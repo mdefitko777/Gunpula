@@ -11,12 +11,16 @@ export function readJson(relativePath) {
 export function loadCatalog() {
   const gradesDoc = readJson("data/grades.json");
   const kitsDoc = readJson("data/kits.json");
+  const sourcesDoc = readJson("data/sources.json");
   return {
     gradesDoc,
     kitsDoc,
+    sourcesDoc,
     grades: gradesDoc.grades,
     kits: kitsDoc.kits,
+    sources: sourcesDoc.sources,
     gradeByCode: new Map(gradesDoc.grades.map((grade) => [grade.code, grade])),
+    sourceById: new Map(sourcesDoc.sources.map((source) => [source.source_id, source])),
   };
 }
 

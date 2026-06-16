@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-06-17",
+  "sources": [
+    {
+      "source_id": "manual_seed",
+      "name": "Manual Seed",
+      "type": "internal",
+      "base_url": null,
+      "priority": 0,
+      "best_for": ["schema testing", "placeholder records"],
+      "weak_for": ["verified catalog facts"],
+      "notes": "Used only for starter records that prove the data model."
+    },
+    {
+      "source_id": "bandai_hobby",
+      "name": "Bandai Hobby / Bandai Spirits",
+      "type": "official",
+      "base_url": "https://bandai-hobby.net/",
+      "priority": 1,
+      "best_for": ["official name", "release date", "price", "official image", "current product pages"],
+      "weak_for": ["older kits", "retired pages", "full historical coverage", "cross-line numbering"],
+      "notes": "Use as official anchor when available, but do not rely on it as the only catalog source."
+    },
+    {
+      "source_id": "the_gundam_base",
+      "name": "The Gundam Base",
+      "type": "official_store",
+      "base_url": "https://www.gundam-base.net/",
+      "priority": 2,
+      "best_for": ["Gundam Base limited items", "event items", "official retail presentation"],
+      "weak_for": ["ordinary older retail kits", "complete release history"],
+      "notes": "Useful for limited and event products that may be absent from normal product pages."
+    },
+    {
+      "source_id": "dalong",
+      "name": "Dalong.net",
+      "type": "review_catalog",
+      "base_url": "https://www.dalong.net/",
+      "priority": 3,
+      "best_for": ["grade lists", "box photos", "manual scans", "runner photos", "review pages", "older mainstream kits"],
+      "weak_for": ["official price authority", "official release-date authority", "machine-readable structure"],
+      "notes": "Very useful for coverage and visual verification. Needs careful parsing and human review."
+    },
+    {
+      "source_id": "hobby_search",
+      "name": "Hobby Search",
+      "type": "retail_catalog",
+      "base_url": "https://www.1999.co.jp/eng/gundam/",
+      "priority": 4,
+      "best_for": ["retail title", "release month", "price", "package images"],
+      "weak_for": ["stock-dependent visibility", "official completeness"],
+      "notes": "Good secondary source for price and release month, especially when official pages are missing."
+    },
+    {
+      "source_id": "hlj",
+      "name": "HobbyLink Japan",
+      "type": "retail_catalog",
+      "base_url": "https://www.hlj.com/",
+      "priority": 5,
+      "best_for": ["retail title", "release month", "price", "availability history"],
+      "weak_for": ["complete historical coverage", "official naming authority"],
+      "notes": "Useful as a secondary retail source."
+    },
+    {
+      "source_id": "gundam_wiki",
+      "name": "Gundam Wiki",
+      "type": "community_wiki",
+      "base_url": "https://gundam.fandom.com/",
+      "priority": 6,
+      "best_for": ["unit identity", "work title", "fictional universe", "variant naming"],
+      "weak_for": ["product pricing", "release-date authority"],
+      "notes": "Use for mobile suit identity and universe metadata, not as sole product source."
+    },
+    {
+      "source_id": "wikipedia",
+      "name": "Wikipedia",
+      "type": "community_wiki",
+      "base_url": "https://www.wikipedia.org/",
+      "priority": 7,
+      "best_for": ["grade background", "historical context", "seed cross-checking"],
+      "weak_for": ["full kit catalog", "retail facts"],
+      "notes": "Useful for background. Avoid using as the only source for verified kit records."
+    }
+  ]
+}

@@ -24,6 +24,20 @@
         "https://en.wikipedia.org/wiki/Gunpla",
         "https://zh.wikipedia.org/wiki/GUNPLA"
       ],
+      "source_refs": [
+        {
+          "source_id": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gunpla",
+          "fields": ["grade_code", "scale", "release_date"],
+          "confidence": "medium"
+        },
+        {
+          "source_id": "wikipedia",
+          "url": "https://zh.wikipedia.org/wiki/GUNPLA",
+          "fields": ["number", "release_date", "names.zh"],
+          "confidence": "medium"
+        }
+      ],
       "tags": ["mobile suit", "gundam"],
       "notes": "Starter record; verify product details against Bandai Hobby or a dedicated kit catalog before marking as verified."
     },
@@ -46,6 +60,14 @@
       "data_status": "seed",
       "source_urls": [
         "https://zh.wikipedia.org/wiki/GUNPLA"
+      ],
+      "source_refs": [
+        {
+          "source_id": "wikipedia",
+          "url": "https://zh.wikipedia.org/wiki/GUNPLA",
+          "fields": ["number", "release_date", "names.zh"],
+          "confidence": "medium"
+        }
       ],
       "tags": ["mobile suit", "zeon"],
       "notes": "Starter record; verify product details against Bandai Hobby or a dedicated kit catalog before marking as verified."
@@ -70,6 +92,14 @@
       "source_urls": [
         "https://en.wikipedia.org/wiki/Gunpla"
       ],
+      "source_refs": [
+        {
+          "source_id": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gunpla",
+          "fields": ["grade_code", "scale", "line_context"],
+          "confidence": "medium"
+        }
+      ],
       "tags": ["mobile suit", "gundam", "entry"],
       "notes": "Starter record for the modern Entry Grade line."
     },
@@ -91,6 +121,14 @@
       "is_limited": false,
       "data_status": "seed",
       "source_urls": [],
+      "source_refs": [
+        {
+          "source_id": "manual_seed",
+          "url": null,
+          "fields": ["grade_code", "scale", "names.en", "names.zh", "work_title"],
+          "confidence": "low"
+        }
+      ],
       "tags": ["mobile suit", "gundam", "witch from mercury"],
       "notes": "Starter record for HG subline handling."
     },
@@ -114,6 +152,14 @@
       "source_urls": [
         "https://en.wikipedia.org/wiki/Gunpla"
       ],
+      "source_refs": [
+        {
+          "source_id": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gunpla",
+          "fields": ["grade_code", "scale", "line_context"],
+          "confidence": "medium"
+        }
+      ],
       "tags": ["mobile suit", "gundam"],
       "notes": "Starter record for MG version naming."
     },
@@ -136,6 +182,14 @@
       "data_status": "seed",
       "source_urls": [
         "https://en.wikipedia.org/wiki/Gunpla"
+      ],
+      "source_refs": [
+        {
+          "source_id": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gunpla",
+          "fields": ["grade_code", "scale", "release_date"],
+          "confidence": "medium"
+        }
       ],
       "tags": ["mobile suit", "gundam", "flagship"],
       "notes": "Starter record for PG subline handling."

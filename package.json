@@ -8,6 +8,7 @@
     "validate": "node scripts/validate_catalog.mjs",
     "stats": "node scripts/catalog_stats.mjs",
     "search": "node scripts/search_kits.mjs",
+    "sources": "node scripts/source_coverage.mjs",
     "export:grades": "node scripts/export_grades_markdown.mjs"
   }
 }

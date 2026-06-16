@@ -1,8 +1,9 @@
 import { countBy, loadCatalog, printTable } from "./lib/catalog.mjs";
 
-const { grades, kits } = loadCatalog();
+const { grades, kits, sources } = loadCatalog();
 
 console.log(`Grades: ${grades.length}`);
+console.log(`Sources: ${sources.length}`);
 console.log(`Kits: ${kits.length}`);
 
 function printCounts(title, rows) {

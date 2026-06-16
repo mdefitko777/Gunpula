@@ -1,6 +1,6 @@
 import { isDateLike, kitName, loadCatalog } from "./lib/catalog.mjs";
 
-const { grades, kits, gradeByCode } = loadCatalog();
+const { grades, kits, sources, gradeByCode, sourceById } = loadCatalog();
 const errors = [];
 const warnings = [];
 
@@ -28,6 +28,14 @@ for (const grade of grades) {
   if (grade.parent_code && !gradeByCode.has(grade.parent_code)) {
     addError(`grade ${grade.code}: unknown parent_code ${grade.parent_code}`);
   }
+}
+
+const sourceIds = new Set();
+for (const source of sources) {
+  if (sourceIds.has(source.source_id)) {
+    addError(`source ${source.source_id}: duplicate source_id`);
+  }
+  sourceIds.add(source.source_id);
 }
 
 const kitIds = new Set();
@@ -82,12 +90,41 @@ for (const kit of kits) {
     addWarning(`${context}: non-seed record has no source_urls`);
   }
 
+  if (!Array.isArray(kit.source_refs)) {
+    addError(`${context}: source_refs must be an array`);
+  } else {
+    for (const sourceRef of kit.source_refs) {
+      if (!sourceRef || typeof sourceRef !== "object") {
+        addError(`${context}: source_refs entries must be objects`);
+        continue;
+      }
+
+      if (!sourceById.has(sourceRef.source_id)) {
+        addError(`${context}: unknown source_ref source_id ${sourceRef.source_id}`);
+      }
+      if (sourceRef.url !== null && typeof sourceRef.url !== "string") {
+        addError(`${context}: source_ref url must be string or null`);
+      }
+      if (!Array.isArray(sourceRef.fields) || sourceRef.fields.length === 0) {
+        addError(`${context}: source_ref fields must be a non-empty array`);
+      }
+      if (!["low", "medium", "high"].includes(sourceRef.confidence)) {
+        addError(`${context}: source_ref confidence must be low, medium, or high`);
+      }
+    }
+
+    const hasNonSeedSource = kit.source_refs.some((sourceRef) => sourceRef.source_id !== "manual_seed");
+    if (kit.data_status !== "seed" && !hasNonSeedSource) {
+      addWarning(`${context}: non-seed record has no external source_refs`);
+    }
+  }
+
   if (!Array.isArray(kit.tags)) {
     addError(`${context}: tags must be an array`);
   }
 }
 
-console.log(`Validated ${grades.length} grades and ${kits.length} kits.`);
+console.log(`Validated ${grades.length} grades, ${sources.length} sources, and ${kits.length} kits.`);
 
 if (warnings.length) {
   console.log("\nWarnings:");

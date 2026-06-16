@@ -1,9 +1,10 @@
 # 数据模型
 
-这个项目先把数据分成两层：
+这个项目先把数据分成三层：
 
 1. `data/grades.json`：等级和模型线字典，例如 HG、MG、RG、PG、SD、FM。
-2. `data/kits.json`：具体套件记录，每条记录通过 `grade_code` 关联到等级字典。
+2. `data/sources.json`：来源登记表，用来说明每个来源擅长和不擅长什么。
+3. `data/kits.json`：具体套件记录，每条记录通过 `grade_code` 关联到等级字典，并通过 `source_refs` 关联到来源登记表。
 
 ## Kit 字段
 
@@ -21,7 +22,8 @@
 | `price_jpy` | 日元定价，未知填 `null`。 |
 | `is_limited` | 是否限定。 |
 | `data_status` | `seed`、`needs_review`、`verified`、`retired`。 |
-| `source_urls` | 来源链接数组。 |
+| `source_urls` | 简单来源链接数组，保留给快速浏览和兼容旧数据。 |
+| `source_refs` | 结构化来源引用，记录来源 ID、URL、支撑字段和可信度。 |
 | `tags` | 搜索和筛选用标签。 |
 | `notes` | 备注。 |
 
@@ -45,6 +47,22 @@ npm run validate
 校验会检查：
 
 - `grade_code` 是否能匹配等级表。
+- `source_refs[].source_id` 是否能匹配 `data/sources.json`。
 - `kit_id` 是否重复。
 - 日期、价格、布尔值等字段格式。
 - 比例是否落在该等级的常见比例内。
+
+## 来源引用
+
+`source_refs` 是后续自动导入的关键字段。一个套件可以有多个来源，每个来源只负责它擅长的字段。
+
+```json
+{
+  "source_id": "dalong",
+  "url": "https://www.dalong.net/",
+  "fields": ["box_art", "runner_photos", "subline", "number"],
+  "confidence": "medium"
+}
+```
+
+Bandai Hobby 适合当官方锚点，但它不保证覆盖旧模、限定、再版和全部历史线；所以记录升级到 `verified` 前，最好至少有一个官方/店铺来源和一个目录/实物来源交叉验证。

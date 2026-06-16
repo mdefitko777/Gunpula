@@ -16,6 +16,7 @@
     "is_limited",
     "data_status",
     "source_urls",
+    "source_refs",
     "tags",
     "notes"
   ],
@@ -76,6 +77,34 @@
     "source_urls": {
       "type": "array",
       "items": { "type": "string", "format": "uri" }
+    },
+    "source_refs": {
+      "type": "array",
+      "description": "Structured source references that explain which source supports which fields.",
+      "items": {
+        "type": "object",
+        "required": ["source_id", "url", "fields", "confidence"],
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "description": "Must match one source_id in data/sources.json."
+          },
+          "url": {
+            "type": ["string", "null"],
+            "format": "uri"
+          },
+          "fields": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["low", "medium", "high"]
+          }
+        },
+        "additionalProperties": false
+      }
     },
     "tags": {
       "type": "array",
