@@ -1,17 +1,32 @@
 const state = {
   kits: [],
   grades: [],
+  sources: [],
+  updatedAt: null,
   query: "",
   grade: "all",
+  work: "all",
+  selectedKit: null,
+  selectedImageIndex: 0,
 };
 
 const elements = {
   datasetSummary: document.querySelector("#datasetSummary"),
   searchInput: document.querySelector("#searchInput"),
   gradeList: document.querySelector("#gradeList"),
+  workList: document.querySelector("#workList"),
   resultCount: document.querySelector("#resultCount"),
   kitGrid: document.querySelector("#kitGrid"),
   cardTemplate: document.querySelector("#kitCardTemplate"),
+  detailDialog: document.querySelector("#detailDialog"),
+  detailClose: document.querySelector("#detailClose"),
+  detailMainImage: document.querySelector("#detailMainImage"),
+  detailThumbs: document.querySelector("#detailThumbs"),
+  detailKicker: document.querySelector("#detailKicker"),
+  detailTitle: document.querySelector("#detailTitle"),
+  detailSubtitle: document.querySelector("#detailSubtitle"),
+  detailMeta: document.querySelector("#detailMeta"),
+  detailOfficialLink: document.querySelector("#detailOfficialLink"),
 };
 
 async function loadJson(path) {
@@ -23,13 +38,16 @@ async function loadJson(path) {
 }
 
 async function init() {
-  const [gradesDoc, kitsDoc] = await Promise.all([
+  const [gradesDoc, kitsDoc, sourcesDoc] = await Promise.all([
     loadJson("../data/grades.json"),
     loadJson("../data/kits.json"),
+    loadJson("../data/sources.json"),
   ]);
 
   state.grades = gradesDoc.grades;
   state.kits = kitsDoc.kits;
+  state.sources = sourcesDoc.sources;
+  state.updatedAt = kitsDoc.updated_at;
 
   bindEvents();
   render();
@@ -40,11 +58,24 @@ function bindEvents() {
     state.query = event.target.value;
     renderKits();
   });
+
+  elements.detailClose.addEventListener("click", closeDetail);
+  elements.detailDialog.addEventListener("click", (event) => {
+    if (event.target === elements.detailDialog) {
+      closeDetail();
+    }
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && elements.detailDialog.open) {
+      closeDetail();
+    }
+  });
 }
 
 function render() {
-  elements.datasetSummary.textContent = `${state.kits.length} kits · ${state.grades.length} series`;
+  elements.datasetSummary.textContent = `${state.kits.length} kits · ${state.grades.length} grades · updated ${state.updatedAt ?? "unknown"}`;
   renderGradeFilters();
+  renderWorkFilters();
   renderKits();
 }
 
@@ -52,22 +83,29 @@ function gradeByCode() {
   return new Map(state.grades.map((grade) => [grade.code, grade]));
 }
 
+function sourceById() {
+  return new Map(state.sources.map((source) => [source.source_id, source]));
+}
+
 function kitDisplayName(kit) {
-  return kit.names.en || kit.names.zh || kit.names.ja || kit.kit_id;
+  return kit.names.ja || kit.names.en || kit.names.zh || kit.kit_id;
 }
 
 function kitSeries(kit) {
   const gradeMap = gradeByCode();
   const grade = gradeMap.get(kit.grade_code);
   const line = kit.subline && kit.subline !== kit.grade_code ? `${kit.grade_code} · ${kit.subline}` : kit.grade_code;
-  const work = kit.work_title ? ` · ${kit.work_title}` : "";
-  return `${line}${work || (grade ? ` · ${grade.name_en}` : "")}`;
+  const work = kit.work_title || grade?.name_en || "出处待补";
+  return `${line} · ${work}`;
 }
 
 function filteredKits() {
   const query = state.query.trim().toLowerCase();
   return state.kits.filter((kit) => {
     if (state.grade !== "all" && kit.grade_code !== state.grade) {
+      return false;
+    }
+    if (state.work !== "all" && (kit.work_title || "unknown") !== state.work) {
       return false;
     }
     if (!query) {
@@ -82,6 +120,9 @@ function filteredKits() {
       kit.names.en,
       kit.names.zh,
       kit.work_title,
+      kit.universe,
+      kit.release_date,
+      kit.price_jpy,
     ]
       .join(" ")
       .toLowerCase();
@@ -102,7 +143,7 @@ function renderGradeFilters() {
   for (const code of codes) {
     const button = document.createElement("button");
     button.type = "button";
-    button.className = `grade-chip${state.grade === code ? " is-active" : ""}`;
+    button.className = `filter-chip${state.grade === code ? " is-active" : ""}`;
     button.textContent = code === "all" ? `全部 ${state.kits.length}` : `${code} ${counts.get(code)}`;
     button.addEventListener("click", () => {
       state.grade = code;
@@ -111,6 +152,41 @@ function renderGradeFilters() {
     });
     elements.gradeList.append(button);
   }
+}
+
+function renderWorkFilters() {
+  const counts = new Map();
+  for (const kit of state.kits) {
+    const work = kit.work_title || "unknown";
+    counts.set(work, (counts.get(work) || 0) + 1);
+  }
+
+  const works = [...counts.keys()].sort((a, b) => {
+    if (a === "unknown") return 1;
+    if (b === "unknown") return -1;
+    return counts.get(b) - counts.get(a) || a.localeCompare(b);
+  });
+
+  elements.workList.innerHTML = "";
+  const allButton = makeWorkButton("all", `全部 ${state.kits.length}`);
+  elements.workList.append(allButton);
+
+  for (const work of works) {
+    elements.workList.append(makeWorkButton(work, `${work === "unknown" ? "出处待补" : work} ${counts.get(work)}`));
+  }
+}
+
+function makeWorkButton(work, label) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = `filter-chip${state.work === work ? " is-active" : ""}`;
+  button.textContent = label;
+  button.addEventListener("click", () => {
+    state.work = work;
+    renderWorkFilters();
+    renderKits();
+  });
+  return button;
 }
 
 function renderKits() {
@@ -127,6 +203,9 @@ function renderKits() {
     const card = elements.cardTemplate.content.firstElementChild.cloneNode(true);
     const boxArt = card.querySelector(".box-art");
     const imageUrl = kit.images?.box_art_url;
+    card.tabIndex = 0;
+    card.setAttribute("role", "button");
+    card.setAttribute("aria-label", `查看 ${kitDisplayName(kit)} 详情`);
 
     if (imageUrl) {
       const img = document.createElement("img");
@@ -141,8 +220,119 @@ function renderKits() {
 
     card.querySelector("h3").textContent = kitDisplayName(kit);
     card.querySelector("p").textContent = kitSeries(kit);
+    card.addEventListener("click", () => openDetail(kit));
+    card.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openDetail(kit);
+      }
+    });
     elements.kitGrid.append(card);
   }
+}
+
+function openDetail(kit) {
+  state.selectedKit = kit;
+  state.selectedImageIndex = 0;
+
+  elements.detailKicker.textContent = `${kit.grade_code}${kit.scale ? ` · ${kit.scale}` : ""}`;
+  elements.detailTitle.textContent = kitDisplayName(kit);
+  elements.detailSubtitle.textContent = kit.work_title || "作品出处待补";
+  renderDetailMeta(kit);
+  renderDetailGallery(kit);
+
+  const officialUrl = kit.source_urls?.[0];
+  if (officialUrl) {
+    elements.detailOfficialLink.href = officialUrl;
+    elements.detailOfficialLink.hidden = false;
+  } else {
+    elements.detailOfficialLink.hidden = true;
+  }
+
+  elements.detailDialog.showModal();
+}
+
+function closeDetail() {
+  elements.detailDialog.close();
+  state.selectedKit = null;
+}
+
+function renderDetailMeta(kit) {
+  const sourceMap = sourceById();
+  const sourceId = kit.images?.box_art_source_id || kit.source_refs?.[0]?.source_id;
+  const source = sourceId ? sourceMap.get(sourceId) : null;
+  const rows = [
+    ["作品出处", kit.work_title || "待补"],
+    ["宇宙/纪年", kit.universe || "待补"],
+    ["等级", kit.subline && kit.subline !== kit.grade_code ? `${kit.grade_code} / ${kit.subline}` : kit.grade_code],
+    ["比例", kit.scale || "待补"],
+    ["发售", kit.release_date || "待补"],
+    ["定价", formatPrice(kit.price_jpy)],
+    ["数据来源", source?.name || sourceId || "待补"],
+  ];
+
+  elements.detailMeta.innerHTML = "";
+  for (const [label, value] of rows) {
+    const dt = document.createElement("dt");
+    dt.textContent = label;
+    const dd = document.createElement("dd");
+    dd.textContent = value;
+    elements.detailMeta.append(dt, dd);
+  }
+}
+
+function renderDetailGallery(kit) {
+  const urls = detailImages(kit);
+  elements.detailThumbs.innerHTML = "";
+  selectDetailImage(urls, 0);
+
+  urls.forEach((url, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `thumb-button${index === state.selectedImageIndex ? " is-active" : ""}`;
+    button.setAttribute("aria-label", `展示图 ${index + 1}`);
+    const img = document.createElement("img");
+    img.src = url;
+    img.alt = `${kitDisplayName(kit)} image ${index + 1}`;
+    img.loading = "lazy";
+    img.addEventListener("error", () => {
+      button.remove();
+    });
+    button.append(img);
+    button.addEventListener("click", () => selectDetailImage(urls, index));
+    elements.detailThumbs.append(button);
+  });
+}
+
+function selectDetailImage(urls, index) {
+  const url = urls[index] || urls[0];
+  state.selectedImageIndex = index;
+  elements.detailMainImage.innerHTML = "";
+  const img = document.createElement("img");
+  img.src = url;
+  img.alt = `${kitDisplayName(state.selectedKit)} main image`;
+  img.addEventListener("error", () => {
+    img.remove();
+    if (urls[index + 1]) {
+      selectDetailImage(urls, index + 1);
+    } else {
+      showPlaceholder(elements.detailMainImage, state.selectedKit?.grade_code || "?");
+    }
+  });
+  elements.detailMainImage.append(img);
+
+  for (const [thumbIndex, thumb] of [...elements.detailThumbs.children].entries()) {
+    thumb.classList.toggle("is-active", thumbIndex === index);
+  }
+}
+
+function detailImages(kit) {
+  const urls = [...(kit.gallery_image_urls || []), kit.images?.box_art_url].filter(Boolean);
+  return [...new Set(urls)];
+}
+
+function formatPrice(value) {
+  return Number.isInteger(value) ? `¥${value.toLocaleString("ja-JP")}` : "待补";
 }
 
 function showPlaceholder(container, gradeCode) {

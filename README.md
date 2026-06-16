@@ -21,6 +21,7 @@ official and Japanese retail catalog sources instead of hand-entering every kit.
 - `scripts/source_coverage.mjs` - reports source coverage and missing source types.
 - `scripts/search_kits.mjs` - searches kit records.
 - `scripts/serve_app.mjs` - serves the local catalog UI.
+- `scripts/import_bandai_spirits_gunpla.mjs` - imports the Japanese official BANDAI SPIRITS Gunpla catalog.
 - `scripts/export_grades_markdown.mjs` - exports grades as Markdown.
 
 ## Commands
@@ -30,6 +31,7 @@ npm run validate
 npm run stats
 npm run sources
 npm run app
+npm run import:bandai
 npm run search -- --grade=RG
 npm run search -- aerial
 npm run export:grades
@@ -41,18 +43,23 @@ On Windows PowerShell, use `npm.cmd` if script execution policy blocks `npm`:
 npm.cmd run validate
 npm.cmd run stats
 npm.cmd run app
+npm.cmd run import:bandai
 ```
 
 ## Current Status
 
-This is v0.1 of the catalog foundation. `data/grades.json` contains the first
-grade taxonomy, `data/sources.json` defines the source registry, and
-`data/kits.json` contains seed records that prove the data model and scripts
-work. Seed records are not complete verified catalog entries.
+The catalog currently imports 2,315 Gunpla kit records from the Japanese
+official BANDAI SPIRITS product search. Records include official product
+images, release dates, JPY prices, source links, and inferred work titles such
+as `Mobile Suit Gundam SEED Destiny` or `Mobile Suit Gundam 00`.
+
+The local website is static. It does not live-fetch official pages while a user
+browses. Run `npm run import:bandai` to refresh the JSON data from the Japanese
+official source; that command can later be wired to a scheduled job.
 
 ## Next Steps
 
-1. Build the first importer for a Japanese source, likely Hobby Search Japan.
-2. Import RG ordinary retail kits as `needs_review`.
-3. Review imported records and promote checked records to `verified`.
-4. Add a filterable website or app view once the data volume is useful.
+1. Add scheduled imports so the catalog refreshes automatically.
+2. Improve work-title inference and manually review records still marked as unknown.
+3. Cross-check special and limited kits with Premium Bandai Japan and The Gundam Base Japan.
+4. Promote reviewed records from `needs_review` to `verified`.

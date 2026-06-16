@@ -67,6 +67,46 @@ const DEFAULT_SCALE_BY_GRADE = {
   SG: "1/200",
 };
 
+const WORK_RULES = [
+  { title: "Mobile Suit Gundam SEED Freedom", universe: "CE", pattern: /ライジングフリーダム|イモータルジャスティス|マイティーストライクフリーダム|ブラックナイトスコード|ゲルググメナース|ギャンシュトローム|SEED FREEDOM/i },
+  { title: "Mobile Suit Gundam SEED Destiny", universe: "CE", pattern: /デスティニー|インパルス|ストライクフリーダム|インフィニットジャスティス|ブレイズザク|ザクウォーリア|ザクファントム|グフイグナイテッド|レジェンドガンダム|アカツキ|ムラサメ|デストロイ|ウィンダム|ダガーL|DESTINY/i },
+  { title: "Mobile Suit Gundam SEED Astray", universe: "CE", pattern: /アストレイ|ASTRAY|レッドフレーム|ブルーフレーム|ゴールドフレーム/i },
+  { title: "Mobile Suit Gundam SEED", universe: "CE", pattern: /SEED|ストライクガンダム|ストライクルージュ|エールストライク|イージス|デュエル|バスター|ブリッツ|フリーダムガンダム|ジャスティスガンダム|プロヴィデンス|カラミティ|フォビドゥン|レイダー|ラゴゥ|M1アストレイ|モビルジン/i },
+  { title: "Mobile Suit Gundam 00", universe: "AD", pattern: /ガンダム00|ダブルオー|エクシア|デュナメス|キュリオス|ヴァーチェ|ナドレ|アストレア|ケルディム|アリオス|セラヴィー|オーライザー|トランザムライザー|クアンタ|ジンクス|ティエレン|スサノオ|フラッグ|GN-/i },
+  { title: "Mobile Suit Gundam: The Witch from Mercury", universe: "Ad Stella", pattern: /水星の魔女|エアリアル|ルブリス|キャリバーン|ファラクト|ディランザ|デミ|ベギル|ミカエリス|ガンダムシュバルゼッテ|ガンヴォルヴァ|ハインドリー|ザウォート|ティックバラン|ミラソウル|ダリルバルデ/i },
+  { title: "Mobile Suit Gundam GQuuuuuuX", universe: "unknown", pattern: /GQuuuuuuX|ジークアクス|アリュゼウス|白いガンダム|赤いガンダム|GFreD|エグザベ|軽キャノン|ガンダムザガン|ガンダムジリウス/i },
+  { title: "Mobile Suit Gundam: Iron-Blooded Orphans", universe: "Post Disaster", pattern: /鉄血|バルバトス|グシオン|キマリス|グレイズ|フラウロス|バエル|ヴィダール|百里|百錬|マンロディ|モンキーロディ|ロディ|ジークルーネ|シュヴァルベ|マルコシアス|アスモデウス|端白星|グレモリー/i },
+  { title: "Mobile Suit Gundam AGE", universe: "AG", pattern: /ガンダムAGE|AGE-|ガフラン|ゼダス|Gエグゼス|ジェノアス|ダナジン/i },
+  { title: "New Mobile Report Gundam Wing: G-Unit", universe: "AC", pattern: /ガンダムグリープ|ジェミナス|アスクレプオス|ハイドラガンダム/i },
+  { title: "Mobile Suit Gundam Wing Endless Waltz", universe: "AC", pattern: /Endless Waltz|EW|ウイングガンダムゼロ|ヘビーアームズ改|サンドロック改|デスサイズヘル|アルトロン/i },
+  { title: "Mobile Suit Gundam Wing", universe: "AC", pattern: /ウイングガンダム|デスサイズ|ヘビーアームズ|サンドロック|シェンロン|トールギス|エピオン|リーオー/i },
+  { title: "Mobile Fighter G Gundam", universe: "FC", pattern: /Gガンダム|ゴッドガンダム|シャイニングガンダム|マスターガンダム|ノーベルガンダム|ドラゴンガンダム|ガンダムローズ|マックスター|マンダラガンダム|デビルガンダム|デスアーミー/i },
+  { title: "After War Gundam X", universe: "AW", pattern: /ガンダムX|ガンダムダブルエックス|ガンダムエアマスター|ガンダムレオパルド|ベルティゴ/i },
+  { title: "Turn A Gundam", universe: "CC", pattern: /∀|ターンエー|ターンX|スモー|カプル/i },
+  { title: "Gundam Reconguista in G", universe: "Regild Century", pattern: /Gのレコンギスタ|G-セルフ|G-アルケイン|カットシー|ジャイオーン|モンテーロ/i },
+  { title: "Gundam Build Series", universe: "Build", pattern: /HGBD|HGBD:R|ビルド|ビギニング|ベアッガイ|すーぱーふみな|ふみな|トライオン|ダイバー|リライジング|コアガンダム|プチッガイ|ウォドムポッド|ユーラヴェン|エルドラ|テルティウム|アースリィ|ジュピターヴ|メルクワン|ネプテイト|サタニクス|ゼルトザーム|ジャスティスナイト|TRYAGE|ν-ジオン|G-エルス|ラヴファントム|シャイニングブレイク|グリモアレッドベレー|ブレイジングガンダム|ヘリオス|リヴランスヘブン|バルバタウロス|神バーニング/i },
+  { title: "Advance of Zeta", universe: "UC", pattern: /ADVANCE OF Z|A\.O\.Z|TR-1|TR-6|ヘイズル|ウーンドウォート|ハイゼンスレイ|フルドド|ホビー・ハイザック/i },
+  { title: "Mobile Suit Gundam Narrative", universe: "UC", pattern: /ナラティブガンダム|ガンダムNT/i },
+  { title: "Mobile Suit Moon Gundam", universe: "UC", pattern: /ムーンガンダム|バルギル/i },
+  { title: "Mobile Suit Gundam F90/MSV", universe: "UC", pattern: /ガンダムF90|F90III|ミッションパック|ガンダム4号機|ガンダム5号機|ガンダム7号機|ディープストライカー/i },
+  { title: "Mobile Suit Gundam Side Story: The Blue Destiny", universe: "UC", pattern: /ブルーディスティニー|イフリート改|ペイルライダー/i },
+  { title: "Mobile Suit Gundam: Requiem for Vengeance", universe: "UC", pattern: /復讐のレクイエム|ガンダムEX/i },
+  { title: "Gundam Thunderbolt", universe: "UC", pattern: /サンダーボルト|フルアーマー・ガンダム|サイコ・ザク|アトラスガンダム/i },
+  { title: "Mobile Suit Gundam: The Origin", universe: "UC", pattern: /THE ORIGIN|オリジン|局地型ガンダム|ブグ/i },
+  { title: "Mobile Suit Gundam Hathaway", universe: "UC", pattern: /閃光のハサウェイ|Ξガンダム|ペーネロペー|メッサー/i },
+  { title: "Mobile Suit Gundam Unicorn", universe: "UC", pattern: /ユニコーン|バンシィ|フェネクス|シナンジュ|クシャトリヤ|ジェスタ|リゼル|デルタプラス|ローゼン・ズール|ギラ・ズール/i },
+  { title: "Mobile Suit Gundam: Char's Counterattack", universe: "UC", pattern: /逆襲のシャア|νガンダム|Hi-ν|サザビー|ナイチンゲール|ヤクト・ドーガ|ギラ・ドーガ|α・アジール|サイコ・ドーガ/i },
+  { title: "Mobile Suit Gundam F91", universe: "UC", pattern: /F91|ビギナ・ギナ|デナン|ベルガ/i },
+  { title: "Mobile Suit V Gundam", universe: "UC", pattern: /Vガンダム|ヴィクトリー|V2|シャッコー|ガンイージ/i },
+  { title: "Mobile Suit Gundam 0083: Stardust Memory", universe: "UC", pattern: /0083|GP01|GP02|GP03|ガーベラ|デンドロビウム|ステイメン/i },
+  { title: "Mobile Suit Gundam 0080: War in the Pocket", universe: "UC", pattern: /0080|アレックス|ケンプファー|ハイゴッグ|ズゴックE|ザクII改/i },
+  { title: "Mobile Suit Gundam: The 08th MS Team", universe: "UC", pattern: /08小隊|Ez-8|陸戦型|グフカスタム/i },
+  { title: "Mobile Suit Gundam ZZ", universe: "UC", pattern: /ZZ|ダブルゼータ|ドーベン・ウルフ|ザクIII|バウ|ゲーマルク|クィン・マンサ|ガルスJ|R・ジャジャ|ドライセン/i },
+  { title: "Mobile Suit Z Gundam", universe: "UC", pattern: /Zガンダム|Ζ|ゼータガンダム|ガンダムMk-II|百式|リック・ディアス|メタス|ハンブラビ|バウンド・ドック|パラス・アテネ|ジ・O|サイコ・ガンダム|ボリノーク・サマーン|ガルバルディ|ディジェ|ガンダムMk-V/i },
+  { title: "Mobile Suit Gundam", universe: "UC", pattern: /RX-78|ガンキャノン|ガンタンク|シャア専用|ザク|グフ|ドム|ズゴック|ゲルググ|ジオング|アッガイ|ジム|ボール/i },
+  { title: "SD Gundam", universe: "SD", pattern: /SD|BB戦士|三国創傑伝|ワールドヒーローズ|クロスシルエット/i },
+];
+
 function decodeHtml(value) {
   return String(value ?? "")
     .replace(/<br\s*\/?>/gi, " ")
@@ -181,6 +221,25 @@ function inferScale(title, gradeCode) {
   return DEFAULT_SCALE_BY_GRADE[gradeCode] ?? "various";
 }
 
+function inferWork(title) {
+  for (const rule of WORK_RULES) {
+    if (rule.pattern.test(title)) {
+      return { work_title: rule.title, universe: rule.universe };
+    }
+  }
+  return { work_title: null, universe: null };
+}
+
+function deriveGalleryImageUrls(imageUrl) {
+  if (!imageUrl) {
+    return [];
+  }
+  if (!/_\d+\.(?:jpg|jpeg|png|webp)$/i.test(imageUrl)) {
+    return [imageUrl];
+  }
+  return Array.from({ length: 10 }, (_, index) => imageUrl.replace(/_\d+(\.(?:jpg|jpeg|png|webp))$/i, `_${index + 1}$1`));
+}
+
 function slugifyTitle(value) {
   const ascii = String(value)
     .normalize("NFKD")
@@ -207,6 +266,8 @@ function toKit(card) {
 
   const releaseDate = parseReleaseDate(card.release_text);
   const priceJpy = parsePrice(card.price_text);
+  const work = inferWork(card.title);
+  const galleryImageUrls = deriveGalleryImageUrls(card.image_url);
 
   return {
     kit_id: kitIdFor(card, grade.grade_code),
@@ -223,8 +284,9 @@ function toKit(card) {
       box_art_url: card.image_url,
       box_art_source_id: card.image_url ? SOURCE_ID : null,
     },
-    universe: null,
-    work_title: null,
+    gallery_image_urls: galleryImageUrls,
+    universe: work.universe,
+    work_title: work.work_title,
     release_date: releaseDate,
     price_jpy: priceJpy,
     is_limited: /限定|イベント|抽選|プレミアムバンダイ|ガンダムベース/.test(card.title),
@@ -234,7 +296,7 @@ function toKit(card) {
       {
         source_id: SOURCE_ID,
         url: card.source_url,
-        fields: ["names", "grade_code", "subline", "scale", "release_date", "price_jpy", "images"],
+        fields: ["names", "grade_code", "subline", "scale", "release_date", "price_jpy", "images", "gallery_image_urls", "work_title", "universe"],
         confidence: "high",
       },
     ],

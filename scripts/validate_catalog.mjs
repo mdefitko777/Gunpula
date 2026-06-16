@@ -82,6 +82,14 @@ for (const kit of kits) {
     }
   }
 
+  if (kit.gallery_image_urls !== undefined) {
+    if (!Array.isArray(kit.gallery_image_urls)) {
+      addError(`${context}: gallery_image_urls must be an array when present`);
+    } else if (kit.gallery_image_urls.some((url) => typeof url !== "string")) {
+      addError(`${context}: gallery_image_urls entries must be strings`);
+    }
+  }
+
   if (!isDateLike(kit.release_date)) {
     addError(`${context}: release_date must be null, YYYY, YYYY-MM, or YYYY-MM-DD`);
   }

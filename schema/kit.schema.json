@@ -67,6 +67,11 @@
       },
       "additionalProperties": false
     },
+    "gallery_image_urls": {
+      "type": "array",
+      "items": { "type": "string", "format": "uri-reference" },
+      "description": "Official product/gallery image URLs when available. The first item should usually match images.box_art_url."
+    },
     "universe": {
       "type": ["string", "null"],
       "description": "UC, CE, AD, Ad Stella, Build, SD, etc."
