@@ -25,7 +25,8 @@ body {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
@@ -102,8 +103,42 @@ h1 {
   color: var(--ink);
 }
 
-.filter-group {
+.filter-panel {
   margin-top: 18px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.filter-panel summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 0 14px;
+  cursor: pointer;
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.filter-panel summary span:last-child {
+  min-width: 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  overflow: hidden;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.filter-body {
+  padding: 0 14px 14px;
+  border-top: 1px solid var(--line);
+}
+
+.filter-group {
+  margin-top: 14px;
 }
 
 .filter-label {
@@ -395,6 +430,84 @@ h1 {
   outline: 0;
 }
 
+.correction-panel {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.secondary-button,
+.correction-actions button {
+  min-height: 38px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.secondary-button {
+  padding: 0 12px;
+}
+
+.secondary-button:hover,
+.secondary-button:focus-visible,
+.correction-actions button:hover,
+.correction-actions button:focus-visible {
+  border-color: var(--accent);
+  outline: 0;
+}
+
+.correction-form {
+  display: grid;
+  gap: 11px;
+  margin-top: 14px;
+}
+
+.correction-form label {
+  display: grid;
+  gap: 5px;
+}
+
+.correction-form label span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.correction-form input,
+.correction-form select {
+  width: 100%;
+  min-width: 0;
+  min-height: 38px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--ink);
+}
+
+.correction-form input:focus,
+.correction-form select:focus {
+  border-color: var(--accent);
+  outline: 0;
+}
+
+.correction-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.correction-actions button {
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+.correction-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
 @media (max-width: 760px) {
   .catalog-page {
     padding: 18px;
@@ -463,5 +576,20 @@ h1 {
 
   .detail-meta {
     grid-template-columns: 78px minmax(0, 1fr);
+  }
+
+  .filter-panel summary {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 10px 12px;
+  }
+
+  .filter-panel summary span:last-child {
+    width: 100%;
+    text-align: left;
+  }
+
+  .correction-actions {
+    grid-template-columns: 1fr;
   }
 }

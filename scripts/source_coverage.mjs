@@ -14,7 +14,7 @@ const missingOfficial = kits.filter(
 const missingVisual = kits.filter(
   (kit) =>
     !(kit.source_refs ?? []).some((sourceRef) =>
-      ["bandai_spirits_products_jp", "p_bandai_jp", "the_gundam_base_jp", "hobby_search_jp", "amiami_jp"].includes(
+      ["bandai_spirits_products_jp", "p_bandai_jp", "the_gundam_base_jp", "bandai_candy_gundam_jp", "bandai_gashapon_gundam_jp", "hobby_search_jp", "amiami_jp"].includes(
         sourceRef.source_id,
       ),
     ),

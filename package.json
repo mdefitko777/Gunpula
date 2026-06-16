@@ -11,6 +11,8 @@
     "sources": "node scripts/source_coverage.mjs",
     "app": "node scripts/serve_app.mjs",
     "export:grades": "node scripts/export_grades_markdown.mjs",
-    "import:bandai": "node scripts/import_bandai_spirits_gunpla.mjs"
+    "import:bandai": "node scripts/import_bandai_spirits_gunpla.mjs",
+    "import:collectibles": "node scripts/import_bandai_collectibles.mjs",
+    "import:official": "npm run import:bandai && npm run import:collectibles"
   }
 }

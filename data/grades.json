@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-06-16",
-  "scope": "Gunpla grade and model-line taxonomy. Includes core grades, SD lines, 1/100 side lines, and historical or special plastic model lines. Excludes completed figures, metal toys, candy toys, third-party kits, and resin garage kits.",
+  "scope": "Bandai official Gundam model and collectible line taxonomy. Includes Gunpla grades, SD lines, 1/100 side lines, historical plastic model lines, Bandai Candy shokugan figures, and Bandai Gashapon Gundam lines. Excludes third-party kits and resin garage kits.",
   "sources": [
     {
       "id": "the_gundam_base_jp",
@@ -17,6 +17,16 @@
       "id": "amiami_jp",
       "title": "AmiAmi Japan Gundam category filters",
       "url": "https://www.amiami.jp/top/page/c/gundam.html"
+    },
+    {
+      "id": "bandai_candy_gundam_jp",
+      "title": "Bandai Candy Gundam Shokugan official portal",
+      "url": "https://www.bandai.co.jp/candy/gundam/"
+    },
+    {
+      "id": "bandai_gashapon_gundam_jp",
+      "title": "Bandai Gashapon Gundam official product pages",
+      "url": "https://gashapon.jp/"
     }
   ],
   "grades": [
@@ -343,6 +353,90 @@
       "parent_code": null,
       "aliases": ["HY2M Glorious Series"],
       "notes_zh": "偏大型或灯效等特殊卖点的历史线，不属于常规 HG/MG/RG 体系。"
+    },
+    {
+      "code": "CONVERGE",
+      "name_en": "FW GUNDAM CONVERGE",
+      "name_zh": "FW GUNDAM CONVERGE 食玩",
+      "category": "shokugan",
+      "typical_scale": ["non-scale"],
+      "introduced": 2010,
+      "status": "active",
+      "parent_code": null,
+      "aliases": ["GUNDAM CONVERGE", "GUNDAM CONVERGE CORE", "GUNDAM CONVERGE SB"],
+      "notes_zh": "Bandai Candy 的小比例涂装食玩模型线，包含通常弹、CORE、SB、SP 等子线。"
+    },
+    {
+      "code": "GFRAME",
+      "name_en": "Mobile Suit Gundam G Frame FA",
+      "name_zh": "机动战士高达 G Frame FA 食玩",
+      "category": "shokugan",
+      "typical_scale": ["non-scale"],
+      "introduced": 2018,
+      "status": "active",
+      "parent_code": null,
+      "aliases": ["G Frame", "G Frame FA"],
+      "notes_zh": "Bandai Candy 的可动骨架食玩线，FA 为 Full Armor 续线。"
+    },
+    {
+      "code": "MOBILITY",
+      "name_en": "MOBILITY JOINT GUNDAM",
+      "name_zh": "MOBILITY JOINT GUNDAM 食玩",
+      "category": "shokugan",
+      "typical_scale": ["non-scale"],
+      "introduced": 2022,
+      "status": "active",
+      "parent_code": null,
+      "aliases": ["Mobility Joint"],
+      "notes_zh": "Bandai Candy 的关节可动食玩系列。"
+    },
+    {
+      "code": "ARTIFACT",
+      "name_en": "Gundam Artifact",
+      "name_zh": "高达 Artifact 食玩",
+      "category": "shokugan",
+      "typical_scale": ["non-scale"],
+      "introduced": 2021,
+      "status": "active",
+      "parent_code": null,
+      "aliases": ["Gundam Artifact"],
+      "notes_zh": "强调高密度造型和造型改编的小比例食玩套件。"
+    },
+    {
+      "code": "SUPERIOR",
+      "name_en": "Gundam Superior Define",
+      "name_zh": "Gundam Superior Define 食玩",
+      "category": "shokugan",
+      "typical_scale": ["non-scale"],
+      "introduced": 2025,
+      "status": "active",
+      "parent_code": null,
+      "aliases": ["Superior Define"],
+      "notes_zh": "Bandai Candy 的高达食玩系列之一，按 No. 编号推出。"
+    },
+    {
+      "code": "MSE",
+      "name_en": "Mobile Suit Ensemble",
+      "name_zh": "MOBILE SUIT ENSEMBLE 扭蛋",
+      "category": "gashapon",
+      "typical_scale": ["non-scale"],
+      "introduced": 2016,
+      "status": "active",
+      "parent_code": null,
+      "aliases": ["MS Ensemble", "MOBILE SUIT ENSEMBLE"],
+      "notes_zh": "Bandai Gashapon 的高达可动拼装扭蛋线，以武装组合为核心。"
+    },
+    {
+      "code": "GSF",
+      "name_en": "Gashapon Senshi f",
+      "name_zh": "Gashapon Senshi f 扭蛋",
+      "category": "gashapon",
+      "typical_scale": ["non-scale"],
+      "introduced": 2017,
+      "status": "inactive_or_archived",
+      "parent_code": null,
+      "aliases": ["Gashapon Senshi Forte", "ガシャポン戦士f"],
+      "notes_zh": "Bandai Gashapon 的 SD 高达扭蛋线，官方归档页保留了各弹款式。"
     }
   ]
 }

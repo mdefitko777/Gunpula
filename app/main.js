@@ -1,7 +1,9 @@
 const state = {
+  rawKits: [],
   kits: [],
   grades: [],
   sources: [],
+  overrides: {},
   updatedAt: null,
   query: "",
   grade: "all",
@@ -13,6 +15,7 @@ const state = {
 const elements = {
   datasetSummary: document.querySelector("#datasetSummary"),
   searchInput: document.querySelector("#searchInput"),
+  filterSummary: document.querySelector("#filterSummary"),
   gradeList: document.querySelector("#gradeList"),
   workList: document.querySelector("#workList"),
   resultCount: document.querySelector("#resultCount"),
@@ -27,7 +30,19 @@ const elements = {
   detailSubtitle: document.querySelector("#detailSubtitle"),
   detailMeta: document.querySelector("#detailMeta"),
   detailOfficialLink: document.querySelector("#detailOfficialLink"),
+  editToggle: document.querySelector("#editToggle"),
+  correctionForm: document.querySelector("#correctionForm"),
+  editNameJa: document.querySelector("#editNameJa"),
+  editGradeCode: document.querySelector("#editGradeCode"),
+  editSubline: document.querySelector("#editSubline"),
+  editWorkTitle: document.querySelector("#editWorkTitle"),
+  editUniverse: document.querySelector("#editUniverse"),
+  saveCorrection: document.querySelector("#saveCorrection"),
+  clearCorrection: document.querySelector("#clearCorrection"),
+  exportCorrections: document.querySelector("#exportCorrections"),
 };
+
+const OVERRIDE_KEY = "gunpula-catalog-overrides-v1";
 
 async function loadJson(path) {
   const response = await fetch(path);
@@ -45,12 +60,61 @@ async function init() {
   ]);
 
   state.grades = gradesDoc.grades;
-  state.kits = kitsDoc.kits;
+  state.rawKits = kitsDoc.kits;
   state.sources = sourcesDoc.sources;
+  state.overrides = loadOverrides();
   state.updatedAt = kitsDoc.updated_at;
+  refreshKits();
 
   bindEvents();
   render();
+}
+
+function loadOverrides() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(OVERRIDE_KEY) || "{}");
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveOverrides() {
+  localStorage.setItem(OVERRIDE_KEY, JSON.stringify(state.overrides, null, 2));
+}
+
+function refreshKits() {
+  state.kits = state.rawKits.map((kit) => applyOverride(kit));
+}
+
+function applyOverride(kit) {
+  const override = state.overrides[kit.kit_id];
+  if (!override) {
+    return kit;
+  }
+
+  const names = { ...kit.names };
+  if (Object.hasOwn(override, "name_ja")) {
+    names.ja = override.name_ja;
+  }
+
+  return {
+    ...kit,
+    names,
+    grade_code: Object.hasOwn(override, "grade_code") ? override.grade_code : kit.grade_code,
+    subline: Object.hasOwn(override, "subline") ? override.subline : kit.subline,
+    work_title: Object.hasOwn(override, "work_title") ? override.work_title : kit.work_title,
+    universe: Object.hasOwn(override, "universe") ? override.universe : kit.universe,
+    local_override: override,
+  };
+}
+
+function rawKitById(kitId) {
+  return state.rawKits.find((kit) => kit.kit_id === kitId);
+}
+
+function displayKitById(kitId) {
+  return state.kits.find((kit) => kit.kit_id === kitId);
 }
 
 function bindEvents() {
@@ -60,6 +124,12 @@ function bindEvents() {
   });
 
   elements.detailClose.addEventListener("click", closeDetail);
+  elements.editToggle.addEventListener("click", () => {
+    elements.correctionForm.hidden = !elements.correctionForm.hidden;
+  });
+  elements.saveCorrection.addEventListener("click", saveCurrentCorrection);
+  elements.clearCorrection.addEventListener("click", clearCurrentCorrection);
+  elements.exportCorrections.addEventListener("click", exportCorrections);
   elements.detailDialog.addEventListener("click", (event) => {
     if (event.target === elements.detailDialog) {
       closeDetail();
@@ -70,12 +140,120 @@ function bindEvents() {
       closeDetail();
     }
   });
+
+  populateGradeSelect();
+}
+
+function populateGradeSelect() {
+  elements.editGradeCode.innerHTML = "";
+  for (const grade of [...state.grades].sort((a, b) => a.code.localeCompare(b.code))) {
+    const option = document.createElement("option");
+    option.value = grade.code;
+    option.textContent = `${grade.code} · ${grade.name_zh || grade.name_en}`;
+    elements.editGradeCode.append(option);
+  }
+}
+
+function fillCorrectionForm(kit) {
+  const rawKit = rawKitById(kit.kit_id) || kit;
+  elements.editNameJa.value = kit.names?.ja || "";
+  elements.editGradeCode.value = kit.grade_code;
+  elements.editSubline.value = kit.subline || "";
+  elements.editWorkTitle.value = kit.work_title || "";
+  elements.editUniverse.value = kit.universe || "";
+  elements.clearCorrection.disabled = !state.overrides[kit.kit_id];
+  elements.correctionForm.dataset.rawNameJa = rawKit.names?.ja || "";
+  elements.correctionForm.dataset.rawGradeCode = rawKit.grade_code || "";
+  elements.correctionForm.dataset.rawSubline = rawKit.subline || "";
+  elements.correctionForm.dataset.rawWorkTitle = rawKit.work_title || "";
+  elements.correctionForm.dataset.rawUniverse = rawKit.universe || "";
+}
+
+function correctionValue(inputValue, rawValue) {
+  const normalizedInput = inputValue.trim();
+  const normalizedRaw = String(rawValue ?? "").trim();
+  if (normalizedInput === normalizedRaw) {
+    return undefined;
+  }
+  return normalizedInput || null;
+}
+
+function saveCurrentCorrection() {
+  const kit = state.selectedKit;
+  if (!kit) {
+    return;
+  }
+
+  const form = elements.correctionForm.dataset;
+  const override = {
+    name_ja: correctionValue(elements.editNameJa.value, form.rawNameJa),
+    grade_code: correctionValue(elements.editGradeCode.value, form.rawGradeCode),
+    subline: correctionValue(elements.editSubline.value, form.rawSubline),
+    work_title: correctionValue(elements.editWorkTitle.value, form.rawWorkTitle),
+    universe: correctionValue(elements.editUniverse.value, form.rawUniverse),
+  };
+
+  for (const key of Object.keys(override)) {
+    if (override[key] === undefined) {
+      delete override[key];
+    }
+  }
+
+  if (Object.keys(override).length) {
+    state.overrides[kit.kit_id] = {
+      ...override,
+      updated_at: new Date().toISOString(),
+    };
+  } else {
+    delete state.overrides[kit.kit_id];
+  }
+
+  saveOverrides();
+  refreshAfterOverride(kit.kit_id);
+}
+
+function clearCurrentCorrection() {
+  const kit = state.selectedKit;
+  if (!kit) {
+    return;
+  }
+  delete state.overrides[kit.kit_id];
+  saveOverrides();
+  refreshAfterOverride(kit.kit_id);
+}
+
+function refreshAfterOverride(kitId) {
+  refreshKits();
+  const nextKit = displayKitById(kitId);
+  state.selectedKit = nextKit;
+  renderGradeFilters();
+  renderWorkFilters();
+  renderFilterSummary();
+  renderKits();
+  if (nextKit && elements.detailDialog.open) {
+    renderDetail(nextKit);
+  }
+}
+
+function exportCorrections() {
+  const payload = {
+    schema_version: 1,
+    updated_at: new Date().toISOString(),
+    overrides: state.overrides,
+  };
+  const blob = new Blob([`${JSON.stringify(payload, null, 2)}\n`], { type: "application/json" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "gunpula-corrections.json";
+  link.click();
+  URL.revokeObjectURL(link.href);
 }
 
 function render() {
-  elements.datasetSummary.textContent = `${state.kits.length} kits · ${state.grades.length} grades · updated ${state.updatedAt ?? "unknown"}`;
+  elements.datasetSummary.textContent = `${state.kits.length} 条记录 · ${state.grades.length} 个产品线 · 更新 ${state.updatedAt ?? "unknown"}`;
   renderGradeFilters();
   renderWorkFilters();
+  renderFilterSummary();
   renderKits();
 }
 
@@ -94,8 +272,8 @@ function kitDisplayName(kit) {
 function kitSeries(kit) {
   const gradeMap = gradeByCode();
   const grade = gradeMap.get(kit.grade_code);
-  const line = kit.subline && kit.subline !== kit.grade_code ? `${kit.grade_code} · ${kit.subline}` : kit.grade_code;
-  const work = kit.work_title || grade?.name_en || "出处待补";
+  const line = kit.subline && kit.subline !== kit.grade_code ? kit.subline : grade?.name_zh || grade?.name_en || kit.grade_code;
+  const work = kit.work_title || "出处待补";
   return `${line} · ${work}`;
 }
 
@@ -148,6 +326,7 @@ function renderGradeFilters() {
     button.addEventListener("click", () => {
       state.grade = code;
       renderGradeFilters();
+      renderFilterSummary();
       renderKits();
     });
     elements.gradeList.append(button);
@@ -184,9 +363,20 @@ function makeWorkButton(work, label) {
   button.addEventListener("click", () => {
     state.work = work;
     renderWorkFilters();
+    renderFilterSummary();
     renderKits();
   });
   return button;
+}
+
+function renderFilterSummary() {
+  const gradeMap = gradeByCode();
+  const gradeLabel =
+    state.grade === "all"
+      ? "全部产品线"
+      : gradeMap.get(state.grade)?.name_zh || gradeMap.get(state.grade)?.name_en || state.grade;
+  const workLabel = state.work === "all" ? "全部出处" : state.work === "unknown" ? "出处待补" : state.work;
+  elements.filterSummary.textContent = `${gradeLabel} · ${workLabel}`;
 }
 
 function renderKits() {
@@ -235,11 +425,17 @@ function openDetail(kit) {
   state.selectedKit = kit;
   state.selectedImageIndex = 0;
 
+  renderDetail(kit);
+  elements.detailDialog.showModal();
+}
+
+function renderDetail(kit) {
   elements.detailKicker.textContent = `${kit.grade_code}${kit.scale ? ` · ${kit.scale}` : ""}`;
   elements.detailTitle.textContent = kitDisplayName(kit);
   elements.detailSubtitle.textContent = kit.work_title || "作品出处待补";
   renderDetailMeta(kit);
   renderDetailGallery(kit);
+  fillCorrectionForm(kit);
 
   const officialUrl = kit.source_urls?.[0];
   if (officialUrl) {
@@ -248,8 +444,6 @@ function openDetail(kit) {
   } else {
     elements.detailOfficialLink.hidden = true;
   }
-
-  elements.detailDialog.showModal();
 }
 
 function closeDetail() {
@@ -258,17 +452,14 @@ function closeDetail() {
 }
 
 function renderDetailMeta(kit) {
-  const sourceMap = sourceById();
-  const sourceId = kit.images?.box_art_source_id || kit.source_refs?.[0]?.source_id;
-  const source = sourceId ? sourceMap.get(sourceId) : null;
   const rows = [
     ["作品出处", kit.work_title || "待补"],
     ["宇宙/纪年", kit.universe || "待补"],
-    ["等级", kit.subline && kit.subline !== kit.grade_code ? `${kit.grade_code} / ${kit.subline}` : kit.grade_code],
+    ["产品线", kit.subline && kit.subline !== kit.grade_code ? `${kit.grade_code} / ${kit.subline}` : kit.grade_code],
     ["比例", kit.scale || "待补"],
     ["发售", kit.release_date || "待补"],
     ["定价", formatPrice(kit.price_jpy)],
-    ["数据来源", source?.name || sourceId || "待补"],
+    ["更正状态", state.overrides[kit.kit_id] ? "已手动更正" : "官方导入"],
   ];
 
   elements.detailMeta.innerHTML = "";

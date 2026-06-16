@@ -78,6 +78,28 @@
       "best_for": ["official news", "new product announcements", "event context"],
       "weak_for": ["complete catalog fields", "older retail facts"],
       "notes": "Use for announcement context, not as the only product record."
+    },
+    {
+      "source_id": "bandai_candy_gundam_jp",
+      "name": "Bandai Candy Gundam Shokugan Portal Japan",
+      "type": "official_candy_jp",
+      "country": "JP",
+      "base_url": "https://www.bandai.co.jp/candy/gundam/",
+      "priority": 7,
+      "best_for": ["official shokugan product lineups", "release month", "retail price", "official product images"],
+      "weak_for": ["ordinary Gunpla grades", "third-party catalog cross-checks"],
+      "notes": "Official Japanese Bandai Candy portal for Gundam shokugan lines such as FW GUNDAM CONVERGE, G Frame FA, Mobility Joint, Artifact, and Superior Define."
+    },
+    {
+      "source_id": "bandai_gashapon_gundam_jp",
+      "name": "Bandai Gashapon Gundam Japan",
+      "type": "official_gashapon_jp",
+      "country": "JP",
+      "base_url": "https://gashapon.jp/",
+      "priority": 8,
+      "best_for": ["official gashapon product pages", "capsule price", "release period", "official product images"],
+      "weak_for": ["Gunpla kit grade taxonomy", "older pages removed from official search"],
+      "notes": "Official Japanese Bandai Gashapon pages, including Mobile Suit Ensemble and Gashapon Senshi f archives."
     }
   ]
 }
