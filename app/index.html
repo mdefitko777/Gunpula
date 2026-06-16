@@ -7,136 +7,40 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="app-shell">
-      <aside class="sidebar" aria-label="Catalog navigation">
-        <div class="brand">
-          <div class="brand-mark" aria-hidden="true">G</div>
-          <div>
-            <div class="brand-title">Gunpula</div>
-            <div class="brand-subtitle">Catalog</div>
-          </div>
+    <main class="catalog-page">
+      <header class="page-header">
+        <div class="brand-line">
+          <span class="brand-mark">G</span>
+          <span>Gunpula Catalog</span>
         </div>
-
-        <nav class="nav-tabs" aria-label="Views">
-          <button class="nav-tab is-active" type="button" data-view="kits">
-            <span class="icon" aria-hidden="true">□</span>
-            <span>模型</span>
-          </button>
-          <button class="nav-tab" type="button" data-view="grades">
-            <span class="icon" aria-hidden="true">≡</span>
-            <span>等级</span>
-          </button>
-          <button class="nav-tab" type="button" data-view="sources">
-            <span class="icon" aria-hidden="true">⌁</span>
-            <span>来源</span>
-          </button>
-        </nav>
-
-        <section class="sidebar-section">
-          <h2>等级筛选</h2>
-          <div class="grade-list" id="gradeList"></div>
-        </section>
-      </aside>
-
-      <main class="main">
-        <header class="topbar">
+        <div class="title-row">
           <div>
             <h1>模型目录</h1>
             <p id="datasetSummary">Loading catalog...</p>
           </div>
-          <div class="topbar-actions">
-            <label class="search-field">
-              <span class="icon" aria-hidden="true">⌕</span>
-              <input id="searchInput" type="search" placeholder="搜索名称、作品、标签" />
-            </label>
-            <select id="statusFilter" aria-label="数据状态">
-              <option value="all">全部状态</option>
-              <option value="seed">Seed</option>
-              <option value="needs_review">Needs review</option>
-              <option value="verified">Verified</option>
-              <option value="retired">Retired</option>
-            </select>
-          </div>
-        </header>
+          <label class="search-field">
+            <span aria-hidden="true">⌕</span>
+            <input id="searchInput" type="search" placeholder="搜索模型名称或作品" />
+          </label>
+        </div>
+        <div class="grade-filter-bar" id="gradeList" aria-label="按系列筛选"></div>
+      </header>
 
-        <section class="metrics" aria-label="Catalog metrics">
-          <article class="metric">
-            <div class="metric-label">模型</div>
-            <div class="metric-value" id="kitCount">0</div>
-          </article>
-          <article class="metric">
-            <div class="metric-label">等级</div>
-            <div class="metric-value" id="gradeCount">0</div>
-          </article>
-          <article class="metric">
-            <div class="metric-label">来源</div>
-            <div class="metric-value" id="sourceCount">0</div>
-          </article>
-          <article class="metric metric-warn">
-            <div class="metric-label">缺官方来源</div>
-            <div class="metric-value" id="missingOfficialCount">0</div>
-          </article>
-        </section>
-
-        <section class="view is-active" id="kitsView">
-          <div class="section-head">
-            <h2>模型列表</h2>
-            <div class="result-count" id="resultCount">0 results</div>
-          </div>
-          <div class="kit-grid" id="kitGrid"></div>
-        </section>
-
-        <section class="view" id="gradesView">
-          <div class="section-head">
-            <h2>等级字典</h2>
-            <div class="result-count" id="gradeResultCount">0 grades</div>
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Code</th>
-                  <th>中文</th>
-                  <th>English</th>
-                  <th>Category</th>
-                  <th>Scale</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody id="gradesTable"></tbody>
-            </table>
-          </div>
-        </section>
-
-        <section class="view" id="sourcesView">
-          <div class="section-head">
-            <h2>来源覆盖</h2>
-            <div class="result-count" id="sourceResultCount">0 sources</div>
-          </div>
-          <div class="source-layout">
-            <div class="source-list" id="sourceList"></div>
-            <div class="coverage-panel">
-              <h3>缺口</h3>
-              <div id="coverageGaps"></div>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
+      <section class="kit-section">
+        <div class="section-head">
+          <h2>模型列表</h2>
+          <span id="resultCount">0 results</span>
+        </div>
+        <div class="kit-grid" id="kitGrid"></div>
+      </section>
+    </main>
 
     <template id="kitCardTemplate">
       <article class="kit-card">
-        <div class="kit-visual">
-          <div class="grade-emblem"></div>
-        </div>
-        <div class="kit-body">
-          <div class="kit-title-row">
-            <h3></h3>
-            <span class="status-pill"></span>
-          </div>
-          <div class="kit-meta"></div>
-          <div class="kit-tags"></div>
-          <div class="source-strip"></div>
+        <div class="box-art"></div>
+        <div class="kit-info">
+          <h3></h3>
+          <p></p>
         </div>
       </article>
     </template>

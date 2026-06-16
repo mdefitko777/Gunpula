@@ -9,6 +9,7 @@
     "subline",
     "scale",
     "names",
+    "images",
     "universe",
     "work_title",
     "release_date",
@@ -48,6 +49,21 @@
         "ja": { "type": ["string", "null"] },
         "en": { "type": ["string", "null"] },
         "zh": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "images": {
+      "type": "object",
+      "required": ["box_art_url", "box_art_source_id"],
+      "properties": {
+        "box_art_url": {
+          "type": ["string", "null"],
+          "format": "uri-reference"
+        },
+        "box_art_source_id": {
+          "type": ["string", "null"],
+          "description": "Must match one source_id in data/sources.json when not null."
+        }
       },
       "additionalProperties": false
     },

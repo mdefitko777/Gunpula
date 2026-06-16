@@ -14,6 +14,10 @@
         "en": "RX-78-2 Gundam",
         "zh": "RX-78-2 高达"
       },
+      "images": {
+        "box_art_url": "./assets/box-art/rg-001-rx-78-2-gundam.jpg",
+        "box_art_source_id": "dalong"
+      },
       "universe": "UC",
       "work_title": "Mobile Suit Gundam",
       "release_date": "2010-07-24",
@@ -36,6 +40,12 @@
           "url": "https://zh.wikipedia.org/wiki/GUNPLA",
           "fields": ["number", "release_date", "names.zh"],
           "confidence": "medium"
+        },
+        {
+          "source_id": "dalong",
+          "url": "https://www.dalong.net/reviews/rg/rg01/rg01_i.htm",
+          "fields": ["images.box_art_url", "release_date", "price_jpy"],
+          "confidence": "medium"
         }
       ],
       "tags": ["mobile suit", "gundam"],
@@ -52,6 +62,10 @@
         "en": "MS-06S Char's Zaku II",
         "zh": "MS-06S 夏亚专用扎古 II"
       },
+      "images": {
+        "box_art_url": "./assets/box-art/rg-002-ms-06s-zaku-ii-char.jpg",
+        "box_art_source_id": "dalong"
+      },
       "universe": "UC",
       "work_title": "Mobile Suit Gundam",
       "release_date": "2010-11-27",
@@ -66,6 +80,12 @@
           "source_id": "wikipedia",
           "url": "https://zh.wikipedia.org/wiki/GUNPLA",
           "fields": ["number", "release_date", "names.zh"],
+          "confidence": "medium"
+        },
+        {
+          "source_id": "dalong",
+          "url": "https://www.dalong.net/reviews/rg/rg02/rg02_i.htm",
+          "fields": ["images.box_art_url", "release_date", "price_jpy"],
           "confidence": "medium"
         }
       ],
@@ -82,6 +102,10 @@
         "ja": null,
         "en": "RX-78-2 Gundam",
         "zh": "RX-78-2 高达"
+      },
+      "images": {
+        "box_art_url": null,
+        "box_art_source_id": null
       },
       "universe": "UC",
       "work_title": "Mobile Suit Gundam",
@@ -114,6 +138,10 @@
         "en": "Gundam Aerial",
         "zh": "风灵高达"
       },
+      "images": {
+        "box_art_url": null,
+        "box_art_source_id": null
+      },
       "universe": "Ad Stella",
       "work_title": "Mobile Suit Gundam: The Witch from Mercury",
       "release_date": null,
@@ -143,6 +171,10 @@
         "en": "RX-78-2 Gundam Ver.3.0",
         "zh": "RX-78-2 高达 Ver.3.0"
       },
+      "images": {
+        "box_art_url": "./assets/box-art/mg-rx-78-2-gundam-ver-3-0.jpg",
+        "box_art_source_id": "dalong"
+      },
       "universe": "UC",
       "work_title": "Mobile Suit Gundam",
       "release_date": null,
@@ -157,6 +189,12 @@
           "source_id": "wikipedia",
           "url": "https://en.wikipedia.org/wiki/Gunpla",
           "fields": ["grade_code", "scale", "line_context"],
+          "confidence": "medium"
+        },
+        {
+          "source_id": "dalong",
+          "url": "https://www.dalong.net/reviews/mg/m172/m172_i.htm",
+          "fields": ["images.box_art_url", "release_date", "price_jpy"],
           "confidence": "medium"
         }
       ],
@@ -174,6 +212,10 @@
         "en": "RX-78-2 Gundam",
         "zh": "RX-78-2 高达"
       },
+      "images": {
+        "box_art_url": "./assets/box-art/pgu-rx-78-2-gundam.jpg",
+        "box_art_source_id": "dalong"
+      },
       "universe": "UC",
       "work_title": "Mobile Suit Gundam",
       "release_date": "2020-12",
@@ -188,6 +230,12 @@
           "source_id": "wikipedia",
           "url": "https://en.wikipedia.org/wiki/Gunpla",
           "fields": ["grade_code", "scale", "release_date"],
+          "confidence": "medium"
+        },
+        {
+          "source_id": "dalong",
+          "url": "https://www.dalong.net/reviews/pg/p19/p19_i.htm",
+          "fields": ["images.box_art_url", "release_date", "price_jpy"],
           "confidence": "medium"
         }
       ],

@@ -68,6 +68,20 @@ for (const kit of kits) {
     addError(`${context}: at least one localized name is required`);
   }
 
+  if (!kit.images || typeof kit.images !== "object") {
+    addError(`${context}: images must be an object`);
+  } else {
+    if (kit.images.box_art_url !== null && typeof kit.images.box_art_url !== "string") {
+      addError(`${context}: images.box_art_url must be string or null`);
+    }
+    if (kit.images.box_art_source_id !== null && !sourceById.has(kit.images.box_art_source_id)) {
+      addError(`${context}: unknown images.box_art_source_id ${kit.images.box_art_source_id}`);
+    }
+    if (kit.images.box_art_url && !kit.images.box_art_source_id) {
+      addWarning(`${context}: box art URL has no source id`);
+    }
+  }
+
   if (!isDateLike(kit.release_date)) {
     addError(`${context}: release_date must be null, YYYY, YYYY-MM, or YYYY-MM-DD`);
   }

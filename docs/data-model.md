@@ -16,6 +16,7 @@
 | `number` | 官方编号，没有就填 `null`。 |
 | `scale` | 比例，例如 `1/144`、`1/100`、`1/60`、`non-scale`。 |
 | `names` | `ja`、`en`、`zh` 三语名称，未知可填 `null`，但至少一个要有值。 |
+| `images` | 图片字段，当前先使用 `box_art_url` 和 `box_art_source_id`。 |
 | `universe` | 世界观，例如 UC、CE、AD、Ad Stella、Build。 |
 | `work_title` | 出处作品或企划名称。 |
 | `release_date` | 发售时间，支持 `YYYY`、`YYYY-MM`、`YYYY-MM-DD` 或 `null`。 |
