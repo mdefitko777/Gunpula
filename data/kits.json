@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-06-17",
-  "scope": "Individual Gunpla kit catalog. Seed records are only used to prove the schema and tooling; verified records should be checked against primary or trusted catalog sources.",
+  "scope": "Individual Gunpla kit catalog. Seed records are placeholders for the UI and data model; verified records must be checked against Japanese official or Japanese retail catalog sources.",
   "kits": [
     {
       "kit_id": "rg-001-rx-78-2-gundam",
@@ -10,96 +10,7 @@
       "number": "01",
       "scale": "1/144",
       "names": {
-        "ja": null,
-        "en": "RX-78-2 Gundam",
-        "zh": "RX-78-2 高达"
-      },
-      "images": {
-        "box_art_url": "./assets/box-art/rg-001-rx-78-2-gundam.jpg",
-        "box_art_source_id": "dalong"
-      },
-      "universe": "UC",
-      "work_title": "Mobile Suit Gundam",
-      "release_date": "2010-07-24",
-      "price_jpy": null,
-      "is_limited": false,
-      "data_status": "seed",
-      "source_urls": [
-        "https://en.wikipedia.org/wiki/Gunpla",
-        "https://zh.wikipedia.org/wiki/GUNPLA"
-      ],
-      "source_refs": [
-        {
-          "source_id": "wikipedia",
-          "url": "https://en.wikipedia.org/wiki/Gunpla",
-          "fields": ["grade_code", "scale", "release_date"],
-          "confidence": "medium"
-        },
-        {
-          "source_id": "wikipedia",
-          "url": "https://zh.wikipedia.org/wiki/GUNPLA",
-          "fields": ["number", "release_date", "names.zh"],
-          "confidence": "medium"
-        },
-        {
-          "source_id": "dalong",
-          "url": "https://www.dalong.net/reviews/rg/rg01/rg01_i.htm",
-          "fields": ["images.box_art_url", "release_date", "price_jpy"],
-          "confidence": "medium"
-        }
-      ],
-      "tags": ["mobile suit", "gundam"],
-      "notes": "Starter record; verify product details against Bandai Hobby or a dedicated kit catalog before marking as verified."
-    },
-    {
-      "kit_id": "rg-002-ms-06s-zaku-ii-char",
-      "grade_code": "RG",
-      "subline": "RG",
-      "number": "02",
-      "scale": "1/144",
-      "names": {
-        "ja": null,
-        "en": "MS-06S Char's Zaku II",
-        "zh": "MS-06S 夏亚专用扎古 II"
-      },
-      "images": {
-        "box_art_url": "./assets/box-art/rg-002-ms-06s-zaku-ii-char.jpg",
-        "box_art_source_id": "dalong"
-      },
-      "universe": "UC",
-      "work_title": "Mobile Suit Gundam",
-      "release_date": "2010-11-27",
-      "price_jpy": null,
-      "is_limited": false,
-      "data_status": "seed",
-      "source_urls": [
-        "https://zh.wikipedia.org/wiki/GUNPLA"
-      ],
-      "source_refs": [
-        {
-          "source_id": "wikipedia",
-          "url": "https://zh.wikipedia.org/wiki/GUNPLA",
-          "fields": ["number", "release_date", "names.zh"],
-          "confidence": "medium"
-        },
-        {
-          "source_id": "dalong",
-          "url": "https://www.dalong.net/reviews/rg/rg02/rg02_i.htm",
-          "fields": ["images.box_art_url", "release_date", "price_jpy"],
-          "confidence": "medium"
-        }
-      ],
-      "tags": ["mobile suit", "zeon"],
-      "notes": "Starter record; verify product details against Bandai Hobby or a dedicated kit catalog before marking as verified."
-    },
-    {
-      "kit_id": "eg-rx-78-2-gundam",
-      "grade_code": "EG",
-      "subline": "EG",
-      "number": null,
-      "scale": "1/144",
-      "names": {
-        "ja": null,
+        "ja": "RX-78-2 ガンダム",
         "en": "RX-78-2 Gundam",
         "zh": "RX-78-2 高达"
       },
@@ -113,19 +24,83 @@
       "price_jpy": null,
       "is_limited": false,
       "data_status": "seed",
-      "source_urls": [
-        "https://en.wikipedia.org/wiki/Gunpla"
-      ],
+      "source_urls": [],
       "source_refs": [
         {
-          "source_id": "wikipedia",
-          "url": "https://en.wikipedia.org/wiki/Gunpla",
-          "fields": ["grade_code", "scale", "line_context"],
-          "confidence": "medium"
+          "source_id": "manual_seed",
+          "url": null,
+          "fields": ["kit_id", "grade_code", "subline", "number", "scale", "names", "work_title"],
+          "confidence": "low"
+        }
+      ],
+      "tags": ["mobile suit", "gundam"],
+      "notes": "Placeholder only. Replace with Japanese-source import."
+    },
+    {
+      "kit_id": "rg-002-ms-06s-zaku-ii-char",
+      "grade_code": "RG",
+      "subline": "RG",
+      "number": "02",
+      "scale": "1/144",
+      "names": {
+        "ja": "MS-06S シャア専用ザクII",
+        "en": "MS-06S Char's Zaku II",
+        "zh": "MS-06S 夏亚专用扎古 II"
+      },
+      "images": {
+        "box_art_url": null,
+        "box_art_source_id": null
+      },
+      "universe": "UC",
+      "work_title": "Mobile Suit Gundam",
+      "release_date": null,
+      "price_jpy": null,
+      "is_limited": false,
+      "data_status": "seed",
+      "source_urls": [],
+      "source_refs": [
+        {
+          "source_id": "manual_seed",
+          "url": null,
+          "fields": ["kit_id", "grade_code", "subline", "number", "scale", "names", "work_title"],
+          "confidence": "low"
+        }
+      ],
+      "tags": ["mobile suit", "zeon"],
+      "notes": "Placeholder only. Replace with Japanese-source import."
+    },
+    {
+      "kit_id": "eg-rx-78-2-gundam",
+      "grade_code": "EG",
+      "subline": "EG",
+      "number": null,
+      "scale": "1/144",
+      "names": {
+        "ja": "RX-78-2 ガンダム",
+        "en": "RX-78-2 Gundam",
+        "zh": "RX-78-2 高达"
+      },
+      "images": {
+        "box_art_url": null,
+        "box_art_source_id": null
+      },
+      "universe": "UC",
+      "work_title": "Mobile Suit Gundam",
+      "release_date": null,
+      "price_jpy": null,
+      "is_limited": false,
+      "data_status": "seed",
+      "source_urls": [],
+      "source_refs": [
+        {
+          "source_id": "manual_seed",
+          "url": null,
+          "fields": ["kit_id", "grade_code", "subline", "scale", "names", "work_title"],
+          "confidence": "low"
         }
       ],
       "tags": ["mobile suit", "gundam", "entry"],
-      "notes": "Starter record for the modern Entry Grade line."
+      "notes": "Placeholder only. Replace with Japanese-source import."
     },
     {
       "kit_id": "hg-gundam-aerial",
@@ -134,7 +109,7 @@
       "number": null,
       "scale": "1/144",
       "names": {
-        "ja": null,
+        "ja": "ガンダム・エアリアル",
         "en": "Gundam Aerial",
         "zh": "风灵高达"
       },
@@ -153,12 +128,12 @@
         {
           "source_id": "manual_seed",
           "url": null,
-          "fields": ["grade_code", "scale", "names.en", "names.zh", "work_title"],
+          "fields": ["kit_id", "grade_code", "subline", "scale", "names", "work_title"],
           "confidence": "low"
         }
       ],
       "tags": ["mobile suit", "gundam", "witch from mercury"],
-      "notes": "Starter record for HG subline handling."
+      "notes": "Placeholder only. Replace with Japanese-source import."
     },
     {
       "kit_id": "mg-rx-78-2-gundam-ver-3-0",
@@ -167,13 +142,13 @@
       "number": null,
       "scale": "1/100",
       "names": {
-        "ja": null,
+        "ja": "RX-78-2 ガンダム Ver.3.0",
         "en": "RX-78-2 Gundam Ver.3.0",
         "zh": "RX-78-2 高达 Ver.3.0"
       },
       "images": {
-        "box_art_url": "./assets/box-art/mg-rx-78-2-gundam-ver-3-0.jpg",
-        "box_art_source_id": "dalong"
+        "box_art_url": null,
+        "box_art_source_id": null
       },
       "universe": "UC",
       "work_title": "Mobile Suit Gundam",
@@ -181,25 +156,17 @@
       "price_jpy": null,
       "is_limited": false,
       "data_status": "seed",
-      "source_urls": [
-        "https://en.wikipedia.org/wiki/Gunpla"
-      ],
+      "source_urls": [],
       "source_refs": [
         {
-          "source_id": "wikipedia",
-          "url": "https://en.wikipedia.org/wiki/Gunpla",
-          "fields": ["grade_code", "scale", "line_context"],
-          "confidence": "medium"
-        },
-        {
-          "source_id": "dalong",
-          "url": "https://www.dalong.net/reviews/mg/m172/m172_i.htm",
-          "fields": ["images.box_art_url", "release_date", "price_jpy"],
-          "confidence": "medium"
+          "source_id": "manual_seed",
+          "url": null,
+          "fields": ["kit_id", "grade_code", "subline", "scale", "names", "work_title"],
+          "confidence": "low"
         }
       ],
       "tags": ["mobile suit", "gundam"],
-      "notes": "Starter record for MG version naming."
+      "notes": "Placeholder only. Replace with Japanese-source import."
     },
     {
       "kit_id": "pgu-rx-78-2-gundam",
@@ -208,39 +175,31 @@
       "number": null,
       "scale": "1/60",
       "names": {
-        "ja": null,
+        "ja": "RX-78-2 ガンダム",
         "en": "RX-78-2 Gundam",
         "zh": "RX-78-2 高达"
       },
       "images": {
-        "box_art_url": "./assets/box-art/pgu-rx-78-2-gundam.jpg",
-        "box_art_source_id": "dalong"
+        "box_art_url": null,
+        "box_art_source_id": null
       },
       "universe": "UC",
       "work_title": "Mobile Suit Gundam",
-      "release_date": "2020-12",
+      "release_date": null,
       "price_jpy": null,
       "is_limited": false,
       "data_status": "seed",
-      "source_urls": [
-        "https://en.wikipedia.org/wiki/Gunpla"
-      ],
+      "source_urls": [],
       "source_refs": [
         {
-          "source_id": "wikipedia",
-          "url": "https://en.wikipedia.org/wiki/Gunpla",
-          "fields": ["grade_code", "scale", "release_date"],
-          "confidence": "medium"
-        },
-        {
-          "source_id": "dalong",
-          "url": "https://www.dalong.net/reviews/pg/p19/p19_i.htm",
-          "fields": ["images.box_art_url", "release_date", "price_jpy"],
-          "confidence": "medium"
+          "source_id": "manual_seed",
+          "url": null,
+          "fields": ["kit_id", "grade_code", "subline", "scale", "names", "work_title"],
+          "confidence": "low"
         }
       ],
       "tags": ["mobile suit", "gundam", "flagship"],
-      "notes": "Starter record for PG subline handling."
+      "notes": "Placeholder only. Replace with Japanese-source import."
     }
   ]
 }

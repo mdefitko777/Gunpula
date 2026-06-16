@@ -4,8 +4,8 @@ Gunpla catalog data project.
 
 The project keeps Gunpla grades/model lines and individual kit records in
 structured JSON files, then validates and reports on that data with small Node
-scripts. The long-term goal is to support automated imports from trusted catalog
-sources instead of hand-entering every kit.
+scripts. The long-term goal is to support automated imports from Japanese
+official and Japanese retail catalog sources instead of hand-entering every kit.
 
 ## Files
 
@@ -52,7 +52,7 @@ work. Seed records are not complete verified catalog entries.
 
 ## Next Steps
 
-1. Build the first importer for one source, likely Dalong or Hobby Search.
-2. Import HG/MG/RG/PG/EG ordinary retail kits as `needs_review`.
+1. Build the first importer for a Japanese source, likely Hobby Search Japan.
+2. Import RG ordinary retail kits as `needs_review`.
 3. Review imported records and promote checked records to `verified`.
 4. Add a filterable website or app view once the data volume is useful.

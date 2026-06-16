@@ -12,7 +12,12 @@ const missingOfficial = kits.filter(
 );
 
 const missingVisual = kits.filter(
-  (kit) => !(kit.source_refs ?? []).some((sourceRef) => ["dalong", "hobby_search", "hlj"].includes(sourceRef.source_id)),
+  (kit) =>
+    !(kit.source_refs ?? []).some((sourceRef) =>
+      ["bandai_hobby_jp", "p_bandai_jp", "the_gundam_base_jp", "hobby_search_jp", "amiami_jp"].includes(
+        sourceRef.source_id,
+      ),
+    ),
 );
 
 console.log(`Kits: ${kits.length}`);
@@ -22,5 +27,5 @@ printTable(["Source", "Type", "Count"], sourceRows);
 console.log("\nKits without official source");
 printTable(["Kit ID", "Grade", "Status"], missingOfficial.map((kit) => [kit.kit_id, kit.grade_code, kit.data_status]));
 
-console.log("\nKits without visual/catalog source");
+console.log("\nKits without Japanese product/catalog source");
 printTable(["Kit ID", "Grade", "Status"], missingVisual.map((kit) => [kit.kit_id, kit.grade_code, kit.data_status]));

@@ -59,11 +59,11 @@ npm run validate
 
 ```json
 {
-  "source_id": "dalong",
-  "url": "https://www.dalong.net/",
-  "fields": ["box_art", "runner_photos", "subline", "number"],
+  "source_id": "hobby_search_jp",
+  "url": "https://www.1999.co.jp/gundam/",
+  "fields": ["box_art", "subline", "release_date", "price_jpy"],
   "confidence": "medium"
 }
 ```
 
-Bandai Hobby 适合当官方锚点，但它不保证覆盖旧模、限定、再版和全部历史线；所以记录升级到 `verified` 前，最好至少有一个官方/店铺来源和一个目录/实物来源交叉验证。
+记录升级到 `verified` 前，必须有日本官方或日本店铺来源支撑；Dalong、Wiki、海外整理站只作为人工参考，不写入主数据来源。

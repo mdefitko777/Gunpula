@@ -6,6 +6,7 @@
       "source_id": "manual_seed",
       "name": "Manual Seed",
       "type": "internal",
+      "country": null,
       "base_url": null,
       "priority": 0,
       "best_for": ["schema testing", "placeholder records"],
@@ -13,74 +14,70 @@
       "notes": "Used only for starter records that prove the data model."
     },
     {
-      "source_id": "bandai_hobby",
-      "name": "Bandai Hobby / Bandai Spirits",
-      "type": "official",
+      "source_id": "bandai_hobby_jp",
+      "name": "Bandai Hobby Site Japan",
+      "type": "official_jp",
+      "country": "JP",
       "base_url": "https://bandai-hobby.net/",
       "priority": 1,
-      "best_for": ["official name", "release date", "price", "official image", "current product pages"],
-      "weak_for": ["older kits", "retired pages", "full historical coverage", "cross-line numbering"],
-      "notes": "Use as official anchor when available, but do not rely on it as the only catalog source."
+      "best_for": ["official product name", "official image", "release date", "manufacturer price"],
+      "weak_for": ["older removed pages", "complete historical coverage"],
+      "notes": "Use item pages when available; do not assume the site covers every older kit."
     },
     {
-      "source_id": "the_gundam_base",
-      "name": "The Gundam Base",
-      "type": "official_store",
-      "base_url": "https://www.gundam-base.net/",
+      "source_id": "p_bandai_jp",
+      "name": "Premium Bandai Japan",
+      "type": "official_store_jp",
+      "country": "JP",
+      "base_url": "https://p-bandai.jp/hobby/",
       "priority": 2,
-      "best_for": ["Gundam Base limited items", "event items", "official retail presentation"],
-      "weak_for": ["ordinary older retail kits", "complete release history"],
-      "notes": "Useful for limited and event products that may be absent from normal product pages."
+      "best_for": ["P-Bandai limited products", "official web-shop title", "price", "release month", "official images"],
+      "weak_for": ["ordinary retail products", "sold-out or removed pages"],
+      "notes": "Primary source for Premium Bandai limited Gunpla."
     },
     {
-      "source_id": "dalong",
-      "name": "Dalong.net",
-      "type": "review_catalog",
-      "base_url": "https://www.dalong.net/",
+      "source_id": "the_gundam_base_jp",
+      "name": "The Gundam Base Japan",
+      "type": "official_store_jp",
+      "country": "JP",
+      "base_url": "https://www.gundam-base.net/products/",
       "priority": 3,
-      "best_for": ["grade lists", "box photos", "manual scans", "runner photos", "review pages", "older mainstream kits"],
-      "weak_for": ["official price authority", "official release-date authority", "machine-readable structure"],
-      "notes": "Very useful for coverage and visual verification. Needs careful parsing and human review."
+      "best_for": ["Gundam Base limited products", "event-limited products", "store availability", "price", "release date"],
+      "weak_for": ["ordinary retail history"],
+      "notes": "Official Japanese store catalog. Useful for limited and event items."
     },
     {
-      "source_id": "hobby_search",
-      "name": "Hobby Search",
-      "type": "retail_catalog",
-      "base_url": "https://www.1999.co.jp/eng/gundam/",
+      "source_id": "hobby_search_jp",
+      "name": "Hobby Search Japan",
+      "type": "retail_catalog_jp",
+      "country": "JP",
+      "base_url": "https://www.1999.co.jp/gundam/",
       "priority": 4,
-      "best_for": ["retail title", "release month", "price", "package images"],
-      "weak_for": ["stock-dependent visibility", "official completeness"],
-      "notes": "Good secondary source for price and release month, especially when official pages are missing."
+      "best_for": ["Japanese product title", "release month", "retail price", "box image", "category"],
+      "weak_for": ["official authority", "items not listed or removed by retailer"],
+      "notes": "Japanese retail catalog. Use as a Japanese catalog source when official pages are incomplete."
     },
     {
-      "source_id": "hlj",
-      "name": "HobbyLink Japan",
-      "type": "retail_catalog",
-      "base_url": "https://www.hlj.com/",
+      "source_id": "amiami_jp",
+      "name": "AmiAmi Japan",
+      "type": "retail_catalog_jp",
+      "country": "JP",
+      "base_url": "https://www.amiami.jp/top/page/c/gundam.html",
       "priority": 5,
-      "best_for": ["retail title", "release month", "price", "availability history"],
-      "weak_for": ["complete historical coverage", "official naming authority"],
-      "notes": "Useful as a secondary retail source."
+      "best_for": ["Japanese retail title", "release month", "retail price", "product image", "series filters"],
+      "weak_for": ["official authority", "historical completeness"],
+      "notes": "Japanese retail catalog. Useful as a cross-check with Hobby Search."
     },
     {
-      "source_id": "gundam_wiki",
-      "name": "Gundam Wiki",
-      "type": "community_wiki",
-      "base_url": "https://gundam.fandom.com/",
+      "source_id": "gundam_info_jp",
+      "name": "GUNDAM.INFO Japan",
+      "type": "official_media_jp",
+      "country": "JP",
+      "base_url": "https://www.gundam.info/",
       "priority": 6,
-      "best_for": ["unit identity", "work title", "fictional universe", "variant naming"],
-      "weak_for": ["product pricing", "release-date authority"],
-      "notes": "Use for mobile suit identity and universe metadata, not as sole product source."
-    },
-    {
-      "source_id": "wikipedia",
-      "name": "Wikipedia",
-      "type": "community_wiki",
-      "base_url": "https://www.wikipedia.org/",
-      "priority": 7,
-      "best_for": ["grade background", "historical context", "seed cross-checking"],
-      "weak_for": ["full kit catalog", "retail facts"],
-      "notes": "Useful for background. Avoid using as the only source for verified kit records."
+      "best_for": ["official news", "new product announcements", "event context"],
+      "weak_for": ["complete catalog fields", "older retail facts"],
+      "notes": "Use for announcement context, not as the only product record."
     }
   ]
 }
