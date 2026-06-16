@@ -14,15 +14,15 @@
       "notes": "Used only for starter records that prove the data model."
     },
     {
-      "source_id": "bandai_hobby_jp",
-      "name": "Bandai Hobby Site Japan",
+      "source_id": "bandai_spirits_products_jp",
+      "name": "BANDAI SPIRITS Product Search Japan",
       "type": "official_jp",
       "country": "JP",
-      "base_url": "https://bandai-hobby.net/",
+      "base_url": "https://www.bandaispirits.co.jp/products/search/",
       "priority": 1,
-      "best_for": ["official product name", "official image", "release date", "manufacturer price"],
-      "weak_for": ["older removed pages", "complete historical coverage"],
-      "notes": "Use item pages when available; do not assume the site covers every older kit."
+      "best_for": ["official product search", "Gunpla category", "release period", "official product pages"],
+      "weak_for": ["JavaScript-only search behavior", "older removed pages", "complete historical coverage"],
+      "notes": "Official Japanese BANDAI SPIRITS product search. Use it as the official anchor, then fall back to Japanese store catalogs when product pages are incomplete."
     },
     {
       "source_id": "p_bandai_jp",

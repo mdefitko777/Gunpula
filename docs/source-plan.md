@@ -4,7 +4,7 @@
 
 ## 推荐顺序
 
-1. **日本官方/官方店铺**：Bandai Hobby Japan、Premium Bandai Japan、The Gundam Base Japan。
+1. **日本官方/官方店铺**：BANDAI SPIRITS Product Search Japan、Premium Bandai Japan、The Gundam Base Japan。
 2. **日本店铺目录**：Hobby Search Japan、AmiAmi Japan。
 3. **核心普通贩售套件**：先做 RG，再扩展 HG / MG / PG / EG / FM / MGSD。
 4. **限定和变体**：P-Bandai、Gundam Base 限定、会场限定、透明版、电镀版、特别涂装。
@@ -13,7 +13,7 @@
 
 | 来源 | 适合拿什么 | 注意点 |
 |---|---|---|
-| Bandai Hobby Japan | 官方名称、官方图、发售时间、价格 | 老页面可能缺失，不保证完整历史。 |
+| BANDAI SPIRITS Product Search Japan | 官方商品搜索、ガンプラ分类、发售时期、官方商品页入口 | 搜索页依赖 JavaScript，抓取时要优先找稳定的商品页。 |
 | Premium Bandai Japan | P-Bandai 限定、价格、发售月、官方图 | 只覆盖限定/网店商品。 |
 | The Gundam Base Japan | Gundam Base 限定、活动限定、价格、发售日、库存 | 不适合完整普通贩售历史。 |
 | Hobby Search Japan | 日文商品名、发售月、价格、盒图、分类 | 店铺目录，不是官方来源。 |
@@ -23,8 +23,8 @@
 
 | 数据字段 | 首选来源 | 补充来源 |
 |---|---|---|
-| 官方商品名 | Bandai Hobby Japan / Premium Bandai Japan / The Gundam Base Japan | Hobby Search Japan、AmiAmi Japan |
-| 等级 / 比例 / 子系列 | Bandai Hobby Japan / 日本店铺标题 | Hobby Search Japan、AmiAmi Japan |
+| 官方商品名 | BANDAI SPIRITS Product Search Japan / Premium Bandai Japan / The Gundam Base Japan | Hobby Search Japan、AmiAmi Japan |
+| 等级 / 比例 / 子系列 | BANDAI SPIRITS Product Search Japan / 日本店铺标题 | Hobby Search Japan、AmiAmi Japan |
 | 发售日期 / 发售月份 | Bandai 官方/官方店铺 | Hobby Search Japan、AmiAmi Japan |
 | 日元定价 | Bandai 官方/官方店铺 | Hobby Search Japan、AmiAmi Japan |
 | 盒图 | Bandai 官方/官方店铺 | Hobby Search Japan、AmiAmi Japan |
