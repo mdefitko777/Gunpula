@@ -1,0 +1,13 @@
+{
+  "name": "gunpula",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Gunpla catalog data, validation, and reporting tools.",
+  "scripts": {
+    "validate": "node scripts/validate_catalog.mjs",
+    "stats": "node scripts/catalog_stats.mjs",
+    "search": "node scripts/search_kits.mjs",
+    "export:grades": "node scripts/export_grades_markdown.mjs"
+  }
+}

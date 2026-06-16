@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mdefitko777/Gunpula/schema/kit.schema.json",
+  "title": "Gunpla Kit Record",
+  "type": "object",
+  "required": [
+    "kit_id",
+    "grade_code",
+    "subline",
+    "scale",
+    "names",
+    "universe",
+    "work_title",
+    "release_date",
+    "price_jpy",
+    "is_limited",
+    "data_status",
+    "source_urls",
+    "tags",
+    "notes"
+  ],
+  "properties": {
+    "kit_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+[a-z0-9-]*$"
+    },
+    "grade_code": {
+      "type": "string",
+      "description": "Must match one code in data/grades.json."
+    },
+    "subline": {
+      "type": ["string", "null"],
+      "description": "More specific label such as HGUC, HGCE, MG Ver.Ka, or PG Unleashed."
+    },
+    "number": {
+      "type": ["string", "null"],
+      "description": "Line number when a model line has an official visible sequence number."
+    },
+    "scale": {
+      "type": "string",
+      "examples": ["1/144", "1/100", "1/60", "non-scale"]
+    },
+    "names": {
+      "type": "object",
+      "required": ["ja", "en", "zh"],
+      "properties": {
+        "ja": { "type": ["string", "null"] },
+        "en": { "type": ["string", "null"] },
+        "zh": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "universe": {
+      "type": ["string", "null"],
+      "description": "UC, CE, AD, Ad Stella, Build, SD, etc."
+    },
+    "work_title": {
+      "type": ["string", "null"],
+      "description": "Original work or product campaign title."
+    },
+    "release_date": {
+      "type": ["string", "null"],
+      "description": "YYYY, YYYY-MM, or YYYY-MM-DD."
+    },
+    "price_jpy": {
+      "type": ["integer", "null"],
+      "minimum": 0
+    },
+    "is_limited": {
+      "type": "boolean"
+    },
+    "data_status": {
+      "type": "string",
+      "enum": ["seed", "needs_review", "verified", "retired"]
+    },
+    "source_urls": {
+      "type": "array",
+      "items": { "type": "string", "format": "uri" }
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "notes": {
+      "type": ["string", "null"]
+    }
+  },
+  "additionalProperties": false
+}
