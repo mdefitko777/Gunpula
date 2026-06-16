@@ -20,6 +20,7 @@ sources instead of hand-entering every kit.
 - `scripts/catalog_stats.mjs` - prints catalog counts.
 - `scripts/source_coverage.mjs` - reports source coverage and missing source types.
 - `scripts/search_kits.mjs` - searches kit records.
+- `scripts/serve_app.mjs` - serves the local catalog UI.
 - `scripts/export_grades_markdown.mjs` - exports grades as Markdown.
 
 ## Commands
@@ -28,6 +29,7 @@ sources instead of hand-entering every kit.
 npm run validate
 npm run stats
 npm run sources
+npm run app
 npm run search -- --grade=RG
 npm run search -- aerial
 npm run export:grades
@@ -38,6 +40,7 @@ On Windows PowerShell, use `npm.cmd` if script execution policy blocks `npm`:
 ```powershell
 npm.cmd run validate
 npm.cmd run stats
+npm.cmd run app
 ```
 
 ## Current Status

@@ -9,6 +9,7 @@
     "stats": "node scripts/catalog_stats.mjs",
     "search": "node scripts/search_kits.mjs",
     "sources": "node scripts/source_coverage.mjs",
+    "app": "node scripts/serve_app.mjs",
     "export:grades": "node scripts/export_grades_markdown.mjs"
   }
 }
