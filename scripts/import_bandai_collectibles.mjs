@@ -4,6 +4,14 @@ const CANDY_BASE_URL = "https://www.bandai.co.jp";
 const GASHAPON_BASE_URL = "https://gashapon.jp";
 const CANDY_SOURCE_ID = "bandai_candy_gundam_jp";
 const GASHAPON_SOURCE_ID = "bandai_gashapon_gundam_jp";
+const GASHAPON_PRODUCTS_SOURCE_ID = "bandai_gashapon_products_jp";
+const POKEMON_HOBBY_SOURCE_ID = "bandai_hobby_pokemon_satellite";
+const KOTOBUKIYA_AC_SOURCE_ID = "kotobukiya_armored_core_jp";
+const BANDAI_SPIRITS_SOURCE_ID = "bandai_spirits_products_jp";
+
+const POKEMON_MODEL_KIT_URL = "https://satellite.bandai-hobby.net/characters/pokemon.php";
+const BANDAI_AC_SEARCH_URL = "https://www.bandaispirits.co.jp/products/search/result.php?freeword=ARMORED%20CORE&category=2";
+const KOTOBUKIYA_AC_URL = "https://www.kotobukiya.co.jp/title/armored-core/";
 
 const CANDY_BRANDS = [
   { code: "CONVERGE", slug: "converge", label: "FW GUNDAM CONVERGE" },
@@ -101,10 +109,9 @@ function parseReleaseDate(value) {
 function parsePrice(value) {
   const text = stripTags(value);
   const yen = /[￥¥]?\s*([\d,]+)\s*円/.exec(text) || /[￥¥]\s*([\d,]+)/.exec(text);
-  if (!yen) {
-    return null;
-  }
-  return Number(yen[1].replace(/,/g, ""));
+  const jpy = /JPY\s*([\d,]+)/i.exec(text);
+  const price = yen || jpy;
+  return price ? Number(price[1].replace(/,/g, "")) : null;
 }
 
 function slugify(value, fallback = "item") {
@@ -151,6 +158,12 @@ function today() {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 function candySubline(title, brand) {
   if (brand.code === "CONVERGE") {
     if (/CORE/i.test(title)) return "FW GUNDAM CONVERGE CORE";
@@ -169,6 +182,7 @@ async function fetchText(url) {
         headers: {
           "user-agent": "Gunpula catalog importer (+https://github.com/mdefitko777/Gunpula)",
           accept: "text/html,application/xhtml+xml",
+          "accept-language": "ja,en-US;q=0.8,en;q=0.7",
         },
       });
       if (response.ok) {
@@ -178,7 +192,7 @@ async function fetchText(url) {
     } catch (error) {
       lastError = error;
     }
-    await new Promise((resolve) => setTimeout(resolve, attempt * 500));
+    await sleep(attempt * (String(lastError?.message ?? "").includes("403") ? 2200 : 600));
   }
   throw lastError;
 }
@@ -254,9 +268,11 @@ function parseGashaponProductDetail(html) {
 
 function buildKit({
   kitId,
+  franchise = "gundam",
   gradeCode,
   subline,
   title,
+  names = {},
   boxArtUrl,
   galleryUrls,
   releaseDate,
@@ -267,19 +283,29 @@ function buildKit({
   tags,
   notes,
   workContext = [],
+  workOverride = null,
+  universeOverride = null,
+  scale = "non-scale",
 }) {
   const inferredWork = inferWork(title, ...workContext);
-  const work = inferredWork.work_title ? inferredWork : fallbackWork(title, gradeCode, subline);
+  const work =
+    workOverride || universeOverride
+      ? { work_title: workOverride, universe: universeOverride }
+      : inferredWork.work_title
+        ? inferredWork
+        : fallbackWork(title, gradeCode, subline);
   return {
     kit_id: kitId,
+    franchise,
     grade_code: gradeCode,
     subline,
     number: null,
-    scale: "non-scale",
+    scale,
     names: {
-      ja: title,
-      en: null,
-      zh: null,
+      ja: Object.hasOwn(names, "ja") ? names.ja : title,
+      en: names.en ?? null,
+      zh: names.zh ?? null,
+      ko: names.ko ?? null,
     },
     images: {
       box_art_url: boxArtUrl,
@@ -297,13 +323,336 @@ function buildKit({
       {
         source_id: sourceId,
         url: sourceUrls[0] ?? null,
-        fields: ["names", "grade_code", "subline", "scale", "release_date", "price_jpy", "images", "gallery_image_urls", "work_title", "universe"],
+        fields: ["franchise", "names", "grade_code", "subline", "scale", "release_date", "price_jpy", "images", "gallery_image_urls", "work_title", "universe"],
         confidence: "high",
       },
     ],
     tags,
     notes,
   };
+}
+
+function parseEnglishMonthRelease(value) {
+  const match = /(\d{4})\s*\/\s*([A-Za-z]{3,})/.exec(String(value ?? ""));
+  if (!match) {
+    return parseReleaseDate(value);
+  }
+
+  const months = new Map(
+    ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"].map((month, index) => [month, String(index + 1).padStart(2, "0")]),
+  );
+  const month = months.get(match[2].slice(0, 3).toLowerCase());
+  return month ? `${match[1]}-${month}` : match[1];
+}
+
+function parsePokemonModelKitListings(html, pageUrl) {
+  const galleryByGroup = new Map();
+  for (const match of html.matchAll(/href="([^"]+)"\s+data-fancybox="([^"]+)"/g)) {
+    const url = absoluteUrl(match[1], pageUrl);
+    const group = match[2];
+    galleryByGroup.set(group, unique([...(galleryByGroup.get(group) ?? []), url]));
+  }
+
+  const records = [];
+  const itemPattern = /<a class="item scrollA" href="([^"]+)" data-fancybox="([^"]+)" data-caption="([^"]+)"[\s\S]*?<p class="summary">([\s\S]*?)<\/p>/g;
+  for (const match of html.matchAll(itemPattern)) {
+    const group = match[2];
+    const title = stripTags(match[3]);
+    const summary = match[4];
+    const releaseText = stripTags(extract(/<span class="release">([\s\S]*?)<\/span>/, summary));
+    const priceText = stripTags(extract(/<span class="price">([\s\S]*?)<\/span>/, summary));
+    const images = galleryByGroup.get(group) ?? [absoluteUrl(match[1], pageUrl)];
+
+    if (!title || !images.length) {
+      continue;
+    }
+
+    records.push({
+      title,
+      images,
+      release_date: parseEnglishMonthRelease(releaseText),
+      price_jpy: parsePrice(priceText),
+    });
+  }
+
+  return records;
+}
+
+async function importPokemonModelKits() {
+  const html = await fetchText(POKEMON_MODEL_KIT_URL);
+  const listings = parsePokemonModelKitListings(html, POKEMON_MODEL_KIT_URL);
+  console.log(`Found ${listings.length} Pokemon Model Kit listings.`);
+
+  return listings.map((listing, index) =>
+    buildKit({
+      kitId: `pokepla-${String(index + 1).padStart(2, "0")}-${slugify(listing.title, "pokemon")}`,
+      franchise: "pokemon",
+      gradeCode: "POKEPLA",
+      subline: /^Pokémon Model Kit Quick!!/i.test(listing.title) ? "Pokemon Model Kit Quick!!" : "Pokemon Model Kit",
+      title: listing.title,
+      names: { ja: null, en: listing.title, zh: null, ko: null },
+      boxArtUrl: listing.images[0],
+      galleryUrls: listing.images,
+      releaseDate: listing.release_date,
+      priceJpy: listing.price_jpy,
+      isLimited: false,
+      sourceId: POKEMON_HOBBY_SOURCE_ID,
+      sourceUrls: [POKEMON_MODEL_KIT_URL],
+      tags: ["pokemon", "bandai hobby", "plastic model", "pokepla"],
+      notes: "Imported from the official Bandai Hobby Site Satellite Pokemon Model Kit page.",
+      workOverride: "Pokemon",
+      universeOverride: "Pokemon",
+    }),
+  );
+}
+
+function parseGashaponSearchListings(html, resultUrl) {
+  const records = [];
+  const blocks = html.split(/<div class="c-card__list[^"]*"[^>]*>/).slice(1);
+
+  for (const block of blocks) {
+    const href = extract(/<a href="([^"]+)" class="c-card__link"/, block);
+    const title = stripTags(extract(/<p class="c-card__name">([\s\S]*?)<\/p>/, block));
+    const image = extract(/<img[^>]+src="([^"]+)"/, block);
+    const priceBlock = extract(/<p class="c-card__price">([\s\S]*?)<\/p>/, block);
+    if (!href || !title) {
+      continue;
+    }
+
+    const detailUrl = absoluteUrl(href, resultUrl);
+    records.push({
+      detail_url: detailUrl,
+      jan_code: new URL(detailUrl).searchParams.get("jan_code"),
+      title,
+      image_url: image ? absoluteUrl(image, resultUrl) : null,
+      price_jpy: parsePrice(priceBlock),
+    });
+  }
+
+  return records;
+}
+
+async function importGashaponSearch({ label, resultUrl, franchise, gradeCode, subline, idPrefix, tags, fallbackWork, fallbackUniverse, fetchDetails = true }) {
+  const html = await fetchText(resultUrl);
+  const listings = parseGashaponSearchListings(html, resultUrl);
+  const imported = [];
+
+  console.log(`Found ${listings.length} ${label} Gashapon search listings.`);
+
+  let detailCount = 0;
+  for (const listing of listings) {
+    let detail = { images: [], release_date: null, price_jpy: null };
+    if (fetchDetails) {
+      await sleep(120);
+      try {
+        detail = parseGashaponProductDetail(await fetchText(listing.detail_url));
+        detailCount += 1;
+      } catch (error) {
+        console.warn(`Gashapon detail fetch failed for ${listing.detail_url}: ${error.message}`);
+      }
+    }
+
+    const inferred = inferWork(listing.title);
+    imported.push(
+      buildKit({
+        kitId: `${idPrefix}-${listing.jan_code ?? slugify(listing.title, "item")}`,
+        franchise,
+        gradeCode,
+        subline,
+        title: listing.title,
+        boxArtUrl: detail.images[0] ?? listing.image_url,
+        galleryUrls: [listing.image_url, ...detail.images],
+        releaseDate: detail.release_date,
+        priceJpy: detail.price_jpy ?? listing.price_jpy,
+        isLimited: /限定|プレミアム|PREMIUM/i.test(listing.title),
+        sourceId: GASHAPON_PRODUCTS_SOURCE_ID,
+        sourceUrls: [listing.detail_url, resultUrl],
+        tags,
+        notes: `Imported from the official Bandai Gashapon product search for ${label}.`,
+        workOverride: inferred.work_title ?? fallbackWork,
+        universeOverride: inferred.universe ?? fallbackUniverse,
+      }),
+    );
+  }
+
+  console.log(fetchDetails ? `Fetched ${detailCount}/${listings.length} ${label} Gashapon detail pages.` : `Used ${listings.length} ${label} Gashapon listing images without detail-page fetches.`);
+  return imported;
+}
+
+function parseBandaiSpiritProductCards(html, listingUrl) {
+  return html
+    .split('<div class="m_panel__listItem">')
+    .slice(1)
+    .map((block) => {
+      const href = extract(/href="([^"]*\/products\/search\/detail\.php[^"]+)"/, block);
+      const imageUrl = extract(/<img src="([^"]+)"/, block);
+      const title = stripTags(extract(/<div class="m_cardA__title">([\s\S]*?)<\/div>/, block));
+      const releaseText = stripTags(extract(/<div class="m_cardA__date">([\s\S]*?)<\/div>/, block));
+      const priceText = stripTags(extract(/<div class="m_cardA__price">([\s\S]*?)<\/div>/, block));
+
+      if (!href || !title) {
+        return null;
+      }
+
+      return {
+        source_url: absoluteUrl(href, listingUrl),
+        image_url: imageUrl ? absoluteUrl(imageUrl, listingUrl) : null,
+        title,
+        release_date: parseReleaseDate(releaseText),
+        price_jpy: parsePrice(priceText),
+      };
+    })
+    .filter(Boolean);
+}
+
+function bandaiImageSeriesId(url) {
+  const file = new URL(url).pathname.split("/").at(-1) ?? "";
+  return /^(.+?)_\d+\.[a-z0-9]+$/i.exec(file)?.[1] ?? null;
+}
+
+function sameBandaiImageSeries(url, referenceUrl) {
+  const id = bandaiImageSeriesId(url);
+  const referenceId = bandaiImageSeriesId(referenceUrl);
+  return Boolean(id && referenceId && id === referenceId);
+}
+
+function parseBandaiSpiritProductDetail(html, referenceImageUrl) {
+  const images = unique([...html.matchAll(/https:\/\/bandai-a\.akamaihd\.net\/bc\/img\/model\/[^"')\s<>]+/g)].map((match) => match[0]));
+  return {
+    images: referenceImageUrl ? images.filter((url) => sameBandaiImageSeries(url, referenceImageUrl)) : images,
+  };
+}
+
+async function importBandaiArmoredCore() {
+  const html = await fetchText(BANDAI_AC_SEARCH_URL);
+  const cards = parseBandaiSpiritProductCards(html, BANDAI_AC_SEARCH_URL).filter((card) => /ARMORED CORE/i.test(card.title));
+  const imported = [];
+
+  console.log(`Found ${cards.length} BANDAI SPIRITS Armored Core plastic model listings.`);
+
+  for (const card of cards) {
+    let detail = { images: [] };
+    try {
+      detail = parseBandaiSpiritProductDetail(await fetchText(card.source_url), card.image_url);
+    } catch (error) {
+      console.warn(`BANDAI SPIRITS detail fetch failed for ${card.source_url}: ${error.message}`);
+    }
+
+    imported.push(
+      buildKit({
+        kitId: `ac30mm-${card.source_url.match(/prd_id=(\d+)/)?.[1] ?? slugify(card.title, "item")}`,
+        franchise: "armored_core",
+        gradeCode: "AC30MM",
+        subline: /オプションパーツ|WEAPON SET/i.test(card.title) ? "30MM Armored Core Option Parts" : "30MM Armored Core VI",
+        title: card.title,
+        boxArtUrl: card.image_url,
+        galleryUrls: [card.image_url, ...detail.images],
+        releaseDate: card.release_date,
+        priceJpy: card.price_jpy,
+        isLimited: /限定|プレミアム/.test(card.title),
+        sourceId: BANDAI_SPIRITS_SOURCE_ID,
+        sourceUrls: [card.source_url, BANDAI_AC_SEARCH_URL],
+        tags: ["armored core", "30mm", "bandai spirits", "plastic model"],
+        notes: "Imported from the official BANDAI SPIRITS product search for Armored Core 30MM plastic models.",
+        workOverride: "Armored Core VI: Fires of Rubicon",
+        universeOverride: "Armored Core",
+      }),
+    );
+  }
+
+  return imported;
+}
+
+function parseKotobukiyaACListings(html, pageUrl) {
+  const listBlock = extract(/<div class="productList[\s\S]*?<ul class="productList_list">([\s\S]*?)<\/ul>\s*<\/div><!-- \/.productList -->/, html) ?? "";
+  const items = listBlock.split('<li class="productList_item">').slice(1);
+  const records = [];
+
+  for (const item of items) {
+    const title = stripTags(extract(/<p class="productList_title">([\s\S]*?)<\/p>/, item));
+    const category = stripTags(extract(/<p class="productList_category">([\s\S]*?)<\/p>/, item));
+    const href = extract(/<a href="([^"]+)" class="overMask"/, item);
+    const image = extract(/<img src="([^"]+)"/, item);
+    const releaseText = stripTags(extract(/<time class="date">([\s\S]*?)<\/time>/, item));
+
+    if (!title || !href || !/プラモデル/.test(category)) {
+      continue;
+    }
+
+    records.push({
+      title,
+      category,
+      detail_url: absoluteUrl(href, pageUrl),
+      image_url: image ? absoluteUrl(image, pageUrl) : null,
+      release_date: parseReleaseDate(releaseText),
+      is_limited: /限定品|badge-limited/.test(item) || /限定/.test(title),
+    });
+  }
+
+  return records;
+}
+
+function parseSpecValue(html, label) {
+  const pattern = new RegExp(`<th>${label}</th>\\s*<td>([\\s\\S]*?)</td>`);
+  return stripTags(extract(pattern, html));
+}
+
+function parseKotobukiyaACDetail(html, detailUrl) {
+  const gallery = unique([
+    ...[...html.matchAll(/data-src="([^"]+)"/g)].map((match) => absoluteUrl(match[1], detailUrl)),
+    ...[...html.matchAll(/<div class="detailSlider_thumbs">[\s\S]*?<img src="([^"]+)"/g)].map((match) => absoluteUrl(match[1], detailUrl)),
+  ]);
+  const releaseDate = parseReleaseDate(extract(/detailHeader_set-release[\s\S]*?<dd>([\s\S]*?)<\/dd>/, html));
+  const priceJpy = parsePrice(extract(/detailHeader_price-taxIn">([\s\S]*?)<\/span>/, html));
+  const scaleText = parseSpecValue(html, "スケール");
+  const scale = /^NON/i.test(scaleText) ? "non-scale" : scaleText || "various";
+  const series = parseSpecValue(html, "シリーズ") || "Armored Core plastic model";
+
+  return { gallery, release_date: releaseDate, price_jpy: priceJpy, scale, series };
+}
+
+async function importKotobukiyaArmoredCore() {
+  const html = await fetchText(KOTOBUKIYA_AC_URL);
+  const listings = parseKotobukiyaACListings(html, KOTOBUKIYA_AC_URL);
+  const imported = [];
+
+  console.log(`Found ${listings.length} Kotobukiya Armored Core plastic model listings.`);
+
+  let detailCount = 0;
+  for (const listing of listings) {
+    let detail = { gallery: [], release_date: null, price_jpy: null, scale: "various", series: "Armored Core plastic model" };
+    try {
+      detail = parseKotobukiyaACDetail(await fetchText(listing.detail_url), listing.detail_url);
+      detailCount += 1;
+    } catch (error) {
+      console.warn(`Kotobukiya detail fetch failed for ${listing.detail_url}: ${error.message}`);
+    }
+
+    imported.push(
+      buildKit({
+        kitId: `acvi-${listing.detail_url.match(/\/product\/detail\/p([^/]+)\//)?.[1] ?? slugify(listing.title, "item")}`,
+        franchise: "armored_core",
+        gradeCode: "ACVI",
+        subline: detail.series,
+        title: listing.title,
+        boxArtUrl: listing.image_url,
+        galleryUrls: [listing.image_url, ...detail.gallery],
+        releaseDate: detail.release_date ?? listing.release_date,
+        priceJpy: detail.price_jpy,
+        isLimited: listing.is_limited,
+        sourceId: KOTOBUKIYA_AC_SOURCE_ID,
+        sourceUrls: [listing.detail_url, KOTOBUKIYA_AC_URL],
+        tags: ["armored core", "kotobukiya", "plastic model"],
+        notes: "Imported from the official Kotobukiya Armored Core product list and detail pages.",
+        workOverride: "Armored Core",
+        universeOverride: "Armored Core",
+        scale: detail.scale,
+      }),
+    );
+  }
+
+  console.log(`Fetched ${detailCount}/${listings.length} Kotobukiya Armored Core detail pages.`);
+  return imported;
 }
 
 async function importCandy() {
@@ -531,8 +880,10 @@ async function importForte() {
 }
 
 function mergeKits(existingDoc, imported) {
-  const byId = new Map(existingDoc.kits.map((kit) => [kit.kit_id, kit]));
-  for (const kit of imported) {
+  const normalizedExisting = existingDoc.kits.map((kit) => normalizeKit(kit)).filter((kit) => kit.kit_id !== "acvi-roduct");
+  const normalizedImported = imported.map((kit) => normalizeKit(kit));
+  const byId = new Map(normalizedExisting.map((kit) => [kit.kit_id, kit]));
+  for (const kit of normalizedImported) {
     byId.set(kit.kit_id, kit);
   }
 
@@ -548,8 +899,23 @@ function mergeKits(existingDoc, imported) {
     ...existingDoc,
     updated_at: today(),
     scope:
-      "Individual Gunpla kit and Bandai official Gundam collectible catalog imported from Japanese official BANDAI SPIRITS, Bandai Candy, and Bandai Gashapon sources. Records are needs_review until field-level human checks are complete.",
+      "Individual model kit and official collectible catalog imported from Japanese official BANDAI SPIRITS, Bandai Candy, Bandai Gashapon, Bandai Hobby, and Kotobukiya sources. Covers Gundam, Armored Core, and Pokemon records. Records are needs_review until field-level human checks are complete.",
     kits,
+  };
+}
+
+function normalizeKit(kit) {
+  const { kit_id: kitId, names = {}, franchise, ...rest } = kit;
+  return {
+    kit_id: kitId,
+    franchise: franchise ?? "gundam",
+    ...rest,
+    names: {
+      ja: names.ja ?? null,
+      en: names.en ?? null,
+      zh: names.zh ?? null,
+      ko: names.ko ?? null,
+    },
   };
 }
 
@@ -559,6 +925,43 @@ async function main() {
     ...(await importCandy()),
     ...(await importEnsemble()),
     ...(await importForte()),
+    ...(await importPokemonModelKits()),
+    ...(await importGashaponSearch({
+      label: "Pokemon",
+      resultUrl: `${GASHAPON_BASE_URL}/products/result.php?free=${encodeURIComponent("ポケモン")}`,
+      franchise: "pokemon",
+      gradeCode: "POKE_GASHAPON",
+      subline: "Pokemon Gashapon",
+      idPrefix: "poke-gashapon",
+      tags: ["pokemon", "bandai gashapon", "capsule toy", "mascot"],
+      fallbackWork: "Pokemon",
+      fallbackUniverse: "Pokemon",
+      fetchDetails: false,
+    })),
+    ...(await importGashaponSearch({
+      label: "Gundam SEED merchandise",
+      resultUrl: `${GASHAPON_BASE_URL}/products/result.php?free=SEED`,
+      franchise: "gundam",
+      gradeCode: "GUNDAM_MERCH",
+      subline: "Gundam SEED Gashapon Merchandise",
+      idPrefix: "gundam-merch",
+      tags: ["gundam", "seed", "bandai gashapon", "merchandise"],
+      fallbackWork: "Mobile Suit Gundam SEED",
+      fallbackUniverse: "CE",
+    })),
+    ...(await importGashaponSearch({
+      label: "Gundam 00 merchandise",
+      resultUrl: `${GASHAPON_BASE_URL}/products/result.php?free=${encodeURIComponent("ガンダム00")}`,
+      franchise: "gundam",
+      gradeCode: "GUNDAM_MERCH",
+      subline: "Gundam 00 Gashapon Merchandise",
+      idPrefix: "gundam-merch",
+      tags: ["gundam", "00", "bandai gashapon", "merchandise"],
+      fallbackWork: "Mobile Suit Gundam 00",
+      fallbackUniverse: "AD",
+    })),
+    ...(await importBandaiArmoredCore()),
+    ...(await importKotobukiyaArmoredCore()),
   ];
 
   const merged = mergeKits(existingDoc, imported);

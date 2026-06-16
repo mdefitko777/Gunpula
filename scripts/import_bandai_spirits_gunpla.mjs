@@ -283,6 +283,7 @@ function toKit(card) {
 
   return {
     kit_id: kitIdFor(card, grade.grade_code),
+    franchise: "gundam",
     grade_code: grade.grade_code,
     subline: grade.subline,
     number: null,
@@ -291,6 +292,7 @@ function toKit(card) {
       ja: card.title,
       en: null,
       zh: null,
+      ko: null,
     },
     images: {
       box_art_url: card.image_url,

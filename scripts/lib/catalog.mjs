@@ -25,7 +25,7 @@ export function loadCatalog() {
 }
 
 export function kitName(kit) {
-  return kit.names.en || kit.names.zh || kit.names.ja || kit.kit_id;
+  return kit.names.en || kit.names.zh || kit.names.ko || kit.names.ja || kit.kit_id;
 }
 
 export function normalizeText(value) {

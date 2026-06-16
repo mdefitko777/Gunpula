@@ -13,28 +13,32 @@
           <span class="brand-mark">G</span>
           <span>Gunpula Catalog</span>
         </div>
+        <div class="control-strip" aria-label="主分类和语言">
+          <div class="segmented-control" id="franchiseList" aria-label="选择作品分类"></div>
+          <div class="segmented-control language-control" id="languageList" aria-label="选择语言"></div>
+        </div>
         <div class="title-row">
           <div>
-            <h1>模型目录</h1>
+            <h1 data-i18n="appTitle">模型目录</h1>
             <p id="datasetSummary">Loading catalog...</p>
           </div>
           <label class="search-field">
             <span aria-hidden="true">⌕</span>
-            <input id="searchInput" type="search" placeholder="搜索模型名称或作品" />
+            <input id="searchInput" type="search" placeholder="搜索模型名称或作品" data-i18n-placeholder="searchPlaceholder" />
           </label>
         </div>
         <details class="filter-panel" id="filtersPanel">
           <summary>
-            <span>筛选</span>
+            <span data-i18n="filters">筛选</span>
             <span id="filterSummary">全部产品线 · 全部出处</span>
           </summary>
           <div class="filter-body">
             <div class="filter-group">
-              <div class="filter-label">产品线 / 等级</div>
+              <div class="filter-label" data-i18n="productLine">产品线 / 等级</div>
               <div class="chip-bar" id="gradeList" aria-label="按产品线或等级筛选"></div>
             </div>
             <div class="filter-group">
-              <div class="filter-label">作品出处</div>
+              <div class="filter-label" data-i18n="workSource">作品出处</div>
               <div class="chip-bar" id="workList" aria-label="按作品出处筛选"></div>
             </div>
           </div>
@@ -43,7 +47,7 @@
 
       <section class="kit-section">
         <div class="section-head">
-          <h2>模型列表</h2>
+          <h2 data-i18n="catalogList">模型列表</h2>
           <span id="resultCount">0 results</span>
         </div>
         <div class="kit-grid" id="kitGrid"></div>
@@ -62,7 +66,7 @@
 
     <dialog class="detail-dialog" id="detailDialog" aria-labelledby="detailTitle">
       <div class="detail-shell">
-        <button class="dialog-close" id="detailClose" type="button" aria-label="关闭详情">×</button>
+        <button class="dialog-close" id="detailClose" type="button" aria-label="关闭详情" data-i18n-aria="closeDetail">×</button>
         <div class="detail-media">
           <div class="detail-main-image" id="detailMainImage"></div>
           <div class="detail-thumbs" id="detailThumbs" aria-label="展示图"></div>
@@ -72,34 +76,46 @@
           <h2 id="detailTitle"></h2>
           <p id="detailSubtitle"></p>
           <dl class="detail-meta" id="detailMeta"></dl>
-          <a class="official-link" id="detailOfficialLink" target="_blank" rel="noreferrer">官方商品页</a>
+          <a class="official-link" id="detailOfficialLink" target="_blank" rel="noreferrer" data-i18n="officialPage">官方商品页</a>
           <section class="correction-panel" aria-label="手动更正">
-            <button class="secondary-button" id="editToggle" type="button">手动更正</button>
+            <button class="secondary-button" id="editToggle" type="button" data-i18n="manualCorrection">手动更正</button>
             <div class="correction-form" id="correctionForm" hidden>
               <label>
-                <span>显示名称</span>
+                <span data-i18n="nameZh">中文名</span>
+                <input id="editNameZh" type="text" />
+              </label>
+              <label>
+                <span data-i18n="nameKo">한국어 이름</span>
+                <input id="editNameKo" type="text" />
+              </label>
+              <label>
+                <span data-i18n="nameEn">English name</span>
+                <input id="editNameEn" type="text" />
+              </label>
+              <label>
+                <span data-i18n="nameJa">日本語名</span>
                 <input id="editNameJa" type="text" />
               </label>
               <label>
-                <span>产品线 / 等级</span>
+                <span data-i18n="productLine">产品线 / 等级</span>
                 <select id="editGradeCode"></select>
               </label>
               <label>
-                <span>子系列</span>
+                <span data-i18n="subline">子系列</span>
                 <input id="editSubline" type="text" />
               </label>
               <label>
-                <span>作品出处</span>
+                <span data-i18n="workSource">作品出处</span>
                 <input id="editWorkTitle" type="text" placeholder="例如 Mobile Suit Gundam SEED" />
               </label>
               <label>
-                <span>宇宙 / 纪年</span>
+                <span data-i18n="universe">宇宙 / 纪年</span>
                 <input id="editUniverse" type="text" placeholder="例如 CE / UC / AD" />
               </label>
               <div class="correction-actions">
-                <button id="saveCorrection" type="button">保存更正</button>
-                <button id="clearCorrection" type="button">清除本条</button>
-                <button id="exportCorrections" type="button">导出更正</button>
+                <button id="saveCorrection" type="button" data-i18n="saveCorrection">保存更正</button>
+                <button id="clearCorrection" type="button" data-i18n="clearCorrection">清除本条</button>
+                <button id="exportCorrections" type="button" data-i18n="exportCorrections">导出更正</button>
               </div>
             </div>
           </section>

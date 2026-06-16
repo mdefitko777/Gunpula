@@ -100,6 +100,39 @@
       "best_for": ["official gashapon product pages", "capsule price", "release period", "official product images"],
       "weak_for": ["Gunpla kit grade taxonomy", "older pages removed from official search"],
       "notes": "Official Japanese Bandai Gashapon pages, including Mobile Suit Ensemble and Gashapon Senshi f archives."
+    },
+    {
+      "source_id": "bandai_gashapon_products_jp",
+      "name": "Bandai Gashapon Product Search Japan",
+      "type": "official_gashapon_jp",
+      "country": "JP",
+      "base_url": "https://gashapon.jp/products/",
+      "priority": 9,
+      "best_for": ["official capsule toy search", "product title", "capsule price", "release period", "official product images"],
+      "weak_for": ["ordinary plastic model kits", "franchise searches with no current Bandai capsule product"],
+      "notes": "Official Japanese Bandai Gashapon product search used for Pokemon capsule toys and Gundam SEED/00 merchandise."
+    },
+    {
+      "source_id": "bandai_hobby_pokemon_satellite",
+      "name": "Bandai Hobby Site Satellite Pokemon Model Kit",
+      "type": "official_hobby_jp",
+      "country": "JP",
+      "base_url": "https://satellite.bandai-hobby.net/characters/pokemon.php",
+      "priority": 10,
+      "best_for": ["Pokemon model kit titles", "official model kit images", "Japan price", "release month"],
+      "weak_for": ["capsule toys", "non-Bandai Pokemon goods"],
+      "notes": "Official BANDAI SPIRITS Hobby Site Satellite page for Pokemon Model Kit / PokePla products."
+    },
+    {
+      "source_id": "kotobukiya_armored_core_jp",
+      "name": "Kotobukiya Armored Core Japan",
+      "type": "official_manufacturer_jp",
+      "country": "JP",
+      "base_url": "https://www.kotobukiya.co.jp/title/armored-core/",
+      "priority": 11,
+      "best_for": ["Armored Core plastic model titles", "V.I. series", "Kotobukiya official images", "release month", "tax-in and tax-out prices"],
+      "weak_for": ["Bandai 30MM products", "capsule toys"],
+      "notes": "Official Kotobukiya product list and detail pages for Armored Core plastic models and related official items."
     }
   ]
 }

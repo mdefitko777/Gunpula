@@ -51,6 +51,11 @@ for (const kit of kits) {
   }
   kitIds.add(kit.kit_id);
 
+  requireType(context, "franchise", kit.franchise, "string");
+  if (!["gundam", "armored_core", "pokemon"].includes(kit.franchise)) {
+    addError(`${context}: franchise is invalid`);
+  }
+
   requireType(context, "grade_code", kit.grade_code, "string");
   const grade = gradeByCode.get(kit.grade_code);
   if (!grade) {
@@ -64,7 +69,7 @@ for (const kit of kits) {
 
   if (!kit.names || typeof kit.names !== "object") {
     addError(`${context}: names must be an object`);
-  } else if (!kit.names.en && !kit.names.zh && !kit.names.ja) {
+  } else if (!kit.names.en && !kit.names.zh && !kit.names.ko && !kit.names.ja) {
     addError(`${context}: at least one localized name is required`);
   }
 

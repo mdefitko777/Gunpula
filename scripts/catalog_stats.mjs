@@ -12,6 +12,7 @@ function printCounts(title, rows) {
 }
 
 printCounts("By grade", countBy(kits, (kit) => kit.grade_code));
+printCounts("By franchise", countBy(kits, (kit) => kit.franchise));
 printCounts("By scale", countBy(kits, (kit) => kit.scale));
 printCounts("By universe", countBy(kits, (kit) => kit.universe));
 printCounts("By data status", countBy(kits, (kit) => kit.data_status));
