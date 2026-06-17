@@ -452,6 +452,7 @@ const state = {
     suppress: false,
   },
   activeView: INITIAL_VIEW_STATE.view || localStorage.getItem(ACTIVE_VIEW_KEY) || "catalog",
+  activeModal: INITIAL_VIEW_STATE.modal || null,
   installPrompt: null,
   updatedAt: null,
   query: INITIAL_VIEW_STATE.query || "",
@@ -576,6 +577,7 @@ function loadSavedViewState() {
   fromHash.query = params.get("q") || params.get("query") || "";
   fromHash.kit = params.has("kit") ? params.get("kit") : null;
   fromHash.view = params.get("view") || "catalog";
+  fromHash.modal = params.get("modal") || null;
 
   return fromHash;
 }
@@ -589,11 +591,11 @@ function currentViewState() {
     query: state.query,
     kit: state.selectedKit?.kit_id || null,
     view: state.activeView,
+    modal: state.activeModal,
   };
 }
 
-function persistViewState() {
-  const viewState = currentViewState();
+function viewStateUrl(viewState) {
   localStorage.setItem(VIEW_STATE_KEY, JSON.stringify(viewState));
 
   const params = new URLSearchParams();
@@ -604,10 +606,35 @@ function persistViewState() {
   if (viewState.query) params.set("q", viewState.query);
   if (viewState.kit) params.set("kit", viewState.kit);
   if (viewState.view && viewState.view !== "catalog") params.set("view", viewState.view);
+  if (viewState.modal) params.set("modal", viewState.modal);
 
   const nextHash = params.toString();
-  const nextUrl = `${window.location.pathname}${window.location.search}${nextHash ? `#${nextHash}` : ""}`;
-  window.history.replaceState(null, "", nextUrl);
+  return `${window.location.pathname}${window.location.search}${nextHash ? `#${nextHash}` : ""}`;
+}
+
+function persistViewState(options = {}) {
+  const viewState = options.viewState || currentViewState();
+  const nextUrl = viewStateUrl(viewState);
+  if (nextUrl === `${window.location.pathname}${window.location.search}${window.location.hash}`) {
+    return;
+  }
+  if (options.mode === "push") {
+    window.history.pushState(null, "", nextUrl);
+  } else {
+    window.history.replaceState(null, "", nextUrl);
+  }
+}
+
+function seedInitialOverlayHistory() {
+  const viewState = currentViewState();
+  if (!viewState.kit && !viewState.modal) {
+    persistViewState({ mode: "replace", viewState });
+    return;
+  }
+
+  const baseState = { ...viewState, kit: null, modal: null };
+  window.history.replaceState(null, "", viewStateUrl(baseState));
+  window.history.pushState(null, "", viewStateUrl(viewState));
 }
 
 function applyViewState(viewState) {
@@ -618,6 +645,7 @@ function applyViewState(viewState) {
   state.grade = viewState.grade || "all";
   state.query = viewState.query || "";
   state.activeView = viewState.view || "catalog";
+  state.activeModal = viewState.modal || null;
   state.selectedKit = viewState.kit ? displayKitById(viewState.kit) : null;
   normalizeState();
   render();
@@ -628,6 +656,14 @@ function applyViewState(viewState) {
     }
   } else if (elements.detailDialog.open) {
     elements.detailDialog.close();
+  }
+  if (state.activeModal === "settings") {
+    renderSettings();
+    if (!elements.settingsDialog.open) {
+      elements.settingsDialog.showModal();
+    }
+  } else if (elements.settingsDialog.open) {
+    elements.settingsDialog.close();
   }
   persistViewState();
 }
@@ -660,7 +696,11 @@ async function init() {
     renderDetail(state.selectedKit);
     elements.detailDialog.showModal();
   }
-  persistViewState();
+  if (state.activeModal === "settings") {
+    renderSettings();
+    elements.settingsDialog.showModal();
+  }
+  seedInitialOverlayHistory();
 }
 
 function normalizeState() {
@@ -675,6 +715,9 @@ function normalizeState() {
   }
   if (!["catalog", "owned", "wanted"].includes(state.activeView)) {
     state.activeView = "catalog";
+  }
+  if (state.activeModal && state.activeModal !== "settings") {
+    state.activeModal = null;
   }
 }
 
@@ -873,14 +916,30 @@ function displayKitById(kitId) {
   return state.kits.find((kit) => kit.kit_id === kitId);
 }
 
-function bindEvents() {
-  elements.settingsOpen.addEventListener("click", () => {
-    renderSettings();
+function openSettings() {
+  state.activeModal = "settings";
+  renderSettings();
+  if (!elements.settingsDialog.open) {
     elements.settingsDialog.showModal();
-  });
-  elements.settingsClose.addEventListener("click", () => {
+  }
+  persistViewState({ mode: "push" });
+}
+
+function closeSettings(options = {}) {
+  if (options.navigate !== false && state.activeModal === "settings") {
+    window.history.back();
+    return;
+  }
+  if (elements.settingsDialog.open) {
     elements.settingsDialog.close();
-  });
+  }
+  state.activeModal = null;
+  persistViewState({ mode: "replace" });
+}
+
+function bindEvents() {
+  elements.settingsOpen.addEventListener("click", openSettings);
+  elements.settingsClose.addEventListener("click", closeSettings);
   elements.consoleModeToggle.addEventListener("change", (event) => {
     state.consoleMode = event.target.checked;
     saveConsoleMode();
@@ -893,13 +952,14 @@ function bindEvents() {
     }
     const nextView = button.dataset.view;
     if (nextView === "settings") {
-      renderSettings();
-      elements.settingsDialog.showModal();
+      openSettings();
       return;
     }
     state.activeView = nextView;
+    state.selectedKit = null;
+    state.activeModal = null;
     localStorage.setItem(ACTIVE_VIEW_KEY, state.activeView);
-    persistViewState();
+    persistViewState({ mode: "push" });
     render();
   });
   elements.saveSyncConfig.addEventListener("click", saveAndConnectSync);
@@ -917,14 +977,14 @@ function bindEvents() {
     renderGradeSelect();
     renderSeriesAdmin();
     renderFilterSummary();
-    persistViewState();
+    persistViewState({ mode: "push" });
     renderKits();
   });
   elements.gradeSelect.addEventListener("change", (event) => {
     state.grade = event.target.value;
     renderGradeSelect();
     renderFilterSummary();
-    persistViewState();
+    persistViewState({ mode: "push" });
     renderKits();
   });
 
@@ -959,14 +1019,25 @@ function bindEvents() {
       closeDetail();
     }
   });
+  elements.detailDialog.addEventListener("cancel", (event) => {
+    event.preventDefault();
+    closeDetail();
+  });
   elements.settingsDialog.addEventListener("click", (event) => {
     if (event.target === elements.settingsDialog) {
-      elements.settingsDialog.close();
+      closeSettings();
     }
+  });
+  elements.settingsDialog.addEventListener("cancel", (event) => {
+    event.preventDefault();
+    closeSettings();
   });
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && elements.detailDialog.open) {
       closeDetail();
+    }
+    if (event.key === "Escape" && elements.settingsDialog.open) {
+      closeSettings();
     }
     if (elements.detailDialog.open && event.key === "ArrowLeft") {
       selectAdjacentImage(-1);
@@ -976,6 +1047,9 @@ function bindEvents() {
     }
   });
   window.addEventListener("hashchange", () => {
+    applyViewState(loadSavedViewState());
+  });
+  window.addEventListener("popstate", () => {
     applyViewState(loadSavedViewState());
   });
   document.addEventListener("visibilitychange", () => {
@@ -1712,7 +1786,7 @@ function renderLanguageControls() {
       if (state.selectedKit && elements.detailDialog.open) {
         renderDetail(state.selectedKit);
       }
-      persistViewState();
+      persistViewState({ mode: "replace" });
     });
     elements.languageList.append(button);
   }
@@ -1793,7 +1867,7 @@ function renderFranchiseFilters() {
       state.selectedKit = null;
       localStorage.setItem(FRANCHISE_KEY, state.franchise);
       render();
-      persistViewState();
+      persistViewState({ mode: "push" });
     });
     elements.franchiseList.append(button);
   }
@@ -1851,7 +1925,7 @@ function makeSeriesTab(key, label) {
     renderGradeSelect();
     renderSeriesAdmin();
     renderFilterSummary();
-    persistViewState();
+    persistViewState({ mode: "push" });
     renderKits();
   });
   return button;
@@ -2070,11 +2144,12 @@ function renderKits() {
 
 function openDetail(kit) {
   state.selectedKit = kit;
+  state.activeModal = null;
   state.selectedImageIndex = 0;
 
   renderDetail(kit);
   elements.detailDialog.showModal();
-  persistViewState();
+  persistViewState({ mode: "push" });
 }
 
 function renderDetail(kit) {
@@ -2096,10 +2171,16 @@ function renderDetail(kit) {
   }
 }
 
-function closeDetail() {
-  elements.detailDialog.close();
+function closeDetail(options = {}) {
+  if (options.navigate !== false && state.selectedKit) {
+    window.history.back();
+    return;
+  }
+  if (elements.detailDialog.open) {
+    elements.detailDialog.close();
+  }
   state.selectedKit = null;
-  persistViewState();
+  persistViewState({ mode: "replace" });
 }
 
 function renderDetailMeta(kit) {
