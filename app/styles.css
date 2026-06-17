@@ -375,6 +375,7 @@ h1 {
 }
 
 .collection-item {
+  position: relative;
   width: 112px;
   flex: 0 0 112px;
   padding: 0;
@@ -419,6 +420,21 @@ h1 {
   overflow-wrap: anywhere;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+.collection-quantity {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  min-width: 28px;
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: rgba(23, 25, 29, 0.88);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
 }
 
 .bottom-nav {
@@ -1059,7 +1075,72 @@ body[data-view="wanted"] .top-bar {
   color: #ffffff;
 }
 
+.wanted-quantity-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.wanted-quantity-control[hidden] {
+  display: none;
+}
+
+.wanted-quantity-control > span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.wanted-stepper {
+  display: grid;
+  grid-template-columns: 36px 56px 36px;
+  gap: 6px;
+  align-items: center;
+}
+
+.wanted-stepper button,
+.wanted-stepper input {
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #ffffff;
+  color: var(--ink);
+  font-weight: 900;
+  text-align: center;
+}
+
+.wanted-stepper button {
+  font-size: 19px;
+  line-height: 1;
+}
+
+.wanted-stepper button:hover,
+.wanted-stepper button:focus-visible,
+.wanted-stepper input:focus {
+  border-color: var(--accent-blue);
+  outline: 0;
+}
+
+.wanted-stepper input {
+  appearance: textfield;
+  font-size: 14px;
+}
+
+.wanted-stepper input::-webkit-outer-spin-button,
+.wanted-stepper input::-webkit-inner-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
 .status-actions button:disabled,
+.wanted-stepper button:disabled,
+.wanted-stepper input:disabled,
 .sync-actions button:disabled,
 .secondary-button:disabled {
   cursor: not-allowed;

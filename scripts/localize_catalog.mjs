@@ -242,6 +242,13 @@ const SERIES = [
     pattern: /Armored Core|ARMORED CORE|アーマード・コア|アーマードコア/i,
   },
   {
+    key: "beyblade_x",
+    sort: 420,
+    labels: { zh: "Beyblade X", en: "Beyblade X", ja: "ベイブレードX", ko: "베이블레이드 X" },
+    universe: "BEYBLADE X",
+    pattern: /BEYBLADE X|Beyblade X|ベイブレードX|ベイブレード|BX-|UX-|CX-/i,
+  },
+  {
     key: "option",
     sort: 900,
     labels: { zh: "配件", en: "Option", ja: "オプション", ko: "옵션" },
@@ -745,6 +752,9 @@ function seriesForKit(kit) {
   }
   if (kit.franchise === "armored_core") {
     return SERIES.find((series) => series.key === "armored_core");
+  }
+  if (kit.franchise === "beyblade") {
+    return SERIES.find((series) => series.key === "beyblade_x");
   }
 
   const names = kit.names ?? {};

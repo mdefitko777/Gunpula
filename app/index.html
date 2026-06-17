@@ -106,6 +106,14 @@
             <button id="toggleOwned" type="button" data-i18n="markOwned">已购买</button>
             <button id="toggleWanted" type="button" data-i18n="markWanted">想要</button>
           </div>
+          <div class="wanted-quantity-control" id="wantedQuantityControl" hidden>
+            <span data-i18n="wantedQuantity">想要数量</span>
+            <div class="wanted-stepper">
+              <button id="wantedQuantityMinus" type="button" aria-label="减少想要数量" data-i18n-aria="decreaseWantedQuantity">−</button>
+              <input id="wantedQuantityInput" type="number" min="1" max="99" step="1" inputmode="numeric" value="1" aria-label="想要数量" data-i18n-aria="wantedQuantity" />
+              <button id="wantedQuantityPlus" type="button" aria-label="增加想要数量" data-i18n-aria="increaseWantedQuantity">+</button>
+            </div>
+          </div>
           <dl class="detail-meta" id="detailMeta"></dl>
           <a class="official-link" id="detailOfficialLink" target="_blank" rel="noreferrer" data-i18n="officialPage">官方商品页</a>
           <section class="correction-panel" aria-label="手动更正">
@@ -255,6 +263,6 @@
       </div>
     </dialog>
 
-    <script type="module" src="./main.js?v=20260617-history"></script>
+    <script type="module" src="./main.js?v=20260618-collections"></script>
   </body>
 </html>

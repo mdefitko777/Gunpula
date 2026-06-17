@@ -52,7 +52,7 @@ for (const kit of kits) {
   kitIds.add(kit.kit_id);
 
   requireType(context, "franchise", kit.franchise, "string");
-  if (!["gundam", "armored_core", "pokemon"].includes(kit.franchise)) {
+  if (!["gundam", "armored_core", "pokemon", "beyblade"].includes(kit.franchise)) {
     addError(`${context}: franchise is invalid`);
   }
 

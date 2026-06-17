@@ -124,6 +124,17 @@
       "notes": "Official BANDAI SPIRITS Hobby Site Satellite page for Pokemon Model Kit / PokePla products."
     },
     {
+      "source_id": "bandai_hobby_pokemon_global",
+      "name": "Bandai Hobby Global Pokemon PLAMO COLLECTION",
+      "type": "official_hobby_global",
+      "country": "JP",
+      "base_url": "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/",
+      "priority": 10,
+      "best_for": ["Pokemon PLAMO COLLECTION product pages", "official model kit images", "Japan price", "launch month"],
+      "weak_for": ["capsule toys", "non-Bandai Pokemon goods", "older products not listed on the global PokePla page"],
+      "notes": "Official BANDAI SPIRITS global Bandai Hobby Pokemon PLAMO COLLECTION pages used to supplement PokePla model kit coverage."
+    },
+    {
       "source_id": "tamashii_web_jp",
       "name": "Tamashii Web Japan",
       "type": "official_jp",
@@ -144,6 +155,17 @@
       "best_for": ["Armored Core plastic model titles", "V.I. series", "Kotobukiya official images", "release month", "tax-in and tax-out prices"],
       "weak_for": ["Bandai 30MM products", "capsule toys"],
       "notes": "Official Kotobukiya product list and detail pages for Armored Core plastic models and related official items."
+    },
+    {
+      "source_id": "takara_tomy_beyblade_x_jp",
+      "name": "Takara Tomy BEYBLADE X Japan",
+      "type": "official_toy_jp",
+      "country": "JP",
+      "base_url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/",
+      "priority": 13,
+      "best_for": ["BEYBLADE X product lineup", "official product images", "Japan price", "release date"],
+      "weak_for": ["Hasbro international product variants", "fan naming aliases"],
+      "notes": "Official Japanese Takara Tomy BEYBLADE X lineup and detail pages."
     }
   ]
 }

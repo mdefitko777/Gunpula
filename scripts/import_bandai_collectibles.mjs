@@ -7,14 +7,22 @@ const CANDY_SOURCE_ID = "bandai_candy_gundam_jp";
 const GASHAPON_SOURCE_ID = "bandai_gashapon_gundam_jp";
 const GASHAPON_PRODUCTS_SOURCE_ID = "bandai_gashapon_products_jp";
 const POKEMON_HOBBY_SOURCE_ID = "bandai_hobby_pokemon_satellite";
+const POKEMON_GLOBAL_SOURCE_ID = "bandai_hobby_pokemon_global";
 const KOTOBUKIYA_AC_SOURCE_ID = "kotobukiya_armored_core_jp";
 const BANDAI_SPIRITS_SOURCE_ID = "bandai_spirits_products_jp";
 const TAMASHII_SOURCE_ID = "tamashii_web_jp";
+const TAKARA_TOMY_BEYBLADE_X_SOURCE_ID = "takara_tomy_beyblade_x_jp";
 
 const POKEMON_MODEL_KIT_URL = "https://satellite.bandai-hobby.net/characters/pokemon.php";
+const POKEMON_GLOBAL_PRODUCTS_URLS = [
+  "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick",
+  "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=select",
+  "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=big",
+];
 const BANDAI_AC_SEARCH_URL = "https://www.bandaispirits.co.jp/products/search/result.php?freeword=ARMORED%20CORE&category=2";
 const KOTOBUKIYA_AC_URL = "https://www.kotobukiya.co.jp/title/armored-core/";
 const TAMASHII_BASE_URL = "https://tamashiiweb.com";
+const BEYBLADE_X_LINEUP_URL = "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/";
 
 const CANDY_BRANDS = [
   { code: "CONVERGE", slug: "converge", label: "FW GUNDAM CONVERGE" },
@@ -138,7 +146,8 @@ function parsePrice(value) {
   const text = stripTags(value);
   const yen = /[￥¥]?\s*([\d,]+)\s*円/.exec(text) || /[￥¥]\s*([\d,]+)/.exec(text);
   const jpy = /JPY\s*([\d,]+)/i.exec(text);
-  const price = yen || jpy;
+  const englishYen = /([\d,]+)\s*Yen/i.exec(text);
+  const price = yen || jpy || englishYen;
   return price ? Number(price[1].replace(/,/g, "")) : null;
 }
 
@@ -211,6 +220,30 @@ async function fetchText(url) {
           "user-agent": "Gunpula catalog importer (+https://github.com/mdefitko777/Gunpula)",
           accept: "text/html,application/xhtml+xml",
           "accept-language": "ja,en-US;q=0.8,en;q=0.7",
+        },
+      });
+      if (response.ok) {
+        return response.text();
+      }
+      lastError = new Error(`Failed to fetch ${url}: ${response.status}`);
+    } catch (error) {
+      lastError = error;
+    }
+    await sleep(attempt * (String(lastError?.message ?? "").includes("403") ? 2200 : 600));
+  }
+  throw lastError;
+}
+
+async function fetchBrowserText(url, referer = null) {
+  let lastError;
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    try {
+      const response = await fetch(url, {
+        headers: {
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36",
+          accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+          "accept-language": "ja,en-US;q=0.9,en;q=0.8",
+          ...(referer ? { referer } : {}),
         },
       });
       if (response.ok) {
@@ -498,6 +531,122 @@ async function importPokemonModelKits() {
       universeOverride: "Pokemon",
     }),
   );
+}
+
+function pokemonModelIdentity(value) {
+  return String(value ?? "")
+    .normalize("NFKD")
+    .replace(/[^\x00-\x7F]/g, " ")
+    .toLowerCase()
+    .replace(/pokemon|pok mon|plamo|collection|model|kit|series|select|fossil|quick|big/g, " ")
+    .replace(/\b\d+\b/g, " ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function pokemonSublineFromTitle(title, category) {
+  const text = `${title} ${category}`;
+  if (/fossil/i.test(text)) return "Pokemon Fossil Pokemon Series";
+  if (/big/i.test(text)) return "Pokemon Model Kit BIG";
+  if (/quick/i.test(text)) return "Pokemon Model Kit Quick!!";
+  if (/select/i.test(text)) return "Pokemon PLAMO COLLECTION SELECT SERIES";
+  return "Pokemon Model Kit";
+}
+
+function parsePokemonGlobalProductList(html, pageUrl) {
+  const records = [];
+  const itemPattern =
+    /<li class="p-products__listItem[^"]*">[\s\S]*?<a href="([^"]*\/item\/01_[^"]+)"[\s\S]*?<img src="([^"]+)" alt="([^"]*)"[\s\S]*?<p class="p-item__category[^"]*">([\s\S]*?)<\/p>[\s\S]*?<h3 class="p-item__text">([\s\S]*?)<\/h3>/g;
+
+  for (const match of html.matchAll(itemPattern)) {
+    const sourceUrl = absoluteUrl(match[1], pageUrl);
+    const productId = sourceUrl.match(/\/item\/([^/]+)\//)?.[1]?.replace("_", "-") ?? slugify(sourceUrl, "pokemon");
+    const category = stripTags(match[4]);
+    const name = stripTags(match[5]);
+    const title = stripTags(match[3]) || [category, name].filter(Boolean).join(" ");
+    if (!title || !sourceUrl) {
+      continue;
+    }
+
+    records.push({
+      product_id: productId,
+      source_url: sourceUrl,
+      list_image_url: absoluteUrl(match[2], pageUrl),
+      title,
+      category,
+      name,
+      subline: pokemonSublineFromTitle(title, category),
+    });
+  }
+
+  return records;
+}
+
+function parsePokemonGlobalDetail(html, detailUrl) {
+  const title = stripTags(extract(/<h1 class="p-heading__h1-product">([\s\S]*?)<\/h1>/, html));
+  const productBlock = extract(/<div class="pg-pg-products__Wrap">([\s\S]*?)<section class="p-section">/, html) ?? html;
+  const sliderBlock = extract(/<div class="js-swiper__main pg-products__sliderMain">([\s\S]*?)<\/div>\s*<\/div>\s*<div class="pg-products__contentLeft">/, productBlock) ?? productBlock;
+  const images = unique([...sliderBlock.matchAll(/<a href="([^"]+)"\s+data-fancybox="images"/g)].map((match) => absoluteUrl(match[1], detailUrl)));
+  const priceText = extract(/<dt class="pg-products__label"><span class="pg-products__labelInner">Price<\/span><\/dt>\s*<dd class="pg-products__labelTxt">([\s\S]*?)<\/dd>/, productBlock);
+  const releaseText = extract(/<dt class="pg-products__label"><span class="pg-products__labelInner">Launch date<\/span><\/dt>\s*<dd class="pg-products__labelTxt">([\s\S]*?)<\/dd>/, productBlock);
+
+  return {
+    title: title || null,
+    images,
+    price_jpy: parsePrice(priceText),
+    release_date: parseEnglishMonthRelease(releaseText),
+  };
+}
+
+async function importPokemonGlobalModelKits(legacyModelKits = []) {
+  const legacyIdentities = new Set(legacyModelKits.map((kit) => pokemonModelIdentity(kit.names?.en || kit.names?.ja || kit.kit_id)).filter(Boolean));
+  const byUrl = new Map();
+
+  for (const pageUrl of POKEMON_GLOBAL_PRODUCTS_URLS) {
+    const html = await fetchBrowserText(pageUrl, "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/");
+    for (const listing of parsePokemonGlobalProductList(html, pageUrl)) {
+      if (!legacyIdentities.has(pokemonModelIdentity(listing.title))) {
+        byUrl.set(listing.source_url, listing);
+      }
+    }
+  }
+
+  const listings = [...byUrl.values()];
+  console.log(`Found ${listings.length} additional Bandai Hobby Global Pokemon Model Kit listings.`);
+
+  const details = await mapLimit(listings, 4, async (listing) => {
+    try {
+      return parsePokemonGlobalDetail(await fetchBrowserText(listing.source_url, "https://global.bandai-hobby.net/en-others/series/pokemon/"), listing.source_url);
+    } catch (error) {
+      console.warn(`Bandai Hobby Global Pokemon detail fetch failed for ${listing.source_url}: ${error.message}`);
+      return { title: null, images: [], release_date: null, price_jpy: null };
+    }
+  });
+
+  return listings.map((listing, index) => {
+    const detail = details[index];
+    const title = detail.title || listing.title;
+    const images = unique([...detail.images, listing.list_image_url]);
+    return buildKit({
+      kitId: `pokepla-${listing.product_id}`,
+      franchise: "pokemon",
+      gradeCode: "POKEPLA",
+      subline: listing.subline,
+      title,
+      names: { ja: null, en: title, zh: null, ko: null },
+      boxArtUrl: images[0] ?? listing.list_image_url,
+      galleryUrls: images,
+      releaseDate: detail.release_date,
+      priceJpy: detail.price_jpy,
+      isLimited: false,
+      sourceId: POKEMON_GLOBAL_SOURCE_ID,
+      sourceUrls: [listing.source_url, ...POKEMON_GLOBAL_PRODUCTS_URLS],
+      tags: ["pokemon", "bandai hobby", "plastic model", "pokepla"],
+      notes: "Imported from the official Bandai Hobby Global Pokemon PLAMO COLLECTION product pages.",
+      workOverride: "Pokemon",
+      universeOverride: "Pokemon",
+    });
+  });
 }
 
 function parseGashaponSearchListings(html, resultUrl) {
@@ -922,6 +1071,118 @@ async function importKotobukiyaArmoredCore() {
   return imported;
 }
 
+function parseBeybladeXListings(html, pageUrl) {
+  const records = [];
+  const itemPattern = /<li class="mix[\s\S]*?<\/li>/g;
+  let index = 0;
+
+  for (const match of html.matchAll(itemPattern)) {
+    const block = match[0];
+    const titleMatch = /<b>\s*([^<]+)<span>([\s\S]*?)<\/span><\/b>/.exec(block);
+    if (!titleMatch || !/^(?:BX|UX|CX)-/i.test(titleMatch[1])) {
+      continue;
+    }
+
+    const code = stripTags(titleMatch[1]);
+    const name = stripTags(titleMatch[2]);
+    const title = `${code} ${name}`.trim();
+    const href = extract(/<a href="([^"]+\.html)"/, block);
+    const image = extract(/<img\s+src="([^"]+)"/, block);
+    const category = stripTags(extract(/<p class="category"><span>([\s\S]*?)<\/span><\/p>/, block));
+    const priceText = stripTags(extract(/<i>([\s\S]*?)<\/i>/, block));
+    const releaseText = stripTags(extract(/<i class="red">([\s\S]*?)<\/i>/, block));
+    const detailUrl = href ? absoluteUrl(href, pageUrl) : pageUrl;
+    const hrefSlug = href ? href.replace(/\.html(?:[?#].*)?$/i, "") : `${code.toLowerCase()}-${index + 1}`;
+
+    records.push({
+      code,
+      name,
+      title,
+      detail_url: detailUrl,
+      href_slug: hrefSlug,
+      image_url: image ? absoluteUrl(image, pageUrl) : null,
+      category,
+      release_date: parseReleaseDate(releaseText),
+      price_jpy: parsePrice(priceText),
+      is_limited: /限定|イベント|B4ストア|タカラトミーモール/.test(block) || /限定/.test(title),
+      index: index + 1,
+    });
+    index += 1;
+  }
+
+  return records;
+}
+
+function parseBeybladeXDetail(html, detailUrl, code) {
+  const imageKey = code.replace(/[^A-Z0-9]/gi, "").toUpperCase();
+  const images = unique(
+    [...html.matchAll(/<img[^>]+src="([^"]+)"[^>]*>/g)]
+      .map((match) => match[1])
+      .filter((src) => {
+        const fileName = new URL(src, detailUrl).pathname.split("/").at(-1)?.toUpperCase() ?? "";
+        return fileName.startsWith(imageKey) && !/_LIST\./i.test(fileName);
+      })
+      .map((src) => absoluteUrl(src, detailUrl)),
+  );
+
+  return { images };
+}
+
+function beybladeCategoryLabel(category) {
+  if (/スターター/.test(category)) return "BEYBLADE X Starter";
+  if (/ランダムブースター/.test(category)) return "BEYBLADE X Random Booster";
+  if (/ブースター/.test(category)) return "BEYBLADE X Booster";
+  if (/セット/.test(category)) return "BEYBLADE X Set";
+  if (/ツール/.test(category)) return "BEYBLADE X Tool";
+  return "BEYBLADE X";
+}
+
+async function importBeybladeX() {
+  const html = await fetchBrowserText(BEYBLADE_X_LINEUP_URL, "https://beyblade.takaratomy.co.jp/");
+  const listings = parseBeybladeXListings(html, BEYBLADE_X_LINEUP_URL);
+  console.log(`Found ${listings.length} Takara Tomy BEYBLADE X listings.`);
+
+  const details = await mapLimit(listings, 6, async (listing) => {
+    if (listing.detail_url === BEYBLADE_X_LINEUP_URL) {
+      return { images: [] };
+    }
+    try {
+      return parseBeybladeXDetail(await fetchBrowserText(listing.detail_url, BEYBLADE_X_LINEUP_URL), listing.detail_url, listing.code);
+    } catch (error) {
+      console.warn(`BEYBLADE X detail fetch failed for ${listing.detail_url}: ${error.message}`);
+      return { images: [] };
+    }
+  });
+
+  return listings.map((listing, index) => {
+    const images = unique([listing.image_url, ...details[index].images]);
+    return buildKit({
+      kitId: `beyblade-x-${slugify(listing.href_slug, `${String(listing.index).padStart(3, "0")}-${listing.code.toLowerCase()}`)}`,
+      franchise: "beyblade",
+      gradeCode: "BEYBLADE_X",
+      subline: beybladeCategoryLabel(listing.category),
+      title: listing.title,
+      names: {
+        ja: listing.title,
+        en: listing.title,
+        zh: listing.title,
+        ko: listing.title,
+      },
+      boxArtUrl: images[0] ?? null,
+      galleryUrls: images,
+      releaseDate: listing.release_date,
+      priceJpy: listing.price_jpy,
+      isLimited: listing.is_limited,
+      sourceId: TAKARA_TOMY_BEYBLADE_X_SOURCE_ID,
+      sourceUrls: [listing.detail_url, BEYBLADE_X_LINEUP_URL],
+      tags: ["beyblade", "beyblade x", "takara tomy", "battle toy"],
+      notes: "Imported from the official Takara Tomy BEYBLADE X lineup and product detail pages.",
+      workOverride: "BEYBLADE X",
+      universeOverride: "BEYBLADE X",
+    });
+  });
+}
+
 async function importCandy() {
   const imported = [];
 
@@ -1166,7 +1427,7 @@ function mergeKits(existingDoc, imported) {
     ...existingDoc,
     updated_at: today(),
     scope:
-      "Individual model kit and official collectible catalog imported from Japanese official BANDAI SPIRITS, Bandai Candy, Bandai Gashapon, Bandai Hobby, Tamashii Web, and Kotobukiya sources. Covers Gundam, Armored Core, and Pokemon records. Records are needs_review until field-level human checks are complete.",
+      "Individual model kit and official collectible catalog imported from Japanese official BANDAI SPIRITS, Bandai Candy, Bandai Gashapon, Bandai Hobby, Tamashii Web, Kotobukiya, and Takara Tomy sources. Covers Gundam, Armored Core, Pokemon, and BEYBLADE X records. Records are needs_review until field-level human checks are complete.",
     kits,
   };
 }
@@ -1188,11 +1449,13 @@ function normalizeKit(kit) {
 
 async function main() {
   const existingDoc = JSON.parse(await readFile("data/kits.json", "utf8"));
+  const pokemonModelKits = await importPokemonModelKits();
   const imported = [
     ...(await importCandy()),
     ...(await importEnsemble()),
     ...(await importForte()),
-    ...(await importPokemonModelKits()),
+    ...pokemonModelKits,
+    ...(await importPokemonGlobalModelKits(pokemonModelKits)),
     ...(await importGashaponSearch({
       label: "Pokemon",
       resultUrl: `${GASHAPON_BASE_URL}/products/result.php?free=${encodeURIComponent("ポケモン")}`,
@@ -1242,6 +1505,7 @@ async function main() {
     ...(await importTamashiiGundamFigures()),
     ...(await importBandaiArmoredCore()),
     ...(await importKotobukiyaArmoredCore()),
+    ...(await importBeybladeX()),
   ];
 
   const merged = mergeKits(existingDoc, imported);

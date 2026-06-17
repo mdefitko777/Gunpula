@@ -18,18 +18,20 @@ const LANGUAGES = [
   { code: "ja", label: "日", htmlLang: "ja" },
 ];
 
-const FRANCHISES = ["gundam", "armored_core", "pokemon"];
+const FRANCHISES = ["gundam", "armored_core", "pokemon", "beyblade"];
 
 const FRANCHISE_LABELS = {
   gundam: { zh: "高达", ko: "건담", en: "Gundam", ja: "ガンダム" },
   armored_core: { zh: "Armored Core", ko: "아머드 코어", en: "Armored Core", ja: "アーマード・コア" },
   pokemon: { zh: "宝可梦", ko: "포켓몬", en: "Pokemon", ja: "ポケモン" },
+  beyblade: { zh: "Beyblade X", ko: "베이블레이드 X", en: "Beyblade X", ja: "ベイブレードX" },
 };
 
 const FRANCHISE_SHORT_LABELS = {
   gundam: { zh: "高达", ko: "건담", en: "Gundam", ja: "Gundam" },
   armored_core: { zh: "AC", ko: "AC", en: "AC", ja: "AC" },
   pokemon: { zh: "宝可梦", ko: "포켓몬", en: "Pokemon", ja: "ポケモン" },
+  beyblade: { zh: "BBX", ko: "BBX", en: "BBX", ja: "BBX" },
 };
 
 const NAME_FALLBACKS = {
@@ -47,6 +49,7 @@ const GRADE_SHORT_LABELS = {
   GUNDAM_MERCH: { zh: "周边", ko: "굿즈", en: "Goods", ja: "グッズ" },
   POKE_GASHAPON: { zh: "扭蛋", ko: "가샤폰", en: "Gashapon", ja: "ガシャポン" },
   POKEPLA: { zh: "拼装", ko: "프라모델", en: "Model Kit", ja: "プラモ" },
+  BEYBLADE_X: { zh: "BBX", ko: "BBX", en: "BBX", ja: "BBX" },
   AC30MM: { zh: "30MM", ko: "30MM", en: "30MM", ja: "30MM" },
   ACVI: { zh: "V.I.", ko: "V.I.", en: "V.I.", ja: "V.I." },
 };
@@ -80,6 +83,9 @@ const TRANSLATIONS = {
     unmarkOwned: "取消已购买",
     markWanted: "想要",
     unmarkWanted: "取消想要",
+    wantedQuantity: "想要数量",
+    decreaseWantedQuantity: "减少想要数量",
+    increaseWantedQuantity: "增加想要数量",
     previousImage: "上一张",
     nextImage: "下一张",
     sharedSync: "共享同步",
@@ -177,6 +183,9 @@ const TRANSLATIONS = {
     unmarkOwned: "구매함 해제",
     markWanted: "원함",
     unmarkWanted: "원함 해제",
+    wantedQuantity: "원하는 수량",
+    decreaseWantedQuantity: "원하는 수량 줄이기",
+    increaseWantedQuantity: "원하는 수량 늘리기",
     previousImage: "이전 이미지",
     nextImage: "다음 이미지",
     sharedSync: "공유 동기화",
@@ -274,6 +283,9 @@ const TRANSLATIONS = {
     unmarkOwned: "Remove owned",
     markWanted: "Wanted",
     unmarkWanted: "Remove wanted",
+    wantedQuantity: "Wanted quantity",
+    decreaseWantedQuantity: "Decrease wanted quantity",
+    increaseWantedQuantity: "Increase wanted quantity",
     previousImage: "Previous image",
     nextImage: "Next image",
     sharedSync: "Shared sync",
@@ -371,6 +383,9 @@ const TRANSLATIONS = {
     unmarkOwned: "購入済み解除",
     markWanted: "欲しい",
     unmarkWanted: "欲しい解除",
+    wantedQuantity: "欲しい数",
+    decreaseWantedQuantity: "欲しい数を減らす",
+    increaseWantedQuantity: "欲しい数を増やす",
     previousImage: "前の画像",
     nextImage: "次の画像",
     sharedSync: "共有同期",
@@ -547,6 +562,10 @@ const elements = {
   detailSubtitle: document.querySelector("#detailSubtitle"),
   toggleOwned: document.querySelector("#toggleOwned"),
   toggleWanted: document.querySelector("#toggleWanted"),
+  wantedQuantityControl: document.querySelector("#wantedQuantityControl"),
+  wantedQuantityInput: document.querySelector("#wantedQuantityInput"),
+  wantedQuantityMinus: document.querySelector("#wantedQuantityMinus"),
+  wantedQuantityPlus: document.querySelector("#wantedQuantityPlus"),
   detailMeta: document.querySelector("#detailMeta"),
   detailOfficialLink: document.querySelector("#detailOfficialLink"),
   correctionPanel: document.querySelector(".correction-panel"),
@@ -603,7 +622,7 @@ function loadSavedViewState() {
   }
 
   const fromHash = {};
-  fromHash.language = storedLanguage || params.get("lang") || params.get("language") || stored.language;
+  fromHash.language = params.get("lang") || params.get("language") || storedLanguage || stored.language;
   fromHash.franchise = params.get("franchise") || stored.franchise;
   fromHash.series = params.get("series") || "all";
   fromHash.grade = params.get("grade") || "all";
@@ -786,6 +805,14 @@ function loadCollection() {
   }
 }
 
+function clampCollectionQuantity(value) {
+  const quantity = Math.trunc(Number(value));
+  if (!Number.isFinite(quantity) || quantity < 1) {
+    return 1;
+  }
+  return Math.min(quantity, 99);
+}
+
 function normalizeCollection(collection = {}) {
   const items = collection.items && typeof collection.items === "object" ? { ...collection.items } : {};
   const now = new Date().toISOString();
@@ -796,20 +823,32 @@ function normalizeCollection(collection = {}) {
   }
   for (const kitId of Array.isArray(collection.wanted) ? collection.wanted : []) {
     if (!items[kitId]) {
-      items[kitId] = { status: "wanted", updated_at: now, updated_by: "local" };
+      items[kitId] = { status: "wanted", quantity: 1, updated_at: now, updated_by: "local" };
     }
   }
   const owned = [];
   const wanted = [];
+  const normalizedItems = {};
   for (const [kitId, entry] of Object.entries(items)) {
     if (entry?.status === "owned") {
+      normalizedItems[kitId] = {
+        status: "owned",
+        updated_at: entry.updated_at || now,
+        updated_by: entry.updated_by || "local",
+      };
       owned.push(kitId);
     }
     if (entry?.status === "wanted") {
+      normalizedItems[kitId] = {
+        status: "wanted",
+        quantity: clampCollectionQuantity(entry.quantity ?? entry.wanted_quantity ?? 1),
+        updated_at: entry.updated_at || now,
+        updated_by: entry.updated_by || "local",
+      };
       wanted.push(kitId);
     }
   }
-  return { owned: [...new Set(owned)], wanted: [...new Set(wanted)], items };
+  return { owned: [...new Set(owned)], wanted: [...new Set(wanted)], items: normalizedItems };
 }
 
 function loadSyncConfig() {
@@ -1031,6 +1070,9 @@ function bindEvents() {
   elements.detailMainImage.addEventListener("pointercancel", clearImagePointer);
   elements.toggleOwned.addEventListener("click", () => toggleKitCollection("owned"));
   elements.toggleWanted.addEventListener("click", () => toggleKitCollection("wanted"));
+  elements.wantedQuantityMinus.addEventListener("click", () => updateSelectedWantedQuantity(wantedQuantityForKit(state.selectedKit?.kit_id) - 1));
+  elements.wantedQuantityPlus.addEventListener("click", () => updateSelectedWantedQuantity(wantedQuantityForKit(state.selectedKit?.kit_id) + 1));
+  elements.wantedQuantityInput.addEventListener("change", (event) => updateSelectedWantedQuantity(event.target.value));
   elements.editToggle.addEventListener("click", () => {
     elements.correctionForm.hidden = !elements.correctionForm.hidden;
   });
@@ -1742,8 +1784,44 @@ function collectionIds(type) {
   return state.collection[type] || [];
 }
 
+function wantedQuantityForKit(kitId) {
+  if (!kitId) {
+    return 1;
+  }
+  state.collection = normalizeCollection(state.collection);
+  return clampCollectionQuantity(state.collection.items?.[kitId]?.quantity ?? 1);
+}
+
 function kitInCollection(kitId, type) {
   return collectionIds(type).includes(kitId);
+}
+
+function updateSelectedWantedQuantity(value) {
+  const kit = state.selectedKit;
+  if (!kit || !kitInCollection(kit.kit_id, "wanted")) {
+    return;
+  }
+  if (!canEditSharedData()) {
+    setSyncStatus("readonly", t("readOnlyHint"));
+    return;
+  }
+
+  const current = state.collection.items?.[kit.kit_id] || {};
+  state.collection.items = {
+    ...(state.collection.items || {}),
+    [kit.kit_id]: {
+      ...current,
+      status: "wanted",
+      quantity: clampCollectionQuantity(value),
+      updated_at: new Date().toISOString(),
+      updated_by: memberName(),
+    },
+  };
+
+  saveCollection();
+  renderCollections();
+  renderKits();
+  renderDetailStatusActions(kit);
 }
 
 function toggleKitCollection(type) {
@@ -1762,9 +1840,17 @@ function toggleKitCollection(type) {
       [kit.kit_id]: { status: null, updated_at: new Date().toISOString(), updated_by: memberName() },
     };
   } else {
+    const nextEntry = {
+      status: type,
+      updated_at: new Date().toISOString(),
+      updated_by: memberName(),
+    };
+    if (type === "wanted") {
+      nextEntry.quantity = wantedQuantityForKit(kit.kit_id);
+    }
     state.collection.items = {
       ...(state.collection.items || {}),
-      [kit.kit_id]: { status: type, updated_at: new Date().toISOString(), updated_by: memberName() },
+      [kit.kit_id]: nextEntry,
     };
   }
 
@@ -1784,7 +1870,8 @@ function renderCollections() {
 function renderCollectionStrip(type, strip, countNode, panel) {
   const ids = collectionIds(type).filter((kitId) => displayKitById(kitId));
   state.collection[type] = ids;
-  countNode.textContent = String(ids.length);
+  const count = type === "wanted" ? ids.reduce((total, kitId) => total + wantedQuantityForKit(kitId), 0) : ids.length;
+  countNode.textContent = String(count);
   panel.hidden = ids.length === 0;
   strip.innerHTML = "";
 
@@ -1809,6 +1896,15 @@ function renderCollectionStrip(type, strip, countNode, panel) {
       item.append(fallback);
     }
 
+    if (type === "wanted") {
+      const quantity = wantedQuantityForKit(kitId);
+      if (quantity > 1) {
+        const badge = document.createElement("span");
+        badge.className = "collection-quantity";
+        badge.textContent = `×${quantity}`;
+        item.append(badge);
+      }
+    }
     const label = document.createElement("span");
     label.textContent = kitShortName(kit);
     item.append(label);
@@ -1827,6 +1923,11 @@ function renderDetailStatusActions(kit) {
   elements.toggleWanted.disabled = !editable;
   elements.toggleOwned.textContent = owned ? t("unmarkOwned") : t("markOwned");
   elements.toggleWanted.textContent = wanted ? t("unmarkWanted") : t("markWanted");
+  elements.wantedQuantityControl.hidden = !wanted;
+  elements.wantedQuantityInput.value = String(wantedQuantityForKit(kit.kit_id));
+  elements.wantedQuantityInput.disabled = !editable;
+  elements.wantedQuantityMinus.disabled = !editable || wantedQuantityForKit(kit.kit_id) <= 1;
+  elements.wantedQuantityPlus.disabled = !editable || wantedQuantityForKit(kit.kit_id) >= 99;
 }
 
 function renderLanguageControls() {
@@ -2179,7 +2280,7 @@ function renderKits() {
     const collectionLabel = kitInCollection(kit.kit_id, "owned")
       ? t("markOwned")
       : kitInCollection(kit.kit_id, "wanted")
-        ? t("markWanted")
+        ? `${t("markWanted")} ×${wantedQuantityForKit(kit.kit_id)}`
         : null;
     if (collectionLabel) {
       const badge = document.createElement("span");

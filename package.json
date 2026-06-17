@@ -16,6 +16,6 @@
     "localize": "node scripts/localize_catalog.mjs",
     "cache:ac-images": "node scripts/cache_ac_images.mjs",
     "clean:tamashii-images": "node scripts/clean_tamashii_related_images.mjs",
-    "import:official": "npm run import:bandai && npm run import:collectibles && npm run localize"
+    "import:official": "npm run import:bandai && npm run import:collectibles && npm run localize && npm run cache:ac-images"
   }
 }
