@@ -1,0 +1,37 @@
+name: Refresh official catalog
+
+on:
+  schedule:
+    - cron: "20 18 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Import official sources
+        run: npm run import:official
+
+      - name: Validate catalog
+        run: npm run validate
+
+      - name: Commit updated catalog
+        run: |
+          if git diff --quiet -- data app/assets; then
+            echo "No catalog updates."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data app/assets
+          git commit -m "Refresh official catalog data"
+          git push

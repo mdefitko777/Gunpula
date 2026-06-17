@@ -5,6 +5,11 @@ const SERIES_LABEL_OVERRIDE_KEY = "gunpula-catalog-series-labels-v1";
 const VIEW_STATE_KEY = "gunpula-catalog-view-state-v1";
 const CONSOLE_MODE_KEY = "gunpula-catalog-console-mode-v1";
 const COLLECTION_KEY = "gunpula-catalog-collection-v1";
+const SYNC_CONFIG_KEY = "gunpula-catalog-sync-config-v1";
+const SYNC_META_KEY = "gunpula-catalog-sync-meta-v1";
+const ACTIVE_VIEW_KEY = "gunpula-catalog-active-view-v1";
+const SYNC_POLL_INTERVAL_MS = 15000;
+const SYNC_SAVE_DEBOUNCE_MS = 700;
 
 const LANGUAGES = [
   { code: "zh", label: "中", htmlLang: "zh-CN" },
@@ -76,6 +81,40 @@ const TRANSLATIONS = {
     unmarkWanted: "取消想要",
     previousImage: "上一张",
     nextImage: "下一张",
+    sharedSync: "共享同步",
+    syncLocal: "本地模式",
+    syncConnecting: "连接中",
+    syncConnected: "已同步",
+    syncReadOnly: "只读同步",
+    syncError: "同步异常",
+    syncSaving: "正在上传",
+    syncSaved: "已上传",
+    supabaseUrl: "Supabase URL",
+    supabaseAnonKey: "Anon key",
+    workspaceId: "共享空间 ID",
+    workspaceSecret: "共享密码",
+    editorSecret: "编辑密码",
+    memberName: "你的名字",
+    saveSyncConfig: "保存并连接",
+    syncNow: "立即同步",
+    disconnectSync: "断开云同步",
+    installApp: "安装到手机",
+    syncHint: "同一个共享空间 ID 会共用收藏、更正和系列名；编辑密码控制谁能改。",
+    syncConfigured: "云端已配置",
+    syncNotConfigured: "未配置云端",
+    syncUpdatedBy: "最后同步：{name} · {time}",
+    readOnlyHint: "当前只有查看权限，不能修改收藏或更正。",
+    cloudSetupMissing: "Supabase 还没建表，请先执行 docs/supabase-setup.sql。",
+    appHealth: "最大问题",
+    issueInstall: "安卓安装",
+    issueInstallStatus: "已支持 PWA",
+    issueSync: "两人数据互通",
+    issueImages: "官方图片稳定性",
+    issueImagesStatus: "已启用本机图片缓存",
+    issueRefresh: "官方数据更新",
+    issueRefreshStatus: "已提供定时刷新工作流",
+    issueConflict: "冲突处理",
+    issueConflictStatus: "后同步覆盖，保留历史",
     officialPage: "官方商品页",
     manualCorrection: "手动更正",
     seriesAdmin: "系列名称",
@@ -133,6 +172,40 @@ const TRANSLATIONS = {
     unmarkWanted: "원함 해제",
     previousImage: "이전 이미지",
     nextImage: "다음 이미지",
+    sharedSync: "공유 동기화",
+    syncLocal: "로컬 모드",
+    syncConnecting: "연결 중",
+    syncConnected: "동기화됨",
+    syncReadOnly: "읽기 전용",
+    syncError: "동기화 오류",
+    syncSaving: "업로드 중",
+    syncSaved: "업로드됨",
+    supabaseUrl: "Supabase URL",
+    supabaseAnonKey: "Anon key",
+    workspaceId: "공유 공간 ID",
+    workspaceSecret: "공유 비밀번호",
+    editorSecret: "편집 비밀번호",
+    memberName: "내 이름",
+    saveSyncConfig: "저장하고 연결",
+    syncNow: "지금 동기화",
+    disconnectSync: "클라우드 해제",
+    installApp: "휴대폰에 설치",
+    syncHint: "같은 공유 공간 ID는 컬렉션, 수정, 시리즈 이름을 공유합니다. 편집 비밀번호가 수정 권한을 제어합니다.",
+    syncConfigured: "클라우드 설정됨",
+    syncNotConfigured: "클라우드 미설정",
+    syncUpdatedBy: "마지막 동기화: {name} · {time}",
+    readOnlyHint: "현재 읽기 전용 권한이라 컬렉션이나 수정 내용을 변경할 수 없습니다.",
+    cloudSetupMissing: "Supabase 테이블이 없습니다. docs/supabase-setup.sql을 먼저 실행하세요.",
+    appHealth: "주요 문제",
+    issueInstall: "Android 설치",
+    issueInstallStatus: "PWA 지원됨",
+    issueSync: "두 사람 데이터 공유",
+    issueImages: "공식 이미지 안정성",
+    issueImagesStatus: "로컬 이미지 캐시 사용",
+    issueRefresh: "공식 데이터 업데이트",
+    issueRefreshStatus: "예약 갱신 워크플로 제공",
+    issueConflict: "충돌 처리",
+    issueConflictStatus: "나중 동기화 우선, 기록 보관",
     officialPage: "공식 상품 페이지",
     manualCorrection: "수동 수정",
     seriesAdmin: "시리즈 이름",
@@ -190,6 +263,40 @@ const TRANSLATIONS = {
     unmarkWanted: "Remove wanted",
     previousImage: "Previous image",
     nextImage: "Next image",
+    sharedSync: "Shared sync",
+    syncLocal: "Local mode",
+    syncConnecting: "Connecting",
+    syncConnected: "Synced",
+    syncReadOnly: "Read-only sync",
+    syncError: "Sync error",
+    syncSaving: "Uploading",
+    syncSaved: "Uploaded",
+    supabaseUrl: "Supabase URL",
+    supabaseAnonKey: "Anon key",
+    workspaceId: "Workspace ID",
+    workspaceSecret: "Shared password",
+    editorSecret: "Editor password",
+    memberName: "Your name",
+    saveSyncConfig: "Save and connect",
+    syncNow: "Sync now",
+    disconnectSync: "Disconnect cloud",
+    installApp: "Install on phone",
+    syncHint: "The same workspace ID shares collections, corrections, and series names. The editor password controls write access.",
+    syncConfigured: "Cloud configured",
+    syncNotConfigured: "Cloud not configured",
+    syncUpdatedBy: "Last sync: {name} · {time}",
+    readOnlyHint: "You currently have read-only access, so collection and correction edits are disabled.",
+    cloudSetupMissing: "Supabase tables are missing. Run docs/supabase-setup.sql first.",
+    appHealth: "Main risks",
+    issueInstall: "Android install",
+    issueInstallStatus: "PWA ready",
+    issueSync: "Two-person sync",
+    issueImages: "Official image stability",
+    issueImagesStatus: "Local image cache enabled",
+    issueRefresh: "Official data updates",
+    issueRefreshStatus: "Scheduled refresh workflow added",
+    issueConflict: "Conflict handling",
+    issueConflictStatus: "Latest sync wins, history kept",
     officialPage: "Official product page",
     manualCorrection: "Manual correction",
     seriesAdmin: "Series names",
@@ -247,6 +354,40 @@ const TRANSLATIONS = {
     unmarkWanted: "欲しい解除",
     previousImage: "前の画像",
     nextImage: "次の画像",
+    sharedSync: "共有同期",
+    syncLocal: "ローカルモード",
+    syncConnecting: "接続中",
+    syncConnected: "同期済み",
+    syncReadOnly: "読み取り専用",
+    syncError: "同期エラー",
+    syncSaving: "アップロード中",
+    syncSaved: "アップロード済み",
+    supabaseUrl: "Supabase URL",
+    supabaseAnonKey: "Anon key",
+    workspaceId: "共有スペース ID",
+    workspaceSecret: "共有パスワード",
+    editorSecret: "編集パスワード",
+    memberName: "あなたの名前",
+    saveSyncConfig: "保存して接続",
+    syncNow: "今すぐ同期",
+    disconnectSync: "クラウド解除",
+    installApp: "スマホにインストール",
+    syncHint: "同じ共有スペース ID はコレクション、修正、シリーズ名を共有します。編集パスワードで変更権限を制御します。",
+    syncConfigured: "クラウド設定済み",
+    syncNotConfigured: "クラウド未設定",
+    syncUpdatedBy: "最終同期: {name} · {time}",
+    readOnlyHint: "現在は読み取り専用のため、コレクションや修正は変更できません。",
+    cloudSetupMissing: "Supabase テーブルがありません。先に docs/supabase-setup.sql を実行してください。",
+    appHealth: "主な課題",
+    issueInstall: "Android インストール",
+    issueInstallStatus: "PWA 対応済み",
+    issueSync: "2人のデータ共有",
+    issueImages: "公式画像の安定性",
+    issueImagesStatus: "ローカル画像キャッシュ有効",
+    issueRefresh: "公式データ更新",
+    issueRefreshStatus: "定期更新ワークフロー追加",
+    issueConflict: "競合処理",
+    issueConflictStatus: "後の同期を優先、履歴保持",
     officialPage: "公式商品ページ",
     manualCorrection: "手動修正",
     seriesAdmin: "シリーズ名",
@@ -297,6 +438,21 @@ const state = {
   overrides: {},
   seriesLabelOverrides: {},
   collection: { owned: [], wanted: [] },
+  syncConfig: loadSyncConfig(),
+  syncMeta: loadSyncMeta(),
+  sync: {
+    enabled: false,
+    canEdit: true,
+    status: "local",
+    message: "",
+    timer: null,
+    saveTimer: null,
+    inFlight: false,
+    lastPulledAt: null,
+    suppress: false,
+  },
+  activeView: INITIAL_VIEW_STATE.view || localStorage.getItem(ACTIVE_VIEW_KEY) || "catalog",
+  installPrompt: null,
   updatedAt: null,
   query: INITIAL_VIEW_STATE.query || "",
   franchise: INITIAL_VIEW_STATE.franchise || localStorage.getItem(FRANCHISE_KEY) || "gundam",
@@ -315,10 +471,26 @@ const state = {
 
 const elements = {
   datasetSummary: document.querySelector("#datasetSummary"),
+  sectionTitle: document.querySelector("#sectionTitle"),
+  bottomNav: document.querySelector("#bottomNav"),
   settingsOpen: document.querySelector("#settingsOpen"),
   settingsDialog: document.querySelector("#settingsDialog"),
   settingsClose: document.querySelector("#settingsClose"),
   consoleModeToggle: document.querySelector("#consoleModeToggle"),
+  syncState: document.querySelector("#syncState"),
+  syncStatusText: document.querySelector("#syncStatusText"),
+  syncSupabaseUrl: document.querySelector("#syncSupabaseUrl"),
+  syncAnonKey: document.querySelector("#syncAnonKey"),
+  syncWorkspaceId: document.querySelector("#syncWorkspaceId"),
+  syncWorkspaceSecret: document.querySelector("#syncWorkspaceSecret"),
+  syncEditorSecret: document.querySelector("#syncEditorSecret"),
+  syncMemberName: document.querySelector("#syncMemberName"),
+  saveSyncConfig: document.querySelector("#saveSyncConfig"),
+  syncNow: document.querySelector("#syncNow"),
+  disconnectSync: document.querySelector("#disconnectSync"),
+  syncHint: document.querySelector("#syncHint"),
+  installApp: document.querySelector("#installApp"),
+  issueSyncStatus: document.querySelector("#issueSyncStatus"),
   collectionSection: document.querySelector("#collectionSection"),
   ownedPanel: document.querySelector("#ownedPanel"),
   wantedPanel: document.querySelector("#wantedPanel"),
@@ -403,6 +575,7 @@ function loadSavedViewState() {
   fromHash.grade = params.get("grade") || "all";
   fromHash.query = params.get("q") || params.get("query") || "";
   fromHash.kit = params.has("kit") ? params.get("kit") : null;
+  fromHash.view = params.get("view") || "catalog";
 
   return fromHash;
 }
@@ -415,6 +588,7 @@ function currentViewState() {
     grade: state.grade,
     query: state.query,
     kit: state.selectedKit?.kit_id || null,
+    view: state.activeView,
   };
 }
 
@@ -429,6 +603,7 @@ function persistViewState() {
   if (viewState.grade && viewState.grade !== "all") params.set("grade", viewState.grade);
   if (viewState.query) params.set("q", viewState.query);
   if (viewState.kit) params.set("kit", viewState.kit);
+  if (viewState.view && viewState.view !== "catalog") params.set("view", viewState.view);
 
   const nextHash = params.toString();
   const nextUrl = `${window.location.pathname}${window.location.search}${nextHash ? `#${nextHash}` : ""}`;
@@ -442,6 +617,7 @@ function applyViewState(viewState) {
   state.series = viewState.series || "all";
   state.grade = viewState.grade || "all";
   state.query = viewState.query || "";
+  state.activeView = viewState.view || "catalog";
   state.selectedKit = viewState.kit ? displayKitById(viewState.kit) : null;
   normalizeState();
   render();
@@ -475,6 +651,10 @@ async function init() {
   state.selectedKit = state.pendingKitId ? displayKitById(state.pendingKitId) : null;
 
   bindEvents();
+  registerPwa();
+  if (syncConfigComplete()) {
+    await connectSync({ silent: true });
+  }
   render();
   if (state.selectedKit) {
     renderDetail(state.selectedKit);
@@ -492,6 +672,9 @@ function normalizeState() {
   }
   if (!LANGUAGES.some((language) => language.code === state.seriesAdminLanguage)) {
     state.seriesAdminLanguage = state.language;
+  }
+  if (!["catalog", "owned", "wanted"].includes(state.activeView)) {
+    state.activeView = "catalog";
   }
 }
 
@@ -520,31 +703,99 @@ function loadConsoleMode() {
 function loadCollection() {
   try {
     const parsed = JSON.parse(localStorage.getItem(COLLECTION_KEY) || "{}");
-    return {
-      owned: Array.isArray(parsed?.owned) ? parsed.owned : [],
-      wanted: Array.isArray(parsed?.wanted) ? parsed.wanted : [],
-    };
+    return normalizeCollection(parsed);
   } catch {
     return { owned: [], wanted: [] };
   }
 }
 
-function saveOverrides() {
-  localStorage.setItem(OVERRIDE_KEY, JSON.stringify(state.overrides, null, 2));
+function normalizeCollection(collection = {}) {
+  const items = collection.items && typeof collection.items === "object" ? { ...collection.items } : {};
+  const now = new Date().toISOString();
+  for (const kitId of Array.isArray(collection.owned) ? collection.owned : []) {
+    if (!items[kitId]) {
+      items[kitId] = { status: "owned", updated_at: now, updated_by: "local" };
+    }
+  }
+  for (const kitId of Array.isArray(collection.wanted) ? collection.wanted : []) {
+    if (!items[kitId]) {
+      items[kitId] = { status: "wanted", updated_at: now, updated_by: "local" };
+    }
+  }
+  const owned = [];
+  const wanted = [];
+  for (const [kitId, entry] of Object.entries(items)) {
+    if (entry?.status === "owned") {
+      owned.push(kitId);
+    }
+    if (entry?.status === "wanted") {
+      wanted.push(kitId);
+    }
+  }
+  return { owned: [...new Set(owned)], wanted: [...new Set(wanted)], items };
 }
 
-function saveSeriesLabelOverrides() {
+function loadSyncConfig() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(SYNC_CONFIG_KEY) || "{}");
+    return {
+      supabaseUrl: String(parsed.supabaseUrl || ""),
+      anonKey: String(parsed.anonKey || ""),
+      workspaceId: String(parsed.workspaceId || ""),
+      workspaceSecret: String(parsed.workspaceSecret || ""),
+      editorSecret: String(parsed.editorSecret || ""),
+      memberName: String(parsed.memberName || ""),
+    };
+  } catch {
+    return { supabaseUrl: "", anonKey: "", workspaceId: "", workspaceSecret: "", editorSecret: "", memberName: "" };
+  }
+}
+
+function loadSyncMeta() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(SYNC_META_KEY) || "{}");
+    return {
+      revision: Number(parsed.revision || 0),
+      updatedAt: parsed.updatedAt || null,
+      updatedBy: parsed.updatedBy || null,
+    };
+  } catch {
+    return { revision: 0, updatedAt: null, updatedBy: null };
+  }
+}
+
+function saveOverrides(options = {}) {
+  localStorage.setItem(OVERRIDE_KEY, JSON.stringify(state.overrides, null, 2));
+  if (!options.skipSync) {
+    scheduleCloudSave("overrides");
+  }
+}
+
+function saveSeriesLabelOverrides(options = {}) {
   localStorage.setItem(SERIES_LABEL_OVERRIDE_KEY, JSON.stringify(state.seriesLabelOverrides, null, 2));
+  if (!options.skipSync) {
+    scheduleCloudSave("series");
+  }
 }
 
 function saveConsoleMode() {
   localStorage.setItem(CONSOLE_MODE_KEY, String(state.consoleMode));
 }
 
-function saveCollection() {
-  state.collection.owned = [...new Set(state.collection.owned)];
-  state.collection.wanted = [...new Set(state.collection.wanted)];
+function saveCollection(options = {}) {
+  state.collection = normalizeCollection(state.collection);
   localStorage.setItem(COLLECTION_KEY, JSON.stringify(state.collection));
+  if (!options.skipSync) {
+    scheduleCloudSave("collection");
+  }
+}
+
+function saveSyncConfig() {
+  localStorage.setItem(SYNC_CONFIG_KEY, JSON.stringify(state.syncConfig));
+}
+
+function saveSyncMeta() {
+  localStorage.setItem(SYNC_META_KEY, JSON.stringify(state.syncMeta));
 }
 
 function refreshKits() {
@@ -635,6 +886,26 @@ function bindEvents() {
     saveConsoleMode();
     renderConsoleMode();
   });
+  elements.bottomNav.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-view]");
+    if (!button) {
+      return;
+    }
+    const nextView = button.dataset.view;
+    if (nextView === "settings") {
+      renderSettings();
+      elements.settingsDialog.showModal();
+      return;
+    }
+    state.activeView = nextView;
+    localStorage.setItem(ACTIVE_VIEW_KEY, state.activeView);
+    persistViewState();
+    render();
+  });
+  elements.saveSyncConfig.addEventListener("click", saveAndConnectSync);
+  elements.syncNow.addEventListener("click", () => pullSync({ force: true }));
+  elements.disconnectSync.addEventListener("click", disconnectSync);
+  elements.installApp.addEventListener("click", installPwa);
   elements.searchInput.addEventListener("input", (event) => {
     state.query = event.target.value;
     persistViewState();
@@ -707,8 +978,284 @@ function bindEvents() {
   window.addEventListener("hashchange", () => {
     applyViewState(loadSavedViewState());
   });
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden && syncConfigComplete()) {
+      pullSync({ silent: true });
+    }
+  });
 
   populateGradeSelect();
+}
+
+function registerPwa() {
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register(new URL("../sw.js", window.location.href), { scope: "../" }).catch(() => {});
+    });
+  }
+  window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+    state.installPrompt = event;
+    renderSettings();
+  });
+}
+
+async function installPwa() {
+  if (!state.installPrompt) {
+    return;
+  }
+  const promptEvent = state.installPrompt;
+  state.installPrompt = null;
+  await promptEvent.prompt();
+  renderSettings();
+}
+
+function syncConfigComplete(config = state.syncConfig) {
+  return Boolean(config.supabaseUrl && config.anonKey && config.workspaceId && config.workspaceSecret);
+}
+
+function cleanSupabaseUrl(url) {
+  return String(url || "").trim().replace(/\/+$/, "");
+}
+
+function memberName() {
+  return state.syncConfig.memberName.trim() || "member";
+}
+
+async function sha256Hex(value) {
+  const encoded = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest("SHA-256", encoded);
+  return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+async function syncAccessHash() {
+  const secret = state.syncConfig.editorSecret || state.syncConfig.workspaceSecret;
+  return sha256Hex(`${state.syncConfig.workspaceId}:${secret}`);
+}
+
+async function syncReadHash() {
+  return sha256Hex(`${state.syncConfig.workspaceId}:${state.syncConfig.workspaceSecret}`);
+}
+
+async function syncEditHash() {
+  const secret = state.syncConfig.editorSecret || state.syncConfig.workspaceSecret;
+  return sha256Hex(`${state.syncConfig.workspaceId}:${secret}`);
+}
+
+function setSyncStatus(status, message = "") {
+  state.sync.status = status;
+  state.sync.message = message;
+  renderSyncStatus();
+}
+
+async function supabaseRpc(functionName, body) {
+  const baseUrl = cleanSupabaseUrl(state.syncConfig.supabaseUrl);
+  const response = await fetch(`${baseUrl}/rest/v1/rpc/${functionName}`, {
+    method: "POST",
+    headers: {
+      apikey: state.syncConfig.anonKey,
+      Authorization: `Bearer ${state.syncConfig.anonKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+  const text = await response.text();
+  const data = text ? JSON.parse(text) : null;
+  if (!response.ok) {
+    const message = data?.message || data?.hint || response.statusText || t("syncError");
+    throw new Error(message.includes("gunpula") ? message : `${message}. ${t("cloudSetupMissing")}`);
+  }
+  return data;
+}
+
+function cloudPayload() {
+  return {
+    schema_version: 1,
+    collection: normalizeCollection(state.collection),
+    overrides: state.overrides,
+    series_label_overrides: state.seriesLabelOverrides,
+  };
+}
+
+function normalizeCloudState(result) {
+  if (!result) {
+    return null;
+  }
+  const stateObject = Array.isArray(result) ? result[0] : result;
+  if (!stateObject) {
+    return null;
+  }
+  return {
+    payload: stateObject.payload || {},
+    revision: Number(stateObject.revision || 0),
+    updatedAt: stateObject.updated_at || stateObject.updatedAt || null,
+    updatedBy: stateObject.updated_by || stateObject.updatedBy || null,
+    canEdit: Boolean(stateObject.can_edit ?? stateObject.canEdit),
+  };
+}
+
+async function readRemoteState() {
+  const result = await supabaseRpc("gunpula_get_state", {
+    p_workspace_id: state.syncConfig.workspaceId.trim(),
+    p_access_hash: await syncAccessHash(),
+  });
+  return normalizeCloudState(result);
+}
+
+async function writeRemoteState(reason = "manual") {
+  if (!syncConfigComplete() || state.sync.inFlight) {
+    return;
+  }
+  state.sync.inFlight = true;
+  setSyncStatus("saving", t("syncSaving"));
+  try {
+    const result = await supabaseRpc("gunpula_save_state", {
+      p_workspace_id: state.syncConfig.workspaceId.trim(),
+      p_read_hash: await syncReadHash(),
+      p_edit_hash: await syncEditHash(),
+      p_member_name: memberName(),
+      p_payload: cloudPayload(),
+      p_base_revision: state.syncMeta.revision || 0,
+      p_reason: reason,
+    });
+    const remote = normalizeCloudState(result);
+    applyRemoteState(remote, { skipSave: true });
+    setSyncStatus(state.sync.canEdit ? "connected" : "readonly", t("syncSaved"));
+  } catch (error) {
+    setSyncStatus("error", error.message);
+  } finally {
+    state.sync.inFlight = false;
+  }
+}
+
+function scheduleCloudSave(reason) {
+  if (state.sync.suppress || !syncConfigComplete()) {
+    return;
+  }
+  if (!state.sync.canEdit) {
+    setSyncStatus("readonly", t("readOnlyHint"));
+    return;
+  }
+  clearTimeout(state.sync.saveTimer);
+  state.sync.saveTimer = setTimeout(() => {
+    writeRemoteState(reason);
+  }, SYNC_SAVE_DEBOUNCE_MS);
+}
+
+async function connectSync(options = {}) {
+  if (!syncConfigComplete()) {
+    state.sync.enabled = false;
+    state.sync.canEdit = true;
+    setSyncStatus("local", t("syncLocal"));
+    return;
+  }
+  state.sync.enabled = true;
+  setSyncStatus("connecting", t("syncConnecting"));
+  clearInterval(state.sync.timer);
+  try {
+    const remote = await readRemoteState();
+    if (remote) {
+      applyRemoteState(remote);
+      setSyncStatus(remote.canEdit ? "connected" : "readonly", remote.canEdit ? t("syncConnected") : t("syncReadOnly"));
+    } else {
+      state.sync.canEdit = true;
+      await writeRemoteState("create-workspace");
+    }
+    state.sync.timer = setInterval(() => pullSync({ silent: true }), SYNC_POLL_INTERVAL_MS);
+  } catch (error) {
+    if (!options.silent) {
+      setSyncStatus("error", error.message);
+    } else {
+      state.sync.status = "error";
+      state.sync.message = error.message;
+    }
+  }
+}
+
+async function pullSync(options = {}) {
+  if (!syncConfigComplete()) {
+    setSyncStatus("local", t("syncLocal"));
+    return;
+  }
+  if (!options.silent) {
+    setSyncStatus("connecting", t("syncConnecting"));
+  }
+  try {
+    const remote = await readRemoteState();
+    if (!remote) {
+      await writeRemoteState("create-workspace");
+      return;
+    }
+    if (options.force || remote.revision !== state.syncMeta.revision) {
+      applyRemoteState(remote);
+    }
+    setSyncStatus(remote.canEdit ? "connected" : "readonly", remote.canEdit ? t("syncConnected") : t("syncReadOnly"));
+  } catch (error) {
+    setSyncStatus("error", error.message);
+  }
+}
+
+function applyRemoteState(remote, options = {}) {
+  if (!remote) {
+    return;
+  }
+  state.sync.suppress = true;
+  state.collection = normalizeCollection(remote.payload?.collection || {});
+  state.overrides = remote.payload?.overrides && typeof remote.payload.overrides === "object" ? remote.payload.overrides : {};
+  state.seriesLabelOverrides =
+    remote.payload?.series_label_overrides && typeof remote.payload.series_label_overrides === "object"
+      ? remote.payload.series_label_overrides
+      : {};
+  state.syncMeta = {
+    revision: remote.revision,
+    updatedAt: remote.updatedAt,
+    updatedBy: remote.updatedBy,
+  };
+  state.sync.canEdit = remote.canEdit;
+  saveCollection({ skipSync: true });
+  saveOverrides({ skipSync: true });
+  saveSeriesLabelOverrides({ skipSync: true });
+  saveSyncMeta();
+  refreshKits();
+  state.sync.suppress = false;
+  if (!options.skipSave) {
+    render();
+    if (state.selectedKit && elements.detailDialog.open) {
+      state.selectedKit = displayKitById(state.selectedKit.kit_id);
+      renderDetail(state.selectedKit);
+    }
+  }
+}
+
+function saveAndConnectSync() {
+  state.syncConfig = {
+    supabaseUrl: cleanSupabaseUrl(elements.syncSupabaseUrl.value),
+    anonKey: elements.syncAnonKey.value.trim(),
+    workspaceId: elements.syncWorkspaceId.value.trim(),
+    workspaceSecret: elements.syncWorkspaceSecret.value,
+    editorSecret: elements.syncEditorSecret.value,
+    memberName: elements.syncMemberName.value.trim(),
+  };
+  saveSyncConfig();
+  connectSync();
+  renderSettings();
+}
+
+function disconnectSync() {
+  clearInterval(state.sync.timer);
+  clearTimeout(state.sync.saveTimer);
+  state.syncConfig = { supabaseUrl: "", anonKey: "", workspaceId: "", workspaceSecret: "", editorSecret: "", memberName: "" };
+  state.syncMeta = { revision: 0, updatedAt: null, updatedBy: null };
+  state.sync.enabled = false;
+  state.sync.canEdit = true;
+  saveSyncConfig();
+  saveSyncMeta();
+  setSyncStatus("local", t("syncLocal"));
+  render();
+}
+
+function canEditSharedData() {
+  return !syncConfigComplete() || state.sync.canEdit;
 }
 
 function t(key, params = {}) {
@@ -718,6 +1265,7 @@ function t(key, params = {}) {
 
 function translateStaticText() {
   document.documentElement.lang = LANGUAGES.find((language) => language.code === state.language)?.htmlLang ?? "zh-CN";
+  document.body.dataset.view = state.activeView;
   document.querySelectorAll("[data-i18n]").forEach((node) => {
     node.textContent = t(node.dataset.i18n);
   });
@@ -801,6 +1349,10 @@ function saveCurrentCorrection() {
   if (!kit) {
     return;
   }
+  if (!canEditSharedData()) {
+    setSyncStatus("readonly", t("readOnlyHint"));
+    return;
+  }
 
   const form = elements.correctionForm.dataset;
   const override = {
@@ -836,6 +1388,10 @@ function saveCurrentCorrection() {
 function clearCurrentCorrection() {
   const kit = state.selectedKit;
   if (!kit) {
+    return;
+  }
+  if (!canEditSharedData()) {
+    setSyncStatus("readonly", t("readOnlyHint"));
     return;
   }
   if (state.overrides[kit.kit_id]) {
@@ -891,9 +1447,16 @@ function render() {
   renderSeriesAdmin();
   renderSettings();
   renderConsoleMode();
+  renderBottomNav();
   renderCollections();
   renderFilterSummary();
   renderKits();
+}
+
+function renderBottomNav() {
+  elements.bottomNav.querySelectorAll("button[data-view]").forEach((button) => {
+    button.classList.toggle("is-active", button.dataset.view === state.activeView);
+  });
 }
 
 function datasetSummary() {
@@ -1002,11 +1565,17 @@ function kitsForCurrentFranchise() {
 
 function filteredKits() {
   const query = state.query.trim().toLowerCase();
-  return kitsForCurrentFranchise().filter((kit) => {
-    if (state.grade !== "all" && kit.grade_code !== state.grade) {
+  const source =
+    state.activeView === "owned"
+      ? collectionIds("owned").map(displayKitById).filter(Boolean)
+      : state.activeView === "wanted"
+        ? collectionIds("wanted").map(displayKitById).filter(Boolean)
+        : kitsForCurrentFranchise();
+  return source.filter((kit) => {
+    if (state.activeView === "catalog" && state.grade !== "all" && kit.grade_code !== state.grade) {
       return false;
     }
-    if (state.series !== "all" && kitSeriesKey(kit) !== state.series) {
+    if (state.activeView === "catalog" && state.series !== "all" && kitSeriesKey(kit) !== state.series) {
       return false;
     }
     if (!query) {
@@ -1037,6 +1606,7 @@ function filteredKits() {
 }
 
 function collectionIds(type) {
+  state.collection = normalizeCollection(state.collection);
   return state.collection[type] || [];
 }
 
@@ -1049,13 +1619,21 @@ function toggleKitCollection(type) {
   if (!kit) {
     return;
   }
+  if (!canEditSharedData()) {
+    setSyncStatus("readonly", t("readOnlyHint"));
+    return;
+  }
 
-  const oppositeType = type === "owned" ? "wanted" : "owned";
   if (kitInCollection(kit.kit_id, type)) {
-    state.collection[type] = collectionIds(type).filter((kitId) => kitId !== kit.kit_id);
+    state.collection.items = {
+      ...(state.collection.items || {}),
+      [kit.kit_id]: { status: null, updated_at: new Date().toISOString(), updated_by: memberName() },
+    };
   } else {
-    state.collection[type] = [...collectionIds(type), kit.kit_id];
-    state.collection[oppositeType] = collectionIds(oppositeType).filter((kitId) => kitId !== kit.kit_id);
+    state.collection.items = {
+      ...(state.collection.items || {}),
+      [kit.kit_id]: { status: type, updated_at: new Date().toISOString(), updated_by: memberName() },
+    };
   }
 
   saveCollection();
@@ -1068,7 +1646,7 @@ function renderCollections() {
   renderCollectionStrip("owned", elements.ownedStrip, elements.ownedCount, elements.ownedPanel);
   renderCollectionStrip("wanted", elements.wantedStrip, elements.wantedCount, elements.wantedPanel);
   const hasCollections = collectionIds("owned").length > 0 || collectionIds("wanted").length > 0;
-  elements.collectionSection.hidden = !hasCollections;
+  elements.collectionSection.hidden = !hasCollections || state.activeView !== "catalog";
 }
 
 function renderCollectionStrip(type, strip, countNode, panel) {
@@ -1110,8 +1688,11 @@ function renderCollectionStrip(type, strip, countNode, panel) {
 function renderDetailStatusActions(kit) {
   const owned = kitInCollection(kit.kit_id, "owned");
   const wanted = kitInCollection(kit.kit_id, "wanted");
+  const editable = canEditSharedData();
   elements.toggleOwned.classList.toggle("is-active", owned);
   elements.toggleWanted.classList.toggle("is-active", wanted);
+  elements.toggleOwned.disabled = !editable;
+  elements.toggleWanted.disabled = !editable;
   elements.toggleOwned.textContent = owned ? t("unmarkOwned") : t("markOwned");
   elements.toggleWanted.textContent = wanted ? t("unmarkWanted") : t("markWanted");
 }
@@ -1139,11 +1720,52 @@ function renderLanguageControls() {
 
 function renderSettings() {
   elements.consoleModeToggle.checked = state.consoleMode;
+  elements.syncSupabaseUrl.value = state.syncConfig.supabaseUrl || "";
+  elements.syncAnonKey.value = state.syncConfig.anonKey || "";
+  elements.syncWorkspaceId.value = state.syncConfig.workspaceId || "";
+  elements.syncWorkspaceSecret.value = state.syncConfig.workspaceSecret || "";
+  elements.syncEditorSecret.value = state.syncConfig.editorSecret || "";
+  elements.syncMemberName.value = state.syncConfig.memberName || "";
+  elements.installApp.hidden = !state.installPrompt;
+  elements.syncNow.disabled = !syncConfigComplete();
+  elements.disconnectSync.disabled = !syncConfigComplete();
+  renderSyncStatus();
+}
+
+function renderSyncStatus() {
+  const labelByStatus = {
+    local: t("syncLocal"),
+    connecting: t("syncConnecting"),
+    connected: t("syncConnected"),
+    readonly: t("syncReadOnly"),
+    saving: t("syncSaving"),
+    error: t("syncError"),
+  };
+  elements.syncState.dataset.status = state.sync.status;
+  elements.syncStatusText.textContent = state.sync.message || labelByStatus[state.sync.status] || t("syncLocal");
+  const syncConfigured = syncConfigComplete();
+  elements.issueSyncStatus.textContent = syncConfigured ? t("syncConfigured") : t("syncNotConfigured");
+  if (state.syncMeta.updatedAt) {
+    const date = new Date(state.syncMeta.updatedAt);
+    const time = Number.isNaN(date.getTime()) ? state.syncMeta.updatedAt : date.toLocaleString();
+    elements.syncHint.textContent = t("syncUpdatedBy", { name: state.syncMeta.updatedBy || "member", time });
+  } else {
+    elements.syncHint.textContent = state.sync.message || t("syncHint");
+  }
 }
 
 function renderConsoleMode() {
   elements.seriesAdminPanel.hidden = !state.consoleMode;
   elements.correctionPanel.hidden = !state.consoleMode;
+  const editable = canEditSharedData();
+  elements.editToggle.disabled = !editable;
+  elements.saveCorrection.disabled = !editable;
+  elements.clearCorrection.disabled = !editable;
+  elements.saveSeriesLabel.disabled = !editable;
+  elements.clearSeriesLabel.disabled = !editable;
+  elements.seriesAdminLabel.disabled = !editable;
+  elements.seriesAdminSeries.disabled = !editable;
+  elements.seriesAdminLanguage.disabled = !editable;
   if (!state.consoleMode) {
     elements.correctionForm.hidden = true;
   }
@@ -1277,6 +1899,10 @@ function updateSeriesAdminLabelField() {
 }
 
 function saveCurrentSeriesLabel() {
+  if (!canEditSharedData()) {
+    setSyncStatus("readonly", t("readOnlyHint"));
+    return;
+  }
   const key = elements.seriesAdminSeries.value;
   const language = elements.seriesAdminLanguage.value;
   const value = elements.seriesAdminLabel.value.trim();
@@ -1306,6 +1932,10 @@ function saveCurrentSeriesLabel() {
 }
 
 function clearCurrentSeriesLabel() {
+  if (!canEditSharedData()) {
+    setSyncStatus("readonly", t("readOnlyHint"));
+    return;
+  }
   const key = elements.seriesAdminSeries.value;
   const language = elements.seriesAdminLanguage.value;
   delete state.seriesLabelOverrides[key]?.[language];
@@ -1374,6 +2004,8 @@ function renderFilterSummary() {
 
 function renderKits() {
   const kits = filteredKits();
+  const titleKey = state.activeView === "owned" ? "ownedList" : state.activeView === "wanted" ? "wantedList" : "catalogList";
+  elements.sectionTitle.textContent = t(titleKey);
   elements.resultCount.textContent = t("results", { count: kits.length });
   elements.kitGrid.innerHTML = "";
 

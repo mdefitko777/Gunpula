@@ -22,6 +22,7 @@
 body {
   margin: 0;
   min-width: 320px;
+  padding-bottom: 76px;
   background: var(--bg);
 }
 
@@ -420,6 +421,74 @@ h1 {
   -webkit-line-clamp: 2;
 }
 
+.bottom-nav {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  left: 12px;
+  z-index: 30;
+  max-width: 520px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  margin: 0 auto;
+  padding: 5px;
+  border: 1px solid rgba(216, 221, 227, 0.92);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 12px 34px rgba(17, 19, 23, 0.16);
+  backdrop-filter: blur(14px);
+}
+
+.bottom-nav button {
+  min-width: 0;
+  min-height: 46px;
+  display: grid;
+  place-items: center;
+  gap: 2px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--muted);
+}
+
+.bottom-nav span {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.bottom-nav strong {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bottom-nav button.is-active,
+.bottom-nav button:hover,
+.bottom-nav button:focus-visible {
+  background: var(--ink);
+  color: #ffffff;
+  outline: 0;
+}
+
+body[data-view="owned"] .franchise-control,
+body[data-view="owned"] .series-tabs,
+body[data-view="owned"] .filter-panel,
+body[data-view="wanted"] .franchise-control,
+body[data-view="wanted"] .series-tabs,
+body[data-view="wanted"] .filter-panel {
+  display: none;
+}
+
+body[data-view="owned"] .top-bar,
+body[data-view="wanted"] .top-bar {
+  grid-template-columns: auto 32px;
+}
+
 .section-head {
   margin-bottom: 12px;
 }
@@ -641,6 +710,137 @@ h1 {
   white-space: nowrap;
 }
 
+.sync-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sync-dot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--muted);
+}
+
+.sync-state[data-status="connected"] .sync-dot,
+.sync-state[data-status="saving"] .sync-dot {
+  background: #1f8b4c;
+}
+
+.sync-state[data-status="readonly"] .sync-dot {
+  background: var(--accent-gold);
+}
+
+.sync-state[data-status="error"] .sync-dot {
+  background: var(--accent);
+}
+
+.sync-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.sync-grid label,
+.series-name-field {
+  min-width: 0;
+}
+
+.sync-grid span,
+.series-name-field span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.sync-grid input,
+.series-name-field input {
+  width: 100%;
+  min-height: 36px;
+  min-width: 0;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #ffffff;
+  color: var(--ink);
+}
+
+.sync-actions,
+.series-admin-actions,
+.correction-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sync-actions {
+  margin-top: 10px;
+}
+
+.sync-actions button,
+.install-button {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #ffffff;
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.sync-actions button:hover,
+.sync-actions button:focus-visible,
+.install-button:hover,
+.install-button:focus-visible {
+  border-color: var(--accent-blue);
+  outline: 0;
+}
+
+.settings-hint {
+  margin-top: 10px;
+}
+
+.install-button {
+  margin-top: 10px;
+}
+
+.issue-list {
+  display: grid;
+  gap: 8px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.issue-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fafbfc;
+}
+
+.issue-list span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.issue-list strong {
+  min-width: 0;
+  color: var(--ink);
+  font-size: 12px;
+  text-align: right;
+}
+
 .toggle-row {
   min-height: 42px;
   display: flex;
@@ -832,6 +1032,13 @@ h1 {
   color: #ffffff;
 }
 
+.status-actions button:disabled,
+.sync-actions button:disabled,
+.secondary-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
 .detail-meta {
   display: grid;
   grid-template-columns: 92px minmax(0, 1fr);
@@ -989,6 +1196,21 @@ h1 {
   .collection-section {
     grid-template-columns: 1fr;
     gap: 8px;
+  }
+
+  .sync-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .issue-list li {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8px 10px;
+  }
+
+  .issue-list strong {
+    text-align: left;
   }
 
   .filter-body,

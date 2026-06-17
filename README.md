@@ -16,6 +16,8 @@ official and Japanese retail catalog sources instead of hand-entering every kit.
 - `docs/grades.md` - readable Chinese grade reference.
 - `docs/data-model.md` - kit data model and validation rules.
 - `docs/source-plan.md` - source and import strategy.
+- `docs/supabase-setup.sql` - Supabase schema and RPC functions for shared sync.
+- `.github/workflows/refresh-catalog.yml` - scheduled official-source refresh workflow.
 - `scripts/validate_catalog.mjs` - validates grades and kit records.
 - `scripts/catalog_stats.mjs` - prints catalog counts.
 - `scripts/source_coverage.mjs` - reports source coverage and missing source types.
@@ -52,12 +54,10 @@ npm.cmd run import:official
 
 ## Current Status
 
-The catalog currently imports 2,973 records from Japanese official sources:
-2,315 Gunpla records from BANDAI SPIRITS product search plus 658 official Bandai
-Candy and Bandai Gashapon Gundam collectible records. Records include official
-product images, release dates, JPY prices where available, source links, and
-inferred work titles such as `Mobile Suit Gundam SEED Destiny`,
-`Mobile Suit Gundam 00`, or `Mixed Gundam Works`.
+The catalog currently validates 4,029 product records across Gundam, Armored
+Core, and Pokemon lines. Records include official product images, release dates,
+JPY prices where available, source links, and inferred work titles such as
+`Mobile Suit Gundam SEED`, `Mobile Suit Gundam 00`, or `Sangokuden`.
 
 The local website is static. It does not live-fetch official pages while a user
 browses. Run `npm run import:official` to refresh the JSON data from Japanese
@@ -65,6 +65,43 @@ official sources; that command can later be wired to a scheduled job.
 
 The UI supports local manual corrections in the browser. Corrections are stored
 in `localStorage` and can be exported as JSON from a product detail view.
+
+## Android App / PWA
+
+The `app/` UI is installable as an Android PWA. Open the hosted `/app/` URL in
+Chrome on Android and use **Add to Home screen** / **Install app**. The service
+worker caches the app shell, catalog JSON, and product images that have been
+opened, so the app remains usable when the network or official image URLs are
+unreliable.
+
+For a Play Store-style APK later, wrap the same web app with Capacitor after the
+Supabase settings are finalized.
+
+## Shared Supabase Sync
+
+Run `docs/supabase-setup.sql` once in Supabase SQL Editor. Then open the app
+settings and fill:
+
+- Supabase URL
+- Supabase anon key
+- Workspace ID
+- Shared password
+- Optional editor password
+- Member name
+
+Users with the same Workspace ID share collection status, wanted list, manual
+corrections, and series-name corrections. Users with another Workspace ID stay
+independent. If an editor password is set, only devices that know it can upload
+changes; read-only devices can still view the shared state.
+
+Conflict behavior is intentionally simple for now: the latest sync wins, while
+`gunpula_workspace_events` keeps a revision history in Supabase.
+
+## Scheduled Updates
+
+The GitHub Actions workflow `refresh-catalog.yml` runs `npm run import:official`
+and `npm run validate` once a day. If official Japanese source data changes, the
+workflow commits the refreshed JSON and cached assets back to the repository.
 
 ## Next Steps
 

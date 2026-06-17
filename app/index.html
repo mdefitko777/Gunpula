@@ -3,8 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#17191d" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="Gunpla DB" />
     <title>Gunpula Catalog</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css?v=20260617-sync" />
   </head>
   <body>
     <main class="catalog-page">
@@ -59,12 +64,19 @@
 
       <section class="kit-section">
         <div class="section-head">
-          <h2 data-i18n="catalogList">模型列表</h2>
+          <h2 id="sectionTitle" data-i18n="catalogList">模型列表</h2>
           <span id="resultCount">0 results</span>
         </div>
         <div class="kit-grid" id="kitGrid"></div>
       </section>
     </main>
+
+    <nav class="bottom-nav" id="bottomNav" aria-label="主导航">
+      <button type="button" data-view="catalog" class="is-active"><span>⌕</span><strong data-i18n="catalogList">目录</strong></button>
+      <button type="button" data-view="owned"><span>✓</span><strong data-i18n="ownedList">已购买</strong></button>
+      <button type="button" data-view="wanted"><span>☆</span><strong data-i18n="wantedList">想要</strong></button>
+      <button type="button" data-view="settings"><span>⚙</span><strong data-i18n="settings">设置</strong></button>
+    </nav>
 
     <template id="kitCardTemplate">
       <article class="kit-card">
@@ -151,6 +163,55 @@
           <h3 data-i18n="language">语言</h3>
           <div class="segmented-control language-control" id="languageList" aria-label="选择语言"></div>
         </section>
+        <section class="settings-section sync-section">
+          <div class="settings-section-head">
+            <h3 data-i18n="sharedSync">共享同步</h3>
+            <span class="sync-state" id="syncState"><span class="sync-dot"></span><span id="syncStatusText">本地模式</span></span>
+          </div>
+          <div class="sync-grid">
+            <label>
+              <span data-i18n="supabaseUrl">Supabase URL</span>
+              <input id="syncSupabaseUrl" type="url" inputmode="url" autocomplete="off" />
+            </label>
+            <label>
+              <span data-i18n="supabaseAnonKey">Anon key</span>
+              <input id="syncAnonKey" type="password" autocomplete="off" />
+            </label>
+            <label>
+              <span data-i18n="workspaceId">共享空间 ID</span>
+              <input id="syncWorkspaceId" type="text" autocomplete="off" />
+            </label>
+            <label>
+              <span data-i18n="workspaceSecret">共享密码</span>
+              <input id="syncWorkspaceSecret" type="password" autocomplete="off" />
+            </label>
+            <label>
+              <span data-i18n="editorSecret">编辑密码</span>
+              <input id="syncEditorSecret" type="password" autocomplete="off" />
+            </label>
+            <label>
+              <span data-i18n="memberName">你的名字</span>
+              <input id="syncMemberName" type="text" autocomplete="name" />
+            </label>
+          </div>
+          <div class="sync-actions">
+            <button id="saveSyncConfig" type="button" data-i18n="saveSyncConfig">保存并连接</button>
+            <button id="syncNow" type="button" data-i18n="syncNow">立即同步</button>
+            <button id="disconnectSync" type="button" data-i18n="disconnectSync">断开云同步</button>
+          </div>
+          <p class="settings-hint" id="syncHint" data-i18n="syncHint">同一个共享空间 ID 和密码会共用收藏与更正。</p>
+          <button class="install-button" id="installApp" type="button" hidden data-i18n="installApp">安装到手机</button>
+        </section>
+        <section class="settings-section app-health-section">
+          <h3 data-i18n="appHealth">最大问题</h3>
+          <ul class="issue-list">
+            <li><span data-i18n="issueInstall">安卓安装</span><strong data-i18n="issueInstallStatus">已支持 PWA</strong></li>
+            <li><span data-i18n="issueSync">两人数据互通</span><strong id="issueSyncStatus">未配置云端</strong></li>
+            <li><span data-i18n="issueImages">官方图片稳定性</span><strong data-i18n="issueImagesStatus">已启用本机图片缓存</strong></li>
+            <li><span data-i18n="issueRefresh">官方数据更新</span><strong data-i18n="issueRefreshStatus">已提供定时刷新工作流</strong></li>
+            <li><span data-i18n="issueConflict">冲突处理</span><strong data-i18n="issueConflictStatus">后同步覆盖，显示最后修改</strong></li>
+          </ul>
+        </section>
         <section class="settings-section">
           <label class="toggle-row">
             <span data-i18n="consoleMode">控制台模式</span>
@@ -185,6 +246,6 @@
       </div>
     </dialog>
 
-    <script type="module" src="./main.js"></script>
+    <script type="module" src="./main.js?v=20260617-sync"></script>
   </body>
 </html>
