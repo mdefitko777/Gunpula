@@ -200,14 +200,16 @@ h1 {
   outline: 0;
 }
 
-.filter-panel {
+.filter-panel,
+.series-admin-panel {
   margin-top: 10px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
 }
 
-.filter-panel summary {
+.filter-panel summary,
+.series-admin-panel summary {
   min-height: 40px;
   display: flex;
   align-items: center;
@@ -218,7 +220,8 @@ h1 {
   font-weight: 900;
 }
 
-.filter-panel summary span:last-child {
+.filter-panel summary span:last-child,
+.series-admin-panel summary span:last-child {
   min-width: 0;
   color: var(--muted);
   font-size: 12px;
@@ -228,7 +231,8 @@ h1 {
   white-space: nowrap;
 }
 
-.filter-body {
+.filter-body,
+.series-admin-body {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
@@ -236,19 +240,26 @@ h1 {
   border-top: 1px solid var(--line);
 }
 
-.select-filter {
+.series-admin-body {
+  grid-template-columns: minmax(0, 1.2fr) minmax(120px, 0.6fr) minmax(0, 1fr);
+}
+
+.select-filter,
+.series-name-field {
   display: grid;
   gap: 6px;
 }
 
 .select-filter span,
+.series-name-field span,
 .filter-label {
   color: var(--muted);
   font-size: 12px;
   font-weight: 900;
 }
 
-.select-filter select {
+.select-filter select,
+.series-name-field input {
   min-width: 0;
   height: 38px;
   padding: 0 10px;
@@ -256,6 +267,30 @@ h1 {
   border-radius: 6px;
   background: #ffffff;
   color: var(--ink);
+}
+
+.series-admin-actions {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.series-admin-actions button {
+  min-height: 38px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #ffffff;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.series-admin-actions button:hover,
+.series-admin-actions button:focus-visible {
+  border-color: var(--accent);
+  outline: 0;
 }
 
 .section-head {
@@ -603,7 +638,8 @@ h1 {
 }
 
 .correction-form input:focus,
-.correction-form select:focus {
+.correction-form select:focus,
+.series-name-field input:focus {
   border-color: var(--accent);
   outline: 0;
 }
@@ -668,7 +704,12 @@ h1 {
     min-width: 34px;
   }
 
-  .filter-body {
+  .filter-body,
+  .series-admin-body {
+    grid-template-columns: 1fr;
+  }
+
+  .series-admin-actions {
     grid-template-columns: 1fr;
   }
 
@@ -764,14 +805,16 @@ h1 {
     display: none;
   }
 
-  .filter-panel summary {
+  .filter-panel summary,
+  .series-admin-panel summary {
     align-items: center;
     flex-direction: row;
     min-height: 38px;
     padding: 0 11px;
   }
 
-  .filter-panel summary span:last-child {
+  .filter-panel summary span:last-child,
+  .series-admin-panel summary span:last-child {
     width: auto;
     text-align: right;
   }

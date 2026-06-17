@@ -44,6 +44,31 @@
             </label>
           </div>
         </details>
+        <details class="series-admin-panel" id="seriesAdminPanel">
+          <summary>
+            <span data-i18n="seriesAdmin">系列名称</span>
+            <span id="seriesAdminSummary">当前分类 · 当前语言</span>
+          </summary>
+          <div class="series-admin-body">
+            <label class="select-filter">
+              <span data-i18n="workSource">系列</span>
+              <select id="seriesAdminSeries"></select>
+            </label>
+            <label class="select-filter">
+              <span data-i18n="displayLanguage">显示语言</span>
+              <select id="seriesAdminLanguage"></select>
+            </label>
+            <label class="series-name-field">
+              <span data-i18n="seriesName">系列名</span>
+              <input id="seriesAdminLabel" type="text" />
+            </label>
+            <div class="series-admin-actions">
+              <button id="saveSeriesLabel" type="button" data-i18n="saveSeriesName">保存系列名</button>
+              <button id="clearSeriesLabel" type="button" data-i18n="clearSeriesName">清除本语言</button>
+              <button id="exportSeriesLabels" type="button" data-i18n="exportSeriesNames">导出系列名</button>
+            </div>
+          </div>
+        </details>
       </header>
 
       <section class="kit-section">
@@ -107,8 +132,8 @@
                 <input id="editSubline" type="text" />
               </label>
               <label>
-                <span data-i18n="workSource">作品出处</span>
-                <input id="editWorkTitle" type="text" placeholder="例如 SEED / 00 / W" />
+                <span data-i18n="workSource">系列</span>
+                <select id="editSeriesKey"></select>
               </label>
               <label>
                 <span data-i18n="universe">宇宙 / 纪年</span>

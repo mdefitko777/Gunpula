@@ -1,6 +1,8 @@
 const LANGUAGE_KEY = "gunpula-catalog-language-v1";
 const FRANCHISE_KEY = "gunpula-catalog-franchise-v1";
 const OVERRIDE_KEY = "gunpula-catalog-overrides-v1";
+const SERIES_LABEL_OVERRIDE_KEY = "gunpula-catalog-series-labels-v1";
+const VIEW_STATE_KEY = "gunpula-catalog-view-state-v1";
 
 const LANGUAGES = [
   { code: "zh", label: "中", htmlLang: "zh-CN" },
@@ -56,6 +58,12 @@ const TRANSLATIONS = {
     catalogList: "目录",
     officialPage: "官方商品页",
     manualCorrection: "手动更正",
+    seriesAdmin: "系列名称",
+    displayLanguage: "显示语言",
+    seriesName: "系列名",
+    saveSeriesName: "保存系列名",
+    clearSeriesName: "清除本语言",
+    exportSeriesNames: "导出系列名",
     nameZh: "中文名",
     nameKo: "韩文名",
     nameEn: "英文名",
@@ -95,6 +103,12 @@ const TRANSLATIONS = {
     catalogList: "목록",
     officialPage: "공식 상품 페이지",
     manualCorrection: "수동 수정",
+    seriesAdmin: "시리즈 이름",
+    displayLanguage: "표시 언어",
+    seriesName: "시리즈명",
+    saveSeriesName: "시리즈명 저장",
+    clearSeriesName: "이 언어 초기화",
+    exportSeriesNames: "시리즈명 내보내기",
     nameZh: "중국어 이름",
     nameKo: "한국어 이름",
     nameEn: "영어 이름",
@@ -134,6 +148,12 @@ const TRANSLATIONS = {
     catalogList: "Catalog",
     officialPage: "Official product page",
     manualCorrection: "Manual correction",
+    seriesAdmin: "Series names",
+    displayLanguage: "Display language",
+    seriesName: "Series name",
+    saveSeriesName: "Save series name",
+    clearSeriesName: "Clear language",
+    exportSeriesNames: "Export series names",
     nameZh: "Chinese name",
     nameKo: "Korean name",
     nameEn: "English name",
@@ -173,6 +193,12 @@ const TRANSLATIONS = {
     catalogList: "一覧",
     officialPage: "公式商品ページ",
     manualCorrection: "手動修正",
+    seriesAdmin: "シリーズ名",
+    displayLanguage: "表示言語",
+    seriesName: "シリーズ名",
+    saveSeriesName: "シリーズ名を保存",
+    clearSeriesName: "この言語をクリア",
+    exportSeriesNames: "シリーズ名を出力",
     nameZh: "中国語名",
     nameKo: "韓国語名",
     nameEn: "英語名",
@@ -205,18 +231,24 @@ const TRANSLATIONS = {
   },
 };
 
+const INITIAL_VIEW_STATE = loadSavedViewState();
+
 const state = {
   rawKits: [],
   kits: [],
   grades: [],
   sources: [],
   overrides: {},
+  seriesLabelOverrides: {},
   updatedAt: null,
-  query: "",
-  franchise: localStorage.getItem(FRANCHISE_KEY) || "gundam",
-  language: localStorage.getItem(LANGUAGE_KEY) || "zh",
-  grade: "all",
-  series: "all",
+  query: INITIAL_VIEW_STATE.query || "",
+  franchise: INITIAL_VIEW_STATE.franchise || localStorage.getItem(FRANCHISE_KEY) || "gundam",
+  language: INITIAL_VIEW_STATE.language || localStorage.getItem(LANGUAGE_KEY) || "zh",
+  grade: INITIAL_VIEW_STATE.grade || "all",
+  series: INITIAL_VIEW_STATE.series || "all",
+  pendingKitId: INITIAL_VIEW_STATE.kit || null,
+  seriesAdminKey: null,
+  seriesAdminLanguage: INITIAL_VIEW_STATE.language || localStorage.getItem(LANGUAGE_KEY) || "zh",
   selectedKit: null,
   selectedImageIndex: 0,
 };
@@ -250,11 +282,18 @@ const elements = {
   editNameJa: document.querySelector("#editNameJa"),
   editGradeCode: document.querySelector("#editGradeCode"),
   editSubline: document.querySelector("#editSubline"),
-  editWorkTitle: document.querySelector("#editWorkTitle"),
+  editSeriesKey: document.querySelector("#editSeriesKey"),
   editUniverse: document.querySelector("#editUniverse"),
   saveCorrection: document.querySelector("#saveCorrection"),
   clearCorrection: document.querySelector("#clearCorrection"),
   exportCorrections: document.querySelector("#exportCorrections"),
+  seriesAdminSummary: document.querySelector("#seriesAdminSummary"),
+  seriesAdminSeries: document.querySelector("#seriesAdminSeries"),
+  seriesAdminLanguage: document.querySelector("#seriesAdminLanguage"),
+  seriesAdminLabel: document.querySelector("#seriesAdminLabel"),
+  saveSeriesLabel: document.querySelector("#saveSeriesLabel"),
+  clearSeriesLabel: document.querySelector("#clearSeriesLabel"),
+  exportSeriesLabels: document.querySelector("#exportSeriesLabels"),
 };
 
 async function loadJson(path) {
@@ -263,6 +302,81 @@ async function loadJson(path) {
     throw new Error(`Failed to load ${path}`);
   }
   return response.json();
+}
+
+function loadSavedViewState() {
+  let stored = {};
+  try {
+    const parsed = JSON.parse(localStorage.getItem(VIEW_STATE_KEY) || "{}");
+    stored = parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    stored = {};
+  }
+
+  const hash = window.location.hash.startsWith("#") ? window.location.hash.slice(1) : "";
+  const params = new URLSearchParams(hash);
+  if (!hash) {
+    return stored;
+  }
+
+  const fromHash = {};
+  fromHash.language = params.get("lang") || params.get("language") || stored.language;
+  fromHash.franchise = params.get("franchise") || stored.franchise;
+  fromHash.series = params.get("series") || "all";
+  fromHash.grade = params.get("grade") || "all";
+  fromHash.query = params.get("q") || params.get("query") || "";
+  fromHash.kit = params.has("kit") ? params.get("kit") : null;
+
+  return fromHash;
+}
+
+function currentViewState() {
+  return {
+    language: state.language,
+    franchise: state.franchise,
+    series: state.series,
+    grade: state.grade,
+    query: state.query,
+    kit: state.selectedKit?.kit_id || null,
+  };
+}
+
+function persistViewState() {
+  const viewState = currentViewState();
+  localStorage.setItem(VIEW_STATE_KEY, JSON.stringify(viewState));
+
+  const params = new URLSearchParams();
+  if (viewState.language) params.set("lang", viewState.language);
+  if (viewState.franchise) params.set("franchise", viewState.franchise);
+  if (viewState.series && viewState.series !== "all") params.set("series", viewState.series);
+  if (viewState.grade && viewState.grade !== "all") params.set("grade", viewState.grade);
+  if (viewState.query) params.set("q", viewState.query);
+  if (viewState.kit) params.set("kit", viewState.kit);
+
+  const nextHash = params.toString();
+  const nextUrl = `${window.location.pathname}${window.location.search}${nextHash ? `#${nextHash}` : ""}`;
+  window.history.replaceState(null, "", nextUrl);
+}
+
+function applyViewState(viewState) {
+  state.language = viewState.language || state.language;
+  state.seriesAdminLanguage = state.language;
+  state.franchise = viewState.franchise || state.franchise;
+  state.series = viewState.series || "all";
+  state.grade = viewState.grade || "all";
+  state.query = viewState.query || "";
+  state.selectedKit = viewState.kit ? displayKitById(viewState.kit) : null;
+  normalizeState();
+  render();
+  if (state.selectedKit) {
+    renderDetail(state.selectedKit);
+    if (!elements.detailDialog.open) {
+      elements.detailDialog.showModal();
+    }
+  } else if (elements.detailDialog.open) {
+    elements.detailDialog.close();
+  }
+  persistViewState();
 }
 
 async function init() {
@@ -276,12 +390,19 @@ async function init() {
   state.rawKits = kitsDoc.kits;
   state.sources = sourcesDoc.sources;
   state.overrides = loadOverrides();
+  state.seriesLabelOverrides = loadSeriesLabelOverrides();
   state.updatedAt = kitsDoc.updated_at;
   refreshKits();
   normalizeState();
+  state.selectedKit = state.pendingKitId ? displayKitById(state.pendingKitId) : null;
 
   bindEvents();
   render();
+  if (state.selectedKit) {
+    renderDetail(state.selectedKit);
+    elements.detailDialog.showModal();
+  }
+  persistViewState();
 }
 
 function normalizeState() {
@@ -290,6 +411,9 @@ function normalizeState() {
   }
   if (!LANGUAGES.some((language) => language.code === state.language)) {
     state.language = "zh";
+  }
+  if (!LANGUAGES.some((language) => language.code === state.seriesAdminLanguage)) {
+    state.seriesAdminLanguage = state.language;
   }
 }
 
@@ -302,12 +426,42 @@ function loadOverrides() {
   }
 }
 
+function loadSeriesLabelOverrides() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(SERIES_LABEL_OVERRIDE_KEY) || "{}");
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
 function saveOverrides() {
   localStorage.setItem(OVERRIDE_KEY, JSON.stringify(state.overrides, null, 2));
 }
 
+function saveSeriesLabelOverrides() {
+  localStorage.setItem(SERIES_LABEL_OVERRIDE_KEY, JSON.stringify(state.seriesLabelOverrides, null, 2));
+}
+
 function refreshKits() {
   state.kits = state.rawKits.map((kit) => applyOverride(kit));
+}
+
+function rawSeriesTemplateByKey(key) {
+  if (!key) {
+    return null;
+  }
+  for (const rawKit of state.rawKits) {
+    const series = normalizeKit(rawKit).series;
+    if (series?.key === key) {
+      return structuredClone(series);
+    }
+  }
+  return {
+    key,
+    sort: 999,
+    labels: { zh: key, en: key, ja: key, ko: key },
+  };
 }
 
 function applyOverride(kit) {
@@ -318,19 +472,23 @@ function applyOverride(kit) {
 
   const normalized = normalizeKit(kit);
   const names = { ...normalized.names };
+  let series = normalized.series;
   for (const code of ["zh", "ko", "en", "ja"]) {
     const key = `name_${code}`;
     if (Object.hasOwn(override, key)) {
       names[code] = override[key];
     }
   }
+  if (Object.hasOwn(override, "series_key")) {
+    series = rawSeriesTemplateByKey(override.series_key);
+  }
 
   return {
     ...normalized,
     names,
+    series,
     grade_code: Object.hasOwn(override, "grade_code") ? override.grade_code : normalized.grade_code,
     subline: Object.hasOwn(override, "subline") ? override.subline : normalized.subline,
-    work_title: Object.hasOwn(override, "work_title") ? override.work_title : normalized.work_title,
     universe: Object.hasOwn(override, "universe") ? override.universe : normalized.universe,
     local_override: override,
   };
@@ -363,19 +521,23 @@ function displayKitById(kitId) {
 function bindEvents() {
   elements.searchInput.addEventListener("input", (event) => {
     state.query = event.target.value;
+    persistViewState();
     renderKits();
   });
   elements.seriesSelect.addEventListener("change", (event) => {
     state.series = event.target.value;
     renderSeriesControls();
     renderGradeSelect();
+    renderSeriesAdmin();
     renderFilterSummary();
+    persistViewState();
     renderKits();
   });
   elements.gradeSelect.addEventListener("change", (event) => {
     state.grade = event.target.value;
     renderGradeSelect();
     renderFilterSummary();
+    persistViewState();
     renderKits();
   });
 
@@ -386,6 +548,18 @@ function bindEvents() {
   elements.saveCorrection.addEventListener("click", saveCurrentCorrection);
   elements.clearCorrection.addEventListener("click", clearCurrentCorrection);
   elements.exportCorrections.addEventListener("click", exportCorrections);
+  elements.detailOfficialLink.addEventListener("click", persistViewState);
+  elements.seriesAdminSeries.addEventListener("change", () => {
+    state.seriesAdminKey = elements.seriesAdminSeries.value;
+    updateSeriesAdminLabelField();
+  });
+  elements.seriesAdminLanguage.addEventListener("change", () => {
+    state.seriesAdminLanguage = elements.seriesAdminLanguage.value;
+    updateSeriesAdminLabelField();
+  });
+  elements.saveSeriesLabel.addEventListener("click", saveCurrentSeriesLabel);
+  elements.clearSeriesLabel.addEventListener("click", clearCurrentSeriesLabel);
+  elements.exportSeriesLabels.addEventListener("click", exportSeriesLabels);
   elements.detailDialog.addEventListener("click", (event) => {
     if (event.target === elements.detailDialog) {
       closeDetail();
@@ -395,6 +569,9 @@ function bindEvents() {
     if (event.key === "Escape" && elements.detailDialog.open) {
       closeDetail();
     }
+  });
+  window.addEventListener("hashchange", () => {
+    applyViewState(loadSavedViewState());
   });
 
   populateGradeSelect();
@@ -428,25 +605,52 @@ function populateGradeSelect() {
   }
 }
 
+function populateCorrectionSeriesSelect(franchise, selectedKey) {
+  const entries = seriesEntriesForFranchise(franchise);
+  elements.editSeriesKey.innerHTML = "";
+  for (const [key, entry] of entries) {
+    elements.editSeriesKey.append(makeOption(key, `${seriesLabelFromKey(key)} (${entry.count})`));
+  }
+  if (selectedKey && !entries.some(([key]) => key === selectedKey)) {
+    elements.editSeriesKey.prepend(makeOption(selectedKey, seriesLabelFromKey(selectedKey)));
+  }
+  elements.editSeriesKey.value = selectedKey || entries[0]?.[0] || "other";
+}
+
 function fillCorrectionForm(kit) {
   const rawKit = normalizeKit(rawKitById(kit.kit_id) || kit);
+  const currentSeriesKey = kitSeriesKey(kit);
+  populateCorrectionSeriesSelect(kit.franchise, currentSeriesKey);
   elements.editNameZh.value = kit.names?.zh || "";
   elements.editNameKo.value = kit.names?.ko || "";
   elements.editNameEn.value = kit.names?.en || "";
   elements.editNameJa.value = kit.names?.ja || "";
   elements.editGradeCode.value = kit.grade_code;
   elements.editSubline.value = kit.subline || "";
-  elements.editWorkTitle.value = kit.work_title || "";
+  elements.editSeriesKey.value = currentSeriesKey;
   elements.editUniverse.value = kit.universe || "";
-  elements.clearCorrection.disabled = !state.overrides[kit.kit_id];
+  elements.clearCorrection.disabled = false;
   elements.correctionForm.dataset.rawNameZh = rawKit.names?.zh || "";
   elements.correctionForm.dataset.rawNameKo = rawKit.names?.ko || "";
   elements.correctionForm.dataset.rawNameEn = rawKit.names?.en || "";
   elements.correctionForm.dataset.rawNameJa = rawKit.names?.ja || "";
   elements.correctionForm.dataset.rawGradeCode = rawKit.grade_code || "";
   elements.correctionForm.dataset.rawSubline = rawKit.subline || "";
-  elements.correctionForm.dataset.rawWorkTitle = rawKit.work_title || "";
+  elements.correctionForm.dataset.rawSeriesKey = kitSeriesKey(rawKit);
   elements.correctionForm.dataset.rawUniverse = rawKit.universe || "";
+}
+
+function resetCorrectionFormToRaw(kit) {
+  const rawKit = normalizeKit(rawKitById(kit.kit_id) || kit);
+  populateCorrectionSeriesSelect(rawKit.franchise, kitSeriesKey(rawKit));
+  elements.editNameZh.value = rawKit.names?.zh || "";
+  elements.editNameKo.value = rawKit.names?.ko || "";
+  elements.editNameEn.value = rawKit.names?.en || "";
+  elements.editNameJa.value = rawKit.names?.ja || "";
+  elements.editGradeCode.value = rawKit.grade_code || "";
+  elements.editSubline.value = rawKit.subline || "";
+  elements.editSeriesKey.value = kitSeriesKey(rawKit);
+  elements.editUniverse.value = rawKit.universe || "";
 }
 
 function correctionValue(inputValue, rawValue) {
@@ -472,7 +676,7 @@ function saveCurrentCorrection() {
     name_ja: correctionValue(elements.editNameJa.value, form.rawNameJa),
     grade_code: correctionValue(elements.editGradeCode.value, form.rawGradeCode),
     subline: correctionValue(elements.editSubline.value, form.rawSubline),
-    work_title: correctionValue(elements.editWorkTitle.value, form.rawWorkTitle),
+    series_key: correctionValue(elements.editSeriesKey.value, form.rawSeriesKey),
     universe: correctionValue(elements.editUniverse.value, form.rawUniverse),
   };
 
@@ -500,9 +704,14 @@ function clearCurrentCorrection() {
   if (!kit) {
     return;
   }
-  delete state.overrides[kit.kit_id];
-  saveOverrides();
-  refreshAfterOverride(kit.kit_id);
+  if (state.overrides[kit.kit_id]) {
+    delete state.overrides[kit.kit_id];
+    saveOverrides();
+    refreshAfterOverride(kit.kit_id);
+    return;
+  }
+
+  resetCorrectionFormToRaw(kit);
 }
 
 function refreshAfterOverride(kitId) {
@@ -512,11 +721,13 @@ function refreshAfterOverride(kitId) {
   renderFranchiseFilters();
   renderGradeFilters();
   renderWorkFilters();
+  renderSeriesAdmin();
   renderFilterSummary();
   renderKits();
   if (nextKit && elements.detailDialog.open) {
     renderDetail(nextKit);
   }
+  persistViewState();
 }
 
 function exportCorrections() {
@@ -524,6 +735,7 @@ function exportCorrections() {
     schema_version: 1,
     updated_at: new Date().toISOString(),
     overrides: state.overrides,
+    series_label_overrides: state.seriesLabelOverrides,
   };
   const blob = new Blob([`${JSON.stringify(payload, null, 2)}\n`], { type: "application/json" });
   const link = document.createElement("a");
@@ -536,11 +748,13 @@ function exportCorrections() {
 function render() {
   translateStaticText();
   populateGradeSelect();
+  elements.searchInput.value = state.query;
   elements.datasetSummary.textContent = datasetSummary();
   renderLanguageControls();
   renderFranchiseFilters();
   renderSeriesControls();
   renderGradeSelect();
+  renderSeriesAdmin();
   renderFilterSummary();
   renderKits();
 }
@@ -588,8 +802,17 @@ function kitSeriesSort(kit) {
   return Number.isFinite(kit.series?.sort) ? kit.series.sort : 999;
 }
 
+function baseSeriesLabel(series, language = state.language) {
+  return series?.labels?.[language] ?? series?.labels?.zh ?? series?.labels?.en ?? series?.key ?? t("pending");
+}
+
+function seriesLabelFromSeries(series, language = state.language) {
+  const key = series?.key;
+  return (key && state.seriesLabelOverrides[key]?.[language]) || baseSeriesLabel(series, language);
+}
+
 function seriesLabelFromKit(kit) {
-  return kit.series?.labels?.[state.language] ?? kit.series?.labels?.zh ?? kit.series?.labels?.en ?? kit.work_title ?? t("pending");
+  return seriesLabelFromSeries(kit.series) || kit.work_title || t("pending");
 }
 
 function seriesLabelFromKey(key) {
@@ -597,7 +820,17 @@ function seriesLabelFromKey(key) {
     return t("allWorks");
   }
   const sample = state.kits.find((kit) => kitSeriesKey(kit) === key);
-  return sample ? seriesLabelFromKit(sample) : key;
+  return sample ? seriesLabelFromKit(sample) : (state.seriesLabelOverrides[key]?.[state.language] ?? key);
+}
+
+function seriesLabelForLanguage(key, language) {
+  const sample = state.kits.find((kit) => kitSeriesKey(kit) === key);
+  return sample ? seriesLabelFromSeries(sample.series, language) : (state.seriesLabelOverrides[key]?.[language] ?? key);
+}
+
+function baseSeriesLabelForLanguage(key, language) {
+  const sample = state.kits.find((kit) => kitSeriesKey(kit) === key);
+  return sample ? baseSeriesLabel(sample.series, language) : key;
 }
 
 function kitDisplayName(kit) {
@@ -671,11 +904,13 @@ function renderLanguageControls() {
     button.textContent = language.label;
     button.addEventListener("click", () => {
       state.language = language.code;
+      state.seriesAdminLanguage = language.code;
       localStorage.setItem(LANGUAGE_KEY, state.language);
       render();
       if (state.selectedKit && elements.detailDialog.open) {
         renderDetail(state.selectedKit);
       }
+      persistViewState();
     });
     elements.languageList.append(button);
   }
@@ -697,24 +932,31 @@ function renderFranchiseFilters() {
       state.franchise = franchise;
       state.grade = "all";
       state.series = "all";
+      state.selectedKit = null;
       localStorage.setItem(FRANCHISE_KEY, state.franchise);
       render();
+      persistViewState();
     });
     elements.franchiseList.append(button);
   }
 }
 
-function seriesCountsForCurrentFranchise() {
-  const kits = kitsForCurrentFranchise();
+function seriesEntriesForFranchise(franchise) {
+  const kits = state.kits.filter((kit) => kit.franchise === franchise);
   const counts = new Map();
   for (const kit of kits) {
     const key = kitSeriesKey(kit);
     const current = counts.get(key) || { count: 0, sort: kitSeriesSort(kit), label: seriesLabelFromKit(kit) };
     current.count += 1;
     current.sort = Math.min(current.sort, kitSeriesSort(kit));
+    current.label = seriesLabelFromKit(kit);
     counts.set(key, current);
   }
-  return counts;
+  return [...counts.entries()].sort((a, b) => a[1].sort - b[1].sort || b[1].count - a[1].count || a[1].label.localeCompare(b[1].label));
+}
+
+function seriesCountsForCurrentFranchise() {
+  return new Map(seriesEntriesForFranchise(state.franchise));
 }
 
 function renderSeriesControls() {
@@ -724,7 +966,7 @@ function renderSeriesControls() {
     state.series = "all";
   }
 
-  const seriesEntries = [...counts.entries()].sort((a, b) => a[1].sort - b[1].sort || b[1].count - a[1].count || a[1].label.localeCompare(b[1].label));
+  const seriesEntries = [...counts.entries()];
 
   elements.seriesTabs.innerHTML = "";
   elements.seriesTabs.append(makeSeriesTab("all", `${t("allWorks")} ${kits.length}`));
@@ -749,7 +991,9 @@ function makeSeriesTab(key, label) {
     state.series = key;
     renderSeriesControls();
     renderGradeSelect();
+    renderSeriesAdmin();
     renderFilterSummary();
+    persistViewState();
     renderKits();
   });
   return button;
@@ -760,6 +1004,97 @@ function makeOption(value, label) {
   option.value = value;
   option.textContent = label;
   return option;
+}
+
+function renderSeriesAdmin() {
+  const entries = seriesEntriesForFranchise(state.franchise);
+  const preferredKey = state.series !== "all" ? state.series : entries[0]?.[0];
+  if (!state.seriesAdminKey || !entries.some(([key]) => key === state.seriesAdminKey)) {
+    state.seriesAdminKey = preferredKey || "other";
+  }
+  if (!LANGUAGES.some((language) => language.code === state.seriesAdminLanguage)) {
+    state.seriesAdminLanguage = state.language;
+  }
+
+  elements.seriesAdminSeries.innerHTML = "";
+  for (const [key, entry] of entries) {
+    elements.seriesAdminSeries.append(makeOption(key, `${entry.label} (${entry.count})`));
+  }
+  if (!entries.some(([key]) => key === state.seriesAdminKey)) {
+    elements.seriesAdminSeries.append(makeOption(state.seriesAdminKey, seriesLabelFromKey(state.seriesAdminKey)));
+  }
+  elements.seriesAdminSeries.value = state.seriesAdminKey;
+
+  elements.seriesAdminLanguage.innerHTML = "";
+  for (const language of LANGUAGES) {
+    elements.seriesAdminLanguage.append(makeOption(language.code, language.label));
+  }
+  elements.seriesAdminLanguage.value = state.seriesAdminLanguage;
+  updateSeriesAdminLabelField();
+}
+
+function updateSeriesAdminLabelField() {
+  const key = state.seriesAdminKey || elements.seriesAdminSeries.value;
+  const language = state.seriesAdminLanguage || elements.seriesAdminLanguage.value || state.language;
+  elements.seriesAdminLabel.value = seriesLabelForLanguage(key, language);
+  elements.seriesAdminSummary.textContent = `${franchiseLabel(state.franchise)} · ${seriesLabelFromKey(key)} · ${LANGUAGES.find((item) => item.code === language)?.label ?? language}`;
+}
+
+function saveCurrentSeriesLabel() {
+  const key = elements.seriesAdminSeries.value;
+  const language = elements.seriesAdminLanguage.value;
+  const value = elements.seriesAdminLabel.value.trim();
+  const baseValue = baseSeriesLabelForLanguage(key, language);
+
+  if (!key || !language) {
+    return;
+  }
+
+  if (!value || value === baseValue) {
+    delete state.seriesLabelOverrides[key]?.[language];
+  } else {
+    state.seriesLabelOverrides[key] = {
+      ...(state.seriesLabelOverrides[key] || {}),
+      [language]: value,
+    };
+  }
+  if (state.seriesLabelOverrides[key] && !Object.keys(state.seriesLabelOverrides[key]).length) {
+    delete state.seriesLabelOverrides[key];
+  }
+
+  saveSeriesLabelOverrides();
+  render();
+  if (state.selectedKit && elements.detailDialog.open) {
+    renderDetail(state.selectedKit);
+  }
+}
+
+function clearCurrentSeriesLabel() {
+  const key = elements.seriesAdminSeries.value;
+  const language = elements.seriesAdminLanguage.value;
+  delete state.seriesLabelOverrides[key]?.[language];
+  if (state.seriesLabelOverrides[key] && !Object.keys(state.seriesLabelOverrides[key]).length) {
+    delete state.seriesLabelOverrides[key];
+  }
+  saveSeriesLabelOverrides();
+  render();
+  if (state.selectedKit && elements.detailDialog.open) {
+    renderDetail(state.selectedKit);
+  }
+}
+
+function exportSeriesLabels() {
+  const payload = {
+    schema_version: 1,
+    updated_at: new Date().toISOString(),
+    series_label_overrides: state.seriesLabelOverrides,
+  };
+  const blob = new Blob([`${JSON.stringify(payload, null, 2)}\n`], { type: "application/json" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "gunpula-series-labels.json";
+  link.click();
+  URL.revokeObjectURL(link.href);
 }
 
 function renderGradeSelect() {
@@ -860,6 +1195,7 @@ function openDetail(kit) {
 
   renderDetail(kit);
   elements.detailDialog.showModal();
+  persistViewState();
 }
 
 function renderDetail(kit) {
@@ -882,22 +1218,18 @@ function renderDetail(kit) {
 function closeDetail() {
   elements.detailDialog.close();
   state.selectedKit = null;
+  persistViewState();
 }
 
 function renderDetailMeta(kit) {
   const rows = [
     [t("franchise"), franchiseLabel(kit.franchise)],
     [t("workSource"), seriesLabelFromKit(kit)],
-    [t("nameZh"), kit.names.zh || t("pending")],
-    [t("nameKo"), kit.names.ko || t("pending")],
-    [t("nameEn"), kit.names.en || t("pending")],
-    [t("nameJa"), kit.names.ja || t("pending")],
     [t("universe"), kit.universe || t("pending")],
     [t("productLine"), kit.subline && kit.subline !== kit.grade_code ? `${kit.grade_code} / ${kit.subline}` : kit.grade_code],
     [t("scale"), kit.scale || t("pending")],
     [t("release"), kit.release_date || t("pending")],
     [t("price"), formatPrice(kit.price_jpy)],
-    [t("correctionStatus"), state.overrides[kit.kit_id] ? t("corrected") : t("imported")],
   ];
 
   elements.detailMeta.innerHTML = "";
