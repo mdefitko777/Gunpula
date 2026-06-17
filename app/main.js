@@ -3,6 +3,8 @@ const FRANCHISE_KEY = "gunpula-catalog-franchise-v1";
 const OVERRIDE_KEY = "gunpula-catalog-overrides-v1";
 const SERIES_LABEL_OVERRIDE_KEY = "gunpula-catalog-series-labels-v1";
 const VIEW_STATE_KEY = "gunpula-catalog-view-state-v1";
+const CONSOLE_MODE_KEY = "gunpula-catalog-console-mode-v1";
+const COLLECTION_KEY = "gunpula-catalog-collection-v1";
 
 const LANGUAGES = [
   { code: "zh", label: "中", htmlLang: "zh-CN" },
@@ -16,6 +18,12 @@ const FRANCHISES = ["gundam", "armored_core", "pokemon"];
 const FRANCHISE_LABELS = {
   gundam: { zh: "高达", ko: "건담", en: "Gundam", ja: "ガンダム" },
   armored_core: { zh: "Armored Core", ko: "아머드 코어", en: "Armored Core", ja: "アーマード・コア" },
+  pokemon: { zh: "宝可梦", ko: "포켓몬", en: "Pokemon", ja: "ポケモン" },
+};
+
+const FRANCHISE_SHORT_LABELS = {
+  gundam: { zh: "高达", ko: "건담", en: "Gundam", ja: "Gundam" },
+  armored_core: { zh: "AC", ko: "AC", en: "AC", ja: "AC" },
   pokemon: { zh: "宝可梦", ko: "포켓몬", en: "Pokemon", ja: "ポケモン" },
 };
 
@@ -56,6 +64,18 @@ const TRANSLATIONS = {
     productLine: "产品线",
     workSource: "系列",
     catalogList: "目录",
+    settings: "设置",
+    closeSettings: "关闭设置",
+    language: "语言",
+    consoleMode: "控制台模式",
+    ownedList: "已购买",
+    wantedList: "想要",
+    markOwned: "已购买",
+    unmarkOwned: "取消已购买",
+    markWanted: "想要",
+    unmarkWanted: "取消想要",
+    previousImage: "上一张",
+    nextImage: "下一张",
     officialPage: "官方商品页",
     manualCorrection: "手动更正",
     seriesAdmin: "系列名称",
@@ -101,6 +121,18 @@ const TRANSLATIONS = {
     productLine: "제품 라인",
     workSource: "시리즈",
     catalogList: "목록",
+    settings: "설정",
+    closeSettings: "설정 닫기",
+    language: "언어",
+    consoleMode: "콘솔 모드",
+    ownedList: "구매함",
+    wantedList: "원함",
+    markOwned: "구매함",
+    unmarkOwned: "구매함 해제",
+    markWanted: "원함",
+    unmarkWanted: "원함 해제",
+    previousImage: "이전 이미지",
+    nextImage: "다음 이미지",
     officialPage: "공식 상품 페이지",
     manualCorrection: "수동 수정",
     seriesAdmin: "시리즈 이름",
@@ -146,6 +178,18 @@ const TRANSLATIONS = {
     productLine: "Product line",
     workSource: "Series",
     catalogList: "Catalog",
+    settings: "Settings",
+    closeSettings: "Close settings",
+    language: "Language",
+    consoleMode: "Console mode",
+    ownedList: "Owned",
+    wantedList: "Wanted",
+    markOwned: "Owned",
+    unmarkOwned: "Remove owned",
+    markWanted: "Wanted",
+    unmarkWanted: "Remove wanted",
+    previousImage: "Previous image",
+    nextImage: "Next image",
     officialPage: "Official product page",
     manualCorrection: "Manual correction",
     seriesAdmin: "Series names",
@@ -191,6 +235,18 @@ const TRANSLATIONS = {
     productLine: "商品ライン",
     workSource: "シリーズ",
     catalogList: "一覧",
+    settings: "設定",
+    closeSettings: "設定を閉じる",
+    language: "言語",
+    consoleMode: "コンソールモード",
+    ownedList: "購入済み",
+    wantedList: "欲しい",
+    markOwned: "購入済み",
+    unmarkOwned: "購入済み解除",
+    markWanted: "欲しい",
+    unmarkWanted: "欲しい解除",
+    previousImage: "前の画像",
+    nextImage: "次の画像",
     officialPage: "公式商品ページ",
     manualCorrection: "手動修正",
     seriesAdmin: "シリーズ名",
@@ -240,6 +296,7 @@ const state = {
   sources: [],
   overrides: {},
   seriesLabelOverrides: {},
+  collection: { owned: [], wanted: [] },
   updatedAt: null,
   query: INITIAL_VIEW_STATE.query || "",
   franchise: INITIAL_VIEW_STATE.franchise || localStorage.getItem(FRANCHISE_KEY) || "gundam",
@@ -249,12 +306,26 @@ const state = {
   pendingKitId: INITIAL_VIEW_STATE.kit || null,
   seriesAdminKey: null,
   seriesAdminLanguage: INITIAL_VIEW_STATE.language || localStorage.getItem(LANGUAGE_KEY) || "zh",
+  consoleMode: loadConsoleMode(),
   selectedKit: null,
   selectedImageIndex: 0,
+  swipeStartX: null,
+  swipeStartY: null,
 };
 
 const elements = {
   datasetSummary: document.querySelector("#datasetSummary"),
+  settingsOpen: document.querySelector("#settingsOpen"),
+  settingsDialog: document.querySelector("#settingsDialog"),
+  settingsClose: document.querySelector("#settingsClose"),
+  consoleModeToggle: document.querySelector("#consoleModeToggle"),
+  collectionSection: document.querySelector("#collectionSection"),
+  ownedPanel: document.querySelector("#ownedPanel"),
+  wantedPanel: document.querySelector("#wantedPanel"),
+  ownedCount: document.querySelector("#ownedCount"),
+  wantedCount: document.querySelector("#wantedCount"),
+  ownedStrip: document.querySelector("#ownedStrip"),
+  wantedStrip: document.querySelector("#wantedStrip"),
   searchInput: document.querySelector("#searchInput"),
   filterSummary: document.querySelector("#filterSummary"),
   franchiseList: document.querySelector("#franchiseList"),
@@ -268,12 +339,17 @@ const elements = {
   detailDialog: document.querySelector("#detailDialog"),
   detailClose: document.querySelector("#detailClose"),
   detailMainImage: document.querySelector("#detailMainImage"),
+  galleryPrev: document.querySelector("#galleryPrev"),
+  galleryNext: document.querySelector("#galleryNext"),
   detailThumbs: document.querySelector("#detailThumbs"),
   detailKicker: document.querySelector("#detailKicker"),
   detailTitle: document.querySelector("#detailTitle"),
   detailSubtitle: document.querySelector("#detailSubtitle"),
+  toggleOwned: document.querySelector("#toggleOwned"),
+  toggleWanted: document.querySelector("#toggleWanted"),
   detailMeta: document.querySelector("#detailMeta"),
   detailOfficialLink: document.querySelector("#detailOfficialLink"),
+  correctionPanel: document.querySelector(".correction-panel"),
   editToggle: document.querySelector("#editToggle"),
   correctionForm: document.querySelector("#correctionForm"),
   editNameZh: document.querySelector("#editNameZh"),
@@ -287,6 +363,7 @@ const elements = {
   saveCorrection: document.querySelector("#saveCorrection"),
   clearCorrection: document.querySelector("#clearCorrection"),
   exportCorrections: document.querySelector("#exportCorrections"),
+  seriesAdminPanel: document.querySelector("#seriesAdminPanel"),
   seriesAdminSummary: document.querySelector("#seriesAdminSummary"),
   seriesAdminSeries: document.querySelector("#seriesAdminSeries"),
   seriesAdminLanguage: document.querySelector("#seriesAdminLanguage"),
@@ -391,6 +468,7 @@ async function init() {
   state.sources = sourcesDoc.sources;
   state.overrides = loadOverrides();
   state.seriesLabelOverrides = loadSeriesLabelOverrides();
+  state.collection = loadCollection();
   state.updatedAt = kitsDoc.updated_at;
   refreshKits();
   normalizeState();
@@ -435,12 +513,38 @@ function loadSeriesLabelOverrides() {
   }
 }
 
+function loadConsoleMode() {
+  return localStorage.getItem(CONSOLE_MODE_KEY) === "true";
+}
+
+function loadCollection() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(COLLECTION_KEY) || "{}");
+    return {
+      owned: Array.isArray(parsed?.owned) ? parsed.owned : [],
+      wanted: Array.isArray(parsed?.wanted) ? parsed.wanted : [],
+    };
+  } catch {
+    return { owned: [], wanted: [] };
+  }
+}
+
 function saveOverrides() {
   localStorage.setItem(OVERRIDE_KEY, JSON.stringify(state.overrides, null, 2));
 }
 
 function saveSeriesLabelOverrides() {
   localStorage.setItem(SERIES_LABEL_OVERRIDE_KEY, JSON.stringify(state.seriesLabelOverrides, null, 2));
+}
+
+function saveConsoleMode() {
+  localStorage.setItem(CONSOLE_MODE_KEY, String(state.consoleMode));
+}
+
+function saveCollection() {
+  state.collection.owned = [...new Set(state.collection.owned)];
+  state.collection.wanted = [...new Set(state.collection.wanted)];
+  localStorage.setItem(COLLECTION_KEY, JSON.stringify(state.collection));
 }
 
 function refreshKits() {
@@ -519,6 +623,18 @@ function displayKitById(kitId) {
 }
 
 function bindEvents() {
+  elements.settingsOpen.addEventListener("click", () => {
+    renderSettings();
+    elements.settingsDialog.showModal();
+  });
+  elements.settingsClose.addEventListener("click", () => {
+    elements.settingsDialog.close();
+  });
+  elements.consoleModeToggle.addEventListener("change", (event) => {
+    state.consoleMode = event.target.checked;
+    saveConsoleMode();
+    renderConsoleMode();
+  });
   elements.searchInput.addEventListener("input", (event) => {
     state.query = event.target.value;
     persistViewState();
@@ -542,6 +658,13 @@ function bindEvents() {
   });
 
   elements.detailClose.addEventListener("click", closeDetail);
+  elements.galleryPrev.addEventListener("click", () => selectAdjacentImage(-1));
+  elements.galleryNext.addEventListener("click", () => selectAdjacentImage(1));
+  elements.detailMainImage.addEventListener("pointerdown", handleImagePointerStart);
+  elements.detailMainImage.addEventListener("pointerup", handleImagePointerEnd);
+  elements.detailMainImage.addEventListener("pointercancel", clearImagePointer);
+  elements.toggleOwned.addEventListener("click", () => toggleKitCollection("owned"));
+  elements.toggleWanted.addEventListener("click", () => toggleKitCollection("wanted"));
   elements.editToggle.addEventListener("click", () => {
     elements.correctionForm.hidden = !elements.correctionForm.hidden;
   });
@@ -565,9 +688,20 @@ function bindEvents() {
       closeDetail();
     }
   });
+  elements.settingsDialog.addEventListener("click", (event) => {
+    if (event.target === elements.settingsDialog) {
+      elements.settingsDialog.close();
+    }
+  });
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && elements.detailDialog.open) {
       closeDetail();
+    }
+    if (elements.detailDialog.open && event.key === "ArrowLeft") {
+      selectAdjacentImage(-1);
+    }
+    if (elements.detailDialog.open && event.key === "ArrowRight") {
+      selectAdjacentImage(1);
     }
   });
   window.addEventListener("hashchange", () => {
@@ -755,6 +889,9 @@ function render() {
   renderSeriesControls();
   renderGradeSelect();
   renderSeriesAdmin();
+  renderSettings();
+  renderConsoleMode();
+  renderCollections();
   renderFilterSummary();
   renderKits();
 }
@@ -778,6 +915,10 @@ function gradeByCode() {
 
 function franchiseLabel(franchise) {
   return FRANCHISE_LABELS[franchise]?.[state.language] ?? FRANCHISE_LABELS[franchise]?.en ?? franchise;
+}
+
+function franchiseShortLabel(franchise) {
+  return FRANCHISE_SHORT_LABELS[franchise]?.[state.language] ?? FRANCHISE_SHORT_LABELS[franchise]?.en ?? franchiseLabel(franchise);
 }
 
 function gradeLabel(grade) {
@@ -895,6 +1036,86 @@ function filteredKits() {
   });
 }
 
+function collectionIds(type) {
+  return state.collection[type] || [];
+}
+
+function kitInCollection(kitId, type) {
+  return collectionIds(type).includes(kitId);
+}
+
+function toggleKitCollection(type) {
+  const kit = state.selectedKit;
+  if (!kit) {
+    return;
+  }
+
+  const oppositeType = type === "owned" ? "wanted" : "owned";
+  if (kitInCollection(kit.kit_id, type)) {
+    state.collection[type] = collectionIds(type).filter((kitId) => kitId !== kit.kit_id);
+  } else {
+    state.collection[type] = [...collectionIds(type), kit.kit_id];
+    state.collection[oppositeType] = collectionIds(oppositeType).filter((kitId) => kitId !== kit.kit_id);
+  }
+
+  saveCollection();
+  renderCollections();
+  renderKits();
+  renderDetailStatusActions(kit);
+}
+
+function renderCollections() {
+  renderCollectionStrip("owned", elements.ownedStrip, elements.ownedCount, elements.ownedPanel);
+  renderCollectionStrip("wanted", elements.wantedStrip, elements.wantedCount, elements.wantedPanel);
+  const hasCollections = collectionIds("owned").length > 0 || collectionIds("wanted").length > 0;
+  elements.collectionSection.hidden = !hasCollections;
+}
+
+function renderCollectionStrip(type, strip, countNode, panel) {
+  const ids = collectionIds(type).filter((kitId) => displayKitById(kitId));
+  state.collection[type] = ids;
+  countNode.textContent = String(ids.length);
+  panel.hidden = ids.length === 0;
+  strip.innerHTML = "";
+
+  for (const kitId of ids.slice(0, 24)) {
+    const kit = displayKitById(kitId);
+    const item = document.createElement("button");
+    item.type = "button";
+    item.className = "collection-item";
+    item.setAttribute("aria-label", t("detailsFor", { name: kitDisplayName(kit) }));
+
+    const imageUrl = kit.images?.box_art_url;
+    if (imageUrl) {
+      const img = document.createElement("img");
+      img.src = imageUrl;
+      img.alt = "";
+      img.loading = "lazy";
+      item.append(img);
+    } else {
+      const fallback = document.createElement("span");
+      fallback.className = "collection-fallback";
+      fallback.textContent = gradeShortLabel(kit);
+      item.append(fallback);
+    }
+
+    const label = document.createElement("span");
+    label.textContent = kitShortName(kit);
+    item.append(label);
+    item.addEventListener("click", () => openDetail(kit));
+    strip.append(item);
+  }
+}
+
+function renderDetailStatusActions(kit) {
+  const owned = kitInCollection(kit.kit_id, "owned");
+  const wanted = kitInCollection(kit.kit_id, "wanted");
+  elements.toggleOwned.classList.toggle("is-active", owned);
+  elements.toggleWanted.classList.toggle("is-active", wanted);
+  elements.toggleOwned.textContent = owned ? t("unmarkOwned") : t("markOwned");
+  elements.toggleWanted.textContent = wanted ? t("unmarkWanted") : t("markWanted");
+}
+
 function renderLanguageControls() {
   elements.languageList.innerHTML = "";
   for (const language of LANGUAGES) {
@@ -916,6 +1137,21 @@ function renderLanguageControls() {
   }
 }
 
+function renderSettings() {
+  elements.consoleModeToggle.checked = state.consoleMode;
+}
+
+function renderConsoleMode() {
+  elements.seriesAdminPanel.hidden = !state.consoleMode;
+  elements.correctionPanel.hidden = !state.consoleMode;
+  if (!state.consoleMode) {
+    elements.correctionForm.hidden = true;
+  }
+  if (state.consoleMode) {
+    renderSeriesAdmin();
+  }
+}
+
 function renderFranchiseFilters() {
   const counts = new Map();
   for (const kit of state.kits) {
@@ -927,7 +1163,7 @@ function renderFranchiseFilters() {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `segment-button${state.franchise === franchise ? " is-active" : ""}`;
-    button.textContent = `${franchiseLabel(franchise)} ${counts.get(franchise) || 0}`;
+    button.textContent = `${franchiseShortLabel(franchise)} ${counts.get(franchise) || 0}`;
     button.addEventListener("click", () => {
       state.franchise = franchise;
       state.grade = "all";
@@ -1176,6 +1412,17 @@ function renderKits() {
       badge.textContent = label;
       badges.append(badge);
     }
+    const collectionLabel = kitInCollection(kit.kit_id, "owned")
+      ? t("markOwned")
+      : kitInCollection(kit.kit_id, "wanted")
+        ? t("markWanted")
+        : null;
+    if (collectionLabel) {
+      const badge = document.createElement("span");
+      badge.className = "status-badge";
+      badge.textContent = collectionLabel;
+      badges.append(badge);
+    }
     card.querySelector("h3").textContent = name;
     card.querySelector("p").textContent = kitSeries(kit);
     card.addEventListener("click", () => openDetail(kit));
@@ -1202,9 +1449,11 @@ function renderDetail(kit) {
   elements.detailKicker.textContent = `${seriesLabelFromKit(kit)} · ${gradeShortLabel(kit)}${kit.scale ? ` · ${kit.scale}` : ""}`;
   elements.detailTitle.textContent = kitShortName(kit);
   elements.detailSubtitle.textContent = [kit.release_date, formatPrice(kit.price_jpy)].filter((value) => value && value !== t("pending")).join(" · ");
+  renderDetailStatusActions(kit);
   renderDetailMeta(kit);
   renderDetailGallery(kit);
   fillCorrectionForm(kit);
+  renderConsoleMode();
 
   const officialUrl = kit.source_urls?.[0];
   if (officialUrl) {
@@ -1263,6 +1512,43 @@ function renderDetailGallery(kit) {
     button.addEventListener("click", () => selectDetailImage(urls, index));
     elements.detailThumbs.append(button);
   });
+  updateGalleryControls(urls);
+}
+
+function selectAdjacentImage(delta) {
+  if (!state.selectedKit) {
+    return;
+  }
+  const urls = detailImages(state.selectedKit);
+  if (urls.length < 2) {
+    return;
+  }
+  selectDetailImage(urls, state.selectedImageIndex + delta);
+}
+
+function handleImagePointerStart(event) {
+  state.swipeStartX = event.clientX;
+  state.swipeStartY = event.clientY;
+}
+
+function handleImagePointerEnd(event) {
+  if (state.swipeStartX === null || state.swipeStartY === null) {
+    return;
+  }
+
+  const deltaX = event.clientX - state.swipeStartX;
+  const deltaY = event.clientY - state.swipeStartY;
+  clearImagePointer();
+
+  if (Math.abs(deltaX) < 42 || Math.abs(deltaX) < Math.abs(deltaY) * 1.2) {
+    return;
+  }
+  selectAdjacentImage(deltaX < 0 ? 1 : -1);
+}
+
+function clearImagePointer() {
+  state.swipeStartX = null;
+  state.swipeStartY = null;
 }
 
 function selectDetailImage(urls, index) {
@@ -1270,18 +1556,20 @@ function selectDetailImage(urls, index) {
   elements.detailMainImage.innerHTML = "";
   if (!urls.length) {
     showPlaceholder(elements.detailMainImage, state.selectedKit?.grade_code || "?");
+    updateGalleryControls(urls);
     return;
   }
 
-  const url = urls[index] || urls[0];
-  state.selectedImageIndex = index;
+  const safeIndex = ((index % urls.length) + urls.length) % urls.length;
+  const url = urls[safeIndex] || urls[0];
+  state.selectedImageIndex = safeIndex;
   const img = document.createElement("img");
   img.src = url;
   img.alt = t("mainImageAlt", { name: kitDisplayName(state.selectedKit) });
   img.addEventListener("error", () => {
     img.remove();
-    if (urls[index + 1]) {
-      selectDetailImage(urls, index + 1);
+    if (urls[safeIndex + 1]) {
+      selectDetailImage(urls, safeIndex + 1);
     } else {
       showPlaceholder(elements.detailMainImage, state.selectedKit?.grade_code || "?");
     }
@@ -1289,8 +1577,16 @@ function selectDetailImage(urls, index) {
   elements.detailMainImage.append(img);
 
   for (const [thumbIndex, thumb] of [...elements.detailThumbs.children].entries()) {
-    thumb.classList.toggle("is-active", thumbIndex === index);
+    thumb.classList.toggle("is-active", thumbIndex === safeIndex);
   }
+  updateGalleryControls(urls);
+}
+
+function updateGalleryControls(urls) {
+  const disabled = urls.length < 2;
+  elements.galleryPrev.disabled = disabled;
+  elements.galleryNext.disabled = disabled;
+  elements.detailMainImage.dataset.imageIndex = urls.length ? `${state.selectedImageIndex + 1} / ${urls.length}` : "";
 }
 
 function detailImages(kit) {

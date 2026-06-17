@@ -14,14 +14,8 @@
             <span class="brand-mark">G</span>
             <span>Gunpla DB</span>
           </div>
-          <div class="segmented-control language-control" id="languageList" aria-label="选择语言"></div>
-        </div>
-        <div class="hero-row">
-          <div>
-            <h1 data-i18n="appTitle">模型库</h1>
-            <p id="datasetSummary">Loading catalog...</p>
-          </div>
           <div class="segmented-control franchise-control" id="franchiseList" aria-label="选择作品分类"></div>
+          <button class="settings-button" id="settingsOpen" type="button" aria-label="设置" data-i18n-aria="settings">⚙</button>
         </div>
         <label class="search-field">
           <span aria-hidden="true">⌕</span>
@@ -44,32 +38,24 @@
             </label>
           </div>
         </details>
-        <details class="series-admin-panel" id="seriesAdminPanel">
-          <summary>
-            <span data-i18n="seriesAdmin">系列名称</span>
-            <span id="seriesAdminSummary">当前分类 · 当前语言</span>
-          </summary>
-          <div class="series-admin-body">
-            <label class="select-filter">
-              <span data-i18n="workSource">系列</span>
-              <select id="seriesAdminSeries"></select>
-            </label>
-            <label class="select-filter">
-              <span data-i18n="displayLanguage">显示语言</span>
-              <select id="seriesAdminLanguage"></select>
-            </label>
-            <label class="series-name-field">
-              <span data-i18n="seriesName">系列名</span>
-              <input id="seriesAdminLabel" type="text" />
-            </label>
-            <div class="series-admin-actions">
-              <button id="saveSeriesLabel" type="button" data-i18n="saveSeriesName">保存系列名</button>
-              <button id="clearSeriesLabel" type="button" data-i18n="clearSeriesName">清除本语言</button>
-              <button id="exportSeriesLabels" type="button" data-i18n="exportSeriesNames">导出系列名</button>
-            </div>
-          </div>
-        </details>
       </header>
+
+      <section class="collection-section" id="collectionSection" hidden>
+        <div class="collection-panel" id="ownedPanel">
+          <div class="collection-head">
+            <h2 data-i18n="ownedList">已购买</h2>
+            <span id="ownedCount">0</span>
+          </div>
+          <div class="collection-strip" id="ownedStrip"></div>
+        </div>
+        <div class="collection-panel" id="wantedPanel">
+          <div class="collection-head">
+            <h2 data-i18n="wantedList">想要</h2>
+            <span id="wantedCount">0</span>
+          </div>
+          <div class="collection-strip" id="wantedStrip"></div>
+        </div>
+      </section>
 
       <section class="kit-section">
         <div class="section-head">
@@ -95,13 +81,19 @@
       <div class="detail-shell">
         <button class="dialog-close" id="detailClose" type="button" aria-label="关闭详情" data-i18n-aria="closeDetail">×</button>
         <div class="detail-media">
+          <button class="gallery-nav gallery-nav-prev" id="galleryPrev" type="button" aria-label="上一张" data-i18n-aria="previousImage">‹</button>
           <div class="detail-main-image" id="detailMainImage"></div>
+          <button class="gallery-nav gallery-nav-next" id="galleryNext" type="button" aria-label="下一张" data-i18n-aria="nextImage">›</button>
           <div class="detail-thumbs" id="detailThumbs" aria-label="展示图"></div>
         </div>
         <div class="detail-info">
           <div class="detail-kicker" id="detailKicker"></div>
           <h2 id="detailTitle"></h2>
           <p id="detailSubtitle"></p>
+          <div class="status-actions" id="detailStatusActions">
+            <button id="toggleOwned" type="button" data-i18n="markOwned">已购买</button>
+            <button id="toggleWanted" type="button" data-i18n="markWanted">想要</button>
+          </div>
           <dl class="detail-meta" id="detailMeta"></dl>
           <a class="official-link" id="detailOfficialLink" target="_blank" rel="noreferrer" data-i18n="officialPage">官方商品页</a>
           <section class="correction-panel" aria-label="手动更正">
@@ -147,6 +139,49 @@
             </div>
           </section>
         </div>
+      </div>
+    </dialog>
+
+    <dialog class="settings-dialog" id="settingsDialog" aria-labelledby="settingsTitle">
+      <div class="settings-shell">
+        <button class="dialog-close settings-close" id="settingsClose" type="button" aria-label="关闭设置" data-i18n-aria="closeSettings">×</button>
+        <h2 id="settingsTitle" data-i18n="settings">设置</h2>
+        <p id="datasetSummary">Loading catalog...</p>
+        <section class="settings-section">
+          <h3 data-i18n="language">语言</h3>
+          <div class="segmented-control language-control" id="languageList" aria-label="选择语言"></div>
+        </section>
+        <section class="settings-section">
+          <label class="toggle-row">
+            <span data-i18n="consoleMode">控制台模式</span>
+            <input id="consoleModeToggle" type="checkbox" />
+          </label>
+        </section>
+        <section class="settings-section console-only" id="seriesAdminPanel" hidden>
+          <div class="settings-section-head">
+            <h3 data-i18n="seriesAdmin">系列名称</h3>
+            <span id="seriesAdminSummary">当前分类 · 当前语言</span>
+          </div>
+          <div class="series-admin-body">
+            <label class="select-filter">
+              <span data-i18n="workSource">系列</span>
+              <select id="seriesAdminSeries"></select>
+            </label>
+            <label class="select-filter">
+              <span data-i18n="displayLanguage">显示语言</span>
+              <select id="seriesAdminLanguage"></select>
+            </label>
+            <label class="series-name-field">
+              <span data-i18n="seriesName">系列名</span>
+              <input id="seriesAdminLabel" type="text" />
+            </label>
+            <div class="series-admin-actions">
+              <button id="saveSeriesLabel" type="button" data-i18n="saveSeriesName">保存系列名</button>
+              <button id="clearSeriesLabel" type="button" data-i18n="clearSeriesName">清除本语言</button>
+              <button id="exportSeriesLabels" type="button" data-i18n="exportSeriesNames">导出系列名</button>
+            </div>
+          </div>
+        </section>
       </div>
     </dialog>
 
