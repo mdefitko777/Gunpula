@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-06-16",
-  "scope": "Official model and collectible line taxonomy for Gundam, Armored Core, and Pokemon catalog records. Includes Gunpla grades, SD lines, 1/100 side lines, historical plastic model lines, Bandai Candy shokugan figures, Bandai Gashapon lines, Bandai/Kotobukiya Armored Core plastic model lines, and Pokemon plastic model / capsule toy lines. Excludes unofficial third-party kits and resin garage kits.",
+  "updated_at": "2026-06-17",
+  "scope": "Official model and collectible line taxonomy for Gundam, Armored Core, and Pokemon catalog records. Includes Gunpla grades, SD lines, 1/100 side lines, historical plastic model lines, Tamashii Nations Gundam figure lines, Bandai Candy shokugan figures, Bandai Gashapon lines, Bandai/Kotobukiya Armored Core plastic model lines, and Pokemon plastic model / capsule toy lines. Excludes unofficial third-party kits and resin garage kits.",
   "sources": [
     {
       "id": "the_gundam_base_jp",
@@ -42,6 +42,11 @@
       "id": "bandai_gashapon_products_jp",
       "title": "Bandai Gashapon official product search",
       "url": "https://gashapon.jp/products/"
+    },
+    {
+      "id": "tamashii_web_jp",
+      "title": "Tamashii Web official Gundam product search",
+      "url": "https://tamashiiweb.com/item_character/gundam_series/"
     },
     {
       "id": "kotobukiya_armored_core_jp",
@@ -469,6 +474,42 @@
       "parent_code": null,
       "aliases": ["Gundam capsule goods", "Gundam acrylic goods"],
       "notes_zh": "Bandai Gashapon 官方商品检索中的高达周边，包含 SEED、00 等作品的亚克力、挂件、海报等非拼装周边。"
+    },
+    {
+      "code": "METAL_BUILD",
+      "name_en": "METAL BUILD",
+      "name_zh": "METAL BUILD / MB 成品",
+      "category": "tamashii_figure",
+      "typical_scale": ["non-scale"],
+      "introduced": 2011,
+      "status": "active",
+      "parent_code": null,
+      "aliases": ["MB", "METAL BUILD Gundam"],
+      "notes_zh": "TAMASHII NATIONS 的高达成品合金可动线，按用户口径归入高达模型分类。"
+    },
+    {
+      "code": "METAL_ROBOT",
+      "name_en": "METAL ROBOT Spirits",
+      "name_zh": "METAL ROBOT魂 / MR魂",
+      "category": "tamashii_figure",
+      "typical_scale": ["non-scale"],
+      "introduced": 2015,
+      "status": "active",
+      "parent_code": null,
+      "aliases": ["MR魂", "METAL ROBOT魂", "METAL ROBOT SPIRITS", "METAL ROBOT魂（Ka signature）"],
+      "notes_zh": "TAMASHII NATIONS 的高达合金可动成品线，含 Ka signature 等子线。"
+    },
+    {
+      "code": "ROBOT_SPIRITS",
+      "name_en": "ROBOT Spirits",
+      "name_zh": "ROBOT魂 / R魂",
+      "category": "tamashii_figure",
+      "typical_scale": ["non-scale"],
+      "introduced": 2008,
+      "status": "active",
+      "parent_code": null,
+      "aliases": ["R魂", "ROBOT魂", "ROBOT SPIRITS", "ROBOT魂 ver. A.N.I.M.E.", "ROBOT魂（Ka signature）"],
+      "notes_zh": "TAMASHII NATIONS 的 ROBOT魂高达可动成品线，含 ver. A.N.I.M.E. 与 Ka signature 等子线。"
     },
     {
       "code": "AC30MM",

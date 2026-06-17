@@ -13,6 +13,7 @@
     "export:grades": "node scripts/export_grades_markdown.mjs",
     "import:bandai": "node scripts/import_bandai_spirits_gunpla.mjs",
     "import:collectibles": "node scripts/import_bandai_collectibles.mjs",
-    "import:official": "npm run import:bandai && npm run import:collectibles"
+    "localize": "node scripts/localize_catalog.mjs",
+    "import:official": "npm run import:bandai && npm run import:collectibles && npm run localize"
   }
 }

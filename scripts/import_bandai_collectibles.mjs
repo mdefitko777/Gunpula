@@ -8,10 +8,12 @@ const GASHAPON_PRODUCTS_SOURCE_ID = "bandai_gashapon_products_jp";
 const POKEMON_HOBBY_SOURCE_ID = "bandai_hobby_pokemon_satellite";
 const KOTOBUKIYA_AC_SOURCE_ID = "kotobukiya_armored_core_jp";
 const BANDAI_SPIRITS_SOURCE_ID = "bandai_spirits_products_jp";
+const TAMASHII_SOURCE_ID = "tamashii_web_jp";
 
 const POKEMON_MODEL_KIT_URL = "https://satellite.bandai-hobby.net/characters/pokemon.php";
 const BANDAI_AC_SEARCH_URL = "https://www.bandaispirits.co.jp/products/search/result.php?freeword=ARMORED%20CORE&category=2";
 const KOTOBUKIYA_AC_URL = "https://www.kotobukiya.co.jp/title/armored-core/";
+const TAMASHII_BASE_URL = "https://tamashiiweb.com";
 
 const CANDY_BRANDS = [
   { code: "CONVERGE", slug: "converge", label: "FW GUNDAM CONVERGE" },
@@ -21,44 +23,67 @@ const CANDY_BRANDS = [
   { code: "SUPERIOR", slug: "superiordefine", label: "Gundam Superior Define" },
 ];
 
+const TAMASHII_GUNDAM_BRANDS = [
+  { brandCode: "metal_build", label: "METAL BUILD" },
+  { brandCode: "metal_robot_tamashii", label: "METAL ROBOT魂" },
+  { brandCode: "robot_tamashii", label: "ROBOT魂" },
+];
+
+const HTML_ENTITY_MAP = {
+  alpha: "α",
+  beta: "β",
+  gamma: "γ",
+  nu: "ν",
+  xi: "Ξ",
+  zeta: "Ζ",
+  rsquo: "’",
+  lsquo: "‘",
+  rdquo: "”",
+  ldquo: "“",
+  times: "×",
+};
+
 const WORK_RULES = [
   { title: "Mobile Suit Gundam SEED Freedom", universe: "CE", pattern: /ライジングフリーダム|イモータルジャスティス|マイティーストライクフリーダム|ブラックナイトスコード|ゲルググメナース|ギャンシュトローム|デスティニーガンダムSpecII|SEED FREEDOM/i },
   { title: "Mobile Suit Gundam SEED C.E.73 Stargazer", universe: "CE", pattern: /スターゲイザー|ストライクノワール|ヴェルデバスター|ブルデュエル|ドレッドノート|105ダガー|スローターダガー|ケルベロスバクゥ|ストライクE/i },
   { title: "Mobile Suit Gundam SEED Destiny", universe: "CE", pattern: /デスティニー|インパルス|ストライクフリーダム|インフィニットジャスティス|セイバーガンダム|ガイアガンダム|アビスガンダム|カオスガンダム|レジェンドガンダム|アカツキ|ムラサメ|ウィンダム|DESTINY/i },
   { title: "Mobile Suit Gundam SEED Astray", universe: "CE", pattern: /アストレイ|ASTRAY|レッドフレーム|ブルーフレーム|ゴールドフレーム/i },
   { title: "Mobile Suit Gundam SEED", universe: "CE", pattern: /エールストライク|ストライクガンダム|ストライクルージュ|イージス|デュエル|バスター|ブリッツ|フリーダムガンダム|ジャスティスガンダム|プロヴィデンス|カラミティ|フォビドゥン|レイダー|ラゴゥ|バクゥ|シグー|モビルジン|ゲイツ|SEED/i },
-  { title: "Mobile Suit Gundam 00", universe: "AD", pattern: /ダブルオー|ガンダム00|00クアンタ|クアンタ|エクシア|デュナメス|キュリオス|ヴァーチェ|ナドレ|アストレア|ケルディム|アリオス|セラヴィー|セラフィム|オーライザー|ジンクス|ティエレン|スサノオ|フラッグ|スローネ|アルケー|アヘッド|ガデッサ|ガラッゾ|リボーンズ|ブレイヴ/i },
+  { title: "Mobile Suit Gundam 00", universe: "AD", pattern: /ダブルオー|ガンダム00(?![0-9])|00クアンタ|クアンタ|エクシア|デュナメス|キュリオス|ヴァーチェ|ナドレ|アストレア|ケルディム|アリオス|セラヴィー|セラフィム|オーライザー|ジンクス|ティエレン|スサノオ|フラッグ|スローネ|アルケー|アヘッド|ガデッサ|ガラッゾ|リボーンズ|ブレイヴ/i },
   { title: "Mobile Suit Gundam: The Witch from Mercury", universe: "Ad Stella", pattern: /水星の魔女|エアリアル|ルブリス|キャリバーン|ファラクト|ディランザ|デミ|ベギル|ミカエリス|シュバルゼッテ|ガンヴォルヴァ|ザウォート|ダリルバルデ/i },
   { title: "Mobile Suit Gundam GQuuuuuuX", universe: "unknown", pattern: /GQuuuuuuX|ジークアクス|白いガンダム|赤いガンダム|軽キャノン|GFreD/i },
   { title: "Mobile Suit Gundam: Iron-Blooded Orphans", universe: "Post Disaster", pattern: /鉄血|バルバトス|グシオン|キマリス|グレイズ|フラウロス|バエル|ヴィダール|百里|百錬|マンロディ|ロディ|マルコシアス|アスタロト|ダンタリオン|レギンレイズ|グリムゲルデ/i },
   { title: "Mobile Suit Gundam AGE", universe: "AG", pattern: /ガンダムAGE|AGE-|ガフラン|ゼダス|Gエグゼス|ジェノアス|ダナジン|レギルス|ギラーガ|ゼイドラ|ファルシア|クランシェ|アデル/i },
   { title: "Mobile Suit Gundam Wing Endless Waltz", universe: "AC", pattern: /Endless Waltz|\bEW\b|ウイングガンダムゼロ|Wガンダムゼロ|デスサイズヘル|サーペント/i },
-  { title: "Mobile Suit Gundam Wing", universe: "AC", pattern: /ウイングガンダム|デスサイズ|ヘビーアームズ|サンドロック|シェンロン|トールギス|エピオン|リーオー|マグアナック/i },
-  { title: "Mobile Fighter G Gundam", universe: "FC", pattern: /Gガンダム|ゴッドガンダム|シャイニングガンダム|マスターガンダム|ノーベルガンダム|ドラゴンガンダム|ガンダムローズ|マックスター|デビルガンダム/i },
-  { title: "After War Gundam X", universe: "AW", pattern: /ガンダムX|ガンダムダブルエックス|エアマスター|レオパルド|ベルティゴ/i },
+  { title: "Mobile Suit Gundam Wing G-Unit", universe: "AC", pattern: /ガンダムジェミナス|G-UNIT/i },
+  { title: "Mobile Suit Gundam Wing", universe: "AC", pattern: /ウイングガンダム|デスサイズ|ヘビーアームズ|サンドロック|シェンロン|アルトロンガンダム|トールギス|エピオン|リーオー|マグアナック|ヴァイエイト|メリクリウス|エアリーズ/i },
+  { title: "Mobile Fighter G Gundam", universe: "FC", pattern: /Gガンダム|ゴッドガンダム|シャイニングガンダム|マスターガンダム|ノーベルガンダム|ドラゴンガンダム|ガンダムローズ|マックスター|デビルガンダム|風雲再起/i },
+  { title: "After War Gundam X", universe: "AW", pattern: /ガンダムX|ガンダムダブルエックス|エアマスター|レオパルド|ベルティゴ|ヴァサーゴ|Gファルコン/i },
   { title: "Turn A Gundam", universe: "CC", pattern: /∀|ターンエー|ターンX|スモー|カプル/i },
   { title: "Gundam Reconguista in G", universe: "Regild Century", pattern: /Gのレコンギスタ|G-セルフ|G-アルケイン|G-ルシファー|グリモア|マックナイフ|ジャハナム|カバカーリー/i },
   { title: "Gundam Build Series", universe: "Build", pattern: /ビルド|ダイバー|コアガンダム|アースリィ|ユーラヴェン|ベアッガイ|プチッガイ|ふみな|トライオン|アメイジング|フェニーチェ|スクランブル|ラーガンダム|プルタイン|ティフォエウス/i },
   { title: "Advance of Zeta", universe: "UC", pattern: /A\.O\.Z|TR-1|TR-6|ヘイズル|ウーンドウォート|ハイゼンスレイ|フルドド/i },
-  { title: "Mobile Suit Gundam Narrative", universe: "UC", pattern: /ナラティブガンダム|ガンダムNT/i },
+  { title: "Mobile Suit Gundam Narrative", universe: "UC", pattern: /ナラティブガンダム|ガンダムNT(?!-?1)/i },
   { title: "Mobile Suit Moon Gundam", universe: "UC", pattern: /ムーンガンダム|バルギル/i },
-  { title: "Gundam Sentinel", universe: "UC", pattern: /Sガンダム|Ex-S|FAZZ|Zプラス|ゼータプラス|ディープストライカー|ゼク・アイン|ネロ/i },
-  { title: "Mobile Suit Crossbone Gundam", universe: "UC", pattern: /クロスボーン|ゴーストガンダム|ファントムガンダム|鋼鉄の7人/i },
-  { title: "Mobile Suit Gundam Hathaway", universe: "UC", pattern: /閃光のハサウェイ|Ξガンダム|ペーネロペー|メッサー/i },
+  { title: "Gundam Sentinel", universe: "UC", pattern: /Sガンダム|Ex-S|FAZZ|Zプラス|ゼータプラス|ディープストライカー|ガンダムMk-V|ゼク・アイン|ネロ/i },
+  { title: "Mobile Suit Crossbone Gundam", universe: "UC", pattern: /クロスボーン|ゴーストガンダム|ファントムガンダム|アンカーガンダム|鋼鉄の7人/i },
+  { title: "Mobile Suit Gundam Hathaway", universe: "UC", pattern: /閃光のハサウェイ|Ξガンダム|クスィーガンダム|ペーネロペー|メッサー/i },
   { title: "Gundam Thunderbolt", universe: "UC", pattern: /サンダーボルト|フルアーマー・ガンダム|サイコ・ザク|アトラスガンダム/i },
   { title: "Mobile Suit Gundam: The Origin", universe: "UC", pattern: /THE ORIGIN|オリジン|局地型ガンダム|ブグ/i },
-  { title: "Mobile Suit Gundam Unicorn", universe: "UC", pattern: /ユニコーン|バンシィ|フェネクス|シナンジュ|クシャトリヤ|ジェスタ|リゼル|デルタプラス|デルタガンダム|シルヴァ・バレト|ローゼン・ズール|ギラ・ズール|ネェル・アーガマ/i },
-  { title: "Mobile Suit Gundam: Char's Counterattack", universe: "UC", pattern: /逆襲のシャア|νガンダム|Hi-ν|サザビー|ナイチンゲール|ヤクト・ドーガ|ギラ・ドーガ|α・アジール|リ・ガズィ|ジェガン/i },
+  { title: "Mobile Suit Gundam Unicorn", universe: "UC", pattern: /ユニコーン|バンシィ|フェネクス|シナンジュ|クシャトリヤ|ジェスタ|リゼル|デルタプラス|デルタガンダム|シルヴァ・バレト|ローゼン・ズール|ギラ・ズール|ネェル・アーガマ|バイアラン・カスタム/i },
+  { title: "Mobile Suit Gundam: Char's Counterattack", universe: "UC", pattern: /逆襲のシャア|ベルトーチカ・チルドレン|νガンダム|Hi-ν|サザビー|ナイチンゲール|サイコ・ドーガ|ヤクト・ドーガ|ギラ・ドーガ|α・アジール|リ・ガズィ|ジェガン/i },
   { title: "Mobile Suit Gundam F91", universe: "UC", pattern: /F91|ビギナ・ギナ|デナン|ベルガ|ヘビーガン/i },
-  { title: "Mobile Suit V Gundam", universe: "UC", pattern: /Vガンダム|ヴィクトリー|V2|セカンドV|ガンイージ/i },
-  { title: "Mobile Suit Gundam 0083: Stardust Memory", universe: "UC", pattern: /0083|GP01|GP02|GP03|ガーベラ|デンドロビウム|ステイメン|ノイエ・ジール|ドラッツェ/i },
+  { title: "Mobile Suit V Gundam", universe: "UC", pattern: /Vガンダム|Ｖダッシュ|Vダッシュ|ヴィクトリー|V2|セカンドV|ガンイージ/i },
+  { title: "Mobile Suit Gundam 0083: Stardust Memory", universe: "UC", pattern: /0083|GP01|GP02|GP03|ガーベラ|デンドロビウム|ステイメン|ノイエ・ジール|ドラッツェ|ザメル/i },
   { title: "Mobile Suit Gundam 0080: War in the Pocket", universe: "UC", pattern: /0080|アレックス|NT-1|ケンプファー|ハイゴッグ|ズゴックE|ザクII改/i },
   { title: "Mobile Suit Gundam: The 08th MS Team", universe: "UC", pattern: /08小隊|Ez-8|陸戦型|グフカスタム/i },
-  { title: "Mobile Suit Gundam ZZ", universe: "UC", pattern: /ZZ|ダブルゼータ|ハンマ・ハンマ|キュベレイ|ドーベン・ウルフ|ザクIII|バウ|クィン・マンサ|ドライセン|ズサ/i },
-  { title: "Mobile Suit Z Gundam", universe: "UC", pattern: /Zガンダム|Ζ|ゼータガンダム|ZII|ガンダムMk-II|百式|リック・ディアス|メタス|ネモ|ハイザック|マラサイ|バーザム|アッシマー|ギャプラン|ジ・O|ディジェ|ガルバルディ/i },
+  { title: "Mobile Suit Gundam ZZ", universe: "UC", pattern: /ZZ|ダブルゼータ|ゲーマルク|ゲー・ドライ|ハンマ・ハンマ|キュベレイ|ドーベン・ウルフ|ザクIII|バウ|クィン・マンサ|ドライセン|ズサ/i },
+  { title: "Mobile Suit Z Gundam", universe: "UC", pattern: /Zガンダム|Ζ|ゼータガンダム|ZII|スーパーガンダム|Gディフェンサー|ガンダムMk-II|ボリノーク・サマーン|百式|リック・ディアス|メタス|ネモ|ハイザック|マラサイ|バーザム|アッシマー|ギャプラン|ジ・O|ディジェ|ガルバルディ/i },
+  { title: "Mobile Suit Gundam Side Story: The Blue Destiny", universe: "UC", pattern: /ブルーディスティニー|イフリート改/i },
+  { title: "Gundam EXA", universe: "unknown", pattern: /エクストリームガンダム|type-レオス/i },
   { title: "Mobile Suit Gundam MSV", universe: "UC", pattern: /G-3ガンダム|フルアーマーガンダム|パーフェクトガンダム|ジョニー・ライデン|シン・マツナガ|高機動型ザク/i },
-  { title: "Mobile Suit Gundam", universe: "UC", pattern: /RX-78|ガンダム\(アニメカラー|ガンダム\(ロールアウト|ガンダム Ver\.|Gファイター|ガンキャノン|ガンタンク|シャア専用|ザク|グフ|ドム|ズゴック|ゲルググ|ジオング|アッガイ|ゾック|ギャン|ジム|ボール|ララァ専用/i },
-  { title: "SD Gundam", universe: "SD", pattern: /SD|BB戦士|武者|頑駄無|騎士ガンダム|ナイトガンダム|サタンガンダム|コマンドガンダム/i },
+  { title: "Mobile Suit Gundam", universe: "UC", pattern: /RX-78|ガンダム\(アニメカラー|ガンダム\(ロールアウト|ガンダム\(ハードポイント|ガンダム Ver\.|＜SIDE MS＞\s*ガンダム$|Gファイター|ホワイトベース|マゼラ・アタック|ガンキャノン|ガンタンク|シャア専用|ザク|グフ|ドム|ズゴック|ゲルググ|ジオング|アッガイ|ゾック|ギャン|ジム|ボール|ララァ専用/i },
+  { title: "SD Gundam", universe: "SD", pattern: /SD|BB戦士|武者|頑駄無|騎士ガンダム|ナイトガンダム|サタンガンダム|コマンドガンダム|関羽ガンダム|孫権ガンダム|曹操ガンダム|劉備ガンダム|三国創傑伝|フェニックスガンダム/i },
 ];
 
 const SKIP_INDIVIDUAL_ITEM_PATTERN = /台座セット|スタンドセット/i;
@@ -74,6 +99,7 @@ function decodeHtml(value) {
     .replace(/&gt;/g, ">")
     .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
     .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(Number.parseInt(code, 16)))
+    .replace(/&([a-z][a-z0-9]+);/gi, (match, name) => HTML_ENTITY_MAP[name.toLowerCase()] ?? match)
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -142,7 +168,7 @@ function fallbackWork(title, gradeCode, subline) {
     return { work_title: "Accessory / Option Set", universe: "Accessory" };
   }
   if (
-    ["CONVERGE", "GFRAME", "MOBILITY", "ARTIFACT", "SUPERIOR", "MSE", "GSF"].includes(gradeCode) &&
+    ["CONVERGE", "GFRAME", "MOBILITY", "ARTIFACT", "SUPERIOR", "MSE", "GSF", "METAL_BUILD", "METAL_ROBOT", "ROBOT_SPIRITS"].includes(gradeCode) &&
     /#|＃|♯|VOL\.?|No\.|第\d|SELECTION|MEMORIAL|OPERATION|REVIVE|SET|セット|GOLD EDITION|Ver\.GFT|SP\d*|EX\d*|Gフレーム\s*\d+|GフレームFA\s*\d+|CONVERGE\s*\d+|[ 　]\d{1,2}(?:[ 　]|$)/i.test(text)
   ) {
     return { work_title: "Mixed Gundam Works", universe: "Mixed" };
@@ -195,6 +221,72 @@ async function fetchText(url) {
     await sleep(attempt * (String(lastError?.message ?? "").includes("403") ? 2200 : 600));
   }
   throw lastError;
+}
+
+async function fetchJson(url) {
+  let lastError;
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    try {
+      const response = await fetch(url, {
+        headers: {
+          "user-agent": "Gunpula catalog importer (+https://github.com/mdefitko777/Gunpula)",
+          accept: "application/json",
+          "accept-language": "ja,en-US;q=0.8,en;q=0.7",
+          "x-requested-with": "XMLHttpRequest",
+        },
+      });
+      if (response.ok) {
+        return response.json();
+      }
+      lastError = new Error(`Failed to fetch ${url}: ${response.status}`);
+    } catch (error) {
+      lastError = error;
+    }
+    await sleep(attempt * 600);
+  }
+  throw lastError;
+}
+
+async function fetchTamashiiDetailText(url) {
+  let lastError;
+  for (let attempt = 1; attempt <= 5; attempt += 1) {
+    try {
+      const response = await fetch(url, {
+        headers: {
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36",
+          accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+          "accept-language": "ja,en-US;q=0.9,en;q=0.8",
+          referer: `${TAMASHII_BASE_URL}/item_character/gundam_series/`,
+        },
+      });
+      if (response.ok) {
+        return response.text();
+      }
+      lastError = new Error(`Failed to fetch ${url}: ${response.status}`);
+    } catch (error) {
+      lastError = error;
+    }
+    await sleep(attempt * (String(lastError?.message ?? "").includes("403") ? 5000 : 1000));
+  }
+  throw lastError;
+}
+
+async function mapLimit(items, limit, mapper) {
+  const results = new Array(items.length);
+  let nextIndex = 0;
+  const workerCount = Math.min(limit, items.length);
+
+  await Promise.all(
+    Array.from({ length: workerCount }, async () => {
+      while (nextIndex < items.length) {
+        const currentIndex = nextIndex;
+        nextIndex += 1;
+        results[currentIndex] = await mapper(items[currentIndex], currentIndex);
+      }
+    }),
+  );
+
+  return results;
 }
 
 function parseCandyListings(html, listingUrl, brand) {
@@ -476,6 +568,171 @@ async function importGashaponSearch({ label, resultUrl, franchise, gradeCode, su
   }
 
   console.log(fetchDetails ? `Fetched ${detailCount}/${listings.length} ${label} Gashapon detail pages.` : `Used ${listings.length} ${label} Gashapon listing images without detail-page fetches.`);
+  return imported;
+}
+
+function tamashiiSearchUrl(brandCode, currentPage = 1) {
+  const url = new URL("/api/site-item/search_item.php", TAMASHII_BASE_URL);
+  url.searchParams.append("brandCode[]", brandCode);
+  url.searchParams.append("characterCode[]", "gundam_series");
+  url.searchParams.set("per_page", "100");
+  url.searchParams.set("current_page", String(currentPage));
+  url.searchParams.set("sort", "1");
+  url.searchParams.set("area", "japan");
+  return url.href;
+}
+
+function tamashiiBrandPageUrl(brandCode) {
+  return `${TAMASHII_BASE_URL}/item_brand/${brandCode}/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new`;
+}
+
+function tamashiiItemUrl(item) {
+  return `${TAMASHII_BASE_URL}/item/${item.tamashiiWebId}/`;
+}
+
+async function fetchTamashiiBrandItems(brand) {
+  const firstPage = await fetchJson(tamashiiSearchUrl(brand.brandCode, 1));
+  const items = [...(firstPage.data ?? [])];
+  const lastPage = firstPage.pagination?.lastPage ?? 1;
+
+  for (let page = 2; page <= lastPage; page += 1) {
+    const pageData = await fetchJson(tamashiiSearchUrl(brand.brandCode, page));
+    items.push(...(pageData.data ?? []));
+  }
+
+  console.log(`Found ${items.length} ${brand.label} Gundam Tamashii listings.`);
+  return items;
+}
+
+function tamashiiGradeCode(brandName) {
+  if (/METAL BUILD/i.test(brandName)) {
+    return "METAL_BUILD";
+  }
+  if (/METAL ROBOT/i.test(brandName)) {
+    return "METAL_ROBOT";
+  }
+  return "ROBOT_SPIRITS";
+}
+
+function tamashiiSubline(title, brandName) {
+  if (/METAL ROBOT/i.test(brandName)) {
+    return brandName;
+  }
+  if (/ROBOT魂/.test(brandName) && /ver\.\s*A\.N\.I\.M\.E\./i.test(title)) {
+    return "ROBOT魂 ver. A.N.I.M.E.";
+  }
+  return brandName || "ROBOT魂";
+}
+
+function parseTamashiiInfoValue(html, labelPattern) {
+  for (const match of html.matchAll(/<dt[^>]*>([\s\S]*?)<\/dt>\s*<dd[^>]*>([\s\S]*?)<\/dd>/g)) {
+    const label = stripTags(match[1]);
+    if (labelPattern.test(label)) {
+      return match[2];
+    }
+  }
+  return null;
+}
+
+function parseTamashiiProductDetail(html, detailUrl) {
+  const title = stripTags(extract(/<span class="productMain__name">([\s\S]*?)<\/span>/, html));
+  const brandName = stripTags(extract(/<span class="productMain__brand">[\s\S]*?<img[^>]+alt="([^"]+)"/, html));
+  const mainGalleryBlock = extract(/<div class="productMainImg[\s\S]*?<\/ul>/, html) ?? html;
+  const gallery = unique([
+    ...[...mainGalleryBlock.matchAll(/(?:href|src)="([^"]*\/storage\/images\/products\/(?:main|sub|imported)\/[^"]+)"/g)].map((match) => absoluteUrl(match[1], detailUrl)),
+    ...[...html.matchAll(/<img[^>]+src="([^"]*\/assets\/item\/[^"]+)"/g)].map((match) => absoluteUrl(match[1], detailUrl)),
+  ]).slice(0, 24);
+  const priceBlock = parseTamashiiInfoValue(html, /販売価格|価格/);
+  const releaseBlock = parseTamashiiInfoValue(html, /発売日|発送月|発売時期/);
+  const workTitle = stripTags(parseTamashiiInfoValue(html, /登場作品/));
+  const releaseTime = extract(/datetime="([^"]+)"/, releaseBlock ?? "");
+
+  return {
+    title,
+    brandName,
+    images: gallery,
+    price_jpy: parsePrice(priceBlock),
+    release_date: parseReleaseDate(releaseTime ?? releaseBlock),
+    work_title: workTitle || null,
+  };
+}
+
+function buildTamashiiKit(item, detail) {
+  const detailUrl = tamashiiItemUrl(item);
+  const title = detail.title || stripTags(item.title);
+  const brandName = detail.brandName || item.mainBrandName || "ROBOT魂";
+  const gradeCode = tamashiiGradeCode(brandName);
+  const inferred = inferWork(title, detail.work_title);
+  const categoryText = [item.category, item.categoryData?.long_name, item.salesAttributeList?.join(" "), title].filter(Boolean).join(" ");
+  const imageUrl = absoluteUrl(item.thumbnailImg, TAMASHII_BASE_URL);
+
+  return buildKit({
+    kitId: `tamashii-${item.tamashiiWebId}`,
+    franchise: "gundam",
+    gradeCode,
+    subline: tamashiiSubline(title, brandName),
+    title,
+    boxArtUrl: imageUrl,
+    galleryUrls: [imageUrl, ...detail.images],
+    releaseDate: detail.release_date ?? item.releaseDateData ?? item.releaseMonth ?? null,
+    priceJpy: detail.price_jpy ?? item.price ?? parsePrice(item.priceTaxStr ?? item.priceText),
+    isLimited: /限定|抽選|魂ウェブ商店|TAMASHII NATION|魂ストア/i.test(categoryText),
+    sourceId: TAMASHII_SOURCE_ID,
+    sourceUrls: [detailUrl, tamashiiBrandPageUrl(item.brandCode || "robot_tamashii")],
+    tags: ["gundam", "tamashii nations", "collectible figure", gradeCode.toLowerCase().replace(/_/g, "-")],
+    notes: `Imported from the official Tamashii Web Gundam ${brandName} catalog and product detail page.`,
+    workContext: [detail.work_title],
+    workOverride: inferred.work_title ?? detail.work_title,
+    universeOverride: inferred.universe,
+  });
+}
+
+async function importTamashiiGundamFigures() {
+  const byWebId = new Map();
+
+  for (const brand of TAMASHII_GUNDAM_BRANDS) {
+    const listings = await fetchTamashiiBrandItems(brand);
+    for (const item of listings) {
+      if (!item.tamashiiWebId || byWebId.has(item.tamashiiWebId)) {
+        continue;
+      }
+      byWebId.set(item.tamashiiWebId, item);
+    }
+  }
+
+  const listings = [...byWebId.values()].filter((item) => item.thumbnailImg && item.title);
+  let detailCount = 0;
+  const failedDetails = [];
+  const imported = await mapLimit(listings, 4, async (item, itemIndex) => {
+    const detailUrl = tamashiiItemUrl(item);
+    let detail = { title: null, brandName: null, images: [], price_jpy: null, release_date: null, work_title: null };
+    try {
+      detail = parseTamashiiProductDetail(await fetchTamashiiDetailText(detailUrl), detailUrl);
+      detailCount += 1;
+    } catch (error) {
+      failedDetails.push({ item, itemIndex, detailUrl, error });
+    }
+
+    return buildTamashiiKit(item, detail);
+  });
+
+  if (failedDetails.length) {
+    console.log(`Retrying ${failedDetails.length} Tamashii detail pages after cooldown.`);
+    await sleep(10000);
+    for (const failure of failedDetails) {
+      try {
+        const detail = parseTamashiiProductDetail(await fetchTamashiiDetailText(failure.detailUrl), failure.detailUrl);
+        imported[failure.itemIndex] = buildTamashiiKit(failure.item, detail);
+        detailCount += 1;
+      } catch (error) {
+        console.warn(`Tamashii detail fetch failed for ${failure.detailUrl}: ${error.message}`);
+      }
+      await sleep(1500);
+    }
+  }
+
+  console.log(`Fetched ${detailCount}/${listings.length} Tamashii Gundam detail pages.`);
+  console.log(`Imported ${imported.length} Tamashii Gundam figure records.`);
   return imported;
 }
 
@@ -899,7 +1156,7 @@ function mergeKits(existingDoc, imported) {
     ...existingDoc,
     updated_at: today(),
     scope:
-      "Individual model kit and official collectible catalog imported from Japanese official BANDAI SPIRITS, Bandai Candy, Bandai Gashapon, Bandai Hobby, and Kotobukiya sources. Covers Gundam, Armored Core, and Pokemon records. Records are needs_review until field-level human checks are complete.",
+      "Individual model kit and official collectible catalog imported from Japanese official BANDAI SPIRITS, Bandai Candy, Bandai Gashapon, Bandai Hobby, Tamashii Web, and Kotobukiya sources. Covers Gundam, Armored Core, and Pokemon records. Records are needs_review until field-level human checks are complete.",
     kits,
   };
 }
@@ -960,6 +1217,7 @@ async function main() {
       fallbackWork: "Mobile Suit Gundam 00",
       fallbackUniverse: "AD",
     })),
+    ...(await importTamashiiGundamFigures()),
     ...(await importBandaiArmoredCore()),
     ...(await importKotobukiyaArmoredCore()),
   ];

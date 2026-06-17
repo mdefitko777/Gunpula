@@ -9,38 +9,39 @@
   <body>
     <main class="catalog-page">
       <header class="page-header">
-        <div class="brand-line">
-          <span class="brand-mark">G</span>
-          <span>Gunpula Catalog</span>
-        </div>
-        <div class="control-strip" aria-label="主分类和语言">
-          <div class="segmented-control" id="franchiseList" aria-label="选择作品分类"></div>
+        <div class="top-bar">
+          <div class="brand-line">
+            <span class="brand-mark">G</span>
+            <span>Gunpla DB</span>
+          </div>
           <div class="segmented-control language-control" id="languageList" aria-label="选择语言"></div>
         </div>
-        <div class="title-row">
+        <div class="hero-row">
           <div>
-            <h1 data-i18n="appTitle">模型目录</h1>
+            <h1 data-i18n="appTitle">模型库</h1>
             <p id="datasetSummary">Loading catalog...</p>
           </div>
-          <label class="search-field">
-            <span aria-hidden="true">⌕</span>
-            <input id="searchInput" type="search" placeholder="搜索模型名称或作品" data-i18n-placeholder="searchPlaceholder" />
-          </label>
+          <div class="segmented-control franchise-control" id="franchiseList" aria-label="选择作品分类"></div>
         </div>
+        <label class="search-field">
+          <span aria-hidden="true">⌕</span>
+          <input id="searchInput" type="search" placeholder="搜索名字 / 系列 / 产品线" data-i18n-placeholder="searchPlaceholder" />
+        </label>
+        <nav class="series-tabs" id="seriesTabs" aria-label="常用系列"></nav>
         <details class="filter-panel" id="filtersPanel">
           <summary>
             <span data-i18n="filters">筛选</span>
-            <span id="filterSummary">全部产品线 · 全部出处</span>
+            <span id="filterSummary">全部系列 · 全部产品线</span>
           </summary>
           <div class="filter-body">
-            <div class="filter-group">
-              <div class="filter-label" data-i18n="productLine">产品线 / 等级</div>
-              <div class="chip-bar" id="gradeList" aria-label="按产品线或等级筛选"></div>
-            </div>
-            <div class="filter-group">
-              <div class="filter-label" data-i18n="workSource">作品出处</div>
-              <div class="chip-bar" id="workList" aria-label="按作品出处筛选"></div>
-            </div>
+            <label class="select-filter">
+              <span data-i18n="workSource">系列</span>
+              <select id="seriesSelect"></select>
+            </label>
+            <label class="select-filter">
+              <span data-i18n="productLine">产品线</span>
+              <select id="gradeSelect"></select>
+            </label>
           </div>
         </details>
       </header>
@@ -58,6 +59,7 @@
       <article class="kit-card">
         <div class="box-art"></div>
         <div class="kit-info">
+          <div class="kit-badges"></div>
           <h3></h3>
           <p></p>
         </div>
@@ -106,7 +108,7 @@
               </label>
               <label>
                 <span data-i18n="workSource">作品出处</span>
-                <input id="editWorkTitle" type="text" placeholder="例如 Mobile Suit Gundam SEED" />
+                <input id="editWorkTitle" type="text" placeholder="例如 SEED / 00 / W" />
               </label>
               <label>
                 <span data-i18n="universe">宇宙 / 纪年</span>

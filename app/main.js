@@ -3,10 +3,10 @@ const FRANCHISE_KEY = "gunpula-catalog-franchise-v1";
 const OVERRIDE_KEY = "gunpula-catalog-overrides-v1";
 
 const LANGUAGES = [
-  { code: "zh", label: "中文", htmlLang: "zh-CN" },
-  { code: "ko", label: "한국어", htmlLang: "ko-KR" },
-  { code: "en", label: "English", htmlLang: "en" },
-  { code: "ja", label: "日本語", htmlLang: "ja" },
+  { code: "zh", label: "中", htmlLang: "zh-CN" },
+  { code: "ko", label: "한", htmlLang: "ko-KR" },
+  { code: "en", label: "EN", htmlLang: "en" },
+  { code: "ja", label: "日", htmlLang: "ja" },
 ];
 
 const FRANCHISES = ["gundam", "armored_core", "pokemon"];
@@ -24,14 +24,36 @@ const NAME_FALLBACKS = {
   ja: ["ja", "en", "zh", "ko"],
 };
 
+const GRADE_SHORT_LABELS = {
+  METAL_BUILD: { zh: "MB", ko: "MB", en: "MB", ja: "MB" },
+  METAL_ROBOT: { zh: "MR魂", ko: "MR魂", en: "MR", ja: "MR魂" },
+  ROBOT_SPIRITS: { zh: "R魂", ko: "R魂", en: "RS", ja: "R魂" },
+  GUNDAM_MERCH: { zh: "周边", ko: "굿즈", en: "Goods", ja: "グッズ" },
+  POKE_GASHAPON: { zh: "扭蛋", ko: "가샤폰", en: "Gashapon", ja: "ガシャポン" },
+  POKEPLA: { zh: "拼装", ko: "프라모델", en: "Model Kit", ja: "プラモ" },
+  AC30MM: { zh: "30MM", ko: "30MM", en: "30MM", ja: "30MM" },
+  ACVI: { zh: "V.I.", ko: "V.I.", en: "V.I.", ja: "V.I." },
+};
+
+const TITLE_PREFIX_PATTERNS = [
+  /^FW\s+(?:GUNDAM|高达|건담)\s+CONVERGE(?:[:：]CORE| CORE| EX\d+| #)?\s*/i,
+  /^MOBILE SUIT ENSEMBLE(?:\s+mecha)?\s*/i,
+  /^机动战士高达\s*/i,
+  /^機動戦士ガンダム\s*/i,
+  /^기동전사 건담\s*/i,
+  /^Mobile Suit Gundam\s*/i,
+  /^SDW HEROES\s*/i,
+  /^BB戦士\d*\s*/i,
+];
+
 const TRANSLATIONS = {
   zh: {
-    appTitle: "模型目录",
-    searchPlaceholder: "搜索模型名称或作品",
+    appTitle: "模型库",
+    searchPlaceholder: "搜索名字 / 系列 / 产品线",
     filters: "筛选",
-    productLine: "产品线 / 等级",
-    workSource: "作品出处",
-    catalogList: "模型列表",
+    productLine: "产品线",
+    workSource: "系列",
+    catalogList: "目录",
     officialPage: "官方商品页",
     manualCorrection: "手动更正",
     nameZh: "中文名",
@@ -45,11 +67,11 @@ const TRANSLATIONS = {
     exportCorrections: "导出更正",
     closeDetail: "关闭详情",
     allProductLines: "全部产品线",
-    allWorks: "全部出处",
+    allWorks: "全部系列",
     pending: "待补",
     noMatches: "没有匹配的记录。",
     records: "{count} 条",
-    results: "{count} results",
+    results: "{count} 条",
     summary: "{total} 条记录 · {parts} · 更新 {date}",
     detailsFor: "查看 {name} 详情",
     boxArtAlt: "{name} 封面图",
@@ -65,12 +87,12 @@ const TRANSLATIONS = {
     imported: "官方导入",
   },
   ko: {
-    appTitle: "모델 카탈로그",
-    searchPlaceholder: "모델명 또는 작품 검색",
+    appTitle: "모델 DB",
+    searchPlaceholder: "이름 / 시리즈 / 라인 검색",
     filters: "필터",
-    productLine: "제품 라인 / 등급",
-    workSource: "작품 출처",
-    catalogList: "모델 목록",
+    productLine: "제품 라인",
+    workSource: "시리즈",
+    catalogList: "목록",
     officialPage: "공식 상품 페이지",
     manualCorrection: "수동 수정",
     nameZh: "중국어 이름",
@@ -84,11 +106,11 @@ const TRANSLATIONS = {
     exportCorrections: "수정 내보내기",
     closeDetail: "상세 닫기",
     allProductLines: "전체 제품 라인",
-    allWorks: "전체 작품",
+    allWorks: "전체 시리즈",
     pending: "보완 필요",
     noMatches: "일치하는 기록이 없습니다.",
     records: "{count}개",
-    results: "{count} results",
+    results: "{count}개",
     summary: "{total}개 기록 · {parts} · 업데이트 {date}",
     detailsFor: "{name} 상세 보기",
     boxArtAlt: "{name} 박스 아트",
@@ -104,12 +126,12 @@ const TRANSLATIONS = {
     imported: "공식 가져오기",
   },
   en: {
-    appTitle: "Model Catalog",
-    searchPlaceholder: "Search model name or work",
+    appTitle: "Model DB",
+    searchPlaceholder: "Search name / series / line",
     filters: "Filters",
-    productLine: "Product line / grade",
-    workSource: "Original work",
-    catalogList: "Model list",
+    productLine: "Product line",
+    workSource: "Series",
+    catalogList: "Catalog",
     officialPage: "Official product page",
     manualCorrection: "Manual correction",
     nameZh: "Chinese name",
@@ -123,11 +145,11 @@ const TRANSLATIONS = {
     exportCorrections: "Export corrections",
     closeDetail: "Close detail",
     allProductLines: "All product lines",
-    allWorks: "All works",
+    allWorks: "All series",
     pending: "Pending",
     noMatches: "No matching records.",
     records: "{count} records",
-    results: "{count} results",
+    results: "{count} records",
     summary: "{total} records · {parts} · updated {date}",
     detailsFor: "View {name} details",
     boxArtAlt: "{name} box art",
@@ -143,12 +165,12 @@ const TRANSLATIONS = {
     imported: "Official import",
   },
   ja: {
-    appTitle: "モデルカタログ",
-    searchPlaceholder: "モデル名または作品で検索",
+    appTitle: "モデルDB",
+    searchPlaceholder: "名前 / シリーズ / ラインで検索",
     filters: "絞り込み",
-    productLine: "商品ライン / グレード",
-    workSource: "作品出典",
-    catalogList: "モデル一覧",
+    productLine: "商品ライン",
+    workSource: "シリーズ",
+    catalogList: "一覧",
     officialPage: "公式商品ページ",
     manualCorrection: "手動修正",
     nameZh: "中国語名",
@@ -162,11 +184,11 @@ const TRANSLATIONS = {
     exportCorrections: "修正を出力",
     closeDetail: "詳細を閉じる",
     allProductLines: "すべての商品ライン",
-    allWorks: "すべての作品",
+    allWorks: "すべてのシリーズ",
     pending: "未確認",
     noMatches: "一致する記録がありません。",
     records: "{count} 件",
-    results: "{count} results",
+    results: "{count} 件",
     summary: "{total} 件 · {parts} · 更新 {date}",
     detailsFor: "{name} の詳細を見る",
     boxArtAlt: "{name} パッケージ画像",
@@ -194,7 +216,7 @@ const state = {
   franchise: localStorage.getItem(FRANCHISE_KEY) || "gundam",
   language: localStorage.getItem(LANGUAGE_KEY) || "zh",
   grade: "all",
-  work: "all",
+  series: "all",
   selectedKit: null,
   selectedImageIndex: 0,
 };
@@ -205,8 +227,9 @@ const elements = {
   filterSummary: document.querySelector("#filterSummary"),
   franchiseList: document.querySelector("#franchiseList"),
   languageList: document.querySelector("#languageList"),
-  gradeList: document.querySelector("#gradeList"),
-  workList: document.querySelector("#workList"),
+  seriesTabs: document.querySelector("#seriesTabs"),
+  gradeSelect: document.querySelector("#gradeSelect"),
+  seriesSelect: document.querySelector("#seriesSelect"),
   resultCount: document.querySelector("#resultCount"),
   kitGrid: document.querySelector("#kitGrid"),
   cardTemplate: document.querySelector("#kitCardTemplate"),
@@ -315,9 +338,11 @@ function applyOverride(kit) {
 
 function normalizeKit(kit) {
   const names = kit.names || {};
+  const series = kit.series && typeof kit.series === "object" ? kit.series : null;
   return {
     ...kit,
     franchise: kit.franchise || "gundam",
+    series,
     names: {
       ja: names.ja ?? null,
       en: names.en ?? null,
@@ -338,6 +363,19 @@ function displayKitById(kitId) {
 function bindEvents() {
   elements.searchInput.addEventListener("input", (event) => {
     state.query = event.target.value;
+    renderKits();
+  });
+  elements.seriesSelect.addEventListener("change", (event) => {
+    state.series = event.target.value;
+    renderSeriesControls();
+    renderGradeSelect();
+    renderFilterSummary();
+    renderKits();
+  });
+  elements.gradeSelect.addEventListener("change", (event) => {
+    state.grade = event.target.value;
+    renderGradeSelect();
+    renderFilterSummary();
     renderKits();
   });
 
@@ -501,8 +539,8 @@ function render() {
   elements.datasetSummary.textContent = datasetSummary();
   renderLanguageControls();
   renderFranchiseFilters();
-  renderGradeFilters();
-  renderWorkFilters();
+  renderSeriesControls();
+  renderGradeSelect();
   renderFilterSummary();
   renderKits();
 }
@@ -538,6 +576,30 @@ function gradeLabel(grade) {
   return grade.name_en || grade.name_zh || grade.code;
 }
 
+function gradeShortLabel(kit) {
+  return GRADE_SHORT_LABELS[kit.grade_code]?.[state.language] ?? GRADE_SHORT_LABELS[kit.grade_code]?.en ?? kit.grade_code;
+}
+
+function kitSeriesKey(kit) {
+  return kit.series?.key || "other";
+}
+
+function kitSeriesSort(kit) {
+  return Number.isFinite(kit.series?.sort) ? kit.series.sort : 999;
+}
+
+function seriesLabelFromKit(kit) {
+  return kit.series?.labels?.[state.language] ?? kit.series?.labels?.zh ?? kit.series?.labels?.en ?? kit.work_title ?? t("pending");
+}
+
+function seriesLabelFromKey(key) {
+  if (key === "all") {
+    return t("allWorks");
+  }
+  const sample = state.kits.find((kit) => kitSeriesKey(kit) === key);
+  return sample ? seriesLabelFromKit(sample) : key;
+}
+
 function kitDisplayName(kit) {
   const names = kit.names || {};
   for (const code of NAME_FALLBACKS[state.language] ?? NAME_FALLBACKS.zh) {
@@ -548,12 +610,16 @@ function kitDisplayName(kit) {
   return kit.kit_id;
 }
 
+function kitShortName(kit) {
+  let name = kitDisplayName(kit);
+  for (const pattern of TITLE_PREFIX_PATTERNS) {
+    name = name.replace(pattern, "");
+  }
+  return name.trim() || kitDisplayName(kit);
+}
+
 function kitSeries(kit) {
-  const gradeMap = gradeByCode();
-  const grade = gradeMap.get(kit.grade_code);
-  const line = kit.subline && kit.subline !== kit.grade_code ? kit.subline : gradeLabel(grade) || kit.grade_code;
-  const work = kit.work_title || t("pending");
-  return `${line} · ${work}`;
+  return `${seriesLabelFromKit(kit)} · ${gradeShortLabel(kit)}`;
 }
 
 function kitsForCurrentFranchise() {
@@ -566,7 +632,7 @@ function filteredKits() {
     if (state.grade !== "all" && kit.grade_code !== state.grade) {
       return false;
     }
-    if (state.work !== "all" && (kit.work_title || "unknown") !== state.work) {
+    if (state.series !== "all" && kitSeriesKey(kit) !== state.series) {
       return false;
     }
     if (!query) {
@@ -582,6 +648,8 @@ function filteredKits() {
       kit.names.en,
       kit.names.zh,
       kit.names.ko,
+      seriesLabelFromKit(kit),
+      kit.series?.key,
       kit.work_title,
       kit.universe,
       kit.release_date,
@@ -628,7 +696,7 @@ function renderFranchiseFilters() {
     button.addEventListener("click", () => {
       state.franchise = franchise;
       state.grade = "all";
-      state.work = "all";
+      state.series = "all";
       localStorage.setItem(FRANCHISE_KEY, state.franchise);
       render();
     });
@@ -636,69 +704,91 @@ function renderFranchiseFilters() {
   }
 }
 
-function renderGradeFilters() {
+function seriesCountsForCurrentFranchise() {
   const kits = kitsForCurrentFranchise();
   const counts = new Map();
   for (const kit of kits) {
-    counts.set(kit.grade_code, (counts.get(kit.grade_code) || 0) + 1);
+    const key = kitSeriesKey(kit);
+    const current = counts.get(key) || { count: 0, sort: kitSeriesSort(kit), label: seriesLabelFromKit(kit) };
+    current.count += 1;
+    current.sort = Math.min(current.sort, kitSeriesSort(kit));
+    counts.set(key, current);
   }
-
-  const codes = ["all", ...[...counts.keys()].sort()];
-  elements.gradeList.innerHTML = "";
-
-  for (const code of codes) {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = `filter-chip${state.grade === code ? " is-active" : ""}`;
-    const label =
-      code === "all"
-        ? `${t("allProductLines")} ${kits.length}`
-        : `${code} ${counts.get(code)}`;
-    button.textContent = label;
-    button.addEventListener("click", () => {
-      state.grade = code;
-      renderGradeFilters();
-      renderFilterSummary();
-      renderKits();
-    });
-    elements.gradeList.append(button);
-  }
+  return counts;
 }
 
-function renderWorkFilters() {
+function renderSeriesControls() {
   const kits = kitsForCurrentFranchise();
-  const counts = new Map();
-  for (const kit of kits) {
-    const work = kit.work_title || "unknown";
-    counts.set(work, (counts.get(work) || 0) + 1);
+  const counts = seriesCountsForCurrentFranchise();
+  if (state.series !== "all" && !counts.has(state.series)) {
+    state.series = "all";
   }
 
-  const works = [...counts.keys()].sort((a, b) => {
-    if (a === "unknown") return 1;
-    if (b === "unknown") return -1;
-    return counts.get(b) - counts.get(a) || a.localeCompare(b);
-  });
+  const seriesEntries = [...counts.entries()].sort((a, b) => a[1].sort - b[1].sort || b[1].count - a[1].count || a[1].label.localeCompare(b[1].label));
 
-  elements.workList.innerHTML = "";
-  elements.workList.append(makeWorkButton("all", `${t("allWorks")} ${kits.length}`));
-
-  for (const work of works) {
-    elements.workList.append(makeWorkButton(work, `${work === "unknown" ? t("pending") : work} ${counts.get(work)}`));
+  elements.seriesTabs.innerHTML = "";
+  elements.seriesTabs.append(makeSeriesTab("all", `${t("allWorks")} ${kits.length}`));
+  for (const [key, entry] of seriesEntries) {
+    elements.seriesTabs.append(makeSeriesTab(key, `${entry.label} ${entry.count}`));
   }
+
+  elements.seriesSelect.innerHTML = "";
+  elements.seriesSelect.append(makeOption("all", `${t("allWorks")} (${kits.length})`));
+  for (const [key, entry] of seriesEntries) {
+    elements.seriesSelect.append(makeOption(key, `${entry.label} (${entry.count})`));
+  }
+  elements.seriesSelect.value = state.series;
 }
 
-function makeWorkButton(work, label) {
+function makeSeriesTab(key, label) {
   const button = document.createElement("button");
   button.type = "button";
-  button.className = `filter-chip${state.work === work ? " is-active" : ""}`;
+  button.className = `series-tab${state.series === key ? " is-active" : ""}`;
   button.textContent = label;
   button.addEventListener("click", () => {
-    state.work = work;
-    renderWorkFilters();
+    state.series = key;
+    renderSeriesControls();
+    renderGradeSelect();
     renderFilterSummary();
     renderKits();
   });
   return button;
+}
+
+function makeOption(value, label) {
+  const option = document.createElement("option");
+  option.value = value;
+  option.textContent = label;
+  return option;
+}
+
+function renderGradeSelect() {
+  const kits = kitsForCurrentFranchise().filter((kit) => state.series === "all" || kitSeriesKey(kit) === state.series);
+  const counts = new Map();
+  for (const kit of kits) {
+    counts.set(kit.grade_code, (counts.get(kit.grade_code) || 0) + 1);
+  }
+  if (state.grade !== "all" && !counts.has(state.grade)) {
+    state.grade = "all";
+  }
+
+  const codes = [...counts.keys()].sort();
+  elements.gradeSelect.innerHTML = "";
+  elements.gradeSelect.append(makeOption("all", `${t("allProductLines")} (${kits.length})`));
+  for (const code of codes) {
+    const sample = kits.find((kit) => kit.grade_code === code);
+    const label = sample ? gradeShortLabel(sample) : code;
+    elements.gradeSelect.append(makeOption(code, `${label} (${counts.get(code)})`));
+  }
+  elements.gradeSelect.value = state.grade;
+}
+
+function renderGradeFilters() {
+  renderGradeSelect();
+}
+
+function renderWorkFilters() {
+  renderSeriesControls();
 }
 
 function renderFilterSummary() {
@@ -707,8 +797,8 @@ function renderFilterSummary() {
     state.grade === "all"
       ? t("allProductLines")
       : gradeLabel(gradeMap.get(state.grade)) || state.grade;
-  const workLabel = state.work === "all" ? t("allWorks") : state.work === "unknown" ? t("pending") : state.work;
-  elements.filterSummary.textContent = `${franchiseLabel(state.franchise)} · ${gradeLabelText} · ${workLabel}`;
+  const seriesLabel = seriesLabelFromKey(state.series);
+  elements.filterSummary.textContent = `${franchiseLabel(state.franchise)} · ${seriesLabel} · ${gradeLabelText}`;
 }
 
 function renderKits() {
@@ -728,15 +818,16 @@ function renderKits() {
     const card = elements.cardTemplate.content.firstElementChild.cloneNode(true);
     const boxArt = card.querySelector(".box-art");
     const imageUrl = kit.images?.box_art_url;
-    const name = kitDisplayName(kit);
+    const fullName = kitDisplayName(kit);
+    const name = kitShortName(kit);
     card.tabIndex = 0;
     card.setAttribute("role", "button");
-    card.setAttribute("aria-label", t("detailsFor", { name }));
+    card.setAttribute("aria-label", t("detailsFor", { name: fullName }));
 
     if (imageUrl) {
       const img = document.createElement("img");
       img.src = imageUrl;
-      img.alt = t("boxArtAlt", { name });
+      img.alt = t("boxArtAlt", { name: fullName });
       img.loading = "lazy";
       img.addEventListener("error", () => showPlaceholder(boxArt, kit.grade_code));
       boxArt.append(img);
@@ -744,6 +835,12 @@ function renderKits() {
       showPlaceholder(boxArt, kit.grade_code);
     }
 
+    const badges = card.querySelector(".kit-badges");
+    for (const label of [seriesLabelFromKit(kit), gradeShortLabel(kit)]) {
+      const badge = document.createElement("span");
+      badge.textContent = label;
+      badges.append(badge);
+    }
     card.querySelector("h3").textContent = name;
     card.querySelector("p").textContent = kitSeries(kit);
     card.addEventListener("click", () => openDetail(kit));
@@ -766,10 +863,9 @@ function openDetail(kit) {
 }
 
 function renderDetail(kit) {
-  const grade = gradeByCode().get(kit.grade_code);
-  elements.detailKicker.textContent = `${franchiseLabel(kit.franchise)} · ${gradeLabel(grade) || kit.grade_code}${kit.scale ? ` · ${kit.scale}` : ""}`;
-  elements.detailTitle.textContent = kitDisplayName(kit);
-  elements.detailSubtitle.textContent = kit.work_title || t("pending");
+  elements.detailKicker.textContent = `${seriesLabelFromKit(kit)} · ${gradeShortLabel(kit)}${kit.scale ? ` · ${kit.scale}` : ""}`;
+  elements.detailTitle.textContent = kitShortName(kit);
+  elements.detailSubtitle.textContent = [kit.release_date, formatPrice(kit.price_jpy)].filter((value) => value && value !== t("pending")).join(" · ");
   renderDetailMeta(kit);
   renderDetailGallery(kit);
   fillCorrectionForm(kit);
@@ -791,11 +887,11 @@ function closeDetail() {
 function renderDetailMeta(kit) {
   const rows = [
     [t("franchise"), franchiseLabel(kit.franchise)],
+    [t("workSource"), seriesLabelFromKit(kit)],
     [t("nameZh"), kit.names.zh || t("pending")],
     [t("nameKo"), kit.names.ko || t("pending")],
     [t("nameEn"), kit.names.en || t("pending")],
     [t("nameJa"), kit.names.ja || t("pending")],
-    [t("workSource"), kit.work_title || t("pending")],
     [t("universe"), kit.universe || t("pending")],
     [t("productLine"), kit.subline && kit.subline !== kit.grade_code ? `${kit.grade_code} / ${kit.subline}` : kit.grade_code],
     [t("scale"), kit.scale || t("pending")],
