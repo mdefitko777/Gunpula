@@ -28,6 +28,7 @@ const TAMASHII_GUNDAM_BRANDS = [
   { brandCode: "metal_build", label: "METAL BUILD" },
   { brandCode: "metal_robot_tamashii", label: "METAL ROBOT魂" },
   { brandCode: "robot_tamashii", label: "ROBOT魂" },
+  { brandCode: "shfiguarts", label: "S.H.Figuarts" },
 ];
 
 const HTML_ENTITY_MAP = {
@@ -526,7 +527,13 @@ function parseGashaponSearchListings(html, resultUrl) {
 }
 
 async function importGashaponSearch({ label, resultUrl, franchise, gradeCode, subline, idPrefix, tags, fallbackWork, fallbackUniverse, fetchDetails = true }) {
-  const html = await fetchText(resultUrl);
+  let html = "";
+  try {
+    html = await fetchText(resultUrl);
+  } catch (error) {
+    console.warn(`Gashapon listing fetch failed for ${label}: ${error.message}`);
+    return [];
+  }
   const listings = parseGashaponSearchListings(html, resultUrl);
   const imported = [];
 
@@ -612,10 +619,16 @@ function tamashiiGradeCode(brandName) {
   if (/METAL ROBOT/i.test(brandName)) {
     return "METAL_ROBOT";
   }
+  if (/S\.H\.Figuarts/i.test(brandName)) {
+    return "SH_FIGUARTS";
+  }
   return "ROBOT_SPIRITS";
 }
 
 function tamashiiSubline(title, brandName) {
+  if (/S\.H\.Figuarts/i.test(brandName)) {
+    return "S.H.Figuarts";
+  }
   if (/METAL ROBOT/i.test(brandName)) {
     return brandName;
   }
@@ -1190,6 +1203,18 @@ async function main() {
       tags: ["pokemon", "bandai gashapon", "capsule toy", "mascot"],
       fallbackWork: "Pokemon",
       fallbackUniverse: "Pokemon",
+      fetchDetails: false,
+    })),
+    ...(await importGashaponSearch({
+      label: "Gundam official gashapon",
+      resultUrl: `${GASHAPON_BASE_URL}/products/result.php?free=${encodeURIComponent("ガンダム")}`,
+      franchise: "gundam",
+      gradeCode: "GUNDAM_MERCH",
+      subline: "Gundam Gashapon Merchandise",
+      idPrefix: "gundam-merch",
+      tags: ["gundam", "bandai gashapon", "capsule toy", "merchandise"],
+      fallbackWork: "Mixed Gundam Works",
+      fallbackUniverse: "Mixed",
       fetchDetails: false,
     })),
     ...(await importGashaponSearch({

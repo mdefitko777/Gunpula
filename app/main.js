@@ -43,6 +43,7 @@ const GRADE_SHORT_LABELS = {
   METAL_BUILD: { zh: "MB", ko: "MB", en: "MB", ja: "MB" },
   METAL_ROBOT: { zh: "MR魂", ko: "MR魂", en: "MR", ja: "MR魂" },
   ROBOT_SPIRITS: { zh: "R魂", ko: "R魂", en: "RS", ja: "R魂" },
+  SH_FIGUARTS: { zh: "SHF", ko: "SHF", en: "SHF", ja: "SHF" },
   GUNDAM_MERCH: { zh: "周边", ko: "굿즈", en: "Goods", ja: "グッズ" },
   POKE_GASHAPON: { zh: "扭蛋", ko: "가샤폰", en: "Gashapon", ja: "ガシャポン" },
   POKEPLA: { zh: "拼装", ko: "프라모델", en: "Model Kit", ja: "プラモ" },
@@ -580,6 +581,11 @@ async function loadJson(path) {
   return response.json();
 }
 
+function preferredLanguage() {
+  const language = localStorage.getItem(LANGUAGE_KEY);
+  return LANGUAGES.some((item) => item.code === language) ? language : null;
+}
+
 function loadSavedViewState() {
   let stored = {};
   try {
@@ -589,14 +595,15 @@ function loadSavedViewState() {
     stored = {};
   }
 
+  const storedLanguage = preferredLanguage() || stored.language;
   const hash = window.location.hash.startsWith("#") ? window.location.hash.slice(1) : "";
   const params = new URLSearchParams(hash);
   if (!hash) {
-    return stored;
+    return { ...stored, language: storedLanguage };
   }
 
   const fromHash = {};
-  fromHash.language = params.get("lang") || params.get("language") || stored.language;
+  fromHash.language = storedLanguage || params.get("lang") || params.get("language") || stored.language;
   fromHash.franchise = params.get("franchise") || stored.franchise;
   fromHash.series = params.get("series") || "all";
   fromHash.grade = params.get("grade") || "all";
@@ -674,6 +681,7 @@ function applyViewState(viewState) {
   state.activeModal = viewState.modal || null;
   state.selectedKit = viewState.kit ? displayKitById(viewState.kit) : null;
   normalizeState();
+  localStorage.setItem(LANGUAGE_KEY, state.language);
   render();
   if (state.selectedKit) {
     renderDetail(state.selectedKit);
