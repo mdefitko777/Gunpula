@@ -1,4 +1,5 @@
 import { readFile, writeFile } from "node:fs/promises";
+import { extractTamashiiGalleryImages } from "./lib/tamashii-images.mjs";
 
 const CANDY_BASE_URL = "https://www.bandai.co.jp";
 const GASHAPON_BASE_URL = "https://gashapon.jp";
@@ -637,11 +638,7 @@ function parseTamashiiInfoValue(html, labelPattern) {
 function parseTamashiiProductDetail(html, detailUrl) {
   const title = stripTags(extract(/<span class="productMain__name">([\s\S]*?)<\/span>/, html));
   const brandName = stripTags(extract(/<span class="productMain__brand">[\s\S]*?<img[^>]+alt="([^"]+)"/, html));
-  const mainGalleryBlock = extract(/<div class="productMainImg[\s\S]*?<\/ul>/, html) ?? html;
-  const gallery = unique([
-    ...[...mainGalleryBlock.matchAll(/(?:href|src)="([^"]*\/storage\/images\/products\/(?:main|sub|imported)\/[^"]+)"/g)].map((match) => absoluteUrl(match[1], detailUrl)),
-    ...[...html.matchAll(/<img[^>]+src="([^"]*\/assets\/item\/[^"]+)"/g)].map((match) => absoluteUrl(match[1], detailUrl)),
-  ]).slice(0, 24);
+  const gallery = extractTamashiiGalleryImages(html, detailUrl).slice(0, 24);
   const priceBlock = parseTamashiiInfoValue(html, /販売価格|価格/);
   const releaseBlock = parseTamashiiInfoValue(html, /発売日|発送月|発売時期/);
   const workTitle = stripTags(parseTamashiiInfoValue(html, /登場作品/));
