@@ -15,7 +15,7 @@
 | `subline` | 更细分类，例如 HGUC、HGCE、MG Ver.Ka、PG Unleashed。 |
 | `number` | 官方编号，没有就填 `null`。 |
 | `scale` | 比例，例如 `1/144`、`1/100`、`1/60`、`non-scale`。 |
-| `names` | `ja`、`en`、`zh` 三语名称，未知可填 `null`，但至少一个要有值。 |
+| `names` | `ja`、`en`、`zh`、`ko` 四语名称，未知可填 `null`，但至少一个要有值。 |
 | `images` | 图片字段，当前先使用 `box_art_url` 和 `box_art_source_id`。 |
 | `gallery_image_urls` | 展示图 URL 数组，第一张通常与盒图相同，详情页使用。 |
 | `universe` | 世界观，例如 UC、CE、AD、Ad Stella、Build。 |

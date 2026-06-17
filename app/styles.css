@@ -280,13 +280,15 @@ h1 {
 }
 
 .select-filter,
-.series-name-field {
+.series-name-field,
+.price-filter {
   display: grid;
   gap: 6px;
 }
 
 .select-filter span,
 .series-name-field span,
+.price-filter > span,
 .filter-label {
   color: var(--muted);
   font-size: 12px;
@@ -294,7 +296,8 @@ h1 {
 }
 
 .select-filter select,
-.series-name-field input {
+.series-name-field input,
+.price-filter input {
   min-width: 0;
   height: 38px;
   padding: 0 10px;
@@ -302,6 +305,23 @@ h1 {
   border-radius: 6px;
   background: #ffffff;
   color: var(--ink);
+}
+
+.price-filter {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.price-filter > span {
+  grid-column: 1 / -1;
+}
+
+.price-filter input {
+  width: 100%;
+}
+
+.compact-button {
+  align-self: end;
+  min-height: 38px;
 }
 
 .series-admin-actions {
@@ -857,6 +877,26 @@ body[data-view="wanted"] .top-bar {
   text-align: right;
 }
 
+.update-log {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.update-log span {
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fafbfc;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
 .app-update-row {
   display: grid;
   grid-template-columns: minmax(120px, auto) minmax(0, 1fr);
@@ -1138,9 +1178,62 @@ body[data-view="wanted"] .top-bar {
   appearance: none;
 }
 
+.collection-detail-panel {
+  margin-top: 10px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fafbfc;
+}
+
+.collection-detail-panel[hidden] {
+  display: none;
+}
+
+.collection-detail-panel h3 {
+  margin: 0 0 10px;
+  font-size: 13px;
+}
+
+.collection-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.collection-detail-grid label {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.collection-detail-grid span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.collection-detail-grid input {
+  width: 100%;
+  min-width: 0;
+  min-height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #ffffff;
+  color: var(--ink);
+}
+
+.collection-detail-panel .compact-button {
+  width: 100%;
+  margin-top: 10px;
+}
+
 .status-actions button:disabled,
 .wanted-stepper button:disabled,
 .wanted-stepper input:disabled,
+.collection-detail-grid input:disabled,
+.collection-detail-panel button:disabled,
 .sync-actions button:disabled,
 .secondary-button:disabled {
   cursor: not-allowed;
@@ -1246,7 +1339,9 @@ body[data-view="wanted"] .top-bar {
 
 .correction-form input:focus,
 .correction-form select:focus,
-.series-name-field input:focus {
+.series-name-field input:focus,
+.price-filter input:focus,
+.collection-detail-grid input:focus {
   border-color: var(--accent);
   outline: 0;
 }
@@ -1323,6 +1418,11 @@ body[data-view="wanted"] .top-bar {
 
   .filter-body,
   .series-admin-body {
+    grid-template-columns: 1fr;
+  }
+
+  .price-filter,
+  .collection-detail-grid {
     grid-template-columns: 1fr;
   }
 

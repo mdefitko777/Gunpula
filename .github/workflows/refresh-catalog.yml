@@ -22,7 +22,10 @@ jobs:
         run: npm run import:official
 
       - name: Validate catalog
-        run: npm run validate
+        run: |
+          npm run validate
+          npm run duplicates
+          npm run audit:gundam-series
 
       - name: Commit updated catalog
         run: |

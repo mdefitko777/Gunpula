@@ -1137,6 +1137,18 @@ function beybladeCategoryLabel(category) {
   return "BEYBLADE X";
 }
 
+function beybladeSeriesTags(listing) {
+  const prefix = listing.code.split("-")[0]?.toLowerCase();
+  const tags = ["beyblade", "beyblade x", "takara tomy", "battle toy"];
+  if (["bx", "ux", "cx"].includes(prefix)) {
+    tags.push(prefix);
+  }
+  if (listing.is_limited) {
+    tags.push("limited");
+  }
+  return tags;
+}
+
 async function importBeybladeX() {
   const html = await fetchBrowserText(BEYBLADE_X_LINEUP_URL, "https://beyblade.takaratomy.co.jp/");
   const listings = parseBeybladeXListings(html, BEYBLADE_X_LINEUP_URL);
@@ -1175,7 +1187,7 @@ async function importBeybladeX() {
       isLimited: listing.is_limited,
       sourceId: TAKARA_TOMY_BEYBLADE_X_SOURCE_ID,
       sourceUrls: [listing.detail_url, BEYBLADE_X_LINEUP_URL],
-      tags: ["beyblade", "beyblade x", "takara tomy", "battle toy"],
+      tags: beybladeSeriesTags(listing),
       notes: "Imported from the official Takara Tomy BEYBLADE X lineup and product detail pages.",
       workOverride: "BEYBLADE X",
       universeOverride: "BEYBLADE X",

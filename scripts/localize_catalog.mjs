@@ -29,21 +29,21 @@ const SERIES = [
     sort: 30,
     labels: { zh: "SEED", en: "SEED", ja: "SEED", ko: "SEED" },
     universe: "CE",
-    pattern: /SEED|DESTINY|FREEDOM|ASTRAY|STARGAZER|スターゲイザー|デスティニー|フリーダム|ジャスティス|インパルス|アカツキ|ストライク|イージス|デュエル|バスター|ブリッツ|プロヴィデンス|カラミティ|フォビドゥン|レイダー|アストレイ|ジン|シグー|ゲイツ|ウィンダム|ムラサメ|ブラックナイトスコード/i,
+    pattern: /SEED|DESTINY|FREEDOM|ASTRAY|STARGAZER|スターゲイザー|デスティニー|フリーダム|ジャスティス|インパルス|アカツキ|ストライク|イージス|デュエル|バスター|ブリッツ|プロヴィデンス|カラミティ|フォビドゥン|レイダー|アストレイ|ジン|シグー|ゲイツ|ウィンダム|ムラサメ|ブラックナイトスコード|ソードストライカー|ランチャーストライカー|エールストライカー|ストライカーパック|プラウドディフェンダー|アークエンジェル/i,
   },
   {
     key: "double_o",
     sort: 40,
     labels: { zh: "00", en: "00", ja: "00", ko: "00" },
     universe: "AD",
-    pattern: /Gundam 00(?![0-9])|ガンダム00(?![0-9])|ダブルオー|00クアンタ|クアンタ|エクシア|デュナメス|キュリオス|ヴァーチェ|ナドレ|アストレア|ケルディム|アリオス|セラヴィー|セラフィム|オーライザー|ジンクス|ティエレン|スサノオ|フラッグ|スローネ|アルケー|アヘッド|ガデッサ|ガラッゾ|リボーンズ|ブレイヴ|Awakening of the Trailblazer/i,
+    pattern: /Gundam 00(?![0-9])|ガンダム00(?![0-9])|ダブルオー|00クアンタ|クアンタ|エクシア|デュナメス|キュリオス|ヴァーチェ|ナドレ|アストレア|ケルディム|アリオス|セラヴィー|セラフィム|オーライザー|ジンクス|ティエレン|スサノオ|フラッグ|スローネ|アルケー|アヘッド|ガデッサ|ガラッゾ|リボーンズ|ブレイヴ|GNアームズ|1\.5（アイズ）|1\.5ガンダム|Awakening of the Trailblazer/i,
   },
   {
     key: "w",
     sort: 50,
     labels: { zh: "W", en: "W", ja: "W", ko: "W" },
     universe: "AC",
-    pattern: /Gundam Wing|Endless Waltz|G-UNIT|ガンダムW|ウイング|デスサイズ|ヘビーアームズ|サンドロック|シェンロン|アルトロン|トールギス|エピオン|リーオー|マグアナック|ヴァイエイト|メリクリウス|エアリーズ|ジェミナス/i,
+    pattern: /Gundam Wing|Endless Waltz|G-UNIT|ガンダムW|ウイング|デスサイズ|ヘビーアームズ|サンドロック|シェンロン|アルトロン|トールギス|エピオン|リーオー|マグアナック|ヴァイエイト|メリクリウス|エアリーズ|ジェミナス|ヒイロ・ユイ/i,
   },
   {
     key: "ibo",
@@ -57,7 +57,7 @@ const SERIES = [
     sort: 70,
     labels: { zh: "水星", en: "Witch", ja: "水星", ko: "수성" },
     universe: "Ad Stella",
-    pattern: /Witch from Mercury|水星の魔女|エアリアル|ルブリス|キャリバーン|ファラクト|ディランザ|デミ|ベギル|ミカエリス|シュバルゼッテ|ガンヴォルヴァ|ザウォート|ダリルバルデ/i,
+    pattern: /Witch from Mercury|水星の魔女|エアリアル|ルブリス|キャリバーン|ファラクト|ディランザ|デミ|ベギル|ミカエリス|シュバルゼッテ|ガンヴォルヴァ|ザウォート|ダリルバルデ|グエル・ジェターク/i,
   },
   {
     key: "gqux",
@@ -71,14 +71,14 @@ const SERIES = [
     sort: 100,
     labels: { zh: "初代", en: "0079", ja: "初代", ko: "초대" },
     universe: "UC",
-    pattern: /Mobile Suit Gundam$|RX-78|ガンダム\(アニメカラー|ガンダム\(ロールアウト|ガンダム\(ハードポイント|＜SIDE MS＞\s*ガンダム$|Gファイター|ホワイトベース|マゼラ・アタック|ガンキャノン|ガンタンク|シャア専用|ザク|グフ|ドム|ズゴック|ゲルググ|ジオング|アッガイ|ゾック|ギャン|ジム|ボール|ララァ専用|ビグ・ザム|コア・ブースター|ドップ|ギガン|プロトタイプガンダム/i,
+    pattern: /Mobile Suit Gundam$|RX-78|ガンダム\(アニメカラー|ガンダム\(ロールアウト|ガンダム\(ハードポイント|＜SIDE MS＞\s*ガンダム$|Gファイター|Gアーマー|ホワイトベース|マゼラ・アタック|ガンキャノン|ガンタンク|シャア専用|シャア・アズナブル|ザク|グフ|ドム|ズゴック|ゲルググ|ジオング|アッガイ|ゾック|ギャン|ジム|ボール|ララァ専用|ビグ・ザム|コア・ブースター|ドップ|ギガン|プロトタイプガンダム|ガンダムEX|復讐のレクイエム/i,
   },
   {
     key: "zeta",
     sort: 110,
     labels: { zh: "Z", en: "Z", ja: "Z", ko: "Z" },
     universe: "UC",
-    pattern: /Mobile Suit Z Gundam|Zガンダム|Ζ|ゼータ|ZII|スーパーガンダム|Gディフェンサー|ガンダムMk-II|ボリノーク・サマーン|百式|リック・ディアス|メタス|ネモ|ハイザック|マラサイ|バーザム|アッシマー|ギャプラン|ジ・O|ディジェ|ガルバルディ/i,
+    pattern: /Mobile Suit Z Gundam|Zガンダム|Ζ|ゼータ|ZII|スーパーガンダム|Gディフェンサー|ガンダムMk-II|ガンダムMk-Ⅱ|ボリノーク・サマーン|百式|リック・ディアス|メタス|ネモ|ハイザック|マラサイ|バーザム|アッシマー|ギャプラン|ジ・O|ディジェ|ガルバルディ/i,
   },
   {
     key: "zz",
@@ -127,7 +127,7 @@ const SERIES = [
     sort: 180,
     labels: { zh: "G", en: "G", ja: "G", ko: "G" },
     universe: "FC",
-    pattern: /Mobile Fighter G Gundam|Gガンダム|ゴッドガンダム|シャイニングガンダム|マスターガンダム|ノーベルガンダム|ドラゴンガンダム|ガンダムローズ|マックスター|デビルガンダム|クーロンガンダム|風雲再起/i,
+    pattern: /Mobile Fighter G Gundam|Gガンダム|ゴッドガンダム|シャイニングガンダム|マスターガンダム|ノーベルガンダム|ドラゴンガンダム|ガンダムローズ|マックスター|マンダラガンダム|デビルガンダム|クーロンガンダム|風雲再起/i,
   },
   {
     key: "x",
@@ -148,14 +148,14 @@ const SERIES = [
     sort: 210,
     labels: { zh: "G复国", en: "G-Reco", ja: "Gレコ", ko: "G레코" },
     universe: "Regild Century",
-    pattern: /Reconguista|Gのレコンギスタ|G-セルフ|G-アルケイン|G-ルシファー|グリモア|マックナイフ|ジャハナム|カバカーリー/i,
+    pattern: /Reconguista|Gのレコンギスタ|G-セルフ|Ｇ-セルフ|G-アルケイン|G-ルシファー|グリモア|マックナイフ|ジャハナム|カバカーリー/i,
   },
   {
     key: "build",
     sort: 220,
     labels: { zh: "创战", en: "Build", ja: "ビルド", ko: "빌드" },
     universe: "Build",
-    pattern: /Build|ビルド|ダイバー|コアガンダム|アースリィ|ユーラヴェン|ベアッガイ|プチッガイ|ふみな|トライオン|アメイジング|フェニーチェ|スクランブル|ラーガンダム|プルタイン|ティフォエウス/i,
+    pattern: /Gundam Build|Build Fighters|Build Divers|Build Metaverse|ビルド|ダイバー|コアガンダム|アースリィ|ユーラヴェン|ベアッガイ|プチッガイ|ふみな|トライオン|アメイジング|フェニーチェ|スクランブル|ラーガンダム|プルタイン|ティフォエウス/i,
   },
   {
     key: "age",
@@ -170,6 +170,27 @@ const SERIES = [
     labels: { zh: "AOZ", en: "AOZ", ja: "A.O.Z", ko: "AOZ" },
     universe: "UC",
     pattern: /Advance of Zeta|A\.O\.Z|TR-1|TR-6|ヘイズル|ウーンドウォート|ハイゼンスレイ|フルドド/i,
+  },
+  {
+    key: "narrative",
+    sort: 242,
+    labels: { zh: "NT", en: "Narrative", ja: "NT", ko: "NT" },
+    universe: "UC",
+    pattern: /Mobile Suit Gundam Narrative|Narrative Gundam|機動戦士ガンダムNT|ナラティブ|フェネクス|シナンジュ・スタイン|ディジェ(?:（ナラティブ| \(Narrative)|ナラティブ Ver/i,
+  },
+  {
+    key: "moon",
+    sort: 244,
+    labels: { zh: "Moon", en: "Moon", ja: "ムーン", ko: "문" },
+    universe: "UC",
+    pattern: /Moon Gundam|ムーンガンダム|バルギル/i,
+  },
+  {
+    key: "origin",
+    sort: 246,
+    labels: { zh: "Origin", en: "Origin", ja: "ORIGIN", ko: "Origin" },
+    universe: "UC",
+    pattern: /THE ORIGIN|Origin|オリジン|局地型ガンダム|ブグ|ザクI(?!I)|ザク・ハーフキャノン/i,
   },
   {
     key: "sentinel",
@@ -242,11 +263,32 @@ const SERIES = [
     pattern: /Armored Core|ARMORED CORE|アーマード・コア|アーマードコア/i,
   },
   {
-    key: "beyblade_x",
+    key: "beyblade_limited",
     sort: 420,
-    labels: { zh: "Beyblade X", en: "Beyblade X", ja: "ベイブレードX", ko: "베이블레이드 X" },
+    labels: { zh: "限定", en: "Limited", ja: "限定", ko: "한정" },
     universe: "BEYBLADE X",
-    pattern: /BEYBLADE X|Beyblade X|ベイブレードX|ベイブレード|BX-|UX-|CX-/i,
+    pattern: /限定|イベント|B4ストア|タカラトミーモール|メタルコート|Ver\./i,
+  },
+  {
+    key: "beyblade_bx",
+    sort: 421,
+    labels: { zh: "BX", en: "BX", ja: "BX", ko: "BX" },
+    universe: "BEYBLADE X",
+    pattern: /^BX-/i,
+  },
+  {
+    key: "beyblade_ux",
+    sort: 422,
+    labels: { zh: "UX", en: "UX", ja: "UX", ko: "UX" },
+    universe: "BEYBLADE X",
+    pattern: /^UX-/i,
+  },
+  {
+    key: "beyblade_cx",
+    sort: 423,
+    labels: { zh: "CX", en: "CX", ja: "CX", ko: "CX" },
+    universe: "BEYBLADE X",
+    pattern: /^CX-/i,
   },
   {
     key: "option",
@@ -271,6 +313,12 @@ const DEFAULT_SERIES = {
   universe: "unknown",
 };
 
+const NON_GUNDAM_SERIES_KEYS = new Set(["pokemon", "armored_core", "beyblade_limited", "beyblade_bx", "beyblade_ux", "beyblade_cx"]);
+
+function isGundamSeries(series) {
+  return !NON_GUNDAM_SERIES_KEYS.has(series.key);
+}
+
 const TITLE_PRIORITY_SERIES = new Set([
   "seed",
   "double_o",
@@ -291,6 +339,9 @@ const TITLE_PRIORITY_SERIES = new Set([
   "g_reco",
   "age",
   "aoz",
+  "narrative",
+  "moon",
+  "origin",
   "sentinel",
   "crossbone",
   "thunderbolt",
@@ -299,6 +350,33 @@ const TITLE_PRIORITY_SERIES = new Set([
   "08ms",
   "msv",
 ]);
+
+const GUNDAM_WORK_UNIT_RULES = [
+  { key: "build", pattern: /HGBF|HGBD|HGBD:R|Gundam Build|Build Fighters|Build Divers|Build Metaverse|ビルド|ダイバー|コアガンダム|アースリィ|マーズフォー|ヴィートルー|メルクワン|ユーラヴェン|ネプテイト|プルタイン|ラーガンダム|ベアッガイ|プチッガイ|ふみな|トライオン|アメイジング|フェニーチェ|スクランブル|ティフォエウス|AGEIIマグナム/i },
+  { key: "sangoku", pattern: /三国|三國|三国創傑伝|三国伝|SDW HEROES.*(?:関羽|孫権|曹操|劉備|諸葛亮|司馬懿|呂布|張飛|趙雲|貂蝉|馬超|黄忠|董卓|信長|悟空|三蔵|佐助|才蔵|軍馬)/i },
+  { key: "crossbone", pattern: /Crossbone|クロスボーン|ガンダムX-?1|ガンダムX-?2|ガンダムX-?3|フルクロス|ゴーストガンダム|ファントムガンダム|アンカーガンダム/i },
+  { key: "sentinel", pattern: /Sentinel|Sガンダム|Ex-S|FAZZ|Zプラス|ゼータプラス|ディープストライカー|ガンダムMk-V|ゼク・アイン/i },
+  { key: "narrative", pattern: /Mobile Suit Gundam Narrative|Narrative Gundam|機動戦士ガンダムNT|ナラティブガンダム|フェネクス|シナンジュ・スタイン.*(?:NT|ナラティブ)|ナラティブ Ver/i },
+  { key: "moon", pattern: /Moon Gundam|ムーンガンダム|バルギル/i },
+  { key: "origin", pattern: /THE ORIGIN|オリジン|局地型ガンダム|ブグ|ザクI(?!I)|ザク・ハーフキャノン|シャア専用ザクII.*ORIGIN/i },
+  { key: "gqux", pattern: /GQuuuuuuX|ジークアクス|GFreD|白いガンダム|赤いガンダム|軽キャノン|\(GQ\)|（GQ）|シャリア専用リック・ドム\(GQ\)|ザク\(GQ\)/i },
+  { key: "seed", pattern: /SEED|DESTINY|FREEDOM|ASTRAY|STARGAZER|スターゲイザー|ライジングフリーダム|イモータルジャスティス|マイティーストライクフリーダム|ストライクフリーダム|インフィニットジャスティス|デスティニー|インパルス|アカツキ|ストライク|イージス|デュエル|バスター|ブリッツ|プロヴィデンス|カラミティ|フォビドゥン|レイダー|アストレイ|ブラックナイトスコード|ジン|シグー|ゲイツ|ウィンダム|ムラサメ|ソードストライカー|ランチャーストライカー|エールストライカー|ストライカーパック|プラウドディフェンダー|アークエンジェル/i },
+  { key: "double_o", pattern: /Gundam 00(?![0-9])|ガンダム00(?![0-9])|ダブルオー|00クアンタ|クアンタ|エクシア|デュナメス|キュリオス|ヴァーチェ|ナドレ|アストレア|ケルディム|アリオス|セラヴィー|セラフィム|オーライザー|ジンクス|ティエレン|スサノオ|フラッグ|スローネ|アルケー|アヘッド|ガデッサ|ガラッゾ|リボーンズ|ブレイヴ|GNアームズ|1\.5（アイズ）|1\.5ガンダム/i },
+  { key: "w", pattern: /Gundam Wing|ガンダムW|Endless Waltz|\bEW\b|G-UNIT|ウイング|デスサイズ|ヘビーアームズ|サンドロック|シェンロン|アルトロン|トールギス|エピオン|リーオー|マグアナック|ヴァイエイト|メリクリウス|エアリーズ|ジェミナス|グリープ|ヒイロ・ユイ/i },
+  { key: "ibo", pattern: /Iron-Blooded Orphans|鉄血|バルバトス|グシオン|キマリス|グレイズ|フラウロス|バエル|ヴィダール|百里|百錬|マンロディ|ロディ|マルコシアス|アスタロト|ダンタリオン|レギンレイズ|グリムゲルデ/i },
+  { key: "witch", pattern: /Witch from Mercury|水星の魔女|エアリアル|ルブリス|キャリバーン|ファラクト|ディランザ|デミ|ベギル|ミカエリス|シュバルゼッテ|ガンヴォルヴァ|ザウォート|ダリルバルデ|グエル・ジェターク/i },
+  { key: "cca", pattern: /Char's Counterattack|逆襲のシャア|ベルトーチカ・チルドレン|νガンダム|Hi-ν|サザビー|ナイチンゲール|ヤクト・ドーガ|ギラ・ドーガ|α・アジール|リ・ガズィ|ジェガン|ハイパー・メガ・バズーカ・ランチャー/i },
+  { key: "hathaway", pattern: /Hathaway|閃光のハサウェイ|Ξガンダム|クスィーガンダム|ペーネロペー|メッサー|グスタフ・カール/i },
+  { key: "thunderbolt", pattern: /Thunderbolt|サンダーボルト|フルアーマー・ガンダム|サイコ・ザク|アトラスガンダム/i },
+  { key: "0083", pattern: /0083|Stardust Memory|GP0[123]|ガーベラ|デンドロビウム|ステイメン|ノイエ・ジール|ドラッツェ|ザメル/i },
+  { key: "0080", pattern: /0080|War in the Pocket|アレックス|NT-1|ケンプファー|ハイゴッグ|ズゴックE|ザクII改/i },
+  { key: "08ms", pattern: /08th MS Team|08小隊|Ez-8|陸戦型|グフカスタム/i },
+  { key: "zz", pattern: /ZZ|ダブルゼータ|フルアーマーZZ|強化型ZZ|クィン・マンサ|キュベレイ|ドーベン・ウルフ|ザクIII|バウ|ドライセン|ズサ|ハンマ・ハンマ|ゲーマルク/i },
+  { key: "zeta", pattern: /Zガンダム|Ζ|ゼータガンダム|ZII|サイコ・ガンダム|ガンダムMk-II|ガンダムMk-Ⅱ|百式|リック・ディアス|メタス|ネモ|ハイザック|マラサイ|バーザム|ギャプラン|アッシマー|ジ・O|ディジェ/i },
+  { key: "g", pattern: /Mobile Fighter G Gundam|Gガンダム|ゴッドガンダム|シャイニングガンダム|マスターガンダム|ノーベルガンダム|ドラゴンガンダム|ガンダムローズ|マックスター|マンダラガンダム|デビルガンダム|クーロンガンダム|風雲再起/i },
+  { key: "g_reco", pattern: /Reconguista|Gのレコンギスタ|G-セルフ|Ｇ-セルフ|G-アルケイン|G-ルシファー|グリモア|マックナイフ|ジャハナム|カバカーリー/i },
+  { key: "x", pattern: /Gundam X(?!-?[123])|ガンダムX(?!-?[123])|ガンダムダブルエックス|ダブルエックス|エアマスター|レオパルド|ベルティゴ|ヴァサーゴ|Gファルコン/i },
+];
 
 const REPLACEMENTS = {
   en: [
@@ -754,31 +832,52 @@ function seriesForKit(kit) {
     return SERIES.find((series) => series.key === "armored_core");
   }
   if (kit.franchise === "beyblade") {
-    return SERIES.find((series) => series.key === "beyblade_x");
+    const text = [kit.names?.ja, kit.names?.en, kit.names?.zh, kit.names?.ko, kit.subline, ...(kit.tags ?? [])].map(decodeHtml).join(" ");
+    if (kit.is_limited || SERIES.find((series) => series.key === "beyblade_limited").pattern.test(text)) {
+      return SERIES.find((series) => series.key === "beyblade_limited");
+    }
+    if (/^UX-/i.test(text)) {
+      return SERIES.find((series) => series.key === "beyblade_ux");
+    }
+    if (/^CX-/i.test(text)) {
+      return SERIES.find((series) => series.key === "beyblade_cx");
+    }
+    return SERIES.find((series) => series.key === "beyblade_bx");
   }
 
   const names = kit.names ?? {};
-  const fullText = [names.ja, names.en, names.zh, names.ko, kit.work_title, kit.universe, kit.subline, kit.grade_code, ...(kit.tags ?? [])]
-    .map(decodeHtml)
-    .join(" ");
   const titleText = [names.ja, names.en, names.zh, names.ko].map(decodeHtml).join(" ");
+  const classificationText = [titleText, kit.subline, kit.grade_code, ...(kit.tags ?? [])].map(decodeHtml).join(" ");
   const workText = [kit.work_title, kit.universe].map(decodeHtml).join(" ");
-  const sangoku = SERIES.find((series) => series.key === "sangoku");
-  if (sangoku.pattern.test(fullText)) {
+  const gundamSeries = SERIES.filter(isGundamSeries);
+  const sangoku = gundamSeries.find((series) => series.key === "sangoku");
+  if (sangoku.pattern.test(classificationText)) {
     return sangoku;
   }
 
-  const titleMatch = SERIES.find((series) => TITLE_PRIORITY_SERIES.has(series.key) && series.pattern.test(titleText));
+  const unitMatch = GUNDAM_WORK_UNIT_RULES.find((rule) => rule.pattern.test(classificationText));
+  if (unitMatch) {
+    return gundamSeries.find((series) => series.key === unitMatch.key) ?? DEFAULT_SERIES;
+  }
+
+  const titleMatch = gundamSeries.find((series) => TITLE_PRIORITY_SERIES.has(series.key) && series.pattern.test(titleText));
   if (titleMatch) {
     return titleMatch;
   }
 
-  const workMatch = SERIES.find((series) => series.pattern.test(workText));
+  const workMatch = gundamSeries.find((series) => series.pattern.test(workText));
   if (workMatch) {
     return workMatch;
   }
 
-  return SERIES.find((series) => series.pattern.test(fullText)) ?? DEFAULT_SERIES;
+  return gundamSeries.find((series) => series.pattern.test(classificationText)) ?? DEFAULT_SERIES;
+}
+
+function workTitleForSeries(series, kit) {
+  if (!series || series.key === "other") {
+    return kit.work_title || null;
+  }
+  return series.labels?.en || series.labels?.zh || series.key;
 }
 
 function localizeKit(kit) {
@@ -799,7 +898,8 @@ function localizeKit(kit) {
       sort: series.sort,
       labels: series.labels,
     },
-    universe: kit.universe || series.universe,
+    universe: series.universe || kit.universe || null,
+    work_title: workTitleForSeries(series, kit),
   };
 }
 

@@ -15,7 +15,12 @@
     "import:collectibles": "node scripts/import_bandai_collectibles.mjs",
     "localize": "node scripts/localize_catalog.mjs",
     "cache:ac-images": "node scripts/cache_ac_images.mjs",
+    "cache:catalog-images": "node scripts/cache_catalog_images.mjs",
+    "check:images": "node scripts/check_image_health.mjs",
     "clean:tamashii-images": "node scripts/clean_tamashii_related_images.mjs",
+    "duplicates": "node scripts/find_duplicate_candidates.mjs",
+    "audit:gundam-series": "node scripts/audit_gundam_series.mjs",
+    "android:sync": "npx @capacitor/cli sync android",
     "import:official": "npm run import:bandai && npm run import:collectibles && npm run localize && npm run cache:ac-images"
   }
 }

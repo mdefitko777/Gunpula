@@ -9,7 +9,7 @@
     <title>Gunpula Catalog</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260617-history" />
+    <link rel="stylesheet" href="./styles.css?v=20260618-12features" />
   </head>
   <body>
     <main class="catalog-page">
@@ -33,7 +33,7 @@
             <span id="filterSummary">全部系列 · 全部产品线</span>
           </summary>
           <div class="filter-body">
-            <label class="select-filter">
+            <label class="select-filter series-select-filter" hidden>
               <span data-i18n="workSource">系列</span>
               <select id="seriesSelect"></select>
             </label>
@@ -41,6 +41,24 @@
               <span data-i18n="productLine">产品线</span>
               <select id="gradeSelect"></select>
             </label>
+            <label class="select-filter">
+              <span data-i18n="itemType">商品类型</span>
+              <select id="itemTypeSelect"></select>
+            </label>
+            <label class="select-filter">
+              <span data-i18n="releaseYear">发售年份</span>
+              <select id="releaseYearSelect"></select>
+            </label>
+            <label class="select-filter">
+              <span data-i18n="limitedStatus">限定状态</span>
+              <select id="limitedSelect"></select>
+            </label>
+            <div class="price-filter">
+              <span data-i18n="priceRange">价格区间</span>
+              <input id="priceMinInput" type="number" min="0" step="100" inputmode="numeric" placeholder="最低" data-i18n-placeholder="priceMin" />
+              <input id="priceMaxInput" type="number" min="0" step="100" inputmode="numeric" placeholder="最高" data-i18n-placeholder="priceMax" />
+            </div>
+            <button class="secondary-button compact-button" id="clearFilters" type="button" data-i18n="clearFilters">清除筛选</button>
           </div>
         </details>
       </header>
@@ -114,6 +132,28 @@
               <button id="wantedQuantityPlus" type="button" aria-label="增加想要数量" data-i18n-aria="increaseWantedQuantity">+</button>
             </div>
           </div>
+          <section class="collection-detail-panel" id="collectionDetailPanel" hidden>
+            <h3 data-i18n="collectionDetails">收藏信息</h3>
+            <div class="collection-detail-grid">
+              <label>
+                <span data-i18n="collectionQuantity">数量</span>
+                <input id="collectionQuantityInput" type="number" min="1" max="99" step="1" inputmode="numeric" />
+              </label>
+              <label>
+                <span data-i18n="purchasePrice">购买价</span>
+                <input id="purchasePriceInput" type="number" min="0" step="100" inputmode="numeric" />
+              </label>
+              <label>
+                <span data-i18n="storageLocation">存放位置</span>
+                <input id="storageLocationInput" type="text" />
+              </label>
+              <label>
+                <span data-i18n="collectionNote">备注</span>
+                <input id="collectionNoteInput" type="text" />
+              </label>
+            </div>
+            <button class="secondary-button compact-button" id="saveCollectionDetails" type="button" data-i18n="saveCollectionDetails">保存收藏信息</button>
+          </section>
           <dl class="detail-meta" id="detailMeta"></dl>
           <a class="official-link" id="detailOfficialLink" target="_blank" rel="noreferrer" data-i18n="officialPage">官方商品页</a>
           <section class="correction-panel" aria-label="手动更正">
@@ -230,6 +270,10 @@
           </ul>
         </section>
         <section class="settings-section">
+          <h3 data-i18n="updateLog">更新记录</h3>
+          <div class="update-log" id="updateLog"></div>
+        </section>
+        <section class="settings-section">
           <label class="toggle-row">
             <span data-i18n="consoleMode">控制台模式</span>
             <input id="consoleModeToggle" type="checkbox" />
@@ -263,6 +307,6 @@
       </div>
     </dialog>
 
-    <script type="module" src="./main.js?v=20260618-collections"></script>
+    <script type="module" src="./main.js?v=20260618-12features"></script>
   </body>
 </html>

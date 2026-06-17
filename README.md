@@ -24,7 +24,11 @@ official and Japanese retail catalog sources instead of hand-entering every kit.
 - `scripts/search_kits.mjs` - searches kit records.
 - `scripts/serve_app.mjs` - serves the local catalog UI.
 - `scripts/import_bandai_spirits_gunpla.mjs` - imports the Japanese official BANDAI SPIRITS Gunpla catalog.
-- `scripts/import_bandai_collectibles.mjs` - imports official Bandai Candy and Bandai Gashapon Gundam lines.
+- `scripts/import_bandai_collectibles.mjs` - imports official Bandai Candy, Bandai Gashapon, Pokemon, Armored Core, and BEYBLADE X lines.
+- `scripts/cache_catalog_images.mjs` - stores fragile remote cover images in a local computer cache folder.
+- `scripts/check_image_health.mjs` - checks whether remote cover images still respond.
+- `scripts/find_duplicate_candidates.mjs` - writes suspected duplicate groups to `data/duplicate-candidates.json`.
+- `scripts/audit_gundam_series.mjs` - checks common Gundam series misclassification cases.
 - `scripts/export_grades_markdown.mjs` - exports grades as Markdown.
 
 ## Commands
@@ -37,6 +41,10 @@ npm run app
 npm run import:bandai
 npm run import:collectibles
 npm run import:official
+npm run duplicates
+npm run audit:gundam-series
+npm run check:images
+npm run cache:catalog-images
 npm run search -- --grade=RG
 npm run search -- aerial
 npm run export:grades
@@ -50,14 +58,17 @@ npm.cmd run stats
 npm.cmd run app
 npm.cmd run import:bandai
 npm.cmd run import:official
+npm.cmd run duplicates
+npm.cmd run audit:gundam-series
 ```
 
 ## Current Status
 
-The catalog currently validates 4,029 product records across Gundam, Armored
-Core, and Pokemon lines. Records include official product images, release dates,
-JPY prices where available, source links, and inferred work titles such as
-`Mobile Suit Gundam SEED`, `Mobile Suit Gundam 00`, or `Sangokuden`.
+The catalog currently validates 4,454 product records across Gundam, Armored
+Core, Pokemon, and BEYBLADE X lines. Records include official product images,
+release dates, JPY prices where available, source links, four-language names,
+and compact series labels such as `SEED`, `00`, `W`, `Iron-Blooded Orphans`,
+`Crossbone`, `Hathaway`, `BX`, `UX`, `CX`, and `Limited`.
 
 The local website is static. It does not live-fetch official pages while a user
 browses. Run `npm run import:official` to refresh the JSON data from Japanese
@@ -65,6 +76,11 @@ official sources; that command can later be wired to a scheduled job.
 
 The UI supports local manual corrections in the browser. Corrections are stored
 in `localStorage` and can be exported as JSON from a product detail view.
+
+`npm run cache:catalog-images` writes fragile official cover images to
+`../image-cache/catalog` by default, or to `IMAGE_CACHE_DIR` if that environment
+variable is set. This is a local computer backup; the browser app still uses
+normal web URLs unless the data is later rewritten to point at a hosted cache.
 
 ## Android App / PWA
 
@@ -75,7 +91,8 @@ opened, so the app remains usable when the network or official image URLs are
 unreliable.
 
 For a Play Store-style APK later, wrap the same web app with Capacitor after the
-Supabase settings are finalized.
+Supabase settings are finalized. A base `capacitor.config.json` is included; run
+`npm run android:sync` after adding Capacitor packages and the Android platform.
 
 ## Shared Supabase Sync
 
@@ -99,13 +116,14 @@ Conflict behavior is intentionally simple for now: the latest sync wins, while
 
 ## Scheduled Updates
 
-The GitHub Actions workflow `refresh-catalog.yml` runs `npm run import:official`
-and `npm run validate` once a day. If official Japanese source data changes, the
-workflow commits the refreshed JSON and cached assets back to the repository.
+The GitHub Actions workflow `refresh-catalog.yml` runs `npm run import:official`,
+`npm run validate`, `npm run duplicates`, and `npm run audit:gundam-series` once
+a day. If official Japanese source data changes, the workflow commits the
+refreshed JSON and cached assets back to the repository.
 
 ## Next Steps
 
-1. Add scheduled imports so the catalog refreshes automatically.
-2. Manually review collectible records still marked as unknown or mixed.
-3. Cross-check special and limited kits with Premium Bandai Japan and The Gundam Base Japan.
-4. Promote reviewed records from `needs_review` to `verified`.
+1. Review `data/duplicate-candidates.json` and merge real duplicates.
+2. Manually review collectible records still marked as `other`, `mixed`, or `option`.
+3. Expand the Gundam series audit rules when a new recurring misclassification is found.
+4. Move image caching from local-computer backup to a hosted cache if official hotlinking becomes unstable.
