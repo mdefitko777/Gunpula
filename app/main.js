@@ -99,6 +99,12 @@ const TRANSLATIONS = {
     syncNow: "立即同步",
     disconnectSync: "断开云同步",
     installApp: "安装到手机",
+    appUpdate: "应用更新",
+    refreshAppCache: "检查更新",
+    refreshAppHint: "清理程序缓存并重新载入最新版本，不会删除收藏。",
+    refreshAppBusy: "正在更新...",
+    refreshAppDone: "缓存已清理，正在重载。",
+    refreshAppError: "更新失败，请稍后再试。",
     syncHint: "同一个共享空间 ID 会共用收藏、更正和系列名；编辑密码控制谁能改。",
     syncConfigured: "云端已配置",
     syncNotConfigured: "未配置云端",
@@ -190,6 +196,12 @@ const TRANSLATIONS = {
     syncNow: "지금 동기화",
     disconnectSync: "클라우드 해제",
     installApp: "휴대폰에 설치",
+    appUpdate: "앱 업데이트",
+    refreshAppCache: "업데이트 확인",
+    refreshAppHint: "앱 캐시를 비우고 최신 버전을 다시 불러옵니다. 컬렉션은 삭제되지 않습니다.",
+    refreshAppBusy: "업데이트 중...",
+    refreshAppDone: "캐시를 비웠습니다. 다시 불러옵니다.",
+    refreshAppError: "업데이트에 실패했습니다. 잠시 후 다시 시도하세요.",
     syncHint: "같은 공유 공간 ID는 컬렉션, 수정, 시리즈 이름을 공유합니다. 편집 비밀번호가 수정 권한을 제어합니다.",
     syncConfigured: "클라우드 설정됨",
     syncNotConfigured: "클라우드 미설정",
@@ -281,6 +293,12 @@ const TRANSLATIONS = {
     syncNow: "Sync now",
     disconnectSync: "Disconnect cloud",
     installApp: "Install on phone",
+    appUpdate: "App update",
+    refreshAppCache: "Check for update",
+    refreshAppHint: "Clears app caches and reloads the latest version. Collections stay untouched.",
+    refreshAppBusy: "Updating...",
+    refreshAppDone: "Cache cleared. Reloading.",
+    refreshAppError: "Update failed. Try again later.",
     syncHint: "The same workspace ID shares collections, corrections, and series names. The editor password controls write access.",
     syncConfigured: "Cloud configured",
     syncNotConfigured: "Cloud not configured",
@@ -372,6 +390,12 @@ const TRANSLATIONS = {
     syncNow: "今すぐ同期",
     disconnectSync: "クラウド解除",
     installApp: "スマホにインストール",
+    appUpdate: "アプリ更新",
+    refreshAppCache: "更新を確認",
+    refreshAppHint: "アプリのキャッシュを削除して最新版を読み込みます。コレクションは消えません。",
+    refreshAppBusy: "更新中...",
+    refreshAppDone: "キャッシュを削除しました。再読み込みします。",
+    refreshAppError: "更新に失敗しました。後でもう一度お試しください。",
     syncHint: "同じ共有スペース ID はコレクション、修正、シリーズ名を共有します。編集パスワードで変更権限を制御します。",
     syncConfigured: "クラウド設定済み",
     syncNotConfigured: "クラウド未設定",
@@ -491,6 +515,8 @@ const elements = {
   disconnectSync: document.querySelector("#disconnectSync"),
   syncHint: document.querySelector("#syncHint"),
   installApp: document.querySelector("#installApp"),
+  refreshAppCache: document.querySelector("#refreshAppCache"),
+  refreshAppStatus: document.querySelector("#refreshAppStatus"),
   issueSyncStatus: document.querySelector("#issueSyncStatus"),
   collectionSection: document.querySelector("#collectionSection"),
   ownedPanel: document.querySelector("#ownedPanel"),
@@ -966,6 +992,7 @@ function bindEvents() {
   elements.syncNow.addEventListener("click", () => pullSync({ force: true }));
   elements.disconnectSync.addEventListener("click", disconnectSync);
   elements.installApp.addEventListener("click", installPwa);
+  elements.refreshAppCache.addEventListener("click", refreshAppCache);
   elements.searchInput.addEventListener("input", (event) => {
     state.query = event.target.value;
     persistViewState();
@@ -1082,6 +1109,29 @@ async function installPwa() {
   state.installPrompt = null;
   await promptEvent.prompt();
   renderSettings();
+}
+
+async function refreshAppCache() {
+  elements.refreshAppCache.disabled = true;
+  elements.refreshAppStatus.textContent = t("refreshAppBusy");
+
+  try {
+    if ("caches" in window) {
+      const keys = await caches.keys();
+      await Promise.all(keys.filter((key) => key.startsWith("gunpula-")).map((key) => caches.delete(key)));
+    }
+    if ("serviceWorker" in navigator) {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(registrations.filter((registration) => window.location.href.startsWith(registration.scope)).map((registration) => registration.unregister()));
+    }
+    elements.refreshAppStatus.textContent = t("refreshAppDone");
+    const nextUrl = new URL(window.location.href);
+    nextUrl.searchParams.set("app-refresh", Date.now().toString());
+    window.location.replace(nextUrl.href);
+  } catch {
+    elements.refreshAppCache.disabled = false;
+    elements.refreshAppStatus.textContent = t("refreshAppError");
+  }
 }
 
 function syncConfigComplete(config = state.syncConfig) {

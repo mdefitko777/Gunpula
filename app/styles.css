@@ -841,6 +841,33 @@ body[data-view="wanted"] .top-bar {
   text-align: right;
 }
 
+.app-update-row {
+  display: grid;
+  grid-template-columns: minmax(120px, auto) minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+}
+
+.app-update-row button {
+  min-height: 42px;
+  border: 1px solid var(--ink);
+  border-radius: 7px;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 900;
+}
+
+.app-update-row button:disabled {
+  opacity: 0.62;
+}
+
+.app-update-row span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
 .toggle-row {
   min-height: 42px;
   display: flex;
