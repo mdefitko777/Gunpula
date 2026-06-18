@@ -9,7 +9,7 @@
     <title>Gunpula Catalog</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260618-collection-tools" />
+    <link rel="stylesheet" href="./styles.css?v=20260618-collection-collapse" />
   </head>
   <body>
     <main class="catalog-page">
@@ -67,14 +67,20 @@
         <div class="collection-panel" id="ownedPanel">
           <div class="collection-head">
             <h2 data-i18n="ownedList">已购买</h2>
-            <span id="ownedCount">0</span>
+            <div class="collection-head-actions">
+              <span id="ownedCount">0</span>
+              <button class="collection-collapse" id="ownedCollapse" type="button" aria-label="折叠已购买">⌃</button>
+            </div>
           </div>
           <div class="collection-strip" id="ownedStrip"></div>
         </div>
         <div class="collection-panel" id="wantedPanel">
           <div class="collection-head">
             <h2 data-i18n="wantedList">想要</h2>
-            <span id="wantedCount">0</span>
+            <div class="collection-head-actions">
+              <span id="wantedCount">0</span>
+              <button class="collection-collapse" id="wantedCollapse" type="button" aria-label="折叠想要">⌃</button>
+            </div>
           </div>
           <div class="collection-strip" id="wantedStrip"></div>
         </div>
@@ -335,6 +341,6 @@
       </div>
     </dialog>
 
-    <script type="module" src="./main.js?v=20260618-collection-tools"></script>
+    <script type="module" src="./main.js?v=20260618-collection-collapse"></script>
   </body>
 </html>

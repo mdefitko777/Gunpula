@@ -9,6 +9,7 @@ const SYNC_CONFIG_KEY = "gunpula-catalog-sync-config-v1";
 const SYNC_META_KEY = "gunpula-catalog-sync-meta-v1";
 const ACTIVE_VIEW_KEY = "gunpula-catalog-active-view-v1";
 const COLLECTION_HOME_VISIBILITY_KEY = "gunpula-catalog-home-collection-visibility-v1";
+const COLLECTION_HOME_COLLAPSE_KEY = "gunpula-catalog-home-collection-collapse-v1";
 const SYNC_POLL_INTERVAL_MS = 15000;
 const SYNC_SAVE_DEBOUNCE_MS = 700;
 
@@ -125,6 +126,8 @@ const TRANSLATIONS = {
     deleteSelected: "删除选中",
     clearCollection: "全部删除",
     clearCollectionConfirm: "要删除{name}里的 {count} 条吗？",
+    collapseCollection: "折叠{name}",
+    expandCollection: "展开{name}",
     shoppingTotal: "预算 {total}",
     duplicateCandidates: "疑似重复",
     updateLog: "更新记录",
@@ -260,6 +263,8 @@ const TRANSLATIONS = {
     deleteSelected: "선택 삭제",
     clearCollection: "전체 삭제",
     clearCollectionConfirm: "{name}의 {count}개 항목을 삭제할까요?",
+    collapseCollection: "{name} 접기",
+    expandCollection: "{name} 펼치기",
     shoppingTotal: "예산 {total}",
     duplicateCandidates: "중복 후보",
     updateLog: "업데이트 기록",
@@ -395,6 +400,8 @@ const TRANSLATIONS = {
     deleteSelected: "Delete selected",
     clearCollection: "Delete all",
     clearCollectionConfirm: "Delete {count} items from {name}?",
+    collapseCollection: "Collapse {name}",
+    expandCollection: "Expand {name}",
     shoppingTotal: "Budget {total}",
     duplicateCandidates: "Duplicate candidates",
     updateLog: "Update log",
@@ -530,6 +537,8 @@ const TRANSLATIONS = {
     deleteSelected: "選択を削除",
     clearCollection: "すべて削除",
     clearCollectionConfirm: "{name} から {count} 件を削除しますか？",
+    collapseCollection: "{name} を折りたたむ",
+    expandCollection: "{name} を展開",
     shoppingTotal: "予算 {total}",
     duplicateCandidates: "重複候補",
     updateLog: "更新履歴",
@@ -634,6 +643,7 @@ const state = {
   seriesLabelOverrides: {},
   collection: { owned: [], wanted: [] },
   homeCollectionVisibility: loadHomeCollectionVisibility(),
+  homeCollectionCollapsed: loadHomeCollectionCollapsed(),
   collectionSelection: { owned: new Set(), wanted: new Set() },
   syncConfig: loadSyncConfig(),
   syncMeta: loadSyncMeta(),
@@ -705,6 +715,8 @@ const elements = {
   wantedPanel: document.querySelector("#wantedPanel"),
   ownedCount: document.querySelector("#ownedCount"),
   wantedCount: document.querySelector("#wantedCount"),
+  ownedCollapse: document.querySelector("#ownedCollapse"),
+  wantedCollapse: document.querySelector("#wantedCollapse"),
   ownedStrip: document.querySelector("#ownedStrip"),
   wantedStrip: document.querySelector("#wantedStrip"),
   collectionManagement: document.querySelector("#collectionManagement"),
@@ -1031,6 +1043,22 @@ function saveHomeCollectionVisibility() {
   localStorage.setItem(COLLECTION_HOME_VISIBILITY_KEY, JSON.stringify(state.homeCollectionVisibility));
 }
 
+function loadHomeCollectionCollapsed() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(COLLECTION_HOME_COLLAPSE_KEY) || "{}");
+    return {
+      owned: parsed.owned === true,
+      wanted: parsed.wanted === true,
+    };
+  } catch {
+    return { owned: false, wanted: false };
+  }
+}
+
+function saveHomeCollectionCollapsed() {
+  localStorage.setItem(COLLECTION_HOME_COLLAPSE_KEY, JSON.stringify(state.homeCollectionCollapsed));
+}
+
 function loadCollection() {
   try {
     const parsed = JSON.parse(localStorage.getItem(COLLECTION_KEY) || "{}");
@@ -1282,6 +1310,8 @@ function bindEvents() {
   });
   bindCollectionPanelNavigation(elements.ownedPanel, "owned");
   bindCollectionPanelNavigation(elements.wantedPanel, "wanted");
+  elements.ownedCollapse.addEventListener("click", () => toggleHomeCollectionCollapsed("owned"));
+  elements.wantedCollapse.addEventListener("click", () => toggleHomeCollectionCollapsed("wanted"));
   elements.bottomNav.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-view]");
     if (!button) {
@@ -1440,7 +1470,7 @@ function bindEvents() {
 
 function bindCollectionPanelNavigation(panel, type) {
   panel.addEventListener("click", (event) => {
-    if (state.activeView !== "catalog" || event.target.closest(".collection-item")) {
+    if (state.activeView !== "catalog" || event.target.closest(".collection-item, .collection-collapse")) {
       return;
     }
     navigateToCollectionView(type);
@@ -1465,6 +1495,15 @@ function navigateToCollectionView(type) {
   persistViewState({ mode: "push" });
   render();
   window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function toggleHomeCollectionCollapsed(type) {
+  if (!COLLECTION_TYPES.includes(type)) {
+    return;
+  }
+  state.homeCollectionCollapsed[type] = !state.homeCollectionCollapsed[type];
+  saveHomeCollectionCollapsed();
+  renderCollections();
 }
 
 function registerPwa() {
@@ -2485,8 +2524,8 @@ function toggleKitCollection(type) {
 }
 
 function renderCollections() {
-  const ownedLength = renderCollectionStrip("owned", elements.ownedStrip, elements.ownedCount, elements.ownedPanel);
-  const wantedLength = renderCollectionStrip("wanted", elements.wantedStrip, elements.wantedCount, elements.wantedPanel);
+  const ownedLength = renderCollectionStrip("owned", elements.ownedStrip, elements.ownedCount, elements.ownedPanel, elements.ownedCollapse);
+  const wantedLength = renderCollectionStrip("wanted", elements.wantedStrip, elements.wantedCount, elements.wantedPanel, elements.wantedCollapse);
   const ownedVisible = state.homeCollectionVisibility.owned && ownedLength > 0;
   const wantedVisible = state.homeCollectionVisibility.wanted && wantedLength > 0;
   elements.ownedPanel.hidden = !ownedVisible;
@@ -2496,14 +2535,25 @@ function renderCollections() {
   elements.collectionSection.hidden = visibleCount === 0 || state.activeView !== "catalog";
 }
 
-function renderCollectionStrip(type, strip, countNode, panel) {
+function renderCollectionStrip(type, strip, countNode, panel, collapseButton) {
   const ids = collectionIds(type).filter((kitId) => displayKitById(kitId));
   state.collection[type] = ids;
   const count = ids.reduce((total, kitId) => total + collectionQuantityForKit(kitId), 0);
+  const collapsed = state.homeCollectionCollapsed[type];
+  const label = t(type === "owned" ? "ownedList" : "wantedList");
   countNode.textContent = String(count);
   panel.hidden = ids.length === 0;
+  panel.classList.toggle("is-collapsed", collapsed);
   panel.tabIndex = ids.length > 0 ? 0 : -1;
+  strip.hidden = collapsed;
+  collapseButton.textContent = collapsed ? "⌄" : "⌃";
+  collapseButton.setAttribute("aria-expanded", String(!collapsed));
+  collapseButton.setAttribute("aria-label", t(collapsed ? "expandCollection" : "collapseCollection", { name: label }));
   strip.innerHTML = "";
+
+  if (collapsed) {
+    return ids.length;
+  }
 
   for (const kitId of ids.slice(0, 24)) {
     const kit = displayKitById(kitId);

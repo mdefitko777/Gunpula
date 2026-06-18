@@ -367,6 +367,10 @@ h1 {
   cursor: pointer;
 }
 
+.collection-panel.is-collapsed {
+  align-self: start;
+}
+
 .collection-panel:hover,
 .collection-panel:focus-visible {
   border-color: var(--accent-blue);
@@ -392,10 +396,37 @@ h1 {
   font-size: 14px;
 }
 
-.collection-head span {
+.collection-head-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.collection-head-actions span {
   color: var(--muted);
   font-size: 12px;
   font-weight: 900;
+}
+
+.collection-collapse {
+  width: 28px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.collection-collapse:hover,
+.collection-collapse:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  outline: 0;
 }
 
 .collection-strip {
@@ -403,6 +434,10 @@ h1 {
   gap: 8px;
   padding: 8px;
   overflow-x: auto;
+}
+
+.collection-strip[hidden] {
+  display: none;
 }
 
 .collection-item {
