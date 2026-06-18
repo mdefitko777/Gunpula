@@ -25,8 +25,9 @@ official and Japanese retail catalog sources instead of hand-entering every kit.
 - `scripts/serve_app.mjs` - serves the local catalog UI.
 - `scripts/import_bandai_spirits_gunpla.mjs` - imports the Japanese official BANDAI SPIRITS Gunpla catalog.
 - `scripts/import_bandai_collectibles.mjs` - imports official Bandai Candy, Bandai Gashapon, Pokemon, Armored Core, and BEYBLADE X lines.
-- `scripts/cache_catalog_images.mjs` - stores fragile remote cover images in a local computer cache folder.
-- `scripts/check_image_health.mjs` - checks whether remote cover images still respond.
+- `scripts/cache_catalog_images.mjs` - stores fragile remote cover images in a local cache or repo asset folder.
+- `scripts/check_image_health.mjs` - checks whether cover and gallery image candidates still respond.
+- `scripts/prune_broken_image_urls.mjs` - removes image URLs known to be broken from gallery candidates.
 - `scripts/find_duplicate_candidates.mjs` - writes suspected duplicate groups to `data/duplicate-candidates.json`.
 - `scripts/audit_gundam_series.mjs` - checks common Gundam series misclassification cases.
 - `scripts/export_grades_markdown.mjs` - exports grades as Markdown.
@@ -44,7 +45,10 @@ npm run import:official
 npm run duplicates
 npm run audit:gundam-series
 npm run check:images
+npm run check:images:pokemon
 npm run cache:catalog-images
+npm run cache:pokemon-images
+npm run repair:pokemon-images
 npm run search -- --grade=RG
 npm run search -- aerial
 npm run export:grades
@@ -79,8 +83,13 @@ in `localStorage` and can be exported as JSON from a product detail view.
 
 `npm run cache:catalog-images` writes fragile official cover images to
 `../image-cache/catalog` by default, or to `IMAGE_CACHE_DIR` if that environment
-variable is set. This is a local computer backup; the browser app still uses
-normal web URLs unless the data is later rewritten to point at a hosted cache.
+variable is set. Use `npm run cache:pokemon-images` to cache Pokemon covers into
+`app/assets/catalog/pokemon` and rewrite the catalog to prefer local assets. If
+the first official cover URL fails, the cache script tries the same product's
+gallery candidates before giving up. `npm run check:images:pokemon` writes
+`data/image-health.json`, which the app settings page shows as an image health
+summary. `npm run repair:pokemon-images` runs the full cache, check, broken URL
+prune, and re-check loop for Pokemon images.
 
 ## Android App / PWA
 

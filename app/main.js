@@ -156,6 +156,10 @@ const TRANSLATIONS = {
     issueSync: "两人数据互通",
     issueImages: "官方图片稳定性",
     issueImagesStatus: "已启用本机图片缓存",
+    imageHealth: "图片健康",
+    imageHealthReady: "可用 {working}/{checked} · 坏链接 {broken} · 更新 {date}",
+    imageHealthMissing: "无可用图 {count}",
+    imageHealthUnavailable: "还没有图片检查报告",
     issueRefresh: "官方数据更新",
     issueRefreshStatus: "已提供定时刷新工作流",
     issueConflict: "冲突处理",
@@ -174,6 +178,7 @@ const TRANSLATIONS = {
     nameJa: "日文名",
     subline: "子系列",
     universe: "宇宙 / 纪年",
+    coverImageUrl: "封面图 URL",
     saveCorrection: "保存更正",
     clearCorrection: "清除本条",
     exportCorrections: "导出更正",
@@ -277,6 +282,10 @@ const TRANSLATIONS = {
     issueSync: "두 사람 데이터 공유",
     issueImages: "공식 이미지 안정성",
     issueImagesStatus: "로컬 이미지 캐시 사용",
+    imageHealth: "이미지 상태",
+    imageHealthReady: "사용 가능 {working}/{checked} · 깨진 링크 {broken} · 업데이트 {date}",
+    imageHealthMissing: "사용 가능한 이미지 없음 {count}",
+    imageHealthUnavailable: "이미지 검사 보고서가 아직 없습니다",
     issueRefresh: "공식 데이터 업데이트",
     issueRefreshStatus: "예약 갱신 워크플로 제공",
     issueConflict: "충돌 처리",
@@ -295,6 +304,7 @@ const TRANSLATIONS = {
     nameJa: "일본어 이름",
     subline: "하위 시리즈",
     universe: "세계관 / 연표",
+    coverImageUrl: "커버 이미지 URL",
     saveCorrection: "수정 저장",
     clearCorrection: "이 항목 초기화",
     exportCorrections: "수정 내보내기",
@@ -398,6 +408,10 @@ const TRANSLATIONS = {
     issueSync: "Two-person sync",
     issueImages: "Official image stability",
     issueImagesStatus: "Local image cache enabled",
+    imageHealth: "Image health",
+    imageHealthReady: "Working {working}/{checked} · broken links {broken} · updated {date}",
+    imageHealthMissing: "No working image {count}",
+    imageHealthUnavailable: "No image check report yet",
     issueRefresh: "Official data updates",
     issueRefreshStatus: "Scheduled refresh workflow added",
     issueConflict: "Conflict handling",
@@ -416,6 +430,7 @@ const TRANSLATIONS = {
     nameJa: "Japanese name",
     subline: "Subline",
     universe: "Universe / era",
+    coverImageUrl: "Cover image URL",
     saveCorrection: "Save correction",
     clearCorrection: "Clear item",
     exportCorrections: "Export corrections",
@@ -519,6 +534,10 @@ const TRANSLATIONS = {
     issueSync: "2人のデータ共有",
     issueImages: "公式画像の安定性",
     issueImagesStatus: "ローカル画像キャッシュ有効",
+    imageHealth: "画像状態",
+    imageHealthReady: "使用可 {working}/{checked} · リンク切れ {broken} · 更新 {date}",
+    imageHealthMissing: "使用できる画像なし {count}",
+    imageHealthUnavailable: "画像チェックレポートはまだありません",
     issueRefresh: "公式データ更新",
     issueRefreshStatus: "定期更新ワークフロー追加",
     issueConflict: "競合処理",
@@ -537,6 +556,7 @@ const TRANSLATIONS = {
     nameJa: "日本語名",
     subline: "サブシリーズ",
     universe: "世界観 / 年代",
+    coverImageUrl: "カバー画像 URL",
     saveCorrection: "修正を保存",
     clearCorrection: "この項目をクリア",
     exportCorrections: "修正を出力",
@@ -570,6 +590,7 @@ const state = {
   kits: [],
   grades: [],
   sources: [],
+  imageHealth: null,
   overrides: {},
   seriesLabelOverrides: {},
   collection: { owned: [], wanted: [] },
@@ -635,6 +656,7 @@ const elements = {
   refreshAppStatus: document.querySelector("#refreshAppStatus"),
   issueSyncStatus: document.querySelector("#issueSyncStatus"),
   updateLog: document.querySelector("#updateLog"),
+  imageHealthLog: document.querySelector("#imageHealthLog"),
   collectionSection: document.querySelector("#collectionSection"),
   ownedPanel: document.querySelector("#ownedPanel"),
   wantedPanel: document.querySelector("#wantedPanel"),
@@ -692,6 +714,7 @@ const elements = {
   editSubline: document.querySelector("#editSubline"),
   editSeriesKey: document.querySelector("#editSeriesKey"),
   editUniverse: document.querySelector("#editUniverse"),
+  editCoverImageUrl: document.querySelector("#editCoverImageUrl"),
   saveCorrection: document.querySelector("#saveCorrection"),
   clearCorrection: document.querySelector("#clearCorrection"),
   exportCorrections: document.querySelector("#exportCorrections"),
@@ -711,6 +734,14 @@ async function loadJson(path) {
     throw new Error(`Failed to load ${path}`);
   }
   return response.json();
+}
+
+async function loadOptionalJson(path) {
+  try {
+    return await loadJson(path);
+  } catch {
+    return null;
+  }
 }
 
 function preferredLanguage() {
@@ -857,15 +888,17 @@ function applyViewState(viewState) {
 }
 
 async function init() {
-  const [gradesDoc, kitsDoc, sourcesDoc] = await Promise.all([
+  const [gradesDoc, kitsDoc, sourcesDoc, imageHealthDoc] = await Promise.all([
     loadJson("../data/grades.json"),
     loadJson("../data/kits.json"),
     loadJson("../data/sources.json"),
+    loadOptionalJson("../data/image-health.json"),
   ]);
 
   state.grades = gradesDoc.grades;
   state.rawKits = kitsDoc.kits;
   state.sources = sourcesDoc.sources;
+  state.imageHealth = imageHealthDoc;
   state.overrides = loadOverrides();
   state.seriesLabelOverrides = loadSeriesLabelOverrides();
   state.collection = loadCollection();
@@ -1088,6 +1121,8 @@ function applyOverride(kit) {
   const normalized = normalizeKit(kit);
   const names = { ...normalized.names };
   let series = normalized.series;
+  const images = { ...(normalized.images || {}) };
+  let galleryImageUrls = [...(normalized.gallery_image_urls || [])];
   for (const code of ["zh", "ko", "en", "ja"]) {
     const key = `name_${code}`;
     if (Object.hasOwn(override, key)) {
@@ -1097,11 +1132,18 @@ function applyOverride(kit) {
   if (Object.hasOwn(override, "series_key")) {
     series = rawSeriesTemplateByKey(override.series_key);
   }
+  if (Object.hasOwn(override, "cover_image_url") || Object.hasOwn(override, "image_url")) {
+    const coverImageUrl = String(override.cover_image_url ?? override.image_url ?? "").trim();
+    images.box_art_url = coverImageUrl || null;
+    galleryImageUrls = [...new Set([coverImageUrl, ...galleryImageUrls].filter(Boolean))];
+  }
 
   return {
     ...normalized,
     names,
     series,
+    images,
+    gallery_image_urls: galleryImageUrls,
     grade_code: Object.hasOwn(override, "grade_code") ? override.grade_code : normalized.grade_code,
     subline: Object.hasOwn(override, "subline") ? override.subline : normalized.subline,
     universe: Object.hasOwn(override, "universe") ? override.universe : normalized.universe,
@@ -1662,6 +1704,7 @@ function fillCorrectionForm(kit) {
   elements.editSubline.value = kit.subline || "";
   elements.editSeriesKey.value = currentSeriesKey;
   elements.editUniverse.value = kit.universe || "";
+  elements.editCoverImageUrl.value = kit.images?.box_art_url || "";
   elements.clearCorrection.disabled = false;
   elements.correctionForm.dataset.rawNameZh = rawKit.names?.zh || "";
   elements.correctionForm.dataset.rawNameKo = rawKit.names?.ko || "";
@@ -1671,6 +1714,7 @@ function fillCorrectionForm(kit) {
   elements.correctionForm.dataset.rawSubline = rawKit.subline || "";
   elements.correctionForm.dataset.rawSeriesKey = kitSeriesKey(rawKit);
   elements.correctionForm.dataset.rawUniverse = rawKit.universe || "";
+  elements.correctionForm.dataset.rawCoverImageUrl = rawKit.images?.box_art_url || "";
 }
 
 function resetCorrectionFormToRaw(kit) {
@@ -1684,6 +1728,7 @@ function resetCorrectionFormToRaw(kit) {
   elements.editSubline.value = rawKit.subline || "";
   elements.editSeriesKey.value = kitSeriesKey(rawKit);
   elements.editUniverse.value = rawKit.universe || "";
+  elements.editCoverImageUrl.value = rawKit.images?.box_art_url || "";
 }
 
 function correctionValue(inputValue, rawValue) {
@@ -1715,6 +1760,7 @@ function saveCurrentCorrection() {
     subline: correctionValue(elements.editSubline.value, form.rawSubline),
     series_key: correctionValue(elements.editSeriesKey.value, form.rawSeriesKey),
     universe: correctionValue(elements.editUniverse.value, form.rawUniverse),
+    cover_image_url: correctionValue(elements.editCoverImageUrl.value, form.rawCoverImageUrl),
   };
 
   for (const key of Object.keys(override)) {
@@ -1902,6 +1948,37 @@ function itemTypeKeyForKit(kit) {
 
 function itemTypeLabel(key) {
   return ITEM_TYPE_LABELS[key]?.[state.language] ?? ITEM_TYPE_LABELS[key]?.en ?? key;
+}
+
+function imageCandidatesForKit(kit) {
+  const overrideCover = kit.local_override?.cover_image_url || kit.local_override?.image_url;
+  return [...new Set([overrideCover, kit.images?.box_art_url, ...(kit.gallery_image_urls || [])].filter(Boolean))];
+}
+
+function appendImageWithFallback(container, kit, options = {}) {
+  const urls = imageCandidatesForKit(kit);
+  if (!urls.length) {
+    options.onExhausted?.();
+    return false;
+  }
+
+  const img = document.createElement("img");
+  img.alt = options.alt || "";
+  img.loading = options.loading || "lazy";
+  let index = 0;
+  const tryNext = () => {
+    if (index >= urls.length) {
+      img.remove();
+      options.onExhausted?.();
+      return;
+    }
+    img.src = urls[index];
+    index += 1;
+  };
+  img.addEventListener("error", tryNext);
+  container.append(img);
+  tryNext();
+  return true;
 }
 
 function releaseYearForKit(kit) {
@@ -2199,19 +2276,16 @@ function renderCollectionStrip(type, strip, countNode, panel) {
     item.className = "collection-item";
     item.setAttribute("aria-label", t("detailsFor", { name: kitDisplayName(kit) }));
 
-    const imageUrl = kit.images?.box_art_url;
-    if (imageUrl) {
-      const img = document.createElement("img");
-      img.src = imageUrl;
-      img.alt = "";
-      img.loading = "lazy";
-      item.append(img);
-    } else {
+    const showCollectionFallback = () => {
+      if (item.querySelector(".collection-fallback")) {
+        return;
+      }
       const fallback = document.createElement("span");
       fallback.className = "collection-fallback";
       fallback.textContent = gradeShortLabel(kit);
-      item.append(fallback);
-    }
+      item.prepend(fallback);
+    };
+    appendImageWithFallback(item, kit, { onExhausted: showCollectionFallback });
 
     const quantity = collectionQuantityForKit(kitId);
     if (quantity > 1) {
@@ -2288,6 +2362,7 @@ function renderSettings() {
   elements.syncNow.disabled = !syncConfigComplete();
   elements.disconnectSync.disabled = !syncConfigComplete();
   renderSyncStatus();
+  renderImageHealth();
 }
 
 function renderSyncStatus() {
@@ -2309,6 +2384,43 @@ function renderSyncStatus() {
     elements.syncHint.textContent = t("syncUpdatedBy", { name: state.syncMeta.updatedBy || "member", time });
   } else {
     elements.syncHint.textContent = state.sync.message || t("syncHint");
+  }
+}
+
+function renderImageHealth() {
+  if (!elements.imageHealthLog) {
+    return;
+  }
+  elements.imageHealthLog.innerHTML = "";
+  const report = state.imageHealth;
+  if (!report) {
+    const item = document.createElement("span");
+    item.textContent = t("imageHealthUnavailable");
+    elements.imageHealthLog.append(item);
+    return;
+  }
+
+  const updatedAt = report.updated_at ? new Date(report.updated_at) : null;
+  const date = updatedAt && !Number.isNaN(updatedAt.getTime()) ? updatedAt.toLocaleString() : report.updated_at || "unknown";
+  const lines = [
+    t("imageHealthReady", {
+      working: report.working_kits ?? Math.max(0, (report.checked_kits || 0) - (report.kits_without_working_image || 0)),
+      checked: report.checked_kits || 0,
+      broken: report.broken_urls || 0,
+      date,
+    }),
+  ];
+  if (report.kits_without_working_image) {
+    lines.push(t("imageHealthMissing", { count: report.kits_without_working_image }));
+  }
+  for (const [franchise, entry] of Object.entries(report.by_franchise || {})) {
+    lines.push(`${franchiseShortLabel(franchise)} ${entry.checked_kits || 0} / ${entry.kits_without_working_image || 0}`);
+  }
+
+  for (const line of lines) {
+    const item = document.createElement("span");
+    item.textContent = line;
+    elements.imageHealthLog.append(item);
   }
 }
 
@@ -2659,23 +2771,16 @@ function renderKits() {
   for (const kit of kits) {
     const card = elements.cardTemplate.content.firstElementChild.cloneNode(true);
     const boxArt = card.querySelector(".box-art");
-    const imageUrl = kit.images?.box_art_url;
     const fullName = kitDisplayName(kit);
     const name = kitShortName(kit);
     card.tabIndex = 0;
     card.setAttribute("role", "button");
     card.setAttribute("aria-label", t("detailsFor", { name: fullName }));
 
-    if (imageUrl) {
-      const img = document.createElement("img");
-      img.src = imageUrl;
-      img.alt = t("boxArtAlt", { name: fullName });
-      img.loading = "lazy";
-      img.addEventListener("error", () => showPlaceholder(boxArt, kit.grade_code));
-      boxArt.append(img);
-    } else {
-      showPlaceholder(boxArt, kit.grade_code);
-    }
+    appendImageWithFallback(boxArt, kit, {
+      alt: t("boxArtAlt", { name: fullName }),
+      onExhausted: () => showPlaceholder(boxArt, kit.grade_code),
+    });
 
     const badges = card.querySelector(".kit-badges");
     for (const label of [seriesLabelFromKit(kit), gradeShortLabel(kit)]) {
@@ -2868,8 +2973,7 @@ function updateGalleryControls(urls) {
 }
 
 function detailImages(kit) {
-  const urls = [...(kit.gallery_image_urls || []), kit.images?.box_art_url].filter(Boolean);
-  return [...new Set(urls)];
+  return imageCandidatesForKit(kit);
 }
 
 function formatPrice(value) {

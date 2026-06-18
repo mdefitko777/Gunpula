@@ -191,6 +191,10 @@
                 <span data-i18n="universe">宇宙 / 纪年</span>
                 <input id="editUniverse" type="text" placeholder="例如 CE / UC / AD" />
               </label>
+              <label>
+                <span data-i18n="coverImageUrl">封面图 URL</span>
+                <input id="editCoverImageUrl" type="url" inputmode="url" />
+              </label>
               <div class="correction-actions">
                 <button id="saveCorrection" type="button" data-i18n="saveCorrection">保存更正</button>
                 <button id="clearCorrection" type="button" data-i18n="clearCorrection">清除本条</button>
@@ -274,6 +278,10 @@
           <div class="update-log" id="updateLog"></div>
         </section>
         <section class="settings-section">
+          <h3 data-i18n="imageHealth">图片健康</h3>
+          <div class="update-log" id="imageHealthLog"></div>
+        </section>
+        <section class="settings-section">
           <label class="toggle-row">
             <span data-i18n="consoleMode">控制台模式</span>
             <input id="consoleModeToggle" type="checkbox" />
@@ -307,6 +315,6 @@
       </div>
     </dialog>
 
-    <script type="module" src="./main.js?v=20260618-12features"></script>
+    <script type="module" src="./main.js?v=20260618-image-health"></script>
   </body>
 </html>

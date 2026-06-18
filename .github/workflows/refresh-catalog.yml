@@ -26,6 +26,10 @@ jobs:
           npm run validate
           npm run duplicates
           npm run audit:gundam-series
+          npm run check:images:pokemon
+          npm run prune:broken-images -- --franchise=pokemon
+          npm run check:images:pokemon
+          npm run validate
 
       - name: Commit updated catalog
         run: |

@@ -16,11 +16,15 @@
     "localize": "node scripts/localize_catalog.mjs",
     "cache:ac-images": "node scripts/cache_ac_images.mjs",
     "cache:catalog-images": "node scripts/cache_catalog_images.mjs",
+    "cache:pokemon-images": "node scripts/cache_catalog_images.mjs --franchise=pokemon --repo-assets --rewrite --covers-only",
     "check:images": "node scripts/check_image_health.mjs",
+    "check:images:pokemon": "node scripts/check_image_health.mjs --franchise=pokemon --local",
+    "prune:broken-images": "node scripts/prune_broken_image_urls.mjs",
+    "repair:pokemon-images": "npm run cache:pokemon-images && npm run check:images:pokemon && npm run prune:broken-images -- --franchise=pokemon && npm run check:images:pokemon",
     "clean:tamashii-images": "node scripts/clean_tamashii_related_images.mjs",
     "duplicates": "node scripts/find_duplicate_candidates.mjs",
     "audit:gundam-series": "node scripts/audit_gundam_series.mjs",
     "android:sync": "npx @capacitor/cli sync android",
-    "import:official": "npm run import:bandai && npm run import:collectibles && npm run localize && npm run cache:ac-images"
+    "import:official": "npm run import:bandai && npm run import:collectibles && npm run localize && npm run cache:pokemon-images && npm run cache:ac-images"
   }
 }
