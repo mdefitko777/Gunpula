@@ -9,7 +9,7 @@
     <title>Gunpula Catalog</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260618-12features" />
+    <link rel="stylesheet" href="./styles.css?v=20260618-collection-tools" />
   </head>
   <body>
     <main class="catalog-page">
@@ -84,6 +84,15 @@
         <div class="section-head">
           <h2 id="sectionTitle" data-i18n="catalogList">模型列表</h2>
           <span id="resultCount">0 results</span>
+        </div>
+        <div class="collection-management" id="collectionManagement" hidden>
+          <label class="collection-select-all">
+            <input id="collectionSelectAll" type="checkbox" />
+            <span data-i18n="selectVisible">全选当前</span>
+          </label>
+          <span id="collectionSelectionSummary">已选 0/0</span>
+          <button class="secondary-button compact-button" id="deleteSelectedCollection" type="button" data-i18n="deleteSelected">删除选中</button>
+          <button class="secondary-button compact-button danger-button" id="clearCollectionView" type="button" data-i18n="clearCollection">全部删除</button>
         </div>
         <div class="kit-grid" id="kitGrid"></div>
       </section>
@@ -215,6 +224,17 @@
           <h3 data-i18n="language">语言</h3>
           <div class="segmented-control language-control" id="languageList" aria-label="选择语言"></div>
         </section>
+        <section class="settings-section">
+          <h3 data-i18n="homeDisplay">主页显示</h3>
+          <label class="toggle-row">
+            <span data-i18n="showOwnedOnHome">主页显示已购买</span>
+            <input id="showOwnedOnHome" type="checkbox" />
+          </label>
+          <label class="toggle-row">
+            <span data-i18n="showWantedOnHome">主页显示想要</span>
+            <input id="showWantedOnHome" type="checkbox" />
+          </label>
+        </section>
         <section class="settings-section sync-section">
           <div class="settings-section-head">
             <h3 data-i18n="sharedSync">共享同步</h3>
@@ -315,6 +335,6 @@
       </div>
     </dialog>
 
-    <script type="module" src="./main.js?v=20260618-image-health"></script>
+    <script type="module" src="./main.js?v=20260618-collection-tools"></script>
   </body>
 </html>

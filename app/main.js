@@ -8,8 +8,11 @@ const COLLECTION_KEY = "gunpula-catalog-collection-v1";
 const SYNC_CONFIG_KEY = "gunpula-catalog-sync-config-v1";
 const SYNC_META_KEY = "gunpula-catalog-sync-meta-v1";
 const ACTIVE_VIEW_KEY = "gunpula-catalog-active-view-v1";
+const COLLECTION_HOME_VISIBILITY_KEY = "gunpula-catalog-home-collection-visibility-v1";
 const SYNC_POLL_INTERVAL_MS = 15000;
 const SYNC_SAVE_DEBOUNCE_MS = 700;
+
+const COLLECTION_TYPES = ["owned", "wanted"];
 
 const LANGUAGES = [
   { code: "zh", label: "中", htmlLang: "zh-CN" },
@@ -100,6 +103,9 @@ const TRANSLATIONS = {
     closeSettings: "关闭设置",
     language: "语言",
     consoleMode: "控制台模式",
+    homeDisplay: "主页显示",
+    showOwnedOnHome: "主页显示已购买",
+    showWantedOnHome: "主页显示想要",
     ownedList: "已购买",
     wantedList: "想要",
     markOwned: "已购买",
@@ -113,6 +119,12 @@ const TRANSLATIONS = {
     storageLocation: "存放位置",
     collectionNote: "备注",
     saveCollectionDetails: "保存收藏信息",
+    selectVisible: "全选当前",
+    selectItem: "选择 {name}",
+    selectedCount: "已选 {selected}/{total}",
+    deleteSelected: "删除选中",
+    clearCollection: "全部删除",
+    clearCollectionConfirm: "要删除{name}里的 {count} 条吗？",
     shoppingTotal: "预算 {total}",
     duplicateCandidates: "疑似重复",
     updateLog: "更新记录",
@@ -226,6 +238,9 @@ const TRANSLATIONS = {
     closeSettings: "설정 닫기",
     language: "언어",
     consoleMode: "콘솔 모드",
+    homeDisplay: "홈 표시",
+    showOwnedOnHome: "홈에 구매함 표시",
+    showWantedOnHome: "홈에 원함 표시",
     ownedList: "구매함",
     wantedList: "원함",
     markOwned: "구매함",
@@ -239,6 +254,12 @@ const TRANSLATIONS = {
     storageLocation: "보관 위치",
     collectionNote: "메모",
     saveCollectionDetails: "컬렉션 정보 저장",
+    selectVisible: "현재 목록 전체 선택",
+    selectItem: "{name} 선택",
+    selectedCount: "{selected}/{total} 선택됨",
+    deleteSelected: "선택 삭제",
+    clearCollection: "전체 삭제",
+    clearCollectionConfirm: "{name}의 {count}개 항목을 삭제할까요?",
     shoppingTotal: "예산 {total}",
     duplicateCandidates: "중복 후보",
     updateLog: "업데이트 기록",
@@ -352,6 +373,9 @@ const TRANSLATIONS = {
     closeSettings: "Close settings",
     language: "Language",
     consoleMode: "Console mode",
+    homeDisplay: "Home display",
+    showOwnedOnHome: "Show owned on home",
+    showWantedOnHome: "Show wanted on home",
     ownedList: "Owned",
     wantedList: "Wanted",
     markOwned: "Owned",
@@ -365,6 +389,12 @@ const TRANSLATIONS = {
     storageLocation: "Storage location",
     collectionNote: "Note",
     saveCollectionDetails: "Save collection details",
+    selectVisible: "Select visible",
+    selectItem: "Select {name}",
+    selectedCount: "Selected {selected}/{total}",
+    deleteSelected: "Delete selected",
+    clearCollection: "Delete all",
+    clearCollectionConfirm: "Delete {count} items from {name}?",
     shoppingTotal: "Budget {total}",
     duplicateCandidates: "Duplicate candidates",
     updateLog: "Update log",
@@ -478,6 +508,9 @@ const TRANSLATIONS = {
     closeSettings: "設定を閉じる",
     language: "言語",
     consoleMode: "コンソールモード",
+    homeDisplay: "ホーム表示",
+    showOwnedOnHome: "ホームに購入済みを表示",
+    showWantedOnHome: "ホームに欲しいを表示",
     ownedList: "購入済み",
     wantedList: "欲しい",
     markOwned: "購入済み",
@@ -491,6 +524,12 @@ const TRANSLATIONS = {
     storageLocation: "保管場所",
     collectionNote: "メモ",
     saveCollectionDetails: "コレクション情報を保存",
+    selectVisible: "表示中を全選択",
+    selectItem: "{name} を選択",
+    selectedCount: "{selected}/{total} 選択中",
+    deleteSelected: "選択を削除",
+    clearCollection: "すべて削除",
+    clearCollectionConfirm: "{name} から {count} 件を削除しますか？",
     shoppingTotal: "予算 {total}",
     duplicateCandidates: "重複候補",
     updateLog: "更新履歴",
@@ -594,6 +633,8 @@ const state = {
   overrides: {},
   seriesLabelOverrides: {},
   collection: { owned: [], wanted: [] },
+  homeCollectionVisibility: loadHomeCollectionVisibility(),
+  collectionSelection: { owned: new Set(), wanted: new Set() },
   syncConfig: loadSyncConfig(),
   syncMeta: loadSyncMeta(),
   sync: {
@@ -639,6 +680,8 @@ const elements = {
   settingsDialog: document.querySelector("#settingsDialog"),
   settingsClose: document.querySelector("#settingsClose"),
   consoleModeToggle: document.querySelector("#consoleModeToggle"),
+  showOwnedOnHome: document.querySelector("#showOwnedOnHome"),
+  showWantedOnHome: document.querySelector("#showWantedOnHome"),
   syncState: document.querySelector("#syncState"),
   syncStatusText: document.querySelector("#syncStatusText"),
   syncSupabaseUrl: document.querySelector("#syncSupabaseUrl"),
@@ -664,6 +707,11 @@ const elements = {
   wantedCount: document.querySelector("#wantedCount"),
   ownedStrip: document.querySelector("#ownedStrip"),
   wantedStrip: document.querySelector("#wantedStrip"),
+  collectionManagement: document.querySelector("#collectionManagement"),
+  collectionSelectAll: document.querySelector("#collectionSelectAll"),
+  collectionSelectionSummary: document.querySelector("#collectionSelectionSummary"),
+  deleteSelectedCollection: document.querySelector("#deleteSelectedCollection"),
+  clearCollectionView: document.querySelector("#clearCollectionView"),
   searchInput: document.querySelector("#searchInput"),
   filterSummary: document.querySelector("#filterSummary"),
   franchiseList: document.querySelector("#franchiseList"),
@@ -967,6 +1015,22 @@ function loadConsoleMode() {
   return localStorage.getItem(CONSOLE_MODE_KEY) === "true";
 }
 
+function loadHomeCollectionVisibility() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(COLLECTION_HOME_VISIBILITY_KEY) || "{}");
+    return {
+      owned: parsed.owned !== false,
+      wanted: parsed.wanted !== false,
+    };
+  } catch {
+    return { owned: true, wanted: true };
+  }
+}
+
+function saveHomeCollectionVisibility() {
+  localStorage.setItem(COLLECTION_HOME_VISIBILITY_KEY, JSON.stringify(state.homeCollectionVisibility));
+}
+
 function loadCollection() {
   try {
     const parsed = JSON.parse(localStorage.getItem(COLLECTION_KEY) || "{}");
@@ -1204,6 +1268,20 @@ function bindEvents() {
     saveConsoleMode();
     renderConsoleMode();
   });
+  elements.showOwnedOnHome.addEventListener("change", (event) => {
+    state.homeCollectionVisibility.owned = event.target.checked;
+    saveHomeCollectionVisibility();
+    renderSettings();
+    renderCollections();
+  });
+  elements.showWantedOnHome.addEventListener("change", (event) => {
+    state.homeCollectionVisibility.wanted = event.target.checked;
+    saveHomeCollectionVisibility();
+    renderSettings();
+    renderCollections();
+  });
+  bindCollectionPanelNavigation(elements.ownedPanel, "owned");
+  bindCollectionPanelNavigation(elements.wantedPanel, "wanted");
   elements.bottomNav.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-view]");
     if (!button) {
@@ -1221,6 +1299,9 @@ function bindEvents() {
     persistViewState({ mode: "push" });
     render();
   });
+  elements.collectionSelectAll.addEventListener("change", toggleVisibleCollectionSelection);
+  elements.deleteSelectedCollection.addEventListener("click", deleteSelectedCollectionItems);
+  elements.clearCollectionView.addEventListener("click", clearActiveCollectionView);
   elements.saveSyncConfig.addEventListener("click", saveAndConnectSync);
   elements.syncNow.addEventListener("click", () => pullSync({ force: true }));
   elements.disconnectSync.addEventListener("click", disconnectSync);
@@ -1355,6 +1436,35 @@ function bindEvents() {
   });
 
   populateGradeSelect();
+}
+
+function bindCollectionPanelNavigation(panel, type) {
+  panel.addEventListener("click", (event) => {
+    if (state.activeView !== "catalog" || event.target.closest(".collection-item")) {
+      return;
+    }
+    navigateToCollectionView(type);
+  });
+  panel.addEventListener("keydown", (event) => {
+    if (state.activeView !== "catalog" || event.target !== panel || !["Enter", " "].includes(event.key)) {
+      return;
+    }
+    event.preventDefault();
+    navigateToCollectionView(type);
+  });
+}
+
+function navigateToCollectionView(type) {
+  if (!COLLECTION_TYPES.includes(type)) {
+    return;
+  }
+  state.activeView = type;
+  state.selectedKit = null;
+  state.activeModal = null;
+  localStorage.setItem(ACTIVE_VIEW_KEY, state.activeView);
+  persistViewState({ mode: "push" });
+  render();
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function registerPwa() {
@@ -2134,6 +2244,126 @@ function filteredKits() {
   });
 }
 
+function activeCollectionType() {
+  return COLLECTION_TYPES.includes(state.activeView) ? state.activeView : null;
+}
+
+function collectionSelection(type) {
+  if (!state.collectionSelection[type]) {
+    state.collectionSelection[type] = new Set();
+  }
+  return state.collectionSelection[type];
+}
+
+function selectedCollectionIds(type) {
+  pruneCollectionSelection(type);
+  return [...collectionSelection(type)];
+}
+
+function pruneCollectionSelection(type) {
+  const validIds = new Set(collectionIds(type));
+  for (const kitId of collectionSelection(type)) {
+    if (!validIds.has(kitId)) {
+      collectionSelection(type).delete(kitId);
+    }
+  }
+}
+
+function visibleCollectionIds(kits) {
+  return kits.map((kit) => kit.kit_id);
+}
+
+function toggleVisibleCollectionSelection(event) {
+  const type = activeCollectionType();
+  if (!type) {
+    return;
+  }
+  const selection = collectionSelection(type);
+  for (const kitId of visibleCollectionIds(filteredKits())) {
+    if (event.target.checked) {
+      selection.add(kitId);
+    } else {
+      selection.delete(kitId);
+    }
+  }
+  renderKits();
+}
+
+function removeCollectionItems(type, kitIds) {
+  if (!COLLECTION_TYPES.includes(type) || !kitIds.length) {
+    return;
+  }
+  if (!canEditSharedData()) {
+    setSyncStatus("readonly", t("readOnlyHint"));
+    return;
+  }
+
+  const deleteSet = new Set(kitIds);
+  const nextItems = { ...(state.collection.items || {}) };
+  for (const kitId of deleteSet) {
+    if (nextItems[kitId]?.status === type) {
+      delete nextItems[kitId];
+    }
+    collectionSelection(type).delete(kitId);
+  }
+  state.collection.items = nextItems;
+  state.collection[type] = (Array.isArray(state.collection[type]) ? state.collection[type] : []).filter((kitId) => !deleteSet.has(kitId));
+
+  saveCollection();
+  renderCollections();
+  renderKits();
+  if (state.selectedKit && elements.detailDialog.open) {
+    renderDetailStatusActions(state.selectedKit);
+  }
+}
+
+function deleteSelectedCollectionItems() {
+  const type = activeCollectionType();
+  if (!type) {
+    return;
+  }
+  removeCollectionItems(type, selectedCollectionIds(type));
+}
+
+function clearActiveCollectionView() {
+  const type = activeCollectionType();
+  if (!type) {
+    return;
+  }
+  const ids = collectionIds(type);
+  if (!ids.length) {
+    return;
+  }
+  const label = t(type === "owned" ? "ownedList" : "wantedList");
+  if (!window.confirm(t("clearCollectionConfirm", { name: label, count: ids.length }))) {
+    return;
+  }
+  removeCollectionItems(type, ids);
+}
+
+function renderCollectionManagement(kits) {
+  const type = activeCollectionType();
+  elements.collectionManagement.hidden = !type;
+  if (!type) {
+    return;
+  }
+
+  pruneCollectionSelection(type);
+  const editable = canEditSharedData();
+  const visibleIds = visibleCollectionIds(kits);
+  const total = collectionIds(type).length;
+  const selection = collectionSelection(type);
+  const selectedIds = selectedCollectionIds(type);
+  const selectedVisibleCount = visibleIds.filter((kitId) => selection.has(kitId)).length;
+
+  elements.collectionSelectAll.checked = visibleIds.length > 0 && selectedVisibleCount === visibleIds.length;
+  elements.collectionSelectAll.indeterminate = selectedVisibleCount > 0 && selectedVisibleCount < visibleIds.length;
+  elements.collectionSelectAll.disabled = !editable || visibleIds.length === 0;
+  elements.deleteSelectedCollection.disabled = !editable || selectedIds.length === 0;
+  elements.clearCollectionView.disabled = !editable || total === 0;
+  elements.collectionSelectionSummary.textContent = t("selectedCount", { selected: selectedIds.length, total });
+}
+
 function collectionIds(type) {
   state.collection = normalizeCollection(state.collection);
   return state.collection[type] || [];
@@ -2255,10 +2485,15 @@ function toggleKitCollection(type) {
 }
 
 function renderCollections() {
-  renderCollectionStrip("owned", elements.ownedStrip, elements.ownedCount, elements.ownedPanel);
-  renderCollectionStrip("wanted", elements.wantedStrip, elements.wantedCount, elements.wantedPanel);
-  const hasCollections = collectionIds("owned").length > 0 || collectionIds("wanted").length > 0;
-  elements.collectionSection.hidden = !hasCollections || state.activeView !== "catalog";
+  const ownedLength = renderCollectionStrip("owned", elements.ownedStrip, elements.ownedCount, elements.ownedPanel);
+  const wantedLength = renderCollectionStrip("wanted", elements.wantedStrip, elements.wantedCount, elements.wantedPanel);
+  const ownedVisible = state.homeCollectionVisibility.owned && ownedLength > 0;
+  const wantedVisible = state.homeCollectionVisibility.wanted && wantedLength > 0;
+  elements.ownedPanel.hidden = !ownedVisible;
+  elements.wantedPanel.hidden = !wantedVisible;
+  const visibleCount = [ownedVisible, wantedVisible].filter(Boolean).length;
+  elements.collectionSection.classList.toggle("is-single", visibleCount === 1);
+  elements.collectionSection.hidden = visibleCount === 0 || state.activeView !== "catalog";
 }
 
 function renderCollectionStrip(type, strip, countNode, panel) {
@@ -2267,6 +2502,7 @@ function renderCollectionStrip(type, strip, countNode, panel) {
   const count = ids.reduce((total, kitId) => total + collectionQuantityForKit(kitId), 0);
   countNode.textContent = String(count);
   panel.hidden = ids.length === 0;
+  panel.tabIndex = ids.length > 0 ? 0 : -1;
   strip.innerHTML = "";
 
   for (const kitId of ids.slice(0, 24)) {
@@ -2300,6 +2536,7 @@ function renderCollectionStrip(type, strip, countNode, panel) {
     item.addEventListener("click", () => openDetail(kit));
     strip.append(item);
   }
+  return ids.length;
 }
 
 function renderDetailStatusActions(kit) {
@@ -2352,6 +2589,8 @@ function renderLanguageControls() {
 
 function renderSettings() {
   elements.consoleModeToggle.checked = state.consoleMode;
+  elements.showOwnedOnHome.checked = state.homeCollectionVisibility.owned;
+  elements.showWantedOnHome.checked = state.homeCollectionVisibility.wanted;
   elements.syncSupabaseUrl.value = state.syncConfig.supabaseUrl || "";
   elements.syncAnonKey.value = state.syncConfig.anonKey || "";
   elements.syncWorkspaceId.value = state.syncConfig.workspaceId || "";
@@ -2752,12 +2991,14 @@ function renderFilterSummary() {
 
 function renderKits() {
   const kits = filteredKits();
+  const collectionType = activeCollectionType();
   const titleKey = state.activeView === "owned" ? "ownedList" : state.activeView === "wanted" ? "wantedList" : "catalogList";
   elements.sectionTitle.textContent = t(titleKey);
   elements.resultCount.textContent =
     state.activeView === "wanted"
       ? `${t("results", { count: kits.length })} · ${t("shoppingTotal", { total: formatPrice(wantedBudgetForKits(kits)) })}`
       : t("results", { count: kits.length });
+  renderCollectionManagement(kits);
   elements.kitGrid.innerHTML = "";
 
   if (!kits.length) {
@@ -2776,6 +3017,30 @@ function renderKits() {
     card.tabIndex = 0;
     card.setAttribute("role", "button");
     card.setAttribute("aria-label", t("detailsFor", { name: fullName }));
+
+    if (collectionType) {
+      const picker = document.createElement("label");
+      picker.className = "kit-select-check";
+      picker.setAttribute("aria-label", t("selectItem", { name: fullName }));
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = collectionSelection(collectionType).has(kit.kit_id);
+      checkbox.disabled = !canEditSharedData();
+      checkbox.addEventListener("change", (event) => {
+        if (event.target.checked) {
+          collectionSelection(collectionType).add(kit.kit_id);
+        } else {
+          collectionSelection(collectionType).delete(kit.kit_id);
+        }
+        card.classList.toggle("is-selected", event.target.checked);
+        renderCollectionManagement(kits);
+      });
+      picker.addEventListener("click", (event) => event.stopPropagation());
+      picker.addEventListener("keydown", (event) => event.stopPropagation());
+      picker.append(checkbox);
+      card.append(picker);
+      card.classList.toggle("is-selected", checkbox.checked);
+    }
 
     appendImageWithFallback(boxArt, kit, {
       alt: t("boxArtAlt", { name: fullName }),

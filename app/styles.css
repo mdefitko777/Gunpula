@@ -355,11 +355,22 @@ h1 {
   margin-bottom: 12px;
 }
 
+.collection-section.is-single {
+  grid-template-columns: 1fr;
+}
+
 .collection-panel {
   min-width: 0;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
+  cursor: pointer;
+}
+
+.collection-panel:hover,
+.collection-panel:focus-visible {
+  border-color: var(--accent-blue);
+  outline: 0;
 }
 
 .collection-panel[hidden],
@@ -404,6 +415,7 @@ h1 {
   border-radius: 8px;
   background: #ffffff;
   color: var(--ink);
+  cursor: pointer;
   text-align: left;
 }
 
@@ -538,6 +550,53 @@ body[data-view="wanted"] .top-bar {
   font-size: 13px;
 }
 
+.collection-management {
+  display: grid;
+  grid-template-columns: minmax(110px, auto) minmax(0, 1fr) minmax(96px, auto) minmax(86px, auto);
+  align-items: center;
+  gap: 8px;
+  margin: -4px 0 12px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.collection-management[hidden] {
+  display: none;
+}
+
+.collection-select-all {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.collection-select-all input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+}
+
+.collection-management > span {
+  min-width: 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+  text-align: right;
+}
+
+.collection-management .compact-button {
+  min-height: 36px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
 .kit-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(176px, 1fr));
@@ -545,6 +604,7 @@ body[data-view="wanted"] .top-bar {
 }
 
 .kit-card {
+  position: relative;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -557,11 +617,39 @@ body[data-view="wanted"] .top-bar {
 }
 
 .kit-card:hover,
-.kit-card:focus-visible {
+.kit-card:focus-visible,
+.kit-card.is-selected {
   border-color: var(--accent-blue);
   outline: 0;
   box-shadow: 0 8px 22px rgba(23, 25, 29, 0.08);
   transform: translateY(-1px);
+}
+
+.kit-card.is-selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(183, 47, 42, 0.16);
+}
+
+.kit-select-check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(23, 25, 29, 0.15);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 4px 12px rgba(23, 25, 29, 0.12);
+}
+
+.kit-select-check input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--accent);
 }
 
 .box-art {
@@ -1300,6 +1388,11 @@ body[data-view="wanted"] .top-bar {
   padding: 0 12px;
 }
 
+.danger-button {
+  border-color: rgba(183, 47, 42, 0.42);
+  color: var(--accent);
+}
+
 .secondary-button:hover,
 .secondary-button:focus-visible,
 .correction-actions button:hover,
@@ -1399,6 +1492,18 @@ body[data-view="wanted"] .top-bar {
   .collection-section {
     grid-template-columns: 1fr;
     gap: 8px;
+  }
+
+  .collection-management {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .collection-management > span {
+    text-align: right;
+  }
+
+  .collection-management button {
+    width: 100%;
   }
 
   .sync-grid {
