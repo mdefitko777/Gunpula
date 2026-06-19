@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-06-18",
+  "updated_at": "2026-06-19",
   "scope": "Individual model kit and official collectible catalog imported from Japanese official BANDAI SPIRITS, Bandai Candy, Bandai Gashapon, Bandai Hobby, Tamashii Web, Kotobukiya, and Takara Tomy sources. Covers Gundam, Armored Core, Pokemon, and BEYBLADE X records. Records are needs_review until field-level human checks are complete.",
   "kits": [
     {
@@ -11,11 +11,11 @@
       "number": null,
       "scale": "1/72",
       "images": {
-        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054056057-02.webp",
+        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054056057-01.webp",
         "box_art_source_id": "kotobukiya_armored_core_jp"
       },
       "gallery_image_urls": [
-        "./assets/kotobukiya-ac/acvi-4934054056057-02.webp",
+        "./assets/kotobukiya-ac/acvi-4934054056057-01.webp",
         "./assets/kotobukiya-ac/acvi-4934054056057-03.jpg",
         "./assets/kotobukiya-ac/acvi-4934054056057-04.jpg",
         "./assets/kotobukiya-ac/acvi-4934054056057-05.jpg",
@@ -620,6 +620,85 @@
       }
     },
     {
+      "kit_id": "tamashii-15934",
+      "franchise": "gundam",
+      "grade_code": "METAL_ROBOT",
+      "subline": "METAL ROBOT魂",
+      "number": null,
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://tamashiiweb.com/storage/images/products/thumbnail/c759a5a5-9180-4337-a46c-9965d72b0776.webp",
+        "box_art_source_id": "tamashii_web_jp"
+      },
+      "gallery_image_urls": [
+        "https://tamashiiweb.com/storage/images/products/thumbnail/c759a5a5-9180-4337-a46c-9965d72b0776.webp",
+        "https://tamashiiweb.com/storage/images/products/main/74021f9c-7c3f-421d-a84b-62d3c9b11639.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/3eb21746-0a54-4c71-85ca-28da872b17ce.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/e5ea0dfa-da2c-47e4-a65e-270f64599d71.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/e76d4afb-96b1-463c-8c78-ab20b2ed0c9c.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/44a11368-2359-493e-b679-b324ada2cf41.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/0a0699c6-2808-4c81-9a83-93d53c24fbe2.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/1ae45f6a-0955-4196-ae89-38fa139025bc.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/0c79e893-7935-411c-9db2-54abc3fdfd8d.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/1fbc931c-c52c-42be-a9f4-bf1d762a09e9.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/39bea59b-bc76-46f1-b42f-6f0932b23c8d.webp",
+        "https://tamashiiweb.com/assets/item/15934_asshimar/item_15934_dF5rNhp3_web.webp"
+      ],
+      "universe": "UC",
+      "work_title": "Z",
+      "release_date": "2026-11",
+      "price_jpy": 29700,
+      "is_limited": true,
+      "data_status": "needs_review",
+      "source_urls": [
+        "https://tamashiiweb.com/item/15934/",
+        "https://tamashiiweb.com/item_brand/metal_robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+      ],
+      "source_refs": [
+        {
+          "source_id": "tamashii_web_jp",
+          "url": "https://tamashiiweb.com/item/15934/",
+          "fields": [
+            "franchise",
+            "names",
+            "grade_code",
+            "subline",
+            "scale",
+            "release_date",
+            "price_jpy",
+            "images",
+            "gallery_image_urls",
+            "work_title",
+            "universe"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "gundam",
+        "tamashii nations",
+        "collectible figure",
+        "metal-robot"
+      ],
+      "notes": "Imported from the official Tamashii Web Gundam METAL ROBOT魂 catalog and product detail page.",
+      "names": {
+        "ja": "試作アッシマーTR-3［キハール］宇宙仕様",
+        "en": "試作アッシマーTR-3［キハール］宇宙Type",
+        "zh": "試作アッシマーTR-3［キハール］宇宙规格",
+        "ko": "試作アッシマーTR-3［キハール］宇宙사양"
+      },
+      "series": {
+        "key": "zeta",
+        "sort": 110,
+        "labels": {
+          "zh": "Z",
+          "en": "Z",
+          "ja": "Z",
+          "ko": "Z"
+        }
+      }
+    },
+    {
       "kit_id": "acvi-4934054083237",
       "franchise": "armored_core",
       "grade_code": "ACVI",
@@ -632,14 +711,14 @@
       },
       "gallery_image_urls": [
         "./assets/kotobukiya-ac/acvi-4934054083237-02.webp",
-        "./assets/kotobukiya-ac/acvi-4934054083237-03.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054083237-04.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054083237-05.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054083237-06.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054083237-07.jpg",
+        "./assets/kotobukiya-ac/acvi-4934054083237-03.webp",
+        "./assets/kotobukiya-ac/acvi-4934054083237-04.webp",
+        "./assets/kotobukiya-ac/acvi-4934054083237-05.webp",
+        "./assets/kotobukiya-ac/acvi-4934054083237-06.webp",
+        "./assets/kotobukiya-ac/acvi-4934054083237-07.webp",
         "./assets/kotobukiya-ac/acvi-4934054083237-08.jpg",
         "./assets/kotobukiya-ac/acvi-4934054083237-09.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054083237-10.jpg"
+        "./assets/kotobukiya-ac/acvi-4934054083237-10.webp"
       ],
       "universe": "Armored Core",
       "work_title": "Armored Core",
@@ -691,6 +770,73 @@
           "en": "Armored Core",
           "ja": "AC",
           "ko": "AC"
+        }
+      }
+    },
+    {
+      "kit_id": "artifact-best",
+      "franchise": "gundam",
+      "grade_code": "ARTIFACT",
+      "subline": "Gundam Artifact",
+      "number": null,
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://www.bandai.co.jp/candy/gundam/artifact/best/01.jpg",
+        "box_art_source_id": "bandai_candy_gundam_jp"
+      },
+      "gallery_image_urls": [
+        "https://www.bandai.co.jp/candy/gundam/artifact/best/01.jpg"
+      ],
+      "universe": "unknown",
+      "work_title": null,
+      "release_date": "2026-10",
+      "price_jpy": 500,
+      "is_limited": false,
+      "data_status": "needs_review",
+      "source_urls": [
+        "https://www.bandai.co.jp/candy/gundam/artifact/best",
+        "https://www.bandai.co.jp/candy/gundam/artifact/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "bandai_candy_gundam_jp",
+          "url": "https://www.bandai.co.jp/candy/gundam/artifact/best",
+          "fields": [
+            "franchise",
+            "names",
+            "grade_code",
+            "subline",
+            "scale",
+            "release_date",
+            "price_jpy",
+            "images",
+            "gallery_image_urls",
+            "work_title",
+            "universe"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "bandai candy",
+        "shokugan",
+        "artifact"
+      ],
+      "notes": "Imported from the official Bandai Candy Gundam Gundam Artifact lineup.",
+      "names": {
+        "ja": "ガンダムアーティファクト ベストセレクション",
+        "en": "Gundamアーティファクト ベストセレクション",
+        "zh": "高达アーティファクト ベストセレクション",
+        "ko": "건담アーティファクト ベストセレクション"
+      },
+      "series": {
+        "key": "other",
+        "sort": 999,
+        "labels": {
+          "zh": "其他",
+          "en": "Other",
+          "ja": "その他",
+          "ko": "기타"
         }
       }
     },
@@ -1105,7 +1251,7 @@
         "./assets/kotobukiya-ac/acvi-4934054083220-09.jpg",
         "./assets/kotobukiya-ac/acvi-4934054083220-10.jpg",
         "./assets/kotobukiya-ac/acvi-4934054083220-11.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054083220-12.jpg"
+        "./assets/kotobukiya-ac/acvi-4934054083220-12.webp"
       ],
       "universe": "Armored Core",
       "work_title": "Armored Core",
@@ -3577,11 +3723,11 @@
       "number": null,
       "scale": "1/72",
       "images": {
-        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054081356-02.webp",
+        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054081356-01.jpg",
         "box_art_source_id": "kotobukiya_armored_core_jp"
       },
       "gallery_image_urls": [
-        "./assets/kotobukiya-ac/acvi-4934054081356-02.webp",
+        "./assets/kotobukiya-ac/acvi-4934054081356-01.jpg",
         "./assets/kotobukiya-ac/acvi-4934054081356-03.jpg",
         "./assets/kotobukiya-ac/acvi-4934054081356-04.jpg",
         "./assets/kotobukiya-ac/acvi-4934054081356-05.jpg",
@@ -11080,11 +11226,11 @@
       "number": null,
       "scale": "non-scale",
       "images": {
-        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054048328-02.webp",
+        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054048328-01.jpg",
         "box_art_source_id": "kotobukiya_armored_core_jp"
       },
       "gallery_image_urls": [
-        "./assets/kotobukiya-ac/acvi-4934054048328-02.webp",
+        "./assets/kotobukiya-ac/acvi-4934054048328-01.jpg",
         "./assets/kotobukiya-ac/acvi-4934054048328-03.jpg",
         "./assets/kotobukiya-ac/acvi-4934054048328-04.jpg",
         "./assets/kotobukiya-ac/acvi-4934054048328-05.jpg",
@@ -11108,7 +11254,7 @@
         "./assets/kotobukiya-ac/acvi-4934054048328-23.jpg",
         "./assets/kotobukiya-ac/acvi-4934054048328-24.jpg",
         "./assets/kotobukiya-ac/acvi-4934054048328-25.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054048328-26.webp"
+        "./assets/kotobukiya-ac/acvi-4934054048328-26.jpg"
       ],
       "universe": "Armored Core",
       "work_title": "Armored Core",
@@ -18847,11 +18993,11 @@
       "number": null,
       "scale": "1/72",
       "images": {
-        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054065523-02.webp",
+        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054065523-01.jpg",
         "box_art_source_id": "kotobukiya_armored_core_jp"
       },
       "gallery_image_urls": [
-        "./assets/kotobukiya-ac/acvi-4934054065523-02.webp",
+        "./assets/kotobukiya-ac/acvi-4934054065523-01.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065523-03.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065523-04.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065523-05.jpg",
@@ -18931,16 +19077,16 @@
       "number": null,
       "scale": "1/72",
       "images": {
-        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054065516-02.webp",
+        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054065516-02.jpg",
         "box_art_source_id": "kotobukiya_armored_core_jp"
       },
       "gallery_image_urls": [
-        "./assets/kotobukiya-ac/acvi-4934054065516-02.webp",
+        "./assets/kotobukiya-ac/acvi-4934054065516-02.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065516-03.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065516-04.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065516-05.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065516-06.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054065516-07.jpg",
+        "./assets/kotobukiya-ac/acvi-4934054065516-07.webp",
         "./assets/kotobukiya-ac/acvi-4934054065516-08.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065516-09.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065516-10.jpg",
@@ -20006,7 +20152,7 @@
         "./assets/kotobukiya-ac/acvi-4934054065165-13.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065165-14.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065165-15.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054065165-16.jpg"
+        "./assets/kotobukiya-ac/acvi-4934054065165-16.webp"
       ],
       "universe": "Armored Core",
       "work_title": "Armored Core",
@@ -20069,11 +20215,11 @@
       "number": null,
       "scale": "1/72",
       "images": {
-        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054065035-02.webp",
+        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054065035-01.jpg",
         "box_art_source_id": "kotobukiya_armored_core_jp"
       },
       "gallery_image_urls": [
-        "./assets/kotobukiya-ac/acvi-4934054065035-02.webp",
+        "./assets/kotobukiya-ac/acvi-4934054065035-01.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065035-03.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065035-04.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065035-05.jpg",
@@ -22018,11 +22164,11 @@
       "number": null,
       "scale": "1/72",
       "images": {
-        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054065189-02.webp",
+        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054065189-01.jpg",
         "box_art_source_id": "kotobukiya_armored_core_jp"
       },
       "gallery_image_urls": [
-        "./assets/kotobukiya-ac/acvi-4934054065189-02.webp",
+        "./assets/kotobukiya-ac/acvi-4934054065189-01.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065189-03.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065189-04.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065189-05.jpg",
@@ -22102,11 +22248,11 @@
       "number": null,
       "scale": "1/72",
       "images": {
-        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054065110-02.webp",
+        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054065110-01.jpg",
         "box_art_source_id": "kotobukiya_armored_core_jp"
       },
       "gallery_image_urls": [
-        "./assets/kotobukiya-ac/acvi-4934054065110-02.webp",
+        "./assets/kotobukiya-ac/acvi-4934054065110-01.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065110-03.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065110-04.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065110-05.jpg",
@@ -24405,11 +24551,11 @@
       "number": null,
       "scale": "1/72",
       "images": {
-        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054066193-02.webp",
+        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054066193-02.jpg",
         "box_art_source_id": "kotobukiya_armored_core_jp"
       },
       "gallery_image_urls": [
-        "./assets/kotobukiya-ac/acvi-4934054066193-02.webp",
+        "./assets/kotobukiya-ac/acvi-4934054066193-02.jpg",
         "./assets/kotobukiya-ac/acvi-4934054066193-03.jpg",
         "./assets/kotobukiya-ac/acvi-4934054066193-04.jpg",
         "./assets/kotobukiya-ac/acvi-4934054066193-05.jpg",
@@ -24563,32 +24709,32 @@
       "number": null,
       "scale": "1/72",
       "images": {
-        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054065004-02.webp",
+        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054065004-02.jpg",
         "box_art_source_id": "kotobukiya_armored_core_jp"
       },
       "gallery_image_urls": [
-        "./assets/kotobukiya-ac/acvi-4934054065004-02.webp",
+        "./assets/kotobukiya-ac/acvi-4934054065004-02.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065004-03.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065004-04.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065004-05.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065004-06.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054065004-07.jpg",
+        "./assets/kotobukiya-ac/acvi-4934054065004-07.webp",
         "./assets/kotobukiya-ac/acvi-4934054065004-08.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065004-09.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054065004-10.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054065004-11.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054065004-12.jpg",
+        "./assets/kotobukiya-ac/acvi-4934054065004-10.webp",
+        "./assets/kotobukiya-ac/acvi-4934054065004-11.webp",
+        "./assets/kotobukiya-ac/acvi-4934054065004-12.webp",
         "./assets/kotobukiya-ac/acvi-4934054065004-13.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065004-14.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065004-15.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065004-16.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054065004-17.jpg",
+        "./assets/kotobukiya-ac/acvi-4934054065004-17.webp",
         "./assets/kotobukiya-ac/acvi-4934054065004-18.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054065004-19.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054065004-20.jpg",
+        "./assets/kotobukiya-ac/acvi-4934054065004-19.webp",
+        "./assets/kotobukiya-ac/acvi-4934054065004-20.webp",
         "./assets/kotobukiya-ac/acvi-4934054065004-21.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054065004-22.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054065004-23.jpg",
+        "./assets/kotobukiya-ac/acvi-4934054065004-22.webp",
+        "./assets/kotobukiya-ac/acvi-4934054065004-23.webp",
         "./assets/kotobukiya-ac/acvi-4934054065004-24.jpg"
       ],
       "universe": "Armored Core",
@@ -24652,11 +24798,11 @@
       "number": null,
       "scale": "1/72",
       "images": {
-        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054065080-02.webp",
+        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054065080-01.jpg",
         "box_art_source_id": "kotobukiya_armored_core_jp"
       },
       "gallery_image_urls": [
-        "./assets/kotobukiya-ac/acvi-4934054065080-02.webp",
+        "./assets/kotobukiya-ac/acvi-4934054065080-01.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065080-03.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065080-04.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065080-05.jpg",
@@ -24730,9 +24876,9 @@
       },
       "gallery_image_urls": [
         "./assets/kotobukiya-ac/acvi-4934054065172-02.webp",
-        "./assets/kotobukiya-ac/acvi-4934054065172-03.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054065172-04.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054065172-05.jpg",
+        "./assets/kotobukiya-ac/acvi-4934054065172-03.webp",
+        "./assets/kotobukiya-ac/acvi-4934054065172-04.webp",
+        "./assets/kotobukiya-ac/acvi-4934054065172-05.webp",
         "./assets/kotobukiya-ac/acvi-4934054065172-06.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065172-07.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065172-08.jpg",
@@ -24752,10 +24898,10 @@
         "./assets/kotobukiya-ac/acvi-4934054065172-22.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065172-23.jpg",
         "./assets/kotobukiya-ac/acvi-4934054065172-24.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054065172-25.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054065172-26.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054065172-27.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054065172-28.jpg"
+        "./assets/kotobukiya-ac/acvi-4934054065172-25.webp",
+        "./assets/kotobukiya-ac/acvi-4934054065172-26.webp",
+        "./assets/kotobukiya-ac/acvi-4934054065172-27.webp",
+        "./assets/kotobukiya-ac/acvi-4934054065172-28.webp"
       ],
       "universe": "Armored Core",
       "work_title": "Armored Core",
@@ -26843,11 +26989,11 @@
       "number": null,
       "scale": "non-scale",
       "images": {
-        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054064595-02.webp",
+        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054064595-01.jpg",
         "box_art_source_id": "kotobukiya_armored_core_jp"
       },
       "gallery_image_urls": [
-        "./assets/kotobukiya-ac/acvi-4934054064595-02.webp",
+        "./assets/kotobukiya-ac/acvi-4934054064595-01.jpg",
         "./assets/kotobukiya-ac/acvi-4934054064595-03.jpg",
         "./assets/kotobukiya-ac/acvi-4934054064595-04.jpg",
         "./assets/kotobukiya-ac/acvi-4934054064595-05.jpg",
@@ -26998,11 +27144,11 @@
       "number": null,
       "scale": "1/72",
       "images": {
-        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054064984-02.webp",
+        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054064984-01.jpg",
         "box_art_source_id": "kotobukiya_armored_core_jp"
       },
       "gallery_image_urls": [
-        "./assets/kotobukiya-ac/acvi-4934054064984-02.webp",
+        "./assets/kotobukiya-ac/acvi-4934054064984-01.jpg",
         "./assets/kotobukiya-ac/acvi-4934054064984-03.jpg",
         "./assets/kotobukiya-ac/acvi-4934054064984-04.jpg",
         "./assets/kotobukiya-ac/acvi-4934054064984-05.jpg",
@@ -28543,7 +28689,7 @@
         "./assets/kotobukiya-ac/acvi-4934054063499-15.jpg",
         "./assets/kotobukiya-ac/acvi-4934054063499-16.jpg",
         "./assets/kotobukiya-ac/acvi-4934054063499-17.jpg",
-        "./assets/kotobukiya-ac/acvi-4934054063499-18.jpg"
+        "./assets/kotobukiya-ac/acvi-4934054063499-18.webp"
       ],
       "universe": "Armored Core",
       "work_title": "Armored Core",
@@ -30206,11 +30352,11 @@
       "number": null,
       "scale": "1/72",
       "images": {
-        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054062966-02.webp",
+        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054062966-01.webp",
         "box_art_source_id": "kotobukiya_armored_core_jp"
       },
       "gallery_image_urls": [
-        "./assets/kotobukiya-ac/acvi-4934054062966-02.webp",
+        "./assets/kotobukiya-ac/acvi-4934054062966-01.webp",
         "./assets/kotobukiya-ac/acvi-4934054062966-03.jpg",
         "./assets/kotobukiya-ac/acvi-4934054062966-04.jpg",
         "./assets/kotobukiya-ac/acvi-4934054062966-05.jpg",
@@ -30279,11 +30425,11 @@
       "number": null,
       "scale": "1/72",
       "images": {
-        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054063253-02.webp",
+        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054063253-01.jpg",
         "box_art_source_id": "kotobukiya_armored_core_jp"
       },
       "gallery_image_urls": [
-        "./assets/kotobukiya-ac/acvi-4934054063253-02.webp",
+        "./assets/kotobukiya-ac/acvi-4934054063253-01.jpg",
         "./assets/kotobukiya-ac/acvi-4934054063253-03.jpg",
         "./assets/kotobukiya-ac/acvi-4934054063253-04.jpg",
         "./assets/kotobukiya-ac/acvi-4934054063253-05.jpg",
@@ -37095,11 +37241,11 @@
       "number": null,
       "scale": "1/72",
       "images": {
-        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054056033-02.webp",
+        "box_art_url": "./assets/kotobukiya-ac/acvi-4934054056033-01.jpg",
         "box_art_source_id": "kotobukiya_armored_core_jp"
       },
       "gallery_image_urls": [
-        "./assets/kotobukiya-ac/acvi-4934054056033-02.webp",
+        "./assets/kotobukiya-ac/acvi-4934054056033-01.jpg",
         "./assets/kotobukiya-ac/acvi-4934054056033-03.jpg",
         "./assets/kotobukiya-ac/acvi-4934054056033-04.jpg",
         "./assets/kotobukiya-ac/acvi-4934054056033-05.jpg",
