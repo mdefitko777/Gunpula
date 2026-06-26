@@ -15,7 +15,8 @@ const flags = new Set(args.filter((arg) => arg.startsWith("--") && !arg.includes
 const limit = Number(options.limit || process.env.IMAGE_CHECK_LIMIT || 0);
 const franchiseFilter = options.franchise || process.env.IMAGE_CHECK_FRANCHISE || "";
 const concurrency = Number(options.concurrency || process.env.IMAGE_CHECK_CONCURRENCY || 8);
-const includeLocal = flags.has("--local") || process.env.IMAGE_CHECK_LOCAL === "1";
+const localOnly = flags.has("--local") || flags.has("--local-only") || process.env.IMAGE_CHECK_LOCAL_ONLY === "1";
+const includeLocal = localOnly || process.env.IMAGE_CHECK_LOCAL === "1";
 const outputPath = options.output || process.env.IMAGE_HEALTH_OUTPUT || "data/image-health.json";
 const userAgent =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
@@ -26,8 +27,10 @@ function imageCandidates(kit) {
 }
 
 function shouldCheck(url) {
+  if (url.startsWith("./")) return includeLocal;
+  if (localOnly) return false;
   if (/^https?:\/\//i.test(url)) return true;
-  return includeLocal && url.startsWith("./");
+  return false;
 }
 
 function localFilePath(url) {

@@ -1028,7 +1028,14 @@ function parseKotobukiyaACDetail(html, detailUrl) {
 }
 
 async function importKotobukiyaArmoredCore() {
-  const html = await fetchText(KOTOBUKIYA_AC_URL);
+  let html = "";
+  try {
+    html = await fetchText(KOTOBUKIYA_AC_URL);
+  } catch (error) {
+    console.warn(`Kotobukiya Armored Core listing fetch failed: ${error.message}`);
+    return [];
+  }
+
   const listings = parseKotobukiyaACListings(html, KOTOBUKIYA_AC_URL);
   const imported = [];
 
@@ -1459,65 +1466,82 @@ function normalizeKit(kit) {
   };
 }
 
+async function importOptional(label, importer) {
+  try {
+    return await importer();
+  } catch (error) {
+    console.warn(`${label} import skipped: ${error.message}`);
+    return [];
+  }
+}
+
 async function main() {
   const existingDoc = JSON.parse(await readFile("data/kits.json", "utf8"));
-  const pokemonModelKits = await importPokemonModelKits();
+  const pokemonModelKits = await importOptional("Pokemon model kits", importPokemonModelKits);
   const imported = [
-    ...(await importCandy()),
-    ...(await importEnsemble()),
-    ...(await importForte()),
+    ...(await importOptional("Bandai Candy", importCandy)),
+    ...(await importOptional("Mobile Suit Ensemble", importEnsemble)),
+    ...(await importOptional("Gashapon Senshi f", importForte)),
     ...pokemonModelKits,
-    ...(await importPokemonGlobalModelKits(pokemonModelKits)),
-    ...(await importGashaponSearch({
-      label: "Pokemon",
-      resultUrl: `${GASHAPON_BASE_URL}/products/result.php?free=${encodeURIComponent("ポケモン")}`,
-      franchise: "pokemon",
-      gradeCode: "POKE_GASHAPON",
-      subline: "Pokemon Gashapon",
-      idPrefix: "poke-gashapon",
-      tags: ["pokemon", "bandai gashapon", "capsule toy", "mascot"],
-      fallbackWork: "Pokemon",
-      fallbackUniverse: "Pokemon",
-      fetchDetails: false,
-    })),
-    ...(await importGashaponSearch({
-      label: "Gundam official gashapon",
-      resultUrl: `${GASHAPON_BASE_URL}/products/result.php?free=${encodeURIComponent("ガンダム")}`,
-      franchise: "gundam",
-      gradeCode: "GUNDAM_MERCH",
-      subline: "Gundam Gashapon Merchandise",
-      idPrefix: "gundam-merch",
-      tags: ["gundam", "bandai gashapon", "capsule toy", "merchandise"],
-      fallbackWork: "Mixed Gundam Works",
-      fallbackUniverse: "Mixed",
-      fetchDetails: false,
-    })),
-    ...(await importGashaponSearch({
-      label: "Gundam SEED merchandise",
-      resultUrl: `${GASHAPON_BASE_URL}/products/result.php?free=SEED`,
-      franchise: "gundam",
-      gradeCode: "GUNDAM_MERCH",
-      subline: "Gundam SEED Gashapon Merchandise",
-      idPrefix: "gundam-merch",
-      tags: ["gundam", "seed", "bandai gashapon", "merchandise"],
-      fallbackWork: "Mobile Suit Gundam SEED",
-      fallbackUniverse: "CE",
-    })),
-    ...(await importGashaponSearch({
-      label: "Gundam 00 merchandise",
-      resultUrl: `${GASHAPON_BASE_URL}/products/result.php?free=${encodeURIComponent("ガンダム00")}`,
-      franchise: "gundam",
-      gradeCode: "GUNDAM_MERCH",
-      subline: "Gundam 00 Gashapon Merchandise",
-      idPrefix: "gundam-merch",
-      tags: ["gundam", "00", "bandai gashapon", "merchandise"],
-      fallbackWork: "Mobile Suit Gundam 00",
-      fallbackUniverse: "AD",
-    })),
-    ...(await importTamashiiGundamFigures()),
-    ...(await importBandaiArmoredCore()),
-    ...(await importKotobukiyaArmoredCore()),
-    ...(await importBeybladeX()),
+    ...(await importOptional("Bandai Hobby Global Pokemon model kits", () => importPokemonGlobalModelKits(pokemonModelKits))),
+    ...(await importOptional("Pokemon Gashapon", () =>
+      importGashaponSearch({
+        label: "Pokemon",
+        resultUrl: `${GASHAPON_BASE_URL}/products/result.php?free=${encodeURIComponent("ポケモン")}`,
+        franchise: "pokemon",
+        gradeCode: "POKE_GASHAPON",
+        subline: "Pokemon Gashapon",
+        idPrefix: "poke-gashapon",
+        tags: ["pokemon", "bandai gashapon", "capsule toy", "mascot"],
+        fallbackWork: "Pokemon",
+        fallbackUniverse: "Pokemon",
+        fetchDetails: false,
+      }),
+    )),
+    ...(await importOptional("Gundam official gashapon", () =>
+      importGashaponSearch({
+        label: "Gundam official gashapon",
+        resultUrl: `${GASHAPON_BASE_URL}/products/result.php?free=${encodeURIComponent("ガンダム")}`,
+        franchise: "gundam",
+        gradeCode: "GUNDAM_MERCH",
+        subline: "Gundam Gashapon Merchandise",
+        idPrefix: "gundam-merch",
+        tags: ["gundam", "bandai gashapon", "capsule toy", "merchandise"],
+        fallbackWork: "Mixed Gundam Works",
+        fallbackUniverse: "Mixed",
+        fetchDetails: false,
+      }),
+    )),
+    ...(await importOptional("Gundam SEED merchandise Gashapon", () =>
+      importGashaponSearch({
+        label: "Gundam SEED merchandise",
+        resultUrl: `${GASHAPON_BASE_URL}/products/result.php?free=SEED`,
+        franchise: "gundam",
+        gradeCode: "GUNDAM_MERCH",
+        subline: "Gundam SEED Gashapon Merchandise",
+        idPrefix: "gundam-merch",
+        tags: ["gundam", "seed", "bandai gashapon", "merchandise"],
+        fallbackWork: "Mobile Suit Gundam SEED",
+        fallbackUniverse: "CE",
+      }),
+    )),
+    ...(await importOptional("Gundam 00 merchandise Gashapon", () =>
+      importGashaponSearch({
+        label: "Gundam 00 merchandise",
+        resultUrl: `${GASHAPON_BASE_URL}/products/result.php?free=${encodeURIComponent("ガンダム00")}`,
+        franchise: "gundam",
+        gradeCode: "GUNDAM_MERCH",
+        subline: "Gundam 00 Gashapon Merchandise",
+        idPrefix: "gundam-merch",
+        tags: ["gundam", "00", "bandai gashapon", "merchandise"],
+        fallbackWork: "Mobile Suit Gundam 00",
+        fallbackUniverse: "AD",
+      }),
+    )),
+    ...(await importOptional("Tamashii Gundam figures", importTamashiiGundamFigures)),
+    ...(await importOptional("Bandai Armored Core", importBandaiArmoredCore)),
+    ...(await importOptional("Kotobukiya Armored Core", importKotobukiyaArmoredCore)),
+    ...(await importOptional("BEYBLADE X", importBeybladeX)),
   ];
 
   const merged = mergeKits(existingDoc, imported);
