@@ -2228,6 +2228,13 @@ function parseDateKey(dateKey) {
   return new Date(year, month - 1, day);
 }
 
+function localDateKey(date = new Date()) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 function dayDiff(fromDateKey, toDateKey) {
   const from = parseDateKey(fromDateKey);
   const to = parseDateKey(toDateKey);
@@ -2239,8 +2246,8 @@ function dayDiff(fromDateKey, toDateKey) {
 
 function updateFeedStats() {
   const entries = updateFeedEntries();
-  const latestDate = state.updateFeed?.updated_at || entries[0]?.date || state.updatedAt;
-  const monthKey = String(latestDate || "").slice(0, 7);
+  const anchorDate = localDateKey();
+  const monthKey = anchorDate.slice(0, 7);
   const sumFor = (predicate) =>
     entries.filter(predicate).reduce(
       (total, entry) => {
@@ -2252,9 +2259,9 @@ function updateFeedStats() {
     );
 
   return {
-    latestDate,
-    today: sumFor((entry) => entry.date === latestDate),
-    week: sumFor((entry) => dayDiff(entry.date, latestDate) >= 0 && dayDiff(entry.date, latestDate) <= 6),
+    latestDate: entries[0]?.date || state.updateFeed?.updated_at || state.updatedAt,
+    today: sumFor((entry) => entry.date === anchorDate),
+    week: sumFor((entry) => dayDiff(entry.date, anchorDate) >= 0 && dayDiff(entry.date, anchorDate) <= 6),
     month: sumFor((entry) => String(entry.date || "").startsWith(monthKey)),
   };
 }
