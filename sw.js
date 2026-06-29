@@ -1,4 +1,4 @@
-const APP_CACHE = "gunpula-app-v6";
+const APP_CACHE = "gunpula-app-v7";
 const DATA_CACHE = "gunpula-data-v1";
 const IMAGE_CACHE = "gunpula-images-v1";
 
@@ -14,6 +14,7 @@ const APP_ASSETS = [
   "./data/grades.json",
   "./data/kits.json",
   "./data/sources.json",
+  "./data/source-health.json",
   "./data/update-feed.json",
 ];
 

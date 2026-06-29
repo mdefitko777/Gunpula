@@ -12,10 +12,20 @@ const COLLECTION_HOME_VISIBILITY_KEY = "gunpula-catalog-home-collection-visibili
 const COLLECTION_HOME_COLLAPSE_KEY = "gunpula-catalog-home-collection-collapse-v1";
 const UPDATE_NOTIFICATION_KEY = "gunpula-catalog-update-notifications-v1";
 const UPDATE_NOTIFICATION_LAST_KEY = "gunpula-catalog-update-notified-v1";
+const UPDATE_NOTIFICATION_FILTER_KEY = "gunpula-catalog-update-notification-filters-v1";
 const SYNC_POLL_INTERVAL_MS = 15000;
 const SYNC_SAVE_DEBOUNCE_MS = 700;
 
 const COLLECTION_TYPES = ["owned", "wanted"];
+
+const DEFAULT_NOTIFICATION_FILTERS = {
+  premium_bandai: true,
+  seed_00: true,
+  bbx: true,
+  gundam: false,
+  armored_core: false,
+  pokemon: false,
+};
 
 const LANGUAGES = [
   { code: "zh", label: "中", htmlLang: "zh-CN" },
@@ -152,13 +162,43 @@ const TRANSLATIONS = {
     updateFeedEmpty: "最近没有新增记录",
     updateNotification: "更新通知",
     updateNotificationHint: "开启后，应用打开时会提醒新数据；SEED / 00 会优先提示。",
+    notificationRules: "通知规则",
+    notifyPremiumBandai: "PB",
+    notifySeed00: "SEED / 00",
+    notifyBbx: "BBX",
+    notifyGundam: "高达",
+    notifyAc: "AC",
+    notifyPokemon: "宝可梦",
     notificationEnabled: "通知已开启",
     notificationDisabled: "通知未开启",
     notificationDenied: "系统拒绝了通知权限",
     notificationUnsupported: "当前浏览器不支持通知",
     notificationSeedTitle: "SEED / 00 有新更新",
+    notificationPriorityTitle: "关注项目有新更新",
     notificationUpdateTitle: "模型库已更新",
     notificationUpdateBody: "{date} · 新增 {added} · 变更 {changed}",
+    sourceHealth: "来源健康",
+    sourceHealthEmpty: "还没有来源检查报告",
+    sourceOk: "正常",
+    sourceBlocked: "被跳转",
+    sourceWarning: "异常",
+    sourceError: "失败",
+    sourceCatalogCount: "官网 {source} / 库内 {catalog}",
+    reviewWorkbench: "待确认工作台",
+    reviewEmpty: "暂时没有高优先级待确认项",
+    reviewMissingImage: "缺图",
+    reviewNeedsReview: "待确认",
+    updateReasons: "原因",
+    reasonNew: "新增",
+    reasonRemoved: "移除",
+    reasonImage: "图片",
+    reasonPrice: "价格",
+    reasonRelease: "发售",
+    reasonName: "名称",
+    reasonSeries: "系列",
+    reasonProductLine: "产品线",
+    reasonLimited: "限定",
+    reasonMetadata: "资料",
     decreaseWantedQuantity: "减少想要数量",
     increaseWantedQuantity: "增加想要数量",
     previousImage: "上一张",
@@ -315,13 +355,43 @@ const TRANSLATIONS = {
     updateFeedEmpty: "최근 신규 기록이 없습니다",
     updateNotification: "업데이트 알림",
     updateNotificationHint: "켜면 앱을 열 때 새 데이터를 알려줍니다. SEED / 00은 우선 알림됩니다.",
+    notificationRules: "알림 규칙",
+    notifyPremiumBandai: "PB",
+    notifySeed00: "SEED / 00",
+    notifyBbx: "BBX",
+    notifyGundam: "건담",
+    notifyAc: "AC",
+    notifyPokemon: "포켓몬",
     notificationEnabled: "알림 켜짐",
     notificationDisabled: "알림 꺼짐",
     notificationDenied: "시스템에서 알림 권한을 거부했습니다",
     notificationUnsupported: "현재 브라우저는 알림을 지원하지 않습니다",
     notificationSeedTitle: "SEED / 00 업데이트",
+    notificationPriorityTitle: "관심 항목 업데이트",
     notificationUpdateTitle: "모델 DB 업데이트",
     notificationUpdateBody: "{date} · 신규 {added} · 변경 {changed}",
+    sourceHealth: "소스 상태",
+    sourceHealthEmpty: "소스 점검 보고서가 없습니다",
+    sourceOk: "정상",
+    sourceBlocked: "리다이렉트됨",
+    sourceWarning: "주의",
+    sourceError: "실패",
+    sourceCatalogCount: "공식 {source} / DB {catalog}",
+    reviewWorkbench: "확인 작업대",
+    reviewEmpty: "우선 확인할 항목이 없습니다",
+    reviewMissingImage: "이미지 없음",
+    reviewNeedsReview: "확인 필요",
+    updateReasons: "이유",
+    reasonNew: "신규",
+    reasonRemoved: "삭제",
+    reasonImage: "이미지",
+    reasonPrice: "가격",
+    reasonRelease: "발매",
+    reasonName: "이름",
+    reasonSeries: "시리즈",
+    reasonProductLine: "라인",
+    reasonLimited: "한정",
+    reasonMetadata: "자료",
     decreaseWantedQuantity: "원하는 수량 줄이기",
     increaseWantedQuantity: "원하는 수량 늘리기",
     previousImage: "이전 이미지",
@@ -478,13 +548,43 @@ const TRANSLATIONS = {
     updateFeedEmpty: "No recent additions",
     updateNotification: "Update notifications",
     updateNotificationHint: "When enabled, the app notifies you after new data loads. SEED / 00 is prioritized.",
+    notificationRules: "Notification rules",
+    notifyPremiumBandai: "PB",
+    notifySeed00: "SEED / 00",
+    notifyBbx: "BBX",
+    notifyGundam: "Gundam",
+    notifyAc: "AC",
+    notifyPokemon: "Pokemon",
     notificationEnabled: "Notifications on",
     notificationDisabled: "Notifications off",
     notificationDenied: "Notifications are blocked by the system",
     notificationUnsupported: "Notifications are not supported here",
     notificationSeedTitle: "SEED / 00 update",
+    notificationPriorityTitle: "Watched update",
     notificationUpdateTitle: "Catalog updated",
     notificationUpdateBody: "{date} · Added {added} · Changed {changed}",
+    sourceHealth: "Source health",
+    sourceHealthEmpty: "No source health report yet",
+    sourceOk: "OK",
+    sourceBlocked: "Redirected",
+    sourceWarning: "Warning",
+    sourceError: "Failed",
+    sourceCatalogCount: "Official {source} / catalog {catalog}",
+    reviewWorkbench: "Review workbench",
+    reviewEmpty: "No high-priority review items",
+    reviewMissingImage: "Missing image",
+    reviewNeedsReview: "Needs review",
+    updateReasons: "Reasons",
+    reasonNew: "New",
+    reasonRemoved: "Removed",
+    reasonImage: "Images",
+    reasonPrice: "Price",
+    reasonRelease: "Release",
+    reasonName: "Name",
+    reasonSeries: "Series",
+    reasonProductLine: "Line",
+    reasonLimited: "Limited",
+    reasonMetadata: "Data",
     decreaseWantedQuantity: "Decrease wanted quantity",
     increaseWantedQuantity: "Increase wanted quantity",
     previousImage: "Previous image",
@@ -641,13 +741,43 @@ const TRANSLATIONS = {
     updateFeedEmpty: "最近の追加はありません",
     updateNotification: "更新通知",
     updateNotificationHint: "オンにすると、アプリ起動時に新データを通知します。SEED / 00を優先します。",
+    notificationRules: "通知ルール",
+    notifyPremiumBandai: "PB",
+    notifySeed00: "SEED / 00",
+    notifyBbx: "BBX",
+    notifyGundam: "ガンダム",
+    notifyAc: "AC",
+    notifyPokemon: "ポケモン",
     notificationEnabled: "通知オン",
     notificationDisabled: "通知オフ",
     notificationDenied: "通知権限が拒否されています",
     notificationUnsupported: "このブラウザは通知に対応していません",
     notificationSeedTitle: "SEED / 00 更新",
+    notificationPriorityTitle: "注目項目の更新",
     notificationUpdateTitle: "カタログ更新",
     notificationUpdateBody: "{date} · 追加 {added} · 変更 {changed}",
+    sourceHealth: "ソース状態",
+    sourceHealthEmpty: "ソース検査レポートはまだありません",
+    sourceOk: "正常",
+    sourceBlocked: "転送",
+    sourceWarning: "注意",
+    sourceError: "失敗",
+    sourceCatalogCount: "公式 {source} / DB {catalog}",
+    reviewWorkbench: "確認ワークベンチ",
+    reviewEmpty: "優先確認項目はありません",
+    reviewMissingImage: "画像なし",
+    reviewNeedsReview: "要確認",
+    updateReasons: "理由",
+    reasonNew: "追加",
+    reasonRemoved: "削除",
+    reasonImage: "画像",
+    reasonPrice: "価格",
+    reasonRelease: "発売",
+    reasonName: "名称",
+    reasonSeries: "シリーズ",
+    reasonProductLine: "ライン",
+    reasonLimited: "限定",
+    reasonMetadata: "資料",
     decreaseWantedQuantity: "欲しい数を減らす",
     increaseWantedQuantity: "欲しい数を増やす",
     previousImage: "前の画像",
@@ -746,12 +876,14 @@ const state = {
   sources: [],
   imageHealth: null,
   updateFeed: null,
+  sourceHealth: null,
   overrides: {},
   seriesLabelOverrides: {},
   collection: { owned: [], wanted: [] },
   homeCollectionVisibility: loadHomeCollectionVisibility(),
   homeCollectionCollapsed: loadHomeCollectionCollapsed(),
   updateNotifications: localStorage.getItem(UPDATE_NOTIFICATION_KEY) === "true",
+  updateNotificationFilters: loadUpdateNotificationFilters(),
   collectionSelection: { owned: new Set(), wanted: new Set() },
   syncConfig: loadSyncConfig(),
   syncMeta: loadSyncMeta(),
@@ -817,13 +949,17 @@ const elements = {
   refreshAppStatus: document.querySelector("#refreshAppStatus"),
   updateNotificationToggle: document.querySelector("#updateNotificationToggle"),
   updateNotificationStatus: document.querySelector("#updateNotificationStatus"),
+  notificationRules: document.querySelector("#notificationRules"),
   issueSyncStatus: document.querySelector("#issueSyncStatus"),
   updateLog: document.querySelector("#updateLog"),
   imageHealthLog: document.querySelector("#imageHealthLog"),
+  sourceHealthLog: document.querySelector("#sourceHealthLog"),
+  reviewWorkbench: document.querySelector("#reviewWorkbench"),
   updatesSection: document.querySelector("#updatesSection"),
   updatesSubtitle: document.querySelector("#updatesSubtitle"),
   updatesOpenSettings: document.querySelector("#updatesOpenSettings"),
   homeUpdateSummary: document.querySelector("#homeUpdateSummary"),
+  sourceHealthStrip: document.querySelector("#sourceHealthStrip"),
   homeUpdateList: document.querySelector("#homeUpdateList"),
   collectionSection: document.querySelector("#collectionSection"),
   ownedPanel: document.querySelector("#ownedPanel"),
@@ -1063,12 +1199,13 @@ function applyViewState(viewState) {
 }
 
 async function init() {
-  const [gradesDoc, kitsDoc, sourcesDoc, imageHealthDoc, updateFeedDoc] = await Promise.all([
+  const [gradesDoc, kitsDoc, sourcesDoc, imageHealthDoc, updateFeedDoc, sourceHealthDoc] = await Promise.all([
     loadJson("../data/grades.json"),
     loadJson("../data/kits.json"),
     loadJson("../data/sources.json"),
     loadOptionalJson("../data/image-health.json"),
     loadOptionalJson("../data/update-feed.json"),
+    loadOptionalJson("../data/source-health.json"),
   ]);
 
   state.grades = gradesDoc.grades;
@@ -1076,6 +1213,7 @@ async function init() {
   state.sources = sourcesDoc.sources;
   state.imageHealth = imageHealthDoc;
   state.updateFeed = updateFeedDoc;
+  state.sourceHealth = sourceHealthDoc;
   state.overrides = loadOverrides();
   state.seriesLabelOverrides = loadSeriesLabelOverrides();
   state.collection = loadCollection();
@@ -1111,7 +1249,7 @@ function normalizeState() {
   if (!LANGUAGES.some((language) => language.code === state.seriesAdminLanguage)) {
     state.seriesAdminLanguage = state.language;
   }
-  if (!["catalog", "owned", "wanted"].includes(state.activeView)) {
+  if (!["catalog", "updates", "owned", "wanted"].includes(state.activeView)) {
     state.activeView = "catalog";
   }
   if (!["all", "limited", "regular"].includes(state.limited)) {
@@ -1142,6 +1280,19 @@ function loadSeriesLabelOverrides() {
 
 function loadConsoleMode() {
   return localStorage.getItem(CONSOLE_MODE_KEY) === "true";
+}
+
+function loadUpdateNotificationFilters() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(UPDATE_NOTIFICATION_FILTER_KEY) || "{}");
+    return { ...DEFAULT_NOTIFICATION_FILTERS, ...(parsed && typeof parsed === "object" ? parsed : {}) };
+  } catch {
+    return { ...DEFAULT_NOTIFICATION_FILTERS };
+  }
+}
+
+function saveUpdateNotificationFilters() {
+  localStorage.setItem(UPDATE_NOTIFICATION_FILTER_KEY, JSON.stringify(state.updateNotificationFilters));
 }
 
 function loadHomeCollectionVisibility() {
@@ -1456,8 +1607,18 @@ function bindEvents() {
   elements.refreshAppCache.addEventListener("click", refreshAppCache);
   elements.updateNotificationToggle.addEventListener("change", toggleUpdateNotifications);
   elements.updatesOpenSettings.addEventListener("click", () => {
-    openSettings();
-    requestAnimationFrame(() => elements.updateLog?.scrollIntoView({ block: "start", behavior: "smooth" }));
+    if (state.activeView === "updates") {
+      openSettings();
+      requestAnimationFrame(() => elements.updateLog?.scrollIntoView({ block: "start", behavior: "smooth" }));
+      return;
+    }
+    state.activeView = "updates";
+    state.selectedKit = null;
+    state.activeModal = null;
+    localStorage.setItem(ACTIVE_VIEW_KEY, state.activeView);
+    persistViewState({ mode: "push" });
+    render();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
   elements.searchInput.addEventListener("input", (event) => {
     state.query = event.target.value;
@@ -1701,6 +1862,35 @@ function renderUpdateNotificationStatus() {
   }
 }
 
+function renderNotificationRules() {
+  if (!elements.notificationRules) {
+    return;
+  }
+  const options = [
+    ["premium_bandai", t("notifyPremiumBandai")],
+    ["seed_00", t("notifySeed00")],
+    ["bbx", t("notifyBbx")],
+    ["gundam", t("notifyGundam")],
+    ["armored_core", t("notifyAc")],
+    ["pokemon", t("notifyPokemon")],
+  ];
+  elements.notificationRules.innerHTML = `<strong>${escapeHtml(t("notificationRules"))}</strong>`;
+  for (const [key, label] of options) {
+    const item = document.createElement("label");
+    item.className = "mini-toggle";
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.checked = state.updateNotificationFilters[key] !== false;
+    input.addEventListener("change", () => {
+      state.updateNotificationFilters[key] = input.checked;
+      saveUpdateNotificationFilters();
+      maybeShowUpdateNotification();
+    });
+    item.append(document.createTextNode(label), input);
+    elements.notificationRules.append(item);
+  }
+}
+
 async function toggleUpdateNotifications(event) {
   const wantsEnabled = event.target.checked;
   if (!("Notification" in window)) {
@@ -1726,9 +1916,36 @@ async function toggleUpdateNotifications(event) {
   maybeShowUpdateNotification();
 }
 
+function updateEntryInterestTags(entry) {
+  const itemTags = [...(entry.added || []), ...(entry.changed || [])].flatMap((item) => item.interest_tags || []);
+  const tags = new Set([...(entry.interest_tags || []), ...itemTags]);
+  if ((entry.premium_bandai_count || 0) > 0) tags.add("premium_bandai");
+  if ((entry.bbx_count || 0) > 0) tags.add("bbx");
+  if ((entry.watched_count || 0) > 0 || (entry.watch_tags || []).length) tags.add("seed_00");
+  return tags;
+}
+
+function updateEntryMatchesNotificationFilters(entry) {
+  const tags = updateEntryInterestTags(entry);
+  const filters = state.updateNotificationFilters;
+  return (
+    (filters.premium_bandai && tags.has("premium_bandai")) ||
+    (filters.seed_00 && (tags.has("seed_00") || tags.has("seed") || tags.has("00"))) ||
+    (filters.bbx && (tags.has("bbx") || tags.has("beyblade"))) ||
+    (filters.gundam && tags.has("gundam")) ||
+    (filters.armored_core && tags.has("armored_core")) ||
+    (filters.pokemon && tags.has("pokemon"))
+  );
+}
+
+function entryHasPriorityInterest(entry) {
+  const tags = updateEntryInterestTags(entry);
+  return tags.has("premium_bandai") || tags.has("bbx") || tags.has("beyblade");
+}
+
 async function maybeShowUpdateNotification() {
   const entry = latestUpdateEntry();
-  if (!state.updateNotifications || !entry || updateEntryTotal(entry) <= 0 || !("Notification" in window) || Notification.permission !== "granted") {
+  if (!state.updateNotifications || !entry || updateEntryTotal(entry) <= 0 || !updateEntryMatchesNotificationFilters(entry) || !("Notification" in window) || Notification.permission !== "granted") {
     return;
   }
 
@@ -1738,7 +1955,7 @@ async function maybeShowUpdateNotification() {
   }
 
   const watched = Number(entry.watched_count || 0);
-  const title = watched > 0 ? t("notificationSeedTitle") : t("notificationUpdateTitle");
+  const title = watched > 0 ? t("notificationSeedTitle") : entryHasPriorityInterest(entry) ? t("notificationPriorityTitle") : t("notificationUpdateTitle");
   const body = t("notificationUpdateBody", {
     date: entry.date,
     added: entry.added_count || 0,
@@ -2375,6 +2592,26 @@ function updateChangeLabel(changeType) {
   return t("changedBadge");
 }
 
+function updateReasonLabel(reason) {
+  const key = {
+    new: "reasonNew",
+    removed: "reasonRemoved",
+    image: "reasonImage",
+    price: "reasonPrice",
+    release: "reasonRelease",
+    name: "reasonName",
+    series: "reasonSeries",
+    product_line: "reasonProductLine",
+    limited: "reasonLimited",
+    metadata: "reasonMetadata",
+  }[reason];
+  return key ? t(key) : reason;
+}
+
+function updateReasonSummary(item) {
+  return (item.change_reasons || []).map(updateReasonLabel).join(" · ");
+}
+
 function updateEntryPreviewItems(entry, limit = 8, franchise = null) {
   const byKey = new Map();
   const items = updateEntryItems(entry, franchise);
@@ -2420,15 +2657,19 @@ function renderHomeUpdates() {
   }
 
   const entries = updateFeedEntries();
-  elements.updatesSection.hidden = state.activeView !== "catalog" || !entries.length;
+  const isUpdateView = state.activeView === "updates";
+  const currentFranchise = isUpdateView ? null : state.franchise;
+  elements.updatesSection.classList.toggle("is-full", isUpdateView);
+  elements.updatesOpenSettings.textContent = isUpdateView ? t("settings") : t("viewAllUpdates");
+  elements.updatesSection.hidden = !["catalog", "updates"].includes(state.activeView) || !entries.length;
   if (elements.updatesSection.hidden) {
     return;
   }
 
-  const visibleEntries = entries.filter((entry) => updateEntryTotal(entry, state.franchise) > 0);
+  const visibleEntries = entries.filter((entry) => updateEntryTotal(entry, currentFranchise) > 0);
   const latest = visibleEntries[0] || entries[0];
-  const stats = updateFeedStats(state.franchise);
-  const latestItems = updateEntryItems(latest, state.franchise);
+  const stats = updateFeedStats(currentFranchise);
+  const latestItems = updateEntryItems(latest, currentFranchise);
   elements.updatesSubtitle.textContent = `${t("latestUpdate", { date: visibleEntries[0]?.date || stats.latestDate || latest.date })} · ${t("updateAdded", { count: latestItems.added.length })} · ${t("updateChanged", { count: latestItems.changed.length })}`;
   renderUpdateSummaryCards(elements.homeUpdateSummary, [
     { label: t("updateToday"), value: stats.today.count, meta: `${t("premiumBandai")} ${stats.today.premium} · ${t("watchedUpdates")} ${stats.today.watched}` },
@@ -2436,9 +2677,10 @@ function renderHomeUpdates() {
     { label: t("updateMonth"), value: stats.month.count, meta: `${t("premiumBandai")} ${stats.month.premium} · ${t("watchedUpdates")} ${stats.month.watched}` },
     { label: t("premiumBandai"), value: stats.month.premium, meta: t("updateMonth") },
   ]);
+  renderSourceHealthStrip();
 
   elements.homeUpdateList.innerHTML = "";
-  const items = recentUpdateItems(6, state.franchise);
+  const items = recentUpdateItems(isUpdateView ? 24 : 6, currentFranchise);
   if (!items.length) {
     const empty = document.createElement("div");
     empty.className = "home-update-empty";
@@ -2468,7 +2710,7 @@ function renderHomeUpdates() {
     body.className = "home-update-body";
     const badges = document.createElement("div");
     badges.className = "home-update-badges";
-    for (const label of [updateChangeLabel(item.change_type), itemIsPremiumBandai(item) ? t("premiumBandai") : null, ...(item.watch_tags || [])].filter(Boolean)) {
+    for (const label of [updateChangeLabel(item.change_type), itemIsPremiumBandai(item) ? t("premiumBandai") : null, ...(item.watch_tags || []), ...(item.change_reasons || []).slice(0, 2).map(updateReasonLabel)].filter(Boolean)) {
       const badge = document.createElement("span");
       badge.textContent = label;
       if (label === t("premiumBandai")) badge.className = "is-premium";
@@ -2477,7 +2719,7 @@ function renderHomeUpdates() {
     const title = document.createElement("strong");
     title.textContent = kit ? kitShortName(kit) : updateItemName(item);
     const meta = document.createElement("span");
-    meta.textContent = [item.date, kit ? kitSeries(kit) : [updateItemSeriesLabel(item), item.grade_code].filter(Boolean).join(" · ")].filter(Boolean).join(" · ");
+    meta.textContent = [item.date, kit ? kitSeries(kit) : [updateItemSeriesLabel(item), item.grade_code].filter(Boolean).join(" · "), updateReasonSummary(item)].filter(Boolean).join(" · ");
     body.append(badges, title, meta);
 
     card.append(art, body);
@@ -2487,6 +2729,106 @@ function renderHomeUpdates() {
       }
     });
     elements.homeUpdateList.append(card);
+  }
+}
+
+function sourceStatusLabel(status) {
+  if (status === "ok") return t("sourceOk");
+  if (status === "blocked") return t("sourceBlocked");
+  if (status === "error") return t("sourceError");
+  return t("sourceWarning");
+}
+
+function sourceName(sourceId) {
+  return state.sources.find((source) => source.source_id === sourceId)?.name || sourceId;
+}
+
+function renderSourceHealthStrip() {
+  if (!elements.sourceHealthStrip) {
+    return;
+  }
+  elements.sourceHealthStrip.innerHTML = "";
+  const checks = state.sourceHealth?.checks || [];
+  if (!checks.length) {
+    elements.sourceHealthStrip.hidden = true;
+    return;
+  }
+  elements.sourceHealthStrip.hidden = false;
+  for (const check of checks.filter((item) => ["p_bandai_jp", "takara_tomy_beyblade_x_jp"].includes(item.source_id))) {
+    const chip = document.createElement("a");
+    chip.className = `source-health-chip is-${check.status}`;
+    chip.href = check.url;
+    chip.target = "_blank";
+    chip.rel = "noreferrer";
+    chip.textContent =
+      check.source_id === "takara_tomy_beyblade_x_jp" && check.item_count
+        ? `BBX ${sourceStatusLabel(check.status)} · ${t("sourceCatalogCount", { source: check.item_count, catalog: check.catalog_count ?? "?" })}`
+        : `${sourceName(check.source_id)} · ${sourceStatusLabel(check.status)}`;
+    elements.sourceHealthStrip.append(chip);
+  }
+}
+
+function renderSourceHealth() {
+  if (!elements.sourceHealthLog) {
+    return;
+  }
+  elements.sourceHealthLog.innerHTML = "";
+  const checks = state.sourceHealth?.checks || [];
+  if (!checks.length) {
+    const empty = document.createElement("div");
+    empty.className = "source-health-row";
+    empty.textContent = t("sourceHealthEmpty");
+    elements.sourceHealthLog.append(empty);
+    return;
+  }
+  for (const check of checks) {
+    const row = document.createElement("a");
+    row.className = `source-health-row is-${check.status}`;
+    row.href = check.url;
+    row.target = "_blank";
+    row.rel = "noreferrer";
+    const countText =
+      check.item_count || check.catalog_count
+        ? ` · ${t("sourceCatalogCount", { source: check.item_count ?? "-", catalog: check.catalog_count ?? state.sourceHealth?.catalog?.byFranchise?.beyblade ?? "-" })}`
+        : "";
+    row.innerHTML = `<strong>${escapeHtml(sourceName(check.source_id))}</strong><span>${escapeHtml(sourceStatusLabel(check.status))}${escapeHtml(countText)}</span><em>${escapeHtml(check.message || check.final_url || "")}</em>`;
+    elements.sourceHealthLog.append(row);
+  }
+}
+
+function reviewCandidates() {
+  const items = [];
+  for (const kit of state.kits) {
+    const reasons = [];
+    if (kit.data_status === "needs_review") reasons.push(t("reviewNeedsReview"));
+    if (!imageCandidatesForKit(kit).length) reasons.push(t("reviewMissingImage"));
+    if (!kit.series?.key || kit.series.key === "other") reasons.push(t("workSource"));
+    if (!reasons.length) continue;
+    items.push({ kit, reasons });
+  }
+  return items.sort((a, b) => b.reasons.length - a.reasons.length || String(b.kit.release_date || "").localeCompare(String(a.kit.release_date || ""))).slice(0, 12);
+}
+
+function renderReviewWorkbench() {
+  if (!elements.reviewWorkbench) {
+    return;
+  }
+  elements.reviewWorkbench.innerHTML = "";
+  const items = reviewCandidates();
+  if (!items.length) {
+    const empty = document.createElement("div");
+    empty.className = "review-empty";
+    empty.textContent = t("reviewEmpty");
+    elements.reviewWorkbench.append(empty);
+    return;
+  }
+  for (const { kit, reasons } of items) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "review-item";
+    button.innerHTML = `<strong>${escapeHtml(kitShortName(kit))}</strong><span>${escapeHtml([franchiseShortLabel(kit.franchise), seriesLabelFromKit(kit), gradeShortLabel(kit)].join(" · "))}</span><em>${escapeHtml(reasons.join(" · "))}</em>`;
+    button.addEventListener("click", () => openDetail(kit));
+    elements.reviewWorkbench.append(button);
   }
 }
 
@@ -3143,7 +3485,10 @@ function renderSettings() {
   elements.syncNow.disabled = !syncConfigComplete();
   elements.disconnectSync.disabled = !syncConfigComplete();
   renderUpdateNotificationStatus();
+  renderNotificationRules();
   renderSyncStatus();
+  renderSourceHealth();
+  renderReviewWorkbench();
   renderImageHealth();
 }
 

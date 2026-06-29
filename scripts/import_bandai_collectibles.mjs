@@ -1111,7 +1111,7 @@ function parseBeybladeXListings(html, pageUrl) {
       category,
       release_date: parseReleaseDate(releaseText),
       price_jpy: parsePrice(priceText),
-      is_limited: /限定|イベント|B4ストア|タカラトミーモール/.test(block) || /限定/.test(title),
+      is_limited: /限定|イベント|B4ストア|タカラトミーモール|メタルコート|Ver\./.test(block) || /限定|メタルコート|Ver\./.test(title),
       index: index + 1,
     });
     index += 1;
