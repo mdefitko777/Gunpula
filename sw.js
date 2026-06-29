@@ -1,4 +1,4 @@
-const APP_CACHE = "gunpula-app-v5";
+const APP_CACHE = "gunpula-app-v6";
 const DATA_CACHE = "gunpula-data-v1";
 const IMAGE_CACHE = "gunpula-images-v1";
 

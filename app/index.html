@@ -9,7 +9,7 @@
     <title>Gunpula Catalog</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260627-update-feed" />
+    <link rel="stylesheet" href="./styles.css?v=20260629-pb-updates" />
   </head>
   <body>
     <main class="catalog-page">
@@ -84,6 +84,18 @@
           </div>
           <div class="collection-strip" id="wantedStrip"></div>
         </div>
+      </section>
+
+      <section class="updates-section" id="updatesSection" hidden>
+        <div class="updates-head">
+          <div>
+            <h2 data-i18n="recentUpdates">最近更新</h2>
+            <p id="updatesSubtitle"></p>
+          </div>
+          <button class="secondary-button compact-button" id="updatesOpenSettings" type="button" data-i18n="viewAllUpdates">全部记录</button>
+        </div>
+        <div class="home-update-summary" id="homeUpdateSummary"></div>
+        <div class="home-update-list" id="homeUpdateList"></div>
       </section>
 
       <section class="kit-section">
@@ -346,6 +358,6 @@
       </div>
     </dialog>
 
-    <script type="module" src="./main.js?v=20260627-update-feed"></script>
+    <script type="module" src="./main.js?v=20260629-pb-updates"></script>
   </body>
 </html>

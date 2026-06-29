@@ -132,6 +132,14 @@ const TRANSLATIONS = {
     expandCollection: "展开{name}",
     shoppingTotal: "预算 {total}",
     duplicateCandidates: "疑似重复",
+    recentUpdates: "最近更新",
+    viewAllUpdates: "全部记录",
+    latestUpdate: "最新 {date}",
+    premiumBandai: "PB",
+    updateRecentEmpty: "暂无可显示的更新",
+    addedBadge: "新增",
+    changedBadge: "变更",
+    removedBadge: "移除",
     updateLog: "更新记录",
     updateToday: "本日",
     updateWeek: "本周",
@@ -287,6 +295,14 @@ const TRANSLATIONS = {
     expandCollection: "{name} 펼치기",
     shoppingTotal: "예산 {total}",
     duplicateCandidates: "중복 후보",
+    recentUpdates: "최근 업데이트",
+    viewAllUpdates: "전체 기록",
+    latestUpdate: "최신 {date}",
+    premiumBandai: "PB",
+    updateRecentEmpty: "표시할 업데이트가 없습니다",
+    addedBadge: "신규",
+    changedBadge: "변경",
+    removedBadge: "삭제",
     updateLog: "업데이트 기록",
     updateToday: "오늘",
     updateWeek: "이번 주",
@@ -442,6 +458,14 @@ const TRANSLATIONS = {
     expandCollection: "Expand {name}",
     shoppingTotal: "Budget {total}",
     duplicateCandidates: "Duplicate candidates",
+    recentUpdates: "Recent Updates",
+    viewAllUpdates: "All Updates",
+    latestUpdate: "Latest {date}",
+    premiumBandai: "PB",
+    updateRecentEmpty: "No updates to show",
+    addedBadge: "Added",
+    changedBadge: "Changed",
+    removedBadge: "Removed",
     updateLog: "Update log",
     updateToday: "Today",
     updateWeek: "This week",
@@ -597,6 +621,14 @@ const TRANSLATIONS = {
     expandCollection: "{name} を展開",
     shoppingTotal: "予算 {total}",
     duplicateCandidates: "重複候補",
+    recentUpdates: "最近の更新",
+    viewAllUpdates: "すべて",
+    latestUpdate: "最新 {date}",
+    premiumBandai: "PB",
+    updateRecentEmpty: "表示できる更新はありません",
+    addedBadge: "追加",
+    changedBadge: "変更",
+    removedBadge: "削除",
     updateLog: "更新履歴",
     updateToday: "本日",
     updateWeek: "今週",
@@ -788,6 +820,11 @@ const elements = {
   issueSyncStatus: document.querySelector("#issueSyncStatus"),
   updateLog: document.querySelector("#updateLog"),
   imageHealthLog: document.querySelector("#imageHealthLog"),
+  updatesSection: document.querySelector("#updatesSection"),
+  updatesSubtitle: document.querySelector("#updatesSubtitle"),
+  updatesOpenSettings: document.querySelector("#updatesOpenSettings"),
+  homeUpdateSummary: document.querySelector("#homeUpdateSummary"),
+  homeUpdateList: document.querySelector("#homeUpdateList"),
   collectionSection: document.querySelector("#collectionSection"),
   ownedPanel: document.querySelector("#ownedPanel"),
   wantedPanel: document.querySelector("#wantedPanel"),
@@ -1418,6 +1455,10 @@ function bindEvents() {
   elements.installApp.addEventListener("click", installPwa);
   elements.refreshAppCache.addEventListener("click", refreshAppCache);
   elements.updateNotificationToggle.addEventListener("change", toggleUpdateNotifications);
+  elements.updatesOpenSettings.addEventListener("click", () => {
+    openSettings();
+    requestAnimationFrame(() => elements.updateLog?.scrollIntoView({ block: "start", behavior: "smooth" }));
+  });
   elements.searchInput.addEventListener("input", (event) => {
     state.query = event.target.value;
     persistViewState();
@@ -1642,7 +1683,7 @@ function updateNotificationSignature(entry = latestUpdateEntry()) {
   if (!entry) {
     return "";
   }
-  return [entry.date, entry.added_count || 0, entry.changed_count || 0, entry.removed_count || 0, entry.watched_count || 0].join(":");
+  return [entry.date, entry.added_count || 0, entry.changed_count || 0, entry.removed_count || 0, entry.watched_count || 0, entry.premium_bandai_count || 0].join(":");
 }
 
 function renderUpdateNotificationStatus() {
@@ -2165,6 +2206,7 @@ function render() {
   renderConsoleMode();
   renderBottomNav();
   renderCollections();
+  renderHomeUpdates();
   renderUpdateLog();
   renderFilterSummary();
   renderKits();
@@ -2214,8 +2256,52 @@ function updateFeedEntries() {
   return Array.isArray(state.updateFeed?.entries) ? [...state.updateFeed.entries].sort((a, b) => String(b.date).localeCompare(String(a.date))) : [];
 }
 
-function updateEntryTotal(entry) {
-  return Number(entry.added_count || 0) + Number(entry.changed_count || 0);
+function updateEntryItems(entry, franchise = null) {
+  const matchesFranchise = (item) => !franchise || item.franchise === franchise;
+  return {
+    added: (entry.added || []).filter(matchesFranchise),
+    changed: (entry.changed || []).filter(matchesFranchise),
+    removed: (entry.removed || []).filter(matchesFranchise),
+  };
+}
+
+function updateEntryTotal(entry, franchise = null) {
+  if (!franchise) {
+    return Number(entry.added_count || 0) + Number(entry.changed_count || 0);
+  }
+  const items = updateEntryItems(entry, franchise);
+  return items.added.length + items.changed.length;
+}
+
+function itemIsPremiumBandai(item) {
+  const text = [
+    item.is_premium_bandai,
+    item.kit_id,
+    item.grade_code,
+    item.subline,
+    ...Object.values(item.names || {}),
+    ...(item.source_urls || []),
+  ]
+    .filter(Boolean)
+    .join(" ");
+  return item.is_premium_bandai === true || /p-bandai\.jp|premium\s*bandai|p-?bandai|プレミアムバンダイ|プレバン|pb\s*限定|pb限定/i.test(text);
+}
+
+function updateEntryPremiumBandaiTotal(entry, franchise = null) {
+  if (!franchise && Number.isFinite(Number(entry.premium_bandai_count))) {
+    return Number(entry.premium_bandai_count || 0);
+  }
+  const items = updateEntryItems(entry, franchise);
+  const seen = new Set();
+  let count = 0;
+  for (const item of [...items.added, ...items.changed]) {
+    if (!item?.kit_id || seen.has(item.kit_id) || !itemIsPremiumBandai(item)) {
+      continue;
+    }
+    seen.add(item.kit_id);
+    count += 1;
+  }
+  return count;
 }
 
 function parseDateKey(dateKey) {
@@ -2244,18 +2330,22 @@ function dayDiff(fromDateKey, toDateKey) {
   return Math.round((to.getTime() - from.getTime()) / 86400000);
 }
 
-function updateFeedStats() {
+function updateFeedStats(franchise = null) {
   const entries = updateFeedEntries();
   const anchorDate = localDateKey();
   const monthKey = anchorDate.slice(0, 7);
   const sumFor = (predicate) =>
     entries.filter(predicate).reduce(
       (total, entry) => {
-        total.count += updateEntryTotal(entry);
-        total.watched += Number(entry.watched_count || 0);
+        const items = updateEntryItems(entry, franchise);
+        total.count += updateEntryTotal(entry, franchise);
+        total.added += items.added.length;
+        total.changed += items.changed.length;
+        total.watched += [...items.added, ...items.changed].filter((item) => item.watch_tags?.length).length;
+        total.premium += updateEntryPremiumBandaiTotal(entry, franchise);
         return total;
       },
-      { count: 0, watched: 0 },
+      { count: 0, added: 0, changed: 0, watched: 0, premium: 0 },
     );
 
   return {
@@ -2275,12 +2365,129 @@ function updateItemName(item) {
   return item.kit_id;
 }
 
-function updateEntryPreviewItems(entry) {
+function updateItemSeriesLabel(item) {
+  return item.series_labels?.[state.language] ?? item.series_labels?.zh ?? item.series_labels?.en ?? item.series_key ?? "";
+}
+
+function updateChangeLabel(changeType) {
+  if (changeType === "added") return t("addedBadge");
+  if (changeType === "removed") return t("removedBadge");
+  return t("changedBadge");
+}
+
+function updateEntryPreviewItems(entry, limit = 8, franchise = null) {
   const byKey = new Map();
-  for (const item of [...(entry.watched || []), ...(entry.added || []), ...(entry.changed || [])]) {
+  const items = updateEntryItems(entry, franchise);
+  const watched = [...items.added, ...items.changed].filter((item) => item.watch_tags?.length);
+  const premium = [...items.added, ...items.changed].filter(itemIsPremiumBandai);
+  for (const item of [...watched, ...premium, ...items.added, ...items.changed]) {
     byKey.set(`${item.change_type}:${item.kit_id}`, item);
   }
-  return [...byKey.values()].slice(0, 8);
+  return [...byKey.values()].slice(0, limit);
+}
+
+function recentUpdateItems(limit = 6, franchise = null) {
+  const seen = new Set();
+  const items = [];
+  for (const entry of updateFeedEntries()) {
+    for (const item of updateEntryPreviewItems(entry, 16, franchise)) {
+      if (!item?.kit_id || seen.has(item.kit_id)) {
+        continue;
+      }
+      seen.add(item.kit_id);
+      items.push({ ...item, date: entry.date });
+      if (items.length >= limit) {
+        return items;
+      }
+    }
+  }
+  return items;
+}
+
+function renderUpdateSummaryCards(container, cards) {
+  container.innerHTML = "";
+  for (const cardInfo of cards) {
+    const card = document.createElement("div");
+    card.className = "update-summary-card";
+    card.innerHTML = `<strong>${escapeHtml(cardInfo.label)}</strong><span>${cardInfo.value}</span><em>${escapeHtml(cardInfo.meta)}</em>`;
+    container.append(card);
+  }
+}
+
+function renderHomeUpdates() {
+  if (!elements.updatesSection) {
+    return;
+  }
+
+  const entries = updateFeedEntries();
+  elements.updatesSection.hidden = state.activeView !== "catalog" || !entries.length;
+  if (elements.updatesSection.hidden) {
+    return;
+  }
+
+  const visibleEntries = entries.filter((entry) => updateEntryTotal(entry, state.franchise) > 0);
+  const latest = visibleEntries[0] || entries[0];
+  const stats = updateFeedStats(state.franchise);
+  const latestItems = updateEntryItems(latest, state.franchise);
+  elements.updatesSubtitle.textContent = `${t("latestUpdate", { date: visibleEntries[0]?.date || stats.latestDate || latest.date })} · ${t("updateAdded", { count: latestItems.added.length })} · ${t("updateChanged", { count: latestItems.changed.length })}`;
+  renderUpdateSummaryCards(elements.homeUpdateSummary, [
+    { label: t("updateToday"), value: stats.today.count, meta: `${t("premiumBandai")} ${stats.today.premium} · ${t("watchedUpdates")} ${stats.today.watched}` },
+    { label: t("updateWeek"), value: stats.week.count, meta: `${t("premiumBandai")} ${stats.week.premium} · ${t("watchedUpdates")} ${stats.week.watched}` },
+    { label: t("updateMonth"), value: stats.month.count, meta: `${t("premiumBandai")} ${stats.month.premium} · ${t("watchedUpdates")} ${stats.month.watched}` },
+    { label: t("premiumBandai"), value: stats.month.premium, meta: t("updateMonth") },
+  ]);
+
+  elements.homeUpdateList.innerHTML = "";
+  const items = recentUpdateItems(6, state.franchise);
+  if (!items.length) {
+    const empty = document.createElement("div");
+    empty.className = "home-update-empty";
+    empty.textContent = t("updateRecentEmpty");
+    elements.homeUpdateList.append(empty);
+    return;
+  }
+
+  for (const item of items) {
+    const kit = displayKitById(item.kit_id);
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "home-update-card";
+    card.disabled = !kit;
+    const art = document.createElement("div");
+    art.className = "home-update-art";
+    if (kit) {
+      appendImageWithFallback(art, kit, {
+        alt: t("boxArtAlt", { name: kitDisplayName(kit) }),
+        onExhausted: () => showPlaceholder(art, item.grade_code || "?"),
+      });
+    } else {
+      showPlaceholder(art, item.grade_code || "?");
+    }
+
+    const body = document.createElement("div");
+    body.className = "home-update-body";
+    const badges = document.createElement("div");
+    badges.className = "home-update-badges";
+    for (const label of [updateChangeLabel(item.change_type), itemIsPremiumBandai(item) ? t("premiumBandai") : null, ...(item.watch_tags || [])].filter(Boolean)) {
+      const badge = document.createElement("span");
+      badge.textContent = label;
+      if (label === t("premiumBandai")) badge.className = "is-premium";
+      badges.append(badge);
+    }
+    const title = document.createElement("strong");
+    title.textContent = kit ? kitShortName(kit) : updateItemName(item);
+    const meta = document.createElement("span");
+    meta.textContent = [item.date, kit ? kitSeries(kit) : [updateItemSeriesLabel(item), item.grade_code].filter(Boolean).join(" · ")].filter(Boolean).join(" · ");
+    body.append(badges, title, meta);
+
+    card.append(art, body);
+    card.addEventListener("click", () => {
+      if (kit) {
+        openDetail(kit);
+      }
+    });
+    elements.homeUpdateList.append(card);
+  }
 }
 
 function renderUpdateLog() {
@@ -2300,16 +2507,11 @@ function renderUpdateLog() {
   const stats = updateFeedStats();
   const summary = document.createElement("div");
   summary.className = "update-summary-grid";
-  for (const [labelKey, stat] of [
-    ["updateToday", stats.today],
-    ["updateWeek", stats.week],
-    ["updateMonth", stats.month],
-  ]) {
-    const card = document.createElement("div");
-    card.className = "update-summary-card";
-    card.innerHTML = `<strong>${escapeHtml(t(labelKey))}</strong><span>${stat.count}</span><em>${escapeHtml(t("watchedUpdates"))} ${stat.watched}</em>`;
-    summary.append(card);
-  }
+  renderUpdateSummaryCards(summary, [
+    { label: t("updateToday"), value: stats.today.count, meta: `${t("premiumBandai")} ${stats.today.premium} · ${t("watchedUpdates")} ${stats.today.watched}` },
+    { label: t("updateWeek"), value: stats.week.count, meta: `${t("premiumBandai")} ${stats.week.premium} · ${t("watchedUpdates")} ${stats.week.watched}` },
+    { label: t("updateMonth"), value: stats.month.count, meta: `${t("premiumBandai")} ${stats.month.premium} · ${t("watchedUpdates")} ${stats.month.watched}` },
+  ]);
   elements.updateLog.append(summary);
 
   const recent = document.createElement("div");
@@ -2319,7 +2521,7 @@ function renderUpdateLog() {
     row.className = "update-entry";
     const heading = document.createElement("div");
     heading.className = "update-entry-head";
-    heading.innerHTML = `<strong>${escapeHtml(entry.date)}</strong><span>${escapeHtml(t("updateAdded", { count: entry.added_count || 0 }))} · ${escapeHtml(t("updateChanged", { count: entry.changed_count || 0 }))} · ${escapeHtml(t("watchedUpdates"))} ${entry.watched_count || 0}</span>`;
+    heading.innerHTML = `<strong>${escapeHtml(entry.date)}</strong><span>${escapeHtml(t("updateAdded", { count: entry.added_count || 0 }))} · ${escapeHtml(t("updateChanged", { count: entry.changed_count || 0 }))} · ${escapeHtml(t("premiumBandai"))} ${updateEntryPremiumBandaiTotal(entry)} · ${escapeHtml(t("watchedUpdates"))} ${entry.watched_count || 0}</span>`;
     row.append(heading);
 
     const items = updateEntryPreviewItems(entry);
@@ -2329,8 +2531,8 @@ function renderUpdateLog() {
       for (const item of items) {
         const chip = document.createElement("button");
         chip.type = "button";
-        chip.className = `update-chip${item.watch_tags?.length ? " is-watched" : ""}`;
-        chip.textContent = `${item.change_type === "changed" ? "Δ" : "+"} ${updateItemName(item)}`;
+        chip.className = `update-chip${item.watch_tags?.length ? " is-watched" : ""}${itemIsPremiumBandai(item) ? " is-premium" : ""}`;
+        chip.textContent = `${item.change_type === "changed" ? "Δ" : "+"} ${itemIsPremiumBandai(item) ? `${t("premiumBandai")} · ` : ""}${updateItemName(item)}`;
         chip.addEventListener("click", () => {
           const kit = displayKitById(item.kit_id);
           if (kit) {

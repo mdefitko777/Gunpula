@@ -74,11 +74,18 @@ function textForWatch(kit) {
     ...Object.values(kit.names || {}),
     ...Object.values(kit.series?.labels || {}),
     ...(kit.tags || []),
+    kit.notes,
     ...(kit.source_urls || []),
+    ...(kit.source_refs || []).flatMap((ref) => [ref.source_id, ref.url]),
   ]
     .filter(Boolean)
     .join(" ")
     .toLowerCase();
+}
+
+function isPremiumBandaiKit(kit) {
+  const text = textForWatch(kit);
+  return /p-bandai\.jp|p_bandai_jp|premium\s*bandai|p-?bandai|プレミアムバンダイ|プレバン|pb\s*限定|pb限定/i.test(text);
 }
 
 function watchTagsFor(kit) {
@@ -95,6 +102,7 @@ function watchTagsFor(kit) {
 
 function summarizeKit(kit, changeType) {
   const watch_tags = watchTagsFor(kit);
+  const is_premium_bandai = isPremiumBandaiKit(kit);
   return {
     kit_id: kit.kit_id,
     change_type: changeType,
@@ -107,6 +115,7 @@ function summarizeKit(kit, changeType) {
     release_date: kit.release_date ?? null,
     price_jpy: kit.price_jpy ?? null,
     is_limited: kit.is_limited === true,
+    is_premium_bandai,
     watch_tags,
     source_urls: (kit.source_urls || []).slice(0, 2),
   };
@@ -150,6 +159,7 @@ function mergeSameDateEntry(previous, next) {
     changed_count: changed.length,
     removed_count: removed.length,
     watched_count: watched.length,
+    premium_bandai_count: mergeUniqueItems(added, changed).filter((item) => item.is_premium_bandai).length,
     watch_tags: [...new Set([...(previous.watch_tags || []), ...(next.watch_tags || [])])],
     added: added.slice(0, ITEM_LIMIT),
     changed: changed.slice(0, ITEM_LIMIT),
@@ -196,6 +206,7 @@ const entry = {
   changed_count: changed.length,
   removed_count: removed.length,
   watched_count: watched.length,
+  premium_bandai_count: entryItems.filter((item) => item.is_premium_bandai).length,
   watch_tags: [...new Set(watched.flatMap((item) => item.watch_tags))],
   added: sortItems(added).slice(0, ITEM_LIMIT),
   changed: sortItems(changed).slice(0, ITEM_LIMIT),
@@ -217,6 +228,7 @@ const feed = {
   updated_at: date,
   generated_at: entry.generated_at,
   watch_tags: ["seed", "00"],
+  interest_tags: ["premium_bandai"],
   entries,
 };
 
