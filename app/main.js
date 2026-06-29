@@ -10,6 +10,8 @@ const SYNC_META_KEY = "gunpula-catalog-sync-meta-v1";
 const ACTIVE_VIEW_KEY = "gunpula-catalog-active-view-v1";
 const COLLECTION_HOME_VISIBILITY_KEY = "gunpula-catalog-home-collection-visibility-v1";
 const COLLECTION_HOME_COLLAPSE_KEY = "gunpula-catalog-home-collection-collapse-v1";
+const UPDATE_NOTIFICATION_KEY = "gunpula-catalog-update-notifications-v1";
+const UPDATE_NOTIFICATION_LAST_KEY = "gunpula-catalog-update-notified-v1";
 const SYNC_POLL_INTERVAL_MS = 15000;
 const SYNC_SAVE_DEBOUNCE_MS = 700;
 
@@ -131,6 +133,24 @@ const TRANSLATIONS = {
     shoppingTotal: "预算 {total}",
     duplicateCandidates: "疑似重复",
     updateLog: "更新记录",
+    updateToday: "本日",
+    updateWeek: "本周",
+    updateMonth: "本月",
+    watchedUpdates: "SEED / 00",
+    updateAdded: "新增 {count}",
+    updateChanged: "变更 {count}",
+    updateRemoved: "移除 {count}",
+    noUpdateFeed: "还没有更新摘要",
+    updateFeedEmpty: "最近没有新增记录",
+    updateNotification: "更新通知",
+    updateNotificationHint: "开启后，应用打开时会提醒新数据；SEED / 00 会优先提示。",
+    notificationEnabled: "通知已开启",
+    notificationDisabled: "通知未开启",
+    notificationDenied: "系统拒绝了通知权限",
+    notificationUnsupported: "当前浏览器不支持通知",
+    notificationSeedTitle: "SEED / 00 有新更新",
+    notificationUpdateTitle: "模型库已更新",
+    notificationUpdateBody: "{date} · 新增 {added} · 变更 {changed}",
     decreaseWantedQuantity: "减少想要数量",
     increaseWantedQuantity: "增加想要数量",
     previousImage: "上一张",
@@ -268,6 +288,24 @@ const TRANSLATIONS = {
     shoppingTotal: "예산 {total}",
     duplicateCandidates: "중복 후보",
     updateLog: "업데이트 기록",
+    updateToday: "오늘",
+    updateWeek: "이번 주",
+    updateMonth: "이번 달",
+    watchedUpdates: "SEED / 00",
+    updateAdded: "신규 {count}",
+    updateChanged: "변경 {count}",
+    updateRemoved: "삭제 {count}",
+    noUpdateFeed: "업데이트 요약이 없습니다",
+    updateFeedEmpty: "최근 신규 기록이 없습니다",
+    updateNotification: "업데이트 알림",
+    updateNotificationHint: "켜면 앱을 열 때 새 데이터를 알려줍니다. SEED / 00은 우선 알림됩니다.",
+    notificationEnabled: "알림 켜짐",
+    notificationDisabled: "알림 꺼짐",
+    notificationDenied: "시스템에서 알림 권한을 거부했습니다",
+    notificationUnsupported: "현재 브라우저는 알림을 지원하지 않습니다",
+    notificationSeedTitle: "SEED / 00 업데이트",
+    notificationUpdateTitle: "모델 DB 업데이트",
+    notificationUpdateBody: "{date} · 신규 {added} · 변경 {changed}",
     decreaseWantedQuantity: "원하는 수량 줄이기",
     increaseWantedQuantity: "원하는 수량 늘리기",
     previousImage: "이전 이미지",
@@ -405,6 +443,24 @@ const TRANSLATIONS = {
     shoppingTotal: "Budget {total}",
     duplicateCandidates: "Duplicate candidates",
     updateLog: "Update log",
+    updateToday: "Today",
+    updateWeek: "This week",
+    updateMonth: "This month",
+    watchedUpdates: "SEED / 00",
+    updateAdded: "Added {count}",
+    updateChanged: "Changed {count}",
+    updateRemoved: "Removed {count}",
+    noUpdateFeed: "No update summary yet",
+    updateFeedEmpty: "No recent additions",
+    updateNotification: "Update notifications",
+    updateNotificationHint: "When enabled, the app notifies you after new data loads. SEED / 00 is prioritized.",
+    notificationEnabled: "Notifications on",
+    notificationDisabled: "Notifications off",
+    notificationDenied: "Notifications are blocked by the system",
+    notificationUnsupported: "Notifications are not supported here",
+    notificationSeedTitle: "SEED / 00 update",
+    notificationUpdateTitle: "Catalog updated",
+    notificationUpdateBody: "{date} · Added {added} · Changed {changed}",
     decreaseWantedQuantity: "Decrease wanted quantity",
     increaseWantedQuantity: "Increase wanted quantity",
     previousImage: "Previous image",
@@ -542,6 +598,24 @@ const TRANSLATIONS = {
     shoppingTotal: "予算 {total}",
     duplicateCandidates: "重複候補",
     updateLog: "更新履歴",
+    updateToday: "本日",
+    updateWeek: "今週",
+    updateMonth: "今月",
+    watchedUpdates: "SEED / 00",
+    updateAdded: "追加 {count}",
+    updateChanged: "変更 {count}",
+    updateRemoved: "削除 {count}",
+    noUpdateFeed: "更新サマリーはまだありません",
+    updateFeedEmpty: "最近の追加はありません",
+    updateNotification: "更新通知",
+    updateNotificationHint: "オンにすると、アプリ起動時に新データを通知します。SEED / 00を優先します。",
+    notificationEnabled: "通知オン",
+    notificationDisabled: "通知オフ",
+    notificationDenied: "通知権限が拒否されています",
+    notificationUnsupported: "このブラウザは通知に対応していません",
+    notificationSeedTitle: "SEED / 00 更新",
+    notificationUpdateTitle: "カタログ更新",
+    notificationUpdateBody: "{date} · 追加 {added} · 変更 {changed}",
     decreaseWantedQuantity: "欲しい数を減らす",
     increaseWantedQuantity: "欲しい数を増やす",
     previousImage: "前の画像",
@@ -639,11 +713,13 @@ const state = {
   grades: [],
   sources: [],
   imageHealth: null,
+  updateFeed: null,
   overrides: {},
   seriesLabelOverrides: {},
   collection: { owned: [], wanted: [] },
   homeCollectionVisibility: loadHomeCollectionVisibility(),
   homeCollectionCollapsed: loadHomeCollectionCollapsed(),
+  updateNotifications: localStorage.getItem(UPDATE_NOTIFICATION_KEY) === "true",
   collectionSelection: { owned: new Set(), wanted: new Set() },
   syncConfig: loadSyncConfig(),
   syncMeta: loadSyncMeta(),
@@ -707,6 +783,8 @@ const elements = {
   installApp: document.querySelector("#installApp"),
   refreshAppCache: document.querySelector("#refreshAppCache"),
   refreshAppStatus: document.querySelector("#refreshAppStatus"),
+  updateNotificationToggle: document.querySelector("#updateNotificationToggle"),
+  updateNotificationStatus: document.querySelector("#updateNotificationStatus"),
   issueSyncStatus: document.querySelector("#issueSyncStatus"),
   updateLog: document.querySelector("#updateLog"),
   imageHealthLog: document.querySelector("#imageHealthLog"),
@@ -948,17 +1026,19 @@ function applyViewState(viewState) {
 }
 
 async function init() {
-  const [gradesDoc, kitsDoc, sourcesDoc, imageHealthDoc] = await Promise.all([
+  const [gradesDoc, kitsDoc, sourcesDoc, imageHealthDoc, updateFeedDoc] = await Promise.all([
     loadJson("../data/grades.json"),
     loadJson("../data/kits.json"),
     loadJson("../data/sources.json"),
     loadOptionalJson("../data/image-health.json"),
+    loadOptionalJson("../data/update-feed.json"),
   ]);
 
   state.grades = gradesDoc.grades;
   state.rawKits = kitsDoc.kits;
   state.sources = sourcesDoc.sources;
   state.imageHealth = imageHealthDoc;
+  state.updateFeed = updateFeedDoc;
   state.overrides = loadOverrides();
   state.seriesLabelOverrides = loadSeriesLabelOverrides();
   state.collection = loadCollection();
@@ -1337,6 +1417,7 @@ function bindEvents() {
   elements.disconnectSync.addEventListener("click", disconnectSync);
   elements.installApp.addEventListener("click", installPwa);
   elements.refreshAppCache.addEventListener("click", refreshAppCache);
+  elements.updateNotificationToggle.addEventListener("change", toggleUpdateNotifications);
   elements.searchInput.addEventListener("input", (event) => {
     state.query = event.target.value;
     persistViewState();
@@ -1494,6 +1575,7 @@ function navigateToCollectionView(type) {
   localStorage.setItem(ACTIVE_VIEW_KEY, state.activeView);
   persistViewState({ mode: "push" });
   render();
+  maybeShowUpdateNotification();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -1549,6 +1631,94 @@ async function refreshAppCache() {
   } catch {
     elements.refreshAppCache.disabled = false;
     elements.refreshAppStatus.textContent = t("refreshAppError");
+  }
+}
+
+function latestUpdateEntry() {
+  return updateFeedEntries()[0] || null;
+}
+
+function updateNotificationSignature(entry = latestUpdateEntry()) {
+  if (!entry) {
+    return "";
+  }
+  return [entry.date, entry.added_count || 0, entry.changed_count || 0, entry.removed_count || 0, entry.watched_count || 0].join(":");
+}
+
+function renderUpdateNotificationStatus() {
+  if (!elements.updateNotificationStatus) {
+    return;
+  }
+  if (!("Notification" in window)) {
+    elements.updateNotificationStatus.textContent = t("notificationUnsupported");
+  } else if (Notification.permission === "denied") {
+    elements.updateNotificationStatus.textContent = t("notificationDenied");
+  } else if (state.updateNotifications && Notification.permission === "granted") {
+    elements.updateNotificationStatus.textContent = t("notificationEnabled");
+  } else {
+    elements.updateNotificationStatus.textContent = t("notificationDisabled");
+  }
+}
+
+async function toggleUpdateNotifications(event) {
+  const wantsEnabled = event.target.checked;
+  if (!("Notification" in window)) {
+    state.updateNotifications = false;
+    localStorage.setItem(UPDATE_NOTIFICATION_KEY, "false");
+    renderSettings();
+    return;
+  }
+
+  if (wantsEnabled && Notification.permission !== "granted") {
+    const permission = await Notification.requestPermission();
+    if (permission !== "granted") {
+      state.updateNotifications = false;
+      localStorage.setItem(UPDATE_NOTIFICATION_KEY, "false");
+      renderSettings();
+      return;
+    }
+  }
+
+  state.updateNotifications = wantsEnabled;
+  localStorage.setItem(UPDATE_NOTIFICATION_KEY, String(state.updateNotifications));
+  renderSettings();
+  maybeShowUpdateNotification();
+}
+
+async function maybeShowUpdateNotification() {
+  const entry = latestUpdateEntry();
+  if (!state.updateNotifications || !entry || updateEntryTotal(entry) <= 0 || !("Notification" in window) || Notification.permission !== "granted") {
+    return;
+  }
+
+  const signature = updateNotificationSignature(entry);
+  if (!signature || localStorage.getItem(UPDATE_NOTIFICATION_LAST_KEY) === signature) {
+    return;
+  }
+
+  const watched = Number(entry.watched_count || 0);
+  const title = watched > 0 ? t("notificationSeedTitle") : t("notificationUpdateTitle");
+  const body = t("notificationUpdateBody", {
+    date: entry.date,
+    added: entry.added_count || 0,
+    changed: entry.changed_count || 0,
+  });
+  const options = {
+    body,
+    tag: `gunpula-update-${entry.date}`,
+    data: { url: new URL("./", window.location.href).href },
+  };
+
+  try {
+    if ("serviceWorker" in navigator) {
+      const registration = await navigator.serviceWorker.ready;
+      await registration.showNotification(title, options);
+    } else {
+      new Notification(title, options);
+    }
+    localStorage.setItem(UPDATE_NOTIFICATION_LAST_KEY, signature);
+  } catch {
+    localStorage.setItem(UPDATE_NOTIFICATION_LAST_KEY, signature);
   }
 }
 
@@ -2040,25 +2210,137 @@ function duplicateCandidateCount() {
   return [...counts.values()].filter((count) => count > 1).length;
 }
 
+function updateFeedEntries() {
+  return Array.isArray(state.updateFeed?.entries) ? [...state.updateFeed.entries].sort((a, b) => String(b.date).localeCompare(String(a.date))) : [];
+}
+
+function updateEntryTotal(entry) {
+  return Number(entry.added_count || 0) + Number(entry.changed_count || 0);
+}
+
+function parseDateKey(dateKey) {
+  const [year, month, day] = String(dateKey || "")
+    .split("-")
+    .map((part) => Number(part));
+  if (!year || !month || !day) {
+    return null;
+  }
+  return new Date(year, month - 1, day);
+}
+
+function dayDiff(fromDateKey, toDateKey) {
+  const from = parseDateKey(fromDateKey);
+  const to = parseDateKey(toDateKey);
+  if (!from || !to) {
+    return Infinity;
+  }
+  return Math.round((to.getTime() - from.getTime()) / 86400000);
+}
+
+function updateFeedStats() {
+  const entries = updateFeedEntries();
+  const latestDate = state.updateFeed?.updated_at || entries[0]?.date || state.updatedAt;
+  const monthKey = String(latestDate || "").slice(0, 7);
+  const sumFor = (predicate) =>
+    entries.filter(predicate).reduce(
+      (total, entry) => {
+        total.count += updateEntryTotal(entry);
+        total.watched += Number(entry.watched_count || 0);
+        return total;
+      },
+      { count: 0, watched: 0 },
+    );
+
+  return {
+    latestDate,
+    today: sumFor((entry) => entry.date === latestDate),
+    week: sumFor((entry) => dayDiff(entry.date, latestDate) >= 0 && dayDiff(entry.date, latestDate) <= 6),
+    month: sumFor((entry) => String(entry.date || "").startsWith(monthKey)),
+  };
+}
+
+function updateItemName(item) {
+  for (const language of NAME_FALLBACKS[state.language] || ["zh", "ja", "en", "ko"]) {
+    if (item.names?.[language]) {
+      return item.names[language];
+    }
+  }
+  return item.kit_id;
+}
+
+function updateEntryPreviewItems(entry) {
+  const byKey = new Map();
+  for (const item of [...(entry.watched || []), ...(entry.added || []), ...(entry.changed || [])]) {
+    byKey.set(`${item.change_type}:${item.kit_id}`, item);
+  }
+  return [...byKey.values()].slice(0, 8);
+}
+
 function renderUpdateLog() {
   if (!elements.updateLog) {
     return;
   }
-  const counts = new Map();
-  for (const kit of state.kits) {
-    counts.set(kit.franchise, (counts.get(kit.franchise) || 0) + 1);
-  }
-  const lines = [
-    `${state.updatedAt ?? "unknown"} · ${state.kits.length}`,
-    ...FRANCHISES.map((franchise) => `${franchiseLabel(franchise)} ${counts.get(franchise) || 0}`),
-    `${t("duplicateCandidates")} ${duplicateCandidateCount()}`,
-  ];
   elements.updateLog.innerHTML = "";
-  for (const line of lines) {
-    const item = document.createElement("span");
-    item.textContent = line;
-    elements.updateLog.append(item);
+
+  const entries = updateFeedEntries();
+  if (!entries.length) {
+    const empty = document.createElement("span");
+    empty.textContent = t("noUpdateFeed");
+    elements.updateLog.append(empty);
+    return;
   }
+
+  const stats = updateFeedStats();
+  const summary = document.createElement("div");
+  summary.className = "update-summary-grid";
+  for (const [labelKey, stat] of [
+    ["updateToday", stats.today],
+    ["updateWeek", stats.week],
+    ["updateMonth", stats.month],
+  ]) {
+    const card = document.createElement("div");
+    card.className = "update-summary-card";
+    card.innerHTML = `<strong>${escapeHtml(t(labelKey))}</strong><span>${stat.count}</span><em>${escapeHtml(t("watchedUpdates"))} ${stat.watched}</em>`;
+    summary.append(card);
+  }
+  elements.updateLog.append(summary);
+
+  const recent = document.createElement("div");
+  recent.className = "update-entry-list";
+  for (const entry of entries.slice(0, 8)) {
+    const row = document.createElement("article");
+    row.className = "update-entry";
+    const heading = document.createElement("div");
+    heading.className = "update-entry-head";
+    heading.innerHTML = `<strong>${escapeHtml(entry.date)}</strong><span>${escapeHtml(t("updateAdded", { count: entry.added_count || 0 }))} · ${escapeHtml(t("updateChanged", { count: entry.changed_count || 0 }))} · ${escapeHtml(t("watchedUpdates"))} ${entry.watched_count || 0}</span>`;
+    row.append(heading);
+
+    const items = updateEntryPreviewItems(entry);
+    if (items.length) {
+      const list = document.createElement("div");
+      list.className = "update-entry-items";
+      for (const item of items) {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = `update-chip${item.watch_tags?.length ? " is-watched" : ""}`;
+        chip.textContent = `${item.change_type === "changed" ? "Δ" : "+"} ${updateItemName(item)}`;
+        chip.addEventListener("click", () => {
+          const kit = displayKitById(item.kit_id);
+          if (kit) {
+            openDetail(kit);
+          }
+        });
+        list.append(chip);
+      }
+      row.append(list);
+    }
+    recent.append(row);
+  }
+  elements.updateLog.append(recent);
+
+  const footer = document.createElement("span");
+  footer.textContent = `${state.updatedAt ?? "unknown"} · ${state.kits.length} · ${t("duplicateCandidates")} ${duplicateCandidateCount()}`;
+  elements.updateLog.append(footer);
 }
 
 function gradeByCode() {
@@ -2641,6 +2923,7 @@ function renderSettings() {
   elements.consoleModeToggle.checked = state.consoleMode;
   elements.showOwnedOnHome.checked = state.homeCollectionVisibility.owned;
   elements.showWantedOnHome.checked = state.homeCollectionVisibility.wanted;
+  elements.updateNotificationToggle.checked = state.updateNotifications;
   elements.syncSupabaseUrl.value = state.syncConfig.supabaseUrl || "";
   elements.syncAnonKey.value = state.syncConfig.anonKey || "";
   elements.syncWorkspaceId.value = state.syncConfig.workspaceId || "";
@@ -2650,6 +2933,7 @@ function renderSettings() {
   elements.installApp.hidden = !state.installPrompt;
   elements.syncNow.disabled = !syncConfigComplete();
   elements.disconnectSync.disabled = !syncConfigComplete();
+  renderUpdateNotificationStatus();
   renderSyncStatus();
   renderImageHealth();
 }

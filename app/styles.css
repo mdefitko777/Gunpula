@@ -1001,8 +1001,8 @@ body[data-view="wanted"] .top-bar {
 }
 
 .update-log {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 8px;
   margin-top: 10px;
 }
@@ -1018,6 +1018,103 @@ body[data-view="wanted"] .top-bar {
   color: var(--muted);
   font-size: 12px;
   font-weight: 900;
+}
+
+.update-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.update-summary-card {
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fafbfc;
+}
+
+.update-summary-card strong,
+.update-summary-card em {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.update-summary-card span {
+  min-height: 0;
+  display: block;
+  padding: 2px 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 22px;
+  line-height: 1.1;
+}
+
+.update-entry-list {
+  display: grid;
+  gap: 8px;
+}
+
+.update-entry {
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.update-entry-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.update-entry-head strong {
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.update-entry-head span {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.update-entry-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.update-chip {
+  min-height: 28px;
+  max-width: 100%;
+  padding: 0 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fafbfc;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 900;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.update-chip.is-watched {
+  border-color: #d92d3a;
+  background: #fff4f4;
+  color: #b4232e;
 }
 
 .app-update-row {
@@ -1045,6 +1142,10 @@ body[data-view="wanted"] .top-bar {
   font-size: 12px;
   font-weight: 800;
   line-height: 1.45;
+}
+
+.update-notification-row {
+  margin-top: 8px;
 }
 
 .toggle-row {

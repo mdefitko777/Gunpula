@@ -28,8 +28,14 @@ jobs:
         with:
           node-version: 22
 
+      - name: Snapshot current catalog
+        run: cp data/kits.json "$RUNNER_TEMP/kits-before.json"
+
       - name: Import official sources
         run: npm run import:official
+
+      - name: Build update feed
+        run: npm run updates -- --before="$RUNNER_TEMP/kits-before.json"
 
       - name: Validate catalog
         run: |

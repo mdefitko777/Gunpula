@@ -1,4 +1,4 @@
-const APP_CACHE = "gunpula-app-v4";
+const APP_CACHE = "gunpula-app-v5";
 const DATA_CACHE = "gunpula-data-v1";
 const IMAGE_CACHE = "gunpula-images-v1";
 
@@ -14,6 +14,7 @@ const APP_ASSETS = [
   "./data/grades.json",
   "./data/kits.json",
   "./data/sources.json",
+  "./data/update-feed.json",
 ];
 
 self.addEventListener("install", (event) => {
@@ -50,6 +51,23 @@ self.addEventListener("fetch", (event) => {
   if (url.origin === self.location.origin) {
     event.respondWith(networkFirst(request, APP_CACHE));
   }
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  const targetUrl = event.notification.data?.url || "./app/";
+  event.waitUntil(
+    self.clients
+      .matchAll({ type: "window", includeUncontrolled: true })
+      .then((clients) => {
+        const appClient = clients.find((client) => client.url.includes("/app/"));
+        if (appClient) {
+          appClient.focus();
+          return appClient.navigate(targetUrl);
+        }
+        return self.clients.openWindow(targetUrl);
+      }),
+  );
 });
 
 async function cacheFirst(request, cacheName) {

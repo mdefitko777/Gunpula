@@ -9,7 +9,7 @@
     <title>Gunpula Catalog</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260618-collection-collapse" />
+    <link rel="stylesheet" href="./styles.css?v=20260627-update-feed" />
   </head>
   <body>
     <main class="catalog-page">
@@ -288,6 +288,11 @@
             <button id="refreshAppCache" type="button" data-i18n="refreshAppCache">检查更新</button>
             <span id="refreshAppStatus" data-i18n="refreshAppHint">清理程序缓存并重新载入最新版本，不会删除收藏。</span>
           </div>
+          <label class="toggle-row update-notification-row">
+            <span data-i18n="updateNotification">更新通知</span>
+            <input id="updateNotificationToggle" type="checkbox" />
+          </label>
+          <p class="settings-hint" id="updateNotificationStatus" data-i18n="updateNotificationHint">开启后，应用打开时会提醒新数据；SEED / 00 会优先提示。</p>
         </section>
         <section class="settings-section app-health-section">
           <h3 data-i18n="appHealth">最大问题</h3>
@@ -341,6 +346,6 @@
       </div>
     </dialog>
 
-    <script type="module" src="./main.js?v=20260618-collection-collapse"></script>
+    <script type="module" src="./main.js?v=20260627-update-feed"></script>
   </body>
 </html>

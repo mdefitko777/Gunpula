@@ -24,6 +24,7 @@
     "clean:tamashii-images": "node scripts/clean_tamashii_related_images.mjs",
     "duplicates": "node scripts/find_duplicate_candidates.mjs",
     "audit:gundam-series": "node scripts/audit_gundam_series.mjs",
+    "updates": "node scripts/build_update_feed.mjs",
     "android:sync": "npx @capacitor/cli sync android",
     "import:official": "npm run import:bandai && npm run import:collectibles && npm run localize && npm run cache:pokemon-images && npm run cache:ac-images"
   }
