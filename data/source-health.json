@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-06-29T20:30:21.345Z",
-  "updated_at": "2026-06-29",
+  "generated_at": "2026-06-30T20:36:02.458Z",
+  "updated_at": "2026-06-30",
   "catalog": {
     "byFranchise": {
-      "gundam": 4016,
+      "gundam": 4019,
       "armored_core": 46,
       "beyblade": 143,
       "pokemon": 253
@@ -23,7 +23,7 @@
       "status": "blocked",
       "http_status": 200,
       "final_url": "https://p-bandai.jp/global_newpc.html",
-      "duration_ms": 308,
+      "duration_ms": 335,
       "item_count": 0,
       "message": "Japanese Premium Bandai storefront redirected this runner to the international region page"
     },
@@ -33,7 +33,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/",
-      "duration_ms": 939,
+      "duration_ms": 829,
       "item_count": 143,
       "catalog_count": 143,
       "buckets": {
@@ -50,7 +50,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://bandai-hobby.net/site/gunpla.html",
-      "duration_ms": 616,
+      "duration_ms": 662,
       "message": "reachable"
     },
     {
@@ -59,7 +59,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://www.bandai.co.jp/candy/gundam/",
-      "duration_ms": 1145,
+      "duration_ms": 1006,
       "message": "reachable"
     },
     {
@@ -68,7 +68,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://gashapon.jp/products/result.php?free=%E3%82%AC%E3%83%B3%E3%83%80%E3%83%A0",
-      "duration_ms": 1224,
+      "duration_ms": 1221,
       "message": "reachable"
     },
     {
@@ -77,17 +77,17 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://tamashiiweb.com/item_character/gundam_series/",
-      "duration_ms": 1013,
+      "duration_ms": 1777,
       "message": "reachable"
     },
     {
       "source_id": "kotobukiya_armored_core_jp",
       "url": "https://www.kotobukiya.co.jp/title/armored-core/",
-      "status": "ok",
-      "http_status": 200,
+      "status": "warning",
+      "http_status": 403,
       "final_url": "https://www.kotobukiya.co.jp/title/armored-core/",
-      "duration_ms": 1615,
-      "message": "reachable"
+      "duration_ms": 597,
+      "message": "reachable but expected product markers were not found"
     },
     {
       "source_id": "bandai_hobby_pokemon_global",
@@ -95,7 +95,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=select",
-      "duration_ms": 550,
+      "duration_ms": 309,
       "message": "reachable"
     }
   ]
