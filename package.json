@@ -18,6 +18,8 @@
     "cache:ac-images": "node scripts/cache_ac_images.mjs",
     "cache:catalog-images": "node scripts/cache_catalog_images.mjs",
     "cache:pokemon-images": "node scripts/cache_catalog_images.mjs --franchise=pokemon --repo-assets --rewrite --covers-only",
+    "cache:pb-images": "node scripts/cache_catalog_images.mjs --franchise=gundam --premium-bandai --repo-assets --rewrite --covers-only --limit=200",
+    "cache:important-images": "npm run cache:pokemon-images && npm run cache:ac-images && npm run cache:pb-images",
     "check:images": "node scripts/check_image_health.mjs",
     "check:images:pokemon": "node scripts/check_image_health.mjs --franchise=pokemon --local",
     "prune:broken-images": "node scripts/prune_broken_image_urls.mjs",
@@ -28,6 +30,9 @@
     "check:sources": "node scripts/check_source_health.mjs",
     "updates": "node scripts/build_update_feed.mjs",
     "android:sync": "npx @capacitor/cli sync android",
-    "import:official": "npm run import:bandai && npm run import:collectibles && npm run import:pb && npm run localize && npm run cache:pokemon-images && npm run cache:ac-images && npm run check:sources"
+    "android:add": "npx @capacitor/cli add android",
+    "android:build": "npm run android:sync && cd android && gradlew assembleDebug",
+    "import:data": "npm run import:bandai && npm run import:collectibles && npm run import:pb && npm run localize && npm run check:sources",
+    "import:official": "npm run import:data"
   }
 }

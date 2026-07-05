@@ -61,6 +61,9 @@ function stableKitFingerprint(kit) {
     price_jpy: kit.price_jpy,
     is_limited: kit.is_limited,
     scale: kit.scale,
+    source_refs: kit.source_refs,
+    source_urls: kit.source_urls,
+    tags: kit.tags,
   });
 }
 
@@ -130,6 +133,7 @@ function changeReasons(beforeKit, kit, changeType) {
   if (beforeKit.grade_code !== kit.grade_code || beforeKit.subline !== kit.subline || beforeKit.scale !== kit.scale) reasons.add("product_line");
   if (beforeKit.series?.key !== kit.series?.key || beforeKit.work_title !== kit.work_title || beforeKit.universe !== kit.universe) reasons.add("series");
   if (beforeKit.is_limited !== kit.is_limited) reasons.add("limited");
+  if (!sameJson(beforeKit.source_refs, kit.source_refs) || !sameJson(beforeKit.source_urls, kit.source_urls) || !sameJson(beforeKit.tags, kit.tags)) reasons.add("source");
   return reasons.size ? [...reasons] : ["metadata"];
 }
 
@@ -172,7 +176,22 @@ function mergeUniqueItems(...groups) {
   const byKey = new Map();
   for (const item of groups.flat()) {
     if (!item?.kit_id) continue;
-    byKey.set(`${item.change_type}:${item.kit_id}`, item);
+    const key = `${item.change_type}:${item.kit_id}`;
+    const previous = byKey.get(key);
+    byKey.set(
+      key,
+      previous
+        ? {
+            ...previous,
+            ...item,
+            watch_tags: [...new Set([...(previous.watch_tags || []), ...(item.watch_tags || [])])],
+            interest_tags: [...new Set([...(previous.interest_tags || []), ...(item.interest_tags || [])])],
+            change_reasons: [...new Set([...(previous.change_reasons || []), ...(item.change_reasons || [])])],
+            source_ids: [...new Set([...(previous.source_ids || []), ...(item.source_ids || [])])],
+            source_urls: [...new Set([...(previous.source_urls || []), ...(item.source_urls || [])])].slice(0, 2),
+          }
+        : item,
+    );
   }
   return sortItems([...byKey.values()]);
 }

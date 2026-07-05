@@ -32,27 +32,27 @@
             <span data-i18n="filters">筛选</span>
             <span id="filterSummary">全部系列 · 全部产品线</span>
           </summary>
-          <div class="filter-body">
-            <label class="select-filter series-select-filter" hidden>
+          <div class="filter-body" id="filterBody">
+            <section class="multi-filter series-select-filter" hidden>
               <span data-i18n="workSource">系列</span>
-              <select id="seriesSelect"></select>
-            </label>
-            <label class="select-filter">
+              <div class="filter-options" id="seriesFilter"></div>
+            </section>
+            <section class="multi-filter">
               <span data-i18n="productLine">产品线</span>
-              <select id="gradeSelect"></select>
-            </label>
-            <label class="select-filter">
+              <div class="filter-options" id="gradeFilter"></div>
+            </section>
+            <section class="multi-filter">
               <span data-i18n="itemType">商品类型</span>
-              <select id="itemTypeSelect"></select>
-            </label>
-            <label class="select-filter">
+              <div class="filter-options" id="itemTypeFilter"></div>
+            </section>
+            <section class="multi-filter">
               <span data-i18n="releaseYear">发售年份</span>
-              <select id="releaseYearSelect"></select>
-            </label>
-            <label class="select-filter">
+              <div class="filter-options" id="releaseYearFilter"></div>
+            </section>
+            <section class="multi-filter">
               <span data-i18n="limitedStatus">限定状态</span>
-              <select id="limitedSelect"></select>
-            </label>
+              <div class="filter-options" id="limitedFilter"></div>
+            </section>
             <div class="price-filter">
               <span data-i18n="priceRange">价格区间</span>
               <input id="priceMinInput" type="number" min="0" step="100" inputmode="numeric" placeholder="最低" data-i18n-placeholder="priceMin" />
@@ -226,6 +226,7 @@
               </label>
               <div class="correction-actions">
                 <button id="saveCorrection" type="button" data-i18n="saveCorrection">保存更正</button>
+                <button id="markVerified" type="button" data-i18n="markVerified">标记已确认</button>
                 <button id="clearCorrection" type="button" data-i18n="clearCorrection">清除本条</button>
                 <button id="exportCorrections" type="button" data-i18n="exportCorrections">导出更正</button>
               </div>

@@ -19,6 +19,7 @@ const allImages = flags.has("--all");
 const coversOnly = flags.has("--covers-only") || !flags.has("--gallery");
 const rewriteCatalog = flags.has("--rewrite");
 const repoAssets = flags.has("--repo-assets");
+const premiumBandaiOnly = flags.has("--premium-bandai");
 const franchiseFilter = options.franchise || process.env.IMAGE_CACHE_FRANCHISE || "";
 const maxItems = Number(options.limit || process.env.IMAGE_CACHE_LIMIT || 0);
 const concurrency = Number(options.concurrency || process.env.IMAGE_CACHE_CONCURRENCY || 6);
@@ -78,6 +79,19 @@ function imageCandidates(kit) {
   return [...new Set([kit.images?.box_art_url, ...(kit.gallery_image_urls || [])].filter(Boolean))];
 }
 
+function isPremiumBandaiKit(kit) {
+  const text = [
+    ...(kit.source_urls || []),
+    ...(kit.source_refs || []).flatMap((ref) => [ref.source_id, ref.url]),
+    ...(kit.tags || []),
+    kit.sales_channel,
+    kit.notes,
+  ]
+    .filter(Boolean)
+    .join(" ");
+  return /p-bandai\.jp|p_bandai_jp|premium\s*bandai|p-?bandai|プレミアムバンダイ|プレバン/i.test(text);
+}
+
 function refererFor(kit, url) {
   return kit.source_urls?.find((sourceUrl) => {
     try {
@@ -124,6 +138,7 @@ async function mapLimit(items, worker) {
 
 const selectedKits = catalog.kits
   .filter((kit) => !franchiseFilter || kit.franchise === franchiseFilter)
+  .filter((kit) => !premiumBandaiOnly || isPremiumBandaiKit(kit))
   .slice(0, maxItems > 0 ? maxItems : undefined);
 
 const tasks = [];

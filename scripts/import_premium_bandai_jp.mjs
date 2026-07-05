@@ -1,207 +1,265 @@
 import { readFile, writeFile } from "node:fs/promises";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 
+const CATALOG_PATH = "data/kits.json";
+const INDEX_PATH = "data/premium-bandai-jp-index.json";
 const SOURCE_ID = "p_bandai_jp";
-const LISTING_URLS = [
-  "https://p-bandai.jp/hobby/a0001/list-da20-n3/",
-  "https://p-bandai.jp/hobby/a0040/list-da20-n1/",
-  "https://p-bandai.jp/hobby/list-da20-n6/",
-];
+const BANDai_SPIRITS_SOURCE_ID = "bandai_spirits_products_jp";
+const DEFAULT_SCAN_LIMIT = 240;
+const DEFAULT_CONCURRENCY = 6;
+const execFileAsync = promisify(execFile);
+
+const args = process.argv.slice(2);
+const options = Object.fromEntries(
+  args
+    .filter((arg) => arg.startsWith("--") && arg.includes("="))
+    .map((arg) => {
+      const [key, ...rest] = arg.slice(2).split("=");
+      return [key, rest.join("=")];
+    }),
+);
+const flags = new Set(args.filter((arg) => arg.startsWith("--") && !arg.includes("=")));
+
+const fullScan = flags.has("--full") || process.env.PB_SCAN_FULL === "true";
+const forceScan = flags.has("--force");
+const scanLimit = fullScan ? Number.POSITIVE_INFINITY : Number(options.scanLimit || process.env.PB_SCAN_LIMIT || DEFAULT_SCAN_LIMIT);
+const concurrency = Number(options.concurrency || process.env.PB_SCAN_CONCURRENCY || DEFAULT_CONCURRENCY);
+const detailTimeoutMs = Number(options.timeoutMs || process.env.PB_DETAIL_TIMEOUT_MS || 8000);
 
 function today() {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
 }
 
-function decodeHtml(value) {
-  return String(value ?? "")
-    .replace(/<br\s*\/?>/gi, " ")
-    .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, '"')
-    .replace(/&#039;/g, "'")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
-    .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(Number.parseInt(code, 16)))
-    .replace(/\s+/g, " ")
-    .trim();
+function nowIso() {
+  return new Date().toISOString();
 }
 
-function stripTags(value) {
-  return decodeHtml(String(value ?? "").replace(/<[^>]+>/g, " "));
+async function readJson(path, fallback) {
+  try {
+    return JSON.parse(await readFile(path, "utf8"));
+  } catch {
+    return fallback;
+  }
 }
 
-function extract(pattern, value) {
-  return pattern.exec(value)?.[1] ?? null;
+function unique(values) {
+  return [...new Set(values.filter(Boolean))];
 }
 
-function absoluteUrl(value, baseUrl) {
-  return new URL(decodeHtml(value), baseUrl).href;
+function isBandaiSpiritsGunpla(kit) {
+  return kit.franchise === "gundam" && (kit.source_refs || []).some((ref) => ref.source_id === BANDai_SPIRITS_SOURCE_ID);
 }
 
-function slugify(value, fallback = "item") {
-  const slug = String(value ?? "")
-    .normalize("NFKD")
-    .replace(/[^\x00-\x7F]/g, " ")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 64)
-    .replace(/-+$/g, "");
-  return slug || fallback;
+function bandaiSpiritsDetailUrl(kit) {
+  return (
+    (kit.source_refs || []).find((ref) => ref.source_id === BANDai_SPIRITS_SOURCE_ID && /\/products\/search\/detail\.php/.test(ref.url))?.url ||
+    (kit.source_urls || []).find((url) => /bandaispirits\.co\.jp\/products\/search\/detail\.php/.test(url)) ||
+    null
+  );
 }
 
-function parsePrice(value) {
-  const match = /([\d,]+)\s*円|¥\s*([\d,]+)/.exec(stripTags(value));
-  const raw = match?.[1] || match?.[2];
-  return raw ? Number(raw.replace(/,/g, "")) : null;
-}
-
-function parseReleaseDate(value) {
-  const text = stripTags(value);
-  const jp = /(\d{4})年\s*(\d{1,2})月/.exec(text);
-  if (jp) return `${jp[1]}-${jp[2].padStart(2, "0")}`;
-  const iso = /(\d{4})[./-](\d{1,2})/.exec(text);
-  return iso ? `${iso[1]}-${iso[2].padStart(2, "0")}` : null;
-}
-
-function inferGrade(title) {
-  const normalized = String(title ?? "").toUpperCase();
-  if (/\bRG\b|リアルグレード/.test(normalized)) return { grade_code: "RG", subline: "Real Grade" };
-  if (/\bMGEX\b/.test(normalized)) return { grade_code: "MGEX", subline: "Master Grade Extreme" };
-  if (/\bMG\b|マスターグレード/.test(normalized)) return { grade_code: "MG", subline: "Master Grade" };
-  if (/\bHG\b|ハイグレード/.test(normalized)) return { grade_code: "HG", subline: "High Grade" };
-  if (/\bPG\b|パーフェクトグレード/.test(normalized)) return { grade_code: "PG", subline: "Perfect Grade" };
-  if (/\bRE\/100\b|\bRE100\b/.test(normalized)) return { grade_code: "RE100", subline: "RE/100" };
-  if (/\bSD\b|SDW|SDガンダム|BB戦士/.test(normalized)) return { grade_code: "SDEX", subline: "SD Gundam" };
-  if (/METAL BUILD/i.test(title)) return { grade_code: "METAL_BUILD", subline: "METAL BUILD" };
-  if (/ROBOT魂/.test(title)) return { grade_code: "ROBOT_SPIRITS", subline: "ROBOT魂" };
-  return { grade_code: "HG", subline: "Premium Bandai Gundam" };
+function pBandaiUrlsFromHtml(html) {
+  return unique(
+    [...html.matchAll(/https?:\/\/p-bandai\.jp\/item\/item-\d+\/?/g)]
+      .map((match) => match[0].replace(/[?#].*$/, "").replace(/\/?$/, "/")),
+  );
 }
 
 async function fetchText(url) {
-  const response = await fetch(url, {
-    redirect: "follow",
-    signal: AbortSignal.timeout(20000),
-    headers: {
-      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36",
-      accept: "text/html,application/xhtml+xml",
-      "accept-language": "ja-JP,ja;q=0.9,en-US;q=0.6,en;q=0.4",
-      referer: "https://p-bandai.jp/",
-    },
-  });
-  const text = await response.text();
-  return { url: response.url, ok: response.ok, status: response.status, text };
-}
-
-function isGlobalRedirect(result) {
-  return /global_newpc\.html/.test(result.url) || /Premium Bandai is International|SELECT YOUR REGION/i.test(result.text);
-}
-
-function parseListing(html, pageUrl) {
-  const records = [];
-  const seen = new Set();
-  const anchorPattern = /<a\b[^>]*href="([^"]*\/item\/item-[^"]+)"[^>]*>([\s\S]*?)<\/a>/g;
-  for (const match of html.matchAll(anchorPattern)) {
-    const detailUrl = absoluteUrl(match[1], pageUrl).replace(/[?#].*$/, "");
-    if (seen.has(detailUrl)) continue;
-    const block = match[2];
-    const image = extract(/<img[^>]+(?:data-src|src)="([^"]+)"/, block);
-    const title =
-      stripTags(extract(/alt="([^"]+)"/, block)) ||
-      stripTags(extract(/<h[2-4][^>]*>([\s\S]*?)<\/h[2-4]>/, block)) ||
-      stripTags(extract(/class="[^"]*(?:ttl|title|name)[^"]*"[^>]*>([\s\S]*?)<\/[^>]+>/i, block));
-    if (!title || !/ガンダム|GUNDAM|ザク|ジム|シャア|SEED|ダブルオー|METAL BUILD|ROBOT魂/i.test(title)) {
-      continue;
-    }
-    seen.add(detailUrl);
-    records.push({
-      title,
-      detail_url: detailUrl,
-      image_url: image ? absoluteUrl(image, pageUrl) : null,
-      price_jpy: parsePrice(block),
-      release_date: parseReleaseDate(block),
-    });
-  }
-  return records;
-}
-
-function buildKit(record) {
-  const grade = inferGrade(record.title);
-  const itemId = /\/item\/(item-[^/?#]+)/.exec(record.detail_url)?.[1] ?? slugify(record.title);
-  return {
-    kit_id: `pb-${slugify(itemId, slugify(record.title))}`,
-    franchise: "gundam",
-    grade_code: grade.grade_code,
-    subline: grade.subline,
-    number: null,
-    scale: /\b1\/\d+/.exec(record.title)?.[0] ?? null,
-    names: { ja: record.title, en: null, zh: null, ko: null },
-    images: {
-      box_art_url: record.image_url,
-      box_art_source_id: record.image_url ? SOURCE_ID : null,
-    },
-    gallery_image_urls: record.image_url ? [record.image_url] : [],
-    universe: null,
-    work_title: null,
-    release_date: record.release_date,
-    price_jpy: record.price_jpy,
-    is_limited: true,
-    data_status: "needs_review",
-    source_urls: [record.detail_url],
-    source_refs: [
-      {
-        source_id: SOURCE_ID,
-        url: record.detail_url,
-        fields: ["names", "grade_code", "subline", "release_date", "price_jpy", "images"],
-        confidence: "high",
-      },
+  const { stdout } = await execFileAsync(
+    "curl",
+    [
+      "--silent",
+      "--show-error",
+      "--location",
+      "--max-time",
+      String(Math.ceil(detailTimeoutMs / 1000)),
+      "--user-agent",
+      "Gunpula catalog importer (+https://github.com/mdefitko777/Gunpula)",
+      "--header",
+      "Accept: text/html,application/xhtml+xml",
+      url,
     ],
-    tags: ["premium bandai", "p-bandai", "premium bandai jp", "limited"],
-    notes: "Imported from the official Japanese Premium Bandai site when the Japan storefront is reachable.",
+    { maxBuffer: 2 * 1024 * 1024 },
+  );
+  if (!stdout) {
+    throw new Error("empty response");
+  }
+  return stdout;
+}
+
+async function mapLimit(items, limit, worker) {
+  let next = 0;
+  await Promise.all(
+    Array.from({ length: Math.min(limit, items.length) }, async () => {
+      while (next < items.length) {
+        const index = next;
+        next += 1;
+        await worker(items[index], index);
+      }
+    }),
+  );
+}
+
+function normalizeIndex(index) {
+  const entries = Array.isArray(index?.entries) ? index.entries : [];
+  return {
+    schema_version: 1,
+    generated_at: index?.generated_at || null,
+    updated_at: index?.updated_at || null,
+    direct_p_bandai_status: index?.direct_p_bandai_status || "blocked",
+    scan_mode: index?.scan_mode || "incremental",
+    entries,
   };
 }
 
-function mergeKits(existingDoc, imported) {
-  const byId = new Map((existingDoc.kits || []).map((kit) => [kit.kit_id, kit]));
-  for (const kit of imported) {
-    byId.set(kit.kit_id, kit);
+async function scanPremiumBandaiLinks(candidates, previousIndex) {
+  const previousByUrl = new Map(previousIndex.entries.map((entry) => [entry.detail_url, entry]));
+  const selected = [];
+  for (const candidate of candidates) {
+    const previous = previousByUrl.get(candidate.detail_url);
+    if (!candidate.inScanWindow) {
+      continue;
+    }
+    if (!forceScan && previous && candidate.inScanWindow && previous.scanned_at?.slice(0, 10) === today()) {
+      continue;
+    }
+    selected.push(candidate);
   }
-  const kits = [...byId.values()].sort((a, b) => {
-    const dateCompare = String(b.release_date ?? "").localeCompare(String(a.release_date ?? ""));
-    if (dateCompare) return dateCompare;
-    return String(a.names?.ja ?? a.kit_id).localeCompare(String(b.names?.ja ?? b.kit_id), "ja");
+
+  const results = [];
+  let failed = 0;
+  await mapLimit(selected, concurrency, async (candidate) => {
+    try {
+      const html = await fetchText(candidate.detail_url);
+      results.push({
+        kit_id: candidate.kit.kit_id,
+        detail_url: candidate.detail_url,
+        title: candidate.kit.names?.ja || candidate.kit.kit_id,
+        p_bandai_urls: pBandaiUrlsFromHtml(html),
+        scanned_at: nowIso(),
+      });
+    } catch (error) {
+      failed += 1;
+      results.push({
+        kit_id: candidate.kit.kit_id,
+        detail_url: candidate.detail_url,
+        title: candidate.kit.names?.ja || candidate.kit.kit_id,
+        p_bandai_urls: previousByUrl.get(candidate.detail_url)?.p_bandai_urls || [],
+        scanned_at: previousByUrl.get(candidate.detail_url)?.scanned_at || null,
+        last_error: error.message,
+      });
+    }
   });
-  return { ...existingDoc, updated_at: today(), kits };
+
+  const merged = new Map(previousIndex.entries.map((entry) => [entry.detail_url, entry]));
+  for (const result of results) {
+    merged.set(result.detail_url, result);
+  }
+
+  return {
+    index: {
+      schema_version: 1,
+      generated_at: nowIso(),
+      updated_at: today(),
+      direct_p_bandai_status: "blocked",
+      scan_mode: fullScan ? "full" : "incremental",
+      scan_limit: Number.isFinite(scanLimit) ? scanLimit : null,
+      scanned_this_run: selected.length,
+      failed_this_run: failed,
+      hit_count: [...merged.values()].filter((entry) => entry.p_bandai_urls?.length).length,
+      entries: [...merged.values()].sort((a, b) => String(b.scanned_at || "").localeCompare(String(a.scanned_at || ""))),
+    },
+    scanned: selected.length,
+    failed,
+  };
+}
+
+function applyPremiumLinks(catalog, index) {
+  const byDetailUrl = new Map(index.entries.map((entry) => [entry.detail_url, entry]));
+  let changed = 0;
+  let linked = 0;
+
+  const kits = catalog.kits.map((kit) => {
+    const detailUrl = bandaiSpiritsDetailUrl(kit);
+    const entry = detailUrl ? byDetailUrl.get(detailUrl) : null;
+    const pBandaiUrls = unique(entry?.p_bandai_urls || []);
+    if (!pBandaiUrls.length) {
+      return kit;
+    }
+
+    linked += 1;
+    const before = JSON.stringify({
+      source_urls: kit.source_urls,
+      source_refs: kit.source_refs,
+      tags: kit.tags,
+      notes: kit.notes,
+    });
+
+    const source_urls = unique([...(kit.source_urls || []), ...pBandaiUrls]);
+    const existingRefs = kit.source_refs || [];
+    const pBandaiRefs = pBandaiUrls
+      .filter((url) => !existingRefs.some((ref) => ref.source_id === SOURCE_ID && ref.url === url))
+      .map((url) => ({
+        source_id: SOURCE_ID,
+        url,
+        fields: ["source_urls", "sales_channel"],
+        confidence: "high",
+      }));
+    const tags = unique([...(kit.tags || []), "premium bandai jp", "p-bandai jp", "official store"]);
+    const note = "Premium Bandai Japan official store link recovered from the Japanese BANDAI SPIRITS product page.";
+    const notes = kit.notes?.includes(note) ? kit.notes : [kit.notes, note].filter(Boolean).join(" ");
+
+    const updated = {
+      ...kit,
+      source_urls,
+      source_refs: [...existingRefs, ...pBandaiRefs],
+      tags,
+      notes,
+    };
+
+    const after = JSON.stringify({
+      source_urls: updated.source_urls,
+      source_refs: updated.source_refs,
+      tags: updated.tags,
+      notes: updated.notes,
+    });
+    if (before !== after) {
+      changed += 1;
+    }
+    return updated;
+  });
+
+  return {
+    catalog: changed ? { ...catalog, updated_at: today(), kits } : catalog,
+    changed,
+    linked,
+  };
 }
 
 async function main() {
-  const imported = [];
-  const blocked = [];
+  const catalog = await readJson(CATALOG_PATH, { kits: [] });
+  const previousIndex = normalizeIndex(await readJson(INDEX_PATH, null));
 
-  for (const url of LISTING_URLS) {
-    const result = await fetchText(url);
-    if (!result.ok || isGlobalRedirect(result)) {
-      blocked.push({ url, final_url: result.url, status: result.status });
-      continue;
-    }
-    imported.push(...parseListing(result.text, url).map(buildKit));
+  const candidates = catalog.kits
+    .filter(isBandaiSpiritsGunpla)
+    .map((kit) => ({ kit, detail_url: bandaiSpiritsDetailUrl(kit) }))
+    .filter((item) => item.detail_url)
+    .sort((a, b) => String(b.kit.release_date || "").localeCompare(String(a.kit.release_date || "")))
+    .map((candidate, index) => ({ ...candidate, inScanWindow: fullScan || index < scanLimit }));
+
+  const { index, scanned, failed } = await scanPremiumBandaiLinks(candidates, previousIndex);
+  const { catalog: updatedCatalog, changed, linked } = applyPremiumLinks(catalog, index);
+
+  await writeFile(INDEX_PATH, `${JSON.stringify(index, null, 2)}\n`, "utf8");
+  if (changed) {
+    await writeFile(CATALOG_PATH, `${JSON.stringify(updatedCatalog, null, 2)}\n`, "utf8");
   }
 
-  const unique = new Map(imported.map((kit) => [kit.kit_id, kit]));
-  const kits = [...unique.values()];
-
-  if (!kits.length) {
-    const message = blocked.length
-      ? `Premium Bandai Japan returned the international redirect for ${blocked.length}/${LISTING_URLS.length} listing pages; no PB records imported.`
-      : "Premium Bandai Japan returned no matching records.";
-    console.warn(message);
-    return;
-  }
-
-  const existingDoc = JSON.parse(await readFile("data/kits.json", "utf8"));
-  const merged = mergeKits(existingDoc, kits);
-  await writeFile("data/kits.json", `${JSON.stringify(merged, null, 2)}\n`, "utf8");
-  console.log(`Imported ${kits.length} Premium Bandai Japan records. Catalog now has ${merged.kits.length} records.`);
+  console.log(
+    `Premium Bandai Japan: scanned ${scanned}, failed ${failed}, index hits ${index.hit_count}, linked ${linked}, changed ${changed}.`,
+  );
 }
 
 main().catch((error) => {

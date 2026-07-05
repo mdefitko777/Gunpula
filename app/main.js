@@ -7,6 +7,7 @@ const CONSOLE_MODE_KEY = "gunpula-catalog-console-mode-v1";
 const COLLECTION_KEY = "gunpula-catalog-collection-v1";
 const SYNC_CONFIG_KEY = "gunpula-catalog-sync-config-v1";
 const SYNC_META_KEY = "gunpula-catalog-sync-meta-v1";
+const SYNC_HISTORY_KEY = "gunpula-catalog-sync-history-v1";
 const ACTIVE_VIEW_KEY = "gunpula-catalog-active-view-v1";
 const COLLECTION_HOME_VISIBILITY_KEY = "gunpula-catalog-home-collection-visibility-v1";
 const COLLECTION_HOME_COLLAPSE_KEY = "gunpula-catalog-home-collection-collapse-v1";
@@ -15,8 +16,11 @@ const UPDATE_NOTIFICATION_LAST_KEY = "gunpula-catalog-update-notified-v1";
 const UPDATE_NOTIFICATION_FILTER_KEY = "gunpula-catalog-update-notification-filters-v1";
 const SYNC_POLL_INTERVAL_MS = 15000;
 const SYNC_SAVE_DEBOUNCE_MS = 700;
+const SYNC_HISTORY_LIMIT = 20;
+const KIT_RENDER_BATCH = 160;
 
 const COLLECTION_TYPES = ["owned", "wanted"];
+const CORRECTION_FIELD_KEYS = ["name_zh", "name_ko", "name_en", "name_ja", "grade_code", "subline", "series_key", "universe", "cover_image_url"];
 
 const DEFAULT_NOTIFICATION_FILTERS = {
   premium_bandai: true,
@@ -142,6 +146,8 @@ const TRANSLATIONS = {
     expandCollection: "展开{name}",
     shoppingTotal: "预算 {total}",
     duplicateCandidates: "疑似重复",
+    showMore: "显示更多 {count} 条",
+    showingPartial: "已显示 {shown}/{total}",
     recentUpdates: "最近更新",
     viewAllUpdates: "全部记录",
     latestUpdate: "最新 {date}",
@@ -188,6 +194,7 @@ const TRANSLATIONS = {
     reviewEmpty: "暂时没有高优先级待确认项",
     reviewMissingImage: "缺图",
     reviewNeedsReview: "待确认",
+    reviewSeriesAudit: "系列可疑",
     updateReasons: "原因",
     reasonNew: "新增",
     reasonRemoved: "移除",
@@ -198,6 +205,7 @@ const TRANSLATIONS = {
     reasonSeries: "系列",
     reasonProductLine: "产品线",
     reasonLimited: "限定",
+    reasonSource: "来源",
     reasonMetadata: "资料",
     decreaseWantedQuantity: "减少想要数量",
     increaseWantedQuantity: "增加想要数量",
@@ -235,7 +243,7 @@ const TRANSLATIONS = {
     cloudSetupMissing: "Supabase 还没建表，请先执行 docs/supabase-setup.sql。",
     appHealth: "最大问题",
     issueInstall: "安卓安装",
-    issueInstallStatus: "已支持 PWA",
+    issueInstallStatus: "PWA + Capacitor 打包脚本",
     issueSync: "两人数据互通",
     issueImages: "官方图片稳定性",
     issueImagesStatus: "已启用本机图片缓存",
@@ -246,7 +254,7 @@ const TRANSLATIONS = {
     issueRefresh: "官方数据更新",
     issueRefreshStatus: "已提供定时刷新工作流",
     issueConflict: "冲突处理",
-    issueConflictStatus: "后同步覆盖，保留历史",
+    issueConflictStatus: "后同步覆盖，保留最近 20 次本机历史",
     officialPage: "官方商品页",
     manualCorrection: "手动更正",
     seriesAdmin: "系列名称",
@@ -263,6 +271,7 @@ const TRANSLATIONS = {
     universe: "宇宙 / 纪年",
     coverImageUrl: "封面图 URL",
     saveCorrection: "保存更正",
+    markVerified: "标记已确认",
     clearCorrection: "清除本条",
     exportCorrections: "导出更正",
     closeDetail: "关闭详情",
@@ -335,6 +344,8 @@ const TRANSLATIONS = {
     expandCollection: "{name} 펼치기",
     shoppingTotal: "예산 {total}",
     duplicateCandidates: "중복 후보",
+    showMore: "{count}개 더 보기",
+    showingPartial: "{shown}/{total} 표시",
     recentUpdates: "최근 업데이트",
     viewAllUpdates: "전체 기록",
     latestUpdate: "최신 {date}",
@@ -381,6 +392,7 @@ const TRANSLATIONS = {
     reviewEmpty: "우선 확인할 항목이 없습니다",
     reviewMissingImage: "이미지 없음",
     reviewNeedsReview: "확인 필요",
+    reviewSeriesAudit: "시리즈 확인",
     updateReasons: "이유",
     reasonNew: "신규",
     reasonRemoved: "삭제",
@@ -391,6 +403,7 @@ const TRANSLATIONS = {
     reasonSeries: "시리즈",
     reasonProductLine: "라인",
     reasonLimited: "한정",
+    reasonSource: "소스",
     reasonMetadata: "자료",
     decreaseWantedQuantity: "원하는 수량 줄이기",
     increaseWantedQuantity: "원하는 수량 늘리기",
@@ -428,7 +441,7 @@ const TRANSLATIONS = {
     cloudSetupMissing: "Supabase 테이블이 없습니다. docs/supabase-setup.sql을 먼저 실행하세요.",
     appHealth: "주요 문제",
     issueInstall: "Android 설치",
-    issueInstallStatus: "PWA 지원됨",
+    issueInstallStatus: "PWA + Capacitor 빌드 스크립트",
     issueSync: "두 사람 데이터 공유",
     issueImages: "공식 이미지 안정성",
     issueImagesStatus: "로컬 이미지 캐시 사용",
@@ -439,7 +452,7 @@ const TRANSLATIONS = {
     issueRefresh: "공식 데이터 업데이트",
     issueRefreshStatus: "예약 갱신 워크플로 제공",
     issueConflict: "충돌 처리",
-    issueConflictStatus: "나중 동기화 우선, 기록 보관",
+    issueConflictStatus: "나중 동기화 우선, 최근 20개 로컬 기록 보관",
     officialPage: "공식 상품 페이지",
     manualCorrection: "수동 수정",
     seriesAdmin: "시리즈 이름",
@@ -456,6 +469,7 @@ const TRANSLATIONS = {
     universe: "세계관 / 연표",
     coverImageUrl: "커버 이미지 URL",
     saveCorrection: "수정 저장",
+    markVerified: "확인 완료 표시",
     clearCorrection: "이 항목 초기화",
     exportCorrections: "수정 내보내기",
     closeDetail: "상세 닫기",
@@ -528,6 +542,8 @@ const TRANSLATIONS = {
     expandCollection: "Expand {name}",
     shoppingTotal: "Budget {total}",
     duplicateCandidates: "Duplicate candidates",
+    showMore: "Show {count} more",
+    showingPartial: "Showing {shown}/{total}",
     recentUpdates: "Recent Updates",
     viewAllUpdates: "All Updates",
     latestUpdate: "Latest {date}",
@@ -574,6 +590,7 @@ const TRANSLATIONS = {
     reviewEmpty: "No high-priority review items",
     reviewMissingImage: "Missing image",
     reviewNeedsReview: "Needs review",
+    reviewSeriesAudit: "Series check",
     updateReasons: "Reasons",
     reasonNew: "New",
     reasonRemoved: "Removed",
@@ -584,6 +601,7 @@ const TRANSLATIONS = {
     reasonSeries: "Series",
     reasonProductLine: "Line",
     reasonLimited: "Limited",
+    reasonSource: "Source",
     reasonMetadata: "Data",
     decreaseWantedQuantity: "Decrease wanted quantity",
     increaseWantedQuantity: "Increase wanted quantity",
@@ -621,7 +639,7 @@ const TRANSLATIONS = {
     cloudSetupMissing: "Supabase tables are missing. Run docs/supabase-setup.sql first.",
     appHealth: "Main risks",
     issueInstall: "Android install",
-    issueInstallStatus: "PWA ready",
+    issueInstallStatus: "PWA + Capacitor build scripts",
     issueSync: "Two-person sync",
     issueImages: "Official image stability",
     issueImagesStatus: "Local image cache enabled",
@@ -632,7 +650,7 @@ const TRANSLATIONS = {
     issueRefresh: "Official data updates",
     issueRefreshStatus: "Scheduled refresh workflow added",
     issueConflict: "Conflict handling",
-    issueConflictStatus: "Latest sync wins, history kept",
+    issueConflictStatus: "Latest sync wins, last 20 local snapshots kept",
     officialPage: "Official product page",
     manualCorrection: "Manual correction",
     seriesAdmin: "Series names",
@@ -649,6 +667,7 @@ const TRANSLATIONS = {
     universe: "Universe / era",
     coverImageUrl: "Cover image URL",
     saveCorrection: "Save correction",
+    markVerified: "Mark verified",
     clearCorrection: "Clear item",
     exportCorrections: "Export corrections",
     closeDetail: "Close detail",
@@ -721,6 +740,8 @@ const TRANSLATIONS = {
     expandCollection: "{name} を展開",
     shoppingTotal: "予算 {total}",
     duplicateCandidates: "重複候補",
+    showMore: "さらに {count} 件表示",
+    showingPartial: "{shown}/{total} 表示",
     recentUpdates: "最近の更新",
     viewAllUpdates: "すべて",
     latestUpdate: "最新 {date}",
@@ -767,6 +788,7 @@ const TRANSLATIONS = {
     reviewEmpty: "優先確認項目はありません",
     reviewMissingImage: "画像なし",
     reviewNeedsReview: "要確認",
+    reviewSeriesAudit: "シリーズ確認",
     updateReasons: "理由",
     reasonNew: "追加",
     reasonRemoved: "削除",
@@ -777,6 +799,7 @@ const TRANSLATIONS = {
     reasonSeries: "シリーズ",
     reasonProductLine: "ライン",
     reasonLimited: "限定",
+    reasonSource: "ソース",
     reasonMetadata: "資料",
     decreaseWantedQuantity: "欲しい数を減らす",
     increaseWantedQuantity: "欲しい数を増やす",
@@ -814,7 +837,7 @@ const TRANSLATIONS = {
     cloudSetupMissing: "Supabase テーブルがありません。先に docs/supabase-setup.sql を実行してください。",
     appHealth: "主な課題",
     issueInstall: "Android インストール",
-    issueInstallStatus: "PWA 対応済み",
+    issueInstallStatus: "PWA + Capacitor ビルドスクリプト",
     issueSync: "2人のデータ共有",
     issueImages: "公式画像の安定性",
     issueImagesStatus: "ローカル画像キャッシュ有効",
@@ -825,7 +848,7 @@ const TRANSLATIONS = {
     issueRefresh: "公式データ更新",
     issueRefreshStatus: "定期更新ワークフロー追加",
     issueConflict: "競合処理",
-    issueConflictStatus: "後の同期を優先、履歴保持",
+    issueConflictStatus: "後の同期を優先、直近20件を保存",
     officialPage: "公式商品ページ",
     manualCorrection: "手動修正",
     seriesAdmin: "シリーズ名",
@@ -842,6 +865,7 @@ const TRANSLATIONS = {
     universe: "世界観 / 年代",
     coverImageUrl: "カバー画像 URL",
     saveCorrection: "修正を保存",
+    markVerified: "確認済みにする",
     clearCorrection: "この項目をクリア",
     exportCorrections: "修正を出力",
     closeDetail: "詳細を閉じる",
@@ -877,6 +901,7 @@ const state = {
   imageHealth: null,
   updateFeed: null,
   sourceHealth: null,
+  seriesAudit: null,
   overrides: {},
   seriesLabelOverrides: {},
   collection: { owned: [], wanted: [] },
@@ -887,6 +912,7 @@ const state = {
   collectionSelection: { owned: new Set(), wanted: new Set() },
   syncConfig: loadSyncConfig(),
   syncMeta: loadSyncMeta(),
+  syncHistory: loadSyncHistory(),
   sync: {
     enabled: false,
     canEdit: true,
@@ -918,6 +944,8 @@ const state = {
   consoleMode: loadConsoleMode(),
   selectedKit: null,
   selectedImageIndex: 0,
+  renderLimit: KIT_RENDER_BATCH,
+  renderSignature: "",
   swipeStartX: null,
   swipeStartY: null,
 };
@@ -980,11 +1008,12 @@ const elements = {
   franchiseList: document.querySelector("#franchiseList"),
   languageList: document.querySelector("#languageList"),
   seriesTabs: document.querySelector("#seriesTabs"),
-  gradeSelect: document.querySelector("#gradeSelect"),
-  seriesSelect: document.querySelector("#seriesSelect"),
-  itemTypeSelect: document.querySelector("#itemTypeSelect"),
-  releaseYearSelect: document.querySelector("#releaseYearSelect"),
-  limitedSelect: document.querySelector("#limitedSelect"),
+  filterBody: document.querySelector("#filterBody"),
+  gradeFilter: document.querySelector("#gradeFilter"),
+  seriesFilter: document.querySelector("#seriesFilter"),
+  itemTypeFilter: document.querySelector("#itemTypeFilter"),
+  releaseYearFilter: document.querySelector("#releaseYearFilter"),
+  limitedFilter: document.querySelector("#limitedFilter"),
   priceMinInput: document.querySelector("#priceMinInput"),
   priceMaxInput: document.querySelector("#priceMaxInput"),
   clearFilters: document.querySelector("#clearFilters"),
@@ -1027,6 +1056,7 @@ const elements = {
   editUniverse: document.querySelector("#editUniverse"),
   editCoverImageUrl: document.querySelector("#editCoverImageUrl"),
   saveCorrection: document.querySelector("#saveCorrection"),
+  markVerified: document.querySelector("#markVerified"),
   clearCorrection: document.querySelector("#clearCorrection"),
   exportCorrections: document.querySelector("#exportCorrections"),
   seriesAdminPanel: document.querySelector("#seriesAdminPanel"),
@@ -1053,6 +1083,55 @@ async function loadOptionalJson(path) {
   } catch {
     return null;
   }
+}
+
+function normalizeFilterStateValue(value) {
+  const values = Array.isArray(value)
+    ? value
+    : String(value || "all")
+        .split(",")
+        .map((item) => item.trim());
+  const filtered = [...new Set(values.filter((item) => item && item !== "all"))];
+  return filtered.length ? filtered.join(",") : "all";
+}
+
+function selectedFilterValues(key) {
+  return normalizeFilterStateValue(state[key]).split(",").filter((item) => item && item !== "all");
+}
+
+function filterIsAll(key) {
+  return selectedFilterValues(key).length === 0;
+}
+
+function filterHas(key, value) {
+  const values = selectedFilterValues(key);
+  return !values.length || values.includes(value);
+}
+
+function setFilterValues(key, values) {
+  state[key] = normalizeFilterStateValue(values);
+}
+
+function toggleFilterValue(key, value) {
+  if (value === "all") {
+    state[key] = "all";
+    return;
+  }
+  const next = new Set(selectedFilterValues(key));
+  if (next.has(value)) {
+    next.delete(value);
+  } else {
+    next.add(value);
+  }
+  setFilterValues(key, [...next]);
+}
+
+function pruneFilterValues(key, allowedValues) {
+  const allowed = new Set(allowedValues);
+  setFilterValues(
+    key,
+    selectedFilterValues(key).filter((value) => allowed.has(value)),
+  );
 }
 
 function preferredLanguage() {
@@ -1098,11 +1177,11 @@ function currentViewState() {
   return {
     language: state.language,
     franchise: state.franchise,
-    series: state.series,
-    grade: state.grade,
-    itemType: state.itemType,
-    releaseYear: state.releaseYear,
-    limited: state.limited,
+    series: normalizeFilterStateValue(state.series),
+    grade: normalizeFilterStateValue(state.grade),
+    itemType: normalizeFilterStateValue(state.itemType),
+    releaseYear: normalizeFilterStateValue(state.releaseYear),
+    limited: normalizeFilterStateValue(state.limited),
     priceMin: state.priceMin,
     priceMax: state.priceMax,
     query: state.query,
@@ -1165,11 +1244,11 @@ function applyViewState(viewState) {
   state.language = closingSettings && savedLanguage ? savedLanguage : viewState.language || state.language;
   state.seriesAdminLanguage = state.language;
   state.franchise = viewState.franchise || state.franchise;
-  state.series = viewState.series || "all";
-  state.grade = viewState.grade || "all";
-  state.itemType = viewState.itemType || "all";
-  state.releaseYear = viewState.releaseYear || "all";
-  state.limited = viewState.limited || "all";
+  state.series = normalizeFilterStateValue(viewState.series);
+  state.grade = normalizeFilterStateValue(viewState.grade);
+  state.itemType = normalizeFilterStateValue(viewState.itemType);
+  state.releaseYear = normalizeFilterStateValue(viewState.releaseYear);
+  state.limited = normalizeFilterStateValue(viewState.limited);
   state.priceMin = viewState.priceMin || "";
   state.priceMax = viewState.priceMax || "";
   state.query = viewState.query || "";
@@ -1199,13 +1278,14 @@ function applyViewState(viewState) {
 }
 
 async function init() {
-  const [gradesDoc, kitsDoc, sourcesDoc, imageHealthDoc, updateFeedDoc, sourceHealthDoc] = await Promise.all([
+  const [gradesDoc, kitsDoc, sourcesDoc, imageHealthDoc, updateFeedDoc, sourceHealthDoc, seriesAuditDoc] = await Promise.all([
     loadJson("../data/grades.json"),
     loadJson("../data/kits.json"),
     loadJson("../data/sources.json"),
     loadOptionalJson("../data/image-health.json"),
     loadOptionalJson("../data/update-feed.json"),
     loadOptionalJson("../data/source-health.json"),
+    loadOptionalJson("../data/series-audit.json"),
   ]);
 
   state.grades = gradesDoc.grades;
@@ -1214,6 +1294,7 @@ async function init() {
   state.imageHealth = imageHealthDoc;
   state.updateFeed = updateFeedDoc;
   state.sourceHealth = sourceHealthDoc;
+  state.seriesAudit = seriesAuditDoc;
   state.overrides = loadOverrides();
   state.seriesLabelOverrides = loadSeriesLabelOverrides();
   state.collection = loadCollection();
@@ -1224,6 +1305,7 @@ async function init() {
 
   bindEvents();
   registerPwa();
+  registerUpdatePeriodicSync();
   if (syncConfigComplete()) {
     await connectSync({ silent: true });
   }
@@ -1252,9 +1334,11 @@ function normalizeState() {
   if (!["catalog", "updates", "owned", "wanted"].includes(state.activeView)) {
     state.activeView = "catalog";
   }
-  if (!["all", "limited", "regular"].includes(state.limited)) {
-    state.limited = "all";
-  }
+  state.series = normalizeFilterStateValue(state.series);
+  state.grade = normalizeFilterStateValue(state.grade);
+  state.itemType = normalizeFilterStateValue(state.itemType);
+  state.releaseYear = normalizeFilterStateValue(state.releaseYear);
+  pruneFilterValues("limited", ["limited", "regular"]);
   if (state.activeModal && state.activeModal !== "settings") {
     state.activeModal = null;
   }
@@ -1417,6 +1501,15 @@ function loadSyncMeta() {
   }
 }
 
+function loadSyncHistory() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(SYNC_HISTORY_KEY) || "[]");
+    return Array.isArray(parsed) ? parsed.slice(0, SYNC_HISTORY_LIMIT) : [];
+  } catch {
+    return [];
+  }
+}
+
 function saveOverrides(options = {}) {
   localStorage.setItem(OVERRIDE_KEY, JSON.stringify(state.overrides, null, 2));
   if (!options.skipSync) {
@@ -1449,6 +1542,39 @@ function saveSyncConfig() {
 
 function saveSyncMeta() {
   localStorage.setItem(SYNC_META_KEY, JSON.stringify(state.syncMeta));
+}
+
+function saveSyncHistory() {
+  localStorage.setItem(SYNC_HISTORY_KEY, JSON.stringify(state.syncHistory.slice(0, SYNC_HISTORY_LIMIT)));
+}
+
+function snapshotJson(value) {
+  return JSON.parse(JSON.stringify(value ?? null));
+}
+
+function recordSyncHistory(reason, remote = null) {
+  const hasLocalData =
+    collectionIds("owned").length ||
+    collectionIds("wanted").length ||
+    Object.keys(state.overrides || {}).length ||
+    Object.keys(state.seriesLabelOverrides || {}).length;
+  if (!hasLocalData) {
+    return;
+  }
+  state.syncHistory = [
+    {
+      saved_at: new Date().toISOString(),
+      reason,
+      local_revision: state.syncMeta.revision || 0,
+      incoming_revision: remote?.revision || null,
+      updated_by: state.syncMeta.updatedBy || memberName(),
+      collection: snapshotJson(normalizeCollection(state.collection)),
+      overrides: snapshotJson(state.overrides),
+      series_label_overrides: snapshotJson(state.seriesLabelOverrides),
+    },
+    ...state.syncHistory,
+  ].slice(0, SYNC_HISTORY_LIMIT);
+  saveSyncHistory();
 }
 
 function refreshKits() {
@@ -1507,6 +1633,7 @@ function applyOverride(kit) {
     grade_code: Object.hasOwn(override, "grade_code") ? override.grade_code : normalized.grade_code,
     subline: Object.hasOwn(override, "subline") ? override.subline : normalized.subline,
     universe: Object.hasOwn(override, "universe") ? override.universe : normalized.universe,
+    data_status: Object.hasOwn(override, "data_status") ? override.data_status : normalized.data_status,
     local_override: override,
   };
 }
@@ -1625,40 +1752,16 @@ function bindEvents() {
     persistViewState();
     renderKits();
   });
-  elements.seriesSelect.addEventListener("change", (event) => {
-    state.series = event.target.value;
+  elements.filterBody.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-filter-key][data-filter-value]");
+    if (!button) {
+      return;
+    }
+    toggleFilterValue(button.dataset.filterKey, button.dataset.filterValue);
     renderSeriesControls();
     renderGradeSelect();
     renderAdvancedFilters();
     renderSeriesAdmin();
-    renderFilterSummary();
-    persistViewState({ mode: "push" });
-    renderKits();
-  });
-  elements.gradeSelect.addEventListener("change", (event) => {
-    state.grade = event.target.value;
-    renderGradeSelect();
-    renderAdvancedFilters();
-    renderFilterSummary();
-    persistViewState({ mode: "push" });
-    renderKits();
-  });
-  elements.itemTypeSelect.addEventListener("change", (event) => {
-    state.itemType = event.target.value;
-    renderAdvancedFilters();
-    renderFilterSummary();
-    persistViewState({ mode: "push" });
-    renderKits();
-  });
-  elements.releaseYearSelect.addEventListener("change", (event) => {
-    state.releaseYear = event.target.value;
-    renderAdvancedFilters();
-    renderFilterSummary();
-    persistViewState({ mode: "push" });
-    renderKits();
-  });
-  elements.limitedSelect.addEventListener("change", (event) => {
-    state.limited = event.target.value;
     renderFilterSummary();
     persistViewState({ mode: "push" });
     renderKits();
@@ -1690,6 +1793,7 @@ function bindEvents() {
     elements.correctionForm.hidden = !elements.correctionForm.hidden;
   });
   elements.saveCorrection.addEventListener("click", saveCurrentCorrection);
+  elements.markVerified.addEventListener("click", markCurrentVerified);
   elements.clearCorrection.addEventListener("click", clearCurrentCorrection);
   elements.exportCorrections.addEventListener("click", exportCorrections);
   elements.detailOfficialLink.addEventListener("click", persistViewState);
@@ -1913,6 +2017,7 @@ async function toggleUpdateNotifications(event) {
   state.updateNotifications = wantsEnabled;
   localStorage.setItem(UPDATE_NOTIFICATION_KEY, String(state.updateNotifications));
   renderSettings();
+  registerUpdatePeriodicSync();
   maybeShowUpdateNotification();
 }
 
@@ -1964,6 +2069,8 @@ async function maybeShowUpdateNotification() {
   const options = {
     body,
     tag: `gunpula-update-${entry.date}`,
+    icon: new URL("./icons/icon-192.png", window.location.href).href,
+    badge: new URL("./icons/icon-192.png", window.location.href).href,
     data: { url: new URL("./", window.location.href).href },
   };
 
@@ -2169,6 +2276,9 @@ function applyRemoteState(remote, options = {}) {
   if (!remote) {
     return;
   }
+  if (!options.skipHistory && remote.revision !== state.syncMeta.revision) {
+    recordSyncHistory("before-remote-apply", remote);
+  }
   state.sync.suppress = true;
   state.collection = normalizeCollection(remote.payload?.collection || {});
   state.overrides = remote.payload?.overrides && typeof remote.payload.overrides === "object" ? remote.payload.overrides : {};
@@ -2340,21 +2450,44 @@ function saveCurrentCorrection() {
     cover_image_url: correctionValue(elements.editCoverImageUrl.value, form.rawCoverImageUrl),
   };
 
-  for (const key of Object.keys(override)) {
+  const nextOverride = { ...(state.overrides[kit.kit_id] || {}) };
+  for (const key of CORRECTION_FIELD_KEYS) {
     if (override[key] === undefined) {
-      delete override[key];
+      delete nextOverride[key];
+    } else {
+      nextOverride[key] = override[key];
     }
   }
 
-  if (Object.keys(override).length) {
+  if (Object.keys(nextOverride).length) {
     state.overrides[kit.kit_id] = {
-      ...override,
+      ...nextOverride,
       updated_at: new Date().toISOString(),
     };
   } else {
     delete state.overrides[kit.kit_id];
   }
 
+  saveOverrides();
+  refreshAfterOverride(kit.kit_id);
+}
+
+function markCurrentVerified() {
+  const kit = state.selectedKit;
+  if (!kit) {
+    return;
+  }
+  if (!canEditSharedData()) {
+    setSyncStatus("readonly", t("readOnlyHint"));
+    return;
+  }
+  state.overrides[kit.kit_id] = {
+    ...(state.overrides[kit.kit_id] || {}),
+    data_status: "verified",
+    reviewed_at: new Date().toISOString(),
+    reviewed_by: memberName(),
+    updated_at: new Date().toISOString(),
+  };
   saveOverrides();
   refreshAfterOverride(kit.kit_id);
 }
@@ -2603,6 +2736,7 @@ function updateReasonLabel(reason) {
     series: "reasonSeries",
     product_line: "reasonProductLine",
     limited: "reasonLimited",
+    source: "reasonSource",
     metadata: "reasonMetadata",
   }[reason];
   return key ? t(key) : reason;
@@ -2648,6 +2782,27 @@ function renderUpdateSummaryCards(container, cards) {
     card.className = "update-summary-card";
     card.innerHTML = `<strong>${escapeHtml(cardInfo.label)}</strong><span>${cardInfo.value}</span><em>${escapeHtml(cardInfo.meta)}</em>`;
     container.append(card);
+  }
+}
+
+async function registerUpdatePeriodicSync() {
+  if (!state.updateNotifications || !("serviceWorker" in navigator)) {
+    return;
+  }
+  try {
+    const registration = await navigator.serviceWorker.ready;
+    if (!("periodicSync" in registration)) {
+      return;
+    }
+    if ("permissions" in navigator) {
+      const permission = await navigator.permissions.query({ name: "periodic-background-sync" });
+      if (permission.state !== "granted") {
+        return;
+      }
+    }
+    await registration.periodicSync.register("gunpula-update-check", { minInterval: 12 * 60 * 60 * 1000 });
+  } catch {
+    // Periodic sync is optional; normal app-open notifications still work.
   }
 }
 
@@ -2798,11 +2953,17 @@ function renderSourceHealth() {
 
 function reviewCandidates() {
   const items = [];
+  const auditByKit = new Map((state.seriesAudit?.issues || []).map((issue) => [issue.kit_id, issue]));
   for (const kit of state.kits) {
+    if (kit.data_status === "verified" || kit.local_override?.data_status === "verified") {
+      continue;
+    }
     const reasons = [];
     if (kit.data_status === "needs_review") reasons.push(t("reviewNeedsReview"));
     if (!imageCandidatesForKit(kit).length) reasons.push(t("reviewMissingImage"));
     if (!kit.series?.key || kit.series.key === "other") reasons.push(t("workSource"));
+    const auditIssue = auditByKit.get(kit.kit_id);
+    if (auditIssue) reasons.push(`${t("reviewSeriesAudit")}: ${auditIssue.check}`);
     if (!reasons.length) continue;
     items.push({ kit, reasons });
   }
@@ -3065,21 +3226,22 @@ function filteredKits() {
         ? collectionIds("wanted").map(displayKitById).filter(Boolean)
         : kitsForCurrentFranchise();
   return source.filter((kit) => {
-    if (state.activeView === "catalog" && state.grade !== "all" && kit.grade_code !== state.grade) {
+    if (state.activeView === "catalog" && !filterHas("grade", kit.grade_code)) {
       return false;
     }
-    if (state.activeView === "catalog" && state.series !== "all" && kitSeriesKey(kit) !== state.series) {
+    if (state.activeView === "catalog" && !filterHas("series", kitSeriesKey(kit))) {
       return false;
     }
-    if (state.activeView === "catalog" && state.itemType !== "all" && itemTypeKeyForKit(kit) !== state.itemType) {
+    if (state.activeView === "catalog" && !filterHas("itemType", itemTypeKeyForKit(kit))) {
       return false;
     }
-    if (state.activeView === "catalog" && state.releaseYear !== "all" && releaseYearForKit(kit) !== state.releaseYear) {
+    if (state.activeView === "catalog" && !filterHas("releaseYear", releaseYearForKit(kit))) {
       return false;
     }
-    if (state.activeView === "catalog" && state.limited !== "all") {
+    if (state.activeView === "catalog" && !filterIsAll("limited")) {
       const limited = Boolean(kit.is_limited);
-      if ((state.limited === "limited" && !limited) || (state.limited === "regular" && limited)) {
+      const selectedLimited = selectedFilterValues("limited");
+      if (!selectedLimited.includes(limited ? "limited" : "regular")) {
         return false;
       }
     }
@@ -3557,6 +3719,7 @@ function renderConsoleMode() {
   const editable = canEditSharedData();
   elements.editToggle.disabled = !editable;
   elements.saveCorrection.disabled = !editable;
+  elements.markVerified.disabled = !editable;
   elements.clearCorrection.disabled = !editable;
   elements.saveSeriesLabel.disabled = !editable;
   elements.clearSeriesLabel.disabled = !editable;
@@ -3619,12 +3782,32 @@ function seriesCountsForCurrentFranchise() {
   return new Map(seriesEntriesForFranchise(state.franchise));
 }
 
+function renderFilterOptions(container, key, allLabel, options) {
+  container.innerHTML = "";
+  const allButton = document.createElement("button");
+  allButton.type = "button";
+  allButton.className = `filter-option${filterIsAll(key) ? " is-active" : ""}`;
+  allButton.dataset.filterKey = key;
+  allButton.dataset.filterValue = "all";
+  allButton.textContent = allLabel;
+  container.append(allButton);
+
+  const selected = new Set(selectedFilterValues(key));
+  for (const option of options) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `filter-option${selected.has(option.value) ? " is-active" : ""}`;
+    button.dataset.filterKey = key;
+    button.dataset.filterValue = option.value;
+    button.textContent = option.label;
+    container.append(button);
+  }
+}
+
 function renderSeriesControls() {
   const kits = kitsForCurrentFranchise();
   const counts = seriesCountsForCurrentFranchise();
-  if (state.series !== "all" && !counts.has(state.series)) {
-    state.series = "all";
-  }
+  pruneFilterValues("series", counts.keys());
 
   const seriesEntries = [...counts.entries()];
 
@@ -3634,21 +3817,21 @@ function renderSeriesControls() {
     elements.seriesTabs.append(makeSeriesTab(key, `${entry.label} ${entry.count}`));
   }
 
-  elements.seriesSelect.innerHTML = "";
-  elements.seriesSelect.append(makeOption("all", `${t("allWorks")} (${kits.length})`));
-  for (const [key, entry] of seriesEntries) {
-    elements.seriesSelect.append(makeOption(key, `${entry.label} (${entry.count})`));
-  }
-  elements.seriesSelect.value = state.series;
+  renderFilterOptions(
+    elements.seriesFilter,
+    "series",
+    `${t("allWorks")} (${kits.length})`,
+    seriesEntries.map(([key, entry]) => ({ value: key, label: `${entry.label} (${entry.count})` })),
+  );
 }
 
 function makeSeriesTab(key, label) {
   const button = document.createElement("button");
   button.type = "button";
-  button.className = `series-tab${state.series === key ? " is-active" : ""}`;
+  button.className = `series-tab${(key === "all" ? filterIsAll("series") : selectedFilterValues("series").includes(key)) ? " is-active" : ""}`;
   button.textContent = label;
   button.addEventListener("click", () => {
-    state.series = key;
+    toggleFilterValue("series", key);
     renderSeriesControls();
     renderGradeSelect();
     renderAdvancedFilters();
@@ -3669,7 +3852,7 @@ function makeOption(value, label) {
 
 function renderSeriesAdmin() {
   const entries = seriesEntriesForFranchise(state.franchise);
-  const preferredKey = state.series !== "all" ? state.series : entries[0]?.[0];
+  const preferredKey = selectedFilterValues("series")[0] || entries[0]?.[0];
   if (!state.seriesAdminKey || !entries.some(([key]) => key === state.seriesAdminKey)) {
     state.seriesAdminKey = preferredKey || "other";
   }
@@ -3767,70 +3950,74 @@ function exportSeriesLabels() {
 }
 
 function renderGradeSelect() {
-  const kits = kitsForCurrentFranchise().filter((kit) => state.series === "all" || kitSeriesKey(kit) === state.series);
+  const kits = kitsForCurrentFranchise().filter((kit) => filterHas("series", kitSeriesKey(kit)));
   const counts = new Map();
   for (const kit of kits) {
     counts.set(kit.grade_code, (counts.get(kit.grade_code) || 0) + 1);
   }
-  if (state.grade !== "all" && !counts.has(state.grade)) {
-    state.grade = "all";
-  }
+  pruneFilterValues("grade", counts.keys());
 
   const codes = [...counts.keys()].sort();
-  elements.gradeSelect.innerHTML = "";
-  elements.gradeSelect.append(makeOption("all", `${t("allProductLines")} (${kits.length})`));
-  for (const code of codes) {
-    const sample = kits.find((kit) => kit.grade_code === code);
-    const label = sample ? gradeShortLabel(sample) : code;
-    elements.gradeSelect.append(makeOption(code, `${label} (${counts.get(code)})`));
-  }
-  elements.gradeSelect.value = state.grade;
+  renderFilterOptions(
+    elements.gradeFilter,
+    "grade",
+    `${t("allProductLines")} (${kits.length})`,
+    codes.map((code) => {
+      const sample = kits.find((kit) => kit.grade_code === code);
+      const label = sample ? gradeShortLabel(sample) : code;
+      return { value: code, label: `${label} (${counts.get(code)})` };
+    }),
+  );
 }
 
 function renderAdvancedFilters() {
   const kits = kitsForCurrentFranchise().filter((kit) => {
-    if (state.series !== "all" && kitSeriesKey(kit) !== state.series) return false;
-    if (state.grade !== "all" && kit.grade_code !== state.grade) return false;
+    if (!filterHas("series", kitSeriesKey(kit))) return false;
+    if (!filterHas("grade", kit.grade_code)) return false;
     return true;
   });
 
   const typeCounts = new Map();
   const yearCounts = new Map();
+  const limitedCounts = new Map([
+    ["limited", 0],
+    ["regular", 0],
+  ]);
   for (const kit of kits) {
     const type = itemTypeKeyForKit(kit);
     typeCounts.set(type, (typeCounts.get(type) || 0) + 1);
+    const limitedKey = kit.is_limited ? "limited" : "regular";
+    limitedCounts.set(limitedKey, (limitedCounts.get(limitedKey) || 0) + 1);
     const year = releaseYearForKit(kit);
     if (year) {
       yearCounts.set(year, (yearCounts.get(year) || 0) + 1);
     }
   }
 
-  if (state.itemType !== "all" && !typeCounts.has(state.itemType)) {
-    state.itemType = "all";
-  }
-  if (state.releaseYear !== "all" && !yearCounts.has(state.releaseYear)) {
-    state.releaseYear = "all";
-  }
+  pruneFilterValues("itemType", typeCounts.keys());
+  pruneFilterValues("releaseYear", yearCounts.keys());
+  pruneFilterValues("limited", ["limited", "regular"]);
 
-  elements.itemTypeSelect.innerHTML = "";
-  elements.itemTypeSelect.append(makeOption("all", `${t("allTypes")} (${kits.length})`));
-  for (const [key, count] of [...typeCounts.entries()].sort((a, b) => itemTypeLabel(a[0]).localeCompare(itemTypeLabel(b[0]), state.language))) {
-    elements.itemTypeSelect.append(makeOption(key, `${itemTypeLabel(key)} (${count})`));
-  }
-  elements.itemTypeSelect.value = state.itemType;
+  renderFilterOptions(
+    elements.itemTypeFilter,
+    "itemType",
+    `${t("allTypes")} (${kits.length})`,
+    [...typeCounts.entries()]
+      .sort((a, b) => itemTypeLabel(a[0]).localeCompare(itemTypeLabel(b[0]), state.language))
+      .map(([key, count]) => ({ value: key, label: `${itemTypeLabel(key)} (${count})` })),
+  );
 
-  elements.releaseYearSelect.innerHTML = "";
-  elements.releaseYearSelect.append(makeOption("all", `${t("allYears")} (${kits.length})`));
-  for (const [year, count] of [...yearCounts.entries()].sort((a, b) => b[0].localeCompare(a[0]))) {
-    elements.releaseYearSelect.append(makeOption(year, `${year} (${count})`));
-  }
-  elements.releaseYearSelect.value = state.releaseYear;
+  renderFilterOptions(
+    elements.releaseYearFilter,
+    "releaseYear",
+    `${t("allYears")} (${kits.length})`,
+    [...yearCounts.entries()].sort((a, b) => b[0].localeCompare(a[0])).map(([year, count]) => ({ value: year, label: `${year} (${count})` })),
+  );
 
-  elements.limitedSelect.innerHTML = "";
-  elements.limitedSelect.append(makeOption("all", t("limitedAll")));
-  elements.limitedSelect.append(makeOption("limited", t("limitedOnly")));
-  elements.limitedSelect.append(makeOption("regular", t("regularOnly")));
-  elements.limitedSelect.value = state.limited;
+  renderFilterOptions(elements.limitedFilter, "limited", t("limitedAll"), [
+    { value: "limited", label: `${t("limitedOnly")} (${limitedCounts.get("limited") || 0})` },
+    { value: "regular", label: `${t("regularOnly")} (${limitedCounts.get("regular") || 0})` },
+  ]);
   elements.priceMinInput.value = state.priceMin;
   elements.priceMaxInput.value = state.priceMax;
 }
@@ -3862,23 +4049,47 @@ function renderWorkFilters() {
 
 function renderFilterSummary() {
   const gradeMap = gradeByCode();
-  const gradeLabelText =
-    state.grade === "all"
-      ? t("allProductLines")
-      : gradeLabel(gradeMap.get(state.grade)) || state.grade;
-  const seriesLabel = seriesLabelFromKey(state.series);
+  const summarize = (values, allLabel, labeler) => {
+    if (!values.length) return allLabel;
+    const labels = values.map(labeler).filter(Boolean);
+    return labels.length > 2 ? `${labels.slice(0, 2).join(" + ")} +${labels.length - 2}` : labels.join(" + ");
+  };
+  const gradeLabelText = summarize(selectedFilterValues("grade"), t("allProductLines"), (code) => gradeLabel(gradeMap.get(code)) || code);
+  const seriesLabel = summarize(selectedFilterValues("series"), t("allWorks"), seriesLabelFromKey);
   const extra = [
-    state.itemType !== "all" ? itemTypeLabel(state.itemType) : null,
-    state.releaseYear !== "all" ? state.releaseYear : null,
-    state.limited !== "all" ? t(state.limited === "limited" ? "limitedOnly" : "regularOnly") : null,
+    !filterIsAll("itemType") ? summarize(selectedFilterValues("itemType"), "", itemTypeLabel) : null,
+    !filterIsAll("releaseYear") ? summarize(selectedFilterValues("releaseYear"), "", (year) => year) : null,
+    !filterIsAll("limited") ? summarize(selectedFilterValues("limited"), "", (value) => t(value === "limited" ? "limitedOnly" : "regularOnly")) : null,
     state.priceMin ? `>=${formatPrice(Number(state.priceMin))}` : null,
     state.priceMax ? `<=${formatPrice(Number(state.priceMax))}` : null,
   ].filter(Boolean);
   elements.filterSummary.textContent = [franchiseLabel(state.franchise), seriesLabel, gradeLabelText, ...extra].join(" · ");
 }
 
+function currentRenderSignature(kits) {
+  return JSON.stringify({
+    view: state.activeView,
+    franchise: state.franchise,
+    query: state.query,
+    grade: state.grade,
+    series: state.series,
+    itemType: state.itemType,
+    releaseYear: state.releaseYear,
+    limited: state.limited,
+    priceMin: state.priceMin,
+    priceMax: state.priceMax,
+    count: kits.length,
+  });
+}
+
 function renderKits() {
   const kits = filteredKits();
+  const signature = currentRenderSignature(kits);
+  if (state.renderSignature !== signature) {
+    state.renderSignature = signature;
+    state.renderLimit = KIT_RENDER_BATCH;
+  }
+  const visibleKits = kits.slice(0, state.renderLimit);
   const collectionType = activeCollectionType();
   const titleKey = state.activeView === "owned" ? "ownedList" : state.activeView === "wanted" ? "wantedList" : "catalogList";
   elements.sectionTitle.textContent = t(titleKey);
@@ -3897,7 +4108,7 @@ function renderKits() {
     return;
   }
 
-  for (const kit of kits) {
+  for (const kit of visibleKits) {
     const card = elements.cardTemplate.content.firstElementChild.cloneNode(true);
     const boxArt = card.querySelector(".box-art");
     const fullName = kitDisplayName(kit);
@@ -3962,6 +4173,19 @@ function renderKits() {
       }
     });
     elements.kitGrid.append(card);
+  }
+
+  if (visibleKits.length < kits.length) {
+    const remaining = kits.length - visibleKits.length;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "load-more";
+    button.textContent = `${t("showMore", { count: Math.min(KIT_RENDER_BATCH, remaining) })} · ${t("showingPartial", { shown: visibleKits.length, total: kits.length })}`;
+    button.addEventListener("click", () => {
+      state.renderLimit += KIT_RENDER_BATCH;
+      renderKits();
+    });
+    elements.kitGrid.append(button);
   }
 }
 

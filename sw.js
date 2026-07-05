@@ -1,6 +1,8 @@
-const APP_CACHE = "gunpula-app-v7";
+const APP_CACHE = "gunpula-app-v8";
 const DATA_CACHE = "gunpula-data-v1";
 const IMAGE_CACHE = "gunpula-images-v1";
+const NOTIFICATION_CACHE = "gunpula-notifications-v1";
+const UPDATE_SYNC_TAG = "gunpula-update-check";
 
 const APP_ASSETS = [
   "./app/",
@@ -15,6 +17,7 @@ const APP_ASSETS = [
   "./data/kits.json",
   "./data/sources.json",
   "./data/source-health.json",
+  "./data/series-audit.json",
   "./data/update-feed.json",
 ];
 
@@ -27,7 +30,7 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches
       .keys()
-      .then((keys) => Promise.all(keys.filter((key) => ![APP_CACHE, DATA_CACHE, IMAGE_CACHE].includes(key)).map((key) => caches.delete(key))))
+      .then((keys) => Promise.all(keys.filter((key) => ![APP_CACHE, DATA_CACHE, IMAGE_CACHE, NOTIFICATION_CACHE].includes(key)).map((key) => caches.delete(key))))
       .then(() => self.clients.claim()),
   );
 });
@@ -71,6 +74,19 @@ self.addEventListener("notificationclick", (event) => {
   );
 });
 
+self.addEventListener("message", (event) => {
+  if (event.data?.type !== "SHOW_UPDATE_NOTIFICATION") {
+    return;
+  }
+  event.waitUntil(self.registration.showNotification(event.data.title, event.data.options || {}));
+});
+
+self.addEventListener("periodicsync", (event) => {
+  if (event.tag === UPDATE_SYNC_TAG) {
+    event.waitUntil(checkCatalogUpdates());
+  }
+});
+
 async function cacheFirst(request, cacheName) {
   const cache = await caches.open(cacheName);
   const cached = await cache.match(request);
@@ -99,4 +115,34 @@ async function networkFirst(request, cacheName) {
     }
     throw new Error("Offline and no cached response is available.");
   }
+}
+
+async function checkCatalogUpdates() {
+  const response = await fetch("./data/update-feed.json", { cache: "no-store" });
+  if (!response.ok) {
+    return;
+  }
+  const feed = await response.json();
+  const entry = feed?.entries?.[0];
+  const total = Number(entry?.added_count || 0) + Number(entry?.changed_count || 0) + Number(entry?.removed_count || 0);
+  const priority = Number(entry?.watched_count || 0) + Number(entry?.premium_bandai_count || 0) + Number(entry?.bbx_count || 0);
+  if (!entry || total <= 0 || priority <= 0) {
+    return;
+  }
+
+  const signature = [entry.date, entry.added_count || 0, entry.changed_count || 0, entry.removed_count || 0, entry.watched_count || 0, entry.premium_bandai_count || 0, entry.bbx_count || 0].join(":");
+  const cache = await caches.open(NOTIFICATION_CACHE);
+  const marker = new Request("./notification-state/latest-update");
+  const cached = await cache.match(marker);
+  if ((await cached?.text()) === signature) {
+    return;
+  }
+  await cache.put(marker, new Response(signature));
+  await self.registration.showNotification("模型库有新更新", {
+    body: `${entry.date} · 新增 ${entry.added_count || 0} · 变更 ${entry.changed_count || 0}`,
+    tag: `gunpula-update-${entry.date}`,
+    icon: "./app/icons/icon-192.png",
+    badge: "./app/icons/icon-192.png",
+    data: { url: "./app/#view=updates" },
+  });
 }

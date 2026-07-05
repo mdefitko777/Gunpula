@@ -240,19 +240,45 @@ h1 {
   margin-top: 6px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--panel);
+  background: #fbfcfd;
+  box-shadow: 0 8px 22px rgba(23, 25, 29, 0.05);
 }
 
 .filter-panel summary,
 .series-admin-panel summary {
-  min-height: 32px;
+  min-height: 42px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 0 10px;
+  padding: 0 12px;
   color: var(--ink);
   font-weight: 900;
+  list-style: none;
+}
+
+.filter-panel summary::-webkit-details-marker,
+.series-admin-panel summary::-webkit-details-marker {
+  display: none;
+}
+
+.filter-panel summary::after {
+  content: "⌄";
+  width: 26px;
+  height: 26px;
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1;
+}
+
+.filter-panel[open] summary::after {
+  content: "⌃";
 }
 
 .filter-panel summary span:last-child,
@@ -270,8 +296,8 @@ h1 {
 .series-admin-body {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  padding: 10px 12px 12px;
+  gap: 0 14px;
+  padding: 8px 12px 12px;
   border-top: 1px solid var(--line);
 }
 
@@ -280,13 +306,18 @@ h1 {
 }
 
 .select-filter,
+.multi-filter,
 .series-name-field,
 .price-filter {
   display: grid;
-  gap: 6px;
+  gap: 8px;
+  min-width: 0;
+  padding: 9px 0;
+  border-bottom: 1px solid #edf0f2;
 }
 
 .select-filter span,
+.multi-filter > span,
 .series-name-field span,
 .price-filter > span,
 .filter-label {
@@ -305,6 +336,43 @@ h1 {
   border-radius: 6px;
   background: #ffffff;
   color: var(--ink);
+}
+
+.filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  max-height: 112px;
+  overflow: auto;
+  padding: 1px 1px 2px;
+}
+
+.filter-option {
+  min-height: 30px;
+  max-width: 100%;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 900;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.filter-option:hover,
+.filter-option:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  outline: 0;
+}
+
+.filter-option.is-active {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #ffffff;
 }
 
 .price-filter {
@@ -1392,6 +1460,24 @@ body[data-view="updates"] .top-bar {
   outline: 0;
 }
 
+.load-more {
+  min-height: 48px;
+  grid-column: 1 / -1;
+  border: 1px solid var(--ink);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.load-more:hover,
+.load-more:focus-visible {
+  background: var(--ink);
+  color: #fff;
+  outline: 0;
+}
+
 .source-health-row strong,
 .review-item strong {
   min-width: 0;
@@ -2090,6 +2176,26 @@ body[data-view="updates"] .top-bar {
     min-height: 32px;
     padding: 0 10px;
     font-size: 12px;
+  }
+
+  .filter-body {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 6px 12px 12px;
+  }
+
+  .filter-panel summary {
+    min-height: 40px;
+  }
+
+  .filter-options {
+    flex-wrap: nowrap;
+    max-height: none;
+    overflow-x: auto;
+  }
+
+  .filter-option {
+    flex: 0 0 auto;
   }
 
   .search-field {

@@ -1,6 +1,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 
 const OUTPUT_PATH = "data/source-health.json";
+const PB_INDEX_PATH = "data/premium-bandai-jp-index.json";
 const P_BANDAI_URL = "https://p-bandai.jp/hobby/a0001/list-da20-n3/";
 const BBX_URL = "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/";
 
@@ -37,6 +38,14 @@ async function fetchText(url, options = {}) {
     duration_ms: Date.now() - started,
     text,
   };
+}
+
+async function readJson(path, fallback) {
+  try {
+    return JSON.parse(await readFile(path, "utf8"));
+  } catch {
+    return fallback;
+  }
 }
 
 function classifyBbx(title) {
@@ -104,22 +113,35 @@ async function checkPremiumBandai() {
     const result = await fetchText(P_BANDAI_URL, { referer: "https://p-bandai.jp/" });
     const redirected = /global_newpc\.html/.test(result.final_url) || /Premium Bandai is International|SELECT YOUR REGION/i.test(result.text);
     const itemCount = [...result.text.matchAll(/\/item\/item-[^"'<\s]+/g)].length;
+    const index = await readJson(PB_INDEX_PATH, { entries: [] });
+    const indexedCount = (index.entries || []).filter((entry) => entry.p_bandai_urls?.length).length;
     return {
       source_id: "p_bandai_jp",
       url: P_BANDAI_URL,
-      status: redirected ? "blocked" : result.ok && itemCount > 0 ? "ok" : "warning",
+      status: redirected && indexedCount > 0 ? "ok" : redirected ? "blocked" : result.ok && itemCount > 0 ? "ok" : "warning",
       http_status: result.status,
       final_url: result.final_url,
       duration_ms: result.duration_ms,
-      item_count: itemCount,
-      message: redirected ? "Japanese Premium Bandai storefront redirected this runner to the international region page" : `Japanese Premium Bandai returned ${itemCount} item links`,
+      item_count: redirected ? indexedCount : itemCount,
+      direct_status: redirected ? "blocked" : "ok",
+      access_method: redirected && indexedCount > 0 ? "bandai_spirits_product_buttons" : "direct",
+      message:
+        redirected && indexedCount > 0
+          ? `Direct Japanese Premium Bandai storefront is redirected, but ${indexedCount} official PB Japan item links were recovered from BANDAI SPIRITS product pages`
+          : redirected
+            ? "Japanese Premium Bandai storefront redirected this runner to the international region page"
+            : `Japanese Premium Bandai returned ${itemCount} item links`,
     };
   } catch (error) {
+    const index = await readJson(PB_INDEX_PATH, { entries: [] });
+    const indexedCount = (index.entries || []).filter((entry) => entry.p_bandai_urls?.length).length;
     return {
       source_id: "p_bandai_jp",
       url: P_BANDAI_URL,
-      status: "error",
-      message: error.message,
+      status: indexedCount > 0 ? "ok" : "error",
+      item_count: indexedCount,
+      access_method: indexedCount > 0 ? "bandai_spirits_product_buttons" : "direct",
+      message: indexedCount > 0 ? `Direct PB check failed, but ${indexedCount} official PB Japan item links are indexed` : error.message,
     };
   }
 }

@@ -32,7 +32,7 @@ jobs:
         run: cp data/kits.json "$RUNNER_TEMP/kits-before.json"
 
       - name: Import official sources
-        run: npm run import:official
+        run: npm run import:data
 
       - name: Build update feed
         run: npm run updates -- --before="$RUNNER_TEMP/kits-before.json"
@@ -42,9 +42,6 @@ jobs:
           npm run validate
           npm run duplicates
           npm run audit:gundam-series
-          npm run check:images:pokemon
-          npm run prune:broken-images -- --franchise=pokemon
-          npm run check:images:pokemon
           npm run validate
 
       - name: Commit updated catalog

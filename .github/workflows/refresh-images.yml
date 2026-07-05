@@ -1,0 +1,43 @@
+name: Refresh important images
+
+on:
+  schedule:
+    - cron: "50 18 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-important-images
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Cache unstable official images
+        run: npm run cache:important-images
+
+      - name: Check cached Pokemon images
+        run: npm run check:images:pokemon
+
+      - name: Commit image cache updates
+        run: |
+          if git diff --quiet -- data app/assets; then
+            echo "No image cache updates."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data app/assets
+          git commit -m "Refresh cached catalog images"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push
