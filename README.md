@@ -12,6 +12,8 @@ official and Japanese retail catalog sources instead of hand-entering every kit.
 - `data/grades.json` - grade, product-line, shokugan, and gashapon taxonomy.
 - `data/sources.json` - source registry and source strengths/weaknesses.
 - `data/kits.json` - individual kit records.
+- `data/pbandai_sources.json` - Premium Bandai JP URLs for the offline crawler.
+- `data/pbandai.json` - cached Premium Bandai JP products read by the static app.
 - `schema/kit.schema.json` - kit record shape for reference.
 - `docs/grades.md` - readable Chinese grade reference.
 - `docs/data-model.md` - kit data model and validation rules.
@@ -25,6 +27,7 @@ official and Japanese retail catalog sources instead of hand-entering every kit.
 - `scripts/serve_app.mjs` - serves the local catalog UI.
 - `scripts/import_bandai_spirits_gunpla.mjs` - imports the Japanese official BANDAI SPIRITS Gunpla catalog.
 - `scripts/import_bandai_collectibles.mjs` - imports official Bandai Candy, Bandai Gashapon, Pokemon, Armored Core, and BEYBLADE X lines.
+- `scripts/crawl_pbandai.py` - safely fetches Premium Bandai JP pages into `data/pbandai.json`.
 - `scripts/cache_catalog_images.mjs` - stores fragile remote cover images in a local cache or repo asset folder.
 - `scripts/check_image_health.mjs` - checks whether cover and gallery image candidates still respond.
 - `scripts/prune_broken_image_urls.mjs` - removes image URLs known to be broken from gallery candidates.
@@ -52,6 +55,7 @@ npm run repair:pokemon-images
 npm run search -- --grade=RG
 npm run search -- aerial
 npm run export:grades
+python scripts/crawl_pbandai.py
 ```
 
 On Windows PowerShell, use `npm.cmd` if script execution policy blocks `npm`:
@@ -66,9 +70,12 @@ npm.cmd run duplicates
 npm.cmd run audit:gundam-series
 ```
 
+If `python` is not on your Windows PATH, use your installed Python executable
+directly. The crawler uses only the Python standard library.
+
 ## Current Status
 
-The catalog currently validates 4,454 product records across Gundam, Armored
+The catalog currently validates 4,465 product records across Gundam, Armored
 Core, Pokemon, and BEYBLADE X lines. Records include official product images,
 release dates, JPY prices where available, source links, four-language names,
 and compact series labels such as `SEED`, `00`, `W`, `Iron-Blooded Orphans`,
@@ -77,6 +84,33 @@ and compact series labels such as `SEED`, `00`, `W`, `Iron-Blooded Orphans`,
 The local website is static. It does not live-fetch official pages while a user
 browses. Run `npm run import:official` to refresh the JSON data from Japanese
 official sources; that command can later be wired to a scheduled job.
+
+## Premium Bandai JP Cache
+
+The frontend does not crawl or fetch `p-bandai.jp` directly. Premium Bandai JP
+can block non-Japan IPs, so PB data is handled as:
+
+1. Edit `data/pbandai_sources.json` with PB product or category URLs.
+2. Run `python scripts/crawl_pbandai.py` on a Japan-based machine or VPS.
+3. Commit or upload the generated `data/pbandai.json`.
+4. GitHub Pages serves the static app, and the app reads only `data/pbandai.json`.
+
+The crawler uses low-frequency requests, timeouts, one retry by default, and a
+local HTML cache under `work/pbandai_cache`. It does not implement login bypass,
+CAPTCHA bypass, proxy rotation, or hidden anti-bot bypass. If Premium Bandai
+redirects or blocks the request, the crawler writes `fetch_status: "blocked"`
+with an error message and still exits cleanly.
+
+Manual fallback is supported: add or edit items in `data/pbandai.json`, and set
+`"manual": true` if you want the crawler to keep that record when a later fetch
+is blocked or errors. A successful fetch for the same item can replace it.
+
+GitHub Pages cannot run crawler code. A Japan VPS can run it daily and push the
+changed JSON back to GitHub. Example cron, not enabled automatically:
+
+```cron
+20 4 * * * cd /srv/Gunpula && python scripts/crawl_pbandai.py && git add data/pbandai.json && git commit -m "Refresh Premium Bandai JP cache" && git push
+```
 
 The UI supports local manual corrections in the browser. Corrections are stored
 in `localStorage` and can be exported as JSON from a product detail view.

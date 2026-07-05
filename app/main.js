@@ -152,6 +152,11 @@ const TRANSLATIONS = {
     viewAllUpdates: "全部记录",
     latestUpdate: "最新 {date}",
     premiumBandai: "PB",
+    premiumBandaiProducts: "Premium Bandai JP",
+    premiumBandaiSource: "Premium Bandai JP",
+    premiumBandaiUpdated: "更新 {date}",
+    pbandaiOpenProduct: "打开商品页",
+    pbandaiUnavailable: "暂无 Premium Bandai 缓存数据",
     updateRecentEmpty: "暂无可显示的更新",
     addedBadge: "新增",
     changedBadge: "变更",
@@ -350,6 +355,11 @@ const TRANSLATIONS = {
     viewAllUpdates: "전체 기록",
     latestUpdate: "최신 {date}",
     premiumBandai: "PB",
+    premiumBandaiProducts: "Premium Bandai JP",
+    premiumBandaiSource: "Premium Bandai JP",
+    premiumBandaiUpdated: "업데이트 {date}",
+    pbandaiOpenProduct: "상품 페이지 열기",
+    pbandaiUnavailable: "Premium Bandai 캐시 데이터가 없습니다",
     updateRecentEmpty: "표시할 업데이트가 없습니다",
     addedBadge: "신규",
     changedBadge: "변경",
@@ -548,6 +558,11 @@ const TRANSLATIONS = {
     viewAllUpdates: "All Updates",
     latestUpdate: "Latest {date}",
     premiumBandai: "PB",
+    premiumBandaiProducts: "Premium Bandai JP",
+    premiumBandaiSource: "Premium Bandai JP",
+    premiumBandaiUpdated: "Updated {date}",
+    pbandaiOpenProduct: "Open product page",
+    pbandaiUnavailable: "No cached Premium Bandai data yet",
     updateRecentEmpty: "No updates to show",
     addedBadge: "Added",
     changedBadge: "Changed",
@@ -746,6 +761,11 @@ const TRANSLATIONS = {
     viewAllUpdates: "すべて",
     latestUpdate: "最新 {date}",
     premiumBandai: "PB",
+    premiumBandaiProducts: "Premium Bandai JP",
+    premiumBandaiSource: "Premium Bandai JP",
+    premiumBandaiUpdated: "更新 {date}",
+    pbandaiOpenProduct: "商品ページを開く",
+    pbandaiUnavailable: "Premium Bandai のキャッシュデータはまだありません",
     updateRecentEmpty: "表示できる更新はありません",
     addedBadge: "追加",
     changedBadge: "変更",
@@ -900,6 +920,7 @@ const state = {
   sources: [],
   imageHealth: null,
   updateFeed: null,
+  pbandai: null,
   sourceHealth: null,
   seriesAudit: null,
   overrides: {},
@@ -950,6 +971,8 @@ const state = {
   swipeStartY: null,
 };
 
+upgradeLegacyFilterDom();
+
 const elements = {
   datasetSummary: document.querySelector("#datasetSummary"),
   sectionTitle: document.querySelector("#sectionTitle"),
@@ -989,6 +1012,9 @@ const elements = {
   homeUpdateSummary: document.querySelector("#homeUpdateSummary"),
   sourceHealthStrip: document.querySelector("#sourceHealthStrip"),
   homeUpdateList: document.querySelector("#homeUpdateList"),
+  pbandaiSection: document.querySelector("#pbandaiSection"),
+  pbandaiSubtitle: document.querySelector("#pbandaiSubtitle"),
+  pbandaiList: document.querySelector("#pbandaiList"),
   collectionSection: document.querySelector("#collectionSection"),
   ownedPanel: document.querySelector("#ownedPanel"),
   wantedPanel: document.querySelector("#wantedPanel"),
@@ -1068,6 +1094,43 @@ const elements = {
   clearSeriesLabel: document.querySelector("#clearSeriesLabel"),
   exportSeriesLabels: document.querySelector("#exportSeriesLabels"),
 };
+
+function upgradeLegacyFilterDom() {
+  const body = document.querySelector("#filterBody") || document.querySelector(".filter-body");
+  if (!body) {
+    return;
+  }
+  body.id = "filterBody";
+
+  const filters = [
+    ["seriesSelect", "seriesFilter", "workSource", "series-select-filter"],
+    ["gradeSelect", "gradeFilter", "productLine", ""],
+    ["itemTypeSelect", "itemTypeFilter", "itemType", ""],
+    ["releaseYearSelect", "releaseYearFilter", "releaseYear", ""],
+    ["limitedSelect", "limitedFilter", "limitedStatus", ""],
+  ];
+
+  for (const [selectId, filterId, labelKey, extraClass] of filters) {
+    if (document.querySelector(`#${filterId}`)) {
+      continue;
+    }
+    const select = document.querySelector(`#${selectId}`);
+    const wrapper = select?.closest("label") || select?.parentElement;
+    if (!wrapper) {
+      continue;
+    }
+    const section = document.createElement("section");
+    section.className = `multi-filter ${extraClass}`.trim();
+    section.hidden = wrapper.hidden;
+    const label = wrapper.querySelector("span")?.cloneNode(true) || document.createElement("span");
+    label.dataset.i18n = label.dataset.i18n || labelKey;
+    const options = document.createElement("div");
+    options.className = "filter-options";
+    options.id = filterId;
+    section.append(label, options);
+    wrapper.replaceWith(section);
+  }
+}
 
 async function loadJson(path) {
   const response = await fetch(path);
@@ -1278,12 +1341,13 @@ function applyViewState(viewState) {
 }
 
 async function init() {
-  const [gradesDoc, kitsDoc, sourcesDoc, imageHealthDoc, updateFeedDoc, sourceHealthDoc, seriesAuditDoc] = await Promise.all([
+  const [gradesDoc, kitsDoc, sourcesDoc, imageHealthDoc, updateFeedDoc, pbandaiDoc, sourceHealthDoc, seriesAuditDoc] = await Promise.all([
     loadJson("../data/grades.json"),
     loadJson("../data/kits.json"),
     loadJson("../data/sources.json"),
     loadOptionalJson("../data/image-health.json"),
     loadOptionalJson("../data/update-feed.json"),
+    loadOptionalJson("../data/pbandai.json"),
     loadOptionalJson("../data/source-health.json"),
     loadOptionalJson("../data/series-audit.json"),
   ]);
@@ -1293,6 +1357,7 @@ async function init() {
   state.sources = sourcesDoc.sources;
   state.imageHealth = imageHealthDoc;
   state.updateFeed = updateFeedDoc;
+  state.pbandai = pbandaiDoc;
   state.sourceHealth = sourceHealthDoc;
   state.seriesAudit = seriesAuditDoc;
   state.overrides = loadOverrides();
@@ -1752,7 +1817,7 @@ function bindEvents() {
     persistViewState();
     renderKits();
   });
-  elements.filterBody.addEventListener("click", (event) => {
+  elements.filterBody?.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-filter-key][data-filter-value]");
     if (!button) {
       return;
@@ -1766,10 +1831,10 @@ function bindEvents() {
     persistViewState({ mode: "push" });
     renderKits();
   });
-  for (const input of [elements.priceMinInput, elements.priceMaxInput]) {
+  for (const input of [elements.priceMinInput, elements.priceMaxInput].filter(Boolean)) {
     input.addEventListener("change", () => {
-      state.priceMin = elements.priceMinInput.value.trim();
-      state.priceMax = elements.priceMaxInput.value.trim();
+      state.priceMin = elements.priceMinInput?.value.trim() || "";
+      state.priceMax = elements.priceMaxInput?.value.trim() || "";
       renderFilterSummary();
       persistViewState({ mode: "push" });
       renderKits();
@@ -2557,6 +2622,7 @@ function render() {
   renderBottomNav();
   renderCollections();
   renderHomeUpdates();
+  renderPBandaiProducts();
   renderUpdateLog();
   renderFilterSummary();
   renderKits();
@@ -2884,6 +2950,94 @@ function renderHomeUpdates() {
       }
     });
     elements.homeUpdateList.append(card);
+  }
+}
+
+function pbandaiItems() {
+  const doc = state.pbandai;
+  const items = Array.isArray(doc) ? doc : Array.isArray(doc?.items) ? doc.items : [];
+  return items
+    .filter((item) => item && item.url)
+    .slice()
+    .sort((a, b) => {
+      const aRank = a.fetch_status === "ok" ? 0 : 1;
+      const bRank = b.fetch_status === "ok" ? 0 : 1;
+      return aRank - bRank || String(b.updated_at || "").localeCompare(String(a.updated_at || ""));
+    });
+}
+
+function safePBandaiImageUrl(item) {
+  const image = String(item.image || "").trim();
+  if (!image || /^https?:\/\/([^/]+\.)?p-bandai\.jp\//i.test(image)) {
+    return "";
+  }
+  return image;
+}
+
+function renderPBandaiProducts() {
+  if (!elements.pbandaiSection) {
+    return;
+  }
+
+  const items = pbandaiItems();
+  const visibleItems = state.activeView === "updates" ? items.slice(0, 24) : items.slice(0, 6);
+  elements.pbandaiSection.classList.toggle("is-full", state.activeView === "updates");
+  elements.pbandaiSection.hidden = !["catalog", "updates"].includes(state.activeView) || !items.length;
+  if (elements.pbandaiSection.hidden) {
+    return;
+  }
+
+  const updatedAt = state.pbandai?.updated_at || visibleItems[0]?.updated_at || "unknown";
+  elements.pbandaiSubtitle.textContent = `${t("premiumBandaiUpdated", { date: String(updatedAt).slice(0, 10) })} · ${items.length}`;
+  elements.pbandaiList.innerHTML = "";
+
+  if (!visibleItems.length) {
+    const empty = document.createElement("div");
+    empty.className = "home-update-empty";
+    empty.textContent = t("pbandaiUnavailable");
+    elements.pbandaiList.append(empty);
+    return;
+  }
+
+  for (const item of visibleItems) {
+    const card = document.createElement("a");
+    card.className = "pbandai-card";
+    card.href = item.url;
+    card.target = "_blank";
+    card.rel = "noreferrer";
+    card.setAttribute("aria-label", `${t("pbandaiOpenProduct")}: ${item.title || item.id || item.url}`);
+
+    const art = document.createElement("div");
+    art.className = "pbandai-art";
+    const image = safePBandaiImageUrl(item);
+    if (image) {
+      const img = document.createElement("img");
+      img.src = image;
+      img.alt = item.title || t("premiumBandaiProducts");
+      img.loading = "lazy";
+      img.addEventListener("error", () => showPlaceholder(art, "PB"));
+      art.append(img);
+    } else {
+      showPlaceholder(art, "PB");
+    }
+
+    const body = document.createElement("div");
+    body.className = "pbandai-body";
+    const badges = document.createElement("div");
+    badges.className = "home-update-badges";
+    for (const label of [t("premiumBandaiSource"), item.fetch_status && item.fetch_status !== "ok" ? item.fetch_status : null, item.category].filter(Boolean)) {
+      const badge = document.createElement("span");
+      badge.textContent = label;
+      if (label === t("premiumBandaiSource")) badge.className = "is-premium";
+      badges.append(badge);
+    }
+    const title = document.createElement("strong");
+    title.textContent = item.title || item.id || item.url;
+    const meta = document.createElement("span");
+    meta.textContent = [item.price, item.status, item.updated_at ? String(item.updated_at).slice(0, 10) : null].filter(Boolean).join(" · ");
+    body.append(badges, title, meta);
+    card.append(art, body);
+    elements.pbandaiList.append(card);
   }
 }
 
@@ -3783,6 +3937,9 @@ function seriesCountsForCurrentFranchise() {
 }
 
 function renderFilterOptions(container, key, allLabel, options) {
+  if (!container) {
+    return;
+  }
   container.innerHTML = "";
   const allButton = document.createElement("button");
   allButton.type = "button";
@@ -4018,8 +4175,8 @@ function renderAdvancedFilters() {
     { value: "limited", label: `${t("limitedOnly")} (${limitedCounts.get("limited") || 0})` },
     { value: "regular", label: `${t("regularOnly")} (${limitedCounts.get("regular") || 0})` },
   ]);
-  elements.priceMinInput.value = state.priceMin;
-  elements.priceMaxInput.value = state.priceMax;
+  if (elements.priceMinInput) elements.priceMinInput.value = state.priceMin;
+  if (elements.priceMaxInput) elements.priceMaxInput.value = state.priceMax;
 }
 
 function clearFilters() {

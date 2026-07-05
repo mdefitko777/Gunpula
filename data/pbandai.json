@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "source": "premium_bandai_jp",
+  "updated_at": "2026-07-05T08:48:44Z",
+  "items": [
+    {
+      "id": "9a6f0a2805a9dfc7",
+      "title": "Premium Bandai JP Gunpla category",
+      "price": "",
+      "status": "",
+      "image": "",
+      "url": "https://p-bandai.jp/hobby/a0001/list-da20-n3/",
+      "source": "premium_bandai_jp",
+      "category": "gunpla",
+      "updated_at": "2026-07-05T08:48:43Z",
+      "fetch_status": "blocked",
+      "error_message": "Premium Bandai appears blocked or redirected: https://p-bandai.jp/global_newpc.html"
+    },
+    {
+      "id": "item-1000251330",
+      "title": "MG 1/100 ブレイズザクファントム(ハイネ・ヴェステンフルス専用機)",
+      "price": "¥5,390",
+      "status": "manual fallback",
+      "image": "https://bandai-a.akamaihd.net/bc/img/model/b/1000251330_1.jpg",
+      "url": "https://p-bandai.jp/item/item-1000251330/",
+      "source": "premium_bandai_jp",
+      "category": "gunpla",
+      "updated_at": "2026-07-05T00:00:00Z",
+      "fetch_status": "ok",
+      "error_message": "Manual fallback item. Run scripts/crawl_pbandai.py from a Japan network to refresh.",
+      "manual": true
+    }
+  ]
+}

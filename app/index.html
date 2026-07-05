@@ -9,7 +9,7 @@
     <title>Gunpula Catalog</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260629-source-health" />
+    <link rel="stylesheet" href="./styles.css?v=20260705-pbandai" />
   </head>
   <body>
     <main class="catalog-page">
@@ -74,6 +74,16 @@
         <div class="home-update-summary" id="homeUpdateSummary"></div>
         <div class="source-health-strip" id="sourceHealthStrip"></div>
         <div class="home-update-list" id="homeUpdateList"></div>
+      </section>
+
+      <section class="pbandai-section" id="pbandaiSection" hidden>
+        <div class="updates-head">
+          <div>
+            <h2 data-i18n="premiumBandaiProducts">Premium Bandai JP</h2>
+            <p id="pbandaiSubtitle"></p>
+          </div>
+        </div>
+        <div class="pbandai-list" id="pbandaiList"></div>
       </section>
 
       <section class="collection-section" id="collectionSection" hidden>
@@ -370,6 +380,6 @@
       </div>
     </dialog>
 
-    <script type="module" src="./main.js?v=20260629-source-health"></script>
+    <script type="module" src="./main.js?v=20260705-pbandai"></script>
   </body>
 </html>
