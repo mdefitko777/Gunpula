@@ -11,15 +11,25 @@ const SYNC_HISTORY_KEY = "gunpula-catalog-sync-history-v1";
 const ACTIVE_VIEW_KEY = "gunpula-catalog-active-view-v1";
 const COLLECTION_HOME_VISIBILITY_KEY = "gunpula-catalog-home-collection-visibility-v1";
 const COLLECTION_HOME_COLLAPSE_KEY = "gunpula-catalog-home-collection-collapse-v1";
+const COLLECTION_MEMBER_VIEW_KEY = "gunpula-catalog-collection-member-view-v1";
 const UPDATE_NOTIFICATION_KEY = "gunpula-catalog-update-notifications-v1";
 const UPDATE_NOTIFICATION_LAST_KEY = "gunpula-catalog-update-notified-v1";
 const UPDATE_NOTIFICATION_FILTER_KEY = "gunpula-catalog-update-notification-filters-v1";
+const THEME_KEY = "gunpula-catalog-theme-v1";
+const APP_ICON_KEY = "gunpula-catalog-app-icon-v1";
+const RELEASE_MONTH_KEY = "gunpula-catalog-release-month-v1";
 const SYNC_POLL_INTERVAL_MS = 15000;
 const SYNC_SAVE_DEBOUNCE_MS = 700;
 const SYNC_HISTORY_LIMIT = 20;
 const KIT_RENDER_BATCH = 160;
+const RADIAL_HOLD_MS = 420;
+const RADIAL_CANCEL_DISTANCE = 14;
 
 const COLLECTION_TYPES = ["owned", "wanted"];
+const THEMES = [
+  { code: "atlas", label: { zh: "蓝白绿", ko: "블루/화이트/그린", en: "Blue", ja: "青白緑" } },
+  { code: "classic", label: { zh: "经典", ko: "클래식", en: "Classic", ja: "クラシック" } },
+];
 const CORRECTION_FIELD_KEYS = ["name_zh", "name_ko", "name_en", "name_ja", "grade_code", "subline", "series_key", "universe", "cover_image_url"];
 
 const DEFAULT_NOTIFICATION_FILTERS = {
@@ -115,6 +125,7 @@ const TRANSLATIONS = {
     appTitle: "Collection Atlas",
     homeNav: "首页",
     collectionNav: "收藏",
+    recentUpdatesNav: "最近更新",
     homeKicker: "收藏图鉴",
     homeTitle: "Collection Atlas",
     homeOpen: "进入图鉴",
@@ -141,6 +152,11 @@ const TRANSLATIONS = {
     workSource: "系列",
     catalogList: "目录",
     settings: "设置",
+    appearance: "外观",
+    themeAtlas: "蓝白绿",
+    themeClassic: "经典",
+    customAppIcon: "自定义图标",
+    resetAppIcon: "恢复默认",
     closeSettings: "关闭设置",
     language: "语言",
     consoleMode: "控制台模式",
@@ -149,6 +165,9 @@ const TRANSLATIONS = {
     showWantedOnHome: "主页显示想要",
     ownedList: "已购买",
     wantedList: "想要",
+    allMembers: "全部",
+    currentMember: "我",
+    memberFilter: "成员",
     markOwned: "已购买",
     unmarkOwned: "取消已购买",
     markWanted: "想要",
@@ -173,6 +192,11 @@ const TRANSLATIONS = {
     showMore: "显示更多 {count} 条",
     showingPartial: "已显示 {shown}/{total}",
     recentUpdates: "最近更新",
+    releaseMonth: "发售月份",
+    releaseMonthSummary: "{month} 发售 {count} 条",
+    releaseDateLabel: "发售 {date}",
+    noReleaseItems: "这个月份没有发售记录",
+    openPremiumBandai: "查看 PB",
     viewAllUpdates: "全部记录",
     latestUpdate: "最新 {date}",
     premiumBandai: "PB",
@@ -181,6 +205,7 @@ const TRANSLATIONS = {
     premiumBandaiUpdated: "更新 {date}",
     pbandaiOpenProduct: "打开商品页",
     pbandaiUnavailable: "暂无 Premium Bandai 缓存数据",
+    pbandaiInternalHint: "点卡片看应用内详情，官方网页请点链接。",
     updateRecentEmpty: "暂无可显示的更新",
     addedBadge: "新增",
     changedBadge: "变更",
@@ -329,6 +354,7 @@ const TRANSLATIONS = {
     appTitle: "Collection Atlas",
     homeNav: "홈",
     collectionNav: "컬렉션",
+    recentUpdatesNav: "최근",
     homeKicker: "컬렉션 도감",
     homeTitle: "Collection Atlas",
     homeOpen: "도감 열기",
@@ -355,6 +381,11 @@ const TRANSLATIONS = {
     workSource: "시리즈",
     catalogList: "목록",
     settings: "설정",
+    appearance: "외관",
+    themeAtlas: "블루/화이트/그린",
+    themeClassic: "클래식",
+    customAppIcon: "사용자 아이콘",
+    resetAppIcon: "기본값",
     closeSettings: "설정 닫기",
     language: "언어",
     consoleMode: "콘솔 모드",
@@ -363,6 +394,9 @@ const TRANSLATIONS = {
     showWantedOnHome: "홈에 원함 표시",
     ownedList: "구매함",
     wantedList: "원함",
+    allMembers: "전체",
+    currentMember: "나",
+    memberFilter: "멤버",
     markOwned: "구매함",
     unmarkOwned: "구매함 해제",
     markWanted: "원함",
@@ -387,6 +421,11 @@ const TRANSLATIONS = {
     showMore: "{count}개 더 보기",
     showingPartial: "{shown}/{total} 표시",
     recentUpdates: "최근 업데이트",
+    releaseMonth: "발매 월",
+    releaseMonthSummary: "{month} 발매 {count}개",
+    releaseDateLabel: "발매 {date}",
+    noReleaseItems: "이 달 발매 기록이 없습니다",
+    openPremiumBandai: "PB 보기",
     viewAllUpdates: "전체 기록",
     latestUpdate: "최신 {date}",
     premiumBandai: "PB",
@@ -395,6 +434,7 @@ const TRANSLATIONS = {
     premiumBandaiUpdated: "업데이트 {date}",
     pbandaiOpenProduct: "상품 페이지 열기",
     pbandaiUnavailable: "Premium Bandai 캐시 데이터가 없습니다",
+    pbandaiInternalHint: "카드를 누르면 앱 상세가 열리고, 공식 페이지는 링크를 누르세요.",
     updateRecentEmpty: "표시할 업데이트가 없습니다",
     addedBadge: "신규",
     changedBadge: "변경",
@@ -543,6 +583,7 @@ const TRANSLATIONS = {
     appTitle: "Collection Atlas",
     homeNav: "Home",
     collectionNav: "Collection",
+    recentUpdatesNav: "Updates",
     homeKicker: "Collection atlas",
     homeTitle: "Collection Atlas",
     homeOpen: "Open atlas",
@@ -569,6 +610,11 @@ const TRANSLATIONS = {
     workSource: "Series",
     catalogList: "Catalog",
     settings: "Settings",
+    appearance: "Appearance",
+    themeAtlas: "Blue / White / Green",
+    themeClassic: "Classic",
+    customAppIcon: "Custom icon",
+    resetAppIcon: "Reset",
     closeSettings: "Close settings",
     language: "Language",
     consoleMode: "Console mode",
@@ -577,6 +623,9 @@ const TRANSLATIONS = {
     showWantedOnHome: "Show wanted on home",
     ownedList: "Owned",
     wantedList: "Wanted",
+    allMembers: "All",
+    currentMember: "Me",
+    memberFilter: "Member",
     markOwned: "Owned",
     unmarkOwned: "Remove owned",
     markWanted: "Wanted",
@@ -601,6 +650,11 @@ const TRANSLATIONS = {
     showMore: "Show {count} more",
     showingPartial: "Showing {shown}/{total}",
     recentUpdates: "Recent Updates",
+    releaseMonth: "Release month",
+    releaseMonthSummary: "{month} releases · {count}",
+    releaseDateLabel: "Release {date}",
+    noReleaseItems: "No releases for this month",
+    openPremiumBandai: "View PB",
     viewAllUpdates: "All Updates",
     latestUpdate: "Latest {date}",
     premiumBandai: "PB",
@@ -609,6 +663,7 @@ const TRANSLATIONS = {
     premiumBandaiUpdated: "Updated {date}",
     pbandaiOpenProduct: "Open product page",
     pbandaiUnavailable: "No cached Premium Bandai data yet",
+    pbandaiInternalHint: "Tap a card for the in-app detail. Use the link for the official page.",
     updateRecentEmpty: "No updates to show",
     addedBadge: "Added",
     changedBadge: "Changed",
@@ -757,6 +812,7 @@ const TRANSLATIONS = {
     appTitle: "Collection Atlas",
     homeNav: "ホーム",
     collectionNav: "コレクション",
+    recentUpdatesNav: "更新",
     homeKicker: "コレクション図鑑",
     homeTitle: "Collection Atlas",
     homeOpen: "図鑑を開く",
@@ -783,6 +839,11 @@ const TRANSLATIONS = {
     workSource: "シリーズ",
     catalogList: "一覧",
     settings: "設定",
+    appearance: "外観",
+    themeAtlas: "青白緑",
+    themeClassic: "クラシック",
+    customAppIcon: "カスタムアイコン",
+    resetAppIcon: "標準に戻す",
     closeSettings: "設定を閉じる",
     language: "言語",
     consoleMode: "コンソールモード",
@@ -791,6 +852,9 @@ const TRANSLATIONS = {
     showWantedOnHome: "ホームに欲しいを表示",
     ownedList: "購入済み",
     wantedList: "欲しい",
+    allMembers: "すべて",
+    currentMember: "自分",
+    memberFilter: "メンバー",
     markOwned: "購入済み",
     unmarkOwned: "購入済み解除",
     markWanted: "欲しい",
@@ -815,6 +879,11 @@ const TRANSLATIONS = {
     showMore: "さらに {count} 件表示",
     showingPartial: "{shown}/{total} 表示",
     recentUpdates: "最近の更新",
+    releaseMonth: "発売月",
+    releaseMonthSummary: "{month} 発売 {count} 件",
+    releaseDateLabel: "発売 {date}",
+    noReleaseItems: "この月の発売記録はありません",
+    openPremiumBandai: "PBを見る",
     viewAllUpdates: "すべて",
     latestUpdate: "最新 {date}",
     premiumBandai: "PB",
@@ -823,6 +892,7 @@ const TRANSLATIONS = {
     premiumBandaiUpdated: "更新 {date}",
     pbandaiOpenProduct: "商品ページを開く",
     pbandaiUnavailable: "Premium Bandai のキャッシュデータはまだありません",
+    pbandaiInternalHint: "カードを押すとアプリ内詳細、公式ページはリンクから開きます。",
     updateRecentEmpty: "表示できる更新はありません",
     addedBadge: "追加",
     changedBadge: "変更",
@@ -986,9 +1056,14 @@ const state = {
   collection: { owned: [], wanted: [] },
   homeCollectionVisibility: loadHomeCollectionVisibility(),
   homeCollectionCollapsed: loadHomeCollectionCollapsed(),
+  collectionMemberView: localStorage.getItem(COLLECTION_MEMBER_VIEW_KEY) || "self",
   updateNotifications: localStorage.getItem(UPDATE_NOTIFICATION_KEY) === "true",
   updateNotificationFilters: loadUpdateNotificationFilters(),
   collectionSelection: { owned: new Set(), wanted: new Set() },
+  theme: loadTheme(),
+  appIcon: loadAppIcon(),
+  releaseMonth: localStorage.getItem(RELEASE_MONTH_KEY) || "",
+  radial: { timer: null, active: false, startX: 0, startY: 0, pointerId: null, selected: null },
   syncConfig: loadSyncConfig(),
   syncMeta: loadSyncMeta(),
   syncHistory: loadSyncHistory(),
@@ -1032,12 +1107,16 @@ const state = {
 upgradeLegacyFilterDom();
 
 const elements = {
+  brandMark: document.querySelector("#brandMark"),
   datasetSummary: document.querySelector("#datasetSummary"),
   sectionTitle: document.querySelector("#sectionTitle"),
   bottomNav: document.querySelector("#bottomNav"),
   settingsOpen: document.querySelector("#settingsOpen"),
   settingsDialog: document.querySelector("#settingsDialog"),
   settingsClose: document.querySelector("#settingsClose"),
+  themeList: document.querySelector("#themeList"),
+  appIconInput: document.querySelector("#appIconInput"),
+  resetAppIcon: document.querySelector("#resetAppIcon"),
   consoleModeToggle: document.querySelector("#consoleModeToggle"),
   showOwnedOnHome: document.querySelector("#showOwnedOnHome"),
   showWantedOnHome: document.querySelector("#showWantedOnHome"),
@@ -1067,6 +1146,7 @@ const elements = {
   updatesSection: document.querySelector("#updatesSection"),
   updatesSubtitle: document.querySelector("#updatesSubtitle"),
   updatesOpenSettings: document.querySelector("#updatesOpenSettings"),
+  updatesDateInput: document.querySelector("#updatesDateInput"),
   homeUpdateSummary: document.querySelector("#homeUpdateSummary"),
   sourceHealthStrip: document.querySelector("#sourceHealthStrip"),
   homeUpdateList: document.querySelector("#homeUpdateList"),
@@ -1075,6 +1155,7 @@ const elements = {
   homeTotal: document.querySelector("#homeTotal"),
   pbandaiSection: document.querySelector("#pbandaiSection"),
   pbandaiSubtitle: document.querySelector("#pbandaiSubtitle"),
+  pbandaiFranchiseTabs: document.querySelector("#pbandaiFranchiseTabs"),
   pbandaiList: document.querySelector("#pbandaiList"),
   collectionSection: document.querySelector("#collectionSection"),
   ownedPanel: document.querySelector("#ownedPanel"),
@@ -1086,6 +1167,7 @@ const elements = {
   ownedStrip: document.querySelector("#ownedStrip"),
   wantedStrip: document.querySelector("#wantedStrip"),
   collectionManagement: document.querySelector("#collectionManagement"),
+  collectionMemberFilter: document.querySelector("#collectionMemberFilter"),
   collectionSelectAll: document.querySelector("#collectionSelectAll"),
   collectionSelectionSummary: document.querySelector("#collectionSelectionSummary"),
   deleteSelectedCollection: document.querySelector("#deleteSelectedCollection"),
@@ -1154,6 +1236,7 @@ const elements = {
   saveSeriesLabel: document.querySelector("#saveSeriesLabel"),
   clearSeriesLabel: document.querySelector("#clearSeriesLabel"),
   exportSeriesLabels: document.querySelector("#exportSeriesLabels"),
+  radialMenu: document.querySelector("#radialMenu"),
 };
 
 function upgradeLegacyFilterDom() {
@@ -1427,6 +1510,7 @@ async function init() {
   state.updatedAt = kitsDoc.updated_at;
   refreshKits();
   normalizeState();
+  state.releaseMonth = validReleaseMonth(state.releaseMonth) || defaultReleaseMonth();
   state.selectedKit = state.pendingKitId ? displayKitById(state.pendingKitId) : null;
 
   bindEvents();
@@ -1457,8 +1541,14 @@ function normalizeState() {
   if (!LANGUAGES.some((language) => language.code === state.seriesAdminLanguage)) {
     state.seriesAdminLanguage = state.language;
   }
-  if (!["home", "catalog", "collection", "updates", "owned", "wanted"].includes(state.activeView)) {
+  if (state.activeView === "collection") {
+    state.activeView = "wanted";
+  }
+  if (!["home", "catalog", "updates", "pbandai", "owned", "wanted"].includes(state.activeView)) {
     state.activeView = "home";
+  }
+  if (!THEMES.some((theme) => theme.code === state.theme)) {
+    state.theme = "atlas";
   }
   state.series = normalizeFilterStateValue(state.series);
   state.grade = normalizeFilterStateValue(state.grade);
@@ -1490,6 +1580,27 @@ function loadSeriesLabelOverrides() {
 
 function loadConsoleMode() {
   return localStorage.getItem(CONSOLE_MODE_KEY) === "true";
+}
+
+function loadTheme() {
+  const theme = localStorage.getItem(THEME_KEY);
+  return THEMES.some((item) => item.code === theme) ? theme : "atlas";
+}
+
+function saveTheme() {
+  localStorage.setItem(THEME_KEY, state.theme);
+}
+
+function loadAppIcon() {
+  return localStorage.getItem(APP_ICON_KEY) || "";
+}
+
+function saveAppIcon() {
+  if (state.appIcon) {
+    localStorage.setItem(APP_ICON_KEY, state.appIcon);
+  } else {
+    localStorage.removeItem(APP_ICON_KEY);
+  }
 }
 
 function loadUpdateNotificationFilters() {
@@ -1556,6 +1667,8 @@ function clampCollectionQuantity(value) {
 
 function normalizeCollection(collection = {}) {
   const items = collection.items && typeof collection.items === "object" ? { ...collection.items } : {};
+  const memberItems = collection.member_items && typeof collection.member_items === "object" ? structuredClone(collection.member_items) : {};
+  const self = safeMemberName(memberName());
   const now = new Date().toISOString();
   for (const kitId of Array.isArray(collection.owned) ? collection.owned : []) {
     if (!items[kitId]) {
@@ -1571,6 +1684,10 @@ function normalizeCollection(collection = {}) {
   const wanted = [];
   const normalizedItems = {};
   for (const [kitId, entry] of Object.entries(items)) {
+    if (!memberItems[self]?.[kitId] && entry?.status) {
+      memberItems[self] = memberItems[self] || {};
+      memberItems[self][kitId] = entry;
+    }
     const common = {
       updated_at: entry.updated_at || now,
       updated_by: entry.updated_by || "local",
@@ -1595,7 +1712,42 @@ function normalizeCollection(collection = {}) {
       wanted.push(kitId);
     }
   }
-  return { owned: [...new Set(owned)], wanted: [...new Set(wanted)], items: normalizedItems };
+
+  const normalizedMemberItems = {};
+  for (const [member, memberMap] of Object.entries(memberItems)) {
+    const memberKey = safeMemberName(member);
+    if (!memberKey || !memberMap || typeof memberMap !== "object") {
+      continue;
+    }
+    for (const [kitId, entry] of Object.entries(memberMap)) {
+      if (!entry?.status || !COLLECTION_TYPES.includes(entry.status)) {
+        continue;
+      }
+      const normalizedEntry = normalizeCollectionEntry(entry, now, memberKey);
+      normalizedMemberItems[memberKey] = normalizedMemberItems[memberKey] || {};
+      normalizedMemberItems[memberKey][kitId] = normalizedEntry;
+    }
+  }
+
+  return { owned: [...new Set(owned)], wanted: [...new Set(wanted)], items: normalizedItems, member_items: normalizedMemberItems };
+}
+
+function safeMemberName(value) {
+  return String(value || "member").trim() || "member";
+}
+
+function normalizeCollectionEntry(entry, now = new Date().toISOString(), member = "member") {
+  const normalized = {
+    status: COLLECTION_TYPES.includes(entry.status) ? entry.status : "wanted",
+    updated_at: entry.updated_at || now,
+    updated_by: entry.updated_by || member,
+    quantity: clampCollectionQuantity(entry.quantity ?? entry.wanted_quantity ?? 1),
+  };
+  if (entry.note) normalized.note = String(entry.note);
+  if (entry.storage) normalized.storage = String(entry.storage);
+  const purchasePrice = numericFilterValue(entry.purchase_price);
+  if (purchasePrice !== null) normalized.purchase_price = Math.round(purchasePrice);
+  return normalized;
 }
 
 function loadSyncConfig() {
@@ -1812,6 +1964,13 @@ function closeSettings(options = {}) {
 function bindEvents() {
   elements.settingsOpen.addEventListener("click", openSettings);
   elements.settingsClose.addEventListener("click", closeSettings);
+  elements.appIconInput.addEventListener("change", handleAppIconUpload);
+  elements.resetAppIcon.addEventListener("click", () => {
+    state.appIcon = "";
+    saveAppIcon();
+    elements.appIconInput.value = "";
+    applyAppearance();
+  });
   elements.consoleModeToggle.addEventListener("change", (event) => {
     state.consoleMode = event.target.checked;
     saveConsoleMode();
@@ -1860,18 +2019,13 @@ function bindEvents() {
   elements.refreshAppCache.addEventListener("click", refreshAppCache);
   elements.updateNotificationToggle.addEventListener("change", toggleUpdateNotifications);
   elements.updatesOpenSettings.addEventListener("click", () => {
-    if (state.activeView === "updates") {
-      openSettings();
-      requestAnimationFrame(() => elements.updateLog?.scrollIntoView({ block: "start", behavior: "smooth" }));
-      return;
-    }
-    state.activeView = "updates";
-    state.selectedKit = null;
-    state.activeModal = null;
-    localStorage.setItem(ACTIVE_VIEW_KEY, state.activeView);
-    persistViewState({ mode: "push" });
-    render();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    openSettings();
+    requestAnimationFrame(() => elements.updateLog?.scrollIntoView({ block: "start", behavior: "smooth" }));
+  });
+  elements.updatesDateInput?.addEventListener("change", (event) => {
+    state.releaseMonth = event.target.value || defaultReleaseMonth();
+    localStorage.setItem(RELEASE_MONTH_KEY, state.releaseMonth);
+    renderHomeUpdates();
   });
   elements.searchInput.addEventListener("input", (event) => {
     state.query = event.target.value;
@@ -1977,8 +2131,141 @@ function bindEvents() {
       pullSync({ silent: true });
     }
   });
+  bindRadialMenu();
 
   populateGradeSelect();
+}
+
+function handleAppIconUpload(event) {
+  const file = event.target.files?.[0];
+  if (!file) {
+    return;
+  }
+  const reader = new FileReader();
+  reader.addEventListener("load", () => {
+    state.appIcon = String(reader.result || "");
+    saveAppIcon();
+    applyAppearance();
+  });
+  reader.readAsDataURL(file);
+}
+
+function bindRadialMenu() {
+  if (!elements.radialMenu) {
+    return;
+  }
+  document.addEventListener("pointerdown", startRadialPress, { passive: true });
+  document.addEventListener("pointermove", moveRadialPress, { passive: false });
+  document.addEventListener("pointerup", endRadialPress);
+  document.addEventListener("pointercancel", cancelRadialPress);
+  document.addEventListener("contextmenu", (event) => {
+    if (state.radial.active) {
+      event.preventDefault();
+    }
+  });
+}
+
+function radialTargetAllowed(target) {
+  if (elements.detailDialog.open || elements.settingsDialog.open) {
+    return false;
+  }
+  return !target.closest("input, textarea, select, label, dialog");
+}
+
+function startRadialPress(event) {
+  if (event.pointerType === "mouse" && event.button !== 0) {
+    return;
+  }
+  if (!radialTargetAllowed(event.target)) {
+    return;
+  }
+  cancelRadialPress();
+  state.radial = {
+    timer: setTimeout(() => showRadialMenu(event.clientX, event.clientY), RADIAL_HOLD_MS),
+    active: false,
+    startX: event.clientX,
+    startY: event.clientY,
+    pointerId: event.pointerId,
+    selected: null,
+  };
+}
+
+function moveRadialPress(event) {
+  if (state.radial.pointerId !== event.pointerId) {
+    return;
+  }
+  const dx = event.clientX - state.radial.startX;
+  const dy = event.clientY - state.radial.startY;
+  if (!state.radial.active && Math.hypot(dx, dy) > RADIAL_CANCEL_DISTANCE) {
+    cancelRadialPress();
+    return;
+  }
+  if (!state.radial.active) {
+    return;
+  }
+  event.preventDefault();
+  updateRadialSelection(event.clientX, event.clientY);
+}
+
+function endRadialPress(event) {
+  if (state.radial.pointerId !== event.pointerId) {
+    return;
+  }
+  const selected = state.radial.active ? state.radial.selected : null;
+  cancelRadialPress();
+  if (selected) {
+    openFranchiseCatalog(selected);
+  }
+}
+
+function cancelRadialPress() {
+  clearTimeout(state.radial.timer);
+  state.radial.timer = null;
+  state.radial.active = false;
+  state.radial.pointerId = null;
+  state.radial.selected = null;
+  if (elements.radialMenu) {
+    elements.radialMenu.hidden = true;
+    elements.radialMenu.innerHTML = "";
+  }
+}
+
+function showRadialMenu(x, y) {
+  state.radial.active = true;
+  elements.radialMenu.hidden = false;
+  elements.radialMenu.style.left = `${x}px`;
+  elements.radialMenu.style.top = `${y}px`;
+  elements.radialMenu.innerHTML = "";
+  const radius = 92;
+  FRANCHISES.forEach((franchise, index) => {
+    const angle = -90 + index * (360 / FRANCHISES.length);
+    const radian = (angle * Math.PI) / 180;
+    const item = document.createElement("span");
+    item.className = "radial-item";
+    item.dataset.franchise = franchise;
+    item.style.transform = `translate(calc(-50% + ${Math.cos(radian) * radius}px), calc(-50% + ${Math.sin(radian) * radius}px))`;
+    item.textContent = franchiseShortLabel(franchise);
+    elements.radialMenu.append(item);
+  });
+  const center = document.createElement("span");
+  center.className = "radial-center";
+  center.textContent = "Atlas";
+  elements.radialMenu.append(center);
+}
+
+function updateRadialSelection(x, y) {
+  const dx = x - state.radial.startX;
+  const dy = y - state.radial.startY;
+  if (Math.hypot(dx, dy) < 24) {
+    state.radial.selected = null;
+  } else {
+    const angle = ((Math.atan2(dy, dx) * 180) / Math.PI + 450) % 360;
+    const index = Math.round(angle / (360 / FRANCHISES.length)) % FRANCHISES.length;
+    state.radial.selected = FRANCHISES[index];
+  }
+  elements.radialMenu.querySelectorAll(".radial-item").forEach((item) => {
+    item.classList.toggle("is-active", item.dataset.franchise === state.radial.selected);
+  });
 }
 
 function bindCollectionPanelNavigation(panel, type) {
@@ -2171,7 +2458,8 @@ function updateEntryMatchesNotificationFilters(entry) {
     (filters.bbx && (tags.has("bbx") || tags.has("beyblade"))) ||
     (filters.gundam && tags.has("gundam")) ||
     (filters.armored_core && tags.has("armored_core")) ||
-    (filters.pokemon && tags.has("pokemon"))
+    (filters.pokemon && tags.has("pokemon")) ||
+    (filters.fate && tags.has("fate"))
   );
 }
 
@@ -2478,6 +2766,7 @@ function t(key, params = {}) {
 function translateStaticText() {
   document.documentElement.lang = LANGUAGES.find((language) => language.code === state.language)?.htmlLang ?? "zh-CN";
   document.body.dataset.view = state.activeView;
+  document.body.dataset.theme = state.theme;
   document.querySelectorAll("[data-i18n]").forEach((node) => {
     node.textContent = t(node.dataset.i18n);
   });
@@ -2676,10 +2965,12 @@ function exportCorrections() {
 
 function render() {
   translateStaticText();
+  applyAppearance();
   populateGradeSelect();
   elements.searchInput.value = state.query;
   elements.datasetSummary.textContent = datasetSummary();
   renderLanguageControls();
+  renderThemeControls();
   renderFranchiseFilters();
   renderSeriesControls();
   renderGradeFilters();
@@ -2698,8 +2989,47 @@ function render() {
 
 function renderBottomNav() {
   elements.bottomNav.querySelectorAll("button[data-view]").forEach((button) => {
-    button.classList.toggle("is-active", button.dataset.view === state.activeView);
+    button.classList.toggle("is-active", button.dataset.view === state.activeView || (state.activeView === "pbandai" && button.dataset.view === "catalog"));
   });
+}
+
+function applyAppearance() {
+  document.body.dataset.theme = state.theme;
+  if (elements.brandMark) {
+    elements.brandMark.innerHTML = "";
+    if (state.appIcon) {
+      const img = document.createElement("img");
+      img.src = state.appIcon;
+      img.alt = "Atlas";
+      elements.brandMark.append(img);
+    } else {
+      elements.brandMark.textContent = "A";
+    }
+  }
+  const favicon = document.querySelector('link[rel="icon"]');
+  if (favicon) {
+    favicon.href = state.appIcon || "./icons/icon.svg";
+  }
+}
+
+function renderThemeControls() {
+  if (!elements.themeList) {
+    return;
+  }
+  elements.themeList.innerHTML = "";
+  for (const theme of THEMES) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `segment-button${state.theme === theme.code ? " is-active" : ""}`;
+    button.textContent = theme.label[state.language] || theme.label.en;
+    button.addEventListener("click", () => {
+      state.theme = theme.code;
+      saveTheme();
+      renderThemeControls();
+      applyAppearance();
+    });
+    elements.themeList.append(button);
+  }
 }
 
 function homeMetaKey(franchise) {
@@ -2972,6 +3302,57 @@ function updateEntryPreviewItems(entry, limit = 8, franchise = null) {
   return [...byKey.values()].slice(0, limit);
 }
 
+function validReleaseMonth(value) {
+  const match = /^\d{4}-\d{2}$/.exec(String(value || ""));
+  return match ? match[0] : "";
+}
+
+function releaseMonthForKit(kit) {
+  return validReleaseMonth(String(kit.release_date || "").slice(0, 7));
+}
+
+function releaseDateForDisplay(kit) {
+  return kit.release_date || t("pending");
+}
+
+function defaultReleaseMonth() {
+  const current = localDateKey().slice(0, 7);
+  const months = [...new Set(state.kits.map(releaseMonthForKit).filter(Boolean))].sort();
+  return months.find((month) => month >= current) || months.at(-1) || current;
+}
+
+function releaseItemsForMonth(month = state.releaseMonth, franchise = null) {
+  const target = validReleaseMonth(month) || defaultReleaseMonth();
+  return state.kits
+    .filter((kit) => releaseMonthForKit(kit) === target && (!franchise || kit.franchise === franchise))
+    .sort((a, b) => {
+      const date = String(a.release_date || "").localeCompare(String(b.release_date || ""));
+      if (date) return date;
+      return kitShortName(a).localeCompare(kitShortName(b), state.language);
+    });
+}
+
+function kitIsPremiumBandai(kit) {
+  return itemIsPremiumBandai({
+    kit_id: kit.kit_id,
+    grade_code: kit.grade_code,
+    subline: kit.subline,
+    names: kit.names,
+    source_urls: kit.source_urls,
+    is_premium_bandai: kit.is_premium_bandai,
+  });
+}
+
+function releaseMonthStats(month = state.releaseMonth, franchise = null) {
+  const items = releaseItemsForMonth(month, franchise);
+  return {
+    count: items.length,
+    premium: items.filter(kitIsPremiumBandai).length,
+    watched: items.filter((kit) => ["seed", "double_o"].includes(kitSeriesKey(kit))).length,
+    franchises: new Set(items.map((kit) => kit.franchise)).size,
+  };
+}
+
 function recentUpdateItems(limit = 6, franchise = null) {
   const seen = new Set();
   const items = [];
@@ -3026,78 +3407,67 @@ function renderHomeUpdates() {
     return;
   }
 
-  const entries = updateFeedEntries();
   const isUpdateView = state.activeView === "updates";
-  const currentFranchise = isUpdateView ? null : state.franchise;
   elements.updatesSection.classList.toggle("is-full", isUpdateView);
-  elements.updatesOpenSettings.textContent = isUpdateView ? t("settings") : t("viewAllUpdates");
-  elements.updatesSection.hidden = !["catalog", "updates"].includes(state.activeView) || !entries.length;
+  elements.updatesSection.hidden = !isUpdateView;
   if (elements.updatesSection.hidden) {
     return;
   }
 
-  const visibleEntries = entries.filter((entry) => updateEntryTotal(entry, currentFranchise) > 0);
-  const latest = visibleEntries[0] || entries[0];
-  const stats = updateFeedStats(currentFranchise);
-  const latestItems = updateEntryItems(latest, currentFranchise);
-  elements.updatesSubtitle.textContent = `${t("latestUpdate", { date: visibleEntries[0]?.date || stats.latestDate || latest.date })} · ${t("updateAdded", { count: latestItems.added.length })} · ${t("updateChanged", { count: latestItems.changed.length })}`;
+  state.releaseMonth = validReleaseMonth(state.releaseMonth) || defaultReleaseMonth();
+  elements.updatesDateInput.value = state.releaseMonth;
+  localStorage.setItem(RELEASE_MONTH_KEY, state.releaseMonth);
+
+  const items = releaseItemsForMonth(state.releaseMonth);
+  const stats = releaseMonthStats(state.releaseMonth);
+  elements.updatesSubtitle.textContent = t("releaseMonthSummary", { month: state.releaseMonth, count: items.length });
   renderUpdateSummaryCards(elements.homeUpdateSummary, [
-    { label: t("updateToday"), value: stats.today.count, meta: `${t("premiumBandai")} ${stats.today.premium} · ${t("watchedUpdates")} ${stats.today.watched}` },
-    { label: t("updateWeek"), value: stats.week.count, meta: `${t("premiumBandai")} ${stats.week.premium} · ${t("watchedUpdates")} ${stats.week.watched}` },
-    { label: t("updateMonth"), value: stats.month.count, meta: `${t("premiumBandai")} ${stats.month.premium} · ${t("watchedUpdates")} ${stats.month.watched}` },
-    { label: t("premiumBandai"), value: stats.month.premium, meta: t("updateMonth") },
+    { label: t("releaseMonth"), value: stats.count, meta: state.releaseMonth },
+    { label: t("premiumBandai"), value: stats.premium, meta: t("openPremiumBandai") },
+    { label: t("watchedUpdates"), value: stats.watched, meta: "SEED / 00" },
+    { label: t("franchise"), value: stats.franchises, meta: t("records", { count: state.kits.length }) },
   ]);
-  renderSourceHealthStrip();
+  elements.sourceHealthStrip.hidden = true;
 
   elements.homeUpdateList.innerHTML = "";
-  const items = recentUpdateItems(isUpdateView ? 24 : 6, currentFranchise);
   if (!items.length) {
     const empty = document.createElement("div");
     empty.className = "home-update-empty";
-    empty.textContent = t("updateRecentEmpty");
+    empty.textContent = t("noReleaseItems");
     elements.homeUpdateList.append(empty);
     return;
   }
 
-  for (const item of items) {
-    const kit = displayKitById(item.kit_id);
+  for (const kit of items) {
     const card = document.createElement("button");
     card.type = "button";
     card.className = "home-update-card";
-    card.disabled = !kit;
     const art = document.createElement("div");
     art.className = "home-update-art";
-    if (kit) {
-      appendImageWithFallback(art, kit, {
-        alt: t("boxArtAlt", { name: kitDisplayName(kit) }),
-        onExhausted: () => showPlaceholder(art, item.grade_code || "?"),
-      });
-    } else {
-      showPlaceholder(art, item.grade_code || "?");
-    }
+    appendImageWithFallback(art, kit, {
+      alt: t("boxArtAlt", { name: kitDisplayName(kit) }),
+      onExhausted: () => showPlaceholder(art, kit.grade_code || "?"),
+    });
+    addReleaseBadge(art, kit);
 
     const body = document.createElement("div");
     body.className = "home-update-body";
     const badges = document.createElement("div");
     badges.className = "home-update-badges";
-    for (const label of [updateChangeLabel(item.change_type), itemIsPremiumBandai(item) ? t("premiumBandai") : null, ...(item.watch_tags || []), ...(item.change_reasons || []).slice(0, 2).map(updateReasonLabel)].filter(Boolean)) {
+    for (const label of [franchiseShortLabel(kit.franchise), seriesLabelFromKit(kit), gradeShortLabel(kit), kitIsPremiumBandai(kit) ? t("premiumBandai") : null].filter(Boolean)) {
       const badge = document.createElement("span");
       badge.textContent = label;
       if (label === t("premiumBandai")) badge.className = "is-premium";
       badges.append(badge);
     }
     const title = document.createElement("strong");
-    title.textContent = kit ? kitShortName(kit) : updateItemName(item);
+    title.textContent = kitShortName(kit);
     const meta = document.createElement("span");
-    meta.textContent = [item.date, kit ? kitSeries(kit) : [updateItemSeriesLabel(item), item.grade_code].filter(Boolean).join(" · "), updateReasonSummary(item)].filter(Boolean).join(" · ");
+    meta.textContent = [t("releaseDateLabel", { date: releaseDateForDisplay(kit) }), kitSeries(kit)].filter(Boolean).join(" · ");
     body.append(badges, title, meta);
 
     card.append(art, body);
-    card.addEventListener("click", () => {
-      if (kit) {
-        openDetail(kit);
-      }
-    });
+    card.addEventListener("click", () => openDetail(kit));
     elements.homeUpdateList.append(card);
   }
 }
@@ -3115,6 +3485,49 @@ function pbandaiItems() {
     });
 }
 
+function pbandaiFranchiseForItem(item) {
+  if (item.franchise) {
+    return item.franchise === "gunpla" ? "gundam" : item.franchise;
+  }
+  if (item.category === "gunpla") {
+    return "gundam";
+  }
+  if (item.category === "armored_core") {
+    return "armored_core";
+  }
+  const kit = item.kit_id ? displayKitById(item.kit_id) : null;
+  return kit?.franchise || "";
+}
+
+function pbandaiFranchises() {
+  return [...new Set(pbandaiItems().map(pbandaiFranchiseForItem).filter((franchise) => FRANCHISES.includes(franchise)))];
+}
+
+function pbandaiItemsForFranchise(franchise = state.franchise) {
+  return pbandaiItems()
+    .filter((item) => pbandaiFranchiseForItem(item) === franchise)
+    .sort((a, b) => {
+      const kitA = a.kit_id ? displayKitById(a.kit_id) : null;
+      const kitB = b.kit_id ? displayKitById(b.kit_id) : null;
+      const date = String(kitB?.release_date || "").localeCompare(String(kitA?.release_date || ""));
+      if (date) return date;
+      return String(a.title || a.id).localeCompare(String(b.title || b.id), state.language);
+    });
+}
+
+function navigateToPBandai(franchise = state.franchise) {
+  const available = pbandaiFranchises();
+  state.franchise = available.includes(franchise) ? franchise : available[0] || state.franchise;
+  state.activeView = "pbandai";
+  state.selectedKit = null;
+  state.activeModal = null;
+  localStorage.setItem(FRANCHISE_KEY, state.franchise);
+  localStorage.setItem(ACTIVE_VIEW_KEY, state.activeView);
+  render();
+  persistViewState({ mode: "push" });
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 function safePBandaiImageUrl(item) {
   const image = String(item.image || "").trim();
   if (!image || /^https?:\/\/([^/]+\.)?p-bandai\.jp\//i.test(image)) {
@@ -3128,16 +3541,21 @@ function renderPBandaiProducts() {
     return;
   }
 
-  const items = pbandaiItems();
-  const visibleItems = state.activeView === "updates" ? items.slice(0, 24) : items.slice(0, 6);
-  elements.pbandaiSection.classList.toggle("is-full", state.activeView === "updates");
-  elements.pbandaiSection.hidden = !["catalog", "updates"].includes(state.activeView) || !items.length;
+  const availableFranchises = pbandaiFranchises();
+  if (state.activeView === "pbandai" && availableFranchises.length && !availableFranchises.includes(state.franchise)) {
+    state.franchise = availableFranchises[0];
+  }
+  const items = pbandaiItemsForFranchise(state.franchise);
+  const visibleItems = state.activeView === "pbandai" ? items : [];
+  elements.pbandaiSection.classList.toggle("is-full", state.activeView === "pbandai");
+  elements.pbandaiSection.hidden = state.activeView !== "pbandai" || !availableFranchises.length;
   if (elements.pbandaiSection.hidden) {
     return;
   }
 
   const updatedAt = state.pbandai?.updated_at || visibleItems[0]?.updated_at || "unknown";
-  elements.pbandaiSubtitle.textContent = `${t("premiumBandaiUpdated", { date: String(updatedAt).slice(0, 10) })} · ${items.length}`;
+  elements.pbandaiSubtitle.textContent = `${franchiseLabel(state.franchise)} · ${t("premiumBandaiUpdated", { date: String(updatedAt).slice(0, 10) })} · ${items.length} · ${t("pbandaiInternalHint")}`;
+  renderPBandaiFranchiseTabs(availableFranchises);
   elements.pbandaiList.innerHTML = "";
 
   if (!visibleItems.length) {
@@ -3149,12 +3567,20 @@ function renderPBandaiProducts() {
   }
 
   for (const item of visibleItems) {
-    const card = document.createElement("a");
+    const kit = item.kit_id ? displayKitById(item.kit_id) : null;
+    const card = document.createElement("article");
     card.className = "pbandai-card";
-    card.href = item.url;
-    card.target = "_blank";
-    card.rel = "noreferrer";
     card.setAttribute("aria-label", `${t("pbandaiOpenProduct")}: ${item.title || item.id || item.url}`);
+
+    const main = document.createElement("button");
+    main.type = "button";
+    main.className = "pbandai-card-main";
+    main.disabled = !kit;
+    main.addEventListener("click", () => {
+      if (kit) {
+        openDetail(kit);
+      }
+    });
 
     const art = document.createElement("div");
     art.className = "pbandai-art";
@@ -3169,24 +3595,54 @@ function renderPBandaiProducts() {
     } else {
       showPlaceholder(art, "PB");
     }
+    addReleaseBadge(art, kit || item.release_date || "");
 
     const body = document.createElement("div");
     body.className = "pbandai-body";
     const badges = document.createElement("div");
     badges.className = "home-update-badges";
-    for (const label of [t("premiumBandaiSource"), item.fetch_status && item.fetch_status !== "ok" ? item.fetch_status : null, item.category].filter(Boolean)) {
+    for (const label of [t("premiumBandaiSource"), kit ? seriesLabelFromKit(kit) : franchiseLabel(pbandaiFranchiseForItem(item)), kit ? gradeShortLabel(kit) : null].filter(Boolean)) {
       const badge = document.createElement("span");
       badge.textContent = label;
       if (label === t("premiumBandaiSource")) badge.className = "is-premium";
       badges.append(badge);
     }
     const title = document.createElement("strong");
-    title.textContent = item.title || item.id || item.url;
+    title.textContent = kit ? kitShortName(kit) : item.title || item.id || item.url;
     const meta = document.createElement("span");
-    meta.textContent = [item.price, item.status, item.updated_at ? String(item.updated_at).slice(0, 10) : null].filter(Boolean).join(" · ");
+    meta.textContent = [kit?.release_date ? t("releaseDateLabel", { date: kit.release_date }) : null, item.price].filter(Boolean).join(" · ");
     body.append(badges, title, meta);
-    card.append(art, body);
+    main.append(art, body);
+    const link = document.createElement("a");
+    link.className = "pbandai-official-link";
+    link.href = item.url;
+    link.target = "_blank";
+    link.rel = "noreferrer";
+    link.textContent = t("pbandaiOpenProduct");
+    link.addEventListener("click", persistViewState);
+    card.append(main, link);
     elements.pbandaiList.append(card);
+  }
+}
+
+function renderPBandaiFranchiseTabs(franchises) {
+  if (!elements.pbandaiFranchiseTabs) {
+    return;
+  }
+  elements.pbandaiFranchiseTabs.innerHTML = "";
+  for (const franchise of franchises) {
+    const count = pbandaiItemsForFranchise(franchise).length;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `filter-chip${state.franchise === franchise ? " is-active" : ""}`;
+    button.textContent = `${franchiseShortLabel(franchise)} ${count}`;
+    button.addEventListener("click", () => {
+      state.franchise = franchise;
+      localStorage.setItem(FRANCHISE_KEY, state.franchise);
+      renderPBandaiProducts();
+      persistViewState({ mode: "push" });
+    });
+    elements.pbandaiFranchiseTabs.append(button);
   }
 }
 
@@ -3440,13 +3896,56 @@ function numericFilterValue(value) {
   return Number.isFinite(number) && number >= 0 ? number : null;
 }
 
-function collectionEntry(kitId) {
+function collectionMembers() {
   state.collection = normalizeCollection(state.collection);
-  return kitId ? state.collection.items?.[kitId] || null : null;
+  const members = new Set([safeMemberName(memberName())]);
+  for (const member of Object.keys(state.collection.member_items || {})) {
+    members.add(safeMemberName(member));
+  }
+  return [...members].sort((a, b) => (a === safeMemberName(memberName()) ? -1 : b === safeMemberName(memberName()) ? 1 : a.localeCompare(b)));
 }
 
-function collectionQuantityForKit(kitId) {
-  return clampCollectionQuantity(collectionEntry(kitId)?.quantity ?? 1);
+function activeCollectionMember() {
+  const value = state.collectionMemberView || "self";
+  if (value === "all") {
+    return "all";
+  }
+  if (value === "self") {
+    return safeMemberName(memberName());
+  }
+  return safeMemberName(value);
+}
+
+function editableCollectionMember() {
+  return safeMemberName(memberName());
+}
+
+function memberCollectionMap(member = editableCollectionMember()) {
+  state.collection = normalizeCollection(state.collection);
+  state.collection.member_items = state.collection.member_items || {};
+  state.collection.member_items[member] = state.collection.member_items[member] || {};
+  return state.collection.member_items[member];
+}
+
+function collectionEntry(kitId, member = editableCollectionMember()) {
+  state.collection = normalizeCollection(state.collection);
+  return kitId ? state.collection.member_items?.[member]?.[kitId] || null : null;
+}
+
+function collectionEntriesForKit(kitId, type = null) {
+  state.collection = normalizeCollection(state.collection);
+  const entries = [];
+  for (const [member, memberMap] of Object.entries(state.collection.member_items || {})) {
+    const entry = memberMap?.[kitId];
+    if (entry?.status && (!type || entry.status === type)) {
+      entries.push({ member, entry });
+    }
+  }
+  return entries;
+}
+
+function collectionQuantityForKit(kitId, member = editableCollectionMember()) {
+  return clampCollectionQuantity(collectionEntry(kitId, member)?.quantity ?? 1);
 }
 
 function wantedBudgetForKits(kits) {
@@ -3636,15 +4135,23 @@ function removeCollectionItems(type, kitIds) {
   }
 
   const deleteSet = new Set(kitIds);
-  const nextItems = { ...(state.collection.items || {}) };
-  for (const kitId of deleteSet) {
-    if (nextItems[kitId]?.status === type) {
-      delete nextItems[kitId];
+  const member = activeCollectionMember();
+  const targetMembers = member === "all" ? collectionMembers() : [member];
+  const nextMemberItems = { ...(state.collection.member_items || {}) };
+  for (const targetMember of targetMembers) {
+    const nextItems = { ...(nextMemberItems[targetMember] || {}) };
+    for (const kitId of deleteSet) {
+      if (nextItems[kitId]?.status === type) {
+        delete nextItems[kitId];
+      }
+      if (state.collection.items?.[kitId]?.status === type) {
+        delete state.collection.items[kitId];
+      }
+      collectionSelection(type).delete(kitId);
     }
-    collectionSelection(type).delete(kitId);
+    nextMemberItems[targetMember] = nextItems;
   }
-  state.collection.items = nextItems;
-  state.collection[type] = (Array.isArray(state.collection[type]) ? state.collection[type] : []).filter((kitId) => !deleteSet.has(kitId));
+  state.collection.member_items = nextMemberItems;
 
   saveCollection();
   renderCollections();
@@ -3685,6 +4192,7 @@ function renderCollectionManagement(kits) {
     return;
   }
 
+  renderCollectionMemberFilter(type);
   pruneCollectionSelection(type);
   const editable = canEditSharedData();
   const visibleIds = visibleCollectionIds(kits);
@@ -3701,21 +4209,85 @@ function renderCollectionManagement(kits) {
   elements.collectionSelectionSummary.textContent = t("selectedCount", { selected: selectedIds.length, total });
 }
 
-function collectionIds(type) {
-  state.collection = normalizeCollection(state.collection);
-  return state.collection[type] || [];
+function renderCollectionMemberFilter(type) {
+  if (!elements.collectionMemberFilter) {
+    return;
+  }
+  elements.collectionMemberFilter.innerHTML = "";
+  const options = [
+    ["all", t("allMembers")],
+    ["self", t("currentMember")],
+    ...collectionMembers()
+      .filter((member) => member !== editableCollectionMember())
+      .map((member) => [member, member]),
+  ];
+  for (const [value, label] of options) {
+    const button = document.createElement("button");
+    button.type = "button";
+    const isActive =
+      state.collectionMemberView === value ||
+      (value === "self" && activeCollectionMember() === editableCollectionMember()) ||
+      (value !== "self" && value !== "all" && activeCollectionMember() === value);
+    button.className = `member-chip${isActive ? " is-active" : ""}`;
+    button.textContent = label;
+    button.addEventListener("click", () => {
+      state.collectionMemberView = value;
+      localStorage.setItem(COLLECTION_MEMBER_VIEW_KEY, state.collectionMemberView);
+      state.collectionSelection[type] = new Set();
+      renderKits();
+    });
+    elements.collectionMemberFilter.append(button);
+  }
 }
 
-function wantedQuantityForKit(kitId) {
+function collectionIds(type) {
+  state.collection = normalizeCollection(state.collection);
+  const member = activeCollectionMember();
+  if (member === "all") {
+    const ids = [];
+    for (const memberMap of Object.values(state.collection.member_items || {})) {
+      for (const [kitId, entry] of Object.entries(memberMap || {})) {
+        if (entry?.status === type) {
+          ids.push(kitId);
+        }
+      }
+    }
+    return [...new Set(ids)];
+  }
+  return Object.entries(state.collection.member_items?.[member] || {})
+    .filter(([, entry]) => entry?.status === type)
+    .map(([kitId]) => kitId);
+}
+
+function wantedQuantityForKit(kitId, member = editableCollectionMember()) {
   if (!kitId) {
     return 1;
   }
   state.collection = normalizeCollection(state.collection);
-  return clampCollectionQuantity(state.collection.items?.[kitId]?.quantity ?? 1);
+  return clampCollectionQuantity(state.collection.member_items?.[member]?.[kitId]?.quantity ?? 1);
 }
 
-function kitInCollection(kitId, type) {
-  return collectionIds(type).includes(kitId);
+function kitInCollection(kitId, type, member = editableCollectionMember()) {
+  return collectionEntry(kitId, member)?.status === type;
+}
+
+function collectionQuantityForView(kitId, type) {
+  const member = activeCollectionMember();
+  if (member === "all") {
+    return collectionEntriesForKit(kitId, type).reduce((total, { entry }) => total + clampCollectionQuantity(entry.quantity), 0);
+  }
+  return clampCollectionQuantity(collectionEntry(kitId, member)?.quantity ?? 1);
+}
+
+function collectionOwnerSummary(kitId, type) {
+  const member = activeCollectionMember();
+  if (member === "all") {
+    return collectionEntriesForKit(kitId, type)
+      .map(({ member: owner, entry }) => `${owner} ×${clampCollectionQuantity(entry.quantity)}`)
+      .join(" / ");
+  }
+  const entry = collectionEntry(kitId, member);
+  return entry?.status === type ? `${member} ×${clampCollectionQuantity(entry.quantity)}` : "";
 }
 
 function updateSelectedWantedQuantity(value) {
@@ -3728,17 +4300,16 @@ function updateSelectedWantedQuantity(value) {
     return;
   }
 
-  const current = state.collection.items?.[kit.kit_id] || {};
-  state.collection.items = {
-    ...(state.collection.items || {}),
-    [kit.kit_id]: {
-      ...current,
-      status: "wanted",
-      quantity: clampCollectionQuantity(value),
-      updated_at: new Date().toISOString(),
-      updated_by: memberName(),
-    },
+  const member = editableCollectionMember();
+  const current = collectionEntry(kit.kit_id, member) || {};
+  memberCollectionMap(member)[kit.kit_id] = {
+    ...current,
+    status: "wanted",
+    quantity: clampCollectionQuantity(value),
+    updated_at: new Date().toISOString(),
+    updated_by: member,
   };
+  state.collection.items = { ...(state.collection.items || {}), [kit.kit_id]: memberCollectionMap(member)[kit.kit_id] };
 
   saveCollection();
   renderCollections();
@@ -3767,7 +4338,7 @@ function saveSelectedCollectionDetails() {
     note: elements.collectionNoteInput.value.trim(),
     storage: elements.storageLocationInput.value.trim(),
     updated_at: new Date().toISOString(),
-    updated_by: memberName(),
+    updated_by: editableCollectionMember(),
   };
   if (purchasePrice === null) {
     delete nextEntry.purchase_price;
@@ -3777,10 +4348,9 @@ function saveSelectedCollectionDetails() {
   if (!nextEntry.note) delete nextEntry.note;
   if (!nextEntry.storage) delete nextEntry.storage;
 
-  state.collection.items = {
-    ...(state.collection.items || {}),
-    [kit.kit_id]: nextEntry,
-  };
+  const member = editableCollectionMember();
+  memberCollectionMap(member)[kit.kit_id] = nextEntry;
+  state.collection.items = { ...(state.collection.items || {}), [kit.kit_id]: nextEntry };
   saveCollection();
   renderCollections();
   renderKits();
@@ -3798,21 +4368,20 @@ function toggleKitCollection(type) {
   }
 
   if (kitInCollection(kit.kit_id, type)) {
-    state.collection.items = {
-      ...(state.collection.items || {}),
-      [kit.kit_id]: { status: null, updated_at: new Date().toISOString(), updated_by: memberName() },
-    };
+    delete memberCollectionMap(editableCollectionMember())[kit.kit_id];
+    if (state.collection.items?.[kit.kit_id]?.status === type) {
+      delete state.collection.items[kit.kit_id];
+    }
   } else {
+    const member = editableCollectionMember();
     const nextEntry = {
       status: type,
-      quantity: collectionQuantityForKit(kit.kit_id),
+      quantity: collectionQuantityForKit(kit.kit_id, member),
       updated_at: new Date().toISOString(),
-      updated_by: memberName(),
+      updated_by: member,
     };
-    state.collection.items = {
-      ...(state.collection.items || {}),
-      [kit.kit_id]: nextEntry,
-    };
+    memberCollectionMap(member)[kit.kit_id] = nextEntry;
+    state.collection.items = { ...(state.collection.items || {}), [kit.kit_id]: nextEntry };
   }
 
   saveCollection();
@@ -3822,24 +4391,23 @@ function toggleKitCollection(type) {
 }
 
 function renderCollections() {
-  const isCollectionView = state.activeView === "collection";
   const isCatalogView = state.activeView === "catalog";
-  const ownedLength = renderCollectionStrip("owned", elements.ownedStrip, elements.ownedCount, elements.ownedPanel, elements.ownedCollapse, isCollectionView);
-  const wantedLength = renderCollectionStrip("wanted", elements.wantedStrip, elements.wantedCount, elements.wantedPanel, elements.wantedCollapse, isCollectionView);
-  const ownedVisible = isCollectionView || (state.homeCollectionVisibility.owned && ownedLength > 0);
-  const wantedVisible = isCollectionView || (state.homeCollectionVisibility.wanted && wantedLength > 0);
+  const ownedLength = renderCollectionStrip("owned", elements.ownedStrip, elements.ownedCount, elements.ownedPanel, elements.ownedCollapse, false);
+  const wantedLength = renderCollectionStrip("wanted", elements.wantedStrip, elements.wantedCount, elements.wantedPanel, elements.wantedCollapse, false);
+  const ownedVisible = state.homeCollectionVisibility.owned && ownedLength > 0;
+  const wantedVisible = state.homeCollectionVisibility.wanted && wantedLength > 0;
   elements.ownedPanel.hidden = !ownedVisible;
   elements.wantedPanel.hidden = !wantedVisible;
   const visibleCount = [ownedVisible, wantedVisible].filter(Boolean).length;
   elements.collectionSection.classList.toggle("is-single", visibleCount === 1);
-  elements.collectionSection.classList.toggle("is-collection-view", isCollectionView);
-  elements.collectionSection.hidden = isCollectionView ? false : visibleCount === 0 || !isCatalogView;
+  elements.collectionSection.classList.toggle("is-collection-view", false);
+  elements.collectionSection.hidden = visibleCount === 0 || !isCatalogView;
 }
 
 function renderCollectionStrip(type, strip, countNode, panel, collapseButton, forceVisible = false) {
   const ids = collectionIds(type).filter((kitId) => displayKitById(kitId));
   state.collection[type] = ids;
-  const count = ids.reduce((total, kitId) => total + collectionQuantityForKit(kitId), 0);
+  const count = ids.reduce((total, kitId) => total + collectionQuantityForView(kitId, type), 0);
   const collapsed = state.homeCollectionCollapsed[type];
   const label = t(type === "owned" ? "ownedList" : "wantedList");
   countNode.textContent = String(count);
@@ -3882,7 +4450,7 @@ function renderCollectionStrip(type, strip, countNode, panel, collapseButton, fo
     };
     appendImageWithFallback(item, kit, { onExhausted: showCollectionFallback });
 
-    const quantity = collectionQuantityForKit(kitId);
+    const quantity = collectionQuantityForView(kitId, type);
     if (quantity > 1) {
       const badge = document.createElement("span");
       badge.className = "collection-quantity";
@@ -4074,6 +4642,15 @@ function renderFranchiseFilters() {
       render();
       persistViewState({ mode: "push" });
     });
+    elements.franchiseList.append(button);
+  }
+  const pbCount = pbandaiItemsForFranchise(state.franchise).length;
+  if (pbCount) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "segment-button pb-segment-button";
+    button.textContent = `${t("premiumBandai")} ${pbCount}`;
+    button.addEventListener("click", () => navigateToPBandai(state.franchise));
     elements.franchiseList.append(button);
   }
 }
@@ -4459,6 +5036,7 @@ function renderKits() {
       alt: t("boxArtAlt", { name: fullName }),
       onExhausted: () => showPlaceholder(boxArt, kit.grade_code),
     });
+    addReleaseBadge(boxArt, kit);
 
     const badges = card.querySelector(".kit-badges");
     for (const label of [seriesLabelFromKit(kit), gradeShortLabel(kit)]) {
@@ -4466,11 +5044,14 @@ function renderKits() {
       badge.textContent = label;
       badges.append(badge);
     }
-    const collectionLabel = kitInCollection(kit.kit_id, "owned")
-      ? `${t("markOwned")} ×${collectionQuantityForKit(kit.kit_id)}`
-      : kitInCollection(kit.kit_id, "wanted")
-        ? `${t("markWanted")} ×${wantedQuantityForKit(kit.kit_id)}`
-        : null;
+    const viewType = activeCollectionType();
+    const collectionLabel = viewType
+      ? collectionOwnerSummary(kit.kit_id, viewType)
+      : kitInCollection(kit.kit_id, "owned")
+        ? `${t("markOwned")} ×${collectionQuantityForKit(kit.kit_id)}`
+        : kitInCollection(kit.kit_id, "wanted")
+          ? `${t("markWanted")} ×${wantedQuantityForKit(kit.kit_id)}`
+          : null;
     if (collectionLabel) {
       const badge = document.createElement("span");
       badge.className = "status-badge";
@@ -4523,7 +5104,7 @@ function renderDetail(kit) {
   fillCorrectionForm(kit);
   renderConsoleMode();
 
-  const officialUrl = kit.source_urls?.[0];
+  const officialUrl = primaryOfficialUrl(kit);
   if (officialUrl) {
     elements.detailOfficialLink.href = officialUrl;
     elements.detailOfficialLink.hidden = false;
@@ -4674,6 +5255,25 @@ function formatPrice(value) {
 function showPlaceholder(container, gradeCode) {
   container.classList.add("is-placeholder");
   container.innerHTML = `<span>${escapeHtml(gradeCode)}</span>`;
+}
+
+function primaryOfficialUrl(kit) {
+  const urls = kit.source_urls || [];
+  if (state.activeView === "pbandai") {
+    return urls.find((url) => /p-bandai\.jp/i.test(url)) || urls[0];
+  }
+  return urls[0];
+}
+
+function addReleaseBadge(container, kitOrDate) {
+  const date = typeof kitOrDate === "string" ? kitOrDate : kitOrDate?.release_date;
+  if (!date || container.querySelector(".release-date-badge")) {
+    return;
+  }
+  const badge = document.createElement("span");
+  badge.className = "release-date-badge";
+  badge.textContent = date;
+  container.append(badge);
 }
 
 function escapeHtml(value) {

@@ -9,14 +9,14 @@
     <title>Collection Atlas</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260706-atlas" />
+    <link rel="stylesheet" href="./styles.css?v=20260706-collection-nav" />
   </head>
   <body>
     <main class="catalog-page">
       <header class="page-header">
         <div class="top-bar">
           <div class="brand-line">
-            <span class="brand-mark">A</span>
+            <span class="brand-mark" id="brandMark">A</span>
             <span>Atlas</span>
           </div>
           <div class="segmented-control franchise-control" id="franchiseList" aria-label="选择作品分类"></div>
@@ -80,7 +80,10 @@
             <h2 data-i18n="recentUpdates">最近更新</h2>
             <p id="updatesSubtitle"></p>
           </div>
-          <button class="secondary-button compact-button" id="updatesOpenSettings" type="button" data-i18n="viewAllUpdates">全部记录</button>
+          <div class="updates-actions">
+            <input id="updatesDateInput" type="month" aria-label="选择发售月份" data-i18n-aria="releaseMonth" />
+            <button class="secondary-button compact-button" id="updatesOpenSettings" type="button" data-i18n="settings">设置</button>
+          </div>
         </div>
         <div class="home-update-summary" id="homeUpdateSummary"></div>
         <div class="source-health-strip" id="sourceHealthStrip"></div>
@@ -94,6 +97,7 @@
             <p id="pbandaiSubtitle"></p>
           </div>
         </div>
+        <div class="pb-franchise-tabs" id="pbandaiFranchiseTabs"></div>
         <div class="pbandai-list" id="pbandaiList"></div>
       </section>
 
@@ -126,6 +130,7 @@
           <span id="resultCount">0 results</span>
         </div>
         <div class="collection-management" id="collectionManagement" hidden>
+          <div class="collection-member-filter" id="collectionMemberFilter"></div>
           <label class="collection-select-all">
             <input id="collectionSelectAll" type="checkbox" />
             <span data-i18n="selectVisible">全选当前</span>
@@ -141,7 +146,9 @@
     <nav class="bottom-nav" id="bottomNav" aria-label="主导航">
       <button type="button" data-view="home" class="is-active"><span>⌂</span><strong data-i18n="homeNav">首页</strong></button>
       <button type="button" data-view="catalog"><span>⌕</span><strong data-i18n="catalogList">图鉴</strong></button>
-      <button type="button" data-view="collection"><span>☆</span><strong data-i18n="collectionNav">收藏</strong></button>
+      <button type="button" data-view="updates"><span>↻</span><strong data-i18n="recentUpdatesNav">最近更新</strong></button>
+      <button type="button" data-view="wanted"><span>☆</span><strong data-i18n="wantedList">想要</strong></button>
+      <button type="button" data-view="owned"><span>✓</span><strong data-i18n="ownedList">已购买</strong></button>
       <button type="button" data-view="settings"><span>⚙</span><strong data-i18n="settings">设置</strong></button>
     </nav>
 
@@ -264,6 +271,17 @@
         <section class="settings-section">
           <h3 data-i18n="language">语言</h3>
           <div class="segmented-control language-control" id="languageList" aria-label="选择语言"></div>
+        </section>
+        <section class="settings-section">
+          <h3 data-i18n="appearance">外观</h3>
+          <div class="segmented-control theme-control" id="themeList" aria-label="选择主题"></div>
+          <div class="icon-setting-row">
+            <label class="icon-upload">
+              <span data-i18n="customAppIcon">自定义图标</span>
+              <input id="appIconInput" type="file" accept="image/*" />
+            </label>
+            <button class="secondary-button compact-button" id="resetAppIcon" type="button" data-i18n="resetAppIcon">恢复默认</button>
+          </div>
         </section>
         <section class="settings-section">
           <h3 data-i18n="homeDisplay">主页显示</h3>
@@ -390,6 +408,8 @@
       </div>
     </dialog>
 
-    <script type="module" src="./main.js?v=20260706-atlas"></script>
+    <div class="radial-menu" id="radialMenu" hidden aria-hidden="true"></div>
+
+    <script type="module" src="./main.js?v=20260706-collection-nav"></script>
   </body>
 </html>
