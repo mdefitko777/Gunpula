@@ -256,6 +256,48 @@ const SERIES = [
     pattern: /Pokemon|Pokémon|ポケモン|PokePla/i,
   },
   {
+    key: "fate_fgo",
+    sort: 430,
+    labels: { zh: "FGO", en: "FGO", ja: "FGO", ko: "FGO" },
+    universe: "Fate",
+    pattern: /Fate\/Grand Order|Grand Order|FGO|マシュ|アルトリア|キャスター\/アルトリア|セイバー|ジャンヌ|モルガン|メリュジーヌ|ギルガメッシュ|スカサハ|エレシュキガル|ネロ|オベロン|BB|メリュジーヌ|Mash|Artoria|Altria|Morgan|Melusine|Gilgamesh|Scathach|Ereshkigal|Nero|Oberon/i,
+  },
+  {
+    key: "fate_stay_night",
+    sort: 431,
+    labels: { zh: "stay night", en: "stay night", ja: "stay night", ko: "stay night" },
+    universe: "Fate",
+    pattern: /Fate\/stay night|Heaven'?s Feel|Unlimited Blade Works|衛宮士郎|遠坂凛|間桐桜|Saber|Rin Tohsaka|Sakura Matou/i,
+  },
+  {
+    key: "fate_zero",
+    sort: 432,
+    labels: { zh: "Zero", en: "Zero", ja: "Zero", ko: "Zero" },
+    universe: "Fate",
+    pattern: /Fate\/Zero|Zero|衛宮切嗣|アイリスフィール|Kiritsugu|Irisviel/i,
+  },
+  {
+    key: "fate_extra",
+    sort: 433,
+    labels: { zh: "EXTRA", en: "EXTRA", ja: "EXTRA", ko: "EXTRA" },
+    universe: "Fate",
+    pattern: /Fate\/EXTRA|EXTELLA|EXTRA|ネロ・クラウディウス|玉藻の前|Tamamo/i,
+  },
+  {
+    key: "fate_apocrypha",
+    sort: 434,
+    labels: { zh: "Apocrypha", en: "Apocrypha", ja: "Apocrypha", ko: "Apocrypha" },
+    universe: "Fate",
+    pattern: /Fate\/Apocrypha|Apocrypha|ジャンヌ・ダルク|モードレッド|Astolfo|Mordred/i,
+  },
+  {
+    key: "type_moon",
+    sort: 435,
+    labels: { zh: "型月", en: "TYPE-MOON", ja: "TYPE-MOON", ko: "타입문" },
+    universe: "TYPE-MOON",
+    pattern: /TYPE-MOON|月姫|空の境界|Kara no Kyoukai|Garden of Sinners|魔法使いの夜|Mahoutsukai|Tsukihime|Arcueid|Shiki/i,
+  },
+  {
     key: "armored_core",
     sort: 410,
     labels: { zh: "AC", en: "Armored Core", ja: "AC", ko: "AC" },
@@ -313,7 +355,20 @@ const DEFAULT_SERIES = {
   universe: "unknown",
 };
 
-const NON_GUNDAM_SERIES_KEYS = new Set(["pokemon", "armored_core", "beyblade_limited", "beyblade_bx", "beyblade_ux", "beyblade_cx"]);
+const NON_GUNDAM_SERIES_KEYS = new Set([
+  "pokemon",
+  "armored_core",
+  "beyblade_limited",
+  "beyblade_bx",
+  "beyblade_ux",
+  "beyblade_cx",
+  "fate_fgo",
+  "fate_stay_night",
+  "fate_zero",
+  "fate_extra",
+  "fate_apocrypha",
+  "type_moon",
+]);
 
 function isGundamSeries(series) {
   return !NON_GUNDAM_SERIES_KEYS.has(series.key);
@@ -830,6 +885,15 @@ function seriesForKit(kit) {
   }
   if (kit.franchise === "armored_core") {
     return SERIES.find((series) => series.key === "armored_core");
+  }
+  if (kit.franchise === "fate") {
+    const text = [kit.work_title, kit.universe, kit.names?.ja, kit.names?.en, kit.names?.zh, kit.names?.ko, kit.subline, ...(kit.tags ?? [])]
+      .map(decodeHtml)
+      .join(" ");
+    return (
+      SERIES.find((series) => ["fate_fgo", "fate_stay_night", "fate_zero", "fate_extra", "fate_apocrypha", "type_moon"].includes(series.key) && series.pattern.test(text)) ||
+      SERIES.find((series) => series.key === "fate_fgo")
+    );
   }
   if (kit.franchise === "beyblade") {
     const text = [kit.names?.ja, kit.names?.en, kit.names?.zh, kit.names?.ko, kit.subline, ...(kit.tags ?? [])].map(decodeHtml).join(" ");

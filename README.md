@@ -1,11 +1,12 @@
-# Gunpula
+# Collection Atlas
 
-Gunpla catalog data project.
+Collectible catalog and collection app for Gunpla, Armored Core, Pokemon,
+Fate/FGO, and BEYBLADE X.
 
-The project keeps Gunpla grades/model lines and individual kit records in
-structured JSON files, then validates and reports on that data with small Node
-scripts. The long-term goal is to support automated imports from Japanese
-official and Japanese retail catalog sources instead of hand-entering every kit.
+The project keeps product lines and individual product records in structured
+JSON files, then validates, imports, and reports on that data with small Node
+scripts. The static `app/` frontend reads those JSON files and presents them as
+a mobile-first collection atlas instead of a database table.
 
 ## Files
 
@@ -14,6 +15,7 @@ official and Japanese retail catalog sources instead of hand-entering every kit.
 - `data/kits.json` - individual kit records.
 - `data/pbandai_sources.json` - Premium Bandai JP URLs for the offline crawler.
 - `data/pbandai.json` - cached Premium Bandai JP products read by the static app.
+- `data/pbandai_manual_products.json` - manually maintained PB/official fallback records.
 - `schema/kit.schema.json` - kit record shape for reference.
 - `docs/grades.md` - readable Chinese grade reference.
 - `docs/data-model.md` - kit data model and validation rules.
@@ -27,6 +29,9 @@ official and Japanese retail catalog sources instead of hand-entering every kit.
 - `scripts/serve_app.mjs` - serves the local catalog UI.
 - `scripts/import_bandai_spirits_gunpla.mjs` - imports the Japanese official BANDAI SPIRITS Gunpla catalog.
 - `scripts/import_bandai_collectibles.mjs` - imports official Bandai Candy, Bandai Gashapon, Pokemon, Armored Core, and BEYBLADE X lines.
+- `scripts/import_goodsmile_fate.mjs` - imports Fate/FGO figure and goods records from Good Smile official pages.
+- `scripts/import_pokemon_center_jp.mjs` - imports Pokemon Center Japan plush/toy supplement records.
+- `scripts/import_pbandai_manual_products.mjs` - merges manual PB and official fallback records into the catalog.
 - `scripts/crawl_pbandai.py` - safely fetches Premium Bandai JP pages into `data/pbandai.json`.
 - `scripts/cache_catalog_images.mjs` - stores fragile remote cover images in a local cache or repo asset folder.
 - `scripts/check_image_health.mjs` - checks whether cover and gallery image candidates still respond.
@@ -44,7 +49,11 @@ npm run sources
 npm run app
 npm run import:bandai
 npm run import:collectibles
+npm run import:fate
+npm run import:pokemon-center
+npm run import:pbandai-manual
 npm run import:official
+npm run import:data
 npm run duplicates
 npm run audit:gundam-series
 npm run check:images
@@ -66,6 +75,7 @@ npm.cmd run stats
 npm.cmd run app
 npm.cmd run import:bandai
 npm.cmd run import:official
+npm.cmd run import:data
 npm.cmd run duplicates
 npm.cmd run audit:gundam-series
 ```
@@ -75,15 +85,19 @@ directly. The crawler uses only the Python standard library.
 
 ## Current Status
 
-The catalog currently validates 4,465 product records across Gundam, Armored
-Core, Pokemon, and BEYBLADE X lines. Records include official product images,
-release dates, JPY prices where available, source links, four-language names,
-and compact series labels such as `SEED`, `00`, `W`, `Iron-Blooded Orphans`,
-`Crossbone`, `Hathaway`, `BX`, `UX`, `CX`, and `Limited`.
+The catalog currently validates 4,680 product records across Gundam, Armored
+Core, Pokemon, Fate/FGO, and BEYBLADE X lines. Records include official product
+images, release dates, JPY prices where available, source links, four-language
+names, and compact series labels such as `SEED`, `00`, `W`, `Iron-Blooded
+Orphans`, `Crossbone`, `Hathaway`, `FGO`, `BX`, `UX`, `CX`, and `Limited`.
 
 The local website is static. It does not live-fetch official pages while a user
 browses. Run `npm run import:official` to refresh the JSON data from Japanese
 official sources; that command can later be wired to a scheduled job.
+
+The current mobile UI is branded as Collection Atlas: a soft blue/white/green
+PWA with a visual home page, four-tab bottom navigation, catalog browsing, and a
+separate collection view for owned and wanted items.
 
 ## Premium Bandai JP Cache
 
@@ -101,9 +115,20 @@ CAPTCHA bypass, proxy rotation, or hidden anti-bot bypass. If Premium Bandai
 redirects or blocks the request, the crawler writes `fetch_status: "blocked"`
 with an error message and still exits cleanly.
 
-Manual fallback is supported: add or edit items in `data/pbandai.json`, and set
-`"manual": true` if you want the crawler to keep that record when a later fetch
-is blocked or errors. A successful fetch for the same item can replace it.
+Manual fallback is supported in two places:
+
+1. Add simple display-only cache records directly in `data/pbandai.json`.
+2. Add catalog records in `data/pbandai_manual_products.json`, then run
+   `npm run import:pbandai-manual`.
+
+Set `"manual": true` in `data/pbandai.json` if you want the PB cache generator
+to keep that record when a later fetch is blocked or errors. A successful fetch
+for the same item can replace it.
+
+The Node PB index importer also links existing catalog records to PB item URLs
+when official Bandai/PB pages expose those links. The current generated PB cache
+includes Gunpla PB records plus manual Armored Core PB records, while still
+avoiding frontend requests to `p-bandai.jp`.
 
 GitHub Pages cannot run crawler code. A Japan VPS can run it daily and push the
 changed JSON back to GitHub. Example cron, not enabled automatically:
@@ -129,9 +154,9 @@ prune, and re-check loop for Pokemon images.
 
 The `app/` UI is installable as an Android PWA. Open the hosted `/app/` URL in
 Chrome on Android and use **Add to Home screen** / **Install app**. The service
-worker caches the app shell, catalog JSON, and product images that have been
-opened, so the app remains usable when the network or official image URLs are
-unreliable.
+worker caches the app shell, catalog JSON, PB cache JSON, and product images
+that have been opened, so the app remains usable when the network or official
+image URLs are unreliable.
 
 For a Play Store-style APK later, wrap the same web app with Capacitor after the
 Supabase settings are finalized. A base `capacitor.config.json` is included; run
@@ -168,5 +193,6 @@ refreshed JSON and cached assets back to the repository.
 
 1. Review `data/duplicate-candidates.json` and merge real duplicates.
 2. Manually review collectible records still marked as `other`, `mixed`, or `option`.
-3. Expand the Gundam series audit rules when a new recurring misclassification is found.
-4. Move image caching from local-computer backup to a hosted cache if official hotlinking becomes unstable.
+3. Expand Fate, Pokemon, and PB historical imports as more official source pages are identified.
+4. Expand the Gundam series audit rules when a new recurring misclassification is found.
+5. Move image caching from local-computer backup to a hosted cache if official hotlinking becomes unstable.

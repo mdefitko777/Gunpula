@@ -13,7 +13,10 @@
     "export:grades": "node scripts/export_grades_markdown.mjs",
     "import:bandai": "node scripts/import_bandai_spirits_gunpla.mjs",
     "import:pb": "node scripts/import_premium_bandai_jp.mjs",
+    "import:pbandai-manual": "node scripts/import_pbandai_manual_products.mjs",
     "import:collectibles": "node scripts/import_bandai_collectibles.mjs",
+    "import:fate": "node scripts/import_goodsmile_fate.mjs",
+    "import:pokemon-center": "node scripts/import_pokemon_center_jp.mjs",
     "localize": "node scripts/localize_catalog.mjs",
     "cache:ac-images": "node scripts/cache_ac_images.mjs",
     "cache:catalog-images": "node scripts/cache_catalog_images.mjs",
@@ -32,7 +35,7 @@
     "android:sync": "npx @capacitor/cli sync android",
     "android:add": "npx @capacitor/cli add android",
     "android:build": "npm run android:sync && cd android && gradlew assembleDebug",
-    "import:data": "npm run import:bandai && npm run import:collectibles && npm run import:pb && npm run localize && npm run check:sources",
+    "import:data": "npm run import:bandai && npm run import:collectibles && npm run import:pokemon-center && npm run import:fate && npm run import:pbandai-manual && npm run import:pb && npm run localize && npm run check:sources",
     "import:official": "npm run import:data"
   }
 }

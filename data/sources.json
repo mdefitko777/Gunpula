@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-06-17",
+  "updated_at": "2026-07-06",
   "sources": [
     {
       "source_id": "manual_seed",
@@ -9,8 +9,13 @@
       "country": null,
       "base_url": null,
       "priority": 0,
-      "best_for": ["schema testing", "placeholder records"],
-      "weak_for": ["verified catalog facts"],
+      "best_for": [
+        "schema testing",
+        "placeholder records"
+      ],
+      "weak_for": [
+        "verified catalog facts"
+      ],
       "notes": "Used only for starter records that prove the data model."
     },
     {
@@ -20,8 +25,17 @@
       "country": "JP",
       "base_url": "https://www.bandaispirits.co.jp/products/search/",
       "priority": 1,
-      "best_for": ["official product search", "Gunpla category", "release period", "official product pages"],
-      "weak_for": ["JavaScript-only search behavior", "older removed pages", "complete historical coverage"],
+      "best_for": [
+        "official product search",
+        "Gunpla category",
+        "release period",
+        "official product pages"
+      ],
+      "weak_for": [
+        "JavaScript-only search behavior",
+        "older removed pages",
+        "complete historical coverage"
+      ],
       "notes": "Official Japanese BANDAI SPIRITS product search. Use it as the official anchor, then fall back to Japanese store catalogs when product pages are incomplete."
     },
     {
@@ -31,8 +45,17 @@
       "country": "JP",
       "base_url": "https://p-bandai.jp/hobby/",
       "priority": 2,
-      "best_for": ["P-Bandai limited products", "official web-shop title", "price", "release month", "official images"],
-      "weak_for": ["ordinary retail products", "sold-out or removed pages"],
+      "best_for": [
+        "P-Bandai limited products",
+        "official web-shop title",
+        "price",
+        "release month",
+        "official images"
+      ],
+      "weak_for": [
+        "ordinary retail products",
+        "sold-out or removed pages"
+      ],
       "notes": "Primary source for Premium Bandai limited Gunpla."
     },
     {
@@ -42,8 +65,16 @@
       "country": "JP",
       "base_url": "https://www.gundam-base.net/products/",
       "priority": 3,
-      "best_for": ["Gundam Base limited products", "event-limited products", "store availability", "price", "release date"],
-      "weak_for": ["ordinary retail history"],
+      "best_for": [
+        "Gundam Base limited products",
+        "event-limited products",
+        "store availability",
+        "price",
+        "release date"
+      ],
+      "weak_for": [
+        "ordinary retail history"
+      ],
       "notes": "Official Japanese store catalog. Useful for limited and event items."
     },
     {
@@ -53,8 +84,17 @@
       "country": "JP",
       "base_url": "https://www.1999.co.jp/gundam/",
       "priority": 4,
-      "best_for": ["Japanese product title", "release month", "retail price", "box image", "category"],
-      "weak_for": ["official authority", "items not listed or removed by retailer"],
+      "best_for": [
+        "Japanese product title",
+        "release month",
+        "retail price",
+        "box image",
+        "category"
+      ],
+      "weak_for": [
+        "official authority",
+        "items not listed or removed by retailer"
+      ],
       "notes": "Japanese retail catalog. Use as a Japanese catalog source when official pages are incomplete."
     },
     {
@@ -64,8 +104,17 @@
       "country": "JP",
       "base_url": "https://www.amiami.jp/top/page/c/gundam.html",
       "priority": 5,
-      "best_for": ["Japanese retail title", "release month", "retail price", "product image", "series filters"],
-      "weak_for": ["official authority", "historical completeness"],
+      "best_for": [
+        "Japanese retail title",
+        "release month",
+        "retail price",
+        "product image",
+        "series filters"
+      ],
+      "weak_for": [
+        "official authority",
+        "historical completeness"
+      ],
       "notes": "Japanese retail catalog. Useful as a cross-check with Hobby Search."
     },
     {
@@ -75,8 +124,15 @@
       "country": "JP",
       "base_url": "https://www.gundam.info/",
       "priority": 6,
-      "best_for": ["official news", "new product announcements", "event context"],
-      "weak_for": ["complete catalog fields", "older retail facts"],
+      "best_for": [
+        "official news",
+        "new product announcements",
+        "event context"
+      ],
+      "weak_for": [
+        "complete catalog fields",
+        "older retail facts"
+      ],
       "notes": "Use for announcement context, not as the only product record."
     },
     {
@@ -86,8 +142,16 @@
       "country": "JP",
       "base_url": "https://www.bandai.co.jp/candy/gundam/",
       "priority": 7,
-      "best_for": ["official shokugan product lineups", "release month", "retail price", "official product images"],
-      "weak_for": ["ordinary Gunpla grades", "third-party catalog cross-checks"],
+      "best_for": [
+        "official shokugan product lineups",
+        "release month",
+        "retail price",
+        "official product images"
+      ],
+      "weak_for": [
+        "ordinary Gunpla grades",
+        "third-party catalog cross-checks"
+      ],
       "notes": "Official Japanese Bandai Candy portal for Gundam shokugan lines such as FW GUNDAM CONVERGE, G Frame FA, Mobility Joint, Artifact, and Superior Define."
     },
     {
@@ -97,8 +161,16 @@
       "country": "JP",
       "base_url": "https://gashapon.jp/",
       "priority": 8,
-      "best_for": ["official gashapon product pages", "capsule price", "release period", "official product images"],
-      "weak_for": ["Gunpla kit grade taxonomy", "older pages removed from official search"],
+      "best_for": [
+        "official gashapon product pages",
+        "capsule price",
+        "release period",
+        "official product images"
+      ],
+      "weak_for": [
+        "Gunpla kit grade taxonomy",
+        "older pages removed from official search"
+      ],
       "notes": "Official Japanese Bandai Gashapon pages, including Mobile Suit Ensemble and Gashapon Senshi f archives."
     },
     {
@@ -108,8 +180,17 @@
       "country": "JP",
       "base_url": "https://gashapon.jp/products/",
       "priority": 9,
-      "best_for": ["official capsule toy search", "product title", "capsule price", "release period", "official product images"],
-      "weak_for": ["ordinary plastic model kits", "franchise searches with no current Bandai capsule product"],
+      "best_for": [
+        "official capsule toy search",
+        "product title",
+        "capsule price",
+        "release period",
+        "official product images"
+      ],
+      "weak_for": [
+        "ordinary plastic model kits",
+        "franchise searches with no current Bandai capsule product"
+      ],
       "notes": "Official Japanese Bandai Gashapon product search used for Pokemon capsule toys and Gundam SEED/00 merchandise."
     },
     {
@@ -119,8 +200,16 @@
       "country": "JP",
       "base_url": "https://satellite.bandai-hobby.net/characters/pokemon.php",
       "priority": 10,
-      "best_for": ["Pokemon model kit titles", "official model kit images", "Japan price", "release month"],
-      "weak_for": ["capsule toys", "non-Bandai Pokemon goods"],
+      "best_for": [
+        "Pokemon model kit titles",
+        "official model kit images",
+        "Japan price",
+        "release month"
+      ],
+      "weak_for": [
+        "capsule toys",
+        "non-Bandai Pokemon goods"
+      ],
       "notes": "Official BANDAI SPIRITS Hobby Site Satellite page for Pokemon Model Kit / PokePla products."
     },
     {
@@ -130,8 +219,17 @@
       "country": "JP",
       "base_url": "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/",
       "priority": 10,
-      "best_for": ["Pokemon PLAMO COLLECTION product pages", "official model kit images", "Japan price", "launch month"],
-      "weak_for": ["capsule toys", "non-Bandai Pokemon goods", "older products not listed on the global PokePla page"],
+      "best_for": [
+        "Pokemon PLAMO COLLECTION product pages",
+        "official model kit images",
+        "Japan price",
+        "launch month"
+      ],
+      "weak_for": [
+        "capsule toys",
+        "non-Bandai Pokemon goods",
+        "older products not listed on the global PokePla page"
+      ],
       "notes": "Official BANDAI SPIRITS global Bandai Hobby Pokemon PLAMO COLLECTION pages used to supplement PokePla model kit coverage."
     },
     {
@@ -141,8 +239,21 @@
       "country": "JP",
       "base_url": "https://tamashiiweb.com/",
       "priority": 11,
-      "best_for": ["Tamashii Nations Gundam figures", "METAL BUILD", "METAL ROBOT Spirits", "ROBOT Spirits", "S.H.Figuarts", "official images", "Japan price", "release or shipping month", "source work"],
-      "weak_for": ["plastic model kit grade taxonomy", "non-Tamashii Gundam model kits"],
+      "best_for": [
+        "Tamashii Nations Gundam figures",
+        "METAL BUILD",
+        "METAL ROBOT Spirits",
+        "ROBOT Spirits",
+        "S.H.Figuarts",
+        "official images",
+        "Japan price",
+        "release or shipping month",
+        "source work"
+      ],
+      "weak_for": [
+        "plastic model kit grade taxonomy",
+        "non-Tamashii Gundam model kits"
+      ],
       "notes": "Official Japanese Tamashii Web product catalog and detail pages for Gundam collectible figure lines such as METAL BUILD, METAL ROBOT魂, ROBOT魂, and S.H.Figuarts."
     },
     {
@@ -152,8 +263,17 @@
       "country": "JP",
       "base_url": "https://www.kotobukiya.co.jp/title/armored-core/",
       "priority": 12,
-      "best_for": ["Armored Core plastic model titles", "V.I. series", "Kotobukiya official images", "release month", "tax-in and tax-out prices"],
-      "weak_for": ["Bandai 30MM products", "capsule toys"],
+      "best_for": [
+        "Armored Core plastic model titles",
+        "V.I. series",
+        "Kotobukiya official images",
+        "release month",
+        "tax-in and tax-out prices"
+      ],
+      "weak_for": [
+        "Bandai 30MM products",
+        "capsule toys"
+      ],
       "notes": "Official Kotobukiya product list and detail pages for Armored Core plastic models and related official items."
     },
     {
@@ -163,9 +283,98 @@
       "country": "JP",
       "base_url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/",
       "priority": 13,
-      "best_for": ["BEYBLADE X product lineup", "official product images", "Japan price", "release date"],
-      "weak_for": ["Hasbro international product variants", "fan naming aliases"],
+      "best_for": [
+        "BEYBLADE X product lineup",
+        "official product images",
+        "Japan price",
+        "release date"
+      ],
+      "weak_for": [
+        "Hasbro international product variants",
+        "fan naming aliases"
+      ],
       "notes": "Official Japanese Takara Tomy BEYBLADE X lineup and detail pages."
+    },
+    {
+      "source_id": "good_smile_fate_en",
+      "name": "Good Smile Company Fate / FGO Official Catalog",
+      "type": "official_manufacturer_global",
+      "country": "JP",
+      "base_url": "https://www.goodsmile.info/en/fgo",
+      "priority": 14,
+      "best_for": [
+        "Fate/FGO Nendoroid",
+        "figma",
+        "scale figures",
+        "official images",
+        "release month",
+        "Japan price"
+      ],
+      "weak_for": [
+        "Ichiban Kuji",
+        "capsule toys",
+        "non-Good Smile goods"
+      ],
+      "notes": "Official Good Smile Company Fate/Grand Order listing and product detail pages used for Fate figure catalog records."
+    },
+    {
+      "source_id": "ichiban_kuji_jp",
+      "name": "Ichiban Kuji Japan",
+      "type": "official_lottery_jp",
+      "country": "JP",
+      "base_url": "https://1kuji.com/",
+      "priority": 15,
+      "best_for": [
+        "Ichiban Kuji prize lineups",
+        "official prize images",
+        "release period",
+        "price per draw"
+      ],
+      "weak_for": [
+        "ordinary retail figures",
+        "complete older archive availability"
+      ],
+      "notes": "Official BANDAI SPIRITS Ichiban Kuji site. Fate records can use it as the authoritative lottery-prize source."
+    },
+    {
+      "source_id": "pokemon_center_jp",
+      "name": "Pokemon Center Online Japan",
+      "type": "official_store_jp",
+      "country": "JP",
+      "base_url": "https://www.pokemoncenter-online.com/",
+      "priority": 16,
+      "best_for": [
+        "Pokemon plush",
+        "Pokemon goods",
+        "official product images",
+        "Japan price"
+      ],
+      "weak_for": [
+        "Bandai PokePla model kit taxonomy",
+        "capsule toys"
+      ],
+      "notes": "Official Pokemon Center Online Japan store used to supplement Pokemon plush and goods coverage."
+    },
+    {
+      "source_id": "bandai_candy_jp",
+      "name": "Bandai Candy Japan",
+      "type": "official_candy_jp",
+      "country": "JP",
+      "base_url": "https://www.bandai.co.jp/candy/",
+      "priority": 17,
+      "best_for": [
+        "Bandai Candy official product pages",
+        "SMP",
+        "shokugan figures",
+        "official images",
+        "release month",
+        "Japan price"
+      ],
+      "weak_for": [
+        "ordinary plastic model kits",
+        "Premium Bandai stock status"
+      ],
+      "notes": "Official Bandai Candy portal for shokugan and SMP products across franchises including Armored Core."
     }
   ]
 }

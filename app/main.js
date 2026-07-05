@@ -29,6 +29,7 @@ const DEFAULT_NOTIFICATION_FILTERS = {
   gundam: false,
   armored_core: false,
   pokemon: false,
+  fate: false,
 };
 
 const LANGUAGES = [
@@ -38,12 +39,13 @@ const LANGUAGES = [
   { code: "ja", label: "日", htmlLang: "ja" },
 ];
 
-const FRANCHISES = ["gundam", "armored_core", "pokemon", "beyblade"];
+const FRANCHISES = ["gundam", "armored_core", "pokemon", "fate", "beyblade"];
 
 const FRANCHISE_LABELS = {
   gundam: { zh: "高达", ko: "건담", en: "Gundam", ja: "ガンダム" },
   armored_core: { zh: "Armored Core", ko: "아머드 코어", en: "Armored Core", ja: "アーマード・コア" },
   pokemon: { zh: "宝可梦", ko: "포켓몬", en: "Pokemon", ja: "ポケモン" },
+  fate: { zh: "Fate", ko: "Fate", en: "Fate", ja: "Fate" },
   beyblade: { zh: "Beyblade X", ko: "베이블레이드 X", en: "Beyblade X", ja: "ベイブレードX" },
 };
 
@@ -51,6 +53,7 @@ const FRANCHISE_SHORT_LABELS = {
   gundam: { zh: "高达", ko: "건담", en: "Gundam", ja: "Gundam" },
   armored_core: { zh: "AC", ko: "AC", en: "AC", ja: "AC" },
   pokemon: { zh: "宝可梦", ko: "포켓몬", en: "Pokemon", ja: "ポケモン" },
+  fate: { zh: "Fate", ko: "Fate", en: "Fate", ja: "Fate" },
   beyblade: { zh: "BBX", ko: "BBX", en: "BBX", ja: "BBX" },
 };
 
@@ -72,6 +75,17 @@ const GRADE_SHORT_LABELS = {
   BEYBLADE_X: { zh: "BBX", ko: "BBX", en: "BBX", ja: "BBX" },
   AC30MM: { zh: "30MM", ko: "30MM", en: "30MM", ja: "30MM" },
   ACVI: { zh: "V.I.", ko: "V.I.", en: "V.I.", ja: "V.I." },
+  AC_SHOKUGAN: { zh: "食玩", ko: "식완", en: "Shokugan", ja: "食玩" },
+  AC_SMP: { zh: "SMP", ko: "SMP", en: "SMP", ja: "SMP" },
+  FATE_SCALE: { zh: "手办", ko: "피규어", en: "Figure", ja: "フィギュア" },
+  FATE_ACTION: { zh: "可动", ko: "액션", en: "Action", ja: "可動" },
+  NENDOROID: { zh: "黏土人", ko: "넨도", en: "Nendoroid", ja: "ねんどろ" },
+  ICHIBAN_KUJI: { zh: "一番赏", ko: "이치방쿠지", en: "Kuji", ja: "一番くじ" },
+  FATE_GASHAPON: { zh: "扭蛋", ko: "가샤폰", en: "Gashapon", ja: "ガシャポン" },
+  FATE_PRIZE: { zh: "景品", ko: "경품", en: "Prize", ja: "景品" },
+  FATE_GOODS: { zh: "周边", ko: "굿즈", en: "Goods", ja: "グッズ" },
+  POKE_PLUSH: { zh: "毛绒", ko: "인형", en: "Plush", ja: "ぬいぐるみ" },
+  POKE_GOODS: { zh: "周边", ko: "굿즈", en: "Goods", ja: "グッズ" },
 };
 
 const MODEL_GRADE_CATEGORIES = new Set(["core", "core_subline", "historical", "one_hundred", "plastic_model", "sd", "special"]);
@@ -98,7 +112,17 @@ const TITLE_PREFIX_PATTERNS = [
 
 const TRANSLATIONS = {
   zh: {
-    appTitle: "模型库",
+    appTitle: "Collection Atlas",
+    homeNav: "首页",
+    collectionNav: "收藏",
+    homeKicker: "收藏图鉴",
+    homeTitle: "Collection Atlas",
+    homeOpen: "进入图鉴",
+    homeGundamMeta: "模型、成品、食玩、扭蛋",
+    homeArmoredCoreMeta: "拼装、V.I.、30MM",
+    homePokemonMeta: "拼装、扭蛋、毛绒、周边",
+    homeFateMeta: "手办、可动、黏土人、一番赏",
+    homeBeybladeMeta: "BX / UX / CX / 限定",
     searchPlaceholder: "搜索名字 / 系列 / 产品线",
     filters: "筛选",
     productLine: "产品线",
@@ -180,6 +204,7 @@ const TRANSLATIONS = {
     notifyGundam: "高达",
     notifyAc: "AC",
     notifyPokemon: "宝可梦",
+    notifyFate: "Fate",
     notificationEnabled: "通知已开启",
     notificationDisabled: "通知未开启",
     notificationDenied: "系统拒绝了通知权限",
@@ -301,7 +326,17 @@ const TRANSLATIONS = {
     imported: "官方导入",
   },
   ko: {
-    appTitle: "모델 DB",
+    appTitle: "Collection Atlas",
+    homeNav: "홈",
+    collectionNav: "컬렉션",
+    homeKicker: "컬렉션 도감",
+    homeTitle: "Collection Atlas",
+    homeOpen: "도감 열기",
+    homeGundamMeta: "프라모델, 완성품, 식완, 가샤폰",
+    homeArmoredCoreMeta: "프라모델, V.I., 30MM",
+    homePokemonMeta: "프라모델, 가샤폰, 인형, 굿즈",
+    homeFateMeta: "피규어, 액션, 넨도로이드, 이치방쿠지",
+    homeBeybladeMeta: "BX / UX / CX / 한정",
     searchPlaceholder: "이름 / 시리즈 / 라인 검색",
     filters: "필터",
     productLine: "제품 라인",
@@ -383,6 +418,7 @@ const TRANSLATIONS = {
     notifyGundam: "건담",
     notifyAc: "AC",
     notifyPokemon: "포켓몬",
+    notifyFate: "Fate",
     notificationEnabled: "알림 켜짐",
     notificationDisabled: "알림 꺼짐",
     notificationDenied: "시스템에서 알림 권한을 거부했습니다",
@@ -504,7 +540,17 @@ const TRANSLATIONS = {
     imported: "공식 가져오기",
   },
   en: {
-    appTitle: "Model DB",
+    appTitle: "Collection Atlas",
+    homeNav: "Home",
+    collectionNav: "Collection",
+    homeKicker: "Collection atlas",
+    homeTitle: "Collection Atlas",
+    homeOpen: "Open atlas",
+    homeGundamMeta: "Kits, figures, shokugan, gashapon",
+    homeArmoredCoreMeta: "Model kits, V.I., 30MM",
+    homePokemonMeta: "Model kits, gashapon, plush, goods",
+    homeFateMeta: "Figures, action figures, Nendoroid, kuji",
+    homeBeybladeMeta: "BX / UX / CX / limited",
     searchPlaceholder: "Search name / series / line",
     filters: "Filters",
     productLine: "Product line",
@@ -586,6 +632,7 @@ const TRANSLATIONS = {
     notifyGundam: "Gundam",
     notifyAc: "AC",
     notifyPokemon: "Pokemon",
+    notifyFate: "Fate",
     notificationEnabled: "Notifications on",
     notificationDisabled: "Notifications off",
     notificationDenied: "Notifications are blocked by the system",
@@ -707,7 +754,17 @@ const TRANSLATIONS = {
     imported: "Official import",
   },
   ja: {
-    appTitle: "モデルDB",
+    appTitle: "Collection Atlas",
+    homeNav: "ホーム",
+    collectionNav: "コレクション",
+    homeKicker: "コレクション図鑑",
+    homeTitle: "Collection Atlas",
+    homeOpen: "図鑑を開く",
+    homeGundamMeta: "プラモデル、完成品、食玩、ガシャポン",
+    homeArmoredCoreMeta: "プラモデル、V.I.、30MM",
+    homePokemonMeta: "プラモデル、ガシャポン、ぬいぐるみ、グッズ",
+    homeFateMeta: "フィギュア、可動、ねんどろいど、一番くじ",
+    homeBeybladeMeta: "BX / UX / CX / 限定",
     searchPlaceholder: "名前 / シリーズ / ラインで検索",
     filters: "絞り込み",
     productLine: "商品ライン",
@@ -789,6 +846,7 @@ const TRANSLATIONS = {
     notifyGundam: "ガンダム",
     notifyAc: "AC",
     notifyPokemon: "ポケモン",
+    notifyFate: "Fate",
     notificationEnabled: "通知オン",
     notificationDisabled: "通知オフ",
     notificationDenied: "通知権限が拒否されています",
@@ -945,7 +1003,7 @@ const state = {
     lastPulledAt: null,
     suppress: false,
   },
-  activeView: INITIAL_VIEW_STATE.view || localStorage.getItem(ACTIVE_VIEW_KEY) || "catalog",
+  activeView: INITIAL_VIEW_STATE.view || localStorage.getItem(ACTIVE_VIEW_KEY) || "home",
   activeModal: INITIAL_VIEW_STATE.modal || null,
   installPrompt: null,
   updatedAt: null,
@@ -1012,6 +1070,9 @@ const elements = {
   homeUpdateSummary: document.querySelector("#homeUpdateSummary"),
   sourceHealthStrip: document.querySelector("#sourceHealthStrip"),
   homeUpdateList: document.querySelector("#homeUpdateList"),
+  homeSection: document.querySelector("#homeSection"),
+  homeGrid: document.querySelector("#homeGrid"),
+  homeTotal: document.querySelector("#homeTotal"),
   pbandaiSection: document.querySelector("#pbandaiSection"),
   pbandaiSubtitle: document.querySelector("#pbandaiSubtitle"),
   pbandaiList: document.querySelector("#pbandaiList"),
@@ -1396,8 +1457,8 @@ function normalizeState() {
   if (!LANGUAGES.some((language) => language.code === state.seriesAdminLanguage)) {
     state.seriesAdminLanguage = state.language;
   }
-  if (!["catalog", "updates", "owned", "wanted"].includes(state.activeView)) {
-    state.activeView = "catalog";
+  if (!["home", "catalog", "collection", "updates", "owned", "wanted"].includes(state.activeView)) {
+    state.activeView = "home";
   }
   state.series = normalizeFilterStateValue(state.series);
   state.grade = normalizeFilterStateValue(state.grade);
@@ -2042,6 +2103,7 @@ function renderNotificationRules() {
     ["gundam", t("notifyGundam")],
     ["armored_core", t("notifyAc")],
     ["pokemon", t("notifyPokemon")],
+    ["fate", t("notifyFate")],
   ];
   elements.notificationRules.innerHTML = `<strong>${escapeHtml(t("notificationRules"))}</strong>`;
   for (const [key, label] of options) {
@@ -2092,6 +2154,11 @@ function updateEntryInterestTags(entry) {
   if ((entry.premium_bandai_count || 0) > 0) tags.add("premium_bandai");
   if ((entry.bbx_count || 0) > 0) tags.add("bbx");
   if ((entry.watched_count || 0) > 0 || (entry.watch_tags || []).length) tags.add("seed_00");
+  for (const item of [...(entry.added || []), ...(entry.changed || [])]) {
+    if (item.franchise && DEFAULT_NOTIFICATION_FILTERS[item.franchise] !== undefined) {
+      tags.add(item.franchise);
+    }
+  }
   return tags;
 }
 
@@ -2620,6 +2687,7 @@ function render() {
   renderSettings();
   renderConsoleMode();
   renderBottomNav();
+  renderHome();
   renderCollections();
   renderHomeUpdates();
   renderPBandaiProducts();
@@ -2632,6 +2700,87 @@ function renderBottomNav() {
   elements.bottomNav.querySelectorAll("button[data-view]").forEach((button) => {
     button.classList.toggle("is-active", button.dataset.view === state.activeView);
   });
+}
+
+function homeMetaKey(franchise) {
+  return {
+    gundam: "homeGundamMeta",
+    armored_core: "homeArmoredCoreMeta",
+    pokemon: "homePokemonMeta",
+    fate: "homeFateMeta",
+    beyblade: "homeBeybladeMeta",
+  }[franchise];
+}
+
+function homeImageKits(franchise) {
+  return state.kits
+    .filter((kit) => kit.franchise === franchise && imageCandidatesForKit(kit).length)
+    .sort((a, b) => String(b.release_date || "").localeCompare(String(a.release_date || "")))
+    .slice(0, 4);
+}
+
+function openFranchiseCatalog(franchise) {
+  state.franchise = franchise;
+  state.activeView = "catalog";
+  state.grade = "all";
+  state.series = "all";
+  state.itemType = "all";
+  state.releaseYear = "all";
+  state.limited = "all";
+  state.priceMin = "";
+  state.priceMax = "";
+  state.selectedKit = null;
+  state.activeModal = null;
+  localStorage.setItem(FRANCHISE_KEY, state.franchise);
+  localStorage.setItem(ACTIVE_VIEW_KEY, state.activeView);
+  render();
+  persistViewState({ mode: "push" });
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderHome() {
+  if (!elements.homeSection) {
+    return;
+  }
+  elements.homeSection.hidden = state.activeView !== "home";
+  if (elements.homeSection.hidden) {
+    return;
+  }
+
+  const counts = new Map();
+  for (const kit of state.kits) {
+    counts.set(kit.franchise, (counts.get(kit.franchise) || 0) + 1);
+  }
+  elements.homeTotal.textContent = t("records", { count: state.kits.length });
+  elements.homeGrid.innerHTML = "";
+
+  for (const franchise of FRANCHISES) {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = `home-card home-card-${franchise.replace("_", "-")}`;
+    card.addEventListener("click", () => openFranchiseCatalog(franchise));
+
+    const media = document.createElement("div");
+    media.className = "home-card-media";
+    for (const kit of homeImageKits(franchise)) {
+      const slot = document.createElement("span");
+      appendImageWithFallback(slot, kit, { alt: kitDisplayName(kit) });
+      media.append(slot);
+    }
+    if (!media.children.length) {
+      const fallback = document.createElement("span");
+      fallback.className = "home-card-fallback";
+      fallback.textContent = franchiseShortLabel(franchise);
+      media.append(fallback);
+    }
+
+    const body = document.createElement("div");
+    body.className = "home-card-body";
+    body.innerHTML = `<strong>${escapeHtml(franchiseLabel(franchise))}</strong><span>${escapeHtml(t(homeMetaKey(franchise)))} </span><em>${escapeHtml(t("records", { count: counts.get(franchise) || 0 }))}</em>`;
+
+    card.append(media, body);
+    elements.homeGrid.append(card);
+  }
 }
 
 function datasetSummary() {
@@ -3673,25 +3822,28 @@ function toggleKitCollection(type) {
 }
 
 function renderCollections() {
-  const ownedLength = renderCollectionStrip("owned", elements.ownedStrip, elements.ownedCount, elements.ownedPanel, elements.ownedCollapse);
-  const wantedLength = renderCollectionStrip("wanted", elements.wantedStrip, elements.wantedCount, elements.wantedPanel, elements.wantedCollapse);
-  const ownedVisible = state.homeCollectionVisibility.owned && ownedLength > 0;
-  const wantedVisible = state.homeCollectionVisibility.wanted && wantedLength > 0;
+  const isCollectionView = state.activeView === "collection";
+  const isCatalogView = state.activeView === "catalog";
+  const ownedLength = renderCollectionStrip("owned", elements.ownedStrip, elements.ownedCount, elements.ownedPanel, elements.ownedCollapse, isCollectionView);
+  const wantedLength = renderCollectionStrip("wanted", elements.wantedStrip, elements.wantedCount, elements.wantedPanel, elements.wantedCollapse, isCollectionView);
+  const ownedVisible = isCollectionView || (state.homeCollectionVisibility.owned && ownedLength > 0);
+  const wantedVisible = isCollectionView || (state.homeCollectionVisibility.wanted && wantedLength > 0);
   elements.ownedPanel.hidden = !ownedVisible;
   elements.wantedPanel.hidden = !wantedVisible;
   const visibleCount = [ownedVisible, wantedVisible].filter(Boolean).length;
   elements.collectionSection.classList.toggle("is-single", visibleCount === 1);
-  elements.collectionSection.hidden = visibleCount === 0 || state.activeView !== "catalog";
+  elements.collectionSection.classList.toggle("is-collection-view", isCollectionView);
+  elements.collectionSection.hidden = isCollectionView ? false : visibleCount === 0 || !isCatalogView;
 }
 
-function renderCollectionStrip(type, strip, countNode, panel, collapseButton) {
+function renderCollectionStrip(type, strip, countNode, panel, collapseButton, forceVisible = false) {
   const ids = collectionIds(type).filter((kitId) => displayKitById(kitId));
   state.collection[type] = ids;
   const count = ids.reduce((total, kitId) => total + collectionQuantityForKit(kitId), 0);
   const collapsed = state.homeCollectionCollapsed[type];
   const label = t(type === "owned" ? "ownedList" : "wantedList");
   countNode.textContent = String(count);
-  panel.hidden = ids.length === 0;
+  panel.hidden = !forceVisible && ids.length === 0;
   panel.classList.toggle("is-collapsed", collapsed);
   panel.tabIndex = ids.length > 0 ? 0 : -1;
   strip.hidden = collapsed;
@@ -3701,6 +3853,14 @@ function renderCollectionStrip(type, strip, countNode, panel, collapseButton) {
   strip.innerHTML = "";
 
   if (collapsed) {
+    return ids.length;
+  }
+
+  if (!ids.length && forceVisible) {
+    const empty = document.createElement("div");
+    empty.className = "collection-empty";
+    empty.textContent = t("noMatches");
+    strip.append(empty);
     return ids.length;
   }
 
@@ -4250,10 +4410,7 @@ function renderKits() {
   const collectionType = activeCollectionType();
   const titleKey = state.activeView === "owned" ? "ownedList" : state.activeView === "wanted" ? "wantedList" : "catalogList";
   elements.sectionTitle.textContent = t(titleKey);
-  elements.resultCount.textContent =
-    state.activeView === "wanted"
-      ? `${t("results", { count: kits.length })} · ${t("shoppingTotal", { total: formatPrice(wantedBudgetForKits(kits)) })}`
-      : t("results", { count: kits.length });
+  elements.resultCount.textContent = t("results", { count: kits.length });
   renderCollectionManagement(kits);
   elements.kitGrid.innerHTML = "";
 

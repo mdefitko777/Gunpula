@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-06-17",
-  "scope": "Official model and collectible line taxonomy for Gundam, Armored Core, Pokemon, and BEYBLADE X catalog records. Includes Gunpla grades, SD lines, 1/100 side lines, historical plastic model lines, Tamashii Nations Gundam figure lines, Bandai Candy shokugan figures, Bandai Gashapon lines, Bandai/Kotobukiya Armored Core plastic model lines, Pokemon plastic model / capsule toy lines, and Takara Tomy BEYBLADE X battle toy lines. Excludes unofficial third-party kits and resin garage kits.",
+  "updated_at": "2026-07-06",
+  "scope": "Official model and collectible line taxonomy for Gundam, Armored Core, Pokemon, and BEYBLADE X catalog records. Includes Gunpla grades, SD lines, 1/100 side lines, historical plastic model lines, Tamashii Nations Gundam figure lines, Bandai Candy shokugan figures, Bandai Gashapon lines, Bandai/Kotobukiya Armored Core plastic model lines, Pokemon plastic model / capsule toy lines, and Takara Tomy BEYBLADE X battle toy lines. Excludes unofficial third-party kits and resin garage kits., Fate/FGO official figures/goods, and Pokemon Center plush/goods catalog records.",
   "sources": [
     {
       "id": "the_gundam_base_jp",
@@ -60,11 +60,20 @@
       "name_en": "No Grade",
       "name_zh": "无等级 / 旧模 / TV",
       "category": "historical",
-      "typical_scale": ["1/144", "1/100", "1/60", "various"],
+      "typical_scale": [
+        "1/144",
+        "1/100",
+        "1/60",
+        "various"
+      ],
       "introduced": 1980,
       "status": "historical",
       "parent_code": null,
-      "aliases": ["Original", "TV", "Old Kit"],
+      "aliases": [
+        "Original",
+        "TV",
+        "Old Kit"
+      ],
       "notes_zh": "固定分级出现前或未进入正式分级体系的套件，常见于早期动画对应商品。"
     },
     {
@@ -72,11 +81,16 @@
       "name_en": "Best Mecha Collection",
       "name_zh": "最佳机甲收藏 / 初代旧模复刻线",
       "category": "historical",
-      "typical_scale": ["1/144", "various"],
+      "typical_scale": [
+        "1/144",
+        "various"
+      ],
       "introduced": 1980,
       "status": "historical_with_revival",
       "parent_code": "NG",
-      "aliases": ["Best Mecha Collection Revival"],
+      "aliases": [
+        "Best Mecha Collection Revival"
+      ],
       "notes_zh": "早期无等级套件的重要系列，2024 年有 RX-78-2 复兴版。"
     },
     {
@@ -84,11 +98,29 @@
       "name_en": "High Grade",
       "name_zh": "高等级 / HG",
       "category": "core",
-      "typical_scale": ["1/144", "1/100", "1/60", "1/550"],
+      "typical_scale": [
+        "1/144",
+        "1/100",
+        "1/60",
+        "1/550"
+      ],
       "introduced": 1990,
       "status": "active",
       "parent_code": null,
-      "aliases": ["HGUC", "HGAC", "HGCE", "HGFC", "HGAW", "HGCC", "HG IBO", "HG WFM", "HG GQuuuuuuX", "HG Build", "HG GTO", "HG Mechanics"],
+      "aliases": [
+        "HGUC",
+        "HGAC",
+        "HGCE",
+        "HGFC",
+        "HGAW",
+        "HGCC",
+        "HG IBO",
+        "HG WFM",
+        "HG GQuuuuuuX",
+        "HG Build",
+        "HG GTO",
+        "HG Mechanics"
+      ],
       "notes_zh": "最主流的入门到中级线，通常为 1/144；不同世界观会有 HGUC、HGCE 等子系列。"
     },
     {
@@ -96,11 +128,17 @@
       "name_en": "Master Grade",
       "name_zh": "大师级",
       "category": "core",
-      "typical_scale": ["1/100"],
+      "typical_scale": [
+        "1/100"
+      ],
       "introduced": 1995,
       "status": "active",
       "parent_code": null,
-      "aliases": ["MG Ver.Ka", "MG Ver.2.0", "MG Ver.3.0"],
+      "aliases": [
+        "MG Ver.Ka",
+        "MG Ver.2.0",
+        "MG Ver.3.0"
+      ],
       "notes_zh": "1/100 主力高细节系列，常见完整或接近完整内构。"
     },
     {
@@ -108,7 +146,9 @@
       "name_en": "Perfect Grade",
       "name_zh": "完美级",
       "category": "core",
-      "typical_scale": ["1/60"],
+      "typical_scale": [
+        "1/60"
+      ],
       "introduced": 1998,
       "status": "active_limited_release",
       "parent_code": null,
@@ -120,7 +160,9 @@
       "name_en": "First Grade",
       "name_zh": "初级 / 首级",
       "category": "historical",
-      "typical_scale": ["1/144"],
+      "typical_scale": [
+        "1/144"
+      ],
       "introduced": 1999,
       "status": "inactive",
       "parent_code": null,
@@ -132,11 +174,17 @@
       "name_en": "EX Model",
       "name_zh": "EX 模型",
       "category": "special",
-      "typical_scale": ["1/144", "1/1700", "various"],
+      "typical_scale": [
+        "1/144",
+        "1/1700",
+        "various"
+      ],
       "introduced": 2001,
       "status": "inactive",
       "parent_code": null,
-      "aliases": ["EX-Model"],
+      "aliases": [
+        "EX-Model"
+      ],
       "notes_zh": "偏战舰、载具、支援机、场景装备等非主角 MS 题材。"
     },
     {
@@ -144,11 +192,16 @@
       "name_en": "U.C. Hard Graph",
       "name_zh": "U.C.硬派写实",
       "category": "special",
-      "typical_scale": ["1/35"],
+      "typical_scale": [
+        "1/35"
+      ],
       "introduced": 2006,
       "status": "inactive",
       "parent_code": null,
-      "aliases": ["UC Hard Graph", "U.C.HARD GRAPH"],
+      "aliases": [
+        "UC Hard Graph",
+        "U.C.HARD GRAPH"
+      ],
       "notes_zh": "偏军事模型风格，包含车辆、士兵和写实场景题材。"
     },
     {
@@ -156,11 +209,15 @@
       "name_en": "Speed Grade",
       "name_zh": "速组级",
       "category": "historical",
-      "typical_scale": ["1/200"],
+      "typical_scale": [
+        "1/200"
+      ],
       "introduced": 2007,
       "status": "inactive",
       "parent_code": null,
-      "aliases": ["Speed Grade Collection"],
+      "aliases": [
+        "Speed Grade Collection"
+      ],
       "notes_zh": "小比例预涂装线，数量很少。"
     },
     {
@@ -168,11 +225,15 @@
       "name_en": "Mega Size Model",
       "name_zh": "Mega Size 大比例模型",
       "category": "special",
-      "typical_scale": ["1/48"],
+      "typical_scale": [
+        "1/48"
+      ],
       "introduced": 2010,
       "status": "inactive_or_rare",
       "parent_code": null,
-      "aliases": ["Mega Size"],
+      "aliases": [
+        "Mega Size"
+      ],
       "notes_zh": "超大比例、结构相对简化，适合展示和大体积收藏。"
     },
     {
@@ -180,7 +241,9 @@
       "name_en": "Real Grade",
       "name_zh": "真实级",
       "category": "core",
-      "typical_scale": ["1/144"],
+      "typical_scale": [
+        "1/144"
+      ],
       "introduced": 2010,
       "status": "active",
       "parent_code": null,
@@ -192,7 +255,9 @@
       "name_en": "Entry Grade",
       "name_zh": "入门级",
       "category": "core",
-      "typical_scale": ["1/144"],
+      "typical_scale": [
+        "1/144"
+      ],
       "introduced": 2011,
       "status": "active",
       "parent_code": null,
@@ -204,7 +269,9 @@
       "name_en": "Advanced Grade",
       "name_zh": "进阶级",
       "category": "historical",
-      "typical_scale": ["1/144"],
+      "typical_scale": [
+        "1/144"
+      ],
       "introduced": 2011,
       "status": "inactive",
       "parent_code": null,
@@ -216,11 +283,16 @@
       "name_en": "Reborn-One Hundred",
       "name_zh": "RE/100",
       "category": "one_hundred",
-      "typical_scale": ["1/100"],
+      "typical_scale": [
+        "1/100"
+      ],
       "introduced": 2014,
       "status": "inactive_or_rare",
       "parent_code": null,
-      "aliases": ["RE/100", "Re/100"],
+      "aliases": [
+        "RE/100",
+        "Re/100"
+      ],
       "notes_zh": "1/100 无完整 MG 内构的系列，适合补完较冷门机体。"
     },
     {
@@ -228,11 +300,16 @@
       "name_en": "Full Mechanics",
       "name_zh": "全机械骨架 / FM",
       "category": "one_hundred",
-      "typical_scale": ["1/100"],
+      "typical_scale": [
+        "1/100"
+      ],
       "introduced": 2016,
       "status": "active",
       "parent_code": null,
-      "aliases": ["1/100 Full Mechanics", "FULL MECHANICS"],
+      "aliases": [
+        "1/100 Full Mechanics",
+        "FULL MECHANICS"
+      ],
       "notes_zh": "1/100 线，通常没有 MG 级完整内构，但外观细节和机关较强。"
     },
     {
@@ -240,11 +317,16 @@
       "name_en": "Hi-Resolution Model",
       "name_zh": "高解析度模型",
       "category": "one_hundred",
-      "typical_scale": ["1/100"],
+      "typical_scale": [
+        "1/100"
+      ],
       "introduced": 2016,
       "status": "inactive_or_rare",
       "parent_code": null,
-      "aliases": ["HiRM", "Hi-Resolution"],
+      "aliases": [
+        "HiRM",
+        "Hi-Resolution"
+      ],
       "notes_zh": "高价 1/100 线，常见预组装或高完成度骨架与外甲组合。"
     },
     {
@@ -252,11 +334,15 @@
       "name_en": "Master Grade Extreme",
       "name_zh": "大师级极致版",
       "category": "core_subline",
-      "typical_scale": ["1/100"],
+      "typical_scale": [
+        "1/100"
+      ],
       "introduced": 2020,
       "status": "active_limited_release",
       "parent_code": "MG",
-      "aliases": ["MG Extreme"],
+      "aliases": [
+        "MG Extreme"
+      ],
       "notes_zh": "MG 的高端子线，围绕灯效、金属质感、展开机关等特定卖点强化。"
     },
     {
@@ -264,11 +350,15 @@
       "name_en": "Perfect Grade Unleashed",
       "name_zh": "完美级解放版",
       "category": "core_subline",
-      "typical_scale": ["1/60"],
+      "typical_scale": [
+        "1/60"
+      ],
       "introduced": 2020,
       "status": "active_limited_release",
       "parent_code": "PG",
-      "aliases": ["PG Unleashed"],
+      "aliases": [
+        "PG Unleashed"
+      ],
       "notes_zh": "PG 的高端进化子线，目前数量极少。"
     },
     {
@@ -276,11 +366,15 @@
       "name_en": "Master Grade SD",
       "name_zh": "大师级 SD",
       "category": "sd",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": 2023,
       "status": "active",
       "parent_code": "SD",
-      "aliases": ["MG SD"],
+      "aliases": [
+        "MG SD"
+      ],
       "notes_zh": "SD 造型结合接近 MG 的零件密度、分色和可动表现。"
     },
     {
@@ -288,11 +382,16 @@
       "name_en": "Super Deformed",
       "name_zh": "SD / Q版",
       "category": "sd",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": 1987,
       "status": "active",
       "parent_code": null,
-      "aliases": ["BB Senshi", "SD Gundam"],
+      "aliases": [
+        "BB Senshi",
+        "SD Gundam"
+      ],
       "notes_zh": "头身比例夸张的 Q 版模型总称，包含多个长期子系列。"
     },
     {
@@ -300,11 +399,16 @@
       "name_en": "SD Gundam EX-Standard",
       "name_zh": "SD EX-Standard",
       "category": "sd",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": 2015,
       "status": "active_or_recent",
       "parent_code": "SD",
-      "aliases": ["EX-Standard", "SDEX"],
+      "aliases": [
+        "EX-Standard",
+        "SDEX"
+      ],
       "notes_zh": "SD 的国际向低价标准线，武器常可与 HG 搭配。"
     },
     {
@@ -312,11 +416,15 @@
       "name_en": "SD Gundam Cross Silhouette",
       "name_zh": "SDCS / Cross Silhouette",
       "category": "sd",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": 2018,
       "status": "active_or_recent",
       "parent_code": "SD",
-      "aliases": ["Cross Silhouette"],
+      "aliases": [
+        "Cross Silhouette"
+      ],
       "notes_zh": "SD 线，可通过骨架切换较短或较高的比例风格。"
     },
     {
@@ -324,11 +432,17 @@
       "name_en": "SD Gundam World",
       "name_zh": "SD 三国创杰传 / 世界英雄",
       "category": "sd",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": 2019,
       "status": "active_or_recent",
       "parent_code": "SD",
-      "aliases": ["Sangoku Soketsuden", "World Heroes", "SDW Heroes"],
+      "aliases": [
+        "Sangoku Soketsuden",
+        "World Heroes",
+        "SDW Heroes"
+      ],
       "notes_zh": "SD 世界观角色线，常见三国、英雄题材再设计。"
     },
     {
@@ -336,11 +450,16 @@
       "name_en": "HaroPla",
       "name_zh": "哈罗模型",
       "category": "special",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": 2018,
       "status": "active_or_recent",
       "parent_code": null,
-      "aliases": ["HaroPla", "HAROPLA"],
+      "aliases": [
+        "HaroPla",
+        "HAROPLA"
+      ],
       "notes_zh": "以哈罗为主题的拼装线，属于 Gunpla 周边模型线而非 MS 等级。"
     },
     {
@@ -348,7 +467,9 @@
       "name_en": "Iropla",
       "name_zh": "Iropla 多色成型早期线",
       "category": "historical",
-      "typical_scale": ["1/250"],
+      "typical_scale": [
+        "1/250"
+      ],
       "introduced": 1983,
       "status": "inactive",
       "parent_code": null,
@@ -360,11 +481,16 @@
       "name_en": "Limited Model",
       "name_zh": "Limited Model",
       "category": "historical",
-      "typical_scale": ["1/144", "various"],
+      "typical_scale": [
+        "1/144",
+        "various"
+      ],
       "introduced": 1996,
       "status": "inactive",
       "parent_code": null,
-      "aliases": ["LM"],
+      "aliases": [
+        "LM"
+      ],
       "notes_zh": "90 年代低价简化模型线，部分题材来自 Gundam 作品。"
     },
     {
@@ -372,11 +498,18 @@
       "name_en": "Hyper Hybrid Model",
       "name_zh": "HY2M / Hyper Hybrid Model",
       "category": "special",
-      "typical_scale": ["1/60", "1/100", "1/24", "various"],
+      "typical_scale": [
+        "1/60",
+        "1/100",
+        "1/24",
+        "various"
+      ],
       "introduced": null,
       "status": "inactive",
       "parent_code": null,
-      "aliases": ["HY2M Glorious Series"],
+      "aliases": [
+        "HY2M Glorious Series"
+      ],
       "notes_zh": "偏大型或灯效等特殊卖点的历史线，不属于常规 HG/MG/RG 体系。"
     },
     {
@@ -384,11 +517,17 @@
       "name_en": "FW GUNDAM CONVERGE",
       "name_zh": "FW GUNDAM CONVERGE 食玩",
       "category": "shokugan",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": 2010,
       "status": "active",
       "parent_code": null,
-      "aliases": ["GUNDAM CONVERGE", "GUNDAM CONVERGE CORE", "GUNDAM CONVERGE SB"],
+      "aliases": [
+        "GUNDAM CONVERGE",
+        "GUNDAM CONVERGE CORE",
+        "GUNDAM CONVERGE SB"
+      ],
       "notes_zh": "Bandai Candy 的小比例涂装食玩模型线，包含通常弹、CORE、SB、SP 等子线。"
     },
     {
@@ -396,11 +535,16 @@
       "name_en": "Mobile Suit Gundam G Frame FA",
       "name_zh": "机动战士高达 G Frame FA 食玩",
       "category": "shokugan",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": 2018,
       "status": "active",
       "parent_code": null,
-      "aliases": ["G Frame", "G Frame FA"],
+      "aliases": [
+        "G Frame",
+        "G Frame FA"
+      ],
       "notes_zh": "Bandai Candy 的可动骨架食玩线，FA 为 Full Armor 续线。"
     },
     {
@@ -408,11 +552,15 @@
       "name_en": "MOBILITY JOINT GUNDAM",
       "name_zh": "MOBILITY JOINT GUNDAM 食玩",
       "category": "shokugan",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": 2022,
       "status": "active",
       "parent_code": null,
-      "aliases": ["Mobility Joint"],
+      "aliases": [
+        "Mobility Joint"
+      ],
       "notes_zh": "Bandai Candy 的关节可动食玩系列。"
     },
     {
@@ -420,11 +568,15 @@
       "name_en": "Gundam Artifact",
       "name_zh": "高达 Artifact 食玩",
       "category": "shokugan",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": 2021,
       "status": "active",
       "parent_code": null,
-      "aliases": ["Gundam Artifact"],
+      "aliases": [
+        "Gundam Artifact"
+      ],
       "notes_zh": "强调高密度造型和造型改编的小比例食玩套件。"
     },
     {
@@ -432,11 +584,15 @@
       "name_en": "Gundam Superior Define",
       "name_zh": "Gundam Superior Define 食玩",
       "category": "shokugan",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": 2025,
       "status": "active",
       "parent_code": null,
-      "aliases": ["Superior Define"],
+      "aliases": [
+        "Superior Define"
+      ],
       "notes_zh": "Bandai Candy 的高达食玩系列之一，按 No. 编号推出。"
     },
     {
@@ -444,11 +600,16 @@
       "name_en": "Mobile Suit Ensemble",
       "name_zh": "MOBILE SUIT ENSEMBLE 扭蛋",
       "category": "gashapon",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": 2016,
       "status": "active",
       "parent_code": null,
-      "aliases": ["MS Ensemble", "MOBILE SUIT ENSEMBLE"],
+      "aliases": [
+        "MS Ensemble",
+        "MOBILE SUIT ENSEMBLE"
+      ],
       "notes_zh": "Bandai Gashapon 的高达可动拼装扭蛋线，以武装组合为核心。"
     },
     {
@@ -456,11 +617,16 @@
       "name_en": "Gashapon Senshi f",
       "name_zh": "Gashapon Senshi f 扭蛋",
       "category": "gashapon",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": 2017,
       "status": "inactive_or_archived",
       "parent_code": null,
-      "aliases": ["Gashapon Senshi Forte", "ガシャポン戦士f"],
+      "aliases": [
+        "Gashapon Senshi Forte",
+        "ガシャポン戦士f"
+      ],
       "notes_zh": "Bandai Gashapon 的 SD 高达扭蛋线，官方归档页保留了各弹款式。"
     },
     {
@@ -468,11 +634,16 @@
       "name_en": "Gundam Gashapon Merchandise",
       "name_zh": "高达官方扭蛋周边",
       "category": "gashapon",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": null,
       "status": "active",
       "parent_code": null,
-      "aliases": ["Gundam capsule goods", "Gundam acrylic goods"],
+      "aliases": [
+        "Gundam capsule goods",
+        "Gundam acrylic goods"
+      ],
       "notes_zh": "Bandai Gashapon 官方商品检索中的高达周边，包含 SEED、00 等作品的亚克力、挂件、海报等非拼装周边。"
     },
     {
@@ -480,11 +651,16 @@
       "name_en": "METAL BUILD",
       "name_zh": "METAL BUILD / MB 成品",
       "category": "tamashii_figure",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": 2011,
       "status": "active",
       "parent_code": null,
-      "aliases": ["MB", "METAL BUILD Gundam"],
+      "aliases": [
+        "MB",
+        "METAL BUILD Gundam"
+      ],
       "notes_zh": "TAMASHII NATIONS 的高达成品合金可动线，按用户口径归入高达模型分类。"
     },
     {
@@ -492,11 +668,18 @@
       "name_en": "METAL ROBOT Spirits",
       "name_zh": "METAL ROBOT魂 / MR魂",
       "category": "tamashii_figure",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": 2015,
       "status": "active",
       "parent_code": null,
-      "aliases": ["MR魂", "METAL ROBOT魂", "METAL ROBOT SPIRITS", "METAL ROBOT魂（Ka signature）"],
+      "aliases": [
+        "MR魂",
+        "METAL ROBOT魂",
+        "METAL ROBOT SPIRITS",
+        "METAL ROBOT魂（Ka signature）"
+      ],
       "notes_zh": "TAMASHII NATIONS 的高达合金可动成品线，含 Ka signature 等子线。"
     },
     {
@@ -504,11 +687,19 @@
       "name_en": "ROBOT Spirits",
       "name_zh": "ROBOT魂 / R魂",
       "category": "tamashii_figure",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": 2008,
       "status": "active",
       "parent_code": null,
-      "aliases": ["R魂", "ROBOT魂", "ROBOT SPIRITS", "ROBOT魂 ver. A.N.I.M.E.", "ROBOT魂（Ka signature）"],
+      "aliases": [
+        "R魂",
+        "ROBOT魂",
+        "ROBOT SPIRITS",
+        "ROBOT魂 ver. A.N.I.M.E.",
+        "ROBOT魂（Ka signature）"
+      ],
       "notes_zh": "TAMASHII NATIONS 的 ROBOT魂高达可动成品线，含 ver. A.N.I.M.E. 与 Ka signature 等子线。"
     },
     {
@@ -516,11 +707,17 @@
       "name_en": "S.H.Figuarts",
       "name_zh": "S.H.Figuarts / SHF 成品",
       "category": "tamashii_figure",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": 2008,
       "status": "active",
       "parent_code": null,
-      "aliases": ["SHF", "S.H.フィギュアーツ", "S.H.Figuarts Gundam"],
+      "aliases": [
+        "SHF",
+        "S.H.フィギュアーツ",
+        "S.H.Figuarts Gundam"
+      ],
       "notes_zh": "TAMASHII NATIONS 的角色可动成品线；本库按用户口径收录高达相关角色。"
     },
     {
@@ -528,11 +725,15 @@
       "name_en": "30MM Armored Core",
       "name_zh": "30MM Armored Core 拼装模型",
       "category": "plastic_model",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": 2024,
       "status": "active",
       "parent_code": null,
-      "aliases": ["30 MINUTES MISSIONS ARMORED CORE VI"],
+      "aliases": [
+        "30 MINUTES MISSIONS ARMORED CORE VI"
+      ],
       "notes_zh": "BANDAI SPIRITS 30 MINUTES MISSIONS 的 ARMORED CORE VI 拼装模型与选配武器线。"
     },
     {
@@ -540,11 +741,19 @@
       "name_en": "Armored Core V.I. Series",
       "name_zh": "Armored Core V.I. 系列拼装模型",
       "category": "plastic_model",
-      "typical_scale": ["1/72", "non-scale", "various"],
+      "typical_scale": [
+        "1/72",
+        "non-scale",
+        "various"
+      ],
       "introduced": 2005,
       "status": "active_reprint",
       "parent_code": null,
-      "aliases": ["V.I. Series", "Variable Infinity", "D-Style Armored Core"],
+      "aliases": [
+        "V.I. Series",
+        "Variable Infinity",
+        "D-Style Armored Core"
+      ],
       "notes_zh": "寿屋官方 Armored Core 拼装模型主线，含 V.I.、D-Style、Structure Arts 等列表条目。"
     },
     {
@@ -552,11 +761,17 @@
       "name_en": "Pokemon Model Kit",
       "name_zh": "宝可梦拼装模型 / PokePla",
       "category": "plastic_model",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": null,
       "status": "active",
       "parent_code": null,
-      "aliases": ["Pokemon Model Kit Quick!!", "PokePla", "ポケプラ"],
+      "aliases": [
+        "Pokemon Model Kit Quick!!",
+        "PokePla",
+        "ポケプラ"
+      ],
       "notes_zh": "BANDAI SPIRITS / Bandai Hobby 官方 Pokemon Model Kit 系列。"
     },
     {
@@ -564,11 +779,16 @@
       "name_en": "Pokemon Gashapon",
       "name_zh": "宝可梦官方扭蛋 / 玩偶周边",
       "category": "gashapon",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": null,
       "status": "active",
       "parent_code": null,
-      "aliases": ["Pokemon capsule toys", "Pokemon mascots"],
+      "aliases": [
+        "Pokemon capsule toys",
+        "Pokemon mascots"
+      ],
       "notes_zh": "Bandai Gashapon 官方商品检索中的宝可梦扭蛋、挂件、玩偶、摆件等。"
     },
     {
@@ -576,12 +796,220 @@
       "name_en": "BEYBLADE X",
       "name_zh": "BEYBLADE X / 战斗陀螺X",
       "category": "battle_toy",
-      "typical_scale": ["non-scale"],
+      "typical_scale": [
+        "non-scale"
+      ],
       "introduced": 2023,
       "status": "active",
       "parent_code": null,
-      "aliases": ["BX", "UX", "CX", "ベイブレードX"],
+      "aliases": [
+        "BX",
+        "UX",
+        "CX",
+        "ベイブレードX"
+      ],
       "notes_zh": "TAKARA TOMY 官方 BEYBLADE X 主线商品。"
+    },
+    {
+      "code": "FATE_SCALE",
+      "name_en": "Scale Figure",
+      "name_zh": "????",
+      "category": "tamashii_figure",
+      "typical_scale": [
+        "1/4",
+        "1/7",
+        "1/8",
+        "non-scale",
+        "various"
+      ],
+      "introduced": null,
+      "status": "active_or_archive",
+      "parent_code": null,
+      "aliases": [
+        "Scale",
+        "POP UP PARADE"
+      ],
+      "notes_zh": "Fate/FGO ?????POP UP PARADE ?????????"
+    },
+    {
+      "code": "FATE_ACTION",
+      "name_en": "Action Figure",
+      "name_zh": "????",
+      "category": "tamashii_figure",
+      "typical_scale": [
+        "non-scale",
+        "various"
+      ],
+      "introduced": null,
+      "status": "active_or_archive",
+      "parent_code": null,
+      "aliases": [
+        "figma",
+        "action figure"
+      ],
+      "notes_zh": "Fate/FGO ???????? figma?"
+    },
+    {
+      "code": "NENDOROID",
+      "name_en": "Nendoroid",
+      "name_zh": "???",
+      "category": "tamashii_figure",
+      "typical_scale": [
+        "non-scale"
+      ],
+      "introduced": null,
+      "status": "active_or_archive",
+      "parent_code": null,
+      "aliases": [
+        "Good Smile Nendoroid",
+        "??????"
+      ],
+      "notes_zh": "Good Smile Company ??????? Doll?"
+    },
+    {
+      "code": "ICHIBAN_KUJI",
+      "name_en": "Ichiban Kuji",
+      "name_zh": "???",
+      "category": "other",
+      "typical_scale": [
+        "non-scale",
+        "various"
+      ],
+      "introduced": null,
+      "status": "active_or_archive",
+      "parent_code": null,
+      "aliases": [
+        "Ichiban Kuji",
+        "????"
+      ],
+      "notes_zh": "???????????"
+    },
+    {
+      "code": "FATE_GASHAPON",
+      "name_en": "Fate Gashapon",
+      "name_zh": "Fate ??",
+      "category": "gashapon",
+      "typical_scale": [
+        "non-scale",
+        "various"
+      ],
+      "introduced": null,
+      "status": "active_or_archive",
+      "parent_code": null,
+      "aliases": [
+        "capsule toy",
+        "gashapon"
+      ],
+      "notes_zh": "Fate/FGO ????????"
+    },
+    {
+      "code": "FATE_PRIZE",
+      "name_en": "Prize Figure",
+      "name_zh": "??",
+      "category": "tamashii_figure",
+      "typical_scale": [
+        "non-scale",
+        "various"
+      ],
+      "introduced": null,
+      "status": "active_or_archive",
+      "parent_code": null,
+      "aliases": [
+        "Prize",
+        "????"
+      ],
+      "notes_zh": "Fate/FGO ????????"
+    },
+    {
+      "code": "FATE_GOODS",
+      "name_en": "Fate Goods",
+      "name_zh": "Fate ??",
+      "category": "other",
+      "typical_scale": [
+        "non-scale",
+        "various"
+      ],
+      "introduced": null,
+      "status": "active_or_archive",
+      "parent_code": null,
+      "aliases": [
+        "goods",
+        "merch",
+        "acrylic",
+        "plush"
+      ],
+      "notes_zh": "Fate/FGO ????????????????"
+    },
+    {
+      "code": "POKE_PLUSH",
+      "name_en": "Pokemon Plush",
+      "name_zh": "?????",
+      "category": "other",
+      "typical_scale": [
+        "non-scale",
+        "various"
+      ],
+      "introduced": null,
+      "status": "active",
+      "parent_code": null,
+      "aliases": [
+        "Pokemon Center plush",
+        "?????"
+      ],
+      "notes_zh": "Pokemon Center ????????"
+    },
+    {
+      "code": "POKE_GOODS",
+      "name_en": "Pokemon Goods",
+      "name_zh": "?????",
+      "category": "other",
+      "typical_scale": [
+        "non-scale",
+        "various"
+      ],
+      "introduced": null,
+      "status": "active",
+      "parent_code": null,
+      "aliases": [
+        "Pokemon Center goods"
+      ],
+      "notes_zh": "Pokemon ????????????????"
+    },
+    {
+      "code": "AC_SHOKUGAN",
+      "name_en": "Armored Core Shokugan",
+      "name_zh": "??????",
+      "category": "shokugan",
+      "typical_scale": [
+        "non-scale",
+        "various"
+      ],
+      "introduced": 2026,
+      "status": "active",
+      "parent_code": null,
+      "aliases": [
+        "Assemble Collection",
+        "???????????"
+      ],
+      "notes_zh": "Armored Core VI ????????????"
+    },
+    {
+      "code": "AC_SMP",
+      "name_en": "SMP Armored Core",
+      "name_zh": "SMP ????",
+      "category": "plastic_model",
+      "typical_scale": [
+        "non-scale",
+        "various"
+      ],
+      "introduced": 2026,
+      "status": "active",
+      "parent_code": null,
+      "aliases": [
+        "SMP",
+        "SHOKUGAN MODELING PROJECT"
+      ],
+      "notes_zh": "Bandai Candy SMP / SHOKUGAN MODELING PROJECT ???????????"
     }
   ]
 }

@@ -3,21 +3,21 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#17191d" />
+    <meta name="theme-color" content="#eaf5f7" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="application-name" content="Gunpla DB" />
-    <title>Gunpula Catalog</title>
+    <meta name="application-name" content="Collection Atlas" />
+    <title>Collection Atlas</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260705-pbandai" />
+    <link rel="stylesheet" href="./styles.css?v=20260706-atlas" />
   </head>
   <body>
     <main class="catalog-page">
       <header class="page-header">
         <div class="top-bar">
           <div class="brand-line">
-            <span class="brand-mark">G</span>
-            <span>Gunpla DB</span>
+            <span class="brand-mark">A</span>
+            <span>Atlas</span>
           </div>
           <div class="segmented-control franchise-control" id="franchiseList" aria-label="选择作品分类"></div>
           <button class="settings-button" id="settingsOpen" type="button" aria-label="设置" data-i18n-aria="settings">⚙</button>
@@ -62,6 +62,17 @@
           </div>
         </details>
       </header>
+
+      <section class="home-section" id="homeSection" hidden>
+        <div class="home-hero">
+          <div>
+            <p class="home-kicker" data-i18n="homeKicker">收藏图鉴</p>
+            <h1 data-i18n="homeTitle">Collection Atlas</h1>
+          </div>
+          <span id="homeTotal">0</span>
+        </div>
+        <div class="home-grid" id="homeGrid"></div>
+      </section>
 
       <section class="updates-section" id="updatesSection" hidden>
         <div class="updates-head">
@@ -128,10 +139,9 @@
     </main>
 
     <nav class="bottom-nav" id="bottomNav" aria-label="主导航">
-      <button type="button" data-view="catalog" class="is-active"><span>⌕</span><strong data-i18n="catalogList">目录</strong></button>
-      <button type="button" data-view="updates"><span>↻</span><strong data-i18n="recentUpdates">更新</strong></button>
-      <button type="button" data-view="owned"><span>✓</span><strong data-i18n="ownedList">已购买</strong></button>
-      <button type="button" data-view="wanted"><span>☆</span><strong data-i18n="wantedList">想要</strong></button>
+      <button type="button" data-view="home" class="is-active"><span>⌂</span><strong data-i18n="homeNav">首页</strong></button>
+      <button type="button" data-view="catalog"><span>⌕</span><strong data-i18n="catalogList">图鉴</strong></button>
+      <button type="button" data-view="collection"><span>☆</span><strong data-i18n="collectionNav">收藏</strong></button>
       <button type="button" data-view="settings"><span>⚙</span><strong data-i18n="settings">设置</strong></button>
     </nav>
 
@@ -380,6 +390,6 @@
       </div>
     </dialog>
 
-    <script type="module" src="./main.js?v=20260705-pbandai"></script>
+    <script type="module" src="./main.js?v=20260706-atlas"></script>
   </body>
 </html>
