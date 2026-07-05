@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-07-06",
-  "generated_at": "2026-07-05T18:04:26.416Z",
+  "generated_at": "2026-07-05T19:59:02.904Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,36 +16,39 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-07-05T18:04:25.951Z",
+    "generated_at": "2026-07-05T19:59:02.468Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-07-06",
-      "generated_at": "2026-07-05T18:04:26.416Z",
+      "generated_at": "2026-07-05T19:59:02.904Z",
       "total_before": 4465,
       "total_after": 4680,
-      "added_count": 120,
-      "changed_count": 225,
-      "removed_count": 0,
-      "watched_count": 136,
-      "premium_bandai_count": 128,
+      "added_count": 127,
+      "changed_count": 120,
+      "removed_count": 7,
+      "watched_count": 120,
+      "premium_bandai_count": 110,
       "bbx_count": 0,
       "franchise_counts": {
         "armored_core": 3,
         "fate": 117,
-        "gundam": 225
+        "pokemon": 7,
+        "gundam": 120
       },
       "reason_counts": {
-        "new": 120,
-        "series": 120,
-        "source": 108
+        "new": 127,
+        "series": 16,
+        "source": 107,
+        "removed": 7
       },
       "interest_tags": [
         "armored_core",
         "premium_bandai",
         "fate",
+        "pokemon",
         "gundam",
         "00",
         "seed"
@@ -9639,7 +9642,267 @@
           ]
         }
       ],
-      "removed": [],
+      "removed": [
+        {
+          "kit_id": "pokemon-center-4521329340548",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "122 ぬいぐるみ Pok&eacute;mon fit バリヤード",
+            "zh": "122 ぬいぐるみ Pok&eacute;mon fit バリヤード",
+            "ko": "122 ぬいぐるみ Pok&eacute;mon fit バリヤード",
+            "en": "122 ぬいぐるみ Pok&eacute;mon fit バリヤード"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329340548.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329341965",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "145 ぬいぐるみ Pok&eacute;mon fit サンダー",
+            "zh": "145 ぬいぐるみ Pok&eacute;mon fit サンダー",
+            "ko": "145 ぬいぐるみ Pok&eacute;mon fit サンダー",
+            "en": "145 ぬいぐるみ Pok&eacute;mon fit サンダー"
+          },
+          "release_date": null,
+          "price_jpy": 1650,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329341965.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329333939",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "146 ぬいぐるみ Pok&eacute;mon fit ファイヤー",
+            "zh": "146 ぬいぐるみ Pok&eacute;mon fit ファイヤー",
+            "ko": "146 ぬいぐるみ Pok&eacute;mon fit ファイヤー",
+            "en": "146 ぬいぐるみ Pok&eacute;mon fit ファイヤー"
+          },
+          "release_date": null,
+          "price_jpy": 1650,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329333939.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329370378",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "38 ぬいぐるみ Pok&eacute;mon fit キュウコン",
+            "zh": "38 ぬいぐるみ Pok&eacute;mon fit キュウコン",
+            "ko": "38 ぬいぐるみ Pok&eacute;mon fit キュウコン",
+            "en": "38 ぬいぐるみ Pok&eacute;mon fit キュウコン"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329370378.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329341309",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "483 ぬいぐるみ Pok&eacute;mon fit ディアルガ",
+            "zh": "483 ぬいぐるみ Pok&eacute;mon fit ディアルガ",
+            "ko": "483 ぬいぐるみ Pok&eacute;mon fit ディアルガ",
+            "en": "483 ぬいぐるみ Pok&eacute;mon fit ディアルガ"
+          },
+          "release_date": null,
+          "price_jpy": 1650,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329341309.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329350127",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "606 ぬいぐるみ Pok&eacute;mon fit オーベム",
+            "zh": "606 ぬいぐるみ Pok&eacute;mon fit オーベム",
+            "ko": "606 ぬいぐるみ Pok&eacute;mon fit オーベム",
+            "en": "606 ぬいぐるみ Pok&eacute;mon fit オーベム"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329350127.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4904810949459",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "Pokemon Center Goods",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "モンコレ MS-47 タイカイデン",
+            "zh": "モンコレ MS-47 タイカイデン",
+            "ko": "モンコレ MS-47 タイカイデン",
+            "en": "モンコレ MS-47 タイカイデン"
+          },
+          "release_date": null,
+          "price_jpy": 715,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4904810949459.html"
+          ]
+        }
+      ],
       "watched": [
         {
           "kit_id": "tamashii-14481",
