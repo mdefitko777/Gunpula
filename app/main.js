@@ -23,7 +23,8 @@ const SYNC_SAVE_DEBOUNCE_MS = 700;
 const SYNC_HISTORY_LIMIT = 20;
 const KIT_RENDER_BATCH = 160;
 const RADIAL_HOLD_MS = 420;
-const RADIAL_CANCEL_DISTANCE = 14;
+const RADIAL_CANCEL_DISTANCE = 36;
+const RADIAL_SELECT_DISTANCE = 28;
 
 const COLLECTION_TYPES = ["owned", "wanted"];
 const THEMES = [
@@ -156,6 +157,7 @@ const TRANSLATIONS = {
     themeAtlas: "蓝白绿",
     themeClassic: "经典",
     customAppIcon: "自定义图标",
+    changeAppIcon: "更改图标",
     resetAppIcon: "恢复默认",
     closeSettings: "关闭设置",
     language: "语言",
@@ -385,6 +387,7 @@ const TRANSLATIONS = {
     themeAtlas: "블루/화이트/그린",
     themeClassic: "클래식",
     customAppIcon: "사용자 아이콘",
+    changeAppIcon: "아이콘 변경",
     resetAppIcon: "기본값",
     closeSettings: "설정 닫기",
     language: "언어",
@@ -614,6 +617,7 @@ const TRANSLATIONS = {
     themeAtlas: "Blue / White / Green",
     themeClassic: "Classic",
     customAppIcon: "Custom icon",
+    changeAppIcon: "Change icon",
     resetAppIcon: "Reset",
     closeSettings: "Close settings",
     language: "Language",
@@ -843,6 +847,7 @@ const TRANSLATIONS = {
     themeAtlas: "青白緑",
     themeClassic: "クラシック",
     customAppIcon: "カスタムアイコン",
+    changeAppIcon: "アイコン変更",
     resetAppIcon: "標準に戻す",
     closeSettings: "設定を閉じる",
     language: "言語",
@@ -1151,6 +1156,8 @@ const elements = {
   sourceHealthStrip: document.querySelector("#sourceHealthStrip"),
   homeUpdateList: document.querySelector("#homeUpdateList"),
   homeSection: document.querySelector("#homeSection"),
+  homeIconButton: document.querySelector("#homeIconButton"),
+  homeIconInput: document.querySelector("#homeIconInput"),
   homeGrid: document.querySelector("#homeGrid"),
   homeTotal: document.querySelector("#homeTotal"),
   pbandaiSection: document.querySelector("#pbandaiSection"),
@@ -1603,6 +1610,14 @@ function saveAppIcon() {
   }
 }
 
+function saveAppearance(options = {}) {
+  saveTheme();
+  saveAppIcon();
+  if (!options.skipSync) {
+    scheduleCloudSave("appearance");
+  }
+}
+
 function loadUpdateNotificationFilters() {
   try {
     const parsed = JSON.parse(localStorage.getItem(UPDATE_NOTIFICATION_FILTER_KEY) || "{}");
@@ -1964,11 +1979,18 @@ function closeSettings(options = {}) {
 function bindEvents() {
   elements.settingsOpen.addEventListener("click", openSettings);
   elements.settingsClose.addEventListener("click", closeSettings);
+  elements.homeIconButton?.addEventListener("click", () => elements.homeIconInput?.click());
+  elements.homeIconInput?.addEventListener("change", handleAppIconUpload);
   elements.appIconInput.addEventListener("change", handleAppIconUpload);
   elements.resetAppIcon.addEventListener("click", () => {
+    if (!canEditSharedData()) {
+      setSyncStatus("readonly", t("readOnlyHint"));
+      return;
+    }
     state.appIcon = "";
-    saveAppIcon();
+    saveAppearance();
     elements.appIconInput.value = "";
+    if (elements.homeIconInput) elements.homeIconInput.value = "";
     applyAppearance();
   });
   elements.consoleModeToggle.addEventListener("change", (event) => {
@@ -2136,18 +2158,44 @@ function bindEvents() {
   populateGradeSelect();
 }
 
-function handleAppIconUpload(event) {
+async function handleAppIconUpload(event) {
   const file = event.target.files?.[0];
   if (!file) {
     return;
   }
-  const reader = new FileReader();
-  reader.addEventListener("load", () => {
-    state.appIcon = String(reader.result || "");
-    saveAppIcon();
+  if (!canEditSharedData()) {
+    setSyncStatus("readonly", t("readOnlyHint"));
+    event.target.value = "";
+    return;
+  }
+  try {
+    state.appIcon = await iconDataUrlFromFile(file);
+    saveAppearance();
     applyAppearance();
+  } finally {
+    event.target.value = "";
+  }
+}
+
+function iconDataUrlFromFile(file) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = 256;
+      canvas.height = 256;
+      const context = canvas.getContext("2d");
+      context.clearRect(0, 0, 256, 256);
+      const scale = Math.min(256 / image.width, 256 / image.height);
+      const width = Math.max(1, Math.round(image.width * scale));
+      const height = Math.max(1, Math.round(image.height * scale));
+      context.drawImage(image, (256 - width) / 2, (256 - height) / 2, width, height);
+      URL.revokeObjectURL(image.src);
+      resolve(canvas.toDataURL("image/png"));
+    };
+    image.onerror = () => reject(new Error("icon load failed"));
+    image.src = URL.createObjectURL(file);
   });
-  reader.readAsDataURL(file);
 }
 
 function bindRadialMenu() {
@@ -2236,36 +2284,67 @@ function showRadialMenu(x, y) {
   elements.radialMenu.style.left = `${x}px`;
   elements.radialMenu.style.top = `${y}px`;
   elements.radialMenu.innerHTML = "";
-  const radius = 92;
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("class", "radial-ring");
+  svg.setAttribute("viewBox", "0 0 220 220");
+  svg.setAttribute("aria-hidden", "true");
+  const labels = document.createElement("div");
+  labels.className = "radial-labels";
   FRANCHISES.forEach((franchise, index) => {
-    const angle = -90 + index * (360 / FRANCHISES.length);
+    const centerAngle = -90 + index * (360 / FRANCHISES.length);
+    const segment = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    segment.setAttribute("class", "radial-segment");
+    segment.dataset.franchise = franchise;
+    segment.setAttribute("d", donutSegmentPath(110, 110, 104, 42, centerAngle - 36, centerAngle + 36));
+    svg.append(segment);
+
+    const angle = centerAngle;
     const radian = (angle * Math.PI) / 180;
-    const item = document.createElement("span");
-    item.className = "radial-item";
-    item.dataset.franchise = franchise;
-    item.style.transform = `translate(calc(-50% + ${Math.cos(radian) * radius}px), calc(-50% + ${Math.sin(radian) * radius}px))`;
-    item.textContent = franchiseShortLabel(franchise);
-    elements.radialMenu.append(item);
+    const label = document.createElement("span");
+    label.className = "radial-label";
+    label.dataset.franchise = franchise;
+    label.style.left = `${110 + Math.cos(radian) * 74}px`;
+    label.style.top = `${110 + Math.sin(radian) * 74}px`;
+    label.textContent = franchiseShortLabel(franchise);
+    labels.append(label);
   });
-  const center = document.createElement("span");
-  center.className = "radial-center";
-  center.textContent = "Atlas";
-  elements.radialMenu.append(center);
+  const center = document.createElement("div");
+  center.className = "radial-center-hole";
+  elements.radialMenu.append(svg, labels, center);
 }
 
 function updateRadialSelection(x, y) {
   const dx = x - state.radial.startX;
   const dy = y - state.radial.startY;
-  if (Math.hypot(dx, dy) < 24) {
+  if (Math.hypot(dx, dy) < RADIAL_SELECT_DISTANCE) {
     state.radial.selected = null;
   } else {
-    const angle = ((Math.atan2(dy, dx) * 180) / Math.PI + 450) % 360;
-    const index = Math.round(angle / (360 / FRANCHISES.length)) % FRANCHISES.length;
+    const angle = (Math.atan2(dy, dx) * 180) / Math.PI;
+    const index = Math.floor(((angle + 126 + 360) % 360) / (360 / FRANCHISES.length));
     state.radial.selected = FRANCHISES[index];
   }
-  elements.radialMenu.querySelectorAll(".radial-item").forEach((item) => {
+  elements.radialMenu.querySelectorAll(".radial-segment, .radial-label").forEach((item) => {
     item.classList.toggle("is-active", item.dataset.franchise === state.radial.selected);
   });
+}
+
+function donutSegmentPath(cx, cy, outerRadius, innerRadius, startDeg, endDeg) {
+  const point = (radius, deg) => {
+    const rad = (deg * Math.PI) / 180;
+    return [cx + Math.cos(rad) * radius, cy + Math.sin(rad) * radius];
+  };
+  const [outerStartX, outerStartY] = point(outerRadius, startDeg);
+  const [outerEndX, outerEndY] = point(outerRadius, endDeg);
+  const [innerEndX, innerEndY] = point(innerRadius, endDeg);
+  const [innerStartX, innerStartY] = point(innerRadius, startDeg);
+  const largeArc = endDeg - startDeg > 180 ? 1 : 0;
+  return [
+    `M ${outerStartX} ${outerStartY}`,
+    `A ${outerRadius} ${outerRadius} 0 ${largeArc} 1 ${outerEndX} ${outerEndY}`,
+    `L ${innerEndX} ${innerEndY}`,
+    `A ${innerRadius} ${innerRadius} 0 ${largeArc} 0 ${innerStartX} ${innerStartY}`,
+    "Z",
+  ].join(" ");
 }
 
 function bindCollectionPanelNavigation(panel, type) {
@@ -2571,6 +2650,10 @@ function cloudPayload() {
     collection: normalizeCollection(state.collection),
     overrides: state.overrides,
     series_label_overrides: state.seriesLabelOverrides,
+    appearance: {
+      theme: state.theme,
+      app_icon: state.appIcon,
+    },
   };
 }
 
@@ -2706,6 +2789,14 @@ function applyRemoteState(remote, options = {}) {
     remote.payload?.series_label_overrides && typeof remote.payload.series_label_overrides === "object"
       ? remote.payload.series_label_overrides
       : {};
+  if (remote.payload?.appearance && typeof remote.payload.appearance === "object") {
+    const nextTheme = remote.payload.appearance.theme;
+    if (THEMES.some((theme) => theme.code === nextTheme)) {
+      state.theme = nextTheme;
+    }
+    state.appIcon = String(remote.payload.appearance.app_icon || "");
+    saveAppearance({ skipSync: true });
+  }
   state.syncMeta = {
     revision: remote.revision,
     updatedAt: remote.updatedAt,
@@ -3023,8 +3114,12 @@ function renderThemeControls() {
     button.className = `segment-button${state.theme === theme.code ? " is-active" : ""}`;
     button.textContent = theme.label[state.language] || theme.label.en;
     button.addEventListener("click", () => {
+      if (!canEditSharedData()) {
+        setSyncStatus("readonly", t("readOnlyHint"));
+        return;
+      }
       state.theme = theme.code;
-      saveTheme();
+      saveAppearance();
       renderThemeControls();
       applyAppearance();
     });
@@ -3448,7 +3543,6 @@ function renderHomeUpdates() {
       alt: t("boxArtAlt", { name: kitDisplayName(kit) }),
       onExhausted: () => showPlaceholder(art, kit.grade_code || "?"),
     });
-    addReleaseBadge(art, kit);
 
     const body = document.createElement("div");
     body.className = "home-update-body";
