@@ -17,13 +17,13 @@ const UPDATE_NOTIFICATION_LAST_KEY = "gunpula-catalog-update-notified-v1";
 const UPDATE_NOTIFICATION_FILTER_KEY = "gunpula-catalog-update-notification-filters-v1";
 const THEME_KEY = "gunpula-catalog-theme-v1";
 const APP_ICON_KEY = "gunpula-catalog-app-icon-v1";
+const HOME_COVER_KEY = "gunpula-catalog-home-covers-v1";
 const RELEASE_MONTH_KEY = "gunpula-catalog-release-month-v1";
 const SYNC_POLL_INTERVAL_MS = 15000;
 const SYNC_SAVE_DEBOUNCE_MS = 700;
 const SYNC_HISTORY_LIMIT = 20;
 const KIT_RENDER_BATCH = 160;
 const RADIAL_HOLD_MS = 420;
-const RADIAL_CANCEL_DISTANCE = 36;
 const RADIAL_SELECT_DISTANCE = 28;
 
 const COLLECTION_TYPES = ["owned", "wanted"];
@@ -158,6 +158,7 @@ const TRANSLATIONS = {
     themeClassic: "经典",
     customAppIcon: "自定义图标",
     changeAppIcon: "更改图标",
+    changeCover: "更换封面",
     resetAppIcon: "恢复默认",
     closeSettings: "关闭设置",
     language: "语言",
@@ -388,6 +389,7 @@ const TRANSLATIONS = {
     themeClassic: "클래식",
     customAppIcon: "사용자 아이콘",
     changeAppIcon: "아이콘 변경",
+    changeCover: "표지 변경",
     resetAppIcon: "기본값",
     closeSettings: "설정 닫기",
     language: "언어",
@@ -618,6 +620,7 @@ const TRANSLATIONS = {
     themeClassic: "Classic",
     customAppIcon: "Custom icon",
     changeAppIcon: "Change icon",
+    changeCover: "Change cover",
     resetAppIcon: "Reset",
     closeSettings: "Close settings",
     language: "Language",
@@ -848,6 +851,7 @@ const TRANSLATIONS = {
     themeClassic: "クラシック",
     customAppIcon: "カスタムアイコン",
     changeAppIcon: "アイコン変更",
+    changeCover: "表紙変更",
     resetAppIcon: "標準に戻す",
     closeSettings: "設定を閉じる",
     language: "言語",
@@ -1067,8 +1071,9 @@ const state = {
   collectionSelection: { owned: new Set(), wanted: new Set() },
   theme: loadTheme(),
   appIcon: loadAppIcon(),
+  homeCovers: loadHomeCovers(),
   releaseMonth: localStorage.getItem(RELEASE_MONTH_KEY) || "",
-  radial: { timer: null, active: false, startX: 0, startY: 0, pointerId: null, selected: null },
+  radial: { timer: null, active: false, startX: 0, startY: 0, lastX: 0, lastY: 0, pointerId: null, selected: null, target: null, suppressClick: false },
   syncConfig: loadSyncConfig(),
   syncMeta: loadSyncMeta(),
   syncHistory: loadSyncHistory(),
@@ -1103,6 +1108,7 @@ const state = {
   consoleMode: loadConsoleMode(),
   selectedKit: null,
   selectedImageIndex: 0,
+  pendingHomeCoverFranchise: null,
   renderLimit: KIT_RENDER_BATCH,
   renderSignature: "",
   swipeStartX: null,
@@ -1156,8 +1162,7 @@ const elements = {
   sourceHealthStrip: document.querySelector("#sourceHealthStrip"),
   homeUpdateList: document.querySelector("#homeUpdateList"),
   homeSection: document.querySelector("#homeSection"),
-  homeIconButton: document.querySelector("#homeIconButton"),
-  homeIconInput: document.querySelector("#homeIconInput"),
+  homeCoverInput: document.querySelector("#homeCoverInput"),
   homeGrid: document.querySelector("#homeGrid"),
   homeTotal: document.querySelector("#homeTotal"),
   pbandaiSection: document.querySelector("#pbandaiSection"),
@@ -1610,9 +1615,43 @@ function saveAppIcon() {
   }
 }
 
+function loadHomeCovers() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(HOME_COVER_KEY) || "{}");
+    return normalizeHomeCovers(parsed);
+  } catch {
+    return {};
+  }
+}
+
+function normalizeHomeCovers(value) {
+  const covers = {};
+  if (!value || typeof value !== "object") {
+    return covers;
+  }
+  for (const franchise of FRANCHISES) {
+    const cover = value[franchise];
+    if (typeof cover === "string" && cover) {
+      covers[franchise] = cover;
+    }
+  }
+  return covers;
+}
+
+function saveHomeCovers() {
+  const covers = normalizeHomeCovers(state.homeCovers);
+  state.homeCovers = covers;
+  if (Object.keys(covers).length) {
+    localStorage.setItem(HOME_COVER_KEY, JSON.stringify(covers));
+  } else {
+    localStorage.removeItem(HOME_COVER_KEY);
+  }
+}
+
 function saveAppearance(options = {}) {
   saveTheme();
   saveAppIcon();
+  saveHomeCovers();
   if (!options.skipSync) {
     scheduleCloudSave("appearance");
   }
@@ -1979,8 +2018,7 @@ function closeSettings(options = {}) {
 function bindEvents() {
   elements.settingsOpen.addEventListener("click", openSettings);
   elements.settingsClose.addEventListener("click", closeSettings);
-  elements.homeIconButton?.addEventListener("click", () => elements.homeIconInput?.click());
-  elements.homeIconInput?.addEventListener("change", handleAppIconUpload);
+  elements.homeCoverInput?.addEventListener("change", handleHomeCoverUpload);
   elements.appIconInput.addEventListener("change", handleAppIconUpload);
   elements.resetAppIcon.addEventListener("click", () => {
     if (!canEditSharedData()) {
@@ -1990,7 +2028,6 @@ function bindEvents() {
     state.appIcon = "";
     saveAppearance();
     elements.appIconInput.value = "";
-    if (elements.homeIconInput) elements.homeIconInput.value = "";
     applyAppearance();
   });
   elements.consoleModeToggle.addEventListener("change", (event) => {
@@ -2169,7 +2206,7 @@ async function handleAppIconUpload(event) {
     return;
   }
   try {
-    state.appIcon = await iconDataUrlFromFile(file);
+    state.appIcon = await imageDataUrlFromFile(file, { width: 256, height: 256, fit: "contain", format: "image/png" });
     saveAppearance();
     applyAppearance();
   } finally {
@@ -2177,23 +2214,53 @@ async function handleAppIconUpload(event) {
   }
 }
 
-function iconDataUrlFromFile(file) {
+async function handleHomeCoverUpload(event) {
+  const file = event.target.files?.[0];
+  const franchise = state.pendingHomeCoverFranchise;
+  state.pendingHomeCoverFranchise = null;
+  if (!file || !FRANCHISES.includes(franchise)) {
+    event.target.value = "";
+    return;
+  }
+  if (!canEditSharedData()) {
+    setSyncStatus("readonly", t("readOnlyHint"));
+    event.target.value = "";
+    return;
+  }
+  try {
+    state.homeCovers[franchise] = await imageDataUrlFromFile(file, { width: 720, height: 450, fit: "cover", format: "image/jpeg", quality: 0.86 });
+    saveAppearance();
+    renderHome();
+  } finally {
+    event.target.value = "";
+  }
+}
+
+function imageDataUrlFromFile(file, options = {}) {
+  const targetWidth = options.width || 256;
+  const targetHeight = options.height || targetWidth;
+  const fit = options.fit || "contain";
+  const format = options.format || "image/png";
   return new Promise((resolve, reject) => {
     const image = new Image();
     image.onload = () => {
       const canvas = document.createElement("canvas");
-      canvas.width = 256;
-      canvas.height = 256;
+      canvas.width = targetWidth;
+      canvas.height = targetHeight;
       const context = canvas.getContext("2d");
-      context.clearRect(0, 0, 256, 256);
-      const scale = Math.min(256 / image.width, 256 / image.height);
-      const width = Math.max(1, Math.round(image.width * scale));
-      const height = Math.max(1, Math.round(image.height * scale));
-      context.drawImage(image, (256 - width) / 2, (256 - height) / 2, width, height);
+      context.fillStyle = "#ffffff";
+      context.fillRect(0, 0, targetWidth, targetHeight);
+      const scale = fit === "cover" ? Math.max(targetWidth / image.width, targetHeight / image.height) : Math.min(targetWidth / image.width, targetHeight / image.height);
+      const drawWidth = Math.max(1, Math.round(image.width * scale));
+      const drawHeight = Math.max(1, Math.round(image.height * scale));
+      context.drawImage(image, (canvas.width - drawWidth) / 2, (canvas.height - drawHeight) / 2, drawWidth, drawHeight);
       URL.revokeObjectURL(image.src);
-      resolve(canvas.toDataURL("image/png"));
+      resolve(canvas.toDataURL(format, options.quality));
     };
-    image.onerror = () => reject(new Error("icon load failed"));
+    image.onerror = () => {
+      URL.revokeObjectURL(image.src);
+      reject(new Error("image load failed"));
+    };
     image.src = URL.createObjectURL(file);
   });
 }
@@ -2202,10 +2269,31 @@ function bindRadialMenu() {
   if (!elements.radialMenu) {
     return;
   }
-  document.addEventListener("pointerdown", startRadialPress, { passive: true });
-  document.addEventListener("pointermove", moveRadialPress, { passive: false });
-  document.addEventListener("pointerup", endRadialPress);
-  document.addEventListener("pointercancel", cancelRadialPress);
+  document.addEventListener("pointerdown", startRadialPress, { capture: true, passive: true });
+  document.addEventListener("pointermove", moveRadialPress, { capture: true, passive: false });
+  document.addEventListener("pointerup", endRadialPress, { capture: true });
+  document.addEventListener("pointercancel", finishRadialPress, { capture: true });
+  document.addEventListener(
+    "click",
+    (event) => {
+      if (!state.radial.suppressClick) {
+        return;
+      }
+      state.radial.suppressClick = false;
+      event.preventDefault();
+      event.stopPropagation();
+    },
+    true,
+  );
+  document.addEventListener(
+    "dragstart",
+    (event) => {
+      if (state.radial.pointerId !== null) {
+        event.preventDefault();
+      }
+    },
+    true,
+  );
   document.addEventListener("contextmenu", (event) => {
     if (state.radial.active) {
       event.preventDefault();
@@ -2217,7 +2305,7 @@ function radialTargetAllowed(target) {
   if (elements.detailDialog.open || elements.settingsDialog.open) {
     return false;
   }
-  return !target.closest("input, textarea, select, label, dialog");
+  return !target.closest("dialog");
 }
 
 function startRadialPress(event) {
@@ -2233,21 +2321,26 @@ function startRadialPress(event) {
     active: false,
     startX: event.clientX,
     startY: event.clientY,
+    lastX: event.clientX,
+    lastY: event.clientY,
     pointerId: event.pointerId,
     selected: null,
+    target: event.target,
+    suppressClick: state.radial.suppressClick,
   };
+  try {
+    event.target?.setPointerCapture?.(event.pointerId);
+  } catch {
+    // Some embedded Android WebViews reject capture for synthetic/native mixed pointers.
+  }
 }
 
 function moveRadialPress(event) {
   if (state.radial.pointerId !== event.pointerId) {
     return;
   }
-  const dx = event.clientX - state.radial.startX;
-  const dy = event.clientY - state.radial.startY;
-  if (!state.radial.active && Math.hypot(dx, dy) > RADIAL_CANCEL_DISTANCE) {
-    cancelRadialPress();
-    return;
-  }
+  state.radial.lastX = event.clientX;
+  state.radial.lastY = event.clientY;
   if (!state.radial.active) {
     return;
   }
@@ -2259,9 +2352,30 @@ function endRadialPress(event) {
   if (state.radial.pointerId !== event.pointerId) {
     return;
   }
+  finishRadialPress(event);
+}
+
+function finishRadialPress(event) {
+  if (state.radial.pointerId !== event.pointerId) {
+    return;
+  }
+  if (state.radial.active) {
+    state.radial.lastX = Number.isFinite(event.clientX) ? event.clientX : state.radial.lastX;
+    state.radial.lastY = Number.isFinite(event.clientY) ? event.clientY : state.radial.lastY;
+    updateRadialSelection(state.radial.lastX, state.radial.lastY);
+  }
   const selected = state.radial.active ? state.radial.selected : null;
+  const target = state.radial.target;
   cancelRadialPress();
   if (selected) {
+    state.radial.suppressClick = true;
+    try {
+      target?.releasePointerCapture?.(event.pointerId);
+    } catch {
+      // Pointer may already be released by the browser.
+    }
+    event.preventDefault();
+    event.stopPropagation();
     openFranchiseCatalog(selected);
   }
 }
@@ -2272,6 +2386,7 @@ function cancelRadialPress() {
   state.radial.active = false;
   state.radial.pointerId = null;
   state.radial.selected = null;
+  state.radial.target = null;
   if (elements.radialMenu) {
     elements.radialMenu.hidden = true;
     elements.radialMenu.innerHTML = "";
@@ -2311,6 +2426,7 @@ function showRadialMenu(x, y) {
   const center = document.createElement("div");
   center.className = "radial-center-hole";
   elements.radialMenu.append(svg, labels, center);
+  updateRadialSelection(state.radial.lastX, state.radial.lastY);
 }
 
 function updateRadialSelection(x, y) {
@@ -2653,6 +2769,7 @@ function cloudPayload() {
     appearance: {
       theme: state.theme,
       app_icon: state.appIcon,
+      home_covers: normalizeHomeCovers(state.homeCovers),
     },
   };
 }
@@ -2795,6 +2912,7 @@ function applyRemoteState(remote, options = {}) {
       state.theme = nextTheme;
     }
     state.appIcon = String(remote.payload.appearance.app_icon || "");
+    state.homeCovers = normalizeHomeCovers(remote.payload.appearance.home_covers);
     saveAppearance({ skipSync: true });
   }
   state.syncMeta = {
@@ -3163,6 +3281,15 @@ function openFranchiseCatalog(franchise) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+function openHomeCoverPicker(franchise) {
+  if (!canEditSharedData()) {
+    setSyncStatus("readonly", t("readOnlyHint"));
+    return;
+  }
+  state.pendingHomeCoverFranchise = franchise;
+  elements.homeCoverInput?.click();
+}
+
 function renderHome() {
   if (!elements.homeSection) {
     return;
@@ -3180,17 +3307,43 @@ function renderHome() {
   elements.homeGrid.innerHTML = "";
 
   for (const franchise of FRANCHISES) {
-    const card = document.createElement("button");
-    card.type = "button";
+    const card = document.createElement("article");
+    card.tabIndex = 0;
+    card.role = "button";
+    card.setAttribute("aria-label", franchiseLabel(franchise));
     card.className = `home-card home-card-${franchise.replace("_", "-")}`;
-    card.addEventListener("click", () => openFranchiseCatalog(franchise));
+    card.addEventListener("click", (event) => {
+      if (event.target.closest(".home-cover-button")) {
+        return;
+      }
+      openFranchiseCatalog(franchise);
+    });
+    card.addEventListener("keydown", (event) => {
+      if (!["Enter", " "].includes(event.key)) {
+        return;
+      }
+      event.preventDefault();
+      openFranchiseCatalog(franchise);
+    });
 
     const media = document.createElement("div");
     media.className = "home-card-media";
-    for (const kit of homeImageKits(franchise)) {
+    const customCover = state.homeCovers[franchise];
+    if (customCover) {
+      media.classList.add("is-custom");
       const slot = document.createElement("span");
-      appendImageWithFallback(slot, kit, { alt: kitDisplayName(kit) });
+      slot.className = "home-card-cover";
+      const image = document.createElement("img");
+      image.src = customCover;
+      image.alt = franchiseLabel(franchise);
+      slot.append(image);
       media.append(slot);
+    } else {
+      for (const kit of homeImageKits(franchise)) {
+        const slot = document.createElement("span");
+        appendImageWithFallback(slot, kit, { alt: kitDisplayName(kit) });
+        media.append(slot);
+      }
     }
     if (!media.children.length) {
       const fallback = document.createElement("span");
@@ -3198,12 +3351,25 @@ function renderHome() {
       fallback.textContent = franchiseShortLabel(franchise);
       media.append(fallback);
     }
+    media.querySelectorAll("img").forEach((image) => {
+      image.draggable = false;
+    });
+
+    const coverButton = document.createElement("button");
+    coverButton.type = "button";
+    coverButton.className = "home-cover-button";
+    coverButton.textContent = t("changeCover");
+    coverButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      openHomeCoverPicker(franchise);
+    });
 
     const body = document.createElement("div");
     body.className = "home-card-body";
     body.innerHTML = `<strong>${escapeHtml(franchiseLabel(franchise))}</strong><span>${escapeHtml(t(homeMetaKey(franchise)))} </span><em>${escapeHtml(t("records", { count: counts.get(franchise) || 0 }))}</em>`;
 
-    card.append(media, body);
+    card.append(media, coverButton, body);
     elements.homeGrid.append(card);
   }
 }

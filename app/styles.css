@@ -29,6 +29,11 @@ body {
     linear-gradient(180deg, #f7fbfb 0%, #eef6f7 36%, #e9f4f2 100%);
 }
 
+.catalog-page img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
 button,
 input,
 select {
@@ -664,13 +669,7 @@ h1 {
   letter-spacing: 0;
 }
 
-.home-hero-actions {
-  display: grid;
-  justify-items: end;
-  gap: 8px;
-}
-
-.home-hero-actions > span {
+.home-hero > span {
   color: var(--muted);
   font-size: 13px;
   font-weight: 900;
@@ -684,6 +683,7 @@ h1 {
 }
 
 .home-card {
+  position: relative;
   min-width: 0;
   padding: 0;
   overflow: hidden;
@@ -693,6 +693,7 @@ h1 {
   color: var(--ink);
   text-align: left;
   box-shadow: 0 10px 26px rgba(32, 92, 112, 0.06);
+  cursor: pointer;
 }
 
 .home-card:hover,
@@ -730,6 +731,44 @@ h1 {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.home-card-media.is-custom {
+  display: block;
+  padding: 0;
+}
+
+.home-card-media.is-custom span,
+.home-card-media.is-custom span:first-child {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.home-card-media.is-custom img {
+  object-fit: cover;
+}
+
+.home-cover-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  min-height: 30px;
+  padding: 0 9px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 999px;
+  background: rgba(17, 41, 58, 0.68);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 900;
+  box-shadow: 0 8px 18px rgba(17, 41, 58, 0.18);
+  backdrop-filter: blur(10px);
+}
+
+.home-cover-button:focus-visible,
+.home-cover-button:hover {
+  outline: 0;
+  background: var(--accent-blue);
 }
 
 .home-card-fallback {
@@ -2458,10 +2497,6 @@ body[data-view="pbandai"] .top-bar {
   .home-hero {
     min-height: 84px;
     padding: 14px;
-  }
-
-  .home-hero-actions {
-    justify-items: end;
   }
 
   .home-hero h1 {

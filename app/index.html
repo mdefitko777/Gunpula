@@ -9,7 +9,7 @@
     <title>Collection Atlas</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260706-icon-radial" />
+    <link rel="stylesheet" href="./styles.css?v=20260706-home-covers" />
   </head>
   <body>
     <main class="catalog-page">
@@ -69,12 +69,9 @@
             <p class="home-kicker" data-i18n="homeKicker">收藏图鉴</p>
             <h1 data-i18n="homeTitle">Collection Atlas</h1>
           </div>
-          <div class="home-hero-actions">
-            <button class="secondary-button compact-button" id="homeIconButton" type="button" data-i18n="changeAppIcon">更改图标</button>
-            <input id="homeIconInput" type="file" accept="image/*" hidden />
-            <span id="homeTotal">0</span>
-          </div>
+          <span id="homeTotal">0</span>
         </div>
+        <input id="homeCoverInput" type="file" accept="image/*" hidden />
         <div class="home-grid" id="homeGrid"></div>
       </section>
 
@@ -417,6 +414,6 @@
       <div class="radial-labels"></div>
     </div>
 
-    <script type="module" src="./main.js?v=20260706-icon-radial"></script>
+    <script type="module" src="./main.js?v=20260706-home-covers"></script>
   </body>
 </html>
