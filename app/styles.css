@@ -46,9 +46,25 @@ select {
 }
 
 .catalog-page {
+  position: relative;
+  z-index: 2;
   width: min(1320px, 100%);
   margin: 0 auto;
   padding: 12px;
+}
+
+body.is-paging {
+  overflow-x: hidden;
+}
+
+body.is-paging .catalog-page {
+  transform: translateX(var(--pager-drag-x, 0));
+  will-change: transform;
+}
+
+body.is-pager-settling .catalog-page,
+body.is-pager-settling .pager-preview {
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .page-header {
@@ -2337,6 +2353,99 @@ body[data-view="pbandai"] .top-bar {
 .danger-button {
   border-color: rgba(185, 75, 69, 0.42);
   color: var(--danger);
+}
+
+.pager-preview {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: stretch;
+  padding: 12px;
+  background: var(--bg);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.pager-preview[hidden],
+.gesture-overlay[hidden] {
+  display: none;
+}
+
+.pager-preview-card {
+  width: min(1320px, 100%);
+  min-height: calc(100vh - 24px);
+  margin: 0 auto;
+  padding: 18px;
+  display: grid;
+  align-content: center;
+  gap: 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg, rgba(47, 111, 159, 0.08), rgba(127, 187, 167, 0.11)),
+    #ffffff;
+}
+
+.pager-preview-media {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.pager-preview-media span {
+  min-height: 116px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--soft);
+}
+
+.pager-preview-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.pager-preview-fallback {
+  grid-column: 1 / -1;
+  color: var(--accent-blue);
+  font-size: 42px;
+  font-weight: 900;
+}
+
+.pager-preview-body {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  text-align: center;
+}
+
+.pager-preview-body span,
+.pager-preview-body em {
+  color: var(--muted);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.pager-preview-body strong {
+  color: var(--ink);
+  font-size: clamp(26px, 7vw, 48px);
+  line-height: 1;
+}
+
+.gesture-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 75;
+  background: transparent;
+  touch-action: none;
+}
+
+body.is-radial-active {
+  overflow: hidden;
 }
 
 .radial-menu {

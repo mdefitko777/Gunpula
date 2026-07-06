@@ -23,8 +23,12 @@ const SYNC_POLL_INTERVAL_MS = 15000;
 const SYNC_SAVE_DEBOUNCE_MS = 700;
 const SYNC_HISTORY_LIMIT = 20;
 const KIT_RENDER_BATCH = 160;
-const RADIAL_HOLD_MS = 420;
+const RADIAL_HOLD_MS = 350;
 const RADIAL_SELECT_DISTANCE = 28;
+const PAGER_START_DISTANCE = 18;
+const PAGER_THRESHOLD_RATIO = 0.28;
+const PAGER_MIN_THRESHOLD = 92;
+const PAGER_ANIMATION_MS = 220;
 
 const COLLECTION_TYPES = ["owned", "wanted"];
 const THEMES = [
@@ -74,6 +78,405 @@ const NAME_FALLBACKS = {
   en: ["en", "ja", "zh", "ko"],
   ja: ["ja", "en", "zh", "ko"],
 };
+
+const JAPANESE_TEXT_PATTERN = /[\u3040-\u30ff]/;
+const DISPLAY_NAME_REPLACEMENTS = {
+  zh: [
+    ["機動戦士ガンダム", "机动战士高达"],
+    ["新機動戦記ガンダムW", "新机动战记高达W"],
+    ["鉄血のオルフェンズ", "铁血的奥尔芬斯"],
+    ["水星の魔女", "水星的魔女"],
+    ["逆襲のシャア", "逆袭的夏亚"],
+    ["閃光のハサウェイ", "闪光的哈萨维"],
+    ["ポケットの中の戦争", "口袋里的战争"],
+    ["マイティーストライクフリーダム", "强袭自由高达二式"],
+    ["ストライクフリーダム", "强袭自由"],
+    ["ライジングフリーダム", "升扬自由"],
+    ["イモータルジャスティス", "不朽正义"],
+    ["インフィニットジャスティス", "无限正义"],
+    ["プロヴィデンス", "神意"],
+    ["デスティニー", "命运"],
+    ["インパルス", "脉冲"],
+    ["フリーダム", "自由"],
+    ["ジャスティス", "正义"],
+    ["ストライク", "强袭"],
+    ["イージス", "圣盾"],
+    ["デュエル", "决斗"],
+    ["バスター", "暴风"],
+    ["ブリッツ", "迅雷"],
+    ["アストレイ", "异端"],
+    ["アカツキ", "晓"],
+    ["ランチャーストライカー", "炮战强袭背包"],
+    ["ソードストライカー", "剑战强袭背包"],
+    ["ウイング", "飞翼"],
+    ["デスサイズ", "死神"],
+    ["ヘビーアームズ", "重武装"],
+    ["サンドロック", "沙漠"],
+    ["シェンロン", "神龙"],
+    ["トールギス", "托鲁基斯"],
+    ["エピオン", "艾比安"],
+    ["エクシア", "能天使"],
+    ["デュナメス", "力天使"],
+    ["キュリオス", "主天使"],
+    ["ヴァーチェ", "德天使"],
+    ["ナドレ", "娜德雷"],
+    ["アストレア", "正义女神"],
+    ["ケルディム", "智天使"],
+    ["アリオス", "堕天使"],
+    ["セラヴィー", "炽天使"],
+    ["クアンタ", "量子型"],
+    ["バルバトス", "巴巴托斯"],
+    ["グシオン", "古辛"],
+    ["キマリス", "锡蒙力"],
+    ["グレイズ", "格雷兹"],
+    ["バエル", "巴耶力"],
+    ["ヴィダール", "维达尔"],
+    ["マルコシアス", "马可西亚斯"],
+    ["ユニコーン", "独角兽"],
+    ["バンシィ", "报丧女妖"],
+    ["フェネクス", "凤凰"],
+    ["シナンジュ", "新安洲"],
+    ["クシャトリヤ", "刹帝利"],
+    ["サザビー", "沙扎比"],
+    ["ナイチンゲール", "夜莺"],
+    ["ケンプファー", "京宝梵"],
+    ["キュベレイ", "卡碧尼"],
+    ["ガンダムMk-II", "高达 Mk-II"],
+    ["グレート・ジオング", "大吉翁号"],
+    ["ジオング", "吉翁号"],
+    ["ハイパー・メガ・バズーカ・ランチャー", "超级米加火箭炮发射器"],
+    ["Gディフェンサー", "G防卫者"],
+    ["メッサーラ", "梅萨拉"],
+    ["ハンブラビ", "汉布拉比"],
+    ["メッサー", "梅萨"],
+    ["キケロガ", "奇克罗加"],
+    ["シャリア・ブル", "夏利亚·布尔"],
+    ["アリュゼウス", "阿琉泽乌斯"],
+    ["グスタフ・カール", "古斯塔夫·卡尔"],
+    ["百式", "百式"],
+    ["ゼータ", "Zeta"],
+    ["ダブルゼータ", "ZZ"],
+    ["ブルーディスティニー", "苍蓝命运"],
+    ["クロスボーン", "海盗"],
+    ["GUNDAM", "高达"],
+    ["Gundam", "高达"],
+    ["ガンダム", "高达"],
+    ["ザク", "扎古"],
+    ["グフ", "老虎"],
+    ["ドム", "大魔"],
+    ["ゲルググ", "勇士"],
+    ["ジム", "吉姆"],
+    ["ボール", "铁球"],
+    ["シャア専用", "夏亚专用"],
+    ["量産型", "量产型"],
+    ["高機動型", "高机动型"],
+    ["専用", "专用"],
+    ["抽選販売", "抽选贩售"],
+    ["プレミアムバンダイ", "Premium Bandai"],
+    ["発売分", "发售批次"],
+    ["発送分", "发货批次"],
+    ["オプションパーツセット", "选配零件套装"],
+    ["オプションセット", "选配套装"],
+    ["拡張セット", "扩展套装"],
+    ["武器セット", "武器套装"],
+    ["武装セット", "武装套装"],
+    ["パーツセット", "零件套装"],
+    ["台座セット", "底座套装"],
+    ["スタンドセット", "支架套装"],
+    ["セット", "套装"],
+    ["限定", "限定"],
+    ["仕様", "规格"],
+    ["重塗装", "重涂装"],
+    ["塗装", "涂装"],
+    ["クリアカラー", "透明色"],
+    ["リアルタイプ", "真实比例"],
+    ["アニメカラー", "动画配色"],
+    ["ハードポイント", "硬点"],
+    ["装備", "装备"],
+    ["発動", "发动"],
+    ["再販", "再贩"],
+    ["リバイバル版", "复刻版"],
+    ["最終決戦", "最终决战"],
+    ["ポケットモンスター", "宝可梦"],
+    ["ポケモン", "宝可梦"],
+    ["ガシャポン", "扭蛋"],
+    ["カプキャラ", "胶囊角色"],
+    ["つまんでつなげてますこっと", "串联挂件"],
+    ["はさむんです", "夹夹饰"],
+    ["スイング", "吊饰"],
+    ["ラバーマスコット", "橡胶挂件"],
+    ["フィギュア", "手办"],
+    ["イーブイフレンズ", "伊布朋友"],
+    ["サン＆ムーン", "太阳&月亮"],
+    ["クレスト", "克雷斯特"],
+    ["レイレナード", "雷雷纳德"],
+    ["ミラージュ", "幻影"],
+    ["ラインアーク", "Line Ark"],
+    ["ホワイト・グリント", "白色闪光"],
+    ["スティールヘイズ", "钢铁迷雾"],
+    ["ロックスミス", "锁匠"],
+    ["オープンフェイス", "开脸"],
+    ["ミルクトゥース", "乳牙"],
+    ["ライガーテイル", "虎尾"],
+    ["ナイトフォール", "夜幕"],
+    ["ハングドマン", "倒吊人"],
+    ["ヴェンジェンス", "复仇"],
+    ["オラクル", "神谕"],
+    ["サンシャイン", "阳光"],
+    ["フィードバック", "反馈"],
+    ["近接突撃型", "近接突击型"],
+    ["強襲型", "强袭型"],
+    ["軽量級", "轻量级"],
+    ["再戦", "再战"],
+    ["コトブキヤショップ限定品", "寿屋店铺限定"],
+    ["ランダムブースター", "随机补充包"],
+    ["ストリングランチャー", "拉绳发射器"],
+    ["メタルコート", "金属涂层"],
+    ["アプリ・イベント限定", "App/活动限定"],
+    ["タカラトミーモール", "Takara Tomy Mall"],
+    ["ストームペガシス", "风暴天马"],
+    ["グローリーワルキューレ", "荣耀女武神"],
+    ["サムライセイバー", "武士军刀"],
+    ["ドランブレイブ", "勇气龙"],
+    ["ドレイクブレイブ", "勇气飞龙"],
+    ["ホーネットフォート", "黄蜂堡垒"],
+    ["クラーケンリグル", "海妖咆哮"],
+    ["ブラック", "黑"],
+    ["グリーン", "绿"],
+    ["ブルー", "蓝"],
+    ["オレンジ", "橙"],
+    ["イエロー", "黄"],
+    ["Nendoroid", "黏土人"],
+    ["POP UP PARADE", "POP UP PARADE"],
+    ["Saber", "剑阶"],
+    ["Lancer", "枪阶"],
+    ["Archer", "弓阶"],
+    ["Rider", "骑阶"],
+    ["Caster", "术阶"],
+    ["Assassin", "杀阶"],
+    ["Berserker", "狂阶"],
+    ["Ruler", "尺阶"],
+    ["Avenger", "仇阶"],
+    ["Foreigner", "降临者"],
+    ["Altria", "阿尔托莉雅"],
+    ["Artoria", "阿尔托莉雅"],
+    ["Jeanne d'Arc", "贞德"],
+    ["Morgan", "摩根"],
+    ["Scáthach", "斯卡哈"],
+    ["Skadi", "斯卡蒂"],
+    ["Mélusine", "妖兰"],
+    ["Koyanskaya of Light", "光之高扬斯卡娅"],
+    ["Minamoto-no-Raikou", "源赖光"],
+    ["Katsushika Hokusai", "葛饰北斋"],
+    ["Mysterious Alter Ego Λ", "谜之Alter Ego Λ"],
+    ["Final Ascension", "最终再临"],
+    ["Travel Portrait", "旅行肖像"],
+    ["Bunny Ver.", "兔女郎Ver."],
+    ["Ver.", "Ver."],
+    ["・", "·"],
+    ["（", "("],
+    ["）", ")"],
+  ],
+  ko: [
+    ["機動戦士ガンダム", "기동전사 건담"],
+    ["新機動戦記ガンダムW", "신기동전기 건담W"],
+    ["鉄血のオルフェンズ", "철혈의 오펀스"],
+    ["水星の魔女", "수성의 마녀"],
+    ["逆襲のシャア", "역습의 샤아"],
+    ["閃光のハサウェイ", "섬광의 하사웨이"],
+    ["ポケットの中の戦争", "주머니 속의 전쟁"],
+    ["マイティーストライクフリーダム", "마이티 스트라이크 프리덤"],
+    ["ストライクフリーダム", "스트라이크 프리덤"],
+    ["ライジングフリーダム", "라이징 프리덤"],
+    ["イモータルジャスティス", "이모탈 저스티스"],
+    ["インフィニットジャスティス", "인피니트 저스티스"],
+    ["プロヴィデンス", "프로비던스"],
+    ["デスティニー", "데스티니"],
+    ["インパルス", "임펄스"],
+    ["フリーダム", "프리덤"],
+    ["ジャスティス", "저스티스"],
+    ["ストライク", "스트라이크"],
+    ["イージス", "이지스"],
+    ["デュエル", "듀얼"],
+    ["バスター", "버스터"],
+    ["ブリッツ", "블리츠"],
+    ["アストレイ", "아스트레이"],
+    ["アカツキ", "아카츠키"],
+    ["ランチャーストライカー", "런처 스트라이커"],
+    ["ソードストライカー", "소드 스트라이커"],
+    ["ウイング", "윙"],
+    ["デスサイズ", "데스사이즈"],
+    ["ヘビーアームズ", "헤비암즈"],
+    ["サンドロック", "샌드록"],
+    ["シェンロン", "셴롱"],
+    ["トールギス", "톨기스"],
+    ["エピオン", "에피온"],
+    ["エクシア", "엑시아"],
+    ["デュナメス", "듀나메스"],
+    ["キュリオス", "큐리오스"],
+    ["ヴァーチェ", "버체"],
+    ["ナドレ", "나드레"],
+    ["アストレア", "아스트레아"],
+    ["ケルディム", "켈딤"],
+    ["アリオス", "아리오스"],
+    ["セラヴィー", "세라비"],
+    ["クアンタ", "퀀터"],
+    ["バルバトス", "발바토스"],
+    ["グシオン", "구시온"],
+    ["キマリス", "키마리스"],
+    ["グレイズ", "그레이즈"],
+    ["バエル", "바알"],
+    ["ヴィダール", "비다르"],
+    ["マルコシアス", "마르코시아스"],
+    ["ユニコーン", "유니콘"],
+    ["バンシィ", "밴시"],
+    ["フェネクス", "페넥스"],
+    ["シナンジュ", "시난주"],
+    ["クシャトリヤ", "크샤트리아"],
+    ["サザビー", "사자비"],
+    ["ナイチンゲール", "나이팅게일"],
+    ["ケンプファー", "캠퍼"],
+    ["キュベレイ", "큐베레이"],
+    ["ガンダムMk-II", "건담 Mk-II"],
+    ["グレート・ジオング", "그레이트 지옹"],
+    ["ジオング", "지옹"],
+    ["ハイパー・メガ・バズーカ・ランチャー", "하이퍼 메가 바주카 런처"],
+    ["Gディフェンサー", "G 디펜서"],
+    ["メッサーラ", "멧사라"],
+    ["ハンブラビ", "함브라비"],
+    ["メッサー", "멧사"],
+    ["キケロガ", "키케로가"],
+    ["シャリア・ブル", "샤리아 불"],
+    ["アリュゼウス", "아류제우스"],
+    ["グスタフ・カール", "구스타프 칼"],
+    ["百式", "백식"],
+    ["ゼータ", "제타"],
+    ["ダブルゼータ", "더블 제타"],
+    ["ブルーディスティニー", "블루 데스티니"],
+    ["クロスボーン", "크로스본"],
+    ["GUNDAM", "건담"],
+    ["Gundam", "건담"],
+    ["ガンダム", "건담"],
+    ["ザク", "자쿠"],
+    ["グフ", "구프"],
+    ["ドム", "돔"],
+    ["ゲルググ", "겔구그"],
+    ["ジム", "짐"],
+    ["ボール", "볼"],
+    ["シャア専用", "샤아 전용"],
+    ["量産型", "양산형"],
+    ["高機動型", "고기동형"],
+    ["専用", "전용"],
+    ["抽選販売", "추첨 판매"],
+    ["プレミアムバンダイ", "프리미엄 반다이"],
+    ["発売分", "발매분"],
+    ["発送分", "배송분"],
+    ["オプションパーツセット", "옵션 파츠 세트"],
+    ["オプションセット", "옵션 세트"],
+    ["拡張セット", "확장 세트"],
+    ["武器セット", "무기 세트"],
+    ["武装セット", "무장 세트"],
+    ["パーツセット", "파츠 세트"],
+    ["台座セット", "베이스 세트"],
+    ["スタンドセット", "스탠드 세트"],
+    ["セット", "세트"],
+    ["限定", "한정"],
+    ["仕様", "사양"],
+    ["重塗装", "중도장"],
+    ["塗装", "도장"],
+    ["クリアカラー", "클리어 컬러"],
+    ["リアルタイプ", "리얼 타입"],
+    ["アニメカラー", "애니메 컬러"],
+    ["ハードポイント", "하드 포인트"],
+    ["装備", "장비"],
+    ["発動", "발동"],
+    ["再販", "재판"],
+    ["リバイバル版", "리바이벌판"],
+    ["最終決戦", "최종 결전"],
+    ["ポケットモンスター", "포켓몬스터"],
+    ["ポケモン", "포켓몬"],
+    ["ガシャポン", "가샤폰"],
+    ["カプキャラ", "캡캐라"],
+    ["つまんでつなげてますこっと", "집어서 연결 마스코트"],
+    ["はさむんです", "끼우는 마스코트"],
+    ["スイング", "스윙"],
+    ["ラバーマスコット", "러버 마스코트"],
+    ["フィギュア", "피규어"],
+    ["イーブイフレンズ", "이브이 프렌즈"],
+    ["サン＆ムーン", "썬&문"],
+    ["クレスト", "크레스트"],
+    ["レイレナード", "레이레너드"],
+    ["ミラージュ", "미라주"],
+    ["ラインアーク", "라인아크"],
+    ["ホワイト・グリント", "화이트 글린트"],
+    ["スティールヘイズ", "스틸 헤이즈"],
+    ["ロックスミス", "록스미스"],
+    ["オープンフェイス", "오픈 페이스"],
+    ["ミルクトゥース", "밀크투스"],
+    ["ライガーテイル", "라이거 테일"],
+    ["ナイトフォール", "나이트폴"],
+    ["ハングドマン", "행드맨"],
+    ["ヴェンジェンス", "벤전스"],
+    ["オラクル", "오라클"],
+    ["サンシャイン", "선샤인"],
+    ["フィードバック", "피드백"],
+    ["近接突撃型", "근접 돌격형"],
+    ["強襲型", "강습형"],
+    ["軽量級", "경량급"],
+    ["再戦", "재전"],
+    ["コトブキヤショップ限定品", "코토부키야샵 한정"],
+    ["ランダムブースター", "랜덤 부스터"],
+    ["ストリングランチャー", "스트링 런처"],
+    ["メタルコート", "메탈 코트"],
+    ["アプリ・イベント限定", "앱/이벤트 한정"],
+    ["タカラトミーモール", "타카라토미몰"],
+    ["ストームペガシス", "스톰 페가시스"],
+    ["グローリーワルキューレ", "글로리 발키리"],
+    ["サムライセイバー", "사무라이 세이버"],
+    ["ドランブレイブ", "드랜 브레이브"],
+    ["ドレイクブレイブ", "드레이크 브레이브"],
+    ["ホーネットフォート", "호넷 포트"],
+    ["クラーケンリグル", "크라켄 리글"],
+    ["ブラック", "블랙"],
+    ["グリーン", "그린"],
+    ["ブルー", "블루"],
+    ["オレンジ", "오렌지"],
+    ["イエロー", "옐로"],
+    ["Nendoroid", "넨도로이드"],
+    ["POP UP PARADE", "POP UP PARADE"],
+    ["Saber", "세이버"],
+    ["Lancer", "랜서"],
+    ["Archer", "아처"],
+    ["Rider", "라이더"],
+    ["Caster", "캐스터"],
+    ["Assassin", "어새신"],
+    ["Berserker", "버서커"],
+    ["Ruler", "룰러"],
+    ["Avenger", "어벤저"],
+    ["Foreigner", "포리너"],
+    ["Altria", "알트리아"],
+    ["Artoria", "알트리아"],
+    ["Jeanne d'Arc", "잔 다르크"],
+    ["Morgan", "모르간"],
+    ["Scáthach", "스카사하"],
+    ["Skadi", "스카디"],
+    ["Mélusine", "멜뤼진"],
+    ["Koyanskaya of Light", "빛의 코얀스카야"],
+    ["Minamoto-no-Raikou", "미나모토노 라이코"],
+    ["Katsushika Hokusai", "가쓰시카 호쿠사이"],
+    ["Mysterious Alter Ego Λ", "수수께끼의 얼터에고 Λ"],
+    ["Final Ascension", "최종재림"],
+    ["Travel Portrait", "트래블 포트레이트"],
+    ["Bunny Ver.", "버니 Ver."],
+    ["Ver.", "Ver."],
+    ["・", " "],
+    ["（", "("],
+    ["）", ")"],
+  ],
+};
+for (const replacements of Object.values(DISPLAY_NAME_REPLACEMENTS)) {
+  replacements.sort((a, b) => b[0].length - a[0].length);
+}
 
 const GRADE_SHORT_LABELS = {
   METAL_BUILD: { zh: "MB", ko: "MB", en: "MB", ja: "MB" },
@@ -1073,7 +1476,8 @@ const state = {
   appIcon: loadAppIcon(),
   homeCovers: loadHomeCovers(),
   releaseMonth: localStorage.getItem(RELEASE_MONTH_KEY) || "",
-  radial: { timer: null, active: false, startX: 0, startY: 0, lastX: 0, lastY: 0, pointerId: null, selected: null, target: null, suppressClick: false },
+  radial: { timer: null, active: false, startX: 0, startY: 0, lastX: 0, lastY: 0, touchId: null, selected: null, target: null, suppressClick: false },
+  pager: { active: false, touchId: null, startX: 0, startY: 0, deltaX: 0, target: null, settling: false, suppressClick: false },
   syncConfig: loadSyncConfig(),
   syncMeta: loadSyncMeta(),
   syncHistory: loadSyncHistory(),
@@ -1248,6 +1652,8 @@ const elements = {
   saveSeriesLabel: document.querySelector("#saveSeriesLabel"),
   clearSeriesLabel: document.querySelector("#clearSeriesLabel"),
   exportSeriesLabels: document.querySelector("#exportSeriesLabels"),
+  pagerPreview: document.querySelector("#pagerPreview"),
+  gestureOverlay: document.querySelector("#gestureOverlay"),
   radialMenu: document.querySelector("#radialMenu"),
 };
 
@@ -2266,20 +2672,21 @@ function imageDataUrlFromFile(file, options = {}) {
 }
 
 function bindRadialMenu() {
-  if (!elements.radialMenu) {
+  if (!elements.radialMenu || !elements.gestureOverlay) {
     return;
   }
-  document.addEventListener("pointerdown", startRadialPress, { capture: true, passive: true });
-  document.addEventListener("pointermove", moveRadialPress, { capture: true, passive: false });
-  document.addEventListener("pointerup", endRadialPress, { capture: true });
-  document.addEventListener("pointercancel", finishRadialPress, { capture: true });
+  document.addEventListener("touchstart", startTouchGesture, { capture: true, passive: false });
+  document.addEventListener("touchmove", moveTouchGesture, { capture: true, passive: false });
+  document.addEventListener("touchend", endTouchGesture, { capture: true, passive: false });
+  document.addEventListener("touchcancel", cancelTouchGesture, { capture: true, passive: false });
   document.addEventListener(
     "click",
     (event) => {
-      if (!state.radial.suppressClick) {
+      if (!state.radial.suppressClick && !state.pager.suppressClick) {
         return;
       }
       state.radial.suppressClick = false;
+      state.pager.suppressClick = false;
       event.preventDefault();
       event.stopPropagation();
     },
@@ -2288,7 +2695,7 @@ function bindRadialMenu() {
   document.addEventListener(
     "dragstart",
     (event) => {
-      if (state.radial.pointerId !== null) {
+      if (state.radial.touchId !== null || state.pager.active) {
         event.preventDefault();
       }
     },
@@ -2301,80 +2708,120 @@ function bindRadialMenu() {
   });
 }
 
-function radialTargetAllowed(target) {
+function gestureTargetAllowed(target) {
   if (elements.detailDialog.open || elements.settingsDialog.open) {
     return false;
   }
-  return !target.closest("dialog");
+  if (!(target instanceof Element)) {
+    return false;
+  }
+  return !target.closest("dialog, input, textarea, select, option");
 }
 
-function startRadialPress(event) {
-  if (event.pointerType === "mouse" && event.button !== 0) {
+function startTouchGesture(event) {
+  if (event.touches.length !== 1 || state.pager.settling || !gestureTargetAllowed(event.target)) {
     return;
   }
-  if (!radialTargetAllowed(event.target)) {
-    return;
-  }
+  const touch = event.changedTouches[0];
   cancelRadialPress();
+  resetPagerGesture();
   state.radial = {
-    timer: setTimeout(() => showRadialMenu(event.clientX, event.clientY), RADIAL_HOLD_MS),
+    timer: setTimeout(() => showRadialMenu(touch.clientX, touch.clientY), RADIAL_HOLD_MS),
     active: false,
-    startX: event.clientX,
-    startY: event.clientY,
-    lastX: event.clientX,
-    lastY: event.clientY,
-    pointerId: event.pointerId,
+    startX: touch.clientX,
+    startY: touch.clientY,
+    lastX: touch.clientX,
+    lastY: touch.clientY,
+    touchId: touch.identifier,
     selected: null,
     target: event.target,
     suppressClick: state.radial.suppressClick,
   };
-  try {
-    event.target?.setPointerCapture?.(event.pointerId);
-  } catch {
-    // Some embedded Android WebViews reject capture for synthetic/native mixed pointers.
+  state.pager.touchId = touch.identifier;
+  state.pager.startX = touch.clientX;
+  state.pager.startY = touch.clientY;
+  state.pager.deltaX = 0;
+}
+
+function moveTouchGesture(event) {
+  const touch = trackedTouch(event.touches);
+  if (!touch) {
+    return;
+  }
+  state.radial.lastX = touch.clientX;
+  state.radial.lastY = touch.clientY;
+
+  if (state.radial.active) {
+    if (event.cancelable) event.preventDefault();
+    updateRadialSelection(touch.clientX, touch.clientY);
+    return;
+  }
+
+  if (state.pager.active) {
+    if (event.cancelable) event.preventDefault();
+    updatePagerGesture(touch.clientX - state.pager.startX);
+    return;
+  }
+
+  const deltaX = touch.clientX - state.radial.startX;
+  const deltaY = touch.clientY - state.radial.startY;
+  const absX = Math.abs(deltaX);
+  const absY = Math.abs(deltaY);
+  if (state.activeView === "catalog" && absX > PAGER_START_DISTANCE && absX > absY * 1.15) {
+    clearTimeout(state.radial.timer);
+    state.radial.timer = null;
+    startPagerGesture(deltaX);
+    updatePagerGesture(deltaX);
+    if (event.cancelable) event.preventDefault();
+    return;
+  }
+  if (absY > 12 && absY > absX) {
+    cancelRadialPress();
   }
 }
 
-function moveRadialPress(event) {
-  if (state.radial.pointerId !== event.pointerId) {
-    return;
-  }
-  state.radial.lastX = event.clientX;
-  state.radial.lastY = event.clientY;
-  if (!state.radial.active) {
-    return;
-  }
-  event.preventDefault();
-  updateRadialSelection(event.clientX, event.clientY);
-}
-
-function endRadialPress(event) {
-  if (state.radial.pointerId !== event.pointerId) {
-    return;
-  }
-  finishRadialPress(event);
-}
-
-function finishRadialPress(event) {
-  if (state.radial.pointerId !== event.pointerId) {
+function endTouchGesture(event) {
+  const touch = trackedTouch(event.changedTouches);
+  if (!touch) {
     return;
   }
   if (state.radial.active) {
-    state.radial.lastX = Number.isFinite(event.clientX) ? event.clientX : state.radial.lastX;
-    state.radial.lastY = Number.isFinite(event.clientY) ? event.clientY : state.radial.lastY;
-    updateRadialSelection(state.radial.lastX, state.radial.lastY);
+    finishRadialTouch(event, touch);
+    return;
   }
+  if (state.pager.active) {
+    finishPagerGesture(event, touch);
+    return;
+  }
+  cancelRadialPress();
+  resetPagerGesture(true);
+}
+
+function cancelTouchGesture(event) {
+  if (!trackedTouch(event.changedTouches)) {
+    return;
+  }
+  cancelRadialPress();
+  resetPagerGesture(true);
+}
+
+function trackedTouch(list) {
+  const touchId = state.radial.touchId ?? state.pager.touchId;
+  if (touchId === null || touchId === undefined) {
+    return null;
+  }
+  return [...list].find((touch) => touch.identifier === touchId) || null;
+}
+
+function finishRadialTouch(event, touch) {
+  state.radial.lastX = touch.clientX;
+  state.radial.lastY = touch.clientY;
+  updateRadialSelection(touch.clientX, touch.clientY);
   const selected = state.radial.active ? state.radial.selected : null;
-  const target = state.radial.target;
   cancelRadialPress();
   if (selected) {
     state.radial.suppressClick = true;
-    try {
-      target?.releasePointerCapture?.(event.pointerId);
-    } catch {
-      // Pointer may already be released by the browser.
-    }
-    event.preventDefault();
+    if (event.cancelable) event.preventDefault();
     event.stopPropagation();
     openFranchiseCatalog(selected);
   }
@@ -2384,9 +2831,13 @@ function cancelRadialPress() {
   clearTimeout(state.radial.timer);
   state.radial.timer = null;
   state.radial.active = false;
-  state.radial.pointerId = null;
+  state.radial.touchId = null;
   state.radial.selected = null;
   state.radial.target = null;
+  if (elements.gestureOverlay) {
+    elements.gestureOverlay.hidden = true;
+  }
+  document.body.classList.remove("is-radial-active");
   if (elements.radialMenu) {
     elements.radialMenu.hidden = true;
     elements.radialMenu.innerHTML = "";
@@ -2394,10 +2845,16 @@ function cancelRadialPress() {
 }
 
 function showRadialMenu(x, y) {
+  const centerX = Math.min(Math.max(x, 112), window.innerWidth - 112);
+  const centerY = Math.min(Math.max(y, 112), window.innerHeight - 112);
   state.radial.active = true;
+  state.radial.startX = centerX;
+  state.radial.startY = centerY;
+  elements.gestureOverlay.hidden = false;
+  document.body.classList.add("is-radial-active");
   elements.radialMenu.hidden = false;
-  elements.radialMenu.style.left = `${x}px`;
-  elements.radialMenu.style.top = `${y}px`;
+  elements.radialMenu.style.left = `${centerX}px`;
+  elements.radialMenu.style.top = `${centerY}px`;
   elements.radialMenu.innerHTML = "";
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("class", "radial-ring");
@@ -2442,6 +2899,124 @@ function updateRadialSelection(x, y) {
   elements.radialMenu.querySelectorAll(".radial-segment, .radial-label").forEach((item) => {
     item.classList.toggle("is-active", item.dataset.franchise === state.radial.selected);
   });
+}
+
+function startPagerGesture(deltaX) {
+  const target = adjacentFranchise(deltaX < 0 ? 1 : -1);
+  if (!target || !elements.pagerPreview) {
+    return;
+  }
+  state.pager.active = true;
+  state.pager.target = target;
+  state.pager.suppressClick = true;
+  cancelRadialPress();
+  document.body.classList.add("is-paging");
+  showPagerPreview(target);
+}
+
+function updatePagerGesture(deltaX) {
+  if (!state.pager.active || !elements.pagerPreview) {
+    return;
+  }
+  const width = window.innerWidth || 1;
+  const clamped = Math.max(-width, Math.min(width, deltaX));
+  const target = adjacentFranchise(clamped < 0 ? 1 : -1);
+  if (target && target !== state.pager.target) {
+    state.pager.target = target;
+    showPagerPreview(target);
+  }
+  state.pager.deltaX = clamped;
+  document.body.style.setProperty("--pager-drag-x", `${clamped}px`);
+  const previewX = clamped < 0 ? width + clamped : -width + clamped;
+  elements.pagerPreview.style.transform = `translateX(${previewX}px)`;
+}
+
+function finishPagerGesture(event, touch) {
+  const deltaX = touch.clientX - state.pager.startX;
+  updatePagerGesture(deltaX);
+  const width = window.innerWidth || 1;
+  const threshold = Math.max(PAGER_MIN_THRESHOLD, width * PAGER_THRESHOLD_RATIO);
+  const target = state.pager.target;
+  const shouldSwitch = target && Math.abs(state.pager.deltaX) >= threshold;
+  state.pager.settling = true;
+  document.body.classList.add("is-pager-settling");
+  if (shouldSwitch) {
+    document.body.style.setProperty("--pager-drag-x", `${state.pager.deltaX < 0 ? -width : width}px`);
+    elements.pagerPreview.style.transform = "translateX(0)";
+  } else {
+    document.body.style.setProperty("--pager-drag-x", "0px");
+    const previewX = state.pager.deltaX < 0 ? width : -width;
+    elements.pagerPreview.style.transform = `translateX(${previewX}px)`;
+  }
+  window.setTimeout(() => {
+    const next = shouldSwitch ? target : null;
+    resetPagerGesture(true);
+    if (next) {
+      openFranchiseCatalog(next);
+    }
+  }, PAGER_ANIMATION_MS);
+  if (event.cancelable) event.preventDefault();
+  event.stopPropagation();
+}
+
+function resetPagerGesture(force = false) {
+  if (state.pager.settling && !force) {
+    return;
+  }
+  document.body.classList.remove("is-paging", "is-pager-settling");
+  document.body.style.removeProperty("--pager-drag-x");
+  if (elements.pagerPreview) {
+    elements.pagerPreview.hidden = true;
+    elements.pagerPreview.innerHTML = "";
+    elements.pagerPreview.style.transform = "";
+  }
+  state.pager.active = false;
+  state.pager.settling = false;
+  state.pager.touchId = null;
+  state.pager.target = null;
+  state.pager.deltaX = 0;
+}
+
+function adjacentFranchise(offset) {
+  const index = FRANCHISES.indexOf(state.franchise);
+  if (index < 0) {
+    return null;
+  }
+  return FRANCHISES[(index + offset + FRANCHISES.length) % FRANCHISES.length];
+}
+
+function kitCountsByFranchise() {
+  const counts = new Map();
+  for (const kit of state.kits) {
+    counts.set(kit.franchise, (counts.get(kit.franchise) || 0) + 1);
+  }
+  return counts;
+}
+
+function showPagerPreview(franchise) {
+  elements.pagerPreview.hidden = false;
+  elements.pagerPreview.innerHTML = "";
+  const counts = kitCountsByFranchise();
+  const card = document.createElement("div");
+  card.className = "pager-preview-card";
+  const media = document.createElement("div");
+  media.className = "pager-preview-media";
+  for (const kit of homeImageKits(franchise).slice(0, 3)) {
+    const slot = document.createElement("span");
+    appendImageWithFallback(slot, kit, { alt: kitDisplayName(kit) });
+    media.append(slot);
+  }
+  if (!media.children.length) {
+    const fallback = document.createElement("span");
+    fallback.className = "pager-preview-fallback";
+    fallback.textContent = franchiseShortLabel(franchise);
+    media.append(fallback);
+  }
+  const body = document.createElement("div");
+  body.className = "pager-preview-body";
+  body.innerHTML = `<span>${escapeHtml(t("franchise"))}</span><strong>${escapeHtml(franchiseLabel(franchise))}</strong><em>${escapeHtml(t("records", { count: counts.get(franchise) || 0 }))}</em>`;
+  card.append(media, body);
+  elements.pagerPreview.append(card);
 }
 
 function donutSegmentPath(cx, cy, outerRadius, innerRadius, startDeg, endDeg) {
@@ -3855,7 +4430,6 @@ function renderPBandaiProducts() {
     } else {
       showPlaceholder(art, "PB");
     }
-    addReleaseBadge(art, kit || item.release_date || "");
 
     const body = document.createElement("div");
     body.className = "pbandai-body";
@@ -4251,11 +4825,67 @@ function baseSeriesLabelForLanguage(key, language) {
   return sample ? baseSeriesLabel(sample.series, language) : key;
 }
 
-function kitDisplayName(kit) {
+function cleanDisplayName(value) {
+  return String(value ?? "")
+    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+    .replace(/\s*\/\s*/g, " / ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function escapePattern(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function applyDisplayNameReplacements(value, language) {
+  let text = cleanDisplayName(value);
+  const replacements = DISPLAY_NAME_REPLACEMENTS[language];
+  if (!text || !replacements) {
+    return text;
+  }
+  for (const [source, target] of replacements) {
+    text = text.replace(new RegExp(escapePattern(source), "g"), target);
+  }
+  return cleanDisplayName(text)
+    .replace(/\s+([)\]】])/g, "$1")
+    .replace(/([(\[【])\s+/g, "$1")
+    .trim();
+}
+
+function kitDisplayNameForLanguage(kit, language) {
   const names = kit.names || {};
-  for (const code of NAME_FALLBACKS[state.language] ?? NAME_FALLBACKS.zh) {
+  if (language === "zh" || language === "ko") {
+    const direct = cleanDisplayName(names[language]);
+    const translatedDirect = applyDisplayNameReplacements(direct, language);
+    if (translatedDirect && (translatedDirect !== direct || !JAPANESE_TEXT_PATTERN.test(translatedDirect))) {
+      return translatedDirect;
+    }
+    const english = applyDisplayNameReplacements(names.en, language);
+    if (english && !JAPANESE_TEXT_PATTERN.test(english)) {
+      return english;
+    }
+    const japanese = applyDisplayNameReplacements(names.ja, language);
+    if (japanese) {
+      return japanese;
+    }
+  }
+  for (const code of NAME_FALLBACKS[language] ?? NAME_FALLBACKS.zh) {
     if (names[code]) {
-      return names[code];
+      return cleanDisplayName(names[code]);
+    }
+  }
+  return kit.kit_id;
+}
+
+function kitDisplayName(kit) {
+  for (const code of NAME_FALLBACKS[state.language] ?? NAME_FALLBACKS.zh) {
+    const name = kitDisplayNameForLanguage(kit, code);
+    if (name) {
+      return name;
     }
   }
   return kit.kit_id;
@@ -4326,7 +4956,13 @@ function filteredKits() {
       kit.names.en,
       kit.names.zh,
       kit.names.ko,
+      kitDisplayNameForLanguage(kit, "zh"),
+      kitDisplayNameForLanguage(kit, "ko"),
+      kitDisplayNameForLanguage(kit, "en"),
+      kitDisplayNameForLanguage(kit, "ja"),
       seriesLabelFromKit(kit),
+      seriesLabelFromSeries(kit.series, "zh"),
+      seriesLabelFromSeries(kit.series, "ko"),
       kit.series?.key,
       kit.work_title,
       kit.universe,

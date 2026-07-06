@@ -9,7 +9,7 @@
     <title>Collection Atlas</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260706-home-covers" />
+    <link rel="stylesheet" href="./styles.css?v=20260706-touch-pager" />
   </head>
   <body>
     <main class="catalog-page">
@@ -409,11 +409,13 @@
       </div>
     </dialog>
 
+    <div class="pager-preview" id="pagerPreview" hidden aria-hidden="true"></div>
+    <div class="gesture-overlay" id="gestureOverlay" hidden aria-hidden="true"></div>
     <div class="radial-menu" id="radialMenu" hidden aria-hidden="true">
       <svg class="radial-ring" viewBox="0 0 220 220" aria-hidden="true"></svg>
       <div class="radial-labels"></div>
     </div>
 
-    <script type="module" src="./main.js?v=20260706-home-covers"></script>
+    <script type="module" src="./main.js?v=20260706-touch-pager"></script>
   </body>
 </html>
