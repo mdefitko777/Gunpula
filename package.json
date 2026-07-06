@@ -32,6 +32,8 @@
     "audit:gundam-series": "node scripts/audit_gundam_series.mjs",
     "check:sources": "node scripts/check_source_health.mjs",
     "updates": "node scripts/build_update_feed.mjs",
+    "market": "node scripts/build_market_data.mjs",
+    "android:status": "node scripts/build_market_data.mjs",
     "android:sync": "npx @capacitor/cli sync android",
     "android:add": "npx @capacitor/cli add android",
     "android:build": "npm run android:sync && cd android && gradlew assembleDebug",

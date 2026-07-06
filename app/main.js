@@ -530,6 +530,35 @@ const TRANSLATIONS = {
     homeNav: "首页",
     collectionNav: "收藏",
     recentUpdatesNav: "最近更新",
+    marketNav: "市场",
+    marketCenter: "市场中心",
+    marketPrice: "市场价",
+    marketSubtitle: "更新 {date} · 样本 {samples} · 汇率 {exchange}",
+    marketSources: "来源",
+    marketApiReady: "API 可用",
+    marketManualReady: "手动/缓存",
+    marketKeywords: "关键词",
+    marketFx: "汇率",
+    marketImages: "图片",
+    marketPricedKits: "有价格商品",
+    marketNoSamples: "还没有价格样本，可先用搜索入口找当前价格。",
+    marketNormalEstimate: "普通估算",
+    marketConservativeEstimate: "保守估算",
+    marketSourceReady: "API 已配置",
+    marketSourceNeedsKeys: "需要 API key",
+    marketSourceManual: "手动链接",
+    marketSourceCache: "缓存/VPS",
+    marketOpenSearch: "搜索 {source}",
+    marketSearchLinks: "平台搜索",
+    keywordAssistant: "AI 名称/关键词整理",
+    keywordQueries: "推荐搜索词",
+    negativeKeywords: "排除词",
+    imageAssetLibrary: "图片资产库",
+    imageAssetReady: "{count} 张 · {size} MB · 本地图 {local}/{total}",
+    androidPackage: "Android APK",
+    androidReady: "Capacitor {status} · Android 项目 {android}",
+    androidPresent: "已生成",
+    androidMissing: "未生成",
     homeKicker: "收藏图鉴",
     homeTitle: "Collection Atlas",
     homeOpen: "进入图鉴",
@@ -761,6 +790,35 @@ const TRANSLATIONS = {
     homeNav: "홈",
     collectionNav: "컬렉션",
     recentUpdatesNav: "최근",
+    marketNav: "시세",
+    marketCenter: "시세 센터",
+    marketPrice: "시장가",
+    marketSubtitle: "업데이트 {date} · 샘플 {samples} · 환율 {exchange}",
+    marketSources: "소스",
+    marketApiReady: "API 가능",
+    marketManualReady: "수동/캐시",
+    marketKeywords: "키워드",
+    marketFx: "환율",
+    marketImages: "이미지",
+    marketPricedKits: "가격 상품",
+    marketNoSamples: "가격 샘플이 없습니다. 먼저 검색 링크로 현재가를 확인하세요.",
+    marketNormalEstimate: "일반 추정",
+    marketConservativeEstimate: "보수 추정",
+    marketSourceReady: "API 설정됨",
+    marketSourceNeedsKeys: "API key 필요",
+    marketSourceManual: "수동 링크",
+    marketSourceCache: "캐시/VPS",
+    marketOpenSearch: "{source} 검색",
+    marketSearchLinks: "플랫폼 검색",
+    keywordAssistant: "AI 이름/키워드 정리",
+    keywordQueries: "추천 검색어",
+    negativeKeywords: "제외어",
+    imageAssetLibrary: "이미지 자산",
+    imageAssetReady: "{count}장 · {size} MB · 로컬 이미지 {local}/{total}",
+    androidPackage: "Android APK",
+    androidReady: "Capacitor {status} · Android 프로젝트 {android}",
+    androidPresent: "있음",
+    androidMissing: "없음",
     homeKicker: "컬렉션 도감",
     homeTitle: "Collection Atlas",
     homeOpen: "도감 열기",
@@ -992,6 +1050,35 @@ const TRANSLATIONS = {
     homeNav: "Home",
     collectionNav: "Collection",
     recentUpdatesNav: "Updates",
+    marketNav: "Market",
+    marketCenter: "Market Center",
+    marketPrice: "Market price",
+    marketSubtitle: "Updated {date} · samples {samples} · FX {exchange}",
+    marketSources: "Sources",
+    marketApiReady: "API ready",
+    marketManualReady: "Manual/cache",
+    marketKeywords: "Keywords",
+    marketFx: "FX",
+    marketImages: "Images",
+    marketPricedKits: "Priced items",
+    marketNoSamples: "No price samples yet. Use the search links to check current prices.",
+    marketNormalEstimate: "Normal estimate",
+    marketConservativeEstimate: "Conservative estimate",
+    marketSourceReady: "API configured",
+    marketSourceNeedsKeys: "Needs API keys",
+    marketSourceManual: "Manual links",
+    marketSourceCache: "Cache/VPS",
+    marketOpenSearch: "Search {source}",
+    marketSearchLinks: "Platform search",
+    keywordAssistant: "AI name / keyword organizer",
+    keywordQueries: "Suggested queries",
+    negativeKeywords: "Exclude terms",
+    imageAssetLibrary: "Image asset library",
+    imageAssetReady: "{count} images · {size} MB · local images {local}/{total}",
+    androidPackage: "Android APK",
+    androidReady: "Capacitor {status} · Android project {android}",
+    androidPresent: "present",
+    androidMissing: "missing",
     homeKicker: "Collection atlas",
     homeTitle: "Collection Atlas",
     homeOpen: "Open atlas",
@@ -1223,6 +1310,35 @@ const TRANSLATIONS = {
     homeNav: "ホーム",
     collectionNav: "コレクション",
     recentUpdatesNav: "更新",
+    marketNav: "相場",
+    marketCenter: "相場センター",
+    marketPrice: "市場価格",
+    marketSubtitle: "更新 {date} · サンプル {samples} · 為替 {exchange}",
+    marketSources: "ソース",
+    marketApiReady: "API 利用可",
+    marketManualReady: "手動/キャッシュ",
+    marketKeywords: "キーワード",
+    marketFx: "為替",
+    marketImages: "画像",
+    marketPricedKits: "価格あり",
+    marketNoSamples: "価格サンプルはまだありません。検索リンクから現在価格を確認できます。",
+    marketNormalEstimate: "通常見積",
+    marketConservativeEstimate: "保守見積",
+    marketSourceReady: "API 設定済み",
+    marketSourceNeedsKeys: "API key 必要",
+    marketSourceManual: "手動リンク",
+    marketSourceCache: "キャッシュ/VPS",
+    marketOpenSearch: "{source} 検索",
+    marketSearchLinks: "プラットフォーム検索",
+    keywordAssistant: "AI 名称/キーワード整理",
+    keywordQueries: "推奨検索語",
+    negativeKeywords: "除外語",
+    imageAssetLibrary: "画像アセット庫",
+    imageAssetReady: "{count}枚 · {size} MB · ローカル画像 {local}/{total}",
+    androidPackage: "Android APK",
+    androidReady: "Capacitor {status} · Android プロジェクト {android}",
+    androidPresent: "あり",
+    androidMissing: "なし",
     homeKicker: "コレクション図鑑",
     homeTitle: "Collection Atlas",
     homeOpen: "図鑑を開く",
@@ -1463,6 +1579,11 @@ const state = {
   pbandai: null,
   sourceHealth: null,
   seriesAudit: null,
+  marketPrices: null,
+  searchIndex: null,
+  searchIndexByKit: new Map(),
+  imageAssets: null,
+  androidPackage: null,
   overrides: {},
   seriesLabelOverrides: {},
   collection: { owned: [], wanted: [] },
@@ -1573,6 +1694,13 @@ const elements = {
   pbandaiSubtitle: document.querySelector("#pbandaiSubtitle"),
   pbandaiFranchiseTabs: document.querySelector("#pbandaiFranchiseTabs"),
   pbandaiList: document.querySelector("#pbandaiList"),
+  marketSection: document.querySelector("#marketSection"),
+  marketSubtitle: document.querySelector("#marketSubtitle"),
+  marketSummary: document.querySelector("#marketSummary"),
+  marketSourceGrid: document.querySelector("#marketSourceGrid"),
+  keywordPreview: document.querySelector("#keywordPreview"),
+  imageAssetSummary: document.querySelector("#imageAssetSummary"),
+  androidPackageSummary: document.querySelector("#androidPackageSummary"),
   collectionSection: document.querySelector("#collectionSection"),
   ownedPanel: document.querySelector("#ownedPanel"),
   wantedPanel: document.querySelector("#wantedPanel"),
@@ -1627,6 +1755,9 @@ const elements = {
   collectionNoteInput: document.querySelector("#collectionNoteInput"),
   saveCollectionDetails: document.querySelector("#saveCollectionDetails"),
   detailMeta: document.querySelector("#detailMeta"),
+  detailMarketPanel: document.querySelector("#detailMarketPanel"),
+  detailMarketBody: document.querySelector("#detailMarketBody"),
+  openMarketFromDetail: document.querySelector("#openMarketFromDetail"),
   detailOfficialLink: document.querySelector("#detailOfficialLink"),
   correctionPanel: document.querySelector(".correction-panel"),
   editToggle: document.querySelector("#editToggle"),
@@ -1903,7 +2034,20 @@ function applyViewState(viewState) {
 }
 
 async function init() {
-  const [gradesDoc, kitsDoc, sourcesDoc, imageHealthDoc, updateFeedDoc, pbandaiDoc, sourceHealthDoc, seriesAuditDoc] = await Promise.all([
+  const [
+    gradesDoc,
+    kitsDoc,
+    sourcesDoc,
+    imageHealthDoc,
+    updateFeedDoc,
+    pbandaiDoc,
+    sourceHealthDoc,
+    seriesAuditDoc,
+    marketPricesDoc,
+    searchIndexDoc,
+    imageAssetsDoc,
+    androidPackageDoc,
+  ] = await Promise.all([
     loadJson("../data/grades.json"),
     loadJson("../data/kits.json"),
     loadJson("../data/sources.json"),
@@ -1912,6 +2056,10 @@ async function init() {
     loadOptionalJson("../data/pbandai.json"),
     loadOptionalJson("../data/source-health.json"),
     loadOptionalJson("../data/series-audit.json"),
+    loadOptionalJson("../data/market-prices.json"),
+    loadOptionalJson("../data/search-index.json"),
+    loadOptionalJson("../data/image-assets.json"),
+    loadOptionalJson("../data/android-package.json"),
   ]);
 
   state.grades = gradesDoc.grades;
@@ -1922,6 +2070,11 @@ async function init() {
   state.pbandai = pbandaiDoc;
   state.sourceHealth = sourceHealthDoc;
   state.seriesAudit = seriesAuditDoc;
+  state.marketPrices = marketPricesDoc;
+  state.searchIndex = searchIndexDoc;
+  state.searchIndexByKit = new Map((searchIndexDoc?.records || []).map((record) => [record.kit_id, record]));
+  state.imageAssets = imageAssetsDoc;
+  state.androidPackage = androidPackageDoc;
   state.overrides = loadOverrides();
   state.seriesLabelOverrides = loadSeriesLabelOverrides();
   state.collection = loadCollection();
@@ -1962,7 +2115,7 @@ function normalizeState() {
   if (state.activeView === "collection") {
     state.activeView = "wanted";
   }
-  if (!["home", "catalog", "updates", "pbandai", "owned", "wanted"].includes(state.activeView)) {
+  if (!["home", "catalog", "updates", "pbandai", "market", "owned", "wanted"].includes(state.activeView)) {
     state.activeView = "home";
   }
   if (!THEMES.some((theme) => theme.code === state.theme)) {
@@ -2534,6 +2687,20 @@ function bindEvents() {
   elements.wantedQuantityPlus.addEventListener("click", () => updateSelectedWantedQuantity(wantedQuantityForKit(state.selectedKit?.kit_id) + 1));
   elements.wantedQuantityInput.addEventListener("change", (event) => updateSelectedWantedQuantity(event.target.value));
   elements.saveCollectionDetails.addEventListener("click", saveSelectedCollectionDetails);
+  elements.openMarketFromDetail?.addEventListener("click", () => {
+    if (state.selectedKit?.franchise) {
+      state.franchise = state.selectedKit.franchise;
+      localStorage.setItem(FRANCHISE_KEY, state.franchise);
+    }
+    state.activeView = "market";
+    state.selectedKit = null;
+    localStorage.setItem(ACTIVE_VIEW_KEY, state.activeView);
+    render();
+    if (elements.detailDialog.open) {
+      elements.detailDialog.close();
+    }
+    persistViewState({ mode: "push" });
+  });
   elements.editToggle.addEventListener("click", () => {
     elements.correctionForm.hidden = !elements.correctionForm.hidden;
   });
@@ -3766,6 +3933,7 @@ function render() {
   renderCollections();
   renderHomeUpdates();
   renderPBandaiProducts();
+  renderMarketCenter();
   renderUpdateLog();
   renderFilterSummary();
   renderKits();
@@ -4480,6 +4648,304 @@ function renderPBandaiFranchiseTabs(franchises) {
   }
 }
 
+function marketSources() {
+  return [...(state.marketPrices?.sources || [])].sort((a, b) => Number(a.priority || 99) - Number(b.priority || 99));
+}
+
+function searchRecordForKit(kit) {
+  return kit?.kit_id ? state.searchIndexByKit.get(kit.kit_id) || null : null;
+}
+
+function marketRecordForKit(kit) {
+  return kit?.kit_id ? state.marketPrices?.by_kit?.[kit.kit_id] || null : null;
+}
+
+function marketListingsForKit(kit) {
+  if (!kit?.kit_id) {
+    return [];
+  }
+  return (state.marketPrices?.listings || []).filter((listing) => listing.kit_id === kit.kit_id);
+}
+
+function marketSourceStatusText(source) {
+  if (source.ready === true) return t("marketSourceReady");
+  if (source.ready === "manual") return t("marketSourceManual");
+  if (source.ready === "cache") return t("marketSourceCache");
+  return t("marketSourceNeedsKeys");
+}
+
+function marketSourceStatusClass(source) {
+  if (source.ready === true) return "is-ready";
+  if (source.ready === "manual") return "is-manual";
+  if (source.ready === "cache") return "is-cache";
+  return "is-missing";
+}
+
+function formatKrw(value) {
+  return Number.isFinite(Number(value)) ? `₩${Number(value).toLocaleString("ko-KR")}` : t("pending");
+}
+
+function formatMarketDate(value) {
+  return String(value || t("pending")).slice(0, 10);
+}
+
+function marketPrimaryQuery(kit) {
+  const record = searchRecordForKit(kit);
+  return record?.queries?.[0] || [kit?.grade_code, kitShortName(kit)].filter(Boolean).join(" ");
+}
+
+function marketSearchUrl(source, query) {
+  const template = source?.search_url_template;
+  if (!template || !query) {
+    return "";
+  }
+  return template.replace("{query}", encodeURIComponent(query));
+}
+
+function marketSearchLinksForKit(kit, limit = 8) {
+  const query = marketPrimaryQuery(kit);
+  return marketSources()
+    .map((source) => ({ source, url: marketSearchUrl(source, query) }))
+    .filter((item) => item.url)
+    .slice(0, limit);
+}
+
+function createMarketMetric(label, value, meta = "") {
+  const card = document.createElement("div");
+  card.className = "market-metric";
+  const title = document.createElement("strong");
+  title.textContent = label;
+  const number = document.createElement("span");
+  number.textContent = value;
+  const small = document.createElement("em");
+  small.textContent = meta;
+  card.append(title, number, small);
+  return card;
+}
+
+function renderMarketCenter() {
+  if (!elements.marketSection) {
+    return;
+  }
+  const isMarketView = state.activeView === "market";
+  elements.marketSection.hidden = !isMarketView;
+  if (!isMarketView) {
+    return;
+  }
+
+  const summary = state.marketPrices?.summary || {};
+  const fx = state.marketPrices?.exchange_rates || {};
+  elements.marketSubtitle.textContent = t("marketSubtitle", {
+    date: formatMarketDate(state.marketPrices?.updated_at),
+    samples: summary.listing_samples || 0,
+    exchange: `${fx.fetch_status || "n/a"} ${fx.date || ""}`.trim(),
+  });
+
+  elements.marketSummary.innerHTML = "";
+  elements.marketSummary.append(
+    createMarketMetric(t("marketSources"), summary.sources_total || marketSources().length || 0, `${t("marketApiReady")} ${summary.api_ready || 0}`),
+    createMarketMetric(t("marketManualReady"), summary.manual_ready || 0, "Manual / VPS cache"),
+    createMarketMetric(t("marketKeywords"), summary.keyword_records || state.searchIndex?.records?.length || 0, t("marketSearchLinks")),
+    createMarketMetric(t("marketPricedKits"), summary.priced_kits || 0, `${summary.listing_samples || 0} samples`),
+    createMarketMetric(t("marketFx"), fx.date || t("pending"), fx.provider || "Frankfurter"),
+    createMarketMetric(t("marketImages"), summary.image_files || state.imageAssets?.image_files || 0, `${summary.image_total_mb || state.imageAssets?.total_mb || 0} MB`),
+  );
+
+  renderMarketSources();
+  renderKeywordPreview();
+  renderImageAssetSummary();
+  renderAndroidPackageSummary();
+}
+
+function renderMarketSources() {
+  elements.marketSourceGrid.innerHTML = "";
+  const sources = marketSources();
+  if (!sources.length) {
+    const empty = document.createElement("div");
+    empty.className = "home-update-empty";
+    empty.textContent = t("sourceHealthEmpty");
+    elements.marketSourceGrid.append(empty);
+    return;
+  }
+
+  for (const source of sources) {
+    const card = document.createElement("article");
+    card.className = `market-source-card ${marketSourceStatusClass(source)}`;
+    const head = document.createElement("div");
+    head.className = "market-source-head";
+    const title = document.createElement("strong");
+    title.textContent = source.label || source.id;
+    const status = document.createElement("span");
+    status.textContent = marketSourceStatusText(source);
+    head.append(title, status);
+
+    const meta = document.createElement("p");
+    meta.textContent = [source.market, source.currency, source.mode].filter(Boolean).join(" · ");
+
+    const notes = document.createElement("em");
+    notes.textContent = source.missing_env?.length ? source.missing_env.join(" / ") : source.notes || "";
+
+    card.append(head, meta, notes);
+    elements.marketSourceGrid.append(card);
+  }
+}
+
+function renderKeywordPreview() {
+  elements.keywordPreview.innerHTML = "";
+  const records = (state.searchIndex?.records || [])
+    .filter((record) => record.franchise === state.franchise)
+    .slice(0, 8);
+
+  if (!records.length) {
+    const empty = document.createElement("div");
+    empty.className = "home-update-empty";
+    empty.textContent = t("noMatches");
+    elements.keywordPreview.append(empty);
+    return;
+  }
+
+  for (const record of records) {
+    const row = document.createElement("article");
+    row.className = "keyword-row";
+    const title = document.createElement("strong");
+    title.textContent = record.display_name || record.kit_id;
+    const meta = document.createElement("span");
+    meta.textContent = [seriesLabelFromKey(record.series_key), record.product_line].filter(Boolean).join(" · ");
+    const chips = document.createElement("div");
+    chips.className = "market-chip-list";
+    for (const query of (record.queries || []).slice(0, 3)) {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.textContent = query;
+      chip.addEventListener("click", () => {
+        state.query = query;
+        state.activeView = "catalog";
+        state.franchise = record.franchise;
+        localStorage.setItem(ACTIVE_VIEW_KEY, state.activeView);
+        localStorage.setItem(FRANCHISE_KEY, state.franchise);
+        persistViewState({ mode: "push" });
+        render();
+      });
+      chips.append(chip);
+    }
+    row.append(title, meta, chips);
+    elements.keywordPreview.append(row);
+  }
+}
+
+function renderImageAssetSummary() {
+  elements.imageAssetSummary.innerHTML = "";
+  const assets = state.imageAssets || {};
+  elements.imageAssetSummary.append(
+    createMarketMetric(t("marketImages"), assets.image_files || 0, t("imageAssetReady", { count: assets.image_files || 0, size: assets.total_mb || 0, local: assets.catalog_records_with_local_images || 0, total: assets.catalog_records || state.kits.length })),
+  );
+  const roots = document.createElement("div");
+  roots.className = "market-chip-list";
+  for (const [root, count] of Object.entries(assets.roots || {})) {
+    const chip = document.createElement("span");
+    chip.textContent = `${root.replace(/^app\/assets\//, "")} ${count}`;
+    roots.append(chip);
+  }
+  elements.imageAssetSummary.append(roots);
+}
+
+function renderAndroidPackageSummary() {
+  elements.androidPackageSummary.innerHTML = "";
+  const status = state.androidPackage || {};
+  elements.androidPackageSummary.append(
+    createMarketMetric(
+      t("androidPackage"),
+      status.android_project_present ? t("androidPresent") : t("androidMissing"),
+      t("androidReady", {
+        status: status.capacitor_config_present ? t("androidPresent") : t("androidMissing"),
+        android: status.android_project_present ? t("androidPresent") : t("androidMissing"),
+      }),
+    ),
+  );
+  const commands = document.createElement("div");
+  commands.className = "market-chip-list";
+  for (const command of status.commands || ["npm run android:add", "npm run android:sync", "npm run android:build"]) {
+    const chip = document.createElement("span");
+    chip.textContent = command;
+    commands.append(chip);
+  }
+  elements.androidPackageSummary.append(commands);
+}
+
+function renderDetailMarketPanel(kit) {
+  if (!elements.detailMarketPanel || !elements.detailMarketBody) {
+    return;
+  }
+  const record = marketRecordForKit(kit);
+  const searchRecord = searchRecordForKit(kit);
+  const links = marketSearchLinksForKit(kit);
+  const listings = marketListingsForKit(kit).slice(0, 4);
+  if (!record && !searchRecord && !links.length) {
+    elements.detailMarketPanel.hidden = true;
+    return;
+  }
+
+  elements.detailMarketPanel.hidden = false;
+  elements.detailMarketBody.innerHTML = "";
+
+  const estimates = document.createElement("div");
+  estimates.className = "market-estimates";
+  estimates.append(
+    createMarketMetric(t("marketNormalEstimate"), formatKrw(record?.median_krw), `${record?.samples || 0} samples`),
+    createMarketMetric(t("marketConservativeEstimate"), formatKrw(record?.conservative_median_krw), "+ tax / fee"),
+  );
+  elements.detailMarketBody.append(estimates);
+
+  if (!record?.samples) {
+    const note = document.createElement("p");
+    note.className = "market-empty-note";
+    note.textContent = t("marketNoSamples");
+    elements.detailMarketBody.append(note);
+  }
+
+  if (searchRecord?.queries?.length) {
+    const heading = document.createElement("strong");
+    heading.className = "market-mini-heading";
+    heading.textContent = t("keywordQueries");
+    const chips = document.createElement("div");
+    chips.className = "market-chip-list";
+    for (const query of searchRecord.queries.slice(0, 4)) {
+      const chip = document.createElement("span");
+      chip.textContent = query;
+      chips.append(chip);
+    }
+    elements.detailMarketBody.append(heading, chips);
+  }
+
+  if (links.length) {
+    const heading = document.createElement("strong");
+    heading.className = "market-mini-heading";
+    heading.textContent = t("marketSearchLinks");
+    const row = document.createElement("div");
+    row.className = "market-link-row";
+    for (const { source, url } of links) {
+      const link = document.createElement("a");
+      link.href = url;
+      link.target = "_blank";
+      link.rel = "noreferrer";
+      link.textContent = t("marketOpenSearch", { source: source.label || source.id });
+      link.addEventListener("click", persistViewState);
+      row.append(link);
+    }
+    elements.detailMarketBody.append(heading, row);
+  }
+
+  for (const listing of listings) {
+    const item = document.createElement("a");
+    item.className = "market-listing-row";
+    item.href = listing.url || "#";
+    item.target = listing.url ? "_blank" : "";
+    item.rel = listing.url ? "noreferrer" : "";
+    item.innerHTML = `<strong>${escapeHtml(listing.title || listing.source)}</strong><span>${escapeHtml(formatKrw(listing.price_krw))} · ${escapeHtml(listing.source)} · ${escapeHtml(listing.condition || "")}</span>`;
+    elements.detailMarketBody.append(item);
+  }
+}
+
 function sourceStatusLabel(status) {
   if (status === "ok") return t("sourceOk");
   if (status === "blocked") return t("sourceBlocked");
@@ -4968,6 +5434,7 @@ function filteredKits() {
       kit.universe,
       kit.release_date,
       kit.price_jpy,
+      searchRecordForKit(kit)?.search_blob,
     ]
       .join(" ")
       .toLowerCase();
@@ -5996,6 +6463,7 @@ function renderDetail(kit) {
   elements.detailSubtitle.textContent = [kit.release_date, formatPrice(kit.price_jpy)].filter((value) => value && value !== t("pending")).join(" · ");
   renderDetailStatusActions(kit);
   renderDetailMeta(kit);
+  renderDetailMarketPanel(kit);
   renderDetailGallery(kit);
   fillCorrectionForm(kit);
   renderConsoleMode();

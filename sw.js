@@ -1,4 +1,4 @@
-const APP_CACHE = "gunpula-app-v14";
+const APP_CACHE = "gunpula-app-v15";
 const DATA_CACHE = "gunpula-data-v1";
 const IMAGE_CACHE = "gunpula-images-v1";
 const NOTIFICATION_CACHE = "gunpula-notifications-v1";
@@ -21,6 +21,13 @@ const APP_ASSETS = [
   "./data/update-feed.json",
   "./data/pbandai.json",
   "./data/pbandai_sources.json",
+  "./data/market_sources.json",
+  "./data/market_manual_links.json",
+  "./data/market-prices.json",
+  "./data/search-index.json",
+  "./data/exchange-rates.json",
+  "./data/image-assets.json",
+  "./data/android-package.json",
 ];
 
 self.addEventListener("install", (event) => {

@@ -1,0 +1,130 @@
+{
+  "updated_at": "2026-07-06",
+  "tax_profiles": {
+    "normal": {
+      "label": "Normal estimate",
+      "vat_rate": 0,
+      "international_fee_rate": 0
+    },
+    "conservative": {
+      "label": "Conservative import estimate",
+      "vat_rate": 0.1,
+      "international_fee_rate": 0.08
+    }
+  },
+  "sources": [
+    {
+      "id": "naver_shop",
+      "label": "Naver Shop",
+      "market": "KR",
+      "currency": "KRW",
+      "mode": "api",
+      "priority": 1,
+      "api_env": ["NAVER_CLIENT_ID", "NAVER_CLIENT_SECRET"],
+      "search_url_template": "https://search.shopping.naver.com/search/all?query={query}",
+      "tax_profile": "normal",
+      "notes": "Official Naver Shopping Search API when credentials are present."
+    },
+    {
+      "id": "amazon",
+      "label": "Amazon",
+      "market": "JP/US",
+      "currency": "JPY",
+      "mode": "api",
+      "priority": 2,
+      "api_env": ["AMAZON_ACCESS_KEY", "AMAZON_SECRET_KEY", "AMAZON_PARTNER_TAG"],
+      "search_url_template": "https://www.amazon.co.jp/s?k={query}",
+      "tax_profile": "conservative",
+      "notes": "Product Advertising API credentials are required for automatic data."
+    },
+    {
+      "id": "mandarake",
+      "label": "Mandarake",
+      "market": "JP",
+      "currency": "JPY",
+      "mode": "low_frequency_cache",
+      "priority": 3,
+      "search_url_template": "https://order.mandarake.co.jp/order/listPage/list?keyword={query}&lang=en",
+      "tax_profile": "conservative",
+      "notes": "Use low-frequency cache or manual listing import; no aggressive scraping."
+    },
+    {
+      "id": "taobao",
+      "label": "Taobao",
+      "market": "CN",
+      "currency": "CNY",
+      "mode": "api",
+      "priority": 4,
+      "api_env": ["TAOBAO_APP_KEY", "TAOBAO_APP_SECRET", "TAOBAO_SESSION"],
+      "search_url_template": "https://s.taobao.com/search?q={query}",
+      "tax_profile": "conservative",
+      "notes": "TOP/Taobao Alliance credentials are required for automatic data."
+    },
+    {
+      "id": "mercari",
+      "label": "Mercari",
+      "market": "JP",
+      "currency": "JPY",
+      "mode": "manual_or_vps_cache",
+      "priority": 5,
+      "search_url_template": "https://jp.mercari.com/search?keyword={query}",
+      "tax_profile": "conservative",
+      "notes": "Second phase; prefer Japan VPS cache or manual links."
+    },
+    {
+      "id": "xianyu",
+      "label": "Xianyu",
+      "market": "CN",
+      "currency": "CNY",
+      "mode": "manual",
+      "priority": 6,
+      "search_url_template": "https://www.goofish.com/search?q={query}",
+      "tax_profile": "conservative",
+      "notes": "Manual links first unless partner TOP permissions are available."
+    },
+    {
+      "id": "pinduoduo",
+      "label": "Pinduoduo",
+      "market": "CN",
+      "currency": "CNY",
+      "mode": "manual",
+      "priority": 7,
+      "search_url_template": "https://mobile.yangkeduo.com/search_result.html?search_key={query}",
+      "tax_profile": "conservative",
+      "notes": "Manual/cache first because matching noise is high."
+    },
+    {
+      "id": "bunjang",
+      "label": "번개장터",
+      "market": "KR",
+      "currency": "KRW",
+      "mode": "manual",
+      "priority": 8,
+      "search_url_template": "https://m.bunjang.co.kr/search/products?q={query}",
+      "tax_profile": "normal",
+      "notes": "Manual links first."
+    },
+    {
+      "id": "joongna",
+      "label": "중고나라",
+      "market": "KR",
+      "currency": "KRW",
+      "mode": "manual",
+      "priority": 9,
+      "search_url_template": "https://web.joongna.com/search/{query}",
+      "tax_profile": "normal",
+      "notes": "Manual links first."
+    },
+    {
+      "id": "coupang",
+      "label": "쿠팡",
+      "market": "KR",
+      "currency": "KRW",
+      "mode": "manual",
+      "priority": 10,
+      "search_url_template": "https://www.coupang.com/np/search?q={query}",
+      "tax_profile": "normal",
+      "notes": "Manual links first unless partner access is configured."
+    }
+  ]
+}

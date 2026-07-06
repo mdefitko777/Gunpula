@@ -16,6 +16,13 @@ a mobile-first collection atlas instead of a database table.
 - `data/pbandai_sources.json` - Premium Bandai JP URLs for the offline crawler.
 - `data/pbandai.json` - cached Premium Bandai JP products read by the static app.
 - `data/pbandai_manual_products.json` - manually maintained PB/official fallback records.
+- `data/market_sources.json` - market source registry for Naver, Amazon, Mandarake, Taobao, Mercari, and manual-link sources.
+- `data/market_manual_links.json` - manually imported marketplace listings for sources that should not be scraped directly.
+- `data/market-prices.json` - generated market summary, source status, KRW price estimates, and search templates.
+- `data/search-index.json` - generated four-language keyword/search index for the app.
+- `data/exchange-rates.json` - generated daily FX cache, using Frankfurter with previous-cache fallback.
+- `data/image-assets.json` - generated local image asset summary.
+- `data/android-package.json` - generated APK/Capacitor readiness summary.
 - `schema/kit.schema.json` - kit record shape for reference.
 - `docs/grades.md` - readable Chinese grade reference.
 - `docs/data-model.md` - kit data model and validation rules.
@@ -27,6 +34,7 @@ a mobile-first collection atlas instead of a database table.
 - `scripts/source_coverage.mjs` - reports source coverage and missing source types.
 - `scripts/search_kits.mjs` - searches kit records.
 - `scripts/serve_app.mjs` - serves the local catalog UI.
+- `scripts/build_market_data.mjs` - builds market source status, keyword index, FX cache, image asset summary, and Android readiness JSON.
 - `scripts/import_bandai_spirits_gunpla.mjs` - imports the Japanese official BANDAI SPIRITS Gunpla catalog.
 - `scripts/import_bandai_collectibles.mjs` - imports official Bandai Candy, Bandai Gashapon, Pokemon, Armored Core, and BEYBLADE X lines.
 - `scripts/import_goodsmile_fate.mjs` - imports Fate/FGO figure and goods records from Good Smile official pages.
@@ -56,6 +64,7 @@ npm run import:official
 npm run import:data
 npm run duplicates
 npm run audit:gundam-series
+npm run market
 npm run check:images
 npm run check:images:pokemon
 npm run cache:catalog-images
@@ -78,6 +87,7 @@ npm.cmd run import:official
 npm.cmd run import:data
 npm.cmd run duplicates
 npm.cmd run audit:gundam-series
+npm.cmd run market
 ```
 
 If `python` is not on your Windows PATH, use your installed Python executable
@@ -96,8 +106,40 @@ browses. Run `npm run import:official` to refresh the JSON data from Japanese
 official sources; that command can later be wired to a scheduled job.
 
 The current mobile UI is branded as Collection Atlas: a soft blue/white/green
-PWA with a visual home page, four-tab bottom navigation, catalog browsing, and a
-separate collection view for owned and wanted items.
+PWA with a visual home page, bottom navigation for home/catalog/recent/market/
+wanted/owned/settings, catalog browsing, and separate collection views for owned
+and wanted items.
+
+## Market Center
+
+Run:
+
+```bash
+npm run market
+```
+
+This generates:
+
+- `data/search-index.json` for the AI-style name/keyword organizer and advanced search.
+- `data/market-prices.json` for market source status, KRW price estimates, and search links.
+- `data/exchange-rates.json` using Frankfurter as a daily cached FX source.
+- `data/image-assets.json` for the local image asset library summary.
+- `data/android-package.json` for APK/Capacitor readiness.
+
+The first market version is deliberately conservative:
+
+- Naver Shop, Amazon, and Taobao are prepared as API-backed sources and show as
+  ready only when their environment keys are present.
+- Mandarake and Mercari are treated as low-frequency cache/VPS/manual sources.
+- Xianyu, Pinduoduo, 번개장터, 중고나라, and 쿠팡 start as manual-link imports in
+  `data/market_manual_links.json`.
+- The static frontend does not scrape marketplace pages directly.
+- Prices are converted to KRW and displayed with both normal and conservative estimates.
+
+To add a manual market sample, copy the example shape from
+`data/market_manual_links.json` into the `listings` array, then run
+`npm run market`. The app will show the imported sample on the product detail
+page and update the market center counts.
 
 ## Premium Bandai JP Cache
 
@@ -158,9 +200,20 @@ worker caches the app shell, catalog JSON, PB cache JSON, and product images
 that have been opened, so the app remains usable when the network or official
 image URLs are unreliable.
 
-For a Play Store-style APK later, wrap the same web app with Capacitor after the
-Supabase settings are finalized. A base `capacitor.config.json` is included; run
-`npm run android:sync` after adding Capacitor packages and the Android platform.
+For a real APK, wrap the same web app with Capacitor. A base
+`capacitor.config.json` is included. The generated `data/android-package.json`
+and the Market Center show whether the Android project exists.
+
+```bash
+npm run android:status
+npm run android:add
+npm run android:sync
+npm run android:build
+```
+
+`npm run android:add` is a one-time setup command. Building the APK requires a
+machine with Android Studio/JDK/Android SDK installed; GitHub Pages itself cannot
+build or serve a native APK.
 
 ## Shared Supabase Sync
 
@@ -185,9 +238,10 @@ Conflict behavior is intentionally simple for now: the latest sync wins, while
 ## Scheduled Updates
 
 The GitHub Actions workflow `refresh-catalog.yml` runs `npm run import:official`,
-`npm run validate`, `npm run duplicates`, and `npm run audit:gundam-series` once
-a day. If official Japanese source data changes, the workflow commits the
-refreshed JSON and cached assets back to the repository.
+`npm run updates`, `npm run market`, `npm run validate`, `npm run duplicates`,
+and `npm run audit:gundam-series` once a day. If official Japanese source data
+changes, the workflow commits the refreshed JSON, market/search data, and cached
+assets back to the repository.
 
 ## Next Steps
 

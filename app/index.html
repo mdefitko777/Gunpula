@@ -9,7 +9,7 @@
     <title>Collection Atlas</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260706-touch-pager" />
+    <link rel="stylesheet" href="./styles.css?v=20260706-market-center" />
   </head>
   <body>
     <main class="catalog-page">
@@ -102,6 +102,31 @@
         <div class="pbandai-list" id="pbandaiList"></div>
       </section>
 
+      <section class="market-section" id="marketSection" hidden>
+        <div class="updates-head">
+          <div>
+            <h2 data-i18n="marketCenter">市场中心</h2>
+            <p id="marketSubtitle"></p>
+          </div>
+        </div>
+        <div class="market-summary" id="marketSummary"></div>
+        <div class="market-source-grid" id="marketSourceGrid"></div>
+        <div class="market-panels">
+          <section class="market-panel">
+            <h3 data-i18n="keywordAssistant">关键词助手</h3>
+            <div class="keyword-preview" id="keywordPreview"></div>
+          </section>
+          <section class="market-panel">
+            <h3 data-i18n="imageAssetLibrary">图片资产库</h3>
+            <div class="asset-summary" id="imageAssetSummary"></div>
+          </section>
+          <section class="market-panel">
+            <h3 data-i18n="androidPackage">Android APK</h3>
+            <div class="asset-summary" id="androidPackageSummary"></div>
+          </section>
+        </div>
+      </section>
+
       <section class="collection-section" id="collectionSection" hidden>
         <div class="collection-panel" id="ownedPanel">
           <div class="collection-head">
@@ -148,6 +173,7 @@
       <button type="button" data-view="home" class="is-active"><span>⌂</span><strong data-i18n="homeNav">首页</strong></button>
       <button type="button" data-view="catalog"><span>⌕</span><strong data-i18n="catalogList">图鉴</strong></button>
       <button type="button" data-view="updates"><span>↻</span><strong data-i18n="recentUpdatesNav">最近更新</strong></button>
+      <button type="button" data-view="market"><span>₩</span><strong data-i18n="marketNav">市场</strong></button>
       <button type="button" data-view="wanted"><span>☆</span><strong data-i18n="wantedList">想要</strong></button>
       <button type="button" data-view="owned"><span>✓</span><strong data-i18n="ownedList">已购买</strong></button>
       <button type="button" data-view="settings"><span>⚙</span><strong data-i18n="settings">设置</strong></button>
@@ -212,6 +238,13 @@
             <button class="secondary-button compact-button" id="saveCollectionDetails" type="button" data-i18n="saveCollectionDetails">保存收藏信息</button>
           </section>
           <dl class="detail-meta" id="detailMeta"></dl>
+          <section class="detail-market-panel" id="detailMarketPanel" hidden>
+            <div class="detail-market-head">
+              <h3 data-i18n="marketPrice">市场价</h3>
+              <button class="secondary-button compact-button" id="openMarketFromDetail" type="button" data-i18n="marketCenter">市场中心</button>
+            </div>
+            <div id="detailMarketBody"></div>
+          </section>
           <a class="official-link" id="detailOfficialLink" target="_blank" rel="noreferrer" data-i18n="officialPage">官方商品页</a>
           <section class="correction-panel" aria-label="手动更正">
             <button class="secondary-button" id="editToggle" type="button" data-i18n="manualCorrection">手动更正</button>
@@ -416,6 +449,6 @@
       <div class="radial-labels"></div>
     </div>
 
-    <script type="module" src="./main.js?v=20260706-touch-pager"></script>
+    <script type="module" src="./main.js?v=20260706-market-center"></script>
   </body>
 </html>
