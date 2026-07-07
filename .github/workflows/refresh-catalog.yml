@@ -70,5 +70,23 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data app/assets
           git commit -m "Refresh official catalog data"
-          git pull --rebase origin "$GITHUB_REF_NAME"
-          git push
+          # Generated data files (timestamps, market prices, search index) change
+          # every run, so a plain rebase against a concurrently-updated remote hits
+          # unresolvable conflicts. Rebase with -X theirs (keep this run's fresh data)
+          # and retry, so overlapping runs can't fail the job on a push race.
+          for attempt in 1 2 3 4 5; do
+            git fetch origin "$GITHUB_REF_NAME"
+            if git rebase -X theirs "origin/$GITHUB_REF_NAME"; then
+              if git push origin "HEAD:$GITHUB_REF_NAME"; then
+                echo "Pushed on attempt $attempt."
+                exit 0
+              fi
+              echo "Push rejected (remote moved); retrying..."
+            else
+              echo "Rebase conflict; aborting and retrying against latest remote..."
+              git rebase --abort || true
+            fi
+            sleep $(( (RANDOM % 10) + 5 ))
+          done
+          echo "Could not push after 5 attempts."
+          exit 1
