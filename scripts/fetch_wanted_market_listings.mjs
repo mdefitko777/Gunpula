@@ -13,6 +13,7 @@ const DATA = {
   watchList: "data/market_watch_list.json",
   autoListings: "data/market_auto_listings.json",
   keywordOverrides: "data/market_keyword_overrides.json",
+  nameOverrides: "data/market_name_overrides.json",
   localSecrets: "data/market_secrets.local.json",
 };
 
@@ -53,15 +54,38 @@ function tokenize(value) {
     .filter((token) => token.length >= 2);
 }
 
-// A candidate listing must share at least one token with the kit's grade/name
-// so we never attach an unrelated search result to the wrong kit, and must not
-// contain junk terms (decal-only, parts-only, sticker, etc.) from the shared
-// exclude list used by the search index builder.
+// Tokens shared by nearly every marketplace listing (grade codes, brand words,
+// scale fractions, seller boilerplate). Matching on these alone attaches
+// unrelated products to the wrong kit, so they never count as evidence.
+const GENERIC_MATCH_TOKENS = new Set([
+  "hg", "hguc", "hgce", "hgbf", "hgbd", "hgbdr", "hgac", "hgtb", "mg", "mgex", "mgsd",
+  "rg", "pg", "sd", "sdcs", "sdex", "bb", "re", "fm", "eg", "hirm",
+  "gundam", "건담", "ガンダム", "高达", "高達", "bandai", "반다이", "バンダイ", "万代",
+  "gunpla", "건프라", "프라모델", "플라모델", "프라", "모형", "피규어", "프라모형",
+  "144", "100", "60", "1/144", "1/100", "1/60",
+  "ver", "버전", "정품", "새상품", "미개봉", "당일발송", "무료배송", "기동전사", "기동", "전사",
+]);
+
+// A token identifies a specific kit only if it is not boilerplate and not a
+// bare number / scale fraction such as "144" or "1/144".
+function isDistinctive(token) {
+  if (GENERIC_MATCH_TOKENS.has(token)) return false;
+  if (/^[\d\s./-]+$/.test(token)) return false;
+  return true;
+}
+
+// A candidate listing must share at least one DISTINCTIVE token with the kit's
+// name so we never attach an unrelated search result to the wrong kit, and must
+// not contain junk terms (decal-only, parts-only, sticker, etc.) from the shared
+// exclude list used by the search index builder. A kit with no distinctive
+// tokens matches nothing: no data is better than wrong data.
 function isLikelyMatch(kitTokens, title, excludeTerms) {
   const lowerTitle = title.toLowerCase();
   if (excludeTerms.some((term) => term && lowerTitle.includes(term.toLowerCase()))) return false;
   const titleTokens = new Set(tokenize(title));
-  return kitTokens.some((token) => titleTokens.has(token));
+  const distinctive = kitTokens.filter(isDistinctive);
+  if (!distinctive.length) return false;
+  return distinctive.some((token) => titleTokens.has(token));
 }
 
 // Load credentials from a local, git-ignored file into process.env so a
@@ -115,22 +139,26 @@ function buildQuery(kit) {
   return (alreadyHasGrade ? name : [grade, name].filter(Boolean).join(" ")).trim();
 }
 
-// Korean C2C marketplaces (Bunjang/Joongna) mostly return real hits for Korean-language
-// queries; an English grade+name query often comes back empty even for popular kits.
-function buildKoreanQuery(kit) {
-  if (!kit.names?.ko) return buildQuery(kit);
-  return [kit.grade_code, cleanName(kit.names.ko)].filter(Boolean).join(" ").trim();
+// Korean marketplaces (Naver/Bunjang/Joongna) return real hits only for Korean-language
+// queries. Many catalog names still carry untranslated Japanese kana, so a verified
+// Korean alias from market_name_overrides.json (nameOverride.ko) is preferred when present.
+function buildKoreanQuery(kit, nameOverride) {
+  const ko = nameOverride?.ko || kit.names?.ko;
+  if (!ko) return buildQuery(kit);
+  return [kit.grade_code, cleanName(ko)].filter(Boolean).join(" ").trim();
 }
 
-function kitMatchTokens(kit) {
-  const names = [kit.names?.en, kit.names?.ja, kit.names?.zh, kit.names?.ko].filter(Boolean);
+function kitMatchTokens(kit, nameOverride) {
+  const names = [kit.names?.en, kit.names?.ja, kit.names?.zh, kit.names?.ko, nameOverride?.ko, nameOverride?.zh].filter(Boolean);
   return [...new Set(names.flatMap(tokenize))];
 }
 
 async function fetchNaver(query) {
   const { NAVER_CLIENT_ID, NAVER_CLIENT_SECRET } = process.env;
   if (!NAVER_CLIENT_ID || !NAVER_CLIENT_SECRET) return [];
-  const url = `https://openapi.naver.com/v1/search/shop.json?query=${encodeURIComponent(query)}&display=5&sort=asc`;
+  // sort=sim (relevance) surfaces the actual kit; sort=asc buries it under
+  // unrelated cheap accessories that the match filter then rejects.
+  const url = `https://openapi.naver.com/v1/search/shop.json?query=${encodeURIComponent(query)}&display=10&sort=sim`;
   const response = await fetch(url, {
     headers: { "X-Naver-Client-Id": NAVER_CLIENT_ID, "X-Naver-Client-Secret": NAVER_CLIENT_SECRET },
   });
@@ -208,7 +236,9 @@ async function fetchAmazon(query) {
 }
 
 const SOURCE_FETCHERS = [
-  { id: "naver_shop", fetch: fetchNaver, buildQuery },
+  // Naver is a Korean marketplace: Korean queries return real hits where
+  // English/kana queries come back empty even for popular kits.
+  { id: "naver_shop", fetch: fetchNaver, buildQuery: buildKoreanQuery },
   { id: "bunjang", fetch: fetchBunjang, buildQuery: buildKoreanQuery },
   { id: "joongna", fetch: fetchJoongna, buildQuery: buildKoreanQuery },
   { id: "amazon", fetch: fetchAmazon, buildQuery },
@@ -222,7 +252,13 @@ async function main() {
   const kitsDoc = await readJson(DATA.kits);
   const kitById = new Map(kitsDoc.kits.map((kit) => [kit.kit_id, kit]));
   const overridesDoc = await readJson(DATA.keywordOverrides, {});
-  const excludeTerms = overridesDoc.global_exclude_terms || [];
+  // MARKET_LINE_EXCLUDES: completed-figure product lines that share kit names
+  // (Robot Spirits boosters, Metal Build, figma...) but are not model kits.
+  // Kept local to market fetching so the shared search-index excludes are untouched.
+  const MARKET_LINE_EXCLUDES = ["로봇혼", "로봇 영혼", "robot혼", "robot spirits", "메탈빌드", "metal build", "넨도로이드", "nendoroid", "피그마", "figma", "s.h.figuarts", "피규어아츠"];
+  const excludeTerms = [...(overridesDoc.global_exclude_terms || []), ...MARKET_LINE_EXCLUDES];
+  const nameOverridesDoc = await readJson(DATA.nameOverrides, { overrides: {} });
+  const nameOverrides = nameOverridesDoc.overrides || {};
   const listings = [];
   const stats = Object.fromEntries(SOURCE_FETCHERS.map((source) => [source.id, { attempted: 0, matched: 0, errors: 0 }]));
 
@@ -236,10 +272,11 @@ async function main() {
       console.warn(`Skipping unknown kit_id in watch list: ${kitId}`);
       continue;
     }
-    const matchTokens = kitMatchTokens(kit);
+    const nameOverride = nameOverrides[kitId];
+    const matchTokens = kitMatchTokens(kit, nameOverride);
     for (const source of SOURCE_FETCHERS) {
       stats[source.id].attempted += 1;
-      const query = source.buildQuery(kit);
+      const query = source.buildQuery(kit, nameOverride);
       try {
         const candidates = await source.fetch(query);
         const matched = candidates.filter((candidate) => candidate.price > 0 && isLikelyMatch(matchTokens, candidate.title, excludeTerms));

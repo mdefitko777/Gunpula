@@ -1,0 +1,12 @@
+{
+  "updated_at": "2026-07-08",
+  "_readme": "Korean/Chinese market-search name aliases for kits whose catalog names still contain untranslated Japanese kana. Used ONLY by scripts/fetch_wanted_market_listings.mjs for querying/matching marketplaces; does NOT change the app's displayed names. Korean aliases here were verified to return the correct product on Naver.",
+  "overrides": {
+    "hg-hg-1-144-4543112531216000": { "ko": "스로네 츠바이", "zh": "斯罗内兹威" },
+    "hg-hg-1-144-4543112574701000": { "ko": "가데사", "zh": "加德萨" },
+    "hg-hg-1-144-4543112599278000": { "ko": "가랏조", "zh": "加拉佐" },
+    "hg-hg-1-144-4543112599384000": { "ko": "가데스", "zh": "加德斯" },
+    "beyblade-x-cx-07-98": { "ko": "페가수스 블라스트", "zh": "天马爆裂" },
+    "beyblade-x-cx00-drb": { "ko": "드레이크 브레이브", "zh": "德雷克勇者" }
+  }
+}
