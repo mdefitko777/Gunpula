@@ -1,14 +1,37 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-07T15:52:03.566Z",
+  "generated_at": "2026-07-07T16:24:36.069Z",
   "updated_at": "2026-07-08",
   "direct_p_bandai_status": "blocked",
   "scan_mode": "incremental",
   "scan_limit": 240,
-  "scanned_this_run": 240,
-  "failed_this_run": 3,
+  "scanned_this_run": 3,
+  "failed_this_run": 0,
   "hit_count": 1428,
   "entries": [
+    {
+      "kit_id": "hg-hg-1-144-4573102669209000",
+      "detail_url": "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102669209000&grp_id=5325",
+      "title": "HG 1/144 ガンダムベース限定 ガンダムキャリバーン [クリアカラー]",
+      "p_bandai_urls": [],
+      "scanned_at": "2026-07-07T16:24:36.068Z"
+    },
+    {
+      "kit_id": "hg-hg-1-144-4573102666994000",
+      "detail_url": "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102666994000&grp_id=5325",
+      "title": "HG 1/144 ガンダムアメイジングバルバトスルプス",
+      "p_bandai_urls": [
+        "https://p-bandai.jp/item/item-1000214675/"
+      ],
+      "scanned_at": "2026-07-07T16:24:36.023Z"
+    },
+    {
+      "kit_id": "rg-rg-1-144-4573102671950000",
+      "detail_url": "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102671950000&grp_id=5325",
+      "title": "RG 1/144 ガンダムベース限定 ジオング [スペシャルコーティング]",
+      "p_bandai_urls": [],
+      "scanned_at": "2026-07-07T16:24:35.900Z"
+    },
     {
       "kit_id": "sdw-sdw-heroes-4573102621818000",
       "detail_url": "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102621818000&grp_id=5325",
@@ -1909,32 +1932,6 @@
       "title": "30MM オプションパーツセット ARMORED CORE VI FIRES OF RUBICON WEAPON SET 07",
       "p_bandai_urls": [],
       "scanned_at": "2026-07-07T15:50:17.599Z"
-    },
-    {
-      "kit_id": "hg-hg-1-144-4573102669209000",
-      "detail_url": "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102669209000&grp_id=5325",
-      "title": "HG 1/144 ガンダムベース限定 ガンダムキャリバーン [クリアカラー]",
-      "p_bandai_urls": [],
-      "scanned_at": "2026-07-06T20:28:56.963Z",
-      "last_error": "Command failed: curl --silent --show-error --location --max-time 8 --user-agent Gunpula catalog importer (+https://github.com/mdefitko777/Gunpula) --header Accept: text/html,application/xhtml+xml https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102669209000&grp_id=5325\ncurl: (92) HTTP/2 stream 1 was not closed cleanly: INTERNAL_ERROR (err 2)\n"
-    },
-    {
-      "kit_id": "hg-hg-1-144-4573102666994000",
-      "detail_url": "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102666994000&grp_id=5325",
-      "title": "HG 1/144 ガンダムアメイジングバルバトスルプス",
-      "p_bandai_urls": [
-        "https://p-bandai.jp/item/item-1000214675/"
-      ],
-      "scanned_at": "2026-07-06T20:28:56.797Z",
-      "last_error": "Command failed: curl --silent --show-error --location --max-time 8 --user-agent Gunpula catalog importer (+https://github.com/mdefitko777/Gunpula) --header Accept: text/html,application/xhtml+xml https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102666994000&grp_id=5325\ncurl: (92) HTTP/2 stream 1 was not closed cleanly: INTERNAL_ERROR (err 2)\n"
-    },
-    {
-      "kit_id": "rg-rg-1-144-4573102671950000",
-      "detail_url": "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102671950000&grp_id=5325",
-      "title": "RG 1/144 ガンダムベース限定 ジオング [スペシャルコーティング]",
-      "p_bandai_urls": [],
-      "scanned_at": "2026-07-06T20:28:55.911Z",
-      "last_error": "Command failed: curl --silent --show-error --location --max-time 8 --user-agent Gunpula catalog importer (+https://github.com/mdefitko777/Gunpula) --header Accept: text/html,application/xhtml+xml https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102671950000&grp_id=5325\ncurl: (92) HTTP/2 stream 1 was not closed cleanly: INTERNAL_ERROR (err 2)\n"
     },
     {
       "kit_id": "ng-1-144-4902425086521000",
