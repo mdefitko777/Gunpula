@@ -13,6 +13,7 @@ const DATA = {
   watchList: "data/market_watch_list.json",
   autoListings: "data/market_auto_listings.json",
   keywordOverrides: "data/market_keyword_overrides.json",
+  localSecrets: "data/market_secrets.local.json",
 };
 
 async function readJson(path, fallback = null) {
@@ -61,6 +62,18 @@ function isLikelyMatch(kitTokens, title, excludeTerms) {
   if (excludeTerms.some((term) => term && lowerTitle.includes(term.toLowerCase()))) return false;
   const titleTokens = new Set(tokenize(title));
   return kitTokens.some((token) => titleTokens.has(token));
+}
+
+// Load credentials from a local, git-ignored file into process.env so a
+// non-technical user can just paste keys into data/market_secrets.local.json
+// instead of setting shell environment variables. Real environment variables
+// (e.g. GitHub Actions secrets) always win over the file.
+async function loadLocalSecrets() {
+  const doc = await readJson(DATA.localSecrets, {});
+  for (const [key, value] of Object.entries(doc)) {
+    if (key.startsWith("_")) continue; // allow "_comment" style notes in the file
+    if (value && !process.env[key]) process.env[key] = String(value);
+  }
 }
 
 async function getWatchedKits() {
@@ -202,6 +215,9 @@ const SOURCE_FETCHERS = [
 ];
 
 async function main() {
+  await loadLocalSecrets();
+  const naverReady = Boolean(process.env.NAVER_CLIENT_ID && process.env.NAVER_CLIENT_SECRET);
+  console.log(`Naver Shop API: ${naverReady ? "credentials found, will query" : "no credentials, skipping (Bunjang/Joongna still run)"}.`);
   const watchedIds = [...new Set(await getWatchedKits())];
   const kitsDoc = await readJson(DATA.kits);
   const kitById = new Map(kitsDoc.kits.map((kit) => [kit.kit_id, kit]));

@@ -5,3 +5,6 @@ tmp/
 work/
 server.log
 tmp-server-*.log
+
+# Local API credentials (Naver etc.) — never commit real keys
+*.local.json
