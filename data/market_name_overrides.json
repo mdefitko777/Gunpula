@@ -1,12 +1,1550 @@
 {
-  "updated_at": "2026-07-08",
+  "updated_at": "2026-07-07",
   "_readme": "Korean/Chinese market-search name aliases for kits whose catalog names still contain untranslated Japanese kana. Used ONLY by scripts/fetch_wanted_market_listings.mjs for querying/matching marketplaces; does NOT change the app's displayed names. Korean aliases here were verified to return the correct product on Naver.",
   "overrides": {
-    "hg-hg-1-144-4543112531216000": { "ko": "스로네 츠바이", "zh": "斯罗内兹威" },
-    "hg-hg-1-144-4543112574701000": { "ko": "가데사", "zh": "加德萨" },
-    "hg-hg-1-144-4543112599278000": { "ko": "가랏조", "zh": "加拉佐" },
-    "hg-hg-1-144-4543112599384000": { "ko": "가데스", "zh": "加德斯" },
-    "beyblade-x-cx-07-98": { "ko": "페가수스 블라스트", "zh": "天马爆裂" },
-    "beyblade-x-cx00-drb": { "ko": "드레이크 브레이브", "zh": "德雷克勇者" }
+    "hg-hg-1-144-4543112531216000": {
+      "ko": "스로네 츠바이",
+      "zh": "斯罗内兹威"
+    },
+    "hg-hg-1-144-4543112574701000": {
+      "ko": "가데사",
+      "zh": "加德萨"
+    },
+    "hg-hg-1-144-4543112599278000": {
+      "ko": "가랏조",
+      "zh": "加拉佐"
+    },
+    "hg-hg-1-144-4543112599384000": {
+      "ko": "가데스",
+      "zh": "加德斯"
+    },
+    "beyblade-x-cx-07-98": {
+      "ko": "페가수스 블라스트",
+      "zh": "天马爆裂"
+    },
+    "beyblade-x-cx00-drb": {
+      "ko": "드레이크 브레이브",
+      "zh": "德雷克勇者"
+    },
+    "beyblade-x-cx00-eva": {
+      "ko": "베이블레이드 CX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx-00-140": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx50": {
+      "ko": "베이블레이드 BX-50",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux20": {
+      "ko": "베이블레이드 UX-20",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx00-ba": {
+      "ko": "베이블레이드 CX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx00-hf": {
+      "ko": "베이블레이드 CX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx00-kw": {
+      "ko": "베이블레이드 CX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx51": {
+      "ko": "베이블레이드 BX-51",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx18": {
+      "ko": "베이블레이드 CX-18",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux-00-133": {
+      "ko": "베이블레이드 UX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx00-db": {
+      "ko": "베이블레이드 CX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx49": {
+      "ko": "베이블레이드 BX-49",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx17": {
+      "ko": "베이블레이드 CX-17",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux00-ss": {
+      "ko": "베이블레이드 UX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux19": {
+      "ko": "베이블레이드 UX-19",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx-00-127": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-sl": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx-13-122": {
+      "ko": "베이블레이드 CX-13",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx-14-123": {
+      "ko": "베이블레이드 CX-14",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx-15-124": {
+      "ko": "베이블레이드 CX-15",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx16": {
+      "ko": "베이블레이드 CX-16",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-cd-white": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-ds-black": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux00-ap-red": {
+      "ko": "베이블레이드 UX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx48": {
+      "ko": "베이블레이드 BX-48",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx-12-117": {
+      "ko": "베이블레이드 CX-12",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx-00-116": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux-17-114": {
+      "ko": "베이블레이드 UX-17",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux18": {
+      "ko": "베이블레이드 UX-18",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-bit-silver-white": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-emb": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx-10-110": {
+      "ko": "베이블레이드 CX-10",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx11": {
+      "ko": "베이블레이드 CX-11",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx46": {
+      "ko": "베이블레이드 BX-46",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx47": {
+      "ko": "베이블레이드 BX-47",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux16": {
+      "ko": "베이블레이드 UX-16",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx-09-106": {
+      "ko": "베이블레이드 CX-09",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx-45-104": {
+      "ko": "베이블레이드 BX-45",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux15": {
+      "ko": "베이블레이드 UX-15",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx00-pb": {
+      "ko": "베이블레이드 CX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx-00-102": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-jsq": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-jtm": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx-08-99": {
+      "ko": "베이블레이드 CX-08",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux00-nm": {
+      "ko": "베이블레이드 UX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx-44-96": {
+      "ko": "베이블레이드 BX-44",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-tom": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-tos": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx-06-95": {
+      "ko": "베이블레이드 CX-06",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-mit": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-msv": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-sld": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-smm": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx-05-87": {
+      "ko": "베이블레이드 CX-05",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux14": {
+      "ko": "베이블레이드 UX-14",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-xc": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx40": {
+      "ko": "베이블레이드 BX-40",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx41": {
+      "ko": "베이블레이드 BX-41",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx42": {
+      "ko": "베이블레이드 BX-42",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx43": {
+      "ko": "베이블레이드 BX-43",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx-01-82": {
+      "ko": "베이블레이드 CX-01",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx-02-83": {
+      "ko": "베이블레이드 CX-02",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx03": {
+      "ko": "베이블레이드 CX-03",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-cx04": {
+      "ko": "베이블레이드 CX-04",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-25set": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-pw": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx39": {
+      "ko": "베이블레이드 BX-39",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux00-db-bc": {
+      "ko": "베이블레이드 UX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux00-hs-bc": {
+      "ko": "베이블레이드 UX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux13": {
+      "ko": "베이블레이드 UX-13",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-drsh": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux11": {
+      "ko": "베이블레이드 UX-11",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux12": {
+      "ko": "베이블레이드 UX-12",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-cc": {
+      "ko": "베이블레이드 UX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-mt": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-cdr": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bxa02": {
+      "ko": "베이블레이드 UX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx38": {
+      "ko": "베이블레이드 BX-38",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux09": {
+      "ko": "베이블레이드 UX-09",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux10": {
+      "ko": "베이블레이드 UX-10",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx37": {
+      "ko": "베이블레이드 BX-37",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux08": {
+      "ko": "베이블레이드 UX-08",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-ld": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx36": {
+      "ko": "베이블레이드 BX-36",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-cd": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-ds3": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux06": {
+      "ko": "베이블레이드 UX-06",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux07": {
+      "ko": "베이블레이드 UX-07",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-dd": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-bit01": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-st01": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-st02": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-st03": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx32": {
+      "ko": "베이블레이드 BX-32",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx34": {
+      "ko": "베이블레이드 BX-34",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx35": {
+      "ko": "베이블레이드 BX-35",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx33": {
+      "ko": "베이블레이드 BX-33",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-cg": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux05": {
+      "ko": "베이블레이드 UX-05",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-hch": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-drs": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx31": {
+      "ko": "베이블레이드 BX-31",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux04": {
+      "ko": "베이블레이드 UX-04",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx28": {
+      "ko": "베이블레이드 BX-28",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx29": {
+      "ko": "베이블레이드 BX-29",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx30": {
+      "ko": "베이블레이드 BX-30",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux01": {
+      "ko": "베이블레이드 UX-01",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux02": {
+      "ko": "베이블레이드 UX-02",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-ux03": {
+      "ko": "베이블레이드 UX-03",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-se": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-lc": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx27": {
+      "ko": "베이블레이드 BX-27",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx26": {
+      "ko": "베이블레이드 BX-26",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx24": {
+      "ko": "베이블레이드 BX-24",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx25": {
+      "ko": "베이블레이드 BX-25",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx22": {
+      "ko": "베이블레이드 BX-22",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx19": {
+      "ko": "베이블레이드 BX-19",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx20": {
+      "ko": "베이블레이드 BX-20",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx21": {
+      "ko": "베이블레이드 BX-21",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx15": {
+      "ko": "베이블레이드 BX-15",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx16": {
+      "ko": "베이블레이드 BX-16",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx17": {
+      "ko": "베이블레이드 BX-17",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx18": {
+      "ko": "베이블레이드 BX-18",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-hc": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx14": {
+      "ko": "베이블레이드 BX-14",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx13": {
+      "ko": "베이블레이드 BX-13",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-ds": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx00-es": {
+      "ko": "베이블레이드 BX-00",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx01": {
+      "ko": "베이블레이드 BX-01",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx02": {
+      "ko": "베이블레이드 BX-02",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx03": {
+      "ko": "베이블레이드 BX-03",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx04": {
+      "ko": "베이블레이드 BX-04",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx05": {
+      "ko": "베이블레이드 BX-05",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx06": {
+      "ko": "베이블레이드 BX-06",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx07": {
+      "ko": "베이블레이드 BX-07",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx08": {
+      "ko": "베이블레이드 BX-08",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx09": {
+      "ko": "베이블레이드 BX-09",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx10": {
+      "ko": "베이블레이드 BX-10",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx11": {
+      "ko": "베이블레이드 BX-11",
+      "via": "auto-naver-verified"
+    },
+    "beyblade-x-bx12": {
+      "ko": "베이블레이드 BX-12",
+      "via": "auto-naver-verified"
+    },
+    "rg-rg-1-144-iv-4573102725721000": {
+      "ko": "건담엑시아 리페어 IV",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-15736": {
+      "ko": "런처 스트라이커 -STORE LIMITED EDITION-",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-15737": {
+      "ko": "소드 스트라이커 -STORE LIMITED EDITION-",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-15621": {
+      "ko": "포스 임펄스건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4573102720030000": {
+      "ko": "레전드 건담",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-15408": {
+      "ko": "레전드 건담",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-15332": {
+      "ko": "소드 임펄스건담SpecII",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-15111": {
+      "ko": "더블오 퀀터 풀 세이버",
+      "via": "auto-naver-verified"
+    },
+    "sdw-sdw-heroes-gf-b-4573102683649000": {
+      "ko": "HEROES GF 건담아스트레아 타입 -B",
+      "via": "auto-naver-verified"
+    },
+    "sdw-sdw-heroes-gf-f-4573102683656000": {
+      "ko": "HEROES GF 건담아스트레아 타입 -F",
+      "via": "auto-naver-verified"
+    },
+    "rg-rg-1-144-specii-4573102672919000": {
+      "ko": "소드 임펄스건담ＳｐｅｃＩＩ",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-15202": {
+      "ko": "全員추첨 판매 건담아스트레이 레드 프레임 -PROJECT ASTRAY-",
+      "via": "auto-naver-verified"
+    },
+    "eg-entry-grade-1-144-4573102683212000": {
+      "ko": "ENTRY GRADE 스트라이크 루즈",
+      "via": "auto-naver-verified"
+    },
+    "rg-rg-1-144-4573102673961000": {
+      "ko": "아카츠키건담 오오와시 장비",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-15077": {
+      "ko": "GAT-X102 듀얼건담 어설트 슈라우드 ver. A.N.I.M.E.",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-14982": {
+      "ko": "GAT-X105E＋AQM / E-X09S 스트라이크 느와르 건담 ver. A.N.I.M.E.",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-14950": {
+      "ko": "포스 임펄스건담SpecII",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4573102674135000": {
+      "ko": "무라사메 改",
+      "via": "auto-naver-verified"
+    },
+    "gframe-fapb23": {
+      "ko": "기동전사 건담 G 프레임 FA 듀얼블리츠건담＆ 라이트닝 버스터건담 프리미엄 반다이한정",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4573102671714000": {
+      "ko": "라이트닝 버스터건담",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-14894": {
+      "ko": "아카츠키 시라누이 장비 SEED FREEDOM Ver.",
+      "via": "auto-naver-verified"
+    },
+    "rg-rg-1-144-specii-4573102662897000": {
+      "ko": "포스 임펄스건담 SpecII",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-14724": {
+      "ko": "에일 스트라이커 -STORE LIMITED EDITION-",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4573102662736000": {
+      "ko": "건담 퍼펙트 스트라이크 프리덤 루즈",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-14479": {
+      "ko": "TMF / A-803 라고 ver. A.N.I.M.E.",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-14403": {
+      "ko": "GAT-X105+AQM / E-X01 에일 스트라이크건담 ver. A.N.I.M.E. ～ROBOT魂15th ANNIVERSARY～",
+      "via": "auto-naver-verified"
+    },
+    "mse-25-3-item": {
+      "ko": "MOBILE SUIT ENSEMBLE 25 윈덤",
+      "via": "auto-naver-verified"
+    },
+    "fm-full-mechanics-1-100-4573102654298000": {
+      "ko": "FULL MECHANICS 포비든 건담",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-14260": {
+      "ko": "TMF / A-802 바쿠 ver. A.N.I.M.E.",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-v2-4573102653918000": {
+      "ko": "V2 어설트 버스터건담 클리어 컬러",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-14221": {
+      "ko": "건담듀나메스＆ 디바이즈 듀나메스",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-14179": {
+      "ko": "TS-MA2mod.00 메비우스 제로 ver. A.N.I.M.E.",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-14117": {
+      "ko": "事後販売 소드 스트라이커 -METAL BUILD 10th Ver.-",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-14118": {
+      "ko": "事後販売 런처 스트라이커 -METAL BUILD 10th Ver.-",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-14139": {
+      "ko": "스트라이크 루즈 그랜드슬램 장비型",
+      "via": "auto-naver-verified"
+    },
+    "gframe-fapb06": {
+      "ko": "기동전사 건담 G 프레임 FA 프로비던스건담 프리미엄 반다이한정",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-13948": {
+      "ko": "건담 디바이즈 엑시아",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-14064": {
+      "ko": "런처 스트라이커 -METAL BUILD 10th Ver.-",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-14065": {
+      "ko": "소드 스트라이커 -METAL BUILD 10th Ver.-",
+      "via": "auto-naver-verified"
+    },
+    "fm-full-mechanics-1-100-4573102633491000": {
+      "ko": "FULL MECHANICS 레이더 건담",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-13836": {
+      "ko": "추첨 판매 10th Anniversary 트랜스암 라이저 Full Particle ver. 事後販売",
+      "via": "auto-naver-verified"
+    },
+    "fm-full-mechanics-1-100-4573102635983000": {
+      "ko": "FULL MECHANICS 에일 칼라미티 건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4573102620262000": {
+      "ko": "건담 퍼펙트 스트라이크 프리덤",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-13723": {
+      "ko": "開催記念商品 10th Anniversary 트랜스암 라이저 Full Particle ver.",
+      "via": "auto-naver-verified"
+    },
+    "sdw-sdw-heroes-4573102619921000": {
+      "ko": "HEROES 베르데 버스터隊員",
+      "via": "auto-naver-verified"
+    },
+    "mse-19-1-item": {
+      "ko": "MOBILE SUIT ENSEMBLE 19 건담아스트레이 레드 프레임",
+      "via": "auto-naver-verified"
+    },
+    "mse-19-2-item": {
+      "ko": "MOBILE SUIT ENSEMBLE 19 건담아스트레이 블루 프레임",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-13727": {
+      "ko": "特別販売 에일 스트라이커 -METAL BUILD 10th Ver.-",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-13556": {
+      "ko": "건담듀나메스 리페어 Ⅲ",
+      "via": "auto-naver-verified"
+    },
+    "fm-full-mechanics-1-100-4573102616623000": {
+      "ko": "FULL MECHANICS 칼라미티 건담",
+      "via": "auto-naver-verified"
+    },
+    "gframe-ex03": {
+      "ko": "기동전사 건담 G 프레임 EX03 퍼펙트 스트라이크건담＆ 스카이 그래스퍼",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-13507": {
+      "ko": "포스 임펄스건담",
+      "via": "auto-naver-verified"
+    },
+    "mg-mg-1-100-4573102613936000": {
+      "ko": "더블오 잔라이저 클리어 컬러",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-l-4573102615466000": {
+      "ko": "대거 L",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-13402": {
+      "ko": "라이트닝 스트라이커",
+      "via": "auto-naver-verified"
+    },
+    "mse-16-3-item": {
+      "ko": "MOBILE SUIT ENSEMBLE 16 오버 플래그",
+      "via": "auto-naver-verified"
+    },
+    "mse-16-4-gn": {
+      "ko": "MOBILE SUIT ENSEMBLE 16 GN 플래그",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-13324": {
+      "ko": "소드 스트라이커",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-13279": {
+      "ko": "건담아스트레이 블루 프레임 세컨드 리바이 2차：2020年11月発送",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-13276": {
+      "ko": "에일 스트라이커",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-13274": {
+      "ko": "건담아스트레이 블루 프레임 세컨드 리바이",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-13275": {
+      "ko": "런처 스트라이커",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-13229": {
+      "ko": "건담엑시아 리페어 IV 2차：2020年8月発送",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-13248": {
+      "ko": "아카츠키건담 시라누이 장비",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-13202": {
+      "ko": "건담엑시아 리페어 IV",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4573102592279000": {
+      "ko": "윈덤",
+      "via": "auto-naver-verified"
+    },
+    "rg-rg-1-144-4573102592286000": {
+      "ko": "포스 임펄스건담",
+      "via": "auto-naver-verified"
+    },
+    "pg-pg-1-60-4573102590114000": {
+      "ko": "퍼펙트 스트라이크건담",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-12981": {
+      "ko": "아카츠키건담 오오와시 장비",
+      "via": "auto-naver-verified"
+    },
+    "mse-10-4-item": {
+      "ko": "MOBILE SUIT ENSEMBLE 10 스카이 그래스퍼 ＋ 에일 스트라이커",
+      "via": "auto-naver-verified"
+    },
+    "rg-rg-1-144-4573102573742000": {
+      "ko": "건담아스트레이 골드 프레임 天［ 스페셜 코팅 ］",
+      "via": "auto-naver-verified"
+    },
+    "gsf-gallery-f08-4-item": {
+      "ko": "기동전사 건담 가샤폰 전사f 08 게이츠",
+      "via": "auto-naver-verified"
+    },
+    "pg-pg-1-60-g-4573102555823000": {
+      "ko": "더블오 건담 세븐 소드 / G",
+      "via": "auto-naver-verified"
+    },
+    "rg-rg-1-144-4549660210641000": {
+      "ko": "건담아스트레이 골드 프레임 天 미나 스페셜 코팅",
+      "via": "auto-naver-verified"
+    },
+    "gsf-gallery-f07-1-item": {
+      "ko": "기동전사 건담 가샤폰 전사f 07 에일 스트라이크건담",
+      "via": "auto-naver-verified"
+    },
+    "mg-mg-1-100-4573102553287000": {
+      "ko": "더블오 퀀터 풀 세이버",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-12552": {
+      "ko": "에일 스트라이크건담",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-12335": {
+      "ko": "잔라이저 + 세븐 소드 파츠 세트",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-12233": {
+      "ko": "더블오 퀀터",
+      "via": "auto-naver-verified"
+    },
+    "mg-mg-1-100-g-4549660222552000": {
+      "ko": "더블오 건담 세븐 소드 / G 클리어 컬러",
+      "via": "auto-naver-verified"
+    },
+    "mg-mg-1-100-4549660210436000": {
+      "ko": "건담아스트레이 골드 프레임 스페셜 코팅",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-11766": {
+      "ko": "건담아스트레이 레드 프레임 改",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-11734": {
+      "ko": "더블오 건담 세븐 소드 / G",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-11735": {
+      "ko": "풀 아머 ０건담",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-11670": {
+      "ko": "더블오 라이저 ＋GN 소드 III",
+      "via": "auto-naver-verified"
+    },
+    "mse-02-1-item": {
+      "ko": "MOBILE SUIT ENSEMBLE 02 더블오 건담",
+      "via": "auto-naver-verified"
+    },
+    "rg-rg-1-144-4549660163800000": {
+      "ko": "건담아스트레이 골드 프레임 天 미나",
+      "via": "auto-naver-verified"
+    },
+    "hg-hgce-1-144-4573102582515000": {
+      "ko": "HGCE 소드 임펄스건담",
+      "via": "auto-naver-verified"
+    },
+    "rg-rg-1-144-ver-4549660151289000": {
+      "ko": "건담엑시아 트랜스암 클리어 Ver.",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-11388": {
+      "ko": "포스 임펄스건담",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-10204": {
+      "ko": "건담엑시아＆엑시아 리페어 III",
+      "via": "auto-naver-verified"
+    },
+    "hg-hgce-1-144-4573102582508000": {
+      "ko": "HGCE 블라스트 임펄스건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hgce-1-144-4549660063261000": {
+      "ko": "HGCE 포스 임펄스건담",
+      "via": "auto-naver-verified"
+    },
+    "rg-rg-1-144-gnt-0000-4549660063124000": {
+      "ko": "GNT-0000 더블오 퀀터",
+      "via": "auto-naver-verified"
+    },
+    "converge-ex10": {
+      "ko": "FW 건담 EX10 건담아스트레이 레드 프레임",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-11178": {
+      "ko": "건담아스트레이 레드 프레임",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-11115": {
+      "ko": "스트라이크 느와르",
+      "via": "auto-naver-verified"
+    },
+    "rg-rg-1-144-mbf-p02-4549660006343000": {
+      "ko": "MBF-P02 건담아스트레이 레드 프레임",
+      "via": "auto-naver-verified"
+    },
+    "hg-hguc-1-144-v2-4543112965271000": {
+      "ko": "HGUC V2 어설트 버스터건담",
+      "via": "auto-naver-verified"
+    },
+    "rg-rg-1-144-gn-0000-gnr-010-4543112964274000": {
+      "ko": "GN-0000+GNR-010 더블오 라이저",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-1163": {
+      "ko": "더블오 건담 세븐 소드",
+      "via": "auto-naver-verified"
+    },
+    "mg-mg-1-100-4543112956903000": {
+      "ko": "건담엑시아 다크 매터",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-10806": {
+      "ko": "건담 아발란치 엑시아 옵션 파츠 세트",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-10778": {
+      "ko": "건담 아발란치 엑시아",
+      "via": "auto-naver-verified"
+    },
+    "mg-mg-1-100-d-4543112943590000": {
+      "ko": "건담아스트레이 블루 프레임 Ｄ",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-1567": {
+      "ko": "에일 스트라이크건담",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-10540": {
+      "ko": "건담엑시아 트랜스암 Ver.",
+      "via": "auto-naver-verified"
+    },
+    "hg-hgce-1-144-4543112891624000": {
+      "ko": "HGCE 스트라이크 루즈",
+      "via": "auto-naver-verified"
+    },
+    "hg-hgce-1-144-4543112851444000": {
+      "ko": "HGCE 에일 스트라이크건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112863607000": {
+      "ko": "건담아스트레이 골드 프레임",
+      "via": "auto-naver-verified"
+    },
+    "mg-mg-1-100-4543112863584000": {
+      "ko": "건담아스트레이 느와르",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-10402": {
+      "ko": "테스타먼트 건담",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-10401": {
+      "ko": "건담엑시아 리페어",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-10336": {
+      "ko": "더블오 라이저",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-l-4543112819420000": {
+      "ko": "건담아스트레이 블루 프레임 세컨드 L",
+      "via": "auto-naver-verified"
+    },
+    "mg-mg-1-100-ver-rm-4543112813497000": {
+      "ko": "에일 스트라이크건담 Ver.RM",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-10225": {
+      "ko": "퍼펙트 스트라이크건담",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-10158": {
+      "ko": "진엑스 IV 트랜스암 Ver.",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-1749": {
+      "ko": "듀얼건담 어설트 슈라우드",
+      "via": "auto-naver-verified"
+    },
+    "rg-rg-1-144-4543112753069000": {
+      "ko": "스카이 그래스퍼 런처 소드 팩",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-r11-4543112753014000": {
+      "ko": "R11 라고",
+      "via": "auto-naver-verified"
+    },
+    "mg-mg-1-100-4543112752994000": {
+      "ko": "듀얼건담 어설트 슈라우드",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-11829": {
+      "ko": "스트라이크 루즈 I.W.S.P.장비",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-11830": {
+      "ko": "더블오 건담 트랜스암 라이저 추첨 판매",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-r08-4543112739179000": {
+      "ko": "R08 칼라미티 건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-r10-4543112739193000": {
+      "ko": "R10 레이더 건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-r01-4543112733665000": {
+      "ko": "R01 에일 스트라이크건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-r02-4543112733672000": {
+      "ko": "R02 듀얼건담 어설트 슈라우드",
+      "via": "auto-naver-verified"
+    },
+    "mg-mg-1-100-g-4543112710758000": {
+      "ko": "더블오 건담 세븐 소드 / G",
+      "via": "auto-naver-verified"
+    },
+    "mg-mg-1-100-4543112699145000": {
+      "ko": "더블오 라이저",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-1492": {
+      "ko": "건담 아발란치 엑시아",
+      "via": "auto-naver-verified"
+    },
+    "rg-rg-1-144-4543112694928000": {
+      "ko": "에일 스트라이크건담",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-1461": {
+      "ko": "더블오 건담 세븐 소드",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-ver-4543112669179000": {
+      "ko": "건담 사바냐 클리어 컬러Ｖｅｒ．",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-ver-4543112669186000": {
+      "ko": "건담 하루트 클리어 컬러Ｖｅｒ．",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-ver-4543112669193000": {
+      "ko": "라파엘 건담 클리어 컬러Ｖｅｒ．",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-ver-4543112669209000": {
+      "ko": "더블오 퀀터클리어 컬러Ｖｅｒ．",
+      "via": "auto-naver-verified"
+    },
+    "mg-mg-1-100-4543112656544000": {
+      "ko": "더블오 퀀터",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112655073000": {
+      "ko": "브레이브 指揮官用試験機",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112655080000": {
+      "ko": "브레이브 一般用試験機",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112645654000": {
+      "ko": "라파엘 건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112645760000": {
+      "ko": "건담 하루트",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112645623000": {
+      "ko": "건담 사바냐",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112645616000": {
+      "ko": "더블오 퀀터",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112632784000": {
+      "ko": "건담 아발란치 엑시아 대시",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-1245": {
+      "ko": "V2 어설트 버스터건담",
+      "via": "auto-naver-verified"
+    },
+    "mg-mg-1-100-4543112620477000": {
+      "ko": "건담아스트레이 레드 프레임 改",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-g-4543112619358000": {
+      "ko": "더블오 건담 세븐 소드 / G",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112614070000": {
+      "ko": "마스라오",
+      "via": "auto-naver-verified"
+    },
+    "pg-pg-1-60-4543112610164000": {
+      "ko": "더블오 라이저",
+      "via": "auto-naver-verified"
+    },
+    "mg-mg-1-100-4543112609984000": {
+      "ko": "건담아스트레이 블루 프레임 세컨드 리바이",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-gn-iii-4543112609960000": {
+      "ko": "더블오 라이저 ＋GN 소드 III",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112594396000": {
+      "ko": "스사노오",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-ii-4543112587619000": {
+      "ko": "건담엑시아 리페어 II",
+      "via": "auto-naver-verified"
+    },
+    "mg-mg-1-100-4543112584946000": {
+      "ko": "소드 임펄스건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112584328000": {
+      "ko": "가랏조",
+      "via": "auto-naver-verified"
+    },
+    "pg-pg-1-60-4543112584632000": {
+      "ko": "건담아스트레이 레드 프레임",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112568823000": {
+      "ko": "오라이저",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-100-4543112568892000": {
+      "ko": "더블오 라이저",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112566577000": {
+      "ko": "어헤드",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-100-4543112569066000": {
+      "ko": "더블오 건담",
+      "via": "auto-naver-verified"
+    },
+    "tamashii-1004": {
+      "ko": "더블오 건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112557469000": {
+      "ko": "더블오 건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-100-4543112546005000": {
+      "ko": "건담 아발란치 엑시아",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112544834000": {
+      "ko": "티에렌 宇宙指揮官型",
+      "via": "auto-naver-verified"
+    },
+    "mg-mg-1-100-4543112544988000": {
+      "ko": "포스 임펄스건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112523693000": {
+      "ko": "건담 스로네 드라이",
+      "via": "auto-naver-verified"
+    },
+    "mg-mg-1-100-4543112538017000": {
+      "ko": "런처 / 소드 스트라이크건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112523785000": {
+      "ko": "오버 플래그",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112523662000": {
+      "ko": "건담 스로네 아인",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112523709000": {
+      "ko": "티에렌 宇宙型",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112523679000": {
+      "ko": "티에렌 타오쯔",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112521576000": {
+      "ko": "티에렌 地上型",
+      "via": "auto-naver-verified"
+    },
+    "sd-bb-299-4543112506627000": {
+      "ko": "BB戦士299 건담아스트레이 골드 프레임",
+      "via": "auto-naver-verified"
+    },
+    "sd-bb-297-4543112505378000": {
+      "ko": "BB戦士297 스타게이저 건담",
+      "via": "auto-naver-verified"
+    },
+    "sd-bb-296-4543112506603000": {
+      "ko": "BB戦士296 블레이즈 자쿠 워리어",
+      "via": "auto-naver-verified"
+    },
+    "sd-bb-294-4543112492531000": {
+      "ko": "BB戦士294 베르데 버스터건담",
+      "via": "auto-naver-verified"
+    },
+    "mg-mg-1-100-4543112489975000": {
+      "ko": "스트라이크 느와르 건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-dssd-4543112488336000": {
+      "ko": "시빌리언 아스트레이 DSSD 커스텀",
+      "via": "auto-naver-verified"
+    },
+    "sd-bb-293-4543112480842000": {
+      "ko": "BB戦士293 스트라이크 느와르 건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112467485000": {
+      "ko": "스타게이저 건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-100-4543112467300000": {
+      "ko": "세이버 건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112450746000": {
+      "ko": "베르데 버스터건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112434241000": {
+      "ko": "스트라이크 느와르 건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-100-4543112434234000": {
+      "ko": "레전드 건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112419101000": {
+      "ko": "오오와시 아카츠키건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-4543112419095000": {
+      "ko": "무라사메 量産機",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112410412000": {
+      "ko": "시라누이 아카츠키건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-60-4543112386090000": {
+      "ko": "스트라이크 프리덤 라이트닝 에디션",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112384140000": {
+      "ko": "레전드 건담",
+      "via": "auto-naver-verified"
+    },
+    "pg-pg-1-60-4543112382573000": {
+      "ko": "스트라이크 루즈 ＋ 스카이 그래스퍼",
+      "via": "auto-naver-verified"
+    },
+    "pg-pg-1-60-4543112980151000": {
+      "ko": "스카이 그래스퍼 + 에일 스트라이커",
+      "via": "auto-naver-verified"
+    },
+    "sd-bb-280-4543112341068000": {
+      "ko": "BB戦士280 포스 임펄스건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-100-4543112321312000": {
+      "ko": "소드 임펄스건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-100-4543112340993000": {
+      "ko": "자쿠 워리어 + 블레이즈 위저드 ＆ 거너 위저드",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-144-hg-4543112339171000": {
+      "ko": "HG 어비스 건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112321589000": {
+      "ko": "세이버 건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112339157000": {
+      "ko": "거너 자쿠 워리어",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-144-4543112318763000": {
+      "ko": "블라스트 임펄스건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112321596000": {
+      "ko": "소드 임펄스건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-144-4543112321329000": {
+      "ko": "세이버 건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112318732000": {
+      "ko": "가이아 건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-100-4543112321701000": {
+      "ko": "카오스 건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-144-4543112318749000": {
+      "ko": "어비스 건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112314222000": {
+      "ko": "카오스 건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-100-4543112314239000": {
+      "ko": "포스 임펄스건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-144-4543112314246000": {
+      "ko": "가이아 건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-144-4543112314352000": {
+      "ko": "소드 임펄스건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-60-4543112314253000": {
+      "ko": "포스 임펄스건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112314147000": {
+      "ko": "포스 임펄스건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-4543112314154000": {
+      "ko": "자쿠 워리어",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-144-4543112314161000": {
+      "ko": "카오스 건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112294555000": {
+      "ko": "드레드노트 건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-144-4543112268686000": {
+      "ko": "포스 임펄스건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-144-4543112294562000": {
+      "ko": "자쿠 워리어",
+      "via": "auto-naver-verified"
+    },
+    "mg-mg-4543112294500000": {
+      "ko": "스트라이크 루즈",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112267955000": {
+      "ko": "하이페리온 건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-100-l-4543112267962000": {
+      "ko": "건담아스트레이 블루 프레임 세컨드 L",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-i-w-s-p-4543112249180000": {
+      "ko": "스트라이크 루즈 ＋I.W.S.P.",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-100-4543112249234000": {
+      "ko": "건담아스트레이 레드 프레임",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112241207000": {
+      "ko": "건담아스트레이 블루 프레임",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-144-4543112222435000": {
+      "ko": "스트라이크 대거",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112227133000": {
+      "ko": "레이더 건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112227157000": {
+      "ko": "건담아스트레이 레드 프레임",
+      "via": "auto-naver-verified"
+    },
+    "mg-mg-4543112222428000": {
+      "ko": "에일 스트라이크건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112222466000": {
+      "ko": "포비든 건담",
+      "via": "auto-naver-verified"
+    },
+    "hg-hg-1-144-4543112204615000": {
+      "ko": "칼라미티 건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-144-4543112204608000": {
+      "ko": "레이더 건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-144-4543112204592000": {
+      "ko": "포비든 건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-144-4543112192479000": {
+      "ko": "칼라미티 건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-100-4543112192509000": {
+      "ko": "듀얼건담 어설트 슈라우드",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-100-4543112164162000": {
+      "ko": "소드 스트라이크건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-100-4543112164179000": {
+      "ko": "런처 스트라이크건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-144-4543112164117000": {
+      "ko": "소드 스트라이크건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-144-4543112164124000": {
+      "ko": "런처 스트라이크건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-100-4543112142115000": {
+      "ko": "에일 스트라이크건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-144-4543112142023000": {
+      "ko": "건담아스트레이 블루 프레임",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-144-hg-4543112142030000": {
+      "ko": "HG 듀얼건담 어설트 슈라우드",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-144-hg-4543112142047000": {
+      "ko": "HG 에일 스트라이크건담",
+      "via": "auto-naver-verified"
+    },
+    "ng-1-144-4543112134042000": {
+      "ko": "건담아스트레이 레드 프레임",
+      "via": "auto-naver-verified"
+    }
   }
 }

@@ -64,6 +64,10 @@ const GENERIC_MATCH_TOKENS = new Set([
   "gunpla", "건프라", "프라모델", "플라모델", "프라", "모형", "피규어", "프라모형",
   "144", "100", "60", "1/144", "1/100", "1/60",
   "ver", "버전", "정품", "새상품", "미개봉", "당일발송", "무료배송", "기동전사", "기동", "전사",
+  // Beyblade franchise boilerplate: present in every Beyblade listing, so it
+  // can never identify a specific top — the product code (CX-07...) does that.
+  "베이블레이드", "베이블레이드x", "beyblade", "타카라토미", "takara", "tomy",
+  "스타터", "부스터", "랜덤부스터", "덱세트", "세트",
 ]);
 
 // A token identifies a specific kit only if it is not boilerplate and not a
