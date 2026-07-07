@@ -532,6 +532,8 @@ const TRANSLATIONS = {
     recentUpdatesNav: "最近更新",
     marketNav: "市场",
     marketCenter: "市场中心",
+    openMarketCenter: "打开市场中心",
+    marketSettingsHint: "查看各来源状态与愿望单价格样本。",
     marketPrice: "市场价",
     marketSubtitle: "更新 {date} · 样本 {samples} · 汇率 {exchange}",
     marketSources: "来源",
@@ -792,6 +794,8 @@ const TRANSLATIONS = {
     recentUpdatesNav: "최근",
     marketNav: "시세",
     marketCenter: "시세 센터",
+    openMarketCenter: "시세 센터 열기",
+    marketSettingsHint: "각 소스 상태와 위시리스트 가격 샘플을 봅니다.",
     marketPrice: "시장가",
     marketSubtitle: "업데이트 {date} · 샘플 {samples} · 환율 {exchange}",
     marketSources: "소스",
@@ -1052,6 +1056,8 @@ const TRANSLATIONS = {
     recentUpdatesNav: "Updates",
     marketNav: "Market",
     marketCenter: "Market Center",
+    openMarketCenter: "Open market center",
+    marketSettingsHint: "See each source's status and wishlist price samples.",
     marketPrice: "Market price",
     marketSubtitle: "Updated {date} · samples {samples} · FX {exchange}",
     marketSources: "Sources",
@@ -1312,6 +1318,8 @@ const TRANSLATIONS = {
     recentUpdatesNav: "更新",
     marketNav: "相場",
     marketCenter: "相場センター",
+    openMarketCenter: "相場センターを開く",
+    marketSettingsHint: "各ソースの状態とウィッシュリスト価格サンプルを表示。",
     marketPrice: "市場価格",
     marketSubtitle: "更新 {date} · サンプル {samples} · 為替 {exchange}",
     marketSources: "ソース",
@@ -1758,6 +1766,7 @@ const elements = {
   detailMarketPanel: document.querySelector("#detailMarketPanel"),
   detailMarketBody: document.querySelector("#detailMarketBody"),
   openMarketFromDetail: document.querySelector("#openMarketFromDetail"),
+  openMarketFromSettings: document.querySelector("#openMarketFromSettings"),
   detailOfficialLink: document.querySelector("#detailOfficialLink"),
   correctionPanel: document.querySelector(".correction-panel"),
   editToggle: document.querySelector("#editToggle"),
@@ -2699,6 +2708,16 @@ function bindEvents() {
     if (elements.detailDialog.open) {
       elements.detailDialog.close();
     }
+    persistViewState({ mode: "push" });
+  });
+  elements.openMarketFromSettings?.addEventListener("click", () => {
+    state.activeView = "market";
+    state.selectedKit = null;
+    localStorage.setItem(ACTIVE_VIEW_KEY, state.activeView);
+    if (elements.settingsDialog.open) {
+      elements.settingsDialog.close();
+    }
+    render();
     persistViewState({ mode: "push" });
   });
   elements.editToggle.addEventListener("click", () => {
@@ -4648,8 +4667,15 @@ function renderPBandaiFranchiseTabs(franchises) {
   }
 }
 
+// Only sources that produce automated data are shown in the app. Manual-link /
+// jump-search-only marketplaces are hidden everywhere (source grid + detail
+// search links) since they can't populate prices on their own.
+const DISPLAYED_MARKET_SOURCES = new Set(["naver_shop", "bunjang", "joongna"]);
+
 function marketSources() {
-  return [...(state.marketPrices?.sources || [])].sort((a, b) => Number(a.priority || 99) - Number(b.priority || 99));
+  return [...(state.marketPrices?.sources || [])]
+    .filter((source) => DISPLAYED_MARKET_SOURCES.has(source.id))
+    .sort((a, b) => Number(a.priority || 99) - Number(b.priority || 99));
 }
 
 function searchRecordForKit(kit) {
@@ -5845,7 +5871,9 @@ function renderDetailStatusActions(kit) {
   elements.wantedQuantityMinus.disabled = !editable || wantedQuantityForKit(kit.kit_id) <= 1;
   elements.wantedQuantityPlus.disabled = !editable || wantedQuantityForKit(kit.kit_id) >= 99;
   const entry = collectionEntry(kit.kit_id);
-  const hasCollectionEntry = owned || wanted;
+  // Collection details (purchase price, storage...) only make sense for kits
+  // you actually own; for wanted-only kits the panel is noise.
+  const hasCollectionEntry = owned;
   elements.collectionDetailPanel.hidden = !hasCollectionEntry;
   elements.collectionQuantityInput.value = String(collectionQuantityForKit(kit.kit_id));
   elements.purchasePriceInput.value = entry?.purchase_price ?? "";
@@ -6007,15 +6035,8 @@ function renderFranchiseFilters() {
     });
     elements.franchiseList.append(button);
   }
-  const pbCount = pbandaiItemsForFranchise(state.franchise).length;
-  if (pbCount) {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "segment-button pb-segment-button";
-    button.textContent = `${t("premiumBandai")} ${pbCount}`;
-    button.addEventListener("click", () => navigateToPBandai(state.franchise));
-    elements.franchiseList.append(button);
-  }
+  // Premium Bandai no longer has its own tab; PB kits live inside the gundam
+  // and AC catalogs directly.
 }
 
 function seriesEntriesForFranchise(franchise) {

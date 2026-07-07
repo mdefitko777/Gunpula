@@ -9,7 +9,7 @@
     <title>Collection Atlas</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260708-v17" />
+    <link rel="stylesheet" href="./styles.css?v=20260708-v18" />
   </head>
   <body>
     <main class="catalog-page">
@@ -173,7 +173,6 @@
       <button type="button" data-view="home" class="is-active"><span>⌂</span><strong data-i18n="homeNav">首页</strong></button>
       <button type="button" data-view="catalog"><span>⌕</span><strong data-i18n="catalogList">图鉴</strong></button>
       <button type="button" data-view="updates"><span>↻</span><strong data-i18n="recentUpdatesNav">最近更新</strong></button>
-      <button type="button" data-view="market"><span>₩</span><strong data-i18n="marketNav">市场</strong></button>
       <button type="button" data-view="wanted"><span>☆</span><strong data-i18n="wantedList">想要</strong></button>
       <button type="button" data-view="owned"><span>✓</span><strong data-i18n="ownedList">已购买</strong></button>
       <button type="button" data-view="settings"><span>⚙</span><strong data-i18n="settings">设置</strong></button>
@@ -303,6 +302,13 @@
         <h2 id="settingsTitle" data-i18n="settings">设置</h2>
         <p id="datasetSummary">Loading catalog...</p>
         <section class="settings-section">
+          <h3 data-i18n="marketCenter">市场中心</h3>
+          <div class="app-update-row">
+            <button id="openMarketFromSettings" type="button" data-i18n="openMarketCenter">打开市场中心</button>
+            <span data-i18n="marketSettingsHint">查看各来源状态与愿望单价格样本。</span>
+          </div>
+        </section>
+        <section class="settings-section">
           <h3 data-i18n="language">语言</h3>
           <div class="segmented-control language-control" id="languageList" aria-label="选择语言"></div>
         </section>
@@ -414,7 +420,7 @@
             <input id="consoleModeToggle" type="checkbox" />
           </label>
         </section>
-        <p class="settings-hint app-version-label" id="appVersionLabel">Gunpula App v17</p>
+        <p class="settings-hint app-version-label" id="appVersionLabel">Gunpula App v18</p>
         <section class="settings-section console-only" id="seriesAdminPanel" hidden>
           <div class="settings-section-head">
             <h3 data-i18n="seriesAdmin">系列名称</h3>
@@ -450,6 +456,6 @@
       <div class="radial-labels"></div>
     </div>
 
-    <script type="module" src="./main.js?v=20260708-v17"></script>
+    <script type="module" src="./main.js?v=20260708-v18"></script>
   </body>
 </html>
