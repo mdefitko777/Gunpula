@@ -33,6 +33,8 @@
     "check:sources": "node scripts/check_source_health.mjs",
     "updates": "node scripts/build_update_feed.mjs",
     "market": "node scripts/build_market_data.mjs",
+    "market:watch": "node scripts/fetch_wanted_market_listings.mjs",
+    "market:all": "npm run market:watch && npm run market",
     "android:status": "node scripts/build_market_data.mjs",
     "android:sync": "npx @capacitor/cli sync android",
     "android:add": "npx @capacitor/cli add android",

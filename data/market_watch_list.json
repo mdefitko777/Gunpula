@@ -1,0 +1,5 @@
+{
+  "updated_at": "2026-07-08",
+  "notes": "Fallback list used by scripts/fetch_wanted_market_listings.mjs when the shared Supabase wanted-list is not configured via env vars. Add kit_id values from data/kits.json here to have their prices checked on the next npm run market:watch.",
+  "kit_ids": []
+}

@@ -9,6 +9,7 @@ const DATA = {
   kits: "data/kits.json",
   marketSources: "data/market_sources.json",
   manualLinks: "data/market_manual_links.json",
+  autoListings: "data/market_auto_listings.json",
   keywordOverrides: "data/market_keyword_overrides.json",
   searchIndex: "data/search-index.json",
   exchangeRates: "data/exchange-rates.json",
@@ -170,14 +171,15 @@ function median(values) {
   return sorted.length % 2 ? sorted[middle] : Math.round((sorted[middle - 1] + sorted[middle]) / 2);
 }
 
-function summarizeListings(kits, sources, manualDoc, rates, taxProfiles) {
+function summarizeListings(kits, sources, manualDoc, autoDoc, rates, taxProfiles) {
   const kitIds = new Set(kits.map((kit) => kit.kit_id));
   const sourceById = new Map(sources.map((source) => [source.id, source]));
   const listings = [];
   const byKit = {};
   const sourceStats = new Map(sources.map((source) => [source.id, { source: source.id, samples: 0, matched: 0 }]));
+  const combinedRaw = [...(manualDoc.listings || []), ...(autoDoc.listings || [])];
 
-  for (const raw of manualDoc.listings || []) {
+  for (const raw of combinedRaw) {
     if (!kitIds.has(raw.kit_id) || !sourceById.has(raw.source)) continue;
     const source = sourceById.get(raw.source);
     const currency = raw.currency || source.currency || "KRW";
@@ -329,6 +331,7 @@ async function buildAndroidPackageStatus() {
 const kitsDoc = await readJson(DATA.kits);
 const marketSourcesDoc = await readJson(DATA.marketSources);
 const manualLinksDoc = await readJson(DATA.manualLinks, { listings: [] });
+const autoListingsDoc = await readJson(DATA.autoListings, { listings: [] });
 const keywordOverrides = await readJson(DATA.keywordOverrides, {});
 const previousRates = await readJson(DATA.exchangeRates, {});
 const sources = marketSourcesDoc.sources || [];
@@ -337,7 +340,7 @@ const rates = await fetchExchangeRates(previousRates);
 const searchIndex = kitsDoc.kits.map((kit) => buildKitKeywords(kit, keywordOverrides));
 const imageAssets = await buildImageAssets(kitsDoc.kits);
 const androidPackage = await buildAndroidPackageStatus();
-const market = summarizeListings(kitsDoc.kits, sources, manualLinksDoc, rates, marketSourcesDoc.tax_profiles || {});
+const market = summarizeListings(kitsDoc.kits, sources, manualLinksDoc, autoListingsDoc, rates, marketSourcesDoc.tax_profiles || {});
 
 const marketPrices = {
   schema_version: 1,
