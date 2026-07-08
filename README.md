@@ -34,6 +34,7 @@ a mobile-first collection atlas instead of a database table.
 - `scripts/source_coverage.mjs` - reports source coverage and missing source types.
 - `scripts/search_kits.mjs` - searches kit records.
 - `scripts/serve_app.mjs` - serves the local catalog UI.
+- `scripts/split_catalog.mjs` - splits `data/kits.json` into per-franchise `data/split/` files the app loads progressively at startup.
 - `scripts/build_market_data.mjs` - builds market source status, keyword index, FX cache, image asset summary, and Android readiness JSON.
 - `scripts/import_bandai_spirits_gunpla.mjs` - imports the Japanese official BANDAI SPIRITS Gunpla catalog.
 - `scripts/import_bandai_collectibles.mjs` - imports official Bandai Candy, Bandai Gashapon, Pokemon, Armored Core, and BEYBLADE X lines.
