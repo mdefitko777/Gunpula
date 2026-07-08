@@ -331,6 +331,24 @@ const feed = {
 
 await writeFile(feedPath, `${JSON.stringify(feed, null, 2)}\n`, "utf8");
 
+// First-seen ledger: records the date each kit_id first appeared in the
+// catalog. The app uses it as a display/filter fallback for kits without an
+// official release_date (e.g. many Pokemon items), per "no release date ->
+// count by upload date". Dates are stamped once and never rewritten.
+const FIRST_SEEN_PATH = "data/kit-first-seen.json";
+const ledger = (await readJson(FIRST_SEEN_PATH, { dates: {} })) || { dates: {} };
+ledger.dates = ledger.dates || {};
+let stamped = 0;
+for (const kit of currentDoc.kits || []) {
+  if (!ledger.dates[kit.kit_id]) {
+    ledger.dates[kit.kit_id] = date;
+    stamped += 1;
+  }
+}
+ledger.schema_version = 1;
+ledger.updated_at = date;
+await writeFile(FIRST_SEEN_PATH, `${JSON.stringify(ledger, null, 2)}\n`, "utf8");
+
 console.log(
-  `Wrote ${feedPath}: +${entry.added_count}, changed ${entry.changed_count}, removed ${entry.removed_count}, watched ${entry.watched_count}.`,
+  `Wrote ${feedPath}: +${entry.added_count}, changed ${entry.changed_count}, removed ${entry.removed_count}, watched ${entry.watched_count}. First-seen ledger: +${stamped} stamped.`,
 );

@@ -34,6 +34,9 @@ jobs:
       - name: Import official sources
         run: npm run import:data
 
+      - name: Translate kana display names to Korean
+        run: node scripts/translate_kana_names.mjs
+
       - name: Build update feed
         run: npm run updates -- --before="$RUNNER_TEMP/kits-before.json"
 

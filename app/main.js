@@ -9,6 +9,7 @@ const SYNC_CONFIG_KEY = "gunpula-catalog-sync-config-v1";
 const SYNC_META_KEY = "gunpula-catalog-sync-meta-v1";
 const SYNC_HISTORY_KEY = "gunpula-catalog-sync-history-v1";
 const ACTIVE_VIEW_KEY = "gunpula-catalog-active-view-v1";
+const GITHUB_TOKEN_KEY = "gunpula-github-dispatch-token-v1";
 const COLLECTION_HOME_VISIBILITY_KEY = "gunpula-catalog-home-collection-visibility-v1";
 const COLLECTION_HOME_COLLAPSE_KEY = "gunpula-catalog-home-collection-collapse-v1";
 const COLLECTION_MEMBER_VIEW_KEY = "gunpula-catalog-collection-member-view-v1";
@@ -533,6 +534,14 @@ const TRANSLATIONS = {
     marketNav: "市场",
     marketCenter: "市场中心",
     openMarketCenter: "打开市场中心",
+    dataFetch: "数据抓取",
+    githubToken: "GitHub Token",
+    manualFetchStart: "立即全部抓取",
+    manualFetchHint: "触发云端抓取全部来源（目录 / 市场价 / 更新），约 10 分钟后刷新查看。",
+    manualFetchNeedToken: "请先填入 GitHub Token（需要 Actions 写权限）。",
+    manualFetchRunning: "正在触发云端抓取...",
+    manualFetchOk: "已触发！约 10 分钟后在设置里点「检查更新」查看结果。",
+    manualFetchFail: "触发失败，请检查 Token 权限",
     marketSettingsHint: "查看各来源状态与愿望单价格样本。",
     marketPrice: "市场价",
     marketSubtitle: "更新 {date} · 样本 {samples} · 汇率 {exchange}",
@@ -795,6 +804,14 @@ const TRANSLATIONS = {
     marketNav: "시세",
     marketCenter: "시세 센터",
     openMarketCenter: "시세 센터 열기",
+    dataFetch: "데이터 수집",
+    githubToken: "GitHub Token",
+    manualFetchStart: "지금 전체 수집",
+    manualFetchHint: "클라우드에서 전체 소스(카탈로그/시세/업데이트)를 수집합니다. 약 10분 후 새로고침하세요.",
+    manualFetchNeedToken: "먼저 GitHub Token을 입력하세요 (Actions 쓰기 권한 필요).",
+    manualFetchRunning: "클라우드 수집 트리거 중...",
+    manualFetchOk: "트리거 완료! 약 10분 후 설정에서 「업데이트 확인」을 눌러 확인하세요.",
+    manualFetchFail: "트리거 실패. Token 권한을 확인하세요",
     marketSettingsHint: "각 소스 상태와 위시리스트 가격 샘플을 봅니다.",
     marketPrice: "시장가",
     marketSubtitle: "업데이트 {date} · 샘플 {samples} · 환율 {exchange}",
@@ -1057,6 +1074,14 @@ const TRANSLATIONS = {
     marketNav: "Market",
     marketCenter: "Market Center",
     openMarketCenter: "Open market center",
+    dataFetch: "Data fetch",
+    githubToken: "GitHub Token",
+    manualFetchStart: "Fetch everything now",
+    manualFetchHint: "Triggers the cloud fetch of all sources (catalog / prices / updates). Refresh in ~10 minutes.",
+    manualFetchNeedToken: "Enter a GitHub token first (Actions write scope).",
+    manualFetchRunning: "Triggering cloud fetch...",
+    manualFetchOk: "Triggered! Check back in ~10 minutes via Check updates.",
+    manualFetchFail: "Trigger failed; check token permissions",
     marketSettingsHint: "See each source's status and wishlist price samples.",
     marketPrice: "Market price",
     marketSubtitle: "Updated {date} · samples {samples} · FX {exchange}",
@@ -1319,6 +1344,14 @@ const TRANSLATIONS = {
     marketNav: "相場",
     marketCenter: "相場センター",
     openMarketCenter: "相場センターを開く",
+    dataFetch: "データ取得",
+    githubToken: "GitHub Token",
+    manualFetchStart: "今すぐ全部取得",
+    manualFetchHint: "クラウドで全ソース（カタログ／相場／更新）を取得します。約10分後に再読み込みしてください。",
+    manualFetchNeedToken: "先に GitHub Token を入力してください（Actions 書き込み権限）。",
+    manualFetchRunning: "クラウド取得をトリガー中...",
+    manualFetchOk: "トリガー完了！約10分後に「更新を確認」で確認してください。",
+    manualFetchFail: "トリガー失敗。Token の権限を確認してください",
     marketSettingsHint: "各ソースの状態とウィッシュリスト価格サンプルを表示。",
     marketPrice: "市場価格",
     marketSubtitle: "更新 {date} · サンプル {samples} · 為替 {exchange}",
@@ -1767,6 +1800,9 @@ const elements = {
   detailMarketBody: document.querySelector("#detailMarketBody"),
   openMarketFromDetail: document.querySelector("#openMarketFromDetail"),
   openMarketFromSettings: document.querySelector("#openMarketFromSettings"),
+  githubTokenInput: document.querySelector("#githubTokenInput"),
+  manualFetchStart: document.querySelector("#manualFetchStart"),
+  manualFetchStatus: document.querySelector("#manualFetchStatus"),
   detailOfficialLink: document.querySelector("#detailOfficialLink"),
   correctionPanel: document.querySelector(".correction-panel"),
   editToggle: document.querySelector("#editToggle"),
@@ -2056,6 +2092,7 @@ async function init() {
     searchIndexDoc,
     imageAssetsDoc,
     androidPackageDoc,
+    firstSeenDoc,
   ] = await Promise.all([
     loadJson("../data/grades.json"),
     loadJson("../data/kits.json"),
@@ -2069,6 +2106,7 @@ async function init() {
     loadOptionalJson("../data/search-index.json"),
     loadOptionalJson("../data/image-assets.json"),
     loadOptionalJson("../data/android-package.json"),
+    loadOptionalJson("../data/kit-first-seen.json"),
   ]);
 
   state.grades = gradesDoc.grades;
@@ -2084,6 +2122,7 @@ async function init() {
   state.searchIndexByKit = new Map((searchIndexDoc?.records || []).map((record) => [record.kit_id, record]));
   state.imageAssets = imageAssetsDoc;
   state.androidPackage = androidPackageDoc;
+  state.kitFirstSeen = firstSeenDoc?.dates || {};
   state.overrides = loadOverrides();
   state.seriesLabelOverrides = loadSeriesLabelOverrides();
   state.collection = loadCollection();
@@ -2719,6 +2758,35 @@ function bindEvents() {
     }
     render();
     persistViewState({ mode: "push" });
+  });
+  if (elements.githubTokenInput) {
+    elements.githubTokenInput.value = localStorage.getItem(GITHUB_TOKEN_KEY) || "";
+  }
+  elements.manualFetchStart?.addEventListener("click", async () => {
+    const token = elements.githubTokenInput?.value.trim() || "";
+    const status = (text) => {
+      if (elements.manualFetchStatus) elements.manualFetchStatus.textContent = text;
+    };
+    if (!token) {
+      status(t("manualFetchNeedToken"));
+      return;
+    }
+    localStorage.setItem(GITHUB_TOKEN_KEY, token);
+    status(t("manualFetchRunning"));
+    try {
+      const response = await fetch("https://api.github.com/repos/mdefitko777/Gunpula/actions/workflows/refresh-catalog.yml/dispatches", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/vnd.github+json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ref: "main" }),
+      });
+      status(response.status === 204 ? t("manualFetchOk") : `${t("manualFetchFail")} (HTTP ${response.status})`);
+    } catch {
+      status(t("manualFetchFail"));
+    }
   });
   elements.editToggle.addEventListener("click", () => {
     elements.correctionForm.hidden = !elements.correctionForm.hidden;
@@ -4330,12 +4398,19 @@ function validReleaseMonth(value) {
   return match ? match[0] : "";
 }
 
+// Kits without an official release_date (common for Pokemon goods) fall back
+// to the date they were first seen in the catalog, so they still appear in
+// the monthly updates view instead of vanishing.
+function effectiveKitDate(kit) {
+  return kit.release_date || state.kitFirstSeen?.[kit.kit_id] || null;
+}
+
 function releaseMonthForKit(kit) {
-  return validReleaseMonth(String(kit.release_date || "").slice(0, 7));
+  return validReleaseMonth(String(effectiveKitDate(kit) || "").slice(0, 7));
 }
 
 function releaseDateForDisplay(kit) {
-  return kit.release_date || t("pending");
+  return effectiveKitDate(kit) || t("pending");
 }
 
 function defaultReleaseMonth() {
@@ -5210,7 +5285,7 @@ function appendImageWithFallback(container, kit, options = {}) {
 }
 
 function releaseYearForKit(kit) {
-  return /^\d{4}/.exec(String(kit.release_date || ""))?.[0] ?? null;
+  return /^\d{4}/.exec(String(effectiveKitDate(kit) || ""))?.[0] ?? null;
 }
 
 function numericFilterValue(value) {

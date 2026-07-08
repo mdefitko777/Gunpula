@@ -125,12 +125,22 @@ async function getWatchedKits() {
       const wanted = row?.payload?.collection?.wanted;
       if (Array.isArray(wanted) && wanted.length) {
         console.log(`Loaded ${wanted.length} wanted kit(s) from shared Supabase workspace.`);
+        // Cache the wishlist into the repo so environments where the Supabase
+        // secrets are unavailable (e.g. misconfigured CI) still fetch prices
+        // for the last-known wanted kits instead of silently doing nothing.
+        await writeJson(DATA.watchList, {
+          updated_at: now,
+          source: "supabase-cache",
+          kit_ids: wanted,
+        });
         return wanted;
       }
       console.log("Shared workspace has no wanted kits yet.");
     } catch (error) {
       console.warn(`Supabase wanted-list lookup failed: ${error.message}. Falling back to data/market_watch_list.json.`);
     }
+  } else {
+    console.warn("Supabase env vars missing; falling back to cached data/market_watch_list.json.");
   }
   const watchDoc = await readJson(DATA.watchList, { kit_ids: [] });
   return Array.isArray(watchDoc.kit_ids) ? watchDoc.kit_ids : [];
@@ -309,11 +319,25 @@ async function main() {
     }
   }
 
+  // Never let a barren run (missing secrets, network outage, blocked runner)
+  // clobber previously captured listings: stale prices beat vanished prices.
+  if (!listings.length) {
+    const previous = await readJson(DATA.autoListings, null);
+    if (previous?.listings?.length) {
+      console.warn(`Captured 0 listings but previous file has ${previous.listings.length}; keeping previous data.`);
+      return;
+    }
+  }
+
   await writeJson(DATA.autoListings, {
     schema_version: 1,
     updated_at: now,
     generated_by: "scripts/fetch_wanted_market_listings.mjs",
     watched_kit_count: watchedIds.length,
+    env_status: {
+      naver: Boolean(process.env.NAVER_CLIENT_ID && process.env.NAVER_CLIENT_SECRET),
+      supabase: Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY && process.env.SYNC_WORKSPACE_ID && process.env.SYNC_WORKSPACE_SECRET),
+    },
     source_stats: stats,
     listings,
   });
