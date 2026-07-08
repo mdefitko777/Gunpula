@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#eaf5f7" />
+    <meta name="theme-color" content="#ffffff" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="application-name" content="Gunpula v1.9.1" />
     <title>Gunpula v1.9.1</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260708-v22" />
+    <link rel="stylesheet" href="./styles.css?v=20260709-v23" />
   </head>
   <body>
     <main class="catalog-page">
@@ -20,10 +20,10 @@
             <span id="brandVersion">v1.9.1</span>
           </div>
           <div class="segmented-control franchise-control" id="franchiseList" aria-label="选择作品分类"></div>
-          <button class="settings-button" id="settingsOpen" type="button" aria-label="设置" data-i18n-aria="settings">⚙</button>
+          <button class="settings-button" id="settingsOpen" type="button" aria-label="设置" data-i18n-aria="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/></svg></button>
         </div>
         <label class="search-field">
-          <span aria-hidden="true">⌕</span>
+          <span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7.5"/><path d="m20.5 20.5-4.2-4.2"/></svg></span>
           <input id="searchInput" type="search" placeholder="搜索名字 / 系列 / 产品线" data-i18n-placeholder="searchPlaceholder" />
         </label>
         <nav class="series-tabs" id="seriesTabs" aria-label="常用系列"></nav>
@@ -145,12 +145,11 @@
     </main>
 
     <nav class="bottom-nav" id="bottomNav" aria-label="主导航">
-      <button type="button" data-view="home" class="is-active"><span>⌂</span><strong data-i18n="homeNav">首页</strong></button>
-      <button type="button" data-view="catalog"><span>⌕</span><strong data-i18n="catalogList">图鉴</strong></button>
-      <button type="button" data-view="updates"><span>↻</span><strong data-i18n="recentUpdatesNav">最近更新</strong></button>
-      <button type="button" data-view="wanted"><span>☆</span><strong data-i18n="wantedList">想要</strong></button>
-      <button type="button" data-view="owned"><span>✓</span><strong data-i18n="ownedList">已购买</strong></button>
-      <button type="button" data-view="settings"><span>⚙</span><strong data-i18n="settings">设置</strong></button>
+      <button type="button" data-view="home" class="is-active"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V20a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 20Z"/><path d="M9 21.5v-8h6v8"/></svg></span><strong data-i18n="homeNav">首页</strong></button>
+      <button type="button" data-view="catalog"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 4H9a3.5 3.5 0 0 1 3.5 3.5V21A3 3 0 0 0 9.5 18h-7Z"/><path d="M21.5 4H15a3.5 3.5 0 0 0-3.5 3.5V21a3 3 0 0 1 3-3h7Z"/></svg></span><strong data-i18n="catalogList">图鉴</strong></button>
+      <button type="button" data-view="updates"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36L21 8"/><path d="M21 3v5h-5"/></svg></span><strong data-i18n="recentUpdatesNav">最近更新</strong></button>
+      <button type="button" data-view="wanted"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.67 6.2.9-4.5 4.38 1.06 6.2L12 17.23l-5.56 2.92L7.5 13.95 3 9.57l6.2-.9Z"/></svg></span><strong data-i18n="wantedList">想要</strong></button>
+      <button type="button" data-view="owned"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 11.1V12a9.5 9.5 0 1 1-5.63-8.68"/><path d="m21.5 4.5-9.5 9.51-3-3"/></svg></span><strong data-i18n="ownedList">已购买</strong></button>
     </nav>
 
     <template id="kitCardTemplate">
@@ -438,6 +437,6 @@
       <div class="radial-labels"></div>
     </div>
 
-    <script type="module" src="./main.js?v=20260708-v22"></script>
+    <script type="module" src="./main.js?v=20260709-v23"></script>
   </body>
 </html>

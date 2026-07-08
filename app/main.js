@@ -601,7 +601,7 @@ const TRANSLATIONS = {
     catalogList: "目录",
     settings: "设置",
     appearance: "外观",
-    themeAtlas: "蓝白绿",
+    themeAtlas: "默认",
     themeClassic: "经典",
     customAppIcon: "自定义图标",
     changeAppIcon: "更改图标",
@@ -874,7 +874,7 @@ const TRANSLATIONS = {
     catalogList: "목록",
     settings: "설정",
     appearance: "외관",
-    themeAtlas: "블루/화이트/그린",
+    themeAtlas: "기본",
     themeClassic: "클래식",
     customAppIcon: "사용자 아이콘",
     changeAppIcon: "아이콘 변경",
@@ -1147,7 +1147,7 @@ const TRANSLATIONS = {
     catalogList: "Catalog",
     settings: "Settings",
     appearance: "Appearance",
-    themeAtlas: "Blue / White / Green",
+    themeAtlas: "Default",
     themeClassic: "Classic",
     customAppIcon: "Custom icon",
     changeAppIcon: "Change icon",
@@ -1420,7 +1420,7 @@ const TRANSLATIONS = {
     catalogList: "一覧",
     settings: "設定",
     appearance: "外観",
-    themeAtlas: "青白緑",
+    themeAtlas: "デフォルト",
     themeClassic: "クラシック",
     customAppIcon: "カスタムアイコン",
     changeAppIcon: "アイコン変更",
@@ -6132,17 +6132,12 @@ function renderConsoleMode() {
 }
 
 function renderFranchiseFilters() {
-  const counts = new Map();
-  for (const kit of state.kits) {
-    counts.set(kit.franchise, (counts.get(kit.franchise) || 0) + 1);
-  }
-
   elements.franchiseList.innerHTML = "";
   for (const franchise of FRANCHISES) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `segment-button${state.franchise === franchise ? " is-active" : ""}`;
-    button.textContent = `${franchiseShortLabel(franchise)} ${counts.get(franchise) || 0}`;
+    button.textContent = franchiseShortLabel(franchise);
     button.addEventListener("click", () => {
       state.franchise = franchise;
       state.grade = "all";
@@ -6214,9 +6209,9 @@ function renderSeriesControls() {
   const seriesEntries = [...counts.entries()];
 
   elements.seriesTabs.innerHTML = "";
-  elements.seriesTabs.append(makeSeriesTab("all", `${t("allWorks")} ${kits.length}`));
+  elements.seriesTabs.append(makeSeriesTab("all", t("allWorks")));
   for (const [key, entry] of seriesEntries) {
-    elements.seriesTabs.append(makeSeriesTab(key, `${entry.label} ${entry.count}`));
+    elements.seriesTabs.append(makeSeriesTab(key, entry.label));
   }
 
   renderFilterOptions(
@@ -6544,10 +6539,9 @@ function renderKits() {
       alt: t("boxArtAlt", { name: fullName }),
       onExhausted: () => showPlaceholder(boxArt, kit.grade_code),
     });
-    addReleaseBadge(boxArt, kit);
 
     const badges = card.querySelector(".kit-badges");
-    for (const label of [seriesLabelFromKit(kit), gradeShortLabel(kit)]) {
+    for (const label of [seriesLabelFromKit(kit), gradeShortLabel(kit), kit.release_date].filter(Boolean)) {
       const badge = document.createElement("span");
       badge.textContent = label;
       badges.append(badge);
@@ -6567,7 +6561,7 @@ function renderKits() {
       badges.append(badge);
     }
     card.querySelector("h3").textContent = name;
-    card.querySelector("p").textContent = kitSeries(kit);
+    card.querySelector("p").textContent = Number.isInteger(kit.price_jpy) ? formatPrice(kit.price_jpy) : "";
     card.addEventListener("click", () => openDetail(kit));
     card.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
