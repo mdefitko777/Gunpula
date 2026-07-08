@@ -30,6 +30,7 @@ const PAGER_START_DISTANCE = 18;
 const PAGER_THRESHOLD_RATIO = 0.28;
 const PAGER_MIN_THRESHOLD = 92;
 const PAGER_ANIMATION_MS = 220;
+const APP_VERSION_LABEL = "v1.9.1";
 
 const COLLECTION_TYPES = ["owned", "wanted"];
 const THEMES = [
@@ -527,13 +528,13 @@ const TITLE_PREFIX_PATTERNS = [
 
 const TRANSLATIONS = {
   zh: {
-    appTitle: "Collection Atlas",
+    appTitle: "v1.9.1",
     homeNav: "首页",
     collectionNav: "收藏",
     recentUpdatesNav: "最近更新",
     marketNav: "市场",
-    marketCenter: "市场中心",
-    openMarketCenter: "打开市场中心",
+    marketCenter: "市场价",
+    openMarketCenter: "查看市场价",
     dataFetch: "数据抓取",
     githubToken: "GitHub Token",
     marketFetchStart: "只更新愿望单价格",
@@ -574,7 +575,7 @@ const TRANSLATIONS = {
     androidPresent: "已生成",
     androidMissing: "未生成",
     homeKicker: "收藏图鉴",
-    homeTitle: "Collection Atlas",
+    homeTitle: "v1.9.1",
     homeOpen: "进入图鉴",
     homeGundamMeta: "模型、成品、食玩、扭蛋",
     homeArmoredCoreMeta: "拼装、V.I.、30MM",
@@ -800,13 +801,13 @@ const TRANSLATIONS = {
     imported: "官方导入",
   },
   ko: {
-    appTitle: "Collection Atlas",
+    appTitle: "v1.9.1",
     homeNav: "홈",
     collectionNav: "컬렉션",
     recentUpdatesNav: "최근",
     marketNav: "시세",
-    marketCenter: "시세 센터",
-    openMarketCenter: "시세 센터 열기",
+    marketCenter: "시세",
+    openMarketCenter: "시세 보기",
     dataFetch: "데이터 수집",
     githubToken: "GitHub Token",
     marketFetchStart: "위시리스트 시세만 갱신",
@@ -847,7 +848,7 @@ const TRANSLATIONS = {
     androidPresent: "있음",
     androidMissing: "없음",
     homeKicker: "컬렉션 도감",
-    homeTitle: "Collection Atlas",
+    homeTitle: "v1.9.1",
     homeOpen: "도감 열기",
     homeGundamMeta: "프라모델, 완성품, 식완, 가샤폰",
     homeArmoredCoreMeta: "프라모델, V.I., 30MM",
@@ -1073,13 +1074,13 @@ const TRANSLATIONS = {
     imported: "공식 가져오기",
   },
   en: {
-    appTitle: "Collection Atlas",
+    appTitle: "v1.9.1",
     homeNav: "Home",
     collectionNav: "Collection",
     recentUpdatesNav: "Updates",
     marketNav: "Market",
-    marketCenter: "Market Center",
-    openMarketCenter: "Open market center",
+    marketCenter: "Market",
+    openMarketCenter: "Open market",
     dataFetch: "Data fetch",
     githubToken: "GitHub Token",
     marketFetchStart: "Update wishlist prices only",
@@ -1119,9 +1120,9 @@ const TRANSLATIONS = {
     androidReady: "Capacitor {status} · Android project {android}",
     androidPresent: "present",
     androidMissing: "missing",
-    homeKicker: "Collection atlas",
-    homeTitle: "Collection Atlas",
-    homeOpen: "Open atlas",
+    homeKicker: "Collection guide",
+    homeTitle: "v1.9.1",
+    homeOpen: "Open catalog",
     homeGundamMeta: "Kits, figures, shokugan, gashapon",
     homeArmoredCoreMeta: "Model kits, V.I., 30MM",
     homePokemonMeta: "Model kits, gashapon, plush, goods",
@@ -1346,13 +1347,13 @@ const TRANSLATIONS = {
     imported: "Official import",
   },
   ja: {
-    appTitle: "Collection Atlas",
+    appTitle: "v1.9.1",
     homeNav: "ホーム",
     collectionNav: "コレクション",
     recentUpdatesNav: "更新",
     marketNav: "相場",
-    marketCenter: "相場センター",
-    openMarketCenter: "相場センターを開く",
+    marketCenter: "相場",
+    openMarketCenter: "相場を見る",
     dataFetch: "データ取得",
     githubToken: "GitHub Token",
     marketFetchStart: "ウィッシュリスト相場のみ更新",
@@ -1393,7 +1394,7 @@ const TRANSLATIONS = {
     androidPresent: "あり",
     androidMissing: "なし",
     homeKicker: "コレクション図鑑",
-    homeTitle: "Collection Atlas",
+    homeTitle: "v1.9.1",
     homeOpen: "図鑑を開く",
     homeGundamMeta: "プラモデル、完成品、食玩、ガシャポン",
     homeArmoredCoreMeta: "プラモデル、V.I.、30MM",
@@ -1697,6 +1698,7 @@ upgradeLegacyFilterDom();
 
 const elements = {
   brandMark: document.querySelector("#brandMark"),
+  brandVersion: document.querySelector("#brandVersion"),
   datasetSummary: document.querySelector("#datasetSummary"),
   sectionTitle: document.querySelector("#sectionTitle"),
   bottomNav: document.querySelector("#bottomNav"),
@@ -1754,6 +1756,7 @@ const elements = {
   keywordPreview: document.querySelector("#keywordPreview"),
   imageAssetSummary: document.querySelector("#imageAssetSummary"),
   androidPackageSummary: document.querySelector("#androidPackageSummary"),
+  appVersionLabel: document.querySelector("#appVersionLabel"),
   collectionSection: document.querySelector("#collectionSection"),
   ownedPanel: document.querySelector("#ownedPanel"),
   wantedPanel: document.querySelector("#wantedPanel"),
@@ -2177,7 +2180,10 @@ function normalizeState() {
   if (state.activeView === "collection") {
     state.activeView = "wanted";
   }
-  if (!["home", "catalog", "updates", "pbandai", "market", "owned", "wanted"].includes(state.activeView)) {
+  if (state.activeView === "market") {
+    state.activeView = "catalog";
+  }
+  if (!["home", "catalog", "updates", "pbandai", "owned", "wanted"].includes(state.activeView)) {
     state.activeView = "home";
   }
   if (!THEMES.some((theme) => theme.code === state.theme)) {
@@ -2341,50 +2347,30 @@ function clampCollectionQuantity(value) {
 }
 
 function normalizeCollection(collection = {}) {
-  const items = collection.items && typeof collection.items === "object" ? { ...collection.items } : {};
+  const legacyItems = collection.items && typeof collection.items === "object" ? { ...collection.items } : {};
   const memberItems = collection.member_items && typeof collection.member_items === "object" ? structuredClone(collection.member_items) : {};
   const self = safeMemberName(memberName());
   const now = new Date().toISOString();
   for (const kitId of Array.isArray(collection.owned) ? collection.owned : []) {
-    if (!items[kitId]) {
-      items[kitId] = { status: "owned", updated_at: now, updated_by: "local" };
+    if (!legacyItems[kitId]) {
+      legacyItems[kitId] = { status: "owned", updated_at: now, updated_by: "local" };
     }
   }
   for (const kitId of Array.isArray(collection.wanted) ? collection.wanted : []) {
-    if (!items[kitId]) {
-      items[kitId] = { status: "wanted", quantity: 1, updated_at: now, updated_by: "local" };
+    if (!legacyItems[kitId]) {
+      legacyItems[kitId] = { status: "wanted", quantity: 1, updated_at: now, updated_by: "local" };
     }
   }
-  const owned = [];
-  const wanted = [];
-  const normalizedItems = {};
-  for (const [kitId, entry] of Object.entries(items)) {
-    if (!memberItems[self]?.[kitId] && entry?.status) {
+
+  // Legacy collections used only `items` / `owned` / `wanted`. Migrate those
+  // once, but never let stale legacy mirrors recreate member entries after a delete.
+  if (Object.keys(memberItems).length === 0) {
+    for (const [kitId, entry] of Object.entries(legacyItems)) {
+      if (!entry?.status) {
+        continue;
+      }
       memberItems[self] = memberItems[self] || {};
       memberItems[self][kitId] = entry;
-    }
-    const common = {
-      updated_at: entry.updated_at || now,
-      updated_by: entry.updated_by || "local",
-      quantity: clampCollectionQuantity(entry.quantity ?? entry.wanted_quantity ?? 1),
-    };
-    if (entry.note) common.note = String(entry.note);
-    if (entry.storage) common.storage = String(entry.storage);
-    const purchasePrice = numericFilterValue(entry.purchase_price);
-    if (purchasePrice !== null) common.purchase_price = Math.round(purchasePrice);
-    if (entry?.status === "owned") {
-      normalizedItems[kitId] = {
-        ...common,
-        status: "owned",
-      };
-      owned.push(kitId);
-    }
-    if (entry?.status === "wanted") {
-      normalizedItems[kitId] = {
-        ...common,
-        status: "wanted",
-      };
-      wanted.push(kitId);
     }
   }
 
@@ -2401,6 +2387,19 @@ function normalizeCollection(collection = {}) {
       const normalizedEntry = normalizeCollectionEntry(entry, now, memberKey);
       normalizedMemberItems[memberKey] = normalizedMemberItems[memberKey] || {};
       normalizedMemberItems[memberKey][kitId] = normalizedEntry;
+    }
+  }
+
+  const owned = [];
+  const wanted = [];
+  const normalizedItems = {};
+  for (const [kitId, entry] of Object.entries(normalizedMemberItems[self] || {})) {
+    normalizedItems[kitId] = entry;
+    if (entry.status === "owned") {
+      owned.push(kitId);
+    }
+    if (entry.status === "wanted") {
+      wanted.push(kitId);
     }
   }
 
@@ -2618,6 +2617,7 @@ function displayKitById(kitId) {
 function openSettings() {
   state.activeModal = "settings";
   renderSettings();
+  renderConsoleMode();
   if (!elements.settingsDialog.open) {
     elements.settingsDialog.showModal();
   }
@@ -2745,34 +2745,10 @@ function bindEvents() {
   elements.detailMainImage.addEventListener("pointercancel", clearImagePointer);
   elements.toggleOwned.addEventListener("click", () => toggleKitCollection("owned"));
   elements.toggleWanted.addEventListener("click", () => toggleKitCollection("wanted"));
-  elements.wantedQuantityMinus.addEventListener("click", () => updateSelectedWantedQuantity(wantedQuantityForKit(state.selectedKit?.kit_id) - 1));
-  elements.wantedQuantityPlus.addEventListener("click", () => updateSelectedWantedQuantity(wantedQuantityForKit(state.selectedKit?.kit_id) + 1));
+  elements.wantedQuantityMinus.addEventListener("click", () => updateSelectedWantedQuantity(selectedWantedQuantity() - 1));
+  elements.wantedQuantityPlus.addEventListener("click", () => updateSelectedWantedQuantity(selectedWantedQuantity() + 1));
   elements.wantedQuantityInput.addEventListener("change", (event) => updateSelectedWantedQuantity(event.target.value));
   elements.saveCollectionDetails.addEventListener("click", saveSelectedCollectionDetails);
-  elements.openMarketFromDetail?.addEventListener("click", () => {
-    if (state.selectedKit?.franchise) {
-      state.franchise = state.selectedKit.franchise;
-      localStorage.setItem(FRANCHISE_KEY, state.franchise);
-    }
-    state.activeView = "market";
-    state.selectedKit = null;
-    localStorage.setItem(ACTIVE_VIEW_KEY, state.activeView);
-    render();
-    if (elements.detailDialog.open) {
-      elements.detailDialog.close();
-    }
-    persistViewState({ mode: "push" });
-  });
-  elements.openMarketFromSettings?.addEventListener("click", () => {
-    state.activeView = "market";
-    state.selectedKit = null;
-    localStorage.setItem(ACTIVE_VIEW_KEY, state.activeView);
-    if (elements.settingsDialog.open) {
-      elements.settingsDialog.close();
-    }
-    render();
-    persistViewState({ mode: "push" });
-  });
   if (elements.githubTokenInput) {
     elements.githubTokenInput.value = localStorage.getItem(GITHUB_TOKEN_KEY) || "";
   }
@@ -4050,12 +4026,18 @@ function renderBottomNav() {
 
 function applyAppearance() {
   document.body.dataset.theme = state.theme;
+  if (elements.brandVersion) {
+    elements.brandVersion.textContent = APP_VERSION_LABEL;
+  }
+  if (elements.appVersionLabel) {
+    elements.appVersionLabel.textContent = `Gunpula App ${APP_VERSION_LABEL}`;
+  }
   if (elements.brandMark) {
     elements.brandMark.innerHTML = "";
     if (state.appIcon) {
       const img = document.createElement("img");
       img.src = state.appIcon;
-      img.alt = "Atlas";
+      img.alt = APP_VERSION_LABEL;
       elements.brandMark.append(img);
     } else {
       elements.brandMark.textContent = "A";
@@ -5344,9 +5326,44 @@ function memberCollectionMap(member = editableCollectionMember()) {
   return state.collection.member_items[member];
 }
 
+function refreshLegacyCollectionItems() {
+  state.collection.member_items = state.collection.member_items || {};
+  const editableItems = state.collection.member_items[editableCollectionMember()] || {};
+  state.collection.items = { ...editableItems };
+  state.collection.owned = Object.entries(editableItems)
+    .filter(([, entry]) => entry?.status === "owned")
+    .map(([kitId]) => kitId);
+  state.collection.wanted = Object.entries(editableItems)
+    .filter(([, entry]) => entry?.status === "wanted")
+    .map(([kitId]) => kitId);
+}
+
 function collectionEntry(kitId, member = editableCollectionMember()) {
   state.collection = normalizeCollection(state.collection);
   return kitId ? state.collection.member_items?.[member]?.[kitId] || null : null;
+}
+
+function preferredCollectionMemberForKit(kitId, type = null) {
+  const activeMember = activeCollectionMember();
+  if (activeMember !== "all") {
+    const activeEntry = collectionEntry(kitId, activeMember);
+    if (activeEntry?.status && (!type || activeEntry.status === type)) {
+      return activeMember;
+    }
+  }
+
+  const editableMember = editableCollectionMember();
+  const editableEntry = collectionEntry(kitId, editableMember);
+  if (editableEntry?.status && (!type || editableEntry.status === type)) {
+    return editableMember;
+  }
+
+  const entries = collectionEntriesForKit(kitId, type);
+  if (entries.length === 1) {
+    return entries[0].member;
+  }
+
+  return editableMember;
 }
 
 function collectionEntriesForKit(kitId, type = null) {
@@ -5632,12 +5649,14 @@ function removeCollectionItems(type, kitIds) {
     nextMemberItems[targetMember] = nextItems;
   }
   state.collection.member_items = nextMemberItems;
+  refreshLegacyCollectionItems();
+  state.collectionSelection[type] = new Set();
 
   saveCollection();
   renderCollections();
   renderKits();
   if (state.selectedKit && elements.detailDialog.open) {
-    renderDetailStatusActions(state.selectedKit);
+    renderDetail(state.selectedKit);
   }
 }
 
@@ -5747,6 +5766,15 @@ function wantedQuantityForKit(kitId, member = editableCollectionMember()) {
   return clampCollectionQuantity(state.collection.member_items?.[member]?.[kitId]?.quantity ?? 1);
 }
 
+function selectedWantedQuantity() {
+  const kit = state.selectedKit;
+  if (!kit) {
+    return 1;
+  }
+  const member = preferredCollectionMemberForKit(kit.kit_id, "wanted");
+  return wantedQuantityForKit(kit.kit_id, member);
+}
+
 function kitInCollection(kitId, type, member = editableCollectionMember()) {
   return collectionEntry(kitId, member)?.status === type;
 }
@@ -5772,7 +5800,11 @@ function collectionOwnerSummary(kitId, type) {
 
 function updateSelectedWantedQuantity(value) {
   const kit = state.selectedKit;
-  if (!kit || !kitInCollection(kit.kit_id, "wanted")) {
+  if (!kit) {
+    return;
+  }
+  const member = preferredCollectionMemberForKit(kit.kit_id, "wanted");
+  if (collectionEntry(kit.kit_id, member)?.status !== "wanted") {
     return;
   }
   if (!canEditSharedData()) {
@@ -5780,7 +5812,6 @@ function updateSelectedWantedQuantity(value) {
     return;
   }
 
-  const member = editableCollectionMember();
   const current = collectionEntry(kit.kit_id, member) || {};
   memberCollectionMap(member)[kit.kit_id] = {
     ...current,
@@ -5789,7 +5820,7 @@ function updateSelectedWantedQuantity(value) {
     updated_at: new Date().toISOString(),
     updated_by: member,
   };
-  state.collection.items = { ...(state.collection.items || {}), [kit.kit_id]: memberCollectionMap(member)[kit.kit_id] };
+  refreshLegacyCollectionItems();
 
   saveCollection();
   renderCollections();
@@ -5802,7 +5833,8 @@ function saveSelectedCollectionDetails() {
   if (!kit) {
     return;
   }
-  const current = collectionEntry(kit.kit_id);
+  const member = preferredCollectionMemberForKit(kit.kit_id, "owned");
+  const current = collectionEntry(kit.kit_id, member);
   if (!current?.status) {
     return;
   }
@@ -5818,7 +5850,7 @@ function saveSelectedCollectionDetails() {
     note: elements.collectionNoteInput.value.trim(),
     storage: elements.storageLocationInput.value.trim(),
     updated_at: new Date().toISOString(),
-    updated_by: editableCollectionMember(),
+    updated_by: member,
   };
   if (purchasePrice === null) {
     delete nextEntry.purchase_price;
@@ -5828,9 +5860,8 @@ function saveSelectedCollectionDetails() {
   if (!nextEntry.note) delete nextEntry.note;
   if (!nextEntry.storage) delete nextEntry.storage;
 
-  const member = editableCollectionMember();
   memberCollectionMap(member)[kit.kit_id] = nextEntry;
-  state.collection.items = { ...(state.collection.items || {}), [kit.kit_id]: nextEntry };
+  refreshLegacyCollectionItems();
   saveCollection();
   renderCollections();
   renderKits();
@@ -5847,11 +5878,9 @@ function toggleKitCollection(type) {
     return;
   }
 
-  if (kitInCollection(kit.kit_id, type)) {
-    delete memberCollectionMap(editableCollectionMember())[kit.kit_id];
-    if (state.collection.items?.[kit.kit_id]?.status === type) {
-      delete state.collection.items[kit.kit_id];
-    }
+  const targetMember = preferredCollectionMemberForKit(kit.kit_id, type);
+  if (collectionEntry(kit.kit_id, targetMember)?.status === type) {
+    delete memberCollectionMap(targetMember)[kit.kit_id];
   } else {
     const member = editableCollectionMember();
     const nextEntry = {
@@ -5861,13 +5890,13 @@ function toggleKitCollection(type) {
       updated_by: member,
     };
     memberCollectionMap(member)[kit.kit_id] = nextEntry;
-    state.collection.items = { ...(state.collection.items || {}), [kit.kit_id]: nextEntry };
   }
+  refreshLegacyCollectionItems();
 
   saveCollection();
   renderCollections();
   renderKits();
-  renderDetailStatusActions(kit);
+  renderDetail(kit);
 }
 
 function renderCollections() {
@@ -5947,8 +5976,10 @@ function renderCollectionStrip(type, strip, countNode, panel, collapseButton, fo
 }
 
 function renderDetailStatusActions(kit) {
-  const owned = kitInCollection(kit.kit_id, "owned");
-  const wanted = kitInCollection(kit.kit_id, "wanted");
+  const ownedMember = preferredCollectionMemberForKit(kit.kit_id, "owned");
+  const wantedMember = preferredCollectionMemberForKit(kit.kit_id, "wanted");
+  const owned = collectionEntry(kit.kit_id, ownedMember)?.status === "owned";
+  const wanted = collectionEntry(kit.kit_id, wantedMember)?.status === "wanted";
   const editable = canEditSharedData();
   elements.toggleOwned.classList.toggle("is-active", owned);
   elements.toggleWanted.classList.toggle("is-active", wanted);
@@ -5957,16 +5988,16 @@ function renderDetailStatusActions(kit) {
   elements.toggleOwned.textContent = owned ? t("unmarkOwned") : t("markOwned");
   elements.toggleWanted.textContent = wanted ? t("unmarkWanted") : t("markWanted");
   elements.wantedQuantityControl.hidden = !wanted;
-  elements.wantedQuantityInput.value = String(wantedQuantityForKit(kit.kit_id));
+  elements.wantedQuantityInput.value = String(wantedQuantityForKit(kit.kit_id, wantedMember));
   elements.wantedQuantityInput.disabled = !editable;
-  elements.wantedQuantityMinus.disabled = !editable || wantedQuantityForKit(kit.kit_id) <= 1;
-  elements.wantedQuantityPlus.disabled = !editable || wantedQuantityForKit(kit.kit_id) >= 99;
-  const entry = collectionEntry(kit.kit_id);
+  elements.wantedQuantityMinus.disabled = !editable || wantedQuantityForKit(kit.kit_id, wantedMember) <= 1;
+  elements.wantedQuantityPlus.disabled = !editable || wantedQuantityForKit(kit.kit_id, wantedMember) >= 99;
+  const entry = collectionEntry(kit.kit_id, ownedMember);
   // Collection details (purchase price, storage...) only make sense for kits
   // you actually own; for wanted-only kits the panel is noise.
   const hasCollectionEntry = owned;
   elements.collectionDetailPanel.hidden = !hasCollectionEntry;
-  elements.collectionQuantityInput.value = String(collectionQuantityForKit(kit.kit_id));
+  elements.collectionQuantityInput.value = String(collectionQuantityForKit(kit.kit_id, ownedMember));
   elements.purchasePriceInput.value = entry?.purchase_price ?? "";
   elements.storageLocationInput.value = entry?.storage ?? "";
   elements.collectionNoteInput.value = entry?.note ?? "";
@@ -6078,7 +6109,9 @@ function renderImageHealth() {
 }
 
 function renderConsoleMode() {
-  elements.seriesAdminPanel.hidden = !state.consoleMode;
+  document.querySelectorAll(".console-only").forEach((node) => {
+    node.hidden = !state.consoleMode;
+  });
   elements.correctionPanel.hidden = !state.consoleMode;
   const editable = canEditSharedData();
   elements.editToggle.disabled = !editable;

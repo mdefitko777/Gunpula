@@ -1706,7 +1706,7 @@ body[data-view="market"] .top-bar {
   padding: 22px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--panel);
+  background: #f7fbfb;
 }
 
 .settings-shell h2 {
@@ -1726,9 +1726,11 @@ body[data-view="market"] .top-bar {
 }
 
 .settings-section {
-  margin-top: 16px;
-  padding-top: 14px;
-  border-top: 1px solid var(--line);
+  margin-top: 12px;
+  padding: 13px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
 }
 
 .settings-section[hidden] {
@@ -1739,6 +1741,10 @@ body[data-view="market"] .top-bar {
 .settings-section-head h3 {
   margin: 0;
   font-size: 14px;
+}
+
+.settings-section > h3 {
+  margin-bottom: 10px;
 }
 
 .settings-section .language-control {
@@ -1858,6 +1864,12 @@ body[data-view="market"] .top-bar {
 
 .settings-hint {
   margin-top: 10px;
+}
+
+.app-version-label {
+  padding: 10px 2px 0;
+  text-align: center;
+  font-weight: 900;
 }
 
 .install-button {

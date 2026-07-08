@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#eaf5f7" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="application-name" content="Collection Atlas" />
-    <title>Collection Atlas</title>
+    <meta name="application-name" content="Gunpula v1.9.1" />
+    <title>Gunpula v1.9.1</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260708-v20" />
+    <link rel="stylesheet" href="./styles.css?v=20260708-v22" />
   </head>
   <body>
     <main class="catalog-page">
@@ -17,7 +17,7 @@
         <div class="top-bar">
           <div class="brand-line">
             <span class="brand-mark" id="brandMark">A</span>
-            <span>Atlas</span>
+            <span id="brandVersion">v1.9.1</span>
           </div>
           <div class="segmented-control franchise-control" id="franchiseList" aria-label="选择作品分类"></div>
           <button class="settings-button" id="settingsOpen" type="button" aria-label="设置" data-i18n-aria="settings">⚙</button>
@@ -67,7 +67,7 @@
         <div class="home-hero">
           <div>
             <p class="home-kicker" data-i18n="homeKicker">收藏图鉴</p>
-            <h1 data-i18n="homeTitle">Collection Atlas</h1>
+            <h1 data-i18n="homeTitle">v1.9.1</h1>
           </div>
           <span id="homeTotal">0</span>
         </div>
@@ -100,31 +100,6 @@
         </div>
         <div class="pb-franchise-tabs" id="pbandaiFranchiseTabs"></div>
         <div class="pbandai-list" id="pbandaiList"></div>
-      </section>
-
-      <section class="market-section" id="marketSection" hidden>
-        <div class="updates-head">
-          <div>
-            <h2 data-i18n="marketCenter">市场中心</h2>
-            <p id="marketSubtitle"></p>
-          </div>
-        </div>
-        <div class="market-summary" id="marketSummary"></div>
-        <div class="market-source-grid" id="marketSourceGrid"></div>
-        <div class="market-panels">
-          <section class="market-panel">
-            <h3 data-i18n="keywordAssistant">关键词助手</h3>
-            <div class="keyword-preview" id="keywordPreview"></div>
-          </section>
-          <section class="market-panel">
-            <h3 data-i18n="imageAssetLibrary">图片资产库</h3>
-            <div class="asset-summary" id="imageAssetSummary"></div>
-          </section>
-          <section class="market-panel">
-            <h3 data-i18n="androidPackage">Android APK</h3>
-            <div class="asset-summary" id="androidPackageSummary"></div>
-          </section>
-        </div>
       </section>
 
       <section class="collection-section" id="collectionSection" hidden>
@@ -240,7 +215,6 @@
           <section class="detail-market-panel" id="detailMarketPanel" hidden>
             <div class="detail-market-head">
               <h3 data-i18n="marketPrice">市场价</h3>
-              <button class="secondary-button compact-button" id="openMarketFromDetail" type="button" data-i18n="marketCenter">市场中心</button>
             </div>
             <div id="detailMarketBody"></div>
           </section>
@@ -301,28 +275,6 @@
         <button class="dialog-close settings-close" id="settingsClose" type="button" aria-label="关闭设置" data-i18n-aria="closeSettings">×</button>
         <h2 id="settingsTitle" data-i18n="settings">设置</h2>
         <p id="datasetSummary">Loading catalog...</p>
-        <section class="settings-section">
-          <h3 data-i18n="marketCenter">市场中心</h3>
-          <div class="app-update-row">
-            <button id="openMarketFromSettings" type="button" data-i18n="openMarketCenter">打开市场中心</button>
-            <span data-i18n="marketSettingsHint">查看各来源状态与愿望单价格样本。</span>
-          </div>
-        </section>
-        <section class="settings-section">
-          <h3 data-i18n="dataFetch">数据抓取</h3>
-          <label class="icon-upload">
-            <span data-i18n="githubToken">GitHub Token</span>
-            <input id="githubTokenInput" type="password" autocomplete="off" placeholder="ghp_..." />
-          </label>
-          <div class="app-update-row">
-            <button id="marketFetchStart" type="button" data-i18n="marketFetchStart">只更新愿望单价格</button>
-            <span id="marketFetchStatus" data-i18n="marketFetchHint">只抓愿望单市场价，约 2~4 分钟。</span>
-          </div>
-          <div class="app-update-row">
-            <button id="manualFetchStart" type="button" data-i18n="manualFetchStart">立即全部抓取</button>
-            <span id="manualFetchStatus" data-i18n="manualFetchHint">触发云端抓取全部来源（目录 / 市场价 / 更新），约 10 分钟后刷新查看。</span>
-          </div>
-        </section>
         <section class="settings-section">
           <h3 data-i18n="language">语言</h3>
           <div class="segmented-control language-control" id="languageList" aria-label="选择语言"></div>
@@ -389,6 +341,21 @@
           <button class="install-button" id="installApp" type="button" hidden data-i18n="installApp">安装到手机</button>
         </section>
         <section class="settings-section">
+          <h3 data-i18n="dataFetch">数据抓取</h3>
+          <label class="icon-upload">
+            <span data-i18n="githubToken">GitHub Token</span>
+            <input id="githubTokenInput" type="password" autocomplete="off" placeholder="ghp_..." />
+          </label>
+          <div class="app-update-row">
+            <button id="marketFetchStart" type="button" data-i18n="marketFetchStart">只更新愿望单价格</button>
+            <span id="marketFetchStatus" data-i18n="marketFetchHint">只抓愿望单市场价，约 2~4 分钟。</span>
+          </div>
+          <div class="app-update-row">
+            <button id="manualFetchStart" type="button" data-i18n="manualFetchStart">立即全部抓取</button>
+            <span id="manualFetchStatus" data-i18n="manualFetchHint">触发云端抓取全部来源（目录 / 市场价 / 更新），约 10 分钟后刷新查看。</span>
+          </div>
+        </section>
+        <section class="settings-section">
           <div class="settings-section-head">
             <h3 data-i18n="appUpdate">应用更新</h3>
           </div>
@@ -403,7 +370,7 @@
           <p class="settings-hint" id="updateNotificationStatus" data-i18n="updateNotificationHint">开启后，应用打开时会提醒新数据；SEED / 00 会优先提示。</p>
           <div class="notification-rules" id="notificationRules"></div>
         </section>
-        <section class="settings-section app-health-section">
+        <section class="settings-section app-health-section console-only" hidden>
           <h3 data-i18n="appHealth">最大问题</h3>
           <ul class="issue-list">
             <li><span data-i18n="issueInstall">安卓安装</span><strong data-i18n="issueInstallStatus">已支持 PWA</strong></li>
@@ -413,19 +380,19 @@
             <li><span data-i18n="issueConflict">冲突处理</span><strong data-i18n="issueConflictStatus">后同步覆盖，显示最后修改</strong></li>
           </ul>
         </section>
-        <section class="settings-section">
+        <section class="settings-section console-only" hidden>
           <h3 data-i18n="updateLog">更新记录</h3>
           <div class="update-log" id="updateLog"></div>
         </section>
-        <section class="settings-section">
+        <section class="settings-section console-only" hidden>
           <h3 data-i18n="sourceHealth">来源健康</h3>
           <div class="source-health-log" id="sourceHealthLog"></div>
         </section>
-        <section class="settings-section">
+        <section class="settings-section console-only" hidden>
           <h3 data-i18n="reviewWorkbench">待确认工作台</h3>
           <div class="review-workbench" id="reviewWorkbench"></div>
         </section>
-        <section class="settings-section">
+        <section class="settings-section console-only" hidden>
           <h3 data-i18n="imageHealth">图片健康</h3>
           <div class="update-log" id="imageHealthLog"></div>
         </section>
@@ -435,7 +402,7 @@
             <input id="consoleModeToggle" type="checkbox" />
           </label>
         </section>
-        <p class="settings-hint app-version-label" id="appVersionLabel">Gunpula App 1.9.1</p>
+        <p class="settings-hint app-version-label" id="appVersionLabel">Gunpula App v1.9.1</p>
         <section class="settings-section console-only" id="seriesAdminPanel" hidden>
           <div class="settings-section-head">
             <h3 data-i18n="seriesAdmin">系列名称</h3>
@@ -471,6 +438,6 @@
       <div class="radial-labels"></div>
     </div>
 
-    <script type="module" src="./main.js?v=20260708-v20"></script>
+    <script type="module" src="./main.js?v=20260708-v22"></script>
   </body>
 </html>
