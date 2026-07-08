@@ -9,7 +9,7 @@
     <title>Collection Atlas</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260708-v19" />
+    <link rel="stylesheet" href="./styles.css?v=20260708-v20" />
   </head>
   <body>
     <main class="catalog-page">
@@ -315,6 +315,10 @@
             <input id="githubTokenInput" type="password" autocomplete="off" placeholder="ghp_..." />
           </label>
           <div class="app-update-row">
+            <button id="marketFetchStart" type="button" data-i18n="marketFetchStart">只更新愿望单价格</button>
+            <span id="marketFetchStatus" data-i18n="marketFetchHint">只抓愿望单市场价，约 2~4 分钟。</span>
+          </div>
+          <div class="app-update-row">
             <button id="manualFetchStart" type="button" data-i18n="manualFetchStart">立即全部抓取</button>
             <span id="manualFetchStatus" data-i18n="manualFetchHint">触发云端抓取全部来源（目录 / 市场价 / 更新），约 10 分钟后刷新查看。</span>
           </div>
@@ -431,7 +435,7 @@
             <input id="consoleModeToggle" type="checkbox" />
           </label>
         </section>
-        <p class="settings-hint app-version-label" id="appVersionLabel">Gunpula App 1.9.0</p>
+        <p class="settings-hint app-version-label" id="appVersionLabel">Gunpula App 1.9.1</p>
         <section class="settings-section console-only" id="seriesAdminPanel" hidden>
           <div class="settings-section-head">
             <h3 data-i18n="seriesAdmin">系列名称</h3>
@@ -467,6 +471,6 @@
       <div class="radial-labels"></div>
     </div>
 
-    <script type="module" src="./main.js?v=20260708-v19"></script>
+    <script type="module" src="./main.js?v=20260708-v20"></script>
   </body>
 </html>

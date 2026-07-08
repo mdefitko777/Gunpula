@@ -1,0 +1,70 @@
+name: Update market prices
+
+# Lightweight manual pipeline: only refreshes wishlist market prices, skipping
+# the slow official-catalog imports. Dispatched from the app's Settings button;
+# typically finishes in 2-4 minutes.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Shares the refresh workflow's group so the two can never push concurrently.
+concurrency:
+  group: refresh-official-catalog
+  cancel-in-progress: false
+
+jobs:
+  market:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fetch wishlist market prices
+        env:
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          SYNC_WORKSPACE_ID: ${{ secrets.SYNC_WORKSPACE_ID }}
+          SYNC_WORKSPACE_SECRET: ${{ secrets.SYNC_WORKSPACE_SECRET }}
+        run: npm run market:watch
+
+      - name: Build market/search assets
+        run: npm run market
+
+      - name: Validate catalog
+        run: npm run validate
+
+      - name: Commit updated market data
+        run: |
+          if git diff --quiet -- data; then
+            echo "No market updates."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          git commit -m "Update wishlist market prices"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin "$GITHUB_REF_NAME"
+            if git rebase -X theirs "origin/$GITHUB_REF_NAME"; then
+              if git push origin "HEAD:$GITHUB_REF_NAME"; then
+                echo "Pushed on attempt $attempt."
+                exit 0
+              fi
+              echo "Push rejected (remote moved); retrying..."
+            else
+              echo "Rebase conflict; aborting and retrying against latest remote..."
+              git rebase --abort || true
+            fi
+            sleep $(( (RANDOM % 10) + 5 ))
+          done
+          echo "Could not push after 5 attempts."
+          exit 1

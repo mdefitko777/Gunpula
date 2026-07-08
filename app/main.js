@@ -536,6 +536,9 @@ const TRANSLATIONS = {
     openMarketCenter: "打开市场中心",
     dataFetch: "数据抓取",
     githubToken: "GitHub Token",
+    marketFetchStart: "只更新愿望单价格",
+    marketFetchHint: "只抓愿望单市场价，约 2~4 分钟。",
+    marketFetchOk: "已触发！约 2~4 分钟后刷新查看价格。",
     manualFetchStart: "立即全部抓取",
     manualFetchHint: "触发云端抓取全部来源（目录 / 市场价 / 更新），约 10 分钟后刷新查看。",
     manualFetchNeedToken: "请先填入 GitHub Token（需要 Actions 写权限）。",
@@ -806,6 +809,9 @@ const TRANSLATIONS = {
     openMarketCenter: "시세 센터 열기",
     dataFetch: "데이터 수집",
     githubToken: "GitHub Token",
+    marketFetchStart: "위시리스트 시세만 갱신",
+    marketFetchHint: "위시리스트 시세만 수집합니다. 약 2~4분.",
+    marketFetchOk: "트리거 완료! 약 2~4분 후 새로고침하여 시세를 확인하세요.",
     manualFetchStart: "지금 전체 수집",
     manualFetchHint: "클라우드에서 전체 소스(카탈로그/시세/업데이트)를 수집합니다. 약 10분 후 새로고침하세요.",
     manualFetchNeedToken: "먼저 GitHub Token을 입력하세요 (Actions 쓰기 권한 필요).",
@@ -1076,6 +1082,9 @@ const TRANSLATIONS = {
     openMarketCenter: "Open market center",
     dataFetch: "Data fetch",
     githubToken: "GitHub Token",
+    marketFetchStart: "Update wishlist prices only",
+    marketFetchHint: "Fetches wishlist market prices only, ~2-4 minutes.",
+    marketFetchOk: "Triggered! Refresh in ~2-4 minutes to see prices.",
     manualFetchStart: "Fetch everything now",
     manualFetchHint: "Triggers the cloud fetch of all sources (catalog / prices / updates). Refresh in ~10 minutes.",
     manualFetchNeedToken: "Enter a GitHub token first (Actions write scope).",
@@ -1346,6 +1355,9 @@ const TRANSLATIONS = {
     openMarketCenter: "相場センターを開く",
     dataFetch: "データ取得",
     githubToken: "GitHub Token",
+    marketFetchStart: "ウィッシュリスト相場のみ更新",
+    marketFetchHint: "ウィッシュリストの相場のみ取得します。約2〜4分。",
+    marketFetchOk: "トリガー完了！約2〜4分後に再読み込みして相場を確認してください。",
     manualFetchStart: "今すぐ全部取得",
     manualFetchHint: "クラウドで全ソース（カタログ／相場／更新）を取得します。約10分後に再読み込みしてください。",
     manualFetchNeedToken: "先に GitHub Token を入力してください（Actions 書き込み権限）。",
@@ -1801,6 +1813,8 @@ const elements = {
   openMarketFromDetail: document.querySelector("#openMarketFromDetail"),
   openMarketFromSettings: document.querySelector("#openMarketFromSettings"),
   githubTokenInput: document.querySelector("#githubTokenInput"),
+  marketFetchStart: document.querySelector("#marketFetchStart"),
+  marketFetchStatus: document.querySelector("#marketFetchStatus"),
   manualFetchStart: document.querySelector("#manualFetchStart"),
   manualFetchStatus: document.querySelector("#manualFetchStatus"),
   detailOfficialLink: document.querySelector("#detailOfficialLink"),
@@ -2762,10 +2776,10 @@ function bindEvents() {
   if (elements.githubTokenInput) {
     elements.githubTokenInput.value = localStorage.getItem(GITHUB_TOKEN_KEY) || "";
   }
-  elements.manualFetchStart?.addEventListener("click", async () => {
+  const dispatchWorkflow = async (workflowFile, statusEl, okKey) => {
     const token = elements.githubTokenInput?.value.trim() || "";
     const status = (text) => {
-      if (elements.manualFetchStatus) elements.manualFetchStatus.textContent = text;
+      if (statusEl) statusEl.textContent = text;
     };
     if (!token) {
       status(t("manualFetchNeedToken"));
@@ -2774,7 +2788,7 @@ function bindEvents() {
     localStorage.setItem(GITHUB_TOKEN_KEY, token);
     status(t("manualFetchRunning"));
     try {
-      const response = await fetch("https://api.github.com/repos/mdefitko777/Gunpula/actions/workflows/refresh-catalog.yml/dispatches", {
+      const response = await fetch(`https://api.github.com/repos/mdefitko777/Gunpula/actions/workflows/${workflowFile}/dispatches`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -2783,11 +2797,13 @@ function bindEvents() {
         },
         body: JSON.stringify({ ref: "main" }),
       });
-      status(response.status === 204 ? t("manualFetchOk") : `${t("manualFetchFail")} (HTTP ${response.status})`);
+      status(response.status === 204 ? t(okKey) : `${t("manualFetchFail")} (HTTP ${response.status})`);
     } catch {
       status(t("manualFetchFail"));
     }
-  });
+  };
+  elements.marketFetchStart?.addEventListener("click", () => dispatchWorkflow("market-prices.yml", elements.marketFetchStatus, "marketFetchOk"));
+  elements.manualFetchStart?.addEventListener("click", () => dispatchWorkflow("refresh-catalog.yml", elements.manualFetchStatus, "manualFetchOk"));
   elements.editToggle.addEventListener("click", () => {
     elements.correctionForm.hidden = !elements.correctionForm.hidden;
   });
