@@ -1,4 +1,4 @@
-const APP_CACHE = "gunpula-app-v23";
+const APP_CACHE = "gunpula-app-v24";
 const DATA_CACHE = "gunpula-data-v1";
 const IMAGE_CACHE = "gunpula-images-v1";
 const NOTIFICATION_CACHE = "gunpula-notifications-v1";
@@ -14,7 +14,12 @@ const APP_ASSETS = [
   "./app/icons/icon-512.png",
   "./app/icons/icon.svg",
   "./data/grades.json",
-  "./data/kits.json",
+  "./data/split/manifest.json",
+  "./data/split/kits-gundam.json",
+  "./data/split/kits-armored_core.json",
+  "./data/split/kits-pokemon.json",
+  "./data/split/kits-fate.json",
+  "./data/split/kits-beyblade.json",
   "./data/sources.json",
   "./data/source-health.json",
   "./data/series-audit.json",
@@ -25,7 +30,6 @@ const APP_ASSETS = [
   "./data/market_sources.json",
   "./data/market_manual_links.json",
   "./data/market-prices.json",
-  "./data/search-index.json",
   "./data/exchange-rates.json",
   "./data/image-assets.json",
   "./data/android-package.json",

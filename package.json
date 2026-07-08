@@ -31,6 +31,7 @@
     "duplicates": "node scripts/find_duplicate_candidates.mjs",
     "audit:gundam-series": "node scripts/audit_gundam_series.mjs",
     "check:sources": "node scripts/check_source_health.mjs",
+    "split": "node scripts/split_catalog.mjs",
     "updates": "node scripts/build_update_feed.mjs",
     "market": "node scripts/build_market_data.mjs",
     "market:watch": "node scripts/fetch_wanted_market_listings.mjs",

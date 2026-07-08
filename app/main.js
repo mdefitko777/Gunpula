@@ -1903,6 +1903,68 @@ async function loadOptionalJson(path) {
   }
 }
 
+// Startup loads only the active franchise's catalog slice; the rest streams in
+// after first render. Falls back to the monolithic kits.json when split files
+// are unavailable (e.g. older deployments or partial offline caches).
+let catalogCompletion = null;
+let searchIndexPromise = null;
+
+async function loadInitialKitsDoc() {
+  const manifest = await loadOptionalJson("../data/split/manifest.json");
+  const franchises = Object.keys(manifest?.franchises || {});
+  if (!franchises.length) {
+    return { doc: await loadJson("../data/kits.json"), pendingFranchises: [] };
+  }
+  const first = franchises.includes(state.franchise) ? state.franchise : franchises.includes("gundam") ? "gundam" : franchises[0];
+  const doc = await loadOptionalJson(`../data/split/kits-${first}.json`);
+  if (!doc?.kits) {
+    return { doc: await loadJson("../data/kits.json"), pendingFranchises: [] };
+  }
+  return { doc, pendingFranchises: franchises.filter((franchise) => franchise !== first) };
+}
+
+function completeCatalogInBackground(pendingFranchises) {
+  if (!pendingFranchises?.length || catalogCompletion) {
+    return;
+  }
+  catalogCompletion = (async () => {
+    const docs = await Promise.all(pendingFranchises.map((franchise) => loadOptionalJson(`../data/split/kits-${franchise}.json`)));
+    if (docs.some((doc) => !doc?.kits)) {
+      const fullDoc = await loadJson("../data/kits.json");
+      state.rawKits = fullDoc.kits;
+      state.updatedAt = fullDoc.updated_at || state.updatedAt;
+    } else {
+      state.rawKits = state.rawKits.concat(...docs.map((doc) => doc.kits));
+    }
+    refreshKits();
+    render();
+  })().catch(() => {
+    catalogCompletion = null;
+  });
+}
+
+function ensureSearchIndex() {
+  if (!searchIndexPromise) {
+    searchIndexPromise = loadOptionalJson("../data/search-index.json").then((doc) => {
+      if (!doc) {
+        searchIndexPromise = null;
+        return null;
+      }
+      state.searchIndex = doc;
+      state.searchIndexByKit = new Map((doc.records || []).map((record) => [record.kit_id, record]));
+      if (state.query.trim()) {
+        renderKits();
+      }
+      if (state.selectedKit && elements.detailDialog.open) {
+        renderDetailMarketPanel(state.selectedKit);
+      }
+      renderMarketCenter();
+      return doc;
+    });
+  }
+  return searchIndexPromise;
+}
+
 function normalizeFilterStateValue(value) {
   const values = Array.isArray(value)
     ? value
@@ -2098,7 +2160,7 @@ function applyViewState(viewState) {
 async function init() {
   const [
     gradesDoc,
-    kitsDoc,
+    initialCatalog,
     sourcesDoc,
     imageHealthDoc,
     updateFeedDoc,
@@ -2106,13 +2168,12 @@ async function init() {
     sourceHealthDoc,
     seriesAuditDoc,
     marketPricesDoc,
-    searchIndexDoc,
     imageAssetsDoc,
     androidPackageDoc,
     firstSeenDoc,
   ] = await Promise.all([
     loadJson("../data/grades.json"),
-    loadJson("../data/kits.json"),
+    loadInitialKitsDoc(),
     loadJson("../data/sources.json"),
     loadOptionalJson("../data/image-health.json"),
     loadOptionalJson("../data/update-feed.json"),
@@ -2120,14 +2181,13 @@ async function init() {
     loadOptionalJson("../data/source-health.json"),
     loadOptionalJson("../data/series-audit.json"),
     loadOptionalJson("../data/market-prices.json"),
-    loadOptionalJson("../data/search-index.json"),
     loadOptionalJson("../data/image-assets.json"),
     loadOptionalJson("../data/android-package.json"),
     loadOptionalJson("../data/kit-first-seen.json"),
   ]);
 
   state.grades = gradesDoc.grades;
-  state.rawKits = kitsDoc.kits;
+  state.rawKits = initialCatalog.doc.kits;
   state.sources = sourcesDoc.sources;
   state.imageHealth = imageHealthDoc;
   state.updateFeed = updateFeedDoc;
@@ -2135,15 +2195,13 @@ async function init() {
   state.sourceHealth = sourceHealthDoc;
   state.seriesAudit = seriesAuditDoc;
   state.marketPrices = marketPricesDoc;
-  state.searchIndex = searchIndexDoc;
-  state.searchIndexByKit = new Map((searchIndexDoc?.records || []).map((record) => [record.kit_id, record]));
   state.imageAssets = imageAssetsDoc;
   state.androidPackage = androidPackageDoc;
   state.kitFirstSeen = firstSeenDoc?.dates || {};
   state.overrides = loadOverrides();
   state.seriesLabelOverrides = loadSeriesLabelOverrides();
   state.collection = loadCollection();
-  state.updatedAt = kitsDoc.updated_at;
+  state.updatedAt = initialCatalog.doc.updated_at;
   refreshKits();
   normalizeState();
   state.releaseMonth = validReleaseMonth(state.releaseMonth) || defaultReleaseMonth();
@@ -2165,6 +2223,10 @@ async function init() {
     elements.settingsDialog.showModal();
   }
   seedInitialOverlayHistory();
+  completeCatalogInBackground(initialCatalog.pendingFranchises);
+  if (state.query.trim()) {
+    ensureSearchIndex();
+  }
 }
 
 function normalizeState() {
@@ -2707,8 +2769,10 @@ function bindEvents() {
     localStorage.setItem(RELEASE_MONTH_KEY, state.releaseMonth);
     renderHomeUpdates();
   });
+  elements.searchInput.addEventListener("focus", () => ensureSearchIndex(), { once: false });
   elements.searchInput.addEventListener("input", (event) => {
     state.query = event.target.value;
+    ensureSearchIndex();
     persistViewState();
     renderKits();
   });
@@ -6591,6 +6655,7 @@ function openDetail(kit) {
   state.activeModal = null;
   state.selectedImageIndex = 0;
 
+  ensureSearchIndex();
   renderDetail(kit);
   elements.detailDialog.showModal();
   persistViewState({ mode: "push" });

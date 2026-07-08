@@ -29,6 +29,9 @@ jobs:
       - name: Check cached Pokemon images
         run: npm run check:images:pokemon
 
+      - name: Split catalog into per-franchise app files
+        run: npm run split
+
       - name: Commit image cache updates
         run: |
           if git diff --quiet -- data app/assets; then
