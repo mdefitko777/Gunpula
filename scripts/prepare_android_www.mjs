@@ -4,19 +4,22 @@ import { fileURLToPath } from "node:url";
 
 // Stages the Capacitor webDir: app/ + data/ side by side so the app's
 // relative ../data fetches keep working inside the native shell.
+// Heavy files stay out of the APK: the shell prefers live GitHub Pages data,
+// kits.json is redundant with data/split, the search index is lazy-loaded,
+// and app/assets holds cached images no catalog record references.
 const rootDir = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const wwwDir = resolve(rootDir, "www");
 
-const EXCLUDED_FILES = new Set(["market_secrets.local.json"]);
+const EXCLUDED_FILES = new Set(["market_secrets.local.json", "kits.json", "search-index.json"]);
+const EXCLUDED_DIRS = new Set([resolve(rootDir, "app", "assets")]);
 
 await rm(wwwDir, { recursive: true, force: true });
 await mkdir(wwwDir, { recursive: true });
 
-await cp(resolve(rootDir, "app"), resolve(wwwDir, "app"), { recursive: true });
-await cp(resolve(rootDir, "data"), resolve(wwwDir, "data"), {
-  recursive: true,
-  filter: (source) => !EXCLUDED_FILES.has(basename(source)),
-});
+const stageFilter = (source) => !EXCLUDED_FILES.has(basename(source)) && !EXCLUDED_DIRS.has(resolve(source));
+
+await cp(resolve(rootDir, "app"), resolve(wwwDir, "app"), { recursive: true, filter: stageFilter });
+await cp(resolve(rootDir, "data"), resolve(wwwDir, "data"), { recursive: true, filter: stageFilter });
 
 await writeFile(
   resolve(wwwDir, "index.html"),
