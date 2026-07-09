@@ -29,12 +29,16 @@ a mobile-first collection atlas instead of a database table.
 - `docs/source-plan.md` - source and import strategy.
 - `docs/supabase-setup.sql` - Supabase schema and RPC functions for shared sync.
 - `.github/workflows/refresh-catalog.yml` - scheduled official-source refresh workflow.
+- `.github/workflows/ci.yml` - syntax checks, catalog validation, and split-freshness gate on every push/PR.
+- `.github/workflows/android-apk.yml` - cloud debug-APK build publishing to the `android-latest` release.
 - `scripts/validate_catalog.mjs` - validates grades and kit records.
 - `scripts/catalog_stats.mjs` - prints catalog counts.
 - `scripts/source_coverage.mjs` - reports source coverage and missing source types.
 - `scripts/search_kits.mjs` - searches kit records.
 - `scripts/serve_app.mjs` - serves the local catalog UI.
 - `scripts/split_catalog.mjs` - splits `data/kits.json` into per-franchise `data/split/` files the app loads progressively at startup.
+- `scripts/check_app_syntax.mjs` - parse-checks the browser ES modules (`app/main.js`, `app/i18n.js`) without executing them.
+- `scripts/prepare_android_www.mjs` - stages the Capacitor `www/` folder (app + data) for Android builds.
 - `scripts/build_market_data.mjs` - builds market source status, keyword index, FX cache, image asset summary, and Android readiness JSON.
 - `scripts/import_bandai_spirits_gunpla.mjs` - imports the Japanese official BANDAI SPIRITS Gunpla catalog.
 - `scripts/import_bandai_collectibles.mjs` - imports official Bandai Candy, Bandai Gashapon, Pokemon, Armored Core, and BEYBLADE X lines.
