@@ -1,14 +1,21 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-09T16:36:59.802Z",
+  "generated_at": "2026-07-09T20:21:47.076Z",
   "updated_at": "2026-07-10",
   "direct_p_bandai_status": "blocked",
   "scan_mode": "incremental",
   "scan_limit": 240,
-  "scanned_this_run": 240,
-  "failed_this_run": 1,
+  "scanned_this_run": 1,
+  "failed_this_run": 0,
   "hit_count": 1428,
   "entries": [
+    {
+      "kit_id": "hg-hg-1-144-4573102674135000",
+      "detail_url": "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102674135000&grp_id=5325",
+      "title": "HG 1/144 ムラサメ改",
+      "p_bandai_urls": [],
+      "scanned_at": "2026-07-09T20:21:47.075Z"
+    },
     {
       "kit_id": "sdw-sdw-heroes-ver-4573102621825000",
       "detail_url": "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102621825000&grp_id=5325",
@@ -1925,14 +1932,6 @@
         "https://p-bandai.jp/item/item-1000253701/"
       ],
       "scanned_at": "2026-07-09T16:34:56.516Z"
-    },
-    {
-      "kit_id": "hg-hg-1-144-4573102674135000",
-      "detail_url": "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102674135000&grp_id=5325",
-      "title": "HG 1/144 ムラサメ改",
-      "p_bandai_urls": [],
-      "scanned_at": "2026-07-09T08:04:28.653Z",
-      "last_error": "Command failed: curl --silent --show-error --location --max-time 8 --user-agent Gunpula catalog importer (+https://github.com/mdefitko777/Gunpula) --header Accept: text/html,application/xhtml+xml https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102674135000&grp_id=5325\ncurl: (28) Operation timed out after 8001 milliseconds with 57317 bytes received\n"
     },
     {
       "kit_id": "ng-1-144-4902425086521000",
