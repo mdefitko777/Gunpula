@@ -37,10 +37,16 @@
     "market:watch": "node scripts/fetch_wanted_market_listings.mjs",
     "market:all": "npm run market:watch && npm run market",
     "android:status": "node scripts/build_market_data.mjs",
-    "android:sync": "npx @capacitor/cli sync android",
-    "android:add": "npx @capacitor/cli add android",
+    "android:www": "node scripts/prepare_android_www.mjs",
+    "android:sync": "npm run android:www && npx @capacitor/cli sync android",
+    "android:add": "npm run android:www && npx @capacitor/cli add android",
     "android:build": "npm run android:sync && cd android && gradlew assembleDebug",
     "import:data": "npm run import:bandai && npm run import:collectibles && npm run import:pokemon-center && npm run import:fate && npm run import:pbandai-manual && npm run import:pb && npm run localize && npm run check:sources",
     "import:official": "npm run import:data"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/cli": "^7.0.0",
+    "@capacitor/core": "^7.0.0"
   }
 }

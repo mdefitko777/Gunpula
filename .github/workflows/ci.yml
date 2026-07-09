@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "app/**"
+      - "scripts/**"
+      - "schema/**"
+      - "sw.js"
+      - "package.json"
+      - "data/kits.json"
+      - "data/grades.json"
+      - "data/split/**"
+      - ".github/workflows/ci.yml"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: App module syntax check
+        run: node --experimental-vm-modules scripts/check_app_syntax.mjs
+
+      - name: Script and service worker syntax check
+        run: |
+          node --check sw.js
+          for file in scripts/*.mjs; do
+            node --check "$file"
+          done
+
+      - name: Validate catalog data
+        run: npm run validate
+
+      - name: Split files match kits.json
+        run: |
+          npm run split
+          if ! git diff --quiet -- data/split; then
+            echo "data/split is stale: run 'npm run split' and commit the result."
+            git diff --stat -- data/split
+            exit 1
+          fi
