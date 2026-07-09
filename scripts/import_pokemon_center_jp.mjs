@@ -27,6 +27,12 @@ function stripTags(value = "") {
   return decodeHtml(String(value).replace(/<[^>]+>/g, " "));
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 async function fetchText(url) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 15000);
@@ -43,6 +49,19 @@ async function fetchText(url) {
   } finally {
     clearTimeout(timeout);
   }
+}
+
+async function fetchTextWithRetry(url, attempts = 3) {
+  let lastError;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      return await fetchText(url);
+    } catch (error) {
+      lastError = error;
+      await sleep(2000 * attempt);
+    }
+  }
+  throw lastError;
 }
 
 function parseProducts(html) {
@@ -124,8 +143,25 @@ function mergeCatalog(existingKits, importedKits) {
   });
 }
 
+// Pokemon Center Online periodically fronts the whole store with a waiting
+// room (wr.pokemoncenter-online.com) that redirect-loops non-browser clients.
+// Like the importOptional sources in import_bandai_collectibles.mjs, an
+// unreachable store must not fail the daily refresh: warn and exit 0. Its
+// products are absent from that day's catalog and return on the next
+// successful import.
+let html;
+try {
+  html = await fetchTextWithRetry(CATEGORY_URL);
+} catch (error) {
+  console.warn(`Pokemon Center Japan: skipped, source unreachable (${error.cause?.message || error.message}). Products return on the next successful import.`);
+  process.exit(0);
+}
+
 const catalog = JSON.parse(await readFile(CATALOG_PATH, "utf8"));
-const html = await fetchText(CATEGORY_URL);
 const importedKits = parseProducts(html).map(toKit);
+if (!importedKits.length) {
+  console.warn("Pokemon Center Japan: page fetched but no products parsed (layout change or interstitial page). Skipping this import.");
+  process.exit(0);
+}
 await writeFile(CATALOG_PATH, `${JSON.stringify({ ...catalog, updated_at: today(), kits: mergeCatalog(catalog.kits, importedKits) }, null, 2)}\n`, "utf8");
 console.log(`Pokemon Center Japan: imported ${importedKits.length} products from plush/toys category page.`);
