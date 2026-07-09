@@ -6,7 +6,7 @@ import vm from "node:vm";
 // Parses the browser ES modules without executing them (no DOM here).
 // Requires: node --experimental-vm-modules scripts/check_app_syntax.mjs
 const rootDir = resolve(fileURLToPath(new URL("..", import.meta.url)));
-const files = ["app/main.js", "app/i18n.js"];
+const files = ["app/main.js", "app/i18n.js", "app/auth.js", "app/sync-config.js"];
 
 let failed = false;
 for (const file of files) {

@@ -302,41 +302,88 @@
         </section>
         <section class="settings-section sync-section">
           <div class="settings-section-head">
-            <h3 data-i18n="sharedSync">共享同步</h3>
+            <h3 data-i18n="accountSync">账号与同步</h3>
             <span class="sync-state" id="syncState"><span class="sync-dot"></span><span id="syncStatusText">本地模式</span></span>
           </div>
-          <div class="sync-grid">
-            <label>
-              <span data-i18n="supabaseUrl">Supabase URL</span>
-              <input id="syncSupabaseUrl" type="url" inputmode="url" autocomplete="off" />
-            </label>
-            <label>
-              <span data-i18n="supabaseAnonKey">Anon key</span>
-              <input id="syncAnonKey" type="password" autocomplete="off" />
-            </label>
-            <label>
-              <span data-i18n="workspaceId">共享空间 ID</span>
-              <input id="syncWorkspaceId" type="text" autocomplete="off" />
-            </label>
-            <label>
-              <span data-i18n="workspaceSecret">共享密码</span>
-              <input id="syncWorkspaceSecret" type="password" autocomplete="off" />
-            </label>
-            <label>
-              <span data-i18n="editorSecret">编辑密码</span>
-              <input id="syncEditorSecret" type="password" autocomplete="off" />
-            </label>
-            <label>
-              <span data-i18n="memberName">你的名字</span>
-              <input id="syncMemberName" type="text" autocomplete="name" />
-            </label>
+          <div class="account-signed-out" id="accountSignedOut">
+            <div class="account-row">
+              <input id="accountEmail" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com" />
+              <button id="accountSendCode" type="button" data-i18n="accountSendCode">发送验证码</button>
+            </div>
+            <div class="account-row" id="accountCodeRow" hidden>
+              <input id="accountCode" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="123456" />
+              <button id="accountVerify" type="button" data-i18n="accountVerify">登录</button>
+            </div>
+            <p class="settings-hint" id="accountHint" data-i18n="accountHint">输入邮箱登录，收藏就能跨设备同步、和朋友共享。</p>
           </div>
-          <div class="sync-actions">
-            <button id="saveSyncConfig" type="button" data-i18n="saveSyncConfig">保存并连接</button>
-            <button id="syncNow" type="button" data-i18n="syncNow">立即同步</button>
-            <button id="disconnectSync" type="button" data-i18n="disconnectSync">断开云同步</button>
+          <div class="account-signed-in" id="accountSignedIn" hidden>
+            <div class="account-identity">
+              <span class="account-avatar" id="accountAvatar">@</span>
+              <strong id="accountEmailLabel"></strong>
+              <button class="secondary-button compact-button" id="accountSignOut" type="button" data-i18n="accountSignOut">退出登录</button>
+            </div>
+            <div class="workspace-none" id="workspaceNone" hidden>
+              <p class="settings-hint" data-i18n="workspaceNoneHint">创建一个新的共享空间，或输入对方给你的邀请码加入。</p>
+              <div class="account-row">
+                <button id="workspaceCreate" type="button" data-i18n="workspaceCreate">创建共享空间</button>
+              </div>
+              <div class="account-row">
+                <input id="workspaceInviteInput" type="text" autocomplete="off" maxlength="8" placeholder="ABC123" />
+                <button id="workspaceJoin" type="button" data-i18n="workspaceJoin">加入空间</button>
+              </div>
+            </div>
+            <div class="workspace-panel" id="workspacePanel" hidden>
+              <div class="workspace-head">
+                <strong id="workspaceNameLabel"></strong>
+                <span class="workspace-invite" id="workspaceInviteWrap" hidden>
+                  <span data-i18n="workspaceInviteCode">邀请码</span>
+                  <code id="workspaceInviteCode"></code>
+                  <button class="secondary-button compact-button" id="workspaceCopyInvite" type="button" data-i18n="workspaceCopy">复制</button>
+                </span>
+              </div>
+              <div class="workspace-members" id="workspaceMembers"></div>
+              <div class="sync-actions">
+                <button id="syncNow" type="button" data-i18n="syncNow">立即同步</button>
+                <button id="migrateV1" type="button" hidden data-i18n="migrateV1">迁移旧版数据</button>
+              </div>
+              <p class="settings-hint" id="migrateV1Hint" hidden data-i18n="migrateV1Hint">检测到本机的旧版同步配置，可一键把老空间的数据导入当前账号。</p>
+            </div>
+            <p class="settings-hint" id="workspaceHint" hidden></p>
           </div>
-          <p class="settings-hint" id="syncHint" data-i18n="syncHint">同一个共享空间 ID 和密码会共用收藏与更正。</p>
+          <details class="legacy-sync" id="legacySyncPanel">
+            <summary data-i18n="legacySync">旧版密钥同步（高级）</summary>
+            <div class="sync-grid">
+              <label>
+                <span data-i18n="supabaseUrl">Supabase URL</span>
+                <input id="syncSupabaseUrl" type="url" inputmode="url" autocomplete="off" />
+              </label>
+              <label>
+                <span data-i18n="supabaseAnonKey">Anon key</span>
+                <input id="syncAnonKey" type="password" autocomplete="off" />
+              </label>
+              <label>
+                <span data-i18n="workspaceId">共享空间 ID</span>
+                <input id="syncWorkspaceId" type="text" autocomplete="off" />
+              </label>
+              <label>
+                <span data-i18n="workspaceSecret">共享密码</span>
+                <input id="syncWorkspaceSecret" type="password" autocomplete="off" />
+              </label>
+              <label>
+                <span data-i18n="editorSecret">编辑密码</span>
+                <input id="syncEditorSecret" type="password" autocomplete="off" />
+              </label>
+              <label>
+                <span data-i18n="memberName">你的名字</span>
+                <input id="syncMemberName" type="text" autocomplete="name" />
+              </label>
+            </div>
+            <div class="sync-actions">
+              <button id="saveSyncConfig" type="button" data-i18n="saveSyncConfig">保存并连接</button>
+              <button id="disconnectSync" type="button" data-i18n="disconnectSync">断开云同步</button>
+            </div>
+            <p class="settings-hint" id="syncHint" data-i18n="syncHint">同一个共享空间 ID 和密码会共用收藏与更正。</p>
+          </details>
           <button class="install-button" id="installApp" type="button" hidden data-i18n="installApp">安装到手机</button>
         </section>
         <section class="settings-section">
@@ -437,6 +484,6 @@
       <div class="radial-labels"></div>
     </div>
 
-    <script type="module" src="./main.js?v=20260709-v25"></script>
+    <script type="module" src="./main.js?v=20260709-v26"></script>
   </body>
 </html>

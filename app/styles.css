@@ -1961,6 +1961,152 @@ body[data-view="market"] .top-bar {
   margin-top: 10px;
 }
 
+.account-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.account-row input {
+  flex: 1;
+  min-width: 0;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: var(--soft);
+  color: var(--ink);
+}
+
+.account-row input:focus {
+  border-color: var(--accent);
+  background: #ffffff;
+  outline: 0;
+}
+
+.account-row button {
+  flex: 0 0 auto;
+  min-height: 38px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.account-row button:hover:enabled,
+.account-row button:focus-visible {
+  background: #3a3835;
+  outline: 0;
+}
+
+.account-row button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+#workspaceCreate {
+  width: 100%;
+}
+
+.account-identity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.account-identity strong {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.account-avatar {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  font-weight: 600;
+}
+
+.workspace-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.workspace-invite {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.workspace-invite code {
+  padding: 3px 9px;
+  border-radius: 7px;
+  background: var(--soft);
+  color: var(--ink);
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.workspace-members {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.member-chip.is-static {
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--soft);
+  color: var(--muted);
+  font-size: 12.5px;
+  cursor: default;
+}
+
+.legacy-sync {
+  margin-top: 16px;
+}
+
+.legacy-sync summary {
+  color: var(--faint);
+  font-size: 12.5px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.legacy-sync summary::-webkit-details-marker {
+  display: none;
+}
+
+.legacy-sync summary::before {
+  content: "▸ ";
+}
+
+.legacy-sync[open] summary::before {
+  content: "▾ ";
+}
+
+.legacy-sync .sync-grid {
+  margin-top: 10px;
+}
+
 .sync-actions button,
 .install-button {
   min-height: 36px;

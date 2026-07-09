@@ -1,4 +1,16 @@
 import { TRANSLATIONS } from "./i18n.js";
+import { SYNC_BACKEND } from "./sync-config.js";
+import {
+  authBackend,
+  authConfigured,
+  configureAuth,
+  currentUserEmail,
+  getAccessToken,
+  isSignedIn,
+  requestEmailCode,
+  signOut,
+  verifyEmailCode,
+} from "./auth.js";
 
 const LANGUAGE_KEY = "gunpula-catalog-language-v1";
 const FRANCHISE_KEY = "gunpula-catalog-franchise-v1";
@@ -574,6 +586,7 @@ const state = {
     inFlight: false,
     lastPulledAt: null,
     suppress: false,
+    workspace: null,
   },
   activeView: INITIAL_VIEW_STATE.view || localStorage.getItem(ACTIVE_VIEW_KEY) || "home",
   activeModal: INITIAL_VIEW_STATE.modal || null,
@@ -621,6 +634,30 @@ const elements = {
   showWantedOnHome: document.querySelector("#showWantedOnHome"),
   syncState: document.querySelector("#syncState"),
   syncStatusText: document.querySelector("#syncStatusText"),
+  accountSignedOut: document.querySelector("#accountSignedOut"),
+  accountSignedIn: document.querySelector("#accountSignedIn"),
+  accountEmail: document.querySelector("#accountEmail"),
+  accountSendCode: document.querySelector("#accountSendCode"),
+  accountCodeRow: document.querySelector("#accountCodeRow"),
+  accountCode: document.querySelector("#accountCode"),
+  accountVerify: document.querySelector("#accountVerify"),
+  accountHint: document.querySelector("#accountHint"),
+  accountAvatar: document.querySelector("#accountAvatar"),
+  accountEmailLabel: document.querySelector("#accountEmailLabel"),
+  accountSignOut: document.querySelector("#accountSignOut"),
+  workspaceNone: document.querySelector("#workspaceNone"),
+  workspaceCreate: document.querySelector("#workspaceCreate"),
+  workspaceInviteInput: document.querySelector("#workspaceInviteInput"),
+  workspaceJoin: document.querySelector("#workspaceJoin"),
+  workspacePanel: document.querySelector("#workspacePanel"),
+  workspaceNameLabel: document.querySelector("#workspaceNameLabel"),
+  workspaceInviteWrap: document.querySelector("#workspaceInviteWrap"),
+  workspaceInviteCode: document.querySelector("#workspaceInviteCode"),
+  workspaceCopyInvite: document.querySelector("#workspaceCopyInvite"),
+  workspaceMembers: document.querySelector("#workspaceMembers"),
+  workspaceHint: document.querySelector("#workspaceHint"),
+  migrateV1: document.querySelector("#migrateV1"),
+  migrateV1Hint: document.querySelector("#migrateV1Hint"),
   syncSupabaseUrl: document.querySelector("#syncSupabaseUrl"),
   syncAnonKey: document.querySelector("#syncAnonKey"),
   syncWorkspaceId: document.querySelector("#syncWorkspaceId"),
@@ -1137,7 +1174,8 @@ async function init() {
   bindEvents();
   registerPwa();
   registerUpdatePeriodicSync();
-  if (syncConfigComplete()) {
+  configureAuth(SYNC_BACKEND.url && SYNC_BACKEND.anonKey ? SYNC_BACKEND : { url: state.syncConfig.supabaseUrl, anonKey: state.syncConfig.anonKey });
+  if (syncActive()) {
     await connectSync({ silent: true });
   }
   render();
@@ -1684,6 +1722,19 @@ function bindEvents() {
   elements.saveSyncConfig.addEventListener("click", saveAndConnectSync);
   elements.syncNow.addEventListener("click", () => pullSync({ force: true }));
   elements.disconnectSync.addEventListener("click", disconnectSync);
+  elements.accountSendCode.addEventListener("click", accountSendCode);
+  elements.accountVerify.addEventListener("click", accountVerifyCode);
+  elements.accountEmail.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") accountSendCode();
+  });
+  elements.accountCode.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") accountVerifyCode();
+  });
+  elements.accountSignOut.addEventListener("click", accountSignOutNow);
+  elements.workspaceCreate.addEventListener("click", workspaceCreateNow);
+  elements.workspaceJoin.addEventListener("click", workspaceJoinNow);
+  elements.workspaceCopyInvite.addEventListener("click", copyInviteCode);
+  elements.migrateV1.addEventListener("click", migrateFromV1Now);
   elements.installApp.addEventListener("click", installPwa);
   elements.refreshAppCache.addEventListener("click", refreshAppCache);
   elements.updateNotificationToggle.addEventListener("change", toggleUpdateNotifications);
@@ -2518,6 +2569,16 @@ function syncConfigComplete(config = state.syncConfig) {
   return Boolean(config.supabaseUrl && config.anonKey && config.workspaceId && config.workspaceSecret);
 }
 
+// v2 sync = signed-in account against the configured backend.
+// Legacy v1 (manual keys) keeps working until the user migrates.
+function syncModeV2() {
+  return authConfigured() && isSignedIn();
+}
+
+function syncActive() {
+  return syncModeV2() || syncConfigComplete();
+}
+
 function cleanSupabaseUrl(url) {
   return String(url || "").trim().replace(/\/+$/, "");
 }
@@ -2572,6 +2633,30 @@ async function supabaseRpc(functionName, body) {
   return data;
 }
 
+async function supabaseRpcV2(functionName, body = {}) {
+  const token = await getAccessToken();
+  if (!token) {
+    throw new Error(t("accountSessionExpired"));
+  }
+  const { url, anonKey } = authBackend();
+  const response = await fetch(`${url}/rest/v1/rpc/${functionName}`, {
+    method: "POST",
+    headers: {
+      apikey: anonKey,
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+  const text = await response.text();
+  const data = text ? JSON.parse(text) : null;
+  if (!response.ok) {
+    const message = data?.message || data?.hint || response.statusText || t("syncError");
+    throw new Error(message);
+  }
+  return data;
+}
+
 function cloudPayload() {
   return {
     schema_version: 1,
@@ -2600,10 +2685,23 @@ function normalizeCloudState(result) {
     updatedAt: stateObject.updated_at || stateObject.updatedAt || null,
     updatedBy: stateObject.updated_by || stateObject.updatedBy || null,
     canEdit: Boolean(stateObject.can_edit ?? stateObject.canEdit),
+    workspace: stateObject.workspace_name
+      ? {
+          id: stateObject.workspace_id || "",
+          name: stateObject.workspace_name || "",
+          inviteCode: stateObject.invite_code || "",
+          role: stateObject.role || "",
+          members: Array.isArray(stateObject.members) ? stateObject.members : [],
+        }
+      : null,
   };
 }
 
 async function readRemoteState() {
+  if (syncModeV2()) {
+    const result = await supabaseRpcV2("gunpula_v2_get_state");
+    return normalizeCloudState(result);
+  }
   const result = await supabaseRpc("gunpula_get_state", {
     p_workspace_id: state.syncConfig.workspaceId.trim(),
     p_access_hash: await syncAccessHash(),
@@ -2612,21 +2710,31 @@ async function readRemoteState() {
 }
 
 async function writeRemoteState(reason = "manual") {
-  if (!syncConfigComplete() || state.sync.inFlight) {
+  if (!syncActive() || state.sync.inFlight) {
+    return;
+  }
+  if (syncModeV2() && !state.sync.workspace) {
+    setSyncStatus("noworkspace", t("syncNoWorkspace"));
     return;
   }
   state.sync.inFlight = true;
   setSyncStatus("saving", t("syncSaving"));
   try {
-    const result = await supabaseRpc("gunpula_save_state", {
-      p_workspace_id: state.syncConfig.workspaceId.trim(),
-      p_read_hash: await syncReadHash(),
-      p_edit_hash: await syncEditHash(),
-      p_member_name: memberName(),
-      p_payload: cloudPayload(),
-      p_base_revision: state.syncMeta.revision || 0,
-      p_reason: reason,
-    });
+    const result = syncModeV2()
+      ? await supabaseRpcV2("gunpula_v2_save_state", {
+          p_payload: cloudPayload(),
+          p_base_revision: state.syncMeta.revision || 0,
+          p_reason: reason,
+        })
+      : await supabaseRpc("gunpula_save_state", {
+          p_workspace_id: state.syncConfig.workspaceId.trim(),
+          p_read_hash: await syncReadHash(),
+          p_edit_hash: await syncEditHash(),
+          p_member_name: memberName(),
+          p_payload: cloudPayload(),
+          p_base_revision: state.syncMeta.revision || 0,
+          p_reason: reason,
+        });
     const remote = normalizeCloudState(result);
     applyRemoteState(remote, { skipSave: true });
     setSyncStatus(state.sync.canEdit ? "connected" : "readonly", t("syncSaved"));
@@ -2638,7 +2746,7 @@ async function writeRemoteState(reason = "manual") {
 }
 
 function scheduleCloudSave(reason) {
-  if (state.sync.suppress || !syncConfigComplete()) {
+  if (state.sync.suppress || !syncActive()) {
     return;
   }
   if (!state.sync.canEdit) {
@@ -2652,7 +2760,7 @@ function scheduleCloudSave(reason) {
 }
 
 async function connectSync(options = {}) {
-  if (!syncConfigComplete()) {
+  if (!syncActive()) {
     state.sync.enabled = false;
     state.sync.canEdit = true;
     setSyncStatus("local", t("syncLocal"));
@@ -2666,6 +2774,10 @@ async function connectSync(options = {}) {
     if (remote) {
       applyRemoteState(remote);
       setSyncStatus(remote.canEdit ? "connected" : "readonly", remote.canEdit ? t("syncConnected") : t("syncReadOnly"));
+    } else if (syncModeV2()) {
+      state.sync.canEdit = true;
+      state.sync.workspace = null;
+      setSyncStatus("noworkspace", t("syncNoWorkspace"));
     } else {
       state.sync.canEdit = true;
       await writeRemoteState("create-workspace");
@@ -2682,7 +2794,7 @@ async function connectSync(options = {}) {
 }
 
 async function pullSync(options = {}) {
-  if (!syncConfigComplete()) {
+  if (!syncActive()) {
     setSyncStatus("local", t("syncLocal"));
     return;
   }
@@ -2692,6 +2804,11 @@ async function pullSync(options = {}) {
   try {
     const remote = await readRemoteState();
     if (!remote) {
+      if (syncModeV2()) {
+        state.sync.workspace = null;
+        setSyncStatus("noworkspace", t("syncNoWorkspace"));
+        return;
+      }
       await writeRemoteState("create-workspace");
       return;
     }
@@ -2733,6 +2850,7 @@ function applyRemoteState(remote, options = {}) {
     updatedBy: remote.updatedBy,
   };
   state.sync.canEdit = remote.canEdit;
+  state.sync.workspace = remote.workspace || null;
   saveCollection({ skipSync: true });
   saveOverrides({ skipSync: true });
   saveSeriesLabelOverrides({ skipSync: true });
@@ -2776,7 +2894,159 @@ function disconnectSync() {
 }
 
 function canEditSharedData() {
-  return !syncConfigComplete() || state.sync.canEdit;
+  return !syncActive() || state.sync.canEdit;
+}
+
+function accountDisplayName() {
+  return state.syncConfig.memberName?.trim() || currentUserEmail().split("@")[0] || "";
+}
+
+async function accountSendCode() {
+  const email = elements.accountEmail.value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    elements.accountHint.textContent = t("accountEmailInvalid");
+    return;
+  }
+  elements.accountSendCode.disabled = true;
+  elements.accountHint.textContent = t("accountSending");
+  try {
+    await requestEmailCode(email);
+    elements.accountCodeRow.hidden = false;
+    elements.accountHint.textContent = t("accountCodeSent");
+    elements.accountCode.focus();
+  } catch (error) {
+    elements.accountHint.textContent = error.message;
+  } finally {
+    elements.accountSendCode.disabled = false;
+  }
+}
+
+async function accountVerifyCode() {
+  const email = elements.accountEmail.value.trim();
+  const code = elements.accountCode.value.trim();
+  if (!code) {
+    elements.accountHint.textContent = t("accountCodeInvalid");
+    return;
+  }
+  elements.accountVerify.disabled = true;
+  try {
+    await verifyEmailCode(email, code);
+    elements.accountCode.value = "";
+    elements.accountCodeRow.hidden = true;
+    await connectSync();
+    renderSettings();
+  } catch (error) {
+    elements.accountHint.textContent = error.message;
+  } finally {
+    elements.accountVerify.disabled = false;
+  }
+}
+
+function accountSignOutNow() {
+  signOut();
+  clearInterval(state.sync.timer);
+  clearTimeout(state.sync.saveTimer);
+  state.sync.workspace = null;
+  state.syncMeta = { revision: 0, updatedAt: null, updatedBy: null };
+  saveSyncMeta();
+  if (syncConfigComplete()) {
+    connectSync({ silent: true });
+  } else {
+    state.sync.enabled = false;
+    state.sync.canEdit = true;
+    setSyncStatus("local", t("syncLocal"));
+  }
+  renderSettings();
+}
+
+async function workspaceCreateNow() {
+  elements.workspaceCreate.disabled = true;
+  try {
+    const result = await supabaseRpcV2("gunpula_v2_create_workspace", {
+      p_name: "",
+      p_display_name: accountDisplayName(),
+    });
+    const remote = normalizeCloudState(result);
+    state.sync.workspace = remote.workspace;
+    state.sync.canEdit = true;
+    state.sync.enabled = true;
+    state.syncMeta = { revision: remote.revision, updatedAt: remote.updatedAt, updatedBy: remote.updatedBy };
+    saveSyncMeta();
+    // The fresh workspace is empty; push this device's data up as revision 1.
+    await writeRemoteState("create-workspace");
+    clearInterval(state.sync.timer);
+    state.sync.timer = setInterval(() => pullSync({ silent: true }), SYNC_POLL_INTERVAL_MS);
+    renderSettings();
+  } catch (error) {
+    setSyncStatus("error", error.message);
+    renderSettings();
+  } finally {
+    elements.workspaceCreate.disabled = false;
+  }
+}
+
+async function workspaceJoinNow() {
+  const code = elements.workspaceInviteInput.value.trim();
+  if (!code) {
+    return;
+  }
+  elements.workspaceJoin.disabled = true;
+  try {
+    const result = await supabaseRpcV2("gunpula_v2_join_workspace", {
+      p_invite_code: code,
+      p_display_name: accountDisplayName(),
+    });
+    recordSyncHistory("before-join-workspace", { revision: state.syncMeta.revision });
+    applyRemoteState(normalizeCloudState(result));
+    state.sync.enabled = true;
+    setSyncStatus(state.sync.canEdit ? "connected" : "readonly", t("syncConnected"));
+    clearInterval(state.sync.timer);
+    state.sync.timer = setInterval(() => pullSync({ silent: true }), SYNC_POLL_INTERVAL_MS);
+    elements.workspaceInviteInput.value = "";
+    renderSettings();
+  } catch (error) {
+    setSyncStatus("error", error.message);
+    renderSettings();
+  } finally {
+    elements.workspaceJoin.disabled = false;
+  }
+}
+
+async function migrateFromV1Now() {
+  if (!syncConfigComplete() || !syncModeV2()) {
+    return;
+  }
+  elements.migrateV1.disabled = true;
+  try {
+    const result = await supabaseRpcV2("gunpula_v2_migrate_from_v1", {
+      p_workspace_id: state.syncConfig.workspaceId.trim(),
+      p_access_hash: await syncAccessHash(),
+    });
+    applyRemoteState(normalizeCloudState(result));
+    setSyncStatus("connected", t("migrateV1Done"));
+    renderSettings();
+  } catch (error) {
+    setSyncStatus("error", error.message);
+    renderSettings();
+  } finally {
+    elements.migrateV1.disabled = false;
+  }
+}
+
+async function copyInviteCode() {
+  const code = state.sync.workspace?.inviteCode || "";
+  if (!code) {
+    return;
+  }
+  try {
+    await navigator.clipboard.writeText(code);
+    elements.workspaceCopyInvite.textContent = t("workspaceCopied");
+    setTimeout(() => {
+      elements.workspaceCopyInvite.textContent = t("workspaceCopy");
+    }, 1600);
+  } catch {
+    // Clipboard unavailable (http/no permission): the code stays visible to copy by hand.
+  }
 }
 
 function t(key, params = {}) {
@@ -5030,14 +5300,55 @@ function renderSettings() {
   elements.syncEditorSecret.value = state.syncConfig.editorSecret || "";
   elements.syncMemberName.value = state.syncConfig.memberName || "";
   elements.installApp.hidden = !state.installPrompt;
-  elements.syncNow.disabled = !syncConfigComplete();
+  elements.syncNow.disabled = !syncActive();
   elements.disconnectSync.disabled = !syncConfigComplete();
+  renderAccountSection();
   renderUpdateNotificationStatus();
   renderNotificationRules();
   renderSyncStatus();
   renderSourceHealth();
   renderReviewWorkbench();
   renderImageHealth();
+}
+
+function renderAccountSection() {
+  if (!elements.accountSignedOut) {
+    return;
+  }
+  const signedIn = syncModeV2();
+  elements.accountSignedOut.hidden = signedIn;
+  elements.accountSignedIn.hidden = !signedIn;
+  if (!signedIn) {
+    const configured = authConfigured();
+    elements.accountEmail.disabled = !configured;
+    elements.accountSendCode.disabled = !configured;
+    if (!configured) {
+      elements.accountHint.textContent = t("accountBackendMissing");
+    }
+    return;
+  }
+  const email = currentUserEmail();
+  elements.accountEmailLabel.textContent = email;
+  elements.accountAvatar.textContent = (email[0] || "@").toUpperCase();
+  const workspace = state.sync.workspace;
+  elements.workspaceNone.hidden = Boolean(workspace);
+  elements.workspacePanel.hidden = !workspace;
+  if (!workspace) {
+    return;
+  }
+  elements.workspaceNameLabel.textContent = workspace.name || t("sharedSync");
+  elements.workspaceInviteWrap.hidden = !workspace.inviteCode;
+  elements.workspaceInviteCode.textContent = workspace.inviteCode || "";
+  elements.workspaceMembers.innerHTML = "";
+  for (const member of workspace.members || []) {
+    const chip = document.createElement("span");
+    chip.className = "member-chip is-static";
+    chip.textContent = member.role === "owner" ? `${member.name} ★` : member.name || "member";
+    elements.workspaceMembers.append(chip);
+  }
+  const canMigrate = syncConfigComplete() && workspace.role === "owner";
+  elements.migrateV1.hidden = !canMigrate;
+  elements.migrateV1Hint.hidden = !canMigrate;
 }
 
 function renderSyncStatus() {
@@ -5047,11 +5358,12 @@ function renderSyncStatus() {
     connected: t("syncConnected"),
     readonly: t("syncReadOnly"),
     saving: t("syncSaving"),
+    noworkspace: t("syncNoWorkspace"),
     error: t("syncError"),
   };
   elements.syncState.dataset.status = state.sync.status;
   elements.syncStatusText.textContent = state.sync.message || labelByStatus[state.sync.status] || t("syncLocal");
-  const syncConfigured = syncConfigComplete();
+  const syncConfigured = syncActive();
   elements.issueSyncStatus.textContent = syncConfigured ? t("syncConfigured") : t("syncNotConfigured");
   if (state.syncMeta.updatedAt) {
     const date = new Date(state.syncMeta.updatedAt);

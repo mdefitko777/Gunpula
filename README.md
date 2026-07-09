@@ -27,7 +27,9 @@ a mobile-first collection atlas instead of a database table.
 - `docs/grades.md` - readable Chinese grade reference.
 - `docs/data-model.md` - kit data model and validation rules.
 - `docs/source-plan.md` - source and import strategy.
-- `docs/supabase-setup.sql` - Supabase schema and RPC functions for shared sync.
+- `docs/supabase-setup.sql` - legacy (v1) Supabase schema for key-based shared sync.
+- `docs/supabase-setup-v2.sql` - account-based sync schema: email login, invite codes, v1 migration RPC.
+- `docs/sync-v2-setup.md` - step-by-step guide for enabling email-code login sync.
 - `.github/workflows/refresh-catalog.yml` - scheduled official-source refresh workflow.
 - `.github/workflows/ci.yml` - syntax checks, catalog validation, and split-freshness gate on every push/PR.
 - `.github/workflows/android-apk.yml` - cloud debug-APK build publishing to the `android-latest` release.
