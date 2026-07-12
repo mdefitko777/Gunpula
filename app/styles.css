@@ -82,7 +82,7 @@ body.is-pager-settling .pager-preview {
   top: 0;
   z-index: 10;
   margin: -12px -12px 12px;
-  padding: 8px 12px 0;
+  padding: calc(8px + env(safe-area-inset-top, 0px)) 12px 0;
   border-bottom: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(12px);
@@ -915,6 +915,16 @@ h1 {
   white-space: nowrap;
 }
 
+.updates-actions .is-active {
+  border-color: transparent;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+}
+
+.updates-actions button {
+  white-space: nowrap;
+}
+
 .updates-actions input {
   min-height: 36px;
   padding: 0 10px;
@@ -949,6 +959,8 @@ h1 {
   background: var(--panel);
   color: var(--ink);
   text-align: left;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 92px;
 }
 
 .home-update-card:hover,
@@ -1628,6 +1640,8 @@ body[data-view="market"] .top-bar {
   background: transparent;
   cursor: pointer;
   transition: background-color 120ms ease;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 105px;
 }
 
 .kit-card:hover,
@@ -3186,7 +3200,7 @@ body.is-radial-active {
   .page-header {
     position: static;
     margin: -10px -10px 12px;
-    padding: 6px 8px 8px;
+    padding: calc(6px + env(safe-area-inset-top, 0px)) 8px 8px;
   }
 
   .hero-row {

@@ -4,7 +4,10 @@ name: Build Android APK
 on:
   workflow_dispatch:
   push:
+    branches: [main]
     paths:
+      - "app/**"
+      - "sw.js"
       - ".github/workflows/android-apk.yml"
       - "scripts/prepare_android_www.mjs"
       - "capacitor.config.json"

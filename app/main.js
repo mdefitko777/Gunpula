@@ -38,6 +38,8 @@ const SYNC_POLL_INTERVAL_MS = 15000;
 const SYNC_SAVE_DEBOUNCE_MS = 700;
 const SYNC_HISTORY_LIMIT = 20;
 const KIT_RENDER_BATCH = 160;
+const RECENT_UPDATE_DAYS = 3;
+const UPDATES_MODE_KEY = "gunpula-updates-mode-v1";
 const RADIAL_HOLD_MS = 350;
 const RADIAL_SELECT_DISTANCE = 28;
 const PAGER_START_DISTANCE = 18;
@@ -571,6 +573,7 @@ const state = {
   appIcon: loadAppIcon(),
   homeCovers: loadHomeCovers(),
   releaseMonth: localStorage.getItem(RELEASE_MONTH_KEY) || "",
+  updatesMode: localStorage.getItem(UPDATES_MODE_KEY) === "month" ? "month" : "recent",
   radial: { timer: null, active: false, startX: 0, startY: 0, lastX: 0, lastY: 0, touchId: null, selected: null, target: null, suppressClick: false },
   pager: { active: false, touchId: null, startX: 0, startY: 0, deltaX: 0, target: null, settling: false, suppressClick: false, blockedByTarget: false },
   syncConfig: loadSyncConfig(),
@@ -683,6 +686,7 @@ const elements = {
   updatesSubtitle: document.querySelector("#updatesSubtitle"),
   updatesOpenSettings: document.querySelector("#updatesOpenSettings"),
   updatesDateInput: document.querySelector("#updatesDateInput"),
+  updatesRecentButton: document.querySelector("#updatesRecentButton"),
   homeUpdateSummary: document.querySelector("#homeUpdateSummary"),
   sourceHealthStrip: document.querySelector("#sourceHealthStrip"),
   homeUpdateList: document.querySelector("#homeUpdateList"),
@@ -1745,6 +1749,13 @@ function bindEvents() {
   elements.updatesDateInput?.addEventListener("change", (event) => {
     state.releaseMonth = event.target.value || defaultReleaseMonth();
     localStorage.setItem(RELEASE_MONTH_KEY, state.releaseMonth);
+    state.updatesMode = "month";
+    localStorage.setItem(UPDATES_MODE_KEY, state.updatesMode);
+    renderHomeUpdates();
+  });
+  elements.updatesRecentButton?.addEventListener("click", () => {
+    state.updatesMode = "recent";
+    localStorage.setItem(UPDATES_MODE_KEY, state.updatesMode);
     renderHomeUpdates();
   });
   elements.searchInput.addEventListener("focus", () => ensureSearchIndex(), { once: false });
@@ -3735,6 +3746,38 @@ function releaseMonthStats(month = state.releaseMonth, franchise = null) {
   };
 }
 
+// Kits added/changed in the update feed during the last `days` days,
+// anchored on the newest feed entry so the list never goes empty when the
+// daily refresh lags.
+function recentFeedKits(days = RECENT_UPDATE_DAYS) {
+  const entries = updateFeedEntries();
+  if (!entries.length) {
+    return [];
+  }
+  const newestMs = Date.parse(`${entries[0].date}T00:00:00`);
+  const cutoffMs = newestMs - (days - 1) * 86400000;
+  const seen = new Set();
+  const results = [];
+  for (const entry of entries) {
+    const entryMs = Date.parse(`${entry.date}T00:00:00`);
+    if (!Number.isFinite(entryMs) || entryMs < cutoffMs) {
+      break;
+    }
+    const items = updateEntryItems(entry);
+    for (const item of [...items.added, ...items.changed]) {
+      if (!item?.kit_id || seen.has(item.kit_id)) {
+        continue;
+      }
+      seen.add(item.kit_id);
+      const kit = displayKitById(item.kit_id);
+      if (kit) {
+        results.push(kit);
+      }
+    }
+  }
+  return results;
+}
+
 function recentUpdateItems(limit = 6, franchise = null) {
   const seen = new Set();
   const items = [];
@@ -3800,15 +3843,27 @@ function renderHomeUpdates() {
   elements.updatesDateInput.value = state.releaseMonth;
   localStorage.setItem(RELEASE_MONTH_KEY, state.releaseMonth);
 
-  const items = releaseItemsForMonth(state.releaseMonth);
-  const stats = releaseMonthStats(state.releaseMonth);
-  elements.updatesSubtitle.textContent = t("releaseMonthSummary", { month: state.releaseMonth, count: items.length });
-  renderUpdateSummaryCards(elements.homeUpdateSummary, [
-    { label: t("releaseMonth"), value: stats.count, meta: state.releaseMonth },
-    { label: t("premiumBandai"), value: stats.premium, meta: t("openPremiumBandai") },
-    { label: t("watchedUpdates"), value: stats.watched, meta: "SEED / 00" },
-    { label: t("franchise"), value: stats.franchises, meta: t("records", { count: state.kits.length }) },
-  ]);
+  const recentMode = state.updatesMode !== "month";
+  elements.updatesRecentButton?.classList.toggle("is-active", recentMode);
+  const items = recentMode ? recentFeedKits() : releaseItemsForMonth(state.releaseMonth);
+  if (recentMode) {
+    elements.updatesSubtitle.textContent = t("recentDaysSummary", { days: RECENT_UPDATE_DAYS, count: items.length });
+    renderUpdateSummaryCards(elements.homeUpdateSummary, [
+      { label: t("recentDaysShort"), value: items.length, meta: updateFeedEntries()[0]?.date || "" },
+      { label: t("premiumBandai"), value: items.filter(kitIsPremiumBandai).length, meta: t("openPremiumBandai") },
+      { label: t("watchedUpdates"), value: items.filter((kit) => ["seed", "double_o"].includes(kitSeriesKey(kit))).length, meta: "SEED / 00" },
+      { label: t("franchise"), value: new Set(items.map((kit) => kit.franchise)).size, meta: t("records", { count: state.kits.length }) },
+    ]);
+  } else {
+    const stats = releaseMonthStats(state.releaseMonth);
+    elements.updatesSubtitle.textContent = t("releaseMonthSummary", { month: state.releaseMonth, count: items.length });
+    renderUpdateSummaryCards(elements.homeUpdateSummary, [
+      { label: t("releaseMonth"), value: stats.count, meta: state.releaseMonth },
+      { label: t("premiumBandai"), value: stats.premium, meta: t("openPremiumBandai") },
+      { label: t("watchedUpdates"), value: stats.watched, meta: "SEED / 00" },
+      { label: t("franchise"), value: stats.franchises, meta: t("records", { count: state.kits.length }) },
+    ]);
+  }
   elements.sourceHealthStrip.hidden = true;
 
   elements.homeUpdateList.innerHTML = "";
@@ -4552,6 +4607,7 @@ function appendImageWithFallback(container, kit, options = {}) {
   const img = document.createElement("img");
   img.alt = options.alt || "";
   img.loading = options.loading || "lazy";
+  img.decoding = "async";
   let index = 0;
   const tryNext = () => {
     if (index >= urls.length) {
