@@ -572,7 +572,7 @@ const state = {
   homeCovers: loadHomeCovers(),
   releaseMonth: localStorage.getItem(RELEASE_MONTH_KEY) || "",
   radial: { timer: null, active: false, startX: 0, startY: 0, lastX: 0, lastY: 0, touchId: null, selected: null, target: null, suppressClick: false },
-  pager: { active: false, touchId: null, startX: 0, startY: 0, deltaX: 0, target: null, settling: false, suppressClick: false },
+  pager: { active: false, touchId: null, startX: 0, startY: 0, deltaX: 0, target: null, settling: false, suppressClick: false, blockedByTarget: false },
   syncConfig: loadSyncConfig(),
   syncMeta: loadSyncMeta(),
   syncHistory: loadSyncHistory(),
@@ -2006,6 +2006,27 @@ function gestureTargetAllowed(target) {
   return !target.closest("dialog, input, textarea, select, option");
 }
 
+// The page swipe must not fire from controls that scroll or pan horizontally
+// themselves (franchise tabs, series tabs, filter chips, collection strips…),
+// otherwise scrolling a filter row keeps flipping to another franchise.
+function pagerBlockedByTarget(target) {
+  if (!(target instanceof Element)) {
+    return false;
+  }
+  if (target.closest(".page-header")) {
+    return true;
+  }
+  let node = target;
+  while (node && node !== document.body) {
+    const style = getComputedStyle(node);
+    if ((style.overflowX === "auto" || style.overflowX === "scroll") && node.scrollWidth > node.clientWidth + 1) {
+      return true;
+    }
+    node = node.parentElement;
+  }
+  return false;
+}
+
 function startTouchGesture(event) {
   if (event.touches.length !== 1 || state.pager.settling || !gestureTargetAllowed(event.target)) {
     return;
@@ -2029,6 +2050,7 @@ function startTouchGesture(event) {
   state.pager.startX = touch.clientX;
   state.pager.startY = touch.clientY;
   state.pager.deltaX = 0;
+  state.pager.blockedByTarget = pagerBlockedByTarget(event.target);
 }
 
 function moveTouchGesture(event) {
@@ -2055,7 +2077,7 @@ function moveTouchGesture(event) {
   const deltaY = touch.clientY - state.radial.startY;
   const absX = Math.abs(deltaX);
   const absY = Math.abs(deltaY);
-  if (state.activeView === "catalog" && absX > PAGER_START_DISTANCE && absX > absY * 1.15) {
+  if (state.activeView === "catalog" && !state.pager.blockedByTarget && absX > PAGER_START_DISTANCE && absX > absY * 1.15) {
     clearTimeout(state.radial.timer);
     state.radial.timer = null;
     startPagerGesture(deltaX);
@@ -2263,6 +2285,7 @@ function resetPagerGesture(force = false) {
   state.pager.touchId = null;
   state.pager.target = null;
   state.pager.deltaX = 0;
+  state.pager.blockedByTarget = false;
 }
 
 function adjacentFranchise(offset) {
