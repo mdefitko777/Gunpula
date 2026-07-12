@@ -9,7 +9,7 @@
     <title>Gunpula v1.9.1</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260712-v30" />
+    <link rel="stylesheet" href="./styles.css?v=20260712-v32" />
   </head>
   <body>
     <main class="catalog-page">
@@ -323,6 +323,10 @@
               <strong id="accountEmailLabel"></strong>
               <button class="secondary-button compact-button" id="accountSignOut" type="button" data-i18n="accountSignOut">退出登录</button>
             </div>
+            <div class="account-row member-name-row" id="memberNameRow" hidden>
+              <input id="memberDisplayNameInput" type="text" autocomplete="name" maxlength="40" placeholder="你的名字" data-i18n-placeholder="memberName" />
+              <button id="saveMemberDisplayName" type="button" data-i18n="saveMemberDisplayName">保存名字</button>
+            </div>
             <div class="workspace-none" id="workspaceNone" hidden>
               <p class="settings-hint" data-i18n="workspaceNoneHint">创建一个新的共享空间，或输入对方给你的邀请码加入。</p>
               <div class="account-row">
@@ -345,6 +349,7 @@
               <div class="workspace-members" id="workspaceMembers"></div>
               <div class="sync-actions">
                 <button id="syncNow" type="button" data-i18n="syncNow">立即同步</button>
+                <button class="secondary-button compact-button danger-button" id="workspaceLeave" type="button" data-i18n="workspaceLeave">退出空间</button>
                 <button id="migrateV1" type="button" hidden data-i18n="migrateV1">迁移旧版数据</button>
               </div>
               <p class="settings-hint" id="migrateV1Hint" hidden data-i18n="migrateV1Hint">检测到本机的旧版同步配置，可一键把老空间的数据导入当前账号。</p>
@@ -386,6 +391,22 @@
             <p class="settings-hint" id="syncHint" data-i18n="syncHint">同一个共享空间 ID 和密码会共用收藏与更正。</p>
           </details>
           <button class="install-button" id="installApp" type="button" hidden data-i18n="installApp">安装到手机</button>
+        </section>
+        <section class="settings-section">
+          <h3 data-i18n="dataBackup">数据备份</h3>
+          <div class="sync-actions">
+            <button id="exportBackup" type="button" data-i18n="exportBackup">导出收藏备份</button>
+            <button id="importBackupButton" type="button" data-i18n="importBackup">从备份恢复</button>
+          </div>
+          <p class="settings-hint" id="backupStatus" data-i18n="backupHint">备份包含收藏、手动更正和外观设置，建议在迁移或换设备前导出一份。</p>
+          <input id="importBackupInput" type="file" accept="application/json,.json" hidden />
+        </section>
+        <section class="settings-section">
+          <div class="settings-section-head">
+            <h3 data-i18n="duplicateWorkbench">疑似重复</h3>
+            <span id="duplicateSummary"></span>
+          </div>
+          <div class="duplicate-workbench" id="duplicateWorkbench"></div>
         </section>
         <section class="settings-section">
           <h3 data-i18n="dataFetch">数据抓取</h3>
@@ -485,6 +506,6 @@
       <div class="radial-labels"></div>
     </div>
 
-    <script type="module" src="./main.js?v=20260712-v30"></script>
+    <script type="module" src="./main.js?v=20260712-v32"></script>
   </body>
 </html>

@@ -50,7 +50,7 @@ const APP_VERSION_LABEL = "v1.9.1";
 
 const COLLECTION_TYPES = ["owned", "wanted"];
 const THEMES = [
-  { code: "atlas", label: { zh: "蓝白绿", ko: "블루/화이트/그린", en: "Blue", ja: "青白緑" } },
+  { code: "atlas", label: { zh: "默认", ko: "기본", en: "Default", ja: "デフォルト" } },
   { code: "classic", label: { zh: "经典", ko: "클래식", en: "Classic", ja: "クラシック" } },
 ];
 const CORRECTION_FIELD_KEYS = ["name_zh", "name_ko", "name_en", "name_ja", "grade_code", "subline", "series_key", "universe", "cover_image_url"];
@@ -648,6 +648,9 @@ const elements = {
   accountAvatar: document.querySelector("#accountAvatar"),
   accountEmailLabel: document.querySelector("#accountEmailLabel"),
   accountSignOut: document.querySelector("#accountSignOut"),
+  memberNameRow: document.querySelector("#memberNameRow"),
+  memberDisplayNameInput: document.querySelector("#memberDisplayNameInput"),
+  saveMemberDisplayName: document.querySelector("#saveMemberDisplayName"),
   workspaceNone: document.querySelector("#workspaceNone"),
   workspaceCreate: document.querySelector("#workspaceCreate"),
   workspaceInviteInput: document.querySelector("#workspaceInviteInput"),
@@ -658,9 +661,14 @@ const elements = {
   workspaceInviteCode: document.querySelector("#workspaceInviteCode"),
   workspaceCopyInvite: document.querySelector("#workspaceCopyInvite"),
   workspaceMembers: document.querySelector("#workspaceMembers"),
+  workspaceLeave: document.querySelector("#workspaceLeave"),
   workspaceHint: document.querySelector("#workspaceHint"),
   migrateV1: document.querySelector("#migrateV1"),
   migrateV1Hint: document.querySelector("#migrateV1Hint"),
+  exportBackup: document.querySelector("#exportBackup"),
+  importBackupButton: document.querySelector("#importBackupButton"),
+  importBackupInput: document.querySelector("#importBackupInput"),
+  backupStatus: document.querySelector("#backupStatus"),
   syncSupabaseUrl: document.querySelector("#syncSupabaseUrl"),
   syncAnonKey: document.querySelector("#syncAnonKey"),
   syncWorkspaceId: document.querySelector("#syncWorkspaceId"),
@@ -682,6 +690,8 @@ const elements = {
   imageHealthLog: document.querySelector("#imageHealthLog"),
   sourceHealthLog: document.querySelector("#sourceHealthLog"),
   reviewWorkbench: document.querySelector("#reviewWorkbench"),
+  duplicateSummary: document.querySelector("#duplicateSummary"),
+  duplicateWorkbench: document.querySelector("#duplicateWorkbench"),
   updatesSection: document.querySelector("#updatesSection"),
   updatesSubtitle: document.querySelector("#updatesSubtitle"),
   updatesOpenSettings: document.querySelector("#updatesOpenSettings"),
@@ -1735,11 +1745,25 @@ function bindEvents() {
     if (event.key === "Enter") accountVerifyCode();
   });
   elements.accountSignOut.addEventListener("click", accountSignOutNow);
+  elements.saveMemberDisplayName?.addEventListener("click", saveMemberDisplayNameNow);
+  elements.memberDisplayNameInput?.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") saveMemberDisplayNameNow();
+  });
   elements.workspaceCreate.addEventListener("click", workspaceCreateNow);
   elements.workspaceJoin.addEventListener("click", workspaceJoinNow);
   elements.workspaceCopyInvite.addEventListener("click", copyInviteCode);
+  elements.workspaceLeave?.addEventListener("click", workspaceLeaveNow);
   elements.migrateV1.addEventListener("click", migrateFromV1Now);
   elements.installApp.addEventListener("click", installPwa);
+  elements.exportBackup?.addEventListener("click", exportCollectionBackup);
+  elements.importBackupButton?.addEventListener("click", () => elements.importBackupInput?.click());
+  elements.importBackupInput?.addEventListener("change", (event) => {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (file) {
+      importCollectionBackup(file);
+    }
+  });
   elements.refreshAppCache.addEventListener("click", refreshAppCache);
   elements.updateNotificationToggle.addEventListener("change", toggleUpdateNotifications);
   elements.updatesOpenSettings.addEventListener("click", () => {
@@ -2937,6 +2961,14 @@ function accountDisplayName() {
   return state.syncConfig.memberName?.trim() || currentUserEmail().split("@")[0] || "";
 }
 
+function selfWorkspaceMember() {
+  return (state.sync.workspace?.members || []).find((member) => member.is_self) || null;
+}
+
+function currentWorkspaceMemberName() {
+  return selfWorkspaceMember()?.name || accountDisplayName();
+}
+
 async function accountSendCode() {
   const email = elements.accountEmail.value.trim();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -2993,6 +3025,97 @@ function accountSignOutNow() {
     setSyncStatus("local", t("syncLocal"));
   }
   renderSettings();
+}
+
+function renameCollectionMember(oldName, newName) {
+  const from = safeMemberName(oldName);
+  const to = safeMemberName(newName);
+  if (!from || !to || from === to) {
+    return false;
+  }
+  state.collection = normalizeCollection(state.collection);
+  const memberItems = state.collection.member_items || {};
+  if (!memberItems[from]) {
+    return false;
+  }
+  memberItems[to] = { ...(memberItems[from] || {}), ...(memberItems[to] || {}) };
+  delete memberItems[from];
+  if (state.collectionMemberView === from) {
+    state.collectionMemberView = to;
+    localStorage.setItem(COLLECTION_MEMBER_VIEW_KEY, state.collectionMemberView);
+  }
+  refreshLegacyCollectionItems();
+  return true;
+}
+
+async function saveMemberDisplayNameNow() {
+  const input = elements.memberDisplayNameInput;
+  if (!input) {
+    return;
+  }
+  const nextName = input.value.trim();
+  if (!nextName) {
+    input.focus();
+    return;
+  }
+  const previousName = currentWorkspaceMemberName();
+  elements.saveMemberDisplayName.disabled = true;
+  try {
+    state.syncConfig.memberName = nextName;
+    saveSyncConfig();
+    const renamedCollection = renameCollectionMember(previousName, nextName);
+    if (syncModeV2() && state.sync.workspace) {
+      const result = await supabaseRpcV2("gunpula_v2_update_member_name", {
+        p_display_name: nextName,
+      });
+      const remote = normalizeCloudState(result);
+      state.sync.workspace = remote?.workspace || state.sync.workspace;
+      state.sync.canEdit = remote?.canEdit ?? state.sync.canEdit;
+      setSyncStatus(state.sync.canEdit ? "connected" : "readonly", t("memberNameSaved"));
+    } else {
+      setSyncStatus("local", t("memberNameSaved"));
+    }
+    if (renamedCollection) {
+      saveCollection();
+    }
+    renderSettings();
+    renderCollections();
+    renderKits();
+  } catch (error) {
+    state.syncConfig.memberName = previousName;
+    saveSyncConfig();
+    setSyncStatus("error", error.message);
+    renderSettings();
+  } finally {
+    elements.saveMemberDisplayName.disabled = false;
+  }
+}
+
+async function workspaceLeaveNow() {
+  if (!syncModeV2() || !state.sync.workspace) {
+    return;
+  }
+  if (!window.confirm(t("workspaceLeaveConfirm"))) {
+    return;
+  }
+  elements.workspaceLeave.disabled = true;
+  try {
+    await supabaseRpcV2("gunpula_v2_leave_workspace");
+    clearInterval(state.sync.timer);
+    clearTimeout(state.sync.saveTimer);
+    state.sync.workspace = null;
+    state.sync.enabled = true;
+    state.sync.canEdit = true;
+    state.syncMeta = { revision: 0, updatedAt: null, updatedBy: null };
+    saveSyncMeta();
+    setSyncStatus("noworkspace", t("workspaceLeft"));
+    render();
+  } catch (error) {
+    setSyncStatus("error", error.message);
+    renderSettings();
+  } finally {
+    elements.workspaceLeave.disabled = false;
+  }
 }
 
 async function workspaceCreateNow() {
@@ -3082,6 +3205,82 @@ async function copyInviteCode() {
     }, 1600);
   } catch {
     // Clipboard unavailable (http/no permission): the code stays visible to copy by hand.
+  }
+}
+
+// Local backup: the same payload the cloud sync stores, saved as a file the
+// user keeps. Restoring overwrites local data (after confirmation) and then
+// propagates through the normal save/sync path.
+function exportCollectionBackup() {
+  const payload = {
+    exported_at: new Date().toISOString(),
+    app: APP_VERSION_LABEL,
+    ...cloudPayload(),
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `gunpula-backup-${localDateKey()}.json`;
+  link.click();
+  URL.revokeObjectURL(link.href);
+  if (elements.backupStatus) {
+    elements.backupStatus.textContent = t("backupExported", {
+      owned: collectionIds("owned").length,
+      wanted: collectionIds("wanted").length,
+    });
+  }
+}
+
+async function importCollectionBackup(file) {
+  try {
+    const payload = JSON.parse(await file.text());
+    if (!payload || typeof payload !== "object" || !payload.collection || typeof payload.collection !== "object") {
+      throw new Error("invalid backup");
+    }
+    // Hand-edited files may carry malformed entries; owned/wanted are kit-id strings.
+    const collection = normalizeCollection({
+      ...payload.collection,
+      owned: (Array.isArray(payload.collection.owned) ? payload.collection.owned : []).filter((id) => typeof id === "string"),
+      wanted: (Array.isArray(payload.collection.wanted) ? payload.collection.wanted : []).filter((id) => typeof id === "string"),
+    });
+    const confirmed = window.confirm(
+      t("backupImportConfirm", { owned: collection.owned.length, wanted: collection.wanted.length }),
+    );
+    if (!confirmed) {
+      return;
+    }
+    recordSyncHistory("before-backup-import");
+    state.collection = collection;
+    if (payload.overrides && typeof payload.overrides === "object") {
+      state.overrides = payload.overrides;
+    }
+    if (payload.series_label_overrides && typeof payload.series_label_overrides === "object") {
+      state.seriesLabelOverrides = payload.series_label_overrides;
+    }
+    if (payload.appearance && typeof payload.appearance === "object") {
+      const nextTheme = payload.appearance.theme;
+      if (THEMES.some((theme) => theme.code === nextTheme)) {
+        state.theme = nextTheme;
+      }
+      state.appIcon = String(payload.appearance.app_icon || "");
+      state.homeCovers = normalizeHomeCovers(payload.appearance.home_covers);
+      saveAppearance();
+    }
+    saveCollection();
+    saveOverrides();
+    saveSeriesLabelOverrides();
+    refreshKits();
+    render();
+    if (elements.backupStatus) {
+      elements.backupStatus.textContent = t("backupImported", {
+        owned: collection.owned.length,
+        wanted: collection.wanted.length,
+      });
+    }
+  } catch {
+    if (elements.backupStatus) {
+      elements.backupStatus.textContent = t("backupInvalid");
+    }
   }
 }
 
@@ -3523,14 +3722,22 @@ function duplicateKeyForKit(kit) {
 }
 
 function duplicateCandidateCount() {
-  const counts = new Map();
+  return duplicateCandidateGroups().length;
+}
+
+function duplicateCandidateGroups(limit = null) {
+  const groups = new Map();
   for (const kit of state.kits) {
     const key = duplicateKeyForKit(kit);
     if (key.length > 8) {
-      counts.set(key, (counts.get(key) || 0) + 1);
+      groups.set(key, [...(groups.get(key) || []), kit]);
     }
   }
-  return [...counts.values()].filter((count) => count > 1).length;
+  const sorted = [...groups.entries()]
+    .filter(([, kits]) => kits.length > 1)
+    .map(([key, kits]) => ({ key, kits }))
+    .sort((a, b) => b.kits.length - a.kits.length || a.key.localeCompare(b.key));
+  return Number.isFinite(limit) ? sorted.slice(0, limit) : sorted;
 }
 
 function updateFeedEntries() {
@@ -5389,6 +5596,7 @@ function renderSettings() {
   renderSyncStatus();
   renderSourceHealth();
   renderReviewWorkbench();
+  renderDuplicateWorkbench();
   renderImageHealth();
 }
 
@@ -5400,6 +5608,7 @@ function renderAccountSection() {
   elements.accountSignedOut.hidden = signedIn;
   elements.accountSignedIn.hidden = !signedIn;
   if (!signedIn) {
+    elements.memberNameRow.hidden = true;
     const configured = authConfigured();
     elements.accountEmail.disabled = !configured;
     elements.accountSendCode.disabled = !configured;
@@ -5411,25 +5620,100 @@ function renderAccountSection() {
   const email = currentUserEmail();
   elements.accountEmailLabel.textContent = email;
   elements.accountAvatar.textContent = (email[0] || "@").toUpperCase();
+  elements.memberNameRow.hidden = false;
+  if (document.activeElement !== elements.memberDisplayNameInput) {
+    elements.memberDisplayNameInput.value = currentWorkspaceMemberName();
+  }
   const workspace = state.sync.workspace;
   elements.workspaceNone.hidden = Boolean(workspace);
   elements.workspacePanel.hidden = !workspace;
   if (!workspace) {
+    elements.workspaceHint.hidden = false;
+    elements.workspaceHint.textContent = t("syncNoWorkspace");
     return;
   }
+  elements.workspaceHint.hidden = true;
   elements.workspaceNameLabel.textContent = workspace.name || t("sharedSync");
   elements.workspaceInviteWrap.hidden = !workspace.inviteCode;
   elements.workspaceInviteCode.textContent = workspace.inviteCode || "";
-  elements.workspaceMembers.innerHTML = "";
-  for (const member of workspace.members || []) {
-    const chip = document.createElement("span");
-    chip.className = "member-chip is-static";
-    chip.textContent = member.role === "owner" ? `${member.name} ★` : member.name || "member";
-    elements.workspaceMembers.append(chip);
-  }
+  renderWorkspaceMembers(workspace.members || []);
+  elements.workspaceLeave.disabled = false;
   const canMigrate = syncConfigComplete() && workspace.role === "owner";
   elements.migrateV1.hidden = !canMigrate;
   elements.migrateV1Hint.hidden = !canMigrate;
+}
+
+function renderWorkspaceMembers(members) {
+  elements.workspaceMembers.innerHTML = "";
+  if (!members.length) {
+    const empty = document.createElement("div");
+    empty.className = "workspace-member-row";
+    empty.textContent = t("workspaceMembersEmpty");
+    elements.workspaceMembers.append(empty);
+    return;
+  }
+  for (const member of members) {
+    const row = document.createElement("div");
+    row.className = `workspace-member-row${member.is_self ? " is-self" : ""}`;
+    const name = document.createElement("strong");
+    name.textContent = `${member.name || "member"}${member.is_self ? ` · ${t("workspaceSelf")}` : ""}`;
+    const meta = document.createElement("span");
+    const joined = member.joined_at ? String(member.joined_at).slice(0, 10) : "";
+    meta.textContent = [t(`workspaceRole${capitalizeRole(member.role)}`), member.email, joined].filter(Boolean).join(" · ");
+    row.append(name, meta);
+    elements.workspaceMembers.append(row);
+  }
+}
+
+function capitalizeRole(role) {
+  const value = String(role || "editor");
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+function renderDuplicateWorkbench() {
+  if (!elements.duplicateWorkbench) {
+    return;
+  }
+  const groups = duplicateCandidateGroups(10);
+  elements.duplicateSummary.textContent = t("duplicateSummary", { count: groups.length });
+  elements.duplicateWorkbench.innerHTML = "";
+  if (!groups.length) {
+    const empty = document.createElement("div");
+    empty.className = "duplicate-empty";
+    empty.textContent = t("duplicateEmpty");
+    elements.duplicateWorkbench.append(empty);
+    return;
+  }
+  for (const group of groups) {
+    const panel = document.createElement("div");
+    panel.className = "duplicate-group";
+    const head = document.createElement("div");
+    head.className = "duplicate-group-head";
+    const label = document.createElement("strong");
+    label.textContent = t("duplicateGroup", { count: group.kits.length });
+    const meta = document.createElement("span");
+    meta.textContent = group.kits.map((kit) => kit.grade_code).filter(Boolean).join(" / ");
+    head.append(label, meta);
+
+    const list = document.createElement("div");
+    list.className = "duplicate-list";
+    for (const kit of group.kits.slice(0, 6)) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "duplicate-item";
+      button.innerHTML = `<strong>${escapeHtml(kitShortName(kit))}</strong><span>${escapeHtml([franchiseLabel(kit.franchise), seriesLabelFromKit(kit), kit.grade_code, kit.release_date].filter(Boolean).join(" · "))}</span>`;
+      button.addEventListener("click", () => {
+        state.selectedKit = kit;
+        renderDetail(kit);
+        if (!elements.detailDialog.open) {
+          elements.detailDialog.showModal();
+        }
+      });
+      list.append(button);
+    }
+    panel.append(head, list);
+    elements.duplicateWorkbench.append(panel);
+  }
 }
 
 function renderSyncStatus() {

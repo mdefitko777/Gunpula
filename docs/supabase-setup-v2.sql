@@ -106,8 +106,10 @@ begin
 
   select coalesce(jsonb_agg(jsonb_build_object(
       'name', public.gunpula_v2_member_name(m.user_id),
+      'email', coalesce((select email from auth.users u where u.id = m.user_id), ''),
       'role', m.role,
-      'joined_at', m.joined_at
+      'joined_at', m.joined_at,
+      'is_self', m.user_id = auth.uid()
     ) order by m.joined_at), '[]'::jsonb)
     into members
     from public.gunpula_v2_members m
@@ -233,6 +235,76 @@ begin
 end;
 $$;
 
+create or replace function public.gunpula_v2_update_member_name(
+  p_display_name text default ''
+)
+returns jsonb
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  member_row public.gunpula_v2_members%rowtype;
+begin
+  if auth.uid() is null then
+    raise exception 'gunpula not signed in' using errcode = '42501';
+  end if;
+
+  select * into member_row from public.gunpula_v2_members where user_id = auth.uid();
+  if not found then
+    raise exception 'gunpula no workspace' using errcode = '42501';
+  end if;
+
+  update public.gunpula_v2_members
+     set display_name = left(coalesce(trim(p_display_name), ''), 40)
+   where workspace_id = member_row.workspace_id
+     and user_id = auth.uid();
+
+  return public.gunpula_v2_get_state();
+end;
+$$;
+
+create or replace function public.gunpula_v2_leave_workspace()
+returns jsonb
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  member_row public.gunpula_v2_members%rowtype;
+  member_count integer;
+begin
+  if auth.uid() is null then
+    raise exception 'gunpula not signed in' using errcode = '42501';
+  end if;
+
+  select * into member_row from public.gunpula_v2_members where user_id = auth.uid();
+  if not found then
+    return null;
+  end if;
+
+  select count(*) into member_count
+    from public.gunpula_v2_members
+   where workspace_id = member_row.workspace_id;
+
+  if member_row.role = 'owner' and member_count > 1 then
+    raise exception 'gunpula owner cannot leave while other members remain' using errcode = '42501';
+  end if;
+
+  if member_row.role = 'owner' then
+    delete from public.gunpula_v2_workspaces
+     where id = member_row.workspace_id
+       and owner_id = auth.uid();
+  else
+    delete from public.gunpula_v2_members
+     where workspace_id = member_row.workspace_id
+       and user_id = auth.uid();
+  end if;
+
+  return null;
+end;
+$$;
+
 -- One-time import of a v1 workspace: the caller proves ownership with the
 -- same id + secret hash the old client already stores, and the old payload
 -- is copied into their (empty) v2 workspace. The v1 rows stay untouched.
@@ -289,4 +361,6 @@ grant execute on function public.gunpula_v2_get_state() to authenticated;
 grant execute on function public.gunpula_v2_save_state(jsonb, bigint, text) to authenticated;
 grant execute on function public.gunpula_v2_create_workspace(text, text) to authenticated;
 grant execute on function public.gunpula_v2_join_workspace(text, text) to authenticated;
+grant execute on function public.gunpula_v2_update_member_name(text) to authenticated;
+grant execute on function public.gunpula_v2_leave_workspace() to authenticated;
 grant execute on function public.gunpula_v2_migrate_from_v1(text, text) to authenticated;

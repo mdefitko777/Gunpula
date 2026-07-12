@@ -9,6 +9,8 @@
    （就是旧版同步在用的那个）。
 2. 左侧 **SQL Editor** → New query → 把 `docs/supabase-setup-v2.sql`
    的全部内容粘贴进去 → Run。看到 "Success" 即可（旧表不受影响）。
+   以后如果 app 增加新的同步功能，也可以重新运行同一个 SQL 文件；
+   `create or replace function` 会更新函数，不会清空你的收藏数据。
 3. 左侧 **Authentication → Emails → Templates**：
    把 **Confirm sign up** 和 **Magic Link or OTP** 两个模板都改成验证码邮件。
    正文必须包含验证码变量 `{{ .Token }}`，不要只保留 `{{ .ConfirmationURL }}`。
