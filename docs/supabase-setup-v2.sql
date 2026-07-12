@@ -4,8 +4,12 @@
 --
 -- Also required in the Supabase dashboard:
 --   1. Authentication -> Providers -> Email: enabled (default).
---   2. Authentication -> Email Templates -> Magic Link: make sure the body
---      contains {{ .Token }} so the mail carries the 6-digit code, e.g.
+--   2. Authentication -> Emails -> Templates:
+--      update BOTH "Confirm sign up" and "Magic Link or OTP".
+--      Their bodies must contain {{ .Token }} and should not rely on
+--      {{ .ConfirmationURL }}. Otherwise the email can show only a link
+--      and the app will have no 6-digit code to enter.
+--      Example body:
 --        <p>你的 Gunpula 登录验证码：<strong>{{ .Token }}</strong></p>
 --
 -- The app talks to these tables only through the RPC functions below;

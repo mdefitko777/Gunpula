@@ -9,15 +9,20 @@
    （就是旧版同步在用的那个）。
 2. 左侧 **SQL Editor** → New query → 把 `docs/supabase-setup-v2.sql`
    的全部内容粘贴进去 → Run。看到 "Success" 即可（旧表不受影响）。
-3. 左侧 **Authentication → Email Templates → Magic Link**：
-   把正文改成包含验证码变量 `{{ .Token }}`，例如：
+3. 左侧 **Authentication → Emails → Templates**：
+   把 **Confirm sign up** 和 **Magic Link or OTP** 两个模板都改成验证码邮件。
+   正文必须包含验证码变量 `{{ .Token }}`，不要只保留 `{{ .ConfirmationURL }}`。
+   例如：
 
    ```html
-   <p>你的 Gunpula 登录验证码：<strong>{{ .Token }}</strong></p>
-   <p>几分钟内有效。不是你本人操作可忽略此邮件。</p>
+   <h2>Gunpula 登录验证码</h2>
+   <p>请输入这个 6 位验证码：</p>
+   <p style="font-size: 28px; font-weight: 700; letter-spacing: 0.18em;">{{ .Token }}</p>
+   <p>如果不是你本人操作，可以忽略这封邮件。</p>
    ```
 
-   （不改也能收到邮件，但默认模板只有链接没有数字码。）
+   新邮箱第一次登录时可能走 **Confirm sign up** 模板；老邮箱再次登录时通常走
+   **Magic Link or OTP** 模板。只改其中一个，就会出现“有邮件但看不到验证码”。
 
 > 免费版自带邮件服务有频率限制（每小时几封），两个人用完全够；
 > 以后想要更稳可以在 Authentication → SMTP 里接自己的邮箱服务。
