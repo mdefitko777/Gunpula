@@ -2085,7 +2085,9 @@ function moveTouchGesture(event) {
     if (event.cancelable) event.preventDefault();
     return;
   }
-  if (absY > 12 && absY > absX) {
+  // Any real movement (either axis) is a scroll or swipe, not a hold:
+  // cancel the pending long-press so the radial ring never pops mid-drag.
+  if (absX > 12 || absY > 12) {
     cancelRadialPress();
   }
 }
