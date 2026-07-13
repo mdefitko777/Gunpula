@@ -1,11 +1,15 @@
 # Android build
 
-The web app is the source of truth. Capacitor wraps a staged `www/` folder
-(`app/` + `data/` copied side by side by `scripts/prepare_android_www.mjs`) so
-the app's relative `../data` fetches keep working inside the native shell.
-When the shell is online it prefers live data from GitHub Pages and only falls
-back to the bundled snapshot offline, so an installed APK stays current without
-rebuilds.
+The web app is the source of truth. The Capacitor shell points straight at the
+live GitHub Pages deployment (`server.url` in capacitor.config.json), so an
+installed APK picks up every app-code and data update automatically — no
+reinstall needed. The service worker caches the app after first launch, so it
+keeps working offline. The staged `www/` folder (built by
+`scripts/prepare_android_www.mjs`) is only a fallback bundle required by the
+Capacitor tooling.
+
+Reinstalling from the release link is only needed when the native shell itself
+changes (icon, splash screen, Capacitor version).
 
 ## Cloud build (no local setup)
 
