@@ -1179,6 +1179,7 @@ h1 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  word-break: keep-all;
 }
 
 .home-update-badges span:not(:last-child)::after {
@@ -1198,7 +1199,8 @@ h1 {
   overflow: hidden;
   font-size: 13px;
   line-height: 1.25;
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  word-break: keep-all;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
@@ -1210,6 +1212,7 @@ h1 {
   font-size: 11px;
   font-weight: 400;
   line-height: 1.25;
+  word-break: keep-all;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
@@ -2335,6 +2338,7 @@ body[data-view="market"] .top-bar {
 
 .duplicate-group-head {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 8px;
   color: var(--muted);
@@ -2408,6 +2412,25 @@ body[data-view="market"] .top-bar {
   outline: 1px solid rgba(182, 70, 48, 0.34);
 }
 
+.duplicate-ignore {
+  min-height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.duplicate-ignore:hover,
+.duplicate-ignore:focus-visible {
+  border-color: var(--accent);
+  color: var(--ink);
+  outline: 0;
+}
+
 .hidden-records {
   display: grid;
   gap: 6px;
@@ -2438,12 +2461,18 @@ body[data-view="market"] .top-bar {
 }
 
 @media (max-width: 520px) {
+  .duplicate-group-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .duplicate-item-row {
     grid-template-columns: 1fr;
   }
 
   .duplicate-delete,
-  .duplicate-restore {
+  .duplicate-restore,
+  .duplicate-ignore {
     min-height: 34px;
   }
 }

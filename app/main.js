@@ -50,7 +50,7 @@ const PAGER_START_DISTANCE = 18;
 const PAGER_THRESHOLD_RATIO = 0.28;
 const PAGER_MIN_THRESHOLD = 92;
 const PAGER_ANIMATION_MS = 220;
-const APP_VERSION_LABEL = "v1.9.2";
+const APP_VERSION_LABEL = "v2.0.0";
 
 const COLLECTION_TYPES = ["owned", "wanted"];
 const COLLECTION_ENTRY_STATUSES = [...COLLECTION_TYPES, "deleted"];
@@ -1745,6 +1745,8 @@ function bindEvents() {
       return;
     }
     state.settingsPanel = button.dataset.settingsTab;
+    state.consoleMode = state.settingsPanel === "console";
+    saveConsoleMode();
     localStorage.setItem(SETTINGS_PANEL_KEY, state.settingsPanel);
     renderSettingsPanels();
     renderConsoleMode();
@@ -1760,11 +1762,6 @@ function bindEvents() {
     saveAppearance();
     elements.appIconInput.value = "";
     applyAppearance();
-  });
-  elements.consoleModeToggle.addEventListener("change", (event) => {
-    state.consoleMode = event.target.checked;
-    saveConsoleMode();
-    renderConsoleMode();
   });
   elements.showOwnedOnHome.addEventListener("change", (event) => {
     state.homeCollectionVisibility.owned = event.target.checked;
@@ -3660,6 +3657,13 @@ function renderBottomNav() {
 
 function applyAppearance() {
   document.body.dataset.theme = state.theme;
+  // APP_VERSION_LABEL is the single source of truth for the version shown
+  // anywhere in the UI; the static strings in index.html/i18n are fallbacks.
+  document.title = `Gunpula ${APP_VERSION_LABEL}`;
+  document.querySelector('meta[name="application-name"]')?.setAttribute("content", `Gunpula ${APP_VERSION_LABEL}`);
+  document.querySelectorAll('[data-i18n="homeTitle"], [data-i18n="appTitle"]').forEach((node) => {
+    node.textContent = APP_VERSION_LABEL;
+  });
   if (elements.brandVersion) {
     elements.brandVersion.textContent = APP_VERSION_LABEL;
   }
@@ -3952,6 +3956,7 @@ function duplicateCandidateGroups(limit = null) {
   }
   const sorted = [...groups.entries()]
     .filter(([, kits]) => kits.length > 1)
+    .filter(([key, kits]) => !kits.every((kit) => state.overrides?.[kit.kit_id]?.duplicate_ignore_key === key))
     .map(([key, kits]) => ({ key, kits }))
     .sort((a, b) => b.kits.length - a.kits.length || a.key.localeCompare(b.key));
   return Number.isFinite(limit) ? sorted.slice(0, limit) : sorted;
@@ -5419,6 +5424,9 @@ function removeCollectionItems(type, kitIds) {
 
   const deleteSet = new Set(kitIds);
   const member = activeCollectionMember();
+  if (member === "all" && !window.confirm(t("deleteAllMembersConfirm", { count: deleteSet.size }))) {
+    return;
+  }
   const targetMembers = member === "all" ? collectionMembers() : [member];
   const nextMemberItems = { ...(state.collection.member_items || {}) };
   const now = new Date().toISOString();
@@ -5822,7 +5830,10 @@ function renderLanguageControls() {
 function renderSettings() {
   renderSettingsTabs();
   renderSettingsPanels();
-  elements.consoleModeToggle.checked = state.consoleMode;
+  state.consoleMode = state.settingsPanel === "console";
+  if (elements.consoleModeToggle) {
+    elements.consoleModeToggle.checked = state.consoleMode;
+  }
   elements.showOwnedOnHome.checked = state.homeCollectionVisibility.owned;
   elements.showWantedOnHome.checked = state.homeCollectionVisibility.wanted;
   elements.updateNotificationToggle.checked = state.updateNotifications;
@@ -5972,7 +5983,12 @@ function renderDuplicateWorkbench() {
     label.textContent = t("duplicateGroup", { count: group.kits.length });
     const meta = document.createElement("span");
     meta.textContent = group.kits.map((kit) => kit.grade_code).filter(Boolean).join(" / ");
-    head.append(label, meta);
+    const ignoreGroup = document.createElement("button");
+    ignoreGroup.type = "button";
+    ignoreGroup.className = "duplicate-ignore";
+    ignoreGroup.textContent = t("ignoreDuplicateGroup");
+    ignoreGroup.addEventListener("click", () => ignoreDuplicateGroup(group));
+    head.append(label, meta, ignoreGroup);
 
     const list = document.createElement("div");
     list.className = "duplicate-list";
@@ -5987,7 +6003,7 @@ function renderDuplicateWorkbench() {
       const deleteButton = document.createElement("button");
       deleteButton.type = "button";
       deleteButton.className = "duplicate-delete";
-      deleteButton.textContent = t("deleteDuplicateCandidate");
+      deleteButton.textContent = t("hideDuplicateCandidate");
       deleteButton.addEventListener("click", () => hideDuplicateCandidate(kit));
       row.append(button, deleteButton);
       list.append(row);
@@ -5995,6 +6011,29 @@ function renderDuplicateWorkbench() {
     panel.append(head, list);
     elements.duplicateWorkbench.append(panel);
   }
+}
+
+function ignoreDuplicateGroup(group) {
+  if (!canEditSharedData()) {
+    setSyncStatus("readonly", t("readOnlyHint"));
+    return;
+  }
+  if (!window.confirm(t("ignoreDuplicateConfirm", { count: group.kits.length }))) {
+    return;
+  }
+  const now = new Date().toISOString();
+  for (const kit of group.kits) {
+    state.overrides[kit.kit_id] = {
+      ...(state.overrides[kit.kit_id] || {}),
+      duplicate_ignore_key: group.key,
+      duplicate_ignored_at: now,
+      duplicate_ignored_by: memberName(),
+      updated_at: now,
+    };
+  }
+  saveOverrides();
+  render();
+  setSyncStatus("saving", t("duplicateGroupIgnored"));
 }
 
 function hideDuplicateCandidate(kit) {
@@ -6143,10 +6182,11 @@ function renderImageHealth() {
 }
 
 function renderConsoleMode() {
+  const consoleVisible = state.settingsPanel === "console";
   document.querySelectorAll(".console-only").forEach((node) => {
-    node.hidden = !state.consoleMode || node.dataset.settingsPanel !== state.settingsPanel;
+    node.hidden = !consoleVisible || node.dataset.settingsPanel !== state.settingsPanel;
   });
-  elements.correctionPanel.hidden = !state.consoleMode;
+  elements.correctionPanel.hidden = !consoleVisible;
   const editable = canEditSharedData();
   elements.editToggle.disabled = !editable;
   elements.saveCorrection.disabled = !editable;
@@ -6157,10 +6197,10 @@ function renderConsoleMode() {
   elements.seriesAdminLabel.disabled = !editable;
   elements.seriesAdminSeries.disabled = !editable;
   elements.seriesAdminLanguage.disabled = !editable;
-  if (!state.consoleMode) {
+  if (!consoleVisible) {
     elements.correctionForm.hidden = true;
   }
-  if (state.consoleMode) {
+  if (consoleVisible) {
     renderSeriesAdmin();
   }
 }
