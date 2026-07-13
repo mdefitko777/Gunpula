@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-07-14",
-  "generated_at": "2026-07-13T17:50:01.815Z",
+  "generated_at": "2026-07-13T20:04:39.709Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,33 +16,408 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-07-13T17:50:01.246Z",
+    "generated_at": "2026-07-13T20:04:39.037Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-07-14",
-      "generated_at": "2026-07-13T17:50:01.815Z",
+      "generated_at": "2026-07-13T20:04:39.709Z",
       "total_before": 4628,
       "total_after": 4628,
-      "added_count": 0,
-      "changed_count": 8,
-      "removed_count": 0,
+      "added_count": 10,
+      "changed_count": 31,
+      "removed_count": 10,
       "watched_count": 0,
       "premium_bandai_count": 0,
       "bbx_count": 0,
       "franchise_counts": {
+        "pokemon": 33,
         "gundam": 8
       },
       "reason_counts": {
-        "image": 8
+        "new": 10,
+        "image": 31,
+        "removed": 10
       },
       "interest_tags": [
+        "pokemon",
         "gundam"
       ],
       "watch_tags": [],
-      "added": [],
+      "added": [
+        {
+          "kit_id": "pokemon-center-4521329344065",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "522 ぬいぐるみ Pok&eacute;mon fit シママ",
+            "zh": "522 ぬいぐるみ Pok&eacute;mon fit シママ",
+            "ko": "522 ぬいぐるみ Pok&eacute;mon fit シママ",
+            "en": "522 ぬいぐるみ Pok&eacute;mon fit シママ"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329344065.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329350059",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "599 ぬいぐるみ Pok&eacute;mon fit ギアル",
+            "zh": "599 ぬいぐるみ Pok&eacute;mon fit ギアル",
+            "ko": "599 ぬいぐるみ Pok&eacute;mon fit ギアル",
+            "en": "599 ぬいぐるみ Pok&eacute;mon fit ギアル"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329350059.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4904790287831",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "Mocchi-Mocchi-Style／フェイス型マスコット／カビゴン",
+            "zh": "Mocchi-Mocchi-Style／フェイス型マスコット／カビゴン",
+            "ko": "Mocchi-Mocchi-Style／フェイス型マスコット／カビゴン",
+            "en": "Mocchi-Mocchi-Style／フェイス型マスコット／カビゴン"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4904790287831.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329381770",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カラビナ付きマスコット ハリマロン",
+            "zh": "カラビナ付きマスコット ハリマロン",
+            "ko": "カラビナ付きマスコット ハリマロン",
+            "en": "カラビナ付きマスコット ハリマロン"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329381770.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329376066",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カラビナ付きマスコット ブラッキー",
+            "zh": "カラビナ付きマスコット ブラッキー",
+            "ko": "カラビナ付きマスコット ブラッキー",
+            "en": "カラビナ付きマスコット ブラッキー"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329376066.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329376073",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カラビナ付きマスコット リーフィア",
+            "zh": "カラビナ付きマスコット リーフィア",
+            "ko": "カラビナ付きマスコット リーフィア",
+            "en": "カラビナ付きマスコット リーフィア"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329376073.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4573102693655",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "Pokemon Center Goods",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモンプラモコレクション クイック!! Lite ゼニガメ",
+            "zh": "宝可梦プラモコレクション クイック!! Lite ゼニガメ",
+            "ko": "포켓몬プラモコレクション クイック!! Lite ゼニガメ",
+            "en": "Pokemonプラモコレクション クイック!! Lite ゼニガメ"
+          },
+          "release_date": null,
+          "price_jpy": 858,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4573102693655.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4904810912262",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "Pokemon Center Goods",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "モンコレ MS-16 カメックス",
+            "zh": "モンコレ MS-16 カメックス",
+            "ko": "モンコレ MS-16 カメックス",
+            "en": "モンコレ MS-16 カメックス"
+          },
+          "release_date": null,
+          "price_jpy": 715,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4904810912262.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4904810949459",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "Pokemon Center Goods",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "モンコレ MS-47 タイカイデン",
+            "zh": "モンコレ MS-47 タイカイデン",
+            "ko": "モンコレ MS-47 タイカイデン",
+            "en": "モンコレ MS-47 タイカイデン"
+          },
+          "release_date": null,
+          "price_jpy": 715,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4904810949459.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4904810955696",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "Pokemon Center Goods",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "モンコレ メガミュウツーX",
+            "zh": "モンコレ メガミュウツーX",
+            "ko": "モンコレ メガミュウツーX",
+            "en": "モンコレ メガミュウツーX"
+          },
+          "release_date": null,
+          "price_jpy": 1067,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4904810955696.html"
+          ]
+        }
+      ],
       "changed": [
         {
           "kit_id": "gsf-gallery-ex07-2-item",
@@ -347,9 +722,836 @@
             "https://gashapon.jp/forte/items/",
             "https://gashapon.jp/products/detail.html?jan_code=4549660132615000"
           ]
+        },
+        {
+          "kit_id": "pokepla-01-4237",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモン PLAMO COLLECTION 52 SELECT SERIES Gyarados",
+            "zh": "宝可梦 PLAMO COLLECTION 52 SELECT SERIES Gyarados",
+            "ko": "포켓몬 PLAMO COLLECTION 52 SELECT SERIES Gyarados",
+            "en": "Pokémon PLAMO COLLECTION 52 SELECT SERIES Gyarados"
+          },
+          "release_date": null,
+          "price_jpy": 1300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_hobby_pokemon_global"
+          ],
+          "source_urls": [
+            "https://global.bandai-hobby.net/en-others/item/01_4237/",
+            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-5028",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモン PLAMO COLLECTION 54 SELECT SERIES Groudon",
+            "zh": "宝可梦 PLAMO COLLECTION 54 SELECT SERIES Groudon",
+            "ko": "포켓몬 PLAMO COLLECTION 54 SELECT SERIES Groudon",
+            "en": "Pokémon PLAMO COLLECTION 54 SELECT SERIES Groudon"
+          },
+          "release_date": null,
+          "price_jpy": 1650,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_hobby_pokemon_global"
+          ],
+          "source_urls": [
+            "https://global.bandai-hobby.net/en-others/item/01_5028/",
+            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-5411",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモン PLAMO COLLECTION 55 SELECT SERIES Scizor",
+            "zh": "宝可梦 PLAMO COLLECTION 55 SELECT SERIES Scizor",
+            "ko": "포켓몬 PLAMO COLLECTION 55 SELECT SERIES Scizor",
+            "en": "Pokémon PLAMO COLLECTION 55 SELECT SERIES Scizor"
+          },
+          "release_date": null,
+          "price_jpy": 1400,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_hobby_pokemon_global"
+          ],
+          "source_urls": [
+            "https://global.bandai-hobby.net/en-others/item/01_5411/",
+            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-5467",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモン PLAMO COLLECTION 56 SELECT SERIES Meowscarada",
+            "zh": "宝可梦 PLAMO COLLECTION 56 SELECT SERIES Meowscarada",
+            "ko": "포켓몬 PLAMO COLLECTION 56 SELECT SERIES Meowscarada",
+            "en": "Pokémon PLAMO COLLECTION 56 SELECT SERIES Meowscarada"
+          },
+          "release_date": null,
+          "price_jpy": 1600,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_hobby_pokemon_global"
+          ],
+          "source_urls": [
+            "https://global.bandai-hobby.net/en-others/item/01_5467/",
+            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-5497",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモン PLAMO COLLECTION 57 SELECT SERIES Ceruledge",
+            "zh": "宝可梦 PLAMO COLLECTION 57 SELECT SERIES Ceruledge",
+            "ko": "포켓몬 PLAMO COLLECTION 57 SELECT SERIES Ceruledge",
+            "en": "Pokémon PLAMO COLLECTION 57 SELECT SERIES Ceruledge"
+          },
+          "release_date": null,
+          "price_jpy": 1700,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_hobby_pokemon_global"
+          ],
+          "source_urls": [
+            "https://global.bandai-hobby.net/en-others/item/01_5497/",
+            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-5568",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモン PLAMO COLLECTION 58 SELECT SERIES Armarouge",
+            "zh": "宝可梦 PLAMO COLLECTION 58 SELECT SERIES Armarouge",
+            "ko": "포켓몬 PLAMO COLLECTION 58 SELECT SERIES Armarouge",
+            "en": "Pokémon PLAMO COLLECTION 58 SELECT SERIES Armarouge"
+          },
+          "release_date": null,
+          "price_jpy": 1700,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_hobby_pokemon_global"
+          ],
+          "source_urls": [
+            "https://global.bandai-hobby.net/en-others/item/01_5568/",
+            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-5958",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモン PLAMO COLLECTION 59 SELECT SERIES Miraidon",
+            "zh": "宝可梦 PLAMO COLLECTION 59 SELECT SERIES Miraidon",
+            "ko": "포켓몬 PLAMO COLLECTION 59 SELECT SERIES Miraidon",
+            "en": "Pokémon PLAMO COLLECTION 59 SELECT SERIES Miraidon"
+          },
+          "release_date": null,
+          "price_jpy": 2100,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_hobby_pokemon_global"
+          ],
+          "source_urls": [
+            "https://global.bandai-hobby.net/en-others/item/01_5958/",
+            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-5984",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモン PLAMO COLLECTION 60 SELECT SERIES Koraidon",
+            "zh": "宝可梦 PLAMO COLLECTION 60 SELECT SERIES Koraidon",
+            "ko": "포켓몬 PLAMO COLLECTION 60 SELECT SERIES Koraidon",
+            "en": "Pokémon PLAMO COLLECTION 60 SELECT SERIES Koraidon"
+          },
+          "release_date": null,
+          "price_jpy": 2100,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_hobby_pokemon_global"
+          ],
+          "source_urls": [
+            "https://global.bandai-hobby.net/en-others/item/01_5984/",
+            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-6780",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモン PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza",
+            "zh": "宝可梦 PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza",
+            "ko": "포켓몬 PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza",
+            "en": "Pokémon PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza"
+          },
+          "release_date": null,
+          "price_jpy": 2700,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_hobby_pokemon_global"
+          ],
+          "source_urls": [
+            "https://global.bandai-hobby.net/en-others/item/01_6780/",
+            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-7038",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモン PLAMO COLLECTION 62 SELECT SERIES Kyogre",
+            "zh": "宝可梦 PLAMO COLLECTION 62 SELECT SERIES Kyogre",
+            "ko": "포켓몬 PLAMO COLLECTION 62 SELECT SERIES Kyogre",
+            "en": "Pokémon PLAMO COLLECTION 62 SELECT SERIES Kyogre"
+          },
+          "release_date": null,
+          "price_jpy": 1800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_hobby_pokemon_global"
+          ],
+          "source_urls": [
+            "https://global.bandai-hobby.net/en-others/item/01_7038/",
+            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-5174",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon Model Kit Quick!!",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモン PLAMO COLLECTION QUICK!! 18 Sprigatito",
+            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 18 Sprigatito",
+            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 18 Sprigatito",
+            "en": "Pokémon PLAMO COLLECTION QUICK!! 18 Sprigatito"
+          },
+          "release_date": null,
+          "price_jpy": 780,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_hobby_pokemon_global"
+          ],
+          "source_urls": [
+            "https://global.bandai-hobby.net/en-others/item/01_5174/",
+            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-5247",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon Model Kit Quick!!",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモン PLAMO COLLECTION QUICK!! 19 Quaxly",
+            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 19 Quaxly",
+            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 19 Quaxly",
+            "en": "Pokémon PLAMO COLLECTION QUICK!! 19 Quaxly"
+          },
+          "release_date": null,
+          "price_jpy": 780,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_hobby_pokemon_global"
+          ],
+          "source_urls": [
+            "https://global.bandai-hobby.net/en-others/item/01_5247/",
+            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+          ]
         }
       ],
-      "removed": [],
+      "removed": [
+        {
+          "kit_id": "pokemon-center-4521329333939",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "146 ぬいぐるみ Pok&eacute;mon fit ファイヤー",
+            "zh": "146 ぬいぐるみ Pok&eacute;mon fit ファイヤー",
+            "ko": "146 ぬいぐるみ Pok&eacute;mon fit ファイヤー",
+            "en": "146 ぬいぐるみ Pok&eacute;mon fit ファイヤー"
+          },
+          "release_date": null,
+          "price_jpy": 1650,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329333939.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329340333",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "245 ぬいぐるみ Pok&eacute;mon fit スイクン",
+            "zh": "245 ぬいぐるみ Pok&eacute;mon fit スイクン",
+            "ko": "245 ぬいぐるみ Pok&eacute;mon fit スイクン",
+            "en": "245 ぬいぐるみ Pok&eacute;mon fit スイクン"
+          },
+          "release_date": null,
+          "price_jpy": 1650,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329340333.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329339719",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "464 ぬいぐるみ Pok&eacute;mon fit ドサイドン",
+            "zh": "464 ぬいぐるみ Pok&eacute;mon fit ドサイドン",
+            "ko": "464 ぬいぐるみ Pok&eacute;mon fit ドサイドン",
+            "en": "464 ぬいぐるみ Pok&eacute;mon fit ドサイドン"
+          },
+          "release_date": null,
+          "price_jpy": 1650,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329339719.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329344034",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "520 ぬいぐるみ Pok&eacute;mon fit ハトーボー",
+            "zh": "520 ぬいぐるみ Pok&eacute;mon fit ハトーボー",
+            "ko": "520 ぬいぐるみ Pok&eacute;mon fit ハトーボー",
+            "en": "520 ぬいぐるみ Pok&eacute;mon fit ハトーボー"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329344034.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329350035",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "597 ぬいぐるみ Pok&eacute;mon fit テッシード",
+            "zh": "597 ぬいぐるみ Pok&eacute;mon fit テッシード",
+            "ko": "597 ぬいぐるみ Pok&eacute;mon fit テッシード",
+            "en": "597 ぬいぐるみ Pok&eacute;mon fit テッシード"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329350035.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329419190",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ちっちゃい！マスコット みだれざき フラベベ(あかいはな)",
+            "zh": "ちっちゃい！マスコット みだれざき フラベベ(あかいはな)",
+            "ko": "ちっちゃい！マスコット みだれざき フラベベ(あかいはな)",
+            "en": "ちっちゃい！マスコット みだれざき フラベベ(あかいはな)"
+          },
+          "release_date": null,
+          "price_jpy": 990,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329419190.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4904790154638",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケピース／ボールチェーンマスコット／ミミッキュ",
+            "zh": "ポケピース／铁球チェーンマスコット／ミミッキュ",
+            "ko": "ポケピース／볼チェーンマスコット／ミミッキュ",
+            "en": "ポケピース／Ballチェーンマスコット／ミミッキュ"
+          },
+          "release_date": null,
+          "price_jpy": 1980,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4904790154638.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329419084",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "マスコット Don’t Attack Me ミミッキュ",
+            "zh": "マスコット Don’t Attack Me ミミッキュ",
+            "ko": "マスコット Don’t Attack Me ミミッキュ",
+            "en": "マスコット Don’t Attack Me ミミッキュ"
+          },
+          "release_date": null,
+          "price_jpy": 1980,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329419084.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4904810996217",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "Pokemon Center Goods",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "モンコレ MS-21 ブラッキー",
+            "zh": "モンコレ MS-21 ブラッキー",
+            "ko": "モンコレ MS-21 ブラッキー",
+            "en": "モンコレ MS-21 ブラッキー"
+          },
+          "release_date": null,
+          "price_jpy": 715,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4904810996217.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4904810996330",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "Pokemon Center Goods",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "モンコレ ポカブ",
+            "zh": "モンコレ ポカブ",
+            "ko": "モンコレ ポカブ",
+            "en": "モンコレ ポカブ"
+          },
+          "release_date": null,
+          "price_jpy": 715,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4904810996330.html"
+          ]
+        }
+      ],
       "watched": []
     },
     {
