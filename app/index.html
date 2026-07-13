@@ -9,7 +9,7 @@
     <title>Gunpula v2.0.0</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260714-v42" />
+    <link rel="stylesheet" href="./styles.css?v=20260714-v43" />
   </head>
   <body>
     <main class="catalog-page">
@@ -97,7 +97,8 @@
             <p id="updatesSubtitle"></p>
           </div>
           <div class="updates-actions">
-            <button class="secondary-button compact-button" id="updatesRecentButton" type="button" data-i18n="recentDaysShort">近3天</button>
+            <button class="secondary-button compact-button" id="updatesRecentButton" type="button" data-i18n="recentDaysShort">最近添加</button>
+            <button class="secondary-button compact-button" id="updatesWeekButton" type="button" data-i18n="weekOnSaleShort">本周在售</button>
             <input id="updatesDateInput" type="month" aria-label="选择发售月份" data-i18n-aria="releaseMonth" />
             <button class="secondary-button compact-button" id="updatesOpenSettings" type="button" data-i18n="settings">设置</button>
           </div>
@@ -336,13 +337,19 @@
           </div>
           <div class="account-signed-in" id="accountSignedIn" hidden>
             <div class="account-identity">
-              <span class="account-avatar" id="accountAvatar">@</span>
+              <button class="account-avatar account-avatar-button" id="accountAvatar" type="button" aria-label="更换头像" data-i18n-aria="profileAvatarHint">@</button>
               <strong id="accountEmailLabel"></strong>
               <button class="secondary-button compact-button" id="accountSignOut" type="button" data-i18n="accountSignOut">退出登录</button>
             </div>
+            <input id="avatarInput" type="file" accept="image/*" hidden />
             <div class="account-row member-name-row" id="memberNameRow" hidden>
               <input id="memberDisplayNameInput" type="text" autocomplete="name" maxlength="40" placeholder="你的名字" data-i18n-placeholder="memberName" />
               <button id="saveMemberDisplayName" type="button" data-i18n="saveMemberDisplayName">保存名字</button>
+            </div>
+            <div class="profile-favorites" id="profileFavorites" hidden>
+              <p class="settings-hint" data-i18n="profileFavoritesTitle">我的喜好：选中的分类和系列会在最近页优先显示。</p>
+              <div class="favorite-chips" id="favoriteFranchises"></div>
+              <div class="favorite-chips" id="favoriteSeries"></div>
             </div>
             <div class="workspace-none" id="workspaceNone" hidden>
               <p class="settings-hint" data-i18n="workspaceNoneHint">创建一个新的共享空间，或输入对方给你的邀请码加入。</p>
@@ -533,6 +540,29 @@
       </div>
     </dialog>
 
+    <dialog class="member-dialog" id="memberDialog" aria-labelledby="memberDialogName">
+      <div class="member-shell">
+        <button class="dialog-close" id="memberDialogClose" type="button" aria-label="关闭" data-i18n-aria="closeSettings">×</button>
+        <div class="member-head">
+          <span class="account-avatar account-avatar-large" id="memberDialogAvatar">@</span>
+          <div class="member-head-info">
+            <h2 id="memberDialogName"></h2>
+            <p id="memberDialogMeta"></p>
+          </div>
+        </div>
+        <div class="favorite-chips is-static" id="memberDialogFavorites"></div>
+        <div class="member-stats" id="memberDialogStats"></div>
+        <section class="member-collection">
+          <h3 data-i18n="ownedList">已购买</h3>
+          <div class="collection-strip" id="memberDialogOwned"></div>
+        </section>
+        <section class="member-collection">
+          <h3 data-i18n="wantedList">想要</h3>
+          <div class="collection-strip" id="memberDialogWanted"></div>
+        </section>
+      </div>
+    </dialog>
+
     <div class="pager-preview" id="pagerPreview" hidden aria-hidden="true"></div>
     <div class="gesture-overlay" id="gestureOverlay" hidden aria-hidden="true"></div>
     <div class="radial-menu" id="radialMenu" hidden aria-hidden="true">
@@ -540,6 +570,6 @@
       <div class="radial-labels"></div>
     </div>
 
-    <script type="module" src="./main.js?v=20260714-v42"></script>
+    <script type="module" src="./main.js?v=20260714-v43"></script>
   </body>
 </html>

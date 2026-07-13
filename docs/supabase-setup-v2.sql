@@ -31,10 +31,17 @@ create table if not exists public.gunpula_v2_members (
   workspace_id uuid not null references public.gunpula_v2_workspaces(id) on delete cascade,
   user_id uuid not null references auth.users(id) on delete cascade,
   display_name text not null default '',
+  avatar text not null default '',
+  preferences jsonb not null default '{}'::jsonb,
   role text not null default 'editor' check (role in ('owner', 'editor', 'viewer')),
   joined_at timestamptz not null default now(),
   primary key (workspace_id, user_id)
 );
+
+-- Profile columns for databases created before the profile feature.
+alter table public.gunpula_v2_members
+  add column if not exists avatar text not null default '',
+  add column if not exists preferences jsonb not null default '{}'::jsonb;
 
 -- One workspace per user keeps the model simple: the unique index lets the
 -- RPCs resolve "my workspace" without extra arguments.
@@ -109,6 +116,8 @@ begin
       'email', coalesce((select email from auth.users u where u.id = m.user_id), ''),
       'role', m.role,
       'joined_at', m.joined_at,
+      'avatar', m.avatar,
+      'preferences', m.preferences,
       'is_self', m.user_id = auth.uid()
     ) order by m.joined_at), '[]'::jsonb)
     into members
@@ -264,6 +273,45 @@ begin
 end;
 $$;
 
+-- Update the caller's profile. Null arguments keep the stored value, so the
+-- client can update fields independently.
+create or replace function public.gunpula_v2_update_member_profile(
+  p_display_name text default null,
+  p_avatar text default null,
+  p_preferences jsonb default null
+)
+returns jsonb
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  member_row public.gunpula_v2_members%rowtype;
+begin
+  if auth.uid() is null then
+    raise exception 'gunpula not signed in' using errcode = '42501';
+  end if;
+
+  select * into member_row from public.gunpula_v2_members where user_id = auth.uid();
+  if not found then
+    raise exception 'gunpula no workspace' using errcode = '42501';
+  end if;
+
+  if p_avatar is not null and length(p_avatar) > 300000 then
+    raise exception 'gunpula avatar too large' using errcode = '22023';
+  end if;
+
+  update public.gunpula_v2_members
+     set display_name = coalesce(left(trim(p_display_name), 40), display_name),
+         avatar = coalesce(p_avatar, avatar),
+         preferences = coalesce(p_preferences, preferences)
+   where workspace_id = member_row.workspace_id
+     and user_id = auth.uid();
+
+  return public.gunpula_v2_get_state();
+end;
+$$;
+
 create or replace function public.gunpula_v2_leave_workspace()
 returns jsonb
 language plpgsql
@@ -362,5 +410,6 @@ grant execute on function public.gunpula_v2_save_state(jsonb, bigint, text) to a
 grant execute on function public.gunpula_v2_create_workspace(text, text) to authenticated;
 grant execute on function public.gunpula_v2_join_workspace(text, text) to authenticated;
 grant execute on function public.gunpula_v2_update_member_name(text) to authenticated;
+grant execute on function public.gunpula_v2_update_member_profile(text, text, jsonb) to authenticated;
 grant execute on function public.gunpula_v2_leave_workspace() to authenticated;
 grant execute on function public.gunpula_v2_migrate_from_v1(text, text) to authenticated;

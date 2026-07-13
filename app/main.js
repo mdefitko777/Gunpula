@@ -725,6 +725,20 @@ const elements = {
   updatesOpenSettings: document.querySelector("#updatesOpenSettings"),
   updatesDateInput: document.querySelector("#updatesDateInput"),
   updatesRecentButton: document.querySelector("#updatesRecentButton"),
+  updatesWeekButton: document.querySelector("#updatesWeekButton"),
+  avatarInput: document.querySelector("#avatarInput"),
+  profileFavorites: document.querySelector("#profileFavorites"),
+  favoriteFranchises: document.querySelector("#favoriteFranchises"),
+  favoriteSeries: document.querySelector("#favoriteSeries"),
+  memberDialog: document.querySelector("#memberDialog"),
+  memberDialogClose: document.querySelector("#memberDialogClose"),
+  memberDialogAvatar: document.querySelector("#memberDialogAvatar"),
+  memberDialogName: document.querySelector("#memberDialogName"),
+  memberDialogMeta: document.querySelector("#memberDialogMeta"),
+  memberDialogFavorites: document.querySelector("#memberDialogFavorites"),
+  memberDialogStats: document.querySelector("#memberDialogStats"),
+  memberDialogOwned: document.querySelector("#memberDialogOwned"),
+  memberDialogWanted: document.querySelector("#memberDialogWanted"),
   homeUpdateSummary: document.querySelector("#homeUpdateSummary"),
   sourceHealthStrip: document.querySelector("#sourceHealthStrip"),
   homeUpdateList: document.querySelector("#homeUpdateList"),
@@ -1948,6 +1962,18 @@ function bindEvents() {
     localStorage.setItem(UPDATES_MODE_KEY, state.updatesMode);
     renderHomeUpdates();
   });
+  elements.updatesWeekButton?.addEventListener("click", () => {
+    state.updatesMode = "week";
+    localStorage.setItem(UPDATES_MODE_KEY, state.updatesMode);
+    renderHomeUpdates();
+  });
+  elements.accountAvatar?.addEventListener("click", () => {
+    if (syncModeV2() && state.sync.workspace) {
+      elements.avatarInput?.click();
+    }
+  });
+  elements.avatarInput?.addEventListener("change", handleAvatarChange);
+  elements.memberDialogClose?.addEventListener("click", () => elements.memberDialog?.close());
   elements.searchInput.addEventListener("focus", () => ensureSearchIndex(), { once: false });
   elements.searchInput.addEventListener("input", (event) => {
     state.query = event.target.value;
@@ -4312,6 +4338,20 @@ function releaseMonthStats(month = state.releaseMonth, franchise = null) {
 // Kits added/changed in the update feed during the last `days` days,
 // anchored on the newest feed entry so the list never goes empty when the
 // daily refresh lags.
+// Items whose (effective) release date falls inside the last 7 days — the
+// "on sale this week" view. Month-only dates are excluded by the string
+// comparison, which is fine: they carry no day to be "this week" on.
+function weekOnSaleKits(days = 7) {
+  const today = localDateKey();
+  const start = localDateKey(new Date(Date.now() - (days - 1) * 86400000));
+  return state.kits
+    .filter((kit) => {
+      const date = String(effectiveKitDate(kit) || "").slice(0, 10);
+      return date.length === 10 && date >= start && date <= today;
+    })
+    .sort((a, b) => String(effectiveKitDate(b) || "").localeCompare(String(effectiveKitDate(a) || "")));
+}
+
 function recentFeedKits(days = RECENT_UPDATE_DAYS) {
   const entries = updateFeedEntries();
   if (!entries.length) {
@@ -4406,13 +4446,19 @@ function renderHomeUpdates() {
   elements.updatesDateInput.value = state.releaseMonth;
   localStorage.setItem(RELEASE_MONTH_KEY, state.releaseMonth);
 
-  const recentMode = state.updatesMode !== "month";
-  elements.updatesRecentButton?.classList.toggle("is-active", recentMode);
-  const items = recentMode ? recentFeedKits() : releaseItemsForMonth(state.releaseMonth);
-  if (recentMode) {
-    elements.updatesSubtitle.textContent = t("recentDaysSummary", { days: RECENT_UPDATE_DAYS, count: items.length });
+  const mode = state.updatesMode === "month" ? "month" : state.updatesMode === "week" ? "week" : "recent";
+  elements.updatesRecentButton?.classList.toggle("is-active", mode === "recent");
+  elements.updatesWeekButton?.classList.toggle("is-active", mode === "week");
+  const items = mode === "recent" ? sortByPreference(recentFeedKits()) : mode === "week" ? sortByPreference(weekOnSaleKits()) : releaseItemsForMonth(state.releaseMonth);
+  if (mode !== "month") {
+    elements.updatesSubtitle.textContent =
+      mode === "week" ? t("weekOnSaleSummary", { count: items.length }) : t("recentDaysSummary", { days: RECENT_UPDATE_DAYS, count: items.length });
     renderUpdateSummaryCards(elements.homeUpdateSummary, [
-      { label: t("recentDaysShort"), value: items.length, meta: updateFeedEntries()[0]?.date || "" },
+      {
+        label: mode === "week" ? t("weekOnSaleShort") : t("recentDaysShort"),
+        value: items.length,
+        meta: mode === "week" ? localDateKey() : updateFeedEntries()[0]?.date || "",
+      },
       { label: t("premiumBandai"), value: items.filter(kitIsPremiumBandai).length, meta: t("openPremiumBandai") },
       { label: t("watchedUpdates"), value: items.filter((kit) => ["seed", "double_o"].includes(kitSeriesKey(kit))).length, meta: "SEED / 00" },
       { label: t("franchise"), value: new Set(items.map((kit) => kit.franchise)).size, meta: t("records", { count: state.kits.length }) },
@@ -6186,6 +6232,236 @@ function renderSettingsPanels() {
   });
 }
 
+function currentMember() {
+  return state.sync.workspace?.members?.find((member) => member.is_self) || null;
+}
+
+function memberPreferences(member = currentMember()) {
+  const prefs = member?.preferences;
+  return {
+    franchises: Array.isArray(prefs?.franchises) ? prefs.franchises.filter((value) => FRANCHISES.includes(value)) : [],
+    series: Array.isArray(prefs?.series) ? prefs.series.map(String) : [],
+  };
+}
+
+function preferenceScoreForKit(kit) {
+  const prefs = memberPreferences();
+  let score = 0;
+  if (prefs.franchises.includes(kit.franchise)) score += 1;
+  if (prefs.series.includes(kitSeriesKey(kit))) score += 2;
+  return score;
+}
+
+// Stable: favorites float up, original order preserved within each tier.
+function sortByPreference(items) {
+  return items
+    .map((kit, index) => ({ kit, index, score: preferenceScoreForKit(kit) }))
+    .sort((a, b) => b.score - a.score || a.index - b.index)
+    .map((entry) => entry.kit);
+}
+
+function applyAvatarTo(element, member, fallbackChar) {
+  if (!element) {
+    return;
+  }
+  element.innerHTML = "";
+  if (member?.avatar) {
+    const img = document.createElement("img");
+    img.src = member.avatar;
+    img.alt = member.name || "";
+    element.append(img);
+  } else {
+    element.textContent = (fallbackChar || member?.name?.[0] || "@").toUpperCase();
+  }
+}
+
+async function saveMemberProfileFields(fields) {
+  const result = await supabaseRpcV2("gunpula_v2_update_member_profile", {
+    p_display_name: fields.displayName ?? null,
+    p_avatar: fields.avatar ?? null,
+    p_preferences: fields.preferences ?? null,
+  });
+  const remote = normalizeCloudState(result);
+  if (remote?.workspace) {
+    state.sync.workspace = remote.workspace;
+  }
+}
+
+async function handleAvatarChange(event) {
+  const file = event.target.files?.[0];
+  event.target.value = "";
+  if (!file || !syncModeV2() || !state.sync.workspace) {
+    return;
+  }
+  try {
+    const avatar = await imageDataUrlFromFile(file, { width: 96, height: 96, fit: "cover", format: "image/jpeg", quality: 0.82 });
+    await saveMemberProfileFields({ avatar });
+    renderSettings();
+  } catch (error) {
+    setSyncStatus("error", error.message);
+    renderSettings();
+  }
+}
+
+let favoritesSaveTimer = null;
+
+function toggleFavorite(kind, value) {
+  const member = currentMember();
+  if (!member) {
+    return;
+  }
+  const prefs = memberPreferences(member);
+  const list = prefs[kind];
+  const index = list.indexOf(value);
+  if (index >= 0) {
+    list.splice(index, 1);
+  } else {
+    list.push(value);
+  }
+  member.preferences = { franchises: prefs.franchises, series: prefs.series };
+  renderProfileFavorites();
+  if (state.activeView === "updates") {
+    renderHomeUpdates();
+  }
+  clearTimeout(favoritesSaveTimer);
+  favoritesSaveTimer = setTimeout(() => {
+    saveMemberProfileFields({ preferences: member.preferences }).catch((error) => setSyncStatus("error", error.message));
+  }, 800);
+}
+
+function favoriteSeriesLabel(key) {
+  const kit = state.kits.find((item) => kitSeriesKey(item) === key);
+  return kit ? seriesLabelFromKit(kit) : key;
+}
+
+function renderProfileFavorites() {
+  if (!elements.profileFavorites) {
+    return;
+  }
+  const member = currentMember();
+  const visible = Boolean(syncModeV2() && state.sync.workspace && member);
+  elements.profileFavorites.hidden = !visible;
+  if (!visible) {
+    return;
+  }
+  const prefs = memberPreferences(member);
+
+  elements.favoriteFranchises.innerHTML = "";
+  for (const franchise of FRANCHISES) {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = `member-chip${prefs.franchises.includes(franchise) ? " is-active" : ""}`;
+    chip.textContent = franchiseShortLabel(franchise);
+    chip.addEventListener("click", () => toggleFavorite("franchises", franchise));
+    elements.favoriteFranchises.append(chip);
+  }
+
+  elements.favoriteSeries.innerHTML = "";
+  const seen = new Set();
+  const candidates = [];
+  for (const franchise of prefs.franchises.length ? prefs.franchises : ["gundam"]) {
+    for (const [key, entry] of seriesEntriesForFranchise(franchise).slice(0, 8)) {
+      if (!seen.has(key)) {
+        seen.add(key);
+        candidates.push({ key, label: entry.label });
+      }
+    }
+  }
+  for (const key of prefs.series) {
+    if (!seen.has(key)) {
+      seen.add(key);
+      candidates.push({ key, label: favoriteSeriesLabel(key) });
+    }
+  }
+  for (const { key, label } of candidates) {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = `member-chip${prefs.series.includes(key) ? " is-active" : ""}`;
+    chip.textContent = label;
+    chip.addEventListener("click", () => toggleFavorite("series", key));
+    elements.favoriteSeries.append(chip);
+  }
+}
+
+function memberCollectionKits(memberDisplayName, status) {
+  const items = state.collection.member_items?.[safeMemberName(memberDisplayName)] || {};
+  return Object.entries(items)
+    .filter(([, entry]) => entry?.status === status)
+    .map(([kitId]) => ({ kit: displayKitById(kitId), entry: items[kitId] }))
+    .filter((row) => Boolean(row.kit));
+}
+
+function fillMemberStrip(container, rows) {
+  container.innerHTML = "";
+  if (!rows.length) {
+    const empty = document.createElement("div");
+    empty.className = "collection-empty";
+    empty.textContent = t("memberNoItems");
+    container.append(empty);
+    return;
+  }
+  for (const { kit } of rows.slice(0, 30)) {
+    const item = document.createElement("button");
+    item.type = "button";
+    item.className = "collection-item";
+    const rendered = appendImageWithFallback(item, kit, { alt: kitDisplayName(kit) });
+    if (!rendered) {
+      const fallback = document.createElement("span");
+      fallback.className = "collection-fallback";
+      fallback.textContent = kit.grade_code || "?";
+      item.append(fallback);
+    }
+    const name = document.createElement("span");
+    name.textContent = kitShortName(kit);
+    item.append(name);
+    item.addEventListener("click", () => openDetail(kit));
+    container.append(item);
+  }
+}
+
+function openMemberProfile(member) {
+  if (!elements.memberDialog) {
+    return;
+  }
+  applyAvatarTo(elements.memberDialogAvatar, member);
+  elements.memberDialogName.textContent = member.name || "member";
+  const joined = member.joined_at ? String(member.joined_at).slice(0, 10) : "";
+  elements.memberDialogMeta.textContent = [t(`workspaceRole${capitalizeRole(member.role)}`), member.email, joined].filter(Boolean).join(" · ");
+
+  const prefs = memberPreferences(member);
+  elements.memberDialogFavorites.innerHTML = "";
+  const labels = [...prefs.franchises.map((franchise) => franchiseShortLabel(franchise)), ...prefs.series.map(favoriteSeriesLabel)];
+  if (!labels.length) {
+    labels.push(t("memberNoFavorites"));
+  }
+  for (const label of labels) {
+    const chip = document.createElement("span");
+    chip.className = "member-chip is-static";
+    chip.textContent = label;
+    elements.memberDialogFavorites.append(chip);
+  }
+
+  const owned = memberCollectionKits(member.name, "owned");
+  const wanted = memberCollectionKits(member.name, "wanted");
+  const spend = owned.reduce((sum, { entry }) => sum + (Number(entry.purchase_price) || 0) * clampCollectionQuantity(entry.quantity), 0);
+  elements.memberDialogStats.innerHTML = "";
+  const stats = [
+    { label: t("ownedList"), value: owned.length },
+    { label: t("wantedList"), value: wanted.length },
+    { label: t("memberSpend"), value: spend ? `¥${spend.toLocaleString("ja-JP")}` : "—" },
+  ];
+  for (const stat of stats) {
+    const card = document.createElement("div");
+    card.className = "update-summary-card";
+    card.innerHTML = `<strong>${escapeHtml(stat.label)}</strong><span>${escapeHtml(String(stat.value))}</span><em></em>`;
+    elements.memberDialogStats.append(card);
+  }
+
+  fillMemberStrip(elements.memberDialogOwned, owned);
+  fillMemberStrip(elements.memberDialogWanted, wanted);
+  elements.memberDialog.showModal();
+}
+
 function renderAccountSection() {
   if (!elements.accountSignedOut) {
     return;
@@ -6205,7 +6481,8 @@ function renderAccountSection() {
   }
   const email = currentUserEmail();
   elements.accountEmailLabel.textContent = email;
-  elements.accountAvatar.textContent = (email[0] || "@").toUpperCase();
+  applyAvatarTo(elements.accountAvatar, currentMember(), email[0]);
+  renderProfileFavorites();
   elements.memberNameRow.hidden = false;
   if (document.activeElement !== elements.memberDisplayNameInput) {
     elements.memberDisplayNameInput.value = currentWorkspaceMemberName();
@@ -6239,14 +6516,22 @@ function renderWorkspaceMembers(members) {
     return;
   }
   for (const member of members) {
-    const row = document.createElement("div");
+    const row = document.createElement("button");
+    row.type = "button";
     row.className = `workspace-member-row${member.is_self ? " is-self" : ""}`;
+    const avatar = document.createElement("span");
+    avatar.className = "account-avatar member-row-avatar";
+    applyAvatarTo(avatar, member);
+    const body = document.createElement("span");
+    body.className = "member-row-body";
     const name = document.createElement("strong");
     name.textContent = `${member.name || "member"}${member.is_self ? ` · ${t("workspaceSelf")}` : ""}`;
     const meta = document.createElement("span");
     const joined = member.joined_at ? String(member.joined_at).slice(0, 10) : "";
     meta.textContent = [t(`workspaceRole${capitalizeRole(member.role)}`), member.email, joined].filter(Boolean).join(" · ");
-    row.append(name, meta);
+    body.append(name, meta);
+    row.append(avatar, body);
+    row.addEventListener("click", () => openMemberProfile(member));
     elements.workspaceMembers.append(row);
   }
 }
