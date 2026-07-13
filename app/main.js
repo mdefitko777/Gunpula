@@ -27,6 +27,7 @@ const GITHUB_TOKEN_KEY = "gunpula-github-dispatch-token-v1";
 const COLLECTION_HOME_VISIBILITY_KEY = "gunpula-catalog-home-collection-visibility-v1";
 const COLLECTION_HOME_COLLAPSE_KEY = "gunpula-catalog-home-collection-collapse-v1";
 const COLLECTION_MEMBER_VIEW_KEY = "gunpula-catalog-collection-member-view-v1";
+const COLLECTION_FILTER_KEY = "gunpula-catalog-collection-filter-v1";
 const UPDATE_NOTIFICATION_KEY = "gunpula-catalog-update-notifications-v1";
 const UPDATE_NOTIFICATION_LAST_KEY = "gunpula-catalog-update-notified-v1";
 const UPDATE_NOTIFICATION_FILTER_KEY = "gunpula-catalog-update-notification-filters-v1";
@@ -588,6 +589,7 @@ const state = {
   homeCollectionVisibility: loadHomeCollectionVisibility(),
   homeCollectionCollapsed: loadHomeCollectionCollapsed(),
   collectionMemberView: localStorage.getItem(COLLECTION_MEMBER_VIEW_KEY) || "self",
+  collectionFilter: loadCollectionFilter(),
   updateNotifications: localStorage.getItem(UPDATE_NOTIFICATION_KEY) === "true",
   updateNotificationFilters: loadUpdateNotificationFilters(),
   collectionSelection: { owned: new Set(), wanted: new Set() },
@@ -1330,6 +1332,23 @@ function loadConsoleMode() {
   return localStorage.getItem(CONSOLE_MODE_KEY) === "true";
 }
 
+function loadCollectionFilter() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(COLLECTION_FILTER_KEY) || "{}");
+    return {
+      franchise: FRANCHISES.includes(parsed?.franchise) ? parsed.franchise : "all",
+      series: parsed?.series || "all",
+      grade: parsed?.grade || "all",
+    };
+  } catch {
+    return { franchise: "all", series: "all", grade: "all" };
+  }
+}
+
+function saveCollectionFilter() {
+  localStorage.setItem(COLLECTION_FILTER_KEY, JSON.stringify(state.collectionFilter));
+}
+
 function loadTheme() {
   const theme = localStorage.getItem(THEME_KEY);
   return THEMES.some((item) => item.code === theme) ? theme : "atlas";
@@ -1820,6 +1839,9 @@ function bindEvents() {
       return;
     }
     state.activeView = nextView;
+    if (COLLECTION_TYPES.includes(nextView)) {
+      state.query = "";
+    }
     state.selectedKit = null;
     state.activeModal = null;
     localStorage.setItem(ACTIVE_VIEW_KEY, state.activeView);
@@ -2031,8 +2053,41 @@ function bindEvents() {
     }
   });
   bindRadialMenu();
+  registerNativeBackButton();
 
   populateGradeSelect();
+}
+
+function registerNativeBackButton() {
+  const appPlugin = window.Capacitor?.Plugins?.App;
+  if (!isNativeShell() || !appPlugin?.addListener) {
+    return;
+  }
+  appPlugin.addListener("backButton", () => {
+    if (elements.onboardingDialog?.open) {
+      finishOnboarding();
+      return;
+    }
+    if (elements.detailDialog?.open || state.selectedKit) {
+      closeDetail({ navigate: false });
+      return;
+    }
+    if (elements.settingsDialog?.open || state.activeModal === "settings") {
+      closeSettings({ navigate: false });
+      return;
+    }
+    if (state.activeView !== "home") {
+      state.activeView = "home";
+      state.selectedKit = null;
+      state.activeModal = null;
+      localStorage.setItem(ACTIVE_VIEW_KEY, state.activeView);
+      render();
+      persistViewState({ mode: "replace" });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    appPlugin.minimizeApp?.();
+  });
 }
 
 async function handleAppIconUpload(event) {
@@ -2523,6 +2578,7 @@ function navigateToCollectionView(type) {
     return;
   }
   state.activeView = type;
+  state.query = "";
   state.selectedKit = null;
   state.activeModal = null;
   localStorage.setItem(ACTIVE_VIEW_KEY, state.activeView);
@@ -5371,6 +5427,9 @@ function filteredKits() {
         ? collectionIds("wanted").map(displayKitById).filter(Boolean)
         : kitsForCurrentFranchise();
   return source.filter((kit) => {
+    if (activeCollectionType() && !collectionFilterMatches(kit)) {
+      return false;
+    }
     if (state.activeView === "catalog" && !filterHas("grade", kit.grade_code)) {
       return false;
     }
@@ -5428,6 +5487,33 @@ function filteredKits() {
 
     return searchTerms.some((term) => haystack.includes(term));
   });
+}
+
+function collectionFilterMatches(kit) {
+  const filter = state.collectionFilter || { franchise: "all", series: "all", grade: "all" };
+  if (filter.franchise !== "all" && kit.franchise !== filter.franchise) {
+    return false;
+  }
+  if (filter.series !== "all" && kitSeriesKey(kit) !== filter.series) {
+    return false;
+  }
+  if (filter.grade !== "all" && kit.grade_code !== filter.grade) {
+    return false;
+  }
+  return true;
+}
+
+function collectionFilterLabel() {
+  const filter = state.collectionFilter || { franchise: "all", series: "all", grade: "all" };
+  const parts = [];
+  parts.push(filter.franchise === "all" ? t("allFranchises") : franchiseLabel(filter.franchise));
+  if (filter.series !== "all") {
+    parts.push(seriesLabelFromKey(filter.series));
+  }
+  if (filter.grade !== "all") {
+    parts.push(filter.grade);
+  }
+  return parts.join(" / ");
 }
 
 function activeCollectionType() {
@@ -5549,7 +5635,7 @@ function renderCollectionManagement(kits) {
   }
 
   renderCollectionMemberFilter(type);
-  renderCollectionGroupSummary(kits);
+  renderCollectionGroupSummary(type);
   pruneCollectionSelection(type);
   const editable = canEditSharedData();
   const visibleIds = visibleCollectionIds(kits);
@@ -5566,37 +5652,77 @@ function renderCollectionManagement(kits) {
   elements.collectionSelectionSummary.textContent = t("selectedCount", { selected: selectedIds.length, total });
 }
 
-function renderCollectionGroupSummary(kits) {
+function renderCollectionGroupSummary(type) {
   if (!elements.collectionGroupSummary) {
     return;
   }
   elements.collectionGroupSummary.innerHTML = "";
+  const allKits = collectionIds(type).map(displayKitById).filter(Boolean);
+  const filter = state.collectionFilter || { franchise: "all", series: "all", grade: "all" };
+  const setFilter = (next) => {
+    state.collectionFilter = { ...state.collectionFilter, ...next };
+    saveCollectionFilter();
+    state.collectionSelection[type] = new Set();
+    persistViewState({ mode: "replace" });
+    renderKits();
+  };
+
+  const reset = document.createElement("button");
+  reset.type = "button";
+  reset.className = filter.franchise === "all" && filter.series === "all" && filter.grade === "all" ? "is-active" : "";
+  reset.textContent = t("allFranchises");
+  reset.addEventListener("click", () => setFilter({ franchise: "all", series: "all", grade: "all" }));
+  elements.collectionGroupSummary.append(reset);
+
+  const path = document.createElement("span");
+  path.textContent = collectionFilterLabel();
+  elements.collectionGroupSummary.append(path);
+
   const buckets = new Map();
-  for (const kit of kits) {
-    for (const value of [franchiseLabel(kit.franchise), seriesLabelFromKit(kit), kit.grade_code]) {
-      if (value) buckets.set(value, (buckets.get(value) || 0) + 1);
+  if (filter.franchise === "all") {
+    for (const kit of allKits) {
+      buckets.set(kit.franchise, (buckets.get(kit.franchise) || 0) + 1);
+    }
+  } else if (filter.series === "all") {
+    for (const kit of allKits.filter((kit) => kit.franchise === filter.franchise)) {
+      const key = kitSeriesKey(kit);
+      buckets.set(key, (buckets.get(key) || 0) + 1);
+    }
+  } else {
+    for (const kit of allKits.filter((kit) => kit.franchise === filter.franchise && kitSeriesKey(kit) === filter.series)) {
+      buckets.set(kit.grade_code, (buckets.get(kit.grade_code) || 0) + 1);
     }
   }
   const top = [...buckets.entries()]
     .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-    .slice(0, 8);
-  if (!top.length) {
+    .slice(0, 16);
+  if (!allKits.length) {
     elements.collectionGroupSummary.hidden = true;
     return;
   }
   elements.collectionGroupSummary.hidden = false;
-  const label = document.createElement("span");
-  label.textContent = t("collectionGroups");
-  elements.collectionGroupSummary.append(label);
-  for (const [name, count] of top) {
+  for (const [key, count] of top) {
     const chip = document.createElement("button");
     chip.type = "button";
-    chip.textContent = `${name} ${count}`;
+    const label =
+      filter.franchise === "all"
+        ? franchiseLabel(key)
+        : filter.series === "all"
+          ? seriesLabelFromKey(key)
+          : key;
+    chip.className =
+      key === filter.franchise || key === filter.series || key === filter.grade
+        ? "is-active"
+        : "";
+    chip.textContent = `${label} ${count}`;
     chip.addEventListener("click", () => {
-      state.query = name;
-      ensureSearchIndex();
-      persistViewState({ mode: "replace" });
-      renderKits();
+      if (filter.franchise === "all") {
+        setFilter({ franchise: key, series: "all", grade: "all" });
+      } else if (filter.series === "all") {
+        setFilter({ series: key, grade: "all" });
+      } else {
+        setFilter({ grade: key });
+      }
     });
     elements.collectionGroupSummary.append(chip);
   }

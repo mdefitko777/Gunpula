@@ -1379,10 +1379,32 @@ function parseForteEntries(html, listUrl) {
   return entries;
 }
 
+function forteEntryIdentity(entry) {
+  const isExGallery = /(^|-)ex\d+/i.test(entry.group || "") || /\bEX\d{3}\b/i.test(entry.set_title || "");
+  if (!isExGallery) {
+    return `${entry.group}:${entry.index}:${entry.name}`;
+  }
+  return `${entry.group}:${entry.name.replace(/\s+/g, " ").trim()}`;
+}
+
+function collapseForteEntries(entries) {
+  const byIdentity = new Map();
+  for (const entry of entries) {
+    const key = forteEntryIdentity(entry);
+    const current = byIdentity.get(key);
+    if (!current) {
+      byIdentity.set(key, { ...entry, images: [entry.image_url] });
+      continue;
+    }
+    current.images = unique([...(current.images || []), entry.image_url]);
+  }
+  return [...byIdentity.values()];
+}
+
 async function importForte() {
   const listUrl = `${GASHAPON_BASE_URL}/forte/items/`;
   const html = await fetchText(listUrl);
-  const entries = parseForteEntries(html, listUrl);
+  const entries = collapseForteEntries(parseForteEntries(html, listUrl));
   const productCache = new Map();
   const imported = [];
 
@@ -1409,8 +1431,8 @@ async function importForte() {
         gradeCode: "GSF",
         subline: entry.set_title,
         title,
-        boxArtUrl: entry.image_url,
-        galleryUrls: [entry.image_url, ...product.images],
+        boxArtUrl: entry.images?.[0] || entry.image_url,
+        galleryUrls: [...(entry.images || [entry.image_url]), ...product.images],
         releaseDate: product.release_date,
         priceJpy: product.price_jpy,
         isLimited: /限定|PB|EX/.test(entry.set_title),
