@@ -36,6 +36,7 @@ const HOME_COVER_KEY = "gunpula-catalog-home-covers-v1";
 const RELEASE_MONTH_KEY = "gunpula-catalog-release-month-v1";
 const SETTINGS_PANEL_KEY = "gunpula-catalog-settings-panel-v1";
 const RECENT_VIEWED_KEY = "gunpula-catalog-recent-viewed-v1";
+const ONBOARDING_DONE_KEY = "gunpula-catalog-onboarding-done-v1";
 const SYNC_POLL_INTERVAL_MS = 15000;
 const SYNC_SAVE_DEBOUNCE_MS = 700;
 const SYNC_HISTORY_LIMIT = 20;
@@ -95,6 +96,20 @@ const FRANCHISE_SHORT_LABELS = {
   fate: { zh: "Fate", ko: "Fate", en: "Fate", ja: "Fate" },
   beyblade: { zh: "BBX", ko: "BBX", en: "BBX", ja: "BBX" },
 };
+
+const SEARCH_ALIAS_GROUPS = [
+  ["freedom", "フリーダム", "프리덤", "自由"],
+  ["strike", "ストライク", "스트라이크", "强袭", "強襲"],
+  ["destiny", "デスティニー", "데스티니", "命运", "命運"],
+  ["justice", "ジャスティス", "저스티스", "正义", "正義"],
+  ["exia", "エクシア", "엑시아", "能天使"],
+  ["unicorn", "ユニコーン", "유니콘", "独角兽", "獨角獸"],
+  ["sazabi", "サザビー", "사자비", "沙扎比"],
+  ["pikachu", "ピカチュウ", "피카츄", "皮卡丘"],
+  ["saber", "セイバー", "세이버", "阿尔托莉雅", "阿爾托莉雅", "artoria", "アルトリア"],
+  ["nendoroid", "ねんどろいど", "넨도로이드", "黏土人"],
+  ["beyblade", "ベイブレード", "베이블레이드", "爆旋陀螺", "bbx"],
+];
 
 const NAME_FALLBACKS = {
   zh: ["zh", "ja", "en", "ko"],
@@ -730,6 +745,11 @@ const elements = {
   imageAssetSummary: document.querySelector("#imageAssetSummary"),
   androidPackageSummary: document.querySelector("#androidPackageSummary"),
   appVersionLabel: document.querySelector("#appVersionLabel"),
+  onboardingDialog: document.querySelector("#onboardingDialog"),
+  onboardingLanguageList: document.querySelector("#onboardingLanguageList"),
+  onboardingOpenAccount: document.querySelector("#onboardingOpenAccount"),
+  onboardingImport: document.querySelector("#onboardingImport"),
+  onboardingDone: document.querySelector("#onboardingDone"),
   collectionSection: document.querySelector("#collectionSection"),
   ownedPanel: document.querySelector("#ownedPanel"),
   wantedPanel: document.querySelector("#wantedPanel"),
@@ -741,6 +761,7 @@ const elements = {
   wantedStrip: document.querySelector("#wantedStrip"),
   collectionManagement: document.querySelector("#collectionManagement"),
   collectionMemberFilter: document.querySelector("#collectionMemberFilter"),
+  collectionGroupSummary: document.querySelector("#collectionGroupSummary"),
   collectionSelectAll: document.querySelector("#collectionSelectAll"),
   collectionSelectionSummary: document.querySelector("#collectionSelectionSummary"),
   deleteSelectedCollection: document.querySelector("#deleteSelectedCollection"),
@@ -1252,6 +1273,7 @@ async function init() {
   if (state.query.trim()) {
     ensureSearchIndex();
   }
+  showOnboardingIfNeeded();
 }
 
 function normalizeState() {
@@ -1675,6 +1697,9 @@ function applyOverride(kit) {
     images.box_art_url = coverImageUrl || null;
     galleryImageUrls = [...new Set([coverImageUrl, ...galleryImageUrls].filter(Boolean))];
   }
+  if (Array.isArray(override.gallery_image_urls)) {
+    galleryImageUrls = [...new Set([...galleryImageUrls, ...override.gallery_image_urls].filter(Boolean))];
+  }
 
   return {
     ...normalized,
@@ -1686,6 +1711,7 @@ function applyOverride(kit) {
     subline: Object.hasOwn(override, "subline") ? override.subline : normalized.subline,
     universe: Object.hasOwn(override, "universe") ? override.universe : normalized.universe,
     data_status: Object.hasOwn(override, "data_status") ? override.data_status : normalized.data_status,
+    source_urls: Array.isArray(override.source_urls) ? [...new Set([...(normalized.source_urls || []), ...override.source_urls].filter(Boolean))] : normalized.source_urls,
     local_override: override,
   };
 }
@@ -1714,7 +1740,11 @@ function displayKitById(kitId) {
   return state.kits.find((kit) => kit.kit_id === kitId);
 }
 
-function openSettings() {
+function openSettings(panel = null) {
+  if (panel && SETTINGS_PANELS.includes(panel)) {
+    state.settingsPanel = panel;
+    localStorage.setItem(SETTINGS_PANEL_KEY, state.settingsPanel);
+  }
   state.activeModal = "settings";
   renderSettings();
   renderConsoleMode();
@@ -1828,6 +1858,21 @@ function bindEvents() {
     event.target.value = "";
     if (file) {
       importCollectionBackup(file);
+    }
+  });
+  elements.onboardingOpenAccount?.addEventListener("click", () => {
+    finishOnboarding();
+    openSettings("account");
+  });
+  elements.onboardingImport?.addEventListener("click", () => {
+    finishOnboarding();
+    elements.importBackupInput?.click();
+  });
+  elements.onboardingDone?.addEventListener("click", finishOnboarding);
+  elements.onboardingDialog?.addEventListener("cancel", finishOnboarding);
+  elements.onboardingDialog?.addEventListener("click", (event) => {
+    if (event.target === elements.onboardingDialog) {
+      finishOnboarding();
     }
   });
   elements.refreshAppCache.addEventListener("click", refreshAppCache);
@@ -5247,6 +5292,22 @@ function applyDisplayNameReplacements(value, language) {
     .trim();
 }
 
+function expandedSearchTerms(query) {
+  const cleaned = String(query || "").trim().toLowerCase();
+  if (!cleaned) {
+    return [];
+  }
+  const terms = new Set([cleaned]);
+  for (const group of SEARCH_ALIAS_GROUPS) {
+    if (group.some((term) => term.toLowerCase().includes(cleaned) || cleaned.includes(term.toLowerCase()))) {
+      for (const term of group) {
+        terms.add(term.toLowerCase());
+      }
+    }
+  }
+  return [...terms];
+}
+
 function kitDisplayNameForLanguage(kit, language) {
   const names = kit.names || {};
   if (language === "zh" || language === "ko") {
@@ -5300,6 +5361,7 @@ function kitsForCurrentFranchise() {
 
 function filteredKits() {
   const query = state.query.trim().toLowerCase();
+  const searchTerms = expandedSearchTerms(query);
   const minPrice = numericFilterValue(state.priceMin);
   const maxPrice = numericFilterValue(state.priceMax);
   const source =
@@ -5364,7 +5426,7 @@ function filteredKits() {
       .join(" ")
       .toLowerCase();
 
-    return haystack.includes(query);
+    return searchTerms.some((term) => haystack.includes(term));
   });
 }
 
@@ -5487,6 +5549,7 @@ function renderCollectionManagement(kits) {
   }
 
   renderCollectionMemberFilter(type);
+  renderCollectionGroupSummary(kits);
   pruneCollectionSelection(type);
   const editable = canEditSharedData();
   const visibleIds = visibleCollectionIds(kits);
@@ -5501,6 +5564,42 @@ function renderCollectionManagement(kits) {
   elements.deleteSelectedCollection.disabled = !editable || selectedIds.length === 0;
   elements.clearCollectionView.disabled = !editable || total === 0;
   elements.collectionSelectionSummary.textContent = t("selectedCount", { selected: selectedIds.length, total });
+}
+
+function renderCollectionGroupSummary(kits) {
+  if (!elements.collectionGroupSummary) {
+    return;
+  }
+  elements.collectionGroupSummary.innerHTML = "";
+  const buckets = new Map();
+  for (const kit of kits) {
+    for (const value of [franchiseLabel(kit.franchise), seriesLabelFromKit(kit), kit.grade_code]) {
+      if (value) buckets.set(value, (buckets.get(value) || 0) + 1);
+    }
+  }
+  const top = [...buckets.entries()]
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .slice(0, 8);
+  if (!top.length) {
+    elements.collectionGroupSummary.hidden = true;
+    return;
+  }
+  elements.collectionGroupSummary.hidden = false;
+  const label = document.createElement("span");
+  label.textContent = t("collectionGroups");
+  elements.collectionGroupSummary.append(label);
+  for (const [name, count] of top) {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.textContent = `${name} ${count}`;
+    chip.addEventListener("click", () => {
+      state.query = name;
+      ensureSearchIndex();
+      persistViewState({ mode: "replace" });
+      renderKits();
+    });
+    elements.collectionGroupSummary.append(chip);
+  }
 }
 
 function renderCollectionMemberFilter(type) {
@@ -5827,6 +5926,43 @@ function renderLanguageControls() {
   }
 }
 
+function renderOnboardingLanguages() {
+  if (!elements.onboardingLanguageList) {
+    return;
+  }
+  elements.onboardingLanguageList.innerHTML = "";
+  for (const language of LANGUAGES) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `segment-button${state.language === language.code ? " is-active" : ""}`;
+    button.textContent = language.label;
+    button.addEventListener("click", () => {
+      state.language = language.code;
+      state.seriesAdminLanguage = language.code;
+      localStorage.setItem(LANGUAGE_KEY, state.language);
+      render();
+      renderOnboardingLanguages();
+      persistViewState({ mode: "replace" });
+    });
+    elements.onboardingLanguageList.append(button);
+  }
+}
+
+function showOnboardingIfNeeded() {
+  if (!elements.onboardingDialog || localStorage.getItem(ONBOARDING_DONE_KEY) === "true" || state.activeModal || state.selectedKit) {
+    return;
+  }
+  renderOnboardingLanguages();
+  elements.onboardingDialog.showModal();
+}
+
+function finishOnboarding() {
+  localStorage.setItem(ONBOARDING_DONE_KEY, "true");
+  if (elements.onboardingDialog?.open) {
+    elements.onboardingDialog.close();
+  }
+}
+
 function renderSettings() {
   renderSettingsTabs();
   renderSettingsPanels();
@@ -5855,6 +5991,7 @@ function renderSettings() {
   renderDuplicateWorkbench();
   renderHiddenRecords();
   renderImageHealth();
+  renderImageAssetSummary();
   renderAndroidPackageSummary();
 }
 
@@ -6005,12 +6142,60 @@ function renderDuplicateWorkbench() {
       deleteButton.className = "duplicate-delete";
       deleteButton.textContent = t("hideDuplicateCandidate");
       deleteButton.addEventListener("click", () => hideDuplicateCandidate(kit));
-      row.append(button, deleteButton);
+      const mergeButton = document.createElement("button");
+      mergeButton.type = "button";
+      mergeButton.className = "duplicate-merge";
+      mergeButton.textContent = t("mergeDuplicateIntoThis");
+      mergeButton.addEventListener("click", () => mergeDuplicateGroup(group, kit));
+      row.append(button, mergeButton, deleteButton);
       list.append(row);
     }
     panel.append(head, list);
     elements.duplicateWorkbench.append(panel);
   }
+}
+
+function mergeDuplicateGroup(group, masterKit) {
+  if (!canEditSharedData()) {
+    setSyncStatus("readonly", t("readOnlyHint"));
+    return;
+  }
+  const others = group.kits.filter((kit) => kit.kit_id !== masterKit.kit_id);
+  if (!others.length || !window.confirm(t("mergeDuplicateConfirm", { name: kitShortName(masterKit), count: others.length }))) {
+    return;
+  }
+  const now = new Date().toISOString();
+  const gallery = new Set(masterKit.gallery_image_urls || []);
+  const sourceUrls = new Set(masterKit.source_urls || []);
+  for (const kit of group.kits) {
+    for (const url of imageCandidatesForKit(kit)) gallery.add(url);
+    for (const url of kit.source_urls || []) sourceUrls.add(url);
+  }
+  state.overrides[masterKit.kit_id] = {
+    ...(state.overrides[masterKit.kit_id] || {}),
+    gallery_image_urls: [...gallery],
+    source_urls: [...sourceUrls],
+    duplicate_merge_key: group.key,
+    duplicate_merged_ids: others.map((kit) => kit.kit_id),
+    duplicate_merged_at: now,
+    duplicate_merged_by: memberName(),
+    updated_at: now,
+  };
+  for (const kit of others) {
+    state.overrides[kit.kit_id] = {
+      ...(state.overrides[kit.kit_id] || {}),
+      data_status: "hidden",
+      hidden_reason: "merged_duplicate",
+      merged_into: masterKit.kit_id,
+      hidden_at: now,
+      hidden_by: memberName(),
+      updated_at: now,
+    };
+  }
+  saveOverrides();
+  refreshKits();
+  render();
+  setSyncStatus("saving", t("duplicateMerged"));
 }
 
 function ignoreDuplicateGroup(group) {
@@ -6109,6 +6294,8 @@ function restoreHiddenRecord(kit) {
   delete override.data_status;
   delete override.hidden_at;
   delete override.hidden_by;
+  delete override.hidden_reason;
+  delete override.merged_into;
   override.updated_at = new Date().toISOString();
   if (Object.keys(override).filter((key) => key !== "updated_at").length) {
     state.overrides[kit.kit_id] = override;

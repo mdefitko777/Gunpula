@@ -231,6 +231,11 @@ secrets:
 - `ANDROID_KEY_ALIAS`
 - `ANDROID_KEY_PASSWORD`
 
+After the secrets are present, push any app change or manually rerun **Build
+Android APK** in GitHub Actions. The workflow uploads both APK files to the same
+fixed release URLs, and the app Settings -> About panel reads
+`data/android-package.json` to show whether release signing is available.
+
 ## Shared Supabase Sync
 
 Run `docs/supabase-setup.sql` once in Supabase SQL Editor. Then open the app
@@ -261,8 +266,7 @@ assets back to the repository.
 
 ## Next Steps
 
-1. Review `data/duplicate-candidates.json` and merge real duplicates.
-2. Manually review collectible records still marked as `other`, `mixed`, or `option`.
-3. Expand Fate, Pokemon, and PB historical imports as more official source pages are identified.
-4. Expand the Gundam series audit rules when a new recurring misclassification is found.
-5. Move image caching from local-computer backup to a hosted cache if official hotlinking becomes unstable.
+1. Manually review collectible records still marked as `other`, `mixed`, or `option`.
+2. Expand Fate, Pokemon, and PB historical imports as more official source pages are identified.
+3. Expand the Gundam series audit rules when a new recurring misclassification is found.
+4. Move image caching from local-computer backup to a hosted cache if official hotlinking becomes unstable.

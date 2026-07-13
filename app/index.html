@@ -9,7 +9,7 @@
     <title>Gunpula v2.0.0</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260713-v39" />
+    <link rel="stylesheet" href="./styles.css?v=20260714-v40" />
   </head>
   <body>
     <main class="catalog-page">
@@ -148,6 +148,7 @@
         </div>
         <div class="collection-management" id="collectionManagement" hidden>
           <div class="collection-member-filter" id="collectionMemberFilter"></div>
+          <div class="collection-group-summary" id="collectionGroupSummary"></div>
           <label class="collection-select-all">
             <input id="collectionSelectAll" type="checkbox" />
             <span data-i18n="selectVisible">全选当前</span>
@@ -418,6 +419,14 @@
           <input id="importBackupInput" type="file" accept="application/json,.json" hidden />
         </section>
         <section class="settings-section" data-settings-panel="data">
+          <h3 data-i18n="sourceHealth">来源健康</h3>
+          <div class="source-health-log" id="sourceHealthLog"></div>
+        </section>
+        <section class="settings-section" data-settings-panel="data">
+          <h3 data-i18n="imageAssetLibrary">图片资产库</h3>
+          <div class="android-package-summary" id="imageAssetSummary"></div>
+        </section>
+        <section class="settings-section" data-settings-panel="data">
           <div class="settings-section-head">
             <h3 data-i18n="duplicateWorkbench">疑似重复</h3>
             <span id="duplicateSummary"></span>
@@ -475,10 +484,6 @@
           <div class="update-log" id="updateLog"></div>
         </section>
         <section class="settings-section console-only" data-settings-panel="console" hidden>
-          <h3 data-i18n="sourceHealth">来源健康</h3>
-          <div class="source-health-log" id="sourceHealthLog"></div>
-        </section>
-        <section class="settings-section console-only" data-settings-panel="console" hidden>
           <h3 data-i18n="reviewWorkbench">待确认工作台</h3>
           <div class="review-workbench" id="reviewWorkbench"></div>
         </section>
@@ -515,6 +520,19 @@
       </div>
     </dialog>
 
+    <dialog class="onboarding-dialog" id="onboardingDialog" aria-labelledby="onboardingTitle">
+      <div class="onboarding-shell">
+        <h2 id="onboardingTitle" data-i18n="onboardingTitle">开始使用 v2.0.0</h2>
+        <p data-i18n="onboardingHint">先选语言，再备份或登录同步。之后都可以在设置里改。</p>
+        <div class="segmented-control language-control" id="onboardingLanguageList"></div>
+        <div class="onboarding-actions">
+          <button id="onboardingOpenAccount" type="button" data-i18n="onboardingAccount">登录同步</button>
+          <button class="secondary-button compact-button" id="onboardingImport" type="button" data-i18n="importBackup">从备份恢复</button>
+          <button class="secondary-button compact-button" id="onboardingDone" type="button" data-i18n="onboardingDone">先逛一下</button>
+        </div>
+      </div>
+    </dialog>
+
     <div class="pager-preview" id="pagerPreview" hidden aria-hidden="true"></div>
     <div class="gesture-overlay" id="gestureOverlay" hidden aria-hidden="true"></div>
     <div class="radial-menu" id="radialMenu" hidden aria-hidden="true">
@@ -522,6 +540,6 @@
       <div class="radial-labels"></div>
     </div>
 
-    <script type="module" src="./main.js?v=20260713-v39"></script>
+    <script type="module" src="./main.js?v=20260714-v40"></script>
   </body>
 </html>
