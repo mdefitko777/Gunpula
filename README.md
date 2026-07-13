@@ -209,7 +209,7 @@ image URLs are unreliable.
 
 For a real APK, wrap the same web app with Capacitor. A base
 `capacitor.config.json` is included. The generated `data/android-package.json`
-and the Market Center show whether the Android project exists.
+and the app settings About tab show the APK status.
 
 ```bash
 npm run android:status
@@ -221,6 +221,15 @@ npm run android:build
 `npm run android:add` is a one-time setup command. Building the APK requires a
 machine with Android Studio/JDK/Android SDK installed; GitHub Pages itself cannot
 build or serve a native APK.
+
+GitHub Actions always publishes `gunpula-debug.apk` to the `android-latest`
+release. To also publish a signed `gunpula-release.apk`, add these repository
+secrets:
+
+- `ANDROID_KEYSTORE_BASE64`
+- `ANDROID_KEYSTORE_PASSWORD`
+- `ANDROID_KEY_ALIAS`
+- `ANDROID_KEY_PASSWORD`
 
 ## Shared Supabase Sync
 

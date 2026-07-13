@@ -34,6 +34,8 @@ const THEME_KEY = "gunpula-catalog-theme-v1";
 const APP_ICON_KEY = "gunpula-catalog-app-icon-v1";
 const HOME_COVER_KEY = "gunpula-catalog-home-covers-v1";
 const RELEASE_MONTH_KEY = "gunpula-catalog-release-month-v1";
+const SETTINGS_PANEL_KEY = "gunpula-catalog-settings-panel-v1";
+const RECENT_VIEWED_KEY = "gunpula-catalog-recent-viewed-v1";
 const SYNC_POLL_INTERVAL_MS = 15000;
 const SYNC_SAVE_DEBOUNCE_MS = 700;
 const SYNC_HISTORY_LIMIT = 20;
@@ -48,7 +50,7 @@ const PAGER_START_DISTANCE = 18;
 const PAGER_THRESHOLD_RATIO = 0.28;
 const PAGER_MIN_THRESHOLD = 92;
 const PAGER_ANIMATION_MS = 220;
-const APP_VERSION_LABEL = "v1.9.1";
+const APP_VERSION_LABEL = "v1.9.2";
 
 const COLLECTION_TYPES = ["owned", "wanted"];
 const COLLECTION_ENTRY_STATUSES = [...COLLECTION_TYPES, "deleted"];
@@ -76,6 +78,7 @@ const LANGUAGES = [
 ];
 
 const FRANCHISES = ["gundam", "armored_core", "pokemon", "fate", "beyblade"];
+const SETTINGS_PANELS = ["account", "appearance", "data", "updates", "about", "console"];
 
 const FRANCHISE_LABELS = {
   gundam: { zh: "高达", ko: "건담", en: "Gundam", ja: "ガンダム" },
@@ -576,6 +579,7 @@ const state = {
   theme: loadTheme(),
   appIcon: loadAppIcon(),
   homeCovers: loadHomeCovers(),
+  recentViewed: loadRecentViewed(),
   releaseMonth: localStorage.getItem(RELEASE_MONTH_KEY) || "",
   updatesMode: localStorage.getItem(UPDATES_MODE_KEY) === "month" ? "month" : "recent",
   radial: { timer: null, active: false, startX: 0, startY: 0, lastX: 0, lastY: 0, touchId: null, selected: null, target: null, suppressClick: false },
@@ -596,6 +600,7 @@ const state = {
     workspace: null,
   },
   activeView: INITIAL_VIEW_STATE.view || localStorage.getItem(ACTIVE_VIEW_KEY) || "home",
+  settingsPanel: SETTINGS_PANELS.includes(localStorage.getItem(SETTINGS_PANEL_KEY)) ? localStorage.getItem(SETTINGS_PANEL_KEY) : "account",
   activeModal: INITIAL_VIEW_STATE.modal || null,
   installPrompt: null,
   updatedAt: null,
@@ -633,6 +638,7 @@ const elements = {
   settingsOpen: document.querySelector("#settingsOpen"),
   settingsDialog: document.querySelector("#settingsDialog"),
   settingsClose: document.querySelector("#settingsClose"),
+  settingsTabs: document.querySelector("#settingsTabs"),
   themeList: document.querySelector("#themeList"),
   appIconInput: document.querySelector("#appIconInput"),
   resetAppIcon: document.querySelector("#resetAppIcon"),
@@ -709,6 +715,9 @@ const elements = {
   homeCoverInput: document.querySelector("#homeCoverInput"),
   homeGrid: document.querySelector("#homeGrid"),
   homeTotal: document.querySelector("#homeTotal"),
+  homeCollectionTotal: document.querySelector("#homeCollectionTotal"),
+  homeCollectionOverview: document.querySelector("#homeCollectionOverview"),
+  homeRecentViewed: document.querySelector("#homeRecentViewed"),
   pbandaiSection: document.querySelector("#pbandaiSection"),
   pbandaiSubtitle: document.querySelector("#pbandaiSubtitle"),
   pbandaiFranchiseTabs: document.querySelector("#pbandaiFranchiseTabs"),
@@ -1540,6 +1549,19 @@ function loadSyncHistory() {
   }
 }
 
+function loadRecentViewed() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(RECENT_VIEWED_KEY) || "[]");
+    return Array.isArray(parsed) ? parsed.filter((id) => typeof id === "string").slice(0, 20) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveRecentViewed() {
+  localStorage.setItem(RECENT_VIEWED_KEY, JSON.stringify(state.recentViewed.slice(0, 20)));
+}
+
 function saveOverrides(options = {}) {
   localStorage.setItem(OVERRIDE_KEY, JSON.stringify(state.overrides, null, 2));
   if (!options.skipSync) {
@@ -1717,6 +1739,16 @@ function closeSettings(options = {}) {
 function bindEvents() {
   elements.settingsOpen.addEventListener("click", openSettings);
   elements.settingsClose.addEventListener("click", closeSettings);
+  elements.settingsTabs?.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-settings-tab]");
+    if (!button) {
+      return;
+    }
+    state.settingsPanel = button.dataset.settingsTab;
+    localStorage.setItem(SETTINGS_PANEL_KEY, state.settingsPanel);
+    renderSettingsPanels();
+    renderConsoleMode();
+  });
   elements.homeCoverInput?.addEventListener("change", handleHomeCoverUpload);
   elements.appIconInput.addEventListener("change", handleAppIconUpload);
   elements.resetAppIcon.addEventListener("click", () => {
@@ -3720,6 +3752,14 @@ function openHomeCoverPicker(franchise) {
   elements.homeCoverInput?.click();
 }
 
+function rememberViewedKit(kit) {
+  if (!kit?.kit_id) {
+    return;
+  }
+  state.recentViewed = [kit.kit_id, ...state.recentViewed.filter((id) => id !== kit.kit_id)].slice(0, 20);
+  saveRecentViewed();
+}
+
 function renderHome() {
   if (!elements.homeSection) {
     return;
@@ -3801,6 +3841,77 @@ function renderHome() {
 
     card.append(media, coverButton, body);
     elements.homeGrid.append(card);
+  }
+  renderHomeDashboard();
+}
+
+function renderHomeDashboard() {
+  renderHomeCollectionOverview();
+  renderHomeRecentViewed();
+}
+
+function renderHomeCollectionOverview() {
+  if (!elements.homeCollectionOverview) {
+    return;
+  }
+  const ownedCount = collectionIds("owned").reduce((total, kitId) => total + collectionQuantityForView(kitId, "owned"), 0);
+  const wantedCount = collectionIds("wanted").reduce((total, kitId) => total + collectionQuantityForView(kitId, "wanted"), 0);
+  elements.homeCollectionTotal.textContent = t("records", { count: ownedCount + wantedCount });
+  elements.homeCollectionOverview.innerHTML = "";
+  for (const type of COLLECTION_TYPES) {
+    const ids = collectionIds(type).filter((kitId) => displayKitById(kitId)).slice(0, 4);
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `home-collection-card is-${type}`;
+    button.addEventListener("click", () => navigateToCollectionView(type));
+    const label = document.createElement("strong");
+    label.textContent = t(type === "owned" ? "ownedList" : "wantedList");
+    const count = document.createElement("span");
+    count.textContent = t("records", { count: type === "owned" ? ownedCount : wantedCount });
+    const thumbs = document.createElement("div");
+    thumbs.className = "home-mini-thumbs";
+    for (const kitId of ids) {
+      const kit = displayKitById(kitId);
+      const slot = document.createElement("span");
+      appendImageWithFallback(slot, kit, { alt: kitShortName(kit) });
+      thumbs.append(slot);
+    }
+    if (!ids.length) {
+      const empty = document.createElement("em");
+      empty.textContent = t("homeCollectionEmpty");
+      thumbs.append(empty);
+    }
+    button.append(label, count, thumbs);
+    elements.homeCollectionOverview.append(button);
+  }
+}
+
+function renderHomeRecentViewed() {
+  if (!elements.homeRecentViewed) {
+    return;
+  }
+  elements.homeRecentViewed.innerHTML = "";
+  const kits = state.recentViewed.map(displayKitById).filter(Boolean).slice(0, 6);
+  if (!kits.length) {
+    const empty = document.createElement("div");
+    empty.className = "home-empty-note";
+    empty.textContent = t("recentViewedEmpty");
+    elements.homeRecentViewed.append(empty);
+    return;
+  }
+  for (const kit of kits) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "home-recent-item";
+    button.addEventListener("click", () => openDetail(kit));
+    const art = document.createElement("span");
+    art.className = "home-recent-art";
+    appendImageWithFallback(art, kit, { alt: kitShortName(kit) });
+    const body = document.createElement("span");
+    body.className = "home-recent-body";
+    body.innerHTML = `<strong>${escapeHtml(kitShortName(kit))}</strong><em>${escapeHtml([franchiseShortLabel(kit.franchise), seriesLabelFromKit(kit), gradeShortLabel(kit)].filter(Boolean).join(" · "))}</em>`;
+    button.append(art, body);
+    elements.homeRecentViewed.append(button);
   }
 }
 
@@ -4603,24 +4714,44 @@ function renderImageAssetSummary() {
 }
 
 function renderAndroidPackageSummary() {
+  if (!elements.androidPackageSummary) {
+    return;
+  }
   elements.androidPackageSummary.innerHTML = "";
   const status = state.androidPackage || {};
   elements.androidPackageSummary.append(
     createMarketMetric(
       t("androidPackage"),
-      status.android_project_present ? t("androidPresent") : t("androidMissing"),
-      t("androidReady", {
-        status: status.capacitor_config_present ? t("androidPresent") : t("androidMissing"),
-        android: status.android_project_present ? t("androidPresent") : t("androidMissing"),
-      }),
+      status.app_version || APP_VERSION_LABEL,
+      `${status.app_id || "com.mdefitko.gunpula"} · ${status.package_mode || "debug"}`,
+    ),
+    createMarketMetric(
+      t("androidReleaseApk"),
+      status.release_build_supported ? t("androidPresent") : t("androidMissing"),
+      t("androidReleaseReady", { status: status.release_build_supported ? t("androidPresent") : t("androidMissing") }),
     ),
   );
   const commands = document.createElement("div");
   commands.className = "market-chip-list";
-  for (const command of status.commands || ["npm run android:add", "npm run android:sync", "npm run android:build"]) {
-    const chip = document.createElement("span");
-    chip.textContent = command;
-    commands.append(chip);
+  const links = [
+    ["debug APK", status.debug_download_url],
+    ["release APK", status.release_download_url],
+  ].filter(([, url]) => url);
+  if (links.length) {
+    for (const [label, url] of links) {
+      const chip = document.createElement("a");
+      chip.href = url;
+      chip.target = "_blank";
+      chip.rel = "noreferrer";
+      chip.textContent = label;
+      commands.append(chip);
+    }
+  } else {
+    for (const command of status.commands || ["npm run android:add", "npm run android:sync", "npm run android:build"]) {
+      const chip = document.createElement("span");
+      chip.textContent = command;
+      commands.append(chip);
+    }
   }
   elements.androidPackageSummary.append(commands);
 }
@@ -5689,6 +5820,8 @@ function renderLanguageControls() {
 }
 
 function renderSettings() {
+  renderSettingsTabs();
+  renderSettingsPanels();
   elements.consoleModeToggle.checked = state.consoleMode;
   elements.showOwnedOnHome.checked = state.homeCollectionVisibility.owned;
   elements.showWantedOnHome.checked = state.homeCollectionVisibility.wanted;
@@ -5711,6 +5844,39 @@ function renderSettings() {
   renderDuplicateWorkbench();
   renderHiddenRecords();
   renderImageHealth();
+  renderAndroidPackageSummary();
+}
+
+function renderSettingsTabs() {
+  if (!elements.settingsTabs) {
+    return;
+  }
+  elements.settingsTabs.innerHTML = "";
+  const labels = {
+    account: "settingsTabAccount",
+    appearance: "settingsTabAppearance",
+    data: "settingsTabData",
+    updates: "settingsTabUpdates",
+    about: "settingsTabAbout",
+    console: "settingsTabConsole",
+  };
+  for (const panel of SETTINGS_PANELS) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.dataset.settingsTab = panel;
+    button.className = state.settingsPanel === panel ? "is-active" : "";
+    button.textContent = t(labels[panel]);
+    elements.settingsTabs.append(button);
+  }
+}
+
+function renderSettingsPanels() {
+  if (!SETTINGS_PANELS.includes(state.settingsPanel)) {
+    state.settingsPanel = "account";
+  }
+  document.querySelectorAll("[data-settings-panel]").forEach((section) => {
+    section.hidden = section.dataset.settingsPanel !== state.settingsPanel;
+  });
 }
 
 function renderAccountSection() {
@@ -5978,7 +6144,7 @@ function renderImageHealth() {
 
 function renderConsoleMode() {
   document.querySelectorAll(".console-only").forEach((node) => {
-    node.hidden = !state.consoleMode;
+    node.hidden = !state.consoleMode || node.dataset.settingsPanel !== state.settingsPanel;
   });
   elements.correctionPanel.hidden = !state.consoleMode;
   const editable = canEditSharedData();
@@ -6458,6 +6624,7 @@ function openDetail(kit, options = {}) {
   state.selectedKit = kit;
   state.activeModal = options.keepSettings ? "settings" : null;
   state.selectedImageIndex = 0;
+  rememberViewedKit(kit);
 
   ensureSearchIndex(kit.franchise || state.franchise);
   renderDetail(kit);

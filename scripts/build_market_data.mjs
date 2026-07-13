@@ -341,13 +341,19 @@ async function writeSearchSplits(records) {
 async function buildAndroidPackageStatus() {
   const capacitorConfig = await readJson("capacitor.config.json", {});
   const androidProjectPresent = await pathExists("android");
+  const appVersion = JSON.parse(await readFile(join(rootDir, "package.json"), "utf8")).version || null;
   return {
     updated_at: now,
     capacitor_config_present: Boolean(capacitorConfig?.appId),
     android_project_present: androidProjectPresent,
+    app_version: appVersion ? `v${appVersion}` : null,
     app_id: capacitorConfig?.appId || null,
     app_name: capacitorConfig?.appName || null,
     web_dir: capacitorConfig?.webDir || "app",
+    package_mode: "debug",
+    release_build_supported: Boolean(process.env.ANDROID_KEYSTORE_BASE64 && process.env.ANDROID_KEYSTORE_PASSWORD && process.env.ANDROID_KEY_ALIAS && process.env.ANDROID_KEY_PASSWORD),
+    debug_download_url: "https://github.com/mdefitko777/Gunpula/releases/download/android-latest/gunpula-debug.apk",
+    release_download_url: "https://github.com/mdefitko777/Gunpula/releases/download/android-latest/gunpula-release.apk",
     commands: androidProjectPresent ? ["npm run android:sync", "npm run android:build"] : ["npm run android:add", "npm run android:sync", "npm run android:build"],
     notes: androidProjectPresent
       ? "Android project exists; run sync and build on a machine with Android Studio/JDK."

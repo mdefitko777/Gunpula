@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#ffffff" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="application-name" content="Gunpula v1.9.1" />
-    <title>Gunpula v1.9.1</title>
+    <meta name="application-name" content="Gunpula v1.9.2" />
+    <title>Gunpula v1.9.2</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260713-v37" />
+    <link rel="stylesheet" href="./styles.css?v=20260713-v38" />
   </head>
   <body>
     <main class="catalog-page">
@@ -17,7 +17,7 @@
         <div class="top-bar">
           <div class="brand-line">
             <span class="brand-mark" id="brandMark">A</span>
-            <span id="brandVersion">v1.9.1</span>
+            <span id="brandVersion">v1.9.2</span>
           </div>
           <div class="segmented-control franchise-control" id="franchiseList" aria-label="选择作品分类"></div>
           <button class="settings-button" id="settingsOpen" type="button" aria-label="设置" data-i18n-aria="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/></svg></button>
@@ -67,12 +67,27 @@
         <div class="home-hero">
           <div>
             <p class="home-kicker" data-i18n="homeKicker">收藏图鉴</p>
-            <h1 data-i18n="homeTitle">v1.9.1</h1>
+            <h1 data-i18n="homeTitle">v1.9.2</h1>
           </div>
           <span id="homeTotal">0</span>
         </div>
         <input id="homeCoverInput" type="file" accept="image/*" hidden />
         <div class="home-grid" id="homeGrid"></div>
+        <div class="home-dashboard">
+          <section class="home-panel">
+            <div class="home-panel-head">
+              <h2 data-i18n="homeCollectionOverview">我的收藏</h2>
+              <span id="homeCollectionTotal">0</span>
+            </div>
+            <div class="home-collection-overview" id="homeCollectionOverview"></div>
+          </section>
+          <section class="home-panel">
+            <div class="home-panel-head">
+              <h2 data-i18n="recentViewed">最近查看</h2>
+            </div>
+            <div class="home-recent-list" id="homeRecentViewed"></div>
+          </section>
+        </div>
       </section>
 
       <section class="updates-section" id="updatesSection" hidden>
@@ -275,11 +290,12 @@
         <button class="dialog-close settings-close" id="settingsClose" type="button" aria-label="关闭设置" data-i18n-aria="closeSettings">×</button>
         <h2 id="settingsTitle" data-i18n="settings">设置</h2>
         <p id="datasetSummary">Loading catalog...</p>
-        <section class="settings-section">
+        <nav class="settings-tabs" id="settingsTabs" aria-label="设置分类"></nav>
+        <section class="settings-section" data-settings-panel="appearance">
           <h3 data-i18n="language">语言</h3>
           <div class="segmented-control language-control" id="languageList" aria-label="选择语言"></div>
         </section>
-        <section class="settings-section">
+        <section class="settings-section" data-settings-panel="appearance">
           <h3 data-i18n="appearance">外观</h3>
           <div class="segmented-control theme-control" id="themeList" aria-label="选择主题"></div>
           <div class="icon-setting-row">
@@ -290,7 +306,7 @@
             <button class="secondary-button compact-button" id="resetAppIcon" type="button" data-i18n="resetAppIcon">恢复默认</button>
           </div>
         </section>
-        <section class="settings-section">
+        <section class="settings-section" data-settings-panel="appearance">
           <h3 data-i18n="homeDisplay">主页显示</h3>
           <label class="toggle-row">
             <span data-i18n="showOwnedOnHome">主页显示已购买</span>
@@ -301,7 +317,7 @@
             <input id="showWantedOnHome" type="checkbox" />
           </label>
         </section>
-        <section class="settings-section sync-section">
+        <section class="settings-section sync-section" data-settings-panel="account">
           <div class="settings-section-head">
             <h3 data-i18n="accountSync">账号与同步</h3>
             <span class="sync-state" id="syncState"><span class="sync-dot"></span><span id="syncStatusText">本地模式</span></span>
@@ -392,7 +408,7 @@
           </details>
           <button class="install-button" id="installApp" type="button" hidden data-i18n="installApp">安装到手机</button>
         </section>
-        <section class="settings-section">
+        <section class="settings-section" data-settings-panel="data">
           <h3 data-i18n="dataBackup">数据备份</h3>
           <div class="sync-actions">
             <button id="exportBackup" type="button" data-i18n="exportBackup">导出收藏备份</button>
@@ -401,7 +417,7 @@
           <p class="settings-hint" id="backupStatus" data-i18n="backupHint">备份包含收藏、手动更正和外观设置，建议在迁移或换设备前导出一份。</p>
           <input id="importBackupInput" type="file" accept="application/json,.json" hidden />
         </section>
-        <section class="settings-section">
+        <section class="settings-section" data-settings-panel="data">
           <div class="settings-section-head">
             <h3 data-i18n="duplicateWorkbench">疑似重复</h3>
             <span id="duplicateSummary"></span>
@@ -409,7 +425,7 @@
           <div class="duplicate-workbench" id="duplicateWorkbench"></div>
           <div class="hidden-records" id="hiddenRecords"></div>
         </section>
-        <section class="settings-section">
+        <section class="settings-section" data-settings-panel="data">
           <h3 data-i18n="dataFetch">数据抓取</h3>
           <label class="icon-upload">
             <span data-i18n="githubToken">GitHub Token</span>
@@ -424,7 +440,7 @@
             <span id="manualFetchStatus" data-i18n="manualFetchHint">触发云端抓取全部来源（目录 / 市场价 / 更新），约 10 分钟后刷新查看。</span>
           </div>
         </section>
-        <section class="settings-section">
+        <section class="settings-section" data-settings-panel="updates">
           <div class="settings-section-head">
             <h3 data-i18n="appUpdate">应用更新</h3>
           </div>
@@ -439,7 +455,12 @@
           <p class="settings-hint" id="updateNotificationStatus" data-i18n="updateNotificationHint">开启后，应用打开时会提醒新数据；SEED / 00 会优先提示。</p>
           <div class="notification-rules" id="notificationRules"></div>
         </section>
-        <section class="settings-section app-health-section console-only" hidden>
+        <section class="settings-section" data-settings-panel="about">
+          <h3 data-i18n="aboutApp">版本与安装</h3>
+          <div class="android-package-summary" id="androidPackageSummary"></div>
+          <p class="settings-hint" data-i18n="androidReleaseHint">当前固定提供 debug APK；配置正式签名后会自动额外生成 release APK。</p>
+        </section>
+        <section class="settings-section app-health-section console-only" data-settings-panel="console" hidden>
           <h3 data-i18n="appHealth">最大问题</h3>
           <ul class="issue-list">
             <li><span data-i18n="issueInstall">安卓安装</span><strong data-i18n="issueInstallStatus">已支持 PWA</strong></li>
@@ -449,30 +470,30 @@
             <li><span data-i18n="issueConflict">冲突处理</span><strong data-i18n="issueConflictStatus">后同步覆盖，显示最后修改</strong></li>
           </ul>
         </section>
-        <section class="settings-section console-only" hidden>
+        <section class="settings-section console-only" data-settings-panel="console" hidden>
           <h3 data-i18n="updateLog">更新记录</h3>
           <div class="update-log" id="updateLog"></div>
         </section>
-        <section class="settings-section console-only" hidden>
+        <section class="settings-section console-only" data-settings-panel="console" hidden>
           <h3 data-i18n="sourceHealth">来源健康</h3>
           <div class="source-health-log" id="sourceHealthLog"></div>
         </section>
-        <section class="settings-section console-only" hidden>
+        <section class="settings-section console-only" data-settings-panel="console" hidden>
           <h3 data-i18n="reviewWorkbench">待确认工作台</h3>
           <div class="review-workbench" id="reviewWorkbench"></div>
         </section>
-        <section class="settings-section console-only" hidden>
+        <section class="settings-section console-only" data-settings-panel="console" hidden>
           <h3 data-i18n="imageHealth">图片健康</h3>
           <div class="update-log" id="imageHealthLog"></div>
         </section>
-        <section class="settings-section">
+        <section class="settings-section" data-settings-panel="console">
           <label class="toggle-row">
             <span data-i18n="consoleMode">控制台模式</span>
             <input id="consoleModeToggle" type="checkbox" />
           </label>
         </section>
-        <p class="settings-hint app-version-label" id="appVersionLabel">Gunpula App v1.9.1</p>
-        <section class="settings-section console-only" id="seriesAdminPanel" hidden>
+        <p class="settings-hint app-version-label" id="appVersionLabel">Gunpula App v1.9.2</p>
+        <section class="settings-section console-only" id="seriesAdminPanel" data-settings-panel="console" hidden>
           <div class="settings-section-head">
             <h3 data-i18n="seriesAdmin">系列名称</h3>
             <span id="seriesAdminSummary">当前分类 · 当前语言</span>
@@ -507,6 +528,6 @@
       <div class="radial-labels"></div>
     </div>
 
-    <script type="module" src="./main.js?v=20260713-v37"></script>
+    <script type="module" src="./main.js?v=20260713-v38"></script>
   </body>
 </html>

@@ -870,6 +870,166 @@ h1 {
   font-weight: 400;
 }
 
+.home-dashboard {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.home-panel {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel);
+}
+
+.home-panel-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.home-panel-head h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.home-panel-head span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.home-collection-overview {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.home-collection-card {
+  min-width: 0;
+  display: grid;
+  gap: 7px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--soft);
+  color: var(--ink);
+  text-align: left;
+}
+
+.home-collection-card:hover,
+.home-collection-card:focus-visible,
+.home-recent-item:hover,
+.home-recent-item:focus-visible {
+  border-color: var(--accent);
+  outline: 0;
+}
+
+.home-collection-card strong {
+  font-size: 14px;
+}
+
+.home-collection-card > span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.home-mini-thumbs {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.home-mini-thumbs span {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.home-mini-thumbs img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-mini-thumbs em,
+.home-empty-note {
+  color: var(--muted);
+  font-size: 12px;
+  font-style: normal;
+}
+
+.home-recent-list {
+  display: grid;
+  gap: 7px;
+}
+
+.home-recent-item {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 9px;
+  align-items: center;
+  padding: 7px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: var(--soft);
+  color: var(--ink);
+  text-align: left;
+}
+
+.home-recent-art {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 9px;
+  background: #ffffff;
+}
+
+.home-recent-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-recent-body {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.home-recent-body strong,
+.home-recent-body em {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-recent-body strong {
+  font-size: 13px;
+}
+
+.home-recent-body em {
+  color: var(--muted);
+  font-size: 11.5px;
+  font-style: normal;
+}
+
 .updates-section,
 .pbandai-section,
 .market-section {
@@ -1835,6 +1995,47 @@ body[data-view="market"] .top-bar {
   line-height: 1.35;
 }
 
+.settings-tabs {
+  position: sticky;
+  top: -24px;
+  z-index: 2;
+  display: flex;
+  gap: 6px;
+  margin: 14px -24px 0;
+  padding: 10px 24px;
+  overflow-x: auto;
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid var(--line);
+}
+
+.settings-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.settings-tabs button {
+  min-height: 34px;
+  padding: 0 13px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.settings-tabs button.is-active {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #ffffff;
+}
+
+.settings-tabs button:hover,
+.settings-tabs button:focus-visible {
+  border-color: var(--accent);
+  outline: 0;
+}
+
 .settings-close {
   top: 12px;
   right: 12px;
@@ -2302,6 +2503,29 @@ body[data-view="market"] .top-bar {
   padding: 10px 2px 0;
   text-align: center;
   font-weight: 500;
+}
+
+.android-package-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.android-package-summary .market-chip-list {
+  grid-column: 1 / -1;
+}
+
+.market-chip-list a {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--ink);
+  text-decoration: none;
 }
 
 .install-button {
@@ -3341,6 +3565,14 @@ body.is-radial-active {
     height: 136px;
   }
 
+  .home-dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .home-panel {
+    padding: 12px;
+  }
+
   .home-hero {
     min-height: 84px;
     padding: 14px;
@@ -3523,6 +3755,16 @@ body.is-radial-active {
     max-height: 100dvh;
     border-radius: 0;
     padding: 20px 16px 16px;
+  }
+
+  .settings-tabs {
+    top: -20px;
+    margin: 14px -16px 0;
+    padding: 9px 16px;
+  }
+
+  .android-package-summary {
+    grid-template-columns: 1fr;
   }
 }
 

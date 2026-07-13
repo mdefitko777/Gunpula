@@ -11,6 +11,7 @@ on:
       - ".github/workflows/android-apk.yml"
       - "scripts/prepare_android_www.mjs"
       - "capacitor.config.json"
+      - "package.json"
 
 permissions:
   contents: write
@@ -23,6 +24,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    env:
+      HAS_RELEASE_SIGNING: ${{ secrets.ANDROID_KEYSTORE_BASE64 != '' && secrets.ANDROID_KEYSTORE_PASSWORD != '' && secrets.ANDROID_KEY_ALIAS != '' && secrets.ANDROID_KEY_PASSWORD != '' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -56,16 +59,71 @@ jobs:
       - name: Collect APK
         run: cp android/app/build/outputs/apk/debug/app-debug.apk gunpula-debug.apk
 
+      - name: Configure release signing
+        if: env.HAS_RELEASE_SIGNING == 'true'
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > android/release.keystore
+          printf '%s\n' \
+            "storeFile=release.keystore" \
+            "storePassword=$ANDROID_KEYSTORE_PASSWORD" \
+            "keyAlias=$ANDROID_KEY_ALIAS" \
+            "keyPassword=$ANDROID_KEY_PASSWORD" \
+            > android/signing.properties
+          node <<'NODE'
+          const fs = require("fs");
+          const path = "android/app/build.gradle";
+          let text = fs.readFileSync(path, "utf8");
+          if (!text.includes("gunpulaSigningProps")) {
+            text = `def gunpulaSigningProps = new Properties()
+def gunpulaSigningFile = rootProject.file("signing.properties")
+if (gunpulaSigningFile.exists()) {
+    gunpulaSigningProps.load(new FileInputStream(gunpulaSigningFile))
+}
+
+` + text;
+            text = text.replace(/android\s*\{/, `android {
+    signingConfigs {
+        release {
+            storeFile file(gunpulaSigningProps["storeFile"] ?: "release.keystore")
+            storePassword gunpulaSigningProps["storePassword"]
+            keyAlias gunpulaSigningProps["keyAlias"]
+            keyPassword gunpulaSigningProps["keyPassword"]
+        }
+    }`);
+            text = text.replace(/release\s*\{/, `release {
+            signingConfig signingConfigs.release`);
+          }
+          fs.writeFileSync(path, text);
+          NODE
+
+      - name: Build signed release APK
+        if: env.HAS_RELEASE_SIGNING == 'true'
+        run: |
+          cd android
+          ./gradlew assembleRelease --no-daemon
+          cp app/build/outputs/apk/release/app-release.apk ../gunpula-release.apk
+
       - uses: actions/upload-artifact@v4
         with:
-          name: gunpula-debug-apk
-          path: gunpula-debug.apk
+          name: gunpula-android-apk
+          path: |
+            gunpula-debug.apk
+            gunpula-release.apk
+          if-no-files-found: ignore
 
       - name: Publish APK to the android-latest release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release view android-latest >/dev/null 2>&1 || \
-            gh release create android-latest --title "Android APK (debug)" \
-              --notes "Latest debug APK built from main. Download gunpula-debug.apk and install it directly (allow unknown sources)."
+            gh release create android-latest --title "Android APK" \
+              --notes "Latest APK built from main. gunpula-debug.apk is always published; gunpula-release.apk appears when release signing secrets are configured."
           gh release upload android-latest gunpula-debug.apk --clobber
+          if [ -f gunpula-release.apk ]; then
+            gh release upload android-latest gunpula-release.apk --clobber
+          fi
