@@ -40,8 +40,9 @@ const SYNC_HISTORY_LIMIT = 20;
 const KIT_RENDER_BATCH = 160;
 const RECENT_UPDATE_DAYS = 3;
 const UPDATES_MODE_KEY = "gunpula-updates-mode-v1";
-const RADIAL_HOLD_MS = 4000;
-const RADIAL_CANCEL_DISTANCE = 34;
+const RADIAL_HOLD_MS = 850;
+const RADIAL_SCROLL_CANCEL_DISTANCE = 10;
+const RADIAL_CANCEL_DISTANCE = 18;
 const RADIAL_SELECT_DISTANCE = 28;
 const PAGER_START_DISTANCE = 18;
 const PAGER_THRESHOLD_RATIO = 0.28;
@@ -2121,8 +2122,13 @@ function moveTouchGesture(event) {
     if (event.cancelable) event.preventDefault();
     return;
   }
-  // Any real movement (either axis) is a scroll or swipe, not a hold:
-  // cancel the pending long-press so the radial ring never pops mid-drag.
+  // Vertical movement should stay a normal page scroll. The radial menu only
+  // arms while the finger is nearly still, then takes over after it appears.
+  if (absY > RADIAL_SCROLL_CANCEL_DISTANCE && absY > absX * 1.15) {
+    cancelRadialPress();
+    return;
+  }
+  // Any real movement (either axis) is a scroll or swipe, not a hold.
   if (absX > RADIAL_CANCEL_DISTANCE || absY > RADIAL_CANCEL_DISTANCE) {
     cancelRadialPress();
   }
