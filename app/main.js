@@ -1573,7 +1573,7 @@ function recordSyncHistory(reason, remote = null) {
 }
 
 function refreshKits() {
-  state.kits = state.rawKits.map((kit) => applyOverride(kit));
+  state.kits = state.rawKits.map((kit) => applyOverride(kit)).filter((kit) => kit.data_status !== "hidden");
 }
 
 function rawSeriesTemplateByKey(key) {
@@ -5705,22 +5705,48 @@ function renderDuplicateWorkbench() {
     const list = document.createElement("div");
     list.className = "duplicate-list";
     for (const kit of group.kits.slice(0, 6)) {
+      const row = document.createElement("div");
+      row.className = "duplicate-item-row";
       const button = document.createElement("button");
       button.type = "button";
       button.className = "duplicate-item";
       button.innerHTML = `<strong>${escapeHtml(kitShortName(kit))}</strong><span>${escapeHtml([franchiseLabel(kit.franchise), seriesLabelFromKit(kit), kit.grade_code, kit.release_date].filter(Boolean).join(" · "))}</span>`;
-      button.addEventListener("click", () => {
-        state.selectedKit = kit;
-        renderDetail(kit);
-        if (!elements.detailDialog.open) {
-          elements.detailDialog.showModal();
-        }
-      });
-      list.append(button);
+      button.addEventListener("click", () => openDetail(kit, { keepSettings: true }));
+      const deleteButton = document.createElement("button");
+      deleteButton.type = "button";
+      deleteButton.className = "duplicate-delete";
+      deleteButton.textContent = t("deleteDuplicateCandidate");
+      deleteButton.addEventListener("click", () => hideDuplicateCandidate(kit));
+      row.append(button, deleteButton);
+      list.append(row);
     }
     panel.append(head, list);
     elements.duplicateWorkbench.append(panel);
   }
+}
+
+function hideDuplicateCandidate(kit) {
+  if (!canEditSharedData()) {
+    setSyncStatus("readonly", t("readOnlyHint"));
+    return;
+  }
+  if (!window.confirm(t("deleteDuplicateConfirm", { name: kitShortName(kit) }))) {
+    return;
+  }
+  state.overrides[kit.kit_id] = {
+    ...(state.overrides[kit.kit_id] || {}),
+    data_status: "hidden",
+    hidden_at: new Date().toISOString(),
+    hidden_by: memberName(),
+    updated_at: new Date().toISOString(),
+  };
+  saveOverrides();
+  if (state.selectedKit?.kit_id === kit.kit_id) {
+    closeDetail({ navigate: false });
+  }
+  refreshKits();
+  render();
+  setSyncStatus("saving", t("duplicateDeleted"));
 }
 
 function renderSyncStatus() {
@@ -6261,9 +6287,9 @@ function renderKits() {
   }
 }
 
-function openDetail(kit) {
+function openDetail(kit, options = {}) {
   state.selectedKit = kit;
-  state.activeModal = null;
+  state.activeModal = options.keepSettings ? "settings" : null;
   state.selectedImageIndex = 0;
 
   ensureSearchIndex();

@@ -2150,6 +2150,13 @@ body[data-view="market"] .top-bar {
   gap: 6px;
 }
 
+.duplicate-item-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px;
+  align-items: stretch;
+}
+
 .duplicate-item {
   display: grid;
   gap: 2px;
@@ -2181,6 +2188,33 @@ body[data-view="market"] .top-bar {
 .duplicate-item:focus-visible {
   background: #ffffff;
   outline: 1px solid var(--accent);
+}
+
+.duplicate-delete {
+  min-width: 58px;
+  padding: 0 10px;
+  border: 1px solid rgba(182, 70, 48, 0.28);
+  border-radius: 8px;
+  background: rgba(182, 70, 48, 0.08);
+  color: #9f3c2c;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.duplicate-delete:hover,
+.duplicate-delete:focus-visible {
+  background: rgba(182, 70, 48, 0.14);
+  outline: 1px solid rgba(182, 70, 48, 0.34);
+}
+
+@media (max-width: 520px) {
+  .duplicate-item-row {
+    grid-template-columns: 1fr;
+  }
+
+  .duplicate-delete {
+    min-height: 34px;
+  }
 }
 
 .legacy-sync {
