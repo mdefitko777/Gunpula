@@ -63,6 +63,7 @@ const CHECKS = [
     message: "SEED / DESTINY / FREEDOM related name is outside the SEED bucket.",
     test: (kit, text) =>
       kit.series?.key !== "seed" &&
+      kit.series?.key !== "build" &&
       kit.series?.key !== "sangoku" &&
       /SEED\s*(DESTINY|FREEDOM|ASTRAY)?|DESTINY\s+GUNDAM|STRIKE\s+FREEDOM|STARGAZER|スターゲイザー|ストライクフリーダム|デスティニーガンダム|アストレイ|インパルスガンダム/i.test(text),
   },
@@ -72,6 +73,7 @@ const CHECKS = [
     message: "00 related name is outside the 00 bucket.",
     test: (kit, text) =>
       kit.series?.key !== "double_o" &&
+      kit.series?.key !== "build" &&
       kit.series?.key !== "sangoku" &&
       /ダブルオー|00ガンダム|エクシア|デュナメス|キュリオス|ヴァーチェ|クアンタ|アストレア|スローネ|ELSクアンタ|GUNDAM\s+00|EXIA|DYNAMES|KYRIOS|VIRTUE|QAN\[T\]|QANT/i.test(text),
   },

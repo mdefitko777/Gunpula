@@ -10,8 +10,8 @@ function keyFor(kit) {
   return [kit.franchise, kit.grade_code, nameFor(kit)]
     .join(" ")
     .toLowerCase()
-    .replace(/【[^】]+】|\[[^\]]+\]|\([^)]*\)/g, " ")
-    .replace(/\b(ver|version|clear|color|limited|special|edition|metallic|gloss|coating|reissue)\b/g, " ")
+    .replace(/[【】\[\]()]/g, " ")
+    .replace(/\b(ver|version)\b/g, " ")
     .replace(/[^\p{L}\p{N}]+/gu, " ")
     .trim();
 }

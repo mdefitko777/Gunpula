@@ -12,6 +12,7 @@ const DATA = {
   autoListings: "data/market_auto_listings.json",
   keywordOverrides: "data/market_keyword_overrides.json",
   searchIndex: "data/search-index.json",
+  searchManifest: "data/search/manifest.json",
   exchangeRates: "data/exchange-rates.json",
   marketPrices: "data/market-prices.json",
   imageAssets: "data/image-assets.json",
@@ -111,7 +112,7 @@ function buildKitKeywords(kit, overrides) {
     keywords: include,
     negative_keywords: exclude,
     queries: querySeeds,
-    search_blob: normalize([kit.kit_id, ...include, ...exclude].join(" ")),
+    search_blob: normalize([kit.kit_id, ...include].join(" ")),
   };
 }
 
@@ -311,6 +312,32 @@ function marketSummary({ sources, listings, byKit, rates, searchIndex, imageAsse
   };
 }
 
+async function writeSearchSplits(records) {
+  const groups = new Map();
+  for (const record of records.map((item) => ({
+    kit_id: item.kit_id,
+    franchise: item.franchise,
+    series_key: item.series_key,
+    product_line: item.product_line,
+    display_name: item.display_name,
+    queries: item.queries,
+    search_blob: item.search_blob,
+  }))) {
+    const franchise = String(record.franchise || "unknown");
+    groups.set(franchise, [...(groups.get(franchise) || []), record]);
+  }
+  const manifest = {
+    schema_version: 1,
+    updated_at: now,
+    total: records.length,
+    franchises: Object.fromEntries([...groups.entries()].map(([franchise, items]) => [franchise, items.length])),
+  };
+  await writeJson(DATA.searchManifest, manifest);
+  for (const [franchise, items] of groups) {
+    await writeJson(`data/search/search-${franchise}.json`, { schema_version: 1, updated_at: now, franchise, records: items });
+  }
+}
+
 async function buildAndroidPackageStatus() {
   const capacitorConfig = await readJson("capacitor.config.json", {});
   const androidProjectPresent = await pathExists("android");
@@ -356,6 +383,7 @@ const marketPrices = {
 
 await writeJson(DATA.exchangeRates, rates);
 await writeJson(DATA.searchIndex, { schema_version: 1, updated_at: now, records: searchIndex });
+await writeSearchSplits(searchIndex);
 await writeJson(DATA.imageAssets, imageAssets);
 await writeJson(DATA.androidPackage, androidPackage);
 await writeJson(DATA.marketPrices, marketPrices);

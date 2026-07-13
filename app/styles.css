@@ -2207,12 +2207,42 @@ body[data-view="market"] .top-bar {
   outline: 1px solid rgba(182, 70, 48, 0.34);
 }
 
+.hidden-records {
+  display: grid;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.hidden-records-title {
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.duplicate-restore {
+  min-width: 58px;
+  padding: 0 10px;
+  border: 1px solid rgba(44, 126, 103, 0.28);
+  border-radius: 8px;
+  background: rgba(44, 126, 103, 0.08);
+  color: #27745d;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.duplicate-restore:hover,
+.duplicate-restore:focus-visible {
+  background: rgba(44, 126, 103, 0.14);
+  outline: 1px solid rgba(44, 126, 103, 0.34);
+}
+
 @media (max-width: 520px) {
   .duplicate-item-row {
     grid-template-columns: 1fr;
   }
 
-  .duplicate-delete {
+  .duplicate-delete,
+  .duplicate-restore {
     min-height: 34px;
   }
 }

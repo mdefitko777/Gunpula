@@ -51,6 +51,7 @@ const PAGER_ANIMATION_MS = 220;
 const APP_VERSION_LABEL = "v1.9.1";
 
 const COLLECTION_TYPES = ["owned", "wanted"];
+const COLLECTION_ENTRY_STATUSES = [...COLLECTION_TYPES, "deleted"];
 const THEMES = [
   { code: "atlas", label: { zh: "默认", ko: "기본", en: "Default", ja: "デフォルト" } },
   { code: "classic", label: { zh: "经典", ko: "클래식", en: "Classic", ja: "クラシック" } },
@@ -560,6 +561,7 @@ const state = {
   marketPrices: null,
   searchIndex: null,
   searchIndexByKit: new Map(),
+  loadedSearchFranchises: new Set(),
   imageAssets: null,
   androidPackage: null,
   overrides: {},
@@ -694,6 +696,7 @@ const elements = {
   reviewWorkbench: document.querySelector("#reviewWorkbench"),
   duplicateSummary: document.querySelector("#duplicateSummary"),
   duplicateWorkbench: document.querySelector("#duplicateWorkbench"),
+  hiddenRecords: document.querySelector("#hiddenRecords"),
   updatesSection: document.querySelector("#updatesSection"),
   updatesSubtitle: document.querySelector("#updatesSubtitle"),
   updatesOpenSettings: document.querySelector("#updatesOpenSettings"),
@@ -887,7 +890,7 @@ async function loadOptionalJson(path) {
 // after first render. Falls back to the monolithic kits.json when split files
 // are unavailable (e.g. older deployments or partial offline caches).
 let catalogCompletion = null;
-let searchIndexPromise = null;
+const searchIndexPromises = new Map();
 
 async function loadInitialKitsDoc() {
   const manifest = await loadOptionalJson("../data/split/manifest.json");
@@ -923,26 +926,58 @@ function completeCatalogInBackground(pendingFranchises) {
   });
 }
 
-function ensureSearchIndex() {
-  if (!searchIndexPromise) {
-    searchIndexPromise = loadOptionalJson("../data/search-index.json").then((doc) => {
-      if (!doc) {
-        searchIndexPromise = null;
-        return null;
-      }
-      state.searchIndex = doc;
-      state.searchIndexByKit = new Map((doc.records || []).map((record) => [record.kit_id, record]));
-      if (state.query.trim()) {
-        renderKits();
-      }
-      if (state.selectedKit && elements.detailDialog.open) {
-        renderDetailMarketPanel(state.selectedKit);
-      }
-      renderMarketCenter();
-      return doc;
-    });
+function ingestSearchIndex(doc, franchise = null) {
+  const records = doc?.records || [];
+  if (!state.searchIndex) {
+    state.searchIndex = { schema_version: 1, updated_at: doc?.updated_at || null, records: [] };
   }
-  return searchIndexPromise;
+  const byId = new Map((state.searchIndex.records || []).map((record) => [record.kit_id, record]));
+  for (const record of records) {
+    byId.set(record.kit_id, record);
+    state.searchIndexByKit.set(record.kit_id, record);
+  }
+  state.searchIndex.records = [...byId.values()];
+  state.searchIndex.updated_at = doc?.updated_at || state.searchIndex.updated_at;
+  if (franchise) {
+    state.loadedSearchFranchises.add(franchise);
+  }
+}
+
+function ensureSearchIndex(franchise = state.franchise) {
+  if (franchise && state.loadedSearchFranchises.has(franchise)) {
+    return Promise.resolve(state.searchIndex);
+  }
+  const key = franchise || "all";
+  if (!searchIndexPromises.has(key)) {
+    const promise = loadOptionalJson(franchise ? `../data/search/search-${franchise}.json` : "../data/search-index.json")
+      .then(async (doc) => {
+        const nextDoc = doc?.records ? doc : await loadOptionalJson("../data/search-index.json");
+        if (!nextDoc?.records) {
+          searchIndexPromises.delete(key);
+          return null;
+        }
+        ingestSearchIndex(nextDoc, doc?.records ? franchise : null);
+        if (!doc?.records) {
+          for (const item of FRANCHISES) {
+            state.loadedSearchFranchises.add(item);
+          }
+        }
+        if (state.query.trim()) {
+          renderKits();
+        }
+        if (state.selectedKit && elements.detailDialog.open) {
+          renderDetailMarketPanel(state.selectedKit);
+        }
+        renderMarketCenter();
+        return state.searchIndex;
+      })
+      .catch(() => {
+        searchIndexPromises.delete(key);
+        return null;
+      });
+    searchIndexPromises.set(key, promise);
+  }
+  return searchIndexPromises.get(key);
 }
 
 function normalizeFilterStateValue(value) {
@@ -1156,7 +1191,7 @@ async function init() {
     loadInitialKitsDoc(),
     loadJson("../data/sources.json"),
     loadOptionalJson("../data/image-health.json"),
-    loadOptionalJson("../data/update-feed.json"),
+    loadOptionalJson("../data/update-feed-lite.json").then((doc) => doc || loadOptionalJson("../data/update-feed.json")),
     loadOptionalJson("../data/pbandai.json"),
     loadOptionalJson("../data/source-health.json"),
     loadOptionalJson("../data/series-audit.json"),
@@ -1424,7 +1459,7 @@ function normalizeCollection(collection = {}) {
       continue;
     }
     for (const [kitId, entry] of Object.entries(memberMap)) {
-      if (!entry?.status || !COLLECTION_TYPES.includes(entry.status)) {
+      if (!entry?.status || !COLLECTION_ENTRY_STATUSES.includes(entry.status)) {
         continue;
       }
       const normalizedEntry = normalizeCollectionEntry(entry, now, memberKey);
@@ -1455,7 +1490,7 @@ function safeMemberName(value) {
 
 function normalizeCollectionEntry(entry, now = new Date().toISOString(), member = "member") {
   const normalized = {
-    status: COLLECTION_TYPES.includes(entry.status) ? entry.status : "wanted",
+    status: COLLECTION_ENTRY_STATUSES.includes(entry.status) ? entry.status : "wanted",
     updated_at: entry.updated_at || now,
     updated_by: entry.updated_by || member,
     quantity: clampCollectionQuantity(entry.quantity ?? entry.wanted_quantity ?? 1),
@@ -2738,6 +2773,64 @@ function cloudPayload() {
   };
 }
 
+function timestampMs(...values) {
+  for (const value of values) {
+    const time = Date.parse(value || "");
+    if (Number.isFinite(time)) {
+      return time;
+    }
+  }
+  return 0;
+}
+
+function newerByTimestamp(left, right, fields = ["updated_at"]) {
+  const leftTime = timestampMs(...fields.map((field) => left?.[field]));
+  const rightTime = timestampMs(...fields.map((field) => right?.[field]));
+  return leftTime >= rightTime ? left : right;
+}
+
+function mergeCollectionState(localCollection, remoteCollection) {
+  const local = normalizeCollection(localCollection || {});
+  const remote = normalizeCollection(remoteCollection || {});
+  const merged = { member_items: {} };
+  const members = new Set([...Object.keys(local.member_items || {}), ...Object.keys(remote.member_items || {})]);
+  for (const member of members) {
+    const kitIds = new Set([...Object.keys(local.member_items?.[member] || {}), ...Object.keys(remote.member_items?.[member] || {})]);
+    for (const kitId of kitIds) {
+      const next = newerByTimestamp(local.member_items?.[member]?.[kitId], remote.member_items?.[member]?.[kitId]);
+      if (!next) {
+        continue;
+      }
+      merged.member_items[member] = merged.member_items[member] || {};
+      merged.member_items[member][kitId] = next;
+    }
+  }
+  return normalizeCollection(merged);
+}
+
+function mergeTimestampedMap(localMap = {}, remoteMap = {}) {
+  const merged = {};
+  for (const key of new Set([...Object.keys(localMap || {}), ...Object.keys(remoteMap || {})])) {
+    const next = newerByTimestamp(localMap?.[key], remoteMap?.[key], ["updated_at", "hidden_at", "reviewed_at"]);
+    if (next && Object.keys(next).length) {
+      merged[key] = next;
+    }
+  }
+  return merged;
+}
+
+function mergeCloudPayload(localPayload, remotePayload = {}) {
+  return {
+    ...remotePayload,
+    collection: mergeCollectionState(localPayload.collection, remotePayload.collection),
+    overrides: mergeTimestampedMap(localPayload.overrides, remotePayload.overrides),
+    series_label_overrides: {
+      ...(remotePayload.series_label_overrides || {}),
+      ...(localPayload.series_label_overrides || {}),
+    },
+  };
+}
+
 function normalizeCloudState(result) {
   if (!result) {
     return null;
@@ -2892,23 +2985,26 @@ function applyRemoteState(remote, options = {}) {
   if (!remote) {
     return;
   }
+  const localPayload = cloudPayload();
+  const payload = options.skipSave ? remote.payload || {} : mergeCloudPayload(localPayload, remote.payload || {});
+  const shouldPushMerged = !options.skipSave && JSON.stringify(payload) !== JSON.stringify(remote.payload || {});
   if (!options.skipHistory && remote.revision !== state.syncMeta.revision) {
     recordSyncHistory("before-remote-apply", remote);
   }
   state.sync.suppress = true;
-  state.collection = normalizeCollection(remote.payload?.collection || {});
-  state.overrides = remote.payload?.overrides && typeof remote.payload.overrides === "object" ? remote.payload.overrides : {};
+  state.collection = normalizeCollection(payload.collection || {});
+  state.overrides = payload.overrides && typeof payload.overrides === "object" ? payload.overrides : {};
   state.seriesLabelOverrides =
-    remote.payload?.series_label_overrides && typeof remote.payload.series_label_overrides === "object"
-      ? remote.payload.series_label_overrides
+    payload.series_label_overrides && typeof payload.series_label_overrides === "object"
+      ? payload.series_label_overrides
       : {};
-  if (remote.payload?.appearance && typeof remote.payload.appearance === "object") {
-    const nextTheme = remote.payload.appearance.theme;
+  if (payload.appearance && typeof payload.appearance === "object") {
+    const nextTheme = payload.appearance.theme;
     if (THEMES.some((theme) => theme.code === nextTheme)) {
       state.theme = nextTheme;
     }
-    state.appIcon = String(remote.payload.appearance.app_icon || "");
-    state.homeCovers = normalizeHomeCovers(remote.payload.appearance.home_covers);
+    state.appIcon = String(payload.appearance.app_icon || "");
+    state.homeCovers = normalizeHomeCovers(payload.appearance.home_covers);
     saveAppearance({ skipSync: true });
   }
   state.syncMeta = {
@@ -2930,6 +3026,9 @@ function applyRemoteState(remote, options = {}) {
       state.selectedKit = displayKitById(state.selectedKit.kit_id);
       renderDetail(state.selectedKit);
     }
+  }
+  if (shouldPushMerged && state.sync.canEdit) {
+    scheduleCloudSave("merge-remote");
   }
 }
 
@@ -3722,8 +3821,8 @@ function duplicateKeyForKit(kit) {
   return [kit.franchise, kit.grade_code, kit.names?.ja || kit.names?.en || kit.kit_id]
     .join(" ")
     .toLowerCase()
-    .replace(/【[^】]+】|\[[^\]]+\]|\([^)]*\)/g, " ")
-    .replace(/\b(ver|version|clear|color|limited|special|edition|metallic|gloss|coating)\b/g, " ")
+    .replace(/[【】\[\]()]/g, " ")
+    .replace(/\b(ver|version)\b/g, " ")
     .replace(/[^\p{L}\p{N}]+/gu, " ")
     .trim();
 }
@@ -5191,11 +5290,12 @@ function removeCollectionItems(type, kitIds) {
   const member = activeCollectionMember();
   const targetMembers = member === "all" ? collectionMembers() : [member];
   const nextMemberItems = { ...(state.collection.member_items || {}) };
+  const now = new Date().toISOString();
   for (const targetMember of targetMembers) {
     const nextItems = { ...(nextMemberItems[targetMember] || {}) };
     for (const kitId of deleteSet) {
       if (nextItems[kitId]?.status === type) {
-        delete nextItems[kitId];
+        nextItems[kitId] = { ...nextItems[kitId], status: "deleted", updated_at: now, updated_by: editableCollectionMember() };
       }
       if (state.collection.items?.[kitId]?.status === type) {
         delete state.collection.items[kitId];
@@ -5436,7 +5536,12 @@ function toggleKitCollection(type) {
 
   const targetMember = preferredCollectionMemberForKit(kit.kit_id, type);
   if (collectionEntry(kit.kit_id, targetMember)?.status === type) {
-    delete memberCollectionMap(targetMember)[kit.kit_id];
+    memberCollectionMap(targetMember)[kit.kit_id] = {
+      ...collectionEntry(kit.kit_id, targetMember),
+      status: "deleted",
+      updated_at: new Date().toISOString(),
+      updated_by: editableCollectionMember(),
+    };
   } else {
     const member = editableCollectionMember();
     const nextEntry = {
@@ -5604,6 +5709,7 @@ function renderSettings() {
   renderSourceHealth();
   renderReviewWorkbench();
   renderDuplicateWorkbench();
+  renderHiddenRecords();
   renderImageHealth();
 }
 
@@ -5747,6 +5853,67 @@ function hideDuplicateCandidate(kit) {
   refreshKits();
   render();
   setSyncStatus("saving", t("duplicateDeleted"));
+}
+
+function hiddenRecordKits() {
+  return Object.entries(state.overrides || {})
+    .filter(([, override]) => override?.data_status === "hidden")
+    .map(([kitId]) => rawKitById(kitId))
+    .filter(Boolean)
+    .map((kit) => applyOverride(kit))
+    .sort((a, b) => String(b.local_override?.hidden_at || b.local_override?.updated_at || "").localeCompare(String(a.local_override?.hidden_at || a.local_override?.updated_at || "")));
+}
+
+function renderHiddenRecords() {
+  if (!elements.hiddenRecords) {
+    return;
+  }
+  const kits = hiddenRecordKits();
+  elements.hiddenRecords.innerHTML = "";
+  if (!kits.length) {
+    return;
+  }
+  const title = document.createElement("strong");
+  title.className = "hidden-records-title";
+  title.textContent = t("hiddenRecords");
+  elements.hiddenRecords.append(title);
+  for (const kit of kits.slice(0, 20)) {
+    const row = document.createElement("div");
+    row.className = "duplicate-item-row";
+    const label = document.createElement("button");
+    label.type = "button";
+    label.className = "duplicate-item";
+    label.innerHTML = `<strong>${escapeHtml(kitShortName(kit))}</strong><span>${escapeHtml([franchiseLabel(kit.franchise), seriesLabelFromKit(kit), kit.grade_code].filter(Boolean).join(" · "))}</span>`;
+    label.addEventListener("click", () => openDetail(kit, { keepSettings: true }));
+    const restore = document.createElement("button");
+    restore.type = "button";
+    restore.className = "duplicate-restore";
+    restore.textContent = t("restoreHiddenRecord");
+    restore.addEventListener("click", () => restoreHiddenRecord(kit));
+    row.append(label, restore);
+    elements.hiddenRecords.append(row);
+  }
+}
+
+function restoreHiddenRecord(kit) {
+  if (!canEditSharedData()) {
+    setSyncStatus("readonly", t("readOnlyHint"));
+    return;
+  }
+  const override = { ...(state.overrides[kit.kit_id] || {}) };
+  delete override.data_status;
+  delete override.hidden_at;
+  delete override.hidden_by;
+  override.updated_at = new Date().toISOString();
+  if (Object.keys(override).filter((key) => key !== "updated_at").length) {
+    state.overrides[kit.kit_id] = override;
+  } else {
+    delete state.overrides[kit.kit_id];
+  }
+  saveOverrides();
+  refreshKits();
+  render();
+  setSyncStatus("saving", t("hiddenRecordRestored"));
 }
 
 function renderSyncStatus() {
@@ -6292,7 +6459,7 @@ function openDetail(kit, options = {}) {
   state.activeModal = options.keepSettings ? "settings" : null;
   state.selectedImageIndex = 0;
 
-  ensureSearchIndex();
+  ensureSearchIndex(kit.franchise || state.franchise);
   renderDetail(kit);
   elements.detailDialog.showModal();
   persistViewState({ mode: "push" });

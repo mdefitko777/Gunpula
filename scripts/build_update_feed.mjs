@@ -2,9 +2,12 @@ import { readFile, writeFile } from "node:fs/promises";
 
 const CATALOG_PATH = "data/kits.json";
 const FEED_PATH = "data/update-feed.json";
+const LITE_FEED_PATH = "data/update-feed-lite.json";
 const SOURCE_HEALTH_PATH = "data/source-health.json";
 const HISTORY_LIMIT = 90;
 const ITEM_LIMIT = 120;
+const LITE_HISTORY_LIMIT = 30;
+const LITE_ITEM_LIMIT = 20;
 
 const args = process.argv.slice(2);
 const options = Object.fromEntries(
@@ -252,8 +255,8 @@ function mergeSameDateEntry(previous, next) {
   };
 }
 
-const beforeDoc = beforePath ? await readJson(beforePath, { kits: [] }) : { kits: [] };
 const currentDoc = await readJson(currentPath, { kits: [] });
+const beforeDoc = beforePath ? await readJson(beforePath, { kits: [] }) : currentDoc;
 const previousFeed = flags.has("--reset") ? { entries: [] } : await readJson(feedPath, { entries: [] });
 const sourceHealth = await readJson(SOURCE_HEALTH_PATH, null);
 
@@ -330,6 +333,18 @@ const feed = {
 };
 
 await writeFile(feedPath, `${JSON.stringify(feed, null, 2)}\n`, "utf8");
+
+const liteFeed = {
+  ...feed,
+  entries: feed.entries.slice(0, LITE_HISTORY_LIMIT).map((item) => ({
+    ...item,
+    added: (item.added || []).slice(0, LITE_ITEM_LIMIT),
+    changed: (item.changed || []).slice(0, LITE_ITEM_LIMIT),
+    removed: (item.removed || []).slice(0, LITE_ITEM_LIMIT),
+    watched: (item.watched || []).slice(0, LITE_ITEM_LIMIT),
+  })),
+};
+await writeFile(LITE_FEED_PATH, `${JSON.stringify(liteFeed, null, 2)}\n`, "utf8");
 
 // First-seen ledger: records the date each kit_id first appeared in the
 // catalog. The app uses it as a display/filter fallback for kits without an
