@@ -80,37 +80,30 @@ jobs:
             "keyAlias=$ANDROID_KEY_ALIAS" \
             "keyPassword=$ANDROID_KEY_PASSWORD" \
             > android/signing.properties
-          node <<'NODE'
-          const fs = require("fs");
-          const path = "android/app/build.gradle";
-          let text = fs.readFileSync(path, "utf8");
-          if (!text.includes("gunpulaSigningProps")) {
-            const prefix = [
-              "def gunpulaSigningProps = new Properties()",
-              "def gunpulaSigningFile = rootProject.file(\"signing.properties\")",
-              "if (gunpulaSigningFile.exists()) {",
-              "    gunpulaSigningProps.load(new FileInputStream(gunpulaSigningFile))",
-              "}",
-              "",
-              "",
-            ].join("\\n");
-            const signingConfig = [
-              "android {",
-              "    signingConfigs {",
-              "        release {",
-              "            storeFile rootProject.file(gunpulaSigningProps[\"storeFile\"] ?: \"release.keystore\")",
-              "            storePassword gunpulaSigningProps[\"storePassword\"]",
-              "            keyAlias gunpulaSigningProps[\"keyAlias\"]",
-              "            keyPassword gunpulaSigningProps[\"keyPassword\"]",
-              "        }",
-              "    }",
-            ].join("\\n");
-            text = prefix + text;
-            text = text.replace(/android\s*\{/, signingConfig);
-            text = text.replace(/release\s*\{/, "release {\\n            signingConfig signingConfigs.release");
+          # Append a second android {} block: Groovy DSL merges it into the
+          # existing extension, which avoids fragile in-place rewrites of the
+          # generated build.gradle.
+          cat >> android/app/build.gradle <<'GRADLE'
+
+          def gunpulaSigningProps = new Properties()
+          gunpulaSigningProps.load(new FileInputStream(rootProject.file("signing.properties")))
+
+          android {
+              signingConfigs {
+                  release {
+                      storeFile rootProject.file(gunpulaSigningProps["storeFile"])
+                      storePassword gunpulaSigningProps["storePassword"]
+                      keyAlias gunpulaSigningProps["keyAlias"]
+                      keyPassword gunpulaSigningProps["keyPassword"]
+                  }
+              }
+              buildTypes {
+                  release {
+                      signingConfig signingConfigs.release
+                  }
+              }
           }
-          fs.writeFileSync(path, text);
-          NODE
+          GRADLE
 
       - name: Build signed release APK
         if: env.HAS_RELEASE_SIGNING == 'true'
