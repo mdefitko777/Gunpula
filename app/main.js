@@ -918,6 +918,38 @@ async function loadOptionalJson(path) {
   }
 }
 
+// The APK shell stamps its version into the user agent (GunpulaShell/N) and
+// the live site publishes app/shell-version.json. When the published shell is
+// newer than the installed one, show a one-tap download banner — Android
+// never allows silent sideload installs, so one tap is the floor.
+async function checkShellUpdate() {
+  const match = /GunpulaShell\/(\d+)/.exec(navigator.userAgent);
+  if (!match) {
+    return;
+  }
+  const installed = Number(match[1]);
+  const info = await loadOptionalJson("./shell-version.json");
+  if (!info || Number(info.shell || 0) <= installed || !info.apk_url) {
+    return;
+  }
+  const banner = document.createElement("div");
+  banner.className = "shell-update-banner";
+  const text = document.createElement("span");
+  text.textContent = t("shellUpdateAvailable");
+  const action = document.createElement("a");
+  action.href = info.apk_url;
+  action.target = "_blank";
+  action.rel = "noreferrer";
+  action.textContent = t("shellUpdateAction");
+  const close = document.createElement("button");
+  close.type = "button";
+  close.textContent = "×";
+  close.setAttribute("aria-label", t("closeSettings"));
+  close.addEventListener("click", () => banner.remove());
+  banner.append(text, action, close);
+  document.body.append(banner);
+}
+
 // Startup loads only the active franchise's catalog slice; the rest streams in
 // after first render. Falls back to the monolithic kits.json when split files
 // are unavailable (e.g. older deployments or partial offline caches).
@@ -1276,6 +1308,7 @@ async function init() {
     ensureSearchIndex();
   }
   showOnboardingIfNeeded();
+  checkShellUpdate();
 }
 
 function normalizeState() {
