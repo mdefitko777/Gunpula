@@ -41,6 +41,7 @@ const KIT_RENDER_BATCH = 160;
 const RECENT_UPDATE_DAYS = 3;
 const UPDATES_MODE_KEY = "gunpula-updates-mode-v1";
 const RADIAL_HOLD_MS = 4000;
+const RADIAL_CANCEL_DISTANCE = 34;
 const RADIAL_SELECT_DISTANCE = 28;
 const PAGER_START_DISTANCE = 18;
 const PAGER_THRESHOLD_RATIO = 0.28;
@@ -2025,7 +2026,7 @@ function bindRadialMenu() {
     true,
   );
   document.addEventListener("contextmenu", (event) => {
-    if (state.radial.active) {
+    if (state.radial.active || state.radial.touchId !== null) {
       event.preventDefault();
     }
   });
@@ -2070,7 +2071,7 @@ function startTouchGesture(event) {
   cancelRadialPress();
   resetPagerGesture();
   state.radial = {
-    timer: setTimeout(() => showRadialMenu(touch.clientX, touch.clientY), RADIAL_HOLD_MS),
+    timer: setTimeout(() => showRadialMenu(state.radial.lastX, state.radial.lastY), RADIAL_HOLD_MS),
     active: false,
     startX: touch.clientX,
     startY: touch.clientY,
@@ -2122,7 +2123,7 @@ function moveTouchGesture(event) {
   }
   // Any real movement (either axis) is a scroll or swipe, not a hold:
   // cancel the pending long-press so the radial ring never pops mid-drag.
-  if (absX > 12 || absY > 12) {
+  if (absX > RADIAL_CANCEL_DISTANCE || absY > RADIAL_CANCEL_DISTANCE) {
     cancelRadialPress();
   }
 }
