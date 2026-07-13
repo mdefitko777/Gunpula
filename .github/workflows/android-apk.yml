@@ -64,10 +64,14 @@ jobs:
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: |
-          if [ -z "$ANDROID_KEYSTORE_BASE64" ] || [ -z "$ANDROID_KEYSTORE_PASSWORD" ] || [ -z "$ANDROID_KEY_ALIAS" ] || [ -z "$ANDROID_KEY_PASSWORD" ]; then
+          if [ -z "$ANDROID_KEYSTORE_BASE64" ] || [ -z "$ANDROID_KEYSTORE_PASSWORD" ]; then
             echo "Release signing secrets are not configured; skipping signed APK."
             exit 0
           fi
+          # Alias/key password fall back to the values used by the PKCS12
+          # keystore generated for this project (alias "gunpula", single password).
+          ANDROID_KEY_ALIAS="${ANDROID_KEY_ALIAS:-gunpula}"
+          ANDROID_KEY_PASSWORD="${ANDROID_KEY_PASSWORD:-$ANDROID_KEYSTORE_PASSWORD}"
           echo "HAS_RELEASE_SIGNING=true" >> "$GITHUB_ENV"
           echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > android/release.keystore
           printf '%s\n' \
@@ -94,7 +98,7 @@ jobs:
               "android {",
               "    signingConfigs {",
               "        release {",
-              "            storeFile file(gunpulaSigningProps[\"storeFile\"] ?: \"release.keystore\")",
+              "            storeFile rootProject.file(gunpulaSigningProps[\"storeFile\"] ?: \"release.keystore\")",
               "            storePassword gunpulaSigningProps[\"storePassword\"]",
               "            keyAlias gunpulaSigningProps[\"keyAlias\"]",
               "            keyPassword gunpulaSigningProps[\"keyPassword\"]",
