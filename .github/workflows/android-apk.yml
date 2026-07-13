@@ -81,24 +81,29 @@ jobs:
           const path = "android/app/build.gradle";
           let text = fs.readFileSync(path, "utf8");
           if (!text.includes("gunpulaSigningProps")) {
-            text = `def gunpulaSigningProps = new Properties()
-def gunpulaSigningFile = rootProject.file("signing.properties")
-if (gunpulaSigningFile.exists()) {
-    gunpulaSigningProps.load(new FileInputStream(gunpulaSigningFile))
-}
-
-` + text;
-            text = text.replace(/android\s*\{/, `android {
-    signingConfigs {
-        release {
-            storeFile file(gunpulaSigningProps["storeFile"] ?: "release.keystore")
-            storePassword gunpulaSigningProps["storePassword"]
-            keyAlias gunpulaSigningProps["keyAlias"]
-            keyPassword gunpulaSigningProps["keyPassword"]
-        }
-    }`);
-            text = text.replace(/release\s*\{/, `release {
-            signingConfig signingConfigs.release`);
+            const prefix = [
+              "def gunpulaSigningProps = new Properties()",
+              "def gunpulaSigningFile = rootProject.file(\"signing.properties\")",
+              "if (gunpulaSigningFile.exists()) {",
+              "    gunpulaSigningProps.load(new FileInputStream(gunpulaSigningFile))",
+              "}",
+              "",
+              "",
+            ].join("\\n");
+            const signingConfig = [
+              "android {",
+              "    signingConfigs {",
+              "        release {",
+              "            storeFile file(gunpulaSigningProps[\"storeFile\"] ?: \"release.keystore\")",
+              "            storePassword gunpulaSigningProps[\"storePassword\"]",
+              "            keyAlias gunpulaSigningProps[\"keyAlias\"]",
+              "            keyPassword gunpulaSigningProps[\"keyPassword\"]",
+              "        }",
+              "    }",
+            ].join("\\n");
+            text = prefix + text;
+            text = text.replace(/android\s*\{/, signingConfig);
+            text = text.replace(/release\s*\{/, "release {\\n            signingConfig signingConfigs.release");
           }
           fs.writeFileSync(path, text);
           NODE
