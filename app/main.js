@@ -49,6 +49,8 @@ const RADIAL_SCROLL_CANCEL_DISTANCE = 10;
 const RADIAL_CANCEL_DISTANCE = 18;
 const RADIAL_SELECT_DISTANCE = 28;
 const PAGER_START_DISTANCE = 18;
+const DRAWER_EDGE_ZONE = 28;
+const DRAWER_OPEN_DISTANCE = 44;
 const PAGER_THRESHOLD_RATIO = 0.28;
 const PAGER_MIN_THRESHOLD = 92;
 const PAGER_ANIMATION_MS = 220;
@@ -617,7 +619,7 @@ const state = {
     workspace: null,
   },
   activeView: INITIAL_VIEW_STATE.view || localStorage.getItem(ACTIVE_VIEW_KEY) || "home",
-  settingsPanel: SETTINGS_PANELS.includes(localStorage.getItem(SETTINGS_PANEL_KEY)) ? localStorage.getItem(SETTINGS_PANEL_KEY) : "account",
+  settingsPanel: SETTINGS_PANELS.includes(localStorage.getItem(SETTINGS_PANEL_KEY)) ? localStorage.getItem(SETTINGS_PANEL_KEY) : "home",
   activeModal: INITIAL_VIEW_STATE.modal || null,
   installPrompt: null,
   updatedAt: null,
@@ -656,6 +658,8 @@ const elements = {
   settingsDialog: document.querySelector("#settingsDialog"),
   settingsClose: document.querySelector("#settingsClose"),
   settingsTabs: document.querySelector("#settingsTabs"),
+  settingsBack: document.querySelector("#settingsBack"),
+  settingsTitle: document.querySelector("#settingsTitle"),
   themeList: document.querySelector("#themeList"),
   appIconInput: document.querySelector("#appIconInput"),
   resetAppIcon: document.querySelector("#resetAppIcon"),
@@ -1823,10 +1827,10 @@ function displayKitById(kitId) {
 }
 
 function openSettings(panel = null) {
-  if (panel && SETTINGS_PANELS.includes(panel)) {
-    state.settingsPanel = panel;
-    localStorage.setItem(SETTINGS_PANEL_KEY, state.settingsPanel);
-  }
+  // Settings opens on its vertical menu unless a caller jumps to a panel directly.
+  state.settingsPanel = typeof panel === "string" && SETTINGS_PANELS.includes(panel) ? panel : "home";
+  state.consoleMode = state.settingsPanel === "console";
+  localStorage.setItem(SETTINGS_PANEL_KEY, state.settingsPanel);
   state.activeModal = "settings";
   renderSettings();
   renderConsoleMode();
@@ -1860,6 +1864,16 @@ function bindEvents() {
     state.consoleMode = state.settingsPanel === "console";
     saveConsoleMode();
     localStorage.setItem(SETTINGS_PANEL_KEY, state.settingsPanel);
+    renderSettingsTabs();
+    renderSettingsPanels();
+    renderConsoleMode();
+  });
+  elements.settingsBack?.addEventListener("click", () => {
+    state.settingsPanel = "home";
+    state.consoleMode = false;
+    saveConsoleMode();
+    localStorage.setItem(SETTINGS_PANEL_KEY, state.settingsPanel);
+    renderSettingsTabs();
     renderSettingsPanels();
     renderConsoleMode();
   });
@@ -1997,26 +2011,35 @@ function bindEvents() {
       openSettings("account");
     }
   });
-  elements.userDialogClose?.addEventListener("click", () => elements.userDialog?.close());
+  elements.userDialogClose?.addEventListener("click", () => closeUserPage());
+  elements.userDialog?.addEventListener("click", (event) => {
+    if (event.target === elements.userDialog) {
+      closeUserPage();
+    }
+  });
+  elements.userDialog?.addEventListener("cancel", (event) => {
+    event.preventDefault();
+    closeUserPage();
+  });
   elements.userDialogAvatar?.addEventListener("click", () => {
     if (syncModeV2() && state.sync.workspace) {
       elements.avatarInput?.click();
     }
   });
   elements.userRowOwned?.addEventListener("click", () => {
-    elements.userDialog?.close();
+    closeUserPage();
     switchToView("owned");
   });
   elements.userRowWanted?.addEventListener("click", () => {
-    elements.userDialog?.close();
+    closeUserPage();
     switchToView("wanted");
   });
   elements.userRowSettings?.addEventListener("click", () => {
-    elements.userDialog?.close();
+    closeUserPage();
     openSettings();
   });
   elements.userRowSignOut?.addEventListener("click", () => {
-    elements.userDialog?.close();
+    closeUserPage();
     accountSignOutNow();
   });
   elements.userCopyInvite?.addEventListener("click", async () => {
@@ -2403,6 +2426,25 @@ function moveTouchGesture(event) {
     startPagerGesture(deltaX);
     updatePagerGesture(deltaX);
     if (event.cancelable) event.preventDefault();
+    return;
+  }
+  // Outside the catalog (whose horizontal swipe already pages franchises), a
+  // left-edge swipe to the right slides the personal drawer out, QQ-style.
+  if (
+    state.activeView !== "catalog" &&
+    !state.pager.blockedByTarget &&
+    state.radial.startX <= DRAWER_EDGE_ZONE &&
+    deltaX > DRAWER_OPEN_DISTANCE &&
+    absX > absY * 1.15 &&
+    !elements.userDialog?.open
+  ) {
+    clearTimeout(state.radial.timer);
+    state.radial.timer = null;
+    state.radial.touchId = null;
+    state.radial.suppressClick = true;
+    resetPagerGesture();
+    if (event.cancelable) event.preventDefault();
+    openUserPage();
     return;
   }
   // Vertical movement should stay a normal page scroll. The radial menu only
@@ -6044,13 +6086,19 @@ function toggleKitCollection(type) {
   }
 
   const targetMember = preferredCollectionMemberForKit(kit.kit_id, type);
-  if (collectionEntry(kit.kit_id, targetMember)?.status === type) {
-    memberCollectionMap(targetMember)[kit.kit_id] = {
-      ...collectionEntry(kit.kit_id, targetMember),
+  // collectionEntry()/memberCollectionMap() each re-normalize state.collection into a
+  // fresh object, so the entry must be read BEFORE grabbing the map — evaluating it
+  // inside the assignment's right side would write into an orphaned map and the
+  // removal would silently vanish on the next normalize.
+  const previousEntry = collectionEntry(kit.kit_id, targetMember);
+  if (previousEntry?.status === type) {
+    const removal = {
+      ...previousEntry,
       status: "deleted",
       updated_at: new Date().toISOString(),
       updated_by: editableCollectionMember(),
     };
+    memberCollectionMap(targetMember)[kit.kit_id] = removal;
   } else {
     const member = editableCollectionMember();
     const nextEntry = {
@@ -6266,36 +6314,63 @@ function renderSettings() {
   renderAndroidPackageSummary();
 }
 
+const SETTINGS_TAB_LABELS = {
+  account: "settingsTabAccount",
+  appearance: "settingsTabAppearance",
+  data: "settingsTabData",
+  updates: "settingsTabUpdates",
+  about: "settingsTabAbout",
+  console: "settingsTabConsole",
+};
+
+const SETTINGS_MENU_ICONS = {
+  account: '<circle cx="12" cy="8" r="4"/><path d="M20 21v-2a6 6 0 0 0-6-6h-4a6 6 0 0 0-6 6v2"/>',
+  appearance:
+    '<circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.93 0 1.65-.74 1.65-1.67 0-.43-.17-.81-.43-1.1a1.65 1.65 0 0 1 1.24-2.73H16a6 6 0 0 0 6-6c0-4.6-4.5-8.5-10-8.5Z"/>',
+  data: '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/>',
+  updates: '<path d="M21 12a9 9 0 1 1-2.64-6.36L21 8"/><path d="M21 3v5h-5"/>',
+  about: '<circle cx="12" cy="12" r="9.5"/><path d="M12 16v-5"/><path d="M12 8h.01"/>',
+  console: '<path d="m4 17 6-5-6-5"/><path d="M12 19h8"/>',
+};
+
 function renderSettingsTabs() {
   if (!elements.settingsTabs) {
     return;
   }
+  const onHome = state.settingsPanel === "home";
+  elements.settingsTabs.hidden = !onHome;
   elements.settingsTabs.innerHTML = "";
-  const labels = {
-    account: "settingsTabAccount",
-    appearance: "settingsTabAppearance",
-    data: "settingsTabData",
-    updates: "settingsTabUpdates",
-    about: "settingsTabAbout",
-    console: "settingsTabConsole",
-  };
   for (const panel of SETTINGS_PANELS) {
     const button = document.createElement("button");
     button.type = "button";
     button.dataset.settingsTab = panel;
-    button.className = state.settingsPanel === panel ? "is-active" : "";
-    button.textContent = t(labels[panel]);
+    button.innerHTML =
+      `<span class="settings-menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${SETTINGS_MENU_ICONS[panel] || ""}</svg></span>` +
+      `<span class="settings-menu-label">${escapeHtml(t(SETTINGS_TAB_LABELS[panel]))}</span>`;
     elements.settingsTabs.append(button);
   }
 }
 
 function renderSettingsPanels() {
-  if (!SETTINGS_PANELS.includes(state.settingsPanel)) {
-    state.settingsPanel = "account";
+  if (state.settingsPanel !== "home" && !SETTINGS_PANELS.includes(state.settingsPanel)) {
+    state.settingsPanel = "home";
   }
+  const onHome = state.settingsPanel === "home";
   document.querySelectorAll("[data-settings-panel]").forEach((section) => {
-    section.hidden = section.dataset.settingsPanel !== state.settingsPanel;
+    section.hidden = onHome || section.dataset.settingsPanel !== state.settingsPanel;
   });
+  if (elements.settingsBack) {
+    elements.settingsBack.hidden = onHome;
+  }
+  if (elements.settingsTitle) {
+    elements.settingsTitle.textContent = onHome ? t("settings") : t(SETTINGS_TAB_LABELS[state.settingsPanel]);
+  }
+  if (elements.settingsTabs) {
+    elements.settingsTabs.hidden = !onHome;
+  }
+  if (elements.datasetSummary) {
+    elements.datasetSummary.hidden = !onHome;
+  }
 }
 
 function currentMember() {
@@ -6532,8 +6607,23 @@ function renderUserPage() {
 function openUserPage() {
   renderUserPage();
   if (!elements.userDialog.open) {
+    elements.userDialog.classList.remove("is-closing");
     elements.userDialog.showModal();
   }
+}
+
+function closeUserPage() {
+  if (!elements.userDialog?.open || elements.userDialog.classList.contains("is-closing")) {
+    return;
+  }
+  // Mirror the slide-in with a slide-out before actually closing the dialog.
+  elements.userDialog.classList.add("is-closing");
+  setTimeout(() => {
+    elements.userDialog.classList.remove("is-closing");
+    if (elements.userDialog.open) {
+      elements.userDialog.close();
+    }
+  }, 190);
 }
 
 function openMemberProfile(member) {

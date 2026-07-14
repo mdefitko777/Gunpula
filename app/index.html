@@ -9,7 +9,7 @@
     <title>Gunpula v2.0.0</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260714-v44" />
+    <link rel="stylesheet" href="./styles.css?v=20260714-v45" />
   </head>
   <body>
     <main class="catalog-page">
@@ -290,9 +290,12 @@
     <dialog class="settings-dialog" id="settingsDialog" aria-labelledby="settingsTitle">
       <div class="settings-shell">
         <button class="dialog-close settings-close" id="settingsClose" type="button" aria-label="关闭设置" data-i18n-aria="closeSettings">×</button>
-        <h2 id="settingsTitle" data-i18n="settings">设置</h2>
+        <div class="settings-header">
+          <button class="settings-back" id="settingsBack" type="button" hidden aria-label="返回" data-i18n-aria="backLabel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+          <h2 id="settingsTitle">设置</h2>
+        </div>
         <p id="datasetSummary">Loading catalog...</p>
-        <nav class="settings-tabs" id="settingsTabs" aria-label="设置分类"></nav>
+        <nav class="settings-menu" id="settingsTabs" aria-label="设置分类"></nav>
         <section class="settings-section" data-settings-panel="appearance">
           <h3 data-i18n="language">语言</h3>
           <div class="segmented-control language-control" id="languageList" aria-label="选择语言"></div>
@@ -535,8 +538,8 @@
       </div>
     </dialog>
 
-    <dialog class="member-dialog user-dialog" id="userDialog" aria-labelledby="userDialogName">
-      <div class="member-shell">
+    <dialog class="member-dialog user-dialog user-drawer" id="userDialog" aria-labelledby="userDialogName">
+      <div class="member-shell user-drawer-shell">
         <button class="dialog-close" id="userDialogClose" type="button" aria-label="关闭" data-i18n-aria="closeSettings">×</button>
         <div class="member-head">
           <button class="account-avatar account-avatar-large account-avatar-button" id="userDialogAvatar" type="button" aria-label="更换头像" data-i18n-aria="profileAvatarHint">@</button>
@@ -547,15 +550,20 @@
         </div>
         <div class="user-menu">
           <button class="user-menu-row" id="userRowOwned" type="button">
+            <span class="user-menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 11.1V12a9.5 9.5 0 1 1-5.63-8.68"/><path d="m21.5 4.5-9.5 9.51-3-3"/></svg></span>
             <span class="user-menu-label" data-i18n="ownedList">已购买</span>
             <span class="user-menu-value" id="userOwnedCount">0</span>
           </button>
           <button class="user-menu-row" id="userRowWanted" type="button">
+            <span class="user-menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.67 6.2.9-4.5 4.38 1.06 6.2L12 17.23l-5.56 2.92L7.5 13.95 3 9.57l6.2-.9Z"/></svg></span>
             <span class="user-menu-label" data-i18n="wantedList">想要</span>
             <span class="user-menu-value" id="userWantedCount">0</span>
           </button>
           <details class="user-menu-details">
-            <summary class="user-menu-row"><span class="user-menu-label" data-i18n="myFavorites">我的喜好</span></summary>
+            <summary class="user-menu-row">
+              <span class="user-menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span>
+              <span class="user-menu-label" data-i18n="myFavorites">我的喜好</span>
+            </summary>
             <div class="user-menu-detail-body">
               <p class="settings-hint" data-i18n="profileFavoritesTitle">我的喜好：选中的分类和系列会在最近页优先显示。</p>
               <div class="profile-favorites" id="profileFavorites" hidden>
@@ -565,7 +573,10 @@
             </div>
           </details>
           <details class="user-menu-details">
-            <summary class="user-menu-row"><span class="user-menu-label" data-i18n="workspaceFriends">共享空间与好友</span></summary>
+            <summary class="user-menu-row">
+              <span class="user-menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+              <span class="user-menu-label" data-i18n="workspaceFriends">共享空间与好友</span>
+            </summary>
             <div class="user-menu-detail-body">
               <p class="settings-hint workspace-invite-line" id="userInviteLine" hidden>
                 <span data-i18n="workspaceInviteCode">邀请码</span>
@@ -575,11 +586,15 @@
               <div class="workspace-members" id="userMembers"></div>
             </div>
           </details>
-          <button class="user-menu-row" id="userRowSettings" type="button">
-            <span class="user-menu-label" data-i18n="settings">设置</span>
-          </button>
           <button class="user-menu-row user-menu-danger" id="userRowSignOut" type="button">
+            <span class="user-menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg></span>
             <span class="user-menu-label" data-i18n="accountSignOut">退出登录</span>
+          </button>
+        </div>
+        <div class="user-drawer-footer">
+          <button class="user-footer-button" id="userRowSettings" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/></svg>
+            <span data-i18n="settings">设置</span>
           </button>
         </div>
       </div>
@@ -615,6 +630,6 @@
       <div class="radial-labels"></div>
     </div>
 
-    <script type="module" src="./main.js?v=20260714-v44"></script>
+    <script type="module" src="./main.js?v=20260714-v45"></script>
   </body>
 </html>
