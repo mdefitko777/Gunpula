@@ -6891,32 +6891,41 @@ function guideBaseName(name) {
     .trim();
 }
 
-async function ensureGuideData() {
-  if (state.guide) return state.guide;
-  const [units, map] = await Promise.all([
-    loadOptionalJson("../data/gget-units.json"),
-    loadOptionalJson("../data/gget-kit-map.json"),
-  ]);
-  if (!units?.units) {
-    state.guide = { works: [], groups: [] };
-    return state.guide;
-  }
-  const unitKits = map?.unit_kits || {};
-  const workIds = new Set((units.works || []).filter((w) => GGET_GUIDE_WORK.test(w.name)).map((w) => w.work_id));
-  const workName = new Map((units.works || []).map((w) => [w.work_id, w.name]));
-  const targetUnits = units.units.filter((u) => (u.work_ids || []).some((id) => workIds.has(id)));
+const GUIDE_SPLITS_KEY = "gunpula-guide-splits-v1";
 
-  // Merge variants per work into display groups.
+function loadGuideSplits() {
+  try {
+    return new Set(JSON.parse(localStorage.getItem(GUIDE_SPLITS_KEY) || "[]"));
+  } catch {
+    return new Set();
+  }
+}
+
+function saveGuideSplits() {
+  localStorage.setItem(GUIDE_SPLITS_KEY, JSON.stringify([...(state.guideSplits || [])]));
+}
+
+function guideMergeKey(unit) {
+  return `${unit.work_id}::${guideBaseName(unit.name).toLowerCase()}`;
+}
+
+// Group the raw units into display cells, merging variants by base name — unless the
+// user has manually split that merge key, in which case each variant stands alone.
+function buildGuideGroups(units) {
+  const splits = state.guideSplits || new Set();
   const groupMap = new Map();
-  for (const unit of targetUnits) {
-    const primaryWork = (unit.work_ids || []).find((id) => workIds.has(id));
-    const key = `${primaryWork}::${guideBaseName(unit.name).toLowerCase()}`;
+  for (const unit of units) {
+    const mergeKey = guideMergeKey(unit);
+    const split = splits.has(mergeKey);
+    const key = split ? `split:${unit.unit_id}` : mergeKey;
     if (!groupMap.has(key)) {
       groupMap.set(key, {
         key,
-        work_id: primaryWork,
-        work: workName.get(primaryWork) || "",
-        name: guideBaseName(unit.name),
+        merge_key: mergeKey,
+        split,
+        work_id: unit.work_id,
+        work: unit.work,
+        name: split ? unit.name : guideBaseName(unit.name),
         icon: unit.icon,
         rarity: unit.rarity,
         unit_ids: [],
@@ -6931,12 +6940,46 @@ async function ensureGuideData() {
       group.rarity = unit.rarity;
       group.icon = unit.icon; // show the highest-rarity art as the cell face
     }
-    for (const kitId of unitKits[unit.unit_id] || []) group.kit_ids.add(kitId);
+    for (const kitId of unit.kit_ids) group.kit_ids.add(kitId);
   }
+  return [...groupMap.values()].map((g) => ({ ...g, kit_ids: [...g.kit_ids] }));
+}
+
+function refreshGuideGroups() {
+  if (state.guide) state.guide.groups = buildGuideGroups(state.guide.units);
+}
+
+async function ensureGuideData() {
+  if (state.guide) return state.guide;
+  if (!state.guideSplits) state.guideSplits = loadGuideSplits();
+  const [units, map] = await Promise.all([
+    loadOptionalJson("../data/gget-units.json"),
+    loadOptionalJson("../data/gget-kit-map.json"),
+  ]);
+  if (!units?.units) {
+    state.guide = { works: [], units: [], groups: [] };
+    return state.guide;
+  }
+  const unitKits = map?.unit_kits || {};
+  const workIds = new Set((units.works || []).filter((w) => GGET_GUIDE_WORK.test(w.name)).map((w) => w.work_id));
+  const workName = new Map((units.works || []).map((w) => [w.work_id, w.name]));
+  const rawUnits = units.units
+    .filter((u) => (u.work_ids || []).some((id) => workIds.has(id)))
+    .map((u) => {
+      const workId = (u.work_ids || []).find((id) => workIds.has(id));
+      return {
+        unit_id: u.unit_id,
+        icon: u.icon,
+        name: u.name,
+        rarity: u.rarity,
+        work_id: workId,
+        work: workName.get(workId) || "",
+        kit_ids: unitKits[u.unit_id] || [],
+      };
+    });
 
   const works = [...workIds].map((id) => ({ work_id: id, name: workName.get(id) || "" }));
-  const groups = [...groupMap.values()].map((g) => ({ ...g, kit_ids: [...g.kit_ids] }));
-  state.guide = { works, groups };
+  state.guide = { works, units: rawUnits, groups: buildGuideGroups(rawUnits) };
   return state.guide;
 }
 
@@ -7038,6 +7081,28 @@ function openGuideUnit(group, status) {
     chip.className = "guide-variant-chip";
     chip.textContent = variant;
     elements.guideUnitVariants.append(chip);
+  }
+  // Manual split/merge: if a base-name merge lumped in variants that shouldn't be
+  // together (or vice-versa), let the user override it. Splitting a merged cell breaks
+  // every variant of that base name into its own cell; re-merging undoes it.
+  const canSplit = group.split || new Set(group.variants).size > 1 || state.guideSplits?.has(group.merge_key);
+  if (canSplit) {
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "guide-split-toggle";
+    const isSplit = state.guideSplits?.has(group.merge_key);
+    toggle.textContent = isSplit ? t("guideMerge") : t("guideSplit");
+    toggle.addEventListener("click", () => {
+      state.guideSplits = state.guideSplits || new Set();
+      if (isSplit) state.guideSplits.delete(group.merge_key);
+      else state.guideSplits.add(group.merge_key);
+      saveGuideSplits();
+      refreshGuideGroups();
+      elements.guideUnitDialog.close();
+      if (elements.guideDialog.open) renderGuide(state.guide);
+      renderUserGuideValue();
+    });
+    elements.guideUnitVariants.append(toggle);
   }
 
   const kits = group.kit_ids.map(displayKitById).filter(Boolean);

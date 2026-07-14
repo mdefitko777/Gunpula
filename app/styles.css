@@ -4230,6 +4230,23 @@ body.is-radial-active {
   font-size: 12px;
 }
 
+.guide-split-toggle {
+  padding: 3px 10px;
+  border: 1px dashed var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent-deep);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.guide-split-toggle:hover,
+.guide-split-toggle:focus-visible {
+  border-color: var(--accent);
+  outline: 0;
+}
+
 .guide-unit-subhead {
   margin: 16px 0 8px;
   font-size: 14px;

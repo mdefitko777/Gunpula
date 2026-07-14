@@ -46,7 +46,8 @@
     "import:official": "npm run import:data",
     "import:gget": "node scripts/import_gget_units.mjs",
     "map:gget": "node scripts/build_gget_kit_map.mjs",
-    "cache:gget-images": "node scripts/cache_gget_images.mjs"
+    "cache:gget-images": "node scripts/cache_gget_images.mjs",
+    "import:bbx-db": "node scripts/import_bbx_database.mjs"
   },
   "devDependencies": {
     "@capacitor/android": "^7.0.0",
