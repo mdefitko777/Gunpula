@@ -9,7 +9,7 @@
     <title>Gunpula v2.0.0</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260714-v53" />
+    <link rel="stylesheet" href="./styles.css?v=20260714-v54" />
   </head>
   <body>
     <main class="catalog-page">
@@ -175,9 +175,10 @@
 
     <nav class="bottom-nav" id="bottomNav" aria-label="主导航">
       <button type="button" data-view="home" class="is-active"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V20a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 20Z"/><path d="M9 21.5v-8h6v8"/></svg></span><strong data-i18n="homeNav">首页</strong></button>
-      <button type="button" data-view="catalog"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 4H9a3.5 3.5 0 0 1 3.5 3.5V21A3 3 0 0 0 9.5 18h-7Z"/><path d="M21.5 4H15a3.5 3.5 0 0 0-3.5 3.5V21a3 3 0 0 1 3-3h7Z"/></svg></span><strong data-i18n="catalogList">图鉴</strong></button>
+      <button type="button" data-view="catalog"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 4H9a3.5 3.5 0 0 1 3.5 3.5V21A3 3 0 0 0 9.5 18h-7Z"/><path d="M21.5 4H15a3.5 3.5 0 0 0-3.5 3.5V21a3 3 0 0 1 3-3h7Z"/></svg></span><strong data-i18n="catalogNav">目录</strong></button>
       <button type="button" data-view="updates"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36L21 8"/><path d="M21 3v5h-5"/></svg></span><strong data-i18n="recentUpdatesNav">最近更新</strong></button>
       <button type="button" data-view="collection"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z"/></svg></span><strong data-i18n="collectionNav">收藏</strong></button>
+      <button type="button" data-view="guide"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><strong data-i18n="pictureBook">图鉴</strong></button>
     </nav>
 
     <template id="kitCardTemplate">
@@ -620,6 +621,10 @@
         <div class="guide-head">
           <button class="dialog-close guide-close" id="guideClose" type="button" aria-label="关闭" data-i18n-aria="closeSettings">×</button>
           <h2 id="guideTitle" data-i18n="pictureBook">图鉴</h2>
+          <div class="segmented-control guide-tabs" id="guideTabs">
+            <button class="segment-button is-active" type="button" data-guide-tab="gundam" data-i18n="guideTabGundam">高达</button>
+            <button class="segment-button" type="button" data-guide-tab="bbx" data-i18n="guideTabBbx">陀螺</button>
+          </div>
           <p id="guideSummary"></p>
         </div>
         <div class="guide-body" id="guideBody"></div>
@@ -639,6 +644,24 @@
         <div class="guide-unit-variants" id="guideUnitVariants"></div>
         <h3 class="guide-unit-subhead" data-i18n="guideMatchedKits">对应模型</h3>
         <div class="guide-unit-kits" id="guideUnitKits"></div>
+      </div>
+    </dialog>
+
+    <dialog class="member-dialog guide-bbx-dialog" id="bbxTopDialog" aria-labelledby="bbxTopName">
+      <div class="member-shell">
+        <button class="dialog-close" id="bbxTopClose" type="button" aria-label="关闭" data-i18n-aria="closeSettings">×</button>
+        <div class="guide-unit-head">
+          <div class="guide-unit-art" id="bbxTopArt"></div>
+          <div class="member-head-info">
+            <h2 id="bbxTopName"></h2>
+            <p id="bbxTopMeta"></p>
+          </div>
+        </div>
+        <h3 class="guide-unit-subhead" data-i18n="bbxParts">部件</h3>
+        <div class="bbx-parts" id="bbxTopParts"></div>
+        <div class="bbx-recommend" id="bbxTopRecommend"></div>
+        <h3 class="guide-unit-subhead" data-i18n="guideMatchedKits">对应模型</h3>
+        <div class="guide-unit-kits" id="bbxTopKits"></div>
       </div>
     </dialog>
 
@@ -672,6 +695,6 @@
       <div class="radial-labels"></div>
     </div>
 
-    <script type="module" src="./main.js?v=20260714-v53"></script>
+    <script type="module" src="./main.js?v=20260714-v54"></script>
   </body>
 </html>

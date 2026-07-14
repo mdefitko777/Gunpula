@@ -764,8 +764,17 @@ const elements = {
   userGuideValue: document.querySelector("#userGuideValue"),
   guideDialog: document.querySelector("#guideDialog"),
   guideClose: document.querySelector("#guideClose"),
+  guideTabs: document.querySelector("#guideTabs"),
   guideSummary: document.querySelector("#guideSummary"),
   guideBody: document.querySelector("#guideBody"),
+  bbxTopDialog: document.querySelector("#bbxTopDialog"),
+  bbxTopClose: document.querySelector("#bbxTopClose"),
+  bbxTopArt: document.querySelector("#bbxTopArt"),
+  bbxTopName: document.querySelector("#bbxTopName"),
+  bbxTopMeta: document.querySelector("#bbxTopMeta"),
+  bbxTopParts: document.querySelector("#bbxTopParts"),
+  bbxTopRecommend: document.querySelector("#bbxTopRecommend"),
+  bbxTopKits: document.querySelector("#bbxTopKits"),
   guideUnitDialog: document.querySelector("#guideUnitDialog"),
   guideUnitClose: document.querySelector("#guideUnitClose"),
   guideUnitArt: document.querySelector("#guideUnitArt"),
@@ -1966,6 +1975,10 @@ function bindEvents() {
       openSettings();
       return;
     }
+    if (nextView === "guide") {
+      openGuide();
+      return;
+    }
     if (nextView === "collection") {
       // Merged collection entry: reopen whichever tab (wanted/owned) was last active.
       nextView = COLLECTION_TYPES.includes(state.lastCollectionTab) ? state.lastCollectionTab : "wanted";
@@ -2136,6 +2149,19 @@ function bindEvents() {
   elements.guideClose?.addEventListener("click", () => elements.guideDialog?.close());
   elements.guideDialog?.addEventListener("click", (event) => {
     if (event.target === elements.guideDialog) elements.guideDialog.close();
+  });
+  elements.guideTabs?.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-guide-tab]");
+    if (!button || button.dataset.guideTab === state.guideTab) return;
+    state.guideTab = button.dataset.guideTab;
+    for (const tab of elements.guideTabs.querySelectorAll("button[data-guide-tab]")) {
+      tab.classList.toggle("is-active", tab.dataset.guideTab === state.guideTab);
+    }
+    renderGuideActive();
+  });
+  elements.bbxTopClose?.addEventListener("click", () => elements.bbxTopDialog?.close());
+  elements.bbxTopDialog?.addEventListener("click", (event) => {
+    if (event.target === elements.bbxTopDialog) elements.bbxTopDialog.close();
   });
   elements.guideUnitClose?.addEventListener("click", () => elements.guideUnitDialog?.close());
   elements.guideUnitDialog?.addEventListener("click", (event) => {
@@ -7024,10 +7050,24 @@ function guideGroupStatus(group, sets) {
   return "none";
 }
 
-async function openGuide() {
-  const guide = await ensureGuideData();
-  renderGuide(guide);
+async function openGuide(tab) {
+  if (tab) state.guideTab = tab;
+  if (!state.guideTab) state.guideTab = "gundam";
+  if (elements.guideTabs) {
+    for (const button of elements.guideTabs.querySelectorAll("button[data-guide-tab]")) {
+      button.classList.toggle("is-active", button.dataset.guideTab === state.guideTab);
+    }
+  }
   if (!elements.guideDialog.open) elements.guideDialog.showModal();
+  await renderGuideActive();
+}
+
+async function renderGuideActive() {
+  if (state.guideTab === "bbx") {
+    renderBbxGuide(await ensureBbxData());
+  } else {
+    renderGuide(await ensureGuideData());
+  }
 }
 
 function renderGuide(guide) {
@@ -7215,6 +7255,260 @@ function renderUserGuideValue() {
   const sets = guideCollectionSets();
   const lit = state.guide.groups.filter((g) => guideGroupStatus(g, sets) !== "none").length;
   elements.userGuideValue.textContent = `${lit}/${state.guide.groups.length}`;
+}
+
+// ---------------------------------------------------------------------------
+// BBX 图鉴 (Beyblade X picture book): each 陀螺 (top) is a Blade+Ratchet+Bit combo.
+// The user marks which parts they own; a top lights up by parts completion, and
+// missing parts are traced back to the product that ships them.
+// ---------------------------------------------------------------------------
+const BBX_OWNED_PARTS_KEY = "gunpula-bbx-owned-parts-v1";
+const BBX_COMPONENT_FIELDS = [
+  ["blade_id", "blade"],
+  ["ratchet_id", "ratchet"],
+  ["bit_id", "bit"],
+  ["assist_blade_id", "assist_blade"],
+  ["lock_chip_id", "lock_chip"],
+  ["main_blade_id", "main_blade"],
+];
+
+function loadBbxOwnedParts() {
+  try {
+    return new Set(JSON.parse(localStorage.getItem(BBX_OWNED_PARTS_KEY) || "[]"));
+  } catch {
+    return new Set();
+  }
+}
+
+function saveBbxOwnedParts() {
+  localStorage.setItem(BBX_OWNED_PARTS_KEY, JSON.stringify([...(state.bbxOwnedParts || [])]));
+}
+
+function bbxLocalize(names = {}) {
+  return names[state.language] || names.en || names.zh || names.ja || "";
+}
+
+function bbxNormalizeCode(value) {
+  return String(value || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+}
+
+async function ensureBbxData() {
+  if (state.bbx) return state.bbx;
+  if (!state.bbxOwnedParts) state.bbxOwnedParts = loadBbxOwnedParts();
+  const db = await loadOptionalJson("../data/bbx-database.json");
+  if (!db?.series) {
+    state.bbx = { tops: [], lines: [], partIndex: new Map(), productByBaseSet: new Map(), catalogByBaseSet: new Map() };
+    return state.bbx;
+  }
+  const partIndex = new Map();
+  for (const list of Object.values(db.parts || {})) for (const part of list) partIndex.set(part.part_id, part);
+
+  const productByBaseSet = new Map();
+  for (const product of db.products || []) {
+    if (product.base_set_id && !productByBaseSet.has(product.base_set_id)) productByBaseSet.set(product.base_set_id, product);
+  }
+  // Parts grouped by their source product, for "buy this to get these parts".
+  const partsByBaseSet = new Map();
+  for (const part of partIndex.values()) {
+    if (!part.base_set_id) continue;
+    if (!partsByBaseSet.has(part.base_set_id)) partsByBaseSet.set(part.base_set_id, []);
+    partsByBaseSet.get(part.base_set_id).push(part);
+  }
+
+  // Catalog beyblade kits keyed by normalized product code, for the reverse link.
+  const catalogByCode = new Map();
+  for (const kit of state.kits.filter((k) => k.franchise === "beyblade")) {
+    const code = bbxNormalizeCode(kit.kit_id.replace(/^beyblade-x-/, ""));
+    if (!code) continue;
+    if (!catalogByCode.has(code)) catalogByCode.set(code, []);
+    catalogByCode.get(code).push(kit.kit_id);
+  }
+
+  const tops = db.series
+    .map((s) => {
+      const components = BBX_COMPONENT_FIELDS.map(([field, type]) => ({ type, part_id: s[field] })).filter((c) => c.part_id);
+      return {
+        series_id: s.series_id,
+        name: bbxLocalize(s.names) || s.model_name || s.series_id,
+        base_set_id: s.base_set_id,
+        components,
+        order: s.collection_order ?? 9999,
+        line: (s.base_set_id.match(/^[A-Za-z]+/) || ["?"])[0].toUpperCase(),
+      };
+    })
+    .filter((t) => t.components.length)
+    .sort((a, b) => a.order - b.order);
+
+  const lines = [...new Set(tops.map((t) => t.line))];
+  state.bbx = { tops, lines, partIndex, productByBaseSet, partsByBaseSet, catalogByCode };
+  return state.bbx;
+}
+
+function bbxTopStatus(top) {
+  const owned = state.bbxOwnedParts || new Set();
+  const have = top.components.filter((c) => owned.has(c.part_id)).length;
+  if (have === 0) return { status: "none", have, total: top.components.length };
+  if (have === top.components.length) return { status: "owned", have, total: top.components.length };
+  return { status: "partial", have, total: top.components.length };
+}
+
+function bbxProductImage(baseSetId) {
+  return state.bbx?.productByBaseSet.get(baseSetId)?.image || null;
+}
+
+function renderBbxGuide(bbx) {
+  const total = bbx.tops.length;
+  const complete = bbx.tops.filter((t) => bbxTopStatus(t).status === "owned").length;
+  elements.guideSummary.textContent = t("bbxComplete", { collected: complete, total });
+
+  elements.guideBody.innerHTML = "";
+  if (!total) {
+    const empty = document.createElement("p");
+    empty.className = "settings-hint";
+    empty.textContent = t("guideNoKits");
+    elements.guideBody.append(empty);
+    return;
+  }
+  for (const line of bbx.lines) {
+    const tops = bbx.tops.filter((tp) => tp.line === line);
+    if (!tops.length) continue;
+    const lit = tops.filter((tp) => bbxTopStatus(tp).status === "owned").length;
+    const section = document.createElement("section");
+    section.className = "guide-work";
+    const head = document.createElement("div");
+    head.className = "guide-work-head";
+    head.innerHTML = `<h3>${escapeHtml(line)}</h3><span>${lit}/${tops.length}</span>`;
+    section.append(head);
+    const grid = document.createElement("div");
+    grid.className = "guide-grid";
+    for (const top of tops) {
+      const info = bbxTopStatus(top);
+      const cell = document.createElement("button");
+      cell.type = "button";
+      cell.className = `guide-cell is-${info.status}`;
+      const art = document.createElement("span");
+      art.className = "guide-cell-art";
+      const image = bbxProductImage(top.base_set_id);
+      if (image) {
+        const img = document.createElement("img");
+        img.decoding = "async";
+        img.src = image;
+        img.alt = top.name;
+        img.addEventListener("error", () => {
+          img.remove();
+          art.classList.add("is-missing");
+        });
+        art.append(img);
+      } else {
+        art.classList.add("is-missing");
+      }
+      const label = document.createElement("span");
+      label.className = "guide-cell-name";
+      label.textContent = top.name;
+      cell.append(art, label);
+      cell.append(badgeEl(`${info.have}/${info.total}`, info.status === "owned" ? "guide-badge-owned" : "guide-badge-count"));
+      cell.addEventListener("click", () => openBbxTop(top));
+      grid.append(cell);
+    }
+    section.append(grid);
+    elements.guideBody.append(section);
+  }
+}
+
+function bbxPartTypeLabel(type) {
+  return t(`bbxPart_${type}`) || type;
+}
+
+function openBbxTop(top) {
+  const bbx = state.bbx;
+  const image = bbxProductImage(top.base_set_id);
+  elements.bbxTopArt.innerHTML = image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(top.name)}" />` : "";
+  elements.bbxTopName.textContent = top.name;
+  const product = bbx.productByBaseSet.get(top.base_set_id);
+  const info = bbxTopStatus(top);
+  elements.bbxTopMeta.textContent = `${product ? bbxLocalize(product.names) : top.base_set_id} · ${info.have}/${info.total}`;
+
+  // Parts, each with an own/not-own toggle.
+  elements.bbxTopParts.innerHTML = "";
+  for (const comp of top.components) {
+    const part = bbx.partIndex.get(comp.part_id);
+    const owned = state.bbxOwnedParts?.has(comp.part_id);
+    const row = document.createElement("div");
+    row.className = "bbx-part-row";
+    const text = document.createElement("span");
+    text.className = "bbx-part-text";
+    text.innerHTML = `<em>${escapeHtml(bbxPartTypeLabel(comp.type))}</em><strong>${escapeHtml(part ? bbxLocalize(part.names) : comp.part_id)}</strong>`;
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = `bbx-own-toggle${owned ? " is-active" : ""}`;
+    toggle.textContent = owned ? t("bbxHave") : t("bbxHaveNot");
+    toggle.addEventListener("click", () => {
+      bbxSetPartOwned(comp.part_id, !owned);
+      openBbxTop(top);
+      renderBbxGuide(state.bbx);
+    });
+    row.append(text, toggle);
+    elements.bbxTopParts.append(row);
+  }
+
+  // Recommendation: missing parts traced to the product(s) that ship them.
+  elements.bbxTopRecommend.innerHTML = "";
+  const missing = top.components.filter((c) => !state.bbxOwnedParts?.has(c.part_id));
+  if (missing.length && missing.length < top.components.length) {
+    const byProduct = new Map();
+    for (const comp of missing) {
+      const part = bbx.partIndex.get(comp.part_id);
+      const setId = part?.base_set_id || top.base_set_id;
+      if (!byProduct.has(setId)) byProduct.set(setId, []);
+      byProduct.get(setId).push(part ? bbxLocalize(part.names) : comp.part_id);
+    }
+    const title = document.createElement("h3");
+    title.className = "guide-unit-subhead";
+    title.textContent = t("bbxBuyToComplete");
+    elements.bbxTopRecommend.append(title);
+    for (const [setId, partNames] of byProduct) {
+      const product = bbx.productByBaseSet.get(setId);
+      const card = document.createElement("div");
+      card.className = "bbx-reco-card";
+      const info2 = document.createElement("div");
+      info2.className = "bbx-reco-info";
+      info2.innerHTML = `<strong>${escapeHtml(product ? bbxLocalize(product.names) : setId)}</strong><span>${escapeHtml(partNames.join(" · "))}</span>`;
+      const buy = document.createElement("button");
+      buy.type = "button";
+      buy.className = "bbx-own-toggle";
+      buy.textContent = t("bbxMarkBought");
+      buy.addEventListener("click", () => {
+        for (const part of bbx.partsByBaseSet.get(setId) || []) bbxSetPartOwned(part.part_id, true);
+        openBbxTop(top);
+        renderBbxGuide(state.bbx);
+      });
+      card.append(info2, buy);
+      elements.bbxTopRecommend.append(card);
+    }
+  }
+
+  // Reverse link: the matching catalog kit(s) with add-to-collection buttons.
+  elements.bbxTopKits.innerHTML = "";
+  const codes = [bbxNormalizeCode(product?.product_id), bbxNormalizeCode(top.base_set_id)].filter(Boolean);
+  const kitIds = [...new Set(codes.flatMap((code) => bbx.catalogByCode.get(code) || []))];
+  const kits = kitIds.map(displayKitById).filter(Boolean);
+  if (!kits.length) {
+    const empty = document.createElement("p");
+    empty.className = "settings-hint";
+    empty.textContent = t("guideNoKits");
+    elements.bbxTopKits.append(empty);
+  } else {
+    for (const kit of kits.slice(0, 12)) elements.bbxTopKits.append(guideKitRow(kit, { kit_ids: kitIds, unit_ids: [], variants: [] }, null));
+  }
+
+  if (!elements.bbxTopDialog.open) elements.bbxTopDialog.showModal();
+}
+
+function bbxSetPartOwned(partId, owned) {
+  state.bbxOwnedParts = state.bbxOwnedParts || new Set();
+  if (owned) state.bbxOwnedParts.add(partId);
+  else state.bbxOwnedParts.delete(partId);
+  saveBbxOwnedParts();
 }
 
 function openMemberProfile(member) {
