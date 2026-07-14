@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-07-14",
-  "generated_at": "2026-07-13T20:04:39.709Z",
+  "generated_at": "2026-07-14T08:20:28.342Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,33 +16,37 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-07-13T20:04:39.037Z",
+    "generated_at": "2026-07-14T08:20:27.621Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-07-14",
-      "generated_at": "2026-07-13T20:04:39.709Z",
+      "generated_at": "2026-07-14T08:20:28.342Z",
       "total_before": 4628,
-      "total_after": 4628,
-      "added_count": 10,
-      "changed_count": 31,
-      "removed_count": 10,
+      "total_after": 4877,
+      "added_count": 12,
+      "changed_count": 151,
+      "removed_count": 12,
       "watched_count": 0,
       "premium_bandai_count": 0,
       "bbx_count": 0,
       "franchise_counts": {
-        "pokemon": 33,
+        "pokemon": 35,
+        "fate": 120,
         "gundam": 8
       },
       "reason_counts": {
-        "new": 10,
+        "new": 12,
+        "name": 94,
+        "series": 120,
         "image": 31,
-        "removed": 10
+        "removed": 12
       },
       "interest_tags": [
         "pokemon",
+        "fate",
         "gundam"
       ],
       "watch_tags": [],
@@ -156,6 +160,43 @@
           ],
           "source_urls": [
             "https://www.pokemoncenter-online.com/4904790287831.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329376059",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カラビナ付きマスコット エーフィ",
+            "zh": "カラビナ付きマスコット エーフィ",
+            "ko": "カラビナ付きマスコット エーフィ",
+            "en": "カラビナ付きマスコット エーフィ"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329376059.html"
           ]
         },
         {
@@ -416,767 +457,798 @@
           "source_urls": [
             "https://www.pokemoncenter-online.com/4904810955696.html"
           ]
+        },
+        {
+          "kit_id": "pokemon-center-4904810996583",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "Pokemon Center Goods",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "モンコレ 旅立ちの3匹セット ホウエン地方",
+            "zh": "モンコレ 旅立ちの3匹套装 ホウエン地方",
+            "ko": "モンコレ 旅立ちの3匹세트 ホウエン地方",
+            "en": "モンコレ 旅立ちの3匹Set ホウエン地方"
+          },
+          "release_date": null,
+          "price_jpy": 2145,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4904810996583.html"
+          ]
         }
       ],
       "changed": [
         {
-          "kit_id": "gsf-gallery-ex07-2-item",
+          "kit_id": "goodsmile-fate-g1142291",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GSF",
-          "subline": "機動戦士ガンダム ガシャポン戦士f EX07",
-          "series_key": "sd",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid Doll",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "SD",
-            "en": "SD",
-            "ja": "SD",
-            "ko": "SD"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "機動戦士ガンダム ガシャポン戦士f EX07 将頑駄無",
-            "zh": "机动战士高达 扭蛋战士f EX07 将頑駄無",
-            "ko": "기동전사 건담 가샤폰 전사f EX07 将頑駄無",
-            "en": "Mobile Suit Gundam Gashapon Senshif EX07 将頑駄無"
+            "ja": "Nendoroid Doll Outfit Set: Saber - Casual Outfit Ver.",
+            "zh": "Nendoroid Doll Outfit 套装: Saber - Casual Outfit Ver.",
+            "ko": "Nendoroid Doll Outfit 세트: Saber - Casual Outfit Ver.",
+            "en": "Nendoroid Doll Outfit Set: Saber - Casual Outfit Ver."
           },
-          "release_date": "2020-04",
-          "price_jpy": 300,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_gashapon_gundam_jp"
-          ],
-          "source_urls": [
-            "https://gashapon.jp/forte/items/",
-            "https://gashapon.jp/products/detail.html?jan_code=4549660472414000"
-          ]
-        },
-        {
-          "kit_id": "gsf-gallery-ex06-1-item",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GSF",
-          "subline": "機動戦士ガンダム ガシャポン戦士f EX006",
-          "series_key": "cca",
-          "series_labels": {
-            "zh": "逆夏",
-            "en": "CCA",
-            "ja": "逆シャア",
-            "ko": "역샤아"
-          },
-          "names": {
-            "ja": "機動戦士ガンダム ガシャポン戦士f EX006 α・アジール",
-            "zh": "机动战士高达 扭蛋战士f EX006 α・アジール",
-            "ko": "기동전사 건담 가샤폰 전사f EX006 α・アジール",
-            "en": "Mobile Suit Gundam Gashapon Senshif EX006 α アジール"
-          },
-          "release_date": "2019-06",
-          "price_jpy": 300,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_gashapon_gundam_jp"
-          ],
-          "source_urls": [
-            "https://gashapon.jp/forte/items/",
-            "https://gashapon.jp/products/detail.html?jan_code=4549660362173000"
-          ]
-        },
-        {
-          "kit_id": "gsf-gallery-ex05-2-item",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GSF",
-          "subline": "機動戦士ガンダム ガシャポン戦士f EX005",
-          "series_key": "sd",
-          "series_labels": {
-            "zh": "SD",
-            "en": "SD",
-            "ja": "SD",
-            "ko": "SD"
-          },
-          "names": {
-            "ja": "機動戦士ガンダム ガシャポン戦士f EX005 フルアーマー騎士ガンダム",
-            "zh": "机动战士高达 扭蛋战士f EX005 フルアーマー騎士高达",
-            "ko": "기동전사 건담 가샤폰 전사f EX005 フルアーマー騎士건담",
-            "en": "Mobile Suit Gundam Gashapon Senshif EX005 フルアーマー騎士Gundam"
-          },
-          "release_date": "2018-10",
-          "price_jpy": 300,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_gashapon_gundam_jp"
-          ],
-          "source_urls": [
-            "https://gashapon.jp/forte/items/",
-            "https://gashapon.jp/products/detail.html?jan_code=4549660292951000"
-          ]
-        },
-        {
-          "kit_id": "gsf-gallery-ex05-3-item",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GSF",
-          "subline": "機動戦士ガンダム ガシャポン戦士f EX005",
-          "series_key": "mixed",
-          "series_labels": {
-            "zh": "混合",
-            "en": "Mixed",
-            "ja": "複合作品",
-            "ko": "혼합"
-          },
-          "names": {
-            "ja": "機動戦士ガンダム ガシャポン戦士f EX005 モンスターブラックドラゴン",
-            "zh": "机动战士高达 扭蛋战士f EX005 モンスターブラックドラゴン",
-            "ko": "기동전사 건담 가샤폰 전사f EX005 モンスターブラックドラゴン",
-            "en": "Mobile Suit Gundam Gashapon Senshif EX005 モンスターブラックドラゴン"
-          },
-          "release_date": "2018-10",
-          "price_jpy": 300,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_gashapon_gundam_jp"
-          ],
-          "source_urls": [
-            "https://gashapon.jp/forte/items/",
-            "https://gashapon.jp/products/detail.html?jan_code=4549660292951000"
-          ]
-        },
-        {
-          "kit_id": "gsf-gallery-ex03-1-item",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GSF",
-          "subline": "機動戦士ガンダム ガシャポン戦士f EX003",
-          "series_key": "zz",
-          "series_labels": {
-            "zh": "ZZ",
-            "en": "ZZ",
-            "ja": "ZZ",
-            "ko": "ZZ"
-          },
-          "names": {
-            "ja": "機動戦士ガンダム ガシャポン戦士f EX003 クィン・マンサ",
-            "zh": "机动战士高达 扭蛋战士f EX003 クィン・マンサ",
-            "ko": "기동전사 건담 가샤폰 전사f EX003 クィン・マンサ",
-            "en": "Mobile Suit Gundam Gashapon Senshif EX003 クィン マンサ"
-          },
-          "release_date": "2018-02",
-          "price_jpy": 300,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_gashapon_gundam_jp"
-          ],
-          "source_urls": [
-            "https://gashapon.jp/forte/items/",
-            "https://gashapon.jp/products/detail.html?jan_code=4549660182832000"
-          ]
-        },
-        {
-          "kit_id": "gsf-gallery-ex04-1-item",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GSF",
-          "subline": "機動戦士ガンダム ガシャポン戦士f EX004",
-          "series_key": "cca",
-          "series_labels": {
-            "zh": "逆夏",
-            "en": "CCA",
-            "ja": "逆シャア",
-            "ko": "역샤아"
-          },
-          "names": {
-            "ja": "機動戦士ガンダム ガシャポン戦士f EX004 ナイチンゲール",
-            "zh": "机动战士高达 扭蛋战士f EX004 夜莺",
-            "ko": "기동전사 건담 가샤폰 전사f EX004 나이팅게일",
-            "en": "Mobile Suit Gundam Gashapon Senshif EX004 Nightingale"
-          },
-          "release_date": "2018-02",
-          "price_jpy": 300,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_gashapon_gundam_jp"
-          ],
-          "source_urls": [
-            "https://gashapon.jp/forte/items/",
-            "https://gashapon.jp/products/detail.html?jan_code=4549660182832000"
-          ]
-        },
-        {
-          "kit_id": "gsf-gallery-ex02-1-item",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GSF",
-          "subline": "機動戦士ガンダム ガシャポン戦士f EX002",
-          "series_key": "mixed",
-          "series_labels": {
-            "zh": "混合",
-            "en": "Mixed",
-            "ja": "複合作品",
-            "ko": "혼합"
-          },
-          "names": {
-            "ja": "機動戦士ガンダム ガシャポン戦士f EX002 サイコガンダム",
-            "zh": "机动战士高达 扭蛋战士f EX002 サイコ高达",
-            "ko": "기동전사 건담 가샤폰 전사f EX002 サイコ건담",
-            "en": "Mobile Suit Gundam Gashapon Senshif EX002 サイコGundam"
-          },
-          "release_date": "2017-09",
-          "price_jpy": 300,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_gashapon_gundam_jp"
-          ],
-          "source_urls": [
-            "https://gashapon.jp/forte/items/",
-            "https://gashapon.jp/products/detail.html?jan_code=4549660179412000"
-          ]
-        },
-        {
-          "kit_id": "gsf-gallery-ex01-1-item",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GSF",
-          "subline": "機動戦士ガンダム ガシャポン戦士f EX001",
-          "series_key": "hathaway",
-          "series_labels": {
-            "zh": "闪哈",
-            "en": "Hathaway",
-            "ja": "閃ハサ",
-            "ko": "섬하사"
-          },
-          "names": {
-            "ja": "機動戦士ガンダム ガシャポン戦士f EX001 ペーネロペー",
-            "zh": "机动战士高达 扭蛋战士f EX001 ペーネロペー",
-            "ko": "기동전사 건담 가샤폰 전사f EX001 ペーネロペー",
-            "en": "Mobile Suit Gundam Gashapon Senshif EX001 ペーネロペー"
-          },
-          "release_date": "2017-06",
-          "price_jpy": 300,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_gashapon_gundam_jp"
-          ],
-          "source_urls": [
-            "https://gashapon.jp/forte/items/",
-            "https://gashapon.jp/products/detail.html?jan_code=4549660132615000"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-4237",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモン PLAMO COLLECTION 52 SELECT SERIES Gyarados",
-            "zh": "宝可梦 PLAMO COLLECTION 52 SELECT SERIES Gyarados",
-            "ko": "포켓몬 PLAMO COLLECTION 52 SELECT SERIES Gyarados",
-            "en": "Pokémon PLAMO COLLECTION 52 SELECT SERIES Gyarados"
-          },
-          "release_date": null,
-          "price_jpy": 1300,
+          "release_date": "2027-02",
+          "price_jpy": 5500,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_4237/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1142291"
           ]
         },
         {
-          "kit_id": "pokepla-01-5028",
+          "kit_id": "goodsmile-fate-g1142290",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid Doll",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 54 SELECT SERIES Groudon",
-            "zh": "宝可梦 PLAMO COLLECTION 54 SELECT SERIES Groudon",
-            "ko": "포켓몬 PLAMO COLLECTION 54 SELECT SERIES Groudon",
-            "en": "Pokémon PLAMO COLLECTION 54 SELECT SERIES Groudon"
+            "ja": "Nendoroid Doll Saber: Casual Outfit Ver.",
+            "zh": "Nendoroid Doll Saber: Casual Outfit Ver.",
+            "ko": "Nendoroid Doll Saber: Casual Outfit Ver.",
+            "en": "Nendoroid Doll Saber: Casual Outfit Ver."
           },
-          "release_date": null,
-          "price_jpy": 1650,
+          "release_date": "2027-02",
+          "price_jpy": 9800,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5028/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1142290"
           ]
         },
         {
-          "kit_id": "pokepla-01-5411",
+          "kit_id": "goodsmile-fate-g1142695",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 55 SELECT SERIES Scizor",
-            "zh": "宝可梦 PLAMO COLLECTION 55 SELECT SERIES Scizor",
-            "ko": "포켓몬 PLAMO COLLECTION 55 SELECT SERIES Scizor",
-            "en": "Pokémon PLAMO COLLECTION 55 SELECT SERIES Scizor"
+            "ja": "figma Berserker / Morgan",
+            "zh": "figma Berserker / Morgan",
+            "ko": "figma Berserker / Morgan",
+            "en": "figma Berserker / Morgan"
           },
-          "release_date": null,
-          "price_jpy": 1400,
+          "release_date": "2027-01",
+          "price_jpy": 13800,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5411/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1142695"
           ]
         },
         {
-          "kit_id": "pokepla-01-5467",
+          "kit_id": "goodsmile-fate-g1145389",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 56 SELECT SERIES Meowscarada",
-            "zh": "宝可梦 PLAMO COLLECTION 56 SELECT SERIES Meowscarada",
-            "ko": "포켓몬 PLAMO COLLECTION 56 SELECT SERIES Meowscarada",
-            "en": "Pokémon PLAMO COLLECTION 56 SELECT SERIES Meowscarada"
+            "ja": "(Box) CHILLfigg Fate / kaleid liner PRISMA☆ILLYA Licht Nameless Girl (6 pieces)",
+            "zh": "(Box) CHILLfigg Fate / kaleid liner PRISMA☆ILLYA Licht Nameless Girl (6 pieces)",
+            "ko": "(Box) CHILLfigg Fate / kaleid liner PRISMA☆ILLYA Licht Nameless Girl (6 pieces)",
+            "en": "(Box) CHILLfigg Fate / kaleid liner PRISMA☆ILLYA Licht Nameless Girl (6 pieces)"
           },
-          "release_date": null,
-          "price_jpy": 1600,
+          "release_date": "2026-12",
+          "price_jpy": 18000,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5467/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1145389"
           ]
         },
         {
-          "kit_id": "pokepla-01-5497",
+          "kit_id": "goodsmile-fate-g1145387",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 57 SELECT SERIES Ceruledge",
-            "zh": "宝可梦 PLAMO COLLECTION 57 SELECT SERIES Ceruledge",
-            "ko": "포켓몬 PLAMO COLLECTION 57 SELECT SERIES Ceruledge",
-            "en": "Pokémon PLAMO COLLECTION 57 SELECT SERIES Ceruledge"
+            "ja": "CHILLfigg Fate / kaleid liner PRISMA☆ILLYA Licht Nameless Girl",
+            "zh": "CHILLfigg Fate / kaleid liner PRISMA☆ILLYA Licht Nameless Girl",
+            "ko": "CHILLfigg Fate / kaleid liner PRISMA☆ILLYA Licht Nameless Girl",
+            "en": "CHILLfigg Fate / kaleid liner PRISMA☆ILLYA Licht Nameless Girl"
           },
-          "release_date": null,
-          "price_jpy": 1700,
+          "release_date": "2026-12",
+          "price_jpy": 3000,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5497/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1145387"
           ]
         },
         {
-          "kit_id": "pokepla-01-5568",
+          "kit_id": "goodsmile-fate-g1141696",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Plushie",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 58 SELECT SERIES Armarouge",
-            "zh": "宝可梦 PLAMO COLLECTION 58 SELECT SERIES Armarouge",
-            "ko": "포켓몬 PLAMO COLLECTION 58 SELECT SERIES Armarouge",
-            "en": "Pokémon PLAMO COLLECTION 58 SELECT SERIES Armarouge"
+            "ja": "Chocopuni Plushie Master / Female Protagonist",
+            "zh": "Chocopuni Plushie Master / Female Protagonist",
+            "ko": "Chocopuni Plushie Master / Female Protagonist",
+            "en": "Chocopuni Plushie Master / Female Protagonist"
           },
-          "release_date": null,
-          "price_jpy": 1700,
+          "release_date": "2026-12",
+          "price_jpy": 4400,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5568/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1141696"
           ]
         },
         {
-          "kit_id": "pokepla-01-5958",
+          "kit_id": "goodsmile-fate-g1141697",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Plushie",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 59 SELECT SERIES Miraidon",
-            "zh": "宝可梦 PLAMO COLLECTION 59 SELECT SERIES Miraidon",
-            "ko": "포켓몬 PLAMO COLLECTION 59 SELECT SERIES Miraidon",
-            "en": "Pokémon PLAMO COLLECTION 59 SELECT SERIES Miraidon"
+            "ja": "Chocopuni Plushie Master / Male Protagonist",
+            "zh": "Chocopuni Plushie Master / Male Protagonist",
+            "ko": "Chocopuni Plushie Master / Male Protagonist",
+            "en": "Chocopuni Plushie Master / Male Protagonist"
           },
-          "release_date": null,
-          "price_jpy": 2100,
+          "release_date": "2026-12",
+          "price_jpy": 4400,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5958/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1141697"
           ]
         },
         {
-          "kit_id": "pokepla-01-5984",
+          "kit_id": "goodsmile-fate-g1142281",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "Scale Figure",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 60 SELECT SERIES Koraidon",
-            "zh": "宝可梦 PLAMO COLLECTION 60 SELECT SERIES Koraidon",
-            "ko": "포켓몬 PLAMO COLLECTION 60 SELECT SERIES Koraidon",
-            "en": "Pokémon PLAMO COLLECTION 60 SELECT SERIES Koraidon"
+            "ja": "Fate / Grand Order Beast / Ereshkigal 1 / 7 scale figure (1st Ascension)",
+            "zh": "Fate / Grand Order Beast / Ereshkigal 1 / 7 scale figure (1st Ascension)",
+            "ko": "Fate / Grand Order Beast / Ereshkigal 1 / 7 scale figure (1st Ascension)",
+            "en": "Fate / Grand Order Beast / Ereshkigal 1 / 7 scale figure (1st Ascension)"
           },
-          "release_date": null,
-          "price_jpy": 2100,
+          "release_date": "2026-11",
+          "price_jpy": 24200,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5984/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1142281"
           ]
         },
         {
-          "kit_id": "pokepla-01-6780",
+          "kit_id": "goodsmile-fate-g1139584",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza",
-            "zh": "宝可梦 PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza",
-            "ko": "포켓몬 PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza",
-            "en": "Pokémon PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza"
+            "ja": "Saber / Okita Souji: Final Ascension Ver.",
+            "zh": "Saber / Okita Souji: Final Ascension Ver.",
+            "ko": "Saber / Okita Souji: Final Ascension Ver.",
+            "en": "Saber / Okita Souji: Final Ascension Ver."
           },
-          "release_date": null,
-          "price_jpy": 2700,
+          "release_date": "2026-11",
+          "price_jpy": 16800,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_6780/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1139584"
           ]
         },
         {
-          "kit_id": "pokepla-01-7038",
+          "kit_id": "goodsmile-fate-g1145054",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 62 SELECT SERIES Kyogre",
-            "zh": "宝可梦 PLAMO COLLECTION 62 SELECT SERIES Kyogre",
-            "ko": "포켓몬 PLAMO COLLECTION 62 SELECT SERIES Kyogre",
-            "en": "Pokémon PLAMO COLLECTION 62 SELECT SERIES Kyogre"
+            "ja": "(Box) Nendoroid Surprise Fate / Grand Order Oberon Collection (6 Pieces)",
+            "zh": "(Box) Nendoroid Surprise Fate / Grand Order Oberon Collection (6 Pieces)",
+            "ko": "(Box) Nendoroid Surprise Fate / Grand Order Oberon Collection (6 Pieces)",
+            "en": "(Box) Nendoroid Surprise Fate / Grand Order Oberon Collection (6 Pieces)"
           },
-          "release_date": null,
+          "release_date": "2026-10",
+          "price_jpy": 10800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/1145054"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g1140741",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Saber: Casual Outfit Ver.",
+            "zh": "Nendoroid Saber: Casual Outfit Ver.",
+            "ko": "Nendoroid Saber: Casual Outfit Ver.",
+            "en": "Nendoroid Saber: Casual Outfit Ver."
+          },
+          "release_date": "2026-10",
+          "price_jpy": 6600,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/1140741"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g1139022",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Surprise Fate / Grand Order Oberon Collection",
+            "zh": "Nendoroid Surprise Fate / Grand Order Oberon Collection",
+            "ko": "Nendoroid Surprise Fate / Grand Order Oberon Collection",
+            "en": "Nendoroid Surprise Fate / Grand Order Oberon Collection"
+          },
+          "release_date": "2026-10",
           "price_jpy": 1800,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7038/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1139022"
           ]
         },
         {
-          "kit_id": "pokepla-01-5174",
+          "kit_id": "goodsmile-fate-g1141676",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 18 Sprigatito",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 18 Sprigatito",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 18 Sprigatito",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 18 Sprigatito"
+            "ja": "Saber / Barghest",
+            "zh": "Saber / Barghest",
+            "ko": "Saber / Barghest",
+            "en": "Saber / Barghest"
           },
-          "release_date": null,
-          "price_jpy": 780,
+          "release_date": "2026-10",
+          "price_jpy": 29800,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5174/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1141676"
           ]
         },
         {
-          "kit_id": "pokepla-01-5247",
+          "kit_id": "goodsmile-fate-g1142475",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 19 Quaxly",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 19 Quaxly",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 19 Quaxly",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 19 Quaxly"
+            "ja": "Archer / Durgā",
+            "zh": "Archer / Durgā",
+            "ko": "Archer / Durgā",
+            "en": "Archer / Durgā"
           },
-          "release_date": null,
-          "price_jpy": 780,
+          "release_date": "2026-09",
+          "price_jpy": 32780,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5247/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1142475"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g1137383",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Fate / Grand Order Berserker / Morgan Non-Scale Figure",
+            "zh": "Fate / Grand Order Berserker / Morgan Non-Scale Figure",
+            "ko": "Fate / Grand Order Berserker / Morgan Non-Scale Figure",
+            "en": "Fate / Grand Order Berserker / Morgan Non-Scale Figure"
+          },
+          "release_date": "2026-08",
+          "price_jpy": 18700,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/1137383"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g1140948",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "Scale Figure",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Fate / Grand Order Morgan, Lady of the Water 1 / 7 Scale Figure",
+            "zh": "Fate / Grand Order Morgan, Lady of the Water 1 / 7 Scale Figure",
+            "ko": "Fate / Grand Order Morgan, Lady of the Water 1 / 7 Scale Figure",
+            "en": "Fate / Grand Order Morgan, Lady of the Water 1 / 7 Scale Figure"
+          },
+          "release_date": "2026-08",
+          "price_jpy": 39600,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/1140948"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g5875",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "figma Saber Alter 2.0",
+            "zh": "figma Saber Alter 2.0",
+            "ko": "figma Saber Alter 2.0",
+            "en": "figma Saber Alter 2.0"
+          },
+          "release_date": "2026-08",
+          "price_jpy": 10800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/5875"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g1140863",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Minamoto-no-Raikou: Bunny Girl Style",
+            "zh": "Minamoto-no-Raikou: Bunny Girl Style",
+            "ko": "Minamoto-no-Raikou: Bunny Girl Style",
+            "en": "Minamoto-no-Raikou: Bunny Girl Style"
+          },
+          "release_date": "2026-08",
+          "price_jpy": 44000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/1140863"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g1141723",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "POP UP PARADE BEACH QUEENS Saber Lily L Size",
+            "zh": "POP UP PARADE BEACH QUEENS Saber Lily L Size",
+            "ko": "POP UP PARADE BEACH QUEENS Saber Lily L Size",
+            "en": "POP UP PARADE BEACH QUEENS Saber Lily L Size"
+          },
+          "release_date": "2026-08",
+          "price_jpy": 8800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/1141723"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g57700",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Saber -Garden of Avalon-",
+            "zh": "Saber -Garden of Avalon-",
+            "ko": "Saber -Garden of Avalon-",
+            "en": "Saber -Garden of Avalon-"
+          },
+          "release_date": "2026-08",
+          "price_jpy": 23000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/57700"
           ]
         }
       ],
@@ -1293,6 +1365,43 @@
           ]
         },
         {
+          "kit_id": "pokemon-center-4521329349190",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "502 ぬいぐるみ Pok&eacute;mon fit フタチマル",
+            "zh": "502 ぬいぐるみ Pok&eacute;mon fit フタチマル",
+            "ko": "502 ぬいぐるみ Pok&eacute;mon fit フタチマル",
+            "en": "502 ぬいぐるみ Pok&eacute;mon fit フタチマル"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329349190.html"
+          ]
+        },
+        {
           "kit_id": "pokemon-center-4521329344034",
           "change_type": "removed",
           "franchise": "pokemon",
@@ -1364,6 +1473,43 @@
           ],
           "source_urls": [
             "https://www.pokemoncenter-online.com/4521329350035.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4904790287831",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "Mocchi-Mocchi-Style／フェイス型マスコット／カビゴン",
+            "zh": "Mocchi-Mocchi-Style／フェイス型マスコット／カビゴン",
+            "ko": "Mocchi-Mocchi-Style／フェイス型マスコット／カビゴン",
+            "en": "Mocchi-Mocchi-Style／フェイス型マスコット／カビゴン"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4904790287831.html"
           ]
         },
         {

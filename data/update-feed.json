@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-07-14",
-  "generated_at": "2026-07-13T20:04:39.709Z",
+  "generated_at": "2026-07-14T08:20:28.342Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,33 +16,37 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-07-13T20:04:39.037Z",
+    "generated_at": "2026-07-14T08:20:27.621Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-07-14",
-      "generated_at": "2026-07-13T20:04:39.709Z",
+      "generated_at": "2026-07-14T08:20:28.342Z",
       "total_before": 4628,
-      "total_after": 4628,
-      "added_count": 10,
-      "changed_count": 31,
-      "removed_count": 10,
+      "total_after": 4877,
+      "added_count": 12,
+      "changed_count": 151,
+      "removed_count": 12,
       "watched_count": 0,
       "premium_bandai_count": 0,
       "bbx_count": 0,
       "franchise_counts": {
-        "pokemon": 33,
+        "pokemon": 35,
+        "fate": 120,
         "gundam": 8
       },
       "reason_counts": {
-        "new": 10,
+        "new": 12,
+        "name": 94,
+        "series": 120,
         "image": 31,
-        "removed": 10
+        "removed": 12
       },
       "interest_tags": [
         "pokemon",
+        "fate",
         "gundam"
       ],
       "watch_tags": [],
@@ -156,6 +160,43 @@
           ],
           "source_urls": [
             "https://www.pokemoncenter-online.com/4904790287831.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329376059",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カラビナ付きマスコット エーフィ",
+            "zh": "カラビナ付きマスコット エーフィ",
+            "ko": "カラビナ付きマスコット エーフィ",
+            "en": "カラビナ付きマスコット エーフィ"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329376059.html"
           ]
         },
         {
@@ -416,1185 +457,4647 @@
           "source_urls": [
             "https://www.pokemoncenter-online.com/4904810955696.html"
           ]
+        },
+        {
+          "kit_id": "pokemon-center-4904810996583",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "Pokemon Center Goods",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "モンコレ 旅立ちの3匹セット ホウエン地方",
+            "zh": "モンコレ 旅立ちの3匹套装 ホウエン地方",
+            "ko": "モンコレ 旅立ちの3匹세트 ホウエン地方",
+            "en": "モンコレ 旅立ちの3匹Set ホウエン地方"
+          },
+          "release_date": null,
+          "price_jpy": 2145,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4904810996583.html"
+          ]
         }
       ],
       "changed": [
         {
-          "kit_id": "gsf-gallery-ex07-2-item",
+          "kit_id": "goodsmile-fate-g1142291",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GSF",
-          "subline": "機動戦士ガンダム ガシャポン戦士f EX07",
-          "series_key": "sd",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid Doll",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "SD",
-            "en": "SD",
-            "ja": "SD",
-            "ko": "SD"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "機動戦士ガンダム ガシャポン戦士f EX07 将頑駄無",
-            "zh": "机动战士高达 扭蛋战士f EX07 将頑駄無",
-            "ko": "기동전사 건담 가샤폰 전사f EX07 将頑駄無",
-            "en": "Mobile Suit Gundam Gashapon Senshif EX07 将頑駄無"
+            "ja": "Nendoroid Doll Outfit Set: Saber - Casual Outfit Ver.",
+            "zh": "Nendoroid Doll Outfit 套装: Saber - Casual Outfit Ver.",
+            "ko": "Nendoroid Doll Outfit 세트: Saber - Casual Outfit Ver.",
+            "en": "Nendoroid Doll Outfit Set: Saber - Casual Outfit Ver."
           },
-          "release_date": "2020-04",
-          "price_jpy": 300,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_gashapon_gundam_jp"
-          ],
-          "source_urls": [
-            "https://gashapon.jp/forte/items/",
-            "https://gashapon.jp/products/detail.html?jan_code=4549660472414000"
-          ]
-        },
-        {
-          "kit_id": "gsf-gallery-ex06-1-item",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GSF",
-          "subline": "機動戦士ガンダム ガシャポン戦士f EX006",
-          "series_key": "cca",
-          "series_labels": {
-            "zh": "逆夏",
-            "en": "CCA",
-            "ja": "逆シャア",
-            "ko": "역샤아"
-          },
-          "names": {
-            "ja": "機動戦士ガンダム ガシャポン戦士f EX006 α・アジール",
-            "zh": "机动战士高达 扭蛋战士f EX006 α・アジール",
-            "ko": "기동전사 건담 가샤폰 전사f EX006 α・アジール",
-            "en": "Mobile Suit Gundam Gashapon Senshif EX006 α アジール"
-          },
-          "release_date": "2019-06",
-          "price_jpy": 300,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_gashapon_gundam_jp"
-          ],
-          "source_urls": [
-            "https://gashapon.jp/forte/items/",
-            "https://gashapon.jp/products/detail.html?jan_code=4549660362173000"
-          ]
-        },
-        {
-          "kit_id": "gsf-gallery-ex05-2-item",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GSF",
-          "subline": "機動戦士ガンダム ガシャポン戦士f EX005",
-          "series_key": "sd",
-          "series_labels": {
-            "zh": "SD",
-            "en": "SD",
-            "ja": "SD",
-            "ko": "SD"
-          },
-          "names": {
-            "ja": "機動戦士ガンダム ガシャポン戦士f EX005 フルアーマー騎士ガンダム",
-            "zh": "机动战士高达 扭蛋战士f EX005 フルアーマー騎士高达",
-            "ko": "기동전사 건담 가샤폰 전사f EX005 フルアーマー騎士건담",
-            "en": "Mobile Suit Gundam Gashapon Senshif EX005 フルアーマー騎士Gundam"
-          },
-          "release_date": "2018-10",
-          "price_jpy": 300,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_gashapon_gundam_jp"
-          ],
-          "source_urls": [
-            "https://gashapon.jp/forte/items/",
-            "https://gashapon.jp/products/detail.html?jan_code=4549660292951000"
-          ]
-        },
-        {
-          "kit_id": "gsf-gallery-ex05-3-item",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GSF",
-          "subline": "機動戦士ガンダム ガシャポン戦士f EX005",
-          "series_key": "mixed",
-          "series_labels": {
-            "zh": "混合",
-            "en": "Mixed",
-            "ja": "複合作品",
-            "ko": "혼합"
-          },
-          "names": {
-            "ja": "機動戦士ガンダム ガシャポン戦士f EX005 モンスターブラックドラゴン",
-            "zh": "机动战士高达 扭蛋战士f EX005 モンスターブラックドラゴン",
-            "ko": "기동전사 건담 가샤폰 전사f EX005 モンスターブラックドラゴン",
-            "en": "Mobile Suit Gundam Gashapon Senshif EX005 モンスターブラックドラゴン"
-          },
-          "release_date": "2018-10",
-          "price_jpy": 300,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_gashapon_gundam_jp"
-          ],
-          "source_urls": [
-            "https://gashapon.jp/forte/items/",
-            "https://gashapon.jp/products/detail.html?jan_code=4549660292951000"
-          ]
-        },
-        {
-          "kit_id": "gsf-gallery-ex03-1-item",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GSF",
-          "subline": "機動戦士ガンダム ガシャポン戦士f EX003",
-          "series_key": "zz",
-          "series_labels": {
-            "zh": "ZZ",
-            "en": "ZZ",
-            "ja": "ZZ",
-            "ko": "ZZ"
-          },
-          "names": {
-            "ja": "機動戦士ガンダム ガシャポン戦士f EX003 クィン・マンサ",
-            "zh": "机动战士高达 扭蛋战士f EX003 クィン・マンサ",
-            "ko": "기동전사 건담 가샤폰 전사f EX003 クィン・マンサ",
-            "en": "Mobile Suit Gundam Gashapon Senshif EX003 クィン マンサ"
-          },
-          "release_date": "2018-02",
-          "price_jpy": 300,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_gashapon_gundam_jp"
-          ],
-          "source_urls": [
-            "https://gashapon.jp/forte/items/",
-            "https://gashapon.jp/products/detail.html?jan_code=4549660182832000"
-          ]
-        },
-        {
-          "kit_id": "gsf-gallery-ex04-1-item",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GSF",
-          "subline": "機動戦士ガンダム ガシャポン戦士f EX004",
-          "series_key": "cca",
-          "series_labels": {
-            "zh": "逆夏",
-            "en": "CCA",
-            "ja": "逆シャア",
-            "ko": "역샤아"
-          },
-          "names": {
-            "ja": "機動戦士ガンダム ガシャポン戦士f EX004 ナイチンゲール",
-            "zh": "机动战士高达 扭蛋战士f EX004 夜莺",
-            "ko": "기동전사 건담 가샤폰 전사f EX004 나이팅게일",
-            "en": "Mobile Suit Gundam Gashapon Senshif EX004 Nightingale"
-          },
-          "release_date": "2018-02",
-          "price_jpy": 300,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_gashapon_gundam_jp"
-          ],
-          "source_urls": [
-            "https://gashapon.jp/forte/items/",
-            "https://gashapon.jp/products/detail.html?jan_code=4549660182832000"
-          ]
-        },
-        {
-          "kit_id": "gsf-gallery-ex02-1-item",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GSF",
-          "subline": "機動戦士ガンダム ガシャポン戦士f EX002",
-          "series_key": "mixed",
-          "series_labels": {
-            "zh": "混合",
-            "en": "Mixed",
-            "ja": "複合作品",
-            "ko": "혼합"
-          },
-          "names": {
-            "ja": "機動戦士ガンダム ガシャポン戦士f EX002 サイコガンダム",
-            "zh": "机动战士高达 扭蛋战士f EX002 サイコ高达",
-            "ko": "기동전사 건담 가샤폰 전사f EX002 サイコ건담",
-            "en": "Mobile Suit Gundam Gashapon Senshif EX002 サイコGundam"
-          },
-          "release_date": "2017-09",
-          "price_jpy": 300,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_gashapon_gundam_jp"
-          ],
-          "source_urls": [
-            "https://gashapon.jp/forte/items/",
-            "https://gashapon.jp/products/detail.html?jan_code=4549660179412000"
-          ]
-        },
-        {
-          "kit_id": "gsf-gallery-ex01-1-item",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GSF",
-          "subline": "機動戦士ガンダム ガシャポン戦士f EX001",
-          "series_key": "hathaway",
-          "series_labels": {
-            "zh": "闪哈",
-            "en": "Hathaway",
-            "ja": "閃ハサ",
-            "ko": "섬하사"
-          },
-          "names": {
-            "ja": "機動戦士ガンダム ガシャポン戦士f EX001 ペーネロペー",
-            "zh": "机动战士高达 扭蛋战士f EX001 ペーネロペー",
-            "ko": "기동전사 건담 가샤폰 전사f EX001 ペーネロペー",
-            "en": "Mobile Suit Gundam Gashapon Senshif EX001 ペーネロペー"
-          },
-          "release_date": "2017-06",
-          "price_jpy": 300,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_gashapon_gundam_jp"
-          ],
-          "source_urls": [
-            "https://gashapon.jp/forte/items/",
-            "https://gashapon.jp/products/detail.html?jan_code=4549660132615000"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-4237",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモン PLAMO COLLECTION 52 SELECT SERIES Gyarados",
-            "zh": "宝可梦 PLAMO COLLECTION 52 SELECT SERIES Gyarados",
-            "ko": "포켓몬 PLAMO COLLECTION 52 SELECT SERIES Gyarados",
-            "en": "Pokémon PLAMO COLLECTION 52 SELECT SERIES Gyarados"
-          },
-          "release_date": null,
-          "price_jpy": 1300,
+          "release_date": "2027-02",
+          "price_jpy": 5500,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_4237/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1142291"
           ]
         },
         {
-          "kit_id": "pokepla-01-5028",
+          "kit_id": "goodsmile-fate-g1142290",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid Doll",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 54 SELECT SERIES Groudon",
-            "zh": "宝可梦 PLAMO COLLECTION 54 SELECT SERIES Groudon",
-            "ko": "포켓몬 PLAMO COLLECTION 54 SELECT SERIES Groudon",
-            "en": "Pokémon PLAMO COLLECTION 54 SELECT SERIES Groudon"
+            "ja": "Nendoroid Doll Saber: Casual Outfit Ver.",
+            "zh": "Nendoroid Doll Saber: Casual Outfit Ver.",
+            "ko": "Nendoroid Doll Saber: Casual Outfit Ver.",
+            "en": "Nendoroid Doll Saber: Casual Outfit Ver."
           },
-          "release_date": null,
-          "price_jpy": 1650,
+          "release_date": "2027-02",
+          "price_jpy": 9800,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5028/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1142290"
           ]
         },
         {
-          "kit_id": "pokepla-01-5411",
+          "kit_id": "goodsmile-fate-g1142695",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 55 SELECT SERIES Scizor",
-            "zh": "宝可梦 PLAMO COLLECTION 55 SELECT SERIES Scizor",
-            "ko": "포켓몬 PLAMO COLLECTION 55 SELECT SERIES Scizor",
-            "en": "Pokémon PLAMO COLLECTION 55 SELECT SERIES Scizor"
+            "ja": "figma Berserker / Morgan",
+            "zh": "figma Berserker / Morgan",
+            "ko": "figma Berserker / Morgan",
+            "en": "figma Berserker / Morgan"
           },
-          "release_date": null,
-          "price_jpy": 1400,
+          "release_date": "2027-01",
+          "price_jpy": 13800,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5411/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1142695"
           ]
         },
         {
-          "kit_id": "pokepla-01-5467",
+          "kit_id": "goodsmile-fate-g1145389",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 56 SELECT SERIES Meowscarada",
-            "zh": "宝可梦 PLAMO COLLECTION 56 SELECT SERIES Meowscarada",
-            "ko": "포켓몬 PLAMO COLLECTION 56 SELECT SERIES Meowscarada",
-            "en": "Pokémon PLAMO COLLECTION 56 SELECT SERIES Meowscarada"
+            "ja": "(Box) CHILLfigg Fate / kaleid liner PRISMA☆ILLYA Licht Nameless Girl (6 pieces)",
+            "zh": "(Box) CHILLfigg Fate / kaleid liner PRISMA☆ILLYA Licht Nameless Girl (6 pieces)",
+            "ko": "(Box) CHILLfigg Fate / kaleid liner PRISMA☆ILLYA Licht Nameless Girl (6 pieces)",
+            "en": "(Box) CHILLfigg Fate / kaleid liner PRISMA☆ILLYA Licht Nameless Girl (6 pieces)"
           },
-          "release_date": null,
-          "price_jpy": 1600,
+          "release_date": "2026-12",
+          "price_jpy": 18000,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5467/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1145389"
           ]
         },
         {
-          "kit_id": "pokepla-01-5497",
+          "kit_id": "goodsmile-fate-g1145387",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 57 SELECT SERIES Ceruledge",
-            "zh": "宝可梦 PLAMO COLLECTION 57 SELECT SERIES Ceruledge",
-            "ko": "포켓몬 PLAMO COLLECTION 57 SELECT SERIES Ceruledge",
-            "en": "Pokémon PLAMO COLLECTION 57 SELECT SERIES Ceruledge"
+            "ja": "CHILLfigg Fate / kaleid liner PRISMA☆ILLYA Licht Nameless Girl",
+            "zh": "CHILLfigg Fate / kaleid liner PRISMA☆ILLYA Licht Nameless Girl",
+            "ko": "CHILLfigg Fate / kaleid liner PRISMA☆ILLYA Licht Nameless Girl",
+            "en": "CHILLfigg Fate / kaleid liner PRISMA☆ILLYA Licht Nameless Girl"
           },
-          "release_date": null,
-          "price_jpy": 1700,
+          "release_date": "2026-12",
+          "price_jpy": 3000,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5497/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1145387"
           ]
         },
         {
-          "kit_id": "pokepla-01-5568",
+          "kit_id": "goodsmile-fate-g1141696",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Plushie",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 58 SELECT SERIES Armarouge",
-            "zh": "宝可梦 PLAMO COLLECTION 58 SELECT SERIES Armarouge",
-            "ko": "포켓몬 PLAMO COLLECTION 58 SELECT SERIES Armarouge",
-            "en": "Pokémon PLAMO COLLECTION 58 SELECT SERIES Armarouge"
+            "ja": "Chocopuni Plushie Master / Female Protagonist",
+            "zh": "Chocopuni Plushie Master / Female Protagonist",
+            "ko": "Chocopuni Plushie Master / Female Protagonist",
+            "en": "Chocopuni Plushie Master / Female Protagonist"
           },
-          "release_date": null,
-          "price_jpy": 1700,
+          "release_date": "2026-12",
+          "price_jpy": 4400,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5568/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1141696"
           ]
         },
         {
-          "kit_id": "pokepla-01-5958",
+          "kit_id": "goodsmile-fate-g1141697",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Plushie",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 59 SELECT SERIES Miraidon",
-            "zh": "宝可梦 PLAMO COLLECTION 59 SELECT SERIES Miraidon",
-            "ko": "포켓몬 PLAMO COLLECTION 59 SELECT SERIES Miraidon",
-            "en": "Pokémon PLAMO COLLECTION 59 SELECT SERIES Miraidon"
+            "ja": "Chocopuni Plushie Master / Male Protagonist",
+            "zh": "Chocopuni Plushie Master / Male Protagonist",
+            "ko": "Chocopuni Plushie Master / Male Protagonist",
+            "en": "Chocopuni Plushie Master / Male Protagonist"
           },
-          "release_date": null,
-          "price_jpy": 2100,
+          "release_date": "2026-12",
+          "price_jpy": 4400,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5958/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1141697"
           ]
         },
         {
-          "kit_id": "pokepla-01-5984",
+          "kit_id": "goodsmile-fate-g1142281",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "Scale Figure",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 60 SELECT SERIES Koraidon",
-            "zh": "宝可梦 PLAMO COLLECTION 60 SELECT SERIES Koraidon",
-            "ko": "포켓몬 PLAMO COLLECTION 60 SELECT SERIES Koraidon",
-            "en": "Pokémon PLAMO COLLECTION 60 SELECT SERIES Koraidon"
+            "ja": "Fate / Grand Order Beast / Ereshkigal 1 / 7 scale figure (1st Ascension)",
+            "zh": "Fate / Grand Order Beast / Ereshkigal 1 / 7 scale figure (1st Ascension)",
+            "ko": "Fate / Grand Order Beast / Ereshkigal 1 / 7 scale figure (1st Ascension)",
+            "en": "Fate / Grand Order Beast / Ereshkigal 1 / 7 scale figure (1st Ascension)"
           },
-          "release_date": null,
-          "price_jpy": 2100,
+          "release_date": "2026-11",
+          "price_jpy": 24200,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5984/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1142281"
           ]
         },
         {
-          "kit_id": "pokepla-01-6780",
+          "kit_id": "goodsmile-fate-g1139584",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza",
-            "zh": "宝可梦 PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza",
-            "ko": "포켓몬 PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza",
-            "en": "Pokémon PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza"
+            "ja": "Saber / Okita Souji: Final Ascension Ver.",
+            "zh": "Saber / Okita Souji: Final Ascension Ver.",
+            "ko": "Saber / Okita Souji: Final Ascension Ver.",
+            "en": "Saber / Okita Souji: Final Ascension Ver."
           },
-          "release_date": null,
-          "price_jpy": 2700,
+          "release_date": "2026-11",
+          "price_jpy": 16800,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_6780/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1139584"
           ]
         },
         {
-          "kit_id": "pokepla-01-7038",
+          "kit_id": "goodsmile-fate-g1145054",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 62 SELECT SERIES Kyogre",
-            "zh": "宝可梦 PLAMO COLLECTION 62 SELECT SERIES Kyogre",
-            "ko": "포켓몬 PLAMO COLLECTION 62 SELECT SERIES Kyogre",
-            "en": "Pokémon PLAMO COLLECTION 62 SELECT SERIES Kyogre"
+            "ja": "(Box) Nendoroid Surprise Fate / Grand Order Oberon Collection (6 Pieces)",
+            "zh": "(Box) Nendoroid Surprise Fate / Grand Order Oberon Collection (6 Pieces)",
+            "ko": "(Box) Nendoroid Surprise Fate / Grand Order Oberon Collection (6 Pieces)",
+            "en": "(Box) Nendoroid Surprise Fate / Grand Order Oberon Collection (6 Pieces)"
           },
-          "release_date": null,
+          "release_date": "2026-10",
+          "price_jpy": 10800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/1145054"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g1140741",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Saber: Casual Outfit Ver.",
+            "zh": "Nendoroid Saber: Casual Outfit Ver.",
+            "ko": "Nendoroid Saber: Casual Outfit Ver.",
+            "en": "Nendoroid Saber: Casual Outfit Ver."
+          },
+          "release_date": "2026-10",
+          "price_jpy": 6600,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/1140741"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g1139022",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Surprise Fate / Grand Order Oberon Collection",
+            "zh": "Nendoroid Surprise Fate / Grand Order Oberon Collection",
+            "ko": "Nendoroid Surprise Fate / Grand Order Oberon Collection",
+            "en": "Nendoroid Surprise Fate / Grand Order Oberon Collection"
+          },
+          "release_date": "2026-10",
           "price_jpy": 1800,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7038/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1139022"
           ]
         },
         {
-          "kit_id": "pokepla-01-5174",
+          "kit_id": "goodsmile-fate-g1141676",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 18 Sprigatito",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 18 Sprigatito",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 18 Sprigatito",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 18 Sprigatito"
+            "ja": "Saber / Barghest",
+            "zh": "Saber / Barghest",
+            "ko": "Saber / Barghest",
+            "en": "Saber / Barghest"
           },
-          "release_date": null,
-          "price_jpy": 780,
+          "release_date": "2026-10",
+          "price_jpy": 29800,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5174/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1141676"
           ]
         },
         {
-          "kit_id": "pokepla-01-5247",
+          "kit_id": "goodsmile-fate-g1142475",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 19 Quaxly",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 19 Quaxly",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 19 Quaxly",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 19 Quaxly"
+            "ja": "Archer / Durgā",
+            "zh": "Archer / Durgā",
+            "ko": "Archer / Durgā",
+            "en": "Archer / Durgā"
           },
-          "release_date": null,
-          "price_jpy": 780,
+          "release_date": "2026-09",
+          "price_jpy": 32780,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5247/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1142475"
           ]
         },
         {
-          "kit_id": "pokepla-01-5372",
+          "kit_id": "goodsmile-fate-g1137383",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 20 Fuecoco",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 20 Fuecoco",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 20 Fuecoco",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 20 Fuecoco"
+            "ja": "Fate / Grand Order Berserker / Morgan Non-Scale Figure",
+            "zh": "Fate / Grand Order Berserker / Morgan Non-Scale Figure",
+            "ko": "Fate / Grand Order Berserker / Morgan Non-Scale Figure",
+            "en": "Fate / Grand Order Berserker / Morgan Non-Scale Figure"
           },
-          "release_date": null,
-          "price_jpy": 780,
+          "release_date": "2026-08",
+          "price_jpy": 18700,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5372/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1137383"
           ]
         },
         {
-          "kit_id": "pokepla-01-5450",
+          "kit_id": "goodsmile-fate-g1140948",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "Scale Figure",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 21 Psyduck",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 21 Psyduck",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 21 Psyduck",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 21 Psyduck"
+            "ja": "Fate / Grand Order Morgan, Lady of the Water 1 / 7 Scale Figure",
+            "zh": "Fate / Grand Order Morgan, Lady of the Water 1 / 7 Scale Figure",
+            "ko": "Fate / Grand Order Morgan, Lady of the Water 1 / 7 Scale Figure",
+            "en": "Fate / Grand Order Morgan, Lady of the Water 1 / 7 Scale Figure"
           },
-          "release_date": null,
-          "price_jpy": 780,
+          "release_date": "2026-08",
+          "price_jpy": 39600,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5450/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1140948"
           ]
         },
         {
-          "kit_id": "pokepla-01-5555",
+          "kit_id": "goodsmile-fate-g5875",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 22 Pawmi",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 22 Pawmi",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 22 Pawmi",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 22 Pawmi"
+            "ja": "figma Saber Alter 2.0",
+            "zh": "figma Saber Alter 2.0",
+            "ko": "figma Saber Alter 2.0",
+            "en": "figma Saber Alter 2.0"
           },
-          "release_date": null,
-          "price_jpy": 780,
+          "release_date": "2026-08",
+          "price_jpy": 10800,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5555/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/5875"
           ]
         },
         {
-          "kit_id": "pokepla-01-5947",
+          "kit_id": "goodsmile-fate-g1140863",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 23 Jirachi",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 23 Jirachi",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 23 Jirachi",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 23 Jirachi"
+            "ja": "Minamoto-no-Raikou: Bunny Girl Style",
+            "zh": "Minamoto-no-Raikou: Bunny Girl Style",
+            "ko": "Minamoto-no-Raikou: Bunny Girl Style",
+            "en": "Minamoto-no-Raikou: Bunny Girl Style"
           },
-          "release_date": null,
-          "price_jpy": 780,
+          "release_date": "2026-08",
+          "price_jpy": 44000,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5947/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1140863"
           ]
         },
         {
-          "kit_id": "pokepla-01-6762",
+          "kit_id": "goodsmile-fate-g1141723",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 24 Pichu",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 24 Pichu",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 24 Pichu",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 24 Pichu"
+            "ja": "POP UP PARADE BEACH QUEENS Saber Lily L Size",
+            "zh": "POP UP PARADE BEACH QUEENS Saber Lily L Size",
+            "ko": "POP UP PARADE BEACH QUEENS Saber Lily L Size",
+            "en": "POP UP PARADE BEACH QUEENS Saber Lily L Size"
           },
-          "release_date": null,
-          "price_jpy": 780,
+          "release_date": "2026-08",
+          "price_jpy": 8800,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_6762/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1141723"
           ]
         },
         {
-          "kit_id": "pokepla-01-7010",
+          "kit_id": "goodsmile-fate-g57700",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 26 Jolteon",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 26 Jolteon",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 26 Jolteon",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 26 Jolteon"
+            "ja": "Saber -Garden of Avalon-",
+            "zh": "Saber -Garden of Avalon-",
+            "ko": "Saber -Garden of Avalon-",
+            "en": "Saber -Garden of Avalon-"
           },
-          "release_date": null,
-          "price_jpy": 780,
+          "release_date": "2026-08",
+          "price_jpy": 23000,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7010/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/57700"
           ]
         },
         {
-          "kit_id": "pokepla-01-7015",
+          "kit_id": "goodsmile-fate-g1141802",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 27 Vaporeon",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 27 Vaporeon",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 27 Vaporeon",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 27 Vaporeon"
+            "ja": "Anastasia & Viy (Archer)",
+            "zh": "Anastasia & Viy (Archer)",
+            "ko": "Anastasia & Viy (Archer)",
+            "en": "Anastasia & Viy (Archer)"
           },
-          "release_date": null,
-          "price_jpy": 780,
+          "release_date": "2026-07",
+          "price_jpy": 28380,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7015/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1141802"
           ]
         },
         {
-          "kit_id": "pokepla-01-7120",
+          "kit_id": "goodsmile-fate-g1136090",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 28 Meowth",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 28 Meowth",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 28 Meowth",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 28 Meowth"
+            "ja": "figma Illyasviel von Einzbern",
+            "zh": "figma Illyasviel von Einzbern",
+            "ko": "figma Illyasviel von Einzbern",
+            "en": "figma Illyasviel von Einzbern"
           },
-          "release_date": null,
-          "price_jpy": 780,
+          "release_date": "2026-07",
+          "price_jpy": 9800,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7120/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1136090"
           ]
         },
         {
-          "kit_id": "pokepla-01-7148",
+          "kit_id": "goodsmile-fate-g5376",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 29 Chimchar",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 29 Chimchar",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 29 Chimchar",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 29 Chimchar"
+            "ja": "figma Saber of \"Red\"",
+            "zh": "figma Saber of \"Red\"",
+            "ko": "figma Saber of \"Red\"",
+            "en": "figma Saber of \"Red\""
           },
-          "release_date": null,
-          "price_jpy": 780,
+          "release_date": "2026-07",
+          "price_jpy": 10800,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7148/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/5376"
           ]
         },
         {
-          "kit_id": "pokepla-01-5010",
+          "kit_id": "goodsmile-fate-g1139462",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION SELECT SERIES Black Rayquaza",
-            "zh": "宝可梦 PLAMO COLLECTION SELECT SERIES Black Rayquaza",
-            "ko": "포켓몬 PLAMO COLLECTION SELECT SERIES Black Rayquaza",
-            "en": "Pokémon PLAMO COLLECTION SELECT SERIES Black Rayquaza"
+            "ja": "Lancer / Mélusine",
+            "zh": "Lancer / Mélusine",
+            "ko": "Lancer / Mélusine",
+            "en": "Lancer / Mélusine"
           },
-          "release_date": null,
-          "price_jpy": 1500,
+          "release_date": "2026-07",
+          "price_jpy": 39800,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5010/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/1139462"
           ]
         },
         {
-          "kit_id": "pokepla-01-4324",
+          "kit_id": "goodsmile-fate-g62225",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid Doll",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ポケモン Plastic Model Collection 53 Select Series Metagross",
-            "zh": "宝可梦 Plastic Model Collection 53 Select Series Metagross",
-            "ko": "포켓몬 Plastic Model Collection 53 Select Series Metagross",
-            "en": "Pokemon Plastic Model Collection 53 Select Series Metagross"
+            "ja": "Nendoroid Doll Pretender / Oberon: Moody Summer Oberon Ver.",
+            "zh": "Nendoroid Doll Pretender / Oberon: Moody Summer Oberon Ver.",
+            "ko": "Nendoroid Doll Pretender / Oberon: Moody Summer Oberon Ver.",
+            "en": "Nendoroid Doll Pretender / Oberon: Moody Summer Oberon Ver."
           },
-          "release_date": null,
-          "price_jpy": 1300,
+          "release_date": "2026-04",
+          "price_jpy": 10000,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_4324/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.goodsmile.com/en/product/62225"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g62103",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "Scale Figure",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "(Bonus Included) Usada Pekora × Mash Kyrielight 1 / 7 Collaboration Figure",
+            "zh": "(Bonus Included) Usada Pekora × Mash Kyrielight 1 / 7 Collaboration Figure",
+            "ko": "(Bonus Included) Usada Pekora × Mash Kyrielight 1 / 7 Collaboration Figure",
+            "en": "(Bonus Included) Usada Pekora × Mash Kyrielight 1 / 7 Collaboration Figure"
+          },
+          "release_date": "2025-09",
+          "price_jpy": 24800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/62103"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g57825",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "Scale Figure",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Fate / Grand Order Moon Cancer / Archetype: Earth 1 / 7 Scale Figure",
+            "zh": "Fate / Grand Order Moon Cancer / Archetype: Earth 1 / 7 Scale Figure",
+            "ko": "Fate / Grand Order Moon Cancer / Archetype: Earth 1 / 7 Scale Figure",
+            "en": "Fate / Grand Order Moon Cancer / Archetype: Earth 1 / 7 Scale Figure"
+          },
+          "release_date": "2025-07",
+          "price_jpy": 37000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/57825"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g61552",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "Scale Figure",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "TSUKIHIME -A piece of blue glass moon- Ciel 1 / 7 Scale Figure",
+            "zh": "TSUKIHIME -A piece of blue glass moon- Ciel 1 / 7 Scale Figure",
+            "ko": "TSUKIHIME -A piece of blue glass moon- Ciel 1 / 7 Scale Figure",
+            "en": "TSUKIHIME -A piece of blue glass moon- Ciel 1 / 7 Scale Figure"
+          },
+          "release_date": "2025-03",
+          "price_jpy": 18700,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/61552"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g57463",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Lancer / Utsumi Erice",
+            "zh": "Lancer / Utsumi Erice",
+            "ko": "Lancer / Utsumi Erice",
+            "en": "Lancer / Utsumi Erice"
+          },
+          "release_date": "2024-12",
+          "price_jpy": 29800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/57463"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g36063",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Saber",
+            "zh": "Nendoroid Saber",
+            "ko": "Nendoroid Saber",
+            "en": "Nendoroid Saber"
+          },
+          "release_date": "2024-12",
+          "price_jpy": 6900,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/36063"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-8394",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/4th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Scáthach: Sashi Ugatsu Bunny Ver.",
+            "zh": "Scáthach: Sashi Ugatsu Bunny Ver.",
+            "ko": "Scáthach: Sashi Ugatsu Bunny Ver.",
+            "en": "Scáthach: Sashi Ugatsu Bunny Ver."
+          },
+          "release_date": "2024-06",
+          "price_jpy": 29700,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/8394/Scathach+Sashi+Ugatsu+Bunny+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/6102"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-14347",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Lancer / Mysterious Alter Ego Λ [AQ]",
+            "zh": "Lancer / Mysterious Alter Ego Λ [AQ]",
+            "ko": "Lancer / Mysterious Alter Ego Λ [AQ]",
+            "en": "Lancer / Mysterious Alter Ego Λ [AQ]"
+          },
+          "release_date": "2024-03",
+          "price_jpy": 24900,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/14347/Lancer+Mysterious+Alter+Ego+AQ.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/12032"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-14348",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/4th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Assassin / Koyanskaya of Light (Final Ascension)",
+            "zh": "Assassin / Koyanskaya of Light (Final Ascension)",
+            "ko": "Assassin / Koyanskaya of Light (Final Ascension)",
+            "en": "Assassin / Koyanskaya of Light (Final Ascension)"
+          },
+          "release_date": "2024-02",
+          "price_jpy": 54780,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/14348/Assassin+Koyanskaya+of+Light+Final+Ascension.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/12033"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-13671",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Caster / Scáthach-Skadi",
+            "zh": "Caster / Scáthach-Skadi",
+            "ko": "Caster / Scáthach-Skadi",
+            "en": "Caster / Scáthach-Skadi"
+          },
+          "release_date": "2024-02",
+          "price_jpy": 26800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/13671/Caster+Scathach+Skadi.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g12579",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Illyasviel von Einzbern: Summer Dress ver.",
+            "zh": "Illyasviel von Einzbern: Summer Dress ver.",
+            "ko": "Illyasviel von Einzbern: Summer Dress ver.",
+            "en": "Illyasviel von Einzbern: Summer Dress ver."
+          },
+          "release_date": "2024-02",
+          "price_jpy": 22550,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/12579"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-14661",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/4th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Ruler / Altria Pendragon",
+            "zh": "Ruler / Altria Pendragon",
+            "ko": "Ruler / Altria Pendragon",
+            "en": "Ruler / Altria Pendragon"
+          },
+          "release_date": "2024-02",
+          "price_jpy": 49500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/14661/Ruler+Altria+Pendragon.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/12346"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-14776",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "POP UP PARADE Avenger / Jeanne d'Arc (Alter)",
+            "zh": "POP UP PARADE Avenger / Jeanne d'Arc (Alter)",
+            "ko": "POP UP PARADE Avenger / Jeanne d'Arc (Alter)",
+            "en": "POP UP PARADE Avenger / Jeanne d'Arc (Alter)"
+          },
+          "release_date": "2024-01",
+          "price_jpy": 4800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/14776/POP+UP+PARADE+Avenger+Jeanne+d+Arc+Alter.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/12461"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-14512",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Lancer / Mélusine",
+            "zh": "Nendoroid Lancer / Mélusine",
+            "ko": "Nendoroid Lancer / Mélusine",
+            "en": "Nendoroid Lancer / Mélusine"
+          },
+          "release_date": "2023-12",
+          "price_jpy": 7200,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/14512/Nendoroid+Lancer+Melusine.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/12197"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-13929",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Berserker / Minamoto-no-Raikou: Travel Portrait Ver.",
+            "zh": "Berserker / Minamoto-no-Raikou: Travel Portrait Ver.",
+            "ko": "Berserker / Minamoto-no-Raikou: Travel Portrait Ver.",
+            "en": "Berserker / Minamoto-no-Raikou: Travel Portrait Ver."
+          },
+          "release_date": "2023-11",
+          "price_jpy": 28800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/13929/Berserker+Minamoto+no+Raikou+Travel+Portrait+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/11614"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-11979",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Caster / Scáthach-Skadi",
+            "zh": "Caster / Scáthach-Skadi",
+            "ko": "Caster / Scáthach-Skadi",
+            "en": "Caster / Scáthach-Skadi"
+          },
+          "release_date": "2023-10",
+          "price_jpy": 22800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/11979/Caster+Scathach+Skadi.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/9668"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g11730",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Akiha Tohno",
+            "zh": "Nendoroid Akiha Tohno",
+            "ko": "Nendoroid Akiha Tohno",
+            "en": "Nendoroid Akiha Tohno"
+          },
+          "release_date": "2023-10",
+          "price_jpy": 7500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/11730"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-14352",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Berserker / Morgan",
+            "zh": "Nendoroid Berserker / Morgan",
+            "ko": "Nendoroid Berserker / Morgan",
+            "en": "Nendoroid Berserker / Morgan"
+          },
+          "release_date": "2023-10",
+          "price_jpy": 7900,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/14352/Nendoroid+Berserker+Morgan.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/12037"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-14455",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "POP UP PARADE Ruler / Jeanne d'Arc",
+            "zh": "POP UP PARADE Ruler / Jeanne d'Arc",
+            "ko": "POP UP PARADE Ruler / Jeanne d'Arc",
+            "en": "POP UP PARADE Ruler / Jeanne d'Arc"
+          },
+          "release_date": "2023-10",
+          "price_jpy": 4800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/14455/POP+UP+PARADE+Ruler+Jeanne+d+Arc.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/12140"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-11432",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Foreigner / Katsushika Hokusai: Travel Portrait Ver.",
+            "zh": "Foreigner / Katsushika Hokusai: Travel Portrait Ver.",
+            "ko": "Foreigner / Katsushika Hokusai: Travel Portrait Ver.",
+            "en": "Foreigner / Katsushika Hokusai: Travel Portrait Ver."
+          },
+          "release_date": "2023-09",
+          "price_jpy": 19800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/11432/Foreigner+Katsushika+Hokusai+Travel+Portrait+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/9126"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g11596",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Illyasviel von Einzbern: Bikini ver.",
+            "zh": "Illyasviel von Einzbern: Bikini ver.",
+            "ko": "Illyasviel von Einzbern: Bikini ver.",
+            "en": "Illyasviel von Einzbern: Bikini ver."
+          },
+          "release_date": "2023-09",
+          "price_jpy": 22000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/11596"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g11458",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Ciel",
+            "zh": "Nendoroid Ciel",
+            "ko": "Nendoroid Ciel",
+            "en": "Nendoroid Ciel"
+          },
+          "release_date": "2023-08",
+          "price_jpy": 7500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/11458"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-14196",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Pretender / Oberon",
+            "zh": "Nendoroid Pretender / Oberon",
+            "ko": "Nendoroid Pretender / Oberon",
+            "en": "Nendoroid Pretender / Oberon"
+          },
+          "release_date": "2023-08",
+          "price_jpy": 6800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/14196/Nendoroid+Pretender+Oberon.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/11881"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g11492",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Pandora: Wedding Dress ver.",
+            "zh": "Pandora: Wedding Dress ver.",
+            "ko": "Pandora: Wedding Dress ver.",
+            "en": "Pandora: Wedding Dress ver."
+          },
+          "release_date": "2023-08",
+          "price_jpy": 28600,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/11492"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g11980",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "POP UP PARADE Akiha Tohno",
+            "zh": "POP UP PARADE Akiha Tohno",
+            "ko": "POP UP PARADE Akiha Tohno",
+            "en": "POP UP PARADE Akiha Tohno"
+          },
+          "release_date": "2023-08",
+          "price_jpy": 4800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/11980"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g11978",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "POP UP PARADE Hisui",
+            "zh": "POP UP PARADE Hisui",
+            "ko": "POP UP PARADE Hisui",
+            "en": "POP UP PARADE Hisui"
+          },
+          "release_date": "2023-08",
+          "price_jpy": 4800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/11978"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g11979",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "POP UP PARADE Kohaku",
+            "zh": "POP UP PARADE Kohaku",
+            "ko": "POP UP PARADE Kohaku",
+            "en": "POP UP PARADE Kohaku"
+          },
+          "release_date": "2023-08",
+          "price_jpy": 4800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/11979"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-13088",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/8th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Ruler / Sherlock Holmes",
+            "zh": "Ruler / Sherlock Holmes",
+            "ko": "Ruler / Sherlock Holmes",
+            "en": "Ruler / Sherlock Holmes"
+          },
+          "release_date": "2023-08",
+          "price_jpy": 22000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/13088/Ruler+Sherlock+Holmes.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/10773"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-13202",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "figma Berserker / Mysterious Heroine X (Alter)",
+            "zh": "figma Berserker / Mysterious Heroine X (Alter)",
+            "ko": "figma Berserker / Mysterious Heroine X (Alter)",
+            "en": "figma Berserker / Mysterious Heroine X (Alter)"
+          },
+          "release_date": "2023-06",
+          "price_jpy": 11800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/13202/figma+Berserker+Mysterious+Heroine+X+Alter.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/10887"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g11522",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "POP UP PARADE Arcueid Brunestud: Limited Ver.",
+            "zh": "POP UP PARADE Arcueid Brunestud: Limited Ver.",
+            "ko": "POP UP PARADE Arcueid Brunestud: Limited Ver.",
+            "en": "POP UP PARADE Arcueid Brunestud: Limited Ver."
+          },
+          "release_date": "2023-06",
+          "price_jpy": 4800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/11522"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10713",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Assassin / Semiramis",
+            "zh": "Assassin / Semiramis",
+            "ko": "Assassin / Semiramis",
+            "en": "Assassin / Semiramis"
+          },
+          "release_date": "2023-05",
+          "price_jpy": 31680,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10713/Assassin+Semiramis.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8407"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-12700",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "figma Lancer / Altria Pendragon",
+            "zh": "figma Lancer / Altria Pendragon",
+            "ko": "figma Lancer / Altria Pendragon",
+            "en": "figma Lancer / Altria Pendragon"
+          },
+          "release_date": "2023-05",
+          "price_jpy": 9500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/12700/figma+Lancer+Altria+Pendragon.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/10385"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-12701",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "figma Lancer / Altria Pendragon: DX Edition",
+            "zh": "figma Lancer / Altria Pendragon: DX Edition",
+            "ko": "figma Lancer / Altria Pendragon: DX Edition",
+            "en": "figma Lancer / Altria Pendragon: DX Edition"
+          },
+          "release_date": "2023-05",
+          "price_jpy": 17800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/12701/figma+Lancer+Altria+Pendragon+DX+Edition.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/10386"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g10711",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Chloe von Einzbern",
+            "zh": "Nendoroid Chloe von Einzbern",
+            "ko": "Nendoroid Chloe von Einzbern",
+            "en": "Nendoroid Chloe von Einzbern"
+          },
+          "release_date": "2023-05",
+          "price_jpy": 6500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/10711"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g11123",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Fate / Grand Order Metal Charm Collection Sword of Rupture Ea / Shuten-Douji's Sword",
+            "zh": "Fate / Grand Order Metal Charm Collection Sword of Rupture Ea / Shuten-Douji's Sword",
+            "ko": "Fate / Grand Order Metal Charm Collection Sword of Rupture Ea / Shuten-Douji's Sword",
+            "en": "Fate / Grand Order Metal Charm Collection Sword of Rupture Ea / Shuten-Douji's Sword"
+          },
+          "release_date": "2023-04",
+          "price_jpy": 6600,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/11123"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g10796",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Illyasviel von Einzbern: Wedding Dress Ver.",
+            "zh": "Illyasviel von Einzbern: Wedding Dress Ver.",
+            "ko": "Illyasviel von Einzbern: Wedding Dress Ver.",
+            "en": "Illyasviel von Einzbern: Wedding Dress Ver."
+          },
+          "release_date": "2023-04",
+          "price_jpy": 27500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/10796"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-12014",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Lancer / Minamoto-no-Raikou [AQ]",
+            "zh": "Lancer / Minamoto-no-Raikou [AQ]",
+            "ko": "Lancer / Minamoto-no-Raikou [AQ]",
+            "en": "Lancer / Minamoto-no-Raikou [AQ]"
+          },
+          "release_date": "2023-04",
+          "price_jpy": 32800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/12014/Lancer+Minamoto+no+Raikou+AQ.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/9702"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-12263",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "figma Saber / Nero Claudius (Bride)",
+            "zh": "figma Saber / Nero Claudius (Bride)",
+            "ko": "figma Saber / Nero Claudius (Bride)",
+            "en": "figma Saber / Nero Claudius (Bride)"
+          },
+          "release_date": "2023-03",
+          "price_jpy": 11000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/12263/figma+Saber+Nero+Claudius+Bride.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/9951"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g10341",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Altria Pendragon: Knight's PE Uniform Ver. [AQ]",
+            "zh": "Altria Pendragon: Knight's PE Uniform Ver. [AQ]",
+            "ko": "Altria Pendragon: Knight's PE Uniform Ver. [AQ]",
+            "en": "Altria Pendragon: Knight's PE Uniform Ver. [AQ]"
+          },
+          "release_date": "2023-02",
+          "price_jpy": 15800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/10341"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-12113",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Lancer / Caenis",
+            "zh": "Lancer / Caenis",
+            "ko": "Lancer / Caenis",
+            "en": "Lancer / Caenis"
+          },
+          "release_date": "2023-02",
+          "price_jpy": 26800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/12113/Lancer+Caenis.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/9801"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-12997",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "POP UP PARADE Rider / Astolfo",
+            "zh": "POP UP PARADE Rider / Astolfo",
+            "ko": "POP UP PARADE Rider / Astolfo",
+            "en": "POP UP PARADE Rider / Astolfo"
+          },
+          "release_date": "2023-02",
+          "price_jpy": 4800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/12997/POP+UP+PARADE+Rider+Astolfo.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/10682"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-13262",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "POP UP PARADE Saber / Mordred",
+            "zh": "POP UP PARADE Saber / Mordred",
+            "ko": "POP UP PARADE Saber / Mordred",
+            "en": "POP UP PARADE Saber / Mordred"
+          },
+          "release_date": "2023-02",
+          "price_jpy": 4800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/13262/POP+UP+PARADE+Saber+Mordred.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/10947"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-11754",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Saber / Katsushika Hokusai",
+            "zh": "Saber / Katsushika Hokusai",
+            "ko": "Saber / Katsushika Hokusai",
+            "en": "Saber / Katsushika Hokusai"
+          },
+          "release_date": "2023-02",
+          "price_jpy": 29800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/11754/Saber+Katsushika+Hokusai.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/9443"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g10737",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Arcueid Brunestud",
+            "zh": "Nendoroid Arcueid Brunestud",
+            "ko": "Nendoroid Arcueid Brunestud",
+            "en": "Nendoroid Arcueid Brunestud"
+          },
+          "release_date": "2023-01",
+          "price_jpy": 6500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/10737"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-12062",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/8th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Assassin / Okada Izo: Festival Portrait Ver.",
+            "zh": "Assassin / Okada Izo: Festival Portrait Ver.",
+            "ko": "Assassin / Okada Izo: Festival Portrait Ver.",
+            "en": "Assassin / Okada Izo: Festival Portrait Ver."
+          },
+          "release_date": "2022-12",
+          "price_jpy": 23800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/12062/Assassin+Okada+Izo+Festival+Portrait+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/9750"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-12298",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "figma Berserker / Miyamoto Musashi",
+            "zh": "figma Berserker / Miyamoto Musashi",
+            "ko": "figma Berserker / Miyamoto Musashi",
+            "en": "figma Berserker / Miyamoto Musashi"
+          },
+          "release_date": "2022-12",
+          "price_jpy": 9500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/12298/figma+Berserker+Miyamoto+Musashi.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/9986"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-12450",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid Doll",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Doll Outfit Set: Saber / Arthur Pendragon (Prototype): Costume Dress -White Rose- Ver.",
+            "zh": "Nendoroid Doll Outfit 套装: Saber / Arthur Pendragon (Prototype): Costume Dress -White Rose- Ver.",
+            "ko": "Nendoroid Doll Outfit 세트: Saber / Arthur Pendragon (Prototype): Costume Dress -White Rose- Ver.",
+            "en": "Nendoroid Doll Outfit Set: Saber / Arthur Pendragon (Prototype): Costume Dress -White Rose- Ver."
+          },
+          "release_date": "2022-12",
+          "price_jpy": 4600,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/12450/Nendoroid+Doll+Outfit+Set+Saber+Arthur+Pendragon+Prototype+Costume+Dress+White+Rose+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/10135"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-12449",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid Doll",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Doll Saber / Arthur Pendragon (Prototype): Costume Dress -White Rose- Ver.",
+            "zh": "Nendoroid Doll Saber / Arthur Pendragon (Prototype): Costume Dress -White Rose- Ver.",
+            "ko": "Nendoroid Doll Saber / Arthur Pendragon (Prototype): Costume Dress -White Rose- Ver.",
+            "en": "Nendoroid Doll Saber / Arthur Pendragon (Prototype): Costume Dress -White Rose- Ver."
+          },
+          "release_date": "2022-12",
+          "price_jpy": 9000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/12449/Nendoroid+Doll+Saber+Arthur+Pendragon+Prototype+Costume+Dress+White+Rose+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/10134"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-12966",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Lancer / Cú Chulainn",
+            "zh": "Nendoroid Lancer / Cú Chulainn",
+            "ko": "Nendoroid Lancer / Cú Chulainn",
+            "en": "Nendoroid Lancer / Cú Chulainn"
+          },
+          "release_date": "2022-12",
+          "price_jpy": 6800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/12966/Nendoroid+Lancer+Cu+Chulainn.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/10651"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-12568",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Lancer / Altria Pendragon (Alter)",
+            "zh": "Nendoroid Lancer / Altria Pendragon (Alter)",
+            "ko": "Nendoroid Lancer / Altria Pendragon (Alter)",
+            "en": "Nendoroid Lancer / Altria Pendragon (Alter)"
+          },
+          "release_date": "2022-11",
+          "price_jpy": 9500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/12568/Nendoroid+Lancer+Altria+Pendragon+Alter.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/10253"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g10148",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Miyu Edelfelt",
+            "zh": "Nendoroid Miyu Edelfelt",
+            "ko": "Nendoroid Miyu Edelfelt",
+            "en": "Nendoroid Miyu Edelfelt"
+          },
+          "release_date": "2022-11",
+          "price_jpy": 5500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/10148"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10212",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Berserker / Jeanne d'Arc (Alter)",
+            "zh": "Berserker / Jeanne d'Arc (Alter)",
+            "ko": "Berserker / Jeanne d'Arc (Alter)",
+            "en": "Berserker / Jeanne d'Arc (Alter)"
+          },
+          "release_date": "2022-10",
+          "price_jpy": 17800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10212/Berserker+Jeanne+d+Arc+Alter.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/7906"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-11794",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Saber / Altria Pendragon [Lily] Festival Portrait Ver.",
+            "zh": "Saber / Altria Pendragon [Lily] Festival Portrait Ver.",
+            "ko": "Saber / Altria Pendragon [Lily] Festival Portrait Ver.",
+            "en": "Saber / Altria Pendragon [Lily] Festival Portrait Ver."
+          },
+          "release_date": "2022-10",
+          "price_jpy": 19800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/11794/Saber+Altria+Pendragon+Lily+Festival+Portrait+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/9483"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-11387",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Saber / Mordred ~Clarent Blood Arthur~",
+            "zh": "Saber / Mordred ~Clarent Blood Arthur~",
+            "ko": "Saber / Mordred ~Clarent Blood Arthur~",
+            "en": "Saber / Mordred ~Clarent Blood Arthur~"
+          },
+          "release_date": "2022-10",
+          "price_jpy": 24800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/11387/Saber+Mordred+Clarent+Blood+Arthur.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/9081"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-9683",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Foreigner / Katsushika Hokusai",
+            "zh": "Foreigner / Katsushika Hokusai",
+            "ko": "Foreigner / Katsushika Hokusai",
+            "en": "Foreigner / Katsushika Hokusai"
+          },
+          "release_date": "2022-09",
+          "price_jpy": 35200,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/9683/Foreigner+Katsushika+Hokusai.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/7385"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-12600",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "POP UP PARADE Lancer / Scáthach",
+            "zh": "POP UP PARADE Lancer / Scáthach",
+            "ko": "POP UP PARADE Lancer / Scáthach",
+            "en": "POP UP PARADE Lancer / Scáthach"
+          },
+          "release_date": "2022-09",
+          "price_jpy": 4800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/12600/POP+UP+PARADE+Lancer+Scathach.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10417",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Lancer / Ereshkigal",
+            "zh": "Lancer / Ereshkigal",
+            "ko": "Lancer / Ereshkigal",
+            "en": "Lancer / Ereshkigal"
+          },
+          "release_date": "2022-07",
+          "price_jpy": 19800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10417/Lancer+Ereshkigal.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8111"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-9470",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Alter Ego / Okita Souji (Alter) -Absolute Blade: Endless Three Stage-",
+            "zh": "Alter Ego / Okita Souji (Alter) -Absolute Blade: Endless Three Stage-",
+            "ko": "Alter Ego / Okita Souji (Alter) -Absolute Blade: Endless Three Stage-",
+            "en": "Alter Ego / Okita Souji (Alter) -Absolute Blade: Endless Three Stage-"
+          },
+          "release_date": "2022-06",
+          "price_jpy": 24800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/9470/Alter+Ego+Okita+Souji+Alter+Absolute+Blade+Endless+Three+Stage.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/7177"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10063",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Archer / Jeanne d'Arc",
+            "zh": "Archer / Jeanne d'Arc",
+            "ko": "Archer / Jeanne d'Arc",
+            "en": "Archer / Jeanne d'Arc"
+          },
+          "release_date": "2022-06",
+          "price_jpy": 14900,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10063/Archer+Jeanne+d+Arc.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/7758"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10556",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Archer / Tomoe Gozen: Heroic Spirit Traveling Outfit Ver.",
+            "zh": "Archer / Tomoe Gozen: Heroic Spirit Traveling Outfit Ver.",
+            "ko": "Archer / Tomoe Gozen: Heroic Spirit Traveling Outfit Ver.",
+            "en": "Archer / Tomoe Gozen: Heroic Spirit Traveling Outfit Ver."
+          },
+          "release_date": "2022-06",
+          "price_jpy": 19800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10556/Archer+Tomoe+Gozen+Heroic+Spirit+Traveling+Outfit+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8250"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-11351",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Assassin / Okita J Souji",
+            "zh": "Assassin / Okita J Souji",
+            "ko": "Assassin / Okita J Souji",
+            "en": "Assassin / Okita J Souji"
+          },
+          "release_date": "2022-06",
+          "price_jpy": 24800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/11351/Assassin+Okita+J+Souji.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/9045"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-11982",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Foreigner / Yang Guifei",
+            "zh": "Nendoroid Foreigner / Yang Guifei",
+            "ko": "Nendoroid Foreigner / Yang Guifei",
+            "en": "Nendoroid Foreigner / Yang Guifei"
+          },
+          "release_date": "2022-06",
+          "price_jpy": 7500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/11982/Nendoroid+Foreigner+Yang+Guifei.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-12055",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Saber / Senji Muramasa",
+            "zh": "Nendoroid Saber / Senji Muramasa",
+            "ko": "Nendoroid Saber / Senji Muramasa",
+            "en": "Nendoroid Saber / Senji Muramasa"
+          },
+          "release_date": "2022-06",
+          "price_jpy": 6500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/12055/Nendoroid+Saber+Senji+Muramasa.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/9743"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10958",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Saber / Altria Pendragon (Alter): Heroic Spirit Traveling Outfit Ver.",
+            "zh": "Saber / Altria Pendragon (Alter): Heroic Spirit Traveling Outfit Ver.",
+            "ko": "Saber / Altria Pendragon (Alter): Heroic Spirit Traveling Outfit Ver.",
+            "en": "Saber / Altria Pendragon (Alter): Heroic Spirit Traveling Outfit Ver."
+          },
+          "release_date": "2022-03",
+          "price_jpy": 16800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10958/Saber+Altria+Pendragon+Alter+Heroic+Spirit+Traveling+Outfit+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8652"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-11530",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Caster / Scheherazade (Caster of the Nightless City)",
+            "zh": "Caster / Scheherazade (Caster of the Nightless City)",
+            "ko": "Caster / Scheherazade (Caster of the Nightless City)",
+            "en": "Caster / Scheherazade (Caster of the Nightless City)"
+          },
+          "release_date": "2022-02",
+          "price_jpy": 26400,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/11530/Caster+Scheherazade+Caster+of+the+Nightless+City.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/9219"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10966",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "figma Saber / Okita Souji",
+            "zh": "figma Saber / Okita Souji",
+            "ko": "figma Saber / Okita Souji",
+            "en": "figma Saber / Okita Souji"
+          },
+          "release_date": "2022-02",
+          "price_jpy": 8800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10966/figma+Saber+Okita+Souji.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8660"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10965",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "figma Saber / Okita Souji: Ascension ver.",
+            "zh": "figma Saber / Okita Souji: Ascension ver.",
+            "ko": "figma Saber / Okita Souji: Ascension ver.",
+            "en": "figma Saber / Okita Souji: Ascension ver."
+          },
+          "release_date": "2022-02",
+          "price_jpy": 11000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10965/figma+Saber+Okita+Souji+Ascension+ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8659"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-11892",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "POP UP PARADE Saber / Nero Claudius",
+            "zh": "POP UP PARADE Saber / Nero Claudius",
+            "ko": "POP UP PARADE Saber / Nero Claudius",
+            "en": "POP UP PARADE Saber / Nero Claudius"
+          },
+          "release_date": "2022-02",
+          "price_jpy": 3900,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/11892/POP+UP+PARADE+Saber+Nero+Claudius.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-9478",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/8th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Archer / James Moriarty",
+            "zh": "Archer / James Moriarty",
+            "ko": "Archer / James Moriarty",
+            "en": "Archer / James Moriarty"
+          },
+          "release_date": "2022-01",
+          "price_jpy": 18700,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/9478/Archer+James+Moriarty.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/7185"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-11038",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Moon Cancer / BB (Devilish Flawless Skin) [AQ]",
+            "zh": "Moon Cancer / BB (Devilish Flawless Skin) [AQ]",
+            "ko": "Moon Cancer / BB (Devilish Flawless Skin) [AQ]",
+            "en": "Moon Cancer / BB (Devilish Flawless Skin) [AQ]"
+          },
+          "release_date": "2022-01",
+          "price_jpy": 20680,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/11038/Moon+Cancer+BB+Devilish+Flawless+Skin+AQ.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8732"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-11279",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/4th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Saber / Altria Pendragon (Second Ascension)",
+            "zh": "Saber / Altria Pendragon (Second Ascension)",
+            "ko": "Saber / Altria Pendragon (Second Ascension)",
+            "en": "Saber / Altria Pendragon (Second Ascension)"
+          },
+          "release_date": "2022-01",
+          "price_jpy": 33000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/11279/Saber+Altria+Pendragon+Second+Ascension.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8973"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10694",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "figma Alter Ego / Okita Souji (Alter)",
+            "zh": "figma Alter Ego / Okita Souji (Alter)",
+            "ko": "figma Alter Ego / Okita Souji (Alter)",
+            "en": "figma Alter Ego / Okita Souji (Alter)"
+          },
+          "release_date": "2021-11",
+          "price_jpy": 11000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10694/figma+Alter+Ego+Okita+Souji+Alter.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8388"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-6682",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "figma Ruler / Jeanne d'Arc",
+            "zh": "figma Ruler / Jeanne d'Arc",
+            "ko": "figma Ruler / Jeanne d'Arc",
+            "en": "figma Ruler / Jeanne d'Arc"
+          },
+          "release_date": "2021-11",
+          "price_jpy": 8800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/6682/figma+Ruler+Jeanne+d+Arc.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/4409"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10288",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "figma Shielder / Mash Kyrielight (Ortinax)",
+            "zh": "figma Shielder / Mash Kyrielight (Ortinax)",
+            "ko": "figma Shielder / Mash Kyrielight (Ortinax)",
+            "en": "figma Shielder / Mash Kyrielight (Ortinax)"
+          },
+          "release_date": "2021-11",
+          "price_jpy": 10800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10288/figma+Shielder+Mash+Kyrielight+Ortinax.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/7982"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-11037",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Moon Cancer / BB (2nd Ascension)",
+            "zh": "Moon Cancer / BB (2nd Ascension)",
+            "ko": "Moon Cancer / BB (2nd Ascension)",
+            "en": "Moon Cancer / BB (2nd Ascension)"
+          },
+          "release_date": "2021-11",
+          "price_jpy": 20680,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/11037/Moon+Cancer+BB+2nd+Ascension.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8731"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-11140",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Caster / Altria Caster",
+            "zh": "Nendoroid Caster / Altria Caster",
+            "ko": "Nendoroid Caster / Altria Caster",
+            "en": "Nendoroid Caster / Altria Caster"
+          },
+          "release_date": "2021-11",
+          "price_jpy": 5800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/11140/Nendoroid+Caster+Altria+Caster.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8834"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-8971",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/8th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Saber / Arthur Pendragon (Prototype): Heroic Spirit Formal Dress Ver.",
+            "zh": "Saber / Arthur Pendragon (Prototype): Heroic Spirit Formal Dress Ver.",
+            "ko": "Saber / Arthur Pendragon (Prototype): Heroic Spirit Formal Dress Ver.",
+            "en": "Saber / Arthur Pendragon (Prototype): Heroic Spirit Formal Dress Ver."
+          },
+          "release_date": "2021-11",
+          "price_jpy": 17800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/8971/Saber+Arthur+Pendragon+Prototype+Heroic+Spirit+Formal+Dress+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/6678"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g6922",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "FATE_SCALE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Saber, Rin Tohsaka and Sakura Matou ~15th Celebration Dress Ver.~ Premium Box",
+            "zh": "Saber, Rin Tohsaka and Sakura Matou ~15th Celebration Dress Ver.~ Premium Box",
+            "ko": "Saber, Rin Tohsaka and Sakura Matou ~15th Celebration Dress Ver.~ Premium Box",
+            "en": "Saber, Rin Tohsaka and Sakura Matou ~15th Celebration Dress Ver.~ Premium Box"
+          },
+          "release_date": "2021-11",
+          "price_jpy": 45000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/6922"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10909",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Assassin / Yu Mei-ren",
+            "zh": "Nendoroid Assassin / Yu Mei-ren",
+            "ko": "Nendoroid Assassin / Yu Mei-ren",
+            "en": "Nendoroid Assassin / Yu Mei-ren"
+          },
+          "release_date": "2021-10",
+          "price_jpy": 5800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10909/Nendoroid+Assassin+Yu+Mei+ren.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8603"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-7056",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/4th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Saber / Altria Pendragon",
+            "zh": "Saber / Altria Pendragon",
+            "ko": "Saber / Altria Pendragon",
+            "en": "Saber / Altria Pendragon"
+          },
+          "release_date": "2021-09",
+          "price_jpy": 30800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/7056/Saber+Altria+Pendragon.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-7145",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Archer / Ishtar",
+            "zh": "Nendoroid Archer / Ishtar",
+            "ko": "Nendoroid Archer / Ishtar",
+            "en": "Nendoroid Archer / Ishtar"
+          },
+          "release_date": "2021-08",
+          "price_jpy": 6926,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/7145/Nendoroid+Archer+Ishtar.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/4863"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10629",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Berserker / Mysterious Heroine X (Alter)",
+            "zh": "Nendoroid Berserker / Mysterious Heroine X (Alter)",
+            "ko": "Nendoroid Berserker / Mysterious Heroine X (Alter)",
+            "en": "Nendoroid Berserker / Mysterious Heroine X (Alter)"
+          },
+          "release_date": "2021-08",
+          "price_jpy": 5800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10629/Nendoroid+Berserker+Mysterious+Heroine+X+Alter.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8323"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-7592",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Caster / Gilgamesh",
+            "zh": "Nendoroid Caster / Gilgamesh",
+            "ko": "Nendoroid Caster / Gilgamesh",
+            "en": "Nendoroid Caster / Gilgamesh"
+          },
+          "release_date": "2021-08",
+          "price_jpy": 4584,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/7592/Nendoroid+Caster+Gilgamesh.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/5308"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-7591",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Caster / Gilgamesh: Ascension Ver.",
+            "zh": "Nendoroid Caster / Gilgamesh: Ascension Ver.",
+            "ko": "Nendoroid Caster / Gilgamesh: Ascension Ver.",
+            "en": "Nendoroid Caster / Gilgamesh: Ascension Ver."
+          },
+          "release_date": "2021-08",
+          "price_jpy": 6112,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/7591/Nendoroid+Caster+Gilgamesh+Ascension+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/5307"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10516",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Lancer / Altria Pendragon",
+            "zh": "Nendoroid Lancer / Altria Pendragon",
+            "ko": "Nendoroid Lancer / Altria Pendragon",
+            "en": "Nendoroid Lancer / Altria Pendragon"
+          },
+          "release_date": "2021-08",
+          "price_jpy": 5500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10516/Nendoroid+Lancer+Altria+Pendragon.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8210"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10515",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Lancer / Altria Pendragon & Dun Stallion",
+            "zh": "Nendoroid Lancer / Altria Pendragon & Dun Stallion",
+            "ko": "Nendoroid Lancer / Altria Pendragon & Dun Stallion",
+            "en": "Nendoroid Lancer / Altria Pendragon & Dun Stallion"
+          },
+          "release_date": "2021-08",
+          "price_jpy": 7500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10515/Nendoroid+Lancer+Altria+Pendragon+Dun+Stallion.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8209"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-7697",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Lancer / Ereshkigal",
+            "zh": "Nendoroid Lancer / Ereshkigal",
+            "ko": "Nendoroid Lancer / Ereshkigal",
+            "en": "Nendoroid Lancer / Ereshkigal"
+          },
+          "release_date": "2021-08",
+          "price_jpy": 5907,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/7697/Nendoroid+Lancer+Ereshkigal.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/5413"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-7480",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Caster / Merlin",
+            "zh": "Nendoroid Caster / Merlin",
+            "ko": "Nendoroid Caster / Merlin",
+            "en": "Nendoroid Caster / Merlin"
+          },
+          "release_date": "2021-07",
+          "price_jpy": 4584,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/7480/Nendoroid+Caster+Merlin.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/5196"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-7479",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Caster / Merlin: Magus of Flowers Ver.",
+            "zh": "Nendoroid Caster / Merlin: Magus of Flowers Ver.",
+            "ko": "Nendoroid Caster / Merlin: Magus of Flowers Ver.",
+            "en": "Nendoroid Caster / Merlin: Magus of Flowers Ver."
+          },
+          "release_date": "2021-07",
+          "price_jpy": 5602,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/7479/Nendoroid+Caster+Merlin+Magus+of+Flowers+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/5195"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10426",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Assassin / Jack the Ripper",
+            "zh": "Nendoroid Assassin / Jack the Ripper",
+            "ko": "Nendoroid Assassin / Jack the Ripper",
+            "en": "Nendoroid Assassin / Jack the Ripper"
+          },
+          "release_date": "2021-06",
+          "price_jpy": 5800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10426/Nendoroid+Assassin+Jack+the+Ripper.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8120"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10342",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Assassin / Shuten-Douji",
+            "zh": "Nendoroid Assassin / Shuten-Douji",
+            "ko": "Nendoroid Assassin / Shuten-Douji",
+            "en": "Nendoroid Assassin / Shuten-Douji"
+          },
+          "release_date": "2021-06",
+          "price_jpy": 6500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10342/Nendoroid+Assassin+Shuten+Douji.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8036"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10284",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Saber / Okita Souji",
+            "zh": "Nendoroid Saber / Okita Souji",
+            "ko": "Nendoroid Saber / Okita Souji",
+            "en": "Nendoroid Saber / Okita Souji"
+          },
+          "release_date": "2021-06",
+          "price_jpy": 4800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10284/Nendoroid+Saber+Okita+Souji.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/7978"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10283",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Saber / Okita Souji: Ascension Ver.",
+            "zh": "Nendoroid Saber / Okita Souji: Ascension Ver.",
+            "ko": "Nendoroid Saber / Okita Souji: Ascension Ver.",
+            "en": "Nendoroid Saber / Okita Souji: Ascension Ver."
+          },
+          "release_date": "2021-06",
+          "price_jpy": 5800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10283/Nendoroid+Saber+Okita+Souji+Ascension+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/7977"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-6843",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Saber / Arthur Pendragon (Prototype)",
+            "zh": "Nendoroid Saber / Arthur Pendragon (Prototype)",
+            "ko": "Nendoroid Saber / Arthur Pendragon (Prototype)",
+            "en": "Nendoroid Saber / Arthur Pendragon (Prototype)"
+          },
+          "release_date": "2021-05",
+          "price_jpy": 4600,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/6843/Nendoroid+Saber+Arthur+Pendragon+Prototype.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/4570"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-6844",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Saber / Arthur Pendragon (Prototype): Ascension Ver.",
+            "zh": "Nendoroid Saber / Arthur Pendragon (Prototype): Ascension Ver.",
+            "ko": "Nendoroid Saber / Arthur Pendragon (Prototype): Ascension Ver.",
+            "en": "Nendoroid Saber / Arthur Pendragon (Prototype): Ascension Ver."
+          },
+          "release_date": "2021-05",
+          "price_jpy": 5907,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/6844/Nendoroid+Saber+Arthur+Pendragon+Prototype+Ascension+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/4571"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-9985",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Alter Ego / Okita Souji (Alter)",
+            "zh": "Nendoroid Alter Ego / Okita Souji (Alter)",
+            "ko": "Nendoroid Alter Ego / Okita Souji (Alter)",
+            "en": "Nendoroid Alter Ego / Okita Souji (Alter)"
+          },
+          "release_date": "2021-04",
+          "price_jpy": 5500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/9985/Nendoroid+Alter+Ego+Okita+Souji+Alter.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/7681"
           ]
         }
       ],
@@ -1711,6 +5214,43 @@
           ]
         },
         {
+          "kit_id": "pokemon-center-4521329349190",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "502 ぬいぐるみ Pok&eacute;mon fit フタチマル",
+            "zh": "502 ぬいぐるみ Pok&eacute;mon fit フタチマル",
+            "ko": "502 ぬいぐるみ Pok&eacute;mon fit フタチマル",
+            "en": "502 ぬいぐるみ Pok&eacute;mon fit フタチマル"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329349190.html"
+          ]
+        },
+        {
           "kit_id": "pokemon-center-4521329344034",
           "change_type": "removed",
           "franchise": "pokemon",
@@ -1782,6 +5322,43 @@
           ],
           "source_urls": [
             "https://www.pokemoncenter-online.com/4521329350035.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4904790287831",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "Mocchi-Mocchi-Style／フェイス型マスコット／カビゴン",
+            "zh": "Mocchi-Mocchi-Style／フェイス型マスコット／カビゴン",
+            "ko": "Mocchi-Mocchi-Style／フェイス型マスコット／カビゴン",
+            "en": "Mocchi-Mocchi-Style／フェイス型マスコット／カビゴン"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4904790287831.html"
           ]
         },
         {
