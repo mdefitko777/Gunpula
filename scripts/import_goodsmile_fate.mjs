@@ -183,7 +183,7 @@ function parseGlobalCards(html) {
     const [, href, productId, body] = match;
     const name = stripTags(/<h2 class="c-title[^"]*">([\s\S]*?)<\/h2>/i.exec(body)?.[1]) || null;
     if (!name) continue;
-    const image = absoluteGlobalUrl(/(?:src)="([^"]*\/product\/image\/\d+\/[^"]*)"/i.exec(body)?.[1]);
+    const image = absoluteGlobalUrl(/(?:src)="([^"]*gsc-webrevo-sdk-storage-prd\/product\/image\/[^"]*)"/i.exec(body)?.[1]);
     const price = parsePrice(stripTags(/<span class="c-price__main">([\s\S]*?)<\/span>/i.exec(body)?.[1]));
     const labels = [...body.matchAll(/<li class="c-label[\s\S]*?">([\s\S]*?)<\/li>/g)].map((label) => stripTags(label[1]));
     cards.push({
@@ -233,25 +233,46 @@ function parseGlobalDetail(html, productId) {
     fields[match[1].trim().toLowerCase()] = stripTags(match[2]);
   }
   const productName = stripTags(/<h1[^>]*>([\s\S]*?)<\/h1>/i.exec(html)?.[1]) || null;
-  const shipping = /Shipping\s*(\d{1,2})\/(\d{4})/i.exec(html);
-  const releaseDate = shipping ? `${shipping[2]}-${shipping[1].padStart(2, "0")}` : normalizeReleaseDate(fields["release date"]);
-  const ogImage = absoluteGlobalUrl(/property="og:image" content="([^"]*)"/i.exec(html)?.[1]);
-  const ownImagePattern = /(?:https:\/\/www\.goodsmile\.com)?\/gsc-webrevo-sdk-storage-prd\/product\/image\/(\d+)\/[^"'\\\s)<]+/g;
-  const images = [
-    ...new Set(
-      [
-        ogImage,
-        ...[...html.matchAll(ownImagePattern)]
-          .filter((match) => match[1] === String(productId))
-          .map((match) => absoluteGlobalUrl(match[0])),
-      ].filter(Boolean),
-    ),
-  ];
+  // Shipping month appears as either "Shipping 01/2027" or "Shipping 2025/11".
+  const shipping = /Shipping\s*(?:(\d{1,2})\/(\d{4})|(\d{4})\/(\d{1,2}))/i.exec(html);
+  const releaseDate = shipping
+    ? shipping[3]
+      ? `${shipping[3]}-${shipping[4].padStart(2, "0")}`
+      : `${shipping[2]}-${shipping[1].padStart(2, "0")}`
+    : normalizeReleaseDate(fields["release date"]);
+
+  let structured = null;
+  for (const match of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+    try {
+      const parsed = JSON.parse(match[1]);
+      if (parsed && parsed["@type"] === "Product") structured = parsed;
+    } catch {
+      // Ignore malformed structured data and fall back to markup scraping.
+    }
+  }
+  const structuredImages = (Array.isArray(structured?.image) ? structured.image : [structured?.image]).filter(Boolean);
+  const mainImage = absoluteGlobalUrl(structuredImages[0] || /property="og:image" content="([^"]*)"/i.exec(html)?.[1]);
+
+  // Gallery images use two url shapes: products created on goodsmile.com use
+  // product/image/{productId}/{hash}, while records migrated from goodsmile.info keep
+  // product/image/product/{date}/{legacyId}/... — match the legacy id via the main image.
+  const legacyId = /product\/image\/product\/\d{8}\/(\d+)\//.exec(mainImage || "")?.[1] || null;
+  const anyImagePattern = /(?:https:\/\/www\.goodsmile\.com)?\/gsc-webrevo-sdk-storage-prd\/product\/image\/(?:(\d+)|product\/\d{8}\/(\d+))\/[^"'\\\s)<]+/g;
+  const galleryImages = [...html.matchAll(anyImagePattern)]
+    .filter((match) => match[1] === String(productId) || (legacyId && match[2] === legacyId))
+    .map((match) => absoluteGlobalUrl(match[0]));
+  const images = [...new Set([mainImage, ...galleryImages].filter(Boolean))];
+
   return {
-    productName,
+    productName: structured?.name || productName,
     series: fields.series || null,
-    manufacturer: fields.manufacturer || fields["distributed by"] || null,
-    price_jpy: parsePrice(/<span class="c-price__main">([\s\S]*?)<\/span>/i.exec(html)?.[1]),
+    category: structured?.category || null,
+    manufacturer:
+      fields.manufacturer ||
+      fields["distributed by"] ||
+      (typeof structured?.brand === "string" ? structured.brand : structured?.brand?.name) ||
+      null,
+    price_jpy: parsePrice(/<span class="c-price__main">([\s\S]*?)<\/span>/i.exec(html)?.[1]) ?? parsePrice(structured?.offers?.price),
     release_date: releaseDate,
     images,
   };
@@ -369,11 +390,11 @@ function lineNameFor(name) {
 
 function toGlobalKit(card, detail = {}) {
   const name = detail.productName || card.name;
-  const line = lineNameFor(name);
+  const line = lineNameFor(name) || detail.category || null;
   const manufacturer = detail.manufacturer || "Good Smile Company";
   const imageUrls = [...new Set([...(detail.images || []), card.image].filter(Boolean))];
   const workTitle = seriesKeyFor(detail.series, name);
-  const gradeCode = gradeForCategory(line, name);
+  const gradeCode = gradeForCategory(`${detail.category || ""} ${line || ""}`, name);
   const labelText = (card.labels || []).join(" ");
   return {
     kit_id: `goodsmile-fate-g${card.productId}`,
@@ -462,8 +483,22 @@ async function main() {
   }
   const knownCards = [];
   const newCards = [];
+  const refreshCards = [];
   for (const card of globalCards) {
-    (fateByName.has(nameKey(card.name)) ? knownCards : newCards).push(card);
+    const kit = fateByName.get(nameKey(card.name));
+    if (!kit) {
+      newCards.push(card);
+    } else if (
+      kit.kit_id === `goodsmile-fate-g${card.productId}` &&
+      (!kit.images?.box_art_url || (kit.gallery_image_urls || []).length < 2)
+    ) {
+      // A kit we previously imported from the global store but with incomplete media —
+      // re-fetch its detail page instead of only patching the card image. (Release dates
+      // are not a trigger: long-released products often have none on the page at all.)
+      refreshCards.push(card);
+    } else {
+      knownCards.push(card);
+    }
   }
 
   for (const card of knownCards) {
@@ -480,7 +515,8 @@ async function main() {
     }
   }
 
-  const globalDetailCards = DETAIL_LIMIT > 0 ? newCards.slice(0, DETAIL_LIMIT) : newCards;
+  const detailTargets = [...newCards, ...refreshCards];
+  const globalDetailCards = DETAIL_LIMIT > 0 ? detailTargets.slice(0, DETAIL_LIMIT) : detailTargets;
   const globalDetails = new Map();
   let globalDetailErrors = 0;
   await mapLimit(globalDetailCards, CONCURRENCY, async (card) => {
@@ -491,7 +527,19 @@ async function main() {
       globalDetails.set(card.productId, { error_message: error.message });
     }
   });
-  const globalKits = globalDetailCards.map((card) => toGlobalKit(card, globalDetails.get(card.productId) || {}));
+  const globalKits = globalDetailCards.map((card) => {
+    const kit = toGlobalKit(card, globalDetails.get(card.productId) || {});
+    const previous = fateByName.get(nameKey(card.name));
+    if (previous) {
+      if (!kit.release_date && previous.release_date) kit.release_date = previous.release_date;
+      if (kit.price_jpy == null && previous.price_jpy != null) kit.price_jpy = previous.price_jpy;
+      if (!kit.images.box_art_url && previous.images?.box_art_url) {
+        kit.images = { ...previous.images };
+        kit.gallery_image_urls = [...new Set([...(previous.gallery_image_urls || []), ...kit.gallery_image_urls])];
+      }
+    }
+    return kit;
+  });
   kits = mergeCatalog(kits, globalKits);
 
   const nextCatalog = {
@@ -503,8 +551,8 @@ async function main() {
   const withBoxArt = globalKits.filter((kit) => kit.images.box_art_url).length;
   console.log(
     `Good Smile Fate: legacy ${importedKits.length} products (detail errors ${detailErrors}); ` +
-      `global store ${globalCards.length} products, matched ${knownCards.length}, new ${globalKits.length} ` +
-      `(${withBoxArt} with box art, detail errors ${globalDetailErrors}).`,
+      `global store ${globalCards.length} products, matched ${knownCards.length}, refreshed ${refreshCards.length}, new ${newCards.length} ` +
+      `(${withBoxArt}/${globalKits.length} detail-fetched kits with box art, detail errors ${globalDetailErrors}).`,
   );
 }
 
