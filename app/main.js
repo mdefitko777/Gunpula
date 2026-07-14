@@ -58,6 +58,12 @@ const APP_VERSION_LABEL = "v2.0.0";
 
 const COLLECTION_TYPES = ["owned", "wanted"];
 const COLLECTION_ENTRY_STATUSES = [...COLLECTION_TYPES, "deleted"];
+
+// Workspace data cleanup: the "냐아" bucket is abandoned and unwanted, and items
+// recorded under the pre-sign-in placeholder "member" belong to ttungyimungyi.
+// (The fold is skipped while actually signed out, when "member" is the live self bucket.)
+const DROPPED_COLLECTION_MEMBERS = new Set(["냐아"]);
+const COLLECTION_MEMBER_MERGES = { member: "ttungyimungyi" };
 const THEMES = [
   { code: "atlas", label: { zh: "默认", ko: "기본", en: "Default", ja: "デフォルト" } },
   { code: "classic", label: { zh: "经典", ko: "클래식", en: "Classic", ja: "クラシック" } },
@@ -1578,9 +1584,19 @@ function normalizeCollection(collection = {}) {
 
   const normalizedMemberItems = {};
   for (const [member, memberMap] of Object.entries(memberItems)) {
-    const memberKey = safeMemberName(member);
+    let memberKey = safeMemberName(member);
     if (!memberKey || !memberMap || typeof memberMap !== "object") {
       continue;
+    }
+    if (DROPPED_COLLECTION_MEMBERS.has(memberKey)) {
+      continue;
+    }
+    // Reapply on every normalize (not one-shot): the cross-device sync unions member
+    // buckets, so a dropped or folded bucket keeps flowing back from the other device
+    // until both sides run this cleanup and the pushed document converges.
+    const mergeTarget = COLLECTION_MEMBER_MERGES[memberKey];
+    if (mergeTarget && memberKey !== self) {
+      memberKey = safeMemberName(mergeTarget);
     }
     for (const [kitId, entry] of Object.entries(memberMap)) {
       if (!entry?.status || !COLLECTION_ENTRY_STATUSES.includes(entry.status)) {
@@ -1588,7 +1604,8 @@ function normalizeCollection(collection = {}) {
       }
       const normalizedEntry = normalizeCollectionEntry(entry, now, memberKey);
       normalizedMemberItems[memberKey] = normalizedMemberItems[memberKey] || {};
-      normalizedMemberItems[memberKey][kitId] = normalizedEntry;
+      const existing = normalizedMemberItems[memberKey][kitId];
+      normalizedMemberItems[memberKey][kitId] = existing ? newerByTimestamp(existing, normalizedEntry) : normalizedEntry;
     }
   }
 

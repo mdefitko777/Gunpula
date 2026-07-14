@@ -1577,7 +1577,7 @@ h1 {
   z-index: 30;
   max-width: none;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0;
   margin: 0;
   padding: 6px 8px calc(8px + env(safe-area-inset-bottom, 0px));
