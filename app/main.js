@@ -591,6 +591,9 @@ const state = {
   homeCollectionVisibility: loadHomeCollectionVisibility(),
   homeCollectionCollapsed: loadHomeCollectionCollapsed(),
   collectionMemberView: localStorage.getItem(COLLECTION_MEMBER_VIEW_KEY) || "self",
+  lastCollectionTab: COLLECTION_TYPES.includes(INITIAL_VIEW_STATE.view || localStorage.getItem(ACTIVE_VIEW_KEY))
+    ? INITIAL_VIEW_STATE.view || localStorage.getItem(ACTIVE_VIEW_KEY)
+    : "wanted",
   collectionFilter: loadCollectionFilter(),
   updateNotifications: localStorage.getItem(UPDATE_NOTIFICATION_KEY) === "true",
   updateNotificationFilters: loadUpdateNotificationFilters(),
@@ -796,7 +799,11 @@ const elements = {
   ownedStrip: document.querySelector("#ownedStrip"),
   wantedStrip: document.querySelector("#wantedStrip"),
   collectionManagement: document.querySelector("#collectionManagement"),
-  collectionMemberFilter: document.querySelector("#collectionMemberFilter"),
+  collectionHub: document.querySelector("#collectionHub"),
+  collectionTypeTabs: document.querySelector("#collectionTypeTabs"),
+  collectionMemberRow: document.querySelector("#collectionMemberRow"),
+  collectionFilterButton: document.querySelector("#collectionFilterButton"),
+  collectionFilterSheet: document.querySelector("#collectionFilterSheet"),
   collectionGroupSummary: document.querySelector("#collectionGroupSummary"),
   collectionSelectAll: document.querySelector("#collectionSelectAll"),
   collectionSelectionSummary: document.querySelector("#collectionSelectionSummary"),
@@ -1910,13 +1917,18 @@ function bindEvents() {
     if (!button) {
       return;
     }
-    const nextView = button.dataset.view;
+    let nextView = button.dataset.view;
     if (nextView === "settings") {
       openSettings();
       return;
     }
+    if (nextView === "collection") {
+      // Merged collection entry: reopen whichever tab (wanted/owned) was last active.
+      nextView = COLLECTION_TYPES.includes(state.lastCollectionTab) ? state.lastCollectionTab : "wanted";
+    }
     state.activeView = nextView;
     if (COLLECTION_TYPES.includes(nextView)) {
+      state.lastCollectionTab = nextView;
       state.query = "";
     }
     state.selectedKit = null;
@@ -1928,6 +1940,20 @@ function bindEvents() {
   elements.collectionSelectAll.addEventListener("change", toggleVisibleCollectionSelection);
   elements.deleteSelectedCollection.addEventListener("click", deleteSelectedCollectionItems);
   elements.clearCollectionView.addEventListener("click", clearActiveCollectionView);
+  elements.collectionTypeTabs?.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-collection-type]");
+    if (!button || button.dataset.collectionType === state.activeView) {
+      return;
+    }
+    switchToView(button.dataset.collectionType);
+  });
+  elements.collectionFilterButton?.addEventListener("click", () => {
+    if (!elements.collectionFilterSheet) {
+      return;
+    }
+    elements.collectionFilterSheet.hidden = !elements.collectionFilterSheet.hidden;
+    renderCollectionFilterButton();
+  });
   elements.saveSyncConfig.addEventListener("click", saveAndConnectSync);
   elements.syncNow.addEventListener("click", () => pullSync({ force: true }));
   elements.disconnectSync.addEventListener("click", disconnectSync);
@@ -3913,7 +3939,12 @@ function render() {
 
 function renderBottomNav() {
   elements.bottomNav.querySelectorAll("button[data-view]").forEach((button) => {
-    button.classList.toggle("is-active", button.dataset.view === state.activeView || (state.activeView === "pbandai" && button.dataset.view === "catalog"));
+    button.classList.toggle(
+      "is-active",
+      button.dataset.view === state.activeView ||
+        (state.activeView === "pbandai" && button.dataset.view === "catalog") ||
+        (button.dataset.view === "collection" && COLLECTION_TYPES.includes(state.activeView)),
+    );
   });
 }
 
@@ -5817,12 +5848,22 @@ function clearActiveCollectionView() {
 function renderCollectionManagement(kits) {
   const type = activeCollectionType();
   elements.collectionManagement.hidden = !type;
+  if (elements.collectionHub) {
+    elements.collectionHub.hidden = !type;
+  }
+  if (elements.collectionFilterButton) {
+    elements.collectionFilterButton.hidden = !type;
+  }
+  if (!type && elements.collectionFilterSheet) {
+    elements.collectionFilterSheet.hidden = true;
+  }
   if (!type) {
     return;
   }
 
-  renderCollectionMemberFilter(type);
+  renderCollectionHub(type);
   renderCollectionGroupSummary(type);
+  renderCollectionFilterButton();
   pruneCollectionSelection(type);
   const editable = canEditSharedData();
   const visibleIds = visibleCollectionIds(kits);
@@ -5915,35 +5956,80 @@ function renderCollectionGroupSummary(type) {
   }
 }
 
-function renderCollectionMemberFilter(type) {
-  if (!elements.collectionMemberFilter) {
+function renderCollectionHub(type) {
+  if (elements.collectionTypeTabs) {
+    for (const button of elements.collectionTypeTabs.querySelectorAll("button[data-collection-type]")) {
+      button.classList.toggle("is-active", button.dataset.collectionType === type);
+    }
+  }
+
+  if (!elements.collectionMemberRow) {
     return;
   }
-  elements.collectionMemberFilter.innerHTML = "";
+  elements.collectionMemberRow.innerHTML = "";
+  const self = editableCollectionMember();
+  const others = collectionMembers().filter((member) => member !== self);
+  // Solo collections have nobody to switch to; the avatar row is pure noise then.
+  if (!others.length) {
+    elements.collectionMemberRow.hidden = true;
+    if (state.collectionMemberView !== "self") {
+      state.collectionMemberView = "self";
+      localStorage.setItem(COLLECTION_MEMBER_VIEW_KEY, state.collectionMemberView);
+    }
+    return;
+  }
+  elements.collectionMemberRow.hidden = false;
+
+  const workspaceMembers = state.sync.workspace?.members || [];
+  const memberByName = new Map(workspaceMembers.map((member) => [safeMemberName(member.name), member]));
   const options = [
-    ["all", t("allMembers")],
-    ["self", t("currentMember")],
-    ...collectionMembers()
-      .filter((member) => member !== editableCollectionMember())
-      .map((member) => [member, member]),
+    ["all", t("allMembers"), null],
+    ["self", currentMember()?.name || t("currentMember"), memberByName.get(self) || currentMember()],
+    ...others.map((member) => [member, member, memberByName.get(member)]),
   ];
-  for (const [value, label] of options) {
+  for (const [value, label, profile] of options) {
     const button = document.createElement("button");
     button.type = "button";
     const isActive =
       state.collectionMemberView === value ||
-      (value === "self" && activeCollectionMember() === editableCollectionMember()) ||
+      (value === "self" && activeCollectionMember() === self && state.collectionMemberView !== "all") ||
       (value !== "self" && value !== "all" && activeCollectionMember() === value);
-    button.className = `member-chip${isActive ? " is-active" : ""}`;
-    button.textContent = label;
+    button.className = `collection-member-circle${isActive ? " is-active" : ""}`;
+    const avatar = document.createElement("span");
+    avatar.className = "account-avatar member-circle-avatar";
+    if (value === "all") {
+      avatar.innerHTML =
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
+    } else if (profile) {
+      applyAvatarTo(avatar, profile, label[0]);
+    } else {
+      avatar.textContent = (label[0] || "?").toUpperCase();
+    }
+    const name = document.createElement("span");
+    name.className = "member-circle-name";
+    name.textContent = label;
+    button.append(avatar, name);
     button.addEventListener("click", () => {
       state.collectionMemberView = value;
       localStorage.setItem(COLLECTION_MEMBER_VIEW_KEY, state.collectionMemberView);
       state.collectionSelection[type] = new Set();
       renderKits();
     });
-    elements.collectionMemberFilter.append(button);
+    elements.collectionMemberRow.append(button);
   }
+}
+
+function collectionFilterActive() {
+  const filter = state.collectionFilter || { franchise: "all", series: "all", grade: "all" };
+  return filter.franchise !== "all" || filter.series !== "all" || filter.grade !== "all";
+}
+
+function renderCollectionFilterButton() {
+  if (!elements.collectionFilterButton) {
+    return;
+  }
+  const sheetOpen = !elements.collectionFilterSheet?.hidden;
+  elements.collectionFilterButton.classList.toggle("is-active", sheetOpen || collectionFilterActive());
 }
 
 function collectionIds(type) {
@@ -6566,6 +6652,9 @@ function fillMemberStrip(container, rows) {
 
 function switchToView(view) {
   state.activeView = view;
+  if (COLLECTION_TYPES.includes(view)) {
+    state.lastCollectionTab = view;
+  }
   state.selectedKit = null;
   state.activeModal = null;
   localStorage.setItem(ACTIVE_VIEW_KEY, state.activeView);
