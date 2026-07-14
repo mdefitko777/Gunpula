@@ -1555,7 +1555,18 @@ function clampCollectionQuantity(value) {
   return Math.min(quantity, 99);
 }
 
+// normalizeCollection is called on nearly every collection read, but its work only
+// matters when a raw/foreign object arrives (load, sync merge, import). Memoize by
+// object identity: once an object has been normalized we hand it straight back, so
+// hot paths skip the full structuredClone + rebuild. In-place mutations keep the
+// same object reference (and stay well-formed via refreshLegacyCollectionItems), so
+// they remain valid; anything that assigns a fresh object gets normalized once.
+const normalizedCollections = new WeakSet();
+
 function normalizeCollection(collection = {}) {
+  if (collection && typeof collection === "object" && normalizedCollections.has(collection)) {
+    return collection;
+  }
   const legacyItems = collection.items && typeof collection.items === "object" ? { ...collection.items } : {};
   const memberItems = collection.member_items && typeof collection.member_items === "object" ? structuredClone(collection.member_items) : {};
   const self = safeMemberName(memberName());
@@ -1623,7 +1634,9 @@ function normalizeCollection(collection = {}) {
     }
   }
 
-  return { owned: [...new Set(owned)], wanted: [...new Set(wanted)], items: normalizedItems, member_items: normalizedMemberItems };
+  const result = { owned: [...new Set(owned)], wanted: [...new Set(wanted)], items: normalizedItems, member_items: normalizedMemberItems };
+  normalizedCollections.add(result);
+  return result;
 }
 
 function safeMemberName(value) {
