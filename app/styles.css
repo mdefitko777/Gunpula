@@ -4247,6 +4247,28 @@ body.is-radial-active {
   outline: 0;
 }
 
+.guide-light-toggle {
+  padding: 3px 10px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent-deep);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.guide-light-toggle.is-active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.guide-light-toggle:hover,
+.guide-light-toggle:focus-visible {
+  outline: 0;
+  filter: brightness(1.05);
+}
+
 .guide-unit-subhead {
   margin: 16px 0 8px;
   font-size: 14px;

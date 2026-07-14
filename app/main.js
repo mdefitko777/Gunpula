@@ -6952,6 +6952,7 @@ function refreshGuideGroups() {
 async function ensureGuideData() {
   if (state.guide) return state.guide;
   if (!state.guideSplits) state.guideSplits = loadGuideSplits();
+  if (!state.guideManualLit) state.guideManualLit = loadGuideManualLit();
   const [units, map] = await Promise.all([
     loadOptionalJson("../data/gget-units.json"),
     loadOptionalJson("../data/gget-kit-map.json"),
@@ -6996,9 +6997,30 @@ function guideCollectionSets() {
   return { owned, wanted };
 }
 
+const GUIDE_MANUAL_LIT_KEY = "gunpula-guide-manual-lit-v1";
+
+function loadGuideManualLit() {
+  try {
+    return new Set(JSON.parse(localStorage.getItem(GUIDE_MANUAL_LIT_KEY) || "[]"));
+  } catch {
+    return new Set();
+  }
+}
+
+function saveGuideManualLit() {
+  localStorage.setItem(GUIDE_MANUAL_LIT_KEY, JSON.stringify([...(state.guideManualLit || [])]));
+}
+
+function guideGroupManuallyLit(group) {
+  const lit = state.guideManualLit;
+  return Boolean(lit && group.unit_ids.some((id) => lit.has(id)));
+}
+
 function guideGroupStatus(group, sets) {
   if (group.kit_ids.some((id) => sets.owned.has(id))) return "owned";
   if (group.kit_ids.some((id) => sets.wanted.has(id))) return "wanted";
+  // A cell with no matching kit can still be lit by hand (e.g. built from spares).
+  if (guideGroupManuallyLit(group)) return "owned";
   return "none";
 }
 
@@ -7104,6 +7126,25 @@ function openGuideUnit(group, status) {
     });
     elements.guideUnitVariants.append(toggle);
   }
+  // Manual light-up: mark a cell collected by hand regardless of any matching kit.
+  const manualToggle = document.createElement("button");
+  manualToggle.type = "button";
+  const manuallyLit = guideGroupManuallyLit(group);
+  manualToggle.className = `guide-light-toggle${manuallyLit ? " is-active" : ""}`;
+  manualToggle.textContent = manuallyLit ? t("guideUnlight") : t("guideLight");
+  manualToggle.addEventListener("click", () => {
+    state.guideManualLit = state.guideManualLit || new Set();
+    const nowLit = !guideGroupManuallyLit(group);
+    for (const id of group.unit_ids) {
+      if (nowLit) state.guideManualLit.add(id);
+      else state.guideManualLit.delete(id);
+    }
+    saveGuideManualLit();
+    openGuideUnit(group, guideGroupStatus(group, guideCollectionSets()));
+    if (elements.guideDialog.open) renderGuide(state.guide);
+    renderUserGuideValue();
+  });
+  elements.guideUnitVariants.append(manualToggle);
 
   const kits = group.kit_ids.map(displayKitById).filter(Boolean);
   elements.guideUnitKits.innerHTML = "";
@@ -7135,8 +7176,9 @@ function guideKitRow(kit, group, groupStatus) {
   text.innerHTML = `<strong>${escapeHtml(kitShortName(kit))}</strong><span>${escapeHtml(seriesLabelFromKit(kit))} · ${escapeHtml(gradeShortLabel(kit))}</span>`;
   face.append(thumb, text);
   face.addEventListener("click", () => {
+    // Keep the 图鉴 gallery open underneath so backing out of the kit detail
+    // returns here instead of dropping all the way to the main view.
     elements.guideUnitDialog.close();
-    elements.guideDialog.close();
     openDetail(kit);
   });
 
