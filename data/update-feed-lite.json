@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-07-14",
-  "generated_at": "2026-07-14T08:20:28.342Z",
+  "generated_at": "2026-07-14T08:45:46.701Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,14 +16,14 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-07-14T08:20:27.621Z",
+    "generated_at": "2026-07-14T08:45:45.910Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-07-14",
-      "generated_at": "2026-07-14T08:20:28.342Z",
+      "generated_at": "2026-07-14T08:45:46.701Z",
       "total_before": 4628,
       "total_after": 4877,
       "added_count": 12,
@@ -39,9 +39,12 @@
       },
       "reason_counts": {
         "new": 12,
-        "name": 94,
+        "name": 77,
+        "image": 58,
         "series": 120,
-        "image": 31,
+        "product_line": 11,
+        "source": 11,
+        "release": 1,
         "removed": 12
       },
       "interest_tags": [
@@ -526,6 +529,7 @@
           ],
           "change_reasons": [
             "name",
+            "image",
             "series"
           ],
           "source_ids": [
@@ -563,6 +567,7 @@
             "fate"
           ],
           "change_reasons": [
+            "image",
             "series"
           ],
           "source_ids": [
@@ -601,6 +606,7 @@
           ],
           "change_reasons": [
             "name",
+            "image",
             "series"
           ],
           "source_ids": [
@@ -615,7 +621,7 @@
           "change_type": "changed",
           "franchise": "fate",
           "grade_code": "FATE_SCALE",
-          "subline": "FATE_SCALE",
+          "subline": "Non-Scale Figure",
           "series_key": "fate_fgo",
           "series_labels": {
             "zh": "FGO",
@@ -639,7 +645,10 @@
           ],
           "change_reasons": [
             "name",
-            "series"
+            "image",
+            "product_line",
+            "series",
+            "source"
           ],
           "source_ids": [
             "good_smile_fate_global"
@@ -653,7 +662,7 @@
           "change_type": "changed",
           "franchise": "fate",
           "grade_code": "FATE_SCALE",
-          "subline": "FATE_SCALE",
+          "subline": "Non-Scale Figure",
           "series_key": "fate_fgo",
           "series_labels": {
             "zh": "FGO",
@@ -677,7 +686,10 @@
           ],
           "change_reasons": [
             "name",
-            "series"
+            "image",
+            "product_line",
+            "series",
+            "source"
           ],
           "source_ids": [
             "good_smile_fate_global"
@@ -715,6 +727,7 @@
           ],
           "change_reasons": [
             "name",
+            "image",
             "series"
           ],
           "source_ids": [
@@ -753,6 +766,7 @@
           ],
           "change_reasons": [
             "name",
+            "image",
             "series"
           ],
           "source_ids": [
@@ -791,6 +805,7 @@
           ],
           "change_reasons": [
             "name",
+            "image",
             "series"
           ],
           "source_ids": [
@@ -805,7 +820,7 @@
           "change_type": "changed",
           "franchise": "fate",
           "grade_code": "FATE_SCALE",
-          "subline": "FATE_SCALE",
+          "subline": "Scale Figure",
           "series_key": "fate_fgo",
           "series_labels": {
             "zh": "FGO",
@@ -829,7 +844,10 @@
           ],
           "change_reasons": [
             "name",
-            "series"
+            "image",
+            "product_line",
+            "series",
+            "source"
           ],
           "source_ids": [
             "good_smile_fate_global"
@@ -867,6 +885,7 @@
           ],
           "change_reasons": [
             "name",
+            "image",
             "series"
           ],
           "source_ids": [
@@ -904,6 +923,7 @@
             "fate"
           ],
           "change_reasons": [
+            "image",
             "series"
           ],
           "source_ids": [
@@ -942,6 +962,7 @@
           ],
           "change_reasons": [
             "name",
+            "image",
             "series"
           ],
           "source_ids": [
@@ -956,7 +977,7 @@
           "change_type": "changed",
           "franchise": "fate",
           "grade_code": "FATE_SCALE",
-          "subline": "FATE_SCALE",
+          "subline": "Scale Figure",
           "series_key": "fate_fgo",
           "series_labels": {
             "zh": "FGO",
@@ -980,7 +1001,10 @@
           ],
           "change_reasons": [
             "name",
-            "series"
+            "image",
+            "product_line",
+            "series",
+            "source"
           ],
           "source_ids": [
             "good_smile_fate_global"
@@ -994,7 +1018,7 @@
           "change_type": "changed",
           "franchise": "fate",
           "grade_code": "FATE_SCALE",
-          "subline": "FATE_SCALE",
+          "subline": "Scale Figure",
           "series_key": "fate_fgo",
           "series_labels": {
             "zh": "FGO",
@@ -1018,7 +1042,10 @@
           ],
           "change_reasons": [
             "name",
-            "series"
+            "image",
+            "product_line",
+            "series",
+            "source"
           ],
           "source_ids": [
             "good_smile_fate_global"
@@ -1032,7 +1059,7 @@
           "change_type": "changed",
           "franchise": "fate",
           "grade_code": "FATE_SCALE",
-          "subline": "FATE_SCALE",
+          "subline": "Figure",
           "series_key": "fate_fgo",
           "series_labels": {
             "zh": "FGO",
@@ -1056,7 +1083,10 @@
           ],
           "change_reasons": [
             "name",
-            "series"
+            "image",
+            "product_line",
+            "series",
+            "source"
           ],
           "source_ids": [
             "good_smile_fate_global"
@@ -1094,6 +1124,7 @@
           ],
           "change_reasons": [
             "name",
+            "image",
             "series"
           ],
           "source_ids": [
@@ -1104,48 +1135,11 @@
           ]
         },
         {
-          "kit_id": "goodsmile-fate-g5875",
-          "change_type": "changed",
-          "franchise": "fate",
-          "grade_code": "FATE_ACTION",
-          "subline": "figma",
-          "series_key": "fate_fgo",
-          "series_labels": {
-            "zh": "FGO",
-            "en": "FGO",
-            "ja": "FGO",
-            "ko": "FGO"
-          },
-          "names": {
-            "ja": "figma Saber Alter 2.0",
-            "zh": "figma Saber Alter 2.0",
-            "ko": "figma Saber Alter 2.0",
-            "en": "figma Saber Alter 2.0"
-          },
-          "release_date": "2026-08",
-          "price_jpy": 10800,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "fate"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "good_smile_fate_global"
-          ],
-          "source_urls": [
-            "https://www.goodsmile.com/en/product/5875"
-          ]
-        },
-        {
           "kit_id": "goodsmile-fate-g1140863",
           "change_type": "changed",
           "franchise": "fate",
           "grade_code": "FATE_SCALE",
-          "subline": "FATE_SCALE",
+          "subline": "Scale Figure",
           "series_key": "fate_fgo",
           "series_labels": {
             "zh": "FGO",
@@ -1168,7 +1162,10 @@
             "fate"
           ],
           "change_reasons": [
-            "series"
+            "image",
+            "product_line",
+            "series",
+            "source"
           ],
           "source_ids": [
             "good_smile_fate_global"
@@ -1205,6 +1202,7 @@
             "fate"
           ],
           "change_reasons": [
+            "image",
             "series"
           ],
           "source_ids": [
@@ -1215,11 +1213,48 @@
           ]
         },
         {
+          "kit_id": "goodsmile-fate-g5875",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Rerelease [figma Saber Alter 2.0]",
+            "zh": "Rerelease [figma Saber Alter 2.0]",
+            "ko": "Rerelease [figma Saber Alter 2.0]",
+            "en": "Rerelease [figma Saber Alter 2.0]"
+          },
+          "release_date": "2026-08",
+          "price_jpy": 10800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/5875"
+          ]
+        },
+        {
           "kit_id": "goodsmile-fate-g57700",
           "change_type": "changed",
           "franchise": "fate",
           "grade_code": "FATE_SCALE",
-          "subline": "FATE_SCALE",
+          "subline": "Scale Figure",
           "series_key": "fate_fgo",
           "series_labels": {
             "zh": "FGO",
@@ -1242,7 +1277,10 @@
             "fate"
           ],
           "change_reasons": [
-            "series"
+            "image",
+            "product_line",
+            "series",
+            "source"
           ],
           "source_ids": [
             "good_smile_fate_global"
