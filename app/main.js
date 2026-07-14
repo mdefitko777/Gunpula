@@ -51,6 +51,7 @@ const RADIAL_SELECT_DISTANCE = 28;
 const PAGER_START_DISTANCE = 18;
 const DRAWER_EDGE_ZONE = 28;
 const DRAWER_OPEN_DISTANCE = 44;
+const COLLECTION_SWIPE_DISTANCE = 46;
 const PAGER_THRESHOLD_RATIO = 0.28;
 const PAGER_MIN_THRESHOLD = 92;
 const PAGER_ANIMATION_MS = 220;
@@ -2488,6 +2489,27 @@ function moveTouchGesture(event) {
     resetPagerGesture();
     if (event.cancelable) event.preventDefault();
     openUserPage();
+    return;
+  }
+  // Inside the merged collection view, a horizontal swipe flips between the
+  // wanted and owned tabs. blockedByTarget already excludes the scrollable member
+  // avatar row and collection strips, so this only fires on the card grid / body.
+  if (
+    COLLECTION_TYPES.includes(state.activeView) &&
+    !state.pager.blockedByTarget &&
+    absX > COLLECTION_SWIPE_DISTANCE &&
+    absX > absY * 1.3
+  ) {
+    clearTimeout(state.radial.timer);
+    state.radial.timer = null;
+    state.radial.touchId = null;
+    state.pager.touchId = null;
+    state.radial.suppressClick = true;
+    const target = deltaX < 0 ? "owned" : "wanted";
+    if (state.activeView !== target) {
+      if (event.cancelable) event.preventDefault();
+      switchToView(target);
+    }
     return;
   }
   // Vertical movement should stay a normal page scroll. The radial menu only
