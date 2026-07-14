@@ -318,6 +318,27 @@
       "notes": "Official Good Smile Company Fate/Grand Order listing and product detail pages used for Fate figure catalog records."
     },
     {
+      "source_id": "good_smile_fate_global",
+      "name": "Good Smile Company Global Store (Fate / TYPE-MOON)",
+      "type": "official_manufacturer_global",
+      "country": "JP",
+      "base_url": "https://www.goodsmile.com/en/search?keyword=Fate",
+      "priority": 14,
+      "best_for": [
+        "new Fate/FGO announcements",
+        "preorder products",
+        "official images",
+        "shipping month",
+        "Japan price"
+      ],
+      "weak_for": [
+        "discontinued legacy products",
+        "Ichiban Kuji",
+        "non-Good Smile goods"
+      ],
+      "notes": "Current Good Smile Company global store (goodsmile.com); replaces the frozen goodsmile.info listing for products announced after mid-2024."
+    },
+    {
       "source_id": "ichiban_kuji_jp",
       "name": "Ichiban Kuji Japan",
       "type": "official_lottery_jp",

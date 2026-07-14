@@ -730,6 +730,22 @@ const elements = {
   profileFavorites: document.querySelector("#profileFavorites"),
   favoriteFranchises: document.querySelector("#favoriteFranchises"),
   favoriteSeries: document.querySelector("#favoriteSeries"),
+  userChip: document.querySelector("#userChip"),
+  userDialog: document.querySelector("#userDialog"),
+  userDialogClose: document.querySelector("#userDialogClose"),
+  userDialogAvatar: document.querySelector("#userDialogAvatar"),
+  userDialogName: document.querySelector("#userDialogName"),
+  userDialogMeta: document.querySelector("#userDialogMeta"),
+  userRowOwned: document.querySelector("#userRowOwned"),
+  userRowWanted: document.querySelector("#userRowWanted"),
+  userOwnedCount: document.querySelector("#userOwnedCount"),
+  userWantedCount: document.querySelector("#userWantedCount"),
+  userInviteLine: document.querySelector("#userInviteLine"),
+  userInviteCode: document.querySelector("#userInviteCode"),
+  userCopyInvite: document.querySelector("#userCopyInvite"),
+  userMembers: document.querySelector("#userMembers"),
+  userRowSettings: document.querySelector("#userRowSettings"),
+  userRowSignOut: document.querySelector("#userRowSignOut"),
   memberDialog: document.querySelector("#memberDialog"),
   memberDialogClose: document.querySelector("#memberDialogClose"),
   memberDialogAvatar: document.querySelector("#memberDialogAvatar"),
@@ -1974,6 +1990,50 @@ function bindEvents() {
   });
   elements.avatarInput?.addEventListener("change", handleAvatarChange);
   elements.memberDialogClose?.addEventListener("click", () => elements.memberDialog?.close());
+  elements.userChip?.addEventListener("click", () => {
+    if (syncModeV2()) {
+      openUserPage();
+    } else {
+      openSettings("account");
+    }
+  });
+  elements.userDialogClose?.addEventListener("click", () => elements.userDialog?.close());
+  elements.userDialogAvatar?.addEventListener("click", () => {
+    if (syncModeV2() && state.sync.workspace) {
+      elements.avatarInput?.click();
+    }
+  });
+  elements.userRowOwned?.addEventListener("click", () => {
+    elements.userDialog?.close();
+    switchToView("owned");
+  });
+  elements.userRowWanted?.addEventListener("click", () => {
+    elements.userDialog?.close();
+    switchToView("wanted");
+  });
+  elements.userRowSettings?.addEventListener("click", () => {
+    elements.userDialog?.close();
+    openSettings();
+  });
+  elements.userRowSignOut?.addEventListener("click", () => {
+    elements.userDialog?.close();
+    accountSignOutNow();
+  });
+  elements.userCopyInvite?.addEventListener("click", async () => {
+    const code = state.sync.workspace?.inviteCode || "";
+    if (!code) {
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(code);
+      elements.userCopyInvite.textContent = t("workspaceCopied");
+      setTimeout(() => {
+        elements.userCopyInvite.textContent = t("workspaceCopy");
+      }, 1600);
+    } catch {
+      // Clipboard unavailable: the code stays visible to copy by hand.
+    }
+  });
   elements.searchInput.addEventListener("focus", () => ensureSearchIndex(), { once: false });
   elements.searchInput.addEventListener("input", (event) => {
     state.query = event.target.value;
@@ -3824,13 +3884,19 @@ function applyAppearance() {
   document.querySelectorAll('[data-i18n="homeTitle"], [data-i18n="appTitle"]').forEach((node) => {
     node.textContent = APP_VERSION_LABEL;
   });
+  // Signed-in users see their avatar + name in the top-left chip (tap to open
+  // the user page); signed-out keeps the brand mark + version.
+  const selfMember = syncModeV2() ? currentMember() : null;
   if (elements.brandVersion) {
-    elements.brandVersion.textContent = APP_VERSION_LABEL;
+    elements.brandVersion.textContent = selfMember ? selfMember.name || currentUserEmail().split("@")[0] : APP_VERSION_LABEL;
+  }
+  if (elements.brandMark && selfMember) {
+    applyAvatarTo(elements.brandMark, selfMember, (selfMember.name || currentUserEmail())[0]);
   }
   if (elements.appVersionLabel) {
     elements.appVersionLabel.textContent = `Gunpula App ${APP_VERSION_LABEL}`;
   }
-  if (elements.brandMark) {
+  if (elements.brandMark && !selfMember) {
     elements.brandMark.innerHTML = "";
     if (state.appIcon) {
       const img = document.createElement("img");
@@ -6297,6 +6363,10 @@ async function handleAvatarChange(event) {
     const avatar = await imageDataUrlFromFile(file, { width: 96, height: 96, fit: "cover", format: "image/jpeg", quality: 0.82 });
     await saveMemberProfileFields({ avatar });
     renderSettings();
+    applyAppearance();
+    if (elements.userDialog?.open) {
+      renderUserPage();
+    }
   } catch (error) {
     setSyncStatus("error", error.message);
     renderSettings();
@@ -6416,6 +6486,53 @@ function fillMemberStrip(container, rows) {
     item.append(name);
     item.addEventListener("click", () => openDetail(kit));
     container.append(item);
+  }
+}
+
+function switchToView(view) {
+  state.activeView = view;
+  state.selectedKit = null;
+  state.activeModal = null;
+  localStorage.setItem(ACTIVE_VIEW_KEY, state.activeView);
+  persistViewState({ mode: "push" });
+  render();
+}
+
+function renderUserPage() {
+  const member = currentMember();
+  applyAvatarTo(elements.userDialogAvatar, member, currentUserEmail()[0]);
+  elements.userDialogName.textContent = member?.name || currentUserEmail().split("@")[0] || "member";
+  elements.userDialogMeta.textContent = currentUserEmail();
+  elements.userOwnedCount.textContent = String(collectionIds("owned").length);
+  elements.userWantedCount.textContent = String(collectionIds("wanted").length);
+  renderProfileFavorites();
+
+  const workspace = state.sync.workspace;
+  elements.userInviteLine.hidden = !workspace?.inviteCode;
+  elements.userInviteCode.textContent = workspace?.inviteCode || "";
+  elements.userMembers.innerHTML = "";
+  for (const row of workspace?.members || []) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `workspace-member-row${row.is_self ? " is-self" : ""}`;
+    const avatar = document.createElement("span");
+    avatar.className = "account-avatar member-row-avatar";
+    applyAvatarTo(avatar, row);
+    const body = document.createElement("span");
+    body.className = "member-row-body";
+    const name = document.createElement("strong");
+    name.textContent = `${row.name || "member"}${row.is_self ? ` · ${t("workspaceSelf")}` : ""}`;
+    body.append(name);
+    button.append(avatar, body);
+    button.addEventListener("click", () => openMemberProfile(row));
+    elements.userMembers.append(button);
+  }
+}
+
+function openUserPage() {
+  renderUserPage();
+  if (!elements.userDialog.open) {
+    elements.userDialog.showModal();
   }
 }
 
