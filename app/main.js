@@ -760,6 +760,19 @@ const elements = {
   userMembers: document.querySelector("#userMembers"),
   userRowSettings: document.querySelector("#userRowSettings"),
   userRowSignOut: document.querySelector("#userRowSignOut"),
+  userRowGuide: document.querySelector("#userRowGuide"),
+  userGuideValue: document.querySelector("#userGuideValue"),
+  guideDialog: document.querySelector("#guideDialog"),
+  guideClose: document.querySelector("#guideClose"),
+  guideSummary: document.querySelector("#guideSummary"),
+  guideBody: document.querySelector("#guideBody"),
+  guideUnitDialog: document.querySelector("#guideUnitDialog"),
+  guideUnitClose: document.querySelector("#guideUnitClose"),
+  guideUnitArt: document.querySelector("#guideUnitArt"),
+  guideUnitName: document.querySelector("#guideUnitName"),
+  guideUnitMeta: document.querySelector("#guideUnitMeta"),
+  guideUnitVariants: document.querySelector("#guideUnitVariants"),
+  guideUnitKits: document.querySelector("#guideUnitKits"),
   memberDialog: document.querySelector("#memberDialog"),
   memberDialogClose: document.querySelector("#memberDialogClose"),
   memberDialogAvatar: document.querySelector("#memberDialogAvatar"),
@@ -2115,6 +2128,18 @@ function bindEvents() {
   elements.userRowSettings?.addEventListener("click", () => {
     closeUserPage();
     openSettings();
+  });
+  elements.userRowGuide?.addEventListener("click", () => {
+    closeUserPage();
+    openGuide();
+  });
+  elements.guideClose?.addEventListener("click", () => elements.guideDialog?.close());
+  elements.guideDialog?.addEventListener("click", (event) => {
+    if (event.target === elements.guideDialog) elements.guideDialog.close();
+  });
+  elements.guideUnitClose?.addEventListener("click", () => elements.guideUnitDialog?.close());
+  elements.guideUnitDialog?.addEventListener("click", (event) => {
+    if (event.target === elements.guideUnitDialog) elements.guideUnitDialog.close();
   });
   elements.userRowSignOut?.addEventListener("click", () => {
     if (!window.confirm(t("signOutConfirm"))) {
@@ -6182,6 +6207,39 @@ function collectionOwnerSummary(kitId, type) {
   return entry?.status === type ? `${member} ×${clampCollectionQuantity(entry.quantity)}` : "";
 }
 
+// Set a kit's status in the signed-in user's own collection by id (used by the 图鉴,
+// which acts on kits the user isn't currently viewing in the detail dialog).
+function setKitCollectionStatus(kitId, type, on) {
+  if (!kitId) return;
+  if (!canEditSharedData()) {
+    setSyncStatus("readonly", t("readOnlyHint"));
+    return;
+  }
+  const member = editableCollectionMember();
+  const previous = collectionEntry(kitId, member);
+  if (on) {
+    memberCollectionMap(member)[kitId] = {
+      status: type,
+      quantity: clampCollectionQuantity(previous?.quantity ?? 1),
+      updated_at: new Date().toISOString(),
+      updated_by: member,
+    };
+  } else if (previous?.status === type) {
+    memberCollectionMap(member)[kitId] = {
+      ...previous,
+      status: "deleted",
+      updated_at: new Date().toISOString(),
+      updated_by: member,
+    };
+  } else {
+    return;
+  }
+  refreshLegacyCollectionItems();
+  saveCollection();
+  renderCollections();
+  renderKits();
+}
+
 function updateSelectedWantedQuantity(value) {
   const kit = state.selectedKit;
   if (!kit) {
@@ -6782,6 +6840,15 @@ function renderUserPage() {
     button.addEventListener("click", () => openMemberProfile(row));
     elements.userMembers.append(button);
   }
+
+  // Populate the 图鉴 count lazily; ensureGuideData caches after the first load.
+  if (elements.userGuideValue) {
+    if (state.guide) {
+      renderUserGuideValue();
+    } else {
+      ensureGuideData().then(renderUserGuideValue).catch(() => {});
+    }
+  }
 }
 
 function openUserPage() {
@@ -6804,6 +6871,243 @@ function closeUserPage() {
       elements.userDialog.close();
     }
   }, 190);
+}
+
+// ---------------------------------------------------------------------------
+// 图鉴 (picture book): a gallery of G Generation mobile suits, grouped by work,
+// that lights up from the user's own owned/wanted collection via the kit map.
+// ---------------------------------------------------------------------------
+const GGET_GUIDE_WORK = /Gundam 00(?!8)|Gundam SEED|Witch from Mercury/i;
+
+// Strip in-game variant tags so "Freedom Gundam", "Freedom Gundam (EX)" and
+// "Freedom Gundam METEOR" collapse to one cell, without merging genuinely
+// different suits like "Strike Gundam" vs "Aile Strike Gundam".
+function guideBaseName(name) {
+  return String(name || "")
+    .replace(/\s*\((?:EX|METEOR)\)/gi, "")
+    .replace(/\s*\[[^\]]*\]/g, "")
+    .replace(/\s*\bMETEOR\b\s*$/i, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+async function ensureGuideData() {
+  if (state.guide) return state.guide;
+  const [units, map] = await Promise.all([
+    loadOptionalJson("../data/gget-units.json"),
+    loadOptionalJson("../data/gget-kit-map.json"),
+  ]);
+  if (!units?.units) {
+    state.guide = { works: [], groups: [] };
+    return state.guide;
+  }
+  const unitKits = map?.unit_kits || {};
+  const workIds = new Set((units.works || []).filter((w) => GGET_GUIDE_WORK.test(w.name)).map((w) => w.work_id));
+  const workName = new Map((units.works || []).map((w) => [w.work_id, w.name]));
+  const targetUnits = units.units.filter((u) => (u.work_ids || []).some((id) => workIds.has(id)));
+
+  // Merge variants per work into display groups.
+  const groupMap = new Map();
+  for (const unit of targetUnits) {
+    const primaryWork = (unit.work_ids || []).find((id) => workIds.has(id));
+    const key = `${primaryWork}::${guideBaseName(unit.name).toLowerCase()}`;
+    if (!groupMap.has(key)) {
+      groupMap.set(key, {
+        key,
+        work_id: primaryWork,
+        work: workName.get(primaryWork) || "",
+        name: guideBaseName(unit.name),
+        icon: unit.icon,
+        rarity: unit.rarity,
+        unit_ids: [],
+        variants: [],
+        kit_ids: new Set(),
+      });
+    }
+    const group = groupMap.get(key);
+    group.unit_ids.push(unit.unit_id);
+    group.variants.push(unit.name);
+    if (unit.rarity > group.rarity) {
+      group.rarity = unit.rarity;
+      group.icon = unit.icon; // show the highest-rarity art as the cell face
+    }
+    for (const kitId of unitKits[unit.unit_id] || []) group.kit_ids.add(kitId);
+  }
+
+  const works = [...workIds].map((id) => ({ work_id: id, name: workName.get(id) || "" }));
+  const groups = [...groupMap.values()].map((g) => ({ ...g, kit_ids: [...g.kit_ids] }));
+  state.guide = { works, groups };
+  return state.guide;
+}
+
+// Owned / wanted kit-id sets for the signed-in user's own collection.
+function guideCollectionSets() {
+  state.collection = normalizeCollection(state.collection);
+  const map = state.collection.member_items?.[editableCollectionMember()] || {};
+  const owned = new Set();
+  const wanted = new Set();
+  for (const [kitId, entry] of Object.entries(map)) {
+    if (entry?.status === "owned") owned.add(kitId);
+    else if (entry?.status === "wanted") wanted.add(kitId);
+  }
+  return { owned, wanted };
+}
+
+function guideGroupStatus(group, sets) {
+  if (group.kit_ids.some((id) => sets.owned.has(id))) return "owned";
+  if (group.kit_ids.some((id) => sets.wanted.has(id))) return "wanted";
+  return "none";
+}
+
+async function openGuide() {
+  const guide = await ensureGuideData();
+  renderGuide(guide);
+  if (!elements.guideDialog.open) elements.guideDialog.showModal();
+}
+
+function renderGuide(guide) {
+  const sets = guideCollectionSets();
+  const statusByGroup = new Map(guide.groups.map((g) => [g.key, guideGroupStatus(g, sets)]));
+  const litTotal = [...statusByGroup.values()].filter((s) => s !== "none").length;
+  elements.guideSummary.textContent = t("guideComplete", { collected: litTotal, total: guide.groups.length });
+
+  elements.guideBody.innerHTML = "";
+  const orderedWorks = [...guide.works].sort((a, b) => a.work_id - b.work_id);
+  for (const work of orderedWorks) {
+    const groups = guide.groups.filter((g) => g.work_id === work.work_id).sort((a, b) => a.name.localeCompare(b.name));
+    if (!groups.length) continue;
+    const lit = groups.filter((g) => statusByGroup.get(g.key) !== "none").length;
+
+    const section = document.createElement("section");
+    section.className = "guide-work";
+    const head = document.createElement("div");
+    head.className = "guide-work-head";
+    head.innerHTML = `<h3>${escapeHtml(work.name)}</h3><span>${lit}/${groups.length}</span>`;
+    section.append(head);
+
+    const grid = document.createElement("div");
+    grid.className = "guide-grid";
+    for (const group of groups) {
+      const status = statusByGroup.get(group.key);
+      const cell = document.createElement("button");
+      cell.type = "button";
+      cell.className = `guide-cell is-${status}`;
+      const art = document.createElement("span");
+      art.className = "guide-cell-art";
+      const img = document.createElement("img");
+      img.decoding = "async";
+      img.src = `./assets/gget/${group.icon}.webp`;
+      img.alt = group.name;
+      img.addEventListener("error", () => {
+        img.remove();
+        art.classList.add("is-missing");
+      });
+      art.append(img);
+      const label = document.createElement("span");
+      label.className = "guide-cell-name";
+      label.textContent = group.name;
+      cell.append(art, label);
+      if (status === "owned") cell.append(badgeEl("✓", "guide-badge-owned"));
+      else if (status === "wanted") cell.append(badgeEl("★", "guide-badge-wanted"));
+      cell.addEventListener("click", () => openGuideUnit(group, status));
+      grid.append(cell);
+    }
+    section.append(grid);
+    elements.guideBody.append(section);
+  }
+}
+
+function badgeEl(text, className) {
+  const span = document.createElement("span");
+  span.className = `guide-badge ${className}`;
+  span.textContent = text;
+  return span;
+}
+
+// Tapping a cell shows its merged variants and — the reverse link the user asked
+// for — the matching catalog kits, each with quick add-to-owned/wanted buttons.
+function openGuideUnit(group, status) {
+  elements.guideUnitArt.innerHTML = `<img src="./assets/gget/${group.icon}.webp" alt="${escapeHtml(group.name)}" />`;
+  elements.guideUnitName.textContent = group.name;
+  const statusLabel = { owned: t("ownedList"), wanted: t("wantedList"), none: t("guideNotCollected") }[status];
+  elements.guideUnitMeta.textContent = `${group.work} · ${statusLabel}`;
+
+  elements.guideUnitVariants.innerHTML = "";
+  for (const variant of [...new Set(group.variants)]) {
+    const chip = document.createElement("span");
+    chip.className = "guide-variant-chip";
+    chip.textContent = variant;
+    elements.guideUnitVariants.append(chip);
+  }
+
+  const kits = group.kit_ids.map(displayKitById).filter(Boolean);
+  elements.guideUnitKits.innerHTML = "";
+  if (!kits.length) {
+    const empty = document.createElement("p");
+    empty.className = "settings-hint";
+    empty.textContent = t("guideNoKits");
+    elements.guideUnitKits.append(empty);
+  } else {
+    for (const kit of kits.slice(0, 30)) {
+      elements.guideUnitKits.append(guideKitRow(kit, group, status));
+    }
+  }
+  if (!elements.guideUnitDialog.open) elements.guideUnitDialog.showModal();
+}
+
+function guideKitRow(kit, group, groupStatus) {
+  const sets = guideCollectionSets();
+  const row = document.createElement("div");
+  row.className = "guide-kit-row";
+  const face = document.createElement("button");
+  face.type = "button";
+  face.className = "guide-kit-face";
+  const thumb = document.createElement("span");
+  thumb.className = "guide-kit-thumb";
+  appendImageWithFallback(thumb, kit, { onExhausted: () => (thumb.textContent = gradeShortLabel(kit)) });
+  const text = document.createElement("span");
+  text.className = "guide-kit-text";
+  text.innerHTML = `<strong>${escapeHtml(kitShortName(kit))}</strong><span>${escapeHtml(seriesLabelFromKit(kit))} · ${escapeHtml(gradeShortLabel(kit))}</span>`;
+  face.append(thumb, text);
+  face.addEventListener("click", () => {
+    elements.guideUnitDialog.close();
+    elements.guideDialog.close();
+    openDetail(kit);
+  });
+
+  const actions = document.createElement("div");
+  actions.className = "guide-kit-actions";
+  const owned = sets.owned.has(kit.kit_id);
+  const wanted = sets.wanted.has(kit.kit_id);
+  actions.append(
+    guideAddButton(kit, "owned", owned, group, groupStatus),
+    guideAddButton(kit, "wanted", wanted, group, groupStatus),
+  );
+  row.append(face, actions);
+  return row;
+}
+
+function guideAddButton(kit, type, active, group, groupStatus) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = `guide-add-button is-${type}${active ? " is-active" : ""}`;
+  const keySuffix = type === "owned" ? "Owned" : "Wanted";
+  button.textContent = active ? t(`unmark${keySuffix}`) : t(`mark${keySuffix}`);
+  button.disabled = !canEditSharedData();
+  button.addEventListener("click", () => {
+    setKitCollectionStatus(kit.kit_id, type, !active);
+    openGuideUnit(group, guideGroupStatus({ ...group, kit_ids: group.kit_ids }, guideCollectionSets()));
+    if (elements.guideDialog.open) renderGuide(state.guide);
+    renderUserGuideValue();
+  });
+  return button;
+}
+
+function renderUserGuideValue() {
+  if (!elements.userGuideValue || !state.guide) return;
+  const sets = guideCollectionSets();
+  const lit = state.guide.groups.filter((g) => guideGroupStatus(g, sets) !== "none").length;
+  elements.userGuideValue.textContent = `${lit}/${state.guide.groups.length}`;
 }
 
 function openMemberProfile(member) {

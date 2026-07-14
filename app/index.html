@@ -9,7 +9,7 @@
     <title>Gunpula v2.0.0</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260714-v50" />
+    <link rel="stylesheet" href="./styles.css?v=20260714-v51" />
   </head>
   <body>
     <main class="catalog-page">
@@ -569,6 +569,11 @@
             <span class="user-menu-label" data-i18n="wantedList">想要</span>
             <span class="user-menu-value" id="userWantedCount">0</span>
           </button>
+          <button class="user-menu-row" id="userRowGuide" type="button">
+            <span class="user-menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+            <span class="user-menu-label" data-i18n="pictureBook">图鉴</span>
+            <span class="user-menu-value" id="userGuideValue"></span>
+          </button>
           <details class="user-menu-details">
             <summary class="user-menu-row">
               <span class="user-menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span>
@@ -610,6 +615,33 @@
       </div>
     </dialog>
 
+    <dialog class="guide-dialog" id="guideDialog" aria-labelledby="guideTitle">
+      <div class="guide-shell">
+        <div class="guide-head">
+          <button class="dialog-close guide-close" id="guideClose" type="button" aria-label="关闭" data-i18n-aria="closeSettings">×</button>
+          <h2 id="guideTitle" data-i18n="pictureBook">图鉴</h2>
+          <p id="guideSummary"></p>
+        </div>
+        <div class="guide-body" id="guideBody"></div>
+      </div>
+    </dialog>
+
+    <dialog class="member-dialog guide-unit-dialog" id="guideUnitDialog" aria-labelledby="guideUnitName">
+      <div class="member-shell">
+        <button class="dialog-close" id="guideUnitClose" type="button" aria-label="关闭" data-i18n-aria="closeSettings">×</button>
+        <div class="guide-unit-head">
+          <div class="guide-unit-art" id="guideUnitArt"></div>
+          <div class="member-head-info">
+            <h2 id="guideUnitName"></h2>
+            <p id="guideUnitMeta"></p>
+          </div>
+        </div>
+        <div class="guide-unit-variants" id="guideUnitVariants"></div>
+        <h3 class="guide-unit-subhead" data-i18n="guideMatchedKits">对应模型</h3>
+        <div class="guide-unit-kits" id="guideUnitKits"></div>
+      </div>
+    </dialog>
+
     <dialog class="member-dialog" id="memberDialog" aria-labelledby="memberDialogName">
       <div class="member-shell">
         <button class="dialog-close" id="memberDialogClose" type="button" aria-label="关闭" data-i18n-aria="closeSettings">×</button>
@@ -640,6 +672,6 @@
       <div class="radial-labels"></div>
     </div>
 
-    <script type="module" src="./main.js?v=20260714-v50"></script>
+    <script type="module" src="./main.js?v=20260714-v51"></script>
   </body>
 </html>

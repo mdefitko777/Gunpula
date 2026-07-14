@@ -43,7 +43,10 @@
     "android:add": "npm run android:www && npx @capacitor/cli add android",
     "android:build": "npm run android:sync && cd android && gradlew assembleDebug",
     "import:data": "npm run import:bandai && npm run import:collectibles && npm run import:pokemon-center && npm run import:fate && npm run import:pbandai-manual && npm run import:pb && npm run localize && npm run check:sources",
-    "import:official": "npm run import:data"
+    "import:official": "npm run import:data",
+    "import:gget": "node scripts/import_gget_units.mjs",
+    "map:gget": "node scripts/build_gget_kit_map.mjs",
+    "cache:gget-images": "node scripts/cache_gget_images.mjs"
   },
   "devDependencies": {
     "@capacitor/android": "^7.0.0",
