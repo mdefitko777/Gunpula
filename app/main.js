@@ -1996,7 +1996,7 @@ function bindEvents() {
   elements.accountCode.addEventListener("keydown", (event) => {
     if (event.key === "Enter") accountVerifyCode();
   });
-  elements.accountSignOut.addEventListener("click", accountSignOutNow);
+  elements.accountSignOut.addEventListener("click", confirmAndSignOut);
   elements.saveMemberDisplayName?.addEventListener("click", saveMemberDisplayNameNow);
   elements.memberDisplayNameInput?.addEventListener("keydown", (event) => {
     if (event.key === "Enter") saveMemberDisplayNameNow();
@@ -2074,6 +2074,27 @@ function bindEvents() {
       closeUserPage();
     }
   });
+  // Left-swipe on the open drawer closes it (mirrors the left-edge right-swipe that opens it).
+  let drawerSwipeX = null;
+  elements.userDialog?.addEventListener(
+    "touchstart",
+    (event) => {
+      drawerSwipeX = event.touches.length === 1 ? event.touches[0].clientX : null;
+    },
+    { passive: true },
+  );
+  elements.userDialog?.addEventListener(
+    "touchend",
+    (event) => {
+      if (drawerSwipeX === null) return;
+      const endX = event.changedTouches[0]?.clientX ?? drawerSwipeX;
+      if (endX - drawerSwipeX < -55) {
+        closeUserPage();
+      }
+      drawerSwipeX = null;
+    },
+    { passive: true },
+  );
   elements.userDialog?.addEventListener("cancel", (event) => {
     event.preventDefault();
     closeUserPage();
@@ -2096,6 +2117,9 @@ function bindEvents() {
     openSettings();
   });
   elements.userRowSignOut?.addEventListener("click", () => {
+    if (!window.confirm(t("signOutConfirm"))) {
+      return;
+    }
     closeUserPage();
     accountSignOutNow();
   });
@@ -3485,6 +3509,13 @@ async function accountVerifyCode() {
   }
 }
 
+function confirmAndSignOut() {
+  if (!window.confirm(t("signOutConfirm"))) {
+    return;
+  }
+  accountSignOutNow();
+}
+
 function accountSignOutNow() {
   signOut();
   clearInterval(state.sync.timer);
@@ -3687,10 +3718,14 @@ async function copyInviteCode() {
 // user keeps. Restoring overwrites local data (after confirmation) and then
 // propagates through the normal save/sync path.
 function exportCollectionBackup() {
+  const githubToken = localStorage.getItem(GITHUB_TOKEN_KEY) || "";
   const payload = {
     exported_at: new Date().toISOString(),
     app: APP_VERSION_LABEL,
     ...cloudPayload(),
+    // Carried so a restore on a fresh install brings the data-fetch token back
+    // instead of forcing the user to paste it again.
+    ...(githubToken ? { github_token: githubToken } : {}),
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
   const link = document.createElement("a");
@@ -3740,6 +3775,10 @@ async function importCollectionBackup(file) {
       state.appIcon = String(payload.appearance.app_icon || "");
       state.homeCovers = normalizeHomeCovers(payload.appearance.home_covers);
       saveAppearance();
+    }
+    if (typeof payload.github_token === "string" && payload.github_token) {
+      localStorage.setItem(GITHUB_TOKEN_KEY, payload.github_token);
+      if (elements.githubTokenInput) elements.githubTokenInput.value = payload.github_token;
     }
     saveCollection();
     saveOverrides();
