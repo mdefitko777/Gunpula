@@ -1,272 +1,305 @@
-# Collection Atlas
+# Gunpula / Collection Atlas
 
-Collectible catalog and collection app for Gunpla, Armored Core, Pokemon,
-Fate/FGO, and BEYBLADE X.
+一个给两个人一起用的收藏图鉴 App。
 
-The project keeps product lines and individual product records in structured
-JSON files, then validates, imports, and reports on that data with small Node
-scripts. The static `app/` frontend reads those JSON files and presents them as
-a mobile-first collection atlas instead of a database table.
+它现在主要管理这些分类：
 
-## Files
+- 高达 / Gunpla / Robot 魂 / Metal Build / 食玩 / 扭蛋 / PB 限定
+- Armored Core 拼装和周边
+- 宝可梦拼装、玩偶、扭蛋、周边
+- Fate / FGO 手办、黏土人、一番赏、扭蛋、周边
+- Beyblade X，包括 BX / CX / UX / 限定和部件图鉴
 
-- `data/grades.json` - grade, product-line, shokugan, and gashapon taxonomy.
-- `data/sources.json` - source registry and source strengths/weaknesses.
-- `data/kits.json` - individual kit records.
-- `data/pbandai_sources.json` - Premium Bandai JP URLs for the offline crawler.
-- `data/pbandai.json` - cached Premium Bandai JP products read by the static app.
-- `data/pbandai_manual_products.json` - manually maintained PB/official fallback records.
-- `data/market_sources.json` - market source registry for Naver, Amazon, Mandarake, Taobao, Mercari, and manual-link sources.
-- `data/market_manual_links.json` - manually imported marketplace listings for sources that should not be scraped directly.
-- `data/market-prices.json` - generated market summary, source status, KRW price estimates, and search templates.
-- `data/search-index.json` - generated four-language keyword/search index for the app.
-- `data/exchange-rates.json` - generated daily FX cache, using Frankfurter with previous-cache fallback.
-- `data/image-assets.json` - generated local image asset summary.
-- `data/android-package.json` - generated APK/Capacitor readiness summary.
-- `schema/kit.schema.json` - kit record shape for reference.
-- `docs/grades.md` - readable Chinese grade reference.
-- `docs/data-model.md` - kit data model and validation rules.
-- `docs/source-plan.md` - source and import strategy.
-- `docs/supabase-setup.sql` - legacy (v1) Supabase schema for key-based shared sync.
-- `docs/supabase-setup-v2.sql` - account-based sync schema: email login, invite codes, v1 migration RPC.
-- `docs/sync-v2-setup.md` - step-by-step guide for enabling email-code login sync.
-- `.github/workflows/refresh-catalog.yml` - scheduled official-source refresh workflow.
-- `.github/workflows/ci.yml` - syntax checks, catalog validation, and split-freshness gate on every push/PR.
-- `.github/workflows/android-apk.yml` - cloud debug-APK build publishing to the `android-latest` release.
-- `scripts/validate_catalog.mjs` - validates grades and kit records.
-- `scripts/catalog_stats.mjs` - prints catalog counts.
-- `scripts/source_coverage.mjs` - reports source coverage and missing source types.
-- `scripts/search_kits.mjs` - searches kit records.
-- `scripts/serve_app.mjs` - serves the local catalog UI.
-- `scripts/split_catalog.mjs` - splits `data/kits.json` into per-franchise `data/split/` files the app loads progressively at startup.
-- `scripts/check_app_syntax.mjs` - parse-checks the browser ES modules (`app/main.js`, `app/i18n.js`) without executing them.
-- `scripts/prepare_android_www.mjs` - stages the Capacitor `www/` folder (app + data) for Android builds.
-- `scripts/build_market_data.mjs` - builds market source status, keyword index, FX cache, image asset summary, and Android readiness JSON.
-- `scripts/import_bandai_spirits_gunpla.mjs` - imports the Japanese official BANDAI SPIRITS Gunpla catalog.
-- `scripts/import_bandai_collectibles.mjs` - imports official Bandai Candy, Bandai Gashapon, Pokemon, Armored Core, and BEYBLADE X lines.
-- `scripts/import_goodsmile_fate.mjs` - imports Fate/FGO figure and goods records from Good Smile official pages.
-- `scripts/import_pokemon_center_jp.mjs` - imports Pokemon Center Japan plush/toy supplement records.
-- `scripts/import_pbandai_manual_products.mjs` - merges manual PB and official fallback records into the catalog.
-- `scripts/crawl_pbandai.py` - safely fetches Premium Bandai JP pages into `data/pbandai.json`.
-- `scripts/cache_catalog_images.mjs` - stores fragile remote cover images in a local cache or repo asset folder.
-- `scripts/check_image_health.mjs` - checks whether cover and gallery image candidates still respond.
-- `scripts/prune_broken_image_urls.mjs` - removes image URLs known to be broken from gallery candidates.
-- `scripts/find_duplicate_candidates.mjs` - writes suspected duplicate groups to `data/duplicate-candidates.json`.
-- `scripts/audit_gundam_series.mjs` - checks common Gundam series misclassification cases.
-- `scripts/export_grades_markdown.mjs` - exports grades as Markdown.
+网站地址：
 
-## Commands
+[https://mdefitko777.github.io/Gunpula/app/](https://mdefitko777.github.io/Gunpula/app/)
+
+Android APK：
+
+[gunpula-debug.apk](https://github.com/mdefitko777/Gunpula/releases/download/android-latest/gunpula-debug.apk)
+
+## 这是什么
+
+这不是普通数据库表格，而是一个手机优先的收藏图鉴。
+
+你可以：
+
+- 按分类浏览商品
+- 搜索中 / 韩 / 英 / 日名称
+- 看商品图、发售日、定价和官方链接
+- 标记“想要”和“已购买”
+- 两个人共享同一个收藏空间
+- 查看对方想要什么、买了什么
+- 手动修正名称、系列、封面图
+- 看最近更新
+- 看 Premium Bandai JP 的缓存数据
+- 安装成 Android App 使用
+
+## 普通使用
+
+### 网页版
+
+直接打开：
+
+[https://mdefitko777.github.io/Gunpula/app/](https://mdefitko777.github.io/Gunpula/app/)
+
+如果手机上看不到新版，去设置里点“刷新缓存”，或者关闭 App 后重新打开。
+
+### Android 版
+
+下载：
+
+[gunpula-debug.apk](https://github.com/mdefitko777/Gunpula/releases/download/android-latest/gunpula-debug.apk)
+
+安装时需要允许“未知来源”。这是 debug 包，不是 Play Store 正式签名包。
+
+App 内容更新一般不需要重新下载 APK，因为 App 会优先读取线上数据。只有底层壳版本变化时，才需要重新安装新版 APK。
+
+## 同步和共享
+
+同步使用 Supabase。
+
+现在推荐使用邮箱验证码登录：
+
+1. 在设置里登录邮箱
+2. 创建共享空间
+3. 把邀请码发给另一个人
+4. 对方在设置里输入邀请码加入
+
+加入后，两个人可以共享：
+
+- 已购买
+- 想要
+- 数量
+- 手动修正
+- 首页封面
+- 头像、名称、背景图
+
+旧版密钥同步还保留在高级设置里，但新用户建议直接用邮箱登录。
+
+Supabase 初始化 SQL：
+
+- `docs/supabase-setup-v2.sql`
+
+## 数据怎么更新
+
+项目是静态网页。用户打开网页时，不会直接爬官方站。
+
+数据更新靠 GitHub Actions：
+
+### 官方目录更新
+
+Workflow：
+
+- `.github/workflows/refresh-catalog.yml`
+
+它负责：
+
+- 抓日本官方来源
+- 合并手动数据
+- 翻译和整理名称
+- 生成最近更新
+- 生成搜索数据
+- 分片数据
+- 校验数据
+- 自动提交到 GitHub
+
+### 市场价更新
+
+Workflow：
+
+- `.github/workflows/market-prices.yml`
+
+市场价已经从官方目录更新里拆出去了。
+
+原因很简单：市场价来源慢或者失败时，不能影响官方新品进库。
+
+现在官方目录和市场价是两条独立任务：
+
+- 官方目录失败，只影响目录
+- 市场价失败，只影响市场价
+- 市场价卡住，不会拖死每日新品更新
+
+## Premium Bandai JP
+
+前端不会直接访问 `p-bandai.jp`。
+
+Premium Bandai JP 可能有地区限制，所以流程是：
+
+1. 日本环境或 VPS 跑抓取脚本
+2. 生成 `data/pbandai.json`
+3. 前端只读取这个 JSON
+
+脚本：
 
 ```bash
-npm run validate
-npm run stats
-npm run sources
-npm run app
-npm run import:bandai
-npm run import:collectibles
-npm run import:fate
-npm run import:pokemon-center
-npm run import:pbandai-manual
-npm run import:official
-npm run import:data
-npm run duplicates
-npm run audit:gundam-series
-npm run market
-npm run check:images
-npm run check:images:pokemon
-npm run cache:catalog-images
-npm run cache:pokemon-images
-npm run repair:pokemon-images
-npm run search -- --grade=RG
-npm run search -- aerial
-npm run export:grades
 python scripts/crawl_pbandai.py
 ```
 
-On Windows PowerShell, use `npm.cmd` if script execution policy blocks `npm`:
+输入来源：
 
-```powershell
-npm.cmd run validate
-npm.cmd run stats
-npm.cmd run app
-npm.cmd run import:bandai
-npm.cmd run import:official
-npm.cmd run import:data
-npm.cmd run duplicates
-npm.cmd run audit:gundam-series
-npm.cmd run market
+- `data/pbandai_sources.json`
+
+输出缓存：
+
+- `data/pbandai.json`
+
+手动补充：
+
+- `data/pbandai_manual_products.json`
+
+这个脚本不会做登录绕过、验证码绕过、代理轮换或反爬绕过。被地区限制时会记录 blocked 状态，不会让前端直接硬爬。
+
+## 本地运行
+
+需要 Node.js。
+
+```bash
+npm install
+npm run app
 ```
 
-If `python` is not on your Windows PATH, use your installed Python executable
-directly. The crawler uses only the Python standard library.
+打开：
 
-## Current Status
+[http://localhost:4173/app/](http://localhost:4173/app/)
 
-The catalog currently validates 4,680 product records across Gundam, Armored
-Core, Pokemon, Fate/FGO, and BEYBLADE X lines. Records include official product
-images, release dates, JPY prices where available, source links, four-language
-names, and compact series labels such as `SEED`, `00`, `W`, `Iron-Blooded
-Orphans`, `Crossbone`, `Hathaway`, `FGO`, `BX`, `UX`, `CX`, and `Limited`.
+Windows PowerShell 如果 `npm` 被策略拦截，就用：
 
-The local website is static. It does not live-fetch official pages while a user
-browses. Run `npm run import:official` to refresh the JSON data from Japanese
-official sources; that command can later be wired to a scheduled job.
+```powershell
+npm.cmd run app
+```
 
-The current mobile UI is branded as Collection Atlas: a soft blue/white/green
-PWA with a visual home page, bottom navigation for home/catalog/recent/market/
-wanted/owned/settings, catalog browsing, and separate collection views for owned
-and wanted items.
+## 常用命令
 
-## Market Center
+检查数据：
 
-Run:
+```bash
+npm run validate
+```
+
+检查前端模块和核心逻辑：
+
+```bash
+node --experimental-vm-modules scripts/check_app_syntax.mjs
+npm run test:unit
+```
+
+重新生成最近更新：
+
+```bash
+npm run updates
+```
+
+重新生成搜索和市场数据：
 
 ```bash
 npm run market
 ```
 
-This generates:
-
-- `data/search-index.json` for the AI-style name/keyword organizer and advanced search.
-- `data/market-prices.json` for market source status, KRW price estimates, and search links.
-- `data/exchange-rates.json` using Frankfurter as a daily cached FX source.
-- `data/image-assets.json` for the local image asset library summary.
-- `data/android-package.json` for APK/Capacitor readiness.
-
-The first market version is deliberately conservative:
-
-- Naver Shop, Amazon, and Taobao are prepared as API-backed sources and show as
-  ready only when their environment keys are present.
-- Mandarake and Mercari are treated as low-frequency cache/VPS/manual sources.
-- Xianyu, Pinduoduo, 번개장터, 중고나라, and 쿠팡 start as manual-link imports in
-  `data/market_manual_links.json`.
-- The static frontend does not scrape marketplace pages directly.
-- Prices are converted to KRW and displayed with both normal and conservative estimates.
-
-To add a manual market sample, copy the example shape from
-`data/market_manual_links.json` into the `listings` array, then run
-`npm run market`. The app will show the imported sample on the product detail
-page and update the market center counts.
-
-## Premium Bandai JP Cache
-
-The frontend does not crawl or fetch `p-bandai.jp` directly. Premium Bandai JP
-can block non-Japan IPs, so PB data is handled as:
-
-1. Edit `data/pbandai_sources.json` with PB product or category URLs.
-2. Run `python scripts/crawl_pbandai.py` on a Japan-based machine or VPS.
-3. Commit or upload the generated `data/pbandai.json`.
-4. GitHub Pages serves the static app, and the app reads only `data/pbandai.json`.
-
-The crawler uses low-frequency requests, timeouts, one retry by default, and a
-local HTML cache under `work/pbandai_cache`. It does not implement login bypass,
-CAPTCHA bypass, proxy rotation, or hidden anti-bot bypass. If Premium Bandai
-redirects or blocks the request, the crawler writes `fetch_status: "blocked"`
-with an error message and still exits cleanly.
-
-Manual fallback is supported in two places:
-
-1. Add simple display-only cache records directly in `data/pbandai.json`.
-2. Add catalog records in `data/pbandai_manual_products.json`, then run
-   `npm run import:pbandai-manual`.
-
-Set `"manual": true` in `data/pbandai.json` if you want the PB cache generator
-to keep that record when a later fetch is blocked or errors. A successful fetch
-for the same item can replace it.
-
-The Node PB index importer also links existing catalog records to PB item URLs
-when official Bandai/PB pages expose those links. The current generated PB cache
-includes Gunpla PB records plus manual Armored Core PB records, while still
-avoiding frontend requests to `p-bandai.jp`.
-
-GitHub Pages cannot run crawler code. A Japan VPS can run it daily and push the
-changed JSON back to GitHub. Example cron, not enabled automatically:
-
-```cron
-20 4 * * * cd /srv/Gunpula && python scripts/crawl_pbandai.py && git add data/pbandai.json && git commit -m "Refresh Premium Bandai JP cache" && git push
-```
-
-The UI supports local manual corrections in the browser. Corrections are stored
-in `localStorage` and can be exported as JSON from a product detail view.
-
-`npm run cache:catalog-images` writes fragile official cover images to
-`../image-cache/catalog` by default, or to `IMAGE_CACHE_DIR` if that environment
-variable is set. Use `npm run cache:pokemon-images` to cache Pokemon covers into
-`app/assets/catalog/pokemon` and rewrite the catalog to prefer local assets. If
-the first official cover URL fails, the cache script tries the same product's
-gallery candidates before giving up. `npm run check:images:pokemon` writes
-`data/image-health.json`, which the app settings page shows as an image health
-summary. `npm run repair:pokemon-images` runs the full cache, check, broken URL
-prune, and re-check loop for Pokemon images.
-
-## Android App / PWA
-
-The `app/` UI is installable as an Android PWA. Open the hosted `/app/` URL in
-Chrome on Android and use **Add to Home screen** / **Install app**. The service
-worker caches the app shell, catalog JSON, PB cache JSON, and product images
-that have been opened, so the app remains usable when the network or official
-image URLs are unreliable.
-
-For a real APK, wrap the same web app with Capacitor. A base
-`capacitor.config.json` is included. The generated `data/android-package.json`
-and the app settings About tab show the APK status.
+导入官方数据：
 
 ```bash
-npm run android:status
+npm run import:data
+```
+
+拆分前端加载数据：
+
+```bash
+npm run split
+```
+
+查重复候选：
+
+```bash
+npm run duplicates
+```
+
+高达系列审计：
+
+```bash
+npm run audit:gundam-series
+```
+
+检查图片：
+
+```bash
+npm run check:images
+```
+
+宝可梦图片修复：
+
+```bash
+npm run repair:pokemon-images
+```
+
+## Android 构建
+
+GitHub Actions 会自动构建 debug APK，并上传到固定 release：
+
+[android-latest](https://github.com/mdefitko777/Gunpula/releases/tag/android-latest)
+
+本地构建需要 Android Studio / JDK / Android SDK：
+
+```bash
 npm run android:add
 npm run android:sync
 npm run android:build
 ```
 
-`npm run android:add` is a one-time setup command. Building the APK requires a
-machine with Android Studio/JDK/Android SDK installed; GitHub Pages itself cannot
-build or serve a native APK.
+`android:add` 只需要第一次执行。
 
-GitHub Actions always publishes `gunpula-debug.apk` to the `android-latest`
-release. To also publish a signed `gunpula-release.apk`, add these repository
-secrets:
+## 主要目录
 
-- `ANDROID_KEYSTORE_BASE64`
-- `ANDROID_KEYSTORE_PASSWORD`
-- `ANDROID_KEY_ALIAS`
-- `ANDROID_KEY_PASSWORD`
+- `app/`：前端 App
+- `data/`：商品、来源、搜索、PB、市场价等 JSON 数据
+- `scripts/`：导入、校验、生成、缓存脚本
+- `docs/`：Supabase 和数据说明
+- `.github/workflows/`：自动更新、CI、APK 构建
 
-After the secrets are present, push any app change or manually rerun **Build
-Android APK** in GitHub Actions. The workflow uploads both APK files to the same
-fixed release URLs, and the app Settings -> About panel reads
-`data/android-package.json` to show whether release signing is available.
+## 现在的底层结构
 
-## Shared Supabase Sync
+前端是原生 JavaScript ES modules，没有 React/Vue。
 
-Run `docs/supabase-setup.sql` once in Supabase SQL Editor. Then open the app
-settings and fill:
+主要模块：
 
-- Supabase URL
-- Supabase anon key
-- Workspace ID
-- Shared password
-- Optional editor password
-- Member name
+- `app/main.js`：主界面和页面逻辑
+- `app/catalog-loader.js`：数据加载，Android 壳内优先读取线上数据
+- `app/view-state.js`：URL hash、筛选状态、返回键状态
+- `app/search-index-store.js`：搜索索引注入
+- `app/collection-store.js`：收藏数据、成员数据、冲突合并
+- `app/storage.js`：localStorage 包装
+- `app/dialogs.js`：dialog 打开/关闭保护
+- `app/image-utils.js`：图片 fallback
+- `app/dom-utils.js`：HTML 转义
+- `app/auth.js`：Supabase 邮箱验证码登录
+- `app/i18n.js`：中 / 韩 / 英 / 日 UI 文案
 
-Users with the same Workspace ID share collection status, wanted list, manual
-corrections, and series-name corrections. Users with another Workspace ID stay
-independent. If an editor password is set, only devices that know it can upload
-changes; read-only devices can still view the shared state.
+## 当前状态
 
-Conflict behavior is intentionally simple for now: the latest sync wins, while
-`gunpula_workspace_events` keeps a revision history in Supabase.
+当前数据大约 4,800 多条，覆盖高达、AC、宝可梦、Fate、BBX。
 
-## Scheduled Updates
+项目已经支持：
 
-The GitHub Actions workflow `refresh-catalog.yml` runs `npm run import:official`,
-`npm run updates`, `npm run market`, `npm run validate`, `npm run duplicates`,
-and `npm run audit:gundam-series` once a day. If official Japanese source data
-changes, the workflow commits the refreshed JSON, market/search data, and cached
-assets back to the repository.
+- 静态网页
+- Android APK
+- Supabase 双人同步
+- 最近更新
+- Premium Bandai 缓存
+- Beyblade X 部件图鉴
+- 多语言名称
+- 本地图片缓存和图片健康检查
 
-## Next Steps
+## 还有什么需要继续做
 
-1. Manually review collectible records still marked as `other`, `mixed`, or `option`.
-2. Expand Fate, Pokemon, and PB historical imports as more official source pages are identified.
-3. Expand the Gundam series audit rules when a new recurring misclassification is found.
-4. Move image caching from local-computer backup to a hosted cache if official hotlinking becomes unstable.
+比较值得继续优化的是：
+
+- 继续拆小 `app/main.js`
+- 给图片缓存加容量清理
+- 把全量图片检查改成默认轻量检查
+- 压缩部分过大的本地图片
+- 给 Supabase 同步增加更多单元测试
+- 整理设置页，让普通设置和维护工具分得更清楚
+
+## 一句话
+
+这个项目的目标不是做一个“商品数据库后台”，而是做一个可以每天打开、好看、能同步、能查图、能记录想要和已购买的收藏图鉴 App。
