@@ -9,7 +9,7 @@
     <title>Gunpula v2.0.0</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260716-v60" />
+    <link rel="stylesheet" href="./styles.css?v=20260716-v62" />
   </head>
   <body>
     <main class="catalog-page">
@@ -618,6 +618,14 @@
       </div>
     </dialog>
 
+    <dialog class="member-dialog user-panel-dialog" id="userPanelDialog" aria-labelledby="userPanelTitle">
+      <div class="member-shell">
+        <button class="dialog-close" id="userPanelClose" type="button" aria-label="关闭" data-i18n-aria="closeSettings">×</button>
+        <h2 id="userPanelTitle"></h2>
+        <div class="user-panel-body" id="userPanelBody"></div>
+      </div>
+    </dialog>
+
     <dialog class="guide-dialog" id="guideDialog" aria-labelledby="guideTitle">
       <div class="guide-shell">
         <div class="guide-head">
@@ -698,13 +706,9 @@
         </div>
         <div class="member-edit-panel" id="memberEditPanel" hidden>
           <input id="memberDialogNameInput" type="text" maxlength="40" autocomplete="name" />
-          <div class="sync-actions">
-            <button id="memberDialogSaveName" type="button" data-i18n="saveMemberDisplayName">保存名字</button>
-            <button class="secondary-button compact-button" id="memberDialogChangeAvatar" type="button" data-i18n="profileAvatarHint">更换头像</button>
-            <button class="secondary-button compact-button" id="memberDialogChangeBackground" type="button" data-i18n="profileBackgroundHint">更换背景</button>
-          </div>
-          <input id="profileBackgroundInput" type="file" accept="image/*" hidden />
+          <button id="memberDialogSaveName" type="button" data-i18n="saveMemberDisplayName">保存名字</button>
         </div>
+        <input id="profileBackgroundInput" type="file" accept="image/*" hidden />
         <div class="favorite-chips is-static" id="memberDialogFavorites"></div>
         <div class="member-stats" id="memberDialogStats"></div>
         <section class="member-collection">
@@ -715,6 +719,19 @@
           <h3 data-i18n="wantedList">想要</h3>
           <div class="collection-strip" id="memberDialogWanted"></div>
         </section>
+      </div>
+    </dialog>
+
+    <dialog class="action-sheet-dialog" id="memberActionDialog" aria-labelledby="memberActionTitle">
+      <div class="action-sheet">
+        <h2 id="memberActionTitle" data-i18n="profileActions">个人资料</h2>
+        <button id="memberActionViewBackground" type="button" data-i18n="viewProfileBackground">查看背景</button>
+        <button id="memberActionViewAvatar" type="button" data-i18n="viewProfileAvatar">查看头像</button>
+        <button id="memberActionChangeBackground" type="button" data-i18n="profileBackgroundHint">更换背景</button>
+        <button id="memberActionChangeAvatar" type="button" data-i18n="profileAvatarHint">更换头像</button>
+        <button id="memberActionRename" type="button" data-i18n="changeNickname">更改昵称</button>
+        <button id="memberActionTags" type="button" data-i18n="chooseTags">选择标签</button>
+        <button class="action-sheet-cancel" id="memberActionCancel" type="button" data-i18n="cancel">取消</button>
       </div>
     </dialog>
 

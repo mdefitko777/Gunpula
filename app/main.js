@@ -137,13 +137,38 @@ const PAGER_MIN_THRESHOLD = 92;
 const PAGER_ANIMATION_MS = 220;
 const APP_VERSION_LABEL = "v2.0.0";
 const HELP_TEXT = {
-  homeSection: "首页按分类进入图鉴，封面图可在卡片上更换；收藏和最近查看只是入口，不放维护数字。",
-  updatesSection: "最近更新会优先显示你在个人喜好里选择的分类和系列；可以切换最近添加、本周在售或按月份查看。",
+  homeSection: {
+    zh: "首页是入口页。点分类卡片进入对应目录；点“我的收藏”里的已购买/想要会进入自己的收藏，不会跟随朋友视图变化；封面图可在卡片上更换。",
+    ko: "홈은 시작 화면입니다. 분류 카드를 누르면 해당 카탈로그로 이동합니다. 내 컬렉션은 항상 내 계정 기준으로 표시되며 친구 보기와 섞이지 않습니다.",
+    en: "Home is the entry page. Tap a franchise card to browse it. My collection always uses your own account, not the currently viewed friend.",
+    ja: "ホームは入口です。分類カードで各カタログへ移動します。マイコレクションは常に自分のアカウント基準で表示されます。",
+  },
+  updatesSection: {
+    zh: "最近更新按发售日和新收录查看。你在个人喜好里选择的分类/系列会排在前面；顶部小字会提示关注系列最近新增多少。",
+    ko: "최근 업데이트는 발매일과 신규 등록 기준으로 봅니다. 내 취향에서 선택한 분류와 시리즈가 먼저 표시됩니다.",
+    en: "Recent updates are sorted by release/addition date. Favorite franchises and series float to the top.",
+    ja: "最近更新は発売日/追加日で確認します。お気に入りの分類とシリーズが優先表示されます。",
+  },
   pbandaiSection: "这里显示 Premium Bandai JP 的缓存数据。网页不会直接爬 PB，更新来自后台抓取后的 JSON。",
   collectionSection: "已购买和想要按当前成员显示，可在详情页标记，也可以在这里批量删除。",
-  kitSection: "目录会把你关注的分类和系列排在前面；筛选和搜索仍然会保留原来的匹配逻辑。",
-  settingsDialog: "设置只放普通使用项；维护数据、来源、重复、抓取和系列改名集中在控制台。",
-  guideDialog: "图鉴按点亮进度浏览，关注系列会优先显示；点开格子可以查看对应商品并快速标记。",
+  kitSection: {
+    zh: "目录用于找商品。搜索会匹配多语言名称、系列和产品线；你关注的系列会优先显示，筛选只影响当前列表。",
+    ko: "카탈로그는 상품을 찾는 곳입니다. 검색은 여러 언어 이름, 시리즈, 라인을 함께 찾고 관심 시리즈를 먼저 보여줍니다.",
+    en: "Catalog is for finding products. Search matches multilingual names, series, and product lines; favorites are shown first.",
+    ja: "カタログは商品検索用です。多言語名・シリーズ・ラインを検索し、お気に入りが優先表示されます。",
+  },
+  settingsDialog: {
+    zh: "设置分为账号、外观、数据、更新、关于和控制台。普通用户只需要账号/外观/更新；数据修正和抓取都在控制台。",
+    ko: "설정은 계정, 외관, 데이터, 업데이트, 정보, 콘솔로 나뉩니다. 일반 사용은 계정/외관/업데이트만 보면 됩니다.",
+    en: "Settings are split into Account, Appearance, Data, Updates, About, and Console. Normal use mainly needs Account, Appearance, and Updates.",
+    ja: "設定はアカウント、外観、データ、更新、情報、コンソールに分かれています。通常はアカウント/外観/更新を使います。",
+  },
+  guideDialog: {
+    zh: "图鉴先按高达作品系列显示大图和点亮数。点系列进入机体列表；已点亮会排前面，点机体可查看关联商品或手动点亮。",
+    ko: "도감은 먼저 작품 시리즈 큰 이미지와 점등 수를 보여줍니다. 시리즈를 누르면 기체 목록이 열리고 점등된 항목이 먼저 나옵니다.",
+    en: "Picture Book first shows series cards with lit counts. Open a series to see units; lit units appear first.",
+    ja: "図鑑は作品シリーズカードと点灯数を先に表示します。シリーズを開くと機体一覧が出て、点灯済みが先に並びます。",
+  },
   userDialog: "个人页可以查看自己和共享成员的收藏、想要、图鉴点亮和喜好。",
   memberDialog: "点头像可更换头像，点背景可更换背景；这里只显示个人收藏概况，不显示维护信息。",
   language: "切换界面语言，不会改动商品数据。",
@@ -252,6 +277,8 @@ const state = {
   activeView: INITIAL_VIEW_STATE.view || localStorage.getItem(ACTIVE_VIEW_KEY) || "home",
   settingsPanel: SETTINGS_PANELS.includes(localStorage.getItem(SETTINGS_PANEL_KEY)) ? localStorage.getItem(SETTINGS_PANEL_KEY) : "home",
   activeModal: INITIAL_VIEW_STATE.modal || null,
+  activeMemberProfile: null,
+  returnToUserDrawer: false,
   installPrompt: null,
   updatedAt: null,
   query: INITIAL_VIEW_STATE.query || "",
@@ -385,6 +412,10 @@ const elements = {
   userRowSignOut: document.querySelector("#userRowSignOut"),
   userRowGuide: document.querySelector("#userRowGuide"),
   userGuideValue: document.querySelector("#userGuideValue"),
+  userPanelDialog: document.querySelector("#userPanelDialog"),
+  userPanelClose: document.querySelector("#userPanelClose"),
+  userPanelTitle: document.querySelector("#userPanelTitle"),
+  userPanelBody: document.querySelector("#userPanelBody"),
   guideDialog: document.querySelector("#guideDialog"),
   guideClose: document.querySelector("#guideClose"),
   guideColorToggle: document.querySelector("#guideColorToggle"),
@@ -430,6 +461,14 @@ const elements = {
   memberDialogStats: document.querySelector("#memberDialogStats"),
   memberDialogOwned: document.querySelector("#memberDialogOwned"),
   memberDialogWanted: document.querySelector("#memberDialogWanted"),
+  memberActionDialog: document.querySelector("#memberActionDialog"),
+  memberActionViewBackground: document.querySelector("#memberActionViewBackground"),
+  memberActionViewAvatar: document.querySelector("#memberActionViewAvatar"),
+  memberActionChangeBackground: document.querySelector("#memberActionChangeBackground"),
+  memberActionChangeAvatar: document.querySelector("#memberActionChangeAvatar"),
+  memberActionRename: document.querySelector("#memberActionRename"),
+  memberActionTags: document.querySelector("#memberActionTags"),
+  memberActionCancel: document.querySelector("#memberActionCancel"),
   homeUpdateSummary: document.querySelector("#homeUpdateSummary"),
   sourceHealthStrip: document.querySelector("#sourceHealthStrip"),
   homeUpdateList: document.querySelector("#homeUpdateList"),
@@ -1323,6 +1362,10 @@ function bindEvents() {
     renderConsoleMode();
   });
   elements.settingsBack?.addEventListener("click", () => {
+    if (state.settingsPanel === "home") {
+      closeSettings();
+      return;
+    }
     state.settingsPanel = "home";
     state.consoleMode = false;
     saveConsoleMode();
@@ -1481,27 +1524,59 @@ function bindEvents() {
   });
   elements.avatarInput?.addEventListener("change", handleAvatarChange);
   elements.memberDialogClose?.addEventListener("click", () => closeDialog(elements.memberDialog));
+  elements.memberDialog?.addEventListener("cancel", (event) => {
+    event.preventDefault();
+    closeDialog(elements.memberDialog);
+  });
+  elements.memberDialog?.addEventListener("click", (event) => {
+    if (event.target === elements.memberDialog) closeDialog(elements.memberDialog);
+  });
   elements.memberDialogChangeAvatar?.addEventListener("click", () => elements.avatarInput?.click());
   elements.memberDialogAvatar?.addEventListener("click", () => {
-    if (memberProfileEditable()) {
-      elements.avatarInput?.click();
-    }
+    openMemberActionSheet();
   });
-  elements.memberDialogChangeBackground?.addEventListener("click", () => elements.profileBackgroundInput?.click());
+  elements.memberDialogChangeBackground?.addEventListener("click", () => openMemberActionSheet());
   elements.memberDialogHead?.addEventListener("click", (event) => {
-    if (!memberProfileEditable() || event.target.closest("button, input, textarea, select, a")) return;
-    elements.profileBackgroundInput?.click();
+    if (event.target.closest("button, input, textarea, select, a")) return;
+    openMemberActionSheet();
   });
   elements.memberDialogHead?.addEventListener("keydown", (event) => {
-    if (!memberProfileEditable() || !["Enter", " "].includes(event.key)) return;
+    if (!["Enter", " "].includes(event.key)) return;
     event.preventDefault();
-    elements.profileBackgroundInput?.click();
+    openMemberActionSheet();
   });
+  elements.memberDialogName?.addEventListener("click", () => openMemberActionSheet());
+  elements.memberDialogFavorites?.addEventListener("click", () => openMemberActionSheet());
   elements.memberDialogSaveName?.addEventListener("click", () => saveMemberDisplayNameValue(elements.memberDialogNameInput?.value, elements.memberDialogSaveName));
   elements.memberDialogNameInput?.addEventListener("keydown", (event) => {
     if (event.key === "Enter") saveMemberDisplayNameValue(elements.memberDialogNameInput.value, elements.memberDialogSaveName);
   });
   elements.profileBackgroundInput?.addEventListener("change", handleProfileBackgroundChange);
+  elements.memberActionCancel?.addEventListener("click", () => closeDialog(elements.memberActionDialog));
+  elements.memberActionDialog?.addEventListener("click", (event) => {
+    if (event.target === elements.memberActionDialog) closeDialog(elements.memberActionDialog);
+  });
+  elements.memberActionDialog?.addEventListener("cancel", (event) => {
+    event.preventDefault();
+    closeDialog(elements.memberActionDialog);
+  });
+  elements.memberActionViewBackground?.addEventListener("click", () => viewMemberProfileImage("background"));
+  elements.memberActionViewAvatar?.addEventListener("click", () => viewMemberProfileImage("avatar"));
+  elements.memberActionChangeBackground?.addEventListener("click", () => {
+    closeDialog(elements.memberActionDialog);
+    if (memberProfileEditable()) elements.profileBackgroundInput?.click();
+  });
+  elements.memberActionChangeAvatar?.addEventListener("click", () => {
+    closeDialog(elements.memberActionDialog);
+    if (memberProfileEditable()) elements.avatarInput?.click();
+  });
+  elements.memberActionRename?.addEventListener("click", () => renameFromMemberActionSheet());
+  elements.memberActionTags?.addEventListener("click", () => {
+    closeDialog(elements.memberActionDialog);
+    closeDialog(elements.memberDialog);
+    openUserPage();
+    openUserPanel("favorites");
+  });
   elements.userChip?.addEventListener("click", () => {
     if (syncModeV2()) {
       openUserPage();
@@ -1546,12 +1621,32 @@ function bindEvents() {
     openMemberProfile(currentMember());
   });
   elements.userDialogName?.addEventListener("click", () => openMemberProfile(currentMember()));
+  elements.userPanelClose?.addEventListener("click", () => closeDialog(elements.userPanelDialog));
+  elements.userPanelDialog?.addEventListener("cancel", (event) => {
+    event.preventDefault();
+    closeDialog(elements.userPanelDialog);
+  });
+  elements.userPanelDialog?.addEventListener("click", (event) => {
+    if (event.target === elements.userPanelDialog) closeDialog(elements.userPanelDialog);
+  });
+  document.querySelectorAll(".user-menu-details > summary").forEach((summary, index) => {
+    summary.addEventListener("click", (event) => {
+      event.preventDefault();
+      openUserPanelDialog(index === 0 ? "favorites" : "friends");
+    });
+  });
   elements.userRowOwned?.addEventListener("click", () => {
     closeUserPage();
+    state.returnToUserDrawer = true;
+    state.collectionMemberView = "self";
+    localStorage.setItem(COLLECTION_MEMBER_VIEW_KEY, state.collectionMemberView);
     switchToView("owned");
   });
   elements.userRowWanted?.addEventListener("click", () => {
     closeUserPage();
+    state.returnToUserDrawer = true;
+    state.collectionMemberView = "self";
+    localStorage.setItem(COLLECTION_MEMBER_VIEW_KEY, state.collectionMemberView);
     switchToView("wanted");
   });
   elements.userRowSettings?.addEventListener("click", () => {
@@ -1560,6 +1655,7 @@ function bindEvents() {
   });
   elements.userRowGuide?.addEventListener("click", () => {
     closeUserPage();
+    state.returnToUserDrawer = true;
     openGuide();
   });
   elements.guideClose?.addEventListener("click", () => closeDialog(elements.guideDialog));
@@ -1777,6 +1873,22 @@ function registerNativeBackButton() {
       closeDialog(elements.guideUnitDialog);
       return;
     }
+    if (elements.memberActionDialog?.open) {
+      closeDialog(elements.memberActionDialog);
+      return;
+    }
+    if (elements.userPanelDialog?.open) {
+      closeDialog(elements.userPanelDialog);
+      return;
+    }
+    if (elements.memberDialog?.open) {
+      closeDialog(elements.memberDialog);
+      return;
+    }
+    if (elements.userDialog?.open) {
+      closeUserPage({ immediate: true });
+      return;
+    }
     if (elements.detailDialog?.open || state.selectedKit) {
       closeDetail({ navigate: false });
       return;
@@ -1787,6 +1899,15 @@ function registerNativeBackButton() {
     }
     if (elements.guideDialog?.open) {
       closeDialog(elements.guideDialog);
+      if (state.returnToUserDrawer) {
+        state.returnToUserDrawer = false;
+        openUserPage();
+      }
+      return;
+    }
+    if (state.returnToUserDrawer) {
+      state.returnToUserDrawer = false;
+      openUserPage();
       return;
     }
     if (state.activeView !== "home") {
@@ -1911,13 +2032,26 @@ function bindRadialMenu() {
 }
 
 function gestureTargetAllowed(target) {
-  if (elements.detailDialog.open || elements.settingsDialog.open) {
+  if (
+    elements.detailDialog.open ||
+    elements.settingsDialog.open ||
+    elements.memberDialog?.open ||
+    elements.memberActionDialog?.open ||
+    elements.userDialog?.open ||
+    elements.guideUnitDialog?.open ||
+    elements.bbxTopDialog?.open ||
+    elements.bbxPartDialog?.open
+  ) {
     return false;
   }
   if (!(target instanceof Element)) {
     return false;
   }
-  return !target.closest("dialog, input, textarea, select, option");
+  const dialog = target.closest("dialog");
+  if (dialog && dialog !== elements.guideDialog) {
+    return false;
+  }
+  return !target.closest("input, textarea, select, option");
 }
 
 // The page swipe must not fire from controls that scroll or pan horizontally
@@ -1991,18 +2125,9 @@ function moveTouchGesture(event) {
   const deltaY = touch.clientY - state.radial.startY;
   const absX = Math.abs(deltaX);
   const absY = Math.abs(deltaY);
-  if (state.activeView === "catalog" && !state.pager.blockedByTarget && absX > PAGER_START_DISTANCE && absX > absY * 1.15) {
-    clearTimeout(state.radial.timer);
-    state.radial.timer = null;
-    startPagerGesture(deltaX);
-    updatePagerGesture(deltaX);
-    if (event.cancelable) event.preventDefault();
-    return;
-  }
-  // Outside the catalog (whose horizontal swipe already pages franchises), a
-  // left-edge swipe to the right slides the personal drawer out, QQ-style.
+  // A left-edge swipe to the right slides the personal drawer out, QQ-style.
+  // This runs before catalog paging so catalog/guide can still open the drawer.
   if (
-    state.activeView !== "catalog" &&
     !state.pager.blockedByTarget &&
     state.radial.startX <= DRAWER_EDGE_ZONE &&
     deltaX > DRAWER_OPEN_DISTANCE &&
@@ -2016,6 +2141,14 @@ function moveTouchGesture(event) {
     resetPagerGesture();
     if (event.cancelable) event.preventDefault();
     openUserPage();
+    return;
+  }
+  if (state.activeView === "catalog" && !elements.guideDialog?.open && !state.pager.blockedByTarget && absX > PAGER_START_DISTANCE && absX > absY * 1.15) {
+    clearTimeout(state.radial.timer);
+    state.radial.timer = null;
+    startPagerGesture(deltaX);
+    updatePagerGesture(deltaX);
+    if (event.cancelable) event.preventDefault();
     return;
   }
   // Inside the merged collection view, a horizontal swipe flips between the
@@ -3253,8 +3386,14 @@ function helpTextFor(node) {
   if (!node) return "";
   if (node.dataset.help) return node.dataset.help;
   const keyed = node.querySelector("[data-i18n]");
-  if (keyed?.dataset.i18n && HELP_TEXT[keyed.dataset.i18n]) return HELP_TEXT[keyed.dataset.i18n];
-  return HELP_TEXT[node.id] || HELP_TEXT[node.dataset.settingsPanel] || "";
+  if (keyed?.dataset.i18n && HELP_TEXT[keyed.dataset.i18n]) return localizedHelpText(HELP_TEXT[keyed.dataset.i18n]);
+  return localizedHelpText(HELP_TEXT[node.id] || HELP_TEXT[node.dataset.settingsPanel] || "");
+}
+
+function localizedHelpText(value) {
+  if (!value) return "";
+  if (typeof value === "string") return value;
+  return value[state.language] || value.zh || value.en || "";
 }
 
 function enhanceHelpButtons() {
@@ -3267,9 +3406,7 @@ function enhanceHelpButtons() {
     ".kit-section",
     ".settings-section",
     ".settings-dialog",
-    ".user-dialog",
     "#guideDialog",
-    "#memberDialog",
   ].join(",");
   for (const section of document.querySelectorAll(selectors)) {
     const text = helpTextFor(section);
@@ -3737,12 +3874,15 @@ function renderHomeCollectionOverview() {
   if (!elements.homeCollectionOverview) {
     return;
   }
-  const ownedCount = collectionIds("owned").reduce((total, kitId) => total + collectionQuantityForView(kitId, "owned"), 0);
-  const wantedCount = collectionIds("wanted").reduce((total, kitId) => total + collectionQuantityForView(kitId, "wanted"), 0);
+  const self = editableCollectionMember();
+  const ownedSelfIds = collectionIdsForMember("owned", self);
+  const wantedSelfIds = collectionIdsForMember("wanted", self);
+  const ownedCount = ownedSelfIds.reduce((total, kitId) => total + collectionQuantityForMember(kitId, "owned", self), 0);
+  const wantedCount = wantedSelfIds.reduce((total, kitId) => total + collectionQuantityForMember(kitId, "wanted", self), 0);
   elements.homeCollectionTotal.textContent = t("records", { count: ownedCount + wantedCount });
   elements.homeCollectionOverview.innerHTML = "";
   for (const type of COLLECTION_TYPES) {
-    const ids = collectionIds(type).filter((kitId) => displayKitById(kitId)).slice(0, 4);
+    const ids = (type === "owned" ? ownedSelfIds : wantedSelfIds).filter((kitId) => displayKitById(kitId)).slice(0, 4);
     const button = document.createElement("button");
     button.type = "button";
     button.className = `home-collection-card is-${type}`;
@@ -3957,11 +4097,12 @@ function recentUpdateItems(limit = 6, franchise = null) {
 
 function renderUpdateSummaryCards(container, cards) {
   container.innerHTML = "";
+  container.classList.add("is-inline");
   for (const cardInfo of cards) {
-    const card = document.createElement("div");
-    card.className = "update-summary-card";
-    card.innerHTML = `<strong>${escapeHtml(cardInfo.label)}</strong><span>${cardInfo.value}</span><em>${escapeHtml(cardInfo.meta)}</em>`;
-    container.append(card);
+    const item = document.createElement("span");
+    item.className = "update-summary-line";
+    item.textContent = `${cardInfo.label} ${cardInfo.value}${cardInfo.meta ? ` · ${cardInfo.meta}` : ""}`;
+    container.append(item);
   }
 }
 
@@ -5268,6 +5409,18 @@ function collectionIds(type) {
     .map(([kitId]) => kitId);
 }
 
+function collectionIdsForMember(type, member = editableCollectionMember()) {
+  state.collection = normalizeCollection(state.collection);
+  return Object.entries(state.collection.member_items?.[safeMemberName(member)] || {})
+    .filter(([, entry]) => entry?.status === type)
+    .map(([kitId]) => kitId);
+}
+
+function collectionQuantityForMember(kitId, type, member = editableCollectionMember()) {
+  const entry = collectionEntry(kitId, safeMemberName(member));
+  return entry?.status === type ? clampCollectionQuantity(entry.quantity ?? 1) : 0;
+}
+
 function wantedQuantityForKit(kitId, member = editableCollectionMember()) {
   if (!kitId) {
     return 1;
@@ -5694,7 +5847,7 @@ function renderSettingsPanels() {
     section.hidden = onHome || section.dataset.settingsPanel !== state.settingsPanel;
   });
   if (elements.settingsBack) {
-    elements.settingsBack.hidden = onHome;
+    elements.settingsBack.hidden = false;
   }
   if (elements.settingsTitle) {
     elements.settingsTitle.textContent = onHome ? t("settings") : t(SETTINGS_TAB_LABELS[state.settingsPanel]);
@@ -5998,8 +6151,8 @@ function renderUserPage() {
   applyAvatarTo(elements.userDialogAvatar, member, currentUserEmail()[0]);
   elements.userDialogName.textContent = member?.name || currentUserEmail().split("@")[0] || "member";
   elements.userDialogMeta.textContent = currentUserEmail();
-  elements.userOwnedCount.textContent = String(collectionIds("owned").length);
-  elements.userWantedCount.textContent = String(collectionIds("wanted").length);
+  elements.userOwnedCount.textContent = String(collectionIdsForMember("owned").length);
+  elements.userWantedCount.textContent = String(collectionIdsForMember("wanted").length);
   renderProfileFavorites();
 
   const workspace = state.sync.workspace;
@@ -6041,8 +6194,13 @@ function openUserPage() {
   }
 }
 
-function closeUserPage() {
+function closeUserPage(options = {}) {
   if (!elements.userDialog?.open || elements.userDialog.classList.contains("is-closing")) {
+    return;
+  }
+  if (options.immediate) {
+    elements.userDialog.classList.remove("is-closing");
+    closeDialog(elements.userDialog);
     return;
   }
   // Mirror the slide-in with a slide-out before actually closing the dialog.
@@ -6135,12 +6293,13 @@ async function ensureGuideData() {
   if (state.guide) return state.guide;
   if (!state.guideSplits) state.guideSplits = loadGuideSplits();
   if (!state.guideManualLit) state.guideManualLit = loadGuideManualLit();
-  const [units, map] = await Promise.all([
+  const [units, map, sectionsDoc] = await Promise.all([
     loadOptionalJson("../data/gget-units.json"),
     loadOptionalJson("../data/gget-kit-map.json"),
+    loadOptionalJson("../data/gget-series-sections.json"),
   ]);
   if (!units?.units) {
-    state.guide = { works: [], units: [], groups: [] };
+    state.guide = { works: [], units: [], groups: [], sections: [] };
     return state.guide;
   }
   const unitKits = map?.unit_kits || {};
@@ -6161,8 +6320,24 @@ async function ensureGuideData() {
       };
     });
 
-  const works = [...workIds].map((id) => ({ work_id: id, name: workName.get(id) || "" }));
-  state.guide = { works, units: rawUnits, groups: buildGuideGroups(rawUnits), iconBase: units.image_base || "" };
+  const sectionByWork = new Map((sectionsDoc?.works || []).map((work) => [Number(work.work_id), work]));
+  const works = [...workIds].map((id) => {
+    const sectionWork = sectionByWork.get(Number(id));
+    return {
+      work_id: id,
+      name: workName.get(id) || sectionWork?.name || "",
+      section: sectionWork?.section || "unavailable",
+      image: sectionWork?.image || "",
+    };
+  });
+  state.guide = {
+    works,
+    units: rawUnits,
+    groups: buildGuideGroups(rawUnits),
+    iconBase: units.image_base || "",
+    sections: sectionsDoc?.sections || [],
+    seriesImageBase: "https://img.kusoge.xyz/ggenet/series/",
+  };
   return state.guide;
 }
 
@@ -6283,50 +6458,120 @@ function renderGuide(guide) {
 
   elements.guideBody.innerHTML = "";
   const workScore = (work) => Math.max(0, ...guide.groups.filter((g) => g.work_id === work.work_id).map(guideGroupPreferenceScore));
-  const orderedWorks = [...guide.works].sort((a, b) => workScore(b) - workScore(a) || a.work_id - b.work_id);
-  for (const work of orderedWorks) {
-    const groups = guide.groups
-      .filter((g) => g.work_id === work.work_id)
-      .sort((a, b) => guideGroupPreferenceScore(b) - guideGroupPreferenceScore(a) || a.name.localeCompare(b.name));
-    if (!groups.length) continue;
-    const lit = groups.filter((g) => statusByGroup.get(g.key) !== "none").length;
+  const orderedWorks = [...guide.works].sort((a, b) => workScore(b) - workScore(a) || Number(a.work_id) - Number(b.work_id));
+  const sectionKeys = ["main_stage", "story_event", "unavailable"];
+  for (const sectionKey of sectionKeys) {
+    const works = orderedWorks.filter((work) => (work.section || "unavailable") === sectionKey);
+    if (!works.length) continue;
+    const sectionLit = works.reduce((sum, work) => sum + guideGroupsForWork(work).filter((g) => statusByGroup.get(g.key) !== "none").length, 0);
+    const sectionTotal = works.reduce((sum, work) => sum + guideGroupsForWork(work).length, 0);
 
     const section = document.createElement("section");
     section.className = "guide-work";
     const head = document.createElement("div");
     head.className = "guide-work-head";
-    head.innerHTML = `<h3>${escapeHtml(work.name)}</h3><span>${lit}/${groups.length}</span>`;
+    head.innerHTML = `<h3>${escapeHtml(guideSectionLabel(sectionKey))}</h3><span>${sectionLit}/${sectionTotal}</span>`;
     section.append(head);
 
     const grid = document.createElement("div");
-    grid.className = "guide-grid";
-    for (const group of groups) {
-      const status = statusByGroup.get(group.key);
+    grid.className = "guide-series-grid";
+    for (const work of works) {
+      const groups = guideGroupsForWork(work);
+      if (!groups.length) continue;
+      const lit = groups.filter((g) => statusByGroup.get(g.key) !== "none").length;
       const cell = document.createElement("button");
       cell.type = "button";
-      cell.className = `guide-cell is-${status}`;
+      cell.className = `guide-series-card${lit ? " is-lit" : ""}`;
       const art = document.createElement("span");
-      art.className = "guide-cell-art";
-      const img = document.createElement("img");
-      img.decoding = "async";
-      img.alt = group.name;
-      guideIconImage(img, group.icon, () => {
-        img.remove();
+      art.className = "guide-series-art";
+      if (work.image) {
+        const img = document.createElement("img");
+        img.decoding = "async";
+        img.alt = work.name;
+        setImageFallbackChain(img, [work.image], () => art.classList.add("is-missing"));
+        art.append(img);
+      } else {
         art.classList.add("is-missing");
-      });
-      art.append(img);
-      const label = document.createElement("span");
-      label.className = "guide-cell-name";
-      label.textContent = group.name;
-      cell.append(art, label);
-      if (status === "owned") cell.append(badgeEl("✓", "guide-badge-owned"));
-      else if (status === "wanted") cell.append(badgeEl("★", "guide-badge-wanted"));
-      cell.addEventListener("click", () => openGuideUnit(group, status));
+      }
+      const label = document.createElement("strong");
+      label.textContent = work.name;
+      const count = document.createElement("span");
+      count.textContent = `${lit}/${groups.length}`;
+      cell.append(art, label, count);
+      cell.addEventListener("click", () => openGuideWork(work));
       grid.append(cell);
     }
     section.append(grid);
     elements.guideBody.append(section);
   }
+}
+
+function guideSectionLabel(key) {
+  const labels = {
+    main_stage: { zh: "主线关卡", ko: "메인 스테이지", en: "Main Stages", ja: "メインステージ" },
+    story_event: { zh: "活动关卡", ko: "스토리 이벤트", en: "Story Events", ja: "ストーリーイベント" },
+    unavailable: { zh: "未开放 / 其他", ko: "미개방 / 기타", en: "Unavailable / Other", ja: "未実装 / その他" },
+  };
+  return labels[key]?.[state.language] || labels[key]?.zh || key;
+}
+
+function guideGroupsForWork(work) {
+  return (state.guide?.groups || [])
+    .filter((g) => g.work_id === work.work_id)
+    .sort((a, b) => {
+      const statusOrder = { owned: 2, wanted: 1, none: 0 };
+      const sets = guideCollectionSets();
+      return (
+        statusOrder[guideGroupStatus(b, sets)] - statusOrder[guideGroupStatus(a, sets)] ||
+        guideGroupPreferenceScore(b) - guideGroupPreferenceScore(a) ||
+        a.name.localeCompare(b.name)
+      );
+    });
+}
+
+function openGuideWork(work) {
+  const groups = guideGroupsForWork(work);
+  const sets = guideCollectionSets();
+  const lit = groups.filter((group) => guideGroupStatus(group, sets) !== "none").length;
+  elements.guideUnitArt.innerHTML = "";
+  if (work.image) {
+    const img = document.createElement("img");
+    img.alt = work.name;
+    setImageFallbackChain(img, [work.image], () => img.remove());
+    elements.guideUnitArt.append(img);
+  }
+  elements.guideUnitName.textContent = work.name;
+  elements.guideUnitMeta.textContent = `${guideSectionLabel(work.section || "unavailable")} · ${lit}/${groups.length}`;
+  elements.guideUnitVariants.innerHTML = "";
+  elements.guideUnitKits.innerHTML = "";
+  const grid = document.createElement("div");
+  grid.className = "guide-grid";
+  for (const group of groups) {
+    const status = guideGroupStatus(group, sets);
+    const cell = document.createElement("button");
+    cell.type = "button";
+    cell.className = `guide-cell is-${status}`;
+    const art = document.createElement("span");
+    art.className = "guide-cell-art";
+    const img = document.createElement("img");
+    img.decoding = "async";
+    img.alt = group.name;
+    guideIconImage(img, group.icon, () => {
+      img.remove();
+      art.classList.add("is-missing");
+    });
+    art.append(img);
+    const label = document.createElement("span");
+    label.className = "guide-cell-name";
+    label.textContent = group.name;
+    cell.append(art, label);
+    if (status === "owned") cell.append(badgeEl("✓", "guide-badge-owned"));
+    else if (status === "wanted") cell.append(badgeEl("★", "guide-badge-wanted"));
+    cell.addEventListener("click", () => openGuideUnit(group, status));
+    grid.append(cell);
+  }
+  elements.guideUnitKits.append(grid);
+  openDialog(elements.guideUnitDialog);
 }
 
 function badgeEl(text, className) {
@@ -7170,7 +7415,139 @@ function memberGuideLitValue(memberName) {
 }
 
 function memberProfileEditable() {
-  return Boolean(elements.memberEditPanel && !elements.memberEditPanel.hidden);
+  return elements.memberDialog?.dataset.self === "1";
+}
+
+function activeMemberProfile() {
+  const key = state.activeMemberProfile;
+  if (!key) return currentMember();
+  return (state.sync.workspace?.members || []).find((member) => safeMemberName(member.name) === key) || currentMember();
+}
+
+function openMemberActionSheet() {
+  if (!elements.memberActionDialog || !elements.memberDialog?.open) return;
+  const editable = memberProfileEditable();
+  for (const button of [elements.memberActionChangeBackground, elements.memberActionChangeAvatar, elements.memberActionRename, elements.memberActionTags]) {
+    if (button) button.hidden = !editable;
+  }
+  openDialog(elements.memberActionDialog);
+}
+
+function memberAvatarUrl(member) {
+  return typeof member?.avatar === "string" ? member.avatar : "";
+}
+
+function viewMemberProfileImage(kind) {
+  const member = activeMemberProfile();
+  const url = kind === "avatar" ? memberAvatarUrl(member) : memberProfileBackground(member);
+  closeDialog(elements.memberActionDialog);
+  if (!url) {
+    window.alert(t(kind === "avatar" ? "profileAvatarMissing" : "profileBackgroundMissing"));
+    return;
+  }
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
+async function renameFromMemberActionSheet() {
+  if (!memberProfileEditable()) return;
+  const current = currentMember()?.name || currentWorkspaceMemberName();
+  const value = window.prompt(t("changeNickname"), current);
+  closeDialog(elements.memberActionDialog);
+  if (value === null) return;
+  await saveMemberDisplayNameValue(value, elements.memberActionRename);
+}
+
+function openUserPanel(panel) {
+  openUserPanelDialog(panel);
+}
+
+function openUserPanelDialog(panel) {
+  if (!elements.userPanelDialog || !elements.userPanelBody) return;
+  elements.userPanelTitle.textContent = panel === "friends" ? t("workspaceFriends") : t("myFavorites");
+  elements.userPanelBody.innerHTML = "";
+  if (panel === "friends") {
+    renderFriendsPanel(elements.userPanelBody);
+  } else {
+    renderFavoritesPanel(elements.userPanelBody);
+  }
+  openDialog(elements.userPanelDialog);
+}
+
+function renderFavoritesPanel(container) {
+  const hint = document.createElement("p");
+  hint.className = "settings-hint";
+  hint.textContent = t("profileFavoritesTitle");
+  container.append(hint);
+  const prefs = memberPreferences(currentMember());
+  const franchiseWrap = document.createElement("div");
+  franchiseWrap.className = "favorite-chips";
+  for (const franchise of FRANCHISES) {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = `member-chip${prefs.franchises.includes(franchise) ? " is-active" : ""}`;
+    chip.textContent = franchiseShortLabel(franchise);
+    chip.addEventListener("click", () => {
+      toggleFavorite("franchises", franchise);
+      renderFavoritesPanel(container);
+    });
+    franchiseWrap.append(chip);
+  }
+  const seriesWrap = document.createElement("div");
+  seriesWrap.className = "favorite-chips";
+  const seen = new Set();
+  const candidates = [];
+  for (const franchise of prefs.franchises.length ? prefs.franchises : ["gundam"]) {
+    for (const [key, entry] of seriesEntriesForFranchise(franchise).slice(0, 12)) {
+      if (!seen.has(key)) {
+        seen.add(key);
+        candidates.push({ key, label: entry.label });
+      }
+    }
+  }
+  for (const key of prefs.series) {
+    if (!seen.has(key)) candidates.push({ key, label: favoriteSeriesLabel(key) });
+  }
+  for (const { key, label } of candidates) {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = `member-chip${prefs.series.includes(key) ? " is-active" : ""}`;
+    chip.textContent = label;
+    chip.addEventListener("click", () => {
+      toggleFavorite("series", key);
+      renderFavoritesPanel(container);
+    });
+    seriesWrap.append(chip);
+  }
+  container.replaceChildren(hint, franchiseWrap, seriesWrap);
+}
+
+function renderFriendsPanel(container) {
+  const workspace = state.sync.workspace;
+  if (workspace?.inviteCode) {
+    const invite = document.createElement("p");
+    invite.className = "settings-hint workspace-invite-line";
+    invite.innerHTML = `<span>${escapeHtml(t("workspaceInviteCode"))}</span><code>${escapeHtml(workspace.inviteCode)}</code>`;
+    container.append(invite);
+  }
+  for (const member of workspace?.members || []) {
+    const row = document.createElement("button");
+    row.type = "button";
+    row.className = `workspace-member-row${member.is_self ? " is-self" : ""}`;
+    const avatar = document.createElement("span");
+    avatar.className = "account-avatar member-row-avatar";
+    applyAvatarTo(avatar, member);
+    const body = document.createElement("span");
+    body.className = "member-row-body";
+    const name = document.createElement("strong");
+    name.textContent = `${member.name || "member"}${member.is_self ? ` · ${t("workspaceSelf")}` : ""}`;
+    body.append(name);
+    row.append(avatar, body);
+    row.addEventListener("click", () => {
+      closeDialog(elements.userPanelDialog);
+      openMemberProfile(member);
+    });
+    container.append(row);
+  }
 }
 
 function openMemberProfile(member) {
@@ -7181,9 +7558,13 @@ function openMemberProfile(member) {
     return;
   }
   const isSelf = Boolean(member.is_self);
+  state.activeMemberProfile = safeMemberName(member.name);
   applyMemberCover(elements.memberDialogCover, member);
   elements.memberDialogHead?.classList.toggle("has-cover", Boolean(memberProfileBackground(member)));
   elements.memberDialogHead?.classList.toggle("is-editable", isSelf);
+  if (elements.memberDialog) {
+    elements.memberDialog.dataset.self = isSelf ? "1" : "0";
+  }
   if (elements.memberDialogHead) {
     if (isSelf) {
       elements.memberDialogHead.tabIndex = 0;
@@ -7198,16 +7579,16 @@ function openMemberProfile(member) {
   applyAvatarTo(elements.memberDialogAvatar, member);
   elements.memberDialogName.textContent = member.name || "member";
   if (elements.memberEditPanel) {
-    elements.memberEditPanel.hidden = !isSelf;
+    elements.memberEditPanel.hidden = true;
   }
   if (elements.memberDialogAvatar) {
-    elements.memberDialogAvatar.disabled = !isSelf;
+    elements.memberDialogAvatar.disabled = false;
   }
   if (isSelf && elements.memberDialogNameInput) {
     elements.memberDialogNameInput.value = member.name || currentWorkspaceMemberName();
   }
   const joined = member.joined_at ? String(member.joined_at).slice(0, 10) : "";
-  elements.memberDialogMeta.textContent = [t(`workspaceRole${capitalizeRole(member.role)}`), member.email, joined].filter(Boolean).join(" · ");
+  elements.memberDialogMeta.textContent = [t(`workspaceRole${capitalizeRole(member.role)}`), member.email, joined, `${t("pictureBook")} ${memberGuideLitValue(member.name)}`].filter(Boolean).join(" · ");
 
   const prefs = memberPreferences(member);
   elements.memberDialogFavorites.innerHTML = "";
@@ -7225,17 +7606,11 @@ function openMemberProfile(member) {
   const owned = memberCollectionKits(member.name, "owned");
   const wanted = memberCollectionKits(member.name, "wanted");
   elements.memberDialogStats.innerHTML = "";
-  const stats = [
-    { label: t("pictureBook"), value: memberGuideLitValue(member.name) },
-    { label: t("ownedList"), value: owned.length },
-    { label: t("wantedList"), value: wanted.length },
-  ];
-  for (const stat of stats) {
-    const card = document.createElement("div");
-    card.className = "update-summary-card";
-    card.innerHTML = `<strong>${escapeHtml(stat.label)}</strong><span>${escapeHtml(String(stat.value))}</span><em></em>`;
-    elements.memberDialogStats.append(card);
-  }
+  elements.memberDialogStats.hidden = true;
+  const ownedTitle = elements.memberDialogOwned?.closest(".member-collection")?.querySelector("h3");
+  const wantedTitle = elements.memberDialogWanted?.closest(".member-collection")?.querySelector("h3");
+  if (ownedTitle) ownedTitle.textContent = `${t("ownedList")} ${owned.length}`;
+  if (wantedTitle) wantedTitle.textContent = `${t("wantedList")} ${wanted.length}`;
 
   fillMemberStrip(elements.memberDialogOwned, owned);
   fillMemberStrip(elements.memberDialogWanted, wanted);
