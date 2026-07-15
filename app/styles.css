@@ -4082,6 +4082,35 @@ body.is-radial-active {
   min-height: 34px;
 }
 
+.guide-color-toggle {
+  position: absolute;
+  top: calc(16px + env(safe-area-inset-top));
+  right: 52px;
+  min-height: 28px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.guide-color-toggle.is-active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Full-color preview: show every cell's art at full saturation regardless of
+   ownership, for browsing. Overrides the is-none / is-partial dimming. */
+.guide-body.is-full-color .guide-cell.is-none .guide-cell-art img,
+.guide-body.is-full-color .guide-cell.is-partial .guide-cell-art img {
+  filter: none;
+  opacity: 1;
+}
+
 /* BBX only: some parts assembled but not fully owned/wanted — dashed accent so
    it reads as "in progress toward owned", distinct from the solid amber wanted. */
 .guide-cell.is-partial {

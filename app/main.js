@@ -764,6 +764,7 @@ const elements = {
   userGuideValue: document.querySelector("#userGuideValue"),
   guideDialog: document.querySelector("#guideDialog"),
   guideClose: document.querySelector("#guideClose"),
+  guideColorToggle: document.querySelector("#guideColorToggle"),
   guideTabs: document.querySelector("#guideTabs"),
   guideSummary: document.querySelector("#guideSummary"),
   guideBody: document.querySelector("#guideBody"),
@@ -2148,6 +2149,7 @@ function bindEvents() {
     openGuide();
   });
   elements.guideClose?.addEventListener("click", () => elements.guideDialog?.close());
+  elements.guideColorToggle?.addEventListener("click", toggleGuideFullColor);
   elements.guideDialog?.addEventListener("click", (event) => {
     if (event.target === elements.guideDialog) elements.guideDialog.close();
   });
@@ -2343,12 +2345,26 @@ function registerNativeBackButton() {
       finishOnboarding();
       return;
     }
+    // 图鉴 overlays close one level at a time (detail → gallery → previous view)
+    // rather than falling through to minimize and dropping out of the app.
+    if (elements.bbxTopDialog?.open) {
+      elements.bbxTopDialog.close();
+      return;
+    }
+    if (elements.guideUnitDialog?.open) {
+      elements.guideUnitDialog.close();
+      return;
+    }
     if (elements.detailDialog?.open || state.selectedKit) {
       closeDetail({ navigate: false });
       return;
     }
     if (elements.settingsDialog?.open || state.activeModal === "settings") {
       closeSettings({ navigate: false });
+      return;
+    }
+    if (elements.guideDialog?.open) {
+      elements.guideDialog.close();
       return;
     }
     if (state.activeView !== "home") {
@@ -7007,8 +7023,34 @@ async function ensureGuideData() {
     });
 
   const works = [...workIds].map((id) => ({ work_id: id, name: workName.get(id) || "" }));
-  state.guide = { works, units: rawUnits, groups: buildGuideGroups(rawUnits) };
+  state.guide = { works, units: rawUnits, groups: buildGuideGroups(rawUnits), iconBase: units.image_base || "" };
   return state.guide;
+}
+
+// Local cached icon first, remote source as fallback: only ~1/4 of guide unit
+// icons are cached under app/assets/gget, so without this most cells hatch out.
+function guideIconLocal(icon) {
+  return `./assets/gget/${icon}.webp`;
+}
+
+function guideIconRemote(icon) {
+  const base = state.guide?.iconBase;
+  return base ? `${base}/thum_${icon}.webp` : "";
+}
+
+// Sets img.src to the local icon and, on failure, tries the remote source once
+// before running onExhausted (which typically hatches the frame).
+function guideIconImage(img, icon, onExhausted) {
+  const remote = guideIconRemote(icon);
+  img.src = guideIconLocal(icon);
+  img.addEventListener("error", () => {
+    if (remote && img.src !== remote && !img.dataset.triedRemote) {
+      img.dataset.triedRemote = "1";
+      img.src = remote;
+      return;
+    }
+    onExhausted?.();
+  });
 }
 
 // Owned / wanted kit-id sets for the signed-in user's own collection.
@@ -7063,12 +7105,33 @@ async function openGuide(tab) {
   await renderGuideActive();
 }
 
+const GUIDE_FULL_COLOR_KEY = "gunpula-guide-full-color-v1";
+
+function loadGuideFullColor() {
+  return localStorage.getItem(GUIDE_FULL_COLOR_KEY) === "1";
+}
+
+// Full-color preview drops the grayscale/dim on un-owned cells so the whole
+// gallery can be browsed in color; applies to both the Gundam and BBX tabs.
+function applyGuideColorMode() {
+  if (state.guideFullColor === undefined) state.guideFullColor = loadGuideFullColor();
+  elements.guideBody?.classList.toggle("is-full-color", state.guideFullColor);
+  elements.guideColorToggle?.classList.toggle("is-active", state.guideFullColor);
+}
+
+function toggleGuideFullColor() {
+  state.guideFullColor = !state.guideFullColor;
+  localStorage.setItem(GUIDE_FULL_COLOR_KEY, state.guideFullColor ? "1" : "0");
+  applyGuideColorMode();
+}
+
 async function renderGuideActive() {
   if (state.guideTab === "bbx") {
     renderBbxGuide(await ensureBbxData());
   } else {
     renderGuide(await ensureGuideData());
   }
+  applyGuideColorMode();
 }
 
 function renderGuide(guide) {
@@ -7102,9 +7165,8 @@ function renderGuide(guide) {
       art.className = "guide-cell-art";
       const img = document.createElement("img");
       img.decoding = "async";
-      img.src = `./assets/gget/${group.icon}.webp`;
       img.alt = group.name;
-      img.addEventListener("error", () => {
+      guideIconImage(img, group.icon, () => {
         img.remove();
         art.classList.add("is-missing");
       });
@@ -7133,7 +7195,11 @@ function badgeEl(text, className) {
 // Tapping a cell shows its merged variants and — the reverse link the user asked
 // for — the matching catalog kits, each with quick add-to-owned/wanted buttons.
 function openGuideUnit(group, status) {
-  elements.guideUnitArt.innerHTML = `<img src="./assets/gget/${group.icon}.webp" alt="${escapeHtml(group.name)}" />`;
+  elements.guideUnitArt.innerHTML = "";
+  const unitImg = document.createElement("img");
+  unitImg.alt = group.name;
+  guideIconImage(unitImg, group.icon, () => unitImg.remove());
+  elements.guideUnitArt.append(unitImg);
   elements.guideUnitName.textContent = group.name;
   const statusLabel = { owned: t("ownedList"), wanted: t("wantedList"), none: t("guideNotCollected") }[status];
   elements.guideUnitMeta.textContent = `${group.work} · ${statusLabel}`;
@@ -7438,6 +7504,35 @@ function bbxProductImage(baseSetId) {
   return state.bbx?.productByBaseSet.get(baseSetId)?.image || null;
 }
 
+// Ordered image candidates for a 陀螺: its product box, else the blade art (some
+// gift/variant sets ship no product image), each tried before the next.
+function bbxTopImageCandidates(top) {
+  const urls = [];
+  const product = state.bbx?.productByBaseSet.get(top.base_set_id);
+  if (product?.image) urls.push(product.image);
+  const bladeComp = top.components.find((c) => c.type === "blade");
+  const blade = bladeComp ? state.bbx?.partIndex.get(bladeComp.part_id) : null;
+  if (blade?.image) urls.push(blade.image);
+  if (blade?.image_fallback) urls.push(blade.image_fallback);
+  return urls;
+}
+
+function bbxTopArtImage(img, top, onExhausted) {
+  const urls = bbxTopImageCandidates(top);
+  if (!urls.length) {
+    onExhausted?.();
+    return false;
+  }
+  let index = 0;
+  img.src = urls[0];
+  img.addEventListener("error", () => {
+    index += 1;
+    if (index < urls.length) img.src = urls[index];
+    else onExhausted?.();
+  });
+  return true;
+}
+
 // Part thumbnail: primary image with an optional fallback URL, then hide the
 // frame if neither loads (some parts have no artwork on the source site).
 function bbxPartThumb(part) {
@@ -7495,20 +7590,15 @@ function renderBbxGuide(bbx) {
       cell.className = `guide-cell is-${info.status}`;
       const art = document.createElement("span");
       art.className = "guide-cell-art";
-      const image = bbxProductImage(top.base_set_id);
-      if (image) {
-        const img = document.createElement("img");
-        img.decoding = "async";
-        img.src = image;
-        img.alt = top.name;
-        img.addEventListener("error", () => {
-          img.remove();
-          art.classList.add("is-missing");
-        });
-        art.append(img);
-      } else {
+      const img = document.createElement("img");
+      img.decoding = "async";
+      img.alt = top.name;
+      const hasArt = bbxTopArtImage(img, top, () => {
+        img.remove();
         art.classList.add("is-missing");
-      }
+      });
+      if (hasArt) art.append(img);
+      else art.classList.add("is-missing");
       const label = document.createElement("span");
       label.className = "guide-cell-name";
       label.textContent = top.name;
@@ -7529,8 +7619,10 @@ function bbxPartTypeLabel(type) {
 
 function openBbxTop(top) {
   const bbx = state.bbx;
-  const image = bbxProductImage(top.base_set_id);
-  elements.bbxTopArt.innerHTML = image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(top.name)}" />` : "";
+  elements.bbxTopArt.innerHTML = "";
+  const heroImg = document.createElement("img");
+  heroImg.alt = top.name;
+  if (bbxTopArtImage(heroImg, top, () => heroImg.remove())) elements.bbxTopArt.append(heroImg);
   elements.bbxTopName.textContent = top.name;
   const product = bbx.productByBaseSet.get(top.base_set_id);
   const info = bbxTopStatus(top);
