@@ -6,7 +6,7 @@
   "description": "Gunpla catalog data, validation, and reporting tools.",
   "scripts": {
     "validate": "node scripts/validate_catalog.mjs",
-    "test:unit": "node scripts/test_collection_store.mjs && node scripts/test_view_state.mjs",
+    "test:unit": "node scripts/test_collection_store.mjs && node scripts/test_view_state.mjs && node scripts/test_catalog_display.mjs && node scripts/test_update_feed.mjs && node scripts/test_pbandai_market.mjs",
     "stats": "node scripts/catalog_stats.mjs",
     "search": "node scripts/search_kits.mjs",
     "sources": "node scripts/source_coverage.mjs",

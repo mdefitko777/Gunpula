@@ -1,4 +1,4 @@
-const APP_CACHE = "gunpula-app-v59";
+const APP_CACHE = "gunpula-app-v60";
 const DATA_CACHE = "gunpula-data-v1";
 const IMAGE_CACHE = "gunpula-images-v1";
 const NOTIFICATION_CACHE = "gunpula-notifications-v1";
@@ -17,6 +17,10 @@ const APP_ASSETS = [
   "./app/dialogs.js",
   "./app/image-utils.js",
   "./app/dom-utils.js",
+  "./app/catalog-display.js",
+  "./app/update-feed.js",
+  "./app/pbandai-store.js",
+  "./app/market-data.js",
   "./app/collection-store.js",
   "./app/search-index-store.js",
   "./app/view-state.js",
