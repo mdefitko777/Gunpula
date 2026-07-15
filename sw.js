@@ -1,4 +1,4 @@
-const APP_CACHE = "gunpula-app-v57";
+const APP_CACHE = "gunpula-app-v58";
 const DATA_CACHE = "gunpula-data-v1";
 const IMAGE_CACHE = "gunpula-images-v1";
 const NOTIFICATION_CACHE = "gunpula-notifications-v1";
@@ -12,6 +12,11 @@ const APP_ASSETS = [
   "./app/i18n.js",
   "./app/auth.js",
   "./app/sync-config.js",
+  "./app/storage.js",
+  "./app/dialogs.js",
+  "./app/image-utils.js",
+  "./app/dom-utils.js",
+  "./app/collection-store.js",
   "./app/manifest.webmanifest",
   "./app/icons/icon-192.png",
   "./app/icons/icon-512.png",
@@ -22,7 +27,7 @@ const APP_ASSETS = [
 ];
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(APP_CACHE).then((cache) => cache.addAll(APP_ASSETS)));
+  event.waitUntil(caches.open(APP_CACHE).then((cache) => Promise.all(APP_ASSETS.map((asset) => cache.add(asset).catch(() => null)))));
   self.skipWaiting();
 });
 
@@ -86,19 +91,6 @@ self.addEventListener("periodicsync", (event) => {
     event.waitUntil(checkCatalogUpdates());
   }
 });
-
-async function cacheFirst(request, cacheName) {
-  const cache = await caches.open(cacheName);
-  const cached = await cache.match(request);
-  if (cached) {
-    return cached;
-  }
-  const response = await fetch(request);
-  if (response && (response.ok || response.type === "opaque")) {
-    cache.put(request, response.clone());
-  }
-  return response;
-}
 
 async function staleWhileRevalidate(request, cacheName) {
   const cache = await caches.open(cacheName);

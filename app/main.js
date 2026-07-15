@@ -11,6 +11,20 @@ import {
   signOut,
   verifyEmailCode,
 } from "./auth.js";
+import { closeDialog, openDialog } from "./dialogs.js";
+import { appendImageWithFallback as appendImageUrlsWithFallback, setImageFallbackChain as chainImageFallbacks } from "./image-utils.js";
+import {
+  clampCollectionQuantity as storeClampCollectionQuantity,
+  mergeCollectionState as storeMergeCollectionState,
+  mergeTimestampedMap as storeMergeTimestampedMap,
+  newerByTimestamp as storeNewerByTimestamp,
+  normalizeCollection as storeNormalizeCollection,
+  normalizeCollectionEntry as storeNormalizeCollectionEntry,
+  safeMemberName as storeSafeMemberName,
+  timestampMs as storeTimestampMs,
+} from "./collection-store.js";
+import { escapeHtml as escapeHtmlValue } from "./dom-utils.js";
+import { getJson, getString, removeValue, setJson, setString } from "./storage.js";
 
 const LANGUAGE_KEY = "gunpula-catalog-language-v1";
 const FRANCHISE_KEY = "gunpula-catalog-franchise-v1";
@@ -1073,7 +1087,7 @@ function completeCatalogInBackground(pendingFranchises) {
       state.rawKits = state.rawKits.concat(...docs.map((doc) => doc.kits));
     }
     refreshKits();
-    render();
+    renderCatalogDataChanged();
   })().catch(() => {
     catalogCompletion = null;
   });
@@ -1102,19 +1116,13 @@ function ensureSearchIndex(franchise = state.franchise) {
   }
   const key = franchise || "all";
   if (!searchIndexPromises.has(key)) {
-    const promise = loadOptionalJson(franchise ? `../data/search/search-${franchise}.json` : "../data/search-index.json")
-      .then(async (doc) => {
-        const nextDoc = doc?.records ? doc : await loadOptionalJson("../data/search-index.json");
-        if (!nextDoc?.records) {
+    const promise = loadOptionalJson(franchise ? `../data/search/search-${franchise}.json` : "../data/search/search-gundam.json")
+      .then((doc) => {
+        if (!doc?.records) {
           searchIndexPromises.delete(key);
           return null;
         }
-        ingestSearchIndex(nextDoc, doc?.records ? franchise : null);
-        if (!doc?.records) {
-          for (const item of FRANCHISES) {
-            state.loadedSearchFranchises.add(item);
-          }
-        }
+        ingestSearchIndex(doc, franchise || "gundam");
         if (state.query.trim()) {
           renderKits();
         }
@@ -1183,18 +1191,13 @@ function pruneFilterValues(key, allowedValues) {
 }
 
 function preferredLanguage() {
-  const language = localStorage.getItem(LANGUAGE_KEY);
+  const language = getString(LANGUAGE_KEY);
   return LANGUAGES.some((item) => item.code === language) ? language : null;
 }
 
 function loadSavedViewState() {
-  let stored = {};
-  try {
-    const parsed = JSON.parse(localStorage.getItem(VIEW_STATE_KEY) || "{}");
-    stored = parsed && typeof parsed === "object" ? parsed : {};
-  } catch {
-    stored = {};
-  }
+  const parsed = getJson(VIEW_STATE_KEY, {});
+  const stored = parsed && typeof parsed === "object" ? parsed : {};
 
   const storedLanguage = preferredLanguage() || stored.language;
   const hash = window.location.hash.startsWith("#") ? window.location.hash.slice(1) : "";
@@ -1308,19 +1311,15 @@ function applyViewState(viewState) {
   render();
   if (state.selectedKit) {
     renderDetail(state.selectedKit);
-    if (!elements.detailDialog.open) {
-      elements.detailDialog.showModal();
-    }
+    openDialog(elements.detailDialog);
   } else if (elements.detailDialog.open) {
-    elements.detailDialog.close();
+    closeDialog(elements.detailDialog);
   }
   if (state.activeModal === "settings") {
     renderSettings();
-    if (!elements.settingsDialog.open) {
-      elements.settingsDialog.showModal();
-    }
+    openDialog(elements.settingsDialog);
   } else if (elements.settingsDialog.open) {
-    elements.settingsDialog.close();
+    closeDialog(elements.settingsDialog);
   }
   persistViewState();
 }
@@ -1385,11 +1384,11 @@ async function init() {
   render();
   if (state.selectedKit) {
     renderDetail(state.selectedKit);
-    elements.detailDialog.showModal();
+    openDialog(elements.detailDialog);
   }
   if (state.activeModal === "settings") {
     renderSettings();
-    elements.settingsDialog.showModal();
+    openDialog(elements.settingsDialog);
   }
   seedInitialOverlayHistory();
   completeCatalogInBackground(initialCatalog.pendingFranchises);
@@ -1433,72 +1432,55 @@ function normalizeState() {
 }
 
 function loadOverrides() {
-  try {
-    const parsed = JSON.parse(localStorage.getItem(OVERRIDE_KEY) || "{}");
-    return parsed && typeof parsed === "object" ? parsed : {};
-  } catch {
-    return {};
-  }
+  const parsed = getJson(OVERRIDE_KEY, {});
+  return parsed && typeof parsed === "object" ? parsed : {};
 }
 
 function loadSeriesLabelOverrides() {
-  try {
-    const parsed = JSON.parse(localStorage.getItem(SERIES_LABEL_OVERRIDE_KEY) || "{}");
-    return parsed && typeof parsed === "object" ? parsed : {};
-  } catch {
-    return {};
-  }
+  const parsed = getJson(SERIES_LABEL_OVERRIDE_KEY, {});
+  return parsed && typeof parsed === "object" ? parsed : {};
 }
 
 function loadConsoleMode() {
-  return localStorage.getItem(CONSOLE_MODE_KEY) === "true";
+  return getString(CONSOLE_MODE_KEY) === "true";
 }
 
 function loadCollectionFilter() {
-  try {
-    const parsed = JSON.parse(localStorage.getItem(COLLECTION_FILTER_KEY) || "{}");
-    return {
-      franchise: FRANCHISES.includes(parsed?.franchise) ? parsed.franchise : "all",
-      series: parsed?.series || "all",
-      grade: parsed?.grade || "all",
-    };
-  } catch {
-    return { franchise: "all", series: "all", grade: "all" };
-  }
+  const parsed = getJson(COLLECTION_FILTER_KEY, {});
+  return {
+    franchise: FRANCHISES.includes(parsed?.franchise) ? parsed.franchise : "all",
+    series: parsed?.series || "all",
+    grade: parsed?.grade || "all",
+  };
 }
 
 function saveCollectionFilter() {
-  localStorage.setItem(COLLECTION_FILTER_KEY, JSON.stringify(state.collectionFilter));
+  setJson(COLLECTION_FILTER_KEY, state.collectionFilter);
 }
 
 function loadTheme() {
-  const theme = localStorage.getItem(THEME_KEY);
+  const theme = getString(THEME_KEY);
   return THEMES.some((item) => item.code === theme) ? theme : "atlas";
 }
 
 function saveTheme() {
-  localStorage.setItem(THEME_KEY, state.theme);
+  setString(THEME_KEY, state.theme);
 }
 
 function loadAppIcon() {
-  return localStorage.getItem(APP_ICON_KEY) || "";
+  return getString(APP_ICON_KEY);
 }
 
 function saveAppIcon() {
   if (state.appIcon) {
-    localStorage.setItem(APP_ICON_KEY, state.appIcon);
+    setString(APP_ICON_KEY, state.appIcon);
   } else {
-    localStorage.removeItem(APP_ICON_KEY);
+    removeValue(APP_ICON_KEY);
   }
 }
 
 function loadHomeCovers() {
-  try {
-    const parsed = JSON.parse(localStorage.getItem(HOME_COVER_KEY) || "{}");
-    return normalizeHomeCovers(parsed);
-  } catch {
-    return {};
-  }
+  return normalizeHomeCovers(getJson(HOME_COVER_KEY, {}));
 }
 
 function normalizeHomeCovers(value) {
@@ -1519,9 +1501,9 @@ function saveHomeCovers() {
   const covers = normalizeHomeCovers(state.homeCovers);
   state.homeCovers = covers;
   if (Object.keys(covers).length) {
-    localStorage.setItem(HOME_COVER_KEY, JSON.stringify(covers));
+    setJson(HOME_COVER_KEY, covers);
   } else {
-    localStorage.removeItem(HOME_COVER_KEY);
+    removeValue(HOME_COVER_KEY);
   }
 }
 
@@ -1535,167 +1517,65 @@ function saveAppearance(options = {}) {
 }
 
 function loadUpdateNotificationFilters() {
-  try {
-    const parsed = JSON.parse(localStorage.getItem(UPDATE_NOTIFICATION_FILTER_KEY) || "{}");
-    return { ...DEFAULT_NOTIFICATION_FILTERS, ...(parsed && typeof parsed === "object" ? parsed : {}) };
-  } catch {
-    return { ...DEFAULT_NOTIFICATION_FILTERS };
-  }
+  const parsed = getJson(UPDATE_NOTIFICATION_FILTER_KEY, {});
+  return { ...DEFAULT_NOTIFICATION_FILTERS, ...(parsed && typeof parsed === "object" ? parsed : {}) };
 }
 
 function saveUpdateNotificationFilters() {
-  localStorage.setItem(UPDATE_NOTIFICATION_FILTER_KEY, JSON.stringify(state.updateNotificationFilters));
+  setJson(UPDATE_NOTIFICATION_FILTER_KEY, state.updateNotificationFilters);
 }
 
 function loadHomeCollectionVisibility() {
-  try {
-    const parsed = JSON.parse(localStorage.getItem(COLLECTION_HOME_VISIBILITY_KEY) || "{}");
-    return {
-      owned: parsed.owned !== false,
-      wanted: parsed.wanted !== false,
-    };
-  } catch {
-    return { owned: true, wanted: true };
-  }
+  const parsed = getJson(COLLECTION_HOME_VISIBILITY_KEY, {});
+  return {
+    owned: parsed.owned !== false,
+    wanted: parsed.wanted !== false,
+  };
 }
 
 function saveHomeCollectionVisibility() {
-  localStorage.setItem(COLLECTION_HOME_VISIBILITY_KEY, JSON.stringify(state.homeCollectionVisibility));
+  setJson(COLLECTION_HOME_VISIBILITY_KEY, state.homeCollectionVisibility);
 }
 
 function loadHomeCollectionCollapsed() {
-  try {
-    const parsed = JSON.parse(localStorage.getItem(COLLECTION_HOME_COLLAPSE_KEY) || "{}");
-    return {
-      owned: parsed.owned === true,
-      wanted: parsed.wanted === true,
-    };
-  } catch {
-    return { owned: false, wanted: false };
-  }
+  const parsed = getJson(COLLECTION_HOME_COLLAPSE_KEY, {});
+  return {
+    owned: parsed.owned === true,
+    wanted: parsed.wanted === true,
+  };
 }
 
 function saveHomeCollectionCollapsed() {
-  localStorage.setItem(COLLECTION_HOME_COLLAPSE_KEY, JSON.stringify(state.homeCollectionCollapsed));
+  setJson(COLLECTION_HOME_COLLAPSE_KEY, state.homeCollectionCollapsed);
 }
 
 function loadCollection() {
-  try {
-    const parsed = JSON.parse(localStorage.getItem(COLLECTION_KEY) || "{}");
-    return normalizeCollection(parsed);
-  } catch {
-    return { owned: [], wanted: [] };
-  }
+  return normalizeCollection(getJson(COLLECTION_KEY, {}));
 }
 
 function clampCollectionQuantity(value) {
-  const quantity = Math.trunc(Number(value));
-  if (!Number.isFinite(quantity) || quantity < 1) {
-    return 1;
-  }
-  return Math.min(quantity, 99);
+  return storeClampCollectionQuantity(value);
 }
 
-// normalizeCollection is called on nearly every collection read, but its work only
-// matters when a raw/foreign object arrives (load, sync merge, import). Memoize by
-// object identity: once an object has been normalized we hand it straight back, so
-// hot paths skip the full structuredClone + rebuild. In-place mutations keep the
-// same object reference (and stay well-formed via refreshLegacyCollectionItems), so
-// they remain valid; anything that assigns a fresh object gets normalized once.
-const normalizedCollections = new WeakSet();
+function collectionStoreOptions() {
+  return {
+    statuses: COLLECTION_ENTRY_STATUSES,
+    self: memberName(),
+    droppedMembers: DROPPED_COLLECTION_MEMBERS,
+    memberMerges: COLLECTION_MEMBER_MERGES,
+  };
+}
 
 function normalizeCollection(collection = {}) {
-  if (collection && typeof collection === "object" && normalizedCollections.has(collection)) {
-    return collection;
-  }
-  const legacyItems = collection.items && typeof collection.items === "object" ? { ...collection.items } : {};
-  const memberItems = collection.member_items && typeof collection.member_items === "object" ? structuredClone(collection.member_items) : {};
-  const self = safeMemberName(memberName());
-  const now = new Date().toISOString();
-  for (const kitId of Array.isArray(collection.owned) ? collection.owned : []) {
-    if (!legacyItems[kitId]) {
-      legacyItems[kitId] = { status: "owned", updated_at: now, updated_by: "local" };
-    }
-  }
-  for (const kitId of Array.isArray(collection.wanted) ? collection.wanted : []) {
-    if (!legacyItems[kitId]) {
-      legacyItems[kitId] = { status: "wanted", quantity: 1, updated_at: now, updated_by: "local" };
-    }
-  }
-
-  // Legacy collections used only `items` / `owned` / `wanted`. Migrate those
-  // once, but never let stale legacy mirrors recreate member entries after a delete.
-  if (Object.keys(memberItems).length === 0) {
-    for (const [kitId, entry] of Object.entries(legacyItems)) {
-      if (!entry?.status) {
-        continue;
-      }
-      memberItems[self] = memberItems[self] || {};
-      memberItems[self][kitId] = entry;
-    }
-  }
-
-  const normalizedMemberItems = {};
-  for (const [member, memberMap] of Object.entries(memberItems)) {
-    let memberKey = safeMemberName(member);
-    if (!memberKey || !memberMap || typeof memberMap !== "object") {
-      continue;
-    }
-    if (DROPPED_COLLECTION_MEMBERS.has(memberKey)) {
-      continue;
-    }
-    // Reapply on every normalize (not one-shot): the cross-device sync unions member
-    // buckets, so a dropped or folded bucket keeps flowing back from the other device
-    // until both sides run this cleanup and the pushed document converges.
-    const mergeTarget = COLLECTION_MEMBER_MERGES[memberKey];
-    if (mergeTarget && memberKey !== self) {
-      memberKey = safeMemberName(mergeTarget);
-    }
-    for (const [kitId, entry] of Object.entries(memberMap)) {
-      if (!entry?.status || !COLLECTION_ENTRY_STATUSES.includes(entry.status)) {
-        continue;
-      }
-      const normalizedEntry = normalizeCollectionEntry(entry, now, memberKey);
-      normalizedMemberItems[memberKey] = normalizedMemberItems[memberKey] || {};
-      const existing = normalizedMemberItems[memberKey][kitId];
-      normalizedMemberItems[memberKey][kitId] = existing ? newerByTimestamp(existing, normalizedEntry) : normalizedEntry;
-    }
-  }
-
-  const owned = [];
-  const wanted = [];
-  const normalizedItems = {};
-  for (const [kitId, entry] of Object.entries(normalizedMemberItems[self] || {})) {
-    normalizedItems[kitId] = entry;
-    if (entry.status === "owned") {
-      owned.push(kitId);
-    }
-    if (entry.status === "wanted") {
-      wanted.push(kitId);
-    }
-  }
-
-  const result = { owned: [...new Set(owned)], wanted: [...new Set(wanted)], items: normalizedItems, member_items: normalizedMemberItems };
-  normalizedCollections.add(result);
-  return result;
+  return storeNormalizeCollection(collection, collectionStoreOptions());
 }
 
 function safeMemberName(value) {
-  return String(value || "member").trim() || "member";
+  return storeSafeMemberName(value);
 }
 
 function normalizeCollectionEntry(entry, now = new Date().toISOString(), member = "member") {
-  const normalized = {
-    status: COLLECTION_ENTRY_STATUSES.includes(entry.status) ? entry.status : "wanted",
-    updated_at: entry.updated_at || now,
-    updated_by: entry.updated_by || member,
-    quantity: clampCollectionQuantity(entry.quantity ?? entry.wanted_quantity ?? 1),
-  };
-  if (entry.note) normalized.note = String(entry.note);
-  if (entry.storage) normalized.storage = String(entry.storage);
-  const purchasePrice = numericFilterValue(entry.purchase_price);
-  if (purchasePrice !== null) normalized.purchase_price = Math.round(purchasePrice);
-  return normalized;
+  return storeNormalizeCollectionEntry(entry, { statuses: COLLECTION_ENTRY_STATUSES, now, member });
 }
 
 function loadSyncConfig() {
@@ -1750,41 +1630,41 @@ function saveRecentViewed() {
 }
 
 function saveOverrides(options = {}) {
-  localStorage.setItem(OVERRIDE_KEY, JSON.stringify(state.overrides, null, 2));
+  setJson(OVERRIDE_KEY, state.overrides);
   if (!options.skipSync) {
     scheduleCloudSave("overrides");
   }
 }
 
 function saveSeriesLabelOverrides(options = {}) {
-  localStorage.setItem(SERIES_LABEL_OVERRIDE_KEY, JSON.stringify(state.seriesLabelOverrides, null, 2));
+  setJson(SERIES_LABEL_OVERRIDE_KEY, state.seriesLabelOverrides);
   if (!options.skipSync) {
     scheduleCloudSave("series");
   }
 }
 
 function saveConsoleMode() {
-  localStorage.setItem(CONSOLE_MODE_KEY, String(state.consoleMode));
+  setString(CONSOLE_MODE_KEY, state.consoleMode);
 }
 
 function saveCollection(options = {}) {
   state.collection = normalizeCollection(state.collection);
-  localStorage.setItem(COLLECTION_KEY, JSON.stringify(state.collection));
+  setJson(COLLECTION_KEY, state.collection);
   if (!options.skipSync) {
     scheduleCloudSave("collection");
   }
 }
 
 function saveSyncConfig() {
-  localStorage.setItem(SYNC_CONFIG_KEY, JSON.stringify(state.syncConfig));
+  setJson(SYNC_CONFIG_KEY, state.syncConfig);
 }
 
 function saveSyncMeta() {
-  localStorage.setItem(SYNC_META_KEY, JSON.stringify(state.syncMeta));
+  setJson(SYNC_META_KEY, state.syncMeta);
 }
 
 function saveSyncHistory() {
-  localStorage.setItem(SYNC_HISTORY_KEY, JSON.stringify(state.syncHistory.slice(0, SYNC_HISTORY_LIMIT)));
+  setJson(SYNC_HISTORY_KEY, state.syncHistory.slice(0, SYNC_HISTORY_LIMIT));
 }
 
 function snapshotJson(value) {
@@ -1913,9 +1793,7 @@ function openSettings(panel = null) {
   state.activeModal = "settings";
   renderSettings();
   renderConsoleMode();
-  if (!elements.settingsDialog.open) {
-    elements.settingsDialog.showModal();
-  }
+  openDialog(elements.settingsDialog);
   persistViewState({ mode: "push" });
 }
 
@@ -1924,9 +1802,7 @@ function closeSettings(options = {}) {
     window.history.back();
     return;
   }
-  if (elements.settingsDialog.open) {
-    elements.settingsDialog.close();
-  }
+  closeDialog(elements.settingsDialog);
   state.activeModal = null;
   persistViewState({ mode: "replace" });
 }
@@ -2105,7 +1981,7 @@ function bindEvents() {
     }
   });
   elements.avatarInput?.addEventListener("change", handleAvatarChange);
-  elements.memberDialogClose?.addEventListener("click", () => elements.memberDialog?.close());
+  elements.memberDialogClose?.addEventListener("click", () => closeDialog(elements.memberDialog));
   elements.memberDialogChangeAvatar?.addEventListener("click", () => elements.avatarInput?.click());
   elements.memberDialogAvatar?.addEventListener("click", () => {
     if (elements.memberEditPanel && !elements.memberEditPanel.hidden) {
@@ -2174,10 +2050,10 @@ function bindEvents() {
     closeUserPage();
     openGuide();
   });
-  elements.guideClose?.addEventListener("click", () => elements.guideDialog?.close());
+  elements.guideClose?.addEventListener("click", () => closeDialog(elements.guideDialog));
   elements.guideColorToggle?.addEventListener("click", toggleGuideFullColor);
   elements.guideDialog?.addEventListener("click", (event) => {
-    if (event.target === elements.guideDialog) elements.guideDialog.close();
+    if (event.target === elements.guideDialog) closeDialog(elements.guideDialog);
   });
   elements.guideTabs?.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-guide-tab]");
@@ -2188,17 +2064,17 @@ function bindEvents() {
     }
     renderGuideActive();
   });
-  elements.bbxTopClose?.addEventListener("click", () => elements.bbxTopDialog?.close());
+  elements.bbxTopClose?.addEventListener("click", () => closeDialog(elements.bbxTopDialog));
   elements.bbxTopDialog?.addEventListener("click", (event) => {
-    if (event.target === elements.bbxTopDialog) elements.bbxTopDialog.close();
+    if (event.target === elements.bbxTopDialog) closeDialog(elements.bbxTopDialog);
   });
-  elements.bbxPartClose?.addEventListener("click", () => elements.bbxPartDialog?.close());
+  elements.bbxPartClose?.addEventListener("click", () => closeDialog(elements.bbxPartDialog));
   elements.bbxPartDialog?.addEventListener("click", (event) => {
-    if (event.target === elements.bbxPartDialog) elements.bbxPartDialog.close();
+    if (event.target === elements.bbxPartDialog) closeDialog(elements.bbxPartDialog);
   });
-  elements.guideUnitClose?.addEventListener("click", () => elements.guideUnitDialog?.close());
+  elements.guideUnitClose?.addEventListener("click", () => closeDialog(elements.guideUnitDialog));
   elements.guideUnitDialog?.addEventListener("click", (event) => {
-    if (event.target === elements.guideUnitDialog) elements.guideUnitDialog.close();
+    if (event.target === elements.guideUnitDialog) closeDialog(elements.guideUnitDialog);
   });
   elements.userRowSignOut?.addEventListener("click", () => {
     if (!window.confirm(t("signOutConfirm"))) {
@@ -2378,15 +2254,15 @@ function registerNativeBackButton() {
     // 图鉴 overlays close one level at a time (detail → gallery → previous view)
     // rather than falling through to minimize and dropping out of the app.
     if (elements.bbxPartDialog?.open) {
-      elements.bbxPartDialog.close();
+      closeDialog(elements.bbxPartDialog);
       return;
     }
     if (elements.bbxTopDialog?.open) {
-      elements.bbxTopDialog.close();
+      closeDialog(elements.bbxTopDialog);
       return;
     }
     if (elements.guideUnitDialog?.open) {
-      elements.guideUnitDialog.close();
+      closeDialog(elements.guideUnitDialog);
       return;
     }
     if (elements.detailDialog?.open || state.selectedKit) {
@@ -2398,7 +2274,7 @@ function registerNativeBackButton() {
       return;
     }
     if (elements.guideDialog?.open) {
-      elements.guideDialog.close();
+      closeDialog(elements.guideDialog);
       return;
     }
     if (state.activeView !== "home") {
@@ -3269,49 +3145,19 @@ function cloudPayload() {
 }
 
 function timestampMs(...values) {
-  for (const value of values) {
-    const time = Date.parse(value || "");
-    if (Number.isFinite(time)) {
-      return time;
-    }
-  }
-  return 0;
+  return storeTimestampMs(...values);
 }
 
 function newerByTimestamp(left, right, fields = ["updated_at"]) {
-  const leftTime = timestampMs(...fields.map((field) => left?.[field]));
-  const rightTime = timestampMs(...fields.map((field) => right?.[field]));
-  return leftTime >= rightTime ? left : right;
+  return storeNewerByTimestamp(left, right, fields);
 }
 
 function mergeCollectionState(localCollection, remoteCollection) {
-  const local = normalizeCollection(localCollection || {});
-  const remote = normalizeCollection(remoteCollection || {});
-  const merged = { member_items: {} };
-  const members = new Set([...Object.keys(local.member_items || {}), ...Object.keys(remote.member_items || {})]);
-  for (const member of members) {
-    const kitIds = new Set([...Object.keys(local.member_items?.[member] || {}), ...Object.keys(remote.member_items?.[member] || {})]);
-    for (const kitId of kitIds) {
-      const next = newerByTimestamp(local.member_items?.[member]?.[kitId], remote.member_items?.[member]?.[kitId]);
-      if (!next) {
-        continue;
-      }
-      merged.member_items[member] = merged.member_items[member] || {};
-      merged.member_items[member][kitId] = next;
-    }
-  }
-  return normalizeCollection(merged);
+  return storeMergeCollectionState(localCollection, remoteCollection, collectionStoreOptions());
 }
 
 function mergeTimestampedMap(localMap = {}, remoteMap = {}) {
-  const merged = {};
-  for (const key of new Set([...Object.keys(localMap || {}), ...Object.keys(remoteMap || {})])) {
-    const next = newerByTimestamp(localMap?.[key], remoteMap?.[key], ["updated_at", "hidden_at", "reviewed_at"]);
-    if (next && Object.keys(next).length) {
-      merged[key] = next;
-    }
-  }
-  return merged;
+  return storeMergeTimestampedMap(localMap, remoteMap);
 }
 
 function mergeCloudPayload(localPayload, remotePayload = {}) {
@@ -4096,6 +3942,20 @@ function render() {
   renderPBandaiProducts();
   renderMarketCenter();
   renderUpdateLog();
+  renderFilterSummary();
+  renderKits();
+}
+
+function renderCatalogDataChanged() {
+  elements.datasetSummary.textContent = datasetSummary();
+  renderFranchiseFilters();
+  renderSeriesControls();
+  renderGradeFilters();
+  renderHome();
+  renderCollections();
+  renderHomeUpdates();
+  renderPBandaiProducts();
+  renderMarketCenter();
   renderFilterSummary();
   renderKits();
 }
@@ -5529,30 +5389,7 @@ function imageCandidatesForKit(kit) {
 }
 
 function appendImageWithFallback(container, kit, options = {}) {
-  const urls = imageCandidatesForKit(kit);
-  if (!urls.length) {
-    options.onExhausted?.();
-    return false;
-  }
-
-  const img = document.createElement("img");
-  img.alt = options.alt || "";
-  img.loading = options.loading || "lazy";
-  img.decoding = "async";
-  let index = 0;
-  const tryNext = () => {
-    if (index >= urls.length) {
-      img.remove();
-      options.onExhausted?.();
-      return;
-    }
-    img.src = urls[index];
-    index += 1;
-  };
-  img.addEventListener("error", tryNext);
-  container.append(img);
-  tryNext();
-  return true;
+  return appendImageUrlsWithFallback(container, imageCandidatesForKit(kit), options);
 }
 
 function releaseYearForKit(kit) {
@@ -6550,18 +6387,16 @@ function renderOnboardingLanguages() {
 }
 
 function showOnboardingIfNeeded() {
-  if (!elements.onboardingDialog || localStorage.getItem(ONBOARDING_DONE_KEY) === "true" || state.activeModal || state.selectedKit) {
+  if (!elements.onboardingDialog || getString(ONBOARDING_DONE_KEY) === "true" || state.activeModal || state.selectedKit) {
     return;
   }
   renderOnboardingLanguages();
-  elements.onboardingDialog.showModal();
+  openDialog(elements.onboardingDialog);
 }
 
 function finishOnboarding() {
-  localStorage.setItem(ONBOARDING_DONE_KEY, "true");
-  if (elements.onboardingDialog?.open) {
-    elements.onboardingDialog.close();
-  }
+  setString(ONBOARDING_DONE_KEY, "true");
+  closeDialog(elements.onboardingDialog);
 }
 
 function renderSettings() {
@@ -6977,7 +6812,7 @@ function openUserPage() {
   renderUserPage();
   if (!elements.userDialog.open) {
     elements.userDialog.classList.remove("is-closing");
-    elements.userDialog.showModal();
+    openDialog(elements.userDialog);
   }
 }
 
@@ -6990,7 +6825,7 @@ function closeUserPage() {
   setTimeout(() => {
     elements.userDialog.classList.remove("is-closing");
     if (elements.userDialog.open) {
-      elements.userDialog.close();
+      closeDialog(elements.userDialog);
     }
   }, 190);
 }
@@ -7180,7 +7015,7 @@ async function openGuide(tab) {
       button.classList.toggle("is-active", button.dataset.guideTab === state.guideTab);
     }
   }
-  if (!elements.guideDialog.open) elements.guideDialog.showModal();
+  openDialog(elements.guideDialog);
   await renderGuideActive();
 }
 
@@ -7308,7 +7143,7 @@ function openGuideUnit(group, status) {
       else state.guideSplits.add(group.merge_key);
       saveGuideSplits();
       refreshGuideGroups();
-      elements.guideUnitDialog.close();
+      closeDialog(elements.guideUnitDialog);
       if (elements.guideDialog.open) renderGuide(state.guide);
       renderUserGuideValue();
     });
@@ -7346,7 +7181,7 @@ function openGuideUnit(group, status) {
       elements.guideUnitKits.append(guideKitRow(kit, group, status));
     }
   }
-  if (!elements.guideUnitDialog.open) elements.guideUnitDialog.showModal();
+  openDialog(elements.guideUnitDialog);
 }
 
 function guideKitRow(kit, group, groupStatus) {
@@ -7366,7 +7201,7 @@ function guideKitRow(kit, group, groupStatus) {
   face.addEventListener("click", () => {
     // Keep the 图鉴 gallery open underneath so backing out of the kit detail
     // returns here instead of dropping all the way to the main view.
-    elements.guideUnitDialog.close();
+    closeDialog(elements.guideUnitDialog);
     openDetail(kit);
   });
 
@@ -7608,19 +7443,7 @@ function bbxImageCandidates(record, preferFallback = false) {
 }
 
 function setImageFallbackChain(img, urls, onExhausted) {
-  const candidates = [...new Set(urls.filter(Boolean))];
-  if (!candidates.length) {
-    onExhausted?.();
-    return false;
-  }
-  let index = 0;
-  img.src = candidates[index];
-  img.addEventListener("error", () => {
-    index += 1;
-    if (index < candidates.length) img.src = candidates[index];
-    else onExhausted?.();
-  });
-  return true;
+  return chainImageFallbacks(img, urls, onExhausted);
 }
 
 // Ordered image candidates for a 陀螺: its product box, else the blade art (some
@@ -7841,14 +7664,14 @@ function openBbxPart(part) {
       text.innerHTML = `<strong>${escapeHtml(top.name)}</strong><em>${escapeHtml(product ? bbxLocalize(product.names) : top.base_set_id)}</em>`;
       row.append(thumb, text);
       row.addEventListener("click", () => {
-        elements.bbxPartDialog.close();
+        closeDialog(elements.bbxPartDialog);
         openBbxTop(top);
       });
       elements.bbxPartTops.append(row);
     }
   }
 
-  if (!elements.bbxPartDialog.open) elements.bbxPartDialog.showModal();
+  openDialog(elements.bbxPartDialog);
 }
 
 function openBbxTop(top) {
@@ -7952,7 +7775,7 @@ function openBbxTop(top) {
   linkBar.append(linkBtn, picker);
   elements.bbxTopKits.append(linkBar);
 
-  if (!elements.bbxTopDialog.open) elements.bbxTopDialog.showModal();
+  openDialog(elements.bbxTopDialog);
 }
 
 // A linked catalog kit inside the 陀螺 dialog: opens the kit, marks owned/wanted
@@ -7973,7 +7796,7 @@ function bbxKitRow(kit, top) {
   text.innerHTML = `<strong>${escapeHtml(kitShortName(kit))}</strong><span>${escapeHtml(seriesLabelFromKit(kit))} · ${escapeHtml(gradeShortLabel(kit))}</span>`;
   face.append(thumb, text);
   face.addEventListener("click", () => {
-    elements.bbxTopDialog.close();
+    closeDialog(elements.bbxTopDialog);
     openDetail(kit);
   });
 
@@ -8172,9 +7995,7 @@ function openMemberProfile(member) {
 
   fillMemberStrip(elements.memberDialogOwned, owned);
   fillMemberStrip(elements.memberDialogWanted, wanted);
-  if (!elements.memberDialog.open) {
-    elements.memberDialog.showModal();
-  }
+  openDialog(elements.memberDialog);
   if (!state.guide) {
     ensureGuideData()
       .then(() => {
@@ -9023,7 +8844,7 @@ function openDetail(kit, options = {}) {
 
   ensureSearchIndex(kit.franchise || state.franchise);
   renderDetail(kit);
-  elements.detailDialog.showModal();
+  openDialog(elements.detailDialog);
   persistViewState({ mode: "push" });
 }
 
@@ -9053,9 +8874,7 @@ function closeDetail(options = {}) {
     window.history.back();
     return;
   }
-  if (elements.detailDialog.open) {
-    elements.detailDialog.close();
-  }
+  closeDialog(elements.detailDialog);
   state.selectedKit = null;
   persistViewState({ mode: "replace" });
 }
@@ -9173,7 +8992,7 @@ function bbxRenderTopPicker(kit, container) {
 
 // Open the 图鉴 on the BBX tab focused on a specific top.
 async function openBbxGuideToTop(top) {
-  if (elements.detailDialog.open) elements.detailDialog.close();
+  closeDialog(elements.detailDialog);
   await openGuide("bbx");
   openBbxTop(top);
 }
@@ -9330,16 +9149,7 @@ function addReleaseBadge(container, kitOrDate) {
 }
 
 function escapeHtml(value) {
-  return String(value ?? "").replace(/[&<>"']/g, (char) => {
-    const replacements = {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;",
-    };
-    return replacements[char];
-  });
+  return escapeHtmlValue(value);
 }
 
 init().catch((error) => {
