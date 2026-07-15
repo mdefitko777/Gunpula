@@ -23,6 +23,30 @@ const PART_TYPES = {
   BeybladePartsOverBlade: "over_blade",
 };
 
+// phstudy renders part images by convention: {basePath}{folder}/{part_id}.png.
+// Its own viewer falls back site -> app; sampling every type shows the app
+// folder resolves for all parts while the higher-res site folder only covers
+// blades. So we store the app-folder URL as the reliable image, and give
+// blades the sharper site image with the app image as fallback.
+const PART_APP_FOLDER = {
+  blade: "Big",
+  ratchet: "Ratchet",
+  bit: "Bit",
+  assist_blade: "AssistBlade",
+  lock_chip: "LockChip",
+  main_blade: "MainBlade",
+  metal_blade: "MetalBlade",
+  over_blade: "OverBlade",
+};
+
+function partImages(type, id) {
+  const appUrl = `${BASE}/images/app/${PART_APP_FOLDER[type] || type}/${id}.png`;
+  if (type === "blade") {
+    return { image: `${BASE}/images/site/Blade/${id}.png`, image_fallback: appUrl };
+  }
+  return { image: appUrl, image_fallback: null };
+}
+
 async function getJson(url) {
   const res = await fetch(url, { headers: { "user-agent": "Gunpula catalog importer" } });
   if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
@@ -61,6 +85,7 @@ async function main() {
       stats: part.defaultStatus || null,
       weight_g: weights[id]?.weight_g ?? null,
       collection_order: part.collection_order ?? null,
+      ...partImages(type, id),
     }));
   }
 

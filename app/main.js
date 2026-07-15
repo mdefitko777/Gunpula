@@ -7270,6 +7270,8 @@ const BBX_COMPONENT_FIELDS = [
   ["assist_blade_id", "assist_blade"],
   ["lock_chip_id", "lock_chip"],
   ["main_blade_id", "main_blade"],
+  ["metal_blade_id", "metal_blade"],
+  ["over_blade_id", "over_blade"],
 ];
 
 function loadBbxOwnedParts() {
@@ -7356,6 +7358,31 @@ function bbxProductImage(baseSetId) {
   return state.bbx?.productByBaseSet.get(baseSetId)?.image || null;
 }
 
+// Part thumbnail: primary image with an optional fallback URL, then hide the
+// frame if neither loads (some parts have no artwork on the source site).
+function bbxPartThumb(part) {
+  const frame = document.createElement("span");
+  frame.className = "bbx-part-thumb";
+  if (!part?.image) {
+    frame.classList.add("is-missing");
+    return frame;
+  }
+  const img = document.createElement("img");
+  img.decoding = "async";
+  img.alt = "";
+  img.src = part.image;
+  img.addEventListener("error", () => {
+    if (part.image_fallback && img.src !== part.image_fallback) {
+      img.src = part.image_fallback;
+      return;
+    }
+    img.remove();
+    frame.classList.add("is-missing");
+  });
+  frame.append(img);
+  return frame;
+}
+
 function renderBbxGuide(bbx) {
   const total = bbx.tops.length;
   const complete = bbx.tops.filter((t) => bbxTopStatus(t).status === "owned").length;
@@ -7435,6 +7462,7 @@ function openBbxTop(top) {
     const owned = state.bbxOwnedParts?.has(comp.part_id);
     const row = document.createElement("div");
     row.className = "bbx-part-row";
+    const thumb = bbxPartThumb(part);
     const text = document.createElement("span");
     text.className = "bbx-part-text";
     text.innerHTML = `<em>${escapeHtml(bbxPartTypeLabel(comp.type))}</em><strong>${escapeHtml(part ? bbxLocalize(part.names) : comp.part_id)}</strong>`;
@@ -7447,7 +7475,7 @@ function openBbxTop(top) {
       openBbxTop(top);
       renderBbxGuide(state.bbx);
     });
-    row.append(text, toggle);
+    row.append(thumb, text, toggle);
     elements.bbxTopParts.append(row);
   }
 
