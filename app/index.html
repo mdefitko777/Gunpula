@@ -625,6 +625,7 @@
           <div class="segmented-control guide-tabs" id="guideTabs">
             <button class="segment-button is-active" type="button" data-guide-tab="gundam" data-i18n="guideTabGundam">高达</button>
             <button class="segment-button" type="button" data-guide-tab="bbx" data-i18n="guideTabBbx">陀螺</button>
+            <button class="segment-button" type="button" data-guide-tab="parts" data-i18n="guideTabParts">部品</button>
           </div>
           <button class="guide-color-toggle" id="guideColorToggle" type="button" data-i18n="guideFullColor">全彩预览</button>
           <p id="guideSummary"></p>
@@ -664,6 +665,22 @@
         <div class="bbx-recommend" id="bbxTopRecommend"></div>
         <h3 class="guide-unit-subhead" data-i18n="guideMatchedKits">对应模型</h3>
         <div class="guide-unit-kits" id="bbxTopKits"></div>
+      </div>
+    </dialog>
+
+    <dialog class="member-dialog guide-bbx-dialog" id="bbxPartDialog" aria-labelledby="bbxPartName">
+      <div class="member-shell">
+        <button class="dialog-close" id="bbxPartClose" type="button" aria-label="关闭" data-i18n-aria="closeSettings">×</button>
+        <div class="guide-unit-head">
+          <div class="guide-unit-art" id="bbxPartArt"></div>
+          <div class="member-head-info">
+            <h2 id="bbxPartName"></h2>
+            <p id="bbxPartMeta"></p>
+          </div>
+        </div>
+        <div class="bbx-part-stats" id="bbxPartStats"></div>
+        <h3 class="guide-unit-subhead" data-i18n="bbxPartUsedIn">出自陀螺</h3>
+        <div class="guide-unit-kits" id="bbxPartTops"></div>
       </div>
     </dialog>
 

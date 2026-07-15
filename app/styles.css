@@ -4296,6 +4296,82 @@ body.is-radial-active {
   font-weight: 600;
 }
 
+/* 部品 (parts) browser */
+.bbx-part-cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.bbx-part-cat {
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.bbx-part-cat.is-active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.bbx-part-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.bbx-stat-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  padding: 4px 9px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.bbx-stat-chip em {
+  font-style: normal;
+  color: var(--faint);
+  font-size: 11px;
+}
+
+.bbx-stat-chip strong {
+  font-size: 13px;
+}
+
+.bbx-part-top-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.bbx-part-top-row .bbx-part-text {
+  display: grid;
+  gap: 1px;
+}
+
+.bbx-part-top-row .bbx-part-text em {
+  font-style: normal;
+  color: var(--faint);
+  font-size: 11px;
+}
+
 .detail-bbx-link {
   display: grid;
   gap: 8px;

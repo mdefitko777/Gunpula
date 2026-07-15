@@ -776,6 +776,13 @@ const elements = {
   bbxTopParts: document.querySelector("#bbxTopParts"),
   bbxTopRecommend: document.querySelector("#bbxTopRecommend"),
   bbxTopKits: document.querySelector("#bbxTopKits"),
+  bbxPartDialog: document.querySelector("#bbxPartDialog"),
+  bbxPartClose: document.querySelector("#bbxPartClose"),
+  bbxPartArt: document.querySelector("#bbxPartArt"),
+  bbxPartName: document.querySelector("#bbxPartName"),
+  bbxPartMeta: document.querySelector("#bbxPartMeta"),
+  bbxPartStats: document.querySelector("#bbxPartStats"),
+  bbxPartTops: document.querySelector("#bbxPartTops"),
   guideUnitDialog: document.querySelector("#guideUnitDialog"),
   guideUnitClose: document.querySelector("#guideUnitClose"),
   guideUnitArt: document.querySelector("#guideUnitArt"),
@@ -2166,6 +2173,10 @@ function bindEvents() {
   elements.bbxTopDialog?.addEventListener("click", (event) => {
     if (event.target === elements.bbxTopDialog) elements.bbxTopDialog.close();
   });
+  elements.bbxPartClose?.addEventListener("click", () => elements.bbxPartDialog?.close());
+  elements.bbxPartDialog?.addEventListener("click", (event) => {
+    if (event.target === elements.bbxPartDialog) elements.bbxPartDialog.close();
+  });
   elements.guideUnitClose?.addEventListener("click", () => elements.guideUnitDialog?.close());
   elements.guideUnitDialog?.addEventListener("click", (event) => {
     if (event.target === elements.guideUnitDialog) elements.guideUnitDialog.close();
@@ -2347,6 +2358,10 @@ function registerNativeBackButton() {
     }
     // 图鉴 overlays close one level at a time (detail → gallery → previous view)
     // rather than falling through to minimize and dropping out of the app.
+    if (elements.bbxPartDialog?.open) {
+      elements.bbxPartDialog.close();
+      return;
+    }
     if (elements.bbxTopDialog?.open) {
       elements.bbxTopDialog.close();
       return;
@@ -7128,6 +7143,8 @@ function toggleGuideFullColor() {
 async function renderGuideActive() {
   if (state.guideTab === "bbx") {
     renderBbxGuide(await ensureBbxData());
+  } else if (state.guideTab === "parts") {
+    renderBbxParts(await ensureBbxData());
   } else {
     renderGuide(await ensureGuideData());
   }
@@ -7472,7 +7489,22 @@ async function ensureBbxData() {
     .sort((a, b) => a.order - b.order);
 
   const lines = [...new Set(tops.map((t) => t.line))];
-  state.bbx = { tops, lines, partIndex, productByBaseSet, partsByBaseSet, kitsByBaseSet, beybladeKits, unmatchedKitIds };
+
+  // Parts kept in their catalog category order for the 部品 browser, and the
+  // reverse index part → 陀螺 that ship/use it (for "which top is this from").
+  const partsByType = new Map();
+  for (const [type, list] of Object.entries(db.parts || {})) {
+    partsByType.set(type, [...list].sort((a, b) => (a.collection_order ?? 9999) - (b.collection_order ?? 9999)));
+  }
+  const topsByPartId = new Map();
+  for (const top of tops) {
+    for (const comp of top.components) {
+      if (!topsByPartId.has(comp.part_id)) topsByPartId.set(comp.part_id, []);
+      topsByPartId.get(comp.part_id).push(top);
+    }
+  }
+
+  state.bbx = { tops, lines, partIndex, productByBaseSet, partsByBaseSet, kitsByBaseSet, beybladeKits, unmatchedKitIds, partsByType, topsByPartId };
   return state.bbx;
 }
 
@@ -7615,6 +7647,148 @@ function renderBbxGuide(bbx) {
 
 function bbxPartTypeLabel(type) {
   return t(`bbxPart_${type}`) || type;
+}
+
+// Category-filtered parts browser (部品 tab): blade / ratchet / bit / lock chip …
+// like the phstudy category page. Tapping a part opens its source 陀螺.
+const BBX_PART_TYPE_ORDER = ["blade", "ratchet", "bit", "lock_chip", "assist_blade", "main_blade", "metal_blade", "over_blade"];
+
+function renderBbxParts(bbx) {
+  if (!state.bbxPartType) state.bbxPartType = "blade";
+  const types = BBX_PART_TYPE_ORDER.filter((type) => (bbx.partsByType.get(type) || []).length);
+  if (!types.includes(state.bbxPartType)) state.bbxPartType = types[0];
+  const parts = bbx.partsByType.get(state.bbxPartType) || [];
+  elements.guideSummary.textContent = t("bbxPartsCount", { count: parts.length });
+
+  elements.guideBody.innerHTML = "";
+  if (!types.length) {
+    const empty = document.createElement("p");
+    empty.className = "settings-hint";
+    empty.textContent = t("guideNoKits");
+    elements.guideBody.append(empty);
+    return;
+  }
+
+  const chips = document.createElement("div");
+  chips.className = "bbx-part-cats";
+  for (const type of types) {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = `bbx-part-cat${type === state.bbxPartType ? " is-active" : ""}`;
+    chip.textContent = bbxPartTypeLabel(type);
+    chip.addEventListener("click", () => {
+      state.bbxPartType = type;
+      renderBbxParts(bbx);
+      applyGuideColorMode();
+    });
+    chips.append(chip);
+  }
+  elements.guideBody.append(chips);
+
+  const grid = document.createElement("div");
+  grid.className = "guide-grid bbx-part-grid";
+  for (const part of parts) {
+    const cell = document.createElement("button");
+    cell.type = "button";
+    cell.className = "guide-cell bbx-part-cell";
+    const art = document.createElement("span");
+    art.className = "guide-cell-art";
+    const img = document.createElement("img");
+    img.decoding = "async";
+    img.alt = "";
+    // Grid thumbnails are tiny: prefer the lighter app-folder image (blades' main
+    // image is a heavy high-res site render), keeping the sharp one for detail.
+    // Eager on purpose — loading="lazy" never fires inside a showModal() dialog.
+    const thumbSrc = part.image_fallback || part.image;
+    const thumbAlt = part.image_fallback ? part.image : null;
+    img.src = thumbSrc;
+    img.addEventListener("error", () => {
+      if (thumbAlt && img.src !== thumbAlt) {
+        img.src = thumbAlt;
+        return;
+      }
+      img.remove();
+      art.classList.add("is-missing");
+    });
+    art.append(img);
+    const label = document.createElement("span");
+    label.className = "guide-cell-name";
+    label.textContent = bbxLocalize(part.names) || part.part_id;
+    cell.append(art, label);
+    const usedIn = bbx.topsByPartId.get(part.part_id)?.length || 0;
+    if (usedIn) cell.append(badgeEl(String(usedIn), "guide-badge-count"));
+    cell.addEventListener("click", () => openBbxPart(part));
+    grid.append(cell);
+  }
+  elements.guideBody.append(grid);
+}
+
+// Part detail: image, stats, and the 陀螺 that ship/use this part (the reverse
+// link the user asked for — "which top is this from").
+function openBbxPart(part) {
+  const bbx = state.bbx;
+  elements.bbxPartArt.innerHTML = "";
+  const img = document.createElement("img");
+  img.alt = bbxLocalize(part.names) || part.part_id;
+  img.src = part.image;
+  img.addEventListener("error", () => {
+    if (part.image_fallback && img.src !== part.image_fallback) img.src = part.image_fallback;
+    else img.remove();
+  });
+  elements.bbxPartArt.append(img);
+  elements.bbxPartName.textContent = bbxLocalize(part.names) || part.part_id;
+  elements.bbxPartMeta.textContent = [bbxPartTypeLabel(part.type), part.weight_g ? `${part.weight_g}g` : ""].filter(Boolean).join(" · ");
+
+  elements.bbxPartStats.innerHTML = "";
+  const stats = part.stats || {};
+  const statFields = [
+    ["attack", t("bbxStatAttack")],
+    ["defense", t("bbxStatDefense")],
+    ["stamina", t("bbxStatStamina")],
+    ["burst", t("bbxStatBurst")],
+    ["dash", t("bbxStatDash")],
+  ];
+  for (const [key, label] of statFields) {
+    const value = Number(stats[key]) || 0;
+    if (!value) continue;
+    const chip = document.createElement("span");
+    chip.className = "bbx-stat-chip";
+    chip.innerHTML = `<em>${escapeHtml(label)}</em><strong>${value}</strong>`;
+    elements.bbxPartStats.append(chip);
+  }
+
+  elements.bbxPartTops.innerHTML = "";
+  const tops = bbx.topsByPartId.get(part.part_id) || [];
+  if (!tops.length) {
+    const empty = document.createElement("p");
+    empty.className = "settings-hint";
+    empty.textContent = t("bbxPartNoTops");
+    elements.bbxPartTops.append(empty);
+  } else {
+    for (const top of tops.slice(0, 20)) {
+      const row = document.createElement("button");
+      row.type = "button";
+      row.className = "bbx-part-top-row";
+      const thumb = document.createElement("span");
+      thumb.className = "bbx-part-thumb";
+      const timg = document.createElement("img");
+      timg.alt = "";
+      if (!bbxTopArtImage(timg, top, () => thumb.classList.add("is-missing"))) thumb.classList.add("is-missing");
+      else thumb.append(timg);
+      const text = document.createElement("span");
+      text.className = "bbx-part-text";
+      const product = bbx.productByBaseSet.get(top.base_set_id);
+      text.innerHTML = `<strong>${escapeHtml(top.name)}</strong><em>${escapeHtml(product ? bbxLocalize(product.names) : top.base_set_id)}</em>`;
+      row.append(thumb, text);
+      row.addEventListener("click", () => {
+        elements.bbxPartDialog.close();
+        openBbxTop(top);
+      });
+      elements.bbxPartTops.append(row);
+    }
+  }
+
+  if (!elements.bbxPartDialog.open) elements.bbxPartDialog.showModal();
 }
 
 function openBbxTop(top) {
