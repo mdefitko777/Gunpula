@@ -169,8 +169,18 @@ const HELP_TEXT = {
     en: "Picture Book first shows series cards with lit counts. Open a series to see units; lit units appear first.",
     ja: "図鑑は作品シリーズカードと点灯数を先に表示します。シリーズを開くと機体一覧が出て、点灯済みが先に並びます。",
   },
-  userDialog: "个人页可以查看自己和共享成员的收藏、想要、图鉴点亮和喜好。",
-  memberDialog: "点头像可更换头像，点背景可更换背景；这里只显示个人收藏概况，不显示维护信息。",
+  userDialog: {
+    zh: "个人页用来看自己和共享成员。点头像/名字进入个人详情；喜好、好友、设置都会以小窗口打开，返回键会逐层关闭。",
+    ko: "개인 페이지에서는 나와 공유 멤버를 봅니다. 아바타나 이름을 누르면 상세 프로필이 열리고, 취향/친구/설정은 작은 창으로 열립니다.",
+    en: "The user page shows you and shared members. Tap the avatar/name for profile details; favorites, friends, and settings open as small layered panels.",
+    ja: "個人ページでは自分と共有メンバーを確認できます。アイコン/名前で詳細プロフィールへ進み、好み・友達・設定は小ウィンドウで開きます。",
+  },
+  memberDialog: {
+    zh: "个人详情显示头像、背景、喜好、图鉴点亮、已购买和想要。点头像/背景/名字/标签会弹出操作菜单；好友页只能查看。",
+    ko: "상세 프로필은 아바타, 배경, 취향, 도감 점등, 구매함/원함을 보여줍니다. 아바타/배경/이름/태그를 누르면 메뉴가 열립니다.",
+    en: "Profile details show avatar, cover, favorites, lit guide series, owned, and wanted items. Tap avatar/cover/name/tags for actions; friend profiles are view-only.",
+    ja: "プロフィール詳細にはアイコン、背景、好み、図鑑点灯、購入済み/欲しい物を表示します。アイコン/背景/名前/タグで操作メニューが開きます。",
+  },
   language: "切换界面语言，不会改动商品数据。",
   appearance: "设置主题、App 图标和首页收藏显示方式。",
   homeDisplay: "控制首页收藏区、首页封面和入口展示方式；这些属于外观，不影响收藏数据。",
@@ -419,6 +429,9 @@ const elements = {
   guideDialog: document.querySelector("#guideDialog"),
   guideClose: document.querySelector("#guideClose"),
   guideColorToggle: document.querySelector("#guideColorToggle"),
+  guideUserChip: document.querySelector("#guideUserChip"),
+  guideUserAvatar: document.querySelector("#guideUserAvatar"),
+  guideUserName: document.querySelector("#guideUserName"),
   guideTabs: document.querySelector("#guideTabs"),
   guideSummary: document.querySelector("#guideSummary"),
   guideBody: document.querySelector("#guideBody"),
@@ -459,6 +472,9 @@ const elements = {
   profileBackgroundInput: document.querySelector("#profileBackgroundInput"),
   memberDialogFavorites: document.querySelector("#memberDialogFavorites"),
   memberDialogStats: document.querySelector("#memberDialogStats"),
+  memberGuideTitle: document.querySelector("#memberGuideTitle"),
+  memberGuideManage: document.querySelector("#memberGuideManage"),
+  memberGuideSeries: document.querySelector("#memberGuideSeries"),
   memberDialogOwned: document.querySelector("#memberDialogOwned"),
   memberDialogWanted: document.querySelector("#memberDialogWanted"),
   memberActionDialog: document.querySelector("#memberActionDialog"),
@@ -1573,9 +1589,7 @@ function bindEvents() {
   elements.memberActionRename?.addEventListener("click", () => renameFromMemberActionSheet());
   elements.memberActionTags?.addEventListener("click", () => {
     closeDialog(elements.memberActionDialog);
-    closeDialog(elements.memberDialog);
-    openUserPage();
-    openUserPanel("favorites");
+    if (memberProfileEditable()) openUserPanelDialog("favorites");
   });
   elements.userChip?.addEventListener("click", () => {
     if (syncModeV2()) {
@@ -1651,6 +1665,7 @@ function bindEvents() {
   });
   elements.userRowSettings?.addEventListener("click", () => {
     closeUserPage();
+    state.returnToUserDrawer = true;
     openSettings();
   });
   elements.userRowGuide?.addEventListener("click", () => {
@@ -1666,12 +1681,9 @@ function bindEvents() {
   elements.guideTabs?.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-guide-tab]");
     if (!button || button.dataset.guideTab === state.guideTab) return;
-    state.guideTab = button.dataset.guideTab;
-    for (const tab of elements.guideTabs.querySelectorAll("button[data-guide-tab]")) {
-      tab.classList.toggle("is-active", tab.dataset.guideTab === state.guideTab);
-    }
-    renderGuideActive();
+    switchGuideTab(button.dataset.guideTab);
   });
+  bindGuideSwipe();
   elements.bbxTopClose?.addEventListener("click", () => closeDialog(elements.bbxTopDialog));
   elements.bbxTopDialog?.addEventListener("click", (event) => {
     if (event.target === elements.bbxTopDialog) closeDialog(elements.bbxTopDialog);
@@ -1836,6 +1848,10 @@ function bindEvents() {
     applyViewState(loadSavedViewState());
   });
   window.addEventListener("popstate", () => {
+    if (closeTopLayerForBack()) {
+      persistViewState({ mode: "replace" });
+      return;
+    }
     applyViewState(loadSavedViewState());
   });
   document.addEventListener("visibilitychange", () => {
@@ -1855,54 +1871,7 @@ function registerNativeBackButton() {
     return;
   }
   appPlugin.addListener("backButton", () => {
-    if (elements.onboardingDialog?.open) {
-      finishOnboarding();
-      return;
-    }
-    // 图鉴 overlays close one level at a time (detail → gallery → previous view)
-    // rather than falling through to minimize and dropping out of the app.
-    if (elements.bbxPartDialog?.open) {
-      closeDialog(elements.bbxPartDialog);
-      return;
-    }
-    if (elements.bbxTopDialog?.open) {
-      closeDialog(elements.bbxTopDialog);
-      return;
-    }
-    if (elements.guideUnitDialog?.open) {
-      closeDialog(elements.guideUnitDialog);
-      return;
-    }
-    if (elements.memberActionDialog?.open) {
-      closeDialog(elements.memberActionDialog);
-      return;
-    }
-    if (elements.userPanelDialog?.open) {
-      closeDialog(elements.userPanelDialog);
-      return;
-    }
-    if (elements.memberDialog?.open) {
-      closeDialog(elements.memberDialog);
-      return;
-    }
-    if (elements.userDialog?.open) {
-      closeUserPage({ immediate: true });
-      return;
-    }
-    if (elements.detailDialog?.open || state.selectedKit) {
-      closeDetail({ navigate: false });
-      return;
-    }
-    if (elements.settingsDialog?.open || state.activeModal === "settings") {
-      closeSettings({ navigate: false });
-      return;
-    }
-    if (elements.guideDialog?.open) {
-      closeDialog(elements.guideDialog);
-      if (state.returnToUserDrawer) {
-        state.returnToUserDrawer = false;
-        openUserPage();
-      }
+    if (closeTopLayerForBack()) {
       return;
     }
     if (state.returnToUserDrawer) {
@@ -1922,6 +1891,67 @@ function registerNativeBackButton() {
     }
     appPlugin.minimizeApp?.();
   });
+}
+
+function closeTopLayerForBack() {
+  if (elements.onboardingDialog?.open) {
+    finishOnboarding();
+    return true;
+  }
+  if (elements.bbxPartDialog?.open) {
+    closeDialog(elements.bbxPartDialog);
+    return true;
+  }
+  if (elements.bbxTopDialog?.open) {
+    closeDialog(elements.bbxTopDialog);
+    return true;
+  }
+  if (elements.guideUnitDialog?.open) {
+    closeDialog(elements.guideUnitDialog);
+    return true;
+  }
+  if (elements.memberActionDialog?.open) {
+    closeDialog(elements.memberActionDialog);
+    return true;
+  }
+  if (elements.userPanelDialog?.open) {
+    closeDialog(elements.userPanelDialog);
+    return true;
+  }
+  if (elements.memberDialog?.open) {
+    closeDialog(elements.memberDialog);
+    return true;
+  }
+  if (elements.userDialog?.open) {
+    closeUserPage({ immediate: true });
+    return true;
+  }
+  if (elements.detailDialog?.open || state.selectedKit) {
+    closeDetail({ navigate: false });
+    return true;
+  }
+  if (elements.settingsDialog?.open || state.activeModal === "settings") {
+    if (state.settingsPanel && state.settingsPanel !== "home") {
+      state.settingsPanel = "home";
+      renderSettingsPanels();
+    } else {
+      closeSettings({ navigate: false });
+      if (state.returnToUserDrawer) {
+        state.returnToUserDrawer = false;
+        openUserPage();
+      }
+    }
+    return true;
+  }
+  if (elements.guideDialog?.open) {
+    closeDialog(elements.guideDialog);
+    if (state.returnToUserDrawer) {
+      state.returnToUserDrawer = false;
+      openUserPage();
+    }
+    return true;
+  }
+  return false;
 }
 
 async function handleAppIconUpload(event) {
@@ -3392,7 +3422,15 @@ function helpTextFor(node) {
 
 function localizedHelpText(value) {
   if (!value) return "";
-  if (typeof value === "string") return value;
+  if (typeof value === "string") {
+    if (state.language === "zh") return value;
+    const fallback = {
+      ko: "이 영역은 현재 화면의 관리 기능입니다. 항목을 눌러 내용을 확인하고, 변경 가능한 정보는 공유 공간에 동기화됩니다.",
+      en: "This area controls the current feature. Tap an item to inspect it; editable changes sync to the shared workspace when enabled.",
+      ja: "このエリアは現在の機能を管理します。項目をタップして確認し、編集できる内容は共有スペースに同期されます。",
+    };
+    return fallback[state.language] || value;
+  }
   return value[state.language] || value.zh || value.en || "";
 }
 
@@ -4106,6 +4144,28 @@ function renderUpdateSummaryCards(container, cards) {
   }
 }
 
+function favoriteUpdateSummaryCards(items) {
+  const prefs = memberPreferences();
+  const cards = [];
+  const seriesCounts = new Map();
+  const franchiseCounts = new Map();
+  for (const kit of items) {
+    if (prefs.series.includes(kitSeriesKey(kit))) {
+      seriesCounts.set(kitSeriesKey(kit), (seriesCounts.get(kitSeriesKey(kit)) || 0) + 1);
+    }
+    if (prefs.franchises.includes(kit.franchise)) {
+      franchiseCounts.set(kit.franchise, (franchiseCounts.get(kit.franchise) || 0) + 1);
+    }
+  }
+  for (const [key, count] of [...seriesCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3)) {
+    cards.push({ label: favoriteSeriesLabel(key), value: `+${count}`, meta: t("watchedSeries") });
+  }
+  for (const [franchise, count] of [...franchiseCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, Math.max(0, 3 - cards.length))) {
+    cards.push({ label: franchiseShortLabel(franchise), value: `+${count}`, meta: t("watchedFranchise") });
+  }
+  return cards;
+}
+
 async function registerUpdatePeriodicSync() {
   if (!state.updateNotifications || !("serviceWorker" in navigator)) {
     return;
@@ -4151,6 +4211,7 @@ function renderHomeUpdates() {
     elements.updatesSubtitle.textContent =
       mode === "week" ? t("weekOnSaleSummary", { count: items.length }) : t("recentDaysSummary", { days: RECENT_UPDATE_DAYS, count: items.length });
     renderUpdateSummaryCards(elements.homeUpdateSummary, [
+      ...favoriteUpdateSummaryCards(items),
       {
         label: mode === "week" ? t("weekOnSaleShort") : t("recentDaysShort"),
         value: items.length,
@@ -4164,6 +4225,7 @@ function renderHomeUpdates() {
     const stats = releaseMonthStats(state.releaseMonth);
     elements.updatesSubtitle.textContent = t("releaseMonthSummary", { month: state.releaseMonth, count: items.length });
     renderUpdateSummaryCards(elements.homeUpdateSummary, [
+      ...favoriteUpdateSummaryCards(items),
       { label: t("releaseMonth"), value: stats.count, meta: state.releaseMonth },
       { label: t("premiumBandai"), value: stats.premium, meta: t("openPremiumBandai") },
       { label: t("watchedUpdates"), value: stats.watched, meta: "SEED / 00" },
@@ -5870,6 +5932,7 @@ function memberPreferences(member = currentMember()) {
     ...(prefs && typeof prefs === "object" && !Array.isArray(prefs) ? prefs : {}),
     franchises: Array.isArray(prefs?.franchises) ? prefs.franchises.filter((value) => FRANCHISES.includes(value)) : [],
     series: Array.isArray(prefs?.series) ? prefs.series.map(String) : [],
+    guide_works: Array.isArray(prefs?.guide_works) ? prefs.guide_works.map((value) => Number(value)).filter(Boolean) : [],
   };
 }
 
@@ -6027,7 +6090,7 @@ function toggleFavorite(kind, value) {
   } else {
     list.push(value);
   }
-  member.preferences = { franchises: prefs.franchises, series: prefs.series };
+  member.preferences = { ...prefs, franchises: prefs.franchises, series: prefs.series };
   renderProfileFavorites();
   if (state.activeView === "updates") {
     renderHomeUpdates();
@@ -6303,12 +6366,16 @@ async function ensureGuideData() {
     return state.guide;
   }
   const unitKits = map?.unit_kits || {};
-  const workIds = new Set((units.works || []).filter((w) => GGET_GUIDE_WORK.test(w.name)).map((w) => w.work_id));
+  const sectionWorkIds = new Set((sectionsDoc?.works || []).map((work) => Number(work.work_id)).filter(Boolean));
+  const workIds = new Set([
+    ...(units.works || []).filter((w) => GGET_GUIDE_WORK.test(w.name)).map((w) => Number(w.work_id)),
+    ...sectionWorkIds,
+  ]);
   const workName = new Map((units.works || []).map((w) => [w.work_id, w.name]));
   const rawUnits = units.units
-    .filter((u) => (u.work_ids || []).some((id) => workIds.has(id)))
+    .filter((u) => (u.work_ids || []).some((id) => workIds.has(Number(id))))
     .map((u) => {
-      const workId = (u.work_ids || []).find((id) => workIds.has(id));
+      const workId = Number((u.work_ids || []).find((id) => workIds.has(Number(id))));
       return {
         unit_id: u.unit_id,
         icon: u.icon,
@@ -6324,12 +6391,12 @@ async function ensureGuideData() {
   const works = [...workIds].map((id) => {
     const sectionWork = sectionByWork.get(Number(id));
     return {
-      work_id: id,
-      name: workName.get(id) || sectionWork?.name || "",
+      work_id: Number(id),
+      name: sectionWork?.name || workName.get(id) || "",
       section: sectionWork?.section || "unavailable",
       image: sectionWork?.image || "",
     };
-  });
+  }).filter((work) => work.name);
   state.guide = {
     works,
     units: rawUnits,
@@ -6367,17 +6434,18 @@ function guideIconImage(img, icon, onExhausted) {
   });
 }
 
-// Owned / wanted kit-id sets for the signed-in user's own collection.
-function guideCollectionSets() {
+// Owned / wanted kit-id sets for a workspace member.
+function guideCollectionSets(member = editableCollectionMember()) {
   state.collection = normalizeCollection(state.collection);
-  const map = state.collection.member_items?.[editableCollectionMember()] || {};
+  const memberKey = safeMemberName(typeof member === "string" ? member : member?.name || editableCollectionMember());
+  const map = state.collection.member_items?.[memberKey] || {};
   const owned = new Set();
   const wanted = new Set();
   for (const [kitId, entry] of Object.entries(map)) {
     if (entry?.status === "owned") owned.add(kitId);
     else if (entry?.status === "wanted") wanted.add(kitId);
   }
-  return { owned, wanted };
+  return { owned, wanted, memberKey };
 }
 
 const GUIDE_MANUAL_LIT_KEY = "gunpula-guide-manual-lit-v1";
@@ -6403,12 +6471,13 @@ function guideGroupStatus(group, sets) {
   if (group.kit_ids.some((id) => sets.owned.has(id))) return "owned";
   if (group.kit_ids.some((id) => sets.wanted.has(id))) return "wanted";
   // A cell with no matching kit can still be lit by hand (e.g. built from spares).
-  if (guideGroupManuallyLit(group)) return "owned";
+  if (sets.memberKey === editableCollectionMember() && guideGroupManuallyLit(group)) return "owned";
   return "none";
 }
 
-async function openGuide(tab) {
+async function openGuide(tab, member = editableCollectionMember()) {
   if (tab) state.guideTab = tab;
+  state.activeGuideMember = safeMemberName(typeof member === "string" ? member : member?.name || editableCollectionMember());
   if (!state.guideTab) state.guideTab = "gundam";
   if (elements.guideTabs) {
     for (const button of elements.guideTabs.querySelectorAll("button[data-guide-tab]")) {
@@ -6420,6 +6489,53 @@ async function openGuide(tab) {
 }
 
 const GUIDE_FULL_COLOR_KEY = "gunpula-guide-full-color-v1";
+const GUIDE_TABS = ["gundam", "bbx", "parts"];
+
+function switchGuideTab(tab) {
+  if (!GUIDE_TABS.includes(tab) || tab === state.guideTab) return;
+  state.guideTab = tab;
+  if (elements.guideTabs) {
+    for (const button of elements.guideTabs.querySelectorAll("button[data-guide-tab]")) {
+      button.classList.toggle("is-active", button.dataset.guideTab === state.guideTab);
+    }
+  }
+  renderGuideActive();
+}
+
+function bindGuideSwipe() {
+  if (!elements.guideDialog || elements.guideDialog.dataset.swipeBound === "1") return;
+  elements.guideDialog.dataset.swipeBound = "1";
+  let startX = 0;
+  let startY = 0;
+  let startTime = 0;
+  elements.guideDialog.addEventListener(
+    "touchstart",
+    (event) => {
+      if (!elements.guideDialog.open || event.touches.length !== 1) return;
+      const touch = event.touches[0];
+      startX = touch.clientX;
+      startY = touch.clientY;
+      startTime = Date.now();
+    },
+    { passive: true },
+  );
+  elements.guideDialog.addEventListener(
+    "touchend",
+    (event) => {
+      if (!startTime || !elements.guideDialog.open) return;
+      const touch = event.changedTouches[0];
+      const dx = touch.clientX - startX;
+      const dy = touch.clientY - startY;
+      const elapsed = Date.now() - startTime;
+      startTime = 0;
+      if (elapsed > 900 || Math.abs(dx) < 64 || Math.abs(dx) < Math.abs(dy) * 1.35) return;
+      const index = GUIDE_TABS.indexOf(state.guideTab || "gundam");
+      const next = dx < 0 ? GUIDE_TABS[index + 1] : GUIDE_TABS[index - 1];
+      if (next) switchGuideTab(next);
+    },
+    { passive: true },
+  );
+}
 
 function loadGuideFullColor() {
   return localStorage.getItem(GUIDE_FULL_COLOR_KEY) === "1";
@@ -6440,6 +6556,7 @@ function toggleGuideFullColor() {
 }
 
 async function renderGuideActive() {
+  renderGuideUserChip();
   if (state.guideTab === "bbx") {
     renderBbxGuide(await ensureBbxData());
   } else if (state.guideTab === "parts") {
@@ -6450,8 +6567,20 @@ async function renderGuideActive() {
   applyGuideColorMode();
 }
 
+function renderGuideUserChip() {
+  if (!elements.guideUserChip) return;
+  const member = activeGuideMember();
+  applyAvatarTo(elements.guideUserAvatar, member, member?.name?.[0] || "@");
+  elements.guideUserName.textContent = member?.name || editableCollectionMember();
+  elements.guideUserChip.onclick = () => {
+    const target = activeGuideMember();
+    if (target) openMemberProfile(target);
+  };
+}
+
 function renderGuide(guide) {
-  const sets = guideCollectionSets();
+  const member = activeGuideMember();
+  const sets = guideCollectionSets(member);
   const statusByGroup = new Map(guide.groups.map((g) => [g.key, guideGroupStatus(g, sets)]));
   const litTotal = [...statusByGroup.values()].filter((s) => s !== "none").length;
   elements.guideSummary.textContent = t("guideComplete", { collected: litTotal, total: guide.groups.length });
@@ -6463,8 +6592,8 @@ function renderGuide(guide) {
   for (const sectionKey of sectionKeys) {
     const works = orderedWorks.filter((work) => (work.section || "unavailable") === sectionKey);
     if (!works.length) continue;
-    const sectionLit = works.reduce((sum, work) => sum + guideGroupsForWork(work).filter((g) => statusByGroup.get(g.key) !== "none").length, 0);
-    const sectionTotal = works.reduce((sum, work) => sum + guideGroupsForWork(work).length, 0);
+    const sectionLit = works.reduce((sum, work) => sum + guideGroupsForWork(work, member).filter((g) => statusByGroup.get(g.key) !== "none").length, 0);
+    const sectionTotal = works.reduce((sum, work) => sum + guideGroupsForWork(work, member).length, 0);
 
     const section = document.createElement("section");
     section.className = "guide-work";
@@ -6476,8 +6605,7 @@ function renderGuide(guide) {
     const grid = document.createElement("div");
     grid.className = "guide-series-grid";
     for (const work of works) {
-      const groups = guideGroupsForWork(work);
-      if (!groups.length) continue;
+      const groups = guideGroupsForWork(work, member);
       const lit = groups.filter((g) => statusByGroup.get(g.key) !== "none").length;
       const cell = document.createElement("button");
       cell.type = "button";
@@ -6498,7 +6626,7 @@ function renderGuide(guide) {
       const count = document.createElement("span");
       count.textContent = `${lit}/${groups.length}`;
       cell.append(art, label, count);
-      cell.addEventListener("click", () => openGuideWork(work));
+      cell.addEventListener("click", () => openGuideWork(work, member));
       grid.append(cell);
     }
     section.append(grid);
@@ -6515,12 +6643,12 @@ function guideSectionLabel(key) {
   return labels[key]?.[state.language] || labels[key]?.zh || key;
 }
 
-function guideGroupsForWork(work) {
+function guideGroupsForWork(work, member = activeGuideMember()) {
+  const sets = guideCollectionSets(member);
   return (state.guide?.groups || [])
     .filter((g) => g.work_id === work.work_id)
     .sort((a, b) => {
       const statusOrder = { owned: 2, wanted: 1, none: 0 };
-      const sets = guideCollectionSets();
       return (
         statusOrder[guideGroupStatus(b, sets)] - statusOrder[guideGroupStatus(a, sets)] ||
         guideGroupPreferenceScore(b) - guideGroupPreferenceScore(a) ||
@@ -6529,9 +6657,10 @@ function guideGroupsForWork(work) {
     });
 }
 
-function openGuideWork(work) {
-  const groups = guideGroupsForWork(work);
-  const sets = guideCollectionSets();
+function openGuideWork(work, member = activeGuideMember()) {
+  state.activeGuideMember = safeMemberName(typeof member === "string" ? member : member?.name || editableCollectionMember());
+  const groups = guideGroupsForWork(work, member);
+  const sets = guideCollectionSets(member);
   const lit = groups.filter((group) => guideGroupStatus(group, sets) !== "none").length;
   elements.guideUnitArt.innerHTML = "";
   if (work.image) {
@@ -6546,6 +6675,14 @@ function openGuideWork(work) {
   elements.guideUnitKits.innerHTML = "";
   const grid = document.createElement("div");
   grid.className = "guide-grid";
+  if (!groups.length) {
+    const empty = document.createElement("p");
+    empty.className = "settings-hint";
+    empty.textContent = t("guideNoUnits");
+    elements.guideUnitKits.append(empty);
+    openDialog(elements.guideUnitDialog);
+    return;
+  }
   for (const group of groups) {
     const status = guideGroupStatus(group, sets);
     const cell = document.createElement("button");
@@ -6567,7 +6704,7 @@ function openGuideWork(work) {
     cell.append(art, label);
     if (status === "owned") cell.append(badgeEl("✓", "guide-badge-owned"));
     else if (status === "wanted") cell.append(badgeEl("★", "guide-badge-wanted"));
-    cell.addEventListener("click", () => openGuideUnit(group, status));
+    cell.addEventListener("click", () => openGuideUnit(group, status, member));
     grid.append(cell);
   }
   elements.guideUnitKits.append(grid);
@@ -6583,7 +6720,9 @@ function badgeEl(text, className) {
 
 // Tapping a cell shows its merged variants and — the reverse link the user asked
 // for — the matching catalog kits, each with quick add-to-owned/wanted buttons.
-function openGuideUnit(group, status) {
+function openGuideUnit(group, status, member = activeGuideMember()) {
+  state.activeGuideMember = safeMemberName(typeof member === "string" ? member : member?.name || editableCollectionMember());
+  const isSelfGuide = state.activeGuideMember === editableCollectionMember();
   elements.guideUnitArt.innerHTML = "";
   const unitImg = document.createElement("img");
   unitImg.alt = group.name;
@@ -6604,7 +6743,7 @@ function openGuideUnit(group, status) {
   // together (or vice-versa), let the user override it. Splitting a merged cell breaks
   // every variant of that base name into its own cell; re-merging undoes it.
   const canSplit = group.split || new Set(group.variants).size > 1 || state.guideSplits?.has(group.merge_key);
-  if (canSplit) {
+  if (canSplit && isSelfGuide) {
     const toggle = document.createElement("button");
     toggle.type = "button";
     toggle.className = "guide-split-toggle";
@@ -6623,24 +6762,26 @@ function openGuideUnit(group, status) {
     elements.guideUnitVariants.append(toggle);
   }
   // Manual light-up: mark a cell collected by hand regardless of any matching kit.
-  const manualToggle = document.createElement("button");
-  manualToggle.type = "button";
-  const manuallyLit = guideGroupManuallyLit(group);
-  manualToggle.className = `guide-light-toggle${manuallyLit ? " is-active" : ""}`;
-  manualToggle.textContent = manuallyLit ? t("guideUnlight") : t("guideLight");
-  manualToggle.addEventListener("click", () => {
-    state.guideManualLit = state.guideManualLit || new Set();
-    const nowLit = !guideGroupManuallyLit(group);
-    for (const id of group.unit_ids) {
-      if (nowLit) state.guideManualLit.add(id);
-      else state.guideManualLit.delete(id);
-    }
-    saveGuideManualLit();
-    openGuideUnit(group, guideGroupStatus(group, guideCollectionSets()));
-    if (elements.guideDialog.open) renderGuide(state.guide);
-    renderUserGuideValue();
-  });
-  elements.guideUnitVariants.append(manualToggle);
+  if (isSelfGuide) {
+    const manualToggle = document.createElement("button");
+    manualToggle.type = "button";
+    const manuallyLit = guideGroupManuallyLit(group);
+    manualToggle.className = `guide-light-toggle${manuallyLit ? " is-active" : ""}`;
+    manualToggle.textContent = manuallyLit ? t("guideUnlight") : t("guideLight");
+    manualToggle.addEventListener("click", () => {
+      state.guideManualLit = state.guideManualLit || new Set();
+      const nowLit = !guideGroupManuallyLit(group);
+      for (const id of group.unit_ids) {
+        if (nowLit) state.guideManualLit.add(id);
+        else state.guideManualLit.delete(id);
+      }
+      saveGuideManualLit();
+      openGuideUnit(group, guideGroupStatus(group, guideCollectionSets(member)), member);
+      if (elements.guideDialog.open) renderGuide(state.guide);
+      renderUserGuideValue();
+    });
+    elements.guideUnitVariants.append(manualToggle);
+  }
 
   const kits = group.kit_ids.map(displayKitById).filter(Boolean);
   elements.guideUnitKits.innerHTML = "";
@@ -6651,14 +6792,15 @@ function openGuideUnit(group, status) {
     elements.guideUnitKits.append(empty);
   } else {
     for (const kit of kits.slice(0, 30)) {
-      elements.guideUnitKits.append(guideKitRow(kit, group, status));
+      elements.guideUnitKits.append(guideKitRow(kit, group, status, member));
     }
   }
   openDialog(elements.guideUnitDialog);
 }
 
-function guideKitRow(kit, group, groupStatus) {
-  const sets = guideCollectionSets();
+function guideKitRow(kit, group, groupStatus, member = activeGuideMember()) {
+  const sets = guideCollectionSets(member);
+  const isSelfGuide = safeMemberName(typeof member === "string" ? member : member?.name || editableCollectionMember()) === editableCollectionMember();
   const row = document.createElement("div");
   row.className = "guide-kit-row";
   const face = document.createElement("button");
@@ -6682,15 +6824,17 @@ function guideKitRow(kit, group, groupStatus) {
   actions.className = "guide-kit-actions";
   const owned = sets.owned.has(kit.kit_id);
   const wanted = sets.wanted.has(kit.kit_id);
-  actions.append(
-    guideAddButton(kit, "owned", owned, group, groupStatus),
-    guideAddButton(kit, "wanted", wanted, group, groupStatus),
-  );
+  if (isSelfGuide) {
+    actions.append(
+      guideAddButton(kit, "owned", owned, group, groupStatus, member),
+      guideAddButton(kit, "wanted", wanted, group, groupStatus, member),
+    );
+  }
   row.append(face, actions);
   return row;
 }
 
-function guideAddButton(kit, type, active, group, groupStatus) {
+function guideAddButton(kit, type, active, group, groupStatus, member = activeGuideMember()) {
   const button = document.createElement("button");
   button.type = "button";
   button.className = `guide-add-button is-${type}${active ? " is-active" : ""}`;
@@ -6699,7 +6843,7 @@ function guideAddButton(kit, type, active, group, groupStatus) {
   button.disabled = !canEditSharedData();
   button.addEventListener("click", () => {
     setKitCollectionStatus(kit.kit_id, type, !active);
-    openGuideUnit(group, guideGroupStatus({ ...group, kit_ids: group.kit_ids }, guideCollectionSets()));
+    openGuideUnit(group, guideGroupStatus({ ...group, kit_ids: group.kit_ids }, guideCollectionSets(member)), member);
     if (elements.guideDialog.open) renderGuide(state.guide);
     renderUserGuideValue();
   });
@@ -7403,14 +7547,8 @@ function memberGuideLitValue(memberName) {
   if (!state.guide?.groups?.length) {
     return "...";
   }
-  const items = state.collection.member_items?.[safeMemberName(memberName)] || {};
-  const owned = new Set();
-  const wanted = new Set();
-  for (const [kitId, entry] of Object.entries(items)) {
-    if (entry?.status === "owned") owned.add(kitId);
-    else if (entry?.status === "wanted") wanted.add(kitId);
-  }
-  const lit = state.guide.groups.filter((group) => group.kit_ids.some((kitId) => owned.has(kitId) || wanted.has(kitId))).length;
+  const sets = guideCollectionSets(memberName);
+  const lit = state.guide.groups.filter((group) => guideGroupStatus(group, sets) !== "none").length;
   return `${lit}/${state.guide.groups.length}`;
 }
 
@@ -7422,6 +7560,11 @@ function activeMemberProfile() {
   const key = state.activeMemberProfile;
   if (!key) return currentMember();
   return (state.sync.workspace?.members || []).find((member) => safeMemberName(member.name) === key) || currentMember();
+}
+
+function activeGuideMember() {
+  const key = state.activeGuideMember || editableCollectionMember();
+  return (state.sync.workspace?.members || []).find((member) => safeMemberName(member.name) === key) || currentMember() || { name: key };
 }
 
 function openMemberActionSheet() {
@@ -7463,10 +7606,12 @@ function openUserPanel(panel) {
 
 function openUserPanelDialog(panel) {
   if (!elements.userPanelDialog || !elements.userPanelBody) return;
-  elements.userPanelTitle.textContent = panel === "friends" ? t("workspaceFriends") : t("myFavorites");
+  elements.userPanelTitle.textContent = panel === "friends" ? t("workspaceFriends") : panel === "guideWorks" ? t("memberGuideManage") : t("myFavorites");
   elements.userPanelBody.innerHTML = "";
   if (panel === "friends") {
     renderFriendsPanel(elements.userPanelBody);
+  } else if (panel === "guideWorks") {
+    renderGuideWorksPanel(elements.userPanelBody);
   } else {
     renderFavoritesPanel(elements.userPanelBody);
   }
@@ -7550,6 +7695,120 @@ function renderFriendsPanel(container) {
   }
 }
 
+function guideWorkProgress(work, member = activeGuideMember()) {
+  const sets = guideCollectionSets(member);
+  const groups = guideGroupsForWork(work, member);
+  const lit = groups.filter((group) => guideGroupStatus(group, sets) !== "none").length;
+  return { lit, total: groups.length };
+}
+
+function guideWorksForMember(member) {
+  const guide = state.guide;
+  if (!guide?.works?.length) return [];
+  const prefs = memberPreferences(member);
+  const selected = prefs.guide_works
+    .map((id) => guide.works.find((work) => Number(work.work_id) === Number(id)))
+    .filter(Boolean);
+  if (selected.length) return selected;
+  const favoriteLabels = new Set(prefs.series.map((key) => favoriteSeriesLabel(key).toLowerCase()));
+  const scored = guide.works.map((work) => {
+    const progress = guideWorkProgress(work, member);
+    const name = String(work.name || "").toLowerCase();
+    const favorite = [...favoriteLabels].some((label) => label && name.includes(label.toLowerCase()));
+    return { work, score: (favorite ? 1000 : 0) + progress.lit * 10 + progress.total };
+  });
+  return scored.sort((a, b) => b.score - a.score || Number(a.work.work_id) - Number(b.work.work_id)).slice(0, 6).map((entry) => entry.work);
+}
+
+function renderMemberGuideSeries(member) {
+  if (!elements.memberGuideSeries) return;
+  elements.memberGuideSeries.innerHTML = "";
+  const isSelf = Boolean(member?.is_self);
+  if (elements.memberGuideManage) {
+    elements.memberGuideManage.hidden = !isSelf;
+    elements.memberGuideManage.onclick = () => openUserPanelDialog("guideWorks");
+  }
+  if (!state.guide) {
+    const loading = document.createElement("p");
+    loading.className = "settings-hint";
+    loading.textContent = "...";
+    elements.memberGuideSeries.append(loading);
+    return;
+  }
+  const works = guideWorksForMember(member);
+  if (!works.length) {
+    const empty = document.createElement("p");
+    empty.className = "settings-hint";
+    empty.textContent = t("guideNoDisplayWorks");
+    elements.memberGuideSeries.append(empty);
+    return;
+  }
+  for (const work of works) {
+    const progress = guideWorkProgress(work, member);
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = `member-guide-card${progress.lit ? " is-lit" : ""}`;
+    const art = document.createElement("span");
+    art.className = "member-guide-art";
+    if (work.image) {
+      const img = document.createElement("img");
+      img.decoding = "async";
+      img.alt = work.name;
+      setImageFallbackChain(img, [work.image], () => art.classList.add("is-missing"));
+      art.append(img);
+    } else {
+      art.classList.add("is-missing");
+    }
+    const text = document.createElement("span");
+    text.className = "member-guide-text";
+    text.innerHTML = `<strong>${escapeHtml(work.name)}</strong><span>${progress.lit}/${progress.total}</span>`;
+    card.append(art, text);
+    card.addEventListener("click", () => openGuideWork(work, member));
+    elements.memberGuideSeries.append(card);
+  }
+}
+
+function renderGuideWorksPanel(container) {
+  if (!state.guide) {
+    const hint = document.createElement("p");
+    hint.className = "settings-hint";
+    hint.textContent = "...";
+    container.append(hint);
+    ensureGuideData().then(() => {
+      container.innerHTML = "";
+      renderGuideWorksPanel(container);
+    }).catch(() => {});
+    return;
+  }
+  const member = currentMember();
+  const prefs = memberPreferences(member);
+  const selected = new Set(prefs.guide_works.map(Number));
+  const hint = document.createElement("p");
+  hint.className = "settings-hint";
+  hint.textContent = t("guideWorksHint");
+  const grid = document.createElement("div");
+  grid.className = "guide-work-picker";
+  for (const work of state.guide.works) {
+    const progress = guideWorkProgress(work, member);
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = `guide-work-pick${selected.has(Number(work.work_id)) ? " is-active" : ""}`;
+    chip.innerHTML = `<strong>${escapeHtml(work.name)}</strong><span>${progress.lit}/${progress.total}</span>`;
+    chip.addEventListener("click", async () => {
+      const id = Number(work.work_id);
+      if (selected.has(id)) selected.delete(id);
+      else selected.add(id);
+      const nextPrefs = { ...memberPreferences(member), guide_works: [...selected] };
+      member.preferences = nextPrefs;
+      chip.classList.toggle("is-active", selected.has(id));
+      await saveMemberProfileFields({ preferences: nextPrefs });
+      if (elements.memberDialog?.open) renderMemberGuideSeries(currentMember());
+    });
+    grid.append(chip);
+  }
+  container.replaceChildren(hint, grid);
+}
+
 function openMemberProfile(member) {
   if (!elements.memberDialog) {
     return;
@@ -7602,6 +7861,7 @@ function openMemberProfile(member) {
     chip.textContent = label;
     elements.memberDialogFavorites.append(chip);
   }
+  renderMemberGuideSeries(member);
 
   const owned = memberCollectionKits(member.name, "owned");
   const wanted = memberCollectionKits(member.name, "wanted");

@@ -630,6 +630,10 @@
       <div class="guide-shell">
         <div class="guide-head">
           <button class="dialog-close guide-close" id="guideClose" type="button" aria-label="关闭" data-i18n-aria="closeSettings">×</button>
+          <button class="guide-user-chip" id="guideUserChip" type="button">
+            <span class="account-avatar guide-user-avatar" id="guideUserAvatar">@</span>
+            <span id="guideUserName"></span>
+          </button>
           <h2 id="guideTitle" data-i18n="pictureBook">图鉴</h2>
           <div class="segmented-control guide-tabs" id="guideTabs">
             <button class="segment-button is-active" type="button" data-guide-tab="gundam" data-i18n="guideTabGundam">高达</button>
@@ -711,6 +715,13 @@
         <input id="profileBackgroundInput" type="file" accept="image/*" hidden />
         <div class="favorite-chips is-static" id="memberDialogFavorites"></div>
         <div class="member-stats" id="memberDialogStats"></div>
+        <section class="member-guide-showcase">
+          <div class="member-section-head">
+            <h3 id="memberGuideTitle" data-i18n="pictureBook">图鉴</h3>
+            <button id="memberGuideManage" type="button" data-i18n="memberGuideManage">选择展示</button>
+          </div>
+          <div class="member-guide-grid" id="memberGuideSeries"></div>
+        </section>
         <section class="member-collection">
           <h3 data-i18n="ownedList">已购买</h3>
           <div class="collection-strip" id="memberDialogOwned"></div>
