@@ -5,14 +5,18 @@ name: Update market prices
 # typically finishes in 2-4 minutes.
 
 on:
+  schedule:
+    - cron: "10 20 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
 
-# Shares the refresh workflow's group so the two can never push concurrently.
+# Independent from catalog refresh: marketplace slowness must never block
+# official product updates. This workflow rebases before push if catalog data
+# changed while prices were being fetched.
 concurrency:
-  group: refresh-official-catalog
+  group: market-prices
   cancel-in-progress: false
 
 jobs:
@@ -27,6 +31,7 @@ jobs:
           node-version: 22
 
       - name: Fetch wishlist market prices
+        timeout-minutes: 8
         env:
           NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
           NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
@@ -37,6 +42,7 @@ jobs:
         run: npm run market:watch
 
       - name: Build market/search assets
+        timeout-minutes: 4
         run: npm run market
 
       - name: Validate catalog

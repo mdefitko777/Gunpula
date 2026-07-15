@@ -11,6 +11,7 @@ import {
   signOut,
   verifyEmailCode,
 } from "./auth.js";
+import { isNativeShell, loadInitialKitsDoc as loadInitialCatalogSlice, loadJson, loadOptionalJson } from "./catalog-loader.js";
 import { closeDialog, openDialog } from "./dialogs.js";
 import { appendImageWithFallback as appendImageUrlsWithFallback, setImageFallbackChain as chainImageFallbacks } from "./image-utils.js";
 import {
@@ -24,7 +25,14 @@ import {
   timestampMs as storeTimestampMs,
 } from "./collection-store.js";
 import { escapeHtml as escapeHtmlValue } from "./dom-utils.js";
+import { ingestSearchIndex as ingestSearchIndexState } from "./search-index-store.js";
 import { getJson, getString, removeValue, setJson, setString } from "./storage.js";
+import {
+  loadSavedViewState as readSavedViewState,
+  normalizeFilterStateValue as normalizeViewFilterStateValue,
+  preferredLanguage as readPreferredLanguage,
+  viewStateUrl as buildViewStateUrl,
+} from "./view-state.js";
 
 const LANGUAGE_KEY = "gunpula-catalog-language-v1";
 const FRANCHISE_KEY = "gunpula-catalog-franchise-v1";
@@ -986,41 +994,6 @@ function upgradeLegacyFilterDom() {
   }
 }
 
-// Inside the Capacitor shell the bundled ../data snapshot is frozen at build
-// time, so prefer the live GitHub Pages copy and fall back to the bundle offline.
-const REMOTE_DATA_BASE = "https://mdefitko777.github.io/Gunpula/";
-
-function isNativeShell() {
-  return Boolean(window.Capacitor?.isNativePlatform?.());
-}
-
-async function fetchJson(path) {
-  const response = await fetch(path);
-  if (!response.ok) {
-    throw new Error(`Failed to load ${path}`);
-  }
-  return response.json();
-}
-
-async function loadJson(path) {
-  if (isNativeShell() && path.startsWith("../")) {
-    try {
-      return await fetchJson(`${REMOTE_DATA_BASE}${path.slice(3)}`);
-    } catch {
-      // Offline or Pages unreachable: use the bundled snapshot below.
-    }
-  }
-  return fetchJson(path);
-}
-
-async function loadOptionalJson(path) {
-  try {
-    return await loadJson(path);
-  } catch {
-    return null;
-  }
-}
-
 // The APK shell stamps its version into the user agent (GunpulaShell/N) and
 // the live site publishes app/shell-version.json. When the published shell is
 // newer than the installed one, show a one-tap download banner — Android
@@ -1060,17 +1033,7 @@ let catalogCompletion = null;
 const searchIndexPromises = new Map();
 
 async function loadInitialKitsDoc() {
-  const manifest = await loadOptionalJson("../data/split/manifest.json");
-  const franchises = Object.keys(manifest?.franchises || {});
-  if (!franchises.length) {
-    return { doc: await loadJson("../data/kits.json"), pendingFranchises: [] };
-  }
-  const first = franchises.includes(state.franchise) ? state.franchise : franchises.includes("gundam") ? "gundam" : franchises[0];
-  const doc = await loadOptionalJson(`../data/split/kits-${first}.json`);
-  if (!doc?.kits) {
-    return { doc: await loadJson("../data/kits.json"), pendingFranchises: [] };
-  }
-  return { doc, pendingFranchises: franchises.filter((franchise) => franchise !== first) };
+  return loadInitialCatalogSlice(state.franchise);
 }
 
 function completeCatalogInBackground(pendingFranchises) {
@@ -1094,20 +1057,7 @@ function completeCatalogInBackground(pendingFranchises) {
 }
 
 function ingestSearchIndex(doc, franchise = null) {
-  const records = doc?.records || [];
-  if (!state.searchIndex) {
-    state.searchIndex = { schema_version: 1, updated_at: doc?.updated_at || null, records: [] };
-  }
-  const byId = new Map((state.searchIndex.records || []).map((record) => [record.kit_id, record]));
-  for (const record of records) {
-    byId.set(record.kit_id, record);
-    state.searchIndexByKit.set(record.kit_id, record);
-  }
-  state.searchIndex.records = [...byId.values()];
-  state.searchIndex.updated_at = doc?.updated_at || state.searchIndex.updated_at;
-  if (franchise) {
-    state.loadedSearchFranchises.add(franchise);
-  }
+  ingestSearchIndexState(state, doc, franchise);
 }
 
 function ensureSearchIndex(franchise = state.franchise) {
@@ -1142,13 +1092,7 @@ function ensureSearchIndex(franchise = state.franchise) {
 }
 
 function normalizeFilterStateValue(value) {
-  const values = Array.isArray(value)
-    ? value
-    : String(value || "all")
-        .split(",")
-        .map((item) => item.trim());
-  const filtered = [...new Set(values.filter((item) => item && item !== "all"))];
-  return filtered.length ? filtered.join(",") : "all";
+  return normalizeViewFilterStateValue(value);
 }
 
 function selectedFilterValues(key) {
@@ -1191,37 +1135,11 @@ function pruneFilterValues(key, allowedValues) {
 }
 
 function preferredLanguage() {
-  const language = getString(LANGUAGE_KEY);
-  return LANGUAGES.some((item) => item.code === language) ? language : null;
+  return readPreferredLanguage(LANGUAGE_KEY, LANGUAGES);
 }
 
 function loadSavedViewState() {
-  const parsed = getJson(VIEW_STATE_KEY, {});
-  const stored = parsed && typeof parsed === "object" ? parsed : {};
-
-  const storedLanguage = preferredLanguage() || stored.language;
-  const hash = window.location.hash.startsWith("#") ? window.location.hash.slice(1) : "";
-  const params = new URLSearchParams(hash);
-  if (!hash) {
-    return { ...stored, language: storedLanguage };
-  }
-
-  const fromHash = {};
-  fromHash.language = params.get("lang") || params.get("language") || storedLanguage || stored.language;
-  fromHash.franchise = params.get("franchise") || stored.franchise;
-  fromHash.series = params.get("series") || "all";
-  fromHash.grade = params.get("grade") || "all";
-  fromHash.itemType = params.get("type") || "all";
-  fromHash.releaseYear = params.get("year") || "all";
-  fromHash.limited = params.get("limited") || "all";
-  fromHash.priceMin = params.get("min") || "";
-  fromHash.priceMax = params.get("max") || "";
-  fromHash.query = params.get("q") || params.get("query") || "";
-  fromHash.kit = params.has("kit") ? params.get("kit") : null;
-  fromHash.view = params.get("view") || "catalog";
-  fromHash.modal = params.get("modal") || null;
-
-  return fromHash;
+  return readSavedViewState({ viewStateKey: VIEW_STATE_KEY, languageKey: LANGUAGE_KEY, languages: LANGUAGES });
 }
 
 function currentViewState() {
@@ -1243,25 +1161,7 @@ function currentViewState() {
 }
 
 function viewStateUrl(viewState) {
-  localStorage.setItem(VIEW_STATE_KEY, JSON.stringify(viewState));
-
-  const params = new URLSearchParams();
-  if (viewState.language) params.set("lang", viewState.language);
-  if (viewState.franchise) params.set("franchise", viewState.franchise);
-  if (viewState.series && viewState.series !== "all") params.set("series", viewState.series);
-  if (viewState.grade && viewState.grade !== "all") params.set("grade", viewState.grade);
-  if (viewState.itemType && viewState.itemType !== "all") params.set("type", viewState.itemType);
-  if (viewState.releaseYear && viewState.releaseYear !== "all") params.set("year", viewState.releaseYear);
-  if (viewState.limited && viewState.limited !== "all") params.set("limited", viewState.limited);
-  if (viewState.priceMin) params.set("min", viewState.priceMin);
-  if (viewState.priceMax) params.set("max", viewState.priceMax);
-  if (viewState.query) params.set("q", viewState.query);
-  if (viewState.kit) params.set("kit", viewState.kit);
-  if (viewState.view && viewState.view !== "catalog") params.set("view", viewState.view);
-  if (viewState.modal) params.set("modal", viewState.modal);
-
-  const nextHash = params.toString();
-  return `${window.location.pathname}${window.location.search}${nextHash ? `#${nextHash}` : ""}`;
+  return buildViewStateUrl(viewState, VIEW_STATE_KEY);
 }
 
 function persistViewState(options = {}) {

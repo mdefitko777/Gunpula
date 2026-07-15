@@ -30,6 +30,9 @@ jobs:
       - name: App module syntax check
         run: node --experimental-vm-modules scripts/check_app_syntax.mjs
 
+      - name: Unit checks
+        run: npm run test:unit
+
       - name: Script and service worker syntax check
         run: |
           node --check sw.js

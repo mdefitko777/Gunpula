@@ -40,20 +40,7 @@ jobs:
       - name: Build update feed
         run: npm run updates -- --before="$RUNNER_TEMP/kits-before.json"
 
-      - name: Fetch wishlist market prices
-        # Best-effort: querying external marketplaces must never fail the daily
-        # catalog refresh. Missing secrets simply skip that source.
-        continue-on-error: true
-        env:
-          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
-          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
-          SYNC_WORKSPACE_ID: ${{ secrets.SYNC_WORKSPACE_ID }}
-          SYNC_WORKSPACE_SECRET: ${{ secrets.SYNC_WORKSPACE_SECRET }}
-        run: npm run market:watch
-
-      - name: Build market/search assets
+      - name: Build search assets
         run: npm run market
 
       - name: Split catalog into per-franchise app files

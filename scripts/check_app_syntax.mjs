@@ -11,11 +11,14 @@ const files = [
   "app/i18n.js",
   "app/auth.js",
   "app/sync-config.js",
+  "app/catalog-loader.js",
   "app/storage.js",
   "app/dialogs.js",
   "app/image-utils.js",
   "app/dom-utils.js",
   "app/collection-store.js",
+  "app/search-index-store.js",
+  "app/view-state.js",
 ];
 
 let failed = false;
