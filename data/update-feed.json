@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-07-15",
-  "generated_at": "2026-07-14T20:13:13.516Z",
+  "generated_at": "2026-07-15T10:35:22.320Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,35 +16,256 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-07-14T20:13:12.865Z",
+    "generated_at": "2026-07-15T10:35:21.609Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-07-15",
-      "generated_at": "2026-07-14T20:13:13.516Z",
+      "generated_at": "2026-07-15T10:35:22.320Z",
       "total_before": 4877,
-      "total_after": 4877,
-      "added_count": 7,
+      "total_after": 4881,
+      "added_count": 17,
       "changed_count": 23,
-      "removed_count": 7,
-      "watched_count": 0,
+      "removed_count": 13,
+      "watched_count": 2,
       "premium_bandai_count": 0,
-      "bbx_count": 0,
+      "bbx_count": 4,
       "franchise_counts": {
-        "pokemon": 30
+        "beyblade": 4,
+        "pokemon": 36
       },
       "reason_counts": {
-        "new": 7,
+        "new": 17,
         "image": 23,
-        "removed": 7
+        "removed": 13
       },
       "interest_tags": [
+        "beyblade",
+        "bbx",
+        "bbx_ux",
+        "bbx_limited",
+        "beyblade_limited",
+        "00",
+        "bbx_bx",
+        "beyblade_ux",
         "pokemon"
       ],
-      "watch_tags": [],
+      "watch_tags": [
+        "00"
+      ],
       "added": [
+        {
+          "kit_id": "beyblade-x-ux00-gv",
+          "change_type": "added",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Starter",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "UX-00 【イベント限定】 グローリーワルキューレLF メタルコート:ブルー",
+            "zh": "UX-00 【イベント限定】 グローリーワルキューレLF メタルコート:ブルー",
+            "ko": "UX-00 【イベント한정】 グローリーワルキューレLF メタルコート:ブルー",
+            "en": "UX-00 [イベントLimited] グローリーワルキューレLF メタルコート:ブルー"
+          },
+          "release_date": "2026-08-29",
+          "price_jpy": 2800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_ux",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/ux00-gv.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-bx00-ds-v2",
+          "change_type": "added",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Booster",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "BX-00 【B4ストア限定】 ドランソード3-60F バージョン2.0",
+            "zh": "BX-00 【B4ストア限定】 ドランソード3-60F バージョン2.0",
+            "ko": "BX-00 【B4ストア한정】 ドランソード3-60F バージョン2.0",
+            "en": "BX-00 [B4ストアLimited] ドランソード3-60F バージョン2.0"
+          },
+          "release_date": "2026-08-08",
+          "price_jpy": 1600,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_bx",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/bx00-ds_v2.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-bx57",
+          "change_type": "added",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Tool",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "BX-57 3on3デッキケース ブラックVer.",
+            "zh": "BX-57 3on3デッキケース ブラックVer.",
+            "ko": "BX-57 3on3デッキケース ブラックVer.",
+            "en": "BX-57 3on3デッキケース ブラックVer."
+          },
+          "release_date": "2026-08-08",
+          "price_jpy": 1100,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_bx",
+            "bbx_limited",
+            "beyblade_limited"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/bx57.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-ux21",
+          "change_type": "added",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Set",
+          "series_key": "beyblade_ux",
+          "series_labels": {
+            "zh": "UX",
+            "en": "UX",
+            "ja": "UX",
+            "ko": "UX"
+          },
+          "names": {
+            "ja": "UX-21 ヘルズネザーデッキセット",
+            "zh": "UX-21 ヘルズネザーデッキ套装",
+            "ko": "UX-21 ヘルズネザーデッキ세트",
+            "en": "UX-21 ヘルズネザーデッキSet"
+          },
+          "release_date": "2026-08-08",
+          "price_jpy": 4500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_ux",
+            "beyblade_ux"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/ux21.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329385907",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "119 ぬいぐるみ ポケモン fit アズマオウ",
+            "zh": "119 ぬいぐるみ 宝可梦 fit アズマオウ",
+            "ko": "119 ぬいぐるみ 포켓몬 fit アズマオウ",
+            "en": "119 ぬいぐるみ Pokemon fit アズマオウ"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329385907.html"
+          ]
+        },
         {
           "kit_id": "pokemon-center-4521329356563",
           "change_type": "added",
@@ -80,6 +301,80 @@
           ],
           "source_urls": [
             "https://www.pokemoncenter-online.com/4521329356563.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329341354",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "487 ぬいぐるみ Pok&eacute;mon fit ギラティナ (オリジンフォルム)",
+            "zh": "487 ぬいぐるみ Pok&eacute;mon fit ギラティナ (オリジンフォルム)",
+            "ko": "487 ぬいぐるみ Pok&eacute;mon fit ギラティナ (オリジンフォルム)",
+            "en": "487 ぬいぐるみ Pok&eacute;mon fit ギラティナ (オリジンフォルム)"
+          },
+          "release_date": null,
+          "price_jpy": 1650,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329341354.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329341422",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "493 ぬいぐるみ Pok&eacute;mon fit アルセウス",
+            "zh": "493 ぬいぐるみ Pok&eacute;mon fit アルセウス",
+            "ko": "493 ぬいぐるみ Pok&eacute;mon fit アルセウス",
+            "en": "493 ぬいぐるみ Pok&eacute;mon fit アルセウス"
+          },
+          "release_date": null,
+          "price_jpy": 1650,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329341422.html"
           ]
         },
         {
@@ -120,6 +415,80 @@
           ]
         },
         {
+          "kit_id": "pokemon-center-4521329360010",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "88 ぬいぐるみ Pok&eacute;mon fit ベトベター",
+            "zh": "88 ぬいぐるみ Pok&eacute;mon fit ベトベター",
+            "ko": "88 ぬいぐるみ Pok&eacute;mon fit ベトベター",
+            "en": "88 ぬいぐるみ Pok&eacute;mon fit ベトベター"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329360010.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4904790287824",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "Mocchi-Mocchi-Style／フェイス型マスコット／ピカチュウ（スマイル）",
+            "zh": "Mocchi-Mocchi-Style／フェイス型マスコット／ピカチュウ（スマイル）",
+            "ko": "Mocchi-Mocchi-Style／フェイス型マスコット／ピカチュウ（スマイル）",
+            "en": "Mocchi-Mocchi-Style／フェイス型マスコット／ピカチュウ (スマイル)"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4904790287824.html"
+          ]
+        },
+        {
           "kit_id": "pokemon-center-4521329437002",
           "change_type": "added",
           "franchise": "pokemon",
@@ -154,6 +523,43 @@
           ],
           "source_urls": [
             "https://www.pokemoncenter-online.com/4521329437002.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4972825234228",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "Pokemon Center Goods",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ナノブロック ライコウ デラックスエディション",
+            "zh": "ナノブロック ライコウ デラックスエディション",
+            "ko": "ナノブロック ライコウ デラックスエディション",
+            "en": "ナノブロック ライコウ デラックスエディション"
+          },
+          "release_date": null,
+          "price_jpy": 6380,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4972825234228.html"
           ]
         },
         {
@@ -1183,6 +1589,117 @@
       ],
       "removed": [
         {
+          "kit_id": "pokemon-center-4521329334028",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "1 ぬいぐるみ Pok&eacute;mon fit フシギダネ",
+            "zh": "1 ぬいぐるみ Pok&eacute;mon fit フシギダネ",
+            "ko": "1 ぬいぐるみ Pok&eacute;mon fit フシギダネ",
+            "en": "1 ぬいぐるみ Pok&eacute;mon fit フシギダネ"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329334028.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329356563",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "173 ぬいぐるみ Pok&eacute;mon fit ピィ",
+            "zh": "173 ぬいぐるみ Pok&eacute;mon fit ピィ",
+            "ko": "173 ぬいぐるみ Pok&eacute;mon fit ピィ",
+            "en": "173 ぬいぐるみ Pok&eacute;mon fit ピィ"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329356563.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329340401",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "2 ぬいぐるみ Pok&eacute;mon fit フシギソウ",
+            "zh": "2 ぬいぐるみ Pok&eacute;mon fit フシギソウ",
+            "ko": "2 ぬいぐるみ Pok&eacute;mon fit フシギソウ",
+            "en": "2 ぬいぐるみ Pok&eacute;mon fit フシギソウ"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329340401.html"
+          ]
+        },
+        {
           "kit_id": "pokemon-center-4521329340685",
           "change_type": "removed",
           "franchise": "pokemon",
@@ -1257,6 +1774,43 @@
           ]
         },
         {
+          "kit_id": "pokemon-center-4904790154638",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケピース／ボールチェーンマスコット／ミミッキュ",
+            "zh": "ポケピース／铁球チェーンマスコット／ミミッキュ",
+            "ko": "ポケピース／볼チェーンマスコット／ミミッキュ",
+            "en": "ポケピース／Ballチェーンマスコット／ミミッキュ"
+          },
+          "release_date": null,
+          "price_jpy": 1980,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4904790154638.html"
+          ]
+        },
+        {
           "kit_id": "pokemon-center-4573102693655",
           "change_type": "removed",
           "franchise": "pokemon",
@@ -1291,6 +1845,43 @@
           ],
           "source_urls": [
             "https://www.pokemoncenter-online.com/4573102693655.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329410005",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "マスコット ピカチュウ ポケモンセンターヒロシマR レモン",
+            "zh": "マスコット ピカチュウ 宝可梦センターヒロシマR レモン",
+            "ko": "マスコット ピカチュウ 포켓몬センターヒロシマR レモン",
+            "en": "マスコット ピカチュウ PokemonセンターヒロシマR レモン"
+          },
+          "release_date": null,
+          "price_jpy": 1650,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329410005.html"
           ]
         },
         {
@@ -1405,6 +1996,43 @@
           ]
         },
         {
+          "kit_id": "pokemon-center-4904810996590",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "Pokemon Center Goods",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "モンコレ 旅立ちの3匹セット シンオウ地方",
+            "zh": "モンコレ 旅立ちの3匹套装 シンオウ地方",
+            "ko": "モンコレ 旅立ちの3匹세트 シンオウ地方",
+            "en": "モンコレ 旅立ちの3匹Set シンオウ地方"
+          },
+          "release_date": null,
+          "price_jpy": 2145,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4904810996590.html"
+          ]
+        },
+        {
           "kit_id": "pokemon-center-4904810996583",
           "change_type": "removed",
           "franchise": "pokemon",
@@ -1442,7 +2070,98 @@
           ]
         }
       ],
-      "watched": []
+      "watched": [
+        {
+          "kit_id": "beyblade-x-ux00-gv",
+          "change_type": "added",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Starter",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "UX-00 【イベント限定】 グローリーワルキューレLF メタルコート:ブルー",
+            "zh": "UX-00 【イベント限定】 グローリーワルキューレLF メタルコート:ブルー",
+            "ko": "UX-00 【イベント한정】 グローリーワルキューレLF メタルコート:ブルー",
+            "en": "UX-00 [イベントLimited] グローリーワルキューレLF メタルコート:ブルー"
+          },
+          "release_date": "2026-08-29",
+          "price_jpy": 2800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_ux",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/ux00-gv.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-bx00-ds-v2",
+          "change_type": "added",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Booster",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "BX-00 【B4ストア限定】 ドランソード3-60F バージョン2.0",
+            "zh": "BX-00 【B4ストア限定】 ドランソード3-60F バージョン2.0",
+            "ko": "BX-00 【B4ストア한정】 ドランソード3-60F バージョン2.0",
+            "en": "BX-00 [B4ストアLimited] ドランソード3-60F バージョン2.0"
+          },
+          "release_date": "2026-08-08",
+          "price_jpy": 1600,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_bx",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/bx00-ds_v2.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        }
+      ]
     },
     {
       "date": "2026-07-14",

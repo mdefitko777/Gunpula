@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-07-14T20:14:29.684Z",
+  "updated_at": "2026-07-15T10:36:33.314Z",
   "sources": [
     {
       "id": "naver_shop",
@@ -161,7 +161,7 @@
     "provider": "Frankfurter",
     "provider_url": "https://frankfurter.dev/",
     "date": "2026-07-14",
-    "fetched_at": "2026-07-14T20:14:29.684Z",
+    "fetched_at": "2026-07-15T10:36:33.314Z",
     "rates_to_krw": {
       "KRW": 1,
       "JPY": 9.219015188368196,
@@ -172,13 +172,13 @@
     "fetch_status": "ok"
   },
   "summary": {
-    "updated_at": "2026-07-14T20:14:29.684Z",
+    "updated_at": "2026-07-15T10:36:33.314Z",
     "sources_total": 10,
     "api_ready": 0,
     "manual_ready": 7,
-    "listing_samples": 33,
+    "listing_samples": 34,
     "priced_kits": 9,
-    "keyword_records": 4877,
+    "keyword_records": 4881,
     "exchange_status": "ok",
     "exchange_date": "2026-07-14",
     "image_files": 1869,
@@ -187,8 +187,8 @@
   "source_stats": [
     {
       "source": "naver_shop",
-      "samples": 25,
-      "matched": 25
+      "samples": 26,
+      "matched": 26
     },
     {
       "source": "amazon",
@@ -245,12 +245,29 @@
       "url": "https://search.shopping.naver.com/catalog/58223308629",
       "condition": "unknown",
       "status": "active",
-      "price": 36990,
+      "price": 37990,
       "shipping_price": 0,
       "currency": "KRW",
-      "price_krw": 36990,
-      "conservative_krw": 36990,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "price_krw": 37990,
+      "conservative_krw": 37990,
+      "captured_at": "2026-07-15T10:35:22.494Z",
+      "confidence": "auto",
+      "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 BX-36\"."
+    },
+    {
+      "id": "naver_shop:beyblade-x-bx36:aHR0cHM6Ly9saW",
+      "kit_id": "beyblade-x-bx36",
+      "source": "naver_shop",
+      "title": "베이블레이드X BX-36 랜덤 부스터 웨일 웨이브 셀렉트 1개",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9647957295&ctag=9647957295&lptag=I28834446226&itemId=28834446226&vendorItemId=95768830475&spec=10305199",
+      "condition": "unknown",
+      "status": "active",
+      "price": 53480,
+      "shipping_price": 0,
+      "currency": "KRW",
+      "price_krw": 53480,
+      "conservative_krw": 53480,
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 BX-36\"."
     },
@@ -267,24 +284,7 @@
       "currency": "KRW",
       "price_krw": 48500,
       "conservative_krw": 48500,
-      "captured_at": "2026-07-14T20:13:13.672Z",
-      "confidence": "auto",
-      "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 BX-36\"."
-    },
-    {
-      "id": "naver_shop:beyblade-x-bx36:aHR0cHM6Ly9saW",
-      "kit_id": "beyblade-x-bx36",
-      "source": "naver_shop",
-      "title": "베이블레이드X BX-36 랜덤부스터 고래웨이브 팽이 5개 세트 부스터 크림슨 4-70TP",
-      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8832998723&ctag=8832998723&lptag=I25738729321&itemId=25738729321&vendorItemId=92727185845&spec=10305199",
-      "condition": "unknown",
-      "status": "active",
-      "price": 26000,
-      "shipping_price": 0,
-      "currency": "KRW",
-      "price_krw": 26000,
-      "conservative_krw": 26000,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 BX-36\"."
     },
@@ -301,7 +301,24 @@
       "currency": "KRW",
       "price_krw": 24000,
       "conservative_krw": 24000,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
+      "confidence": "auto",
+      "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 CX-17\"."
+    },
+    {
+      "id": "naver_shop:beyblade-x-cx17:aHR0cHM6Ly9zZW",
+      "kit_id": "beyblade-x-cx17",
+      "source": "naver_shop",
+      "title": "타카라토미 베이블레이드 X CX-17 랜덤 부스터 Vol.10",
+      "url": "https://search.shopping.naver.com/catalog/60325235920",
+      "condition": "unknown",
+      "status": "active",
+      "price": 130140,
+      "shipping_price": 0,
+      "currency": "KRW",
+      "price_krw": 130140,
+      "conservative_krw": 130140,
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 CX-17\"."
     },
@@ -318,24 +335,7 @@
       "currency": "KRW",
       "price_krw": 66000,
       "conservative_krw": 66000,
-      "captured_at": "2026-07-14T20:13:13.672Z",
-      "confidence": "auto",
-      "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 CX-17\"."
-    },
-    {
-      "id": "naver_shop:beyblade-x-cx17:aHR0cHM6Ly9zZW",
-      "kit_id": "beyblade-x-cx17",
-      "source": "naver_shop",
-      "title": "베이블레이드X CX-17 랜덤 부스터 Vol.10",
-      "url": "https://search.shopping.naver.com/catalog/60056199889",
-      "condition": "unknown",
-      "status": "active",
-      "price": 66000,
-      "shipping_price": 0,
-      "currency": "KRW",
-      "price_krw": 66000,
-      "conservative_krw": 66000,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 CX-17\"."
     },
@@ -352,7 +352,7 @@
       "currency": "KRW",
       "price_krw": 47900,
       "conservative_krw": 47900,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 CX-18\"."
     },
@@ -369,24 +369,24 @@
       "currency": "KRW",
       "price_krw": 65560,
       "conservative_krw": 65560,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 CX-18\"."
     },
     {
-      "id": "naver_shop:beyblade-x-cx18:aHR0cHM6Ly93d3",
+      "id": "naver_shop:beyblade-x-cx18:aHR0cHM6Ly9saW",
       "kit_id": "beyblade-x-cx18",
       "source": "naver_shop",
-      "title": "재고 있음 오리지널 CX-18 베이블레이드 X CX18 랜덤 팩 배틀 베이블레이드 소년 컬렉션 선물",
-      "url": "https://www.11st.co.kr/connect/Gateway.tmall?method=Xsite&prdNo=9376527888&tid=1000000061",
+      "title": "베이블레이드 X CX-18 랜덤 부스터 브라키오 윕 셀렉트 1개",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9563241583&ctag=9563241583&lptag=V95484242542&itemId=28539358733&vendorItemId=95484242542&spec=10305199",
       "condition": "unknown",
       "status": "active",
-      "price": 160500,
+      "price": 59100,
       "shipping_price": 0,
       "currency": "KRW",
-      "price_krw": 160500,
-      "conservative_krw": 160500,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "price_krw": 59100,
+      "conservative_krw": 59100,
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 CX-18\"."
     },
@@ -403,7 +403,7 @@
       "currency": "KRW",
       "price_krw": 48060,
       "conservative_krw": 48060,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 UX-14\"."
     },
@@ -420,7 +420,7 @@
       "currency": "KRW",
       "price_krw": 12800,
       "conservative_krw": 12800,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 UX-14\"."
     },
@@ -437,9 +437,26 @@
       "currency": "KRW",
       "price_krw": 30390,
       "conservative_krw": 30390,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 UX-14\"."
+    },
+    {
+      "id": "naver_shop:beyblade-x-cx00-drb:aHR0cHM6Ly9saW",
+      "kit_id": "beyblade-x-cx00-drb",
+      "source": "naver_shop",
+      "title": "베이블레이드 X 드레이크 브레이브G 4-70I 메탈 코트 블루 일반국제배송 7~8일소요예정",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9649992645&ctag=9649992645&lptag=P9649992645&itemId=28842160638&vendorItemId=95776255389&spec=10305199",
+      "condition": "unknown",
+      "status": "active",
+      "price": 655090,
+      "shipping_price": 0,
+      "currency": "KRW",
+      "price_krw": 655090,
+      "conservative_krw": 655090,
+      "captured_at": "2026-07-15T10:35:22.494Z",
+      "confidence": "auto",
+      "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 드레이크 브레이브\"."
     },
     {
       "id": "naver_shop:beyblade-x-cx00-drb:aHR0cHM6Ly9zbW",
@@ -454,7 +471,7 @@
       "currency": "KRW",
       "price_krw": 559900,
       "conservative_krw": 559900,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 드레이크 브레이브\"."
     },
@@ -471,7 +488,7 @@
       "currency": "KRW",
       "price_krw": 37000,
       "conservative_krw": 37000,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 스로네 츠바이\"."
     },
@@ -488,7 +505,7 @@
       "currency": "KRW",
       "price_krw": 32040,
       "conservative_krw": 32040,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 스로네 츠바이\"."
     },
@@ -505,7 +522,7 @@
       "currency": "KRW",
       "price_krw": 65600,
       "conservative_krw": 65600,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 스로네 츠바이\"."
     },
@@ -522,7 +539,7 @@
       "currency": "KRW",
       "price_krw": 27000,
       "conservative_krw": 27000,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via bunjang search for \"HG 스로네 츠바이\"."
     },
@@ -539,7 +556,7 @@
       "currency": "KRW",
       "price_krw": 128800,
       "conservative_krw": 128800,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 가데사\"."
     },
@@ -556,7 +573,7 @@
       "currency": "KRW",
       "price_krw": 107400,
       "conservative_krw": 107400,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 가데사\"."
     },
@@ -573,7 +590,7 @@
       "currency": "KRW",
       "price_krw": 539260,
       "conservative_krw": 539260,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 가데사\"."
     },
@@ -590,7 +607,7 @@
       "currency": "KRW",
       "price_krw": 178920,
       "conservative_krw": 178920,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 가랏조\"."
     },
@@ -607,7 +624,7 @@
       "currency": "KRW",
       "price_krw": 131500,
       "conservative_krw": 131500,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 가랏조\"."
     },
@@ -624,7 +641,7 @@
       "currency": "KRW",
       "price_krw": 176000,
       "conservative_krw": 176000,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 가랏조\"."
     },
@@ -641,7 +658,7 @@
       "currency": "KRW",
       "price_krw": 65000,
       "conservative_krw": 65000,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via bunjang search for \"HG 가랏조\"."
     },
@@ -658,7 +675,7 @@
       "currency": "KRW",
       "price_krw": 30000,
       "conservative_krw": 30000,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via bunjang search for \"HG 가랏조\"."
     },
@@ -675,7 +692,7 @@
       "currency": "KRW",
       "price_krw": 70000,
       "conservative_krw": 70000,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via bunjang search for \"HG 가랏조\"."
     },
@@ -692,7 +709,7 @@
       "currency": "KRW",
       "price_krw": 65000,
       "conservative_krw": 65000,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via joongna search for \"HG 가랏조\"."
     },
@@ -709,7 +726,7 @@
       "currency": "KRW",
       "price_krw": 180000,
       "conservative_krw": 180000,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via joongna search for \"HG 가랏조\"."
     },
@@ -726,24 +743,7 @@
       "currency": "KRW",
       "price_krw": 145430,
       "conservative_krw": 145430,
-      "captured_at": "2026-07-14T20:13:13.672Z",
-      "confidence": "auto",
-      "notes": "Auto-fetched via naver_shop search for \"HG 가데스\"."
-    },
-    {
-      "id": "naver_shop:hg-hg-1-144-4543112599384000:aHR0cHM6Ly9zbW",
-      "kit_id": "hg-hg-1-144-4543112599384000",
-      "source": "naver_shop",
-      "title": "HG 1144 GNZ 007 가데스 00 기동전사 기본 박스 손실",
-      "url": "https://smartstore.naver.com/main/products/12761868047",
-      "condition": "unknown",
-      "status": "active",
-      "price": 72450,
-      "shipping_price": 0,
-      "currency": "KRW",
-      "price_krw": 72450,
-      "conservative_krw": 72450,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 가데스\"."
     },
@@ -760,7 +760,24 @@
       "currency": "KRW",
       "price_krw": 105700,
       "conservative_krw": 105700,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
+      "confidence": "auto",
+      "notes": "Auto-fetched via naver_shop search for \"HG 가데스\"."
+    },
+    {
+      "id": "naver_shop:hg-hg-1-144-4543112599384000:aHR0cHM6Ly9zbW",
+      "kit_id": "hg-hg-1-144-4543112599384000",
+      "source": "naver_shop",
+      "title": "HG 1144 GNZ 007 가데스 00 기동전사 기본 박스 손실",
+      "url": "https://smartstore.naver.com/main/products/12761868047",
+      "condition": "unknown",
+      "status": "active",
+      "price": 72450,
+      "shipping_price": 0,
+      "currency": "KRW",
+      "price_krw": 72450,
+      "conservative_krw": 72450,
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 가데스\"."
     },
@@ -777,7 +794,7 @@
       "currency": "KRW",
       "price_krw": 70000,
       "conservative_krw": 70000,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via bunjang search for \"HG 가데스\"."
     },
@@ -794,7 +811,7 @@
       "currency": "KRW",
       "price_krw": 30000,
       "conservative_krw": 30000,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via bunjang search for \"HG 가데스\"."
     }
@@ -806,10 +823,10 @@
       "sources": {
         "naver_shop": 3
       },
-      "min_krw": 26000,
-      "median_krw": 36990,
-      "conservative_median_krw": 36990,
-      "updated_at": "2026-07-14T20:14:29.684Z"
+      "min_krw": 37990,
+      "median_krw": 48500,
+      "conservative_median_krw": 48500,
+      "updated_at": "2026-07-15T10:36:33.314Z"
     },
     "beyblade-x-cx17": {
       "kit_id": "beyblade-x-cx17",
@@ -820,7 +837,7 @@
       "min_krw": 24000,
       "median_krw": 66000,
       "conservative_median_krw": 66000,
-      "updated_at": "2026-07-14T20:14:29.684Z"
+      "updated_at": "2026-07-15T10:36:33.314Z"
     },
     "beyblade-x-cx18": {
       "kit_id": "beyblade-x-cx18",
@@ -829,9 +846,9 @@
         "naver_shop": 3
       },
       "min_krw": 47900,
-      "median_krw": 65560,
-      "conservative_median_krw": 65560,
-      "updated_at": "2026-07-14T20:14:29.684Z"
+      "median_krw": 59100,
+      "conservative_median_krw": 59100,
+      "updated_at": "2026-07-15T10:36:33.314Z"
     },
     "beyblade-x-ux14": {
       "kit_id": "beyblade-x-ux14",
@@ -842,18 +859,18 @@
       "min_krw": 12800,
       "median_krw": 30390,
       "conservative_median_krw": 30390,
-      "updated_at": "2026-07-14T20:14:29.684Z"
+      "updated_at": "2026-07-15T10:36:33.314Z"
     },
     "beyblade-x-cx00-drb": {
       "kit_id": "beyblade-x-cx00-drb",
-      "samples": 1,
+      "samples": 2,
       "sources": {
-        "naver_shop": 1
+        "naver_shop": 2
       },
       "min_krw": 559900,
-      "median_krw": 559900,
-      "conservative_median_krw": 559900,
-      "updated_at": "2026-07-14T20:14:29.684Z"
+      "median_krw": 607495,
+      "conservative_median_krw": 607495,
+      "updated_at": "2026-07-15T10:36:33.314Z"
     },
     "hg-hg-1-144-4543112531216000": {
       "kit_id": "hg-hg-1-144-4543112531216000",
@@ -865,7 +882,7 @@
       "min_krw": 27000,
       "median_krw": 34520,
       "conservative_median_krw": 34520,
-      "updated_at": "2026-07-14T20:14:29.684Z"
+      "updated_at": "2026-07-15T10:36:33.314Z"
     },
     "hg-hg-1-144-4543112574701000": {
       "kit_id": "hg-hg-1-144-4543112574701000",
@@ -876,7 +893,7 @@
       "min_krw": 107400,
       "median_krw": 128800,
       "conservative_median_krw": 128800,
-      "updated_at": "2026-07-14T20:14:29.684Z"
+      "updated_at": "2026-07-15T10:36:33.314Z"
     },
     "hg-hg-1-144-4543112599278000": {
       "kit_id": "hg-hg-1-144-4543112599278000",
@@ -889,7 +906,7 @@
       "min_krw": 30000,
       "median_krw": 100750,
       "conservative_median_krw": 100750,
-      "updated_at": "2026-07-14T20:14:29.684Z"
+      "updated_at": "2026-07-15T10:36:33.314Z"
     },
     "hg-hg-1-144-4543112599384000": {
       "kit_id": "hg-hg-1-144-4543112599384000",
@@ -901,7 +918,7 @@
       "min_krw": 30000,
       "median_krw": 72450,
       "conservative_median_krw": 72450,
-      "updated_at": "2026-07-14T20:14:29.684Z"
+      "updated_at": "2026-07-15T10:36:33.314Z"
     }
   }
 }

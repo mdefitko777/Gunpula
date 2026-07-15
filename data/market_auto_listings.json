@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-07-14T20:13:13.672Z",
+  "updated_at": "2026-07-15T10:35:22.494Z",
   "generated_by": "scripts/fetch_wanted_market_listings.mjs",
   "watched_kit_count": 9,
   "env_status": {
@@ -26,7 +26,7 @@
     "amazon": {
       "attempted": 9,
       "matched": 0,
-      "errors": 8
+      "errors": 9
     }
   },
   "listings": [
@@ -34,13 +34,27 @@
       "kit_id": "beyblade-x-bx36",
       "source": "naver_shop",
       "title": "베이블레이드 엑스 BX-36 랜덤부스터 웨일 웨이브 셀렉트",
-      "price": 36990,
+      "price": 37990,
       "currency": "KRW",
       "url": "https://search.shopping.naver.com/catalog/58223308629",
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
+      "confidence": "auto",
+      "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 BX-36\"."
+    },
+    {
+      "kit_id": "beyblade-x-bx36",
+      "source": "naver_shop",
+      "title": "베이블레이드X BX-36 랜덤 부스터 웨일 웨이브 셀렉트 1개",
+      "price": 53480,
+      "currency": "KRW",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9647957295&ctag=9647957295&lptag=I28834446226&itemId=28834446226&vendorItemId=95768830475&spec=10305199",
+      "condition": "unknown",
+      "status": "active",
+      "shipping_price": 0,
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 BX-36\"."
     },
@@ -54,21 +68,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
-      "confidence": "auto",
-      "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 BX-36\"."
-    },
-    {
-      "kit_id": "beyblade-x-bx36",
-      "source": "naver_shop",
-      "title": "베이블레이드X BX-36 랜덤부스터 고래웨이브 팽이 5개 세트 부스터 크림슨 4-70TP",
-      "price": 26000,
-      "currency": "KRW",
-      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=8832998723&ctag=8832998723&lptag=I25738729321&itemId=25738729321&vendorItemId=92727185845&spec=10305199",
-      "condition": "unknown",
-      "status": "active",
-      "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 BX-36\"."
     },
@@ -82,7 +82,21 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
+      "confidence": "auto",
+      "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 CX-17\"."
+    },
+    {
+      "kit_id": "beyblade-x-cx17",
+      "source": "naver_shop",
+      "title": "타카라토미 베이블레이드 X CX-17 랜덤 부스터 Vol.10",
+      "price": 130140,
+      "currency": "KRW",
+      "url": "https://search.shopping.naver.com/catalog/60325235920",
+      "condition": "unknown",
+      "status": "active",
+      "shipping_price": 0,
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 CX-17\"."
     },
@@ -96,21 +110,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
-      "confidence": "auto",
-      "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 CX-17\"."
-    },
-    {
-      "kit_id": "beyblade-x-cx17",
-      "source": "naver_shop",
-      "title": "베이블레이드X CX-17 랜덤 부스터 Vol.10",
-      "price": 66000,
-      "currency": "KRW",
-      "url": "https://search.shopping.naver.com/catalog/60056199889",
-      "condition": "unknown",
-      "status": "active",
-      "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 CX-17\"."
     },
@@ -124,7 +124,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 CX-18\"."
     },
@@ -138,21 +138,21 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 CX-18\"."
     },
     {
       "kit_id": "beyblade-x-cx18",
       "source": "naver_shop",
-      "title": "재고 있음 오리지널 CX-18 베이블레이드 X CX18 랜덤 팩 배틀 베이블레이드 소년 컬렉션 선물",
-      "price": 160500,
+      "title": "베이블레이드 X CX-18 랜덤 부스터 브라키오 윕 셀렉트 1개",
+      "price": 59100,
       "currency": "KRW",
-      "url": "https://www.11st.co.kr/connect/Gateway.tmall?method=Xsite&prdNo=9376527888&tid=1000000061",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9563241583&ctag=9563241583&lptag=V95484242542&itemId=28539358733&vendorItemId=95484242542&spec=10305199",
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 CX-18\"."
     },
@@ -166,7 +166,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 UX-14\"."
     },
@@ -180,7 +180,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 UX-14\"."
     },
@@ -194,9 +194,23 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 베이블레이드 UX-14\"."
+    },
+    {
+      "kit_id": "beyblade-x-cx00-drb",
+      "source": "naver_shop",
+      "title": "베이블레이드 X 드레이크 브레이브G 4-70I 메탈 코트 블루 일반국제배송 7~8일소요예정",
+      "price": 655090,
+      "currency": "KRW",
+      "url": "https://link.coupang.com/re/PCSNAVERPCSDP?pageKey=9649992645&ctag=9649992645&lptag=P9649992645&itemId=28842160638&vendorItemId=95776255389&spec=10305199",
+      "condition": "unknown",
+      "status": "active",
+      "shipping_price": 0,
+      "captured_at": "2026-07-15T10:35:22.494Z",
+      "confidence": "auto",
+      "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 드레이크 브레이브\"."
     },
     {
       "kit_id": "beyblade-x-cx00-drb",
@@ -208,7 +222,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"BEYBLADE_X 드레이크 브레이브\"."
     },
@@ -222,7 +236,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 스로네 츠바이\"."
     },
@@ -236,7 +250,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 스로네 츠바이\"."
     },
@@ -250,7 +264,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 스로네 츠바이\"."
     },
@@ -264,7 +278,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via bunjang search for \"HG 스로네 츠바이\"."
     },
@@ -278,7 +292,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 가데사\"."
     },
@@ -292,7 +306,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 가데사\"."
     },
@@ -306,7 +320,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 가데사\"."
     },
@@ -320,7 +334,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 가랏조\"."
     },
@@ -334,7 +348,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 가랏조\"."
     },
@@ -348,7 +362,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 가랏조\"."
     },
@@ -362,7 +376,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via bunjang search for \"HG 가랏조\"."
     },
@@ -376,7 +390,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via bunjang search for \"HG 가랏조\"."
     },
@@ -390,7 +404,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via bunjang search for \"HG 가랏조\"."
     },
@@ -404,7 +418,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via joongna search for \"HG 가랏조\"."
     },
@@ -418,7 +432,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via joongna search for \"HG 가랏조\"."
     },
@@ -432,21 +446,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
-      "confidence": "auto",
-      "notes": "Auto-fetched via naver_shop search for \"HG 가데스\"."
-    },
-    {
-      "kit_id": "hg-hg-1-144-4543112599384000",
-      "source": "naver_shop",
-      "title": "HG 1144 GNZ 007 가데스 00 기동전사 기본 박스 손실",
-      "price": 72450,
-      "currency": "KRW",
-      "url": "https://smartstore.naver.com/main/products/12761868047",
-      "condition": "unknown",
-      "status": "active",
-      "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 가데스\"."
     },
@@ -460,7 +460,21 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
+      "confidence": "auto",
+      "notes": "Auto-fetched via naver_shop search for \"HG 가데스\"."
+    },
+    {
+      "kit_id": "hg-hg-1-144-4543112599384000",
+      "source": "naver_shop",
+      "title": "HG 1144 GNZ 007 가데스 00 기동전사 기본 박스 손실",
+      "price": 72450,
+      "currency": "KRW",
+      "url": "https://smartstore.naver.com/main/products/12761868047",
+      "condition": "unknown",
+      "status": "active",
+      "shipping_price": 0,
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via naver_shop search for \"HG 가데스\"."
     },
@@ -474,7 +488,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via bunjang search for \"HG 가데스\"."
     },
@@ -488,7 +502,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-07-14T20:13:13.672Z",
+      "captured_at": "2026-07-15T10:35:22.494Z",
       "confidence": "auto",
       "notes": "Auto-fetched via bunjang search for \"HG 가데스\"."
     }
