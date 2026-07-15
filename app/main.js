@@ -747,6 +747,8 @@ const elements = {
   userChip: document.querySelector("#userChip"),
   userDialog: document.querySelector("#userDialog"),
   userDialogClose: document.querySelector("#userDialogClose"),
+  userDialogHead: document.querySelector("#userDialogHead"),
+  userDialogCover: document.querySelector("#userDialogCover"),
   userDialogAvatar: document.querySelector("#userDialogAvatar"),
   userDialogName: document.querySelector("#userDialogName"),
   userDialogMeta: document.querySelector("#userDialogMeta"),
@@ -792,9 +794,17 @@ const elements = {
   guideUnitKits: document.querySelector("#guideUnitKits"),
   memberDialog: document.querySelector("#memberDialog"),
   memberDialogClose: document.querySelector("#memberDialogClose"),
+  memberDialogHead: document.querySelector("#memberDialogHead"),
+  memberDialogCover: document.querySelector("#memberDialogCover"),
   memberDialogAvatar: document.querySelector("#memberDialogAvatar"),
   memberDialogName: document.querySelector("#memberDialogName"),
   memberDialogMeta: document.querySelector("#memberDialogMeta"),
+  memberEditPanel: document.querySelector("#memberEditPanel"),
+  memberDialogNameInput: document.querySelector("#memberDialogNameInput"),
+  memberDialogSaveName: document.querySelector("#memberDialogSaveName"),
+  memberDialogChangeAvatar: document.querySelector("#memberDialogChangeAvatar"),
+  memberDialogChangeBackground: document.querySelector("#memberDialogChangeBackground"),
+  profileBackgroundInput: document.querySelector("#profileBackgroundInput"),
   memberDialogFavorites: document.querySelector("#memberDialogFavorites"),
   memberDialogStats: document.querySelector("#memberDialogStats"),
   memberDialogOwned: document.querySelector("#memberDialogOwned"),
@@ -2096,6 +2106,18 @@ function bindEvents() {
   });
   elements.avatarInput?.addEventListener("change", handleAvatarChange);
   elements.memberDialogClose?.addEventListener("click", () => elements.memberDialog?.close());
+  elements.memberDialogChangeAvatar?.addEventListener("click", () => elements.avatarInput?.click());
+  elements.memberDialogAvatar?.addEventListener("click", () => {
+    if (elements.memberEditPanel && !elements.memberEditPanel.hidden) {
+      elements.avatarInput?.click();
+    }
+  });
+  elements.memberDialogChangeBackground?.addEventListener("click", () => elements.profileBackgroundInput?.click());
+  elements.memberDialogSaveName?.addEventListener("click", () => saveMemberDisplayNameValue(elements.memberDialogNameInput?.value, elements.memberDialogSaveName));
+  elements.memberDialogNameInput?.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") saveMemberDisplayNameValue(elements.memberDialogNameInput.value, elements.memberDialogSaveName);
+  });
+  elements.profileBackgroundInput?.addEventListener("change", handleProfileBackgroundChange);
   elements.userChip?.addEventListener("click", () => {
     if (syncModeV2()) {
       openUserPage();
@@ -2134,11 +2156,8 @@ function bindEvents() {
     event.preventDefault();
     closeUserPage();
   });
-  elements.userDialogAvatar?.addEventListener("click", () => {
-    if (syncModeV2() && state.sync.workspace) {
-      elements.avatarInput?.click();
-    }
-  });
+  elements.userDialogAvatar?.addEventListener("click", () => openMemberProfile(currentMember()));
+  elements.userDialogName?.addEventListener("click", () => openMemberProfile(currentMember()));
   elements.userRowOwned?.addEventListener("click", () => {
     closeUserPage();
     switchToView("owned");
@@ -3647,37 +3666,7 @@ async function saveMemberDisplayNameNow() {
     input.focus();
     return;
   }
-  const previousName = currentWorkspaceMemberName();
-  elements.saveMemberDisplayName.disabled = true;
-  try {
-    state.syncConfig.memberName = nextName;
-    saveSyncConfig();
-    const renamedCollection = renameCollectionMember(previousName, nextName);
-    if (syncModeV2() && state.sync.workspace) {
-      const result = await supabaseRpcV2("gunpula_v2_update_member_name", {
-        p_display_name: nextName,
-      });
-      const remote = normalizeCloudState(result);
-      state.sync.workspace = remote?.workspace || state.sync.workspace;
-      state.sync.canEdit = remote?.canEdit ?? state.sync.canEdit;
-      setSyncStatus(state.sync.canEdit ? "connected" : "readonly", t("memberNameSaved"));
-    } else {
-      setSyncStatus("local", t("memberNameSaved"));
-    }
-    if (renamedCollection) {
-      saveCollection();
-    }
-    renderSettings();
-    renderCollections();
-    renderKits();
-  } catch (error) {
-    state.syncConfig.memberName = previousName;
-    saveSyncConfig();
-    setSyncStatus("error", error.message);
-    renderSettings();
-  } finally {
-    elements.saveMemberDisplayName.disabled = false;
-  }
+  await saveMemberDisplayNameValue(nextName, elements.saveMemberDisplayName);
 }
 
 async function workspaceLeaveNow() {
@@ -6673,6 +6662,7 @@ function currentMember() {
 function memberPreferences(member = currentMember()) {
   const prefs = member?.preferences;
   return {
+    ...(prefs && typeof prefs === "object" && !Array.isArray(prefs) ? prefs : {}),
     franchises: Array.isArray(prefs?.franchises) ? prefs.franchises.filter((value) => FRANCHISES.includes(value)) : [],
     series: Array.isArray(prefs?.series) ? prefs.series.map(String) : [],
   };
@@ -6709,6 +6699,18 @@ function applyAvatarTo(element, member, fallbackChar) {
   }
 }
 
+function memberProfileBackground(member) {
+  const value = memberPreferences(member).profile_background;
+  return typeof value === "string" ? value : "";
+}
+
+function applyMemberCover(element, member) {
+  if (!element) return;
+  const background = memberProfileBackground(member);
+  element.style.backgroundImage = background ? `url("${background}")` : "";
+  element.classList.toggle("has-cover", Boolean(background));
+}
+
 async function saveMemberProfileFields(fields) {
   const result = await supabaseRpcV2("gunpula_v2_update_member_profile", {
     p_display_name: fields.displayName ?? null,
@@ -6718,6 +6720,42 @@ async function saveMemberProfileFields(fields) {
   const remote = normalizeCloudState(result);
   if (remote?.workspace) {
     state.sync.workspace = remote.workspace;
+  }
+}
+
+async function saveMemberDisplayNameValue(nextName, button = null) {
+  const trimmed = String(nextName || "").trim();
+  if (!trimmed) return;
+  const previousName = currentWorkspaceMemberName();
+  if (button) button.disabled = true;
+  try {
+    state.syncConfig.memberName = trimmed;
+    saveSyncConfig();
+    const renamedCollection = renameCollectionMember(previousName, trimmed);
+    if (syncModeV2() && state.sync.workspace) {
+      const result = await supabaseRpcV2("gunpula_v2_update_member_name", {
+        p_display_name: trimmed,
+      });
+      const remote = normalizeCloudState(result);
+      state.sync.workspace = remote?.workspace || state.sync.workspace;
+      state.sync.canEdit = remote?.canEdit ?? state.sync.canEdit;
+      setSyncStatus(state.sync.canEdit ? "connected" : "readonly", t("memberNameSaved"));
+    } else {
+      setSyncStatus("local", t("memberNameSaved"));
+    }
+    if (renamedCollection) saveCollection();
+    renderSettings();
+    renderCollections();
+    renderKits();
+    if (elements.userDialog?.open) renderUserPage();
+    if (elements.memberDialog?.open) openMemberProfile(currentMember());
+  } catch (error) {
+    state.syncConfig.memberName = previousName;
+    saveSyncConfig();
+    setSyncStatus("error", error.message);
+    renderSettings();
+  } finally {
+    if (button) button.disabled = false;
   }
 }
 
@@ -6735,6 +6773,30 @@ async function handleAvatarChange(event) {
     if (elements.userDialog?.open) {
       renderUserPage();
     }
+    if (elements.memberDialog?.open) {
+      openMemberProfile(currentMember());
+    }
+  } catch (error) {
+    setSyncStatus("error", error.message);
+    renderSettings();
+  }
+}
+
+async function handleProfileBackgroundChange(event) {
+  const file = event.target.files?.[0];
+  event.target.value = "";
+  const member = currentMember();
+  if (!file || !member || !syncModeV2() || !state.sync.workspace) {
+    return;
+  }
+  try {
+    const background = await imageDataUrlFromFile(file, { width: 900, height: 360, fit: "cover", format: "image/jpeg", quality: 0.78 });
+    const prefs = { ...memberPreferences(member), profile_background: background };
+    member.preferences = prefs;
+    await saveMemberProfileFields({ preferences: prefs });
+    renderSettings();
+    renderUserPage();
+    openMemberProfile(currentMember());
   } catch (error) {
     setSyncStatus("error", error.message);
     renderSettings();
@@ -6871,6 +6933,8 @@ function switchToView(view) {
 
 function renderUserPage() {
   const member = currentMember();
+  applyMemberCover(elements.userDialogCover, member);
+  elements.userDialogHead?.classList.toggle("has-cover", Boolean(memberProfileBackground(member)));
   applyAvatarTo(elements.userDialogAvatar, member, currentUserEmail()[0]);
   elements.userDialogName.textContent = member?.name || currentUserEmail().split("@")[0] || "member";
   elements.userDialogMeta.textContent = currentUserEmail();
@@ -7536,33 +7600,43 @@ function bbxProductImage(baseSetId) {
   return state.bbx?.productByBaseSet.get(baseSetId)?.image || null;
 }
 
+function bbxImageCandidates(record, preferFallback = false) {
+  if (!record) return [];
+  const primary = [record.image, record.image_remote].filter(Boolean);
+  const fallback = [record.image_fallback].filter(Boolean);
+  return [...new Set([...(preferFallback ? fallback : primary), ...(preferFallback ? primary : fallback)].filter(Boolean))];
+}
+
+function setImageFallbackChain(img, urls, onExhausted) {
+  const candidates = [...new Set(urls.filter(Boolean))];
+  if (!candidates.length) {
+    onExhausted?.();
+    return false;
+  }
+  let index = 0;
+  img.src = candidates[index];
+  img.addEventListener("error", () => {
+    index += 1;
+    if (index < candidates.length) img.src = candidates[index];
+    else onExhausted?.();
+  });
+  return true;
+}
+
 // Ordered image candidates for a 陀螺: its product box, else the blade art (some
 // gift/variant sets ship no product image), each tried before the next.
 function bbxTopImageCandidates(top) {
   const urls = [];
   const product = state.bbx?.productByBaseSet.get(top.base_set_id);
-  if (product?.image) urls.push(product.image);
+  urls.push(...bbxImageCandidates(product));
   const bladeComp = top.components.find((c) => c.type === "blade");
   const blade = bladeComp ? state.bbx?.partIndex.get(bladeComp.part_id) : null;
-  if (blade?.image) urls.push(blade.image);
-  if (blade?.image_fallback) urls.push(blade.image_fallback);
-  return urls;
+  urls.push(...bbxImageCandidates(blade));
+  return [...new Set(urls)];
 }
 
 function bbxTopArtImage(img, top, onExhausted) {
-  const urls = bbxTopImageCandidates(top);
-  if (!urls.length) {
-    onExhausted?.();
-    return false;
-  }
-  let index = 0;
-  img.src = urls[0];
-  img.addEventListener("error", () => {
-    index += 1;
-    if (index < urls.length) img.src = urls[index];
-    else onExhausted?.();
-  });
-  return true;
+  return setImageFallbackChain(img, bbxTopImageCandidates(top), onExhausted);
 }
 
 // Part thumbnail: primary image with an optional fallback URL, then hide the
@@ -7570,19 +7644,15 @@ function bbxTopArtImage(img, top, onExhausted) {
 function bbxPartThumb(part) {
   const frame = document.createElement("span");
   frame.className = "bbx-part-thumb";
-  if (!part?.image) {
+  const urls = bbxImageCandidates(part);
+  if (!urls.length) {
     frame.classList.add("is-missing");
     return frame;
   }
   const img = document.createElement("img");
   img.decoding = "async";
   img.alt = "";
-  img.src = part.image;
-  img.addEventListener("error", () => {
-    if (part.image_fallback && img.src !== part.image_fallback) {
-      img.src = part.image_fallback;
-      return;
-    }
+  setImageFallbackChain(img, urls, () => {
     img.remove();
     frame.classList.add("is-missing");
   });
@@ -7699,14 +7769,7 @@ function renderBbxParts(bbx) {
     // Grid thumbnails are tiny: prefer the lighter app-folder image (blades' main
     // image is a heavy high-res site render), keeping the sharp one for detail.
     // Eager on purpose — loading="lazy" never fires inside a showModal() dialog.
-    const thumbSrc = part.image_fallback || part.image;
-    const thumbAlt = part.image_fallback ? part.image : null;
-    img.src = thumbSrc;
-    img.addEventListener("error", () => {
-      if (thumbAlt && img.src !== thumbAlt) {
-        img.src = thumbAlt;
-        return;
-      }
+    setImageFallbackChain(img, bbxImageCandidates(part, true), () => {
       img.remove();
       art.classList.add("is-missing");
     });
@@ -7730,12 +7793,9 @@ function openBbxPart(part) {
   elements.bbxPartArt.innerHTML = "";
   const img = document.createElement("img");
   img.alt = bbxLocalize(part.names) || part.part_id;
-  img.src = part.image;
-  img.addEventListener("error", () => {
-    if (part.image_fallback && img.src !== part.image_fallback) img.src = part.image_fallback;
-    else img.remove();
-  });
-  elements.bbxPartArt.append(img);
+  if (setImageFallbackChain(img, bbxImageCandidates(part), () => img.remove())) {
+    elements.bbxPartArt.append(img);
+  }
   elements.bbxPartName.textContent = bbxLocalize(part.names) || part.part_id;
   elements.bbxPartMeta.textContent = [bbxPartTypeLabel(part.type), part.weight_g ? `${part.weight_g}g` : ""].filter(Boolean).join(" · ");
 
@@ -8043,12 +8103,42 @@ function bbxSetPartOwned(partId, owned) {
   saveBbxOwnedParts();
 }
 
+function memberGuideLitValue(memberName) {
+  if (!state.guide?.groups?.length) {
+    return "...";
+  }
+  const items = state.collection.member_items?.[safeMemberName(memberName)] || {};
+  const owned = new Set();
+  const wanted = new Set();
+  for (const [kitId, entry] of Object.entries(items)) {
+    if (entry?.status === "owned") owned.add(kitId);
+    else if (entry?.status === "wanted") wanted.add(kitId);
+  }
+  const lit = state.guide.groups.filter((group) => group.kit_ids.some((kitId) => owned.has(kitId) || wanted.has(kitId))).length;
+  return `${lit}/${state.guide.groups.length}`;
+}
+
 function openMemberProfile(member) {
   if (!elements.memberDialog) {
     return;
   }
+  if (!member) {
+    return;
+  }
+  const isSelf = Boolean(member.is_self);
+  applyMemberCover(elements.memberDialogCover, member);
+  elements.memberDialogHead?.classList.toggle("has-cover", Boolean(memberProfileBackground(member)));
   applyAvatarTo(elements.memberDialogAvatar, member);
   elements.memberDialogName.textContent = member.name || "member";
+  if (elements.memberEditPanel) {
+    elements.memberEditPanel.hidden = !isSelf;
+  }
+  if (elements.memberDialogAvatar) {
+    elements.memberDialogAvatar.disabled = !isSelf;
+  }
+  if (isSelf && elements.memberDialogNameInput) {
+    elements.memberDialogNameInput.value = member.name || currentWorkspaceMemberName();
+  }
   const joined = member.joined_at ? String(member.joined_at).slice(0, 10) : "";
   elements.memberDialogMeta.textContent = [t(`workspaceRole${capitalizeRole(member.role)}`), member.email, joined].filter(Boolean).join(" · ");
 
@@ -8067,12 +8157,11 @@ function openMemberProfile(member) {
 
   const owned = memberCollectionKits(member.name, "owned");
   const wanted = memberCollectionKits(member.name, "wanted");
-  const spend = owned.reduce((sum, { entry }) => sum + (Number(entry.purchase_price) || 0) * clampCollectionQuantity(entry.quantity), 0);
   elements.memberDialogStats.innerHTML = "";
   const stats = [
+    { label: t("pictureBook"), value: memberGuideLitValue(member.name) },
     { label: t("ownedList"), value: owned.length },
     { label: t("wantedList"), value: wanted.length },
-    { label: t("memberSpend"), value: spend ? `¥${spend.toLocaleString("ja-JP")}` : "—" },
   ];
   for (const stat of stats) {
     const card = document.createElement("div");
@@ -8083,7 +8172,18 @@ function openMemberProfile(member) {
 
   fillMemberStrip(elements.memberDialogOwned, owned);
   fillMemberStrip(elements.memberDialogWanted, wanted);
-  elements.memberDialog.showModal();
+  if (!elements.memberDialog.open) {
+    elements.memberDialog.showModal();
+  }
+  if (!state.guide) {
+    ensureGuideData()
+      .then(() => {
+        if (elements.memberDialog?.open) {
+          openMemberProfile(isSelf ? currentMember() : member);
+        }
+      })
+      .catch(() => {});
+  }
 }
 
 function renderAccountSection() {

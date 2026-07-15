@@ -9,7 +9,7 @@
     <title>Gunpula v2.0.0</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260714-v54" />
+    <link rel="stylesheet" href="./styles.css?v=20260716-v57" />
   </head>
   <body>
     <main class="catalog-page">
@@ -553,7 +553,8 @@
     <dialog class="member-dialog user-dialog user-drawer" id="userDialog" aria-labelledby="userDialogName">
       <div class="member-shell user-drawer-shell">
         <button class="dialog-close" id="userDialogClose" type="button" aria-label="关闭" data-i18n-aria="closeSettings">×</button>
-        <div class="member-head">
+        <div class="member-head user-profile-head" id="userDialogHead">
+          <div class="member-cover" id="userDialogCover"></div>
           <button class="account-avatar account-avatar-large account-avatar-button" id="userDialogAvatar" type="button" aria-label="更换头像" data-i18n-aria="profileAvatarHint">@</button>
           <div class="member-head-info">
             <h2 id="userDialogName"></h2>
@@ -687,12 +688,22 @@
     <dialog class="member-dialog" id="memberDialog" aria-labelledby="memberDialogName">
       <div class="member-shell">
         <button class="dialog-close" id="memberDialogClose" type="button" aria-label="关闭" data-i18n-aria="closeSettings">×</button>
-        <div class="member-head">
-          <span class="account-avatar account-avatar-large" id="memberDialogAvatar">@</span>
+        <div class="member-head member-profile-head" id="memberDialogHead">
+          <div class="member-cover" id="memberDialogCover"></div>
+          <button class="account-avatar account-avatar-large account-avatar-button" id="memberDialogAvatar" type="button" aria-label="更换头像" data-i18n-aria="profileAvatarHint">@</button>
           <div class="member-head-info">
             <h2 id="memberDialogName"></h2>
             <p id="memberDialogMeta"></p>
           </div>
+        </div>
+        <div class="member-edit-panel" id="memberEditPanel" hidden>
+          <input id="memberDialogNameInput" type="text" maxlength="40" autocomplete="name" />
+          <div class="sync-actions">
+            <button id="memberDialogSaveName" type="button" data-i18n="saveMemberDisplayName">保存名字</button>
+            <button class="secondary-button compact-button" id="memberDialogChangeAvatar" type="button" data-i18n="profileAvatarHint">更换头像</button>
+            <button class="secondary-button compact-button" id="memberDialogChangeBackground" type="button" data-i18n="profileBackgroundHint">更换背景</button>
+          </div>
+          <input id="profileBackgroundInput" type="file" accept="image/*" hidden />
         </div>
         <div class="favorite-chips is-static" id="memberDialogFavorites"></div>
         <div class="member-stats" id="memberDialogStats"></div>
@@ -714,6 +725,6 @@
       <div class="radial-labels"></div>
     </div>
 
-    <script type="module" src="./main.js?v=20260714-v54"></script>
+    <script type="module" src="./main.js?v=20260716-v57"></script>
   </body>
 </html>

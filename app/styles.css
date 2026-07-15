@@ -4835,6 +4835,61 @@ body.is-radial-active {
   gap: 14px;
 }
 
+.member-profile-head,
+.user-profile-head {
+  position: relative;
+  min-height: 150px;
+  margin: -22px -22px 14px;
+  padding: 68px 22px 20px;
+  overflow: hidden;
+  border-radius: 16px 16px 0 0;
+  background: linear-gradient(135deg, rgba(49, 91, 128, 0.95), rgba(118, 156, 136, 0.9));
+  color: #ffffff;
+}
+
+.user-profile-head {
+  margin: calc(-22px - env(safe-area-inset-top, 0px)) -18px 14px;
+  padding: calc(68px + env(safe-area-inset-top, 0px)) 18px 20px;
+  border-radius: 0;
+}
+
+.member-cover {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.member-cover.has-cover {
+  opacity: 1;
+}
+
+.member-profile-head::after,
+.user-profile-head::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(180deg, rgba(8, 20, 32, 0.18), rgba(8, 20, 32, 0.68));
+}
+
+.member-profile-head > :not(.member-cover),
+.user-profile-head > :not(.member-cover) {
+  position: relative;
+  z-index: 1;
+}
+
+.member-profile-head .account-avatar,
+.user-profile-head .account-avatar {
+  border: 3px solid rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(9, 17, 26, 0.24);
+}
+
 .member-head-info h2 {
   font-size: 20px;
 }
@@ -4843,6 +4898,36 @@ body.is-radial-active {
   margin-top: 3px;
   color: var(--faint);
   font-size: 12.5px;
+}
+
+.member-profile-head .member-head-info p,
+.user-profile-head .member-head-info p {
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.member-edit-panel {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 14px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--soft);
+}
+
+.member-edit-panel[hidden] {
+  display: none;
+}
+
+.member-edit-panel input[type="text"] {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--ink);
+  font: inherit;
 }
 
 .member-stats {
