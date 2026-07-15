@@ -136,6 +136,40 @@ const PAGER_THRESHOLD_RATIO = 0.28;
 const PAGER_MIN_THRESHOLD = 92;
 const PAGER_ANIMATION_MS = 220;
 const APP_VERSION_LABEL = "v2.0.0";
+const HELP_TEXT = {
+  homeSection: "首页按分类进入图鉴，封面图可在卡片上更换；收藏和最近查看只是入口，不放维护数字。",
+  updatesSection: "最近更新会优先显示你在个人喜好里选择的分类和系列；可以切换最近添加、本周在售或按月份查看。",
+  pbandaiSection: "这里显示 Premium Bandai JP 的缓存数据。网页不会直接爬 PB，更新来自后台抓取后的 JSON。",
+  collectionSection: "已购买和想要按当前成员显示，可在详情页标记，也可以在这里批量删除。",
+  kitSection: "目录会把你关注的分类和系列排在前面；筛选和搜索仍然会保留原来的匹配逻辑。",
+  settingsDialog: "设置只放普通使用项；维护数据、来源、重复、抓取和系列改名集中在控制台。",
+  guideDialog: "图鉴按点亮进度浏览，关注系列会优先显示；点开格子可以查看对应商品并快速标记。",
+  userDialog: "个人页可以查看自己和共享成员的收藏、想要、图鉴点亮和喜好。",
+  memberDialog: "点头像可更换头像，点背景可更换背景；这里只显示个人收藏概况，不显示维护信息。",
+  language: "切换界面语言，不会改动商品数据。",
+  appearance: "设置主题、App 图标和首页收藏显示方式。",
+  homeDisplay: "控制首页收藏区、首页封面和入口展示方式；这些属于外观，不影响收藏数据。",
+  accountSync: "用邮箱验证码登录后，可以创建共享空间或输入邀请码加入对方空间。",
+  dataBackup: "迁移或换手机前先导出备份；恢复会覆盖当前本地收藏和更正。",
+  appUpdate: "检查更新会清理程序缓存并重新加载最新版，不会删除收藏。",
+  aboutApp: "查看当前版本、APK 状态和安装信息。",
+  recentUpdates: "按发售日期查看新品；个人喜好里的分类和系列会优先排在前面。",
+  premiumBandaiProducts: "PB 商品只展示后台缓存，点卡片先看详情，官方链接在详情页打开。",
+  catalogList: "目录优先显示关注系列，仍可用搜索、筛选和分类入口精确缩小范围。",
+  ownedList: "已购买按成员独立记录，可以查看自己或朋友的收藏。",
+  wantedList: "想要按成员独立记录，数量可在详情页调整。",
+  myFavorites: "选择你关注的分类和系列，它会影响首页、最近更新、目录和图鉴排序。",
+  workspaceFriends: "共享空间成员可以互相查看收藏、想要和图鉴点亮进度。",
+  appHealth: "这里是维护视角的问题列表，普通使用时不用看。",
+  updateLog: "后台更新记录，用来确认每天抓取新增、变更和删除了什么。",
+  reviewWorkbench: "待确认工作台放归类、图片、数据质量问题，适合集中手动处理。",
+  imageHealth: "图片健康检查显示缺图和失效图，方便决定哪些要本地化。",
+  sourceHealth: "来源健康显示官网抓取是否正常、被拦截或数量异常。",
+  imageAssetLibrary: "图片资产库统计本地缓存图和远程图比例。",
+  duplicateWorkbench: "疑似重复可合并、隐藏或标记不是重复，改动会进入共享更正。",
+  dataFetch: "触发 GitHub Actions 后台抓取目录、PB、市场价和更新数据。",
+  seriesAdmin: "在这里改系列名，只改显示名称，不改商品本身来源。",
+};
 
 const COLLECTION_TYPES = ["owned", "wanted"];
 const COLLECTION_ENTRY_STATUSES = [...COLLECTION_TYPES, "deleted"];
@@ -1449,11 +1483,20 @@ function bindEvents() {
   elements.memberDialogClose?.addEventListener("click", () => closeDialog(elements.memberDialog));
   elements.memberDialogChangeAvatar?.addEventListener("click", () => elements.avatarInput?.click());
   elements.memberDialogAvatar?.addEventListener("click", () => {
-    if (elements.memberEditPanel && !elements.memberEditPanel.hidden) {
+    if (memberProfileEditable()) {
       elements.avatarInput?.click();
     }
   });
   elements.memberDialogChangeBackground?.addEventListener("click", () => elements.profileBackgroundInput?.click());
+  elements.memberDialogHead?.addEventListener("click", (event) => {
+    if (!memberProfileEditable() || event.target.closest("button, input, textarea, select, a")) return;
+    elements.profileBackgroundInput?.click();
+  });
+  elements.memberDialogHead?.addEventListener("keydown", (event) => {
+    if (!memberProfileEditable() || !["Enter", " "].includes(event.key)) return;
+    event.preventDefault();
+    elements.profileBackgroundInput?.click();
+  });
   elements.memberDialogSaveName?.addEventListener("click", () => saveMemberDisplayNameValue(elements.memberDialogNameInput?.value, elements.memberDialogSaveName));
   elements.memberDialogNameInput?.addEventListener("keydown", (event) => {
     if (event.key === "Enter") saveMemberDisplayNameValue(elements.memberDialogNameInput.value, elements.memberDialogSaveName);
@@ -1498,6 +1541,10 @@ function bindEvents() {
     closeUserPage();
   });
   elements.userDialogAvatar?.addEventListener("click", () => openMemberProfile(currentMember()));
+  elements.userDialogHead?.addEventListener("click", (event) => {
+    if (event.target.closest("button, input, textarea, select, a")) return;
+    openMemberProfile(currentMember());
+  });
   elements.userDialogName?.addEventListener("click", () => openMemberProfile(currentMember()));
   elements.userRowOwned?.addEventListener("click", () => {
     closeUserPage();
@@ -3199,6 +3246,51 @@ function translateStaticText() {
   document.querySelectorAll("[data-i18n-aria]").forEach((node) => {
     node.setAttribute("aria-label", t(node.dataset.i18nAria));
   });
+  enhanceHelpButtons();
+}
+
+function helpTextFor(node) {
+  if (!node) return "";
+  if (node.dataset.help) return node.dataset.help;
+  const keyed = node.querySelector("[data-i18n]");
+  if (keyed?.dataset.i18n && HELP_TEXT[keyed.dataset.i18n]) return HELP_TEXT[keyed.dataset.i18n];
+  return HELP_TEXT[node.id] || HELP_TEXT[node.dataset.settingsPanel] || "";
+}
+
+function enhanceHelpButtons() {
+  document.querySelectorAll(".help-button").forEach((button) => button.remove());
+  const selectors = [
+    ".home-section",
+    ".updates-section",
+    ".pbandai-section",
+    ".collection-section",
+    ".kit-section",
+    ".settings-section",
+    ".settings-dialog",
+    ".user-dialog",
+    "#guideDialog",
+    "#memberDialog",
+  ].join(",");
+  for (const section of document.querySelectorAll(selectors)) {
+    const text = helpTextFor(section);
+    if (!text) continue;
+    const anchor =
+      section.querySelector(":scope > .home-hero h1") ||
+      section.querySelector(":scope > .home-section-head h2, :scope > .section-title h2, :scope > .settings-section-head h3, :scope > h3, :scope > h2") ||
+      section.querySelector("h1, h2, h3");
+    if (!anchor || anchor.querySelector(".help-button")) continue;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "help-button";
+    button.textContent = "?";
+    button.setAttribute("aria-label", "说明");
+    button.title = text;
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      window.alert(text);
+    });
+    anchor.append(" ", button);
+  }
 }
 
 function populateGradeSelect() {
@@ -3913,7 +4005,7 @@ function renderHomeUpdates() {
   const mode = state.updatesMode === "month" ? "month" : state.updatesMode === "week" ? "week" : "recent";
   elements.updatesRecentButton?.classList.toggle("is-active", mode === "recent");
   elements.updatesWeekButton?.classList.toggle("is-active", mode === "week");
-  const items = mode === "recent" ? sortByPreference(recentFeedKits()) : mode === "week" ? sortByPreference(weekOnSaleKits()) : releaseItemsForMonth(state.releaseMonth);
+  const items = sortByPreference(mode === "recent" ? recentFeedKits() : mode === "week" ? weekOnSaleKits() : releaseItemsForMonth(state.releaseMonth));
   if (mode !== "month") {
     elements.updatesSubtitle.textContent =
       mode === "week" ? t("weekOnSaleSummary", { count: items.length }) : t("recentDaysSummary", { days: RECENT_UPDATE_DAYS, count: items.length });
@@ -4751,7 +4843,7 @@ function kitShortName(kit) {
 }
 
 function kitSeries(kit) {
-  return seriesLabelFromKit(kit) + " ? " + gradeShortLabel(kit);
+  return seriesLabelFromKit(kit) + " · " + gradeShortLabel(kit);
 }
 
 function kitsForCurrentFranchise() {
@@ -4769,7 +4861,7 @@ function filteredKits() {
       : state.activeView === "wanted"
         ? collectionIds("wanted").map(displayKitById).filter(Boolean)
         : kitsForCurrentFranchise();
-  return source.filter((kit) => {
+  return sortByPreference(source.filter((kit) => {
     if (activeCollectionType() && !collectionFilterMatches(kit)) {
       return false;
     }
@@ -4829,7 +4921,7 @@ function filteredKits() {
       .toLowerCase();
 
     return searchTerms.some((term) => haystack.includes(term));
-  });
+  }));
 }
 
 function collectionFilterMatches(kit) {
@@ -5644,6 +5736,10 @@ function sortByPreference(items) {
     .map((entry) => entry.kit);
 }
 
+function guideGroupPreferenceScore(group) {
+  return Math.max(0, ...group.kit_ids.map((kitId) => preferenceScoreForKit(displayKitById(kitId) || {})));
+}
+
 function applyAvatarTo(element, member, fallbackChar) {
   if (!element) {
     return;
@@ -5895,6 +5991,10 @@ function renderUserPage() {
   const member = currentMember();
   applyMemberCover(elements.userDialogCover, member);
   elements.userDialogHead?.classList.toggle("has-cover", Boolean(memberProfileBackground(member)));
+  elements.userDialogHead?.classList.toggle("is-editable", Boolean(member));
+  if (elements.userDialogHead) {
+    elements.userDialogHead.tabIndex = member ? 0 : -1;
+  }
   applyAvatarTo(elements.userDialogAvatar, member, currentUserEmail()[0]);
   elements.userDialogName.textContent = member?.name || currentUserEmail().split("@")[0] || "member";
   elements.userDialogMeta.textContent = currentUserEmail();
@@ -6182,9 +6282,12 @@ function renderGuide(guide) {
   elements.guideSummary.textContent = t("guideComplete", { collected: litTotal, total: guide.groups.length });
 
   elements.guideBody.innerHTML = "";
-  const orderedWorks = [...guide.works].sort((a, b) => a.work_id - b.work_id);
+  const workScore = (work) => Math.max(0, ...guide.groups.filter((g) => g.work_id === work.work_id).map(guideGroupPreferenceScore));
+  const orderedWorks = [...guide.works].sort((a, b) => workScore(b) - workScore(a) || a.work_id - b.work_id);
   for (const work of orderedWorks) {
-    const groups = guide.groups.filter((g) => g.work_id === work.work_id).sort((a, b) => a.name.localeCompare(b.name));
+    const groups = guide.groups
+      .filter((g) => g.work_id === work.work_id)
+      .sort((a, b) => guideGroupPreferenceScore(b) - guideGroupPreferenceScore(a) || a.name.localeCompare(b.name));
     if (!groups.length) continue;
     const lit = groups.filter((g) => statusByGroup.get(g.key) !== "none").length;
 
@@ -7066,6 +7169,10 @@ function memberGuideLitValue(memberName) {
   return `${lit}/${state.guide.groups.length}`;
 }
 
+function memberProfileEditable() {
+  return Boolean(elements.memberEditPanel && !elements.memberEditPanel.hidden);
+}
+
 function openMemberProfile(member) {
   if (!elements.memberDialog) {
     return;
@@ -7076,6 +7183,18 @@ function openMemberProfile(member) {
   const isSelf = Boolean(member.is_self);
   applyMemberCover(elements.memberDialogCover, member);
   elements.memberDialogHead?.classList.toggle("has-cover", Boolean(memberProfileBackground(member)));
+  elements.memberDialogHead?.classList.toggle("is-editable", isSelf);
+  if (elements.memberDialogHead) {
+    if (isSelf) {
+      elements.memberDialogHead.tabIndex = 0;
+      elements.memberDialogHead.setAttribute("role", "button");
+      elements.memberDialogHead.title = t("profileBackgroundHint");
+    } else {
+      elements.memberDialogHead.removeAttribute("tabindex");
+      elements.memberDialogHead.removeAttribute("role");
+      elements.memberDialogHead.removeAttribute("title");
+    }
+  }
   applyAvatarTo(elements.memberDialogAvatar, member);
   elements.memberDialogName.textContent = member.name || "member";
   if (elements.memberEditPanel) {

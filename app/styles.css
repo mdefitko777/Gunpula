@@ -2380,6 +2380,23 @@ body[data-view="owned"] .section-head h2 {
   font-size: 14px;
 }
 
+.help-button {
+  width: 20px;
+  height: 20px;
+  margin-left: 6px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--panel);
+  color: var(--muted);
+  font: 700 12px/1 var(--font);
+  vertical-align: middle;
+}
+
+.help-button:active {
+  transform: scale(0.94);
+}
+
 .settings-section > h3 {
   margin-bottom: 10px;
 }
@@ -4865,6 +4882,17 @@ body.is-radial-active {
 
 .member-cover.has-cover {
   opacity: 1;
+}
+
+.member-profile-head.is-editable,
+.user-profile-head.is-editable {
+  cursor: pointer;
+}
+
+.member-profile-head.is-editable:focus-visible,
+.user-profile-head.is-editable:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.84);
+  outline-offset: -4px;
 }
 
 .member-profile-head::after,
