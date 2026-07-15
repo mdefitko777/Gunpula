@@ -877,6 +877,7 @@ const elements = {
   collectionNoteInput: document.querySelector("#collectionNoteInput"),
   saveCollectionDetails: document.querySelector("#saveCollectionDetails"),
   detailMeta: document.querySelector("#detailMeta"),
+  detailBbxLink: document.querySelector("#detailBbxLink"),
   detailMarketPanel: document.querySelector("#detailMarketPanel"),
   detailMarketBody: document.querySelector("#detailMarketBody"),
   openMarketFromDetail: document.querySelector("#openMarketFromDetail"),
@@ -7286,6 +7287,24 @@ function saveBbxOwnedParts() {
   localStorage.setItem(BBX_OWNED_PARTS_KEY, JSON.stringify([...(state.bbxOwnedParts || [])]));
 }
 
+// Manual override linking a catalog kit_id to a 陀螺's base_set_id, for the
+// event/exclusive kits whose code can't be auto-matched. Written from both the
+// 图鉴 side (link a kit into this top) and the catalog side (put this kit into a
+// top), so the two entry points share one store.
+const BBX_MANUAL_MAP_KEY = "gunpula-bbx-manual-map-v1";
+
+function loadBbxManualMap() {
+  try {
+    return new Map(Object.entries(JSON.parse(localStorage.getItem(BBX_MANUAL_MAP_KEY) || "{}")));
+  } catch {
+    return new Map();
+  }
+}
+
+function saveBbxManualMap() {
+  localStorage.setItem(BBX_MANUAL_MAP_KEY, JSON.stringify(Object.fromEntries(state.bbxManualMap || new Map())));
+}
+
 function bbxLocalize(names = {}) {
   return names[state.language] || names.en || names.zh || names.ja || "";
 }
@@ -7294,12 +7313,28 @@ function bbxNormalizeCode(value) {
   return String(value || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
 }
 
+// Canonical product code from a catalog kit_id: leading line letters + the first
+// number group only, so a catalog sequence suffix (cx-13-122) or an event name
+// suffix (cx00-tiga) collapses to the real set code (CX13 / CX00).
+function bbxKitCode(kitId) {
+  const s = String(kitId).replace(/^beyblade-x-/, "");
+  const m = /^([a-z]+)-?(\d+)/i.exec(s);
+  return m ? (m[1] + m[2]).toUpperCase() : bbxNormalizeCode(s);
+}
+
+// Same letters+first-number reduction for a bbx product_id / base_set_id.
+function bbxSetCode(value) {
+  const m = /^([A-Za-z]+)-?(\d+)/.exec(String(value || ""));
+  return m ? (m[1] + m[2]).toUpperCase() : bbxNormalizeCode(value);
+}
+
 async function ensureBbxData() {
   if (state.bbx) return state.bbx;
   if (!state.bbxOwnedParts) state.bbxOwnedParts = loadBbxOwnedParts();
+  if (!state.bbxManualMap) state.bbxManualMap = loadBbxManualMap();
   const db = await loadOptionalJson("../data/bbx-database.json");
   if (!db?.series) {
-    state.bbx = { tops: [], lines: [], partIndex: new Map(), productByBaseSet: new Map(), catalogByBaseSet: new Map() };
+    state.bbx = { tops: [], lines: [], partIndex: new Map(), productByBaseSet: new Map(), partsByBaseSet: new Map(), kitsByBaseSet: new Map(), beybladeKits: [], unmatchedKitIds: [] };
     return state.bbx;
   }
   const partIndex = new Map();
@@ -7317,13 +7352,42 @@ async function ensureBbxData() {
     partsByBaseSet.get(part.base_set_id).push(part);
   }
 
-  // Catalog beyblade kits keyed by normalized product code, for the reverse link.
-  const catalogByCode = new Map();
-  for (const kit of state.kits.filter((k) => k.franchise === "beyblade")) {
-    const code = bbxNormalizeCode(kit.kit_id.replace(/^beyblade-x-/, ""));
-    if (!code) continue;
-    if (!catalogByCode.has(code)) catalogByCode.set(code, []);
-    catalogByCode.get(code).push(kit.kit_id);
+  // Every base_set_id a 陀螺 or product references, indexed by its canonical set
+  // code, so a catalog kit's code can resolve to the matching base set(s).
+  const baseSetsByCode = new Map();
+  const addBaseSet = (code, baseSetId) => {
+    if (!code || !baseSetId) return;
+    if (!baseSetsByCode.has(code)) baseSetsByCode.set(code, new Set());
+    baseSetsByCode.get(code).add(baseSetId);
+  };
+  for (const product of db.products || []) {
+    addBaseSet(bbxSetCode(product.product_id), product.base_set_id);
+    addBaseSet(bbxSetCode(product.base_set_id), product.base_set_id);
+  }
+  for (const s of db.series) addBaseSet(bbxSetCode(s.base_set_id), s.base_set_id);
+
+  // Catalog beyblade kits mapped to their base set(s): auto by code, plus any
+  // manual override. Kits that resolve to nothing are surfaced for manual linking.
+  const beybladeKits = state.kits.filter((k) => k.franchise === "beyblade");
+  const kitsByBaseSet = new Map();
+  const unmatchedKitIds = [];
+  const linkKit = (baseSetId, kitId) => {
+    if (!kitsByBaseSet.has(baseSetId)) kitsByBaseSet.set(baseSetId, new Set());
+    kitsByBaseSet.get(baseSetId).add(kitId);
+  };
+  for (const kit of beybladeKits) {
+    const manual = state.bbxManualMap.get(kit.kit_id);
+    const autoSets = baseSetsByCode.get(bbxKitCode(kit.kit_id));
+    let linked = false;
+    if (manual) {
+      linkKit(manual, kit.kit_id);
+      linked = true;
+    }
+    if (autoSets) {
+      for (const bs of autoSets) linkKit(bs, kit.kit_id);
+      linked = true;
+    }
+    if (!linked) unmatchedKitIds.push(kit.kit_id);
   }
 
   const tops = db.series
@@ -7342,16 +7406,32 @@ async function ensureBbxData() {
     .sort((a, b) => a.order - b.order);
 
   const lines = [...new Set(tops.map((t) => t.line))];
-  state.bbx = { tops, lines, partIndex, productByBaseSet, partsByBaseSet, catalogByCode };
+  state.bbx = { tops, lines, partIndex, productByBaseSet, partsByBaseSet, kitsByBaseSet, beybladeKits, unmatchedKitIds };
   return state.bbx;
 }
 
+// Catalog kit_ids linked to a 陀螺 (auto-matched by code or manually mapped).
+function bbxTopKitIds(top) {
+  return [...(state.bbx?.kitsByBaseSet.get(top.base_set_id) || [])];
+}
+
+// Combined status: your collection (owned/wanted the linked product, like the
+// Gundam guide) layered over per-part ownership. Precedence: fully owned →
+// wanted → partially assembled → none.
 function bbxTopStatus(top) {
   const owned = state.bbxOwnedParts || new Set();
   const have = top.components.filter((c) => owned.has(c.part_id)).length;
-  if (have === 0) return { status: "none", have, total: top.components.length };
-  if (have === top.components.length) return { status: "owned", have, total: top.components.length };
-  return { status: "partial", have, total: top.components.length };
+  const total = top.components.length;
+  const sets = guideCollectionSets();
+  const kitIds = bbxTopKitIds(top);
+  const ownsProduct = kitIds.some((id) => sets.owned.has(id));
+  const wantsProduct = kitIds.some((id) => sets.wanted.has(id));
+
+  let status = "none";
+  if (ownsProduct || (total > 0 && have === total)) status = "owned";
+  else if (wantsProduct) status = "wanted";
+  else if (have > 0) status = "partial";
+  return { status, have, total, ownsProduct, wantsProduct };
 }
 
 function bbxProductImage(baseSetId) {
@@ -7433,7 +7513,8 @@ function renderBbxGuide(bbx) {
       label.className = "guide-cell-name";
       label.textContent = top.name;
       cell.append(art, label);
-      cell.append(badgeEl(`${info.have}/${info.total}`, info.status === "owned" ? "guide-badge-owned" : "guide-badge-count"));
+      const badgeClass = info.status === "owned" ? "guide-badge-owned" : info.status === "wanted" ? "guide-badge-wanted" : "guide-badge-count";
+      cell.append(badgeEl(`${info.have}/${info.total}`, badgeClass));
       cell.addEventListener("click", () => openBbxTop(top));
       grid.append(cell);
     }
@@ -7515,10 +7596,10 @@ function openBbxTop(top) {
     }
   }
 
-  // Reverse link: the matching catalog kit(s) with add-to-collection buttons.
+  // Reverse link: catalog kit(s) linked to this top (auto-matched or manual),
+  // each with add-to-collection buttons, plus a control to link more by hand.
   elements.bbxTopKits.innerHTML = "";
-  const codes = [bbxNormalizeCode(product?.product_id), bbxNormalizeCode(top.base_set_id)].filter(Boolean);
-  const kitIds = [...new Set(codes.flatMap((code) => bbx.catalogByCode.get(code) || []))];
+  const kitIds = bbxTopKitIds(top);
   const kits = kitIds.map(displayKitById).filter(Boolean);
   if (!kits.length) {
     const empty = document.createElement("p");
@@ -7526,10 +7607,167 @@ function openBbxTop(top) {
     empty.textContent = t("guideNoKits");
     elements.bbxTopKits.append(empty);
   } else {
-    for (const kit of kits.slice(0, 12)) elements.bbxTopKits.append(guideKitRow(kit, { kit_ids: kitIds, unit_ids: [], variants: [] }, null));
+    for (const kit of kits.slice(0, 12)) elements.bbxTopKits.append(bbxKitRow(kit, top));
   }
 
+  const linkBar = document.createElement("div");
+  linkBar.className = "bbx-link-bar";
+  const linkBtn = document.createElement("button");
+  linkBtn.type = "button";
+  linkBtn.className = "bbx-link-toggle";
+  linkBtn.textContent = t("bbxLinkKit");
+  const picker = document.createElement("div");
+  picker.className = "bbx-link-picker";
+  picker.hidden = true;
+  linkBtn.addEventListener("click", () => {
+    picker.hidden = !picker.hidden;
+    if (!picker.hidden) bbxRenderLinkPicker(top, picker);
+  });
+  linkBar.append(linkBtn, picker);
+  elements.bbxTopKits.append(linkBar);
+
   if (!elements.bbxTopDialog.open) elements.bbxTopDialog.showModal();
+}
+
+// A linked catalog kit inside the 陀螺 dialog: opens the kit, marks owned/wanted
+// (which drives the top's collection color), and unlinks manual links. Separate
+// from guideKitRow because that one refreshes the Gundam guide, not this one.
+function bbxKitRow(kit, top) {
+  const sets = guideCollectionSets();
+  const row = document.createElement("div");
+  row.className = "guide-kit-row";
+  const face = document.createElement("button");
+  face.type = "button";
+  face.className = "guide-kit-face";
+  const thumb = document.createElement("span");
+  thumb.className = "guide-kit-thumb";
+  appendImageWithFallback(thumb, kit, { onExhausted: () => (thumb.textContent = gradeShortLabel(kit)) });
+  const text = document.createElement("span");
+  text.className = "guide-kit-text";
+  text.innerHTML = `<strong>${escapeHtml(kitShortName(kit))}</strong><span>${escapeHtml(seriesLabelFromKit(kit))} · ${escapeHtml(gradeShortLabel(kit))}</span>`;
+  face.append(thumb, text);
+  face.addEventListener("click", () => {
+    elements.bbxTopDialog.close();
+    openDetail(kit);
+  });
+
+  const actions = document.createElement("div");
+  actions.className = "guide-kit-actions";
+  for (const type of ["owned", "wanted"]) {
+    const active = sets[type].has(kit.kit_id);
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `guide-add-button is-${type}${active ? " is-active" : ""}`;
+    button.textContent = active ? t(`unmark${type === "owned" ? "Owned" : "Wanted"}`) : t(`mark${type === "owned" ? "Owned" : "Wanted"}`);
+    button.disabled = !canEditSharedData();
+    button.addEventListener("click", () => {
+      setKitCollectionStatus(kit.kit_id, type, !active);
+      openBbxTop(top);
+      renderBbxGuide(state.bbx);
+      renderUserGuideValue();
+    });
+    actions.append(button);
+  }
+  row.append(face, actions);
+
+  if (state.bbxManualMap?.get(kit.kit_id) === top.base_set_id) {
+    const unlink = document.createElement("button");
+    unlink.type = "button";
+    unlink.className = "bbx-unlink";
+    unlink.textContent = t("bbxUnlink");
+    unlink.title = t("bbxManualTag");
+    unlink.addEventListener("click", async (event) => {
+      event.stopPropagation();
+      await bbxUnlinkKit(kit.kit_id);
+      openBbxTop(top);
+      renderBbxGuide(state.bbx);
+    });
+    row.append(unlink);
+  }
+  return row;
+}
+
+// Inline candidate list for manually linking a catalog kit to this 陀螺. Kits
+// with no automatic match are offered first, then the rest, filtered by a text
+// box on kit code or localized name.
+function bbxRenderLinkPicker(top, container) {
+  const bbx = state.bbx;
+  container.innerHTML = "";
+  const hint = document.createElement("p");
+  hint.className = "settings-hint";
+  hint.textContent = t("bbxLinkHint");
+  const search = document.createElement("input");
+  search.type = "search";
+  search.className = "bbx-link-search";
+  search.placeholder = t("bbxLinkSearch");
+  const list = document.createElement("div");
+  list.className = "bbx-link-list";
+  container.append(hint, search, list);
+
+  const alreadyLinked = new Set(bbxTopKitIds(top));
+  const unmatched = new Set(bbx.unmatchedKitIds);
+  const candidates = bbx.beybladeKits
+    .filter((k) => !alreadyLinked.has(k.kit_id))
+    .sort((a, b) => (unmatched.has(b.kit_id) ? 1 : 0) - (unmatched.has(a.kit_id) ? 1 : 0));
+
+  const draw = () => {
+    const query = bbxNormalizeCode(search.value);
+    const nameQuery = search.value.trim().toLowerCase();
+    list.innerHTML = "";
+    const shown = candidates
+      .filter((k) => {
+        if (!query && !nameQuery) return true;
+        const codeHit = bbxKitCode(k.kit_id).includes(query);
+        const nameHit = bbxLocalize(k.names).toLowerCase().includes(nameQuery);
+        return codeHit || nameHit;
+      })
+      .slice(0, 40);
+    if (!shown.length) {
+      const empty = document.createElement("p");
+      empty.className = "settings-hint";
+      empty.textContent = t("bbxNoLinkCandidates");
+      list.append(empty);
+      return;
+    }
+    for (const kit of shown) {
+      const row = document.createElement("button");
+      row.type = "button";
+      row.className = "bbx-link-candidate";
+      const name = document.createElement("span");
+      name.textContent = bbxLocalize(kit.names) || kit.kit_id;
+      if (unmatched.has(kit.kit_id)) {
+        const tag = document.createElement("em");
+        tag.className = "bbx-link-unmatched";
+        tag.textContent = t("bbxUnlinkedTag");
+        name.append(" ", tag);
+      }
+      row.append(name);
+      row.addEventListener("click", async () => {
+        await bbxLinkKitToTop(kit.kit_id, top.base_set_id);
+        openBbxTop(top);
+        renderBbxGuide(state.bbx);
+      });
+      list.append(row);
+    }
+  };
+  search.addEventListener("input", draw);
+  draw();
+}
+
+async function bbxLinkKitToTop(kitId, baseSetId) {
+  state.bbxManualMap = state.bbxManualMap || new Map();
+  state.bbxManualMap.set(kitId, baseSetId);
+  saveBbxManualMap();
+  state.bbx = null; // rebuild the kit↔top index with the new link
+  await ensureBbxData();
+}
+
+async function bbxUnlinkKit(kitId) {
+  if (!state.bbxManualMap?.has(kitId)) return;
+  state.bbxManualMap.delete(kitId);
+  saveBbxManualMap();
+  state.bbx = null;
+  await ensureBbxData();
 }
 
 function bbxSetPartOwned(partId, owned) {
@@ -8429,6 +8667,7 @@ function renderDetail(kit) {
   elements.detailSubtitle.textContent = [kit.release_date, formatPrice(kit.price_jpy)].filter((value) => value && value !== t("pending")).join(" · ");
   renderDetailStatusActions(kit);
   renderDetailMeta(kit);
+  renderDetailBbxLink(kit);
   renderDetailMarketPanel(kit);
   renderDetailGallery(kit);
   fillCorrectionForm(kit);
@@ -8453,6 +8692,124 @@ function closeDetail(options = {}) {
   }
   state.selectedKit = null;
   persistViewState({ mode: "replace" });
+}
+
+// Catalog-side entry into the 陀螺 mapping: for a Beyblade kit, show which
+// 陀螺 it feeds (auto-matched or manual) and let the user link it into a top by
+// hand — the mirror of the link control inside the 图鉴 dialog.
+async function renderDetailBbxLink(kit) {
+  const el = elements.detailBbxLink;
+  if (!el) return;
+  if (kit.franchise !== "beyblade") {
+    el.hidden = true;
+    el.innerHTML = "";
+    return;
+  }
+  el.hidden = false;
+  el.innerHTML = "";
+  const bbx = await ensureBbxData();
+  if (state.selectedKit !== kit) return; // user moved on while loading
+
+  const title = document.createElement("h3");
+  title.className = "detail-bbx-title";
+  title.textContent = t("pictureBook");
+  el.append(title);
+
+  const linkedBaseSets = [...bbx.kitsByBaseSet.entries()].filter(([, set]) => set.has(kit.kit_id)).map(([bs]) => bs);
+  const linkedTops = bbx.tops.filter((top) => linkedBaseSets.includes(top.base_set_id));
+
+  if (linkedTops.length) {
+    const list = document.createElement("div");
+    list.className = "detail-bbx-tops";
+    for (const top of linkedTops.slice(0, 12)) {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "detail-bbx-top";
+      chip.textContent = top.name;
+      const manual = state.bbxManualMap?.get(kit.kit_id) === top.base_set_id;
+      if (manual) {
+        const tag = document.createElement("em");
+        tag.textContent = t("bbxManualTag");
+        chip.append(" ", tag);
+      }
+      chip.addEventListener("click", () => openBbxGuideToTop(top));
+      list.append(chip);
+    }
+    el.append(list);
+  } else {
+    const hint = document.createElement("p");
+    hint.className = "settings-hint";
+    hint.textContent = t("guideNoKits");
+    el.append(hint);
+  }
+
+  const addBtn = document.createElement("button");
+  addBtn.type = "button";
+  addBtn.className = "bbx-link-toggle";
+  addBtn.textContent = t("bbxAddToGuide");
+  const picker = document.createElement("div");
+  picker.className = "bbx-link-picker";
+  picker.hidden = true;
+  addBtn.addEventListener("click", () => {
+    picker.hidden = !picker.hidden;
+    if (!picker.hidden) bbxRenderTopPicker(kit, picker);
+  });
+  el.append(addBtn, picker);
+}
+
+// Inline searchable list of 陀螺 to attach this catalog kit to (catalog side).
+function bbxRenderTopPicker(kit, container) {
+  const bbx = state.bbx;
+  container.innerHTML = "";
+  const hint = document.createElement("p");
+  hint.className = "settings-hint";
+  hint.textContent = t("bbxPickTop");
+  const search = document.createElement("input");
+  search.type = "search";
+  search.className = "bbx-link-search";
+  search.placeholder = t("bbxLinkSearch");
+  const list = document.createElement("div");
+  list.className = "bbx-link-list";
+  container.append(hint, search, list);
+
+  const draw = () => {
+    const codeQuery = bbxNormalizeCode(search.value);
+    const nameQuery = search.value.trim().toLowerCase();
+    list.innerHTML = "";
+    const shown = bbx.tops
+      .filter((top) => {
+        if (!codeQuery && !nameQuery) return true;
+        return bbxSetCode(top.base_set_id).includes(codeQuery) || top.name.toLowerCase().includes(nameQuery);
+      })
+      .slice(0, 40);
+    if (!shown.length) {
+      const empty = document.createElement("p");
+      empty.className = "settings-hint";
+      empty.textContent = t("bbxNoLinkCandidates");
+      list.append(empty);
+      return;
+    }
+    for (const top of shown) {
+      const row = document.createElement("button");
+      row.type = "button";
+      row.className = "bbx-link-candidate";
+      row.textContent = top.name;
+      row.addEventListener("click", async () => {
+        await bbxLinkKitToTop(kit.kit_id, top.base_set_id);
+        renderDetailBbxLink(kit);
+      });
+      list.append(row);
+    }
+  };
+  search.addEventListener("input", draw);
+  draw();
+}
+
+// Open the 图鉴 on the BBX tab focused on a specific top.
+async function openBbxGuideToTop(top) {
+  if (elements.detailDialog.open) elements.detailDialog.close();
+  await openGuide("bbx");
+  openBbxTop(top);
 }
 
 function renderDetailMeta(kit) {

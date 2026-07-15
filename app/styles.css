@@ -4082,8 +4082,11 @@ body.is-radial-active {
   min-height: 34px;
 }
 
+/* BBX only: some parts assembled but not fully owned/wanted — dashed accent so
+   it reads as "in progress toward owned", distinct from the solid amber wanted. */
 .guide-cell.is-partial {
-  border-color: #e0a63a;
+  border-style: dashed;
+  border-color: var(--accent);
 }
 
 .guide-cell.is-partial .guide-cell-art img {
@@ -4186,6 +4189,115 @@ body.is-radial-active {
   display: grid;
   gap: 6px;
   margin-bottom: 4px;
+}
+
+.bbx-unlink {
+  flex: none;
+  align-self: center;
+  margin-left: 6px;
+  min-height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--faint);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.bbx-link-bar {
+  margin-top: 8px;
+}
+
+.bbx-link-toggle {
+  width: 100%;
+  min-height: 34px;
+  border: 1px dashed var(--accent);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--accent-deep);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.bbx-link-picker {
+  margin-top: 8px;
+  display: grid;
+  gap: 8px;
+}
+
+.bbx-link-search {
+  width: 100%;
+  min-height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-2, rgba(127, 127, 127, 0.08));
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.bbx-link-list {
+  display: grid;
+  gap: 4px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.bbx-link-candidate {
+  text-align: left;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.bbx-link-candidate:hover {
+  border-color: var(--accent);
+}
+
+.bbx-link-unmatched {
+  font-style: normal;
+  color: #e0a63a;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.detail-bbx-link {
+  display: grid;
+  gap: 8px;
+  margin: 4px 0 12px;
+}
+
+.detail-bbx-title {
+  font-size: 13px;
+  margin: 0;
+}
+
+.detail-bbx-tops {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.detail-bbx-top {
+  padding: 6px 10px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent-deep);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.detail-bbx-top em {
+  font-style: normal;
+  color: var(--faint);
+  font-size: 10px;
 }
 
 .bbx-reco-card {
