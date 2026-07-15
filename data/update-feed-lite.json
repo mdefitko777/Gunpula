@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-07-16",
-  "generated_at": "2026-07-15T15:38:25.016Z",
+  "generated_at": "2026-07-15T19:44:40.357Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,56 +16,95 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-07-15T15:38:24.332Z",
+    "generated_at": "2026-07-15T19:44:39.667Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-07-16",
-      "generated_at": "2026-07-15T15:38:25.016Z",
+      "generated_at": "2026-07-15T19:44:40.357Z",
       "total_before": 4881,
-      "total_after": 4880,
-      "added_count": 0,
-      "changed_count": 153,
+      "total_after": 4881,
+      "added_count": 1,
+      "changed_count": 120,
       "removed_count": 1,
       "watched_count": 43,
       "premium_bandai_count": 38,
       "bbx_count": 10,
       "franchise_counts": {
-        "armored_core": 3,
+        "fate": 38,
         "beyblade": 10,
-        "fate": 37,
-        "gundam": 48,
-        "pokemon": 55
+        "gundam": 46,
+        "armored_core": 3,
+        "pokemon": 24
       },
       "reason_counts": {
-        "image": 153,
+        "new": 1,
+        "image": 120,
         "removed": 1
       },
       "interest_tags": [
-        "armored_core",
-        "premium_bandai",
+        "fate",
         "beyblade",
         "bbx",
         "bbx_cx",
         "beyblade_cx",
         "00",
+        "gundam",
+        "premium_bandai",
+        "seed",
         "bbx_ux",
         "bbx_limited",
         "beyblade_limited",
         "bbx_bx",
+        "armored_core",
         "beyblade_ux",
-        "fate",
-        "gundam",
-        "seed",
         "pokemon"
       ],
       "watch_tags": [
         "00",
         "seed"
       ],
-      "added": [],
+      "added": [
+        {
+          "kit_id": "goodsmile-fate-g272",
+          "change_type": "added",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "Other Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Caren Ortenzia Prologue ver.",
+            "zh": "Caren Ortenzia Prologue ver.",
+            "ko": "Caren Ortenzia Prologue ver.",
+            "en": "Caren Ortenzia Prologue ver."
+          },
+          "release_date": null,
+          "price_jpy": 7480,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/272"
+          ]
+        }
+      ],
       "changed": [
         {
           "kit_id": "beyblade-x-cx00-tiga",
