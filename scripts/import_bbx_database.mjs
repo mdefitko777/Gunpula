@@ -39,12 +39,19 @@ const PART_APP_FOLDER = {
   over_blade: "OverBlade",
 };
 
+// image      – primary display URL (rewritten to a local ./assets path by
+//              cache_bbx_images.mjs; remote here so the app works pre-cache)
+// image_fallback – blade's lighter app-folder art (used for grid thumbnails)
+// image_remote   – primary remote URL, never rewritten, so the app can fall
+//              back to the network when local assets are absent (the APK build
+//              excludes app/assets)
 function partImages(type, id) {
   const appUrl = `${BASE}/images/app/${PART_APP_FOLDER[type] || type}/${id}.png`;
   if (type === "blade") {
-    return { image: `${BASE}/images/site/Blade/${id}.png`, image_fallback: appUrl };
+    const siteUrl = `${BASE}/images/site/Blade/${id}.png`;
+    return { image: siteUrl, image_fallback: appUrl, image_remote: siteUrl };
   }
-  return { image: appUrl, image_fallback: null };
+  return { image: appUrl, image_fallback: null, image_remote: appUrl };
 }
 
 async function getJson(url) {
@@ -108,16 +115,20 @@ async function main() {
       collection_order: s.collection_order ?? null,
     }));
 
-  const cleanProducts = products.map((p) => ({
-    product_id: p.product_id,
-    base_set_id: p.base_set_id || "",
-    names: names(p.name),
-    price: p.price || "",
-    release_date: p.release_date || "",
-    url: p.url || "",
-    youtube: p.youtube || "",
-    image: Array.isArray(p.images) && p.images[0] ? `${BASE}/${p.images[0]}` : null,
-  }));
+  const cleanProducts = products.map((p) => {
+    const image = Array.isArray(p.images) && p.images[0] ? `${BASE}/${p.images[0]}` : null;
+    return {
+      product_id: p.product_id,
+      base_set_id: p.base_set_id || "",
+      names: names(p.name),
+      price: p.price || "",
+      release_date: p.release_date || "",
+      url: p.url || "",
+      youtube: p.youtube || "",
+      image,
+      image_remote: image,
+    };
+  });
 
   const doc = {
     source: "beyblade.phstudy.org",

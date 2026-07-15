@@ -21,6 +21,7 @@ const rewriteCatalog = flags.has("--rewrite");
 const repoAssets = flags.has("--repo-assets");
 const premiumBandaiOnly = flags.has("--premium-bandai");
 const franchiseFilter = options.franchise || process.env.IMAGE_CACHE_FRANCHISE || "";
+const kitIdsPath = options["kit-ids"] || process.env.IMAGE_CACHE_KIT_IDS || "";
 const maxItems = Number(options.limit || process.env.IMAGE_CACHE_LIMIT || 0);
 const concurrency = Number(options.concurrency || process.env.IMAGE_CACHE_CONCURRENCY || 6);
 const externalCacheRoot = path.resolve(process.env.IMAGE_CACHE_DIR || "../image-cache/catalog");
@@ -102,6 +103,15 @@ function refererFor(kit, url) {
   }) || kit.source_urls?.[0] || new URL(url).origin;
 }
 
+const kitIdFilter = kitIdsPath
+  ? new Set(
+      (await readFile(kitIdsPath, "utf8"))
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter(Boolean),
+    )
+  : new Set();
+
 async function fetchImage(kit, url) {
   const response = await fetch(url, {
     headers: {
@@ -139,6 +149,7 @@ async function mapLimit(items, worker) {
 const selectedKits = catalog.kits
   .filter((kit) => !franchiseFilter || kit.franchise === franchiseFilter)
   .filter((kit) => !premiumBandaiOnly || isPremiumBandaiKit(kit))
+  .filter((kit) => !kitIdsPath || kitIdFilter.has(kit.kit_id))
   .slice(0, maxItems > 0 ? maxItems : undefined);
 
 const tasks = [];
