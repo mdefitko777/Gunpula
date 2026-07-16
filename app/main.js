@@ -129,7 +129,7 @@ const RADIAL_SCROLL_CANCEL_DISTANCE = 10;
 const RADIAL_CANCEL_DISTANCE = 18;
 const RADIAL_SELECT_DISTANCE = 28;
 const PAGER_START_DISTANCE = 18;
-const DRAWER_EDGE_ZONE = 28;
+const DRAWER_EDGE_ZONE = 96;
 const DRAWER_OPEN_DISTANCE = 44;
 const COLLECTION_SWIPE_DISTANCE = 46;
 const PAGER_THRESHOLD_RATIO = 0.28;
@@ -485,6 +485,10 @@ const elements = {
   memberActionRename: document.querySelector("#memberActionRename"),
   memberActionTags: document.querySelector("#memberActionTags"),
   memberActionCancel: document.querySelector("#memberActionCancel"),
+  profileImageDialog: document.querySelector("#profileImageDialog"),
+  profileImageClose: document.querySelector("#profileImageClose"),
+  profileImageTitle: document.querySelector("#profileImageTitle"),
+  profileImagePreview: document.querySelector("#profileImagePreview"),
   homeUpdateSummary: document.querySelector("#homeUpdateSummary"),
   sourceHealthStrip: document.querySelector("#sourceHealthStrip"),
   homeUpdateList: document.querySelector("#homeUpdateList"),
@@ -969,7 +973,7 @@ function normalizeState() {
   if (state.activeView === "market") {
     state.activeView = "catalog";
   }
-  if (!["home", "catalog", "updates", "pbandai", "owned", "wanted"].includes(state.activeView)) {
+  if (!["home", "catalog", "updates", "pbandai", "owned", "wanted", "guide"].includes(state.activeView)) {
     state.activeView = "home";
   }
   if (!THEMES.some((theme) => theme.code === state.theme)) {
@@ -1428,10 +1432,6 @@ function bindEvents() {
       openSettings();
       return;
     }
-    if (nextView === "guide") {
-      openGuide();
-      return;
-    }
     if (nextView === "collection") {
       // Merged collection entry: reopen whichever tab (wanted/owned) was last active.
       nextView = COLLECTION_TYPES.includes(state.lastCollectionTab) ? state.lastCollectionTab : "wanted";
@@ -1568,6 +1568,14 @@ function bindEvents() {
     if (event.key === "Enter") saveMemberDisplayNameValue(elements.memberDialogNameInput.value, elements.memberDialogSaveName);
   });
   elements.profileBackgroundInput?.addEventListener("change", handleProfileBackgroundChange);
+  elements.profileImageClose?.addEventListener("click", () => closeDialog(elements.profileImageDialog));
+  elements.profileImageDialog?.addEventListener("click", (event) => {
+    if (event.target === elements.profileImageDialog) closeDialog(elements.profileImageDialog);
+  });
+  elements.profileImageDialog?.addEventListener("cancel", (event) => {
+    event.preventDefault();
+    closeDialog(elements.profileImageDialog);
+  });
   elements.memberActionCancel?.addEventListener("click", () => closeDialog(elements.memberActionDialog));
   elements.memberActionDialog?.addEventListener("click", (event) => {
     if (event.target === elements.memberActionDialog) closeDialog(elements.memberActionDialog);
@@ -1673,11 +1681,8 @@ function bindEvents() {
     state.returnToUserDrawer = true;
     openGuide();
   });
-  elements.guideClose?.addEventListener("click", () => closeDialog(elements.guideDialog));
+  elements.guideClose?.addEventListener("click", () => switchToView("home"));
   elements.guideColorToggle?.addEventListener("click", toggleGuideFullColor);
-  elements.guideDialog?.addEventListener("click", (event) => {
-    if (event.target === elements.guideDialog) closeDialog(elements.guideDialog);
-  });
   elements.guideTabs?.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-guide-tab]");
     if (!button || button.dataset.guideTab === state.guideTab) return;
@@ -1910,6 +1915,10 @@ function closeTopLayerForBack() {
     closeDialog(elements.guideUnitDialog);
     return true;
   }
+  if (elements.profileImageDialog?.open) {
+    closeDialog(elements.profileImageDialog);
+    return true;
+  }
   if (elements.memberActionDialog?.open) {
     closeDialog(elements.memberActionDialog);
     return true;
@@ -1940,14 +1949,6 @@ function closeTopLayerForBack() {
         state.returnToUserDrawer = false;
         openUserPage();
       }
-    }
-    return true;
-  }
-  if (elements.guideDialog?.open) {
-    closeDialog(elements.guideDialog);
-    if (state.returnToUserDrawer) {
-      state.returnToUserDrawer = false;
-      openUserPage();
     }
     return true;
   }
@@ -2069,6 +2070,7 @@ function gestureTargetAllowed(target) {
     elements.memberActionDialog?.open ||
     elements.userDialog?.open ||
     elements.guideUnitDialog?.open ||
+    elements.profileImageDialog?.open ||
     elements.bbxTopDialog?.open ||
     elements.bbxPartDialog?.open
   ) {
@@ -2158,7 +2160,6 @@ function moveTouchGesture(event) {
   // A left-edge swipe to the right slides the personal drawer out, QQ-style.
   // This runs before catalog paging so catalog/guide can still open the drawer.
   if (
-    !state.pager.blockedByTarget &&
     state.radial.startX <= DRAWER_EDGE_ZONE &&
     deltaX > DRAWER_OPEN_DISTANCE &&
     absX > absY * 1.15 &&
@@ -2173,7 +2174,12 @@ function moveTouchGesture(event) {
     openUserPage();
     return;
   }
-  if (state.activeView === "catalog" && !elements.guideDialog?.open && !state.pager.blockedByTarget && absX > PAGER_START_DISTANCE && absX > absY * 1.15) {
+  if (
+    ["catalog", "guide"].includes(state.activeView) &&
+    !state.pager.blockedByTarget &&
+    absX > PAGER_START_DISTANCE &&
+    absX > absY * 1.15
+  ) {
     clearTimeout(state.radial.timer);
     state.radial.timer = null;
     startPagerGesture(deltaX);
@@ -3673,6 +3679,7 @@ function render() {
   renderHomeUpdates();
   renderPBandaiProducts();
   renderMarketCenter();
+  renderGuidePage();
   renderUpdateLog();
   renderFilterSummary();
   renderKits();
@@ -3688,6 +3695,7 @@ function renderCatalogDataChanged() {
   renderHomeUpdates();
   renderPBandaiProducts();
   renderMarketCenter();
+  renderGuidePage();
   renderFilterSummary();
   renderKits();
 }
@@ -4207,33 +4215,20 @@ function renderHomeUpdates() {
   elements.updatesRecentButton?.classList.toggle("is-active", mode === "recent");
   elements.updatesWeekButton?.classList.toggle("is-active", mode === "week");
   const items = sortByPreference(mode === "recent" ? recentFeedKits() : mode === "week" ? weekOnSaleKits() : releaseItemsForMonth(state.releaseMonth));
+  if (elements.homeUpdateSummary) {
+    elements.homeUpdateSummary.hidden = true;
+    elements.homeUpdateSummary.innerHTML = "";
+  }
+  if (elements.sourceHealthStrip) {
+    elements.sourceHealthStrip.hidden = true;
+    elements.sourceHealthStrip.innerHTML = "";
+  }
   if (mode !== "month") {
     elements.updatesSubtitle.textContent =
       mode === "week" ? t("weekOnSaleSummary", { count: items.length }) : t("recentDaysSummary", { days: RECENT_UPDATE_DAYS, count: items.length });
-    renderUpdateSummaryCards(elements.homeUpdateSummary, [
-      ...favoriteUpdateSummaryCards(items),
-      {
-        label: mode === "week" ? t("weekOnSaleShort") : t("recentDaysShort"),
-        value: items.length,
-        meta: mode === "week" ? localDateKey() : updateFeedEntries()[0]?.date || "",
-      },
-      { label: t("premiumBandai"), value: items.filter(kitIsPremiumBandai).length, meta: t("openPremiumBandai") },
-      { label: t("watchedUpdates"), value: items.filter((kit) => ["seed", "double_o"].includes(kitSeriesKey(kit))).length, meta: "SEED / 00" },
-      { label: t("franchise"), value: new Set(items.map((kit) => kit.franchise)).size, meta: t("records", { count: state.kits.length }) },
-    ]);
   } else {
-    const stats = releaseMonthStats(state.releaseMonth);
     elements.updatesSubtitle.textContent = t("releaseMonthSummary", { month: state.releaseMonth, count: items.length });
-    renderUpdateSummaryCards(elements.homeUpdateSummary, [
-      ...favoriteUpdateSummaryCards(items),
-      { label: t("releaseMonth"), value: stats.count, meta: state.releaseMonth },
-      { label: t("premiumBandai"), value: stats.premium, meta: t("openPremiumBandai") },
-      { label: t("watchedUpdates"), value: stats.watched, meta: "SEED / 00" },
-      { label: t("franchise"), value: stats.franchises, meta: t("records", { count: state.kits.length }) },
-    ]);
   }
-  elements.sourceHealthStrip.hidden = true;
-
   elements.homeUpdateList.innerHTML = "";
   if (!items.length) {
     const empty = document.createElement("div");
@@ -6479,12 +6474,24 @@ async function openGuide(tab, member = editableCollectionMember()) {
   if (tab) state.guideTab = tab;
   state.activeGuideMember = safeMemberName(typeof member === "string" ? member : member?.name || editableCollectionMember());
   if (!state.guideTab) state.guideTab = "gundam";
+  state.activeView = "guide";
+  state.selectedKit = null;
+  state.activeModal = null;
+  localStorage.setItem(ACTIVE_VIEW_KEY, state.activeView);
+  persistViewState({ mode: "push" });
+  render();
+}
+
+async function renderGuidePage() {
+  const visible = state.activeView === "guide";
+  if (elements.guideDialog) elements.guideDialog.hidden = !visible;
+  if (!visible) return;
+  if (!state.guideTab) state.guideTab = "gundam";
   if (elements.guideTabs) {
     for (const button of elements.guideTabs.querySelectorAll("button[data-guide-tab]")) {
       button.classList.toggle("is-active", button.dataset.guideTab === state.guideTab);
     }
   }
-  openDialog(elements.guideDialog);
   await renderGuideActive();
 }
 
@@ -6511,7 +6518,7 @@ function bindGuideSwipe() {
   elements.guideDialog.addEventListener(
     "touchstart",
     (event) => {
-      if (!elements.guideDialog.open || event.touches.length !== 1) return;
+      if (state.activeView !== "guide" || event.touches.length !== 1) return;
       const touch = event.touches[0];
       startX = touch.clientX;
       startY = touch.clientY;
@@ -6522,7 +6529,7 @@ function bindGuideSwipe() {
   elements.guideDialog.addEventListener(
     "touchend",
     (event) => {
-      if (!startTime || !elements.guideDialog.open) return;
+      if (!startTime || state.activeView !== "guide") return;
       const touch = event.changedTouches[0];
       const dx = touch.clientX - startX;
       const dy = touch.clientY - startY;
@@ -6756,7 +6763,7 @@ function openGuideUnit(group, status, member = activeGuideMember()) {
       saveGuideSplits();
       refreshGuideGroups();
       closeDialog(elements.guideUnitDialog);
-      if (elements.guideDialog.open) renderGuide(state.guide);
+      if (state.activeView === "guide") renderGuide(state.guide);
       renderUserGuideValue();
     });
     elements.guideUnitVariants.append(toggle);
@@ -6777,7 +6784,7 @@ function openGuideUnit(group, status, member = activeGuideMember()) {
       }
       saveGuideManualLit();
       openGuideUnit(group, guideGroupStatus(group, guideCollectionSets(member)), member);
-      if (elements.guideDialog.open) renderGuide(state.guide);
+      if (state.activeView === "guide") renderGuide(state.guide);
       renderUserGuideValue();
     });
     elements.guideUnitVariants.append(manualToggle);
@@ -6844,7 +6851,7 @@ function guideAddButton(kit, type, active, group, groupStatus, member = activeGu
   button.addEventListener("click", () => {
     setKitCollectionStatus(kit.kit_id, type, !active);
     openGuideUnit(group, guideGroupStatus({ ...group, kit_ids: group.kit_ids }, guideCollectionSets(member)), member);
-    if (elements.guideDialog.open) renderGuide(state.guide);
+    if (state.activeView === "guide") renderGuide(state.guide);
     renderUserGuideValue();
   });
   return button;
@@ -7588,7 +7595,12 @@ function viewMemberProfileImage(kind) {
     window.alert(t(kind === "avatar" ? "profileAvatarMissing" : "profileBackgroundMissing"));
     return;
   }
-  window.open(url, "_blank", "noopener,noreferrer");
+  if (elements.profileImageDialog && elements.profileImagePreview) {
+    elements.profileImageTitle.textContent = t(kind === "avatar" ? "viewProfileAvatar" : "viewProfileBackground");
+    elements.profileImagePreview.src = url;
+    elements.profileImagePreview.alt = elements.profileImageTitle.textContent;
+    openDialog(elements.profileImageDialog);
+  }
 }
 
 async function renameFromMemberActionSheet() {

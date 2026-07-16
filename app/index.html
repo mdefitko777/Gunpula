@@ -9,7 +9,7 @@
     <title>Gunpula v2.0.0</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260716-v62" />
+    <link rel="stylesheet" href="./styles.css?v=20260716-v63" />
   </head>
   <body>
     <main class="catalog-page">
@@ -117,6 +117,27 @@
         </div>
         <div class="pb-franchise-tabs" id="pbandaiFranchiseTabs"></div>
         <div class="pbandai-list" id="pbandaiList"></div>
+      </section>
+
+      <section class="guide-section" id="guideDialog" aria-labelledby="guideTitle" hidden>
+        <div class="guide-shell">
+          <div class="guide-head">
+            <button class="dialog-close guide-close" id="guideClose" type="button" aria-label="关闭" data-i18n-aria="closeSettings">×</button>
+            <button class="guide-user-chip" id="guideUserChip" type="button">
+              <span class="account-avatar guide-user-avatar" id="guideUserAvatar">@</span>
+              <span id="guideUserName"></span>
+            </button>
+            <h2 id="guideTitle" data-i18n="pictureBook">图鉴</h2>
+            <div class="segmented-control guide-tabs" id="guideTabs">
+              <button class="segment-button is-active" type="button" data-guide-tab="gundam" data-i18n="guideTabGundam">高达</button>
+              <button class="segment-button" type="button" data-guide-tab="bbx" data-i18n="guideTabBbx">陀螺</button>
+              <button class="segment-button" type="button" data-guide-tab="parts" data-i18n="guideTabParts">部品</button>
+            </div>
+            <button class="guide-color-toggle" id="guideColorToggle" type="button" data-i18n="guideFullColor">全彩预览</button>
+            <p id="guideSummary"></p>
+          </div>
+          <div class="guide-body" id="guideBody"></div>
+        </div>
       </section>
 
       <section class="collection-section" id="collectionSection" hidden>
@@ -626,27 +647,6 @@
       </div>
     </dialog>
 
-    <dialog class="guide-dialog" id="guideDialog" aria-labelledby="guideTitle">
-      <div class="guide-shell">
-        <div class="guide-head">
-          <button class="dialog-close guide-close" id="guideClose" type="button" aria-label="关闭" data-i18n-aria="closeSettings">×</button>
-          <button class="guide-user-chip" id="guideUserChip" type="button">
-            <span class="account-avatar guide-user-avatar" id="guideUserAvatar">@</span>
-            <span id="guideUserName"></span>
-          </button>
-          <h2 id="guideTitle" data-i18n="pictureBook">图鉴</h2>
-          <div class="segmented-control guide-tabs" id="guideTabs">
-            <button class="segment-button is-active" type="button" data-guide-tab="gundam" data-i18n="guideTabGundam">高达</button>
-            <button class="segment-button" type="button" data-guide-tab="bbx" data-i18n="guideTabBbx">陀螺</button>
-            <button class="segment-button" type="button" data-guide-tab="parts" data-i18n="guideTabParts">部品</button>
-          </div>
-          <button class="guide-color-toggle" id="guideColorToggle" type="button" data-i18n="guideFullColor">全彩预览</button>
-          <p id="guideSummary"></p>
-        </div>
-        <div class="guide-body" id="guideBody"></div>
-      </div>
-    </dialog>
-
     <dialog class="member-dialog guide-unit-dialog" id="guideUnitDialog" aria-labelledby="guideUnitName">
       <div class="member-shell">
         <button class="dialog-close" id="guideUnitClose" type="button" aria-label="关闭" data-i18n-aria="closeSettings">×</button>
@@ -746,6 +746,14 @@
       </div>
     </dialog>
 
+    <dialog class="profile-image-dialog" id="profileImageDialog" aria-labelledby="profileImageTitle">
+      <div class="profile-image-shell">
+        <button class="dialog-close" id="profileImageClose" type="button" aria-label="关闭" data-i18n-aria="closeSettings">×</button>
+        <h2 id="profileImageTitle"></h2>
+        <img id="profileImagePreview" alt="" />
+      </div>
+    </dialog>
+
     <div class="pager-preview" id="pagerPreview" hidden aria-hidden="true"></div>
     <div class="gesture-overlay" id="gestureOverlay" hidden aria-hidden="true"></div>
     <div class="radial-menu" id="radialMenu" hidden aria-hidden="true">
@@ -753,6 +761,6 @@
       <div class="radial-labels"></div>
     </div>
 
-    <script type="module" src="./main.js?v=20260716-v60"></script>
+    <script type="module" src="./main.js?v=20260716-v63"></script>
   </body>
 </html>
