@@ -6585,6 +6585,50 @@ function renderGuideUserChip() {
   };
 }
 
+function guideWorkDisplayName(workOrName) {
+  return String(typeof workOrName === "string" ? workOrName : workOrName?.name || "")
+    .replace(/^Mobile Suit Gundam\s*:?\s*/i, "")
+    .replace(/^Mobile Suit\s*:?\s*/i, "")
+    .trim();
+}
+
+function createGuideWorkArt(work, className) {
+  const art = document.createElement("span");
+  art.className = className;
+  if (!work?.image) {
+    art.classList.add("is-missing");
+    return art;
+  }
+  const img = document.createElement("img");
+  img.decoding = "async";
+  img.alt = guideWorkDisplayName(work);
+  setImageFallbackChain(img, [work.image], () => art.classList.add("is-missing"));
+  art.append(img);
+  return art;
+}
+
+function createGuideWorkCard(work, member, options = {}) {
+  const progress = guideWorkProgress(work, member);
+  const card = document.createElement("button");
+  card.type = "button";
+  card.className = `${options.cardClass || "guide-series-card"}${progress.lit ? " is-lit" : ""}`;
+  card.append(createGuideWorkArt(work, options.artClass || "guide-series-art"));
+  if (options.compact) {
+    const text = document.createElement("span");
+    text.className = "member-guide-text";
+    text.innerHTML = `<strong>${escapeHtml(guideWorkDisplayName(work))}</strong><span>${progress.lit}/${progress.total}</span>`;
+    card.append(text);
+  } else {
+    const label = document.createElement("strong");
+    label.textContent = guideWorkDisplayName(work);
+    const count = document.createElement("span");
+    count.textContent = `${progress.lit}/${progress.total}`;
+    card.append(label, count);
+  }
+  card.addEventListener("click", () => openGuideWork(work, member));
+  return card;
+}
+
 function renderGuide(guide) {
   const member = activeGuideMember();
   const sets = guideCollectionSets(member);
@@ -6612,29 +6656,7 @@ function renderGuide(guide) {
     const grid = document.createElement("div");
     grid.className = "guide-series-grid";
     for (const work of works) {
-      const groups = guideGroupsForWork(work, member);
-      const lit = groups.filter((g) => statusByGroup.get(g.key) !== "none").length;
-      const cell = document.createElement("button");
-      cell.type = "button";
-      cell.className = `guide-series-card${lit ? " is-lit" : ""}`;
-      const art = document.createElement("span");
-      art.className = "guide-series-art";
-      if (work.image) {
-        const img = document.createElement("img");
-        img.decoding = "async";
-        img.alt = work.name;
-        setImageFallbackChain(img, [work.image], () => art.classList.add("is-missing"));
-        art.append(img);
-      } else {
-        art.classList.add("is-missing");
-      }
-      const label = document.createElement("strong");
-      label.textContent = work.name;
-      const count = document.createElement("span");
-      count.textContent = `${lit}/${groups.length}`;
-      cell.append(art, label, count);
-      cell.addEventListener("click", () => openGuideWork(work, member));
-      grid.append(cell);
+      grid.append(createGuideWorkCard(work, member));
     }
     section.append(grid);
     elements.guideBody.append(section);
@@ -6672,11 +6694,11 @@ function openGuideWork(work, member = activeGuideMember()) {
   elements.guideUnitArt.innerHTML = "";
   if (work.image) {
     const img = document.createElement("img");
-    img.alt = work.name;
+    img.alt = guideWorkDisplayName(work);
     setImageFallbackChain(img, [work.image], () => img.remove());
     elements.guideUnitArt.append(img);
   }
-  elements.guideUnitName.textContent = work.name;
+  elements.guideUnitName.textContent = guideWorkDisplayName(work);
   elements.guideUnitMeta.textContent = `${guideSectionLabel(work.section || "unavailable")} · ${lit}/${groups.length}`;
   elements.guideUnitVariants.innerHTML = "";
   elements.guideUnitKits.innerHTML = "";
@@ -7756,27 +7778,13 @@ function renderMemberGuideSeries(member) {
     return;
   }
   for (const work of works) {
-    const progress = guideWorkProgress(work, member);
-    const card = document.createElement("button");
-    card.type = "button";
-    card.className = `member-guide-card${progress.lit ? " is-lit" : ""}`;
-    const art = document.createElement("span");
-    art.className = "member-guide-art";
-    if (work.image) {
-      const img = document.createElement("img");
-      img.decoding = "async";
-      img.alt = work.name;
-      setImageFallbackChain(img, [work.image], () => art.classList.add("is-missing"));
-      art.append(img);
-    } else {
-      art.classList.add("is-missing");
-    }
-    const text = document.createElement("span");
-    text.className = "member-guide-text";
-    text.innerHTML = `<strong>${escapeHtml(work.name)}</strong><span>${progress.lit}/${progress.total}</span>`;
-    card.append(art, text);
-    card.addEventListener("click", () => openGuideWork(work, member));
-    elements.memberGuideSeries.append(card);
+    elements.memberGuideSeries.append(
+      createGuideWorkCard(work, member, {
+        cardClass: "member-guide-card",
+        artClass: "member-guide-art",
+        compact: true,
+      }),
+    );
   }
 }
 
@@ -7805,7 +7813,7 @@ function renderGuideWorksPanel(container) {
     const chip = document.createElement("button");
     chip.type = "button";
     chip.className = `guide-work-pick${selected.has(Number(work.work_id)) ? " is-active" : ""}`;
-    chip.innerHTML = `<strong>${escapeHtml(work.name)}</strong><span>${progress.lit}/${progress.total}</span>`;
+    chip.innerHTML = `<strong>${escapeHtml(guideWorkDisplayName(work))}</strong><span>${progress.lit}/${progress.total}</span>`;
     chip.addEventListener("click", async () => {
       const id = Number(work.work_id);
       if (selected.has(id)) selected.delete(id);
