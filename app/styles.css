@@ -487,8 +487,8 @@ h1 {
   max-width: 100%;
   padding: 0 12px;
   border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--panel);
+  border-radius: 8px;
+  background: transparent;
   color: var(--muted);
   font-size: 12.5px;
   font-weight: 500;
@@ -505,7 +505,7 @@ h1 {
 }
 
 .filter-option.is-active {
-  border-color: transparent;
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--line));
   background: var(--accent-soft);
   color: var(--accent-deep);
   box-shadow: none;
@@ -566,7 +566,7 @@ h1 {
 .collection-panel {
   min-width: 0;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 8px;
   background: var(--panel);
   cursor: pointer;
 }
@@ -618,7 +618,7 @@ h1 {
   display: grid;
   place-items: center;
   border: 0;
-  border-radius: 999px;
+  border-radius: 8px;
   background: transparent;
   color: var(--faint);
   font-size: 16px;
@@ -669,7 +669,7 @@ h1 {
   padding: 0;
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink);
   cursor: pointer;
@@ -717,7 +717,7 @@ h1 {
   right: 6px;
   min-width: 28px;
   padding: 3px 6px;
-  border-radius: 999px;
+  border-radius: 8px;
   background: rgba(28, 27, 26, 0.72);
   color: #ffffff;
   font-size: 11px;
@@ -784,7 +784,7 @@ h1 {
   padding: 0;
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink);
   text-align: left;
@@ -855,7 +855,7 @@ h1 {
   min-height: 28px;
   padding: 0 10px;
   border: 0;
-  border-radius: 999px;
+  border-radius: 8px;
   background: rgba(28, 27, 26, 0.55);
   color: #ffffff;
   font-size: 11px;
@@ -914,7 +914,7 @@ h1 {
   min-width: 0;
   padding: 14px;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 8px;
   background: var(--panel);
 }
 
@@ -1029,7 +1029,7 @@ h1 {
   display: grid;
   place-items: center;
   overflow: hidden;
-  border-radius: 9px;
+  border-radius: 6px;
   background: #ffffff;
 }
 
@@ -1166,7 +1166,7 @@ h1 {
   gap: 10px;
   padding: 8px;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink);
   text-align: left;
@@ -1304,7 +1304,7 @@ h1 {
   gap: 6px;
   padding: 8px;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink);
 }
@@ -1334,7 +1334,7 @@ h1 {
 .pbandai-official-link {
   justify-self: start;
   padding: 5px 10px;
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--soft);
   color: var(--muted);
   font-size: 11px;
@@ -1347,10 +1347,32 @@ h1 {
 }
 
 .pb-franchise-tabs {
-  display: flex;
-  gap: 8px;
   margin-bottom: 8px;
-  overflow-x: auto;
+}
+
+.inline-filter-panel {
+  border: 0;
+  background: transparent;
+}
+
+.inline-filter-panel summary {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  list-style: none;
+  cursor: pointer;
+}
+
+.inline-filter-panel summary::-webkit-details-marker {
+  display: none;
+}
+
+.inline-filter-panel .filter-options {
+  margin-top: 6px;
 }
 
 .pbandai-art {
@@ -1540,7 +1562,7 @@ h1 {
   min-height: 28px;
   padding: 5px 10px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--muted);
   font-size: 11px;
@@ -1572,7 +1594,7 @@ h1 {
   align-items: center;
   padding: 0 10px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--muted);
   font-size: 11px;
@@ -1670,16 +1692,12 @@ body[data-view="home"] .pbandai-section,
 body[data-view="home"] .market-section,
 body[data-view="home"] .collection-section,
 body[data-view="home"] .kit-section,
-body[data-view="owned"] .franchise-control,
 body[data-view="owned"] .series-tabs,
 body[data-view="owned"] .filter-panel,
 body[data-view="owned"] .market-section,
-body[data-view="wanted"] .franchise-control,
 body[data-view="wanted"] .series-tabs,
 body[data-view="wanted"] .filter-panel,
 body[data-view="wanted"] .market-section,
-body[data-view="updates"] .franchise-control,
-body[data-view="updates"] .search-field,
 body[data-view="updates"] .series-tabs,
 body[data-view="updates"] .filter-panel,
 body[data-view="updates"] .collection-section,
@@ -1687,7 +1705,6 @@ body[data-view="updates"] .pbandai-section,
 body[data-view="updates"] .market-section,
 body[data-view="updates"] .kit-section,
 body[data-view="pbandai"] .franchise-control,
-body[data-view="pbandai"] .search-field,
 body[data-view="pbandai"] .series-tabs,
 body[data-view="pbandai"] .filter-panel,
 body[data-view="pbandai"] .updates-section,
@@ -1719,9 +1736,6 @@ body[data-view="guide"] .kit-section {
 }
 
 body[data-view="home"] .top-bar,
-body[data-view="owned"] .top-bar,
-body[data-view="wanted"] .top-bar,
-body[data-view="updates"] .top-bar,
 body[data-view="pbandai"] .top-bar,
 body[data-view="market"] .top-bar,
 body[data-view="guide"] .top-bar {
@@ -1884,7 +1898,7 @@ body[data-view="guide"] .top-bar {
   margin-bottom: 12px;
   padding: 12px;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 8px;
   background: var(--panel);
   box-shadow: 0 12px 32px rgba(28, 27, 26, 0.1);
   animation: collection-sheet-pop 0.16s ease-out;
@@ -1929,7 +1943,7 @@ body[data-view="owned"] .section-head h2 {
   flex: 0 0 auto;
   padding: 0 10px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--muted);
   font-size: 12px;
@@ -1951,7 +1965,7 @@ body[data-view="owned"] .section-head h2 {
 }
 
 .collection-group-summary button.is-active {
-  border-color: transparent;
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--line));
   background: var(--accent-soft);
   color: var(--accent-deep);
 }
@@ -1960,8 +1974,8 @@ body[data-view="owned"] .section-head h2 {
   min-height: 30px;
   flex: 0 0 auto;
   padding: 0 12px;
-  border: 0;
-  border-radius: 999px;
+  border: 1px solid transparent;
+  border-radius: 8px;
   background: transparent;
   color: var(--muted);
   font-size: 12.5px;
@@ -1976,6 +1990,7 @@ body[data-view="owned"] .section-head h2 {
 }
 
 .member-chip.is-active {
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--line));
   background: var(--accent-soft);
   color: var(--accent-deep);
 }
@@ -2081,7 +2096,7 @@ body[data-view="owned"] .section-head h2 {
   display: grid;
   place-items: center;
   border: 0;
-  border-radius: 999px;
+  border-radius: 8px;
   background: transparent;
   box-shadow: none;
   transform: translateY(-50%);
@@ -2578,7 +2593,7 @@ body[data-view="owned"] .section-head h2 {
   min-height: 38px;
   padding: 0 16px;
   border: 0;
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--ink);
   color: #ffffff;
   font-weight: 500;
@@ -2787,7 +2802,7 @@ body[data-view="owned"] .section-head h2 {
   min-height: 28px;
   padding: 0 10px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--muted);
   font-size: 12px;
@@ -2898,7 +2913,7 @@ body[data-view="owned"] .section-head h2 {
   min-height: 36px;
   padding: 0 14px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink);
   font-weight: 500;
@@ -2940,7 +2955,7 @@ body[data-view="owned"] .section-head h2 {
   align-items: center;
   padding: 0 10px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink);
   text-decoration: none;
@@ -3089,7 +3104,7 @@ body[data-view="owned"] .section-head h2 {
   max-width: 100%;
   padding: 0 10px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--muted);
   font-size: 12px;
@@ -3170,7 +3185,7 @@ body[data-view="owned"] .section-head h2 {
   grid-column: 1 / -1;
   margin-top: 12px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--muted);
   font-size: 13px;
@@ -3220,7 +3235,7 @@ body[data-view="owned"] .section-head h2 {
   min-height: 40px;
   padding: 0 14px;
   border: 0;
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--ink);
   color: #fff;
   font-weight: 500;
@@ -3465,7 +3480,7 @@ body[data-view="owned"] .section-head h2 {
 .status-actions button {
   min-height: 40px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 8px;
   background: #ffffff;
   color: var(--ink);
   font-weight: 500;
@@ -3691,7 +3706,7 @@ body[data-view="owned"] .section-head h2 {
   min-height: 40px;
   margin-top: 22px;
   padding: 0 18px;
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--ink);
   color: #ffffff;
   font-weight: 500;
@@ -3714,7 +3729,7 @@ body[data-view="owned"] .section-head h2 {
 .correction-actions button {
   min-height: 38px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 8px;
   background: #ffffff;
   color: var(--ink);
   font-weight: 500;
@@ -3981,7 +3996,7 @@ body.is-radial-active {
   padding: 2px 6px 2px 2px;
   margin: -2px 0 -2px -2px;
   background: transparent;
-  border-radius: 999px;
+  border-radius: 8px;
   cursor: pointer;
   max-width: 40vw;
 }
@@ -4146,7 +4161,7 @@ body.is-radial-active {
   margin-bottom: 8px;
   padding: 0 10px 0 4px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--soft);
   color: var(--ink);
   font-weight: 700;
@@ -4408,7 +4423,7 @@ body.is-radial-active {
 .bbx-part-cat {
   padding: 6px 12px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 8px;
   background: transparent;
   color: var(--muted);
   font-size: 12px;
@@ -4493,7 +4508,7 @@ body.is-radial-active {
 .detail-bbx-top {
   padding: 6px 10px;
   border: 1px solid var(--accent);
-  border-radius: 999px;
+  border-radius: 8px;
   background: transparent;
   color: var(--accent-deep);
   font-size: 12px;
@@ -4608,7 +4623,7 @@ body.is-radial-active {
   padding: 0;
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 11px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink);
   text-align: left;
@@ -4656,7 +4671,7 @@ body.is-radial-active {
   gap: 3px;
   padding: 6px 4px;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 8px;
   background: var(--panel);
   cursor: pointer;
   position: relative;
@@ -4764,7 +4779,7 @@ body.is-radial-active {
 
 .guide-variant-chip {
   padding: 3px 9px;
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--soft);
   color: var(--muted);
   font-size: 12px;
@@ -4773,7 +4788,7 @@ body.is-radial-active {
 .guide-split-toggle {
   padding: 3px 10px;
   border: 1px dashed var(--line);
-  border-radius: 999px;
+  border-radius: 8px;
   background: transparent;
   color: var(--accent-deep);
   font-size: 12px;
@@ -4790,7 +4805,7 @@ body.is-radial-active {
 .guide-light-toggle {
   padding: 3px 10px;
   border: 1px solid var(--accent);
-  border-radius: 999px;
+  border-radius: 8px;
   background: transparent;
   color: var(--accent-deep);
   font-size: 12px;
@@ -5246,7 +5261,7 @@ body.is-radial-active {
   min-height: 30px;
   padding: 0 12px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink);
   font-weight: 700;
@@ -5266,7 +5281,7 @@ body.is-radial-active {
   min-height: 72px;
   padding: 6px 4px;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink);
   text-align: center;
@@ -5423,7 +5438,7 @@ body.is-radial-active {
   z-index: 2;
   max-width: calc(100% - 12px);
   padding: 3px 7px;
-  border-radius: 999px;
+  border-radius: 8px;
   background: rgba(28, 27, 26, 0.72);
   color: #ffffff;
   font-size: 10px;

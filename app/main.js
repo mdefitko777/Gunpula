@@ -1725,7 +1725,7 @@ function bindEvents() {
     state.query = event.target.value;
     ensureSearchIndex();
     persistViewState();
-    renderKits();
+    renderSearchTarget();
   });
   elements.filterBody?.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-filter-key][data-filter-value]");
@@ -4238,7 +4238,8 @@ function renderHomeUpdates() {
   const mode = state.updatesMode === "month" ? "month" : state.updatesMode === "week" ? "week" : "recent";
   elements.updatesRecentButton?.classList.toggle("is-active", mode === "recent");
   elements.updatesWeekButton?.classList.toggle("is-active", mode === "week");
-  const items = sortByPreference(mode === "recent" ? recentFeedKits() : mode === "week" ? weekOnSaleKits() : releaseItemsForMonth(state.releaseMonth));
+  const sourceItems = mode === "recent" ? recentFeedKits() : mode === "week" ? weekOnSaleKits() : releaseItemsForMonth(state.releaseMonth);
+  const items = sortByPreference(sourceItems.filter((kit) => kit.franchise === state.franchise && kitMatchesSearchQuery(kit)));
   if (elements.homeUpdateSummary) {
     elements.homeUpdateSummary.hidden = true;
     elements.homeUpdateSummary.innerHTML = "";
@@ -4338,11 +4339,13 @@ function renderPBandaiProducts() {
   }
 
   const updatedAt = state.pbandai?.updated_at || visibleItems[0]?.updated_at || "unknown";
-  elements.pbandaiSubtitle.textContent = `${franchiseLabel(state.franchise)} · ${t("premiumBandaiUpdated", { date: String(updatedAt).slice(0, 10) })} · ${items.length} · ${t("pbandaiInternalHint")}`;
+  const query = state.query.trim().toLowerCase();
+  const filteredItems = visibleItems.filter((item) => pbandaiItemMatchesSearch(item, query));
+  elements.pbandaiSubtitle.textContent = `${franchiseLabel(state.franchise)} · ${t("premiumBandaiUpdated", { date: String(updatedAt).slice(0, 10) })} · ${filteredItems.length}/${items.length}`;
   renderPBandaiFranchiseTabs(availableFranchises);
   elements.pbandaiList.innerHTML = "";
 
-  if (!visibleItems.length) {
+  if (!filteredItems.length) {
     const empty = document.createElement("div");
     empty.className = "home-update-empty";
     empty.textContent = t("pbandaiUnavailable");
@@ -4350,7 +4353,7 @@ function renderPBandaiProducts() {
     return;
   }
 
-  for (const item of visibleItems) {
+  for (const item of filteredItems) {
     const kit = item.kit_id ? displayKitById(item.kit_id) : null;
     const card = document.createElement("article");
     card.className = "pbandai-card";
@@ -4408,25 +4411,45 @@ function renderPBandaiProducts() {
   }
 }
 
+function pbandaiItemMatchesSearch(item, query) {
+  if (!query) return true;
+  const kit = item.kit_id ? displayKitById(item.kit_id) : null;
+  if (kit && kitMatchesSearchQuery(kit, query)) return true;
+  const haystack = [item.id, item.title, item.price, item.status, item.category, item.source, item.url]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+  return expandedSearchTerms(query).some((term) => haystack.includes(term));
+}
+
 function renderPBandaiFranchiseTabs(franchises) {
   if (!elements.pbandaiFranchiseTabs) {
     return;
   }
   elements.pbandaiFranchiseTabs.innerHTML = "";
+  const details = document.createElement("details");
+  details.className = "inline-filter-panel";
+  const summary = document.createElement("summary");
+  summary.innerHTML = `<span class="filter-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M7 12h10"/><path d="M10 18h4"/></svg></span><span>${escapeHtml(franchiseLabel(state.franchise))}</span>`;
+  const options = document.createElement("div");
+  options.className = "filter-options";
   for (const franchise of franchises) {
     const count = pbandaiItemsForFranchise(franchise).length;
     const button = document.createElement("button");
     button.type = "button";
-    button.className = `filter-chip${state.franchise === franchise ? " is-active" : ""}`;
+    button.className = `filter-option${state.franchise === franchise ? " is-active" : ""}`;
     button.textContent = `${franchiseShortLabel(franchise)} ${count}`;
     button.addEventListener("click", () => {
       state.franchise = franchise;
       localStorage.setItem(FRANCHISE_KEY, state.franchise);
       renderPBandaiProducts();
       persistViewState({ mode: "push" });
+      details.open = false;
     });
-    elements.pbandaiFranchiseTabs.append(button);
+    options.append(button);
   }
+  details.append(summary, options);
+  elements.pbandaiFranchiseTabs.append(details);
 }
 
 function marketSources() {
@@ -5068,13 +5091,53 @@ function kitSeries(kit) {
   return seriesLabelFromKit(kit) + " · " + gradeShortLabel(kit);
 }
 
+function kitMatchesSearchQuery(kit, rawQuery = state.query) {
+  const query = rawQuery.trim().toLowerCase();
+  if (!query) return true;
+  const haystack = [
+    kit.kit_id,
+    kit.franchise,
+    kit.grade_code,
+    kit.subline,
+    kit.names.ja,
+    kit.names.en,
+    kit.names.zh,
+    kit.names.ko,
+    kitDisplayNameForLanguage(kit, "zh"),
+    kitDisplayNameForLanguage(kit, "ko"),
+    kitDisplayNameForLanguage(kit, "en"),
+    kitDisplayNameForLanguage(kit, "ja"),
+    seriesLabelFromKit(kit),
+    seriesLabelFromSeries(kit.series, "zh"),
+    seriesLabelFromSeries(kit.series, "ko"),
+    kit.series?.key,
+    kit.work_title,
+    kit.universe,
+    kit.release_date,
+    kit.price_jpy,
+    searchRecordForKit(kit)?.search_blob,
+  ]
+    .join(" ")
+    .toLowerCase();
+  return expandedSearchTerms(query).some((term) => haystack.includes(term));
+}
+
+function renderSearchTarget() {
+  if (state.activeView === "updates") {
+    renderHomeUpdates();
+  } else if (state.activeView === "pbandai") {
+    renderPBandaiProducts();
+  } else {
+    renderKits();
+  }
+}
+
 function kitsForCurrentFranchise() {
   return state.kits.filter((kit) => kit.franchise === state.franchise);
 }
 
 function filteredKits() {
   const query = state.query.trim().toLowerCase();
-  const searchTerms = expandedSearchTerms(query);
   const minPrice = numericFilterValue(state.priceMin);
   const maxPrice = numericFilterValue(state.priceMax);
   const source =
@@ -5112,37 +5175,7 @@ function filteredKits() {
     if (state.activeView === "catalog" && maxPrice !== null && (kit.price_jpy || 0) > maxPrice) {
       return false;
     }
-    if (!query) {
-      return true;
-    }
-
-    const haystack = [
-      kit.kit_id,
-      kit.franchise,
-      kit.grade_code,
-      kit.subline,
-      kit.names.ja,
-      kit.names.en,
-      kit.names.zh,
-      kit.names.ko,
-      kitDisplayNameForLanguage(kit, "zh"),
-      kitDisplayNameForLanguage(kit, "ko"),
-      kitDisplayNameForLanguage(kit, "en"),
-      kitDisplayNameForLanguage(kit, "ja"),
-      seriesLabelFromKit(kit),
-      seriesLabelFromSeries(kit.series, "zh"),
-      seriesLabelFromSeries(kit.series, "ko"),
-      kit.series?.key,
-      kit.work_title,
-      kit.universe,
-      kit.release_date,
-      kit.price_jpy,
-      searchRecordForKit(kit)?.search_blob,
-    ]
-      .join(" ")
-      .toLowerCase();
-
-    return searchTerms.some((term) => haystack.includes(term));
+    return !query || kitMatchesSearchQuery(kit, query);
   }));
 }
 
@@ -8427,19 +8460,27 @@ function renderFranchiseFilters() {
   for (const franchise of FRANCHISES) {
     const button = document.createElement("button");
     button.type = "button";
-    button.className = `segment-button${state.franchise === franchise ? " is-active" : ""}`;
+    const active = activeCollectionType()
+      ? state.collectionFilter?.franchise === franchise
+      : state.franchise === franchise;
+    button.className = `segment-button${active ? " is-active" : ""}`;
     button.textContent = franchiseShortLabel(franchise);
     button.addEventListener("click", () => {
-      state.franchise = franchise;
-      state.grade = "all";
-      state.series = "all";
-      state.itemType = "all";
-      state.releaseYear = "all";
-      state.limited = "all";
+      if (activeCollectionType()) {
+        state.collectionFilter = { ...(state.collectionFilter || {}), franchise, series: "all", grade: "all" };
+        saveCollectionFilter();
+      } else {
+        state.franchise = franchise;
+        state.grade = "all";
+        state.series = "all";
+        state.itemType = "all";
+        state.releaseYear = "all";
+        state.limited = "all";
+        localStorage.setItem(FRANCHISE_KEY, state.franchise);
+      }
       state.priceMin = "";
       state.priceMax = "";
       state.selectedKit = null;
-      localStorage.setItem(FRANCHISE_KEY, state.franchise);
       render();
       persistViewState({ mode: "push" });
     });
