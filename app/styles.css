@@ -4519,6 +4519,32 @@ body.is-radial-active {
   margin-bottom: 20px;
 }
 
+.guide-family-filter {
+  display: flex;
+  gap: 6px;
+  margin: 4px 0 12px;
+  padding-bottom: 4px;
+  overflow-x: auto;
+}
+
+.guide-family-chip {
+  flex: 0 0 auto;
+  min-height: 30px;
+  padding: 0 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.guide-family-chip.is-active {
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--line));
+  background: color-mix(in srgb, var(--accent) 10%, var(--panel));
+  color: var(--accent-deep);
+}
+
 .guide-work-head {
   display: flex;
   align-items: baseline;

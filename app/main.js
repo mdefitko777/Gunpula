@@ -289,6 +289,7 @@ const state = {
   activeModal: INITIAL_VIEW_STATE.modal || null,
   activeMemberProfile: null,
   guideUnitBack: null,
+  guideSeriesFilters: loadGuideSeriesFilters(),
   returnToUserDrawer: false,
   installPrompt: null,
   updatedAt: null,
@@ -6291,6 +6292,19 @@ function guideBaseName(name) {
 }
 
 const GUIDE_SPLITS_KEY = "gunpula-guide-splits-v1";
+const GUIDE_SERIES_FILTER_KEY = "gunpula-guide-series-filter-v1";
+
+function loadGuideSeriesFilters() {
+  try {
+    return new Set(JSON.parse(localStorage.getItem(GUIDE_SERIES_FILTER_KEY) || "[]"));
+  } catch {
+    return new Set();
+  }
+}
+
+function saveGuideSeriesFilters() {
+  localStorage.setItem(GUIDE_SERIES_FILTER_KEY, JSON.stringify([...(state.guideSeriesFilters || [])]));
+}
 
 function loadGuideSplits() {
   try {
@@ -6593,6 +6607,53 @@ function guideWorkDisplayName(workOrName) {
     .trim();
 }
 
+function guideWorkFamily(workOrName) {
+  const name = String(typeof workOrName === "string" ? workOrName : workOrName?.name || "").toLowerCase();
+  if (name.includes("seed")) return "seed";
+  if (name.includes("gundam 00") || name.includes("celestial being")) return "double_o";
+  if (name.includes("wing")) return "wing";
+  if (name.includes("iron-blooded")) return "iron_blooded";
+  if (name.includes("witch from mercury")) return "witch";
+  if (name.includes("gquuuuuux")) return "gquuuuuux";
+  if (name.includes("age")) return "age";
+  if (name.includes("build") || name.includes("gunpla builders")) return "build";
+  if (name.includes("sd ") || name.includes("sengokuden") || name.includes("sangoku")) return "sd";
+  if (name.includes("fighter g gundam")) return "g";
+  if (name.includes("gundam x")) return "x";
+  if (name.includes("turn a")) return "turn_a";
+  if (name.includes("reconguista")) return "g_reco";
+  if (name.includes("g generation") || name.includes("extreme vs") || name.includes("battle master")) return "game";
+  if (
+    /\b(0079|0080|0081|0083|0087|0093|f90|f91|uc|cca|msv|zeta|zz|unicorn|narrative|hathaway|crossbone|sentinel|igloo|blue destiny|lost war|missing link|thunderbolt|advance of zeta|char|v gundam|origin|mobile suit gundam)\b/.test(name)
+  ) {
+    return "uc";
+  }
+  return "other";
+}
+
+function guideFamilyLabel(key) {
+  const labels = {
+    all: { zh: "全部", ko: "전체", en: "All", ja: "すべて" },
+    uc: { zh: "UC", ko: "UC", en: "UC", ja: "UC" },
+    seed: { zh: "SEED", ko: "SEED", en: "SEED", ja: "SEED" },
+    double_o: { zh: "00", ko: "00", en: "00", ja: "00" },
+    wing: { zh: "W", ko: "W", en: "W", ja: "W" },
+    iron_blooded: { zh: "铁血", ko: "철혈", en: "IBO", ja: "鉄血" },
+    witch: { zh: "水星", ko: "수성", en: "Witch", ja: "水星" },
+    gquuuuuux: { zh: "GQuuuuuuX", ko: "GQuuuuuuX", en: "GQuuuuuuX", ja: "GQuuuuuuX" },
+    age: { zh: "AGE", ko: "AGE", en: "AGE", ja: "AGE" },
+    build: { zh: "创战", ko: "빌드", en: "Build", ja: "ビルド" },
+    sd: { zh: "SD", ko: "SD", en: "SD", ja: "SD" },
+    g: { zh: "G", ko: "G", en: "G", ja: "G" },
+    x: { zh: "X", ko: "X", en: "X", ja: "X" },
+    turn_a: { zh: "∀", ko: "∀", en: "Turn A", ja: "∀" },
+    g_reco: { zh: "G复国", ko: "G레코", en: "G-Reco", ja: "Gレコ" },
+    game: { zh: "游戏", ko: "게임", en: "Games", ja: "ゲーム" },
+    other: { zh: "其他", ko: "기타", en: "Other", ja: "その他" },
+  };
+  return labels[key]?.[state.language] || labels[key]?.zh || key;
+}
+
 function createGuideWorkArt(work, className) {
   const art = document.createElement("span");
   art.className = className;
@@ -6640,9 +6701,12 @@ function renderGuide(guide) {
   elements.guideBody.innerHTML = "";
   const workScore = (work) => Math.max(0, ...guide.groups.filter((g) => g.work_id === work.work_id).map(guideGroupPreferenceScore));
   const orderedWorks = [...guide.works].sort((a, b) => workScore(b) - workScore(a) || Number(a.work_id) - Number(b.work_id));
-  const sectionKeys = ["main_stage", "story_event", "unavailable"];
-  for (const sectionKey of sectionKeys) {
-    const works = orderedWorks.filter((work) => (work.section || "unavailable") === sectionKey);
+  const familyKeys = guideFamilyKeys(orderedWorks);
+  renderGuideFamilyFilter(familyKeys);
+  const selectedFamilies = state.guideSeriesFilters || new Set();
+  const visibleFamilyKeys = selectedFamilies.size ? familyKeys.filter((key) => selectedFamilies.has(key)) : familyKeys;
+  for (const familyKey of visibleFamilyKeys) {
+    const works = orderedWorks.filter((work) => guideWorkFamily(work) === familyKey);
     if (!works.length) continue;
     const sectionLit = works.reduce((sum, work) => sum + guideGroupsForWork(work, member).filter((g) => statusByGroup.get(g.key) !== "none").length, 0);
     const sectionTotal = works.reduce((sum, work) => sum + guideGroupsForWork(work, member).length, 0);
@@ -6651,7 +6715,7 @@ function renderGuide(guide) {
     section.className = "guide-work";
     const head = document.createElement("div");
     head.className = "guide-work-head";
-    head.innerHTML = `<h3>${escapeHtml(guideSectionLabel(sectionKey))}</h3><span>${sectionLit}/${sectionTotal}</span>`;
+    head.innerHTML = `<h3>${escapeHtml(guideFamilyLabel(familyKey))}</h3><span>${sectionLit}/${sectionTotal}</span>`;
     section.append(head);
 
     const grid = document.createElement("div");
@@ -6664,13 +6728,41 @@ function renderGuide(guide) {
   }
 }
 
-function guideSectionLabel(key) {
-  const labels = {
-    main_stage: { zh: "主线关卡", ko: "메인 스테이지", en: "Main Stages", ja: "メインステージ" },
-    story_event: { zh: "活动关卡", ko: "스토리 이벤트", en: "Story Events", ja: "ストーリーイベント" },
-    unavailable: { zh: "未开放 / 其他", ko: "미개방 / 기타", en: "Unavailable / Other", ja: "未実装 / その他" },
-  };
-  return labels[key]?.[state.language] || labels[key]?.zh || key;
+function guideFamilyKeys(works) {
+  const preferred = ["uc", "seed", "double_o", "wing", "iron_blooded", "witch", "gquuuuuux", "age", "build", "sd", "g", "x", "turn_a", "g_reco", "game", "other"];
+  const available = new Set(works.map(guideWorkFamily));
+  return preferred.filter((key) => available.has(key));
+}
+
+function renderGuideFamilyFilter(familyKeys) {
+  const filter = document.createElement("div");
+  filter.className = "guide-family-filter";
+  const selected = state.guideSeriesFilters || new Set();
+  const all = document.createElement("button");
+  all.type = "button";
+  all.className = `guide-family-chip${selected.size ? "" : " is-active"}`;
+  all.textContent = guideFamilyLabel("all");
+  all.addEventListener("click", () => {
+    state.guideSeriesFilters = new Set();
+    saveGuideSeriesFilters();
+    renderGuide(state.guide);
+  });
+  filter.append(all);
+  for (const key of familyKeys) {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = `guide-family-chip${selected.has(key) ? " is-active" : ""}`;
+    chip.textContent = guideFamilyLabel(key);
+    chip.addEventListener("click", () => {
+      state.guideSeriesFilters = state.guideSeriesFilters || new Set();
+      if (state.guideSeriesFilters.has(key)) state.guideSeriesFilters.delete(key);
+      else state.guideSeriesFilters.add(key);
+      saveGuideSeriesFilters();
+      renderGuide(state.guide);
+    });
+    filter.append(chip);
+  }
+  elements.guideBody.append(filter);
 }
 
 function guideGroupsForWork(work, member = activeGuideMember()) {
@@ -6701,7 +6793,7 @@ function openGuideWork(work, member = activeGuideMember()) {
     elements.guideUnitArt.append(img);
   }
   elements.guideUnitName.textContent = guideWorkDisplayName(work);
-  elements.guideUnitMeta.textContent = `${guideSectionLabel(work.section || "unavailable")} · ${lit}/${groups.length}`;
+  elements.guideUnitMeta.textContent = `${guideFamilyLabel(guideWorkFamily(work))} · ${lit}/${groups.length}`;
   elements.guideUnitVariants.innerHTML = "";
   elements.guideUnitKits.innerHTML = "";
   const grid = document.createElement("div");
