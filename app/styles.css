@@ -4545,8 +4545,8 @@ body.is-radial-active {
 
 .guide-series-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(156px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: 8px;
 }
 
 .guide-series-card {
@@ -4554,7 +4554,7 @@ body.is-radial-active {
   padding: 0;
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 11px;
   background: var(--panel);
   color: var(--ink);
   text-align: left;
@@ -4568,7 +4568,7 @@ body.is-radial-active {
   display: grid;
   place-items: center;
   aspect-ratio: 4 / 3;
-  padding: 14px;
+  padding: 8px;
   background: var(--soft);
 }
 
@@ -4581,20 +4581,20 @@ body.is-radial-active {
 .guide-series-card strong,
 .guide-series-card span {
   display: block;
-  padding: 0 12px;
+  padding: 0 8px;
 }
 
 .guide-series-card strong {
-  min-height: 42px;
-  margin-top: 10px;
-  font-size: 13px;
+  min-height: 32px;
+  margin-top: 7px;
+  font-size: 11.5px;
   line-height: 1.25;
 }
 
 .guide-series-card span:last-child {
-  padding-bottom: 12px;
+  padding-bottom: 8px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .guide-cell {
@@ -5200,22 +5200,22 @@ body.is-radial-active {
 
 .member-guide-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 5px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
   margin-top: 6px;
 }
 
 .member-guide-card {
   display: grid;
-  grid-template-columns: 34px minmax(0, 1fr);
-  gap: 7px;
-  min-height: 42px;
-  padding: 4px 7px;
+  justify-items: center;
+  gap: 3px;
+  min-height: 72px;
+  padding: 6px 4px;
   border: 1px solid var(--line);
   border-radius: 10px;
   background: var(--panel);
   color: var(--ink);
-  text-align: left;
+  text-align: center;
 }
 
 .member-guide-card.is-lit {
@@ -5229,8 +5229,8 @@ body.is-radial-active {
   overflow: hidden;
   border-radius: 8px;
   background: var(--soft);
-  width: 34px;
-  height: 34px;
+  width: 42px;
+  height: 28px;
   padding: 2px;
   box-sizing: border-box;
 }
@@ -5244,12 +5244,15 @@ body.is-radial-active {
 .member-guide-text {
   display: grid;
   align-content: center;
+  justify-items: center;
   min-width: 0;
+  width: 100%;
 }
 
 .member-guide-text strong {
+  width: 100%;
   overflow: hidden;
-  font-size: 12px;
+  font-size: 10.5px;
   line-height: 1.3;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -5258,9 +5261,9 @@ body.is-radial-active {
 }
 
 .member-guide-text span {
-  margin-top: 2px;
+  margin-top: 1px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 10.5px;
   font-weight: 800;
 }
 

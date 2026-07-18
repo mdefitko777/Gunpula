@@ -288,6 +288,7 @@ const state = {
   settingsPanel: SETTINGS_PANELS.includes(localStorage.getItem(SETTINGS_PANEL_KEY)) ? localStorage.getItem(SETTINGS_PANEL_KEY) : "home",
   activeModal: INITIAL_VIEW_STATE.modal || null,
   activeMemberProfile: null,
+  guideUnitBack: null,
   returnToUserDrawer: false,
   installPrompt: null,
   updatedAt: null,
@@ -1697,9 +1698,9 @@ function bindEvents() {
   elements.bbxPartDialog?.addEventListener("click", (event) => {
     if (event.target === elements.bbxPartDialog) closeDialog(elements.bbxPartDialog);
   });
-  elements.guideUnitClose?.addEventListener("click", () => closeDialog(elements.guideUnitDialog));
+  elements.guideUnitClose?.addEventListener("click", () => closeGuideUnitLayer());
   elements.guideUnitDialog?.addEventListener("click", (event) => {
-    if (event.target === elements.guideUnitDialog) closeDialog(elements.guideUnitDialog);
+    if (event.target === elements.guideUnitDialog) closeGuideUnitLayer();
   });
   elements.userRowSignOut?.addEventListener("click", () => {
     if (!window.confirm(t("signOutConfirm"))) {
@@ -1912,7 +1913,7 @@ function closeTopLayerForBack() {
     return true;
   }
   if (elements.guideUnitDialog?.open) {
-    closeDialog(elements.guideUnitDialog);
+    closeGuideUnitLayer();
     return true;
   }
   if (elements.profileImageDialog?.open) {
@@ -2175,7 +2176,7 @@ function moveTouchGesture(event) {
     return;
   }
   if (
-    ["catalog", "guide"].includes(state.activeView) &&
+    state.activeView === "catalog" &&
     !state.pager.blockedByTarget &&
     absX > PAGER_START_DISTANCE &&
     absX > absY * 1.15
@@ -6687,6 +6688,7 @@ function guideGroupsForWork(work, member = activeGuideMember()) {
 }
 
 function openGuideWork(work, member = activeGuideMember()) {
+  state.guideUnitBack = null;
   state.activeGuideMember = safeMemberName(typeof member === "string" ? member : member?.name || editableCollectionMember());
   const groups = guideGroupsForWork(work, member);
   const sets = guideCollectionSets(member);
@@ -6751,6 +6753,7 @@ function badgeEl(text, className) {
 // for — the matching catalog kits, each with quick add-to-owned/wanted buttons.
 function openGuideUnit(group, status, member = activeGuideMember()) {
   state.activeGuideMember = safeMemberName(typeof member === "string" ? member : member?.name || editableCollectionMember());
+  state.guideUnitBack = { workId: Number(group.work_id), member: state.activeGuideMember };
   const isSelfGuide = state.activeGuideMember === editableCollectionMember();
   elements.guideUnitArt.innerHTML = "";
   const unitImg = document.createElement("img");
@@ -6784,6 +6787,7 @@ function openGuideUnit(group, status, member = activeGuideMember()) {
       else state.guideSplits.add(group.merge_key);
       saveGuideSplits();
       refreshGuideGroups();
+      state.guideUnitBack = null;
       closeDialog(elements.guideUnitDialog);
       if (state.activeView === "guide") renderGuide(state.guide);
       renderUserGuideValue();
@@ -6827,6 +6831,20 @@ function openGuideUnit(group, status, member = activeGuideMember()) {
   openDialog(elements.guideUnitDialog);
 }
 
+function closeGuideUnitLayer() {
+  if (state.guideUnitBack) {
+    const { workId, member } = state.guideUnitBack;
+    const work = state.guide?.works?.find((item) => Number(item.work_id) === Number(workId));
+    state.guideUnitBack = null;
+    if (work) {
+      openGuideWork(work, member);
+      return;
+    }
+  }
+  state.guideUnitBack = null;
+  closeDialog(elements.guideUnitDialog);
+}
+
 function guideKitRow(kit, group, groupStatus, member = activeGuideMember()) {
   const sets = guideCollectionSets(member);
   const isSelfGuide = safeMemberName(typeof member === "string" ? member : member?.name || editableCollectionMember()) === editableCollectionMember();
@@ -6845,6 +6863,7 @@ function guideKitRow(kit, group, groupStatus, member = activeGuideMember()) {
   face.addEventListener("click", () => {
     // Keep the 图鉴 gallery open underneath so backing out of the kit detail
     // returns here instead of dropping all the way to the main view.
+    state.guideUnitBack = null;
     closeDialog(elements.guideUnitDialog);
     openDetail(kit);
   });
