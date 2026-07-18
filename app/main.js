@@ -2181,13 +2181,18 @@ function moveTouchGesture(event) {
     state.activeView === "catalog" &&
     swipeZoneAllowed(state.pager.startY) &&
     !state.pager.blockedByTarget &&
-    absX > PAGER_START_DISTANCE &&
-    absX > absY * 1.15
+    absX > COLLECTION_SWIPE_DISTANCE &&
+    absX > absY * 1.3
   ) {
     clearTimeout(state.radial.timer);
     state.radial.timer = null;
-    startPagerGesture(deltaX);
-    updatePagerGesture(deltaX);
+    state.radial.touchId = null;
+    state.pager.touchId = null;
+    state.radial.suppressClick = true;
+    const target = adjacentFranchise(deltaX < 0 ? 1 : -1);
+    if (target) {
+      openFranchiseCatalog(target);
+    }
     if (event.cancelable) event.preventDefault();
     return;
   }
@@ -2287,7 +2292,7 @@ function finishRadialTouch(event, touch) {
     state.radial.suppressClick = true;
     if (event.cancelable) event.preventDefault();
     event.stopPropagation();
-    openFranchiseCatalog(selected);
+    activateRadialSelection(selected);
   }
 }
 
@@ -2298,6 +2303,7 @@ function cancelRadialPress() {
   state.radial.touchId = null;
   state.radial.selected = null;
   state.radial.target = null;
+  state.radial.items = [];
   if (elements.gestureOverlay) {
     elements.gestureOverlay.hidden = true;
   }
@@ -2309,9 +2315,12 @@ function cancelRadialPress() {
 }
 
 function showRadialMenu(x, y) {
+  const items = radialMenuItems();
+  if (!items.length) return;
   const centerX = Math.min(Math.max(x, 112), window.innerWidth - 112);
   const centerY = Math.min(Math.max(y, 112), window.innerHeight - 112);
   state.radial.active = true;
+  state.radial.items = items;
   state.radial.startX = centerX;
   state.radial.startY = centerY;
   elements.gestureOverlay.hidden = false;
@@ -2326,22 +2335,23 @@ function showRadialMenu(x, y) {
   svg.setAttribute("aria-hidden", "true");
   const labels = document.createElement("div");
   labels.className = "radial-labels";
-  FRANCHISES.forEach((franchise, index) => {
-    const centerAngle = -90 + index * (360 / FRANCHISES.length);
+  const step = 360 / items.length;
+  items.forEach((item, index) => {
+    const centerAngle = -90 + index * step;
     const segment = document.createElementNS("http://www.w3.org/2000/svg", "path");
     segment.setAttribute("class", "radial-segment");
-    segment.dataset.franchise = franchise;
-    segment.setAttribute("d", donutSegmentPath(110, 110, 104, 42, centerAngle - 36, centerAngle + 36));
+    segment.dataset.radialId = item.id;
+    segment.setAttribute("d", donutSegmentPath(110, 110, 104, 42, centerAngle - step / 2 + 2, centerAngle + step / 2 - 2));
     svg.append(segment);
 
     const angle = centerAngle;
     const radian = (angle * Math.PI) / 180;
     const label = document.createElement("span");
     label.className = "radial-label";
-    label.dataset.franchise = franchise;
+    label.dataset.radialId = item.id;
     label.style.left = `${110 + Math.cos(radian) * 74}px`;
     label.style.top = `${110 + Math.sin(radian) * 74}px`;
-    label.textContent = franchiseShortLabel(franchise);
+    label.textContent = item.label;
     labels.append(label);
   });
   const center = document.createElement("div");
@@ -2353,16 +2363,71 @@ function showRadialMenu(x, y) {
 function updateRadialSelection(x, y) {
   const dx = x - state.radial.startX;
   const dy = y - state.radial.startY;
+  const items = state.radial.items || [];
   if (Math.hypot(dx, dy) < RADIAL_SELECT_DISTANCE) {
     state.radial.selected = null;
-  } else {
+  } else if (items.length) {
     const angle = (Math.atan2(dy, dx) * 180) / Math.PI;
-    const index = Math.floor(((angle + 126 + 360) % 360) / (360 / FRANCHISES.length));
-    state.radial.selected = FRANCHISES[index];
+    const step = 360 / items.length;
+    const index = Math.floor(((angle - (-90 - step / 2) + 360) % 360) / step);
+    state.radial.selected = items[index]?.id || null;
   }
   elements.radialMenu.querySelectorAll(".radial-segment, .radial-label").forEach((item) => {
-    item.classList.toggle("is-active", item.dataset.franchise === state.radial.selected);
+    item.classList.toggle("is-active", item.dataset.radialId === state.radial.selected);
   });
+}
+
+function radialMenuItems() {
+  if (state.activeView === "home") {
+    return [
+      { id: "view:catalog", label: t("catalogNav") },
+      { id: "view:updates", label: t("recentUpdatesNav") },
+      { id: "view:collection", label: t("collectionNav") },
+      { id: "view:guide", label: t("pictureBook") },
+    ];
+  }
+  if (COLLECTION_TYPES.includes(state.activeView)) {
+    return [
+      { id: "collection:wanted", label: t("wantedList") },
+      { id: "collection:owned", label: t("ownedList") },
+    ];
+  }
+  if (state.activeView === "guide") {
+    return [
+      { id: "guide:gundam", label: t("guideTabGundam") },
+      { id: "guide:bbx", label: t("guideTabBbx") },
+      { id: "guide:parts", label: t("guideTabParts") },
+    ];
+  }
+  const franchises = state.activeView === "pbandai" ? pbandaiFranchises() : FRANCHISES;
+  return franchises.map((franchise) => ({ id: `franchise:${franchise}`, label: franchiseShortLabel(franchise) }));
+}
+
+function activateRadialSelection(id) {
+  const [type, value] = String(id).split(":");
+  if (type === "view") {
+    switchToView(value === "collection" ? (COLLECTION_TYPES.includes(state.lastCollectionTab) ? state.lastCollectionTab : "wanted") : value);
+  } else if (type === "collection") {
+    switchToView(value);
+  } else if (type === "guide") {
+    openGuide(value);
+  } else if (type === "franchise") {
+    selectFranchiseForActiveView(value);
+  }
+}
+
+function selectFranchiseForActiveView(franchise) {
+  if (!FRANCHISES.includes(franchise)) return;
+  if (state.activeView === "catalog") {
+    openFranchiseCatalog(franchise);
+  } else if (state.activeView === "pbandai") {
+    navigateToPBandai(franchise);
+  } else {
+    state.franchise = franchise;
+    localStorage.setItem(FRANCHISE_KEY, state.franchise);
+    render();
+    persistViewState({ mode: "push" });
+  }
 }
 
 function startPagerGesture(deltaX) {
