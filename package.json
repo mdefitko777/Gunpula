@@ -14,6 +14,7 @@
     "export:grades": "node scripts/export_grades_markdown.mjs",
     "import:bandai": "node scripts/import_bandai_spirits_gunpla.mjs",
     "import:pb": "node scripts/import_premium_bandai_jp.mjs",
+    "import:pb:jp": "python3 scripts/crawl_pbandai.py --force --max-items-per-source=500 --cache-hours=1 || python scripts/crawl_pbandai.py --force --max-items-per-source=500 --cache-hours=1",
     "import:pbandai-manual": "node scripts/import_pbandai_manual_products.mjs",
     "import:collectibles": "node scripts/import_bandai_collectibles.mjs",
     "import:fate": "node scripts/import_goodsmile_fate.mjs",
@@ -43,12 +44,14 @@
     "android:sync": "npm run android:www && npx @capacitor/cli sync android",
     "android:add": "npm run android:www && npx @capacitor/cli add android",
     "android:build": "npm run android:sync && cd android && gradlew assembleDebug",
-    "import:data": "npm run import:bandai && npm run import:collectibles && npm run import:pokemon-center && npm run import:fate && npm run import:pbandai-manual && npm run import:pb && npm run localize && npm run check:sources",
     "import:official": "npm run import:data",
     "import:gget": "node scripts/import_gget_units.mjs",
     "map:gget": "node scripts/build_gget_kit_map.mjs",
     "cache:gget-images": "node scripts/cache_gget_images.mjs",
-    "import:bbx-db": "node scripts/import_bbx_database.mjs"
+    "import:bbx-db": "node scripts/import_bbx_database.mjs",
+    "cache:bbx-images": "node scripts/cache_bbx_images.mjs",
+    "refresh:pb:japan": "npm run import:pb:jp && npm run check:sources",
+    "import:data": "npm run import:bandai && npm run import:collectibles && npm run import:pokemon-center && npm run import:fate && npm run import:bbx-db && npm run import:gget && npm run map:gget && npm run import:pbandai-manual && npm run import:pb && npm run cache:bbx-images && npm run localize && npm run check:sources"
   },
   "devDependencies": {
     "@capacitor/android": "^7.0.0",

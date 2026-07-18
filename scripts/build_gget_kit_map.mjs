@@ -51,6 +51,60 @@ function kitSearchText(kit) {
   ].filter(Boolean).join(" ");
 }
 
+function workFamily(name) {
+  const s = String(name || "").toLowerCase();
+  if (s.includes("seed")) return "seed";
+  if (s.includes("gundam 00") || s.includes("celestial being")) return "double_o";
+  if (s.includes("wing")) return "w";
+  if (s.includes("iron-blooded")) return "iron_blooded";
+  if (s.includes("witch from mercury")) return "witch";
+  if (s.includes("gquuuuuux")) return "gquuuuuux";
+  if (s.includes("age")) return "age";
+  if (s.includes("build") || s.includes("gunpla builders")) return "build";
+  if (s.includes("sd ") || s.includes("sengokuden") || s.includes("sangoku")) return "sd";
+  if (s.includes("fighter g gundam")) return "g";
+  if (s.includes("gundam x")) return "x";
+  if (s.includes("turn a")) return "turn_a";
+  if (s.includes("reconguista")) return "g_reco";
+  if (s.includes("g generation") || s.includes("extreme vs") || s.includes("battle master")) return "game";
+  if (/\b(0079|0080|0081|0083|0087|0093|f90|f91|uc|cca|msv|zeta|zz|unicorn|narrative|hathaway|crossbone|sentinel|igloo|blue destiny|lost war|missing link|thunderbolt|advance of zeta|char|v gundam|origin|mobile suit gundam)\b/.test(s)) return "uc";
+  return "other";
+}
+
+function kitFamily(kit) {
+  const key = kit.series?.key || "";
+  const map = {
+    seed: "seed",
+    double_o: "double_o",
+    w: "w",
+    iron_blooded: "iron_blooded",
+    witch: "witch",
+    gquuuuuux: "gquuuuuux",
+    age: "age",
+    build: "build",
+    sd: "sd",
+    sangoku: "sd",
+    g: "g",
+    x: "x",
+    turn_a: "turn_a",
+    g_reco: "g_reco",
+  };
+  if (map[key]) return map[key];
+  if (/^(0079|0080|0083|z|zz|cca|uc|f90|f91|v|msv|origin|thunderbolt|hathaway|crossbone|sentinel|blue_destiny|0081|igloo|narrative)$/.test(key)) return "uc";
+  return workFamily([kit.work_title, kit.universe, kit.subline, kit.names?.en, kit.names?.ja].filter(Boolean).join(" "));
+}
+
+function familyCompatible(kit, unit) {
+  const kFamily = kitFamily(kit);
+  const families = unit.families || new Set(["other"]);
+  return families.has(kFamily) || families.has("other") || kFamily === "other";
+}
+
+function accessoryOnly(kit) {
+  const text = kitSearchText(kit);
+  return /\b(option parts?|weapon set|effect parts?|expansion set|parts set|display stand|water slide decal|decal)\b/i.test(text);
+}
+
 function usefulUnitKey(key) {
   if (!key || key.length < 6) return false;
   if (/^(gundam|zaku|gm|gelgoog|gouf|dom|rickdom|zakuii|gmii|guncannon)$/.test(key)) return false;
@@ -62,8 +116,14 @@ async function main() {
   const catalog = JSON.parse(await readFile(CATALOG_PATH, "utf8"));
 
   const works = gget.works;
+  const workNameById = new Map(works.map((work) => [work.work_id, work.name]));
   const workIds = new Set(works.map((w) => w.work_id));
-  const units = gget.units.filter((u) => u.work_ids.some((id) => workIds.has(id)));
+  const units = gget.units
+    .filter((u) => u.work_ids.some((id) => workIds.has(id)))
+    .map((unit) => ({
+      ...unit,
+      families: new Set((unit.work_ids || []).map((id) => workNameById.get(id)).filter(Boolean).map(workFamily)),
+    }));
 
   // Group units by normalized suit name (variants like EX / Meteor collapse together).
   const unitsByKey = new Map();
@@ -74,9 +134,9 @@ async function main() {
     unitsByKey.get(key).push(unit);
   }
 
-  const kits = catalog.kits.filter((k) => k.franchise === "gundam" && k.data_status !== "hidden");
+  const kits = catalog.kits.filter((k) => k.franchise === "gundam" && k.data_status !== "hidden" && !accessoryOnly(k));
 
-  const map = {}; // unit_id -> [kit_id]
+  const map = {}; // unit_id -> Set<kit_id>
   let matchedKits = 0;
   for (const kit of kits) {
     const kitKey = normalizeName(kitSearchText(kit));
@@ -85,20 +145,22 @@ async function main() {
     // name plus extras). Prefer the longest unit key to avoid "gundam" over-matching.
     let best = null;
     for (const [key, unitList] of unitsByKey) {
-      if (kitKey.includes(key) && (!best || key.length > best.key.length)) best = { key, unitList };
+      const compatibleUnits = unitList.filter((unit) => familyCompatible(kit, unit));
+      if (compatibleUnits.length && kitKey.includes(key) && (!best || key.length > best.key.length)) best = { key, unitList: compatibleUnits };
     }
     if (!best) continue;
     matchedKits += 1;
     for (const unit of best.unitList) {
-      (map[unit.unit_id] = map[unit.unit_id] || []).push(kit.kit_id);
+      (map[unit.unit_id] = map[unit.unit_id] || new Set()).add(kit.kit_id);
     }
   }
 
-  const matchedUnits = Object.keys(map).length;
+  const unitKits = Object.fromEntries(Object.entries(map).map(([unitId, kitIds]) => [unitId, [...kitIds].sort()]));
+  const matchedUnits = Object.keys(unitKits).length;
   const doc = {
     updated_at: gget.updated_at,
     works: works.map((w) => ({ work_id: w.work_id, name: w.name })),
-    unit_kits: map,
+    unit_kits: unitKits,
   };
   await writeFile(OUTPUT_PATH, `${JSON.stringify(doc, null, 2)}\n`, "utf8");
   console.log(

@@ -239,16 +239,21 @@ def crawl_source(source: dict, args) -> list[dict]:
     return items
 
 
-def merge_manual_items(new_items: list[dict]) -> list[dict]:
+def merge_existing_items(new_items: list[dict]) -> list[dict]:
     existing_doc = read_json(OUTPUT_PATH, {})
     existing_items = existing_doc if isinstance(existing_doc, list) else existing_doc.get("items", [])
     merged = {item.get("id") or item.get("url"): item for item in new_items if item.get("id") or item.get("url")}
+    has_fresh_ok = any(item.get("fetch_status") == "ok" and item.get("url") for item in new_items)
     for item in existing_items:
         key = item.get("id") or item.get("url")
-        if item.get("manual") and key:
-            current = merged.get(key)
-            if not current or current.get("fetch_status") != "ok":
-                merged[key] = item
+        if not key:
+            continue
+        current = merged.get(key)
+        if item.get("manual") and (not current or current.get("fetch_status") != "ok"):
+            merged[key] = item
+        elif not has_fresh_ok and item.get("fetch_status") == "ok" and not current:
+            # Keep the last good cache if the Japan crawl was blocked or errored.
+            merged[key] = item
     return list(merged.values())
 
 
@@ -275,7 +280,7 @@ def main() -> int:
         "schema_version": 1,
         "source": "premium_bandai_jp",
         "updated_at": now_iso(),
-        "items": merge_manual_items(items),
+        "items": merge_existing_items(items),
     }
     write_json(OUTPUT_PATH, payload)
     print(f"Wrote {len(payload['items'])} Premium Bandai records to {OUTPUT_PATH}")

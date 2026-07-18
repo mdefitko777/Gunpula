@@ -136,6 +136,14 @@ Premium Bandai JP 可能有地区限制，所以流程是：
 python scripts/crawl_pbandai.py
 ```
 
+每日日本 PB 直抓需要一台日本网络的 self-hosted runner：
+
+- Workflow：`.github/workflows/refresh-pbandai-jp.yml`
+- Runner 标签：`self-hosted`、`linux`、`pbandai-jp`
+- 命令：`npm run refresh:pb:japan`
+
+GitHub 官方 runner 不在日本，会被重定向到 `https://p-bandai.jp/global_newpc.html`。这种情况下普通每日目录任务只会从 Bandai Spirits 商品页恢复 PB 链接，不会冒充完整 PB 日本站抓取。
+
 输入来源：
 
 - `data/pbandai_sources.json`

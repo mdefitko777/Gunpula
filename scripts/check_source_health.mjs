@@ -118,7 +118,7 @@ async function checkPremiumBandai() {
     return {
       source_id: "p_bandai_jp",
       url: P_BANDAI_URL,
-      status: redirected && indexedCount > 0 ? "ok" : redirected ? "blocked" : result.ok && itemCount > 0 ? "ok" : "warning",
+      status: redirected ? "blocked" : result.ok && itemCount > 0 ? "ok" : "warning",
       http_status: result.status,
       final_url: result.final_url,
       duration_ms: result.duration_ms,
@@ -138,7 +138,7 @@ async function checkPremiumBandai() {
     return {
       source_id: "p_bandai_jp",
       url: P_BANDAI_URL,
-      status: indexedCount > 0 ? "ok" : "error",
+      status: indexedCount > 0 ? "blocked" : "error",
       item_count: indexedCount,
       access_method: indexedCount > 0 ? "bandai_spirits_product_buttons" : "direct",
       message: indexedCount > 0 ? `Direct PB check failed, but ${indexedCount} official PB Japan item links are indexed` : error.message,
