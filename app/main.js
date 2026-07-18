@@ -132,6 +132,7 @@ const PAGER_START_DISTANCE = 18;
 const DRAWER_EDGE_ZONE = 96;
 const DRAWER_OPEN_DISTANCE = 44;
 const COLLECTION_SWIPE_DISTANCE = 46;
+const SWIPE_ZONE_TOP_RATIO = 0.42;
 const PAGER_THRESHOLD_RATIO = 0.28;
 const PAGER_MIN_THRESHOLD = 92;
 const PAGER_ANIMATION_MS = 220;
@@ -1514,26 +1515,20 @@ function bindEvents() {
   });
   elements.refreshAppCache.addEventListener("click", refreshAppCache);
   elements.updateNotificationToggle.addEventListener("change", toggleUpdateNotifications);
-  elements.updatesOpenSettings.addEventListener("click", () => {
+  elements.updatesOpenSettings?.addEventListener("click", () => {
     openSettings();
     requestAnimationFrame(() => elements.updateLog?.scrollIntoView({ block: "start", behavior: "smooth" }));
   });
   elements.updatesDateInput?.addEventListener("change", (event) => {
     state.releaseMonth = event.target.value || defaultReleaseMonth();
     localStorage.setItem(RELEASE_MONTH_KEY, state.releaseMonth);
-    state.updatesMode = "month";
-    localStorage.setItem(UPDATES_MODE_KEY, state.updatesMode);
-    renderHomeUpdates();
+    setUpdatesMode("month");
   });
   elements.updatesRecentButton?.addEventListener("click", () => {
-    state.updatesMode = "recent";
-    localStorage.setItem(UPDATES_MODE_KEY, state.updatesMode);
-    renderHomeUpdates();
+    setUpdatesMode("recent");
   });
   elements.updatesWeekButton?.addEventListener("click", () => {
-    state.updatesMode = "week";
-    localStorage.setItem(UPDATES_MODE_KEY, state.updatesMode);
-    renderHomeUpdates();
+    setUpdatesMode("week");
   });
   elements.accountAvatar?.addEventListener("click", () => {
     if (syncModeV2() && state.sync.workspace) {
@@ -2088,6 +2083,11 @@ function gestureTargetAllowed(target) {
   return !target.closest("input, textarea, select, option");
 }
 
+function swipeZoneAllowed(y) {
+  const height = window.innerHeight || document.documentElement.clientHeight || 1;
+  return y >= height * SWIPE_ZONE_TOP_RATIO;
+}
+
 // The page swipe must not fire from controls that scroll or pan horizontally
 // themselves (franchise tabs, series tabs, filter chips, collection strips…),
 // otherwise scrolling a filter row keeps flipping to another franchise.
@@ -2163,6 +2163,7 @@ function moveTouchGesture(event) {
   // This runs before catalog paging so catalog/guide can still open the drawer.
   if (
     state.radial.startX <= DRAWER_EDGE_ZONE &&
+    swipeZoneAllowed(state.radial.startY) &&
     deltaX > DRAWER_OPEN_DISTANCE &&
     absX > absY * 1.15 &&
     !elements.userDialog?.open
@@ -2178,6 +2179,7 @@ function moveTouchGesture(event) {
   }
   if (
     state.activeView === "catalog" &&
+    swipeZoneAllowed(state.pager.startY) &&
     !state.pager.blockedByTarget &&
     absX > PAGER_START_DISTANCE &&
     absX > absY * 1.15
@@ -2189,11 +2191,31 @@ function moveTouchGesture(event) {
     if (event.cancelable) event.preventDefault();
     return;
   }
+  if (
+    state.activeView === "updates" &&
+    swipeZoneAllowed(state.pager.startY) &&
+    !state.pager.blockedByTarget &&
+    absX > COLLECTION_SWIPE_DISTANCE &&
+    absX > absY * 1.3
+  ) {
+    clearTimeout(state.radial.timer);
+    state.radial.timer = null;
+    state.radial.touchId = null;
+    state.pager.touchId = null;
+    state.radial.suppressClick = true;
+    const target = deltaX < 0 ? "week" : "recent";
+    if (state.updatesMode !== target) {
+      if (event.cancelable) event.preventDefault();
+      setUpdatesMode(target);
+    }
+    return;
+  }
   // Inside the merged collection view, a horizontal swipe flips between the
   // wanted and owned tabs. blockedByTarget already excludes the scrollable member
   // avatar row and collection strips, so this only fires on the card grid / body.
   if (
     COLLECTION_TYPES.includes(state.activeView) &&
+    swipeZoneAllowed(state.pager.startY) &&
     !state.pager.blockedByTarget &&
     absX > COLLECTION_SWIPE_DISTANCE &&
     absX > absY * 1.3
@@ -6524,6 +6546,13 @@ function switchGuideTab(tab) {
   renderGuideActive();
 }
 
+function setUpdatesMode(mode) {
+  if (!["recent", "week", "month"].includes(mode)) return;
+  state.updatesMode = mode;
+  localStorage.setItem(UPDATES_MODE_KEY, state.updatesMode);
+  renderHomeUpdates();
+}
+
 function bindGuideSwipe() {
   if (!elements.guideDialog || elements.guideDialog.dataset.swipeBound === "1") return;
   elements.guideDialog.dataset.swipeBound = "1";
@@ -6533,8 +6562,10 @@ function bindGuideSwipe() {
   elements.guideDialog.addEventListener(
     "touchstart",
     (event) => {
+      startTime = 0;
       if (state.activeView !== "guide" || event.touches.length !== 1) return;
       const touch = event.touches[0];
+      if (!swipeZoneAllowed(touch.clientY) || pagerBlockedByTarget(event.target)) return;
       startX = touch.clientX;
       startY = touch.clientY;
       startTime = Date.now();

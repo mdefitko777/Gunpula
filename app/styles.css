@@ -169,10 +169,10 @@ body[data-theme="classic"] {
 }
 
 .segment-button {
-  min-height: 28px;
+  min-height: 34px;
   padding: 0 12px;
-  border: 0;
-  border-radius: 7px;
+  border: 1px solid transparent;
+  border-radius: 8px;
   background: transparent;
   color: var(--muted);
   font-size: 13px;
@@ -187,9 +187,10 @@ body[data-theme="classic"] {
 }
 
 .segment-button.is-active {
-  background: var(--panel);
-  color: var(--ink);
-  box-shadow: 0 1px 3px rgba(28, 27, 26, 0.08);
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--line));
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  box-shadow: none;
 }
 
 .franchise-control {
@@ -202,26 +203,29 @@ body[data-theme="classic"] {
 }
 
 .franchise-control .segment-button {
+  flex: 0 0 96px;
+  min-width: 0;
   min-height: 38px;
-  padding: 0 10px;
-  border-radius: 0;
-  border-bottom: 2px solid transparent;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
   color: var(--muted);
   font-size: 13.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .franchise-control .segment-button:hover,
 .franchise-control .segment-button:focus-visible {
   color: var(--ink);
-  background: transparent;
+  background: var(--soft);
 }
 
 .franchise-control .segment-button.is-active {
-  border-bottom-color: var(--accent);
-  background: transparent;
-  color: var(--ink);
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--line));
+  background: var(--accent-soft);
+  color: var(--accent-deep);
   font-weight: 600;
-  box-shadow: none;
 }
 
 .hero-row {
@@ -325,8 +329,8 @@ h1 {
   min-height: 30px;
   flex: 0 0 auto;
   padding: 0 12px;
-  border: 0;
-  border-radius: 999px;
+  border: 1px solid transparent;
+  border-radius: 8px;
   background: transparent;
   color: var(--muted);
   font-size: 13px;
@@ -345,6 +349,7 @@ h1 {
 
 .series-tab.is-active,
 .filter-chip.is-active {
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--line));
   background: var(--accent-soft);
   color: var(--accent-deep);
 }
@@ -365,12 +370,13 @@ h1 {
 
 .filter-panel summary,
 .series-admin-panel summary {
+  width: 100%;
   min-height: 38px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 0 2px;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 0;
   color: var(--muted);
   font-size: 13px;
   font-weight: 500;
@@ -384,19 +390,28 @@ h1 {
 }
 
 .filter-panel summary::after {
-  content: "";
-  width: 8px;
-  height: 8px;
-  flex: 0 0 auto;
-  margin-right: 4px;
-  border-right: 1.5px solid var(--faint);
-  border-bottom: 1.5px solid var(--faint);
-  transform: rotate(45deg) translateY(-2px);
-  transition: transform 140ms ease;
+  content: none;
 }
 
-.filter-panel[open] summary::after {
-  transform: rotate(-135deg) translateY(-2px);
+.filter-icon {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--ink);
+}
+
+.filter-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.filter-title {
+  display: none;
 }
 
 .filter-panel summary span:last-child,
@@ -405,7 +420,7 @@ h1 {
   color: var(--muted);
   font-size: 12px;
   overflow: hidden;
-  text-align: right;
+  text-align: left;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -1065,9 +1080,9 @@ h1 {
 }
 
 .updates-head {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
   gap: 12px;
   margin-bottom: 8px;
 }
@@ -1077,11 +1092,7 @@ h1 {
 }
 
 .updates-head h2 {
-  min-width: 0;
-  font-size: 16px;
-  line-height: 1.25;
-  overflow-wrap: normal;
-  word-break: keep-all;
+  display: none;
 }
 
 .updates-head p {
@@ -1093,33 +1104,34 @@ h1 {
 
 .updates-actions {
   flex: 0 0 auto;
-  display: inline-flex;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(92px, 1fr);
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
-.updates-actions button {
+.updates-actions button,
+.updates-actions input {
+  width: 100%;
+  min-height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--muted);
+  font-weight: 600;
   white-space: nowrap;
 }
 
 .updates-actions .is-active {
-  border-color: transparent;
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--line));
   background: var(--accent-soft);
   color: var(--accent-deep);
 }
 
-.updates-actions button {
-  white-space: nowrap;
-}
-
 .updates-actions input {
-  min-height: 36px;
   padding: 0 10px;
-  border: 1px solid transparent;
-  border-radius: 9px;
-  background: var(--soft);
   color: var(--ink);
-  font-weight: 400;
 }
 
 .home-update-summary {
@@ -1758,13 +1770,19 @@ body[data-view="guide"] .top-bar {
 }
 
 .collection-type-tabs {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
   width: 100%;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 .collection-type-tabs .segment-button {
-  flex: 1;
   min-height: 38px;
+  border-color: var(--line);
+  background: var(--panel);
   font-size: 14px;
 }
 
@@ -4110,12 +4128,14 @@ body.is-radial-active {
 
 .guide-head {
   position: relative;
+  display: grid;
+  gap: 8px;
   padding: 0 0 12px;
   border-bottom: 1px solid var(--line);
 }
 
 .guide-head h2 {
-  font-size: 19px;
+  display: none;
 }
 
 .guide-user-chip {
@@ -4146,25 +4166,32 @@ body.is-radial-active {
 }
 
 .guide-tabs {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 0;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 .guide-tabs .segment-button {
-  flex: 1;
-  min-height: 34px;
+  min-width: 0;
+  min-height: 38px;
+  border-color: var(--line);
+  background: var(--panel);
 }
 
 .guide-color-toggle {
-  position: absolute;
-  top: 0;
-  right: 0;
-  min-height: 28px;
+  position: static;
+  justify-self: start;
+  min-width: 92px;
+  min-height: 36px;
   padding: 0 12px;
   border: 1px solid var(--line);
-  border-radius: 999px;
-  background: transparent;
+  border-radius: 8px;
+  background: var(--panel);
   color: var(--muted);
   font-size: 12px;
   font-weight: 600;
@@ -4529,11 +4556,12 @@ body.is-radial-active {
 
 .guide-family-chip {
   flex: 0 0 auto;
-  min-height: 30px;
-  padding: 0 11px;
+  min-width: 72px;
+  min-height: 34px;
+  padding: 0 10px;
   border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--panel);
+  border-radius: 8px;
+  background: transparent;
   color: var(--muted);
   font-size: 12px;
   font-weight: 700;
@@ -5526,7 +5554,12 @@ body.is-radial-active {
     width: 100%;
   }
 
-  .franchise-control .segment-button,
+  .franchise-control .segment-button {
+    flex: 0 0 96px;
+    min-width: 0;
+    padding: 0 8px;
+  }
+
   .language-control .segment-button {
     flex: 1 1 0;
     min-width: 0;
@@ -5750,24 +5783,23 @@ body.is-radial-active {
   }
 
   .updates-head {
+    grid-template-columns: minmax(0, 1fr);
     align-items: stretch;
-    flex-direction: column;
   }
 
   .updates-actions {
     width: 100%;
+    grid-auto-columns: minmax(94px, 1fr);
     overflow-x: auto;
     padding-bottom: 2px;
   }
 
   .updates-actions input {
-    flex: 1 0 132px;
     min-width: 132px;
   }
 
   .updates-head h2 {
-    font-size: 18px;
-    white-space: normal;
+    display: none;
   }
 
   .home-update-card {
@@ -5792,13 +5824,13 @@ body.is-radial-active {
     align-items: center;
     flex-direction: row;
     min-height: 32px;
-    padding: 0 11px;
+    padding: 0;
   }
 
   .filter-panel summary span:last-child,
   .series-admin-panel summary span:last-child {
     width: auto;
-    text-align: right;
+    text-align: left;
   }
 
   .kit-card {

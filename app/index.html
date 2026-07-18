@@ -9,7 +9,7 @@
     <title>Gunpula v2.0.0</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260718-v67" />
+    <link rel="stylesheet" href="./styles.css?v=20260718-v68" />
   </head>
   <body>
     <main class="catalog-page">
@@ -29,7 +29,8 @@
         <nav class="series-tabs" id="seriesTabs" aria-label="常用系列"></nav>
         <details class="filter-panel" id="filtersPanel">
           <summary>
-            <span data-i18n="filters">筛选</span>
+            <span class="filter-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M7 12h10"/><path d="M10 18h4"/></svg></span>
+            <span class="filter-title" data-i18n="filters">筛选</span>
             <span id="filterSummary">全部系列 · 全部产品线</span>
           </summary>
           <div class="filter-body" id="filterBody">
@@ -100,7 +101,6 @@
             <button class="secondary-button compact-button" id="updatesRecentButton" type="button" data-i18n="recentDaysShort">最近添加</button>
             <button class="secondary-button compact-button" id="updatesWeekButton" type="button" data-i18n="weekOnSaleShort">本周在售</button>
             <input id="updatesDateInput" type="month" aria-label="选择发售月份" data-i18n-aria="releaseMonth" />
-            <button class="secondary-button compact-button" id="updatesOpenSettings" type="button" data-i18n="settings">设置</button>
           </div>
         </div>
         <div class="home-update-summary" id="homeUpdateSummary"></div>
@@ -761,6 +761,6 @@
       <div class="radial-labels"></div>
     </div>
 
-    <script type="module" src="./main.js?v=20260718-v67"></script>
+    <script type="module" src="./main.js?v=20260718-v68"></script>
   </body>
 </html>
