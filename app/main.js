@@ -7007,6 +7007,7 @@ async function openAtlasGroup(group, tab, member = activeGuideMember()) {
   elements.guideUnitName.textContent = atlasLabel(group.labels);
   elements.guideUnitMeta.textContent = `${franchiseShortLabel(tab)} · ${lit}/${kits.length}${atlasLabel(group.subtitle) ? ` · ${atlasLabel(group.subtitle)}` : ""}`;
   elements.guideUnitVariants.innerHTML = "";
+  appendAtlasGroupItems(group);
   elements.guideUnitKits.innerHTML = "";
   if (!kits.length) {
     const empty = document.createElement("p");
@@ -7022,6 +7023,24 @@ async function openAtlasGroup(group, tab, member = activeGuideMember()) {
     elements.guideUnitKits.append(list);
   }
   openDialog(elements.guideUnitDialog);
+}
+
+function appendAtlasGroupItems(group) {
+  const items = (group.items || []).filter(Boolean);
+  if (!items.length) return;
+  const limit = group.id?.startsWith("gen") ? 18 : 24;
+  for (const item of items.slice(0, limit)) {
+    const chip = document.createElement("span");
+    chip.className = "guide-variant-chip";
+    chip.textContent = item;
+    elements.guideUnitVariants.append(chip);
+  }
+  if (items.length > limit) {
+    const chip = document.createElement("span");
+    chip.className = "guide-variant-chip";
+    chip.textContent = `+${items.length - limit}`;
+    elements.guideUnitVariants.append(chip);
+  }
 }
 
 function atlasKitScore(kit, sets) {

@@ -47,6 +47,7 @@
     "import:official": "npm run import:data",
     "import:gget": "node scripts/import_gget_units.mjs",
     "map:gget": "node scripts/build_gget_kit_map.mjs",
+    "atlas:taxonomy": "node scripts/fetch_atlas_taxonomy.mjs",
     "atlas:groups": "node scripts/build_atlas_groups.mjs",
     "cache:gget-images": "node scripts/cache_gget_images.mjs",
     "import:bbx-db": "node scripts/import_bbx_database.mjs",
