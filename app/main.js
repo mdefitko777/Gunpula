@@ -249,6 +249,7 @@ const state = {
   loadedSearchFranchises: new Set(),
   imageAssets: null,
   androidPackage: null,
+  atlasGroups: null,
   overrides: {},
   seriesLabelOverrides: {},
   collection: { owned: [], wanted: [] },
@@ -695,6 +696,19 @@ const searchIndexPromises = new Map();
 
 async function loadInitialKitsDoc() {
   return loadInitialCatalogSlice(state.franchise);
+}
+
+async function ensureCatalogComplete() {
+  if (catalogCompletion) {
+    await catalogCompletion;
+    return;
+  }
+  const manifest = await loadOptionalJson("../data/split/manifest.json");
+  const franchises = Object.keys(manifest?.franchises || {}).filter((franchise) => !state.rawKits.some((kit) => kit.franchise === franchise));
+  if (franchises.length) {
+    completeCatalogInBackground(franchises);
+    if (catalogCompletion) await catalogCompletion;
+  }
 }
 
 function completeCatalogInBackground(pendingFranchises) {
@@ -6538,6 +6552,13 @@ async function ensureGuideData() {
   return state.guide;
 }
 
+async function ensureAtlasData() {
+  if (state.atlasGroups) return state.atlasGroups;
+  const doc = await loadOptionalJson("../data/atlas-groups.json");
+  state.atlasGroups = doc?.franchises || {};
+  return state.atlasGroups;
+}
+
 // Local cached icon first, remote source as fallback: only ~1/4 of guide unit
 // icons are cached under app/assets/gget, so without this most cells hatch out.
 function guideIconLocal(icon) {
@@ -6631,7 +6652,7 @@ async function renderGuidePage() {
 }
 
 const GUIDE_FULL_COLOR_KEY = "gunpula-guide-full-color-v1";
-const GUIDE_TABS = ["gundam", "bbx", "parts"];
+const GUIDE_TABS = ["gundam", "pokemon", "fate", "armored_core", "bbx", "parts"];
 
 function switchGuideTab(tab) {
   if (!GUIDE_TABS.includes(tab) || tab === state.guideTab) return;
@@ -6712,6 +6733,8 @@ async function renderGuideActive() {
     renderBbxGuide(await ensureBbxData());
   } else if (state.guideTab === "parts") {
     renderBbxParts(await ensureBbxData());
+  } else if (["pokemon", "fate", "armored_core"].includes(state.guideTab)) {
+    renderAtlasGuide(state.guideTab, await ensureAtlasData());
   } else {
     renderGuide(await ensureGuideData());
   }
@@ -6855,6 +6878,134 @@ function renderGuide(guide) {
     section.append(grid);
     elements.guideBody.append(section);
   }
+}
+
+function atlasLabel(value) {
+  if (!value) return "";
+  if (typeof value === "string") return value;
+  return value[state.language] || value.zh || value.en || value.ja || value.ko || "";
+}
+
+function renderAtlasGuide(tab, atlasGroups) {
+  const groups = atlasGroups?.[tab] || [];
+  const member = activeGuideMember();
+  const sets = guideCollectionSets(member);
+  elements.guideSummary.textContent = t("guideComplete", {
+    collected: groups.reduce((sum, group) => sum + (group.kit_ids || []).filter((id) => sets.owned.has(id) || sets.wanted.has(id)).length, 0),
+    total: groups.reduce((sum, group) => sum + (group.kit_ids || []).length, 0),
+  });
+  elements.guideBody.innerHTML = "";
+
+  const section = document.createElement("section");
+  section.className = "guide-work";
+  const grid = document.createElement("div");
+  grid.className = "guide-series-grid guide-atlas-grid";
+  for (const group of groups) {
+    grid.append(createAtlasGroupCard(group, tab, member, sets));
+  }
+  section.append(grid);
+  elements.guideBody.append(section);
+}
+
+function createAtlasGroupCard(group, tab, member, sets) {
+  const kitIds = group.kit_ids || [];
+  const lit = kitIds.filter((id) => sets.owned.has(id) || sets.wanted.has(id)).length;
+  const card = document.createElement("button");
+  card.type = "button";
+  card.className = `guide-series-card atlas-group-card${lit ? " is-lit" : ""}`;
+
+  const art = document.createElement("span");
+  art.className = "guide-series-art";
+  if (group.image) {
+    const img = document.createElement("img");
+    img.alt = atlasLabel(group.labels);
+    setImageFallbackChain(img, [group.image], () => art.classList.add("is-missing"));
+    art.append(img);
+  } else {
+    art.classList.add("is-missing");
+  }
+  const label = document.createElement("strong");
+  label.textContent = atlasLabel(group.labels);
+  const meta = document.createElement("span");
+  meta.textContent = `${lit}/${kitIds.length}${atlasLabel(group.subtitle) ? ` · ${atlasLabel(group.subtitle)}` : ""}`;
+  card.append(art, label, meta);
+  card.addEventListener("click", () => openAtlasGroup(group, tab, member));
+  return card;
+}
+
+async function openAtlasGroup(group, tab, member = activeGuideMember()) {
+  await ensureCatalogComplete();
+  state.activeGuideMember = safeMemberName(typeof member === "string" ? member : member?.name || editableCollectionMember());
+  const kits = (group.kit_ids || []).map(displayKitById).filter(Boolean);
+  const sets = guideCollectionSets(member);
+  const lit = kits.filter((kit) => sets.owned.has(kit.kit_id) || sets.wanted.has(kit.kit_id)).length;
+  elements.guideUnitArt.innerHTML = "";
+  if (group.image) {
+    const img = document.createElement("img");
+    img.alt = atlasLabel(group.labels);
+    setImageFallbackChain(img, [group.image], () => img.remove());
+    elements.guideUnitArt.append(img);
+  }
+  elements.guideUnitName.textContent = atlasLabel(group.labels);
+  elements.guideUnitMeta.textContent = `${franchiseShortLabel(tab)} · ${lit}/${kits.length}${atlasLabel(group.subtitle) ? ` · ${atlasLabel(group.subtitle)}` : ""}`;
+  elements.guideUnitVariants.innerHTML = "";
+  elements.guideUnitKits.innerHTML = "";
+  if (!kits.length) {
+    const empty = document.createElement("p");
+    empty.className = "settings-hint";
+    empty.textContent = t("guideNoKits");
+    elements.guideUnitKits.append(empty);
+  } else {
+    const list = document.createElement("div");
+    list.className = "atlas-kit-list";
+    for (const kit of kits.sort((a, b) => atlasKitScore(b, sets) - atlasKitScore(a, sets) || kitDisplayName(a).localeCompare(kitDisplayName(b)))) {
+      list.append(atlasKitRow(kit, group, tab, member));
+    }
+    elements.guideUnitKits.append(list);
+  }
+  openDialog(elements.guideUnitDialog);
+}
+
+function atlasKitScore(kit, sets) {
+  if (sets.owned.has(kit.kit_id)) return 2;
+  if (sets.wanted.has(kit.kit_id)) return 1;
+  return 0;
+}
+
+function atlasKitRow(kit, group, tab, member = activeGuideMember()) {
+  const row = document.createElement("div");
+  row.className = "guide-kit-row";
+  const face = document.createElement("button");
+  face.type = "button";
+  face.className = "guide-kit-face";
+  const thumb = document.createElement("span");
+  thumb.className = "guide-kit-thumb";
+  appendImageWithFallback(thumb, kit, { alt: kitDisplayName(kit) });
+  const text = document.createElement("span");
+  text.className = "guide-kit-text";
+  text.innerHTML = `<strong>${escapeHtml(kitDisplayName(kit))}</strong><span>${escapeHtml(seriesLabelFromKit(kit))} · ${escapeHtml(gradeShortLabel(kit))}</span>`;
+  face.append(thumb, text);
+  face.addEventListener("click", () => {
+    closeDialog(elements.guideUnitDialog);
+    openDetail(kit);
+  });
+  const actions = document.createElement("span");
+  actions.className = "guide-kit-actions";
+  for (const type of COLLECTION_TYPES) {
+    const active = kitInCollection(kit.kit_id, type, editableCollectionMember());
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `guide-add-button is-${type}${active ? " is-active" : ""}`;
+    button.textContent = active ? t(type === "owned" ? "unmarkOwned" : "unmarkWanted") : t(type === "owned" ? "markOwned" : "markWanted");
+    button.disabled = activeGuideMember()?.name && safeMemberName(activeGuideMember().name) !== editableCollectionMember();
+    button.addEventListener("click", () => {
+      setKitCollectionStatus(kit.kit_id, type, !active);
+      openAtlasGroup(group, tab, member);
+    });
+    actions.append(button);
+  }
+  row.append(face, actions);
+  return row;
 }
 
 function guideFamilyKeys(works) {

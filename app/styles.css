@@ -4181,18 +4181,20 @@ body.is-radial-active {
 }
 
 .guide-tabs {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
   gap: 6px;
   width: 100%;
   margin-top: 0;
   padding: 0;
   border-radius: 0;
   background: transparent;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 
 .guide-tabs .segment-button {
-  min-width: 0;
+  flex: 0 0 auto;
+  min-width: 72px;
   min-height: 38px;
   border-color: var(--line);
   background: var(--panel);
@@ -4618,6 +4620,10 @@ body.is-radial-active {
   gap: 8px;
 }
 
+.guide-atlas-grid {
+  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+}
+
 .guide-series-card {
   min-width: 0;
   padding: 0;
@@ -4664,6 +4670,15 @@ body.is-radial-active {
   padding-bottom: 8px;
   color: var(--muted);
   font-size: 11px;
+}
+
+.atlas-group-card .guide-series-art {
+  aspect-ratio: 16 / 10;
+}
+
+.atlas-kit-list {
+  display: grid;
+  gap: 2px;
 }
 
 .guide-cell {
