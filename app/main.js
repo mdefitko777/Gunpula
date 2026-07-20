@@ -6652,7 +6652,7 @@ async function renderGuidePage() {
 }
 
 const GUIDE_FULL_COLOR_KEY = "gunpula-guide-full-color-v1";
-const GUIDE_TABS = ["gundam", "pokemon", "fate", "armored_core", "bbx", "parts"];
+const GUIDE_TABS = ["gundam", "timeline", "pokemon", "fate", "armored_core", "bbx", "parts"];
 
 function switchGuideTab(tab) {
   if (!GUIDE_TABS.includes(tab) || tab === state.guideTab) return;
@@ -6733,6 +6733,8 @@ async function renderGuideActive() {
     renderBbxGuide(await ensureBbxData());
   } else if (state.guideTab === "parts") {
     renderBbxParts(await ensureBbxData());
+  } else if (state.guideTab === "timeline") {
+    renderGundamTimeline(await ensureAtlasData());
   } else if (["pokemon", "fate", "armored_core"].includes(state.guideTab)) {
     renderAtlasGuide(state.guideTab, await ensureAtlasData());
   } else {
@@ -6931,6 +6933,62 @@ function createAtlasGroupCard(group, tab, member, sets) {
   card.append(art, label, meta);
   card.addEventListener("click", () => openAtlasGroup(group, tab, member));
   return card;
+}
+
+function renderGundamTimeline(atlasGroups) {
+  const groups = atlasGroups?.gundam_timeline || [];
+  elements.guideSummary.textContent = `${groups.reduce((sum, group) => sum + (group.works?.length || 0), 0)} works`;
+  elements.guideBody.innerHTML = "";
+  const section = document.createElement("section");
+  section.className = "guide-work";
+  const grid = document.createElement("div");
+  grid.className = "guide-series-grid guide-atlas-grid";
+  for (const group of groups) {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "guide-series-card atlas-group-card";
+    const art = document.createElement("span");
+    art.className = "guide-series-art";
+    if (group.image) {
+      const img = document.createElement("img");
+      img.alt = atlasLabel(group.labels);
+      setImageFallbackChain(img, [group.image], () => art.classList.add("is-missing"));
+      art.append(img);
+    } else {
+      art.classList.add("is-missing");
+    }
+    const label = document.createElement("strong");
+    label.textContent = atlasLabel(group.labels);
+    const meta = document.createElement("span");
+    meta.textContent = atlasLabel(group.subtitle);
+    card.append(art, label, meta);
+    card.addEventListener("click", () => openGundamTimelineGroup(group));
+    grid.append(card);
+  }
+  section.append(grid);
+  elements.guideBody.append(section);
+}
+
+async function openGundamTimelineGroup(group) {
+  await ensureGuideData();
+  elements.guideUnitArt.innerHTML = "";
+  if (group.image) {
+    const img = document.createElement("img");
+    img.alt = atlasLabel(group.labels);
+    setImageFallbackChain(img, [group.image], () => img.remove());
+    elements.guideUnitArt.append(img);
+  }
+  elements.guideUnitName.textContent = atlasLabel(group.labels);
+  elements.guideUnitMeta.textContent = atlasLabel(group.subtitle);
+  elements.guideUnitVariants.innerHTML = "";
+  elements.guideUnitKits.innerHTML = "";
+  const grid = document.createElement("div");
+  grid.className = "guide-series-grid guide-atlas-grid";
+  for (const work of group.works || []) {
+    grid.append(createGuideWorkCard(work, activeGuideMember()));
+  }
+  elements.guideUnitKits.append(grid);
+  openDialog(elements.guideUnitDialog);
 }
 
 async function openAtlasGroup(group, tab, member = activeGuideMember()) {
