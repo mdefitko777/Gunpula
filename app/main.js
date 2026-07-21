@@ -176,6 +176,14 @@ const WORLD_ACTIONS = [
   { key: "updates", label: { zh: "最近", ko: "최근", en: "Updates", ja: "最近" }, view: "updates" },
   { key: "collection", label: { zh: "收藏", ko: "컬렉션", en: "Collection", ja: "コレクション" }, view: "collection" },
 ];
+
+const WORLD_SEARCH_PLACEHOLDERS = {
+  gundam: { zh: "搜索机体 / 作品 / HG·MG·MB", ko: "기체 / 작품 / HG·MG·MB 검색", en: "Search suit / work / HG·MG·MB", ja: "機体 / 作品 / HG·MG·MB 検索" },
+  armored_core: { zh: "搜索机体 / 游戏 / V.I.·30MM", ko: "기체 / 게임 / V.I.·30MM 검색", en: "Search AC / game / V.I.·30MM", ja: "機体 / ゲーム / V.I.·30MM 検索" },
+  pokemon: { zh: "搜索编号 / 宝可梦 / 拼装·毛绒", ko: "번호 / 포켓몬 / 프라·인형 검색", en: "Search No. / Pokemon / kit·plush", ja: "番号 / ポケモン / プラモ·ぬいぐるみ" },
+  fate: { zh: "搜索角色 / 作品 / FGO 章节", ko: "캐릭터 / 작품 / FGO 장 검색", en: "Search character / work / FGO chapter", ja: "キャラ / 作品 / FGO 章 検索" },
+  beyblade: { zh: "搜索 BX / UX / CX / 部件", ko: "BX / UX / CX / 파츠 검색", en: "Search BX / UX / CX / parts", ja: "BX / UX / CX / パーツ検索" },
+};
 const HELP_TEXT = {
   homeSection: {
     zh: "首页是入口页。点分类卡片进入对应目录；点“我的收藏”里的已购买/想要会进入自己的收藏，不会跟随朋友视图变化；封面图可在卡片上更换。",
@@ -538,6 +546,7 @@ const elements = {
   homeSection: document.querySelector("#homeSection"),
   homeCoverInput: document.querySelector("#homeCoverInput"),
   worldSection: document.querySelector("#worldSection"),
+  homePulse: document.querySelector("#homePulse"),
   homeGrid: document.querySelector("#homeGrid"),
   homeTotal: document.querySelector("#homeTotal"),
   homeCollectionTotal: document.querySelector("#homeCollectionTotal"),
@@ -1497,6 +1506,9 @@ function bindEvents() {
     if (nextView === "collection") {
       // Merged collection entry: reopen whichever tab (wanted/owned) was last active.
       nextView = COLLECTION_TYPES.includes(state.lastCollectionTab) ? state.lastCollectionTab : "wanted";
+    }
+    if (nextView === "guide") {
+      state.guideTab = WORLD_COPY[state.franchise]?.guideTab || "gundam";
     }
     state.activeView = nextView;
     if (COLLECTION_TYPES.includes(nextView)) {
@@ -3817,6 +3829,7 @@ function render() {
   applyAppearance();
   populateGradeSelect();
   elements.searchInput.value = state.query;
+  renderWorldSearchPlaceholder();
   elements.datasetSummary.textContent = datasetSummary();
   renderLanguageControls();
   renderThemeControls();
@@ -4007,6 +4020,7 @@ function renderHome() {
   }
   elements.homeTotal.textContent = t("records", { count: state.kits.length });
   renderWorldSection();
+  renderHomePulse();
   elements.homeGrid.innerHTML = "";
 
   for (const franchise of FRANCHISES) {
@@ -4079,10 +4093,116 @@ function renderHome() {
   renderHomeDashboard();
 }
 
+function openWorldGroup(group) {
+  const world = WORLD_COPY[state.franchise] || WORLD_COPY.gundam;
+  if (state.franchise === "gundam") {
+    state.guideTab = "timeline";
+    state.activeView = "guide";
+    render();
+    persistViewState({ mode: "push" });
+    setTimeout(() => openGundamTimelineGroup(group), 0);
+    return;
+  }
+  if (state.franchise === "beyblade" && group?.id === "parts") {
+    openGuide("parts");
+    return;
+  }
+  state.guideTab = world.guideTab;
+  state.activeView = "guide";
+  render();
+  persistViewState({ mode: "push" });
+  setTimeout(() => openAtlasGroup(group, world.guideTab, editableCollectionMember()), 0);
+}
+
+function worldGroupProgress(group) {
+  const ids = (group?.kit_ids || []).filter((id) => displayKitById(id));
+  if (!ids.length) return { lit: 0, total: group?.count || (group?.works || []).length || (group?.items || []).length || 0 };
+  const sets = guideCollectionSets(editableCollectionMember());
+  return { lit: ids.filter((id) => sets.owned.has(id) || sets.wanted.has(id)).length, total: ids.length };
+}
+
+function createPulseCard({ kind, eyebrow, title, meta, kit, image, action }) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = `pulse-card is-${kind}`;
+  const art = document.createElement("span");
+  art.className = "pulse-art";
+  if (kit) {
+    appendImageWithFallback(art, kit, { alt: kitShortName(kit) });
+  } else if (image) {
+    const img = document.createElement("img");
+    img.alt = title;
+    setImageFallbackChain(img, [image], () => art.classList.add("is-missing"));
+    art.append(img);
+  } else {
+    art.classList.add("is-missing");
+    art.textContent = franchiseShortLabel(state.franchise);
+  }
+  const body = document.createElement("span");
+  body.className = "pulse-body";
+  body.innerHTML = `<em>${escapeHtml(eyebrow)}</em><strong>${escapeHtml(title)}</strong><span>${escapeHtml(meta)}</span>`;
+  button.append(art, body);
+  button.addEventListener("click", action);
+  return button;
+}
+
+function renderHomePulse() {
+  if (!elements.homePulse) return;
+  const world = WORLD_COPY[state.franchise] || WORLD_COPY.gundam;
+  const updates = sortByPreference(recentFeedKits(14).filter((kit) => kit.franchise === state.franchise));
+  const updateKit = updates[0] || sortByPreference(weekOnSaleKits(30).filter((kit) => kit.franchise === state.franchise))[0];
+  const groups = worldGroupsFor(state.franchise);
+  const group = groups.find((entry) => (entry.kit_ids || []).length) || groups[0];
+  const progress = worldGroupProgress(group);
+  const ownedCount = collectionIdsForMember("owned", editableCollectionMember()).filter((id) => displayKitById(id)?.franchise === state.franchise).length;
+  const wantedCount = collectionIdsForMember("wanted", editableCollectionMember()).filter((id) => displayKitById(id)?.franchise === state.franchise).length;
+
+  elements.homePulse.innerHTML = "";
+  const head = document.createElement("div");
+  head.className = "pulse-head";
+  head.innerHTML = `<strong>${escapeHtml(worldText({ zh: "今日看板", ko: "오늘 보드", en: "Today", ja: "今日のボード" }))}</strong><span>${escapeHtml(worldText(world.title))}</span>`;
+  const rail = document.createElement("div");
+  rail.className = "pulse-rail";
+  if (updateKit) {
+    rail.append(createPulseCard({
+      kind: "update",
+      eyebrow: worldText({ zh: "最近动态", ko: "최근", en: "Update", ja: "最近" }),
+      title: kitShortName(updateKit),
+      meta: [releaseDateForDisplay(updateKit), seriesLabelFromKit(updateKit), gradeShortLabel(updateKit)].filter(Boolean).join(" · "),
+      kit: updateKit,
+      action: () => openDetail(updateKit),
+    }));
+  }
+  if (group) {
+    rail.append(createPulseCard({
+      kind: "route",
+      eyebrow: worldText({ zh: "图鉴路线", ko: "도감 루트", en: "Atlas route", ja: "図鑑ルート" }),
+      title: worldText(group.labels),
+      meta: `${progress.lit}/${progress.total || 0} · ${worldText(group.subtitle)}`,
+      image: worldGroupImage(group, state.franchise),
+      action: () => openWorldGroup(group),
+    }));
+  }
+  rail.append(createPulseCard({
+    kind: "collection",
+    eyebrow: worldText({ zh: "我的记录", ko: "내 기록", en: "My shelf", ja: "自分の記録" }),
+    title: `${worldText({ zh: "已拥有", ko: "구매함", en: "Owned", ja: "所有" })} ${ownedCount} / ${worldText({ zh: "想要", ko: "원함", en: "Wanted", ja: "欲しい" })} ${wantedCount}`,
+    meta: worldText({ zh: "进入当前世界的收藏", ko: "현재 세계 컬렉션 보기", en: "Open this world's collection", ja: "この世界のコレクションへ" }),
+    image: worldGroupImage(group, state.franchise),
+    action: () => navigateToCollectionView(wantedCount ? "wanted" : "owned"),
+  }));
+  elements.homePulse.append(head, rail);
+}
+
 function worldText(value) {
   if (!value) return "";
   if (typeof value === "string") return value;
   return value[state.language] || value.zh || value.en || value.ja || value.ko || "";
+}
+
+function renderWorldSearchPlaceholder() {
+  if (!elements.searchInput) return;
+  elements.searchInput.placeholder = worldText(WORLD_SEARCH_PLACEHOLDERS[state.franchise]) || t("searchPlaceholder");
 }
 
 function worldGroupsFor(franchise) {
@@ -4166,23 +4286,7 @@ function renderWorldSection() {
     const total = (group.kit_ids || []).length || group.count || (group.works || []).length || (group.items || []).length || 0;
     text.innerHTML = `<strong>${escapeHtml(worldText(group.labels))}</strong><em>${escapeHtml([worldText(group.subtitle), total ? t("records", { count: total }) : ""].filter(Boolean).join(" · "))}</em>`;
     item.append(image, text);
-    item.addEventListener("click", () => {
-      if (state.franchise === "gundam") {
-        state.guideTab = "timeline";
-        state.activeView = "guide";
-        render();
-        persistViewState({ mode: "push" });
-        setTimeout(() => openGundamTimelineGroup(group), 0);
-      } else if (state.franchise === "beyblade" && group.id === "parts") {
-        openGuide("parts");
-      } else {
-        state.guideTab = world.guideTab;
-        state.activeView = "guide";
-        render();
-        persistViewState({ mode: "push" });
-        setTimeout(() => openAtlasGroup(group, world.guideTab, editableCollectionMember()), 0);
-      }
-    });
+    item.addEventListener("click", () => openWorldGroup(group));
     rail.append(item);
   }
   elements.worldSection.append(hero, rail);
@@ -4516,8 +4620,14 @@ function renderHomeUpdates() {
   const items = sortByPreference(sourceItems.filter((kit) => kit.franchise === state.franchise && kitMatchesSearchQuery(kit)));
   renderDiscoveryChannels(mode, items.length);
   if (elements.sourceHealthStrip) {
-    elements.sourceHealthStrip.hidden = true;
     elements.sourceHealthStrip.innerHTML = "";
+    const cards = favoriteUpdateSummaryCards(items);
+    if (cards.length) {
+      renderUpdateSummaryCards(elements.sourceHealthStrip, cards);
+      elements.sourceHealthStrip.hidden = false;
+    } else {
+      elements.sourceHealthStrip.hidden = true;
+    }
   }
   if (mode !== "month") {
     elements.updatesSubtitle.textContent =
@@ -6924,6 +7034,7 @@ function toggleGuideFullColor() {
 
 async function renderGuideActive() {
   renderGuideUserChip();
+  if (elements.guideDialog) elements.guideDialog.dataset.guideTab = state.guideTab || "gundam";
   if (state.guideTab === "bbx") {
     renderBbxGuide(await ensureBbxData());
   } else if (state.guideTab === "parts") {
@@ -7094,9 +7205,9 @@ function renderAtlasGuide(tab, atlasGroups) {
   elements.guideBody.innerHTML = "";
 
   const section = document.createElement("section");
-  section.className = "guide-work";
+  section.className = `guide-work guide-world guide-world-${tab.replace("_", "-")}`;
   const grid = document.createElement("div");
-  grid.className = "guide-series-grid guide-atlas-grid";
+  grid.className = `guide-series-grid guide-atlas-grid guide-atlas-${tab.replace("_", "-")}`;
   for (const group of groups) {
     grid.append(createAtlasGroupCard(group, tab, member, sets));
   }

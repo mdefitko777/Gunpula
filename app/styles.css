@@ -1160,6 +1160,14 @@ h1 {
 }
 
 .update-summary-line {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent-soft) 70%, #fff);
+  color: var(--accent-deep);
+  font-weight: 750;
   white-space: nowrap;
 }
 
@@ -6712,10 +6720,12 @@ body.is-radial-active {
 
 .home-collection-card {
   flex: 0 0 min(78vw, 310px);
-  border: 1px solid rgba(20, 34, 41, 0.07);
-  border-radius: 20px;
-  background: #ffffff;
-  box-shadow: 0 12px 30px rgba(20, 34, 41, 0.06);
+  min-height: 124px;
+  border: 1px solid rgba(20, 34, 41, 0.06);
+  border-radius: 26px;
+  background:
+    linear-gradient(135deg, #fff, color-mix(in srgb, var(--accent-soft) 52%, #fff));
+  box-shadow: 0 14px 36px rgba(20, 34, 41, 0.055);
 }
 
 .home-recent-list {
@@ -6731,9 +6741,13 @@ body.is-radial-active {
 
 .home-recent-item {
   flex: 0 0 min(72vw, 260px);
-  border-radius: 18px;
+  border-radius: 24px;
   background: #ffffff;
   box-shadow: 0 10px 26px rgba(20, 34, 41, 0.05);
+}
+
+.home-recent-art {
+  border-radius: 18px;
 }
 
 .home-update-summary.is-channels {
@@ -6880,6 +6894,123 @@ body[data-theme="atlas"][data-franchise="beyblade"] {
 .world-section {
   display: grid;
   gap: 14px;
+}
+
+.home-pulse {
+  display: grid;
+  gap: 10px;
+}
+
+.pulse-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pulse-head strong {
+  color: var(--ink);
+  font-size: 18px;
+}
+
+.pulse-head span {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pulse-rail {
+  display: flex;
+  gap: 12px;
+  margin-inline: -12px;
+  padding: 0 12px 4px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+
+.pulse-rail::-webkit-scrollbar {
+  display: none;
+}
+
+.pulse-card {
+  flex: 0 0 min(82vw, 356px);
+  min-height: 116px;
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr);
+  gap: 13px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid rgba(20, 34, 41, 0.06);
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+  text-align: left;
+  box-shadow: 0 14px 36px rgba(20, 34, 41, 0.065);
+  scroll-snap-align: start;
+}
+
+.pulse-card:hover,
+.pulse-card:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--line));
+  outline: 0;
+  transform: translateY(-1px);
+}
+
+.pulse-art {
+  width: 82px;
+  height: 92px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--accent-soft) 76%, #fff);
+  color: var(--accent-deep);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.pulse-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.pulse-body {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+}
+
+.pulse-body em {
+  color: var(--accent-deep);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+}
+
+.pulse-body strong {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.24;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.pulse-body span {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .world-hero {
@@ -7157,6 +7288,114 @@ body[data-theme="atlas"][data-franchise="beyblade"] {
   border-radius: 18px 18px 0 0;
 }
 
+.guide-section[data-guide-tab="fate"] .guide-atlas-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  padding-left: 18px;
+}
+
+.guide-section[data-guide-tab="fate"] .guide-atlas-grid::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 18px;
+  bottom: 18px;
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(var(--accent), transparent);
+}
+
+.guide-section[data-guide-tab="fate"] .atlas-group-card {
+  position: relative;
+  grid-template-columns: 104px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  gap: 5px 12px;
+  align-items: center;
+  padding: 10px;
+  text-align: left;
+}
+
+.guide-section[data-guide-tab="fate"] .atlas-group-card::before {
+  content: "";
+  position: absolute;
+  left: -18px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border: 3px solid #fff;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 32%, transparent);
+}
+
+.guide-section[data-guide-tab="fate"] .atlas-group-card .guide-series-art {
+  grid-row: 1 / 3;
+  height: 66px;
+  border: 0;
+  border-radius: 16px;
+  aspect-ratio: auto;
+}
+
+.guide-section[data-guide-tab="fate"] .atlas-group-card strong,
+.guide-section[data-guide-tab="fate"] .atlas-group-card span:last-child {
+  text-align: left;
+}
+
+.guide-section[data-guide-tab="pokemon"] .guide-atlas-grid {
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+}
+
+.guide-section[data-guide-tab="pokemon"] .atlas-group-card {
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, #fff, color-mix(in srgb, var(--accent-soft) 58%, #fff));
+}
+
+.guide-section[data-guide-tab="pokemon"] .atlas-group-card .guide-series-art {
+  width: 70px;
+  height: 70px;
+  margin: 10px auto 4px;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  aspect-ratio: auto;
+}
+
+.guide-section[data-guide-tab="pokemon"] .atlas-group-card .guide-series-art img {
+  padding: 8px;
+}
+
+.guide-section[data-guide-tab="armored_core"] .guide-atlas-grid {
+  grid-template-columns: 1fr;
+}
+
+.guide-section[data-guide-tab="armored_core"] .atlas-group-card {
+  grid-template-columns: 86px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  gap: 4px 12px;
+  align-items: center;
+  min-height: 94px;
+  padding: 10px;
+  text-align: left;
+}
+
+.guide-section[data-guide-tab="armored_core"] .atlas-group-card .guide-series-art {
+  grid-row: 1 / 3;
+  height: 74px;
+  border: 0;
+  border-radius: 20px;
+  aspect-ratio: auto;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-soft) 86%, #fff), #fff);
+}
+
+.guide-section[data-guide-tab="armored_core"] .atlas-group-card strong,
+.guide-section[data-guide-tab="armored_core"] .atlas-group-card span:last-child {
+  text-align: left;
+}
+
 @media (max-width: 760px) {
   .world-section {
     gap: 12px;
@@ -7211,5 +7450,230 @@ body[data-theme="atlas"][data-franchise="beyblade"] {
     width: 68px;
     height: 68px;
     border-radius: 18px;
+  }
+}
+
+/* Atlas 3.1 cohesion pass: the version stays in the top identity chip; the
+   home surface starts with the selected world instead of a duplicate title. */
+.home-section > .home-hero {
+  display: none;
+}
+
+.home-section {
+  padding-top: 2px;
+}
+
+.world-hero {
+  min-height: 150px;
+}
+
+.world-copy strong {
+  font-size: clamp(24px, 4.6vw, 38px);
+}
+
+.world-copy p {
+  max-width: 460px;
+}
+
+.world-stat {
+  min-width: 96px;
+  padding: 12px;
+}
+
+.world-stat strong {
+  font-size: 25px;
+}
+
+.world-actions {
+  gap: 7px;
+}
+
+.world-actions button {
+  min-height: 34px;
+  padding-inline: 12px;
+  box-shadow: 0 4px 14px rgba(20, 34, 41, 0.035);
+}
+
+.home-grid {
+  order: 4;
+  margin-top: -2px;
+}
+
+.home-card {
+  flex-basis: clamp(180px, 26vw, 238px);
+  min-height: 138px;
+  border-radius: 24px;
+}
+
+.home-card-body {
+  left: 13px;
+  right: 13px;
+  bottom: 12px;
+}
+
+.home-card-body strong {
+  font-size: 18px;
+}
+
+.home-card-body span,
+.home-card-body em {
+  min-height: 21px;
+  padding-inline: 7px;
+  font-size: 10.5px;
+}
+
+.home-cover-button {
+  width: 31px;
+  min-width: 31px;
+  height: 31px;
+  min-height: 31px;
+}
+
+.home-pulse {
+  order: 2;
+}
+
+.home-dashboard {
+  order: 3;
+}
+
+.pulse-card {
+  flex-basis: min(78vw, 318px);
+  min-height: 104px;
+  grid-template-columns: 72px minmax(0, 1fr);
+  border-radius: 24px;
+}
+
+.pulse-art {
+  width: 72px;
+  height: 78px;
+  border-radius: 20px;
+}
+
+.pulse-body strong {
+  font-size: 14.5px;
+}
+
+.member-guide-grid {
+  grid-template-columns: repeat(auto-fill, minmax(62px, 1fr));
+  gap: 7px;
+}
+
+.member-guide-card {
+  min-height: 64px;
+  padding: 5px 3px;
+  border-radius: 14px;
+}
+
+.member-guide-art {
+  width: 46px;
+  height: 30px;
+  border-radius: 10px;
+}
+
+.member-guide-text strong {
+  font-size: 9.5px;
+}
+
+.member-guide-text span {
+  font-size: 10px;
+}
+
+.member-dialog .collection-item {
+  width: 72px;
+  flex-basis: 72px;
+}
+
+.member-dialog .collection-thumb,
+.member-dialog .collection-item > span:first-child {
+  min-height: 72px;
+}
+
+.guide-section[data-guide-tab="gundam"] .guide-series-grid,
+.guide-section[data-guide-tab="timeline"] .guide-series-grid {
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+}
+
+.guide-section[data-guide-tab="gundam"] .guide-series-art,
+.guide-section[data-guide-tab="timeline"] .guide-series-art {
+  aspect-ratio: 16 / 10;
+  padding: 5px;
+}
+
+.guide-section[data-guide-tab="gundam"] .guide-series-card strong,
+.guide-section[data-guide-tab="timeline"] .guide-series-card strong {
+  min-height: 28px;
+  font-size: 10.5px;
+}
+
+.guide-section[data-guide-tab="gundam"] .guide-series-card span:last-child,
+.guide-section[data-guide-tab="timeline"] .guide-series-card span:last-child {
+  font-size: 10px;
+}
+
+.updates-head {
+  align-items: end;
+}
+
+.source-health-strip {
+  margin-top: -2px;
+}
+
+.source-health-strip .update-summary-line {
+  background: transparent;
+  padding-inline: 0;
+  color: var(--muted);
+  font-weight: 650;
+}
+
+@media (max-width: 760px) {
+  .world-hero {
+    min-height: 156px;
+    padding: 16px;
+  }
+
+  .world-copy strong {
+    font-size: 27px;
+  }
+
+  .world-copy p {
+    max-width: calc(100% - 82px);
+    font-size: 12.5px;
+  }
+
+  .world-actions {
+    padding-right: 0;
+  }
+
+  .world-actions button {
+    min-height: 32px;
+    padding-inline: 11px;
+    font-size: 12.5px;
+  }
+
+  .home-card {
+    flex-basis: min(58vw, 224px);
+    min-height: 132px;
+  }
+
+  .home-card-body strong {
+    font-size: 17px;
+  }
+
+  .guide-section[data-guide-tab="gundam"] .guide-series-grid,
+  .guide-section[data-guide-tab="timeline"] .guide-series-grid,
+  .guide-section[data-guide-tab="pokemon"] .guide-atlas-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .guide-section[data-guide-tab="pokemon"] .atlas-group-card {
+    min-height: 112px;
+    border-radius: 22px;
+  }
+
+  .guide-section[data-guide-tab="pokemon"] .atlas-group-card .guide-series-art {
+    width: 58px;
+    height: 58px;
+    margin-top: 8px;
   }
 }

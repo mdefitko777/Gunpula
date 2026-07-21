@@ -165,6 +165,9 @@ export const DISPLAY_NAME_REPLACEMENTS = {
     ["最終決戦", "最终决战"],
     ["ポケットモンスター", "宝可梦"],
     ["ポケモン", "宝可梦"],
+    ["Pokémon", "宝可梦"],
+    ["Pokemon", "宝可梦"],
+    ["ぬいぐるみ", "毛绒"],
     ["ガシャポン", "扭蛋"],
     ["カプキャラ", "胶囊角色"],
     ["つまんでつなげてますこっと", "串联挂件"],
@@ -361,6 +364,9 @@ export const DISPLAY_NAME_REPLACEMENTS = {
     ["最終決戦", "최종 결전"],
     ["ポケットモンスター", "포켓몬스터"],
     ["ポケモン", "포켓몬"],
+    ["Pokémon", "포켓몬"],
+    ["Pokemon", "포켓몬"],
+    ["ぬいぐるみ", "인형"],
     ["ガシャポン", "가샤폰"],
     ["カプキャラ", "캡캐라"],
     ["つまんでつなげてますこっと", "집어서 연결 마스코트"],
@@ -546,6 +552,7 @@ export function cleanDisplayName(value) {
   return String(value ?? "")
     .replace(/<br\s*\/?>/gi, " ")
     .replace(/&nbsp;/g, " ")
+    .replace(/&eacute;/gi, "é")
     .replace(/&amp;/g, "&")
     .replace(/&quot;/g, '"')
     .replace(/&#039;/g, "'")
