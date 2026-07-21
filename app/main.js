@@ -137,6 +137,45 @@ const PAGER_THRESHOLD_RATIO = 0.28;
 const PAGER_MIN_THRESHOLD = 92;
 const PAGER_ANIMATION_MS = 220;
 const APP_VERSION_LABEL = "v2.0.0";
+const WORLD_COPY = {
+  gundam: {
+    title: { zh: "高达宇宙档案", ko: "건담 유니버스", en: "Gundam Universe", ja: "ガンダム宇宙" },
+    lead: { zh: "按宇宙纪年、作品和产品线去逛，不再只是一张商品表。", ko: "연표, 작품, 제품 라인으로 탐색합니다.", en: "Browse by timeline, work, and product line instead of a flat list.", ja: "年表、作品、商品ラインで辿る図鑑です。" },
+    mode: "timeline",
+    guideTab: "timeline",
+  },
+  armored_core: {
+    title: { zh: "AC 机库", ko: "AC 격납고", en: "AC Hangar", ja: "AC ハンガー" },
+    lead: { zh: "按游戏世代看机体、V.I.、30MM 和周边。", ko: "게임 세대별로 기체와 프라모델을 봅니다.", en: "Browse machines, V.I., 30MM, and goods by game era.", ja: "ゲーム世代ごとに機体と商品を閲覧します。" },
+    mode: "atlas",
+    guideTab: "armored_core",
+  },
+  pokemon: {
+    title: { zh: "宝可梦世代图鉴", ko: "포켓몬 세대 도감", en: "Pokemon Generations", ja: "ポケモン世代図鑑" },
+    lead: { zh: "用世代和地区进入，像翻游戏图鉴一样找拼装、扭蛋和玩偶。", ko: "세대와 지방으로 프라모델, 가샤폰, 인형을 찾습니다.", en: "Enter by generation and region, then browse model kits, gashapon, and plush.", ja: "世代と地方からプラモ、ガシャポン、ぬいぐるみを探します。" },
+    mode: "atlas",
+    guideTab: "pokemon",
+  },
+  fate: {
+    title: { zh: "Fate / FGO 长卷", ko: "Fate / FGO 타임라인", en: "Fate / FGO Chronicle", ja: "Fate / FGO クロニクル" },
+    lead: { zh: "FGO 已经是一条十年以上的长线，按作品和章节去看角色周边。", ko: "작품과 장별로 캐릭터 굿즈를 봅니다.", en: "Follow works and FGO chapters as a long collectible timeline.", ja: "作品とFGO章ごとにグッズを辿ります。" },
+    mode: "timeline",
+    guideTab: "fate",
+  },
+  beyblade: {
+    title: { zh: "Beyblade X 装备台", ko: "BBX 덱 스테이션", en: "Beyblade X Deck", ja: "ベイブレードX デッキ" },
+    lead: { zh: "按 BX / UX / CX / 限定和部件拆开看，适合补齐和配装。", ko: "BX / UX / CX / 한정과 부품별로 봅니다.", en: "Browse by BX, UX, CX, limited items, and parts.", ja: "BX / UX / CX / 限定とパーツで整理します。" },
+    mode: "bbx",
+    guideTab: "bbx",
+  },
+};
+
+const WORLD_ACTIONS = [
+  { key: "catalog", label: { zh: "目录", ko: "카탈로그", en: "Catalog", ja: "カタログ" }, view: "catalog" },
+  { key: "guide", label: { zh: "图鉴", ko: "도감", en: "Atlas", ja: "図鑑" }, view: "guide" },
+  { key: "updates", label: { zh: "最近", ko: "최근", en: "Updates", ja: "最近" }, view: "updates" },
+  { key: "collection", label: { zh: "收藏", ko: "컬렉션", en: "Collection", ja: "コレクション" }, view: "collection" },
+];
 const HELP_TEXT = {
   homeSection: {
     zh: "首页是入口页。点分类卡片进入对应目录；点“我的收藏”里的已购买/想要会进入自己的收藏，不会跟随朋友视图变化；封面图可在卡片上更换。",
@@ -498,6 +537,7 @@ const elements = {
   homeUpdateList: document.querySelector("#homeUpdateList"),
   homeSection: document.querySelector("#homeSection"),
   homeCoverInput: document.querySelector("#homeCoverInput"),
+  worldSection: document.querySelector("#worldSection"),
   homeGrid: document.querySelector("#homeGrid"),
   homeTotal: document.querySelector("#homeTotal"),
   homeCollectionTotal: document.querySelector("#homeCollectionTotal"),
@@ -3518,6 +3558,7 @@ function translateStaticText() {
   document.documentElement.lang = LANGUAGES.find((language) => language.code === state.language)?.htmlLang ?? "zh-CN";
   document.body.dataset.view = state.activeView;
   document.body.dataset.theme = state.theme;
+  document.body.dataset.franchise = state.franchise;
   document.querySelectorAll("[data-i18n]").forEach((node) => {
     node.textContent = t(node.dataset.i18n);
   });
@@ -3829,6 +3870,7 @@ function renderBottomNav() {
 
 function applyAppearance() {
   document.body.dataset.theme = state.theme;
+  document.body.dataset.franchise = state.franchise;
   // APP_VERSION_LABEL is the single source of truth for the version shown
   // anywhere in the UI; the static strings in index.html/i18n are fallbacks.
   document.title = `Gunpula ${APP_VERSION_LABEL}`;
@@ -3925,6 +3967,14 @@ function openFranchiseCatalog(franchise) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+function selectHomeWorld(franchise) {
+  if (!FRANCHISES.includes(franchise)) return;
+  state.franchise = franchise;
+  localStorage.setItem(FRANCHISE_KEY, state.franchise);
+  render();
+  persistViewState({ mode: "replace" });
+}
+
 function openHomeCoverPicker(franchise) {
   if (!canEditSharedData()) {
     setSyncStatus("readonly", t("readOnlyHint"));
@@ -3956,6 +4006,7 @@ function renderHome() {
     counts.set(kit.franchise, (counts.get(kit.franchise) || 0) + 1);
   }
   elements.homeTotal.textContent = t("records", { count: state.kits.length });
+  renderWorldSection();
   elements.homeGrid.innerHTML = "";
 
   for (const franchise of FRANCHISES) {
@@ -3963,19 +4014,19 @@ function renderHome() {
     card.tabIndex = 0;
     card.role = "button";
     card.setAttribute("aria-label", franchiseLabel(franchise));
-    card.className = `home-card home-card-${franchise.replace("_", "-")}`;
+    card.className = `home-card home-card-${franchise.replace("_", "-")}${state.franchise === franchise ? " is-active" : ""}`;
     card.addEventListener("click", (event) => {
       if (event.target.closest(".home-cover-button")) {
         return;
       }
-      openFranchiseCatalog(franchise);
+      selectHomeWorld(franchise);
     });
     card.addEventListener("keydown", (event) => {
       if (!["Enter", " "].includes(event.key)) {
         return;
       }
       event.preventDefault();
-      openFranchiseCatalog(franchise);
+      selectHomeWorld(franchise);
     });
 
     const media = document.createElement("div");
@@ -4026,6 +4077,115 @@ function renderHome() {
     elements.homeGrid.append(card);
   }
   renderHomeDashboard();
+}
+
+function worldText(value) {
+  if (!value) return "";
+  if (typeof value === "string") return value;
+  return value[state.language] || value.zh || value.en || value.ja || value.ko || "";
+}
+
+function worldGroupsFor(franchise) {
+  const atlas = state.atlasGroups || {};
+  if (franchise === "gundam") return atlas.gundam_timeline || [];
+  if (franchise === "beyblade") return [
+    { id: "bbx", labels: { zh: "BX / UX / CX", ko: "BX / UX / CX", en: "BX / UX / CX", ja: "BX / UX / CX" }, subtitle: { zh: "主系列与限定", ko: "메인 라인과 한정", en: "Main lines and limited releases", ja: "メインラインと限定" }, kit_ids: state.kits.filter((kit) => kit.franchise === "beyblade").map((kit) => kit.kit_id) },
+    { id: "parts", labels: { zh: "部件图鉴", ko: "파츠 도감", en: "Parts Atlas", ja: "パーツ図鑑" }, subtitle: { zh: "刀盘 / 齿轮 / 轴尖", ko: "블레이드 / 래칫 / 비트", en: "Blade / Ratchet / Bit", ja: "ブレード / ラチェット / ビット" }, kit_ids: [] },
+  ];
+  return atlas[franchise] || [];
+}
+
+function worldGroupImage(group, franchise) {
+  if (group?.image) return group.image;
+  if (franchise === "armored_core") {
+    const kit = state.kits.find((item) => item.franchise === "armored_core" && imageCandidatesForKit(item).length);
+    return kit ? imageCandidatesForKit(kit)[0] : "";
+  }
+  if (franchise === "beyblade") {
+    const kit = state.kits.find((item) => item.franchise === "beyblade" && imageCandidatesForKit(item).length);
+    return kit ? imageCandidatesForKit(kit)[0] : "";
+  }
+  return "";
+}
+
+function renderWorldSection() {
+  if (!elements.worldSection) return;
+  const world = WORLD_COPY[state.franchise] || WORLD_COPY.gundam;
+  const franchiseKits = state.kits.filter((kit) => kit.franchise === state.franchise);
+  const groups = worldGroupsFor(state.franchise);
+  if (!state.atlasGroups) {
+    ensureAtlasData().then(() => {
+      if (state.activeView === "home") renderWorldSection();
+    }).catch(() => {});
+  }
+
+  elements.worldSection.innerHTML = "";
+  const hero = document.createElement("div");
+  hero.className = `world-hero world-${state.franchise.replace("_", "-")}`;
+  const copy = document.createElement("div");
+  copy.className = "world-copy";
+  copy.innerHTML = `<span>${escapeHtml(franchiseShortLabel(state.franchise))}</span><strong>${escapeHtml(worldText(world.title))}</strong><p>${escapeHtml(worldText(world.lead))}</p>`;
+  const actions = document.createElement("div");
+  actions.className = "world-actions";
+  for (const action of WORLD_ACTIONS) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = worldText(action.label);
+    button.addEventListener("click", () => {
+      if (action.view === "guide") openGuide(world.guideTab);
+      else if (action.view === "collection") navigateToCollectionView("wanted");
+      else switchToView(action.view);
+    });
+    actions.append(button);
+  }
+  const stat = document.createElement("div");
+  stat.className = "world-stat";
+  stat.innerHTML = `<strong>${franchiseKits.length}</strong><span>${escapeHtml(worldText({ zh: "收录", ko: "수록", en: "records", ja: "収録" }))}</span>`;
+  hero.append(copy, actions, stat);
+
+  const rail = document.createElement("div");
+  rail.className = `world-rail world-rail-${world.mode}`;
+  for (const group of groups.slice(0, state.franchise === "fate" ? 18 : 12)) {
+    const item = document.createElement("button");
+    item.type = "button";
+    item.className = "world-node";
+    const image = document.createElement("span");
+    image.className = "world-node-art";
+    const imageUrl = worldGroupImage(group, state.franchise);
+    if (imageUrl) {
+      const img = document.createElement("img");
+      img.alt = worldText(group.labels);
+      setImageFallbackChain(img, [imageUrl], () => image.classList.add("is-missing"));
+      image.append(img);
+    } else {
+      image.classList.add("is-missing");
+      image.textContent = franchiseShortLabel(state.franchise);
+    }
+    const text = document.createElement("span");
+    text.className = "world-node-text";
+    const total = (group.kit_ids || []).length || group.count || (group.works || []).length || (group.items || []).length || 0;
+    text.innerHTML = `<strong>${escapeHtml(worldText(group.labels))}</strong><em>${escapeHtml([worldText(group.subtitle), total ? t("records", { count: total }) : ""].filter(Boolean).join(" · "))}</em>`;
+    item.append(image, text);
+    item.addEventListener("click", () => {
+      if (state.franchise === "gundam") {
+        state.guideTab = "timeline";
+        state.activeView = "guide";
+        render();
+        persistViewState({ mode: "push" });
+        setTimeout(() => openGundamTimelineGroup(group), 0);
+      } else if (state.franchise === "beyblade" && group.id === "parts") {
+        openGuide("parts");
+      } else {
+        state.guideTab = world.guideTab;
+        state.activeView = "guide";
+        render();
+        persistViewState({ mode: "push" });
+        setTimeout(() => openAtlasGroup(group, world.guideTab, editableCollectionMember()), 0);
+      }
+    });
+    rail.append(item);
+  }
+  elements.worldSection.append(hero, rail);
 }
 
 function renderHomeDashboard() {
