@@ -1,17 +1,17 @@
 :root {
-  --bg: #ffffff;
+  --bg: #f6faf9;
   --panel: #ffffff;
-  --ink: #1c1b1a;
-  --muted: #716c65;
-  --faint: #a39e96;
-  --line: #ecebe8;
-  --soft: #f5f4f1;
-  --accent: #c2603d;
-  --accent-soft: #f8ede7;
-  --accent-deep: #9c4c2e;
-  --accent-blue: #c2603d;
-  --accent-green: #c2603d;
-  --accent-gold: #c2603d;
+  --ink: #142229;
+  --muted: #65747b;
+  --faint: #99a6aa;
+  --line: #dfe9e7;
+  --soft: #edf5f3;
+  --accent: #2f8f8a;
+  --accent-soft: #e5f4f1;
+  --accent-deep: #0e5f68;
+  --accent-blue: #5f9fd6;
+  --accent-green: #4da886;
+  --accent-gold: #7aa779;
   --danger: #b4392f;
   --radius: 10px;
   font-family:
@@ -5532,6 +5532,400 @@ body.is-radial-active {
   opacity: 0.48;
 }
 
+/* Atlas 3.0 UI pass: make every main view feel like one collection app. */
+.catalog-page {
+  padding: 14px;
+}
+
+.page-header {
+  margin: -14px -14px 14px;
+  padding: calc(10px + env(safe-area-inset-top, 0px)) 14px 8px;
+  border-bottom-color: rgba(20, 34, 41, 0.08);
+  background: rgba(246, 250, 249, 0.9);
+}
+
+.top-bar {
+  min-height: 52px;
+}
+
+.brand-line {
+  gap: 9px;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+}
+
+.settings-button,
+.filter-icon,
+.collection-filter-button {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.settings-button:hover,
+.settings-button:focus-visible,
+.filter-icon:hover,
+.collection-filter-button:hover,
+.collection-filter-button:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--line));
+  background: #ffffff;
+  color: var(--accent-deep);
+}
+
+.search-field {
+  height: 42px;
+  margin-top: 8px;
+  border: 1px solid rgba(20, 34, 41, 0.06);
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.franchise-control .segment-button,
+.series-tab,
+.filter-chip,
+.guide-tabs .segment-button,
+.collection-type-tabs .segment-button,
+.updates-actions button,
+.updates-actions input,
+.filter-option {
+  border-radius: 10px;
+}
+
+.franchise-control .segment-button.is-active,
+.series-tab.is-active,
+.filter-chip.is-active,
+.guide-tabs .segment-button.is-active,
+.collection-type-tabs .segment-button.is-active,
+.updates-actions .is-active,
+.filter-option.is-active {
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--line));
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+}
+
+.filter-panel summary {
+  min-height: 42px;
+}
+
+.filter-body {
+  margin-top: 4px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.home-section,
+.updates-section,
+.pbandai-section,
+.guide-section,
+.kit-section {
+  width: min(1120px, 100%);
+  margin-inline: auto;
+}
+
+.home-section {
+  gap: 16px;
+}
+
+.home-hero {
+  min-height: 0;
+  padding: 18px 2px 2px;
+}
+
+.home-kicker {
+  color: var(--accent-deep);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.home-hero h1 {
+  font-size: 30px;
+}
+
+.home-grid {
+  order: 1;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.home-dashboard {
+  order: 2;
+}
+
+.home-card {
+  min-height: 216px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(136px, 1fr) auto;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 10px 28px rgba(20, 34, 41, 0.06);
+}
+
+.home-card:hover,
+.home-card:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 36%, var(--line));
+  transform: translateY(-1px);
+}
+
+.home-card-media {
+  min-height: 136px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  background: linear-gradient(180deg, #f9fbfb, var(--soft));
+}
+
+.home-card-media span,
+.home-card-media span:first-child,
+.home-card-media span:not(:first-child) {
+  display: grid;
+}
+
+.home-card-media img {
+  padding: 4px;
+  object-fit: contain;
+}
+
+.home-card-media.is-custom img {
+  padding: 0;
+  object-fit: cover;
+}
+
+.home-cover-button {
+  top: 10px;
+  right: 10px;
+  min-height: 30px;
+  background: rgba(14, 95, 104, 0.78);
+}
+
+.home-card-body {
+  padding: 12px;
+  border-top: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.home-card-body strong {
+  font-size: 16px;
+}
+
+.home-panel,
+.collection-panel,
+.collection-filter-sheet {
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.home-collection-card,
+.home-recent-item {
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.updates-section,
+.pbandai-section {
+  padding-top: 8px;
+}
+
+.updates-head {
+  margin-bottom: 12px;
+}
+
+.updates-head p {
+  font-size: 13px;
+}
+
+.home-update-summary {
+  display: flex;
+  gap: 8px 14px;
+  margin: 4px 0 12px;
+  overflow-x: auto;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.home-update-summary > *,
+.source-health-strip > * {
+  flex: 0 0 auto;
+}
+
+.home-update-list,
+.pbandai-list {
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 10px;
+}
+
+.home-update-card,
+.pbandai-card {
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(20, 34, 41, 0.045);
+}
+
+.home-update-card {
+  grid-template-columns: 86px minmax(0, 1fr);
+  padding: 10px;
+}
+
+.home-update-art,
+.pbandai-art {
+  width: 86px;
+  border-radius: 12px;
+}
+
+.home-update-body strong,
+.pbandai-body strong {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.home-update-badges span {
+  max-width: 116px;
+}
+
+.pbandai-card-main {
+  grid-template-columns: 86px minmax(0, 1fr);
+}
+
+.pbandai-official-link {
+  border: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.kit-grid {
+  width: min(1040px, 100%);
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 10px;
+}
+
+.kit-card {
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 13px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 22px rgba(20, 34, 41, 0.04);
+}
+
+.kit-card:hover,
+.kit-card:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 34%, var(--line));
+  background: #ffffff;
+}
+
+.box-art {
+  border-radius: 12px;
+}
+
+.kit-info h3 {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.32;
+}
+
+.kit-badges {
+  gap: 0 6px;
+}
+
+.kit-badges span,
+.kit-info p {
+  font-size: 12px;
+}
+
+.collection-hub,
+.section-head {
+  width: min(1040px, 100%);
+  margin-inline: auto;
+}
+
+.section-head {
+  padding: 4px 0;
+}
+
+.section-head h2 {
+  display: none;
+}
+
+.section-head span {
+  font-size: 12px;
+}
+
+.guide-head {
+  padding: 8px 0 12px;
+}
+
+.guide-tabs {
+  gap: 8px;
+}
+
+.guide-body {
+  padding-top: 14px;
+}
+
+.guide-series-grid {
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.guide-atlas-grid {
+  grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+}
+
+.guide-series-card,
+.guide-cell {
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(20, 34, 41, 0.04);
+}
+
+.guide-series-art {
+  padding: 10px;
+  border-bottom: 1px solid var(--line);
+  background: #f8fbfa;
+  aspect-ratio: 16 / 9;
+}
+
+.guide-series-art:empty,
+.guide-series-art:not(:has(img)) {
+  display: none;
+}
+
+.guide-series-card strong {
+  min-height: 0;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.guide-series-card span:last-child {
+  font-size: 11.5px;
+}
+
+.guide-grid {
+  grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+}
+
+.bottom-nav {
+  padding-inline: max(10px, env(safe-area-inset-left, 0px)) max(10px, env(safe-area-inset-right, 0px));
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.bottom-nav button.is-active {
+  color: var(--accent-deep);
+}
+
+.bottom-nav button.is-active span {
+  color: var(--accent-deep);
+}
+
 @media (max-width: 760px) {
   .catalog-page {
     padding: 10px;
@@ -5893,6 +6287,117 @@ body.is-radial-active {
   }
 
   .correction-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .catalog-page {
+    padding: 10px;
+  }
+
+  .page-header {
+    margin: -10px -10px 12px;
+    padding: calc(8px + env(safe-area-inset-top, 0px)) 10px 8px;
+  }
+
+  .top-bar {
+    min-height: 50px;
+    align-items: center;
+  }
+
+  .home-hero {
+    min-height: 0;
+    padding: 12px 2px 0;
+  }
+
+  .home-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .home-card {
+    min-height: 190px;
+  }
+
+  .home-card-media {
+    min-height: 126px;
+  }
+
+  .home-card-body {
+    padding: 10px;
+  }
+
+  .home-card-body strong {
+    font-size: 14px;
+  }
+
+  .home-card-body span,
+  .home-card-body em {
+    font-size: 11px;
+  }
+
+  .home-dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .kit-grid,
+  .home-update-list,
+  .pbandai-list {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .kit-card {
+    grid-template-columns: 82px minmax(0, 1fr);
+    min-height: 104px;
+    padding: 9px;
+  }
+
+  .home-update-card,
+  .pbandai-card-main {
+    grid-template-columns: 74px minmax(0, 1fr);
+  }
+
+  .home-update-art,
+  .pbandai-art {
+    width: 74px;
+  }
+
+  .updates-section {
+    padding: 4px 0 0;
+  }
+
+  .updates-actions {
+    grid-auto-columns: minmax(104px, 1fr);
+  }
+
+  .guide-series-grid,
+  .guide-atlas-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .guide-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .guide-series-art {
+    aspect-ratio: 16 / 9;
+    padding: 7px;
+  }
+
+  .guide-series-card strong {
+    font-size: 11px;
+  }
+
+  .guide-series-card span:last-child {
+    font-size: 10.5px;
+  }
+}
+
+@media (max-width: 380px) {
+  .home-grid {
     grid-template-columns: 1fr;
   }
 }
