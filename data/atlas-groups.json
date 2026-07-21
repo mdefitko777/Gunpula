@@ -988,6 +988,7 @@
           "pokepla-10-poke-mon-model-kit-pikachu",
           "pokepla-11-poke-mon-model-kit-eevee",
           "pokepla-12-poke-mon-model-kit-mewtwo",
+          "poke-gashapon-4543112970503000",
           "poke-gashapon-4549660271291000",
           "poke-gashapon-4549660321293000",
           "poke-gashapon-4549660362432000",
@@ -999,7 +1000,8 @@
           "pokemon-center-4521329340555",
           "pokemon-center-4521329359878",
           "pokemon-center-4521329359922",
-          "pokemon-center-4521329385860",
+          "pokemon-center-4521329385877",
+          "pokemon-center-4521329389707",
           "pokemon-center-4521329397610",
           "pokepla-01-4237",
           "pokepla-01-4324",
@@ -1025,7 +1027,7 @@
           "pokepla-01-7120",
           "pokepla-01-7148"
         ],
-        "count": 49
+        "count": 51
       },
       {
         "id": "gen2",
@@ -1148,10 +1150,9 @@
           "pokepla-13-poke-mon-model-kit-lugia",
           "pokepla-14-poke-mon-model-kit-ho-oh",
           "poke-gashapon-4570118197993000",
-          "pokemon-center-4521329333717",
-          "pokemon-center-4521329392998"
+          "pokemon-center-4521329333717"
         ],
-        "count": 5
+        "count": 4
       },
       {
         "id": "gen3",
@@ -1311,10 +1312,9 @@
           "pokemon-center-4521329316321",
           "pokemon-center-4521329316703",
           "pokemon-center-4521329316710",
-          "pokemon-center-4521329317236",
-          "pokepla-01-5010"
+          "pokemon-center-4521329317236"
         ],
-        "count": 7
+        "count": 6
       },
       {
         "id": "gen4",
@@ -1446,15 +1446,15 @@
           "pokepla-17-poke-mon-model-kit-riolu-lucario",
           "poke-gashapon-4549660716716000",
           "poke-gashapon-4549660777977000",
-          "pokemon-center-4521329339221",
           "pokemon-center-4521329339245",
+          "pokemon-center-4521329339269",
           "pokemon-center-4521329339443",
           "pokemon-center-4521329339450",
           "pokemon-center-4521329339481",
           "pokemon-center-4521329339528",
+          "pokemon-center-4521329339597",
           "pokemon-center-4521329341132",
           "pokemon-center-4521329341149",
-          "pokemon-center-4521329341248",
           "pokemon-center-4521329341361"
         ],
         "count": 15
@@ -1637,15 +1637,16 @@
           "pokepla-16-poke-mon-model-kit-zekrom",
           "pokemon-center-4521329349152",
           "pokemon-center-4521329349503",
-          "pokemon-center-4521329349961",
-          "pokemon-center-4521329350141",
           "pokemon-center-4521329350158",
           "pokemon-center-4521329350295",
+          "pokemon-center-4521329350301",
           "pokemon-center-4521329350387",
           "pokemon-center-4521329350394",
-          "pokemon-center-4521329350431"
+          "pokemon-center-4521329350431",
+          "pokemon-center-4521329350516",
+          "pokepla-01-5010"
         ],
-        "count": 11
+        "count": 12
       },
       {
         "id": "gen6",
@@ -1740,9 +1741,10 @@
           "pokepla-21-poke-mon-model-kit-greninja",
           "poke-gashapon-4543112899972000",
           "poke-gashapon-4543112922724000",
+          "pokemon-center-4521329366272",
           "pokemon-center-4521329366944"
         ],
-        "count": 4
+        "count": 5
       },
       {
         "id": "gen7",
@@ -1854,10 +1856,9 @@
           "poke-gashapon-4549660180074000",
           "poke-gashapon-4549660346173000",
           "pokemon-center-4521329420561",
-          "pokemon-center-4521329420653",
           "pokemon-center-4521329420738"
         ],
-        "count": 6
+        "count": 5
       },
       {
         "id": "gen8",
@@ -2123,23 +2124,22 @@
         "count": 4
       },
       {
-        "id": "pokemon_unsorted",
+        "id": "pokemon_general",
         "labels": {
-          "zh": "宝可梦 未校对",
-          "ko": "포켓몬 미분류",
-          "en": "Pokemon Unsorted",
-          "ja": "ポケモン 未分類"
+          "zh": "全世代周边",
+          "ko": "전 세대 굿즈",
+          "en": "All-generation goods",
+          "ja": "全世代グッズ"
         },
         "subtitle": {
-          "zh": "没有明确 species / 游戏世代",
-          "ko": "명확한 포켓몬/세대 없음",
-          "en": "Needs species or game tag",
-          "ja": "species / 世代タグ待ち"
+          "zh": "没有固定宝可梦或游戏世代",
+          "ko": "특정 포켓몬/세대가 없는 상품",
+          "en": "Goods without a single species or generation",
+          "ja": "特定のポケモン・世代を持たない商品"
         },
-        "image": "https://bandai-a.akamaihd.net/bc/img/model/b/1000103697_1.jpg",
+        "image": "https://bandai-a.akamaihd.net/bc/img/model/b/1000104725_1.jpg",
         "items": [],
         "kit_ids": [
-          "poke-gashapon-4543112970503000",
           "poke-gashapon-4549660028338000",
           "poke-gashapon-4549660030560000",
           "poke-gashapon-4549660030584000",
@@ -2333,7 +2333,7 @@
           "pokemon-center-4521329435152",
           "pokemon-center-4521329435169"
         ],
-        "count": 193
+        "count": 192
       }
     ],
     "fate": [
@@ -2368,38 +2368,27 @@
           "goodsmile-fate-g1142291",
           "goodsmile-fate-g1140741",
           "goodsmile-fate-g1141723",
-          "goodsmile-fate-g57700",
-          "goodsmile-fate-g5875",
           "goodsmile-fate-g2240",
           "goodsmile-fate-g60400",
           "goodsmile-fate-g1136139",
           "goodsmile-fate-g1140709",
-          "goodsmile-fate-g7068",
           "goodsmile-fate-g1136982",
-          "goodsmile-fate-g3235",
           "goodsmile-fate-g37314",
-          "goodsmile-fate-g36433",
-          "goodsmile-fate-g36434",
           "goodsmile-fate-g9460",
           "goodsmile-fate-g6922",
-          "goodsmile-fate-g102",
           "goodsmile-fate-g1051",
           "goodsmile-fate-g118",
           "goodsmile-fate-g1192",
           "goodsmile-fate-g1237",
           "goodsmile-fate-g125",
           "goodsmile-fate-g1251",
-          "goodsmile-fate-g1397",
           "goodsmile-fate-g1418",
           "goodsmile-fate-g1445",
-          "goodsmile-fate-g1456",
           "goodsmile-fate-g1505",
           "goodsmile-fate-g155",
           "goodsmile-fate-g161",
-          "goodsmile-fate-g1861",
           "goodsmile-fate-g199",
           "goodsmile-fate-g2086",
-          "goodsmile-fate-g2168",
           "goodsmile-fate-g2191",
           "goodsmile-fate-g2555",
           "goodsmile-fate-g2557",
@@ -2407,9 +2396,7 @@
           "goodsmile-fate-g2769",
           "goodsmile-fate-g277",
           "goodsmile-fate-g281",
-          "goodsmile-fate-g2938",
           "goodsmile-fate-g3053",
-          "goodsmile-fate-g3122",
           "goodsmile-fate-g392",
           "goodsmile-fate-g407",
           "goodsmile-fate-g415",
@@ -2417,15 +2404,12 @@
           "goodsmile-fate-g453",
           "goodsmile-fate-g482",
           "goodsmile-fate-g537",
-          "goodsmile-fate-g538",
-          "goodsmile-fate-g601",
           "goodsmile-fate-g623",
           "goodsmile-fate-g627",
           "goodsmile-fate-g629",
           "goodsmile-fate-g6315",
           "goodsmile-fate-g650",
           "goodsmile-fate-g659",
-          "goodsmile-fate-g678",
           "goodsmile-fate-g680",
           "goodsmile-fate-g6923",
           "goodsmile-fate-g6924",
@@ -2435,12 +2419,10 @@
           "goodsmile-fate-g735",
           "goodsmile-fate-g7392",
           "goodsmile-fate-g7853",
-          "goodsmile-fate-g832",
           "goodsmile-fate-g8414",
-          "goodsmile-fate-g9331",
           "goodsmile-fate-g9374"
         ],
-        "count": 75
+        "count": 57
       },
       {
         "id": "zero",
@@ -2537,7 +2519,7 @@
           "en": "Fate work",
           "ja": "Fate 作品"
         },
-        "image": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1137333/FhwRMenjauBtLz8xp3YUJsNbP02Zy65q.jpg",
+        "image": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20220427/12656/98382/large/60bd782c9c12027b3e933a0d1ff0b240.jpg",
         "aliases": [
           "extra",
           "ccc",
@@ -2547,7 +2529,6 @@
         ],
         "items": [],
         "kit_ids": [
-          "goodsmile-fate-g1137333",
           "goodsmile-fate-g10341",
           "goodsmile-fate-11038",
           "goodsmile-fate-11037",
@@ -2558,11 +2539,9 @@
           "goodsmile-fate-g2307",
           "goodsmile-fate-g3046",
           "goodsmile-fate-g3448",
-          "goodsmile-fate-g3861",
-          "goodsmile-fate-g4484",
-          "goodsmile-fate-g4791"
+          "goodsmile-fate-g3861"
         ],
-        "count": 14
+        "count": 11
       },
       {
         "id": "apocrypha",
@@ -2591,10 +2570,6 @@
           "goodsmile-fate-g5376",
           "goodsmile-fate-10713",
           "goodsmile-fate-12997",
-          "goodsmile-fate-13262",
-          "goodsmile-fate-11387",
-          "goodsmile-fate-9687",
-          "goodsmile-fate-g4303",
           "goodsmile-fate-g4744",
           "goodsmile-fate-g4772",
           "goodsmile-fate-g5687",
@@ -2605,7 +2580,7 @@
           "goodsmile-fate-g7146",
           "goodsmile-fate-g7655"
         ],
-        "count": 16
+        "count": 12
       },
       {
         "id": "type_moon",
@@ -2659,10 +2634,10 @@
       {
         "id": "fgo_100",
         "labels": {
-          "zh": "Singularity F Flame Contaminated City: Fuyuki",
-          "ko": "Singularity F Flame Contaminated City: Fuyuki",
-          "en": "Singularity F Flame Contaminated City: Fuyuki",
-          "ja": "Singularity F Flame Contaminated City: Fuyuki"
+          "zh": "特异点 F 冬木",
+          "ko": "특이점 F 후유키",
+          "en": "Singularity F · Fuyuki",
+          "ja": "特異点F 冬木"
         },
         "subtitle": {
           "zh": "AD:2004",
@@ -2685,16 +2660,23 @@
           "Unknown Coordinates X-G",
           "Mobile Coordinate No.0"
         ],
-        "kit_ids": [],
-        "count": 0
+        "kit_ids": [
+          "goodsmile-fate-g102",
+          "goodsmile-fate-g1397",
+          "goodsmile-fate-g1456",
+          "goodsmile-fate-g2938",
+          "goodsmile-fate-g3122",
+          "goodsmile-fate-g538"
+        ],
+        "count": 6
       },
       {
         "id": "fgo_101",
         "labels": {
-          "zh": "First Singularity Hundred Years' War of the Evil Dragons: Orleans",
-          "ko": "First Singularity Hundred Years' War of the Evil Dragons: Orleans",
-          "en": "First Singularity Hundred Years' War of the Evil Dragons: Orleans",
-          "ja": "First Singularity Hundred Years' War of the Evil Dragons: Orleans"
+          "zh": "第一特异点 奥尔良",
+          "ko": "제1특이점 오를레앙",
+          "en": "Singularity I · Orleans",
+          "ja": "第一特異点 オルレアン"
         },
         "subtitle": {
           "zh": "AD:1431",
@@ -2742,17 +2724,18 @@
           "goodsmile-fate-7099",
           "goodsmile-fate-6961",
           "goodsmile-fate-5766",
-          "goodsmile-fate-6642"
+          "goodsmile-fate-6642",
+          "goodsmile-fate-g4303"
         ],
-        "count": 20
+        "count": 21
       },
       {
         "id": "fgo_102",
         "labels": {
-          "zh": "Second Singularity Eternal Madness Empire: Septem",
-          "ko": "Second Singularity Eternal Madness Empire: Septem",
-          "en": "Second Singularity Eternal Madness Empire: Septem",
-          "ja": "Second Singularity Eternal Madness Empire: Septem"
+          "zh": "第二特异点 七丘之城",
+          "ko": "제2특이점 세프템",
+          "en": "Singularity II · Septem",
+          "ja": "第二特異点 セプテム"
         },
         "subtitle": {
           "zh": "AD:60",
@@ -2785,17 +2768,19 @@
           "goodsmile-fate-g55681",
           "goodsmile-fate-12263",
           "goodsmile-fate-11892",
-          "goodsmile-fate-6981"
+          "goodsmile-fate-6981",
+          "goodsmile-fate-g4484",
+          "goodsmile-fate-g4791"
         ],
-        "count": 4
+        "count": 6
       },
       {
         "id": "fgo_103",
         "labels": {
-          "zh": "Third Singularity Sealed Ends of the Four Seas: Okeanos",
-          "ko": "Third Singularity Sealed Ends of the Four Seas: Okeanos",
-          "en": "Third Singularity Sealed Ends of the Four Seas: Okeanos",
-          "ja": "Third Singularity Sealed Ends of the Four Seas: Okeanos"
+          "zh": "第三特异点 俄刻阿诺斯",
+          "ko": "제3특이점 오케아노스",
+          "en": "Singularity III · Okeanos",
+          "ja": "第三特異点 オケアノス"
         },
         "subtitle": {
           "zh": "AD:1573",
@@ -2829,10 +2814,10 @@
       {
         "id": "fgo_104",
         "labels": {
-          "zh": "Fourth Singularity The Mist City: London",
-          "ko": "Fourth Singularity The Mist City: London",
-          "en": "Fourth Singularity The Mist City: London",
-          "ja": "Fourth Singularity The Mist City: London"
+          "zh": "第四特异点 伦敦",
+          "ko": "제4특이점 런던",
+          "en": "Singularity IV · London",
+          "ja": "第四特異点 ロンドン"
         },
         "subtitle": {
           "zh": "AD:1888",
@@ -2859,18 +2844,21 @@
           "Hyde Park"
         ],
         "kit_ids": [
+          "goodsmile-fate-13262",
+          "goodsmile-fate-11387",
           "goodsmile-fate-10426",
+          "goodsmile-fate-9687",
           "goodsmile-fate-7554"
         ],
-        "count": 2
+        "count": 5
       },
       {
         "id": "fgo_105",
         "labels": {
-          "zh": "Fifth Singularity North American Myth War: E Pluribus Unum",
-          "ko": "Fifth Singularity North American Myth War: E Pluribus Unum",
-          "en": "Fifth Singularity North American Myth War: E Pluribus Unum",
-          "ja": "Fifth Singularity North American Myth War: E Pluribus Unum"
+          "zh": "第五特异点 北美神话大战",
+          "ko": "제5특이점 북미 신화대전",
+          "en": "Singularity V · E Pluribus Unum",
+          "ja": "第五特異点 北米神話大戦"
         },
         "subtitle": {
           "zh": "AD:1783",
@@ -2907,10 +2895,10 @@
       {
         "id": "fgo_106",
         "labels": {
-          "zh": "Sixth Singularity Divine Realm of the Round Table: Camelot",
-          "ko": "Sixth Singularity Divine Realm of the Round Table: Camelot",
-          "en": "Sixth Singularity Divine Realm of the Round Table: Camelot",
-          "ja": "Sixth Singularity Divine Realm of the Round Table: Camelot"
+          "zh": "第六特异点 卡美洛",
+          "ko": "제6특이점 카멜롯",
+          "en": "Singularity VI · Camelot",
+          "ja": "第六特異点 キャメロット"
         },
         "subtitle": {
           "zh": "AD:1273",
@@ -2960,10 +2948,10 @@
       {
         "id": "fgo_107",
         "labels": {
-          "zh": "Seventh Singularity Absolute Demonic Front: Babylonia",
-          "ko": "Seventh Singularity Absolute Demonic Front: Babylonia",
-          "en": "Seventh Singularity Absolute Demonic Front: Babylonia",
-          "ja": "Seventh Singularity Absolute Demonic Front: Babylonia"
+          "zh": "第七特异点 巴比伦尼亚",
+          "ko": "제7특이점 바빌로니아",
+          "en": "Singularity VII · Babylonia",
+          "ja": "第七特異点 バビロニア"
         },
         "subtitle": {
           "zh": "BC:2655",
@@ -3028,6 +3016,8 @@
         ],
         "kit_ids": [
           "goodsmile-fate-g1142281",
+          "goodsmile-fate-g36433",
+          "goodsmile-fate-g36434",
           "goodsmile-fate-10417",
           "goodsmile-fate-7145",
           "goodsmile-fate-7591",
@@ -3038,17 +3028,18 @@
           "goodsmile-fate-5742",
           "goodsmile-fate-8395",
           "goodsmile-fate-7421",
+          "goodsmile-fate-g2168",
           "goodsmile-fate-g6915"
         ],
-        "count": 12
+        "count": 15
       },
       {
         "id": "fgo_108",
         "labels": {
-          "zh": "Final Singularity The Grand Temple of Time: Solomon",
-          "ko": "Final Singularity The Grand Temple of Time: Solomon",
-          "en": "Final Singularity The Grand Temple of Time: Solomon",
-          "ja": "Final Singularity The Grand Temple of Time: Solomon"
+          "zh": "终局特异点 所罗门",
+          "ko": "종국특이점 솔로몬",
+          "en": "Final Singularity · Solomon",
+          "ja": "終局特異点 ソロモン"
         },
         "subtitle": {
           "zh": "AD:2016",
@@ -3097,10 +3088,10 @@
       {
         "id": "fgo_201",
         "labels": {
-          "zh": "Pseudo-Singularity I: Quarantined Territory of Malice, Shinjuku",
-          "ko": "Pseudo-Singularity I: Quarantined Territory of Malice, Shinjuku",
-          "en": "Pseudo-Singularity I: Quarantined Territory of Malice, Shinjuku",
-          "ja": "Pseudo-Singularity I: Quarantined Territory of Malice, Shinjuku"
+          "zh": "亚种特异点 I 新宿",
+          "ko": "아종특이점 I 신주쿠",
+          "en": "Pseudo-Singularity I · Shinjuku",
+          "ja": "亜種特異点I 新宿"
         },
         "subtitle": {
           "zh": "AD:1999",
@@ -3137,23 +3128,31 @@
           "Tower - Upper Level"
         ],
         "kit_ids": [
+          "goodsmile-fate-g5875",
+          "goodsmile-fate-g7068",
           "goodsmile-fate-g1138666",
+          "goodsmile-fate-g3235",
           "goodsmile-fate-9478",
           "goodsmile-fate-8391",
           "goodsmile-fate-8392",
           "goodsmile-fate-7767",
           "goodsmile-fate-7806",
-          "goodsmile-fate-7807"
+          "goodsmile-fate-7807",
+          "goodsmile-fate-g1861",
+          "goodsmile-fate-g601",
+          "goodsmile-fate-g678",
+          "goodsmile-fate-g832",
+          "goodsmile-fate-g9331"
         ],
-        "count": 7
+        "count": 15
       },
       {
         "id": "fgo_202",
         "labels": {
-          "zh": "Pseudo-Singularity II: Subterranean World of Folklore, Agartha",
-          "ko": "Pseudo-Singularity II: Subterranean World of Folklore, Agartha",
-          "en": "Pseudo-Singularity II: Subterranean World of Folklore, Agartha",
-          "ja": "Pseudo-Singularity II: Subterranean World of Folklore, Agartha"
+          "zh": "亚种特异点 II 雅戈泰",
+          "ko": "아종특이점 II 아가르타",
+          "en": "Pseudo-Singularity II · Agartha",
+          "ja": "亜種特異点II アガルタ"
         },
         "subtitle": {
           "zh": "AD:2000",
@@ -3193,10 +3192,10 @@
       {
         "id": "fgo_203",
         "labels": {
-          "zh": "Pseudo-Parallel World The Stage of Carnage, Shimousa",
-          "ko": "Pseudo-Parallel World The Stage of Carnage, Shimousa",
-          "en": "Pseudo-Parallel World The Stage of Carnage, Shimousa",
-          "ja": "Pseudo-Parallel World The Stage of Carnage, Shimousa"
+          "zh": "英灵剑豪七番胜负 下总国",
+          "ko": "영령검호 시모사",
+          "en": "Epic of Remnant · Shimousa",
+          "ja": "英霊剣豪七番勝負 下総国"
         },
         "subtitle": {
           "zh": "Kan'ei 16",
@@ -3253,10 +3252,10 @@
       {
         "id": "fgo_204",
         "labels": {
-          "zh": "Pseudo-Singularity IV The Forbidden Advent Garden, Salem",
-          "ko": "Pseudo-Singularity IV The Forbidden Advent Garden, Salem",
-          "en": "Pseudo-Singularity IV The Forbidden Advent Garden, Salem",
-          "ja": "Pseudo-Singularity IV The Forbidden Advent Garden, Salem"
+          "zh": "亚种特异点 IV 塞勒姆",
+          "ko": "아종특이점 IV 세일럼",
+          "en": "Pseudo-Singularity IV · Salem",
+          "ja": "亜種特異点IV セイレム"
         },
         "subtitle": {
           "zh": "AD:1692",
@@ -3295,10 +3294,10 @@
       {
         "id": "fgo_301",
         "labels": {
-          "zh": "Lostbelt No.1 Permafrost Empire, Anastasia",
-          "ko": "Lostbelt No.1 Permafrost Empire, Anastasia",
-          "en": "Lostbelt No.1 Permafrost Empire, Anastasia",
-          "ja": "Lostbelt No.1 Permafrost Empire, Anastasia"
+          "zh": "Lostbelt No.1 阿纳斯塔西娅",
+          "ko": "이문대 No.1 아나스타샤",
+          "en": "Lostbelt No.1 · Anastasia",
+          "ja": "Lostbelt No.1 アナスタシア"
         },
         "subtitle": {
           "zh": "A.D.1570?",
@@ -3367,10 +3366,10 @@
       {
         "id": "fgo_302",
         "labels": {
-          "zh": "Lostbelt No.2 The Eternal Icy Fire Century, Götterdämmerung",
-          "ko": "Lostbelt No.2 The Eternal Icy Fire Century, Götterdämmerung",
-          "en": "Lostbelt No.2 The Eternal Icy Fire Century, Götterdämmerung",
-          "ja": "Lostbelt No.2 The Eternal Icy Fire Century, Götterdämmerung"
+          "zh": "Lostbelt No.2 诸神黄昏",
+          "ko": "이문대 No.2 괴터데머룽",
+          "en": "Lostbelt No.2 · Gotterdammerung",
+          "ja": "Lostbelt No.2 ゲッテルデメルング"
         },
         "subtitle": {
           "zh": "B.C.1000?",
@@ -3420,10 +3419,10 @@
       {
         "id": "fgo_303",
         "labels": {
-          "zh": "Lostbelt No.3 The Synchronized Intellect Nation, SIN",
-          "ko": "Lostbelt No.3 The Synchronized Intellect Nation, SIN",
-          "en": "Lostbelt No.3 The Synchronized Intellect Nation, SIN",
-          "ja": "Lostbelt No.3 The Synchronized Intellect Nation, SIN"
+          "zh": "Lostbelt No.3 SIN",
+          "ko": "이문대 No.3 SIN",
+          "en": "Lostbelt No.3 · SIN",
+          "ja": "Lostbelt No.3 SIN"
         },
         "subtitle": {
           "zh": "B.C.0210",
@@ -3460,10 +3459,10 @@
       {
         "id": "fgo_304",
         "labels": {
-          "zh": "Lostbelt No.4 Saṃsāra of Genesis and Terminus, Yugakshetra",
-          "ko": "Lostbelt No.4 Saṃsāra of Genesis and Terminus, Yugakshetra",
-          "en": "Lostbelt No.4 Saṃsāra of Genesis and Terminus, Yugakshetra",
-          "ja": "Lostbelt No.4 Saṃsāra of Genesis and Terminus, Yugakshetra"
+          "zh": "Lostbelt No.4 创世灭亡轮回",
+          "ko": "이문대 No.4 유가 크셰트라",
+          "en": "Lostbelt No.4 · Yuga Kshetra",
+          "ja": "Lostbelt No.4 ユガ・クシェートラ"
         },
         "subtitle": {
           "zh": "??.11900",
@@ -3585,10 +3584,10 @@
       {
         "id": "fgo_305",
         "labels": {
-          "zh": "Lostbelt No.5 Ancient Ocean of the Dreadnought Gods, Atlantis",
-          "ko": "Lostbelt No.5 Ancient Ocean of the Dreadnought Gods, Atlantis",
-          "en": "Lostbelt No.5 Ancient Ocean of the Dreadnought Gods, Atlantis",
-          "ja": "Lostbelt No.5 Ancient Ocean of the Dreadnought Gods, Atlantis"
+          "zh": "Lostbelt No.5 亚特兰蒂斯",
+          "ko": "이문대 No.5 아틀란티스",
+          "en": "Lostbelt No.5 · Atlantis",
+          "ja": "Lostbelt No.5 アトランティス"
         },
         "subtitle": {
           "zh": "B.C.12000?",
@@ -3659,10 +3658,10 @@
       {
         "id": "fgo_306",
         "labels": {
-          "zh": "Lostbelt No.5 Interstellar Mountainous City, Olympus",
-          "ko": "Lostbelt No.5 Interstellar Mountainous City, Olympus",
-          "en": "Lostbelt No.5 Interstellar Mountainous City, Olympus",
-          "ja": "Lostbelt No.5 Interstellar Mountainous City, Olympus"
+          "zh": "Lostbelt No.5 奥林波斯",
+          "ko": "이문대 No.5 올림포스",
+          "en": "Lostbelt No.5 · Olympus",
+          "ja": "Lostbelt No.5 オリュンポス"
         },
         "subtitle": {
           "zh": "B.C.12000?",
@@ -3706,10 +3705,10 @@
       {
         "id": "fgo_307",
         "labels": {
-          "zh": "Naraka Mandala, Heian-kyo",
-          "ko": "Naraka Mandala, Heian-kyo",
-          "en": "Naraka Mandala, Heian-kyo",
-          "ja": "Naraka Mandala, Heian-kyo"
+          "zh": "地狱界曼荼罗 平安京",
+          "ko": "지옥계만다라 헤이안쿄",
+          "en": "Heian-kyo",
+          "ja": "地獄界曼荼羅 平安京"
         },
         "subtitle": {
           "zh": "A.D.1008",
@@ -3791,10 +3790,10 @@
       {
         "id": "fgo_308",
         "labels": {
-          "zh": "Lostbelt No.6 Fae Round Table Domain, Avalon le Fae",
-          "ko": "Lostbelt No.6 Fae Round Table Domain, Avalon le Fae",
-          "en": "Lostbelt No.6 Fae Round Table Domain, Avalon le Fae",
-          "ja": "Lostbelt No.6 Fae Round Table Domain, Avalon le Fae"
+          "zh": "Lostbelt No.6 妖精圆桌领域",
+          "ko": "이문대 No.6 아발론 르 페이",
+          "en": "Lostbelt No.6 · Avalon le Fae",
+          "ja": "Lostbelt No.6 アヴァロン・ル・フェ"
         },
         "subtitle": {
           "zh": "■.■.2017",
@@ -3893,6 +3892,7 @@
           "goodsmile-fate-g1141676",
           "goodsmile-fate-g1145054",
           "goodsmile-fate-g1137383",
+          "goodsmile-fate-g57700",
           "goodsmile-fate-g1136599",
           "goodsmile-fate-g59968",
           "goodsmile-fate-g62022",
@@ -3900,6 +3900,7 @@
           "goodsmile-fate-g62225",
           "goodsmile-fate-g62226",
           "goodsmile-fate-g1137481",
+          "goodsmile-fate-g1137333",
           "goodsmile-fate-g61277",
           "goodsmile-fate-g57471",
           "goodsmile-fate-g35138",
@@ -3913,15 +3914,15 @@
           "goodsmile-fate-g47307",
           "goodsmile-fate-g61314"
         ],
-        "count": 24
+        "count": 26
       },
       {
         "id": "fgo_309",
         "labels": {
-          "zh": "Anti-Primate Biosphere, Tunguska Sanctuary",
-          "ko": "Anti-Primate Biosphere, Tunguska Sanctuary",
-          "en": "Anti-Primate Biosphere, Tunguska Sanctuary",
-          "ja": "Anti-Primate Biosphere, Tunguska Sanctuary"
+          "zh": "通古斯卡 圣域",
+          "ko": "퉁구스카 생추어리",
+          "en": "Tunguska Sanctuary",
+          "ja": "ツングースカ・サンクチュアリ"
         },
         "subtitle": {
           "zh": "-",
@@ -3946,10 +3947,10 @@
       {
         "id": "fgo_310",
         "labels": {
-          "zh": "Realm of the Thanatos Impulse, Traum",
-          "ko": "Realm of the Thanatos Impulse, Traum",
-          "en": "Realm of the Thanatos Impulse, Traum",
-          "ja": "Realm of the Thanatos Impulse, Traum"
+          "zh": "死想显现界域 特劳姆",
+          "ko": "사상현현계역 트라움",
+          "en": "Traum",
+          "ja": "死想顕現界域 トラオム"
         },
         "subtitle": {
           "zh": "A.D. XX19",
@@ -3998,10 +3999,10 @@
       {
         "id": "fgo_311",
         "labels": {
-          "zh": "Lostbelt No.7: Golden Sea of Trees, Nahui Mictlān",
-          "ko": "Lostbelt No.7: Golden Sea of Trees, Nahui Mictlān",
-          "en": "Lostbelt No.7: Golden Sea of Trees, Nahui Mictlān",
-          "ja": "Lostbelt No.7: Golden Sea of Trees, Nahui Mictlān"
+          "zh": "Lostbelt No.7 纳维·米克特兰",
+          "ko": "이문대 No.7 나우이 믹틀란",
+          "en": "Lostbelt No.7 · Nahui Mictlan",
+          "ja": "Lostbelt No.7 ナウイ・ミクトラン"
         },
         "subtitle": {
           "zh": "-",
@@ -4056,10 +4057,10 @@
       {
         "id": "fgo_402",
         "labels": {
-          "zh": "Zero Compass Inner Domain, Paper Moon",
-          "ko": "Zero Compass Inner Domain, Paper Moon",
-          "en": "Zero Compass Inner Domain, Paper Moon",
-          "ja": "Zero Compass Inner Domain, Paper Moon"
+          "zh": "奏章 I Paper Moon",
+          "ko": "주장 I 페이퍼 문",
+          "en": "Ordeal Call I · Paper Moon",
+          "ja": "奏章I ペーパームーン"
         },
         "subtitle": {
           "zh": "-",
@@ -4135,10 +4136,10 @@
       {
         "id": "fgo_403",
         "labels": {
-          "zh": "The Inescapable Gehenna, Id",
-          "ko": "The Inescapable Gehenna, Id",
-          "en": "The Inescapable Gehenna, Id",
-          "ja": "The Inescapable Gehenna, Id"
+          "zh": "奏章 II Id",
+          "ko": "주장 II 이드",
+          "en": "Ordeal Call II · Id",
+          "ja": "奏章II イド"
         },
         "subtitle": {
           "zh": "-",
@@ -4194,18 +4195,18 @@
         "count": 3
       },
       {
-        "id": "fate_unsorted",
+        "id": "fate_general",
         "labels": {
-          "zh": "Fate / FGO 未校对",
-          "ko": "Fate / FGO 미분류",
-          "en": "Fate / FGO Unsorted",
-          "ja": "Fate / FGO 未分類"
+          "zh": "Fate / FGO 角色周边",
+          "ko": "Fate / FGO 캐릭터 굿즈",
+          "en": "Fate / FGO character goods",
+          "ja": "Fate / FGO キャラクターグッズ"
         },
         "subtitle": {
-          "zh": "待补角色/章节关键词",
-          "ko": "캐릭터/장 키워드 필요",
-          "en": "Needs character/chapter keywords",
-          "ja": "キャラ/章キーワード待ち"
+          "zh": "没有固定章节归属",
+          "ko": "특정 장에 속하지 않는 상품",
+          "en": "Goods without a fixed chapter",
+          "ja": "特定の章に属さない商品"
         },
         "image": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1141696/EqK3DTYwUXp79sm4MuP1VJkdAnHBrjRx.jpg",
         "aliases": [],
@@ -4544,7 +4545,7 @@
           "en": "Game era",
           "ja": "ゲーム世代"
         },
-        "image": "https://bandai-a.akamaihd.net/bc/img/model/b/1000252457_1.jpg",
+        "image": "https://www.bandai.co.jp/candy/published/cms_files/20260629_SMP_AC6_BALTEUS_600x341.jpg",
         "aliases": [
           "armored core vi",
           "fires of rubicon",
@@ -4569,6 +4570,9 @@
           "ORBiter"
         ],
         "kit_ids": [
+          "pbandai-ac-smp-aap07-balteus",
+          "ac-assemble-collection-vol01",
+          "pbandai-ac-assemble-collection-vol01-default-color",
           "ac30mm-4573102725516000",
           "ac30mm-4573102725523000",
           "ac30mm-4573102720382000",
@@ -4587,21 +4591,21 @@
           "ac30mm-4573102671691000",
           "ac30mm-4573102671707000"
         ],
-        "count": 17
+        "count": 20
       },
       {
-        "id": "ac_unsorted",
+        "id": "ac_general",
         "labels": {
-          "zh": "AC 未校对",
-          "ko": "AC 미분류",
-          "en": "AC Unsorted",
-          "ja": "AC 未分類"
+          "zh": "跨作机体 / 周边",
+          "ko": "크로스 타이틀 기체 / 굿즈",
+          "en": "Cross-title machines / goods",
+          "ja": "作品横断機体 / グッズ"
         },
         "subtitle": {
-          "zh": "待确认游戏来源",
-          "ko": "게임 출처 확인 필요",
-          "en": "Needs game source",
-          "ja": "ゲーム出典待ち"
+          "zh": "没有固定游戏世代",
+          "ko": "특정 게임 세대 없음",
+          "en": "No single game era",
+          "ja": "特定のゲーム世代なし"
         },
         "image": "",
         "aliases": [],

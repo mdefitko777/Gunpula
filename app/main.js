@@ -91,6 +91,13 @@ import {
   preferredLanguage as readPreferredLanguage,
   viewStateUrl as buildViewStateUrl,
 } from "./view-state.js";
+import {
+  WORLD_SEARCH_PLACEHOLDERS,
+  WORLD_THEME_CONFIG,
+  localizedWorldText,
+  worldIconMarkup,
+  worldNavItems,
+} from "./world-themes.js";
 
 const LANGUAGE_KEY = "gunpula-catalog-language-v1";
 const FRANCHISE_KEY = "gunpula-catalog-franchise-v1";
@@ -132,58 +139,13 @@ const PAGER_START_DISTANCE = 18;
 const DRAWER_EDGE_ZONE = 96;
 const DRAWER_OPEN_DISTANCE = 44;
 const COLLECTION_SWIPE_DISTANCE = 46;
-const SWIPE_ZONE_TOP_RATIO = 0.42;
+const SWIPE_ZONE_TOP_RATIO = 0.5;
 const PAGER_THRESHOLD_RATIO = 0.28;
 const PAGER_MIN_THRESHOLD = 92;
 const PAGER_ANIMATION_MS = 220;
 const APP_VERSION_LABEL = "v2.0.0";
-const WORLD_COPY = {
-  gundam: {
-    title: { zh: "高达宇宙档案", ko: "건담 유니버스", en: "Gundam Universe", ja: "ガンダム宇宙" },
-    lead: { zh: "按宇宙纪年、作品和产品线去逛，不再只是一张商品表。", ko: "연표, 작품, 제품 라인으로 탐색합니다.", en: "Browse by timeline, work, and product line instead of a flat list.", ja: "年表、作品、商品ラインで辿る図鑑です。" },
-    mode: "timeline",
-    guideTab: "timeline",
-  },
-  armored_core: {
-    title: { zh: "AC 机库", ko: "AC 격납고", en: "AC Hangar", ja: "AC ハンガー" },
-    lead: { zh: "按游戏世代看机体、V.I.、30MM 和周边。", ko: "게임 세대별로 기체와 프라모델을 봅니다.", en: "Browse machines, V.I., 30MM, and goods by game era.", ja: "ゲーム世代ごとに機体と商品を閲覧します。" },
-    mode: "atlas",
-    guideTab: "armored_core",
-  },
-  pokemon: {
-    title: { zh: "宝可梦世代图鉴", ko: "포켓몬 세대 도감", en: "Pokemon Generations", ja: "ポケモン世代図鑑" },
-    lead: { zh: "用世代和地区进入，像翻游戏图鉴一样找拼装、扭蛋和玩偶。", ko: "세대와 지방으로 프라모델, 가샤폰, 인형을 찾습니다.", en: "Enter by generation and region, then browse model kits, gashapon, and plush.", ja: "世代と地方からプラモ、ガシャポン、ぬいぐるみを探します。" },
-    mode: "atlas",
-    guideTab: "pokemon",
-  },
-  fate: {
-    title: { zh: "Fate / FGO 长卷", ko: "Fate / FGO 타임라인", en: "Fate / FGO Chronicle", ja: "Fate / FGO クロニクル" },
-    lead: { zh: "FGO 已经是一条十年以上的长线，按作品和章节去看角色周边。", ko: "작품과 장별로 캐릭터 굿즈를 봅니다.", en: "Follow works and FGO chapters as a long collectible timeline.", ja: "作品とFGO章ごとにグッズを辿ります。" },
-    mode: "timeline",
-    guideTab: "fate",
-  },
-  beyblade: {
-    title: { zh: "Beyblade X 装备台", ko: "BBX 덱 스테이션", en: "Beyblade X Deck", ja: "ベイブレードX デッキ" },
-    lead: { zh: "按 BX / UX / CX / 限定和部件拆开看，适合补齐和配装。", ko: "BX / UX / CX / 한정과 부품별로 봅니다.", en: "Browse by BX, UX, CX, limited items, and parts.", ja: "BX / UX / CX / 限定とパーツで整理します。" },
-    mode: "bbx",
-    guideTab: "bbx",
-  },
-};
+const WORLD_COPY = WORLD_THEME_CONFIG;
 
-const WORLD_ACTIONS = [
-  { key: "catalog", label: { zh: "目录", ko: "카탈로그", en: "Catalog", ja: "カタログ" }, view: "catalog" },
-  { key: "guide", label: { zh: "图鉴", ko: "도감", en: "Atlas", ja: "図鑑" }, view: "guide" },
-  { key: "updates", label: { zh: "最近", ko: "최근", en: "Updates", ja: "最近" }, view: "updates" },
-  { key: "collection", label: { zh: "收藏", ko: "컬렉션", en: "Collection", ja: "コレクション" }, view: "collection" },
-];
-
-const WORLD_SEARCH_PLACEHOLDERS = {
-  gundam: { zh: "搜索机体 / 作品 / HG·MG·MB", ko: "기체 / 작품 / HG·MG·MB 검색", en: "Search suit / work / HG·MG·MB", ja: "機体 / 作品 / HG·MG·MB 検索" },
-  armored_core: { zh: "搜索机体 / 游戏 / V.I.·30MM", ko: "기체 / 게임 / V.I.·30MM 검색", en: "Search AC / game / V.I.·30MM", ja: "機体 / ゲーム / V.I.·30MM 検索" },
-  pokemon: { zh: "搜索编号 / 宝可梦 / 拼装·毛绒", ko: "번호 / 포켓몬 / 프라·인형 검색", en: "Search No. / Pokemon / kit·plush", ja: "番号 / ポケモン / プラモ·ぬいぐるみ" },
-  fate: { zh: "搜索角色 / 作品 / FGO 章节", ko: "캐릭터 / 작품 / FGO 장 검색", en: "Search character / work / FGO chapter", ja: "キャラ / 作品 / FGO 章 検索" },
-  beyblade: { zh: "搜索 BX / UX / CX / 部件", ko: "BX / UX / CX / 파츠 검색", en: "Search BX / UX / CX / parts", ja: "BX / UX / CX / パーツ検索" },
-};
 const HELP_TEXT = {
   homeSection: {
     zh: "首页是入口页。点分类卡片进入对应目录；点“我的收藏”里的已购买/想要会进入自己的收藏，不会跟随朋友视图变化；封面图可在卡片上更换。",
@@ -315,7 +277,7 @@ const state = {
   homeCovers: loadHomeCovers(),
   recentViewed: loadRecentViewed(),
   releaseMonth: localStorage.getItem(RELEASE_MONTH_KEY) || "",
-  updatesMode: localStorage.getItem(UPDATES_MODE_KEY) === "month" ? "month" : "recent",
+  updatesMode: ["recent", "week", "month"].includes(localStorage.getItem(UPDATES_MODE_KEY)) ? localStorage.getItem(UPDATES_MODE_KEY) : "recent",
   radial: { timer: null, active: false, startX: 0, startY: 0, lastX: 0, lastY: 0, touchId: null, selected: null, target: null, suppressClick: false },
   pager: { active: false, touchId: null, startX: 0, startY: 0, deltaX: 0, target: null, settling: false, suppressClick: false, blockedByTarget: false },
   syncConfig: loadSyncConfig(),
@@ -1756,7 +1718,6 @@ function bindEvents() {
     if (!button || button.dataset.guideTab === state.guideTab) return;
     switchGuideTab(button.dataset.guideTab);
   });
-  bindGuideSwipe();
   elements.bbxTopClose?.addEventListener("click", () => closeDialog(elements.bbxTopDialog));
   elements.bbxTopDialog?.addEventListener("click", (event) => {
     if (event.target === elements.bbxTopDialog) closeDialog(elements.bbxTopDialog);
@@ -2248,65 +2209,16 @@ function moveTouchGesture(event) {
     openUserPage();
     return;
   }
-  if (
-    state.activeView === "catalog" &&
-    swipeZoneAllowed(state.pager.startY) &&
-    !state.pager.blockedByTarget &&
-    absX > COLLECTION_SWIPE_DISTANCE &&
-    absX > absY * 1.3
-  ) {
-    clearTimeout(state.radial.timer);
-    state.radial.timer = null;
-    state.radial.touchId = null;
-    state.pager.touchId = null;
-    state.radial.suppressClick = true;
-    const target = adjacentFranchise(deltaX < 0 ? 1 : -1);
+  if (swipeZoneAllowed(state.pager.startY) && !state.pager.blockedByTarget && absX > PAGER_START_DISTANCE && absX > absY * 1.3) {
+    const target = pagerTargetForDelta(deltaX);
     if (target) {
-      openFranchiseCatalog(target);
-    }
-    if (event.cancelable) event.preventDefault();
-    return;
-  }
-  if (
-    state.activeView === "updates" &&
-    swipeZoneAllowed(state.pager.startY) &&
-    !state.pager.blockedByTarget &&
-    absX > COLLECTION_SWIPE_DISTANCE &&
-    absX > absY * 1.3
-  ) {
-    clearTimeout(state.radial.timer);
-    state.radial.timer = null;
-    state.radial.touchId = null;
-    state.pager.touchId = null;
-    state.radial.suppressClick = true;
-    const target = deltaX < 0 ? "week" : "recent";
-    if (state.updatesMode !== target) {
+      clearTimeout(state.radial.timer);
+      state.radial.timer = null;
+      state.radial.touchId = null;
+      startPagerGesture(target, deltaX);
       if (event.cancelable) event.preventDefault();
-      setUpdatesMode(target);
+      return;
     }
-    return;
-  }
-  // Inside the merged collection view, a horizontal swipe flips between the
-  // wanted and owned tabs. blockedByTarget already excludes the scrollable member
-  // avatar row and collection strips, so this only fires on the card grid / body.
-  if (
-    COLLECTION_TYPES.includes(state.activeView) &&
-    swipeZoneAllowed(state.pager.startY) &&
-    !state.pager.blockedByTarget &&
-    absX > COLLECTION_SWIPE_DISTANCE &&
-    absX > absY * 1.3
-  ) {
-    clearTimeout(state.radial.timer);
-    state.radial.timer = null;
-    state.radial.touchId = null;
-    state.pager.touchId = null;
-    state.radial.suppressClick = true;
-    const target = deltaX < 0 ? "owned" : "wanted";
-    if (state.activeView !== target) {
-      if (event.cancelable) event.preventDefault();
-      switchToView(target);
-    }
-    return;
   }
   // Vertical movement should stay a normal page scroll. The radial menu only
   // arms while the finger is nearly still, then takes over after it appears.
@@ -2450,12 +2362,7 @@ function updateRadialSelection(x, y) {
 
 function radialMenuItems() {
   if (state.activeView === "home") {
-    return [
-      { id: "view:updates", label: t("discoverNav") },
-      { id: "view:guide", label: t("pictureBook") },
-      { id: "view:collection", label: t("collectionNav") },
-      { id: "view:me", label: t("myNav") },
-    ];
+    return FRANCHISES.filter((franchise) => franchise !== state.franchise).map((franchise) => ({ id: `franchise:${franchise}`, label: franchiseShortLabel(franchise) }));
   }
   if (COLLECTION_TYPES.includes(state.activeView)) {
     return [
@@ -2466,12 +2373,22 @@ function radialMenuItems() {
   if (state.activeView === "guide") {
     return [
       { id: "guide:gundam", label: t("guideTabGundam") },
+      { id: "guide:pokemon", label: t("franchisePokemon") },
+      { id: "guide:fate", label: t("franchiseFate") },
+      { id: "guide:armored_core", label: t("franchiseArmoredCore") },
       { id: "guide:bbx", label: t("guideTabBbx") },
-      { id: "guide:parts", label: t("guideTabParts") },
     ];
   }
   const franchises = state.activeView === "pbandai" ? pbandaiFranchises() : FRANCHISES;
   return franchises.map((franchise) => ({ id: `franchise:${franchise}`, label: franchiseShortLabel(franchise) }));
+}
+
+function pushTransientLayerHistory(layer) {
+  try {
+    window.history.pushState({ gunpulaLayer: layer }, "", `${window.location.pathname}${window.location.search}${window.location.hash}`);
+  } catch {
+    // History is an enhancement for Android/web back behavior; the app can run without it.
+  }
 }
 
 function activateRadialSelection(id) {
@@ -2505,8 +2422,32 @@ function selectFranchiseForActiveView(franchise) {
   }
 }
 
-function startPagerGesture(deltaX) {
-  const target = adjacentFranchise(deltaX < 0 ? 1 : -1);
+function pagerTargetForDelta(deltaX) {
+  const offset = deltaX < 0 ? 1 : -1;
+  if (["home", "catalog"].includes(state.activeView)) {
+    const franchise = adjacentFranchise(offset);
+    return franchise ? `franchise:${franchise}` : null;
+  }
+  if (state.activeView === "guide") {
+    const tabs = GUIDE_TABS.filter((tab) => !["timeline", "parts"].includes(tab));
+    const index = tabs.indexOf(state.guideTab || WORLD_COPY[state.franchise]?.guideTab || "gundam");
+    const target = tabs[(index + offset + tabs.length) % tabs.length];
+    return target ? `guide:${target}` : null;
+  }
+  if (state.activeView === "updates") {
+    const modes = ["recent", "week", "month"];
+    const index = modes.indexOf(state.updatesMode || "recent");
+    const target = modes[index + offset];
+    return target ? `updates:${target}` : null;
+  }
+  if (COLLECTION_TYPES.includes(state.activeView)) {
+    const target = state.activeView === "wanted" ? "owned" : "wanted";
+    return `collection:${target}`;
+  }
+  return null;
+}
+
+function startPagerGesture(target, deltaX) {
   if (!target || !elements.pagerPreview) {
     return;
   }
@@ -2515,7 +2456,8 @@ function startPagerGesture(deltaX) {
   state.pager.suppressClick = true;
   cancelRadialPress();
   document.body.classList.add("is-paging");
-  showPagerPreview(target);
+  showPagerPreviewTarget(target);
+  updatePagerGesture(deltaX);
 }
 
 function updatePagerGesture(deltaX) {
@@ -2524,10 +2466,10 @@ function updatePagerGesture(deltaX) {
   }
   const width = window.innerWidth || 1;
   const clamped = Math.max(-width, Math.min(width, deltaX));
-  const target = adjacentFranchise(clamped < 0 ? 1 : -1);
+  const target = pagerTargetForDelta(clamped);
   if (target && target !== state.pager.target) {
     state.pager.target = target;
-    showPagerPreview(target);
+    showPagerPreviewTarget(target);
   }
   state.pager.deltaX = clamped;
   document.body.style.setProperty("--pager-drag-x", `${clamped}px`);
@@ -2556,7 +2498,7 @@ function finishPagerGesture(event, touch) {
     const next = shouldSwitch ? target : null;
     resetPagerGesture(true);
     if (next) {
-      openFranchiseCatalog(next);
+      applyPagerTarget(next);
     }
   }, PAGER_ANIMATION_MS);
   if (event.cancelable) event.preventDefault();
@@ -2622,6 +2564,67 @@ function showPagerPreview(franchise) {
   body.innerHTML = `<span>${escapeHtml(t("franchise"))}</span><strong>${escapeHtml(franchiseLabel(franchise))}</strong><em>${escapeHtml(t("records", { count: counts.get(franchise) || 0 }))}</em>`;
   card.append(media, body);
   elements.pagerPreview.append(card);
+}
+
+function showPagerPreviewTarget(target) {
+  const [type, value] = String(target).split(":");
+  if (type === "franchise") {
+    showPagerPreview(value);
+    return;
+  }
+  elements.pagerPreview.hidden = false;
+  elements.pagerPreview.innerHTML = "";
+  const card = document.createElement("div");
+  card.className = "pager-preview-card pager-preview-simple";
+  const body = document.createElement("div");
+  body.className = "pager-preview-body";
+  const label =
+    type === "updates"
+      ? ({ recent: t("recentDaysShort"), week: t("weekOnSaleShort"), month: t("releaseMonth") }[value] || value)
+      : type === "guide"
+        ? guideTabLabel(value)
+      : value === "owned"
+        ? t("ownedList")
+        : t("wantedList");
+  body.innerHTML = `<strong>${escapeHtml(label)}</strong><span>${escapeHtml(type === "updates" ? t("discoverNav") : type === "guide" ? t("pictureBook") : t("collectionNav"))}</span>`;
+  card.append(body);
+  elements.pagerPreview.append(card);
+}
+
+function applyPagerTarget(target) {
+  const [type, value] = String(target).split(":");
+  if (type === "franchise") {
+    if (state.activeView === "catalog") {
+      openFranchiseCatalog(value);
+    } else if (state.activeView === "guide") {
+      state.franchise = value;
+      state.guideTab = WORLD_COPY[value]?.guideTab || "gundam";
+      localStorage.setItem(FRANCHISE_KEY, state.franchise);
+      render();
+      persistViewState({ mode: "push" });
+    } else {
+      selectHomeWorld(value);
+    }
+  } else if (type === "updates") {
+    setUpdatesMode(value);
+  } else if (type === "guide") {
+    switchGuideTab(value);
+  } else if (type === "collection") {
+    switchToView(value);
+  }
+}
+
+function guideTabLabel(tab) {
+  const labels = {
+    gundam: t("guideTabGundam"),
+    pokemon: t("franchisePokemon"),
+    fate: t("franchiseFate"),
+    armored_core: t("franchiseArmoredCore"),
+    bbx: t("guideTabBbx"),
+    timeline: t("guideTabTimeline"),
+    parts: t("guideTabParts"),
+  };
+  return labels[tab] || tab;
 }
 
 function donutSegmentPath(cx, cy, outerRadius, innerRadius, startDeg, endDeg) {
@@ -3867,7 +3870,16 @@ function renderCatalogDataChanged() {
 }
 
 function renderBottomNav() {
+  const themedItems = new Map(worldNavItems(state.franchise, state.language).map((item) => [item.view, item]));
   elements.bottomNav.querySelectorAll("button[data-view]").forEach((button) => {
+    const themedItem = themedItems.get(button.dataset.view);
+    if (themedItem) {
+      const icon = button.querySelector("span");
+      const label = button.querySelector("strong");
+      if (icon) icon.innerHTML = worldIconMarkup(themedItem.icon);
+      if (label) label.textContent = themedItem.label;
+      button.setAttribute("aria-label", themedItem.label);
+    }
     const userOpen = Boolean(elements.userDialog?.open);
     const isDiscover = button.dataset.view === "updates" && ["updates", "catalog", "pbandai"].includes(state.activeView);
     button.classList.toggle(
@@ -3986,6 +3998,7 @@ function selectHomeWorld(franchise) {
   localStorage.setItem(FRANCHISE_KEY, state.franchise);
   render();
   persistViewState({ mode: "replace" });
+  window.scrollTo({ top: 0, behavior: "auto" });
 }
 
 function openHomeCoverPicker(franchise) {
@@ -4021,76 +4034,51 @@ function renderHome() {
   elements.homeTotal.textContent = t("records", { count: state.kits.length });
   renderWorldSection();
   renderHomePulse();
+  renderHomeWorldSwitcher(counts);
+  renderHomeDashboard();
+}
+
+function renderHomeWorldSwitcher(counts) {
   elements.homeGrid.innerHTML = "";
-
+  elements.homeGrid.className = "home-grid world-switcher";
   for (const franchise of FRANCHISES) {
-    const card = document.createElement("article");
-    card.tabIndex = 0;
-    card.role = "button";
-    card.setAttribute("aria-label", franchiseLabel(franchise));
-    card.className = `home-card home-card-${franchise.replace("_", "-")}${state.franchise === franchise ? " is-active" : ""}`;
-    card.addEventListener("click", (event) => {
-      if (event.target.closest(".home-cover-button")) {
-        return;
-      }
-      selectHomeWorld(franchise);
-    });
-    card.addEventListener("keydown", (event) => {
-      if (!["Enter", " "].includes(event.key)) {
-        return;
-      }
-      event.preventDefault();
-      selectHomeWorld(franchise);
-    });
-
-    const media = document.createElement("div");
-    media.className = "home-card-media";
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `world-switcher-item${state.franchise === franchise ? " is-active" : ""}`;
+    button.setAttribute("aria-label", franchiseLabel(franchise));
+    const visual = document.createElement("span");
+    visual.className = "world-switcher-visual";
     const customCover = state.homeCovers[franchise];
+    const fallbackKit = homeImageKits(franchise)[0];
     if (customCover) {
-      media.classList.add("is-custom");
-      const slot = document.createElement("span");
-      slot.className = "home-card-cover";
       const image = document.createElement("img");
       image.src = customCover;
-      image.alt = franchiseLabel(franchise);
-      slot.append(image);
-      media.append(slot);
+      image.alt = "";
+      visual.append(image);
+    } else if (fallbackKit) {
+      appendImageWithFallback(visual, fallbackKit, { alt: "" });
     } else {
-      for (const kit of homeImageKits(franchise)) {
-        const slot = document.createElement("span");
-        appendImageWithFallback(slot, kit, { alt: kitDisplayName(kit) });
-        media.append(slot);
-      }
+      visual.innerHTML = worldIconMarkup(franchise);
     }
-    if (!media.children.length) {
-      const fallback = document.createElement("span");
-      fallback.className = "home-card-fallback";
-      fallback.textContent = franchiseShortLabel(franchise);
-      media.append(fallback);
-    }
-    media.querySelectorAll("img").forEach((image) => {
-      image.draggable = false;
-    });
-
-    const coverButton = document.createElement("button");
-    coverButton.type = "button";
-    coverButton.className = "home-cover-button";
-    coverButton.setAttribute("aria-label", t("changeCover"));
-    coverButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 20 8-8-4-4-8 8-2 6z"/><path d="m14 6 4 4"/></svg>`;
-    coverButton.addEventListener("click", (event) => {
-      event.preventDefault();
+    const identity = document.createElement("span");
+    identity.className = "world-switcher-identity";
+    identity.innerHTML = `${worldIconMarkup(franchise)}<strong>${escapeHtml(franchiseShortLabel(franchise))}</strong><em>${counts.get(franchise) || 0}</em>`;
+    button.append(visual, identity);
+    button.addEventListener("click", () => selectHomeWorld(franchise));
+    const edit = document.createElement("button");
+    edit.type = "button";
+    edit.className = "world-switcher-edit";
+    edit.setAttribute("aria-label", t("changeCover"));
+    edit.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 20 8-8-4-4-8 8-2 6z"/><path d="m14 6 4 4"/></svg>';
+    edit.addEventListener("click", (event) => {
       event.stopPropagation();
       openHomeCoverPicker(franchise);
     });
-
-    const body = document.createElement("div");
-    body.className = "home-card-body";
-    body.innerHTML = `<strong>${escapeHtml(franchiseLabel(franchise))}</strong><span>${escapeHtml(t(homeMetaKey(franchise)))} </span><em>${escapeHtml(t("records", { count: counts.get(franchise) || 0 }))}</em>`;
-
-    card.append(media, coverButton, body);
-    elements.homeGrid.append(card);
+    const item = document.createElement("div");
+    item.className = "world-switcher-slot";
+    item.append(button, edit);
+    elements.homeGrid.append(item);
   }
-  renderHomeDashboard();
 }
 
 function openWorldGroup(group) {
@@ -4195,9 +4183,7 @@ function renderHomePulse() {
 }
 
 function worldText(value) {
-  if (!value) return "";
-  if (typeof value === "string") return value;
-  return value[state.language] || value.zh || value.en || value.ja || value.ko || "";
+  return localizedWorldText(value, state.language);
 }
 
 function renderWorldSearchPlaceholder() {
@@ -4228,6 +4214,286 @@ function worldGroupImage(group, franchise) {
   return "";
 }
 
+function newestWorldKit(kits) {
+  return [...kits]
+    .filter((kit) => imageCandidatesForKit(kit).length)
+    .sort((a, b) => String(b.release_date || "").localeCompare(String(a.release_date || "")))[0] || null;
+}
+
+function createWorldHero(world, kits, actions, variant) {
+  const hero = document.createElement("section");
+  hero.className = `world-hero world-experience-hero is-${variant}`;
+  const customCover = state.homeCovers[state.franchise];
+  const featured = newestWorldKit(kits);
+  const media = document.createElement("div");
+  media.className = "world-hero-media";
+  if (customCover) {
+    const image = document.createElement("img");
+    image.src = customCover;
+    image.alt = "";
+    media.append(image);
+  } else if (featured) {
+    appendImageWithFallback(media, featured, { alt: kitShortName(featured) });
+  } else {
+    media.innerHTML = worldIconMarkup(state.franchise);
+  }
+
+  const copy = document.createElement("div");
+  copy.className = "world-copy";
+  copy.innerHTML = `<span>${worldIconMarkup(state.franchise)}${escapeHtml(worldText(world.eyebrow))}</span><strong>${escapeHtml(worldText(world.title))}</strong><p>${escapeHtml(worldText(world.lead))}</p>`;
+  const actionBar = document.createElement("div");
+  actionBar.className = "world-actions";
+  for (const action of actions) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.innerHTML = `${worldIconMarkup(action.icon)}<span>${escapeHtml(worldText(action.label))}</span>`;
+    button.addEventListener("click", action.run);
+    actionBar.append(button);
+  }
+  const stat = document.createElement("div");
+  stat.className = "world-stat";
+  stat.innerHTML = `<strong>${kits.length}</strong><span>${escapeHtml(worldText({ zh: "收录", ko: "수록", en: "records", ja: "収録" }))}</span>`;
+  const portal = document.createElement("div");
+  portal.className = "world-portal";
+  const portalButton = document.createElement("button");
+  portalButton.type = "button";
+  portalButton.className = "world-portal-launcher";
+  portalButton.setAttribute("aria-expanded", "false");
+  portalButton.setAttribute("aria-label", worldText({ zh: "切换主题", ko: "테마 전환", en: "Switch world", ja: "テーマ切替" }));
+  portalButton.innerHTML = `${worldIconMarkup(state.franchise)}<span>${escapeHtml(franchiseShortLabel(state.franchise))}</span>`;
+  const portalMenu = document.createElement("div");
+  portalMenu.className = "world-portal-menu";
+  portalMenu.hidden = true;
+  for (const franchise of FRANCHISES) {
+    const option = document.createElement("button");
+    option.type = "button";
+    option.className = state.franchise === franchise ? "is-active" : "";
+    option.setAttribute("aria-label", franchiseLabel(franchise));
+    option.innerHTML = `${worldIconMarkup(franchise)}<span>${escapeHtml(franchiseShortLabel(franchise))}</span>`;
+    option.addEventListener("click", () => selectHomeWorld(franchise));
+    portalMenu.append(option);
+  }
+  portalButton.addEventListener("click", () => {
+    portalMenu.hidden = !portalMenu.hidden;
+    portalButton.setAttribute("aria-expanded", String(!portalMenu.hidden));
+  });
+  portal.addEventListener("focusout", (event) => {
+    if (event.relatedTarget && portal.contains(event.relatedTarget)) return;
+    portalMenu.hidden = true;
+    portalButton.setAttribute("aria-expanded", "false");
+  });
+  portal.append(portalButton, portalMenu);
+  hero.append(media, copy, actionBar, stat, portal);
+  return hero;
+}
+
+function worldActionsFor(franchise) {
+  const catalog = { icon: "storage", label: { zh: "商品目录", ko: "상품 목록", en: "Catalog", ja: "商品一覧" }, run: () => openFranchiseCatalog(franchise) };
+  const collection = { icon: "vault", label: { zh: "我的收藏", ko: "내 컬렉션", en: "My collection", ja: "マイコレクション" }, run: () => navigateToCollectionView("owned") };
+  if (franchise === "gundam") {
+    return [
+      { icon: "signal", label: { zh: "宇宙时间线", ko: "우주 연표", en: "Timeline", ja: "宇宙年表" }, run: () => openGuide("timeline") },
+      { icon: "mecha", label: { zh: "作品图鉴", ko: "작품 도감", en: "Work atlas", ja: "作品図鑑" }, run: () => openGuide("gundam") },
+      { icon: "news", label: { zh: "PB 日本", ko: "PB 일본", en: "PB Japan", ja: "PB 日本" }, run: () => navigateToPBandai("gundam") },
+    ];
+  }
+  if (franchise === "armored_core") {
+    return [
+      { icon: "garage", label: { zh: "机体档案", ko: "기체 파일", en: "AC archive", ja: "機体記録" }, run: () => openGuide("armored_core") },
+      catalog,
+      { icon: "mission", label: { zh: "PB / 新品", ko: "PB / 신작", en: "PB / New", ja: "PB / 新作" }, run: () => navigateToPBandai("armored_core") },
+    ];
+  }
+  if (franchise === "pokemon") {
+    return [
+      { icon: "dex", label: { zh: "世代图鉴", ko: "세대 도감", en: "Generation dex", ja: "世代図鑑" }, run: () => openGuide("pokemon") },
+      catalog,
+      collection,
+    ];
+  }
+  if (franchise === "fate") {
+    return [
+      { icon: "observe", label: { zh: "章节长卷", ko: "장 연표", en: "Chapter chronicle", ja: "章の長巻" }, run: () => openGuide("fate") },
+      catalog,
+      collection,
+    ];
+  }
+  return [
+    { icon: "combo", label: { zh: "整机图鉴", ko: "콤보 도감", en: "Combo atlas", ja: "構成図鑑" }, run: () => openGuide("bbx") },
+    { icon: "gear", label: { zh: "部件库", ko: "파츠", en: "Parts", ja: "パーツ" }, run: () => openGuide("parts") },
+    catalog,
+  ];
+}
+
+function createWorldGroupButton(group, franchise, className = "world-node") {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = className;
+  const art = document.createElement("span");
+  art.className = "world-node-art";
+  const imageUrl = worldGroupImage(group, franchise);
+  if (imageUrl) {
+    const image = document.createElement("img");
+    image.alt = worldText(group.labels);
+    setImageFallbackChain(image, [imageUrl], () => art.classList.add("is-missing"));
+    art.append(image);
+  } else {
+    art.classList.add("is-missing");
+    art.innerHTML = worldIconMarkup(franchise);
+  }
+  const progress = worldGroupProgress(group);
+  const text = document.createElement("span");
+  text.className = "world-node-text";
+  text.innerHTML = `<strong>${escapeHtml(worldText(group.labels))}</strong><em>${escapeHtml(worldText(group.subtitle))}</em><small>${progress.lit}/${progress.total || 0}</small>`;
+  button.append(art, text);
+  button.addEventListener("click", () => openWorldGroup(group));
+  return button;
+}
+
+function worldSectionHeading(title, meta = "") {
+  const head = document.createElement("div");
+  head.className = "world-section-heading";
+  head.innerHTML = `<strong>${escapeHtml(worldText(title))}</strong>${meta ? `<span>${escapeHtml(meta)}</span>` : ""}`;
+  return head;
+}
+
+function renderGundamWorld(container, world, kits, groups) {
+  container.append(createWorldHero(world, kits, worldActionsFor("gundam"), "gundam"));
+  const route = document.createElement("section");
+  route.className = "gundam-era-route";
+  route.append(worldSectionHeading({ zh: "宇宙航路", ko: "우주 항로", en: "Universe routes", ja: "宇宙航路" }, `${groups.length}`));
+  const rail = document.createElement("div");
+  rail.className = "gundam-era-rail";
+  for (const group of groups) rail.append(createWorldGroupButton(group, "gundam", "gundam-era-node"));
+  route.append(rail);
+  container.append(route);
+}
+
+function renderArmoredCoreWorld(container, world, kits, groups) {
+  container.append(createWorldHero(world, kits, worldActionsFor("armored_core"), "armored-core"));
+  const board = document.createElement("section");
+  board.className = "ac-hangar-board";
+  board.append(worldSectionHeading({ zh: "游戏档案", ko: "게임 아카이브", en: "Game archive", ja: "ゲーム記録" }, "RAVEN DATABASE"));
+  const rack = document.createElement("div");
+  rack.className = "ac-generation-rack";
+  for (const group of groups) rack.append(createWorldGroupButton(group, "armored_core", "ac-generation-row"));
+  board.append(rack);
+  const featured = newestWorldKit(kits);
+  if (featured) {
+    const machine = document.createElement("button");
+    machine.type = "button";
+    machine.className = "ac-featured-machine";
+    const art = document.createElement("span");
+    art.className = "ac-machine-art";
+    appendImageWithFallback(art, featured, { alt: kitShortName(featured) });
+    const copy = document.createElement("span");
+    copy.innerHTML = `<em>NEW FRAME</em><strong>${escapeHtml(kitShortName(featured))}</strong><small>${escapeHtml([seriesLabelFromKit(featured), gradeShortLabel(featured)].filter(Boolean).join(" // "))}</small>`;
+    machine.append(art, copy);
+    machine.addEventListener("click", () => openDetail(featured));
+    board.append(machine);
+  }
+  container.append(board);
+}
+
+function renderPokemonWorld(container, world, kits, groups) {
+  container.append(createWorldHero(world, kits, worldActionsFor("pokemon"), "pokemon"));
+  const journal = document.createElement("section");
+  journal.className = "pokemon-field-journal";
+  journal.append(worldSectionHeading({ zh: "地区与世代", ko: "지방과 세대", en: "Regions & generations", ja: "地方と世代" }, `${groups.length}`));
+  const map = document.createElement("div");
+  map.className = "pokemon-region-map";
+  groups.forEach((group, index) => {
+    const card = createWorldGroupButton(group, "pokemon", "pokemon-region-stamp");
+    card.style.setProperty("--region-index", index);
+    map.append(card);
+  });
+  journal.append(map);
+  const types = new Map();
+  for (const kit of kits) {
+    const label = itemTypeLabel(itemTypeKeyForKit(kit));
+    types.set(label, (types.get(label) || 0) + 1);
+  }
+  const habitats = document.createElement("div");
+  habitats.className = "pokemon-habitat-strip";
+  [...types.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5).forEach(([label, count]) => {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.innerHTML = `<strong>${escapeHtml(label)}</strong><span>${count}</span>`;
+    chip.addEventListener("click", () => openFranchiseCatalog("pokemon"));
+    habitats.append(chip);
+  });
+  journal.append(habitats);
+  container.append(journal);
+}
+
+function renderFateWorld(container, world, kits, groups) {
+  container.append(createWorldHero(world, kits, worldActionsFor("fate"), "fate"));
+  const archive = document.createElement("section");
+  archive.className = "fate-archive";
+  const works = groups.filter((group) => !String(group.id).startsWith("fgo_"));
+  const chapters = groups.filter((group) => String(group.id).startsWith("fgo_"));
+  archive.append(worldSectionHeading({ zh: "作品书库", ko: "작품 서고", en: "Work archive", ja: "作品書庫" }, `${works.length}`));
+  const shelf = document.createElement("div");
+  shelf.className = "fate-work-shelf";
+  for (const group of works) shelf.append(createWorldGroupButton(group, "fate", "fate-work-volume"));
+  archive.append(shelf);
+  archive.append(worldSectionHeading({ zh: "FGO 章节长卷", ko: "FGO 장 연표", en: "FGO chapter chronicle", ja: "FGO 章の長巻" }, `${chapters.length}`));
+  const chronicle = document.createElement("div");
+  chronicle.className = "fate-chapter-chronicle";
+  for (const group of chapters) chronicle.append(createWorldGroupButton(group, "fate", "fate-chapter-node"));
+  archive.append(chronicle);
+  container.append(archive);
+}
+
+function renderBeybladeWorld(container, world, kits) {
+  container.append(createWorldHero(world, kits, worldActionsFor("beyblade"), "beyblade"));
+  const arena = document.createElement("section");
+  arena.className = "bbx-arena-board";
+  arena.append(worldSectionHeading({ zh: "X-TREME 装备台", ko: "X-TREME 장비", en: "X-TREME deck", ja: "X-TREME デッキ" }, "3-ON-3"));
+  const deck = document.createElement("div");
+  deck.className = "bbx-component-deck";
+  const partTypes = [
+    ["blade", { zh: "刀盘", ko: "블레이드", en: "Blade", ja: "ブレード" }],
+    ["ratchet", { zh: "齿轮", ko: "라쳇", en: "Ratchet", ja: "ラチェット" }],
+    ["bit", { zh: "轴尖", ko: "비트", en: "Bit", ja: "ビット" }],
+  ];
+  for (const [type, label] of partTypes) {
+    const count = state.bbx?.partsByType?.get(type)?.length || 0;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `bbx-component-slot is-${type}`;
+    button.innerHTML = `<span>${worldIconMarkup("gear")}</span><em>${escapeHtml(worldText(label))}</em><strong>${count || "--"}</strong>`;
+    button.addEventListener("click", () => {
+      state.bbxPartType = type;
+      openGuide("parts");
+    });
+    deck.append(button);
+  }
+  arena.append(deck);
+  const lines = document.createElement("div");
+  lines.className = "bbx-line-switches";
+  for (const line of ["BX", "UX", "CX", "限定"]) {
+    const count = kits.filter((kit) => {
+      const searchable = [kit.grade_code, kit.subline, kitDisplayName(kit), ...(kit.tags || [])].filter(Boolean).join(" ").toUpperCase();
+      return line === "限定" ? Boolean(kit.is_limited || kit.limited_type || /LIMIT|限定|EXCLUSIVE/.test(searchable)) : new RegExp(`\\b${line}[- ]`).test(searchable);
+    }).length;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.innerHTML = `<strong>${line}</strong><span>${count}</span>`;
+    button.addEventListener("click", () => openFranchiseCatalog("beyblade"));
+    lines.append(button);
+  }
+  arena.append(lines);
+  container.append(arena);
+  if (!state.bbx && !state.bbxWorldLoading) {
+    state.bbxWorldLoading = true;
+    ensureBbxData().then(() => {
+      state.bbxWorldLoading = false;
+      if (state.activeView === "home" && state.franchise === "beyblade") renderWorldSection();
+    }).catch(() => { state.bbxWorldLoading = false; });
+  }
+}
+
 function renderWorldSection() {
   if (!elements.worldSection) return;
   const world = WORLD_COPY[state.franchise] || WORLD_COPY.gundam;
@@ -4240,56 +4506,15 @@ function renderWorldSection() {
   }
 
   elements.worldSection.innerHTML = "";
-  const hero = document.createElement("div");
-  hero.className = `world-hero world-${state.franchise.replace("_", "-")}`;
-  const copy = document.createElement("div");
-  copy.className = "world-copy";
-  copy.innerHTML = `<span>${escapeHtml(franchiseShortLabel(state.franchise))}</span><strong>${escapeHtml(worldText(world.title))}</strong><p>${escapeHtml(worldText(world.lead))}</p>`;
-  const actions = document.createElement("div");
-  actions.className = "world-actions";
-  for (const action of WORLD_ACTIONS) {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.textContent = worldText(action.label);
-    button.addEventListener("click", () => {
-      if (action.view === "guide") openGuide(world.guideTab);
-      else if (action.view === "collection") navigateToCollectionView("wanted");
-      else switchToView(action.view);
-    });
-    actions.append(button);
-  }
-  const stat = document.createElement("div");
-  stat.className = "world-stat";
-  stat.innerHTML = `<strong>${franchiseKits.length}</strong><span>${escapeHtml(worldText({ zh: "收录", ko: "수록", en: "records", ja: "収録" }))}</span>`;
-  hero.append(copy, actions, stat);
-
-  const rail = document.createElement("div");
-  rail.className = `world-rail world-rail-${world.mode}`;
-  for (const group of groups.slice(0, state.franchise === "fate" ? 18 : 12)) {
-    const item = document.createElement("button");
-    item.type = "button";
-    item.className = "world-node";
-    const image = document.createElement("span");
-    image.className = "world-node-art";
-    const imageUrl = worldGroupImage(group, state.franchise);
-    if (imageUrl) {
-      const img = document.createElement("img");
-      img.alt = worldText(group.labels);
-      setImageFallbackChain(img, [imageUrl], () => image.classList.add("is-missing"));
-      image.append(img);
-    } else {
-      image.classList.add("is-missing");
-      image.textContent = franchiseShortLabel(state.franchise);
-    }
-    const text = document.createElement("span");
-    text.className = "world-node-text";
-    const total = (group.kit_ids || []).length || group.count || (group.works || []).length || (group.items || []).length || 0;
-    text.innerHTML = `<strong>${escapeHtml(worldText(group.labels))}</strong><em>${escapeHtml([worldText(group.subtitle), total ? t("records", { count: total }) : ""].filter(Boolean).join(" · "))}</em>`;
-    item.append(image, text);
-    item.addEventListener("click", () => openWorldGroup(group));
-    rail.append(item);
-  }
-  elements.worldSection.append(hero, rail);
+  elements.worldSection.className = `world-section world-experience world-experience-${state.franchise.replace("_", "-")}`;
+  const renderers = {
+    gundam: renderGundamWorld,
+    armored_core: renderArmoredCoreWorld,
+    pokemon: renderPokemonWorld,
+    fate: renderFateWorld,
+    beyblade: renderBeybladeWorld,
+  };
+  (renderers[state.franchise] || renderGundamWorld)(elements.worldSection, world, franchiseKits, groups);
 }
 
 function renderHomeDashboard() {
@@ -6666,7 +6891,9 @@ function renderUserPage() {
     body.className = "member-row-body";
     const name = document.createElement("strong");
     name.textContent = `${row.name || "member"}${row.is_self ? ` · ${t("workspaceSelf")}` : ""}`;
-    body.append(name);
+    const meta = document.createElement("span");
+    meta.textContent = memberMiniStats(row);
+    body.append(name, meta);
     button.append(avatar, body);
     button.addEventListener("click", () => openMemberProfile(row));
     elements.userMembers.append(button);
@@ -6686,6 +6913,7 @@ function openUserPage() {
   renderUserPage();
   if (!elements.userDialog.open) {
     elements.userDialog.classList.remove("is-closing");
+    pushTransientLayerHistory("user-drawer");
     openDialog(elements.userDialog);
   }
   renderBottomNav();
@@ -6977,43 +7205,6 @@ function setUpdatesMode(mode) {
   renderHomeUpdates();
 }
 
-function bindGuideSwipe() {
-  if (!elements.guideDialog || elements.guideDialog.dataset.swipeBound === "1") return;
-  elements.guideDialog.dataset.swipeBound = "1";
-  let startX = 0;
-  let startY = 0;
-  let startTime = 0;
-  elements.guideDialog.addEventListener(
-    "touchstart",
-    (event) => {
-      startTime = 0;
-      if (state.activeView !== "guide" || event.touches.length !== 1) return;
-      const touch = event.touches[0];
-      if (!swipeZoneAllowed(touch.clientY) || pagerBlockedByTarget(event.target)) return;
-      startX = touch.clientX;
-      startY = touch.clientY;
-      startTime = Date.now();
-    },
-    { passive: true },
-  );
-  elements.guideDialog.addEventListener(
-    "touchend",
-    (event) => {
-      if (!startTime || state.activeView !== "guide") return;
-      const touch = event.changedTouches[0];
-      const dx = touch.clientX - startX;
-      const dy = touch.clientY - startY;
-      const elapsed = Date.now() - startTime;
-      startTime = 0;
-      if (elapsed > 900 || Math.abs(dx) < 64 || Math.abs(dx) < Math.abs(dy) * 1.35) return;
-      const index = GUIDE_TABS.indexOf(state.guideTab || "gundam");
-      const next = dx < 0 ? GUIDE_TABS[index + 1] : GUIDE_TABS[index - 1];
-      if (next) switchGuideTab(next);
-    },
-    { passive: true },
-  );
-}
-
 function loadGuideFullColor() {
   return localStorage.getItem(GUIDE_FULL_COLOR_KEY) === "1";
 }
@@ -7294,6 +7485,9 @@ async function openGundamTimelineGroup(group) {
     grid.append(createGuideWorkCard(work, activeGuideMember()));
   }
   elements.guideUnitKits.append(grid);
+  if (!elements.guideUnitDialog.open) {
+    pushTransientLayerHistory("guide-timeline-group");
+  }
   openDialog(elements.guideUnitDialog);
 }
 
@@ -7327,6 +7521,9 @@ async function openAtlasGroup(group, tab, member = activeGuideMember()) {
       list.append(atlasKitRow(kit, group, tab, member));
     }
     elements.guideUnitKits.append(list);
+  }
+  if (!elements.guideUnitDialog.open) {
+    pushTransientLayerHistory("guide-atlas-group");
   }
   openDialog(elements.guideUnitDialog);
 }
@@ -7398,23 +7595,28 @@ function guideFamilyKeys(works) {
 }
 
 function renderGuideFamilyFilter(familyKeys) {
-  const filter = document.createElement("div");
-  filter.className = "guide-family-filter";
   const selected = state.guideSeriesFilters || new Set();
+  const filter = document.createElement("details");
+  filter.className = "inline-filter-panel guide-family-filter";
+  const summary = document.createElement("summary");
+  const activeText = selected.size ? familyKeys.filter((key) => selected.has(key)).map(guideFamilyLabel).join(" / ") : guideFamilyLabel("all");
+  summary.innerHTML = `<span class="filter-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M7 12h10"/><path d="M10 18h4"/></svg></span><span>${escapeHtml(activeText)}</span>`;
+  const options = document.createElement("div");
+  options.className = "filter-options";
   const all = document.createElement("button");
   all.type = "button";
-  all.className = `guide-family-chip${selected.size ? "" : " is-active"}`;
+  all.className = `filter-option${selected.size ? "" : " is-active"}`;
   all.textContent = guideFamilyLabel("all");
   all.addEventListener("click", () => {
     state.guideSeriesFilters = new Set();
     saveGuideSeriesFilters();
     renderGuide(state.guide);
   });
-  filter.append(all);
+  options.append(all);
   for (const key of familyKeys) {
     const chip = document.createElement("button");
     chip.type = "button";
-    chip.className = `guide-family-chip${selected.has(key) ? " is-active" : ""}`;
+    chip.className = `filter-option${selected.has(key) ? " is-active" : ""}`;
     chip.textContent = guideFamilyLabel(key);
     chip.addEventListener("click", () => {
       state.guideSeriesFilters = state.guideSeriesFilters || new Set();
@@ -7423,8 +7625,9 @@ function renderGuideFamilyFilter(familyKeys) {
       saveGuideSeriesFilters();
       renderGuide(state.guide);
     });
-    filter.append(chip);
+    options.append(chip);
   }
+  filter.append(summary, options);
   elements.guideBody.append(filter);
 }
 
@@ -7442,7 +7645,7 @@ function guideGroupsForWork(work, member = activeGuideMember()) {
     });
 }
 
-function openGuideWork(work, member = activeGuideMember()) {
+function openGuideWork(work, member = activeGuideMember(), options = {}) {
   state.guideUnitBack = null;
   state.activeGuideMember = safeMemberName(typeof member === "string" ? member : member?.name || editableCollectionMember());
   const groups = guideGroupsForWork(work, member);
@@ -7466,6 +7669,9 @@ function openGuideWork(work, member = activeGuideMember()) {
     empty.className = "settings-hint";
     empty.textContent = t("guideNoUnits");
     elements.guideUnitKits.append(empty);
+    if (!elements.guideUnitDialog.open && !options.skipHistory) {
+      pushTransientLayerHistory("guide-work");
+    }
     openDialog(elements.guideUnitDialog);
     return;
   }
@@ -7494,6 +7700,9 @@ function openGuideWork(work, member = activeGuideMember()) {
     grid.append(cell);
   }
   elements.guideUnitKits.append(grid);
+  if (!elements.guideUnitDialog.open && !options.skipHistory) {
+    pushTransientLayerHistory("guide-work");
+  }
   openDialog(elements.guideUnitDialog);
 }
 
@@ -7506,7 +7715,10 @@ function badgeEl(text, className) {
 
 // Tapping a cell shows its merged variants and — the reverse link the user asked
 // for — the matching catalog kits, each with quick add-to-owned/wanted buttons.
-function openGuideUnit(group, status, member = activeGuideMember()) {
+function openGuideUnit(group, status, member = activeGuideMember(), options = {}) {
+  if (!options.skipHistory) {
+    pushTransientLayerHistory("guide-unit");
+  }
   state.activeGuideMember = safeMemberName(typeof member === "string" ? member : member?.name || editableCollectionMember());
   state.guideUnitBack = { workId: Number(group.work_id), member: state.activeGuideMember };
   const isSelfGuide = state.activeGuideMember === editableCollectionMember();
@@ -7564,7 +7776,7 @@ function openGuideUnit(group, status, member = activeGuideMember()) {
         else state.guideManualLit.delete(id);
       }
       saveGuideManualLit();
-      openGuideUnit(group, guideGroupStatus(group, guideCollectionSets(member)), member);
+      openGuideUnit(group, guideGroupStatus(group, guideCollectionSets(member)), member, { skipHistory: true });
       if (state.activeView === "guide") renderGuide(state.guide);
       renderUserGuideValue();
     });
@@ -7592,7 +7804,7 @@ function closeGuideUnitLayer() {
     const work = state.guide?.works?.find((item) => Number(item.work_id) === Number(workId));
     state.guideUnitBack = null;
     if (work) {
-      openGuideWork(work, member);
+      openGuideWork(work, member, { skipHistory: true });
       return;
     }
   }
@@ -7646,7 +7858,7 @@ function guideAddButton(kit, type, active, group, groupStatus, member = activeGu
   button.disabled = !canEditSharedData();
   button.addEventListener("click", () => {
     setKitCollectionStatus(kit.kit_id, type, !active);
-    openGuideUnit(group, guideGroupStatus({ ...group, kit_ids: group.kit_ids }, guideCollectionSets(member)), member);
+    openGuideUnit(group, guideGroupStatus({ ...group, kit_ids: group.kit_ids }, guideCollectionSets(member)), member, { skipHistory: true });
     if (state.activeView === "guide") renderGuide(state.guide);
     renderUserGuideValue();
   });
@@ -8355,6 +8567,15 @@ function memberGuideLitValue(memberName) {
   return `${lit}/${state.guide.groups.length}`;
 }
 
+function memberMiniStats(member) {
+  const name = member?.name || editableCollectionMember();
+  return [
+    `${t("ownedList")} ${memberCollectionKits(name, "owned").length}`,
+    `${t("wantedList")} ${memberCollectionKits(name, "wanted").length}`,
+    `${t("pictureBook")} ${memberGuideLitValue(name)}`,
+  ].join(" · ");
+}
+
 function memberProfileEditable() {
   return elements.memberDialog?.dataset.self === "1";
 }
@@ -8376,6 +8597,7 @@ function openMemberActionSheet() {
   for (const button of [elements.memberActionChangeBackground, elements.memberActionChangeAvatar, elements.memberActionRename, elements.memberActionTags]) {
     if (button) button.hidden = !editable;
   }
+  pushTransientLayerHistory("member-actions");
   openDialog(elements.memberActionDialog);
 }
 
@@ -8395,6 +8617,7 @@ function viewMemberProfileImage(kind) {
     elements.profileImageTitle.textContent = t(kind === "avatar" ? "viewProfileAvatar" : "viewProfileBackground");
     elements.profileImagePreview.src = url;
     elements.profileImagePreview.alt = elements.profileImageTitle.textContent;
+    pushTransientLayerHistory(`profile-${kind}`);
     openDialog(elements.profileImageDialog);
   }
 }
@@ -8423,6 +8646,7 @@ function openUserPanelDialog(panel) {
   } else {
     renderFavoritesPanel(elements.userPanelBody);
   }
+  pushTransientLayerHistory(`user-panel-${panel}`);
   openDialog(elements.userPanelDialog);
 }
 
@@ -8493,7 +8717,9 @@ function renderFriendsPanel(container) {
     body.className = "member-row-body";
     const name = document.createElement("strong");
     name.textContent = `${member.name || "member"}${member.is_self ? ` · ${t("workspaceSelf")}` : ""}`;
-    body.append(name);
+    const meta = document.createElement("span");
+    meta.textContent = memberMiniStats(member);
+    body.append(name, meta);
     row.append(avatar, body);
     row.addEventListener("click", () => {
       closeDialog(elements.userPanelDialog);
@@ -8668,6 +8894,9 @@ function openMemberProfile(member) {
 
   fillMemberStrip(elements.memberDialogOwned, owned);
   fillMemberStrip(elements.memberDialogWanted, wanted);
+  if (!elements.memberDialog.open) {
+    pushTransientLayerHistory("member-profile");
+  }
   openDialog(elements.memberDialog);
   if (!state.guide) {
     ensureGuideData()
@@ -9062,8 +9291,9 @@ function renderFranchiseFilters() {
     const active = activeCollectionType()
       ? state.collectionFilter?.franchise === franchise
       : state.franchise === franchise;
-    button.className = `segment-button${active ? " is-active" : ""}`;
-    button.textContent = franchiseShortLabel(franchise);
+    button.className = `segment-button world-switch-button${active ? " is-active" : ""}`;
+    button.innerHTML = `${worldIconMarkup(franchise, "world-switch-icon")}<span>${escapeHtml(franchiseShortLabel(franchise))}</span>`;
+    button.setAttribute("aria-label", franchiseLabel(franchise));
     button.addEventListener("click", () => {
       if (activeCollectionType()) {
         state.collectionFilter = { ...(state.collectionFilter || {}), franchise, series: "all", grade: "all" };
@@ -9082,6 +9312,7 @@ function renderFranchiseFilters() {
       state.selectedKit = null;
       render();
       persistViewState({ mode: "push" });
+      window.scrollTo({ top: 0, behavior: "auto" });
     });
     elements.franchiseList.append(button);
   }

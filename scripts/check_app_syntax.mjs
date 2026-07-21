@@ -23,6 +23,7 @@ const files = [
   "app/collection-store.js",
   "app/search-index-store.js",
   "app/view-state.js",
+  "app/world-themes.js",
 ];
 
 let failed = false;

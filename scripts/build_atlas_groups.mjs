@@ -20,6 +20,35 @@ const normalized = (value) =>
     .trim();
 const imageOf = (kit) => kit?.images?.box_art_url || kit?.gallery_image_urls?.[0] || "";
 
+const FGO_CHAPTER_LABELS = {
+  fgo_100: lang("特异点 F 冬木", "특이점 F 후유키", "Singularity F · Fuyuki", "特異点F 冬木"),
+  fgo_101: lang("第一特异点 奥尔良", "제1특이점 오를레앙", "Singularity I · Orleans", "第一特異点 オルレアン"),
+  fgo_102: lang("第二特异点 七丘之城", "제2특이점 세프템", "Singularity II · Septem", "第二特異点 セプテム"),
+  fgo_103: lang("第三特异点 俄刻阿诺斯", "제3특이점 오케아노스", "Singularity III · Okeanos", "第三特異点 オケアノス"),
+  fgo_104: lang("第四特异点 伦敦", "제4특이점 런던", "Singularity IV · London", "第四特異点 ロンドン"),
+  fgo_105: lang("第五特异点 北美神话大战", "제5특이점 북미 신화대전", "Singularity V · E Pluribus Unum", "第五特異点 北米神話大戦"),
+  fgo_106: lang("第六特异点 卡美洛", "제6특이점 카멜롯", "Singularity VI · Camelot", "第六特異点 キャメロット"),
+  fgo_107: lang("第七特异点 巴比伦尼亚", "제7특이점 바빌로니아", "Singularity VII · Babylonia", "第七特異点 バビロニア"),
+  fgo_108: lang("终局特异点 所罗门", "종국특이점 솔로몬", "Final Singularity · Solomon", "終局特異点 ソロモン"),
+  fgo_201: lang("亚种特异点 I 新宿", "아종특이점 I 신주쿠", "Pseudo-Singularity I · Shinjuku", "亜種特異点I 新宿"),
+  fgo_202: lang("亚种特异点 II 雅戈泰", "아종특이점 II 아가르타", "Pseudo-Singularity II · Agartha", "亜種特異点II アガルタ"),
+  fgo_203: lang("英灵剑豪七番胜负 下总国", "영령검호 시모사", "Epic of Remnant · Shimousa", "英霊剣豪七番勝負 下総国"),
+  fgo_204: lang("亚种特异点 IV 塞勒姆", "아종특이점 IV 세일럼", "Pseudo-Singularity IV · Salem", "亜種特異点IV セイレム"),
+  fgo_301: lang("Lostbelt No.1 阿纳斯塔西娅", "이문대 No.1 아나스타샤", "Lostbelt No.1 · Anastasia", "Lostbelt No.1 アナスタシア"),
+  fgo_302: lang("Lostbelt No.2 诸神黄昏", "이문대 No.2 괴터데머룽", "Lostbelt No.2 · Gotterdammerung", "Lostbelt No.2 ゲッテルデメルング"),
+  fgo_303: lang("Lostbelt No.3 SIN", "이문대 No.3 SIN", "Lostbelt No.3 · SIN", "Lostbelt No.3 SIN"),
+  fgo_304: lang("Lostbelt No.4 创世灭亡轮回", "이문대 No.4 유가 크셰트라", "Lostbelt No.4 · Yuga Kshetra", "Lostbelt No.4 ユガ・クシェートラ"),
+  fgo_305: lang("Lostbelt No.5 亚特兰蒂斯", "이문대 No.5 아틀란티스", "Lostbelt No.5 · Atlantis", "Lostbelt No.5 アトランティス"),
+  fgo_306: lang("Lostbelt No.5 奥林波斯", "이문대 No.5 올림포스", "Lostbelt No.5 · Olympus", "Lostbelt No.5 オリュンポス"),
+  fgo_307: lang("地狱界曼荼罗 平安京", "지옥계만다라 헤이안쿄", "Heian-kyo", "地獄界曼荼羅 平安京"),
+  fgo_308: lang("Lostbelt No.6 妖精圆桌领域", "이문대 No.6 아발론 르 페이", "Lostbelt No.6 · Avalon le Fae", "Lostbelt No.6 アヴァロン・ル・フェ"),
+  fgo_309: lang("通古斯卡 圣域", "퉁구스카 생추어리", "Tunguska Sanctuary", "ツングースカ・サンクチュアリ"),
+  fgo_310: lang("死想显现界域 特劳姆", "사상현현계역 트라움", "Traum", "死想顕現界域 トラオム"),
+  fgo_311: lang("Lostbelt No.7 纳维·米克特兰", "이문대 No.7 나우이 믹틀란", "Lostbelt No.7 · Nahui Mictlan", "Lostbelt No.7 ナウイ・ミクトラン"),
+  fgo_402: lang("奏章 I Paper Moon", "주장 I 페이퍼 문", "Ordeal Call I · Paper Moon", "奏章I ペーパームーン"),
+  fgo_403: lang("奏章 II Id", "주장 II 이드", "Ordeal Call II · Id", "奏章II イド"),
+};
+
 function namesFor(label, fallback = "") {
   if (!label) return lang(fallback, fallback, fallback, fallback);
   return {
@@ -61,16 +90,21 @@ function pokemonGroups() {
     count: 0,
   }));
   groups.push({
-    id: "pokemon_unsorted",
-    labels: lang("宝可梦 未校对", "포켓몬 미분류", "Pokemon Unsorted", "ポケモン 未分類"),
-    subtitle: lang("没有明确 species / 游戏世代", "명확한 포켓몬/세대 없음", "Needs species or game tag", "species / 世代タグ待ち"),
+    id: "pokemon_general",
+    labels: lang("全世代周边", "전 세대 굿즈", "All-generation goods", "全世代グッズ"),
+    subtitle: lang("没有固定宝可梦或游戏世代", "특정 포켓몬/세대가 없는 상품", "Goods without a single species or generation", "特定のポケモン・世代を持たない商品"),
     image: "",
     items: [],
     kit_ids: [],
     count: 0,
   });
   const byId = new Map(groups.map((group) => [group.id, group]));
-  const versionHints = [
+  const regionHints = [
+    ["gen1", /kanto|カントー|関都|관동|关都|關都|red|green|blue|yellow/i],
+    ["gen2", /johto|ジョウト|城都|성도|gold|silver|crystal/i],
+    ["gen3", /hoenn|ホウエン|丰缘|豐緣|호연|ruby|sapphire|emerald/i],
+    ["gen4", /sinnoh|シンオウ|神奥|神奧|신오|diamond|pearl|platinum/i],
+    ["gen5", /unova|イッシュ|合众|合眾|하나|black|white/i],
     ["gen6", /\bxy\b|xy|カロス|kalos/i],
     ["gen7", /sun|moon|サン|ムーン|アローラ|alola/i],
     ["gen8", /sword|shield|ソード|シールド|galar|ガラル/i],
@@ -82,7 +116,7 @@ function pokemonGroups() {
     const dex = prefixDex([kit.names?.en, kit.names?.ja, kit.names?.zh, kit.names?.ko].filter(Boolean).join(" "));
     let groupId = dex ? speciesToGeneration.get(dex) : null;
     if (!groupId) {
-      groupId = versionHints.find(([, pattern]) => pattern.test(rawText))?.[0] || null;
+      groupId = regionHints.find(([, pattern]) => pattern.test(rawText))?.[0] || null;
     }
     if (!groupId) {
       for (const [id, speciesNames] of speciesNamesByGeneration) {
@@ -92,7 +126,7 @@ function pokemonGroups() {
         }
       }
     }
-    const group = byId.get(groupId || "pokemon_unsorted");
+    const group = byId.get(groupId || "pokemon_general");
     group.kit_ids.push(kit.kit_id);
     group.count += 1;
     if (!group.image) group.image = imageOf(kit);
@@ -110,7 +144,7 @@ function keywordMatcher(entries) {
 function fateGroups() {
   const chapters = (taxonomy.fate?.fgo_chapters || []).map((chapter) => ({
     id: chapter.id,
-    labels: namesFor(chapter.labels),
+    labels: FGO_CHAPTER_LABELS[chapter.id] || namesFor(chapter.labels),
     subtitle: { zh: chapter.age || "FGO", ko: chapter.age || "FGO", en: chapter.age || "FGO", ja: chapter.age || "FGO" },
     image: chapter.image || "",
     aliases: chapter.aliases || [],
@@ -129,9 +163,9 @@ function fateGroups() {
     count: 0,
   }));
   const unsorted = {
-    id: "fate_unsorted",
-    labels: lang("Fate / FGO 未校对", "Fate / FGO 미분류", "Fate / FGO Unsorted", "Fate / FGO 未分類"),
-    subtitle: lang("待补角色/章节关键词", "캐릭터/장 키워드 필요", "Needs character/chapter keywords", "キャラ/章キーワード待ち"),
+    id: "fate_general",
+    labels: lang("Fate / FGO 角色周边", "Fate / FGO 캐릭터 굿즈", "Fate / FGO character goods", "Fate / FGO キャラクターグッズ"),
+    subtitle: lang("没有固定章节归属", "특정 장에 속하지 않는 상품", "Goods without a fixed chapter", "特定の章に属さない商品"),
     image: "",
     aliases: [],
     items: [],
@@ -142,7 +176,7 @@ function fateGroups() {
   const matchWork = keywordMatcher(works);
   const matchChapter = keywordMatcher(chapters);
   for (const kit of kits.filter((item) => item.franchise === "fate" && item.data_status !== "hidden")) {
-    const group = matchWork(kit) || matchChapter(kit) || unsorted;
+    const group = matchChapter(kit) || matchWork(kit) || unsorted;
     group.kit_ids.push(kit.kit_id);
     group.count += 1;
     if (!group.image) group.image = imageOf(kit);
@@ -162,9 +196,9 @@ function armoredCoreGroups() {
     count: 0,
   }));
   const unsorted = {
-    id: "ac_unsorted",
-    labels: lang("AC 未校对", "AC 미분류", "AC Unsorted", "AC 未分類"),
-    subtitle: lang("待确认游戏来源", "게임 출처 확인 필요", "Needs game source", "ゲーム出典待ち"),
+    id: "ac_general",
+    labels: lang("跨作机体 / 周边", "크로스 타이틀 기체 / 굿즈", "Cross-title machines / goods", "作品横断機体 / グッズ"),
+    subtitle: lang("没有固定游戏世代", "특정 게임 세대 없음", "No single game era", "特定のゲーム世代なし"),
     image: "",
     aliases: [],
     items: [],
