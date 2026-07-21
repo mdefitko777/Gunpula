@@ -1383,7 +1383,7 @@ function closeSettings(options = {}) {
 }
 
 function bindEvents() {
-  elements.settingsOpen.addEventListener("click", openSettings);
+  elements.settingsOpen.addEventListener("click", openUserPage);
   elements.settingsClose.addEventListener("click", closeSettings);
   elements.settingsTabs?.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-settings-tab]");
@@ -1447,6 +1447,11 @@ function bindEvents() {
     let nextView = button.dataset.view;
     if (nextView === "settings") {
       openSettings();
+      return;
+    }
+    if (nextView === "me") {
+      openUserPage();
+      renderBottomNav();
       return;
     }
     if (nextView === "collection") {
@@ -2394,10 +2399,10 @@ function updateRadialSelection(x, y) {
 function radialMenuItems() {
   if (state.activeView === "home") {
     return [
-      { id: "view:catalog", label: t("catalogNav") },
-      { id: "view:updates", label: t("recentUpdatesNav") },
-      { id: "view:collection", label: t("collectionNav") },
+      { id: "view:updates", label: t("discoverNav") },
       { id: "view:guide", label: t("pictureBook") },
+      { id: "view:collection", label: t("collectionNav") },
+      { id: "view:me", label: t("myNav") },
     ];
   }
   if (COLLECTION_TYPES.includes(state.activeView)) {
@@ -2420,6 +2425,10 @@ function radialMenuItems() {
 function activateRadialSelection(id) {
   const [type, value] = String(id).split(":");
   if (type === "view") {
+    if (value === "me") {
+      openUserPage();
+      return;
+    }
     switchToView(value === "collection" ? (COLLECTION_TYPES.includes(state.lastCollectionTab) ? state.lastCollectionTab : "wanted") : value);
   } else if (type === "collection") {
     switchToView(value);
@@ -3805,11 +3814,15 @@ function renderCatalogDataChanged() {
 
 function renderBottomNav() {
   elements.bottomNav.querySelectorAll("button[data-view]").forEach((button) => {
+    const userOpen = Boolean(elements.userDialog?.open);
+    const isDiscover = button.dataset.view === "updates" && ["updates", "catalog", "pbandai"].includes(state.activeView);
     button.classList.toggle(
       "is-active",
-      button.dataset.view === state.activeView ||
-        (state.activeView === "pbandai" && button.dataset.view === "catalog") ||
-        (button.dataset.view === "collection" && COLLECTION_TYPES.includes(state.activeView)),
+      userOpen
+        ? button.dataset.view === "me"
+        : button.dataset.view === state.activeView ||
+            isDiscover ||
+            (button.dataset.view === "collection" && COLLECTION_TYPES.includes(state.activeView)),
     );
   });
 }
@@ -4277,6 +4290,27 @@ function favoriteUpdateSummaryCards(items) {
   return cards;
 }
 
+function renderDiscoveryChannels(mode, count) {
+  if (!elements.homeUpdateSummary) return;
+  elements.homeUpdateSummary.hidden = false;
+  elements.homeUpdateSummary.classList.add("is-channels");
+  elements.homeUpdateSummary.innerHTML = "";
+  const channels = [
+    { label: t("discoverCatalog"), active: state.activeView === "catalog", action: () => switchToView("catalog") },
+    { label: t("recentDaysShort"), active: mode === "recent" && state.activeView === "updates", action: () => setUpdatesMode("recent"), count },
+    { label: t("weekOnSaleShort"), active: mode === "week" && state.activeView === "updates", action: () => setUpdatesMode("week") },
+    { label: t("discoverPremiumBandai"), active: state.activeView === "pbandai", action: () => navigateToPBandai(state.franchise), count: pbandaiItemsForFranchise(state.franchise).length },
+  ];
+  for (const channel of channels) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `discover-channel${channel.active ? " is-active" : ""}`;
+    button.textContent = Number.isFinite(channel.count) ? `${channel.label} ${channel.count}` : channel.label;
+    button.addEventListener("click", channel.action);
+    elements.homeUpdateSummary.append(button);
+  }
+}
+
 async function registerUpdatePeriodicSync() {
   if (!state.updateNotifications || !("serviceWorker" in navigator)) {
     return;
@@ -4319,10 +4353,7 @@ function renderHomeUpdates() {
   elements.updatesWeekButton?.classList.toggle("is-active", mode === "week");
   const sourceItems = mode === "recent" ? recentFeedKits() : mode === "week" ? weekOnSaleKits() : releaseItemsForMonth(state.releaseMonth);
   const items = sortByPreference(sourceItems.filter((kit) => kit.franchise === state.franchise && kitMatchesSearchQuery(kit)));
-  if (elements.homeUpdateSummary) {
-    elements.homeUpdateSummary.hidden = true;
-    elements.homeUpdateSummary.innerHTML = "";
-  }
+  renderDiscoveryChannels(mode, items.length);
   if (elements.sourceHealthStrip) {
     elements.sourceHealthStrip.hidden = true;
     elements.sourceHealthStrip.innerHTML = "";
@@ -6386,6 +6417,7 @@ function openUserPage() {
     elements.userDialog.classList.remove("is-closing");
     openDialog(elements.userDialog);
   }
+  renderBottomNav();
 }
 
 function closeUserPage(options = {}) {
@@ -6395,6 +6427,7 @@ function closeUserPage(options = {}) {
   if (options.immediate) {
     elements.userDialog.classList.remove("is-closing");
     closeDialog(elements.userDialog);
+    renderBottomNav();
     return;
   }
   // Mirror the slide-in with a slide-out before actually closing the dialog.
@@ -6404,6 +6437,7 @@ function closeUserPage(options = {}) {
     if (elements.userDialog.open) {
       closeDialog(elements.userDialog);
     }
+    renderBottomNav();
   }, 190);
 }
 

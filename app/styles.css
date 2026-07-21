@@ -1134,6 +1134,11 @@ h1 {
   color: var(--ink);
 }
 
+#updatesRecentButton,
+#updatesWeekButton {
+  display: none;
+}
+
 .home-update-summary {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -5750,6 +5755,36 @@ body.is-radial-active {
   overflow-x: auto;
   color: var(--muted);
   font-size: 12px;
+}
+
+.home-update-summary.is-channels {
+  gap: 8px;
+  margin: 6px 0 14px;
+}
+
+.discover-channel {
+  min-height: 40px;
+  flex: 0 0 auto;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #ffffff;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.discover-channel:hover,
+.discover-channel:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--line));
+  color: var(--ink);
+  outline: 0;
+}
+
+.discover-channel.is-active {
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--line));
+  background: var(--accent-soft);
+  color: var(--accent-deep);
 }
 
 .home-update-summary > *,
