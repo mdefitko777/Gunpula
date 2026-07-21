@@ -4010,7 +4010,8 @@ function renderHome() {
     const coverButton = document.createElement("button");
     coverButton.type = "button";
     coverButton.className = "home-cover-button";
-    coverButton.textContent = t("changeCover");
+    coverButton.setAttribute("aria-label", t("changeCover"));
+    coverButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 20 8-8-4-4-8 8-2 6z"/><path d="m14 6 4 4"/></svg>`;
     coverButton.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopPropagation();
