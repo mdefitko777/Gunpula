@@ -1705,7 +1705,6 @@ body[data-view="updates"] .source-health-strip {
   color: var(--ink);
 }
 
-body[data-view="home"] .franchise-control,
 body[data-view="home"] .search-field,
 body[data-view="home"] .series-tabs,
 body[data-view="home"] .filter-panel,
@@ -1714,9 +1713,11 @@ body[data-view="home"] .pbandai-section,
 body[data-view="home"] .market-section,
 body[data-view="home"] .collection-section,
 body[data-view="home"] .kit-section,
+body[data-view="owned"] .franchise-control,
 body[data-view="owned"] .series-tabs,
 body[data-view="owned"] .filter-panel,
 body[data-view="owned"] .market-section,
+body[data-view="wanted"] .franchise-control,
 body[data-view="wanted"] .series-tabs,
 body[data-view="wanted"] .filter-panel,
 body[data-view="wanted"] .market-section,
@@ -1744,7 +1745,6 @@ body[data-view="market"] .kit-section {
   display: none;
 }
 
-body[data-view="guide"] .franchise-control,
 body[data-view="guide"] .search-field,
 body[data-view="guide"] .series-tabs,
 body[data-view="guide"] .filter-panel,
@@ -3479,16 +3479,26 @@ body[data-view="owned"] .section-head h2 {
 }
 
 .detail-info h2 {
-  margin-top: 9px;
-  font-size: 25px;
-  line-height: 1.2;
+  margin-top: 6px;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
   overflow-wrap: anywhere;
 }
 
+.detail-kicker {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
 .detail-info p {
-  margin-top: 9px;
+  margin-top: 8px;
   color: var(--muted);
-  line-height: 1.4;
+  font-size: 14px;
+  line-height: 1.5;
   overflow-wrap: anywhere;
 }
 
@@ -3654,23 +3664,37 @@ body[data-view="owned"] .section-head h2 {
 
 .detail-meta {
   display: grid;
-  grid-template-columns: 92px minmax(0, 1fr);
-  gap: 10px 14px;
+  grid-template-columns: 88px minmax(0, 1fr);
   margin: 22px 0 0;
-  padding: 0;
+  padding: 4px 0;
+  border-top: 1px solid var(--line);
 }
 
 .detail-meta dt {
+  display: flex;
+  align-items: center;
+  padding: 9px 0;
   color: var(--faint);
   font-size: 12.5px;
   font-weight: 400;
+  border-bottom: 1px solid var(--line);
+}
+
+.detail-meta dt:last-of-type,
+.detail-meta dd:last-of-type {
+  border-bottom: 0;
 }
 
 .detail-meta dd {
+  display: flex;
+  align-items: center;
   margin: 0;
+  padding: 9px 0;
   font-size: 14px;
-  line-height: 1.35;
+  font-weight: 500;
+  line-height: 1.4;
   overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--line);
 }
 
 .detail-market-panel {
@@ -6890,6 +6914,14 @@ body.is-radial-active {
   gap: 24px;
 }
 
+/* Collection + user page stay neutral — the per-world accent (Atlas 3.0,
+   applied by data-franchise) is overridden back to the app default here. */
+body[data-world-scoped="false"] {
+  --accent: #2f8f8a !important;
+  --accent-soft: #e6f4f1 !important;
+  --accent-deep: #0c6270 !important;
+}
+
 .world-experience .world-experience-hero {
   min-height: 310px;
   grid-template-columns: minmax(0, 1.1fr) minmax(230px, 0.9fr);
@@ -7018,6 +7050,38 @@ body.is-radial-active {
   z-index: 4;
   top: 18px;
   left: 22px;
+}
+
+.world-cover-edit {
+  position: absolute;
+  z-index: 4;
+  top: 18px;
+  right: 22px;
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  border: 1px solid var(--world-line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--world-surface) 88%, transparent);
+  color: var(--world-ink);
+  font-size: 11px;
+  font-weight: 800;
+  backdrop-filter: blur(10px);
+}
+
+.world-cover-edit svg {
+  width: 14px;
+  height: 14px;
+}
+
+.home-grid.is-empty {
+  display: none;
+}
+
+.user-dashboard {
+  margin-top: 4px;
 }
 
 .world-portal-launcher {

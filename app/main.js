@@ -277,7 +277,7 @@ const state = {
   homeCovers: loadHomeCovers(),
   recentViewed: loadRecentViewed(),
   releaseMonth: localStorage.getItem(RELEASE_MONTH_KEY) || "",
-  updatesMode: ["recent", "week", "month"].includes(localStorage.getItem(UPDATES_MODE_KEY)) ? localStorage.getItem(UPDATES_MODE_KEY) : "recent",
+  updatesMode: ["recent", "month"].includes(localStorage.getItem(UPDATES_MODE_KEY)) ? localStorage.getItem(UPDATES_MODE_KEY) : "recent",
   radial: { timer: null, active: false, startX: 0, startY: 0, lastX: 0, lastY: 0, touchId: null, selected: null, target: null, suppressClick: false },
   pager: { active: false, touchId: null, startX: 0, startY: 0, deltaX: 0, target: null, settling: false, suppressClick: false, blockedByTarget: false },
   syncConfig: loadSyncConfig(),
@@ -410,7 +410,7 @@ const elements = {
   updatesOpenSettings: document.querySelector("#updatesOpenSettings"),
   updatesDateInput: document.querySelector("#updatesDateInput"),
   updatesRecentButton: document.querySelector("#updatesRecentButton"),
-  updatesWeekButton: document.querySelector("#updatesWeekButton"),
+  updatesMonthButton: document.querySelector("#updatesMonthButton"),
   avatarInput: document.querySelector("#avatarInput"),
   profileFavorites: document.querySelector("#profileFavorites"),
   favoriteFranchises: document.querySelector("#favoriteFranchises"),
@@ -1001,7 +1001,7 @@ function normalizeState() {
   if (state.activeView === "market") {
     state.activeView = "catalog";
   }
-  if (!["home", "catalog", "updates", "pbandai", "owned", "wanted", "guide"].includes(state.activeView)) {
+  if (!["home", "catalog", "updates", "owned", "wanted", "guide"].includes(state.activeView)) {
     state.activeView = "home";
   }
   if (!THEMES.some((theme) => theme.code === state.theme)) {
@@ -1560,8 +1560,8 @@ function bindEvents() {
   elements.updatesRecentButton?.addEventListener("click", () => {
     setUpdatesMode("recent");
   });
-  elements.updatesWeekButton?.addEventListener("click", () => {
-    setUpdatesMode("week");
+  elements.updatesMonthButton?.addEventListener("click", () => {
+    setUpdatesMode("month");
   });
   elements.accountAvatar?.addEventListener("click", () => {
     if (syncModeV2() && state.sync.workspace) {
@@ -2435,7 +2435,7 @@ function pagerTargetForDelta(deltaX) {
     return target ? `guide:${target}` : null;
   }
   if (state.activeView === "updates") {
-    const modes = ["recent", "week", "month"];
+    const modes = ["recent", "month"];
     const index = modes.indexOf(state.updatesMode || "recent");
     const target = modes[index + offset];
     return target ? `updates:${target}` : null;
@@ -2580,7 +2580,7 @@ function showPagerPreviewTarget(target) {
   body.className = "pager-preview-body";
   const label =
     type === "updates"
-      ? ({ recent: t("recentDaysShort"), week: t("weekOnSaleShort"), month: t("releaseMonth") }[value] || value)
+      ? ({ recent: t("recentDaysShort"), month: t("monthReleaseShort") }[value] || value)
       : type === "guide"
         ? guideTabLabel(value)
       : value === "owned"
@@ -3870,32 +3870,29 @@ function renderCatalogDataChanged() {
 }
 
 function renderBottomNav() {
-  const themedItems = new Map(worldNavItems(state.franchise, state.language).map((item) => [item.view, item]));
+  // Fixed labels: 首页/目录/最近/收藏/图鉴. The per-world theme changes colors
+  // and hero art, not the nav wording. 我的 lives in the top-left avatar chip.
+  const userOpen = Boolean(elements.userDialog?.open);
   elements.bottomNav.querySelectorAll("button[data-view]").forEach((button) => {
-    const themedItem = themedItems.get(button.dataset.view);
-    if (themedItem) {
-      const icon = button.querySelector("span");
-      const label = button.querySelector("strong");
-      if (icon) icon.innerHTML = worldIconMarkup(themedItem.icon);
-      if (label) label.textContent = themedItem.label;
-      button.setAttribute("aria-label", themedItem.label);
-    }
-    const userOpen = Boolean(elements.userDialog?.open);
-    const isDiscover = button.dataset.view === "updates" && ["updates", "catalog", "pbandai"].includes(state.activeView);
+    const view = button.dataset.view;
     button.classList.toggle(
       "is-active",
-      userOpen
-        ? button.dataset.view === "me"
-        : button.dataset.view === state.activeView ||
-            isDiscover ||
-            (button.dataset.view === "collection" && COLLECTION_TYPES.includes(state.activeView)),
+      !userOpen &&
+        (view === state.activeView ||
+          (view === "catalog" && state.activeView === "pbandai") ||
+          (view === "collection" && COLLECTION_TYPES.includes(state.activeView))),
     );
   });
 }
 
+const WORLD_SCOPED_VIEWS = new Set(["home", "catalog", "updates", "guide"]);
+
 function applyAppearance() {
   document.body.dataset.theme = state.theme;
   document.body.dataset.franchise = state.franchise;
+  // World-scoped views wear the current world's accent; collection + user page
+  // stay neutral (they show everything across worlds).
+  document.body.dataset.worldScoped = WORLD_SCOPED_VIEWS.has(state.activeView) ? "true" : "false";
   // APP_VERSION_LABEL is the single source of truth for the version shown
   // anywhere in the UI; the static strings in index.html/i18n are fallbacks.
   document.title = `Gunpula ${APP_VERSION_LABEL}`;
@@ -4034,8 +4031,10 @@ function renderHome() {
   elements.homeTotal.textContent = t("records", { count: state.kits.length });
   renderWorldSection();
   renderHomePulse();
-  renderHomeWorldSwitcher(counts);
-  renderHomeDashboard();
+  // The 5-franchise switcher grid is gone — the hero's world-portal handles
+  // switching. My collection + recently-viewed moved to the user page.
+  elements.homeGrid.innerHTML = "";
+  elements.homeGrid.className = "home-grid is-empty";
 }
 
 function renderHomeWorldSwitcher(counts) {
@@ -4240,7 +4239,9 @@ function createWorldHero(world, kits, actions, variant) {
 
   const copy = document.createElement("div");
   copy.className = "world-copy";
-  copy.innerHTML = `<span>${worldIconMarkup(state.franchise)}${escapeHtml(worldText(world.eyebrow))}</span><strong>${escapeHtml(worldText(world.title))}</strong><p>${escapeHtml(worldText(world.lead))}</p>`;
+  // Plain franchise identity — no invented theme names, the world's look
+  // (color/art/icon) carries the identity instead.
+  copy.innerHTML = `<span>${worldIconMarkup(state.franchise)}${escapeHtml(worldText({ zh: "收藏图鉴", ko: "컬렉션", en: "Collection", ja: "コレクション" }))}</span><strong>${escapeHtml(franchiseLabel(state.franchise))}</strong>`;
   const actionBar = document.createElement("div");
   actionBar.className = "world-actions";
   for (const action of actions) {
@@ -4253,37 +4254,17 @@ function createWorldHero(world, kits, actions, variant) {
   const stat = document.createElement("div");
   stat.className = "world-stat";
   stat.innerHTML = `<strong>${kits.length}</strong><span>${escapeHtml(worldText({ zh: "收录", ko: "수록", en: "records", ja: "収録" }))}</span>`;
-  const portal = document.createElement("div");
-  portal.className = "world-portal";
-  const portalButton = document.createElement("button");
-  portalButton.type = "button";
-  portalButton.className = "world-portal-launcher";
-  portalButton.setAttribute("aria-expanded", "false");
-  portalButton.setAttribute("aria-label", worldText({ zh: "切换主题", ko: "테마 전환", en: "Switch world", ja: "テーマ切替" }));
-  portalButton.innerHTML = `${worldIconMarkup(state.franchise)}<span>${escapeHtml(franchiseShortLabel(state.franchise))}</span>`;
-  const portalMenu = document.createElement("div");
-  portalMenu.className = "world-portal-menu";
-  portalMenu.hidden = true;
-  for (const franchise of FRANCHISES) {
-    const option = document.createElement("button");
-    option.type = "button";
-    option.className = state.franchise === franchise ? "is-active" : "";
-    option.setAttribute("aria-label", franchiseLabel(franchise));
-    option.innerHTML = `${worldIconMarkup(franchise)}<span>${escapeHtml(franchiseShortLabel(franchise))}</span>`;
-    option.addEventListener("click", () => selectHomeWorld(franchise));
-    portalMenu.append(option);
-  }
-  portalButton.addEventListener("click", () => {
-    portalMenu.hidden = !portalMenu.hidden;
-    portalButton.setAttribute("aria-expanded", String(!portalMenu.hidden));
-  });
-  portal.addEventListener("focusout", (event) => {
-    if (event.relatedTarget && portal.contains(event.relatedTarget)) return;
-    portalMenu.hidden = true;
-    portalButton.setAttribute("aria-expanded", "false");
-  });
-  portal.append(portalButton, portalMenu);
-  hero.append(media, copy, actionBar, stat, portal);
+
+  // World switching is handled by the single header switcher (作品切换) that is
+  // now visible on every world-scoped view — no separate home portal.
+  const coverEdit = document.createElement("button");
+  coverEdit.type = "button";
+  coverEdit.className = "world-cover-edit";
+  coverEdit.setAttribute("aria-label", t("changeCover"));
+  coverEdit.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 20 8-8-4-4-8 8-2 6z"/><path d="m14 6 4 4"/></svg><span>${escapeHtml(t("changeCover"))}</span>`;
+  coverEdit.addEventListener("click", () => openHomeCoverPicker(state.franchise));
+
+  hero.append(media, copy, actionBar, stat, coverEdit);
   return hero;
 }
 
@@ -4292,16 +4273,16 @@ function worldActionsFor(franchise) {
   const collection = { icon: "vault", label: { zh: "我的收藏", ko: "내 컬렉션", en: "My collection", ja: "マイコレクション" }, run: () => navigateToCollectionView("owned") };
   if (franchise === "gundam") {
     return [
-      { icon: "signal", label: { zh: "宇宙时间线", ko: "우주 연표", en: "Timeline", ja: "宇宙年表" }, run: () => openGuide("timeline") },
       { icon: "mecha", label: { zh: "作品图鉴", ko: "작품 도감", en: "Work atlas", ja: "作品図鑑" }, run: () => openGuide("gundam") },
-      { icon: "news", label: { zh: "PB 日本", ko: "PB 일본", en: "PB Japan", ja: "PB 日本" }, run: () => navigateToPBandai("gundam") },
+      catalog,
+      collection,
     ];
   }
   if (franchise === "armored_core") {
     return [
       { icon: "garage", label: { zh: "机体档案", ko: "기체 파일", en: "AC archive", ja: "機体記録" }, run: () => openGuide("armored_core") },
       catalog,
-      { icon: "mission", label: { zh: "PB / 新品", ko: "PB / 신작", en: "PB / New", ja: "PB / 新作" }, run: () => navigateToPBandai("armored_core") },
+      collection,
     ];
   }
   if (franchise === "pokemon") {
@@ -4538,7 +4519,10 @@ function renderHomeCollectionOverview() {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `home-collection-card is-${type}`;
-    button.addEventListener("click", () => navigateToCollectionView(type));
+    button.addEventListener("click", () => {
+      if (elements.userDialog?.open) elements.userDialog.close();
+      navigateToCollectionView(type);
+    });
     const label = document.createElement("strong");
     label.textContent = t(type === "owned" ? "ownedList" : "wantedList");
     const count = document.createElement("span");
@@ -4788,8 +4772,7 @@ function renderDiscoveryChannels(mode, count) {
   const channels = [
     { label: t("discoverCatalog"), active: state.activeView === "catalog", action: () => switchToView("catalog") },
     { label: t("recentDaysShort"), active: mode === "recent" && state.activeView === "updates", action: () => setUpdatesMode("recent"), count },
-    { label: t("weekOnSaleShort"), active: mode === "week" && state.activeView === "updates", action: () => setUpdatesMode("week") },
-    { label: t("discoverPremiumBandai"), active: state.activeView === "pbandai", action: () => navigateToPBandai(state.franchise), count: pbandaiItemsForFranchise(state.franchise).length },
+    { label: t("monthReleaseShort"), active: mode === "month" && state.activeView === "updates", action: () => setUpdatesMode("month") },
   ];
   for (const channel of channels) {
     const button = document.createElement("button");
@@ -4838,10 +4821,13 @@ function renderHomeUpdates() {
   elements.updatesDateInput.value = state.releaseMonth;
   localStorage.setItem(RELEASE_MONTH_KEY, state.releaseMonth);
 
-  const mode = state.updatesMode === "month" ? "month" : state.updatesMode === "week" ? "week" : "recent";
+  // Two modes only: 最近添加 (feed) and 本月发售 (month picker). The month input
+  // shows only in month mode.
+  const mode = state.updatesMode === "month" ? "month" : "recent";
   elements.updatesRecentButton?.classList.toggle("is-active", mode === "recent");
-  elements.updatesWeekButton?.classList.toggle("is-active", mode === "week");
-  const sourceItems = mode === "recent" ? recentFeedKits() : mode === "week" ? weekOnSaleKits() : releaseItemsForMonth(state.releaseMonth);
+  elements.updatesMonthButton?.classList.toggle("is-active", mode === "month");
+  if (elements.updatesDateInput) elements.updatesDateInput.hidden = mode !== "month";
+  const sourceItems = mode === "month" ? releaseItemsForMonth(state.releaseMonth) : recentFeedKits();
   const items = sortByPreference(sourceItems.filter((kit) => kit.franchise === state.franchise && kitMatchesSearchQuery(kit)));
   renderDiscoveryChannels(mode, items.length);
   if (elements.sourceHealthStrip) {
@@ -4854,12 +4840,10 @@ function renderHomeUpdates() {
       elements.sourceHealthStrip.hidden = true;
     }
   }
-  if (mode !== "month") {
-    elements.updatesSubtitle.textContent =
-      mode === "week" ? t("weekOnSaleSummary", { count: items.length }) : t("recentDaysSummary", { days: RECENT_UPDATE_DAYS, count: items.length });
-  } else {
-    elements.updatesSubtitle.textContent = t("releaseMonthSummary", { month: state.releaseMonth, count: items.length });
-  }
+  elements.updatesSubtitle.textContent =
+    mode === "month"
+      ? t("releaseMonthSummary", { month: state.releaseMonth, count: items.length })
+      : t("recentDaysSummary", { days: RECENT_UPDATE_DAYS, count: items.length });
   elements.homeUpdateList.innerHTML = "";
   if (!items.length) {
     const empty = document.createElement("div");
@@ -6875,6 +6859,8 @@ function renderUserPage() {
   elements.userOwnedCount.textContent = String(collectionIdsForMember("owned").length);
   elements.userWantedCount.textContent = String(collectionIdsForMember("wanted").length);
   renderProfileFavorites();
+  // 我的收藏 overview + 最近查看 live here now (moved off the home page).
+  renderHomeDashboard();
 
   const workspace = state.sync.workspace;
   elements.userInviteLine.hidden = !workspace?.inviteCode;
@@ -7171,15 +7157,35 @@ async function openGuide(tab, member = editableCollectionMember()) {
   render();
 }
 
+// Guide is scoped to the current world: only that franchise's tabs show.
+// Gundam merges the old timeline into its single works guide; beyblade keeps
+// the genuinely-distinct 整机/部品 split.
+const FRANCHISE_GUIDE_TABS = {
+  gundam: ["gundam"],
+  armored_core: ["armored_core"],
+  pokemon: ["pokemon"],
+  fate: ["fate"],
+  beyblade: ["bbx", "parts"],
+};
+
+function guideTabsForFranchise(franchise = state.franchise) {
+  return FRANCHISE_GUIDE_TABS[franchise] || ["gundam"];
+}
+
 async function renderGuidePage() {
   const visible = state.activeView === "guide";
   if (elements.guideDialog) elements.guideDialog.hidden = !visible;
   if (!visible) return;
-  if (!state.guideTab) state.guideTab = "gundam";
+  const allowed = guideTabsForFranchise();
+  if (!allowed.includes(state.guideTab)) state.guideTab = allowed[0];
   if (elements.guideTabs) {
     for (const button of elements.guideTabs.querySelectorAll("button[data-guide-tab]")) {
+      const shown = allowed.includes(button.dataset.guideTab);
+      button.hidden = !shown;
       button.classList.toggle("is-active", button.dataset.guideTab === state.guideTab);
     }
+    // A single-tab world doesn't need the tab strip at all.
+    elements.guideTabs.classList.toggle("is-single", allowed.length <= 1);
   }
   await renderGuideActive();
 }
@@ -7199,7 +7205,7 @@ function switchGuideTab(tab) {
 }
 
 function setUpdatesMode(mode) {
-  if (!["recent", "week", "month"].includes(mode)) return;
+  if (!["recent", "month"].includes(mode)) return;
   state.updatesMode = mode;
   localStorage.setItem(UPDATES_MODE_KEY, state.updatesMode);
   renderHomeUpdates();
