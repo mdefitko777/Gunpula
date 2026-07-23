@@ -43,15 +43,14 @@ import {
 import { personCircle } from "ionicons/icons";
 import WorldSwitcher from "../components/WorldSwitcher.vue";
 import { useStore } from "../store";
+import { useDetail } from "../composables/useDetail";
 
 const { state, name, franchiseLabel, gradeLabel, worldText, worldConfig, ensureFranchise, currentKits } = useStore();
+const { openDetail } = useDetail();
 
 const kits = currentKits;
 const preview = computed(() => kits.value.slice(0, 40));
 
-function openDetail(/* kit */) {
-  // Detail modal lands in the detail-view stage.
-}
 function openProfile() {
   // Profile modal lands in the 我的 stage.
 }

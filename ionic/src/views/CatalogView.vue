@@ -47,8 +47,10 @@ import {
 } from "@ionic/vue";
 import WorldSwitcher from "../components/WorldSwitcher.vue";
 import { useStore } from "../store";
+import { useDetail } from "../composables/useDetail";
 
 const { state, t, name, franchiseLabel, gradeLabel, ensureFranchise, currentKits } = useStore();
+const { openDetail } = useDetail();
 
 const query = ref("");
 const pageSize = 30;
@@ -74,7 +76,6 @@ function loadMore(ev) {
   shown.value += pageSize;
   ev.target.complete();
 }
-function openDetail(/* kit */) {}
 
 watch([query, () => state.franchise], () => { shown.value = pageSize; });
 onMounted(() => ensureFranchise());

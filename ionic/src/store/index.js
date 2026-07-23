@@ -2,12 +2,17 @@ import { reactive, computed } from "vue";
 import { TRANSLATIONS } from "@app/i18n.js";
 import { FRANCHISES, kitDisplayNameFor, franchiseShortLabelFor, gradeShortLabelFor } from "@app/catalog-display.js";
 import { WORLD_THEME_CONFIG, localizedWorldText } from "@app/world-themes.js";
-import { getString, setString } from "@app/storage.js";
+import { getString, setString, getJson, setJson } from "@app/storage.js";
+import { normalizeCollection } from "@app/collection-store.js";
 import { loadFranchise } from "../services/catalog";
 
 const LANG_KEY = "gunpula-catalog-language-v1";
 const FRANCHISE_KEY = "gunpula-catalog-franchise-v1";
+const COLLECTION_KEY = "gunpula-catalog-collection-v1";
 const LANGS = ["zh", "ko", "en", "ja"];
+// Local self member matches the vanilla app's default so an existing local
+// collection carries over untouched. Sync/login overrides this later.
+const SELF = "member";
 
 function initialLang() {
   const saved = getString(LANG_KEY);
@@ -26,15 +31,64 @@ const state = reactive({
   language: initialLang(),
   franchise: initialFranchise(),
   catalogByFranchise: {},
+  collection: normalizeCollection(getJson(COLLECTION_KEY, {}), { self: SELF }),
   loading: false,
   error: null,
 });
+
+// --- Collection (owned / wanted) -----------------------------------------
+// The store owns the self member's items; toggling rebuilds member_items and
+// re-normalizes so owned/wanted arrays stay in sync, then persists.
+function collectionStatus(kitId) {
+  return state.collection.items?.[kitId]?.status || null;
+}
+
+function setCollectionStatus(kitId, status) {
+  const now = new Date().toISOString();
+  const members = structuredCloneSafe(state.collection.member_items || {});
+  members[SELF] = members[SELF] || {};
+  if (status === null) {
+    delete members[SELF][kitId];
+  } else {
+    const prev = members[SELF][kitId] || {};
+    members[SELF][kitId] = { ...prev, status, quantity: prev.quantity || 1, updated_at: now, updated_by: SELF };
+  }
+  state.collection = normalizeCollection({ member_items: members }, { self: SELF });
+  setJson(COLLECTION_KEY, { member_items: state.collection.member_items });
+}
+
+// Toggle: tapping the current status clears it, otherwise sets it.
+function toggleCollectionStatus(kitId, status) {
+  setCollectionStatus(kitId, collectionStatus(kitId) === status ? null : status);
+}
+
+function structuredCloneSafe(value) {
+  try {
+    return structuredClone(value);
+  } catch {
+    return JSON.parse(JSON.stringify(value));
+  }
+}
 
 // Mirror the vanilla app's translator: current language, fall back to zh, then
 // the raw key; interpolate {placeholders}.
 function t(key, params = {}) {
   const template = TRANSLATIONS[state.language]?.[key] ?? TRANSLATIONS.zh[key] ?? key;
   return String(template).replace(/\{(\w+)\}/g, (_, k) => (params[k] ?? ""));
+}
+
+async function ensureAllFranchises() {
+  await Promise.all(FRANCHISES.map((f) => ensureFranchise(f)));
+}
+
+// Resolve a kit id against every loaded franchise (a collection can hold kits
+// from any world).
+function kitById(kitId) {
+  for (const list of Object.values(state.catalogByFranchise)) {
+    const hit = list.find((k) => k.kit_id === kitId);
+    if (hit) return hit;
+  }
+  return null;
 }
 
 async function ensureFranchise(franchise = state.franchise) {
@@ -82,6 +136,13 @@ export function useStore() {
     setLanguage,
     setFranchise,
     ensureFranchise,
+    ensureAllFranchises,
+    kitById,
+    collectionStatus,
+    setCollectionStatus,
+    toggleCollectionStatus,
+    ownedIds: computed(() => state.collection.owned || []),
+    wantedIds: computed(() => state.collection.wanted || []),
     franchises: FRANCHISES,
     currentKits: computed(() => state.catalogByFranchise[state.franchise] || []),
     ...helpers,
