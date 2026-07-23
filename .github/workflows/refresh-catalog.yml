@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: refresh-official-catalog
@@ -83,3 +84,20 @@ jobs:
           done
           echo "Could not push after 5 attempts."
           exit 1
+
+      # Silent failures are the real risk here: a scrape can break for weeks
+      # before anyone notices the catalog stopped growing. Open (or reuse) one
+      # issue so a broken daily refresh is visible.
+      - name: Report failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="每日目录抓取失败"
+          existing=$(gh issue list --state open --search "$title in:title" --json number --jq '.[0].number')
+          body="Run failed: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} ($(date -u '+%Y-%m-%d %H:%M UTC'))"
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "$body"
+          else
+            gh issue create --title "$title" --body "$body" --label "" || gh issue create --title "$title" --body "$body"
+          fi
