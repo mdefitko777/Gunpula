@@ -104,7 +104,7 @@ body.is-pager-settling .pager-preview {
 
 .top-bar {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) 34px;
+  grid-template-columns: auto minmax(0, 1fr);
   min-height: 48px;
   padding-bottom: 8px;
   gap: 8px;
@@ -208,7 +208,7 @@ body[data-theme="classic"] {
 }
 
 .franchise-control .segment-button {
-  flex: 0 0 96px;
+  flex: 0 1 auto;
   min-width: 0;
   min-height: 38px;
   padding: 0 12px;
@@ -1750,14 +1750,6 @@ body[data-view="guide"] .market-section,
 body[data-view="guide"] .collection-section,
 body[data-view="guide"] .kit-section {
   display: none;
-}
-
-body[data-view="home"] .top-bar,
-body[data-view="pbandai"] .top-bar,
-body[data-view="market"] .top-bar,
-body[data-view="guide"] .top-bar {
-  grid-template-columns: auto 34px;
-  justify-content: space-between;
 }
 
 .section-head {
@@ -6224,8 +6216,8 @@ body.is-radial-active {
   }
 
   .top-bar {
-    align-items: stretch;
-    grid-template-columns: auto minmax(0, 1fr) 32px;
+    align-items: center;
+    grid-template-columns: auto minmax(0, 1fr);
     gap: 6px;
   }
 
@@ -6476,7 +6468,7 @@ body.is-radial-active {
 /* Atlas 3.0 surface: the main app should feel like a browsing app, not a
    grid dashboard. Keep the existing DOM, but turn controls into light rails. */
 .top-bar {
-  grid-template-columns: auto minmax(0, 1fr) 34px;
+  grid-template-columns: auto minmax(0, 1fr);
 }
 
 .franchise-control {
@@ -6834,7 +6826,7 @@ body.is-radial-active {
 
 @media (max-width: 760px) {
   .top-bar {
-    grid-template-columns: auto minmax(0, 1fr) 34px;
+    grid-template-columns: auto minmax(0, 1fr);
   }
 
   .franchise-control {
@@ -8908,9 +8900,11 @@ body[data-theme="atlas"][data-franchise="beyblade"] {
 }
 
 /* Atlas polish pass: keep all main pages on the same header rhythm and make
-   picture-book surfaces denser on phones. */
+   picture-book surfaces denser on phones. This min-height is the last .top-bar
+   rule in the file, so it sets the floor for every view — including collection,
+   where the world switcher is hidden — keeping the avatar row from shifting up. */
 .top-bar {
-  min-height: 44px;
+  min-height: 50px;
 }
 
 .guide-head {

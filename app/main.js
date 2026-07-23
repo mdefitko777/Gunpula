@@ -337,7 +337,6 @@ const elements = {
   datasetSummary: document.querySelector("#datasetSummary"),
   sectionTitle: document.querySelector("#sectionTitle"),
   bottomNav: document.querySelector("#bottomNav"),
-  settingsOpen: document.querySelector("#settingsOpen"),
   settingsDialog: document.querySelector("#settingsDialog"),
   settingsClose: document.querySelector("#settingsClose"),
   settingsTabs: document.querySelector("#settingsTabs"),
@@ -1393,7 +1392,6 @@ function closeSettings(options = {}) {
 }
 
 function bindEvents() {
-  elements.settingsOpen.addEventListener("click", openUserPage);
   elements.settingsClose.addEventListener("click", closeSettings);
   elements.settingsTabs?.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-settings-tab]");
@@ -2398,7 +2396,7 @@ function activateRadialSelection(id) {
   } else if (type === "collection") {
     switchToView(value);
   } else if (type === "guide") {
-    openGuide(value);
+    switchGuideCategory(value);
   } else if (type === "franchise") {
     selectFranchiseForActiveView(value);
   }
@@ -2604,7 +2602,7 @@ function applyPagerTarget(target) {
   } else if (type === "updates") {
     setUpdatesMode(value);
   } else if (type === "guide") {
-    switchGuideTab(value);
+    switchGuideCategory(value);
   } else if (type === "collection") {
     switchToView(value);
   }
@@ -4143,7 +4141,9 @@ function renderHomePulse() {
   elements.homePulse.innerHTML = "";
   const head = document.createElement("div");
   head.className = "pulse-head";
-  head.innerHTML = `<strong>${escapeHtml(worldText({ zh: "今日看板", ko: "오늘 보드", en: "Today", ja: "今日のボード" }))}</strong><span>${escapeHtml(worldText(world.title))}</span>`;
+  // The world name is already the whole page's context (world switcher +
+  // hero), so echoing it here read as a stray「高达」in the corner.
+  head.innerHTML = `<strong>${escapeHtml(worldText({ zh: "今日看板", ko: "오늘 보드", en: "Today", ja: "今日のボード" }))}</strong>`;
   const rail = document.createElement("div");
   rail.className = "pulse-rail";
   if (updateKit) {
@@ -7150,6 +7150,28 @@ const FRANCHISE_GUIDE_TABS = {
 
 function guideTabsForFranchise(franchise = state.franchise) {
   return FRANCHISE_GUIDE_TABS[franchise] || ["gundam"];
+}
+
+// The guide is world-scoped, so a guide tab implies a world. Switching guide
+// category from the radial/pager therefore has to switch the world too —
+// otherwise renderGuidePage snaps the tab back to the current world and the
+// gesture appears to do nothing.
+const GUIDE_TAB_FRANCHISE = {
+  gundam: "gundam",
+  pokemon: "pokemon",
+  fate: "fate",
+  armored_core: "armored_core",
+  bbx: "beyblade",
+  parts: "beyblade",
+};
+
+function switchGuideCategory(tab) {
+  const franchise = GUIDE_TAB_FRANCHISE[tab];
+  if (franchise && franchise !== state.franchise) {
+    state.franchise = franchise;
+    localStorage.setItem(FRANCHISE_KEY, state.franchise);
+  }
+  openGuide(tab);
 }
 
 async function renderGuidePage() {
