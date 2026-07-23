@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-07-23",
-  "generated_at": "2026-07-23T14:05:27.862Z",
+  "generated_at": "2026-07-23T14:29:19.338Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,33 +16,34 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-07-23T14:05:27.138Z",
+    "generated_at": "2026-07-23T14:29:18.643Z",
     "blocked_count": 1,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-07-23",
-      "generated_at": "2026-07-23T14:05:27.862Z",
+      "generated_at": "2026-07-23T14:29:19.338Z",
       "total_before": 4883,
-      "total_after": 5028,
-      "added_count": 12,
-      "changed_count": 121,
-      "removed_count": 12,
+      "total_after": 5067,
+      "added_count": 13,
+      "changed_count": 58,
+      "removed_count": 13,
       "watched_count": 0,
       "premium_bandai_count": 0,
       "bbx_count": 0,
       "franchise_counts": {
-        "pokemon": 132,
+        "pokemon": 70,
         "fate": 1
       },
       "reason_counts": {
-        "new": 12,
+        "new": 13,
+        "name": 34,
         "release": 1,
         "series": 97,
         "name": 6,
         "image": 23,
-        "removed": 12
+        "removed": 13
       },
       "interest_tags": [
         "pokemon",
@@ -122,6 +123,43 @@
           ],
           "source_urls": [
             "https://www.pokemoncenter-online.com/4521329316185.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329316321",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "273 ぬいぐるみ Pok&eacute;mon fit タネボー",
+            "zh": "273 ぬいぐるみ Pok&eacute;mon fit タネボー",
+            "ko": "273 ぬいぐるみ Pok&eacute;mon fit タネボー",
+            "en": "273 ぬいぐるみ Pok&eacute;mon fit タネボー"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329316321.html"
           ]
         },
         {
@@ -497,6 +535,43 @@
       ],
       "changed": [
         {
+          "kit_id": "ichibankuji-pk-masters",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_KUJI",
+          "subline": "一番くじ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "一番くじ ポケモンマスターズ EX 7th Anniversary",
+            "zh": "一番くじ 宝可梦マスターズ EX 7th Anniversary",
+            "ko": "一番くじ 포켓몬マスターズ EX 7th Anniversary",
+            "en": "一番くじ Pokemonマスターズ EX 7th Anniversary"
+          },
+          "release_date": "2026-08-29",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "ichiban_kuji_jp"
+          ],
+          "source_urls": [
+            "https://1kuji.com/products/pk_masters"
+          ]
+        },
+        {
           "kit_id": "goodsmile-fate-g1139462",
           "change_type": "changed",
           "franchise": "fate",
@@ -534,43 +609,6 @@
           ]
         },
         {
-          "kit_id": "moncolle-ms-02",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "イーブイ",
-            "zh": "イーブイ",
-            "ko": "イーブイ",
-            "en": "イーブイ"
-          },
-          "release_date": "2026-08",
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms02/"
-          ]
-        },
-        {
           "kit_id": "moncolle-mc-1",
           "change_type": "changed",
           "franchise": "pokemon",
@@ -598,8 +636,7 @@
             "pokemon"
           ],
           "change_reasons": [
-            "name",
-            "series"
+            "name"
           ],
           "source_ids": [
             "takara_tomy_pokemon_jp"
@@ -609,11 +646,11 @@
           ]
         },
         {
-          "kit_id": "moncolle-ms-32",
+          "kit_id": "banpresto-2826567",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -622,35 +659,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "サンダース",
-            "zh": "サンダース",
-            "ko": "サンダース",
-            "en": "サンダース"
+            "ja": "ポケットモンスター もふぐっとぬいぐるみ イーブイフレンズ～サンダース・ブースター～おひるねver.",
+            "zh": "ポケットモンスター もふぐっとぬいぐるみ イーブイフレンズ～サンダース・ブースター～おひるねver.",
+            "ko": "ポケットモンスター もふぐっとぬいぐるみ イーブイフレンズ～サンダース・ブースター～おひるねver.",
+            "en": "ポケットモンスター もふぐっとぬいぐるみ イーブイフレンズ - サンダース ブースター - おひるねver."
           },
-          "release_date": "2026-08",
+          "release_date": "2026-07-29",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms32/"
+            "https://bsp-prize.jp/item/2826567/"
           ]
         },
         {
-          "kit_id": "moncolle-mc-0",
+          "kit_id": "banpresto-2826613",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -659,35 +696,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ピカチュウセレクション みるピカチュウ",
-            "zh": "ピカチュウセレクション みるピカチュウ",
-            "ko": "ピカチュウセレクション みるピカチュウ",
-            "en": "ピカチュウセレクション みるピカチュウ"
+            "ja": "ポケットモンスター もふぐっとぬいぐるみ イーブイフレンズ～シャワーズ・グレイシア～おひるねver.",
+            "zh": "ポケットモンスター もふぐっとぬいぐるみ イーブイフレンズ～シャワーズ・グレイシア～おひるねver.",
+            "ko": "ポケットモンスター もふぐっとぬいぐるみ イーブイフレンズ～シャワーズ・グレイシア～おひるねver.",
+            "en": "ポケットモンスター もふぐっとぬいぐるみ イーブイフレンズ - シャワーズ グレイシア - おひるねver."
           },
-          "release_date": "2026-08",
+          "release_date": "2026-07-29",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/pokemon_30th/miru_pikachu/"
+            "https://bsp-prize.jp/item/2826613/"
           ]
         },
         {
-          "kit_id": "moncolle-ms-23",
+          "kit_id": "banpresto-2824520",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -696,35 +733,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ピチュー",
-            "zh": "ピチュー",
-            "ko": "ピチュー",
-            "en": "ピチュー"
+            "ja": "ポケットモンスター いろんなおかおぬいぐるみ～ピカチュウ～30th Anniversary",
+            "zh": "ポケットモンスター いろんなおかおぬいぐるみ～ピカチュウ～30th Anniversary",
+            "ko": "ポケットモンスター いろんなおかおぬいぐるみ～ピカチュウ～30th Anniversary",
+            "en": "ポケットモンスター いろんなおかおぬいぐるみ - ピカチュウ - 30th Anniversary"
           },
-          "release_date": "2026-08",
+          "release_date": "2026-07-28",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms23/"
+            "https://bsp-prize.jp/item/2824520/"
           ]
         },
         {
-          "kit_id": "moncolle-ms-40",
+          "kit_id": "banpresto-2745595",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -733,35 +770,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ブースター",
-            "zh": "ブースター",
-            "ko": "ブースター",
-            "en": "ブースター"
+            "ja": "ポケットモンスター めちゃもふぐっとぬいぐるみ～ゲンガー～",
+            "zh": "ポケットモンスター めちゃもふぐっとぬいぐるみ～ゲンガー～",
+            "ko": "ポケットモンスター めちゃもふぐっとぬいぐるみ～ゲンガー～",
+            "en": "ポケットモンスター めちゃもふぐっとぬいぐるみ - ゲンガー -"
           },
-          "release_date": "2026-08",
+          "release_date": "2026-07-28",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms40/"
+            "https://bsp-prize.jp/item/2745595/"
           ]
         },
         {
-          "kit_id": "moncolle-ms-27",
+          "kit_id": "banpresto-2831970",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -770,35 +807,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ライチュウ",
-            "zh": "ライチュウ",
-            "ko": "ライチュウ",
-            "en": "ライチュウ"
+            "ja": "ポケットモンスター ワッペンチャーム～フシギダネ・ヒトカゲ・ゼニガメ・ピカチュウ～30th Anniversary",
+            "zh": "ポケットモンスター ワッペンチャーム～フシギダネ・ヒトカゲ・ゼニガメ・ピカチュウ～30th Anniversary",
+            "ko": "ポケットモンスター ワッペンチャーム～フシギダネ・ヒトカゲ・ゼニガメ・ピカチュウ～30th Anniversary",
+            "en": "ポケットモンスター ワッペンチャーム - フシギダネ ヒトカゲ ゼニガメ ピカチュウ - 30th Anniversary"
           },
-          "release_date": "2026-08",
+          "release_date": "2026-07-28",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms27/"
+            "https://bsp-prize.jp/item/2831970/"
           ]
         },
         {
-          "kit_id": "moncolle-ms-26",
+          "kit_id": "banpresto-2826602",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -807,35 +844,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ゲンガー",
-            "zh": "ゲンガー",
-            "ko": "ゲンガー",
-            "en": "ゲンガー"
+            "ja": "ポケットモンスター ぐらぶらりんぬいぐるみ～エイパム・パチリス・デデンネ～",
+            "zh": "ポケットモンスター ぐらぶらりんぬいぐるみ～エイパム・パチリス・デデンネ～",
+            "ko": "ポケットモンスター ぐらぶらりんぬいぐるみ～エイパム・パチリス・デデンネ～",
+            "en": "ポケットモンスター ぐらぶらりんぬいぐるみ - エイパム パチリス デデンネ -"
           },
-          "release_date": "2026-07",
+          "release_date": "2026-07-23",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms26/"
+            "https://bsp-prize.jp/item/2826602/"
           ]
         },
         {
-          "kit_id": "moncolle-mc-7",
+          "kit_id": "banpresto-2826624",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -844,35 +881,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ピカチュウセレクション でかけるピカチュウ",
-            "zh": "ピカチュウセレクション でかけるピカチュウ",
-            "ko": "ピカチュウセレクション でかけるピカチュウ",
-            "en": "ピカチュウセレクション でかけるピカチュウ"
+            "ja": "ポケットモンスター めちゃもふぐっとぬいぐるみ イーブイフレンズ～イーブイ～おひるねver.",
+            "zh": "ポケットモンスター めちゃもふぐっとぬいぐるみ イーブイフレンズ～イーブイ～おひるねver.",
+            "ko": "ポケットモンスター めちゃもふぐっとぬいぐるみ イーブイフレンズ～イーブイ～おひるねver.",
+            "en": "ポケットモンスター めちゃもふぐっとぬいぐるみ イーブイフレンズ - イーブイ - おひるねver."
           },
-          "release_date": "2026-07",
+          "release_date": "2026-07-23",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/pokemon_30th/dekakeru_pikachu/"
+            "https://bsp-prize.jp/item/2826624/"
           ]
         },
         {
-          "kit_id": "moncolle-mc-117",
+          "kit_id": "banpresto-2832374",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -881,35 +918,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "メガカイリュー",
-            "zh": "メガカイリュー",
-            "ko": "メガカイリュー",
-            "en": "メガカイリュー"
+            "ja": "ポケットモンスター ボールチェーン付きフェイスぬいぐるみ～ミュウ・アチャモ・ミジュマル・カヌチャン～",
+            "zh": "ポケットモンスター 铁球チェーン付きフェイスぬいぐるみ～ミュウ・アチャモ・ミジュマル・カヌチャン～",
+            "ko": "ポケットモンスター 볼チェーン付きフェイスぬいぐるみ～ミュウ・アチャモ・ミジュマル・カヌチャン～",
+            "en": "ポケットモンスター Ballチェーン付きフェイスぬいぐるみ - ミュウ アチャモ ミジュマル カヌチャン -"
           },
-          "release_date": "2026-07",
+          "release_date": "2026-07-22",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/mega_dragonite/"
+            "https://bsp-prize.jp/item/2832374/"
           ]
         },
         {
-          "kit_id": "moncolle-mc-126",
+          "kit_id": "ichibankuji-pk30th-2",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_KUJI",
+          "subline": "一番くじ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -918,13 +955,568 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "あくテラスタル リザードン",
-            "zh": "あくテラスタル リザードン",
-            "ko": "あくテラスタル リザードン",
-            "en": "あくテラスタル リザードン"
+            "ja": "一番くじ ポケモン 30th ANNIVERSARY vol.2",
+            "zh": "一番くじ 宝可梦 30th ANNIVERSARY vol.2",
+            "ko": "一番くじ 포켓몬 30th ANNIVERSARY vol.2",
+            "en": "一番くじ Pokémon 30th ANNIVERSARY vol.2"
+          },
+          "release_date": "2026-07-18",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "ichiban_kuji_jp"
+          ],
+          "source_urls": [
+            "https://1kuji.com/products/pk30th_2"
+          ]
+        },
+        {
+          "kit_id": "banpresto-2824498",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケットモンスター ぬいぐるみ～ソーナンス・チリーン・ニャスパー～",
+            "zh": "ポケットモンスター ぬいぐるみ～ソーナンス・チリーン・ニャスパー～",
+            "ko": "ポケットモンスター ぬいぐるみ～ソーナンス・チリーン・ニャスパー～",
+            "en": "ポケットモンスター ぬいぐるみ - ソーナンス チリーン ニャスパー -"
+          },
+          "release_date": "2026-07-16",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "banpresto_prize_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2824498/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-2826600",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケットモンスター ぬいぐるみ帽子～ピカチュウ～vol.2",
+            "zh": "ポケットモンスター ぬいぐるみ帽子～ピカチュウ～vol.2",
+            "ko": "ポケットモンスター ぬいぐるみ帽子～ピカチュウ～vol.2",
+            "en": "ポケットモンスター ぬいぐるみ帽子 - ピカチュウ - vol.2"
+          },
+          "release_date": "2026-07-14",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "banpresto_prize_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2826600/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-2826563",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケットモンスター めちゃもふぐっとぬいぐるみ～ミュウ～にっこりver.",
+            "zh": "ポケットモンスター めちゃもふぐっとぬいぐるみ～ミュウ～にっこりver.",
+            "ko": "ポケットモンスター めちゃもふぐっとぬいぐるみ～ミュウ～にっこりver.",
+            "en": "ポケットモンスター めちゃもふぐっとぬいぐるみ - ミュウ - にっこりver."
+          },
+          "release_date": "2026-07-14",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "banpresto_prize_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2826563/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-2843712",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケットモンスター しっぽみてみて！ボールチェーン付きフィギュア",
+            "zh": "ポケットモンスター しっぽみてみて！铁球チェーン付きフィギュア",
+            "ko": "ポケットモンスター しっぽみてみて！볼チェーン付きフィギュア",
+            "en": "ポケットモンスター しっぽみてみて！Ballチェーン付きフィギュア"
+          },
+          "release_date": "2026-07-09",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "banpresto_prize_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2843712/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-2826565",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケットモンスター ビッグマイクロファイバータオル～30th Anniversary～",
+            "zh": "ポケットモンスター ビッグマイクロファイバータオル～30th Anniversary～",
+            "ko": "ポケットモンスター ビッグマイクロファイバータオル～30th Anniversary～",
+            "en": "ポケットモンスター ビッグマイクロファイバータオル - 30th Anniversary -"
+          },
+          "release_date": "2026-07-09",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "banpresto_prize_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2826565/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-2827809",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケットモンスター もふぐっと ほっこりいやされぬいぐるみ～エネコ・モクロー～",
+            "zh": "ポケットモンスター もふぐっと ほっこりいやされぬいぐるみ～エネコ・モクロー～",
+            "ko": "ポケットモンスター もふぐっと ほっこりいやされぬいぐるみ～エネコ・モクロー～",
+            "en": "ポケットモンスター もふぐっと ほっこりいやされぬいぐるみ - エネコ モクロー -"
+          },
+          "release_date": "2026-07-09",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "banpresto_prize_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2827809/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-2826603",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモンフォーカス 〈地方別のすがた〉 ぬいぐるみ～ガーディ・ガーディ（ヒスイのすがた）・ウパー・ウパー（パルデアのすがた）～",
+            "zh": "宝可梦フォーカス 〈地方別のすがた〉 ぬいぐるみ～ガーディ・ガーディ（ヒスイのすがた）・ウパー・ウパー（パルデアのすがた）～",
+            "ko": "포켓몬フォーカス 〈地方別のすがた〉 ぬいぐるみ～ガーディ・ガーディ（ヒスイのすがた）・ウパー・ウパー（パルデアのすがた）～",
+            "en": "Pokemonフォーカス 〈地方別のすがた〉 ぬいぐるみ - ガーディ ガーディ (ヒスイのすがた) ウパー ウパー (パルデアのすがた) -"
+          },
+          "release_date": "2026-07-09",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "banpresto_prize_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2826603/"
+          ]
+        },
+        {
+          "kit_id": "ichibankuji-pk30th-1",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_KUJI",
+          "subline": "一番くじ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "一番くじ ポケモン 30th ANNIVERSARY vol.1",
+            "zh": "一番くじ 宝可梦 30th ANNIVERSARY vol.1",
+            "ko": "一番くじ 포켓몬 30th ANNIVERSARY vol.1",
+            "en": "一番くじ Pokémon 30th ANNIVERSARY vol.1"
+          },
+          "release_date": "2026-05-30",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "ichiban_kuji_jp"
+          ],
+          "source_urls": [
+            "https://1kuji.com/products/pk30th_1"
+          ]
+        },
+        {
+          "kit_id": "ichibankuji-pk-peace3",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_KUJI",
+          "subline": "一番くじ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "一番くじ ポケピース ～“PEACE”なダイナーへようこそ～",
+            "zh": "一番くじ ポケピース ～“PEACE”なダイナーへようこそ～",
+            "ko": "一番くじ ポケピース ～“PEACE”なダイナーへようこそ～",
+            "en": "一番くじ ポケピース - “PEACE”なダイナーへようこそ -"
+          },
+          "release_date": "2026-01-10",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "ichiban_kuji_jp"
+          ],
+          "source_urls": [
+            "https://1kuji.com/products/pk_peace3"
+          ]
+        },
+        {
+          "kit_id": "ichibankuji-pk2025",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_KUJI",
+          "subline": "一番くじ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "2025 ポケモン Collection くじ ～Let's Go for a Walk!～",
+            "zh": "2025 宝可梦 Collection くじ ～Let's Go for a Walk!～",
+            "ko": "2025 포켓몬 Collection くじ ～Let's Go for a Walk!～",
+            "en": "2025 Pokémon Collection くじ - Let's Go for a Walk! -"
+          },
+          "release_date": "2025-11-07",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "ichiban_kuji_jp"
+          ],
+          "source_urls": [
+            "https://1kuji.com/products/pk2025"
+          ]
+        },
+        {
+          "kit_id": "ichibankuji-pk-mega",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_KUJI",
+          "subline": "一番くじ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "一番くじ ポケモン 「メガシンカ」",
+            "zh": "一番くじ 宝可梦 「メガシンカ」",
+            "ko": "一番くじ 포켓몬 「メガシンカ」",
+            "en": "一番くじ Pokémon 「メガシンカ」"
+          },
+          "release_date": "2025-08-30",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "ichiban_kuji_jp"
+          ],
+          "source_urls": [
+            "https://1kuji.com/products/pk_mega"
+          ]
+        },
+        {
+          "kit_id": "ichibankuji-pk-gh-2",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_KUJI",
+          "subline": "一番くじ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "一番くじ ポケモン Type:Ghost",
+            "zh": "一番くじ 宝可梦 Type:Ghost",
+            "ko": "一番くじ 포켓몬 Type:Ghost",
+            "en": "一番くじ Pokémon Type:Ghost"
+          },
+          "release_date": "2025-05-10",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "ichiban_kuji_jp"
+          ],
+          "source_urls": [
+            "https://1kuji.com/products/pk_gh-2"
+          ]
+        },
+        {
+          "kit_id": "ichibankuji-pk-peace2",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_KUJI",
+          "subline": "一番くじ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "一番くじ ポケピース ～“PEACE”なおさいほうのひととき～",
+            "zh": "一番くじ ポケピース ～“PEACE”なおさいほうのひととき～",
+            "ko": "一番くじ ポケピース ～“PEACE”なおさいほうのひととき～",
+            "en": "一番くじ ポケピース - “PEACE”なおさいほうのひととき -"
+          },
+          "release_date": "2025-03-15",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "ichiban_kuji_jp"
+          ],
+          "source_urls": [
+            "https://1kuji.com/products/pk_peace2"
+          ]
+        },
+        {
+          "kit_id": "ichibankuji-pk2024",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_KUJI",
+          "subline": "一番くじ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "2024 ポケモン Collection くじ ～Welcome to the ポケモン House～",
+            "zh": "2024 宝可梦 Collection くじ ～Welcome to the 宝可梦 House～",
+            "ko": "2024 포켓몬 Collection くじ ～Welcome to the 포켓몬 House～",
+            "en": "2024 Pokémon Collection くじ - Welcome to the Pokémon House -"
+          },
+          "release_date": "2024-11-22",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "ichiban_kuji_jp"
+          ],
+          "source_urls": [
+            "https://1kuji.com/products/pk2024"
+          ]
+        },
+        {
+          "kit_id": "gsc-pokemon-4251",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_FIGURE",
+          "subline": "Good Smile / Nendoroid",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "Nendoroid More: ポケモン Face Parts Case (Pikachu)",
+            "zh": "Nendoroid More: 宝可梦 Face Parts Case (Pikachu)",
+            "ko": "Nendoroid More: 포켓몬 Face Parts Case (Pikachu)",
+            "en": "Nendoroid More: Pokémon Face Parts Case (Pikachu)"
           },
           "release_date": null,
-          "price_jpy": null,
+          "price_jpy": 1222,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -932,1197 +1524,13 @@
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "good_smile_global"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/terastal_lizardon/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-46",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "アブソル",
-            "zh": "アブソル",
-            "ko": "アブソル",
-            "en": "アブソル"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms46/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-22",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "アルセウス",
-            "zh": "アルセウス",
-            "ko": "アルセウス",
-            "en": "アルセウス"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml22/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-24",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "イッカネズミ (４ひきかぞく)",
-            "zh": "イッカネズミ (４ひきかぞく)",
-            "ko": "イッカネズミ (４ひきかぞく)",
-            "en": "イッカネズミ (４ひきかぞく)"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms24/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-13",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "イベルタル",
-            "zh": "イベルタル",
-            "ko": "イベルタル",
-            "en": "イベルタル"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml13/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-58",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ウェーニバル",
-            "zh": "ウェーニバル",
-            "ko": "ウェーニバル",
-            "en": "ウェーニバル"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms58/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-122",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ウガツホムラ",
-            "zh": "ウガツホムラ",
-            "ko": "ウガツホムラ",
-            "en": "ウガツホムラ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/paradox_ugatsuhomura/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-121",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ウネルミナモ",
-            "zh": "ウネルミナモ",
-            "ko": "ウネルミナモ",
-            "en": "ウネルミナモ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/paradox_uneruminamo/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-35",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "エースバーン",
-            "zh": "エースバーン",
-            "ko": "エースバーン",
-            "en": "エースバーン"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms35/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-51",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "エーフィ",
-            "zh": "エーフィ",
-            "ko": "エーフィ",
-            "en": "エーフィ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms51/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-04",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "カイオーガ",
-            "zh": "カイオーガ",
-            "ko": "カイオーガ",
-            "en": "カイオーガ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml04/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-25",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "カイリュー",
-            "zh": "カイリュー",
-            "ko": "カイリュー",
-            "en": "カイリュー"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms25/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-129",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "かくとうテラスタル コライドン",
-            "zh": "かくとうテラスタル コライドン",
-            "ko": "かくとうテラスタル コライドン",
-            "en": "かくとうテラスタル コライドン"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/terastal_koraidon/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-29",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "カビゴン",
-            "zh": "カビゴン",
-            "ko": "カビゴン",
-            "en": "カビゴン"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms29/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-22",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ガブリアス",
-            "zh": "ガブリアス",
-            "ko": "ガブリアス",
-            "en": "ガブリアス"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms22/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-16",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "カメックス",
-            "zh": "カメックス",
-            "ko": "カメックス",
-            "en": "カメックス"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms16/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-12",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "キャプテンピカチュウ",
-            "zh": "キャプテンピカチュウ",
-            "ko": "キャプテンピカチュウ",
-            "en": "キャプテンピカチュウ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms12/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-23",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ギラティナ",
-            "zh": "ギラティナ",
-            "ko": "ギラティナ",
-            "en": "ギラティナ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml23/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-03",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "グラードン",
-            "zh": "グラードン",
-            "ko": "グラードン",
-            "en": "グラードン"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml03/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-37",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "グレイシア",
-            "zh": "グレイシア",
-            "ko": "グレイシア",
-            "en": "グレイシア"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms37/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-54",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "グレンアルマ",
-            "zh": "グレンアルマ",
-            "ko": "グレンアルマ",
-            "en": "グレンアルマ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms54/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-05",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "クワッス",
-            "zh": "クワッス",
-            "ko": "クワッス",
-            "en": "クワッス"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms05/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-08",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ゲッコウガ",
-            "zh": "ゲッコウガ",
-            "ko": "ゲッコウガ",
-            "en": "ゲッコウガ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms08/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-138",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ケルディオ (かくごのすがた)",
-            "zh": "ケルディオ (かくごのすがた)",
-            "ko": "ケルディオ (かくごのすがた)",
-            "en": "ケルディオ (かくごのすがた)"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/select35/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-135",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ゲンシカイオーガ",
-            "zh": "ゲンシカイオーガ",
-            "ko": "ゲンシカイオーガ",
-            "en": "ゲンシカイオーガ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/primal_kyogre/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-136",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ゲンシグラードン",
-            "zh": "ゲンシグラードン",
-            "ko": "ゲンシグラードン",
-            "en": "ゲンシグラードン"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/primal_groudon/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-128",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ゴーストテラスタル ソウブレイズ",
-            "zh": "ゴーストテラスタル ソウブレイズ",
-            "ko": "ゴーストテラスタル ソウブレイズ",
-            "en": "ゴーストテラスタル ソウブレイズ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/terastal_soublades/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-45",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "コダック",
-            "zh": "コダック",
-            "ko": "コダック",
-            "en": "コダック"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms45/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-29",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "コライドン",
-            "zh": "コライドン",
-            "ko": "コライドン",
-            "en": "コライドン"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml29/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-124",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "サケブシッポ",
-            "zh": "サケブシッポ",
-            "ko": "サケブシッポ",
-            "en": "サケブシッポ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/paradox_sakebushippo/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-18",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ザシアン",
-            "zh": "ザシアン",
-            "ko": "ザシアン",
-            "en": "ザシアン"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml18/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-19",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ザマゼンタ",
-            "zh": "ザマゼンタ",
-            "ko": "ザマゼンタ",
-            "en": "ザマゼンタ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml19/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-26",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ジガルデ (パーフェクトフォルム)",
-            "zh": "ジガルデ (パーフェクトフォルム)",
-            "ko": "ジガルデ (パーフェクトフォルム)",
-            "en": "ジガルデ (パーフェクトフォルム)"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml26/"
+            "https://www.goodsmile.com/en/product/4251"
           ]
         },
         {
@@ -2153,51 +1561,13 @@
             "pokemon"
           ],
           "change_reasons": [
-            "name",
-            "series"
+            "name"
           ],
           "source_ids": [
             "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
             "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms59/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-31",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "シャワーズ",
-            "zh": "シャワーズ",
-            "ko": "シャワーズ",
-            "en": "シャワーズ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms31/"
           ]
         },
         {
@@ -2228,8 +1598,7 @@
             "pokemon"
           ],
           "change_reasons": [
-            "name",
-            "series"
+            "name"
           ],
           "source_ids": [
             "takara_tomy_pokemon_jp"
@@ -2266,569 +1635,13 @@
             "pokemon"
           ],
           "change_reasons": [
-            "name",
-            "series"
+            "name"
           ],
           "source_ids": [
             "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
             "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/toxtricity_set/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-20",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "セグレイブ",
-            "zh": "セグレイブ",
-            "ko": "セグレイブ",
-            "en": "セグレイブ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms20/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-09",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ゼクロム",
-            "zh": "ゼクロム",
-            "ko": "ゼクロム",
-            "en": "ゼクロム"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml09/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-09",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ゼラオラ",
-            "zh": "ゼラオラ",
-            "ko": "ゼラオラ",
-            "en": "ゼラオラ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms09/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-12",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ゼルネアス",
-            "zh": "ゼルネアス",
-            "ko": "ゼルネアス",
-            "en": "ゼルネアス"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml12/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-55",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ソウブレイズ",
-            "zh": "ソウブレイズ",
-            "ko": "ソウブレイズ",
-            "en": "ソウブレイズ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms55/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-14",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ソルガレオ",
-            "zh": "ソルガレオ",
-            "ko": "ソルガレオ",
-            "en": "ソルガレオ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml14/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-47",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "タイカイデン",
-            "zh": "タイカイデン",
-            "ko": "タイカイデン",
-            "en": "タイカイデン"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms47/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-123",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "タケルライコ",
-            "zh": "タケルライコ",
-            "ko": "タケルライコ",
-            "en": "タケルライコ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/paradox_takeruraiko/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-132",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "チコリータ",
-            "zh": "チコリータ",
-            "ko": "チコリータ",
-            "en": "チコリータ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/select36/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-06",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ディアルガ",
-            "zh": "ディアルガ",
-            "ko": "ディアルガ",
-            "en": "ディアルガ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml06/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-137",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "デオキシス (ノーマルフォルム)",
-            "zh": "デオキシス (ノーマルフォルム)",
-            "ko": "デオキシス (ノーマルフォルム)",
-            "en": "デオキシス (ノーマルフォルム)"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/select34/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-11",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "デカヌチャン",
-            "zh": "デカヌチャン",
-            "ko": "デカヌチャン",
-            "en": "デカヌチャン"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms11/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-120",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "テツノイバラ",
-            "zh": "テツノイバラ",
-            "ko": "テツノイバラ",
-            "en": "テツノイバラ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/paradox_tetsunoibara/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-44",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "デデンネ",
-            "zh": "デデンネ",
-            "ko": "デデンネ",
-            "en": "デデンネ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms44/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-48",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "テブリム",
-            "zh": "テブリム",
-            "ko": "テブリム",
-            "en": "テブリム"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms48/"
           ]
         },
         {
@@ -2859,421 +1672,13 @@
             "pokemon"
           ],
           "change_reasons": [
-            "name",
-            "series"
+            "name"
           ],
           "source_ids": [
             "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
             "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/terastal_terapagos/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-33",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "テラパゴス (ノーマルフォルム)",
-            "zh": "テラパゴス (ノーマルフォルム)",
-            "ko": "テラパゴス (ノーマルフォルム)",
-            "en": "テラパゴス (ノーマルフォルム)"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms33/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-130",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "でんきテラスタル ミライドン",
-            "zh": "でんきテラスタル ミライドン",
-            "ko": "でんきテラスタル ミライドン",
-            "en": "でんきテラスタル ミライドン"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/terastal_miraidon/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-43",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ドオー",
-            "zh": "ドオー",
-            "ko": "ドオー",
-            "en": "ドオー"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms43/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-119",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "トドロクツキ",
-            "zh": "トドロクツキ",
-            "ko": "トドロクツキ",
-            "en": "トドロクツキ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/paradox_todorokutsuki/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-41",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ドラパルト",
-            "zh": "ドラパルト",
-            "ko": "ドラパルト",
-            "en": "ドラパルト"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms41/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-03",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ニャオハ",
-            "zh": "ニャオハ",
-            "ko": "ニャオハ",
-            "en": "ニャオハ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms03/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-28",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ニャローテ",
-            "zh": "ニャローテ",
-            "ko": "ニャローテ",
-            "en": "ニャローテ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms28/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-50",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ニンフィア",
-            "zh": "ニンフィア",
-            "ko": "ニンフィア",
-            "en": "ニンフィア"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms50/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-17",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ネクロズマ (あかつきのつばさ)",
-            "zh": "ネクロズマ (あかつきのつばさ)",
-            "ko": "ネクロズマ (あかつきのつばさ)",
-            "en": "ネクロズマ (あかつきのつばさ)"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml17/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-21",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ネクロズマ (ウルトラネクロズマ)",
-            "zh": "ネクロズマ (ウルトラネクロズマ)",
-            "ko": "ネクロズマ (ウルトラネクロズマ)",
-            "en": "ネクロズマ (ウルトラネクロズマ)"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml21/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-16",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ネクロズマ (たそがれのたてがみ)",
-            "zh": "ネクロズマ (たそがれのたてがみ)",
-            "ko": "ネクロズマ (たそがれのたてがみ)",
-            "en": "ネクロズマ (たそがれのたてがみ)"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml16/"
           ]
         },
         {
@@ -3304,643 +1709,13 @@
             "pokemon"
           ],
           "change_reasons": [
-            "name",
-            "series"
+            "name"
           ],
           "source_ids": [
             "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
             "https://takaratomymall.jp/shop/g/g4904810225232/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-36",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "パオジアン",
-            "zh": "パオジアン",
-            "ko": "パオジアン",
-            "en": "パオジアン"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms36/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-118",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ハバタクカミ",
-            "zh": "ハバタクカミ",
-            "ko": "ハバタクカミ",
-            "en": "ハバタクカミ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/paradox_habatakukami/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-07",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "パルキア",
-            "zh": "パルキア",
-            "ko": "パルキア",
-            "en": "パルキア"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml07/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-28",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "パルキア (オリジンフォルム)",
-            "zh": "パルキア (オリジンフォルム)",
-            "ko": "パルキア (オリジンフォルム)",
-            "en": "パルキア (オリジンフォルム)"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml28/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-19",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "バンギラス",
-            "zh": "バンギラス",
-            "ko": "バンギラス",
-            "en": "バンギラス"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms19/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-01",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ピカチュウ",
-            "zh": "ピカチュウ",
-            "ko": "ピカチュウ",
-            "en": "ピカチュウ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms01/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-94",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ピカチュウ (キョダイマックスのすがた)",
-            "zh": "ピカチュウ (キョダイマックスのすがた)",
-            "ko": "ピカチュウ (キョダイマックスのすがた)",
-            "en": "ピカチュウ (キョダイマックスのすがた)"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/kyodaimax_pikachu/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-125",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ひこうテラスタル ピカチュウ",
-            "zh": "ひこうテラスタル ピカチュウ",
-            "ko": "ひこうテラスタル ピカチュウ",
-            "en": "ひこうテラスタル ピカチュウ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/terastal_pikachu/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-14",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "フシギバナ",
-            "zh": "フシギバナ",
-            "ko": "フシギバナ",
-            "en": "フシギバナ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms14/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-21",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ブラッキー",
-            "zh": "ブラッキー",
-            "ko": "ブラッキー",
-            "en": "ブラッキー"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms21/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-11",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ブラックキュレム",
-            "zh": "ブラックキュレム",
-            "ko": "ブラックキュレム",
-            "en": "ブラックキュレム"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml11/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-142",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "フリード",
-            "zh": "フリード",
-            "ko": "フリード",
-            "en": "フリード"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/trainer07/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-18",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "プリン",
-            "zh": "プリン",
-            "ko": "プリン",
-            "en": "プリン"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms18/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-01",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ホウオウ",
-            "zh": "ホウオウ",
-            "ko": "ホウオウ",
-            "en": "ホウオウ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml01/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-39",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ボーマンダ",
-            "zh": "ボーマンダ",
-            "ko": "ボーマンダ",
-            "en": "ボーマンダ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms39/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-134",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポカブ",
-            "zh": "ポカブ",
-            "ko": "ポカブ",
-            "en": "ポカブ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/select38/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-04",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ホゲータ",
-            "zh": "ホゲータ",
-            "ko": "ホゲータ",
-            "en": "ホゲータ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms04/"
           ]
         },
         {
@@ -4818,7 +2593,7 @@
           ]
         },
         {
-          "kit_id": "moncolle-ms-53",
+          "kit_id": "moncolle-mb-04",
           "change_type": "changed",
           "franchise": "pokemon",
           "grade_code": "POKE_MONCOLLE",
@@ -4831,10 +2606,10 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポッチャマ",
-            "zh": "ポッチャマ",
-            "ko": "ポッチャマ",
-            "en": "ポッチャマ"
+            "ja": "マスターボール",
+            "zh": "マスター铁球",
+            "ko": "マスター볼",
+            "en": "マスターBall"
           },
           "release_date": null,
           "price_jpy": null,
@@ -4845,17 +2620,17 @@
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
             "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms53/"
+            "https://takaratomymall.jp/shop/g/g4904810225249/"
           ]
         },
         {
-          "kit_id": "moncolle-ms-42",
+          "kit_id": "moncolle-ms-60",
           "change_type": "changed",
           "franchise": "pokemon",
           "grade_code": "POKE_MONCOLLE",
@@ -4868,10 +2643,10 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポニータ (ガラルのすがた)",
-            "zh": "ポニータ (ガラルのすがた)",
-            "ko": "ポニータ (ガラルのすがた)",
-            "en": "ポニータ (ガラルのすがた)"
+            "ja": "マホイップ （ミルキィバニラ）",
+            "zh": "マホイップ （ミルキィバニラ）",
+            "ko": "マホイップ （ミルキィバニラ）",
+            "en": "マホイップ (ミルキィバニラ)"
           },
           "release_date": null,
           "price_jpy": null,
@@ -4882,17 +2657,17 @@
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
             "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms42/"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms60/"
           ]
         },
         {
-          "kit_id": "moncolle-mc-127",
+          "kit_id": "moncolle-mb-01",
           "change_type": "changed",
           "franchise": "pokemon",
           "grade_code": "POKE_MONCOLLE",
@@ -4905,10 +2680,10 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ほのおテラスタル グレンアルマ",
-            "zh": "ほのおテラスタル グレンアルマ",
-            "ko": "ほのおテラスタル グレンアルマ",
-            "en": "ほのおテラスタル グレンアルマ"
+            "ja": "モンスターボール",
+            "zh": "モンスター铁球",
+            "ko": "モンスター볼",
+            "en": "モンスターBall"
           },
           "release_date": null,
           "price_jpy": null,
@@ -4919,50 +2694,13 @@
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
             "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/terastal_gurenarma/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ml-10",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ホワイトキュレム",
-            "zh": "ホワイトキュレム",
-            "ko": "ホワイトキュレム",
-            "en": "ホワイトキュレム"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml10/"
+            "https://takaratomymall.jp/shop/g/g4904810225218/"
           ]
         }
       ],
@@ -5113,6 +2851,43 @@
           ],
           "source_urls": [
             "https://www.pokemoncenter-online.com/4521329316321.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329339245",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "420 ぬいぐるみ Pok&eacute;mon fit チェリンボ",
+            "zh": "420 ぬいぐるみ Pok&eacute;mon fit チェリンボ",
+            "ko": "420 ぬいぐるみ Pok&eacute;mon fit チェリンボ",
+            "en": "420 ぬいぐるみ Pok&eacute;mon fit チェリンボ"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329339245.html"
           ]
         },
         {

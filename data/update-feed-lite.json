@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-07-23",
-  "generated_at": "2026-07-23T14:05:27.862Z",
+  "generated_at": "2026-07-23T14:29:19.338Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,33 +16,34 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-07-23T14:05:27.138Z",
+    "generated_at": "2026-07-23T14:29:18.643Z",
     "blocked_count": 1,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-07-23",
-      "generated_at": "2026-07-23T14:05:27.862Z",
+      "generated_at": "2026-07-23T14:29:19.338Z",
       "total_before": 4883,
-      "total_after": 5028,
-      "added_count": 12,
-      "changed_count": 121,
-      "removed_count": 12,
+      "total_after": 5067,
+      "added_count": 13,
+      "changed_count": 58,
+      "removed_count": 13,
       "watched_count": 0,
       "premium_bandai_count": 0,
       "bbx_count": 0,
       "franchise_counts": {
-        "pokemon": 132,
+        "pokemon": 70,
         "fate": 1
       },
       "reason_counts": {
-        "new": 12,
+        "new": 13,
+        "name": 34,
         "release": 1,
         "series": 97,
         "name": 6,
         "image": 23,
-        "removed": 12
+        "removed": 13
       },
       "interest_tags": [
         "pokemon",
@@ -122,6 +123,43 @@
           ],
           "source_urls": [
             "https://www.pokemoncenter-online.com/4521329316185.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329316321",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "273 ぬいぐるみ Pok&eacute;mon fit タネボー",
+            "zh": "273 ぬいぐるみ Pok&eacute;mon fit タネボー",
+            "ko": "273 ぬいぐるみ Pok&eacute;mon fit タネボー",
+            "en": "273 ぬいぐるみ Pok&eacute;mon fit タネボー"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329316321.html"
           ]
         },
         {
@@ -497,6 +535,43 @@
       ],
       "changed": [
         {
+          "kit_id": "ichibankuji-pk-masters",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_KUJI",
+          "subline": "一番くじ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "一番くじ ポケモンマスターズ EX 7th Anniversary",
+            "zh": "一番くじ 宝可梦マスターズ EX 7th Anniversary",
+            "ko": "一番くじ 포켓몬マスターズ EX 7th Anniversary",
+            "en": "一番くじ Pokemonマスターズ EX 7th Anniversary"
+          },
+          "release_date": "2026-08-29",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "ichiban_kuji_jp"
+          ],
+          "source_urls": [
+            "https://1kuji.com/products/pk_masters"
+          ]
+        },
+        {
           "kit_id": "goodsmile-fate-g1139462",
           "change_type": "changed",
           "franchise": "fate",
@@ -534,43 +609,6 @@
           ]
         },
         {
-          "kit_id": "moncolle-ms-02",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "イーブイ",
-            "zh": "イーブイ",
-            "ko": "イーブイ",
-            "en": "イーブイ"
-          },
-          "release_date": "2026-08",
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms02/"
-          ]
-        },
-        {
           "kit_id": "moncolle-mc-1",
           "change_type": "changed",
           "franchise": "pokemon",
@@ -598,8 +636,7 @@
             "pokemon"
           ],
           "change_reasons": [
-            "name",
-            "series"
+            "name"
           ],
           "source_ids": [
             "takara_tomy_pokemon_jp"
@@ -609,11 +646,11 @@
           ]
         },
         {
-          "kit_id": "moncolle-ms-32",
+          "kit_id": "banpresto-2826567",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -622,35 +659,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "サンダース",
-            "zh": "サンダース",
-            "ko": "サンダース",
-            "en": "サンダース"
+            "ja": "ポケットモンスター もふぐっとぬいぐるみ イーブイフレンズ～サンダース・ブースター～おひるねver.",
+            "zh": "ポケットモンスター もふぐっとぬいぐるみ イーブイフレンズ～サンダース・ブースター～おひるねver.",
+            "ko": "ポケットモンスター もふぐっとぬいぐるみ イーブイフレンズ～サンダース・ブースター～おひるねver.",
+            "en": "ポケットモンスター もふぐっとぬいぐるみ イーブイフレンズ - サンダース ブースター - おひるねver."
           },
-          "release_date": "2026-08",
+          "release_date": "2026-07-29",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms32/"
+            "https://bsp-prize.jp/item/2826567/"
           ]
         },
         {
-          "kit_id": "moncolle-mc-0",
+          "kit_id": "banpresto-2826613",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -659,35 +696,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ピカチュウセレクション みるピカチュウ",
-            "zh": "ピカチュウセレクション みるピカチュウ",
-            "ko": "ピカチュウセレクション みるピカチュウ",
-            "en": "ピカチュウセレクション みるピカチュウ"
+            "ja": "ポケットモンスター もふぐっとぬいぐるみ イーブイフレンズ～シャワーズ・グレイシア～おひるねver.",
+            "zh": "ポケットモンスター もふぐっとぬいぐるみ イーブイフレンズ～シャワーズ・グレイシア～おひるねver.",
+            "ko": "ポケットモンスター もふぐっとぬいぐるみ イーブイフレンズ～シャワーズ・グレイシア～おひるねver.",
+            "en": "ポケットモンスター もふぐっとぬいぐるみ イーブイフレンズ - シャワーズ グレイシア - おひるねver."
           },
-          "release_date": "2026-08",
+          "release_date": "2026-07-29",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/pokemon_30th/miru_pikachu/"
+            "https://bsp-prize.jp/item/2826613/"
           ]
         },
         {
-          "kit_id": "moncolle-ms-23",
+          "kit_id": "banpresto-2824520",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -696,35 +733,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ピチュー",
-            "zh": "ピチュー",
-            "ko": "ピチュー",
-            "en": "ピチュー"
+            "ja": "ポケットモンスター いろんなおかおぬいぐるみ～ピカチュウ～30th Anniversary",
+            "zh": "ポケットモンスター いろんなおかおぬいぐるみ～ピカチュウ～30th Anniversary",
+            "ko": "ポケットモンスター いろんなおかおぬいぐるみ～ピカチュウ～30th Anniversary",
+            "en": "ポケットモンスター いろんなおかおぬいぐるみ - ピカチュウ - 30th Anniversary"
           },
-          "release_date": "2026-08",
+          "release_date": "2026-07-28",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms23/"
+            "https://bsp-prize.jp/item/2824520/"
           ]
         },
         {
-          "kit_id": "moncolle-ms-40",
+          "kit_id": "banpresto-2745595",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -733,35 +770,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ブースター",
-            "zh": "ブースター",
-            "ko": "ブースター",
-            "en": "ブースター"
+            "ja": "ポケットモンスター めちゃもふぐっとぬいぐるみ～ゲンガー～",
+            "zh": "ポケットモンスター めちゃもふぐっとぬいぐるみ～ゲンガー～",
+            "ko": "ポケットモンスター めちゃもふぐっとぬいぐるみ～ゲンガー～",
+            "en": "ポケットモンスター めちゃもふぐっとぬいぐるみ - ゲンガー -"
           },
-          "release_date": "2026-08",
+          "release_date": "2026-07-28",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms40/"
+            "https://bsp-prize.jp/item/2745595/"
           ]
         },
         {
-          "kit_id": "moncolle-ms-27",
+          "kit_id": "banpresto-2831970",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -770,35 +807,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ライチュウ",
-            "zh": "ライチュウ",
-            "ko": "ライチュウ",
-            "en": "ライチュウ"
+            "ja": "ポケットモンスター ワッペンチャーム～フシギダネ・ヒトカゲ・ゼニガメ・ピカチュウ～30th Anniversary",
+            "zh": "ポケットモンスター ワッペンチャーム～フシギダネ・ヒトカゲ・ゼニガメ・ピカチュウ～30th Anniversary",
+            "ko": "ポケットモンスター ワッペンチャーム～フシギダネ・ヒトカゲ・ゼニガメ・ピカチュウ～30th Anniversary",
+            "en": "ポケットモンスター ワッペンチャーム - フシギダネ ヒトカゲ ゼニガメ ピカチュウ - 30th Anniversary"
           },
-          "release_date": "2026-08",
+          "release_date": "2026-07-28",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms27/"
+            "https://bsp-prize.jp/item/2831970/"
           ]
         },
         {
-          "kit_id": "moncolle-ms-26",
+          "kit_id": "banpresto-2826602",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -807,35 +844,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ゲンガー",
-            "zh": "ゲンガー",
-            "ko": "ゲンガー",
-            "en": "ゲンガー"
+            "ja": "ポケットモンスター ぐらぶらりんぬいぐるみ～エイパム・パチリス・デデンネ～",
+            "zh": "ポケットモンスター ぐらぶらりんぬいぐるみ～エイパム・パチリス・デデンネ～",
+            "ko": "ポケットモンスター ぐらぶらりんぬいぐるみ～エイパム・パチリス・デデンネ～",
+            "en": "ポケットモンスター ぐらぶらりんぬいぐるみ - エイパム パチリス デデンネ -"
           },
-          "release_date": "2026-07",
+          "release_date": "2026-07-23",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms26/"
+            "https://bsp-prize.jp/item/2826602/"
           ]
         },
         {
-          "kit_id": "moncolle-mc-7",
+          "kit_id": "banpresto-2826624",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -844,35 +881,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ピカチュウセレクション でかけるピカチュウ",
-            "zh": "ピカチュウセレクション でかけるピカチュウ",
-            "ko": "ピカチュウセレクション でかけるピカチュウ",
-            "en": "ピカチュウセレクション でかけるピカチュウ"
+            "ja": "ポケットモンスター めちゃもふぐっとぬいぐるみ イーブイフレンズ～イーブイ～おひるねver.",
+            "zh": "ポケットモンスター めちゃもふぐっとぬいぐるみ イーブイフレンズ～イーブイ～おひるねver.",
+            "ko": "ポケットモンスター めちゃもふぐっとぬいぐるみ イーブイフレンズ～イーブイ～おひるねver.",
+            "en": "ポケットモンスター めちゃもふぐっとぬいぐるみ イーブイフレンズ - イーブイ - おひるねver."
           },
-          "release_date": "2026-07",
+          "release_date": "2026-07-23",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/pokemon_30th/dekakeru_pikachu/"
+            "https://bsp-prize.jp/item/2826624/"
           ]
         },
         {
-          "kit_id": "moncolle-mc-117",
+          "kit_id": "banpresto-2832374",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -881,35 +918,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "メガカイリュー",
-            "zh": "メガカイリュー",
-            "ko": "メガカイリュー",
-            "en": "メガカイリュー"
+            "ja": "ポケットモンスター ボールチェーン付きフェイスぬいぐるみ～ミュウ・アチャモ・ミジュマル・カヌチャン～",
+            "zh": "ポケットモンスター 铁球チェーン付きフェイスぬいぐるみ～ミュウ・アチャモ・ミジュマル・カヌチャン～",
+            "ko": "ポケットモンスター 볼チェーン付きフェイスぬいぐるみ～ミュウ・アチャモ・ミジュマル・カヌチャン～",
+            "en": "ポケットモンスター Ballチェーン付きフェイスぬいぐるみ - ミュウ アチャモ ミジュマル カヌチャン -"
           },
-          "release_date": "2026-07",
+          "release_date": "2026-07-22",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/mega_dragonite/"
+            "https://bsp-prize.jp/item/2832374/"
           ]
         },
         {
-          "kit_id": "moncolle-mc-126",
+          "kit_id": "ichibankuji-pk30th-2",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_KUJI",
+          "subline": "一番くじ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -918,35 +955,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "あくテラスタル リザードン",
-            "zh": "あくテラスタル リザードン",
-            "ko": "あくテラスタル リザードン",
-            "en": "あくテラスタル リザードン"
+            "ja": "一番くじ ポケモン 30th ANNIVERSARY vol.2",
+            "zh": "一番くじ 宝可梦 30th ANNIVERSARY vol.2",
+            "ko": "一番くじ 포켓몬 30th ANNIVERSARY vol.2",
+            "en": "一番くじ Pokémon 30th ANNIVERSARY vol.2"
           },
-          "release_date": null,
+          "release_date": "2026-07-18",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "ichiban_kuji_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/terastal_lizardon/"
+            "https://1kuji.com/products/pk30th_2"
           ]
         },
         {
-          "kit_id": "moncolle-ms-46",
+          "kit_id": "banpresto-2824498",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -955,35 +992,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "アブソル",
-            "zh": "アブソル",
-            "ko": "アブソル",
-            "en": "アブソル"
+            "ja": "ポケットモンスター ぬいぐるみ～ソーナンス・チリーン・ニャスパー～",
+            "zh": "ポケットモンスター ぬいぐるみ～ソーナンス・チリーン・ニャスパー～",
+            "ko": "ポケットモンスター ぬいぐるみ～ソーナンス・チリーン・ニャスパー～",
+            "en": "ポケットモンスター ぬいぐるみ - ソーナンス チリーン ニャスパー -"
           },
-          "release_date": null,
+          "release_date": "2026-07-16",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms46/"
+            "https://bsp-prize.jp/item/2824498/"
           ]
         },
         {
-          "kit_id": "moncolle-ml-22",
+          "kit_id": "banpresto-2826600",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -992,35 +1029,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "アルセウス",
-            "zh": "アルセウス",
-            "ko": "アルセウス",
-            "en": "アルセウス"
+            "ja": "ポケットモンスター ぬいぐるみ帽子～ピカチュウ～vol.2",
+            "zh": "ポケットモンスター ぬいぐるみ帽子～ピカチュウ～vol.2",
+            "ko": "ポケットモンスター ぬいぐるみ帽子～ピカチュウ～vol.2",
+            "en": "ポケットモンスター ぬいぐるみ帽子 - ピカチュウ - vol.2"
           },
-          "release_date": null,
+          "release_date": "2026-07-14",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml22/"
+            "https://bsp-prize.jp/item/2826600/"
           ]
         },
         {
-          "kit_id": "moncolle-ms-24",
+          "kit_id": "banpresto-2826563",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1029,35 +1066,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "イッカネズミ (４ひきかぞく)",
-            "zh": "イッカネズミ (４ひきかぞく)",
-            "ko": "イッカネズミ (４ひきかぞく)",
-            "en": "イッカネズミ (４ひきかぞく)"
+            "ja": "ポケットモンスター めちゃもふぐっとぬいぐるみ～ミュウ～にっこりver.",
+            "zh": "ポケットモンスター めちゃもふぐっとぬいぐるみ～ミュウ～にっこりver.",
+            "ko": "ポケットモンスター めちゃもふぐっとぬいぐるみ～ミュウ～にっこりver.",
+            "en": "ポケットモンスター めちゃもふぐっとぬいぐるみ - ミュウ - にっこりver."
           },
-          "release_date": null,
+          "release_date": "2026-07-14",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms24/"
+            "https://bsp-prize.jp/item/2826563/"
           ]
         },
         {
-          "kit_id": "moncolle-ml-13",
+          "kit_id": "banpresto-2843712",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1066,35 +1103,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "イベルタル",
-            "zh": "イベルタル",
-            "ko": "イベルタル",
-            "en": "イベルタル"
+            "ja": "ポケットモンスター しっぽみてみて！ボールチェーン付きフィギュア",
+            "zh": "ポケットモンスター しっぽみてみて！铁球チェーン付きフィギュア",
+            "ko": "ポケットモンスター しっぽみてみて！볼チェーン付きフィギュア",
+            "en": "ポケットモンスター しっぽみてみて！Ballチェーン付きフィギュア"
           },
-          "release_date": null,
+          "release_date": "2026-07-09",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml13/"
+            "https://bsp-prize.jp/item/2843712/"
           ]
         },
         {
-          "kit_id": "moncolle-ms-58",
+          "kit_id": "banpresto-2826565",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1103,35 +1140,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ウェーニバル",
-            "zh": "ウェーニバル",
-            "ko": "ウェーニバル",
-            "en": "ウェーニバル"
+            "ja": "ポケットモンスター ビッグマイクロファイバータオル～30th Anniversary～",
+            "zh": "ポケットモンスター ビッグマイクロファイバータオル～30th Anniversary～",
+            "ko": "ポケットモンスター ビッグマイクロファイバータオル～30th Anniversary～",
+            "en": "ポケットモンスター ビッグマイクロファイバータオル - 30th Anniversary -"
           },
-          "release_date": null,
+          "release_date": "2026-07-09",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms58/"
+            "https://bsp-prize.jp/item/2826565/"
           ]
         },
         {
-          "kit_id": "moncolle-mc-122",
+          "kit_id": "banpresto-2827809",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1140,35 +1177,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ウガツホムラ",
-            "zh": "ウガツホムラ",
-            "ko": "ウガツホムラ",
-            "en": "ウガツホムラ"
+            "ja": "ポケットモンスター もふぐっと ほっこりいやされぬいぐるみ～エネコ・モクロー～",
+            "zh": "ポケットモンスター もふぐっと ほっこりいやされぬいぐるみ～エネコ・モクロー～",
+            "ko": "ポケットモンスター もふぐっと ほっこりいやされぬいぐるみ～エネコ・モクロー～",
+            "en": "ポケットモンスター もふぐっと ほっこりいやされぬいぐるみ - エネコ モクロー -"
           },
-          "release_date": null,
+          "release_date": "2026-07-09",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/paradox_ugatsuhomura/"
+            "https://bsp-prize.jp/item/2827809/"
           ]
         },
         {
-          "kit_id": "moncolle-mc-121",
+          "kit_id": "banpresto-2826603",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1177,35 +1214,35 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ウネルミナモ",
-            "zh": "ウネルミナモ",
-            "ko": "ウネルミナモ",
-            "en": "ウネルミナモ"
+            "ja": "ポケモンフォーカス 〈地方別のすがた〉 ぬいぐるみ～ガーディ・ガーディ（ヒスイのすがた）・ウパー・ウパー（パルデアのすがた）～",
+            "zh": "宝可梦フォーカス 〈地方別のすがた〉 ぬいぐるみ～ガーディ・ガーディ（ヒスイのすがた）・ウパー・ウパー（パルデアのすがた）～",
+            "ko": "포켓몬フォーカス 〈地方別のすがた〉 ぬいぐるみ～ガーディ・ガーディ（ヒスイのすがた）・ウパー・ウパー（パルデアのすがた）～",
+            "en": "Pokemonフォーカス 〈地方別のすがた〉 ぬいぐるみ - ガーディ ガーディ (ヒスイのすがた) ウパー ウパー (パルデアのすがた) -"
           },
-          "release_date": null,
+          "release_date": "2026-07-09",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "banpresto_prize_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/paradox_uneruminamo/"
+            "https://bsp-prize.jp/item/2826603/"
           ]
         },
         {
-          "kit_id": "moncolle-ms-35",
+          "kit_id": "ichibankuji-pk30th-1",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_KUJI",
+          "subline": "一番くじ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1214,27 +1251,27 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "エースバーン",
-            "zh": "エースバーン",
-            "ko": "エースバーン",
-            "en": "エースバーン"
+            "ja": "一番くじ ポケモン 30th ANNIVERSARY vol.1",
+            "zh": "一番くじ 宝可梦 30th ANNIVERSARY vol.1",
+            "ko": "一番くじ 포켓몬 30th ANNIVERSARY vol.1",
+            "en": "一番くじ Pokémon 30th ANNIVERSARY vol.1"
           },
-          "release_date": null,
+          "release_date": "2026-05-30",
           "price_jpy": null,
-          "is_limited": false,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
-            "series"
+            "name"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "ichiban_kuji_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms35/"
+            "https://1kuji.com/products/pk30th_1"
           ]
         }
       ],
@@ -1385,6 +1422,43 @@
           ],
           "source_urls": [
             "https://www.pokemoncenter-online.com/4521329316321.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329339245",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "420 ぬいぐるみ Pok&eacute;mon fit チェリンボ",
+            "zh": "420 ぬいぐるみ Pok&eacute;mon fit チェリンボ",
+            "ko": "420 ぬいぐるみ Pok&eacute;mon fit チェリンボ",
+            "en": "420 ぬいぐるみ Pok&eacute;mon fit チェリンボ"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329339245.html"
           ]
         },
         {
