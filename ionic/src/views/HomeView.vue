@@ -2,25 +2,31 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Gunpula</ion-title>
+        <ion-title>{{ worldText(worldConfig().title) }}</ion-title>
+        <ion-buttons slot="end">
+          <ion-button @click="openProfile"><ion-icon :icon="personCircle" slot="icon-only" /></ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+      <ion-toolbar>
+        <world-switcher />
       </ion-toolbar>
     </ion-header>
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">首页</ion-title>
-        </ion-toolbar>
-      </ion-header>
 
-      <div v-if="error" class="ion-padding">加载失败：{{ error }}</div>
-      <ion-list v-else>
-        <ion-item v-for="kit in kits" :key="kit.kit_id">
+    <ion-content :fullscreen="true">
+      <p class="world-lead ion-padding">{{ worldText(worldConfig().lead) }}</p>
+
+      <div v-if="state.error" class="ion-padding">加载失败：{{ state.error }}</div>
+      <ion-list v-else lines="full">
+        <ion-list-header>
+          <ion-label>{{ franchiseLabel(state.franchise) }} · {{ kits.length }}</ion-label>
+        </ion-list-header>
+        <ion-item v-for="kit in preview" :key="kit.kit_id" button @click="openDetail(kit)">
           <ion-thumbnail slot="start" v-if="kit.images?.box_art_url">
-            <img :src="kit.images.box_art_url" :alt="name(kit)" />
+            <img :src="kit.images.box_art_url" :alt="name(kit)" loading="lazy" />
           </ion-thumbnail>
           <ion-label>
             <h2>{{ name(kit) }}</h2>
-            <p>{{ kit.grade_code }} · {{ kit.release_date || "—" }}</p>
+            <p>{{ gradeLabel(kit.grade_code) }} · {{ kit.release_date || "—" }}</p>
           </ion-label>
         </ion-item>
       </ion-list>
@@ -29,25 +35,35 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { computed, watch, onMounted } from "vue";
 import {
-  IonPage, IonHeader, IonToolbar, IonTitle, IonContent,
-  IonList, IonItem, IonLabel, IonThumbnail,
+  IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonIcon,
+  IonList, IonListHeader, IonItem, IonLabel, IonThumbnail,
 } from "@ionic/vue";
-import { loadFranchise } from "../services/catalog";
+import { personCircle } from "ionicons/icons";
+import WorldSwitcher from "../components/WorldSwitcher.vue";
+import { useStore } from "../store";
 
-const kits = ref([]);
-const error = ref(null);
+const { state, name, franchiseLabel, gradeLabel, worldText, worldConfig, ensureFranchise, currentKits } = useStore();
 
-// Proof-of-toolchain: load a small real franchise (armored_core, ~20 records)
-// so the build exercises Ionic components + async data + list rendering.
-const name = (kit) => kit.names?.zh || kit.names?.ja || kit.names?.en || kit.kit_id;
+const kits = currentKits;
+const preview = computed(() => kits.value.slice(0, 40));
 
-onMounted(async () => {
-  try {
-    kits.value = await loadFranchise("armored_core");
-  } catch (e) {
-    error.value = String(e.message || e);
-  }
-});
+function openDetail(/* kit */) {
+  // Detail modal lands in the detail-view stage.
+}
+function openProfile() {
+  // Profile modal lands in the 我的 stage.
+}
+
+onMounted(() => ensureFranchise());
+watch(() => state.franchise, () => ensureFranchise());
 </script>
+
+<style scoped>
+.world-lead {
+  margin: 0;
+  color: var(--ion-color-medium);
+  font-size: 14px;
+}
+</style>
