@@ -131,6 +131,8 @@ const SYNC_HISTORY_LIMIT = 20;
 const KIT_RENDER_BATCH = 160;
 const RECENT_UPDATE_DAYS = 3;
 const UPDATES_MODE_KEY = "gunpula-updates-mode-v1";
+// 最近页的三个视图，顺序同时决定左右滑动的切换顺序。
+const UPDATES_MODES = ["recent", "month", "all"];
 const RADIAL_HOLD_MS = 850;
 const RADIAL_SCROLL_CANCEL_DISTANCE = 10;
 const RADIAL_CANCEL_DISTANCE = 18;
@@ -277,7 +279,7 @@ const state = {
   homeCovers: loadHomeCovers(),
   recentViewed: loadRecentViewed(),
   releaseMonth: localStorage.getItem(RELEASE_MONTH_KEY) || "",
-  updatesMode: ["recent", "month"].includes(localStorage.getItem(UPDATES_MODE_KEY)) ? localStorage.getItem(UPDATES_MODE_KEY) : "recent",
+  updatesMode: UPDATES_MODES.includes(localStorage.getItem(UPDATES_MODE_KEY)) ? localStorage.getItem(UPDATES_MODE_KEY) : "recent",
   radial: { timer: null, active: false, startX: 0, startY: 0, lastX: 0, lastY: 0, touchId: null, selected: null, target: null, suppressClick: false },
   pager: { active: false, touchId: null, startX: 0, startY: 0, deltaX: 0, target: null, settling: false, suppressClick: false, blockedByTarget: false },
   syncConfig: loadSyncConfig(),
@@ -409,8 +411,6 @@ const elements = {
   updatesSubtitle: document.querySelector("#updatesSubtitle"),
   updatesOpenSettings: document.querySelector("#updatesOpenSettings"),
   updatesDateInput: document.querySelector("#updatesDateInput"),
-  updatesRecentButton: document.querySelector("#updatesRecentButton"),
-  updatesMonthButton: document.querySelector("#updatesMonthButton"),
   avatarInput: document.querySelector("#avatarInput"),
   profileFavorites: document.querySelector("#profileFavorites"),
   favoriteFranchises: document.querySelector("#favoriteFranchises"),
@@ -427,6 +427,8 @@ const elements = {
   userRowWanted: document.querySelector("#userRowWanted"),
   userOwnedCount: document.querySelector("#userOwnedCount"),
   userWantedCount: document.querySelector("#userWantedCount"),
+  userRowRecentViewed: document.querySelector("#userRowRecentViewed"),
+  userRecentViewedCount: document.querySelector("#userRecentViewedCount"),
   userInviteLine: document.querySelector("#userInviteLine"),
   userInviteCode: document.querySelector("#userInviteCode"),
   userCopyInvite: document.querySelector("#userCopyInvite"),
@@ -511,9 +513,6 @@ const elements = {
   homePulse: document.querySelector("#homePulse"),
   homeGrid: document.querySelector("#homeGrid"),
   homeTotal: document.querySelector("#homeTotal"),
-  homeCollectionTotal: document.querySelector("#homeCollectionTotal"),
-  homeCollectionOverview: document.querySelector("#homeCollectionOverview"),
-  homeRecentViewed: document.querySelector("#homeRecentViewed"),
   pbandaiSection: document.querySelector("#pbandaiSection"),
   pbandaiSubtitle: document.querySelector("#pbandaiSubtitle"),
   pbandaiFranchiseTabs: document.querySelector("#pbandaiFranchiseTabs"),
@@ -1557,12 +1556,6 @@ function bindEvents() {
     localStorage.setItem(RELEASE_MONTH_KEY, state.releaseMonth);
     setUpdatesMode("month");
   });
-  elements.updatesRecentButton?.addEventListener("click", () => {
-    setUpdatesMode("recent");
-  });
-  elements.updatesMonthButton?.addEventListener("click", () => {
-    setUpdatesMode("month");
-  });
   elements.accountAvatar?.addEventListener("click", () => {
     if (syncModeV2() && state.sync.workspace) {
       elements.avatarInput?.click();
@@ -1700,6 +1693,9 @@ function bindEvents() {
     state.collectionMemberView = "self";
     localStorage.setItem(COLLECTION_MEMBER_VIEW_KEY, state.collectionMemberView);
     switchToView("wanted");
+  });
+  elements.userRowRecentViewed?.addEventListener("click", () => {
+    openUserPanelDialog("recentViewed");
   });
   elements.userRowSettings?.addEventListener("click", () => {
     closeUserPage();
@@ -2435,7 +2431,7 @@ function pagerTargetForDelta(deltaX) {
     return target ? `guide:${target}` : null;
   }
   if (state.activeView === "updates") {
-    const modes = ["recent", "month"];
+    const modes = UPDATES_MODES;
     const index = modes.indexOf(state.updatesMode || "recent");
     const target = modes[index + offset];
     return target ? `updates:${target}` : null;
@@ -2580,7 +2576,7 @@ function showPagerPreviewTarget(target) {
   body.className = "pager-preview-body";
   const label =
     type === "updates"
-      ? ({ recent: t("recentDaysShort"), month: t("monthReleaseShort") }[value] || value)
+      ? ({ recent: t("recentDaysShort"), month: t("monthReleaseShort"), all: t("updatesAllShort") }[value] || value)
       : type === "guide"
         ? guideTabLabel(value)
       : value === "owned"
@@ -4499,79 +4495,48 @@ function renderWorldSection() {
 }
 
 function renderHomeDashboard() {
-  renderHomeCollectionOverview();
-  renderHomeRecentViewed();
-}
-
-function renderHomeCollectionOverview() {
-  if (!elements.homeCollectionOverview) {
-    return;
-  }
-  const self = editableCollectionMember();
-  const ownedSelfIds = collectionIdsForMember("owned", self);
-  const wantedSelfIds = collectionIdsForMember("wanted", self);
-  const ownedCount = ownedSelfIds.reduce((total, kitId) => total + collectionQuantityForMember(kitId, "owned", self), 0);
-  const wantedCount = wantedSelfIds.reduce((total, kitId) => total + collectionQuantityForMember(kitId, "wanted", self), 0);
-  elements.homeCollectionTotal.textContent = t("records", { count: ownedCount + wantedCount });
-  elements.homeCollectionOverview.innerHTML = "";
-  for (const type of COLLECTION_TYPES) {
-    const ids = (type === "owned" ? ownedSelfIds : wantedSelfIds).filter((kitId) => displayKitById(kitId)).slice(0, 4);
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = `home-collection-card is-${type}`;
-    button.addEventListener("click", () => {
-      if (elements.userDialog?.open) elements.userDialog.close();
-      navigateToCollectionView(type);
-    });
-    const label = document.createElement("strong");
-    label.textContent = t(type === "owned" ? "ownedList" : "wantedList");
-    const count = document.createElement("span");
-    count.textContent = t("records", { count: type === "owned" ? ownedCount : wantedCount });
-    const thumbs = document.createElement("div");
-    thumbs.className = "home-mini-thumbs";
-    for (const kitId of ids) {
-      const kit = displayKitById(kitId);
-      const slot = document.createElement("span");
-      appendImageWithFallback(slot, kit, { alt: kitShortName(kit) });
-      thumbs.append(slot);
-    }
-    if (!ids.length) {
-      const empty = document.createElement("em");
-      empty.textContent = t("homeCollectionEmpty");
-      thumbs.append(empty);
-    }
-    button.append(label, count, thumbs);
-    elements.homeCollectionOverview.append(button);
+  // 我的收藏概览已移除；个人页现在只需要刷新「最近查看」入口上的计数。
+  if (elements.userRecentViewedCount) {
+    elements.userRecentViewedCount.textContent = String(recentViewedKits().length);
   }
 }
 
-function renderHomeRecentViewed() {
-  if (!elements.homeRecentViewed) {
-    return;
-  }
-  elements.homeRecentViewed.innerHTML = "";
-  const kits = state.recentViewed.map(displayKitById).filter(Boolean).slice(0, 6);
+function recentViewedKits() {
+  return state.recentViewed.map(displayKitById).filter(Boolean);
+}
+
+// 「最近查看」从个人页的独立板块改成菜单入口，列表移进通用的 user-panel 弹层。
+function renderRecentViewedPanel(container) {
+  const kits = recentViewedKits();
   if (!kits.length) {
     const empty = document.createElement("div");
     empty.className = "home-empty-note";
     empty.textContent = t("recentViewedEmpty");
-    elements.homeRecentViewed.append(empty);
+    container.append(empty);
     return;
   }
+  const list = document.createElement("div");
+  list.className = "home-recent-list";
   for (const kit of kits) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "home-recent-item";
-    button.addEventListener("click", () => openDetail(kit));
+    button.addEventListener("click", () => {
+      closeDialog(elements.userPanelDialog);
+      openDetail(kit);
+    });
     const art = document.createElement("span");
     art.className = "home-recent-art";
     appendImageWithFallback(art, kit, { alt: kitShortName(kit) });
     const body = document.createElement("span");
     body.className = "home-recent-body";
-    body.innerHTML = `<strong>${escapeHtml(kitShortName(kit))}</strong><em>${escapeHtml([franchiseShortLabel(kit.franchise), seriesLabelFromKit(kit), gradeShortLabel(kit)].filter(Boolean).join(" · "))}</em>`;
+    body.innerHTML = `<strong>${escapeHtml(kitShortName(kit))}</strong><em>${escapeHtml(
+      [franchiseShortLabel(kit.franchise), seriesLabelFromKit(kit), gradeShortLabel(kit)].filter(Boolean).join(" · "),
+    )}</em>`;
     button.append(art, body);
-    elements.homeRecentViewed.append(button);
+    list.append(button);
   }
+  container.append(list);
 }
 
 function datasetSummary() {
@@ -4731,6 +4696,16 @@ function recentUpdateItems(limit = 6, franchise = null) {
   return feedRecentUpdateItems(state.updateFeed, { limit, franchise });
 }
 
+// 「全部」视图把两个来源拼在一起，同一件商品可能既是最近添加又在本月发售。
+function dedupeKits(kits) {
+  const seen = new Set();
+  return kits.filter((kit) => {
+    if (!kit || seen.has(kit.kit_id)) return false;
+    seen.add(kit.kit_id);
+    return true;
+  });
+}
+
 function renderUpdateSummaryCards(container, cards) {
   container.innerHTML = "";
   container.classList.add("is-inline");
@@ -4770,9 +4745,9 @@ function renderDiscoveryChannels(mode, count) {
   elements.homeUpdateSummary.classList.add("is-channels");
   elements.homeUpdateSummary.innerHTML = "";
   const channels = [
-    { label: t("discoverCatalog"), active: state.activeView === "catalog", action: () => switchToView("catalog") },
-    { label: t("recentDaysShort"), active: mode === "recent" && state.activeView === "updates", action: () => setUpdatesMode("recent"), count },
-    { label: t("monthReleaseShort"), active: mode === "month" && state.activeView === "updates", action: () => setUpdatesMode("month") },
+    { label: t("recentDaysShort"), active: mode === "recent" && state.activeView === "updates", action: () => setUpdatesMode("recent"), count: mode === "recent" ? count : undefined },
+    { label: t("monthReleaseShort"), active: mode === "month" && state.activeView === "updates", action: () => setUpdatesMode("month"), count: mode === "month" ? count : undefined },
+    { label: t("updatesAllShort"), active: mode === "all" && state.activeView === "updates", action: () => setUpdatesMode("all"), count: mode === "all" ? count : undefined },
   ];
   for (const channel of channels) {
     const button = document.createElement("button");
@@ -4821,13 +4796,16 @@ function renderHomeUpdates() {
   elements.updatesDateInput.value = state.releaseMonth;
   localStorage.setItem(RELEASE_MONTH_KEY, state.releaseMonth);
 
-  // Two modes only: 最近添加 (feed) and 本月发售 (month picker). The month input
-  // shows only in month mode.
-  const mode = state.updatesMode === "month" ? "month" : "recent";
-  elements.updatesRecentButton?.classList.toggle("is-active", mode === "recent");
-  elements.updatesMonthButton?.classList.toggle("is-active", mode === "month");
-  if (elements.updatesDateInput) elements.updatesDateInput.hidden = mode !== "month";
-  const sourceItems = mode === "month" ? releaseItemsForMonth(state.releaseMonth) : recentFeedKits();
+  // Three modes: 最近添加 (feed), 本月发售 (month picker) and 全部 (both merged).
+  // The month input shows wherever the month feed is part of the result.
+  const mode = UPDATES_MODES.includes(state.updatesMode) ? state.updatesMode : "recent";
+  if (elements.updatesDateInput) elements.updatesDateInput.hidden = mode === "recent";
+  const sourceItems =
+    mode === "month"
+      ? releaseItemsForMonth(state.releaseMonth)
+      : mode === "recent"
+        ? recentFeedKits()
+        : dedupeKits([...recentFeedKits(), ...releaseItemsForMonth(state.releaseMonth)]);
   const items = sortByPreference(sourceItems.filter((kit) => kit.franchise === state.franchise && kitMatchesSearchQuery(kit)));
   renderDiscoveryChannels(mode, items.length);
   if (elements.sourceHealthStrip) {
@@ -4843,7 +4821,9 @@ function renderHomeUpdates() {
   elements.updatesSubtitle.textContent =
     mode === "month"
       ? t("releaseMonthSummary", { month: state.releaseMonth, count: items.length })
-      : t("recentDaysSummary", { days: RECENT_UPDATE_DAYS, count: items.length });
+      : mode === "all"
+        ? t("updatesAllSummary", { count: items.length })
+        : t("recentDaysSummary", { days: RECENT_UPDATE_DAYS, count: items.length });
   elements.homeUpdateList.innerHTML = "";
   if (!items.length) {
     const empty = document.createElement("div");
@@ -7205,7 +7185,7 @@ function switchGuideTab(tab) {
 }
 
 function setUpdatesMode(mode) {
-  if (!["recent", "month"].includes(mode)) return;
+  if (!UPDATES_MODES.includes(mode)) return;
   state.updatesMode = mode;
   localStorage.setItem(UPDATES_MODE_KEY, state.updatesMode);
   renderHomeUpdates();
@@ -8643,12 +8623,21 @@ function openUserPanel(panel) {
 
 function openUserPanelDialog(panel) {
   if (!elements.userPanelDialog || !elements.userPanelBody) return;
-  elements.userPanelTitle.textContent = panel === "friends" ? t("workspaceFriends") : panel === "guideWorks" ? t("memberGuideManage") : t("myFavorites");
+  elements.userPanelTitle.textContent =
+    panel === "friends"
+      ? t("workspaceFriends")
+      : panel === "guideWorks"
+        ? t("memberGuideManage")
+        : panel === "recentViewed"
+          ? t("recentViewed")
+          : t("myFavorites");
   elements.userPanelBody.innerHTML = "";
   if (panel === "friends") {
     renderFriendsPanel(elements.userPanelBody);
   } else if (panel === "guideWorks") {
     renderGuideWorksPanel(elements.userPanelBody);
+  } else if (panel === "recentViewed") {
+    renderRecentViewedPanel(elements.userPanelBody);
   } else {
     renderFavoritesPanel(elements.userPanelBody);
   }

@@ -59,6 +59,27 @@
       "notes": "Primary source for Premium Bandai limited Gunpla."
     },
     {
+      "source_id": "p_bandai_wayback",
+      "name": "Premium Bandai Japan (Wayback Machine)",
+      "type": "archive",
+      "country": "JP",
+      "base_url": "https://web.archive.org/web/https://p-bandai.jp/item/",
+      "priority": 3,
+      "best_for": [
+        "P-Bandai price",
+        "order window",
+        "shipping month",
+        "availability",
+        "items unreachable from outside Japan"
+      ],
+      "weak_for": [
+        "items never archived",
+        "stale snapshots",
+        "pages captured while archive.org was itself redirected"
+      ],
+      "notes": "p-bandai.jp geo-blocks every non-Japanese IP on all paths, so the catalog reads Premium Bandai through archive.org snapshots instead."
+    },
+    {
       "source_id": "the_gundam_base_jp",
       "name": "The Gundam Base Japan",
       "type": "official_store_jp",

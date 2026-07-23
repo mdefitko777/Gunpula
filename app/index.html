@@ -85,8 +85,6 @@
             <p id="updatesSubtitle"></p>
           </div>
           <div class="updates-actions">
-            <button class="secondary-button compact-button" id="updatesRecentButton" type="button" data-i18n="recentDaysShort">最近添加</button>
-            <button class="secondary-button compact-button" id="updatesMonthButton" type="button" data-i18n="monthReleaseShort">本月发售</button>
             <input id="updatesDateInput" type="month" aria-label="选择发售月份" data-i18n-aria="releaseMonth" hidden />
           </div>
         </div>
@@ -579,6 +577,11 @@
             <span class="user-menu-label" data-i18n="wantedList">想要</span>
             <span class="user-menu-value" id="userWantedCount">0</span>
           </button>
+          <button class="user-menu-row" id="userRowRecentViewed" type="button">
+            <span class="user-menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v5h5"/><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/><path d="M12 7v5l4 2"/></svg></span>
+            <span class="user-menu-label" data-i18n="recentViewed">最近查看</span>
+            <span class="user-menu-value" id="userRecentViewedCount">0</span>
+          </button>
           <details class="user-menu-details">
             <summary class="user-menu-row">
               <span class="user-menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span>
@@ -614,21 +617,6 @@
             <span class="user-menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg></span>
             <span class="user-menu-label" data-i18n="accountSignOut">退出登录</span>
           </button>
-        </div>
-        <div class="home-dashboard user-dashboard">
-          <section class="home-panel">
-            <div class="home-panel-head">
-              <h2 data-i18n="homeCollectionOverview">我的收藏</h2>
-              <span id="homeCollectionTotal">0</span>
-            </div>
-            <div class="home-collection-overview" id="homeCollectionOverview"></div>
-          </section>
-          <section class="home-panel">
-            <div class="home-panel-head">
-              <h2 data-i18n="recentViewed">最近查看</h2>
-            </div>
-            <div class="home-recent-list" id="homeRecentViewed"></div>
-          </section>
         </div>
       </div>
     </dialog>

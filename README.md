@@ -124,39 +124,26 @@ Workflow：
 
 前端不会直接访问 `p-bandai.jp`。
 
-Premium Bandai JP 可能有地区限制，所以流程是：
+`p-bandai.jp` 对日本以外的 IP 是全站封锁：包括 `robots.txt` 和 `sitemap.xml` 在内的每一个路径，都会返回同一个约 2.2KB 的「アクセス制限」页。改请求头没用（`Accept-Language: ja-JP`、Googlebot UA 都试过），它按 IP 判断，所以直抓在 GitHub 官方 runner 上永远不可能成功。
 
-1. 日本环境或 VPS 跑抓取脚本
-2. 生成 `data/pbandai.json`
-3. 前端只读取这个 JSON
+因此 PB 日本站走两条互补的间接路径：
 
-脚本：
+1. **反查**（`npm run import:pb`）——抓万代 SPIRITS 官方商品页（不锁区），从 HTML 里提取真实的 `p-bandai.jp/item/item-xxxx/` 链接。覆盖存量老品，但看不见没有万代商品页的 PB 独占新品。
+2. **存档**（`npm run import:pb:wayback`）——archive.org 不在万代的封锁名单里，存有完整的日文商品页。补上反查的盲区，并拿到只有 PB 页面才有的价格、受注期间、发送月份和在售状态。
 
-```bash
-python scripts/crawl_pbandai.py
-```
-
-每日日本 PB 直抓需要一台日本网络的 self-hosted runner：
-
-- Workflow：`.github/workflows/refresh-pbandai-jp.yml`
-- Runner 标签：`self-hosted`、`linux`、`pbandai-jp`
-- 命令：`npm run refresh:pb:japan`
-
-GitHub 官方 runner 不在日本，会被重定向到 `https://p-bandai.jp/global_newpc.html`。这种情况下普通每日目录任务只会从 Bandai Spirits 商品页恢复 PB 链接，不会冒充完整 PB 日本站抓取。
-
-输入来源：
-
-- `data/pbandai_sources.json`
+两者都挂在每日 `npm run import:data` 里，不需要日本 IP，也不需要 self-hosted runner。
 
 输出缓存：
 
 - `data/pbandai.json`
+- `data/premium-bandai-jp-index.json`（反查的扫描记录）
+- `data/premium-bandai-wayback-index.json`（存档抓取的增量记录）
 
 手动补充：
 
 - `data/pbandai_manual_products.json`
 
-这个脚本不会做登录绕过、验证码绕过、代理轮换或反爬绕过。被地区限制时会记录 blocked 状态，不会让前端直接硬爬。
+这些脚本不会做登录绕过、验证码绕过、代理轮换或反爬绕过。存档路径读的是 archive.org 的公开快照，不去碰被封锁的源站。
 
 ## 本地运行
 

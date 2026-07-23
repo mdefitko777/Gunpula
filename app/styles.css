@@ -1139,11 +1139,6 @@ h1 {
   color: var(--ink);
 }
 
-#updatesRecentButton,
-#updatesWeekButton {
-  display: none;
-}
-
 .home-update-summary {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
