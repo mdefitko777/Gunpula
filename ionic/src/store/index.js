@@ -4,7 +4,8 @@ import { FRANCHISES, kitDisplayNameFor, franchiseShortLabelFor, gradeShortLabelF
 import { WORLD_THEME_CONFIG, localizedWorldText } from "@app/world-themes.js";
 import { getString, setString, getJson, setJson } from "@app/storage.js";
 import { normalizeCollection } from "@app/collection-store.js";
-import { loadFranchise } from "../services/catalog";
+import { recentFeedKits, releaseItemsForMonth, defaultReleaseMonth, validReleaseMonth } from "@app/update-feed.js";
+import { loadFranchise, loadUpdateFeed } from "../services/catalog";
 
 const LANG_KEY = "gunpula-catalog-language-v1";
 const FRANCHISE_KEY = "gunpula-catalog-franchise-v1";
@@ -32,9 +33,39 @@ const state = reactive({
   franchise: initialFranchise(),
   catalogByFranchise: {},
   collection: normalizeCollection(getJson(COLLECTION_KEY, {}), { self: SELF }),
+  updateFeed: null,
+  releaseMonth: "",
   loading: false,
   error: null,
 });
+
+// --- Recent / releases feed ----------------------------------------------
+async function ensureUpdateFeed() {
+  if (state.updateFeed) return state.updateFeed;
+  state.updateFeed = await loadUpdateFeed();
+  return state.updateFeed;
+}
+
+// 最近添加 (recently added by the daily pipeline), scoped to the current world.
+function recentAddedKits(days = 3) {
+  if (!state.updateFeed) return [];
+  return recentFeedKits(state.updateFeed, { days, displayKitById: kitById })
+    .filter((kit) => kit.franchise === state.franchise);
+}
+
+// 本月发售 for the current world (only needs kits + release_date).
+function releaseMonthKits(month = state.releaseMonth) {
+  const kits = state.catalogByFranchise[state.franchise] || [];
+  return releaseItemsForMonth(kits, { month, nameForSort: (k) => helpers.name(k) });
+}
+
+function defaultMonth() {
+  return defaultReleaseMonth(state.catalogByFranchise[state.franchise] || []);
+}
+
+function setReleaseMonth(month) {
+  state.releaseMonth = validReleaseMonth(month) || defaultMonth();
+}
 
 // --- Collection (owned / wanted) -----------------------------------------
 // The store owns the self member's items; toggling rebuilds member_items and
@@ -137,6 +168,11 @@ export function useStore() {
     setFranchise,
     ensureFranchise,
     ensureAllFranchises,
+    ensureUpdateFeed,
+    recentAddedKits,
+    releaseMonthKits,
+    defaultMonth,
+    setReleaseMonth,
     kitById,
     collectionStatus,
     setCollectionStatus,

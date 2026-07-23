@@ -9,3 +9,17 @@ export async function loadFranchise(franchise) {
   const data = await res.json();
   return data.kits || [];
 }
+
+// The daily "recently added" feed. Prefer the lite build; fall back to the full
+// one. Never throws — recent-added is a convenience over the month view.
+export async function loadUpdateFeed() {
+  for (const name of ["update-feed-lite.json", "update-feed.json"]) {
+    try {
+      const res = await fetch(`${DATA_BASE}/${name}`);
+      if (res.ok) return await res.json();
+    } catch {
+      // try next
+    }
+  }
+  return { entries: [] };
+}
