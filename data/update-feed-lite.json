@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-07-24",
-  "generated_at": "2026-07-23T16:04:24.613Z",
+  "generated_at": "2026-07-23T20:24:40.286Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,45 +16,278 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-07-23T16:04:23.880Z",
+    "generated_at": "2026-07-23T20:24:39.580Z",
     "blocked_count": 1,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-07-24",
-      "generated_at": "2026-07-23T16:04:24.613Z",
+      "generated_at": "2026-07-23T20:24:40.286Z",
       "total_before": 5069,
-      "total_after": 5067,
-      "added_count": 0,
-      "changed_count": 104,
+      "total_after": 5073,
+      "added_count": 6,
+      "changed_count": 149,
       "removed_count": 2,
-      "watched_count": 27,
-      "premium_bandai_count": 81,
+      "watched_count": 45,
+      "premium_bandai_count": 132,
       "bbx_count": 0,
       "franchise_counts": {
+        "gundam": 129,
         "armored_core": 3,
-        "gundam": 78,
         "pokemon": 23
       },
       "reason_counts": {
-        "source": 81,
+        "new": 6,
+        "source": 126,
         "image": 23,
         "removed": 2
       },
       "interest_tags": [
-        "armored_core",
-        "premium_bandai",
         "gundam",
+        "premium_bandai",
         "seed",
         "00",
+        "armored_core",
         "pokemon"
       ],
       "watch_tags": [
         "seed",
         "00"
       ],
-      "added": [],
+      "added": [
+        {
+          "kit_id": "pbandai-wb-1000105795",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ガンダムアストレイ ノワール 【再販】【２次：２０１６年１０月発送】",
+            "zh": "ＭＧ 1 / 100 高达异端 ノワール 【再贩】【２次：２０１６年１０月発送】",
+            "ko": "ＭＧ 1 / 100 건담아스트레이 느와르 【재판】【２次：２０１６年１０月発送】",
+            "en": "ＭＧ 1 / 100 Gundam Astray ノワール [Reissue][２次：２０１６年１０月発送]"
+          },
+          "release_date": "2016-10",
+          "price_jpy": 5400,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000105795/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000068447",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "other",
+          "series_labels": {
+            "zh": "其他",
+            "en": "Other",
+            "ja": "その他",
+            "ko": "기타"
+          },
+          "names": {
+            "ja": "アクションベース１ ブラック",
+            "zh": "アクションベース１ ブラック",
+            "ko": "アクションベース１ ブラック",
+            "en": "アクションベース１ ブラック"
+          },
+          "release_date": "2026-10",
+          "price_jpy": 605,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000068447/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000101185",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "uc_first",
+          "series_labels": {
+            "zh": "初代",
+            "en": "0079",
+            "ja": "初代",
+            "ko": "초대"
+          },
+          "names": {
+            "ja": "ROBOT魂 〈SIDE MS〉 RX-78-3 G-3 ガンダム ver. A.N.I.M.E.",
+            "zh": "ROBOT魂 〈SIDE MS〉 RX-78-3 G-3 高达 ver. A.N.I.M.E.",
+            "ko": "ROBOT魂 〈SIDE MS〉 RX-78-3 G-3 건담 ver. A.N.I.M.E.",
+            "en": "ROBOT魂 〈SIDE MS〉 RX-78-3 G-3 Gundam ver. A.N.I.M.E."
+          },
+          "release_date": "2016-09",
+          "price_jpy": 5940,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000101185/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000103503",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "ibo",
+          "series_labels": {
+            "zh": "铁血",
+            "en": "Iron-Blooded Orphans",
+            "ja": "鉄血",
+            "ko": "철혈"
+          },
+          "names": {
+            "ja": "機動戦士ガンダム鉄血のオルフェンズ ＨＧ 鉄華団",
+            "zh": "机动战士高达铁血孤儿 ＨＧ 鉄華団",
+            "ko": "기동전사 건담철혈의 오펀스 ＨＧ 鉄華団",
+            "en": "Mobile Suit Gundam Iron-Blooded Orphans ＨＧ 鉄華団"
+          },
+          "release_date": "2016-06",
+          "price_jpy": 8640,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000103503/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000095901",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "uc_first",
+          "series_labels": {
+            "zh": "初代",
+            "en": "0079",
+            "ja": "初代",
+            "ko": "초대"
+          },
+          "names": {
+            "ja": "ＲＧ 1 / 144 RX-78-3 Ｇ-３ガンダム 【２次：２０１５年５月発送】",
+            "zh": "ＲＧ 1 / 144 RX-78-3 Ｇ-３高达 【２次：２０１５年５月発送】",
+            "ko": "ＲＧ 1 / 144 RX-78-3 Ｇ-３건담 【２次：２０１５年５月発送】",
+            "en": "ＲＧ 1 / 144 RX-78-3 Ｇ-３Gundam [２次：２０１５年５月発送]"
+          },
+          "release_date": "2015-05",
+          "price_jpy": 2808,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000095901/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000092555",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "other",
+          "series_labels": {
+            "zh": "其他",
+            "en": "Other",
+            "ja": "その他",
+            "ko": "기타"
+          },
+          "names": {
+            "ja": "アクションベース１ クリア",
+            "zh": "アクションベース１ クリア",
+            "ko": "アクションベース１ クリア",
+            "en": "アクションベース１ クリア"
+          },
+          "release_date": null,
+          "price_jpy": 605,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000092555/"
+          ]
+        }
+      ],
       "changed": [
         {
           "kit_id": "hg-hg-1-144-4573102742490000",
