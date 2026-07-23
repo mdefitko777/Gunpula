@@ -124,6 +124,7 @@ function toKit(product, index) {
       box_art_source_id: product.image ? SOURCE_ID : null,
     },
     gallery_image_urls: product.image ? [product.image] : [],
+    series: { key: "pokemon", sort: 400, labels: { zh: "宝可梦", en: "Pokemon", ja: "ポケモン", ko: "포켓몬" } },
     universe: "Pokemon",
     work_title: "Pokemon",
     release_date: product.release_date,

@@ -413,6 +413,38 @@
         "gunpla"
       ],
       "notes": "Official Takara Tomy Moncolle lineup page; one page lists the full range."
+    },
+    {
+      "source_id": "banpresto_prize_jp",
+      "name": "Banpresto Prize (JP)",
+      "type": "official",
+      "country": "JP",
+      "base_url": "https://bsp-prize.jp/",
+      "priority": 3,
+      "best_for": [
+        "prize figures",
+        "plush"
+      ],
+      "weak_for": [
+        "prices"
+      ],
+      "notes": "Server-rendered listing page."
+    },
+    {
+      "source_id": "good_smile_global",
+      "name": "Good Smile Company (Global)",
+      "type": "official",
+      "country": "JP",
+      "base_url": "https://www.goodsmile.com/",
+      "priority": 2,
+      "best_for": [
+        "nendoroid",
+        "figures"
+      ],
+      "weak_for": [
+        "prize items"
+      ],
+      "notes": "Global storefront search API; title id 559 = Pokemon."
     }
   ]
 }
