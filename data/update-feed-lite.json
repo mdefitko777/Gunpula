@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-07-23",
-  "generated_at": "2026-07-22T20:14:02.840Z",
+  "generated_at": "2026-07-23T14:05:27.862Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,31 +16,33 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-07-22T20:14:02.135Z",
+    "generated_at": "2026-07-23T14:05:27.138Z",
     "blocked_count": 1,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-07-23",
-      "generated_at": "2026-07-22T20:14:02.840Z",
+      "generated_at": "2026-07-23T14:05:27.862Z",
       "total_before": 4883,
-      "total_after": 4883,
-      "added_count": 10,
-      "changed_count": 24,
-      "removed_count": 10,
+      "total_after": 5028,
+      "added_count": 12,
+      "changed_count": 121,
+      "removed_count": 12,
       "watched_count": 0,
       "premium_bandai_count": 0,
       "bbx_count": 0,
       "franchise_counts": {
-        "pokemon": 33,
+        "pokemon": 132,
         "fate": 1
       },
       "reason_counts": {
-        "new": 10,
+        "new": 12,
         "release": 1,
+        "series": 97,
+        "name": 6,
         "image": 23,
-        "removed": 10
+        "removed": 12
       },
       "interest_tags": [
         "pokemon",
@@ -120,6 +122,43 @@
           ],
           "source_urls": [
             "https://www.pokemoncenter-online.com/4521329316185.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329316406",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "281 ぬいぐるみ Pok&eacute;mon fit キルリア",
+            "zh": "281 ぬいぐるみ Pok&eacute;mon fit キルリア",
+            "ko": "281 ぬいぐるみ Pok&eacute;mon fit キルリア",
+            "en": "281 ぬいぐるみ Pok&eacute;mon fit キルリア"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329316406.html"
           ]
         },
         {
@@ -417,6 +456,43 @@
           "source_urls": [
             "https://www.pokemoncenter-online.com/4521329341224.html"
           ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329341392",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "491 ぬいぐるみ Pok&eacute;mon fit ダークライ",
+            "zh": "491 ぬいぐるみ Pok&eacute;mon fit ダークライ",
+            "ko": "491 ぬいぐるみ Pok&eacute;mon fit ダークライ",
+            "en": "491 ぬいぐるみ Pok&eacute;mon fit ダークライ"
+          },
+          "release_date": null,
+          "price_jpy": 1650,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329341392.html"
+          ]
         }
       ],
       "changed": [
@@ -458,11 +534,11 @@
           ]
         },
         {
-          "kit_id": "pokepla-01-4237",
+          "kit_id": "moncolle-ms-02",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -471,13 +547,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 52 SELECT SERIES Gyarados",
-            "zh": "宝可梦 PLAMO COLLECTION 52 SELECT SERIES Gyarados",
-            "ko": "포켓몬 PLAMO COLLECTION 52 SELECT SERIES Gyarados",
-            "en": "Pokémon PLAMO COLLECTION 52 SELECT SERIES Gyarados"
+            "ja": "イーブイ",
+            "zh": "イーブイ",
+            "ko": "イーブイ",
+            "en": "イーブイ"
           },
-          "release_date": null,
-          "price_jpy": 1300,
+          "release_date": "2026-08",
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -485,22 +561,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_4237/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms02/"
           ]
         },
         {
-          "kit_id": "pokepla-01-5028",
+          "kit_id": "moncolle-mc-1",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -509,13 +584,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 54 SELECT SERIES Groudon",
-            "zh": "宝可梦 PLAMO COLLECTION 54 SELECT SERIES Groudon",
-            "ko": "포켓몬 PLAMO COLLECTION 54 SELECT SERIES Groudon",
-            "en": "Pokémon PLAMO COLLECTION 54 SELECT SERIES Groudon"
+            "ja": "コイキング・ギャラドスセット",
+            "zh": "コイキング・ギャラドス套装",
+            "ko": "コイキング・ギャラドス세트",
+            "en": "コイキング ギャラドスSet"
           },
-          "release_date": null,
-          "price_jpy": 1650,
+          "release_date": "2026-08",
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -523,22 +598,22 @@
             "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5028/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/magikarp_gyarados_set/"
           ]
         },
         {
-          "kit_id": "pokepla-01-5411",
+          "kit_id": "moncolle-ms-32",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -547,13 +622,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 55 SELECT SERIES Scizor",
-            "zh": "宝可梦 PLAMO COLLECTION 55 SELECT SERIES Scizor",
-            "ko": "포켓몬 PLAMO COLLECTION 55 SELECT SERIES Scizor",
-            "en": "Pokémon PLAMO COLLECTION 55 SELECT SERIES Scizor"
+            "ja": "サンダース",
+            "zh": "サンダース",
+            "ko": "サンダース",
+            "en": "サンダース"
           },
-          "release_date": null,
-          "price_jpy": 1400,
+          "release_date": "2026-08",
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -561,22 +636,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5411/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms32/"
           ]
         },
         {
-          "kit_id": "pokepla-01-5467",
+          "kit_id": "moncolle-mc-0",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -585,13 +659,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 56 SELECT SERIES Meowscarada",
-            "zh": "宝可梦 PLAMO COLLECTION 56 SELECT SERIES Meowscarada",
-            "ko": "포켓몬 PLAMO COLLECTION 56 SELECT SERIES Meowscarada",
-            "en": "Pokémon PLAMO COLLECTION 56 SELECT SERIES Meowscarada"
+            "ja": "ピカチュウセレクション みるピカチュウ",
+            "zh": "ピカチュウセレクション みるピカチュウ",
+            "ko": "ピカチュウセレクション みるピカチュウ",
+            "en": "ピカチュウセレクション みるピカチュウ"
           },
-          "release_date": null,
-          "price_jpy": 1600,
+          "release_date": "2026-08",
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -599,22 +673,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5467/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/pokemon_30th/miru_pikachu/"
           ]
         },
         {
-          "kit_id": "pokepla-01-5497",
+          "kit_id": "moncolle-ms-23",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -623,13 +696,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 57 SELECT SERIES Ceruledge",
-            "zh": "宝可梦 PLAMO COLLECTION 57 SELECT SERIES Ceruledge",
-            "ko": "포켓몬 PLAMO COLLECTION 57 SELECT SERIES Ceruledge",
-            "en": "Pokémon PLAMO COLLECTION 57 SELECT SERIES Ceruledge"
+            "ja": "ピチュー",
+            "zh": "ピチュー",
+            "ko": "ピチュー",
+            "en": "ピチュー"
           },
-          "release_date": null,
-          "price_jpy": 1700,
+          "release_date": "2026-08",
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -637,22 +710,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5497/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms23/"
           ]
         },
         {
-          "kit_id": "pokepla-01-5568",
+          "kit_id": "moncolle-ms-40",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -661,13 +733,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 58 SELECT SERIES Armarouge",
-            "zh": "宝可梦 PLAMO COLLECTION 58 SELECT SERIES Armarouge",
-            "ko": "포켓몬 PLAMO COLLECTION 58 SELECT SERIES Armarouge",
-            "en": "Pokémon PLAMO COLLECTION 58 SELECT SERIES Armarouge"
+            "ja": "ブースター",
+            "zh": "ブースター",
+            "ko": "ブースター",
+            "en": "ブースター"
           },
-          "release_date": null,
-          "price_jpy": 1700,
+          "release_date": "2026-08",
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -675,22 +747,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5568/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms40/"
           ]
         },
         {
-          "kit_id": "pokepla-01-5958",
+          "kit_id": "moncolle-ms-27",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -699,13 +770,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 59 SELECT SERIES Miraidon",
-            "zh": "宝可梦 PLAMO COLLECTION 59 SELECT SERIES Miraidon",
-            "ko": "포켓몬 PLAMO COLLECTION 59 SELECT SERIES Miraidon",
-            "en": "Pokémon PLAMO COLLECTION 59 SELECT SERIES Miraidon"
+            "ja": "ライチュウ",
+            "zh": "ライチュウ",
+            "ko": "ライチュウ",
+            "en": "ライチュウ"
           },
-          "release_date": null,
-          "price_jpy": 2100,
+          "release_date": "2026-08",
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -713,22 +784,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5958/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms27/"
           ]
         },
         {
-          "kit_id": "pokepla-01-5984",
+          "kit_id": "moncolle-ms-26",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -737,13 +807,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 60 SELECT SERIES Koraidon",
-            "zh": "宝可梦 PLAMO COLLECTION 60 SELECT SERIES Koraidon",
-            "ko": "포켓몬 PLAMO COLLECTION 60 SELECT SERIES Koraidon",
-            "en": "Pokémon PLAMO COLLECTION 60 SELECT SERIES Koraidon"
+            "ja": "ゲンガー",
+            "zh": "ゲンガー",
+            "ko": "ゲンガー",
+            "en": "ゲンガー"
           },
-          "release_date": null,
-          "price_jpy": 2100,
+          "release_date": "2026-07",
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -751,22 +821,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5984/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms26/"
           ]
         },
         {
-          "kit_id": "pokepla-01-6780",
+          "kit_id": "moncolle-mc-7",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -775,13 +844,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza",
-            "zh": "宝可梦 PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza",
-            "ko": "포켓몬 PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza",
-            "en": "Pokémon PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza"
+            "ja": "ピカチュウセレクション でかけるピカチュウ",
+            "zh": "ピカチュウセレクション でかけるピカチュウ",
+            "ko": "ピカチュウセレクション でかけるピカチュウ",
+            "en": "ピカチュウセレクション でかけるピカチュウ"
           },
-          "release_date": null,
-          "price_jpy": 2700,
+          "release_date": "2026-07",
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -789,22 +858,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_6780/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/pokemon_30th/dekakeru_pikachu/"
           ]
         },
         {
-          "kit_id": "pokepla-01-7038",
+          "kit_id": "moncolle-mc-117",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -813,13 +881,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 62 SELECT SERIES Kyogre",
-            "zh": "宝可梦 PLAMO COLLECTION 62 SELECT SERIES Kyogre",
-            "ko": "포켓몬 PLAMO COLLECTION 62 SELECT SERIES Kyogre",
-            "en": "Pokémon PLAMO COLLECTION 62 SELECT SERIES Kyogre"
+            "ja": "メガカイリュー",
+            "zh": "メガカイリュー",
+            "ko": "メガカイリュー",
+            "en": "メガカイリュー"
           },
-          "release_date": null,
-          "price_jpy": 1800,
+          "release_date": "2026-07",
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -827,22 +895,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7038/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/mega_dragonite/"
           ]
         },
         {
-          "kit_id": "pokepla-01-5174",
+          "kit_id": "moncolle-mc-126",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -851,13 +918,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 18 Sprigatito",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 18 Sprigatito",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 18 Sprigatito",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 18 Sprigatito"
+            "ja": "あくテラスタル リザードン",
+            "zh": "あくテラスタル リザードン",
+            "ko": "あくテラスタル リザードン",
+            "en": "あくテラスタル リザードン"
           },
           "release_date": null,
-          "price_jpy": 780,
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -865,22 +932,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5174/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/terastal_lizardon/"
           ]
         },
         {
-          "kit_id": "pokepla-01-5247",
+          "kit_id": "moncolle-ms-46",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -889,13 +955,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 19 Quaxly",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 19 Quaxly",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 19 Quaxly",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 19 Quaxly"
+            "ja": "アブソル",
+            "zh": "アブソル",
+            "ko": "アブソル",
+            "en": "アブソル"
           },
           "release_date": null,
-          "price_jpy": 780,
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -903,22 +969,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5247/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms46/"
           ]
         },
         {
-          "kit_id": "pokepla-01-5372",
+          "kit_id": "moncolle-ml-22",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -927,13 +992,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 20 Fuecoco",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 20 Fuecoco",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 20 Fuecoco",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 20 Fuecoco"
+            "ja": "アルセウス",
+            "zh": "アルセウス",
+            "ko": "アルセウス",
+            "en": "アルセウス"
           },
           "release_date": null,
-          "price_jpy": 780,
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -941,22 +1006,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5372/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml22/"
           ]
         },
         {
-          "kit_id": "pokepla-01-5450",
+          "kit_id": "moncolle-ms-24",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -965,13 +1029,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 21 Psyduck",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 21 Psyduck",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 21 Psyduck",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 21 Psyduck"
+            "ja": "イッカネズミ (４ひきかぞく)",
+            "zh": "イッカネズミ (４ひきかぞく)",
+            "ko": "イッカネズミ (４ひきかぞく)",
+            "en": "イッカネズミ (４ひきかぞく)"
           },
           "release_date": null,
-          "price_jpy": 780,
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -979,22 +1043,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5450/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms24/"
           ]
         },
         {
-          "kit_id": "pokepla-01-5555",
+          "kit_id": "moncolle-ml-13",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1003,13 +1066,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 22 Pawmi",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 22 Pawmi",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 22 Pawmi",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 22 Pawmi"
+            "ja": "イベルタル",
+            "zh": "イベルタル",
+            "ko": "イベルタル",
+            "en": "イベルタル"
           },
           "release_date": null,
-          "price_jpy": 780,
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -1017,22 +1080,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5555/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml13/"
           ]
         },
         {
-          "kit_id": "pokepla-01-5947",
+          "kit_id": "moncolle-ms-58",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1041,13 +1103,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 23 Jirachi",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 23 Jirachi",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 23 Jirachi",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 23 Jirachi"
+            "ja": "ウェーニバル",
+            "zh": "ウェーニバル",
+            "ko": "ウェーニバル",
+            "en": "ウェーニバル"
           },
           "release_date": null,
-          "price_jpy": 780,
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -1055,22 +1117,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5947/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms58/"
           ]
         },
         {
-          "kit_id": "pokepla-01-6762",
+          "kit_id": "moncolle-mc-122",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1079,13 +1140,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 24 Pichu",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 24 Pichu",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 24 Pichu",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 24 Pichu"
+            "ja": "ウガツホムラ",
+            "zh": "ウガツホムラ",
+            "ko": "ウガツホムラ",
+            "en": "ウガツホムラ"
           },
           "release_date": null,
-          "price_jpy": 780,
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -1093,22 +1154,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_6762/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/paradox_ugatsuhomura/"
           ]
         },
         {
-          "kit_id": "pokepla-01-7010",
+          "kit_id": "moncolle-mc-121",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1117,13 +1177,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 26 Jolteon",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 26 Jolteon",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 26 Jolteon",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 26 Jolteon"
+            "ja": "ウネルミナモ",
+            "zh": "ウネルミナモ",
+            "ko": "ウネルミナモ",
+            "en": "ウネルミナモ"
           },
           "release_date": null,
-          "price_jpy": 780,
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -1131,22 +1191,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7010/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/paradox_uneruminamo/"
           ]
         },
         {
-          "kit_id": "pokepla-01-7015",
+          "kit_id": "moncolle-ms-35",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1155,13 +1214,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 27 Vaporeon",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 27 Vaporeon",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 27 Vaporeon",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 27 Vaporeon"
+            "ja": "エースバーン",
+            "zh": "エースバーン",
+            "ko": "エースバーン",
+            "en": "エースバーン"
           },
           "release_date": null,
-          "price_jpy": 780,
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -1169,14 +1228,13 @@
             "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "series"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7015/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms35/"
           ]
         }
       ],
@@ -1256,6 +1314,43 @@
           ]
         },
         {
+          "kit_id": "pokemon-center-4521329316185",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "259 ぬいぐるみ Pok&eacute;mon fit ヌマクロー",
+            "zh": "259 ぬいぐるみ Pok&eacute;mon fit ヌマクロー",
+            "ko": "259 ぬいぐるみ Pok&eacute;mon fit ヌマクロー",
+            "en": "259 ぬいぐるみ Pok&eacute;mon fit ヌマクロー"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329316185.html"
+          ]
+        },
+        {
           "kit_id": "pokemon-center-4521329316321",
           "change_type": "removed",
           "franchise": "pokemon",
@@ -1327,6 +1422,43 @@
           ],
           "source_urls": [
             "https://www.pokemoncenter-online.com/4521329339450.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329339481",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "441 ぬいぐるみ Pok&eacute;mon fit ペラップ",
+            "zh": "441 ぬいぐるみ Pok&eacute;mon fit ペラップ",
+            "ko": "441 ぬいぐるみ Pok&eacute;mon fit ペラップ",
+            "en": "441 ぬいぐるみ Pok&eacute;mon fit ペラップ"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329339481.html"
           ]
         },
         {
