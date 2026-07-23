@@ -1,0 +1,15 @@
+/* Ionic theme variables. Placeholder brand accent for now; the full design
+   token set (matching the current app's --accent / world themes) lands during
+   the design pass. Ionic reads prefers-color-scheme for dark mode automatically
+   via its palette import, added later. */
+:root {
+  --ion-color-primary: #2f6f4f;
+  --ion-color-primary-rgb: 47, 111, 79;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #29623f;
+  --ion-color-primary-tint: #447d5f;
+
+  --ion-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", Roboto, sans-serif;
+}
