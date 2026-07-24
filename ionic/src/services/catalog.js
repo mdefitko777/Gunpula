@@ -10,6 +10,29 @@ export async function loadFranchise(franchise) {
   return data.kits || [];
 }
 
+// 图鉴 groups (Atlas): generations / eras / works per franchise.
+export async function loadAtlasGroups() {
+  try {
+    const res = await fetch(`${DATA_BASE}/atlas-groups.json`);
+    if (res.ok) return await res.json();
+  } catch {
+    // guide is optional; the rest of the app works without it
+  }
+  return { franchises: {} };
+}
+
+// Beyblade X keeps its own database (complete beys + part categories) rather
+// than atlas groups.
+export async function loadBbxDatabase() {
+  try {
+    const res = await fetch(`${DATA_BASE}/bbx-database.json`);
+    if (res.ok) return await res.json();
+  } catch {
+    // guide is optional
+  }
+  return null;
+}
+
 // The daily "recently added" feed. Prefer the lite build; fall back to the full
 // one. Never throws — recent-added is a convenience over the month view.
 export async function loadUpdateFeed() {

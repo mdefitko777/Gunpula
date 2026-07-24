@@ -5,7 +5,7 @@ import { WORLD_THEME_CONFIG, localizedWorldText } from "@app/world-themes.js";
 import { getString, setString, getJson, setJson } from "@app/storage.js";
 import { normalizeCollection } from "@app/collection-store.js";
 import { recentFeedKits, releaseItemsForMonth, defaultReleaseMonth, validReleaseMonth } from "@app/update-feed.js";
-import { loadFranchise, loadUpdateFeed } from "../services/catalog";
+import { loadFranchise, loadUpdateFeed, loadAtlasGroups, loadBbxDatabase } from "../services/catalog";
 
 const LANG_KEY = "gunpula-catalog-language-v1";
 const FRANCHISE_KEY = "gunpula-catalog-franchise-v1";
@@ -48,6 +48,8 @@ const state = reactive({
   catalogByFranchise: {},
   collection: normalizeCollection(getJson(COLLECTION_KEY, {}), { self: SELF }),
   updateFeed: null,
+  atlasGroups: null,
+  bbx: null,
   releaseMonth: "",
   theme: initialTheme(),
   // View state the gestures can drive, so radial/swipe and the on-screen
@@ -74,6 +76,82 @@ function setTheme(theme) {
   state.theme = theme;
   setString(THEME_KEY, theme);
   applyTheme();
+}
+
+// --- 图鉴 (Atlas groups) --------------------------------------------------
+// Each world keys into a different atlas bucket; gundam's is the timeline.
+const ATLAS_KEY_BY_FRANCHISE = {
+  gundam: "gundam_timeline",
+  pokemon: "pokemon",
+  fate: "fate",
+  armored_core: "armored_core",
+};
+
+async function ensureAtlasGroups() {
+  if (state.atlasGroups) return state.atlasGroups;
+  state.atlasGroups = await loadAtlasGroups();
+  return state.atlasGroups;
+}
+
+async function ensureBbx() {
+  if (state.bbx) return state.bbx;
+  state.bbx = await loadBbxDatabase();
+  return state.bbx;
+}
+
+// Beyblade X has no atlas groups, so synthesize the same shape from its own
+// database: complete beys plus one group per part category (陀螺 / 部品).
+const BBX_PART_LABELS = {
+  blade: { zh: "刃", ko: "블레이드", en: "Blade", ja: "ブレード" },
+  ratchet: { zh: "齿轮", ko: "래칫", en: "Ratchet", ja: "ラチェット" },
+  bit: { zh: "轴尖", ko: "비트", en: "Bit", ja: "ビット" },
+  assist_blade: { zh: "辅助刃", ko: "어시스트 블레이드", en: "Assist Blade", ja: "アシストブレード" },
+  lock_chip: { zh: "锁片", ko: "락 칩", en: "Lock Chip", ja: "ロックチップ" },
+  main_blade: { zh: "主刃", ko: "메인 블레이드", en: "Main Blade", ja: "メインブレード" },
+  metal_blade: { zh: "金属刃", ko: "메탈 블레이드", en: "Metal Blade", ja: "メタルブレード" },
+  over_blade: { zh: "上刃", ko: "오버 블레이드", en: "Over Blade", ja: "オーバーブレード" },
+};
+
+function bbxGroups() {
+  const db = state.bbx;
+  if (!db) return [];
+  const partsLabel = { zh: "部品", ko: "부품", en: "Parts", ja: "パーツ" };
+  const groups = [];
+  if (Array.isArray(db.series) && db.series.length) {
+    groups.push({
+      id: "bbx-series",
+      labels: { zh: "完成品陀螺", ko: "완성 베이", en: "Complete Beys", ja: "完成ベイ" },
+      subtitle: { zh: "整机", ko: "완성", en: "Complete", ja: "完成" },
+      count: db.series.length,
+      items: db.series,
+    });
+  }
+  for (const [key, list] of Object.entries(db.parts || {})) {
+    if (!Array.isArray(list) || !list.length) continue;
+    groups.push({
+      id: `bbx-${key}`,
+      labels: BBX_PART_LABELS[key] || { zh: key, ko: key, en: key, ja: key },
+      subtitle: partsLabel,
+      count: list.length,
+      items: list,
+    });
+  }
+  return groups;
+}
+
+function guideGroups(franchise = state.franchise) {
+  if (franchise === "beyblade") return bbxGroups();
+  const key = ATLAS_KEY_BY_FRANCHISE[franchise];
+  return (key && state.atlasGroups?.franchises?.[key]) || [];
+}
+
+// Lit = how many of a group's kits are already owned or wanted.
+function guideGroupProgress(group) {
+  const ids = group.kit_ids || [];
+  const owned = new Set(state.collection.owned || []);
+  const wanted = new Set(state.collection.wanted || []);
+  const lit = ids.filter((id) => owned.has(id) || wanted.has(id)).length;
+  return { lit, total: ids.length || group.count || (group.works || []).length };
 }
 
 // --- Recent / releases feed ----------------------------------------------
@@ -188,6 +266,13 @@ function setFranchise(franchise) {
   setString(FRANCHISE_KEY, franchise);
 }
 
+// Atlas labels/subtitles are {zh,ko,en,ja} objects (or plain strings).
+function atlasLabel(value) {
+  if (!value) return "";
+  if (typeof value === "string") return value;
+  return value[state.language] || value.zh || value.en || value.ja || value.ko || "";
+}
+
 // Display helpers bound to the current language.
 const helpers = {
   name: (kit) => kitDisplayNameFor(kit, state.language),
@@ -213,6 +298,11 @@ export function useStore() {
     ensureFranchise,
     ensureAllFranchises,
     ensureUpdateFeed,
+    ensureAtlasGroups,
+    ensureBbx,
+    guideGroups,
+    guideGroupProgress,
+    atlasLabel,
     recentAddedKits,
     releaseMonthKits,
     defaultMonth,
