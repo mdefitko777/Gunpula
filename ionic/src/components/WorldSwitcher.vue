@@ -1,5 +1,8 @@
 <template>
+  <!-- Keyed on the value: ion-segment doesn't refresh its buttons' checked
+       state when value changes externally (e.g. from the radial gesture). -->
   <ion-segment
+    :key="state.franchise"
     :value="state.franchise"
     scrollable
     class="world-switcher"

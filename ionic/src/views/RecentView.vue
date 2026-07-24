@@ -8,7 +8,7 @@
         <world-switcher />
       </ion-toolbar>
       <ion-toolbar>
-        <ion-segment :value="mode" @ion-change="mode = $event.detail.value">
+        <ion-segment :key="mode" :value="mode" @ion-change="setRecentMode($event.detail.value)">
           <ion-segment-button value="recent"><ion-label>{{ t("recentDaysShort") }}</ion-label></ion-segment-button>
           <ion-segment-button value="month"><ion-label>{{ t("monthReleaseShort") }}</ion-label></ion-segment-button>
           <ion-segment-button value="all"><ion-label>{{ t("updatesAllShort") }}</ion-label></ion-segment-button>
@@ -56,11 +56,12 @@ import { useDetail } from "../composables/useDetail";
 
 const {
   state, t, name, gradeLabel, ensureFranchise, ensureUpdateFeed,
-  recentAddedKits, releaseMonthKits, defaultMonth, setReleaseMonth,
+  recentAddedKits, releaseMonthKits, defaultMonth, setReleaseMonth, setRecentMode,
 } = useStore();
 const { openDetail } = useDetail();
 
-const mode = ref("recent");
+// Mode lives in the store so the radial/swipe gestures drive the same state.
+const mode = computed(() => state.recentMode);
 const month = ref("");
 
 const months = computed(() => {

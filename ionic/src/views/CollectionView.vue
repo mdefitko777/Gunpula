@@ -5,7 +5,7 @@
         <ion-title>{{ t("collectionNav") }}</ion-title>
       </ion-toolbar>
       <ion-toolbar>
-        <ion-segment :value="tab" @ion-change="tab = $event.detail.value">
+        <ion-segment :key="tab" :value="tab" @ion-change="setCollectionTab($event.detail.value)">
           <ion-segment-button value="wanted">
             <ion-label>{{ t("wantedList") }} ({{ wantedIds.length }})</ion-label>
           </ion-segment-button>
@@ -42,10 +42,11 @@ import {
 import { useStore } from "../store";
 import { useDetail } from "../composables/useDetail";
 
-const { t, name, franchiseLabel, gradeLabel, ownedIds, wantedIds, ensureAllFranchises, kitById } = useStore();
+const { state, t, name, franchiseLabel, gradeLabel, ownedIds, wantedIds, ensureAllFranchises, kitById, setCollectionTab } = useStore();
 const { openDetail } = useDetail();
 
-const tab = ref("wanted");
+// Tab lives in the store so the radial/swipe gestures drive the same state.
+const tab = computed(() => state.collectionTab);
 // Collection spans all worlds, so resolve ids against every franchise.
 const kits = computed(() =>
   (tab.value === "owned" ? ownedIds.value : wantedIds.value).map(kitById).filter(Boolean),

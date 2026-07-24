@@ -50,9 +50,24 @@ const state = reactive({
   updateFeed: null,
   releaseMonth: "",
   theme: initialTheme(),
+  // View state the gestures can drive, so radial/swipe and the on-screen
+  // segments stay in sync.
+  recentMode: "recent",
+  collectionTab: "wanted",
   loading: false,
   error: null,
 });
+
+const RECENT_MODES = ["recent", "month", "all"];
+const COLLECTION_TABS = ["wanted", "owned"];
+
+function setRecentMode(mode) {
+  if (RECENT_MODES.includes(mode)) state.recentMode = mode;
+}
+
+function setCollectionTab(tab) {
+  if (COLLECTION_TABS.includes(tab)) state.collectionTab = tab;
+}
 
 function setTheme(theme) {
   if (!THEMES.includes(theme)) return;
@@ -188,6 +203,10 @@ export function useStore() {
     t,
     setLanguage,
     setTheme,
+    setRecentMode,
+    setCollectionTab,
+    recentModes: RECENT_MODES,
+    collectionTabs: COLLECTION_TABS,
     languages: LANGS,
     themes: THEMES,
     setFranchise,
