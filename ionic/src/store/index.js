@@ -3,7 +3,7 @@ import { TRANSLATIONS } from "@app/i18n.js";
 import { FRANCHISES, kitDisplayNameFor, franchiseShortLabelFor, gradeShortLabelFor } from "@app/catalog-display.js";
 import { WORLD_THEME_CONFIG, localizedWorldText } from "@app/world-themes.js";
 import { getString, setString, getJson, setJson } from "@app/storage.js";
-import { normalizeCollection } from "@app/collection-store.js";
+import { normalizeCollection, mergeCollectionState } from "@app/collection-store.js";
 import { recentFeedKits, releaseItemsForMonth, defaultReleaseMonth, validReleaseMonth } from "@app/update-feed.js";
 import { loadFranchise, loadUpdateFeed, loadAtlasGroups, loadBbxDatabase } from "../services/catalog";
 
@@ -57,6 +57,7 @@ const state = reactive({
   recentMode: "recent",
   collectionTab: "wanted",
   filters: { series: "", grade: "", year: "", limited: "", priceMin: null, priceMax: null },
+  syncRevision: 0,
   loading: false,
   error: null,
 });
@@ -289,6 +290,40 @@ function setCollectionStatus(kitId, status) {
   setJson(COLLECTION_KEY, { member_items: state.collection.member_items });
 }
 
+// --- Account sync ---------------------------------------------------------
+// Same payload shape as the vanilla build, so both clients round-trip cleanly.
+function syncRevision() {
+  return state.syncRevision || 0;
+}
+
+function cloudPayload() {
+  return {
+    schema_version: 1,
+    collection: normalizeCollection(state.collection, { self: SELF }),
+  };
+}
+
+// Merge the remote collection into the local one (last-write-wins per entry,
+// handled by mergeCollectionState) and persist the result.
+function syncPull(remote) {
+  const stateObject = Array.isArray(remote) ? remote[0] : remote;
+  if (!stateObject) return;
+  state.syncRevision = Number(stateObject.revision || 0);
+  const remoteCollection = stateObject.payload?.collection;
+  if (!remoteCollection) return;
+  const merged = mergeCollectionState(state.collection, remoteCollection, { self: SELF });
+  state.collection = normalizeCollection(merged, { self: SELF });
+  setJson(COLLECTION_KEY, { member_items: state.collection.member_items });
+}
+
+async function syncPush() {
+  const { pushState } = await import("../services/sync");
+  const result = await pushState(cloudPayload(), syncRevision(), "ionic");
+  const stateObject = Array.isArray(result) ? result[0] : result;
+  if (stateObject?.revision) state.syncRevision = Number(stateObject.revision);
+  return result;
+}
+
 // Toggle: tapping the current status clears it, otherwise sets it.
 function toggleCollectionStatus(kitId, status) {
   setCollectionStatus(kitId, collectionStatus(kitId) === status ? null : status);
@@ -402,6 +437,8 @@ export function useStore() {
     collectionStatus,
     setCollectionStatus,
     toggleCollectionStatus,
+    syncPull,
+    syncPush,
     ownedIds: computed(() => state.collection.owned || []),
     wantedIds: computed(() => state.collection.wanted || []),
     franchises: FRANCHISES,

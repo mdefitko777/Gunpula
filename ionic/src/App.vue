@@ -3,6 +3,7 @@
     <ion-router-outlet />
     <detail-host />
     <profile-host />
+    <account-host />
     <radial-menu />
   </ion-app>
 </template>
@@ -13,6 +14,7 @@ import { IonApp, IonRouterOutlet } from "@ionic/vue";
 import { useRoute } from "vue-router";
 import DetailHost from "./components/DetailHost.vue";
 import ProfileHost from "./components/ProfileHost.vue";
+import AccountHost from "./components/AccountHost.vue";
 import RadialMenu from "./components/RadialMenu.vue";
 import { installRadialGestures, setRadialProvider } from "./composables/useRadial";
 import { useStore } from "./store";

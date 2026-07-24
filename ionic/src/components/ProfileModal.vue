@@ -65,7 +65,7 @@
     </ion-list>
 
     <ion-list :inset="true">
-      <ion-item button @click="notReady">
+      <ion-item button @click="goAccount">
         <ion-icon :icon="cloudUpload" slot="start" />
         <ion-label>{{ t("accountSync") }}</ion-label>
       </ion-item>
@@ -78,18 +78,20 @@ import { ref, computed } from "vue";
 import {
   IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent,
   IonList, IonListHeader, IonItem, IonLabel, IonNote, IonIcon, IonThumbnail,
-  IonSelect, IonSelectOption, toastController,
+  IonSelect, IonSelectOption,
 } from "@ionic/vue";
 import { book, checkmarkCircle, star, time, cloudUpload } from "ionicons/icons";
 import { useRouter } from "vue-router";
 import { useStore } from "../store";
 import { useDetail } from "../composables/useDetail";
 import { useProfile } from "../composables/useProfile";
+import { useAccount } from "../composables/useAccount";
 
 defineEmits(["close"]);
 const { state, t, name, setLanguage, setTheme, ownedIds, wantedIds, kitById, ensureAllFranchises } = useStore();
 const { openDetail } = useDetail();
 const { closeProfile } = useProfile();
+const { openAccount } = useAccount();
 const router = useRouter();
 
 // Local identity until account sync lands.
@@ -105,10 +107,7 @@ ensureAllFranchises();
 
 function goGuide() { closeProfile(); router.push("/guide"); }
 function goCollection() { closeProfile(); router.push("/collection"); }
-async function notReady() {
-  const toast = await toastController.create({ message: t("comingSoon"), duration: 1500 });
-  await toast.present();
-}
+function goAccount() { closeProfile(); openAccount(); }
 </script>
 
 <style scoped>
