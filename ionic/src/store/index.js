@@ -19,6 +19,39 @@ function initialTheme() {
   return THEMES.includes(saved) ? saved : "auto";
 }
 
+// Per-world accent, carried over from the vanilla Atlas palette. Mapping it
+// onto --ion-color-primary means every Ionic component (segments, buttons,
+// tab bar, radial menu) picks up the world colour, not just the home page.
+const WORLD_ACCENTS = {
+  gundam: { base: "#2f8f8a", shade: "#0c6270" },
+  pokemon: { base: "#45a875", shade: "#216d50" },
+  fate: { base: "#4f91b8", shade: "#275f7c" },
+  armored_core: { base: "#5e8d9c", shade: "#345c68" },
+  beyblade: { base: "#579b82", shade: "#2f6a58" },
+};
+
+function hexToRgb(hex) {
+  const n = parseInt(hex.slice(1), 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+}
+
+// Lighten toward white for the tint Ionic uses on hover/active surfaces.
+function tintOf(hex, amount = 0.22) {
+  const [r, g, b] = hexToRgb(hex).map((c) => Math.round(c + (255 - c) * amount));
+  return `#${[r, g, b].map((c) => c.toString(16).padStart(2, "0")).join("")}`;
+}
+
+export function applyWorldTheme(franchise = state.franchise) {
+  const accent = WORLD_ACCENTS[franchise] || WORLD_ACCENTS.gundam;
+  const root = document.documentElement.style;
+  root.setProperty("--ion-color-primary", accent.base);
+  root.setProperty("--ion-color-primary-rgb", hexToRgb(accent.base).join(", "));
+  root.setProperty("--ion-color-primary-contrast", "#ffffff");
+  root.setProperty("--ion-color-primary-contrast-rgb", "255, 255, 255");
+  root.setProperty("--ion-color-primary-shade", accent.shade);
+  root.setProperty("--ion-color-primary-tint", tintOf(accent.base));
+}
+
 // Toggle Ionic's dark palette class on <html>. auto follows the system.
 export function applyTheme() {
   const theme = initialTheme();
@@ -385,6 +418,7 @@ function setFranchise(franchise) {
   if (!FRANCHISES.includes(franchise)) return;
   state.franchise = franchise;
   setString(FRANCHISE_KEY, franchise);
+  applyWorldTheme(franchise);
 }
 
 // Atlas labels/subtitles are {zh,ko,en,ja} objects (or plain strings).

@@ -18,10 +18,21 @@ import "@ionic/vue/css/display.css";
 import "@ionic/vue/css/palettes/dark.class.css";
 import "./theme/variables.css";
 
-import { applyTheme } from "./store";
+import { applyTheme, applyWorldTheme } from "./store";
 
 applyTheme();
+applyWorldTheme();
 
 const app = createApp(App).use(IonicVue).use(router);
 
 router.isReady().then(() => app.mount("#app"));
+
+// PWA: register the service worker relative to the deploy path so it works both
+// at the site root in dev and under /Gunpula/app/ in production.
+if ("serviceWorker" in navigator && import.meta.env.PROD) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => {
+      // offline support is an enhancement; never block startup on it
+    });
+  });
+}
