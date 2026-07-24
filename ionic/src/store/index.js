@@ -56,12 +56,98 @@ const state = reactive({
   // segments stay in sync.
   recentMode: "recent",
   collectionTab: "wanted",
+  filters: { series: "", grade: "", year: "", limited: "", priceMin: null, priceMax: null },
   loading: false,
   error: null,
 });
 
 const RECENT_MODES = ["recent", "month", "all"];
 const COLLECTION_TABS = ["wanted", "owned"];
+
+// --- Catalog filters ------------------------------------------------------
+function emptyFilters() {
+  return { series: "", grade: "", year: "", limited: "", priceMin: null, priceMax: null };
+}
+
+function setFilter(key, value) {
+  if (!(key in state.filters)) return;
+  state.filters[key] = value === "" || value === null || value === undefined ? emptyFilters()[key] : value;
+}
+
+function clearFilters() {
+  Object.assign(state.filters, emptyFilters());
+}
+
+function activeFilterCount() {
+  const f = state.filters;
+  return [f.series, f.grade, f.year, f.limited].filter(Boolean).length
+    + (Number.isFinite(f.priceMin) ? 1 : 0)
+    + (Number.isFinite(f.priceMax) ? 1 : 0);
+}
+
+function kitSeriesKey(kit) {
+  return kit.series?.key || kit.work_title || "";
+}
+
+function kitSeriesLabel(kit) {
+  const labels = kit.series?.labels;
+  return (labels && (labels[state.language] || labels.zh || labels.en)) || kit.work_title || "";
+}
+
+function kitYear(kit) {
+  const y = String(kit.release_date || "").slice(0, 4);
+  return /^\d{4}$/.test(y) ? y : "";
+}
+
+// Apply the active filters to a list of kits.
+function applyFilters(kits) {
+  const f = state.filters;
+  return kits.filter((kit) => {
+    if (f.series && kitSeriesKey(kit) !== f.series) return false;
+    if (f.grade && kit.grade_code !== f.grade) return false;
+    if (f.year && kitYear(kit) !== f.year) return false;
+    if (f.limited === "limited" && !kit.is_limited) return false;
+    if (f.limited === "regular" && kit.is_limited) return false;
+    const price = Number(kit.price_jpy);
+    if (Number.isFinite(f.priceMin) && !(price >= f.priceMin)) return false;
+    if (Number.isFinite(f.priceMax) && !(price <= f.priceMax)) return false;
+    return true;
+  });
+}
+
+// Option lists with counts, derived from the current world's kits.
+function filterOptions(kits) {
+  const count = (fn) => {
+    const map = new Map();
+    for (const kit of kits) {
+      const v = fn(kit);
+      if (!v) continue;
+      map.set(v, (map.get(v) || 0) + 1);
+    }
+    return map;
+  };
+  const seriesCounts = count(kitSeriesKey);
+  const seriesLabels = new Map();
+  for (const kit of kits) {
+    const key = kitSeriesKey(kit);
+    if (key && !seriesLabels.has(key)) seriesLabels.set(key, kitSeriesLabel(kit));
+  }
+  return {
+    series: [...seriesCounts.entries()]
+      .map(([value, n]) => ({ value, label: seriesLabels.get(value) || value, count: n }))
+      .sort((a, b) => b.count - a.count),
+    grade: [...count((k) => k.grade_code).entries()]
+      .map(([value, n]) => ({ value, label: helpers.gradeLabel(value), count: n }))
+      .sort((a, b) => b.count - a.count),
+    year: [...count(kitYear).entries()]
+      .map(([value, n]) => ({ value, label: value, count: n }))
+      .sort((a, b) => b.value.localeCompare(a.value)),
+    limited: [
+      { value: "limited", label: t("limitedOnly"), count: kits.filter((k) => k.is_limited).length },
+      { value: "regular", label: t("regularOnly"), count: kits.filter((k) => !k.is_limited).length },
+    ],
+  };
+}
 
 function setRecentMode(mode) {
   if (RECENT_MODES.includes(mode)) state.recentMode = mode;
@@ -290,6 +376,11 @@ export function useStore() {
     setTheme,
     setRecentMode,
     setCollectionTab,
+    setFilter,
+    clearFilters,
+    activeFilterCount,
+    applyFilters,
+    filterOptions,
     recentModes: RECENT_MODES,
     collectionTabs: COLLECTION_TABS,
     languages: LANGS,
