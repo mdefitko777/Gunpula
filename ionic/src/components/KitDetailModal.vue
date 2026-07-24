@@ -2,7 +2,7 @@
   <ion-header :translucent="true">
     <ion-toolbar>
       <ion-buttons slot="end">
-        <ion-button @click="$emit('close')">{{ t("close") || "关闭" }}</ion-button>
+        <ion-button @click="$emit('close')">{{ t("close") }}</ion-button>
       </ion-buttons>
       <ion-title>{{ gradeLabel(kit.grade_code) }}</ion-title>
     </ion-toolbar>
@@ -20,17 +20,17 @@
 
     <ion-list :inset="true">
       <ion-item v-if="kit.number"><ion-label>No.</ion-label><ion-note slot="end">{{ kit.number }}</ion-note></ion-item>
-      <ion-item v-if="kit.release_date"><ion-label>{{ t("releaseDateShort") || "发售" }}</ion-label><ion-note slot="end">{{ kit.release_date }}</ion-note></ion-item>
-      <ion-item v-if="kit.price_jpy"><ion-label>{{ t("priceLabel") || "价格" }}</ion-label><ion-note slot="end">¥{{ kit.price_jpy.toLocaleString() }}</ion-note></ion-item>
+      <ion-item v-if="kit.release_date"><ion-label>{{ t("releaseDateShort") }}</ion-label><ion-note slot="end">{{ kit.release_date }}</ion-note></ion-item>
+      <ion-item v-if="kit.price_jpy"><ion-label>{{ t("priceLabel") }}</ion-label><ion-note slot="end">¥{{ kit.price_jpy.toLocaleString() }}</ion-note></ion-item>
       <ion-item v-if="kit.scale && kit.scale !== 'non-scale'"><ion-label>Scale</ion-label><ion-note slot="end">{{ kit.scale }}</ion-note></ion-item>
     </ion-list>
 
     <div class="detail-actions">
       <ion-button expand="block" :fill="status === 'owned' ? 'solid' : 'outline'" color="success" @click="toggle('owned')">
-        <ion-icon :icon="checkmarkCircle" slot="start" />{{ t("ownedList") || "已购买" }}
+        <ion-icon :icon="checkmarkCircle" slot="start" />{{ t("ownedList") }}
       </ion-button>
       <ion-button expand="block" :fill="status === 'wanted' ? 'solid' : 'outline'" @click="toggle('wanted')">
-        <ion-icon :icon="star" slot="start" />{{ t("wantedList") || "想要" }}
+        <ion-icon :icon="star" slot="start" />{{ t("wantedList") }}
       </ion-button>
     </div>
   </ion-content>

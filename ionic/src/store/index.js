@@ -10,7 +10,21 @@ import { loadFranchise, loadUpdateFeed } from "../services/catalog";
 const LANG_KEY = "gunpula-catalog-language-v1";
 const FRANCHISE_KEY = "gunpula-catalog-franchise-v1";
 const COLLECTION_KEY = "gunpula-catalog-collection-v1";
+const THEME_KEY = "gunpula-catalog-theme-v1";
 const LANGS = ["zh", "ko", "en", "ja"];
+const THEMES = ["auto", "light", "dark"];
+
+function initialTheme() {
+  const saved = getString(THEME_KEY);
+  return THEMES.includes(saved) ? saved : "auto";
+}
+
+// Toggle Ionic's dark palette class on <html>. auto follows the system.
+export function applyTheme() {
+  const theme = initialTheme();
+  const dark = theme === "dark" || (theme === "auto" && window.matchMedia?.("(prefers-color-scheme: dark)").matches);
+  document.documentElement.classList.toggle("ion-palette-dark", dark);
+}
 // Local self member matches the vanilla app's default so an existing local
 // collection carries over untouched. Sync/login overrides this later.
 const SELF = "member";
@@ -35,9 +49,17 @@ const state = reactive({
   collection: normalizeCollection(getJson(COLLECTION_KEY, {}), { self: SELF }),
   updateFeed: null,
   releaseMonth: "",
+  theme: initialTheme(),
   loading: false,
   error: null,
 });
+
+function setTheme(theme) {
+  if (!THEMES.includes(theme)) return;
+  state.theme = theme;
+  setString(THEME_KEY, theme);
+  applyTheme();
+}
 
 // --- Recent / releases feed ----------------------------------------------
 async function ensureUpdateFeed() {
@@ -165,6 +187,9 @@ export function useStore() {
     state,
     t,
     setLanguage,
+    setTheme,
+    languages: LANGS,
+    themes: THEMES,
     setFranchise,
     ensureFranchise,
     ensureAllFranchises,

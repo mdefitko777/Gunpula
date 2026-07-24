@@ -2,22 +2,22 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>{{ t("collectionNav") || "收藏" }}</ion-title>
+        <ion-title>{{ t("collectionNav") }}</ion-title>
       </ion-toolbar>
       <ion-toolbar>
         <ion-segment :value="tab" @ion-change="tab = $event.detail.value">
           <ion-segment-button value="wanted">
-            <ion-label>{{ t("wantedList") || "想要" }} ({{ wantedIds.length }})</ion-label>
+            <ion-label>{{ t("wantedList") }} ({{ wantedIds.length }})</ion-label>
           </ion-segment-button>
           <ion-segment-button value="owned">
-            <ion-label>{{ t("ownedList") || "已购买" }} ({{ ownedIds.length }})</ion-label>
+            <ion-label>{{ t("ownedList") }} ({{ ownedIds.length }})</ion-label>
           </ion-segment-button>
         </ion-segment>
       </ion-toolbar>
     </ion-header>
 
     <ion-content :fullscreen="true">
-      <div v-if="!kits.length" class="empty ion-padding">{{ t("homeCollectionEmpty") || "还没有记录" }}</div>
+      <div v-if="!kits.length" class="empty ion-padding">{{ t("homeCollectionEmpty") }}</div>
       <ion-list v-else lines="full">
         <ion-item v-for="kit in kits" :key="kit.kit_id" button @click="openDetail(kit)">
           <ion-thumbnail slot="start" v-if="kit.images?.box_art_url">

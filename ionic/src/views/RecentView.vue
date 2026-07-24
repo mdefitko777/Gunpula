@@ -2,23 +2,23 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>{{ t("recentNav") || "最近" }}</ion-title>
+        <ion-title>{{ t("recentNav") }}</ion-title>
       </ion-toolbar>
       <ion-toolbar>
         <world-switcher />
       </ion-toolbar>
       <ion-toolbar>
         <ion-segment :value="mode" @ion-change="mode = $event.detail.value">
-          <ion-segment-button value="recent"><ion-label>{{ t("recentDaysShort") || "最近添加" }}</ion-label></ion-segment-button>
-          <ion-segment-button value="month"><ion-label>{{ t("monthReleaseShort") || "本月发售" }}</ion-label></ion-segment-button>
-          <ion-segment-button value="all"><ion-label>{{ t("updatesAllShort") || "全部" }}</ion-label></ion-segment-button>
+          <ion-segment-button value="recent"><ion-label>{{ t("recentDaysShort") }}</ion-label></ion-segment-button>
+          <ion-segment-button value="month"><ion-label>{{ t("monthReleaseShort") }}</ion-label></ion-segment-button>
+          <ion-segment-button value="all"><ion-label>{{ t("updatesAllShort") }}</ion-label></ion-segment-button>
         </ion-segment>
       </ion-toolbar>
       <ion-toolbar v-if="mode !== 'recent'">
         <ion-select
           :value="month"
           interface="popover"
-          :label="t('monthReleaseShort') || '本月发售'"
+          :label="t('monthReleaseShort')"
           @ion-change="onMonth"
         >
           <ion-select-option v-for="m in months" :key="m" :value="m">{{ m }}</ion-select-option>
@@ -27,7 +27,7 @@
     </ion-header>
 
     <ion-content :fullscreen="true">
-      <div v-if="!items.length" class="empty ion-padding">{{ t("noReleaseItems") || "暂无" }}</div>
+      <div v-if="!items.length" class="empty ion-padding">{{ t("noReleaseItems") }}</div>
       <ion-list v-else lines="full">
         <ion-list-header><ion-label>{{ subtitle }}</ion-label></ion-list-header>
         <ion-item v-for="kit in items" :key="kit.kit_id" button @click="openDetail(kit)">

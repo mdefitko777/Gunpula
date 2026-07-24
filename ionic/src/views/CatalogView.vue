@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>{{ t("catalogNav") || "目录" }}</ion-title>
+        <ion-title>{{ t("catalogNav") }}</ion-title>
       </ion-toolbar>
       <ion-toolbar>
         <world-switcher />

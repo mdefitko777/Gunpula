@@ -44,16 +44,14 @@ import { personCircle } from "ionicons/icons";
 import WorldSwitcher from "../components/WorldSwitcher.vue";
 import { useStore } from "../store";
 import { useDetail } from "../composables/useDetail";
+import { useProfile } from "../composables/useProfile";
 
 const { state, name, franchiseLabel, gradeLabel, worldText, worldConfig, ensureFranchise, currentKits } = useStore();
 const { openDetail } = useDetail();
+const { openProfile } = useProfile();
 
 const kits = currentKits;
 const preview = computed(() => kits.value.slice(0, 40));
-
-function openProfile() {
-  // Profile modal lands in the 我的 stage.
-}
 
 onMounted(() => ensureFranchise());
 watch(() => state.franchise, () => ensureFranchise());
