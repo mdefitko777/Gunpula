@@ -91,6 +91,7 @@ const state = reactive({
   collectionTab: "wanted",
   filters: { series: "", grade: "", year: "", limited: "", priceMin: null, priceMax: null },
   syncRevision: 0,
+  workspace: null,
   loading: false,
   error: null,
 });
@@ -342,11 +343,28 @@ function syncPull(remote) {
   const stateObject = Array.isArray(remote) ? remote[0] : remote;
   if (!stateObject) return;
   state.syncRevision = Number(stateObject.revision || 0);
+  // Workspace + member roster for the friends view.
+  state.workspace = stateObject.workspace_name
+    ? {
+        id: stateObject.workspace_id || "",
+        name: stateObject.workspace_name || "",
+        inviteCode: stateObject.invite_code || "",
+        members: Array.isArray(stateObject.members) ? stateObject.members : [],
+      }
+    : null;
   const remoteCollection = stateObject.payload?.collection;
   if (!remoteCollection) return;
+  // Merge keeps every member's items, so friends' collections come along.
   const merged = mergeCollectionState(state.collection, remoteCollection, { self: SELF });
   state.collection = normalizeCollection(merged, { self: SELF });
   setJson(COLLECTION_KEY, { member_items: state.collection.member_items });
+}
+
+// A member's owned/wanted kit ids (self or a friend), from the merged
+// member_items map. Read-only for friends — you can only edit your own.
+function memberIds(member, status) {
+  const items = state.collection.member_items?.[member] || {};
+  return Object.entries(items).filter(([, e]) => e.status === status).map(([id]) => id);
 }
 
 async function syncPush() {
@@ -473,6 +491,7 @@ export function useStore() {
     toggleCollectionStatus,
     syncPull,
     syncPush,
+    memberIds,
     ownedIds: computed(() => state.collection.owned || []),
     wantedIds: computed(() => state.collection.wanted || []),
     franchises: FRANCHISES,

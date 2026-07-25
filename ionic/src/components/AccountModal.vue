@@ -54,6 +54,18 @@
 
       <ion-button expand="block" :disabled="busy" @click="syncNow">{{ t("syncNow") }}</ion-button>
 
+      <!-- Friends: other workspace members, tap to view their collection -->
+      <ion-list :inset="true" v-if="friends.length">
+        <ion-list-header><ion-label>{{ t("workspaceFriends") }}</ion-label></ion-list-header>
+        <ion-item v-for="m in friends" :key="m.name" button @click="viewFriend = m">
+          <div class="friend-avatar" slot="start">{{ (m.name || '?')[0] }}</div>
+          <ion-label>{{ m.name }}</ion-label>
+          <ion-note slot="end">
+            {{ memberIds(m.name, 'owned').length }} / {{ memberIds(m.name, 'wanted').length }}
+          </ion-note>
+        </ion-item>
+      </ion-list>
+
       <ion-list :inset="true" v-if="!workspace">
         <ion-item>
           <ion-input :label="t('workspaceJoin')" label-placement="stacked"
@@ -73,23 +85,54 @@
     </template>
 
     <p v-if="message" class="msg">{{ message }}</p>
+
+    <!-- A friend's collection (read-only) -->
+    <ion-modal :is-open="!!viewFriend" @did-dismiss="viewFriend = null">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ viewFriend?.name }}</ion-title>
+          <ion-buttons slot="end"><ion-button @click="viewFriend = null">{{ t("close") }}</ion-button></ion-buttons>
+        </ion-toolbar>
+        <ion-toolbar>
+          <ion-segment :key="friendTab" :value="friendTab" @ion-change="friendTab = $event.detail.value">
+            <ion-segment-button value="owned"><ion-label>{{ t("ownedList") }} ({{ friendOwned.length }})</ion-label></ion-segment-button>
+            <ion-segment-button value="wanted"><ion-label>{{ t("wantedList") }} ({{ friendWanted.length }})</ion-label></ion-segment-button>
+          </ion-segment>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list v-if="friendKits.length" lines="full">
+          <ion-item v-for="kit in friendKits" :key="kit.kit_id" button @click="openDetail(kit)">
+            <ion-thumbnail slot="start" v-if="kit.images?.box_art_url"><img :src="kit.images.box_art_url" loading="lazy" /></ion-thumbnail>
+            <ion-label><h3>{{ name(kit) }}</h3><p>{{ franchiseLabel(kit.franchise) }} · {{ gradeLabel(kit.grade_code) }}</p></ion-label>
+          </ion-item>
+        </ion-list>
+        <div v-else class="msg">{{ t("homeCollectionEmpty") }}</div>
+      </ion-content>
+    </ion-modal>
   </ion-content>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import {
   IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent,
-  IonList, IonItem, IonLabel, IonNote, IonInput,
+  IonList, IonListHeader, IonItem, IonLabel, IonNote, IonInput, IonModal,
+  IonSegment, IonSegmentButton, IonThumbnail,
 } from "@ionic/vue";
 import { useStore } from "../store";
+import { useDetail } from "../composables/useDetail";
 import {
   isSignedIn, currentUserEmail, requestEmailCode, verifyEmailCode, signOut,
   pullState, pushState, createWorkspace, joinWorkspace,
 } from "../services/sync";
 
 defineEmits(["close"]);
-const { t, syncPull, syncPush } = useStore();
+const { state, t, name, franchiseLabel, gradeLabel, syncPull, syncPush, memberIds, kitById, ensureAllFranchises } = useStore();
+const { openDetail } = useDetail();
+
+// Need every world loaded to resolve friends' kit ids to kits.
+ensureAllFranchises();
 
 const signedIn = ref(isSignedIn());
 const email = ref(currentUserEmail() || "");
@@ -99,6 +142,19 @@ const codeSent = ref(false);
 const busy = ref(false);
 const message = ref("");
 const workspace = ref(null);
+
+// Friends = other workspace members. The roster comes from the pulled state;
+// a friend's collection is read from the merged member_items map.
+const friends = computed(() =>
+  (state.workspace?.members || []).filter((m) => m.name && !m.is_self),
+);
+const viewFriend = ref(null);
+const friendTab = ref("owned");
+const friendOwned = computed(() => (viewFriend.value ? memberIds(viewFriend.value.name, "owned") : []));
+const friendWanted = computed(() => (viewFriend.value ? memberIds(viewFriend.value.name, "wanted") : []));
+const friendKits = computed(() =>
+  (friendTab.value === "owned" ? friendOwned.value : friendWanted.value).map(kitById).filter(Boolean),
+);
 
 async function run(fn, okMsg = "") {
   busy.value = true;
@@ -162,4 +218,10 @@ if (isSignedIn()) refresh().catch((e) => { message.value = String(e.message || e
 
 <style scoped>
 .msg { margin-top: 12px; color: var(--ion-color-medium); font-size: 13px; text-align: center; }
+.friend-avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--ion-color-primary); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600; text-transform: uppercase; margin-right: 8px;
+}
 </style>
