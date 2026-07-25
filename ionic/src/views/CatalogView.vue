@@ -71,6 +71,15 @@
             </ion-select>
           </ion-item>
           <ion-item>
+            <ion-select :label="t('itemType')" :value="state.filters.itemType" interface="action-sheet"
+                        @ion-change="setFilter('itemType', $event.detail.value)">
+              <ion-select-option value="">{{ t("allTypes") }}</ion-select-option>
+              <ion-select-option v-for="o in opts.itemType" :key="o.value" :value="o.value">
+                {{ o.label }} ({{ o.count }})
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
             <ion-select :label="t('releaseYear')" :value="state.filters.year" interface="action-sheet"
                         @ion-change="setFilter('year', $event.detail.value)">
               <ion-select-option value="">{{ t("allYears") }}</ion-select-option>
@@ -124,7 +133,7 @@ import { useStore } from "../store";
 import { useDetail } from "../composables/useDetail";
 
 const {
-  state, t, name, franchiseLabel, gradeLabel, ensureFranchise, currentKits,
+  state, t, name, franchiseLabel, gradeLabel, ensureFranchise, ensureGrades, currentKits,
   setFilter, clearFilters, activeFilterCount, applyFilters, filterOptions,
 } = useStore();
 const { openDetail } = useDetail();
@@ -158,7 +167,7 @@ function loadMore(ev) {
 }
 
 watch([query, () => state.franchise, () => state.filters], () => { shown.value = pageSize; }, { deep: true });
-onMounted(() => ensureFranchise());
+onMounted(() => { ensureFranchise(); ensureGrades(); });
 watch(() => state.franchise, () => { clearFilters(); ensureFranchise(); });
 </script>
 

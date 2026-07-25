@@ -1,11 +1,14 @@
 import { reactive, computed } from "vue";
 import { TRANSLATIONS } from "@app/i18n.js";
-import { FRANCHISES, kitDisplayNameFor, franchiseShortLabelFor, gradeShortLabelFor } from "@app/catalog-display.js";
+import {
+  FRANCHISES, kitDisplayNameFor, franchiseShortLabelFor, gradeShortLabelFor,
+  ITEM_TYPE_LABELS, itemTypeKeyForCategory, itemTypeLabelFor,
+} from "@app/catalog-display.js";
 import { WORLD_THEME_CONFIG, localizedWorldText } from "@app/world-themes.js";
 import { getString, setString, getJson, setJson } from "@app/storage.js";
 import { normalizeCollection, mergeCollectionState } from "@app/collection-store.js";
 import { recentFeedKits, releaseItemsForMonth, defaultReleaseMonth, validReleaseMonth } from "@app/update-feed.js";
-import { loadFranchise, loadUpdateFeed, loadAtlasGroups, loadBbxDatabase } from "../services/catalog";
+import { loadFranchise, loadUpdateFeed, loadAtlasGroups, loadBbxDatabase, loadGrades } from "../services/catalog";
 
 const LANG_KEY = "gunpula-catalog-language-v1";
 const FRANCHISE_KEY = "gunpula-catalog-franchise-v1";
@@ -89,7 +92,7 @@ const state = reactive({
   // segments stay in sync.
   recentMode: "recent",
   collectionTab: "wanted",
-  filters: { series: "", grade: "", year: "", limited: "", priceMin: null, priceMax: null },
+  filters: { series: "", grade: "", itemType: "", year: "", limited: "", priceMin: null, priceMax: null },
   syncRevision: 0,
   workspace: null,
   loading: false,
@@ -101,7 +104,14 @@ const COLLECTION_TABS = ["wanted", "owned"];
 
 // --- Catalog filters ------------------------------------------------------
 function emptyFilters() {
-  return { series: "", grade: "", year: "", limited: "", priceMin: null, priceMax: null };
+  return { series: "", grade: "", itemType: "", year: "", limited: "", priceMin: null, priceMax: null };
+}
+
+// grade_code → item-type key, via the grade's category. Built once grades load.
+const gradeCategory = new Map();
+function itemTypeOfKit(kit) {
+  const category = gradeCategory.get(kit.grade_code) || "other";
+  return itemTypeKeyForCategory(category);
 }
 
 function setFilter(key, value) {
@@ -115,7 +125,7 @@ function clearFilters() {
 
 function activeFilterCount() {
   const f = state.filters;
-  return [f.series, f.grade, f.year, f.limited].filter(Boolean).length
+  return [f.series, f.grade, f.itemType, f.year, f.limited].filter(Boolean).length
     + (Number.isFinite(f.priceMin) ? 1 : 0)
     + (Number.isFinite(f.priceMax) ? 1 : 0);
 }
@@ -140,6 +150,7 @@ function applyFilters(kits) {
   return kits.filter((kit) => {
     if (f.series && kitSeriesKey(kit) !== f.series) return false;
     if (f.grade && kit.grade_code !== f.grade) return false;
+    if (f.itemType && itemTypeOfKit(kit) !== f.itemType) return false;
     if (f.year && kitYear(kit) !== f.year) return false;
     if (f.limited === "limited" && !kit.is_limited) return false;
     if (f.limited === "regular" && kit.is_limited) return false;
@@ -173,6 +184,9 @@ function filterOptions(kits) {
       .sort((a, b) => b.count - a.count),
     grade: [...count((k) => k.grade_code).entries()]
       .map(([value, n]) => ({ value, label: helpers.gradeLabel(value), count: n }))
+      .sort((a, b) => b.count - a.count),
+    itemType: [...count(itemTypeOfKit).entries()]
+      .map(([value, n]) => ({ value, label: itemTypeLabelFor(value, state.language), count: n }))
       .sort((a, b) => b.count - a.count),
     year: [...count(kitYear).entries()]
       .map(([value, n]) => ({ value, label: value, count: n }))
@@ -212,6 +226,16 @@ async function ensureAtlasGroups() {
   if (state.atlasGroups) return state.atlasGroups;
   state.atlasGroups = await loadAtlasGroups();
   return state.atlasGroups;
+}
+
+// Load the grade→category table once, so the item-type filter can classify kits.
+let gradesLoaded = false;
+async function ensureGrades() {
+  if (gradesLoaded) return;
+  gradesLoaded = true;
+  for (const grade of await loadGrades()) {
+    if (grade.code) gradeCategory.set(grade.code, grade.category || "other");
+  }
 }
 
 async function ensureBbx() {
@@ -477,6 +501,7 @@ export function useStore() {
     ensureAllFranchises,
     ensureUpdateFeed,
     ensureAtlasGroups,
+    ensureGrades,
     ensureBbx,
     guideGroups,
     guideGroupProgress,

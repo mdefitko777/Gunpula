@@ -10,6 +10,20 @@ export async function loadFranchise(franchise) {
   return data.kits || [];
 }
 
+// Grade → category table, used to derive the 商品类型 filter.
+export async function loadGrades() {
+  try {
+    const res = await fetch(`${DATA_BASE}/grades.json`);
+    if (res.ok) {
+      const data = await res.json();
+      return data.grades || data || [];
+    }
+  } catch {
+    // item-type filter is optional
+  }
+  return [];
+}
+
 // 图鉴 groups (Atlas): generations / eras / works per franchise.
 export async function loadAtlasGroups() {
   try {
