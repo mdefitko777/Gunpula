@@ -257,6 +257,25 @@ const BBX_PART_LABELS = {
   over_blade: { zh: "上刃", ko: "오버 블레이드", en: "Over Blade", ja: "オーバーブレード" },
 };
 
+// Canonical set code (e.g. "BX-50" / "BX50 ..." → "BX50"), matching the vanilla
+// bbxSetCode, so a catalog kit's code links to a guide bey.
+function bbxSetCode(value) {
+  const m = /([A-Za-z]{1,4})-?(\d{1,4})/.exec(String(value || ""));
+  return m ? (m[1] + m[2]).toUpperCase() : "";
+}
+
+// Set codes the user owns / wants, from their beyblade catalog collection.
+function bbxCollectedCodes(status) {
+  const ids = new Set(status === "owned" ? state.collection.owned || [] : state.collection.wanted || []);
+  const codes = new Set();
+  for (const kit of state.catalogByFranchise.beyblade || []) {
+    if (!ids.has(kit.kit_id)) continue;
+    const code = bbxSetCode(kit.names?.ja || kit.names?.zh || kit.kit_id);
+    if (code) codes.add(code);
+  }
+  return codes;
+}
+
 function bbxGroups() {
   const db = state.bbx;
   if (!db) return [];
@@ -269,6 +288,9 @@ function bbxGroups() {
       subtitle: { zh: "整机", ko: "완성", en: "Complete", ja: "完成" },
       count: db.series.length,
       items: db.series,
+      // Complete beys map to catalog kits by set code; parts don't, so only this
+      // group lights from the collection.
+      codeLinked: true,
     });
   }
   for (const [key, list] of Object.entries(db.parts || {})) {
@@ -290,8 +312,19 @@ function guideGroups(franchise = state.franchise) {
   return (key && state.atlasGroups?.franchises?.[key]) || [];
 }
 
-// Lit = how many of a group's kits are already owned or wanted.
+// Lit = how many of a group's entries are already owned or wanted.
 function guideGroupProgress(group) {
+  // Beyblade groups carry their own items and link by set code, not kit_ids.
+  if (group.items) {
+    if (!group.codeLinked) return { lit: 0, total: group.count || group.items.length };
+    const owned = bbxCollectedCodes("owned");
+    const wanted = bbxCollectedCodes("wanted");
+    const lit = group.items.filter((it) => {
+      const code = bbxSetCode(it.base_set_id || it.product_id || it.part_id);
+      return code && (owned.has(code) || wanted.has(code));
+    }).length;
+    return { lit, total: group.items.length };
+  }
   const ids = group.kit_ids || [];
   const owned = new Set(state.collection.owned || []);
   const wanted = new Set(state.collection.wanted || []);
