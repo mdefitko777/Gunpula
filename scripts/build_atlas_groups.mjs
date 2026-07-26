@@ -47,6 +47,11 @@ const FGO_CHAPTER_LABELS = {
   fgo_311: lang("Lostbelt No.7 纳维·米克特兰", "이문대 No.7 나우이 믹틀란", "Lostbelt No.7 · Nahui Mictlan", "Lostbelt No.7 ナウイ・ミクトラン"),
   fgo_402: lang("奏章 I Paper Moon", "주장 I 페이퍼 문", "Ordeal Call I · Paper Moon", "奏章I ペーパームーン"),
   fgo_403: lang("奏章 II Id", "주장 II 이드", "Ordeal Call II · Id", "奏章II イド"),
+  fgo_404: lang("奏章 III 原型创世", "주장 III 아키타입 인셉션", "Ordeal Call III · Archetype Inception", "奏章III アーキタイプ・インセプション"),
+  fgo_405: lang("奏章 IV 三位一体·梅塔特隆", "주장 IV 트리니티 메타트로니오스", "Ordeal Call IV · Trinity Metatronios", "奏章IV トリニティ・メタトロニオス"),
+  fgo_407: lang("终章", "종장", "Final Chapter", "終章"),
+  fgo_500: lang("第三部 余日之始", "제3부 애프터타임의 시작", "Part 3 · Beginning of After Time", "第三部 アフタータイムのはじまり"),
+  fgo_501: lang("第三部 过去迦勒底", "제3부 패스트 칼데아", "Part 3 · Past Chaldea", "第三部 パスト・カルデア"),
 };
 
 function namesFor(label, fallback = "") {

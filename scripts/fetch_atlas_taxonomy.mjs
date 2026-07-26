@@ -73,7 +73,10 @@ async function pokemonGenerations() {
   return generations;
 }
 
-const fgoMainWarIds = [100, 101, 102, 103, 104, 105, 106, 107, 108, 201, 202, 203, 204, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 402, 403];
+// Uses the JP region: NA runs ~2 years behind, so it lacks Ordeal Call III/IV,
+// the Part 2 finale, and all of Part 3. 402/403 = 奏章I/II, 404/405 = 奏章III/IV,
+// 407 = 終章 (Part 2 finale), 500/501 = Part 3 (アフタータイム / パスト・カルデア).
+const fgoMainWarIds = [100, 101, 102, 103, 104, 105, 106, 107, 108, 201, 202, 203, 204, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 402, 403, 404, 405, 407, 500, 501];
 const fgoChapterAliases = {
   100: ["fuyuki", "emiya"],
   101: ["orleans", "jeanne", "jalter"],
@@ -101,16 +104,21 @@ const fgoChapterAliases = {
   311: ["nahui", "mictlan", "kukulkan", "tezcatlipoca", "tlaloc", "quetzal"],
   402: ["paper moon", "durga", "kali", "sion"],
   403: ["gehenna", "monte cristo", "avenger"],
+  404: ["archetype", "inception", "melusine", "ptolemaios"],
+  405: ["trinity", "metatronios", "metatron", "trinity metatronios"],
+  407: ["final chapter", "終章", "chaldea", "mash", "fujimaru"],
+  500: ["after time", "aftertime", "chaldea"],
+  501: ["past chaldea", "パスト・カルデア", "past", "nostalgia"],
 };
 
 async function fgoChapters() {
-  const basicWars = await json("https://api.atlasacademy.io/export/NA/basic_war.json");
+  const basicWars = await json("https://api.atlasacademy.io/export/JP/basic_war.json");
   const byId = new Map(basicWars.map((war) => [Number(war.id), war]));
   const chapters = await mapLimit(fgoMainWarIds, 5, async (id) => {
     const basic = byId.get(id) || {};
     let nice = {};
     try {
-      nice = await json(`https://api.atlasacademy.io/nice/NA/war/${id}`);
+      nice = await json(`https://api.atlasacademy.io/nice/JP/war/${id}`);
     } catch {
       nice = {};
     }
