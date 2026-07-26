@@ -8945,3 +8945,59 @@ body[data-view="updates"] .source-health-strip {
 .member-guide-text span {
   font-size: 9.5px;
 }
+
+/* Friends v3: account id, search, requests and the friend list. */
+.friends-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.friends-block:last-of-type {
+  border-bottom: 0;
+}
+
+.friends-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.friends-row input {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.friends-row button {
+  flex: 0 0 auto;
+}
+
+.friends-person {
+  align-items: center;
+  gap: 10px;
+}
+
+/* Buttons sit at the end of the row and never squeeze the name. */
+.friends-actions {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+
+.friends-result:empty {
+  display: none;
+}
+
+.friends-error {
+  color: var(--danger, #be2d2a);
+}

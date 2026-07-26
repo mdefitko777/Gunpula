@@ -301,6 +301,11 @@ const state = {
     suppress: false,
     workspace: null,
   },
+  // Friends v3: my account handle plus the friend/request lists from get_me.
+  friends: { handle: "", revision: 0, list: [], incoming: [], outgoing: [], loaded: false, error: "" },
+  // Friends' collections, keyed by handle. Kept separate from state.collection
+  // on purpose so they never ride along in my own synced payload.
+  friendCollections: {},
   activeView: INITIAL_VIEW_STATE.view || localStorage.getItem(ACTIVE_VIEW_KEY) || "home",
   settingsPanel: SETTINGS_PANELS.includes(localStorage.getItem(SETTINGS_PANEL_KEY)) ? localStorage.getItem(SETTINGS_PANEL_KEY) : "home",
   activeModal: INITIAL_VIEW_STATE.modal || null,
@@ -2981,6 +2986,61 @@ async function supabaseRpcV2(functionName, body = {}) {
   return data;
 }
 
+// --- Friends v3 -----------------------------------------------------------
+// The v3 RPCs are shaped like the v2 ones; they just act on the caller's own
+// row (gunpula_v3_users) instead of a shared workspace. See docs/friends-v3.md.
+const supabaseRpcV3 = (functionName, body = {}) => supabaseRpcV2(functionName, body);
+
+// get_me returns profile + payload + friends + both request queues in one call.
+function applyFriendsState(me) {
+  if (!me) return;
+  state.friends = {
+    handle: me.handle || "",
+    revision: Number(me.revision || 0),
+    list: Array.isArray(me.friends) ? me.friends : [],
+    incoming: Array.isArray(me.incoming_requests) ? me.incoming_requests : [],
+    outgoing: Array.isArray(me.outgoing_requests) ? me.outgoing_requests : [],
+    loaded: true,
+    error: "",
+  };
+}
+
+async function refreshFriends({ quiet = false } = {}) {
+  if (!syncModeV2()) return null;
+  try {
+    const me = await supabaseRpcV3("gunpula_v3_get_me");
+    applyFriendsState(me);
+    return me;
+  } catch (error) {
+    state.friends.loaded = true;
+    // A missing function means the v3 SQL has not been run yet; say so plainly
+    // rather than showing a raw Postgres error.
+    state.friends.error = /does not exist|schema cache/i.test(error.message) ? t("friendsSetupNeeded") : error.message;
+    if (!quiet) setSyncStatus("error", state.friends.error);
+    return null;
+  }
+}
+
+// Friend actions all return the fresh get_me payload, so the panel can re-render
+// from one source of truth after every change.
+async function friendAction(fn, body = {}) {
+  const me = await supabaseRpcV3(fn, body);
+  applyFriendsState(me);
+  return me;
+}
+
+// Fetch a friend's collection into its own slot, then reuse the member profile
+// viewer. get_friend_collection returns only the collection — never their home
+// cover photos — so personal images stay private even between friends.
+async function openFriendProfile(friend) {
+  const handle = friend?.handle;
+  if (!handle) return;
+  const result = await supabaseRpcV3("gunpula_v3_get_friend_collection", { p_handle: handle });
+  const items = result?.collection?.member_items?.[result?.name] || result?.collection?.items || {};
+  state.friendCollections[safeMemberName(result?.name || handle)] = items;
+  openMemberProfile({ name: result?.name || handle, avatar: result?.avatar || "", is_self: false });
+}
+
 function cloudPayload() {
   return {
     schema_version: 1,
@@ -3052,6 +3112,10 @@ function normalizeCloudState(result) {
 async function readRemoteState() {
   if (syncModeV2()) {
     const result = await supabaseRpcV2("gunpula_v2_get_state");
+    // Pick up the account handle, friends and pending requests alongside the
+    // collection pull, so the friends panel is warm when it opens. Quiet: a
+    // project that has not run the v3 SQL yet must not break normal syncing.
+    refreshFriends({ quiet: true });
     return normalizeCloudState(result);
   }
   const result = await supabaseRpc("gunpula_get_state", {
@@ -3090,10 +3154,31 @@ async function writeRemoteState(reason = "manual") {
     const remote = normalizeCloudState(result);
     applyRemoteState(remote, { skipSave: true });
     setSyncStatus(state.sync.canEdit ? "connected" : "readonly", t("syncSaved"));
+    await mirrorStateToV3();
   } catch (error) {
     setSyncStatus("error", error.message);
   } finally {
     state.sync.inFlight = false;
+  }
+}
+
+// Collections still sync through v2; v3 holds the copy friends are allowed to
+// read. Without this mirror a friend would only ever see the snapshot taken at
+// migration time, so every successful save is copied across. Failures here are
+// swallowed: the real save already succeeded, and the friends panel surfaces
+// setup problems on its own.
+async function mirrorStateToV3() {
+  if (!syncModeV2() || !state.friends.handle) return;
+  try {
+    const me = await supabaseRpcV3("gunpula_v3_save_state", {
+      p_payload: cloudPayload(),
+      p_base_revision: state.friends.revision || 0,
+    });
+    applyFriendsState(me);
+  } catch {
+    // v3 not set up yet, or the revision drifted (another device saved first).
+    // Re-read so the next save starts from the server's number.
+    await refreshFriends({ quiet: true });
   }
 }
 
@@ -5560,6 +5645,15 @@ function editableCollectionMember() {
   return safeMemberName(memberName());
 }
 
+// Read-only view of a member's items. In v3 a friend's collection lives in
+// their own row and is fetched separately — it is deliberately kept out of
+// state.collection, because anything in there gets pushed back up as part of
+// my own payload on the next save.
+function memberItemsFor(member) {
+  const name = safeMemberName(member);
+  return state.collection.member_items?.[name] || state.friendCollections[name] || {};
+}
+
 function memberCollectionMap(member = editableCollectionMember()) {
   state.collection = normalizeCollection(state.collection);
   state.collection.member_items = state.collection.member_items || {};
@@ -5581,7 +5675,7 @@ function refreshLegacyCollectionItems() {
 
 function collectionEntry(kitId, member = editableCollectionMember()) {
   state.collection = normalizeCollection(state.collection);
-  return kitId ? state.collection.member_items?.[member]?.[kitId] || null : null;
+  return kitId ? memberItemsFor(member)[kitId] || null : null;
 }
 
 function preferredCollectionMemberForKit(kitId, type = null) {
@@ -6097,14 +6191,14 @@ function collectionIds(type) {
     }
     return [...new Set(ids)];
   }
-  return Object.entries(state.collection.member_items?.[member] || {})
+  return Object.entries(memberItemsFor(member))
     .filter(([, entry]) => entry?.status === type)
     .map(([kitId]) => kitId);
 }
 
 function collectionIdsForMember(type, member = editableCollectionMember()) {
   state.collection = normalizeCollection(state.collection);
-  return Object.entries(state.collection.member_items?.[safeMemberName(member)] || {})
+  return Object.entries(memberItemsFor(member))
     .filter(([, entry]) => entry?.status === type)
     .map(([kitId]) => kitId);
 }
@@ -6787,7 +6881,7 @@ function renderProfileFavorites() {
 }
 
 function memberCollectionKits(memberDisplayName, status) {
-  const items = state.collection.member_items?.[safeMemberName(memberDisplayName)] || {};
+  const items = memberItemsFor(memberDisplayName);
   return Object.entries(items)
     .filter(([, entry]) => entry?.status === status)
     .map(([kitId]) => ({ kit: displayKitById(kitId), entry: items[kitId] }))
@@ -8763,35 +8857,252 @@ function renderFavoritesPanel(container) {
   container.replaceChildren(hint, franchiseWrap, seriesWrap);
 }
 
+// Friends panel: my account id, search by account id, the requests waiting on
+// me, and my friends. Replaces the old shared-workspace invite code, which
+// could not be revoked and let anyone holding it read everything.
 function renderFriendsPanel(container) {
-  const workspace = state.sync.workspace;
-  if (workspace?.inviteCode) {
-    const invite = document.createElement("p");
-    invite.className = "settings-hint workspace-invite-line";
-    invite.innerHTML = `<span>${escapeHtml(t("workspaceInviteCode"))}</span><code>${escapeHtml(workspace.inviteCode)}</code>`;
-    container.append(invite);
+  if (!syncModeV2()) {
+    const hint = document.createElement("p");
+    hint.className = "settings-hint";
+    hint.textContent = t("friendsSignInFirst");
+    container.append(hint);
+    return;
   }
-  for (const member of workspace?.members || []) {
-    const row = document.createElement("button");
-    row.type = "button";
-    row.className = `workspace-member-row${member.is_self ? " is-self" : ""}`;
-    const avatar = document.createElement("span");
-    avatar.className = "account-avatar member-row-avatar";
-    applyAvatarTo(avatar, member);
-    const body = document.createElement("span");
-    body.className = "member-row-body";
-    const name = document.createElement("strong");
-    name.textContent = `${member.name || "member"}${member.is_self ? ` · ${t("workspaceSelf")}` : ""}`;
-    const meta = document.createElement("span");
-    meta.textContent = memberMiniStats(member);
-    body.append(name, meta);
-    row.append(avatar, body);
-    row.addEventListener("click", () => {
-      closeDialog(elements.userPanelDialog);
-      openMemberProfile(member);
-    });
-    container.append(row);
+
+  const rerender = () => {
+    container.innerHTML = "";
+    renderFriendsPanel(container);
+  };
+  const run = async (fn) => {
+    try {
+      await fn();
+      rerender();
+    } catch (error) {
+      const note = container.querySelector(".friends-error") || document.createElement("p");
+      note.className = "settings-hint friends-error";
+      note.textContent = friendErrorText(error);
+      container.append(note);
+    }
+  };
+
+  if (!state.friends.loaded) {
+    const loading = document.createElement("p");
+    loading.className = "settings-hint";
+    loading.textContent = t("friendsLoading");
+    container.append(loading);
+    refreshFriends({ quiet: true }).then(rerender);
+    return;
   }
+  if (state.friends.error) {
+    const err = document.createElement("p");
+    err.className = "settings-hint friends-error";
+    err.textContent = state.friends.error;
+    container.append(err);
+  }
+
+  // --- my account id ---
+  const mine = document.createElement("div");
+  mine.className = "friends-block";
+  const mineLabel = document.createElement("p");
+  mineLabel.className = "settings-hint";
+  mineLabel.textContent = state.friends.handle ? t("friendsMyId") : t("friendsPickIdHint");
+  mine.append(mineLabel);
+  const idRow = document.createElement("div");
+  idRow.className = "friends-row";
+  const idInput = document.createElement("input");
+  idInput.type = "text";
+  idInput.value = state.friends.handle || "";
+  idInput.placeholder = t("friendsIdPlaceholder");
+  idInput.maxLength = 20;
+  const idSave = document.createElement("button");
+  idSave.type = "button";
+  idSave.className = "secondary-button compact-button";
+  idSave.textContent = state.friends.handle ? t("friendsChangeId") : t("friendsSetId");
+  idSave.addEventListener("click", () =>
+    run(() => friendAction("gunpula_v3_claim_handle", { p_handle: idInput.value.trim().toLowerCase() })),
+  );
+  idRow.append(idInput, idSave);
+  mine.append(idRow);
+  container.append(mine);
+
+  // Everything below needs an id: friends find you by it.
+  if (!state.friends.handle) return;
+
+  // --- search + add ---
+  const search = document.createElement("div");
+  search.className = "friends-block";
+  const searchLabel = document.createElement("p");
+  searchLabel.className = "settings-hint";
+  searchLabel.textContent = t("friendsAddHint");
+  const searchRow = document.createElement("div");
+  searchRow.className = "friends-row";
+  const searchInput = document.createElement("input");
+  searchInput.type = "text";
+  searchInput.placeholder = t("friendsSearchPlaceholder");
+  const searchButton = document.createElement("button");
+  searchButton.type = "button";
+  searchButton.className = "secondary-button compact-button";
+  searchButton.textContent = t("friendsSearch");
+  const result = document.createElement("div");
+  result.className = "friends-result";
+  searchButton.addEventListener("click", async () => {
+    const handle = searchInput.value.trim().toLowerCase();
+    result.innerHTML = "";
+    if (!handle) return;
+    try {
+      const found = await supabaseRpcV3("gunpula_v3_search_user", { p_handle: handle });
+      if (!found) {
+        result.textContent = t("friendsNotFound");
+        return;
+      }
+      result.append(friendRow(found, [
+        found.relation === "none"
+          ? { label: t("friendsAdd"), action: () => run(() => friendAction("gunpula_v3_request_friend", { p_handle: found.handle })) }
+          : { label: friendRelationText(found.relation), disabled: true },
+      ]));
+    } catch (error) {
+      result.textContent = friendErrorText(error);
+    }
+  });
+  searchRow.append(searchInput, searchButton);
+  search.append(searchLabel, searchRow, result);
+  container.append(search);
+
+  // --- requests waiting on me ---
+  if (state.friends.incoming.length) {
+    const block = document.createElement("div");
+    block.className = "friends-block";
+    const label = document.createElement("p");
+    label.className = "settings-hint";
+    label.textContent = t("friendsIncoming");
+    block.append(label);
+    for (const person of state.friends.incoming) {
+      block.append(friendRow(person, [
+        { label: t("friendsAccept"), action: () => run(() => friendAction("gunpula_v3_respond_friend", { p_handle: person.handle, p_accept: true })) },
+        { label: t("friendsDecline"), action: () => run(() => friendAction("gunpula_v3_respond_friend", { p_handle: person.handle, p_accept: false })) },
+      ]));
+    }
+    container.append(block);
+  }
+
+  // --- requests I sent ---
+  if (state.friends.outgoing.length) {
+    const block = document.createElement("div");
+    block.className = "friends-block";
+    const label = document.createElement("p");
+    label.className = "settings-hint";
+    label.textContent = t("friendsOutgoing");
+    block.append(label);
+    for (const person of state.friends.outgoing) {
+      block.append(friendRow(person, [
+        { label: t("friendsCancel"), action: () => run(() => friendAction("gunpula_v3_remove_friend", { p_handle: person.handle })) },
+      ]));
+    }
+    container.append(block);
+  }
+
+  // --- my friends ---
+  const listBlock = document.createElement("div");
+  listBlock.className = "friends-block";
+  const listLabel = document.createElement("p");
+  listLabel.className = "settings-hint";
+  listLabel.textContent = t("friendsList");
+  listBlock.append(listLabel);
+  if (!state.friends.list.length) {
+    const empty = document.createElement("p");
+    empty.className = "settings-hint";
+    empty.textContent = t("friendsEmpty");
+    listBlock.append(empty);
+  }
+  for (const person of state.friends.list) {
+    listBlock.append(friendRow(person, [
+      {
+        label: t("friendsView"),
+        action: async () => {
+          closeDialog(elements.userPanelDialog);
+          await openFriendProfile(person);
+        },
+      },
+      { label: t("friendsRemove"), action: () => run(() => friendAction("gunpula_v3_remove_friend", { p_handle: person.handle })) },
+    ]));
+  }
+  container.append(listBlock);
+
+  // --- one-time import from the old shared workspace ---
+  if (state.sync.workspace) {
+    const migrate = document.createElement("button");
+    migrate.type = "button";
+    migrate.className = "secondary-button compact-button";
+    migrate.textContent = t("friendsMigrate");
+    migrate.addEventListener("click", () =>
+      run(async () => {
+        const me = await friendAction("gunpula_v3_migrate_from_v2");
+        if (me?.payload?.collection) {
+          state.collection = normalizeCollection(me.payload.collection);
+          saveCollection({ skipSync: true });
+          render();
+        }
+      }),
+    );
+    container.append(migrate);
+  }
+}
+
+function friendRelationText(relation) {
+  return (
+    {
+      friends: t("friendsAlready"),
+      outgoing: t("friendsPending"),
+      incoming: t("friendsRespondHint"),
+      self: t("friendsSelf"),
+    }[relation] || ""
+  );
+}
+
+function friendErrorText(error) {
+  const message = String(error?.message || error || "");
+  const known = {
+    "gunpula handle taken": t("friendsIdTaken"),
+    "gunpula user not found": t("friendsNotFound"),
+    "gunpula already friends": t("friendsAlready"),
+    "gunpula cannot add yourself": t("friendsSelf"),
+  };
+  for (const [needle, text] of Object.entries(known)) {
+    if (message.includes(needle)) return text;
+  }
+  if (message.includes("handle must be")) return t("friendsIdRule");
+  if (/does not exist|schema cache/i.test(message)) return t("friendsSetupNeeded");
+  return message;
+}
+
+// One row: avatar, name + @id, and the buttons for whatever state we're in.
+function friendRow(person, actions = []) {
+  const row = document.createElement("div");
+  row.className = "workspace-member-row friends-person";
+  const avatar = document.createElement("span");
+  avatar.className = "account-avatar member-row-avatar";
+  applyAvatarTo(avatar, person);
+  const body = document.createElement("span");
+  body.className = "member-row-body";
+  const name = document.createElement("strong");
+  name.textContent = person.name || person.handle || "member";
+  const meta = document.createElement("span");
+  meta.textContent = `@${person.handle || ""}`;
+  body.append(name, meta);
+  row.append(avatar, body);
+  const buttons = document.createElement("span");
+  buttons.className = "friends-actions";
+  for (const action of actions) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "secondary-button compact-button";
+    button.textContent = action.label;
+    if (action.disabled) button.disabled = true;
+    else button.addEventListener("click", action.action);
+    buttons.append(button);
+  }
+  row.append(buttons);
+  return row;
 }
 
 function guideWorkProgress(work, member = activeGuideMember()) {
