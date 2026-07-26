@@ -512,28 +512,31 @@ $$;
 -- ---------------------------------------------------------------------------
 -- Grants: RPCs only, and only for signed-in users.
 --
--- Postgres grants EXECUTE to PUBLIC on every new function, and both anon and
--- authenticated inherit that — so revoking from those two roles alone would
--- leave the functions callable. Everything is revoked from PUBLIC first, then
--- only the app-facing RPCs are granted back. This matters for the internal
--- helpers especially: gunpula_v3_public_profile(uuid) would otherwise let an
--- anonymous caller turn a guessed user id into someone's handle and avatar.
+-- Two separate grants have to be undone here, which is easy to get wrong:
+--   1. Postgres grants EXECUTE to PUBLIC on every new function.
+--   2. Supabase additionally sets ALTER DEFAULT PRIVILEGES so new functions in
+--      the public schema are granted EXECUTE to anon and authenticated DIRECTLY.
+-- Revoking from PUBLIC alone therefore leaves the direct grants in place and the
+-- function stays callable — verified against a live project. So every revoke
+-- below names public, anon and authenticated. It matters most for the internal
+-- helpers: gunpula_v3_public_profile(uuid) would otherwise let an anonymous
+-- caller turn a user id into someone's handle and avatar.
 -- ---------------------------------------------------------------------------
-revoke all on function public.gunpula_v3_norm_handle(text) from public;
-revoke all on function public.gunpula_v3_ensure_self() from public;
-revoke all on function public.gunpula_v3_public_profile(uuid) from public;
-revoke all on function public.gunpula_v3_are_friends(uuid, uuid) from public;
+revoke all on function public.gunpula_v3_norm_handle(text) from public, anon, authenticated;
+revoke all on function public.gunpula_v3_ensure_self() from public, anon, authenticated;
+revoke all on function public.gunpula_v3_public_profile(uuid) from public, anon, authenticated;
+revoke all on function public.gunpula_v3_are_friends(uuid, uuid) from public, anon, authenticated;
 
-revoke all on function public.gunpula_v3_get_me() from public;
-revoke all on function public.gunpula_v3_claim_handle(text) from public;
-revoke all on function public.gunpula_v3_update_profile(text, text, jsonb) from public;
-revoke all on function public.gunpula_v3_save_state(jsonb, bigint) from public;
-revoke all on function public.gunpula_v3_search_user(text) from public;
-revoke all on function public.gunpula_v3_request_friend(text) from public;
-revoke all on function public.gunpula_v3_respond_friend(text, boolean) from public;
-revoke all on function public.gunpula_v3_remove_friend(text) from public;
-revoke all on function public.gunpula_v3_get_friend_collection(text) from public;
-revoke all on function public.gunpula_v3_migrate_from_v2() from public;
+revoke all on function public.gunpula_v3_get_me() from public, anon, authenticated;
+revoke all on function public.gunpula_v3_claim_handle(text) from public, anon, authenticated;
+revoke all on function public.gunpula_v3_update_profile(text, text, jsonb) from public, anon, authenticated;
+revoke all on function public.gunpula_v3_save_state(jsonb, bigint) from public, anon, authenticated;
+revoke all on function public.gunpula_v3_search_user(text) from public, anon, authenticated;
+revoke all on function public.gunpula_v3_request_friend(text) from public, anon, authenticated;
+revoke all on function public.gunpula_v3_respond_friend(text, boolean) from public, anon, authenticated;
+revoke all on function public.gunpula_v3_remove_friend(text) from public, anon, authenticated;
+revoke all on function public.gunpula_v3_get_friend_collection(text) from public, anon, authenticated;
+revoke all on function public.gunpula_v3_migrate_from_v2() from public, anon, authenticated;
 
 grant execute on function public.gunpula_v3_get_me() to authenticated;
 grant execute on function public.gunpula_v3_claim_handle(text) to authenticated;
