@@ -7393,6 +7393,35 @@ function atlasLabel(value) {
   return value[state.language] || value.zh || value.en || value.ja || value.ko || "";
 }
 
+// Fate is a long story timeline (works → Part 1 singularities → sub-singularities
+// → Part 2 Lostbelts → Ordeal Call → Part 3), so its 38 chapters read as a wall
+// when flat. Bucket them by their war id into labelled sections.
+const FATE_WAR = (id) => Number(/^fgo_(\d+)/.exec(id || "")?.[1] ?? NaN);
+const FATE_SECTIONS = [
+  { label: { zh: "Fate 系列作品", ko: "Fate 시리즈", en: "Fate series", ja: "Fate シリーズ" }, test: (id) => !/^fgo_/.test(id) && id !== "fate_general" },
+  { label: { zh: "第一部 · 特异点", ko: "1부 · 특이점", en: "Part 1 · Singularities", ja: "第一部 · 特異点" }, test: (id) => FATE_WAR(id) >= 100 && FATE_WAR(id) < 200 },
+  { label: { zh: "亚种特异点", ko: "아종 특이점", en: "Sub-Singularities", ja: "亜種特異点" }, test: (id) => FATE_WAR(id) >= 200 && FATE_WAR(id) < 300 },
+  { label: { zh: "第二部 · 异闻带", ko: "2부 · 이문대", en: "Part 2 · Lostbelts", ja: "第二部 · 異聞帯" }, test: (id) => FATE_WAR(id) >= 300 && FATE_WAR(id) < 400 },
+  { label: { zh: "奏章 · Ordeal Call", ko: "주장 · 오디널 콜", en: "Ordeal Call", ja: "奏章 · Ordeal Call" }, test: (id) => FATE_WAR(id) >= 400 && FATE_WAR(id) < 500 },
+  { label: { zh: "第三部", ko: "제3부", en: "Part 3", ja: "第三部" }, test: (id) => FATE_WAR(id) >= 500 },
+  { label: { zh: "角色周边", ko: "캐릭터 굿즈", en: "Character goods", ja: "キャラクターグッズ" }, test: (id) => id === "fate_general" },
+];
+
+// Split a tab's groups into labelled sections; only Fate is sectioned for now.
+function atlasSections(tab, groups) {
+  if (tab !== "fate") return [{ label: null, groups }];
+  const used = new Set();
+  const sections = FATE_SECTIONS.map((section) => {
+    const list = groups.filter((g) => !used.has(g.id) && section.test(g.id));
+    list.forEach((g) => used.add(g.id));
+    return { label: section.label, groups: list };
+  }).filter((s) => s.groups.length);
+  // Anything unmatched falls into a trailing untitled section so nothing drops.
+  const rest = groups.filter((g) => !used.has(g.id));
+  if (rest.length) sections.push({ label: null, groups: rest });
+  return sections;
+}
+
 function renderAtlasGuide(tab, atlasGroups) {
   const groups = atlasGroups?.[tab] || [];
   const member = activeGuideMember();
@@ -7403,15 +7432,25 @@ function renderAtlasGuide(tab, atlasGroups) {
   });
   elements.guideBody.innerHTML = "";
 
-  const section = document.createElement("section");
-  section.className = `guide-work guide-world guide-world-${tab.replace("_", "-")}`;
-  const grid = document.createElement("div");
-  grid.className = `guide-series-grid guide-atlas-grid guide-atlas-${tab.replace("_", "-")}`;
-  for (const group of groups) {
-    grid.append(createAtlasGroupCard(group, tab, member, sets));
+  for (const part of atlasSections(tab, groups)) {
+    const section = document.createElement("section");
+    section.className = `guide-work guide-world guide-world-${tab.replace("_", "-")}`;
+    if (part.label) {
+      const lit = part.groups.reduce((sum, g) => sum + (g.kit_ids || []).filter((id) => sets.owned.has(id) || sets.wanted.has(id)).length, 0);
+      const total = part.groups.reduce((sum, g) => sum + (g.kit_ids || []).length, 0);
+      const head = document.createElement("div");
+      head.className = "guide-work-head";
+      head.innerHTML = `<h3>${escapeHtml(atlasLabel(part.label))}</h3><span>${lit}/${total}</span>`;
+      section.append(head);
+    }
+    const grid = document.createElement("div");
+    grid.className = `guide-series-grid guide-atlas-grid guide-atlas-${tab.replace("_", "-")}`;
+    for (const group of part.groups) {
+      grid.append(createAtlasGroupCard(group, tab, member, sets));
+    }
+    section.append(grid);
+    elements.guideBody.append(section);
   }
-  section.append(grid);
-  elements.guideBody.append(section);
 }
 
 function createAtlasGroupCard(group, tab, member, sets) {
