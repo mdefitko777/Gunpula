@@ -221,11 +221,15 @@ const HELP_TEXT = {
 const COLLECTION_TYPES = ["owned", "wanted"];
 const COLLECTION_ENTRY_STATUSES = [...COLLECTION_TYPES, "deleted"];
 
-// Workspace data cleanup: the "냐아" bucket is abandoned and unwanted, and items
-// recorded under the pre-sign-in placeholder "member" belong to ttungyimungyi.
-// (The fold is skipped while actually signed out, when "member" is the live self bucket.)
+// Workspace data cleanup: the "냐아" bucket is abandoned and unwanted. The
+// ttungyimu account was merged into 빵빵한빵디, and items recorded under the
+// pre-sign-in placeholder "member" belong there too, so those buckets fold into
+// whoever is signed in rather than a hard-coded display name — a typo in the
+// name would otherwise make the merge silently do nothing. Both spellings of the
+// old account are listed because the stored key has varied.
+// (The fold is skipped while signed out, when "member" is the live self bucket.)
 const DROPPED_COLLECTION_MEMBERS = new Set(["냐아"]);
-const COLLECTION_MEMBER_MERGES = { member: "ttungyimungyi" };
+const MERGED_COLLECTION_ALIASES = ["member", "ttungyimungyi", "ttungyimu"];
 const THEMES = [
   { code: "atlas", label: { zh: "默认", ko: "기본", en: "Default", ja: "デフォルト" } },
   { code: "classic", label: { zh: "经典", ko: "클래식", en: "Classic", ja: "クラシック" } },
@@ -1142,11 +1146,16 @@ function clampCollectionQuantity(value) {
 }
 
 function collectionStoreOptions() {
+  const self = memberName();
+  // Fold the legacy buckets into the signed-in member. While signed out the
+  // placeholder "member" is the live bucket, so nothing is folded then.
+  const memberMerges =
+    self === "member" ? {} : Object.fromEntries(MERGED_COLLECTION_ALIASES.map((alias) => [alias, self]));
   return {
     statuses: COLLECTION_ENTRY_STATUSES,
-    self: memberName(),
+    self,
     droppedMembers: DROPPED_COLLECTION_MEMBERS,
-    memberMerges: COLLECTION_MEMBER_MERGES,
+    memberMerges,
   };
 }
 
