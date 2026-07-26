@@ -98,6 +98,13 @@ import {
   worldIconMarkup,
   worldNavItems,
 } from "./world-themes.js";
+import {
+  applyCmsAtlasGroups,
+  applyCmsCatalog,
+  cmsSeriesLabelOverrides,
+  loadCmsPublishedState,
+  resolveCmsMerge,
+} from "./cms-patches.js";
 
 const LANGUAGE_KEY = "gunpula-catalog-language-v1";
 const FRANCHISE_KEY = "gunpula-catalog-franchise-v1";
@@ -265,6 +272,8 @@ const state = {
   imageAssets: null,
   androidPackage: null,
   atlasGroups: null,
+  cmsPayload: {},
+  cmsSeriesLabels: {},
   overrides: {},
   seriesLabelOverrides: {},
   collection: { owned: [], wanted: [] },
@@ -931,6 +940,7 @@ async function init() {
     imageAssetsDoc,
     androidPackageDoc,
     firstSeenDoc,
+    cmsPublished,
   ] = await Promise.all([
     loadJson("../data/grades.json"),
     loadInitialKitsDoc(),
@@ -944,6 +954,7 @@ async function init() {
     loadOptionalJson("../data/image-assets.json"),
     loadOptionalJson("../data/android-package.json"),
     loadOptionalJson("../data/kit-first-seen.json"),
+    loadCmsPublishedState(SYNC_BACKEND),
   ]);
 
   state.grades = gradesDoc.grades;
@@ -958,6 +969,8 @@ async function init() {
   state.imageAssets = imageAssetsDoc;
   state.androidPackage = androidPackageDoc;
   state.kitFirstSeen = firstSeenDoc?.dates || {};
+  state.cmsPayload = cmsPublished?.payload || {};
+  state.cmsSeriesLabels = cmsSeriesLabelOverrides(state.cmsPayload);
   state.overrides = loadOverrides();
   state.seriesLabelOverrides = loadSeriesLabelOverrides();
   state.collection = loadCollection();
@@ -1295,7 +1308,7 @@ function recordSyncHistory(reason, remote = null) {
 }
 
 function refreshKits() {
-  state.kits = state.rawKits.map((kit) => applyOverride(kit)).filter((kit) => kit.data_status !== "hidden");
+  state.kits = applyCmsCatalog(state.rawKits, state.cmsPayload).map((kit) => applyOverride(kit)).filter((kit) => kit.data_status !== "hidden");
 }
 
 function rawSeriesTemplateByKey(key) {
@@ -1380,7 +1393,8 @@ function rawKitById(kitId) {
 }
 
 function displayKitById(kitId) {
-  return state.kits.find((kit) => kit.kit_id === kitId);
+  const resolved = resolveCmsMerge(kitId, state.cmsPayload);
+  return state.kits.find((kit) => kit.kit_id === resolved);
 }
 
 function openSettings(panel = null) {
@@ -5727,7 +5741,11 @@ function baseSeriesLabel(series, language = state.language) {
 }
 
 function seriesLabelFromSeries(series, language = state.language) {
-  return displaySeriesLabelForSeries(series, language, state.seriesLabelOverrides, t("pending"));
+  const overrides = { ...state.cmsSeriesLabels };
+  for (const [key, labels] of Object.entries(state.seriesLabelOverrides || {})) {
+    overrides[key] = { ...(overrides[key] || {}), ...labels };
+  }
+  return displaySeriesLabelForSeries(series, language, overrides, t("pending"));
 }
 
 function seriesLabelFromKit(kit) {
@@ -5739,12 +5757,12 @@ function seriesLabelFromKey(key) {
     return t("allWorks");
   }
   const sample = state.kits.find((kit) => kitSeriesKey(kit) === key);
-  return sample ? seriesLabelFromKit(sample) : (state.seriesLabelOverrides[key]?.[state.language] ?? key);
+  return sample ? seriesLabelFromKit(sample) : (state.seriesLabelOverrides[key]?.[state.language] ?? state.cmsSeriesLabels[key]?.[state.language] ?? key);
 }
 
 function seriesLabelForLanguage(key, language) {
   const sample = state.kits.find((kit) => kitSeriesKey(kit) === key);
-  return sample ? seriesLabelFromSeries(sample.series, language) : (state.seriesLabelOverrides[key]?.[language] ?? key);
+  return sample ? seriesLabelFromSeries(sample.series, language) : (state.seriesLabelOverrides[key]?.[language] ?? state.cmsSeriesLabels[key]?.[language] ?? key);
 }
 
 function baseSeriesLabelForLanguage(key, language) {
@@ -7157,7 +7175,7 @@ async function ensureGuideData() {
 async function ensureAtlasData() {
   if (state.atlasGroups) return state.atlasGroups;
   const doc = await loadOptionalJson("../data/atlas-groups.json");
-  state.atlasGroups = doc?.franchises || {};
+  state.atlasGroups = applyCmsAtlasGroups(doc?.franchises || {}, state.cmsPayload);
   return state.atlasGroups;
 }
 
@@ -7363,7 +7381,10 @@ function renderGuideUserChip() {
 }
 
 function guideWorkDisplayName(workOrName) {
-  return String(typeof workOrName === "string" ? workOrName : workOrName?.name || "")
+  const value = typeof workOrName === "string"
+    ? workOrName
+    : (workOrName?.labels ? atlasLabel(workOrName.labels) : workOrName?.name || "");
+  return String(value)
     .replace(/^Mobile Suit Gundam\s*:?\s*/i, "")
     .replace(/^Mobile Suit\s*:?\s*/i, "")
     .trim();

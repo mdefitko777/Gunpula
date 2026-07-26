@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - "app/**"
+      - "admin/**"
+      - "docs/supabase-cms.sql"
       - "scripts/**"
       - "schema/**"
       - "sw.js"
@@ -36,6 +38,9 @@ jobs:
       - name: Script and service worker syntax check
         run: |
           node --check sw.js
+          node --check admin/main.js
+          node --check admin/cms-api.js
+          node --check admin/cms-model.js
           for file in scripts/*.mjs; do
             node --check "$file"
           done

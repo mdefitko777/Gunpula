@@ -25,6 +25,9 @@ function resolveRequestPath(url) {
   if (requestPath === "/app" || requestPath === "/app/") {
     requestPath = "/app/index.html";
   }
+  if (requestPath === "/admin" || requestPath === "/admin/") {
+    requestPath = "/admin/index.html";
+  }
   const fullPath = resolve(rootDir, `.${requestPath}`);
   if (fullPath !== rootDir && !fullPath.startsWith(`${rootDir}${sep}`)) {
     return null;

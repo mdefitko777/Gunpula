@@ -24,6 +24,10 @@ const files = [
   "app/search-index-store.js",
   "app/view-state.js",
   "app/world-themes.js",
+  "app/cms-patches.js",
+  "admin/main.js",
+  "admin/cms-api.js",
+  "admin/cms-model.js",
 ];
 
 let failed = false;

@@ -14,6 +14,10 @@
 
 [https://mdefitko777.github.io/Gunpula/app/](https://mdefitko777.github.io/Gunpula/app/)
 
+管理员后台：
+
+[https://mdefitko777.github.io/Gunpula/admin/](https://mdefitko777.github.io/Gunpula/admin/)
+
 Android APK：
 
 [gunpula-debug.apk](https://github.com/mdefitko777/Gunpula/releases/download/android-latest/gunpula-debug.apk)
@@ -34,6 +38,28 @@ Android APK：
 - 看最近更新
 - 看 Premium Bandai JP 的缓存数据
 - 安装成 Android App 使用
+
+目录维护不再放在普通 App 里。管理员通过独立的桌面 CMS 修改商品、分类、图片、重复项和发布版本，普通用户只读取审核后发布的数据。
+
+## 内容管理后台
+
+`/admin/` 是面向电脑的独立 CMS，不是手机 App 的设置页面。它提供：
+
+- 商品新增、四语编辑、隐藏和批量移动
+- 高达系列/作品、宝可梦世代、Fate 作品/FGO 章节、AC 游戏、BBX 产品线管理
+- 分类排序、封面、别名和父级关系维护
+- 图片状态检查、URL 修复和缓存任务队列
+- 官方抓取来源、区域限制和错误记录总览
+- 重复商品并排对比、忽略或合并
+- 草稿预览、批次撤销、已发布变更恢复和版本发布
+
+后台只允许 `gunpula_cms_admins` 中启用的 Supabase 用户进入。第一次上线前，在 Supabase SQL Editor 完整执行：
+
+- `docs/supabase-cms.sql`
+
+脚本默认把 `mdefitko@gmail.com` 设为管理员；要使用其他邮箱，修改 SQL 中的邮箱后重新执行管理员插入部分。更完整的使用和安全说明见：
+
+- `docs/cms.md`
 
 ## 普通使用
 
@@ -158,6 +184,12 @@ npm run app
 
 [http://localhost:4173/app/](http://localhost:4173/app/)
 
+后台：
+
+[http://localhost:4173/admin/](http://localhost:4173/admin/)
+
+在 `localhost` 上后台使用隔离的本地草稿数据，便于开发验收；正式网址必须登录管理员账号，并把草稿保存到 Supabase。
+
 Windows PowerShell 如果 `npm` 被策略拦截，就用：
 
 ```powershell
@@ -246,6 +278,7 @@ npm run android:build
 ## 主要目录
 
 - `app/`：前端 App
+- `admin/`：桌面内容管理后台
 - `data/`：商品、来源、搜索、PB、市场价等 JSON 数据
 - `scripts/`：导入、校验、生成、缓存脚本
 - `docs/`：Supabase 和数据说明
@@ -268,10 +301,14 @@ npm run android:build
 - `app/dom-utils.js`：HTML 转义
 - `app/auth.js`：Supabase 邮箱验证码登录
 - `app/i18n.js`：中 / 韩 / 英 / 日 UI 文案
+- `app/cms-patches.js`：把已发布 CMS 变更叠加到静态目录和图鉴分类
+- `admin/main.js`：CMS 工作台与操作流程
+- `admin/cms-api.js`：管理员认证、草稿、撤销和发布 API
+- `admin/cms-model.js`：目录变更、合并和分类模型
 
 ## 当前状态
 
-当前数据大约 4,800 多条，覆盖高达、AC、宝可梦、Fate、BBX。
+当前数据约 5,000 条，覆盖高达、AC、宝可梦、Fate、BBX。
 
 项目已经支持：
 
@@ -283,6 +320,7 @@ npm run android:build
 - Beyblade X 部件图鉴
 - 多语言名称
 - 本地图片缓存和图片健康检查
+- 管理员 CMS、草稿预览和版本发布
 
 ## 还有什么需要继续做
 

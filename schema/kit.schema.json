@@ -100,7 +100,7 @@
     },
     "data_status": {
       "type": "string",
-      "enum": ["seed", "needs_review", "verified", "retired"]
+      "enum": ["seed", "needs_review", "verified", "retired", "hidden"]
     },
     "source_urls": {
       "type": "array",
@@ -137,6 +137,11 @@
     "tags": {
       "type": "array",
       "items": { "type": "string" }
+    },
+    "taxonomy_ids": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Optional CMS-managed links to atlas categories such as works, generations, chapters, or games."
     },
     "notes": {
       "type": ["string", "null"]
