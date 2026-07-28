@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-27T20:25:42.578Z",
-  "updated_at": "2026-07-28",
+  "generated_at": "2026-07-28T20:21:39.854Z",
+  "updated_at": "2026-07-29",
   "catalog": {
     "byFranchise": {
       "armored_core": 20,
-      "gundam": 4000,
-      "pokemon": 479,
+      "gundam": 4001,
+      "pokemon": 439,
       "beyblade": 148,
       "fate": 423
     },
@@ -24,11 +24,11 @@
       "status": "blocked",
       "http_status": 200,
       "final_url": "https://p-bandai.jp/global_newpc.html",
-      "duration_ms": 300,
-      "item_count": 1421,
+      "duration_ms": 270,
+      "item_count": 1423,
       "direct_status": "blocked",
       "access_method": "bandai_spirits_product_buttons",
-      "message": "Direct Japanese Premium Bandai storefront is redirected, but 1421 official PB Japan item links were recovered from BANDAI SPIRITS product pages"
+      "message": "Direct Japanese Premium Bandai storefront is redirected, but 1423 official PB Japan item links were recovered from BANDAI SPIRITS product pages"
     },
     {
       "source_id": "takara_tomy_beyblade_x_jp",
@@ -36,7 +36,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/",
-      "duration_ms": 1351,
+      "duration_ms": 1598,
       "item_count": 148,
       "catalog_count": 148,
       "buckets": {
@@ -53,7 +53,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://bandai-hobby.net/site/gunpla.html",
-      "duration_ms": 770,
+      "duration_ms": 636,
       "message": "reachable"
     },
     {
@@ -62,7 +62,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://www.bandai.co.jp/candy/gundam/",
-      "duration_ms": 1176,
+      "duration_ms": 1182,
       "message": "reachable"
     },
     {
@@ -71,7 +71,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://gashapon.jp/products/result.php?free=%E3%82%AC%E3%83%B3%E3%83%80%E3%83%A0",
-      "duration_ms": 1442,
+      "duration_ms": 1169,
       "message": "reachable"
     },
     {
@@ -80,7 +80,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://tamashiiweb.com/item_character/gundam_series/",
-      "duration_ms": 1105,
+      "duration_ms": 792,
       "message": "reachable"
     },
     {
@@ -89,7 +89,7 @@
       "status": "warning",
       "http_status": 403,
       "final_url": "https://www.kotobukiya.co.jp/title/armored-core/",
-      "duration_ms": 507,
+      "duration_ms": 601,
       "message": "reachable but expected product markers were not found"
     },
     {
@@ -98,7 +98,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=select",
-      "duration_ms": 953,
+      "duration_ms": 939,
       "message": "reachable"
     }
   ]
