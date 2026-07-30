@@ -175,6 +175,29 @@ export async function publishChanges(note) {
   return release;
 }
 
+export async function updateReleaseNote(revision, note) {
+  if (isSignedIn()) {
+    try {
+      return await rpc("gunpula_cms_update_release_note", {
+        p_revision: Number(revision),
+        p_note: String(note || ""),
+      });
+    } catch (error) {
+      if (/gunpula_cms_update_release_note|schema cache/i.test(error.message)) {
+        throw new Error("请先在 Supabase SQL Editor 运行 docs/supabase-cms-release-note-upgrade.sql");
+      }
+      throw error;
+    }
+  }
+  if (!isLocalHost) throw new Error("管理员登录已失效");
+  const backend = loadLocal();
+  const release = backend.releases.find((item) => Number(item.revision) === Number(revision));
+  if (!release) throw new Error("找不到这个发布版本");
+  release.note = String(note || "");
+  saveLocal(backend);
+  return release;
+}
+
 export async function loadPublishedState() {
   try {
     return await rpc("gunpula_cms_get_published", {}, { auth: false });

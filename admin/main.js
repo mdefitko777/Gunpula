@@ -7,6 +7,7 @@ import {
   saveChanges,
   sendCode,
   undoChange,
+  updateReleaseNote,
   verifyCode,
 } from "./cms-api.js";
 import {
@@ -29,12 +30,24 @@ const FRANCHISES = [
 ];
 const FRANCHISE_LABELS = Object.fromEntries(FRANCHISES);
 const PAGE_SIZE = 100;
+const DEFAULT_PRODUCT_FILTERS = {
+  query: "",
+  franchise: "all",
+  category: "all",
+  grade: "all",
+  source: "all",
+  releaseYear: "all",
+  limited: "all",
+  status: "all",
+  image: "all",
+};
 const sectionMeta = {
   overview: ["OPERATIONS", "总览"],
   products: ["CATALOG", "商品目录"],
   taxonomy: ["TAXONOMY", "分类体系"],
   media: ["ASSETS", "图片资产"],
   harvest: ["INGESTION", "抓取中心"],
+  announcements: ["ANNOUNCEMENTS", "官方预告"],
   duplicates: ["QUALITY", "重复处理"],
   changes: ["AUDIT LOG", "变更记录"],
   releases: ["RELEASES", "发布版本"],
@@ -56,15 +69,18 @@ const state = {
   pbandai: null,
   seriesAudit: null,
   atlasGroups: null,
+  announcementDoc: null,
+  announcements: [],
   cms: null,
   selectedIds: new Set(),
   selectedProductId: "",
   selectedCategoryId: "",
   productPage: 1,
-  productFilters: { query: "", franchise: "all", status: "all", image: "all" },
+  productFilters: { ...DEFAULT_PRODUCT_FILTERS },
   taxonomyFranchise: "gundam",
   taxonomyKind: "series",
   mediaMode: "all",
+  announcementStatus: "all",
   loginEmail: "",
 };
 
@@ -86,6 +102,7 @@ const elements = {
   inspector: document.querySelector("#inspector"),
   navProductCount: document.querySelector("#navProductCount"),
   navDuplicateCount: document.querySelector("#navDuplicateCount"),
+  navAnnouncementCount: document.querySelector("#navAnnouncementCount"),
   navDraftCount: document.querySelector("#navDraftCount"),
   publishCount: document.querySelector("#publishCount"),
   adminName: document.querySelector("#adminName"),
@@ -147,7 +164,7 @@ async function fetchJson(path, fallback = null) {
 }
 
 async function loadCatalogData() {
-  const [catalog, grades, sources, duplicates, sourceHealth, imageHealth, imageAssets, pbandai, seriesAudit, atlasGroups] = await Promise.all([
+  const [catalog, grades, sources, duplicates, sourceHealth, imageHealth, imageAssets, pbandai, seriesAudit, atlasGroups, announcementDoc] = await Promise.all([
     fetchJson("../data/kits.json", { kits: [] }),
     fetchJson("../data/grades.json", { grades: [] }),
     fetchJson("../data/sources.json", { sources: [] }),
@@ -158,6 +175,7 @@ async function loadCatalogData() {
     fetchJson("../data/pbandai.json", {}),
     fetchJson("../data/series-audit.json", {}),
     fetchJson("../data/atlas-groups.json", { franchises: {} }),
+    fetchJson("../data/announcements.json", { announcements: [] }),
   ]);
   state.baseKits = catalog.kits || [];
   state.grades = grades.grades || [];
@@ -169,6 +187,17 @@ async function loadCatalogData() {
   state.pbandai = pbandai;
   state.seriesAudit = seriesAudit;
   state.atlasGroups = atlasGroups;
+  state.announcementDoc = announcementDoc;
+}
+
+function materializeAnnouncements() {
+  const records = new Map((state.announcementDoc?.announcements || []).map((item) => [item.id, structuredClone(item)]));
+  for (const [key, patch] of Object.entries(state.cms?.sources || {})) {
+    if (!key.startsWith("announcement:")) continue;
+    const id = key.slice("announcement:".length);
+    records.set(id, { ...(records.get(id) || { id, franchise: "gundam" }), ...patch, names: { ...(records.get(id)?.names || {}), ...(patch.names || {}) } });
+  }
+  return [...records.values()].sort((a, b) => String(b.announced_at || "").localeCompare(String(a.announced_at || "")));
 }
 
 function refreshDerived() {
@@ -177,6 +206,7 @@ function refreshDerived() {
   state.kits = materializeCatalog(state.baseKits, state.cms, { includeHidden: true });
   state.kitById = new Map(state.kits.map((kit) => [kit.kit_id, kit]));
   state.categories = categoryRecords(state.kits, state.cms, state.atlasGroups);
+  state.announcements = materializeAnnouncements();
   for (const id of [...state.selectedIds]) {
     if (!state.kitById.has(id)) state.selectedIds.delete(id);
   }
@@ -250,6 +280,7 @@ function render() {
   elements.mainNav.querySelectorAll("button").forEach((button) => button.classList.toggle("is-active", button.dataset.section === state.section));
   elements.navProductCount.textContent = state.kits.length;
   elements.navDuplicateCount.textContent = visibleDuplicateGroups().length;
+  elements.navAnnouncementCount.textContent = state.announcements.filter((item) => item.status === "announced").length;
   elements.navDraftCount.textContent = state.bootstrap?.drafts?.length || 0;
   elements.publishCount.textContent = state.bootstrap?.drafts?.length || 0;
   elements.publishButton.disabled = !state.bootstrap?.drafts?.length;
@@ -264,6 +295,7 @@ function render() {
     taxonomy: renderTaxonomy,
     media: renderMedia,
     harvest: renderHarvest,
+    announcements: renderAnnouncements,
     duplicates: renderDuplicates,
     changes: renderChanges,
     releases: renderReleases,
@@ -334,13 +366,26 @@ function activityMarkup(changes) {
 function changeLabel(change) {
   const operations = { add: "新增", edit: "修改", move: "移动", hide: "隐藏", merge: "合并", repair: "修复", ignore: "忽略" };
   const entities = { product: "商品", category: "分类", merge: "重复记录", source: "来源", image_task: "图片任务", review: "审核项" };
-  return `${operations[change.operation] || change.operation} ${entities[change.entity_type] || change.entity_type}`;
+  const entity = change.entity_type === "source" && String(change.entity_id).startsWith("announcement:")
+    ? "官方预告"
+    : entities[change.entity_type] || change.entity_type;
+  return `${operations[change.operation] || change.operation} ${entity}`;
 }
 
 function filteredProducts() {
   const query = state.productFilters.query.trim().toLowerCase();
   return state.kits.filter((kit) => {
     if (state.productFilters.franchise !== "all" && kit.franchise !== state.productFilters.franchise) return false;
+    if (state.productFilters.category !== "all") {
+      const category = state.categories.find((item) => item.id === state.productFilters.category);
+      if (!category?.linked_kit_ids?.includes(kit.kit_id)) return false;
+    }
+    if (state.productFilters.grade !== "all" && kit.grade_code !== state.productFilters.grade) return false;
+    if (state.productFilters.releaseYear !== "all" && !String(kit.release_date || "").startsWith(state.productFilters.releaseYear)) return false;
+    if (state.productFilters.limited === "yes" && !kit.is_limited) return false;
+    if (state.productFilters.limited === "no" && kit.is_limited) return false;
+    const sourceIds = (kit.source_refs || []).map((source) => source.source_id).filter(Boolean);
+    if (state.productFilters.source !== "all" && !sourceIds.includes(state.productFilters.source)) return false;
     if (state.productFilters.status !== "all" && kit.data_status !== state.productFilters.status) return false;
     const hasImage = Boolean(imageUrl(kit));
     if (state.productFilters.image === "missing" && hasImage) return false;
@@ -354,6 +399,8 @@ function filteredProducts() {
       kit.grade_code,
       kit.subline,
       ...(kit.tags || []),
+      ...sourceIds,
+      ...(kit.source_urls || []),
     ].filter(Boolean).join(" ").toLowerCase().includes(query);
   });
 }
@@ -364,6 +411,17 @@ function renderProducts() {
   state.productPage = Math.min(state.productPage, pages);
   const start = (state.productPage - 1) * PAGE_SIZE;
   const page = products.slice(start, start + PAGE_SIZE);
+  const scoped = state.productFilters.franchise === "all"
+    ? state.kits
+    : state.kits.filter((kit) => kit.franchise === state.productFilters.franchise);
+  const gradeOptions = [...new Set(scoped.map((kit) => kit.grade_code).filter(Boolean))].sort().map((value) => [value, value]);
+  const yearOptions = [...new Set(scoped.map((kit) => String(kit.release_date || "").slice(0, 4)).filter((year) => /^\d{4}$/.test(year)))].sort().reverse().map((value) => [value, value]);
+  const sourceOptions = [...new Set(scoped.flatMap((kit) => (kit.source_refs || []).map((source) => source.source_id)).filter(Boolean))]
+    .sort()
+    .map((value) => [value, state.sources.find((source) => source.source_id === value)?.name || value]);
+  const categoryOptions = state.categories
+    .filter((category) => state.productFilters.franchise === "all" || category.franchise === state.productFilters.franchise)
+    .map((category) => [category.id, `${FRANCHISE_LABELS[category.franchise]} · ${categoryKindLabel(category.kind || "series")} · ${category.labels?.zh || category.key}`]);
   const allChecked = page.length && page.every((kit) => state.selectedIds.has(kit.kit_id));
   const bulk = state.selectedIds.size ? `
     <div class="bulk-bar">
@@ -381,6 +439,11 @@ function renderProducts() {
     <div class="filter-toolbar">
       <label class="search-inline">${icon("search")}<input id="productQuery" type="search" placeholder="名称 / ID / 作品 / 标签" value="${escapeHtml(state.productFilters.query)}" /></label>
       <select id="productFranchise">${optionMarkup([["all", "全部主题"], ...FRANCHISES], state.productFilters.franchise)}</select>
+      <select id="productCategory">${optionMarkup([["all", "全部分类"], ...categoryOptions], state.productFilters.category)}</select>
+      <select id="productGrade">${optionMarkup([["all", "全部产品线"], ...gradeOptions], state.productFilters.grade)}</select>
+      <select id="productSource">${optionMarkup([["all", "全部来源"], ...sourceOptions], state.productFilters.source)}</select>
+      <select id="productReleaseYear">${optionMarkup([["all", "全部发售年份"], ...yearOptions], state.productFilters.releaseYear)}</select>
+      <select id="productLimited">${optionMarkup([["all", "全部限定状态"], ["yes", "仅限定"], ["no", "仅通常"]], state.productFilters.limited)}</select>
       <select id="productStatus">${optionMarkup([["all", "全部状态"], ["verified", "已核对"], ["needs_review", "待核对"], ["seed", "种子"], ["retired", "已退役"], ["hidden", "已隐藏"]], state.productFilters.status)}</select>
       <select id="productImage">${optionMarkup([["all", "全部图片状态"], ["present", "有封面"], ["missing", "缺少封面"]], state.productFilters.image)}</select>
       <button class="quiet-button" id="resetProductFilters" type="button">${icon("filter")}重置</button>
@@ -544,6 +607,46 @@ function renderHarvest() {
     <section class="panel" style="margin-top:18px"><div class="panel-head"><div><h2>来源检查</h2><p>区域限制不会被当作普通网络失败</p></div></div><div class="source-list">${sourceRows(checks)}</div></section>`;
 }
 
+function announcementStatusLabel(status) {
+  return {
+    announced: "已官宣",
+    product_confirmed: "商品化确定",
+    preorder_open: "预约开放",
+    dismissed: "已排除",
+  }[status] || status || "待确认";
+}
+
+function renderAnnouncements() {
+  const records = state.announcements.filter((item) => state.announcementStatus === "all" || item.status === state.announcementStatus);
+  elements.workspace.innerHTML = `
+    ${sectionToolbar("官方预告中心", "直播和官网公开后先进入这里；确认正式商品前不会进入发售目录。", `<button class="primary-button" id="addAnnouncement" type="button">${icon("plus")}手动记录直播预告</button>`)}
+    <div class="metric-strip">
+      <div class="metric"><span>预告记录</span><strong>${state.announcements.length}</strong><small>${state.announcementDoc?.updated_at ? formatDate(state.announcementDoc.updated_at) : "等待首次抓取"}</small></div>
+      <div class="metric"><span>待确认</span><strong>${state.announcements.filter((item) => item.status === "announced").length}</strong><small>直播与自动候选</small></div>
+      <div class="metric"><span>已关联商品</span><strong>${state.announcements.filter((item) => item.linked_kit_id).length}</strong><small>保留官宣历史</small></div>
+      <div class="metric"><span>抓取错误</span><strong>${state.announcementDoc?.fetch_errors?.length || 0}</strong><small>官方新闻 / YouTube</small></div>
+    </div>
+    <div class="filter-toolbar" style="margin-top:18px">
+      <select id="announcementStatus" aria-label="预告状态">${optionMarkup([
+        ["all", "全部状态"],
+        ["announced", "已官宣 / 待确认"],
+        ["product_confirmed", "商品化确定"],
+        ["preorder_open", "预约开放"],
+        ["dismissed", "已排除"],
+      ], state.announcementStatus)}</select>
+    </div>
+    <div class="announcement-grid">${records.map((item) => `
+      <button type="button" class="announcement-card" data-announcement-id="${escapeHtml(item.id)}">
+        <span class="announcement-art">${safeUrl(item.thumbnail_url) ? `<img src="${escapeHtml(safeUrl(item.thumbnail_url))}" alt="">` : icon("bell")}</span>
+        <span class="announcement-copy">
+          <small>${escapeHtml(item.announced_at || "日期待补")} · ${escapeHtml(item.source_name || "人工录入")}</small>
+          <strong>${escapeHtml(displayName(item))}</strong>
+          <em>${escapeHtml([item.grade_code, item.series_key !== "unclassified" ? item.series_key : null, item.linked_kit_id].filter(Boolean).join(" · ") || "产品信息待确认")}</em>
+        </span>
+        <span class="status-badge ${item.status === "preorder_open" ? "is-ok" : item.status === "dismissed" ? "is-error" : "is-warning"}">${escapeHtml(announcementStatusLabel(item.status))}</span>
+      </button>`).join("") || emptyState("bell", "没有匹配的预告", "自动抓取每天运行，也可以手动记录直播中的新品。")}</div>`;
+}
+
 function duplicateReviewKey(group) {
   return `duplicate:${group.map((item) => item.kit_id).sort().join("|")}`;
 }
@@ -566,7 +669,10 @@ function duplicateGroup(group) {
   return `<section class="duplicate-group" data-review-key="${escapeHtml(duplicateReviewKey(group))}">
     <header class="duplicate-head"><strong>${escapeHtml(displayName(first))}</strong><span>${escapeHtml(first.franchise || "")} · ${escapeHtml(first.grade_code || "")}</span></header>
     <div class="compare-grid">
-      ${products.map((product) => `<div class="compare-product">${imageUrl(product) ? `<img src="${escapeHtml(safeUrl(imageUrl(product)))}" alt="">` : `<span class="media-thumb"></span>`}<div><strong>${escapeHtml(displayName(product))}</strong><small>${escapeHtml(product.kit_id)}</small><small>${escapeHtml(product.release_date || "日期未知")} · ${escapeHtml((product.source_urls || []).length)} 个来源</small></div></div>`).join("")}
+      ${products.map((product) => `<button type="button" class="compare-product" data-product-id="${escapeHtml(product.kit_id)}">
+        ${imageUrl(product) ? `<img src="${escapeHtml(safeUrl(imageUrl(product)))}" alt="">` : `<span class="media-thumb"></span>`}
+        <span><strong>${escapeHtml(displayName(product))}</strong><small>${escapeHtml(product.kit_id)}</small><small>${escapeHtml(product.work_title || product.universe || "作品未知")} · ${escapeHtml(product.release_date || "日期未知")}</small><small>${escapeHtml(product.grade_code || "产品线未知")} · ${escapeHtml((product.source_urls || []).length)} 个来源 · 点击查看完整资料</small></span>
+      </button>`).join("")}
       <div class="compare-actions">
         <button class="primary-button merge-button" data-keep="${escapeHtml(first.kit_id)}" data-lose="${escapeHtml(second.kit_id)}">保留左侧并合并</button>
         <button class="primary-button merge-button" data-keep="${escapeHtml(second.kit_id)}" data-lose="${escapeHtml(first.kit_id)}">保留右侧并合并</button>
@@ -600,13 +706,167 @@ function renderChanges() {
 function renderReleases() {
   const releases = state.bootstrap?.releases || [];
   elements.workspace.innerHTML = `
-    ${sectionToolbar("发布版本", "每次发布都是不可变快照。App 只读取最新 revision。")}
+    ${sectionToolbar("发布版本", "版本号和快照保持不变；这里只允许修正版本说明。")}
     <section class="panel"><div class="release-list">${releases.length ? releases.map((release) => `
-      <div class="release-row"><strong>r${release.revision}</strong><div><strong>${escapeHtml(release.note || "无版本说明")}</strong><small>${escapeHtml(release.change_count)} 条变更</small></div><span>${escapeHtml(release.change_count)}</span><small>${formatDate(release.published_at)}</small></div>`).join("") : emptyInline("还没有 CMS 发布版本")}</div></section>`;
+      <form class="release-row release-note-form" data-revision="${release.revision}">
+        <strong>r${release.revision}</strong>
+        <label><span>版本说明</span><input name="note" maxlength="2000" value="${escapeHtml(release.note || "")}" placeholder="补充这次发布做了什么"></label>
+        <small>${escapeHtml(release.change_count)} 条变更 · ${formatDate(release.published_at)}</small>
+        <button class="quiet-button" type="submit">${icon("check")}保存说明</button>
+      </form>`).join("") : emptyInline("还没有 CMS 发布版本")}</div></section>`;
 }
 
 function emptyState(iconName, title, body) {
   return `<div class="empty-state">${icon(iconName)}<h2>${escapeHtml(title)}</h2><p>${escapeHtml(body)}</p></div>`;
+}
+
+function announcementPatch(form, item) {
+  const values = Object.fromEntries(new FormData(form).entries());
+  return {
+    kind: "announcement",
+    franchise: "gundam",
+    names: { zh: values.name_zh || null, ko: values.name_ko || null, en: values.name_en || null, ja: values.name_ja || null },
+    status: values.status,
+    announced_at: values.announced_at || null,
+    source_type: item.source_type || "manual",
+    source_name: values.source_name || null,
+    source_url: values.source_url || null,
+    thumbnail_url: values.thumbnail_url || null,
+    video_id: item.video_id || null,
+    video_timestamp_seconds: values.video_timestamp_seconds === "" ? null : Number(values.video_timestamp_seconds),
+    series_key: values.series_key || "unclassified",
+    grade_code: values.grade_code || null,
+    linked_kit_id: values.linked_kit_id || null,
+    confidence: item.confidence || "manual",
+    notes: values.notes || null,
+  };
+}
+
+function announcementProduct(item, kitId) {
+  return {
+    kit_id: kitId,
+    franchise: "gundam",
+    names: item.names,
+    grade_code: item.grade_code || "OTHER",
+    subline: null,
+    number: null,
+    scale: "various",
+    universe: item.series_key,
+    work_title: item.series_key,
+    series: { key: item.series_key || "unclassified" },
+    release_date: null,
+    price_jpy: null,
+    is_limited: false,
+    data_status: "needs_review",
+    tags: ["official announcement"],
+    images: { box_art_url: item.thumbnail_url, box_art_source_id: "bandai_official_announcement" },
+    gallery_image_urls: item.thumbnail_url ? [item.thumbnail_url] : [],
+    source_urls: item.source_url ? [item.source_url] : [],
+    source_refs: [{ source_id: "bandai_official_announcement", url: item.source_url, fields: ["names", "grade_code", "series", "images"], confidence: "medium" }],
+    notes: `Created from official announcement; release date and price require confirmation.`,
+  };
+}
+
+function showAnnouncementInspector(announcement = null) {
+  const isNew = !announcement;
+  const item = announcement || {
+    id: `manual-${crypto.randomUUID()}`,
+    names: { zh: "", ko: "", en: "", ja: "" },
+    status: "announced",
+    announced_at: new Date().toISOString().slice(0, 10),
+    source_type: "manual",
+    source_name: "BANDAI official live",
+    source_url: "",
+    thumbnail_url: "",
+    video_timestamp_seconds: null,
+    series_key: "unclassified",
+    grade_code: "",
+    linked_kit_id: null,
+    confidence: "manual",
+    notes: "",
+  };
+  elements.inspector.hidden = false;
+  elements.workspaceLayout.classList.add("has-inspector");
+  elements.inspector.innerHTML = `
+    <header class="inspector-head"><div><strong>${isNew ? "记录直播预告" : escapeHtml(displayName(item))}</strong><small>${escapeHtml(item.id)}</small></div><button id="closeInspector" type="button" aria-label="关闭">${icon("x")}</button></header>
+    <form class="editor-form" id="announcementEditor">
+      <div class="editor-cover" id="announcementCover">${safeUrl(item.thumbnail_url) ? `<img src="${escapeHtml(safeUrl(item.thumbnail_url))}" alt="">` : icon("bell")}</div>
+      <section class="form-section">
+        <h3>预告状态</h3>
+        <label class="field">状态<select name="status">${optionMarkup([["announced", "已官宣 / 待确认"], ["product_confirmed", "商品化确定"], ["preorder_open", "预约开放"], ["dismissed", "不属于商品预告"]], item.status)}</select></label>
+        <label class="field">官宣日期<input type="date" name="announced_at" value="${escapeHtml(item.announced_at || "")}"></label>
+        <label class="field">产品线<input name="grade_code" value="${escapeHtml(item.grade_code || "")}" placeholder="HG / MG / RG"></label>
+        <label class="field">系列<input name="series_key" value="${escapeHtml(item.series_key || "")}" placeholder="SEED / 00"></label>
+        <label class="field is-wide">正式商品 ID<input name="linked_kit_id" value="${escapeHtml(item.linked_kit_id || "")}" placeholder="已有 ID 直接关联；新 ID 会创建商品草稿"></label>
+      </section>
+      <section class="form-section">
+        <h3>四语暂定名称</h3>
+        <label class="field is-wide">中文<input name="name_zh" value="${escapeHtml(item.names?.zh || "")}"></label>
+        <label class="field is-wide">한국어<input name="name_ko" value="${escapeHtml(item.names?.ko || "")}"></label>
+        <label class="field is-wide">English<input name="name_en" value="${escapeHtml(item.names?.en || "")}"></label>
+        <label class="field is-wide">日本語<input name="name_ja" value="${escapeHtml(item.names?.ja || "")}"></label>
+      </section>
+      <section class="form-section">
+        <h3>直播与出处</h3>
+        <label class="field is-wide">官方链接<input name="source_url" value="${escapeHtml(item.source_url || "")}"></label>
+        <label class="field">来源名称<input name="source_name" value="${escapeHtml(item.source_name || "")}"></label>
+        <label class="field">直播时间点（秒）<input type="number" min="0" name="video_timestamp_seconds" value="${item.video_timestamp_seconds ?? ""}"></label>
+        <label class="field is-wide">截图 / 封面 URL<input name="thumbnail_url" value="${escapeHtml(item.thumbnail_url || "")}"></label>
+        <label class="field is-wide">备注<textarea rows="4" name="notes">${escapeHtml(item.notes || "")}</textarea></label>
+      </section>
+    </form>
+    <footer class="inspector-actions">
+      ${!isNew && safeUrl(item.source_url) ? `<a class="quiet-button" href="${escapeHtml(safeUrl(item.source_url))}" target="_blank" rel="noreferrer">${icon("external")}打开官方出处</a>` : ""}
+      ${!isNew && item.status !== "dismissed" ? `<button class="quiet-button" id="promoteAnnouncement" type="button">${icon("package")}关联 / 创建正式商品</button>` : ""}
+      <button class="primary-button" type="submit" form="announcementEditor">${icon("check")}保存草稿</button>
+    </footer>`;
+  const form = elements.inspector.querySelector("#announcementEditor");
+  elements.inspector.querySelector("#closeInspector")?.addEventListener("click", () => closeInspector());
+  form?.querySelector('[name="thumbnail_url"]')?.addEventListener("input", (event) => {
+    const url = safeUrl(event.target.value);
+    elements.inspector.querySelector("#announcementCover").innerHTML = url ? `<img src="${escapeHtml(url)}" alt="">` : icon("bell");
+  });
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    try {
+      await saveChange({ entity_type: "source", entity_id: `announcement:${item.id}`, operation: isNew ? "add" : "edit", patch: announcementPatch(form, item), before_value: isNew ? {} : item });
+      toast("预告已保存为草稿");
+      await reloadBackend();
+      state.section = "announcements";
+      render();
+    } catch (error) {
+      toast(error.message, "error");
+    }
+  });
+  elements.inspector.querySelector("#promoteAnnouncement")?.addEventListener("click", async () => {
+    const patch = announcementPatch(form, item);
+    const kitId = String(patch.linked_kit_id || "").trim();
+    if (!/^[a-z0-9]+[a-z0-9-]*$/.test(kitId)) {
+      toast(kitId ? "商品 ID 只能使用小写字母、数字和连字符" : "先填写正式商品 ID", "error");
+      form.querySelector('[name="linked_kit_id"]')?.focus();
+      return;
+    }
+    const changes = [{
+      entity_type: "source",
+      entity_id: `announcement:${item.id}`,
+      operation: "edit",
+      patch: { ...patch, status: patch.status === "preorder_open" ? "preorder_open" : "product_confirmed", reviewed_at: new Date().toISOString() },
+      before_value: item,
+    }];
+    if (!state.kitById.has(kitId)) {
+      changes.push({ entity_type: "product", entity_id: kitId, operation: "add", patch: announcementProduct(patch, kitId), before_value: {} });
+    }
+    try {
+      await saveChanges(changes);
+      toast(state.kitById.has(kitId) ? "已关联现有商品" : "已创建商品草稿并保留官宣记录");
+      await reloadBackend();
+      state.section = "products";
+      state.productFilters = { ...DEFAULT_PRODUCT_FILTERS, query: kitId };
+      render();
+    } catch (error) {
+      toast(error.message, "error");
+    }
+  });
 }
 
 function showProductInspector(productId = "", isNew = false) {
@@ -644,6 +904,7 @@ function showProductInspector(productId = "", isNew = false) {
 
 function productEditorMarkup(product, isNew) {
   const cover = safeUrl(imageUrl(product));
+  const gallery = [...new Set([cover, ...(product.gallery_image_urls || []).map(safeUrl)].filter(Boolean))].slice(0, 12);
   const linkedCategoryIds = new Set(product.taxonomy_ids || []);
   for (const category of state.categories) {
     if (category.franchise === product.franchise && category.linked_kit_ids?.includes(product.kit_id)) linkedCategoryIds.add(category.id);
@@ -654,6 +915,7 @@ function productEditorMarkup(product, isNew) {
     <header class="inspector-head"><div><strong>${isNew ? "新增商品" : escapeHtml(displayName(product))}</strong><small>${escapeHtml(product.kit_id || "填写稳定 ID")}</small></div><button id="closeInspector" type="button" aria-label="关闭">${icon("x")}</button></header>
     <form class="editor-form" id="productEditor">
       <div class="editor-cover" id="editorCover">${cover ? `<img src="${escapeHtml(cover)}" alt="">` : icon("image")}</div>
+      ${gallery.length > 1 ? `<div class="editor-gallery">${gallery.map((url) => `<a href="${escapeHtml(url)}" target="_blank" rel="noreferrer"><img src="${escapeHtml(url)}" alt=""></a>`).join("")}</div>` : ""}
       <section class="form-section">
         <h3>标识与分类</h3>
         <label class="field is-wide">商品 ID<input name="kit_id" value="${escapeHtml(product.kit_id)}" ${isNew ? "" : "readonly"} required></label>
@@ -767,6 +1029,7 @@ function showCategoryInspector(category = null) {
     count: 0,
   };
   const isNew = !category;
+  const linkedProducts = (item.linked_kit_ids || []).map((id) => state.kitById.get(id)).filter(Boolean);
   state.selectedCategoryId = isNew ? "__new__" : item.id;
   elements.inspector.hidden = false;
   elements.workspaceLayout.classList.add("has-inspector");
@@ -803,9 +1066,28 @@ function showCategoryInspector(category = null) {
         <label class="field is-wide">封面 URL<input name="cover_url" value="${escapeHtml(item.cover_url || "")}"></label>
         <label class="field is-wide">别名（每行一个）<textarea name="aliases" rows="5">${escapeHtml((item.aliases || []).join("\n"))}</textarea></label>
       </section>
+      ${isNew ? "" : `<section class="category-members">
+        <div class="category-members-head"><div><h3>分类中的商品</h3><small>${linkedProducts.length} 条，可点开查看完整资料</small></div><button class="quiet-button" id="openCategoryProducts" type="button">${icon("package")}去商品目录批量处理</button></div>
+        <div class="category-member-list">${linkedProducts.slice(0, 160).map((product) => {
+          const cover = safeUrl(imageUrl(product));
+          return `<button type="button" class="category-member" data-category-product-id="${escapeHtml(product.kit_id)}">
+            ${cover ? `<img src="${escapeHtml(cover)}" alt="">` : `<span class="media-thumb"></span>`}
+            <span><strong>${escapeHtml(displayName(product))}</strong><small>${escapeHtml(product.kit_id)} · ${escapeHtml(product.grade_code || "—")} · ${escapeHtml(product.release_date || "日期未知")}</small></span>
+            ${icon("eye")}
+          </button>`;
+        }).join("") || `<p class="category-member-empty">这个分类还没有关联商品。</p>`}</div>
+        ${linkedProducts.length > 160 ? `<small class="muted">此处先显示 160 条；商品目录可查看全部。</small>` : ""}
+      </section>`}
     </form>
     <footer class="inspector-actions"><button class="primary-button" type="submit" form="categoryEditor">${icon("check")}保存分类</button></footer>`;
   elements.inspector.querySelector("#closeInspector")?.addEventListener("click", () => closeInspector());
+  elements.inspector.querySelectorAll("[data-category-product-id]").forEach((button) => button.addEventListener("click", () => showProductInspector(button.dataset.categoryProductId)));
+  elements.inspector.querySelector("#openCategoryProducts")?.addEventListener("click", () => {
+    state.productFilters = { ...DEFAULT_PRODUCT_FILTERS, franchise: item.franchise, category: item.id };
+    state.productPage = 1;
+    state.section = "products";
+    render();
+  });
   elements.inspector.querySelector("#categoryEditor")?.addEventListener("submit", async (event) => {
     event.preventDefault();
     const values = Object.fromEntries(new FormData(event.currentTarget).entries());
@@ -958,12 +1240,18 @@ function bindWorkspaceControls() {
   const filterBindings = [
     ["productQuery", "query"],
     ["productFranchise", "franchise"],
+    ["productCategory", "category"],
+    ["productGrade", "grade"],
+    ["productSource", "source"],
+    ["productReleaseYear", "releaseYear"],
+    ["productLimited", "limited"],
     ["productStatus", "status"],
     ["productImage", "image"],
   ];
   for (const [id, key] of filterBindings) {
     elements.workspace.querySelector(`#${id}`)?.addEventListener(id === "productQuery" ? "input" : "change", (event) => {
       state.productFilters[key] = event.target.value;
+      if (key === "franchise") state.productFilters.category = "all";
       state.productPage = 1;
       clearTimeout(bindWorkspaceControls.filterTimer);
       bindWorkspaceControls.filterTimer = setTimeout(() => {
@@ -974,7 +1262,7 @@ function bindWorkspaceControls() {
     });
   }
   elements.workspace.querySelector("#resetProductFilters")?.addEventListener("click", () => {
-    state.productFilters = { query: "", franchise: "all", status: "all", image: "all" };
+    state.productFilters = { ...DEFAULT_PRODUCT_FILTERS };
     state.productPage = 1;
     renderProducts();
     bindWorkspaceControls();
@@ -1023,10 +1311,36 @@ function bindWorkspaceControls() {
     bindWorkspaceControls();
     attachImageFallbacks();
   });
+  elements.workspace.querySelector("#announcementStatus")?.addEventListener("change", (event) => {
+    state.announcementStatus = event.target.value;
+    renderAnnouncements();
+    bindWorkspaceControls();
+    attachImageFallbacks();
+  });
+  elements.workspace.querySelector("#addAnnouncement")?.addEventListener("click", () => showAnnouncementInspector());
+  elements.workspace.querySelectorAll("[data-announcement-id]").forEach((button) => button.addEventListener("click", () => {
+    showAnnouncementInspector(state.announcements.find((item) => item.id === button.dataset.announcementId));
+  }));
   elements.workspace.querySelectorAll(".merge-button").forEach((button) => button.addEventListener("click", () => mergeProducts(button.dataset.keep, button.dataset.lose)));
   elements.workspace.querySelectorAll(".ignore-duplicate").forEach((button) => button.addEventListener("click", () => ignoreDuplicate(button.dataset.key)));
   elements.workspace.querySelectorAll(".undo-change").forEach((button) => button.addEventListener("click", () => undoDraft(Number(button.dataset.id))));
   elements.workspace.querySelectorAll(".revert-change").forEach((button) => button.addEventListener("click", () => revertPublishedChange(Number(button.dataset.id))));
+  elements.workspace.querySelectorAll(".release-note-form").forEach((form) => form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const button = form.querySelector("button");
+    button.disabled = true;
+    try {
+      await updateReleaseNote(Number(form.dataset.revision), new FormData(form).get("note"));
+      toast(`r${form.dataset.revision} 的版本说明已更新`);
+      await reloadBackend();
+      state.section = "releases";
+      render();
+    } catch (error) {
+      toast(error.message, "error");
+    } finally {
+      button.disabled = false;
+    }
+  }));
 }
 
 function attachImageFallbacks() {

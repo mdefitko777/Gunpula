@@ -6,7 +6,7 @@
   "description": "Gunpla catalog data, validation, and reporting tools.",
   "scripts": {
     "validate": "node scripts/validate_catalog.mjs",
-    "test:unit": "node scripts/test_collection_store.mjs && node scripts/test_view_state.mjs && node scripts/test_catalog_display.mjs && node scripts/test_update_feed.mjs && node scripts/test_pbandai_market.mjs && node scripts/test_cms_model.mjs && node scripts/test_cms_patches.mjs",
+    "test:unit": "node scripts/test_collection_store.mjs && node scripts/test_view_state.mjs && node scripts/test_catalog_display.mjs && node scripts/test_update_feed.mjs && node scripts/test_pbandai_market.mjs && node scripts/test_cms_model.mjs && node scripts/test_cms_patches.mjs && node scripts/test_kotobukiya_shop.mjs && node scripts/test_bandai_announcements.mjs",
     "stats": "node scripts/catalog_stats.mjs",
     "search": "node scripts/search_kits.mjs",
     "sources": "node scripts/source_coverage.mjs",
@@ -46,6 +46,7 @@
     "android:build": "npm run android:sync && cd android && gradlew assembleDebug",
     "import:official": "npm run import:data",
     "import:gget": "node scripts/import_gget_units.mjs",
+    "import:announcements": "node scripts/fetch_bandai_announcements.mjs",
     "map:gget": "node scripts/build_gget_kit_map.mjs",
     "atlas:taxonomy": "node scripts/fetch_atlas_taxonomy.mjs",
     "atlas:groups": "node scripts/build_atlas_groups.mjs",
@@ -53,7 +54,7 @@
     "import:bbx-db": "node scripts/import_bbx_database.mjs",
     "cache:bbx-images": "node scripts/cache_bbx_images.mjs",
     "refresh:pb:japan": "npm run import:pb:wayback && npm run check:sources",
-    "import:data": "npm run import:bandai && npm run import:collectibles && npm run import:pokemon-center && npm run import:takaratomy-pokemon && npm run import:pokemon-extra && npm run import:fate && npm run import:bbx-db && npm run import:gget && npm run map:gget && npm run atlas:groups && npm run import:pbandai-manual && npm run import:pb && npm run import:pb:wayback && npm run cache:bbx-images && npm run localize && npm run check:sources",
+    "import:data": "npm run import:bandai && npm run import:collectibles && npm run import:pokemon-center && npm run import:takaratomy-pokemon && npm run import:pokemon-extra && npm run import:fate && npm run import:bbx-db && npm run import:gget && npm run map:gget && npm run atlas:groups && npm run import:pbandai-manual && npm run import:pb && npm run import:pb:wayback && npm run import:announcements && npm run cache:bbx-images && npm run localize && npm run check:sources",
     "import:takaratomy-pokemon": "node scripts/import_takaratomy_pokemon.mjs",
     "import:pokemon-extra": "node scripts/import_pokemon_extra_sources.mjs"
   },

@@ -20,6 +20,11 @@ const stageFilter = (source) => !EXCLUDED_FILES.has(basename(source)) && !EXCLUD
 
 await cp(resolve(rootDir, "app"), resolve(wwwDir, "app"), { recursive: true, filter: stageFilter });
 await cp(resolve(rootDir, "data"), resolve(wwwDir, "data"), { recursive: true, filter: stageFilter });
+await cp(
+  resolve(rootDir, "app", "assets", "announcements"),
+  resolve(wwwDir, "app", "assets", "announcements"),
+  { recursive: true, force: true },
+).catch(() => {});
 
 await writeFile(
   resolve(wwwDir, "index.html"),

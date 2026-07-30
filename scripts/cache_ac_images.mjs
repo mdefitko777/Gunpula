@@ -25,7 +25,7 @@ function extensionFrom(contentType, url) {
 }
 
 function isKotobukiyaImage(url) {
-  return typeof url === "string" && url.startsWith("https://www.kotobukiya.co.jp/");
+  return typeof url === "string" && /^https:\/\/(?:www|shop)\.kotobukiya\.co\.jp\//.test(url);
 }
 
 function localAssetUrl(fileName) {
@@ -81,7 +81,8 @@ for (const kit of kitsDoc.kits) {
     continue;
   }
 
-  const referer = kit.source_urls?.find((url) => url.includes("/product/detail/")) || "https://www.kotobukiya.co.jp/title/armored-core/";
+  const referer = kit.source_urls?.find((url) => /kotobukiya\.co\.jp\/(?:product\/detail|shop\/g\/)/.test(url))
+    || "https://shop.kotobukiya.co.jp/";
   const urls = [kit.images?.box_art_url, ...(kit.gallery_image_urls || [])].filter(isKotobukiyaImage);
   urls.forEach((url, index) => {
     tasks.push({

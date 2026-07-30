@@ -466,6 +466,24 @@
         "prize items"
       ],
       "notes": "Global storefront search API; title id 559 = Pokemon."
+    },
+    {
+      "source_id": "bandai_official_announcement",
+      "name": "BANDAI Hobby Official Announcements",
+      "type": "official_news_and_video",
+      "country": "JP",
+      "base_url": "https://www.bandaispirits.co.jp/products/topics/?category=1",
+      "priority": 1,
+      "best_for": [
+        "Gunpla product announcements",
+        "official livestream reveals",
+        "first announcement date"
+      ],
+      "weak_for": [
+        "price before preorder",
+        "release date before product listing"
+      ],
+      "notes": "Official news and YouTube candidates stay in the announcement center until an administrator links or creates a formal product."
     }
   ]
 }

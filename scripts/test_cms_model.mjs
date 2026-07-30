@@ -20,6 +20,7 @@ assert.equal(kits.length, 1);
 assert.equal(kits[0].names.zh, "甲改");
 assert.equal(resolveMerge("b", state.merges), "a");
 assert.equal(categoryRecords(kits, state)[0].count, 1);
+assert.deepEqual(categoryRecords(kits, state)[0].linked_kit_ids, ["a"]);
 const categories = categoryRecords(kits, state, {
   franchises: {
     pokemon: [{ id: "gen1", labels: { zh: "第一世代" }, kit_ids: ["p1", "p2"] }],

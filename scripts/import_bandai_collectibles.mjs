@@ -1,4 +1,11 @@
 import { readFile, writeFile } from "node:fs/promises";
+import {
+  decodeKotobukiyaShopHtml,
+  KOTOBUKIYA_AC_PORTAL_URL,
+  KOTOBUKIYA_AC_SHOP_URL,
+  parseKotobukiyaShopDetail,
+  parseKotobukiyaShopListings,
+} from "./lib/kotobukiya-shop.mjs";
 import { extractTamashiiGalleryImages } from "./lib/tamashii-images.mjs";
 
 const CANDY_BASE_URL = "https://www.bandai.co.jp";
@@ -20,7 +27,6 @@ const POKEMON_GLOBAL_PRODUCTS_URLS = [
   "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=big",
 ];
 const BANDAI_AC_SEARCH_URL = "https://www.bandaispirits.co.jp/products/search/result.php?freeword=ARMORED%20CORE&category=2";
-const KOTOBUKIYA_AC_URL = "https://www.kotobukiya.co.jp/title/armored-core/";
 const TAMASHII_BASE_URL = "https://tamashiiweb.com";
 const BEYBLADE_X_LINEUP_URL = "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/";
 
@@ -979,103 +985,45 @@ async function importBandaiArmoredCore() {
   return imported;
 }
 
-function parseKotobukiyaACListings(html, pageUrl) {
-  const listBlock = extract(/<div class="productList[\s\S]*?<ul class="productList_list">([\s\S]*?)<\/ul>\s*<\/div><!-- \/.productList -->/, html) ?? "";
-  const items = listBlock.split('<li class="productList_item">').slice(1);
-  const records = [];
-
-  for (const item of items) {
-    const title = stripTags(extract(/<p class="productList_title">([\s\S]*?)<\/p>/, item));
-    const category = stripTags(extract(/<p class="productList_category">([\s\S]*?)<\/p>/, item));
-    const href = extract(/<a href="([^"]+)" class="overMask"/, item);
-    const image = extract(/<img src="([^"]+)"/, item);
-    const releaseText = stripTags(extract(/<time class="date">([\s\S]*?)<\/time>/, item));
-
-    if (!title || !href || !/プラモデル/.test(category)) {
-      continue;
-    }
-
-    records.push({
-      title,
-      category,
-      detail_url: absoluteUrl(href, pageUrl),
-      image_url: image ? absoluteUrl(image, pageUrl) : null,
-      release_date: parseReleaseDate(releaseText),
-      is_limited: /限定品|badge-limited/.test(item) || /限定/.test(title),
-    });
-  }
-
-  return records;
-}
-
-function parseSpecValue(html, label) {
-  const pattern = new RegExp(`<th>${label}</th>\\s*<td>([\\s\\S]*?)</td>`);
-  return stripTags(extract(pattern, html));
-}
-
-function parseKotobukiyaACDetail(html, detailUrl) {
-  const gallery = unique([
-    ...[...html.matchAll(/data-src="([^"]+)"/g)].map((match) => absoluteUrl(match[1], detailUrl)),
-    ...[...html.matchAll(/<div class="detailSlider_thumbs">[\s\S]*?<img src="([^"]+)"/g)].map((match) => absoluteUrl(match[1], detailUrl)),
-  ]);
-  const releaseDate = parseReleaseDate(extract(/detailHeader_set-release[\s\S]*?<dd>([\s\S]*?)<\/dd>/, html));
-  const priceJpy = parsePrice(extract(/detailHeader_price-taxIn">([\s\S]*?)<\/span>/, html));
-  const scaleText = parseSpecValue(html, "スケール");
-  const scale = /^NON/i.test(scaleText) ? "non-scale" : scaleText || "various";
-  const series = parseSpecValue(html, "シリーズ") || "Armored Core plastic model";
-
-  return { gallery, release_date: releaseDate, price_jpy: priceJpy, scale, series };
-}
-
 async function importKotobukiyaArmoredCore() {
-  let html = "";
-  try {
-    html = await fetchText(KOTOBUKIYA_AC_URL);
-  } catch (error) {
-    console.warn(`Kotobukiya Armored Core listing fetch failed: ${error.message}`);
-    return [];
-  }
-
-  const listings = parseKotobukiyaACListings(html, KOTOBUKIYA_AC_URL);
-  const imported = [];
-
-  console.log(`Found ${listings.length} Kotobukiya Armored Core plastic model listings.`);
-
+  const html = await fetchKotobukiyaShopText(KOTOBUKIYA_AC_SHOP_URL);
+  const listings = parseKotobukiyaShopListings(html);
+  console.log(`Found ${listings.length} Kotobukiya Armored Core official shop listings.`);
   let detailCount = 0;
-  for (const listing of listings) {
-    let detail = { gallery: [], release_date: null, price_jpy: null, scale: "various", series: "Armored Core plastic model" };
+  const imported = await mapLimit(listings, 5, async (listing) => {
+    let detail = null;
     try {
-      detail = parseKotobukiyaACDetail(await fetchText(listing.detail_url), listing.detail_url);
+      detail = parseKotobukiyaShopDetail(await fetchKotobukiyaShopText(listing.detail_url), listing.detail_url);
       detailCount += 1;
     } catch (error) {
       console.warn(`Kotobukiya detail fetch failed for ${listing.detail_url}: ${error.message}`);
     }
+    const fallbackModel = !/カラー|塗料|チャーム|DECOCTION|完成品フィギュア/i.test(listing.title);
+    if (!(detail?.is_plastic_model ?? fallbackModel)) return null;
 
-    imported.push(
-      buildKit({
-        kitId: `acvi-${listing.detail_url.match(/\/product\/detail\/p([^/]+)\//)?.[1] ?? slugify(listing.title, "item")}`,
+    return buildKit({
+        kitId: `acvi-${listing.product_id}`,
         franchise: "armored_core",
         gradeCode: "ACVI",
-        subline: detail.series,
-        title: listing.title,
+        subline: detail?.series || "Kotobukiya Armored Core",
+        title: detail?.title || listing.title,
         boxArtUrl: listing.image_url,
-        galleryUrls: [listing.image_url, ...detail.gallery],
-        releaseDate: detail.release_date ?? listing.release_date,
-        priceJpy: detail.price_jpy,
+        galleryUrls: [listing.image_url, ...(detail?.gallery || [])],
+        releaseDate: detail?.release_date,
+        priceJpy: detail?.price_jpy,
         isLimited: listing.is_limited,
         sourceId: KOTOBUKIYA_AC_SOURCE_ID,
-        sourceUrls: [listing.detail_url, KOTOBUKIYA_AC_URL],
+        sourceUrls: [listing.detail_url, KOTOBUKIYA_AC_SHOP_URL, KOTOBUKIYA_AC_PORTAL_URL],
         tags: ["armored core", "kotobukiya", "plastic model"],
-        notes: "Imported from the official Kotobukiya Armored Core product list and detail pages.",
-        workOverride: "Armored Core",
+        notes: "Imported from the official Kotobukiya Japan online shop; the public product portal is retained as a reference.",
+        workOverride: detail?.work_title || "Armored Core",
         universeOverride: "Armored Core",
-        scale: detail.scale,
-      }),
-    );
-  }
+        scale: detail?.scale || "various",
+      });
+  });
 
   console.log(`Fetched ${detailCount}/${listings.length} Kotobukiya Armored Core detail pages.`);
-  return imported;
+  return imported.filter(Boolean);
 }
 
 function parseBeybladeXListings(html, pageUrl) {
@@ -1377,6 +1325,28 @@ function parseForteEntries(html, listUrl) {
   }
 
   return entries;
+}
+
+async function fetchKotobukiyaShopText(url) {
+  let lastError;
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    try {
+      const response = await fetch(url, {
+        headers: {
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36",
+          accept: "text/html,application/xhtml+xml",
+          "accept-language": "ja-JP,ja;q=0.9,en;q=0.6",
+          referer: "https://shop.kotobukiya.co.jp/",
+        },
+      });
+      if (response.ok) return decodeKotobukiyaShopHtml(await response.arrayBuffer());
+      lastError = new Error(`Failed to fetch ${url}: ${response.status}`);
+    } catch (error) {
+      lastError = error;
+    }
+    await sleep(attempt * 600);
+  }
+  throw lastError;
 }
 
 function forteEntryIdentity(entry) {

@@ -138,8 +138,8 @@ const SYNC_HISTORY_LIMIT = 20;
 const KIT_RENDER_BATCH = 160;
 const RECENT_UPDATE_DAYS = 3;
 const UPDATES_MODE_KEY = "gunpula-updates-mode-v1";
-// 最近页的三个视图，顺序同时决定左右滑动的切换顺序。
-const UPDATES_MODES = ["recent", "month", "all"];
+// 最近页的视图顺序同时决定左右滑动的切换顺序。
+const UPDATES_MODES = ["recent", "month", "announced", "all"];
 const RADIAL_HOLD_MS = 850;
 const RADIAL_SCROLL_CANCEL_DISTANCE = 10;
 const RADIAL_CANCEL_DISTANCE = 18;
@@ -262,6 +262,8 @@ const state = {
   sources: [],
   imageHealth: null,
   updateFeed: null,
+  announcementDoc: null,
+  announcements: [],
   pbandai: null,
   sourceHealth: null,
   seriesAudit: null,
@@ -941,6 +943,7 @@ async function init() {
     androidPackageDoc,
     firstSeenDoc,
     cmsPublished,
+    announcementDoc,
   ] = await Promise.all([
     loadJson("../data/grades.json"),
     loadInitialKitsDoc(),
@@ -955,6 +958,7 @@ async function init() {
     loadOptionalJson("../data/android-package.json"),
     loadOptionalJson("../data/kit-first-seen.json"),
     loadCmsPublishedState(SYNC_BACKEND),
+    loadOptionalJson("../data/announcements.json"),
   ]);
 
   state.grades = gradesDoc.grades;
@@ -970,6 +974,8 @@ async function init() {
   state.androidPackage = androidPackageDoc;
   state.kitFirstSeen = firstSeenDoc?.dates || {};
   state.cmsPayload = cmsPublished?.payload || {};
+  state.announcementDoc = announcementDoc || { announcements: [] };
+  state.announcements = materializeAppAnnouncements(state.announcementDoc.announcements, state.cmsPayload);
   state.cmsSeriesLabels = cmsSeriesLabelOverrides(state.cmsPayload);
   state.overrides = loadOverrides();
   state.seriesLabelOverrides = loadSeriesLabelOverrides();
@@ -2438,6 +2444,10 @@ function selectFranchiseForActiveView(franchise) {
     navigateToPBandai(franchise);
   } else {
     state.franchise = franchise;
+    if (state.activeView === "updates" && franchise !== "gundam" && state.updatesMode === "announced") {
+      state.updatesMode = "recent";
+      localStorage.setItem(UPDATES_MODE_KEY, state.updatesMode);
+    }
     localStorage.setItem(FRANCHISE_KEY, state.franchise);
     render();
     persistViewState({ mode: "push" });
@@ -2457,7 +2467,7 @@ function pagerTargetForDelta(deltaX) {
     return target ? `guide:${target}` : null;
   }
   if (state.activeView === "updates") {
-    const modes = UPDATES_MODES;
+    const modes = state.franchise === "gundam" ? UPDATES_MODES : UPDATES_MODES.filter((mode) => mode !== "announced");
     const index = modes.indexOf(state.updatesMode || "recent");
     const target = modes[index + offset];
     return target ? `updates:${target}` : null;
@@ -4804,6 +4814,83 @@ function recentUpdateItems(limit = 6, franchise = null) {
   return feedRecentUpdateItems(state.updateFeed, { limit, franchise });
 }
 
+function materializeAppAnnouncements(base = [], payload = {}) {
+  const records = new Map(base.map((item) => [item.id, structuredClone(item)]));
+  for (const [key, patch] of Object.entries(payload.sources || {})) {
+    if (!key.startsWith("announcement:")) continue;
+    const id = key.slice("announcement:".length);
+    const previous = records.get(id) || { id, franchise: "gundam", names: {} };
+    records.set(id, { ...previous, ...patch, names: { ...(previous.names || {}), ...(patch.names || {}) } });
+  }
+  return [...records.values()]
+    .filter((item) => item.status !== "dismissed")
+    .sort((a, b) => String(b.announced_at || "").localeCompare(String(a.announced_at || "")));
+}
+
+function announcementDisplayName(item) {
+  const order = {
+    zh: ["zh", "ja", "en", "ko"],
+    ko: ["ko", "ja", "en", "zh"],
+    en: ["en", "ja", "zh", "ko"],
+    ja: ["ja", "en", "zh", "ko"],
+  }[state.language] || ["ja", "en", "zh", "ko"];
+  return order.map((code) => item.names?.[code]).find(Boolean) || item.id;
+}
+
+function announcementStatusText(status) {
+  return {
+    announced: t("announcementStatusAnnounced"),
+    product_confirmed: t("announcementStatusConfirmed"),
+    preorder_open: t("announcementStatusPreorder"),
+  }[status] || t("announcementStatusAnnounced");
+}
+
+function renderAnnouncementUpdates(items) {
+  elements.homeUpdateList.innerHTML = "";
+  if (!items.length) {
+    const empty = document.createElement("div");
+    empty.className = "home-update-empty";
+    empty.textContent = t("announcementEmpty");
+    elements.homeUpdateList.append(empty);
+    return;
+  }
+  for (const item of items) {
+    const card = document.createElement("a");
+    card.className = "home-update-card announcement-update-card";
+    card.href = item.source_url || "#";
+    card.target = item.source_url ? "_blank" : "";
+    card.rel = "noreferrer";
+    const art = document.createElement("div");
+    art.className = "home-update-art announcement-update-art";
+    if (item.thumbnail_url) {
+      const image = document.createElement("img");
+      image.src = item.thumbnail_url;
+      image.alt = announcementDisplayName(item);
+      image.loading = "lazy";
+      art.append(image);
+    } else {
+      art.classList.add("is-placeholder");
+      art.textContent = "LIVE";
+    }
+    const body = document.createElement("div");
+    body.className = "home-update-body";
+    const badges = document.createElement("div");
+    badges.className = "home-update-badges";
+    for (const label of [announcementStatusText(item.status), item.series_key !== "unclassified" ? item.series_key : null, item.grade_code].filter(Boolean)) {
+      const badge = document.createElement("span");
+      badge.textContent = label;
+      badges.append(badge);
+    }
+    const title = document.createElement("strong");
+    title.textContent = announcementDisplayName(item);
+    const meta = document.createElement("span");
+    meta.textContent = [item.announced_at, item.source_name, item.linked_kit_id ? t("announcementLinked") : null].filter(Boolean).join(" · ");
+    body.append(badges, title, meta);
+    card.append(art, body);
+    elements.homeUpdateList.append(card);
+  }
+}
+
 // 「全部」视图把两个来源拼在一起，同一件商品可能既是最近添加又在本月发售。
 function dedupeKits(kits) {
   const seen = new Set();
@@ -4857,6 +4944,9 @@ function renderDiscoveryChannels(mode, count) {
     { label: t("monthReleaseShort"), active: mode === "month" && state.activeView === "updates", action: () => setUpdatesMode("month"), count: mode === "month" ? count : undefined },
     { label: t("updatesAllShort"), active: mode === "all" && state.activeView === "updates", action: () => setUpdatesMode("all"), count: mode === "all" ? count : undefined },
   ];
+  if (state.franchise === "gundam") {
+    channels.splice(2, 0, { label: t("announcementsShort"), active: mode === "announced" && state.activeView === "updates", action: () => setUpdatesMode("announced"), count: mode === "announced" ? count : undefined });
+  }
   for (const channel of channels) {
     const button = document.createElement("button");
     button.type = "button";
@@ -4904,10 +4994,18 @@ function renderHomeUpdates() {
   elements.updatesDateInput.value = state.releaseMonth;
   localStorage.setItem(RELEASE_MONTH_KEY, state.releaseMonth);
 
-  // Three modes: 最近添加 (feed), 本月发售 (month picker) and 全部 (both merged).
+  // Product feeds and official announcement candidates stay separate.
   // The month input shows wherever the month feed is part of the result.
   const mode = UPDATES_MODES.includes(state.updatesMode) ? state.updatesMode : "recent";
-  if (elements.updatesDateInput) elements.updatesDateInput.hidden = mode === "recent";
+  if (elements.updatesDateInput) elements.updatesDateInput.hidden = ["recent", "announced"].includes(mode);
+  if (mode === "announced") {
+    const announcements = state.franchise === "gundam" ? state.announcements : [];
+    renderDiscoveryChannels(mode, announcements.length);
+    if (elements.sourceHealthStrip) elements.sourceHealthStrip.hidden = true;
+    elements.updatesSubtitle.textContent = t("announcementSummary", { count: announcements.length });
+    renderAnnouncementUpdates(announcements);
+    return;
+  }
   const sourceItems =
     mode === "month"
       ? releaseItemsForMonth(state.releaseMonth)

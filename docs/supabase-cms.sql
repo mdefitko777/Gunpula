@@ -350,6 +350,34 @@ begin
 end;
 $$;
 
+create or replace function public.gunpula_cms_update_release_note(
+  p_revision bigint,
+  p_note text default ''
+)
+returns jsonb
+language plpgsql
+security definer
+set search_path = public, auth
+as $$
+declare
+  updated public.gunpula_cms_releases%rowtype;
+begin
+  perform public.gunpula_cms_assert_admin();
+  if length(coalesce(p_note, '')) > 2000 then
+    raise exception 'release note exceeds 2000 characters' using errcode = '22023';
+  end if;
+
+  update public.gunpula_cms_releases
+     set note = coalesce(p_note, '')
+   where revision = p_revision
+  returning * into updated;
+  if updated.id is null then
+    raise exception 'cms release not found' using errcode = '22023';
+  end if;
+  return to_jsonb(updated) - 'payload';
+end;
+$$;
+
 create or replace function public.gunpula_cms_get_published()
 returns jsonb
 language sql
@@ -373,6 +401,7 @@ revoke all on function public.gunpula_cms_save_change(text, text, text, jsonb, j
 revoke all on function public.gunpula_cms_save_batch(jsonb) from public, anon, authenticated;
 revoke all on function public.gunpula_cms_undo_change(bigint) from public, anon, authenticated;
 revoke all on function public.gunpula_cms_publish(text) from public, anon, authenticated;
+revoke all on function public.gunpula_cms_update_release_note(bigint, text) from public, anon, authenticated;
 revoke all on function public.gunpula_cms_get_published() from public, anon, authenticated;
 
 grant execute on function public.gunpula_cms_get_bootstrap() to authenticated;
@@ -380,4 +409,5 @@ grant execute on function public.gunpula_cms_save_change(text, text, text, jsonb
 grant execute on function public.gunpula_cms_save_batch(jsonb) to authenticated;
 grant execute on function public.gunpula_cms_undo_change(bigint) to authenticated;
 grant execute on function public.gunpula_cms_publish(text) to authenticated;
+grant execute on function public.gunpula_cms_update_release_note(bigint, text) to authenticated;
 grant execute on function public.gunpula_cms_get_published() to anon, authenticated;

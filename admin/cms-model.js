@@ -230,9 +230,11 @@ export function categoryRecords(kits, cmsState, atlasGroups = {}) {
       labels: { zh: key, ko: key, en: key, ja: key },
       sort: kit.series?.sort ?? 999,
       cover_url: imageUrl(kit),
+      linked_kit_ids: [],
       count: 0,
     };
-    existing.count += 1;
+    if (!existing.linked_kit_ids.includes(kit.kit_id)) existing.linked_kit_ids.push(kit.kit_id);
+    existing.count = existing.linked_kit_ids.length;
     for (const code of ["zh", "ko", "en", "ja"]) {
       existing.labels[code] = kit.series?.labels?.[code] || existing.labels[code];
     }

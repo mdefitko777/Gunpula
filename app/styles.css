@@ -1198,6 +1198,22 @@ h1 {
   opacity: 0.78;
 }
 
+.announcement-update-card {
+  text-decoration: none;
+}
+
+.announcement-update-art img {
+  object-fit: cover;
+}
+
+.announcement-update-art.is-placeholder {
+  background: var(--accent-deep);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
 .home-update-art {
   position: relative;
   width: 74px;
@@ -8542,32 +8558,82 @@ body[data-theme="atlas"][data-franchise="beyblade"] {
 }
 
 .guide-section[data-guide-tab="armored_core"] .guide-atlas-grid {
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 12px;
 }
 
 .guide-section[data-guide-tab="armored_core"] .atlas-group-card {
-  grid-template-columns: 86px minmax(0, 1fr);
-  grid-template-rows: auto auto;
-  gap: 4px 12px;
-  align-items: center;
-  min-height: 94px;
-  padding: 10px;
-  text-align: left;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto auto;
+  gap: 0;
+  min-height: 0;
+  padding: 0 0 10px;
+  overflow: hidden;
+  border-color: rgba(89, 121, 127, 0.18);
+  border-radius: 6px;
+  background: #fff;
+  text-align: center;
 }
 
 .guide-section[data-guide-tab="armored_core"] .atlas-group-card .guide-series-art {
-  grid-row: 1 / 3;
-  height: 74px;
+  display: grid;
+  grid-row: auto;
+  width: 100%;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
+  margin: 0 0 9px;
+  padding: 10px;
   border: 0;
-  border-radius: 20px;
-  aspect-ratio: auto;
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--accent-soft) 86%, #fff), #fff);
+  border-bottom: 1px solid rgba(130, 209, 193, 0.18);
+  border-radius: 0;
+  aspect-ratio: 16 / 10;
+  background: #182126;
+  overflow: hidden;
+}
+
+.guide-section[data-guide-tab="armored_core"] .atlas-group-card .guide-series-art img {
+  min-width: 0;
+  min-height: 0;
+  object-fit: cover;
+}
+
+.guide-section[data-guide-tab="armored_core"] .atlas-group-card .guide-series-art.is-missing img {
+  display: none;
+}
+
+.guide-section[data-guide-tab="armored_core"] .atlas-group-card .guide-series-art.is-missing::after {
+  content: "ARMORED CORE";
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0;
 }
 
 .guide-section[data-guide-tab="armored_core"] .atlas-group-card strong,
 .guide-section[data-guide-tab="armored_core"] .atlas-group-card span:last-child {
-  text-align: left;
+  text-align: center;
+}
+
+.guide-section[data-guide-tab="armored_core"] .atlas-group-card strong {
+  min-height: 30px;
+  margin: 0;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+@media (max-width: 760px) {
+  .guide-section[data-guide-tab="armored_core"] .guide-atlas-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .guide-section[data-guide-tab="armored_core"] .atlas-group-card .guide-series-art {
+    padding: 7px;
+  }
 }
 
 @media (max-width: 760px) {
