@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-07-30",
-  "generated_at": "2026-07-30T07:52:22.902Z",
+  "generated_at": "2026-07-30T10:26:04.362Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,36 +16,46 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-07-30T07:52:22.086Z",
+    "generated_at": "2026-07-30T10:26:03.553Z",
     "blocked_count": 1,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-07-30",
-      "generated_at": "2026-07-30T07:52:22.902Z",
+      "generated_at": "2026-07-30T10:26:04.362Z",
       "total_before": 5031,
-      "total_after": 5101,
+      "total_after": 5139,
       "added_count": 30,
       "changed_count": 240,
       "removed_count": 0,
-      "watched_count": 232,
-      "premium_bandai_count": 220,
-      "bbx_count": 0,
+      "watched_count": 240,
+      "premium_bandai_count": 110,
+      "bbx_count": 45,
       "franchise_counts": {
-        "gundam": 270
+        "gundam": 225,
+        "beyblade": 45
       },
       "reason_counts": {
         "new": 30,
-        "name": 120,
-        "series": 120,
-        "source": 190
+        "name": 230,
+        "series": 240,
+        "source": 70
       },
       "interest_tags": [
         "gundam",
         "premium_bandai",
         "seed",
-        "00"
+        "00",
+        "beyblade",
+        "bbx",
+        "bbx_cx",
+        "beyblade_cx",
+        "bbx_ux",
+        "bbx_limited",
+        "beyblade_limited",
+        "bbx_bx",
+        "beyblade_bx"
       ],
       "watch_tags": [
         "seed",
@@ -839,6 +849,134 @@
       ],
       "changed": [
         {
+          "kit_id": "tamashii-16006",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ミーティア",
+            "zh": "ミーティア",
+            "ko": "미티어",
+            "en": "ミーティア"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 88000,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16006/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-15968",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "SH_FIGUARTS",
+          "subline": "S.H.Figuarts",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "キラ・ヤマト(オーブ連合首長国パイロットスーツVer.)",
+            "zh": "キラ・ヤマト(オーブ連合首長国パイロットスーツVer.)",
+            "ko": "キラ・ヤマト(オーブ連合首長国パイロットスーツVer.)",
+            "en": "キラ ヤマト(オーブ連合首長国パイロットスーツVer.)"
+          },
+          "release_date": "2026-12",
+          "price_jpy": 9900,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/15968/",
+            "https://tamashiiweb.com/item_brand/shfiguarts/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-cx00-tiga",
+          "change_type": "changed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Starter",
+          "series_key": "beyblade_cx",
+          "series_labels": {
+            "zh": "CX",
+            "en": "CX",
+            "ja": "CX",
+            "ko": "CX"
+          },
+          "names": {
+            "ja": "CX-00 ティガレイジFT3-60T",
+            "zh": "CX-00 ティガレイジFT3-60T",
+            "ko": "CX-00 ティガレイジFT3-60T",
+            "en": "CX-00 ティガレイジFT3-60T"
+          },
+          "release_date": "2026-09-12",
+          "price_jpy": 2750,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_cx",
+            "beyblade_cx",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-tiga.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
           "kit_id": "mg-mg-1-100-4573102743145000",
           "change_type": "changed",
           "franchise": "gundam",
@@ -884,6 +1022,187 @@
           ]
         },
         {
+          "kit_id": "beyblade-x-cx00-eva",
+          "change_type": "changed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Set",
+          "series_key": "beyblade_cx",
+          "series_labels": {
+            "zh": "CX",
+            "en": "CX",
+            "ja": "CX",
+            "ko": "CX"
+          },
+          "names": {
+            "ja": "CX-00 エヴァンゲリオンデッキセット",
+            "zh": "CX-00 エヴァンゲリオンデッキ套装",
+            "ko": "CX-00 에반게리온 덱 세트",
+            "en": "CX-00 エヴァンゲリオンデッキSet"
+          },
+          "release_date": "2026-08-29",
+          "price_jpy": 7500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_cx",
+            "beyblade_cx",
+            "00"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-eva.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-ux00-gv",
+          "change_type": "changed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Starter",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "UX-00 【イベント限定】 グローリーワルキューレLF メタルコート:ブルー",
+            "zh": "UX-00 【イベント限定】 グローリーワルキューレLF メタルコート:ブルー",
+            "ko": "UX-00 【イベント한정】 グローリーワルキューレLF メタルコート:ブルー",
+            "en": "UX-00 [イベントLimited] グローリーワルキューレLF メタルコート:ブルー"
+          },
+          "release_date": "2026-08-29",
+          "price_jpy": 2800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_ux",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/ux00-gv.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-bx00-ds-v2",
+          "change_type": "changed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Booster",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "BX-00 【B4ストア限定】 ドランソード3-60F バージョン2.0",
+            "zh": "BX-00 【B4ストア限定】 ドランソード3-60F バージョン2.0",
+            "ko": "BX-00 【B4ストア한정】 ドランソード3-60F バージョン2.0",
+            "en": "BX-00 [B4ストアLimited] ドランソード3-60F バージョン2.0"
+          },
+          "release_date": "2026-08-08",
+          "price_jpy": 1600,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_bx",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/bx00-ds_v2.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-bx-00-140",
+          "change_type": "changed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Starter",
+          "series_key": "beyblade_bx",
+          "series_labels": {
+            "zh": "BX",
+            "en": "BX",
+            "ja": "BX",
+            "ko": "BX"
+          },
+          "names": {
+            "ja": "BX-00 ストームペガシス3-70RA",
+            "zh": "BX-00 ストームペガシス3-70RA",
+            "ko": "BX-00 스톰 페가시스 3-70RA",
+            "en": "BX-00 ストームペガシス3-70RA"
+          },
+          "release_date": "2026-07-11",
+          "price_jpy": 2620,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_bx",
+            "beyblade_bx",
+            "00"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
           "kit_id": "hg-hg-1-144-4573102742490000",
           "change_type": "changed",
           "franchise": "gundam",
@@ -922,6 +1241,276 @@
           ],
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102742490000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-cx00-kw",
+          "change_type": "changed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Booster",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "CX-00 【アプリ・イベント限定】 クラーケンリグルS3-70O メタルコート:ブルー",
+            "zh": "CX-00 【アプリ・イベント限定】 クラーケンリグルS3-70O メタルコート:ブルー",
+            "ko": "CX-00 【アプリ・イベント한정】 クラーケンリグルS3-70O メタルコート:ブルー",
+            "en": "CX-00 [アプリ イベントLimited] クラーケンリグルS3-70O メタルコート:ブルー"
+          },
+          "release_date": "2026-07-09",
+          "price_jpy": 1800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_cx",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-kw.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-cx00-drb",
+          "change_type": "changed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Booster",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "CX-00 【アプリ・イベント限定】 ドレイクブレイブG4-70I メタルコート:ブルー",
+            "zh": "CX-00 【アプリ・イベント限定】 ドレイクブレイブG4-70I メタルコート:ブルー",
+            "ko": "CX-00 【アプリ・イベント한정】 ドレイクブレイブG4-70I メタルコート:ブルー",
+            "en": "CX-00 [アプリ イベントLimited] ドレイクブレイブG4-70I メタルコート:ブルー"
+          },
+          "release_date": "2026-07-09",
+          "price_jpy": 1900,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_cx",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-drb.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-cx00-ba",
+          "change_type": "changed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Booster",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "CX-00 【アプリ・イベント限定】 バックスアントラーズB2-60D メタルコート:オレンジ",
+            "zh": "CX-00 【アプリ・イベント限定】 バックスアントラーズB2-60D メタルコート:オレンジ",
+            "ko": "CX-00 【アプリ・イベント한정】 バックスアントラーズB2-60D メタルコート:オレンジ",
+            "en": "CX-00 [アプリ イベントLimited] バックスアントラーズB2-60D メタルコート:オレンジ"
+          },
+          "release_date": "2026-07-09",
+          "price_jpy": 1800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_cx",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-ba.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-cx00-hf",
+          "change_type": "changed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Booster",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "CX-00 【アプリ・イベント限定】 ホーネットフォートR7-60T メタルコート:イエロー",
+            "zh": "CX-00 【アプリ・イベント限定】 ホーネットフォートR7-60T メタルコート:イエロー",
+            "ko": "CX-00 【アプリ・イベント한정】 ホーネットフォートR7-60T メタルコート:イエロー",
+            "en": "CX-00 [アプリ イベントLimited] ホーネットフォートR7-60T メタルコート:イエロー"
+          },
+          "release_date": "2026-07-09",
+          "price_jpy": 1800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_cx",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-hf.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "tamashii-15752",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ストライクフリーダムガンダム ＜リバイバル版＞",
+            "zh": "强袭自由高达 ＜复刻版＞",
+            "ko": "스트라이크 프리덤건담 ＜리바이벌판＞",
+            "en": "Strike Freedom Gundam ＜Revival Ver.＞"
+          },
+          "release_date": "2026-06-27",
+          "price_jpy": 38500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/15752/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-ux-00-133",
+          "change_type": "changed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Starter",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "UX-00 サムライセイバー5-60K メタルコート:サムライブルー サッカー日本代表Ver.",
+            "zh": "UX-00 サムライセイバー5-60K メタルコート:サムライブルー サッカー日本代表Ver.",
+            "ko": "UX-00 サムライセイバー5-60K メタルコート:サムライブルー サッカー日本代表Ver.",
+            "en": "UX-00 サムライセイバー5-60K メタルコート:サムライブルー サッカー日本代表Ver."
+          },
+          "release_date": "2026-06-13",
+          "price_jpy": 2500,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_ux",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
           ]
         },
         {
@@ -966,187 +1555,57 @@
           ]
         },
         {
-          "kit_id": "mgsd-mgsd-4573102720276000",
+          "kit_id": "beyblade-x-cx00-db",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MGSD",
-          "subline": "MGSD",
-          "series_key": "seed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Booster",
+          "series_key": "beyblade_limited",
           "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
           },
           "names": {
-            "ja": "MGSD デスティニーガンダム",
-            "zh": "MGSD 命运高达",
-            "ko": "MGSD 데스티니건담",
-            "en": "MGSD Destiny Gundam"
+            "ja": "CX-00 【タカラトミーモール・イベント限定】 ドランブレイブS6-60V メタルコート:ブラック",
+            "zh": "CX-00 【タカラトミーモール・イベント限定】 ドランブレイブS6-60V メタルコート:ブラック",
+            "ko": "CX-00 【タカラトミーモール・イベント한정】 ドランブレイブS6-60V メタルコート:ブラック",
+            "en": "CX-00 [タカラトミーモール イベントLimited] ドランブレイブS6-60V メタルコート:ブラック"
           },
-          "release_date": "2026-02-21",
-          "price_jpy": 4950,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102720276000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000247191/"
-          ]
-        },
-        {
-          "kit_id": "hg-hg-1-144-00-4573102720191000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "hathaway",
-          "series_labels": {
-            "zh": "闪哈",
-            "en": "Hathaway",
-            "ja": "閃ハサ",
-            "ko": "섬하사"
-          },
-          "names": {
-            "ja": "HG 1 / 144 グスタフ・カール００型",
-            "zh": "HG 1 / 144 グスタフ・カール００型",
-            "ko": "HG 1 / 144 グスタフ・カール００型",
-            "en": "HG 1 / 144 グスタフ カール００型"
-          },
-          "release_date": "2026-02-07",
-          "price_jpy": 3850,
-          "is_limited": false,
-          "is_premium_bandai": true,
+          "release_date": "2026-05-30",
+          "price_jpy": 1800,
+          "is_limited": true,
+          "is_premium_bandai": false,
           "watch_tags": [
             "00"
           ],
           "interest_tags": [
-            "gundam",
-            "premium_bandai",
+            "beyblade",
+            "bbx",
+            "bbx_cx",
+            "bbx_limited",
+            "beyblade_limited",
             "00"
           ],
           "change_reasons": [
             "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102720191000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000246305/"
-          ]
-        },
-        {
-          "kit_id": "hg-hg-1-144-4573102720030000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "HG 1 / 144 レジェンドガンダム",
-            "zh": "HG 1 / 144 レジェンド高达",
-            "ko": "HG 1 / 144 레전드 건담",
-            "en": "HG 1 / 144 レジェンドGundam"
-          },
-          "release_date": "2026-01-31",
-          "price_jpy": 3080,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102720030000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000245802/"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-4573102699008000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "MG 1 / 100 ガンダムアストレイミラージュフレーム セカンドイシュー",
-            "zh": "MG 1 / 100 高达异端ミラージュフレーム セカンドイシュー",
-            "ko": "MG 1 / 100 건담아스트레이ミラージュフレーム セカンドイシュー",
-            "en": "MG 1 / 100 Gundam Astrayミラージュフレーム セカンドイシュー"
-          },
-          "release_date": "2025-11",
-          "price_jpy": 6600,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "seed"
-          ],
-          "change_reasons": [
-            "name",
             "series"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp"
+            "takara_tomy_beyblade_x_jp"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102699008000&grp_id=5325"
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-db.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
           ]
         },
         {
-          "kit_id": "hg-hg-1-144-specii-4573102688590000",
+          "kit_id": "tamashii-15672",
           "change_type": "changed",
           "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
           "series_key": "seed",
           "series_labels": {
             "zh": "SEED",
@@ -1155,95 +1614,13 @@
             "ko": "SEED"
           },
           "names": {
-            "ja": "HG 1 / 144 デスティニーガンダムSpecII[最終決戦イメージカラー]",
-            "zh": "HG 1 / 144 命运高达SpecII[最终决战イメージカラー]",
-            "ko": "HG 1 / 144 데스티니건담SpecII[최종 결전イメージカラー]",
-            "en": "HG 1 / 144 Destiny Gundam SpecII [Final Battleイメージカラー]"
+            "ja": "プロヴィデンスガンダム CLIMAX BATTLE Ver.",
+            "zh": "天帝高达 CLIMAX BATTLE Ver.",
+            "ko": "프로비던스건담 CLIMAX BATTLE Ver.",
+            "en": "Providence Gundam CLIMAX BATTLE Ver."
           },
-          "release_date": "2025-08",
-          "price_jpy": 2970,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "seed"
-          ],
-          "change_reasons": [
-            "name",
-            "series"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102688590000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-4573102688583000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "MG 1 / 100 ブレイズザクファントム (ディアッカ・エルスマン専用機)",
-            "zh": "MG 1 / 100 ブレイズ扎古ファントム (ディアッカ・エルスマン专用機)",
-            "ko": "MG 1 / 100 ブレイズ자쿠ファントム (ディアッカ・エルスマン전용機)",
-            "en": "MG 1 / 100 ブレイズZakuファントム (ディアッカ エルスマンCustom機)"
-          },
-          "release_date": "2025-08",
-          "price_jpy": 5390,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "seed"
-          ],
-          "change_reasons": [
-            "name",
-            "series"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102688583000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-4573102685391000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "MG 1 / 100 ガンダムベース限定 ガンダムアストレイ レッドフレーム [リサーキュレーションカラー / ネオンピンク］",
-            "zh": "MG 1 / 100 高达ベース限定 高达异端 レッドフレーム [リサーキュレーションカラー / ネオンピンク］",
-            "ko": "MG 1 / 100 건담ベース한정 건담아스트레이 レッドフレーム [リサーキュレーションカラー / ネオンピンク］",
-            "en": "MG 1 / 100 GundamベースLimited Gundam Astray レッドフレーム [リサーキュレーションカラー / ネオンピンク］"
-          },
-          "release_date": "2025-04-11",
-          "price_jpy": 5280,
+          "release_date": "2026-05",
+          "price_jpy": 50600,
           "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [
@@ -1258,153 +1635,19 @@
             "series"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp"
+            "tamashii_web_jp"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102685391000&grp_id=5325"
+            "https://tamashiiweb.com/item/15672/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
           ]
         },
         {
-          "kit_id": "sdw-sdw-heroes-gf-b-4573102683649000",
+          "kit_id": "gframe-fapb32",
           "change_type": "changed",
           "franchise": "gundam",
-          "grade_code": "SDW",
-          "subline": "SD Gundam World",
-          "series_key": "double_o",
-          "series_labels": {
-            "zh": "00",
-            "en": "00",
-            "ja": "00",
-            "ko": "00"
-          },
-          "names": {
-            "ja": "SDW HEROES GF ガンダムアストレア タイプ-B",
-            "zh": "SDW HEROES GF 高达正义女神 タイプ-B",
-            "ko": "SDW HEROES GF 건담아스트레아 타입 -B",
-            "en": "SDW HEROES GF Gundam Astraea タイプ-B"
-          },
-          "release_date": "2025-03-22",
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "00"
-          ],
-          "change_reasons": [
-            "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102683649000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000228132/"
-          ]
-        },
-        {
-          "kit_id": "sdw-sdw-heroes-gf-f-4573102683656000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "SDW",
-          "subline": "SD Gundam World",
-          "series_key": "double_o",
-          "series_labels": {
-            "zh": "00",
-            "en": "00",
-            "ja": "00",
-            "ko": "00"
-          },
-          "names": {
-            "ja": "SDW HEROES GF ガンダムアストレア タイプ-F",
-            "zh": "SDW HEROES GF 高达正义女神 タイプ-F",
-            "ko": "SDW HEROES GF 건담아스트레아 타입 -F",
-            "en": "SDW HEROES GF Gundam Astraea タイプ-F"
-          },
-          "release_date": "2025-03-22",
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "00"
-          ],
-          "change_reasons": [
-            "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102683656000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000228133/"
-          ]
-        },
-        {
-          "kit_id": "sdw-sdw-heroes-gf-4573102683632000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "SDW",
-          "subline": "SD Gundam World",
-          "series_key": "double_o",
-          "series_labels": {
-            "zh": "00",
-            "en": "00",
-            "ja": "00",
-            "ko": "00"
-          },
-          "names": {
-            "ja": "SDW HEROES キャプテンクアンタ GF",
-            "zh": "SDW HEROES キャプテン量子型 GF",
-            "ko": "SDW HEROES キャプテン퀀터 GF",
-            "en": "SDW HEROES キャプテンQan [T] GF"
-          },
-          "release_date": "2025-03-22",
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "00"
-          ],
-          "change_reasons": [
-            "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102683632000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000228131/"
-          ]
-        },
-        {
-          "kit_id": "rg-rg-1-144-specii-4573102672919000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "RG",
-          "subline": "RG",
+          "grade_code": "GFRAME",
+          "subline": "Mobile Suit Gundam G Frame FA",
           "series_key": "seed",
           "series_labels": {
             "zh": "SEED",
@@ -1413,14 +1656,14 @@
             "ko": "SEED"
           },
           "names": {
-            "ja": "RG 1 / 144 ソードインパルスガンダムＳｐｅｃＩＩ",
-            "zh": "RG 1 / 144 ソード脉冲高达ＳｐｅｃＩＩ",
-            "ko": "RG 1 / 144 소드 임펄스건담ＳｐｅｃＩＩ",
-            "en": "RG 1 / 144 ソードImpulse GundamＳｐｅｃＩＩ"
+            "ja": "機動戦士ガンダム GフレームFA ストライクフリーダムガンダム オプションパーツセット【プレミアムバンダイ限定】",
+            "zh": "机动战士高达 GフレームFA 强袭自由高达 选配零件套装【Premium Bandai限定】",
+            "ko": "기동전사 건담 G 프레임 FA 스트라이크 프리덤건담 옵션 파츠 세트【프리미엄 반다이한정】",
+            "en": "Mobile Suit Gundam GフレームFA Strike Freedom Gundam Option Parts Set [Premium BandaiLimited]"
           },
-          "release_date": "2025-03",
-          "price_jpy": 4180,
-          "is_limited": false,
+          "release_date": "2026-05",
+          "price_jpy": 3600,
+          "is_limited": true,
           "is_premium_bandai": true,
           "watch_tags": [
             "seed"
@@ -1428,140 +1671,6 @@
           "interest_tags": [
             "gundam",
             "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102672919000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000254945/"
-          ]
-        },
-        {
-          "kit_id": "hg-hg-1-144-seed-freedom-ver-4573102683427000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "HG 1 / 144 ズゴック(SEED FREEDOM Ver.)",
-            "zh": "HG 1 / 144 ズゴック(SEED FREEDOM Ver.)",
-            "ko": "HG 1 / 144 ズゴック(SEED FREEDOM Ver.)",
-            "en": "HG 1 / 144 ズゴック(SEED FREEDOM Ver.)"
-          },
-          "release_date": "2025-02-22",
-          "price_jpy": 3520,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102683427000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000226930/"
-          ]
-        },
-        {
-          "kit_id": "eg-entry-grade-1-144-4573102683212000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "EG",
-          "subline": "Entry Grade",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "ENTRY GRADE 1 / 144 ストライクルージュ",
-            "zh": "ENTRY GRADE 1 / 144 强袭ルージュ",
-            "ko": "ENTRY GRADE 1 / 144 스트라이크 루즈",
-            "en": "ENTRY GRADE 1 / 144 Strikeルージュ"
-          },
-          "release_date": "2025-01-17",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102683212000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000224494/"
-          ]
-        },
-        {
-          "kit_id": "rg-rg-1-144-4573102673961000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "RG",
-          "subline": "RG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "RG 1 / 144 アカツキガンダム(オオワシ装備)",
-            "zh": "RG 1 / 144 晓高达(オオワシ装备)",
-            "ko": "RG 1 / 144 아카츠키건담( 오오와시 장비)",
-            "en": "RG 1 / 144 Akatsuki Gundam(オオワシEquipment)"
-          },
-          "release_date": "2024-12-14",
-          "price_jpy": 8800,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
             "seed"
           ],
           "change_reasons": [
@@ -1569,85 +1678,45 @@
             "series"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp"
+            "bandai_candy_gundam_jp"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102673961000&grp_id=5325"
+            "https://www.bandai.co.jp/candy/gundam/gframe/faPb32/",
+            "https://www.bandai.co.jp/candy/gundam/gframe/"
           ]
         },
         {
-          "kit_id": "hg-hg-1-144-specii-4573102674289000",
+          "kit_id": "beyblade-x-ux00-ss",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "seed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Booster",
+          "series_key": "beyblade_limited",
           "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
           },
           "names": {
-            "ja": "HG 1 / 144 デスティニーガンダムSpecII&ゼウスシルエット",
-            "zh": "HG 1 / 144 命运高达SpecII&ゼウスシルエット",
-            "ko": "HG 1 / 144 데스티니건담SpecII&ゼウスシルエット",
-            "en": "HG 1 / 144 Destiny Gundam SpecII&ゼウスシルエット"
+            "ja": "UX-00 【アプリ・イベント限定】 スコーピオスピア0-70Z メタルコート:マゼンタ",
+            "zh": "UX-00 【アプリ・イベント限定】 スコーピオスピア0-70Z メタルコート:マゼンタ",
+            "ko": "UX-00 【アプリ・イベント한정】 スコーピオスピア0-70Z メタルコート:マゼンタ",
+            "en": "UX-00 [アプリ イベントLimited] スコーピオスピア0-70Z メタルコート:マゼンタ"
           },
-          "release_date": "2024-11-23",
-          "price_jpy": 7920,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102674289000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000222391/"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-4573102674630000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "double_o",
-          "series_labels": {
-            "zh": "00",
-            "en": "00",
-            "ja": "00",
-            "ko": "00"
-          },
-          "names": {
-            "ja": "MG 1 / 100 ガンダムベース限定 ガンダムエクシア [クリアカラー]",
-            "zh": "MG 1 / 100 高达ベース限定 高达能天使 [透明色]",
-            "ko": "MG 1 / 100 건담ベース한정 건담엑시아 [클리어 컬러]",
-            "en": "MG 1 / 100 GundamベースLimited Gundam Exia [Clear Color]"
-          },
-          "release_date": "2024-11-09",
-          "price_jpy": 4840,
+          "release_date": "2026-04-25",
+          "price_jpy": 1800,
           "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [
             "00"
           ],
           "interest_tags": [
-            "gundam",
+            "beyblade",
+            "bbx",
+            "bbx_ux",
+            "bbx_limited",
+            "beyblade_limited",
             "00"
           ],
           "change_reasons": [
@@ -1655,61 +1724,145 @@
             "series"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp"
+            "takara_tomy_beyblade_x_jp"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102674630000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "hg-hg-1-144-4573102674142000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "HG 1 / 144 ブラックナイトスコードカルラ",
-            "zh": "HG 1 / 144 ブラックナイトスコードカルラ",
-            "ko": "HG 1 / 144 ブラックナイトスコードカルラ",
-            "en": "HG 1 / 144 ブラックナイトスコードカルラ"
-          },
-          "release_date": "2024-10-26",
-          "price_jpy": 4070,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102674142000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000222388/"
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/ux00-ss.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
           ]
         }
       ],
       "removed": [],
       "watched": [
         {
+          "kit_id": "tamashii-16006",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ミーティア",
+            "zh": "ミーティア",
+            "ko": "미티어",
+            "en": "ミーティア"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 88000,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16006/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-15968",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "SH_FIGUARTS",
+          "subline": "S.H.Figuarts",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "キラ・ヤマト(オーブ連合首長国パイロットスーツVer.)",
+            "zh": "キラ・ヤマト(オーブ連合首長国パイロットスーツVer.)",
+            "ko": "キラ・ヤマト(オーブ連合首長国パイロットスーツVer.)",
+            "en": "キラ ヤマト(オーブ連合首長国パイロットスーツVer.)"
+          },
+          "release_date": "2026-12",
+          "price_jpy": 9900,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/15968/",
+            "https://tamashiiweb.com/item_brand/shfiguarts/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-cx00-tiga",
+          "change_type": "changed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Starter",
+          "series_key": "beyblade_cx",
+          "series_labels": {
+            "zh": "CX",
+            "en": "CX",
+            "ja": "CX",
+            "ko": "CX"
+          },
+          "names": {
+            "ja": "CX-00 ティガレイジFT3-60T",
+            "zh": "CX-00 ティガレイジFT3-60T",
+            "ko": "CX-00 ティガレイジFT3-60T",
+            "en": "CX-00 ティガレイジFT3-60T"
+          },
+          "release_date": "2026-09-12",
+          "price_jpy": 2750,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_cx",
+            "beyblade_cx",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-tiga.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
           "kit_id": "mg-mg-1-100-4573102743145000",
           "change_type": "changed",
           "franchise": "gundam",
@@ -1755,6 +1908,187 @@
           ]
         },
         {
+          "kit_id": "beyblade-x-cx00-eva",
+          "change_type": "changed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Set",
+          "series_key": "beyblade_cx",
+          "series_labels": {
+            "zh": "CX",
+            "en": "CX",
+            "ja": "CX",
+            "ko": "CX"
+          },
+          "names": {
+            "ja": "CX-00 エヴァンゲリオンデッキセット",
+            "zh": "CX-00 エヴァンゲリオンデッキ套装",
+            "ko": "CX-00 에반게리온 덱 세트",
+            "en": "CX-00 エヴァンゲリオンデッキSet"
+          },
+          "release_date": "2026-08-29",
+          "price_jpy": 7500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_cx",
+            "beyblade_cx",
+            "00"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-eva.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-ux00-gv",
+          "change_type": "changed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Starter",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "UX-00 【イベント限定】 グローリーワルキューレLF メタルコート:ブルー",
+            "zh": "UX-00 【イベント限定】 グローリーワルキューレLF メタルコート:ブルー",
+            "ko": "UX-00 【イベント한정】 グローリーワルキューレLF メタルコート:ブルー",
+            "en": "UX-00 [イベントLimited] グローリーワルキューレLF メタルコート:ブルー"
+          },
+          "release_date": "2026-08-29",
+          "price_jpy": 2800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_ux",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/ux00-gv.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-bx00-ds-v2",
+          "change_type": "changed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Booster",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "BX-00 【B4ストア限定】 ドランソード3-60F バージョン2.0",
+            "zh": "BX-00 【B4ストア限定】 ドランソード3-60F バージョン2.0",
+            "ko": "BX-00 【B4ストア한정】 ドランソード3-60F バージョン2.0",
+            "en": "BX-00 [B4ストアLimited] ドランソード3-60F バージョン2.0"
+          },
+          "release_date": "2026-08-08",
+          "price_jpy": 1600,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_bx",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/bx00-ds_v2.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-bx-00-140",
+          "change_type": "changed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Starter",
+          "series_key": "beyblade_bx",
+          "series_labels": {
+            "zh": "BX",
+            "en": "BX",
+            "ja": "BX",
+            "ko": "BX"
+          },
+          "names": {
+            "ja": "BX-00 ストームペガシス3-70RA",
+            "zh": "BX-00 ストームペガシス3-70RA",
+            "ko": "BX-00 스톰 페가시스 3-70RA",
+            "en": "BX-00 ストームペガシス3-70RA"
+          },
+          "release_date": "2026-07-11",
+          "price_jpy": 2620,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_bx",
+            "beyblade_bx",
+            "00"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
           "kit_id": "hg-hg-1-144-4573102742490000",
           "change_type": "changed",
           "franchise": "gundam",
@@ -1793,6 +2127,276 @@
           ],
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102742490000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-cx00-kw",
+          "change_type": "changed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Booster",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "CX-00 【アプリ・イベント限定】 クラーケンリグルS3-70O メタルコート:ブルー",
+            "zh": "CX-00 【アプリ・イベント限定】 クラーケンリグルS3-70O メタルコート:ブルー",
+            "ko": "CX-00 【アプリ・イベント한정】 クラーケンリグルS3-70O メタルコート:ブルー",
+            "en": "CX-00 [アプリ イベントLimited] クラーケンリグルS3-70O メタルコート:ブルー"
+          },
+          "release_date": "2026-07-09",
+          "price_jpy": 1800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_cx",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-kw.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-cx00-drb",
+          "change_type": "changed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Booster",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "CX-00 【アプリ・イベント限定】 ドレイクブレイブG4-70I メタルコート:ブルー",
+            "zh": "CX-00 【アプリ・イベント限定】 ドレイクブレイブG4-70I メタルコート:ブルー",
+            "ko": "CX-00 【アプリ・イベント한정】 ドレイクブレイブG4-70I メタルコート:ブルー",
+            "en": "CX-00 [アプリ イベントLimited] ドレイクブレイブG4-70I メタルコート:ブルー"
+          },
+          "release_date": "2026-07-09",
+          "price_jpy": 1900,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_cx",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-drb.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-cx00-ba",
+          "change_type": "changed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Booster",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "CX-00 【アプリ・イベント限定】 バックスアントラーズB2-60D メタルコート:オレンジ",
+            "zh": "CX-00 【アプリ・イベント限定】 バックスアントラーズB2-60D メタルコート:オレンジ",
+            "ko": "CX-00 【アプリ・イベント한정】 バックスアントラーズB2-60D メタルコート:オレンジ",
+            "en": "CX-00 [アプリ イベントLimited] バックスアントラーズB2-60D メタルコート:オレンジ"
+          },
+          "release_date": "2026-07-09",
+          "price_jpy": 1800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_cx",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-ba.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-cx00-hf",
+          "change_type": "changed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Booster",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "CX-00 【アプリ・イベント限定】 ホーネットフォートR7-60T メタルコート:イエロー",
+            "zh": "CX-00 【アプリ・イベント限定】 ホーネットフォートR7-60T メタルコート:イエロー",
+            "ko": "CX-00 【アプリ・イベント한정】 ホーネットフォートR7-60T メタルコート:イエロー",
+            "en": "CX-00 [アプリ イベントLimited] ホーネットフォートR7-60T メタルコート:イエロー"
+          },
+          "release_date": "2026-07-09",
+          "price_jpy": 1800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_cx",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-hf.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "tamashii-15752",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ストライクフリーダムガンダム ＜リバイバル版＞",
+            "zh": "强袭自由高达 ＜复刻版＞",
+            "ko": "스트라이크 프리덤건담 ＜리바이벌판＞",
+            "en": "Strike Freedom Gundam ＜Revival Ver.＞"
+          },
+          "release_date": "2026-06-27",
+          "price_jpy": 38500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/15752/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-ux-00-133",
+          "change_type": "changed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Starter",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "UX-00 サムライセイバー5-60K メタルコート:サムライブルー サッカー日本代表Ver.",
+            "zh": "UX-00 サムライセイバー5-60K メタルコート:サムライブルー サッカー日本代表Ver.",
+            "ko": "UX-00 サムライセイバー5-60K メタルコート:サムライブルー サッカー日本代表Ver.",
+            "en": "UX-00 サムライセイバー5-60K メタルコート:サムライブルー サッカー日本代表Ver."
+          },
+          "release_date": "2026-06-13",
+          "price_jpy": 2500,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_ux",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
           ]
         },
         {
@@ -1837,187 +2441,57 @@
           ]
         },
         {
-          "kit_id": "mgsd-mgsd-4573102720276000",
+          "kit_id": "beyblade-x-cx00-db",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MGSD",
-          "subline": "MGSD",
-          "series_key": "seed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Booster",
+          "series_key": "beyblade_limited",
           "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
           },
           "names": {
-            "ja": "MGSD デスティニーガンダム",
-            "zh": "MGSD 命运高达",
-            "ko": "MGSD 데스티니건담",
-            "en": "MGSD Destiny Gundam"
+            "ja": "CX-00 【タカラトミーモール・イベント限定】 ドランブレイブS6-60V メタルコート:ブラック",
+            "zh": "CX-00 【タカラトミーモール・イベント限定】 ドランブレイブS6-60V メタルコート:ブラック",
+            "ko": "CX-00 【タカラトミーモール・イベント한정】 ドランブレイブS6-60V メタルコート:ブラック",
+            "en": "CX-00 [タカラトミーモール イベントLimited] ドランブレイブS6-60V メタルコート:ブラック"
           },
-          "release_date": "2026-02-21",
-          "price_jpy": 4950,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102720276000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000247191/"
-          ]
-        },
-        {
-          "kit_id": "hg-hg-1-144-00-4573102720191000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "hathaway",
-          "series_labels": {
-            "zh": "闪哈",
-            "en": "Hathaway",
-            "ja": "閃ハサ",
-            "ko": "섬하사"
-          },
-          "names": {
-            "ja": "HG 1 / 144 グスタフ・カール００型",
-            "zh": "HG 1 / 144 グスタフ・カール００型",
-            "ko": "HG 1 / 144 グスタフ・カール００型",
-            "en": "HG 1 / 144 グスタフ カール００型"
-          },
-          "release_date": "2026-02-07",
-          "price_jpy": 3850,
-          "is_limited": false,
-          "is_premium_bandai": true,
+          "release_date": "2026-05-30",
+          "price_jpy": 1800,
+          "is_limited": true,
+          "is_premium_bandai": false,
           "watch_tags": [
             "00"
           ],
           "interest_tags": [
-            "gundam",
-            "premium_bandai",
+            "beyblade",
+            "bbx",
+            "bbx_cx",
+            "bbx_limited",
+            "beyblade_limited",
             "00"
           ],
           "change_reasons": [
             "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102720191000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000246305/"
-          ]
-        },
-        {
-          "kit_id": "hg-hg-1-144-4573102720030000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "HG 1 / 144 レジェンドガンダム",
-            "zh": "HG 1 / 144 レジェンド高达",
-            "ko": "HG 1 / 144 레전드 건담",
-            "en": "HG 1 / 144 レジェンドGundam"
-          },
-          "release_date": "2026-01-31",
-          "price_jpy": 3080,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102720030000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000245802/"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-4573102699008000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "MG 1 / 100 ガンダムアストレイミラージュフレーム セカンドイシュー",
-            "zh": "MG 1 / 100 高达异端ミラージュフレーム セカンドイシュー",
-            "ko": "MG 1 / 100 건담아스트레이ミラージュフレーム セカンドイシュー",
-            "en": "MG 1 / 100 Gundam Astrayミラージュフレーム セカンドイシュー"
-          },
-          "release_date": "2025-11",
-          "price_jpy": 6600,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "seed"
-          ],
-          "change_reasons": [
-            "name",
             "series"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp"
+            "takara_tomy_beyblade_x_jp"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102699008000&grp_id=5325"
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-db.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
           ]
         },
         {
-          "kit_id": "hg-hg-1-144-specii-4573102688590000",
+          "kit_id": "tamashii-15672",
           "change_type": "changed",
           "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
           "series_key": "seed",
           "series_labels": {
             "zh": "SEED",
@@ -2026,95 +2500,13 @@
             "ko": "SEED"
           },
           "names": {
-            "ja": "HG 1 / 144 デスティニーガンダムSpecII[最終決戦イメージカラー]",
-            "zh": "HG 1 / 144 命运高达SpecII[最终决战イメージカラー]",
-            "ko": "HG 1 / 144 데스티니건담SpecII[최종 결전イメージカラー]",
-            "en": "HG 1 / 144 Destiny Gundam SpecII [Final Battleイメージカラー]"
+            "ja": "プロヴィデンスガンダム CLIMAX BATTLE Ver.",
+            "zh": "天帝高达 CLIMAX BATTLE Ver.",
+            "ko": "프로비던스건담 CLIMAX BATTLE Ver.",
+            "en": "Providence Gundam CLIMAX BATTLE Ver."
           },
-          "release_date": "2025-08",
-          "price_jpy": 2970,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "seed"
-          ],
-          "change_reasons": [
-            "name",
-            "series"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102688590000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-4573102688583000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "MG 1 / 100 ブレイズザクファントム (ディアッカ・エルスマン専用機)",
-            "zh": "MG 1 / 100 ブレイズ扎古ファントム (ディアッカ・エルスマン专用機)",
-            "ko": "MG 1 / 100 ブレイズ자쿠ファントム (ディアッカ・エルスマン전용機)",
-            "en": "MG 1 / 100 ブレイズZakuファントム (ディアッカ エルスマンCustom機)"
-          },
-          "release_date": "2025-08",
-          "price_jpy": 5390,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "seed"
-          ],
-          "change_reasons": [
-            "name",
-            "series"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102688583000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-4573102685391000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "MG 1 / 100 ガンダムベース限定 ガンダムアストレイ レッドフレーム [リサーキュレーションカラー / ネオンピンク］",
-            "zh": "MG 1 / 100 高达ベース限定 高达异端 レッドフレーム [リサーキュレーションカラー / ネオンピンク］",
-            "ko": "MG 1 / 100 건담ベース한정 건담아스트레이 レッドフレーム [リサーキュレーションカラー / ネオンピンク］",
-            "en": "MG 1 / 100 GundamベースLimited Gundam Astray レッドフレーム [リサーキュレーションカラー / ネオンピンク］"
-          },
-          "release_date": "2025-04-11",
-          "price_jpy": 5280,
+          "release_date": "2026-05",
+          "price_jpy": 50600,
           "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [
@@ -2129,153 +2521,19 @@
             "series"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp"
+            "tamashii_web_jp"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102685391000&grp_id=5325"
+            "https://tamashiiweb.com/item/15672/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
           ]
         },
         {
-          "kit_id": "sdw-sdw-heroes-gf-b-4573102683649000",
+          "kit_id": "gframe-fapb32",
           "change_type": "changed",
           "franchise": "gundam",
-          "grade_code": "SDW",
-          "subline": "SD Gundam World",
-          "series_key": "double_o",
-          "series_labels": {
-            "zh": "00",
-            "en": "00",
-            "ja": "00",
-            "ko": "00"
-          },
-          "names": {
-            "ja": "SDW HEROES GF ガンダムアストレア タイプ-B",
-            "zh": "SDW HEROES GF 高达正义女神 タイプ-B",
-            "ko": "SDW HEROES GF 건담아스트레아 타입 -B",
-            "en": "SDW HEROES GF Gundam Astraea タイプ-B"
-          },
-          "release_date": "2025-03-22",
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "00"
-          ],
-          "change_reasons": [
-            "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102683649000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000228132/"
-          ]
-        },
-        {
-          "kit_id": "sdw-sdw-heroes-gf-f-4573102683656000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "SDW",
-          "subline": "SD Gundam World",
-          "series_key": "double_o",
-          "series_labels": {
-            "zh": "00",
-            "en": "00",
-            "ja": "00",
-            "ko": "00"
-          },
-          "names": {
-            "ja": "SDW HEROES GF ガンダムアストレア タイプ-F",
-            "zh": "SDW HEROES GF 高达正义女神 タイプ-F",
-            "ko": "SDW HEROES GF 건담아스트레아 타입 -F",
-            "en": "SDW HEROES GF Gundam Astraea タイプ-F"
-          },
-          "release_date": "2025-03-22",
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "00"
-          ],
-          "change_reasons": [
-            "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102683656000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000228133/"
-          ]
-        },
-        {
-          "kit_id": "sdw-sdw-heroes-gf-4573102683632000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "SDW",
-          "subline": "SD Gundam World",
-          "series_key": "double_o",
-          "series_labels": {
-            "zh": "00",
-            "en": "00",
-            "ja": "00",
-            "ko": "00"
-          },
-          "names": {
-            "ja": "SDW HEROES キャプテンクアンタ GF",
-            "zh": "SDW HEROES キャプテン量子型 GF",
-            "ko": "SDW HEROES キャプテン퀀터 GF",
-            "en": "SDW HEROES キャプテンQan [T] GF"
-          },
-          "release_date": "2025-03-22",
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "00"
-          ],
-          "change_reasons": [
-            "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102683632000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000228131/"
-          ]
-        },
-        {
-          "kit_id": "rg-rg-1-144-specii-4573102672919000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "RG",
-          "subline": "RG",
+          "grade_code": "GFRAME",
+          "subline": "Mobile Suit Gundam G Frame FA",
           "series_key": "seed",
           "series_labels": {
             "zh": "SEED",
@@ -2284,14 +2542,14 @@
             "ko": "SEED"
           },
           "names": {
-            "ja": "RG 1 / 144 ソードインパルスガンダムＳｐｅｃＩＩ",
-            "zh": "RG 1 / 144 ソード脉冲高达ＳｐｅｃＩＩ",
-            "ko": "RG 1 / 144 소드 임펄스건담ＳｐｅｃＩＩ",
-            "en": "RG 1 / 144 ソードImpulse GundamＳｐｅｃＩＩ"
+            "ja": "機動戦士ガンダム GフレームFA ストライクフリーダムガンダム オプションパーツセット【プレミアムバンダイ限定】",
+            "zh": "机动战士高达 GフレームFA 强袭自由高达 选配零件套装【Premium Bandai限定】",
+            "ko": "기동전사 건담 G 프레임 FA 스트라이크 프리덤건담 옵션 파츠 세트【프리미엄 반다이한정】",
+            "en": "Mobile Suit Gundam GフレームFA Strike Freedom Gundam Option Parts Set [Premium BandaiLimited]"
           },
-          "release_date": "2025-03",
-          "price_jpy": 4180,
-          "is_limited": false,
+          "release_date": "2026-05",
+          "price_jpy": 3600,
+          "is_limited": true,
           "is_premium_bandai": true,
           "watch_tags": [
             "seed"
@@ -2299,140 +2557,6 @@
           "interest_tags": [
             "gundam",
             "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102672919000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000254945/"
-          ]
-        },
-        {
-          "kit_id": "hg-hg-1-144-seed-freedom-ver-4573102683427000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "HG 1 / 144 ズゴック(SEED FREEDOM Ver.)",
-            "zh": "HG 1 / 144 ズゴック(SEED FREEDOM Ver.)",
-            "ko": "HG 1 / 144 ズゴック(SEED FREEDOM Ver.)",
-            "en": "HG 1 / 144 ズゴック(SEED FREEDOM Ver.)"
-          },
-          "release_date": "2025-02-22",
-          "price_jpy": 3520,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102683427000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000226930/"
-          ]
-        },
-        {
-          "kit_id": "eg-entry-grade-1-144-4573102683212000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "EG",
-          "subline": "Entry Grade",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "ENTRY GRADE 1 / 144 ストライクルージュ",
-            "zh": "ENTRY GRADE 1 / 144 强袭ルージュ",
-            "ko": "ENTRY GRADE 1 / 144 스트라이크 루즈",
-            "en": "ENTRY GRADE 1 / 144 Strikeルージュ"
-          },
-          "release_date": "2025-01-17",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102683212000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000224494/"
-          ]
-        },
-        {
-          "kit_id": "rg-rg-1-144-4573102673961000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "RG",
-          "subline": "RG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "RG 1 / 144 アカツキガンダム(オオワシ装備)",
-            "zh": "RG 1 / 144 晓高达(オオワシ装备)",
-            "ko": "RG 1 / 144 아카츠키건담( 오오와시 장비)",
-            "en": "RG 1 / 144 Akatsuki Gundam(オオワシEquipment)"
-          },
-          "release_date": "2024-12-14",
-          "price_jpy": 8800,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
             "seed"
           ],
           "change_reasons": [
@@ -2440,85 +2564,45 @@
             "series"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp"
+            "bandai_candy_gundam_jp"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102673961000&grp_id=5325"
+            "https://www.bandai.co.jp/candy/gundam/gframe/faPb32/",
+            "https://www.bandai.co.jp/candy/gundam/gframe/"
           ]
         },
         {
-          "kit_id": "hg-hg-1-144-specii-4573102674289000",
+          "kit_id": "beyblade-x-ux00-ss",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "seed",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Booster",
+          "series_key": "beyblade_limited",
           "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
           },
           "names": {
-            "ja": "HG 1 / 144 デスティニーガンダムSpecII&ゼウスシルエット",
-            "zh": "HG 1 / 144 命运高达SpecII&ゼウスシルエット",
-            "ko": "HG 1 / 144 데스티니건담SpecII&ゼウスシルエット",
-            "en": "HG 1 / 144 Destiny Gundam SpecII&ゼウスシルエット"
+            "ja": "UX-00 【アプリ・イベント限定】 スコーピオスピア0-70Z メタルコート:マゼンタ",
+            "zh": "UX-00 【アプリ・イベント限定】 スコーピオスピア0-70Z メタルコート:マゼンタ",
+            "ko": "UX-00 【アプリ・イベント한정】 スコーピオスピア0-70Z メタルコート:マゼンタ",
+            "en": "UX-00 [アプリ イベントLimited] スコーピオスピア0-70Z メタルコート:マゼンタ"
           },
-          "release_date": "2024-11-23",
-          "price_jpy": 7920,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102674289000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000222391/"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-4573102674630000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "double_o",
-          "series_labels": {
-            "zh": "00",
-            "en": "00",
-            "ja": "00",
-            "ko": "00"
-          },
-          "names": {
-            "ja": "MG 1 / 100 ガンダムベース限定 ガンダムエクシア [クリアカラー]",
-            "zh": "MG 1 / 100 高达ベース限定 高达能天使 [透明色]",
-            "ko": "MG 1 / 100 건담ベース한정 건담엑시아 [클리어 컬러]",
-            "en": "MG 1 / 100 GundamベースLimited Gundam Exia [Clear Color]"
-          },
-          "release_date": "2024-11-09",
-          "price_jpy": 4840,
+          "release_date": "2026-04-25",
+          "price_jpy": 1800,
           "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [
             "00"
           ],
           "interest_tags": [
-            "gundam",
+            "beyblade",
+            "bbx",
+            "bbx_ux",
+            "bbx_limited",
+            "beyblade_limited",
             "00"
           ],
           "change_reasons": [
@@ -2526,55 +2610,11 @@
             "series"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp"
+            "takara_tomy_beyblade_x_jp"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102674630000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "hg-hg-1-144-4573102674142000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "HG 1 / 144 ブラックナイトスコードカルラ",
-            "zh": "HG 1 / 144 ブラックナイトスコードカルラ",
-            "ko": "HG 1 / 144 ブラックナイトスコードカルラ",
-            "en": "HG 1 / 144 ブラックナイトスコードカルラ"
-          },
-          "release_date": "2024-10-26",
-          "price_jpy": 4070,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "name",
-            "series",
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102674142000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000222388/"
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/ux00-ss.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
           ]
         }
       ]
