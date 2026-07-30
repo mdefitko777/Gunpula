@@ -1,4 +1,9 @@
 import { readFile, writeFile } from "node:fs/promises";
+import {
+  KOTOBUKIYA_AC_PORTAL_URL,
+  KOTOBUKIYA_AC_SHOP_URL,
+  parseKotobukiyaShopListings,
+} from "./lib/kotobukiya-shop.mjs";
 
 const OUTPUT_PATH = "data/source-health.json";
 const PB_INDEX_PATH = "data/premium-bandai-jp-index.json";
@@ -10,8 +15,28 @@ const CHECKS = [
   { source_id: "bandai_candy_gundam_jp", url: "https://www.bandai.co.jp/candy/gundam/", expected: /GUNDAM|ガンダム|CONVERGE/i },
   { source_id: "bandai_gashapon_products_jp", url: "https://gashapon.jp/products/result.php?free=%E3%82%AC%E3%83%B3%E3%83%80%E3%83%A0", expected: /ガンダム|GUNDAM|商品/i },
   { source_id: "tamashii_web_jp", url: "https://tamashiiweb.com/item_character/gundam_series/", expected: /METAL BUILD|ROBOT魂|ガンダム/i },
-  { source_id: "kotobukiya_armored_core_jp", url: "https://www.kotobukiya.co.jp/title/armored-core/", expected: /ARMORED CORE|アーマード・コア/i },
   { source_id: "bandai_hobby_pokemon_global", url: "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=select", expected: /Pokemon|Pokémon|Gyarados/i },
+  { source_id: "pokemon_center_jp", url: "https://www.pokemoncenter-online.com/plush-toys/", expected: /ぬいぐるみ|プラッシー|plush|商品/i },
+  { source_id: "takara_tomy_pokemon_jp", url: "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/", expected: /モンコレ|MONCOLLE|ポケモン/i },
+  { source_id: "ichiban_kuji_jp", url: "https://1kuji.com/products/search?index_master_search=47", expected: /一番くじ|itemName|ポケモン/i },
+  { source_id: "banpresto_prize_jp", url: "https://bsp-prize.jp/title/IP00002054/", expected: /products_item|products_name|ポケモン/i },
+];
+
+// Sources that must be represented in the catalog. A source silently dropping to
+// zero records is the signature of an import failure, and is exactly how 40
+// Pokemon Center plush records vanished on 2026-07-28 while every reachability
+// check still said "ok". Coverage is therefore checked against kits.json itself,
+// independent of whether the site happens to answer this runner.
+const CATALOG_SOURCES = [
+  { source_id: "bandai_spirits_products_jp", label: "BANDAI SPIRITS Gunpla" },
+  { source_id: "kotobukiya_armored_core_jp", label: "Kotobukiya Armored Core" },
+  { source_id: "takara_tomy_beyblade_x_jp", label: "Takara Tomy BEYBLADE X" },
+  { source_id: "pokemon_center_jp", label: "Pokemon Center plush" },
+  { source_id: "takara_tomy_pokemon_jp", label: "Takara Tomy Moncolle" },
+  { source_id: "ichiban_kuji_jp", label: "Ichiban Kuji" },
+  { source_id: "banpresto_prize_jp", label: "Banpresto prize" },
+  { source_id: "good_smile_global", label: "Good Smile (Pokemon)" },
+  { source_id: "p_bandai_wayback", label: "Premium Bandai (Wayback)" },
 ];
 
 function nowIso() {
@@ -30,7 +55,7 @@ async function fetchText(url, options = {}) {
       ...(options.referer ? { referer: options.referer } : {}),
     },
   });
-  const text = await response.text();
+  const text = new TextDecoder(options.encoding || "utf-8").decode(await response.arrayBuffer());
   return {
     ok: response.ok,
     status: response.status,
@@ -38,6 +63,40 @@ async function fetchText(url, options = {}) {
     duration_ms: Date.now() - started,
     text,
   };
+}
+
+async function checkKotobukiyaArmoredCore(catalog) {
+  try {
+    const result = await fetchText(KOTOBUKIYA_AC_SHOP_URL, {
+      encoding: "shift_jis",
+      referer: "https://shop.kotobukiya.co.jp/",
+    });
+    const listings = parseKotobukiyaShopListings(result.text);
+    const catalogCount = (catalog.kits || []).filter((kit) =>
+      kit.franchise === "armored_core"
+      && (kit.source_refs || []).some((source) => source.source_id === "kotobukiya_armored_core_jp")
+    ).length;
+    return {
+      source_id: "kotobukiya_armored_core_jp",
+      url: KOTOBUKIYA_AC_PORTAL_URL,
+      status: result.ok && listings.length > 0 ? "ok" : "warning",
+      http_status: result.status,
+      final_url: result.final_url,
+      duration_ms: result.duration_ms,
+      item_count: listings.length,
+      catalog_count: catalogCount,
+      access_method: "kotobukiya_official_shop_jp",
+      message: `Official Japanese shop returned ${listings.length} Armored Core listings; catalog currently has ${catalogCount} Kotobukiya records`,
+    };
+  } catch (error) {
+    return {
+      source_id: "kotobukiya_armored_core_jp",
+      url: KOTOBUKIYA_AC_PORTAL_URL,
+      status: "error",
+      access_method: "kotobukiya_official_shop_jp",
+      message: error.message,
+    };
+  }
 }
 
 async function readJson(path, fallback) {
@@ -83,6 +142,32 @@ function catalogStats(catalog) {
     }
   }
   return { byFranchise, bySeries };
+}
+
+// How many catalog records carry each source_id. This is the silent-loss
+// detector: reachability alone said "ok" while the catalog held none of the
+// records, which is what let the Pokemon Center and Kotobukiya gaps sit unnoticed.
+function checkCatalogCoverage(catalog) {
+  const counts = new Map(CATALOG_SOURCES.map((source) => [source.source_id, 0]));
+  for (const kit of catalog.kits || []) {
+    for (const ref of kit.source_refs || []) {
+      if (counts.has(ref.source_id)) counts.set(ref.source_id, counts.get(ref.source_id) + 1);
+    }
+  }
+  const sources = CATALOG_SOURCES.map((source) => ({
+    source_id: source.source_id,
+    label: source.label,
+    catalog_count: counts.get(source.source_id) || 0,
+  }));
+  const empty = sources.filter((source) => source.catalog_count === 0);
+  return {
+    source_id: "catalog_coverage",
+    status: empty.length ? "error" : "ok",
+    sources,
+    message: empty.length
+      ? `${empty.length} source(s) have no catalog records: ${empty.map((s) => s.source_id).join(", ")}`
+      : `all ${sources.length} tracked sources are represented in the catalog`,
+  };
 }
 
 async function checkGeneric(check) {
@@ -176,8 +261,10 @@ async function checkBeyblade(catalog) {
 async function main() {
   const catalog = JSON.parse(await readFile("data/kits.json", "utf8"));
   const checks = [
+    checkCatalogCoverage(catalog),
     await checkPremiumBandai(),
     await checkBeyblade(catalog),
+    await checkKotobukiyaArmoredCore(catalog),
     ...(await Promise.all(CHECKS.map(checkGeneric))),
   ];
   const report = {
@@ -190,6 +277,21 @@ async function main() {
   await writeFile(OUTPUT_PATH, `${JSON.stringify(report, null, 2)}\n`, "utf8");
   const failed = checks.filter((check) => ["blocked", "error"].includes(check.status));
   console.log(`Wrote ${OUTPUT_PATH}: ${checks.length} checks, ${failed.length} blocked/error.`);
+
+  // A source with zero catalog records means the data is actually broken, so fail
+  // the run: that makes the daily workflow's "Report failure" step open an issue.
+  // Without this the report was only ever written to a file nobody reads, which is
+  // why 40 Pokemon Center records could vanish unnoticed.
+  //
+  // Reachability problems deliberately do NOT fail the run. p_bandai_jp is
+  // permanently "blocked" by design (geo-locked, read through other routes) and
+  // sites like Kotobukiya answer 403 to cloud IPs while the data is still fine —
+  // failing on those would train everyone to ignore a red build.
+  const coverage = checks.find((check) => check.source_id === "catalog_coverage");
+  if (coverage?.status === "error") {
+    console.error(`Catalog coverage failure: ${coverage.message}`);
+    process.exitCode = 1;
+  }
 }
 
 main().catch((error) => {
