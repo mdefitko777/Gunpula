@@ -398,15 +398,51 @@ async function main() {
     return a.names.ja.localeCompare(b.names.ja, "ja");
   });
 
+  // Merge into the existing catalog instead of replacing it.
+  //
+  // This script runs first in `npm run import:data`, and it used to write the
+  // file with only its own scraped kits. That silently made the whole catalog
+  // disposable: every later importer had to re-add its own slice from scratch,
+  // so any source that failed on a given day lost all of its records. On
+  // 2026-07-28 the Pokemon Center page returned an interstitial, its importer
+  // skipped (by design), and 40 POKE_PLUSH records vanished from the catalog.
+  //
+  // Merging by kit_id keeps this run authoritative for the kits it did scrape
+  // while leaving every other source's records intact.
+  const existingDoc = await readCatalog();
+  const byId = new Map((existingDoc.kits || []).map((kit) => [kit.kit_id, kit]));
+  for (const kit of kits) {
+    const previous = byId.get(kit.kit_id);
+    byId.set(kit.kit_id, previous ? { ...previous, ...kit } : kit);
+  }
+  const merged = [...byId.values()].sort((a, b) => {
+    const dateCompare = String(b.release_date ?? "").localeCompare(String(a.release_date ?? ""));
+    if (dateCompare) return dateCompare;
+    return String(a.names?.ja ?? a.kit_id).localeCompare(String(b.names?.ja ?? b.kit_id), "ja");
+  });
+
   const doc = {
+    ...existingDoc,
     schema_version: 1,
     updated_at: new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date()),
     scope: "Individual Gunpla kit catalog imported from Japanese official BANDAI SPIRITS product search. Records are needs_review until field-level human checks are complete.",
-    kits,
+    kits: merged,
   };
 
   await writeFile("data/kits.json", `${JSON.stringify(doc, null, 2)}\n`, "utf8");
-  console.log(`Imported ${kits.length} kit records. Skipped ${skipped} non-kit/accessory/duplicate records.`);
+  console.log(
+    `Imported ${kits.length} kit records (catalog now ${merged.length}). Skipped ${skipped} non-kit/accessory/duplicate records.`,
+  );
+}
+
+// Missing or unreadable catalog must not abort the import; start from empty.
+async function readCatalog() {
+  try {
+    const parsed = JSON.parse(await readFile("data/kits.json", "utf8"));
+    return parsed && Array.isArray(parsed.kits) ? parsed : { kits: [] };
+  } catch {
+    return { kits: [] };
+  }
 }
 
 main().catch((error) => {
