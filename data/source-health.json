@@ -1,30 +1,79 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-30T07:52:22.086Z",
+  "generated_at": "2026-07-30T08:14:05.444Z",
   "updated_at": "2026-07-30",
   "catalog": {
     "byFranchise": {
-      "armored_core": 20,
+      "fate": 423,
+      "armored_core": 58,
       "gundam": 4031,
-      "pokemon": 479,
       "beyblade": 148,
-      "fate": 423
+      "pokemon": 479
     },
     "bySeries": {
-      "beyblade_bx": 55,
-      "beyblade_limited": 52,
-      "beyblade_cx": 20,
-      "beyblade_ux": 21
+      "unknown": 148
     }
   },
   "checks": [
+    {
+      "source_id": "catalog_coverage",
+      "status": "ok",
+      "sources": [
+        {
+          "source_id": "bandai_spirits_products_jp",
+          "label": "BANDAI SPIRITS Gunpla",
+          "catalog_count": 2335
+        },
+        {
+          "source_id": "kotobukiya_armored_core_jp",
+          "label": "Kotobukiya Armored Core",
+          "catalog_count": 38
+        },
+        {
+          "source_id": "takara_tomy_beyblade_x_jp",
+          "label": "Takara Tomy BEYBLADE X",
+          "catalog_count": 148
+        },
+        {
+          "source_id": "pokemon_center_jp",
+          "label": "Pokemon Center plush",
+          "catalog_count": 40
+        },
+        {
+          "source_id": "takara_tomy_pokemon_jp",
+          "label": "Takara Tomy Moncolle",
+          "catalog_count": 145
+        },
+        {
+          "source_id": "ichiban_kuji_jp",
+          "label": "Ichiban Kuji",
+          "catalog_count": 10
+        },
+        {
+          "source_id": "banpresto_prize_jp",
+          "label": "Banpresto prize",
+          "catalog_count": 15
+        },
+        {
+          "source_id": "good_smile_global",
+          "label": "Good Smile (Pokemon)",
+          "catalog_count": 14
+        },
+        {
+          "source_id": "p_bandai_wayback",
+          "label": "Premium Bandai (Wayback)",
+          "catalog_count": 129
+        }
+      ],
+      "message": "all 9 tracked sources are represented in the catalog"
+    },
     {
       "source_id": "p_bandai_jp",
       "url": "https://p-bandai.jp/hobby/a0001/list-da20-n3/",
       "status": "blocked",
       "http_status": 200,
       "final_url": "https://p-bandai.jp/global_newpc.html",
-      "duration_ms": 325,
+      "duration_ms": 1477,
       "item_count": 1423,
       "direct_status": "blocked",
       "access_method": "bandai_spirits_product_buttons",
@@ -36,7 +85,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/",
-      "duration_ms": 1804,
+      "duration_ms": 3230,
       "item_count": 148,
       "catalog_count": 148,
       "buckets": {
@@ -48,12 +97,24 @@
       "message": "Official lineup parsed 148 BBX products; catalog currently has 148"
     },
     {
+      "source_id": "kotobukiya_armored_core_jp",
+      "url": "https://www.kotobukiya.co.jp/title/armored-core/",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90",
+      "duration_ms": 1214,
+      "item_count": 43,
+      "catalog_count": 38,
+      "access_method": "kotobukiya_official_shop_jp",
+      "message": "Official Japanese shop returned 43 Armored Core listings; catalog currently has 38 Kotobukiya records"
+    },
+    {
       "source_id": "bandai_spirits_products_jp",
       "url": "https://bandai-hobby.net/site/gunpla.html",
       "status": "ok",
       "http_status": 200,
       "final_url": "https://bandai-hobby.net/site/gunpla.html",
-      "duration_ms": 839,
+      "duration_ms": 599,
       "message": "reachable"
     },
     {
@@ -62,7 +123,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://www.bandai.co.jp/candy/gundam/",
-      "duration_ms": 1512,
+      "duration_ms": 888,
       "message": "reachable"
     },
     {
@@ -71,7 +132,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://gashapon.jp/products/result.php?free=%E3%82%AC%E3%83%B3%E3%83%80%E3%83%A0",
-      "duration_ms": 1777,
+      "duration_ms": 888,
       "message": "reachable"
     },
     {
@@ -80,17 +141,8 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://tamashiiweb.com/item_character/gundam_series/",
-      "duration_ms": 504,
+      "duration_ms": 922,
       "message": "reachable"
-    },
-    {
-      "source_id": "kotobukiya_armored_core_jp",
-      "url": "https://www.kotobukiya.co.jp/title/armored-core/",
-      "status": "warning",
-      "http_status": 403,
-      "final_url": "https://www.kotobukiya.co.jp/title/armored-core/",
-      "duration_ms": 558,
-      "message": "reachable but expected product markers were not found"
     },
     {
       "source_id": "bandai_hobby_pokemon_global",
@@ -98,7 +150,43 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=select",
-      "duration_ms": 737,
+      "duration_ms": 446,
+      "message": "reachable"
+    },
+    {
+      "source_id": "pokemon_center_jp",
+      "url": "https://www.pokemoncenter-online.com/plush-toys/",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://www.pokemoncenter-online.com/plush-toys/",
+      "duration_ms": 1350,
+      "message": "reachable"
+    },
+    {
+      "source_id": "takara_tomy_pokemon_jp",
+      "url": "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/",
+      "duration_ms": 886,
+      "message": "reachable"
+    },
+    {
+      "source_id": "ichiban_kuji_jp",
+      "url": "https://1kuji.com/products/search?index_master_search=47",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://1kuji.com/products/search?index_master_search=47",
+      "duration_ms": 886,
+      "message": "reachable"
+    },
+    {
+      "source_id": "banpresto_prize_jp",
+      "url": "https://bsp-prize.jp/title/IP00002054/",
+      "status": "ok",
+      "http_status": 200,
+      "final_url": "https://bsp-prize.jp/title/IP00002054/",
+      "duration_ms": 1201,
       "message": "reachable"
     }
   ]
