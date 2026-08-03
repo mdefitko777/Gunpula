@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-08-03",
-  "generated_at": "2026-08-02T20:03:31.361Z",
+  "generated_at": "2026-08-03T06:47:58.395Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,38 +16,80 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-08-02T20:03:30.635Z",
+    "generated_at": "2026-08-03T06:47:57.624Z",
     "blocked_count": 1,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-08-03",
-      "generated_at": "2026-08-02T20:03:31.361Z",
+      "generated_at": "2026-08-03T06:47:58.395Z",
       "total_before": 5195,
-      "total_after": 5214,
-      "added_count": 19,
-      "changed_count": 44,
+      "total_after": 5217,
+      "added_count": 22,
+      "changed_count": 164,
       "removed_count": 0,
       "watched_count": 0,
       "premium_bandai_count": 21,
       "bbx_count": 0,
       "franchise_counts": {
-        "pokemon": 42,
+        "pokemon": 140,
+        "armored_core": 5,
+        "fate": 20,
         "gundam": 21
       },
       "reason_counts": {
-        "new": 19,
-        "source": 21,
-        "image": 23
+        "new": 22,
+        "name": 11,
+        "image": 142,
+        "source": 31
       },
       "interest_tags": [
         "pokemon",
+        "armored_core",
+        "fate",
         "gundam",
         "premium_bandai"
       ],
       "watch_tags": [],
       "added": [
+        {
+          "kit_id": "moncolle-mc-5",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "コイキング・ギャラドスセット",
+            "zh": "コイキング・ギャラドス套装",
+            "ko": "コイキング・ギャラドス세트",
+            "en": "コイキング ギャラドスSet"
+          },
+          "release_date": "2026-08",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/magikarp_gyarados_set/"
+          ]
+        },
         {
           "kit_id": "pokemon-center-4521329389684",
           "change_type": "added",
@@ -754,803 +796,760 @@
       ],
       "changed": [
         {
-          "kit_id": "ng-1-100-4902425087108000",
+          "kit_id": "moncolle-mc-0",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
           "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
           },
           "names": {
-            "ja": "1 / 100 シャア専用ザク",
-            "zh": "1 / 100 夏亚专用扎古",
-            "ko": "1 / 100 샤아 전용자쿠",
-            "en": "1 / 100 シャアCustomZaku"
+            "ja": "ピカチュウセレクション ねむるピカチュウ",
+            "zh": "ピカチュウセレクション ねむるピカチュウ",
+            "ko": "ピカチュウセレクション ねむるピカチュウ",
+            "en": "ピカチュウセレクション ねむるピカチュウ"
           },
-          "release_date": "1981-07",
-          "price_jpy": 770,
+          "release_date": "2026-09",
+          "price_jpy": null,
           "is_limited": false,
-          "is_premium_bandai": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "pokemon"
           ],
           "change_reasons": [
-            "source"
+            "name"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087108000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000150066/"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/pokemon_30th/nemuru_pikachu/"
           ]
         },
         {
-          "kit_id": "ng-1-144-4902425086606000",
+          "kit_id": "ichibankuji-pk-masters",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
+          "franchise": "pokemon",
+          "grade_code": "POKE_KUJI",
+          "subline": "一番くじ",
+          "series_key": "pokemon",
           "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
           },
           "names": {
-            "ja": "1 / 144 ギャン",
-            "zh": "1 / 144 ギャン",
-            "ko": "1 / 144 ギャン",
-            "en": "1 / 144 ギャン"
+            "ja": "一番くじ ポケモンマスターズ EX 7th Anniversary",
+            "zh": "一番くじ 宝可梦マスターズ EX 7th Anniversary",
+            "ko": "一番くじ 포켓몬マスターズ EX 7th Anniversary",
+            "en": "一番くじ Pokemonマスターズ EX 7th Anniversary"
           },
-          "release_date": "1981-07",
-          "price_jpy": 330,
-          "is_limited": false,
-          "is_premium_bandai": true,
+          "release_date": "2026-08-29",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "pokemon"
           ],
           "change_reasons": [
-            "source"
+            "image"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "ichiban_kuji_jp"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086606000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137251/"
+            "https://1kuji.com/products/pk_masters"
           ]
         },
         {
-          "kit_id": "ng-1-144-4902425086576000",
+          "kit_id": "moncolle-mc-4",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
           "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
           },
           "names": {
-            "ja": "1 / 144 シャア専用ズゴック",
-            "zh": "1 / 144 夏亚专用ズゴック",
-            "ko": "1 / 144 샤아 전용ズゴック",
-            "en": "1 / 144 シャアCustomズゴック"
+            "ja": "ピカチュウセレクション みるピカチュウ",
+            "zh": "ピカチュウセレクション みるピカチュウ",
+            "ko": "ピカチュウセレクション みるピカチュウ",
+            "en": "ピカチュウセレクション みるピカチュウ"
           },
-          "release_date": "1981-07",
-          "price_jpy": 330,
+          "release_date": "2026-08",
+          "price_jpy": null,
           "is_limited": false,
-          "is_premium_bandai": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "pokemon"
           ],
           "change_reasons": [
+            "name",
+            "image",
             "source"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "takara_tomy_pokemon_jp"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086576000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146633/"
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/pokemon_30th/miru_pikachu/"
           ]
         },
         {
-          "kit_id": "ng-1-100-4902425087122000",
+          "kit_id": "ichibankuji-pk30th-2",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
+          "franchise": "pokemon",
+          "grade_code": "POKE_KUJI",
+          "subline": "一番くじ",
+          "series_key": "pokemon",
           "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
           },
           "names": {
-            "ja": "1 / 100 量産型ゲルググ",
-            "zh": "1 / 100 量产型勇士",
-            "ko": "1 / 100 양산형겔구그",
-            "en": "1 / 100 Mass Production TypeGelgoog"
+            "ja": "一番くじ ポケモン 30th ANNIVERSARY vol.2",
+            "zh": "一番くじ 宝可梦 30th ANNIVERSARY vol.2",
+            "ko": "一番くじ 포켓몬 30th ANNIVERSARY vol.2",
+            "en": "一番くじ Pokémon 30th ANNIVERSARY vol.2"
           },
-          "release_date": "1981-06",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
+          "release_date": "2026-07-18",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "pokemon"
           ],
           "change_reasons": [
-            "source"
+            "image"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "ichiban_kuji_jp"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087122000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137268/"
+            "https://1kuji.com/products/pk30th_2"
           ]
         },
         {
-          "kit_id": "ng-1-144-4902425087115000",
+          "kit_id": "acvi-4934054064595",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "D-スタイル",
+          "series_key": "armored_core",
           "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
           },
           "names": {
-            "ja": "1 / 144 シャア専用ゲルググ",
-            "zh": "1 / 144 夏亚专用勇士",
-            "ko": "1 / 144 샤아 전용겔구그",
-            "en": "1 / 144 シャアCustomGelgoog"
+            "ja": "D-スタイル ラインアーク ホワイト・グリント",
+            "zh": "D-スタイル ラインアーク ホワイト・グリント",
+            "ko": "D-スタイル ラインアーク ホワイト・グリント",
+            "en": "D-スタイル ラインアーク ホワイト グリント"
           },
-          "release_date": "1981-06",
-          "price_jpy": 550,
+          "release_date": "2025-01-17",
+          "price_jpy": 3960,
           "is_limited": false,
-          "is_premium_bandai": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "armored_core"
           ],
           "change_reasons": [
-            "source"
+            "image"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "kotobukiya_armored_core_jp"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087115000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000143600/"
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054064595/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
           ]
         },
         {
-          "kit_id": "ng-1-144-4902425086569000",
+          "kit_id": "acvi-4934054064977",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "D-スタイル",
+          "series_key": "armored_core",
           "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
           },
           "names": {
-            "ja": "1 / 144 ガンキャノン",
-            "zh": "1 / 144 ガンキャノン",
-            "ko": "1 / 144 ガンキャノン",
-            "en": "1 / 144 ガンキャノン"
+            "ja": "D-スタイル ローゼンタール タイプ-オーギル ノブリス・オブリージュ",
+            "zh": "D-スタイル ローゼンタール タイプ-オーギル ノブリス・オブリージュ",
+            "ko": "D-スタイル ローゼンタール タイプ-オーギル ノブリス・オブリージュ",
+            "en": "D-スタイル ローゼンタール タイプ-オーギル ノブリス オブリージュ"
           },
-          "release_date": "1981-05",
-          "price_jpy": 330,
+          "release_date": "2025-01-17",
+          "price_jpy": 3960,
           "is_limited": false,
-          "is_premium_bandai": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "armored_core"
           ],
           "change_reasons": [
-            "source"
+            "image"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "kotobukiya_armored_core_jp"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086569000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000142768/"
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054064977/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
           ]
         },
         {
-          "kit_id": "ng-1-144-4902425087085000",
+          "kit_id": "acvi-4934054064984",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "V.I.シリーズ",
+          "series_key": "armored_core",
           "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
           },
           "names": {
-            "ja": "1 / 144 ガンタンク",
-            "zh": "1 / 144 ガンタンク",
-            "ko": "1 / 144 ガンタンク",
-            "en": "1 / 144 ガンタンク"
+            "ja": "ミラージュ C04-ATLAS フォックス・アイ Ver.",
+            "zh": "ミラージュ C04-ATLAS フォックス・アイ Ver.",
+            "ko": "ミラージュ C04-ATLAS フォックス・アイ Ver.",
+            "en": "ミラージュ C04-ATLAS フォックス アイ Ver."
           },
-          "release_date": "1981-05",
-          "price_jpy": 660,
+          "release_date": "2025-01-17",
+          "price_jpy": 6600,
           "is_limited": false,
-          "is_premium_bandai": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "armored_core"
           ],
           "change_reasons": [
-            "source"
+            "image"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "kotobukiya_armored_core_jp"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087085000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137260/"
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054064984/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
           ]
         },
         {
-          "kit_id": "ng-1-144-4902425086682000",
+          "kit_id": "goodsmile-fate-10713",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "other",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "其他",
-            "en": "Other",
-            "ja": "その他",
-            "ko": "기타"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "1 / 144 ゴッグ",
-            "zh": "1 / 144 ゴッグ",
-            "ko": "1 / 144 ゴッグ",
-            "en": "1 / 144 ゴッグ"
+            "ja": "Assassin / Semiramis",
+            "zh": "Assassin / Semiramis",
+            "ko": "Assassin / Semiramis",
+            "en": "Assassin / Semiramis"
           },
-          "release_date": "1981-05",
-          "price_jpy": 440,
+          "release_date": "2023-05",
+          "price_jpy": 31680,
           "is_limited": false,
-          "is_premium_bandai": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "fate"
           ],
           "change_reasons": [
-            "source"
+            "image"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "good_smile_fate_en"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086682000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000142770/"
+            "https://www.goodsmile.info/en/product/10713/Assassin+Semiramis.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8407"
           ]
         },
         {
-          "kit_id": "ng-1-144-4902425086583000",
+          "kit_id": "goodsmile-fate-10958",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "1 / 144 ジム",
-            "zh": "1 / 144 吉姆",
-            "ko": "1 / 144 짐",
-            "en": "1 / 144 GM"
+            "ja": "Saber / Altria Pendragon (Alter): Heroic Spirit Traveling Outfit Ver.",
+            "zh": "Saber / Altria Pendragon (Alter): Heroic Spirit Traveling Outfit Ver.",
+            "ko": "Saber / Altria Pendragon (Alter): Heroic Spirit Traveling Outfit Ver.",
+            "en": "Saber / Altria Pendragon (Alter): Heroic Spirit Traveling Outfit Ver."
           },
-          "release_date": "1981-04",
-          "price_jpy": 330,
+          "release_date": "2022-03",
+          "price_jpy": 16800,
           "is_limited": false,
-          "is_premium_bandai": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "fate"
           ],
           "change_reasons": [
-            "source"
+            "image"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "good_smile_fate_en"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086583000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000145877/"
+            "https://www.goodsmile.info/en/product/10958/Saber+Altria+Pendragon+Alter+Heroic+Spirit+Traveling+Outfit+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8652"
           ]
         },
         {
-          "kit_id": "ng-1-144-4902425086644000",
+          "kit_id": "goodsmile-fate-10966",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "option",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "配件",
-            "en": "Option",
-            "ja": "オプション",
-            "ko": "옵션"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "1 / 144 武器セット",
-            "zh": "1 / 144 武器套装",
-            "ko": "1 / 144 무기 세트",
-            "en": "1 / 144 Weapon Set"
+            "ja": "figma Saber / Okita Souji",
+            "zh": "figma Saber / Okita Souji",
+            "ko": "figma Saber / Okita Souji",
+            "en": "figma Saber / Okita Souji"
           },
-          "release_date": "1981-04",
-          "price_jpy": 330,
+          "release_date": "2022-02",
+          "price_jpy": 8800,
           "is_limited": false,
-          "is_premium_bandai": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "fate"
           ],
           "change_reasons": [
-            "source"
+            "image"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "good_smile_fate_en"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086644000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146640/"
+            "https://www.goodsmile.info/en/product/10966/figma+Saber+Okita+Souji.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8660"
           ]
         },
         {
-          "kit_id": "ng-1-100-4902425087061000",
+          "kit_id": "goodsmile-fate-10965",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "1 / 100 ガンキャノン",
-            "zh": "1 / 100 ガンキャノン",
-            "ko": "1 / 100 ガンキャノン",
-            "en": "1 / 100 ガンキャノン"
+            "ja": "figma Saber / Okita Souji: Ascension ver.",
+            "zh": "figma Saber / Okita Souji: Ascension ver.",
+            "ko": "figma Saber / Okita Souji: Ascension ver.",
+            "en": "figma Saber / Okita Souji: Ascension ver."
           },
-          "release_date": "1981-03",
-          "price_jpy": 770,
+          "release_date": "2022-02",
+          "price_jpy": 11000,
           "is_limited": false,
-          "is_premium_bandai": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "fate"
           ],
           "change_reasons": [
-            "source"
+            "image"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "good_smile_fate_en"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087061000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137262/"
+            "https://www.goodsmile.info/en/product/10965/figma+Saber+Okita+Souji+Ascension+ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8659"
           ]
         },
         {
-          "kit_id": "ng-1-100-4902425087078000",
+          "kit_id": "goodsmile-fate-6682",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "1 / 100 シャア専用ゲルググ",
-            "zh": "1 / 100 夏亚专用勇士",
-            "ko": "1 / 100 샤아 전용겔구그",
-            "en": "1 / 100 シャアCustomGelgoog"
+            "ja": "figma Ruler / Jeanne d'Arc",
+            "zh": "figma Ruler / Jeanne d'Arc",
+            "ko": "figma Ruler / Jeanne d'Arc",
+            "en": "figma Ruler / Jeanne d'Arc"
           },
-          "release_date": "1981-03",
-          "price_jpy": 880,
+          "release_date": "2021-11",
+          "price_jpy": 8800,
           "is_limited": false,
-          "is_premium_bandai": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "fate"
           ],
           "change_reasons": [
-            "source"
+            "image"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "good_smile_fate_en"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087078000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137267/"
+            "https://www.goodsmile.info/en/product/6682/figma+Ruler+Jeanne+d+Arc.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/4409"
           ]
         },
         {
-          "kit_id": "ng-1-144-4902425087054000",
+          "kit_id": "goodsmile-fate-11037",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "1 / 144 ジオング",
-            "zh": "1 / 144 ジオング",
-            "ko": "1 / 144 ジオング",
-            "en": "1 / 144 ジオング"
+            "ja": "Moon Cancer / BB (2nd Ascension)",
+            "zh": "Moon Cancer / BB (2nd Ascension)",
+            "ko": "Moon Cancer / BB (2nd Ascension)",
+            "en": "Moon Cancer / BB (2nd Ascension)"
           },
-          "release_date": "1981-03",
-          "price_jpy": 660,
+          "release_date": "2021-11",
+          "price_jpy": 20680,
           "is_limited": false,
-          "is_premium_bandai": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "fate"
           ],
           "change_reasons": [
-            "source"
+            "image"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "good_smile_fate_en"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087054000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000150064/"
+            "https://www.goodsmile.info/en/product/11037/Moon+Cancer+BB+2nd+Ascension.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8731"
           ]
         },
         {
-          "kit_id": "ng-1-144-4902425086538000",
+          "kit_id": "goodsmile-fate-11140",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "1 / 144 量産型ザク",
-            "zh": "1 / 144 量产型扎古",
-            "ko": "1 / 144 양산형자쿠",
-            "en": "1 / 144 Mass Production TypeZaku"
+            "ja": "Nendoroid Caster / Altria Caster",
+            "zh": "Nendoroid Caster / Altria Caster",
+            "ko": "Nendoroid Caster / Altria Caster",
+            "en": "Nendoroid Caster / Altria Caster"
           },
-          "release_date": "1981-01",
-          "price_jpy": 330,
+          "release_date": "2021-11",
+          "price_jpy": 5800,
           "is_limited": false,
-          "is_premium_bandai": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "fate"
           ],
           "change_reasons": [
-            "source"
+            "image"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "good_smile_fate_en"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086538000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146629/"
+            "https://www.goodsmile.info/en/product/11140/Nendoroid+Caster+Altria+Caster.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8834"
           ]
         },
         {
-          "kit_id": "ng-1-144-4902425086552000",
+          "kit_id": "goodsmile-fate-6843",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "1 / 144 量産型ズゴック",
-            "zh": "1 / 144 量产型ズゴック",
-            "ko": "1 / 144 양산형ズゴック",
-            "en": "1 / 144 Mass Production Typeズゴック"
+            "ja": "Nendoroid Saber / Arthur Pendragon (Prototype)",
+            "zh": "Nendoroid Saber / Arthur Pendragon (Prototype)",
+            "ko": "Nendoroid Saber / Arthur Pendragon (Prototype)",
+            "en": "Nendoroid Saber / Arthur Pendragon (Prototype)"
           },
-          "release_date": "1980-12",
-          "price_jpy": 330,
+          "release_date": "2021-05",
+          "price_jpy": 4600,
           "is_limited": false,
-          "is_premium_bandai": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "fate"
           ],
           "change_reasons": [
-            "source"
+            "image"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "good_smile_fate_en"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086552000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146634/"
+            "https://www.goodsmile.info/en/product/6843/Nendoroid+Saber+Arthur+Pendragon+Prototype.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/4570"
           ]
         },
         {
-          "kit_id": "ng-1-60-4902425087047000",
+          "kit_id": "goodsmile-fate-6844",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "other",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "其他",
-            "en": "Other",
-            "ja": "その他",
-            "ko": "기타"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "1 / 60 ガンダム",
-            "zh": "1 / 60 高达",
-            "ko": "1 / 60 건담",
-            "en": "1 / 60 Gundam"
+            "ja": "Nendoroid Saber / Arthur Pendragon (Prototype): Ascension Ver.",
+            "zh": "Nendoroid Saber / Arthur Pendragon (Prototype): Ascension Ver.",
+            "ko": "Nendoroid Saber / Arthur Pendragon (Prototype): Ascension Ver.",
+            "en": "Nendoroid Saber / Arthur Pendragon (Prototype): Ascension Ver."
           },
-          "release_date": "1980-12",
-          "price_jpy": 2200,
+          "release_date": "2021-05",
+          "price_jpy": 5907,
           "is_limited": false,
-          "is_premium_bandai": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "fate"
           ],
           "change_reasons": [
-            "source"
+            "image"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "good_smile_fate_en"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087047000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137274/"
+            "https://www.goodsmile.info/en/product/6844/Nendoroid+Saber+Arthur+Pendragon+Prototype+Ascension+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/4571"
           ]
         },
         {
-          "kit_id": "ng-1-60-4902425087016000",
+          "kit_id": "goodsmile-fate-8152",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Goods , Accessory",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "1 / 60 シャア専用ザク",
-            "zh": "1 / 60 夏亚专用扎古",
-            "ko": "1 / 60 샤아 전용자쿠",
-            "en": "1 / 60 シャアCustomZaku"
+            "ja": "Lapis Lazuli Bracelet",
+            "zh": "Lapis Lazuli Bracelet",
+            "ko": "Lapis Lazuli Bracelet",
+            "en": "Lapis Lazuli Bracelet"
           },
-          "release_date": "1980-12",
-          "price_jpy": 2200,
+          "release_date": "2020-07",
+          "price_jpy": 10185,
           "is_limited": false,
-          "is_premium_bandai": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "fate"
           ],
           "change_reasons": [
-            "source"
+            "image"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "good_smile_fate_en"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087016000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000136682/"
+            "https://www.goodsmile.info/en/product/8152/Lapis+Lazuli+Bracelet.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/5860"
           ]
         },
         {
-          "kit_id": "ng-1-144-4902425086545000",
+          "kit_id": "goodsmile-fate-8153",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Goods , Accessory",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "1 / 144 グフ",
-            "zh": "1 / 144 老虎",
-            "ko": "1 / 144 구프",
-            "en": "1 / 144 Gouf"
+            "ja": "Sunset Earrings",
+            "zh": "Sunset Earrings",
+            "ko": "Sunset Earrings",
+            "en": "Sunset Earrings"
           },
-          "release_date": "1980-11",
-          "price_jpy": 330,
+          "release_date": "2020-07",
+          "price_jpy": 15278,
           "is_limited": false,
-          "is_premium_bandai": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "fate"
           ],
           "change_reasons": [
-            "source"
+            "image"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "good_smile_fate_en"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086545000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146632/"
+            "https://www.goodsmile.info/en/product/8153/Sunset+Earrings.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/5861"
           ]
         },
         {
-          "kit_id": "ng-1-144-4902425086521000",
+          "kit_id": "goodsmile-fate-8395",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/8th Scale",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "1 / 144 シャア専用ザク",
-            "zh": "1 / 144 夏亚专用扎古",
-            "ko": "1 / 144 샤아 전용자쿠",
-            "en": "1 / 144 シャアCustomZaku"
+            "ja": "Archer / Gilgamesh",
+            "zh": "Archer / Gilgamesh",
+            "ko": "Archer / Gilgamesh",
+            "en": "Archer / Gilgamesh"
           },
-          "release_date": "1980-09",
-          "price_jpy": 330,
+          "release_date": "2019-11",
+          "price_jpy": 15074,
           "is_limited": false,
-          "is_premium_bandai": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "fate"
           ],
           "change_reasons": [
-            "source"
+            "image"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "good_smile_fate_en"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086521000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146626/"
+            "https://www.goodsmile.info/en/product/8395/Archer+Gilgamesh.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo"
           ]
         },
         {
-          "kit_id": "ng-1-100-4902425086996000",
+          "kit_id": "goodsmile-fate-8305",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "other",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "其他",
-            "en": "Other",
-            "ja": "その他",
-            "ko": "기타"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "1 / 100 ガンダム",
-            "zh": "1 / 100 高达",
-            "ko": "1 / 100 건담",
-            "en": "1 / 100 Gundam"
+            "ja": "figma Saber / Miyamoto Musashi",
+            "zh": "figma Saber / Miyamoto Musashi",
+            "ko": "figma Saber / Miyamoto Musashi",
+            "en": "figma Saber / Miyamoto Musashi"
           },
-          "release_date": "1980-07",
-          "price_jpy": 770,
+          "release_date": "2019-11",
+          "price_jpy": 8800,
           "is_limited": false,
-          "is_premium_bandai": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "fate"
           ],
           "change_reasons": [
-            "source"
+            "image"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "good_smile_fate_en"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086996000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000150065/"
+            "https://www.goodsmile.info/en/product/8305/figma+Saber+Miyamoto+Musashi.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/6013"
           ]
         }
       ],

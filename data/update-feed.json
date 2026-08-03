@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-08-03",
-  "generated_at": "2026-08-02T20:03:31.361Z",
+  "generated_at": "2026-08-03T06:47:58.395Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,38 +16,80 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-08-02T20:03:30.635Z",
+    "generated_at": "2026-08-03T06:47:57.624Z",
     "blocked_count": 1,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-08-03",
-      "generated_at": "2026-08-02T20:03:31.361Z",
+      "generated_at": "2026-08-03T06:47:58.395Z",
       "total_before": 5195,
-      "total_after": 5214,
-      "added_count": 19,
-      "changed_count": 44,
+      "total_after": 5217,
+      "added_count": 22,
+      "changed_count": 164,
       "removed_count": 0,
       "watched_count": 0,
       "premium_bandai_count": 21,
       "bbx_count": 0,
       "franchise_counts": {
-        "pokemon": 42,
+        "pokemon": 140,
+        "armored_core": 5,
+        "fate": 20,
         "gundam": 21
       },
       "reason_counts": {
-        "new": 19,
-        "source": 21,
-        "image": 23
+        "new": 22,
+        "name": 11,
+        "image": 142,
+        "source": 31
       },
       "interest_tags": [
         "pokemon",
+        "armored_core",
+        "fate",
         "gundam",
         "premium_bandai"
       ],
       "watch_tags": [],
       "added": [
+        {
+          "kit_id": "moncolle-mc-5",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "コイキング・ギャラドスセット",
+            "zh": "コイキング・ギャラドス套装",
+            "ko": "コイキング・ギャラドス세트",
+            "en": "コイキング ギャラドスSet"
+          },
+          "release_date": "2026-08",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/magikarp_gyarados_set/"
+          ]
+        },
         {
           "kit_id": "pokemon-center-4521329389684",
           "change_type": "added",
@@ -750,9 +792,1106 @@
           "source_urls": [
             "https://www.pokemoncenter-online.com/4521329420660.html"
           ]
+        },
+        {
+          "kit_id": "moncolle-mc-145",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "フリード",
+            "zh": "フリード",
+            "ko": "フリード",
+            "en": "フリード"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/trainer07/"
+          ]
+        },
+        {
+          "kit_id": "moncolle-mc-110",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "メガギャラドス",
+            "zh": "メガギャラドス",
+            "ko": "メガギャラドス",
+            "en": "メガギャラドス"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/mega_gyarados/"
+          ]
         }
       ],
       "changed": [
+        {
+          "kit_id": "moncolle-mc-0",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ピカチュウセレクション ねむるピカチュウ",
+            "zh": "ピカチュウセレクション ねむるピカチュウ",
+            "ko": "ピカチュウセレクション ねむるピカチュウ",
+            "en": "ピカチュウセレクション ねむるピカチュウ"
+          },
+          "release_date": "2026-09",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/pokemon_30th/nemuru_pikachu/"
+          ]
+        },
+        {
+          "kit_id": "ichibankuji-pk-masters",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_KUJI",
+          "subline": "一番くじ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "一番くじ ポケモンマスターズ EX 7th Anniversary",
+            "zh": "一番くじ 宝可梦マスターズ EX 7th Anniversary",
+            "ko": "一番くじ 포켓몬マスターズ EX 7th Anniversary",
+            "en": "一番くじ Pokemonマスターズ EX 7th Anniversary"
+          },
+          "release_date": "2026-08-29",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "ichiban_kuji_jp"
+          ],
+          "source_urls": [
+            "https://1kuji.com/products/pk_masters"
+          ]
+        },
+        {
+          "kit_id": "moncolle-mc-4",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ピカチュウセレクション みるピカチュウ",
+            "zh": "ピカチュウセレクション みるピカチュウ",
+            "ko": "ピカチュウセレクション みるピカチュウ",
+            "en": "ピカチュウセレクション みるピカチュウ"
+          },
+          "release_date": "2026-08",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name",
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/pokemon_30th/miru_pikachu/"
+          ]
+        },
+        {
+          "kit_id": "ichibankuji-pk30th-2",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_KUJI",
+          "subline": "一番くじ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "一番くじ ポケモン 30th ANNIVERSARY vol.2",
+            "zh": "一番くじ 宝可梦 30th ANNIVERSARY vol.2",
+            "ko": "一番くじ 포켓몬 30th ANNIVERSARY vol.2",
+            "en": "一番くじ Pokémon 30th ANNIVERSARY vol.2"
+          },
+          "release_date": "2026-07-18",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "ichiban_kuji_jp"
+          ],
+          "source_urls": [
+            "https://1kuji.com/products/pk30th_2"
+          ]
+        },
+        {
+          "kit_id": "acvi-4934054064595",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "D-スタイル",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "D-スタイル ラインアーク ホワイト・グリント",
+            "zh": "D-スタイル ラインアーク ホワイト・グリント",
+            "ko": "D-スタイル ラインアーク ホワイト・グリント",
+            "en": "D-スタイル ラインアーク ホワイト グリント"
+          },
+          "release_date": "2025-01-17",
+          "price_jpy": 3960,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054064595/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
+        {
+          "kit_id": "acvi-4934054064977",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "D-スタイル",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "D-スタイル ローゼンタール タイプ-オーギル ノブリス・オブリージュ",
+            "zh": "D-スタイル ローゼンタール タイプ-オーギル ノブリス・オブリージュ",
+            "ko": "D-スタイル ローゼンタール タイプ-オーギル ノブリス・オブリージュ",
+            "en": "D-スタイル ローゼンタール タイプ-オーギル ノブリス オブリージュ"
+          },
+          "release_date": "2025-01-17",
+          "price_jpy": 3960,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054064977/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
+        {
+          "kit_id": "acvi-4934054064984",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "V.I.シリーズ",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "ミラージュ C04-ATLAS フォックス・アイ Ver.",
+            "zh": "ミラージュ C04-ATLAS フォックス・アイ Ver.",
+            "ko": "ミラージュ C04-ATLAS フォックス・アイ Ver.",
+            "en": "ミラージュ C04-ATLAS フォックス アイ Ver."
+          },
+          "release_date": "2025-01-17",
+          "price_jpy": 6600,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054064984/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10713",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Assassin / Semiramis",
+            "zh": "Assassin / Semiramis",
+            "ko": "Assassin / Semiramis",
+            "en": "Assassin / Semiramis"
+          },
+          "release_date": "2023-05",
+          "price_jpy": 31680,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10713/Assassin+Semiramis.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8407"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10958",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Saber / Altria Pendragon (Alter): Heroic Spirit Traveling Outfit Ver.",
+            "zh": "Saber / Altria Pendragon (Alter): Heroic Spirit Traveling Outfit Ver.",
+            "ko": "Saber / Altria Pendragon (Alter): Heroic Spirit Traveling Outfit Ver.",
+            "en": "Saber / Altria Pendragon (Alter): Heroic Spirit Traveling Outfit Ver."
+          },
+          "release_date": "2022-03",
+          "price_jpy": 16800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10958/Saber+Altria+Pendragon+Alter+Heroic+Spirit+Traveling+Outfit+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8652"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10966",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "figma Saber / Okita Souji",
+            "zh": "figma Saber / Okita Souji",
+            "ko": "figma Saber / Okita Souji",
+            "en": "figma Saber / Okita Souji"
+          },
+          "release_date": "2022-02",
+          "price_jpy": 8800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10966/figma+Saber+Okita+Souji.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8660"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-10965",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "figma Saber / Okita Souji: Ascension ver.",
+            "zh": "figma Saber / Okita Souji: Ascension ver.",
+            "ko": "figma Saber / Okita Souji: Ascension ver.",
+            "en": "figma Saber / Okita Souji: Ascension ver."
+          },
+          "release_date": "2022-02",
+          "price_jpy": 11000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/10965/figma+Saber+Okita+Souji+Ascension+ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8659"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-6682",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "figma Ruler / Jeanne d'Arc",
+            "zh": "figma Ruler / Jeanne d'Arc",
+            "ko": "figma Ruler / Jeanne d'Arc",
+            "en": "figma Ruler / Jeanne d'Arc"
+          },
+          "release_date": "2021-11",
+          "price_jpy": 8800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/6682/figma+Ruler+Jeanne+d+Arc.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/4409"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-11037",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Moon Cancer / BB (2nd Ascension)",
+            "zh": "Moon Cancer / BB (2nd Ascension)",
+            "ko": "Moon Cancer / BB (2nd Ascension)",
+            "en": "Moon Cancer / BB (2nd Ascension)"
+          },
+          "release_date": "2021-11",
+          "price_jpy": 20680,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/11037/Moon+Cancer+BB+2nd+Ascension.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8731"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-11140",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Caster / Altria Caster",
+            "zh": "Nendoroid Caster / Altria Caster",
+            "ko": "Nendoroid Caster / Altria Caster",
+            "en": "Nendoroid Caster / Altria Caster"
+          },
+          "release_date": "2021-11",
+          "price_jpy": 5800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/11140/Nendoroid+Caster+Altria+Caster.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/8834"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-6843",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Saber / Arthur Pendragon (Prototype)",
+            "zh": "Nendoroid Saber / Arthur Pendragon (Prototype)",
+            "ko": "Nendoroid Saber / Arthur Pendragon (Prototype)",
+            "en": "Nendoroid Saber / Arthur Pendragon (Prototype)"
+          },
+          "release_date": "2021-05",
+          "price_jpy": 4600,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/6843/Nendoroid+Saber+Arthur+Pendragon+Prototype.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/4570"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-6844",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Saber / Arthur Pendragon (Prototype): Ascension Ver.",
+            "zh": "Nendoroid Saber / Arthur Pendragon (Prototype): Ascension Ver.",
+            "ko": "Nendoroid Saber / Arthur Pendragon (Prototype): Ascension Ver.",
+            "en": "Nendoroid Saber / Arthur Pendragon (Prototype): Ascension Ver."
+          },
+          "release_date": "2021-05",
+          "price_jpy": 5907,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/6844/Nendoroid+Saber+Arthur+Pendragon+Prototype+Ascension+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/4571"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-8152",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Goods , Accessory",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Lapis Lazuli Bracelet",
+            "zh": "Lapis Lazuli Bracelet",
+            "ko": "Lapis Lazuli Bracelet",
+            "en": "Lapis Lazuli Bracelet"
+          },
+          "release_date": "2020-07",
+          "price_jpy": 10185,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/8152/Lapis+Lazuli+Bracelet.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/5860"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-8153",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Goods , Accessory",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Sunset Earrings",
+            "zh": "Sunset Earrings",
+            "ko": "Sunset Earrings",
+            "en": "Sunset Earrings"
+          },
+          "release_date": "2020-07",
+          "price_jpy": 15278,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/8153/Sunset+Earrings.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/5861"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-8395",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/8th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Archer / Gilgamesh",
+            "zh": "Archer / Gilgamesh",
+            "ko": "Archer / Gilgamesh",
+            "en": "Archer / Gilgamesh"
+          },
+          "release_date": "2019-11",
+          "price_jpy": 15074,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/8395/Archer+Gilgamesh.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-8305",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_ACTION",
+          "subline": "figma",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "figma Saber / Miyamoto Musashi",
+            "zh": "figma Saber / Miyamoto Musashi",
+            "ko": "figma Saber / Miyamoto Musashi",
+            "en": "figma Saber / Miyamoto Musashi"
+          },
+          "release_date": "2019-11",
+          "price_jpy": 8800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/8305/figma+Saber+Miyamoto+Musashi.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/6013"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-8452",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Avenger / King of the Cavern Edmond Dantès",
+            "zh": "Nendoroid Avenger / King of the Cavern Edmond Dantès",
+            "ko": "Nendoroid Avenger / King of the Cavern Edmond Dantès",
+            "en": "Nendoroid Avenger / King of the Cavern Edmond Dantès"
+          },
+          "release_date": "2019-11",
+          "price_jpy": 4500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/8452/Nendoroid+Avenger+King+of+the+Cavern+Edmond+Dantes.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/6160"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-8451",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Avenger / King of the Cavern Edmond Dantès: Ascension Ver.",
+            "zh": "Nendoroid Avenger / King of the Cavern Edmond Dantès: Ascension Ver.",
+            "ko": "Nendoroid Avenger / King of the Cavern Edmond Dantès: Ascension Ver.",
+            "en": "Nendoroid Avenger / King of the Cavern Edmond Dantès: Ascension Ver."
+          },
+          "release_date": "2019-11",
+          "price_jpy": 5500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/8451/Nendoroid+Avenger+King+of+the+Cavern+Edmond+Dantes+Ascension+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/6159"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-8266",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid Doll",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Doll: Kigurumi Pajamas (Fou-kun)",
+            "zh": "Nendoroid Doll: Kigurumi Pajamas (Fou-kun)",
+            "ko": "Nendoroid Doll: Kigurumi Pajamas (Fou-kun)",
+            "en": "Nendoroid Doll: Kigurumi Pajamas (Fou-kun)"
+          },
+          "release_date": "2019-11",
+          "price_jpy": 3000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/8266/Nendoroid+Doll+Kigurumi+Pajamas+Fou+kun.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/5974"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-8392",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Saber / Altria Pendragon (Alter) Shinjuku Ver.",
+            "zh": "Nendoroid Saber / Altria Pendragon (Alter) Shinjuku Ver.",
+            "ko": "Nendoroid Saber / Altria Pendragon (Alter) Shinjuku Ver.",
+            "en": "Nendoroid Saber / Altria Pendragon (Alter) Shinjuku Ver."
+          },
+          "release_date": "2019-11",
+          "price_jpy": 4600,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/8392/Nendoroid+Saber+Altria+Pendragon+Alter+Shinjuku+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/6100"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-8391",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Nendoroid Saber / Altria Pendragon (Alter) Shinjuku Ver. & Cuirassier Noir",
+            "zh": "Nendoroid Saber / Altria Pendragon (Alter) Shinjuku Ver. & Cuirassier Noir",
+            "ko": "Nendoroid Saber / Altria Pendragon (Alter) Shinjuku Ver. & Cuirassier Noir",
+            "en": "Nendoroid Saber / Altria Pendragon (Alter) Shinjuku Ver. & Cuirassier Noir"
+          },
+          "release_date": "2019-11",
+          "price_jpy": 5800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/8391/Nendoroid+Saber+Altria+Pendragon+Alter+Shinjuku+Ver+Cuirassier+Noir.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo",
+            "https://www.goodsmile.com/en/product/6099"
+          ]
+        },
+        {
+          "kit_id": "acvi-4934054106806",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "V.I.シリーズ",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "ACV V.I.ウェポンセット",
+            "zh": "ACV V.I.ウェポン套装",
+            "ko": "ACV V.I.ウェポン세트",
+            "en": "ACV V.I.ウェポンSet"
+          },
+          "release_date": "2018-12-19",
+          "price_jpy": 4290,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054106806/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
+        {
+          "kit_id": "acvi-4934054258963",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "V.I.シリーズ",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "アーマード・コア ウェポンユニット017",
+            "zh": "装甲核心 ウェポンユニット017",
+            "ko": "아머드 코어 ウェポンユニット017",
+            "en": "アーマード コア ウェポンユニット017"
+          },
+          "release_date": "2018-12-19",
+          "price_jpy": 1100,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054258963/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
         {
           "kit_id": "ng-1-100-4902425087108000",
           "change_type": "changed",
@@ -1594,11 +2733,11 @@
           ]
         },
         {
-          "kit_id": "pokepla-01-4237",
+          "kit_id": "poke-gashapon-4549660798095000",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1607,13 +2746,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 52 SELECT SERIES Gyarados",
-            "zh": "宝可梦 PLAMO COLLECTION 52 SELECT SERIES Gyarados",
-            "ko": "포켓몬 PLAMO COLLECTION 52 SELECT SERIES Gyarados",
-            "en": "Pokémon PLAMO COLLECTION 52 SELECT SERIES Gyarados"
+            "ja": "【フラットガシャポン】 ポケットモンスター ビッグサイズ色紙コレクション",
+            "zh": "【フラット扭蛋】 ポケットモンスター ビッグサイズ色紙コレクション",
+            "ko": "【フラット가샤폰】 ポケットモンスター ビッグサイズ色紙コレクション",
+            "en": "[フラットGashapon] ポケットモンスター ビッグサイズ色紙コレクション"
           },
           "release_date": null,
-          "price_jpy": 1300,
+          "price_jpy": 500,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -1624,19 +2763,19 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "bandai_gashapon_products_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_4237/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://gashapon.jp/products/detail.php?jan_code=4549660798095000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
           ]
         },
         {
-          "kit_id": "pokepla-01-5028",
+          "kit_id": "poke-gashapon-4582769738876000",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1645,10 +2784,535 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 54 SELECT SERIES Groudon",
-            "zh": "宝可梦 PLAMO COLLECTION 54 SELECT SERIES Groudon",
-            "ko": "포켓몬 PLAMO COLLECTION 54 SELECT SERIES Groudon",
-            "en": "Pokémon PLAMO COLLECTION 54 SELECT SERIES Groudon"
+            "ja": "【フラットガシャポン】ポケットモンスター クリアラバーコースター",
+            "zh": "【フラット扭蛋】ポケットモンスター クリアラバーコースター",
+            "ko": "【フラット가샤폰】ポケットモンスター クリアラバーコースター",
+            "en": "[フラットGashapon]ポケットモンスター クリアラバーコースター"
+          },
+          "release_date": null,
+          "price_jpy": 400,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4582769738876000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4582769776397000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "【フラットガシャポン】ポケットモンスター クリアラバーコースター2",
+            "zh": "【フラット扭蛋】ポケットモンスター クリアラバーコースター2",
+            "ko": "【フラット가샤폰】ポケットモンスター クリアラバーコースター2",
+            "en": "[フラットGashapon]ポケットモンスター クリアラバーコースター2"
+          },
+          "release_date": null,
+          "price_jpy": 400,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4582769776397000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4582769927331000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "【フラットガシャポン】ポケットモンスター クリアラバーコースター3",
+            "zh": "【フラット扭蛋】ポケットモンスター クリアラバーコースター3",
+            "ko": "【フラット가샤폰】ポケットモンスター クリアラバーコースター3",
+            "en": "[フラットGashapon]ポケットモンスター クリアラバーコースター3"
+          },
+          "release_date": null,
+          "price_jpy": 400,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4582769927331000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4549660747758000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "【フラットガシャポン】ポケットモンスター 下敷き",
+            "zh": "【フラット扭蛋】ポケットモンスター 下敷き",
+            "ko": "【フラット가샤폰】ポケットモンスター 下敷き",
+            "en": "[フラットGashapon]ポケットモンスター 下敷き"
+          },
+          "release_date": null,
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4549660747758000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329438054",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "【受注】Sean Wotherspoon ✕ Pok&eacute;mon Center ぬいぐるみ フシギダネ",
+            "zh": "【受注】Sean Wotherspoon ✕ Pok&eacute;mon Center ぬいぐるみ フシギダネ",
+            "ko": "【受注】Sean Wotherspoon ✕ Pok&eacute;mon Center ぬいぐるみ フシギダネ",
+            "en": "[受注]Sean Wotherspoon ✕ Pok&eacute;mon Center ぬいぐるみ フシギダネ"
+          },
+          "release_date": null,
+          "price_jpy": 7700,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329438054.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329438061",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "【受注】Sean Wotherspoon ✕ Pok&eacute;mon Center ぬいぐるみ リザードン",
+            "zh": "【受注】Sean Wotherspoon ✕ Pok&eacute;mon Center ぬいぐるみ リザードン",
+            "ko": "【受注】Sean Wotherspoon ✕ Pok&eacute;mon Center ぬいぐるみ リザードン",
+            "en": "[受注]Sean Wotherspoon ✕ Pok&eacute;mon Center ぬいぐるみ リザードン"
+          },
+          "release_date": null,
+          "price_jpy": 7700,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329438061.html"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4582769707810000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "#ポケモン after school ＃ハッシュタグつける",
+            "zh": "#宝可梦 after school ＃ハッシュタグつける",
+            "ko": "#포켓몬 after school ＃ハッシュタグつける",
+            "en": "#Pokémon after school ＃ハッシュタグつける"
+          },
+          "release_date": null,
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4582769707810000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4582769707827000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "#ポケモン after school カプセルヘアクリップ",
+            "zh": "#宝可梦 after school カプセルヘアクリップ",
+            "ko": "#포켓몬 after school カプセルヘアクリップ",
+            "en": "#Pokémon after school カプセルヘアクリップ"
+          },
+          "release_date": null,
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4582769707827000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4582769707834000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "#ポケモン after school ライトブレス",
+            "zh": "#宝可梦 after school ライトブレス",
+            "ko": "#포켓몬 after school ライトブレス",
+            "en": "#Pokémon after school ライトブレス"
+          },
+          "release_date": null,
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4582769707834000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329340562",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "127 ぬいぐるみ Pok&eacute;mon fit カイロス",
+            "zh": "127 ぬいぐるみ Pok&eacute;mon fit カイロス",
+            "ko": "127 ぬいぐるみ Pok&eacute;mon fit カイロス",
+            "en": "127 ぬいぐるみ Pok&eacute;mon fit カイロス"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329340562.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329385877",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "139 ぬいぐるみ Pok&eacute;mon fit オムスター",
+            "zh": "139 ぬいぐるみ Pok&eacute;mon fit オムスター",
+            "ko": "139 ぬいぐるみ Pok&eacute;mon fit オムスター",
+            "en": "139 ぬいぐるみ Pok&eacute;mon fit オムスター"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329385877.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329340593",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "142 ぬいぐるみ Pok&eacute;mon fit プテラ",
+            "zh": "142 ぬいぐるみ Pok&eacute;mon fit プテラ",
+            "ko": "142 ぬいぐるみ Pok&eacute;mon fit プテラ",
+            "en": "142 ぬいぐるみ Pok&eacute;mon fit プテラ"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329340593.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329393001",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "171 ぬいぐるみ Pok&eacute;mon fit ランターン",
+            "zh": "171 ぬいぐるみ Pok&eacute;mon fit ランターン",
+            "ko": "171 ぬいぐるみ Pok&eacute;mon fit ランターン",
+            "en": "171 ぬいぐるみ Pok&eacute;mon fit ランターン"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329393001.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329333717",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "212 ぬいぐるみ Pok&eacute;mon fit ハッサム",
+            "zh": "212 ぬいぐるみ Pok&eacute;mon fit ハッサム",
+            "ko": "212 ぬいぐるみ Pok&eacute;mon fit ハッサム",
+            "en": "212 ぬいぐるみ Pok&eacute;mon fit ハッサム"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329333717.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329316192",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "260 ぬいぐるみ Pok&eacute;mon fit ラグラージ",
+            "zh": "260 ぬいぐるみ Pok&eacute;mon fit ラグラージ",
+            "ko": "260 ぬいぐるみ Pok&eacute;mon fit ラグラージ",
+            "en": "260 ぬいぐるみ Pok&eacute;mon fit ラグラージ"
           },
           "release_date": null,
           "price_jpy": 1650,
@@ -1662,19 +3326,18 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "pokemon_center_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5028/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.pokemoncenter-online.com/4521329316192.html"
           ]
         },
         {
-          "kit_id": "pokepla-01-5411",
+          "kit_id": "pokemon-center-4521329317175",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1683,13 +3346,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 55 SELECT SERIES Scizor",
-            "zh": "宝可梦 PLAMO COLLECTION 55 SELECT SERIES Scizor",
-            "ko": "포켓몬 PLAMO COLLECTION 55 SELECT SERIES Scizor",
-            "en": "Pokémon PLAMO COLLECTION 55 SELECT SERIES Scizor"
+            "ja": "355 ぬいぐるみ Pok&eacute;mon fit ヨマワル",
+            "zh": "355 ぬいぐるみ Pok&eacute;mon fit ヨマワル",
+            "ko": "355 ぬいぐるみ Pok&eacute;mon fit ヨマワル",
+            "en": "355 ぬいぐるみ Pok&eacute;mon fit ヨマワル"
           },
           "release_date": null,
-          "price_jpy": 1400,
+          "price_jpy": 1320,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -1700,19 +3363,18 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "pokemon_center_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5411/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.pokemoncenter-online.com/4521329317175.html"
           ]
         },
         {
-          "kit_id": "pokepla-01-5467",
+          "kit_id": "pokemon-center-4521329317236",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1721,13 +3383,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 56 SELECT SERIES Meowscarada",
-            "zh": "宝可梦 PLAMO COLLECTION 56 SELECT SERIES Meowscarada",
-            "ko": "포켓몬 PLAMO COLLECTION 56 SELECT SERIES Meowscarada",
-            "en": "Pokémon PLAMO COLLECTION 56 SELECT SERIES Meowscarada"
+            "ja": "361 ぬいぐるみ Pok&eacute;mon fit ユキワラシ",
+            "zh": "361 ぬいぐるみ Pok&eacute;mon fit ユキワラシ",
+            "ko": "361 ぬいぐるみ Pok&eacute;mon fit ユキワラシ",
+            "en": "361 ぬいぐるみ Pok&eacute;mon fit ユキワラシ"
           },
           "release_date": null,
-          "price_jpy": 1600,
+          "price_jpy": 1320,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -1738,19 +3400,18 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "pokemon_center_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5467/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.pokemoncenter-online.com/4521329317236.html"
           ]
         },
         {
-          "kit_id": "pokepla-01-5497",
+          "kit_id": "pokemon-center-4521329339405",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1759,13 +3420,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 57 SELECT SERIES Ceruledge",
-            "zh": "宝可梦 PLAMO COLLECTION 57 SELECT SERIES Ceruledge",
-            "ko": "포켓몬 PLAMO COLLECTION 57 SELECT SERIES Ceruledge",
-            "en": "Pokémon PLAMO COLLECTION 57 SELECT SERIES Ceruledge"
+            "ja": "433 ぬいぐるみ Pok&eacute;mon fit リーシャン",
+            "zh": "433 ぬいぐるみ Pok&eacute;mon fit リーシャン",
+            "ko": "433 ぬいぐるみ Pok&eacute;mon fit リーシャン",
+            "en": "433 ぬいぐるみ Pok&eacute;mon fit リーシャン"
           },
           "release_date": null,
-          "price_jpy": 1700,
+          "price_jpy": 1320,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -1776,19 +3437,18 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "pokemon_center_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5497/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.pokemoncenter-online.com/4521329339405.html"
           ]
         },
         {
-          "kit_id": "pokepla-01-5568",
+          "kit_id": "pokemon-center-4521329341200",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1797,13 +3457,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 58 SELECT SERIES Armarouge",
-            "zh": "宝可梦 PLAMO COLLECTION 58 SELECT SERIES Armarouge",
-            "ko": "포켓몬 PLAMO COLLECTION 58 SELECT SERIES Armarouge",
-            "en": "Pokémon PLAMO COLLECTION 58 SELECT SERIES Armarouge"
+            "ja": "478 ぬいぐるみ Pok&eacute;mon fit ユキメノコ",
+            "zh": "478 ぬいぐるみ Pok&eacute;mon fit ユキメノコ",
+            "ko": "478 ぬいぐるみ Pok&eacute;mon fit ユキメノコ",
+            "en": "478 ぬいぐるみ Pok&eacute;mon fit ユキメノコ"
           },
           "release_date": null,
-          "price_jpy": 1700,
+          "price_jpy": 1540,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -1814,19 +3474,18 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "pokemon_center_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5568/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.pokemoncenter-online.com/4521329341200.html"
           ]
         },
         {
-          "kit_id": "pokepla-01-5958",
+          "kit_id": "pokemon-center-4521329341408",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1835,13 +3494,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 59 SELECT SERIES Miraidon",
-            "zh": "宝可梦 PLAMO COLLECTION 59 SELECT SERIES Miraidon",
-            "ko": "포켓몬 PLAMO COLLECTION 59 SELECT SERIES Miraidon",
-            "en": "Pokémon PLAMO COLLECTION 59 SELECT SERIES Miraidon"
+            "ja": "492 ぬいぐるみ Pok&eacute;mon fit シェイミ (ランドフォルム)",
+            "zh": "492 ぬいぐるみ Pok&eacute;mon fit シェイミ (ランドフォルム)",
+            "ko": "492 ぬいぐるみ Pok&eacute;mon fit シェイミ (ランドフォルム)",
+            "en": "492 ぬいぐるみ Pok&eacute;mon fit シェイミ (ランドフォルム)"
           },
           "release_date": null,
-          "price_jpy": 2100,
+          "price_jpy": 1650,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -1852,19 +3511,18 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "pokemon_center_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5958/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.pokemoncenter-online.com/4521329341408.html"
           ]
         },
         {
-          "kit_id": "pokepla-01-5984",
+          "kit_id": "pokemon-center-4521329349909",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1873,13 +3531,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 60 SELECT SERIES Koraidon",
-            "zh": "宝可梦 PLAMO COLLECTION 60 SELECT SERIES Koraidon",
-            "ko": "포켓몬 PLAMO COLLECTION 60 SELECT SERIES Koraidon",
-            "en": "Pokémon PLAMO COLLECTION 60 SELECT SERIES Koraidon"
+            "ja": "586 ぬいぐるみ Pok&eacute;mon fit メブキジカ(ふゆのすがた)",
+            "zh": "586 ぬいぐるみ Pok&eacute;mon fit メブキジカ(ふゆのすがた)",
+            "ko": "586 ぬいぐるみ Pok&eacute;mon fit メブキジカ(ふゆのすがた)",
+            "en": "586 ぬいぐるみ Pok&eacute;mon fit メブキジカ(ふゆのすがた)"
           },
           "release_date": null,
-          "price_jpy": 2100,
+          "price_jpy": 1540,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -1890,19 +3548,18 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "pokemon_center_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5984/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.pokemoncenter-online.com/4521329349909.html"
           ]
         },
         {
-          "kit_id": "pokepla-01-6780",
+          "kit_id": "pokemon-center-4521329350547",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1911,13 +3568,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza",
-            "zh": "宝可梦 PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza",
-            "ko": "포켓몬 PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza",
-            "en": "Pokémon PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza"
+            "ja": "645 ぬいぐるみ Pok&eacute;mon fit ランドロス(れいじゅうフォルム)",
+            "zh": "645 ぬいぐるみ Pok&eacute;mon fit ランドロス(れいじゅうフォルム)",
+            "ko": "645 ぬいぐるみ Pok&eacute;mon fit ランドロス(れいじゅうフォルム)",
+            "en": "645 ぬいぐるみ Pok&eacute;mon fit ランドロス(れいじゅうフォルム)"
           },
           "release_date": null,
-          "price_jpy": 2700,
+          "price_jpy": 1650,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -1928,19 +3585,18 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "pokemon_center_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_6780/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.pokemoncenter-online.com/4521329350547.html"
           ]
         },
         {
-          "kit_id": "pokepla-01-7038",
+          "kit_id": "pokemon-center-4521329366258",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1949,13 +3605,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION 62 SELECT SERIES Kyogre",
-            "zh": "宝可梦 PLAMO COLLECTION 62 SELECT SERIES Kyogre",
-            "ko": "포켓몬 PLAMO COLLECTION 62 SELECT SERIES Kyogre",
-            "en": "Pokémon PLAMO COLLECTION 62 SELECT SERIES Kyogre"
+            "ja": "685 ぬいぐるみ Pok&eacute;mon fit ペロリーム",
+            "zh": "685 ぬいぐるみ Pok&eacute;mon fit ペロリーム",
+            "ko": "685 ぬいぐるみ Pok&eacute;mon fit ペロリーム",
+            "en": "685 ぬいぐるみ Pok&eacute;mon fit ペロリーム"
           },
           "release_date": null,
-          "price_jpy": 1800,
+          "price_jpy": 1760,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -1966,19 +3622,18 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "pokemon_center_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7038/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.pokemoncenter-online.com/4521329366258.html"
           ]
         },
         {
-          "kit_id": "pokepla-01-5174",
+          "kit_id": "pokemon-center-4521329420677",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1987,13 +3642,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 18 Sprigatito",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 18 Sprigatito",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 18 Sprigatito",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 18 Sprigatito"
+            "ja": "752 ぬいぐるみ Pok&eacute;mon fit オニシズクモ",
+            "zh": "752 ぬいぐるみ Pok&eacute;mon fit オニシズクモ",
+            "ko": "752 ぬいぐるみ Pok&eacute;mon fit オニシズクモ",
+            "en": "752 ぬいぐるみ Pok&eacute;mon fit オニシズクモ"
           },
           "release_date": null,
-          "price_jpy": 780,
+          "price_jpy": 1760,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -2004,19 +3659,18 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "pokemon_center_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5174/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.pokemoncenter-online.com/4521329420677.html"
           ]
         },
         {
-          "kit_id": "pokepla-01-5247",
+          "kit_id": "pokemon-center-4521329370439",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -2025,13 +3679,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 19 Quaxly",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 19 Quaxly",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 19 Quaxly",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 19 Quaxly"
+            "ja": "90 ぬいぐるみ Pok&eacute;mon fit シェルダー",
+            "zh": "90 ぬいぐるみ Pok&eacute;mon fit シェルダー",
+            "ko": "90 ぬいぐるみ Pok&eacute;mon fit シェルダー",
+            "en": "90 ぬいぐるみ Pok&eacute;mon fit シェルダー"
           },
           "release_date": null,
-          "price_jpy": 780,
+          "price_jpy": 1320,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -2042,19 +3696,18 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "pokemon_center_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5247/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.pokemoncenter-online.com/4521329370439.html"
           ]
         },
         {
-          "kit_id": "pokepla-01-5372",
+          "kit_id": "pokemon-center-4521329356426",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -2063,13 +3716,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 20 Fuecoco",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 20 Fuecoco",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 20 Fuecoco",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 20 Fuecoco"
+            "ja": "91 ぬいぐるみ Pok&eacute;mon fit パルシェン",
+            "zh": "91 ぬいぐるみ Pok&eacute;mon fit パルシェン",
+            "ko": "91 ぬいぐるみ Pok&eacute;mon fit パルシェン",
+            "en": "91 ぬいぐるみ Pok&eacute;mon fit パルシェン"
           },
           "release_date": null,
-          "price_jpy": 780,
+          "price_jpy": 1540,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -2080,19 +3733,18 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "pokemon_center_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5372/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.pokemoncenter-online.com/4521329356426.html"
           ]
         },
         {
-          "kit_id": "pokepla-01-5450",
+          "kit_id": "pokemon-center-4521329397610",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -2101,13 +3753,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 21 Psyduck",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 21 Psyduck",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 21 Psyduck",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 21 Psyduck"
+            "ja": "92 ぬいぐるみ Pok&eacute;mon fit ゴース",
+            "zh": "92 ぬいぐるみ Pok&eacute;mon fit ゴース",
+            "ko": "92 ぬいぐるみ Pok&eacute;mon fit ゴース",
+            "en": "92 ぬいぐるみ Pok&eacute;mon fit ゴース"
           },
           "release_date": null,
-          "price_jpy": 780,
+          "price_jpy": 1320,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -2118,19 +3770,92 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "pokemon_center_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5450/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://www.pokemoncenter-online.com/4521329397610.html"
           ]
         },
         {
-          "kit_id": "pokepla-01-5555",
+          "kit_id": "goodsmile-fate-g6107",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Accessory",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Fate / Grand Order Metal Charm Collection (Excalibur / Excalibur Proto):Fate / Grand Order Metal Charm Collection Excalibur",
+            "zh": "Fate / Grand Order Metal Charm Collection (Excalibur / Excalibur Proto):Fate / Grand Order Metal Charm Collection Excalibur",
+            "ko": "Fate / Grand Order Metal Charm Collection (Excalibur / Excalibur Proto):Fate / Grand Order Metal Charm Collection Excalibur",
+            "en": "Fate / Grand Order Metal Charm Collection (Excalibur / Excalibur Proto):Fate / Grand Order Metal Charm Collection Excalibur"
+          },
+          "release_date": null,
+          "price_jpy": 3960,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/6107"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g5957",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Accessory",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Fate / Grand Order Metal Charm Collection (Light Spear of Indra / Gandiva):Fate / Grand Order Metal Charm Collection Gandiva",
+            "zh": "Fate / Grand Order Metal Charm Collection (Light Spear of Indra / Gandiva):Fate / Grand Order Metal Charm Collection Gandiva",
+            "ko": "Fate / Grand Order Metal Charm Collection (Light Spear of Indra / Gandiva):Fate / Grand Order Metal Charm Collection Gandiva",
+            "en": "Fate / Grand Order Metal Charm Collection (Light Spear of Indra / Gandiva):Fate / Grand Order Metal Charm Collection Gandiva"
+          },
+          "release_date": null,
+          "price_jpy": 4400,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/5957"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4549660661238000",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -2139,13 +3864,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 22 Pawmi",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 22 Pawmi",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 22 Pawmi",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 22 Pawmi"
+            "ja": "Ringcolle! ポケットモンスター ポケモンリング",
+            "zh": "Ringcolle! ポケットモンスター 宝可梦リング",
+            "ko": "Ringcolle! ポケットモンスター 포켓몬リング",
+            "en": "Ringcolle! ポケットモンスター Pokemonリング"
           },
           "release_date": null,
-          "price_jpy": 780,
+          "price_jpy": 300,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -2156,19 +3881,19 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "bandai_gashapon_products_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5555/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://gashapon.jp/products/detail.php?jan_code=4549660661238000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
           ]
         },
         {
-          "kit_id": "pokepla-01-5947",
+          "kit_id": "poke-gashapon-4549660757597000",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -2177,13 +3902,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 23 Jirachi",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 23 Jirachi",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 23 Jirachi",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 23 Jirachi"
+            "ja": "Ringcolle! ポケットモンスター ポケモンリングvol.2",
+            "zh": "Ringcolle! ポケットモンスター 宝可梦リングvol.2",
+            "ko": "Ringcolle! ポケットモンスター 포켓몬リングvol.2",
+            "en": "Ringcolle! ポケットモンスター Pokemonリングvol.2"
           },
           "release_date": null,
-          "price_jpy": 780,
+          "price_jpy": 300,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -2194,19 +3919,19 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "bandai_gashapon_products_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5947/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://gashapon.jp/products/detail.php?jan_code=4549660757597000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
           ]
         },
         {
-          "kit_id": "pokepla-01-6762",
+          "kit_id": "poke-gashapon-4549660774556000",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -2215,13 +3940,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 24 Pichu",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 24 Pichu",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 24 Pichu",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 24 Pichu"
+            "ja": "Ringcolle! ポケットモンスター ポケモンリングvol.3",
+            "zh": "Ringcolle! ポケットモンスター 宝可梦リングvol.3",
+            "ko": "Ringcolle! ポケットモンスター 포켓몬リングvol.3",
+            "en": "Ringcolle! ポケットモンスター Pokemonリングvol.3"
           },
           "release_date": null,
-          "price_jpy": 780,
+          "price_jpy": 300,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -2232,19 +3957,19 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "bandai_gashapon_products_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_6762/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://gashapon.jp/products/detail.php?jan_code=4549660774556000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
           ]
         },
         {
-          "kit_id": "pokepla-01-7010",
+          "kit_id": "poke-gashapon-4549660796275000",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -2253,13 +3978,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 26 Jolteon",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 26 Jolteon",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 26 Jolteon",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 26 Jolteon"
+            "ja": "Ringcolle! ポケットモンスター ポケモンリングvol.4",
+            "zh": "Ringcolle! ポケットモンスター 宝可梦リングvol.4",
+            "ko": "Ringcolle! ポケットモンスター 포켓몬リングvol.4",
+            "en": "Ringcolle! ポケットモンスター Pokemonリングvol.4"
           },
           "release_date": null,
-          "price_jpy": 780,
+          "price_jpy": 400,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -2270,19 +3995,19 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "bandai_gashapon_products_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7010/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://gashapon.jp/products/detail.php?jan_code=4549660796275000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
           ]
         },
         {
-          "kit_id": "pokepla-01-7015",
+          "kit_id": "poke-gashapon-4549660952916000",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -2291,13 +4016,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 27 Vaporeon",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 27 Vaporeon",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 27 Vaporeon",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 27 Vaporeon"
+            "ja": "Ringcolle! ポケットモンスター ポケモンリングvol.5",
+            "zh": "Ringcolle! ポケットモンスター 宝可梦リングvol.5",
+            "ko": "Ringcolle! ポケットモンスター 포켓몬リングvol.5",
+            "en": "Ringcolle! ポケットモンスター Pokemonリングvol.5"
           },
           "release_date": null,
-          "price_jpy": 780,
+          "price_jpy": 400,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -2308,19 +4033,19 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "bandai_gashapon_products_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7015/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://gashapon.jp/products/detail.php?jan_code=4549660952916000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
           ]
         },
         {
-          "kit_id": "pokepla-01-7120",
+          "kit_id": "poke-gashapon-4549660952930000",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -2329,13 +4054,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 28 Meowth",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 28 Meowth",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 28 Meowth",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 28 Meowth"
+            "ja": "Ringcolle! ポケットモンスター ポケモンリングvol.6",
+            "zh": "Ringcolle! ポケットモンスター 宝可梦リングvol.6",
+            "ko": "Ringcolle! ポケットモンスター 포켓몬リングvol.6",
+            "en": "Ringcolle! ポケットモンスター Pokemonリングvol.6"
           },
           "release_date": null,
-          "price_jpy": 780,
+          "price_jpy": 400,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -2346,19 +4071,19 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "bandai_gashapon_products_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7120/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://gashapon.jp/products/detail.php?jan_code=4549660952930000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
           ]
         },
         {
-          "kit_id": "pokepla-01-7148",
+          "kit_id": "poke-gashapon-4570118143099000",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -2367,13 +4092,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION QUICK!! 29 Chimchar",
-            "zh": "宝可梦 PLAMO COLLECTION QUICK!! 29 Chimchar",
-            "ko": "포켓몬 PLAMO COLLECTION QUICK!! 29 Chimchar",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 29 Chimchar"
+            "ja": "Ringcolle! ポケットモンスター ポケモンリングvol.7",
+            "zh": "Ringcolle! ポケットモンスター 宝可梦リングvol.7",
+            "ko": "Ringcolle! ポケットモンスター 포켓몬リングvol.7",
+            "en": "Ringcolle! ポケットモンスター Pokemonリングvol.7"
           },
           "release_date": null,
-          "price_jpy": 780,
+          "price_jpy": 400,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -2384,19 +4109,19 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "bandai_gashapon_products_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7148/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://gashapon.jp/products/detail.php?jan_code=4570118143099000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
           ]
         },
         {
-          "kit_id": "pokepla-01-5010",
+          "kit_id": "poke-gashapon-4570118245397000",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -2405,13 +4130,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン PLAMO COLLECTION SELECT SERIES Black Rayquaza",
-            "zh": "宝可梦 PLAMO COLLECTION SELECT SERIES Black Rayquaza",
-            "ko": "포켓몬 PLAMO COLLECTION SELECT SERIES Black Rayquaza",
-            "en": "Pokémon PLAMO COLLECTION SELECT SERIES Black Rayquaza"
+            "ja": "Ringcolle! ポケットモンスター ポケモンリングvol.8",
+            "zh": "Ringcolle! ポケットモンスター 宝可梦リングvol.8",
+            "ko": "Ringcolle! ポケットモンスター 포켓몬リングvol.8",
+            "en": "Ringcolle! ポケットモンスター Pokemonリングvol.8"
           },
           "release_date": null,
-          "price_jpy": 1500,
+          "price_jpy": 400,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -2422,19 +4147,19 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "bandai_gashapon_products_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5010/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://gashapon.jp/products/detail.php?jan_code=4570118245397000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
           ]
         },
         {
-          "kit_id": "pokepla-01-4324",
+          "kit_id": "poke-gashapon-4582769693427000",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -2443,13 +4168,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ポケモン Plastic Model Collection 53 Select Series Metagross",
-            "zh": "宝可梦 Plastic Model Collection 53 Select Series Metagross",
-            "ko": "포켓몬 Plastic Model Collection 53 Select Series Metagross",
-            "en": "Pokemon Plastic Model Collection 53 Select Series Metagross"
+            "ja": "Ringcolle! ポケットモンスター ポケモンリングvol.9",
+            "zh": "Ringcolle! ポケットモンスター 宝可梦リングvol.9",
+            "ko": "Ringcolle! ポケットモンスター 포켓몬リングvol.9",
+            "en": "Ringcolle! ポケットモンスター Pokemonリングvol.9"
           },
           "release_date": null,
-          "price_jpy": 1300,
+          "price_jpy": 400,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -2460,11 +4185,1255 @@
             "image"
           ],
           "source_ids": [
-            "bandai_hobby_pokemon_global"
+            "bandai_gashapon_products_jp"
           ],
           "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_4324/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+            "https://gashapon.jp/products/detail.php?jan_code=4582769693427000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "moncolle-mc-129",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "あくテラスタル リザードン",
+            "zh": "あくテラスタル リザードン",
+            "ko": "あくテラスタル リザードン",
+            "en": "あくテラスタル リザードン"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name",
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/terastal_lizardon/"
+          ]
+        },
+        {
+          "kit_id": "moncolle-ms-46",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "アブソル",
+            "zh": "アブソル",
+            "ko": "アブソル",
+            "en": "アブソル"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms46/"
+          ]
+        },
+        {
+          "kit_id": "moncolle-ml-22",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "アルセウス",
+            "zh": "アルセウス",
+            "ko": "アルセウス",
+            "en": "アルセウス"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml22/"
+          ]
+        },
+        {
+          "kit_id": "moncolle-ms-24",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "イッカネズミ (４ひきかぞく)",
+            "zh": "イッカネズミ (４ひきかぞく)",
+            "ko": "イッカネズミ (４ひきかぞく)",
+            "en": "イッカネズミ (４ひきかぞく)"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms24/"
+          ]
+        },
+        {
+          "kit_id": "moncolle-ml-13",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "イベルタル",
+            "zh": "イベルタル",
+            "ko": "イベルタル",
+            "en": "イベルタル"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml13/"
+          ]
+        },
+        {
+          "kit_id": "moncolle-ms-58",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ウェーニバル",
+            "zh": "ウェーニバル",
+            "ko": "ウェーニバル",
+            "en": "ウェーニバル"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms58/"
+          ]
+        },
+        {
+          "kit_id": "moncolle-mc-125",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ウガツホムラ",
+            "zh": "ウガツホムラ",
+            "ko": "ウガツホムラ",
+            "en": "ウガツホムラ"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name",
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/paradox_ugatsuhomura/"
+          ]
+        },
+        {
+          "kit_id": "moncolle-mc-124",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ウネルミナモ",
+            "zh": "ウネルミナモ",
+            "ko": "ウネルミナモ",
+            "en": "ウネルミナモ"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name",
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/paradox_uneruminamo/"
+          ]
+        },
+        {
+          "kit_id": "moncolle-ms-35",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "エースバーン",
+            "zh": "エースバーン",
+            "ko": "エースバーン",
+            "en": "エースバーン"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms35/"
+          ]
+        },
+        {
+          "kit_id": "moncolle-ms-51",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "エーフィ",
+            "zh": "エーフィ",
+            "ko": "エーフィ",
+            "en": "エーフィ"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms51/"
+          ]
+        },
+        {
+          "kit_id": "moncolle-ml-04",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カイオーガ",
+            "zh": "カイオーガ",
+            "ko": "カイオーガ",
+            "en": "カイオーガ"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml04/"
+          ]
+        },
+        {
+          "kit_id": "moncolle-ms-25",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カイリュー",
+            "zh": "カイリュー",
+            "ko": "カイリュー",
+            "en": "カイリュー"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms25/"
+          ]
+        },
+        {
+          "kit_id": "moncolle-mc-132",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "かくとうテラスタル コライドン",
+            "zh": "かくとうテラスタル コライドン",
+            "ko": "かくとうテラスタル コライドン",
+            "en": "かくとうテラスタル コライドン"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name",
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/terastal_koraidon/"
+          ]
+        },
+        {
+          "kit_id": "moncolle-ms-29",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カビゴン",
+            "zh": "カビゴン",
+            "ko": "カビゴン",
+            "en": "カビゴン"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms29/"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4549660269250000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カプキャラ ポケットモンスター",
+            "zh": "カプキャラ ポケットモンスター",
+            "ko": "カプキャラ ポケットモンスター",
+            "en": "カプキャラ ポケットモンスター"
+          },
+          "release_date": null,
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4549660269250000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4549660516170000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カプキャラ ポケットモンスター１0",
+            "zh": "カプキャラ ポケットモンスター１0",
+            "ko": "カプキャラ ポケットモンスター１0",
+            "en": "カプキャラ ポケットモンスター１0"
+          },
+          "release_date": null,
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4549660516170000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4549660547358000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カプキャラ ポケットモンスター11（こおりタイプ）",
+            "zh": "カプキャラ ポケットモンスター11（こおりタイプ）",
+            "ko": "カプキャラ ポケットモンスター11（こおりタイプ）",
+            "en": "カプキャラ ポケットモンスター11 (こおりタイプ)"
+          },
+          "release_date": null,
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4549660547358000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4549660502258000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カプキャラ ポケットモンスター12（くさタイプ）",
+            "zh": "カプキャラ ポケットモンスター12（くさタイプ）",
+            "ko": "カプキャラ ポケットモンスター12（くさタイプ）",
+            "en": "カプキャラ ポケットモンスター12 (くさタイプ)"
+          },
+          "release_date": null,
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4549660502258000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4549660622994000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カプキャラ ポケットモンスター13",
+            "zh": "カプキャラ ポケットモンスター13",
+            "ko": "カプキャラ ポケットモンスター13",
+            "en": "カプキャラ ポケットモンスター13"
+          },
+          "release_date": null,
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4549660622994000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4549660654674000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カプキャラ ポケットモンスター14",
+            "zh": "カプキャラ ポケットモンスター14",
+            "ko": "カプキャラ ポケットモンスター14",
+            "en": "カプキャラ ポケットモンスター14"
+          },
+          "release_date": null,
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4549660654674000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4549660721413000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カプキャラ ポケットモンスター15",
+            "zh": "カプキャラ ポケットモンスター15",
+            "ko": "カプキャラ ポケットモンスター15",
+            "en": "カプキャラ ポケットモンスター15"
+          },
+          "release_date": null,
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4549660721413000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4549660321330000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カプキャラ ポケットモンスター2",
+            "zh": "カプキャラ ポケットモンスター2",
+            "ko": "カプキャラ ポケットモンスター2",
+            "en": "カプキャラ ポケットモンスター2"
+          },
+          "release_date": null,
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4549660321330000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4549660333753000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カプキャラ ポケットモンスター3",
+            "zh": "カプキャラ ポケットモンスター3",
+            "ko": "カプキャラ ポケットモンスター3",
+            "en": "カプキャラ ポケットモンスター3"
+          },
+          "release_date": null,
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4549660333753000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4549660371373000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カプキャラ ポケットモンスター4",
+            "zh": "カプキャラ ポケットモンスター4",
+            "ko": "カプキャラ ポケットモンスター4",
+            "en": "カプキャラ ポケットモンスター4"
+          },
+          "release_date": null,
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4549660371373000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4549660397151000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カプキャラ ポケットモンスター5",
+            "zh": "カプキャラ ポケットモンスター5",
+            "ko": "カプキャラ ポケットモンスター5",
+            "en": "カプキャラ ポケットモンスター5"
+          },
+          "release_date": null,
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4549660397151000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4549660446330000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カプキャラ ポケットモンスター6",
+            "zh": "カプキャラ ポケットモンスター6",
+            "ko": "カプキャラ ポケットモンスター6",
+            "en": "カプキャラ ポケットモンスター6"
+          },
+          "release_date": null,
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4549660446330000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4549660473299000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カプキャラ ポケットモンスター7",
+            "zh": "カプキャラ ポケットモンスター7",
+            "ko": "カプキャラ ポケットモンスター7",
+            "en": "カプキャラ ポケットモンスター7"
+          },
+          "release_date": null,
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4549660473299000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4549660473312000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カプキャラ ポケットモンスター8",
+            "zh": "カプキャラ ポケットモンスター8",
+            "ko": "カプキャラ ポケットモンスター8",
+            "en": "カプキャラ ポケットモンスター8"
+          },
+          "release_date": null,
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4549660473312000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4549660473374000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カプキャラ ポケットモンスター9",
+            "zh": "カプキャラ ポケットモンスター9",
+            "ko": "カプキャラ ポケットモンスター9",
+            "en": "カプキャラ ポケットモンスター9"
+          },
+          "release_date": null,
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4549660473374000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
+          "kit_id": "moncolle-ms-22",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ガブリアス",
+            "zh": "ガブリアス",
+            "ko": "ガブリアス",
+            "en": "ガブリアス"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms22/"
+          ]
+        },
+        {
+          "kit_id": "moncolle-ms-16",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カメックス",
+            "zh": "カメックス",
+            "ko": "カメックス",
+            "en": "カメックス"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms16/"
+          ]
+        },
+        {
+          "kit_id": "moncolle-ms-12",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "キャプテンピカチュウ",
+            "zh": "キャプテンピカチュウ",
+            "ko": "キャプテンピカチュウ",
+            "en": "キャプテンピカチュウ"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms12/"
+          ]
+        },
+        {
+          "kit_id": "moncolle-ml-23",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ギラティナ",
+            "zh": "ギラティナ",
+            "ko": "ギラティナ",
+            "en": "ギラティナ"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "takara_tomy_pokemon_jp"
+          ],
+          "source_urls": [
+            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ml23/"
           ]
         }
       ],
