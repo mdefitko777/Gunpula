@@ -22,6 +22,7 @@ const files = [
   "app/market-data.js",
   "app/collection-store.js",
   "app/search-index-store.js",
+  "app/search-engine.js",
   "app/view-state.js",
   "app/world-themes.js",
   "app/cms-patches.js",

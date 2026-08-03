@@ -1,6 +1,7 @@
 import { mkdir, readdir, readFile, stat, writeFile } from "node:fs/promises";
 import { dirname, extname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
+import { aliasVariants, normalizeSearchText } from "../app/search-engine.js";
 
 const rootDir = dirname(dirname(fileURLToPath(import.meta.url)));
 const now = new Date().toISOString();
@@ -52,12 +53,7 @@ function unique(values) {
 }
 
 function normalize(value) {
-  return String(value ?? "")
-    .toLowerCase()
-    .normalize("NFKC")
-    .replace(/[<>【】\[\]{}()（）"'“”‘’・·:：/\\|,，.!！?？#]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+  return normalizeSearchText(value);
 }
 
 function compactName(value) {
@@ -73,9 +69,15 @@ function gradeTokens(kit) {
 
 function aliasTerms(text, aliases) {
   const haystack = normalize(text);
+  const contains = (value) => {
+    const term = normalize(value);
+    if (!term) return false;
+    if (/^[a-z0-9]{1,3}$/i.test(term)) return haystack.split(" ").includes(term);
+    return haystack.includes(term);
+  };
   const out = [];
   for (const [needle, values] of Object.entries(aliases || {})) {
-    if (haystack.includes(normalize(needle)) || values.some((value) => haystack.includes(normalize(value)))) {
+    if (contains(needle) || values.some(contains)) {
       out.push(needle, ...values);
     }
   }
@@ -88,7 +90,11 @@ function buildKitKeywords(kit, overrides) {
   const seriesLabels = unique([kit.series?.labels?.zh, kit.series?.labels?.ko, kit.series?.labels?.en, kit.series?.labels?.ja, kit.series?.key, kit.work_title]);
   const lineTokens = gradeTokens(kit);
   const allText = [...baseNames, ...seriesLabels, ...lineTokens, kit.franchise].join(" ");
-  const aliases = aliasTerms(allText, overrides.aliases);
+  const baseNormalized = new Set([...baseNames, ...seriesLabels].map(normalize));
+  const aliases = unique([
+    ...aliasTerms(allText, overrides.aliases),
+    ...[...baseNames, ...seriesLabels].flatMap(aliasVariants).filter((value) => !baseNormalized.has(normalize(value))),
+  ]);
   const kitOverride = overrides.kit_overrides?.[kit.kit_id] || {};
   const include = unique([...(kitOverride.include || []), ...aliases, ...baseNames, ...seriesLabels, ...lineTokens, kit.franchise]);
   const exclude = unique([...(overrides.global_exclude_terms || []), ...(kitOverride.exclude || [])]);
@@ -109,6 +115,7 @@ function buildKitKeywords(kit, overrides) {
     series_key: kit.series?.key || "unknown",
     product_line: kit.grade_code || "unknown",
     display_name: primaryName,
+    ...(aliases.length ? { aliases } : {}),
     keywords: include,
     negative_keywords: exclude,
     queries: querySeeds,
@@ -320,6 +327,7 @@ async function writeSearchSplits(records) {
     series_key: item.series_key,
     product_line: item.product_line,
     display_name: item.display_name,
+    ...(item.aliases?.length ? { aliases: item.aliases } : {}),
     queries: item.queries,
     search_blob: item.search_blob,
   }))) {

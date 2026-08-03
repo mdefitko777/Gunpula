@@ -32,7 +32,6 @@ import {
   SETTINGS_PANELS,
   baseSeriesLabelFor as displayBaseSeriesLabelFor,
   cleanDisplayName,
-  expandedSearchTerms,
   franchiseLabelFor,
   franchiseShortLabelFor,
   gradeLabelFor,
@@ -84,6 +83,15 @@ import {
   marketSources as readMarketSources,
 } from "./market-data.js";
 import { ingestSearchIndex as ingestSearchIndexState } from "./search-index-store.js";
+import {
+  createSearchDocument,
+  groupSearchResults,
+  normalizeSearchText,
+  parseSearchQuery,
+  scoreSearchDocument,
+  searchDocuments,
+  suggestSearches,
+} from "./search-engine.js";
 import { getJson, getString, removeValue, setJson, setString } from "./storage.js";
 import {
   loadSavedViewState as readSavedViewState,
@@ -131,6 +139,8 @@ const HOME_COVER_KEY = "gunpula-catalog-home-covers-v1";
 const RELEASE_MONTH_KEY = "gunpula-catalog-release-month-v1";
 const SETTINGS_PANEL_KEY = "gunpula-catalog-settings-panel-v1";
 const RECENT_VIEWED_KEY = "gunpula-catalog-recent-viewed-v1";
+const SEARCH_HISTORY_KEY = "gunpula-search-history-v1";
+const SEARCH_MISS_KEY = "gunpula-search-misses-v1";
 const ONBOARDING_DONE_KEY = "gunpula-catalog-onboarding-done-v1";
 const SYNC_POLL_INTERVAL_MS = 15000;
 const SYNC_SAVE_DEBOUNCE_MS = 700;
@@ -154,6 +164,13 @@ const PAGER_MIN_THRESHOLD = 92;
 const PAGER_ANIMATION_MS = 220;
 const APP_VERSION_LABEL = "v2.0.0";
 const WORLD_COPY = WORLD_THEME_CONFIG;
+
+const SEARCH_COPY = {
+  zh: { recent: "最近搜索", understood: "已识别", units: "先看机体", suggestions: "可能想找", clear: "清除", self: "自己", other: "对方", owned: "已购买", wanted: "想要", limited: "限定", empty: "没有完全匹配，试试这些相关词", products: "个商品" },
+  ko: { recent: "최근 검색", understood: "인식됨", units: "기체 먼저 보기", suggestions: "추천 검색", clear: "지우기", self: "나", other: "상대", owned: "구매함", wanted: "원함", limited: "한정", empty: "정확한 결과가 없습니다. 관련 검색어를 확인하세요", products: "개 상품" },
+  en: { recent: "Recent", understood: "Understood", units: "Units first", suggestions: "Possible matches", clear: "Clear", self: "Me", other: "Other member", owned: "Owned", wanted: "Wanted", limited: "Limited", empty: "No exact result. Try a related search", products: "products" },
+  ja: { recent: "最近の検索", understood: "認識内容", units: "機体から見る", suggestions: "候補", clear: "消去", self: "自分", other: "相手", owned: "購入済み", wanted: "欲しい", limited: "限定", empty: "完全一致がありません。関連候補を試してください", products: "商品" },
+};
 
 const HELP_TEXT = {
   homeSection: {
@@ -270,6 +287,11 @@ const state = {
   marketPrices: null,
   searchIndex: null,
   searchIndexByKit: new Map(),
+  searchDocumentByKit: new Map(),
+  atlasSearchByKit: new Map(),
+  searchEntityFilter: "",
+  searchResults: [],
+  searchHasGlobalMatches: false,
   loadedSearchFranchises: new Set(),
   imageAssets: null,
   androidPackage: null,
@@ -570,6 +592,9 @@ const elements = {
   deleteSelectedCollection: document.querySelector("#deleteSelectedCollection"),
   clearCollectionView: document.querySelector("#clearCollectionView"),
   searchInput: document.querySelector("#searchInput"),
+  searchAssist: document.querySelector("#searchAssist"),
+  searchScan: document.querySelector("#searchScan"),
+  searchScanInput: document.querySelector("#searchScanInput"),
   filterSummary: document.querySelector("#filterSummary"),
   franchiseList: document.querySelector("#franchiseList"),
   languageList: document.querySelector("#languageList"),
@@ -762,6 +787,7 @@ function completeCatalogInBackground(pendingFranchises) {
 
 function ingestSearchIndex(doc, franchise = null) {
   ingestSearchIndexState(state, doc, franchise);
+  state.searchDocumentByKit.clear();
 }
 
 function ensureSearchIndex(franchise = state.franchise) {
@@ -1315,6 +1341,8 @@ function recordSyncHistory(reason, remote = null) {
 
 function refreshKits() {
   state.kits = applyCmsCatalog(state.rawKits, state.cmsPayload).map((kit) => applyOverride(kit)).filter((kit) => kit.data_status !== "hidden");
+  state.searchDocumentByKit.clear();
+  state.atlasSearchByKit.clear();
 }
 
 function rawSeriesTemplateByKey(key) {
@@ -1780,12 +1808,52 @@ function bindEvents() {
       // Clipboard unavailable: the code stays visible to copy by hand.
     }
   });
-  elements.searchInput.addEventListener("focus", () => ensureSearchIndex(), { once: false });
+  elements.searchInput.addEventListener("focus", () => {
+    ensureSearchIndex();
+    renderSearchAssist();
+  }, { once: false });
   elements.searchInput.addEventListener("input", (event) => {
     state.query = event.target.value;
+    state.searchEntityFilter = "";
     ensureSearchIndex();
     persistViewState();
-    renderSearchTarget();
+    clearTimeout(elements.searchInput.renderTimer);
+    elements.searchInput.renderTimer = setTimeout(renderSearchTarget, 120);
+  });
+  elements.searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      rememberSearch(state.query);
+      elements.searchInput.blur();
+      if (elements.searchAssist) elements.searchAssist.hidden = true;
+    } else if (event.key === "Escape") {
+      elements.searchInput.blur();
+      if (elements.searchAssist) elements.searchAssist.hidden = true;
+    }
+  });
+  if ("BarcodeDetector" in window && elements.searchScan && elements.searchScanInput) {
+    elements.searchScan.hidden = false;
+    elements.searchScan.addEventListener("click", (event) => {
+      event.preventDefault();
+      elements.searchScanInput.click();
+    });
+    elements.searchScanInput.addEventListener("change", async () => {
+      const file = elements.searchScanInput.files?.[0];
+      if (!file) return;
+      try {
+        const bitmap = await createImageBitmap(file);
+        const detector = new BarcodeDetector({ formats: ["ean_13", "ean_8", "code_128", "qr_code"] });
+        const [barcode] = await detector.detect(bitmap);
+        bitmap.close?.();
+        if (barcode?.rawValue) applySearchValue(barcode.rawValue);
+      } catch {
+        // Unsupported barcode formats can still be entered as a product code.
+      } finally {
+        elements.searchScanInput.value = "";
+      }
+    });
+  }
+  document.addEventListener("pointerdown", (event) => {
+    if (!event.target.closest(".search-field, .search-assist") && elements.searchAssist) elements.searchAssist.hidden = true;
   });
   elements.filterBody?.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-filter-key][data-filter-value]");
@@ -5191,11 +5259,15 @@ function pbandaiItemMatchesSearch(item, query) {
   if (!query) return true;
   const kit = item.kit_id ? displayKitById(item.kit_id) : null;
   if (kit && kitMatchesSearchQuery(kit, query)) return true;
-  const haystack = [item.id, item.title, item.price, item.status, item.category, item.source, item.url]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase();
-  return expandedSearchTerms(query).some((term) => haystack.includes(term));
+  const document = createSearchDocument({
+    kit_id: item.id,
+    franchise: pbandaiFranchiseForItem(item),
+    grade_code: item.category,
+    names: { ja: item.title, en: item.title, zh: item.title, ko: item.title },
+    tags: [item.source, item.status, item.price],
+    is_limited: true,
+  });
+  return scoreSearchDocument(document, query).score > 0;
 }
 
 function renderPBandaiFranchiseTabs(franchises) {
@@ -5234,6 +5306,100 @@ function marketSources() {
 
 function searchRecordForKit(kit) {
   return kit?.kit_id ? state.searchIndexByKit.get(kit.kit_id) || null : null;
+}
+
+function searchDocumentForKit(kit) {
+  if (!kit?.kit_id) return createSearchDocument(kit || {});
+  const indexed = searchRecordForKit(kit);
+  const cached = state.searchDocumentByKit.get(kit.kit_id);
+  if (cached?.indexed === indexed && cached?.kit === kit) return cached.document;
+  if (!state.atlasSearchByKit.size) {
+    for (const group of Object.values(state.atlasGroups?.franchises || {}).flatMap((groups) => Array.isArray(groups) ? groups : [])) {
+      const cmsAliases = Object.values(state.cmsPayload?.categories || {})
+        .filter((category) => category?.key === group.id)
+        .flatMap((category) => category.aliases || []);
+      const terms = {
+        aliases: cmsAliases,
+        series: [group.id, ...Object.values(group.labels || {})],
+      };
+      for (const kitId of group.kit_ids || []) {
+        const current = state.atlasSearchByKit.get(kitId) || { aliases: [], series: [] };
+        current.aliases.push(...terms.aliases);
+        current.series.push(...terms.series);
+        state.atlasSearchByKit.set(kitId, current);
+      }
+    }
+  }
+  const atlasTerms = state.atlasSearchByKit.get(kit.kit_id) || { aliases: [], series: [] };
+  const document = createSearchDocument(kit, indexed || {}, {
+    names: ["zh", "ko", "en", "ja"].map((language) => kitDisplayNameForLanguage(kit, language)),
+    aliases: atlasTerms.aliases,
+    series: [
+      seriesLabelFromSeries(kit.series, "zh"),
+      seriesLabelFromSeries(kit.series, "ko"),
+      seriesLabelFromSeries(kit.series, "en"),
+      seriesLabelFromSeries(kit.series, "ja"),
+      ...atlasTerms.series,
+    ],
+  });
+  state.searchDocumentByKit.set(kit.kit_id, { indexed, kit, document });
+  return document;
+}
+
+function searchDocumentsForKits(kits) {
+  return kits.map(searchDocumentForKit);
+}
+
+function searchHistory() {
+  try {
+    const values = JSON.parse(localStorage.getItem(SEARCH_HISTORY_KEY) || "[]");
+    return Array.isArray(values) ? values.filter(Boolean).slice(0, 8) : [];
+  } catch {
+    return [];
+  }
+}
+
+function rememberSearch(value) {
+  const query = String(value || "").trim();
+  if (!query) return;
+  const normalized = normalizeSearchText(query);
+  const next = [query, ...searchHistory().filter((item) => normalizeSearchText(item) !== normalized)].slice(0, 8);
+  localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(next));
+}
+
+function rememberSearchMiss(value) {
+  const query = String(value || "").trim();
+  if (query.length < 2) return;
+  let rows = [];
+  try { rows = JSON.parse(localStorage.getItem(SEARCH_MISS_KEY) || "[]"); } catch { rows = []; }
+  const normalized = normalizeSearchText(query);
+  const existing = rows.find((row) => row.normalized_query === normalized && row.franchise === state.franchise);
+  if (existing) {
+    existing.count = Number(existing.count || 0) + 1;
+    existing.last_seen_at = new Date().toISOString();
+  } else {
+    rows.unshift({ query, normalized_query: normalized, franchise: state.franchise, language: state.language, count: 1, last_seen_at: new Date().toISOString() });
+  }
+  const nextRows = rows.slice(0, 100);
+  localStorage.setItem(SEARCH_MISS_KEY, JSON.stringify(nextRows));
+  if (syncModeV2()) {
+    supabaseRpcV2("gunpula_log_search_miss", {
+      p_query: query,
+      p_normalized_query: normalized,
+      p_franchise: state.franchise,
+      p_language: state.language,
+    }).catch(() => null);
+  }
+}
+
+function applySearchValue(value, { remember = true } = {}) {
+  state.query = String(value || "").trim();
+  state.searchEntityFilter = "";
+  elements.searchInput.value = state.query;
+  if (remember) rememberSearch(state.query);
+  ensureSearchIndex();
+  persistViewState();
+  renderSearchTarget();
 }
 
 function marketRecordForKit(kit) {
@@ -5881,34 +6047,8 @@ function kitSeries(kit) {
 }
 
 function kitMatchesSearchQuery(kit, rawQuery = state.query) {
-  const query = rawQuery.trim().toLowerCase();
-  if (!query) return true;
-  const haystack = [
-    kit.kit_id,
-    kit.franchise,
-    kit.grade_code,
-    kit.subline,
-    kit.names.ja,
-    kit.names.en,
-    kit.names.zh,
-    kit.names.ko,
-    kitDisplayNameForLanguage(kit, "zh"),
-    kitDisplayNameForLanguage(kit, "ko"),
-    kitDisplayNameForLanguage(kit, "en"),
-    kitDisplayNameForLanguage(kit, "ja"),
-    seriesLabelFromKit(kit),
-    seriesLabelFromSeries(kit.series, "zh"),
-    seriesLabelFromSeries(kit.series, "ko"),
-    kit.series?.key,
-    kit.work_title,
-    kit.universe,
-    kit.release_date,
-    kit.price_jpy,
-    searchRecordForKit(kit)?.search_blob,
-  ]
-    .join(" ")
-    .toLowerCase();
-  return expandedSearchTerms(query).some((term) => haystack.includes(term));
+  const parsed = parseSearchQuery(rawQuery);
+  return !parsed.normalized || scoreSearchDocument(searchDocumentForKit(kit), parsed).score > 0;
 }
 
 function renderSearchTarget() {
@@ -5926,16 +6066,17 @@ function kitsForCurrentFranchise() {
 }
 
 function filteredKits() {
-  const query = state.query.trim().toLowerCase();
+  const query = state.query.trim();
+  const parsedQuery = parseSearchQuery(query);
   const minPrice = numericFilterValue(state.priceMin);
   const maxPrice = numericFilterValue(state.priceMax);
-  const source =
-    state.activeView === "owned"
+  const intentSource = searchCollectionIntentKits(parsedQuery);
+  const source = intentSource || (state.activeView === "owned"
       ? collectionIds("owned").map(displayKitById).filter(Boolean)
       : state.activeView === "wanted"
         ? collectionIds("wanted").map(displayKitById).filter(Boolean)
-        : kitsForCurrentFranchise();
-  return sortByPreference(source.filter((kit) => {
+        : kitsForCurrentFranchise());
+  const filtered = source.filter((kit) => {
     if (activeCollectionType() && !collectionFilterMatches(kit)) {
       return false;
     }
@@ -5964,8 +6105,38 @@ function filteredKits() {
     if (state.activeView === "catalog" && maxPrice !== null && (kit.price_jpy || 0) > maxPrice) {
       return false;
     }
-    return !query || kitMatchesSearchQuery(kit, query);
-  }));
+    return true;
+  });
+  if (!query) {
+    state.searchResults = [];
+    return sortByPreference(filtered);
+  }
+  const ranked = searchDocuments(searchDocumentsForKits(filtered), parsedQuery).results;
+  state.searchResults = ranked;
+  const entityFiltered = state.searchEntityFilter
+    ? ranked.filter((result) => result.document.entityKey === state.searchEntityFilter)
+    : ranked;
+  return entityFiltered.map((result) => result.item);
+}
+
+function searchCollectionIntentKits(parsed) {
+  if (!parsed?.collection) return null;
+  const status = parsed.collection;
+  const self = editableCollectionMember();
+  let member = parsed.owner === "self" ? self : null;
+  if (parsed.owner === "other") {
+    const selected = activeCollectionMember();
+    const candidates = [...new Set([...collectionMembers(), ...Object.keys(state.friendCollections || {})])].filter((name) => safeMemberName(name) !== self);
+    member = selected !== "all" && selected !== self ? selected : candidates[0];
+    if (!member) return [];
+  }
+  if (member) {
+    return Object.entries(memberItemsFor(member))
+      .filter(([, entry]) => entry?.status === status)
+      .map(([kitId]) => displayKitById(kitId))
+      .filter(Boolean);
+  }
+  return collectionIds(status).map(displayKitById).filter(Boolean);
 }
 
 function collectionFilterMatches(kit) {
@@ -10136,6 +10307,116 @@ function currentRenderSignature(kits) {
   });
 }
 
+function searchCopy(key) {
+  return SEARCH_COPY[state.language]?.[key] || SEARCH_COPY.zh[key] || key;
+}
+
+function addSearchAssistSection(container, title, entries, options = {}) {
+  if (!entries.length) return;
+  const section = document.createElement("section");
+  section.className = "search-assist-section";
+  const heading = document.createElement("div");
+  heading.className = "search-assist-heading";
+  heading.textContent = title;
+  if (options.clear) {
+    const clear = document.createElement("button");
+    clear.type = "button";
+    clear.textContent = searchCopy("clear");
+    clear.addEventListener("click", () => {
+      localStorage.removeItem(SEARCH_HISTORY_KEY);
+      renderSearchAssist();
+    });
+    heading.append(clear);
+  }
+  const list = document.createElement("div");
+  list.className = options.groups ? "search-entity-list" : "search-suggestion-list";
+  for (const entry of entries) {
+    const value = typeof entry === "string" ? entry : entry.value;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = options.groups ? `search-entity${state.searchEntityFilter === entry.key ? " is-active" : ""}` : "search-suggestion";
+    const label = document.createElement("strong");
+    label.textContent = typeof entry === "string" ? entry : entry.label;
+    button.append(label);
+    if (typeof entry !== "string" && entry.meta) {
+      const meta = document.createElement("span");
+      meta.textContent = entry.meta;
+      button.append(meta);
+    }
+    button.addEventListener("click", () => {
+      if (typeof entry?.action === "function") {
+        entry.action();
+      } else if (options.groups) {
+        state.searchEntityFilter = state.searchEntityFilter === entry.key ? "" : entry.key;
+        renderKits();
+      } else {
+        applySearchValue(value);
+      }
+    });
+    list.append(button);
+  }
+  section.append(heading, list);
+  container.append(section);
+}
+
+function parsedSearchChips(parsed) {
+  const chips = [];
+  if (parsed.owner) chips.push(searchCopy(parsed.owner));
+  if (parsed.collection) chips.push(searchCopy(parsed.collection));
+  if (parsed.limited) chips.push(searchCopy("limited"));
+  chips.push(...parsed.productLines.map((line) => line.toUpperCase()));
+  return [...new Set(chips)];
+}
+
+function renderSearchAssist() {
+  if (!elements.searchAssist) return;
+  const query = state.query.trim();
+  state.searchHasGlobalMatches = false;
+  const focused = document.activeElement === elements.searchInput;
+  const allDocuments = searchDocumentsForKits(kitsForCurrentFranchise());
+  elements.searchAssist.innerHTML = "";
+  if (!query) {
+    addSearchAssistSection(elements.searchAssist, searchCopy("recent"), searchHistory(), { clear: true });
+    elements.searchAssist.hidden = !focused || !elements.searchAssist.childElementCount;
+    return;
+  }
+  const parsed = parseSearchQuery(query);
+  const chips = parsedSearchChips(parsed);
+  if (chips.length) addSearchAssistSection(elements.searchAssist, searchCopy("understood"), chips.map((label) => ({ label, value: query })));
+  const groups = groupSearchResults(state.searchResults, 6).map((group) => ({
+    key: group.key,
+    label: group.name,
+    value: group.name,
+    meta: `${group.count} ${searchCopy("products")}`,
+  }));
+  addSearchAssistSection(elements.searchAssist, searchCopy("units"), groups, { groups: true });
+  if (!state.searchResults.length) {
+    const note = document.createElement("p");
+    note.className = "search-empty-note";
+    note.textContent = searchCopy("empty");
+    elements.searchAssist.append(note);
+    const globalRanked = searchDocuments(searchDocumentsForKits(state.kits), parsed, { limit: 40 }).results
+      .filter((result) => result.item.franchise !== state.franchise);
+    const globalMatches = groupSearchResults(globalRanked, 5)
+      .map((group) => ({
+        label: group.name,
+        value: query,
+        meta: franchiseLabel(group.items[0].franchise),
+        action: () => {
+          state.franchise = group.items[0].franchise;
+          localStorage.setItem(FRANCHISE_KEY, state.franchise);
+          state.searchEntityFilter = "";
+          ensureSearchIndex(state.franchise);
+          render();
+          persistViewState({ mode: "push" });
+        },
+      }));
+    state.searchHasGlobalMatches = globalMatches.length > 0;
+    addSearchAssistSection(elements.searchAssist, searchCopy("suggestions"), globalMatches.length ? globalMatches : suggestSearches(allDocuments, query));
+  }
+  elements.searchAssist.hidden = !elements.searchAssist.childElementCount;
+}
+
 function renderKits() {
   const kits = filteredKits();
   const signature = currentRenderSignature(kits);
@@ -10148,6 +10429,7 @@ function renderKits() {
   const titleKey = state.activeView === "owned" ? "ownedList" : state.activeView === "wanted" ? "wantedList" : "catalogList";
   elements.sectionTitle.textContent = t(titleKey);
   elements.resultCount.textContent = t("results", { count: kits.length });
+  renderSearchAssist();
   renderCollectionManagement(kits);
   elements.kitGrid.innerHTML = "";
 
@@ -10156,6 +10438,8 @@ function renderKits() {
     empty.className = "empty";
     empty.textContent = t("noMatches");
     elements.kitGrid.append(empty);
+    clearTimeout(renderKits.searchMissTimer);
+    if (!state.searchHasGlobalMatches) renderKits.searchMissTimer = setTimeout(() => rememberSearchMiss(state.query), 700);
     return;
   }
 
@@ -10248,6 +10532,7 @@ function openDetail(kit, options = {}) {
   state.activeModal = options.keepSettings ? "settings" : null;
   state.selectedImageIndex = 0;
   rememberViewedKit(kit);
+  if (state.query.trim()) rememberSearch(state.query);
 
   ensureSearchIndex(kit.franchise || state.franchise);
   renderDetail(kit);

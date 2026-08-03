@@ -20,6 +20,8 @@ import {
   seriesKey,
   validateProduct,
 } from "./cms-model.js";
+import { createSearchDocument, searchDocuments } from "../app/search-engine.js";
+import { kitDisplayNameForLanguage } from "../app/catalog-display.js";
 
 const FRANCHISES = [
   ["gundam", "高达"],
@@ -51,6 +53,7 @@ const sectionMeta = {
   duplicates: ["QUALITY", "重复处理"],
   changes: ["AUDIT LOG", "变更记录"],
   releases: ["RELEASES", "发布版本"],
+  search: ["SEARCH", "搜索洞察"],
 };
 
 const state = {
@@ -82,6 +85,7 @@ const state = {
   mediaMode: "all",
   announcementStatus: "all",
   loginEmail: "",
+  searchAliasCategoryId: "",
 };
 
 const elements = {
@@ -299,6 +303,7 @@ function render() {
     duplicates: renderDuplicates,
     changes: renderChanges,
     releases: renderReleases,
+    search: renderSearchInsights,
   };
   renderers[state.section]();
   bindWorkspaceControls();
@@ -373,8 +378,8 @@ function changeLabel(change) {
 }
 
 function filteredProducts() {
-  const query = state.productFilters.query.trim().toLowerCase();
-  return state.kits.filter((kit) => {
+  const query = state.productFilters.query.trim();
+  const filtered = state.kits.filter((kit) => {
     if (state.productFilters.franchise !== "all" && kit.franchise !== state.productFilters.franchise) return false;
     if (state.productFilters.category !== "all") {
       const category = state.categories.find((item) => item.id === state.productFilters.category);
@@ -390,19 +395,19 @@ function filteredProducts() {
     const hasImage = Boolean(imageUrl(kit));
     if (state.productFilters.image === "missing" && hasImage) return false;
     if (state.productFilters.image === "present" && !hasImage) return false;
-    if (!query) return true;
-    return [
-      kit.kit_id,
-      ...Object.values(kit.names || {}),
-      kit.work_title,
-      kit.universe,
-      kit.grade_code,
-      kit.subline,
-      ...(kit.tags || []),
-      ...sourceIds,
-      ...(kit.source_urls || []),
-    ].filter(Boolean).join(" ").toLowerCase().includes(query);
+    return true;
   });
+  if (!query) return filtered;
+  const documents = filtered.map((kit) => {
+    const categories = state.categories.filter((category) => category.linked_kit_ids?.includes(kit.kit_id));
+    return createSearchDocument(kit, {}, {
+      names: ["zh", "ko", "en", "ja"].map((language) => kitDisplayNameForLanguage(kit, language)),
+      aliases: categories.flatMap((category) => state.cms?.categories?.[category.id]?.aliases || []),
+      series: categories.flatMap((category) => [category.key, ...Object.values(category.labels || {})]),
+      codes: (kit.source_refs || []).map((source) => source.source_id),
+    });
+  });
+  return searchDocuments(documents, query).results.map((result) => result.item);
 }
 
 function renderProducts() {
@@ -718,6 +723,33 @@ function renderReleases() {
 
 function emptyState(iconName, title, body) {
   return `<div class="empty-state">${icon(iconName)}<h2>${escapeHtml(title)}</h2><p>${escapeHtml(body)}</p></div>`;
+}
+
+function renderSearchInsights() {
+  const misses = [...(state.bootstrap?.search_misses || [])]
+    .sort((a, b) => Number(b.count || 0) - Number(a.count || 0) || String(b.last_seen_at || "").localeCompare(String(a.last_seen_at || "")));
+  const categoryOptions = state.categories
+    .slice()
+    .sort((a, b) => String(a.franchise).localeCompare(String(b.franchise)) || Number(a.sort || 999) - Number(b.sort || 999))
+    .map((category) => [category.id, `${FRANCHISE_LABELS[category.franchise] || category.franchise} · ${category.labels?.zh || category.key}`]);
+  if (!categoryOptions.some(([id]) => id === state.searchAliasCategoryId)) state.searchAliasCategoryId = categoryOptions[0]?.[0] || "";
+  elements.workspace.innerHTML = `
+    ${sectionToolbar("搜索洞察", "这里聚合 App 中没有返回结果的搜索词。只保存搜索词、语言和主题，不保存账号或收藏内容。")}
+    <section class="panel search-insight-panel">
+      <div class="panel-head"><div><h2>待补搜索词</h2><p>${misses.length ? `${misses.length} 个词需要确认；高频词优先。` : "暂时没有零结果搜索。若线上一直为空，请运行 docs/supabase-search-insights.sql。"}</p></div></div>
+      <div class="search-alias-toolbar">
+        <label>别名要加入的分类<select id="searchAliasCategory">${optionMarkup(categoryOptions, state.searchAliasCategoryId)}</select></label>
+        <small>选择分类后，点某一行的“加入别名”，变更会先进入草稿。</small>
+      </div>
+      <div class="search-miss-list">
+        ${misses.map((row) => `<article class="search-miss-row">
+          <div><strong>${escapeHtml(row.query)}</strong><small>${escapeHtml(row.franchise || "all")} · ${escapeHtml(row.language || "—")} · 最近 ${escapeHtml(formatDate(row.last_seen_at))}</small></div>
+          <b>${Number(row.count || 1)} 次</b>
+          <button class="quiet-button" data-search-products="${escapeHtml(row.query)}">在商品中搜索</button>
+          <button class="primary-button" data-add-search-alias="${escapeHtml(row.query)}">加入别名</button>
+        </article>`).join("") || emptyInline("目前没有需要处理的搜索词")}
+      </div>
+    </section>`;
 }
 
 function announcementPatch(form, item) {
@@ -1219,6 +1251,30 @@ async function ignoreDuplicate(key) {
 
 function bindWorkspaceControls() {
   elements.workspace.querySelectorAll("[data-go]").forEach((button) => button.addEventListener("click", () => switchSection(button.dataset.go)));
+  elements.workspace.querySelector("#searchAliasCategory")?.addEventListener("change", (event) => {
+    state.searchAliasCategoryId = event.target.value;
+  });
+  elements.workspace.querySelectorAll("[data-search-products]").forEach((button) => button.addEventListener("click", () => {
+    state.productFilters = { ...DEFAULT_PRODUCT_FILTERS, query: button.dataset.searchProducts };
+    state.productPage = 1;
+    state.section = "products";
+    render();
+  }));
+  elements.workspace.querySelectorAll("[data-add-search-alias]").forEach((button) => button.addEventListener("click", async () => {
+    const category = state.categories.find((item) => item.id === state.searchAliasCategoryId);
+    const alias = button.dataset.addSearchAlias?.trim();
+    if (!category || !alias) return;
+    const aliases = [...new Set([...(category.aliases || []), alias])];
+    try {
+      await saveChange({ entity_type: "category", entity_id: category.id, operation: "edit", patch: { aliases }, before_value: { aliases: category.aliases || [] } });
+      toast(`已把“${alias}”加入 ${category.labels?.zh || category.key}，等待发布`);
+      await reloadBackend();
+      state.section = "search";
+      render();
+    } catch (error) {
+      toast(error.message, "error");
+    }
+  }));
   elements.workspace.querySelector("#addProduct")?.addEventListener("click", () => showProductInspector("", true));
   elements.workspace.querySelector("#addCategory")?.addEventListener("click", () => showCategoryInspector());
   elements.workspace.querySelectorAll("[data-product-id]").forEach((row) => row.addEventListener("click", (event) => {

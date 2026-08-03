@@ -84,12 +84,22 @@ export function logout() {
 export async function loadBootstrap() {
   if (isSignedIn()) {
     try {
-      return await rpc("gunpula_cms_get_bootstrap");
+      const bootstrap = await rpc("gunpula_cms_get_bootstrap");
+      try {
+        bootstrap.search_misses = await rpc("gunpula_cms_get_search_misses");
+      } catch {
+        bootstrap.search_misses = [];
+      }
+      return bootstrap;
     } catch (error) {
       if (!isLocalHost) throw error;
     }
   }
-  if (isLocalHost) return loadLocal();
+  if (isLocalHost) {
+    const bootstrap = loadLocal();
+    try { bootstrap.search_misses = JSON.parse(localStorage.getItem("gunpula-search-misses-v1") || "[]"); } catch { bootstrap.search_misses = []; }
+    return bootstrap;
+  }
   throw new Error("请先使用管理员邮箱登录");
 }
 

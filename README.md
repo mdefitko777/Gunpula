@@ -29,7 +29,8 @@ Android APK：
 你可以：
 
 - 按分类浏览商品
-- 搜索中 / 韩 / 英 / 日名称
+- 搜索中 / 韩 / 英 / 日名称、常用简称、商品编号和机体编号
+- 支持拼写容错、机体优先分组、最近搜索，以及“我的 MG SEED / 对方想要 AC6”这类收藏查询
 - 看商品图、发售日、定价和官方链接
 - 标记“想要”和“已购买”
 - 两个人共享同一个收藏空间
@@ -56,6 +57,8 @@ Android APK：
 后台只允许 `gunpula_cms_admins` 中启用的 Supabase 用户进入。第一次上线前，在 Supabase SQL Editor 完整执行：
 
 - `docs/supabase-cms.sql`
+
+已经安装旧版 CMS 时，再执行 `docs/supabase-search-insights.sql`，后台就能看到 App 中没有结果的搜索词，并把高频词直接补成分类别名。
 
 脚本默认把 `mdefitko@gmail.com` 设为管理员；要使用其他邮箱，修改 SQL 中的邮箱后重新执行管理员插入部分。更完整的使用和安全说明见：
 
@@ -294,6 +297,7 @@ npm run android:build
 - `app/catalog-loader.js`：数据加载，Android 壳内优先读取线上数据
 - `app/view-state.js`：URL hash、筛选状态、返回键状态
 - `app/search-index-store.js`：搜索索引注入
+- `app/search-engine.js`：多语言规范化、别名、意图解析、容错评分和机体分组
 - `app/collection-store.js`：收藏数据、成员数据、冲突合并
 - `app/storage.js`：localStorage 包装
 - `app/dialogs.js`：dialog 打开/关闭保护

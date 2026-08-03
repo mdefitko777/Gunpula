@@ -61,6 +61,69 @@ svg {
   display: none !important;
 }
 
+.search-alias-toolbar {
+  display: grid;
+  grid-template-columns: minmax(280px, 520px) 1fr;
+  gap: 18px;
+  align-items: end;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.search-alias-toolbar label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.search-alias-toolbar select {
+  min-height: 40px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--panel);
+}
+
+.search-alias-toolbar small,
+.search-miss-row small {
+  color: var(--muted);
+}
+
+.search-miss-list {
+  display: grid;
+}
+
+.search-miss-row {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) 70px auto auto;
+  gap: 12px;
+  align-items: center;
+  padding: 13px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.search-miss-row > div {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.search-miss-row strong,
+.search-miss-row small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .search-alias-toolbar,
+  .search-miss-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 .auth-screen {
   min-height: 100vh;
   display: grid;

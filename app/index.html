@@ -9,7 +9,7 @@
     <title>Gunpula v2.0.0</title>
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20260730-v85" />
+    <link rel="stylesheet" href="./styles.css?v=20260803-search1" />
   </head>
   <body>
     <main class="catalog-page">
@@ -23,8 +23,11 @@
         </div>
         <label class="search-field">
           <span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7.5"/><path d="m20.5 20.5-4.2-4.2"/></svg></span>
-          <input id="searchInput" type="search" placeholder="搜索名字 / 系列 / 产品线" data-i18n-placeholder="searchPlaceholder" />
+          <input id="searchInput" type="search" placeholder="搜索名字 / 系列 / 产品线" aria-label="搜索名字 / 系列 / 产品线" data-i18n-placeholder="searchPlaceholder" data-i18n-aria="searchPlaceholder" />
+          <button class="search-scan" id="searchScan" type="button" hidden aria-label="扫描商品条码"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 5v14M8 5v14M11 5v14M15 5v14M20 5v14"/></svg></button>
+          <input id="searchScanInput" type="file" accept="image/*" capture="environment" hidden />
         </label>
+        <section class="search-assist" id="searchAssist" hidden aria-live="polite"></section>
         <nav class="series-tabs" id="seriesTabs" aria-label="常用系列"></nav>
         <details class="filter-panel" id="filtersPanel">
           <summary>
@@ -742,6 +745,6 @@
       <div class="radial-labels"></div>
     </div>
 
-    <script type="module" src="./main.js?v=20260730-v85"></script>
+    <script type="module" src="./main.js?v=20260803-search1"></script>
   </body>
 </html>
