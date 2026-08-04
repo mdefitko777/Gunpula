@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-04T20:27:34.001Z",
+  "updated_at": "2026-08-04T21:35:43.966Z",
   "sources": [
     {
       "id": "naver_shop",
@@ -161,7 +161,7 @@
     "provider": "Frankfurter",
     "provider_url": "https://frankfurter.dev/",
     "date": "2026-08-04",
-    "fetched_at": "2026-08-04T20:27:34.001Z",
+    "fetched_at": "2026-08-04T21:35:43.966Z",
     "rates_to_krw": {
       "KRW": 1,
       "JPY": 9.066092905219023,
@@ -172,11 +172,11 @@
     "fetch_status": "ok"
   },
   "summary": {
-    "updated_at": "2026-08-04T20:27:34.001Z",
+    "updated_at": "2026-08-04T21:35:43.966Z",
     "sources_total": 10,
     "api_ready": 0,
     "manual_ready": 7,
-    "listing_samples": 8,
+    "listing_samples": 6,
     "priced_kits": 3,
     "keyword_records": 5228,
     "exchange_status": "ok",
@@ -222,8 +222,8 @@
     },
     {
       "source": "bunjang",
-      "samples": 6,
-      "matched": 6
+      "samples": 4,
+      "matched": 4
     },
     {
       "source": "joongna",
@@ -245,12 +245,12 @@
       "url": "https://m.bunjang.co.kr/products/421688737",
       "condition": "unknown",
       "status": "active",
-      "price": 40000,
+      "price": 60000,
       "shipping_price": 0,
       "currency": "KRW",
-      "price_krw": 40000,
-      "conservative_krw": 40000,
-      "captured_at": "2026-08-03T21:20:35.475Z",
+      "price_krw": 60000,
+      "conservative_krw": 60000,
+      "captured_at": "2026-08-04T21:34:24.889Z",
       "confidence": "auto",
       "notes": "Auto-fetched via bunjang search for \"HG 스로네 츠바이\"."
     },
@@ -267,7 +267,7 @@
       "currency": "KRW",
       "price_krw": 27000,
       "conservative_krw": 27000,
-      "captured_at": "2026-08-03T21:20:35.475Z",
+      "captured_at": "2026-08-04T21:34:24.889Z",
       "confidence": "auto",
       "notes": "Auto-fetched via bunjang search for \"HG 스로네 츠바이\"."
     },
@@ -284,7 +284,7 @@
       "currency": "KRW",
       "price_krw": 15000,
       "conservative_krw": 15000,
-      "captured_at": "2026-08-03T21:20:35.475Z",
+      "captured_at": "2026-08-04T21:34:24.889Z",
       "confidence": "auto",
       "notes": "Auto-fetched via bunjang search for \"HG 가랏조\"."
     },
@@ -301,24 +301,7 @@
       "currency": "KRW",
       "price_krw": 30000,
       "conservative_krw": 30000,
-      "captured_at": "2026-08-03T21:20:35.475Z",
-      "confidence": "auto",
-      "notes": "Auto-fetched via bunjang search for \"HG 가랏조\"."
-    },
-    {
-      "id": "bunjang:hg-hg-1-144-4543112599278000:aHR0cHM6Ly9tLm",
-      "kit_id": "hg-hg-1-144-4543112599278000",
-      "source": "bunjang",
-      "title": "반다이 HG 가랏조 건담 더블오 프라모델",
-      "url": "https://m.bunjang.co.kr/products/406343039",
-      "condition": "unknown",
-      "status": "active",
-      "price": 70000,
-      "shipping_price": 0,
-      "currency": "KRW",
-      "price_krw": 70000,
-      "conservative_krw": 70000,
-      "captured_at": "2026-08-03T21:20:35.475Z",
+      "captured_at": "2026-08-04T21:34:24.889Z",
       "confidence": "auto",
       "notes": "Auto-fetched via bunjang search for \"HG 가랏조\"."
     },
@@ -335,26 +318,9 @@
       "currency": "KRW",
       "price_krw": 180000,
       "conservative_krw": 180000,
-      "captured_at": "2026-08-03T21:20:35.475Z",
+      "captured_at": "2026-08-04T21:34:24.889Z",
       "confidence": "auto",
       "notes": "Auto-fetched via joongna search for \"HG 가랏조\"."
-    },
-    {
-      "id": "bunjang:hg-hg-1-144-4543112599384000:aHR0cHM6Ly9tLm",
-      "kit_id": "hg-hg-1-144-4543112599384000",
-      "source": "bunjang",
-      "title": "반다이 HG 가데스 건담 더블오 프라모델",
-      "url": "https://m.bunjang.co.kr/products/406342940",
-      "condition": "unknown",
-      "status": "active",
-      "price": 70000,
-      "shipping_price": 0,
-      "currency": "KRW",
-      "price_krw": 70000,
-      "conservative_krw": 70000,
-      "captured_at": "2026-08-03T21:20:35.475Z",
-      "confidence": "auto",
-      "notes": "Auto-fetched via bunjang search for \"HG 가데스\"."
     },
     {
       "id": "joongna:hg-hg-1-144-4543112599384000:aHR0cHM6Ly93ZW",
@@ -369,7 +335,7 @@
       "currency": "KRW",
       "price_krw": 150000,
       "conservative_krw": 150000,
-      "captured_at": "2026-08-03T21:20:35.475Z",
+      "captured_at": "2026-08-04T21:34:24.889Z",
       "confidence": "auto",
       "notes": "Auto-fetched via joongna search for \"HG 가데스\"."
     }
@@ -382,33 +348,32 @@
         "bunjang": 2
       },
       "min_krw": 27000,
-      "median_krw": 33500,
-      "conservative_median_krw": 33500,
-      "updated_at": "2026-08-04T20:27:34.001Z"
+      "median_krw": 43500,
+      "conservative_median_krw": 43500,
+      "updated_at": "2026-08-04T21:35:43.966Z"
     },
     "hg-hg-1-144-4543112599278000": {
       "kit_id": "hg-hg-1-144-4543112599278000",
-      "samples": 4,
+      "samples": 3,
       "sources": {
-        "bunjang": 3,
+        "bunjang": 2,
         "joongna": 1
       },
       "min_krw": 15000,
-      "median_krw": 50000,
-      "conservative_median_krw": 50000,
-      "updated_at": "2026-08-04T20:27:34.001Z"
+      "median_krw": 30000,
+      "conservative_median_krw": 30000,
+      "updated_at": "2026-08-04T21:35:43.966Z"
     },
     "hg-hg-1-144-4543112599384000": {
       "kit_id": "hg-hg-1-144-4543112599384000",
-      "samples": 2,
+      "samples": 1,
       "sources": {
-        "bunjang": 1,
         "joongna": 1
       },
-      "min_krw": 70000,
-      "median_krw": 110000,
-      "conservative_median_krw": 110000,
-      "updated_at": "2026-08-04T20:27:34.001Z"
+      "min_krw": 150000,
+      "median_krw": 150000,
+      "conservative_median_krw": 150000,
+      "updated_at": "2026-08-04T21:35:43.966Z"
     }
   }
 }
