@@ -37,6 +37,11 @@ const CATALOG_SOURCES = [
   { source_id: "banpresto_prize_jp", label: "Banpresto prize" },
   { source_id: "good_smile_global", label: "Good Smile (Pokemon)" },
   { source_id: "p_bandai_wayback", label: "Premium Bandai (Wayback)" },
+  { source_id: "aniplex_plus_fate_jp", label: "Aniplex+ (Fate)" },
+  { source_id: "ichiban_kuji_fate_jp", label: "Ichiban Kuji (Fate)" },
+  { source_id: "banpresto_prize_fate_jp", label: "Banpresto prize (Fate)" },
+  { source_id: "kotobukiya_fate_jp", label: "Kotobukiya (Fate)" },
+  { source_id: "tamashii_web_fate_jp", label: "Tamashii Web (Fate)" },
 ];
 
 function nowIso() {

@@ -18,6 +18,7 @@
     "import:pbandai-manual": "node scripts/import_pbandai_manual_products.mjs",
     "import:collectibles": "node scripts/import_bandai_collectibles.mjs",
     "import:fate": "node scripts/import_goodsmile_fate.mjs",
+    "import:fate-extra": "node scripts/import_fate_extra_sources.mjs",
     "import:pokemon-center": "node scripts/import_pokemon_center_jp.mjs",
     "localize": "node scripts/localize_catalog.mjs",
     "cache:ac-images": "node scripts/cache_ac_images.mjs",
@@ -54,7 +55,7 @@
     "import:bbx-db": "node scripts/import_bbx_database.mjs",
     "cache:bbx-images": "node scripts/cache_bbx_images.mjs",
     "refresh:pb:japan": "npm run import:pb:wayback && npm run check:sources",
-    "import:data": "npm run import:bandai && npm run import:collectibles && npm run import:pokemon-center && npm run import:takaratomy-pokemon && npm run import:pokemon-extra && npm run import:fate && npm run import:bbx-db && npm run import:gget && npm run map:gget && npm run atlas:groups && npm run import:pbandai-manual && npm run import:pb && npm run import:pb:wayback && npm run import:announcements && npm run cache:bbx-images && npm run localize && npm run check:sources",
+    "import:data": "npm run import:bandai && npm run import:collectibles && npm run import:pokemon-center && npm run import:takaratomy-pokemon && npm run import:pokemon-extra && npm run import:fate && npm run import:fate-extra && npm run import:bbx-db && npm run import:gget && npm run map:gget && npm run atlas:groups && npm run import:pbandai-manual && npm run import:pb && npm run import:pb:wayback && npm run import:announcements && npm run cache:bbx-images && npm run localize && npm run check:sources",
     "import:takaratomy-pokemon": "node scripts/import_takaratomy_pokemon.mjs",
     "import:pokemon-extra": "node scripts/import_pokemon_extra_sources.mjs"
   },
