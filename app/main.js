@@ -8450,6 +8450,10 @@ async function ensureBbxData() {
       return {
         series_id: s.series_id,
         name: bbxLocalize(s.names) || s.model_name || s.series_id,
+        // Keep the raw multilingual names + model code so search can match a
+        // Japanese/English name (ドラン, DRAN) while the UI shows Chinese.
+        names: s.names,
+        model_name: s.model_name,
         base_set_id: s.base_set_id,
         components,
         order: s.collection_order ?? 9999,
@@ -8555,6 +8559,52 @@ function bbxPartThumb(part) {
   return frame;
 }
 
+// Beyblade names run in near-identical families (BX-34 ドランバスター vs
+// BX-45 ドランブレイブ vs …), so scrolling 276 beys or 1000+ parts to find one is
+// hopeless. Match across every localized name plus the set/part codes.
+// Spaces and the various dashes/dots are dropped on both sides so "BX-34",
+// "BX 34" and "bx34" all find the same bey.
+function bbxNormalize(value) {
+  return String(value || "").toLowerCase().replace(/[\s·・‐‑–—-]/g, "");
+}
+
+function bbxMatchesQuery(entry, query) {
+  const needle = bbxNormalize(query);
+  if (!needle) return true;
+  const haystack = bbxNormalize(
+    [
+      entry?.name,
+      ...Object.values(entry?.names || {}),
+      entry?.model_name,
+      entry?.part_id,
+      entry?.series_id,
+      entry?.base_set_id,
+      entry?.product_id,
+      entry?.line,
+    ]
+      .filter(Boolean)
+      .join(" "),
+  );
+  return haystack.includes(needle);
+}
+
+// The input is built once and kept; only the results below it are repainted, so
+// typing never loses focus or caret position.
+function bbxSearchBox(placeholder, onQuery) {
+  const wrap = document.createElement("div");
+  wrap.className = "bbx-search";
+  const input = document.createElement("input");
+  input.type = "search";
+  input.placeholder = placeholder;
+  input.value = state.bbxQuery || "";
+  input.addEventListener("input", () => {
+    state.bbxQuery = input.value;
+    onQuery(state.bbxQuery);
+  });
+  wrap.append(input);
+  return wrap;
+}
+
 function renderBbxGuide(bbx) {
   const total = bbx.tops.length;
   const complete = bbx.tops.filter((t) => bbxTopStatus(t).status === "owned").length;
@@ -8568,9 +8618,20 @@ function renderBbxGuide(bbx) {
     elements.guideBody.append(empty);
     return;
   }
+
+  const results = document.createElement("div");
+  elements.guideBody.append(bbxSearchBox(t("bbxSearchPlaceholder"), () => paintBbxTops(bbx, results)), results);
+  paintBbxTops(bbx, results);
+}
+
+function paintBbxTops(bbx, container) {
+  const query = state.bbxQuery || "";
+  container.innerHTML = "";
+  let shown = 0;
   for (const line of bbx.lines) {
-    const tops = bbx.tops.filter((tp) => tp.line === line);
+    const tops = bbx.tops.filter((tp) => tp.line === line && bbxMatchesQuery(tp, query));
     if (!tops.length) continue;
+    shown += tops.length;
     const lit = tops.filter((tp) => bbxTopStatus(tp).status === "owned").length;
     const section = document.createElement("section");
     section.className = "guide-work";
@@ -8606,8 +8667,15 @@ function renderBbxGuide(bbx) {
       grid.append(cell);
     }
     section.append(grid);
-    elements.guideBody.append(section);
+    container.append(section);
   }
+  if (!shown) {
+    const empty = document.createElement("p");
+    empty.className = "settings-hint";
+    empty.textContent = t("bbxSearchEmpty", { query });
+    container.append(empty);
+  }
+  applyGuideColorMode();
 }
 
 function bbxPartTypeLabel(type) {
@@ -8650,6 +8718,23 @@ function renderBbxParts(bbx) {
   }
   elements.guideBody.append(chips);
 
+  const results = document.createElement("div");
+  elements.guideBody.append(bbxSearchBox(t("bbxSearchPlaceholder"), () => paintBbxParts(bbx, results)), results);
+  paintBbxParts(bbx, results);
+}
+
+function paintBbxParts(bbx, container) {
+  const query = state.bbxQuery || "";
+  const parts = (bbx.partsByType.get(state.bbxPartType) || []).filter((part) => bbxMatchesQuery(part, query));
+  container.innerHTML = "";
+  if (!parts.length) {
+    const empty = document.createElement("p");
+    empty.className = "settings-hint";
+    empty.textContent = t("bbxSearchEmpty", { query });
+    container.append(empty);
+    return;
+  }
+
   const grid = document.createElement("div");
   grid.className = "guide-grid bbx-part-grid";
   for (const part of parts) {
@@ -8678,7 +8763,8 @@ function renderBbxParts(bbx) {
     cell.addEventListener("click", () => openBbxPart(part));
     grid.append(cell);
   }
-  elements.guideBody.append(grid);
+  container.append(grid);
+  applyGuideColorMode();
 }
 
 // Part detail: image, stats, and the 陀螺 that ship/use this part (the reverse

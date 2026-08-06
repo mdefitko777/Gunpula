@@ -9198,3 +9198,24 @@ body[data-view="updates"] .source-health-strip {
 .friends-error {
   color: var(--danger, #be2d2a);
 }
+
+/* BBX guide search: beys and parts run in near-identical name families, so the
+   list is unusable without filtering. */
+.bbx-search {
+  padding: 8px 0 4px;
+}
+
+.bbx-search input {
+  width: 100%;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.bbx-search input::placeholder {
+  color: var(--faint);
+}
