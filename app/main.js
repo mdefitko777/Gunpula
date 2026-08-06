@@ -5012,7 +5012,9 @@ function renderDiscoveryChannels(mode, count) {
     { label: t("monthReleaseShort"), active: mode === "month" && state.activeView === "updates", action: () => setUpdatesMode("month"), count: mode === "month" ? count : undefined },
     { label: t("updatesAllShort"), active: mode === "all" && state.activeView === "updates", action: () => setUpdatesMode("all"), count: mode === "all" ? count : undefined },
   ];
-  if (state.franchise === "gundam") {
+  // Offer the 公式予告 channel wherever the world actually has announcements,
+  // rather than only for Gundam as when the feed was Gundam-only.
+  if (state.announcements.some((item) => item.franchise === state.franchise)) {
     channels.splice(2, 0, { label: t("announcementsShort"), active: mode === "announced" && state.activeView === "updates", action: () => setUpdatesMode("announced"), count: mode === "announced" ? count : undefined });
   }
   for (const channel of channels) {
@@ -5067,7 +5069,10 @@ function renderHomeUpdates() {
   const mode = UPDATES_MODES.includes(state.updatesMode) ? state.updatesMode : "recent";
   if (elements.updatesDateInput) elements.updatesDateInput.hidden = ["recent", "announced"].includes(mode);
   if (mode === "announced") {
-    const announcements = state.franchise === "gundam" ? state.announcements : [];
+    // The feed used to be Gundam-only, so this pinned the panel to that world
+    // and every other world showed an empty 公式预告 tab no matter what was
+    // collected. Announcements now carry their own franchise.
+    const announcements = state.announcements.filter((item) => item.franchise === state.franchise);
     renderDiscoveryChannels(mode, announcements.length);
     if (elements.sourceHealthStrip) elements.sourceHealthStrip.hidden = true;
     elements.updatesSubtitle.textContent = t("announcementSummary", { count: announcements.length });

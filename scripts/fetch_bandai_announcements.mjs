@@ -3,9 +3,13 @@ import { basename } from "node:path";
 import {
   BANDAI_HOBBY_NEWS_URL,
   BANDAI_HOBBY_YOUTUBE_FEED_URL,
+  BEYBLADE_X_NEWS_URL,
+  TAMASHII_NEWS_URL,
   mergeAnnouncementRecords,
   parseBandaiHobbyNews,
   parseBandaiYoutubeFeed,
+  parseBeybladeNews,
+  parseTamashiiNews,
 } from "./lib/bandai-announcements.mjs";
 
 const OUTPUT_PATH = "data/announcements.json";
@@ -74,11 +78,14 @@ const incoming = [];
 for (const source of [
   { id: "bandai_hobby_news", url: BANDAI_HOBBY_NEWS_URL, parse: parseBandaiHobbyNews },
   { id: "bandai_hobby_youtube", url: BANDAI_HOBBY_YOUTUBE_FEED_URL, parse: parseBandaiYoutubeFeed },
+  { id: "tamashii_news", url: TAMASHII_NEWS_URL, parse: parseTamashiiNews },
+  { id: "beyblade_x_news", url: BEYBLADE_X_NEWS_URL, parse: parseBeybladeNews },
 ]) {
   try {
     const records = source.parse(await fetchText(source.url));
     incoming.push(...records);
-    console.log(`${source.id}: ${records.length} Gundam announcement records`);
+    const byFranchise = records.reduce((acc, record) => ({ ...acc, [record.franchise]: (acc[record.franchise] || 0) + 1 }), {});
+    console.log(`${source.id}: ${records.length} announcement records ${JSON.stringify(byFranchise)}`);
   } catch (error) {
     errors.push({ source_id: source.id, message: error.message });
     console.warn(`${source.id}: ${error.message}`);
@@ -92,6 +99,8 @@ await writeFile(OUTPUT_PATH, `${JSON.stringify({
   sources: [
     { source_id: "bandai_hobby_news", name: "BANDAI SPIRITS", url: BANDAI_HOBBY_NEWS_URL },
     { source_id: "bandai_hobby_youtube", name: "BANDAI Hobby Site YouTube", url: BANDAI_HOBBY_YOUTUBE_FEED_URL },
+    { source_id: "tamashii_news", name: "TAMASHII WEB", url: TAMASHII_NEWS_URL },
+    { source_id: "beyblade_x_news", name: "BEYBLADE X", url: BEYBLADE_X_NEWS_URL },
   ],
   fetch_errors: errors,
   announcements,
