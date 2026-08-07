@@ -484,6 +484,100 @@
         "release date before product listing"
       ],
       "notes": "Official news and YouTube candidates stay in the announcement center until an administrator links or creates a formal product."
+    },
+    {
+      "source_id": "aniplex_plus_fate_jp",
+      "name": "Aniplex+ (Fate / TYPE-MOON)",
+      "type": "official_manufacturer_jp",
+      "country": "JP",
+      "base_url": "https://online.aniplex.co.jp/search?q=Fate",
+      "priority": 14,
+      "best_for": [
+        "Aniplex-exclusive Fate scale figures",
+        "preorder windows",
+        "release month",
+        "official gallery images",
+        "Japan price"
+      ],
+      "weak_for": [
+        "non-Aniplex makers",
+        "flat goods are deliberately not imported"
+      ],
+      "notes": "Aniplex+ official store. The importer keeps figure-class products only; its keyword search also returns ~1600 badge/acrylic goods whose grid tiles carry no release date."
+    },
+    {
+      "source_id": "ichiban_kuji_fate_jp",
+      "name": "Ichiban Kuji Japan (Fate)",
+      "type": "official_lottery_jp",
+      "country": "JP",
+      "base_url": "https://1kuji.com/products/search?index_master_search=444",
+      "priority": 15,
+      "best_for": [
+        "Fate Ichiban Kuji prize lineups",
+        "official prize images",
+        "draw period"
+      ],
+      "weak_for": [
+        "ordinary retail figures",
+        "older archive availability"
+      ],
+      "notes": "Same site as ichiban_kuji_jp, filtered to the Fate関連作品 title (id 444)."
+    },
+    {
+      "source_id": "banpresto_prize_fate_jp",
+      "name": "Banpresto Prize (Fate)",
+      "type": "official_prize_jp",
+      "country": "JP",
+      "base_url": "https://bsp-prize.jp/title/IP00004797/",
+      "priority": 16,
+      "best_for": [
+        "Fate prize figures and plush",
+        "release month",
+        "official prize images"
+      ],
+      "weak_for": [
+        "retail figures",
+        "price (prize items carry none)"
+      ],
+      "notes": "Banpresto prize-figure site, Fate シリーズ title page."
+    },
+    {
+      "source_id": "kotobukiya_fate_jp",
+      "name": "Kotobukiya Online Shop (Fate)",
+      "type": "official_manufacturer_jp",
+      "country": "JP",
+      "base_url": "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=Fate",
+      "priority": 14,
+      "best_for": [
+        "Kotobukiya Fate scale figures",
+        "release month",
+        "Japan price",
+        "spec and scale"
+      ],
+      "weak_for": [
+        "other makers",
+        "cloud IPs are often served 403"
+      ],
+      "notes": "Shift-JIS storefront shared with the Armored Core importer; listing tiles carry no price or date, so each product needs its detail page."
+    },
+    {
+      "source_id": "tamashii_web_fate_jp",
+      "name": "Tamashii Web (Fate)",
+      "type": "official_manufacturer_jp",
+      "country": "JP",
+      "base_url": "https://tamashiiweb.com/item_character/fate_series/",
+      "priority": 14,
+      "best_for": [
+        "Figuarts / Figuarts ZERO Fate figures",
+        "exact release date",
+        "Japan price",
+        "brand line"
+      ],
+      "weak_for": [
+        "coverage (the Fate character filter lists few items)",
+        "works other than FGO/Zero"
+      ],
+      "notes": "JSON API search_item.php filtered by the fate_series and fate_zero character codes. Keyword parameters are ignored by that endpoint and per_page caps at 40."
     }
   ]
 }
