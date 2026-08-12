@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-12",
+  "updated_at": "2026-08-13",
   "scope": "Individual model kit and official collectible catalog imported from Japanese official BANDAI SPIRITS, Bandai Candy, Bandai Gashapon, Bandai Hobby, Tamashii Web, Kotobukiya, and Takara Tomy sources. Covers Gundam, Armored Core, Pokemon, and BEYBLADE X records. Records are needs_review until field-level human checks are complete.",
   "kits": [
     {
@@ -4452,6 +4452,87 @@
       }
     },
     {
+      "kit_id": "beyblade-x-cx19",
+      "franchise": "beyblade",
+      "grade_code": "BEYBLADE_X",
+      "subline": "BEYBLADE X Random Booster",
+      "number": null,
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX19_list.png",
+        "box_art_source_id": "takara_tomy_beyblade_x_jp"
+      },
+      "gallery_image_urls": [
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX19_list.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX19@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX19_01@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX19_02@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX19_03@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX19_04@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX19_05@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX19_06@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX19_07@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX19_08@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX19_09@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX19_10@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX19_11@1.png"
+      ],
+      "universe": "BEYBLADE X",
+      "work_title": "CX",
+      "release_date": "2026-09-12",
+      "price_jpy": 1600,
+      "is_limited": false,
+      "data_status": "needs_review",
+      "source_urls": [
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx19.html",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "takara_tomy_beyblade_x_jp",
+          "url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx19.html",
+          "fields": [
+            "franchise",
+            "names",
+            "grade_code",
+            "subline",
+            "scale",
+            "release_date",
+            "price_jpy",
+            "images",
+            "gallery_image_urls",
+            "work_title",
+            "universe"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "beyblade",
+        "beyblade x",
+        "takara tomy",
+        "battle toy",
+        "cx"
+      ],
+      "notes": "Imported from the official Takara Tomy BEYBLADE X lineup and product detail pages.",
+      "names": {
+        "ja": "CX-19 ランダムブースター クロコトレッドセレクト",
+        "en": "CX-19 ランダムブースター クロコトレッドセレクト",
+        "zh": "CX-19 ランダムブースター クロコトレッドセレクト",
+        "ko": "CX-19 ランダムブースター クロコトレッドセレクト"
+      },
+      "series": {
+        "key": "beyblade_cx",
+        "sort": 423,
+        "labels": {
+          "zh": "CX",
+          "en": "CX",
+          "ja": "CX",
+          "ko": "CX"
+        }
+      }
+    },
+    {
       "kit_id": "beyblade-x-cx00-eva",
       "franchise": "beyblade",
       "grade_code": "BEYBLADE_X",
@@ -4841,6 +4922,75 @@
         {
           "source_id": "takara_tomy_beyblade_x_jp",
           "url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/",
+          "fields": [
+            "franchise",
+            "names",
+            "grade_code",
+            "subline",
+            "scale",
+            "release_date",
+            "price_jpy",
+            "images",
+            "gallery_image_urls",
+            "work_title",
+            "universe"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "beyblade",
+        "beyblade x",
+        "takara tomy",
+        "battle toy",
+        "bx"
+      ],
+      "notes": "Imported from the official Takara Tomy BEYBLADE X lineup and product detail pages.",
+      "series": {
+        "key": "beyblade_bx",
+        "sort": 421,
+        "labels": {
+          "zh": "BX",
+          "en": "BX",
+          "ja": "BX",
+          "ko": "BX"
+        }
+      },
+      "names": {
+        "ja": "BX-00 ストームペガシス3-70RA",
+        "en": "BX-00 ストームペガシス3-70RA",
+        "zh": "BX-00 ストームペガシス3-70RA",
+        "ko": "BX-00 스톰 페가시스 3-70RA"
+      }
+    },
+    {
+      "kit_id": "beyblade-x-bx00-sp",
+      "franchise": "beyblade",
+      "grade_code": "BEYBLADE_X",
+      "subline": "BEYBLADE X Starter",
+      "number": null,
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/BXG47_list.png",
+        "box_art_source_id": "takara_tomy_beyblade_x_jp"
+      },
+      "gallery_image_urls": [
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/BXG47_list.png"
+      ],
+      "universe": "BEYBLADE X",
+      "work_title": "BX",
+      "release_date": "2026-07-11",
+      "price_jpy": 2620,
+      "is_limited": false,
+      "data_status": "needs_review",
+      "source_urls": [
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/bx00-sp.html",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "takara_tomy_beyblade_x_jp",
+          "url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/bx00-sp.html",
           "fields": [
             "franchise",
             "names",
@@ -6254,6 +6404,74 @@
       }
     },
     {
+      "kit_id": "beyblade-x-cx-16-125",
+      "franchise": "beyblade",
+      "grade_code": "BEYBLADE_X",
+      "subline": "BEYBLADE X Set",
+      "number": null,
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX16_list.png",
+        "box_art_source_id": "takara_tomy_beyblade_x_jp"
+      },
+      "gallery_image_urls": [
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX16_list.png"
+      ],
+      "universe": "BEYBLADE X",
+      "work_title": "CX",
+      "release_date": "2026-03-28",
+      "price_jpy": 5650,
+      "is_limited": false,
+      "data_status": "needs_review",
+      "source_urls": [
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "takara_tomy_beyblade_x_jp",
+          "url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/",
+          "fields": [
+            "franchise",
+            "names",
+            "grade_code",
+            "subline",
+            "scale",
+            "release_date",
+            "price_jpy",
+            "images",
+            "gallery_image_urls",
+            "work_title",
+            "universe"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "beyblade",
+        "beyblade x",
+        "takara tomy",
+        "battle toy",
+        "cx"
+      ],
+      "notes": "Imported from the official Takara Tomy BEYBLADE X lineup and product detail pages.",
+      "names": {
+        "ja": "CX-16 スタートダッシュセットC",
+        "en": "CX-16 スタートダッシュSetC",
+        "zh": "CX-16 スタートダッシュ套装C",
+        "ko": "CX-16 スタートダッシュ세트C"
+      },
+      "series": {
+        "key": "beyblade_cx",
+        "sort": 423,
+        "labels": {
+          "zh": "CX",
+          "en": "CX",
+          "ja": "CX",
+          "ko": "CX"
+        }
+      }
+    },
+    {
       "kit_id": "beyblade-x-cx16",
       "franchise": "beyblade",
       "grade_code": "BEYBLADE_X",
@@ -6316,12 +6534,6 @@
         "cx"
       ],
       "notes": "Imported from the official Takara Tomy BEYBLADE X lineup and product detail pages.",
-      "names": {
-        "ja": "CX-16 スタートダッシュセットC",
-        "en": "CX-16 スタートダッシュSetC",
-        "zh": "CX-16 スタートダッシュ套装C",
-        "ko": "CX-16 スタートダッシュ세트C"
-      },
       "series": {
         "key": "beyblade_cx",
         "sort": 423,
@@ -6331,6 +6543,12 @@
           "ja": "CX",
           "ko": "CX"
         }
+      },
+      "names": {
+        "ja": "CX-16 スタートダッシュセットC",
+        "en": "CX-16 スタートダッシュSetC",
+        "zh": "CX-16 スタートダッシュ套装C",
+        "ko": "CX-16 スタートダッシュ세트C"
       }
     },
     {
@@ -9255,12 +9473,6 @@
         "cx"
       ],
       "notes": "Imported from the official Takara Tomy BEYBLADE X lineup and product detail pages.",
-      "names": {
-        "ja": "CX-01 ドランブレイブS6-60V",
-        "en": "CX-01 ドランブレイブS6-60V",
-        "zh": "CX-01 ドランブレイブS6-60V",
-        "ko": "CX-01 ドランブレイブS6-60V"
-      },
       "series": {
         "key": "beyblade_cx",
         "sort": 423,
@@ -9270,6 +9482,12 @@
           "ja": "CX",
           "ko": "CX"
         }
+      },
+      "names": {
+        "ja": "CX-01 ドランブレイブS6-60V",
+        "en": "CX-01 ドランブレイブS6-60V",
+        "zh": "CX-01 ドランブレイブS6-60V",
+        "ko": "CX-01 ドランブレイブS6-60V"
       }
     },
     {
@@ -9299,6 +9517,162 @@
         {
           "source_id": "takara_tomy_beyblade_x_jp",
           "url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/",
+          "fields": [
+            "franchise",
+            "names",
+            "grade_code",
+            "subline",
+            "scale",
+            "release_date",
+            "price_jpy",
+            "images",
+            "gallery_image_urls",
+            "work_title",
+            "universe"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "beyblade",
+        "beyblade x",
+        "takara tomy",
+        "battle toy",
+        "cx"
+      ],
+      "notes": "Imported from the official Takara Tomy BEYBLADE X lineup and product detail pages.",
+      "series": {
+        "key": "beyblade_cx",
+        "sort": 423,
+        "labels": {
+          "zh": "CX",
+          "en": "CX",
+          "ja": "CX",
+          "ko": "CX"
+        }
+      },
+      "names": {
+        "ja": "CX-02 ウィザードアークR4-55LO",
+        "en": "CX-02 ウィザードアークR4-55LO",
+        "zh": "CX-02 ウィザードアークR4-55LO",
+        "ko": "CX-02 ウィザードアークR4-55LO"
+      }
+    },
+    {
+      "kit_id": "beyblade-x-cx01",
+      "franchise": "beyblade",
+      "grade_code": "BEYBLADE_X",
+      "subline": "BEYBLADE X Starter",
+      "number": null,
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX01_list.png",
+        "box_art_source_id": "takara_tomy_beyblade_x_jp"
+      },
+      "gallery_image_urls": [
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX01_list.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX01@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX01_01@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX01_02@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX01_03@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX01_04@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX01_05@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX01_06@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX01_07@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX01_08@1.png"
+      ],
+      "universe": "BEYBLADE X",
+      "work_title": "CX",
+      "release_date": "2025-03-29",
+      "price_jpy": 2200,
+      "is_limited": false,
+      "data_status": "needs_review",
+      "source_urls": [
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx01.html",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "takara_tomy_beyblade_x_jp",
+          "url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx01.html",
+          "fields": [
+            "franchise",
+            "names",
+            "grade_code",
+            "subline",
+            "scale",
+            "release_date",
+            "price_jpy",
+            "images",
+            "gallery_image_urls",
+            "work_title",
+            "universe"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "beyblade",
+        "beyblade x",
+        "takara tomy",
+        "battle toy",
+        "cx"
+      ],
+      "notes": "Imported from the official Takara Tomy BEYBLADE X lineup and product detail pages.",
+      "names": {
+        "ja": "CX-01 ドランブレイブS6-60V",
+        "en": "CX-01 ドランブレイブS6-60V",
+        "zh": "CX-01 ドランブレイブS6-60V",
+        "ko": "CX-01 ドランブレイブS6-60V"
+      },
+      "series": {
+        "key": "beyblade_cx",
+        "sort": 423,
+        "labels": {
+          "zh": "CX",
+          "en": "CX",
+          "ja": "CX",
+          "ko": "CX"
+        }
+      }
+    },
+    {
+      "kit_id": "beyblade-x-cx02",
+      "franchise": "beyblade",
+      "grade_code": "BEYBLADE_X",
+      "subline": "BEYBLADE X Starter",
+      "number": null,
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX02_list.png",
+        "box_art_source_id": "takara_tomy_beyblade_x_jp"
+      },
+      "gallery_image_urls": [
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX02_list.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX02@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX02_01@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX02_02@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX02_03@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX02_04@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX02_05@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX02_06@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX02_07@1.png",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/CX02_08@1.png"
+      ],
+      "universe": "BEYBLADE X",
+      "work_title": "CX",
+      "release_date": "2025-03-29",
+      "price_jpy": 2200,
+      "is_limited": false,
+      "data_status": "needs_review",
+      "source_urls": [
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx02.html",
+        "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "takara_tomy_beyblade_x_jp",
+          "url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx02.html",
           "fields": [
             "franchise",
             "names",
@@ -91054,8 +91428,7 @@
       "is_limited": false,
       "data_status": "needs_review",
       "source_urls": [
-        "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102662842000&grp_id=5325",
-        "https://p-bandai.jp/item/item-1000206407/"
+        "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102662842000&grp_id=5325"
       ],
       "source_refs": [
         {
@@ -91074,25 +91447,13 @@
             "universe"
           ],
           "confidence": "high"
-        },
-        {
-          "source_id": "p_bandai_jp",
-          "url": "https://p-bandai.jp/item/item-1000206407/",
-          "fields": [
-            "source_urls",
-            "sales_channel"
-          ],
-          "confidence": "high"
         }
       ],
       "tags": [
         "gunpla",
-        "bandai spirits import",
-        "premium bandai jp",
-        "p-bandai jp",
-        "official store"
+        "bandai spirits import"
       ],
-      "notes": "Imported from BANDAI SPIRITS product search. Release text: 2024年01月26日. Premium Bandai Japan official store link recovered from the Japanese BANDAI SPIRITS product page.",
+      "notes": "Imported from BANDAI SPIRITS product search. Release text: 2024年01月26日.",
       "series": {
         "key": "seed",
         "sort": 30,
@@ -91140,8 +91501,7 @@
       "is_limited": false,
       "data_status": "needs_review",
       "source_urls": [
-        "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102662859000&grp_id=5325",
-        "https://p-bandai.jp/item/item-1000206408/"
+        "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102662859000&grp_id=5325"
       ],
       "source_refs": [
         {
@@ -91160,25 +91520,13 @@
             "universe"
           ],
           "confidence": "high"
-        },
-        {
-          "source_id": "p_bandai_jp",
-          "url": "https://p-bandai.jp/item/item-1000206408/",
-          "fields": [
-            "source_urls",
-            "sales_channel"
-          ],
-          "confidence": "high"
         }
       ],
       "tags": [
         "gunpla",
-        "bandai spirits import",
-        "premium bandai jp",
-        "p-bandai jp",
-        "official store"
+        "bandai spirits import"
       ],
-      "notes": "Imported from BANDAI SPIRITS product search. Release text: 2024年01月26日. Premium Bandai Japan official store link recovered from the Japanese BANDAI SPIRITS product page.",
+      "notes": "Imported from BANDAI SPIRITS product search. Release text: 2024年01月26日.",
       "series": {
         "key": "seed",
         "sort": 30,
@@ -407305,12 +407653,6 @@
       "subline": "Pokemon Center Plush",
       "number": "4521329376011",
       "scale": "non-scale",
-      "names": {
-        "ja": "カラビナ付きマスコット イーブイ",
-        "en": "カラビナ付きマスコット イーブイ",
-        "zh": "カラビナ付きマスコット イーブイ",
-        "ko": "カラビナ付きマスコット イーブイ"
-      },
       "images": {
         "box_art_url": "https://www.pokemoncenter-online.com/a/img/item/4521329376011/M/cff2ecf7ba57a7b9f349f30fea35ed957e6a08809a01aedc32159b8cdd723230.jpg",
         "box_art_source_id": "pokemon_center_jp"
@@ -407355,6 +407697,12 @@
           "ja": "ポケモン",
           "ko": "포켓몬"
         }
+      },
+      "names": {
+        "ja": "カラビナ付きマスコット イーブイ",
+        "en": "カラビナ付きマスコット イーブイ",
+        "zh": "カラビナ付きマスコット イーブイ",
+        "ko": "カラビナ付きマスコット イーブイ"
       }
     },
     {
@@ -407423,12 +407771,6 @@
       "subline": "Pokemon Center Plush",
       "number": "4521329381664",
       "scale": "non-scale",
-      "names": {
-        "ja": "カラビナ付きマスコット ヒノアラシ",
-        "en": "カラビナ付きマスコット ヒノアラシ",
-        "zh": "カラビナ付きマスコット ヒノアラシ",
-        "ko": "カラビナ付きマスコット ヒノアラシ"
-      },
       "images": {
         "box_art_url": "https://www.pokemoncenter-online.com/a/img/item/4521329381664/M/275679ba07d23cc7c70fcafa7f5f0dfab610d885e189d1f302a7ee0bb728afc1.jpg",
         "box_art_source_id": "pokemon_center_jp"
@@ -407473,6 +407815,12 @@
           "ja": "ポケモン",
           "ko": "포켓몬"
         }
+      },
+      "names": {
+        "ja": "カラビナ付きマスコット ヒノアラシ",
+        "en": "カラビナ付きマスコット ヒノアラシ",
+        "zh": "カラビナ付きマスコット ヒノアラシ",
+        "ko": "カラビナ付きマスコット ヒノアラシ"
       }
     },
     {
@@ -408733,12 +409081,6 @@
       "subline": "Pokemon Center Plush",
       "number": "4521329419084",
       "scale": "non-scale",
-      "names": {
-        "ja": "マスコット Don’t Attack Me ミミッキュ",
-        "en": "マスコット Don’t Attack Me ミミッキュ",
-        "zh": "マスコット Don’t Attack Me ミミッキュ",
-        "ko": "マスコット Don’t Attack Me ミミッキュ"
-      },
       "images": {
         "box_art_url": "https://www.pokemoncenter-online.com/a/img/item/4521329419084/M/814371dce79958b39bb9b4a0cb4a721762a9a431b10b54c1ae0067af1320d2e8.jpg",
         "box_art_source_id": "pokemon_center_jp"
@@ -408783,6 +409125,12 @@
           "ja": "ポケモン",
           "ko": "포켓몬"
         }
+      },
+      "names": {
+        "ja": "マスコット Don’t Attack Me ミミッキュ",
+        "en": "マスコット Don’t Attack Me ミミッキュ",
+        "zh": "マスコット Don’t Attack Me ミミッキュ",
+        "ko": "マスコット Don’t Attack Me ミミッキュ"
       }
     },
     {
@@ -409618,6 +409966,65 @@
       }
     },
     {
+      "kit_id": "pokemon-center-4521329437187",
+      "franchise": "pokemon",
+      "grade_code": "POKE_PLUSH",
+      "subline": "Pokemon Center Plush",
+      "number": "4521329437187",
+      "scale": "non-scale",
+      "names": {
+        "ja": "カラビナ付きマスコット モクロー",
+        "en": "カラビナ付きマスコット モクロー",
+        "zh": "カラビナ付きマスコット モクロー",
+        "ko": "カラビナ付きマスコット モクロー"
+      },
+      "images": {
+        "box_art_url": "https://www.pokemoncenter-online.com/a/img/item/4521329437187/M/72363eb940a09f743b7674d1654628b677b521f1137c3d123588ceb9b0f2e616.jpg",
+        "box_art_source_id": "pokemon_center_jp"
+      },
+      "gallery_image_urls": [
+        "https://www.pokemoncenter-online.com/a/img/item/4521329437187/M/72363eb940a09f743b7674d1654628b677b521f1137c3d123588ceb9b0f2e616.jpg"
+      ],
+      "universe": "Pokemon",
+      "work_title": "Pokemon",
+      "release_date": null,
+      "price_jpy": 1540,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://www.pokemoncenter-online.com/4521329437187.html"
+      ],
+      "source_refs": [
+        {
+          "source_id": "pokemon_center_jp",
+          "url": "https://www.pokemoncenter-online.com/4521329437187.html",
+          "fields": [
+            "names",
+            "price_jpy",
+            "images",
+            "grade_code"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "pokemon",
+        "pokemon center",
+        "poke_plush"
+      ],
+      "notes": "Imported from Pokemon Center Online Japan category page.",
+      "series": {
+        "key": "pokemon",
+        "sort": 400,
+        "labels": {
+          "zh": "宝可梦",
+          "en": "Pokemon",
+          "ja": "ポケモン",
+          "ko": "포켓몬"
+        }
+      }
+    },
+    {
       "kit_id": "pokemon-center-4521329437521",
       "franchise": "pokemon",
       "grade_code": "POKE_PLUSH",
@@ -410216,12 +410623,6 @@
       "subline": "Pokemon Center Goods",
       "number": "4521329455181",
       "scale": "non-scale",
-      "names": {
-        "ja": "スマホスタンドにもなるフォトフレーム Pok&eacute;mon Timeless Adventure",
-        "en": "スマホスタンドにもなるフォトフレーム Pok&eacute;mon Timeless Adventure",
-        "zh": "スマホスタンドにもなるフォトフレーム Pok&eacute;mon Timeless Adventure",
-        "ko": "スマホスタンドにもなるフォトフレーム Pok&eacute;mon Timeless Adventure"
-      },
       "images": {
         "box_art_url": "https://www.pokemoncenter-online.com/a/img/item/4521329455181/M/748c2a8c6699008b6b6dfecfbbecc2cca6a1151bccd70157873094460d2d74f1.jpg",
         "box_art_source_id": "pokemon_center_jp"
@@ -410266,6 +410667,12 @@
           "ja": "ポケモン",
           "ko": "포켓몬"
         }
+      },
+      "names": {
+        "ja": "スマホスタンドにもなるフォトフレーム Pok&eacute;mon Timeless Adventure",
+        "en": "スマホスタンドにもなるフォトフレーム Pok&eacute;mon Timeless Adventure",
+        "zh": "スマホスタンドにもなるフォトフレーム Pok&eacute;mon Timeless Adventure",
+        "ko": "スマホスタンドにもなるフォトフレーム Pok&eacute;mon Timeless Adventure"
       }
     },
     {
@@ -410632,12 +411039,6 @@
       "subline": "Pokemon Center Plush",
       "number": "4905330036292",
       "scale": "non-scale",
-      "names": {
-        "ja": "ぬいぐるみ(S) ゲンガー（舌だし）",
-        "en": "ぬいぐるみ(S) ゲンガー (舌だし)",
-        "zh": "ぬいぐるみ(S) ゲンガー（舌だし）",
-        "ko": "ぬいぐるみ(S) ゲンガー（舌だし）"
-      },
       "images": {
         "box_art_url": "https://www.pokemoncenter-online.com/a/img/item/4905330036292/M/a339b0ed809629970b4dee17808e7a548152d585d2d8ac9c558f9d5bd311bca4.jpg",
         "box_art_source_id": "pokemon_center_jp"
@@ -410682,6 +411083,12 @@
           "ja": "ポケモン",
           "ko": "포켓몬"
         }
+      },
+      "names": {
+        "ja": "ぬいぐるみ(S) ゲンガー（舌だし）",
+        "en": "ぬいぐるみ(S) ゲンガー (舌だし)",
+        "zh": "ぬいぐるみ(S) ゲンガー（舌だし）",
+        "ko": "ぬいぐるみ(S) ゲンガー（舌だし）"
       }
     },
     {
@@ -410932,17 +411339,17 @@
       "number": null,
       "scale": "non-scale",
       "images": {
-        "box_art_url": "https://d3bk8pkqsprcvh.cloudfront.net/hobby/jp/product/2025/03/6ntXIfTGlixcP5fg/rpYuhJnsztZveqDY.jpg?Expires=1786477233&Key-Pair-Id=K7AVJM1114TH7&Signature=HUHvYKAIunaxUTPKsHTUYV3RI-WXyjswBLGevqrB9u1S9FDd2E8x6i27tD7q1RKHYYm-4YTEhAaHJOYUivqE8bNOWbrvlXEjRoqVoPeSNOFny1MDCbw9zf5XYg2tW8xe~Q6O19GlsqEWBeNQGgvIfec-JxtUQSXGzfVRjVDUicY9xk0Dlv07XCyHQysCodegpolJdV5jo~XyBKXrBHLsvmm6mieoQm3boFpBtr6VTFTYEpWxaBNc5rUU04G3KYcWqS87lMtqwhAcv1~VZSMp9UDzCKb5gOb6Yq07GJngA3wz8rpfhfiL8lPRs~GsbyvAcWuVfcHL4Mm8JUWo-bhpog__",
+        "box_art_url": "https://d3bk8pkqsprcvh.cloudfront.net/hobby/jp/product/2025/03/6ntXIfTGlixcP5fg/rpYuhJnsztZveqDY.jpg?Expires=1786563679&Key-Pair-Id=K7AVJM1114TH7&Signature=MS6YHxflAGWuYyQ1kvIwoBMBhpfwkfUcxKoMJW1CyW0MVk7btP84CZv1oXrT9Tsping4p6lctRPXRvzMYoYoWEqJjDsSuEcOWgA79IkL-GvDSpdcCvgRQIdMc3xLkWIazsHEjaD~TY3iw2GSBlP1nfOzj58oHeo9Cp21WQw2moNHf4eUq9FIfqsT8Rjx7nbvz1fU~Iyvdg9v15fHHlPFEAZkFUufIv7TC-j7zbeVk9J5kkGlZ5gAE~8pQWHJBW1aqZLoQr3-lAOSXjFVSJ2F2XDXTA0hv833u7W8C7h6EfIWLdLlyaOgqZC-Hl6vDD2y0RNtKeGs26xUK0a2hbf3Jg__",
         "box_art_source_id": "bandai_hobby_pokemon_global"
       },
       "gallery_image_urls": [
-        "https://d3bk8pkqsprcvh.cloudfront.net/hobby/jp/product/2025/03/6ntXIfTGlixcP5fg/rpYuhJnsztZveqDY.jpg?Expires=1786477233&Key-Pair-Id=K7AVJM1114TH7&Signature=HUHvYKAIunaxUTPKsHTUYV3RI-WXyjswBLGevqrB9u1S9FDd2E8x6i27tD7q1RKHYYm-4YTEhAaHJOYUivqE8bNOWbrvlXEjRoqVoPeSNOFny1MDCbw9zf5XYg2tW8xe~Q6O19GlsqEWBeNQGgvIfec-JxtUQSXGzfVRjVDUicY9xk0Dlv07XCyHQysCodegpolJdV5jo~XyBKXrBHLsvmm6mieoQm3boFpBtr6VTFTYEpWxaBNc5rUU04G3KYcWqS87lMtqwhAcv1~VZSMp9UDzCKb5gOb6Yq07GJngA3wz8rpfhfiL8lPRs~GsbyvAcWuVfcHL4Mm8JUWo-bhpog__",
-        "https://d3bk8pkqsprcvh.cloudfront.net/hobby/jp/product/2025/03/ARopcgMIrna3NGR6/MpJq8dMIJgDkhU45.jpg?Expires=1786477233&Key-Pair-Id=K7AVJM1114TH7&Signature=UYjH1qxlmr-3hMEGXAlvGusTOwq5lfEz3iWgw--oYwNkGHS0wZmCV9pZBqT4i8mJP3KSMjkVxJxk0GST7oNoLR4HU~Ua8tVP~1~NjHGzIh6tbEcnQfx49YzfeFSzNKIRRtGX0HdwYkkgqX-Idy9IKharFunaZ7F1pViweV~WKqkHjzE3xm~RELaMZPK8Iwafdr1tZIppul~NSeMiJXAJem4T-yA4HJA9be6px-eQ1GT30kxScMl5ElNTyPW4Jo86C2jvBeqTsuXyTb889c1EQmLKt5b6R2xRsWE80FQXp02oeborTTROmbh5Ao8gON9lwQK4cL1pnOernpvWmznL8w__",
-        "https://d3bk8pkqsprcvh.cloudfront.net/hobby/jp/product/2025/03/5eub7pyWvS7rRRjM/q7ZeoBude54irF5s.jpg?Expires=1786477233&Key-Pair-Id=K7AVJM1114TH7&Signature=RQE61chLdO9ccQ9desBvYgujoNFK0OBfjGqHv1ykbVsBAw0kvh~LGGWxYCnUjgBfrNLBQaXfkiB4EJLtbLhOFKwLPVTIRchPkZtnSEvkOweutEIhOscrKXTLJgeQfdQyS1qq5oD6gznbm3raK4COUJpoZzGcSU2IEy0TWpJTc6HAAw-OzbcY25UMMa0-1Wt8nZncV9XIfm7hj~8RdPUVee5wFsydye86REV8e5OtBLm6RV3Nrm1boe9OBHM8QQI1gLjSmbR1PsENyM8i~ipoKBFlwi34sszJSvKOeDqLjP1F8Kh8-t3gVILFbR-~HFS2vQuZz7~nfW1tb1BgNti4CQ__",
-        "https://d3bk8pkqsprcvh.cloudfront.net/hobby/jp/product/2025/03/96sjrgg9XUc6x9Ux/2mMCWggxiiaGnetJ.jpg?Expires=1786477233&Key-Pair-Id=K7AVJM1114TH7&Signature=TD21yq2CQBJGCQcweuvPGx06ouAWTFkJmLl416-oQGFKUM27yidc1bJXgDnEDvzRpbEoq4IoAgyY74sKjPMfPpy9~V2gQFktGhAxCE1ypDPKpCcnrNEYfKZED4IOmKHLNQfHHvOwIUHfnkPzOWk5LxiT7qL1glY4Mj1f158huFXFqUopmHDPnDkp3C91SKbVJeMiqo6aY205xtbU2KEgXvf11eKwm4aOvI~HV~J1YQVK2zF5xV6oXDuCSwz00Z-YhX3AWmHMmU2DLpcTdRs6ZLPrNJiF3NSsy0yUd5NG-mYwP47VwlSiJT1CRb9YPtzr-AZnn9s5lOe2S5e6Jj6Ryg__",
-        "https://d3bk8pkqsprcvh.cloudfront.net/hobby/jp/product/2025/03/fCJEMHk1FMIOGPTv/bUtixR56mZcKJq35.jpg?Expires=1786477233&Key-Pair-Id=K7AVJM1114TH7&Signature=PoDalnSovwBZs7W1zV~wKq9lscNYkQWwDGQ9wLPUyOV1~rhTyFZTiuS~e4Repy82KDCQrdr017zSzWRUyr7UgdFhyF4jtP1UvF-19T-D7mTUd6t6-RbKfYoFJxspgl1v1pDMpd7gK2vopkSeTcMEhZwmpj~QXLah8iO7v-rowS6ihd5ewPK0Cr6PNce8~ox3QmFWTMscCi9wDIjpgQBVc6MXIa-gYgxLQrtr~5iBrBrWiomkJ2H8PKHT6ePn4ACOiA0ntN4rSaCR1tJcj1kZ9AiKiO-CgyFHkqbpzcnjz2lIf5Z5bnCWJ9gyElVpdgOUx4p7h37h-zNPmiO3VjUJwA__",
-        "https://d3bk8pkqsprcvh.cloudfront.net/hobby/jp/product/2025/03/TnldzgmgHEvZcqja/63AypuC07ptc0woO.jpg?Expires=1786477234&Key-Pair-Id=K7AVJM1114TH7&Signature=mgg-mCHg29dQLsuJsg7z2NXrIUuH4W95BVAjouA5wH1wVCXc2L8xSC5IaZgXvjpyhyB6gBYAlGSe4gcVbkySCyANeEmnBB3IW2NgOahrxZq~h9n7vvrFEcYvrM8IpreBw7LHiuvGqp5a~MyqKk3f5G-z0dphyoKXxmixWTu4FjDDP1krpE~ss~WI2yAc5nRN79hJZ7GdEXgN0mcSl3edExTa02HUnzQ7PMxh~vSRz5WCoOBdYV~ftPBylhEYIk7uM1SsKOiTTojv0TxYV7XyPFf5JGS2pJTKOzc92quL9kLnCYEvnIW9CDE2RjrcAO0h4Fm3JNfMK2ZhA8rqDIvtbg__",
-        "https://d3bk8pkqsprcvh.cloudfront.net/hobby/jp/product/2025/03/LfS9IupK52gimlLH/0f9AdTerW10KrKRZ.jpg?Expires=1786477234&Key-Pair-Id=K7AVJM1114TH7&Signature=LvoUKjVFurlHILAQOYY6jCJA7uaLMZMX7vqqGbYfXT7xf7yzv2CMzCfogQtqg-KsBfIHL3zPidh4svC4JzzUyOUbRdzuPX2eDCsjpV4zMXaxQpHA1zPrqw--15q7rhkexs5ZUz58-zGLKjbIGuyksjuOtd02U1ZtZH7fTOCJoJQ2vFJTkKYRqC2c9vs00eFTgidvcCCFdXft5xX8ivMiLWtwhBXe7uA2ZLhCKTM86WOAAqigokZrG5fuChdRjoloYen2JSkGbJ2tWzhzFwS7YGbUF46NmmPzi7mIeqVutV8mjei-NySS6OoKB6ftUrXyecEU6pm0CfXH0CW1nl5Kwg__",
+        "https://d3bk8pkqsprcvh.cloudfront.net/hobby/jp/product/2025/03/6ntXIfTGlixcP5fg/rpYuhJnsztZveqDY.jpg?Expires=1786563679&Key-Pair-Id=K7AVJM1114TH7&Signature=MS6YHxflAGWuYyQ1kvIwoBMBhpfwkfUcxKoMJW1CyW0MVk7btP84CZv1oXrT9Tsping4p6lctRPXRvzMYoYoWEqJjDsSuEcOWgA79IkL-GvDSpdcCvgRQIdMc3xLkWIazsHEjaD~TY3iw2GSBlP1nfOzj58oHeo9Cp21WQw2moNHf4eUq9FIfqsT8Rjx7nbvz1fU~Iyvdg9v15fHHlPFEAZkFUufIv7TC-j7zbeVk9J5kkGlZ5gAE~8pQWHJBW1aqZLoQr3-lAOSXjFVSJ2F2XDXTA0hv833u7W8C7h6EfIWLdLlyaOgqZC-Hl6vDD2y0RNtKeGs26xUK0a2hbf3Jg__",
+        "https://d3bk8pkqsprcvh.cloudfront.net/hobby/jp/product/2025/03/ARopcgMIrna3NGR6/MpJq8dMIJgDkhU45.jpg?Expires=1786563679&Key-Pair-Id=K7AVJM1114TH7&Signature=ligccVHagiEqkuYsj1xRNQeN2cOJVZBIgvqE2Fs~c1prKPuI36qbCM8cP8NdlVSiRmv783pq4bjHg0rZxlGs-II13UUWaPo8jdbs0dBmf8V3hoohcxDlypLEK2Vt8jMGJDLnBP0UI69f~QYmGqcFMne3CKC2539Ejqo~uwZQEUGab1m7QOx84okrohZyTi2b8TMuxuDQL6JSilME9aAPGGTEMabXgzR53ynO0q3ODtzSPaylTkXpi5zVtrHLWidDlJHbiKiz3Mp~EuiRheYoeUijujkB5DkqxK~i9gVmiuKpZSn3h6txG83zxrrbVE6lXrfY3HDns2BQfnv-8~fMzg__",
+        "https://d3bk8pkqsprcvh.cloudfront.net/hobby/jp/product/2025/03/5eub7pyWvS7rRRjM/q7ZeoBude54irF5s.jpg?Expires=1786563679&Key-Pair-Id=K7AVJM1114TH7&Signature=Q6C8cfy32foV0HWucVRBvA82kb7iqLPadoL1Ke82YfpkCRITS-1sN8xWNIm8fZB9ph~UHpyMRIvmK1IrWUORGdlq9koP6o~cSkfgFu2CjEzIZdLa3nf~6xiPU8vWTwOKhh5y8-kyk2ohD2sPdrTSN15XkUjcNh2T0x6P0JQEDkIQBYqIerSyvj4Jm6GtqW9tYKpn~UcA06dwhu71zwgeB6yPODwULEsv7JtE9b-rnQjeX3g5shqAjm92a2Y6lrodoICH-WclGLqA~epU3VF8240DkwXvPYzk1gFElswI0-IDb57eV0AGH4yxeOjv4E8SQNUGMbl~1Ij-bEOEZRRn8g__",
+        "https://d3bk8pkqsprcvh.cloudfront.net/hobby/jp/product/2025/03/96sjrgg9XUc6x9Ux/2mMCWggxiiaGnetJ.jpg?Expires=1786563679&Key-Pair-Id=K7AVJM1114TH7&Signature=OgwwN2Tm6M9trx6swzknD42~dsr91eJP9gEt6QDm7M-o8KoSg2Hb52tuXoc-pegeWo7uxQ3-c8IpzUkZpO7GxRN3ijVY6BRcLlBaNXodOVjb8VTu7veGVz5LfFpkxBoNcqk5zk0NWdOXQGu9r6Kj4q3eATiSQqlYmJdVRmDbazJr~AtFAfWvIGqbbrLehwaFgI77i0pUX0dExc7B19pCR4uH4JnSgWj7g3CrfGXFbOo74AOHMviLh951NvIYeJOEqX7LEBmKO8ifG4HgEpA3uJsqNkIfBlmu2gpIF95QbSfjNU3WkG7NjSBrCgOZuwMw8Y1RoNp70boFU9oIyZf3iA__",
+        "https://d3bk8pkqsprcvh.cloudfront.net/hobby/jp/product/2025/03/fCJEMHk1FMIOGPTv/bUtixR56mZcKJq35.jpg?Expires=1786563680&Key-Pair-Id=K7AVJM1114TH7&Signature=Hgg1ZZD~FlqxbLTW48qfBtZHV8a2BmQy0O2gOkXjw0zC3oZ~7NVRVl7JofgFvX-AKpCO1JrE1Mgaot6ixZKTDQhNQqtsmplX6YDKU~dxuIW0ektWvmln0m2j2h764MTngd7i5YWIJaV08lVvU8MGheNzX1KW7TBjoOqjWl3tFDy9yhczu5MhXz~I2JZCRvgFy~d05Z4Ut3O8iHKpWFD64JXZCFDkyS5tTKTAr5DnDaRvD8FOI1yvM4AIX4JFE4gL9f3jfH68zs4QcrBFfHl-gsnnvSYEg9x0RUK5eXXnLONHiQ1Z3oj~ZLUN0xpbMzSGfvI778pNB3xQbdOoZBF21Q__",
+        "https://d3bk8pkqsprcvh.cloudfront.net/hobby/jp/product/2025/03/TnldzgmgHEvZcqja/63AypuC07ptc0woO.jpg?Expires=1786563680&Key-Pair-Id=K7AVJM1114TH7&Signature=dY6IEM0YXsOHFrtgFsr3YRh2lnPfuVlYUswKUA2HfPe57-mx8Lh3csaroemXVxOWLY1HDa6mh20Ovl78A-DfKL7Wv1J5nM4INycAnVbfpvu-SAEOwY8p6yLSJhBqhhgFlHtkDRwjRzscb0eeIDWb10OUzPy75a6ruP0AEO7d8G2BRF3PWxmadlHOv6m2ZTsQ6uCpr4AU6b65-3MP4d8-spz8ay9giWanuyv0~eJMexeBk7Qnq9Gopfx4UGl4FlSAi68U8mtRf-OMunEcD1BIbpheJoiv6ytf-5NmxljXy2N84IMzF1LhDAhqOu-xv1UGZrLwelabudFeL7JemF36Yg__",
+        "https://d3bk8pkqsprcvh.cloudfront.net/hobby/jp/product/2025/03/LfS9IupK52gimlLH/0f9AdTerW10KrKRZ.jpg?Expires=1786563680&Key-Pair-Id=K7AVJM1114TH7&Signature=P~KYtB1LCPUYGoBqq1vVsq-TWoYKlcNGuWM65FpcVG5IL68RlAAU32TAayxw0~1AGDb-v7POwGry9Zac8xU1rhKviez6~-26z7snlrwJ5MmvhFKlOIGWTMeEacNGcdJEeH44AVISWPM9C96NhzzAZcpD7-MOy86UaT7Ip3ych4mwSexwJWnOgP1rY2J1Tc245ZZP~z8KMXtbUDZROVize4Xtv6~V3WM1QxGt3sq7Y1VGukTNeWfTPbBv6wIGl-j5~-EZcTk5oz~Zlugwa77AfbbGkG-3wUqrEPg8DR3BGXyjcrjsoQDxwY-RJcDI9YuICOJGgbC2musEl4wiX8xetg__",
         "https://bandai-hobby.net/images/190_5156_s_yn3ryw35k4r94drfjcaf4ucbkjkv.jpg",
         "https://global.bandai-hobby.net/common/site/pokemon/pokepla/images/products/thumbnail/01_4237.webp"
       ],
