@@ -2,7 +2,7 @@
   "source": "soshage.com/gget — SD Gundam G Generation ETERNAL",
   "source_url": "https://soshage.com/gget/api/unit",
   "image_base": "https://img.kusoge.xyz/ggenet/thumb",
-  "updated_at": "2026-08-16",
+  "updated_at": "2026-08-17",
   "works": [
     {
       "work_id": 10,
@@ -203,6 +203,11 @@
       "work_id": 1330,
       "world_id": 0,
       "name": "UC-MSV"
+    },
+    {
+      "work_id": 1390,
+      "world_id": 0,
+      "name": "Odaiba Unicorn Gundam Statue"
     },
     {
       "work_id": 1440,
@@ -452,12 +457,12 @@
     {
       "work_id": 7001,
       "world_id": 0,
-      "name": "SD Sengokuden: Seven Mushas "
+      "name": "SD Sengokuden"
     },
     {
       "work_id": 7050,
       "world_id": 0,
-      "name": "SD Gundam Side Story: Sieg Zeon Chronicle"
+      "name": "SD Gundam Side Story: Sieg Zeon Chronicles"
     },
     {
       "work_id": 7090,
@@ -6782,6 +6787,21 @@
         1330
       ],
       "image_url": "https://img.kusoge.xyz/ggenet/thumb/thum_g1330u01500.webp"
+    },
+    {
+      "unit_id": 1139000100,
+      "icon": "g1390u00100",
+      "name": "Unicorn Gundam Ver. TWC Final",
+      "rarity": 4,
+      "role": "shooter",
+      "ult": false,
+      "work_id": 1250,
+      "work": "Mobile Suit Gundam Unicorn",
+      "work_ids": [
+        1250,
+        1390
+      ],
+      "image_url": "https://img.kusoge.xyz/ggenet/thumb/thum_g1390u00100.webp"
     },
     {
       "unit_id": 1144000100,
@@ -17115,11 +17135,25 @@
       "role": "attacker",
       "ult": false,
       "work_id": 7001,
-      "work": "SD Sengokuden: Seven Mushas ",
+      "work": "SD Sengokuden",
       "work_ids": [
         7001
       ],
       "image_url": "https://img.kusoge.xyz/ggenet/thumb/thum_g7000u00100.webp"
+    },
+    {
+      "unit_id": 1700000250,
+      "icon": "g7000u00250",
+      "name": "Sandaime Gundam Daishogun (EX)",
+      "rarity": 5,
+      "role": "shooter",
+      "ult": false,
+      "work_id": 7001,
+      "work": "SD Sengokuden",
+      "work_ids": [
+        7001
+      ],
+      "image_url": "https://img.kusoge.xyz/ggenet/thumb/thum_g7000u00250.webp"
     },
     {
       "unit_id": 1705000100,
@@ -17129,7 +17163,7 @@
       "role": "defender",
       "ult": false,
       "work_id": 7050,
-      "work": "SD Gundam Side Story: Sieg Zeon Chronicle",
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
       "work_ids": [
         7050
       ],
@@ -17143,7 +17177,7 @@
       "role": "shooter",
       "ult": false,
       "work_id": 7050,
-      "work": "SD Gundam Side Story: Sieg Zeon Chronicle",
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
       "work_ids": [
         7050
       ],
@@ -17157,7 +17191,7 @@
       "role": "shooter",
       "ult": false,
       "work_id": 7050,
-      "work": "SD Gundam Side Story: Sieg Zeon Chronicle",
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
       "work_ids": [
         7050
       ],
@@ -17171,7 +17205,7 @@
       "role": "attacker",
       "ult": false,
       "work_id": 7050,
-      "work": "SD Gundam Side Story: Sieg Zeon Chronicle",
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
       "work_ids": [
         7050
       ],
@@ -17185,7 +17219,7 @@
       "role": "shooter",
       "ult": false,
       "work_id": 7050,
-      "work": "SD Gundam Side Story: Sieg Zeon Chronicle",
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
       "work_ids": [
         7050
       ],
@@ -17199,7 +17233,7 @@
       "role": "defender",
       "ult": false,
       "work_id": 7050,
-      "work": "SD Gundam Side Story: Sieg Zeon Chronicle",
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
       "work_ids": [
         7050
       ],
@@ -17213,7 +17247,7 @@
       "role": "shooter",
       "ult": false,
       "work_id": 7050,
-      "work": "SD Gundam Side Story: Sieg Zeon Chronicle",
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
       "work_ids": [
         7050
       ],
@@ -17227,7 +17261,7 @@
       "role": "shooter",
       "ult": false,
       "work_id": 7050,
-      "work": "SD Gundam Side Story: Sieg Zeon Chronicle",
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
       "work_ids": [
         7050
       ],
@@ -17241,7 +17275,7 @@
       "role": "defender",
       "ult": false,
       "work_id": 7050,
-      "work": "SD Gundam Side Story: Sieg Zeon Chronicle",
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
       "work_ids": [
         7050
       ],
@@ -17255,7 +17289,7 @@
       "role": "attacker",
       "ult": false,
       "work_id": 7050,
-      "work": "SD Gundam Side Story: Sieg Zeon Chronicle",
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
       "work_ids": [
         7050
       ],
@@ -17269,7 +17303,7 @@
       "role": "defender",
       "ult": false,
       "work_id": 7050,
-      "work": "SD Gundam Side Story: Sieg Zeon Chronicle",
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
       "work_ids": [
         7050
       ],
@@ -17283,7 +17317,7 @@
       "role": "shooter",
       "ult": false,
       "work_id": 7050,
-      "work": "SD Gundam Side Story: Sieg Zeon Chronicle",
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
       "work_ids": [
         7050
       ],
@@ -17297,11 +17331,207 @@
       "role": "defender",
       "ult": false,
       "work_id": 7050,
-      "work": "SD Gundam Side Story: Sieg Zeon Chronicle",
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
       "work_ids": [
         7050
       ],
       "image_url": "https://img.kusoge.xyz/ggenet/thumb/thum_g7050u01500.webp"
+    },
+    {
+      "unit_id": 1705002050,
+      "icon": "g7050u02050",
+      "name": "Versal Knight Gundam (EX)",
+      "rarity": 5,
+      "role": "attacker",
+      "ult": false,
+      "work_id": 7050,
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
+      "work_ids": [
+        7050
+      ],
+      "image_url": "https://img.kusoge.xyz/ggenet/thumb/thum_g7050u02050.webp"
+    },
+    {
+      "unit_id": 1705002200,
+      "icon": "g7050u02200",
+      "name": "Full Armor Knight Gundam (Two Sacred Treasures)",
+      "rarity": 4,
+      "role": "shooter",
+      "ult": false,
+      "work_id": 7050,
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
+      "work_ids": [
+        7050
+      ],
+      "image_url": "https://img.kusoge.xyz/ggenet/thumb/thum_g7050u02200.webp"
+    },
+    {
+      "unit_id": 1705002900,
+      "icon": "g7050u02900",
+      "name": "Martial Artist Nemo",
+      "rarity": 4,
+      "role": "attacker",
+      "ult": false,
+      "work_id": 7050,
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
+      "work_ids": [
+        7050
+      ],
+      "image_url": "https://img.kusoge.xyz/ggenet/thumb/thum_g7050u02900.webp"
+    },
+    {
+      "unit_id": 1705003010,
+      "icon": "g7050u03000",
+      "name": "Golden Knight",
+      "rarity": 4,
+      "role": "shooter",
+      "ult": false,
+      "work_id": 7050,
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
+      "work_ids": [
+        7050
+      ],
+      "image_url": "https://img.kusoge.xyz/ggenet/thumb/thum_g7050u03000.webp"
+    },
+    {
+      "unit_id": 1705003100,
+      "icon": "g7050u03100",
+      "name": "Giant Psycho Golem",
+      "rarity": 4,
+      "role": "attacker",
+      "ult": false,
+      "work_id": 7050,
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
+      "work_ids": [
+        7050
+      ],
+      "image_url": "https://img.kusoge.xyz/ggenet/thumb/thum_g7050u03100.webp"
+    },
+    {
+      "unit_id": 1705003200,
+      "icon": "g7050u03200",
+      "name": "Sorcerer Messala",
+      "rarity": 3,
+      "role": "shooter",
+      "ult": false,
+      "work_id": 7050,
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
+      "work_ids": [
+        7050
+      ],
+      "image_url": "https://img.kusoge.xyz/ggenet/thumb/thum_g7050u03200.webp"
+    },
+    {
+      "unit_id": 1705004310,
+      "icon": "g7050u04300",
+      "name": "Giant Mud Golem",
+      "rarity": 4,
+      "role": "attacker",
+      "ult": false,
+      "work_id": 7050,
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
+      "work_ids": [
+        7050
+      ],
+      "image_url": "https://img.kusoge.xyz/ggenet/thumb/thum_g7050u04300.webp"
+    },
+    {
+      "unit_id": 1705004400,
+      "icon": "g7050u04400",
+      "name": "Knight Galbaldy Alpha",
+      "rarity": 3,
+      "role": "defender",
+      "ult": false,
+      "work_id": 7050,
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
+      "work_ids": [
+        7050
+      ],
+      "image_url": "https://img.kusoge.xyz/ggenet/thumb/thum_g7050u04400.webp"
+    },
+    {
+      "unit_id": 1705004500,
+      "icon": "g7050u04500",
+      "name": "Knight Galbaldy Beta",
+      "rarity": 3,
+      "role": "attacker",
+      "ult": false,
+      "work_id": 7050,
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
+      "work_ids": [
+        7050
+      ],
+      "image_url": "https://img.kusoge.xyz/ggenet/thumb/thum_g7050u04500.webp"
+    },
+    {
+      "unit_id": 1705004600,
+      "icon": "g7050u04600",
+      "name": "Warrior Desert Zaku",
+      "rarity": 2,
+      "role": "defender",
+      "ult": false,
+      "work_id": 7050,
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
+      "work_ids": [
+        7050
+      ],
+      "image_url": "https://img.kusoge.xyz/ggenet/thumb/thum_g7050u04600.webp"
+    },
+    {
+      "unit_id": 1705004700,
+      "icon": "g7050u04700",
+      "name": "Warrior Desert Dom",
+      "rarity": 2,
+      "role": "attacker",
+      "ult": false,
+      "work_id": 7050,
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
+      "work_ids": [
+        7050
+      ],
+      "image_url": "https://img.kusoge.xyz/ggenet/thumb/thum_g7050u04700.webp"
+    },
+    {
+      "unit_id": 1705004910,
+      "icon": "g7050u04900",
+      "name": "Swordsman Gelgoog",
+      "rarity": 3,
+      "role": "defender",
+      "ult": false,
+      "work_id": 7050,
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
+      "work_ids": [
+        7050
+      ],
+      "image_url": "https://img.kusoge.xyz/ggenet/thumb/thum_g7050u04900.webp"
+    },
+    {
+      "unit_id": 1705005010,
+      "icon": "g7050u05000",
+      "name": "Warrior Rick Dom II",
+      "rarity": 3,
+      "role": "attacker",
+      "ult": false,
+      "work_id": 7050,
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
+      "work_ids": [
+        7050
+      ],
+      "image_url": "https://img.kusoge.xyz/ggenet/thumb/thum_g7050u05000.webp"
+    },
+    {
+      "unit_id": 1705005500,
+      "icon": "g7050u05500",
+      "name": "Knight Gundam (Centaur Form)",
+      "rarity": 4,
+      "role": "defender",
+      "ult": false,
+      "work_id": 7050,
+      "work": "SD Gundam Side Story: Sieg Zeon Chronicles",
+      "work_ids": [
+        7050
+      ],
+      "image_url": "https://img.kusoge.xyz/ggenet/thumb/thum_g7050u05500.webp"
     },
     {
       "unit_id": 1709000100,
