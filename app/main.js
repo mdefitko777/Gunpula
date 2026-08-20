@@ -10593,7 +10593,7 @@ function renderKits() {
       badges.append(badge);
     }
     card.querySelector("h3").textContent = name;
-    card.querySelector("p").textContent = Number.isInteger(kit.price_jpy) ? formatPrice(kit.price_jpy) : "";
+    card.querySelector("p").textContent = Number.isInteger(kit.price_jpy) || Number.isInteger(kit.price_krw) ? formatPrice(kit.price_jpy, kit) : "";
     card.addEventListener("click", () => openDetail(kit));
     card.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
@@ -10634,7 +10634,7 @@ function openDetail(kit, options = {}) {
 function renderDetail(kit) {
   elements.detailKicker.textContent = `${seriesLabelFromKit(kit)} · ${gradeShortLabel(kit)}${kit.scale ? ` · ${kit.scale}` : ""}`;
   elements.detailTitle.textContent = kitShortName(kit);
-  elements.detailSubtitle.textContent = [kit.release_date, formatPrice(kit.price_jpy)].filter((value) => value && value !== t("pending")).join(" · ");
+  elements.detailSubtitle.textContent = [kit.release_date, formatPrice(kit.price_jpy, kit)].filter((value) => value && value !== t("pending")).join(" · ");
   renderDetailStatusActions(kit);
   renderDetailMeta(kit);
   renderDetailBbxLink(kit);
@@ -10788,7 +10788,7 @@ function renderDetailMeta(kit) {
     [t("productLine"), kit.subline && kit.subline !== kit.grade_code ? `${kit.grade_code} / ${kit.subline}` : kit.grade_code],
     [t("scale"), kit.scale || t("pending")],
     [t("release"), kit.release_date || t("pending")],
-    [t("price"), formatPrice(kit.price_jpy)],
+    [t("price"), formatPrice(kit.price_jpy, kit)],
   ];
 
   elements.detailMeta.innerHTML = "";
@@ -10903,8 +10903,12 @@ function detailImages(kit) {
   return imageCandidatesForKit(kit);
 }
 
-function formatPrice(value) {
-  return Number.isInteger(value) ? `¥${value.toLocaleString("ja-JP")}` : t("pending");
+function formatPrice(value, kit = null) {
+  if (Number.isInteger(value)) return `¥${value.toLocaleString("ja-JP")}`;
+  // Korean Pokemon Store records price in won and leave price_jpy null rather
+  // than inventing a converted figure, so show the won price instead of "未定".
+  if (Number.isInteger(kit?.price_krw)) return `₩${kit.price_krw.toLocaleString("ko-KR")}`;
+  return t("pending");
 }
 
 function showPlaceholder(container, gradeCode) {

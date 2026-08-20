@@ -578,6 +578,27 @@
         "works other than FGO/Zero"
       ],
       "notes": "JSON API search_item.php filtered by the fate_series and fate_zero character codes. Keyword parameters are ignored by that endpoint and per_page caps at 40."
+    },
+    {
+      "source_id": "pokemon_store_kr",
+      "name": "Pokemon Store Korea (포켓몬스토어)",
+      "type": "official_retail_kr",
+      "country": "KR",
+      "base_url": "https://pokemonstore.co.kr/",
+      "priority": 13,
+      "best_for": [
+        "Korea-exclusive Pokemon plush and goods",
+        "Korean product names",
+        "KRW price",
+        "sale start date",
+        "official images"
+      ],
+      "weak_for": [
+        "Japan-only products",
+        "yen price (the shop prices in won)",
+        "apparel/stationery/TCG are deliberately not imported"
+      ],
+      "notes": "Official Korean Pokemon Store, on NHN Commerce shopby. Public REST API at shop-api.e-ncp.com; search filters need a filter. prefix while the category filter is the bare categoryNos — getting either wrong silently returns a 4-product default instead of an error."
     }
   ]
 }

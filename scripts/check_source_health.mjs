@@ -42,6 +42,7 @@ const CATALOG_SOURCES = [
   { source_id: "banpresto_prize_fate_jp", label: "Banpresto prize (Fate)" },
   { source_id: "kotobukiya_fate_jp", label: "Kotobukiya (Fate)" },
   { source_id: "tamashii_web_fate_jp", label: "Tamashii Web (Fate)" },
+  { source_id: "pokemon_store_kr", label: "Pokemon Store Korea" },
 ];
 
 function nowIso() {
