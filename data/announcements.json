@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-19T19:23:52.673Z",
+  "updated_at": "2026-08-20T03:14:49.409Z",
   "sources": [
     {
       "source_id": "bandai_hobby_news",
@@ -22,8 +22,61 @@
       "url": "https://beyblade.takaratomy.co.jp/beyblade-x/news/"
     }
   ],
-  "fetch_errors": [],
+  "fetch_errors": [
+    {
+      "source_id": "bandai_hobby_youtube",
+      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuxB1suCoCqAKiljh_0xE4A returned 404"
+    }
+  ],
   "announcements": [
+    {
+      "id": "tamashii-news-2026-08-20-16070",
+      "franchise": "gundam",
+      "names": {
+        "ja": "【ADVANCE OF Z】METAL ROBOT魂より「ガンダムTR-1［ヘイズル・ラー］第二形態」が登場。",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-08-20",
+      "source_type": "news",
+      "source_name": "TAMASHII WEB",
+      "source_url": "https://tamashiiweb.com/item/16070/",
+      "thumbnail_url": "../app/assets/announcements/tamashii-news-2026-08-20-16070.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "bandai-news-2026-08-19-vMDFfNzM0OS8",
+      "franchise": "gundam",
+      "names": {
+        "ja": "2027年1月～3月発売予定の新商品を掲載！「HOBBY NEW ITEM INFO.」",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-08-19",
+      "source_type": "news",
+      "source_name": "BANDAI SPIRITS",
+      "source_url": "https://bandai-hobby.net/news/01_7349/",
+      "thumbnail_url": "../app/assets/announcements/bandai-news-2026-08-19-vMDFfNzM0OS8.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null
+    },
     {
       "id": "tamashii-news-2026-08-14-aS1maWcv",
       "franchise": "gundam",
