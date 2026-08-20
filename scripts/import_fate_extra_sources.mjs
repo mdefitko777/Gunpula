@@ -1,7 +1,7 @@
 // Fate / TYPE-MOON merchandise from the vendors Good Smile does not cover.
 //
 // Until now the whole Fate catalog came from goodsmile.info + goodsmile.com,
-// so every figure released by another maker was simply missing. These five
+// so every figure released by another maker was simply missing. These six
 // sources all render their listings server-side (or expose a JSON endpoint),
 // so one request per page is enough:
 //
@@ -10,10 +10,17 @@
 //   * バンプレスト景品 — bsp-prize.jp, Fate シリーズ title page (IP00004797)
 //   * 寿屋            — shop.kotobukiya.co.jp keyword search (Shift-JIS)
 //   * 魂ウェブ        — tamashiiweb.com search_item.php, Fate character codes
+//   * ホビーサーチ     — 1999.co.jp figure listing, `searchkey` keyword search
 //
 // Aniplex+ is by far the largest: its keyword search drifts into unrelated
 // products past the exact matches, so results are kept only when the tile's
 // series line (or, when that is blank, the title) names a Fate/TYPE-MOON work.
+//
+// Every maker's own site was checked and none is usable: Alter, Ques Q and
+// Wonderful Works either fail DNS or render client-side, Bellfine and Max
+// Factory return no Fate hits, and the aggregate databases are closed to
+// scripts (AmiAmi and MyFigureCollection both answer 403). Hobby Search is the
+// one reachable listing that carries those makers' products.
 import { readFile, writeFile } from "node:fs/promises";
 import {
   decodeKotobukiyaShopHtml,
@@ -196,7 +203,10 @@ function parseAniplexGrid(html) {
 // FATE_ANIPLEX_INCLUDE_GOODS=1 to take the whole storefront instead.
 const ANIPLEX_FIGURE_PATTERN =
   /フィギュア|スケール|ねんどろいど|ネンドロイド|figma|POP UP PARADE|ARTFX|完成品|ドール|ガレージキット|Figure/i;
-const ANIPLEX_INCLUDE_GOODS = process.env.FATE_ANIPLEX_INCLUDE_GOODS === "1";
+// Goods are included, but only figures get a detail fetch: sampling their
+// detail pages showed the goods carry no release date anywhere (they are
+// evergreen 復刻 reprints), so a fetch per item would buy nothing.
+const ANIPLEX_INCLUDE_GOODS = process.env.FATE_ANIPLEX_GOODS !== "0";
 
 function parseAniplexDetail(html) {
   // "2027年7月発売予定" sits right under the product title; the お届け時期 block
@@ -241,9 +251,9 @@ async function fetchAniplex() {
     if (products.length < ANIPLEX_PAGE_SIZE) break;
   }
 
-  // Only the kept products get a detail fetch, for the release date and the
-  // full gallery. A detail failure downgrades the record rather than losing it.
+  // A detail failure downgrades the record rather than losing it.
   for (const product of byKey.values()) {
+    if (!ANIPLEX_FIGURE_PATTERN.test(product.name)) continue;
     try {
       const detail = parseAniplexDetail(await fetchText(product.url));
       product.release_date = detail.release_date || product.release_date;
@@ -379,6 +389,66 @@ async function fetchTamashii() {
   return [...byKey.values()];
 }
 
+
+// ------------------------------------------------------- ホビーサーチ (1999.co.jp)
+
+// The only reachable listing that carries the makers the official sites do not
+// expose (PLAMATEA, BUSHIROAD, PalVerse, CHILLfigg ...). Two traps: the search
+// parameter is `searchkey`, not `keyword` — `keyword` is accepted and then
+// silently ignored, returning an unfiltered default page — and the keyword
+// still matches unrelated products, so titles are checked against the Fate
+// works before a record is kept.
+const HOBBY_SEARCH_BASE = "https://www.1999.co.jp";
+const HOBBY_SEARCH_KEYWORDS = ["Fate", "Fate/Grand Order", "フェイト"];
+const HOBBY_SEARCH_TITLE =
+  /Fate|フェイト|FGO|セイバー|アルトリア|マシュ|ジャンヌ|ギルガメッシュ|エミヤ|遠坂|イリヤ|型月|月姫|空の境界|カルデア|サーヴァント/i;
+// "Dr. FATE" is a DC character; MAFEX releases it and it matches on "FATE".
+const HOBBY_SEARCH_EXCLUDE = /Dr\.?\s*FATE/i;
+
+function parseHobbySearch(html) {
+  const out = [];
+  for (const chunk of String(html || "").split('<div class="c-product-list__item">').slice(1)) {
+    const block = chunk.split("</div></div></div>")[0];
+    const code = /ItemCode="(\d+)"/.exec(block)?.[1];
+    const name = decodeHtml(/<div class="c-card__title">([\s\S]*?)<\/div>/.exec(block)?.[1] || "");
+    if (!code || !name) continue;
+    if (!HOBBY_SEARCH_TITLE.test(name) || HOBBY_SEARCH_EXCLUDE.test(name)) continue;
+    const image = /<img[^>]*src="([^"]*itbig[^"]*)"/i.exec(block)?.[1];
+    out.push({
+      key: code,
+      name,
+      series: "",
+      line: "ホビーサーチ",
+      url: `${HOBBY_SEARCH_BASE}/${code}`,
+      image: image ? absolute(image, HOBBY_SEARCH_BASE) : "",
+      price_jpy: parseYen(decodeHtml(/<div class="c-card__price-element">([\s\S]*?)<\/div>/.exec(block)?.[1] || "")),
+      // The card shows a fuzzy Japanese release phrase ("9月下旬 発売予定") with
+      // no year, so it is left unset rather than guessed at.
+      release_date: null,
+      is_limited: /限定|特典/.test(name),
+    });
+  }
+  return out;
+}
+
+async function fetchHobbySearch() {
+  const byKey = new Map();
+  for (const keyword of HOBBY_SEARCH_KEYWORDS) {
+    for (let page = 1; page <= 12; page += 1) {
+      const url =
+        `${HOBBY_SEARCH_BASE}/search?typ1_c=101&cat=figure&sold=1` +
+        `&searchkey=${encodeURIComponent(keyword)}&spage=${page}`;
+      const html = await fetchText(url);
+      const products = parseHobbySearch(html);
+      for (const product of products) byKey.set(product.key, product);
+      // Page size is 60 regardless of how many survive the Fate title filter,
+      // so paging stops on the raw card count, not the kept count.
+      if ((html.split('<div class="c-product-list__item">').length - 1) < 60) break;
+    }
+  }
+  return [...byKey.values()];
+}
+
 // --------------------------------------------------------------------------
 
 const SOURCES = [
@@ -416,6 +486,14 @@ const SOURCES = [
     tags: ["fate", "kotobukiya", "figure"],
     fetchAll: fetchKotobukiya,
     notes: "Imported from the Kotobukiya online shop (Fate keyword search).",
+  },
+  {
+    source_id: "hobby_search_fate_jp",
+    idPrefix: "hobbysearch-fate",
+    subline: "ホビーサーチ",
+    tags: ["fate", "hobby search", "figure"],
+    fetchAll: fetchHobbySearch,
+    notes: "Imported from the Hobby Search figure listing (Fate keyword search); covers makers whose own sites are not reachable.",
   },
   {
     source_id: "tamashii_web_fate_jp",

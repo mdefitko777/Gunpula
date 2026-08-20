@@ -599,6 +599,25 @@
         "apparel/stationery/TCG are deliberately not imported"
       ],
       "notes": "Official Korean Pokemon Store, on NHN Commerce shopby. Public REST API at shop-api.e-ncp.com; search filters need a filter. prefix while the category filter is the bare categoryNos — getting either wrong silently returns a 4-product default instead of an error."
+    },
+    {
+      "source_id": "hobby_search_fate_jp",
+      "name": "Hobby Search (Fate figures)",
+      "type": "retailer_jp",
+      "country": "JP",
+      "base_url": "https://www.1999.co.jp/search?typ1_c=101&cat=figure&searchkey=Fate",
+      "priority": 18,
+      "best_for": [
+        "makers with no scrapable site of their own (PLAMATEA, BUSHIROAD, PalVerse, CHILLfigg)",
+        "Japan price",
+        "official product images"
+      ],
+      "weak_for": [
+        "historical catalog (only currently orderable stock is listed)",
+        "release date (the card shows a fuzzy month with no year)",
+        "non-figure categories"
+      ],
+      "notes": "Retailer, not a manufacturer, and used only for makers whose own sites are unreachable. The search parameter is searchkey — keyword is accepted then silently ignored, returning an unfiltered page — and results still drift, so titles are matched against the Fate works before a record is kept."
     }
   ]
 }
