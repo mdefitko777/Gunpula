@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 // relative ../data fetches keep working inside the native shell.
 // Heavy files stay out of the APK: the shell prefers live GitHub Pages data,
 // kits.json is redundant with data/split, the search index is lazy-loaded,
-// and app/assets holds cached images no catalog record references.
+// and app/assets is served from GitHub Pages by image-utils inside the native shell.
 const rootDir = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const wwwDir = resolve(rootDir, "www");
 

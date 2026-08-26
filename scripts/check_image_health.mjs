@@ -44,13 +44,18 @@ async function checkRemote(item) {
       headers: {
         "User-Agent": userAgent,
         "Accept": "image/avif,image/webp,image/png,image/jpeg,image/*,*/*;q=0.8",
+        "Range": "bytes=0-1023",
       },
     });
+    const contentType = response.headers.get("content-type") || "";
+    const ok = response.ok && /^image\//i.test(contentType);
+    await response.body?.cancel();
     return {
       ...item,
-      ok: response.ok,
+      ok,
       status: response.status,
-      content_type: response.headers.get("content-type"),
+      content_type: contentType,
+      error: response.ok && !ok ? `unexpected content-type ${contentType || "unknown"}` : undefined,
     };
   } catch (error) {
     return { ...item, ok: false, status: 0, error: error.message };

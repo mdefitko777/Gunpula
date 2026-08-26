@@ -33,12 +33,12 @@ export async function loadInitialKitsDoc(activeFranchise) {
   const manifest = await loadOptionalJson("../data/split/manifest.json");
   const franchises = Object.keys(manifest?.franchises || {});
   if (!franchises.length) {
-    return { doc: await loadJson("../data/kits.json"), pendingFranchises: [] };
+    return { doc: await loadJson("../data/kits.json"), pendingFranchises: [], manifest: null };
   }
   const first = franchises.includes(activeFranchise) ? activeFranchise : franchises.includes("gundam") ? "gundam" : franchises[0];
   const doc = await loadOptionalJson(`../data/split/kits-${first}.json`);
   if (!doc?.kits) {
-    return { doc: await loadJson("../data/kits.json"), pendingFranchises: [] };
+    return { doc: await loadJson("../data/kits.json"), pendingFranchises: [], manifest: null };
   }
-  return { doc, pendingFranchises: franchises.filter((franchise) => franchise !== first) };
+  return { doc, pendingFranchises: franchises.filter((franchise) => franchise !== first), manifest };
 }

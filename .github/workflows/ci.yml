@@ -48,6 +48,9 @@ jobs:
       - name: Validate catalog data
         run: npm run validate
 
+      - name: Cached images stay linked
+        run: npm run relink:images:check
+
       - name: Split files match kits.json
         run: |
           npm run split

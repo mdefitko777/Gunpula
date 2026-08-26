@@ -1,6 +1,6 @@
-const APP_CACHE = "gunpula-app-v90";
+const APP_CACHE = "gunpula-app-v91";
 const DATA_CACHE = "gunpula-data-v1";
-const IMAGE_CACHE = "gunpula-images-v1";
+const IMAGE_CACHE = "gunpula-images-v2";
 const NOTIFICATION_CACHE = "gunpula-notifications-v1";
 const UPDATE_SYNC_TAG = "gunpula-update-check";
 
@@ -60,7 +60,7 @@ self.addEventListener("fetch", (event) => {
   }
 
   const url = new URL(request.url);
-  if (request.destination === "image") {
+  if (request.destination === "image" && url.origin === self.location.origin) {
     event.respondWith(staleWhileRevalidate(request, IMAGE_CACHE));
     return;
   }
@@ -110,7 +110,7 @@ async function staleWhileRevalidate(request, cacheName) {
   const cached = await cache.match(request);
   const network = fetch(request)
     .then((response) => {
-      if (response && (response.ok || response.type === "opaque")) {
+      if (response?.ok) {
         cache.put(request, response.clone());
       }
       return response;

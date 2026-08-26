@@ -13,7 +13,7 @@ import {
 } from "./auth.js";
 import { isNativeShell, loadInitialKitsDoc as loadInitialCatalogSlice, loadJson, loadOptionalJson } from "./catalog-loader.js";
 import { closeDialog, openDialog } from "./dialogs.js";
-import { appendImageWithFallback as appendImageUrlsWithFallback, setImageFallbackChain as chainImageFallbacks } from "./image-utils.js";
+import { appendImageWithFallback as appendImageUrlsWithFallback, resolveImageUrl, setImageFallbackChain as chainImageFallbacks } from "./image-utils.js";
 import {
   clampCollectionQuantity as storeClampCollectionQuantity,
   mergeCollectionState as storeMergeCollectionState,
@@ -145,7 +145,7 @@ const ONBOARDING_DONE_KEY = "gunpula-catalog-onboarding-done-v1";
 const SYNC_POLL_INTERVAL_MS = 15000;
 const SYNC_SAVE_DEBOUNCE_MS = 700;
 const SYNC_HISTORY_LIMIT = 20;
-const KIT_RENDER_BATCH = 160;
+const KIT_RENDER_BATCH = window.matchMedia("(max-width: 720px)").matches ? 36 : 72;
 const RECENT_UPDATE_DAYS = 3;
 const UPDATES_MODE_KEY = "gunpula-updates-mode-v1";
 // 最近页的视图顺序同时决定左右滑动的切换顺序。
@@ -275,6 +275,7 @@ const INITIAL_VIEW_STATE = loadSavedViewState();
 const state = {
   rawKits: [],
   kits: [],
+  catalogCounts: {},
   grades: [],
   sources: [],
   imageHealth: null,
@@ -746,6 +747,7 @@ async function checkShellUpdate() {
 // after first render. Falls back to the monolithic kits.json when split files
 // are unavailable (e.g. older deployments or partial offline caches).
 let catalogCompletion = null;
+const franchiseCatalogPromises = new Map();
 const searchIndexPromises = new Map();
 
 async function loadInitialKitsDoc() {
@@ -765,6 +767,21 @@ async function ensureCatalogComplete() {
   }
 }
 
+async function ensureFranchiseCatalog(franchise) {
+  if (!franchise || state.rawKits.some((kit) => kit.franchise === franchise)) return;
+  if (franchiseCatalogPromises.has(franchise)) return franchiseCatalogPromises.get(franchise);
+  const promise = (async () => {
+    const doc = await loadOptionalJson(`../data/split/kits-${franchise}.json`);
+    if (!doc?.kits) return;
+    const existingIds = new Set(state.rawKits.map((kit) => kit.kit_id));
+    state.rawKits = state.rawKits.concat(doc.kits.filter((kit) => !existingIds.has(kit.kit_id)));
+    refreshKits();
+    renderCatalogDataChanged();
+  })().finally(() => franchiseCatalogPromises.delete(franchise));
+  franchiseCatalogPromises.set(franchise, promise);
+  return promise;
+}
+
 function completeCatalogInBackground(pendingFranchises) {
   if (!pendingFranchises?.length || catalogCompletion) {
     return;
@@ -776,7 +793,8 @@ function completeCatalogInBackground(pendingFranchises) {
       state.rawKits = fullDoc.kits;
       state.updatedAt = fullDoc.updated_at || state.updatedAt;
     } else {
-      state.rawKits = state.rawKits.concat(...docs.map((doc) => doc.kits));
+      const existingIds = new Set(state.rawKits.map((kit) => kit.kit_id));
+      state.rawKits = state.rawKits.concat(...docs.map((doc) => doc.kits.filter((kit) => !existingIds.has(kit.kit_id))));
     }
     refreshKits();
     renderCatalogDataChanged();
@@ -989,6 +1007,7 @@ async function init() {
 
   state.grades = gradesDoc.grades;
   state.rawKits = initialCatalog.doc.kits;
+  state.catalogCounts = initialCatalog.manifest?.franchises || {};
   state.sources = sourcesDoc.sources;
   state.imageHealth = imageHealthDoc;
   state.updateFeed = updateFeedDoc;
@@ -1029,7 +1048,6 @@ async function init() {
     openDialog(elements.settingsDialog);
   }
   seedInitialOverlayHistory();
-  completeCatalogInBackground(initialCatalog.pendingFranchises);
   if (state.query.trim()) {
     ensureSearchIndex();
   }
@@ -2633,10 +2651,10 @@ function adjacentFranchise(offset) {
 }
 
 function kitCountsByFranchise() {
+  const entries = Object.entries(state.catalogCounts || {});
+  if (entries.length) return new Map(entries);
   const counts = new Map();
-  for (const kit of state.kits) {
-    counts.set(kit.franchise, (counts.get(kit.franchise) || 0) + 1);
-  }
+  for (const kit of state.kits) counts.set(kit.franchise, (counts.get(kit.franchise) || 0) + 1);
   return counts;
 }
 
@@ -4008,6 +4026,14 @@ function exportCorrections() {
 }
 
 function render() {
+  const collectionFranchise = activeCollectionType() ? state.collectionFilter?.franchise : null;
+  if (collectionFranchise && collectionFranchise !== "all") {
+    void ensureFranchiseCatalog(collectionFranchise);
+  } else if (activeCollectionType() && (!collectionFranchise || collectionFranchise === "all")) {
+    void ensureCatalogComplete();
+  } else {
+    void ensureFranchiseCatalog(state.franchise);
+  }
   translateStaticText();
   applyAppearance();
   populateGradeSelect();
@@ -4204,11 +4230,9 @@ function renderHome() {
     return;
   }
 
-  const counts = new Map();
-  for (const kit of state.kits) {
-    counts.set(kit.franchise, (counts.get(kit.franchise) || 0) + 1);
-  }
-  elements.homeTotal.textContent = t("records", { count: state.kits.length });
+  const counts = kitCountsByFranchise();
+  const total = [...counts.values()].reduce((sum, count) => sum + Number(count || 0), 0);
+  elements.homeTotal.textContent = t("records", { count: total });
   renderWorldSection();
   renderHomePulse();
   // The 5-franchise switcher grid is gone — the hero's world-portal handles
@@ -4726,13 +4750,11 @@ function renderRecentViewedPanel(container) {
 }
 
 function datasetSummary() {
-  const counts = new Map();
-  for (const kit of state.kits) {
-    counts.set(kit.franchise, (counts.get(kit.franchise) || 0) + 1);
-  }
+  const counts = kitCountsByFranchise();
   const parts = FRANCHISES.map((franchise) => `${franchiseLabel(franchise)} ${counts.get(franchise) || 0}`).join(" / ");
+  const total = [...counts.values()].reduce((sum, count) => sum + Number(count || 0), 0);
   return t("summary", {
-    total: state.kits.length,
+    total,
     parts,
     date: state.updatedAt ?? "unknown",
   });
@@ -4932,7 +4954,7 @@ function renderAnnouncementUpdates(items) {
     art.className = "home-update-art announcement-update-art";
     if (item.thumbnail_url) {
       const image = document.createElement("img");
-      image.src = item.thumbnail_url;
+      image.src = resolveImageUrl(item.thumbnail_url);
       image.alt = announcementDisplayName(item);
       image.loading = "lazy";
       art.append(image);
@@ -5223,7 +5245,7 @@ function renderPBandaiProducts() {
     const image = safePBandaiImageUrl(item);
     if (image) {
       const img = document.createElement("img");
-      img.src = image;
+      img.src = resolveImageUrl(image);
       img.alt = item.title || t("premiumBandaiProducts");
       img.loading = "lazy";
       img.addEventListener("error", () => showPlaceholder(art, "PB"));
@@ -5893,11 +5915,13 @@ function itemTypeLabel(key) {
 
 function imageCandidatesForKit(kit) {
   const overrideCover = kit.local_override?.cover_image_url || kit.local_override?.image_url;
-  return [...new Set([overrideCover, kit.images?.box_art_url, ...(kit.gallery_image_urls || [])].filter(Boolean))];
+  const candidates = [...new Set([kit.images?.box_art_url, ...(kit.gallery_image_urls || [])].filter(Boolean))]
+    .sort((left, right) => Number(!String(left).startsWith("./")) - Number(!String(right).startsWith("./")));
+  return overrideCover ? [overrideCover, ...candidates.filter((url) => url !== overrideCover)] : candidates;
 }
 
 function appendImageWithFallback(container, kit, options = {}) {
-  return appendImageUrlsWithFallback(container, imageCandidatesForKit(kit), options);
+  return appendImageUrlsWithFallback(container, imageCandidatesForKit(kit).slice(0, options.maxCandidates || 3), options);
 }
 
 function releaseYearForKit(kit) {
@@ -7468,7 +7492,7 @@ function guideIconRemote(icon) {
 // before running onExhausted (which typically hatches the frame).
 function guideIconImage(img, icon, onExhausted) {
   const remote = guideIconRemote(icon);
-  img.src = guideIconLocal(icon);
+  img.src = resolveImageUrl(guideIconLocal(icon));
   img.addEventListener("error", () => {
     if (remote && img.src !== remote && !img.dataset.triedRemote) {
       img.dataset.triedRemote = "1";
@@ -10812,7 +10836,7 @@ function renderDetailGallery(kit) {
     button.className = `thumb-button${index === state.selectedImageIndex ? " is-active" : ""}`;
     button.setAttribute("aria-label", t("galleryImage", { index: index + 1 }));
     const img = document.createElement("img");
-    img.src = url;
+    img.src = resolveImageUrl(url);
     img.alt = t("imageAlt", { name: kitDisplayName(kit), index: index + 1 });
     img.loading = "lazy";
     img.addEventListener("error", () => {
@@ -10874,7 +10898,7 @@ function selectDetailImage(urls, index) {
   const url = urls[safeIndex] || urls[0];
   state.selectedImageIndex = safeIndex;
   const img = document.createElement("img");
-  img.src = url;
+  img.src = resolveImageUrl(url);
   img.alt = t("mainImageAlt", { name: kitDisplayName(state.selectedKit) });
   img.addEventListener("error", () => {
     img.remove();

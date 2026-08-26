@@ -1,5 +1,13 @@
+const REMOTE_APP_BASE = "https://mdefitko777.github.io/Gunpula/app/";
+
+export function resolveImageUrl(url) {
+  const value = String(url || "");
+  const nativeShell = Boolean(window.Capacitor?.isNativePlatform?.());
+  return nativeShell && value.startsWith("./") ? `${REMOTE_APP_BASE}${value.slice(2)}` : value;
+}
+
 export function uniqueImageUrls(urls) {
-  return [...new Set((urls || []).filter(Boolean))];
+  return [...new Set((urls || []).filter(Boolean).map(resolveImageUrl))];
 }
 
 export function setImageFallbackChain(img, urls, onExhausted) {
@@ -28,6 +36,7 @@ export function appendImageWithFallback(container, urls, options = {}) {
   img.alt = options.alt || "";
   img.loading = options.loading || "lazy";
   img.decoding = "async";
+  img.fetchPriority = options.fetchPriority || (img.loading === "lazy" ? "low" : "auto");
   container.append(img);
   return setImageFallbackChain(img, candidates, () => {
     img.remove();
