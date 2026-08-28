@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-26T20:39:53.211Z",
+  "updated_at": "2026-08-28T02:39:59.725Z",
   "sources": [
     {
       "source_id": "bandai_hobby_news",
@@ -22,8 +22,109 @@
       "url": "https://beyblade.takaratomy.co.jp/beyblade-x/news/"
     }
   ],
-  "fetch_errors": [],
+  "fetch_errors": [
+    {
+      "source_id": "bandai_hobby_youtube",
+      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuxB1suCoCqAKiljh_0xE4A returned 404"
+    }
+  ],
   "announcements": [
+    {
+      "id": "tamashii-news-2026-08-27-16018",
+      "franchise": "gundam",
+      "names": {
+        "ja": "【METAL STRUCTURE 解体匠機】ついに「RX-178 ガンダムMk-II（エゥーゴ仕様）」の全貌が明らかに！8月27日より一般店頭にて予約開始。",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-08-27",
+      "source_type": "news",
+      "source_name": "TAMASHII WEB",
+      "source_url": "https://tamashiiweb.com/item/16018/",
+      "thumbnail_url": "../app/assets/announcements/tamashii-news-2026-08-27-16018.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "tamashii-news-2026-08-27-16032",
+      "franchise": "gundam",
+      "names": {
+        "ja": "【新ブランド ABSOLUTE ACT】「ストライクフリーダムガンダム」が『機動戦士ガンダムSEED DESTINY』から登場！",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-08-27",
+      "source_type": "news",
+      "source_name": "TAMASHII WEB",
+      "source_url": "https://tamashiiweb.com/item/16032/",
+      "thumbnail_url": "../app/assets/announcements/tamashii-news-2026-08-27-16032.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "tamashii-news-2026-08-27-16104",
+      "franchise": "gundam",
+      "names": {
+        "ja": "【機動戦士ガンダム 逆襲のシャア】「νガンダム【さくらみこVer.】」がMETAL ROBOT魂に登場！",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-08-27",
+      "source_type": "news",
+      "source_name": "TAMASHII WEB",
+      "source_url": "https://tamashiiweb.com/item/16104/",
+      "thumbnail_url": "../app/assets/announcements/tamashii-news-2026-08-27-16104.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "tamashii-news-2026-08-27-16105",
+      "franchise": "gundam",
+      "names": {
+        "ja": "【機動戦士ガンダム 逆襲のシャア】「サザビー【星街すいせいVer.】」がMETAL ROBOT魂に登場！",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-08-27",
+      "source_type": "news",
+      "source_name": "TAMASHII WEB",
+      "source_url": "https://tamashiiweb.com/item/16105/",
+      "thumbnail_url": "../app/assets/announcements/tamashii-news-2026-08-27-16105.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null
+    },
     {
       "id": "bandai-news-2026-08-26-vMDFfNzM1MC8",
       "franchise": "gundam",
@@ -39,6 +140,30 @@
       "source_name": "BANDAI SPIRITS",
       "source_url": "https://bandai-hobby.net/news/01_7350/",
       "thumbnail_url": "../app/assets/announcements/bandai-news-2026-08-26-vMDFfNzM1MC8.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "bandai-news-2026-08-26-wMDI1NTU5Ny8",
+      "franchise": "gundam",
+      "names": {
+        "ja": "PG UNLEASHED 1/60 νガンダム用 フィン・ファンネル & クリアカラーボディ 8月26日(水) お申し込み受付開始！",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-08-26",
+      "source_type": "news",
+      "source_name": "BANDAI SPIRITS",
+      "source_url": "https://p-bandai.jp/item/item-1000255597/",
+      "thumbnail_url": "../app/assets/announcements/bandai-news-2026-08-26-wMDI1NTU5Ny8.jpg",
       "video_id": null,
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
