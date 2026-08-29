@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-29T21:26:53.241Z",
+  "updated_at": "2026-08-29T22:41:05.941Z",
   "sources": [
     {
       "id": "naver_shop",
@@ -161,7 +161,7 @@
     "provider": "Frankfurter",
     "provider_url": "https://frankfurter.dev/",
     "date": "2026-08-28",
-    "fetched_at": "2026-08-29T21:26:53.241Z",
+    "fetched_at": "2026-08-29T22:41:05.941Z",
     "rates_to_krw": {
       "KRW": 1,
       "JPY": 8.607949655765921,
@@ -172,11 +172,11 @@
     "fetch_status": "ok"
   },
   "summary": {
-    "updated_at": "2026-08-29T21:26:53.241Z",
+    "updated_at": "2026-08-29T22:41:05.941Z",
     "sources_total": 10,
     "api_ready": 0,
     "manual_ready": 7,
-    "listing_samples": 3,
+    "listing_samples": 2,
     "priced_kits": 2,
     "keyword_records": 8237,
     "exchange_status": "ok",
@@ -222,8 +222,8 @@
     },
     {
       "source": "bunjang",
-      "samples": 2,
-      "matched": 2
+      "samples": 1,
+      "matched": 1
     },
     {
       "source": "joongna",
@@ -250,26 +250,9 @@
       "currency": "KRW",
       "price_krw": 27000,
       "conservative_krw": 27000,
-      "captured_at": "2026-08-29T02:48:55.051Z",
+      "captured_at": "2026-08-29T22:39:53.661Z",
       "confidence": "auto",
       "notes": "Auto-fetched via bunjang search for \"HG 스로네 츠바이\"."
-    },
-    {
-      "id": "bunjang:hg-hg-1-144-4543112599278000:aHR0cHM6Ly9tLm",
-      "kit_id": "hg-hg-1-144-4543112599278000",
-      "source": "bunjang",
-      "title": "HG 가랏조",
-      "url": "https://m.bunjang.co.kr/products/411437489",
-      "condition": "unknown",
-      "status": "active",
-      "price": 30000,
-      "shipping_price": 0,
-      "currency": "KRW",
-      "price_krw": 30000,
-      "conservative_krw": 30000,
-      "captured_at": "2026-08-29T02:48:55.051Z",
-      "confidence": "auto",
-      "notes": "Auto-fetched via bunjang search for \"HG 가랏조\"."
     },
     {
       "id": "joongna:hg-hg-1-144-4543112599278000:aHR0cHM6Ly93ZW",
@@ -284,7 +267,7 @@
       "currency": "KRW",
       "price_krw": 180000,
       "conservative_krw": 180000,
-      "captured_at": "2026-08-29T02:48:55.051Z",
+      "captured_at": "2026-08-29T22:39:53.661Z",
       "confidence": "auto",
       "notes": "Auto-fetched via joongna search for \"HG 가랏조\"."
     }
@@ -299,19 +282,18 @@
       "min_krw": 27000,
       "median_krw": 27000,
       "conservative_median_krw": 27000,
-      "updated_at": "2026-08-29T21:26:53.241Z"
+      "updated_at": "2026-08-29T22:41:05.941Z"
     },
     "hg-hg-1-144-4543112599278000": {
       "kit_id": "hg-hg-1-144-4543112599278000",
-      "samples": 2,
+      "samples": 1,
       "sources": {
-        "bunjang": 1,
         "joongna": 1
       },
-      "min_krw": 30000,
-      "median_krw": 105000,
-      "conservative_median_krw": 105000,
-      "updated_at": "2026-08-29T21:26:53.241Z"
+      "min_krw": 180000,
+      "median_krw": 180000,
+      "conservative_median_krw": 180000,
+      "updated_at": "2026-08-29T22:41:05.941Z"
     }
   }
 }
