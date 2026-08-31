@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-31",
-  "generated_at": "2026-08-30T21:39:56.979Z",
+  "updated_at": "2026-09-01",
+  "generated_at": "2026-08-31T23:22:44.418Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,11 +16,1103 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-08-30T21:39:56.037Z",
+    "generated_at": "2026-08-31T23:22:43.638Z",
     "blocked_count": 1,
     "error_count": 0
   },
   "entries": [
+    {
+      "date": "2026-09-01",
+      "generated_at": "2026-08-31T23:22:44.418Z",
+      "total_before": 8244,
+      "total_after": 8252,
+      "added_count": 8,
+      "changed_count": 70,
+      "removed_count": 0,
+      "watched_count": 0,
+      "premium_bandai_count": 1,
+      "bbx_count": 0,
+      "franchise_counts": {
+        "gundam": 2,
+        "pokemon": 37,
+        "armored_core": 38,
+        "fate": 1
+      },
+      "reason_counts": {
+        "new": 8,
+        "image": 68,
+        "price": 1,
+        "source": 1,
+        "name": 1
+      },
+      "interest_tags": [
+        "gundam",
+        "pokemon",
+        "armored_core",
+        "fate",
+        "premium_bandai"
+      ],
+      "watch_tags": [],
+      "added": [
+        {
+          "kit_id": "tamashii-16049",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "METAL_ROBOT",
+          "subline": "METAL ROBOT魂",
+          "series_key": "cca",
+          "series_labels": {
+            "zh": "逆夏",
+            "en": "CCA",
+            "ja": "逆シャア",
+            "ko": "역샤아"
+          },
+          "names": {
+            "ja": "νガンダム",
+            "zh": "ν高达",
+            "ko": "ν건담",
+            "en": "νGundam"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 22000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16049/",
+            "https://tamashiiweb.com/item_brand/metal_robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-122919151",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 미니책받침 (지우와 포켓몬 친구들)",
+            "zh": "포켓몬 스토어 미니책받침 (지우와 포켓몬 친구들)",
+            "ko": "포켓몬 스토어 미니책받침 (지우와 포켓몬 친구들)",
+            "en": "포켓몬 스토어 미니책받침 (지우와 포켓몬 친구들)"
+          },
+          "release_date": "2024-09-30",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=122919151"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-114168621",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 포켓몬 미니 백팩(랜덤 상품)",
+            "zh": "포켓몬센터 포켓몬 미니 백팩(랜덤 상품)",
+            "ko": "포켓몬센터 포켓몬 미니 백팩(랜덤 상품)",
+            "en": "포켓몬센터 포켓몬 미니 백팩(랜덤 상품)"
+          },
+          "release_date": "2023-09-20",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=114168621"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329316703",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "311 ぬいぐるみ Pok&eacute;mon fit プラスル",
+            "zh": "311 ぬいぐるみ Pok&eacute;mon fit プラスル",
+            "ko": "311 ぬいぐるみ Pok&eacute;mon fit プラスル",
+            "en": "311 ぬいぐるみ Pok&eacute;mon fit プラスル"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329316703.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329316710",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "312 ぬいぐるみ Pok&eacute;mon fit マイナン",
+            "zh": "312 ぬいぐるみ Pok&eacute;mon fit マイナン",
+            "ko": "312 ぬいぐるみ Pok&eacute;mon fit マイナン",
+            "en": "312 ぬいぐるみ Pok&eacute;mon fit マイナン"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329316710.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329339771",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "470 ぬいぐるみ Pok&eacute;mon fit リーフィア",
+            "zh": "470 ぬいぐるみ Pok&eacute;mon fit リーフィア",
+            "ko": "470 ぬいぐるみ Pok&eacute;mon fit リーフィア",
+            "en": "470 ぬいぐるみ Pok&eacute;mon fit リーフィア"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329339771.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329366579",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "653 ぬいぐるみ Pok&eacute;mon fit フォッコ",
+            "zh": "653 ぬいぐるみ Pok&eacute;mon fit フォッコ",
+            "ko": "653 ぬいぐるみ Pok&eacute;mon fit フォッコ",
+            "en": "653 ぬいぐるみ Pok&eacute;mon fit フォッコ"
+          },
+          "release_date": null,
+          "price_jpy": 1430,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329366579.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329437118",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カラビナ付きマスコット ポッチャマ",
+            "zh": "カラビナ付きマスコット ポッチャマ",
+            "ko": "カラビナ付きマスコット ポッチャマ",
+            "en": "カラビナ付きマスコット ポッチャマ"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329437118.html"
+          ]
+        }
+      ],
+      "changed": [
+        {
+          "kit_id": "acvi-4934054056057",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "V.I.シリーズ",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "ラインアーク ホワイト・グリント＆V.O.Bセット",
+            "zh": "ラインアーク ホワイト・グリント＆V.O.B套装",
+            "ko": "ラインアーク ホワイト・グリント＆V.O.B세트",
+            "en": "ラインアーク ホワイト グリント＆V.O.BSet"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 12100,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054056057/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
+        {
+          "kit_id": "acvi-4934054083237",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "V.I.シリーズ",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "クレスト CR-C98E2 強襲型Ver. （クレスト CR-C98E2 強襲型Ver.）",
+            "zh": "クレスト CR-C98E2 強襲型Ver. （クレスト CR-C98E2 強襲型Ver.）",
+            "ko": "クレスト CR-C98E2 強襲型Ver. （クレスト CR-C98E2 強襲型Ver.）",
+            "en": "クレスト CR-C98E2 強襲型Ver. (クレスト CR-C98E2 強襲型Ver.)"
+          },
+          "release_date": "2026-10",
+          "price_jpy": 7920,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054083237/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
+        {
+          "kit_id": "acvi-4934054083220",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "V.I.シリーズ",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "クレスト CR-C90U3 （クレスト CR-C90U3）",
+            "zh": "クレスト CR-C90U3 （クレスト CR-C90U3）",
+            "ko": "クレスト CR-C90U3 （クレスト CR-C90U3）",
+            "en": "クレスト CR-C90U3 (クレスト CR-C90U3)"
+          },
+          "release_date": "2026-09",
+          "price_jpy": 7920,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054083220/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-136476280",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(루카리오)",
+            "zh": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(루카리오)",
+            "ko": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(루카리오)",
+            "en": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(루카리오)"
+          },
+          "release_date": "2026-08-10",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=136476280"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-136476282",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(리자몽)",
+            "zh": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(리자몽)",
+            "ko": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(리자몽)",
+            "en": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(리자몽)"
+          },
+          "release_date": "2026-08-10",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=136476282"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-136476278",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(망나뇽)",
+            "zh": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(망나뇽)",
+            "ko": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(망나뇽)",
+            "en": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(망나뇽)"
+          },
+          "release_date": "2026-08-10",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=136476278"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-136476283",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(뮤츠)",
+            "zh": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(뮤츠)",
+            "ko": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(뮤츠)",
+            "en": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(뮤츠)"
+          },
+          "release_date": "2026-08-10",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=136476283"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-136476281",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(팬텀)",
+            "zh": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(팬텀)",
+            "ko": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(팬텀)",
+            "en": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(팬텀)"
+          },
+          "release_date": "2026-08-10",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=136476281"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-136476279",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(피카츄)",
+            "zh": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(피카츄)",
+            "ko": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(피카츄)",
+            "en": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 핀뱃지(피카츄)"
+          },
+          "release_date": "2026-08-10",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=136476279"
+          ]
+        },
+        {
+          "kit_id": "acvi-4934054081356",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "V.I.シリーズ",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "レイレナード 03-AALIYAH オルレア",
+            "zh": "レイレナード 03-AALIYAH オルレア",
+            "ko": "レイレナード 03-AALIYAH オルレア",
+            "en": "レイレナード 03-AALIYAH オルレア"
+          },
+          "release_date": "2026-06-25",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054081356/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
+        {
+          "kit_id": "acvi-4934054048083",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "Kotobukiya Armored Core",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "SCHNEIDER NACHTREIHER / 40E 近接突撃型",
+            "zh": "SCHNEIDER NACHTREIHER / 40E 近接突撃型",
+            "ko": "SCHNEIDER NACHTREIHER / 40E 近接突撃型",
+            "en": "SCHNEIDER NACHTREIHER / 40E 近接突撃型"
+          },
+          "release_date": "2026-06-24",
+          "price_jpy": 17050,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054048083/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
+        {
+          "kit_id": "acvi-4934054048328",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "Kotobukiya Armored Core",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "SCHNEIDER NACHTREIHER / 40E スティールヘイズ",
+            "zh": "SCHNEIDER NACHTREIHER / 40E スティールヘイズ",
+            "ko": "SCHNEIDER NACHTREIHER / 40E スティールヘイズ",
+            "en": "SCHNEIDER NACHTREIHER / 40E スティールヘイズ"
+          },
+          "release_date": "2025-12-25",
+          "price_jpy": 17050,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054048328/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
+        {
+          "kit_id": "acvi-4988601383523",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "Kotobukiya Armored Core",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "アーマード・コア ストラクチャーアーツ ノンスケールプラスチックモデルキット シリーズ Vol.１",
+            "zh": "装甲核心 ストラクチャーアーツ ノンスケールプラスチックモデルキット シリーズ Vol.１",
+            "ko": "아머드 코어 ストラクチャーアーツ ノンスケールプラスチックモデルキット シリーズ Vol.１",
+            "en": "アーマード コア ストラクチャーアーツ ノンスケールプラスチックモデルキット シリーズ Vol.１"
+          },
+          "release_date": "2025-12-25",
+          "price_jpy": 14080,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4988601383523/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
+        {
+          "kit_id": "hg-hg-1-144-4573102691859000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "g",
+          "series_labels": {
+            "zh": "G",
+            "en": "G",
+            "ja": "G",
+            "ko": "G"
+          },
+          "names": {
+            "ja": "HG 1 / 144 マンダラガンダム",
+            "zh": "HG 1 / 144 マンダラ高达",
+            "ko": "HG 1 / 144 マンダラ건담",
+            "en": "HG 1 / 144 マンダラGundam"
+          },
+          "release_date": "2025-11",
+          "price_jpy": 2915,
+          "is_limited": false,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102691859000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000256716/"
+          ]
+        },
+        {
+          "kit_id": "acvi-4934054065523",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "V.I.シリーズ",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "KT-104 / PERUN ハングドマン 再戦ver.",
+            "zh": "KT-104 / PERUN ハングドマン 再戦ver.",
+            "ko": "KT-104 / PERUN ハングドマン 再戦ver.",
+            "en": "KT-104 / PERUN ハングドマン 再戦ver."
+          },
+          "release_date": "2025-06-24",
+          "price_jpy": 10780,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054065523/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
+        {
+          "kit_id": "acvi-4934054065516",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "V.I.シリーズ",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "ナインボール ARMORED CORE Ver.",
+            "zh": "ナイン铁球 ARMORED CORE Ver.",
+            "ko": "ナイン볼 ARMORED CORE Ver.",
+            "en": "ナインBall ARMORED CORE Ver."
+          },
+          "release_date": "2025-06-24",
+          "price_jpy": 6600,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054065516/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
+        {
+          "kit_id": "acvi-4934054057047",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "V.I.シリーズ",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "ミラージュ C01-GAEA",
+            "zh": "ミラージュ C01-GAEA",
+            "ko": "ミラージュ C01-GAEA",
+            "en": "ミラージュ C01-GAEA"
+          },
+          "release_date": "2025-06-24",
+          "price_jpy": 4180,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054057047/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
+        {
+          "kit_id": "acvi-4934054065165",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "V.I.シリーズ",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "MATSUKAZE mdl.2 拠点防衛仕様",
+            "zh": "MATSUKAZE mdl.2 拠点防衛规格",
+            "ko": "MATSUKAZE mdl.2 拠点防衛사양",
+            "en": "MATSUKAZE mdl.2 拠点防衛Type"
+          },
+          "release_date": "2025-05-23",
+          "price_jpy": 22000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054065165/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
+        {
+          "kit_id": "acvi-4934054065035",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "V.I.シリーズ",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "オーバード・ウェポンセット",
+            "zh": "オーバード・ウェポン套装",
+            "ko": "オーバード・ウェポン세트",
+            "en": "オーバード ウェポンSet"
+          },
+          "release_date": "2025-05-23",
+          "price_jpy": 9350,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054065035/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
+        {
+          "kit_id": "acvi-4934054065189",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "V.I.シリーズ",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "UCR-10 / A ヴェンジェンス",
+            "zh": "UCR-10 / A ヴェンジェンス",
+            "ko": "UCR-10 / A ヴェンジェンス",
+            "en": "UCR-10 / A ヴェンジェンス"
+          },
+          "release_date": "2025-04-18",
+          "price_jpy": 10670,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054065189/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        }
+      ],
+      "removed": [],
+      "watched": []
+    },
     {
       "date": "2026-08-31",
       "generated_at": "2026-08-30T21:39:56.979Z",
@@ -35910,1830 +37002,6 @@
           "source_ids": [
             "bandai_spirits_products_jp",
             "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425425238000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000133122/"
-          ]
-        }
-      ]
-    },
-    {
-      "date": "2026-07-31",
-      "generated_at": "2026-07-30T20:22:16.566Z",
-      "total_before": 5139,
-      "total_after": 5158,
-      "added_count": 19,
-      "changed_count": 223,
-      "removed_count": 0,
-      "watched_count": 6,
-      "premium_bandai_count": 200,
-      "bbx_count": 0,
-      "franchise_counts": {
-        "pokemon": 42,
-        "gundam": 200
-      },
-      "reason_counts": {
-        "new": 19,
-        "source": 200,
-        "image": 23
-      },
-      "interest_tags": [
-        "pokemon",
-        "gundam",
-        "premium_bandai",
-        "00",
-        "seed"
-      ],
-      "watch_tags": [
-        "seed",
-        "00"
-      ],
-      "added": [
-        {
-          "kit_id": "pokemon-center-4521329385860",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "107 ぬいぐるみ Pok&eacute;mon fit エビワラー",
-            "zh": "107 ぬいぐるみ Pok&eacute;mon fit エビワラー",
-            "ko": "107 ぬいぐるみ Pok&eacute;mon fit エビワラー",
-            "en": "107 ぬいぐるみ Pok&eacute;mon fit エビワラー"
-          },
-          "release_date": null,
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329385860.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329340562",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "127 ぬいぐるみ Pok&eacute;mon fit カイロス",
-            "zh": "127 ぬいぐるみ Pok&eacute;mon fit カイロス",
-            "ko": "127 ぬいぐるみ Pok&eacute;mon fit カイロス",
-            "en": "127 ぬいぐるみ Pok&eacute;mon fit カイロス"
-          },
-          "release_date": null,
-          "price_jpy": 1320,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329340562.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329341965",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "145 ぬいぐるみ Pok&eacute;mon fit サンダー",
-            "zh": "145 ぬいぐるみ Pok&eacute;mon fit サンダー",
-            "ko": "145 ぬいぐるみ Pok&eacute;mon fit サンダー",
-            "en": "145 ぬいぐるみ Pok&eacute;mon fit サンダー"
-          },
-          "release_date": null,
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329341965.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329333939",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "146 ぬいぐるみ Pok&eacute;mon fit ファイヤー",
-            "zh": "146 ぬいぐるみ Pok&eacute;mon fit ファイヤー",
-            "ko": "146 ぬいぐるみ Pok&eacute;mon fit ファイヤー",
-            "en": "146 ぬいぐるみ Pok&eacute;mon fit ファイヤー"
-          },
-          "release_date": null,
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329333939.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329333717",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "212 ぬいぐるみ Pok&eacute;mon fit ハッサム",
-            "zh": "212 ぬいぐるみ Pok&eacute;mon fit ハッサム",
-            "ko": "212 ぬいぐるみ Pok&eacute;mon fit ハッサム",
-            "en": "212 ぬいぐるみ Pok&eacute;mon fit ハッサム"
-          },
-          "release_date": null,
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329333717.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329317434",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "381 ぬいぐるみ Pok&eacute;mon fit ラティオス",
-            "zh": "381 ぬいぐるみ Pok&eacute;mon fit ラティオス",
-            "ko": "381 ぬいぐるみ Pok&eacute;mon fit ラティオス",
-            "en": "381 ぬいぐるみ Pok&eacute;mon fit ラティオス"
-          },
-          "release_date": null,
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329317434.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329339405",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "433 ぬいぐるみ Pok&eacute;mon fit リーシャン",
-            "zh": "433 ぬいぐるみ Pok&eacute;mon fit リーシャン",
-            "ko": "433 ぬいぐるみ Pok&eacute;mon fit リーシャン",
-            "en": "433 ぬいぐるみ Pok&eacute;mon fit リーシャン"
-          },
-          "release_date": null,
-          "price_jpy": 1320,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329339405.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329339696",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "462 ぬいぐるみ Pok&eacute;mon fit ジバコイル",
-            "zh": "462 ぬいぐるみ Pok&eacute;mon fit ジバコイル",
-            "ko": "462 ぬいぐるみ Pok&eacute;mon fit ジバコイル",
-            "en": "462 ぬいぐるみ Pok&eacute;mon fit ジバコイル"
-          },
-          "release_date": null,
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329339696.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329343907",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "507 ぬいぐるみ Pok&eacute;mon fit ハーデリア",
-            "zh": "507 ぬいぐるみ Pok&eacute;mon fit ハーデリア",
-            "ko": "507 ぬいぐるみ Pok&eacute;mon fit ハーデリア",
-            "en": "507 ぬいぐるみ Pok&eacute;mon fit ハーデリア"
-          },
-          "release_date": null,
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329343907.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329344027",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "519 ぬいぐるみ Pok&eacute;mon fit マメパト",
-            "zh": "519 ぬいぐるみ Pok&eacute;mon fit マメパト",
-            "ko": "519 ぬいぐるみ Pok&eacute;mon fit マメパト",
-            "en": "519 ぬいぐるみ Pok&eacute;mon fit マメパト"
-          },
-          "release_date": null,
-          "price_jpy": 1320,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329344027.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329349893",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "586 ぬいぐるみ Pok&eacute;mon fit メブキジカ(あきのすがた)",
-            "zh": "586 ぬいぐるみ Pok&eacute;mon fit メブキジカ(あきのすがた)",
-            "ko": "586 ぬいぐるみ Pok&eacute;mon fit メブキジカ(あきのすがた)",
-            "en": "586 ぬいぐるみ Pok&eacute;mon fit メブキジカ(あきのすがた)"
-          },
-          "release_date": null,
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329349893.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329350233",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "617 ぬいぐるみ Pok&eacute;mon fit アギルダー",
-            "zh": "617 ぬいぐるみ Pok&eacute;mon fit アギルダー",
-            "ko": "617 ぬいぐるみ Pok&eacute;mon fit アギルダー",
-            "en": "617 ぬいぐるみ Pok&eacute;mon fit アギルダー"
-          },
-          "release_date": null,
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329350233.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329366258",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "685 ぬいぐるみ Pok&eacute;mon fit ペロリーム",
-            "zh": "685 ぬいぐるみ Pok&eacute;mon fit ペロリーム",
-            "ko": "685 ぬいぐるみ Pok&eacute;mon fit ペロリーム",
-            "en": "685 ぬいぐるみ Pok&eacute;mon fit ペロリーム"
-          },
-          "release_date": null,
-          "price_jpy": 1760,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329366258.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329427898",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "787 ぬいぐるみ Pok&eacute;mon fit カプ・ブルル",
-            "zh": "787 ぬいぐるみ Pok&eacute;mon fit カプ・ブルル",
-            "ko": "787 ぬいぐるみ Pok&eacute;mon fit カプ・ブルル",
-            "en": "787 ぬいぐるみ Pok&eacute;mon fit カプ ブルル"
-          },
-          "release_date": null,
-          "price_jpy": 1980,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329427898.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329356426",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "91 ぬいぐるみ Pok&eacute;mon fit パルシェン",
-            "zh": "91 ぬいぐるみ Pok&eacute;mon fit パルシェン",
-            "ko": "91 ぬいぐるみ Pok&eacute;mon fit パルシェン",
-            "en": "91 ぬいぐるみ Pok&eacute;mon fit パルシェン"
-          },
-          "release_date": null,
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329356426.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329419053",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "マスコット Don’t Attack Me ヒメグマ",
-            "zh": "マスコット Don’t Attack Me ヒメグマ",
-            "ko": "マスコット Don’t Attack Me ヒメグマ",
-            "en": "マスコット Don’t Attack Me ヒメグマ"
-          },
-          "release_date": null,
-          "price_jpy": 1980,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329419053.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329435121",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "もちものミニミニマスコット オボンのみ",
-            "zh": "もちものミニミニマスコット オボンのみ",
-            "ko": "もちものミニミニマスコット オボンのみ",
-            "en": "もちものミニミニマスコット オボンのみ"
-          },
-          "release_date": null,
-          "price_jpy": 605,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329435121.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329435152",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "もちものミニミニマスコット おまもりこばん",
-            "zh": "もちものミニミニマスコット おまもりこばん",
-            "ko": "もちものミニミニマスコット おまもりこばん",
-            "en": "もちものミニミニマスコット おまもりこばん"
-          },
-          "release_date": null,
-          "price_jpy": 605,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329435152.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329435138",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "もちものミニミニマスコット ラムのみ",
-            "zh": "もちものミニミニマスコット ラムのみ",
-            "ko": "もちものミニミニマスコット ラムのみ",
-            "en": "もちものミニミニマスコット ラムのみ"
-          },
-          "release_date": null,
-          "price_jpy": 605,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329435138.html"
-          ]
-        }
-      ],
-      "changed": [
-        {
-          "kit_id": "sd-sd-g-61-1-4543112052674000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "SD",
-          "subline": "SD",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "SDガンダムGジェネレーション61 ブルーディスティニー1号機",
-            "zh": "SD高达Gジェネレーション61 蓝色命运1号機",
-            "ko": "SD건담Gジェネレーション61 블루 데스티니1号機",
-            "en": "SD Gundam Gジェネレーション61 Blue Destiny1号機"
-          },
-          "release_date": "2001-09",
-          "price_jpy": 440,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112052674000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000130986/"
-          ]
-        },
-        {
-          "kit_id": "sd-sd-g-52-3-4902425776316000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "SD",
-          "subline": "SD",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "SDガンダムGジェネレーション52 ブルーディスティニー3号機",
-            "zh": "SD高达Gジェネレーション52 蓝色命运3号機",
-            "ko": "SD건담Gジェネレーション52 블루 데스티니3号機",
-            "en": "SD Gundam Gジェネレーション52 Blue Destiny3号機"
-          },
-          "release_date": "2000-10",
-          "price_jpy": 440,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425776316000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000130921/"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-rx-78-2-ver1-5-4902425763729000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "double_o",
-          "series_labels": {
-            "zh": "00",
-            "en": "00",
-            "ja": "00",
-            "ko": "00"
-          },
-          "names": {
-            "ja": "MG 1 / 100 RX-78-2 ガンダム ver1.5",
-            "zh": "MG 1 / 100 RX-78-2 高达 ver1.5",
-            "ko": "MG 1 / 100 RX-78-2 건담 ver1.5",
-            "en": "MG 1 / 100 RX-78-2 Gundam ver1.5"
-          },
-          "release_date": "2000-06",
-          "price_jpy": 3300,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "00"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425763729000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000151741/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425458267000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "1 / 100 ライジングガンダム",
-            "zh": "1 / 100 ライジング高达",
-            "ko": "1 / 100 ライジング건담",
-            "en": "1 / 100 ライジングGundam"
-          },
-          "release_date": "1994-08",
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425458267000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000139097/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425458274000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "1 / 144 ライジングガンダム",
-            "zh": "1 / 144 ライジング高达",
-            "ko": "1 / 144 ライジング건담",
-            "en": "1 / 144 ライジングGundam"
-          },
-          "release_date": "1994-08",
-          "price_jpy": 550,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425458274000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000139089/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-v2-4902425425238000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "1 / 144 V2バスターガンダム",
-            "zh": "1 / 144 V2暴风高达",
-            "ko": "1 / 144 V2버스터건담",
-            "en": "1 / 144 V2Buster Gundam"
-          },
-          "release_date": "1994-02",
-          "price_jpy": 550,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425425238000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000133122/"
-          ]
-        },
-        {
-          "kit_id": "sd-bb-232-4543112094650000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "SD",
-          "subline": "SD",
-          "series_key": "sd",
-          "series_labels": {
-            "zh": "SD",
-            "en": "SD",
-            "ja": "SD",
-            "ko": "SD"
-          },
-          "names": {
-            "ja": "BB戦士232 若神丸（ワカマル）",
-            "zh": "BB戦士232 若神丸（ワカマル）",
-            "ko": "BB戦士232 若神丸（ワカマル）",
-            "en": "BB戦士232 若神丸 (ワカマル)"
-          },
-          "release_date": "2002-04",
-          "price_jpy": 550,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112094650000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000130276/"
-          ]
-        },
-        {
-          "kit_id": "sd-bb-230-4543112088284000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "SD",
-          "subline": "SD",
-          "series_key": "sd",
-          "series_labels": {
-            "zh": "SD",
-            "en": "SD",
-            "ja": "SD",
-            "ko": "SD"
-          },
-          "names": {
-            "ja": "BB戦士230 爆王頑駄無",
-            "zh": "BB戦士230 爆王頑駄無",
-            "ko": "BB戦士230 爆王頑駄無",
-            "en": "BB戦士230 爆王頑駄無"
-          },
-          "release_date": "2002-03",
-          "price_jpy": 550,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112088284000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000130275/"
-          ]
-        },
-        {
-          "kit_id": "sd-bb-231-ii-s-4543112088291000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "SD",
-          "subline": "SD",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "BB戦士231 ザクII S型",
-            "zh": "BB戦士231 扎古II S型",
-            "ko": "BB戦士231 자쿠II S型",
-            "en": "BB戦士231 ZakuII S型"
-          },
-          "release_date": "2002-03",
-          "price_jpy": 550,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112088291000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000131126/"
-          ]
-        },
-        {
-          "kit_id": "hg-hguc-1-144-gp03-4543112079855000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HGUC",
-          "series_key": "0083",
-          "series_labels": {
-            "zh": "0083",
-            "en": "0083",
-            "ja": "0083",
-            "ko": "0083"
-          },
-          "names": {
-            "ja": "HGUC 1 / 144 ガンダムGP03 デンドロビウム",
-            "zh": "HGUC 1 / 144 高达GP03 デンドロビウム",
-            "ko": "HGUC 1 / 144 건담GP03 デンドロビウム",
-            "en": "HGUC 1 / 144 Gundam GP03 デンドロビウム"
-          },
-          "release_date": "2002-03",
-          "price_jpy": 30800,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112079855000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000213990/"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-4543112088277000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "g",
-          "series_labels": {
-            "zh": "G",
-            "en": "G",
-            "ja": "G",
-            "ko": "G"
-          },
-          "names": {
-            "ja": "MG 1 / 100 マスターガンダム",
-            "zh": "MG 1 / 100 マスター高达",
-            "ko": "MG 1 / 100 マスター건담",
-            "en": "MG 1 / 100 マスターGundam"
-          },
-          "release_date": "2002-03",
-          "price_jpy": 3520,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112088277000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000139080/"
-          ]
-        },
-        {
-          "kit_id": "sd-bb-228-4543112077219000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "SD",
-          "subline": "SD",
-          "series_key": "sd",
-          "series_labels": {
-            "zh": "SD",
-            "en": "SD",
-            "ja": "SD",
-            "ko": "SD"
-          },
-          "names": {
-            "ja": "BB戦士228 トウ王頑駄無",
-            "zh": "BB戦士228 トウ王頑駄無",
-            "ko": "BB戦士228 トウ王頑駄無",
-            "en": "BB戦士228 トウ王頑駄無"
-          },
-          "release_date": "2002-01",
-          "price_jpy": 550,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112077219000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000130272/"
-          ]
-        },
-        {
-          "kit_id": "sd-sd-g-63-x2-4543112077226000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "SD",
-          "subline": "SD",
-          "series_key": "crossbone",
-          "series_labels": {
-            "zh": "海盗",
-            "en": "Crossbone",
-            "ja": "クロスボーン",
-            "ko": "크로스본"
-          },
-          "names": {
-            "ja": "SDガンダムGジェネレーション63 クロスボーンX2",
-            "zh": "SD高达Gジェネレーション63 海盗X2",
-            "ko": "SD건담Gジェネレーション63 크로스본X2",
-            "en": "SD Gundam Gジェネレーション63 CrossboneX2"
-          },
-          "release_date": "2002-01",
-          "price_jpy": 440,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112077226000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000131007/"
-          ]
-        },
-        {
-          "kit_id": "sd-bb-227-4543112070203000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "SD",
-          "subline": "SD",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "BB戦士227 スーパーガンダム",
-            "zh": "BB戦士227 スーパー高达",
-            "ko": "BB戦士227 スーパー건담",
-            "en": "BB戦士227 スーパーGundam"
-          },
-          "release_date": "2001-12",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112070203000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000131120/"
-          ]
-        },
-        {
-          "kit_id": "hg-hguc-1-144-gp03s-4543112070166000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HGUC",
-          "series_key": "0083",
-          "series_labels": {
-            "zh": "0083",
-            "en": "0083",
-            "ja": "0083",
-            "ko": "0083"
-          },
-          "names": {
-            "ja": "HGUC 1 / 144 ガンダムGP03S ステイメン",
-            "zh": "HGUC 1 / 144 高达GP03S ステイメン",
-            "ko": "HGUC 1 / 144 건담GP03S ステイメン",
-            "en": "HGUC 1 / 144 Gundam GP03S ステイメン"
-          },
-          "release_date": "2001-12",
-          "price_jpy": 1760,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112070166000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000156450/"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-rx-77-2-4543112070173000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "MG RX-77-2 ガンキャノン",
-            "zh": "MG RX-77-2 ガンキャノン",
-            "ko": "MG RX-77-2 ガンキャノン",
-            "en": "MG RX-77-2 ガンキャノン"
-          },
-          "release_date": "2001-12",
-          "price_jpy": 3960,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112070173000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000162351/"
-          ]
-        },
-        {
-          "kit_id": "sd-bb-224-4543112060433000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "SD",
-          "subline": "SD",
-          "series_key": "0083",
-          "series_labels": {
-            "zh": "0083",
-            "en": "0083",
-            "ja": "0083",
-            "ko": "0083"
-          },
-          "names": {
-            "ja": "BB戦士224 ノイエ・ジール",
-            "zh": "BB戦士224 ノイエ・ジール",
-            "ko": "BB戦士224 ノイエ・ジール",
-            "en": "BB戦士224 ノイエ ジール"
-          },
-          "release_date": "2001-11",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112060433000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000131114/"
-          ]
-        },
-        {
-          "kit_id": "sd-bb-225-4543112060440000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "SD",
-          "subline": "SD",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "BB戦士225 ガンキャノン",
-            "zh": "BB戦士225 ガンキャノン",
-            "ko": "BB戦士225 ガンキャノン",
-            "en": "BB戦士225 ガンキャノン"
-          },
-          "release_date": "2001-11",
-          "price_jpy": 550,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112060440000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000131115/"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-g-4543112060426000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "g",
-          "series_labels": {
-            "zh": "G",
-            "en": "G",
-            "ja": "G",
-            "ko": "G"
-          },
-          "names": {
-            "ja": "MG 1 / 100 Gガンダム",
-            "zh": "MG 1 / 100 G高达",
-            "ko": "MG 1 / 100 G건담",
-            "en": "MG 1 / 100 G Gundam"
-          },
-          "release_date": "2001-11",
-          "price_jpy": 3190,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112060426000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000139077/"
-          ]
-        },
-        {
-          "kit_id": "pg-pg-1-60-mk-ii-4543112060471000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "PG",
-          "subline": "PG",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "PG 1 / 60 ガンダムMk-II",
-            "zh": "PG 1 / 60 高达Mk-II",
-            "ko": "PG 1 / 60 건담 Mk-II",
-            "en": "PG 1 / 60 Gundam Mk-II"
-          },
-          "release_date": "2001-11",
-          "price_jpy": 16500,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112060471000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000188739/"
-          ]
-        }
-      ],
-      "removed": [],
-      "watched": [
-        {
-          "kit_id": "sd-sd-g-61-1-4543112052674000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "SD",
-          "subline": "SD",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "SDガンダムGジェネレーション61 ブルーディスティニー1号機",
-            "zh": "SD高达Gジェネレーション61 蓝色命运1号機",
-            "ko": "SD건담Gジェネレーション61 블루 데스티니1号機",
-            "en": "SD Gundam Gジェネレーション61 Blue Destiny1号機"
-          },
-          "release_date": "2001-09",
-          "price_jpy": 440,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112052674000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000130986/"
-          ]
-        },
-        {
-          "kit_id": "sd-sd-g-52-3-4902425776316000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "SD",
-          "subline": "SD",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "SDガンダムGジェネレーション52 ブルーディスティニー3号機",
-            "zh": "SD高达Gジェネレーション52 蓝色命运3号機",
-            "ko": "SD건담Gジェネレーション52 블루 데스티니3号機",
-            "en": "SD Gundam Gジェネレーション52 Blue Destiny3号機"
-          },
-          "release_date": "2000-10",
-          "price_jpy": 440,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425776316000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000130921/"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-rx-78-2-ver1-5-4902425763729000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "double_o",
-          "series_labels": {
-            "zh": "00",
-            "en": "00",
-            "ja": "00",
-            "ko": "00"
-          },
-          "names": {
-            "ja": "MG 1 / 100 RX-78-2 ガンダム ver1.5",
-            "zh": "MG 1 / 100 RX-78-2 高达 ver1.5",
-            "ko": "MG 1 / 100 RX-78-2 건담 ver1.5",
-            "en": "MG 1 / 100 RX-78-2 Gundam ver1.5"
-          },
-          "release_date": "2000-06",
-          "price_jpy": 3300,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "00"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425763729000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000151741/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425458267000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "1 / 100 ライジングガンダム",
-            "zh": "1 / 100 ライジング高达",
-            "ko": "1 / 100 ライジング건담",
-            "en": "1 / 100 ライジングGundam"
-          },
-          "release_date": "1994-08",
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425458267000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000139097/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425458274000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "1 / 144 ライジングガンダム",
-            "zh": "1 / 144 ライジング高达",
-            "ko": "1 / 144 ライジング건담",
-            "en": "1 / 144 ライジングGundam"
-          },
-          "release_date": "1994-08",
-          "price_jpy": 550,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425458274000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000139089/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-v2-4902425425238000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "1 / 144 V2バスターガンダム",
-            "zh": "1 / 144 V2暴风高达",
-            "ko": "1 / 144 V2버스터건담",
-            "en": "1 / 144 V2Buster Gundam"
-          },
-          "release_date": "1994-02",
-          "price_jpy": 550,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
           ],
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425425238000&grp_id=5325",
