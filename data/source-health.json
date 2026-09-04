@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-03T21:34:29.975Z",
-  "updated_at": "2026-09-04",
+  "generated_at": "2026-09-04T21:16:56.995Z",
+  "updated_at": "2026-09-05",
   "catalog": {
     "byFranchise": {
       "armored_core": 59,
       "beyblade": 153,
-      "fate": 2255,
+      "fate": 2261,
       "gundam": 4164,
       "pokemon": 1670
     },
@@ -70,7 +70,7 @@
         {
           "source_id": "aniplex_plus_fate_jp",
           "label": "Aniplex+ (Fate)",
-          "catalog_count": 1737
+          "catalog_count": 1743
         },
         {
           "source_id": "ichiban_kuji_fate_jp",
@@ -111,7 +111,7 @@
       "status": "blocked",
       "http_status": 200,
       "final_url": "https://p-bandai.jp/global_newpc.html",
-      "duration_ms": 677,
+      "duration_ms": 273,
       "item_count": 1425,
       "direct_status": "blocked",
       "access_method": "bandai_spirits_product_buttons",
@@ -123,7 +123,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/",
-      "duration_ms": 1303,
+      "duration_ms": 2373,
       "item_count": 149,
       "catalog_count": 153,
       "buckets": {
@@ -137,14 +137,14 @@
     {
       "source_id": "kotobukiya_armored_core_jp",
       "url": "https://www.kotobukiya.co.jp/title/armored-core/",
-      "status": "warning",
-      "http_status": 503,
+      "status": "ok",
+      "http_status": 200,
       "final_url": "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90",
-      "duration_ms": 1651,
-      "item_count": 0,
+      "duration_ms": 1456,
+      "item_count": 44,
       "catalog_count": 39,
       "access_method": "kotobukiya_official_shop_jp",
-      "message": "Official Japanese shop returned 0 Armored Core listings; catalog currently has 39 Kotobukiya records"
+      "message": "Official Japanese shop returned 44 Armored Core listings; catalog currently has 39 Kotobukiya records"
     },
     {
       "source_id": "bandai_spirits_products_jp",
@@ -152,7 +152,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://bandai-hobby.net/site/gunpla.html",
-      "duration_ms": 787,
+      "duration_ms": 665,
       "message": "reachable"
     },
     {
@@ -161,7 +161,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://www.bandai.co.jp/candy/gundam/",
-      "duration_ms": 1515,
+      "duration_ms": 2832,
       "message": "reachable"
     },
     {
@@ -170,7 +170,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://gashapon.jp/products/result.php?free=%E3%82%AC%E3%83%B3%E3%83%80%E3%83%A0",
-      "duration_ms": 1660,
+      "duration_ms": 1322,
       "message": "reachable"
     },
     {
@@ -179,7 +179,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://tamashiiweb.com/item_character/gundam_series/",
-      "duration_ms": 1066,
+      "duration_ms": 968,
       "message": "reachable"
     },
     {
@@ -188,7 +188,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=select",
-      "duration_ms": 1032,
+      "duration_ms": 708,
       "message": "reachable"
     },
     {
@@ -197,7 +197,7 @@
       "status": "warning",
       "http_status": 403,
       "final_url": "https://wr.pokemoncenter-online.com/?c=pol&e=wr20260904ec&ver=v3-javascript-3.7.10&cver=216&man=pol-prd-rule-sfcc&t=https%3A%2F%2Fwww.pokemoncenter-online.com%2Fon%2Fdemandware.store%2FSites-POL-Site%2Fja_JP%2FSearch-Show%3Fcgid%3Dplush-toys&kupver=salesforce-2.1.0",
-      "duration_ms": 1517,
+      "duration_ms": 1475,
       "message": "reachable"
     },
     {
@@ -206,7 +206,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/",
-      "duration_ms": 1635,
+      "duration_ms": 1379,
       "message": "reachable"
     },
     {
@@ -215,7 +215,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://1kuji.com/products/search?index_master_search=47",
-      "duration_ms": 1383,
+      "duration_ms": 1109,
       "message": "reachable"
     },
     {
@@ -224,7 +224,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://bsp-prize.jp/title/IP00002054/",
-      "duration_ms": 1886,
+      "duration_ms": 1303,
       "message": "reachable"
     }
   ]
