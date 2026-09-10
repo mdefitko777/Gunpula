@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-09",
-  "generated_at": "2026-09-08T21:42:24.993Z",
+  "updated_at": "2026-09-11",
+  "generated_at": "2026-09-10T21:24:56.739Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,11 +16,1254 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-09-08T21:42:24.060Z",
+    "generated_at": "2026-09-10T21:24:55.720Z",
     "blocked_count": 1,
     "error_count": 0
   },
   "entries": [
+    {
+      "date": "2026-09-11",
+      "generated_at": "2026-09-10T21:24:56.739Z",
+      "total_before": 8336,
+      "total_after": 8364,
+      "added_count": 28,
+      "changed_count": 3,
+      "removed_count": 0,
+      "watched_count": 1,
+      "premium_bandai_count": 8,
+      "bbx_count": 0,
+      "franchise_counts": {
+        "pokemon": 18,
+        "fate": 1,
+        "gundam": 12
+      },
+      "reason_counts": {
+        "new": 28,
+        "release": 1,
+        "image": 2
+      },
+      "interest_tags": [
+        "pokemon",
+        "fate",
+        "gundam",
+        "premium_bandai",
+        "seed"
+      ],
+      "watch_tags": [
+        "seed"
+      ],
+      "added": [
+        {
+          "kit_id": "pbandai-wb-1000134667",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "【開催記念商品】METAL BUILD ストライクガンダム ※会場受け取り",
+            "zh": "【開催記念商品】METAL BUILD 强袭高达 ※会場受け取り",
+            "ko": "【開催記念商品】METAL BUILD 스트라이크건담 ※会場受け取り",
+            "en": "[開催記念商品]METAL BUILD Strike Gundam ※会場受け取り"
+          },
+          "release_date": null,
+          "price_jpy": 16000,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000134667/"
+          ]
+        },
+        {
+          "kit_id": "tamashii-16129",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "METAL_ROBOT",
+          "subline": "METAL ROBOT魂（Ka signature）",
+          "series_key": "zz",
+          "series_labels": {
+            "zh": "ZZ",
+            "en": "ZZ",
+            "ja": "ZZ",
+            "ko": "ZZ"
+          },
+          "names": {
+            "ja": "強化型ZZガンダム",
+            "zh": "強化型ZZ高达",
+            "ko": "強化型ZZ건담",
+            "en": "強化型ZZ Gundam"
+          },
+          "release_date": "2027-04",
+          "price_jpy": 26400,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16129/",
+            "https://tamashiiweb.com/item_brand/mrs_ka_signature/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-16130",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "METAL_ROBOT",
+          "subline": "METAL ROBOT魂",
+          "series_key": "x",
+          "series_labels": {
+            "zh": "X",
+            "en": "X",
+            "ja": "X",
+            "ko": "X"
+          },
+          "names": {
+            "ja": "【抽選販売】ガンダムダブルエックス【2次：2027年3月発送分】",
+            "zh": "【抽选贩售】高达ダブルエックス【第二批：2027年3月发货批次】",
+            "ko": "【추첨 판매】건담ダブルエックス【2차：2027年3月배송분】",
+            "en": "[Lottery Sale] Gundamダブルエックス[Second：2027年3月Shipping Batch]"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 24200,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16130/",
+            "https://tamashiiweb.com/item_brand/metal_robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-16068",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "ROBOT_SPIRITS",
+          "subline": "ROBOT魂（Ka signature）",
+          "series_key": "zz",
+          "series_labels": {
+            "zh": "ZZ",
+            "en": "ZZ",
+            "ja": "ZZ",
+            "ko": "ZZ"
+          },
+          "names": {
+            "ja": "ゲーマルク [Re:Coordinate]",
+            "zh": "ゲーマルク [Re:Coordinate]",
+            "ko": "ゲーマルク [Re:Coordinate]",
+            "en": "ゲーマルク [Re:Coordinate]"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 17600,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16068/",
+            "https://tamashiiweb.com/item_brand/ka_signature/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000253035",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "other",
+          "series_labels": {
+            "zh": "其他",
+            "en": "Other",
+            "ja": "その他",
+            "ko": "기타"
+          },
+          "names": {
+            "ja": "G.M.G. COLLECTION 17 機動戦士ガンダム 地球連邦軍 セイラ・マス 制服Ver.",
+            "zh": "G.M.G. COLLECTION 17 机动战士高达 地球連邦軍 セイラ・マス 制服Ver.",
+            "ko": "G.M.G. COLLECTION 17 기동전사 건담 地球連邦軍 セイラ・マス 制服Ver.",
+            "en": "G.M.G. COLLECTION 17 Mobile Suit Gundam 地球連邦軍 セイラ マス 制服Ver."
+          },
+          "release_date": "2026-12",
+          "price_jpy": 3850,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000253035/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-2846955",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケットモンスター めちゃもふぐっと カラーセレクションぬいぐるみ brown～ディグダ～",
+            "zh": "ポケットモンスター めちゃもふぐっと カラーセレクションぬいぐるみ brown～ディグダ～",
+            "ko": "ポケットモンスター めちゃもふぐっと カラーセレクションぬいぐるみ brown～ディグダ～",
+            "en": "ポケットモンスター めちゃもふぐっと カラーセレクションぬいぐるみ brown - ディグダ -"
+          },
+          "release_date": "2026-10",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "banpresto_prize_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2846955/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-2837884",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケットモンスター めちゃもふぐっとぬいぐるみ～メタモン～びっくりver.",
+            "zh": "ポケットモンスター めちゃもふぐっとぬいぐるみ～メタモン～びっくりver.",
+            "ko": "ポケットモンスター めちゃもふぐっとぬいぐるみ～メタモン～びっくりver.",
+            "en": "ポケットモンスター めちゃもふぐっとぬいぐるみ - メタモン - びっくりver."
+          },
+          "release_date": "2026-10",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "banpresto_prize_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2837884/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000254575",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "crossbone",
+          "series_labels": {
+            "zh": "海盗",
+            "en": "Crossbone",
+            "ja": "クロスボーン",
+            "ko": "크로스본"
+          },
+          "names": {
+            "ja": "機動戦士ガンダムF91 クロスボーン・バンガード Tシャツ",
+            "zh": "机动战士高达F91 海盗・バンガード Tシャツ",
+            "ko": "기동전사 건담F91 크로스본・バンガード Tシャツ",
+            "en": "Mobile Suit Gundam F91 Crossbone バンガード Tシャツ"
+          },
+          "release_date": "2026-09",
+          "price_jpy": 4400,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000254575/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000254577",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "crossbone",
+          "series_labels": {
+            "zh": "海盗",
+            "en": "Crossbone",
+            "ja": "クロスボーン",
+            "ko": "크로스본"
+          },
+          "names": {
+            "ja": "機動戦士ガンダムF91 クロスボーン・バンガード バスタオル",
+            "zh": "机动战士高达F91 海盗・バンガード バスタオル",
+            "ko": "기동전사 건담F91 크로스본・バンガード バスタオル",
+            "en": "Mobile Suit Gundam F91 Crossbone バンガード バスタオル"
+          },
+          "release_date": "2026-09",
+          "price_jpy": 4620,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000254577/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000254578",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "crossbone",
+          "series_labels": {
+            "zh": "海盗",
+            "en": "Crossbone",
+            "ja": "クロスボーン",
+            "ko": "크로스본"
+          },
+          "names": {
+            "ja": "機動戦士ガンダムF91 クロスボーン・バンガード マグカップ",
+            "zh": "机动战士高达F91 海盗・バンガード マグカップ",
+            "ko": "기동전사 건담F91 크로스본・バンガード マグカップ",
+            "en": "Mobile Suit Gundam F91 Crossbone バンガード マグカップ"
+          },
+          "release_date": "2026-09",
+          "price_jpy": 2530,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000254578/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000254576",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "crossbone",
+          "series_labels": {
+            "zh": "海盗",
+            "en": "Crossbone",
+            "ja": "クロスボーン",
+            "ko": "크로스본"
+          },
+          "names": {
+            "ja": "機動戦士ガンダムF91 クロスボーン・バンガード リバーシブルトートバッグ",
+            "zh": "机动战士高达F91 海盗・バンガード リバーシブルトートバッグ",
+            "ko": "기동전사 건담F91 크로스본・バンガード リバーシブルトートバッグ",
+            "en": "Mobile Suit Gundam F91 Crossbone バンガード リバーシブルトートバッグ"
+          },
+          "release_date": "2026-09",
+          "price_jpy": 4400,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000254576/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000136617",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "option",
+          "series_labels": {
+            "zh": "配件",
+            "en": "Option",
+            "ja": "オプション",
+            "ko": "옵션"
+          },
+          "names": {
+            "ja": "METAL BUILD カレトヴルッフ オプションセット【2次：2020年4月発送】",
+            "zh": "METAL BUILD カレトヴルッフ 选配套装【第二批：2020年4月発送】",
+            "ko": "METAL BUILD カレトヴルッフ 옵션 세트【2차：2020年4月発送】",
+            "en": "METAL BUILD カレトヴルッフ Option Set [Second：2020年4月発送]"
+          },
+          "release_date": "2020-04",
+          "price_jpy": 4950,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000136617/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000083472",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "zz",
+          "series_labels": {
+            "zh": "ZZ",
+            "en": "ZZ",
+            "ja": "ZZ",
+            "ko": "ZZ"
+          },
+          "names": {
+            "ja": "HGUC 1 / 144 リバウ",
+            "zh": "HGUC 1 / 144 リバウ",
+            "ko": "HGUC 1 / 144 リバウ",
+            "en": "HGUC 1 / 144 リバウ"
+          },
+          "release_date": "2013-12",
+          "price_jpy": 2520,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000083472/"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329340616",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "172 ぬいぐるみ Pok&eacute;mon fit ピチュー",
+            "zh": "172 ぬいぐるみ Pok&eacute;mon fit ピチュー",
+            "ko": "172 ぬいぐるみ Pok&eacute;mon fit ピチュー",
+            "en": "172 ぬいぐるみ Pok&eacute;mon fit ピチュー"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329340616.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329339221",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "418 ぬいぐるみ Pok&eacute;mon fit ブイゼル",
+            "zh": "418 ぬいぐるみ Pok&eacute;mon fit ブイゼル",
+            "ko": "418 ぬいぐるみ Pok&eacute;mon fit ブイゼル",
+            "en": "418 ぬいぐるみ Pok&eacute;mon fit ブイゼル"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329339221.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329341255",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "479 ぬいぐるみ Pok&eacute;mon fit ロトム (スピンロトム)",
+            "zh": "479 ぬいぐるみ Pok&eacute;mon fit ロトム (スピンロトム)",
+            "ko": "479 ぬいぐるみ Pok&eacute;mon fit ロトム (スピンロトム)",
+            "en": "479 ぬいぐるみ Pok&eacute;mon fit ロトム (スピンロトム)"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329341255.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329349138",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "496 ぬいぐるみ Pok&eacute;mon fit ジャノビー",
+            "zh": "496 ぬいぐるみ Pok&eacute;mon fit ジャノビー",
+            "ko": "496 ぬいぐるみ Pok&eacute;mon fit ジャノビー",
+            "en": "496 ぬいぐるみ Pok&eacute;mon fit ジャノビー"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329349138.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329350240",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "618 ぬいぐるみ Pok&eacute;mon fit マッギョ",
+            "zh": "618 ぬいぐるみ Pok&eacute;mon fit マッギョ",
+            "ko": "618 ぬいぐるみ Pok&eacute;mon fit マッギョ",
+            "en": "618 ぬいぐるみ Pok&eacute;mon fit マッギョ"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329350240.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329350295",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "623 ぬいぐるみ Pok&eacute;mon fit ゴルーグ",
+            "zh": "623 ぬいぐるみ Pok&eacute;mon fit ゴルーグ",
+            "ko": "623 ぬいぐるみ Pok&eacute;mon fit ゴルーグ",
+            "en": "623 ぬいぐるみ Pok&eacute;mon fit ゴルーグ"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329350295.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329413433",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "724 ぬいぐるみ Pok&eacute;mon fit ジュナイパー",
+            "zh": "724 ぬいぐるみ Pok&eacute;mon fit ジュナイパー",
+            "ko": "724 ぬいぐるみ Pok&eacute;mon fit ジュナイパー",
+            "en": "724 ぬいぐるみ Pok&eacute;mon fit ジュナイパー"
+          },
+          "release_date": null,
+          "price_jpy": 1980,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329413433.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329420943",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "778 ぬいぐるみ Pok&eacute;mon fit ミミッキュ(ばけたすがた)",
+            "zh": "778 ぬいぐるみ Pok&eacute;mon fit ミミッキュ(ばけたすがた)",
+            "ko": "778 ぬいぐるみ Pok&eacute;mon fit ミミッキュ(ばけたすがた)",
+            "en": "778 ぬいぐるみ Pok&eacute;mon fit ミミッキュ(ばけたすがた)"
+          },
+          "release_date": null,
+          "price_jpy": 1430,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329420943.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329420950",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "778 ぬいぐるみ Pok&eacute;mon fit ミミッキュ(ばれたすがた)",
+            "zh": "778 ぬいぐるみ Pok&eacute;mon fit ミミッキュ(ばれたすがた)",
+            "ko": "778 ぬいぐるみ Pok&eacute;mon fit ミミッキュ(ばれたすがた)",
+            "en": "778 ぬいぐるみ Pok&eacute;mon fit ミミッキュ(ばれたすがた)"
+          },
+          "release_date": null,
+          "price_jpy": 1430,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329420950.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329427973",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "795 ぬいぐるみ Pok&eacute;mon fit フェローチェ",
+            "zh": "795 ぬいぐるみ Pok&eacute;mon fit フェローチェ",
+            "ko": "795 ぬいぐるみ Pok&eacute;mon fit フェローチェ",
+            "en": "795 ぬいぐるみ Pok&eacute;mon fit フェローチェ"
+          },
+          "release_date": null,
+          "price_jpy": 2420,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329427973.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329439136",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ぬいぐるみ Pok&eacute;mon Magic Hour Illusion! ゾロアーク",
+            "zh": "ぬいぐるみ Pok&eacute;mon Magic Hour Illusion! ゾロアーク",
+            "ko": "ぬいぐるみ Pok&eacute;mon Magic Hour Illusion! ゾロアーク",
+            "en": "ぬいぐるみ Pok&eacute;mon Magic Hour Illusion! ゾロアーク"
+          },
+          "release_date": null,
+          "price_jpy": 5500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329439136.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329439129",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ぬいぐるみ Pok&eacute;mon Magic Hour Illusion! ピカチュウ",
+            "zh": "ぬいぐるみ Pok&eacute;mon Magic Hour Illusion! ピカチュウ",
+            "ko": "ぬいぐるみ Pok&eacute;mon Magic Hour Illusion! ピカチュウ",
+            "en": "ぬいぐるみ Pok&eacute;mon Magic Hour Illusion! ピカチュウ"
+          },
+          "release_date": null,
+          "price_jpy": 3960,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329439129.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329388618",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ぬいぐるみ ヒラヒナ",
+            "zh": "ぬいぐるみ ヒラヒナ",
+            "ko": "ぬいぐるみ ヒラヒナ",
+            "en": "ぬいぐるみ ヒラヒナ"
+          },
+          "release_date": null,
+          "price_jpy": 2200,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329388618.html"
+          ]
+        },
+        {
+          "kit_id": "hobbysearch-fate-11336829",
+          "change_type": "added",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "ホビーサーチ",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "ねんどろいどどーる アヴェンジャー / ジャンヌ・ダルク〔オルタ〕新宿Ver. (フィギュア)",
+            "zh": "ねんどろいどどーる アヴェンジャー / ジャンヌ・ダルク〔オルタ〕新宿Ver. (フィギュア)",
+            "ko": "ねんどろいどどーる アヴェンジャー / ジャンヌ・ダルク〔オルタ〕新宿Ver. (フィギュア)",
+            "en": "ねんどろいどどーる アヴェンジャー / ジャンヌ ダルク〔オルタ〕新宿Ver. (フィギュア)"
+          },
+          "release_date": null,
+          "price_jpy": 8721,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "hobby_search_fate_jp"
+          ],
+          "source_urls": [
+            "https://www.1999.co.jp/11336829"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329418667",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "肩のせぬいぐるみ ピカチュウ",
+            "zh": "肩のせぬいぐるみ ピカチュウ",
+            "ko": "肩のせぬいぐるみ ピカチュウ",
+            "en": "肩のせぬいぐるみ ピカチュウ"
+          },
+          "release_date": null,
+          "price_jpy": 2200,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329418667.html"
+          ]
+        }
+      ],
+      "changed": [
+        {
+          "kit_id": "tamashii-16127",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "ROBOT_SPIRITS",
+          "subline": "ROBOT魂 ver. A.N.I.M.E.",
+          "series_key": "uc_first",
+          "series_labels": {
+            "zh": "初代",
+            "en": "0079",
+            "ja": "初代",
+            "ko": "초대"
+          },
+          "names": {
+            "ja": "MSM-10 ゾック ver. A.N.I.M.E.",
+            "zh": "MSM-10 ゾック ver. A.N.I.M.E.",
+            "ko": "MSM-10 ゾック ver. A.N.I.M.E.",
+            "en": "MSM-10 ゾック ver. A.N.I.M.E."
+          },
+          "release_date": "2027-03",
+          "price_jpy": 15400,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16127/",
+            "https://tamashiiweb.com/item_brand/robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "banpresto-2839440",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケットモンスター SOFVIMATES～ミュウツー～",
+            "zh": "ポケットモンスター SOFVIMATES～ミュウツー～",
+            "ko": "ポケットモンスター SOFVIMATES～ミュウツー～",
+            "en": "ポケットモンスター SOFVIMATES - ミュウツー -"
+          },
+          "release_date": "2026-09-29",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "banpresto_prize_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2839440/"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-5497",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモン PLAMO COLLECTION 57 SELECT SERIES Ceruledge",
+            "zh": "宝可梦 PLAMO COLLECTION 57 SELECT SERIES Ceruledge",
+            "ko": "포켓몬 PLAMO COLLECTION 57 SELECT SERIES Ceruledge",
+            "en": "Pokémon PLAMO COLLECTION 57 SELECT SERIES Ceruledge"
+          },
+          "release_date": null,
+          "price_jpy": 1700,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_hobby_pokemon_global"
+          ],
+          "source_urls": [
+            "https://global.bandai-hobby.net/en-others/item/01_5497/",
+            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
+          ]
+        }
+      ],
+      "removed": [],
+      "watched": [
+        {
+          "kit_id": "pbandai-wb-1000134667",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "【開催記念商品】METAL BUILD ストライクガンダム ※会場受け取り",
+            "zh": "【開催記念商品】METAL BUILD 强袭高达 ※会場受け取り",
+            "ko": "【開催記念商品】METAL BUILD 스트라이크건담 ※会場受け取り",
+            "en": "[開催記念商品]METAL BUILD Strike Gundam ※会場受け取り"
+          },
+          "release_date": null,
+          "price_jpy": 16000,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000134667/"
+          ]
+        }
+      ]
+    },
     {
       "date": "2026-09-09",
       "generated_at": "2026-09-08T21:42:24.993Z",
