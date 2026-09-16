@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-16",
-  "generated_at": "2026-09-15T21:56:18.443Z",
+  "updated_at": "2026-09-17",
+  "generated_at": "2026-09-16T21:50:45.579Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,11 +16,155 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-09-15T21:56:17.244Z",
+    "generated_at": "2026-09-16T21:50:44.614Z",
     "blocked_count": 1,
     "error_count": 0
   },
   "entries": [
+    {
+      "date": "2026-09-17",
+      "generated_at": "2026-09-16T21:50:45.579Z",
+      "total_before": 8593,
+      "total_after": 8594,
+      "added_count": 1,
+      "changed_count": 2,
+      "removed_count": 0,
+      "watched_count": 0,
+      "premium_bandai_count": 0,
+      "bbx_count": 0,
+      "franchise_counts": {
+        "fate": 1,
+        "gundam": 2
+      },
+      "reason_counts": {
+        "new": 1,
+        "series": 2
+      },
+      "interest_tags": [
+        "fate",
+        "gundam"
+      ],
+      "watch_tags": [],
+      "added": [
+        {
+          "kit_id": "aniplex-fate-itemkvdvyqwf",
+          "change_type": "added",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Aniplex+",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "FGO THE DRAMALOGUE -Cosmos in the Lostbelt- チケット抽選ページ",
+            "zh": "FGO THE DRAMALOGUE -Cosmos in the Lostbelt- チケット抽選ページ",
+            "ko": "FGO THE DRAMALOGUE -Cosmos in the Lostbelt- チケット抽選ページ",
+            "en": "FGO THE DRAMALOGUE -Cosmos in the Lostbelt- チケット抽選ページ"
+          },
+          "release_date": null,
+          "price_jpy": 9500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "aniplex_plus_fate_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemKVDvyqwF.html"
+          ]
+        }
+      ],
+      "changed": [
+        {
+          "kit_id": "tamashii-13571",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "ROBOT_SPIRITS",
+          "subline": "ROBOT魂 ver. A.N.I.M.E.",
+          "series_key": "0083",
+          "series_labels": {
+            "zh": "0083",
+            "en": "0083",
+            "ja": "0083",
+            "ko": "0083"
+          },
+          "names": {
+            "ja": "RGM-79Q ジム・クゥエル ver. A.N.I.M.E.",
+            "zh": "RGM-79Q 吉姆・クゥエル ver. A.N.I.M.E.",
+            "ko": "RGM-79Q 짐・クゥエル ver. A.N.I.M.E.",
+            "en": "RGM-79Q GM クゥエル ver. A.N.I.M.E."
+          },
+          "release_date": "2021-08-07",
+          "price_jpy": 7150,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/13571/",
+            "https://tamashiiweb.com/item_brand/robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-13308",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "ROBOT_SPIRITS",
+          "subline": "ROBOT魂 ver. A.N.I.M.E.",
+          "series_key": "0083",
+          "series_labels": {
+            "zh": "0083",
+            "en": "0083",
+            "ja": "0083",
+            "ko": "0083"
+          },
+          "names": {
+            "ja": "MS-06F-2 ザクII F2型 ver. A.N.I.M.E.",
+            "zh": "MS-06F-2 扎古II F2型 ver. A.N.I.M.E.",
+            "ko": "MS-06F-2 자쿠II F2型 ver. A.N.I.M.E.",
+            "en": "MS-06F-2 ZakuII F2型 ver. A.N.I.M.E."
+          },
+          "release_date": "2020-11-14",
+          "price_jpy": 7150,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/13308/",
+            "https://tamashiiweb.com/item_brand/robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        }
+      ],
+      "removed": [],
+      "watched": []
+    },
     {
       "date": "2026-09-16",
       "generated_at": "2026-09-15T21:56:18.443Z",
