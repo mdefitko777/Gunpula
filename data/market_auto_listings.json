@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-20T22:25:54.914Z",
+  "updated_at": "2026-09-21T23:15:49.729Z",
   "generated_by": "scripts/fetch_wanted_market_listings.mjs",
   "watched_kit_count": 9,
   "env_status": {
@@ -15,7 +15,7 @@
     },
     "bunjang": {
       "attempted": 9,
-      "matched": 1,
+      "matched": 2,
       "errors": 0
     },
     "joongna": {
@@ -40,7 +40,7 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-09-20T22:25:54.914Z",
+      "captured_at": "2026-09-21T23:15:49.729Z",
       "confidence": "auto",
       "notes": "Auto-fetched via bunjang search for \"HG 스로네 츠바이\"."
     },
@@ -54,9 +54,23 @@
       "condition": "unknown",
       "status": "active",
       "shipping_price": 0,
-      "captured_at": "2026-09-20T22:25:54.914Z",
+      "captured_at": "2026-09-21T23:15:49.729Z",
       "confidence": "auto",
       "notes": "Auto-fetched via joongna search for \"HG 가랏조\"."
+    },
+    {
+      "kit_id": "hg-hg-1-144-4543112599384000",
+      "source": "bunjang",
+      "title": "HG 가데스 / 건담 더블오 2기 건프라",
+      "price": 58000,
+      "currency": "KRW",
+      "url": "https://m.bunjang.co.kr/products/433602385",
+      "condition": "unknown",
+      "status": "active",
+      "shipping_price": 0,
+      "captured_at": "2026-09-21T23:15:49.729Z",
+      "confidence": "auto",
+      "notes": "Auto-fetched via bunjang search for \"HG 가데스\"."
     }
   ]
 }
