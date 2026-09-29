@@ -1,19 +1,19 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-28T23:49:04.844Z",
-  "updated_at": "2026-09-29",
+  "generated_at": "2026-09-29T22:51:18.529Z",
+  "updated_at": "2026-09-30",
   "catalog": {
     "byFranchise": {
       "armored_core": 60,
-      "gundam": 4367,
+      "beyblade": 156,
       "fate": 2331,
-      "pokemon": 1794,
-      "beyblade": 156
+      "gundam": 4370,
+      "pokemon": 1794
     },
     "bySeries": {
       "beyblade_bx": 59,
-      "beyblade_limited": 52,
       "beyblade_cx": 24,
+      "beyblade_limited": 52,
       "beyblade_ux": 21
     }
   },
@@ -111,11 +111,11 @@
       "status": "blocked",
       "http_status": 200,
       "final_url": "https://p-bandai.jp/global_newpc.html",
-      "duration_ms": 422,
-      "item_count": 1428,
+      "duration_ms": 350,
+      "item_count": 1429,
       "direct_status": "blocked",
       "access_method": "bandai_spirits_product_buttons",
-      "message": "Direct Japanese Premium Bandai storefront is redirected, but 1428 official PB Japan item links were recovered from BANDAI SPIRITS product pages"
+      "message": "Direct Japanese Premium Bandai storefront is redirected, but 1429 official PB Japan item links were recovered from BANDAI SPIRITS product pages"
     },
     {
       "source_id": "takara_tomy_beyblade_x_jp",
@@ -123,7 +123,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/",
-      "duration_ms": 848,
+      "duration_ms": 1033,
       "item_count": 152,
       "catalog_count": 156,
       "buckets": {
@@ -137,14 +137,14 @@
     {
       "source_id": "kotobukiya_armored_core_jp",
       "url": "https://www.kotobukiya.co.jp/title/armored-core/",
-      "status": "ok",
-      "http_status": 200,
+      "status": "warning",
+      "http_status": 503,
       "final_url": "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90",
-      "duration_ms": 2756,
-      "item_count": 44,
+      "duration_ms": 1174,
+      "item_count": 0,
       "catalog_count": 39,
       "access_method": "kotobukiya_official_shop_jp",
-      "message": "Official Japanese shop returned 44 Armored Core listings; catalog currently has 39 Kotobukiya records"
+      "message": "Official Japanese shop returned 0 Armored Core listings; catalog currently has 39 Kotobukiya records"
     },
     {
       "source_id": "bandai_spirits_products_jp",
@@ -152,7 +152,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://bandai-hobby.net/site/gunpla.html",
-      "duration_ms": 678,
+      "duration_ms": 896,
       "message": "reachable"
     },
     {
@@ -161,7 +161,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://www.bandai.co.jp/candy/gundam/",
-      "duration_ms": 2814,
+      "duration_ms": 1219,
       "message": "reachable"
     },
     {
@@ -170,7 +170,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://gashapon.jp/products/result.php?free=%E3%82%AC%E3%83%B3%E3%83%80%E3%83%A0",
-      "duration_ms": 1226,
+      "duration_ms": 1412,
       "message": "reachable"
     },
     {
@@ -179,7 +179,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://tamashiiweb.com/item_character/gundam_series/",
-      "duration_ms": 1513,
+      "duration_ms": 889,
       "message": "reachable"
     },
     {
@@ -188,16 +188,16 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=select",
-      "duration_ms": 506,
+      "duration_ms": 937,
       "message": "reachable"
     },
     {
       "source_id": "pokemon_center_jp",
       "url": "https://www.pokemoncenter-online.com/plush-toys/",
-      "status": "ok",
-      "http_status": 200,
-      "final_url": "https://www.pokemoncenter-online.com/plush-toys/",
-      "duration_ms": 486,
+      "status": "warning",
+      "http_status": 403,
+      "final_url": "https://wr.pokemoncenter-online.com/?c=pol&e=wr20260930ec&ver=v3-javascript-3.7.10&cver=228&man=pol-prd-rule-sfcc&t=https%3A%2F%2Fwww.pokemoncenter-online.com%2Fon%2Fdemandware.store%2FSites-POL-Site%2Fja_JP%2FSearch-Show%3Fcgid%3Dplush-toys&kupver=salesforce-2.1.0",
+      "duration_ms": 1348,
       "message": "reachable"
     },
     {
@@ -206,7 +206,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/",
-      "duration_ms": 856,
+      "duration_ms": 1216,
       "message": "reachable"
     },
     {
@@ -215,7 +215,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://1kuji.com/products/search?index_master_search=47",
-      "duration_ms": 933,
+      "duration_ms": 1234,
       "message": "reachable"
     },
     {
@@ -224,7 +224,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://bsp-prize.jp/title/IP00002054/",
-      "duration_ms": 1334,
+      "duration_ms": 1820,
       "message": "reachable"
     }
   ]
