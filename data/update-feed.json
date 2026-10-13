@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-13",
-  "generated_at": "2026-10-13T01:16:20.672Z",
+  "updated_at": "2026-10-14",
+  "generated_at": "2026-10-13T23:21:41.155Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,11 +16,114 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-10-13T01:16:19.703Z",
+    "generated_at": "2026-10-13T23:21:40.183Z",
     "blocked_count": 1,
     "error_count": 0
   },
   "entries": [
+    {
+      "date": "2026-10-14",
+      "generated_at": "2026-10-13T23:21:41.155Z",
+      "total_before": 8802,
+      "total_after": 8803,
+      "added_count": 1,
+      "changed_count": 1,
+      "removed_count": 0,
+      "watched_count": 0,
+      "premium_bandai_count": 0,
+      "bbx_count": 0,
+      "franchise_counts": {
+        "pokemon": 2
+      },
+      "reason_counts": {
+        "new": 1,
+        "release": 1
+      },
+      "interest_tags": [
+        "pokemon"
+      ],
+      "watch_tags": [],
+      "added": [
+        {
+          "kit_id": "pokemon-center-4521329349633",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "565 ぬいぐるみ Pok&eacute;mon fit アバゴーラ",
+            "zh": "565 ぬいぐるみ Pok&eacute;mon fit アバゴーラ",
+            "ko": "565 ぬいぐるみ Pok&eacute;mon fit アバゴーラ",
+            "en": "565 ぬいぐるみ Pok&eacute;mon fit アバゴーラ"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329349633.html"
+          ]
+        }
+      ],
+      "changed": [
+        {
+          "kit_id": "banpresto-2837912",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケットモンスター ぬいぐるみ～ハクリュー・タツベイ・ドラメシヤ～",
+            "zh": "ポケットモンスター ぬいぐるみ～ハクリュー・タツベイ・ドラメシヤ～",
+            "ko": "ポケットモンスター ぬいぐるみ～ハクリュー・タツベイ・ドラメシヤ～",
+            "en": "ポケットモンスター ぬいぐるみ - ハクリュー タツベイ ドラメシヤ -"
+          },
+          "release_date": "2026-10-22",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "banpresto_prize_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2837912/"
+          ]
+        }
+      ],
+      "removed": [],
+      "watched": []
+    },
     {
       "date": "2026-10-13",
       "generated_at": "2026-10-13T01:16:20.672Z",
@@ -272348,26 +272451,6 @@
           ]
         }
       ],
-      "watched": []
-    },
-    {
-      "date": "2026-07-13T17:33:34.186Z",
-      "generated_at": "2026-07-13T17:33:43.146Z",
-      "total_before": 4628,
-      "total_after": 4628,
-      "added_count": 0,
-      "changed_count": 0,
-      "removed_count": 0,
-      "watched_count": 0,
-      "premium_bandai_count": 0,
-      "bbx_count": 0,
-      "franchise_counts": {},
-      "reason_counts": {},
-      "interest_tags": [],
-      "watch_tags": [],
-      "added": [],
-      "changed": [],
-      "removed": [],
       "watched": []
     }
   ]

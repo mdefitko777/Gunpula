@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-13T01:16:05.894Z",
+  "updated_at": "2026-10-13T23:21:25.563Z",
   "sources": [
     {
       "source_id": "bandai_hobby_news",
@@ -22,7 +22,12 @@
       "url": "https://beyblade.takaratomy.co.jp/beyblade-x/news/"
     }
   ],
-  "fetch_errors": [],
+  "fetch_errors": [
+    {
+      "source_id": "bandai_hobby_youtube",
+      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuxB1suCoCqAKiljh_0xE4A returned 500"
+    }
+  ],
   "announcements": [
     {
       "id": "tamashii-news-2026-10-09-aS1maWcv",
