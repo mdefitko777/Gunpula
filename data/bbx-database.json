@@ -1,7 +1,7 @@
 {
   "source": "beyblade.phstudy.org",
   "image_base": "https://beyblade.phstudy.org/images",
-  "updated_at": "2026-10-14",
+  "updated_at": "2026-10-15",
   "products": [
     {
       "product_id": "BX50",
@@ -64,8 +64,8 @@
       "release_date": "2026.11.21",
       "url": "",
       "youtube": "",
-      "image": "./assets/bbx/bx54-9de8813c9a.jpg",
-      "image_remote": "https://beyblade.phstudy.org/images/products/BX-54/corocoro.jpg"
+      "image": "./assets/bbx/bx54-2a52370f67.png",
+      "image_remote": "https://beyblade.phstudy.org/images/products/BX-54/080763_00.png"
     },
     {
       "product_id": "BXA01",
@@ -416,8 +416,8 @@
       "release_date": "2026.10.15",
       "url": "https://corocoro-news.jp/news/402435/",
       "youtube": "https://www.youtube.com/watch?v=iqAR6f6sihQ&t=567",
-      "image": "./assets/bbx/bxc21-2464993634.png",
-      "image_remote": "https://beyblade.phstudy.org/images/products/BXC-21/099021_00.png"
+      "image": "./assets/bbx/bxc21-3c009ae4c9.png",
+      "image_remote": "https://beyblade.phstudy.org/images/products/BXC-21/056225_00.png"
     },
     {
       "product_id": "BXG12",
@@ -914,6 +914,22 @@
       "youtube": "https://www.youtube.com/watch?v=0XqslWS1EDs",
       "image": "./assets/bbx/cx19-b6fdffb7f2.png",
       "image_remote": "https://beyblade.phstudy.org/images/products/CX-19/080626_00.png"
+    },
+    {
+      "product_id": "CX20",
+      "base_set_id": "CX-20",
+      "names": {
+        "zh": "CX-20 豪華改造組 C",
+        "ko": "CX-20 커스터마이즈 세트 C",
+        "en": "CX-20 Customize Set C",
+        "ja": "CX-20 カスタマイズセットC"
+      },
+      "price": "¥6,600",
+      "release_date": "2026.11.21",
+      "url": "",
+      "youtube": "",
+      "image": "./assets/bbx/cx20-d29c810902.jpg",
+      "image_remote": "https://beyblade.phstudy.org/images/products/CX-20/077596_00.jpg"
     },
     {
       "product_id": "UX20",
@@ -3675,6 +3691,54 @@
         "bx"
       ],
       "collection_order": 229
+    },
+    {
+      "series_id": "SR-PRD-056225-00",
+      "base_set_id": "BXC-21",
+      "names": {
+        "zh": "BXC-21 基德狩獵 K4-70TK 金屬塗層:白",
+        "ko": "BXC-21 키드 헌트 K4-70TK 메탈 코트:화이트",
+        "en": "BXC-21 Kid Hunt K 4-70TK Metallic Coat: White",
+        "ja": "BXC-21 キッドハントK 4-70TK メタルコート:ホワイト"
+      },
+      "model_name": "BXC21_KidHuntK4-70TK",
+      "blade_id": "BL-PRD-056225-00",
+      "ratchet_id": "RC-PRD-056225-00",
+      "bit_id": "BT-PRD-056225-00",
+      "assist_blade_id": "AB-PRD-056225-00",
+      "lock_chip_id": "LC-PRD-056225-00",
+      "main_blade_id": "MB-PRD-056225-00",
+      "metal_blade_id": "",
+      "over_blade_id": "",
+      "tags": [
+        "cx",
+        "other"
+      ],
+      "collection_order": 304
+    },
+    {
+      "series_id": "SR-PRD-056225-00R",
+      "base_set_id": "",
+      "names": {
+        "zh": "CX-00 基德狩獵 K4-70TK 金屬塗層:白",
+        "ko": "CX-00 키드 헌트 K4-70TK 메탈 코트:화이트",
+        "en": "CX-00 Kid Hunt K 4-70TK Metallic Coat: White",
+        "ja": "CX-00 キッドハントK4-70TK メタルコート:ホワイト"
+      },
+      "model_name": "BXC21_KidHuntK4-70TK_ModeChange",
+      "blade_id": "BL-PRD-056225-00R",
+      "ratchet_id": "RC-PRD-056225-00R",
+      "bit_id": "BT-PRD-056225-00R",
+      "assist_blade_id": "AB-PRD-056225-00R",
+      "lock_chip_id": "LC-PRD-056225-00R",
+      "main_blade_id": "MB-PRD-056225-00R",
+      "metal_blade_id": "",
+      "over_blade_id": "",
+      "tags": [
+        "cx",
+        "other"
+      ],
+      "collection_order": 304
     },
     {
       "series_id": "SR-PRD-065159-00",
@@ -10728,6 +10792,60 @@
         "image": "https://beyblade.phstudy.org/images/site/Blade/BL-FRB-FB2602-00.png",
         "image_fallback": "https://beyblade.phstudy.org/images/app/Big/BL-FRB-FB2602-00.png",
         "image_remote": "https://beyblade.phstudy.org/images/site/Blade/BL-FRB-FB2602-00.png"
+      },
+      {
+        "part_id": "BL-PRD-056225-00",
+        "type": "blade",
+        "base_set_id": "BXC-21",
+        "names": {
+          "zh": "BXC-21 基德狩獵 K 金屬塗層:白",
+          "ko": "BXC-21 키드 헌트 K 메탈 코트:화이트",
+          "en": "BXC-21 Kid Hunt K Metallic Coat: White",
+          "ja": "BXC-21 キッドハントK メタルコート:ホワイト"
+        },
+        "color": "",
+        "stats": {
+          "attack": 55,
+          "burst": 0,
+          "dash": 0,
+          "defense": 20,
+          "height": 50,
+          "rotation": "right",
+          "stamina": 40,
+          "weight": 0
+        },
+        "weight_g": null,
+        "collection_order": 304,
+        "image": "https://beyblade.phstudy.org/images/site/Blade/BL-PRD-056225-00.png",
+        "image_fallback": "https://beyblade.phstudy.org/images/app/Big/BL-PRD-056225-00.png",
+        "image_remote": "https://beyblade.phstudy.org/images/site/Blade/BL-PRD-056225-00.png"
+      },
+      {
+        "part_id": "BL-PRD-056225-00R",
+        "type": "blade",
+        "base_set_id": "",
+        "names": {
+          "zh": "CX-00 KIDHUNTK Metallic Coat: White",
+          "ko": "CX-00 Kid Hunt K Metallic Coat: White",
+          "en": "CX-00 Kid Hunt K Metallic Coat: White",
+          "ja": "CX-00 キッドハントK メタルコート:ホワイト"
+        },
+        "color": "",
+        "stats": {
+          "attack": 55,
+          "burst": 0,
+          "dash": 0,
+          "defense": 20,
+          "height": 50,
+          "rotation": "right",
+          "stamina": 40,
+          "weight": 0
+        },
+        "weight_g": null,
+        "collection_order": 304,
+        "image": "https://beyblade.phstudy.org/images/site/Blade/BL-PRD-056225-00R.png",
+        "image_fallback": "https://beyblade.phstudy.org/images/app/Big/BL-PRD-056225-00R.png",
+        "image_remote": "https://beyblade.phstudy.org/images/site/Blade/BL-PRD-056225-00R.png"
       },
       {
         "part_id": "BL-PRD-065159-00",
@@ -18778,6 +18896,60 @@
         "image_remote": "https://beyblade.phstudy.org/images/app/Ratchet/RC-FRB-CR2502-00.png"
       },
       {
+        "part_id": "RC-PRD-056225-00",
+        "type": "ratchet",
+        "base_set_id": "BXC-21",
+        "names": {
+          "zh": "BXC-21 4-70",
+          "ko": "BXC-21 4-70",
+          "en": "BXC-21 4-70",
+          "ja": "BXC-21 4-70"
+        },
+        "color": "",
+        "stats": {
+          "attack": 11,
+          "burst": 0,
+          "dash": 0,
+          "defense": 12,
+          "height": 70,
+          "rotation": null,
+          "stamina": 7,
+          "weight": 0
+        },
+        "weight_g": null,
+        "collection_order": 304,
+        "image": "https://beyblade.phstudy.org/images/app/Ratchet/RC-PRD-056225-00.png",
+        "image_fallback": null,
+        "image_remote": "https://beyblade.phstudy.org/images/app/Ratchet/RC-PRD-056225-00.png"
+      },
+      {
+        "part_id": "RC-PRD-056225-00R",
+        "type": "ratchet",
+        "base_set_id": "",
+        "names": {
+          "zh": "CX-00 4-70",
+          "ko": "CX-00 4-70",
+          "en": "CX-00 4-70",
+          "ja": "CX-00 4-70"
+        },
+        "color": "",
+        "stats": {
+          "attack": 11,
+          "burst": 0,
+          "dash": 0,
+          "defense": 12,
+          "height": 70,
+          "rotation": null,
+          "stamina": 7,
+          "weight": 0
+        },
+        "weight_g": null,
+        "collection_order": 304,
+        "image": "https://beyblade.phstudy.org/images/app/Ratchet/RC-PRD-056225-00R.png",
+        "image_fallback": null,
+        "image_remote": "https://beyblade.phstudy.org/images/app/Ratchet/RC-PRD-056225-00R.png"
+      },
+      {
         "part_id": "RC-PRD-065159-00",
         "type": "ratchet",
         "base_set_id": "BXG-63",
@@ -26581,6 +26753,60 @@
         "image": "https://beyblade.phstudy.org/images/app/Bit/BT-FRB-CR2502-00.png",
         "image_fallback": null,
         "image_remote": "https://beyblade.phstudy.org/images/app/Bit/BT-FRB-CR2502-00.png"
+      },
+      {
+        "part_id": "BT-PRD-056225-00",
+        "type": "bit",
+        "base_set_id": "BXC-21",
+        "names": {
+          "zh": "BXC-21 TK",
+          "ko": "BXC-21 TK",
+          "en": "BXC-21 TK",
+          "ja": "BXC-21 TK"
+        },
+        "color": "",
+        "stats": {
+          "attack": 35,
+          "burst": 80,
+          "dash": 15,
+          "defense": 30,
+          "height": 0,
+          "rotation": null,
+          "stamina": 20,
+          "weight": 0
+        },
+        "weight_g": null,
+        "collection_order": 304,
+        "image": "https://beyblade.phstudy.org/images/app/Bit/BT-PRD-056225-00.png",
+        "image_fallback": null,
+        "image_remote": "https://beyblade.phstudy.org/images/app/Bit/BT-PRD-056225-00.png"
+      },
+      {
+        "part_id": "BT-PRD-056225-00R",
+        "type": "bit",
+        "base_set_id": "",
+        "names": {
+          "zh": "CX-00 TK",
+          "ko": "CX-00 TK",
+          "en": "CX-00 TK",
+          "ja": "CX-00 TK"
+        },
+        "color": "",
+        "stats": {
+          "attack": 35,
+          "burst": 80,
+          "dash": 15,
+          "defense": 30,
+          "height": 0,
+          "rotation": null,
+          "stamina": 20,
+          "weight": 0
+        },
+        "weight_g": null,
+        "collection_order": 304,
+        "image": "https://beyblade.phstudy.org/images/app/Bit/BT-PRD-056225-00R.png",
+        "image_fallback": null,
+        "image_remote": "https://beyblade.phstudy.org/images/app/Bit/BT-PRD-056225-00R.png"
       },
       {
         "part_id": "BT-PRD-065159-00",
@@ -34415,6 +34641,60 @@
         "image_remote": "https://beyblade.phstudy.org/images/app/AssistBlade/AB-EVE-982524-03.png"
       },
       {
+        "part_id": "AB-PRD-056225-00",
+        "type": "assist_blade",
+        "base_set_id": "BXC-21",
+        "names": {
+          "zh": "BXC-21 K",
+          "ko": "BXC-21 K",
+          "en": "BXC-21 K",
+          "ja": "BXC-21 K"
+        },
+        "color": "",
+        "stats": {
+          "attack": 30,
+          "burst": 0,
+          "dash": 0,
+          "defense": 5,
+          "height": 50,
+          "rotation": "right",
+          "stamina": 5,
+          "weight": 0
+        },
+        "weight_g": null,
+        "collection_order": 304,
+        "image": "https://beyblade.phstudy.org/images/app/AssistBlade/AB-PRD-056225-00.png",
+        "image_fallback": null,
+        "image_remote": "https://beyblade.phstudy.org/images/app/AssistBlade/AB-PRD-056225-00.png"
+      },
+      {
+        "part_id": "AB-PRD-056225-00R",
+        "type": "assist_blade",
+        "base_set_id": "",
+        "names": {
+          "zh": "CX-00 K",
+          "ko": "CX-00 K",
+          "en": "CX-00 K",
+          "ja": "CX-00 K"
+        },
+        "color": "",
+        "stats": {
+          "attack": 30,
+          "burst": 0,
+          "dash": 0,
+          "defense": 5,
+          "height": 50,
+          "rotation": "right",
+          "stamina": 5,
+          "weight": 0
+        },
+        "weight_g": null,
+        "collection_order": 304,
+        "image": "https://beyblade.phstudy.org/images/app/AssistBlade/AB-PRD-056225-00R.png",
+        "image_fallback": null,
+        "image_remote": "https://beyblade.phstudy.org/images/app/AssistBlade/AB-PRD-056225-00R.png"
+      },
+      {
         "part_id": "AB-PRD-072447-00",
         "type": "assist_blade",
         "base_set_id": "BXC-19",
@@ -36496,6 +36776,60 @@
         "image_remote": "https://beyblade.phstudy.org/images/app/LockChip/LC-EVE-982524-03.png"
       },
       {
+        "part_id": "LC-PRD-056225-00",
+        "type": "lock_chip",
+        "base_set_id": "BXC-21",
+        "names": {
+          "zh": "BXC-21 基德",
+          "ko": "BXC-21 키드",
+          "en": "BXC-21 Kid",
+          "ja": "BXC-21 キッド"
+        },
+        "color": "",
+        "stats": {
+          "attack": 0,
+          "burst": 0,
+          "dash": 0,
+          "defense": 0,
+          "height": 0,
+          "rotation": "right",
+          "stamina": 0,
+          "weight": 0
+        },
+        "weight_g": null,
+        "collection_order": 304,
+        "image": "https://beyblade.phstudy.org/images/app/LockChip/LC-PRD-056225-00.png",
+        "image_fallback": null,
+        "image_remote": "https://beyblade.phstudy.org/images/app/LockChip/LC-PRD-056225-00.png"
+      },
+      {
+        "part_id": "LC-PRD-056225-00R",
+        "type": "lock_chip",
+        "base_set_id": "",
+        "names": {
+          "zh": "CX-00 KID",
+          "ko": "CX-00 Kid",
+          "en": "CX-00 Kid",
+          "ja": "CX-00 キッド"
+        },
+        "color": "",
+        "stats": {
+          "attack": 0,
+          "burst": 0,
+          "dash": 0,
+          "defense": 0,
+          "height": 0,
+          "rotation": "right",
+          "stamina": 0,
+          "weight": 0
+        },
+        "weight_g": null,
+        "collection_order": 304,
+        "image": "https://beyblade.phstudy.org/images/app/LockChip/LC-PRD-056225-00R.png",
+        "image_fallback": null,
+        "image_remote": "https://beyblade.phstudy.org/images/app/LockChip/LC-PRD-056225-00R.png"
+      },
+      {
         "part_id": "LC-PRD-072447-00",
         "type": "lock_chip",
         "base_set_id": "BXC-19",
@@ -38575,6 +38909,60 @@
         "image": "https://beyblade.phstudy.org/images/app/MainBlade/MB-EVE-982524-03.png",
         "image_fallback": null,
         "image_remote": "https://beyblade.phstudy.org/images/app/MainBlade/MB-EVE-982524-03.png"
+      },
+      {
+        "part_id": "MB-PRD-056225-00",
+        "type": "main_blade",
+        "base_set_id": "BXC-21",
+        "names": {
+          "zh": "BXC-21 狩獵 金屬塗層:白色",
+          "ko": "BXC-21 헌트 메탈 코트:화이트",
+          "en": "BXC-21 Hunt Metallic Coat: White",
+          "ja": "BXC-21 ハント メタルコート:ホワイト"
+        },
+        "color": "",
+        "stats": {
+          "attack": 25,
+          "burst": 0,
+          "dash": 0,
+          "defense": 15,
+          "height": 0,
+          "rotation": "right",
+          "stamina": 35,
+          "weight": 0
+        },
+        "weight_g": null,
+        "collection_order": 304,
+        "image": "https://beyblade.phstudy.org/images/app/MainBlade/MB-PRD-056225-00.png",
+        "image_fallback": null,
+        "image_remote": "https://beyblade.phstudy.org/images/app/MainBlade/MB-PRD-056225-00.png"
+      },
+      {
+        "part_id": "MB-PRD-056225-00R",
+        "type": "main_blade",
+        "base_set_id": "",
+        "names": {
+          "zh": "CX-00 狩獵 金屬塗層:白色",
+          "ko": "CX-00 Hunt Metallic Coat: White",
+          "en": "CX-00 Hunt Metallic Coat: White",
+          "ja": "CX-00 ハント メタルコート:ホワイト"
+        },
+        "color": "",
+        "stats": {
+          "attack": 25,
+          "burst": 0,
+          "dash": 0,
+          "defense": 15,
+          "height": 0,
+          "rotation": "right",
+          "stamina": 35,
+          "weight": 0
+        },
+        "weight_g": null,
+        "collection_order": 304,
+        "image": "https://beyblade.phstudy.org/images/app/MainBlade/MB-PRD-056225-00R.png",
+        "image_fallback": null,
+        "image_remote": "https://beyblade.phstudy.org/images/app/MainBlade/MB-PRD-056225-00R.png"
       },
       {
         "part_id": "MB-PRD-072447-00",
