@@ -40,12 +40,35 @@ const CANDY_BRANDS = [
   { code: "SUPERIOR", slug: "superiordefine", label: "Gundam Superior Define" },
 ];
 
-const TAMASHII_GUNDAM_BRANDS = [
-  { brandCode: "metal_build", label: "METAL BUILD" },
-  { brandCode: "metal_robot_tamashii", label: "METAL ROBOT魂" },
-  { brandCode: "robot_tamashii", label: "ROBOT魂" },
-  { brandCode: "shfiguarts", label: "S.H.Figuarts" },
+// Every Tamashii brand with a Gundam item is read through one characterCode
+// query per sales area. Until 2026-11 only four brands in the japan area were
+// read, so GFF METAL COMPOSITE, GUNDAM UNIVERSE, NXEDGE STYLE, SDX, 超合金,
+// METAL STRUCTURE … (about 240 items) and the Gundam Base / overseas-event
+// ROBOT魂 that are only listed in the asia area never reached the catalog.
+const TAMASHII_AREAS = ["japan", "asia", "usa"];
+const TAMASHII_BRAND_GRADES = [
+  [/^METAL BUILD/i, "METAL_BUILD"],
+  [/^METAL ROBOT魂/i, "METAL_ROBOT"],
+  [/^ROBOT魂/i, "ROBOT_SPIRITS"],
+  [/^S\.H\.Figuarts/i, "SH_FIGUARTS"],
+  [/^Figuarts mini/i, "FIGUARTS_MINI"],
+  [/^GUNDAM FIX FIGURATION/i, "GFF"],
+  [/^GUNDAM UNIVERSE/i, "GUNDAM_UNIVERSE"],
+  [/^NXEDGE STYLE/i, "NXEDGE"],
+  [/^SDX$/i, "SDX"],
+  [/^元祖SDガンダムワールド/, "GANSO_SD"],
+  [/^METAL STRUCTURE/i, "METAL_STRUCTURE"],
+  [/超合金/, "CHOGOKIN"],
 ];
+// Display stands, not figures.
+const TAMASHII_SKIP_BRANDS = /^魂STAGE$/;
+// Lines whose item titles are only a character or series name, so two different
+// products share one title ("Figuarts mini キラ・ヤマト" 2024 and 2026).
+const TAMASHII_GENERIC_TITLE_BRANDS = /^(?:Figuarts mini|超合金の塊)$/;
+// Detail pages are fetched one at a time, about one a second, and only for items
+// the catalog does not have yet (or has without images/price/date).
+const TAMASHII_DETAIL_BUDGET = Number(process.env.TAMASHII_DETAIL_BUDGET || 300);
+const TAMASHII_DETAIL_GAP_MS = 1100;
 
 const HTML_ENTITY_MAP = {
   alpha: "α",
@@ -292,14 +315,14 @@ async function fetchJson(url) {
 
 async function fetchTamashiiDetailText(url) {
   let lastError;
-  for (let attempt = 1; attempt <= 5; attempt += 1) {
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
     try {
+      // A plain, self-identifying request: no browser user-agent, no forged referer.
       const response = await fetch(url, {
         headers: {
-          "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36",
-          accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-          "accept-language": "ja,en-US;q=0.9,en;q=0.8",
-          referer: `${TAMASHII_BASE_URL}/item_character/gundam_series/`,
+          "user-agent": "HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)",
+          accept: "text/html,application/xhtml+xml",
+          "accept-language": "ja,en-US;q=0.8,en;q=0.7",
         },
       });
       if (response.ok) {
@@ -744,14 +767,14 @@ async function importGashaponSearch({ label, resultUrl, franchise, gradeCode, su
   return imported;
 }
 
-function tamashiiSearchUrl(brandCode, currentPage = 1) {
+function tamashiiSearchUrl(area, currentPage = 1) {
   const url = new URL("/api/site-item/search_item.php", TAMASHII_BASE_URL);
-  url.searchParams.append("brandCode[]", brandCode);
   url.searchParams.append("characterCode[]", "gundam_series");
+  // The API answers 40 per page whatever per_page says; the loop follows lastPage.
   url.searchParams.set("per_page", "100");
   url.searchParams.set("current_page", String(currentPage));
   url.searchParams.set("sort", "1");
-  url.searchParams.set("area", "japan");
+  url.searchParams.set("area", area);
   return url.href;
 }
 
@@ -763,36 +786,35 @@ function tamashiiItemUrl(item) {
   return `${TAMASHII_BASE_URL}/item/${item.tamashiiWebId}/`;
 }
 
-async function fetchTamashiiBrandItems(brand) {
-  const firstPage = await fetchJson(tamashiiSearchUrl(brand.brandCode, 1));
+async function fetchTamashiiAreaItems(area) {
+  const firstPage = await fetchJson(tamashiiSearchUrl(area, 1));
   const items = [...(firstPage.data ?? [])];
   const lastPage = firstPage.pagination?.lastPage ?? 1;
 
   for (let page = 2; page <= lastPage; page += 1) {
-    const pageData = await fetchJson(tamashiiSearchUrl(brand.brandCode, page));
+    await sleep(500);
+    const pageData = await fetchJson(tamashiiSearchUrl(area, page));
     items.push(...(pageData.data ?? []));
   }
 
-  console.log(`Found ${items.length} ${brand.label} Gundam Tamashii listings.`);
+  console.log(`Found ${items.length} Gundam Tamashii listings in the ${area} area.`);
   return items;
 }
 
 function tamashiiGradeCode(brandName) {
-  if (/METAL BUILD/i.test(brandName)) {
-    return "METAL_BUILD";
+  const name = nfkc(brandName);
+  for (const [pattern, code] of TAMASHII_BRAND_GRADES) {
+    if (pattern.test(name)) return code;
   }
-  if (/METAL ROBOT/i.test(brandName)) {
-    return "METAL_ROBOT";
-  }
-  if (/S\.H\.Figuarts/i.test(brandName)) {
-    return "SH_FIGUARTS";
-  }
-  return "ROBOT_SPIRITS";
+  return "TAMASHII_OTHER";
 }
 
 function tamashiiSubline(title, brandName) {
   if (/S\.H\.Figuarts/i.test(brandName)) {
     return "S.H.Figuarts";
+  }
+  if (!/ROBOT魂/.test(brandName)) {
+    return brandName || "Tamashii Nations";
   }
   if (/METAL ROBOT/i.test(brandName)) {
     return brandName;
@@ -834,8 +856,11 @@ function parseTamashiiProductDetail(html, detailUrl) {
 
 function buildTamashiiKit(item, detail) {
   const detailUrl = tamashiiItemUrl(item);
-  const title = detail.title || stripTags(item.title);
+  // Listing titles carry the "＜SIDE MS＞" category tag that detail-page titles do not.
+  let title = detail.title || stripTags(item.title).replace(/^s*[＜<]s*SIDE MSs*[＞>]s*/i, "");
   const brandName = detail.brandName || item.mainBrandName || "ROBOT魂";
+  if (item.titleSuffix && !title.endsWith(item.titleSuffix)) title = `${title} ${item.titleSuffix}`;
+  const areaTags = item.areas?.includes("japan") ? [] : (item.areas || []).map((area) => `tamashii-${area}-only`);
   const gradeCode = tamashiiGradeCode(brandName);
   const inferred = inferWork(title, detail.work_title);
   const categoryText = [item.category, item.categoryData?.long_name, item.salesAttributeList?.join(" "), title].filter(Boolean).join(" ");
@@ -854,59 +879,102 @@ function buildTamashiiKit(item, detail) {
     isLimited: /限定|抽選|魂ウェブ商店|TAMASHII NATION|魂ストア/i.test(categoryText),
     sourceId: TAMASHII_SOURCE_ID,
     sourceUrls: [detailUrl, tamashiiBrandPageUrl(item.brandCode || "robot_tamashii")],
-    tags: ["gundam", "tamashii nations", "collectible figure", gradeCode.toLowerCase().replace(/_/g, "-")],
-    notes: `Imported from the official Tamashii Web Gundam ${brandName} catalog and product detail page.`,
+    names: item.areas?.includes("japan") || /[ぁ-んァ-ヶ一-龠]/.test(title) ? {} : { en: title },
+    tags: ["gundam", "tamashii nations", "collectible figure", gradeCode.toLowerCase().replace(/_/g, "-"), ...areaTags],
+    notes: item.areas?.includes("japan")
+      ? `Imported from the official Tamashii Web Gundam ${brandName} catalog and product detail page.`
+      : `Imported from the official Tamashii Web Gundam ${brandName} catalog. Listed only in the ${item.areas.join("/")} sales area (event or overseas exclusive).`,
     workContext: [detail.work_title],
     workOverride: inferred.work_title ?? detail.work_title,
     universeOverride: inferred.universe,
   });
 }
 
-async function importTamashiiGundamFigures() {
+// What an earlier run already read from a detail page, so the page is not
+// fetched again every day.
+function tamashiiDetailFromExisting(kit) {
+  if (!kit || !(kit.gallery_image_urls?.length > 1) || kit.price_jpy == null || !kit.release_date) return null;
+  return {
+    title: kit.names?.ja || null,
+    brandName: null,
+    images: kit.gallery_image_urls.slice(1),
+    price_jpy: kit.price_jpy,
+    release_date: kit.release_date,
+    work_title: kit.work_title || null,
+  };
+}
+
+async function importTamashiiGundamFigures(existingKits = []) {
   const byWebId = new Map();
 
-  for (const brand of TAMASHII_GUNDAM_BRANDS) {
-    const listings = await fetchTamashiiBrandItems(brand);
+  for (const area of TAMASHII_AREAS) {
+    let listings;
+    try {
+      listings = await fetchTamashiiAreaItems(area);
+    } catch (error) {
+      // japan carries almost everything; a failed overseas area only loses its exclusives.
+      if (area === "japan") throw error;
+      console.warn(`Tamashii ${area} area skipped: ${error.message}`);
+      continue;
+    }
     for (const item of listings) {
-      if (!item.tamashiiWebId || byWebId.has(item.tamashiiWebId)) {
+      if (!item.tamashiiWebId) continue;
+      const known = byWebId.get(item.tamashiiWebId);
+      if (known) {
+        known.areas.push(area);
         continue;
       }
-      byWebId.set(item.tamashiiWebId, item);
+      byWebId.set(item.tamashiiWebId, { ...item, areas: [area] });
     }
   }
 
-  const listings = [...byWebId.values()].filter((item) => item.thumbnailImg && item.title);
-  let detailCount = 0;
-  const failedDetails = [];
-  const imported = await mapLimit(listings, 4, async (item, itemIndex) => {
-    const detailUrl = tamashiiItemUrl(item);
-    let detail = { title: null, brandName: null, images: [], price_jpy: null, release_date: null, work_title: null };
-    try {
-      detail = parseTamashiiProductDetail(await fetchTamashiiDetailText(detailUrl), detailUrl);
-      detailCount += 1;
-    } catch (error) {
-      failedDetails.push({ item, itemIndex, detailUrl, error });
+  const listings = [...byWebId.values()].filter(
+    (item) => item.thumbnailImg && item.title && !TAMASHII_SKIP_BRANDS.test(nfkc(item.mainBrandName || "")),
+  );
+  // Same brand + same plain title on different products: keep them apart by month.
+  const titleCounts = new Map();
+  const titleKey = (item) => `${item.mainBrandName}|${nfkc(stripTags(item.title))}`;
+  for (const item of listings) {
+    if (TAMASHII_GENERIC_TITLE_BRANDS.test(nfkc(item.mainBrandName || ""))) titleCounts.set(titleKey(item), (titleCounts.get(titleKey(item)) || 0) + 1);
+  }
+  for (const item of listings) {
+    if ((titleCounts.get(titleKey(item)) || 0) > 1 && item.releaseMonth) {
+      const [year, month] = item.releaseMonth.split("-");
+      item.titleSuffix = `（${year}年${Number(month)}月発売）`;
     }
+  }
 
-    return buildTamashiiKit(item, detail);
-  });
-
-  if (failedDetails.length) {
-    console.log(`Retrying ${failedDetails.length} Tamashii detail pages after cooldown.`);
-    await sleep(10000);
-    for (const failure of failedDetails) {
+  const existingById = new Map(existingKits.map((kit) => [kit.kit_id, kit]));
+  const emptyDetail = { title: null, brandName: null, images: [], price_jpy: null, release_date: null, work_title: null };
+  let detailCount = 0;
+  let reusedCount = 0;
+  let budget = TAMASHII_DETAIL_BUDGET;
+  const imported = [];
+  for (const item of listings) {
+    const detailUrl = tamashiiItemUrl(item);
+    const existing = existingById.get(`tamashii-${item.tamashiiWebId}`);
+    let detail = tamashiiDetailFromExisting(existing);
+    if (detail) {
+      reusedCount += 1;
+    } else if (budget > 0) {
+      budget -= 1;
       try {
-        const detail = parseTamashiiProductDetail(await fetchTamashiiDetailText(failure.detailUrl), failure.detailUrl);
-        imported[failure.itemIndex] = buildTamashiiKit(failure.item, detail);
+        detail = parseTamashiiProductDetail(await fetchTamashiiDetailText(detailUrl), detailUrl);
         detailCount += 1;
       } catch (error) {
-        console.warn(`Tamashii detail fetch failed for ${failure.detailUrl}: ${error.message}`);
+        console.warn(`Tamashii detail fetch failed for ${detailUrl}: ${error.message}`);
       }
-      await sleep(1500);
+      await sleep(TAMASHII_DETAIL_GAP_MS);
     }
+    if (!detail && existing) {
+      // Keep what the catalog has rather than overwrite it with listing-only data.
+      imported.push(existing);
+      continue;
+    }
+    imported.push(buildTamashiiKit(item, detail || emptyDetail));
   }
 
-  console.log(`Fetched ${detailCount}/${listings.length} Tamashii Gundam detail pages.`);
+  console.log(`Fetched ${detailCount} Tamashii detail pages, reused ${reusedCount} from the catalog (budget ${TAMASHII_DETAIL_BUDGET}).`);
   console.log(`Imported ${imported.length} Tamashii Gundam figure records.`);
   return imported;
 }
@@ -1498,7 +1566,15 @@ async function readJsonFile(path, fallback) {
   }
 }
 
+// `--only=<regex>` runs just the matching sources (e.g. --only=Tamashii), for
+// re-importing one source without touching the others.
+const ONLY = (() => {
+  const arg = process.argv.find((value) => value.startsWith("--only="));
+  return arg ? new RegExp(arg.slice("--only=".length), "i") : null;
+})();
+
 async function importOptional(label, importer) {
+  if (ONLY && !ONLY.test(label)) return [];
   try {
     return await importer();
   } catch (error) {
@@ -1570,7 +1646,7 @@ async function main() {
         fallbackUniverse: "AD",
       }),
     )),
-    ...(await importOptional("Tamashii Gundam figures", importTamashiiGundamFigures)),
+    ...(await importOptional("Tamashii Gundam figures", () => importTamashiiGundamFigures(existingDoc.kits))),
     ...(await importOptional("Bandai Armored Core", importBandaiArmoredCore)),
     ...(await importOptional("Kotobukiya Armored Core", importKotobukiyaArmoredCore)),
     ...(await importOptional("BEYBLADE X", () => importBeybladeX(existingDoc.kits))),

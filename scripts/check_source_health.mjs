@@ -29,6 +29,7 @@ const CHECKS = [
 // independent of whether the site happens to answer this runner.
 const CATALOG_SOURCES = [
   { source_id: "bandai_spirits_products_jp", label: "BANDAI SPIRITS Gunpla" },
+  { source_id: "tamashii_web_jp", label: "Tamashii Web (Gundam)" },
   { source_id: "kotobukiya_armored_core_jp", label: "Kotobukiya Armored Core" },
   { source_id: "takara_tomy_beyblade_x_jp", label: "Takara Tomy BEYBLADE X" },
   { source_id: "pokemon_center_jp", label: "Pokemon Center plush" },

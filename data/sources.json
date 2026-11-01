@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-07-06",
+  "updated_at": "2026-11-01",
   "sources": [
     {
       "source_id": "manual_seed",
@@ -269,13 +269,38 @@
         "official images",
         "Japan price",
         "release or shipping month",
-        "source work"
+        "source work",
+        "GUNDAM FIX FIGURATION",
+        "GUNDAM UNIVERSE",
+        "NXEDGE STYLE",
+        "SDX",
+        "超合金 / METAL STRUCTURE",
+        "asia/usa-area exclusives"
       ],
       "weak_for": [
         "plastic model kit grade taxonomy",
         "non-Tamashii Gundam model kits"
       ],
-      "notes": "Official Japanese Tamashii Web product catalog and detail pages for Gundam collectible figure lines such as METAL BUILD, METAL ROBOT魂, ROBOT魂, and S.H.Figuarts."
+      "notes": "Official Tamashii Web item search API (characterCode gundam_series, every brand, japan + asia + usa areas) and product detail pages for Gundam collectible figure lines."
+    },
+    {
+      "source_id": "ja_wikipedia",
+      "name": "Japanese Wikipedia (CC BY-SA 4.0)",
+      "type": "community_reference",
+      "country": "JP",
+      "base_url": "https://ja.wikipedia.org/",
+      "priority": 40,
+      "best_for": [
+        "gap filling for products the official catalogs no longer list",
+        "original release month",
+        "limited-sale channel"
+      ],
+      "weak_for": [
+        "prices",
+        "images",
+        "JAN"
+      ],
+      "notes": "Used only to fill gaps the official sources leave (e.g. 2009-2012 魂ウェブ商店 ROBOT魂). Rows are read from a pinned revision through the MediaWiki API; every record cites the article revision, is needs_review, and is attributed under CC BY-SA 4.0."
     },
     {
       "source_id": "kotobukiya_armored_core_jp",

@@ -30,6 +30,9 @@ const STEPS = [
   { script: "import:pbandai-manual", kind: "derive" },
   { script: "import:pb", kind: "source" },
   { script: "import:pb:wayback", kind: "source" },
+  // CC BY-SA list articles (pinned revisions) for products no official source
+  // lists any more; after the official importers so it only fills real gaps.
+  { script: "import:wiki-gaps", kind: "source" },
   { script: "import:announcements", kind: "source" },
   { script: "cache:bbx-images", kind: "source" },
   // After every importer: drops non-collectibles and duplicate sale pages,

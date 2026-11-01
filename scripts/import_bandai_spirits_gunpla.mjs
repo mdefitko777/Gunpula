@@ -1,18 +1,24 @@
 import { readFile, writeFile } from "node:fs/promises";
+import { gundamGradeFromName, nfkc } from "./lib/catalog-cleanup.mjs";
 
 const BASE_URL = "https://www.bandaispirits.co.jp";
 const SOURCE_ID = "bandai_spirits_products_jp";
 const RESULT_PATH = "/products/search/result.php";
 const FIRST_PAGE_URL = `${BASE_URL}${RESULT_PATH}?search=true&free=&category=1`;
 
+// Matched on the NFKC title (BANDAI SPIRITS writes many titles with full-width
+// ＨＧ／ＭＧ／ＢＢ戦士 prefixes). The weapon and base rules only drop add-on
+// packs: "ENTRY GRADE … (フルウェポンセット)", "PG … ガンダム+ウエポンズ" and
+// "HG … +アクションベース3" are kits and stay.
 const EXCLUDED_TITLE_PATTERNS = [
   /ガンダムデカール/,
   /デカール/,
   /オプションパーツ/,
   /ビルダーズパーツ/,
-  /アクションベース/,
+  /^(?:(?:ガンダムベース|GUNDAM SIDE-F)限定 |バンダイプラモデル )?アクションベース/,
   /カスタマイズ/,
-  /ウェポン/,
+  /(?:システム|カスタム)ウ[ェエ]ポン|ウ[ェエ]ポン(?:ズ|キット\d*|バインダー|ディスプレイベース)?$|バックウ[ェエ]ポンシステム/,
+  /^HGBC\b|^BPHD\b/,
   /エフェクトパーツ/,
   /マーキングシール/,
   /LEDユニット/,
@@ -33,21 +39,24 @@ const GRADE_RULES = [
   { code: "RG", subline: "RG", pattern: /^RG\b/i },
   { code: "MG", subline: "MG", pattern: /^MG\b/i },
   { code: "EG", subline: "Entry Grade", pattern: /^(?:ENTRY GRADE|EG)\b/i },
-  { code: "HG", subline: null, pattern: /^HG(?:UC|AC|CE|FC|AW|CC|BD(?::R)?|GBB|GTO|IBO|WFM|UC|UC|AGE|BUILD|GQuuuuuuX)?\b/i },
-  { code: "SDEX", subline: "SD EX-Standard", pattern: /^(?:SDEX|SDガンダム\s*EXスタンダード|SDガンダム\s*EX-STANDARD)\b/i },
-  { code: "SDCS", subline: "SD Cross Silhouette", pattern: /^(?:SDCS|SDガンダム\s*クロスシルエット)\b/i },
-  { code: "SDW", subline: "SD Gundam World", pattern: /^(?:SDW|SDガンダムワールド|SDガンダム\s*ワールドヒーローズ)\b/i },
-  { code: "SD", subline: "SD", pattern: /^(?:BB戦士|SDガンダム|SD 三国創傑伝)\b/i },
-  { code: "HAROPLA", subline: "HaroPla", pattern: /^(?:ハロプラ|HAROPLA)\b/i },
-  { code: "MEGA", subline: "Mega Size Model", pattern: /^(?:メガサイズモデル|MEGA SIZE MODEL)\b/i },
-  { code: "UCHG", subline: "U.C. Hard Graph", pattern: /^(?:U\.C\.ハードグラフ|U\.C\. HARD GRAPH)\b/i },
-  { code: "EX", subline: "EX Model", pattern: /^(?:EXモデル|EX MODEL)\b/i },
+  // HGUC, HGCE, HGBF, HGBD:R, HGPG (プチッガイ), HGBM … every HG line prefix.
+  { code: "HG", subline: null, pattern: /^HG(?:[A-Z]{1,4}(?::R)?|GQuuuuuuX)?(?=[\s\d/]|$)/ },
+  // \b never fires after a Japanese character, so these end in a lookahead.
+  { code: "SDEX", subline: "SD EX-Standard", pattern: /^(?:SDEX|SDガンダム\s*EXスタンダード|SDガンダム\s*EX-STANDARD)(?=[\s\d/(]|$)/i },
+  { code: "SDCS", subline: "SD Cross Silhouette", pattern: /^(?:SDCS|SDガンダム\s*クロスシルエット)(?=[\s\d/(]|$)/i },
+  { code: "SDW", subline: "SD Gundam World", pattern: /^(?:SDW|SDガンダムワールド|SDガンダム\s*ワールドヒーローズ)(?=[\s\d/(]|$)/i },
+  { code: "SD", subline: "SD", pattern: /^(?:BB ?戦士|BB\d|SDガンダム|SD ?三国|SDBF|SDBD|SDGF|SD |LEGEND ?BB|SD武者)/i },
+  { code: "HAROPLA", subline: "HaroPla", pattern: /^(?:ハロプラ|HAROPLA)(?=[\s\d/(]|$)/i },
+  { code: "MEGA", subline: "Mega Size Model", pattern: /^(?:メガサイズモデル|MEGA SIZE MODEL)(?=[\s\d/(]|$)/i },
+  { code: "UCHG", subline: "U.C. Hard Graph", pattern: /^(?:U\.C\. ?ハードグラフ|U\.C\. ?HARD GRAPH)(?=[\s\d/(]|$)/i },
+  { code: "EX", subline: "EX Model", pattern: /^(?:EXモデル|EX MODEL)(?=[\s\d/(]|$)/i },
   { code: "FG", subline: "First Grade", pattern: /^(?:FG|FIRST GRADE)\b/i },
   { code: "AG", subline: "Advanced Grade", pattern: /^(?:AG|ADVANCED GRADE)\b/i },
-  { code: "BMC", subline: "Best Mecha Collection", pattern: /^(?:ベストメカコレクション|BEST MECHA COLLECTION)\b/i },
+  { code: "BMC", subline: "Best Mecha Collection", pattern: /^(?:ベストメカコレクション|BEST MECHA COLLECTION)(?=[\s\d/(]|$)/i },
   { code: "HY2M", subline: "HY2M", pattern: /^HY2M\b/i },
   { code: "LM", subline: "Limited Model", pattern: /^(?:LM|LIMITED MODEL)\b/i },
-  { code: "NG", subline: "No Grade", pattern: /^(?:1\/144|1\/100|1\/60|1\/550)\b/i },
+  { code: "MEGA", subline: "Mega Size Model", pattern: /^1 ?\/ ?48 メガサイズモデル/ },
+  { code: "NG", subline: "No Grade", pattern: /^1 ?\/ ?(?:144|100|60|48|220|250|300|550|1200|1700|2200|2400)\b/i },
 ];
 
 const GRADE_PREFIX_ORDER = ["PGU", "MGEX", "MGSD", "RE100", "HIRM", "MEGA", "HAROPLA", "UCHG", "SDEX", "SDCS", "SDW"];
@@ -67,6 +76,7 @@ const DEFAULT_SCALE_BY_GRADE = {
   RE100: "1/100",
   RG: "1/144",
   SG: "1/200",
+  UCHG: "1/35",
 };
 
 const WORK_RULES = [
@@ -203,29 +213,46 @@ function parsePrice(value) {
   return digits ? Number(digits) : null;
 }
 
-function inferGrade(title) {
+// Lead-in tags BANDAI SPIRITS puts before the grade ("ガンダムベース限定 ",
+// "EXPO2025 ", "【…】") are skipped for the prefix rules; the shared name rules
+// (lib/catalog-cleanup.mjs) catch the rest ("SD武者ガンダム BB戦士395 …").
+const LEAD_IN = /^(?:(?:ガンダムベース|GUNDAM SIDE-F|イベント|プレミアムバンダイ)限定\s+|EXPO\d{4}\s+|【[^】]*】\s*)+/;
+const SUBLINE_BY_SHARED_GRADE = {
+  SD: "SD", MG: "MG", RG: "RG", PG: "PG", EG: "Entry Grade", HG: "HG", MGSD: "MGSD", SDCS: "SD Cross Silhouette",
+  SDEX: "SD EX-Standard", SDW: "SD Gundam World", RE100: "RE/100", HIRM: "Hi-Resolution Model", MEGA: "Mega Size Model",
+  EX: "EX Model", NG: "No Grade", PGU: "PG Unleashed", MGEX: "MGEX", FM: "Full Mechanics",
+};
+
+function inferGrade(rawTitle) {
+  // Until 2026-11 this matched the raw title, so every full-width "ＨＧ 1/144 …",
+  // "ＭＧ …" and "ＢＢ戦士 …" card, and every HGBF/HGPG/HGBM card, was skipped:
+  // about 1,500 of the 3,800 listed kits never reached the catalog.
+  const title = nfkc(rawTitle);
   if (EXCLUDED_TITLE_PATTERNS.some((pattern) => pattern.test(title))) {
     return null;
   }
+  const bare = title.replace(LEAD_IN, "");
 
   for (const rule of GRADE_RULES) {
-    const match = rule.pattern.exec(title);
+    const match = rule.pattern.exec(bare);
     if (!match) {
       continue;
     }
 
     let subline = rule.subline;
     if (rule.code === "HG") {
-      subline = /^([A-Z][A-Z0-9:]+)\b/i.exec(title)?.[1]?.toUpperCase() ?? "HG";
+      subline = /^([A-Z][A-Za-z0-9:]+)/.exec(bare)?.[1]?.toUpperCase() ?? "HG";
     }
     return { grade_code: rule.code, subline };
   }
 
+  const shared = gundamGradeFromName(title);
+  if (shared && SUBLINE_BY_SHARED_GRADE[shared]) return { grade_code: shared, subline: SUBLINE_BY_SHARED_GRADE[shared] };
   return null;
 }
 
 function inferScale(title, gradeCode) {
-  const explicitScale = /(\d+\/\d+)/.exec(title)?.[1];
+  const explicitScale = /(\d+) ?\/ ?(\d+)/.exec(nfkc(title))?.slice(1, 3).join("/");
   if (explicitScale) {
     return explicitScale;
   }
@@ -305,7 +332,7 @@ function toKit(card) {
     work_title: work.work_title,
     release_date: releaseDate,
     price_jpy: priceJpy,
-    is_limited: /限定|イベント|抽選|プレミアムバンダイ|ガンダムベース/.test(card.title),
+    is_limited: /限定|イベント|抽選|プレミアムバンダイ|ガンダムベース|EXPO\d{4}/.test(nfkc(card.title)),
     data_status: "needs_review",
     source_urls: [card.source_url],
     source_refs: [
@@ -333,7 +360,7 @@ async function fetchText(url) {
     try {
       const response = await fetch(url, {
         headers: {
-          "user-agent": "Gunpula catalog importer (+https://github.com/mdefitko777/Gunpula)",
+          "user-agent": "HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)",
           accept: "text/html,application/xhtml+xml",
         },
       });
@@ -367,7 +394,8 @@ async function main() {
   console.log(`Fetched page 1/${maxPage}: ${cards.length} cards.`);
 
   for (let page = 2; page <= maxPage; page += 1) {
-    await sleep(250);
+    // About one request a second: the full product search is ~190 pages.
+    await sleep(1000);
     const html = await fetchText(pageUrl(page));
     const pageCards = parseCards(html);
     cards.push(...pageCards);

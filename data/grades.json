@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-07-06",
+  "updated_at": "2026-11-01",
   "scope": "Official model and collectible line taxonomy for Gundam, Armored Core, Pokemon, and BEYBLADE X catalog records. Includes Gunpla grades, SD lines, 1/100 side lines, historical plastic model lines, Tamashii Nations Gundam figure lines, Bandai Candy shokugan figures, Bandai Gashapon lines, Bandai/Kotobukiya Armored Core plastic model lines, Pokemon plastic model / capsule toy lines, and Takara Tomy BEYBLADE X battle toy lines. Excludes unofficial third-party kits and resin garage kits., Fate/FGO official figures/goods, and Pokemon Center plush/goods catalog records.",
   "sources": [
     {
@@ -719,6 +719,176 @@
         "S.H.Figuarts Gundam"
       ],
       "notes_zh": "TAMASHII NATIONS 的角色可动成品线；本库按用户口径收录高达相关角色。"
+    },
+    {
+      "code": "GFF",
+      "name_en": "GUNDAM FIX FIGURATION",
+      "name_zh": "GFF / GUNDAM FIX FIGURATION 成品",
+      "category": "tamashii_figure",
+      "typical_scale": [
+        "non-scale",
+        "various"
+      ],
+      "introduced": 2001,
+      "status": "active",
+      "parent_code": null,
+      "aliases": [
+        "GFF",
+        "G.F.F.",
+        "GUNDAM FIX FIGURATION METAL COMPOSITE",
+        "GFF METAL COMPOSITE",
+        "G.F.F.M.C."
+      ],
+      "notes_zh": "TAMASHII NATIONS 的高达合金/可动成品线，含 METAL COMPOSITE 子线。"
+    },
+    {
+      "code": "GUNDAM_UNIVERSE",
+      "name_en": "GUNDAM UNIVERSE",
+      "name_zh": "GUNDAM UNIVERSE 成品",
+      "category": "tamashii_figure",
+      "typical_scale": [
+        "non-scale",
+        "various"
+      ],
+      "introduced": null,
+      "status": "active",
+      "parent_code": null,
+      "aliases": [
+        "GU",
+        "Gundam Universe"
+      ],
+      "notes_zh": "TAMASHII NATIONS 面向海外和国内的平价高达可动成品线。"
+    },
+    {
+      "code": "NXEDGE",
+      "name_en": "NXEDGE STYLE",
+      "name_zh": "NXEDGE STYLE 成品",
+      "category": "tamashii_figure",
+      "typical_scale": [
+        "non-scale",
+        "various"
+      ],
+      "introduced": null,
+      "status": "active",
+      "parent_code": null,
+      "aliases": [
+        "NX",
+        "NXEDGE",
+        "NXEDGE STYLE [MS UNIT]"
+      ],
+      "notes_zh": "TAMASHII NATIONS 的小型 Q 版可动成品线（MS UNIT 等）。"
+    },
+    {
+      "code": "SDX",
+      "name_en": "SDX",
+      "name_zh": "SDX 成品",
+      "category": "tamashii_figure",
+      "typical_scale": [
+        "non-scale",
+        "various"
+      ],
+      "introduced": null,
+      "status": "active",
+      "parent_code": null,
+      "aliases": [
+        "SDX"
+      ],
+      "notes_zh": "TAMASHII NATIONS 的 SD 高达骑士/武者可动成品线。"
+    },
+    {
+      "code": "GANSO_SD",
+      "name_en": "Ganso SD Gundam World",
+      "name_zh": "元祖SD高达世界 复刻",
+      "category": "tamashii_figure",
+      "typical_scale": [
+        "non-scale",
+        "various"
+      ],
+      "introduced": null,
+      "status": "active",
+      "parent_code": null,
+      "aliases": [
+        "元祖SDガンダムワールド",
+        "元祖SD"
+      ],
+      "notes_zh": "TAMASHII NATIONS 复刻的元祖 SD 高达世界成品。"
+    },
+    {
+      "code": "FIGUARTS_MINI",
+      "name_en": "Figuarts mini",
+      "name_zh": "Figuarts mini 角色成品",
+      "category": "tamashii_figure",
+      "typical_scale": [
+        "non-scale",
+        "various"
+      ],
+      "introduced": null,
+      "status": "active",
+      "parent_code": null,
+      "aliases": [
+        "Figuarts mini"
+      ],
+      "notes_zh": "TAMASHII NATIONS 的 Q 版角色成品，本库收录高达角色。"
+    },
+    {
+      "code": "CHOGOKIN",
+      "name_en": "Chogokin",
+      "name_zh": "超合金 成品",
+      "category": "tamashii_figure",
+      "typical_scale": [
+        "non-scale",
+        "various"
+      ],
+      "introduced": null,
+      "status": "active",
+      "parent_code": null,
+      "aliases": [
+        "超合金",
+        "超合金魂",
+        "DX超合金",
+        "超合金の塊"
+      ],
+      "notes_zh": "TAMASHII NATIONS 超合金系高达成品，含超合金魂、DX超合金、超合金の塊。"
+    },
+    {
+      "code": "METAL_STRUCTURE",
+      "name_en": "METAL STRUCTURE",
+      "name_zh": "METAL STRUCTURE 解体匠机",
+      "category": "tamashii_figure",
+      "typical_scale": [
+        "non-scale",
+        "various"
+      ],
+      "introduced": null,
+      "status": "active",
+      "parent_code": null,
+      "aliases": [
+        "METAL STRUCTURE 解体匠機",
+        "解体匠機"
+      ],
+      "notes_zh": "TAMASHII NATIONS 的大型合金内构成品线。"
+    },
+    {
+      "code": "TAMASHII_OTHER",
+      "name_en": "Tamashii Nations (other lines)",
+      "name_zh": "魂系列 其他成品",
+      "category": "tamashii_figure",
+      "typical_scale": [
+        "non-scale",
+        "various"
+      ],
+      "introduced": null,
+      "status": "active",
+      "parent_code": null,
+      "aliases": [
+        "FORMANIA EX",
+        "ABSOLUTE ACT",
+        "PROPLICA",
+        "輝艦大全",
+        "アーマーガールズプロジェクト",
+        "PROJECT BM!"
+      ],
+      "notes_zh": "TAMASHII NATIONS 其他高达相关成品线（FORMANIA EX、PROPLICA、輝艦大全等），子线写在 subline。"
     },
     {
       "code": "AC30MM",

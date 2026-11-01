@@ -49,7 +49,8 @@ const MEDIA_RULES = [
   ["video_game", /PlayStation|<\s*(?:PS[345]|Nintendo Switch\s*2?|Switch\s*2?)\s*>|\bXbox\b/i],
   ["board_game", /ボードゲーム|Board Game/i],
   ["ticket", /チケット\s*(?:≪|<<|抽選|リセール)|(?:入場|観覧|参加)券(?!付)/],
-  ["sales_page", /販売ページ$/],
+  // Bulk-buy pages ("【６個まとめ買い】") sell n copies of a kit the catalog has.
+  ["sales_page", /販売ページ$|まとめ買い/],
   [
     "book",
     /画集(?!表紙|描き下ろし)|ART ?WORKS|図録|記録全集|MEMORIAL BOOK|Anniversary ALBUM|Trailer's Trail|advertising works|設定資料集|お疲れ様本|^CONCEPT ?\d$/i,
@@ -59,7 +60,8 @@ const MEDIA_RULES = [
     "card_game",
     /(?<!ジャンボ)カードダス|カードゲーム(?!.*(?:アクリル|チャーム))|BOOSTER PACK|ブースターパック|SDコマンド戦記 ミッションボックス|^(?:新約)?SDガンダム外伝(?!.*(?:BB戦士|SDX|フィギュア|ガシャポン))/i,
   ],
-  ["food", /クッキー|グミ(?!ュ)|キャンディ|お菓子|焼き菓子/],
+  // "HGPG プチッガイ ソーダポップブルー&アイスキャンディー" is a kit colour name.
+  ["food", /(?<!プチッガイ.*)(?:クッキー|グミ(?!ュ)|キャンディ|お菓子|焼き菓子)/],
 ];
 
 const GOODS_RULES = [

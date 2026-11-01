@@ -6,12 +6,19 @@
 // and holds real Japanese product pages — snapshots stay current to within days
 // — so the catalog reads Premium Bandai through the archive instead.
 //
-// Two passes:
+// Three passes:
 //   1. enrich  — for PB links already recovered from BANDAI SPIRITS pages, pull
 //                the fields only the PB page carries (price, order window,
 //                shipping month, availability).
 //   2. discover — list recently archived item pages via the CDX API and import
 //                the ones belonging to a franchise this catalog tracks.
+//   3. listing — archived pages of the Premium Bandai Gunpla category list
+//                (hobby/a0001/list-da20-nN, 20 kits a page, ~200 pages). Discover
+//                only sees item pages archive.org happened to capture in the last
+//                weeks; the category list names every PB Gunpla item the store
+//                still shows — HG/MG/RG limiteds, Gundam Base and EXPO kits —
+//                with name, price, shipping month and image, so a kit gets a
+//                record from its listing card and is enriched later.
 //
 // Both passes are incremental and budgeted: archive.org is a free service, so a
 // daily run touches a bounded number of snapshots and records what it saw.
@@ -37,6 +44,9 @@ const limit = Number(args.get("limit") || 200);
 const discoverDays = Number(args.get("discover-days") || 45);
 const concurrency = Math.max(1, Math.min(4, Number(args.get("concurrency") || 3)));
 const force = args.get("force") === "true";
+// Listing pages read per run (pass 3); each page is one archive.org request.
+const listingPages = Math.max(0, Number(args.get("listing-pages") || 30));
+const LISTING_PREFIX = "p-bandai.jp/hobby/a0001/list-da20-n";
 
 function today() {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
@@ -104,6 +114,90 @@ async function fetchSnapshot(itemUrl) {
   } finally {
     clearTimeout(timeout);
   }
+}
+
+// Latest capture of every archived page of the Gunpla category list.
+async function fetchListingCaptures() {
+  const query = new URLSearchParams({
+    url: LISTING_PREFIX,
+    matchType: "prefix",
+    fl: "original,timestamp,length",
+    filter: "statuscode:200",
+    limit: "20000",
+  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 90000);
+  try {
+    const response = await fetch(`https://web.archive.org/cdx/search/cdx?${query}`, {
+      signal: controller.signal,
+      headers: { "User-Agent": "HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)" },
+    });
+    if (!response.ok) throw new Error(`CDX HTTP ${response.status}`);
+    const latest = new Map();
+    for (const line of (await response.text()).split("\n")) {
+      const [original, timestamp, length] = line.trim().split(/\s+/);
+      const key = /\/hobby\/a0001\/(list-da20-n\d+)\/?$/.exec(original || "")?.[1];
+      if (!key || (Number(length) && Number(length) < 4000)) continue;
+      if (!latest.has(key) || latest.get(key) < timestamp) latest.set(key, timestamp);
+    }
+    return latest;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+async function fetchListingPage(key, timestamp) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 45000);
+  try {
+    const response = await fetch(`https://web.archive.org/web/${timestamp}id_/https://p-bandai.jp/hobby/a0001/${key}/`, {
+      signal: controller.signal,
+      redirect: "follow",
+      headers: { "User-Agent": "HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)" },
+    });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const html = new TextDecoder("shift_jis").decode(Buffer.from(await response.arrayBuffer()));
+    if (/アクセス制限|global_newpc/.test(html)) throw new Error("archived copy is the geo-block page");
+    return html;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+function listingNameMonth(name) {
+  const match = /(\d{4})年\s*(\d{1,2})月[^】]{0,4}?発送/.exec(String(name).normalize("NFKC"));
+  return match ? `${match[1]}-${String(match[2]).padStart(2, "0")}` : null;
+}
+
+// One card of the category list: item id, name, price, shipping month, image.
+export function parseListingCards(html) {
+  const cards = [];
+  for (const block of html.split('<div class="article_area">').slice(1)) {
+    const itemId = /\/item\/item-(\d{10})\//.exec(block)?.[1];
+    const name = decodeEntities(/<p class="article_title"><a[^>]*>([\s\S]*?)<\/a>/.exec(block)?.[1]?.replace(/<[^>]+>/g, "") || "");
+    if (!itemId || !name) continue;
+    const price = Number(/<p class="price">([\d,]+)円/.exec(block)?.[1]?.replace(/,/g, ""));
+    const ship = /RESERVE_(\d{4})(\d{2})\.gif/.exec(block);
+    const thumb = /<img src="((?:https?:)?\/\/bandai-a\.akamaihd\.net\/bc\/img\/model\/[a-z]\/\d+_1\.jpg)"/.exec(block)?.[1];
+    const icons = [...block.matchAll(/icon\/[A-Z_0-9]+\.gif" alt="([^"]*)"/g)].map((match) => match[1]);
+    cards.push({
+      item_url: `https://p-bandai.jp/item/item-${itemId}/`,
+      item_id: itemId,
+      name,
+      description: "",
+      // The list shows the 90px thumbnail (model/m); model/b is the same photo full size.
+      image: thumb ? thumb.replace(/^\/\//, "https://").replace("/model/m/", "/model/b/") : null,
+      price_jpy: Number.isFinite(price) && price > 0 ? price : null,
+      availability: icons.includes("在庫無し") ? "sold_out" : icons.includes("予約") ? "preorder" : null,
+      work_title: null,
+      // Older cards have no shipping icon, but the name often says
+      // "【２次：２０１９年７月発送】".
+      release_date: ship ? `${ship[1]}-${ship[2]}` : listingNameMonth(name),
+      order_opens_at: null,
+      order_closes_at: null,
+    });
+  }
+  return cards;
 }
 
 async function fetchRecentItemUrls(sinceDate) {
@@ -369,8 +463,9 @@ for (const kit of catalog.kits) {
   }
 }
 
-// Pass 1: known PB links that have not been enriched yet (or are stale).
-const enrichTargets = [...kitsByPbUrl.keys()].filter((url) => force || !index.entries[url]);
+// Pass 1: known PB links that have not been enriched yet (or are stale). Kits
+// made from a listing card (pass 3) still lack the order window.
+const enrichTargets = [...kitsByPbUrl.keys()].filter((url) => force || !index.entries[url] || index.entries[url].status === "listed");
 
 // Pass 2: recently archived item pages the catalog has never seen.
 const sinceDate = new Date(Date.now() - discoverDays * 86400000).toISOString().slice(0, 10).replace(/-/g, "");
@@ -390,16 +485,68 @@ const targets = [
   ...discovered.slice(0, Math.floor(budget / 2)).map((url) => ({ url, mode: "discover" })),
 ];
 
-if (!targets.length) {
-  console.log("Nothing to fetch; every known Premium Bandai link is already enriched.");
-  process.exit(0);
-}
-
 const kitsById = new Map(catalog.kits.map((kit) => [kit.kit_id, kit]));
 let enriched = 0;
 let added = 0;
 let skipped = 0;
 let failed = 0;
+
+// Pass 3: the Gunpla category list. Pages never read come first, then the ones
+// whose newest capture is newer than the copy read last time.
+index.listing_pages = index.listing_pages || {};
+let listed = 0;
+if (listingPages > 0) {
+  let captures = new Map();
+  try {
+    captures = await fetchListingCaptures();
+  } catch (error) {
+    console.warn(`CDX listing-page query failed: ${error.message}`);
+  }
+  const pages = [...captures.entries()]
+    .filter(([key, timestamp]) => force || index.listing_pages[key]?.timestamp !== timestamp)
+    .sort(([a], [b]) => {
+      const seenA = index.listing_pages[a]?.checked_at || "";
+      const seenB = index.listing_pages[b]?.checked_at || "";
+      return seenA.localeCompare(seenB) || a.localeCompare(b, "en", { numeric: true });
+    })
+    .slice(0, listingPages);
+  for (const [key, timestamp] of pages) {
+    try {
+      const cards = parseListingCards(await fetchListingPage(key, timestamp));
+      for (const card of cards) {
+        if (kitsByPbUrl.has(card.item_url) || kitsById.has(slugifyId(card.item_id))) continue;
+        // Everything in this category is a Gunpla kit; the name rules only
+        // decide whether it belongs to another franchise the catalog tracks.
+        const rule =
+          matchFranchise(card) ||
+          (gundamGradeFromName(card.name) ? FRANCHISE_RULES.find((entry) => entry.franchise === "gundam") : null);
+        if (!rule) continue;
+        if (nonCollectibleReason({ franchise: rule.franchise, names: { ja: card.name } })) continue;
+        const kit = toKit(card, rule);
+        if (retired.has(kit.kit_id)) continue;
+        kit.source_refs[0].fields = ["names", "images", "price_jpy", "release_date"];
+        kit.notes = "Imported from an archive.org snapshot of the Premium Bandai Japan Gunpla category list.";
+        kit.premium_bandai.captured_via = "wayback_listing";
+        kitsById.set(kit.kit_id, kit);
+        kitsByPbUrl.set(card.item_url, kit);
+        index.entries[card.item_url] = { checked_at: nowIso(), status: "listed", kit_id: kit.kit_id };
+        listed += 1;
+      }
+      index.listing_pages[key] = { timestamp, checked_at: nowIso(), cards: cards.length };
+    } catch (error) {
+      index.listing_pages[key] = { timestamp: null, checked_at: nowIso(), error: String(error.message).slice(0, 120) };
+    }
+    await sleep(2000);
+  }
+  console.log(`Premium Bandai (Wayback) listing: read ${pages.length} category pages, ${listed} new kits.`);
+}
+added += listed;
+
+if (!targets.length && !listed) {
+  console.log("Nothing to fetch; every known Premium Bandai link is already enriched.");
+  await writeFile(INDEX_PATH, `${JSON.stringify({ ...index, updated_at: nowIso() }, null, 2)}\n`, "utf8");
+  process.exit(0);
+}
 
 await mapLimit(targets, concurrency, async ({ url, mode }) => {
   try {
@@ -463,6 +610,7 @@ await writeFile(
       direct_p_bandai_status: "blocked",
       access_method: "wayback_machine",
       entries: index.entries,
+      listing_pages: index.listing_pages,
     },
     null,
     2,
