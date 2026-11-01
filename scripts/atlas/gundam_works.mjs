@@ -10,7 +10,9 @@
 // names     only when GGET has no series for the work (or to override GGET's wording)
 //
 // Every GGET series that has units but is not folded into a work below becomes an
-// automatic work "gget-<id>" with GGET's names and the timeline from AUTO_TIMELINE.
+// automatic work with GGET's names and the timeline from AUTO_TIMELINE. Its id is a slug of
+// the English title ("Mobile Suit Gundam: Gihren's Greed" -> "gihrens-greed"); the GGET series
+// id stays available as gget_series_id. "gget-<id>" is used only when no slug can be made.
 
 export const TIMELINES = [
   { id: "UC", names: { ja: "宇宙世紀", en: "Universal Century", ko: "우주세기", zh: "宇宙世纪" }, eras: ["Universal Century", "Universal Century (Thunderbolt)", "Universal Century (thunderbolt)", "Universal Century (For the Barrel)"] },
@@ -89,6 +91,8 @@ export const WORKS = [
   // ---- SD ----
   { id: "sd-gundam-gaiden", timeline: "SD", gget: [7050, 7051, 7052, 7053, 7300], wiki: [/^SD Gundam (Gaiden|Side Story)/] },
   { id: "sd-sengokuden", timeline: "SD", gget: [7001], wiki: [/Sengokuden/] },
+  // BB戦士 三国伝 (2007-2011 and the later 群雄割拠 sets): generals glued to MS names.
+  { id: "sd-sangokuden", timeline: "SD", names: { ja: "SDガンダム三国伝 Brave Battle Warriors", en: "SD Gundam Sangokuden Brave Battle Warriors", ko: "SD건담 삼국전 Brave Battle Warriors", zh: "SD高达三国传 Brave Battle Warriors" }, wiki: [/Sangokuden/i] },
   { id: "sd-gundam-world-soketsuden", timeline: "SD", gget: [7250], legacy: ["sangoku"], wiki: [/Sangoku Soketsuden/i] },
   { id: "sd-gundam-world-heroes", timeline: "SD", names: { ja: "SDガンダムワールド ヒーローズ", en: "SD Gundam World Heroes", ko: "SD건담 월드 히어로즈", zh: "SD高达世界 群英集" }, wiki: [/SD Gundam World Heroes/i] },
 ];
@@ -124,10 +128,23 @@ export function buildWorks(ggetSeries) {
       auto: false,
     };
   });
+  const taken = new Set(works.map((w) => w.id));
+  const slugOf = (s) => {
+    const en = String(s.names?.en || "")
+      .normalize("NFKC")
+      .replace(/^Mobile Suit Gundam\b:?\s*(?=\S)/i, "")
+      .toLowerCase()
+      .replace(/['’]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+    return en && !taken.has(en) ? en : `gget-${s.id}`;
+  };
   for (const s of ggetSeries || []) {
     if (folded.has(s.id) || !s.names?.ja || !(s.units > 0)) continue;
+    const id = slugOf(s);
+    taken.add(id);
     works.push({
-      id: `gget-${s.id}`,
+      id,
       timeline: AUTO_TIMELINE[s.id] || "OTHER",
       gget: [s.id],
       manual: [],

@@ -22,8 +22,9 @@ const PREFIX = new RegExp(
 const LIMITED = /(ガンダムベース(?:東京|福岡|サテライト[^\s]*)?|THE\s*GUNDAM\s*BASE|プレミアムバンダイ|プレバン|イベント|GUNDAM\s*SIDE-F|ホビーオンラインショップ|魂ウェブ商店|TAMASHII\s*NATIONS\s*STORE|ガンダムカフェ|ガンプラEXPO)\s*(?:限定|販売)?/gi;
 const FINISH = /(スペシャル)?(ハーフメカニカルクリア|メカニカルクリア|プラスクリア外装|クリアカラー|メタリック(?:カラー|コーティング)?|メッキ|コーティング|エクストラフィニッシュ|リアルタイプカラー|リアルタイプ|ペインティングモデル|グロスインジェクション|パールグロス|チタニウムフィニッシュ|クリアパーツ付き|クリアパーツ|蓄光|クリア|ライトパッケージVer|アニメカラー|アニメーションカラー|最終決戦仕様|最終決戦イメージカラー|劇中カラー|リミテッドカラー|ゴールドインジェクション|レインボー|カラークリア|再販版?|再生産|初回限定|数量限定|期間限定|限定品?)/g;
 // "<MS>用 <accessory>" (but not 専用): keep the MS, mark the kit as an accessory.
-const ACCESSORY = /(?<!専)用\s*(?:の)?\s*[^\s]{0,16}?\s*(ミッションパック|フィン・ファンネル|拡張|オプション|エフェクト|武器|ウェポン|パーツ|フルアーマー|強化|ブースター|装備|改造|カスタム|リペア|ディテールアップ|専用|水転写|デカール|マーキング|ベース|ディスプレイ|スタンド|LED|ユニット|セット|キット|アーマー|バックパック|アクション).*$/;
-const ACCESSORY_WORDS = /(拡張パーツ|拡張セット|拡張ユニット|エフェクトユニット|エフェクトパーツ|ウェポンセット|武器セット|オプションパーツ|カスタマイズパーツ|カスタマイズキット|カスタマイズマテリアル|ディテールアップ|ミキシング|LEDユニット|ビルドパーツ|アクションベース|水転写式デカール|デカール)/;
+// "装備型" is a loadout of the MS itself (G-セルフ(大気圏用パック装備型)), not an accessory.
+const ACCESSORY = /(?<!専)用\s*(?:の)?\s*[^\s]{0,16}?\s*(ミッションパック|フィン・ファンネル|拡張|オプション|エフェクト|武器|ウェポン|パーツ|フルアーマー|強化|ブースター|装備(?!型)|改造|カスタム|リペア|ディテールアップ|専用|水転写|デカール|マーキング|ベース|ディスプレイ|スタンド|LED|ユニット|セット|キット|アーマー|バックパック|アクション).*$/;
+const ACCESSORY_WORDS = /(拡張パーツ|拡張セット|拡張ユニット|エフェクトユニット|エフェクトパーツ|エフェクトセット|ウェポンセット|武器セット|オプションパーツ|カスタマイズパーツ|カスタマイズキット|カスタマイズマテリアル|ディテールアップ|ミキシング|LEDユニット|ビルドパーツ|アクションベース|水転写式デカール|デカール)/;
 
 export const PLASTIC_GRADES = new Set(["HG", "MG", "RG", "PG", "NG", "EG", "RE100", "FM", "MGSD", "MGEX", "SD", "SDW", "SDEX", "PGU", "AG", "FG", "HY2M"]);
 export const FIGURE_GRADES = new Set(["ROBOT_SPIRITS", "METAL_BUILD", "METAL_ROBOT", "CONVERGE", "GFRAME", "MSE", "GSF", "MOBILITY", "ARTIFACT", "SH_FIGUARTS", "SUPERIOR"]);
@@ -61,6 +62,8 @@ export function kitJoinKey(raw) {
 export function cleanKitName(raw, workPrefixes = []) {
   let s = nfkc(raw);
   s = s.replace(/【[^】]*】|<[^>]*>|＜[^＞]*＞|〈[^〉]*〉|《[^》]*》/g, " ");
+  // "RX-78 / C.A. キャスバル専用ガンダム", "TMF / A-803 ラゴゥ": rejoin model numbers split by " / "
+  s = s.replace(/([A-Za-z0-9.])\s+\/\s*([A-Za-z0-9])|([A-Za-z0-9.])\s*\/\s+([A-Za-z0-9])/g, (m0, a, b, c, d) => `${a || c}/${b || d}`);
   // [..] holds both tags ([クリアカラー]) and MS names (TR-6[ウーンドウォート], RX-79[G]): mark it, decide later.
   s = s.replace(/\[([^\]]*)\]/g, " ⟦$1⟧ ").replace(/^\s*(⟦[^⟧]*⟧\s*)+/, "");
   s = s.replace(/～[^～]*～|~[^~]*~/g, " ");
@@ -91,9 +94,17 @@ export function cleanKitName(raw, workPrefixes = []) {
   }
   s = s.replace(FINISH, " ");
   // Trailing colour / edition words after the MS name: "ジム改 スタンダードカラー", "Zガンダム バージョン".
+  // A word glued to the next set member keeps the member: "スタンダードカラー＆ボール改修型" -> "＆ボール改修型".
+  const TAIL_WORD = /カラー|バージョン|ver\.?$|エディション|edition|仕様$|^版$|Ver$/i;
   const dropTail = (t) => {
     const words = t.replace(/\s+/g, " ").trim().split(" ");
-    return words.filter((w, i) => i === 0 || !/カラー|バージョン|ver\.?$|エディション|edition|仕様$|^版$|Ver$/i.test(w)).join(" ");
+    const out = [];
+    words.forEach((w, i) => {
+      const glued = i > 0 && w.match(/^(.*?)([&＆+＋])(.+)$/);
+      if (glued && TAIL_WORD.test(glued[1]) && !/パーツ|セット|ユニット|エフェクト/.test(glued[3])) out.push(`${glued[2]}${glued[3]}`);
+      else if (i === 0 || !TAIL_WORD.test(w)) out.push(w);
+    });
+    return out.join(" ");
   };
   const keepB = (t) => t.replace(/[⟦⟧]/g, " ");
   const dropB = (t) => t.replace(/⟦[^⟧]*⟧/g, " ");
@@ -110,12 +121,16 @@ export function cleanKitName(raw, workPrefixes = []) {
     push(dropTail(stripParens(keepB(s))), "full");
   }
   push(withParens, "full");
+  // Short Latin qualifier in brackets names the MS: "ガンダム(G3)" is the G-3 Gundam.
+  const qual = dropB(s).match(/^(.+?)\s*[(（]\s*([A-Za-z][A-Za-z0-9-]{0,5})\s*[)）]\s*$/);
+  if (qual) push(`${qual[2]}${dropTail(qual[1])}`, "full");
   push(noParens, "full");
   // Quoted nicknames: 高機動型ザク“サイコ・ザク”, ザクI“旧ザク”
   const q = noParens.match(/^(.*?)\s*[“"”]([^“"”]+)[”"]\s*(.*)$/);
   if (q) {
-    push(`${q[1]} ${q[3]}`.trim(), "full");
+    // the nickname is the more specific name: 高機動型ザク“サイコ・ザク” is the Psycho Zaku
     push(q[2], "full");
+    push(`${q[1]} ${q[3]}`.trim(), "full");
   }
   // "MS-06F ザク・マインレイヤー" -> "ザク・マインレイヤー" (the model step handles the number)
   const lead = noParens.match(/^([A-Za-z0-9][A-Za-z0-9\-\/\[\].+νΞ]*-[A-Za-z0-9\-\/\[\].+νΞ]*)\s*(.+)$/);
@@ -140,9 +155,22 @@ export function splitPilotCustom(text) {
 
 /** Split a set name into member names ("A&B", "A+B", "A・Bセット"). */
 export function splitSet(text) {
-  const t = nfkc(text).replace(/(\d+\s*(?:機|体))?\s*セット$/, "").trim();
-  const parts = t.split(/\s*(?:&|＆|\+|＋|\s+vs\.?\s+|\s+VS\s+|\/)\s*/).map((p) => p.trim()).filter((p) => nameKey(p).length >= 2);
-  return parts.length >= 2 ? parts : null;
+  let t = nfkc(text).replace(/(\d+\s*(?:機|体))?\s*セット$/, "").trim();
+  // "+" and "/" inside model numbers are not set separators: GAT-X105+AQM/E-X01, MS-09F/TROP
+  const MODEL_JOIN = /(?<![A-Za-z0-9-])([A-Z0-9][A-Za-z0-9-]*\d[A-Za-z0-9-]*|[A-Z][A-Z0-9-]*)\s*([+\/])\s*([A-Z0-9][A-Za-z0-9-]*)(?=$|\s|[^A-Za-z0-9-])/;
+  for (let i = 0; i < 6 && MODEL_JOIN.test(t); i++) t = t.replace(MODEL_JOIN, (_, a, op, b) => `${a}${op === "+" ? "\u0001" : "\u0002"}${b}`);
+  const restore = (p) => p.replace(/\u0001/g, "+").replace(/\u0002/g, "/");
+  // "vs" also appears without spaces between Japanese names (νガンダムvsサザビー)
+  const raw = t.split(/\s*(?:&|＆|\+|＋|\/|(?<![A-Za-z])vs\.?(?![A-Za-z])|\s+VS\s+)\s*/i).map((p) => restore(p.trim()));
+  // "ユニコーンガンダム1号機&2号機": a bare unit number continues the previous member's name
+  const parts = [];
+  for (const p of raw) {
+    const prev = parts[parts.length - 1];
+    if (prev && /^\d+号機$/.test(p) && /\d+号機$/.test(prev)) parts.push(prev.replace(/\d+号機$/, p));
+    else parts.push(p);
+  }
+  const kept = parts.filter((p) => nameKey(p).length >= 2);
+  return kept.length >= 2 ? kept : null;
 }
 
 export const isSetName = (text) => /セット|&|＆|\+|＋|\d\s*機|\d\s*体/.test(nfkc(text));
@@ -151,4 +179,31 @@ export function janOf(kit) {
   const urls = (kit.source_urls || []).join(" ");
   const m = urls.match(/(?:prd_id|jan_code|jan)=(\d{13})/) || String(kit.kit_id).match(/(?:^|-)(\d{13})000$/);
   return m ? m[1] : null;
+}
+
+// Kanji that start real MS names; anything else glued in front of an MS name on a BB戦士 box is
+// a 三国伝 general (司馬懿サザビー, 孔明νガンダム, 天翔竜 孔明νガンダム).
+const MS_KANJI_PREFIX = /^(量産型|陸戦型|高機動型|試作|先行|指揮官|重装|局地|水中|百式|旧|強化型|完成型|偵察型|宇宙用|地上用|砂漠|寒冷地|真|新|改|獅電|百錬|漏影|辟邪|雷電)/;
+
+/**
+ * SD original characters reuse a real MS name but are not that MS. Returns the SD work id the
+ * kit belongs to (sd-sangokuden, sd-sengokuden, sd-gundam-gaiden, sd-gundam-world-heroes,
+ * sd-gundam-world-soketsuden) or null for ordinary kits (BB戦士 ユニコーンガンダム is a real MS).
+ */
+export function sdOriginalWork(kit, cleaned = "") {
+  const n = nfkc(kit.names?.ja || "");
+  const sdLine = kit.grade_code === "SD" || kit.grade_code === "SDW" || /BB戦士|SDガンダム|SDW|SDCS|SDEX|LEGEND\s*BB/i.test(n);
+  if (kit.grade_code === "SDW" || /SDW\s*HEROES/i.test(n)) return "sd-gundam-world-heroes";
+  if (/創傑伝/.test(n)) return "sd-gundam-world-soketsuden";
+  if (/武者|頑駄無|戦国伝|戦国アストレイ|機兵伝説|大将軍|闇将軍/.test(n)) return "sd-sengokuden";
+  if (/騎士|ナイトガンダム|SDガンダム外伝|剣士ゼータ|闘士/.test(n)) return "sd-gundam-gaiden";
+  if (sdLine && /三国伝|三国/.test(n)) return "sd-sangokuden";
+  // 戦国伝 characters (蒼天丸, 超将軍闘我, 少年法師霧丸) and 三国伝 troops / mounts (部隊兵, 白銀流星馬)
+  if (sdLine && /BB戦士/.test(n) && /丸|将軍|法師|導師|軍師|剣豪|精太/.test(nfkc(cleaned))) return "sd-sengokuden";
+  if (sdLine && /BB戦士/.test(n) && /^[一-鿿]{2,}$/.test(nfkc(cleaned).replace(/\s+/g, ""))) return "sd-sangokuden";
+  if (sdLine && /BB戦士/.test(n)) {
+    const m = nfkc(cleaned).match(/^(?:[一-鿿]{1,5}\s+)?([一-鿿]{1,4})\s*(?=[ァ-ヶA-Za-zΑ-Ωα-ω0-9])/);
+    if (m && !MS_KANJI_PREFIX.test(m[1])) return "sd-sangokuden";
+  }
+  return null;
 }

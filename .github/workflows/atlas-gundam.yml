@@ -1,9 +1,13 @@
 name: Atlas Gundam MS data
 
 # Weekly refresh of the Hobby Atlas Gundam MS master and kit <-> MS links
-# (data/atlas/gundam-*). Sources: soshage.com GGET API, Gunplapedia + Gundam Wiki
-# (MediaWiki API), Bandai Hobby WEB取説. Every fetch step keeps its previous snapshot when a
-# source fails, and the build refuses to overwrite outputs on a large drop in linked kits.
+# (data/atlas/gundam-*). Sources: soshage.com GGET API, Bandai Hobby WEB取説, and (only after a
+# human confirmed Fandom's robots/API policy) Gunplapedia + Gundam Wiki via the MediaWiki API.
+# Fandom's robots.txt answers our bot with a Cloudflare challenge, so the Fandom steps stay off
+# until the repository variable ATLAS_FANDOM_CONFIRMED is set to 1 (or a manual run ticks
+# "fandom_confirmed"); meanwhile the committed Fandom snapshots are used.
+# Every fetch step keeps its previous snapshot when a source fails, and the build refuses to
+# overwrite outputs on a large drop in linked kits or localized MS names.
 # Only data/atlas/gundam-* is ever committed.
 
 on:
@@ -17,6 +21,10 @@ on:
         default: false
       full_manual:
         description: "Re-read every WEB取説 listing page"
+        type: boolean
+        default: false
+      fandom_confirmed:
+        description: "I checked Fandom's robots.txt / API policy and this run may read gunpla.fandom.com and gundam.fandom.com"
         type: boolean
         default: false
   # Re-link after the catalogue changes (offline build, no network fetch).
@@ -50,11 +58,18 @@ jobs:
         with:
           node-version: 22
 
+      # One HTTP cache entry per ISO week (not per run); build-only runs neither restore nor save it.
+      - name: Cache key
+        id: week
+        if: github.event_name != 'workflow_run' && !inputs.build_only
+        run: echo "key=atlas-gundam-$(date -u +%G-W%V)" >> "$GITHUB_OUTPUT"
+
       - name: Restore HTTP cache
-        uses: actions/cache@v4
+        if: steps.week.outputs.key != ''
+        uses: actions/cache/restore@v4
         with:
           path: ${{ runner.temp }}/atlas-cache
-          key: atlas-gundam-${{ github.run_id }}
+          key: ${{ steps.week.outputs.key }}
           restore-keys: atlas-gundam-
 
       - name: Fetch sources and build
@@ -62,6 +77,7 @@ jobs:
         env:
           ATLAS_CACHE_DIR: ${{ runner.temp }}/atlas-cache
           ATLAS_MANUAL_FULL: ${{ inputs.full_manual && '1' || '' }}
+          ATLAS_FANDOM_CONFIRMED: ${{ (vars.ATLAS_FANDOM_CONFIRMED == '1' || inputs.fandom_confirmed) && '1' || '' }}
           BUILD_ONLY: ${{ (github.event_name == 'workflow_run' || inputs.build_only) && '1' || '' }}
         run: |
           if [ "$BUILD_ONLY" = "1" ]; then
@@ -69,6 +85,14 @@ jobs:
           else
             node scripts/atlas/run_gundam.mjs
           fi
+
+      - name: Save HTTP cache
+        if: always() && steps.week.outputs.key != ''
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/atlas-cache
+          key: ${{ steps.week.outputs.key }}
+        continue-on-error: true # the week's entry may already exist
 
       - name: Commit updated Atlas Gundam data
         run: |

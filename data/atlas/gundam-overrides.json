@@ -1,19 +1,23 @@
-{
-  "_about": "Human-maintained kit -> MS fixes for scripts/atlas/build_gundam_ms.mjs. Format: {\"<kit_id from data/kits.json>\": [\"<Gundam Wiki MS title or gget:<unit id>>\", ...]}. Overrides always win over the automatic cascade. Pick kit ids from data/atlas/gundam-review-queue.json.",
-  "mg-mg-1-100-ms-06r-ver-2-0-4543112523730000": ["MS-06R-1A Zaku II High Mobility Type"],
-  "ng-1-100-ii-4902425013268000": ["MS-06R-1A Zaku II High Mobility Type"],
-  "ng-1-100-2-4902425013596000": ["MS-06R-2 Zaku II High Mobility Type"],
-  "ng-1-144-ii-4902425013404000": ["MS-06R-2 Zaku II High Mobility Type"],
-  "ng-1-100-4902425013435000": ["FA-78-1 Full Armor Gundam"],
-  "ng-1-144-4902425013145000": ["FA-78-1 Full Armor Gundam"],
-  "ng-1-144-4902425013138000": ["MS-06M Zaku Marine Type"],
-  "ng-1-144-4902425013107000": ["MS-06D Zaku Desert Type"],
-  "hg-hguc-1-144-4543112938299000": ["MSZ-006A1 Zeta Plus A1"],
-  "hg-hguc-1-144-ver-4543112895776000": ["MSZ-006A1 Zeta Plus A1"],
-  "ng-1-100-4902425314495000": ["F71 G-Cannon"],
-  "ng-1-144-r-l-4902425069494000": ["AMX-117R Gaz-R", "AMX-117L Gaz-L"],
-  "ng-1-100-4902425563169000": ["XXXG-01S2 Altron Gundam EW"],
-  "ng-1-144-sp-4902425712635000": ["XXXG-01S2 Altron Gundam EW"],
-  "pbandai-wb-1000255643": ["GN-0000+GNR-010 00 Raiser"],
-  "mg-mg-1-100-4549660210474000": ["GN-0000+GNR-010 00 Raiser"]
-}
+{"schema":1,"sources":[{"name":"Hobby Atlas maintainers (hand-curated kit -> MS fixes)","url":"https://github.com/mdefitko777/Gunpula/blob/main/data/atlas/gundam-overrides.json","licence":"Project data; MS ids are Gundam Wiki page titles (CC BY-SA 3.0, The Gundam Wiki contributors) or gget:<unit id>"}],"about":"Human-maintained kit -> MS fixes for scripts/atlas/build_gundam_ms.mjs. kits: {\"<kit_id from data/kits.json>\": [\"<Gundam Wiki MS title or gget:<unit id>>\", ...]}. Overrides always win over the automatic cascade. Pick kit ids from data/atlas/gundam-review-queue.json. units: {\"<GGET unit id>\": \"<Gundam Wiki MS title>\"} attaches a GGET unit to a page its name does not match. Keep one entry per line, no indentation.","units":{
+"1031000300":"MS-06R Zaku II High Mobility Type (Reuse \"P\" Device)",
+"1031000350":"MS-06R Zaku II High Mobility Type (Reuse \"P\" Device)",
+"1166000250":"XM-X1 Crossbone Gundam X-1 Kai",
+"1200005600":"Ulube's Gundam"
+},"kits":{
+"mg-mg-1-100-ms-06r-ver-2-0-4543112523730000":["MS-06R-1A Zaku II High Mobility Type"],
+"ng-1-100-ii-4902425013268000":["MS-06R-1A Zaku II High Mobility Type"],
+"ng-1-100-2-4902425013596000":["MS-06R-2 Zaku II High Mobility Type"],
+"ng-1-144-ii-4902425013404000":["MS-06R-2 Zaku II High Mobility Type"],
+"ng-1-100-4902425013435000":["FA-78-1 Full Armor Gundam"],
+"ng-1-144-4902425013145000":["FA-78-1 Full Armor Gundam"],
+"ng-1-144-4902425013138000":["MS-06M Zaku Marine Type"],
+"ng-1-144-4902425013107000":["MS-06D Zaku Desert Type"],
+"hg-hguc-1-144-4543112938299000":["MSZ-006A1 Zeta Plus A1"],
+"hg-hguc-1-144-ver-4543112895776000":["MSZ-006A1 Zeta Plus A1"],
+"ng-1-100-4902425314495000":["F71 G-Cannon"],
+"ng-1-144-r-l-4902425069494000":["AMX-117R Gaz-R","AMX-117L Gaz-L"],
+"ng-1-100-4902425563169000":["XXXG-01S2 Altron Gundam EW"],
+"ng-1-144-sp-4902425712635000":["XXXG-01S2 Altron Gundam EW"],
+"pbandai-wb-1000255643":["GN-0000+GNR-010 00 Raiser"],
+"mg-mg-1-100-4549660210474000":["GN-0000+GNR-010 00 Raiser"]
+}}

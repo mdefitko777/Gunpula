@@ -11,6 +11,13 @@
 // (=all) or not at all (=none). Output: data/atlas/gundam-gget-roster.json (compact JSON).
 // If soshage cannot be reached the previous roster is left untouched and the step fails
 // softly (exit code 0 with a warning) so later steps keep working on the previous data.
+// If only a localized list (ko / zh-CN / zh-TW) is missing or comes back untranslated, that
+// language's names are carried over from the previous roster instead of being dropped.
+//
+// Republished fields are limited to what Hobby Atlas needs to identify a unit and link it to
+// an MS: id, icon id, names, model numbers, work (series) membership and transform forms.
+// Game statistics (rarity, role, body type, tags) are not kept; images are hotlinked through
+// thumb_template, never stored.
 import path from "node:path";
 import { politeJson, requestSummary } from "./lib/http.mjs";
 import { ATLAS_DATA, readJson, today, uniq, writeCompactJson } from "./lib/util.mjs";
@@ -27,14 +34,12 @@ const LANGS = [
 ];
 const DETAILS = process.env.ATLAS_GGET_DETAILS || "new";
 
-const ROLE = { 1: "attacker", 2: "defender", 3: "shooter" };
 // "/" belongs to many model numbers (RX-9/A, ZGMF-X56S/γ), so only "," "、" and " / " separate.
 const splitModels = (m) =>
   String(m || "")
     .split(/\s*[,、，]\s*|\s+[\/／]\s+/)
     .map((s) => s.trim())
     .filter((s) => s && s !== "-" && s !== "－");
-const thumb = (icon) => (icon ? `${THUMB}/thum_${icon}.webp` : null);
 const formOf = (u) => ({ id: u.id, icon: u.icon, name: u.name, models: splitModels(u.models) });
 
 async function main() {
@@ -66,21 +71,15 @@ async function main() {
   for (const key of ["ko", "zh", "zh_tw"]) {
     const sample = byLang[key]?.get(ja[0].id)?.name;
     if (sample && sample === byLang.en.get(ja[0].id)?.name) {
-      console.warn(`[gget] ${key} list looks untranslated; dropping it`);
+      console.warn(`[gget] ${key} list looks untranslated; using the previous roster's ${key} names`);
       delete byLang[key];
+      delete seriesLists[key];
     }
   }
-
-  // 2. Tag dictionary.
-  const tags = {};
-  for (const [key, map] of Object.entries(byLang)) {
-    for (const u of map.values()) {
-      for (const t of u.tags || []) {
-        if (!t?.tag) continue;
-        (tags[t.tag_id] ||= {})[key] = t.tag.name;
-      }
-    }
-  }
+  // 2. Languages the previous roster had but this run could not get: carry them over.
+  const carried = (previous?.languages || []).filter((k) => !byLang[k]);
+  const prevSeriesById = new Map((previous?.series || []).map((x) => [x.id, x]));
+  if (carried.length) console.warn(`[gget] carrying ${carried.join("/")} names from the previous roster (${previous.updated_at})`);
 
   // 3. Series master.
   const seriesById = new Map();
@@ -91,6 +90,7 @@ async function main() {
       seriesById.set(s.id, e);
     }
   }
+  for (const e of seriesById.values()) for (const k of carried) if (!e.names[k] && prevSeriesById.get(e.id)?.names?.[k]) e.names[k] = prevSeriesById.get(e.id).names[k];
 
   // 4. Transform details (incremental).
   const details = new Map();
@@ -128,6 +128,10 @@ async function main() {
       if (lu?.short_name && lu.short_name !== lu.name) shortNames[key] = lu.short_name;
     }
     const prev = prevById.get(u.id);
+    for (const k of carried) {
+      if (prev?.names?.[k]) names[k] = prev.names[k];
+      if (prev?.short_names?.[k]) shortNames[k] = prev.short_names[k];
+    }
     const d = details.get(u.id);
     let transforms = prev?.transforms;
     let checked = Boolean(prev?.transforms_checked);
@@ -138,20 +142,8 @@ async function main() {
       checked = true;
     }
     const series = [...(u.series_set || [])].sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0)).map((s) => s.series_id);
-    const out = {
-      id: u.id,
-      icon: u.icon,
-      thumb: thumb(u.icon),
-      names,
-      models: splitModels(u.models),
-      series: uniq(series),
-      tags: uniq((u.tags || []).map((t) => t.tag_id)),
-      rarity: u.rarity,
-      role: ROLE[u.role] || String(u.role ?? ""),
-      body_type: u.body_type,
-    };
+    const out = { id: u.id, icon: u.icon, names, models: splitModels(u.models), series: uniq(series) };
     if (Object.keys(shortNames).length) out.short_names = shortNames;
-    if (u.ult) out.ult = true;
     if (transforms) out.transforms = transforms;
     if (checked) out.transforms_checked = true;
     return out;
@@ -166,15 +158,15 @@ async function main() {
         name: "soshage.com SD Gundam G Generation ETERNAL database",
         url: "https://soshage.com/gget/",
         api: `${BASE}/{ja,en,ko,zh-CN,zh-TW}/unit`,
-        licence: "Fan database, no licence stated; game data © SOTSU・SUNRISE / BANDAI NAMCO Entertainment. Metadata only, personal use, attribution to soshage.com.",
-        images: `Hotlinked from ${THUMB} (not rehosted).`,
+        licence: "Fan database, no licence stated; game data © SOTSU・SUNRISE / BANDAI NAMCO Entertainment. Only identifying metadata is kept (names, model numbers, work membership, forms); no game statistics. Attribution to soshage.com.",
+        images: `Hotlinked from ${THUMB} via thumb_template (not rehosted).`,
         stale,
+        ...(carried.length ? { carried_languages: carried, carried_from: previous.updated_at } : {}),
       },
     ],
     thumb_template: `${THUMB}/thum_{icon}.webp`,
-    languages: Object.keys(byLang),
+    languages: uniq([...Object.keys(byLang), ...carried.filter((k) => units.some((u) => u.names[k]))]),
     series: [...seriesById.values()].filter((s) => usedSeries.has(s.id) || s.stages).sort((a, b) => a.id - b.id),
-    tags,
     units: units.sort((a, b) => a.id - b.id),
   };
   const res = await writeCompactJson(OUT, doc);

@@ -5,12 +5,15 @@
 // Also resolves Gunplapedia "Model of" titles that are redirects on the Gundam Wiki.
 //
 // Output: data/atlas/gundam-src-gundamwiki.json (pipeline snapshot, CC BY-SA 3.0 derived).
+// Fetching is off until a human confirms Fandom's robots/API policy (lib/policy.mjs,
+// ATLAS_FANDOM_CONFIRMED=1); until then this step keeps the committed snapshot.
 // On API failure the previous snapshot is kept; with none, ATLAS_FANDOM_FALLBACK_DIR may point
 // at a research dump (<dir>/fandom/mobile-weapons.json).
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { requestSummary } from "./lib/http.mjs";
 import { cleanWiki, extractTemplate, pageText, queryAll, resolveRedirects, templateParams } from "./lib/mediawiki.mjs";
+import { FANDOM_POLICY } from "./lib/policy.mjs";
 import { ATLAS_DATA, readJson, today, writeCompactJson } from "./lib/util.mjs";
 
 const HOST = "gundam.fandom.com";
@@ -122,6 +125,7 @@ async function main() {
         licence: "CC BY-SA 3.0; attribution: The Gundam Wiki contributors",
         via: result.via,
         stale: result.stale,
+        crawl_policy: FANDOM_POLICY,
       },
     ],
     stats: {

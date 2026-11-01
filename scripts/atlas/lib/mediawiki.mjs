@@ -1,11 +1,13 @@
 // Minimal MediaWiki API client (Fandom) + wikitext infobox helpers.
 import { politeJson } from "./http.mjs";
+import { assertFandomAllowed } from "./policy.mjs";
 
 /**
  * Run an action=query request and follow `continue` until done.
  * `onBatch(json)` receives each response. Returns {requests, stale}.
  */
 export async function queryAll(host, params, onBatch, { maxRequests = 400, ttlHours = 24 * 6, label = "" } = {}) {
+  if (/fandom\.com$/.test(host)) assertFandomAllowed(host);
   let cont = {};
   let requests = 0;
   let stale = false;
@@ -95,6 +97,7 @@ export function cleanWiki(s) {
 
 /** Resolve page titles through redirects (50 per request). Returns Map(from -> to) for those that redirect. */
 export async function resolveRedirects(host, titles, { ttlHours = 24 * 30 } = {}) {
+  if (/fandom\.com$/.test(host)) assertFandomAllowed(host);
   const out = new Map();
   const missing = new Set();
   const list = [...new Set(titles)].filter(Boolean);
