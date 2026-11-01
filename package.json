@@ -6,7 +6,7 @@
   "description": "Gunpla catalog data, validation, and reporting tools.",
   "scripts": {
     "validate": "node scripts/validate_catalog.mjs",
-    "test:unit": "node scripts/test_search_engine.mjs && node scripts/test_collection_store.mjs && node scripts/test_view_state.mjs && node scripts/test_catalog_display.mjs && node scripts/test_update_feed.mjs && node scripts/test_pbandai_market.mjs && node scripts/test_cms_model.mjs && node scripts/test_cms_patches.mjs && node scripts/test_kotobukiya_shop.mjs && node scripts/test_bandai_announcements.mjs && node scripts/test_coverage_parsers.mjs && node scripts/atlas/test_atlas_groups.mjs && node scripts/test_backup_format.mjs",
+    "test:unit": "node scripts/test_search_engine.mjs && node scripts/test_collection_store.mjs && node scripts/test_view_state.mjs && node scripts/test_catalog_display.mjs && node scripts/test_update_feed.mjs && node scripts/test_pbandai_market.mjs && node scripts/test_cms_model.mjs && node scripts/test_cms_patches.mjs && node scripts/test_kotobukiya_shop.mjs && node scripts/test_bandai_announcements.mjs && node scripts/test_coverage_parsers.mjs && node scripts/atlas/test_atlas_groups.mjs && node scripts/test_backup_format.mjs && node scripts/test_restocks.mjs && node scripts/atlas/test_notify_feed.mjs",
     "stats": "node scripts/catalog_stats.mjs",
     "search": "node scripts/search_kits.mjs",
     "sources": "node scripts/source_coverage.mjs",
@@ -58,6 +58,7 @@
     "atlas:groups": "node scripts/build_atlas_groups.mjs",
     "atlas:fate-roster": "node scripts/atlas/build_fate_roster.mjs",
     "atlas:covers": "node scripts/atlas/build_atlas_covers.mjs",
+    "atlas:restocks": "node scripts/build_restocks.mjs",
     "cache:gget-images": "node scripts/cache_gget_images.mjs",
     "import:bbx-db": "node scripts/import_bbx_database.mjs",
     "cache:bbx-images": "node scripts/cache_bbx_images.mjs",

@@ -38,6 +38,10 @@ const STEPS = [
   // After every importer: drops non-collectibles and duplicate sale pages,
   // fixes GUNDAM_MERCH grades, records dropped ids in data/kit-aliases.json.
   { script: "clean:catalog", kind: "derive" },
+  // Restock / resale events (data/atlas/restocks.json) from the sale pages clean:catalog
+  // just folded (data/sale-pages.json), the announcements and, with RESTOCK_BEFORE_PATH,
+  // the release months that moved. Offline.
+  { script: "atlas:restocks", kind: "derive" },
   { script: "relink:images", kind: "derive" },
   { script: "localize", kind: "derive" },
   { script: "check:sources", kind: "required" },
