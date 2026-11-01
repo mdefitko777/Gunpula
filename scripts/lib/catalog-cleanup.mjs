@@ -77,8 +77,15 @@ const GOODS_RULES = [
 
 // Hobby supplies (decals, LED units, builders parts) — tools for building kits,
 // which import_bandai_spirits_gunpla.mjs already leaves out of the catalog.
-const GUNDAM_HOBBY_SUPPLY =
-  /ガンダムデカール|ガンプラLEDユニット|^LEDユニット|ビルダーズパーツ|オプションパーツセット ?ガンプラ|MS(?:エフェクト|スパイク|バーニア)\d|^HGBC\b/i;
+// Plastic accessory kits are not supplies: HGBC weapon/backpack sets, the
+// オプションパーツセット ガンプラ line, the ガンダムベース限定 1/100 MSエフェクト /
+// MSスパイク / MSバーニア kits and the ビルダーズパーツ システムベース action base
+// are injection-moulded Gunpla, often PB or Gundam Base limiteds. They stay,
+// tagged accessory-kit (ACCESSORY_KIT).
+const GUNDAM_HOBBY_SUPPLY = /ガンダムデカール|ガンプラLEDユニット|^LEDユニット|ビルダーズパーツ(?!.*システムベース)/i;
+
+export const ACCESSORY_KIT =
+  /オプションパーツセット ?ガンプラ|MS(?:エフェクト|スパイク|バーニア)\d|^(?:【[^】]*】\s*)*(?:ガンダムベース限定 )?HGBC\b|ビルダーズパーツ.*システムベース/i;
 
 /**
  * Why a record is not a collectible, or null when it is one.
@@ -113,40 +120,78 @@ const GUNDAM_GRADE_RULES = [
   [/Gフレーム/, "GFRAME"],
   [/MOBILE SUIT ENSEMBLE/i, "MSE"],
   [/ガシャポン戦士(?:フォルテ|f\b)/i, "GSF"],
-  [new RegExp(`${P}MGSD(?=\\s)`), "MGSD"],
-  [new RegExp(`${P}MGEX(?=\\s)`), "MGEX"],
-  [new RegExp(`${P}PG ?UNLEASHED(?=\\s)`, "i"), "PGU"],
-  [new RegExp(`${P}RE ?/ ?100(?=\\s)`), "RE100"],
   [/メガサイズ/, "MEGA"],
   [new RegExp(`${P}EXモデル`), "EX"],
   [/SDガンダム ?クロスシルエット|SDCS/, "SDCS"],
   [/SDガンダム ?EXスタンダード/, "SDEX"],
-  [/SDW ?HEROES|SD ?三国創傑伝/, "SDW"],
+  // SD三国創傑伝 (2019-) is SD Gundam World; the 2010 BB戦士 三国伝 stays SD.
+  [/SDW ?HEROES|SD(?:ガンダム)? ?(?:ワールド ?)?三国創傑伝/, "SDW"],
   [/BB戦士|LEGEND ?BB/, "SD"],
   [/ハイレゾリューションモデル|Hi-Resolution Model/i, "HIRM"],
   [/ENTRY GRADE/i, "EG"],
-  [new RegExp(`${P}HG(?:UC|CE|AC|FC|BF|BD|IBO|GTO|BD:R)?(?=\\s)`), "HG"],
+  [/FULL MECHANICS/i, "FM"],
+  [/^(?:【[^】]*】\s*)*HY2M\b/, "HY2M"],
+  // Plastic accessory kits whose names carry no grade token.
+  [/オプションパーツセット ?ガンプラ|MS(?:エフェクト|スパイク|バーニア)\d|システムベース/, "NG"],
+];
+
+// Grade tokens: the one that comes first in the name wins, so "MG サザビー
+// Ver.Ka & RE/100 ナイチンゲール用 エフェクトセット" is an MG set, not an RE/100 kit.
+const GRADE_TOKENS = [
+  [new RegExp(`${P}MGSD(?=\\s)`), "MGSD"],
+  [new RegExp(`${P}MGEX(?=\\s)`), "MGEX"],
+  [new RegExp(`${P}PG ?UNLEASHED(?=\\s)`, "i"), "PGU"],
+  [new RegExp(`${P}RE ?/ ?100(?=\\s)`), "RE100"],
+  // HGCC (the 月光蝶 effect unit) and HGBC (Build Custom parts) are HG lines too.
+  [new RegExp(`${P}HG(?:UC|CE|AC|FC|BF|BD|BC|CC|IBO|GTO|BD:R)?(?=\\s)`), "HG"],
   [new RegExp(`${P}MG(?=\\s)`), "MG"],
   [new RegExp(`${P}RG(?=\\s)`), "RG"],
   [new RegExp(`${P}PG(?=\\s)`), "PG"],
   [new RegExp(`${P}EG(?=\\s)`), "EG"],
   [new RegExp(`${P}FM(?=\\s)`), "FM"],
-  // A plain scale with no grade line is the No Grade (NG) range, e.g. the
-  // After War "1/100 ガンダムヴァサーゴ HG" reruns (HG there is the old 1/100 HG).
-  [/^(?:【[^】]*】\s*)*1 ?\/ ?(?:48|60|100|144|220|550)\s/, "NG"],
 ];
+
+// A plain scale with no grade line is the No Grade (NG) range, e.g. the
+// After War "1/100 ガンダムヴァサーゴ HG" reruns (HG there is the old 1/100 HG).
+const NO_GRADE = /^(?:【[^】]*】\s*)*1 ?\/ ?(?:48|60|100|144|220|550)\s/;
 
 export function gundamGradeFromName(name) {
   const text = nfkc(name);
   for (const [pattern, code] of GUNDAM_GRADE_RULES) {
     if (pattern.test(text)) return code;
   }
-  return null;
+  let best = null;
+  for (const [pattern, code] of GRADE_TOKENS) {
+    const match = pattern.exec(text);
+    if (match && (!best || match.index < best.index)) best = { index: match.index, code };
+  }
+  if (best) return best.code;
+  return NO_GRADE.test(text) ? "NG" : null;
 }
 
+// "RG1/1ガンダムプロジェクトVer." and "REAL GRADE 1/1 GUNDAM PROJECT" name the
+// 1/1 statue in Odaiba, not the scale of the kit.
+export const REAL_GRADE_1_1 = /(?:REAL GRADE|RG) ?1 ?\/ ?1(?!\d)|1 ?\/ ?1 ?(?:GUNDAM PROJECT|ガンダムプロジェクト)/gi;
+
 export function scaleFromName(name) {
-  const match = /(?:^|[^\d/])1 ?\/ ?(24|35|48|60|72|100|144|200|220|250|550|1700)(?![\d])/.exec(nfkc(name));
+  const match = /(?:^|[^\d/])1 ?\/ ?(24|35|48|60|72|100|144|200|220|250|550|1700)(?![\d])/.exec(nfkc(name).replace(REAL_GRADE_1_1, " "));
   return match ? `1/${match[1]}` : null;
+}
+
+/** Image id of a Bandai product photo (bandai-a.akamaihd.net/bc/img/model/b/<id>_1.jpg). */
+export function bandaiImageId(url) {
+  return /\/bc\/img\/model\/[a-z]\/(\d{10})_\d+\./.exec(String(url || ""))?.[1] || null;
+}
+
+/**
+ * BANDAI SPIRITS cards occasionally point at the CMS-internal host
+ * (http://internal-pbn/bc/img/…), which no browser can reach; the same path on
+ * bandai-a.akamaihd.net answered 404 when checked (2026-11-02). Such a URL is
+ * dropped rather than shipped as a broken image.
+ */
+export function publicBandaiImageUrl(url) {
+  if (!url) return url;
+  return /^https?:\/\/internal-pbn\//i.test(String(url)) ? null : String(url);
 }
 
 // ---------------------------------------------------------------------------
@@ -155,11 +200,44 @@ export function scaleFromName(name) {
 
 // 【抽選販売】, 【2次：2027年5月発送分】, 【再販】, 【事後販売】, 【受注販売】,
 // 【2026年11月発送】 … mark a sale of a product, not a different product.
+// 【２次】 (NFKC turns the digits ASCII), 【特典対象】, 【特典付】 and a bare
+// shipping month 【２０２１年４月】 mark a sale too.
 const SALE_TAG =
-  /【(?:[^】]*(?:抽選|発送|再販|事後販売|受注販売|受注生産|予約|送料|販売|プレバン|プレミアムバンダイ|PB限定|PBの日|開催記念|会場|限定品オンライン|特別再販|お届け|総選挙|ご購入の権利)[^】]*)】|※会場受け取り|ご購入の権利|\(\d+月お届け分[^)]*\)/g;
+  /【(?:[^】]*(?:抽選|発送|再販|事後販売|受注販売|受注生産|予約|送料|販売|プレバン|プレミアムバンダイ|PB限定|PBの日|開催記念|会場|限定品オンライン|特別再販|お届け|総選挙|ご購入の権利|特典|\d+次|\d{4}年\s*\d{1,2}月)[^】]*)】|※会場受け取り|ご購入の権利|\(\d+月お届け分[^)]*\)/g;
 
 export function stripSaleTags(name) {
   return nfkc(name).replace(SALE_TAG, " ").replace(/\s+/g, " ").trim();
+}
+
+// Tags clean_catalog.mjs adds; importers keep them when they re-import a kit.
+export const CLEANUP_TAGS = ["accessory-kit", "premium-bandai-sale", "gashapon-wave"];
+
+/**
+ * Re-import of `previous` as `kit` without losing what clean_catalog.mjs folded
+ * into it: source refs of other sources (the PB pages it absorbed), the Premium
+ * Bandai flags and order window, and the cleanup tags. Importers overwrite
+ * every field they own, so without this the next daily run wiped the PB refs
+ * and flags again.
+ */
+export function carryCleanupFields(previous, kit) {
+  if (!previous) return kit;
+  const own = new Set((kit.source_refs || []).map((ref) => ref.source_id));
+  const foreignRefs = (previous.source_refs || []).filter((ref) => !own.has(ref.source_id));
+  const pbFlagged = previous.is_premium_bandai === true || kit.is_premium_bandai === true;
+  const tags = [...(kit.tags || []), ...(previous.tags || []).filter((tag) => CLEANUP_TAGS.includes(tag) && !(kit.tags || []).includes(tag))];
+  return {
+    ...kit,
+    is_limited: Boolean(kit.is_limited) || (previous.is_premium_bandai === true && previous.is_limited === true),
+    ...(pbFlagged ? { is_premium_bandai: true } : {}),
+    ...(previous.premium_bandai && !kit.premium_bandai ? { premium_bandai: previous.premium_bandai } : {}),
+    source_refs: [...(kit.source_refs || []), ...foreignRefs],
+    tags,
+  };
+}
+
+/** True when the name carries a sale tag (resale, lottery, Nth batch, shipping month …). */
+export function hasSaleTag(name) {
+  return new RegExp(SALE_TAG.source).test(nfkc(name));
 }
 
 // Model codes such as RX-78-2, ZGMF-X10A, RX-78GP01Fb, GN-0000+GNR-010. Premium
@@ -175,6 +253,8 @@ export function hasModelCode(name) {
 export function productKey(name, { keepCodes = true } = {}) {
   let text = stripSaleTags(name)
     .replace(/<SIDE MS>|〈SIDE MS〉/gi, " ")
+    // "(RFV)" is how Premium Bandai abbreviates 復讐のレクイエム.
+    .replace(/\bRFV\b/g, "復讐のレクイエム")
     .replace(/^(?:METAL ROBOT魂|ROBOT魂|METAL BUILD)\s*(?:\((?:Ka signature)\))?/i, " ")
     .replace(new RegExp(`${P}(?:HGUC|HGCE|HGAC|HGFC|HG|MGSD|MGEX|MG|RG|PG UNLEASHED|PG|RE ?/ ?100|EG)(?=\\s)`), " ")
     // After War reruns: "1/100 ガンダムヴァサーゴ HG" is the 1996 1/100 HG kit.

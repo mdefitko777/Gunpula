@@ -55,6 +55,13 @@ export function printTable(headers, rows) {
   }
 }
 
+// YYYY, YYYY-MM or YYYY-MM-DD with a real month (01-12) and day (01-31):
+// "2016-70" (a BANDAI SPIRITS typo) must not pass.
 export function isDateLike(value) {
-  return value === null || /^\d{4}(-\d{2}){0,2}$/.test(value);
+  if (value === null) return true;
+  const match = /^\d{4}(?:-(\d{2})(?:-(\d{2}))?)?$/.exec(String(value));
+  if (!match) return false;
+  const [, month, day] = match;
+  if (month && (Number(month) < 1 || Number(month) > 12)) return false;
+  return !day || (Number(day) >= 1 && Number(day) <= 31);
 }

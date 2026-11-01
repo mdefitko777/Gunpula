@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
+import { pathToFileURL } from "node:url";
 import {
   decodeKotobukiyaShopHtml,
   KOTOBUKIYA_AC_PORTAL_URL,
@@ -7,7 +8,7 @@ import {
   parseKotobukiyaShopDetail,
   parseKotobukiyaShopListings,
 } from "./lib/kotobukiya-shop.mjs";
-import { KIT_ALIASES_PATH, gundamGradeFromName, nfkc, nonCollectibleReason, retiredKitIds } from "./lib/catalog-cleanup.mjs";
+import { KIT_ALIASES_PATH, carryCleanupFields, gundamGradeFromName, nfkc, nonCollectibleReason, retiredKitIds } from "./lib/catalog-cleanup.mjs";
 import { extractTamashiiGalleryImages } from "./lib/tamashii-images.mjs";
 
 const CANDY_BASE_URL = "https://www.bandai.co.jp";
@@ -69,6 +70,11 @@ const TAMASHII_GENERIC_TITLE_BRANDS = /^(?:Figuarts mini|超合金の塊)$/;
 // the catalog does not have yet (or has without images/price/date).
 const TAMASHII_DETAIL_BUDGET = Number(process.env.TAMASHII_DETAIL_BUDGET || 300);
 const TAMASHII_DETAIL_GAP_MS = 1100;
+// Detail pages re-read each day even when nothing in the listing changed, so a
+// moved release day or a corrected price on the detail page is picked up within
+// about a month (1,000+ records / 40 a day).
+const TAMASHII_DETAIL_REFRESH_PER_DAY = Number(process.env.TAMASHII_DETAIL_REFRESH || 40);
+const BOT_UA = "HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)";
 
 const HTML_ENTITY_MAP = {
   alpha: "α",
@@ -248,7 +254,7 @@ async function fetchText(url) {
     try {
       const response = await fetch(url, {
         headers: {
-          "user-agent": "Gunpula catalog importer (+https://github.com/mdefitko777/Gunpula)",
+          "user-agent": BOT_UA,
           accept: "text/html,application/xhtml+xml",
           "accept-language": "ja,en-US;q=0.8,en;q=0.7",
         },
@@ -295,7 +301,7 @@ async function fetchJson(url) {
     try {
       const response = await fetch(url, {
         headers: {
-          "user-agent": "Gunpula catalog importer (+https://github.com/mdefitko777/Gunpula)",
+          "user-agent": BOT_UA,
           accept: "application/json",
           "accept-language": "ja,en-US;q=0.8,en;q=0.7",
           "x-requested-with": "XMLHttpRequest",
@@ -320,7 +326,7 @@ async function fetchTamashiiDetailText(url) {
       // A plain, self-identifying request: no browser user-agent, no forged referer.
       const response = await fetch(url, {
         headers: {
-          "user-agent": "HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)",
+          "user-agent": BOT_UA,
           accept: "text/html,application/xhtml+xml",
           "accept-language": "ja,en-US;q=0.8,en;q=0.7",
         },
@@ -792,7 +798,8 @@ async function fetchTamashiiAreaItems(area) {
   const lastPage = firstPage.pagination?.lastPage ?? 1;
 
   for (let page = 2; page <= lastPage; page += 1) {
-    await sleep(500);
+    // About one request a second (~55 pages a run over three areas).
+    await sleep(1000);
     const pageData = await fetchJson(tamashiiSearchUrl(area, page));
     items.push(...(pageData.data ?? []));
   }
@@ -801,7 +808,7 @@ async function fetchTamashiiAreaItems(area) {
   return items;
 }
 
-function tamashiiGradeCode(brandName) {
+export function tamashiiGradeCode(brandName) {
   const name = nfkc(brandName);
   for (const [pattern, code] of TAMASHII_BRAND_GRADES) {
     if (pattern.test(name)) return code;
@@ -854,10 +861,25 @@ function parseTamashiiProductDetail(html, detailUrl) {
   };
 }
 
+// The search listing is read on every run; the detail page (and the values an
+// earlier run stored from it) only now and then. The listing month wins when
+// the two disagree, the detail page only adds the day within that month.
+export function tamashiiReleaseDate(item, detail) {
+  const listed = item.releaseDateData || item.releaseMonth || null;
+  const stored = detail?.release_date || null;
+  if (listed && stored && String(stored).slice(0, 7) !== String(listed).slice(0, 7)) return listed;
+  return stored ?? listed ?? null;
+}
+
+function tamashiiListedPrice(item) {
+  const price = Number(item.price);
+  return Number.isFinite(price) && price > 0 ? price : null;
+}
+
 function buildTamashiiKit(item, detail) {
   const detailUrl = tamashiiItemUrl(item);
   // Listing titles carry the "＜SIDE MS＞" category tag that detail-page titles do not.
-  let title = detail.title || stripTags(item.title).replace(/^s*[＜<]s*SIDE MSs*[＞>]s*/i, "");
+  let title = detail.title || stripTags(item.title).replace(/^\s*[＜<]\s*SIDE MS\s*[＞>]\s*/i, "");
   const brandName = detail.brandName || item.mainBrandName || "ROBOT魂";
   if (item.titleSuffix && !title.endsWith(item.titleSuffix)) title = `${title} ${item.titleSuffix}`;
   const areaTags = item.areas?.includes("japan") ? [] : (item.areas || []).map((area) => `tamashii-${area}-only`);
@@ -874,8 +896,8 @@ function buildTamashiiKit(item, detail) {
     title,
     boxArtUrl: imageUrl,
     galleryUrls: [imageUrl, ...detail.images],
-    releaseDate: detail.release_date ?? item.releaseDateData ?? item.releaseMonth ?? null,
-    priceJpy: detail.price_jpy ?? item.price ?? parsePrice(item.priceTaxStr ?? item.priceText),
+    releaseDate: tamashiiReleaseDate(item, detail),
+    priceJpy: tamashiiListedPrice(item) ?? detail.price_jpy ?? parsePrice(item.priceTaxStr ?? item.priceText),
     isLimited: /限定|抽選|魂ウェブ商店|TAMASHII NATION|魂ストア/i.test(categoryText),
     sourceId: TAMASHII_SOURCE_ID,
     sourceUrls: [detailUrl, tamashiiBrandPageUrl(item.brandCode || "robot_tamashii")],
@@ -888,6 +910,25 @@ function buildTamashiiKit(item, detail) {
     workOverride: inferred.work_title ?? detail.work_title,
     universeOverride: inferred.universe,
   });
+}
+
+// The listing (search API) says when Tamashii moved a release month or changed
+// a price; the stored detail values are stale then.
+export function tamashiiListingChanged(item, kit) {
+  if (!kit) return false;
+  const listedMonth = String(item.releaseDateData || item.releaseMonth || "").slice(0, 7);
+  const storedMonth = String(kit.release_date || "").slice(0, 7);
+  if (/^\d{4}-\d{2}$/.test(listedMonth) && storedMonth && listedMonth !== storedMonth) return true;
+  const listedPrice = Number(item.price);
+  return Number.isFinite(listedPrice) && listedPrice > 0 && Number.isFinite(kit.price_jpy) && listedPrice !== kit.price_jpy;
+}
+
+// Day-based rotation over the Tamashii ids: each id comes up once every
+// ceil(n / perDay) days.
+function tamashiiRefreshDue(webId, index, total, perDay, day = Math.floor(Date.now() / 86400000)) {
+  if (perDay <= 0 || total <= 0) return false;
+  const cycle = Math.max(1, Math.ceil(total / perDay));
+  return index % cycle === day % cycle;
 }
 
 // What an earlier run already read from a detail page, so the page is not
@@ -950,11 +991,39 @@ async function importTamashiiGundamFigures(existingKits = []) {
   let reusedCount = 0;
   let budget = TAMASHII_DETAIL_BUDGET;
   const imported = [];
-  for (const item of listings) {
+  let changedCount = 0;
+  let refreshCount = 0;
+  const order = [...listings].sort((a, b) => Number(a.tamashiiWebId) - Number(b.tamashiiWebId));
+  const rotation = new Map(order.map((item, index) => [item.tamashiiWebId, index]));
+  // Changed listings first, so a moved month always wins the budget.
+  const queue = [...listings].sort(
+    (a, b) =>
+      Number(tamashiiListingChanged(b, existingById.get(`tamashii-${b.tamashiiWebId}`))) -
+      Number(tamashiiListingChanged(a, existingById.get(`tamashii-${a.tamashiiWebId}`))),
+  );
+  for (const item of queue) {
     const detailUrl = tamashiiItemUrl(item);
     const existing = existingById.get(`tamashii-${item.tamashiiWebId}`);
     let detail = tamashiiDetailFromExisting(existing);
-    if (detail) {
+    const changed = Boolean(detail) && tamashiiListingChanged(item, existing);
+    const due = Boolean(detail) && !changed && refreshCount < TAMASHII_DETAIL_REFRESH_PER_DAY &&
+      tamashiiRefreshDue(item.tamashiiWebId, rotation.get(item.tamashiiWebId), order.length, TAMASHII_DETAIL_REFRESH_PER_DAY);
+    if (detail && (changed || due) && budget > 0) {
+      if (changed) changedCount += 1;
+      else refreshCount += 1;
+      const stored = detail;
+      detail = null;
+      budget -= 1;
+      try {
+        detail = parseTamashiiProductDetail(await fetchTamashiiDetailText(detailUrl), detailUrl);
+        detailCount += 1;
+      } catch (error) {
+        console.warn(`Tamashii detail fetch failed for ${detailUrl}: ${error.message}`);
+        // The listing month and price are current; the stored detail values are not.
+        detail = changed ? { ...stored, release_date: null, price_jpy: null } : stored;
+      }
+      await sleep(TAMASHII_DETAIL_GAP_MS);
+    } else if (detail) {
       reusedCount += 1;
     } else if (budget > 0) {
       budget -= 1;
@@ -974,7 +1043,9 @@ async function importTamashiiGundamFigures(existingKits = []) {
     imported.push(buildTamashiiKit(item, detail || emptyDetail));
   }
 
-  console.log(`Fetched ${detailCount} Tamashii detail pages, reused ${reusedCount} from the catalog (budget ${TAMASHII_DETAIL_BUDGET}).`);
+  console.log(
+    `Fetched ${detailCount} Tamashii detail pages (${changedCount} for a changed listing month/price, ${refreshCount} scheduled re-checks), reused ${reusedCount} from the catalog (budget ${TAMASHII_DETAIL_BUDGET}).`,
+  );
   console.log(`Imported ${imported.length} Tamashii Gundam figure records.`);
   return imported;
 }
@@ -1523,7 +1594,8 @@ function mergeKits(existingDoc, imported) {
   const normalizedImported = imported.map((kit) => normalizeKit(kit));
   const byId = new Map(normalizedExisting.map((kit) => [kit.kit_id, kit]));
   for (const kit of normalizedImported) {
-    byId.set(kit.kit_id, kit);
+    // PB refs, PB flags and cleanup tags folded into a record survive the re-import.
+    byId.set(kit.kit_id, carryCleanupFields(byId.get(kit.kit_id), kit));
   }
 
   const kits = [...byId.values()].sort((a, b) => {
@@ -1659,7 +1731,10 @@ async function main() {
   console.log(`Merged ${imported.length} collectible records. Catalog now has ${merged.kits.length} records.`);
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+// The unit tests import the Tamashii helpers; only a direct run imports data.
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
+}

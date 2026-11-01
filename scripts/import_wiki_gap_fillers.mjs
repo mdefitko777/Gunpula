@@ -23,6 +23,7 @@
 import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 import { KIT_ALIASES_PATH, emptyAliases, nfkc, productKey, resolveAlias, retiredKitIds } from "./lib/catalog-cleanup.mjs";
+import { parseWikiTables } from "./lib/wiki-tables.mjs";
 
 const CATALOG_PATH = "data/kits.json";
 const SOURCE_ID = "ja_wikipedia";
@@ -83,99 +84,6 @@ async function fetchRevision(article) {
     }
   }
   throw lastError;
-}
-
-// ---------------------------------------------------------------------------
-// Wikitext tables
-// ---------------------------------------------------------------------------
-
-function cleanWiki(value) {
-  return String(value ?? "")
-    .replace(/<ref[^>]*\/>/g, "")
-    .replace(/<ref[^>]*>[\s\S]*?<\/ref>/g, "")
-    .replace(/\{\{0\}\}/g, "")
-    .replace(/\{\{[^{}]*\}\}/g, "")
-    .replace(/<br\s*\/?>/gi, "\n")
-    .replace(/\[\[(?:[^\]|]*\|)?([^\]]*)\]\]/g, "$1")
-    .replace(/\[https?:[^\s\]]+\s*([^\]]*)\]/g, "$1")
-    .replace(/'''?/g, "")
-    .replace(/<[^>]+>/g, "")
-    .replace(/&nbsp;/g, " ")
-    .split("\n")
-    .map((line) => line.trim())
-    .filter(Boolean)
-    .join("\n");
-}
-
-function splitCellAttributes(cell) {
-  const match = /^\s*((?:[a-z]+\s*=\s*"[^"]*"\s*)+)\|(?!\|)([\s\S]*)$/i.exec(cell);
-  return match ? { attrs: match[1], text: match[2] } : { attrs: "", text: cell };
-}
-
-// Rows of every wikitable between `start` and `end`, with rowspan cells carried down.
-export function parseWikiTables(content, start, end) {
-  const lines = content.split("\n");
-  const from = Math.max(0, lines.findIndex((line) => start.test(line)));
-  const rows = [];
-  let heading = null;
-  let table = null;
-  let cells = null;
-  const flush = () => {
-    if (!table || !cells) return;
-    const out = [];
-    let index = 0;
-    for (let column = 0; column < Math.max(table.columns, 1) || index < cells.length; column += 1) {
-      const pending = table.pending[column];
-      if (pending && pending.remaining > 0) {
-        out.push(pending.text);
-        pending.remaining -= 1;
-        continue;
-      }
-      if (index >= cells.length) break;
-      const { attrs, text } = splitCellAttributes(cells[index]);
-      index += 1;
-      const span = Number(/rowspan\s*=\s*"?(\d+)/i.exec(attrs)?.[1] || 1);
-      if (span > 1) table.pending[column] = { text, remaining: span - 1 };
-      out.push(text);
-    }
-    if (out.length) rows.push({ heading, cells: out.map(cleanWiki) });
-    cells = null;
-  };
-  for (let n = from + 1; n < lines.length; n += 1) {
-    const line = lines[n];
-    if (!table && end.test(line)) break;
-    const headingMatch = /^(=+)\s*(.*?)\s*\1\s*$/.exec(line);
-    if (headingMatch && !table) {
-      heading = headingMatch[2];
-      continue;
-    }
-    if (/^\{\|/.test(line)) {
-      table = { pending: [], columns: 0 };
-      continue;
-    }
-    if (!table) continue;
-    if (/^\|\}/.test(line)) {
-      flush();
-      table = null;
-      continue;
-    }
-    if (/^\|-/.test(line)) {
-      flush();
-      cells = [];
-      continue;
-    }
-    if (/^!/.test(line)) {
-      table.columns = line.replace(/^!/, "").split("!!").length;
-      continue;
-    }
-    if (/^\|/.test(line)) {
-      cells = cells || [];
-      cells.push(...line.replace(/^\|/, "").split("||"));
-      continue;
-    }
-    if (cells?.length) cells[cells.length - 1] += `\n${line}`;
-  }
-  return rows;
 }
 
 // ---------------------------------------------------------------------------
@@ -272,9 +180,12 @@ function sublineFor(name) {
   return "ROBOT魂";
 }
 
+const PB_WEB_SHOP_FROM = 2013;
+
 function toKit(article, row, permalink) {
   const name = nfkc(row.name).replace(/\s+/g, " ").trim();
   const channels = channelSummary(row);
+  const webShop = /魂ウェブ商店/.test(row.note + row.date);
   return {
     kit_id: kitIdFor(article, row),
     franchise: "gundam",
@@ -290,7 +201,9 @@ function toKit(article, row, permalink) {
     release_date: firstDate(row.date),
     price_jpy: null,
     is_limited: LIMITED.test(`${row.date} ${row.note}`),
-    ...(/魂ウェブ商店/.test(row.note + row.date) ? { is_premium_bandai: true } : {}),
+    // 魂ウェブ商店 sold through Premium Bandai only from 2013; the 2009-2012
+    // web exclusives are limited, but not Premium Bandai items.
+    ...(webShop && Number(String(firstDate(row.date) || "").slice(0, 4)) >= PB_WEB_SHOP_FROM ? { is_premium_bandai: true } : {}),
     data_status: "needs_review",
     source_urls: [permalink],
     source_refs: [
@@ -301,10 +214,24 @@ function toKit(article, row, permalink) {
         confidence: "low",
       },
     ],
-    tags: ["gundam", "tamashii nations", "collectible figure", "robot-spirits", "gap-fill", "wikipedia"],
+    tags: ["gundam", "tamashii nations", "collectible figure", "robot-spirits", "gap-fill", "wikipedia", ...(webShop ? ["tamashii-web-shop"] : [])],
     notes:
       `Not in the official Tamashii Web item database. Facts (name, ROBOT魂 No. ${row.no || "-"}, month, sales channel: ${channels}) ` +
       `from the Japanese Wikipedia article 「${article.title}」, revision ${article.revid}, licensed CC BY-SA 4.0. Price and images unknown.`,
+  };
+}
+
+// On a refresh only the fields this source owns change; the English, Chinese
+// and Korean names and the universe localize_catalog.mjs filled in stay, so the
+// catalog is not rewritten every day for nothing.
+function mergeOwnedFields(previous, kit) {
+  if (!previous) return kit;
+  return {
+    ...previous,
+    ...kit,
+    names: { ...(previous.names || {}), ja: kit.names.ja },
+    universe: previous.universe ?? kit.universe,
+    work_title: previous.work_title ?? kit.work_title ?? null,
   };
 }
 
@@ -370,7 +297,7 @@ for (const article of ARTICLES) {
     const kit = toKit(article, row, permalink);
     if (kitsById.has(id)) updated += 1;
     else added += 1;
-    kitsById.set(id, { ...(kitsById.get(id) || {}), ...kit });
+    kitsById.set(id, mergeOwnedFields(kitsById.get(id), kit));
   }
   console.log(`ja.wikipedia ${article.title} oldid ${article.revid}: ${rows.length} rows.`);
 }

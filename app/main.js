@@ -11,7 +11,7 @@ import {
   signOut,
   verifyEmailCode,
 } from "./auth.js";
-import { isNativeShell, loadInitialKitsDoc as loadInitialCatalogSlice, loadJson, loadOptionalJson } from "./catalog-loader.js";
+import { isNativeShell, loadInitialKitsDoc as loadInitialCatalogSlice, loadJson, loadKitAliases, loadOptionalJson } from "./catalog-loader.js";
 import { closeDialog, openDialog } from "./dialogs.js";
 import { appendImageWithFallback as appendImageUrlsWithFallback, resolveImageUrl, setImageFallbackChain as chainImageFallbacks } from "./image-utils.js";
 import {
@@ -21,6 +21,8 @@ import {
   newerByTimestamp as storeNewerByTimestamp,
   normalizeCollection as storeNormalizeCollection,
   normalizeCollectionEntry as storeNormalizeCollectionEntry,
+  remapKitEntries as storeRemapKitEntries,
+  resolveKitAlias as storeResolveKitAlias,
   safeMemberName as storeSafeMemberName,
   timestampMs as storeTimestampMs,
 } from "./collection-store.js";
@@ -340,6 +342,8 @@ const state = {
   // Friends' collections, keyed by handle. Kept separate from state.collection
   // on purpose so they never ride along in my own synced payload.
   friendCollections: {},
+  // Retired kit_id -> surviving kit_id; saved entries and deep links follow it.
+  kitAliases: {},
   activeView: INITIAL_VIEW_STATE.view || localStorage.getItem(ACTIVE_VIEW_KEY) || "home",
   settingsPanel: SETTINGS_PANELS.includes(localStorage.getItem(SETTINGS_PANEL_KEY)) ? localStorage.getItem(SETTINGS_PANEL_KEY) : "home",
   activeModal: INITIAL_VIEW_STATE.modal || null,
@@ -988,6 +992,7 @@ async function init() {
     firstSeenDoc,
     cmsPublished,
     announcementDoc,
+    kitAliases,
   ] = await Promise.all([
     loadJson("../data/grades.json"),
     loadInitialKitsDoc(),
@@ -1003,6 +1008,7 @@ async function init() {
     loadOptionalJson("../data/kit-first-seen.json"),
     loadCmsPublishedState(SYNC_BACKEND),
     loadOptionalJson("../data/announcements.json"),
+    loadKitAliases(),
   ]);
 
   state.grades = gradesDoc.grades;
@@ -1024,12 +1030,14 @@ async function init() {
   state.cmsSeriesLabels = cmsSeriesLabelOverrides(state.cmsPayload);
   state.overrides = loadOverrides();
   state.seriesLabelOverrides = loadSeriesLabelOverrides();
+  // Before the collection is read, so entries saved on a retired id move over.
+  state.kitAliases = kitAliases || {};
   state.collection = loadCollection();
   state.updatedAt = initialCatalog.doc.updated_at;
   refreshKits();
   normalizeState();
   state.releaseMonth = validReleaseMonth(state.releaseMonth) || defaultReleaseMonth();
-  state.selectedKit = state.pendingKitId ? displayKitById(state.pendingKitId) : null;
+  state.selectedKit = state.pendingKitId ? displayKitById(storeResolveKitAlias(state.kitAliases, state.pendingKitId)) : null;
 
   bindEvents();
   registerPwa();
@@ -1224,6 +1232,7 @@ function collectionStoreOptions() {
     self,
     droppedMembers: DROPPED_COLLECTION_MEMBERS,
     memberMerges,
+    kitAliases: state.kitAliases,
   };
 }
 
@@ -3147,7 +3156,7 @@ async function openFriendProfile(friend) {
   if (!handle) return;
   const result = await supabaseRpcV3("gunpula_v3_get_friend_collection", { p_handle: handle });
   const items = result?.collection?.member_items?.[result?.name] || result?.collection?.items || {};
-  state.friendCollections[safeMemberName(result?.name || handle)] = items;
+  state.friendCollections[safeMemberName(result?.name || handle)] = storeRemapKitEntries(items, state.kitAliases);
   openMemberProfile({ name: result?.name || handle, avatar: result?.avatar || "", is_self: false });
 }
 

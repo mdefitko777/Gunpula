@@ -24,6 +24,7 @@
 // daily run touches a bounded number of snapshots and records what it saw.
 import { readFile, writeFile } from "node:fs/promises";
 import { KIT_ALIASES_PATH, gundamGradeFromName, nonCollectibleReason, retiredKitIds, scaleFromName } from "./lib/catalog-cleanup.mjs";
+import { decodeEntities, parseListingCards } from "./lib/pb-listing.mjs";
 
 const CATALOG_PATH = "data/kits.json";
 const INDEX_PATH = "data/premium-bandai-wayback-index.json";
@@ -42,7 +43,13 @@ const args = new Map(
 );
 const limit = Number(args.get("limit") || 200);
 const discoverDays = Number(args.get("discover-days") || 45);
-const concurrency = Math.max(1, Math.min(4, Number(args.get("concurrency") || 3)));
+// One request at a time, about a second apart: archive.org is a free service.
+const concurrency = Math.max(1, Math.min(4, Number(args.get("concurrency") || 1)));
+const REQUEST_GAP_MS = 1000;
+// A failed snapshot fetch is retried after a cool-down, a few times at most.
+const RETRY_AFTER_MS = 7 * 86400000;
+const MAX_ATTEMPTS = 3;
+const UA = "HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)";
 const force = args.get("force") === "true";
 // Listing pages read per run (pass 3); each page is one archive.org request.
 const listingPages = Math.max(0, Number(args.get("listing-pages") || 30));
@@ -77,7 +84,7 @@ async function mapLimit(items, workers, worker) {
         next += 1;
         await worker(items[index], index);
         // Stay a polite guest on a free archive.
-        await sleep(250);
+        await sleep(REQUEST_GAP_MS);
       }
     }),
   );
@@ -96,7 +103,7 @@ async function fetchSnapshot(itemUrl) {
     const response = await fetch(`https://web.archive.org/web/29991231id_/${itemUrl}`, {
       signal: controller.signal,
       redirect: "follow",
-      headers: { "User-Agent": "GunpulaCatalog/2.0 (+https://github.com/mdefitko777/Gunpula)" },
+      headers: { "User-Agent": UA },
     });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const buffer = Buffer.from(await response.arrayBuffer());
@@ -130,7 +137,7 @@ async function fetchListingCaptures() {
   try {
     const response = await fetch(`https://web.archive.org/cdx/search/cdx?${query}`, {
       signal: controller.signal,
-      headers: { "User-Agent": "HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)" },
+      headers: { "User-Agent": UA },
     });
     if (!response.ok) throw new Error(`CDX HTTP ${response.status}`);
     const latest = new Map();
@@ -153,7 +160,7 @@ async function fetchListingPage(key, timestamp) {
     const response = await fetch(`https://web.archive.org/web/${timestamp}id_/https://p-bandai.jp/hobby/a0001/${key}/`, {
       signal: controller.signal,
       redirect: "follow",
-      headers: { "User-Agent": "HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)" },
+      headers: { "User-Agent": UA },
     });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const html = new TextDecoder("shift_jis").decode(Buffer.from(await response.arrayBuffer()));
@@ -162,42 +169,6 @@ async function fetchListingPage(key, timestamp) {
   } finally {
     clearTimeout(timeout);
   }
-}
-
-function listingNameMonth(name) {
-  const match = /(\d{4})年\s*(\d{1,2})月[^】]{0,4}?発送/.exec(String(name).normalize("NFKC"));
-  return match ? `${match[1]}-${String(match[2]).padStart(2, "0")}` : null;
-}
-
-// One card of the category list: item id, name, price, shipping month, image.
-export function parseListingCards(html) {
-  const cards = [];
-  for (const block of html.split('<div class="article_area">').slice(1)) {
-    const itemId = /\/item\/item-(\d{10})\//.exec(block)?.[1];
-    const name = decodeEntities(/<p class="article_title"><a[^>]*>([\s\S]*?)<\/a>/.exec(block)?.[1]?.replace(/<[^>]+>/g, "") || "");
-    if (!itemId || !name) continue;
-    const price = Number(/<p class="price">([\d,]+)円/.exec(block)?.[1]?.replace(/,/g, ""));
-    const ship = /RESERVE_(\d{4})(\d{2})\.gif/.exec(block);
-    const thumb = /<img src="((?:https?:)?\/\/bandai-a\.akamaihd\.net\/bc\/img\/model\/[a-z]\/\d+_1\.jpg)"/.exec(block)?.[1];
-    const icons = [...block.matchAll(/icon\/[A-Z_0-9]+\.gif" alt="([^"]*)"/g)].map((match) => match[1]);
-    cards.push({
-      item_url: `https://p-bandai.jp/item/item-${itemId}/`,
-      item_id: itemId,
-      name,
-      description: "",
-      // The list shows the 90px thumbnail (model/m); model/b is the same photo full size.
-      image: thumb ? thumb.replace(/^\/\//, "https://").replace("/model/m/", "/model/b/") : null,
-      price_jpy: Number.isFinite(price) && price > 0 ? price : null,
-      availability: icons.includes("在庫無し") ? "sold_out" : icons.includes("予約") ? "preorder" : null,
-      work_title: null,
-      // Older cards have no shipping icon, but the name often says
-      // "【２次：２０１９年７月発送】".
-      release_date: ship ? `${ship[1]}-${ship[2]}` : listingNameMonth(name),
-      order_opens_at: null,
-      order_closes_at: null,
-    });
-  }
-  return cards;
 }
 
 async function fetchRecentItemUrls(sinceDate) {
@@ -214,7 +185,7 @@ async function fetchRecentItemUrls(sinceDate) {
   try {
     const response = await fetch(`https://web.archive.org/cdx/search/cdx?${query}`, {
       signal: controller.signal,
-      headers: { "User-Agent": "GunpulaCatalog/2.0 (+https://github.com/mdefitko777/Gunpula)" },
+      headers: { "User-Agent": UA },
     });
     if (!response.ok) throw new Error(`CDX HTTP ${response.status}`);
     const text = await response.text();
@@ -241,17 +212,6 @@ function normalizeItemUrl(raw) {
 // ---------------------------------------------------------------------------
 // Parsing
 // ---------------------------------------------------------------------------
-
-function decodeEntities(value = "") {
-  return String(value)
-    .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, '"')
-    .replace(/&#039;/g, "'")
-    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
-    .replace(/\s+/g, " ")
-    .trim();
-}
 
 function plainText(html) {
   return html
@@ -463,16 +423,28 @@ for (const kit of catalog.kits) {
   }
 }
 
+// A failed fetch (archive.org timeout, 5xx …) is tried again after a week, up
+// to MAX_ATTEMPTS times; before 2026-11 an error was final.
+const retryDue = (entry) =>
+  entry?.status === "error" &&
+  (entry.attempts || 1) < MAX_ATTEMPTS &&
+  Date.now() - Date.parse(entry.checked_at || 0) >= RETRY_AFTER_MS;
+// A listed kit whose enrichment failed stays "listed" and is retried the same way.
+const listedDue = (entry) =>
+  entry?.status === "listed" && (!entry.attempts || (entry.attempts < MAX_ATTEMPTS && Date.now() - Date.parse(entry.checked_at || 0) >= RETRY_AFTER_MS));
+
 // Pass 1: known PB links that have not been enriched yet (or are stale). Kits
 // made from a listing card (pass 3) still lack the order window.
-const enrichTargets = [...kitsByPbUrl.keys()].filter((url) => force || !index.entries[url] || index.entries[url].status === "listed");
+const enrichTargets = [...kitsByPbUrl.keys()].filter(
+  (url) => force || !index.entries[url] || listedDue(index.entries[url]) || retryDue(index.entries[url]),
+);
 
 // Pass 2: recently archived item pages the catalog has never seen.
 const sinceDate = new Date(Date.now() - discoverDays * 86400000).toISOString().slice(0, 10).replace(/-/g, "");
 let discovered = [];
 try {
   const recent = await fetchRecentItemUrls(sinceDate);
-  discovered = recent.filter((url) => !kitsByPbUrl.has(url) && (force || !index.entries[url]));
+  discovered = recent.filter((url) => !kitsByPbUrl.has(url) && (force || !index.entries[url] || retryDue(index.entries[url])));
   console.log(`CDX: ${recent.length} archived item pages since ${sinceDate}, ${discovered.length} new to the catalog.`);
 } catch (error) {
   // Discovery is the optional half; enrichment still runs if CDX is unhappy.
@@ -589,7 +561,15 @@ await mapLimit(targets, concurrency, async ({ url, mode }) => {
     index.entries[url] = { checked_at: nowIso(), status: "imported", kit_id: kit.kit_id };
   } catch (error) {
     failed += 1;
-    index.entries[url] = { checked_at: nowIso(), status: "error", message: String(error.message).slice(0, 120) };
+    const previous = index.entries[url] || {};
+    const attempts = (previous.attempts || (previous.status === "error" ? 1 : 0)) + 1;
+    const message = String(error.message).slice(0, 120);
+    // A listed kit keeps its status, so a bad archive.org day does not drop it
+    // from the enrichment queue for good.
+    index.entries[url] =
+      previous.status === "listed"
+        ? { ...previous, checked_at: nowIso(), attempts, message }
+        : { checked_at: nowIso(), status: "error", attempts, message, ...(previous.kit_id ? { kit_id: previous.kit_id } : {}) };
   }
 });
 

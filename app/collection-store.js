@@ -1,5 +1,31 @@
 const normalizedCollections = new WeakSet();
 
+// The catalog retires duplicate kit_ids (a Premium Bandai resale page folded
+// into the BANDAI SPIRITS kit, a Tamashii lottery page into the figure …) and
+// publishes old id -> surviving id in data/split/kit-aliases.json. Saved
+// entries follow the alias, so nothing a member owns or wants goes missing.
+export function resolveKitAlias(aliases, kitId) {
+  if (!aliases || typeof aliases !== "object") return kitId;
+  let current = kitId;
+  for (let hops = 0; hops < 20 && Object.prototype.hasOwnProperty.call(aliases, current); hops += 1) {
+    const next = aliases[current];
+    if (!next || next === current) break;
+    current = next;
+  }
+  return current;
+}
+
+/** A kit_id -> entry map with retired ids moved to their surviving id (newer entry wins). */
+export function remapKitEntries(items = {}, aliases = null) {
+  if (!aliases || !items || typeof items !== "object") return items;
+  const remapped = {};
+  for (const [kitId, entry] of Object.entries(items)) {
+    const target = resolveKitAlias(aliases, kitId);
+    remapped[target] = remapped[target] ? newerByTimestamp(remapped[target], entry) : entry;
+  }
+  return remapped;
+}
+
 export function safeMemberName(value) {
   return String(value || "member").trim() || "member";
 }
@@ -53,6 +79,7 @@ export function normalizeCollection(collection = {}, options = {}) {
   const statuses = options.statuses || ["owned", "wanted", "deleted"];
   const self = safeMemberName(options.self);
   const droppedMembers = options.droppedMembers || new Set();
+  const kitAliases = options.kitAliases || null;
   const memberMerges = options.memberMerges || {};
   const legacyItems = collection.items && typeof collection.items === "object" ? { ...collection.items } : {};
   const memberItems = collection.member_items && typeof collection.member_items === "object" ? structuredClone(collection.member_items) : {};
@@ -79,8 +106,9 @@ export function normalizeCollection(collection = {}, options = {}) {
     if (!memberKey || !memberMap || typeof memberMap !== "object" || droppedMembers.has(memberKey)) continue;
     const mergeTarget = memberMerges[memberKey];
     if (mergeTarget && memberKey !== self) memberKey = safeMemberName(mergeTarget);
-    for (const [kitId, entry] of Object.entries(memberMap)) {
+    for (const [savedKitId, entry] of Object.entries(memberMap)) {
       if (!entry?.status || !statuses.includes(entry.status)) continue;
+      const kitId = resolveKitAlias(kitAliases, savedKitId);
       const normalizedEntry = normalizeCollectionEntry(entry, { statuses, now, member: memberKey });
       normalizedMemberItems[memberKey] ||= {};
       const existing = normalizedMemberItems[memberKey][kitId];

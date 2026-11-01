@@ -1,5 +1,14 @@
 import { readFile, writeFile } from "node:fs/promises";
-import { gundamGradeFromName, nfkc } from "./lib/catalog-cleanup.mjs";
+import { pathToFileURL } from "node:url";
+import {
+  ACCESSORY_KIT,
+  REAL_GRADE_1_1,
+  bandaiImageId,
+  carryCleanupFields,
+  gundamGradeFromName,
+  nfkc,
+  publicBandaiImageUrl,
+} from "./lib/catalog-cleanup.mjs";
 
 const BASE_URL = "https://www.bandaispirits.co.jp";
 const SOURCE_ID = "bandai_spirits_products_jp";
@@ -9,21 +18,21 @@ const FIRST_PAGE_URL = `${BASE_URL}${RESULT_PATH}?search=true&free=&category=1`;
 // Matched on the NFKC title (BANDAI SPIRITS writes many titles with full-width
 // ＨＧ／ＭＧ／ＢＢ戦士 prefixes). The weapon and base rules only drop add-on
 // packs: "ENTRY GRADE … (フルウェポンセット)", "PG … ガンダム+ウエポンズ" and
-// "HG … +アクションベース3" are kits and stay.
+// "HG … +アクションベース3" are kits and stay. Plastic accessory kits (HGBC,
+// オプションパーツセット ガンプラ, ガンダムベース限定 MSエフェクト/スパイク/バーニア,
+// ビルダーズパーツ システムベース) stay too, tagged accessory-kit.
 const EXCLUDED_TITLE_PATTERNS = [
   /ガンダムデカール/,
   /デカール/,
-  /オプションパーツ/,
-  /ビルダーズパーツ/,
+  /オプションパーツ(?!セット ?ガンプラ)/,
+  /ビルダーズパーツ(?!.*システムベース)/,
   /^(?:(?:ガンダムベース|GUNDAM SIDE-F)限定 |バンダイプラモデル )?アクションベース/,
   /カスタマイズ/,
   /(?:システム|カスタム)ウ[ェエ]ポン|ウ[ェエ]ポン(?:ズ|キット\d*|バインダー|ディスプレイベース)?$|バックウ[ェエ]ポンシステム/,
-  /^HGBC\b|^BPHD\b/,
+  /^BPHD\b/,
   /エフェクトパーツ/,
   /マーキングシール/,
   /LEDユニット/,
-  // Gundam Base builders parts sold without the ビルダーズパーツ label.
-  /[MＭ][SＳ](?:エフェクト|スパイク|バーニア)/,
   /工具/,
   /塗料/,
 ];
@@ -44,8 +53,9 @@ const GRADE_RULES = [
   // \b never fires after a Japanese character, so these end in a lookahead.
   { code: "SDEX", subline: "SD EX-Standard", pattern: /^(?:SDEX|SDガンダム\s*EXスタンダード|SDガンダム\s*EX-STANDARD)(?=[\s\d/(]|$)/i },
   { code: "SDCS", subline: "SD Cross Silhouette", pattern: /^(?:SDCS|SDガンダム\s*クロスシルエット)(?=[\s\d/(]|$)/i },
-  { code: "SDW", subline: "SD Gundam World", pattern: /^(?:SDW|SDガンダムワールド|SDガンダム\s*ワールドヒーローズ)(?=[\s\d/(]|$)/i },
-  { code: "SD", subline: "SD", pattern: /^(?:BB ?戦士|BB\d|SDガンダム|SD ?三国|SDBF|SDBD|SDGF|SD |LEGEND ?BB|SD武者)/i },
+  // SD三国創傑伝 (2019-) belongs to SD Gundam World; BB戦士 三国伝 (2010) is SD.
+  { code: "SDW", subline: "SD Gundam World", pattern: /^(?:SDW|SDガンダムワールド|SDガンダム\s*ワールドヒーローズ|SD(?:ガンダム)?\s*三国創傑伝)(?=[\s\d/(]|$)/i },
+  { code: "SD", subline: "SD", pattern: /^(?:BB ?戦士|BB\d|SDガンダム|SD ?三国(?!創傑伝)|SDBF|SDBD|SDGF|SD |LEGEND ?BB|SD武者)/i },
   { code: "HAROPLA", subline: "HaroPla", pattern: /^(?:ハロプラ|HAROPLA)(?=[\s\d/(]|$)/i },
   { code: "MEGA", subline: "Mega Size Model", pattern: /^(?:メガサイズモデル|MEGA SIZE MODEL)(?=[\s\d/(]|$)/i },
   { code: "UCHG", subline: "U.C. Hard Graph", pattern: /^(?:U\.C\. ?ハードグラフ|U\.C\. ?HARD GRAPH)(?=[\s\d/(]|$)/i },
@@ -161,7 +171,7 @@ function parseMaxPage(html) {
   return Math.max(1, ...pages);
 }
 
-function parseCards(html) {
+export function parseCards(html) {
   return html
     .split('<div class="m_panel__listItem">')
     .slice(1)
@@ -179,7 +189,7 @@ function parseCards(html) {
 
       return {
         source_url: absoluteUrl(href),
-        image_url: imageUrl ? absoluteUrl(imageUrl) : null,
+        image_url: imageUrl ? publicBandaiImageUrl(absoluteUrl(imageUrl)) : null,
         image_alt: imageAlt,
         title,
         release_text: releaseText,
@@ -189,15 +199,22 @@ function parseCards(html) {
     .filter(Boolean);
 }
 
-function parseReleaseDate(value) {
+// BANDAI SPIRITS has typos such as "2016年70月日": a month outside 1-12 keeps
+// only the year, a day outside 1-31 keeps only the month.
+export function parseReleaseDate(value) {
   const text = String(value ?? "");
   const year = /(\d{4})年/.exec(text)?.[1];
   if (!year) {
     return null;
   }
 
-  const month = /(\d{1,2})月/.exec(text)?.[1]?.padStart(2, "0");
-  const day = /(\d{1,2})日/.exec(text)?.[1]?.padStart(2, "0");
+  const monthText = /(\d{1,2})月/.exec(text)?.[1];
+  if (monthText && (Number(monthText) < 1 || Number(monthText) > 12)) {
+    return year;
+  }
+  const dayText = /(\d{1,2})日/.exec(text)?.[1];
+  const month = monthText?.padStart(2, "0");
+  const day = dayText && Number(dayText) >= 1 && Number(dayText) <= 31 ? dayText.padStart(2, "0") : undefined;
 
   if (month && day) {
     return `${year}-${month}-${day}`;
@@ -223,12 +240,14 @@ const SUBLINE_BY_SHARED_GRADE = {
   EX: "EX Model", NG: "No Grade", PGU: "PG Unleashed", MGEX: "MGEX", FM: "Full Mechanics",
 };
 
-function inferGrade(rawTitle) {
+export function inferGrade(rawTitle) {
   // Until 2026-11 this matched the raw title, so every full-width "ＨＧ 1/144 …",
   // "ＭＧ …" and "ＢＢ戦士 …" card, and every HGBF/HGPG/HGBM card, was skipped:
   // about 1,500 of the 3,800 listed kits never reached the catalog.
   const title = nfkc(rawTitle);
-  if (EXCLUDED_TITLE_PATTERNS.some((pattern) => pattern.test(title))) {
+  // Accessory kits (HGBC バックウェポンシステム …) are kits even when a weapon
+  // rule would match their name.
+  if (!ACCESSORY_KIT.test(title) && EXCLUDED_TITLE_PATTERNS.some((pattern) => pattern.test(title))) {
     return null;
   }
   const bare = title.replace(LEAD_IN, "");
@@ -251,8 +270,9 @@ function inferGrade(rawTitle) {
   return null;
 }
 
-function inferScale(title, gradeCode) {
-  const explicitScale = /(\d+) ?\/ ?(\d+)/.exec(nfkc(title))?.slice(1, 3).join("/");
+export function inferScale(title, gradeCode) {
+  // "REAL GRADE 1/1 GUNDAM PROJECT" names the Odaiba statue, not a scale.
+  const explicitScale = /(\d+) ?\/ ?(\d+)/.exec(nfkc(title).replace(REAL_GRADE_1_1, " "))?.slice(1, 3).join("/");
   if (explicitScale) {
     return explicitScale;
   }
@@ -299,11 +319,15 @@ function kitIdFor(card, gradeCode) {
   return `${gradePrefix}-${slugifyTitle(card.title)}-${productId}`;
 }
 
-function toKit(card) {
+// knownPbIds: Premium Bandai item ids the catalog has seen (Wayback index,
+// pbandai.json, retired PB pages). A BANDAI SPIRITS card of a PB exclusive
+// shows the PB item's own photo, model/b/<PB item id>_1.jpg.
+export function toKit(card, knownPbIds = new Set()) {
   const grade = inferGrade(card.title);
   if (!grade) {
     return null;
   }
+  const pbOriginal = knownPbIds.has(bandaiImageId(card.image_url));
 
   const releaseDate = parseReleaseDate(card.release_text);
   const priceJpy = parsePrice(card.price_text);
@@ -332,7 +356,8 @@ function toKit(card) {
     work_title: work.work_title,
     release_date: releaseDate,
     price_jpy: priceJpy,
-    is_limited: /限定|イベント|抽選|プレミアムバンダイ|ガンダムベース|EXPO\d{4}/.test(nfkc(card.title)),
+    is_limited: pbOriginal || /限定|イベント|抽選|プレミアムバンダイ|ガンダムベース|EXPO\d{4}/.test(nfkc(card.title)),
+    ...(pbOriginal ? { is_premium_bandai: true } : {}),
     data_status: "needs_review",
     source_urls: [card.source_url],
     source_refs: [
@@ -343,7 +368,7 @@ function toKit(card) {
         confidence: "high",
       },
     ],
-    tags: ["gunpla", "bandai spirits import"],
+    tags: ["gunpla", "bandai spirits import", ...(ACCESSORY_KIT.test(nfkc(card.title)) ? ["accessory-kit"] : [])],
     notes: card.release_text ? `Imported from BANDAI SPIRITS product search. Release text: ${card.release_text}.` : "Imported from BANDAI SPIRITS product search.",
   };
 }
@@ -382,6 +407,37 @@ function pageUrl(page) {
   return `${BASE_URL}${RESULT_PATH}?paging=${page}&dsp_cnt=20&sort=salesdate&order=desc&category=1`;
 }
 
+async function knownPremiumBandaiIds() {
+  const ids = new Set();
+  const read = async (path) => {
+    try {
+      return JSON.parse(await readFile(path, "utf8"));
+    } catch {
+      return null;
+    }
+  };
+  const wayback = await read("data/premium-bandai-wayback-index.json");
+  for (const url of Object.keys(wayback?.entries || {})) {
+    const id = /item-(\d{10})/.exec(url)?.[1];
+    if (id) ids.add(id);
+  }
+  for (const item of (await read("data/pbandai.json"))?.items || []) {
+    const id = /(\d{10})/.exec(item.id || item.url || "")?.[1];
+    if (id) ids.add(id);
+  }
+  const aliasDoc = await read("data/kit-aliases.json");
+  for (const id of [...Object.keys(aliasDoc?.aliases || {}), ...Object.keys(aliasDoc?.excluded || {})]) {
+    if (id.startsWith("pbandai-wb-")) ids.add(id.slice("pbandai-wb-".length));
+  }
+  return ids;
+}
+
+// What clean_catalog.mjs folded into a kit (PB refs, PB flags, cleanup tags)
+// survives the daily re-import; every field this importer owns is refreshed.
+export function mergeImportedKit(previous, kit) {
+  return previous ? { ...previous, ...carryCleanupFields(previous, kit) } : kit;
+}
+
 async function main() {
   const maxPagesArg = process.argv.find((arg) => arg.startsWith("--max-pages="));
   const maxPagesOverride = maxPagesArg ? Number(maxPagesArg.split("=")[1]) : null;
@@ -406,8 +462,9 @@ async function main() {
   const seenIds = new Set();
   let skipped = 0;
 
+  const knownPbIds = await knownPremiumBandaiIds();
   for (const card of cards) {
-    const kit = toKit(card);
+    const kit = toKit(card, knownPbIds);
     if (!kit) {
       skipped += 1;
       continue;
@@ -443,7 +500,7 @@ async function main() {
   const byId = new Map((existingDoc.kits || []).map((kit) => [kit.kit_id, kit]));
   for (const kit of kits) {
     const previous = byId.get(kit.kit_id);
-    byId.set(kit.kit_id, previous ? { ...previous, ...kit } : kit);
+    byId.set(kit.kit_id, mergeImportedKit(previous, kit));
   }
   const merged = [...byId.values()].sort((a, b) => {
     const dateCompare = String(b.release_date ?? "").localeCompare(String(a.release_date ?? ""));
@@ -475,7 +532,10 @@ async function readCatalog() {
   }
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+// The unit tests import the parsers; only a direct run imports data.
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
+}

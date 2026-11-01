@@ -29,6 +29,12 @@ export async function loadOptionalJson(path) {
   }
 }
 
+// Retired kit_id -> surviving kit_id (written by scripts/split_catalog.mjs).
+export async function loadKitAliases() {
+  const doc = await loadOptionalJson("../data/split/kit-aliases.json");
+  return doc?.aliases && typeof doc.aliases === "object" ? doc.aliases : {};
+}
+
 export async function loadInitialKitsDoc(activeFranchise) {
   const manifest = await loadOptionalJson("../data/split/manifest.json");
   const franchises = Object.keys(manifest?.franchises || {});

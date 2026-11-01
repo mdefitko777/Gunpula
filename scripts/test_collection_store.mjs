@@ -4,6 +4,8 @@ import {
   mergeCollectionState,
   mergeTimestampedMap,
   normalizeCollection,
+  remapKitEntries,
+  resolveKitAlias,
   safeMemberName,
 } from "../app/collection-store.js";
 
@@ -51,3 +53,28 @@ assert.deepEqual(
 );
 
 console.log("collection-store tests OK");
+
+// Entries saved on a retired kit_id move to the record that replaced it.
+{
+  const kitAliases = { "pbandai-wb-1": "rg-banshee", "tamashii-2": "tamashii-1", "tamashii-1": "tamashii-0" };
+  assert.equal(resolveKitAlias(kitAliases, "tamashii-2"), "tamashii-0");
+  assert.equal(resolveKitAlias(kitAliases, "unknown"), "unknown");
+  assert.equal(resolveKitAlias({ a: "b", b: "a" }, "a"), "a"); // a cycle cannot hang the app
+  const remapped = normalizeCollection(
+    {
+      member_items: {
+        me: {
+          "pbandai-wb-1": { status: "owned", updated_at: "2026-03-01T00:00:00Z" },
+          "rg-banshee": { status: "wanted", updated_at: "2026-01-01T00:00:00Z" },
+          "tamashii-2": { status: "wanted", quantity: 2, updated_at: "2026-01-01T00:00:00Z" },
+        },
+      },
+    },
+    { ...options, kitAliases },
+  );
+  assert.deepEqual(Object.keys(remapped.member_items.me).sort(), ["rg-banshee", "tamashii-0"]);
+  assert.equal(remapped.member_items.me["rg-banshee"].status, "owned"); // the newer entry wins
+  assert.equal(remapped.member_items.me["tamashii-0"].quantity, 2);
+  assert.deepEqual(remapped.owned, ["rg-banshee"]);
+  assert.deepEqual(Object.keys(remapKitEntries({ "tamashii-2": { status: "owned" } }, kitAliases)), ["tamashii-0"]);
+}
