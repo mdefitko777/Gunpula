@@ -295,6 +295,8 @@ export function buildDoc({ feed, manifest, prev, pairs, commits, edgeDates = new
   // Maintenance (data/atlas/notify-quiet.json): their kits.json diffs and update-feed dates are not news
   const quietCommits = (quiet?.commits || []).filter(Boolean);
   const quietFeedDates = new Set(quiet?.feed_dates || []);
+  // date → reasons that are noise on that date (an item is dropped when every one of its reasons is listed)
+  const quietReasons = new Map(Object.entries(quiet?.date_quiet_reasons || {}).map(([d, r]) => [d, new Set(r)]));
   const isQuietPair = (p) => quietCommits.some((q) => String(p.sha || "").startsWith(q) || q.startsWith(String(p.sha || "x")));
   const feedEntries = new Map((feed?.entries || []).filter((e) => !quietFeedDates.has(e.date)).map((e) => [e.date, e]));
   const prevEntries = new Map((prev?.entries || []).map((e) => [e.date, e]));
@@ -319,13 +321,19 @@ export function buildDoc({ feed, manifest, prev, pairs, commits, edgeDates = new
     const pe = prevEntries.get(date);
     const ps = (pairDates.get(date) || []).sort((a, b) => a.at.localeCompare(b.at)); // older first: the later version wins
     const map = new Map();
-    for (const it of [...(pe?.added || []), ...(pe?.changed || [])]) mergeItem(map, it);
+    // restock items are placed again below from restocks.json — don't carry the previous output's copy (it may sit on an older date)
+    for (const it of [...(pe?.added || []), ...(pe?.changed || [])]) {
+      if (!(it.change_reasons || []).includes("restock")) mergeItem(map, it);
+    }
     for (const it of [...(fe?.added || []), ...(fe?.changed || [])]) {
       if (notifiable(it.change_type, it.change_reasons)) mergeItem(map, itemFromFeed(it));
     }
     for (const p of ps) for (const it of p.items) mergeItem(map, it);
     for (const it of restockDates.get(date) || []) mergeItem(map, it);
-    const items = sortItems([...map.values()]);
+    const noise = quietReasons.get(date);
+    const items = sortItems(
+      [...map.values()].filter((i) => !noise || !(i.change_reasons || []).length || !i.change_reasons.every((r) => noise.has(r))),
+    );
     const restockCount = items.filter((i) => i.change_reasons.includes("restock")).length;
     const feedComplete = !!fe && (fe.added || []).length >= (fe.added_count || 0) && (fe.changed || []).length >= (fe.changed_count || 0);
     const gitComplete = gitOk && diffedDates.has(date) && !edgeDates.has(date);

@@ -275,3 +275,20 @@ console.log("notify feed restocks: ok");
   assert.deepEqual(doc.entries[0].added.map((i) => i.kit_id), ["real-news"]);
 }
 console.log("notify feed quiet maintenance: ok");
+
+// date_quiet_reasons: source-only churn on a maintenance date is dropped, real changes stay
+{
+  const manifest = { updated_at: "2026-11-02", total: 3 };
+  const it = (id, reasons, type = "changed") => ({ kit_id: id, change_type: type, franchise: "gundam", names: { ko: id }, change_reasons: reasons });
+  const doc = buildDoc({
+    feed: null,
+    manifest,
+    prev: null,
+    pairs: [{ date: "2026-11-02", at: "2026-11-02T01:00:00Z", sha: "cccc3333", items: [it("churn", ["source", "product_line"]), it("price", ["source", "price"]), it("new", ["new"], "added")], added: 1, changed: 2, total: 3 }],
+    commits: [{ sha: "cccc3333", date: "2026-11-02" }],
+    quiet: { date_quiet_reasons: { "2026-11-02": ["source", "product_line"] } },
+  });
+  const ids = [...doc.entries[0].added, ...doc.entries[0].changed].map((i) => i.kit_id).sort();
+  assert.deepEqual(ids, ["new", "price"]);
+}
+console.log("notify feed date_quiet_reasons: ok");
