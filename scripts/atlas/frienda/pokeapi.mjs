@@ -62,7 +62,13 @@ function parseCsv(text) {
 }
 
 export async function loadPokeApi() {
-  const get = async (f) => parseCsv((await politeFetch(POKEAPI_CSV + f, { maxAgeMs: 7 * 86400e3, accept: "text/csv,*/*" })).text);
+  // fetchedAt: CSV 를 실제로 받은 시각 중 가장 늦은 것 (캐시에서 읽으면 그때 받은 시각)
+  let fetchedAt = null;
+  const get = async (f) => {
+    const r = await politeFetch(POKEAPI_CSV + f, { maxAgeMs: 7 * 86400e3, accept: "text/csv,*/*" });
+    if (r.fetchedAt && (!fetchedAt || r.fetchedAt > fetchedAt)) fetchedAt = r.fetchedAt;
+    return parseCsv(r.text);
+  };
   const speciesNames = await get("pokemon_species_names.csv");
   const pokemon = await get("pokemon.csv");
   const ptypes = await get("pokemon_types.csv");
@@ -221,5 +227,5 @@ export async function loadPokeApi() {
 
   const speciesJa = (dex) => species.get(dex)?.ja || null;
 
-  return { size: species.size, resolveJa, typesFor, namesFor, speciesJa };
+  return { size: species.size, fetchedAt, resolveJa, typesFor, namesFor, speciesJa };
 }

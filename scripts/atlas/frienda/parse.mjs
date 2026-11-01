@@ -250,7 +250,19 @@ export function parseCampaign(html, pageUrl) {
     start_date = ymd(2000 + Number(idm[1]), Number(idm[2]), Number(idm[3]));
     date_src = "event-id";
   }
-  return { title, start_date, date_src, ended: ENDED_RE.test(flat), mentions };
+  // 끝나는 날: 시작 날짜 바로 뒤의 「（金）～9月3日（水）」 / 「～2026年1月4日」. 「2026年9月19日（土）～」 처럼
+  // 끝이 없으면(なくなり次第終了) null. 「終了しました」 배너가 없는 지난 캠페인을 끝난 것으로 보기 위해 쓴다.
+  let end_date = null;
+  if (start) {
+    const after = flat.slice(start.index + start[0].length, start.index + start[0].length + 40);
+    const e = after.match(/^\s*(?:[（(][^）)]{1,4}[）)])?\s*[～〜~]\s*(?:(20\d\d)年\s*)?(\d{1,2})月\s*(\d{1,2})日/);
+    if (e) {
+      const sy = Number(start[1]);
+      const y = e[1] ? Number(e[1]) : Number(e[2]) < Number(start[2]) ? sy + 1 : sy;
+      end_date = ymd(y, e[2], e[3]);
+    }
+  }
+  return { title, start_date, date_src, end_date, ended: ENDED_RE.test(flat), mentions };
 }
 
 // ---------------------------------------------------------------- 픽 메커닉

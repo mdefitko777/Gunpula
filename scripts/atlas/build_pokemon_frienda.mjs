@@ -570,10 +570,13 @@ function build(pages, api, prev) {
         cp.push(e);
       }
       if (!cp.length) continue;
-      campaigns.push({ id: c.id, title: c.title || c.index_title, start_date: c.start_date, date_src: c.date_src === "event-id" ? "event-id" : undefined, ended: c.ended || undefined, url: c.url, picks: cp });
+      campaigns.push({ id: c.id, title: c.title || c.index_title, start_date: c.start_date, end_date: c.end_date || undefined, date_src: c.date_src === "event-id" ? "event-id" : undefined, ended: c.ended || undefined, url: c.url, picks: cp });
     }
     campaigns.sort((a, b) => (a.start_date || "9999").localeCompare(b.start_date || "9999") || a.id.localeCompare(b.id));
   }
+  // 「終了しました」 배너가 없어도 공식 기간이 지났으면 끝난 캠페인 (일본 날짜 기준)
+  const todayJst = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+  campaigns = campaigns.map((c) => (!c.ended && c.end_date && c.end_date < todayJst ? { ...c, ended: true } : c));
 
   // 특별 시리즈 ordinal 은 101 부터 (본편 탄이 늘어나도 바뀌지 않게)
   special.forEach((s) => {
@@ -698,12 +701,14 @@ async function main() {
         "ポケモンセンターバージョン (Pokémon Center / Pokémon Store cabinets, from ベストタッグ2だん) dispenses the same picks as normal cabinets; only cosmetics and charms differ.",
         "'mechanic' (tera / zmove / mega / dynamax / gmax / tag) is set only where the official 注目のフレンダピック / ピックアップ text or the pick name states it; a missing mechanic does not mean the pick has none. 'tera' gives the tera type when the text names it.",
         "Types come from PokeAPI for the resolved form (not verified against Frienda; tera/special picks may differ). Exact ★2 vs ★3 is not published on the official list (rarity 'normal' = ★2・★3).",
+        "Frienda is released only in Japan: names.en / names.ko of the edition, sets and special series are descriptive translations, not official titles; show names.ja first. Pokémon names in en / ko / zh_hant are the official species names (PokeAPI).",
+        "Promo campaigns: 'ended' comes from the official 終了 banner or from the official end date (end_date, JST) having passed; a campaign without either may still be running while stocks last.",
         WITH_IMAGES ? "img/thumb are hotlinked official image URLs; the site terms ask other sites not to hotlink." : "Image URLs are omitted because the official site asks other sites not to hotlink images; 'url' links each pick's official list page.",
       ],
     },
     // next_set_expected = 최신 탄 실시 기간 다음 날 (추정). 새 탄 페이지가 공개되면 sets 에 자동으로 들어온다.
     latest: latest ? { set: latest.id, names: latest.names, release_date: latest.release_date, end_date: latest.end_date, next_set_expected: nextGuess } : null,
-    sources: [officialSource, { ...POKEAPI_SOURCE, status: "ok", fetched_at: nowIso() }],
+    sources: [officialSource, { ...POKEAPI_SOURCE, status: "ok", fetched_at: api.fetchedAt || nowIso() }],
     sets,
     picks,
   };
