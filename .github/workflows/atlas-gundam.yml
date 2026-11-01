@@ -8,6 +8,10 @@ name: Atlas Gundam MS data
 # "fandom_confirmed"); meanwhile the committed Fandom snapshots are used.
 # Every fetch step keeps its previous snapshot when a source fails, and the build refuses to
 # overwrite outputs on a large drop in linked kits or localized MS names.
+# A second step rebuilds "what is in each chapter" (data/atlas/gundam-chapters.json) from the
+# Gundam Wiki episode pages (SMW; same Fandom gate), soshage.com G Gen ETERNAL story stages and
+# the official gundam-official.com episode subtitles, keyed by the MS ids of the fresh MS master
+# and carrying each unit's kit ids from gundam-kit-ms.json.
 # Only data/atlas/gundam-* is ever committed.
 
 on:
@@ -27,6 +31,10 @@ on:
         description: "I checked Fandom's robots.txt / API policy and this run may read gunpla.fandom.com and gundam.fandom.com"
         type: boolean
         default: false
+      all_stages:
+        description: "Re-read every G Gen story stage (default: only stages new since the last snapshot)"
+        type: boolean
+        default: false
   # Re-link after the catalogue changes (offline build, no network fetch).
   workflow_run:
     workflows: ["Refresh official catalog"]
@@ -43,7 +51,7 @@ jobs:
   gundam:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
         with:
@@ -86,6 +94,24 @@ jobs:
             node scripts/atlas/run_gundam.mjs
           fi
 
+      # Needs data/atlas/gundam-ms.json from the step above (MS ids = Gundam Wiki titles).
+      # A chapters failure must not hold back the MS data: the chapter build already refuses
+      # to overwrite gundam-chapters.json on a large drop, so the commit step can still run.
+      - name: Fetch chapter sources and build chapters
+        timeout-minutes: 30
+        continue-on-error: true
+        env:
+          ATLAS_CACHE_DIR: ${{ runner.temp }}/atlas-cache
+          ATLAS_GGET_STAGES: ${{ inputs.all_stages && 'all' || 'new' }}
+          ATLAS_FANDOM_CONFIRMED: ${{ (vars.ATLAS_FANDOM_CONFIRMED == '1' || inputs.fandom_confirmed) && '1' || '' }}
+          BUILD_ONLY: ${{ (github.event_name == 'workflow_run' || inputs.build_only) && '1' || '' }}
+        run: |
+          if [ "$BUILD_ONLY" = "1" ]; then
+            node scripts/atlas/run_gundam_chapters.mjs --build
+          else
+            node scripts/atlas/run_gundam_chapters.mjs
+          fi
+
       - name: Save HTTP cache
         if: always() && steps.week.outputs.key != ''
         uses: actions/cache/save@v4
@@ -102,8 +128,10 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # data/atlas/gundam-* covers the MS master, kit links, data/atlas/gundam-chapters.json,
+          # the chapter review list and every gundam-src-* snapshot.
           git add -- 'data/atlas/gundam-*'
-          git commit -m "Update Atlas Gundam MS data"
+          git commit -m "Update Atlas Gundam MS and chapter data"
           for attempt in 1 2 3 4 5; do
             git fetch origin main
             if git rebase -X theirs "origin/main"; then
