@@ -13,6 +13,14 @@
 // the 120 cap). Each run only diffs kits.json commits it has not seen; the previous output keeps
 // the rest. No network. Output is compact JSON for phones.
 //
+// Restocks: events in data/atlas/restocks.json (scripts/build_restocks.mjs — PB 再販 / N次発送,
+// Tamashii 発送分, BANDAI SPIRITS 再販 news) become "changed" items with change_reasons
+// ["restock"] and a `restock` object { date, kind, url, announced_at }, filed under the first
+// feed date on or after the day the event was first seen. They are not "added" items, are not
+// counted in added_count / changed_count (restock_count instead), and the backfill rule does not
+// apply to them: a restocked kit is old by nature. Events marked quiet (the first build's
+// backlog, resales already over) are never items.
+//
 //   node scripts/atlas/build_notify_feed.mjs [--days=30] [--max-commits=60] [--rebuild] [--no-git]
 //                                            [--report=path.json] [--output=data/atlas/notify-feed.json]
 import { execFileSync } from "node:child_process";
@@ -25,6 +33,7 @@ const CATALOG = "data/kits.json";
 const FEED = "data/update-feed.json";
 const MANIFEST = "data/split/manifest.json";
 const OUTPUT = "data/atlas/notify-feed.json";
+const RESTOCKS = "data/atlas/restocks.json";
 
 /** Change reasons the app never notifies about (same list as hobby-atlas lib/notifications/feed_rules.dart). */
 export const QUIET_REASONS = new Set(["image", "name", "series", "product_line", "metadata"]);
@@ -205,6 +214,41 @@ export function mergeItem(map, item) {
   map.set(item.kit_id, { ...prev, ...item, change_type: changeType, change_reasons: reasons });
 }
 
+/** restocks.json event → restock object of a notify item (the keys the app reads) */
+export function restockInfo(event) {
+  const out = { date: event.date, kind: event.kind };
+  if (event.source_url) out.url = event.source_url;
+  if (event.announced_at) out.announced_at = event.announced_at;
+  return out;
+}
+
+/** kits.json kit + restocks.json event → notify item (change_type "changed", reason "restock") */
+export function restockItem(kit, event) {
+  return { ...itemFromKit(kit, "changed", ["restock"]), restock: restockInfo(event) };
+}
+
+/**
+ * Restock items per feed date: every event that is not quiet, filed under the first of [dates]
+ * (newest first) on or after its `seen` day — or the newest date when it is newer than all of
+ * them. Events seen before the oldest date are outside the window. One item per kit and date:
+ * the event with the latest restock date.
+ */
+export function restockItemsByDate(restocks, kitsById, dates) {
+  const byDate = new Map();
+  const ascending = [...dates].sort();
+  if (!ascending.length) return byDate;
+  for (const event of restocks?.events || []) {
+    if (event.quiet || !event.seen || event.seen < ascending[0]) continue;
+    const kit = kitsById.get(event.kit_id);
+    if (!kit) continue;
+    const date = ascending.find((d) => d >= event.seen) || ascending.at(-1);
+    const map = byDate.get(date) ?? byDate.set(date, new Map()).get(date);
+    const prev = map.get(event.kit_id);
+    if (!prev || String(event.date).localeCompare(String(prev.date)) > 0) map.set(event.kit_id, event);
+  }
+  return new Map([...byDate].map(([date, map]) => [date, [...map.values()].map((event) => restockItem(kitsById.get(event.kit_id), event))]));
+}
+
 function sortItems(items) {
   return items.sort((a, b) => (a.change_type === b.change_type ? a.kit_id.localeCompare(b.kit_id) : a.change_type === "added" ? -1 : 1));
 }
@@ -245,8 +289,9 @@ async function readJson(path, fallback = null) {
  *  commits   : [{sha, date}] kits.json commits whose diff is in the result (prev + pairs)
  *  edgeDates : dates whose first kits.json commit could not be diffed (oldest commit in the window)
  *  since     : oldest date kept (windowStart of the feed dates); empty = the newest [days] dates
+ *  restocks  : data/atlas/restocks.json (null = no restock items) · kitsById: the current catalog
  */
-export function buildDoc({ feed, manifest, prev, pairs, commits, edgeDates = new Set(), days = 30, since = "", gitOk = true, now = new Date() }) {
+export function buildDoc({ feed, manifest, prev, pairs, commits, edgeDates = new Set(), days = 30, since = "", gitOk = true, now = new Date(), restocks = null, kitsById = new Map() }) {
   const feedEntries = new Map((feed?.entries || []).map((e) => [e.date, e]));
   const prevEntries = new Map((prev?.entries || []).map((e) => [e.date, e]));
   const pairDates = new Map();
@@ -258,6 +303,7 @@ export function buildDoc({ feed, manifest, prev, pairs, commits, edgeDates = new
     .sort((a, b) => b.localeCompare(a));
   const dates = since ? all.filter((d) => d >= since) : all.slice(0, days);
   const diffedDates = new Set(commits.map((c) => c.date));
+  const restockDates = restockItemsByDate(restocks, kitsById, dates);
 
   const entries = dates.map((date) => {
     const fe = feedEntries.get(date);
@@ -269,7 +315,9 @@ export function buildDoc({ feed, manifest, prev, pairs, commits, edgeDates = new
       if (notifiable(it.change_type, it.change_reasons)) mergeItem(map, itemFromFeed(it));
     }
     for (const p of ps) for (const it of p.items) mergeItem(map, it);
+    for (const it of restockDates.get(date) || []) mergeItem(map, it);
     const items = sortItems([...map.values()]);
+    const restockCount = items.filter((i) => i.change_reasons.includes("restock")).length;
     const feedComplete = !!fe && (fe.added || []).length >= (fe.added_count || 0) && (fe.changed || []).length >= (fe.changed_count || 0);
     const gitComplete = gitOk && diffedDates.has(date) && !edgeDates.has(date);
     const addedCount = Math.max(fe?.added_count || 0, pe?.added_count || 0, ps.reduce((n, p) => n + p.added, 0));
@@ -282,6 +330,7 @@ export function buildDoc({ feed, manifest, prev, pairs, commits, edgeDates = new
       added_count: addedCount,
       changed_count: changedCount,
       complete: feedComplete || gitComplete || pe?.complete === true,
+      ...(restockCount ? { restock_count: restockCount } : {}),
       added: items.filter((i) => i.change_type === "added"),
       changed: items.filter((i) => i.change_type === "changed"),
     };
@@ -301,7 +350,7 @@ export function buildDoc({ feed, manifest, prev, pairs, commits, edgeDates = new
         name: "Gunpula catalog — data/kits.json history + data/update-feed.json",
         url: "https://github.com/mdefitko777/Gunpula",
         method:
-          "Diff of consecutive git versions of data/kits.json (same rule as scripts/build_update_feed.mjs, no item cap), merged with data/update-feed.json. Only new items and price / release / limited / source changes are kept.",
+          "Diff of consecutive git versions of data/kits.json (same rule as scripts/build_update_feed.mjs, no item cap), merged with data/update-feed.json. Only new items and price / release / limited / source changes are kept. Restock items (reason restock) come from data/atlas/restocks.json.",
         licence:
           "Product facts (names, prices, release dates) collected by Gunpula from the official shops named in each kit's source_refs (BANDAI SPIRITS, Premium Bandai, Pokémon Center, Takara Tomy, Good Smile and others). Names and trademarks belong to their owners. No images are included.",
       },
@@ -337,6 +386,12 @@ async function main() {
   const prev = flags.has("--rebuild") ? null : await readJson(output, null);
   const done = new Map((prev?.schema === 1 ? prev.commits || [] : []).map(([sha, date]) => [sha, date]));
   const prevOk = prev?.schema === 1 ? prev : null;
+  const restocks = await readJson(RESTOCKS, null);
+  const kitsById = new Map();
+  if (restocks?.events?.length) {
+    const wanted = new Set(restocks.events.filter((e) => !e.quiet).map((e) => e.kit_id));
+    for (const kit of (await readJson(CATALOG, { kits: [] })).kits || []) if (wanted.has(kit.kit_id)) kitsById.set(kit.kit_id, kit);
+  }
 
   // Oldest date the output holds: the [days]-th newest feed date (the feed keeps 90)
   const cutoff = windowStart([...(feed.entries || []).map((e) => e.date), manifest?.updated_at], days);
@@ -384,7 +439,7 @@ async function main() {
     }
   }
 
-  const doc = buildDoc({ feed, manifest, prev: prevOk, pairs, commits, edgeDates, days, since: cutoff, gitOk });
+  const doc = buildDoc({ feed, manifest, prev: prevOk, pairs, commits, edgeDates, days, since: cutoff, gitOk, restocks, kitsById });
   const changed = !sameContent(prevOk, doc);
   if (!changed) doc.generated_at = prevOk.generated_at;
   const text = `${JSON.stringify(doc)}\n`;
@@ -400,6 +455,7 @@ async function main() {
     entries: doc.entries.length,
     items,
     incomplete: doc.entries.filter((e) => !e.complete).map((e) => e.date),
+    restocks: doc.entries.reduce((n, e) => n + (e.restock_count || 0), 0),
     new_pairs: pairs.length,
     commits: doc.commits.length,
     git: gitOk ? "ok" : "off",

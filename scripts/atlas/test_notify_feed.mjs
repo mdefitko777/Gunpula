@@ -190,3 +190,68 @@ console.log("build_notify_feed self-test passed");
   assert.equal(isBackfill({}, "2026-11-02"), false);
 }
 console.log("notify feed backfill: ok");
+
+// Restocks: data/atlas/restocks.json events → "changed" items with reason "restock" (never "added",
+// not counted in added_count / changed_count, not dropped by the backfill rule)
+{
+  const old = kit("hg-rose", { release_date: "2012-03-24", source_urls: ["https://p-bandai.jp/item/item-1000260724/"] });
+  const kitsById = new Map([[old.kit_id, old], ["mg-x", kit("mg-x", { release_date: "2015-01" })], ["quiet", kit("quiet")]]);
+  const restocks = {
+    schema: 1,
+    events: [
+      { kit_id: "hg-rose", date: "2027-01", kind: "pb_resale", source_url: "https://p-bandai.jp/item/item-1000260724/", announced_at: "2026-10-30", seen: "2026-11-02", source: "sale_page" },
+      { kit_id: "hg-rose", date: "2026-12", kind: "lottery", source_url: "https://p-bandai.jp/item/item-1/", announced_at: null, seen: "2026-11-02", source: "sale_page" },
+      { kit_id: "mg-x", date: "2026-12-13", kind: "retail_resale", source_url: "https://gundam-official.com/news/a", announced_at: "2026-10-24", seen: "2026-10-24", source: "official_news" },
+      { kit_id: "quiet", date: "2025-01", kind: "pb_resale", seen: "2026-11-02", source: "sale_page", quiet: true },
+      { kit_id: "gone", date: "2027-01", kind: "pb_resale", seen: "2026-11-02", source: "sale_page" },
+      { kit_id: "mg-x", date: "2026-01", kind: "pb_resale", seen: "2026-09-01", source: "sale_page" },
+    ],
+  };
+  const feed = {
+    updated_at: "2026-11-02",
+    entries: [
+      { date: "2026-11-02", total_after: 10, added_count: 0, changed_count: 0, added: [], changed: [] },
+      { date: "2026-10-23", total_after: 9, added_count: 1, changed_count: 0, added: [{ kit_id: "n1", change_type: "added", franchise: "gundam", names: { ko: "n1" }, change_reasons: ["new"] }], changed: [] },
+    ],
+  };
+  const manifest = { updated_at: "2026-11-02", total: 10 };
+  const doc = buildDoc({ feed, manifest, prev: null, pairs: [], commits: [], days: 2, since: "2026-10-23", gitOk: false, restocks, kitsById });
+  const [top, older] = doc.entries;
+  assert.deepEqual(top.added, [], "a restock is never an added item");
+  assert.equal(top.added_count, 0);
+  assert.equal(top.changed_count, 0, "restocks are not counted as catalog changes");
+  assert.equal(top.restock_count, 2);
+  const rose = top.changed.find((i) => i.kit_id === "hg-rose");
+  assert.deepEqual(rose, {
+    kit_id: "hg-rose",
+    change_type: "changed",
+    franchise: "gundam",
+    series_key: "uc",
+    names: { ko: "ko-hg-rose" },
+    series_labels: { ko: "UC" },
+    release_date: "2012-03-24",
+    price_jpy: 2200,
+    is_premium_bandai: true,
+    change_reasons: ["restock"],
+    restock: { date: "2027-01", kind: "pb_resale", url: "https://p-bandai.jp/item/item-1000260724/", announced_at: "2026-10-30" },
+  }, "one item per kit and date: the latest restock; a 2012 kit is not a backfill here");
+  assert.equal(notifiable(rose.change_type, rose.change_reasons), true, "the app's rule: restock is not a quiet reason");
+  // seen 2026-10-24 → first feed date on or after it (2026-11-02); seen before the window → dropped
+  assert.deepEqual(top.changed.map((i) => i.kit_id).sort(), ["hg-rose", "mg-x"]);
+  assert.equal(top.changed.find((i) => i.kit_id === "mg-x").restock.kind, "retail_resale");
+  assert.equal(older.restock_count, undefined);
+  assert.deepEqual(older.changed, []);
+  // A price change of the same kit on the same date merges into one item with both reasons
+  const withPrice = buildDoc({
+    feed: { ...feed, entries: [{ ...feed.entries[0], changed_count: 1, changed: [{ kit_id: "hg-rose", change_type: "changed", franchise: "gundam", names: { ko: "x" }, price_jpy: 2420, change_reasons: ["price"] }] }, feed.entries[1]] },
+    manifest, prev: null, pairs: [], commits: [], days: 2, since: "2026-10-23", gitOk: false, restocks, kitsById,
+  });
+  const merged = withPrice.entries[0].changed.find((i) => i.kit_id === "hg-rose");
+  assert.deepEqual(merged.change_reasons, ["price", "restock"]);
+  assert.equal(merged.restock.date, "2027-01");
+  // No restocks file → unchanged behaviour
+  const none = buildDoc({ feed, manifest, prev: null, pairs: [], commits: [], days: 2, since: "2026-10-23", gitOk: false });
+  assert.deepEqual(none.entries[0].changed, []);
+  assert.equal(none.entries[0].restock_count, undefined);
+}
+console.log("notify feed restocks: ok");

@@ -5,6 +5,8 @@ name: Atlas - Notify feed
 # item cap. data/update-feed-lite.json keeps only 20 per date, so busy days lost PB, SEED/00
 # and liked-kit changes. The builder diffs consecutive git versions of data/kits.json (only
 # the commits it has not seen yet) and merges data/update-feed.json. No network requests.
+# Restock / resale events from data/atlas/restocks.json (built by the daily catalog refresh,
+# scripts/build_restocks.mjs) are added as "changed" items with change_reasons ["restock"].
 # Commits only data/atlas/notify-feed.json.
 
 on:
