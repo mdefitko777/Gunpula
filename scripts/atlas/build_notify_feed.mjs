@@ -153,16 +153,35 @@ export function itemFromFeed(item) {
   return compactItem({ ...item, series_label: koName(item.series_labels, "") });
 }
 
-/** Two kits.json documents → notifiable items + full counts (same rule as build_update_feed.mjs, no cap) */
-export function diffCatalogs(beforeDoc, afterDoc) {
+/** Same rule as build_update_feed.mjs: a newly found record released more than this long ago is a backfill, not news. */
+export const BACKFILL_AGE_MONTHS = 12;
+
+function monthNumber(value) {
+  const match = /^(\d{4})(?:-(\d{2}))?/.exec(String(value || ""));
+  return match ? Number(match[1]) * 12 + Number(match[2] || 1) : null;
+}
+
+/** Was this newly found kit released long before [date]? (old records filled in by a coverage fix — the app must not notify) */
+export function isBackfill(kit, date) {
+  const released = monthNumber(kit?.release_date);
+  const feed = monthNumber(date);
+  return released != null && feed != null && released < feed - BACKFILL_AGE_MONTHS;
+}
+
+/** Two kits.json documents → notifiable items + full counts (same rule as build_update_feed.mjs, no cap).
+ *  [date] = the after-document's date; newly found kits released more than 12 months earlier are counted as backfilled, not notified. */
+export function diffCatalogs(beforeDoc, afterDoc, date = afterDoc?.updated_at) {
   const before = new Map((beforeDoc?.kits || []).map((k) => [k.kit_id, k]));
   const items = [];
   let added = 0;
   let changed = 0;
+  let backfilled = 0;
   for (const kit of afterDoc?.kits || []) {
     if (!kit?.kit_id) continue;
     const old = before.get(kit.kit_id);
-    if (!old) {
+    if (!old && isBackfill(kit, date)) {
+      backfilled += 1;
+    } else if (!old) {
       added += 1;
       items.push(itemFromKit(kit, "added", ["new"]));
     } else if (stableKitFingerprint(old) !== stableKitFingerprint(kit)) {
@@ -171,7 +190,7 @@ export function diffCatalogs(beforeDoc, afterDoc) {
       if (notifiable("changed", reasons)) items.push(itemFromKit(kit, "changed", reasons));
     }
   }
-  return { items, added, changed };
+  return { items, added, changed, backfilled };
 }
 
 /** One kit per date: "added" wins over "changed", reasons are merged, the later version's fields win. */
@@ -349,7 +368,7 @@ async function main() {
           break;
         }
         const before = readKitsAt(parent.sha);
-        const d = diffCatalogs(before, after);
+        const d = diffCatalogs(before, after, date);
         pairs.push({ date, at: c.at, sha: c.sha, total: (after.kits || []).length, ...d });
         commits.push({ sha: c.sha, date });
         afterDoc = before;

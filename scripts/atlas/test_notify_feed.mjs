@@ -1,7 +1,7 @@
 // Self-test for scripts/atlas/build_notify_feed.mjs (no network, no git):
 //   node scripts/atlas/test_notify_feed.mjs
 import assert from "node:assert/strict";
-import { buildDoc, changeReasons, compactItem, diffCatalogs, itemFromFeed, mergeItem, notifiable, sameContent, windowStart } from "./build_notify_feed.mjs";
+import { buildDoc, changeReasons, compactItem, diffCatalogs, isBackfill, itemFromFeed, mergeItem, notifiable, sameContent, windowStart } from "./build_notify_feed.mjs";
 
 const kit = (id, extra = {}) => ({
   kit_id: id,
@@ -173,3 +173,20 @@ assert.equal(notifiable("added", ["new"]), true);
 }
 
 console.log("build_notify_feed self-test passed");
+
+// Backfill: old records filled in by a coverage fix are not news
+{
+  const before = { kits: [] };
+  const after = { updated_at: "2026-11-02", kits: [
+    { kit_id: "old-hg", franchise: "gundam", names: { ja: "HG 旧" }, release_date: "2014-04" },
+    { kit_id: "new-hg", franchise: "gundam", names: { ja: "HG 新" }, release_date: "2026-12" },
+  ] };
+  const d = diffCatalogs(before, after);
+  assert.equal(d.added, 1);
+  assert.equal(d.backfilled, 1);
+  assert.deepEqual(d.items.map((i) => i.kit_id), ["new-hg"]);
+  assert.equal(isBackfill({ release_date: "2025-12" }, "2026-11-02"), false);
+  assert.equal(isBackfill({ release_date: "2025-10" }, "2026-11-02"), true);
+  assert.equal(isBackfill({}, "2026-11-02"), false);
+}
+console.log("notify feed backfill: ok");
