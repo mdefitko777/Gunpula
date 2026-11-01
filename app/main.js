@@ -27,6 +27,7 @@ import {
   timestampMs as storeTimestampMs,
 } from "./collection-store.js";
 import { escapeHtml as escapeHtmlValue } from "./dom-utils.js";
+import { buildBackupPayload, parseBackupLocalState } from "./backup-format.js";
 import {
   FRANCHISES,
   LANGUAGES,
@@ -3687,19 +3688,23 @@ async function copyInviteCode() {
   }
 }
 
-// Local backup: the same payload the cloud sync stores, saved as a file the
-// user keeps. Restoring overwrites local data (after confirmation) and then
-// propagates through the normal save/sync path.
+// Local backup: the same payload the cloud sync stores, plus the device-only
+// local_state (BBX parts/manual map, hand-lit guide cells, recent viewed) in
+// the shape Hobby Atlas imports. Restoring overwrites the collection (after
+// confirmation), merges local_state in, and propagates through the normal
+// save/sync path. The GitHub token is a secret and is not written to the file.
 function exportCollectionBackup() {
-  const githubToken = localStorage.getItem(GITHUB_TOKEN_KEY) || "";
-  const payload = {
-    exported_at: new Date().toISOString(),
+  const payload = buildBackupPayload({
+    exportedAt: new Date().toISOString(),
     app: APP_VERSION_LABEL,
-    ...cloudPayload(),
-    // Carried so a restore on a fresh install brings the data-fetch token back
-    // instead of forcing the user to paste it again.
-    ...(githubToken ? { github_token: githubToken } : {}),
-  };
+    cloud: cloudPayload(),
+    localState: {
+      bbxOwnedParts: state.bbxOwnedParts || loadBbxOwnedParts(),
+      bbxManualMap: state.bbxManualMap || loadBbxManualMap(),
+      guideManualLit: state.guideManualLit || loadGuideManualLit(),
+      recentViewed: state.recentViewed || [],
+    },
+  });
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
@@ -3752,6 +3757,23 @@ async function importCollectionBackup(file) {
     if (typeof payload.github_token === "string" && payload.github_token) {
       localStorage.setItem(GITHUB_TOKEN_KEY, payload.github_token);
       if (elements.githubTokenInput) elements.githubTokenInput.value = payload.github_token;
+    }
+    // Device-only data (absent in backups made before local_state existed).
+    // Merged rather than replaced so a restore never drops parts/cells.
+    const localState = parseBackupLocalState(payload);
+    if (localState) {
+      state.bbxOwnedParts = state.bbxOwnedParts || loadBbxOwnedParts();
+      localState.bbxOwnedParts.forEach((id) => state.bbxOwnedParts.add(id));
+      saveBbxOwnedParts();
+      state.bbxManualMap = state.bbxManualMap || loadBbxManualMap();
+      Object.entries(localState.bbxManualMap).forEach(([kitId, baseSetId]) => state.bbxManualMap.set(kitId, baseSetId));
+      saveBbxManualMap();
+      state.guideManualLit = state.guideManualLit || loadGuideManualLit();
+      localState.guideManualLit.forEach((id) => state.guideManualLit.add(id));
+      saveGuideManualLit();
+      const recent = state.recentViewed || [];
+      state.recentViewed = [...recent, ...localState.recentViewed.filter((id) => !recent.includes(id))].slice(0, 20);
+      saveRecentViewed();
     }
     saveCollection();
     saveOverrides();

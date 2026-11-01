@@ -21,6 +21,7 @@ const files = [
   "app/pbandai-store.js",
   "app/market-data.js",
   "app/collection-store.js",
+  "app/backup-format.js",
   "app/search-index-store.js",
   "app/search-engine.js",
   "app/view-state.js",
