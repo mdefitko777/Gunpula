@@ -1,0 +1,98 @@
+name: Atlas Gundam MS data
+
+# Weekly refresh of the Hobby Atlas Gundam MS master and kit <-> MS links
+# (data/atlas/gundam-*). Sources: soshage.com GGET API, Gunplapedia + Gundam Wiki
+# (MediaWiki API), Bandai Hobby WEB取説. Every fetch step keeps its previous snapshot when a
+# source fails, and the build refuses to overwrite outputs on a large drop in linked kits.
+# Only data/atlas/gundam-* is ever committed.
+
+on:
+  schedule:
+    - cron: "40 19 * * 0" # Sundays 19:40 UTC (Mondays 04:40 KST)
+  workflow_dispatch:
+    inputs:
+      build_only:
+        description: "Rebuild from committed snapshots without fetching"
+        type: boolean
+        default: false
+      full_manual:
+        description: "Re-read every WEB取説 listing page"
+        type: boolean
+        default: false
+  # Re-link after the catalogue changes (offline build, no network fetch).
+  workflow_run:
+    workflows: ["Refresh official catalog"]
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atlas-gundam
+  cancel-in-progress: false
+
+jobs:
+  gundam:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          # app/assets is ~800 MB and not needed here.
+          sparse-checkout: |
+            /*
+            !/app/assets/
+          sparse-checkout-cone-mode: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Restore HTTP cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/atlas-cache
+          key: atlas-gundam-${{ github.run_id }}
+          restore-keys: atlas-gundam-
+
+      - name: Fetch sources and build
+        timeout-minutes: 50
+        env:
+          ATLAS_CACHE_DIR: ${{ runner.temp }}/atlas-cache
+          ATLAS_MANUAL_FULL: ${{ inputs.full_manual && '1' || '' }}
+          BUILD_ONLY: ${{ (github.event_name == 'workflow_run' || inputs.build_only) && '1' || '' }}
+        run: |
+          if [ "$BUILD_ONLY" = "1" ]; then
+            node scripts/atlas/run_gundam.mjs --build
+          else
+            node scripts/atlas/run_gundam.mjs
+          fi
+
+      - name: Commit updated Atlas Gundam data
+        run: |
+          if git diff --quiet -- 'data/atlas/gundam-*' && [ -z "$(git ls-files --others --exclude-standard -- 'data/atlas/gundam-*')" ]; then
+            echo "No Atlas Gundam updates."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- 'data/atlas/gundam-*'
+          git commit -m "Update Atlas Gundam MS data"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            if git rebase -X theirs "origin/main"; then
+              if git push origin "HEAD:main"; then
+                echo "Pushed on attempt $attempt."
+                exit 0
+              fi
+              echo "Push rejected (remote moved); retrying..."
+            else
+              echo "Rebase conflict; aborting and retrying against latest remote..."
+              git rebase --abort || true
+            fi
+            sleep $(( (RANDOM % 10) + 5 ))
+          done
+          echo "Could not push after 5 attempts."
+          exit 1
