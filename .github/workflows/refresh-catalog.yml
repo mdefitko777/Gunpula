@@ -21,7 +21,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
 
@@ -32,7 +32,11 @@ jobs:
       - name: Snapshot current catalog
         run: cp data/kits.json "$RUNNER_TEMP/kits-before.json"
 
+      # Keeps going past a failed source (its previous data stays) and lists the
+      # failed steps in import-failures.txt for the report step below.
       - name: Import official sources
+        env:
+          IMPORT_FAILURES_PATH: ${{ runner.temp }}/import-failures.txt
         run: npm run import:data
 
       - name: Translate kana display names to Korean
@@ -87,15 +91,34 @@ jobs:
 
       # Silent failures are the real risk here: a scrape can break for weeks
       # before anyone notices the catalog stopped growing. Open (or reuse) one
-      # issue so a broken daily refresh is visible.
+      # issue so a broken daily refresh is visible. A run that committed but had
+      # failed sources is reported too; this runs after the commit, so it never blocks it.
       - name: Report failure
-        if: failure()
+        if: ${{ !cancelled() }}
         env:
           GH_TOKEN: ${{ github.token }}
+          JOB_STATUS: ${{ job.status }}
+          FAILURES_PATH: ${{ runner.temp }}/import-failures.txt
         run: |
+          failed_steps=""
+          if [ -s "$FAILURES_PATH" ]; then
+            failed_steps=$(sed 's/^/- /' "$FAILURES_PATH")
+          fi
+          if [ "$JOB_STATUS" = "success" ] && [ -z "$failed_steps" ]; then
+            echo "Nothing to report."
+            exit 0
+          fi
+          run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          if [ "$JOB_STATUS" = "success" ]; then
+            body="Run succeeded, but these import steps failed and kept their previous data: $run_url ($(date -u '+%Y-%m-%d %H:%M UTC'))"
+          else
+            body="Run failed: $run_url ($(date -u '+%Y-%m-%d %H:%M UTC'))"
+          fi
+          if [ -n "$failed_steps" ]; then
+            body="$body"$'\n\n'"$failed_steps"
+          fi
           title="每日目录抓取失败"
           existing=$(gh issue list --state open --search "$title in:title" --json number --jq '.[0].number')
-          body="Run failed: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} ($(date -u '+%Y-%m-%d %H:%M UTC'))"
           if [ -n "$existing" ]; then
             gh issue comment "$existing" --body "$body"
           else
