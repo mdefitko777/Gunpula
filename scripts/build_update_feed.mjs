@@ -4,6 +4,8 @@ const CATALOG_PATH = "data/kits.json";
 const FEED_PATH = "data/update-feed.json";
 const LITE_FEED_PATH = "data/update-feed-lite.json";
 const SOURCE_HEALTH_PATH = "data/source-health.json";
+const ALIASES_PATH = "data/kit-aliases.json";
+const BACKFILL_AGE_MONTHS = 12;
 const HISTORY_LIMIT = 90;
 const ITEM_LIMIT = 120;
 const LITE_HISTORY_LIMIT = 30;
@@ -231,6 +233,8 @@ function mergeSameDateEntry(previous, next) {
   const changed = mergeUniqueItems(previous.changed || [], next.changed || []);
   const removed = mergeUniqueItems(previous.removed || [], next.removed || []);
   const watched = mergeUniqueItems(previous.watched || [], next.watched || []);
+  const merged = mergeUniqueItems(previous.merged || [], next.merged || []);
+  const backfilled = mergeUniqueItems(previous.backfilled || [], next.backfilled || []);
   const stats = entryStats(added, changed, removed);
 
   return {
@@ -242,6 +246,8 @@ function mergeSameDateEntry(previous, next) {
     changed_count: changed.length,
     removed_count: removed.length,
     watched_count: watched.length,
+    merged_count: Math.max(merged.length, (previous.merged_count || 0) + (next.merged_count || 0) - (previous.merged || []).length - (next.merged || []).length + merged.length),
+    backfilled_count: Math.max(backfilled.length, (previous.backfilled_count || 0) + (next.backfilled_count || 0) - (previous.backfilled || []).length - (next.backfilled || []).length + backfilled.length),
     premium_bandai_count: stats.premium_bandai_count,
     bbx_count: stats.bbx_count,
     franchise_counts: stats.franchise_counts,
@@ -252,6 +258,8 @@ function mergeSameDateEntry(previous, next) {
     changed: changed.slice(0, ITEM_LIMIT),
     removed: removed.slice(0, ITEM_LIMIT),
     watched: watched.slice(0, ITEM_LIMIT),
+    merged: merged.slice(0, ITEM_LIMIT),
+    backfilled: backfilled.slice(0, ITEM_LIMIT),
   };
 }
 
@@ -267,11 +275,29 @@ const currentById = byId(currentDoc.kits);
 const added = [];
 const changed = [];
 const removed = [];
+// Ids clean_catalog.mjs folded into another record: the product is still in the
+// catalog under the surviving id, so they are "merged", not "removed".
+const aliasMap = (await readJson(ALIASES_PATH, { aliases: {} }))?.aliases || {};
+const merged = [];
+// A record that is new to the catalog but whose product came out long ago (a
+// source added later, a gap filled from a list article) is a backfill, not news.
+const backfilled = [];
+
+function monthNumber(value) {
+  const match = /^(\d{4})(?:-(\d{2}))?/.exec(String(value || ""));
+  return match ? Number(match[1]) * 12 + Number(match[2] || 1) : null;
+}
+const feedMonth = monthNumber(date);
+function isBackfill(kit) {
+  const released = monthNumber(kit.release_date);
+  return released != null && feedMonth != null && released < feedMonth - BACKFILL_AGE_MONTHS;
+}
 
 for (const kit of currentDoc.kits || []) {
   const beforeKit = beforeById.get(kit.kit_id);
   if (!beforeKit) {
-    added.push(summarizeKit(kit, "added", changeReasons(null, kit, "added")));
+    const item = summarizeKit(kit, "added", changeReasons(null, kit, "added"));
+    (isBackfill(kit) ? backfilled : added).push(item);
   } else if (stableKitFingerprint(beforeKit) !== stableKitFingerprint(kit)) {
     changed.push(summarizeKit(kit, "changed", changeReasons(beforeKit, kit, "changed")));
   }
@@ -279,7 +305,9 @@ for (const kit of currentDoc.kits || []) {
 
 for (const kit of beforeDoc.kits || []) {
   if (!currentById.has(kit.kit_id)) {
-    removed.push(summarizeKit(kit, "removed", changeReasons(kit, null, "removed")));
+    const item = summarizeKit(kit, "removed", changeReasons(kit, null, "removed"));
+    if (aliasMap[kit.kit_id] && currentById.has(aliasMap[kit.kit_id])) merged.push({ ...item, merged_into: aliasMap[kit.kit_id] });
+    else removed.push(item);
   }
 }
 
@@ -295,6 +323,8 @@ const entry = {
   changed_count: changed.length,
   removed_count: removed.length,
   watched_count: watched.length,
+  merged_count: merged.length,
+  backfilled_count: backfilled.length,
   premium_bandai_count: stats.premium_bandai_count,
   bbx_count: stats.bbx_count,
   franchise_counts: stats.franchise_counts,
@@ -305,6 +335,8 @@ const entry = {
   changed: sortItems(changed).slice(0, ITEM_LIMIT),
   removed: sortItems(removed).slice(0, ITEM_LIMIT),
   watched: watched.slice(0, ITEM_LIMIT),
+  merged: sortItems(merged).slice(0, ITEM_LIMIT),
+  backfilled: sortItems(backfilled).slice(0, ITEM_LIMIT),
 };
 
 const previousEntries = previousFeed.entries || [];
@@ -342,6 +374,8 @@ const liteFeed = {
     changed: (item.changed || []).slice(0, LITE_ITEM_LIMIT),
     removed: (item.removed || []).slice(0, LITE_ITEM_LIMIT),
     watched: (item.watched || []).slice(0, LITE_ITEM_LIMIT),
+    merged: (item.merged || []).slice(0, LITE_ITEM_LIMIT),
+    backfilled: (item.backfilled || []).slice(0, LITE_ITEM_LIMIT),
   })),
 };
 await writeFile(LITE_FEED_PATH, `${JSON.stringify(liteFeed, null, 2)}\n`, "utf8");
@@ -349,14 +383,21 @@ await writeFile(LITE_FEED_PATH, `${JSON.stringify(liteFeed, null, 2)}\n`, "utf8"
 // First-seen ledger: records the date each kit_id first appeared in the
 // catalog. The app uses it as a display/filter fallback for kits without an
 // official release_date (e.g. many Pokemon items), per "no release date ->
-// count by upload date". Dates are stamped once and never rewritten.
+// count by upload date", and to mark recently added kits. Dates are stamped
+// once and never rewritten. A backfill (released more than BACKFILL_AGE_MONTHS
+// before the run) is stamped with its release date, so a product from 2009
+// that a new source brings in does not show up as new.
 const FIRST_SEEN_PATH = "data/kit-first-seen.json";
+function releaseDay(value) {
+  const [year, month = "01", day = "01"] = String(value).split("-");
+  return `${year}-${month}-${day}`;
+}
 const ledger = (await readJson(FIRST_SEEN_PATH, { dates: {} })) || { dates: {} };
 ledger.dates = ledger.dates || {};
 let stamped = 0;
 for (const kit of currentDoc.kits || []) {
   if (!ledger.dates[kit.kit_id]) {
-    ledger.dates[kit.kit_id] = date;
+    ledger.dates[kit.kit_id] = isBackfill(kit) ? releaseDay(kit.release_date) : date;
     stamped += 1;
   }
 }
@@ -365,5 +406,5 @@ ledger.updated_at = date;
 await writeFile(FIRST_SEEN_PATH, `${JSON.stringify(ledger, null, 2)}\n`, "utf8");
 
 console.log(
-  `Wrote ${feedPath}: +${entry.added_count}, changed ${entry.changed_count}, removed ${entry.removed_count}, watched ${entry.watched_count}. First-seen ledger: +${stamped} stamped.`,
+  `Wrote ${feedPath}: +${entry.added_count} (+${entry.backfilled_count} backfilled), changed ${entry.changed_count}, removed ${entry.removed_count} (+${entry.merged_count} merged into another id), watched ${entry.watched_count}. First-seen ledger: +${stamped} stamped.`,
 );

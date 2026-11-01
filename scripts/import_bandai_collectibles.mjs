@@ -8,7 +8,7 @@ import {
   parseKotobukiyaShopDetail,
   parseKotobukiyaShopListings,
 } from "./lib/kotobukiya-shop.mjs";
-import { KIT_ALIASES_PATH, carryCleanupFields, gundamGradeFromName, nfkc, nonCollectibleReason, retiredKitIds } from "./lib/catalog-cleanup.mjs";
+import { KIT_ALIASES_PATH, carryCleanupFields, gundamGradeFromName, nfkc, retiredKitIds } from "./lib/catalog-cleanup.mjs";
 import { extractTamashiiGalleryImages } from "./lib/tamashii-images.mjs";
 
 const CANDY_BASE_URL = "https://www.bandai.co.jp";
@@ -271,16 +271,18 @@ async function fetchText(url) {
   throw lastError;
 }
 
-async function fetchBrowserText(url, referer = null) {
+// Bandai Hobby Global (Pokemon) and BEYBLADE X pages. Until 2026-11 this sent a
+// Chrome user-agent and a made-up referer; every source now gets the same
+// plain, self-identifying request (a failed source keeps its previous data).
+async function fetchBrowserText(url) {
   let lastError;
   for (let attempt = 1; attempt <= 3; attempt += 1) {
     try {
       const response = await fetch(url, {
         headers: {
-          "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36",
+          "user-agent": BOT_UA,
           accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
           "accept-language": "ja,en-US;q=0.9,en;q=0.8",
-          ...(referer ? { referer } : {}),
         },
       });
       if (response.ok) {
@@ -304,7 +306,6 @@ async function fetchJson(url) {
           "user-agent": BOT_UA,
           accept: "application/json",
           "accept-language": "ja,en-US;q=0.8,en;q=0.7",
-          "x-requested-with": "XMLHttpRequest",
         },
       });
       if (response.ok) {
@@ -640,7 +641,7 @@ async function importPokemonGlobalModelKits(legacyModelKits = []) {
   const byUrl = new Map();
 
   for (const pageUrl of POKEMON_GLOBAL_PRODUCTS_URLS) {
-    const html = await fetchBrowserText(pageUrl, "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/");
+    const html = await fetchBrowserText(pageUrl);
     for (const listing of parsePokemonGlobalProductList(html, pageUrl)) {
       if (!legacyIdentities.has(pokemonModelIdentity(listing.title))) {
         byUrl.set(listing.source_url, listing);
@@ -653,7 +654,7 @@ async function importPokemonGlobalModelKits(legacyModelKits = []) {
 
   const details = await mapLimit(listings, 4, async (listing) => {
     try {
-      return parsePokemonGlobalDetail(await fetchBrowserText(listing.source_url, "https://global.bandai-hobby.net/en-others/series/pokemon/"), listing.source_url);
+      return parsePokemonGlobalDetail(await fetchBrowserText(listing.source_url), listing.source_url);
     } catch (error) {
       console.warn(`Bandai Hobby Global Pokemon detail fetch failed for ${listing.source_url}: ${error.message}`);
       return { title: null, images: [], release_date: null, price_jpy: null };
@@ -721,12 +722,11 @@ async function importGashaponSearch({ label, resultUrl, franchise, gradeCode, su
     return [];
   }
   // A 【箱売】 card sells a whole box of a capsule line that has its own card.
+  // Goods (towels, card packs …) stay: clean_catalog.mjs gives them a goods_kind.
   const parsed = parseGashaponSearchListings(html, resultUrl);
   const lineTitles = new Set(parsed.filter((listing) => !/【箱売】/.test(listing.title)).map((listing) => listing.title.replace(/【[^】]*】/g, "").replace(/\s+/g, "")));
   const listings = parsed.filter(
-    (listing) =>
-      !(/【箱売】/.test(listing.title) && lineTitles.has(listing.title.replace(/【[^】]*】/g, "").replace(/\s+/g, ""))) &&
-      !nonCollectibleReason({ franchise, names: { ja: listing.title } }),
+    (listing) => !(/【箱売】/.test(listing.title) && lineTitles.has(listing.title.replace(/【[^】]*】/g, "").replace(/\s+/g, ""))),
   );
   const imported = [];
 
@@ -882,6 +882,9 @@ function buildTamashiiKit(item, detail) {
   let title = detail.title || stripTags(item.title).replace(/^\s*[＜<]\s*SIDE MS\s*[＞>]\s*/i, "");
   const brandName = detail.brandName || item.mainBrandName || "ROBOT魂";
   if (item.titleSuffix && !title.endsWith(item.titleSuffix)) title = `${title} ${item.titleSuffix}`;
+  // "ガンダムシリーズ" alone names nothing; the official title is
+  // "超合金の塊 ガンダムシリーズ" (and "Figuarts mini キラ・ヤマト").
+  if (TAMASHII_GENERIC_TITLE_BRANDS.test(nfkc(brandName)) && !nfkc(title).startsWith(nfkc(brandName))) title = `${brandName} ${title}`;
   const areaTags = item.areas?.includes("japan") ? [] : (item.areas || []).map((area) => `tamashii-${area}-only`);
   const gradeCode = tamashiiGradeCode(brandName);
   const inferred = inferWork(title, detail.work_title);
@@ -1276,7 +1279,7 @@ async function importBeybladeX(existingKits = []) {
       .filter((kit) => kit.franchise === "beyblade" && !retired.has(kit.kit_id))
       .map((kit) => [beybladeTitleKey(kit.names?.ja), kit.kit_id]),
   );
-  const html = await fetchBrowserText(BEYBLADE_X_LINEUP_URL, "https://beyblade.takaratomy.co.jp/");
+  const html = await fetchBrowserText(BEYBLADE_X_LINEUP_URL);
   const listings = parseBeybladeXListings(html, BEYBLADE_X_LINEUP_URL);
   console.log(`Found ${listings.length} Takara Tomy BEYBLADE X listings.`);
 
@@ -1285,7 +1288,7 @@ async function importBeybladeX(existingKits = []) {
       return { images: [] };
     }
     try {
-      return parseBeybladeXDetail(await fetchBrowserText(listing.detail_url, BEYBLADE_X_LINEUP_URL), listing.detail_url, listing.code);
+      return parseBeybladeXDetail(await fetchBrowserText(listing.detail_url), listing.detail_url, listing.code);
     } catch (error) {
       console.warn(`BEYBLADE X detail fetch failed for ${listing.detail_url}: ${error.message}`);
       return { images: [] };
@@ -1504,10 +1507,9 @@ async function fetchKotobukiyaShopText(url) {
     try {
       const response = await fetch(url, {
         headers: {
-          "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36",
+          "user-agent": BOT_UA,
           accept: "text/html,application/xhtml+xml",
           "accept-language": "ja-JP,ja;q=0.9,en;q=0.6",
-          referer: "https://shop.kotobukiya.co.jp/",
         },
       });
       if (response.ok) return decodeKotobukiyaShopHtml(await response.arrayBuffer());

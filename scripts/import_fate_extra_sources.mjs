@@ -27,7 +27,7 @@ import {
   parseKotobukiyaShopDetail,
   parseKotobukiyaShopListings,
 } from "./lib/kotobukiya-shop.mjs";
-import { KIT_ALIASES_PATH, nonCollectibleReason, retiredKitIds } from "./lib/catalog-cleanup.mjs";
+import { KIT_ALIASES_PATH, retiredKitIds } from "./lib/catalog-cleanup.mjs";
 import { gradeForProduct, scaleFor } from "./lib/fate-grades.mjs";
 
 const CATALOG_PATH = "data/kits.json";
@@ -233,8 +233,8 @@ async function fetchAniplex() {
     const products = parseAniplexGrid(html);
     for (const product of products) {
       if (!isFateProduct(product)) continue;
-      // Tickets, Blu-ray, CDs, games, books, apparel … share the q=Fate grid.
-      if (nonCollectibleReason({ franchise: "fate", names: { ja: product.name } })) continue;
+      // Tickets, Blu-ray, CDs, games, books, apparel … share the q=Fate grid; they
+      // stay as goods (clean_catalog.mjs sets goods_kind).
       if (!ANIPLEX_INCLUDE_GOODS && !ANIPLEX_FIGURE_PATTERN.test(product.name)) continue;
       byKey.set(product.key, product);
     }

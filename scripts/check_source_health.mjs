@@ -51,16 +51,19 @@ function nowIso() {
   return new Date().toISOString();
 }
 
+// Reachability checks identify themselves like every importer: no browser
+// user-agent, no made-up referer (a 403 is recorded, it never fails the run).
+const BOT_UA = "HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)";
+
 async function fetchText(url, options = {}) {
   const started = Date.now();
   const response = await fetch(url, {
     redirect: "follow",
     signal: AbortSignal.timeout(options.timeoutMs || 20000),
     headers: {
-      "user-agent": options.userAgent || "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36",
+      "user-agent": BOT_UA,
       accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
       "accept-language": options.language || "ja-JP,ja;q=0.9,en-US;q=0.6,en;q=0.4",
-      ...(options.referer ? { referer: options.referer } : {}),
     },
   });
   const text = new TextDecoder(options.encoding || "utf-8").decode(await response.arrayBuffer());

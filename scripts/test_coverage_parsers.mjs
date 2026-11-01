@@ -3,7 +3,7 @@
 // BANDAI SPIRITS grade/scale/date rules, the Tamashii brand grades and listing
 // checks, and the shared cleanup rules.
 import assert from "node:assert/strict";
-import { inferGrade, inferScale, parseReleaseDate } from "./import_bandai_spirits_gunpla.mjs";
+import { inferGrade, inferScale, parseReleaseDate, toKit } from "./import_bandai_spirits_gunpla.mjs";
 import { tamashiiGradeCode, tamashiiListingChanged, tamashiiReleaseDate } from "./import_bandai_collectibles.mjs";
 import { isDateLike } from "./lib/catalog.mjs";
 import {
@@ -11,12 +11,14 @@ import {
   bandaiImageId,
   carryCleanupFields,
   gundamGradeFromName,
+  goodsKind,
   hasSaleTag,
   nfkc,
-  nonCollectibleReason,
+  premiumBandaiExclusiveEvidence,
   productKey,
   publicBandaiImageUrl,
   scaleFromName,
+  stripDisplaySaleTags,
   stripSaleTags,
 } from "./lib/catalog-cleanup.mjs";
 import { listingNameMonth, parseListingCards } from "./lib/pb-listing.mjs";
@@ -136,11 +138,41 @@ import { parseWikiTables } from "./lib/wiki-tables.mjs";
   assert.equal(hasSaleTag("HGUC 1/144 リバウ"), false);
   assert.equal(productKey("ＨＧ 1/144 リック・ディアス【再販】"), productKey("HG 1/144 リック・ディアス"));
   // Plastic accessory kits are kits; decals and LED units are supplies.
-  for (const name of ["ＨＧＢＣ 1/144 ライトニングバックウェポンシステムMk-II", "オプションパーツセット ガンプラ 16 (メテオホッパー)", "ガンダムベース限定 1/100 MSスパイク01"]) {
-    assert.equal(nonCollectibleReason({ franchise: "gundam", names: { ja: name } }), null, name);
+  for (const name of [
+    "ＨＧＢＣ 1/144 ライトニングバックウェポンシステムMk-II",
+    "オプションパーツセット ガンプラ 16 (メテオホッパー)",
+    "ガンダムベース限定 1/100 MSスパイク01",
+    "ビルダーズパーツHD-04 1/144 MSバーニア01",
+    "ビルダーズパーツHD-02 1/144 MSハンド01（連邦系）",
+    "BPHD 1/144 MSエフェクト01(イエロー)",
+  ]) {
+    assert.equal(goodsKind({ franchise: "gundam", names: { ja: name } }), null, name);
     assert.ok(ACCESSORY_KIT.test(nfkc(name)), name);
   }
-  assert.equal(nonCollectibleReason({ franchise: "gundam", names: { ja: "ガンダムデカール No.120" } }), "hobby_supply");
+  assert.equal(gundamGradeFromName("ビルダーズパーツHD-02 1/144 MSハンド01（連邦系）"), "NG");
+  // Goods keep a kind the app labels; decals and LED units are hobby supplies.
+  const kind = (ja, franchise = "gundam") => goodsKind({ franchise, names: { ja } });
+  assert.equal(kind("ガンダムデカール No.120"), "hobby_supply");
+  assert.equal(kind("ＬＥＤユニット１個セット(黄) 【２０２６年９月発送】"), "hobby_supply");
+  assert.equal(kind("【Blu-ray】Vシネクスト『超宇宙刑事ギャバン インフィニティVSライヤ』", "armored_core"), "media_video");
+  assert.equal(kind("Fate / Grand Order 10th Anniversary ALBUM", "fate"), "book");
+  assert.equal(kind("ガンダムカードゲーム ブースターパック Dual Impact[GD02]"), "card_game");
+  assert.equal(kind("機動戦士ガンダム 水星の魔女 Tシャツ"), "apparel");
+  assert.equal(kind("ネックレス シャア・アズナブル"), "accessory");
+  assert.equal(kind("포켓몬 볼펜 세트", "pokemon"), "stationery");
+  assert.equal(kind("マグカップ ガンダム"), "household");
+  assert.equal(kind("ぬいぐるみポーチ ピカチュウ", "pokemon"), null); // plush stays a collectible
+  assert.equal(kind("HGPG プチッガイ ソーダポップブルー&アイスキャンディー"), null);
+  assert.equal(gundamGradeFromName("GUNDAM FIX FIGURATION METAL COMPOSITE Oガンダム"), "GFF");
+  assert.equal(gundamGradeFromName("METAL STRUCTURE 解体匠機 RX-93 νガンダム専用オプションパーツ"), "METAL_STRUCTURE");
+  // Premium Bandai renames HGBF reruns plain "ＨＧ".
+  assert.equal(productKey("ＨＧ 1/144 アメイジングズゴック 【再販】【２次：２０２５年３月発送】"), productKey("HGBF 1/144 アメイジングズゴック"));
+  assert.equal(stripSaleTags("【イベント受け取り】ＭＧ 1/100 リ・ガズィ・カスタム"), "MG 1/100 リ・ガズィ・カスタム");
+  assert.equal(stripSaleTags("【特別抽選販売】ストライクガンダム -METAL BUILD 10th Ver.-（2022年2月発送分）"), "ストライクガンダム -METAL BUILD 10th Ver.-");
+  // Display names keep their full-width spelling, without the sale tags.
+  assert.equal(stripDisplaySaleTags("ＭＧ RMS-179 ジムＩＩ 【２次：２０１７年２月発送】"), "ＭＧ RMS-179 ジムＩＩ");
+  assert.equal(stripDisplaySaleTags("【抽選販売】ＲＧ 1 / 144 νガンダム"), "ＲＧ 1 / 144 νガンダム");
+  assert.equal(stripDisplaySaleTags("超合金の塊 ガンダムシリーズ （2016年11月発売）"), "超合金の塊 ガンダムシリーズ （2016年11月発売）");
   assert.equal(bandaiImageId("https://bandai-a.akamaihd.net/bc/img/model/b/1000130551_1.jpg"), "1000130551");
   assert.equal(publicBandaiImageUrl("http://internal-pbn/bc/img/model/b/1000094473_1.jpg"), null);
   assert.equal(publicBandaiImageUrl("https://bandai-a.akamaihd.net/bc/img/model/b/1_1.jpg"), "https://bandai-a.akamaihd.net/bc/img/model/b/1_1.jpg");
@@ -161,6 +193,31 @@ import { parseWikiTables } from "./lib/wiki-tables.mjs";
   assert.deepEqual(merged.source_refs.map((ref) => ref.url), ["a2", "b"]);
   assert.deepEqual(merged.tags, ["gunpla", "premium-bandai-sale"]);
   assert.equal(carryCleanupFields(null, fresh), fresh);
+}
+
+// --- Premium Bandai exclusives --------------------------------------------------
+{
+  const keeper = (date, photo) => ({ release_date: date, images: { box_art_url: photo ? `https://bandai-a.akamaihd.net/bc/img/model/b/${photo}_1.jpg` : null } });
+  const page = (id, ja, date = null) => ({ kit_id: `pbandai-wb-${id}`, names: { ja }, release_date: date });
+  // Retail kits: a shop day on BANDAI SPIRITS, PB lottery / rerun pages years later.
+  assert.equal(premiumBandaiExclusiveEvidence(keeper("2014-04-26", "1000087927"), [page("1000250001", "【抽選販売】ＲＧ 1 / 144 ガンダムエクシア")]), null);
+  assert.equal(premiumBandaiExclusiveEvidence(keeper("2020-05-23", "1000150000"), [page("1000210000", "ＨＧ 1/144 ウィンダム【２０２４年５月発送】")]), null);
+  assert.equal(premiumBandaiExclusiveEvidence(keeper("1987-12", "1000125963"), [page("1000125963", "1/144 リ・ガズィ")]), null);
+  assert.equal(premiumBandaiExclusiveEvidence(keeper("2026-12", "1"), [page("1000260000", "【抽選販売】HG 1/144 ガンダムX")]), null);
+  assert.equal(premiumBandaiExclusiveEvidence(keeper("2002-06", "1"), [page("1000250002", "ＨＧ メカニクス 1 / 550 ヴァル・ヴァロ")]), null);
+  assert.equal(premiumBandaiExclusiveEvidence(keeper("2018-08-04", "1"), [page("1000257314", "ＨＧ 1/144 陸戦型ガンダム（パラシュート・パック仕様）【再販】")]), null);
+  // PB exclusives: no shop day on BANDAI SPIRITS (a month, or the 1st) and a PB page.
+  const sale = "PB sale page of a kit without a shop day";
+  assert.equal(premiumBandaiExclusiveEvidence(keeper("2021-03", "1000150001"), [page("1000150001", "ＭＧ 1/100 ガンダムＦ９０ ２号機")]), "original PB listing");
+  assert.equal(premiumBandaiExclusiveEvidence(keeper("2025-08", "1000226427"), [page("1000226427", "【抽選販売】RG 1 / 144 MS-06S ザクII [初音ミクVer.]")]), "original PB listing");
+  assert.equal(premiumBandaiExclusiveEvidence(keeper("2012-09", "1"), [page("1000220000", "ＨＧ 1/144 ダナジン（紫カラー）【再販】【２次：２０２２年２月発送】")]), sale);
+  assert.equal(premiumBandaiExclusiveEvidence(keeper("2015-04", "1"), [page("1000099999", "HGUC 1/144 ペイルライダー（陸戦重装備仕様）【３次：２０１５年６月発送】")]), sale);
+  assert.equal(premiumBandaiExclusiveEvidence(keeper("2020-06-01", "1"), [page("1000254488", "ＭＧ 1/100 RGM-89D ジェガン Ｄ型（先行配備機）【再販】")]), sale);
+  assert.equal(premiumBandaiExclusiveEvidence(keeper("2019-08-10", "1"), [page("1000140000", "【プレミアムバンダイ限定】ＨＧ 1/144 ザク")]), "page says PB limited");
+  // A BANDAI SPIRITS card never flags itself as a PB exclusive.
+  const card = { source_url: "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102591234", image_url: "https://bandai-a.akamaihd.net/bc/img/model/b/1000125963_1.jpg", title: "1/144 リ・ガズィ", release_text: "1987年12月15日", price_text: "880円" };
+  assert.equal(toKit(card).is_limited, false);
+  assert.equal(toKit(card).is_premium_bandai, undefined);
 }
 
 // --- Release dates -------------------------------------------------------------

@@ -1,4 +1,5 @@
 import { existsSync, readFileSync } from "node:fs";
+import { GOODS_KINDS } from "./lib/catalog-cleanup.mjs";
 import { isDateLike, kitName, loadCatalog } from "./lib/catalog.mjs";
 
 const { grades, kits, sources, gradeByCode, sourceById } = loadCatalog();
@@ -150,6 +151,12 @@ for (const kit of kits) {
   if (!Array.isArray(kit.tags)) {
     addError(`${context}: tags must be an array`);
   }
+
+  // Goods (clean_catalog.mjs): category "goods" and a goods_kind the apps label.
+  if (kit.goods_kind !== undefined || kit.category !== undefined) {
+    if (kit.category !== "goods") addError(`${context}: category must be "goods" when present`);
+    if (!GOODS_KINDS.includes(kit.goods_kind)) addError(`${context}: goods_kind ${kit.goods_kind} is not one of ${GOODS_KINDS.join(", ")}`);
+  }
 }
 
 // data/kit-aliases.json lists kit_ids removed from the catalog. A listed id must
@@ -160,8 +167,10 @@ if (aliasDoc) {
     if (kitIds.has(from)) addError(`kit-aliases: ${from} is aliased to ${to} but is still in the catalog`);
     if (!kitIds.has(to)) addError(`kit-aliases: ${from} is aliased to ${to}, which is not in the catalog`);
   }
-  for (const id of Object.keys(aliasDoc.excluded || {})) {
+  for (const [id, reason] of Object.entries(aliasDoc.excluded || {})) {
     if (kitIds.has(id)) addError(`kit-aliases: ${id} is excluded but still in the catalog`);
+    // Goods stay in the catalog; only another franchise's / IP's records are removed.
+    if (!/^wrong_franchise\b/.test(String(reason))) addError(`kit-aliases: ${id} is excluded for "${reason}"; only wrong_franchise records may be removed`);
   }
 }
 

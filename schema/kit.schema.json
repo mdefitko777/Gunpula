@@ -138,6 +138,16 @@
       "type": "array",
       "items": { "type": "string" }
     },
+    "category": {
+      "type": "string",
+      "enum": ["goods"],
+      "description": "Set by scripts/clean_catalog.mjs on products that are not model kits or figures (Blu-ray, CD, books, tickets, apparel …)."
+    },
+    "goods_kind": {
+      "type": "string",
+      "enum": ["ticket", "apparel", "accessory", "household", "stationery", "acrylic", "media_video", "media_audio", "book", "pamphlet", "food", "video_game", "board_game", "card_game", "hobby_supply", "other"],
+      "description": "Sub-category of a goods record (category goods); the apps label it (티켓 · 의류 · 생활용품 · 블루레이 · 음반 · 책 …)."
+    },
     "taxonomy_ids": {
       "type": "array",
       "items": { "type": "string" },

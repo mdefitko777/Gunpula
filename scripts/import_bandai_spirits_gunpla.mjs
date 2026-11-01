@@ -3,7 +3,6 @@ import { pathToFileURL } from "node:url";
 import {
   ACCESSORY_KIT,
   REAL_GRADE_1_1,
-  bandaiImageId,
   carryCleanupFields,
   gundamGradeFromName,
   nfkc,
@@ -319,15 +318,16 @@ function kitIdFor(card, gradeCode) {
   return `${gradePrefix}-${slugifyTitle(card.title)}-${productId}`;
 }
 
-// knownPbIds: Premium Bandai item ids the catalog has seen (Wayback index,
-// pbandai.json, retired PB pages). A BANDAI SPIRITS card of a PB exclusive
-// shows the PB item's own photo, model/b/<PB item id>_1.jpg.
-export function toKit(card, knownPbIds = new Set()) {
+// The card alone never makes a kit a Premium Bandai exclusive: retail kits
+// sold in the PB shop carry the same product photo id as their PB page
+// (pbandai.json lists hundreds), so that test flagged common kits as limited.
+// clean_catalog.mjs decides from the PB pages folded into the record
+// (premiumBandaiExclusiveEvidence); the name markers below are the card's own.
+export function toKit(card) {
   const grade = inferGrade(card.title);
   if (!grade) {
     return null;
   }
-  const pbOriginal = knownPbIds.has(bandaiImageId(card.image_url));
 
   const releaseDate = parseReleaseDate(card.release_text);
   const priceJpy = parsePrice(card.price_text);
@@ -356,8 +356,7 @@ export function toKit(card, knownPbIds = new Set()) {
     work_title: work.work_title,
     release_date: releaseDate,
     price_jpy: priceJpy,
-    is_limited: pbOriginal || /限定|イベント|抽選|プレミアムバンダイ|ガンダムベース|EXPO\d{4}/.test(nfkc(card.title)),
-    ...(pbOriginal ? { is_premium_bandai: true } : {}),
+    is_limited: /限定|イベント|抽選|プレミアムバンダイ|ガンダムベース|EXPO\d{4}/.test(nfkc(card.title)),
     data_status: "needs_review",
     source_urls: [card.source_url],
     source_refs: [
@@ -407,31 +406,6 @@ function pageUrl(page) {
   return `${BASE_URL}${RESULT_PATH}?paging=${page}&dsp_cnt=20&sort=salesdate&order=desc&category=1`;
 }
 
-async function knownPremiumBandaiIds() {
-  const ids = new Set();
-  const read = async (path) => {
-    try {
-      return JSON.parse(await readFile(path, "utf8"));
-    } catch {
-      return null;
-    }
-  };
-  const wayback = await read("data/premium-bandai-wayback-index.json");
-  for (const url of Object.keys(wayback?.entries || {})) {
-    const id = /item-(\d{10})/.exec(url)?.[1];
-    if (id) ids.add(id);
-  }
-  for (const item of (await read("data/pbandai.json"))?.items || []) {
-    const id = /(\d{10})/.exec(item.id || item.url || "")?.[1];
-    if (id) ids.add(id);
-  }
-  const aliasDoc = await read("data/kit-aliases.json");
-  for (const id of [...Object.keys(aliasDoc?.aliases || {}), ...Object.keys(aliasDoc?.excluded || {})]) {
-    if (id.startsWith("pbandai-wb-")) ids.add(id.slice("pbandai-wb-".length));
-  }
-  return ids;
-}
-
 // What clean_catalog.mjs folded into a kit (PB refs, PB flags, cleanup tags)
 // survives the daily re-import; every field this importer owns is refreshed.
 export function mergeImportedKit(previous, kit) {
@@ -462,9 +436,8 @@ async function main() {
   const seenIds = new Set();
   let skipped = 0;
 
-  const knownPbIds = await knownPremiumBandaiIds();
   for (const card of cards) {
-    const kit = toKit(card, knownPbIds);
+    const kit = toKit(card);
     if (!kit) {
       skipped += 1;
       continue;

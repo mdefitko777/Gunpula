@@ -1,46 +1,62 @@
-// Removes records that should not be in the published catalog and fixes the
-// GUNDAM_MERCH grade on Premium Bandai / Gashapon kits. Runs after every import
-// (run_importers.mjs), so a record an importer brings back is dropped again.
+// Tidies the catalog after every import (run_importers.mjs), so whatever an
+// importer brings back is classified and folded again on the next daily run:
 //
-//   * non-collectibles (Blu-ray, CD, books, tickets, apparel, household …)
+//   * goods: Blu-ray, CD, books, tickets, apparel, household goods, card games …
+//     stay in the catalog with `category: "goods"`, a `goods_kind` the apps
+//     label (티켓 · 의류 · 생활용품 · 블루레이 · 음반 · 책 …) and the franchise's
+//     goods grade. data/goods-kinds.json holds hand-checked kinds for records
+//     whose name does not say what they are (Aniplex+ disc titles);
+//   * the real grade of Premium Bandai / Gashapon kits imported as GUNDAM_MERCH;
 //   * sale pages of a product the catalog already has: Premium Bandai lottery /
 //     resale / 2次発送 pages, Tamashii Web 【抽選販売】/【2次：…発送分】 pages,
-//     Gashapon 【箱売】 box-sale cards of a capsule wave the catalog has
-//   * anything listed in data/kit-aliases.json (curated duplicates and
-//     exclusions, plus everything this script found on earlier runs)
+//     Gashapon 【箱売】 box-sale cards of a capsule wave the catalog has;
+//   * anything listed in data/kit-aliases.json: `aliases` (duplicates and
+//     everything this script folded on earlier runs) and `excluded` (curated:
+//     only records of the wrong franchise / IP, e.g. a 超宇宙刑事ギャバン Blu-ray
+//     that matched Armored Core).
 //
-// kit_ids are never renamed. A removed id is recorded in data/kit-aliases.json:
-// `aliases` maps a duplicate to the record that survives, `excluded` says why a
-// record was dropped. split_catalog.mjs publishes the alias map next to the
-// split files (data/split/kit-aliases.json) and the app moves saved collection
-// entries with it.
+// kit_ids are never renamed. A folded id is recorded in data/kit-aliases.json
+// (`aliases` maps it to the record that survives); split_catalog.mjs publishes
+// the map next to the split files and the apps move saved entries with it.
+// When the app already shows a Premium Bandai record and BANDAI SPIRITS lists
+// the same kit under a new id, the published id stays and takes the BANDAI
+// SPIRITS product data.
 //
 // When a Premium Bandai page is folded into another record, what the page knew
-// moves with it: its source ref, price/date when the survivor has none, and the
-// Premium Bandai / limited flags (step 6).
+// moves with it: its source ref, a price/date the survivor lacks, the earliest
+// shipping month, and the Premium Bandai / limited flags only when the pages
+// show a PB exclusive (premiumBandaiExclusiveEvidence) — a lottery or rerun
+// page of a retail kit only adds the premium-bandai-sale tag.
 //
 //   node scripts/clean_catalog.mjs            rewrite data/kits.json + kit-aliases.json
 //   node scripts/clean_catalog.mjs --check    report only, exit 1 if anything would change
 import { readFile, writeFile } from "node:fs/promises";
 import {
   ACCESSORY_KIT,
+  GOODS_GRADE,
+  GOODS_KINDS,
+  KEEPS_GRADE_AS_GOODS,
   KIT_ALIASES_PATH,
   bandaiImageId,
   emptyAliases,
+  goodsKind,
   gundamGradeFromName,
   hasModelCode,
   hasSaleTag,
   kitNameText,
   nfkc,
-  nonCollectibleReason,
+  premiumBandaiExclusiveEvidence,
   productKey,
   resolveAlias,
   scaleFromName,
+  stripDisplaySaleTags,
   stripSaleTags,
 } from "./lib/catalog-cleanup.mjs";
 
 const CATALOG_PATH = "data/kits.json";
 const FIRST_SEEN_PATH = "data/kit-first-seen.json";
+const GOODS_KINDS_PATH = "data/goods-kinds.json";
+const BANDAI_SPIRITS_SOURCE = "bandai_spirits_products_jp";
 const checkOnly = process.argv.includes("--check");
 const verbose = process.argv.includes("--verbose");
 
@@ -56,27 +72,25 @@ function today() {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
 }
 
-const catalog = JSON.parse(await readFile(CATALOG_PATH, "utf8"));
+const catalogText = await readFile(CATALOG_PATH, "utf8");
+const catalog = JSON.parse(catalogText);
+const before = JSON.stringify(catalog.kits);
 const aliasDoc = { ...emptyAliases(), ...(await readJson(KIT_ALIASES_PATH, emptyAliases())) };
 const aliases = { ...aliasDoc.aliases };
 const excluded = { ...aliasDoc.excluded };
+const goodsOverrides = (await readJson(GOODS_KINDS_PATH, { overrides: {} })).overrides || {};
 // Ids the app has already published (build_update_feed.mjs stamps every new id
 // after the cleanup). An id missing here was created by this very run.
 const firstSeen = (await readJson(FIRST_SEEN_PATH, { dates: {} })).dates || {};
 const kitsById = new Map(catalog.kits.map((kit) => [kit.kit_id, kit]));
-const log = { excluded: [], aliased: [], relabelled: [], tagged: [], flagged: [] };
+const log = { aliased: [], relabelled: [], tagged: [], flagged: [], goods: [], adopted: [], renamed: [] };
 
 function addAlias(fromId, toId, why) {
-  if (fromId === toId || aliases[fromId] || excluded[fromId]) return;
-  if (resolveAlias(aliases, toId) === fromId) return; // never create a cycle
+  if (fromId === toId || aliases[fromId] || excluded[fromId]) return false;
+  if (resolveAlias(aliases, toId) === fromId) return false; // never create a cycle
   aliases[fromId] = toId;
   log.aliased.push({ kit_id: fromId, to: toId, why });
-}
-
-function addExcluded(kitId, reason) {
-  if (aliases[kitId] || excluded[kitId]) return;
-  excluded[kitId] = reason;
-  log.excluded.push({ kit_id: kitId, reason });
+  return true;
 }
 
 function addTag(kit, tag) {
@@ -87,9 +101,19 @@ function addTag(kit, tag) {
   return true;
 }
 
+const unique = (values) => [...new Set(values.filter(Boolean))];
 const isLive = (kit) => !aliases[kit.kit_id] && !excluded[kit.kit_id];
+const isGoods = (kit) => kit.category === "goods";
 const isPbPage = (kit) => kit.kit_id.startsWith("pbandai-wb-");
+const isBandaiSpirits = (kit) => (kit.source_refs || []).some((ref) => ref.source_id === BANDAI_SPIRITS_SOURCE);
 const pbItemId = (kit) => (isPbPage(kit) ? kit.kit_id.slice("pbandai-wb-".length) : null);
+// A PB record that took over a BANDAI SPIRITS kit (step 6a) is that kit now:
+// the duplicate pass treats it like the BANDAI SPIRITS record, not like a page.
+const isPbOnlyPage = (kit) => isPbPage(kit) && !isBandaiSpirits(kit);
+// A PB record's name as Premium Bandai listed it (【抽選販売】, 【再販】 …): step 7
+// tidies the display name and keeps the listing name in premium_bandai.listing_name.
+const listingName = (kit) => kit.premium_bandai?.listing_name || kitNameText(kit);
+const asListedPage = (kit) => ({ kit_id: kit.kit_id, names: { ja: listingName(kit) } });
 const imageId = (kit) => bandaiImageId(kit.images?.box_art_url);
 const published = (kit) => Boolean(firstSeen[kit.kit_id]);
 const priceClose = (a, b) => !Number.isFinite(a) || !Number.isFinite(b) || Math.max(a, b) / Math.max(1, Math.min(a, b)) <= 1.6;
@@ -99,17 +123,29 @@ const monthIndex = (date) => {
   return match ? Number(match[1]) * 12 + Number(match[2]) : null;
 };
 
-// 1. Non-collectibles, in every franchise.
+// 1. Goods, in every franchise. A curated kind (data/goods-kinds.json) wins,
+//    then the name rules; a record classified on an earlier run keeps its kind.
 for (const kit of catalog.kits) {
   if (!isLive(kit)) continue;
-  const reason = nonCollectibleReason(kit);
-  if (reason) addExcluded(kit.kit_id, reason);
+  const curated = GOODS_KINDS.includes(goodsOverrides[kit.kit_id]) ? goodsOverrides[kit.kit_id] : null;
+  const kind = curated || goodsKind(kit) || (GOODS_KINDS.includes(kit.goods_kind) ? kit.goods_kind : null);
+  if (!kind) continue;
+  const grade = GOODS_GRADE[kit.franchise] && !KEEPS_GRADE_AS_GOODS.test(kit.grade_code || "") ? GOODS_GRADE[kit.franchise] : kit.grade_code;
+  if (kit.category !== "goods" || kit.goods_kind !== kind || kit.grade_code !== grade || kit.scale !== "non-scale") {
+    log.goods.push({ kit_id: kit.kit_id, kind, from: kit.grade_code, to: grade });
+  }
+  kit.category = "goods";
+  kit.goods_kind = kind;
+  kit.grade_code = grade;
+  // Ticket dates ("1/24 公演") are not scales.
+  kit.scale = "non-scale";
+  if (Array.isArray(kit.tags)) kit.tags = kit.tags.filter((tag) => tag !== "accessory-kit");
 }
 
-// 1b. Plastic accessory kits (HGBC, オプションパーツセット ガンプラ, ガンダムベース
-//     MSエフェクト …) stay in the catalog, tagged so the app can tell them apart.
+// 1b. Plastic accessory kits (HGBC, オプションパーツセット ガンプラ, ビルダーズパーツHD,
+//     ガンダムベース MSエフェクト …) are kits, tagged so the app can tell them apart.
 for (const kit of catalog.kits) {
-  if (isLive(kit) && kit.franchise === "gundam" && ACCESSORY_KIT.test(kitNameText(kit))) addTag(kit, "accessory-kit");
+  if (isLive(kit) && !isGoods(kit) && kit.franchise === "gundam" && ACCESSORY_KIT.test(kitNameText(kit))) addTag(kit, "accessory-kit");
 }
 
 // 2. Gundam grade from the product name. Premium Bandai Wayback and the Gashapon
@@ -117,7 +153,7 @@ for (const kit of catalog.kits) {
 //    ROBOT魂, METAL BUILD, MOBILE SUIT ENSEMBLE … The relabel runs before the
 //    duplicate passes so they compare like with like.
 for (const kit of catalog.kits) {
-  if (!isLive(kit) || kit.franchise !== "gundam" || kit.grade_code !== "GUNDAM_MERCH") continue;
+  if (!isLive(kit) || isGoods(kit) || kit.franchise !== "gundam" || kit.grade_code !== "GUNDAM_MERCH") continue;
   const grade = gundamGradeFromName(kitNameText(kit));
   if (!grade) continue;
   const scale = scaleFromName(kitNameText(kit));
@@ -127,10 +163,11 @@ for (const kit of catalog.kits) {
 }
 
 // 3. Tamashii Web opens a new item page for every sales batch of one figure
-//    (【抽選販売】, 【2次：2027年5月発送分】, 【事後販売】 …) and for straight
-//    reissues, sometimes with the brand repeated in the title ("METAL STRUCTURE
-//    解体匠機 …"). Same brand line + same name without sale tags and brand =
-//    same product; the oldest page (lowest Tamashii id) is the record that stays.
+//    (【抽選販売】, 【2次：2027年5月発送分】, 【事後販売】, "…（2022年2月発送分）") and
+//    for straight reissues, sometimes with the brand repeated in the title
+//    ("METAL STRUCTURE 解体匠機 …"). Same brand line + same name without sale
+//    tags and brand = same product. The page the app already shows stays, then
+//    the oldest page (lowest Tamashii id).
 {
   const BRAND_PREFIX = /^(?:METAL STRUCTURE\s*(?:解体匠機)?|METAL ROBOT魂|ROBOT魂|METAL BUILD|GUNDAM FIX FIGURATION(?:\s*METAL COMPOSITE)?|超合金)\s*/i;
   const groups = new Map();
@@ -147,7 +184,7 @@ for (const kit of catalog.kits) {
   }
   for (const members of groups.values()) {
     if (members.length < 2) continue;
-    members.sort((a, b) => Number(a.kit_id.slice(9)) - Number(b.kit_id.slice(9)));
+    members.sort((a, b) => (published(b) ? 1 : 0) - (published(a) ? 1 : 0) || Number(a.kit_id.slice(9)) - Number(b.kit_id.slice(9)));
     for (const kit of members.slice(1)) addAlias(kit.kit_id, members[0].kit_id, "tamashii sale batch / reissue page");
   }
 }
@@ -210,8 +247,12 @@ for (const kit of catalog.kits) {
 //    Which record stays: a non-PB record (the image-linked one, then equal
 //    price, matching model code, nearest month), else the PB page the app has
 //    already published, then the one without sale tags, then the oldest item id.
+//    Exception: a BANDAI SPIRITS record new in this run never replaces a PB
+//    record the app already shows; it is folded into that record instead
+//    (step 6 moves its product data over), so saved collections keep their id.
 //    Gashapon figure records (mse-/gsf-) are never the target of a PB page: a PB
 //    line card sells the whole wave.
+const adopted = new Set(); // PB records that take a folded BANDAI SPIRITS record's data
 {
   const kaSignature = (kit) => /Ka signature/i.test(`${kit.subline || ""} ${kitNameText(kit)}`);
   const isFigureRecord = (kit) => /^(?:mse|gsf)-/.test(kit.kit_id);
@@ -224,9 +265,9 @@ for (const kit of catalog.kits) {
     const name = kitNameText(kit);
     const bare = productKey(name, { keepCodes: false });
     if (!bare) continue;
-    const entry = { kit, full: productKey(name), coded: hasModelCode(name), tagged: hasSaleTag(name), month: monthIndex(kit.release_date) };
+    const entry = { kit, full: productKey(name), coded: hasModelCode(name), tagged: hasSaleTag(isPbPage(kit) ? listingName(kit) : name), month: monthIndex(kit.release_date) };
     entries.set(kit.kit_id, entry);
-    const key = `${kit.grade_code}|${kaSignature(kit) ? "ka" : ""}|${bare}`;
+    const key = `${kit.grade_code}|${isGoods(kit) ? `goods:${kit.goods_kind}` : ""}|${kaSignature(kit) ? "ka" : ""}|${bare}`;
     if (!groups.has(key)) groups.set(key, []);
     groups.get(key).push(entry);
     entry.group = groups.get(key);
@@ -248,17 +289,18 @@ for (const kit of catalog.kits) {
     }
     return 0;
   };
+  const pbRank = (entry) => [published(entry.kit) ? 0 : 1, entry.tagged ? 1 : 0, Number(pbItemId(entry.kit))];
   for (const member of entries.values()) {
-    if (!isPbPage(member.kit)) continue;
+    if (!isPbOnlyPage(member.kit) || !isLive(member.kit)) continue;
     const linked = new Set([...(byImage.get(pbItemId(member.kit)) || []), ...(byImage.get(imageId(member.kit)) || [])]);
     const candidates = new Set();
-    for (const other of linked) if (other !== member && priceClose(member.kit.price_jpy, other.kit.price_jpy)) candidates.add(other);
-    for (const other of member.group) {
-      if (other !== member && sameProduct(member, other) && priceClose(member.kit.price_jpy, other.kit.price_jpy)) candidates.add(other);
-    }
+    // Goods only meet goods of the same kind.
+    const compatible = (other) => other !== member && isGoods(other.kit) === isGoods(member.kit) && priceClose(member.kit.price_jpy, other.kit.price_jpy);
+    for (const other of linked) if (compatible(other)) candidates.add(other);
+    for (const other of member.group) if (compatible(other) && sameProduct(member, other)) candidates.add(other);
     if (!candidates.size) continue;
     const rank = (entry) => {
-      if (isPbPage(entry.kit)) return [1, published(entry.kit) ? 0 : 1, entry.tagged ? 1 : 0, Number(pbItemId(entry.kit))];
+      if (isPbOnlyPage(entry.kit)) return [1, ...pbRank(entry)];
       const months = member.month != null && entry.month != null ? Math.abs(member.month - entry.month) : 9999;
       return [
         0,
@@ -270,16 +312,29 @@ for (const kit of catalog.kits) {
         entry.kit.kit_id,
       ];
     };
-    const keeper = [member, ...candidates].reduce((best, entry) => (compare(rank(entry), rank(best)) < 0 ? entry : best)).kit;
-    if (keeper !== member.kit) addAlias(member.kit.kit_id, keeper.kit_id, "Premium Bandai page of a product already in the catalog");
+    const pool = [member, ...candidates];
+    const keeper = pool.reduce((best, entry) => (compare(rank(entry), rank(best)) < 0 ? entry : best));
+    if (keeper === member) continue;
+    const publishedPb = pool.filter((entry) => isPbOnlyPage(entry.kit) && published(entry.kit) && isLive(entry.kit));
+    if (!isPbPage(keeper.kit) && !published(keeper.kit) && isBandaiSpirits(keeper.kit) && publishedPb.length && isLive(keeper.kit)) {
+      const pbKeeper = publishedPb.reduce((best, entry) => (compare(pbRank(entry), pbRank(best)) < 0 ? entry : best));
+      if (addAlias(keeper.kit.kit_id, pbKeeper.kit.kit_id, "new BANDAI SPIRITS id of a Premium Bandai record the app already shows")) {
+        adopted.add(pbKeeper.kit.kit_id);
+      }
+      if (pbKeeper !== member) addAlias(member.kit.kit_id, pbKeeper.kit.kit_id, "Premium Bandai page of a product already in the catalog");
+      continue;
+    }
+    const target = resolveAlias(aliases, keeper.kit.kit_id);
+    if (target !== member.kit.kit_id) addAlias(member.kit.kit_id, target, "Premium Bandai page of a product already in the catalog");
   }
 }
 
 // 6. Fold what the dropped duplicate knew into the record that stays: its
 //    source_refs (so the PB price/page or the Pokemon Center JAN is not lost),
-//    any price/date the survivor lacks, and, for Premium Bandai pages, the PB
-//    and limited flags.
+//    any price/date the survivor lacks, and, for Premium Bandai pages, the
+//    shipping month and the PB / limited flags (below).
 const pbPagesByKeeper = new Map();
+const bandaiSpiritsByPbKeeper = new Map();
 for (const [fromId, toIdRaw] of Object.entries(aliases)) {
   const toId = resolveAlias(aliases, toIdRaw);
   aliases[fromId] = toId;
@@ -292,40 +347,80 @@ for (const [fromId, toIdRaw] of Object.entries(aliases)) {
   if (extra.length) to.source_refs = [...refs, ...extra.map((ref) => ({ ...ref, confidence: ref.confidence === "high" ? "medium" : ref.confidence }))];
   if (to.price_jpy == null && Number.isInteger(from.price_jpy) && !/【箱売】/.test(from.names?.ja || "")) to.price_jpy = from.price_jpy;
   if (!to.release_date && from.release_date) to.release_date = from.release_date;
-  if (isPbPage(from) && !isPbPage(to)) {
+  if (isPbPage(from)) {
     if (!pbPagesByKeeper.has(toId)) pbPagesByKeeper.set(toId, []);
     pbPagesByKeeper.get(toId).push(from);
   }
+  if (isPbPage(to) && !isPbPage(from) && isBandaiSpirits(from)) bandaiSpiritsByPbKeeper.set(toId, from);
 }
 
-// A BANDAI SPIRITS or Tamashii record does not say whether the product was a
-// Premium Bandai exclusive; the PB pages folded into it do:
-//   * a PB page whose item id is the record's own product photo id is the
-//     product's original PB listing;
-//   * resale / lottery / Nth-batch pages (【再販】【２次：…発送】) are repeat PB
-//     sales, which Premium Bandai runs for its own items;
-//   * an untagged PB page with its own photo is a retail kit Premium Bandai
-//     also sells (the current PB Gunpla shop lists retail reruns). That is a
-//     sales channel, not a limited: tag premium-bandai-sale only.
-// A Tamashii figure counts as limited only when Tamashii itself says so
-// (魂ウェブ商店 / event); otherwise PB is a sales channel there too.
-for (const [toId, pages] of pbPagesByKeeper) {
+// 6a. A PB record that absorbed a new BANDAI SPIRITS id takes that record's
+//     product data (official name, grade, release day, photos); its kit_id stays.
+const ADOPTED_FIELDS = ["names", "grade_code", "subline", "scale", "number", "release_date", "price_jpy", "images", "gallery_image_urls", "universe", "work_title"];
+for (const [toId, from] of bandaiSpiritsByPbKeeper) {
   const to = kitsById.get(toId);
   if (!to || !isLive(to)) continue;
-  const ownImage = imageId(to);
-  const original = Boolean(ownImage) && pages.some((page) => pbItemId(page) === ownImage || imageId(page) === ownImage);
-  const repeatSale = pages.some((page) => hasSaleTag(kitNameText(page)));
-  const exclusive = to.kit_id.startsWith("tamashii-") ? Boolean(to.is_limited) : original || repeatSale;
-  if (!exclusive) {
+  if (!to.premium_bandai?.listing_name) to.premium_bandai = { ...(to.premium_bandai || {}), listing_name: to.names?.ja || null };
+  for (const field of ADOPTED_FIELDS) {
+    if (from[field] == null || (Array.isArray(from[field]) && !from[field].length)) continue;
+    if (field === "names") {
+      // localize_catalog.mjs fills the other languages; only a new Japanese name resets them.
+      if (nfkc(from.names?.ja) && nfkc(from.names.ja) !== nfkc(to.names?.ja)) to.names = { ...from.names };
+      continue;
+    }
+    to[field] = from[field];
+  }
+  to.source_urls = unique([...(from.source_urls || []), ...(to.source_urls || [])]);
+  to.tags = unique([...(to.tags || []), ...(from.tags || [])]);
+  to.is_limited = Boolean(from.is_limited);
+  log.adopted.push({ kit_id: toId, from: from.kit_id });
+}
+
+// 6b. A Premium Bandai record that absorbed later pages of the same PB item
+//     (再販, 2次/3次発送) keeps the earliest shipping month: that is the release.
+for (const [toId, pages] of pbPagesByKeeper) {
+  const to = kitsById.get(toId);
+  if (!to || !isLive(to) || !isPbPage(to) || bandaiSpiritsByPbKeeper.has(toId)) continue;
+  const earliest = pages.map((page) => page.release_date).filter((date) => monthIndex(date) != null).sort()[0];
+  if (earliest && (monthIndex(to.release_date) == null || monthIndex(earliest) < monthIndex(to.release_date))) to.release_date = earliest;
+}
+
+// 6c. Premium Bandai / limited flags. A BANDAI SPIRITS or Tamashii record does
+//     not say whether the product was a PB exclusive, and a PB page folded into
+//     it is not proof either (lotteries, reruns and shop pages of retail kits
+//     carry sale tags too): premiumBandaiExclusiveEvidence decides. Otherwise
+//     PB is a sales channel: tag premium-bandai-sale, flags untouched.
+//     A Tamashii figure counts as limited only when Tamashii itself says so
+//     (魂ウェブ商店 / event). A PB record that took over a BANDAI SPIRITS kit
+//     is judged the same way, its own page counting as one of the PB pages.
+for (const toId of new Set([...pbPagesByKeeper.keys(), ...bandaiSpiritsByPbKeeper.keys()])) {
+  const to = kitsById.get(toId);
+  if (!to || !isLive(to) || (isPbPage(to) && !bandaiSpiritsByPbKeeper.has(toId))) continue;
+  const pages = (pbPagesByKeeper.get(toId) || []).filter((page) => page !== to).map(asListedPage);
+  const evidencePages = isPbPage(to) ? [asListedPage(to), ...pages] : pages;
+  const evidence = to.kit_id.startsWith("tamashii-") ? (to.is_limited ? "Tamashii limited" : null) : premiumBandaiExclusiveEvidence(to, evidencePages);
+  if (!evidence) {
     addTag(to, "premium-bandai-sale");
     continue;
   }
   if (to.is_premium_bandai !== true || to.is_limited !== true || !to.premium_bandai) {
-    const latest = [...pages].sort((a, b) => Number(pbItemId(b)) - Number(pbItemId(a)))[0];
+    const latest = [...evidencePages].map((page) => kitsById.get(page.kit_id)).sort((a, b) => Number(pbItemId(b)) - Number(pbItemId(a)))[0];
     to.is_premium_bandai = true;
     to.is_limited = true;
-    to.premium_bandai = to.premium_bandai || { ...(latest.premium_bandai || {}), captured_via: latest.premium_bandai?.captured_via || "wayback" };
-    log.flagged.push({ kit_id: toId, pages: pages.length, original });
+    to.premium_bandai = to.premium_bandai || { ...(latest?.premium_bandai || {}), captured_via: latest?.premium_bandai?.captured_via || "wayback" };
+    log.flagged.push({ kit_id: toId, pages: evidencePages.length, evidence });
+  }
+}
+
+// 7. Display names of Premium Bandai and Tamashii records lose their sale tags
+//    (【抽選販売】, 【再販】【２次：２０１７年２月発送】, "（2022年2月発送分）").
+for (const kit of catalog.kits) {
+  if (!isLive(kit) || !(isPbPage(kit) || kit.kit_id.startsWith("tamashii-")) || !kit.names) continue;
+  const names = Object.fromEntries(Object.entries(kit.names).map(([lang, value]) => [lang, stripDisplaySaleTags(value)]));
+  if (JSON.stringify(names) !== JSON.stringify(kit.names)) {
+    if (isPbPage(kit) && !kit.premium_bandai?.listing_name) kit.premium_bandai = { ...(kit.premium_bandai || {}), listing_name: kit.names.ja };
+    log.renamed.push({ kit_id: kit.kit_id, from: kit.names.ja, to: names.ja });
+    kit.names = names;
   }
 }
 
@@ -346,17 +441,21 @@ const byFranchise = (entries) =>
     acc[franchise] = (acc[franchise] || 0) + 1;
     return acc;
   }, {});
+const goodsCount = kept.filter(isGoods).length;
 console.log(
-  `Catalog cleanup: ${removed} records removed (${log.excluded.length} newly excluded ${JSON.stringify(byFranchise(log.excluded))}, ` +
-    `${log.aliased.length} newly aliased ${JSON.stringify(byFranchise(log.aliased))}), ${log.relabelled.length} grades relabelled, ` +
-    `${log.flagged.length} records given the Premium Bandai / limited flags of their PB pages, ${log.tagged.length} tags added; ` +
+  `Catalog cleanup: ${removed} records removed (${log.aliased.length} newly aliased ${JSON.stringify(byFranchise(log.aliased))}), ` +
+    `${log.goods.length} records classified as goods (${goodsCount} goods in total), ${log.relabelled.length} grades relabelled, ` +
+    `${log.flagged.length} records given the Premium Bandai / limited flags of their PB pages, ${log.adopted.length} PB records took BANDAI SPIRITS data, ` +
+    `${log.renamed.length} names lost sale tags, ${log.tagged.length} tags added; ` +
     `${kept.length} records remain. kit-aliases.json: ${Object.keys(aliases).length} aliases, ${Object.keys(excluded).length} excluded.`,
 );
 if (verbose) {
-  for (const entry of log.excluded) console.log(`  excluded ${entry.kit_id} (${entry.reason}) ${kitNameText(kitsById.get(entry.kit_id))}`);
+  for (const entry of log.goods) console.log(`  goods    ${entry.kit_id} ${entry.kind} (${entry.from} -> ${entry.to}) ${kitNameText(kitsById.get(entry.kit_id))}`);
   for (const entry of log.aliased) console.log(`  alias    ${entry.kit_id} -> ${entry.to} (${entry.why})`);
   for (const entry of log.relabelled) console.log(`  grade    ${entry.kit_id} ${entry.from} -> ${entry.to}`);
-  for (const entry of log.flagged) console.log(`  pb       ${entry.kit_id} (${entry.pages} PB pages${entry.original ? ", original listing" : ""})`);
+  for (const entry of log.flagged) console.log(`  pb       ${entry.kit_id} (${entry.pages} PB pages: ${entry.evidence})`);
+  for (const entry of log.adopted) console.log(`  adopt    ${entry.kit_id} <- ${entry.from}`);
+  for (const entry of log.renamed) console.log(`  name     ${entry.kit_id} ${entry.from} -> ${entry.to}`);
   for (const entry of log.tagged) console.log(`  tag      ${entry.kit_id} ${entry.tag}`);
 }
 
@@ -364,11 +463,11 @@ const sortKeys = (object) => Object.fromEntries(Object.entries(object).sort(([a]
 const aliasesChanged =
   JSON.stringify(sortKeys(aliases)) !== JSON.stringify(sortKeys(aliasDoc.aliases)) ||
   JSON.stringify(sortKeys(excluded)) !== JSON.stringify(sortKeys(aliasDoc.excluded));
-const changed = removed > 0 || log.relabelled.length > 0 || log.flagged.length > 0 || log.tagged.length > 0 || aliasesChanged;
+const changed = JSON.stringify(kept) !== before || aliasesChanged;
 
 if (checkOnly) {
   if (changed) {
-    console.error("Catalog has records the cleanup rules would remove or relabel. Run node scripts/clean_catalog.mjs.");
+    console.error("Catalog has records the cleanup rules would change. Run node scripts/clean_catalog.mjs.");
     process.exitCode = 1;
   }
 } else if (changed) {
@@ -378,7 +477,7 @@ if (checkOnly) {
       schema: 1,
       updated_at: today(),
       description:
-        "kit_ids removed from data/kits.json. aliases: duplicate id -> id of the record that replaced it (move saved entries there). excluded: id -> why the record was dropped (not a collectible, wrong franchise …).",
+        "kit_ids removed from data/kits.json. aliases: duplicate id -> id of the record that replaced it (move saved entries there). excluded: id -> why the record was dropped (only records of another franchise / IP; goods stay in the catalog with a goods_kind).",
       aliases: sortKeys(aliases),
       excluded: sortKeys(excluded),
     };

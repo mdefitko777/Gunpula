@@ -20,10 +20,18 @@
 //                with name, price, shipping month and image, so a kit gets a
 //                record from its listing card and is enriched later.
 //
-// Both passes are incremental and budgeted: archive.org is a free service, so a
-// daily run touches a bounded number of snapshots and records what it saw.
+// Every pass is incremental and budgeted: archive.org is a free service, so a
+// daily run touches a bounded number of snapshots (one at a time, a second
+// apart) and records what it saw. A snapshot takes 2-5 s, so the run also has a
+// wall-clock budget (--time-budget-minutes, default 10) well inside
+// run_importers' 15-minute step timeout: no new fetch starts once it is spent,
+// and the catalog and index are saved every SAVE_EVERY pages, so even a killed
+// run keeps what it fetched. Whatever is left is picked up on the next day.
+//
+// Goods (Blu-ray, apparel, card games …) are imported like kits;
+// clean_catalog.mjs gives them a goods_kind.
 import { readFile, writeFile } from "node:fs/promises";
-import { KIT_ALIASES_PATH, gundamGradeFromName, nonCollectibleReason, retiredKitIds, scaleFromName } from "./lib/catalog-cleanup.mjs";
+import { KIT_ALIASES_PATH, gundamGradeFromName, retiredKitIds, scaleFromName } from "./lib/catalog-cleanup.mjs";
 import { decodeEntities, parseListingCards } from "./lib/pb-listing.mjs";
 
 const CATALOG_PATH = "data/kits.json";
@@ -41,7 +49,13 @@ const args = new Map(
     return [key, value];
   }),
 );
-const limit = Number(args.get("limit") || 200);
+// Snapshots per run (half enrich, half discover). 100 x ~4 s ≈ 7 minutes.
+const limit = Number(args.get("limit") || 100);
+const STARTED_AT = Date.now();
+const TIME_BUDGET_MS = Number(args.get("time-budget-minutes") || process.env.PB_WAYBACK_BUDGET_MINUTES || 10) * 60000;
+const outOfTime = () => Date.now() - STARTED_AT >= TIME_BUDGET_MS;
+// Catalog + index are written after this many fetched pages (and at the end).
+const SAVE_EVERY = 20;
 const discoverDays = Number(args.get("discover-days") || 45);
 // One request at a time, about a second apart: archive.org is a free service.
 const concurrency = Math.max(1, Math.min(4, Number(args.get("concurrency") || 1)));
@@ -79,7 +93,8 @@ async function mapLimit(items, workers, worker) {
   let next = 0;
   await Promise.all(
     Array.from({ length: Math.min(workers, items.length) }, async () => {
-      while (next < items.length) {
+      // No new fetch once the time budget is spent; the rest waits for tomorrow.
+      while (next < items.length && !outOfTime()) {
         const index = next;
         next += 1;
         await worker(items[index], index);
@@ -409,8 +424,9 @@ function enrichKit(kit, product) {
 // Run
 // ---------------------------------------------------------------------------
 
+
 const catalog = JSON.parse(await readFile(CATALOG_PATH, "utf8"));
-// Ids clean_catalog.mjs dropped as duplicates or non-collectibles.
+// Ids clean_catalog.mjs folded into another record, or removed as another IP.
 const retired = retiredKitIds(await readJson(KIT_ALIASES_PATH, null));
 const index = await readJson(INDEX_PATH, { schema_version: 1, entries: {} });
 index.entries = index.entries || {};
@@ -433,38 +449,46 @@ const retryDue = (entry) =>
 const listedDue = (entry) =>
   entry?.status === "listed" && (!entry.attempts || (entry.attempts < MAX_ATTEMPTS && Date.now() - Date.parse(entry.checked_at || 0) >= RETRY_AFTER_MS));
 
-// Pass 1: known PB links that have not been enriched yet (or are stale). Kits
-// made from a listing card (pass 3) still lack the order window.
-const enrichTargets = [...kitsByPbUrl.keys()].filter(
-  (url) => force || !index.entries[url] || listedDue(index.entries[url]) || retryDue(index.entries[url]),
-);
-
-// Pass 2: recently archived item pages the catalog has never seen.
-const sinceDate = new Date(Date.now() - discoverDays * 86400000).toISOString().slice(0, 10).replace(/-/g, "");
-let discovered = [];
-try {
-  const recent = await fetchRecentItemUrls(sinceDate);
-  discovered = recent.filter((url) => !kitsByPbUrl.has(url) && (force || !index.entries[url] || retryDue(index.entries[url])));
-  console.log(`CDX: ${recent.length} archived item pages since ${sinceDate}, ${discovered.length} new to the catalog.`);
-} catch (error) {
-  // Discovery is the optional half; enrichment still runs if CDX is unhappy.
-  console.warn(`CDX listing failed: ${error.message}`);
-}
-
-const budget = Math.max(0, limit);
-const targets = [
-  ...enrichTargets.slice(0, Math.ceil(budget / 2)).map((url) => ({ url, mode: "enrich" })),
-  ...discovered.slice(0, Math.floor(budget / 2)).map((url) => ({ url, mode: "discover" })),
-];
-
 const kitsById = new Map(catalog.kits.map((kit) => [kit.kit_id, kit]));
 let enriched = 0;
 let added = 0;
 let skipped = 0;
 let failed = 0;
+let catalogDirty = false;
+let sinceSave = 0;
 
-// Pass 3: the Gunpla category list. Pages never read come first, then the ones
-// whose newest capture is newer than the copy read last time.
+// Writes are chained, so a save never overlaps another one.
+let saving = Promise.resolve();
+function save() {
+  const write = async () => {
+    const indexDoc = {
+      schema_version: 1,
+      updated_at: nowIso(),
+      direct_p_bandai_status: "blocked",
+      access_method: "wayback_machine",
+      entries: index.entries,
+      listing_pages: index.listing_pages || {},
+    };
+    if (catalogDirty) {
+      const merged = [...kitsById.values()].sort((a, b) => String(a.kit_id).localeCompare(String(b.kit_id)));
+      await writeFile(CATALOG_PATH, `${JSON.stringify({ ...catalog, updated_at: today(), kits: merged }, null, 2)}\n`, "utf8");
+      catalogDirty = false;
+    }
+    await writeFile(INDEX_PATH, `${JSON.stringify(indexDoc, null, 2)}\n`, "utf8");
+  };
+  saving = saving.then(write, write);
+  return saving;
+}
+async function progress() {
+  sinceSave += 1;
+  if (sinceSave >= SAVE_EVERY) {
+    sinceSave = 0;
+    await save();
+  }
+}
+
+// Pass 3 first: the Gunpla category list. Pages never read come first, then the
+// ones whose newest capture is newer than the copy read last time.
 index.listing_pages = index.listing_pages || {};
 let listed = 0;
 if (listingPages > 0) {
@@ -482,18 +506,20 @@ if (listingPages > 0) {
       return seenA.localeCompare(seenB) || a.localeCompare(b, "en", { numeric: true });
     })
     .slice(0, listingPages);
+  let read = 0;
   for (const [key, timestamp] of pages) {
+    if (outOfTime()) break;
+    read += 1;
     try {
       const cards = parseListingCards(await fetchListingPage(key, timestamp));
       for (const card of cards) {
         if (kitsByPbUrl.has(card.item_url) || kitsById.has(slugifyId(card.item_id))) continue;
-        // Everything in this category is a Gunpla kit; the name rules only
+        // Everything in this category is a Gunpla product; the name rules only
         // decide whether it belongs to another franchise the catalog tracks.
         const rule =
           matchFranchise(card) ||
           (gundamGradeFromName(card.name) ? FRANCHISE_RULES.find((entry) => entry.franchise === "gundam") : null);
         if (!rule) continue;
-        if (nonCollectibleReason({ franchise: rule.franchise, names: { ja: card.name } })) continue;
         const kit = toKit(card, rule);
         if (retired.has(kit.kit_id)) continue;
         kit.source_refs[0].fields = ["names", "images", "price_jpy", "release_date"];
@@ -503,24 +529,48 @@ if (listingPages > 0) {
         kitsByPbUrl.set(card.item_url, kit);
         index.entries[card.item_url] = { checked_at: nowIso(), status: "listed", kit_id: kit.kit_id };
         listed += 1;
+        catalogDirty = true;
       }
       index.listing_pages[key] = { timestamp, checked_at: nowIso(), cards: cards.length };
     } catch (error) {
       index.listing_pages[key] = { timestamp: null, checked_at: nowIso(), error: String(error.message).slice(0, 120) };
     }
+    await progress();
     await sleep(2000);
   }
-  console.log(`Premium Bandai (Wayback) listing: read ${pages.length} category pages, ${listed} new kits.`);
+  console.log(`Premium Bandai (Wayback) listing: read ${read} of ${pages.length} due category pages, ${listed} new kits.`);
 }
 added += listed;
 
-if (!targets.length && !listed) {
-  console.log("Nothing to fetch; every known Premium Bandai link is already enriched.");
-  await writeFile(INDEX_PATH, `${JSON.stringify({ ...index, updated_at: nowIso() }, null, 2)}\n`, "utf8");
-  process.exit(0);
+// Pass 1: known PB links that have not been enriched yet (or are stale). Kits
+// made from a listing card (pass 3) still lack the order window.
+const enrichTargets = [...kitsByPbUrl.keys()].filter(
+  (url) => force || !index.entries[url] || listedDue(index.entries[url]) || retryDue(index.entries[url]),
+);
+
+// Pass 2: recently archived item pages the catalog has never seen.
+const sinceDate = new Date(Date.now() - discoverDays * 86400000).toISOString().slice(0, 10).replace(/-/g, "");
+let discovered = [];
+if (!outOfTime()) {
+  try {
+    const recent = await fetchRecentItemUrls(sinceDate);
+    discovered = recent.filter((url) => !kitsByPbUrl.has(url) && (force || !index.entries[url] || retryDue(index.entries[url])));
+    console.log(`CDX: ${recent.length} archived item pages since ${sinceDate}, ${discovered.length} new to the catalog.`);
+  } catch (error) {
+    // Discovery is the optional half; enrichment still runs if CDX is unhappy.
+    console.warn(`CDX listing failed: ${error.message}`);
+  }
 }
 
+const budget = Math.max(0, limit);
+const targets = [
+  ...enrichTargets.slice(0, Math.ceil(budget / 2)).map((url) => ({ url, mode: "enrich" })),
+  ...discovered.slice(0, Math.floor(budget / 2)).map((url) => ({ url, mode: "discover" })),
+];
+
+let fetched = 0;
 await mapLimit(targets, concurrency, async ({ url, mode }) => {
+  fetched += 1;
   try {
     const product = parseSnapshot(await fetchSnapshot(url), url);
     if (!product) {
@@ -532,6 +582,7 @@ await mapLimit(targets, concurrency, async ({ url, mode }) => {
       const kit = kitsByPbUrl.get(url);
       kitsById.set(kit.kit_id, enrichKit(kitsById.get(kit.kit_id) || kit, product));
       enriched += 1;
+      catalogDirty = true;
       index.entries[url] = { checked_at: nowIso(), status: "enriched", kit_id: kit.kit_id };
       return;
     }
@@ -543,13 +594,6 @@ await mapLimit(targets, concurrency, async ({ url, mode }) => {
       skipped += 1;
       return;
     }
-    // Blu-ray, apparel, card games, mugs … sit on the same character pages.
-    const notCollectible = nonCollectibleReason({ franchise: rule.franchise, names: { ja: product.name } });
-    if (notCollectible) {
-      index.entries[url] = { checked_at: nowIso(), status: "off_catalog", reason: notCollectible };
-      skipped += 1;
-      return;
-    }
     const kit = toKit(product, rule);
     if (retired.has(kit.kit_id)) {
       index.entries[url] = { checked_at: nowIso(), status: "retired", kit_id: kit.kit_id };
@@ -558,6 +602,7 @@ await mapLimit(targets, concurrency, async ({ url, mode }) => {
     }
     if (!kitsById.has(kit.kit_id)) added += 1;
     kitsById.set(kit.kit_id, { ...(kitsById.get(kit.kit_id) || {}), ...kit });
+    catalogDirty = true;
     index.entries[url] = { checked_at: nowIso(), status: "imported", kit_id: kit.kit_id };
   } catch (error) {
     failed += 1;
@@ -570,34 +615,15 @@ await mapLimit(targets, concurrency, async ({ url, mode }) => {
       previous.status === "listed"
         ? { ...previous, checked_at: nowIso(), attempts, message }
         : { checked_at: nowIso(), status: "error", attempts, message, ...(previous.kit_id ? { kit_id: previous.kit_id } : {}) };
+  } finally {
+    await progress();
   }
 });
 
-if (!enriched && !added) {
-  console.log(`Premium Bandai (Wayback): nothing usable this run (${skipped} skipped, ${failed} failed); catalog untouched.`);
-  await writeFile(INDEX_PATH, `${JSON.stringify({ ...index, updated_at: nowIso() }, null, 2)}\n`, "utf8");
-  process.exit(0);
-}
-
-const merged = [...kitsById.values()].sort((a, b) => String(a.kit_id).localeCompare(String(b.kit_id)));
-await writeFile(CATALOG_PATH, `${JSON.stringify({ ...catalog, updated_at: today(), kits: merged }, null, 2)}\n`, "utf8");
-await writeFile(
-  INDEX_PATH,
-  `${JSON.stringify(
-    {
-      schema_version: 1,
-      updated_at: nowIso(),
-      direct_p_bandai_status: "blocked",
-      access_method: "wayback_machine",
-      entries: index.entries,
-      listing_pages: index.listing_pages,
-    },
-    null,
-    2,
-  )}\n`,
-  "utf8",
-);
-
+await save();
+const left = targets.length - fetched;
 console.log(
-  `Premium Bandai (Wayback): enriched ${enriched}, added ${added}, skipped ${skipped}, failed ${failed}; catalog now ${merged.length} records.`,
+  `Premium Bandai (Wayback): enriched ${enriched}, added ${added}, skipped ${skipped}, failed ${failed}` +
+    `${left > 0 ? `, ${left} left for the next run (time budget ${TIME_BUDGET_MS / 60000} min)` : ""}; ` +
+    `${Math.round((Date.now() - STARTED_AT) / 1000)} s; catalog ${kitsById.size} records.`,
 );

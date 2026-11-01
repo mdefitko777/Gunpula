@@ -10,7 +10,7 @@
 // error: the search filters need a `filter.` prefix (`filter.keywords`, not
 // `keywords`), while the category filter is the bare `categoryNos`.
 import { readFile, writeFile } from "node:fs/promises";
-import { KIT_ALIASES_PATH, nonCollectibleReason, retiredKitIds } from "./lib/catalog-cleanup.mjs";
+import { KIT_ALIASES_PATH, retiredKitIds } from "./lib/catalog-cleanup.mjs";
 
 const CATALOG_PATH = "data/kits.json";
 const SOURCE_ID = "pokemon_store_kr";
@@ -21,8 +21,8 @@ const CLIENT_ID = process.env.POKEMON_KR_CLIENT_ID || "HJGfZ5jPHZk3/PEOkm+/Qw=="
 const PAGE_SIZE = 100;
 const REQUEST_DELAY_MS = Number(process.env.POKEMON_KR_DELAY_MS || 150);
 
-// Collectible categories only (and 스토어 오리지널 is filtered per product: it
-// also carries the OST album, tumblers, notebooks, apparel …). The shop also sells 패션 (560), 문구 (255),
+// Collectible categories (스토어 오리지널 also carries the OST album, tumblers,
+// notebooks, apparel …, kept as goods by clean_catalog.mjs). The shop also sells 패션 (560), 문구 (255),
 // 리빙 (224), 카드 게임 (197) and 닌텐도 게임 (13) — apparel, stationery,
 // homeware, TCG and game software, none of which this catalog tracks.
 const CATEGORIES = [
@@ -172,7 +172,7 @@ for (const category of CATEGORIES) {
       // so plush never gets relabelled as generic goods.
       if (imported.has(product.productNo)) continue;
       const kit = toKit(product, category);
-      if (retired.has(kit.kit_id) || nonCollectibleReason(kit)) continue;
+      if (retired.has(kit.kit_id)) continue;
       imported.set(product.productNo, kit);
     }
     report.push(`${category.label} ${products.length}`);
