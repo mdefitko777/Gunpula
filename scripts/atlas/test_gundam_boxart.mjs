@@ -1,7 +1,26 @@
-// Self-test for scripts/atlas/build_gundam_boxart.mjs (no network):
+// Self-test for scripts/atlas/build_gundam_boxart.mjs (no internet; a local HTTP server
+// on 127.0.0.1 stands in for the image hosts):
 //   node scripts/atlas/test_gundam_boxart.mjs
 import assert from "node:assert/strict";
-import { decodeJpegLuma, letterbox, isDeadUrl, kitJans, confidenceFor, boxPairShot, isKitName } from "./build_gundam_boxart.mjs";
+import { spawnSync } from "node:child_process";
+import { createHash } from "node:crypto";
+import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { createServer } from "node:http";
+import { tmpdir } from "node:os";
+import path from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
+
+// The builder reads these when it is imported.
+const TMP = mkdtempSync(path.join(tmpdir(), "atlas-boxart-test-"));
+const GAP = 200;
+process.env.ATLAS_CACHE_DIR = path.join(TMP, "cache");
+process.env.ATLAS_MIN_GAP_MS = String(GAP);
+process.env.ATLAS_TIMEOUT_MS = "5000";
+const BUILDER = path.join(path.dirname(fileURLToPath(import.meta.url)), "build_gundam_boxart.mjs");
+const {
+  decodeJpegLuma, letterbox, isDeadUrl, kitJans, confidenceFor, boxPairShot, isKitName, fetchCached, hostReport, refusal,
+  candyPkgSrc, candyTokens, CANDY_EXTRACT, BS_EXTRACT, toEntry, guardReasons, healthPlan,
+} = await import(pathToFileURL(BUILDER).href);
 
 const b64 = (s) => Buffer.from(s, "base64");
 
@@ -118,4 +137,189 @@ assert.deepEqual(kitJans({ kit_id: "hg-hg-1-144-4580886844760000", source_urls: 
 assert.deepEqual(kitJans({ kit_id: "x", source_urls: ["https://gashapon.jp/products/detail.php?jan_code=4549660547853000"] }), ["4549660547853"]);
 assert.deepEqual(kitJans({ kit_id: "hg-4580886844761000", source_urls: [] }), [], "bad check digit");
 
+// --- Refusals vs answers ----------------------------------------------------------
+assert.equal(refusal(403, "text/html", null).kind, "blocked");
+assert.equal(refusal(451, "", null).kind, "blocked");
+assert.equal(refusal(404, "text/html", Buffer.from("<h1>Not Found</h1>"), "image"), null, "404 is a real 'missing'");
+assert.equal(refusal(200, "image/jpeg", null, "image"), null);
+assert.equal(refusal(200, "text/html; charset=utf-8", null, "image").kind, "blocked", "HTML instead of an image");
+assert.equal(refusal(200, "text/html", Buffer.from("<html><title>Just a moment...</title></html>"), /x/).kind, "blocked");
+assert.equal(refusal(200, "text/html", Buffer.from("<div class=l_productsSlider>"), /l_productsSlider/), null);
+assert.equal(refusal(200, "text/html", Buffer.from("<p>maintenance</p>"), /l_productsSlider/).kind, "unexpected");
+
+// --- Polite HTTP against a local server ------------------------------------------
+const hits = [];
+const server = createServer((req, res) => {
+  hits.push({ t: performance.now(), url: req.url, ua: req.headers["user-agent"] });
+  if (req.url.startsWith("/img/")) {
+    res.writeHead(200, { "content-type": "image/jpeg" });
+    res.end(Buffer.from([0xff, 0xd8, 0xff, 0xd9]));
+  } else if (req.url.startsWith("/missing/")) {
+    res.writeHead(404, { "content-type": "text/html" });
+    res.end("<h1>Not Found</h1>");
+  } else if (req.url.startsWith("/forbidden/")) {
+    res.writeHead(403, { "content-type": "text/html" });
+    res.end("<title>Access Denied</title>");
+  } else {
+    res.writeHead(200, { "content-type": "text/html" }); // a bot wall where an image should be
+    res.end("<html><title>Just a moment...</title><script src=/cdn-cgi/challenge-platform/x.js></script></html>");
+  }
+});
+await new Promise((r) => server.listen(0, "127.0.0.1", r));
+const base = `http://127.0.0.1:${server.address().port}`;
+const { USER_AGENT } = await import(pathToFileURL(BUILDER).href);
+{
+  // 8 concurrent requests to one host: every gap must be >= the minimum (old bug: 6 at once).
+  const t0 = performance.now();
+  const rs = await Promise.all(Array.from({ length: 8 }, (_, i) => fetchCached(`${base}/img/${i}.jpg#frag`, { expect: "image" })));
+  assert.ok(rs.every((r) => r && r.status === 200 && !r.cached));
+  const ts = hits.map((h) => h.t).sort((a, b) => a - b);
+  const gaps = ts.slice(1).map((t, i) => t - ts[i]);
+  // Slots are fixed in advance, so the k-th arrival is never earlier than k gaps after the
+  // first (a little slack for timers); a single late request can only shorten the gap that
+  // follows it, never below half the minimum.
+  ts.forEach((t, k) => assert.ok(t - ts[0] >= k * GAP - 30, `arrival ${k} at ${Math.round(t - ts[0])} ms, slot ${k * GAP} ms`));
+  assert.ok(Math.min(...gaps) >= GAP / 2, `gaps ${gaps.map(Math.round)} must be about ${GAP} ms`);
+  assert.ok(performance.now() - t0 >= 7 * GAP - 30);
+  assert.ok(hits.every((h) => h.ua === USER_AGENT && !h.url.includes("#")));
+  const again = await fetchCached(`${base}/img/0.jpg`, { expect: "image" });
+  assert.ok(again.cached, "fragment stripped: one cache entry per page");
+  assert.equal(hits.length, 8);
+}
+{
+  // A real "missing" is an answer: cached.
+  const r = await fetchCached(`${base}/missing/a.jpg`, { expect: "image" });
+  assert.equal(r.status, 404);
+  assert.ok((await fetchCached(`${base}/missing/a.jpg`, { expect: "image" })).cached);
+}
+{
+  // A refusal cached by the old script is ignored and asked again.
+  const u = `${base}/img/legacy.jpg`;
+  const file = path.join(process.env.ATLAS_CACHE_DIR, "127.0.0.1", createHash("sha1").update(u).digest("hex"));
+  mkdirSync(path.dirname(file), { recursive: true });
+  writeFileSync(`${file}.meta.json`, JSON.stringify({ url: u, status: 403, content_type: "text/html", fetched_at: new Date().toISOString() }));
+  writeFileSync(`${file}.body`, "Forbidden");
+  const r = await fetchCached(u, { expect: "image" });
+  assert.equal(r.status, 200);
+  assert.equal(r.cached, false);
+}
+{
+  // Refusals: unknown (null), never cached; 3 of them stop all requests to the host.
+  const n0 = hits.length;
+  assert.equal(await fetchCached(`${base}/forbidden/a.jpg`, { expect: "image" }), null);
+  assert.equal(await fetchCached(`${base}/wall/a.jpg`, { expect: "image" }), null);
+  assert.equal(await fetchCached(`${base}/wall/a.jpg`, { method: "HEAD", expect: "image", probe: true }), null);
+  let s = hostReport()["127.0.0.1"];
+  assert.equal(s.blocked, 2);
+  assert.equal(s.probe_blocked, 1, "an expected refusal (probe) is counted apart");
+  assert.equal(hits.length, n0 + 3);
+  assert.equal(await fetchCached(`${base}/forbidden/a.jpg`, { expect: "image" }), null, "not cached: asked again");
+  assert.equal(hits.length, n0 + 4);
+  s = hostReport()["127.0.0.1"];
+  assert.equal(s.blocked, 3);
+  assert.equal(await fetchCached(`${base}/img/after-trip.jpg`, { expect: "image" }), null);
+  assert.equal(hits.length, n0 + 4, "tripped host gets no more requests");
+  assert.equal(hostReport()["127.0.0.1"].skipped_blocked, 1);
+  assert.ok((await fetchCached(`${base}/img/1.jpg`, { expect: "image" })).cached, "cached answers still served");
+}
+server.close();
+
+// --- Bandai Candy: per-item sections (page#id) ---------------------------------------
+{
+  const html = `<html><li data-id="after">x</li>
+    <article class="itemDetail"><article class="itemImagesBlock flexBlock"><img src="a.jpg"></article>
+    <p class="specPkg"><img src="pkg01.png" alt=""></p></article>
+    <p id="optionPartsSet" class="specialBlock">オプションパーツセット</p>
+    <article id="optionPartsSet" class="itemImagesBlock flexBlock"><div id="gallery"></div><p class="specPkg"><img src="pkg02.png"></p></article>
+    <p class="specialBlock" id="optionParts">別売</p><article class="itemDetail"><p class="specPkg"><img src="pkg2.png"></p></article>
+    <article id="noPkg" class="itemImagesBlock flexBlock"><p>none</p></article>
+    <article id="after" class="itemImagesBlock flexBlock"><p class="specPkg"><img src="pkg03.png"></p></article></html>`;
+  const cases = { "": "pkg01.png", optionPartsSet: "pkg02.png", optionParts: "pkg2.png", noPkg: null, after: "pkg03.png" };
+  const slim = CANDY_EXTRACT.fn(html);
+  assert.ok(slim.length < html.length);
+  for (const [frag, want] of Object.entries(cases)) {
+    assert.equal(candyPkgSrc(html, frag), want, `#${frag}`);
+    assert.equal(candyPkgSrc(slim, frag), want, `#${frag} from the cached extract`);
+  }
+  assert.deepEqual(candyPkgSrc(html, "gone"), { none: "fragment-not-found" });
+  assert.deepEqual(candyTokens(slim), candyTokens(html));
+}
+{
+  const html = `<div class="l_productsSlider"><ul><li class="l_productsSlider__item"><img src="https://bandai-a.akamaihd.net/bc/img/model/b/1000000001_1.jpg" alt=""></li>
+    <li class="l_productsSlider__item"><img src="https://bandai-a.akamaihd.net/bc/img/model/b/1000000001_2.jpg"></li></ul></div><p>${"x".repeat(5000)}</p>`;
+  const slim = BS_EXTRACT.fn(html);
+  const re = /l_productsSlider__item"><img src="([^"]+)"/g;
+  assert.deepEqual([...slim.matchAll(re)].map((m) => m[1]), [...html.matchAll(re)].map((m) => m[1]));
+  assert.ok(slim.length < 400);
+}
+
+// --- Entries, guard, health sample ----------------------------------------------------
+assert.deepEqual(toEntry({ url: "u", source: "s", confidence: "high" }), { url: "u", source: "s", confidence: "high" });
+assert.equal(toEntry({ url: "u", source: "s", confidence: "medium" }).kind, undefined);
+assert.equal(toEntry({ url: "u", source: "s", confidence: "low" }).kind, "maybe");
+assert.equal(toEntry({ url: "u", source: "s", confidence: "medium", kind: "dp" }).kind, "dp");
+const okHosts = { a: { blocked: 0, unexpected: 0 } };
+assert.deepEqual(guardReasons({ hosts: okHosts, prevCount: 100, count: 96 }), []);
+assert.equal(guardReasons({ hosts: okHosts, prevCount: 100, count: 94 }).length, 1);
+assert.deepEqual(guardReasons({ hosts: okHosts, prevCount: 100, count: 94, allowDrop: true }), []);
+assert.equal(guardReasons({ hosts: { a: { blocked: 1, unexpected: 0, last_refusal: "403" } }, prevCount: 0, count: 0 }).length, 1);
+assert.equal(guardReasons({ hosts: { a: { blocked: 0, unexpected: 21 } }, prevCount: 0, count: 0 }).length, 1);
+{
+  const entries = Array.from({ length: 10 }, (_, i) => [`k${i}`, { source: i % 2 ? "b" : "a", url: `u${i}` }]);
+  const plan = healthPlan(entries, 3);
+  assert.deepEqual([...plan.keys()], ["a", "b"]);
+  assert.deepEqual(plan.get("a").map(([k]) => k), ["k0", "k2", "k4"]);
+  assert.deepEqual(healthPlan(entries, 3), plan, "same input, same sample");
+}
+
+// --- Whole builder, offline: a host that refused us keeps the previous entries ----------
+{
+  const dir = path.join(TMP, "run");
+  mkdirSync(dir, { recursive: true });
+  const page = (n) => `https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=${n}`;
+  const kits = [1, 2, 3].map((n) => ({ kit_id: `k${n}`, franchise: "gundam", grade_code: "HG", release_date: "2020-01-01", source_urls: [page(n)] }));
+  writeFileSync(path.join(dir, "kits.json"), JSON.stringify({ kits }));
+  const prev = {
+    schema: 1,
+    boxart: {
+      k1: { url: "https://bandai-a.akamaihd.net/bc/img/model/b/1000000001_5.jpg", source: "bandai_spirits_last", confidence: "high" },
+      k2: { url: "https://bandai-a.akamaihd.net/bc/img/model/b/1000000002_5.jpg", source: "bandai_spirits_last", confidence: "medium" },
+      k3: { url: "https://bandai-a.akamaihd.net/bc/img/model/b/1000000003_5.jpg", source: "bandai_spirits_last", confidence: "low" },
+    },
+  };
+  const cacheWith = (name, status) => {
+    const c = path.join(dir, name);
+    for (const n of [1, 2, 3]) {
+      const f = path.join(c, "www.bandaispirits.co.jp", createHash("sha1").update(page(n)).digest("hex"));
+      mkdirSync(path.dirname(f), { recursive: true });
+      writeFileSync(`${f}.meta.json`, JSON.stringify({ url: page(n), status, content_type: "text/html", fetched_at: new Date().toISOString() }));
+      writeFileSync(`${f}.body`, status === 403 ? "<title>403 Forbidden</title>" : "<h1>Not Found</h1>");
+    }
+    return c;
+  };
+  const run = (cache, ...extra) => {
+    writeFileSync(path.join(dir, "out.json"), JSON.stringify(prev));
+    const p = spawnSync(process.execPath, [BUILDER, "--offline", "--only=bs", "--check=0", `--kits=${path.join(dir, "kits.json")}`, `--out=${path.join(dir, "out.json")}`, `--report=${path.join(dir, "report.json")}`, ...extra], {
+      env: { ...process.env, ATLAS_CACHE_DIR: cache },
+      encoding: "utf8",
+    });
+    assert.equal(p.status, 0, p.stderr);
+    return { out: JSON.parse(readFileSync(path.join(dir, "out.json"), "utf8")), report: JSON.parse(readFileSync(path.join(dir, "report.json"), "utf8")) };
+  };
+  // Cached 403 pages (left by the old script): unknown, so all 3 entries are carried over.
+  const a = run(cacheWith("c403", 403));
+  assert.deepEqual(Object.keys(a.out.boxart), ["k1", "k2", "k3"]);
+  assert.equal(a.report.carried_over, 3);
+  assert.equal(a.out.boxart.k3.kind, "maybe", "carried low-confidence entry becomes kind maybe");
+  assert.equal(a.out.stats.with_box, 2);
+  assert.equal(a.out.stats.with_maybe, 1);
+  // Real 404 pages: the entries go, but --guard refuses to write a file that lost >5%.
+  const b = run(cacheWith("c404", 404), "--guard");
+  assert.equal(b.report.picked, 0);
+  assert.equal(b.report.changed, false);
+  assert.equal(b.report.guard.length, 1);
+  assert.deepEqual(b.out, prev, "previous file left untouched");
+}
+
+rmSync(TMP, { recursive: true, force: true });
 console.log("test_gundam_boxart: ok");

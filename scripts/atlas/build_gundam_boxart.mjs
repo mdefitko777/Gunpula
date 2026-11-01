@@ -19,7 +19,8 @@
 //   * Premium Bandai items use the same CDN; p-bandai.jp answers bots with a JS
 //     challenge, so the image count is found with HEAD probes on the CDN instead.
 //     Only plastic kits are looked at (decals, cards, videos and goods have no box).
-//   * Bandai Candy (食玩) pages carry the package in <p class="specPkg"> (pkg.png).
+//   * Bandai Candy (食玩) pages carry the package in <p class="specPkg"> (pkg.png); a
+//     sub-item linked as page#id uses the specPkg of its own section.
 //   * Gashapon: 【箱売】 sets show the shipping box as image _1 (older items: _2), found
 //     by a box-pair pixel check; other capsule sets get the machine's DP card (台紙)
 //     with kind "dp", since capsule toys have no box.
@@ -30,18 +31,28 @@
 //     Site images (bandai-hobby.net: HTML or expiring signed URLs).
 //
 // Output: data/atlas/gundam-boxart.json, compact JSON, hotlinked URLs only:
-//   {schema:1, updated_at, sources[], not_covered{}, boxart:{kit_id:{url, source,
-//    confidence: high|medium|low, kind?: "dp"}}, stats:{kits, with_box, with_dp,
-//    by_grade:{grade:{kits, with_box, with_dp?}}, by_source}}
+//   {schema:1, updated_at, kinds{}, sources[], not_covered{}, boxart:{kit_id:{url, source,
+//    confidence: high|medium|low, kind?: "dp"|"maybe"}}, stats:{kits, with_box, with_dp,
+//    with_maybe, premium_bandai, by_grade:{grade:{kits, with_box, with_dp?, with_maybe?}},
+//    by_source}}
+// Only entries WITHOUT a kind are box art (confidence high or medium). kind "dp" is a
+// gashapon DP card; kind "maybe" is a low-confidence pick (~4 in 5 are boxes) that the app
+// must not show as box art. The file's "kinds" field says the same.
 // Akamai URLs use the 500 px "/b/" size; replace "/b/" with "/xl/" for 1200 px.
 //
-// Network: one descriptive UA, <= 1 request per second per host, every raw response
-// cached under ATLAS_CACHE_DIR (default tmp/atlas-cache/gundam-boxart, gitignored).
-// When a host is over budget, offline or failing, the previous file's entry is kept.
+// Network: one descriptive UA, <= 1 request per second per host (slots are reserved
+// before sleeping, so concurrent workers queue), every answer cached under ATLAS_CACHE_DIR
+// (default tmp/atlas-cache/gundam-boxart, gitignored); product pages are cached as the few
+// tags the pickers read, not as whole HTML. 401/403/429/451, challenge pages and images
+// that come back as HTML are refusals: never cached, the kit keeps the previous file's
+// entry, and after 3 of them the host gets no more requests this run. Offline, over-budget
+// and 5xx answers also keep the previous entry. With --guard (CI) the file is not written
+// when any host refused us or the entry count fell more than 5% (--allow-drop overrides).
 //
 // Usage:
 //   node scripts/atlas/build_gundam_boxart.mjs [--budget=N] [--check=N] [--offline]
 //        [--only=bs,pb,candy,gashapon,gunplapedia] [--out=FILE] [--report=FILE]
+//        [--kits=FILE] [--guard] [--allow-drop] [--workers=N]
 //   node scripts/atlas/test_gundam_boxart.mjs   # offline self-test
 
 import { createHash } from "node:crypto";
@@ -78,9 +89,42 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const lastHit = new Map();
 const hostStats = new Map();
 function hs(host) {
-  if (!hostStats.has(host)) hostStats.set(host, { live: 0, cached: 0, errors: 0, skipped_budget: 0, blocked: 0 });
+  if (!hostStats.has(host))
+    hostStats.set(host, { live: 0, cached: 0, errors: 0, skipped_budget: 0, blocked: 0, unexpected: 0, probe_blocked: 0, skipped_blocked: 0 });
   return hostStats.get(host);
 }
+export const hostReport = () => Object.fromEntries([...hostStats.entries()].sort());
+
+// A host that answers like this is refusing us (or showing a bot wall), not saying
+// "this item has no image": the answer is unknown, never cached, and the kit keeps its
+// previous entry. After BLOCK_TRIP such answers the host gets no more requests this run.
+const BLOCKED_STATUS = new Set([401, 403, 429, 451]);
+const BLOCK_TRIP = Number(process.env.ATLAS_BLOCK_TRIP || 3);
+const CHALLENGE_RE =
+  /cf-chl|challenge-platform|cf_chl_opt|<title>\s*Just a moment|Attention Required! \| Cloudflare|g-recaptcha|h-captcha|hcaptcha\.com|_Incapsula_Resource|Incapsula incident|awswaf|AwsWafIntegration|<title>\s*Access Denied|Request unsuccessful|Pardon Our Interruption|px-captcha|datadome/i;
+
+/**
+ * Why a response is a refusal rather than an answer, or null when it is a real answer.
+ * expect: "image" (a 200 must be image/*) or a RegExp a real 200 HTML page contains.
+ * Returns {kind: "blocked"|"unexpected", why}.
+ */
+export function refusal(status, contentType, body, expect) {
+  if (BLOCKED_STATUS.has(status)) return { kind: "blocked", why: `${status} ${String(contentType).split(";")[0]}`.trim() };
+  if (status !== 200) return null;
+  if (expect === "image") return /^image\//i.test(contentType) ? null : { kind: "blocked", why: `200 ${String(contentType).split(";")[0] || "?"} instead of an image` };
+  if (!body || !/html|^text\//i.test(contentType)) return null;
+  const s = body.toString("utf8");
+  if (CHALLENGE_RE.test(s)) return { kind: "blocked", why: "challenge page" };
+  if (expect instanceof RegExp && !expect.test(s)) return { kind: "unexpected", why: "page without the expected markup" };
+  return null;
+}
+
+/** Fragments never reach the server; one cache entry per page. */
+const stripHash = (url) => {
+  const u = new URL(url);
+  u.hash = "";
+  return u.href;
+};
 
 function cachePath(method, url) {
   const key = method === "GET" ? url : `${method} ${url}`;
@@ -98,23 +142,33 @@ async function readCached(file, wantBody) {
   }
 }
 
-async function throttle(host) {
-  const wait = (lastHit.get(host) || 0) + MIN_GAP_MS - Date.now();
-  if (wait > 0) await sleep(wait);
-  lastHit.set(host, Date.now());
+/** Reserve this host's next slot first, then sleep, so concurrent workers queue up. */
+export async function throttle(host) {
+  const now = Date.now();
+  const at = Math.max(now, (lastHit.get(host) || 0) + MIN_GAP_MS);
+  lastHit.set(host, at);
+  if (at > now) await sleep(at - now);
 }
+
+const tripped = (host) => hs(host).blocked >= BLOCK_TRIP;
 
 /**
  * Fetch with cache. Returns {status, contentType, length, body (Buffer|null), fetchedAt, cached}
- * or null when the answer is unknown (offline, over budget, network error, 429/5xx) and
- * nothing is cached.
+ * or null when the answer is unknown (offline, over budget, network error, 5xx, refused or
+ * challenged) and nothing usable is cached.
  * maxAgeDays: cached entries younger than this are used without a request.
+ * expect: see refusal(). extract: (html) => smaller text kept in the cache instead of the
+ * page (callers parse both forms the same way). probe: a refusal is expected and harmless
+ * (counted apart, never trips the host).
  */
-export async function fetchCached(url, { method = "GET", maxAgeDays = 30 } = {}) {
+export async function fetchCached(rawUrl, { method = "GET", maxAgeDays = 30, expect, extract, probe = false } = {}) {
+  const url = stripHash(rawUrl);
   const host = new URL(url).hostname;
   const file = cachePath(method, url);
   const wantBody = method === "GET";
-  const cached = await readCached(file, wantBody);
+  let cached = await readCached(file, wantBody);
+  // Refusals cached by older versions of this script are not answers: ignore them.
+  if (cached && (BLOCKED_STATUS.has(cached.meta.status) || (!cached.meta.extracted && refusal(cached.meta.status, cached.meta.content_type || "", cached.body, expect)))) cached = null;
   const fresh = cached && Date.now() - Date.parse(cached.meta.fetched_at) < maxAgeDays * DAY;
   const asResult = (c, isCached) => ({
     status: c.meta.status,
@@ -125,17 +179,27 @@ export async function fetchCached(url, { method = "GET", maxAgeDays = 30 } = {})
     fetchedAt: c.meta.fetched_at,
     cached: isCached,
   });
+  const stale = () => (cached ? asResult(cached, true) : null);
   if (cached && (fresh || OFFLINE)) {
     hs(host).cached++;
     return asResult(cached, true);
   }
+  if (tripped(host)) {
+    hs(host).skipped_blocked++;
+    return stale();
+  }
   if (OFFLINE || hs(host).live >= BUDGET) {
     hs(host).skipped_budget++;
-    return cached ? asResult(cached, true) : null;
+    return stale();
   }
-  await throttle(host);
-  hs(host).live++;
   for (let attempt = 1; attempt <= 3; attempt++) {
+    hs(host).live++;
+    await throttle(host);
+    if (tripped(host)) {
+      hs(host).live--; // another worker tripped the host while this one waited
+      hs(host).skipped_blocked++;
+      return stale();
+    }
     try {
       const res = await fetch(url, {
         method,
@@ -143,25 +207,36 @@ export async function fetchCached(url, { method = "GET", maxAgeDays = 30 } = {})
         headers: { "User-Agent": USER_AGENT, Accept: wantBody ? "*/*" : "image/*,*/*;q=0.5" },
         signal: AbortSignal.timeout(TIMEOUT_MS),
       });
-      const body = wantBody ? Buffer.from(await res.arrayBuffer()) : null;
-      const meta = {
-        url,
-        method,
-        status: res.status,
-        content_type: res.headers.get("content-type") || "",
-        length: body ? body.length : Number(res.headers.get("content-length") || 0) || null,
-        location: res.headers.get("location") || undefined,
-        fetched_at: new Date().toISOString(),
-      };
+      let body = wantBody ? Buffer.from(await res.arrayBuffer()) : null;
+      const contentType = res.headers.get("content-type") || "";
       if ((res.status === 429 || res.status >= 500) && attempt < 3) {
         await sleep(5000 * attempt);
         continue;
       }
-      if ([403, 429, 503].includes(res.status)) hs(host).blocked++;
-      if (res.status === 429 || res.status >= 500) {
-        // Transient / rate-limited: never cache it; callers keep the previous answer.
-        hs(host).errors++;
-        return cached ? asResult(cached, true) : null;
+      const ref = refusal(res.status, contentType, body, expect);
+      if (ref) {
+        const s = hs(host);
+        if (probe) s.probe_blocked++;
+        else s[ref.kind]++;
+        s.last_refusal = ref.why;
+        return stale();
+      }
+      if (res.status >= 500) {
+        hs(host).errors++; // transient: never cached; callers keep the previous answer
+        return stale();
+      }
+      const meta = {
+        url,
+        method,
+        status: res.status,
+        content_type: contentType,
+        length: body ? body.length : Number(res.headers.get("content-length") || 0) || null,
+        location: res.headers.get("location") || undefined,
+        fetched_at: new Date().toISOString(),
+      };
+      if (extract && body && res.status === 200) {
+        body = Buffer.from(extract.fn(body.toString("utf8")), "utf8");
+        meta.extracted = extract.id;
       }
       await mkdir(path.dirname(file), { recursive: true });
       if (body) await writeFile(`${file}.body`, body);
@@ -173,7 +248,7 @@ export async function fetchCached(url, { method = "GET", maxAgeDays = 30 } = {})
         continue;
       }
       hs(host).errors++;
-      return cached ? asResult(cached, true) : null; // network error: unknown, not "missing"
+      return stale(); // network error: unknown, not "missing"
     }
   }
   return null;
@@ -593,7 +668,7 @@ const analysisCache = new Map();
 async function analyzeAkamai(id, i, analyse = letterbox) {
   const key = `${id}_${i}_${analyse.name}`;
   if (analysisCache.has(key)) return analysisCache.get(key);
-  const r = await fetchCached(akamaiUrl(id, i, "m"), { maxAgeDays: 180 });
+  const r = await fetchCached(akamaiUrl(id, i, "m"), { maxAgeDays: 180, expect: "image" });
   let out;
   if (!r) out = { unknown: true };
   else if (r.status !== 200 || !/^image\/jpe?g/.test(r.contentType || "image/jpeg")) out = { missing: true, status: r.status };
@@ -632,14 +707,21 @@ async function pickAkamaiPackage(id, indices, sourcePrefix, { first: allowFirst 
 
 // --- BANDAI SPIRITS product pages -----------------------------------------
 
+// Only the slider <img> tags are kept in the cache (a product page is ~120 KB).
+const BS_SLIDER_RE = /l_productsSlider__item"><img src="([^"]+)"/g;
+export const BS_EXTRACT = {
+  id: "bs-slider-1",
+  fn: (html) => `<!--atlas:bs-slider-1-->\n${[...html.matchAll(BS_SLIDER_RE)].map((m) => `<li class="l_productsSlider__item"><img src="${m[1]}"></li>`).join("\n")}\n`,
+};
+
 async function pickBandaiSpirits(kit) {
   const page = (kit.source_urls || []).find((u) => BS_DETAIL_RE.test(u));
   if (!page) return null;
-  const r = await fetchFollow(page, { maxAgeDays: pageTtl(kit) });
+  const r = await fetchFollow(page, { maxAgeDays: pageTtl(kit), expect: /l_productsSlider/, extract: BS_EXTRACT });
   if (!r) return { unknown: true };
   if (r.status !== 200 || !r.body) return { none: `page-${r.status}` };
   const html = r.body.toString("utf8");
-  const slider = [...html.matchAll(/l_productsSlider__item"><img src="([^"]+)"/g)].map((m) => m[1].match(AKAMAI_RE)).filter(Boolean);
+  const slider = [...html.matchAll(BS_SLIDER_RE)].map((m) => m[1].match(AKAMAI_RE)).filter(Boolean);
   if (!slider.length) return { none: "no-slider" };
   const id = slider[0][1];
   const indices = slider.filter((m) => m[1] === id).map((m) => Number(m[2]));
@@ -650,7 +732,7 @@ async function pickBandaiSpirits(kit) {
 //     akamai images directly: galloping HEAD probes on the 100 px size) -------------
 
 async function akamaiExists(id, i, ttl) {
-  const r = await fetchCached(akamaiUrl(id, i, "s"), { method: "HEAD", maxAgeDays: ttl });
+  const r = await fetchCached(akamaiUrl(id, i, "s"), { method: "HEAD", maxAgeDays: ttl, expect: "image" });
   if (!r) return null;
   return r.status === 200;
 }
@@ -700,20 +782,61 @@ async function pickPremiumBandai(kit) {
 }
 
 // --- Bandai Candy (食玩): <p class="specPkg"><img src="pkg.png"> ---------------
-// Unreleased items show a shared 17,694-byte "NOW PRINTING" PNG; skip anything that small.
+// Unreleased items show a shared "NOW PRINTING" PNG (17,694 or 20,761 bytes); skip
+// anything that small.
+// One page can sell several items (main kit + option parts set ...). The catalog then
+// links each sub-item as page#<id>, and each item's section (from the element with that
+// id up to the next item block) has its own specPkg. Without a fragment the first
+// specPkg on the page is the main item's.
 
 const CANDY_PLACEHOLDER_MAX = 25000;
+const CANDY_TOKEN_RE = /<([a-z]+)\b([^>]*?\sid="([^"]+)"[^>]*)>|class="specPkg"[^>]*>\s*<img[^>]+src="([^"]+)"/g;
+const CANDY_BLOCK_CLASS = /\bclass="[^"]*\b(?:specialBlock|itemDetail|itemImagesBlock|itemInfoBlock)\b/;
+/** Ordered tokens: {id, block} for elements with an id, {pkg} for specPkg images. */
+export function candyTokens(html) {
+  const out = [];
+  for (const m of html.matchAll(CANDY_TOKEN_RE)) {
+    if (m[4]) out.push({ pkg: m[4] });
+    else out.push({ id: m[3], block: /^(?:article|section)$/i.test(m[1]) || CANDY_BLOCK_CLASS.test(m[2]) });
+  }
+  return out;
+}
+// Only the tokens are kept in the cache (a candy page is ~270 KB).
+export const CANDY_EXTRACT = {
+  id: "candy-tokens-1",
+  fn: (html) =>
+    `<!--atlas:candy-tokens-1-->\n${candyTokens(html)
+      .map((t) => (t.pkg ? `<p class="specPkg"><img src="${t.pkg}"></p>` : `<${t.block ? "article" : "div"} id="${t.id}">`))
+      .join("\n")}\n`,
+};
+/** src of the item's package image: the first specPkg, or the first one in #fragment's section. */
+export function candyPkgSrc(html, fragment) {
+  const toks = candyTokens(html);
+  if (!fragment) return toks.find((t) => t.pkg)?.pkg ?? null;
+  const start = toks.findIndex((t) => t.id === fragment);
+  if (start < 0) return { none: "fragment-not-found" };
+  for (const t of toks.slice(start + 1)) {
+    if (t.pkg) return t.pkg;
+    if (t.block && t.id !== fragment) break; // next item starts: this one has no package
+  }
+  return null;
+}
+
 async function pickCandy(kit) {
   const page = (kit.source_urls || []).find((u) => CANDY_RE.test(u));
   if (!page) return null;
-  const r = await fetchFollow(page, { maxAgeDays: pageTtl(kit) });
+  let fragment = new URL(page).hash.slice(1);
+  try {
+    fragment = decodeURIComponent(fragment);
+  } catch {}
+  const r = await fetchFollow(page, { maxAgeDays: pageTtl(kit), expect: /class="specPkg"/, extract: CANDY_EXTRACT });
   if (!r) return { unknown: true };
   if (r.status !== 200 || !r.body) return { none: `page-${r.status}` };
-  const html = r.body.toString("utf8");
-  const m = html.match(/class="specPkg"[^>]*>\s*<img[^>]+src="([^"]+)"/);
-  if (!m) return { none: "no-specPkg" };
-  const url = new URL(m[1], r.finalUrl || page).href;
-  const h = await fetchCached(url, { method: "HEAD", maxAgeDays: pageTtl(kit) });
+  const src = candyPkgSrc(r.body.toString("utf8"), fragment);
+  if (src?.none) return src;
+  if (!src) return { none: "no-specPkg" };
+  const url = new URL(src, stripHash(r.finalUrl || page)).href;
+  const h = await fetchCached(url, { method: "HEAD", maxAgeDays: pageTtl(kit), expect: "image" });
   if (!h) return { unknown: true };
   if (h.status !== 200 || !/^image\//.test(h.contentType)) return { none: `pkg-${h.status}` };
   if (h.length && h.length <= CANDY_PLACEHOLDER_MAX) return { none: "pkg-placeholder" };
@@ -787,8 +910,10 @@ export function plamoInfobox(text) {
 }
 
 async function gunplapediaJanIndex(report) {
-  const probe = await fetchCached(FANDOM_PROBE, { method: "HEAD", maxAgeDays: 7 });
-  report.probe = probe ? `${probe.status} ${probe.contentType.split(";")[0]}` : "skipped";
+  // A refused probe is expected (it is not cached and does not count as a block).
+  const probe = await fetchCached(FANDOM_PROBE, { method: "HEAD", maxAgeDays: 7, expect: "image", probe: true });
+  const ps = hostStats.get(new URL(FANDOM_PROBE).hostname);
+  report.probe = probe ? `${probe.status} ${probe.contentType.split(";")[0]}` : ps?.probe_blocked ? `refused (${ps.last_refusal})` : OFFLINE ? "not probed (offline)" : "no answer";
   if (!probe || probe.status !== 200 || !/^image\//.test(probe.contentType)) return null;
   const base = `${FANDOM_API}?action=query&format=json&formatversion=2&generator=allpages&gapnamespace=0&gaplimit=50&gapfilterredir=nonredirects&prop=revisions&rvprop=content&rvslots=main&rvsection=0`;
   const fileByJan = new Map();
@@ -839,21 +964,28 @@ async function gunplapediaJanIndex(report) {
 // ---------------------------------------------------------------------------
 // URL health sample: status + content-type without Referer / cookies.
 
-async function healthSample(entries, perSource) {
+/** Every k-th entry of each source, in the order given (pass catalog order: deterministic). */
+export function healthPlan(entries, perSource) {
   const bySource = new Map();
   for (const [kitId, e] of entries) {
     if (!bySource.has(e.source)) bySource.set(e.source, []);
     bySource.get(e.source).push([kitId, e]);
   }
-  const out = {};
-  for (const [source, list] of bySource) {
-    // deterministic spread: every k-th entry
+  const plan = new Map();
+  for (const [source, list] of [...bySource].sort(([a], [b]) => (a < b ? -1 : 1))) {
     const step = Math.max(1, Math.floor(list.length / perSource));
-    const sample = list.filter((_, i) => i % step === 0).slice(0, perSource);
+    plan.set(source, list.filter((_, i) => i % step === 0).slice(0, perSource));
+  }
+  return plan;
+}
+
+async function healthSample(entries, perSource) {
+  const out = {};
+  for (const [source, sample] of healthPlan(entries, perSource)) {
     let ok = 0;
     let checked = 0;
     for (const [, e] of sample) {
-      const r = await fetchCached(e.url, { method: "HEAD", maxAgeDays: 7 });
+      const r = await fetchCached(e.url, { method: "HEAD", maxAgeDays: 7, expect: "image" });
       if (!r) continue;
       checked++;
       if (r.status === 200 && /^image\//.test(r.contentType)) ok++;
@@ -870,14 +1002,14 @@ const SOURCES = [
     id: "bandai_spirits_last",
     name: "BANDAI SPIRITS 商品情報 (bandaispirits.co.jp/products) — last slider image",
     url: "https://www.bandaispirits.co.jp/products/",
-    method: "Last image of the product slider, accepted only when it is a white-padded box scan with a box-like aspect ratio (pixel check). Confidence high/medium/low from the share of flat background blocks. Hotlinked from bandai-a.akamaihd.net; '/b/' 500px, swap to '/xl/' for 1200px.",
+    method: "Last image of the product slider, accepted only when it is a white-padded box scan with a box-like aspect ratio (pixel check). Confidence high/medium/low from the share of flat background blocks; low picks are emitted as kind 'maybe' (not box art). Hotlinked from bandai-a.akamaihd.net; '/b/' 500px, swap to '/xl/' for 1200px.",
     licence: "© SOTSU・SUNRISE / BANDAI SPIRITS. Official product images, hotlinked only, not rehosted.",
   },
   {
     id: "bandai_spirits_first",
     name: "BANDAI SPIRITS 商品情報 — first slider image",
     url: "https://www.bandaispirits.co.jp/products/",
-    method: "Older pages (mostly MG and 1/100 old kits) put the box first; used when the last image is not a box and the first one passes the same pixel check. Confidence at most medium.",
+    method: "Older pages (mostly MG and 1/100 old kits) put the box first; used when the last image is not a box and the first one passes the same pixel check. Confidence at most medium (low ones are kind 'maybe').",
     licence: "© SOTSU・SUNRISE / BANDAI SPIRITS. Hotlinked only.",
   },
   {
@@ -891,7 +1023,7 @@ const SOURCES = [
     id: "bandai_candy_pkg",
     name: "Bandai Candy ガンダム食玩 (bandai.co.jp/candy/gundam) — specPkg image",
     url: "https://www.bandai.co.jp/candy/gundam/",
-    method: "The page's package block (<p class=\"specPkg\">, usually pkg.png). The 17,694-byte NOW PRINTING placeholder is skipped. Large PNG (~0.3–0.5 MB).",
+    method: "The item's package block (<p class=\"specPkg\">, usually pkg.png): the first one on the page, or, for a sub-item linked as page#id, the first one in that item's own section. NOW PRINTING placeholders (<= 25 KB) are skipped. Large PNG (~0.3–0.5 MB).",
     licence: "© SOTSU・SUNRISE / BANDAI. Hotlinked only.",
   },
   {
@@ -912,7 +1044,7 @@ const SOURCES = [
     id: "gunplapedia_jan",
     name: "Gunplapedia (gunpla.fandom.com) infobox box art, joined by JAN",
     url: "https://gunpla.fandom.com/",
-    method: "Only used when static.wikia.nocookie.net serves images to non-browser clients; it answered with a Cloudflare challenge when this file was built, so no entries come from here.",
+    method: "Only used when static.wikia.nocookie.net serves images to non-browser clients (one HEAD probe per run); it answered with a Cloudflare challenge (403) when this was written, so no entries come from here.",
     licence: "Wiki text CC BY-SA 3.0; box art © SOTSU・SUNRISE / BANDAI SPIRITS. Hotlinked only.",
   },
 ];
@@ -925,6 +1057,35 @@ const NOT_COVERED = {
   premium_bandai_merch: "Premium Bandai decals, cards, videos, books, games and apparel: no box image (their images are sheets, cards or product shots).",
 };
 
+// What an entry is. The app shows only plain entries (no kind) as box art.
+export const KINDS = {
+  box: "No kind field: the retail package (箱絵), confidence high or medium. Show it as the box art.",
+  dp: "kind \"dp\": a gashapon DP card (台紙) shown on the machine. Capsule toys have no box; show it as the set image, not as a box.",
+  maybe: "kind \"maybe\": a low-confidence pick (about 4 in 5 were boxes when checked by eye; the rest are group photos, product shots or decal sheets). Never show it as box art; at most as an ordinary gallery image.",
+};
+
+/** The output entry for a picker result; low-confidence picks become kind "maybe". */
+export function toEntry(r) {
+  const e = { url: r.url, source: r.source, confidence: r.confidence };
+  if (r.kind) e.kind = r.kind;
+  else if (r.confidence === "low") e.kind = "maybe";
+  return e;
+}
+
+/**
+ * Reasons not to write the file (CI passes --guard): a host refused us, served unexpected
+ * pages en masse, or the entry count fell more than 5% below the previous file.
+ */
+export function guardReasons({ hosts, prevCount, count, allowDrop = false }) {
+  const out = [];
+  for (const [host, s] of Object.entries(hosts)) {
+    if (s.blocked > 0) out.push(`${host}: ${s.blocked} refused (${s.last_refusal || "?"})`);
+    if (s.unexpected > 20) out.push(`${host}: ${s.unexpected} pages without the expected markup`);
+  }
+  if (!allowDrop && prevCount > 0 && count < prevCount * 0.95) out.push(`entries ${prevCount} -> ${count} (more than 5% fewer)`);
+  return out;
+}
+
 async function readJson(file) {
   try {
     return JSON.parse(await readFile(file, "utf8"));
@@ -933,12 +1094,18 @@ async function readJson(file) {
   }
 }
 
+/** Equality for "did anything but the timestamp / URL-check counts change?". */
+const comparable = (body) => JSON.stringify({ ...body, updated_at: null, sources: (body.sources || []).map(({ url_check, ...s }) => s) });
+
 async function main() {
-  const kitsFile = path.join(ROOT, "data", "split", "kits-gundam.json");
+  const rawBudget = args.budget ?? process.env.ATLAS_BUDGET;
+  if (rawBudget !== undefined && !/^\d+$/.test(String(rawBudget))) throw new Error(`--budget must be a whole number, got ${JSON.stringify(rawBudget)}`);
+  const kitsFile = path.resolve(ROOT, args.kits || path.join("data", "split", "kits-gundam.json"));
   const outFile = path.resolve(ROOT, args.out || path.join("data", "atlas", "gundam-boxart.json"));
   const only = args.only ? new Set(String(args.only).split(",")) : null;
   const want = (f) => !only || only.has(f);
   const checkPerSource = Number(args.check ?? 30);
+  const guard = args.guard === "1";
 
   const catalog = await readJson(kitsFile);
   if (!catalog?.kits?.length) throw new Error(`no kits in ${kitsFile}`);
@@ -975,11 +1142,11 @@ async function main() {
         if (hit && !isDeadUrl(hit.url)) result = { url: hit.url, source: "gunplapedia_jan", confidence: hit.boxName ? "medium" : "low" };
       }
       if (result?.url && !isDeadUrl(result.url)) {
-        const e = { url: result.url, source: result.source, confidence: result.confidence };
-        if (result.kind) e.kind = result.kind;
-        picks.set(kit.kit_id, e);
+        picks.set(kit.kit_id, toEntry(result));
       } else if (result?.unknown && prevBox[kit.kit_id]) {
-        picks.set(kit.kit_id, prevBox[kit.kit_id]); // over budget / offline: keep last known
+        // over budget / offline / host refused: keep the last known answer
+        const p = prevBox[kit.kit_id];
+        picks.set(kit.kit_id, p.kind || p.confidence !== "low" ? p : { ...p, kind: "maybe" });
         report.carried_over++;
       } else {
         const why = result?.none || (result?.unknown ? "unknown" : "no-source");
@@ -990,18 +1157,19 @@ async function main() {
   }
   await Promise.all(Array.from({ length: Number(args.workers || 6) }, worker));
 
+  // Catalog order from here on (stable output and a deterministic health sample).
+  const ordered = kits.filter((k) => picks.has(k.kit_id)).map((k) => [k.kit_id, picks.get(k.kit_id)]);
   // Health sample per source; a source whose sample mostly fails is dropped this run.
-  const checks = checkPerSource > 0 ? await healthSample(picks, checkPerSource) : {};
+  const checks = checkPerSource > 0 ? await healthSample(ordered, checkPerSource) : {};
+  const dropped = new Set();
   for (const [source, c] of Object.entries(checks)) {
     if (c.checked >= 5 && c.ok / c.checked < 0.9) {
-      for (const [k, e] of picks) if (e.source === source) picks.delete(k);
+      dropped.add(source);
       c.dropped = true;
     }
   }
+  const boxart = Object.fromEntries(ordered.filter(([, e]) => !dropped.has(e.source)));
 
-  // Stable output order = catalog order.
-  const boxart = {};
-  for (const kit of kits) if (picks.has(kit.kit_id)) boxart[kit.kit_id] = picks.get(kit.kit_id);
   const byGrade = {};
   const bySource = {};
   for (const kit of kits) {
@@ -1009,51 +1177,72 @@ async function main() {
     g.kits++;
     const e = boxart[kit.kit_id];
     if (!e) continue;
-    if (e.kind === "dp") g.with_dp = (g.with_dp || 0) + 1;
+    if (e.kind) g[`with_${e.kind}`] = (g[`with_${e.kind}`] || 0) + 1;
     else g.with_box++;
     bySource[e.source] = (bySource[e.source] || 0) + 1;
   }
+  const entries = Object.values(boxart);
+  const countKind = (k) => entries.filter((e) => (e.kind || "box") === k).length;
+  // Premium Bandai plastic kits (by name) vs those with a box: the rest is a known gap.
+  const pbItems = kits.filter((k) => k.images?.box_art_source_id === "p_bandai_wayback");
+  const pbKits = pbItems.filter((k) => isKitName(k.names?.ja || k.names?.en));
+  const pbBox = pbKits.filter((k) => boxart[k.kit_id] && !boxart[k.kit_id].kind).length;
   const sources = SOURCES.map((s) => ({
     ...s,
     entries: bySource[s.id] || 0,
     ...(checks[s.id] ? { url_check: checks[s.id] } : {}),
-    ...(s.id === "gunplapedia_jan" ? { status: fandom ? "ok" : `blocked (${report.gunplapedia.probe || "not run"})` } : {}),
+    ...(s.id === "gunplapedia_jan" ? { status: fandom ? "ok" : "not used" } : {}),
   }));
   const body = {
     schema: 1,
     updated_at: null,
+    kinds: KINDS,
     sources,
-    not_covered: NOT_COVERED,
+    not_covered: {
+      ...NOT_COVERED,
+      premium_bandai_kits: `${pbKits.length - pbBox} of ${pbKits.length} Premium Bandai plastic kits have no box image: their last CDN image is a product shot (item pages are behind a JS challenge, and their first images were never boxes in the checked samples).`,
+    },
     boxart,
     stats: {
       kits: kits.length,
-      with_box: Object.values(boxart).filter((e) => e.kind !== "dp").length,
-      with_dp: Object.values(boxart).filter((e) => e.kind === "dp").length,
+      with_box: countKind("box"),
+      with_dp: countKind("dp"),
+      with_maybe: countKind("maybe"),
+      premium_bandai: { items: pbItems.length, kits: pbKits.length, with_box: pbBox },
       by_grade: byGrade,
       by_source: bySource,
     },
   };
-  // Keep updated_at (and the file) unchanged when nothing but the timestamp would move.
-  const same = prev && JSON.stringify({ ...prev, updated_at: null }) === JSON.stringify(body);
-  body.updated_at = same ? prev.updated_at : new Date().toISOString();
-  if (!same) {
+
+  // Keep updated_at (and the file) unchanged when only the timestamp or the URL-check
+  // counts would move.
+  const same = !!prev && comparable(prev) === comparable(body);
+  const hosts = hostReport();
+  const blockedBy = guard ? guardReasons({ hosts, prevCount: Object.keys(prevBox).length, count: entries.length, allowDrop: args["allow-drop"] === "1" }) : [];
+  const write = !same && blockedBy.length === 0;
+  body.updated_at = same || !write ? prev?.updated_at ?? null : new Date().toISOString();
+  if (write) {
     await mkdir(path.dirname(outFile), { recursive: true });
     await writeFile(outFile, `${JSON.stringify(body)}\n`);
   }
   const summary = {
-    changed: !same,
+    changed: write,
+    guard: blockedBy,
     kits: kits.length,
-    picked: Object.keys(boxart).length,
+    picked: entries.length,
+    previous: Object.keys(prevBox).length,
     with_box: body.stats.with_box,
     with_dp: body.stats.with_dp,
+    with_maybe: body.stats.with_maybe,
     by_source: bySource,
     url_checks: checks,
     reasons: report.reasons,
     carried_over: report.carried_over,
     gunplapedia: report.gunplapedia,
-    hosts: Object.fromEntries([...hostStats.entries()].sort()),
+    hosts,
   };
   console.log(JSON.stringify(summary, null, 1));
+  if (blockedBy.length) console.log(`::warning::Gundam box art not written: ${blockedBy.join("; ")}`);
   if (args.report) await writeFile(path.resolve(args.report), JSON.stringify(summary, null, 1));
 }
 

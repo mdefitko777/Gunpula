@@ -4,8 +4,10 @@ name: Atlas - Gundam box art
 # for each gundam item in data/split/kits-gundam.json. Official BANDAI SPIRITS / Premium
 # Bandai / Bandai Candy / gashapon images, hotlinked only, with a pixel check that keeps
 # only white-padded box scans. Polite crawler (descriptive User-Agent, <= 1 request per
-# second per host, raw responses cached between runs, never committed). A host that fails
-# or runs out of budget keeps the previous entries. Commits only data/atlas/gundam-boxart.json.
+# second per host, answers cached between runs, never committed). A host that is offline,
+# over budget or refusing us (401/403/429/451, challenge pages) keeps the previous
+# entries; the build is run with --guard, so the file is not rewritten at all when any host
+# refused us or the entry count fell more than 5%. Commits only data/atlas/gundam-boxart.json.
 
 on:
   schedule:
@@ -13,8 +15,12 @@ on:
   workflow_dispatch:
     inputs:
       budget:
-        description: "Max live requests per host this run"
+        description: "Max live requests per host this run (whole number)"
         default: "3000"
+      allow_drop:
+        description: "Allow the entry count to fall more than 5% (after checking why)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -34,20 +40,32 @@ jobs:
         with:
           node-version: 22
 
-      # Raw-response cache between runs (keeps the request count low; never committed).
+      # Cached answers between runs (keeps the request count low; never committed). Pages
+      # are stored as the few tags the script reads, so this stays small (images: ~10 KB
+      # each). A new key per run; GitHub drops entries unused for 7 days, so only the
+      # latest one or two weekly entries exist at a time.
       - uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/atlas-cache/gundam-boxart
-          key: atlas-boxart-${{ github.run_id }}
-          restore-keys: atlas-boxart-
+          key: atlas-boxart-v2-${{ github.run_id }}
+          restore-keys: atlas-boxart-v2-
+
+      - name: Self-test
+        run: node scripts/atlas/test_gundam_boxart.mjs
 
       - name: Build Gundam box art
-        timeout-minutes: 105
+        timeout-minutes: 100
         env:
           ATLAS_CACHE_DIR: ${{ runner.temp }}/atlas-cache/gundam-boxart
+          BUDGET: ${{ inputs.budget || '3000' }}
+          ALLOW_DROP: ${{ inputs.allow_drop && '1' || '' }}
         run: |
+          case "$BUDGET" in
+            ''|*[!0-9]*) echo "budget must be a whole number" >&2; exit 1 ;;
+          esac
           node scripts/atlas/build_gundam_boxart.mjs \
-            --budget="${{ github.event.inputs.budget || '3000' }}" \
+            --guard ${ALLOW_DROP:+--allow-drop} \
+            --budget="$BUDGET" \
             --report="$RUNNER_TEMP/boxart-report.json"
 
       - name: Summarise
@@ -58,7 +76,8 @@ jobs:
             const f = process.env.RUNNER_TEMP + "/boxart-report.json";
             if (!fs.existsSync(f)) process.exit(0);
             const r = JSON.parse(fs.readFileSync(f, "utf8"));
-            const out = ["## Gundam box art", "", `${r.changed ? "changed" : "unchanged"}: ${r.with_box} box + ${r.with_dp} DP of ${r.kits} items (carried over ${r.carried_over})`, ""];
+            const out = ["## Gundam box art", "", `${r.changed ? "changed" : "unchanged"}: ${r.with_box} box + ${r.with_dp} DP + ${r.with_maybe} maybe of ${r.kits} items (previous file: ${r.previous} entries, carried over ${r.carried_over})`, ""];
+            if (r.guard && r.guard.length) out.push("**Not written (guard):** " + r.guard.join("; "));
             out.push("By source: " + JSON.stringify(r.by_source));
             out.push("URL checks: " + JSON.stringify(r.url_checks));
             out.push("No pick: " + JSON.stringify(r.reasons));
@@ -68,9 +87,27 @@ jobs:
           '
 
       - name: Validate JSON
+        env:
+          ALLOW_DROP: ${{ inputs.allow_drop && '1' || '' }}
         run: |
           f=data/atlas/gundam-boxart.json
-          node -e 'const d=JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")); const n=Object.keys(d.boxart||{}).length; if(d.schema!==1||!Array.isArray(d.sources)||!d.stats||n<500||Object.values(d.boxart).some(e=>!/^https:\/\//.test(e.url))) {console.error("bad", process.argv[1], n); process.exit(1)}' "$f"
+          git show "HEAD:$f" > "$RUNNER_TEMP/boxart-prev.json" 2>/dev/null || echo '{}' > "$RUNNER_TEMP/boxart-prev.json"
+          node -e '
+            const fs = require("fs");
+            const d = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+            const p = JSON.parse(fs.readFileSync(process.argv[2], "utf8"));
+            const n = Object.keys(d.boxart || {}).length;
+            const was = Object.keys(p.boxart || {}).length;
+            if (d.schema !== 1 || !Array.isArray(d.sources) || !d.stats || !d.kinds || n < 500 || Object.values(d.boxart).some((e) => !/^https:\/\//.test(e.url))) {
+              console.error("bad", process.argv[1], n);
+              process.exit(1);
+            }
+            // Second line of defence next to --guard: never commit a file that lost > 5%.
+            if (!process.env.ALLOW_DROP && was > 0 && n < was * 0.95) {
+              console.error(`entries fell from ${was} to ${n}; not committing (re-run with allow_drop after checking why)`);
+              process.exit(1);
+            }
+          ' "$f" "$RUNNER_TEMP/boxart-prev.json"
 
       - name: Commit updated box art
         run: |
