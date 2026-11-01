@@ -2,17 +2,21 @@
 // Build data/atlas/mezastar-intl.json and data/atlas/mezastar-jp.json (Hobby Atlas, Pokémon MEZASTAR).
 //
 //   node scripts/atlas/mezastar/build.mjs [--edition=all|intl|jp] [--kr-popups=new|all|none]
-//                                         [--out=data/atlas] [--report=<file>]
+//                                         [--out=data/atlas] [--report=<file>] [--reassign-ids]
 //
 // Env: ATLAS_CACHE_DIR (raw response cache, default tmp/atlas-cache/mezastar, never committed),
 //      ATLAS_OFFLINE=1 (cache only), ATLAS_BULBA_SEED_DIR (snapshot used if Bulbapedia is blocked).
 // A source that fails (blocked / down / suspiciously small) never wipes data: its contribution is
 // carried over from the previous output file and its status is recorded in "sources".
+// Ids are stable (lib/ids.mjs): the previous file is the id registry, re-keys become "aliases",
+// and the build refuses to write a file with duplicate ids or with a published id that no longer
+// resolves. --reassign-ids ignores the previous ids (only for files that were never published).
 
 import path from "node:path";
 import { mkdir, writeFile } from "node:fs/promises";
-import { CACHE_DIR, BlockedError, blockedHosts, hostOldest, hostReport, USER_AGENT } from "./lib/http.mjs";
+import { CACHE_DIR, BlockedError, backoffReport, blockedHosts, hostOldest, hostReport, USER_AGENT } from "./lib/http.mjs";
 import { prune, readJsonMaybe, uniq, writeCompactJson } from "./lib/util.mjs";
+import { checkOutput, finaliseIds, makeRegistry } from "./lib/ids.mjs";
 import { loadPokeApi, POKEAPI_SOURCE } from "./lib/pokeapi.mjs";
 import { fetchTW, TW_SOURCE } from "./sources/tw.mjs";
 import { fetchHK, HK_SOURCE } from "./sources/hk.mjs";
@@ -28,6 +32,7 @@ const args = Object.fromEntries(process.argv.slice(2).map((a) => { const [k, v] 
 const EDITIONS = (args.edition || "all") === "all" ? ["intl", "jp"] : [args.edition];
 const OUT = path.resolve(args.out || "data/atlas");
 const FILES = { intl: path.join(OUT, "mezastar-intl.json"), jp: path.join(OUT, "mezastar-jp.json") };
+const REASSIGN = args["reassign-ids"] === "1";
 const now = new Date().toISOString();
 const log = (...a) => console.error("[mezastar]", ...a);
 
@@ -126,6 +131,18 @@ function overlayPrevious(prev, cur, failed) {
       // the form (and the form-specific types) came from the official EN name
       if (!ct.form || ct.form === pt.form) { ct.form = pt.form; delete ct.form_src; ct.types = pt.types; }
     }
+    for (const reg of ["TC", "KR"]) {
+      // the form came from that region's official name ("武道熊師（連擊流）"): restore it with the
+      // form-specific types and the form-aware fallback names
+      if (!failed.has(reg) || pt.form_src !== `${reg} name` || (ct.form && ct.form !== pt.form)) continue;
+      const was = ct.form;
+      ct.form = pt.form;
+      ct.form_src = pt.form_src;
+      if (was !== pt.form) {
+        ct.types = pt.types;
+        for (const l of pt.names_derived || []) if ((ct.names_derived || []).includes(l)) ct.names[l] = pt.names[l];
+      }
+    }
     const lost = (pt.anomalies || []).filter((a) => [...failed].some((r) => a.startsWith(`${r} `)) && !(ct.anomalies || []).includes(a));
     if (lost.length) ct.anomalies = [...(ct.anomalies || []), ...lost];
     const gradeFailed = (failed.has("KR") && pt.grade_src?.startsWith("KR")) || (failed.has("CN") && pt.grade_src?.startsWith("CN"));
@@ -136,9 +153,17 @@ function overlayPrevious(prev, cur, failed) {
   return notes;
 }
 
-const stableJson = (o) => JSON.stringify({ ...o, updated_at: null, sources: (o.sources || []).map(({ fetched_at, ...s }) => s) });
+// Change detection ignores timestamps and free-text error messages (a source's status still counts).
+const stableJson = (o) => JSON.stringify({ ...o, updated_at: null, sources: (o.sources || []).map(({ fetched_at, error, seed_snapshot_at, ...s }) => s) });
 
-async function writeIfChanged(file, out, prev) {
+async function writeIfChanged(file, out, prev, idCheckPrev) {
+  const errors = checkOutput(out, idCheckPrev);
+  if (errors.length) {
+    for (const e of errors.slice(0, 20)) log(`${path.basename(file)}: ID CHECK FAILED: ${e}`);
+    log(`${path.basename(file)}: not written (previous file kept)`);
+    process.exitCode = 1;
+    return { changed: false, id_check_failed: errors, ...(prev ? await sizeOf(prev) : {}) };
+  }
   if (prev && stableJson(prev) === stableJson(out)) {
     log(`${path.basename(file)}: unchanged`);
     return { changed: false, ...(await sizeOf(prev)) };
@@ -218,12 +243,14 @@ if (EDITIONS.includes("intl")) {
     const rows = r.data.rows.length;
     if (before && rows < before * 0.6) { r.ok = false; r.status = "failed"; r.error = `only ${rows} rows vs ${before} printings before (layout change?)`; log(`${reg}: ${r.error}`); }
   }
+  const reg = makeRegistry(prev.intl, { reassign: REASSIGN });
   const merged = mergeIntl({
     tw: res.TC.ok ? res.TC.data : null, hk: res.EN.ok ? res.EN.data : null, kr: res.KR.ok ? res.KR.data : null, cn: res.CN.ok ? res.CN.data : null,
-    md, poke, launch: bul.ok ? bul.data.launch : {},
+    md, poke, launch: bul.ok ? bul.data.launch : {}, reg,
   });
   const failed = new Set(Object.entries(res).filter(([, r]) => !r.ok).map(([k]) => k));
   const carried = overlayPrevious(prev.intl, merged, failed);
+  const ids = finaliseIds(merged, prev.intl, reg, { reassign: REASSIGN });
   // EN launch day of Stardust 1 comes from Bulbapedia; keep the previous value if it is unavailable
   if (!bul.ok && prev.intl) for (const s of merged.sets) for (const r of s.releases) if (!r.date) r.date = prev.intl.sets.find((x) => x.id === s.id)?.releases.find((x) => x.region === r.region)?.date || null;
   // deterministic ordinals (a set carried over from the previous run keeps its place)
@@ -240,7 +267,11 @@ if (EDITIONS.includes("intl")) {
     t.printings.sort((a, b) => RO[a.region] - RO[b.region] || first(a) - first(b) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
   }
   const tags = sortTags(merged.sets, merged.tags, { standard: 0, regular: 1, legacy: 2, promo: 3 });
-  for (const s of merged.sets) s.releases.sort((a, b) => ({ KR: 0, TC: 1, EN: 2 })[a.region] - ({ KR: 0, TC: 1, EN: 2 })[b.region]);
+  for (const s of merged.sets) {
+    s.releases.sort((a, b) => ({ KR: 0, TC: 1, EN: 2 })[a.region] - ({ KR: 0, TC: 1, EN: 2 })[b.region]);
+    // fixed key order, so a name restored from the previous run does not count as a change
+    s.names = Object.fromEntries(["en", "zh_hant", "ko", "ja"].filter((l) => s.names?.[l]).map((l) => [l, s.names[l]]));
+  }
   recount(merged.sets, tags, ["KR", "TC", "EN"]);
   const out = prune({
     schema: 1,
@@ -253,23 +284,28 @@ if (EDITIONS.includes("intl")) {
     ],
     sets: merged.sets,
     tags,
+    aliases: merged.aliases,
   });
   out.updated_at = now;
-  const w = await writeIfChanged(FILES.intl, out, prev.intl);
-  report.editions.intl = { file: FILES.intl, ...w, kr_popups: res.KR.ok ? res.KR.data.popups : null, sources: Object.fromEntries(Object.entries(res).map(([k, r]) => [k, r.status + (r.error ? `: ${r.error}` : "")])), carried, metrics: metrics(out, ["KR", "TC", "EN"]) };
+  const w = await writeIfChanged(FILES.intl, out, prev.intl, REASSIGN ? null : prev.intl);
+  report.editions.intl = { file: FILES.intl, ...w, kr_popups: res.KR.ok ? res.KR.data.popups : null, sources: Object.fromEntries(Object.entries(res).map(([k, r]) => [k, r.status + (r.error ? `: ${r.error}` : "")])), carried, ids, metrics: metrics(out, ["KR", "TC", "EN"]) };
 }
 
 if (EDITIONS.includes("jp")) {
-  const jpRes = await attempt("jp-archive", fetchJP);
+  // The JP edition is frozen and cannot be rebuilt without Bulbapedia: do not even fetch the
+  // archive (20 pages) when Bulbapedia is unavailable and a previous file exists.
+  const jpRes = !bul.ok && prev.jp ? { ok: false, status: "not fetched (Bulbapedia unavailable)" } : await attempt("jp-archive", fetchJP);
   const usable = jpRes.ok && bul.ok;
   if (!usable && prev.jp) {
-    log("JP: a required source failed; previous mezastar-jp.json kept unchanged (edition is frozen)");
+    log("JP: a required source is unavailable; previous mezastar-jp.json kept unchanged (edition is frozen)");
     report.editions.jp = { file: FILES.jp, changed: false, kept_previous: true, sources: { archive: jpRes.status, bulbapedia: bulStatus }, metrics: metrics(prev.jp, ["JA"]), ...(await sizeOf(prev.jp)) };
   } else if (!jpRes.ok) {
     log("JP: official archive unavailable and no previous file; skipping");
     report.editions.jp = { skipped: true, error: jpRes.error };
   } else {
-    const merged = mergeJp({ jp: jpRes.data, bulba: bul.ok ? bul.data : null, md, poke });
+    const reg = makeRegistry(prev.jp, { reassign: REASSIGN });
+    const merged = mergeJp({ jp: jpRes.data, bulba: bul.ok ? bul.data : null, md, poke, reg });
+    const ids = finaliseIds(merged, prev.jp, reg, { reassign: REASSIGN });
     const tags = sortTags(merged.sets, merged.tags, { standard: 0, gorgeous: 1, legacy: 2, promo: 3 });
     recount(merged.sets, tags, ["JA"]);
     const out = prune({
@@ -281,14 +317,16 @@ if (EDITIONS.includes("jp")) {
       ],
       sets: merged.sets,
       tags,
+      aliases: merged.aliases,
     });
     out.updated_at = now;
-    const w = await writeIfChanged(FILES.jp, out, prev.jp);
-    report.editions.jp = { file: FILES.jp, ...w, sources: { archive: jpRes.status, bulbapedia: bulStatus }, metrics: metrics(out, ["JA"]) };
+    const w = await writeIfChanged(FILES.jp, out, prev.jp, REASSIGN ? null : prev.jp);
+    report.editions.jp = { file: FILES.jp, ...w, sources: { archive: jpRes.status, bulbapedia: bulStatus }, ids, metrics: metrics(out, ["JA"]) };
   }
 }
 
 report.blocked_hosts = blockedHosts();
+report.backoff = backoffReport();
 report.hosts = hostReport();
 report.bulbapedia = { status: bulStatus, ...bulbaStatus };
 const reportFile = args.report || path.join(CACHE_DIR, "report.json");

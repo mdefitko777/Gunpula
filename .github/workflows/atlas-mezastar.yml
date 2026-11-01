@@ -5,7 +5,10 @@ name: Atlas - Pokémon MEZASTAR data
 # PokeAPI and the vendored mezastar-dex stats. Polite crawler (descriptive User-Agent,
 # >= 1.1 s between requests per host, raw responses cached outside the repo). A host that
 # fails or blocks the bot never wipes data: the previous file's values are carried over and
-# the source is marked in "sources". Commits only data/atlas/mezastar-*.
+# the source is marked in "sources". A host that blocked the bot is not contacted again for
+# 28 days (back-off kept in the restored cache). Ids are stable: the build and the check step
+# refuse duplicate ids and any published id that no longer resolves. Commits only
+# data/atlas/mezastar-*.
 
 on:
   schedule:
@@ -48,6 +51,9 @@ jobs:
           key: atlas-mezastar-${{ github.run_id }}
           restore-keys: atlas-mezastar-
 
+      - name: Unit tests (ids, parsers)
+        run: node --test scripts/atlas/mezastar/test/*.test.mjs
+
       - name: Build MEZASTAR datasets
         timeout-minutes: 15
         env:
@@ -70,6 +76,8 @@ jobs:
             for (const [ed, e] of Object.entries(r.editions)) {
               out.push(`### ${ed}: ${e.changed ? "changed" : "unchanged"}${e.kept_previous ? " (previous file kept)" : ""}, ${e.bytes ?? "?"} bytes (gzip ${e.gzip ?? "?"})`);
               out.push("Sources: " + JSON.stringify(e.sources));
+              if (e.id_check_failed) out.push("**ID check failed, file not written:** " + e.id_check_failed.slice(0, 5).join("; "));
+              if (e.ids) out.push(`Ids: ${e.ids.aliases_added.length} aliases added, ${e.ids.delisted_carried.length} delisted ids carried over` + (e.ids.aliases_added.length ? " (" + e.ids.aliases_added.slice(0, 5).join(", ") + ")" : ""));
               const m = e.metrics; if (!m) continue;
               out.push(`Tags ${m.tags} ${JSON.stringify(m.by_kind)}; anomalies ${m.anomalies.total}; images ${JSON.stringify(m.images)}`);
               for (const s of m.sets) out.push(`- ${s.id}: ${JSON.stringify(s.releases)} ${JSON.stringify(s.counts)}`);
@@ -77,12 +85,12 @@ jobs:
             fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, out.join("\n") + "\n");
           '
 
-      - name: Validate JSON
+      # Shape, sources, unique ids, aliases, and every id published in HEAD must still resolve.
+      - name: Validate data and id stability
         run: |
-          for f in data/atlas/mezastar-*.json; do
-            [ -f "$f" ] || continue
-            node -e 'const d=JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")); if(d.schema!==1||!Array.isArray(d.sets)||!Array.isArray(d.tags)||!d.tags.length||!Array.isArray(d.sources)) {console.error("bad", process.argv[1]); process.exit(1)}' "$f"
-          done
+          files=$(ls data/atlas/mezastar-*.json 2>/dev/null || true)
+          [ -n "$files" ] || exit 0
+          node scripts/atlas/mezastar/check.mjs $files --against=HEAD
 
       - name: Commit updated MEZASTAR data
         run: |

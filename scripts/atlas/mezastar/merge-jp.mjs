@@ -2,12 +2,13 @@
 // Official archive = which tags exist + ja names + images; Bulbapedia = EN species, types, exact grade,
 // Gorgeous/Ultra Beast/Legacy rows, promo campaigns, release dates; mezastar-dex = stats.
 import { nfkc, pad3, slug, uniq } from "./lib/util.mjs";
+import { assignPrintingIds } from "./lib/ids.mjs";
 
 export const EDITION_JP = {
   id: "mz-jp",
   name: { ja: "ポケモンメザスタ", en: "Pokémon Mezastar (Japan, 2020-2024)", ko: "포켓몬 메자스타 (일본판)", zh_hant: "寶可夢MEZASTAR（日本版）" },
   regions: { JA: { label: "JA (Japan)", printed_suffix: null, lang: "ja" } },
-  id_scheme: "mz-jp:<serial> (1-001, 2-s-NNN, 3-s-NNN, 4-s-NNN, 4-s-NNNG gorgeous, 4-s-UNN ultra beast); mz-jp:<set>-L-<original serial> legacy; mz-jp:P-NNN promos (official image number) or mz-jp:P-<slug>",
+  id_scheme: "mz-jp:<serial> (1-001, 2-s-NNN, 3-s-NNN, 4-s-NNN, 4-s-NNNG gorgeous, 4-s-UNN ultra beast); mz-jp:<set>-L-<original serial> legacy; mz-jp:P-NNN promos (official image number) or mz-jp:P-<species>-<campaign> (Bulbapedia only). Printing ids: <tag>@JA[:<promo campaign>]",
   status: "ended 2024 (replaced by Pokémon Frienda); data frozen",
 };
 
@@ -31,7 +32,14 @@ function groupFromHeading(h) {
 }
 const groupFromGrade = (g) => (g === 6 ? "superstar" : g === 5 ? "star" : g >= 2 && g <= 4 ? "normal" : null);
 
-export function mergeJp({ jp, bulba, md, poke }) {
+/** Official promo image number: '.../img/p014.png?v1' -> 14, '.../img/p137-wxfQcSV7XQ2Z.png' -> 137. */
+export function promoFile(url) {
+  const file = (url || "").split(/[?#]/)[0].split("/").pop().replace(/\.\w+$/, "");
+  const m = file.match(/^p(\d+)/i);
+  return { file, no: m ? Number(m[1]) : null };
+}
+
+export function mergeJp({ jp, bulba, md, poke, reg = null }) {
   const sets = new Map(), tags = new Map(), setAnoms = new Map();
   const sa = (sid, a) => { if (!setAnoms.has(sid)) setAnoms.set(sid, []); setAnoms.get(sid).push(a); };
   const ensureTag = (id, init) => {
@@ -59,10 +67,11 @@ export function mergeJp({ jp, bulba, md, poke }) {
     const grp = groupFromHeading(r.heading);
     const printing = { region: "JA", name: r.name, img_front: r.img_front, img_thumb: r.img_thumb, kira: r.kira || undefined };
     if (r.page === "special" || r.serial === "P") {
-      const file = (r.img_front || "").split("/").pop().replace(/\.\w+$/, "");
-      const pn = file.match(/^p(\d+)$/i);
-      const id = pn ? `mz-jp:P-${pad3(pn[1])}` : `mz-jp:P-${slug(file)}`;
-      const t = ensureTag(id, { serial: "P", kind: "promo", grade_group: "promo", promo_no: pn ? Number(pn[1]) : null });
+      const pf = promoFile(r.img_front);
+      const id = pf.no != null ? `mz-jp:P-${pad3(pf.no)}` : `mz-jp:P-${slug(pf.file)}`;
+      // in-set specials (DC3_sp_Nyaoha.png) are named by file; on the special-tag page every image is pNNN
+      if (pf.no == null && r.page === "special") sa(set.id, `promo image '${pf.file}' has no p<number> name; id taken from the file name`);
+      const t = ensureTag(id, { serial: "P", kind: "promo", grade_group: "promo", promo_no: pf.no });
       t.orientation = grp === "promo:horizontal" ? "horizontal" : grp === "promo:vertical" ? "vertical" : t.orientation;
       t.sets.add(set.id);
       t.printings.push(printing);
@@ -79,6 +88,8 @@ export function mergeJp({ jp, bulba, md, poke }) {
 
   // ---- Bulbapedia set lists --------------------------------------------------------
   const dexEn = (n) => poke.resolveEn(n);
+  /** species of a tag before enrichment: its Bulbapedia row, else the official ja name */
+  const tagDex = (t) => (t.bulba && dexEn(t.bulba.species)?.dex) || poke.resolveLocal(t.printings.find((p) => p.name)?.name, "ja")?.dex || null;
   for (const set of sets.values()) {
     const b = set.bulba;
     if (!b) { if (set.series !== "promo" && bulba) sa(set.id, "no Bulbapedia set list"); continue; }
@@ -140,10 +151,30 @@ export function mergeJp({ jp, bulba, md, poke }) {
     let extra = 0;
     for (const row of bRows) {
       if (row.no !== "P") {
-        // promotional variant of a numbered tag -> extra printing on that tag
-        const t = tags.get(`mz-jp:${row.no}`);
-        if (t) t.printings.push({ region: "JA", variant: row.page || "promo", name: null, src: "bulbapedia" });
-        else sa("mz-jp:promo", `Bulbapedia promo variant ${row.no} ${row.species} has no matching tag`);
+        // promotional variant of a numbered tag -> extra printing on that tag, if the species agrees
+        const d = dexEn(row.species)?.dex || null;
+        const listed = tags.get(`mz-jp:${row.no}`);
+        let t = listed;
+        if (listed && d && tagDex(listed) && tagDex(listed) !== d) {
+          // Bulbapedia data error (Chespin, Braixen and Greninja are all listed as 3-4-034):
+          // re-home the row to the one tag of that species in the same set, else skip it
+          const prefix = (row.no.match(/^(\d-(?:\d-)?)/) || [])[1] || "";
+          const re = new RegExp(`^${prefix}\\d{3}$`);
+          const cands = [...tags.values()].filter((x) => x.kind === "standard" && re.test(x.serial || "") && tagDex(x) === d);
+          t = cands.length === 1 ? cands[0] : null;
+          const what = `Bulbapedia lists the '${row.page}' promo variant of ${row.species} as ${row.no}, which is ${listed.bulba?.species || listed.printings[0].name}`;
+          if (t) t.anomalies.push(`${what}; re-assigned to ${t.serial} by species`);
+          else sa("mz-jp:promo", `${what}; no unique ${row.species} tag in that set, variant skipped`);
+        }
+        if (!t) {
+          if (!listed) sa("mz-jp:promo", `Bulbapedia promo variant ${row.no} ${row.species} has no matching tag`);
+          continue;
+        }
+        if (t.printings.some((p) => p.variant === (row.page || "promo"))) {
+          sa("mz-jp:promo", `Bulbapedia lists the '${row.page}' variant of ${t.serial} twice (deduplicated)`);
+          continue;
+        }
+        t.printings.push({ region: "JA", variant: row.page || "promo", name: null, src: "bulbapedia" });
         continue;
       }
       const d = dexEn(row.species)?.dex || 0;
@@ -155,8 +186,10 @@ export function mergeJp({ jp, bulba, md, poke }) {
         list[k].promo_campaign = row.page || undefined;
       } else {
         extra++;
-        const id = `mz-jp:P-${slug(row.species)}-${slug(row.page || String(extra))}`;
-        const t = ensureTag(tags.has(id) ? `${id}-${extra}` : id, { serial: "P", kind: "promo", grade_group: "promo", promo_campaign: row.page || undefined });
+        const base = `mz-jp:P-${slug(row.species)}-${slug(row.page || "promo")}`;
+        let id = base;
+        for (let n = 2; tags.has(id); n++) id = `${base}-${n}`;
+        const t = ensureTag(id, { serial: "P", kind: "promo", grade_group: "promo", promo_campaign: row.page || undefined });
         t.sets.add("mz-jp:promo");
         t.bulba = row;
         t.printings.push({ region: "JA", name: null, src: "bulbapedia" });
@@ -192,15 +225,12 @@ export function mergeJp({ jp, bulba, md, poke }) {
       if (jd && jd !== t.dex) t.anomalies.push(`official ja '${jaName}' (#${jd}) vs Bulbapedia '${b.species}' (#${t.dex})`);
     }
     for (const p of t.printings) if (!p.name && (baseName || jaName)) { p.name = baseName || jaName; p.name_from = base ? "base tag" : undefined; }
-    for (const p of t.printings) if (!p.name && t.dex) { p.name = poke.name(t.dex, "ja"); p.name_from = "PokeAPI"; }
+    for (const p of t.printings) if (!p.name && t.dex) { p.name = poke.displayName(t.dex, t.form, "ja"); p.name_from = "PokeAPI"; }
     if (official && t.dex && !poke.nameAgrees(t.dex, "ja", official.name)) t.anomalies.push(`JA name '${official.name}' does not contain PokeAPI ja '${poke.name(t.dex, "ja")}'`);
 
-    t.names = {
-      ja: jaName || (t.dex ? poke.name(t.dex, "ja") : null),
-      en: b?.species || (t.dex ? poke.name(t.dex, "en") : null),
-      ko: t.dex ? poke.name(t.dex, "ko") : null,
-      zh_hant: t.dex ? poke.name(t.dex, "zh_hant") : null,
-    };
+    // fallback names follow the official style: regional/Primal prefix, other forms in brackets
+    const derived = (lang) => (t.dex ? poke.displayName(t.dex, t.form, lang) : null);
+    t.names = { ja: jaName || derived("ja"), en: b?.species || derived("en"), ko: derived("ko"), zh_hant: derived("zh_hant") };
     t.names_derived = ["ja", "en", "ko", "zh_hant"].filter((l) => t.names[l] && !(l === "ja" ? official || baseName : l === "en" ? b : false));
 
     // grade
@@ -221,7 +251,7 @@ export function mergeJp({ jp, bulba, md, poke }) {
     if (t.kind === "standard" && !b && t.grade_group !== "ultra_beast") t.anomalies.push("no Bulbapedia row (types/grade missing)");
 
     // types
-    const typeForm = /^(mega( [xy])?|gigantamax|dynamax|primal)$/i.test(t.form || "") ? null : t.form;
+    const typeForm = /^(mega( [a-z])?|gigantamax|dynamax|primal)$/i.test(t.form || "") ? null : t.form;
     t.types = b?.types?.length ? b.types : t.dex ? poke.typesFor(t.dex, typeForm) : [];
     t.types_src = b?.types?.length ? "Bulbapedia" : t.types.length ? "PokeAPI" : null;
     if (b?.types?.length && t.dex) {
@@ -252,10 +282,9 @@ export function mergeJp({ jp, bulba, md, poke }) {
   const outTags = [...tags.values()]
     .map((t) => {
       const setsSorted = [...t.sets].sort((a, b) => ordOf.get(a) - ordOf.get(b));
-      const printings = t.printings.map((p, i) => ({
-        id: `${t.id}@JA${p.variant ? `:${slug(p.variant)}` : i ? `:${i + 1}` : ""}`,
-        region: "JA", variant: p.variant, name: p.name, name_from: p.name_from, img_front: p.img_front, img_thumb: p.img_thumb, kira: p.kira, src: p.src,
-      }));
+      const printings = assignPrintingIds(t.id, t.printings.map((p) => ({
+        id: null, region: "JA", variant: p.variant, name: p.name, name_from: p.name_from, img_front: p.img_front, img_thumb: p.img_thumb, kira: p.kira, src: p.src,
+      })), { reg });
       return {
         id: t.id, serial: t.serial, kind: t.kind, grade: t.grade, grade_src: t.grade_src, grade_group: t.grade_group, special: t.special,
         dex: t.dex, form: t.form, types: t.types, orientation: t.orientation, names: t.names, names_derived: t.names_derived,

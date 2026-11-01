@@ -5,7 +5,9 @@
 // - Every raw response body is cached on disk (ATLAS_CACHE_DIR, never committed).
 //   Fresh cache hits make no request; on failure a stale cache entry is used.
 // - A bot check (403/429/503/511, Cloudflare "Just a moment", challenge pages) is
-//   recorded as "blocked" and never retried with different headers.
+//   recorded as "blocked" and never retried with different headers. The block is also
+//   remembered in <cache>/_blocked-hosts.json: later runs do not contact that host again for
+//   ATLAS_BLOCK_BACKOFF_DAYS (default 28) and use cached responses (or fail fast) instead.
 
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
@@ -17,6 +19,23 @@ const TIMEOUT_MS = Number(process.env.ATLAS_TIMEOUT_MS || 30000);
 
 export const CACHE_DIR = path.resolve(process.env.ATLAS_CACHE_DIR || "tmp/atlas-cache/mezastar");
 export const OFFLINE = process.env.ATLAS_OFFLINE === "1";
+
+const BACKOFF_DAYS = Number(process.env.ATLAS_BLOCK_BACKOFF_DAYS || 28);
+const BACKOFF_FILE = path.join(CACHE_DIR, "_blocked-hosts.json");
+let backoff = null; // host -> { since, until, reason }
+async function loadBackoff() {
+  if (backoff) return backoff;
+  try { backoff = JSON.parse(await readFile(BACKOFF_FILE, "utf8")); } catch { backoff = {}; }
+  return backoff;
+}
+async function saveBackoff() {
+  await mkdir(CACHE_DIR, { recursive: true });
+  await writeFile(BACKOFF_FILE, JSON.stringify(backoff, null, 1));
+}
+/** Hosts in back-off because they blocked the bot in this or an earlier run. */
+export function backoffReport() {
+  return backoff ? structuredClone(backoff) : {};
+}
 
 const lastHit = new Map(); // host -> timestamp of last request start
 const hostLog = new Map(); // host -> { requests, cached, stale, errors, blocked, lastError }
@@ -110,14 +129,21 @@ export async function politeFetch(url, opts = {}) {
     return { status: cached.meta.status, text: cached.body.toString("utf8"), fromCache: true, stale: false, fetchedAt: cached.meta.fetchedAt };
   }
   if (OFFLINE) throw new Error(`offline and no cache for ${url}`);
+  const bo = (await loadBackoff())[host];
+  if (!L.blocked && bo && Date.parse(bo.until) > Date.now() && process.env.ATLAS_IGNORE_BACKOFF !== "1") {
+    // Blocked the bot in an earlier run: do not knock again until the back-off ends.
+    L.blocked = true;
+    L.backoff = bo;
+    L.lastError = `backing off until ${bo.until} (${bo.reason})`;
+  }
   if (L.blocked) {
-    // Host already blocked during this run: do not keep knocking.
+    // Host already blocked during this run (or in back-off): do not keep knocking.
     if (cached) {
       L.stale++;
       seen(L, cached.meta.fetchedAt);
       return { status: cached.meta.status, text: cached.body.toString("utf8"), fromCache: true, stale: true, fetchedAt: cached.meta.fetchedAt };
     }
-    throw new BlockedError(url, 0, "host blocked earlier in this run");
+    throw new BlockedError(url, 0, L.backoff ? `backing off until ${L.backoff.until.slice(0, 10)} after ${L.backoff.reason}` : "host blocked earlier in this run");
   }
   let lastErr = null;
   for (let attempt = 0; attempt < 3; attempt++) {
@@ -139,6 +165,8 @@ export async function politeFetch(url, opts = {}) {
       if (block) {
         L.blocked = true;
         L.lastError = `${block} ${url}`;
+        backoff[host] = { since: new Date().toISOString(), until: new Date(Date.now() + BACKOFF_DAYS * 86400e3).toISOString(), reason: block };
+        await saveBackoff();
         if (cached) {
           L.stale++;
           seen(L, cached.meta.fetchedAt);
@@ -155,6 +183,7 @@ export async function politeFetch(url, opts = {}) {
       }
       const fetchedAt = new Date().toISOString();
       seen(L, fetchedAt);
+      if (backoff[host]) { delete backoff[host]; await saveBackoff(); }
       await writeCache(file, { url, method, status: res.status, fetchedAt, contentType: res.headers.get("content-type") }, buf);
       return { status: res.status, text, fromCache: false, stale: false, fetchedAt };
     } catch (err) {
