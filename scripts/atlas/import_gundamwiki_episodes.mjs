@@ -9,6 +9,8 @@
 // 3. Linked titles that are not Mobile Weapon page titles are resolved through redirects.
 //
 // Descriptive User-Agent (lib/http.mjs), ~1 request/second, responses cached in ATLAS_CACHE_DIR.
+// Fetching is off until a human confirms Fandom's robots/API policy (lib/policy.mjs,
+// ATLAS_FANDOM_CONFIRMED=1); until then this step keeps the committed snapshot.
 // Output: data/atlas/gundam-src-episodes.json (pipeline snapshot; CC BY-SA 3.0 derived facts).
 // If the wiki refuses us, the previous snapshot is kept; with none, ATLAS_FANDOM_FALLBACK_DIR
 // may point at a research dump (<dir>/gundam_chapters/fandom/{smw_all_episodes,
@@ -17,6 +19,7 @@ import path from "node:path";
 import { fandomFilmPages } from "./gundam_chapter_works.mjs";
 import { politeJson, requestSummary } from "./lib/http.mjs";
 import { pageText, resolveRedirects } from "./lib/mediawiki.mjs";
+import { FANDOM_POLICY, assertFandomAllowed } from "./lib/policy.mjs";
 import { ATLAS_DATA, readJson, today, writeCompactJson } from "./lib/util.mjs";
 
 const HOST = "gundam.fandom.com";
@@ -145,6 +148,7 @@ async function fetchWikitext(titles) {
 }
 
 async function fromApi() {
+  assertFandomAllowed(HOST);
   const eps = await askAll("[[Concept:Episodes]]|?Series|?Episode number|?English Title", "Concept:Episodes");
   const subs = await askAll("[[Mobile Weapon::+]]|?Mobile Weapon|?Note|?-Has subobject=parent", "Mobile Weapon subobjects");
   const episodes = new Map();
@@ -272,6 +276,7 @@ async function main() {
         licence: "CC BY-SA 3.0; attribution: The Gundam Wiki contributors",
         via: r.via,
         stale: r.stale,
+        crawl_policy: FANDOM_POLICY,
       },
     ],
     stats: {

@@ -94,7 +94,8 @@ jobs:
             node scripts/atlas/run_gundam.mjs
           fi
 
-      # Needs data/atlas/gundam-ms.json from the step above (MS ids = Gundam Wiki titles).
+      # Needs data/atlas/gundam-ms.json + gundam-kit-ms.json from the step above (MS ids = the
+      # master's ids, kit ids = its kit links), so chapters refresh on the same schedule.
       # A chapters failure must not hold back the MS data: the chapter build already refuses
       # to overwrite gundam-chapters.json on a large drop, so the commit step can still run.
       - name: Fetch chapter sources and build chapters
@@ -110,6 +111,12 @@ jobs:
             node scripts/atlas/run_gundam_chapters.mjs --build
           else
             node scripts/atlas/run_gundam_chapters.mjs
+          fi
+          # Chapter units must point at ids of this run's MS master and kit links; otherwise
+          # keep the committed chapter files so the app never sees dangling ids.
+          if ! node scripts/atlas/check_gundam_chapters.mjs; then
+            git checkout -- data/atlas/gundam-chapters.json data/atlas/gundam-chapters-review.json
+            exit 1
           fi
 
       - name: Save HTTP cache

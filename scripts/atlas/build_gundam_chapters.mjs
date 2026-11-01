@@ -2,9 +2,10 @@
 // mobile weapon lists, keyed by the MS ids of data/atlas/gundam-ms.json (= Gundam Wiki titles).
 //
 // Inputs (repo only, no network):
-//   data/atlas/gundam-ms.json                  works[] + MS master (ids, model numbers, names)
+//   data/atlas/gundam-ms.json                  works[] + MS master (ids, model numbers, names,
+//                                              gget_ids) + ms_redirects (folded overview pages)
 //   data/atlas/gundam-gget-roster.json         GGET unit names (to map stage NPC units)
-//   data/atlas/gundam-kit-ms.json              kit links (stats only)
+//   data/atlas/gundam-kit-ms.json              kit <-> MS links (-> ms_kits, kit coverage stats)
 //   data/atlas/gundam-src-gundamwiki.json      wiki Mobile Weapon pages (unit types, extra_ms names)
 //   data/atlas/gundam-src-episodes.json        import_gundamwiki_episodes.mjs
 //   data/atlas/gundam-src-gget-stages.json     import_gget_stages.mjs
@@ -13,10 +14,14 @@
 //   scripts/atlas/gundam_chapter_works.mjs     work -> seasons / films table
 //
 // Outputs (compact JSON):
-//   data/atlas/gundam-chapters.json          {schema, updated_at, sources, roles, unit_types,
-//       extra_ms, works{work_id: {kind, arcs[{id, order, title{ja,en,ko,zh_tw}, episode_from,
-//       episode_to, anchor_episode, gget_stage_id, ms[{ms, side}]}], episodes[{no, title_ja,
-//       title_en, ms[{ms, role, source, side?, note?}]}]}}, stats}
+//   data/atlas/gundam-chapters.json          {schema, updated_at, ms_master, sources, roles,
+//       unit_types, extra_ms, ms_kits{ms id: [kit_id]}, works{work_id: {kind, arcs[{id, order,
+//       title{ja,en,ko,zh_tw}, episode_from, episode_to, anchor_episode, gget_stage_id,
+//       ms[{ms, side}]}], episodes[{no, title_ja, title_en, ms[{ms, role, source, side?,
+//       note?}]}]}}, stats}
+//     Every "ms" value is a gundam-ms.json id (the key the app's MS guide uses) or an extra_ms
+//     id; its kits are ms_kits[ms] (kit_id of data/kits.json, from gundam-kit-ms.json links
+//     with role main / set_member / figure), kept once per MS instead of once per appearance.
 //   data/atlas/gundam-chapters-review.json   unresolved wiki titles / NPC units / unanchored and
 //       skipped stages / GGET links overridden / official subtitles not merged
 //
@@ -26,7 +31,8 @@
 // anchor episode up to the episode before the next anchor (the first arc also covers the
 // episodes before its anchor). Cutscene-only stages are skipped and multi-part stages
 // ("…1/2/3") fold into one arc. Film works: one episode per film.
-// MS ids: master ids, or Gundam Wiki Mobile Weapon titles the master drops (listed in extra_ms).
+// MS ids: master ids (old ids folded by the master resolve through its ms_redirects), or Gundam
+// Wiki Mobile Weapon titles the master drops (listed in extra_ms).
 import path from "node:path";
 import { gzipSync } from "node:zlib";
 import { CHAPTER_WORKS } from "./gundam_chapter_works.mjs";
@@ -34,8 +40,13 @@ import { ATLAS_DATA, modelKey, nameKey, nfkc, pct, readJson, today, uniq, writeC
 
 const P = (f) => path.join(ATLAS_DATA, f);
 const MIN_RATIO = Number(process.env.ATLAS_MIN_CHAPTER_RATIO || 0.8);
+// Debug: ATLAS_EXPLAIN_STAGES=30000103,37000103 prints each NPC unit of those stages -> MS id.
+const EXPLAIN_STAGES = new Set(String(process.env.ATLAS_EXPLAIN_STAGES || "").split(",").filter(Boolean).map(Number));
 
 const SIDE = { 1: "ally", 2: "enemy", 3: "third", 4: "third" };
+// gundam-kit-ms.json roles that mean "this item is (or contains) the MS itself". accessory_for
+// (parts / effects for the MS) and sd_character (SD original whose design borrows it) are left out.
+const KIT_ROLES = ["main", "set_member", "figure"];
 const SIDE_ORDER = { ally: 0, enemy: 1, third: 2 };
 const ROLES = {
   debut: "first appearance (Gundam Wiki note, or first listed episode of an MS that debuts in this work when the work's episode data is near complete)",
@@ -117,6 +128,9 @@ async function main() {
   // ---------------------------------------------------------------- MS indices
   const msById = new Map(msDoc.ms.map((m) => [m.id, m]));
   const msLower = new Map(msDoc.ms.map((m) => [m.id.toLowerCase(), m.id]));
+  // Overview pages the master folded into one member ("MS-14 Gelgoog" -> "MS-14A Gelgoog").
+  const msRedirects = new Map(Object.entries(msDoc.ms_redirects || {}).filter(([, to]) => msById.has(to)));
+  const canon = (id) => (id && !msById.has(id) && msRedirects.has(id) ? msRedirects.get(id) : id);
   const rosterById = new Map((roster.units || []).map((u) => [u.id, u]));
   const byGget = new Map();
   const byModel = new Map();
@@ -143,8 +157,9 @@ async function main() {
   // still valid ids (same key space: wiki page title), described in the output's extra_ms.
   const wikiPage = new Map((wikiMs.ms || []).map((m) => [m.t, m]));
   const extraUsed = new Map(); // id -> link count
-  const known = (id) => msById.has(id) || wikiPage.has(id);
+  const known = (id) => msById.has(canon(id)) || wikiPage.has(id);
   const useId = (id) => {
+    id = canon(id);
     if (!msById.has(id)) extraUsed.set(id, (extraUsed.get(id) || 0) + 1);
     return id;
   };
@@ -154,8 +169,9 @@ async function main() {
     const o = overrides.wiki[t];
     if (o !== undefined) return o && known(o) ? useId(o) : null;
     if (msById.has(t)) return t;
+    if (msRedirects.has(t)) return msRedirects.get(t);
     const r = wikiRedirects[t];
-    if (r && msById.has(r)) return r;
+    if (r && msById.has(canon(r))) return canon(r);
     const l = msLower.get(t.toLowerCase());
     if (l) return l;
     if (wikiPage.has(t)) return useId(t);
@@ -276,8 +292,21 @@ async function main() {
   const skippedStages = [];
   const droppedOfficial = [];
   const usedNonSuits = new Map();
-  const kitCount = new Map();
-  for (const links of Object.values(kitDoc.links || {})) for (const l of links) kitCount.set(l.ms, (kitCount.get(l.ms) || 0) + 1);
+  // MS id -> kit ids (role order main, set_member, figure; then kit_id), from the matcher.
+  const kitsByMs = new Map();
+  for (const [kitId, links] of Object.entries(kitDoc.links || {})) {
+    for (const l of links) {
+      const rank = KIT_ROLES.indexOf(l.role);
+      if (rank < 0) continue;
+      const id = canon(l.ms);
+      const list = kitsByMs.get(id) || kitsByMs.set(id, []).get(id);
+      const had = list.find((x) => x.kit === kitId);
+      if (had) had.rank = Math.min(had.rank, rank);
+      else list.push({ kit: kitId, rank });
+    }
+  }
+  const kitIds = new Map([...kitsByMs].map(([id, list]) => [id, list.sort((a, b) => a.rank - b.rank || a.kit.localeCompare(b.kit)).map((x) => x.kit)]));
+  const hasKit = (id) => (kitIds.get(id)?.length || 0) > 0;
 
   for (const work of msDoc.works) {
     const cfg = configById.get(work.id) || {};
@@ -389,9 +418,10 @@ async function main() {
     // 2. Arcs: G Gen normal stages of every G Gen series folded into the work.
     const ggetIds = work.gget_series_ids || (work.gget_series_id ? [work.gget_series_id] : []);
     const arcs = [];
-    const addUnits = (units, payload) => {
+    const addUnits = (units, payload, stageId) => {
       for (const u of payload?.units || []) {
         const id = resolveNpc(u, work.id);
+        if (EXPLAIN_STAGES.has(stageId)) console.log(`[explain] ${stageId} side ${u.s} ${u.u} ${u.n} [${u.m}] -> ${id || "(unmatched)"}${id && hasKit(id) ? ` (${kitIds.get(id).length} kits)` : ""}`);
         if (!id) continue;
         const side = SIDE[u.s] || "third";
         const k = `${id}|${side}`;
@@ -425,7 +455,7 @@ async function main() {
         if (last && part && last.part && part.ja === last.part.ja && part.en === last.part.en && part.n > last.part.n) {
           last.stages.push(st);
           last.part.n = part.n;
-          addUnits(last.units, payload);
+          addUnits(last.units, payload, st.id);
           continue;
         }
         const arc = {
@@ -437,7 +467,7 @@ async function main() {
           units: new Map(),
           part,
         };
-        addUnits(arc.units, payload);
+        addUnits(arc.units, payload, st.id);
         arcs.push(arc);
         last = arc;
       }
@@ -604,11 +634,16 @@ async function main() {
 
     // 5. Stats.
     const distinct = new Set([...outEpisodes.flatMap((e) => e.ms.map((x) => x.ms)), ...outArcs.flatMap((a) => a.ms.map((x) => x.ms))]);
-    const withKit = [...distinct].filter((id) => kitCount.get(id) > 0).length;
+    const withKit = [...distinct].filter(hasKit).length;
     const suits = [...distinct].filter(isSuit);
-    const suitsWithKit = suits.filter((id) => kitCount.get(id) > 0).length;
+    const suitsWithKit = suits.filter(hasKit).length;
     for (const id of distinct) if (!isSuit(id)) usedNonSuits.set(id, unitType.get(id));
     const epWithMs = outEpisodes.filter((e) => e.ms.length).length;
+    // Unit-level kit coverage: entries (one per MS per chapter) whose MS has at least one kit.
+    const arcUnits = outArcs.reduce((n, a) => n + a.ms.length, 0);
+    const arcUnitsKit = outArcs.reduce((n, a) => n + a.ms.filter((u) => hasKit(u.ms)).length, 0);
+    const epUnits = outEpisodes.reduce((n, e) => n + e.ms.length, 0);
+    const epUnitsKit = outEpisodes.reduce((n, e) => n + e.ms.filter((u) => hasKit(u.ms)).length, 0);
     const epWithArc = outEpisodes.filter((e) => e.ms.length || outArcs.some((a) => a.episode_from !== null && e.no >= a.episode_from && e.no <= a.episode_to && a.ms.length)).length;
     stats[work.id] = {
       episodes: outEpisodes.length,
@@ -625,6 +660,14 @@ async function main() {
       distinct_suits: suits.length,
       suits_with_kit: suitsWithKit,
       suits_with_kit_pct: pct(suitsWithKit, suits.length),
+      arc_units: arcUnits,
+      arc_units_with_kit: arcUnitsKit,
+      arc_units_with_kit_pct: pct(arcUnitsKit, arcUnits),
+      arcs_with_kit_unit: outArcs.filter((a) => a.ms.some((u) => hasKit(u.ms))).length,
+      episode_units: epUnits,
+      episode_units_with_kit: epUnitsKit,
+      episode_units_with_kit_pct: pct(epUnitsKit, epUnits),
+      episodes_with_kit_unit: outEpisodes.filter((e) => e.ms.some((u) => hasKit(u.ms))).length,
     };
   }
 
@@ -637,8 +680,12 @@ async function main() {
       episode_links: t.episode_links + s.episode_links,
       arcs: t.arcs + s.arcs,
       arcs_anchored: t.arcs_anchored + s.arcs_anchored,
+      arc_units_with_kit: t.arc_units_with_kit + s.arc_units_with_kit,
+      episode_units_with_kit: t.episode_units_with_kit + s.episode_units_with_kit,
+      arcs_with_kit_unit: t.arcs_with_kit_unit + s.arcs_with_kit_unit,
+      episodes_with_kit_unit: t.episodes_with_kit_unit + s.episodes_with_kit_unit,
     }),
-    { works: 0, episodes: 0, episodes_with_ms: 0, episode_links: 0, arcs: 0, arcs_anchored: 0 },
+    { works: 0, episodes: 0, episodes_with_ms: 0, episode_links: 0, arcs: 0, arcs_anchored: 0, arc_units_with_kit: 0, episode_units_with_kit: 0, arcs_with_kit_unit: 0, episodes_with_kit_unit: 0 },
   );
   const prevLinks = previous?.stats?._totals ? previous.stats._totals.episode_links + (previous.stats._totals.arc_links || 0) : 0;
   const arcLinks = Object.values(works).reduce((n, w) => n + w.arcs.reduce((m, a) => m + a.ms.length, 0), 0);
@@ -655,6 +702,7 @@ async function main() {
     ...snap(offDoc),
     ...snap(wikiMs).map((s) => ({ ...s, used_for: "extra_ms (wiki Mobile Weapon pages not in the MS master)" })),
     { name: "Hobby Atlas Gundam MS master (data/atlas/gundam-ms.json; ids = Gundam Wiki page titles)", url: "https://github.com/mdefitko777/Gunpula/blob/main/data/atlas/gundam-ms.json", licence: "Derived from The Gundam Wiki (CC BY-SA 3.0) and soshage.com; see that file's sources", snapshot: msDoc.updated_at },
+    { name: "Hobby Atlas Gundam kit <-> MS links (data/atlas/gundam-kit-ms.json)", url: "https://github.com/mdefitko777/Gunpula/blob/main/data/atlas/gundam-kit-ms.json", used_for: "ms_kits", snapshot: kitDoc.updated_at },
   ];
   // Ids used above that the MS master does not contain (wiki pages without a work, kit or
   // GGET link). They carry no kits by construction; the app shows them by name only.
@@ -671,9 +719,16 @@ async function main() {
       }),
   );
   totals.extra_ms = Object.keys(extraMs).length;
+  // Kits of every MS used above (extra_ms ids never have kits). Units without kits are omitted.
+  const msKits = Object.fromEntries([...usedIds].filter(hasKit).sort().map((id) => [id, kitIds.get(id)]));
+  totals.distinct_ms = usedIds.size;
+  totals.distinct_ms_with_kit = Object.keys(msKits).length;
+  totals.arc_units_with_kit_pct = pct(totals.arc_units_with_kit, arcLinks);
+  totals.episode_units_with_kit_pct = pct(totals.episode_units_with_kit, totals.episode_links);
   const doc = {
     schema: 1,
     updated_at: today(),
+    ms_master: { file: "data/atlas/gundam-ms.json", updated_at: msDoc.updated_at, kit_links_file: "data/atlas/gundam-kit-ms.json", kit_links_updated_at: kitDoc.updated_at },
     sources,
     wiki_page_url: "https://gundam.fandom.com/wiki/{wiki or title_en}",
     roles: ROLES,
@@ -685,6 +740,8 @@ async function main() {
     unit_types: Object.fromEntries([...usedNonSuits].sort()),
     extra_ms_note: "Ids used in works{} that are not in data/atlas/gundam-ms.json: Gundam Wiki Mobile Weapon page titles (same key space) that the MS master drops because they have no work, kit or G Gen link. Names only; no kits.",
     extra_ms: extraMs,
+    ms_kits_note: `Kit ids (data/kits.json kit_id) of each MS id used in works{}, from data/atlas/gundam-kit-ms.json links with role ${KIT_ROLES.join(" / ")} (ordered by that role, then kit_id). A unit's kits are ms_kits[unit.ms]; ids absent here have no matched kit.`,
+    ms_kits: msKits,
     works,
     stats: { ...stats, _totals: totals },
   };
