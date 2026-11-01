@@ -9,6 +9,7 @@ import {
   parseKotobukiyaShopListings,
 } from "./lib/kotobukiya-shop.mjs";
 import { KIT_ALIASES_PATH, carryCleanupFields, gundamGradeFromName, nfkc, retiredKitIds } from "./lib/catalog-cleanup.mjs";
+import { readSalePages, salePageFromKit, seoulToday, upsertSalePage, writeSalePages } from "./lib/sale-pages.mjs";
 import { extractTamashiiGalleryImages } from "./lib/tamashii-images.mjs";
 
 const CANDY_BASE_URL = "https://www.bandai.co.jp";
@@ -1728,6 +1729,16 @@ async function main() {
 
   // Ids clean_catalog.mjs retired (duplicates, non-collectibles) are not re-added.
   const retired = retiredKitIds(await readJsonFile(KIT_ALIASES_PATH, null));
+  // A retired Tamashii page is a sale batch / reissue page folded into the figure it
+  // sells; what it says now (shipping month, batch) is the resale signal kept in
+  // data/sale-pages.json for scripts/build_restocks.mjs.
+  const salePages = await readSalePages();
+  let salePagesChanged = false;
+  for (const kit of imported) {
+    if (!/^tamashii-\d+$/.test(kit.kit_id) || !retired.has(kit.kit_id)) continue;
+    if (upsertSalePage(salePages, kit.kit_id, salePageFromKit(kit, { firstSeen: seoulToday() }))) salePagesChanged = true;
+  }
+  await writeSalePages(salePages, { changed: salePagesChanged });
   const merged = mergeKits(existingDoc, imported.filter((kit) => !retired.has(kit.kit_id)));
   await writeFile("data/kits.json", `${JSON.stringify(merged, null, 2)}\n`, "utf8");
   console.log(`Merged ${imported.length} collectible records. Catalog now has ${merged.kits.length} records.`);

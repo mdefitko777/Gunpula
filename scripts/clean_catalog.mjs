@@ -52,6 +52,7 @@ import {
   stripDisplaySaleTags,
   stripSaleTags,
 } from "./lib/catalog-cleanup.mjs";
+import { readSalePages, salePageFromKit, upsertSalePage, writeSalePages } from "./lib/sale-pages.mjs";
 
 const CATALOG_PATH = "data/kits.json";
 const FIRST_SEEN_PATH = "data/kit-first-seen.json";
@@ -333,14 +334,23 @@ const adopted = new Set(); // PB records that take a folded BANDAI SPIRITS recor
 //    source_refs (so the PB price/page or the Pokemon Center JAN is not lost),
 //    any price/date the survivor lacks, and, for Premium Bandai pages, the
 //    shipping month and the PB / limited flags (below).
+//    A folded sale page (PB Wayback page, Tamashii page) is written to
+//    data/sale-pages.json first: its listing name, shipping month and URL are the
+//    resale signal scripts/build_restocks.mjs reads once the page is gone.
 const pbPagesByKeeper = new Map();
 const bandaiSpiritsByPbKeeper = new Map();
+const salePages = await readSalePages();
+let salePagesChanged = false;
+const isSalePage = (kit) => isPbPage(kit) || /^tamashii-\d+$/.test(kit.kit_id);
 for (const [fromId, toIdRaw] of Object.entries(aliases)) {
   const toId = resolveAlias(aliases, toIdRaw);
   aliases[fromId] = toId;
   const from = kitsById.get(fromId);
   const to = kitsById.get(toId);
   if (!from || !to || from === to) continue;
+  if (isSalePage(from) && upsertSalePage(salePages, fromId, salePageFromKit(from, { to: toId, firstSeen: firstSeen[fromId] || today() }))) {
+    salePagesChanged = true;
+  }
   const refs = to.source_refs || [];
   const seen = new Set(refs.map((ref) => `${ref.source_id}|${ref.url}`));
   const extra = (from.source_refs || []).filter((ref) => !seen.has(`${ref.source_id}|${ref.url}`));
@@ -470,7 +480,10 @@ if (checkOnly) {
     console.error("Catalog has records the cleanup rules would change. Run node scripts/clean_catalog.mjs.");
     process.exitCode = 1;
   }
-} else if (changed) {
+} else {
+  if (await writeSalePages(salePages, { changed: salePagesChanged, today: today() })) console.log(`data/sale-pages.json: ${Object.keys(salePages.pages).length} folded sale pages.`);
+}
+if (!checkOnly && changed) {
   await writeFile(CATALOG_PATH, `${JSON.stringify({ ...catalog, kits: kept }, null, 2)}\n`, "utf8");
   if (aliasesChanged) {
     const doc = {

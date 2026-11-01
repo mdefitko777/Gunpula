@@ -33,6 +33,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { KIT_ALIASES_PATH, gundamGradeFromName, retiredKitIds, scaleFromName } from "./lib/catalog-cleanup.mjs";
 import { decodeEntities, parseListingCards } from "./lib/pb-listing.mjs";
+import { readSalePages, salePageFromKit, upsertSalePage, writeSalePages } from "./lib/sale-pages.mjs";
 
 const CATALOG_PATH = "data/kits.json";
 const INDEX_PATH = "data/premium-bandai-wayback-index.json";
@@ -67,6 +68,10 @@ const UA = "HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)";
 const force = args.get("force") === "true";
 // Listing pages read per run (pass 3); each page is one archive.org request.
 const listingPages = Math.max(0, Number(args.get("listing-pages") || 30));
+// --ledger-only: re-read every listing page at the capture stored in the index (no
+// CDX query, no catalog or index write) and only write the cards of folded (retired)
+// items to data/sale-pages.json. One-off backfill of the resale ledger.
+const ledgerOnly = args.get("ledger-only") === "true";
 const LISTING_PREFIX = "p-bandai.jp/hobby/a0001/list-da20-n";
 
 function today() {
@@ -450,6 +455,15 @@ const listedDue = (entry) =>
   entry?.status === "listed" && (!entry.attempts || (entry.attempts < MAX_ATTEMPTS && Date.now() - Date.parse(entry.checked_at || 0) >= RETRY_AFTER_MS));
 
 const kitsById = new Map(catalog.kits.map((kit) => [kit.kit_id, kit]));
+// Retired (folded) items met again are resale pages of a product the catalog has:
+// what the card / page says goes to data/sale-pages.json (scripts/build_restocks.mjs).
+const salePages = await readSalePages();
+let salePagesChanged = false;
+let retiredSeen = 0;
+function rememberRetired(kit) {
+  retiredSeen += 1;
+  if (upsertSalePage(salePages, kit.kit_id, salePageFromKit(kit, { firstSeen: today(), source: SOURCE_ID }))) salePagesChanged = true;
+}
 let enriched = 0;
 let added = 0;
 let skipped = 0;
@@ -474,7 +488,8 @@ function save() {
       await writeFile(CATALOG_PATH, `${JSON.stringify({ ...catalog, updated_at: today(), kits: merged }, null, 2)}\n`, "utf8");
       catalogDirty = false;
     }
-    await writeFile(INDEX_PATH, `${JSON.stringify(indexDoc, null, 2)}\n`, "utf8");
+    if (!ledgerOnly) await writeFile(INDEX_PATH, `${JSON.stringify(indexDoc, null, 2)}\n`, "utf8");
+    if (await writeSalePages(salePages, { changed: salePagesChanged, today: today() })) salePagesChanged = false;
   };
   saving = saving.then(write, write);
   return saving;
@@ -491,6 +506,32 @@ async function progress() {
 // ones whose newest capture is newer than the copy read last time.
 index.listing_pages = index.listing_pages || {};
 let listed = 0;
+if (ledgerOnly) {
+  const stored = Object.entries(index.listing_pages)
+    .filter(([, page]) => page?.timestamp)
+    .sort(([a], [b]) => a.localeCompare(b, "en", { numeric: true }));
+  let read = 0;
+  for (const [key, page] of stored) {
+    if (outOfTime()) break;
+    try {
+      for (const card of parseListingCards(await fetchListingPage(key, page.timestamp))) {
+        const kit = toKit(card, FRANCHISE_RULES[0]);
+        if (retired.has(kit.kit_id)) rememberRetired(kit);
+      }
+      read += 1;
+    } catch (error) {
+      console.warn(`${key}@${page.timestamp}: ${error.message}`);
+    }
+    if (read % SAVE_EVERY === 0) await save();
+    await sleep(2000);
+  }
+  await save();
+  console.log(
+    `Premium Bandai (Wayback) ledger backfill: read ${read} of ${stored.length} stored listing pages, ` +
+      `${retiredSeen} cards of folded items, ${Object.keys(salePages.pages).length} pages in data/sale-pages.json.`,
+  );
+  process.exit(0);
+}
 if (listingPages > 0) {
   let captures = new Map();
   try {
@@ -521,7 +562,10 @@ if (listingPages > 0) {
           (gundamGradeFromName(card.name) ? FRANCHISE_RULES.find((entry) => entry.franchise === "gundam") : null);
         if (!rule) continue;
         const kit = toKit(card, rule);
-        if (retired.has(kit.kit_id)) continue;
+        if (retired.has(kit.kit_id)) {
+          rememberRetired(kit);
+          continue;
+        }
         kit.source_refs[0].fields = ["names", "images", "price_jpy", "release_date"];
         kit.notes = "Imported from an archive.org snapshot of the Premium Bandai Japan Gunpla category list.";
         kit.premium_bandai.captured_via = "wayback_listing";
@@ -596,6 +640,7 @@ await mapLimit(targets, concurrency, async ({ url, mode }) => {
     }
     const kit = toKit(product, rule);
     if (retired.has(kit.kit_id)) {
+      rememberRetired(kit);
       index.entries[url] = { checked_at: nowIso(), status: "retired", kit_id: kit.kit_id };
       skipped += 1;
       return;
