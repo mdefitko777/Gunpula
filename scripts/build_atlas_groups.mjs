@@ -1,225 +1,227 @@
+// Builds data/atlas-groups.json: the Atlas "world" cards of the Hobby Atlas app (one card per
+// group with an official cover image, label and the kit_ids that belong to it).
+//
+// No network: everything comes from committed files, so the daily catalog refresh can run it
+// and the same inputs always give the same output.
+//   data/kits.json                     products
+//   data/atlas-source-taxonomy.json    Pokémon species per generation (PokeAPI)
+//   data/gget-series-sections.json     Gundam works (timeline groups)
+//   data/atlas/fate-roster.json        Fate works, FGO chapters, servants (build_fate_roster.mjs)
+//   data/atlas/atlas-covers.json       official cover images (build_atlas_covers.mjs)
+//   scripts/atlas/atlas_titles.mjs     Pokémon game titles, Armored Core eras and rosters
+//
+// Shape (backward compatible): franchises.{pokemon,fate,armored_core}[] =
+//   {id, labels{zh,ko,en,ja}, subtitle, image, kit_ids[], count, …}
+// plus `kind`, `image_remote`, `cover_source`, `roster` (and per-franchise extras), and a
+// top-level `channels` map with one official header image per channel. Empty groups are left
+// out. `--report=<file>` writes every product's group and reason (for review).
 import { readFile, writeFile } from "node:fs/promises";
+import { armoredCoreClassifier, fateClassifier, lang, pokemonClassifier, POKEMON_GAMES, AC_TITLES, productText } from "./atlas/lib/atlas_groups.mjs";
 
-const catalog = JSON.parse(await readFile("data/kits.json", "utf8"));
-const taxonomy = JSON.parse(await readFile("data/atlas-source-taxonomy.json", "utf8"));
-const ggetSections = JSON.parse(await readFile("data/gget-series-sections.json", "utf8"));
-const kits = catalog.kits || [];
-
-const lang = (zh, ko, en, ja) => ({ zh, ko, en, ja });
-const itemText = (kit) =>
-  [kit.names?.en, kit.names?.ja, kit.names?.zh, kit.names?.ko, kit.work_title, kit.universe, kit.subline, kit.grade_code, ...(kit.tags || [])]
-    .filter(Boolean)
-    .join(" ");
-const normalized = (value) =>
-  String(value || "")
-    .toLowerCase()
-    .normalize("NFKC")
-    .replace(/[&＆]/g, " and ")
-    .replace(/['’.\-_:：/()[\]【】!！★☆]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-const imageOf = (kit) => kit?.images?.box_art_url || kit?.gallery_image_urls?.[0] || "";
-
-const FGO_CHAPTER_LABELS = {
-  fgo_100: lang("特异点 F 冬木", "특이점 F 후유키", "Singularity F · Fuyuki", "特異点F 冬木"),
-  fgo_101: lang("第一特异点 奥尔良", "제1특이점 오를레앙", "Singularity I · Orleans", "第一特異点 オルレアン"),
-  fgo_102: lang("第二特异点 七丘之城", "제2특이점 세프템", "Singularity II · Septem", "第二特異点 セプテム"),
-  fgo_103: lang("第三特异点 俄刻阿诺斯", "제3특이점 오케아노스", "Singularity III · Okeanos", "第三特異点 オケアノス"),
-  fgo_104: lang("第四特异点 伦敦", "제4특이점 런던", "Singularity IV · London", "第四特異点 ロンドン"),
-  fgo_105: lang("第五特异点 北美神话大战", "제5특이점 북미 신화대전", "Singularity V · E Pluribus Unum", "第五特異点 北米神話大戦"),
-  fgo_106: lang("第六特异点 卡美洛", "제6특이점 카멜롯", "Singularity VI · Camelot", "第六特異点 キャメロット"),
-  fgo_107: lang("第七特异点 巴比伦尼亚", "제7특이점 바빌로니아", "Singularity VII · Babylonia", "第七特異点 バビロニア"),
-  fgo_108: lang("终局特异点 所罗门", "종국특이점 솔로몬", "Final Singularity · Solomon", "終局特異点 ソロモン"),
-  fgo_201: lang("亚种特异点 I 新宿", "아종특이점 I 신주쿠", "Pseudo-Singularity I · Shinjuku", "亜種特異点I 新宿"),
-  fgo_202: lang("亚种特异点 II 雅戈泰", "아종특이점 II 아가르타", "Pseudo-Singularity II · Agartha", "亜種特異点II アガルタ"),
-  fgo_203: lang("英灵剑豪七番胜负 下总国", "영령검호 시모사", "Epic of Remnant · Shimousa", "英霊剣豪七番勝負 下総国"),
-  fgo_204: lang("亚种特异点 IV 塞勒姆", "아종특이점 IV 세일럼", "Pseudo-Singularity IV · Salem", "亜種特異点IV セイレム"),
-  fgo_301: lang("Lostbelt No.1 阿纳斯塔西娅", "이문대 No.1 아나스타샤", "Lostbelt No.1 · Anastasia", "Lostbelt No.1 アナスタシア"),
-  fgo_302: lang("Lostbelt No.2 诸神黄昏", "이문대 No.2 괴터데머룽", "Lostbelt No.2 · Gotterdammerung", "Lostbelt No.2 ゲッテルデメルング"),
-  fgo_303: lang("Lostbelt No.3 SIN", "이문대 No.3 SIN", "Lostbelt No.3 · SIN", "Lostbelt No.3 SIN"),
-  fgo_304: lang("Lostbelt No.4 创世灭亡轮回", "이문대 No.4 유가 크셰트라", "Lostbelt No.4 · Yuga Kshetra", "Lostbelt No.4 ユガ・クシェートラ"),
-  fgo_305: lang("Lostbelt No.5 亚特兰蒂斯", "이문대 No.5 아틀란티스", "Lostbelt No.5 · Atlantis", "Lostbelt No.5 アトランティス"),
-  fgo_306: lang("Lostbelt No.5 奥林波斯", "이문대 No.5 올림포스", "Lostbelt No.5 · Olympus", "Lostbelt No.5 オリュンポス"),
-  fgo_307: lang("地狱界曼荼罗 平安京", "지옥계만다라 헤이안쿄", "Heian-kyo", "地獄界曼荼羅 平安京"),
-  fgo_308: lang("Lostbelt No.6 妖精圆桌领域", "이문대 No.6 아발론 르 페이", "Lostbelt No.6 · Avalon le Fae", "Lostbelt No.6 アヴァロン・ル・フェ"),
-  fgo_309: lang("通古斯卡 圣域", "퉁구스카 생추어리", "Tunguska Sanctuary", "ツングースカ・サンクチュアリ"),
-  fgo_310: lang("死想显现界域 特劳姆", "사상현현계역 트라움", "Traum", "死想顕現界域 トラオム"),
-  fgo_311: lang("Lostbelt No.7 纳维·米克特兰", "이문대 No.7 나우이 믹틀란", "Lostbelt No.7 · Nahui Mictlan", "Lostbelt No.7 ナウイ・ミクトラン"),
-  fgo_402: lang("奏章 I Paper Moon", "주장 I 페이퍼 문", "Ordeal Call I · Paper Moon", "奏章I ペーパームーン"),
-  fgo_403: lang("奏章 II Id", "주장 II 이드", "Ordeal Call II · Id", "奏章II イド"),
-  fgo_404: lang("奏章 III 原型创世", "주장 III 아키타입 인셉션", "Ordeal Call III · Archetype Inception", "奏章III アーキタイプ・インセプション"),
-  fgo_405: lang("奏章 IV 三位一体·梅塔特隆", "주장 IV 트리니티 메타트로니오스", "Ordeal Call IV · Trinity Metatronios", "奏章IV トリニティ・メタトロニオス"),
-  fgo_407: lang("终章", "종장", "Final Chapter", "終章"),
-  fgo_500: lang("第三部 余日之始", "제3부 애프터타임의 시작", "Part 3 · Beginning of After Time", "第三部 アフタータイムのはじまり"),
-  fgo_501: lang("第三部 过去迦勒底", "제3부 패스트 칼데아", "Part 3 · Past Chaldea", "第三部 パスト・カルデア"),
+const readJson = async (file, fallback) => {
+  try {
+    return JSON.parse(await readFile(file, "utf8"));
+  } catch (error) {
+    if (fallback !== undefined) return fallback;
+    throw error;
+  }
 };
 
-function namesFor(label, fallback = "") {
-  if (!label) return lang(fallback, fallback, fallback, fallback);
-  return {
-    zh: label.zh || label.en || fallback,
-    ko: label.ko || label.en || fallback,
-    en: label.en || label.zh || fallback,
-    ja: label.ja || label.en || fallback,
-  };
+const catalog = await readJson("data/kits.json");
+const taxonomy = await readJson("data/atlas-source-taxonomy.json");
+const ggetSections = await readJson("data/gget-series-sections.json");
+const fateRoster = await readJson("data/atlas/fate-roster.json");
+const coverFile = await readJson("data/atlas/atlas-covers.json", { covers: {} });
+const reportArg = process.argv.find((a) => a.startsWith("--report="))?.slice(9);
+const kits = (catalog.kits || []).filter((kit) => kit.data_status !== "hidden");
+
+const covers = coverFile.covers || {};
+function cover(key, fallbackKey) {
+  const c = covers[key] || (fallbackKey && covers[fallbackKey]);
+  if (!c) return { image: "" };
+  return { image: c.image, image_remote: c.image_remote, cover_source: c.source_page };
 }
 
-function prefixDex(text) {
-  const match = String(text || "").match(/(?:^|\s|[「【])(?:no\.?\s*)?0*([1-9]\d{0,3})(?=\s|[.:：\-]|$)/i);
-  return match ? Number(match[1]) : null;
-}
-
-function pokemonGroups() {
-  const speciesToGeneration = new Map();
-  const speciesNamesByGeneration = new Map();
-  for (const generation of taxonomy.pokemon || []) {
-    const names = [];
-    for (const species of generation.species || []) {
-      speciesToGeneration.set(species.id, generation.id);
-      for (const value of Object.values(species.names || {})) {
-        const token = normalized(value);
-        if (token && token.length > 1) names.push(token);
-      }
-      if (species.slug) names.push(normalized(species.slug));
-    }
-    speciesNamesByGeneration.set(generation.id, [...new Set(names)]);
+const report = [];
+function collect(franchise, classify, groups) {
+  const byId = new Map(groups.map((g) => [g.id, g]));
+  for (const kit of kits.filter((k) => k.franchise === franchise)) {
+    const result = classify(kit);
+    const group = byId.get(result.group);
+    if (!group) throw new Error(`${franchise}: classifier returned unknown group ${result.group}`);
+    group.kit_ids.push(kit.kit_id);
+    report.push({ franchise, kit_id: kit.kit_id, group: result.group, reason: result.reason, names: result.names, title: productText(kit) });
   }
+  return groups.map((g) => ({ ...g, count: g.kit_ids.length })).filter((g) => g.count > 0);
+}
 
-  const groups = (taxonomy.pokemon || []).map((generation) => ({
-    id: generation.id,
-    labels: namesFor(generation.labels, `Generation ${generation.generation}`),
-    subtitle: generation.subtitle || lang(generation.region, generation.region, generation.region, generation.region),
-    image: generation.image,
-    items: (generation.species || []).map((species) => `${species.id}. ${species.names?.en || species.slug}`),
-    kit_ids: [],
-    count: 0,
-  }));
+// ─────────────── Pokémon: groups named after each generation's games ───────────────
+function pokemonGroups() {
+  const generations = new Map((taxonomy.pokemon || []).map((g) => [g.id, g]));
+  const groups = Object.entries(POKEMON_GAMES).map(([id, game]) => {
+    const gen = generations.get(id);
+    return {
+      id,
+      kind: "generation",
+      generation: game.generation,
+      region: game.region,
+      labels: game.labels,
+      subtitle: game.subtitle,
+      games: game.games,
+      ...cover(`pokemon:${id}`, "channel:pokemon"),
+      items: (gen?.species || []).map((s) => `${s.id}. ${s.names?.en || s.slug}`),
+      roster_count: gen?.species?.length || 0,
+      kit_ids: [],
+    };
+  });
   groups.push({
     id: "pokemon_general",
-    labels: lang("全世代周边", "전 세대 굿즈", "All-generation goods", "全世代グッズ"),
-    subtitle: lang("没有固定宝可梦或游戏世代", "특정 포켓몬/세대가 없는 상품", "Goods without a single species or generation", "特定のポケモン・世代を持たない商品"),
-    image: "",
+    kind: "multi_generation",
+    labels: lang("跨世代宝可梦周边", "여러 세대 포켓몬 굿즈", "Multi-generation goods", "複数世代のポケモングッズ"),
+    subtitle: lang("同时登场多个世代的宝可梦", "여러 세대의 포켓몬이 함께 나오는 상품", "Pokémon from several generations together", "複数の世代のポケモンが一緒の商品"),
+    ...cover("channel:pokemon"),
     items: [],
     kit_ids: [],
-    count: 0,
   });
-  const byId = new Map(groups.map((group) => [group.id, group]));
-  const regionHints = [
-    ["gen1", /kanto|カントー|関都|관동|关都|關都|red|green|blue|yellow/i],
-    ["gen2", /johto|ジョウト|城都|성도|gold|silver|crystal/i],
-    ["gen3", /hoenn|ホウエン|丰缘|豐緣|호연|ruby|sapphire|emerald/i],
-    ["gen4", /sinnoh|シンオウ|神奥|神奧|신오|diamond|pearl|platinum/i],
-    ["gen5", /unova|イッシュ|合众|合眾|하나|black|white/i],
-    ["gen6", /\bxy\b|xy|カロス|kalos/i],
-    ["gen7", /sun|moon|サン|ムーン|アローラ|alola/i],
-    ["gen8", /sword|shield|ソード|シールド|galar|ガラル/i],
-    ["gen9", /scarlet|violet|スカーレット|バイオレット|paldea|パルデア/i],
-  ];
-  for (const kit of kits.filter((item) => item.franchise === "pokemon" && item.data_status !== "hidden")) {
-    const rawText = itemText(kit);
-    const text = normalized(rawText);
-    const dex = prefixDex([kit.names?.en, kit.names?.ja, kit.names?.zh, kit.names?.ko].filter(Boolean).join(" "));
-    let groupId = dex ? speciesToGeneration.get(dex) : null;
-    if (!groupId) {
-      groupId = regionHints.find(([, pattern]) => pattern.test(rawText))?.[0] || null;
-    }
-    if (!groupId) {
-      for (const [id, speciesNames] of speciesNamesByGeneration) {
-        if (speciesNames.some((name) => text.includes(name))) {
-          groupId = id;
-          break;
-        }
-      }
-    }
-    const group = byId.get(groupId || "pokemon_general");
-    group.kit_ids.push(kit.kit_id);
-    group.count += 1;
-    if (!group.image) group.image = imageOf(kit);
-  }
-  return groups;
+  groups.push({
+    id: "pokemon_common",
+    kind: "common",
+    labels: lang("宝可梦通用周边", "포켓몬 공통 굿즈", "General Pokémon goods", "ポケモン共通グッズ"),
+    subtitle: lang("精灵球 · 标志 · 训练家 等", "몬스터볼 · 로고 · 트레이너 등", "Poké Balls, logos, trainers …", "モンスターボール・ロゴ・トレーナーなど"),
+    ...cover("channel:pokemon"),
+    items: [],
+    kit_ids: [],
+  });
+  return collect("pokemon", pokemonClassifier(taxonomy.pokemon || []).classify, groups);
 }
 
-function keywordMatcher(entries) {
-  return (kit) => {
-    const text = ` ${normalized(itemText(kit))} `;
-    return entries.find((entry) => (entry.aliases || []).some((alias) => text.includes(` ${normalized(alias)} `)));
-  };
-}
-
+// ─────────────── Fate: FGO chapters, then the other works ───────────────
 function fateGroups() {
-  const chapters = (taxonomy.fate?.fgo_chapters || []).map((chapter) => ({
-    id: chapter.id,
-    labels: FGO_CHAPTER_LABELS[chapter.id] || namesFor(chapter.labels),
-    subtitle: { zh: chapter.age || "FGO", ko: chapter.age || "FGO", en: chapter.age || "FGO", ja: chapter.age || "FGO" },
-    image: chapter.image || "",
-    aliases: chapter.aliases || [],
-    items: chapter.items || [],
+  const servantsByChapter = new Map();
+  for (const s of fateRoster.servants) {
+    const ch = s.chapter || "fgo_event";
+    if (!servantsByChapter.has(ch)) servantsByChapter.set(ch, []);
+    servantsByChapter.get(ch).push(s);
+  }
+  const rosterOf = (list) => list.map((s) => ({ no: s.no, ja: s.names.ja, ko: s.names.ko || s.names.ja, en: s.names.en }));
+  const servantCount = (n) => lang(`从者 ${n} 骑`, `서번트 ${n}기`, `${n} servants`, `サーヴァント ${n}騎`);
+  const join = (a, b) => ({ zh: `${a.zh} · ${b.zh}`, ko: `${a.ko} · ${b.ko}`, en: `${a.en} · ${b.en}`, ja: `${a.ja}・${b.ja}` });
+
+  const chapterGroups = fateRoster.chapters.map((c) => {
+    const list = servantsByChapter.get(c.id) || [];
+    return {
+      id: c.id,
+      kind: "fgo_chapter",
+      work: "fgo",
+      part: c.part,
+      war_id: c.war_id,
+      labels: c.labels,
+      subtitle: join(fateRoster.part_labels[c.part], servantCount(list.length)),
+      ...cover(`fate:${c.id}`, "fate:fgo"),
+      roster: rosterOf(list),
+      kit_ids: [],
+    };
+  });
+  const eventServants = servantsByChapter.get("fgo_event") || [];
+  const fgoExtra = [
+    {
+      id: "fgo_event",
+      kind: "fgo_event",
+      work: "fgo",
+      labels: lang("FGO 活动·限定从者", "FGO 이벤트·한정 서번트", "FGO event & limited servants", "FGO イベント・期間限定サーヴァント"),
+      subtitle: join(lang("未在主线章节召唤中登场", "메인 스토리 장 픽업에 없던 서번트", "Not on a story-chapter pickup", "メインストーリー章のピックアップ外"), servantCount(eventServants.length)),
+      ...cover("fate:fgo", "channel:fate"),
+      roster: rosterOf(eventServants),
+      kit_ids: [],
+    },
+    {
+      id: "fgo_fes",
+      kind: "fgo_goods",
+      work: "fgo",
+      labels: lang("FGO Fes. · 周年周边", "FGO Fes. · 주년 굿즈", "FGO Fes. & anniversary goods", "FGO Fes.・周年グッズ"),
+      subtitle: lang("没有单一从者的 Fes. 周边", "특정 서번트가 없는 Fes. 굿즈", "Fes. goods without a single servant", "特定サーヴァントのない Fes. グッズ"),
+      ...cover("channel:fate", "fate:fgo"),
+      roster: [],
+      kit_ids: [],
+    },
+    {
+      id: "fgo_events",
+      kind: "fgo_goods",
+      work: "fgo",
+      labels: lang("FGO 展览 · 活动 · 门票", "FGO 전시 · 이벤트 · 티켓", "FGO exhibitions, events & tickets", "FGO 展示・イベント・チケット"),
+      subtitle: lang("冬祭 · 展览会 · 实景解谜 · 联动", "겨울축제 · 전시회 · 리얼 탈출 게임 · 콜라보", "Winter Fes., exhibitions, escape games, collaborations", "冬祭り・展覧会・リアル脱出ゲーム・コラボ"),
+      ...cover("channel:fate", "fate:fgo"),
+      roster: [],
+      kit_ids: [],
+    },
+    {
+      id: "fgo_media",
+      kind: "fgo_goods",
+      work: "fgo",
+      labels: lang("FGO 音乐 · 影像 · 书籍", "FGO 음반 · 영상 · 서적", "FGO music, video & books", "FGO 音楽・映像・書籍"),
+      subtitle: lang("原声 · Blu-ray · 画集", "OST · 블루레이 · 화집", "Soundtracks, Blu-ray, art books", "サントラ・Blu-ray・画集"),
+      ...cover("fate:fgo", "channel:fate"),
+      roster: [],
+      kit_ids: [],
+    },
+    {
+      id: "fgo_common",
+      kind: "fgo_goods",
+      work: "fgo",
+      labels: lang("FGO 综合周边", "FGO 공통 굿즈", "FGO general goods", "FGO 共通グッズ"),
+      subtitle: lang("随机 · 多从者套装等", "랜덤 · 여러 서번트 세트 등", "Random and multi-servant sets", "ランダム・複数サーヴァントのセットなど"),
+      ...cover("channel:fate", "fate:fgo"),
+      roster: [],
+      kit_ids: [],
+    },
+  ];
+  const workGroups = fateRoster.works.map((w) => ({
+    id: w.id,
+    kind: "work",
+    work: w.id,
+    labels: w.labels,
+    subtitle: w.subtitle,
+    ...cover(`fate:${w.id}`, "fate:type_moon"),
+    roster: w.characters.map((c) => ({ ja: c.ja, ko: c.ko, en: c.en })),
     kit_ids: [],
-    count: 0,
   }));
-  const works = (taxonomy.fate?.works || []).map((work) => ({
-    id: work.id,
-    labels: namesFor(work.labels),
-    subtitle: lang("Fate 作品", "Fate 작품", "Fate work", "Fate 作品"),
-    image: "",
-    aliases: work.aliases || [],
-    items: [],
-    kit_ids: [],
-    count: 0,
-  }));
-  const unsorted = {
+  const general = {
     id: "fate_general",
-    labels: lang("Fate / FGO 角色周边", "Fate / FGO 캐릭터 굿즈", "Fate / FGO character goods", "Fate / FGO キャラクターグッズ"),
-    subtitle: lang("没有固定章节归属", "특정 장에 속하지 않는 상품", "Goods without a fixed chapter", "特定の章に属さない商品"),
-    image: "",
-    aliases: [],
-    items: [],
+    kind: "unsorted",
+    labels: lang("其他 Fate / TYPE-MOON 周边", "기타 Fate / TYPE-MOON 굿즈", "Other Fate / TYPE-MOON goods", "その他の Fate / TYPE-MOON グッズ"),
+    subtitle: lang("无法判断作品", "작품을 알 수 없는 상품", "Work could not be identified", "作品を特定できない商品"),
+    ...cover("fate:type_moon", "channel:fate"),
+    roster: [],
     kit_ids: [],
-    count: 0,
   };
-  const groups = [...works, ...chapters, unsorted];
-  const matchWork = keywordMatcher(works);
-  const matchChapter = keywordMatcher(chapters);
-  for (const kit of kits.filter((item) => item.franchise === "fate" && item.data_status !== "hidden")) {
-    const group = matchChapter(kit) || matchWork(kit) || unsorted;
-    group.kit_ids.push(kit.kit_id);
-    group.count += 1;
-    if (!group.image) group.image = imageOf(kit);
-  }
-  return groups;
+  return collect("fate", fateClassifier(fateRoster).classify, [...chapterGroups, ...fgoExtra, ...workGroups, general]);
 }
 
+// ─────────────── Armored Core: game eras ───────────────
 function armoredCoreGroups() {
-  const groups = (taxonomy.armored_core || []).map((game) => ({
-    id: game.id,
-    labels: namesFor(game.labels),
-    subtitle: lang("游戏世代", "게임 세대", "Game era", "ゲーム世代"),
-    image: "",
-    aliases: game.aliases || [],
-    items: game.items || [],
+  const groups = AC_TITLES.map((t) => ({
+    id: t.id,
+    kind: "game_era",
+    labels: t.labels,
+    subtitle: t.subtitle,
+    games: t.games,
+    ...cover(`armored_core:${t.id}`, "channel:armored_core"),
+    roster: t.roster.filter((n) => /[^\x00-\x7f]/.test(n)).slice(0, 12),
     kit_ids: [],
-    count: 0,
   }));
-  const unsorted = {
+  groups.push({
     id: "ac_general",
-    labels: lang("跨作机体 / 周边", "크로스 타이틀 기체 / 굿즈", "Cross-title machines / goods", "作品横断機体 / グッズ"),
-    subtitle: lang("没有固定游戏世代", "특정 게임 세대 없음", "No single game era", "特定のゲーム世代なし"),
-    image: "",
-    aliases: [],
-    items: [],
+    kind: "unsorted",
+    labels: lang("跨作品 / 其他", "작품 공통 / 기타", "Cross-title / other", "作品横断 / その他"),
+    subtitle: lang("无法判断游戏世代", "게임 세대를 알 수 없는 상품", "Game era could not be identified", "ゲーム世代を特定できない商品"),
+    ...cover("channel:armored_core"),
+    roster: [],
     kit_ids: [],
-    count: 0,
-  };
-  const match = keywordMatcher(groups);
-  for (const kit of kits.filter((item) => item.franchise === "armored_core" && item.data_status !== "hidden")) {
-    const group = match(kit) || unsorted;
-    group.kit_ids.push(kit.kit_id);
-    group.count += 1;
-    if (!group.image) group.image = imageOf(kit);
-  }
-  return [...groups, unsorted];
+  });
+  return collect("armored_core", armoredCoreClassifier().classify, groups);
 }
 
+// ─────────────── Gundam timeline (unchanged: GGEN series logos per work) ───────────────
 function gundamTimeline() {
   const family = (name) => {
     const s = String(name || "").toLowerCase();
@@ -260,19 +262,34 @@ function gundamTimeline() {
       const groupWorks = works.filter((work) => family(work.name) === id);
       return {
         id,
+        kind: "timeline",
         labels: groupLabels,
         subtitle: lang(`${groupWorks.length} 个作品`, `${groupWorks.length}개 작품`, `${groupWorks.length} works`, `${groupWorks.length}作品`),
         count: groupWorks.length,
         image: groupWorks.find((work) => work.image)?.image || "",
+        cover_source: "G Generation series logo (official game asset) via soshage.com GGET",
         works: groupWorks.map((work) => ({ work_id: work.work_id, name: work.name, image: work.image || "" })),
       };
     })
     .filter((group) => group.count);
 }
 
+function channels() {
+  const ch = (id, label) => ({ label, ...cover(`channel:${id}`) });
+  return {
+    gundam: ch("gundam", lang("高达", "건담", "Gundam", "ガンダム")),
+    beyblade: ch("beyblade", lang("战斗陀螺 X", "베이블레이드 X", "BEYBLADE X", "ベイブレードエックス")),
+    pokemon: ch("pokemon", lang("宝可梦", "포켓몬", "Pokémon", "ポケモン")),
+    fate: ch("fate", lang("Fate", "Fate", "Fate", "Fate")),
+    armored_core: ch("armored_core", lang("装甲核心", "아머드 코어", "Armored Core", "アーマード・コア")),
+  };
+}
+
 const output = {
-  updated_at: new Date().toISOString().slice(0, 10),
-  source: "Generated from data/kits.json, data/atlas-source-taxonomy.json, and data/gget-series-sections.json",
+  updated_at: catalog.updated_at || "",
+  source:
+    "Generated from data/kits.json, data/atlas-source-taxonomy.json (PokeAPI species), data/gget-series-sections.json, data/atlas/fate-roster.json (Atlas Academy + Mooncell + hand-kept works) and data/atlas/atlas-covers.json by scripts/build_atlas_groups.mjs",
+  channels: channels(),
   franchises: {
     gundam_timeline: gundamTimeline(),
     pokemon: pokemonGroups(),
@@ -282,6 +299,7 @@ const output = {
 };
 
 await writeFile("data/atlas-groups.json", `${JSON.stringify(output, null, 2)}\n`, "utf8");
-console.log(
-  `atlas groups: pokemon ${output.franchises.pokemon.length}, fate ${output.franchises.fate.length}, ac ${output.franchises.armored_core.length}, gundam timeline ${output.franchises.gundam_timeline.length}`,
-);
+if (reportArg) await writeFile(reportArg, `${JSON.stringify(report, null, 1)}\n`, "utf8");
+const summary = (list) => list.map((g) => `${g.id}:${g.count}`).join(" ");
+console.log(`atlas groups: pokemon ${output.franchises.pokemon.length}, fate ${output.franchises.fate.length}, ac ${output.franchises.armored_core.length}, gundam timeline ${output.franchises.gundam_timeline.length}`);
+for (const f of ["pokemon", "fate", "armored_core"]) console.log(`  ${f}: ${summary(output.franchises[f])}`);

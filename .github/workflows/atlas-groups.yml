@@ -1,0 +1,87 @@
+name: Atlas - group rosters and covers
+
+# Hobby Atlas: refreshes what the Atlas group cards are built from, weekly.
+#   - data/atlas/fate-roster.json: FGO servants (Atlas Academy exports, JP/EN/CN/KR/TW names),
+#     their story chapter (Mooncell summoning banners) and the hand-kept Fate works
+#     (scripts/atlas/fate_works.mjs), checked against Japanese Wikipedia.
+#   - data/atlas/atlas-covers.json + app/assets/atlas/covers/: official cover images (only
+#     missing ones are downloaded; existing files are kept).
+#   - data/atlas-groups.json rebuilt from both (the daily catalog refresh rebuilds it too,
+#     from the committed roster, without network).
+# Polite crawling through scripts/atlas/lib/http.mjs (descriptive User-Agent, >= 1.1 s per
+# host, raw responses cached between runs, bot challenges never worked around). If a source
+# fails, the previous roster is kept and the step fails without committing.
+
+on:
+  schedule:
+    - cron: "20 4 * * 1" # Mondays 04:20 UTC (13:20 KST)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atlas-groups
+  cancel-in-progress: false
+
+jobs:
+  groups:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/atlas-cache/groups
+          key: atlas-groups-${{ github.run_id }}
+          restore-keys: atlas-groups-
+
+      - name: Build Fate roster
+        timeout-minutes: 10
+        env:
+          ATLAS_CACHE_DIR: ${{ runner.temp }}/atlas-cache/groups
+        run: node scripts/atlas/build_fate_roster.mjs
+
+      - name: Download missing cover images
+        timeout-minutes: 6
+        env:
+          ATLAS_CACHE_DIR: ${{ runner.temp }}/atlas-cache/groups
+        run: node scripts/atlas/build_atlas_covers.mjs
+
+      - name: Rebuild atlas groups and check them
+        run: |
+          node scripts/build_atlas_groups.mjs
+          node scripts/atlas/test_atlas_groups.mjs
+
+      - name: Commit updated rosters and groups
+        run: |
+          paths="data/atlas/fate-roster.json data/atlas/atlas-covers.json app/assets/atlas/covers data/atlas-groups.json"
+          if [ -z "$(git status --porcelain -- $paths)" ]; then
+            echo "No roster or cover changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- $paths
+          git commit -m "Update Atlas group rosters"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin "$GITHUB_REF_NAME"
+            if git rebase -X theirs "origin/$GITHUB_REF_NAME"; then
+              if git push origin "HEAD:$GITHUB_REF_NAME"; then
+                echo "Pushed on attempt $attempt."
+                exit 0
+              fi
+              echo "Push rejected (remote moved); retrying..."
+            else
+              echo "Rebase conflict; aborting and retrying against latest remote..."
+              git rebase --abort || true
+            fi
+            sleep $(( (RANDOM % 10) + 5 ))
+          done
+          echo "Could not push after 5 attempts."
+          exit 1
