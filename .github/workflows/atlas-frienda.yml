@@ -1,0 +1,101 @@
+name: Atlas - Pokémon Frienda data
+
+# Hobby Atlas: rebuilds data/atlas/pokemon-frienda.json (ポケモンフレンダ, the Japanese successor of
+# Pokémon MEZASTAR) from the official site pokemonfrienda.com (set pages, ワンダーピック,
+# スペシャルフレンダピック, レガシーピック event pages) and the PokeAPI CSVs. Polite crawler
+# (descriptive User-Agent, >= 1.1 s between requests per host, raw responses cached outside the
+# repo). If the official site fails or blocks the bot the previous file is kept unchanged.
+# Commits only data/atlas/pokemon-frienda.json, and only when its content changed.
+
+on:
+  schedule:
+    - cron: "50 3 * * 5" # Fridays 03:50 UTC (12:50 KST / JST 12:50) — new sets start on Thursdays
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atlas-frienda
+  cancel-in-progress: false
+
+jobs:
+  frienda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Raw-response cache between runs (keeps the request count low; never committed).
+      - uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/atlas-cache/frienda
+          key: atlas-frienda-${{ github.run_id }}
+          restore-keys: atlas-frienda-
+
+      - name: Build Frienda dataset
+        timeout-minutes: 8
+        env:
+          ATLAS_CACHE_DIR: ${{ runner.temp }}/atlas-cache/frienda
+        run: node scripts/atlas/build_pokemon_frienda.mjs --report="$RUNNER_TEMP/frienda-report.json"
+
+      - name: Summarise
+        if: always()
+        run: |
+          node -e '
+            const fs = require("fs");
+            const f = process.env.RUNNER_TEMP + "/frienda-report.json";
+            if (!fs.existsSync(f)) process.exit(0);
+            const r = JSON.parse(fs.readFileSync(f, "utf8"));
+            const out = ["## Pokémon Frienda data", "", "Blocked hosts: " + ((r.blocked_hosts || []).join(", ") || "none")];
+            if (r.kept_previous) out.push("", "Official site unavailable; previous file kept. " + (r.error || ""));
+            const m = r.metrics;
+            if (m) {
+              out.push("", `Latest: ${m.latest?.names?.ja} (${m.latest?.release_date} → ${m.latest?.end_date})`, `Picks ${m.picks} ${JSON.stringify(m.by_kind)}; dex ${m.dex_resolved}; names ${JSON.stringify(m.names)}; images ${m.images}; ${m.bytes} bytes (gzip ${m.gzip})`, "");
+              for (const s of m.sets) out.push(`- ${s.id} ${s.ja}: ${s.release_date || "?"} → ${s.end_date || "?"} ${JSON.stringify(s.counts)}`);
+            }
+            if (r.anomalies?.length) { out.push("", "### Anomalies"); for (const a of r.anomalies) out.push(`- ${a.where}: ${a.msg}`); }
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, out.join("\n") + "\n");
+          '
+
+      - name: Validate JSON
+        run: |
+          f=data/atlas/pokemon-frienda.json
+          node -e '
+            const d = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"));
+            const ok = d.schema === 1 && d.game === "frienda" && Array.isArray(d.sources) && Array.isArray(d.sets) && d.sets.length
+              && Array.isArray(d.picks) && d.picks.length && d.picks.every((p) => p.id.startsWith("frienda:"))
+              && new Set(d.picks.map((p) => p.id)).size === d.picks.length;
+            if (!ok) { console.error("bad", process.argv[1]); process.exit(1); }
+          ' "$f"
+
+      - name: Commit updated Frienda data
+        run: |
+          if [ -z "$(git status --porcelain -- data/atlas/pokemon-frienda.json)" ]; then
+            echo "No Frienda data changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- data/atlas/pokemon-frienda.json
+          git commit -m "Update Atlas Pokémon Frienda data"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin "$GITHUB_REF_NAME"
+            if git rebase -X theirs "origin/$GITHUB_REF_NAME"; then
+              if git push origin "HEAD:$GITHUB_REF_NAME"; then
+                echo "Pushed on attempt $attempt."
+                exit 0
+              fi
+              echo "Push rejected (remote moved); retrying..."
+            else
+              echo "Rebase conflict; aborting and retrying against latest remote..."
+              git rebase --abort || true
+            fi
+            sleep $(( (RANDOM % 10) + 5 ))
+          done
+          echo "Could not push after 5 attempts."
+          exit 1
