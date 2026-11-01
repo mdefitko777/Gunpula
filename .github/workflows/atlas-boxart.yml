@@ -1,0 +1,100 @@
+name: Atlas - Gundam box art
+
+# Hobby Atlas: rebuilds data/atlas/gundam-boxart.json, the package image (箱絵 / パッケージ)
+# for each gundam item in data/split/kits-gundam.json. Official BANDAI SPIRITS / Premium
+# Bandai / Bandai Candy / gashapon images, hotlinked only, with a pixel check that keeps
+# only white-padded box scans. Polite crawler (descriptive User-Agent, <= 1 request per
+# second per host, raw responses cached between runs, never committed). A host that fails
+# or runs out of budget keeps the previous entries. Commits only data/atlas/gundam-boxart.json.
+
+on:
+  schedule:
+    - cron: "20 4 * * 2" # Tuesdays 04:20 UTC (13:20 KST)
+  workflow_dispatch:
+    inputs:
+      budget:
+        description: "Max live requests per host this run"
+        default: "3000"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atlas-boxart
+  cancel-in-progress: false
+
+jobs:
+  boxart:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Raw-response cache between runs (keeps the request count low; never committed).
+      - uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/atlas-cache/gundam-boxart
+          key: atlas-boxart-${{ github.run_id }}
+          restore-keys: atlas-boxart-
+
+      - name: Build Gundam box art
+        timeout-minutes: 105
+        env:
+          ATLAS_CACHE_DIR: ${{ runner.temp }}/atlas-cache/gundam-boxart
+        run: |
+          node scripts/atlas/build_gundam_boxart.mjs \
+            --budget="${{ github.event.inputs.budget || '3000' }}" \
+            --report="$RUNNER_TEMP/boxart-report.json"
+
+      - name: Summarise
+        if: always()
+        run: |
+          node -e '
+            const fs = require("fs");
+            const f = process.env.RUNNER_TEMP + "/boxart-report.json";
+            if (!fs.existsSync(f)) process.exit(0);
+            const r = JSON.parse(fs.readFileSync(f, "utf8"));
+            const out = ["## Gundam box art", "", `${r.changed ? "changed" : "unchanged"}: ${r.with_box} box + ${r.with_dp} DP of ${r.kits} items (carried over ${r.carried_over})`, ""];
+            out.push("By source: " + JSON.stringify(r.by_source));
+            out.push("URL checks: " + JSON.stringify(r.url_checks));
+            out.push("No pick: " + JSON.stringify(r.reasons));
+            out.push("Gunplapedia: " + JSON.stringify(r.gunplapedia));
+            out.push("Hosts: " + JSON.stringify(r.hosts));
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, out.join("\n\n") + "\n");
+          '
+
+      - name: Validate JSON
+        run: |
+          f=data/atlas/gundam-boxart.json
+          node -e 'const d=JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")); const n=Object.keys(d.boxart||{}).length; if(d.schema!==1||!Array.isArray(d.sources)||!d.stats||n<500||Object.values(d.boxart).some(e=>!/^https:\/\//.test(e.url))) {console.error("bad", process.argv[1], n); process.exit(1)}' "$f"
+
+      - name: Commit updated box art
+        run: |
+          if [ -z "$(git status --porcelain -- data/atlas/gundam-boxart.json)" ]; then
+            echo "No box art changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- data/atlas/gundam-boxart.json
+          git commit -m "Update Atlas Gundam box art"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin "$GITHUB_REF_NAME"
+            if git rebase -X theirs "origin/$GITHUB_REF_NAME"; then
+              if git push origin "HEAD:$GITHUB_REF_NAME"; then
+                echo "Pushed on attempt $attempt."
+                exit 0
+              fi
+              echo "Push rejected (remote moved); retrying..."
+            else
+              echo "Rebase conflict; aborting and retrying against latest remote..."
+              git rebase --abort || true
+            fi
+            sleep $(( (RANDOM % 10) + 5 ))
+          done
+          echo "Could not push after 5 attempts."
+          exit 1
