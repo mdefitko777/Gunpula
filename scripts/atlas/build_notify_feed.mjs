@@ -291,15 +291,24 @@ async function readJson(path, fallback = null) {
  *  since     : oldest date kept (windowStart of the feed dates); empty = the newest [days] dates
  *  restocks  : data/atlas/restocks.json (null = no restock items) · kitsById: the current catalog
  */
-export function buildDoc({ feed, manifest, prev, pairs, commits, edgeDates = new Set(), days = 30, since = "", gitOk = true, now = new Date(), restocks = null, kitsById = new Map() }) {
-  const feedEntries = new Map((feed?.entries || []).map((e) => [e.date, e]));
+export function buildDoc({ feed, manifest, prev, pairs, commits, edgeDates = new Set(), days = 30, since = "", gitOk = true, now = new Date(), restocks = null, kitsById = new Map(), quiet = null }) {
+  // Maintenance (data/atlas/notify-quiet.json): their kits.json diffs and update-feed dates are not news
+  const quietCommits = (quiet?.commits || []).filter(Boolean);
+  const quietFeedDates = new Set(quiet?.feed_dates || []);
+  const isQuietPair = (p) => quietCommits.some((q) => String(p.sha || "").startsWith(q) || q.startsWith(String(p.sha || "x")));
+  const feedEntries = new Map((feed?.entries || []).filter((e) => !quietFeedDates.has(e.date)).map((e) => [e.date, e]));
   const prevEntries = new Map((prev?.entries || []).map((e) => [e.date, e]));
   const pairDates = new Map();
-  for (const p of pairs) (pairDates.get(p.date) ?? pairDates.set(p.date, []).get(p.date)).push(p);
+  for (const p0 of pairs) {
+    const p = isQuietPair(p0) ? { ...p0, items: [], added: 0, changed: 0, quiet: true } : p0;
+    (pairDates.get(p.date) ?? pairDates.set(p.date, []).get(p.date)).push(p);
+  }
   // A kits.json commit outside the daily refresh (cached images) can carry its own date, so the window is
   // "on or after [since]" rather than a fixed count: the same window main() walks the git history for.
   const all = [...new Set([...feedEntries.keys(), ...prevEntries.keys(), ...pairDates.keys(), manifest?.updated_at])]
     .filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d || ""))
+    // a feed date can't be newer than the catalog it describes (a run stamped with a local date)
+    .filter((d) => !manifest?.updated_at || d <= manifest.updated_at)
     .sort((a, b) => b.localeCompare(a));
   const dates = since ? all.filter((d) => d >= since) : all.slice(0, days);
   const diffedDates = new Set(commits.map((c) => c.date));
@@ -387,6 +396,7 @@ async function main() {
   const done = new Map((prev?.schema === 1 ? prev.commits || [] : []).map(([sha, date]) => [sha, date]));
   const prevOk = prev?.schema === 1 ? prev : null;
   const restocks = await readJson(RESTOCKS, null);
+  const quiet = await readJson("data/atlas/notify-quiet.json", null);
   const kitsById = new Map();
   if (restocks?.events?.length) {
     const wanted = new Set(restocks.events.filter((e) => !e.quiet).map((e) => e.kit_id));
@@ -439,7 +449,7 @@ async function main() {
     }
   }
 
-  const doc = buildDoc({ feed, manifest, prev: prevOk, pairs, commits, edgeDates, days, since: cutoff, gitOk, restocks, kitsById });
+  const doc = buildDoc({ feed, manifest, prev: prevOk, pairs, commits, edgeDates, days, since: cutoff, gitOk, restocks, kitsById, quiet });
   const changed = !sameContent(prevOk, doc);
   if (!changed) doc.generated_at = prevOk.generated_at;
   const text = `${JSON.stringify(doc)}\n`;

@@ -255,3 +255,23 @@ console.log("notify feed backfill: ok");
   assert.equal(none.entries[0].restock_count, undefined);
 }
 console.log("notify feed restocks: ok");
+
+// Maintenance commits (data/atlas/notify-quiet.json) and dates newer than the catalog are not news
+{
+  const manifest = { updated_at: "2026-11-01", total: 2 };
+  const item = (id) => ({ kit_id: id, change_type: "added", franchise: "gundam", names: { ko: id }, change_reasons: ["new"] });
+  const doc = buildDoc({
+    feed: { entries: [{ date: "2026-11-02", added: [item("local-run")], changed: [], added_count: 1, changed_count: 0 }] },
+    manifest,
+    prev: null,
+    pairs: [
+      { date: "2026-11-01", at: "2026-11-01T10:00:00Z", sha: "aaaa1111", items: [item("maintenance")], added: 1, changed: 0, total: 2 },
+      { date: "2026-11-01", at: "2026-11-01T11:00:00Z", sha: "bbbb2222", items: [item("real-news")], added: 1, changed: 0, total: 2 },
+    ],
+    commits: [{ sha: "aaaa1111", date: "2026-11-01" }, { sha: "bbbb2222", date: "2026-11-01" }],
+    quiet: { commits: ["aaaa1111"], feed_dates: [] },
+  });
+  assert.equal(doc.entries[0].date, "2026-11-01", "no entry newer than the catalog");
+  assert.deepEqual(doc.entries[0].added.map((i) => i.kit_id), ["real-news"]);
+}
+console.log("notify feed quiet maintenance: ok");
