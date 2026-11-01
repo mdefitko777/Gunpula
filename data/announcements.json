@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-22T22:09:18.180Z",
+  "updated_at": "2026-11-01T04:34:43.798Z",
   "sources": [
     {
       "source_id": "bandai_hobby_news",
@@ -22,8 +22,37 @@
       "url": "https://beyblade.takaratomy.co.jp/beyblade-x/news/"
     }
   ],
-  "fetch_errors": [],
+  "fetch_errors": [
+    {
+      "source_id": "bandai_hobby_youtube",
+      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuxB1suCoCqAKiljh_0xE4A returned 404"
+    }
+  ],
   "announcements": [
+    {
+      "id": "tamashii-news-2026-10-30-16152",
+      "franchise": "gundam",
+      "names": {
+        "ja": "【GUNDAM UNIVERSE】『機動戦士ガンダムRG XARX-ZERO』より「XARX-0 GUNDAM ZERO」が登場！",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-10-30",
+      "source_type": "news",
+      "source_name": "TAMASHII WEB",
+      "source_url": "https://tamashiiweb.com/item/16152/",
+      "thumbnail_url": "../app/assets/announcements/tamashii-news-2026-10-30-16152.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null
+    },
     {
       "id": "bandai-youtube-Ninhgtydeiw",
       "franchise": "gundam",
