@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 import {
   decodeKotobukiyaShopHtml,
@@ -6,6 +7,7 @@ import {
   parseKotobukiyaShopDetail,
   parseKotobukiyaShopListings,
 } from "./lib/kotobukiya-shop.mjs";
+import { KIT_ALIASES_PATH, gundamGradeFromName, nfkc, nonCollectibleReason, retiredKitIds } from "./lib/catalog-cleanup.mjs";
 import { extractTamashiiGalleryImages } from "./lib/tamashii-images.mjs";
 
 const CANDY_BASE_URL = "https://www.bandai.co.jp";
@@ -689,7 +691,14 @@ async function importGashaponSearch({ label, resultUrl, franchise, gradeCode, su
     console.warn(`Gashapon listing fetch failed for ${label}: ${error.message}`);
     return [];
   }
-  const listings = parseGashaponSearchListings(html, resultUrl);
+  // A 【箱売】 card sells a whole box of a capsule line that has its own card.
+  const parsed = parseGashaponSearchListings(html, resultUrl);
+  const lineTitles = new Set(parsed.filter((listing) => !/【箱売】/.test(listing.title)).map((listing) => listing.title.replace(/【[^】]*】/g, "").replace(/\s+/g, "")));
+  const listings = parsed.filter(
+    (listing) =>
+      !(/【箱売】/.test(listing.title) && lineTitles.has(listing.title.replace(/【[^】]*】/g, "").replace(/\s+/g, ""))) &&
+      !nonCollectibleReason({ franchise, names: { ja: listing.title } }),
+  );
   const imported = [];
 
   console.log(`Found ${listings.length} ${label} Gashapon search listings.`);
@@ -712,7 +721,8 @@ async function importGashaponSearch({ label, resultUrl, franchise, gradeCode, su
       buildKit({
         kitId: `${idPrefix}-${listing.jan_code ?? slugify(listing.title, "item")}`,
         franchise,
-        gradeCode,
+        // Line cards of MOBILE SUIT ENSEMBLE / ガシャポン戦士フォルテ are not merch.
+        gradeCode: (franchise === "gundam" && gundamGradeFromName(listing.title)) || gradeCode,
         subline,
         title: listing.title,
         boxArtUrl: detail.images[0] ?? listing.image_url,
@@ -1104,7 +1114,29 @@ function beybladeSeriesTags(listing) {
   return tags;
 }
 
-async function importBeybladeX() {
+// A lineup card without a detail link used to get `${code}-${position}` as its id,
+// and the id changed whenever the card moved or gained its link, leaving a stale
+// twin behind. A card that matches an existing record by title keeps that
+// record's id; a new card without a link gets an id from its code and title.
+const beybladeTitleKey = (title) => nfkc(title).replace(/\s+/g, "");
+
+function beybladeKitId(listing, existingByTitle) {
+  const existing = existingByTitle.get(beybladeTitleKey(listing.title));
+  if (existing) return existing;
+  if (listing.detail_url !== BEYBLADE_X_LINEUP_URL) {
+    return `beyblade-x-${slugify(listing.href_slug, `${String(listing.index).padStart(3, "0")}-${listing.code.toLowerCase()}`)}`;
+  }
+  const titleHash = createHash("sha1").update(listing.title).digest("hex").slice(0, 8);
+  return `beyblade-x-${slugify(listing.code, "bx")}-${titleHash}`;
+}
+
+async function importBeybladeX(existingKits = []) {
+  const retired = retiredKitIds(await readJsonFile(KIT_ALIASES_PATH, null));
+  const existingByTitle = new Map(
+    existingKits
+      .filter((kit) => kit.franchise === "beyblade" && !retired.has(kit.kit_id))
+      .map((kit) => [beybladeTitleKey(kit.names?.ja), kit.kit_id]),
+  );
   const html = await fetchBrowserText(BEYBLADE_X_LINEUP_URL, "https://beyblade.takaratomy.co.jp/");
   const listings = parseBeybladeXListings(html, BEYBLADE_X_LINEUP_URL);
   console.log(`Found ${listings.length} Takara Tomy BEYBLADE X listings.`);
@@ -1124,7 +1156,7 @@ async function importBeybladeX() {
   return listings.map((listing, index) => {
     const images = unique([listing.image_url, ...details[index].images]);
     return buildKit({
-      kitId: `beyblade-x-${slugify(listing.href_slug, `${String(listing.index).padStart(3, "0")}-${listing.code.toLowerCase()}`)}`,
+      kitId: beybladeKitId(listing, existingByTitle),
       franchise: "beyblade",
       gradeCode: "BEYBLADE_X",
       subline: beybladeCategoryLabel(listing.category),
@@ -1458,6 +1490,14 @@ function normalizeKit(kit) {
   };
 }
 
+async function readJsonFile(path, fallback) {
+  try {
+    return JSON.parse(await readFile(path, "utf8"));
+  } catch {
+    return fallback;
+  }
+}
+
 async function importOptional(label, importer) {
   try {
     return await importer();
@@ -1533,10 +1573,12 @@ async function main() {
     ...(await importOptional("Tamashii Gundam figures", importTamashiiGundamFigures)),
     ...(await importOptional("Bandai Armored Core", importBandaiArmoredCore)),
     ...(await importOptional("Kotobukiya Armored Core", importKotobukiyaArmoredCore)),
-    ...(await importOptional("BEYBLADE X", importBeybladeX)),
+    ...(await importOptional("BEYBLADE X", () => importBeybladeX(existingDoc.kits))),
   ];
 
-  const merged = mergeKits(existingDoc, imported);
+  // Ids clean_catalog.mjs retired (duplicates, non-collectibles) are not re-added.
+  const retired = retiredKitIds(await readJsonFile(KIT_ALIASES_PATH, null));
+  const merged = mergeKits(existingDoc, imported.filter((kit) => !retired.has(kit.kit_id)));
   await writeFile("data/kits.json", `${JSON.stringify(merged, null, 2)}\n`, "utf8");
   console.log(`Merged ${imported.length} collectible records. Catalog now has ${merged.kits.length} records.`);
 }

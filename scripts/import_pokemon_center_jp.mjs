@@ -86,9 +86,13 @@ function parseProducts(html) {
 }
 
 function gradeForProduct(name) {
+  // Takara Tomy モンコレ figures sold at Pokemon Center (MS-xx, ピカチュウセレクション, ぽこ あ ポケモン).
+  if (/モンコレ/.test(name)) return "POKE_MONCOLLE";
   if (/ぬいぐるみ|マスコット|Plush/i.test(name)) return "POKE_PLUSH";
   return "POKE_GOODS";
 }
+
+const SUBLINES = { POKE_MONCOLLE: "モンコレ", POKE_PLUSH: "Pokemon Center Plush", POKE_GOODS: "Pokemon Center Goods" };
 
 function toKit(product) {
   const gradeCode = gradeForProduct(product.name);
@@ -96,7 +100,7 @@ function toKit(product) {
     kit_id: `pokemon-center-${product.pid}`,
     franchise: "pokemon",
     grade_code: gradeCode,
-    subline: gradeCode === "POKE_PLUSH" ? "Pokemon Center Plush" : "Pokemon Center Goods",
+    subline: SUBLINES[gradeCode],
     number: product.pid,
     scale: "non-scale",
     names: {

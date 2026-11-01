@@ -6,6 +6,7 @@
 //       <div class="number">MS-02</div><div class="new_sale">8月発売</div>
 //     </div><div class="name">イーブイ</div></div></a>
 import { readFile, writeFile } from "node:fs/promises";
+import { KIT_ALIASES_PATH, retiredKitIds } from "./lib/catalog-cleanup.mjs";
 
 const CATALOG_PATH = "data/kits.json";
 const SOURCE_ID = "takara_tomy_pokemon_jp";
@@ -57,9 +58,10 @@ function absolute(href, base) {
   }
 }
 
-// "8月発売" carries no year; anchor it to the next occurrence of that month so
-// upcoming items sort sensibly instead of collapsing to an empty date.
-function releaseDateFrom(text) {
+// "8月発売" carries no year. The label stays on the page after release, so a
+// month up to two months back is this year's (read in November, "10月発売" is
+// last month, not next October); anything earlier is next year's.
+function releaseDateFrom(text, now = new Date()) {
   const match = /(\d{4})年\s*(\d{1,2})月/.exec(text) || /(\d{1,2})月/.exec(text);
   if (!match) return null;
   if (match.length === 3) {
@@ -67,8 +69,7 @@ function releaseDateFrom(text) {
   }
   const month = Number(match[1]);
   if (!Number.isInteger(month) || month < 1 || month > 12) return null;
-  const now = new Date();
-  const year = month < now.getMonth() + 1 ? now.getFullYear() + 1 : now.getFullYear();
+  const year = month < now.getMonth() + 1 - 2 ? now.getFullYear() + 1 : now.getFullYear();
   return `${year}-${String(month).padStart(2, "0")}`;
 }
 
@@ -109,10 +110,23 @@ function parseLineup(html) {
   });
 }
 
-function toKit(product, index) {
-  const idBase = product.number ? slugify(product.number, `mc-${index}`) : slugify(product.name, `mc-${index}`);
+// Numbered figures are keyed by their number (MS-02). Unnumbered ones used to
+// fall back to slugify(name) — empty for Japanese names, so `mc-${position}`,
+// and "x" for every "メガ…X" — and the id then pointed at whichever product sat
+// at that position next time. Now an unnumbered product keeps the id of the
+// record that already has its page URL (or name), and a new one gets an id
+// from its URL path (…/lineup/mega_raichu_x/ -> moncolle-mega-raichu-x).
+function kitIdFor(product, index, existing) {
+  if (product.number) return `moncolle-${slugify(product.number, `mc-${index}`)}`;
+  const known = existing.byUrl.get(product.url) || existing.byName.get(product.name);
+  if (known) return known;
+  const pathSlug = slugify(new URL(product.url).pathname.split("/").filter(Boolean).slice(-2).join("-").replace(/^lineup-/, ""), "");
+  return `moncolle-${pathSlug || `mc-${index}`}`;
+}
+
+function toKit(product, index, existing) {
   return {
-    kit_id: `moncolle-${idBase}`,
+    kit_id: kitIdFor(product, index, existing),
     franchise: "pokemon",
     grade_code: "POKE_MONCOLLE",
     subline: "モンコレ",
@@ -160,8 +174,20 @@ if (!products.length) {
   console.error("No Moncolle products parsed — the lineup markup may have changed; leaving the catalog untouched.");
   process.exit(1);
 }
-const importedKits = products.map(toKit);
 const catalog = JSON.parse(await readFile(CATALOG_PATH, "utf8"));
+let retired = new Set();
+try {
+  retired = retiredKitIds(JSON.parse(await readFile(KIT_ALIASES_PATH, "utf8")));
+} catch {
+  // No alias file yet.
+}
+const existing = { byUrl: new Map(), byName: new Map() };
+for (const kit of catalog.kits) {
+  if (!kit.kit_id.startsWith("moncolle-") || retired.has(kit.kit_id) || kit.number) continue;
+  for (const url of kit.source_urls || []) if (!existing.byUrl.has(url)) existing.byUrl.set(url, kit.kit_id);
+  if (kit.names?.ja && !existing.byName.has(kit.names.ja)) existing.byName.set(kit.names.ja, kit.kit_id);
+}
+const importedKits = products.map((product, index) => toKit(product, index, existing)).filter((kit) => !retired.has(kit.kit_id));
 const before = catalog.kits.filter((kit) => kit.grade_code === "POKE_MONCOLLE").length;
 const merged = mergeCatalog(catalog.kits, importedKits);
 await writeFile(CATALOG_PATH, `${JSON.stringify({ ...catalog, updated_at: today(), kits: merged }, null, 2)}\n`, "utf8");

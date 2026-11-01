@@ -16,6 +16,7 @@
 // Both passes are incremental and budgeted: archive.org is a free service, so a
 // daily run touches a bounded number of snapshots and records what it saw.
 import { readFile, writeFile } from "node:fs/promises";
+import { KIT_ALIASES_PATH, gundamGradeFromName, nonCollectibleReason, retiredKitIds, scaleFromName } from "./lib/catalog-cleanup.mjs";
 
 const CATALOG_PATH = "data/kits.json";
 const INDEX_PATH = "data/premium-bandai-wayback-index.json";
@@ -247,17 +248,28 @@ function parseSnapshot(html, itemUrl) {
 // Franchise matching — PB Japan sells far beyond this catalog's five worlds, so
 // discovery only keeps items that clearly belong to one of them.
 // ---------------------------------------------------------------------------
+//
+// No bare words that sit inside other titles: 'ネクスト' matched 'Vシネクスト' and
+// made a 超宇宙刑事ギャバン Blu-ray an Armored Core kit; 'セイバー' would take
+// 仮面ライダーセイバー or a Beyblade サムライセイバー for Fate.
 const FRANCHISE_RULES = [
   { franchise: "gundam", grade_code: "GUNDAM_MERCH", universe: "Gundam", test: /ガンダム|GUNDAM|ザク|ZAKU|シャア|ジオン|機動戦士|ガンプラ/i },
-  { franchise: "armored_core", grade_code: "AC_SMP", universe: "Armored Core", test: /アーマード・?コア|ARMORED CORE|ネクスト|RUBICON/i },
+  { franchise: "armored_core", grade_code: "AC_SMP", universe: "Armored Core", test: /アーマード・?コア|ARMORED CORE|RUBICON/i },
   { franchise: "pokemon", grade_code: "POKE_FIGURE", universe: "Pokemon", test: /ポケモン|ポケットモンスター|POKEMON|POKÉMON|ピカチュウ/i },
-  { franchise: "fate", grade_code: "FATE_GOODS", universe: "Fate", test: /Fate\/|フェイト\/|型月|Grand Order|セイバー|FGO/i },
+  { franchise: "fate", grade_code: "FATE_GOODS", universe: "Fate", test: /Fate\s*\/|フェイト\/|型月|TYPE-MOON|Grand Order|FGO/i },
   { franchise: "beyblade", grade_code: "BEYBLADE_X", universe: "Beyblade X", test: /ベイブレード|BEYBLADE|ベイバトル/i },
 ];
 
+// The product name and the breadcrumb (the work/character shop the item is
+// listed under) decide. The free-text description mentions labels, collabs and
+// related series, so it only counts for Gundam kits listed under a genre page.
 function matchFranchise(product) {
-  const haystack = `${product.name} ${product.work_title || ""} ${product.description}`;
-  return FRANCHISE_RULES.find((rule) => rule.test.test(haystack)) || null;
+  const named = `${product.name} ${product.work_title || ""}`;
+  return (
+    FRANCHISE_RULES.find((rule) => rule.test.test(named)) ||
+    FRANCHISE_RULES.filter((rule) => rule.franchise === "gundam").find((rule) => rule.test.test(product.description)) ||
+    null
+  );
 }
 
 function slugifyId(itemId) {
@@ -265,12 +277,15 @@ function slugifyId(itemId) {
 }
 
 function toKit(product, rule) {
+  // Premium Bandai sells HG/MG/RG kits, ROBOT魂, METAL BUILD … next to its
+  // goods; the product name says which grade it is.
+  const grade = rule.franchise === "gundam" ? gundamGradeFromName(product.name) : null;
   return {
     kit_id: slugifyId(product.item_id),
     franchise: rule.franchise,
-    grade_code: rule.grade_code,
+    grade_code: grade || rule.grade_code,
     subline: "プレミアムバンダイ",
-    scale: "non-scale",
+    scale: (grade && scaleFromName(product.name)) || "non-scale",
     names: { ja: product.name, en: product.name, zh: product.name, ko: product.name },
     images: {
       box_art_url: product.image || null,
@@ -341,6 +356,8 @@ function enrichKit(kit, product) {
 // ---------------------------------------------------------------------------
 
 const catalog = JSON.parse(await readFile(CATALOG_PATH, "utf8"));
+// Ids clean_catalog.mjs dropped as duplicates or non-collectibles.
+const retired = retiredKitIds(await readJson(KIT_ALIASES_PATH, null));
 const index = await readJson(INDEX_PATH, { schema_version: 1, entries: {} });
 index.entries = index.entries || {};
 
@@ -407,7 +424,19 @@ await mapLimit(targets, concurrency, async ({ url, mode }) => {
       skipped += 1;
       return;
     }
+    // Blu-ray, apparel, card games, mugs … sit on the same character pages.
+    const notCollectible = nonCollectibleReason({ franchise: rule.franchise, names: { ja: product.name } });
+    if (notCollectible) {
+      index.entries[url] = { checked_at: nowIso(), status: "off_catalog", reason: notCollectible };
+      skipped += 1;
+      return;
+    }
     const kit = toKit(product, rule);
+    if (retired.has(kit.kit_id)) {
+      index.entries[url] = { checked_at: nowIso(), status: "retired", kit_id: kit.kit_id };
+      skipped += 1;
+      return;
+    }
     if (!kitsById.has(kit.kit_id)) added += 1;
     kitsById.set(kit.kit_id, { ...(kitsById.get(kit.kit_id) || {}), ...kit });
     index.entries[url] = { checked_at: nowIso(), status: "imported", kit_id: kit.kit_id };

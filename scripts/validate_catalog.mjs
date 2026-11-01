@@ -1,3 +1,4 @@
+import { existsSync, readFileSync } from "node:fs";
 import { isDateLike, kitName, loadCatalog } from "./lib/catalog.mjs";
 
 const { grades, kits, sources, gradeByCode, sourceById } = loadCatalog();
@@ -148,6 +149,19 @@ for (const kit of kits) {
 
   if (!Array.isArray(kit.tags)) {
     addError(`${context}: tags must be an array`);
+  }
+}
+
+// data/kit-aliases.json lists kit_ids removed from the catalog. A listed id must
+// not be back in kits.json, and an alias must lead to a record that exists.
+const aliasDoc = existsSync("data/kit-aliases.json") ? JSON.parse(readFileSync("data/kit-aliases.json", "utf8")) : null;
+if (aliasDoc) {
+  for (const [from, to] of Object.entries(aliasDoc.aliases || {})) {
+    if (kitIds.has(from)) addError(`kit-aliases: ${from} is aliased to ${to} but is still in the catalog`);
+    if (!kitIds.has(to)) addError(`kit-aliases: ${from} is aliased to ${to}, which is not in the catalog`);
+  }
+  for (const id of Object.keys(aliasDoc.excluded || {})) {
+    if (kitIds.has(id)) addError(`kit-aliases: ${id} is excluded but still in the catalog`);
   }
 }
 

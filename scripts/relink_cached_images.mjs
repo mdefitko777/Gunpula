@@ -43,10 +43,10 @@ async function existingCatalogAsset(kit, url, index, fileCache) {
   const slot = String(index + 1).padStart(2, "0");
   const hash = createHash("sha1").update(url).digest("hex").slice(0, 10);
   const exact = `${stem}-${slot}-${hash}.${urlExtension(url)}`;
-  const filename = files.includes(exact)
-    ? exact
-    : files.find((file) => file.startsWith(`${stem}-${slot}-${hash}.`))
-      || files.find((file) => file.startsWith(`${stem}-${slot}-`));
+  // Only a file cached from this exact URL. Falling back to any
+  // `${stem}-${slot}-*` file handed a kit the photo of whatever product its
+  // kit_id used to point at (Moncolle ids were positional).
+  const filename = files.includes(exact) ? exact : files.find((file) => file.startsWith(`${stem}-${slot}-${hash}.`));
   return filename ? `./assets/catalog/${kit.franchise}/${filename}` : "";
 }
 

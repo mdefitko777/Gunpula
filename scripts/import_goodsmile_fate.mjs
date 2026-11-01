@@ -1,4 +1,5 @@
 import { readFile, writeFile } from "node:fs/promises";
+import { KIT_ALIASES_PATH, retiredKitIds } from "./lib/catalog-cleanup.mjs";
 
 const CATALOG_PATH = "data/kits.json";
 const LIST_URL = "https://www.goodsmile.info/en/fgo";
@@ -312,6 +313,9 @@ function gradeForCategory(category, name) {
   if (/figma|action/i.test(text)) return "FATE_ACTION";
   if (/Goods|Accessory|Apparel|Stationery|Keychain|Acrylic|Plush|Doll/i.test(text)) return "FATE_GOODS";
   if (/Prize/i.test(text)) return "FATE_PRIZE";
+  // The plain "Other" category holds tableware (Orange Rouge cups) and
+  // "Decals/Stickers" holds decal sheets; neither is a figure.
+  if (/^(?:\s*Other)+\s*$|Decal|Sticker|Tableware/i.test(String(category || ""))) return "FATE_GOODS";
   return "FATE_SCALE";
 }
 
@@ -541,6 +545,10 @@ async function main() {
     return kit;
   });
   kits = mergeCatalog(kits, globalKits);
+  // Ids clean_catalog.mjs dropped as duplicates (e.g. a truncated legacy name
+  // of a global-store product) are not brought back.
+  const retired = retiredKitIds(await readFile(KIT_ALIASES_PATH, "utf8").then(JSON.parse, () => null));
+  kits = kits.filter((kit) => !retired.has(kit.kit_id));
 
   const nextCatalog = {
     ...catalog,

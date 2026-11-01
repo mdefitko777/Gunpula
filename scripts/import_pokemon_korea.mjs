@@ -10,6 +10,7 @@
 // error: the search filters need a `filter.` prefix (`filter.keywords`, not
 // `keywords`), while the category filter is the bare `categoryNos`.
 import { readFile, writeFile } from "node:fs/promises";
+import { KIT_ALIASES_PATH, nonCollectibleReason, retiredKitIds } from "./lib/catalog-cleanup.mjs";
 
 const CATALOG_PATH = "data/kits.json";
 const SOURCE_ID = "pokemon_store_kr";
@@ -20,7 +21,8 @@ const CLIENT_ID = process.env.POKEMON_KR_CLIENT_ID || "HJGfZ5jPHZk3/PEOkm+/Qw=="
 const PAGE_SIZE = 100;
 const REQUEST_DELAY_MS = Number(process.env.POKEMON_KR_DELAY_MS || 150);
 
-// Collectible categories only. The shop also sells 패션 (560), 문구 (255),
+// Collectible categories only (and 스토어 오리지널 is filtered per product: it
+// also carries the OST album, tumblers, notebooks, apparel …). The shop also sells 패션 (560), 문구 (255),
 // 리빙 (224), 카드 게임 (197) and 닌텐도 게임 (13) — apparel, stationery,
 // homeware, TCG and game software, none of which this catalog tracks.
 const CATEGORIES = [
@@ -85,15 +87,24 @@ async function fetchCategory(category) {
   return [...products.values()];
 }
 
+// "[구매권 추첨] …" is the lottery for the right to buy a product, listed at 0 won.
+const LOTTERY_PREFIX = /^\s*\[구매권 추첨\]\s*/;
+
+function gradeFor(name, category) {
+  if (category.grade_code === "POKE_GOODS" && /봉제인형|마스코트/.test(name)) return "POKE_PLUSH";
+  return category.grade_code;
+}
+
 function toKit(product, category) {
-  const name = String(product.productName || "").replace(/\s+/g, " ").trim();
+  const name = String(product.productName || "").replace(LOTTERY_PREFIX, "").replace(/\s+/g, " ").trim();
   const image = absoluteImage((product.listImageUrls || product.imageUrls || [])[0]);
   const url = `${STORE}/pages/product/product-detail.html?productNo=${product.productNo}`;
-  const price = Number.isInteger(product.salePrice) ? product.salePrice : null;
+  const price = Number.isInteger(product.salePrice) && product.salePrice > 0 ? product.salePrice : null;
+  const gradeCode = gradeFor(name, category);
   return {
     kit_id: `pokemon-kr-${product.productNo}`,
     franchise: "pokemon",
-    grade_code: category.grade_code,
+    grade_code: gradeCode,
     subline: category.label,
     number: null,
     scale: "non-scale",
@@ -124,7 +135,7 @@ function toKit(product, category) {
         confidence: "high",
       },
     ],
-    tags: [...new Set(["pokemon", "korea", "pokemon store", category.grade_code.toLowerCase()])],
+    tags: [...new Set(["pokemon", "korea", "pokemon store", gradeCode.toLowerCase()])],
     notes: "Imported from the official Korean Pokemon Store online shop (pokemonstore.co.kr).",
   };
 }
@@ -147,13 +158,22 @@ function mergeCatalog(existingKits, importedKits) {
 
 const imported = new Map();
 const report = [];
+let retired = new Set();
+try {
+  retired = retiredKitIds(JSON.parse(await readFile(KIT_ALIASES_PATH, "utf8")));
+} catch {
+  // No alias file yet.
+}
 for (const category of CATEGORIES) {
   try {
     const products = await fetchCategory(category);
     for (const product of products) {
       // A product can sit in several categories; the first one listed here wins
       // so plush never gets relabelled as generic goods.
-      if (!imported.has(product.productNo)) imported.set(product.productNo, toKit(product, category));
+      if (imported.has(product.productNo)) continue;
+      const kit = toKit(product, category);
+      if (retired.has(kit.kit_id) || nonCollectibleReason(kit)) continue;
+      imported.set(product.productNo, kit);
     }
     report.push(`${category.label} ${products.length}`);
   } catch (error) {

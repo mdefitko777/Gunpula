@@ -36,6 +36,7 @@
     "repair:pokemon-images": "npm run cache:pokemon-images && npm run check:images:pokemon && npm run prune:broken-images -- --franchise=pokemon && npm run check:images:pokemon",
     "clean:tamashii-images": "node scripts/clean_tamashii_related_images.mjs",
     "duplicates": "node scripts/find_duplicate_candidates.mjs",
+    "clean:catalog": "node scripts/clean_catalog.mjs",
     "audit:gundam-series": "node scripts/audit_gundam_series.mjs",
     "check:sources": "node scripts/check_source_health.mjs",
     "split": "node scripts/split_catalog.mjs",

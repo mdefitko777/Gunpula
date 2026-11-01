@@ -16,6 +16,8 @@ const EXCLUDED_TITLE_PATTERNS = [
   /エフェクトパーツ/,
   /マーキングシール/,
   /LEDユニット/,
+  // Gundam Base builders parts sold without the ビルダーズパーツ label.
+  /[MＭ][SＳ](?:エフェクト|スパイク|バーニア)/,
   /工具/,
   /塗料/,
 ];

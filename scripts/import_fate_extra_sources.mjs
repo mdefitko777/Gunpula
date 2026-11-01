@@ -27,6 +27,8 @@ import {
   parseKotobukiyaShopDetail,
   parseKotobukiyaShopListings,
 } from "./lib/kotobukiya-shop.mjs";
+import { KIT_ALIASES_PATH, nonCollectibleReason, retiredKitIds } from "./lib/catalog-cleanup.mjs";
+import { gradeForProduct, scaleFor } from "./lib/fate-grades.mjs";
 
 const CATALOG_PATH = "data/kits.json";
 const REQUEST_DELAY_MS = Number(process.env.FATE_EXTRA_DELAY_MS || 150);
@@ -140,22 +142,6 @@ function isFateProduct(product) {
   return FATE_WORK_PATTERN.test(`${product.series || ""} ${product.name || ""}`);
 }
 
-// Mirrors the classification the Good Smile importer uses so items from
-// different vendors land in the same catalog categories.
-function gradeForProduct(product) {
-  const text = `${product.name || ""} ${product.line || ""} ${product.series || ""}`;
-  if (/ねんどろいど|ネンドロイド|Nendoroid/i.test(text)) return "NENDOROID";
-  if (/figma|アクションフィギュア|S\.H\.Figuarts|フィギュアーツ/i.test(text)) return "FATE_ACTION";
-  if (/ガシャポン|カプセル|ガチャ/i.test(text)) return "FATE_GASHAPON";
-  if (/一番くじ|プライズ|景品|ちびぐるみ|ぬいぐるみ/i.test(text)) return "FATE_PRIZE";
-  if (/1\/\d|スケール|フィギュア|Figure|POP UP PARADE|ARTFX|美少女/i.test(text)) return "FATE_SCALE";
-  return "FATE_GOODS";
-}
-
-function scaleFor(name) {
-  return /(1\/(?:3|4|6|7|8|10|12))/.exec(String(name || ""))?.[1] || "non-scale";
-}
-
 function workTitleFor(product) {
   const text = `${product.series || ""} ${product.name || ""}`;
   if (/Grand Order|FGO/i.test(text)) return "Fate/Grand Order";
@@ -228,6 +214,8 @@ function parseAniplexDetail(html) {
     release_date: release
       ? [release[1], release[2].padStart(2, "0"), release[3]?.padStart(2, "0")].filter(Boolean).join("-")
       : null,
+    // Figures listed under the character name alone ("Fate / Apocrypha ジャンヌ・ダルク").
+    is_figure: /塗装済み完成品|完成品フィギュア|スケールフィギュア|ノンスケールフィギュア/.test(html),
     images: (Array.isArray(structured?.image) ? structured.image : [structured?.image])
       .filter(Boolean)
       .map((url) => absolute(url, ANIPLEX_BASE)),
@@ -245,6 +233,8 @@ async function fetchAniplex() {
     const products = parseAniplexGrid(html);
     for (const product of products) {
       if (!isFateProduct(product)) continue;
+      // Tickets, Blu-ray, CDs, games, books, apparel … share the q=Fate grid.
+      if (nonCollectibleReason({ franchise: "fate", names: { ja: product.name } })) continue;
       if (!ANIPLEX_INCLUDE_GOODS && !ANIPLEX_FIGURE_PATTERN.test(product.name)) continue;
       byKey.set(product.key, product);
     }
@@ -252,11 +242,14 @@ async function fetchAniplex() {
   }
 
   // A detail failure downgrades the record rather than losing it.
+  // Pricier tiles get a detail fetch too: figures from Max Factory, MegaHouse,
+  // Kotobukiya … are often listed under the character name alone.
   for (const product of byKey.values()) {
-    if (!ANIPLEX_FIGURE_PATTERN.test(product.name)) continue;
+    if (!ANIPLEX_FIGURE_PATTERN.test(product.name) && !(product.price_jpy >= 10000)) continue;
     try {
       const detail = parseAniplexDetail(await fetchText(product.url));
       product.release_date = detail.release_date || product.release_date;
+      product.is_figure = detail.is_figure;
       product.series = detail.work_title || product.series;
       if (detail.images.length) {
         product.image = detail.images[0];
@@ -592,7 +585,14 @@ if (!imported.length) {
 }
 
 const catalog = JSON.parse(await readFile(CATALOG_PATH, "utf8"));
-const merged = mergeCatalog(catalog.kits, imported);
+// Ids clean_catalog.mjs dropped as cross-source duplicates or non-collectibles.
+let retired = new Set();
+try {
+  retired = retiredKitIds(JSON.parse(await readFile(KIT_ALIASES_PATH, "utf8")));
+} catch {
+  // No alias file yet.
+}
+const merged = mergeCatalog(catalog.kits, imported.filter((kit) => !retired.has(kit.kit_id)));
 await writeFile(CATALOG_PATH, `${JSON.stringify({ ...catalog, updated_at: today(), kits: merged }, null, 2)}\n`, "utf8");
 console.log(
   `Extra Fate sources — ${report.join(", ")}; catalog now ${merged.filter((kit) => kit.franchise === "fate").length} Fate records.`,

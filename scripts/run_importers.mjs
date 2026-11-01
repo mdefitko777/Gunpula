@@ -32,6 +32,9 @@ const STEPS = [
   { script: "import:pb:wayback", kind: "source" },
   { script: "import:announcements", kind: "source" },
   { script: "cache:bbx-images", kind: "source" },
+  // After every importer: drops non-collectibles and duplicate sale pages,
+  // fixes GUNDAM_MERCH grades, records dropped ids in data/kit-aliases.json.
+  { script: "clean:catalog", kind: "derive" },
   { script: "relink:images", kind: "derive" },
   { script: "localize", kind: "derive" },
   { script: "check:sources", kind: "required" },
