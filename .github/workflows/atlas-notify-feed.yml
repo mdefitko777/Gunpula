@@ -1,0 +1,116 @@
+name: Atlas - Notify feed
+
+# Hobby Atlas: rebuilds data/atlas/notify-feed.json, every catalog change worth a phone
+# notification per date (new items, price / release / limited / source changes) with no
+# item cap. data/update-feed-lite.json keeps only 20 per date, so busy days lost PB, SEED/00
+# and liked-kit changes. The builder diffs consecutive git versions of data/kits.json (only
+# the commits it has not seen yet) and merges data/update-feed.json. No network requests.
+# Commits only data/atlas/notify-feed.json.
+
+on:
+  # Right after a workflow that rewrites data/kits.json + data/split has pushed
+  workflow_run:
+    workflows: ["Refresh official catalog", "Refresh important images"]
+    types: [completed]
+  # Fallback if a workflow_run event is missed
+  schedule:
+    - cron: "50 21 * * *" # 21:50 UTC (06:50 KST)
+  workflow_dispatch:
+    inputs:
+      rebuild:
+        description: "Ignore the previous file and diff the whole window again"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atlas-notify-feed
+  cancel-in-progress: false
+
+jobs:
+  notify-feed:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      # Full commit history (the builder walks git log -- data/kits.json), but only the blobs
+      # of the paths below are checked out: sparse checkout makes this a blob:none partial
+      # clone, and older kits.json versions are fetched on demand (one or two per day).
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+          sparse-checkout: |
+            data
+            scripts
+            .github
+          sparse-checkout-cone-mode: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Self-test
+        run: node scripts/atlas/test_notify_feed.mjs
+
+      - name: Build notify feed
+        run: |
+          extra=""
+          if [ "${{ github.event.inputs.rebuild }}" = "true" ]; then extra="--rebuild"; fi
+          node scripts/atlas/build_notify_feed.mjs $extra --report="$RUNNER_TEMP/notify-feed-report.json"
+
+      - name: Summarise
+        if: always()
+        run: |
+          node -e '
+            const fs = require("fs");
+            const f = process.env.RUNNER_TEMP + "/notify-feed-report.json";
+            if (!fs.existsSync(f)) process.exit(0);
+            const r = JSON.parse(fs.readFileSync(f, "utf8"));
+            const out = ["## Atlas notify feed", "", `${r.changed ? "changed" : "unchanged"}: ${r.entries} dates, ${r.items} items, ${r.bytes} bytes; ${r.new_pairs} new kits.json diffs; git ${r.git} ${r.git_note || ""}`];
+            if (r.newest) out.push(`Newest ${r.newest.date}: ${r.newest.added} new (of ${r.newest.added_count}) + ${r.newest.changed} changes`);
+            if (r.incomplete.length) out.push("Incomplete dates (feed cap, no git diff): " + r.incomplete.join(", "));
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, out.join("\n\n") + "\n");
+          '
+
+      - name: Validate JSON
+        run: |
+          node -e '
+            const d = JSON.parse(require("fs").readFileSync("data/atlas/notify-feed.json", "utf8"));
+            const m = JSON.parse(require("fs").readFileSync("data/split/manifest.json", "utf8"));
+            const e = d.entries || [];
+            const bad = d.schema !== 1 || !Array.isArray(d.sources) || !e.length || d.updated_at !== m.updated_at || d.total !== m.total
+              || e[0].date !== m.updated_at || e[0].total_after !== m.total
+              || e.some((x) => ![...x.added, ...x.changed].every((i) => i.kit_id && i.change_type && Array.isArray(i.change_reasons)));
+            if (bad) { console.error("bad data/atlas/notify-feed.json", d.updated_at, d.total, m.updated_at, m.total); process.exit(1); }
+          '
+
+      - name: Commit updated notify feed
+        run: |
+          if [ -z "$(git status --porcelain -- data/atlas/notify-feed.json)" ]; then
+            echo "No notify feed changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- data/atlas/notify-feed.json
+          git commit -m "Update Atlas notify feed"
+          branch="${{ github.event.repository.default_branch }}"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin "$branch"
+            if git rebase -X theirs "origin/$branch"; then
+              if git push origin "HEAD:$branch"; then
+                echo "Pushed on attempt $attempt."
+                exit 0
+              fi
+              echo "Push rejected (remote moved); retrying..."
+            else
+              echo "Rebase conflict; aborting and retrying against latest remote..."
+              git rebase --abort || true
+            fi
+            sleep $(( (RANDOM % 10) + 5 ))
+          done
+          echo "Could not push after 5 attempts."
+          exit 1
