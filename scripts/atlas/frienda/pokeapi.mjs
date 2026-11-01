@@ -22,6 +22,19 @@ export const POKEAPI_SOURCE = {
 
 const LANG = { ja_hrkt: 1, ko: 3, zh_hant: 4, en: 9, ja: 11 };
 const REGION = { アローラ: "alola", ガラル: "galar", ヒスイ: "hisui", パルデア: "paldea" };
+// PokeAPI 에 ko / zh_hant 폼 이름이 없는 지방 폼(パルデア · ヒスイ 등)에 붙일 공식 표기
+const REGION_FORM = {
+  alola: { ko: "알로라의 모습", zh_hant: "阿羅拉的樣子" },
+  galar: { ko: "가라르의 모습", zh_hant: "伽勒爾的樣子" },
+  hisui: { ko: "히스이의 모습", zh_hant: "洗翠的樣子" },
+  paldea: { ko: "팔데아의 모습", zh_hant: "帕底亞的樣子" },
+};
+// 폼이 아닌 수식어(variant) 번역. 모르는 수식어는 기본 이름 그대로 두고 variant 필드에만 남긴다.
+const VARIANT_NAMES = {
+  黒い: { en: "Black", ko: "검은", zh_hant: "黑色" },
+  白い: { en: "White", ko: "하얀", zh_hant: "白色" },
+  キャプテン: { en: "Captain", ko: "캡틴", zh_hant: "隊長" },
+};
 
 export const nfkc = (s) => String(s ?? "").normalize("NFKC");
 const norm = (s) => nfkc(s).replace(/[\s・·.．:：]/g, "");
@@ -184,8 +197,8 @@ export async function loadPokeApi() {
     return t;
   }
 
-  /** en/ko/zh_hant 이름. 폼이 있으면 PokeAPI 폼 이름을 붙인다. */
-  function namesFor(dex, pokemonId) {
+  /** en/ko/zh_hant 이름. 폼이 있으면 PokeAPI 폼 이름을, 아는 수식어(黒い 등)면 번역을 붙인다. */
+  function namesFor(dex, pokemonId, variant) {
     const sp = species.get(dex) || {};
     const f = pokemonId && pokemonId !== defaultPokemon.get(dex)
       ? (formsOfSpecies.get(dex) || []).find((x) => x.pokemon_id === pokemonId && x.form_identifier)
@@ -198,7 +211,10 @@ export async function loadPokeApi() {
       if (lang === "en" && fn?.pokemon) out[lang] = fn.pokemon;
       else if (fn?.form && norm(fn.form).includes(norm(base))) out[lang] = fn.form;
       else if (fn?.form) out[lang] = `${base} (${fn.form})`;
+      else if (f && lang !== "en" && REGION_FORM[f.form_identifier.split("-")[0]]) out[lang] = `${base} (${REGION_FORM[f.form_identifier.split("-")[0]][lang]})`;
       else out[lang] = base;
+      const v = VARIANT_NAMES[String(variant || "").trim()];
+      if (v) out[lang] = lang === "zh_hant" ? `${v[lang]}${out[lang]}` : `${v[lang]} ${out[lang]}`;
     }
     return out;
   }

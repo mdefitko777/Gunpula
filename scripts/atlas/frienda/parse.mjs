@@ -5,7 +5,7 @@
 //                      ★2・★3 / パラレルアートピック / いろちがいのポケモン) 아래 <li class="grid__item …">
 //   /new/wonder/       ワンダーピック (#specialfriendapick, 이미지 이름이 3-2-W01 처럼 탄 코드를 품음)
 //   /new/special/      スペシャルフレンダピック (#specialfriendapick, 이미지 이름 p001 … p130)
-//   /event/            이벤트 목록 → 레거시픽 이벤트 페이지 (/event/eXXXXl/)
+//   /event/            이벤트 목록 → 레거시픽 이벤트 페이지 (/event/eXXXXl/), 프로모 캠페인 페이지
 // 마크업은 탄마다 줄바꿈이 달라서 모두 공백에 관대하게 읽는다.
 
 export const SITE = "https://pokemonfrienda.com/";
@@ -114,7 +114,7 @@ const GROUPS = [
  */
 export function parseSetPage(html, pageUrl) {
   const label = decode(html.match(/<title>\s*【([^】]+)】/)?.[1] || "");
-  const out = { label, picks: [], asset_dates: {}, start_from_assets: null, end_date: null, launch_text: [], pickups: [], pamphlet: null };
+  const out = { label, picks: [], asset_dates: {}, start_from_assets: null, end_date: null, launch_text: [], pickups: [], recommend: [], introduces: [], pamphlet: null };
 
   const sec = section(html, "friendapick");
   if (sec) {
@@ -150,15 +150,30 @@ export function parseSetPage(html, pageUrl) {
     const title = decode(item.match(/<h3\b[^>]*>([\s\S]*?)<\/h3>/i)?.[1] || "");
     const text = [...item.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)].map((x) => decode(x[1])).join(" ");
     const imgSrc = item.match(/srcset="([^",\s]+)/i)?.[1] || item.match(/<img\b[^>]*src="([^"]+)"/i)?.[1] || null;
+    const href = item.match(/<a\b[^>]*href="([^"#][^"]*)"/i)?.[1] || null;
     const date = text.match(/(\d{1,2})月(\d{1,2})日（.）(?:から|より)/) || title.match(/(\d{1,2})月(\d{1,2})日（.）(?:から|より)/);
     out.pickups.push({
       title,
       text,
       img: imgSrc ? abs(imgSrc, pageUrl) : null,
+      href: href && !/^javascript:/i.test(href) ? abs(href, pageUrl) : null,
       month: date ? Number(date[1]) : null,
       day: date ? Number(date[2]) : null,
       names: [...new Set([...`${title} ${text}`.matchAll(/「([^」]+)」/g)].map((x) => x[1]))],
     });
+  }
+  // 注目のフレンダピック: 픽 메커닉(テラスタル · Zワザ · メガシンカ · ダイマックス …) 설명
+  const rec = section(html, "recommend") || "";
+  for (const item of rec.split(/<div class="contents__item"/i).slice(1)) {
+    const title = decode(item.match(/<h3\b[^>]*>([\s\S]*?)<\/h3>/i)?.[1] || "");
+    const text = [...item.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)].map((x) => decode(x[1])).join(" ");
+    out.recommend.push({ title, text });
+  }
+  // 「…ピック」新登場 / 初登場 문장 (메커닉이 처음 나온 탄). ピックアップ 에는 지난 탄 공지가 남아 있기도
+  // 해서 빌더는 가장 이른 탄을 쓴다.
+  for (const sent of decode(`${rec} ${pk}`).split(/(?<=[！!。])/)) {
+    if (!/新登場|初登場/.test(sent)) continue;
+    for (const k of mechanicsIn(sent)) if (!out.introduces.includes(k)) out.introduces.push(k);
   }
   const pdf = html.match(/href="([^"]+PMFR_BOOK[^"]*\.pdf)"/i)?.[1];
   if (pdf) out.pamphlet = abs(pdf, pageUrl);
@@ -185,7 +200,8 @@ export function parseEventIndex(html, baseUrl) {
 /** 레거시픽 이벤트 페이지: { title, set_label, start_date, picks[{ name, img }] } */
 export function parseLegacyEvent(html, pageUrl) {
   const title = decode(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || "");
-  const set_label = title.match(/((?:ベストタッグ|エクストレジャー)?\d+だん)/)?.[1] || null;
+  // 시리즈 이름은 바뀌므로(1~5だん → ベストタッグ → エクストレジャー → …) 「…Nだん」 토큰을 통째로 잡는다.
+  const set_label = title.match(/([^\s「」『』、。！]*?\d+だん)/)?.[1] || null;
   const flat = decode(html);
   const start = flat.match(/開催期間\s*(20\d\d)年(\d{1,2})月(\d{1,2})日/);
   const picks = [];
@@ -194,4 +210,135 @@ export function parseLegacyEvent(html, pageUrl) {
     if (name) picks.push({ name, img: abs(m[1], pageUrl) });
   }
   return { title, set_label, start_date: start ? ymd(start[1], start[2], start[3]) : null, picks, dates: fullDates(flat) };
+}
+
+// ---------------------------------------------------------------- 프로모 캠페인
+
+export const ENDED_RE = /このイベント・キャンペーンは終了/;
+
+/**
+ * 프로모 캠페인 이벤트 페이지 (/event/eXXXX/): { title, start_date, ended, mentions[{ kind_ja, name }] }
+ * mentions 는 「…ピック」 바로 뒤의 「이름」 만 읽는다 (장식 문구 속 포켓몬 이름은 무시).
+ */
+export function parseCampaign(html, pageUrl) {
+  const title = decode(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || "");
+  const i = html.indexOf("<main");
+  const j = html.indexOf("</main>");
+  const body = i >= 0 ? html.slice(i, j > i ? j : undefined) : html;
+  const flat = decode(body.replace(/<img\b[^>]*>/gi, " "));
+  const start = flat.match(/(?:実施日|開催期間|配布期間|実施期間|応募期間|配布日)\s*[:：]?\s*(20\d\d)年\s*(\d{1,2})月\s*(\d{1,2})日/) || flat.match(/(20\d\d)年\s*(\d{1,2})月\s*(\d{1,2})日/);
+  const mentions = [];
+  const seen = new Set();
+  const push = (kind_ja, name) => {
+    const key = name.normalize("NFKC");
+    if (seen.has(key)) return;
+    seen.add(key);
+    mentions.push({ kind_ja, name });
+  };
+  for (const src of [title, flat]) {
+    for (const m of src.matchAll(/([^\s「」『』、。！!？?]*ピック)[^「」『』。！!]{0,10}?「([^」]+)」((?:\s*(?:か|と|、|・|や)\s*「[^」]+」)*)/g)) {
+      push(m[1], m[2]);
+      // 「ホウオウ」か「ルギア」 처럼 이어진 이름
+      for (const x of m[3].matchAll(/「([^」]+)」/g)) push(m[1], x[1]);
+    }
+  }
+  // 날짜가 본문에 없으면 이벤트 id(eYYMMDD…)의 날짜를 쓰고 date_src 로 표시한다
+  let start_date = start ? ymd(start[1], start[2], start[3]) : null;
+  let date_src = start ? "official-text" : null;
+  const idm = pageUrl.match(/\/event\/e(\d{2})(\d{2})(\d{2})/);
+  if (!start_date && idm && Number(idm[2]) >= 1 && Number(idm[2]) <= 12 && Number(idm[3]) >= 1 && Number(idm[3]) <= 31) {
+    start_date = ymd(2000 + Number(idm[1]), Number(idm[2]), Number(idm[3]));
+    date_src = "event-id";
+  }
+  return { title, start_date, date_src, ended: ENDED_RE.test(flat), mentions };
+}
+
+// ---------------------------------------------------------------- 픽 메커닉
+
+/** 공식 문구의 픽 메커닉. 키가 데이터의 mechanic 값이다. */
+export const MECHANICS = {
+  tera: { ja: "テラスタルピック", en: "Terastal pick", ko: "테라스탈 픽" },
+  zmove: { ja: "Zワザピック", en: "Z-Move pick", ko: "Z기술 픽" },
+  mega: { ja: "メガシンカピック", en: "Mega Evolution pick", ko: "메가진화 픽" },
+  dynamax: { ja: "ダイマックスピック", en: "Dynamax pick", ko: "다이맥스 픽" },
+  gmax: { ja: "キョダイマックスできるピック", en: "Gigantamax pick", ko: "거다이맥스 픽" },
+  tag: { ja: "タッグわざピック", en: "Tag Move pick (two Pokémon on one pick)", ko: "태그 기술 픽" },
+};
+const MECH_RE = [[/キョダイマックス/g, "gmax"], [/ダイマックス/g, "dynamax"], [/メガシンカ/g, "mega"], [/Z\s*ワザ/g, "zmove"], [/テラスタル/g, "tera"], [/タッグわざ/g, "tag"]];
+
+/** 문자열 속 메커닉 키워드 (キョダイマックス 를 먼저 지워 ダイマックス 와 겹치지 않게) */
+export function mechanicsIn(raw) {
+  let t = String(raw).normalize("NFKC");
+  const out = [];
+  for (const [re, k] of MECH_RE) {
+    if (t.match(re)) {
+      out.push(k);
+      t = t.replace(re, "");
+    }
+  }
+  return out;
+}
+
+export const TERA_TYPES = { ノーマル: "normal", ほのお: "fire", みず: "water", くさ: "grass", でんき: "electric", こおり: "ice", かくとう: "fighting", どく: "poison", じめん: "ground", ひこう: "flying", エスパー: "psychic", むし: "bug", いわ: "rock", ゴースト: "ghost", ドラゴン: "dragon", あく: "dark", はがね: "steel", フェアリー: "fairy", ステラ: "stellar" };
+const QUAL_RE = /[（(]([^（()）]*?)(テラスタル|キョダイマックス|ダイマックス)[)）]/;
+
+/** 「サーナイト（フェアリーテラスタル）」 → { name: "サーナイト", mechanic: "tera", tera: "fairy" } */
+export function splitQualifier(name) {
+  const q = String(name).normalize("NFKC").match(QUAL_RE);
+  if (!q) return { name: String(name).normalize("NFKC") };
+  const mechanic = q[2] === "テラスタル" ? "tera" : q[2] === "キョダイマックス" ? "gmax" : "dynamax";
+  return { name: String(name).normalize("NFKC").replace(q[0], "").trim(), mechanic, tera: mechanic === "tera" ? TERA_TYPES[q[1]] || null : null };
+}
+
+/**
+ * 공지 문구(제목 + 본문)에서 「이름」 별 메커닉을 읽는다. 반환: [{ name, mechanic?, tera? }] (등장 순서)
+ *   1. 이름 안 수식어: 「カビゴン（ステラテラスタル）」, 괄호 없는 モジャンボ（ダイマックス）
+ *   2. 이름 바로 앞 키워드: キョダイマックスできる「ゲンガー」、メガシンカピック「シャンデラ」
+ *   3. 문장 단위: 키워드가 한 종류뿐인 문장의 이름들. 이름이 없는 문장(「この3枚はどれもテラスタル…」)은
+ *      바로 앞 문장의 이름에, 앞 문장이 없으면(제목) 다음 이름 문장에 적용한다.
+ */
+export function mechanicMentions(raw) {
+  const text = String(raw).normalize("NFKC");
+  const out = new Map();
+  const put = (rawName, mech, strong) => {
+    const q = splitQualifier(rawName);
+    let m = out.get(q.name);
+    if (!m) out.set(q.name, (m = { name: q.name }));
+    if (q.mechanic) {
+      m.mechanic = q.mechanic;
+      m.strong = true;
+    } else if (mech && (!m.mechanic || (strong && !m.strong))) {
+      m.mechanic = mech;
+      if (strong) m.strong = true;
+    }
+    if (q.tera) m.tera = q.tera;
+  };
+  // 1b. 「」 밖의 이름 + 수식어
+  for (const m of text.replace(/「[^」]*」/g, " ").matchAll(/([ァ-ヶー]{2,})[（(]([^（()）]*?)(テラスタル|キョダイマックス|ダイマックス)[)）]/g)) put(`${m[1]}（${m[2]}${m[3]}）`);
+  let lastNames = [];
+  let pending = null;
+  for (const sent of text.split(/(?<=[！!。])/)) {
+    const names = [];
+    const re = /「([^」]+)」/g;
+    let m;
+    let from = 0;
+    while ((m = re.exec(sent))) {
+      const before = sent.slice(Math.max(from, m.index - 24), m.index);
+      from = m.index + m[0].length;
+      const direct = mechanicsIn(before).at(-1) || null;
+      put(m[1], direct, Boolean(direct));
+      names.push(splitQualifier(m[1]).name);
+    }
+    const kws = mechanicsIn(sent.replace(/「[^」]*」/g, ""));
+    if (names.length) {
+      const k = kws.length === 1 ? kws[0] : !kws.length && pending ? pending : null;
+      if (k) for (const n of names) put(n, k);
+      lastNames = names;
+      pending = null;
+    } else if (kws.length === 1) {
+      if (lastNames.length) for (const n of lastNames) put(n, kws[0]);
+      else pending = kws[0];
+    }
+  }
+  return [...out.values()].map(({ strong, ...m }) => m);
 }

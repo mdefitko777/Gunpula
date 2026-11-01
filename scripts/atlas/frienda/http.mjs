@@ -1,11 +1,14 @@
 // Hobby Atlas — ポケモンフレンダ 데이터용 예의 바른 HTTP 클라이언트.
 //
 // - 연락처가 들어간 User-Agent 하나만 쓴다. 브라우저 흉내는 하지 않는다.
-// - 호스트마다 MIN_GAP_MS(기본 1.1 초)에 한 번만 요청한다.
+// - 호스트마다 MIN_GAP_MS(기본 1.1 초)에 한 번만 요청한다. 마지막 요청 시각을 캐시 폴더의
+//   .throttle/<host> 에도 적어서, 같은 캐시를 쓰는 다른 프로세스와 동시에 돌아도 간격을 지킨다.
 // - 응답 원문은 ATLAS_CACHE_DIR 에 저장한다(커밋하지 않음). 신선한 캐시는 요청하지 않고,
 //   요청이 실패하면 오래된 캐시라도 쓴다.
-// - 봇 차단(403/429/503/511, Cloudflare "Just a moment", challenge 페이지)은 "blocked" 로
-//   기록하고, 헤더를 바꿔 다시 시도하지 않는다.
+// - 봇 차단(Cloudflare challenge 헤더 · 페이지, 429/503/511, 같은 호스트의 403 이 3 번)은 "blocked" 로
+//   기록하고, 헤더를 바꿔 다시 시도하지 않는다. 한 번의 평범한 403(예: 디렉터리 목록 금지)은
+//   그 URL 만 실패시킨다.
+// - opts.isFinal(text) 가 참인 캐시(끝난 이벤트 페이지)는 나이와 상관없이 다시 받지 않는다.
 
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
@@ -19,6 +22,7 @@ export const CACHE_DIR = path.resolve(process.env.ATLAS_CACHE_DIR || "tmp/atlas-
 export const OFFLINE = process.env.ATLAS_OFFLINE === "1";
 
 const lastHit = new Map(); // host -> 마지막 요청 시각
+const THROTTLE_DIR = path.join(CACHE_DIR, ".throttle");
 const hostLog = new Map(); // host -> { requests, cached, stale, errors, blocked, last_error }
 
 export class BlockedError extends Error {
@@ -32,7 +36,7 @@ export class BlockedError extends Error {
 }
 
 function log(host) {
-  if (!hostLog.has(host)) hostLog.set(host, { requests: 0, cached: 0, stale: 0, errors: 0, not_found: 0, blocked: false, last_error: null });
+  if (!hostLog.has(host)) hostLog.set(host, { requests: 0, cached: 0, stale: 0, errors: 0, not_found: 0, forbidden: 0, blocked: false, last_error: null });
   return hostLog.get(host);
 }
 
@@ -43,9 +47,28 @@ export const isBlocked = (host) => Boolean(hostLog.get(host)?.blocked);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function throttle(host) {
-  const wait = (lastHit.get(host) || 0) + MIN_GAP_MS - Date.now();
+  const file = path.join(THROTTLE_DIR, host);
+  let last = lastHit.get(host) || 0;
+  try {
+    last = Math.max(last, Number(await readFile(file, "utf8")) || 0);
+  } catch {
+    // 처음이거나 읽을 수 없으면 이 프로세스의 기록만 쓴다.
+  }
+  const wait = last + MIN_GAP_MS - Date.now();
   if (wait > 0) await sleep(wait);
-  lastHit.set(host, Date.now());
+  await markHit(host);
+}
+
+// 요청 시작과 응답 끝 모두에 기록한다: 간격을 앞 응답이 끝난 때부터 재서 초당 1 회를 넘지 않게.
+async function markHit(host) {
+  const now = Date.now();
+  lastHit.set(host, now);
+  try {
+    await mkdir(THROTTLE_DIR, { recursive: true });
+    await writeFile(path.join(THROTTLE_DIR, host), String(now));
+  } catch {
+    // 기록 실패는 무시 (프로세스 안의 간격은 그대로 지킨다)
+  }
 }
 
 function cacheFile(method, url, body) {
@@ -71,11 +94,19 @@ async function writeCache(file, meta, body) {
   await writeFile(`${file}.meta.json`, JSON.stringify(meta));
 }
 
-const CHALLENGE_RE = /Just a moment\.\.\.|cf-chl-|challenge-platform|cf_chl_opt|Attention Required! \| Cloudflare|captcha/i;
+// 오류 응답 본문에서만 보는 challenge 표시. 정상(2xx) 페이지는 <title> 만 본다:
+// 평범한 페이지에도 "captcha" 문구나 Cloudflare 스크립트가 들어 있을 수 있어서.
+const CHALLENGE_RE = /Just a moment\.\.\.|cf-chl-|cf_chl_opt|\/cdn-cgi\/challenge-platform\/h\/|Attention Required! \| Cloudflare|g-recaptcha|h-captcha|captcha-delivery/i;
+const CHALLENGE_TITLE_RE = /<title>\s*(?:Just a moment\.\.\.|Attention Required! \| Cloudflare)/i;
 
-function detectBlock(status, text) {
-  if ([403, 429, 503, 511].includes(status)) return `HTTP ${status}`;
-  if (status < 400 && text && text.length < 200000 && CHALLENGE_RE.test(text.slice(0, 20000))) return "challenge page";
+function detectBlock(res, text, L) {
+  const status = res.status;
+  if (res.headers.get("cf-mitigated") === "challenge") return `Cloudflare challenge (HTTP ${status})`;
+  const head = (text || "").slice(0, 20000);
+  if (status >= 400 && CHALLENGE_RE.test(head)) return `challenge page (HTTP ${status})`;
+  if (status < 400 && CHALLENGE_TITLE_RE.test(head)) return "challenge page";
+  if ([429, 503, 511].includes(status)) return `HTTP ${status}`;
+  if (status === 403 && ++L.forbidden >= 3) return "HTTP 403 (3 times on this host)";
   return null;
 }
 
@@ -97,7 +128,8 @@ export async function politeFetch(url, opts = {}) {
   const L = log(host);
   const file = cacheFile(method, url, body);
   const cached = await readCache(file);
-  if (cached && (OFFLINE || Date.now() - Date.parse(cached.meta.fetchedAt) < maxAgeMs)) return fromCache(L, cached, false);
+  const fresh = cached && (OFFLINE || Date.now() - Date.parse(cached.meta.fetchedAt) < maxAgeMs || (opts.isFinal && cached.meta.status < 400 && opts.isFinal(cached.body.toString("utf8"))));
+  if (fresh) return fromCache(L, cached, false);
   if (OFFLINE) throw new Error(`offline and no cache for ${url}`);
   if (L.blocked) {
     // 이번 실행에서 이미 막힌 호스트는 더 두드리지 않는다.
@@ -124,7 +156,7 @@ export async function politeFetch(url, opts = {}) {
       });
       const buf = Buffer.from(await res.arrayBuffer());
       const text = buf.toString("utf8");
-      const block = res.headers.get("cf-mitigated") === "challenge" ? `Cloudflare challenge (HTTP ${res.status})` : detectBlock(res.status, text);
+      const block = detectBlock(res, text, L);
       if (block) {
         L.blocked = true;
         L.last_error = `${block} ${url}`;
@@ -154,6 +186,7 @@ export async function politeFetch(url, opts = {}) {
       await sleep(2000 * (attempt + 1));
     } finally {
       clearTimeout(timer);
+      await markHit(host);
     }
   }
   if (cached) return fromCache(L, cached, true);

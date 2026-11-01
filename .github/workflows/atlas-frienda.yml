@@ -2,9 +2,13 @@ name: Atlas - Pokémon Frienda data
 
 # Hobby Atlas: rebuilds data/atlas/pokemon-frienda.json (ポケモンフレンダ, the Japanese successor of
 # Pokémon MEZASTAR) from the official site pokemonfrienda.com (set pages, ワンダーピック,
-# スペシャルフレンダピック, レガシーピック event pages) and the PokeAPI CSVs. Polite crawler
-# (descriptive User-Agent, >= 1.1 s between requests per host, raw responses cached outside the
-# repo). If the official site fails or blocks the bot the previous file is kept unchanged.
+# スペシャルフレンダピック, レガシーピック and promo campaign event pages) and the PokeAPI CSVs.
+# Polite crawler (descriptive User-Agent, >= 1.1 s from the end of one response to the next request
+# per host, raw responses cached outside the repo, ended event pages never re-fetched). If the
+# official site fails or blocks the bot the previous file is kept unchanged; if one page or list
+# fails, the previous data for that set / series is kept and the anomaly is shown in the summary.
+# Image URLs are NOT written: the site terms ask other sites not to hotlink. To opt in after
+# deciding that is acceptable, add ATLAS_FRIENDA_IMAGES: "1" to the build step's env.
 # Commits only data/atlas/pokemon-frienda.json, and only when its content changed.
 
 on:
@@ -55,7 +59,7 @@ jobs:
             if (r.kept_previous) out.push("", "Official site unavailable; previous file kept. " + (r.error || ""));
             const m = r.metrics;
             if (m) {
-              out.push("", `Latest: ${m.latest?.names?.ja} (${m.latest?.release_date} → ${m.latest?.end_date})`, `Picks ${m.picks} ${JSON.stringify(m.by_kind)}; dex ${m.dex_resolved}; names ${JSON.stringify(m.names)}; images ${m.images}; ${m.bytes} bytes (gzip ${m.gzip})`, "");
+              out.push("", `Latest: ${m.latest?.names?.ja} (${m.latest?.release_date} → ${m.latest?.end_date}; next expected ${m.latest?.next_set_expected})`, `Picks ${m.picks} ${JSON.stringify(m.by_kind)}; mechanics ${JSON.stringify(m.by_mechanic)}; campaigns ${(m.campaigns || []).length}; dex ${m.dex_resolved}; names ${JSON.stringify(m.names)}; images ${m.images}; ${m.bytes} bytes (gzip ${m.gzip})`, "");
               for (const s of m.sets) out.push(`- ${s.id} ${s.ja}: ${s.release_date || "?"} → ${s.end_date || "?"} ${JSON.stringify(s.counts)}`);
             }
             if (r.anomalies?.length) { out.push("", "### Anomalies"); for (const a of r.anomalies) out.push(`- ${a.where}: ${a.msg}`); }
@@ -69,7 +73,9 @@ jobs:
             const d = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"));
             const ok = d.schema === 1 && d.game === "frienda" && Array.isArray(d.sources) && Array.isArray(d.sets) && d.sets.length
               && Array.isArray(d.picks) && d.picks.length && d.picks.every((p) => p.id.startsWith("frienda:"))
-              && new Set(d.picks.map((p) => p.id)).size === d.picks.length;
+              && new Set(d.picks.map((p) => p.id)).size === d.picks.length
+              && d.picks.filter((p) => p.kind === "wonder").every((p) => p.from_set && p.dex)
+              && (String(d.sources[0].images || "").startsWith("included") || d.picks.every((p) => !p.img && !p.thumb));
             if (!ok) { console.error("bad", process.argv[1]); process.exit(1); }
           ' "$f"
 
