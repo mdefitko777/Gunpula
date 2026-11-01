@@ -1,0 +1,112 @@
+name: Atlas - Pokémon MEZASTAR data
+
+# Hobby Atlas: rebuilds data/atlas/mezastar-intl.json (KR / TC / EN printings) and
+# data/atlas/mezastar-jp.json (frozen JP edition) from the official sites, Bulbapedia,
+# PokeAPI and the vendored mezastar-dex stats. Polite crawler (descriptive User-Agent,
+# >= 1.1 s between requests per host, raw responses cached outside the repo). A host that
+# fails or blocks the bot never wipes data: the previous file's values are carried over and
+# the source is marked in "sources". Commits only data/atlas/mezastar-*.
+
+on:
+  schedule:
+    - cron: "35 3 * * 1" # Mondays 03:35 UTC (12:35 KST)
+  workflow_dispatch:
+    inputs:
+      edition:
+        description: "Edition to rebuild"
+        type: choice
+        options: [all, intl, jp]
+        default: all
+      kr_popups:
+        description: "KR front/back popups: new = only tags not seen before"
+        type: choice
+        options: [new, all, none]
+        default: new
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atlas-mezastar
+  cancel-in-progress: false
+
+jobs:
+  mezastar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Raw-response cache between runs (keeps the request count low; never committed).
+      - uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/atlas-cache/mezastar
+          key: atlas-mezastar-${{ github.run_id }}
+          restore-keys: atlas-mezastar-
+
+      - name: Build MEZASTAR datasets
+        timeout-minutes: 15
+        env:
+          ATLAS_CACHE_DIR: ${{ runner.temp }}/atlas-cache/mezastar
+        run: |
+          node scripts/atlas/mezastar/build.mjs \
+            --edition="${{ github.event.inputs.edition || 'all' }}" \
+            --kr-popups="${{ github.event.inputs.kr_popups || 'new' }}" \
+            --report="$RUNNER_TEMP/mezastar-report.json"
+
+      - name: Summarise
+        if: always()
+        run: |
+          node -e '
+            const fs = require("fs");
+            const f = process.env.RUNNER_TEMP + "/mezastar-report.json";
+            if (!fs.existsSync(f)) process.exit(0);
+            const r = JSON.parse(fs.readFileSync(f, "utf8"));
+            const out = ["## MEZASTAR data", "", "Blocked hosts: " + (r.blocked_hosts.join(", ") || "none"), ""];
+            for (const [ed, e] of Object.entries(r.editions)) {
+              out.push(`### ${ed}: ${e.changed ? "changed" : "unchanged"}${e.kept_previous ? " (previous file kept)" : ""}, ${e.bytes ?? "?"} bytes (gzip ${e.gzip ?? "?"})`);
+              out.push("Sources: " + JSON.stringify(e.sources));
+              const m = e.metrics; if (!m) continue;
+              out.push(`Tags ${m.tags} ${JSON.stringify(m.by_kind)}; anomalies ${m.anomalies.total}; images ${JSON.stringify(m.images)}`);
+              for (const s of m.sets) out.push(`- ${s.id}: ${JSON.stringify(s.releases)} ${JSON.stringify(s.counts)}`);
+            }
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, out.join("\n") + "\n");
+          '
+
+      - name: Validate JSON
+        run: |
+          for f in data/atlas/mezastar-*.json; do
+            [ -f "$f" ] || continue
+            node -e 'const d=JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")); if(d.schema!==1||!Array.isArray(d.sets)||!Array.isArray(d.tags)||!d.tags.length||!Array.isArray(d.sources)) {console.error("bad", process.argv[1]); process.exit(1)}' "$f"
+          done
+
+      - name: Commit updated MEZASTAR data
+        run: |
+          if [ -z "$(git status --porcelain -- 'data/atlas/mezastar-*')" ]; then
+            echo "No MEZASTAR data changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- 'data/atlas/mezastar-*'
+          git commit -m "Update Atlas MEZASTAR data"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin "$GITHUB_REF_NAME"
+            if git rebase -X theirs "origin/$GITHUB_REF_NAME"; then
+              if git push origin "HEAD:$GITHUB_REF_NAME"; then
+                echo "Pushed on attempt $attempt."
+                exit 0
+              fi
+              echo "Push rejected (remote moved); retrying..."
+            else
+              echo "Rebase conflict; aborting and retrying against latest remote..."
+              git rebase --abort || true
+            fi
+            sleep $(( (RANDOM % 10) + 5 ))
+          done
+          echo "Could not push after 5 attempts."
+          exit 1
