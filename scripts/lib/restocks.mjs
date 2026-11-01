@@ -85,7 +85,9 @@ function isTamashiiKit(kit) {
  * Shipping month of a Premium Bandai page that does not say it, from its item id: PB numbers
  * items in listing order, so the median shipping month of the ten nearest item ids that do say
  * it is the estimate (checked against 1,127 pages that say it: within 1 month for 80%, within 3
- * months for 95%). Null when the neighbours are too few or too far apart (> 6 months).
+ * months for 95%). Null when the neighbours are too few or too far apart (> 6 months);
+ * undefined for an item newer than every page that names a month (a current listing: the
+ * caller falls back to the day it was first seen).
  */
 export function pbShipEstimator(pages) {
   const points = Object.entries(pages || {})
@@ -96,6 +98,7 @@ export function pbShipEstimator(pages) {
     const match = /^pbandai-wb-(\d+)$/.exec(pageId || "");
     if (!match || points.length < 4) return null;
     const id = Number(match[1]);
+    if (id > points.at(-1)[0]) return undefined;
     let lo = 0;
     let hi = points.length;
     while (lo < hi) {
@@ -127,7 +130,10 @@ export function eventFromSalePage(pageId, page, keeper, estimate = null) {
   const tamashiiPage = /^tamashii-/.test(pageId) || page.source === "tamashii_web_jp";
   const kind = tags.lottery && !tags.resale ? "lottery" : tamashiiPage ? "tamashii_resale" : "pb_resale";
   const known = ship || monthOf(page.order_opens_at);
-  const date = known || estimate?.(pageId) || monthOf(page.first_seen);
+  // A page with no month of its own: estimated from its PB item id; the day it was first
+  // seen only for a page newer than every dated one (or when there is no estimator).
+  const estimated = known ? null : estimate?.(pageId);
+  const date = known || estimated || (estimated === undefined ? monthOf(page.first_seen) : null);
   if (!date) return null;
   // Without a month of its own, a page that ships no later than the product is not a resale.
   if (!known && original != null && monthIndex(date) <= original) return null;
