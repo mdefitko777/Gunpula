@@ -6,17 +6,23 @@
 //     uploaded there as non-free fair-use files). Article HTML is read from /wiki/ pages,
 //     which robots.txt allows (the /w/api.php endpoint is disallowed, so it is not used).
 //   - Atlas Academy static assets for the FGO chapter banners (official game assets).
+//   - Product-line covers (the "종류별 도감" cards: HG / MG / ROBOT魂 / MONCOLLE / BX …): the line's
+//     logo picked from the static HTML of the maker's own brand page, as listed in
+//     scripts/atlas/lib/line_covers.mjs. robots.txt of every page and image host is checked first;
+//     images are cropped / flattened / shrunk to <= 80 KB (Python + Pillow) and saved as
+//     line-<franchise>-<code>.png|jpg.
 // The image is downloaded once into app/assets/atlas/covers/ (served by GitHub Pages next to the
 // catalog images) so the app never hotlinks; data/atlas/atlas-covers.json records the local
 // path, the original image URL and the page it came from.
 //
 // Run by hand or weekly (`npm run atlas:covers`); existing files are not downloaded again
 // unless --refresh is passed. The daily data refresh only reads atlas-covers.json.
-import { existsSync, renameSync, rmSync, statSync } from "node:fs";
+import { copyFileSync, existsSync, renameSync, rmSync, statSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { politeFetch, USER_AGENT } from "./lib/http.mjs";
+import { politeFetch, throttle, USER_AGENT } from "./lib/http.mjs";
+import { LINE_COVER_SOURCES, lineFileStem, lineKind, lineSelector, OFFICIAL_LINE_HOSTS, parseRobots, pickLineImage, robotsAllows } from "./lib/line_covers.mjs";
 import { ATLAS_DATA, REPO_ROOT, readJson, today, writeCompactJson } from "./lib/util.mjs";
 
 const REFRESH = process.argv.includes("--refresh");
@@ -76,12 +82,9 @@ async function fateChapterSources() {
   return out;
 }
 
-const lastAt = new Map();
+// Same per-host clock as politeFetch, so page and image requests together stay >= 1.1 s apart.
 async function fetchBinary(url) {
-  const host = new URL(url).host;
-  const wait = (lastAt.get(host) || 0) + 1100 - Date.now();
-  if (wait > 0) await new Promise((r) => setTimeout(r, wait));
-  lastAt.set(host, Date.now());
+  await throttle(new URL(url).host);
   const res = await fetch(url, { headers: { "user-agent": USER_AGENT, accept: "image/*" }, redirect: "follow" });
   if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
   const type = res.headers.get("content-type") || "";
@@ -156,6 +159,138 @@ function optimise(file, bg) {
   return file;
 }
 
+// ─────────────── Product-line covers (scripts/atlas/lib/line_covers.mjs) ───────────────
+
+// robots.txt per origin, read once per run. 404/410 or an HTML "not found" page = no rules;
+// any other failure (403, 5xx, bot challenge) = treat the whole host as off limits.
+const robotsCache = new Map();
+async function robotsRules(origin) {
+  if (robotsCache.has(origin)) return robotsCache.get(origin);
+  let rules;
+  try {
+    await throttle(new URL(origin).host);
+    const res = await fetch(`${origin}/robots.txt`, { headers: { "user-agent": USER_AGENT, accept: "text/plain" }, redirect: "follow" });
+    const text = await res.text();
+    if (res.status === 404 || res.status === 410) rules = [];
+    else if (!res.ok) rules = null;
+    else rules = /^\s*</.test(text) ? [] : parseRobots(text);
+  } catch {
+    rules = null;
+  }
+  robotsCache.set(origin, rules);
+  return rules;
+}
+async function assertRobotsAllow(url) {
+  const u = new URL(url);
+  const rules = await robotsRules(u.origin);
+  if (rules === null) throw new Error(`robots.txt of ${u.host} could not be read; skipped`);
+  if (!robotsAllows(rules, `${u.pathname}${u.search}`)) throw new Error(`robots.txt of ${u.host} disallows ${u.pathname}`);
+}
+
+// Crop (optional), put transparent pixels on a solid background, cap the width at 640 px and keep
+// the file small: PNG for logos (palette PNG if needed), JPEG for key visuals or when PNG is too
+// big. A small JPEG that needs no change is kept byte for byte (prints KEEP).
+const LINE_MAX_BYTES = 80 * 1024;
+const PY_LINE = String.raw`
+import json, os, sys
+from PIL import Image
+src, stem, crop, bg, kind, limit = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], int(sys.argv[6])
+im = Image.open(src)
+fmt = im.format
+im.load()
+if fmt == "JPEG" and not crop and im.width <= 640 and os.path.getsize(src) <= limit:
+    print("KEEP")
+    sys.exit(0)
+if crop:
+    im = im.crop(tuple(json.loads(crop)))
+im = im.convert("RGBA")
+base = Image.new("RGBA", im.size, bg)
+base.alpha_composite(im)
+im = base.convert("RGB")
+if im.width > 640:
+    im = im.resize((640, round(im.height * 640 / im.width)), Image.LANCZOS)
+if kind == "logo" and fmt != "JPEG":
+    out = stem + ".png"
+    im.save(out, "PNG", optimize=True)
+    if os.path.getsize(out) <= limit:
+        print(out)
+        sys.exit(0)
+    im.quantize(256).save(out, "PNG", optimize=True)
+    if os.path.getsize(out) <= limit:
+        print(out)
+        sys.exit(0)
+    os.remove(out)
+out = stem + ".jpg"
+for q in (88, 82, 75, 68, 60):
+    im.save(out, "JPEG", quality=q, optimize=True, progressive=True)
+    if os.path.getsize(out) <= limit:
+        break
+print(out)
+`;
+// First interpreter that can import Pillow (on Windows "python3" may be a Store stub).
+let pillowPython;
+function pythonWithPillow() {
+  if (pillowPython === undefined) {
+    pillowPython = ["python3", "python"].find((py) => spawnSync(py, ["-I", "-c", "import PIL"], { encoding: "utf8" }).status === 0) || null;
+  }
+  return pillowPython;
+}
+
+function processLine(raw, stem, source) {
+  const args = [raw, stem, source.crop ? JSON.stringify(source.crop) : "", source.background || "#ffffff", lineKind(source), String(LINE_MAX_BYTES)];
+  const py = pythonWithPillow();
+  if (py) {
+    const res = spawnSync(py, ["-I", "-c", PY_LINE, ...args], { encoding: "utf8" });
+    if (res.status !== 0) throw new Error(`image processing failed: ${(res.stderr || res.error?.message || "").trim().split("\n").pop()}`);
+    const said = res.stdout.trim().split("\n").pop();
+    if (said === "KEEP") {
+      copyFileSync(raw, `${stem}.jpg`);
+      return `${stem}.jpg`;
+    }
+    return said;
+  }
+  // No Python + Pillow: only a small, uncropped PNG/JPEG may be used as downloaded.
+  const ext = path.extname(raw).slice(1);
+  if (source.crop || !["png", "jpg"].includes(ext) || statSync(raw).size > LINE_MAX_BYTES) throw new Error("needs Python with Pillow to crop / shrink this image");
+  copyFileSync(raw, `${stem}.${ext}`);
+  return `${stem}.${ext}`;
+}
+
+async function lineCover(key, source, prev) {
+  const [franchise, code] = key.split(":");
+  const stem = path.join(ASSET_DIR, lineFileStem(franchise, code));
+  await assertRobotsAllow(source.page);
+  const pageRes = await politeFetch(source.page, { ttlHours: 24 * 30, accept: "text/html", retries: 1 });
+  const image = pickLineImage(pageRes.body, source.page, source);
+  if (!image) throw new Error(`no matching image on ${source.page}`);
+  const host = new URL(image).host;
+  if (!OFFICIAL_LINE_HOSTS.has(host)) throw new Error(`picked image is on ${host}, not an official host`);
+  await assertRobotsAllow(image);
+  const { bytes, type } = await fetchBinary(image);
+  // Work on temporary names so a failure leaves the previous cover in place.
+  const raw = `${stem}.download.${extOf(type, image)}`;
+  await writeFile(raw, bytes);
+  let fresh;
+  try {
+    fresh = processLine(raw, `${stem}.new`, source);
+  } finally {
+    rmSync(raw, { force: true });
+  }
+  const file = `${stem}${path.extname(fresh)}`;
+  const prevFile = prev?.image ? path.join(APP_DIR, prev.image.replace(/^\.\//, "")) : "";
+  for (const old of [prevFile, `${stem}.png`, `${stem}.jpg`]) if (old && path.resolve(old) !== path.resolve(file)) rmSync(old, { force: true });
+  renameSync(fresh, file);
+  return {
+    image: `./assets/atlas/covers/${path.basename(file)}`,
+    image_remote: image,
+    source_page: source.page,
+    kind: lineKind(source),
+    selector: lineSelector(source),
+    note: source.note,
+    bytes: statSync(file).size,
+  };
+}
+
 async function main() {
   const previous = (await readJson(OUT, null))?.covers || {};
   const sources = { ...COVER_SOURCES, ...(await fateChapterSources()) };
@@ -193,9 +328,25 @@ async function main() {
       if (prev) covers[key] = prev;
     }
   }
+  for (const [lineKey, source] of Object.entries(LINE_COVER_SOURCES).sort(([a], [b]) => a.localeCompare(b))) {
+    const key = `line:${lineKey}`;
+    const prev = previous[key];
+    const prevFile = prev?.image ? path.join(APP_DIR, prev.image.replace(/^\.\//, "")) : "";
+    try {
+      if (prev && !REFRESH && prev.source_page === source.page && prev.selector === lineSelector(source) && prev.kind === lineKind(source) && existsSync(prevFile)) {
+        covers[key] = prev;
+        continue;
+      }
+      covers[key] = await lineCover(lineKey, source, prev);
+      console.log(`${key}: ${path.basename(covers[key].image)} (${covers[key].bytes} bytes) <- ${covers[key].image_remote} [${source.page}]`);
+    } catch (error) {
+      failures.push(`${key}: ${error.message || error}`);
+      if (prev && existsSync(prevFile)) covers[key] = prev;
+    }
+  }
   const out = {
     updated_at: today(),
-    note: "Official cover images for Atlas group cards and channel headers. image = copy in this repo; image_remote = where it was downloaded from; source_page = the page that shows it as the official cover/logo.",
+    note: "Official cover images for Atlas group cards, channel headers and product lines (keys line:<franchise>:<code>). image = copy in this repo; image_remote = where it was downloaded from; source_page = the page that shows it as the official cover/logo.",
     covers,
   };
   const res = await writeCompactJson(OUT, out);

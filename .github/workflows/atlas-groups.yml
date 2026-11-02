@@ -47,6 +47,14 @@ jobs:
           ATLAS_CACHE_DIR: ${{ runner.temp }}/atlas-cache/groups
         run: node scripts/atlas/build_fate_roster.mjs
 
+      # Pillow crops / shrinks the product-line logos (scripts/atlas/lib/line_covers.mjs).
+      - name: Install Pillow
+        run: |
+          python3 -c "import PIL" 2>/dev/null \
+            || python3 -m pip install --quiet --user pillow \
+            || python3 -m pip install --quiet --user --break-system-packages pillow \
+            || echo "Pillow not installed; covers that need cropping keep their previous file."
+
       - name: Download missing cover images
         timeout-minutes: 6
         env:

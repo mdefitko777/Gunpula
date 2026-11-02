@@ -13,8 +13,10 @@
 // Shape (backward compatible): franchises.{pokemon,fate,armored_core}[] =
 //   {id, labels{zh,ko,en,ja}, subtitle, image, kit_ids[], count, …}
 // plus `kind`, `image_remote`, `cover_source`, `roster` (and per-franchise extras), and a
-// top-level `channels` map with one official header image per channel. Empty groups are left
-// out. `--report=<file>` writes every product's group and reason (for review).
+// top-level `channels` map with one official header image per channel, and a top-level
+// `line_covers` map {<franchise>: {<grade_code | BX | UX | CX>: {image, image_remote,
+// cover_source, kind: "logo" | "key_visual"}}} with the official image of each product line.
+// Empty groups are left out. `--report=<file>` writes every product's group and reason (for review).
 import { readFile, writeFile } from "node:fs/promises";
 import { armoredCoreClassifier, fateClassifier, lang, pokemonClassifier, POKEMON_GAMES, AC_TITLES, productText } from "./atlas/lib/atlas_groups.mjs";
 
@@ -285,11 +287,25 @@ function channels() {
   };
 }
 
+// "종류별 도감" cards: official logo / key visual per product line, from the covers keyed
+// line:<franchise>:<grade_code> (BEYBLADE X: line:beyblade:BX|UX|CX). Curated in
+// scripts/atlas/lib/line_covers.mjs, downloaded by build_atlas_covers.mjs.
+function lineCovers() {
+  const out = {};
+  for (const [key, c] of Object.entries(covers).sort(([a], [b]) => a.localeCompare(b))) {
+    const m = key.match(/^line:([a-z_]+):([A-Za-z0-9_]+)$/);
+    if (!m || !c.image) continue;
+    (out[m[1]] ||= {})[m[2]] = { image: c.image, image_remote: c.image_remote, cover_source: c.source_page, kind: c.kind || "logo" };
+  }
+  return out;
+}
+
 const output = {
   updated_at: catalog.updated_at || "",
   source:
     "Generated from data/kits.json, data/atlas-source-taxonomy.json (PokeAPI species), data/gget-series-sections.json, data/atlas/fate-roster.json (Atlas Academy + Mooncell + hand-kept works) and data/atlas/atlas-covers.json by scripts/build_atlas_groups.mjs",
   channels: channels(),
+  line_covers: lineCovers(),
   franchises: {
     gundam_timeline: gundamTimeline(),
     pokemon: pokemonGroups(),

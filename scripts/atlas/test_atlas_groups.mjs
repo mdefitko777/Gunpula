@@ -1,8 +1,10 @@
 // Checks for the Atlas group classifiers (scripts/atlas/lib/atlas_groups.mjs) against the
 // committed rosters. Run: node scripts/atlas/test_atlas_groups.mjs
 import assert from "node:assert/strict";
+import { existsSync, statSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { armoredCoreClassifier, fateClassifier, pokemonClassifier } from "./lib/atlas_groups.mjs";
+import { LINE_COVER_GAPS, LINE_COVER_KINDS, LINE_COVER_SOURCES, OFFICIAL_LINE_HOSTS, parseRobots, pickLineImage, robotsAllows } from "./lib/line_covers.mjs";
 import { buildMatcher, compactKey } from "./lib/textmatch.mjs";
 
 const json = async (file) => JSON.parse(await readFile(new URL(`../../${file}`, import.meta.url), "utf8"));
@@ -98,5 +100,70 @@ const total = fateGroups.reduce((n, g) => n + g.count, 0);
 const unsorted = fateGroups.find((g) => g.id === "fate_general")?.count || 0;
 assert.ok(unsorted / total <= 0.1, `Fate catch-all ${unsorted}/${total} is over 10%`);
 checks++;
+
+// Product-line covers: picking from static HTML and robots.txt rules (no network).
+const page = "https://example.jp/brand/";
+const html = `<meta property="og:image" content="/og.png">
+  <img src="/categories/1.jpeg" alt="HG"/><img src="/categories/5.jpeg" alt="HGUC"/>
+  <img src="/categories/232.jpeg" alt="メガサイズモデル"/>
+  <img class="lazy" data-original="/img/ac_logo.png" alt="">
+  <img src="_image/pict17.png" srcset="_image/pict17.png 1x,_image/pict17@2x.png 2x" alt="BX">`;
+assert.equal(pickLineImage(html, page, { img: { alt: "HG" } }), "https://example.jp/categories/1.jpeg");
+assert.equal(pickLineImage(html, page, { img: { alt: "メガサイズモデル" } }), "https://example.jp/categories/232.jpeg");
+assert.equal(pickLineImage(html, page, { img: { src: "ac_logo.png" } }), "https://example.jp/img/ac_logo.png");
+assert.equal(pickLineImage(html, page, { img: { alt: "BX" } }), "https://example.jp/brand/_image/pict17@2x.png");
+assert.equal(pickLineImage(html, page, { og: true }), "https://example.jp/og.png");
+assert.equal(pickLineImage(html, page, { img: { alt: "RG" } }), "");
+const robots = parseRobots("User-agent: ClaudeBot\nDisallow: /\n\nUser-agent: *\nDisallow: /common/\nAllow: /common/ok/\nDisallow: /*.json$\n");
+assert.equal(robotsAllows(robots, "/candy/gundam/"), true);
+assert.equal(robotsAllows(robots, "/common/x.png"), false);
+assert.equal(robotsAllows(robots, "/common/ok/x.png"), true);
+assert.equal(robotsAllows(robots, "/a/products.json"), false);
+assert.equal(robotsAllows(parseRobots("User-agent: HobbyAtlasDataBot\nDisallow: /x/\n\nUser-agent: *\nDisallow: /\n"), "/y"), true);
+assert.equal(robotsAllows(parseRobots("User-agent: *\nDisallow:\n"), "/anything"), true);
+checks += 12;
+
+// Product-line covers in the generated file: shape, official sources, files present and small,
+// every code a real line of that franchise, and in step with the curated list.
+const gradesDoc = await json("data/grades.json");
+const grades = new Set((gradesDoc.grades || gradesDoc).map((g) => g.code));
+const codesByFranchise = {};
+for (const franchise of ["gundam", "armored_core", "pokemon", "fate", "beyblade"]) {
+  const split = await json(`data/split/kits-${franchise}.json`);
+  codesByFranchise[franchise] = new Set((split.kits || []).map((k) => k.grade_code));
+}
+const BBX_LINES = new Set(["BX", "UX", "CX"]);
+const lineCovers = groups.line_covers;
+assert.ok(lineCovers && typeof lineCovers === "object", "line_covers map");
+const seenLines = new Set();
+for (const [franchise, byCode] of Object.entries(lineCovers)) {
+  assert.ok(codesByFranchise[franchise], `line_covers franchise ${franchise}`);
+  for (const [code, c] of Object.entries(byCode)) {
+    const where = `line_covers.${franchise}.${code}`;
+    seenLines.add(`${franchise}:${code}`);
+    assert.deepEqual(Object.keys(c).sort(), ["cover_source", "image", "image_remote", "kind"], `${where} keys`);
+    if (franchise === "beyblade") assert.ok(BBX_LINES.has(code), `${where}: BEYBLADE X lines are BX / UX / CX`);
+    else {
+      assert.ok(grades.has(code), `${where}: not a grade code in data/grades.json`);
+      for (const [other, codes] of Object.entries(codesByFranchise)) assert.ok(other === franchise || !codes.has(code), `${where}: code belongs to ${other}`);
+    }
+    assert.ok(LINE_COVER_KINDS.has(c.kind), `${where} kind ${c.kind}`);
+    assert.match(c.image, new RegExp(`^\\./assets/atlas/covers/line-${franchise}-[a-z0-9_]+\\.(png|jpg)$`), `${where} image path`);
+    const file = new URL(`../../app/${c.image.slice(2)}`, import.meta.url);
+    assert.ok(existsSync(file), `${where}: ${c.image} missing`);
+    assert.ok(statSync(file).size <= 100 * 1024, `${where}: ${c.image} is over 100 KB`);
+    assert.ok(OFFICIAL_LINE_HOSTS.has(new URL(c.image_remote).host), `${where}: image_remote host`);
+    assert.ok(OFFICIAL_LINE_HOSTS.has(new URL(c.cover_source).host), `${where}: cover_source host`);
+    assert.ok(LINE_COVER_SOURCES[`${franchise}:${code}`], `${where} is not in LINE_COVER_SOURCES`);
+    assert.ok(!LINE_COVER_GAPS[`${franchise}:${code}`], `${where} is also listed as a gap`);
+    checks++;
+  }
+}
+for (const key of Object.keys(LINE_COVER_SOURCES)) assert.ok(!LINE_COVER_GAPS[key], `${key} both curated and a gap`);
+assert.ok(seenLines.size >= 30, `only ${seenLines.size} line covers`);
+for (const line of ["gundam:HG", "gundam:MG", "gundam:RG", "gundam:PG", "gundam:METAL_BUILD", "gundam:ROBOT_SPIRITS", "beyblade:BX", "beyblade:UX", "beyblade:CX", "pokemon:POKE_MONCOLLE"]) {
+  assert.ok(seenLines.has(line), `line cover ${line} missing`);
+}
+checks += 2;
 
 console.log(`atlas groups: ${checks} checks passed`);

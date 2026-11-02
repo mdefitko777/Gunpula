@@ -24,7 +24,8 @@ export const requestLog = [];
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-async function throttle(host) {
+/** Wait until this host may be contacted again (shared by every request of this process). */
+export async function throttle(host) {
   const last = lastRequestAt.get(host) || 0;
   const wait = last + HOST_INTERVAL_MS - Date.now();
   if (wait > 0) await sleep(wait);
