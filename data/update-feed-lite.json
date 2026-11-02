@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-03",
-  "generated_at": "2026-11-02T20:59:09.562Z",
+  "generated_at": "2026-11-02T21:24:45.109Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,38 +16,38 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-11-02T20:59:08.234Z",
+    "generated_at": "2026-11-02T21:24:43.132Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-03",
-      "generated_at": "2026-11-02T20:59:09.562Z",
+      "generated_at": "2026-11-02T21:24:45.109Z",
       "total_before": 10409,
       "total_after": 10468,
-      "added_count": 11,
-      "changed_count": 44,
+      "added_count": 3,
+      "changed_count": 14,
       "removed_count": 0,
       "watched_count": 0,
       "merged_count": 0,
       "backfilled_count": 0,
-      "premium_bandai_count": 0,
+      "premium_bandai_count": 12,
       "bbx_count": 0,
       "franchise_counts": {
-        "pokemon": 55
+        "pokemon": 5,
+        "gundam": 12
       },
       "reason_counts": {
-        "new": 11,
-        "name": 42,
-        "image": 42,
-        "release": 42,
-        "price": 44,
-        "source": 44,
-        "product_line": 10
+        "new": 3,
+        "series": 12,
+        "price": 2,
+        "source": 2
       },
       "interest_tags": [
-        "pokemon"
+        "pokemon",
+        "gundam",
+        "premium_bandai"
       ],
       "watch_tags": [],
       "added": [
@@ -1145,6 +1145,462 @@
         }
       ],
       "changed": [
+        {
+          "kit_id": "pbandai-wb-1000256979",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "zz",
+          "series_labels": {
+            "zh": "ZZ",
+            "en": "ZZ",
+            "ja": "ZZ",
+            "ko": "ZZ"
+          },
+          "names": {
+            "ja": "STRICT-G.ARMS『機動戦士ガンダムＺＺ』Tシャツ エゥーゴ",
+            "zh": "STRICT-G.ARMS『机动战士高达ＺＺ』Tシャツ エゥーゴ",
+            "ko": "STRICT-G.ARMS『기동전사 건담 ZZ』 티셔츠 에우고",
+            "en": "STRICT-G.ARMS『Mobile Suit GundamＺＺ』Tシャツ エゥーゴ"
+          },
+          "release_date": "2026-09",
+          "price_jpy": 7480,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000256979/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000256982",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "zz",
+          "series_labels": {
+            "zh": "ZZ",
+            "en": "ZZ",
+            "ja": "ZZ",
+            "ko": "ZZ"
+          },
+          "names": {
+            "ja": "STRICT-G.ARMS『機動戦士ガンダムＺＺ』Tシャツ ネオ・ジオン",
+            "zh": "STRICT-G.ARMS『机动战士高达ＺＺ』Tシャツ ネオ・ジオン",
+            "ko": "STRICT-G.ARMS『기동전사 건담 ZZ』 티셔츠 네오 지온",
+            "en": "STRICT-G.ARMS『Mobile Suit GundamＺＺ』Tシャツ ネオ ジオン"
+          },
+          "release_date": "2026-09",
+          "price_jpy": 7480,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000256982/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000255966",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "zz",
+          "series_labels": {
+            "zh": "ZZ",
+            "en": "ZZ",
+            "ja": "ZZ",
+            "ko": "ZZ"
+          },
+          "names": {
+            "ja": "STRICT-G『機動戦士ガンダムＺＺ』グラス ハマーン・カーン マスク",
+            "zh": "STRICT-G『机动战士高达ＺＺ』グラス ハマーン・カーン マスク",
+            "ko": "STRICT-G『기동전사 건담 ZZ』 글라스 하만 칸 마스크",
+            "en": "STRICT-G『Mobile Suit GundamＺＺ』グラス ハマーン カーン マスク"
+          },
+          "release_date": "2026-08",
+          "price_jpy": 2200,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000255966/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000255065",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "zz",
+          "series_labels": {
+            "zh": "ZZ",
+            "en": "ZZ",
+            "ja": "ZZ",
+            "ko": "ZZ"
+          },
+          "names": {
+            "ja": "STRICT-G『機動戦士ガンダムＺＺ』刺繍オープンカラーシャツ MSZ-010 ＺＺガンダム",
+            "zh": "STRICT-G『机动战士高达ＺＺ』刺繍オープンカラーシャツ MSZ-010 ＺＺ高达",
+            "ko": "STRICT-G『기동전사 건담 ZZ』 자수 오픈 칼라 셔츠 MSZ-010 ZZ건담",
+            "en": "STRICT-G『Mobile Suit GundamＺＺ』刺繍オープンカラーシャツ MSZ-010 ＺＺGundam"
+          },
+          "release_date": "2026-08",
+          "price_jpy": 14080,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000255065/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000253636",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "sentinel",
+          "series_labels": {
+            "zh": "Sentinel",
+            "en": "Sentinel",
+            "ja": "センチネル",
+            "ko": "센티넬"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 Ｅｘ-Ｓガンダム / Ｓガンダム (タスクフォースα Ｖｅｒ.)",
+            "zh": "ＭＧ 1 / 100 Ｅｘ-Ｓ高达 / Ｓ高达 (タスクフォースα Ｖｅｒ.)【再贩】",
+            "ko": "MG 1/100 Ex-S건담 / S건담 (태스크 포스 α Ver.)",
+            "en": "ＭＧ 1 / 100 Ｅｘ-ＳGundam / ＳGundam (タスクフォースα Ｖｅｒ.)[Reissue]"
+          },
+          "release_date": "2026-04",
+          "price_jpy": 16500,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000253636/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000115597",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "zz",
+          "series_labels": {
+            "zh": "ZZ",
+            "en": "ZZ",
+            "ja": "ZZ",
+            "ko": "ZZ"
+          },
+          "names": {
+            "ja": "ガンダムデカール No.１０８ 機動戦士Ｚガンダム／機動戦士ガンダムＺＺ汎用１",
+            "zh": "高达デカール No.１０８ 機動戦士Ｚ高达／机动战士高达ＺＺ汎用１",
+            "ko": "건담 데칼 No.108 기동전사 Z건담/기동전사 건담 ZZ 범용 1",
+            "en": "Gundamデカール No.１０８ 機動戦士ＺGundam／Mobile Suit GundamＺＺ汎用１"
+          },
+          "release_date": "2026-04",
+          "price_jpy": 550,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000115597/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000130517",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "f91",
+          "series_labels": {
+            "zh": "F91",
+            "en": "F91",
+            "ja": "F91",
+            "ko": "F91"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ガンダムＦ９１ Ｖｅｒ．２．０（残像イメージカラー）",
+            "zh": "ＭＧ 1 / 100 高达Ｆ９１ Ｖｅｒ．２．０（残像イメージカラー）",
+            "ko": "MG 1/100 건담 F91 Ver.2.0(잔상 이미지 컬러)",
+            "en": "ＭＧ 1 / 100 GundamＦ９１ Ｖｅｒ．２．０ (残像イメージカラー)"
+          },
+          "release_date": "2019-04",
+          "price_jpy": 4320,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000130517/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000128218",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "f91",
+          "series_labels": {
+            "zh": "F91",
+            "en": "F91",
+            "ja": "F91",
+            "ko": "F91"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ガンダムＦ９１ Ｖｅｒ．２．０ バックキャノン装着型 ＆ ツイン・ヴェスバー装着型",
+            "zh": "ＭＧ 1 / 100 高达Ｆ９１ Ｖｅｒ．２．０ バックキャノン装着型 ＆ ツイン・ヴェスバー装着型",
+            "ko": "MG 1/100 건담 F91 Ver.2.0 백 캐논 장착형 & 트윈 베스바 장착형",
+            "en": "ＭＧ 1 / 100 GundamＦ９１ Ｖｅｒ．２．０ バックキャノン装着型 ＆ ツイン ヴェスバー装着型"
+          },
+          "release_date": "2019-01",
+          "price_jpy": 6264,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000128218/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000125915",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RE100",
+          "subline": "プレミアムバンダイ",
+          "series_key": "msv",
+          "series_labels": {
+            "zh": "MSV",
+            "en": "MSV",
+            "ja": "MSV",
+            "ko": "MSV"
+          },
+          "names": {
+            "ja": "ＲＥ / 100 1 / 100 ガンキャノン・ディテクター（Ｚ-ＭＳＶ Ｖｅｒ.）",
+            "zh": "ＲＥ / 100 1 / 100 ガンキャノン・ディテクター（Ｚ-ＭＳＶ Ｖｅｒ.）",
+            "ko": "RE/100 1/100 건캐논 디텍터(Z-MSV Ver.)",
+            "en": "ＲＥ / 100 1 / 100 ガンキャノン ディテクター (Ｚ-ＭＳＶ Ｖｅｒ.)"
+          },
+          "release_date": "2018-09",
+          "price_jpy": 4104,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000125915/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000010254",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "cca",
+          "series_labels": {
+            "zh": "逆夏",
+            "en": "CCA",
+            "ja": "逆シャア",
+            "ko": "역샤아"
+          },
+          "names": {
+            "ja": "HG 1 / 144 Hi-ニューガンダム GPBカラー",
+            "zh": "HG 1 / 144 Hi-ニュー高达 GPBカラー",
+            "ko": "HG 1/144 Hi-ν건담 GPB 컬러",
+            "en": "HG 1 / 144 Hi-ニューGundam GPBカラー"
+          },
+          "release_date": null,
+          "price_jpy": 2310,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000010254/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000143585",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "aoz",
+          "series_labels": {
+            "zh": "AOZ",
+            "en": "AOZ",
+            "ja": "A.O.Z",
+            "ko": "AOZ"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ガンダムＴＲ-６ ［キハールII］（ADVANCE OF Z ティターンズの旗のもとに）【６個まとめ買い】",
+            "zh": "ＨＧ 1 / 144 高达ＴＲ-６ ［キハールII］（ADVANCE OF Z ティターンズの旗のもとに）【６個まとめ買い】",
+            "ko": "HG 1/144 건담 TR-6 [키하르II] (ADVANCE OF Z 티탄즈의 깃발 아래)【6개 묶음 구매】",
+            "en": "ＨＧ 1 / 144 GundamＴＲ-６ ［キハールII］ (ADVANCE OF Z ティターンズの旗のもとに)[６個まとめ買い]"
+          },
+          "release_date": null,
+          "price_jpy": 16500,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000143585/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000136952",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "f91",
+          "series_labels": {
+            "zh": "F91",
+            "en": "F91",
+            "ja": "F91",
+            "ko": "F91"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ガンダムＦ９１ Ｖｅｒ．２．０（ハリソン・マディン専用機）",
+            "zh": "ＭＧ 1 / 100 高达Ｆ９１ Ｖｅｒ．２．０（ハリソン・マディン专用機）",
+            "ko": "MG 1/100 건담 F91 Ver.2.0(해리슨 매딘 전용기)",
+            "en": "ＭＧ 1 / 100 GundamＦ９１ Ｖｅｒ．２．０ (ハリソン マディンCustom機)"
+          },
+          "release_date": null,
+          "price_jpy": 4620,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000136952/"
+          ]
+        },
         {
           "kit_id": "moncolle-ms-40",
           "change_type": "changed",
