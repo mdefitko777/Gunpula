@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-02",
-  "generated_at": "2026-11-02T00:29:59.483Z",
+  "generated_at": "2026-11-02T10:28:16.272Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,44 +16,44 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-11-02T00:29:58.111Z",
+    "generated_at": "2026-11-02T10:28:14.945Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-02",
-      "generated_at": "2026-11-02T00:29:59.483Z",
+      "generated_at": "2026-11-02T10:28:16.272Z",
       "total_before": 9165,
-      "total_after": 10398,
-      "added_count": 120,
-      "changed_count": 150,
+      "total_after": 10409,
+      "added_count": 129,
+      "changed_count": 134,
       "removed_count": 1,
-      "watched_count": 126,
-      "premium_bandai_count": 132,
+      "watched_count": 123,
+      "premium_bandai_count": 126,
       "bbx_count": 2,
       "franchise_counts": {
-        "gundam": 241,
-        "pokemon": 5,
-        "fate": 22,
+        "gundam": 228,
+        "pokemon": 13,
+        "fate": 20,
         "beyblade": 2
       },
       "reason_counts": {
-        "new": 120,
-        "source": 96,
-        "name": 21,
+        "new": 129,
+        "source": 86,
+        "name": 20,
         "product_line": 8,
         "limited": 7,
-        "price": 30,
+        "price": 28,
         "image": 5,
         "release": 5,
-        "series": 12,
+        "series": 9,
         "removed": 1
       },
       "interest_tags": [
         "gundam",
-        "seed",
         "premium_bandai",
+        "seed",
         "00",
         "pokemon",
         "fate",
@@ -69,6 +69,48 @@
         "00"
       ],
       "added": [
+        {
+          "kit_id": "converge-core56",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "CONVERGE",
+          "subline": "FW GUNDAM CONVERGE CORE",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "FW GUNDAM CONVERGE CORE フリーダムガンダム＆プロヴィデンスガンダム【プレミアムバンダイ限定】",
+            "zh": "FW 高达 CONVERGE CORE 自由高达＆天帝高达【Premium Bandai限定】",
+            "ko": "FW 건담 CONVERGE CORE 프리덤건담＆프로비던스건담【프리미엄 반다이한정】",
+            "en": "FW GUNDAM CONVERGE CORE Freedom Gundam＆Providence Gundam [Premium BandaiLimited]"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 6360,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "bandai_candy_gundam_jp"
+          ],
+          "source_urls": [
+            "https://www.bandai.co.jp/candy/gundam/converge/core56/",
+            "https://www.bandai.co.jp/candy/gundam/converge/"
+          ]
+        },
         {
           "kit_id": "tamashii-16032",
           "change_type": "added",
@@ -1319,6 +1361,154 @@
           ]
         },
         {
+          "kit_id": "pokemon-kr-137641260",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 파닥파닥! 봉제인형 만타인",
+            "zh": "포켓몬센터 파닥파닥! 봉제인형 만타인",
+            "ko": "포켓몬센터 파닥파닥! 봉제인형 만타인",
+            "en": "포켓몬센터 파닥파닥! 봉제인형 만타인"
+          },
+          "release_date": "2026-11-02",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137641260"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137641227",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 파닥파닥! 봉제인형 물짱이",
+            "zh": "포켓몬센터 파닥파닥! 봉제인형 물짱이",
+            "ko": "포켓몬센터 파닥파닥! 봉제인형 물짱이",
+            "en": "포켓몬센터 파닥파닥! 봉제인형 물짱이"
+          },
+          "release_date": "2026-11-02",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137641227"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137641243",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 파닥파닥! 봉제인형 싸리용(젖힌 모습)",
+            "zh": "포켓몬센터 파닥파닥! 봉제인형 싸리용(젖힌 모습)",
+            "ko": "포켓몬센터 파닥파닥! 봉제인형 싸리용(젖힌 모습)",
+            "en": "포켓몬센터 파닥파닥! 봉제인형 싸리용(젖힌 모습)"
+          },
+          "release_date": "2026-11-02",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137641243"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137641269",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 파닥파닥! 봉제인형 콘치",
+            "zh": "포켓몬센터 파닥파닥! 봉제인형 콘치",
+            "ko": "포켓몬센터 파닥파닥! 봉제인형 콘치",
+            "en": "포켓몬센터 파닥파닥! 봉제인형 콘치"
+          },
+          "release_date": "2026-11-02",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137641269"
+          ]
+        },
+        {
           "kit_id": "tamashii-15848",
           "change_type": "added",
           "franchise": "gundam",
@@ -2224,6 +2414,43 @@
           ],
           "source_urls": [
             "https://p-bandai.jp/item/item-1000008876/"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329367057",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "706 ぬいぐるみ Pok&eacute;mon fit ヌメルゴン",
+            "zh": "706 ぬいぐるみ Pok&eacute;mon fit ヌメルゴン",
+            "ko": "706 ぬいぐるみ Pok&eacute;mon fit ヌメルゴン",
+            "en": "706 ぬいぐるみ Pok&eacute;mon fit ヌメルゴン"
+          },
+          "release_date": null,
+          "price_jpy": 1980,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329367057.html"
           ]
         },
         {
@@ -4007,6 +4234,43 @@
           ]
         },
         {
+          "kit_id": "pokemon-center-4521329456652",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "Pokemon Center Goods",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "カナリィぬいコレクション",
+            "zh": "カナリィぬいコレクション",
+            "ko": "カナリィぬいコレクション",
+            "en": "カナリィぬいコレクション"
+          },
+          "release_date": null,
+          "price_jpy": 2310,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329456652.html"
+          ]
+        },
+        {
           "kit_id": "aniplex-fate-itemsolktwos22",
           "change_type": "added",
           "franchise": "fate",
@@ -4411,265 +4675,6 @@
           ],
           "source_urls": [
             "https://online.aniplex.co.jp/itemSOlktwos20.html"
-          ]
-        },
-        {
-          "kit_id": "aniplex-fate-itemsolktwos19",
-          "change_type": "added",
-          "franchise": "fate",
-          "grade_code": "FATE_GOODS",
-          "subline": "Aniplex+",
-          "series_key": "fate_fgo",
-          "series_labels": {
-            "zh": "FGO",
-            "en": "FGO",
-            "ja": "FGO",
-            "ko": "FGO"
-          },
-          "names": {
-            "ja": "マグカップ",
-            "zh": "マグカップ",
-            "ko": "マグカップ",
-            "en": "マグカップ"
-          },
-          "release_date": null,
-          "price_jpy": 2200,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "fate"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "aniplex_plus_fate_jp"
-          ],
-          "source_urls": [
-            "https://online.aniplex.co.jp/itemSOlktwos19.html"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mega-mewtwo-x",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "メガミュウツーX",
-            "zh": "メガミュウツーX",
-            "ko": "メガミュウツーX",
-            "en": "メガミュウツーX"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/mega_mewtwo_x/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mega-mewtwo-y",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "メガミュウツーY",
-            "zh": "メガミュウツーY",
-            "ko": "メガミュウツーY",
-            "en": "メガミュウツーY"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/mega_mewtwo_y/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mega-charizard-x",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "メガリザードンX",
-            "zh": "メガリザードンX",
-            "ko": "メガリザードンX",
-            "en": "メガリザードンX"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/mega_charizard_x/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mega-charizard-y",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "メガリザードンY",
-            "zh": "メガリザードンY",
-            "ko": "メガリザードンY",
-            "en": "メガリザードンY"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/mega_charizard_y/"
-          ]
-        },
-        {
-          "kit_id": "aniplex-fate-itemsolktwos09",
-          "change_type": "added",
-          "franchise": "fate",
-          "grade_code": "FATE_GOODS",
-          "subline": "Aniplex+",
-          "series_key": "fate_fgo",
-          "series_labels": {
-            "zh": "FGO",
-            "en": "FGO",
-            "ja": "FGO",
-            "ko": "FGO"
-          },
-          "names": {
-            "ja": "メタルチャーム",
-            "zh": "メタルチャーム",
-            "ko": "メタルチャーム",
-            "en": "メタルチャーム"
-          },
-          "release_date": null,
-          "price_jpy": 1500,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "fate"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "aniplex_plus_fate_jp"
-          ],
-          "source_urls": [
-            "https://online.aniplex.co.jp/itemSOlktwos09.html"
-          ]
-        },
-        {
-          "kit_id": "aniplex-fate-itemsolktwos13",
-          "change_type": "added",
-          "franchise": "fate",
-          "grade_code": "FATE_GOODS",
-          "subline": "Aniplex+",
-          "series_key": "fate_fgo",
-          "series_labels": {
-            "zh": "FGO",
-            "en": "FGO",
-            "ja": "FGO",
-            "ko": "FGO"
-          },
-          "names": {
-            "ja": "ランダムアクリルチャーム（全17種）",
-            "zh": "ランダムアクリルチャーム（全17種）",
-            "ko": "ランダムアクリルチャーム（全17種）",
-            "en": "ランダムアクリルチャーム (全17種)"
-          },
-          "release_date": null,
-          "price_jpy": 700,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "fate"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "aniplex_plus_fate_jp"
-          ],
-          "source_urls": [
-            "https://online.aniplex.co.jp/itemSOlktwos13.html"
           ]
         }
       ],
@@ -8370,6 +8375,50 @@
           ]
         },
         {
+          "kit_id": "sdw-sdw-heroes-4573102615503000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "SDW",
+          "subline": "SD Gundam World",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "SDW HEROES サージェントヴェルデバスターガンダム",
+            "zh": "SDW HEROES サージェントヴェルデ暴风高达",
+            "ko": "SDW HEROES サージェントヴェルデ버스터건담",
+            "en": "SDW HEROES サージェントヴェルデBuster Gundam"
+          },
+          "release_date": "2021-04-17",
+          "price_jpy": 660,
+          "is_limited": false,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102615503000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000156945/"
+          ]
+        },
+        {
           "kit_id": "hg-hg-1-144-l-4573102615466000",
           "change_type": "changed",
           "franchise": "gundam",
@@ -9073,6 +9122,50 @@
           ]
         },
         {
+          "kit_id": "hg-hgce-1-144-4573102589309000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HGCE",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "HGCE 1 / 144 インフィニットジャスティスガンダム",
+            "zh": "HGCE 1 / 144 无限正义高达",
+            "ko": "HGCE 1 / 144 인피니트 저스티스건담",
+            "en": "HGCE 1 / 144 Infinite Justice Gundam"
+          },
+          "release_date": "2020-05-23",
+          "price_jpy": 2420,
+          "is_limited": false,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102589309000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000151722/"
+          ]
+        },
+        {
           "kit_id": "rg-rg-1-144-4573102592286000",
           "change_type": "changed",
           "franchise": "gundam",
@@ -9622,87 +9715,6 @@
             "https://tamashiiweb.com/item/12362/",
             "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
           ]
-        },
-        {
-          "kit_id": "mse-05-1-oo",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MSE",
-          "subline": "MOBILE SUIT ENSEMBLE 05",
-          "series_key": "double_o",
-          "series_labels": {
-            "zh": "00",
-            "en": "00",
-            "ja": "00",
-            "ko": "00"
-          },
-          "names": {
-            "ja": "MOBILE SUIT ENSEMBLE 05 OO クアンタ",
-            "zh": "MOBILE SUIT ENSEMBLE 05 OO 量子型",
-            "ko": "MOBILE SUIT ENSEMBLE 05 OO 퀀터",
-            "en": "MOBILE SUIT ENSEMBLE 05 OO Qan [T]"
-          },
-          "release_date": "2018-02",
-          "price_jpy": 500,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "gundam",
-            "00"
-          ],
-          "change_reasons": [
-            "price"
-          ],
-          "source_ids": [
-            "bandai_gashapon_gundam_jp"
-          ],
-          "source_urls": [
-            "https://gashapon.jp/ensemble/items/detail.php?p=05"
-          ]
-        },
-        {
-          "kit_id": "tamashii-12235",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "METAL_BUILD",
-          "subline": "METAL BUILD",
-          "series_key": "other",
-          "series_labels": {
-            "zh": "其他",
-            "en": "Other",
-            "ja": "その他",
-            "ko": "기타"
-          },
-          "names": {
-            "ja": "GNソードIIブラスター",
-            "zh": "GNソードIIブラスター",
-            "ko": "GNソードIIブラスター",
-            "en": "GNソードIIブラスター"
-          },
-          "release_date": "2018-01",
-          "price_jpy": 3850,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "gundam",
-            "00"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "tamashii_web_jp"
-          ],
-          "source_urls": [
-            "https://tamashiiweb.com/item/12235/",
-            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
-          ]
         }
       ],
       "removed": [
@@ -9746,6 +9758,48 @@
         }
       ],
       "watched": [
+        {
+          "kit_id": "converge-core56",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "CONVERGE",
+          "subline": "FW GUNDAM CONVERGE CORE",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "FW GUNDAM CONVERGE CORE フリーダムガンダム＆プロヴィデンスガンダム【プレミアムバンダイ限定】",
+            "zh": "FW 高达 CONVERGE CORE 自由高达＆天帝高达【Premium Bandai限定】",
+            "ko": "FW 건담 CONVERGE CORE 프리덤건담＆프로비던스건담【프리미엄 반다이한정】",
+            "en": "FW GUNDAM CONVERGE CORE Freedom Gundam＆Providence Gundam [Premium BandaiLimited]"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 6360,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "bandai_candy_gundam_jp"
+          ],
+          "source_urls": [
+            "https://www.bandai.co.jp/candy/gundam/converge/core56/",
+            "https://www.bandai.co.jp/candy/gundam/converge/"
+          ]
+        },
         {
           "kit_id": "tamashii-16032",
           "change_type": "added",
@@ -13975,6 +14029,50 @@
           ]
         },
         {
+          "kit_id": "sdw-sdw-heroes-4573102615503000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "SDW",
+          "subline": "SD Gundam World",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "SDW HEROES サージェントヴェルデバスターガンダム",
+            "zh": "SDW HEROES サージェントヴェルデ暴风高达",
+            "ko": "SDW HEROES サージェントヴェルデ버스터건담",
+            "en": "SDW HEROES サージェントヴェルデBuster Gundam"
+          },
+          "release_date": "2021-04-17",
+          "price_jpy": 660,
+          "is_limited": false,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102615503000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000156945/"
+          ]
+        },
+        {
           "kit_id": "hg-hg-1-144-l-4573102615466000",
           "change_type": "changed",
           "franchise": "gundam",
@@ -14675,93 +14773,6 @@
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102592279000&grp_id=5325",
             "https://p-bandai.jp/item/item-1000229580/"
-          ]
-        },
-        {
-          "kit_id": "rg-rg-1-144-4573102592286000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "RG",
-          "subline": "RG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "RG 1 / 144 フォースインパルスガンダム",
-            "zh": "RG 1 / 144 フォース脉冲高达",
-            "ko": "RG 1 / 144 포스 임펄스건담",
-            "en": "RG 1 / 144 フォースImpulse Gundam"
-          },
-          "release_date": "2020-04-25",
-          "price_jpy": 3300,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102592286000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000148163/"
-          ]
-        },
-        {
-          "kit_id": "tamashii-13007",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "METAL_BUILD",
-          "subline": "METAL BUILD",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "フライトユニット オプションセット（オルタナティブストライクVer.）",
-            "zh": "フライトユニット 选配套装（オルタナティブ强袭Ver.）",
-            "ko": "フライトユニット 옵션 세트（オルタナティブ스트라이크Ver.）",
-            "en": "フライトユニット Option Set (オルタナティブStrikeVer.)"
-          },
-          "release_date": "2020-01",
-          "price_jpy": 7150,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "tamashii_web_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://tamashiiweb.com/item/13007/",
-            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
           ]
         }
       ],

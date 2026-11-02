@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-02T00:29:42.751Z",
+  "updated_at": "2026-11-02T10:27:59.948Z",
   "sources": [
     {
       "source_id": "tamashii_news",
@@ -82,25 +82,33 @@
       "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuG_D_8QZmHTfbJfsz8-J_A"
     }
   ],
-  "fetch_errors": [
-    {
-      "source_id": "bandai_hobby_youtube",
-      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuxB1suCoCqAKiljh_0xE4A returned 404; https://www.youtube.com/feeds/videos.xml?playlist_id=UUuxB1suCoCqAKiljh_0xE4A returned 404"
-    },
-    {
-      "source_id": "gundam_channel_youtube",
-      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UC7wu64jFsV02bbu6UHUd7JA returned 404; https://www.youtube.com/feeds/videos.xml?playlist_id=UU7wu64jFsV02bbu6UHUd7JA returned 404"
-    },
-    {
-      "source_id": "gundam_base_youtube",
-      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UCMt6mbBNDPwyNGvJKvhCYuA returned 500; https://www.youtube.com/feeds/videos.xml?playlist_id=UUMt6mbBNDPwyNGvJKvhCYuA returned 404"
-    },
-    {
-      "source_id": "beyblade_youtube",
-      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuG_D_8QZmHTfbJfsz8-J_A returned 404; https://www.youtube.com/feeds/videos.xml?playlist_id=UUuG_D_8QZmHTfbJfsz8-J_A returned 404"
-    }
-  ],
+  "fetch_errors": [],
   "announcements": [
+    {
+      "id": "bandai-youtube-GadAifkSCoU",
+      "franchise": "gundam",
+      "names": {
+        "ja": "【公式】ビルダーズノート ガンプラ再販会議 2026冬 第3回選抜選挙『MG 機動戦士ガンダム・Zガンダム選抜選挙』",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "announced",
+      "announced_at": "2026-11-02",
+      "source_type": "youtube",
+      "source_name": "BANDAI Hobby Site YouTube",
+      "source_url": "https://www.youtube.com/watch?v=GadAifkSCoU",
+      "thumbnail_url": "../app/assets/announcements/bandai-youtube-GadAifkSCoU.jpg",
+      "video_id": "GadAifkSCoU",
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "candidate",
+      "notes": "Official video detected automatically. Confirm individual product reveals in CMS.",
+      "source_id": "bandai_hobby_youtube",
+      "reviewed_at": null
+    },
     {
       "id": "beyblade-lineup-MC12di5odG1s",
       "franchise": "beyblade",
