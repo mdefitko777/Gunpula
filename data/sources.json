@@ -251,7 +251,27 @@
         "non-Bandai Pokemon goods",
         "older products not listed on the global PokePla page"
       ],
-      "notes": "Official BANDAI SPIRITS global Bandai Hobby Pokemon PLAMO COLLECTION pages used to supplement PokePla model kit coverage."
+      "notes": "Official BANDAI SPIRITS global Bandai Hobby Pokemon PLAMO COLLECTION pages. Not imported since 2026-11: its CloudFront answers 403 to the self-identifying importer user-agent. Records first imported from it keep this ref; bandai_spirits_pokepla_jp now supplies their data."
+    },
+    {
+      "source_id": "bandai_spirits_pokepla_jp",
+      "name": "BANDAI SPIRITS Product Search (Pokemon PLAMO COLLECTION)",
+      "type": "official_jp",
+      "country": "JP",
+      "base_url": "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2",
+      "priority": 9,
+      "best_for": [
+        "Pokemon PLAMO COLLECTION (Pokepla) Japanese names",
+        "release day",
+        "tax-included Japan price",
+        "official product images"
+      ],
+      "weak_for": [
+        "overseas-only Pokemon Model Kit releases",
+        "capsule toys",
+        "non-Bandai Pokemon goods"
+      ],
+      "notes": "Official BANDAI SPIRITS product search, プラモデル category, keyword ポケモン: every Pokepla kit since 2010 (QUICK!!, SELECT SERIES, BIG, fossil, evolution sets). Plain HTML, 60 results a page."
     },
     {
       "source_id": "tamashii_web_jp",

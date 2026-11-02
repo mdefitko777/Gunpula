@@ -22,6 +22,7 @@ const missingVisual = kits.filter(
         "bandai_gashapon_gundam_jp",
         "bandai_gashapon_products_jp",
         "bandai_hobby_pokemon_satellite",
+        "bandai_spirits_pokepla_jp",
         "tamashii_web_jp",
         "kotobukiya_armored_core_jp",
         "hobby_search_jp",

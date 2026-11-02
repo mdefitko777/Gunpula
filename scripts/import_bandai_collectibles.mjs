@@ -9,6 +9,7 @@ import {
   parseKotobukiyaShopListings,
 } from "./lib/kotobukiya-shop.mjs";
 import { KIT_ALIASES_PATH, carryCleanupFields, gundamGradeFromName, nfkc, retiredKitIds } from "./lib/catalog-cleanup.mjs";
+import { buildSpeciesIndex, pokeplaIdentity, pokeplaNames, pokeplaSpeciesKey, pokeplaSubline } from "./lib/pokepla.mjs";
 import { readSalePages, salePageFromKit, seoulToday, upsertSalePage, writeSalePages } from "./lib/sale-pages.mjs";
 import { extractTamashiiGalleryImages } from "./lib/tamashii-images.mjs";
 
@@ -18,18 +19,25 @@ const CANDY_SOURCE_ID = "bandai_candy_gundam_jp";
 const GASHAPON_SOURCE_ID = "bandai_gashapon_gundam_jp";
 const GASHAPON_PRODUCTS_SOURCE_ID = "bandai_gashapon_products_jp";
 const POKEMON_HOBBY_SOURCE_ID = "bandai_hobby_pokemon_satellite";
-const POKEMON_GLOBAL_SOURCE_ID = "bandai_hobby_pokemon_global";
+const POKEPLA_SOURCE_ID = "bandai_spirits_pokepla_jp";
 const KOTOBUKIYA_AC_SOURCE_ID = "kotobukiya_armored_core_jp";
 const BANDAI_SPIRITS_SOURCE_ID = "bandai_spirits_products_jp";
 const TAMASHII_SOURCE_ID = "tamashii_web_jp";
 const TAKARA_TOMY_BEYBLADE_X_SOURCE_ID = "takara_tomy_beyblade_x_jp";
 
 const POKEMON_MODEL_KIT_URL = "https://satellite.bandai-hobby.net/characters/pokemon.php";
-const POKEMON_GLOBAL_PRODUCTS_URLS = [
-  "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick",
-  "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=select",
-  "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=big",
-];
+// Official BANDAI SPIRITS product search: プラモデル category, keyword ポケモン,
+// newest first, 60 a page (the largest page size the form offers). See
+// scripts/lib/pokepla.mjs for why this replaced global.bandai-hobby.net.
+const POKEPLA_SEARCH_URL =
+  "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc";
+const POKEPLA_PAGE_SIZE = 60;
+const POKEPLA_MAX_PAGES = 6;
+// One request at a time to bandaispirits.co.jp, a little over a second apart.
+const POKEPLA_REQUEST_GAP_MS = 1100;
+// Detail pages only add the gallery, so they are read for new products and for
+// records that have no BANDAI SPIRITS gallery yet.
+const POKEPLA_DETAIL_BUDGET = Number(process.env.POKEPLA_DETAIL_BUDGET || 120);
 const BANDAI_AC_SEARCH_URL = "https://www.bandaispirits.co.jp/products/search/result.php?freeword=ARMORED%20CORE&category=2";
 const TAMASHII_BASE_URL = "https://tamashiiweb.com";
 const BEYBLADE_X_LINEUP_URL = "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/";
@@ -272,7 +280,7 @@ async function fetchText(url) {
   throw lastError;
 }
 
-// Bandai Hobby Global (Pokemon) and BEYBLADE X pages. Until 2026-11 this sent a
+// BEYBLADE X pages (and, until 2026-11, Bandai Hobby Global). Until 2026-11 this sent a
 // Chrome user-agent and a made-up referer; every source now gets the same
 // plain, self-identifying request (a failed source keeps its previous data).
 async function fetchBrowserText(url) {
@@ -572,120 +580,139 @@ async function importPokemonModelKits() {
   );
 }
 
-function pokemonModelIdentity(value) {
-  return String(value ?? "")
-    .normalize("NFKD")
-    .replace(/[^\x00-\x7F]/g, " ")
-    .toLowerCase()
-    .replace(/pokemon|pok mon|plamo|collection|model|kit|series|select|fossil|quick|big/g, " ")
-    .replace(/\b\d+\b/g, " ")
-    .replace(/[^a-z0-9]+/g, " ")
-    .trim();
+function bandaiSpiritsHitCount(html) {
+  const count = /m_resultData__text"><span class="s_num">([\d,]+)<\/span>/.exec(html)?.[1];
+  return count ? Number(count.replace(/,/g, "")) : null;
 }
 
-function pokemonSublineFromTitle(title, category) {
-  const text = `${title} ${category}`;
-  if (/fossil/i.test(text)) return "Pokemon Fossil Pokemon Series";
-  if (/big/i.test(text)) return "Pokemon Model Kit BIG";
-  if (/quick/i.test(text)) return "Pokemon Model Kit Quick!!";
-  if (/select/i.test(text)) return "Pokemon PLAMO COLLECTION SELECT SERIES";
-  return "Pokemon Model Kit";
+function bandaiSpiritsProductId(url) {
+  return /prd_id=(\d+)/.exec(String(url ?? ""))?.[1] ?? null;
 }
 
-function parsePokemonGlobalProductList(html, pageUrl) {
-  const records = [];
-  const itemPattern =
-    /<li class="p-products__listItem[^"]*">[\s\S]*?<a href="([^"]*\/item\/01_[^"]+)"[\s\S]*?<img src="([^"]+)" alt="([^"]*)"[\s\S]*?<p class="p-item__category[^"]*">([\s\S]*?)<\/p>[\s\S]*?<h3 class="p-item__text">([\s\S]*?)<\/h3>/g;
+// prd_id is the JAN code followed by three zeros (4573102742957000).
+function pokeplaKitId(productId) {
+  return `pokepla-jp-${productId.length === 16 && productId.endsWith("000") ? productId.slice(0, 13) : productId}`;
+}
 
-  for (const match of html.matchAll(itemPattern)) {
-    const sourceUrl = absoluteUrl(match[1], pageUrl);
-    const productId = sourceUrl.match(/\/item\/([^/]+)\//)?.[1]?.replace("_", "-") ?? slugify(sourceUrl, "pokemon");
-    const category = stripTags(match[4]);
-    const name = stripTags(match[5]);
-    const title = stripTags(match[3]) || [category, name].filter(Boolean).join(" ");
-    if (!title || !sourceUrl) {
-      continue;
+function isBandaiSpiritsModelImage(url) {
+  return /^https:\/\/bandai-a\.akamaihd\.net\/bc\/img\/model\//.test(String(url ?? ""));
+}
+
+/**
+ * Every Pokémon plastic model kit in the official BANDAI SPIRITS product search.
+ * A product the catalog already has under an older id (the global/satellite
+ * Bandai Hobby pages, or a previous run) keeps that id, so collections that
+ * reference it stay intact. Overseas satellite records of the same product are
+ * added to `absorbedOverseas` and not imported separately any more.
+ */
+async function importPokeplaBandaiSpirits(existingKits = [], overseasKits = [], absorbedOverseas = new Set()) {
+  const taxonomy = await readJsonFile("data/atlas-source-taxonomy.json", {});
+  const speciesIndex = buildSpeciesIndex(taxonomy.pokemon || []);
+
+  const cards = new Map();
+  let total = null;
+  for (let page = 1; page <= POKEPLA_MAX_PAGES; page += 1) {
+    if (page > 1) await sleep(POKEPLA_REQUEST_GAP_MS);
+    const html = await fetchText(`${POKEPLA_SEARCH_URL}&paging=${page}`);
+    total ??= bandaiSpiritsHitCount(html);
+    const pageCards = parseBandaiSpiritProductCards(html, POKEPLA_SEARCH_URL);
+    for (const card of pageCards) {
+      const productId = bandaiSpiritsProductId(card.source_url);
+      if (productId && /ポケモン/.test(card.title)) cards.set(productId, { ...card, product_id: productId });
     }
+    if (pageCards.length < POKEPLA_PAGE_SIZE || (total && page * POKEPLA_PAGE_SIZE >= total)) break;
+  }
+  if (!cards.size) throw new Error("BANDAI SPIRITS search returned no Pokemon plastic model listings");
+  console.log(`Found ${cards.size} BANDAI SPIRITS Pokemon plastic model listings (search reported ${total ?? "?"}).`);
 
-    records.push({
-      product_id: productId,
-      source_url: sourceUrl,
-      list_image_url: absoluteUrl(match[2], pageUrl),
-      title,
-      category,
-      name,
-      subline: pokemonSublineFromTitle(title, category),
-    });
+  const cardList = [...cards.values()].map((card) => ({
+    ...card,
+    identity: pokeplaIdentity(card.title, speciesIndex),
+    species_key: pokeplaSpeciesKey(card.title, speciesIndex),
+  }));
+  const speciesKeyCount = new Map();
+  for (const card of cardList) {
+    if (card.species_key) speciesKeyCount.set(card.species_key, (speciesKeyCount.get(card.species_key) || 0) + 1);
+  }
+  // An unnumbered overseas title ("Pokémon Model Kit GENGAR") matches the one
+  // Japanese product with the same line, Pokémon and variant ("45 セレクトシリーズ ゲンガー").
+  const sameProduct = (title, card) => {
+    const identity = pokeplaIdentity(title, speciesIndex);
+    if (identity === card.identity) return true;
+    if (!identity.includes(":-:")) return false;
+    const speciesKey = pokeplaSpeciesKey(title, speciesIndex);
+    return Boolean(speciesKey && speciesKey === card.species_key && speciesKeyCount.get(speciesKey) === 1);
+  };
+
+  // Which existing record each product continues: first the record this source
+  // wrote before, then a record from the Bandai Hobby global/satellite pages.
+  const pokeplaKits = existingKits.filter((kit) => kit.grade_code === "POKEPLA");
+  const byProduct = new Map();
+  for (const kit of pokeplaKits) {
+    for (const ref of kit.source_refs || []) {
+      const productId = ref.source_id === POKEPLA_SOURCE_ID ? bandaiSpiritsProductId(ref.url) : null;
+      if (productId && !byProduct.has(productId)) byProduct.set(productId, kit);
+    }
+  }
+  const unclaimed = pokeplaKits.filter((kit) => !(kit.source_refs || []).some((ref) => ref.source_id === POKEPLA_SOURCE_ID));
+  const sourceTitle = (kit) => kit.names?.en || kit.names?.ja || "";
+  const claimed = new Set();
+  for (const card of cardList) {
+    let existing = byProduct.get(card.product_id) ?? null;
+    if (!existing) existing = unclaimed.find((kit) => !claimed.has(kit.kit_id) && sameProduct(sourceTitle(kit), card)) ?? null;
+    if (existing) claimed.add(existing.kit_id);
+    card.existing = existing;
+    card.kit_id = existing?.kit_id ?? pokeplaKitId(card.product_id);
+    card.overseas = overseasKits.filter((kit) => kit.kit_id === card.kit_id || sameProduct(sourceTitle(kit), card));
+    for (const kit of card.overseas) absorbedOverseas.add(kit.kit_id);
   }
 
-  return records;
-}
-
-function parsePokemonGlobalDetail(html, detailUrl) {
-  const title = stripTags(extract(/<h1 class="p-heading__h1-product">([\s\S]*?)<\/h1>/, html));
-  const productBlock = extract(/<div class="pg-pg-products__Wrap">([\s\S]*?)<section class="p-section">/, html) ?? html;
-  const sliderBlock = extract(/<div class="js-swiper__main pg-products__sliderMain">([\s\S]*?)<\/div>\s*<\/div>\s*<div class="pg-products__contentLeft">/, productBlock) ?? productBlock;
-  const images = unique([...sliderBlock.matchAll(/<a href="([^"]+)"\s+data-fancybox="images"/g)].map((match) => absoluteUrl(match[1], detailUrl)));
-  const priceText = extract(/<dt class="pg-products__label"><span class="pg-products__labelInner">Price<\/span><\/dt>\s*<dd class="pg-products__labelTxt">([\s\S]*?)<\/dd>/, productBlock);
-  const releaseText = extract(/<dt class="pg-products__label"><span class="pg-products__labelInner">Launch date<\/span><\/dt>\s*<dd class="pg-products__labelTxt">([\s\S]*?)<\/dd>/, productBlock);
-
-  return {
-    title: title || null,
-    images,
-    price_jpy: parsePrice(priceText),
-    release_date: parseEnglishMonthRelease(releaseText),
-  };
-}
-
-async function importPokemonGlobalModelKits(legacyModelKits = []) {
-  const legacyIdentities = new Set(legacyModelKits.map((kit) => pokemonModelIdentity(kit.names?.en || kit.names?.ja || kit.kit_id)).filter(Boolean));
-  const byUrl = new Map();
-
-  for (const pageUrl of POKEMON_GLOBAL_PRODUCTS_URLS) {
-    const html = await fetchBrowserText(pageUrl);
-    for (const listing of parsePokemonGlobalProductList(html, pageUrl)) {
-      if (!legacyIdentities.has(pokemonModelIdentity(listing.title))) {
-        byUrl.set(listing.source_url, listing);
+  let detailCount = 0;
+  const imported = [];
+  for (const card of cardList) {
+    const previousGallery = (card.existing?.gallery_image_urls || []).filter(isBandaiSpiritsModelImage);
+    let detailImages = previousGallery;
+    if (!previousGallery.length && detailCount < POKEPLA_DETAIL_BUDGET) {
+      await sleep(POKEPLA_REQUEST_GAP_MS);
+      detailCount += 1;
+      try {
+        detailImages = parseBandaiSpiritProductDetail(await fetchText(card.source_url), card.image_url).images;
+      } catch (error) {
+        console.warn(`BANDAI SPIRITS detail fetch failed for ${card.source_url}: ${error.message}`);
       }
     }
+    // Satellite images are plain files; global.bandai-hobby.net ones are signed links that expire.
+    const overseasImages = card.overseas
+      .flatMap((kit) => kit.gallery_image_urls || [])
+      .filter((url) => /^https:\/\//.test(url) && !/[?&]Expires=/.test(url));
+    const names = pokeplaNames(card.title, speciesIndex);
+    imported.push(
+      buildKit({
+        kitId: card.kit_id,
+        franchise: "pokemon",
+        gradeCode: "POKEPLA",
+        subline: pokeplaSubline(card.title),
+        title: names.ja,
+        names,
+        boxArtUrl: card.image_url,
+        galleryUrls: [card.image_url, ...detailImages, ...overseasImages],
+        releaseDate: card.release_date,
+        priceJpy: card.price_jpy,
+        isLimited: /限定/.test(card.title),
+        sourceId: POKEPLA_SOURCE_ID,
+        sourceUrls: [card.source_url, POKEPLA_SEARCH_URL],
+        tags: ["pokemon", "bandai hobby", "plastic model", "pokepla"],
+        notes: "Imported from the official BANDAI SPIRITS product search (Pokémon PLAMO COLLECTION / ポケプラ).",
+        workOverride: "Pokemon",
+        universeOverride: "Pokemon",
+      }),
+    );
   }
 
-  const listings = [...byUrl.values()];
-  console.log(`Found ${listings.length} additional Bandai Hobby Global Pokemon Model Kit listings.`);
-
-  const details = await mapLimit(listings, 4, async (listing) => {
-    try {
-      return parsePokemonGlobalDetail(await fetchBrowserText(listing.source_url), listing.source_url);
-    } catch (error) {
-      console.warn(`Bandai Hobby Global Pokemon detail fetch failed for ${listing.source_url}: ${error.message}`);
-      return { title: null, images: [], release_date: null, price_jpy: null };
-    }
-  });
-
-  return listings.map((listing, index) => {
-    const detail = details[index];
-    const title = detail.title || listing.title;
-    const images = unique([...detail.images, listing.list_image_url]);
-    return buildKit({
-      kitId: `pokepla-${listing.product_id}`,
-      franchise: "pokemon",
-      gradeCode: "POKEPLA",
-      subline: listing.subline,
-      title,
-      names: { ja: null, en: title, zh: null, ko: null },
-      boxArtUrl: images[0] ?? listing.list_image_url,
-      galleryUrls: images,
-      releaseDate: detail.release_date,
-      priceJpy: detail.price_jpy,
-      isLimited: false,
-      sourceId: POKEMON_GLOBAL_SOURCE_ID,
-      sourceUrls: [listing.source_url, ...POKEMON_GLOBAL_PRODUCTS_URLS],
-      tags: ["pokemon", "bandai hobby", "plastic model", "pokepla"],
-      notes: "Imported from the official Bandai Hobby Global Pokemon PLAMO COLLECTION product pages.",
-      workOverride: "Pokemon",
-      universeOverride: "Pokemon",
-    });
-  });
+  console.log(
+    `Imported ${imported.length} Pokepla records (${claimed.size} continue an existing record, ${absorbedOverseas.size} overseas satellite records folded in, ${detailCount} detail pages read).`,
+  );
+  return imported;
 }
 
 function parseGashaponSearchListings(html, resultUrl) {
@@ -1661,12 +1688,21 @@ async function importOptional(label, importer) {
 async function main() {
   const existingDoc = JSON.parse(await readFile("data/kits.json", "utf8"));
   const pokemonModelKits = await importOptional("Pokemon model kits", importPokemonModelKits);
+  const absorbedOverseasPokepla = new Set();
+  const pokeplaOwnedIds = new Set(
+    existingDoc.kits.filter((kit) => (kit.source_refs || []).some((ref) => ref.source_id === POKEPLA_SOURCE_ID)).map((kit) => kit.kit_id),
+  );
+  const pokeplaKits = await importOptional("BANDAI SPIRITS Pokemon model kits", () =>
+    importPokeplaBandaiSpirits(existingDoc.kits, pokemonModelKits, absorbedOverseasPokepla),
+  );
   const imported = [
     ...(await importOptional("Bandai Candy", importCandy)),
     ...(await importOptional("Mobile Suit Ensemble", importEnsemble)),
     ...(await importOptional("Gashapon Senshi f", importForte)),
-    ...pokemonModelKits,
-    ...(await importOptional("Bandai Hobby Global Pokemon model kits", () => importPokemonGlobalModelKits(pokemonModelKits))),
+    // Satellite (overseas) records the Japanese source covers are folded into it,
+    // also on a day the BANDAI SPIRITS search fails (the record keeps its data).
+    ...pokemonModelKits.filter((kit) => !absorbedOverseasPokepla.has(kit.kit_id) && !pokeplaOwnedIds.has(kit.kit_id)),
+    ...pokeplaKits,
     ...(await importOptional("Pokemon Gashapon", () =>
       importGashaponSearch({
         label: "Pokemon",

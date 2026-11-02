@@ -6,6 +6,7 @@ import assert from "node:assert/strict";
 import { inferGrade, inferScale, parseReleaseDate, toKit } from "./import_bandai_spirits_gunpla.mjs";
 import { tamashiiGradeCode, tamashiiListingChanged, tamashiiReleaseDate } from "./import_bandai_collectibles.mjs";
 import { isDateLike } from "./lib/catalog.mjs";
+import { buildSpeciesIndex, pokeplaIdentity, pokeplaNames, pokeplaSpeciesKey, pokeplaSubline } from "./lib/pokepla.mjs";
 import {
   ACCESSORY_KIT,
   bandaiImageId,
@@ -224,5 +225,46 @@ import { parseWikiTables } from "./lib/wiki-tables.mjs";
 assert.equal(isDateLike("2016-70"), false);
 assert.equal(isDateLike("2016-12-31"), true);
 assert.equal(isDateLike("2016-00"), false);
+
+// --- Pokepla (BANDAI SPIRITS product search) ----------------------------------
+{
+  const species = (id, ja, en, ko, zh) => ({ id, names: { ja, en, ko, zh } });
+  const index = buildSpeciesIndex([
+    {
+      species: [
+        species(25, "ピカチュウ", "Pikachu", "피카츄", "皮卡丘"),
+        species(94, "ゲンガー", "Gengar", "팬텀", "耿鬼"),
+        species(150, "ミュウツー", "Mewtwo", "뮤츠", "超梦"),
+        species(151, "ミュウ", "Mew", "뮤", "梦幻"),
+        species(384, "レックウザ", "Rayquaza", "레쿠쟈", "烈空坐"),
+        species(390, "ヒコザル", "Chimchar", "불꽃숭이", "小火焰猴"),
+      ],
+    },
+  ]);
+  const quick = "ポケモンプラモコレクション クイック&#8252; 29 ヒコザル".replace("&#8252;", "‼");
+  assert.deepEqual(pokeplaNames(quick, index), {
+    ja: "ポケモンプラモコレクション クイック!! 29 ヒコザル",
+    en: "Pokémon PLAMO COLLECTION QUICK!! 29 Chimchar",
+    ko: "포켓몬 프라모 컬렉션 퀵!! 29 불꽃숭이",
+    zh: "宝可梦 PLAMO COLLECTION QUICK!! 29 小火焰猴",
+  });
+  assert.equal(pokeplaSubline(quick), "Pokemon Model Kit Quick!!");
+  // The Japanese title and the global/satellite English titles share an identity.
+  assert.equal(pokeplaIdentity(quick, index), "quick:29");
+  assert.equal(pokeplaIdentity("Pokémon PLAMO COLLECTION QUICK!! 29 Chimchar", index), "quick:29");
+  assert.equal(pokeplaIdentity("Pokémon Model Kit Quick!!06 PIPLUP", index), "quick:6");
+  assert.equal(pokeplaIdentity("ポケモンプラモコレクションNo.32ミュウツー", index), "select:32");
+  assert.equal(pokeplaIdentity("ポケモンプラモコレクション No.36+No.38セレクトシリーズ メガリザードンX", index), "select:36+38");
+  // Variants stay apart: black / mega / plain Rayquaza.
+  assert.equal(pokeplaIdentity("ポケモンプラモコレクション セレクトシリーズ 黒いレックウザ", index), "select:-:384:black");
+  assert.equal(pokeplaIdentity("Pokémon PLAMO COLLECTION SELECT SERIES Black Rayquaza", index), "select:-:384:black");
+  assert.equal(pokeplaIdentity("ポケモンプラモコレクション セレクトシリーズ 黒いメガレックウザ", index), "select:-:384:black:mega");
+  // Unnumbered overseas titles fall back to line + Pokémon.
+  assert.equal(pokeplaSpeciesKey("Pokémon Model Kit GENGAR", index), "select:94");
+  assert.equal(pokeplaSpeciesKey("ポケモンプラモコレクション 45 セレクトシリーズ ゲンガー", index), "select:94");
+  assert.equal(pokeplaSpeciesKey("ポケモンプラモコレクション ミュウツー&ミュウ&ピカチュウセット", index), "select:25+150+151");
+  // A name with words the table does not know is left for localize_catalog.mjs.
+  assert.equal(pokeplaNames("ポケモンプラモコレクション ゲンガー まぼろしセット", index).en, null);
+}
 
 console.log("coverage parser tests passed");

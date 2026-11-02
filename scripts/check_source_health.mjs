@@ -15,7 +15,9 @@ const CHECKS = [
   { source_id: "bandai_candy_gundam_jp", url: "https://www.bandai.co.jp/candy/gundam/", expected: /GUNDAM|ガンダム|CONVERGE/i },
   { source_id: "bandai_gashapon_products_jp", url: "https://gashapon.jp/products/result.php?free=%E3%82%AC%E3%83%B3%E3%83%80%E3%83%A0", expected: /ガンダム|GUNDAM|商品/i },
   { source_id: "tamashii_web_jp", url: "https://tamashiiweb.com/item_character/gundam_series/", expected: /METAL BUILD|ROBOT魂|ガンダム/i },
-  { source_id: "bandai_hobby_pokemon_global", url: "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=select", expected: /Pokemon|Pokémon|Gyarados/i },
+  // global.bandai-hobby.net (the old Pokepla source) answers 403 to this user-agent;
+  // Pokepla now come from the BANDAI SPIRITS product search.
+  { source_id: "bandai_spirits_pokepla_jp", url: "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2", expected: /ポケモンプラモコレクション/ },
   { source_id: "pokemon_center_jp", url: "https://www.pokemoncenter-online.com/plush-toys/", expected: /ぬいぐるみ|プラッシー|plush|商品/i },
   { source_id: "takara_tomy_pokemon_jp", url: "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/", expected: /モンコレ|MONCOLLE|ポケモン/i },
   { source_id: "ichiban_kuji_jp", url: "https://1kuji.com/products/search?index_master_search=47", expected: /一番くじ|itemName|ポケモン/i },
@@ -32,6 +34,7 @@ const CATALOG_SOURCES = [
   { source_id: "tamashii_web_jp", label: "Tamashii Web (Gundam)" },
   { source_id: "kotobukiya_armored_core_jp", label: "Kotobukiya Armored Core" },
   { source_id: "takara_tomy_beyblade_x_jp", label: "Takara Tomy BEYBLADE X" },
+  { source_id: "bandai_spirits_pokepla_jp", label: "BANDAI SPIRITS Pokepla" },
   { source_id: "pokemon_center_jp", label: "Pokemon Center plush" },
   { source_id: "takara_tomy_pokemon_jp", label: "Takara Tomy Moncolle" },
   { source_id: "ichiban_kuji_jp", label: "Ichiban Kuji" },
