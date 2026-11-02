@@ -143,6 +143,10 @@
       "enum": ["goods"],
       "description": "Set by scripts/clean_catalog.mjs on products that are not model kits or figures (Blu-ray, CD, books, tickets, apparel …)."
     },
+    "source_name": {
+      "type": "string",
+      "description": "The source's own product title when names carry an added qualifier (Aniplex+ Fate goods sold under one generic title by several campaigns get the campaign in front, see scripts/lib/fate-names.mjs)."
+    },
     "goods_kind": {
       "type": "string",
       "enum": ["ticket", "apparel", "accessory", "household", "stationery", "acrylic", "media_video", "media_audio", "book", "pamphlet", "food", "video_game", "board_game", "card_game", "hobby_supply", "other"],

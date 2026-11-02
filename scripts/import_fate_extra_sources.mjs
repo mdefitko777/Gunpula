@@ -29,6 +29,7 @@ import {
 } from "./lib/kotobukiya-shop.mjs";
 import { KIT_ALIASES_PATH, retiredKitIds } from "./lib/catalog-cleanup.mjs";
 import { gradeForProduct, scaleFor } from "./lib/fate-grades.mjs";
+import { aniplexCampaign, nameKey, needsQualifier, qualifiedName, sameName } from "./lib/fate-names.mjs";
 
 const CATALOG_PATH = "data/kits.json";
 const REQUEST_DELAY_MS = Number(process.env.FATE_EXTRA_DELAY_MS || 150);
@@ -36,6 +37,9 @@ const ANIPLEX_MAX_PAGES = Number(process.env.FATE_ANIPLEX_MAX_PAGES || 40);
 const ANIPLEX_PAGE_SIZE = 48;
 const ANIPLEX_BASE = "https://online.aniplex.co.jp";
 const ANIPLEX_GRID = `${ANIPLEX_BASE}/on/demandware.store/Sites-ANX-Site/ja_JP/Search-UpdateGrid`;
+// Campaign lookups for ambiguous goods names (see lib/fate-names.mjs) go one
+// product page a second; a record keeps its qualified name once it has one.
+const ANIPLEX_CAMPAIGN_DELAY_MS = Number(process.env.FATE_ANIPLEX_CAMPAIGN_DELAY_MS || 1000);
 const TAMASHII_BASE = "https://tamashiiweb.com";
 
 // Character codes on 魂ウェブ that map to Fate works.
@@ -259,7 +263,55 @@ async function fetchAniplex() {
       console.warn(`aniplex_plus_fate_jp detail ${product.key}: ${error.message}`);
     }
   }
+  await qualifyAniplexNames([...byKey.values()]);
   return [...byKey.values()];
+}
+
+// Ten campaigns each sell a 「メインビジュアル B2タペストリー」. Such names
+// (shared by another Fate record, or naming no work, event or character) get the
+// campaign from the product page's breadcrumb in front; the store's own title
+// stays in source_name. A record that was qualified before reuses its name, so
+// only new products cost a page fetch.
+async function qualifyAniplexNames(products) {
+  let catalogKits = [];
+  try {
+    catalogKits = JSON.parse(await readFile(CATALOG_PATH, "utf8")).kits || [];
+  } catch {
+    // No catalog yet: every candidate is looked up.
+  }
+  const previousById = new Map(catalogKits.map((kit) => [kit.kit_id, kit]));
+  const nameCounts = new Map();
+  const count = (name) => {
+    const key = nameKey(name);
+    nameCounts.set(key, (nameCounts.get(key) || 0) + 1);
+  };
+  const ownIds = new Set(products.map((product) => `aniplex-fate-${slugify(product.key, product.key)}`));
+  for (const kit of catalogKits) {
+    if (kit.franchise === "fate" && !ownIds.has(kit.kit_id)) count(kit.source_name || kit.names?.ja);
+  }
+  for (const product of products) count(product.name);
+
+  let fetched = 0;
+  let reused = 0;
+  for (const product of products) {
+    if (!needsQualifier(product.name, nameCounts)) continue;
+    const previous = previousById.get(`aniplex-fate-${slugify(product.key, product.key)}`);
+    if (previous?.source_name && sameName(previous.source_name, product.name) && previous.names?.ja && !sameName(previous.names.ja, product.name)) {
+      product.display_name = previous.names.ja;
+      product.source_name = previous.source_name;
+      reused += 1;
+      continue;
+    }
+    try {
+      await sleep(ANIPLEX_CAMPAIGN_DELAY_MS);
+      const campaign = aniplexCampaign(await fetchText(product.url));
+      fetched += 1;
+      if (campaign) product.display_name = qualifiedName(campaign, product.name);
+    } catch (error) {
+      console.warn(`aniplex_plus_fate_jp campaign ${product.key}: ${error.message}`);
+    }
+  }
+  console.log(`Aniplex+ ambiguous names: ${fetched} campaigns looked up, ${reused} kept from the catalog.`);
 }
 
 // ---------------------------------------------------------------- 一番くじ
@@ -503,6 +555,8 @@ function toKit(product, source, index) {
   const gallery = [...new Set([product.image, ...(product.gallery || [])].filter(Boolean))];
   const image = gallery[0] || null;
   const gradeCode = gradeForProduct(product);
+  const displayName = product.display_name && product.display_name !== product.name ? product.display_name : null;
+  const name = displayName || product.name;
   return {
     kit_id: `${source.idPrefix}-${id}`,
     franchise: "fate",
@@ -510,7 +564,9 @@ function toKit(product, source, index) {
     subline: product.line || source.subline,
     number: null,
     scale: scaleFor(product.name),
-    names: { ja: product.name, en: product.name, zh: product.name, ko: product.name },
+    names: { ja: name, en: name, zh: name, ko: name },
+    // The store's own title when names carry a campaign prefix (lib/fate-names.mjs).
+    ...(displayName ? { source_name: product.source_name || product.name } : {}),
     images: {
       box_art_url: image,
       box_art_source_id: image ? source.source_id : null,
@@ -540,7 +596,10 @@ function mergeCatalog(existingKits, importedKits) {
   const byId = new Map(existingKits.map((kit) => [kit.kit_id, kit]));
   for (const kit of importedKits) {
     const previous = byId.get(kit.kit_id);
-    byId.set(kit.kit_id, previous ? { ...previous, ...kit } : kit);
+    const merged = previous ? { ...previous, ...kit } : kit;
+    // A name that no longer needs its campaign prefix drops the saved store title too.
+    if (!("source_name" in kit)) delete merged.source_name;
+    byId.set(kit.kit_id, merged);
   }
   return [...byId.values()].sort((a, b) => {
     const franchiseCompare = String(a.franchise).localeCompare(String(b.franchise));

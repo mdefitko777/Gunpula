@@ -119,7 +119,9 @@ export const ACCESSORY_KIT =
  * `kit` needs names (and franchise for the Gundam-only hobby-supply rule).
  */
 export function goodsKind(kit) {
-  const name = kitNameText(kit);
+  // The store's own title when the name carries a campaign prefix, so a campaign
+  // such as 「… ART WORKS …」 does not make a tapestry a book.
+  const name = kit?.source_name ? nfkc(kit.source_name) : kitNameText(kit);
   if (!name) return null;
   for (const [kind, pattern] of MEDIA_RULES) {
     if (pattern.test(name)) return kind;
