@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-03",
-  "generated_at": "2026-11-02T21:54:23.034Z",
+  "generated_at": "2026-11-02T22:23:39.661Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,41 +16,43 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-11-02T21:54:21.698Z",
+    "generated_at": "2026-11-02T22:23:37.832Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-03",
-      "generated_at": "2026-11-02T21:54:23.034Z",
+      "generated_at": "2026-11-02T22:23:39.661Z",
       "total_before": 10409,
-      "total_after": 10468,
+      "total_after": 10467,
       "added_count": 9,
-      "changed_count": 22,
+      "changed_count": 17,
       "removed_count": 0,
-      "watched_count": 0,
+      "watched_count": 1,
       "merged_count": 0,
       "backfilled_count": 0,
-      "premium_bandai_count": 20,
+      "premium_bandai_count": 15,
       "bbx_count": 0,
       "franchise_counts": {
         "pokemon": 11,
-        "gundam": 20
+        "gundam": 15
       },
       "reason_counts": {
         "new": 9,
-        "release": 5,
+        "source": 5,
         "series": 12,
-        "source": 6,
         "price": 2
       },
       "interest_tags": [
         "pokemon",
         "gundam",
-        "premium_bandai"
+        "premium_bandai",
+        "seed"
       ],
-      "watch_tags": [],
+      "watch_tags": [
+        "seed"
+      ],
       "added": [
         {
           "kit_id": "pokepla-jp-4573102693655",
@@ -396,41 +398,45 @@
       ],
       "changed": [
         {
-          "kit_id": "pbandai-wb-1000010255",
+          "kit_id": "hg-hg-1-144-4573102614032000",
           "change_type": "changed",
           "franchise": "gundam",
           "grade_code": "HG",
-          "subline": "プレミアムバンダイ",
-          "series_key": "uc_first",
+          "subline": "HG",
+          "series_key": "seed",
           "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
           },
           "names": {
-            "ja": "HG 1 / 144 スーパーカスタムザクF2000",
-            "zh": "HG 1 / 144 スーパーカスタム扎古F2000",
-            "ko": "HG 1/144 슈퍼 커스텀 자쿠 F2000",
-            "en": "HG 1 / 144 スーパーカスタムZakuF2000"
+            "ja": "ＨＧ 1 / 144 ウィンダム（ネオ・ロアノーク専用機）",
+            "zh": "ＨＧ 1 / 144 ウィンダム（ネオ・ロアノーク专用機）",
+            "ko": "HG 1/144 윈담(네오 로아노크 전용기)",
+            "en": "ＨＧ 1 / 144 ウィンダム (ネオ ロアノークCustom機)"
           },
-          "release_date": "2027-01",
-          "price_jpy": 2310,
+          "release_date": "2021-08",
+          "price_jpy": 1540,
           "is_limited": true,
           "is_premium_bandai": true,
-          "watch_tags": [],
+          "watch_tags": [
+            "seed"
+          ],
           "interest_tags": [
             "gundam",
-            "premium_bandai"
+            "premium_bandai",
+            "seed"
           ],
           "change_reasons": [
-            "release"
+            "source"
           ],
           "source_ids": [
+            "bandai_spirits_products_jp",
             "p_bandai_wayback"
           ],
           "source_urls": [
-            "https://p-bandai.jp/item/item-1000010255/"
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102614032000&grp_id=5325"
           ]
         },
         {
@@ -659,6 +665,45 @@
           ],
           "source_urls": [
             "https://p-bandai.jp/item/item-1000115597/"
+          ]
+        },
+        {
+          "kit_id": "mg-mg-1-100-4573102610423000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "MG",
+          "series_key": "mixed",
+          "series_labels": {
+            "zh": "混合",
+            "en": "Mixed",
+            "ja": "複合作品",
+            "ko": "혼합"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 緊急脱出ポッド［プリムローズ］拡張セット",
+            "zh": "ＭＧ 1 / 100 緊急脱出ポッド［プリムローズ］扩展套装",
+            "ko": "MG 1/100 긴급 탈출 포드[프림로즈] 확장 세트",
+            "en": "ＭＧ 1 / 100 緊急脱出ポッド［プリムローズ］Expansion Set"
+          },
+          "release_date": "2020-12",
+          "price_jpy": 2750,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102610423000&grp_id=5325"
           ]
         },
         {
@@ -1170,7 +1215,50 @@
         }
       ],
       "removed": [],
-      "watched": [],
+      "watched": [
+        {
+          "kit_id": "hg-hg-1-144-4573102614032000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ウィンダム（ネオ・ロアノーク専用機）",
+            "zh": "ＨＧ 1 / 144 ウィンダム（ネオ・ロアノーク专用機）",
+            "ko": "HG 1/144 윈담(네오 로아노크 전용기)",
+            "en": "ＨＧ 1 / 144 ウィンダム (ネオ ロアノークCustom機)"
+          },
+          "release_date": "2021-08",
+          "price_jpy": 1540,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102614032000&grp_id=5325"
+          ]
+        }
+      ],
       "merged": [],
       "backfilled": []
     },

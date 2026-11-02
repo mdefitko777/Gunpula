@@ -1,6 +1,7 @@
 {
   "schema": 1,
   "updated_at": "2026-11-03",
+  "description": "kit_ids removed from data/kits.json. aliases: duplicate id -> id of the record that replaced it (move saved entries there). excluded: id -> why the record was dropped (only records of another franchise / IP; goods stay in the catalog with a goods_kind).",
   "aliases": {
     "aniplex-fate-itemffpaofmf": "goodsmile-fate-g4303",
     "aniplex-fate-itemmcclapea": "kotobukiya-fate-4934054058136",
@@ -1641,6 +1642,8 @@
     "pbandai-wb-1000161106": "hg-hg-1-144-4573102610379000",
     "pbandai-wb-1000161107": "rg-rg-1-144-iii-4573102618030000",
     "pbandai-wb-1000161849": "rg-rg-1-144-4573102621962000",
+    "pbandai-wb-1000163279": "hg-hg-1-144-4573102614032000",
+    "pbandai-wb-1000163280": "mg-mg-1-100-4573102610423000",
     "pbandai-wb-1000163281": "mg-mg-1-100-4573102612540000",
     "pbandai-wb-1000163282": "hg-hg-1-144-tr-1-ii-advance-of-z-4573102610324000",
     "pbandai-wb-1000163288": "hg-hg-1-144-4573102616845000",
@@ -2641,6 +2644,7 @@
     "rg-rg-1-144-specii-4573102672018000": "pbandai-wb-1000254947",
     "rg-rg-1-144-tv-ver-4573102602367000": "pbandai-wb-1000142878",
     "rg-rg-1-144-ver-4543112896469000": "pbandai-wb-1000118949",
+    "robot-spirits-jawiki-4942b7e785": "tamashii-1419",
     "sd-bb-legendbb-ver-4543112896384000": "pbandai-wb-1000258387",
     "sd-bb-legendbb-ver-4543112930118000": "pbandai-wb-1000258388",
     "sd-bb-zgmf-4573102674548000": "pbandai-wb-1000222395",
@@ -2759,11 +2763,9 @@
     "tamashii-16158": "tamashii-16068",
     "tamashii-16170": "tamashii-16134",
     "tamashii-16171": "tamashii-16129",
-    "tamashii-16172": "tamashii-16135",
-    "robot-spirits-jawiki-4942b7e785": "tamashii-1419"
+    "tamashii-16172": "tamashii-16135"
   },
   "excluded": {
     "pbandai-wb-1000255817": "wrong_franchise: 超宇宙刑事ギャバン Blu-ray matched armored_core through 'ネクスト' in 'Vシネクスト'"
-  },
-  "description": "kit_ids removed from data/kits.json. aliases: duplicate id -> id of the record that replaced it (move saved entries there). excluded: id -> why the record was dropped (only records of another franchise / IP; goods stay in the catalog with a goods_kind)."
+  }
 }
