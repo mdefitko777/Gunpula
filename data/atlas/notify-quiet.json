@@ -2,7 +2,9 @@
   "note": "Data-maintenance commits whose kits.json diffs must not reach the app as news (coverage repair 2026-11, image relink). feed_dates: update-feed.json dates written by such a maintenance run. date_quiet_reasons: on that date, items whose every reason is in the list are dropped (the first live refresh after the coverage regeneration re-touched sources/grades of hundreds of records).",
   "commits": [
     "0226098fbcff6dedac9d14399665e2aa4ef4bca7",
-    "0db2913d0aa00579e9d86562975bb3918ce4ce92"
+    "0db2913d0aa00579e9d86562975bb3918ce4ce92",
+    "2a621346b279ab31ab82231c5a1454a28a1a869e",
+    "bfb3ff36b06aa2e14e9bfe2bc062fee492b093ee"
   ],
   "feed_dates": [
     "2026-11-02"
