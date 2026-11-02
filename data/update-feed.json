@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-02",
-  "generated_at": "2026-11-01T23:33:52.256Z",
+  "generated_at": "2026-11-02T00:03:02.078Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,31 +16,31 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-11-01T23:33:51.322Z",
+    "generated_at": "2026-11-02T00:03:00.898Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-02",
-      "generated_at": "2026-11-01T23:33:52.256Z",
+      "generated_at": "2026-11-02T00:03:02.078Z",
       "total_before": 9165,
-      "total_after": 10398,
-      "added_count": 125,
-      "changed_count": 190,
+      "total_after": 10400,
+      "added_count": 127,
+      "changed_count": 189,
       "removed_count": 1,
-      "watched_count": 195,
-      "premium_bandai_count": 123,
+      "watched_count": 194,
+      "premium_bandai_count": 125,
       "bbx_count": 2,
       "franchise_counts": {
-        "gundam": 244,
+        "gundam": 246,
         "pokemon": 5,
-        "fate": 64,
+        "fate": 63,
         "beyblade": 2
       },
       "reason_counts": {
-        "new": 125,
-        "source": 127,
+        "new": 127,
+        "source": 126,
         "name": 26,
         "product_line": 10,
         "limited": 8,
@@ -1013,6 +1013,47 @@
           ]
         },
         {
+          "kit_id": "pbandai-wb-1000212664",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "機動戦士ガンダムSEED FREEDOM Blu-ray Mighty Edition",
+            "zh": "机动战士高达SEED FREEDOM Blu-ray Mighty Edition",
+            "ko": "기동전사 건담SEED FREEDOM Blu-ray Mighty Edition",
+            "en": "Mobile Suit Gundam SEED FREEDOM Blu-ray Mighty Edition"
+          },
+          "release_date": null,
+          "price_jpy": 27500,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000212664/"
+          ]
+        },
+        {
           "kit_id": "tamashii-16152",
           "change_type": "added",
           "franchise": "gundam",
@@ -1048,6 +1089,44 @@
           "source_urls": [
             "https://tamashiiweb.com/item/16152/",
             "https://tamashiiweb.com/item_brand/gundam_universe/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000256489",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "uc_first",
+          "series_labels": {
+            "zh": "初代",
+            "en": "0079",
+            "ja": "初代",
+            "ko": "초대"
+          },
+          "names": {
+            "ja": "Full Scale Works 機動戦士ガンダム シャア・アズナブル シュタールヘルム",
+            "zh": "Full Scale Works 机动战士高达 シャア・アズナブル シュタールヘルム",
+            "ko": "Full Scale Works 기동전사 건담 シャア・アズナブル シュタールヘルム",
+            "en": "Full Scale Works Mobile Suit Gundam シャア アズナブル シュタールヘルム"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 29700,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000256489/"
           ]
         },
         {
@@ -4591,80 +4670,6 @@
           ],
           "source_urls": [
             "https://online.aniplex.co.jp/itemSOlktwos13.html"
-          ]
-        },
-        {
-          "kit_id": "aniplex-fate-itemsolktwos15",
-          "change_type": "added",
-          "franchise": "fate",
-          "grade_code": "FATE_GOODS",
-          "subline": "Aniplex+",
-          "series_key": "fate_fgo",
-          "series_labels": {
-            "zh": "FGO",
-            "en": "FGO",
-            "ja": "FGO",
-            "ko": "FGO"
-          },
-          "names": {
-            "ja": "ランダムアクリルブロック（全9種）",
-            "zh": "ランダムアクリルブロック（全9種）",
-            "ko": "ランダムアクリルブロック（全9種）",
-            "en": "ランダムアクリルブロック (全9種)"
-          },
-          "release_date": null,
-          "price_jpy": 1000,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "fate"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "aniplex_plus_fate_jp"
-          ],
-          "source_urls": [
-            "https://online.aniplex.co.jp/itemSOlktwos15.html"
-          ]
-        },
-        {
-          "kit_id": "aniplex-fate-itemsolktwos25",
-          "change_type": "added",
-          "franchise": "fate",
-          "grade_code": "FATE_GOODS",
-          "subline": "Aniplex+",
-          "series_key": "fate_fgo",
-          "series_labels": {
-            "zh": "FGO",
-            "en": "FGO",
-            "ja": "FGO",
-            "ko": "FGO"
-          },
-          "names": {
-            "ja": "ランダムマグネット（全9種）",
-            "zh": "ランダムマグネット（全9種）",
-            "ko": "ランダムマグネット（全9種）",
-            "en": "ランダムマグネット (全9種)"
-          },
-          "release_date": null,
-          "price_jpy": 500,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "fate"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "aniplex_plus_fate_jp"
-          ],
-          "source_urls": [
-            "https://online.aniplex.co.jp/itemSOlktwos25.html"
           ]
         }
       ],
