@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-02T21:20:20.591Z",
+  "updated_at": "2026-11-02T21:49:59.087Z",
   "direct_p_bandai_status": "blocked",
   "access_method": "wayback_machine",
   "entries": {
@@ -2635,8 +2635,9 @@
       "kit_id": "hg-hg-1-144-4549660018742000"
     },
     "https://p-bandai.jp/item/item-1000252424/": {
-      "checked_at": "2026-07-26T06:45:08.700Z",
+      "checked_at": "2026-11-02T21:48:22.156Z",
       "status": "error",
+      "attempts": 2,
       "message": "HTTP 404"
     },
     "https://p-bandai.jp/item/item-1000139307/": {
@@ -2904,9 +2905,9 @@
       "kit_id": "sd-bb-392-4543112895059000"
     },
     "https://p-bandai.jp/item/item-1000251731/": {
-      "checked_at": "2026-07-26T06:45:51.228Z",
-      "status": "error",
-      "message": "HTTP 404"
+      "checked_at": "2026-11-02T21:48:45.244Z",
+      "status": "enriched",
+      "kit_id": "hg-hguc-1-144-ams-129-4543112896421000"
     },
     "https://p-bandai.jp/item/item-1000251733/": {
       "checked_at": "2026-07-26T06:45:54.860Z",
@@ -3094,8 +3095,9 @@
       "kit_id": "hg-hguc-1-144-c-ver-4543112849106000"
     },
     "https://p-bandai.jp/item/item-1000252190/": {
-      "checked_at": "2026-07-26T20:05:03.235Z",
+      "checked_at": "2026-11-02T21:49:00.307Z",
       "status": "error",
+      "attempts": 2,
       "message": "HTTP 404"
     },
     "https://p-bandai.jp/item/item-1000253791/": {
@@ -4288,9 +4290,11 @@
       "status": "off_catalog"
     },
     "https://p-bandai.jp/item/item-1000118949/": {
-      "checked_at": "2026-11-01T18:37:19.866Z",
+      "checked_at": "2026-11-02T21:48:56.737Z",
       "status": "listed",
-      "kit_id": "pbandai-wb-1000118949"
+      "kit_id": "pbandai-wb-1000118949",
+      "attempts": 1,
+      "message": "fetch failed"
     },
     "https://p-bandai.jp/item/item-1000117502/": {
       "checked_at": "2026-07-26T22:45:31.051Z",
@@ -4514,9 +4518,10 @@
       "kit_id": "mg-mg-1-100-4543112623522000"
     },
     "https://p-bandai.jp/item/item-1000188738/": {
-      "checked_at": "2026-07-27T20:24:49.142Z",
+      "checked_at": "2026-11-02T21:49:13.595Z",
       "status": "error",
-      "message": "HTTP 503"
+      "attempts": 2,
+      "message": "fetch failed"
     },
     "https://p-bandai.jp/item/item-1000144757/": {
       "checked_at": "2026-07-27T20:24:49.415Z",
@@ -5108,8 +5113,9 @@
       "kit_id": "hg-hg-1-144-4543112569073000"
     },
     "https://p-bandai.jp/item/item-1000141109/": {
-      "checked_at": "2026-07-28T20:21:04.183Z",
+      "checked_at": "2026-11-02T21:49:16.543Z",
       "status": "error",
+      "attempts": 2,
       "message": "HTTP 404"
     },
     "https://p-bandai.jp/item/item-1000150021/": {
@@ -5398,8 +5404,9 @@
       "kit_id": "hg-hg-1-144-4543112512475000"
     },
     "https://p-bandai.jp/item/item-1000125971/": {
-      "checked_at": "2026-07-28T20:21:33.135Z",
+      "checked_at": "2026-11-02T21:49:22.082Z",
       "status": "error",
+      "attempts": 2,
       "message": "HTTP 503"
     },
     "https://p-bandai.jp/item/item-1000149854/": {
@@ -5408,9 +5415,10 @@
       "kit_id": "mg-mg-1-100-4543112512444000"
     },
     "https://p-bandai.jp/item/item-1000149853/": {
-      "checked_at": "2026-07-28T20:21:33.920Z",
+      "checked_at": "2026-11-02T21:49:33.575Z",
       "status": "error",
-      "message": "HTTP 503"
+      "attempts": 2,
+      "message": "fetch failed"
     },
     "https://p-bandai.jp/item/item-1000182634/": {
       "checked_at": "2026-07-28T20:21:34.405Z",
@@ -6373,8 +6381,9 @@
       "kit_id": "hg-hguc-1-144-4543112321695000"
     },
     "https://p-bandai.jp/item/item-1000136427/": {
-      "checked_at": "2026-07-30T07:51:40.659Z",
+      "checked_at": "2026-11-02T21:49:35.159Z",
       "status": "error",
+      "attempts": 2,
       "message": "HTTP 404"
     },
     "https://p-bandai.jp/item/item-1000146440/": {
@@ -7863,9 +7872,9 @@
       "kit_id": "ng-1-100-4902425382456000"
     },
     "https://p-bandai.jp/item/item-1000250494/": {
-      "checked_at": "2026-07-31T20:21:30.410Z",
-      "status": "error",
-      "message": "HTTP 404"
+      "checked_at": "2026-11-02T21:49:37.299Z",
+      "status": "enriched",
+      "kit_id": "ng-1-100-rxf91-4902425357645000"
     },
     "https://p-bandai.jp/item/item-1000146694/": {
       "checked_at": "2026-07-31T20:21:31.031Z",
@@ -7913,9 +7922,9 @@
       "kit_id": "ng-1-100-4902425326450000"
     },
     "https://p-bandai.jp/item/item-1000250493/": {
-      "checked_at": "2026-07-31T20:21:41.586Z",
-      "status": "error",
-      "message": "HTTP 404"
+      "checked_at": "2026-11-02T21:49:39.484Z",
+      "status": "enriched",
+      "kit_id": "ng-1-100-4902425326467000"
     },
     "https://p-bandai.jp/item/item-1000250489/": {
       "checked_at": "2026-07-31T20:21:45.571Z",
@@ -7928,9 +7937,8 @@
       "kit_id": "ng-1-100-f-90-2l-4902425345666000"
     },
     "https://p-bandai.jp/item/item-1000250488/": {
-      "checked_at": "2026-07-31T20:21:47.410Z",
-      "status": "error",
-      "message": "HTTP 404"
+      "checked_at": "2026-11-02T21:49:41.623Z",
+      "status": "unparsed"
     },
     "https://p-bandai.jp/item/item-1000146699/": {
       "checked_at": "2026-07-31T20:21:48.181Z",
@@ -7938,9 +7946,9 @@
       "kit_id": "ng-1-100-4902425317007000"
     },
     "https://p-bandai.jp/item/item-1000250487/": {
-      "checked_at": "2026-07-31T20:21:50.255Z",
-      "status": "error",
-      "message": "HTTP 404"
+      "checked_at": "2026-11-02T21:49:43.284Z",
+      "status": "enriched",
+      "kit_id": "ng-1-100-4902425314495000"
     },
     "https://p-bandai.jp/item/item-1000160165/": {
       "checked_at": "2026-07-31T20:21:50.502Z",
@@ -8328,9 +8336,8 @@
       "kit_id": "ng-1-550-4902425086699000"
     },
     "https://p-bandai.jp/item/item-1000152214/": {
-      "checked_at": "2026-07-31T20:23:57.055Z",
-      "status": "error",
-      "message": "fetch failed"
+      "checked_at": "2026-11-02T21:49:45.493Z",
+      "status": "unparsed"
     },
     "https://p-bandai.jp/item/item-1000143596/": {
       "checked_at": "2026-07-31T20:24:02.272Z",
@@ -8342,9 +8349,8 @@
       "status": "unparsed"
     },
     "https://p-bandai.jp/item/item-1000143601/": {
-      "checked_at": "2026-07-31T20:24:07.547Z",
-      "status": "error",
-      "message": "fetch failed"
+      "checked_at": "2026-11-02T21:49:47.455Z",
+      "status": "unparsed"
     },
     "https://p-bandai.jp/item/item-1000150066/": {
       "checked_at": "2026-08-01T20:02:14.114Z",
@@ -24079,8 +24085,8 @@
       "kit_id": "pbandai-wb-1000113544"
     },
     "https://p-bandai.jp/item/item-1000113445/": {
-      "checked_at": "2026-11-01T18:37:21.878Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:47:27.535Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000113445"
     },
     "https://p-bandai.jp/item/item-1000113161/": {
@@ -24099,8 +24105,8 @@
       "kit_id": "pbandai-wb-1000113094"
     },
     "https://p-bandai.jp/item/item-1000113021/": {
-      "checked_at": "2026-11-01T18:37:21.878Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:47:58.393Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000113021"
     },
     "https://p-bandai.jp/item/item-1000113049/": {
@@ -24139,9 +24145,8 @@
       "kit_id": "pbandai-wb-1000112989"
     },
     "https://p-bandai.jp/item/item-1000112988/": {
-      "checked_at": "2026-11-01T18:37:24.047Z",
-      "status": "listed",
-      "kit_id": "pbandai-wb-1000112988"
+      "checked_at": "2026-11-02T21:48:01.004Z",
+      "status": "unparsed"
     },
     "https://p-bandai.jp/item/item-1000112987/": {
       "checked_at": "2026-11-01T18:37:24.047Z",
@@ -24149,8 +24154,8 @@
       "kit_id": "pbandai-wb-1000112987"
     },
     "https://p-bandai.jp/item/item-1000112927/": {
-      "checked_at": "2026-11-01T18:37:24.047Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:47:53.726Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000112927"
     },
     "https://p-bandai.jp/item/item-1000112918/": {
@@ -24174,8 +24179,8 @@
       "kit_id": "pbandai-wb-1000112824"
     },
     "https://p-bandai.jp/item/item-1000112649/": {
-      "checked_at": "2026-11-01T18:37:24.047Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:47:51.109Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000112649"
     },
     "https://p-bandai.jp/item/item-1000112770/": {
@@ -24244,8 +24249,8 @@
       "kit_id": "pbandai-wb-1000113965"
     },
     "https://p-bandai.jp/item/item-1000113899/": {
-      "checked_at": "2026-11-01T18:37:28.080Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:47:09.343Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000113899"
     },
     "https://p-bandai.jp/item/item-1000113940/": {
@@ -24294,14 +24299,12 @@
       "kit_id": "pbandai-wb-1000113809"
     },
     "https://p-bandai.jp/item/item-1000113716/": {
-      "checked_at": "2026-11-01T18:37:28.080Z",
-      "status": "listed",
-      "kit_id": "pbandai-wb-1000113716"
+      "checked_at": "2026-11-02T21:47:23.101Z",
+      "status": "unparsed"
     },
     "https://p-bandai.jp/item/item-1000113631/": {
-      "checked_at": "2026-11-01T18:37:28.080Z",
-      "status": "listed",
-      "kit_id": "pbandai-wb-1000113631"
+      "checked_at": "2026-11-02T21:47:41.916Z",
+      "status": "unparsed"
     },
     "https://p-bandai.jp/item/item-1000115500/": {
       "checked_at": "2026-11-01T18:37:30.097Z",
@@ -24324,8 +24327,8 @@
       "kit_id": "pbandai-wb-1000115181"
     },
     "https://p-bandai.jp/item/item-1000115178/": {
-      "checked_at": "2026-11-01T18:37:30.097Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:46:54.223Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000115178"
     },
     "https://p-bandai.jp/item/item-1000115269/": {
@@ -24334,13 +24337,13 @@
       "kit_id": "pbandai-wb-1000115269"
     },
     "https://p-bandai.jp/item/item-1000115268/": {
-      "checked_at": "2026-11-01T18:37:30.097Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:47:21.294Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000115268"
     },
     "https://p-bandai.jp/item/item-1000115266/": {
-      "checked_at": "2026-11-01T18:37:30.097Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:47:19.533Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000115266"
     },
     "https://p-bandai.jp/item/item-1000115265/": {
@@ -24359,19 +24362,18 @@
       "kit_id": "pbandai-wb-1000115240"
     },
     "https://p-bandai.jp/item/item-1000115168/": {
-      "checked_at": "2026-11-01T18:37:30.097Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:46:51.071Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000115168"
     },
     "https://p-bandai.jp/item/item-1000115238/": {
-      "checked_at": "2026-11-01T18:37:30.097Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:47:16.920Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000115238"
     },
     "https://p-bandai.jp/item/item-1000115174/": {
-      "checked_at": "2026-11-01T18:37:30.097Z",
-      "status": "listed",
-      "kit_id": "pbandai-wb-1000115174"
+      "checked_at": "2026-11-02T21:47:14.123Z",
+      "status": "unparsed"
     },
     "https://p-bandai.jp/item/item-1000115047/": {
       "checked_at": "2026-11-01T18:37:30.097Z",
@@ -24416,13 +24418,13 @@
       "kit_id": "pbandai-wb-1000115892"
     },
     "https://p-bandai.jp/item/item-1000115958/": {
-      "checked_at": "2026-11-01T18:37:32.108Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:47:06.909Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000115958"
     },
     "https://p-bandai.jp/item/item-1000115956/": {
-      "checked_at": "2026-11-01T18:37:32.108Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:47:03.345Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000115956"
     },
     "https://p-bandai.jp/item/item-1000115903/": {
@@ -24441,8 +24443,8 @@
       "kit_id": "pbandai-wb-1000115894"
     },
     "https://p-bandai.jp/item/item-1000115893/": {
-      "checked_at": "2026-11-01T18:37:32.108Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:46:59.717Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000115893"
     },
     "https://p-bandai.jp/item/item-1000115644/": {
@@ -24491,8 +24493,8 @@
       "kit_id": "pbandai-wb-1000110935"
     },
     "https://p-bandai.jp/item/item-1000110878/": {
-      "checked_at": "2026-11-01T18:37:34.123Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:48:08.820Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000110878"
     },
     "https://p-bandai.jp/item/item-1000111051/": {
@@ -24521,8 +24523,8 @@
       "kit_id": "pbandai-wb-1000110844"
     },
     "https://p-bandai.jp/item/item-1000110800/": {
-      "checked_at": "2026-11-01T18:37:34.123Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:48:05.935Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000110800"
     },
     "https://p-bandai.jp/item/item-1000110793/": {
@@ -24541,9 +24543,8 @@
       "kit_id": "pbandai-wb-1000110620"
     },
     "https://p-bandai.jp/item/item-1000110516/": {
-      "checked_at": "2026-11-01T18:37:34.123Z",
-      "status": "listed",
-      "kit_id": "pbandai-wb-1000110516"
+      "checked_at": "2026-11-02T21:48:15.568Z",
+      "status": "unparsed"
     },
     "https://p-bandai.jp/item/item-1000110445/": {
       "checked_at": "2026-11-01T18:37:34.123Z",
@@ -24556,8 +24557,8 @@
       "kit_id": "pbandai-wb-1000110317"
     },
     "https://p-bandai.jp/item/item-1000110311/": {
-      "checked_at": "2026-11-01T18:37:34.123Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:48:03.623Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000110311"
     },
     "https://p-bandai.jp/item/item-1000107421/": {
@@ -24566,8 +24567,8 @@
       "kit_id": "pbandai-wb-1000107421"
     },
     "https://p-bandai.jp/item/item-1000107583/": {
-      "checked_at": "2026-11-01T18:37:36.137Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:48:19.013Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000107583"
     },
     "https://p-bandai.jp/item/item-1000107274/": {
@@ -24666,8 +24667,8 @@
       "kit_id": "pbandai-wb-1000111727"
     },
     "https://p-bandai.jp/item/item-1000111587/": {
-      "checked_at": "2026-11-01T18:37:38.147Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:47:45.239Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000111587"
     },
     "https://p-bandai.jp/item/item-1000111693/": {
@@ -24726,9 +24727,8 @@
       "kit_id": "pbandai-wb-1000105597"
     },
     "https://p-bandai.jp/item/item-1000105594/": {
-      "checked_at": "2026-11-01T18:37:40.165Z",
-      "status": "listed",
-      "kit_id": "pbandai-wb-1000105594"
+      "checked_at": "2026-11-02T21:48:11.566Z",
+      "status": "unparsed"
     },
     "https://p-bandai.jp/item/item-1000105593/": {
       "checked_at": "2026-11-01T18:37:40.165Z",
@@ -24876,8 +24876,8 @@
       "kit_id": "pbandai-wb-1000107529"
     },
     "https://p-bandai.jp/item/item-1000112530/": {
-      "checked_at": "2026-11-01T18:37:44.191Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:47:25.749Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000112530"
     },
     "https://p-bandai.jp/item/item-1000112704/": {
@@ -24891,13 +24891,13 @@
       "kit_id": "pbandai-wb-1000112685"
     },
     "https://p-bandai.jp/item/item-1000112047/": {
-      "checked_at": "2026-11-01T18:37:46.199Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:47:49.224Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000112047"
     },
     "https://p-bandai.jp/item/item-1000112046/": {
-      "checked_at": "2026-11-01T18:37:46.199Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:47:47.394Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000112046"
     },
     "https://p-bandai.jp/item/item-1000112645/": {
@@ -25321,9 +25321,8 @@
       "kit_id": "pbandai-wb-1000097151"
     },
     "https://p-bandai.jp/item/item-1000093780/": {
-      "checked_at": "2026-11-01T18:38:04.462Z",
-      "status": "listed",
-      "kit_id": "pbandai-wb-1000093780"
+      "checked_at": "2026-11-02T21:48:24.408Z",
+      "status": "unparsed"
     },
     "https://p-bandai.jp/item/item-1000093767/": {
       "checked_at": "2026-11-01T18:38:04.462Z",
@@ -25481,8 +25480,8 @@
       "kit_id": "pbandai-wb-1000100667"
     },
     "https://p-bandai.jp/item/item-1000100666/": {
-      "checked_at": "2026-11-01T18:38:06.476Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:48:20.886Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000100666"
     },
     "https://p-bandai.jp/item/item-1000100775/": {
@@ -26091,8 +26090,8 @@
       "kit_id": "pbandai-wb-1000090168"
     },
     "https://p-bandai.jp/item/item-1000090122/": {
-      "checked_at": "2026-11-01T18:38:26.588Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:48:29.988Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000090122"
     },
     "https://p-bandai.jp/item/item-1000089982/": {
@@ -26281,18 +26280,18 @@
       "kit_id": "pbandai-wb-1000010257"
     },
     "https://p-bandai.jp/item/item-1000010255/": {
-      "checked_at": "2026-11-01T18:38:32.623Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:49:58.086Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000010255"
     },
     "https://p-bandai.jp/item/item-1000010254/": {
-      "checked_at": "2026-11-01T18:38:32.623Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:49:56.272Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000010254"
     },
     "https://p-bandai.jp/item/item-1000010253/": {
-      "checked_at": "2026-11-01T18:38:32.623Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:49:54.542Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000010253"
     },
     "https://p-bandai.jp/item/item-1000010239/": {
@@ -26316,8 +26315,8 @@
       "kit_id": "pbandai-wb-1000009633"
     },
     "https://p-bandai.jp/item/item-1000008876/": {
-      "checked_at": "2026-11-01T18:38:32.623Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:49:52.547Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000008876"
     },
     "https://p-bandai.jp/item/item-1000008875/": {
@@ -26376,8 +26375,8 @@
       "kit_id": "pbandai-wb-1000003915"
     },
     "https://p-bandai.jp/item/item-1000003914/": {
-      "checked_at": "2026-11-01T18:38:34.636Z",
-      "status": "listed",
+      "checked_at": "2026-11-02T21:49:49.660Z",
+      "status": "enriched",
       "kit_id": "pbandai-wb-1000003914"
     },
     "https://p-bandai.jp/item/item-1000000126/": {

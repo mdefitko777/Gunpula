@@ -1,14 +1,23 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-02T21:16:56.013Z",
+  "generated_at": "2026-11-02T21:45:41.906Z",
   "updated_at": "2026-11-03",
   "direct_p_bandai_status": "blocked",
   "scan_mode": "incremental",
   "scan_limit": 240,
-  "scanned_this_run": 0,
+  "scanned_this_run": 1,
   "failed_this_run": 0,
   "hit_count": 1471,
   "entries": [
+    {
+      "kit_id": "hg-hg-1-144-4573102672636000",
+      "detail_url": "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102672636000&grp_id=5325",
+      "title": "ＨＧ 1/144 ゲルググメナース",
+      "p_bandai_urls": [
+        "https://p-bandai.jp/item/item-1000259096/"
+      ],
+      "scanned_at": "2026-11-02T21:45:41.905Z"
+    },
     {
       "kit_id": "hg-hg-1-144-4573102660275000",
       "detail_url": "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102660275000&grp_id=5325",
@@ -1797,16 +1806,6 @@
       "title": "HG 1/144 ガンダムヴァサーゴ",
       "p_bandai_urls": [],
       "scanned_at": "2026-11-02T20:50:02.250Z"
-    },
-    {
-      "kit_id": "hg-hg-1-144-4573102672636000",
-      "detail_url": "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102672636000&grp_id=5325",
-      "title": "ＨＧ 1/144 ゲルググメナース",
-      "p_bandai_urls": [
-        "https://p-bandai.jp/item/item-1000259096/"
-      ],
-      "scanned_at": "2026-11-01T23:52:51.768Z",
-      "last_error": "Command failed: curl --silent --show-error --location --max-time 8 --user-agent Gunpula catalog importer (+https://github.com/mdefitko777/Gunpula) --header Accept: text/html,application/xhtml+xml https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102672636000&grp_id=5325\ncurl: (92) HTTP/2 stream 1 was not closed cleanly: INTERNAL_ERROR (err 2)\n"
     },
     {
       "kit_id": "mg-mg-1-100-4573102634214000",

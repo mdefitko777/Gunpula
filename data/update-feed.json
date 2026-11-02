@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-03",
-  "generated_at": "2026-11-02T21:24:45.109Z",
+  "generated_at": "2026-11-02T21:54:23.034Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,33 +16,34 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-11-02T21:24:43.132Z",
+    "generated_at": "2026-11-02T21:54:21.698Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-03",
-      "generated_at": "2026-11-02T21:24:45.109Z",
+      "generated_at": "2026-11-02T21:54:23.034Z",
       "total_before": 10409,
       "total_after": 10468,
-      "added_count": 3,
-      "changed_count": 14,
+      "added_count": 9,
+      "changed_count": 22,
       "removed_count": 0,
       "watched_count": 0,
       "merged_count": 0,
       "backfilled_count": 0,
-      "premium_bandai_count": 12,
+      "premium_bandai_count": 20,
       "bbx_count": 0,
       "franchise_counts": {
-        "pokemon": 5,
-        "gundam": 12
+        "pokemon": 11,
+        "gundam": 20
       },
       "reason_counts": {
-        "new": 3,
+        "new": 9,
+        "release": 5,
         "series": 12,
-        "price": 2,
-        "source": 2
+        "source": 6,
+        "price": 2
       },
       "interest_tags": [
         "pokemon",
@@ -51,81 +52,6 @@
       ],
       "watch_tags": [],
       "added": [
-        {
-          "kit_id": "pokemon-center-4521329349916",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "587 ぬいぐるみ Pok&eacute;mon fit エモンガ",
-            "zh": "587 ぬいぐるみ Pok&eacute;mon fit エモンガ",
-            "ko": "587 ぬいぐるみ Pok&eacute;mon fit エモンガ",
-            "en": "587 ぬいぐるみ Pok&eacute;mon fit エモンガ"
-          },
-          "release_date": null,
-          "price_jpy": 1320,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329349916.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329413297",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "A038 ぬいぐるみ Pok&eacute;mon fit キュウコン(アローラのすがた)",
-            "zh": "A038 ぬいぐるみ Pok&eacute;mon fit キュウコン(アローラのすがた)",
-            "ko": "A038 ぬいぐるみ Pok&eacute;mon fit キュウコン(アローラのすがた)",
-            "en": "A038 ぬいぐるみ Pok&eacute;mon fit キュウコン(アローラのすがた)"
-          },
-          "release_date": "2026-03-07",
-          "price_jpy": 858,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "bandai_spirits_pokepla_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102693631000&grp_id=5325",
-            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc"
-          ]
-        },
         {
           "kit_id": "pokepla-jp-4573102693655",
           "change_type": "added",
@@ -422,10 +348,12 @@
             "new"
           ],
           "source_ids": [
+            "bandai_spirits_pokepla_jp",
             "pokemon_center_jp"
           ],
           "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329413297.html"
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102693631000&grp_id=5325",
+            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc"
           ]
         },
         {
@@ -467,6 +395,44 @@
         }
       ],
       "changed": [
+        {
+          "kit_id": "pbandai-wb-1000010255",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "uc_first",
+          "series_labels": {
+            "zh": "初代",
+            "en": "0079",
+            "ja": "初代",
+            "ko": "초대"
+          },
+          "names": {
+            "ja": "HG 1 / 144 スーパーカスタムザクF2000",
+            "zh": "HG 1 / 144 スーパーカスタム扎古F2000",
+            "ko": "HG 1/144 슈퍼 커스텀 자쿠 F2000",
+            "en": "HG 1 / 144 スーパーカスタムZakuF2000"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 2310,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000010255/"
+          ]
+        },
         {
           "kit_id": "pbandai-wb-1000256979",
           "change_type": "changed",
@@ -810,6 +776,47 @@
           ]
         },
         {
+          "kit_id": "hg-hguc-1-144-ams-129-4543112896421000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HGUC",
+          "series_key": "unicorn",
+          "series_labels": {
+            "zh": "UC",
+            "en": "Unicorn",
+            "ja": "UC",
+            "ko": "UC"
+          },
+          "names": {
+            "ja": "HGUC 1 / 144 AMS-129 ギラ・ズール（ギルボア・サント機）",
+            "zh": "HGUC 1 / 144 AMS-129 ギラ・ズール（ギルボア・サント機）",
+            "ko": "HGUC 1/144 AMS-129 기라 줄루 (길보아 산트기)",
+            "en": "HGUC 1 / 144 AMS-129 ギラ ズール (ギルボア サント機)"
+          },
+          "release_date": "2014-06",
+          "price_jpy": 2860,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112896421000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000251731/"
+          ]
+        },
+        {
           "kit_id": "pbandai-wb-1000010254",
           "change_type": "changed",
           "franchise": "gundam",
@@ -828,7 +835,7 @@
             "ko": "HG 1/144 Hi-ν건담 GPB 컬러",
             "en": "HG 1 / 144 Hi-ニューGundam GPBカラー"
           },
-          "release_date": null,
+          "release_date": "2011-07",
           "price_jpy": 2310,
           "is_limited": true,
           "is_premium_bandai": true,
@@ -838,13 +845,251 @@
             "premium_bandai"
           ],
           "change_reasons": [
-            "series"
+            "series",
+            "release"
           ],
           "source_ids": [
             "p_bandai_wayback"
           ],
           "source_urls": [
             "https://p-bandai.jp/item/item-1000010254/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000010253",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "other",
+          "series_labels": {
+            "zh": "其他",
+            "en": "Other",
+            "ja": "その他",
+            "ko": "기타"
+          },
+          "names": {
+            "ja": "HG 1 / 144 ビギニングガンダム",
+            "zh": "HG 1 / 144 ビギニング高达",
+            "ko": "HG 1/144 비기닝 건담",
+            "en": "HG 1 / 144 ビギニングGundam"
+          },
+          "release_date": "2011-07",
+          "price_jpy": 1680,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000010253/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000008876",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "unicorn",
+          "series_labels": {
+            "zh": "UC",
+            "en": "Unicorn",
+            "ja": "UC",
+            "ko": "UC"
+          },
+          "names": {
+            "ja": "【こちらで2種買うとポイント２倍！】「HGUC ユニコーンガンダム パールクリアＶｅｒ．」まとめ買い",
+            "zh": "【こちらで2種買うとポイント２倍！】「HGUC 独角兽高达 パールクリアＶｅｒ．」まとめ買い",
+            "ko": "【여기서 2종 구매 시 포인트 2배!】 「HGUC 유니콘 건담 펄 클리어 Ver.」 묶음 구매",
+            "en": "[こちらで2種買うとポイント２倍！]「HGUC Unicorn Gundam パールクリアＶｅｒ．」まとめ買い"
+          },
+          "release_date": "2011-05",
+          "price_jpy": 3500,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000008876/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000003914",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "other",
+          "series_labels": {
+            "zh": "其他",
+            "en": "Other",
+            "ja": "その他",
+            "ko": "기타"
+          },
+          "names": {
+            "ja": "機動戦士ガンダム３０ｔｈ ガンプラプレミアムＢＯＸ",
+            "zh": "机动战士高达３０ｔｈ ガンプラプレミアムＢＯＸ",
+            "ko": "기동전사 건담 30th 건프라 프리미엄 BOX",
+            "en": "Mobile Suit Gundam３０ｔｈ ガンプラプレミアムＢＯＸ"
+          },
+          "release_date": "2010-01",
+          "price_jpy": 15750,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000003914/"
+          ]
+        },
+        {
+          "kit_id": "ng-1-100-rxf91-4902425357645000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "NG",
+          "subline": "No Grade",
+          "series_key": "f91",
+          "series_labels": {
+            "zh": "F91",
+            "en": "F91",
+            "ja": "F91",
+            "ko": "F91"
+          },
+          "names": {
+            "ja": "1 / 100 ガンダムRXF91",
+            "zh": "1 / 100 高达RXF91",
+            "ko": "1 / 100 건담RXF91",
+            "en": "1 / 100 Gundam RXF91"
+          },
+          "release_date": "1992-05",
+          "price_jpy": 1980,
+          "is_limited": false,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425357645000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000250494/"
+          ]
+        },
+        {
+          "kit_id": "ng-1-100-4902425326467000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "NG",
+          "subline": "No Grade",
+          "series_key": "f91",
+          "series_labels": {
+            "zh": "F91",
+            "en": "F91",
+            "ja": "F91",
+            "ko": "F91"
+          },
+          "names": {
+            "ja": "1 / 100 ダギイルス",
+            "zh": "1 / 100 ダギイルス",
+            "ko": "1/100 다기 일스",
+            "en": "1 / 100 ダギイルス"
+          },
+          "release_date": "1991-03",
+          "price_jpy": 1210,
+          "is_limited": false,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425326467000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000250493/"
+          ]
+        },
+        {
+          "kit_id": "ng-1-100-4902425314495000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "NG",
+          "subline": "No Grade",
+          "series_key": "f91",
+          "series_labels": {
+            "zh": "F91",
+            "en": "F91",
+            "ja": "F91",
+            "ko": "F91"
+          },
+          "names": {
+            "ja": "1 / 100 ジーキャノン",
+            "zh": "1 / 100 ジーキャノン",
+            "ko": "1/100 G캐논",
+            "en": "1 / 100 ジーキャノン"
+          },
+          "release_date": "1990-12",
+          "price_jpy": 1210,
+          "is_limited": false,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425314495000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000250487/"
           ]
         },
         {
