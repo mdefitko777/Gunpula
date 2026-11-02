@@ -1,7 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-02",
-  "description": "kit_ids removed from data/kits.json. aliases: duplicate id -> id of the record that replaced it (move saved entries there). excluded: id -> why the record was dropped (only records of another franchise / IP; goods stay in the catalog with a goods_kind).",
+  "updated_at": "2026-11-03",
   "aliases": {
     "aniplex-fate-itemffpaofmf": "goodsmile-fate-g4303",
     "aniplex-fate-itemmcclapea": "kotobukiya-fate-4934054058136",
@@ -2760,9 +2759,11 @@
     "tamashii-16158": "tamashii-16068",
     "tamashii-16170": "tamashii-16134",
     "tamashii-16171": "tamashii-16129",
-    "tamashii-16172": "tamashii-16135"
+    "tamashii-16172": "tamashii-16135",
+    "robot-spirits-jawiki-4942b7e785": "tamashii-1419"
   },
   "excluded": {
     "pbandai-wb-1000255817": "wrong_franchise: 超宇宙刑事ギャバン Blu-ray matched armored_core through 'ネクスト' in 'Vシネクスト'"
-  }
+  },
+  "description": "kit_ids removed from data/kits.json. aliases: duplicate id -> id of the record that replaced it (move saved entries there). excluded: id -> why the record was dropped (only records of another franchise / IP; goods stay in the catalog with a goods_kind)."
 }

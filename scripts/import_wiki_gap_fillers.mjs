@@ -13,7 +13,11 @@
 //     matching passes as the coverage audit, plus a short curated override list);
 //   * facts only (name, month, channel), data_status needs_review, confidence low,
 //     source_refs cite the article revision (attribution, CC BY-SA 4.0);
-//   * no price, JAN or image, because the article has none;
+//   * no price or JAN, because the article has none;
+//   * the cover and gallery come from the product's Premium Bandai 魂ウェブ商店
+//     page (2009-2012 web exclusives and lotteries were sold there), found in
+//     the Wayback Machine and listed in PB_PAGES below. The pictures themselves
+//     are still served by the official PB image host;
 //   * cancelled rows are skipped;
 //   * when an official record for the same product appears later, the gap-filler
 //     record is dropped and aliased to it in data/kit-aliases.json.
@@ -47,6 +51,7 @@ const ARTICLES = [
       "MS-06 量産型ザクII ver. A.N.I.M.E. 〜リアルタイプカラー〜": "tamashii-12271", // Tamashii lists the lottery page
       "陸戦型ガンダム ver. A.N.I.M.E.": "tamashii-13692", // "RX-79(G)" prefix, reissue month
       "陸戦型ジム ver. A.N.I.M.E.": "tamashii-13792",
+      "デスティニーガンダム": "tamashii-1419", // Tamashii spells it デスティ二ー (kanji 二)
     },
   },
 ];
@@ -180,12 +185,76 @@ function sublineFor(name) {
   return "ROBOT魂";
 }
 
+// Premium Bandai item page of each gap-filler product (row name -> [PB item id,
+// number of product pictures on the page]). Read from archive.org captures of
+// p-bandai.jp/tamashiiwebshouten/…/item-<id>/ in 2026-11 and matched by hand
+// (name, sales channel, shipping month). Rows missing here had no PB page: the
+// event-only and magazine mail-order items (ダブルオーガンダム トランザムクリア
+// バージョン, ガンダムアストレア, アドヴァンスドジンクス（デボラ機）) and the two
+// 2012 セラヴィーガンダムGNHW/3G sets, whose page was never archived.
+const PB_IMAGE_BASE = "https://bandai-a.akamaihd.net/bc/img/model/b";
+const PB_PAGES = {
+  "ジンクス": ["1000007245", 1],
+  "デナン・ゲー(ブラック・バンガード仕様)": ["1000007593", 4],
+  "ガンダムF91(残像Ver.)": ["1000005607", 4],
+  "トールギスII": ["1000012033", 1],
+  "ダブルオークアンタ(クアンタムバーストver.)": ["1000010000", 5],
+  "ガンダムF91(ハリソン・マディン機)": ["1000006526", 1],
+  "ジムスナイパーII(ホワイト・ディンゴ隊仕様機)": ["1000007601", 5],
+  "ストライクフリーダムガンダム用 ウイングエフェクトパーツ&スタンドセット": ["1000005679", 1],
+  "GNソードIII": ["1000003972", 1],
+  "ヤークトアルケーガンダム": ["1000009622", 5],
+  "ダブルオーライザー 〔粒子貯蔵タンク型〕": ["1000007768", 2],
+  "∀ガンダムシリーズ用 武器セット": ["1000005121", 2],
+  "スサノオ (トランザムVer.)": ["1000004692", 4],
+  "ガッデス": ["1000003312", 1],
+  "オーガンダム": ["1000003751", 4],
+  "レグナント": ["1000002467", 9],
+  "ウァッド": ["1000005117", 2],
+  "ダブルオークアンタ(クアンタムバーストver.) ブラックライト台座セット": ["1000010034", 7],
+  "アドヴァンスドジンクス": ["1000002929", 3],
+  "ガガ トランザムセット": ["1000003749", 3],
+  "ターンエーガンダム / ターンX用 月光蝶エフェクトパーツ&スタンドセット": ["1000004508", 2],
+  "ブレイヴ一般用試験機": ["1000009489", 1],
+  "プロトタイプガンダム": ["1000010850", 2],
+  "ウイングガンダム(EW版)": ["1000010849", 2],
+  "デナン・ゾン(ブラック・バンガード仕様)": ["1000007594", 4],
+  "Vダッシュガンダム& Vガンダムヘキサ パーツセット": ["1000007598", 5],
+  "ギラ・ズール(親衛隊機)": ["1000007596", 5],
+  "ガガ": ["1000003750", 2],
+  "ガンダムエクシア リペアII 換装パーツ": ["1000002717", 2],
+  "ガンダムエクシア リペア": ["1000003453", 5],
+  "G-3ガンダム(メタリックコート仕様)": ["1000012053", 1],
+  "コレン専用カプル": ["1000006527", 1],
+  "ジンクスIV(指揮官機)": ["1000011842", 5],
+  "ターンX 月光蝶Ver.": ["1000003681", 1],
+  "ダブルオーガンダム トランザムライザー": ["1000003958", 7],
+  "ガデッサ / ガラッゾ / ガッデス用 ブースター": ["1000003350", 1],
+  "ターンエーガンダムvs.ターンX 月光蝶対決セット": ["1000004507", 2],
+  "ガンダムアストレア(タイプF)": ["1000008187", 6],
+  "ガンダムエクシア トランザムクリアVer.": ["1000007244", 1],
+  "ターンエーガンダム(月光蝶Ver.)": ["1000004506", 1],
+};
+
+function pbPage(name) {
+  // Spaces differ between the article and the localized catalog name ("ガデッサ / ガラッゾ").
+  const bare = (value) => normalizeName(value).replace(/\s+/g, "");
+  const key = Object.keys(PB_PAGES).find((candidate) => bare(candidate) === bare(name));
+  if (!key) return null;
+  const [itemId, pictures] = PB_PAGES[key];
+  return {
+    url: `https://p-bandai.jp/item/item-${itemId}/`,
+    images: Array.from({ length: pictures }, (_, index) => `${PB_IMAGE_BASE}/${itemId}_${index + 1}.jpg`),
+  };
+}
+
 const PB_WEB_SHOP_FROM = 2013;
 
 function toKit(article, row, permalink) {
   const name = nfkc(row.name).replace(/\s+/g, " ").trim();
   const channels = channelSummary(row);
   const webShop = /魂ウェブ商店/.test(row.note + row.date);
+  const pb = pbPage(name);
   return {
     kit_id: kitIdFor(article, row),
     franchise: "gundam",
@@ -194,8 +263,8 @@ function toKit(article, row, permalink) {
     number: /^\d+$/.test(row.no) ? row.no : null,
     scale: "non-scale",
     names: { ja: name, en: null, zh: null, ko: null },
-    images: { box_art_url: null, box_art_source_id: null },
-    gallery_image_urls: [],
+    images: { box_art_url: pb?.images[0] || null, box_art_source_id: pb ? "p_bandai_wayback" : null },
+    gallery_image_urls: pb?.images || [],
     universe: null,
     work_title: row.heading || null,
     release_date: firstDate(row.date),
@@ -205,7 +274,7 @@ function toKit(article, row, permalink) {
     // web exclusives are limited, but not Premium Bandai items.
     ...(webShop && Number(String(firstDate(row.date) || "").slice(0, 4)) >= PB_WEB_SHOP_FROM ? { is_premium_bandai: true } : {}),
     data_status: "needs_review",
-    source_urls: [permalink],
+    source_urls: [permalink, ...(pb ? [pb.url] : [])],
     source_refs: [
       {
         source_id: SOURCE_ID,
@@ -213,11 +282,13 @@ function toKit(article, row, permalink) {
         fields: ["names", "release_date", "is_limited", "work_title"],
         confidence: "low",
       },
+      ...(pb ? [{ source_id: "p_bandai_wayback", url: pb.url, fields: ["images"], confidence: "medium" }] : []),
     ],
     tags: ["gundam", "tamashii nations", "collectible figure", "robot-spirits", "gap-fill", "wikipedia", ...(webShop ? ["tamashii-web-shop"] : [])],
     notes:
       `Not in the official Tamashii Web item database. Facts (name, ROBOT魂 No. ${row.no || "-"}, month, sales channel: ${channels}) ` +
-      `from the Japanese Wikipedia article 「${article.title}」, revision ${article.revid}, licensed CC BY-SA 4.0. Price and images unknown.`,
+      `from the Japanese Wikipedia article 「${article.title}」, revision ${article.revid}, licensed CC BY-SA 4.0. ` +
+      (pb ? `Pictures from the archived Premium Bandai 魂ウェブ商店 page ${pb.url}; price unknown.` : "Price and images unknown."),
   };
 }
 
