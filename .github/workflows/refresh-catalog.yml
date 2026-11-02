@@ -81,6 +81,19 @@ jobs:
           for attempt in 1 2 3 4 5; do
             git fetch origin "$GITHUB_REF_NAME"
             if git rebase -X theirs "origin/$GITHUB_REF_NAME"; then
+              # -X theirs merges kits.json / atlas-groups.json hunk by hunk, which can
+              # duplicate records, undo curated Korean names or leave a group's count
+              # out of step with its kit_ids. Re-derive those from the merged catalog
+              # and don't push a catalog that fails validation.
+              node scripts/dedupe_kit_ids.mjs
+              node scripts/apply_ko_names.mjs
+              node scripts/build_atlas_groups.mjs
+              npm run split
+              npm run validate
+              if ! git diff --quiet -- data; then
+                git add data
+                git commit -q --amend --no-edit
+              fi
               if git push origin "HEAD:$GITHUB_REF_NAME"; then
                 echo "Pushed on attempt $attempt."
                 exit 0
