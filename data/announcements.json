@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-03T09:23:46.236Z",
+  "updated_at": "2026-11-03T23:56:42.771Z",
   "sources": [
     {
       "source_id": "tamashii_news",
@@ -82,8 +82,200 @@
       "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuG_D_8QZmHTfbJfsz8-J_A"
     }
   ],
-  "fetch_errors": [],
+  "fetch_errors": [
+    {
+      "source_id": "bandai_hobby_youtube",
+      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuxB1suCoCqAKiljh_0xE4A returned 404; https://www.youtube.com/feeds/videos.xml?playlist_id=UUuxB1suCoCqAKiljh_0xE4A returned 404"
+    },
+    {
+      "source_id": "gundam_channel_youtube",
+      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UC7wu64jFsV02bbu6UHUd7JA returned 404; https://www.youtube.com/feeds/videos.xml?playlist_id=UU7wu64jFsV02bbu6UHUd7JA returned 404"
+    },
+    {
+      "source_id": "gundam_base_youtube",
+      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UCMt6mbBNDPwyNGvJKvhCYuA returned 404; https://www.youtube.com/feeds/videos.xml?playlist_id=UUMt6mbBNDPwyNGvJKvhCYuA returned 404"
+    },
+    {
+      "source_id": "beyblade_youtube",
+      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuG_D_8QZmHTfbJfsz8-J_A returned 500; https://www.youtube.com/feeds/videos.xml?playlist_id=UUuG_D_8QZmHTfbJfsz8-J_A returned 404"
+    }
+  ],
   "announcements": [
+    {
+      "id": "pbandai-1000171450",
+      "franchise": "gundam",
+      "names": {
+        "ja": "ＨＧ 1/144 ムラサメ（アンドリ…",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-11-04",
+      "source_type": "news",
+      "source_name": "プレミアムバンダイ",
+      "source_id": "premium_bandai_new_items",
+      "source_url": "https://p-bandai.jp/item/item-1000171450/",
+      "thumbnail_url": "../app/assets/announcements/pbandai-1000171450.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Name truncated by the Premium Bandai new-items list.",
+      "reviewed_at": null
+    },
+    {
+      "id": "pbandai-1000260362",
+      "franchise": "gundam",
+      "names": {
+        "ja": "ＲＧ 1/144 トールギス ＥＷ",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-11-04",
+      "source_type": "news",
+      "source_name": "プレミアムバンダイ",
+      "source_id": "premium_bandai_new_items",
+      "source_url": "https://p-bandai.jp/item/item-1000260362/",
+      "thumbnail_url": "../app/assets/announcements/pbandai-1000260362.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Name truncated by the Premium Bandai new-items list.",
+      "reviewed_at": null
+    },
+    {
+      "id": "pbandai-1000260364",
+      "franchise": "gundam",
+      "names": {
+        "ja": "ＲＧ 1/144 MS-06S ザクII",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-11-04",
+      "source_type": "news",
+      "source_name": "プレミアムバンダイ",
+      "source_id": "premium_bandai_new_items",
+      "source_url": "https://p-bandai.jp/item/item-1000260364/",
+      "thumbnail_url": "../app/assets/announcements/pbandai-1000260364.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Name truncated by the Premium Bandai new-items list.",
+      "reviewed_at": null
+    },
+    {
+      "id": "pbandai-1000260365",
+      "franchise": "gundam",
+      "names": {
+        "ja": "ＲＧ 1/144 ガンダムＭｋ-II（テ…",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-11-04",
+      "source_type": "news",
+      "source_name": "プレミアムバンダイ",
+      "source_id": "premium_bandai_new_items",
+      "source_url": "https://p-bandai.jp/item/item-1000260365/",
+      "thumbnail_url": "../app/assets/announcements/pbandai-1000260365.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Name truncated by the Premium Bandai new-items list.",
+      "reviewed_at": null
+    },
+    {
+      "id": "pbandai-1000260366",
+      "franchise": "gundam",
+      "names": {
+        "ja": "ＲＧ 1/144 ウイングガンダム",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-11-04",
+      "source_type": "news",
+      "source_name": "プレミアムバンダイ",
+      "source_id": "premium_bandai_new_items",
+      "source_url": "https://p-bandai.jp/item/item-1000260366/",
+      "thumbnail_url": "../app/assets/announcements/pbandai-1000260366.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Name truncated by the Premium Bandai new-items list.",
+      "reviewed_at": null
+    },
+    {
+      "id": "pbandai-1000260367",
+      "franchise": "gundam",
+      "names": {
+        "ja": "ＲＧ 1/144 ダブルオーライザー",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-11-04",
+      "source_type": "news",
+      "source_name": "プレミアムバンダイ",
+      "source_id": "premium_bandai_new_items",
+      "source_url": "https://p-bandai.jp/item/item-1000260367/",
+      "thumbnail_url": "../app/assets/announcements/pbandai-1000260367.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Name truncated by the Premium Bandai new-items list.",
+      "reviewed_at": null
+    },
+    {
+      "id": "pbandai-1000260386",
+      "franchise": "gundam",
+      "names": {
+        "ja": "ＲＧ 1/144 RX-0 ユニコーンガン…",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-11-04",
+      "source_type": "news",
+      "source_name": "プレミアムバンダイ",
+      "source_id": "premium_bandai_new_items",
+      "source_url": "https://p-bandai.jp/item/item-1000260386/",
+      "thumbnail_url": "../app/assets/announcements/pbandai-1000260386.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Name truncated by the Premium Bandai new-items list.",
+      "reviewed_at": null
+    },
     {
       "id": "pbandai-1000260899",
       "franchise": "gundam",
