@@ -23,6 +23,7 @@ const STEPS = [
   { script: "import:pokemon-extra", kind: "source" },
   { script: "import:fate", kind: "source" },
   { script: "import:fate-extra", kind: "source" },
+  { script: "import:madoka", kind: "source" },
   { script: "import:bbx-db", kind: "source" },
   { script: "import:gget", kind: "source" },
   { script: "map:gget", kind: "derive" },

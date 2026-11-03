@@ -48,6 +48,11 @@ const CATALOG_SOURCES = [
   { source_id: "tamashii_web_fate_jp", label: "Tamashii Web (Fate)" },
   { source_id: "pokemon_store_kr", label: "Pokemon Store Korea" },
   { source_id: "hobby_search_fate_jp", label: "Hobby Search (Fate)" },
+  { source_id: "aniplex_plus_madoka_jp", label: "Aniplex+ (Madoka)" },
+  { source_id: "good_smile_madoka_en", label: "Good Smile legacy (Madoka)" },
+  { source_id: "tamashii_web_madoka_jp", label: "Tamashii Web (Madoka)" },
+  { source_id: "ichiban_kuji_madoka_jp", label: "Ichiban Kuji (Madoka)" },
+  { source_id: "banpresto_prize_madoka_jp", label: "Banpresto prize (Madoka)" },
 ];
 
 function nowIso() {
