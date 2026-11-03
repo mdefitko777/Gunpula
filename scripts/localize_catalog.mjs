@@ -63,7 +63,8 @@ const SERIES = [
     key: "gqux",
     sort: 80,
     labels: { zh: "GQX", en: "GQuuuuuuX", ja: "GQuuuuuuX", ko: "GQuuuuuuX" },
-    universe: "unknown",
+    // An alternate One Year War: counted with the other Universal Century works.
+    universe: "UC",
     pattern: /GQuuuuuuX|ジークアクス|GFreD|白いガンダム|赤いガンダム|軽キャノン/i,
   },
   {
@@ -240,6 +241,16 @@ const SERIES = [
     labels: { zh: "MSV", en: "MSV", ja: "MSV", ko: "MSV" },
     universe: "UC",
     pattern: /MSV|G-3ガンダム|フルアーマーガンダム|パーフェクトガンダム|ジョニー・ライデン|シン・マツナガ|高機動型ザク/i,
+  },
+  {
+    // UC side stories with no series of their own here (Blue Destiny, MS IGLOO,
+    // Missing Link, Battle Operation, U.C. ENGAGE ...). Reached only through
+    // GUNDAM_FALLBACK_UNIT_RULES, so the pattern never matches by itself.
+    key: "uc_side",
+    sort: 315,
+    labels: { zh: "UC外传", en: "UC Side Story", ja: "UC外伝", ko: "UC 외전" },
+    universe: "UC",
+    pattern: /(?!)/,
   },
   {
     key: "sd",
@@ -431,6 +442,48 @@ const GUNDAM_WORK_UNIT_RULES = [
   { key: "g", pattern: /Mobile Fighter G Gundam|Gガンダム|ゴッドガンダム|シャイニングガンダム|マスターガンダム|ノーベルガンダム|ドラゴンガンダム|ガンダムローズ|マックスター|マンダラガンダム|デビルガンダム|クーロンガンダム|風雲再起/i },
   { key: "g_reco", pattern: /Reconguista|Gのレコンギスタ|G-セルフ|Ｇ-セルフ|G-アルケイン|G-ルシファー|グリモア|マックナイフ|ジャハナム|カバカーリー/i },
   { key: "x", pattern: /Gundam X(?!-?[123])|ガンダムX(?!-?[123])|ガンダムダブルエックス|ダブルエックス|エアマスター|レオパルド|ベルティゴ|ヴァサーゴ|Gファルコン/i },
+];
+
+// Checked (on NFKC text) only for records no rule above placed. Order matters:
+// f91 before the plain-Gundam rule, which would otherwise take "ガンダムRXF-91改".
+const GUNDAM_FALLBACK_UNIT_RULES = [
+  { key: "double_o", pattern: /ガンダムOO|グラハム・エーカー|GUNDAM EXIA|00 RAISER|00 QAN\[T\]|トランザムライザー|GNソード|GNアーチャー|GNアームズ|アルヴァアロン|アルヴァトーレ|オーガンダム|[O0]ガンダム|ガッデス|(?:^|\s)ガガ(?=\s|$)|マスラオ|レグナント|プロトザンユニット/i },
+  { key: "g", pattern: /MASTER GUNDAM|BURNING GUNDAM|GOD GUNDAM|ガンダムシュピーゲル|ドモン・カッシュ|東方不敗/i },
+  { key: "w", pattern: /TALLGEESE|OZ-06MS LEO|EPYON|WING GUNDAM|DEATHSCYTHE|HEAVY ARMS|SANDROCK/i },
+  { key: "ibo", pattern: /BARBATOS|獅電/i },
+  { key: "witch", pattern: /CALIBARN|GUNDAM AERIAL|スレッタ・マーキュリー|ミオリネ・レンブラン/i },
+  { key: "cca", pattern: /SAZABI|νGUNDAM/i },
+  { key: "unicorn", pattern: /SINANJU|ガンダムUC|アームド・?アーマーVN|コンロイ/i },
+  { key: "f91", pattern: /F90|RXF-91|ネオガンダム|クラスターガンダム|Gキャノンマグナ|ハーディガン|ビギナ・?ゼラ|ベース・?ジャバー/i },
+  { key: "victory", pattern: /ガンブラスター|セカンドV/i },
+  { key: "x", pattern: /ガンダムエックス|ドートレス/i },
+  { key: "crossbone", pattern: /ディキトゥス/i },
+  { key: "build", pattern: /ビギニングガンダム|パンダッガイ/i },
+  { key: "seed", pattern: /1 \/ 1700 エターナル|エグザス|ミネルバ|テスタメント|ダークダガー|ミーティアユニット/i },
+  { key: "aoz", pattern: /シスクード|ADVANCE OF Z/i },
+  { key: "sentinel", pattern: /Zplus/i },
+  { key: "gqux", pattern: /ソドン/i },
+  { key: "zeta", pattern: /アーガマ(?!級)|ガンダム ?Mk-II(?!I)|リックディアス/i },
+  { key: "zz", pattern: /ドワッジ/i },
+  { key: "hathaway", pattern: /メッサ[ー―-]/i },
+  { key: "08ms", pattern: /08MS小隊|アイナ・サハリン/i },
+  { key: "0083", pattern: /アルビオン|ラビアンローズ|試作[123]号機/i },
+  { key: "msv", pattern: /ヘビー・ガンダム|ガンダムMk-III|G-3 GUNDAM|ヴァッフ/i },
+  {
+    key: "uc_side",
+    pattern: /イフリート|ピクシー|ペイルライダー|ブラックライダー|ホワイトライダー|レッドライダー|ジーライン|ガンダム[4-6]号機|水中型ガンダム|バイアラン・イゾルデ|リゲルグ|エンゲージガンダム|エンゲージゼロ|ヅダ|ヒルドルブ|オッゴ|トーリスリッター|スレイヴ・レイス|ジーセイバー|リントヴルム|Twilight AXIS/i,
+  },
+  {
+    key: "uc_first",
+    pattern:
+      /CHAR'S ZAKU|ZAKU ?II\(Unidentified|GUNDAM EX(?!IA)|ストームブリンガー|ゴッグ|マゼラン|サラミス|ムサイ|ガウ攻撃空母|ザンジバル|G・アーマー|ドダイ|コアブースター|コア・ファイター|マゼラアタック|アッザム|グラブロ|ビグザム|ビグロ|ブラウ・?ブロ|ミデア|ガンペリー|61式戦車|ガンダムトレーラー|WHITE BASE|キャスバル専用ガンダム|アムロ・レイ|セイラ・マス|カツ・レツ・キッカ|ZEON FORCES|勝利の栄光を君に|ハンディファン 地球連邦軍|『機動戦士ガンダム』|デカールDX 01 機動戦士ガンダム|Gファイター|RX-?78-?2/i,
+  },
+  // A bare "ガンダム" after the grade and scale is the RX-78-2.
+  {
+    key: "uc_first",
+    pattern:
+      /^(?:(?:HGUC|HG|MG|PG|RG|HY2M|\d+ \/ \d+|メガサイズモデル|メガサイズ|リアルタイプ|MOBILE SUIT ENSEMBLE(?: HATSUNEMIKU| [\d.]+)?)\s*)*ガンダム(?=$|\s|\(|「|〔|Ver|G40|G30|RX)(?!\s*G-)/i,
+  },
 ];
 
 const REPLACEMENTS = {
@@ -948,7 +1001,21 @@ function seriesForKit(kit) {
     return workMatch;
   }
 
-  return gundamSeries.find((series) => series.pattern.test(classificationText)) ?? DEFAULT_SERIES;
+  const plainMatch = gundamSeries.find((series) => series.pattern.test(classificationText));
+  if (plainMatch) {
+    return plainMatch;
+  }
+
+  // Nothing matched. Official names are often full-width (ＭＧ ガンダムＦ９０, ＲＸ－７８)
+  // and Gundam Universe / ROBOT魂 names give only the unit, in English or katakana.
+  // Retry on the NFKC form with extra unit names. Only records that would otherwise
+  // be "other" get here, so this can't move an already classified kit.
+  const normalized = classificationText.normalize("NFKC");
+  const fallback = [...GUNDAM_WORK_UNIT_RULES, ...GUNDAM_FALLBACK_UNIT_RULES].find((rule) => rule.pattern.test(normalized));
+  if (fallback) {
+    return gundamSeries.find((series) => series.key === fallback.key) ?? DEFAULT_SERIES;
+  }
+  return gundamSeries.find((series) => series.pattern.test(normalized)) ?? DEFAULT_SERIES;
 }
 
 function workTitleForSeries(series, kit) {
