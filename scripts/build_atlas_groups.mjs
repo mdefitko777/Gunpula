@@ -18,7 +18,7 @@
 // cover_source, kind: "logo" | "key_visual"}}} with the official image of each product line.
 // Empty groups are left out. `--report=<file>` writes every product's group and reason (for review).
 import { readFile, writeFile } from "node:fs/promises";
-import { armoredCoreClassifier, fateClassifier, lang, pokemonClassifier, POKEMON_GAMES, AC_TITLES, productText } from "./atlas/lib/atlas_groups.mjs";
+import { armoredCoreClassifier, fateClassifier, lang, madokaClassifier, MADOKA_CHARACTERS, pokemonClassifier, POKEMON_GAMES, AC_TITLES, productText } from "./atlas/lib/atlas_groups.mjs";
 
 const readJson = async (file, fallback) => {
   try {
@@ -223,6 +223,44 @@ function armoredCoreGroups() {
   return collect("armored_core", armoredCoreClassifier().classify, groups);
 }
 
+// ─────────────── 魔法少女まどか☆マギカ: characters ───────────────
+function madokaGroups() {
+  const groups = MADOKA_CHARACTERS.map((c) => ({
+    id: c.id,
+    kind: "character",
+    labels: c.labels,
+    subtitle: lang("", "", "", ""),
+    ...cover(`madoka:${c.id}`, "channel:madoka"),
+    kit_ids: [],
+  }));
+  groups.push({
+    id: "madoka_ensemble",
+    kind: "ensemble",
+    labels: lang("多人", "여러 캐릭터", "Several characters", "複数キャラクター"),
+    subtitle: lang("一件商品里有好几位角色", "한 상품에 여러 캐릭터", "Several characters in one product", "一つの商品に複数のキャラクター"),
+    ...cover("channel:madoka"),
+    kit_ids: [],
+  });
+  groups.push({
+    id: "madoka_general",
+    kind: "unsorted",
+    labels: lang("其他", "기타", "Other", "その他"),
+    subtitle: lang("没有写明角色", "캐릭터가 적혀 있지 않은 상품", "No character named", "キャラクター名のない商品"),
+    ...cover("channel:madoka"),
+    kit_ids: [],
+  });
+  // No official cover per character: show the newest product picture of that character.
+  const byId = new Map(kits.map((k) => [k.kit_id, k]));
+  return collect("madoka", madokaClassifier().classify, groups).map((g) => {
+    if (g.image) return g;
+    const newest = g.kit_ids
+      .map((id) => byId.get(id))
+      .filter((k) => k?.images?.box_art_url)
+      .sort((a, b) => String(b.release_date || "").localeCompare(String(a.release_date || "")))[0];
+    return newest ? { ...g, image: newest.images.box_art_url, cover_source: "newest product picture" } : g;
+  });
+}
+
 // ─────────────── Gundam timeline (unchanged: GGEN series logos per work) ───────────────
 function gundamTimeline() {
   const family = (name) => {
@@ -284,6 +322,7 @@ function channels() {
     pokemon: ch("pokemon", lang("宝可梦", "포켓몬", "Pokémon", "ポケモン")),
     fate: ch("fate", lang("Fate", "Fate", "Fate", "Fate")),
     armored_core: ch("armored_core", lang("装甲核心", "아머드 코어", "Armored Core", "アーマード・コア")),
+    madoka: ch("madoka", lang("魔法少女小圆", "마도카 마기카", "Madoka Magica", "まどか☆マギカ")),
   };
 }
 
@@ -311,6 +350,7 @@ const output = {
     pokemon: pokemonGroups(),
     fate: fateGroups(),
     armored_core: armoredCoreGroups(),
+    madoka: madokaGroups(),
   },
 };
 
@@ -318,4 +358,4 @@ await writeFile("data/atlas-groups.json", `${JSON.stringify(output, null, 2)}\n`
 if (reportArg) await writeFile(reportArg, `${JSON.stringify(report, null, 1)}\n`, "utf8");
 const summary = (list) => list.map((g) => `${g.id}:${g.count}`).join(" ");
 console.log(`atlas groups: pokemon ${output.franchises.pokemon.length}, fate ${output.franchises.fate.length}, ac ${output.franchises.armored_core.length}, gundam timeline ${output.franchises.gundam_timeline.length}`);
-for (const f of ["pokemon", "fate", "armored_core"]) console.log(`  ${f}: ${summary(output.franchises[f])}`);
+for (const f of ["pokemon", "fate", "armored_core", "madoka"]) console.log(`  ${f}: ${summary(output.franchises[f])}`);

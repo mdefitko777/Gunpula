@@ -39,7 +39,7 @@ from PIL import Image
 UA = 'HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)'
 MODEL_ID = 'siglip2-b32-256-wi8'
 SIZE = 256
-FRANCHISES = ['gundam', 'pokemon', 'fate', 'armored_core', 'beyblade']
+FRANCHISES = ['gundam', 'pokemon', 'fate', 'armored_core', 'beyblade', 'madoka']
 
 ap = argparse.ArgumentParser()
 ap.add_argument('repo')

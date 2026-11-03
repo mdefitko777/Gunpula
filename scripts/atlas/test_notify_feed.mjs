@@ -1,7 +1,7 @@
 // Self-test for scripts/atlas/build_notify_feed.mjs (no network, no git):
 //   node scripts/atlas/test_notify_feed.mjs
 import assert from "node:assert/strict";
-import { buildDoc, changeReasons, compactItem, diffCatalogs, isBackfill, itemFromFeed, mergeItem, notifiable, sameContent, windowStart } from "./build_notify_feed.mjs";
+import { annotateItems, buildDoc, changeReasons, compactItem, diffCatalogs, isBackfill, itemFromFeed, mergeItem, notifiable, sameContent, windowStart } from "./build_notify_feed.mjs";
 
 const kit = (id, extra = {}) => ({
   kit_id: id,
@@ -292,3 +292,16 @@ console.log("notify feed quiet maintenance: ok");
   assert.deepEqual(ids, ["new", "price"]);
 }
 console.log("notify feed date_quiet_reasons: ok");
+
+// annotateItems: line and atlas groups for the app's own notification conditions
+{
+  const doc = { entries: [{ added: [{ kit_id: "m1" }], changed: [{ kit_id: "g1" }] }] };
+  annotateItems(doc, [{ kit_id: "m1", grade_code: "NENDOROID" }, { kit_id: "g1", grade_code: "HG" }], {
+    franchises: { madoka: [{ id: "homura", kit_ids: ["m1"] }] },
+  });
+  assert.equal(doc.entries[0].added[0].grade_code, "NENDOROID");
+  assert.deepEqual(doc.entries[0].added[0].groups, ["homura"]);
+  assert.equal(doc.entries[0].changed[0].grade_code, "HG");
+  assert.equal(doc.entries[0].changed[0].groups, undefined);
+  console.log("notify feed annotate: ok");
+}

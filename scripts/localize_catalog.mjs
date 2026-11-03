@@ -308,6 +308,36 @@ const SERIES = [
     universe: "TYPE-MOON",
     pattern: /TYPE-MOON|月姫|空の境界|Kara no Kyoukai|Garden of Sinners|魔法使いの夜|Mahoutsukai|Tsukihime|Arcueid|Shiki/i,
   },
+  // 魔法少女まどか☆マギカ: one series per work, checked in this order (a Rebellion or
+  // Magia Record title also contains "まどか☆マギカ"); madoka_tv takes the rest.
+  {
+    key: "madoka_walpurgis",
+    sort: 442,
+    labels: { zh: "瓦尔普吉斯的回天", en: "Walpurgisnacht: Rising", ja: "ワルプルギスの廻天", ko: "발푸르기스의 회천" },
+    universe: "Madoka",
+    pattern: /ワルプルギスの廻天|Walpurgisnacht/i,
+  },
+  {
+    key: "madoka_rebellion",
+    sort: 441,
+    labels: { zh: "叛逆的物语", en: "Rebellion", ja: "叛逆の物語", ko: "반역의 이야기" },
+    universe: "Madoka",
+    pattern: /叛逆の物語|新編|Rebellion|悪魔ほむら/i,
+  },
+  {
+    key: "madoka_magireco",
+    sort: 443,
+    labels: { zh: "魔法纪录", en: "Magia Record", ja: "マギアレコード", ko: "마기아 레코드" },
+    universe: "Madoka",
+    pattern: /マギアレコード|マギレコ|Magia Record|マギアエクセドラ|Magia Exedra|環いろは|七海やちよ/i,
+  },
+  {
+    key: "madoka_tv",
+    sort: 440,
+    labels: { zh: "魔法少女小圆", en: "Madoka Magica", ja: "まどか☆マギカ", ko: "마도카 마기카" },
+    universe: "Madoka",
+    pattern: /まどか☆マギカ|まどマギ|Madoka Magica/i,
+  },
   {
     key: "armored_core",
     sort: 410,
@@ -379,6 +409,10 @@ const NON_GUNDAM_SERIES_KEYS = new Set([
   "fate_extra",
   "fate_apocrypha",
   "type_moon",
+  "madoka_walpurgis",
+  "madoka_rebellion",
+  "madoka_magireco",
+  "madoka_tv",
 ]);
 
 function isGundamSeries(series) {
@@ -961,6 +995,11 @@ function seriesForKit(kit) {
       SERIES.find((series) => ["fate_fgo", "fate_stay_night", "fate_zero", "fate_extra", "fate_apocrypha", "type_moon"].includes(series.key) && series.pattern.test(text)) ||
       SERIES.find((series) => series.key === "fate_fgo")
     );
+  }
+  if (kit.franchise === "madoka") {
+    const keys = ["madoka_walpurgis", "madoka_rebellion", "madoka_magireco", "madoka_tv"];
+    const text = [kit.work_title, kit.names?.ja, kit.names?.en, kit.subline, ...(kit.tags ?? [])].map(decodeHtml).join(" ");
+    return SERIES.find((series) => keys.includes(series.key) && series.pattern.test(text)) || SERIES.find((series) => series.key === "madoka_tv");
   }
   if (kit.franchise === "beyblade") {
     const text = [kit.names?.ja, kit.names?.en, kit.names?.zh, kit.names?.ko, kit.subline, ...(kit.tags ?? [])].map(decodeHtml).join(" ");

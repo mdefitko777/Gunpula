@@ -319,4 +319,40 @@ export function armoredCoreClassifier() {
   return { classify };
 }
 
+// ─────────────── 魔法少女まどか☆マギカ: one group per character ───────────────
+
+// Work titles contain character names ("まどか☆マギカ"), so they are cut out before matching.
+const MADOKA_WORK_TITLES = /(?:劇場版\s*)?魔法少女まどか[☆★]?マギカ|まどか[☆★]マギカ|まどマギ|Puella Magi Madoka Magica|Madoka Magica/gi;
+
+export const MADOKA_CHARACTERS = [
+  { id: "madoka", labels: lang("鹿目圆", "마도카", "Madoka", "鹿目まどか"), names: ["鹿目まどか", "まどか", "円環の理", "Madoka"] },
+  { id: "homura", labels: lang("晓美焰", "호무라", "Homura", "暁美ほむら"), names: ["暁美ほむら", "ほむら", "Homura"] },
+  { id: "sayaka", labels: lang("美树沙耶加", "사야카", "Sayaka", "美樹さやか"), names: ["美樹さやか", "さやか", "オクタヴィア", "Sayaka"] },
+  { id: "mami", labels: lang("巴麻美", "마미", "Mami", "巴マミ"), names: ["巴マミ", "マミ", "Mami"] },
+  { id: "kyoko", labels: lang("佐仓杏子", "쿄코", "Kyoko", "佐倉杏子"), names: ["佐倉杏子", "杏子", "Kyoko"] },
+  { id: "nagisa", labels: lang("百江渚", "나기사", "Nagisa", "百江なぎさ"), names: ["百江なぎさ", "なぎさ", "ベベ", "シャルロッテ", "Nagisa"] },
+  { id: "kyubey", labels: lang("丘比", "큐베", "Kyubey", "キュゥべえ"), names: ["キュゥべえ", "キュウべえ", "キュゥべぇ", "インキュベーター", "Kyubey"] },
+  { id: "iroha", labels: lang("环彩羽", "이로하", "Iroha", "環いろは"), names: ["環いろは", "いろは", "Iroha"] },
+  { id: "yachiyo", labels: lang("七海八千代", "야치요", "Yachiyo", "七海やちよ"), names: ["七海やちよ", "やちよ", "Yachiyo"] },
+  { id: "kuroe", labels: lang("黑江", "쿠로에", "Kuroe", "黒江"), names: ["黒江", "Kuroe"] },
+  { id: "ui", labels: lang("环忧", "우이", "Ui", "環うい"), names: ["環うい", "Ui Tamaki"] },
+  { id: "tsuruno", labels: lang("由比鹤乃", "츠루노", "Tsuruno", "由比鶴乃"), names: ["由比鶴乃", "鶴乃", "Tsuruno"] },
+  { id: "felicia", labels: lang("深月菲莉希亚", "펠리시아", "Felicia", "深月フェリシア"), names: ["深月フェリシア", "フェリシア", "Felicia"] },
+  { id: "sana", labels: lang("二叶莎奈", "사나", "Sana", "二葉さな"), names: ["二葉さな", "Sana Futaba"] },
+];
+
+export function madokaClassifier() {
+  const entries = MADOKA_CHARACTERS.flatMap((c) => c.names.map((key) => ({ key, ref: c.id })));
+  const matcher = buildMatcher(entries);
+  function classify(kit) {
+    const text = [productText(kit), kit.subline].filter(Boolean).join(" / ").replace(MADOKA_WORK_TITLES, " ");
+    const hits = matcher.findAll(text);
+    const ids = uniq(hits.map((h) => h.refs[0]));
+    if (ids.length === 1) return { group: ids[0], reason: "names one character", names: uniq(hits.map((h) => h.key)) };
+    if (ids.length > 1) return { group: "madoka_ensemble", reason: `names ${ids.join(", ")}`, names: uniq(hits.map((h) => h.key)) };
+    return { group: "madoka_general", reason: "no character named", names: [] };
+  }
+  return { classify };
+}
+
 export { POKEMON_GAMES, AC_TITLES };

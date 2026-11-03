@@ -162,6 +162,30 @@ export function itemFromFeed(item) {
   return compactItem({ ...item, series_label: koName(item.series_labels, "") });
 }
 
+/**
+ * Adds what the app's own notification conditions match on (channel · work or character · line):
+ * `grade_code` and `groups` (the data/atlas-groups.json groups the kit is in, e.g. a Madoka
+ * character). Taken from the current catalog, so items cached from older runs get them too.
+ */
+export function annotateItems(doc, kits, atlas) {
+  const grade = new Map(kits.map((k) => [k.kit_id, k.grade_code]));
+  const groups = new Map();
+  for (const list of Object.values(atlas?.franchises || {})) {
+    for (const g of Array.isArray(list) ? list : []) {
+      for (const id of g.kit_ids || []) (groups.get(id) || groups.set(id, []).get(id)).push(g.id);
+    }
+  }
+  for (const entry of doc.entries || []) {
+    for (const item of [...(entry.added || []), ...(entry.changed || [])]) {
+      const code = grade.get(item.kit_id);
+      if (code) item.grade_code = code;
+      const ids = groups.get(item.kit_id);
+      if (ids?.length) item.groups = [...ids];
+    }
+  }
+  return doc;
+}
+
 /** Same rule as build_update_feed.mjs: a newly found record released more than this long ago is a backfill, not news. */
 export const BACKFILL_AGE_MONTHS = 12;
 
@@ -457,7 +481,11 @@ async function main() {
     }
   }
 
-  const doc = buildDoc({ feed, manifest, prev: prevOk, pairs, commits, edgeDates, days, since: cutoff, gitOk, restocks, kitsById, quiet });
+  const doc = annotateItems(
+    buildDoc({ feed, manifest, prev: prevOk, pairs, commits, edgeDates, days, since: cutoff, gitOk, restocks, kitsById, quiet }),
+    (await readJson(CATALOG, { kits: [] })).kits || [],
+    await readJson("data/atlas-groups.json", null),
+  );
   const changed = !sameContent(prevOk, doc);
   if (!changed) doc.generated_at = prevOk.generated_at;
   const text = `${JSON.stringify(doc)}\n`;
