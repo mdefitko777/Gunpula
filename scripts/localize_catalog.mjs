@@ -879,7 +879,21 @@ function sourceName(kit) {
   return decodeHtml(names.ja || names.en || names.zh || names.ko || kit.kit_id);
 }
 
+// A record this script already localized carries its series key and the compact work
+// title written from it ("Z", "stay night"). The patterns below are written for the
+// sources' full titles, so on such a record they miss: a re-run (or a record whose
+// source failed today and kept yesterday's data) would drop ~150 Gundam kits into
+// "other" and turn stay night into FGO. Keep the earlier result instead.
+function previousSeries(kit) {
+  const series = SERIES.find((candidate) => candidate.key === kit.series?.key);
+  return series && kit.work_title === workTitleForSeries(series, kit) ? series : null;
+}
+
 function seriesForKit(kit) {
+  const previous = previousSeries(kit);
+  if (previous) {
+    return previous;
+  }
   if (kit.franchise === "pokemon") {
     return SERIES.find((series) => series.key === "pokemon");
   }
@@ -962,7 +976,8 @@ function localizeKit(kit) {
       sort: series.sort,
       labels: series.labels,
     },
-    universe: series.universe || kit.universe || null,
+    // "other" says nothing about the universe; don't overwrite one the source gave.
+    universe: series === DEFAULT_SERIES ? kit.universe || series.universe : series.universe || kit.universe || null,
     work_title: workTitleForSeries(series, kit),
   };
 }
@@ -974,6 +989,16 @@ const missingSeries = kits.filter((kit) => !kit.series?.key);
 
 if (missingNames.length || missingSeries.length) {
   throw new Error(`Localization incomplete: missing names ${missingNames.length}, missing series ${missingSeries.length}`);
+}
+
+// A rule change that moves a few records is normal; one that moves a large batch out
+// of the series they already had is a regression. Fail without writing, so the
+// refresh keeps yesterday's kits.json and reports this step.
+const MAX_SERIES_MOVES = Number(process.env.LOCALIZE_MAX_SERIES_MOVES || 40);
+const moved = catalog.kits.filter((kit, index) => kit.series?.key && kit.series.key !== "other" && kits[index].series.key !== kit.series.key);
+if (moved.length > MAX_SERIES_MOVES) {
+  const sample = moved.slice(0, 5).map((kit) => `${kit.kit_id} ${kit.series.key}`).join(", ");
+  throw new Error(`Localization would move ${moved.length} records out of their series (limit ${MAX_SERIES_MOVES}), e.g. ${sample}`);
 }
 
 await writeFile(CATALOG_FILE, `${JSON.stringify({ ...catalog, kits }, null, 2)}\n`, "utf8");
