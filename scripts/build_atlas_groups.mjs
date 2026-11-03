@@ -246,8 +246,8 @@ function madokaGroups() {
   groups.push({
     id: "madoka_general",
     kind: "unsorted",
-    labels: lang("其他", "기타", "Other", "その他"),
-    subtitle: lang("没有写明角色", "캐릭터가 적혀 있지 않은 상품", "No character named", "キャラクター名のない商品"),
+    labels: lang("套装 · 其他", "세트 · 기타", "Sets / other", "セット・その他"),
+    subtitle: lang("一番赏、盲盒等没写明角色的商品", "제일복권 · 트레이딩처럼 캐릭터가 적혀 있지 않은 상품", "Lotteries, trading sets and others with no character named", "一番くじ・トレーディングなどキャラクター名のない商品"),
     ...cover("channel:madoka"),
     kit_ids: [],
   });

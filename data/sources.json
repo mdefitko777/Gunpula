@@ -663,6 +663,138 @@
         "non-figure categories"
       ],
       "notes": "Retailer, not a manufacturer, and used only for makers whose own sites are unreachable. The search parameter is searchkey — keyword is accepted then silently ignored, returning an unfiltered page — and results still drift, so titles are matched against the Fate works before a record is kept."
+    },
+    {
+      "source_id": "good_smile_madoka_en",
+      "name": "Good Smile Company (Madoka Magica, goodsmile.info)",
+      "type": "official_manufacturer_global",
+      "country": "JP",
+      "base_url": "https://www.goodsmile.info/ja/",
+      "priority": 14,
+      "best_for": [
+        "Nendoroid",
+        "figma",
+        "scale figures",
+        "official images",
+        "release month",
+        "Japan price"
+      ],
+      "weak_for": [
+        "products announced after mid-2024 (goodsmile.info is frozen)"
+      ],
+      "notes": "Frozen goodsmile.info catalog, Japanese product pages filtered to the まどか☆マギカ works."
+    },
+    {
+      "source_id": "good_smile_madoka_global",
+      "name": "Good Smile Company Global Store (Madoka Magica)",
+      "type": "official_manufacturer_global",
+      "country": "JP",
+      "base_url": "https://www.goodsmile.com/",
+      "priority": 14,
+      "best_for": [
+        "new Good Smile / Max Factory announcements"
+      ],
+      "weak_for": [
+        "was in maintenance (HTTP 503) when the importer was written"
+      ],
+      "notes": "Kept so newer products come in once goodsmile.com is back; refused/empty runs keep previous data."
+    },
+    {
+      "source_id": "aniplex_plus_madoka_jp",
+      "name": "Aniplex+ (Madoka Magica)",
+      "type": "official_manufacturer_jp",
+      "country": "JP",
+      "base_url": "https://online.aniplex.co.jp/",
+      "priority": 14,
+      "best_for": [
+        "Aniplex scale figures",
+        "Walpurgisnacht: Rising figures",
+        "official images",
+        "Japan price"
+      ],
+      "weak_for": [
+        "flat goods are deliberately not imported"
+      ],
+      "notes": "Aniplex+ official store, figure-class products only."
+    },
+    {
+      "source_id": "tamashii_web_madoka_jp",
+      "name": "Tamashii Web (Madoka Magica)",
+      "type": "official_manufacturer_jp",
+      "country": "JP",
+      "base_url": "https://tamashiiweb.com/",
+      "priority": 14,
+      "best_for": [
+        "Figuarts mini",
+        "exact release date",
+        "Japan price"
+      ],
+      "weak_for": [
+        "coverage (few Madoka items)"
+      ],
+      "notes": "Tamashii Nations item search filtered to Madoka Magica."
+    },
+    {
+      "source_id": "ichiban_kuji_madoka_jp",
+      "name": "Ichiban Kuji Japan (Madoka Magica)",
+      "type": "official_lottery_jp",
+      "country": "JP",
+      "base_url": "https://1kuji.com/",
+      "priority": 15,
+      "best_for": [
+        "Ichiban Kuji lineups with figure or plush prizes"
+      ],
+      "weak_for": [
+        "ordinary retail figures"
+      ],
+      "notes": "One record per lottery, only when its lineup has a figure or plush prize."
+    },
+    {
+      "source_id": "banpresto_prize_madoka_jp",
+      "name": "Banpresto Prize (Madoka Magica)",
+      "type": "official_prize_jp",
+      "country": "JP",
+      "base_url": "https://bsp-prize.jp/",
+      "priority": 16,
+      "best_for": [
+        "prize figures and plush",
+        "release month",
+        "official prize images"
+      ],
+      "weak_for": [
+        "price (prize items carry none)"
+      ],
+      "notes": "Banpresto prize site, Madoka Magica title."
+    },
+    {
+      "source_id": "kotobukiya_madoka_jp",
+      "name": "Kotobukiya Online Shop (Madoka Magica)",
+      "type": "official_manufacturer_jp",
+      "country": "JP",
+      "base_url": "https://shop.kotobukiya.co.jp/",
+      "priority": 14,
+      "best_for": [
+        "Kotobukiya figures"
+      ],
+      "weak_for": [
+        "the shop listed no Madoka Magica products when checked"
+      ],
+      "notes": "Keyword hits for まどか were all other works and are filtered out."
+    },
+    {
+      "source_id": "hobby_search_madoka_jp",
+      "name": "Hobby Search (Madoka Magica figures)",
+      "type": "retailer_jp",
+      "country": "JP",
+      "base_url": "https://www.1999.co.jp/",
+      "priority": 18,
+      "best_for": [
+        "makers with no site of their own"
+      ],
+      "weak_for": [
+        "answers the bot with a Cloudflare challenge (HTTP 403); not worked around"
+      ],
+      "notes": "Retailer; currently refuses HobbyAtlasDataBot, so it yields nothing."
     }
   ]
 }
