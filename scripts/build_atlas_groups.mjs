@@ -33,6 +33,8 @@ const catalog = await readJson("data/kits.json");
 const taxonomy = await readJson("data/atlas-source-taxonomy.json");
 const ggetSections = await readJson("data/gget-series-sections.json");
 const fateRoster = await readJson("data/atlas/fate-roster.json");
+const bbxDatabase = await readJson("data/bbx-database.json", { products: [], series: [] });
+const bbxBladers = await readJson("data/atlas/bbx-bladers.json", { bladers: [] });
 const coverFile = await readJson("data/atlas/atlas-covers.json", { covers: {} });
 const reportArg = process.argv.find((a) => a.startsWith("--report="))?.slice(9);
 const kits = (catalog.kits || []).filter((kit) => kit.data_status !== "hidden");
@@ -261,6 +263,53 @@ function madokaGroups() {
   });
 }
 
+// ─────────────── BEYBLADE X: bladers (who uses the bey, data/atlas/bbx-bladers.json) ───────────────
+// A product belongs to every blader whose blade (or CX main / metal / over blade) it contains, so a
+// random booster or a shared blade can be in several groups. Catalog kit id = beyblade-x-<product id>.
+// Kits the parts database doesn't list (event / store limited BX-00, newest releases) are matched by
+// the blade name in the product name instead (コバルトドラグーン2-60C メタルコート:ブラック).
+function beybladeGroups() {
+  const byName = (bbxBladers.bladers || [])
+    .flatMap((b) => b.blades.map((x) => ({ name: x.name_ja, id: b.id })))
+    .filter((x) => x.name)
+    .sort((a, c) => c.name.length - a.name.length);
+  const namedBladers = (kit) => {
+    const text = String(kit.names?.ja || "");
+    const hit = byName.find((x) => text.includes(x.name));
+    return hit ? new Set(byName.filter((x) => x.name === hit.name).map((x) => x.id)) : new Set();
+  };
+  const catalogIds = new Set(kits.filter((k) => k.franchise === "beyblade").map((k) => k.kit_id));
+  const seriesBySet = new Map();
+  for (const s of bbxDatabase.series || []) (seriesBySet.get(s.base_set_id) || seriesBySet.set(s.base_set_id, []).get(s.base_set_id)).push(s);
+  const productParts = (product) =>
+    new Set((seriesBySet.get(product.base_set_id) || []).flatMap((s) => [s.blade_id, s.main_blade_id, s.metal_blade_id, s.over_blade_id]).filter(Boolean));
+  const products = (bbxDatabase.products || [])
+    .map((p) => ({ product: p, kitId: `beyblade-x-${String(p.product_id).toLowerCase()}`, parts: productParts(p) }))
+    .filter((p) => catalogIds.has(p.kitId));
+  const listed = new Set(products.map((p) => p.kitId));
+  const unlisted = kits.filter((k) => k.franchise === "beyblade" && !listed.has(k.kit_id));
+  return (bbxBladers.bladers || [])
+    .map((b) => {
+      const ids = new Set(b.blades.flatMap((x) => [...(x.blade_ids || [x.blade_id]), ...(x.main_blade_ids || []), ...(x.metal_blade_ids || []), ...(x.over_blade_ids || [])]));
+      const mine = products.filter((p) => [...p.parts].some((id) => ids.has(id)));
+      const byNameKits = unlisted.filter((k) => namedBladers(k).has(b.id));
+      const newest = [...mine].sort((a, c) => String(c.product.release_date || "").localeCompare(String(a.product.release_date || "")))[0];
+      return {
+        id: b.id,
+        kind: "blader",
+        labels: lang(b.names.zh, b.names.ko, b.names.en, b.names.ja),
+        subtitle: lang(b.team || "", b.team || "", b.team || "", b.team || ""),
+        image: newest ? newest.product.image || newest.product.image_remote || "" : "",
+        cover_source: "newest product picture",
+        blades: b.blades.map((x) => x.name_ja),
+        kit_ids: [...mine.map((p) => p.kitId), ...byNameKits.map((k) => k.kit_id)],
+      };
+    })
+    .map((g) => ({ ...g, count: g.kit_ids.length }))
+    .filter((g) => g.count > 0)
+    .sort((a, c) => c.count - a.count);
+}
+
 // ─────────────── Gundam timeline (unchanged: GGEN series logos per work) ───────────────
 function gundamTimeline() {
   const family = (name) => {
@@ -351,6 +400,7 @@ const output = {
     fate: fateGroups(),
     armored_core: armoredCoreGroups(),
     madoka: madokaGroups(),
+    beyblade: beybladeGroups(),
   },
 };
 
@@ -358,4 +408,4 @@ await writeFile("data/atlas-groups.json", `${JSON.stringify(output, null, 2)}\n`
 if (reportArg) await writeFile(reportArg, `${JSON.stringify(report, null, 1)}\n`, "utf8");
 const summary = (list) => list.map((g) => `${g.id}:${g.count}`).join(" ");
 console.log(`atlas groups: pokemon ${output.franchises.pokemon.length}, fate ${output.franchises.fate.length}, ac ${output.franchises.armored_core.length}, gundam timeline ${output.franchises.gundam_timeline.length}`);
-for (const f of ["pokemon", "fate", "armored_core", "madoka"]) console.log(`  ${f}: ${summary(output.franchises[f])}`);
+for (const f of ["pokemon", "fate", "armored_core", "madoka", "beyblade"]) console.log(`  ${f}: ${summary(output.franchises[f])}`);
