@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-03",
-  "generated_at": "2026-11-02T22:23:39.661Z",
+  "generated_at": "2026-11-03T01:30:42.288Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,42 +16,45 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-11-02T22:23:37.832Z",
+    "generated_at": "2026-11-03T01:30:40.696Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-03",
-      "generated_at": "2026-11-02T22:23:39.661Z",
+      "generated_at": "2026-11-03T01:30:42.288Z",
       "total_before": 10409,
       "total_after": 10467,
       "added_count": 9,
-      "changed_count": 17,
+      "changed_count": 46,
       "removed_count": 0,
-      "watched_count": 1,
+      "watched_count": 6,
       "merged_count": 0,
       "backfilled_count": 0,
-      "premium_bandai_count": 15,
+      "premium_bandai_count": 39,
       "bbx_count": 0,
       "franchise_counts": {
         "pokemon": 11,
-        "gundam": 15
+        "gundam": 44
       },
       "reason_counts": {
         "new": 9,
-        "source": 5,
-        "series": 12,
+        "source": 8,
+        "release": 22,
+        "series": 17,
         "price": 2
       },
       "interest_tags": [
         "pokemon",
         "gundam",
         "premium_bandai",
-        "seed"
+        "seed",
+        "00"
       ],
       "watch_tags": [
-        "seed"
+        "seed",
+        "00"
       ],
       "added": [
         {
@@ -440,6 +443,211 @@
           ]
         },
         {
+          "kit_id": "pbandai-wb-1000128880",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ジンクスIII （連邦カラー）",
+            "zh": "ＭＧ 1 / 100 ジンクスIII （連邦カラー）",
+            "ko": "MG 1/100 징크스III (연방 컬러)",
+            "en": "ＭＧ 1 / 100 ジンクスIII (連邦カラー)"
+          },
+          "release_date": "2018-12",
+          "price_jpy": 4644,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000128880/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000078187",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "RG 1 / 144 GAT-X105ストライクガンダム ディアクティブモード（再販）",
+            "zh": "RG 1 / 144 GAT-X105强袭高达 ディアクティブモード（再贩）",
+            "ko": "RG 1/144 GAT-X105 스트라이크 건담 디액티브 모드(재판)",
+            "en": "RG 1 / 144 GAT-X105Strike Gundam ディアクティブモード (Reissue)"
+          },
+          "release_date": "2013-01",
+          "price_jpy": 2100,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000078187/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000078189",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "RG 1 / 144 ZGMF-X09A ジャスティスガンダム ディアクティブモード（再販）",
+            "zh": "RG 1 / 144 ZGMF-X09A 正义高达 ディアクティブモード（再贩）",
+            "ko": "RG 1/144 ZGMF-X09A 저스티스 건담 디액티브 모드(재판)",
+            "en": "RG 1 / 144 ZGMF-X09A Justice Gundam ディアクティブモード (Reissue)"
+          },
+          "release_date": "2013-01",
+          "price_jpy": 2625,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000078189/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000078188",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "RG 1 / 144 ZGMF-X10A フリーダムガンダム ディアクティブモード（再販）",
+            "zh": "RG 1 / 144 ZGMF-X10A 自由高达 ディアクティブモード（再贩）",
+            "ko": "RG 1/144 ZGMF-X10A 프리덤 건담 디액티브 모드(재판)",
+            "en": "RG 1 / 144 ZGMF-X10A Freedom Gundam ディアクティブモード (Reissue)"
+          },
+          "release_date": "2013-01",
+          "price_jpy": 2625,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000078188/"
+          ]
+        },
+        {
+          "kit_id": "tamashii-1028",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "ROBOT_SPIRITS",
+          "subline": "ROBOT魂",
+          "series_key": "other",
+          "series_labels": {
+            "zh": "其他",
+            "en": "Other",
+            "ja": "その他",
+            "ko": "기타"
+          },
+          "names": {
+            "ja": "GNアーチャー(ガンアーチャー)",
+            "zh": "GNアーチャー(ガンアーチャー)",
+            "ko": "GN 아처(건 아처)",
+            "en": "GNアーチャー(ガンアーチャー)"
+          },
+          "release_date": "2009-03-21",
+          "price_jpy": 2750,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/1028/",
+            "https://tamashiiweb.com/item_brand/robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
           "kit_id": "pbandai-wb-1000256979",
           "change_type": "changed",
           "franchise": "gundam",
@@ -668,6 +876,158 @@
           ]
         },
         {
+          "kit_id": "tamashii-15054",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_UNIVERSE",
+          "subline": "GUNDAM UNIVERSE",
+          "series_key": "other",
+          "series_labels": {
+            "zh": "其他",
+            "en": "Other",
+            "ja": "その他",
+            "ko": "기타"
+          },
+          "names": {
+            "ja": "GF13-001NHⅡ MASTER GUNDAM (MEIKYOUSISUI)",
+            "zh": "GF13-001NHⅡ MASTER 高达 (MEIKYOUSISUI)",
+            "ko": "GF13-001NHⅡ MASTER 건담 (MEIKYOUSISUI)",
+            "en": "GF13-001NHⅡ MASTER GUNDAM (MEIKYOUSISUI)"
+          },
+          "release_date": "2024-12-01",
+          "price_jpy": 4620,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/15054/",
+            "https://tamashiiweb.com/item_brand/gundam_universe/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-14286",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_UNIVERSE",
+          "subline": "GUNDAM UNIVERSE",
+          "series_key": "g",
+          "series_labels": {
+            "zh": "G",
+            "en": "G",
+            "ja": "G",
+            "ko": "G"
+          },
+          "names": {
+            "ja": "GF13-017 NJ SHINING GUNDAM",
+            "zh": "GF13-017 NJ SHINING 高达",
+            "ko": "GF13-017 NJ SHINING 건담",
+            "en": "GF13-017 NJ SHINING GUNDAM"
+          },
+          "release_date": "2023-07-29",
+          "price_jpy": 3300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/14286/",
+            "https://tamashiiweb.com/item_brand/gundam_universe/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-14285",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_UNIVERSE",
+          "subline": "GUNDAM UNIVERSE",
+          "series_key": "other",
+          "series_labels": {
+            "zh": "其他",
+            "en": "Other",
+            "ja": "その他",
+            "ko": "기타"
+          },
+          "names": {
+            "ja": "XVX-016 GUNDAM AERIAL",
+            "zh": "XVX-016 高达 AERIAL",
+            "ko": "XVX-016 건담 AERIAL",
+            "en": "XVX-016 GUNDAM AERIAL"
+          },
+          "release_date": "2023-07-29",
+          "price_jpy": 3300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/14285/",
+            "https://tamashiiweb.com/item_brand/gundam_universe/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-14175",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_UNIVERSE",
+          "subline": "GUNDAM UNIVERSE",
+          "series_key": "cca",
+          "series_labels": {
+            "zh": "逆夏",
+            "en": "CCA",
+            "ja": "逆シャア",
+            "ko": "역샤아"
+          },
+          "names": {
+            "ja": "RX-93 ν GUNDAM [REAL MARKING PLUS ver.]",
+            "zh": "RX-93 ν 高达 [REAL MARKING PLUS ver.]",
+            "ko": "RX-93 ν 건담 [REAL MARKING PLUS ver.]",
+            "en": "RX-93 ν GUNDAM [REAL MARKING PLUS ver.]"
+          },
+          "release_date": "2022-07-20",
+          "price_jpy": 3850,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/14175/",
+            "https://tamashiiweb.com/item_brand/gundam_universe/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
           "kit_id": "mg-mg-1-100-4573102610423000",
           "change_type": "changed",
           "franchise": "gundam",
@@ -783,6 +1143,158 @@
           ]
         },
         {
+          "kit_id": "pbandai-wb-1000127155",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "uc_first",
+          "series_labels": {
+            "zh": "初代",
+            "en": "0079",
+            "ja": "初代",
+            "ko": "초대"
+          },
+          "names": {
+            "ja": "ＲＧ 1 / 144 MS-06R-2 ギャビー・ハザード専用ザクＩＩ",
+            "zh": "ＲＧ 1 / 144 MS-06R-2 ギャビー・ハザード专用扎古ＩＩ",
+            "ko": "RG 1/144 MS-06R-2 개비 해저드 전용 자쿠II",
+            "en": "ＲＧ 1 / 144 MS-06R-2 ギャビー ハザードCustomZakuＩＩ"
+          },
+          "release_date": "2018-10",
+          "price_jpy": 3240,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000127155/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000127041",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "w",
+          "series_labels": {
+            "zh": "W",
+            "en": "W",
+            "ja": "W",
+            "ko": "W"
+          },
+          "names": {
+            "ja": "ＲＧ 1 / 144 ウイングガンダムゼロ ＥＷ & ドライツバーク［チタニウムフィニッシュ］",
+            "zh": "ＲＧ 1 / 144 飞翼高达ゼロ ＥＷ & ドライツバーク［チタニウムフィニッシュ］",
+            "ko": "RG 1/144 윙 건담 제로 EW & 드라이츠바크 [티타늄 피니시]",
+            "en": "ＲＧ 1 / 144 Wing Gundamゼロ ＥＷ & ドライツバーク［チタニウムフィニッシュ］"
+          },
+          "release_date": "2018-10",
+          "price_jpy": 7128,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000127041/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000127040",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "w",
+          "series_labels": {
+            "zh": "W",
+            "en": "W",
+            "ja": "W",
+            "ko": "W"
+          },
+          "names": {
+            "ja": "ＲＧ 1 / 144 トールギス ＥＷ［チタニウムフィニッシュ］",
+            "zh": "ＲＧ 1 / 144 托鲁基斯 ＥＷ［チタニウムフィニッシュ］",
+            "ko": "RG 1/144 톨기스 EW [티타늄 피니시]",
+            "en": "ＲＧ 1 / 144 Tallgeese ＥＷ［チタニウムフィニッシュ］"
+          },
+          "release_date": "2018-10",
+          "price_jpy": 6696,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000127040/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000126002",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "ibo",
+          "series_labels": {
+            "zh": "铁血",
+            "en": "Iron-Blooded Orphans",
+            "ja": "鉄血",
+            "ko": "철혈"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 グレイズリッター(カルタ隊所属機)",
+            "zh": "ＨＧ 1 / 144 格雷兹リッター(カルタ隊所属機)",
+            "ko": "HG 1/144 그레이즈 리터(카르타대 소속기)",
+            "en": "ＨＧ 1 / 144 Grazeリッター(カルタ隊所属機)"
+          },
+          "release_date": "2018-09",
+          "price_jpy": 1296,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000126002/"
+          ]
+        },
+        {
           "kit_id": "pbandai-wb-1000125915",
           "change_type": "changed",
           "franchise": "gundam",
@@ -818,6 +1330,234 @@
           ],
           "source_urls": [
             "https://p-bandai.jp/item/item-1000125915/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000124674",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "other",
+          "series_labels": {
+            "zh": "其他",
+            "en": "Other",
+            "ja": "その他",
+            "ko": "기타"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ガンダムＸ３号機",
+            "zh": "ＭＧ 1 / 100 高达Ｘ３号機",
+            "ko": "MG 1/100 건담X 3호기",
+            "en": "ＭＧ 1 / 100 GundamＸ３号機"
+          },
+          "release_date": "2018-07",
+          "price_jpy": 4320,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000124674/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000118017",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "ibo",
+          "series_labels": {
+            "zh": "铁血",
+            "en": "Iron-Blooded Orphans",
+            "ja": "鉄血",
+            "ko": "철혈"
+          },
+          "names": {
+            "ja": "HG 1 / 144 ゲイレールシャルフリヒター&ランドマンロディ セット",
+            "zh": "HG 1 / 144 ゲイレールシャルフリヒター&ランドマンロディ 套装",
+            "ko": "HG 1/144 게이레일 샬프리히터 & 랜드맨 로디 세트",
+            "en": "HG 1 / 144 ゲイレールシャルフリヒター&ランドマンロディ Set"
+          },
+          "release_date": "2017-12",
+          "price_jpy": 3456,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000118017/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000117500",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "build",
+          "series_labels": {
+            "zh": "创战",
+            "en": "Build",
+            "ja": "ビルド",
+            "ko": "빌드"
+          },
+          "names": {
+            "ja": "HGBF 1 / 144 サイコジム",
+            "zh": "HGBF 1 / 144 サイコ吉姆",
+            "ko": "HGBF 1/144 사이코 짐",
+            "en": "HGBF 1 / 144 サイコGM"
+          },
+          "release_date": "2017-12",
+          "price_jpy": 6264,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000117500/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000117493",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "cca",
+          "series_labels": {
+            "zh": "逆夏",
+            "en": "CCA",
+            "ja": "逆シャア",
+            "ko": "역샤아"
+          },
+          "names": {
+            "ja": "HGUC 1 / 144 RGM-89D ジェガンＤ型（ピコ・アルティドール専用機）",
+            "zh": "HGUC 1 / 144 RGM-89D ジェガンＤ型（ピコ・アルティドール专用機）",
+            "ko": "HGUC 1/144 RGM-89D 제간 D형 (피코 알티돌 전용기)",
+            "en": "HGUC 1 / 144 RGM-89D ジェガンＤ型 (ピコ アルティドールCustom機)"
+          },
+          "release_date": "2017-11",
+          "price_jpy": 1728,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000117493/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000116766",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "build",
+          "series_labels": {
+            "zh": "创战",
+            "en": "Build",
+            "ja": "ビルド",
+            "ko": "빌드"
+          },
+          "names": {
+            "ja": "ＲＧ 1 / 144 ビルドストライクガンダム フルパッケージ（ＲＧシステムイメージカラー）",
+            "zh": "ＲＧ 1 / 144 ビルド强袭高达 フルパッケージ（ＲＧシステムイメージカラー）",
+            "ko": "RG 1/144 빌드 스트라이크 건담 풀 패키지(RG 시스템 이미지 컬러)",
+            "en": "ＲＧ 1 / 144 ビルドStrike Gundam フルパッケージ (ＲＧシステムイメージカラー)"
+          },
+          "release_date": "2017-11",
+          "price_jpy": 2700,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000116766/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000114046",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "mixed",
+          "series_labels": {
+            "zh": "混合",
+            "en": "Mixed",
+            "ja": "複合作品",
+            "ko": "혼합"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 プルーマ クリュセ侵攻セット",
+            "zh": "ＨＧ 1 / 144 プルーマ クリュセ侵攻套装",
+            "ko": "HG 1/144 플루마 크뤼세 침공 세트",
+            "en": "ＨＧ 1 / 144 プルーマ クリュセ侵攻Set"
+          },
+          "release_date": "2017-06",
+          "price_jpy": 1944,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000114046/"
           ]
         },
         {
@@ -859,6 +1599,158 @@
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112896421000&grp_id=5325",
             "https://p-bandai.jp/item/item-1000251731/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000079935",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "uc_first",
+          "series_labels": {
+            "zh": "初代",
+            "en": "0079",
+            "ja": "初代",
+            "ko": "초대"
+          },
+          "names": {
+            "ja": "HGUC 1 / 144 ボールK型（第08MS小隊版）＆ボール（シャークマウス仕様）（再販）",
+            "zh": "HGUC 1 / 144 铁球K型（第08MS小隊版）＆铁球（シャークマウス规格）（再贩）",
+            "ko": "HGUC 1/144 볼 K형(제08MS소대판) & 볼(샤크 마우스 사양)(재판)",
+            "en": "HGUC 1 / 144 BallK型 (第08MS小隊版)＆Ball (シャークマウスType) (Reissue)"
+          },
+          "release_date": "2013-04",
+          "price_jpy": 1575,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000079935/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000079973",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "zeta",
+          "series_labels": {
+            "zh": "Z",
+            "en": "Z",
+            "ja": "Z",
+            "ko": "Z"
+          },
+          "names": {
+            "ja": "ＲＧ 1 / 144 MSZ-006-3 ゼータガンダム３号機（４月発送分）",
+            "zh": "ＲＧ 1 / 144 MSZ-006-3 Zeta高达３号機（４月发货批次）",
+            "ko": "RG 1/144 MSZ-006-3 제타 건담 3호기(4월 발송분)",
+            "en": "ＲＧ 1 / 144 MSZ-006-3 Zeta Gundam３号機 (４月Shipping Batch)"
+          },
+          "release_date": "2013-04",
+          "price_jpy": 3360,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000079973/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000078185",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "msv",
+          "series_labels": {
+            "zh": "MSV",
+            "en": "MSV",
+            "ja": "MSV",
+            "ko": "MSV"
+          },
+          "names": {
+            "ja": "HGUC 1 / 144 ジュアッグ(Ver.MSV）（１月発送）",
+            "zh": "HGUC 1 / 144 ジュアッグ(Ver.MSV）（１月発送）",
+            "ko": "HGUC 1/144 쥬앗그(Ver.MSV)(1월 발송)",
+            "en": "HGUC 1 / 144 ジュアッグ(Ver.MSV) (１月発送)"
+          },
+          "release_date": "2013-01",
+          "price_jpy": 1785,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000078185/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000011986",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "other",
+          "series_labels": {
+            "zh": "其他",
+            "en": "Other",
+            "ja": "その他",
+            "ko": "기타"
+          },
+          "names": {
+            "ja": "MG 1 / 100 トランザムライザー",
+            "zh": "MG 1 / 100 トランザムライザー",
+            "ko": "MG 1/100 트랜스암 라이저",
+            "en": "MG 1 / 100 トランザムライザー"
+          },
+          "release_date": "2011-10",
+          "price_jpy": 6825,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000011986/"
           ]
         },
         {
@@ -1334,6 +2226,211 @@
           ],
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102614032000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000128880",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ジンクスIII （連邦カラー）",
+            "zh": "ＭＧ 1 / 100 ジンクスIII （連邦カラー）",
+            "ko": "MG 1/100 징크스III (연방 컬러)",
+            "en": "ＭＧ 1 / 100 ジンクスIII (連邦カラー)"
+          },
+          "release_date": "2018-12",
+          "price_jpy": 4644,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000128880/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000078187",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "RG 1 / 144 GAT-X105ストライクガンダム ディアクティブモード（再販）",
+            "zh": "RG 1 / 144 GAT-X105强袭高达 ディアクティブモード（再贩）",
+            "ko": "RG 1/144 GAT-X105 스트라이크 건담 디액티브 모드(재판)",
+            "en": "RG 1 / 144 GAT-X105Strike Gundam ディアクティブモード (Reissue)"
+          },
+          "release_date": "2013-01",
+          "price_jpy": 2100,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000078187/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000078189",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "RG 1 / 144 ZGMF-X09A ジャスティスガンダム ディアクティブモード（再販）",
+            "zh": "RG 1 / 144 ZGMF-X09A 正义高达 ディアクティブモード（再贩）",
+            "ko": "RG 1/144 ZGMF-X09A 저스티스 건담 디액티브 모드(재판)",
+            "en": "RG 1 / 144 ZGMF-X09A Justice Gundam ディアクティブモード (Reissue)"
+          },
+          "release_date": "2013-01",
+          "price_jpy": 2625,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000078189/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000078188",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "RG 1 / 144 ZGMF-X10A フリーダムガンダム ディアクティブモード（再販）",
+            "zh": "RG 1 / 144 ZGMF-X10A 自由高达 ディアクティブモード（再贩）",
+            "ko": "RG 1/144 ZGMF-X10A 프리덤 건담 디액티브 모드(재판)",
+            "en": "RG 1 / 144 ZGMF-X10A Freedom Gundam ディアクティブモード (Reissue)"
+          },
+          "release_date": "2013-01",
+          "price_jpy": 2625,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000078188/"
+          ]
+        },
+        {
+          "kit_id": "tamashii-1028",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "ROBOT_SPIRITS",
+          "subline": "ROBOT魂",
+          "series_key": "other",
+          "series_labels": {
+            "zh": "其他",
+            "en": "Other",
+            "ja": "その他",
+            "ko": "기타"
+          },
+          "names": {
+            "ja": "GNアーチャー(ガンアーチャー)",
+            "zh": "GNアーチャー(ガンアーチャー)",
+            "ko": "GN 아처(건 아처)",
+            "en": "GNアーチャー(ガンアーチャー)"
+          },
+          "release_date": "2009-03-21",
+          "price_jpy": 2750,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/1028/",
+            "https://tamashiiweb.com/item_brand/robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
           ]
         }
       ],
