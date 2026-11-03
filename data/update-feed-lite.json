@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-03",
-  "generated_at": "2026-11-03T08:15:11.395Z",
+  "generated_at": "2026-11-03T08:47:00.679Z",
   "watch_tags": [
     "seed",
     "00"
@@ -16,33 +16,33 @@
     "beyblade"
   ],
   "source_health": {
-    "generated_at": "2026-11-03T08:15:10.070Z",
+    "generated_at": "2026-11-03T08:46:58.689Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-03",
-      "generated_at": "2026-11-03T08:15:11.395Z",
+      "generated_at": "2026-11-03T08:47:00.679Z",
       "total_before": 10409,
       "total_after": 10468,
       "added_count": 10,
-      "changed_count": 115,
+      "changed_count": 231,
       "removed_count": 0,
-      "watched_count": 10,
+      "watched_count": 43,
       "merged_count": 0,
       "backfilled_count": 0,
-      "premium_bandai_count": 86,
+      "premium_bandai_count": 148,
       "bbx_count": 0,
       "franchise_counts": {
         "pokemon": 12,
-        "gundam": 113
+        "gundam": 229
       },
       "reason_counts": {
         "new": 10,
         "release": 37,
+        "series": 190,
         "source": 8,
-        "series": 73,
         "price": 2
       },
       "interest_tags": [
@@ -520,6 +520,295 @@
           ]
         },
         {
+          "kit_id": "hg-hg-1-144-l-4573102665324000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ダークダガーＬ",
+            "zh": "ＨＧ 1 / 144 ダークダガーＬ",
+            "ko": "HG 1/144 다크 대거 L",
+            "en": "ＨＧ 1 / 144 ダークダガーＬ"
+          },
+          "release_date": "2024-04",
+          "price_jpy": 1650,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102665324000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "tamashii-14830",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_UNIVERSE",
+          "subline": "GUNDAM UNIVERSE",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "GNT-0000 00 QAN[T] [TRANS-AM MODE]",
+            "zh": "GNT-0000 00 QAN[T] [TRANS-AM MODE]",
+            "ko": "GNT-0000 00 QAN[T] [TRANS-AM MODE]",
+            "en": "GNT-0000 00 QAN [T] [TRANS-AM MODE]"
+          },
+          "release_date": "2024-02-01",
+          "price_jpy": 3300,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/14830/",
+            "https://tamashiiweb.com/item_brand/gundam_universe/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-14474",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "プロトザンユニット",
+            "zh": "プロトザンユニット",
+            "ko": "프로토 잔 유닛",
+            "en": "プロトザンユニット"
+          },
+          "release_date": "2023-10",
+          "price_jpy": 7150,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/14474/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-14357",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_UNIVERSE",
+          "subline": "GUNDAM UNIVERSE",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "GNT-0000 00 QAN[T]",
+            "zh": "GNT-0000 00 QAN[T]",
+            "ko": "GNT-0000 00 QAN[T]",
+            "en": "GNT-0000 00 QAN [T]"
+          },
+          "release_date": "2023-09-30",
+          "price_jpy": 3300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/14357/",
+            "https://tamashiiweb.com/item_brand/gundam_universe/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-13950",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_UNIVERSE",
+          "subline": "GUNDAM UNIVERSE",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "GN-0000＋GNR-010 00 RAISER",
+            "zh": "GN-0000＋GNR-010 00 RAISER",
+            "ko": "GN-0000＋GNR-010 00 RAISER",
+            "en": "GN-0000＋GNR-010 00 RAISER"
+          },
+          "release_date": "2022-09-23",
+          "price_jpy": 4950,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/13950/",
+            "https://tamashiiweb.com/item_brand/gundam_universe/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "gframe-fapb05",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GFRAME",
+          "subline": "Mobile Suit Gundam G Frame FA",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "機動戦士ガンダム GフレームFA ミーティアユニット【プレミアムバンダイ限定】",
+            "zh": "机动战士高达 GフレームFA ミーティアユニット【Premium Bandai限定】",
+            "ko": "기동전사 건담 G프레임 FA 미티어 유닛【프리미엄 반다이 한정】",
+            "en": "Mobile Suit Gundam GフレームFA ミーティアユニット[Premium BandaiLimited]"
+          },
+          "release_date": "2022-09",
+          "price_jpy": 11800,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "bandai_candy_gundam_jp"
+          ],
+          "source_urls": [
+            "https://www.bandai.co.jp/candy/gundam/gframe/faPb05/",
+            "https://www.bandai.co.jp/candy/gundam/gframe/"
+          ]
+        },
+        {
+          "kit_id": "tamashii-13836",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "10th Anniversary トランザムライザー Full Particle ver.（事後販売）",
+            "zh": "10th Anniversary トランザムライザー Full Particle ver.（事後販売）",
+            "ko": "10th Anniversary 트랜스암 라이저 Full Particle ver.(사후 판매)",
+            "en": "10th Anniversary トランザムライザー Full Particle ver. (事後販売)"
+          },
+          "release_date": "2022-05",
+          "price_jpy": 27500,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/13836/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
           "kit_id": "pbandai-wb-1000166358",
           "change_type": "changed",
           "franchise": "gundam",
@@ -558,6 +847,129 @@
           ],
           "source_urls": [
             "https://p-bandai.jp/item/item-1000166358/"
+          ]
+        },
+        {
+          "kit_id": "tamashii-14833",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_UNIVERSE",
+          "subline": "GUNDAM UNIVERSE",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "GN-001 GUNDAM EXIA [TRANS-AM MODE]",
+            "zh": "GN-001 高达 EXIA [TRANS-AM MODE]",
+            "ko": "GN-001 건담 EXIA [TRANS-AM MODE]",
+            "en": "GN-001 GUNDAM EXIA [TRANS-AM MODE]"
+          },
+          "release_date": "2022-01-01",
+          "price_jpy": 3300,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/14833/",
+            "https://tamashiiweb.com/item_brand/gundam_universe/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-13723",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "10th Anniversary トランザムライザー Full Particle ver.",
+            "zh": "10th Anniversary トランザムライザー Full Particle ver.",
+            "ko": "10th Anniversary 트랜스암 라이저 Full Particle ver.",
+            "en": "10th Anniversary トランザムライザー Full Particle ver."
+          },
+          "release_date": "2021-11",
+          "price_jpy": 27500,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/13723/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-13600",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_UNIVERSE",
+          "subline": "GUNDAM UNIVERSE",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "GN-001 GUNDAM EXIA",
+            "zh": "GN-001 高达 EXIA",
+            "ko": "GN-001 건담 EXIA",
+            "en": "GN-001 GUNDAM EXIA"
+          },
+          "release_date": "2021-09-25",
+          "price_jpy": 3300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/13600/",
+            "https://tamashiiweb.com/item_brand/gundam_universe/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
           ]
         },
         {
@@ -600,6 +1012,89 @@
           ],
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102614032000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "mg-mg-1-100-4573102609205000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "MG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 テスタメントガンダム",
+            "zh": "ＭＧ 1 / 100 テスタメント高达",
+            "ko": "MG 1/100 테스타먼트 건담",
+            "en": "ＭＧ 1 / 100 テスタメントGundam"
+          },
+          "release_date": "2020-11",
+          "price_jpy": 6270,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102609205000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000140760",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "GGG 機動戦士ガンダムOO グラハム・エーカー",
+            "zh": "GGG 机动战士高达OO グラハム・エーカー",
+            "ko": "GGG 기동전사 건담 OO 그라함 에이커",
+            "en": "GGG Mobile Suit Gundam OO グラハム エーカー [Limited特典付き]"
+          },
+          "release_date": "2020-05",
+          "price_jpy": 13200,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000140760/"
           ]
         },
         {
@@ -685,150 +1180,27 @@
           ]
         },
         {
-          "kit_id": "pbandai-wb-1000078187",
+          "kit_id": "tamashii-12235",
           "change_type": "changed",
           "franchise": "gundam",
-          "grade_code": "RG",
-          "subline": "プレミアムバンダイ",
-          "series_key": "seed",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": "double_o",
           "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
           },
           "names": {
-            "ja": "RG 1 / 144 GAT-X105ストライクガンダム ディアクティブモード（再販）",
-            "zh": "RG 1 / 144 GAT-X105强袭高达 ディアクティブモード（再贩）",
-            "ko": "RG 1/144 GAT-X105 스트라이크 건담 디액티브 모드(재판)",
-            "en": "RG 1 / 144 GAT-X105Strike Gundam ディアクティブモード (Reissue)"
+            "ja": "GNソードIIブラスター",
+            "zh": "GNソードIIブラスター",
+            "ko": "GN 소드II 블래스터",
+            "en": "GNソードIIブラスター"
           },
-          "release_date": "2013-01",
-          "price_jpy": 2100,
+          "release_date": "2018-01",
+          "price_jpy": 3850,
           "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "release"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000078187/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000078189",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "RG",
-          "subline": "プレミアムバンダイ",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "RG 1 / 144 ZGMF-X09A ジャスティスガンダム ディアクティブモード（再販）",
-            "zh": "RG 1 / 144 ZGMF-X09A 正义高达 ディアクティブモード（再贩）",
-            "ko": "RG 1/144 ZGMF-X09A 저스티스 건담 디액티브 모드(재판)",
-            "en": "RG 1 / 144 ZGMF-X09A Justice Gundam ディアクティブモード (Reissue)"
-          },
-          "release_date": "2013-01",
-          "price_jpy": 2625,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "release"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000078189/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000078188",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "RG",
-          "subline": "プレミアムバンダイ",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "RG 1 / 144 ZGMF-X10A フリーダムガンダム ディアクティブモード（再販）",
-            "zh": "RG 1 / 144 ZGMF-X10A 自由高达 ディアクティブモード（再贩）",
-            "ko": "RG 1/144 ZGMF-X10A 프리덤 건담 디액티브 모드(재판)",
-            "en": "RG 1 / 144 ZGMF-X10A Freedom Gundam ディアクティブモード (Reissue)"
-          },
-          "release_date": "2013-01",
-          "price_jpy": 2625,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "release"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000078188/"
-          ]
-        },
-        {
-          "kit_id": "tamashii-1028",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "ROBOT_SPIRITS",
-          "subline": "ROBOT魂",
-          "series_key": "other",
-          "series_labels": {
-            "zh": "其他",
-            "en": "Other",
-            "ja": "その他",
-            "ko": "기타"
-          },
-          "names": {
-            "ja": "GNアーチャー(ガンアーチャー)",
-            "zh": "GNアーチャー(ガンアーチャー)",
-            "ko": "GN 아처(건 아처)",
-            "en": "GNアーチャー(ガンアーチャー)"
-          },
-          "release_date": "2009-03-21",
-          "price_jpy": 2750,
-          "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [
             "00"
@@ -844,37 +1216,40 @@
             "tamashii_web_jp"
           ],
           "source_urls": [
-            "https://tamashiiweb.com/item/1028/",
-            "https://tamashiiweb.com/item_brand/robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+            "https://tamashiiweb.com/item/12235/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
           ]
         },
         {
-          "kit_id": "pbandai-wb-1000256979",
+          "kit_id": "pbandai-wb-1000255643",
           "change_type": "changed",
           "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
+          "grade_code": "PG",
           "subline": "プレミアムバンダイ",
-          "series_key": "zz",
+          "series_key": "double_o",
           "series_labels": {
-            "zh": "ZZ",
-            "en": "ZZ",
-            "ja": "ZZ",
-            "ko": "ZZ"
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
           },
           "names": {
-            "ja": "STRICT-G.ARMS『機動戦士ガンダムＺＺ』Tシャツ エゥーゴ",
-            "zh": "STRICT-G.ARMS『机动战士高达ＺＺ』Tシャツ エゥーゴ",
-            "ko": "STRICT-G.ARMS『기동전사 건담 ZZ』 티셔츠 에우고",
-            "en": "STRICT-G.ARMS『Mobile Suit GundamＺＺ』Tシャツ エゥーゴ"
+            "ja": "ＰＧ 1 / 60 トランザムライザー クリアカラーボディ",
+            "zh": "ＰＧ 1 / 60 トランザムライザー 透明色ボディ 【再贩】",
+            "ko": "PG 1/60 트랜스암 라이저 클리어 컬러 바디",
+            "en": "ＰＧ 1 / 60 トランザムライザー Clear Colorボディ [Reissue][２０２６年１０月発送]"
           },
-          "release_date": "2026-09",
-          "price_jpy": 7480,
+          "release_date": "2017-09",
+          "price_jpy": 4180,
           "is_limited": true,
           "is_premium_bandai": true,
-          "watch_tags": [],
+          "watch_tags": [
+            "00"
+          ],
           "interest_tags": [
             "gundam",
-            "premium_bandai"
+            "premium_bandai",
+            "00"
           ],
           "change_reasons": [
             "series"
@@ -883,349 +1258,7 @@
             "p_bandai_wayback"
           ],
           "source_urls": [
-            "https://p-bandai.jp/item/item-1000256979/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000256982",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "zz",
-          "series_labels": {
-            "zh": "ZZ",
-            "en": "ZZ",
-            "ja": "ZZ",
-            "ko": "ZZ"
-          },
-          "names": {
-            "ja": "STRICT-G.ARMS『機動戦士ガンダムＺＺ』Tシャツ ネオ・ジオン",
-            "zh": "STRICT-G.ARMS『机动战士高达ＺＺ』Tシャツ ネオ・ジオン",
-            "ko": "STRICT-G.ARMS『기동전사 건담 ZZ』 티셔츠 네오 지온",
-            "en": "STRICT-G.ARMS『Mobile Suit GundamＺＺ』Tシャツ ネオ ジオン"
-          },
-          "release_date": "2026-09",
-          "price_jpy": 7480,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000256982/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000255966",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "zz",
-          "series_labels": {
-            "zh": "ZZ",
-            "en": "ZZ",
-            "ja": "ZZ",
-            "ko": "ZZ"
-          },
-          "names": {
-            "ja": "STRICT-G『機動戦士ガンダムＺＺ』グラス ハマーン・カーン マスク",
-            "zh": "STRICT-G『机动战士高达ＺＺ』グラス ハマーン・カーン マスク",
-            "ko": "STRICT-G『기동전사 건담 ZZ』 글라스 하만 칸 마스크",
-            "en": "STRICT-G『Mobile Suit GundamＺＺ』グラス ハマーン カーン マスク"
-          },
-          "release_date": "2026-08",
-          "price_jpy": 2200,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000255966/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000255065",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "zz",
-          "series_labels": {
-            "zh": "ZZ",
-            "en": "ZZ",
-            "ja": "ZZ",
-            "ko": "ZZ"
-          },
-          "names": {
-            "ja": "STRICT-G『機動戦士ガンダムＺＺ』刺繍オープンカラーシャツ MSZ-010 ＺＺガンダム",
-            "zh": "STRICT-G『机动战士高达ＺＺ』刺繍オープンカラーシャツ MSZ-010 ＺＺ高达",
-            "ko": "STRICT-G『기동전사 건담 ZZ』 자수 오픈 칼라 셔츠 MSZ-010 ZZ건담",
-            "en": "STRICT-G『Mobile Suit GundamＺＺ』刺繍オープンカラーシャツ MSZ-010 ＺＺGundam"
-          },
-          "release_date": "2026-08",
-          "price_jpy": 14080,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000255065/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000242987",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "プレミアムバンダイ",
-          "series_key": "ibo",
-          "series_labels": {
-            "zh": "铁血",
-            "en": "Iron-Blooded Orphans",
-            "ja": "鉄血",
-            "ko": "철혈"
-          },
-          "names": {
-            "ja": "HG 1 / 144 ガンダムバルバトスアダプト",
-            "zh": "HG 1 / 144 高达巴巴托斯アダプト",
-            "ko": "HG 1/144 건담 발바토스 어댑트",
-            "en": "HG 1 / 144 Gundam Barbatosアダプト"
-          },
-          "release_date": "2026-05",
-          "price_jpy": 2420,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "release"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000242987/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000253636",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "プレミアムバンダイ",
-          "series_key": "sentinel",
-          "series_labels": {
-            "zh": "Sentinel",
-            "en": "Sentinel",
-            "ja": "センチネル",
-            "ko": "센티넬"
-          },
-          "names": {
-            "ja": "ＭＧ 1 / 100 Ｅｘ-Ｓガンダム / Ｓガンダム (タスクフォースα Ｖｅｒ.)",
-            "zh": "ＭＧ 1 / 100 Ｅｘ-Ｓ高达 / Ｓ高达 (タスクフォースα Ｖｅｒ.)【再贩】",
-            "ko": "MG 1/100 Ex-S건담 / S건담 (태스크 포스 α Ver.)",
-            "en": "ＭＧ 1 / 100 Ｅｘ-ＳGundam / ＳGundam (タスクフォースα Ｖｅｒ.)[Reissue]"
-          },
-          "release_date": "2026-04",
-          "price_jpy": 16500,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000253636/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000115597",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "zz",
-          "series_labels": {
-            "zh": "ZZ",
-            "en": "ZZ",
-            "ja": "ZZ",
-            "ko": "ZZ"
-          },
-          "names": {
-            "ja": "ガンダムデカール No.１０８ 機動戦士Ｚガンダム／機動戦士ガンダムＺＺ汎用１",
-            "zh": "高达デカール No.１０８ 機動戦士Ｚ高达／机动战士高达ＺＺ汎用１",
-            "ko": "건담 데칼 No.108 기동전사 Z건담/기동전사 건담 ZZ 범용 1",
-            "en": "Gundamデカール No.１０８ 機動戦士ＺGundam／Mobile Suit GundamＺＺ汎用１"
-          },
-          "release_date": "2026-04",
-          "price_jpy": 550,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000115597/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000242784",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "SD",
-          "subline": "プレミアムバンダイ",
-          "series_key": "sd",
-          "series_labels": {
-            "zh": "SD",
-            "en": "SD",
-            "ja": "SD",
-            "ko": "SD"
-          },
-          "names": {
-            "ja": "SDガンダムBB戦士 武者七人衆セット",
-            "zh": "SD高达BB戦士 武者七人衆套装",
-            "ko": "SD건담 BB전사 무사 7인중 세트",
-            "en": "SD Gundam BB戦士 武者七人衆Set"
-          },
-          "release_date": "2026-03",
-          "price_jpy": 4950,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "release"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000242784/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000239260",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "プレミアムバンダイ",
-          "series_key": "other",
-          "series_labels": {
-            "zh": "其他",
-            "en": "Other",
-            "ja": "その他",
-            "ko": "기타"
-          },
-          "names": {
-            "ja": "HG 1 / 144 01ガンダム",
-            "zh": "HG 1 / 144 01高达",
-            "ko": "HG 1 / 144 01건담",
-            "en": "HG 1 / 144 01 Gundam"
-          },
-          "release_date": "2026-01",
-          "price_jpy": 2420,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "release"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000239260/"
-          ]
-        },
-        {
-          "kit_id": "tamashii-15054",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_UNIVERSE",
-          "subline": "GUNDAM UNIVERSE",
-          "series_key": "other",
-          "series_labels": {
-            "zh": "其他",
-            "en": "Other",
-            "ja": "その他",
-            "ko": "기타"
-          },
-          "names": {
-            "ja": "GF13-001NHⅡ MASTER GUNDAM (MEIKYOUSISUI)",
-            "zh": "GF13-001NHⅡ MASTER 高达 (MEIKYOUSISUI)",
-            "ko": "GF13-001NHⅡ MASTER 건담 (MEIKYOUSISUI)",
-            "en": "GF13-001NHⅡ MASTER GUNDAM (MEIKYOUSISUI)"
-          },
-          "release_date": "2024-12-01",
-          "price_jpy": 4620,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "tamashii_web_jp"
-          ],
-          "source_urls": [
-            "https://tamashiiweb.com/item/15054/",
-            "https://tamashiiweb.com/item_brand/gundam_universe/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+            "https://p-bandai.jp/item/item-1000255643/"
           ]
         }
       ],
@@ -1314,6 +1347,295 @@
           ]
         },
         {
+          "kit_id": "hg-hg-1-144-l-4573102665324000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ダークダガーＬ",
+            "zh": "ＨＧ 1 / 144 ダークダガーＬ",
+            "ko": "HG 1/144 다크 대거 L",
+            "en": "ＨＧ 1 / 144 ダークダガーＬ"
+          },
+          "release_date": "2024-04",
+          "price_jpy": 1650,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102665324000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "tamashii-14830",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_UNIVERSE",
+          "subline": "GUNDAM UNIVERSE",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "GNT-0000 00 QAN[T] [TRANS-AM MODE]",
+            "zh": "GNT-0000 00 QAN[T] [TRANS-AM MODE]",
+            "ko": "GNT-0000 00 QAN[T] [TRANS-AM MODE]",
+            "en": "GNT-0000 00 QAN [T] [TRANS-AM MODE]"
+          },
+          "release_date": "2024-02-01",
+          "price_jpy": 3300,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/14830/",
+            "https://tamashiiweb.com/item_brand/gundam_universe/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-14474",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "プロトザンユニット",
+            "zh": "プロトザンユニット",
+            "ko": "프로토 잔 유닛",
+            "en": "プロトザンユニット"
+          },
+          "release_date": "2023-10",
+          "price_jpy": 7150,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/14474/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-14357",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_UNIVERSE",
+          "subline": "GUNDAM UNIVERSE",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "GNT-0000 00 QAN[T]",
+            "zh": "GNT-0000 00 QAN[T]",
+            "ko": "GNT-0000 00 QAN[T]",
+            "en": "GNT-0000 00 QAN [T]"
+          },
+          "release_date": "2023-09-30",
+          "price_jpy": 3300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/14357/",
+            "https://tamashiiweb.com/item_brand/gundam_universe/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-13950",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_UNIVERSE",
+          "subline": "GUNDAM UNIVERSE",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "GN-0000＋GNR-010 00 RAISER",
+            "zh": "GN-0000＋GNR-010 00 RAISER",
+            "ko": "GN-0000＋GNR-010 00 RAISER",
+            "en": "GN-0000＋GNR-010 00 RAISER"
+          },
+          "release_date": "2022-09-23",
+          "price_jpy": 4950,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/13950/",
+            "https://tamashiiweb.com/item_brand/gundam_universe/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "gframe-fapb05",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GFRAME",
+          "subline": "Mobile Suit Gundam G Frame FA",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "機動戦士ガンダム GフレームFA ミーティアユニット【プレミアムバンダイ限定】",
+            "zh": "机动战士高达 GフレームFA ミーティアユニット【Premium Bandai限定】",
+            "ko": "기동전사 건담 G프레임 FA 미티어 유닛【프리미엄 반다이 한정】",
+            "en": "Mobile Suit Gundam GフレームFA ミーティアユニット[Premium BandaiLimited]"
+          },
+          "release_date": "2022-09",
+          "price_jpy": 11800,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "bandai_candy_gundam_jp"
+          ],
+          "source_urls": [
+            "https://www.bandai.co.jp/candy/gundam/gframe/faPb05/",
+            "https://www.bandai.co.jp/candy/gundam/gframe/"
+          ]
+        },
+        {
+          "kit_id": "tamashii-13836",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "10th Anniversary トランザムライザー Full Particle ver.（事後販売）",
+            "zh": "10th Anniversary トランザムライザー Full Particle ver.（事後販売）",
+            "ko": "10th Anniversary 트랜스암 라이저 Full Particle ver.(사후 판매)",
+            "en": "10th Anniversary トランザムライザー Full Particle ver. (事後販売)"
+          },
+          "release_date": "2022-05",
+          "price_jpy": 27500,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/13836/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
           "kit_id": "pbandai-wb-1000166358",
           "change_type": "changed",
           "franchise": "gundam",
@@ -1352,6 +1674,129 @@
           ],
           "source_urls": [
             "https://p-bandai.jp/item/item-1000166358/"
+          ]
+        },
+        {
+          "kit_id": "tamashii-14833",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_UNIVERSE",
+          "subline": "GUNDAM UNIVERSE",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "GN-001 GUNDAM EXIA [TRANS-AM MODE]",
+            "zh": "GN-001 高达 EXIA [TRANS-AM MODE]",
+            "ko": "GN-001 건담 EXIA [TRANS-AM MODE]",
+            "en": "GN-001 GUNDAM EXIA [TRANS-AM MODE]"
+          },
+          "release_date": "2022-01-01",
+          "price_jpy": 3300,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/14833/",
+            "https://tamashiiweb.com/item_brand/gundam_universe/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-13723",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "10th Anniversary トランザムライザー Full Particle ver.",
+            "zh": "10th Anniversary トランザムライザー Full Particle ver.",
+            "ko": "10th Anniversary 트랜스암 라이저 Full Particle ver.",
+            "en": "10th Anniversary トランザムライザー Full Particle ver."
+          },
+          "release_date": "2021-11",
+          "price_jpy": 27500,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/13723/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-13600",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_UNIVERSE",
+          "subline": "GUNDAM UNIVERSE",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "GN-001 GUNDAM EXIA",
+            "zh": "GN-001 高达 EXIA",
+            "ko": "GN-001 건담 EXIA",
+            "en": "GN-001 GUNDAM EXIA"
+          },
+          "release_date": "2021-09-25",
+          "price_jpy": 3300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/13600/",
+            "https://tamashiiweb.com/item_brand/gundam_universe/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
           ]
         },
         {
@@ -1394,6 +1839,89 @@
           ],
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102614032000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "mg-mg-1-100-4573102609205000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "MG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 テスタメントガンダム",
+            "zh": "ＭＧ 1 / 100 テスタメント高达",
+            "ko": "MG 1/100 테스타먼트 건담",
+            "en": "ＭＧ 1 / 100 テスタメントGundam"
+          },
+          "release_date": "2020-11",
+          "price_jpy": 6270,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102609205000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000140760",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "GGG 機動戦士ガンダムOO グラハム・エーカー",
+            "zh": "GGG 机动战士高达OO グラハム・エーカー",
+            "ko": "GGG 기동전사 건담 OO 그라함 에이커",
+            "en": "GGG Mobile Suit Gundam OO グラハム エーカー [Limited特典付き]"
+          },
+          "release_date": "2020-05",
+          "price_jpy": 13200,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000140760/"
           ]
         },
         {
@@ -1479,150 +2007,27 @@
           ]
         },
         {
-          "kit_id": "pbandai-wb-1000078187",
+          "kit_id": "tamashii-12235",
           "change_type": "changed",
           "franchise": "gundam",
-          "grade_code": "RG",
-          "subline": "プレミアムバンダイ",
-          "series_key": "seed",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": "double_o",
           "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
           },
           "names": {
-            "ja": "RG 1 / 144 GAT-X105ストライクガンダム ディアクティブモード（再販）",
-            "zh": "RG 1 / 144 GAT-X105强袭高达 ディアクティブモード（再贩）",
-            "ko": "RG 1/144 GAT-X105 스트라이크 건담 디액티브 모드(재판)",
-            "en": "RG 1 / 144 GAT-X105Strike Gundam ディアクティブモード (Reissue)"
+            "ja": "GNソードIIブラスター",
+            "zh": "GNソードIIブラスター",
+            "ko": "GN 소드II 블래스터",
+            "en": "GNソードIIブラスター"
           },
-          "release_date": "2013-01",
-          "price_jpy": 2100,
+          "release_date": "2018-01",
+          "price_jpy": 3850,
           "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "release"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000078187/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000078189",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "RG",
-          "subline": "プレミアムバンダイ",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "RG 1 / 144 ZGMF-X09A ジャスティスガンダム ディアクティブモード（再販）",
-            "zh": "RG 1 / 144 ZGMF-X09A 正义高达 ディアクティブモード（再贩）",
-            "ko": "RG 1/144 ZGMF-X09A 저스티스 건담 디액티브 모드(재판)",
-            "en": "RG 1 / 144 ZGMF-X09A Justice Gundam ディアクティブモード (Reissue)"
-          },
-          "release_date": "2013-01",
-          "price_jpy": 2625,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "release"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000078189/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000078188",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "RG",
-          "subline": "プレミアムバンダイ",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "RG 1 / 144 ZGMF-X10A フリーダムガンダム ディアクティブモード（再販）",
-            "zh": "RG 1 / 144 ZGMF-X10A 自由高达 ディアクティブモード（再贩）",
-            "ko": "RG 1/144 ZGMF-X10A 프리덤 건담 디액티브 모드(재판)",
-            "en": "RG 1 / 144 ZGMF-X10A Freedom Gundam ディアクティブモード (Reissue)"
-          },
-          "release_date": "2013-01",
-          "price_jpy": 2625,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "release"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000078188/"
-          ]
-        },
-        {
-          "kit_id": "tamashii-1028",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "ROBOT_SPIRITS",
-          "subline": "ROBOT魂",
-          "series_key": "other",
-          "series_labels": {
-            "zh": "其他",
-            "en": "Other",
-            "ja": "その他",
-            "ko": "기타"
-          },
-          "names": {
-            "ja": "GNアーチャー(ガンアーチャー)",
-            "zh": "GNアーチャー(ガンアーチャー)",
-            "ko": "GN 아처(건 아처)",
-            "en": "GNアーチャー(ガンアーチャー)"
-          },
-          "release_date": "2009-03-21",
-          "price_jpy": 2750,
-          "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [
             "00"
@@ -1638,8 +2043,49 @@
             "tamashii_web_jp"
           ],
           "source_urls": [
-            "https://tamashiiweb.com/item/1028/",
-            "https://tamashiiweb.com/item_brand/robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+            "https://tamashiiweb.com/item/12235/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000255643",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "PG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "ＰＧ 1 / 60 トランザムライザー クリアカラーボディ",
+            "zh": "ＰＧ 1 / 60 トランザムライザー 透明色ボディ 【再贩】",
+            "ko": "PG 1/60 트랜스암 라이저 클리어 컬러 바디",
+            "en": "ＰＧ 1 / 60 トランザムライザー Clear Colorボディ [Reissue][２０２６年１０月発送]"
+          },
+          "release_date": "2017-09",
+          "price_jpy": 4180,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "00"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000255643/"
           ]
         }
       ],
