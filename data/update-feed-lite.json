@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-05",
-  "generated_at": "2026-11-05T07:30:03.747Z",
+  "generated_at": "2026-11-05T07:58:36.803Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,45 +18,528 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-05T07:29:59.360Z",
+    "generated_at": "2026-11-05T07:58:33.868Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-05",
-      "generated_at": "2026-11-05T07:30:03.747Z",
+      "generated_at": "2026-11-05T07:58:36.803Z",
       "total_before": 10614,
-      "total_after": 39181,
-      "added_count": 0,
-      "changed_count": 10,
+      "total_after": 39195,
+      "added_count": 13,
+      "changed_count": 32,
       "removed_count": 0,
       "watched_count": 0,
       "merged_count": 0,
-      "backfilled_count": 0,
+      "backfilled_count": 1,
       "premium_bandai_count": 0,
       "bbx_count": 0,
       "franchise_counts": {
-        "madoka": 5,
+        "madoka": 20,
+        "pokemon": 21,
         "gundam": 3,
-        "pokemon": 1,
         "fate": 1
       },
       "reason_counts": {
-        "release": 5,
+        "new": 13,
+        "release": 25,
         "series": 2,
         "price": 1,
-        "source": 1,
-        "image": 2
+        "source": 3,
+        "image": 4
       },
       "interest_tags": [
         "madoka",
-        "gundam",
         "pokemon",
+        "gundam",
         "fate"
       ],
       "watch_tags": [],
-      "added": [],
+      "added": [
+        {
+          "kit_id": "taito-madoka-0452066900",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PLUSH",
+          "subline": "タイトープライズ てちぬい",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 てちぬい vol.1",
+            "zh": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 てちぬい vol.1",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 테치누이 vol.1",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 てちぬい vol.1"
+          },
+          "release_date": "2026-09-29",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "taito_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://www.taito.co.jp/taito-prize/0452066900"
+          ]
+        },
+        {
+          "kit_id": "taito-madoka-0452067000",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PLUSH",
+          "subline": "タイトープライズ てちぬい",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 てちぬい vol.2",
+            "zh": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 てちぬい vol.2",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 테치누이 vol.2",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 てちぬい vol.2"
+          },
+          "release_date": "2026-09-29",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "taito_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://www.taito.co.jp/taito-prize/0452067000"
+          ]
+        },
+        {
+          "kit_id": "furyuprize-madoka-21766",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PRIZE",
+          "subline": "フリュープライズ",
+          "series_key": "madoka_tv",
+          "series_labels": {
+            "zh": "魔法少女小圆",
+            "en": "Madoka Magica",
+            "ja": "まどか☆マギカ",
+            "ko": "마도카 마기카"
+          },
+          "names": {
+            "ja": "魔法少女まどか☆マギカ ぬーどるストッパーフィギュアー暁美ほむらー",
+            "zh": "魔法少女まどか☆マギカ ぬーどるストッパーフィギュアー暁美ほむらー",
+            "ko": "마법소녀 마도카☆마기카 누들 스토퍼 피규어 -아케미 호무라-",
+            "en": "魔法少女まどか☆マギカ ぬーどるストッパーフィギュアー暁美ほむらー"
+          },
+          "release_date": "2026-08",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "furyu_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://furyuprize.com/item/21766"
+          ]
+        },
+        {
+          "kit_id": "sega-madoka-b122318",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PLUSH",
+          "subline": "セガプライズ",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 ふわぷち ぬいぐるみVol.2",
+            "zh": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 ふわぷち ぬいぐるみVol.2",
+            "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 후와푸치 봉제인형 Vol.2",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 ふわぷち ぬいぐるみVol.2"
+          },
+          "release_date": "2026-01-23",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "sega_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://segaplaza.jp/prize/B122318/"
+          ]
+        },
+        {
+          "kit_id": "sega-madoka-b122317",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PLUSH",
+          "subline": "セガプライズ",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 ふわぷち ぬいぐるみVol.1",
+            "zh": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 ふわぷち ぬいぐるみVol.1",
+            "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 후와푸치 봉제인형 Vol.1",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 ふわぷち ぬいぐるみVol.1"
+          },
+          "release_date": "2026-01-16",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "sega_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://segaplaza.jp/prize/B122317/"
+          ]
+        },
+        {
+          "kit_id": "sega-madoka-d122938",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PRIZE",
+          "subline": "セガプライズ",
+          "series_key": "madoka_magireco",
+          "series_labels": {
+            "zh": "魔法纪录",
+            "en": "Magia Record",
+            "ja": "マギアレコード",
+            "ko": "마기아 레코드"
+          },
+          "names": {
+            "ja": "マギアレコード 魔法少女まどか☆マギカ外伝 スーパープレミアムフィギュア“鹿目まどか”",
+            "zh": "マギアレコード 魔法少女まどか☆マギカ外伝 スーパープレミアムフィギュア“鹿目まどか”",
+            "ko": "마기아 레코드 마법소녀 마도카☆마기카 외전 슈퍼 프리미엄 피규어 “카나메 마도카”",
+            "en": "マギアレコード 魔法少女まどか☆マギカ外伝 スーパープレミアムフィギュア“鹿目まどか”"
+          },
+          "release_date": "2025-12-05",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "sega_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://segaplaza.jp/prize/D122938/"
+          ]
+        },
+        {
+          "kit_id": "furyu-madoka-tnl-8l8kty5p",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "TENITOL",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "TENITOL TALL 暁美ほむら",
+            "zh": "TENITOL TALL 暁美ほむら",
+            "ko": "TENITOL TALL 아케미 호무라",
+            "en": "TENITOL TALL 暁美ほむら"
+          },
+          "release_date": null,
+          "price_jpy": 10450,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "furyu_madoka_jp"
+          ],
+          "source_urls": [
+            "https://furyu-hm.com/products/tnl-8l8kty5p"
+          ]
+        },
+        {
+          "kit_id": "furyu-madoka-tnl-5mey8dnc",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "TENITOL",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "TENITOL TALL 鹿目まどか",
+            "zh": "TENITOL TALL 鹿目まどか",
+            "ko": "TENITOL TALL 카나메 마도카",
+            "en": "TENITOL TALL 鹿目まどか"
+          },
+          "release_date": null,
+          "price_jpy": 10450,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "furyu_madoka_jp"
+          ],
+          "source_urls": [
+            "https://furyu-hm.com/products/tnl-5mey8dnc"
+          ]
+        },
+        {
+          "kit_id": "furyu-madoka-tnl-7dckkixl",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "TENITOL",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "TENITOL TALL 鹿目まどか&暁美ほむら スペシャルセット",
+            "zh": "TENITOL TALL 鹿目まどか&暁美ほむら スペシャル套装",
+            "ko": "TENITOL TALL 카나메 마도카 & 아케미 호무라 스페셜 세트",
+            "en": "TENITOL TALL 鹿目まどか&暁美ほむら スペシャルSet"
+          },
+          "release_date": null,
+          "price_jpy": 20900,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "furyu_madoka_jp"
+          ],
+          "source_urls": [
+            "https://furyu-hm.com/products/tnl-7dckkixl"
+          ]
+        },
+        {
+          "kit_id": "furyu-madoka-fnx-eokdayen",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "F:NEX",
+          "series_key": "madoka_magireco",
+          "series_labels": {
+            "zh": "魔法纪录",
+            "en": "Magia Record",
+            "ja": "マギアレコード",
+            "ko": "마기아 레코드"
+          },
+          "names": {
+            "ja": "環いろは 水着ver. 1 / 7スケールフィギュア",
+            "zh": "環いろは 水着ver. 1 / 7スケールフィギュア",
+            "ko": "타마키 이로하 수영복 Ver. 1/7 스케일 피규어",
+            "en": "環いろは 水着ver. 1 / 7スケールフィギュア"
+          },
+          "release_date": null,
+          "price_jpy": 18480,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "furyu_madoka_jp"
+          ],
+          "source_urls": [
+            "https://furyu-hm.com/products/fnx-eokdayen"
+          ]
+        },
+        {
+          "kit_id": "furyu-madoka-fnx-goqgxlee",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "F:NEX",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "吉徳×F:NEX 鹿目まどか・暁美ほむらセット -日本人形- 1 / 4スケールフィギュア",
+            "zh": "吉徳×F:NEX 鹿目まどか・暁美ほむら套装 -日本人形- 1 / 4スケールフィギュア",
+            "ko": "요시토쿠×F:NEX 카나메 마도카 · 아케미 호무라 세트 -일본 인형- 1/4 스케일 피규어",
+            "en": "吉徳×F:NEX 鹿目まどか 暁美ほむらSet -日本人形- 1 / 4スケールフィギュア"
+          },
+          "release_date": null,
+          "price_jpy": 396000,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "furyu_madoka_jp"
+          ],
+          "source_urls": [
+            "https://furyu-hm.com/products/fnx-goqgxlee"
+          ]
+        },
+        {
+          "kit_id": "furyu-madoka-fnx-tpa65tar",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "F:NEX",
+          "series_key": "madoka_magireco",
+          "series_labels": {
+            "zh": "魔法纪录",
+            "en": "Magia Record",
+            "ja": "マギアレコード",
+            "ko": "마기아 레코드"
+          },
+          "names": {
+            "ja": "鹿目まどか 晴着ver. 1 / 7スケールフィギュア",
+            "zh": "鹿目まどか 晴着ver. 1 / 7スケールフィギュア",
+            "ko": "카나메 마도카 하레기 Ver. 1/7 스케일 피규어",
+            "en": "鹿目まどか 晴着ver. 1 / 7スケールフィギュア"
+          },
+          "release_date": null,
+          "price_jpy": 19580,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "furyu_madoka_jp"
+          ],
+          "source_urls": [
+            "https://furyu-hm.com/products/fnx-tpa65tar"
+          ]
+        },
+        {
+          "kit_id": "furyu-madoka-fnx-ulmhideq",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "F:NEX",
+          "series_key": "madoka_magireco",
+          "series_labels": {
+            "zh": "魔法纪录",
+            "en": "Magia Record",
+            "ja": "マギアレコード",
+            "ko": "마기아 레코드"
+          },
+          "names": {
+            "ja": "鹿目まどか 晴着ver. 1 / 7スケールフィギュア",
+            "zh": "鹿目まどか 晴着ver. 1 / 7スケールフィギュア",
+            "ko": "카나메 마도카 하레기 Ver. 1/7 스케일 피규어",
+            "en": "鹿目まどか 晴着ver. 1 / 7スケールフィギュア"
+          },
+          "release_date": null,
+          "price_jpy": 22000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "furyu_madoka_jp"
+          ],
+          "source_urls": [
+            "https://furyu-hm.com/products/fnx-ulmhideq"
+          ]
+        }
+      ],
       "changed": [
         {
           "kit_id": "aniplex-madoka-itemcarfxvpv02",
@@ -244,87 +727,11 @@
           ]
         },
         {
-          "kit_id": "tamashii-14286",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_UNIVERSE",
-          "subline": "GUNDAM UNIVERSE",
-          "series_key": "other",
-          "series_labels": {
-            "zh": "其他",
-            "en": "Other",
-            "ja": "その他",
-            "ko": "기타"
-          },
-          "names": {
-            "ja": "GF13-017 NJ SHINING GUNDAM",
-            "zh": "GF13-017 NJ SHINING 高达",
-            "ko": "GF13-017 NJ SHINING 건담",
-            "en": "GF13-017 NJ SHINING GUNDAM"
-          },
-          "release_date": "2023-07-29",
-          "price_jpy": 3300,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "tamashii_web_jp"
-          ],
-          "source_urls": [
-            "https://tamashiiweb.com/item/14286/",
-            "https://tamashiiweb.com/item_brand/gundam_universe/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
-          ]
-        },
-        {
-          "kit_id": "tamashii-14175",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_UNIVERSE",
-          "subline": "GUNDAM UNIVERSE",
-          "series_key": "other",
-          "series_labels": {
-            "zh": "其他",
-            "en": "Other",
-            "ja": "その他",
-            "ko": "기타"
-          },
-          "names": {
-            "ja": "RX-93 ν GUNDAM [REAL MARKING PLUS ver.]",
-            "zh": "RX-93 ν 高达 [REAL MARKING PLUS ver.]",
-            "ko": "RX-93 ν 건담 [REAL MARKING PLUS ver.]",
-            "en": "RX-93 ν GUNDAM [REAL MARKING PLUS ver.]"
-          },
-          "release_date": "2022-07-20",
-          "price_jpy": 3850,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "tamashii_web_jp"
-          ],
-          "source_urls": [
-            "https://tamashiiweb.com/item/14175/",
-            "https://tamashiiweb.com/item_brand/gundam_universe/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-07",
+          "kit_id": "pokemon-kr-137593192",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -333,12 +740,12 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "リーフィア",
-            "zh": "リーフィア",
-            "ko": "리피아",
-            "en": "リーフィア"
+            "ja": "포켓몬센터 Sean Wotherspoon ✕ ポケモン Center 봉제인형 리자몽",
+            "zh": "포켓몬센터 Sean Wotherspoon ✕ 宝可梦 Center 봉제인형 리자몽",
+            "ko": "포켓몬센터 Sean Wotherspoon ✕ 포켓몬 Center 봉제인형 리자몽",
+            "en": "포켓몬센터 Sean Wotherspoon ✕ Pokémon Center 봉제인형 리자몽"
           },
-          "release_date": null,
+          "release_date": "2026-11-05",
           "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
@@ -347,96 +754,576 @@
             "pokemon"
           ],
           "change_reasons": [
-            "price",
-            "source"
+            "release"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp"
+            "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms07/"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137593192"
           ]
         },
         {
-          "kit_id": "gundam-merch-4582769995729000",
+          "kit_id": "pokemon-kr-137592460",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "Gundam Gashapon Merchandise",
-          "series_key": "mixed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
           "series_labels": {
-            "zh": "混合",
-            "en": "Mixed",
-            "ja": "複合作品",
-            "ko": "혼합"
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
           },
           "names": {
-            "ja": "機動戦士ガンダム CAPSULE INDEX 04",
-            "zh": "机动战士高达 CAPSULE INDEX 04",
-            "ko": "기동전사 건담 CAPSULE INDEX 04",
-            "en": "Mobile Suit Gundam CAPSULE INDEX 04"
+            "ja": "포켓몬센터 Sean Wotherspoon ✕ ポケモン Center 봉제인형 이상해씨",
+            "zh": "포켓몬센터 Sean Wotherspoon ✕ 宝可梦 Center 봉제인형 이상해씨",
+            "ko": "포켓몬센터 Sean Wotherspoon ✕ 포켓몬 Center 봉제인형 이상해씨",
+            "en": "포켓몬센터 Sean Wotherspoon ✕ Pokémon Center 봉제인형 이상해씨"
           },
-          "release_date": null,
-          "price_jpy": 400,
+          "release_date": "2026-11-05",
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam"
+            "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "release"
           ],
           "source_ids": [
-            "bandai_gashapon_products_jp"
+            "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://gashapon.jp/products/detail.php?jan_code=4582769995729000",
-            "https://gashapon.jp/products/result.php?free=%E3%82%AC%E3%83%B3%E3%83%80%E3%83%A0"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137592460"
           ]
         },
         {
-          "kit_id": "aniplex-fate-itemcvhbvles",
+          "kit_id": "pokemon-kr-137593509",
           "change_type": "changed",
-          "franchise": "fate",
-          "grade_code": "FATE_GOODS",
-          "subline": "Aniplex+",
-          "series_key": "fate_fgo",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
           "series_labels": {
-            "zh": "FGO",
-            "en": "FGO",
-            "ja": "FGO",
-            "ko": "FGO"
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
           },
           "names": {
-            "ja": "聖晶石販売ページ",
-            "zh": "聖晶石販売ページ",
-            "ko": "성정석 판매 페이지",
-            "en": "聖晶石販売ページ"
+            "ja": "포켓몬센터 Sean Wotherspoon ✕ ポケモン Center 봉제인형 피카츄",
+            "zh": "포켓몬센터 Sean Wotherspoon ✕ 宝可梦 Center 봉제인형 피카츄",
+            "ko": "포켓몬센터 Sean Wotherspoon ✕ 포켓몬 Center 봉제인형 피카츄",
+            "en": "포켓몬센터 Sean Wotherspoon ✕ Pokémon Center 봉제인형 피카츄"
           },
-          "release_date": null,
-          "price_jpy": 1520,
+          "release_date": "2026-11-05",
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "fate"
+            "pokemon"
           ],
           "change_reasons": [
-            "image"
+            "release"
           ],
           "source_ids": [
-            "aniplex_plus_fate_jp"
+            "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://online.aniplex.co.jp/itemCVhbvlES.html"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137593509"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137504096",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 마스코트 마휘핑",
+            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 마스코트 마휘핑",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 마스코트 마휘핑",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 마스코트 마휘핑"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504096"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137504094",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 마스코트 알로라 라이츄",
+            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 마스코트 알로라 라이츄",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 마스코트 알로라 라이츄",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 마스코트 알로라 라이츄"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504094"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137504095",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 마스코트 조로아",
+            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 마스코트 조로아",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 마스코트 조로아",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 마스코트 조로아"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504095"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137504089",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 봉제인형 빠모",
+            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 봉제인형 빠모",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 봉제인형 빠모",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 봉제인형 빠모"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504089"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137504088",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 봉제인형 조로아크",
+            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 봉제인형 조로아크",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 봉제인형 조로아크",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 봉제인형 조로아크"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504088"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137504091",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 봉제인형 포트데스(위작폼)",
+            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 봉제인형 포트데스(위작폼)",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 봉제인형 포트데스(위작폼)",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 봉제인형 포트데스(위작폼)"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504091"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137504090",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 봉제인형 피카츄",
+            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 봉제인형 피카츄",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 봉제인형 피카츄",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 봉제인형 피카츄"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504090"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137504093",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 포즈 마스코트 크로뱃",
+            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 포즈 마스코트 크로뱃",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 포즈 마스코트 크로뱃",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 포즈 마스코트 크로뱃"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504093"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137529058",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 네오라이트",
+            "zh": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 네오라이트",
+            "ko": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 네오라이트",
+            "en": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 네오라이트"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137529058"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137529060",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 밀로틱",
+            "zh": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 밀로틱",
+            "ko": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 밀로틱",
+            "en": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 밀로틱"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137529060"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137529057",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 샤미드",
+            "zh": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 샤미드",
+            "ko": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 샤미드",
+            "en": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 샤미드"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137529057"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137529053",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 코산호",
+            "zh": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 코산호",
+            "ko": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 코산호",
+            "en": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 코산호"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137529053"
           ]
         }
       ],
       "removed": [],
       "watched": [],
       "merged": [],
-      "backfilled": []
+      "backfilled": [
+        {
+          "kit_id": "alter-madoka-258",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "ALTER",
+          "series_key": "madoka_magireco",
+          "series_labels": {
+            "zh": "魔法纪录",
+            "en": "Magia Record",
+            "ja": "マギアレコード",
+            "ko": "마기아 레코드"
+          },
+          "names": {
+            "ja": "五十鈴 れん",
+            "zh": "五十鈴 れん",
+            "ko": "이스즈 렌",
+            "en": "五十鈴 れん"
+          },
+          "release_date": "2020-09",
+          "price_jpy": 18000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "alter_madoka_jp"
+          ],
+          "source_urls": [
+            "https://alter-web.jp/products/258/"
+          ]
+        }
+      ]
     },
     {
       "date": "2026-11-04",
