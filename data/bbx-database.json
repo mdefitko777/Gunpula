@@ -39,7 +39,7 @@
       "product_id": "BX53",
       "base_set_id": "BX-53",
       "names": {
-        "zh": "BX-53 多合一套組",
+        "zh": "BX-53 極限衝擊對戰組",
         "ko": "BX-53 올인원 세트",
         "en": "BX-53 All-in-One Set",
         "ja": "BX-53 オールインワンセット"
@@ -3707,6 +3707,30 @@
         "bx"
       ],
       "collection_order": 229
+    },
+    {
+      "series_id": "SR-PRD-056102-00",
+      "base_set_id": "BXG-65",
+      "names": {
+        "zh": "BXG-65 戰神伏特 S4-70V 槍灰版",
+        "ko": "BXG-65 발키리언볼트 S4-70V 건메탈 버전",
+        "en": "BXG-65 Valkyrie Volt S 4-70V Gunmetal Ver.",
+        "ja": "BXG-65 ワルキューレボルトS 4-70V ガンメタVer."
+      },
+      "model_name": "BXG65_ValkyrieVoltS4-70V",
+      "blade_id": "BL-PRD-056102-00",
+      "ratchet_id": "RC-PRD-056102-00",
+      "bit_id": "BT-PRD-056102-00",
+      "assist_blade_id": "AB-PRD-056102-00",
+      "lock_chip_id": "LC-PRD-056102-00",
+      "main_blade_id": "MB-PRD-056102-00",
+      "metal_blade_id": "",
+      "over_blade_id": "",
+      "tags": [
+        "cx",
+        "other"
+      ],
+      "collection_order": 307
     },
     {
       "series_id": "SR-PRD-056225-00",
@@ -10856,6 +10880,33 @@
         "image": "https://beyblade.phstudy.org/images/site/Blade/BL-FRB-FB2602-00.png",
         "image_fallback": "https://beyblade.phstudy.org/images/app/Big/BL-FRB-FB2602-00.png",
         "image_remote": "https://beyblade.phstudy.org/images/site/Blade/BL-FRB-FB2602-00.png"
+      },
+      {
+        "part_id": "BL-PRD-056102-00",
+        "type": "blade",
+        "base_set_id": "BXG-65",
+        "names": {
+          "zh": "BXG-65 戰神伏特S 槍灰",
+          "ko": "BXG-65 발키리언볼트 S 건메탈 버전",
+          "en": "BXG-65 Valkyrie Volt S Gunmetal Ver.",
+          "ja": "BXG-65 ワルキューレボルトS ガンメタVer."
+        },
+        "color": "",
+        "stats": {
+          "attack": 69,
+          "burst": 0,
+          "dash": 0,
+          "defense": 29,
+          "height": 50,
+          "rotation": "right",
+          "stamina": 27,
+          "weight": 0
+        },
+        "weight_g": null,
+        "collection_order": 307,
+        "image": "https://beyblade.phstudy.org/images/site/Blade/BL-PRD-056102-00.png",
+        "image_fallback": "https://beyblade.phstudy.org/images/app/Big/BL-PRD-056102-00.png",
+        "image_remote": "https://beyblade.phstudy.org/images/site/Blade/BL-PRD-056102-00.png"
       },
       {
         "part_id": "BL-PRD-056225-00",
@@ -19014,6 +19065,33 @@
         "image_remote": "https://beyblade.phstudy.org/images/app/Ratchet/RC-FRB-CR2502-00.png"
       },
       {
+        "part_id": "RC-PRD-056102-00",
+        "type": "ratchet",
+        "base_set_id": "BXG-65",
+        "names": {
+          "zh": "BXG-65 4-70",
+          "ko": "BXG-65 4-70",
+          "en": "BXG-65 4-70",
+          "ja": "BXG-65 4-70"
+        },
+        "color": "",
+        "stats": {
+          "attack": 11,
+          "burst": 0,
+          "dash": 0,
+          "defense": 12,
+          "height": 70,
+          "rotation": null,
+          "stamina": 7,
+          "weight": 0
+        },
+        "weight_g": null,
+        "collection_order": 307,
+        "image": "https://beyblade.phstudy.org/images/app/Ratchet/RC-PRD-056102-00.png",
+        "image_fallback": null,
+        "image_remote": "https://beyblade.phstudy.org/images/app/Ratchet/RC-PRD-056102-00.png"
+      },
+      {
         "part_id": "RC-PRD-056225-00",
         "type": "ratchet",
         "base_set_id": "BXC-21",
@@ -26925,6 +27003,33 @@
         "image": "https://beyblade.phstudy.org/images/app/Bit/BT-FRB-CR2502-00.png",
         "image_fallback": null,
         "image_remote": "https://beyblade.phstudy.org/images/app/Bit/BT-FRB-CR2502-00.png"
+      },
+      {
+        "part_id": "BT-PRD-056102-00",
+        "type": "bit",
+        "base_set_id": "BXG-65",
+        "names": {
+          "zh": "BXG-65 V",
+          "ko": "BXG-65 V",
+          "en": "BXG-65 V",
+          "ja": "BXG-65 V"
+        },
+        "color": "",
+        "stats": {
+          "attack": 45,
+          "burst": 80,
+          "dash": 40,
+          "defense": 10,
+          "height": 0,
+          "rotation": "both-right-origin",
+          "stamina": 5,
+          "weight": 0
+        },
+        "weight_g": null,
+        "collection_order": 307,
+        "image": "https://beyblade.phstudy.org/images/app/Bit/BT-PRD-056102-00.png",
+        "image_fallback": null,
+        "image_remote": "https://beyblade.phstudy.org/images/app/Bit/BT-PRD-056102-00.png"
       },
       {
         "part_id": "BT-PRD-056225-00",
@@ -34867,6 +34972,33 @@
         "image_remote": "https://beyblade.phstudy.org/images/app/AssistBlade/AB-EVE-982524-03.png"
       },
       {
+        "part_id": "AB-PRD-056102-00",
+        "type": "assist_blade",
+        "base_set_id": "BXG-65",
+        "names": {
+          "zh": "BXG-65 S",
+          "ko": "BXG-65 S",
+          "en": "BXG-65 S",
+          "ja": "BXG-65 S"
+        },
+        "color": "",
+        "stats": {
+          "attack": 20,
+          "burst": 0,
+          "dash": 0,
+          "defense": 10,
+          "height": 50,
+          "rotation": "right",
+          "stamina": 10,
+          "weight": 0
+        },
+        "weight_g": null,
+        "collection_order": 307,
+        "image": "https://beyblade.phstudy.org/images/app/AssistBlade/AB-PRD-056102-00.png",
+        "image_fallback": null,
+        "image_remote": "https://beyblade.phstudy.org/images/app/AssistBlade/AB-PRD-056102-00.png"
+      },
+      {
         "part_id": "AB-PRD-056225-00",
         "type": "assist_blade",
         "base_set_id": "BXC-21",
@@ -37002,6 +37134,33 @@
         "image_remote": "https://beyblade.phstudy.org/images/app/LockChip/LC-EVE-982524-03.png"
       },
       {
+        "part_id": "LC-PRD-056102-00",
+        "type": "lock_chip",
+        "base_set_id": "BXG-65",
+        "names": {
+          "zh": "BXG-65> 戰神",
+          "ko": "BXG-65 발키리언",
+          "en": "BXG-65 Valkyrie",
+          "ja": "BXG-65 ワルキューレ"
+        },
+        "color": "",
+        "stats": {
+          "attack": 4,
+          "burst": 0,
+          "dash": 0,
+          "defense": 4,
+          "height": 0,
+          "rotation": "right",
+          "stamina": 2,
+          "weight": 0
+        },
+        "weight_g": null,
+        "collection_order": 307,
+        "image": "https://beyblade.phstudy.org/images/app/LockChip/LC-PRD-056102-00.png",
+        "image_fallback": null,
+        "image_remote": "https://beyblade.phstudy.org/images/app/LockChip/LC-PRD-056102-00.png"
+      },
+      {
         "part_id": "LC-PRD-056225-00",
         "type": "lock_chip",
         "base_set_id": "BXC-21",
@@ -39135,6 +39294,33 @@
         "image": "https://beyblade.phstudy.org/images/app/MainBlade/MB-EVE-982524-03.png",
         "image_fallback": null,
         "image_remote": "https://beyblade.phstudy.org/images/app/MainBlade/MB-EVE-982524-03.png"
+      },
+      {
+        "part_id": "MB-PRD-056102-00",
+        "type": "main_blade",
+        "base_set_id": "BXG-65",
+        "names": {
+          "zh": "BXG-65 伏特 槍灰",
+          "ko": "BXG-65 볼트 건메탈 버전",
+          "en": "BXG-65 Volt Gunmetal Ver.",
+          "ja": "BXG-65 ボルト ガンメタVer."
+        },
+        "color": "",
+        "stats": {
+          "attack": 45,
+          "burst": 0,
+          "dash": 0,
+          "defense": 15,
+          "height": 0,
+          "rotation": "right",
+          "stamina": 15,
+          "weight": 0
+        },
+        "weight_g": null,
+        "collection_order": 307,
+        "image": "https://beyblade.phstudy.org/images/app/MainBlade/MB-PRD-056102-00.png",
+        "image_fallback": null,
+        "image_remote": "https://beyblade.phstudy.org/images/app/MainBlade/MB-PRD-056102-00.png"
       },
       {
         "part_id": "MB-PRD-056225-00",
