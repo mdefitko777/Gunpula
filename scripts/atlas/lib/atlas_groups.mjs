@@ -340,6 +340,7 @@ export const MADOKA_CHARACTERS = [
   { id: "felicia", labels: lang("深月菲莉希亚", "펠리시아", "Felicia", "深月フェリシア"), names: ["深月フェリシア", "フェリシア", "Felicia"] },
   { id: "sana", labels: lang("二叶莎奈", "사나", "Sana", "二葉さな"), names: ["二葉さな", "Sana Futaba"] },
   { id: "alina", labels: lang("爱丽娜·格雷", "아리나", "Alina", "アリナ・グレイ"), names: ["アリナ・グレイ", "アリナ", "Alina Gray"] },
+  { id: "ren", labels: lang("五十铃怜", "렌", "Ren", "五十鈴れん"), names: ["五十鈴れん", "五十鈴 れん", "Ren Isuzu"] },
 ];
 
 export function madokaClassifier() {
