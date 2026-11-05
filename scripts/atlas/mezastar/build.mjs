@@ -13,14 +13,14 @@
 // resolves. --reassign-ids ignores the previous ids (only for files that were never published).
 
 import path from "node:path";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { CACHE_DIR, BlockedError, backoffReport, blockedHosts, hostOldest, hostReport, USER_AGENT } from "./lib/http.mjs";
 import { prune, readJsonMaybe, uniq, writeCompactJson } from "./lib/util.mjs";
 import { checkOutput, finaliseIds, makeRegistry } from "./lib/ids.mjs";
 import { loadPokeApi, POKEAPI_SOURCE } from "./lib/pokeapi.mjs";
 import { fetchTW, TW_SOURCE } from "./sources/tw.mjs";
 import { fetchHK, HK_SOURCE } from "./sources/hk.mjs";
-import { fetchKR, KR_SOURCE } from "./sources/kr.mjs";
+import { fetchKR, KR_SOURCE, mergeSupport } from "./sources/kr.mjs";
 import { fetchCN, CN_SOURCE } from "./sources/cn.mjs";
 import { fetchJP, JP_SOURCE } from "./sources/jp.mjs";
 import { fetchBulba, BULBA_SOURCE, bulbaStatus } from "./sources/bulba.mjs";
@@ -285,8 +285,12 @@ if (EDITIONS.includes("intl")) {
     sets: merged.sets,
     tags,
     aliases: merged.aliases,
-    // 서포트 포켓몬 티켓 (KR site): keep the previous list when the page could not be read
-    support_tickets: (res.KR.ok && res.KR.data.support?.length ? res.KR.data.support : prev.intl?.support_tickets) || undefined,
+    // 서포트 포켓몬 티켓: the KR site's current list (kept from the previous run when unreadable) + the
+    // curated earlier tickets, with move / type / dex from scripts/atlas/mezastar/support-kr.json
+    support_tickets: mergeSupport(
+      (res.KR.ok && res.KR.data.support?.length ? res.KR.data.support : prev.intl?.support_tickets?.filter((t) => t.status === "current")) || [],
+      JSON.parse(await readFile(new URL("./support-kr.json", import.meta.url), "utf8")).tickets,
+    ),
   });
   out.updated_at = now;
   const w = await writeIfChanged(FILES.intl, out, prev.intl, REASSIGN ? null : prev.intl);

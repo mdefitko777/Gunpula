@@ -120,3 +120,18 @@ export async function fetchKR({ known = new Map(), popups = "new" } = {}) {
   }
   return { sets, rows, stale, support, popups: { fetched: popupFetched, reused: popupReused, failed: popupFailed } };
 }
+
+/** Official current tickets + curated ones (support-kr.json): curated info (move, type, dex) is added to an
+ *  official ticket of the same name; a curated ticket the site no longer lists becomes a "past" ticket
+ *  with no picture (the app shows the Pokémon's official artwork). */
+export function mergeSupport(official, curated) {
+  const out = official.map((t) => {
+    const c = curated.find((x) => x.name === t.name);
+    return c ? { ...t, move: c.move, type: c.type, dex: c.dex } : t;
+  });
+  for (const c of curated) {
+    if (out.some((t) => t.name === c.name)) continue;
+    out.push({ id: `mz-support:KR:dex${c.dex}`, region: "KR", name: c.name, move: c.move, type: c.type, dex: c.dex, image: null, status: "past", url: "https://pokemontagstar.co.kr/kr/sub/htp13.php" });
+  }
+  return out;
+}
