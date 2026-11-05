@@ -56,8 +56,9 @@ function parsePopup(html, url) {
  * known: Map idx -> {img_front, img_back} from the previous output, so popups are fetched only for new tags.
  * popups: "all" | "new" | "none"
  */
-// 서포트 포켓몬 티켓 (support Pokémon tickets): htp13.php lists the current tickets; retired ones stay
-// in the page inside an HTML comment, so they are read too and marked "retired". One request.
+// 서포트 포켓몬 티켓 (support Pokémon tickets): htp13.php lists the tickets. Only the live list items
+// count: the ones inside an HTML comment are template leftovers showing Taiwan/HK MEZASTAR tickets
+// (支援寶可夢券), not Korean releases. One request.
 export function parseSupportTickets(html, url) {
   const list = (html.match(/<ul class="ticket-list">([\s\S]*?)<\/ul>/) || [])[1] || "";
   const retiredSpans = [...list.matchAll(/<!--([\s\S]*?)-->/g)].map((m) => [m.index, m.index + m[0].length]);
@@ -68,8 +69,8 @@ export function parseSupportTickets(html, url) {
     if (!img || !name) continue;
     const abs = absUrl(img, url);
     const file = abs.split("/").pop().replace(/\.[a-z]+$/i, "");
-    const retired = retiredSpans.some(([a, b]) => m.index > a && m.index < b);
-    out.push({ id: `mz-support:KR:${file}`, region: "KR", name, image: abs, status: retired ? "retired" : "current", url });
+    if (retiredSpans.some(([a, b]) => m.index > a && m.index < b)) continue;
+    out.push({ id: `mz-support:KR:${file}`, region: "KR", name, image: abs, status: "current", url });
   }
   return out;
 }
