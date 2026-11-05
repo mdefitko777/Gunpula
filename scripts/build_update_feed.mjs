@@ -353,7 +353,7 @@ const feed = {
   updated_at: date,
   generated_at: entry.generated_at,
   watch_tags: ["seed", "00"],
-  interest_tags: ["premium_bandai", "bbx", "gundam", "armored_core", "pokemon", "fate", "beyblade", "madoka"],
+  interest_tags: ["premium_bandai", "bbx", "gundam", "armored_core", "pokemon", "fate", "beyblade", "madoka", "lego"],
   source_health: sourceHealth
     ? {
         generated_at: sourceHealth.generated_at,

@@ -2,6 +2,9 @@ import { readFile, writeFile } from "node:fs/promises";
 
 const CATALOG_FILE = "data/kits.json";
 
+// Korean labels of the LEGO top-level themes (Rebrickable names, franchise lego)
+const LEGO_THEME_KO = JSON.parse(await readFile("data/lego/theme-labels-ko.json", "utf8")).labels;
+
 const HTML_ENTITY_MAP = {
   alpha: "α",
   beta: "β",
@@ -995,6 +998,16 @@ function seriesForKit(kit) {
       SERIES.find((series) => ["fate_fgo", "fate_stay_night", "fate_zero", "fate_extra", "fate_apocrypha", "type_moon"].includes(series.key) && series.pattern.test(text)) ||
       SERIES.find((series) => series.key === "fate_fgo")
     );
+  }
+  if (kit.franchise === "lego") {
+    // One series per Rebrickable top-level theme (work_title); not in SERIES, built from the theme name
+    const theme = kit.work_title || "Other";
+    return {
+      key: `lego_${theme.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "other"}`,
+      sort: 600,
+      labels: { zh: theme, en: theme, ja: theme, ko: LEGO_THEME_KO[theme] || theme },
+      universe: "LEGO",
+    };
   }
   if (kit.franchise === "madoka") {
     const keys = ["madoka_walpurgis", "madoka_rebellion", "madoka_magireco", "madoka_tv"];

@@ -17,6 +17,7 @@
 // `line_covers` map {<franchise>: {<grade_code | BX | UX | CX>: {image, image_remote,
 // cover_source, kind: "logo" | "key_visual"}}} with the official image of each product line.
 // Empty groups are left out. `--report=<file>` writes every product's group and reason (for review).
+import { readFileSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
 import { armoredCoreClassifier, fateClassifier, lang, madokaClassifier, MADOKA_CHARACTERS, pokemonClassifier, POKEMON_GAMES, AC_TITLES, productText } from "./atlas/lib/atlas_groups.mjs";
 
@@ -310,6 +311,33 @@ function beybladeGroups() {
     .sort((a, c) => c.count - a.count);
 }
 
+// ─────────────── LEGO: one group per Rebrickable top-level theme (work_title) ───────────────
+function legoGroups() {
+  const ko = JSON.parse(readFileSync("data/lego/theme-labels-ko.json", "utf8")).labels;
+  const byTheme = new Map();
+  for (const k of kits.filter((x) => x.franchise === "lego")) {
+    const theme = k.work_title || "Other";
+    (byTheme.get(theme) || byTheme.set(theme, []).get(theme)).push(k);
+  }
+  return [...byTheme.entries()]
+    .map(([theme, list]) => {
+      const newest = [...list]
+        .filter((k) => k.images?.box_art_url)
+        .sort((a, b) => String(b.release_date || "").localeCompare(String(a.release_date || "")) || (b.tags?.length || 0) - (a.tags?.length || 0))[0];
+      return {
+        id: `lego_${theme.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "other"}`,
+        kind: "theme",
+        labels: lang(theme, ko[theme] || theme, theme, theme),
+        subtitle: lang("", "", "", ""),
+        image: newest?.images.box_art_url || "",
+        cover_source: "newest set picture (Rebrickable)",
+        kit_ids: list.map((k) => k.kit_id),
+        count: list.length,
+      };
+    })
+    .sort((a, b) => b.count - a.count);
+}
+
 // ─────────────── Gundam timeline (unchanged: GGEN series logos per work) ───────────────
 function gundamTimeline() {
   const family = (name) => {
@@ -372,6 +400,7 @@ function channels() {
     fate: ch("fate", lang("Fate", "Fate", "Fate", "Fate")),
     armored_core: ch("armored_core", lang("装甲核心", "아머드 코어", "Armored Core", "アーマード・コア")),
     madoka: ch("madoka", lang("魔法少女小圆", "마도카 마기카", "Madoka Magica", "まどか☆マギカ")),
+    lego: ch("lego", lang("乐高", "레고", "LEGO", "レゴ")),
   };
 }
 
@@ -401,6 +430,7 @@ const output = {
     armored_core: armoredCoreGroups(),
     madoka: madokaGroups(),
     beyblade: beybladeGroups(),
+    lego: legoGroups(),
   },
 };
 

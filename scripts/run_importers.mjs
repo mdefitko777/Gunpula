@@ -24,6 +24,9 @@ const STEPS = [
   { script: "import:fate", kind: "source" },
   { script: "import:fate-extra", kind: "source" },
   { script: "import:madoka", kind: "source" },
+  // Rebrickable allows downloading its catalog archives at most once a day; the script skips
+  // the download when data/lego/rebrickable-fetch.json already has today's date.
+  { script: "import:lego", kind: "source" },
   { script: "import:bbx-db", kind: "source" },
   { script: "import:gget", kind: "source" },
   { script: "map:gget", kind: "derive" },

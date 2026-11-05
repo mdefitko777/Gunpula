@@ -795,6 +795,26 @@
         "answers the bot with a Cloudflare challenge (HTTP 403); not worked around"
       ],
       "notes": "Retailer; currently refuses HobbyAtlasDataBot, so it yields nothing."
+    },
+    {
+      "source_id": "rebrickable_lego",
+      "name": "Rebrickable LEGO catalog",
+      "type": "community_database",
+      "country": "DK",
+      "base_url": "https://rebrickable.com/downloads/",
+      "priority": 20,
+      "best_for": [
+        "every official LEGO set",
+        "set number",
+        "release year",
+        "piece count",
+        "set images"
+      ],
+      "weak_for": [
+        "price",
+        "Korean names"
+      ],
+      "notes": "Daily CSV archives (sets, themes), free for personal and commercial use with credit to Rebrickable; downloaded at most once a day, web pages are never scraped."
     }
   ]
 }
