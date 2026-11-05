@@ -335,8 +335,11 @@ function legoGroups() {
         count: list.length,
       };
     })
-    .sort((a, b) => b.count - a.count);
+    // Real set themes first (by size); merch, books, parts packs, promos and store-only things last
+    .sort((a, b) => Number(LEGO_TAIL_THEMES.has(a.labels.en)) - Number(LEGO_TAIL_THEMES.has(b.labels.en)) || b.count - a.count);
 }
+
+const LEGO_TAIL_THEMES = new Set(["Gear", "Books", "Service Packs", "Bulk Bricks", "Promotional", "LEGO Brand Store", "Legoland", "Legoland Parks", "Other", "Educational and Dacta", "FIRST LEGO League", "Games", "Power Functions", "Value Packs", "Universal Building Set"]);
 
 // ─────────────── Gundam timeline (unchanged: GGEN series logos per work) ───────────────
 function gundamTimeline() {
