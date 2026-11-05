@@ -54,6 +54,11 @@ const CATALOG_SOURCES = [
   { source_id: "tamashii_web_madoka_jp", label: "Tamashii Web (Madoka)" },
   { source_id: "ichiban_kuji_madoka_jp", label: "Ichiban Kuji (Madoka)" },
   { source_id: "banpresto_prize_madoka_jp", label: "Banpresto prize (Madoka)" },
+  { source_id: "alter_madoka_jp", label: "ALTER (Madoka)" },
+  { source_id: "furyu_madoka_jp", label: "FURYU HOBBY MALL (Madoka)" },
+  { source_id: "taito_prize_madoka_jp", label: "TAITO prize (Madoka)" },
+  { source_id: "sega_prize_madoka_jp", label: "SEGA prize (Madoka)" },
+  { source_id: "furyu_prize_madoka_jp", label: "FuRyu prize (Madoka)" },
 ];
 
 function nowIso() {

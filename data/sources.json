@@ -815,6 +815,111 @@
         "Korean names"
       ],
       "notes": "Daily CSV archives (sets, themes), free for personal and commercial use with credit to Rebrickable; downloaded at most once a day, web pages are never scraped."
+    },
+    {
+      "source_id": "alter_madoka_jp",
+      "name": "ALTER (Madoka Magica)",
+      "type": "official_manufacturer_jp",
+      "country": "JP",
+      "base_url": "https://alter-web.jp/",
+      "priority": 14,
+      "best_for": [
+        "ALTER scale figures",
+        "official images",
+        "release month",
+        "Japan price (before tax)"
+      ],
+      "weak_for": [
+        "coverage (one Madoka product when checked)"
+      ],
+      "notes": "ALTER product catalog; the keyword search also matches the 作品名, which is checked on each product page."
+    },
+    {
+      "source_id": "furyu_madoka_jp",
+      "name": "FURYU HOBBY MALL (Madoka Magica)",
+      "type": "official_manufacturer_jp",
+      "country": "JP",
+      "base_url": "https://furyu-hm.com/",
+      "priority": 14,
+      "best_for": [
+        "F:NEX scale figures",
+        "TENITOL figures",
+        "official images",
+        "Japan price"
+      ],
+      "weak_for": [
+        "release date (rarely stated in the product text)"
+      ],
+      "notes": "FuRyu's own Shopify store (furyu-hobby.com no longer resolves); products.json filtered by the 魔法少女まどか☆マギカ tag."
+    },
+    {
+      "source_id": "medicos_madoka_jp",
+      "name": "MEDICOS ENTERTAINMENT (Madoka Magica)",
+      "type": "official_manufacturer_jp",
+      "country": "JP",
+      "base_url": "https://www.medicos-e.net/",
+      "priority": 14,
+      "best_for": [
+        "超像可動 and other MEDICOS figures"
+      ],
+      "weak_for": [
+        "listed no Madoka figures when checked (its Madoka releases were Don Quijote collaboration goods)"
+      ],
+      "notes": "WordPress gallery post type searched through the public REST API."
+    },
+    {
+      "source_id": "taito_prize_madoka_jp",
+      "name": "TAITO Prize (Madoka Magica)",
+      "type": "official_prize_jp",
+      "country": "JP",
+      "base_url": "https://www.taito.co.jp/taito-prize",
+      "priority": 16,
+      "best_for": [
+        "TAITO prize figures and plush",
+        "release date",
+        "official prize images"
+      ],
+      "weak_for": [
+        "price (prize items carry none)",
+        "older non-brand prizes (the current lineup only reaches back a few weeks)"
+      ],
+      "notes": "TAITO prize JSON (current lineup plus each original brand's archive); robots.txt asks for Crawl-delay 20, which the importer honours."
+    },
+    {
+      "source_id": "sega_prize_madoka_jp",
+      "name": "SEGA Prize (Madoka Magica)",
+      "type": "official_prize_jp",
+      "country": "JP",
+      "base_url": "https://segaplaza.jp/",
+      "priority": 16,
+      "best_for": [
+        "SEGA prize figures and plush",
+        "release date",
+        "official prize images"
+      ],
+      "weak_for": [
+        "price (prize items carry none)",
+        "prizes from before late 2024"
+      ],
+      "notes": "segaplaza.jp prize table, read as data from the search page's script chunk; pictures from each prize page's JSON-LD."
+    },
+    {
+      "source_id": "furyu_prize_madoka_jp",
+      "name": "FuRyu Prize (Madoka Magica)",
+      "type": "official_prize_jp",
+      "country": "JP",
+      "base_url": "https://furyuprize.com/",
+      "priority": 16,
+      "best_for": [
+        "FuRyu prize figures and plush",
+        "release month",
+        "official prize images"
+      ],
+      "weak_for": [
+        "price (prize items carry none)",
+        "past prizes (only current and upcoming items are listed)"
+      ],
+      "notes": "furyuprize.com search API; earlier runs' records are kept when an item drops off the site."
     }
   ]
 }

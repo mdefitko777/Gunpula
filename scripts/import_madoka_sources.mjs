@@ -16,6 +16,18 @@
 //   * 寿屋                — shop.kotobukiya.co.jp keyword search (Shift-JIS)
 //   * ホビーサーチ         — 1999.co.jp figure search (answers the bot with a
 //                           Cloudflare challenge as of 2026-11; reported as refused)
+//   * ALTER               — alter-web.jp keyword search + product pages
+//   * FuRyu (hobby)       — furyu-hm.com (FURYU HOBBY MALL) products.json, Madoka tag
+//   * MEDICOS             — medicos-e.net WordPress "gallery" REST search
+//   * タイトープライズ     — taito.co.jp prize JSON (Crawl-delay 20 is honoured)
+//   * セガプライズ         — segaplaza.jp prize table (read from its script chunk as data)
+//   * フリュープライズ     — furyuprize.com /api/search
+//
+// Checked and left out (2026-11): myethos.com is a parked domain, myethos.cn
+// does not connect and myethos.jp renders its catalog in the browser only;
+// www.kotobukiya.co.jp answers 403; bellfine.co.jp answers its REST search
+// with 403; union-creative.jp, medicomtoy.co.jp and quesq.net list no Madoka
+// products.
 //
 // Crawling rules (non-negotiable): every request identifies as
 // HobbyAtlasDataBot, each host's robots.txt is fetched first and obeyed, and
@@ -361,19 +373,25 @@ const GOODS_PATTERN = new RegExp(
 );
 const GOODS_CATEGORY = /グッズ|雑貨|アパレル|ステーショナリー|デカール|書籍|アクセサリー|ファッション/;
 
-const PLUSH_PATTERN = /ぬいぐるみ|ちびぐるみ|Fluffy\s*Puffy|プラッシュ|Plush|もちころりん|ぬいもーじゅ|めちゃもふ|めちゃでか/i;
+const PLUSH_PATTERN = /ぬいぐるみ|ちびぐるみ|Fluffy\s*Puffy|プラッシュ|Plush|もちころりん|ぬいもーじゅ|めちゃもふ|めちゃでか|てちぬい/i;
 // Plush that is really a bag charm or a cushion: not a figure, but close
 // enough to list as uncertain rather than drop silently.
 const PLUSH_ACCESSORY = /チャーム|キーホルダー|ストラップ|ポーチ|バッグ|クッション|ケース|ポシェット|リュック|ペンケース/;
 const NENDOROID_PATTERN = /ねんどろいど|ネンドロイド|Nendoroid/i;
 const MINI_PATTERN =
   /Figuarts\s*mini|フィギュアーツ\s*mini|ぺたん娘|ぷちきゃら|トレーディングフィギュア|ちょこのせ|HELLO!\s*GOOD\s*SMILE|Q\s*posket|デフォルメ|きゅんキャラ|ソフビ|ソフトビニール|SOFT\s*VINYL|BE@RBRICK|るかっぷ|ワールドコレクタブル|ミニフィギュア|コレクションフィギュア|ガシャポン|カプセル|ガチャ|ぷちぴっと|minissimo|ころんぷてぃ|ちびっこ|ぴのこ|ぷちらま|ちょびるめ|ミニッチュ/i;
-const ACTION_PATTERN = /figma|S\.H\.?\s*Figuarts|フィギュアーツ|Figuarts|BUZZmod|アクションフィギュア|可動フィギュア|キューポッシュ|ACT MODE|Pop Mart/i;
+const ACTION_PATTERN = /figma|S\.H\.?\s*Figuarts|フィギュアーツ|Figuarts|BUZZmod|アクションフィギュア|可動フィギュア|キューポッシュ|ACT MODE|Pop Mart|超像可動/i;
 const PRIZE_PATTERN = /一番くじ|プライズ|景品|EVOLVE|Serenus\s*couture|ESPRESTO|GLITTER\s*&\s*GLAMOURS|Luminasta|TENITOL|SPM|ちょこのせプレミアム/i;
 const SCALE_FIGURE_PATTERN =
   /(?<![\d/])1\s?\/\s?(3|4|5|6|7|8|10|12)(?![\d(（])|スケール|フィギュア|POP UP PARADE|完成品|日本人形|figFIX|スタチュー|Statue|ARTFX|美少女/i;
 
-const PRIZE_SOURCES = new Set(["banpresto_prize_madoka_jp", "ichiban_kuji_madoka_jp"]);
+const PRIZE_SOURCES = new Set([
+  "banpresto_prize_madoka_jp",
+  "ichiban_kuji_madoka_jp",
+  "taito_prize_madoka_jp",
+  "sega_prize_madoka_jp",
+  "furyu_prize_madoka_jp",
+]);
 
 /**
  * Figure grade for a product, or { exclude } with the reason.
@@ -993,10 +1011,416 @@ async function fetchHobbySearch(ctx) {
   });
 }
 
+// ------------------------------------------------------- タイトープライズ
+
+// www.taito.co.jp asks for Crawl-delay: 20, which politeFetch honours (each
+// request here waits 20 s). The TAITO prize pages are AngularJS templates fed
+// by JSON under /api/ (read as data; no page script is run). The current
+// lineup (/api/PrizeProduct, aspMemberID 0000000002 = タイトープライズ) only
+// reaches back a few weeks, while each original brand (Coreful, AMP+, てちぬい …)
+// keeps its full history in /api/TaitoPrizeSeriesProductModel. Brand ids come
+// from the brand index (category 0000000036), so a new brand is picked up.
+// IP "series" (category 0000000035) are not read: none is a Madoka work, and
+// each would cost another 20 s.
+const TAITO_BASE = "https://www.taito.co.jp";
+const TAITO_MEMBER = "0000000002";
+
+function taitoDate(value) {
+  const match = /^(\d{4})(\d{2})(\d{2})$/.exec(String(value || ""));
+  return match ? `${match[1]}-${match[2]}-${match[3]}` : null;
+}
+
+function taitoProduct(item, line) {
+  const images = [];
+  if (item.ImageFullPathName01 && item.ImageName01) images.push(`https://${item.ImageFullPathName01}`);
+  for (const key of ["ImageName02", "ImageName03", "ImageName04", "ImageName05"]) {
+    if (item[key] && item.ImagePath) images.push(`https://${item.ImagePath}${item[key]}`);
+  }
+  return {
+    key: String(item.ProductID),
+    name: nf(item.ProductName).replace(/\s+/g, " ").trim(),
+    series: "",
+    line: line ? `タイトープライズ ${line}` : "タイトープライズ",
+    url: `${TAITO_BASE}/taito-prize/${item.ProductID}`,
+    image: images[0] || "",
+    gallery: images,
+    price_jpy: null,
+    release_date: taitoDate(item.ReleaseDate),
+    is_limited: true,
+  };
+}
+
+async function fetchTaitoPrize(ctx) {
+  const byKey = new Map();
+  const current = await fetchJson(
+    `${TAITO_BASE}/api/PrizeProduct/?aspMemberID=${TAITO_MEMBER}&offset=0&limit=1000&sortName=TaitoPrizeNew&isDesc=true`,
+  );
+  for (const item of Array.isArray(current) ? current : []) byKey.set(String(item.ProductID), taitoProduct(item, ""));
+  const brands = await fetchJson(
+    `${TAITO_BASE}/api/PrizeProduct/?aspMemberID=${TAITO_MEMBER}&offset=0&limit=100&sortName=&isDesc=true&isParents=true&category=0000000036&lang=ja`,
+  );
+  for (const brand of Array.isArray(brands) ? brands : []) {
+    const items = await fetchJson(
+      `${TAITO_BASE}/api/TaitoPrizeSeriesProductModel/?aspMemberID=${TAITO_MEMBER}&limit=1000&offset=0&isDesc=true&sortName=&productID=${brand.ProductID}&lang=ja`,
+    );
+    const line = nf(brand.ProductName).replace(/フィギュア$/, "").trim();
+    for (const item of Array.isArray(items) ? items : []) byKey.set(String(item.ProductID), taitoProduct(item, line));
+  }
+  ctx.listed = byKey.size;
+  // Names carry the work in front ("劇場版 魔法少女まどか☆マギカ〈…〉 てちぬい vol.1").
+  return [...byKey.values()].filter((product) => isMadoka(product.name));
+}
+
+// --------------------------------------------------------- セガプライズ
+
+// segaplaza.jp is a Nuxt site whose search runs in the browser over a prize
+// table compiled into one of its script chunks (~4 MB, every prize on the
+// site). The chunk name changes with each build, so it is found from the
+// search page: the chunks /search/ preloads that /title/ does not, read as
+// text until one holds the "prizeId" table. Nothing is executed — the
+// objects are cut out and parsed as JSON. Each Madoka figure-class prize then
+// gets its prerendered page for the official pictures (JSON-LD "image").
+const SEGA_BASE = "https://segaplaza.jp";
+
+function chunkUrls(html) {
+  return [...new Set([...html.matchAll(/\/_nuxt\/[A-Za-z0-9_-]+\.js/g)].map((match) => match[0]))];
+}
+
+// Every top-level {"prizeId": …} object literal in the chunk.
+function segaPrizeObjects(text) {
+  const out = [];
+  let index = 0;
+  while ((index = text.indexOf('{"prizeId":', index)) >= 0) {
+    let depth = 0;
+    let end = index;
+    let inString = false;
+    for (; end < text.length; end += 1) {
+      const char = text[end];
+      if (inString) {
+        if (char === "\\") end += 1;
+        else if (char === '"') inString = false;
+        continue;
+      }
+      if (char === '"') inString = true;
+      else if (char === "{") depth += 1;
+      else if (char === "}" && --depth === 0) break;
+    }
+    try {
+      out.push(JSON.parse(text.slice(index, end + 1)));
+    } catch {
+      // A literal that is not plain JSON (none is Madoka as of 2026-11).
+    }
+    index = end + 1;
+  }
+  return out;
+}
+
+function segaImages(html) {
+  for (const match of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+    try {
+      const parsed = JSON.parse(match[1]);
+      const entries = Array.isArray(parsed) ? parsed : [parsed];
+      for (const entry of entries) {
+        const images = Array.isArray(entry?.image) ? entry.image : entry?.image ? [entry.image] : [];
+        const own = images.filter((url) => typeof url === "string" && url.includes("/images-v3/prize/"));
+        if (own.length) return own;
+      }
+    } catch {
+      // Ignore malformed structured data.
+    }
+  }
+  return [...new Set([...html.matchAll(/\/images-v3\/prize\/[^"']+\/large\/[^"']+\.webp/g)].map((match) => absolute(match[0], SEGA_BASE)))];
+}
+
+async function fetchSegaPrize(ctx) {
+  const searchChunks = chunkUrls(await fetchText(`${SEGA_BASE}/search/`));
+  const titleChunks = new Set(chunkUrls(await fetchText(`${SEGA_BASE}/title/`)));
+  let prizes = [];
+  for (const chunk of searchChunks.filter((url) => !titleChunks.has(url))) {
+    const text = await fetchText(absolute(chunk, SEGA_BASE));
+    if (!text.includes('{"prizeId":')) continue;
+    prizes = segaPrizeObjects(text);
+    break;
+  }
+  if (!prizes.length) throw new Error("prize table not found in the search page chunks");
+  ctx.listed = prizes.length;
+  const out = [];
+  for (const prize of prizes) {
+    // 【改行】 marks a display line break: "…マギカ【改行】[新編]叛逆の物語".
+    const name = nf(String(prize.name || "").replace(/【改行】(?=[[［〈])/g, "").replace(/【改行】/g, " "))
+      .replace(/\s+/g, " ")
+      .trim();
+    const keywords = (prize.keywords || []).join(" ");
+    if (!isMadoka(name, keywords)) {
+      // Only near misses are worth listing (a Madoka title id, other name).
+      if (/madoka|magia/i.test(prize.productId || "")) ctx.offWork.push(`${prize.productId} | ${name}`);
+      continue;
+    }
+    const product = {
+      key: String(prize.prizeId),
+      name,
+      // The work as the site files it (first keyword), for 叛逆の物語 vs TV.
+      work: (prize.keywords || []).find((keyword) => isMadoka(keyword)) || "",
+      series: "",
+      line: "セガプライズ",
+      spec: prize.size || "",
+      url: `${SEGA_BASE}/prize/${prize.prizeId}/`,
+      image: "",
+      gallery: [],
+      price_jpy: null,
+      release_date: releaseDateFrom(prize.releaseDate),
+      is_limited: true,
+    };
+    if (!classify(product, "sega_prize_madoka_jp").exclude) {
+      try {
+        const images = segaImages(await fetchText(product.url));
+        product.image = images[0] || "";
+        product.gallery = images;
+      } catch (error) {
+        if (error.refused) throw error;
+        console.warn(`sega_prize_madoka_jp detail ${product.key}: ${error.message}`);
+      }
+    }
+    out.push(product);
+  }
+  return out;
+}
+
+// ------------------------------------------------------------------ ALTER
+
+// alter-web.jp keyword search covers the 作品名 too ("マギカ" finds 五十鈴れん);
+// each product page has a 作品名 / 発売月 / 価格 / サイズ table.
+const ALTER_BASE = "https://alter-web.jp";
+const ALTER_QUERIES = ["まどか", "マギカ", "マギアレコード"];
+
+function alterCell(html, label) {
+  return decodeHtml(new RegExp(`<th>\\s*${label}\\s*<\\/th>\\s*<td>([\\s\\S]*?)<\\/td>`).exec(html)?.[1] || "");
+}
+
+function parseAlterDetail(html) {
+  const images = [
+    ...new Set(
+      [...html.matchAll(/<img[^>]*src="(\/uploads\/products\/[^"]+)"/g)].map((match) => absolute(match[1], ALTER_BASE)),
+    ),
+  ];
+  const spec = `${alterCell(html, "サイズ")} ${decodeHtml(/<p class="spec[^"]*">([\s\S]*?)<\/p>/.exec(html)?.[1] || "")}`.trim();
+  return {
+    // The page's first <h1> is the site logo; the product name is the
+    // hl06 heading (the <title> minus " | ALTER" as a fallback).
+    name:
+      decodeHtml(/<h1 class="hl\d+[^"]*">([\s\S]*?)<\/h1>/.exec(html)?.[1] || "") ||
+      decodeHtml(/<title>([\s\S]*?)<\/title>/.exec(html)?.[1] || "").replace(/\s*\|\s*ALTER\s*$/, ""),
+    work: alterCell(html, "作品名"),
+    release_date: releaseDateFrom(alterCell(html, "発売月")),
+    price_jpy: parseYen(alterCell(html, "価格")),
+    spec,
+    images,
+  };
+}
+
+async function fetchAlter(ctx) {
+  const ids = new Set();
+  for (const query of ALTER_QUERIES) {
+    const html = await fetchText(`${ALTER_BASE}/search/?keyword=${encodeURIComponent(query)}`);
+    for (const match of html.matchAll(/href="\/products\/(\d+)\/"/g)) ids.add(match[1]);
+  }
+  ctx.listed = ids.size;
+  const out = [];
+  for (const id of ids) {
+    const url = `${ALTER_BASE}/products/${id}/`;
+    const detail = parseAlterDetail(await fetchText(url));
+    if (!isMadoka(detail.work)) {
+      ctx.offWork.push(`${detail.work || "(no work)"} | ${detail.name}`);
+      continue;
+    }
+    out.push({
+      key: id,
+      name: detail.name,
+      work: detail.work,
+      line: "ALTER",
+      spec: detail.spec,
+      is_figure: /完成品/.test(detail.spec),
+      url,
+      image: detail.images[0] || "",
+      gallery: detail.images,
+      price_jpy: detail.price_jpy,
+      release_date: detail.release_date,
+      is_limited: /限定/.test(detail.name),
+    });
+  }
+  return out;
+}
+
+// ---------------------------------------------------------------- MEDICOS
+
+// medicos-e.net is WordPress; its product pages are the "gallery" post type,
+// searched through the public REST API. As of 2026-11 Medicos' Madoka
+// releases are Don Quijote collaboration goods only (news posts), so this
+// finds nothing; it is kept for a future 超像可動 or figure.
+const MEDICOS_BASE = "https://www.medicos-e.net";
+const MEDICOS_QUERIES = ["まどか", "マギカ", "マギアレコード"];
+
+async function fetchMedicos(ctx) {
+  const byKey = new Map();
+  for (const query of MEDICOS_QUERIES) {
+    const posts = await fetchJson(
+      `${MEDICOS_BASE}/wp-json/wp/v2/gallery?search=${encodeURIComponent(query)}&per_page=100&_fields=id,date,link,title,content`,
+    );
+    for (const post of Array.isArray(posts) ? posts : []) byKey.set(String(post.id), post);
+  }
+  ctx.listed = byKey.size;
+  const out = [];
+  for (const post of byKey.values()) {
+    const name = decodeHtml(post.title?.rendered || "");
+    const content = post.content?.rendered || "";
+    const text = decodeHtml(content);
+    if (!isMadoka(name, text.slice(0, 600))) {
+      ctx.offWork.push(name);
+      continue;
+    }
+    const images = [...new Set([...content.matchAll(/<img[^>]*src="([^"]+)"/g)].map((match) => absolute(match[1], MEDICOS_BASE)))];
+    out.push({
+      key: String(post.id),
+      name,
+      work: /『([^』]+)』/.exec(text)?.[1] || "",
+      line: "MEDICOS",
+      spec: text.slice(0, 1500),
+      is_figure: /完成品/.test(text),
+      url: post.link,
+      image: images[0] || "",
+      gallery: images,
+      price_jpy: parseYen(/価格[^0-9]{0,20}([\d,]+)\s*円/.exec(text)?.[1]),
+      release_date: releaseDateFrom(/発売[^0-9]{0,20}(\d{4}\s*年\s*\d{1,2}\s*月)/.exec(text)?.[1]),
+      is_limited: /限定/.test(name),
+    });
+  }
+  return out;
+}
+
+// ------------------------------------------------------- フリュープライズ
+
+// furyuprize.com (charahiroba.com redirects here) lists the current and
+// upcoming FuRyu prizes; its search grid is fed by /api/search (JSON).
+// Older prizes drop off the site, so earlier runs' records are kept.
+const FURYU_PRIZE_BASE = "https://furyuprize.com";
+const FURYU_PRIZE_QUERIES = ["まどか", "マギカ", "マギアレコード"];
+
+async function fetchFuryuPrize(ctx) {
+  const byKey = new Map();
+  for (const query of FURYU_PRIZE_QUERIES) {
+    for (let page = 1; page <= 20; page += 1) {
+      const payload = await fetchJson(`${FURYU_PRIZE_BASE}/api/search?keyword=${encodeURIComponent(query)}&page=${page}`);
+      for (const item of payload?.items || []) if (item?.code) byKey.set(String(item.code), item);
+      if (!payload?.last_page || page >= payload.last_page) break;
+    }
+  }
+  ctx.listed = byKey.size;
+  const out = [];
+  for (const item of byKey.values()) {
+    const work = nf(item.name_group || item.character_name || "");
+    const itemName = nf(item.name_item || "").trim();
+    if (!isMadoka(work, itemName)) {
+      ctx.offWork.push(`${work || "(no work)"} | ${itemName}`);
+      continue;
+    }
+    const url = `${FURYU_PRIZE_BASE}/item/${item.code}`;
+    const product = {
+      key: String(item.code),
+      // The item page titles it "<作品> <item>"; the grid has the two apart.
+      name: isMadoka(itemName) ? itemName : `${work} ${itemName}`.trim(),
+      work,
+      series: "",
+      line: "フリュープライズ",
+      url,
+      image: item.img_item_main ? absolute(`/files/images${item.img_item_main}`, FURYU_PRIZE_BASE) : "",
+      gallery: [],
+      price_jpy: null,
+      release_date: releaseDateFrom(item.release_month),
+      is_limited: true,
+    };
+    if (!classify(product, "furyu_prize_madoka_jp").exclude) {
+      try {
+        const html = await fetchText(url);
+        const images = [
+          ...new Set(
+            [...html.matchAll(/\/files\/images\/prz\/pi-(?:main|sub\d+)-\d+\.(?:webp|jpg|png)/g)]
+              .map((match) => absolute(match[0], FURYU_PRIZE_BASE))
+              .filter((src) => src.includes(`-${item.code}.`)),
+          ),
+        ];
+        if (images.length) {
+          product.image = images[0];
+          product.gallery = images;
+        }
+      } catch (error) {
+        if (error.refused) throw error;
+        console.warn(`furyu_prize_madoka_jp detail ${item.code}: ${error.message}`);
+      }
+    }
+    out.push(product);
+  }
+  return out;
+}
+
+// ------------------------------------------------- FURYU HOBBY MALL (F:NEX)
+
+// FuRyu's own hobby store (furyu-hm.com, Shopify) for F:NEX and TENITOL;
+// furyu-hobby.com no longer resolves. The storefront's public products.json
+// pages (250 a page) carry title, type, tags, price and images; a product is
+// Madoka when a tag or its title names the work. These are retail figures, so
+// TENITOL (a prize word elsewhere) is graded as a scale figure here.
+const FURYU_HM_BASE = "https://furyu-hm.com";
+const FURYU_HM_MAX_PAGES = Number(process.env.MADOKA_FURYU_HM_MAX_PAGES || 30);
+
+async function fetchFuryuHobby(ctx) {
+  const products = [];
+  for (let page = 1; page <= FURYU_HM_MAX_PAGES; page += 1) {
+    const payload = await fetchJson(`${FURYU_HM_BASE}/products.json?limit=250&page=${page}`);
+    const batch = payload?.products || [];
+    products.push(...batch);
+    if (batch.length < 250) break;
+  }
+  ctx.listed = products.length;
+  const out = [];
+  for (const item of products) {
+    const tags = (item.tags || []).join(" ");
+    const title = nf(item.title || "").replace(/\s+/g, " ").trim();
+    if (!isMadoka(tags, title)) continue;
+    const body = decodeHtml(item.body_html || "");
+    const work = (body.match(/『([^』]+)』/g) || []).map((text) => text.slice(1, -1)).find((text) => isMadoka(text)) ||
+      (item.tags || []).find((tag) => isMadoka(tag)) || "";
+    const price = Number(item.variants?.[0]?.price);
+    const release = /(\d{4})\s*年\s*(\d{1,2})\s*月\s*(?:上旬|中旬|下旬|頃)?\s*(?:発売|発送|お届け|出荷)/.exec(body);
+    const images = (item.images || []).map((image) => image.src).filter(Boolean);
+    const product = {
+      key: String(item.handle),
+      name: title,
+      work,
+      line: nf(item.vendor || "FuRyu"),
+      category: nf(item.product_type || ""),
+      spec: `${nf(item.product_type || "")} ${body.slice(0, 600)}`,
+      is_figure: /フィギュア/.test(item.product_type || ""),
+      url: `${FURYU_HM_BASE}/products/${item.handle}`,
+      image: images[0] || "",
+      gallery: images,
+      price_jpy: Number.isFinite(price) && price > 0 ? Math.round(price) : null,
+      release_date: release ? `${release[1]}-${release[2].padStart(2, "0")}` : null,
+      is_limited: /限定/.test(`${title} ${tags}`),
+    };
+    const grade = classify(product, "furyu_madoka_jp");
+    if (grade.grade === "MADOKA_PRIZE") product.force_grade = "MADOKA_SCALE";
+    out.push(product);
+  }
+  return out;
+}
+
 // --------------------------------------------------------------------------
 
 // Order is also the merge priority for the same product in two sources: the
-// maker's own record wins over a store listing.
+// maker's own record wins over a store listing. The maker sites added in
+// 2026-11 (TAITO … FuRyu) come after the original sources so a product that
+// is already in the catalog keeps its record and the new site's listing is
+// folded into it as an extra source ref (existing kit ids never move).
 const SOURCES = [
   {
     source_id: "good_smile_madoka_en",
@@ -1061,6 +1485,54 @@ const SOURCES = [
     tags: ["madoka", "aniplex plus", "aniplex"],
     fetchAll: fetchAniplex,
     notes: "Imported from the Aniplex+ official store (Madoka keyword search).",
+  },
+  {
+    source_id: "alter_madoka_jp",
+    idPrefix: "alter-madoka",
+    subline: "ALTER",
+    tags: ["madoka", "alter"],
+    fetchAll: fetchAlter,
+    notes: "Imported from the ALTER official product catalog (alter-web.jp, Madoka keyword search).",
+  },
+  {
+    source_id: "furyu_madoka_jp",
+    idPrefix: "furyu-madoka",
+    subline: "FuRyu",
+    tags: ["madoka", "furyu"],
+    fetchAll: fetchFuryuHobby,
+    notes: "Imported from FuRyu's official hobby store (FURYU HOBBY MALL, F:NEX / TENITOL, Madoka tag).",
+  },
+  {
+    source_id: "medicos_madoka_jp",
+    idPrefix: "medicos-madoka",
+    subline: "MEDICOS",
+    tags: ["madoka", "medicos"],
+    fetchAll: fetchMedicos,
+    notes: "Imported from the MEDICOS ENTERTAINMENT product gallery (medicos-e.net, Madoka keyword search).",
+  },
+  {
+    source_id: "taito_prize_madoka_jp",
+    idPrefix: "taito-madoka",
+    subline: "タイトープライズ",
+    tags: ["madoka", "taito", "prize"],
+    fetchAll: fetchTaitoPrize,
+    notes: "Imported from the TAITO prize site (taito.co.jp, current lineup and original brand archives).",
+  },
+  {
+    source_id: "sega_prize_madoka_jp",
+    idPrefix: "sega-madoka",
+    subline: "セガプライズ",
+    tags: ["madoka", "sega", "prize"],
+    fetchAll: fetchSegaPrize,
+    notes: "Imported from the SEGA prize site (segaplaza.jp prize table, Madoka works).",
+  },
+  {
+    source_id: "furyu_prize_madoka_jp",
+    idPrefix: "furyuprize-madoka",
+    subline: "フリュープライズ",
+    tags: ["madoka", "furyu", "prize"],
+    fetchAll: fetchFuryuPrize,
+    notes: "Imported from the FuRyu prize site (furyuprize.com, Madoka keyword search).",
   },
 ];
 
