@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-05",
-  "generated_at": "2026-11-05T07:58:36.803Z",
+  "generated_at": "2026-11-05T11:27:32.421Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,18 +18,18 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-05T07:58:33.868Z",
+    "generated_at": "2026-11-05T11:27:28.138Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-05",
-      "generated_at": "2026-11-05T07:58:36.803Z",
+      "generated_at": "2026-11-05T11:27:32.421Z",
       "total_before": 10614,
-      "total_after": 39195,
-      "added_count": 13,
-      "changed_count": 32,
+      "total_after": 39198,
+      "added_count": 16,
+      "changed_count": 33,
       "removed_count": 0,
       "watched_count": 0,
       "merged_count": 0,
@@ -37,27 +37,64 @@
       "premium_bandai_count": 0,
       "bbx_count": 0,
       "franchise_counts": {
+        "pokemon": 25,
         "madoka": 20,
-        "pokemon": 21,
         "gundam": 3,
         "fate": 1
       },
       "reason_counts": {
-        "new": 13,
+        "new": 16,
         "release": 25,
         "series": 2,
+        "source": 4,
         "price": 1,
-        "source": 3,
         "image": 4
       },
       "interest_tags": [
-        "madoka",
         "pokemon",
+        "madoka",
         "gundam",
         "fate"
       ],
       "watch_tags": [],
       "added": [
+        {
+          "kit_id": "pokemon-kr-137676460",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 봉제인형 ポケモン Pokopia 피카츄(창백한 색)",
+            "zh": "포켓몬센터 봉제인형 宝可梦 Pokopia 피카츄(창백한 색)",
+            "ko": "포켓몬센터 봉제인형 포켓몬 Pokopia 피카츄(창백한 색)",
+            "en": "포켓몬센터 봉제인형 Pokémon Pokopia 피카츄(창백한 색)"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137676460"
+          ]
+        },
         {
           "kit_id": "taito-madoka-0452066900",
           "change_type": "added",
@@ -278,6 +315,80 @@
           ],
           "source_urls": [
             "https://segaplaza.jp/prize/D122938/"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329316345",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "275 ぬいぐるみ Pok&eacute;mon fit ダーテング",
+            "zh": "275 ぬいぐるみ Pok&eacute;mon fit ダーテング",
+            "ko": "275 ぬいぐるみ Pok&eacute;mon fit ダーテング",
+            "en": "275 ぬいぐるみ Pok&eacute;mon fit ダーテング"
+          },
+          "release_date": null,
+          "price_jpy": 1650,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329316345.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329350448",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "638 ぬいぐるみ Pok&eacute;mon fit コバルオン",
+            "zh": "638 ぬいぐるみ Pok&eacute;mon fit コバルオン",
+            "ko": "638 ぬいぐるみ Pok&eacute;mon fit コバルオン",
+            "en": "638 ぬいぐるみ Pok&eacute;mon fit コバルオン"
+          },
+          "release_date": null,
+          "price_jpy": 1650,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329350448.html"
           ]
         },
         {
