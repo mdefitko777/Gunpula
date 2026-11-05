@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-03T23:56:53.112Z",
-  "updated_at": "2026-11-04",
+  "generated_at": "2026-11-05T00:13:00.273Z",
+  "updated_at": "2026-11-05",
   "catalog": {
     "byFranchise": {
       "armored_core": 62,
@@ -51,7 +51,7 @@
         {
           "source_id": "pokemon_center_jp",
           "label": "Pokemon Center plush",
-          "catalog_count": 407
+          "catalog_count": 406
         },
         {
           "source_id": "takara_tomy_pokemon_jp",
@@ -147,7 +147,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://p-bandai.jp/hobby/a0001/list-da20-n3/",
-      "duration_ms": 784,
+      "duration_ms": 804,
       "item_count": 40,
       "direct_status": "ok",
       "access_method": "direct",
@@ -159,7 +159,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/",
-      "duration_ms": 875,
+      "duration_ms": 1025,
       "item_count": 155,
       "catalog_count": 155,
       "buckets": {
@@ -176,7 +176,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90",
-      "duration_ms": 818,
+      "duration_ms": 1256,
       "item_count": 46,
       "catalog_count": 42,
       "access_method": "kotobukiya_official_shop_jp",
@@ -188,7 +188,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://bandai-hobby.net/site/gunpla.html",
-      "duration_ms": 354,
+      "duration_ms": 434,
       "message": "reachable"
     },
     {
@@ -197,7 +197,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://www.bandai.co.jp/candy/gundam/",
-      "duration_ms": 914,
+      "duration_ms": 1086,
       "message": "reachable"
     },
     {
@@ -206,7 +206,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://gashapon.jp/products/result.php?free=%E3%82%AC%E3%83%B3%E3%83%80%E3%83%A0",
-      "duration_ms": 1174,
+      "duration_ms": 1180,
       "message": "reachable"
     },
     {
@@ -215,7 +215,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://tamashiiweb.com/item_character/gundam_series/",
-      "duration_ms": 920,
+      "duration_ms": 752,
       "message": "reachable"
     },
     {
@@ -224,16 +224,16 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2",
-      "duration_ms": 349,
+      "duration_ms": 723,
       "message": "reachable"
     },
     {
       "source_id": "pokemon_center_jp",
       "url": "https://www.pokemoncenter-online.com/plush-toys/",
-      "status": "ok",
-      "http_status": 200,
-      "final_url": "https://www.pokemoncenter-online.com/plush-toys/",
-      "duration_ms": 324,
+      "status": "warning",
+      "http_status": 403,
+      "final_url": "https://wr.pokemoncenter-online.com/?c=pol&e=wr20261105ec&ver=v3-javascript-3.7.10&cver=248&man=pol-prd-rule-sfcc&t=https%3A%2F%2Fwww.pokemoncenter-online.com%2Fon%2Fdemandware.store%2FSites-POL-Site%2Fja_JP%2FSearch-Show%3Fcgid%3Dplush-toys&kupver=salesforce-2.1.0",
+      "duration_ms": 1146,
       "message": "reachable"
     },
     {
@@ -242,7 +242,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/",
-      "duration_ms": 556,
+      "duration_ms": 951,
       "message": "reachable"
     },
     {
@@ -251,7 +251,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://1kuji.com/products/search?index_master_search=47",
-      "duration_ms": 564,
+      "duration_ms": 998,
       "message": "reachable"
     },
     {
@@ -260,7 +260,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://bsp-prize.jp/title/IP00002054/",
-      "duration_ms": 1095,
+      "duration_ms": 1381,
       "message": "reachable"
     }
   ]
