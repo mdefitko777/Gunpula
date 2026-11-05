@@ -285,6 +285,8 @@ if (EDITIONS.includes("intl")) {
     sets: merged.sets,
     tags,
     aliases: merged.aliases,
+    // 서포트 포켓몬 티켓 (KR site): keep the previous list when the page could not be read
+    support_tickets: (res.KR.ok && res.KR.data.support?.length ? res.KR.data.support : prev.intl?.support_tickets) || undefined,
   });
   out.updated_at = now;
   const w = await writeIfChanged(FILES.intl, out, prev.intl, REASSIGN ? null : prev.intl);

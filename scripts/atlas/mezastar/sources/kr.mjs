@@ -56,6 +56,24 @@ function parsePopup(html, url) {
  * known: Map idx -> {img_front, img_back} from the previous output, so popups are fetched only for new tags.
  * popups: "all" | "new" | "none"
  */
+// 서포트 포켓몬 티켓 (support Pokémon tickets): htp13.php lists the current tickets; retired ones stay
+// in the page inside an HTML comment, so they are read too and marked "retired". One request.
+export function parseSupportTickets(html, url) {
+  const list = (html.match(/<ul class="ticket-list">([\s\S]*?)<\/ul>/) || [])[1] || "";
+  const retiredSpans = [...list.matchAll(/<!--([\s\S]*?)-->/g)].map((m) => [m.index, m.index + m[0].length]);
+  const out = [];
+  for (const m of list.matchAll(/<li class="list-item">([\s\S]*?)<\/li>/g)) {
+    const img = (m[1].match(/<img[^>]+src="([^"]+)"/) || [])[1];
+    const name = nfkc(stripTags((m[1].match(/<p class="list-item-txt">([\s\S]*?)<\/p>/) || [])[1] || ""));
+    if (!img || !name) continue;
+    const abs = absUrl(img, url);
+    const file = abs.split("/").pop().replace(/\.[a-z]+$/i, "");
+    const retired = retiredSpans.some(([a, b]) => m.index > a && m.index < b);
+    out.push({ id: `mz-support:KR:${file}`, region: "KR", name, image: abs, status: retired ? "retired" : "current", url });
+  }
+  return out;
+}
+
 export async function fetchKR({ known = new Map(), popups = "new" } = {}) {
   const first = await politeFetch(`${BASE}stage.php`);
   let stale = first.stale;
@@ -92,5 +110,12 @@ export async function fetchKR({ known = new Map(), popups = "new" } = {}) {
     const twin = rows.find((x) => x.idx === row.idx && x.img_front);
     if (!row.img_front && twin) Object.assign(row, { img_front: twin.img_front, img_back: twin.img_back });
   }
-  return { sets, rows, stale, popups: { fetched: popupFetched, reused: popupReused, failed: popupFailed } };
+  let support = null;
+  try {
+    const url = `${BASE}htp13.php`;
+    support = parseSupportTickets((await politeFetch(url)).text, url);
+  } catch {
+    support = null; // keep the previous list (build.mjs)
+  }
+  return { sets, rows, stale, support, popups: { fetched: popupFetched, reused: popupReused, failed: popupFailed } };
 }
