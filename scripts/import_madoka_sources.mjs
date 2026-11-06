@@ -379,14 +379,16 @@ const PLUSH_PATTERN = /ぬいぐるみ|ちびぐるみ|Fluffy\s*Puffy|プラッ�
 const PLUSH_ACCESSORY = /チャーム|キーホルダー|ストラップ|ポーチ|バッグ|クッション|ケース|ポシェット|リュック|ペンケース/;
 const NENDOROID_PATTERN = /ねんどろいど|ネンドロイド|Nendoroid/i;
 const MINI_PATTERN =
-  /Figuarts\s*mini|フィギュアーツ\s*mini|ぺたん娘|ぷちきゃら|トレーディングフィギュア|ちょこのせ|HELLO!\s*GOOD\s*SMILE|Q\s*posket|デフォルメ|きゅんキャラ|ソフビ|ソフトビニール|SOFT\s*VINYL|BE@RBRICK|るかっぷ|ワールドコレクタブル|ミニフィギュア|コレクションフィギュア|ガシャポン|カプセル|ガチャ|ぷちぴっと|minissimo|ころんぷてぃ|ちびっこ|ぴのこ|ぷちらま|ちょびるめ|ミニッチュ/i;
-const ACTION_PATTERN = /figma|S\.H\.?\s*Figuarts|フィギュアーツ|Figuarts|BUZZmod|アクションフィギュア|可動フィギュア|キューポッシュ|ACT MODE|Pop Mart|超像可動/i;
+  /Figuarts\s*mini|フィギュアーツ\s*mini|ぺたん娘|ぷちきゃら|トレーディングフィギュア|ちょこのせ|HELLO!\s*GOOD\s*SMILE|Q\s*posket|デフォルメ|きゅんキャラ|ソフビ|ソフトビニール|SOFT\s*VINYL|BE@RBRICK|るかっぷ|ワールドコレクタブル|ミニフィギュア|コレクションフィギュア|ガシャポン|カプセル|ガチャ|ぷちぴっと|minissimo|ころんぷてぃ|ちびっこ|ぴのこ|ぷちらま|ちょびるめ|ミニッチュ|るかっぷ|ねむらせ隊|トルソー|キューティーフィギュア|ぺたっとおすわり|Half\s*Age|Twinkle\s*Dolly|PalVerse|食玩|マスコット(?!.*ラバー)/i;
+const ACTION_PATTERN = /figma|S\.H\.?\s*Figuarts|フィギュアーツ|Figuarts|BUZZmod|アクションフィギュア|可動フィギュア|キューポッシュ|ACT MODE|Pop Mart|超像可動|30MP|30\s*MINUTES/i;
 const PRIZE_PATTERN = /一番くじ|プライズ|景品|EVOLVE|Serenus\s*couture|ESPRESTO|GLITTER\s*&\s*GLAMOURS|Luminasta|TENITOL|SPM|ちょこのせプレミアム/i;
 const SCALE_FIGURE_PATTERN =
   /(?<![\d/])1\s?\/\s?(3|4|5|6|7|8|10|12)(?![\d(（])|スケール|フィギュア|POP UP PARADE|完成品|日本人形|figFIX|スタチュー|Statue|ARTFX|美少女/i;
 
 const PRIZE_SOURCES = new Set([
   "banpresto_prize_madoka_jp",
+  "banpresto_archive_madoka_jp",
+  "sk_japan_madoka_jp",
   "ichiban_kuji_madoka_jp",
   "taito_prize_madoka_jp",
   "sega_prize_madoka_jp",
@@ -414,6 +416,7 @@ function classify(product, sourceId) {
   if (ACTION_PATTERN.test(label)) {
     if (/figma/i.test(label)) return { grade: "MADOKA_ACTION", subline: "figma" };
     if (/BUZZmod/i.test(label)) return { grade: "MADOKA_ACTION", subline: "BUZZmod." };
+    if (/30MP|30\s*MINUTES/i.test(label)) return { grade: "MADOKA_ACTION", subline: "30MP" };
     if (/Figuarts|フィギュアーツ/i.test(label)) return { grade: "MADOKA_ACTION", subline: "S.H.Figuarts" };
     return { grade: "MADOKA_ACTION" };
   }
@@ -796,8 +799,17 @@ function parseKujiDetail(html) {
   return {
     prizes,
     price_jpy: parseYen(/希望小売価格[：:]\s*1回\s*([\d,]+)\s*円/.exec(text)?.[1]),
+    // Used for the old campaigns, which the title filter no longer lists.
+    name: decodeHtml(/<title>([^<｜]*)/.exec(html)?.[1] || ""),
+    release_date: releaseDateFrom(/(\d{4}年\s*\d{1,2}月[^ ]{0,8}?)発売/.exec(text)?.[1] || ""),
+    image: /(https:\/\/assets\.1kuji\.com\/uploads\/product\/top_banner\/[^"]+\.(?:jpg|png))/.exec(html)?.[1] || "",
   };
 }
+
+// 2011–2016 campaigns: still served by 1kuji.com, but no longer in the title
+// filter or the keyword search, so their pages are read by slug.
+// (madomagi1 and magireco4 do not exist.)
+const KUJI_OLD_SLUGS = ["madomagi", "madomagi2", "madomagi3", "madomagi4", "madomagi5", "madomagi6", "madomagi7", "madomagi8", "madomagi9", "madomagi10"];
 
 // Prize figure lines on 1kuji.com, plus plush. "着ぐるみキュゥべえ" (Magiccraft
 // III) is a plush in costume but says so nowhere: it is reported as uncertain.
@@ -807,19 +819,38 @@ const KUJI_UNCERTAIN_PRIZE = /着ぐるみ|マスコット/;
 
 async function fetchIchibanKuji(ctx) {
   const listed = parseIchibanKuji(await fetchText(KUJI_LIST_URL), KUJI_LIST_URL);
+  for (const slug of KUJI_OLD_SLUGS) {
+    if (listed.some((kuji) => kuji.key === slug)) continue;
+    listed.push({ key: slug, name: "", series: "", line: "一番くじ", url: `${KUJI_BASE}/products/${slug}`, image: "", release_date: null, is_limited: true, old: true });
+  }
   ctx.listed = listed.length;
   const out = [];
   for (const kuji of listed) {
+    if (kuji.old) {
+      let page;
+      try {
+        page = parseKujiDetail(await fetchText(kuji.url));
+      } catch (error) {
+        if (error.refused) throw error;
+        console.warn(`ichiban_kuji_madoka_jp ${kuji.key}: ${error.message}`);
+        continue;
+      }
+      Object.assign(kuji, { name: page.name, release_date: page.release_date, image: page.image, detail: page });
+      delete kuji.old;
+    }
     if (!isMadoka(kuji.name)) {
       ctx.offWork.push(kuji.name);
       continue;
     }
-    let detail = { prizes: [] };
-    try {
-      detail = parseKujiDetail(await fetchText(kuji.url));
-    } catch (error) {
-      if (error.refused) throw error;
-      console.warn(`ichiban_kuji_madoka_jp detail ${kuji.key}: ${error.message}`);
+    let detail = kuji.detail || { prizes: [] };
+    delete kuji.detail;
+    if (!detail.prizes.length) {
+      try {
+        detail = parseKujiDetail(await fetchText(kuji.url));
+      } catch (error) {
+        if (error.refused) throw error;
+        console.warn(`ichiban_kuji_madoka_jp detail ${kuji.key}: ${error.message}`);
+      }
     }
     const figurePrizes = detail.prizes.filter((prize) => KUJI_FIGURE_PRIZE.test(nf(prize)));
     if (detail.prizes.length && !figurePrizes.length) {
@@ -1421,6 +1452,432 @@ async function fetchFuryuHobby(ctx) {
 // 2026-11 (TAITO … FuRyu) come after the original sources so a product that
 // is already in the catalog keeps its record and the new site's listing is
 // folded into it as an extra source ref (existing kit ids never move).
+// ------------------------------------------------ smaller makers (2026-11)
+//
+// Makers whose own sites list a handful of Madoka figures each. All render
+// their pages server-side (Claynel answers its listing as JSON).
+
+const ogMeta = (html, property) =>
+  decodeHtml(new RegExp(`<meta[^>]+property="og:${property}"[^>]+content="([^"]*)"`, "i").exec(html)?.[1] || "");
+
+// One page of plain text, scripts and styles left out.
+const pageText = (html) => decodeHtml(String(html).replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, " "));
+
+// SK JAPAN (prize plush and figures): character page, then each item page.
+const SKJ_BASE = "https://www.sk-japan.co.jp";
+const SKJ_LIST_URL = `${SKJ_BASE}/charatoru/charas/madoka-magica`;
+
+async function fetchSkJapan(ctx) {
+  const urls = new Set();
+  for (let page = 1; page <= 10; page += 1) {
+    const listUrl = page === 1 ? SKJ_LIST_URL : `${SKJ_LIST_URL}/page/${page}`;
+    let html;
+    try {
+      html = await fetchText(listUrl);
+    } catch (error) {
+      if (error.refused || page === 1) throw error;
+      break;
+    }
+    const before = urls.size;
+    for (const match of html.matchAll(/href="(https:\/\/www\.sk-japan\.co\.jp\/charatoru\/chara\/madoka-magica\/amgoods-\d+)\/?"/g)) {
+      urls.add(match[1]);
+    }
+    if (urls.size === before || !html.includes(`/page/${page + 1}`)) break;
+  }
+  ctx.listed = urls.size;
+  const out = [];
+  for (const url of urls) {
+    const html = await fetchText(url);
+    const name = decodeHtml(
+      /<p class="[^"]*title_l[^"]*">([\s\S]*?)<\/p>/.exec(html)?.[1] || /<title>([^<|]*?)\s*プライズの情報サイト/.exec(html)?.[1] || "",
+    );
+    if (!name) continue;
+    const cell = (label) => decodeHtml(new RegExp(`<h2>${label}</h2></th>\\s*<td>([\\s\\S]*?)</td>`).exec(html)?.[1] || "");
+    const images = [...html.matchAll(/<ul id="bxslider">[\s\S]*?<\/ul>/g)].flatMap((block) =>
+      [...block[0].matchAll(/<img src="([^"]+)"/g)].map((match) => match[1]),
+    );
+    out.push({
+      key: url.split("/").pop(),
+      name: /まどか|マギカ/.test(name) ? name : `魔法少女まどか☆マギカ ${name}`,
+      work: "魔法少女まどか☆マギカ",
+      line: "SK JAPAN",
+      spec: cell("詳細"),
+      url,
+      image: images[0] || "",
+      gallery: images,
+      price_jpy: null,
+      release_date: releaseDateFrom(cell("発売日")),
+      is_limited: false,
+    });
+  }
+  return out;
+}
+
+// クレーネル (Claynel, Aniplex group; BUZZmod.): JSON listing of every title's
+// products, 12 a page. Titles carry character names only, so candidates are
+// picked by name and kept when the item page's 作品名 is a Madoka work.
+const CLAYNEL_BASE = "https://www.claynel.jp";
+
+async function fetchClaynel(ctx) {
+  const candidates = [];
+  let total = Infinity;
+  for (let page = 1; (page - 1) * 12 < total && page <= 20; page += 1) {
+    const data = await fetchJson(`${CLAYNEL_BASE}/products/data.html?page=${page}`);
+    total = Number(data.items?.total || 0);
+    for (const item of data.items?.articles || []) {
+      if (MADOKA_CHARACTER.test(nf(item.title))) candidates.push(item);
+    }
+  }
+  ctx.listed = candidates.length;
+  const out = [];
+  for (const item of candidates) {
+    const url = `${CLAYNEL_BASE}/products/?item_id=${item.id}`;
+    const html = await fetchText(url);
+    const block = (cap) =>
+      decodeHtml(new RegExp(`name-cap">${cap}</div>\\s*<div class="p-works_detail__name-desc">([\\s\\S]*?)</div>`).exec(html)?.[1] || "");
+    const work = block("作品名");
+    if (!isMadoka(work)) {
+      ctx.offWork.push(`${work || "(no work)"} | ${item.title}`);
+      continue;
+    }
+    const text = pageText(html);
+    const images = [
+      ...new Set([...html.matchAll(/SYS\/CONTENTS\/goods_\d+_(?:main|photo_\d+)/g)].map((match) => `${CLAYNEL_BASE}/${match[0]}`)),
+    ];
+    out.push({
+      key: String(item.id),
+      name: decodeHtml(/p-works_detail__name-name">([\s\S]*?)<\/div>/.exec(html)?.[1] || item.title),
+      work,
+      line: "クレーネル",
+      // Claynel's pages give no scale; BUZZmod. is a 1/12 line (as Aniplex+
+      // lists it), which lets the cross-source dedupe match the two.
+      spec: `${/BUZZmod/i.test(item.title) ? "1/12 " : ""}${/商品形態\s*(.{0,60})/.exec(text)?.[1] || ""}`,
+      is_figure: /フィギュア|BUZZmod/.test(item.title),
+      url,
+      image: images.find((image) => image.endsWith("_main")) || images[0] || "",
+      gallery: images,
+      price_jpy: parseYen(block("商品価格")),
+      release_date: releaseDateFrom(/発売(?:日|時期|予定)?\s*(\d{4}年\s*\d{1,2}月(?:\s*\d{1,2}日)?)/.exec(text)?.[1] || ""),
+      is_limited: false,
+    });
+  }
+  return out;
+}
+
+// メガハウス (megahobby.jp): keyword search, then item pages.
+const MEGAHOBBY_BASE = "https://www.megahobby.jp";
+const MEGAHOBBY_QUERIES = ["まどか☆マギカ", "マギアレコード"];
+
+async function fetchMegaHouse(ctx) {
+  const ids = new Set();
+  for (const query of MEGAHOBBY_QUERIES) {
+    const html = await fetchText(`${MEGAHOBBY_BASE}/search/?s=${encodeURIComponent(query)}`);
+    for (const match of html.matchAll(/href="[^"]*\/products\/item\/(\d+)\/?"/g)) ids.add(match[1]);
+  }
+  ctx.listed = ids.size;
+  const out = [];
+  for (const id of ids) {
+    const url = `${MEGAHOBBY_BASE}/products/item/${id}/`;
+    const html = await fetchText(url);
+    // The item heading names the line ("キューティーフィギュアマスコット …"); the
+    // og:title of older items is only a category ("その他コレクションアイテム …").
+    const name = decodeHtml(/<h2 class="ttl">([\s\S]*?)<\/h2>/.exec(html)?.[1] || "") || ogMeta(html, "title");
+    const keywords = /<meta name="keywords" content="([^"]*)"/.exec(html)?.[1] || "";
+    if (!isMadoka(name, keywords)) {
+      ctx.offWork.push(name);
+      continue;
+    }
+    const after = (alt) => decodeHtml(new RegExp(`alt="${alt}"[^>]*>\\s*(?:</dt>\\s*<dd>)?([^<]*)`).exec(html)?.[1] || "");
+    out.push({
+      key: id,
+      name,
+      work: isMadoka(name) ? name : "魔法少女まどか☆マギカ",
+      line: "MegaHouse",
+      is_figure: /フィギュア|figure/i.test(keywords),
+      url,
+      image: absolute(ogMeta(html, "image"), url),
+      price_jpy: parseYen(after("希望小売価格")),
+      release_date: releaseDateFrom(after("発売日")),
+      is_limited: /限定/.test(name),
+    });
+  }
+  return out;
+}
+
+// バンダイ キャンディ (食玩): site search, back to 2012.
+const CANDY_SEARCH_URL = "https://www.bandai.co.jp/candy/search/result.html";
+const CANDY_QUERIES = ["まどか", "マギカ"];
+
+async function fetchBandaiCandy(ctx) {
+  const urls = new Set();
+  for (const query of CANDY_QUERIES) {
+    const html = await fetchText(`${CANDY_SEARCH_URL}?q=${encodeURIComponent(query)}`);
+    for (const match of html.matchAll(/href="(https:\/\/www\.bandai\.co\.jp\/candy\/products\/\d{4}\/\d+\.html)"/g)) urls.add(match[1]);
+  }
+  ctx.listed = urls.size;
+  const out = [];
+  for (const url of urls) {
+    const html = await fetchText(url);
+    const title = ogMeta(html, "title");
+    const name = title.split("｜")[0].trim();
+    if (!isMadoka(name)) {
+      ctx.offWork.push(name);
+      continue;
+    }
+    const text = pageText(html);
+    out.push({
+      key: url.match(/(\d+)\.html$/)[1],
+      name,
+      work: name,
+      line: "バンダイ キャンディ 食玩",
+      // Only the figure lines count; wafers, gum, ice cream … are sweets with a
+      // card or sticker.
+      category: /フィギュア|コレクション|COLLECTION|マスコット|Dolly|ドール/i.test(name) ? "" : "グッズ",
+      url,
+      image: ogMeta(html, "image"),
+      price_jpy: parseYen(/税込\s*([\d,]+)\s*円/.exec(text)?.[1]),
+      release_date: releaseDateFrom(/発売日[：:]\s*([^｜]+)/.exec(title)?.[1] || ""),
+      is_limited: false,
+    });
+  }
+  return out;
+}
+
+// ムービック (movic.jp): store search; only the plush line (goods code
+// group 00700: ぬいパル and other ぬいぐるみ) counts here.
+const MOVIC_BASE = "https://www.movic.jp";
+
+async function fetchMovic(ctx) {
+  const cards = new Map();
+  for (let page = 1; page <= 12; page += 1) {
+    const html = await fetchText(
+      `${MOVIC_BASE}/shop/goods/search.aspx?search=x&keyword=${encodeURIComponent("まどか☆マギカ")}&p=${page}&ps=50`,
+    );
+    let found = 0;
+    for (const match of html.matchAll(/href="(\/shop\/g\/g([0-9-]+)\/)"[^>]*>([\s\S]*?)<\/a>/g)) {
+      const name = decodeHtml(match[3]).replace(/\s*在庫[\s\S]*$/, "").trim();
+      if (!name) continue;
+      found += 1;
+      const price = parseYen(/在庫[\s\S]*?([\d,]+)円/.exec(decodeHtml(match[3]))?.[1]);
+      if (/-00700-/.test(match[2]) && !cards.has(match[2])) cards.set(match[2], { id: match[2], name, price, url: `${MOVIC_BASE}${match[1]}` });
+    }
+    if (!found) break;
+  }
+  ctx.listed = cards.size;
+  const out = [];
+  for (const card of cards.values()) {
+    if (!isMadoka(card.name)) continue;
+    const html = await fetchText(card.url);
+    const text = pageText(html);
+    out.push({
+      key: card.id,
+      name: card.name,
+      work: card.name,
+      line: "ムービック",
+      category: "ぬいぐるみ",
+      url: card.url,
+      image: ogMeta(html, "image"),
+      price_jpy: card.price,
+      release_date: releaseDateFrom(/(\d{4}年\d{1,2}月(?:\d{1,2}日)?)頃?発売/.exec(text)?.[1] || ""),
+      is_limited: /受注生産|限定/.test(card.name),
+    });
+  }
+  return out;
+}
+
+// SHIBUYA SCRAMBLE FIGURE (eStream): brand store category; cards carry the
+// work and the price, the item page the product outline and images.
+const SSF_BASE = "https://ec.shibuya-scramble-figure.com";
+
+async function fetchShibuyaScramble(ctx) {
+  const cards = new Map();
+  for (let page = 1; page <= 10; page += 1) {
+    const html = await fetchText(`${SSF_BASE}/shop/product_categories/ssf?page=${page}`);
+    let found = 0;
+    for (const match of html.matchAll(/href="(\/shop\/products\/(\d+))"[^>]*>([\s\S]*?)<\/a>/g)) {
+      found += 1;
+      const text = decodeHtml(match[3]);
+      if (isMadoka(text) && !cards.has(match[2])) cards.set(match[2], { id: match[2], text, url: `${SSF_BASE}${match[1]}` });
+    }
+    if (!found || !html.includes(`page=${page + 1}`)) break;
+  }
+  ctx.listed = cards.size;
+  const out = [];
+  for (const card of cards.values()) {
+    const html = await fetchText(card.url);
+    const text = pageText(html);
+    const outline = text.slice(text.lastIndexOf("商品概要 商品名"));
+    const field = (label) =>
+      new RegExp(`${label}\\s+(.+?)\\s+(?:商品名|作品名|原型|彩色|仕様|サイズ|素材|販売元|発売元|お届け|購入特典|注意事項|$)`).exec(outline)?.[1] || "";
+    const work = field("作品名") || /「([^」]*マギカ[^」]*)」/.exec(card.text)?.[1] || "魔法少女まどか☆マギカ";
+    const spec = field("仕様");
+    const images = [
+      ...new Set(
+        [...html.matchAll(/(https:\/\/[a-z0-9]+\.cloudfront\.net\/ecshibuyascrambl\/ec_assets\/[0-9a-f]+-original\.(?:jpg|png))/g)].map(
+          (match) => match[1],
+        ),
+      ),
+    ];
+    // "鹿目 まどか" + "1/7スケール PVC製…" → "魔法少女まどか☆マギカ 鹿目まどか 1/7スケールフィギュア"
+    const name = (field("商品名") || card.text.replace(/^.*」\s*/, "").replace(/¥.*$/, "")).replace(/\s+/g, "").trim();
+    const scale = /1\s*\/\s*\d+\s*スケール/.exec(spec)?.[0].replace(/\s+/g, "") || "";
+    out.push({
+      key: card.id,
+      name: `魔法少女まどか☆マギカ ${name} ${scale}フィギュア`,
+      work,
+      line: "SHIBUYA SCRAMBLE FIGURE",
+      spec,
+      is_figure: true,
+      url: card.url,
+      image: images[0] || "",
+      gallery: images,
+      price_jpy: parseYen(/([\d,]+)\s*（税込）/.exec(card.text)?.[1]),
+      release_date: releaseDateFrom(/お届け(?:期間|予定)?\s*(\d{4}年\s*\d{1,2}月)/.exec(text)?.[1] || ""),
+      is_limited: true,
+    });
+  }
+  return out;
+}
+
+// Prime 1 Studio: the Madoka series page only (robots.txt forbids query
+// strings and the search).
+const PRIME1_SERIES_URL = "https://www.prime1studio.co.jp/series/puellamagimadokamagica.html";
+
+async function fetchPrime1(ctx) {
+  const html = await fetchText(PRIME1_SERIES_URL);
+  const urls = [
+    ...new Set(
+      [...html.matchAll(/href="(https:\/\/www\.prime1studio\.co\.jp\/([a-z0-9-]+)\.html)"/g)]
+        .filter((match) => /\d/.test(match[2]))
+        .map((match) => match[1]),
+    ),
+  ];
+  ctx.listed = urls.length;
+  const out = [];
+  for (const url of urls) {
+    const page = await fetchText(url);
+    const name = ogMeta(page, "title");
+    if (!isMadoka(name)) {
+      ctx.offWork.push(name);
+      continue;
+    }
+    const text = pageText(page);
+    out.push({
+      key: url.match(/\/([a-z0-9-]+)\.html$/)[1],
+      name,
+      work: name,
+      line: "Prime 1 Studio",
+      is_figure: /完成品|スタチュー|フィギュア/.test(name),
+      url,
+      image: ogMeta(page, "image"),
+      price_jpy: parseYen(/([\d,]{5,})\s*円/.exec(text)?.[1]),
+      release_date: releaseDateFrom(/発売(?:予定|時期)?[^0-9]{0,6}(\d{4}年\s*\d{1,2}月)/.exec(text)?.[1] || ""),
+      is_limited: /限定|ボーナス版/.test(name),
+    });
+  }
+  return out;
+}
+
+// BANDAI SPIRITS product search: the figures and model kits that are neither
+// prizes (bsp-prize.jp) nor 一番くじ (1kuji.com) — 30MP, Figuarts mini,
+// Half Age Characters …
+const BSPIRITS_BASE = "https://www.bandaispirits.co.jp";
+const BSPIRITS_SEARCH_URL = `${BSPIRITS_BASE}/products/search/result.php`;
+
+async function fetchBandaiSpirits(ctx) {
+  const ids = new Map();
+  // The search splits words: "まどか☆マギカ" finds less than "まどか" does.
+  for (const query of ["まどか", "マギアレコード"]) {
+    const html = await fetchText(`${BSPIRITS_SEARCH_URL}?freeword=${encodeURIComponent(query)}&dsp_cnt=60`);
+    for (const match of html.matchAll(/detail\.php\?prd_id=([^&"]+)&(?:amp;)?grp_id=(\d+)/g)) {
+      if (match[2] === "10000" || match[2] === "9999") continue; // prizes, 一番くじ
+      ids.set(match[1], match[2]);
+    }
+  }
+  ctx.listed = ids.size;
+  const out = [];
+  for (const [id, group] of ids) {
+    const url = `${BSPIRITS_BASE}/products/search/detail.php?prd_id=${encodeURIComponent(id)}&grp_id=${group}`;
+    const html = await fetchText(url);
+    const name = ogMeta(html, "title");
+    const text = pageText(html);
+    if (!isMadoka(name, /作品名\s*(.{0,60})/.exec(text)?.[1] || "", /(?:魔法少女まどか☆マギカ|マギアレコード)[^ ]{0,30}/.exec(text)?.[0] || "")) {
+      ctx.offWork.push(name);
+      continue;
+    }
+    const images = [
+      ...new Set(
+        [...html.matchAll(/<img[^>]+src="([^"]+\.(?:jpg|jpeg|png))"/gi)]
+          .map((match) => absolute(match[1], url))
+          .filter((src) => !/\/assets\/img\//.test(src) && !/logo|icon|banner|btn_/i.test(src)),
+      ),
+    ];
+    out.push({
+      key: id,
+      name: isMadoka(name) ? name : `魔法少女まどか☆マギカ ${name}`,
+      work: "魔法少女まどか☆マギカ",
+      line: "BANDAI SPIRITS",
+      url,
+      image: images[0] || "",
+      gallery: images,
+      price_jpy: parseYen(/([\d,]+)\s*円\s*[（(]税込/.exec(text)?.[1]),
+      release_date: releaseDateFrom(/(\d{4}年\s*\d{1,2}月(?:\s*\d{1,2}日)?)/.exec(text)?.[1] || ""),
+      is_limited: false,
+    });
+  }
+  return out;
+}
+
+// ガシャポン (gashapon.jp): keyword search, about two years deep.
+const GASHAPON_BASE = "https://gashapon.jp";
+
+async function fetchGashapon(ctx) {
+  const ids = new Set();
+  for (const query of ["まどか☆マギカ", "マギアレコード"]) {
+    const html = await fetchText(`${GASHAPON_BASE}/products/result.php?free=${encodeURIComponent(query)}`);
+    for (const match of html.matchAll(/detail\.php\?jan_code=(\d+)/g)) ids.add(match[1]);
+  }
+  ctx.listed = ids.size;
+  const out = [];
+  for (const id of ids) {
+    const url = `${GASHAPON_BASE}/products/detail.php?jan_code=${id}`;
+    const html = await fetchText(url);
+    const name = (ogMeta(html, "title") || decodeHtml(/<title>([^<]*)/.exec(html)?.[1] || "")).split(/[|｜]/)[0].trim();
+    if (!isMadoka(name)) {
+      ctx.offWork.push(name);
+      continue;
+    }
+    const text = pageText(html);
+    out.push({
+      key: id,
+      name,
+      work: name,
+      line: "ガシャポン",
+      url,
+      image: ogMeta(html, "image"),
+      price_jpy: parseYen(/([\d,]+)\s*円/.exec(/価格[^円]{0,30}円/.exec(text)?.[0] || "")?.[1]),
+      release_date: releaseDateFrom(/発売(?:日|時期|予定)?[^0-9]{0,6}(\d{4}年\s*\d{1,2}月)/.exec(text)?.[1] || ""),
+      is_limited: false,
+    });
+  }
+  return out;
+}
+
+// Retired official sites (とるナビ / prizebp.jp …), read once from the Wayback
+// Machine by scripts/archive_madoka_wayback.mjs and committed. No network here.
+const ARCHIVE_PATH = "data/madoka/archive-products.json";
+
+async function fetchArchive(ctx) {
+  let data;
+  try {
+    data = JSON.parse(await readFile(ARCHIVE_PATH, "utf8"));
+  } catch {
+    return [];
+  }
+  ctx.listed = data.products.length;
+  return data.products.map((product) => ({ ...product, work: product.work || product.name }));
+}
+
 const SOURCES = [
   {
     source_id: "good_smile_madoka_en",
@@ -1533,6 +1990,86 @@ const SOURCES = [
     tags: ["madoka", "furyu", "prize"],
     fetchAll: fetchFuryuPrize,
     notes: "Imported from the FuRyu prize site (furyuprize.com, Madoka keyword search).",
+  },
+  {
+    source_id: "bandai_spirits_madoka_jp",
+    idPrefix: "bspirits-madoka",
+    subline: "BANDAI SPIRITS",
+    tags: ["madoka", "bandai spirits"],
+    fetchAll: fetchBandaiSpirits,
+    notes: "Imported from the BANDAI SPIRITS product search (Madoka keyword; prizes and 一番くじ come from their own sites).",
+  },
+  {
+    source_id: "claynel_madoka_jp",
+    idPrefix: "claynel-madoka",
+    subline: "クレーネル",
+    tags: ["madoka", "claynel", "aniplex"],
+    fetchAll: fetchClaynel,
+    notes: "Imported from the Claynel official product list (claynel.jp, Madoka works).",
+  },
+  {
+    source_id: "shibuya_scramble_madoka_jp",
+    idPrefix: "ssf-madoka",
+    subline: "SHIBUYA SCRAMBLE FIGURE",
+    tags: ["madoka", "shibuya scramble figure", "estream"],
+    fetchAll: fetchShibuyaScramble,
+    notes: "Imported from the SHIBUYA SCRAMBLE FIGURE official store (eStream).",
+  },
+  {
+    source_id: "prime1_madoka_jp",
+    idPrefix: "prime1-madoka",
+    subline: "Prime 1 Studio",
+    tags: ["madoka", "prime 1 studio"],
+    fetchAll: fetchPrime1,
+    notes: "Imported from the Prime 1 Studio Madoka series page.",
+  },
+  {
+    source_id: "megahouse_madoka_jp",
+    idPrefix: "megahouse-madoka",
+    subline: "MegaHouse",
+    tags: ["madoka", "megahouse"],
+    fetchAll: fetchMegaHouse,
+    notes: "Imported from the MegaHouse hobby site (megahobby.jp, Madoka keyword search).",
+  },
+  {
+    source_id: "bandai_candy_madoka_jp",
+    idPrefix: "candy-madoka",
+    subline: "バンダイ キャンディ",
+    tags: ["madoka", "bandai candy", "shokugan"],
+    fetchAll: fetchBandaiCandy,
+    notes: "Imported from the Bandai Candy official site (食玩, Madoka keyword search).",
+  },
+  {
+    source_id: "gashapon_madoka_jp",
+    idPrefix: "gashapon-madoka",
+    subline: "ガシャポン",
+    tags: ["madoka", "gashapon", "bandai"],
+    fetchAll: fetchGashapon,
+    notes: "Imported from the Gashapon official site (gashapon.jp, Madoka keyword search).",
+  },
+  {
+    source_id: "sk_japan_madoka_jp",
+    idPrefix: "skjapan-madoka",
+    subline: "SK JAPAN",
+    tags: ["madoka", "sk japan", "prize"],
+    fetchAll: fetchSkJapan,
+    notes: "Imported from the SK JAPAN prize site (キャラとる, 魔法少女まどか☆マギカ page).",
+  },
+  {
+    source_id: "movic_madoka_jp",
+    idPrefix: "movic-madoka",
+    subline: "ムービック",
+    tags: ["madoka", "movic"],
+    fetchAll: fetchMovic,
+    notes: "Imported from the Movic official store (plush only, Madoka keyword search).",
+  },
+  {
+    source_id: "banpresto_archive_madoka_jp",
+    idPrefix: "prizebp-madoka",
+    subline: "バンプレスト景品",
+    tags: ["madoka", "banpresto", "prize", "archive"],
+    fetchAll: fetchArchive,
+    notes: "Banpresto prize from the retired とるナビ site (www.prizebp.jp), read through the Internet Archive's Wayback Machine.",
   },
 ];
 
@@ -1733,7 +2270,9 @@ try {
 }
 
 // Sources run side by side; each host still sees one request at a time.
-const results = await Promise.all(SOURCES.map(runSource));
+// MADOKA_ONLY=a,b runs only those sources (for trying a vendor by hand).
+const ONLY = new Set((process.env.MADOKA_ONLY || "").split(",").filter(Boolean));
+const results = await Promise.all(SOURCES.filter((source) => !ONLY.size || ONLY.has(source.source_id)).map(runSource));
 const imported = results.flatMap((result) => result.kits).filter((kit) => !retired.has(kit.kit_id));
 const { kits: deduped, merges, kept: keptPairs } = dedupe(imported, previousMadoka);
 

@@ -59,6 +59,15 @@ const CATALOG_SOURCES = [
   { source_id: "taito_prize_madoka_jp", label: "TAITO prize (Madoka)" },
   { source_id: "sega_prize_madoka_jp", label: "SEGA prize (Madoka)" },
   { source_id: "furyu_prize_madoka_jp", label: "FuRyu prize (Madoka)" },
+  { source_id: "bandai_spirits_madoka_jp", label: "BANDAI SPIRITS (Madoka)" },
+  { source_id: "claynel_madoka_jp", label: "Claynel (Madoka)" },
+  { source_id: "shibuya_scramble_madoka_jp", label: "SHIBUYA SCRAMBLE FIGURE (Madoka)" },
+  { source_id: "prime1_madoka_jp", label: "Prime 1 Studio (Madoka)" },
+  { source_id: "megahouse_madoka_jp", label: "MegaHouse (Madoka)" },
+  { source_id: "bandai_candy_madoka_jp", label: "Bandai Candy (Madoka)" },
+  { source_id: "gashapon_madoka_jp", label: "Gashapon (Madoka)" },
+  { source_id: "sk_japan_madoka_jp", label: "SK JAPAN prize (Madoka)" },
+  { source_id: "movic_madoka_jp", label: "Movic plush (Madoka)" },
 ];
 
 function nowIso() {

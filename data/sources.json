@@ -920,6 +920,169 @@
         "past prizes (only current and upcoming items are listed)"
       ],
       "notes": "furyuprize.com search API; earlier runs' records are kept when an item drops off the site."
+    },
+    {
+      "source_id": "bandai_spirits_madoka_jp",
+      "name": "BANDAI SPIRITS products (Madoka Magica)",
+      "type": "official_maker_jp",
+      "country": "JP",
+      "base_url": "https://www.bandaispirits.co.jp/",
+      "priority": 17,
+      "best_for": [
+        "30MP model kits, Figuarts mini, candy-toy figures",
+        "release date",
+        "price"
+      ],
+      "weak_for": [
+        "prizes and 一番くじ (they come from bsp-prize.jp and 1kuji.com)"
+      ],
+      "notes": "BANDAI SPIRITS product search (keyword まどか / マギアレコード), prize and 一番くじ groups skipped."
+    },
+    {
+      "source_id": "claynel_madoka_jp",
+      "name": "Claynel (Madoka Magica)",
+      "type": "official_maker_jp",
+      "country": "JP",
+      "base_url": "https://www.claynel.jp/",
+      "priority": 17,
+      "best_for": [
+        "BUZZmod. and non-scale figures",
+        "price",
+        "release month"
+      ],
+      "weak_for": [
+        "titles name characters only (the item page 作品名 decides)"
+      ],
+      "notes": "claynel.jp product list JSON (products/data.html) plus item pages; most items are also on Aniplex+ and merge there."
+    },
+    {
+      "source_id": "shibuya_scramble_madoka_jp",
+      "name": "SHIBUYA SCRAMBLE FIGURE (Madoka Magica)",
+      "type": "official_maker_jp",
+      "country": "JP",
+      "base_url": "https://ec.shibuya-scramble-figure.com/",
+      "priority": 17,
+      "best_for": [
+        "1/7 scale figures",
+        "price",
+        "delivery month"
+      ],
+      "weak_for": [
+        "items leave the store after the order window"
+      ],
+      "notes": "eStream brand store, ssf category pages."
+    },
+    {
+      "source_id": "prime1_madoka_jp",
+      "name": "Prime 1 Studio (Madoka Magica)",
+      "type": "official_maker_jp",
+      "country": "JP",
+      "base_url": "https://www.prime1studio.co.jp/",
+      "priority": 17,
+      "best_for": [
+        "PRISMA WING statues"
+      ],
+      "weak_for": [
+        "release date"
+      ],
+      "notes": "Madoka series page only (robots.txt forbids query strings and search)."
+    },
+    {
+      "source_id": "megahouse_madoka_jp",
+      "name": "MegaHouse (Madoka Magica)",
+      "type": "official_maker_jp",
+      "country": "JP",
+      "base_url": "https://www.megahobby.jp/",
+      "priority": 17,
+      "best_for": [
+        "るかっぷ and trading figures",
+        "price",
+        "release month"
+      ],
+      "weak_for": [],
+      "notes": "megahobby.jp keyword search (?s=) plus item pages."
+    },
+    {
+      "source_id": "bandai_candy_madoka_jp",
+      "name": "Bandai Candy (Madoka Magica)",
+      "type": "official_maker_jp",
+      "country": "JP",
+      "base_url": "https://www.bandai.co.jp/candy/",
+      "priority": 17,
+      "best_for": [
+        "食玩 figures and mascots since 2012",
+        "release date"
+      ],
+      "weak_for": [
+        "wafers and other sweets with cards (skipped as goods)"
+      ],
+      "notes": "bandai.co.jp/candy site search."
+    },
+    {
+      "source_id": "gashapon_madoka_jp",
+      "name": "Bandai Gashapon (Madoka Magica)",
+      "type": "official_maker_jp",
+      "country": "JP",
+      "base_url": "https://gashapon.jp/",
+      "priority": 17,
+      "best_for": [
+        "capsule figures",
+        "price",
+        "release month"
+      ],
+      "weak_for": [
+        "older capsules (the site keeps about two years)"
+      ],
+      "notes": "gashapon.jp keyword search plus detail pages."
+    },
+    {
+      "source_id": "sk_japan_madoka_jp",
+      "name": "SK JAPAN prize (Madoka Magica)",
+      "type": "official_prize_jp",
+      "country": "JP",
+      "base_url": "https://www.sk-japan.co.jp/",
+      "priority": 17,
+      "best_for": [
+        "prize plush and figures",
+        "release week"
+      ],
+      "weak_for": [
+        "price (prize items carry none)"
+      ],
+      "notes": "キャラとる 魔法少女まどか☆マギカ character page plus item pages."
+    },
+    {
+      "source_id": "movic_madoka_jp",
+      "name": "Movic (Madoka Magica plush)",
+      "type": "official_store_jp",
+      "country": "JP",
+      "base_url": "https://www.movic.jp/",
+      "priority": 17,
+      "best_for": [
+        "plush (ぬいパル)",
+        "price"
+      ],
+      "weak_for": [
+        "everything else Movic sells is flat goods and skipped"
+      ],
+      "notes": "movic.jp store search, goods code group 00700 (plush) only."
+    },
+    {
+      "source_id": "banpresto_archive_madoka_jp",
+      "name": "Banpresto とるナビ archive (Madoka Magica)",
+      "type": "archive",
+      "country": "JP",
+      "base_url": "https://web.archive.org/web/2013/http://www.prizebp.jp/chara/85/",
+      "priority": 18,
+      "best_for": [
+        "2011–2015 Banpresto prizes (SQ, DXF, plush)",
+        "release month",
+        "images"
+      ],
+      "weak_for": [
+        "price"
+      ],
+      "notes": "Retired www.prizebp.jp read once through the Wayback Machine (scripts/archive_madoka_wayback.mjs → data/madoka/archive-products.json); the daily import reads only that file."
     }
   ]
 }
