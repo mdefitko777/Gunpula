@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-06",
-  "generated_at": "2026-11-06T04:39:19.817Z",
+  "generated_at": "2026-11-06T05:23:02.838Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,40 +18,43 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-06T04:39:15.585Z",
+    "generated_at": "2026-11-06T05:22:59.630Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-06",
-      "generated_at": "2026-11-06T04:39:19.817Z",
+      "generated_at": "2026-11-06T05:23:02.838Z",
       "total_before": 39198,
-      "total_after": 39270,
-      "added_count": 9,
-      "changed_count": 132,
+      "total_after": 39299,
+      "added_count": 38,
+      "changed_count": 198,
       "removed_count": 0,
-      "watched_count": 127,
+      "watched_count": 120,
       "merged_count": 0,
       "backfilled_count": 0,
-      "premium_bandai_count": 30,
-      "bbx_count": 37,
+      "premium_bandai_count": 37,
+      "bbx_count": 45,
       "franchise_counts": {
-        "gundam": 92,
-        "pokemon": 11,
-        "beyblade": 37,
-        "lego": 1
+        "gundam": 97,
+        "madoka": 68,
+        "pokemon": 8,
+        "beyblade": 45,
+        "fate": 18
       },
       "reason_counts": {
-        "new": 9,
+        "new": 38,
         "name": 119,
-        "series": 120,
-        "price": 2,
-        "source": 3
+        "series": 130,
+        "image": 39,
+        "source": 45,
+        "release": 14
       },
       "interest_tags": [
         "gundam",
         "seed",
+        "madoka",
         "pokemon",
         "premium_bandai",
         "beyblade",
@@ -61,7 +64,10 @@
         "00",
         "bbx_ux",
         "bbx_bx",
-        "lego"
+        "beyblade_cx",
+        "beyblade_bx",
+        "beyblade_ux",
+        "fate"
       ],
       "watch_tags": [
         "seed",
@@ -102,6 +108,123 @@
           "source_urls": [
             "https://tamashiiweb.com/item/16254/",
             "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g1146449",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Good Smile Company",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 暁美ほむら ノンスケールフィギュア",
+            "zh": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 暁美ほむら ノンスケールフィギュア",
+            "ko": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 暁美ほむら ノンスケールフィギュア",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 暁美ほむら ノンスケールフィギュア"
+          },
+          "release_date": "2027-09",
+          "price_jpy": 8800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global",
+            "claynel_madoka_jp"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/1146449",
+            "https://www.claynel.jp/products/?item_id=12521"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g1146889",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Good Smile Company",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 巴マミ ノンスケールフィギュア",
+            "zh": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 巴マミ ノンスケールフィギュア",
+            "ko": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 巴マミ ノンスケールフィギュア",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 巴マミ ノンスケールフィギュア"
+          },
+          "release_date": "2027-09",
+          "price_jpy": 8800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global",
+            "claynel_madoka_jp"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/1146889",
+            "https://www.claynel.jp/products/?item_id=12520"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g1146448",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Good Smile Company",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 鹿目まどか ノンスケールフィギュア",
+            "zh": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 鹿目まどか ノンスケールフィギュア",
+            "ko": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 鹿目まどか ノンスケールフィギュア",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 鹿目まどか ノンスケールフィギュア"
+          },
+          "release_date": "2027-08",
+          "price_jpy": 8800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global",
+            "claynel_madoka_jp"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/1146448",
+            "https://www.claynel.jp/products/?item_id=12405"
           ]
         },
         {
@@ -179,6 +302,413 @@
           ]
         },
         {
+          "kit_id": "goodsmile-madoka-g1146963",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_ACTION",
+          "subline": "BUZZmod.",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 暁美ほむら",
+            "zh": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 暁美ほむら",
+            "ko": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 暁美ほむら",
+            "en": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 暁美ほむら"
+          },
+          "release_date": null,
+          "price_jpy": 12000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/1146963"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g1146450",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_ACTION",
+          "subline": "BUZZmod.",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 鹿目まどか",
+            "zh": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 鹿目まどか",
+            "ko": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 鹿目まどか",
+            "en": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 鹿目まどか"
+          },
+          "release_date": null,
+          "price_jpy": 12000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/1146450"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g10642",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_MINI",
+          "subline": "Good Smile Company",
+          "series_key": "madoka_tv",
+          "series_labels": {
+            "zh": "魔法少女小圆",
+            "en": "Madoka Magica",
+            "ja": "まどか☆マギカ",
+            "ko": "마도카 마기카"
+          },
+          "names": {
+            "ja": "HELLO! GOOD SMILE 暁美ほむら",
+            "zh": "HELLO! GOOD SMILE 暁美ほむら",
+            "ko": "HELLO! GOOD SMILE 暁美ほむら",
+            "en": "HELLO! GOOD SMILE 暁美ほむら"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/10642"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g1138609",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_MINI",
+          "subline": "Good Smile Company",
+          "series_key": "madoka_tv",
+          "series_labels": {
+            "zh": "魔法少女小圆",
+            "en": "Madoka Magica",
+            "ja": "まどか☆マギカ",
+            "ko": "마도카 마기카"
+          },
+          "names": {
+            "ja": "HELLO! GOOD SMILE 鹿目まどか オーロラVer.",
+            "zh": "HELLO! GOOD SMILE 鹿目まどか オーロラVer.",
+            "ko": "HELLO! GOOD SMILE 鹿目まどか オーロラVer.",
+            "en": "HELLO! GOOD SMILE 鹿目まどか オーロラVer."
+          },
+          "release_date": null,
+          "price_jpy": 2000,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/1138609"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g10866",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_MINI",
+          "subline": "Good Smile Company",
+          "series_key": "madoka_tv",
+          "series_labels": {
+            "zh": "魔法少女小圆",
+            "en": "Madoka Magica",
+            "ja": "まどか☆マギカ",
+            "ko": "마도카 마기카"
+          },
+          "names": {
+            "ja": "HELLO! GOOD SMILE 巴マミ",
+            "zh": "HELLO! GOOD SMILE 巴マミ",
+            "ko": "HELLO! GOOD SMILE 巴マミ",
+            "en": "HELLO! GOOD SMILE 巴マミ"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/10866"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g1147107",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "POP UP PARADE SP 鹿目まどか 〈ワルプルギスの廻天〉 Ver.",
+            "zh": "POP UP PARADE SP 鹿目まどか 〈ワルプルギスの廻天〉 Ver.",
+            "ko": "POP UP PARADE SP 鹿目まどか 〈ワルプルギスの廻天〉 Ver.",
+            "en": "POP UP PARADE SP 鹿目まどか 〈ワルプルギスの廻天〉 Ver."
+          },
+          "release_date": null,
+          "price_jpy": 880,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/1147107"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g55557",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "madoka_tv",
+          "series_labels": {
+            "zh": "魔法少女小圆",
+            "en": "Madoka Magica",
+            "ja": "まどか☆マギカ",
+            "ko": "마도카 마기카"
+          },
+          "names": {
+            "ja": "POP UP PARADE 暁美ほむら",
+            "zh": "POP UP PARADE 暁美ほむら",
+            "ko": "POP UP PARADE 暁美ほむら",
+            "en": "POP UP PARADE 暁美ほむら"
+          },
+          "release_date": null,
+          "price_jpy": 4800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/55557"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g10524",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "madoka_tv",
+          "series_labels": {
+            "zh": "魔法少女小圆",
+            "en": "Madoka Magica",
+            "ja": "まどか☆マギカ",
+            "ko": "마도카 마기카"
+          },
+          "names": {
+            "ja": "POP UP PARADE 佐倉杏子",
+            "zh": "POP UP PARADE 佐倉杏子",
+            "ko": "POP UP PARADE 佐倉杏子",
+            "en": "POP UP PARADE 佐倉杏子"
+          },
+          "release_date": null,
+          "price_jpy": 4800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/10524"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g10018",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "madoka_tv",
+          "series_labels": {
+            "zh": "魔法少女小圆",
+            "en": "Madoka Magica",
+            "ja": "まどか☆マギカ",
+            "ko": "마도카 마기카"
+          },
+          "names": {
+            "ja": "POP UP PARADE 鹿目まどか",
+            "zh": "POP UP PARADE 鹿目まどか",
+            "ko": "POP UP PARADE 鹿目まどか",
+            "en": "POP UP PARADE 鹿目まどか"
+          },
+          "release_date": null,
+          "price_jpy": 4800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/10018"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g10412",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "madoka_tv",
+          "series_labels": {
+            "zh": "魔法少女小圆",
+            "en": "Madoka Magica",
+            "ja": "まどか☆マギカ",
+            "ko": "마도카 마기카"
+          },
+          "names": {
+            "ja": "POP UP PARADE 美樹さやか",
+            "zh": "POP UP PARADE 美樹さやか",
+            "ko": "POP UP PARADE 美樹さやか",
+            "en": "POP UP PARADE 美樹さやか"
+          },
+          "release_date": null,
+          "price_jpy": 4800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/10412"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g55558",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "madoka_tv",
+          "series_labels": {
+            "zh": "魔法少女小圆",
+            "en": "Madoka Magica",
+            "ja": "まどか☆マギカ",
+            "ko": "마도카 마기카"
+          },
+          "names": {
+            "ja": "POP UP PARADE 百江なぎさ",
+            "zh": "POP UP PARADE 百江なぎさ",
+            "ko": "POP UP PARADE 百江なぎさ",
+            "en": "POP UP PARADE 百江なぎさ"
+          },
+          "release_date": null,
+          "price_jpy": 4800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/55558"
+          ]
+        },
+        {
           "kit_id": "pokemon-center-4521329453880",
           "change_type": "added",
           "franchise": "pokemon",
@@ -253,151 +783,40 @@
           ]
         },
         {
-          "kit_id": "pokemon-center-4521329453972",
+          "kit_id": "goodsmile-madoka-g1137469",
           "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PLUSH",
+          "subline": "Good Smile Company",
+          "series_key": "madoka_rebellion",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
           },
           "names": {
-            "ja": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみカラカラ",
-            "zh": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみカラカラ",
-            "ko": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみカラカラ",
-            "en": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみカラカラ"
+            "ja": "くりぱん ぬいぐるみ アルティメットまどか / 悪魔ほむら",
+            "zh": "くりぱん ぬいぐるみ アルティメットまどか / 悪魔ほむら",
+            "ko": "くりぱん ぬいぐるみ アルティメットまどか / 悪魔ほむら",
+            "en": "くりぱん ぬいぐるみ アルティメットまどか / 悪魔ほむら"
           },
           "release_date": null,
-          "price_jpy": 3520,
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "madoka"
           ],
           "change_reasons": [
             "new"
           ],
           "source_ids": [
-            "pokemon_center_jp"
+            "good_smile_madoka_global"
           ],
           "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329453972.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329453989",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみゲンガー",
-            "zh": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみゲンガー",
-            "ko": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみゲンガー",
-            "en": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみゲンガー"
-          },
-          "release_date": null,
-          "price_jpy": 3520,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329453989.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329453941",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみピカチュウ",
-            "zh": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみピカチュウ",
-            "ko": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみピカチュウ",
-            "en": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみピカチュウ"
-          },
-          "release_date": null,
-          "price_jpy": 3520,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329453941.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329453958",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみヤドン",
-            "zh": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみヤドン",
-            "ko": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみヤドン",
-            "en": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみヤドン"
-          },
-          "release_date": null,
-          "price_jpy": 3520,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329453958.html"
+            "https://www.goodsmile.com/ja/product/1137469"
           ]
         }
       ],
