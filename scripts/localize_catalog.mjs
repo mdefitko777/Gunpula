@@ -5,7 +5,7 @@ const CATALOG_FILE = "data/kits.json";
 // Korean labels of the LEGO top-level themes (Rebrickable names, franchise lego)
 const LEGO_THEME_KO = JSON.parse(await readFile("data/lego/theme-labels-ko.json", "utf8")).labels;
 
-// Gundam products filed under "mixed" (CONVERGE, MSE, GSF, merch …) whose
+// Gundam products filed under "mixed" or "other" (CONVERGE, MSE, GSF, merch …) whose
 // suits the atlas has linked to works (data/atlas/gundam-kit-ms.json
 // kit_works): when every linked work maps to one series, that series is used.
 const KIT_WORKS = await readFile("data/atlas/gundam-kit-ms.json", "utf8")
@@ -1008,9 +1008,9 @@ function previousSeries(kit) {
 
 function seriesForKit(kit) {
   const series = classifySeries(kit);
-  // Only a product that would otherwise be "mixed" takes the series of its
-  // linked suits' works — never one the name rules already placed.
-  if (kit.franchise === "gundam" && series?.key === "mixed") return seriesFromKitWorks(kit) || series;
+  // Only a product the name rules file under "mixed" or "other" takes the
+  // series of its linked suits' works — never one they already placed.
+  if (kit.franchise === "gundam" && (series?.key === "mixed" || series?.key === "other")) return seriesFromKitWorks(kit) || series;
   return series;
 }
 
