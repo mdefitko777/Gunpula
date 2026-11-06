@@ -287,6 +287,11 @@ export function pokemonClassifier(taxonomyPokemon) {
       if (dex && genOf.has(Number(dex[1]))) return { group: genOf.get(Number(dex[1])), reason: `dex number ${dex[1]}`, names: [] };
       return { group: "pokemon_common", reason: "no single Pokémon named", names: [] };
     }
+    // One species named twice — "メガレックウザ" (form → gen6) and its Korean name
+    // "메가레쿠쟈" (no form word known in Korean → gen3) — is still one Pokémon:
+    // the form's generation wins for every mention of that species.
+    const formGen = new Map(found.filter((f) => f.form && f.id).map((f) => [f.id, f.gen]));
+    for (const f of found) if (formGen.has(f.id)) f.gen = formGen.get(f.id);
     const gens = uniq(found.map((f) => f.gen));
     const names = uniq(found.map((f) => f.name));
     if (gens.length === 1) return { group: gens[0], reason: `species ${names.slice(0, 3).join(", ")}`, names };

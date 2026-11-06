@@ -168,7 +168,10 @@ export function itemFromFeed(item) {
  * character). Taken from the current catalog, so items cached from older runs get them too.
  */
 export function annotateItems(doc, kits, atlas) {
-  const grade = new Map(kits.map((k) => [k.kit_id, k.grade_code]));
+  // The app's product type (종류) comes from grade_code corrected by the
+  // Japanese name and the subline (lib/data/gunpula.dart correctedCode /
+  // lineLabel), so condition alerts get both to compute the same type.
+  const byId = new Map(kits.map((k) => [k.kit_id, k]));
   const groups = new Map();
   for (const list of Object.values(atlas?.franchises || {})) {
     for (const g of Array.isArray(list) ? list : []) {
@@ -177,8 +180,10 @@ export function annotateItems(doc, kits, atlas) {
   }
   for (const entry of doc.entries || []) {
     for (const item of [...(entry.added || []), ...(entry.changed || [])]) {
-      const code = grade.get(item.kit_id);
-      if (code) item.grade_code = code;
+      const kit = byId.get(item.kit_id);
+      if (kit?.grade_code) item.grade_code = kit.grade_code;
+      if (kit?.subline) item.subline = kit.subline;
+      if (kit?.names?.ja) item.name_ja = kit.names.ja;
       const ids = groups.get(item.kit_id);
       if (ids?.length) item.groups = [...ids];
     }

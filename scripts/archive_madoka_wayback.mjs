@@ -58,6 +58,22 @@ async function get(url) {
   return null;
 }
 
+async function isImage(url) {
+  const wait = lastRequest + GAP_MS - Date.now();
+  if (wait > 0) await sleep(wait);
+  lastRequest = Date.now();
+  requests += 1;
+  try {
+    const response = await fetch(url, { headers: { "user-agent": BOT_UA }, signal: AbortSignal.timeout(60000) });
+    await response.arrayBuffer();
+    return response.ok && /^image\//.test(response.headers.get("content-type") || "");
+  } catch {
+    return false;
+  } finally {
+    lastRequest = Date.now();
+  }
+}
+
 async function cdx(params) {
   const text = await get(`${WAYBACK}/cdx/search/cdx?${new URLSearchParams({ output: "json", ...params })}`);
   if (!text) return [];
@@ -96,6 +112,32 @@ function dateFrom(text) {
 }
 
 // ------------------------------------------------------------- とるナビ
+
+// The page names its photos (main, "middle" size, per-kind item shots), but
+// archive.org saved only some of them — a snapshot of the page says nothing
+// about whether its images were captured. Each candidate is looked up in the
+// CDX index and the first one actually archived is used ("im_" form of that
+// capture), so no record points at a 404.
+async function archivedImage(html) {
+  const found = [
+    ...new Set(
+      [...html.matchAll(/https?:\/\/img\.prizebp\.jp\/trn_prize(?:_item)?\/(?:top_image|image)\/\d+\/(?:middle\/)?[A-Za-z0-9]+\.jpg/g)].map(
+        (match) => match[0],
+      ),
+    ),
+  ];
+  // Largest first: the main photo, then its middle size, then item shots.
+  const rank = (url) => (/trn_prize\/top_image\/\d+\/[^/]+$/.test(url) ? 0 : /\/middle\//.test(url) ? 1 : 2);
+  for (const url of found.sort((a, b) => rank(a) - rank(b)).slice(0, 6)) {
+    const rows = await cdx({ url, filter: "statuscode:200", fl: "timestamp", limit: "1" });
+    if (!rows[0]?.timestamp) continue;
+    // A CDX hit can still answer 404 through the im_ form (a capture of an
+    // error page), so the image itself is fetched once to be sure.
+    const archived = `${WAYBACK}/web/${rows[0].timestamp}im_/${url}`;
+    if (await isImage(archived)) return archived;
+  }
+  return "";
+}
 
 const PRIZEBP_CHARA = "www.prizebp.jp/chara/85/";
 
@@ -156,7 +198,7 @@ async function prizebp() {
     // and サイズ on the page are the item's own (related items carry neither).
     const release = text.match(/(20\d{2}年\s*\d{1,2}月(?:\s*\d{1,2}日)?)[^ ]{0,20}登場/)?.[1];
     const size = text.match(/サイズ\s*[:：]\s*([^ ]+)/)?.[1] || "";
-    const image = html.match(/(https?:\/\/img\.prizebp\.jp\/trn_prize\/top_image\/\d+\/[A-Za-z0-9]+\.jpg)/)?.[1] || "";
+    const image = await archivedImage(html);
     products.push({
       source: "prizebp",
       key: `prizebp-${id}`,
@@ -164,7 +206,7 @@ async function prizebp() {
       line: "バンプレスト景品",
       spec: size ? `サイズ:${size}` : "",
       url: `${WAYBACK}/web/${snapshot.timestamp}/${snapshot.url}`,
-      image: image ? `${WAYBACK}/web/${snapshot.timestamp}im_/${image}` : "",
+      image,
       release_date: release ? dateFrom(release) : null,
     });
   }

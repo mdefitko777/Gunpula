@@ -63,6 +63,10 @@ expectGroup(pokemon, "ロコン（アローラのすがた） ぬいぐるみ", 
 expectGroup(pokemon, "ポケプラ No.47 ゲッコウガ", "gen6");
 expectGroup(pokemon, "ポケットモンスター スカーレット・バイオレット アクリルスイング", "gen9");
 expectGroup(pokemon, "ポケットモンスター もふぐっとぬいぐるみ～ミュウ・サケブシッポ～", "pokemon_general");
+// Mega form named in Japanese and Korean: one Pokémon, the form's generation
+expectGroup(pokemon, "ポケモンプラモコレクション 61 セレクトシリーズ メガレックウザ", "gen6", {
+  names: { ja: "ポケモンプラモコレクション 61 セレクトシリーズ メガレックウザ", ko: "포켓몬 프라모 컬렉션 61 셀렉트 시리즈 메가레쿠쟈" },
+});
 expectGroup(pokemon, "ポケットモンスター ポケモンラバーマスコット12", "pokemon_common");
 expectGroup(pokemon, "figma Marnie", "gen8");
 expectGroup(pokemon, "포켓몬 스토어 Lucky for you 마스킹 스티커", "pokemon_common");

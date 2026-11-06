@@ -14,6 +14,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { tidyKoNames } from "./lib/ko-tidy.mjs";
 
 const rootDir = dirname(dirname(fileURLToPath(import.meta.url)));
 const KITS_PATH = join(rootDir, "data/kits.json");
@@ -50,8 +51,14 @@ for (const kit of doc.kits) {
     continue;
   }
   if (entry) stale += 1;
-  if (needsKorean(kit.names?.ko)) pending.push({ kit_id: kit.kit_id, franchise: kit.franchise, src });
+  // Still Japanese, or (outside LEGO, whose names are English on purpose) no Korean at all.
+  const ko = kit.names?.ko || "";
+  const untranslated = kit.franchise !== "lego" && /[A-Za-z]{3}/.test(ko) && !/[가-힣]/.test(ko);
+  if (needsKorean(ko) || untranslated) pending.push({ kit_id: kit.kit_id, franchise: kit.franchise, src });
 }
+
+// Brackets, scales, shop tags, reissue tags, look-alike names (scripts/lib/ko-tidy.mjs)
+const tidied = tidyKoNames(doc.kits);
 
 await writeFile(KITS_PATH, `${JSON.stringify(doc, null, 2)}\n`, "utf8");
 await writeFile(
@@ -59,4 +66,4 @@ await writeFile(
   `${JSON.stringify({ count: pending.length, note: "Kits whose Korean name still has kana/kanji and no curated entry in names-ko.json", kits: pending }, null, 2)}\n`,
   "utf8",
 );
-console.log(`Curated Korean names: applied=${applied} stale(source renamed)=${stale} pending=${pending.length}`);
+console.log(`Curated Korean names: applied=${applied} stale(source renamed)=${stale} pending=${pending.length} tidied=${tidied}`);

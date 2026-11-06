@@ -36,6 +36,9 @@ const ggetSections = await readJson("data/gget-series-sections.json");
 const fateRoster = await readJson("data/atlas/fate-roster.json");
 const bbxDatabase = await readJson("data/bbx-database.json", { products: [], series: [] });
 const bbxBladers = await readJson("data/atlas/bbx-bladers.json", { bladers: [] });
+// Korean for names the sources leave in Japanese (team names, servants without a KR name)
+const koOverrides = (await readJson("data/atlas/atlas-ko-overrides.json", { ko: {} })).ko || {};
+const koFix = (text) => koOverrides[text] ?? text;
 const coverFile = await readJson("data/atlas/atlas-covers.json", { covers: {} });
 const reportArg = process.argv.find((a) => a.startsWith("--report="))?.slice(9);
 const kits = (catalog.kits || []).filter((kit) => kit.data_status !== "hidden");
@@ -108,7 +111,7 @@ function fateGroups() {
     if (!servantsByChapter.has(ch)) servantsByChapter.set(ch, []);
     servantsByChapter.get(ch).push(s);
   }
-  const rosterOf = (list) => list.map((s) => ({ no: s.no, ja: s.names.ja, ko: s.names.ko || s.names.ja, en: s.names.en }));
+  const rosterOf = (list) => list.map((s) => ({ no: s.no, ja: s.names.ja, ko: koFix(s.names.ko || s.names.ja), en: s.names.en }));
   const servantCount = (n) => lang(`从者 ${n} 骑`, `서번트 ${n}기`, `${n} servants`, `サーヴァント ${n}騎`);
   const join = (a, b) => ({ zh: `${a.zh} · ${b.zh}`, ko: `${a.ko} · ${b.ko}`, en: `${a.en} · ${b.en}`, ja: `${a.ja}・${b.ja}` });
 
@@ -299,7 +302,7 @@ function beybladeGroups() {
         id: b.id,
         kind: "blader",
         labels: lang(b.names.zh, b.names.ko, b.names.en, b.names.ja),
-        subtitle: lang(b.team || "", b.team || "", b.team || "", b.team || ""),
+        subtitle: lang(b.team || "", koFix(b.team || ""), b.team || "", b.team || ""),
         image: newest ? newest.product.image || newest.product.image_remote || "" : "",
         cover_source: "newest product picture",
         blades: b.blades.map((x) => x.name_ja),

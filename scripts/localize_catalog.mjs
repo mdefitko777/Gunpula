@@ -5,6 +5,33 @@ const CATALOG_FILE = "data/kits.json";
 // Korean labels of the LEGO top-level themes (Rebrickable names, franchise lego)
 const LEGO_THEME_KO = JSON.parse(await readFile("data/lego/theme-labels-ko.json", "utf8")).labels;
 
+// Gundam products filed under "mixed" (CONVERGE, MSE, GSF, merch …) whose
+// suits the atlas has linked to works (data/atlas/gundam-kit-ms.json
+// kit_works): when every linked work maps to one series, that series is used.
+const KIT_WORKS = await readFile("data/atlas/gundam-kit-ms.json", "utf8")
+  .then((text) => JSON.parse(text).kit_works || {})
+  .catch(() => ({}));
+const WORK_SERIES = {
+  "mobile-suit-gundam": "uc_first", "gundam-side-story-0079-rise-from-the-ashes": "uc_first", "cucuruz-doans-island": "uc_first",
+  "requiem-for-vengeance": "uc_first", "cross-dimension-0079": "uc_first", "blue-destiny": "uc_side", "lost-war-chronicles": "uc_side",
+  "ms-igloo": "uc_side", "battlefield-record-u-c-0081": "uc_side", "side-story-missing-link": "uc_side", "08th-ms-team": "08ms",
+  "0080-war-in-the-pocket": "0080", "0083": "0083", z: "zeta", zz: "zz", "chars-counterattack": "cca", unicorn: "unicorn",
+  narrative: "narrative", hathaway: "hathaway", f91: "f91", v: "victory", g: "g", wing: "w", "wing-endless-waltz": "w", x: "x",
+  "turn-a": "turn_a", seed: "seed", "seed-destiny": "seed", "seed-freedom": "seed", "seed-astray": "seed", "seed-stargazer": "seed",
+  "00": "double_o", "00i": "double_o", "00p": "double_o", "00v": "double_o", "00f": "double_o", age: "age", "reconguista-in-g": "g_reco",
+  orphans: "ibo", "orphans-urdr-hunt": "ibo", "witch-from-mercury": "witch", gquuuuuux: "gqux", "build-fighters": "build",
+  "build-fighters-try": "build", "build-divers": "build", "build-divers-rerise": "build", "build-metaverse": "build", aoz: "aoz",
+  sentinel: "sentinel", thunderbolt: "thunderbolt", origin: "origin", crossbone: "crossbone", msv: "msv", moon: "moon",
+  "sd-sangokuden": "sangoku", "sd-gundam-world-soketsuden": "sangoku",
+};
+
+function seriesFromKitWorks(kit) {
+  const keys = new Set((KIT_WORKS[kit.kit_id] || []).map((work) => WORK_SERIES[work]));
+  if (keys.size !== 1 || keys.has(undefined)) return null;
+  const [key] = keys;
+  return SERIES.find((series) => series.key === key) || null;
+}
+
 const HTML_ENTITY_MAP = {
   alpha: "α",
   beta: "β",
@@ -981,6 +1008,10 @@ function previousSeries(kit) {
 
 function seriesForKit(kit) {
   const previous = previousSeries(kit);
+  if (kit.franchise === "gundam" && (!previous || previous.key === "mixed")) {
+    const linked = seriesFromKitWorks(kit);
+    if (linked) return linked;
+  }
   if (previous) {
     return previous;
   }
