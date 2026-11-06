@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-06",
-  "generated_at": "2026-11-06T01:45:32.105Z",
+  "generated_at": "2026-11-06T04:39:19.817Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,42 +18,49 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-06T01:45:27.818Z",
+    "generated_at": "2026-11-06T04:39:15.585Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-06",
-      "generated_at": "2026-11-06T01:45:32.105Z",
+      "generated_at": "2026-11-06T04:39:19.817Z",
       "total_before": 39198,
-      "total_after": 39269,
-      "added_count": 8,
-      "changed_count": 12,
+      "total_after": 39270,
+      "added_count": 9,
+      "changed_count": 132,
       "removed_count": 0,
-      "watched_count": 7,
+      "watched_count": 127,
       "merged_count": 0,
       "backfilled_count": 0,
-      "premium_bandai_count": 2,
-      "bbx_count": 0,
+      "premium_bandai_count": 30,
+      "bbx_count": 37,
       "franchise_counts": {
+        "gundam": 92,
         "pokemon": 11,
-        "gundam": 8,
+        "beyblade": 37,
         "lego": 1
       },
       "reason_counts": {
-        "new": 8,
-        "name": 8,
-        "series": 1,
+        "new": 9,
+        "name": 119,
+        "series": 120,
         "price": 2,
         "source": 3
       },
       "interest_tags": [
-        "pokemon",
         "gundam",
-        "premium_bandai",
         "seed",
+        "pokemon",
+        "premium_bandai",
+        "beyblade",
+        "bbx",
+        "bbx_cx",
+        "bbx_limited",
         "00",
+        "bbx_ux",
+        "bbx_bx",
         "lego"
       ],
       "watch_tags": [
@@ -61,6 +68,42 @@
         "00"
       ],
       "added": [
+        {
+          "kit_id": "tamashii-16254",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "エールストライクガンダム -THE GUNDAM BASE LIMITED-",
+            "zh": "エールストライクガンダム -THE GUNDAM BASE LIMITED-",
+            "ko": "エールストライクガンダム -THE GUNDAM BASE LIMITED-",
+            "en": "エールストライクガンダム -THE GUNDAM BASE LIMITED-"
+          },
+          "release_date": "2026-11",
+          "price_jpy": 33000,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16254/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
         {
           "kit_id": "pokemon-center-4521329455273",
           "change_type": "added",
@@ -360,548 +403,777 @@
       ],
       "changed": [
         {
-          "kit_id": "rg-rg-1-144-4573102673961000",
+          "kit_id": "tamashii-16191",
           "change_type": "changed",
           "franchise": "gundam",
-          "grade_code": "RG",
-          "subline": "RG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
+          "grade_code": "METAL_ROBOT",
+          "subline": "METAL ROBOT魂",
+          "series_key": null,
+          "series_labels": null,
           "names": {
-            "ja": "RG 1 / 144 アカツキガンダム(オオワシ装備)",
-            "zh": "RG 1 / 144 晓高达(オオワシ装备)",
-            "ko": "RG 1 / 144 아카츠키건담( 오오와시 장비)",
-            "en": "RG 1 / 144 Akatsuki Gundam(オオワシEquipment)"
+            "ja": "ブラックナイトスコード カルラ",
+            "zh": "ブラックナイトスコード カルラ",
+            "ko": "블랙 나이트 스쿼드 카루라",
+            "en": "ブラックナイトスコード カルラ"
           },
-          "release_date": "2024-12-14",
-          "price_jpy": 8800,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102673961000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-4549660210436000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "MG 1 / 100 ガンダムアストレイ ゴールドフレーム[スペシャルコーティング]",
-            "zh": "MG 1 / 100 高达异端 ゴールドフレーム[スペシャルコーティング]",
-            "ko": "MG 1 / 100 건담아스트레이 골드 프레임 [ 스페셜 코팅 ]",
-            "en": "MG 1 / 100 Gundam Astray ゴールドフレーム[スペシャルコーティング]"
-          },
-          "release_date": "2017-10",
-          "price_jpy": 8800,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "seed"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660210436000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "tamashii-1749",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "ROBOT_SPIRITS",
-          "subline": "ROBOT魂",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "デュエルガンダム(アサルトシュラウド)",
-            "zh": "决斗高达(アサルトシュラウド)",
-            "ko": "듀얼건담( 어설트 슈라우드 )",
-            "en": "Duel Gundam(アサルトシュラウド)"
-          },
-          "release_date": "2012-08-25",
-          "price_jpy": 4950,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "seed"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "tamashii_web_jp"
-          ],
-          "source_urls": [
-            "https://tamashiiweb.com/item/1749/",
-            "https://tamashiiweb.com/item_brand/robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
-          ]
-        },
-        {
-          "kit_id": "rg-rg-1-144-4543112753069000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "RG",
-          "subline": "RG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "RG 1 / 144 スカイグラスパー[ランチャー・ソードパック]",
-            "zh": "RG 1 / 144 スカイグラスパー[ランチャー・ソードパック]",
-            "ko": "RG 1 / 144 스카이 그래스퍼 [ 런처 소드 팩 ]",
-            "en": "RG 1 / 144 スカイグラスパー[ランチャー ソードパック]"
-          },
-          "release_date": "2012-02-29",
-          "price_jpy": 3300,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112753069000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137427/"
-          ]
-        },
-        {
-          "kit_id": "hg-hg-1-144-4543112582157000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "double_o",
-          "series_labels": {
-            "zh": "00",
-            "en": "00",
-            "ja": "00",
-            "ko": "00"
-          },
-          "names": {
-            "ja": "HG 1 / 144 ダブルオーライザー (ダブルオーガンダム+オーライザー) クリアカラーバージョン",
-            "zh": "HG 1 / 144 ダブルオーライザー (ダブルオー高达+オーライザー) 透明色バージョン",
-            "ko": "HG 1 / 144 더블오 라이저 ( 더블오 건담+ 오라이저 ) 클리어 컬러 버전",
-            "en": "HG 1 / 144 ダブルオーライザー (ダブルオーGundam+オーライザー) Clear Colorバージョン"
-          },
-          "release_date": "2009-03-20",
-          "price_jpy": 1885,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "gundam",
-            "00"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112582157000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-mbf-p03-l-4543112318916000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "1 / 100 MBF-P03 ガンダムアストレイ ブルーフレーム セカンドL(レッドバージョン)",
-            "zh": "1 / 100 MBF-P03 高达异端 ブルーフレーム セカンドL(レッドバージョン)",
-            "ko": "1 / 100 MBF-P03 건담아스트레이 블루 프레임 세컨드 L( 레드 버전 )",
-            "en": "1 / 100 MBF-P03 Gundam Astray ブルーフレーム セカンドL(レッドバージョン)"
-          },
-          "release_date": "2004-10-01",
-          "price_jpy": 2619,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "seed"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112318916000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4543112142023000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "1 / 144 ガンダムアストレイ (ブルーフレーム)",
-            "zh": "1 / 144 高达异端 (ブルーフレーム)",
-            "ko": "1 / 144 건담아스트레이 ( 블루 프레임 )",
-            "en": "1 / 144 Gundam Astray (ブルーフレーム)"
-          },
-          "release_date": "2002-11-16",
-          "price_jpy": 330,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "seed"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112142023000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "tamashii-16103",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "TAMASHII_OTHER",
-          "subline": "PROPLICA",
-          "series_key": "x",
-          "series_labels": {
-            "zh": "X",
-            "en": "X",
-            "ja": "X",
-            "ko": "X"
-          },
-          "names": {
-            "ja": "Gコントローラー",
-            "zh": "Gコントローラー",
-            "ko": "G컨트롤러",
-            "en": "Gコントローラー"
-          },
-          "release_date": "2027-02",
-          "price_jpy": 20350,
+          "release_date": "2027-04",
+          "price_jpy": 26400,
           "is_limited": true,
           "is_premium_bandai": false,
-          "watch_tags": [],
+          "watch_tags": [
+            "seed"
+          ],
           "interest_tags": [
-            "gundam"
+            "gundam",
+            "seed"
           ],
           "change_reasons": [
+            "name",
             "series"
           ],
           "source_ids": [
             "tamashii_web_jp"
           ],
           "source_urls": [
-            "https://tamashiiweb.com/item/16103/",
-            "https://tamashiiweb.com/item_brand/proplica/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+            "https://tamashiiweb.com/item/16191/",
+            "https://tamashiiweb.com/item_brand/metal_robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
           ]
         },
         {
-          "kit_id": "moncolle-x",
+          "kit_id": "tamashii-16192",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
+          "franchise": "gundam",
+          "grade_code": "METAL_ROBOT",
+          "subline": "METAL ROBOT魂",
+          "series_key": null,
+          "series_labels": null,
           "names": {
-            "ja": "メガライチュウX",
-            "zh": "メガライチュウX",
-            "ko": "메가라이츄X",
-            "en": "メガライチュウX"
+            "ja": "ブラックナイトスコード カルラ専用エフェクトパーツセット",
+            "zh": "ブラックナイトスコード カルラ専用エフェクトパーツセット",
+            "ko": "블랙 나이트 스쿼드 카루라 전용 이펙트 파츠 세트",
+            "en": "ブラックナイトスコード カルラ専用エフェクトパーツセット"
           },
-          "release_date": "2026-09",
-          "price_jpy": 1067,
-          "is_limited": false,
+          "release_date": "2027-04",
+          "price_jpy": 6050,
+          "is_limited": true,
           "is_premium_bandai": false,
-          "watch_tags": [],
+          "watch_tags": [
+            "seed"
+          ],
           "interest_tags": [
-            "pokemon"
+            "gundam",
+            "seed"
           ],
           "change_reasons": [
-            "price",
-            "source"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "takara_tomy_pokemon_jp",
-            "pokemon_center_jp"
+            "tamashii_web_jp"
           ],
           "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/mega_raichu_x/"
+            "https://tamashiiweb.com/item/16192/",
+            "https://tamashiiweb.com/item_brand/metal_robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
           ]
         },
         {
-          "kit_id": "lego-1641-1",
+          "kit_id": "converge-core56",
           "change_type": "changed",
-          "franchise": "lego",
-          "grade_code": "LEGO_SET",
-          "subline": "Basic Set",
-          "series_key": "lego_duplo",
-          "series_labels": {
-            "zh": "Duplo",
-            "en": "Duplo",
-            "ja": "Duplo",
-            "ko": "듀플로"
-          },
+          "franchise": "gundam",
+          "grade_code": "CONVERGE",
+          "subline": "FW GUNDAM CONVERGE CORE",
+          "series_key": null,
+          "series_labels": null,
           "names": {
-            "ja": "Giddy the Gator",
-            "zh": "Giddy the Gator",
-            "ko": "Giddy the Gator",
-            "en": "Giddy the Gator"
+            "ja": "FW GUNDAM CONVERGE CORE フリーダムガンダム＆プロヴィデンスガンダム【プレミアムバンダイ限定】",
+            "zh": "FW GUNDAM CONVERGE CORE フリーダムガンダム＆プロヴィデンスガンダム【プレミアムバンダイ限定】",
+            "ko": "FW GUNDAM CONVERGE CORE フリーダムガンダム＆プロヴィデンスガンダム【プレミアムバンダイ限定】",
+            "en": "FW GUNDAM CONVERGE CORE フリーダムガンダム＆プロヴィデンスガンダム【プレミアムバンダイ限定】"
           },
-          "release_date": "1989",
-          "price_jpy": null,
+          "release_date": "2027-03",
+          "price_jpy": 6360,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "bandai_candy_gundam_jp"
+          ],
+          "source_urls": [
+            "https://www.bandai.co.jp/candy/gundam/converge/core56/",
+            "https://www.bandai.co.jp/candy/gundam/converge/"
+          ]
+        },
+        {
+          "kit_id": "tamashii-16139",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "ストライクノワールガンダム (20th MEMORIAL COLOR)",
+            "zh": "ストライクノワールガンダム (20th MEMORIAL COLOR)",
+            "ko": "ストライクノワールガンダム (20th MEMORIAL COLOR)",
+            "en": "ストライクノワールガンダム (20th MEMORIAL COLOR)"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 39600,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16139/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-16032",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "TAMASHII_OTHER",
+          "subline": "ABSOLUTE ACT",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "ストライクフリーダムガンダム",
+            "zh": "ストライクフリーダムガンダム",
+            "ko": "ストライクフリーダムガンダム",
+            "en": "ストライクフリーダムガンダム"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 16500,
           "is_limited": false,
           "is_premium_bandai": false,
-          "watch_tags": [],
+          "watch_tags": [
+            "seed"
+          ],
           "interest_tags": [
-            "lego"
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16032/",
+            "https://tamashiiweb.com/item_brand/absolute-act/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "gframe-fapb33",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GFRAME",
+          "subline": "Mobile Suit Gundam G Frame FA",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "機動戦士ガンダム GフレームFA デスティニーガンダム【プレミアムバンダイ限定】",
+            "zh": "機動戦士ガンダム GフレームFA デスティニーガンダム【プレミアムバンダイ限定】",
+            "ko": "機動戦士ガンダム GフレームFA デスティニーガンダム【プレミアムバンダイ限定】",
+            "en": "機動戦士ガンダム GフレームFA デスティニーガンダム【プレミアムバンダイ限定】"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 5950,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "bandai_candy_gundam_jp"
+          ],
+          "source_urls": [
+            "https://www.bandai.co.jp/candy/gundam/gframe/faPb33/",
+            "https://www.bandai.co.jp/candy/gundam/gframe/"
+          ]
+        },
+        {
+          "kit_id": "gframe-fapb34",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GFRAME",
+          "subline": "Mobile Suit Gundam G Frame FA",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "機動戦士ガンダム GフレームFA デスティニーガンダムSpecII[最終決戦イメージカラー]【プレミアムバンダイ限定】",
+            "zh": "機動戦士ガンダム GフレームFA デスティニーガンダムSpecII[最終決戦イメージカラー]【プレミアムバンダイ限定】",
+            "ko": "기동전사 건담 G프레임 FA 데스티니건담SpecII [최종 결전 이미지 컬러]【프리미엄 반다이 한정】",
+            "en": "機動戦士ガンダム GフレームFA デスティニーガンダムSpecII[最終決戦イメージカラー]【プレミアムバンダイ限定】"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 5950,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "bandai_candy_gundam_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandai.co.jp/candy/gundam/gframe/faPb34/",
+            "https://www.bandai.co.jp/candy/gundam/gframe/"
+          ]
+        },
+        {
+          "kit_id": "tamashii-16006",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "ミーティア",
+            "zh": "ミーティア",
+            "ko": "ミーティア",
+            "en": "ミーティア"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 88000,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16006/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-15971",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "FIGUARTS_MINI",
+          "subline": "Figuarts mini",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "Figuarts mini カガリ・ユラ・アスハ",
+            "zh": "Figuarts mini カガリ・ユラ・アスハ",
+            "ko": "Figuarts mini 카가리 유라 아스하",
+            "en": "Figuarts mini カガリ・ユラ・アスハ"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 3850,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/15971/",
+            "https://tamashiiweb.com/item_brand/figuarts_mini/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-15970",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "FIGUARTS_MINI",
+          "subline": "Figuarts mini",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "Figuarts mini シン・アスカ",
+            "zh": "Figuarts mini シン・アスカ",
+            "ko": "Figuarts mini 신 아스카",
+            "en": "Figuarts mini シン・アスカ"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 3850,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/15970/",
+            "https://tamashiiweb.com/item_brand/figuarts_mini/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-15969",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "FIGUARTS_MINI",
+          "subline": "Figuarts mini",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "Figuarts mini ルナマリア・ホーク",
+            "zh": "Figuarts mini ルナマリア・ホーク",
+            "ko": "Figuarts mini 루나마리아 호크",
+            "en": "Figuarts mini ルナマリア・ホーク"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 3850,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/15969/",
+            "https://tamashiiweb.com/item_brand/figuarts_mini/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-16151",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_ROBOT",
+          "subline": "METAL ROBOT魂",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "インフィニットジャスティスガンダム（SEED FREEDOM ZERO Ver.）",
+            "zh": "インフィニットジャスティスガンダム（SEED FREEDOM ZERO Ver.）",
+            "ko": "インフィニットジャスティスガンダム（SEED FREEDOM ZERO Ver.）",
+            "en": "インフィニットジャスティスガンダム（SEED FREEDOM ZERO Ver.）"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 19800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16151/",
+            "https://tamashiiweb.com/item_brand/metal_robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-16166",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "ストライクガンダム ENGINEERING EDITION",
+            "zh": "ストライクガンダム ENGINEERING EDITION",
+            "ko": "ストライクガンダム ENGINEERING EDITION",
+            "en": "ストライクガンダム ENGINEERING EDITION"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 19800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16166/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-16165",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_ROBOT",
+          "subline": "METAL ROBOT魂",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "ライジングフリーダムガンダム ラディアンスグランジャー",
+            "zh": "ライジングフリーダムガンダム ラディアンスグランジャー",
+            "ko": "라이징 프리덤 건담 래디언스 그랜저",
+            "en": "ライジングフリーダムガンダム ラディアンスグランジャー"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 26400,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16165/",
+            "https://tamashiiweb.com/item_brand/metal_robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "gframe-fapb35",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GFRAME",
+          "subline": "Mobile Suit Gundam G Frame FA",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "機動戦士ガンダム GフレームFA V2アサルトバスターガンダム オプションパーツセット＆大口径ビームキャノン【PB限定】",
+            "zh": "機動戦士ガンダム GフレームFA V2アサルトバスターガンダム オプションパーツセット＆大口径ビームキャノン【PB限定】",
+            "ko": "기동전사 건담 G프레임 FA V2어설트 버스터 건담 옵션 파츠 세트 & 대구경 빔 캐논【PB 한정】",
+            "en": "機動戦士ガンダム GフレームFA V2アサルトバスターガンダム オプションパーツセット＆大口径ビームキャノン【PB限定】"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 4500,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "bandai_candy_gundam_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandai.co.jp/candy/gundam/gframe/faPb35/",
+            "https://www.bandai.co.jp/candy/gundam/gframe/"
+          ]
+        },
+        {
+          "kit_id": "tamashii-15981",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "FIGUARTS_MINI",
+          "subline": "Figuarts mini",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "Figuarts mini アスラン・ザラ （2026年12月発売）",
+            "zh": "Figuarts mini アスラン・ザラ （2026年12月発売）",
+            "ko": "Figuarts mini 아스란 자라 (2026년 12월 발매)",
+            "en": "Figuarts mini アスラン・ザラ （2026年12月発売）"
+          },
+          "release_date": "2026-12",
+          "price_jpy": 3850,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/15981/",
+            "https://tamashiiweb.com/item_brand/figuarts_mini/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-15982",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "FIGUARTS_MINI",
+          "subline": "Figuarts mini",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "Figuarts mini キラ・ヤマト （2026年12月発売）",
+            "zh": "Figuarts mini キラ・ヤマト （2026年12月発売）",
+            "ko": "Figuarts mini 키라 야마토 (2026년 12월 발매)",
+            "en": "Figuarts mini キラ・ヤマト （2026年12月発売）"
+          },
+          "release_date": "2026-12",
+          "price_jpy": 3850,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/15982/",
+            "https://tamashiiweb.com/item_brand/figuarts_mini/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-15983",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "FIGUARTS_MINI",
+          "subline": "Figuarts mini",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "Figuarts mini ラクス・クライン （2026年12月発売）",
+            "zh": "Figuarts mini ラクス・クライン （2026年12月発売）",
+            "ko": "Figuarts mini 라크스 클라인 (2026년 12월 발매)",
+            "en": "Figuarts mini ラクス・クライン （2026年12月発売）"
+          },
+          "release_date": "2026-12",
+          "price_jpy": 3850,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/15983/",
+            "https://tamashiiweb.com/item_brand/figuarts_mini/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000254949",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＲＧ 1 / 144 ガンダムアストレイゴールドフレーム天ハナ",
+            "zh": "ＲＧ 1 / 144 高达异端ゴールドフレーム天ハナ【再贩】",
+            "ko": "RG 1/144 건담 어스트레이 골드 프레임 아마츠 하나",
+            "en": "ＲＧ 1 / 144 Gundam Astrayゴールドフレーム天ハナ[Reissue]"
+          },
+          "release_date": "2026-12",
+          "price_jpy": 3850,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
           ],
           "change_reasons": [
             "name"
           ],
           "source_ids": [
-            "rebrickable_lego"
+            "p_bandai_wayback"
           ],
           "source_urls": [
-            "https://rebrickable.com/sets/1641-1/"
+            "https://p-bandai.jp/item/item-1000254949/"
           ]
         },
         {
-          "kit_id": "pokemon-center-4904810075516",
+          "kit_id": "tamashii-15972",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_UNIVERSE",
+          "subline": "GUNDAM UNIVERSE",
+          "series_key": null,
+          "series_labels": null,
           "names": {
-            "ja": "モンコレ ぽこ あ ポケモン コレクション ピカチュウ（うすいろ）",
-            "zh": "モンコレ ぽこ あ 宝可梦 コレクション ピカチュウ（うすいろ）",
-            "ko": "몬콜레 포코 아 포켓몬 컬렉션 피카츄 (연한 색)",
-            "en": "モンコレ ぽこ あ Pokemon コレクション ピカチュウ (うすいろ)"
+            "ja": "ZGMF-X20A STRIKE FREEDOM GUNDAM RENEWAL",
+            "zh": "ZGMF-X20A STRIKE FREEDOM GUNDAM RENEWAL",
+            "ko": "ZGMF-X20A STRIKE FREEDOM GUNDAM RENEWAL",
+            "en": "ZGMF-X20A STRIKE FREEDOM GUNDAM RENEWAL"
           },
-          "release_date": null,
-          "price_jpy": 715,
+          "release_date": "2026-12",
+          "price_jpy": 4400,
           "is_limited": false,
           "is_premium_bandai": false,
-          "watch_tags": [],
+          "watch_tags": [
+            "seed"
+          ],
           "interest_tags": [
-            "pokemon"
+            "gundam",
+            "seed"
           ],
           "change_reasons": [
-            "source"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "pokemon_center_jp"
+            "tamashii_web_jp"
           ],
           "source_urls": [
-            "https://www.pokemoncenter-online.com/4904810075516.html"
-          ]
-        },
-        {
-          "kit_id": "moncolle-ms-07",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "リーフィア",
-            "zh": "リーフィア",
-            "ko": "리피아",
-            "en": "リーフィア"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "price",
-            "source"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/ms07/"
+            "https://tamashiiweb.com/item/15972/",
+            "https://tamashiiweb.com/item_brand/gundam_universe/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
           ]
         }
       ],
       "removed": [],
       "watched": [
         {
-          "kit_id": "rg-rg-1-144-4573102673961000",
+          "kit_id": "tamashii-16191",
           "change_type": "changed",
           "franchise": "gundam",
-          "grade_code": "RG",
-          "subline": "RG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
+          "grade_code": "METAL_ROBOT",
+          "subline": "METAL ROBOT魂",
+          "series_key": null,
+          "series_labels": null,
           "names": {
-            "ja": "RG 1 / 144 アカツキガンダム(オオワシ装備)",
-            "zh": "RG 1 / 144 晓高达(オオワシ装备)",
-            "ko": "RG 1 / 144 아카츠키건담( 오오와시 장비)",
-            "en": "RG 1 / 144 Akatsuki Gundam(オオワシEquipment)"
+            "ja": "ブラックナイトスコード カルラ",
+            "zh": "ブラックナイトスコード カルラ",
+            "ko": "블랙 나이트 스쿼드 카루라",
+            "en": "ブラックナイトスコード カルラ"
           },
-          "release_date": "2024-12-14",
-          "price_jpy": 8800,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102673961000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-4549660210436000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "MG 1 / 100 ガンダムアストレイ ゴールドフレーム[スペシャルコーティング]",
-            "zh": "MG 1 / 100 高达异端 ゴールドフレーム[スペシャルコーティング]",
-            "ko": "MG 1 / 100 건담아스트레이 골드 프레임 [ 스페셜 코팅 ]",
-            "en": "MG 1 / 100 Gundam Astray ゴールドフレーム[スペシャルコーティング]"
-          },
-          "release_date": "2017-10",
-          "price_jpy": 8800,
-          "is_limited": false,
+          "release_date": "2027-04",
+          "price_jpy": 26400,
+          "is_limited": true,
           "is_premium_bandai": false,
           "watch_tags": [
             "seed"
@@ -911,62 +1183,660 @@
             "seed"
           ],
           "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660210436000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "tamashii-1749",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "ROBOT_SPIRITS",
-          "subline": "ROBOT魂",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "デュエルガンダム(アサルトシュラウド)",
-            "zh": "决斗高达(アサルトシュラウド)",
-            "ko": "듀얼건담( 어설트 슈라우드 )",
-            "en": "Duel Gundam(アサルトシュラウド)"
-          },
-          "release_date": "2012-08-25",
-          "price_jpy": 4950,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "seed"
-          ],
-          "change_reasons": [
-            "name"
+            "name",
+            "series"
           ],
           "source_ids": [
             "tamashii_web_jp"
           ],
           "source_urls": [
-            "https://tamashiiweb.com/item/1749/",
-            "https://tamashiiweb.com/item_brand/robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+            "https://tamashiiweb.com/item/16191/",
+            "https://tamashiiweb.com/item_brand/metal_robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
           ]
         },
         {
-          "kit_id": "rg-rg-1-144-4543112753069000",
+          "kit_id": "tamashii-16192",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_ROBOT",
+          "subline": "METAL ROBOT魂",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "ブラックナイトスコード カルラ専用エフェクトパーツセット",
+            "zh": "ブラックナイトスコード カルラ専用エフェクトパーツセット",
+            "ko": "블랙 나이트 스쿼드 카루라 전용 이펙트 파츠 세트",
+            "en": "ブラックナイトスコード カルラ専用エフェクトパーツセット"
+          },
+          "release_date": "2027-04",
+          "price_jpy": 6050,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16192/",
+            "https://tamashiiweb.com/item_brand/metal_robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "converge-core56",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "CONVERGE",
+          "subline": "FW GUNDAM CONVERGE CORE",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "FW GUNDAM CONVERGE CORE フリーダムガンダム＆プロヴィデンスガンダム【プレミアムバンダイ限定】",
+            "zh": "FW GUNDAM CONVERGE CORE フリーダムガンダム＆プロヴィデンスガンダム【プレミアムバンダイ限定】",
+            "ko": "FW GUNDAM CONVERGE CORE フリーダムガンダム＆プロヴィデンスガンダム【プレミアムバンダイ限定】",
+            "en": "FW GUNDAM CONVERGE CORE フリーダムガンダム＆プロヴィデンスガンダム【プレミアムバンダイ限定】"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 6360,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "bandai_candy_gundam_jp"
+          ],
+          "source_urls": [
+            "https://www.bandai.co.jp/candy/gundam/converge/core56/",
+            "https://www.bandai.co.jp/candy/gundam/converge/"
+          ]
+        },
+        {
+          "kit_id": "tamashii-16139",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "ストライクノワールガンダム (20th MEMORIAL COLOR)",
+            "zh": "ストライクノワールガンダム (20th MEMORIAL COLOR)",
+            "ko": "ストライクノワールガンダム (20th MEMORIAL COLOR)",
+            "en": "ストライクノワールガンダム (20th MEMORIAL COLOR)"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 39600,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16139/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-16032",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "TAMASHII_OTHER",
+          "subline": "ABSOLUTE ACT",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "ストライクフリーダムガンダム",
+            "zh": "ストライクフリーダムガンダム",
+            "ko": "ストライクフリーダムガンダム",
+            "en": "ストライクフリーダムガンダム"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 16500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16032/",
+            "https://tamashiiweb.com/item_brand/absolute-act/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "gframe-fapb33",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GFRAME",
+          "subline": "Mobile Suit Gundam G Frame FA",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "機動戦士ガンダム GフレームFA デスティニーガンダム【プレミアムバンダイ限定】",
+            "zh": "機動戦士ガンダム GフレームFA デスティニーガンダム【プレミアムバンダイ限定】",
+            "ko": "機動戦士ガンダム GフレームFA デスティニーガンダム【プレミアムバンダイ限定】",
+            "en": "機動戦士ガンダム GフレームFA デスティニーガンダム【プレミアムバンダイ限定】"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 5950,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "bandai_candy_gundam_jp"
+          ],
+          "source_urls": [
+            "https://www.bandai.co.jp/candy/gundam/gframe/faPb33/",
+            "https://www.bandai.co.jp/candy/gundam/gframe/"
+          ]
+        },
+        {
+          "kit_id": "gframe-fapb34",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GFRAME",
+          "subline": "Mobile Suit Gundam G Frame FA",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "機動戦士ガンダム GフレームFA デスティニーガンダムSpecII[最終決戦イメージカラー]【プレミアムバンダイ限定】",
+            "zh": "機動戦士ガンダム GフレームFA デスティニーガンダムSpecII[最終決戦イメージカラー]【プレミアムバンダイ限定】",
+            "ko": "기동전사 건담 G프레임 FA 데스티니건담SpecII [최종 결전 이미지 컬러]【프리미엄 반다이 한정】",
+            "en": "機動戦士ガンダム GフレームFA デスティニーガンダムSpecII[最終決戦イメージカラー]【プレミアムバンダイ限定】"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 5950,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "bandai_candy_gundam_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandai.co.jp/candy/gundam/gframe/faPb34/",
+            "https://www.bandai.co.jp/candy/gundam/gframe/"
+          ]
+        },
+        {
+          "kit_id": "tamashii-16006",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "ミーティア",
+            "zh": "ミーティア",
+            "ko": "ミーティア",
+            "en": "ミーティア"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 88000,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16006/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-15971",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "FIGUARTS_MINI",
+          "subline": "Figuarts mini",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "Figuarts mini カガリ・ユラ・アスハ",
+            "zh": "Figuarts mini カガリ・ユラ・アスハ",
+            "ko": "Figuarts mini 카가리 유라 아스하",
+            "en": "Figuarts mini カガリ・ユラ・アスハ"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 3850,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/15971/",
+            "https://tamashiiweb.com/item_brand/figuarts_mini/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-15970",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "FIGUARTS_MINI",
+          "subline": "Figuarts mini",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "Figuarts mini シン・アスカ",
+            "zh": "Figuarts mini シン・アスカ",
+            "ko": "Figuarts mini 신 아스카",
+            "en": "Figuarts mini シン・アスカ"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 3850,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/15970/",
+            "https://tamashiiweb.com/item_brand/figuarts_mini/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-15969",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "FIGUARTS_MINI",
+          "subline": "Figuarts mini",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "Figuarts mini ルナマリア・ホーク",
+            "zh": "Figuarts mini ルナマリア・ホーク",
+            "ko": "Figuarts mini 루나마리아 호크",
+            "en": "Figuarts mini ルナマリア・ホーク"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 3850,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/15969/",
+            "https://tamashiiweb.com/item_brand/figuarts_mini/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-16151",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_ROBOT",
+          "subline": "METAL ROBOT魂",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "インフィニットジャスティスガンダム（SEED FREEDOM ZERO Ver.）",
+            "zh": "インフィニットジャスティスガンダム（SEED FREEDOM ZERO Ver.）",
+            "ko": "インフィニットジャスティスガンダム（SEED FREEDOM ZERO Ver.）",
+            "en": "インフィニットジャスティスガンダム（SEED FREEDOM ZERO Ver.）"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 19800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16151/",
+            "https://tamashiiweb.com/item_brand/metal_robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-16166",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "ストライクガンダム ENGINEERING EDITION",
+            "zh": "ストライクガンダム ENGINEERING EDITION",
+            "ko": "ストライクガンダム ENGINEERING EDITION",
+            "en": "ストライクガンダム ENGINEERING EDITION"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 19800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16166/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-16165",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_ROBOT",
+          "subline": "METAL ROBOT魂",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "ライジングフリーダムガンダム ラディアンスグランジャー",
+            "zh": "ライジングフリーダムガンダム ラディアンスグランジャー",
+            "ko": "라이징 프리덤 건담 래디언스 그랜저",
+            "en": "ライジングフリーダムガンダム ラディアンスグランジャー"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 26400,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16165/",
+            "https://tamashiiweb.com/item_brand/metal_robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "gframe-fapb35",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GFRAME",
+          "subline": "Mobile Suit Gundam G Frame FA",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "機動戦士ガンダム GフレームFA V2アサルトバスターガンダム オプションパーツセット＆大口径ビームキャノン【PB限定】",
+            "zh": "機動戦士ガンダム GフレームFA V2アサルトバスターガンダム オプションパーツセット＆大口径ビームキャノン【PB限定】",
+            "ko": "기동전사 건담 G프레임 FA V2어설트 버스터 건담 옵션 파츠 세트 & 대구경 빔 캐논【PB 한정】",
+            "en": "機動戦士ガンダム GフレームFA V2アサルトバスターガンダム オプションパーツセット＆大口径ビームキャノン【PB限定】"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 4500,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "bandai_candy_gundam_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandai.co.jp/candy/gundam/gframe/faPb35/",
+            "https://www.bandai.co.jp/candy/gundam/gframe/"
+          ]
+        },
+        {
+          "kit_id": "tamashii-15981",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "FIGUARTS_MINI",
+          "subline": "Figuarts mini",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "Figuarts mini アスラン・ザラ （2026年12月発売）",
+            "zh": "Figuarts mini アスラン・ザラ （2026年12月発売）",
+            "ko": "Figuarts mini 아스란 자라 (2026년 12월 발매)",
+            "en": "Figuarts mini アスラン・ザラ （2026年12月発売）"
+          },
+          "release_date": "2026-12",
+          "price_jpy": 3850,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/15981/",
+            "https://tamashiiweb.com/item_brand/figuarts_mini/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-15982",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "FIGUARTS_MINI",
+          "subline": "Figuarts mini",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "Figuarts mini キラ・ヤマト （2026年12月発売）",
+            "zh": "Figuarts mini キラ・ヤマト （2026年12月発売）",
+            "ko": "Figuarts mini 키라 야마토 (2026년 12월 발매)",
+            "en": "Figuarts mini キラ・ヤマト （2026年12月発売）"
+          },
+          "release_date": "2026-12",
+          "price_jpy": 3850,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/15982/",
+            "https://tamashiiweb.com/item_brand/figuarts_mini/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-15983",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "FIGUARTS_MINI",
+          "subline": "Figuarts mini",
+          "series_key": null,
+          "series_labels": null,
+          "names": {
+            "ja": "Figuarts mini ラクス・クライン （2026年12月発売）",
+            "zh": "Figuarts mini ラクス・クライン （2026年12月発売）",
+            "ko": "Figuarts mini 라크스 클라인 (2026년 12월 발매)",
+            "en": "Figuarts mini ラクス・クライン （2026年12月発売）"
+          },
+          "release_date": "2026-12",
+          "price_jpy": 3850,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "seed"
+          ],
+          "change_reasons": [
+            "name",
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/15983/",
+            "https://tamashiiweb.com/item_brand/figuarts_mini/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000254949",
           "change_type": "changed",
           "franchise": "gundam",
           "grade_code": "RG",
-          "subline": "RG",
+          "subline": "プレミアムバンダイ",
           "series_key": "seed",
           "series_labels": {
             "zh": "SEED",
@@ -975,14 +1845,14 @@
             "ko": "SEED"
           },
           "names": {
-            "ja": "RG 1 / 144 スカイグラスパー[ランチャー・ソードパック]",
-            "zh": "RG 1 / 144 スカイグラスパー[ランチャー・ソードパック]",
-            "ko": "RG 1 / 144 스카이 그래스퍼 [ 런처 소드 팩 ]",
-            "en": "RG 1 / 144 スカイグラスパー[ランチャー ソードパック]"
+            "ja": "ＲＧ 1 / 144 ガンダムアストレイゴールドフレーム天ハナ",
+            "zh": "ＲＧ 1 / 144 高达异端ゴールドフレーム天ハナ【再贩】",
+            "ko": "RG 1/144 건담 어스트레이 골드 프레임 아마츠 하나",
+            "en": "ＲＧ 1 / 144 Gundam Astrayゴールドフレーム天ハナ[Reissue]"
           },
-          "release_date": "2012-02-29",
-          "price_jpy": 3300,
-          "is_limited": false,
+          "release_date": "2026-12",
+          "price_jpy": 3850,
+          "is_limited": true,
           "is_premium_bandai": true,
           "watch_tags": [
             "seed"
@@ -996,76 +1866,28 @@
             "name"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
             "p_bandai_wayback"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112753069000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137427/"
+            "https://p-bandai.jp/item/item-1000254949/"
           ]
         },
         {
-          "kit_id": "hg-hg-1-144-4543112582157000",
+          "kit_id": "tamashii-15972",
           "change_type": "changed",
           "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "double_o",
-          "series_labels": {
-            "zh": "00",
-            "en": "00",
-            "ja": "00",
-            "ko": "00"
-          },
+          "grade_code": "GUNDAM_UNIVERSE",
+          "subline": "GUNDAM UNIVERSE",
+          "series_key": null,
+          "series_labels": null,
           "names": {
-            "ja": "HG 1 / 144 ダブルオーライザー (ダブルオーガンダム+オーライザー) クリアカラーバージョン",
-            "zh": "HG 1 / 144 ダブルオーライザー (ダブルオー高达+オーライザー) 透明色バージョン",
-            "ko": "HG 1 / 144 더블오 라이저 ( 더블오 건담+ 오라이저 ) 클리어 컬러 버전",
-            "en": "HG 1 / 144 ダブルオーライザー (ダブルオーGundam+オーライザー) Clear Colorバージョン"
+            "ja": "ZGMF-X20A STRIKE FREEDOM GUNDAM RENEWAL",
+            "zh": "ZGMF-X20A STRIKE FREEDOM GUNDAM RENEWAL",
+            "ko": "ZGMF-X20A STRIKE FREEDOM GUNDAM RENEWAL",
+            "en": "ZGMF-X20A STRIKE FREEDOM GUNDAM RENEWAL"
           },
-          "release_date": "2009-03-20",
-          "price_jpy": 1885,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "gundam",
-            "00"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112582157000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-mbf-p03-l-4543112318916000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "1 / 100 MBF-P03 ガンダムアストレイ ブルーフレーム セカンドL(レッドバージョン)",
-            "zh": "1 / 100 MBF-P03 高达异端 ブルーフレーム セカンドL(レッドバージョン)",
-            "ko": "1 / 100 MBF-P03 건담아스트레이 블루 프레임 세컨드 L( 레드 버전 )",
-            "en": "1 / 100 MBF-P03 Gundam Astray ブルーフレーム セカンドL(レッドバージョン)"
-          },
-          "release_date": "2004-10-01",
-          "price_jpy": 2619,
+          "release_date": "2026-12",
+          "price_jpy": 4400,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [
@@ -1076,53 +1898,15 @@
             "seed"
           ],
           "change_reasons": [
-            "name"
+            "name",
+            "series"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp"
+            "tamashii_web_jp"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112318916000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4543112142023000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "1 / 144 ガンダムアストレイ (ブルーフレーム)",
-            "zh": "1 / 144 高达异端 (ブルーフレーム)",
-            "ko": "1 / 144 건담아스트레이 ( 블루 프레임 )",
-            "en": "1 / 144 Gundam Astray (ブルーフレーム)"
-          },
-          "release_date": "2002-11-16",
-          "price_jpy": 330,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "seed"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112142023000&grp_id=5325"
+            "https://tamashiiweb.com/item/15972/",
+            "https://tamashiiweb.com/item_brand/gundam_universe/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
           ]
         }
       ],
