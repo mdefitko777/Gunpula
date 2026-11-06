@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-06T00:11:41.633Z",
+  "updated_at": "2026-11-06T01:45:02.478Z",
   "sources": [
     {
       "source_id": "tamashii_news",
@@ -83,6 +83,10 @@
     }
   ],
   "fetch_errors": [
+    {
+      "source_id": "bandai_hobby_youtube",
+      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuxB1suCoCqAKiljh_0xE4A returned 404; https://www.youtube.com/feeds/videos.xml?playlist_id=UUuxB1suCoCqAKiljh_0xE4A returned 404"
+    },
     {
       "source_id": "gundam_channel_youtube",
       "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UC7wu64jFsV02bbu6UHUd7JA returned 404; https://www.youtube.com/feeds/videos.xml?playlist_id=UU7wu64jFsV02bbu6UHUd7JA returned 404"
