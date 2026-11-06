@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-05",
+  "updated_at": "2026-11-06",
   "scope": "Individual model kit and official collectible catalog imported from Japanese official BANDAI SPIRITS, Bandai Candy, Bandai Gashapon, Bandai Hobby, Tamashii Web, Kotobukiya, and Takara Tomy sources. Covers Gundam, Armored Core, Pokemon, and BEYBLADE X records. Records are needs_review until field-level human checks are complete.",
   "kits": [
     {
@@ -2033748,10 +2033748,10 @@
         }
       },
       "names": {
-        "ja": "Crocodile",
-        "en": "Crocodile",
-        "zh": "Crocodile",
-        "ko": "Crocodile"
+        "ja": "Giddy the Gator",
+        "en": "Giddy the Gator",
+        "zh": "Giddy the Gator",
+        "ko": "Giddy the Gator"
       }
     },
     {
@@ -2184552,7 +2184552,7 @@
       "universe": "Pokemon",
       "work_title": "Pokemon",
       "release_date": "2026-09",
-      "price_jpy": null,
+      "price_jpy": 1067,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2184570,6 +2184570,17 @@
             "release_date"
           ],
           "confidence": "high"
+        },
+        {
+          "source_id": "pokemon_center_jp",
+          "url": "https://www.pokemoncenter-online.com/4904810075271.html",
+          "fields": [
+            "names",
+            "price_jpy",
+            "images",
+            "grade_code"
+          ],
+          "confidence": "medium"
         }
       ],
       "tags": [
@@ -2258577,7 +2258588,7 @@
       "universe": "Pokemon",
       "work_title": "Pokemon",
       "release_date": null,
-      "price_jpy": 715,
+      "price_jpy": null,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2258595,17 +2258606,6 @@
             "release_date"
           ],
           "confidence": "high"
-        },
-        {
-          "source_id": "pokemon_center_jp",
-          "url": "https://www.pokemoncenter-online.com/4904810996286.html",
-          "fields": [
-            "names",
-            "price_jpy",
-            "images",
-            "grade_code"
-          ],
-          "confidence": "medium"
         }
       ],
       "tags": [
@@ -2295066,6 +2295066,66 @@
       }
     },
     {
+      "kit_id": "pokemon-center-4521329420752",
+      "franchise": "pokemon",
+      "grade_code": "POKE_PLUSH",
+      "subline": "Pokemon Center Plush",
+      "number": "4521329420752",
+      "scale": "non-scale",
+      "names": {
+        "ja": "760 ぬいぐるみ Pok&eacute;mon fit キテルグマ",
+        "en": "760 ぬいぐるみ Pok&eacute;mon fit キテルグマ",
+        "zh": "760 ぬいぐるみ Pok&eacute;mon fit キテルグマ",
+        "ko": "760 ぬいぐるみ Pok&eacute;mon fit キテルグマ"
+      },
+      "images": {
+        "box_art_url": "./assets/catalog/pokemon/pokemon-center-4521329420752-01-9a46afe3bb.jpg",
+        "box_art_source_id": "pokemon_center_jp"
+      },
+      "gallery_image_urls": [
+        "./assets/catalog/pokemon/pokemon-center-4521329420752-01-9a46afe3bb.jpg",
+        "https://www.pokemoncenter-online.com/a/img/item/4521329420752/M/b2212033499c3941996910ef86cfc66a833fa0a5bbd612baf2ed992d59d28195.jpg"
+      ],
+      "universe": "Pokemon",
+      "work_title": "Pokemon",
+      "release_date": null,
+      "price_jpy": 1760,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://www.pokemoncenter-online.com/4521329420752.html"
+      ],
+      "source_refs": [
+        {
+          "source_id": "pokemon_center_jp",
+          "url": "https://www.pokemoncenter-online.com/4521329420752.html",
+          "fields": [
+            "names",
+            "price_jpy",
+            "images",
+            "grade_code"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "pokemon",
+        "pokemon center",
+        "poke_plush"
+      ],
+      "notes": "Imported from Pokemon Center Online Japan category page.",
+      "series": {
+        "key": "pokemon",
+        "sort": 400,
+        "labels": {
+          "zh": "宝可梦",
+          "en": "Pokemon",
+          "ja": "ポケモン",
+          "ko": "포켓몬"
+        }
+      }
+    },
+    {
       "kit_id": "pokemon-center-4521329420875",
       "franchise": "pokemon",
       "grade_code": "POKE_PLUSH",
@@ -2299145,6 +2299205,301 @@
       }
     },
     {
+      "kit_id": "pokemon-center-4521329453880",
+      "franchise": "pokemon",
+      "grade_code": "POKE_PLUSH",
+      "subline": "Pokemon Center Plush",
+      "number": "4521329453880",
+      "scale": "non-scale",
+      "names": {
+        "ja": "エルフーンのみがわりぬいぐるみ",
+        "en": "エルフーンのみがわりぬいぐるみ",
+        "zh": "エルフーンのみがわりぬいぐるみ",
+        "ko": "エルフーンのみがわりぬいぐるみ"
+      },
+      "images": {
+        "box_art_url": "https://www.pokemoncenter-online.com/a/img/item/4521329453880/M/ec946c668e5a7380cce5716dd72fa659cb22c1e2045a69e5e56023edbfecea54.jpg",
+        "box_art_source_id": "pokemon_center_jp"
+      },
+      "gallery_image_urls": [
+        "https://www.pokemoncenter-online.com/a/img/item/4521329453880/M/ec946c668e5a7380cce5716dd72fa659cb22c1e2045a69e5e56023edbfecea54.jpg"
+      ],
+      "universe": "Pokemon",
+      "work_title": "Pokemon",
+      "release_date": null,
+      "price_jpy": 1760,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://www.pokemoncenter-online.com/4521329453880.html"
+      ],
+      "source_refs": [
+        {
+          "source_id": "pokemon_center_jp",
+          "url": "https://www.pokemoncenter-online.com/4521329453880.html",
+          "fields": [
+            "names",
+            "price_jpy",
+            "images",
+            "grade_code"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "pokemon",
+        "pokemon center",
+        "poke_plush"
+      ],
+      "notes": "Imported from Pokemon Center Online Japan category page.",
+      "series": {
+        "key": "pokemon",
+        "sort": 400,
+        "labels": {
+          "zh": "宝可梦",
+          "en": "Pokemon",
+          "ja": "ポケモン",
+          "ko": "포켓몬"
+        }
+      }
+    },
+    {
+      "kit_id": "pokemon-center-4521329453941",
+      "franchise": "pokemon",
+      "grade_code": "POKE_PLUSH",
+      "subline": "Pokemon Center Plush",
+      "number": "4521329453941",
+      "scale": "non-scale",
+      "names": {
+        "ja": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみピカチュウ",
+        "en": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみピカチュウ",
+        "zh": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみピカチュウ",
+        "ko": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみピカチュウ"
+      },
+      "images": {
+        "box_art_url": "https://www.pokemoncenter-online.com/a/img/item/4521329453941/M/f80e2ecfca43fbe7d1479fcfbd843135793494832d1c90097917d5a751d51a1b.jpg",
+        "box_art_source_id": "pokemon_center_jp"
+      },
+      "gallery_image_urls": [
+        "https://www.pokemoncenter-online.com/a/img/item/4521329453941/M/f80e2ecfca43fbe7d1479fcfbd843135793494832d1c90097917d5a751d51a1b.jpg"
+      ],
+      "universe": "Pokemon",
+      "work_title": "Pokemon",
+      "release_date": null,
+      "price_jpy": 3520,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://www.pokemoncenter-online.com/4521329453941.html"
+      ],
+      "source_refs": [
+        {
+          "source_id": "pokemon_center_jp",
+          "url": "https://www.pokemoncenter-online.com/4521329453941.html",
+          "fields": [
+            "names",
+            "price_jpy",
+            "images",
+            "grade_code"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "pokemon",
+        "pokemon center",
+        "poke_plush"
+      ],
+      "notes": "Imported from Pokemon Center Online Japan category page.",
+      "series": {
+        "key": "pokemon",
+        "sort": 400,
+        "labels": {
+          "zh": "宝可梦",
+          "en": "Pokemon",
+          "ja": "ポケモン",
+          "ko": "포켓몬"
+        }
+      }
+    },
+    {
+      "kit_id": "pokemon-center-4521329453958",
+      "franchise": "pokemon",
+      "grade_code": "POKE_PLUSH",
+      "subline": "Pokemon Center Plush",
+      "number": "4521329453958",
+      "scale": "non-scale",
+      "names": {
+        "ja": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみヤドン",
+        "en": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみヤドン",
+        "zh": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみヤドン",
+        "ko": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみヤドン"
+      },
+      "images": {
+        "box_art_url": "https://www.pokemoncenter-online.com/a/img/item/4521329453958/M/499f9127386c92bfc122460e57b196c1489e5b72617da009279f85a6de0338d0.jpg",
+        "box_art_source_id": "pokemon_center_jp"
+      },
+      "gallery_image_urls": [
+        "https://www.pokemoncenter-online.com/a/img/item/4521329453958/M/499f9127386c92bfc122460e57b196c1489e5b72617da009279f85a6de0338d0.jpg"
+      ],
+      "universe": "Pokemon",
+      "work_title": "Pokemon",
+      "release_date": null,
+      "price_jpy": 3520,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://www.pokemoncenter-online.com/4521329453958.html"
+      ],
+      "source_refs": [
+        {
+          "source_id": "pokemon_center_jp",
+          "url": "https://www.pokemoncenter-online.com/4521329453958.html",
+          "fields": [
+            "names",
+            "price_jpy",
+            "images",
+            "grade_code"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "pokemon",
+        "pokemon center",
+        "poke_plush"
+      ],
+      "notes": "Imported from Pokemon Center Online Japan category page.",
+      "series": {
+        "key": "pokemon",
+        "sort": 400,
+        "labels": {
+          "zh": "宝可梦",
+          "en": "Pokemon",
+          "ja": "ポケモン",
+          "ko": "포켓몬"
+        }
+      }
+    },
+    {
+      "kit_id": "pokemon-center-4521329453972",
+      "franchise": "pokemon",
+      "grade_code": "POKE_PLUSH",
+      "subline": "Pokemon Center Plush",
+      "number": "4521329453972",
+      "scale": "non-scale",
+      "names": {
+        "ja": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみカラカラ",
+        "en": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみカラカラ",
+        "zh": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみカラカラ",
+        "ko": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみカラカラ"
+      },
+      "images": {
+        "box_art_url": "https://www.pokemoncenter-online.com/a/img/item/4521329453972/M/a21e18493b5f4e3c10c50c1795191549cbb48319d18754ab0daf0225f322021f.jpg",
+        "box_art_source_id": "pokemon_center_jp"
+      },
+      "gallery_image_urls": [
+        "https://www.pokemoncenter-online.com/a/img/item/4521329453972/M/a21e18493b5f4e3c10c50c1795191549cbb48319d18754ab0daf0225f322021f.jpg"
+      ],
+      "universe": "Pokemon",
+      "work_title": "Pokemon",
+      "release_date": null,
+      "price_jpy": 3520,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://www.pokemoncenter-online.com/4521329453972.html"
+      ],
+      "source_refs": [
+        {
+          "source_id": "pokemon_center_jp",
+          "url": "https://www.pokemoncenter-online.com/4521329453972.html",
+          "fields": [
+            "names",
+            "price_jpy",
+            "images",
+            "grade_code"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "pokemon",
+        "pokemon center",
+        "poke_plush"
+      ],
+      "notes": "Imported from Pokemon Center Online Japan category page.",
+      "series": {
+        "key": "pokemon",
+        "sort": 400,
+        "labels": {
+          "zh": "宝可梦",
+          "en": "Pokemon",
+          "ja": "ポケモン",
+          "ko": "포켓몬"
+        }
+      }
+    },
+    {
+      "kit_id": "pokemon-center-4521329453989",
+      "franchise": "pokemon",
+      "grade_code": "POKE_PLUSH",
+      "subline": "Pokemon Center Plush",
+      "number": "4521329453989",
+      "scale": "non-scale",
+      "names": {
+        "ja": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみゲンガー",
+        "en": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみゲンガー",
+        "zh": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみゲンガー",
+        "ko": "もっちりぬいぐるみ Pok&eacute;mon Sleep おやすみゲンガー"
+      },
+      "images": {
+        "box_art_url": "https://www.pokemoncenter-online.com/a/img/item/4521329453989/M/b758d8600f3c000ec8fc68637e030af642e7f2eeca3419ca5701a0e1d547270e.jpg",
+        "box_art_source_id": "pokemon_center_jp"
+      },
+      "gallery_image_urls": [
+        "https://www.pokemoncenter-online.com/a/img/item/4521329453989/M/b758d8600f3c000ec8fc68637e030af642e7f2eeca3419ca5701a0e1d547270e.jpg"
+      ],
+      "universe": "Pokemon",
+      "work_title": "Pokemon",
+      "release_date": null,
+      "price_jpy": 3520,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://www.pokemoncenter-online.com/4521329453989.html"
+      ],
+      "source_refs": [
+        {
+          "source_id": "pokemon_center_jp",
+          "url": "https://www.pokemoncenter-online.com/4521329453989.html",
+          "fields": [
+            "names",
+            "price_jpy",
+            "images",
+            "grade_code"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "pokemon",
+        "pokemon center",
+        "poke_plush"
+      ],
+      "notes": "Imported from Pokemon Center Online Japan category page.",
+      "series": {
+        "key": "pokemon",
+        "sort": 400,
+        "labels": {
+          "zh": "宝可梦",
+          "en": "Pokemon",
+          "ja": "ポケモン",
+          "ko": "포켓몬"
+        }
+      }
+    },
+    {
       "kit_id": "pokemon-center-4521329454146",
       "franchise": "pokemon",
       "grade_code": "POKE_PLUSH",
@@ -2299742,6 +2300097,124 @@
         "en": "スマホスタンドにもなるフォトフレーム Pok&eacute;mon Timeless Adventure",
         "zh": "スマホスタンドにもなるフォトフレーム Pok&eacute;mon Timeless Adventure",
         "ko": "스마트폰 스탠드도 되는 포토 프레임 Pokémon Timeless Adventure"
+      }
+    },
+    {
+      "kit_id": "pokemon-center-4521329455259",
+      "franchise": "pokemon",
+      "grade_code": "POKE_PLUSH",
+      "subline": "Pokemon Center Plush",
+      "number": "4521329455259",
+      "scale": "non-scale",
+      "names": {
+        "ja": "エルフーンのみがわりぬいぐるみマスコット",
+        "en": "エルフーンのみがわりぬいぐるみマスコット",
+        "zh": "エルフーンのみがわりぬいぐるみマスコット",
+        "ko": "エルフーンのみがわりぬいぐるみマスコット"
+      },
+      "images": {
+        "box_art_url": "https://www.pokemoncenter-online.com/a/img/item/4521329455259/M/5dc98bdc9479d591e84697f9f1ed15299ee440d7e2f5aac55f2d9a7db42ca069.jpg",
+        "box_art_source_id": "pokemon_center_jp"
+      },
+      "gallery_image_urls": [
+        "https://www.pokemoncenter-online.com/a/img/item/4521329455259/M/5dc98bdc9479d591e84697f9f1ed15299ee440d7e2f5aac55f2d9a7db42ca069.jpg"
+      ],
+      "universe": "Pokemon",
+      "work_title": "Pokemon",
+      "release_date": null,
+      "price_jpy": 1320,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://www.pokemoncenter-online.com/4521329455259.html"
+      ],
+      "source_refs": [
+        {
+          "source_id": "pokemon_center_jp",
+          "url": "https://www.pokemoncenter-online.com/4521329455259.html",
+          "fields": [
+            "names",
+            "price_jpy",
+            "images",
+            "grade_code"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "pokemon",
+        "pokemon center",
+        "poke_plush"
+      ],
+      "notes": "Imported from Pokemon Center Online Japan category page.",
+      "series": {
+        "key": "pokemon",
+        "sort": 400,
+        "labels": {
+          "zh": "宝可梦",
+          "en": "Pokemon",
+          "ja": "ポケモン",
+          "ko": "포켓몬"
+        }
+      }
+    },
+    {
+      "kit_id": "pokemon-center-4521329455273",
+      "franchise": "pokemon",
+      "grade_code": "POKE_PLUSH",
+      "subline": "Pokemon Center Plush",
+      "number": "4521329455273",
+      "scale": "non-scale",
+      "names": {
+        "ja": "12インチ エルフーンのみがわりぬいぐるみ",
+        "en": "12インチ エルフーンのみがわりぬいぐるみ",
+        "zh": "12インチ エルフーンのみがわりぬいぐるみ",
+        "ko": "12インチ エルフーンのみがわりぬいぐるみ"
+      },
+      "images": {
+        "box_art_url": "https://www.pokemoncenter-online.com/a/img/item/4521329455273/M/59d2bde161759301b54a2dd937dd365c8a10b1f93ea68b462949f563d75f54b0.jpg",
+        "box_art_source_id": "pokemon_center_jp"
+      },
+      "gallery_image_urls": [
+        "https://www.pokemoncenter-online.com/a/img/item/4521329455273/M/59d2bde161759301b54a2dd937dd365c8a10b1f93ea68b462949f563d75f54b0.jpg"
+      ],
+      "universe": "Pokemon",
+      "work_title": "Pokemon",
+      "release_date": null,
+      "price_jpy": 4840,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://www.pokemoncenter-online.com/4521329455273.html"
+      ],
+      "source_refs": [
+        {
+          "source_id": "pokemon_center_jp",
+          "url": "https://www.pokemoncenter-online.com/4521329455273.html",
+          "fields": [
+            "names",
+            "price_jpy",
+            "images",
+            "grade_code"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "pokemon",
+        "pokemon center",
+        "poke_plush"
+      ],
+      "notes": "Imported from Pokemon Center Online Japan category page.",
+      "series": {
+        "key": "pokemon",
+        "sort": 400,
+        "labels": {
+          "zh": "宝可梦",
+          "en": "Pokemon",
+          "ja": "ポケモン",
+          "ko": "포켓몬"
+        }
       }
     },
     {
@@ -2300503,7 +2300976,7 @@
       "tags": [
         "pokemon",
         "pokemon center",
-        "poke_goods"
+        "poke_moncolle"
       ],
       "notes": "Imported from Pokemon Center Online Japan category page.",
       "series": {
