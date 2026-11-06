@@ -1007,11 +1007,15 @@ function previousSeries(kit) {
 }
 
 function seriesForKit(kit) {
+  const series = classifySeries(kit);
+  // Only a product that would otherwise be "mixed" takes the series of its
+  // linked suits' works — never one the name rules already placed.
+  if (kit.franchise === "gundam" && series?.key === "mixed") return seriesFromKitWorks(kit) || series;
+  return series;
+}
+
+function classifySeries(kit) {
   const previous = previousSeries(kit);
-  if (kit.franchise === "gundam" && (!previous || previous.key === "mixed")) {
-    const linked = seriesFromKitWorks(kit);
-    if (linked) return linked;
-  }
   if (previous) {
     return previous;
   }
