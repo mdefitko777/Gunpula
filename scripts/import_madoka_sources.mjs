@@ -2137,6 +2137,9 @@ function coreKey(kit) {
 }
 
 function sameProduct(a, b) {
+  // A stored record that already absorbed this very page is the same product.
+  const urlsA = new Set((a.source_refs || []).map((ref) => ref.url));
+  if ((b.source_refs || []).length && b.source_refs.every((ref) => urlsA.has(ref.url))) return true;
   const sourcesA = new Set((a.source_refs || []).map((ref) => ref.source_id));
   if ((b.source_refs || []).some((ref) => sourcesA.has(ref.source_id))) return false;
   return a.work_title === b.work_title || (a.price_jpy != null && a.price_jpy === b.price_jpy);
@@ -2179,9 +2182,10 @@ function dedupe(imported, previousMadoka) {
   const kept = [];
   for (const group of groups.values()) {
     if (group.length < 2) continue;
-    // Previous records rank first within a source rank so they are never the
-    // one folded away.
-    group.sort((a, b) => sourceRank(a) - sourceRank(b) || Number(!previousIds.has(a.kit_id)) - Number(!previousIds.has(b.kit_id)));
+    // Records already in the catalog come first, so a source that appears
+    // later (goodsmile.com back from maintenance) is folded into the record
+    // people already have instead of standing beside it; then source rank.
+    group.sort((a, b) => Number(!previousIds.has(a.kit_id)) - Number(!previousIds.has(b.kit_id)) || sourceRank(a) - sourceRank(b));
     const winners = [];
     for (const kit of group) {
       const winner = winners.find((candidate) => sameProduct(candidate, kit));
@@ -2198,6 +2202,27 @@ function dedupe(imported, previousMadoka) {
       dropped.add(kit.kit_id);
       merges.push(`${kit.kit_id} → ${winner.kit_id} (${winner.names.ja})`);
     }
+  }
+  // goodsmile.com lists the products goodsmile.info and Aniplex+ already have,
+  // but without the work or (for action figures) the scale, and at today's
+  // price, so the rule above cannot match them. A goodsmile.com record is the
+  // product of the one other record with the same core name and grade.
+  const coreName = (kit) => coreKey(kit).split("|")[0];
+  const live = pool.filter((kit) => !dropped.has(kit.kit_id));
+  for (const kit of live) {
+    if (kit.source_refs?.[0]?.source_id !== "good_smile_madoka_global" || previousIds.has(kit.kit_id)) continue;
+    const others = live.filter(
+      (other) =>
+        other !== kit &&
+        !dropped.has(other.kit_id) &&
+        other.grade_code === kit.grade_code &&
+        coreName(other) === coreName(kit) &&
+        !(other.source_refs || []).some((ref) => ref.source_id === "good_smile_madoka_global" && ref.url !== kit.source_refs[0].url),
+    );
+    if (others.length !== 1) continue;
+    absorb(others[0], kit);
+    dropped.add(kit.kit_id);
+    merges.push(`${kit.kit_id} → ${others[0].kit_id} (${others[0].names.ja}, goodsmile.com)`);
   }
   return { kits: imported.filter((kit) => !dropped.has(kit.kit_id)), merges, kept };
 }

@@ -2168849,7 +2168849,20 @@
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwf5713d3e/items/title-M/madoka-magica/FGR/kaiten_homura-ns/09.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwab849f91/items/title-M/madoka-magica/FGR/kaiten_homura-ns/10.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwe373335b/items/title-M/madoka-magica/FGR/kaiten_homura-ns/11.jpg",
-        "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw8485663c/items/title-M/madoka-magica/FGR/kaiten_homura-ns/12.jpg"
+        "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw8485663c/items/title-M/madoka-magica/FGR/kaiten_homura-ns/12.jpg",
+        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1146449/g58kzaVJ036qFd49PMBpNmLK7fUsWGuZ.jpg",
+        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_main",
+        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_1",
+        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_2",
+        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_3",
+        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_4",
+        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_5",
+        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_6",
+        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_7",
+        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_8",
+        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_9",
+        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_10",
+        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_11"
       ],
       "universe": "Madoka",
       "work_title": "Walpurgisnacht: Rising",
@@ -2168858,12 +2168871,40 @@
       "is_limited": true,
       "data_status": "verified",
       "source_urls": [
-        "https://online.aniplex.co.jp/itemMDrePKqw02.html"
+        "https://online.aniplex.co.jp/itemMDrePKqw02.html",
+        "https://www.goodsmile.com/ja/product/1146449",
+        "https://www.claynel.jp/products/?item_id=12521"
       ],
       "source_refs": [
         {
           "source_id": "aniplex_plus_madoka_jp",
           "url": "https://online.aniplex.co.jp/itemMDrePKqw02.html",
+          "fields": [
+            "names",
+            "images",
+            "grade_code",
+            "release_date",
+            "price_jpy",
+            "work_title"
+          ],
+          "confidence": "high"
+        },
+        {
+          "source_id": "claynel_madoka_jp",
+          "url": "https://www.claynel.jp/products/?item_id=12521",
+          "fields": [
+            "names",
+            "images",
+            "grade_code",
+            "release_date",
+            "price_jpy",
+            "work_title"
+          ],
+          "confidence": "high"
+        },
+        {
+          "source_id": "good_smile_madoka_global",
+          "url": "https://www.goodsmile.com/ja/product/1146449",
           "fields": [
             "names",
             "images",
@@ -2168879,7 +2168920,9 @@
         "madoka",
         "aniplex plus",
         "aniplex",
-        "madoka_scale"
+        "madoka_scale",
+        "good smile",
+        "claynel"
       ],
       "notes": "Imported from the Aniplex+ official store (Madoka keyword search).",
       "series": {
@@ -2168922,157 +2168965,7 @@
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwde2fc4c8/items/title-M/madoka-magica/FGR/kaiten_mami-ns/09.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwe494dc5d/items/title-M/madoka-magica/FGR/kaiten_mami-ns/10.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw4421d317/items/title-M/madoka-magica/FGR/kaiten_mami-ns/11.jpg",
-        "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw5bfc5294/items/title-M/madoka-magica/FGR/kaiten_mami-ns/12.jpg"
-      ],
-      "universe": "Madoka",
-      "work_title": "Walpurgisnacht: Rising",
-      "release_date": "2027-09",
-      "price_jpy": 8800,
-      "is_limited": true,
-      "data_status": "verified",
-      "source_urls": [
-        "https://online.aniplex.co.jp/itemMDrePKqw03.html"
-      ],
-      "source_refs": [
-        {
-          "source_id": "aniplex_plus_madoka_jp",
-          "url": "https://online.aniplex.co.jp/itemMDrePKqw03.html",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        }
-      ],
-      "tags": [
-        "madoka",
-        "aniplex plus",
-        "aniplex",
-        "madoka_scale"
-      ],
-      "notes": "Imported from the Aniplex+ official store (Madoka keyword search).",
-      "series": {
-        "key": "madoka_walpurgis",
-        "sort": 442,
-        "labels": {
-          "zh": "瓦尔普吉斯的回天",
-          "en": "Walpurgisnacht: Rising",
-          "ja": "ワルプルギスの廻天",
-          "ko": "발푸르기스의 회천"
-        }
-      },
-      "names": {
-        "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 巴マミ ノンスケールフィギュア",
-        "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 巴マミ ノンスケールフィギュア",
-        "zh": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 巴マミ ノンスケールフィギュア",
-        "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 토모에 마미 논스케일 피규어"
-      }
-    },
-    {
-      "kit_id": "goodsmile-madoka-g1146449",
-      "franchise": "madoka",
-      "grade_code": "MADOKA_SCALE",
-      "subline": "Good Smile Company",
-      "number": null,
-      "scale": "non-scale",
-      "images": {
-        "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1146449/g58kzaVJ036qFd49PMBpNmLK7fUsWGuZ.jpg",
-        "box_art_source_id": "good_smile_madoka_global"
-      },
-      "gallery_image_urls": [
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1146449/g58kzaVJ036qFd49PMBpNmLK7fUsWGuZ.jpg",
-        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_main",
-        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_1",
-        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_2",
-        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_3",
-        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_4",
-        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_5",
-        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_6",
-        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_7",
-        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_8",
-        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_9",
-        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_10",
-        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_11"
-      ],
-      "universe": "Madoka",
-      "work_title": "Walpurgisnacht: Rising",
-      "release_date": "2027-09",
-      "price_jpy": 8800,
-      "is_limited": false,
-      "data_status": "verified",
-      "source_urls": [
-        "https://www.goodsmile.com/ja/product/1146449",
-        "https://www.claynel.jp/products/?item_id=12521"
-      ],
-      "source_refs": [
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1146449",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "claynel_madoka_jp",
-          "url": "https://www.claynel.jp/products/?item_id=12521",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        }
-      ],
-      "tags": [
-        "madoka",
-        "good smile",
-        "madoka_scale",
-        "claynel",
-        "aniplex"
-      ],
-      "notes": "Imported from the Good Smile Company official store (goodsmile.com, Madoka keyword search).",
-      "series": {
-        "key": "madoka_walpurgis",
-        "sort": 442,
-        "labels": {
-          "zh": "瓦尔普吉斯的回天",
-          "en": "Walpurgisnacht: Rising",
-          "ja": "ワルプルギスの廻天",
-          "ko": "발푸르기스의 회천"
-        }
-      },
-      "names": {
-        "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 暁美ほむら ノンスケールフィギュア",
-        "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 暁美ほむら ノンスケールフィギュア",
-        "zh": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 暁美ほむら ノンスケールフィギュア",
-        "ko": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 暁美ほむら ノンスケールフィギュア"
-      }
-    },
-    {
-      "kit_id": "goodsmile-madoka-g1146889",
-      "franchise": "madoka",
-      "grade_code": "MADOKA_SCALE",
-      "subline": "Good Smile Company",
-      "number": null,
-      "scale": "non-scale",
-      "images": {
-        "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1146889/htprm3qaCvb49VZniUgKdL6cJBej58Hw.jpg",
-        "box_art_source_id": "good_smile_madoka_global"
-      },
-      "gallery_image_urls": [
+        "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw5bfc5294/items/title-M/madoka-magica/FGR/kaiten_mami-ns/12.jpg",
         "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1146889/htprm3qaCvb49VZniUgKdL6cJBej58Hw.jpg",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12520_main",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12520_photo_1",
@@ -2169091,16 +2168984,17 @@
       "work_title": "Walpurgisnacht: Rising",
       "release_date": "2027-09",
       "price_jpy": 8800,
-      "is_limited": false,
+      "is_limited": true,
       "data_status": "verified",
       "source_urls": [
+        "https://online.aniplex.co.jp/itemMDrePKqw03.html",
         "https://www.goodsmile.com/ja/product/1146889",
         "https://www.claynel.jp/products/?item_id=12520"
       ],
       "source_refs": [
         {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1146889",
+          "source_id": "aniplex_plus_madoka_jp",
+          "url": "https://online.aniplex.co.jp/itemMDrePKqw03.html",
           "fields": [
             "names",
             "images",
@@ -2169123,16 +2169017,30 @@
             "work_title"
           ],
           "confidence": "high"
+        },
+        {
+          "source_id": "good_smile_madoka_global",
+          "url": "https://www.goodsmile.com/ja/product/1146889",
+          "fields": [
+            "names",
+            "images",
+            "grade_code",
+            "release_date",
+            "price_jpy",
+            "work_title"
+          ],
+          "confidence": "high"
         }
       ],
       "tags": [
         "madoka",
-        "good smile",
+        "aniplex plus",
+        "aniplex",
         "madoka_scale",
-        "claynel",
-        "aniplex"
+        "good smile",
+        "claynel"
       ],
-      "notes": "Imported from the Good Smile Company official store (goodsmile.com, Madoka keyword search).",
+      "notes": "Imported from the Aniplex+ official store (Madoka keyword search).",
       "series": {
         "key": "madoka_walpurgis",
         "sort": 442,
@@ -2169147,7 +2169055,7 @@
         "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 巴マミ ノンスケールフィギュア",
         "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 巴マミ ノンスケールフィギュア",
         "zh": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 巴マミ ノンスケールフィギュア",
-        "ko": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 巴マミ ノンスケールフィギュア"
+        "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 토모에 마미 논스케일 피규어"
       }
     },
     {
@@ -2169172,68 +2169080,7 @@
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwa23d13e1/items/title-M/madoka-magica/FGR/kaiten_madoka-ns/07.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw7ed0256c/items/title-M/madoka-magica/FGR/kaiten_madoka-ns/08.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw14223aa5/items/title-M/madoka-magica/FGR/kaiten_madoka-ns/09.jpg",
-        "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw8eca9752/items/title-M/madoka-magica/FGR/kaiten_madoka-ns/10.jpg"
-      ],
-      "universe": "Madoka",
-      "work_title": "Walpurgisnacht: Rising",
-      "release_date": "2027-08",
-      "price_jpy": 8800,
-      "is_limited": true,
-      "data_status": "verified",
-      "source_urls": [
-        "https://online.aniplex.co.jp/itemMDrePKqw.html"
-      ],
-      "source_refs": [
-        {
-          "source_id": "aniplex_plus_madoka_jp",
-          "url": "https://online.aniplex.co.jp/itemMDrePKqw.html",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        }
-      ],
-      "tags": [
-        "madoka",
-        "aniplex plus",
-        "aniplex",
-        "madoka_scale"
-      ],
-      "notes": "Imported from the Aniplex+ official store (Madoka keyword search).",
-      "series": {
-        "key": "madoka_walpurgis",
-        "sort": 442,
-        "labels": {
-          "zh": "瓦尔普吉斯的回天",
-          "en": "Walpurgisnacht: Rising",
-          "ja": "ワルプルギスの廻天",
-          "ko": "발푸르기스의 회천"
-        }
-      },
-      "names": {
-        "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 鹿目まどか ノンスケールフィギュア",
-        "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 鹿目まどか ノンスケールフィギュア",
-        "zh": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 鹿目まどか ノンスケールフィギュア",
-        "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 카나메 마도카 논스케일 피규어"
-      }
-    },
-    {
-      "kit_id": "goodsmile-madoka-g1146448",
-      "franchise": "madoka",
-      "grade_code": "MADOKA_SCALE",
-      "subline": "Good Smile Company",
-      "number": null,
-      "scale": "non-scale",
-      "images": {
-        "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1146448/9SiTXswDd8tz2yYkAgQcERjF0Zm75vq6.jpg",
-        "box_art_source_id": "good_smile_madoka_global"
-      },
-      "gallery_image_urls": [
+        "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw8eca9752/items/title-M/madoka-magica/FGR/kaiten_madoka-ns/10.jpg",
         "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1146448/9SiTXswDd8tz2yYkAgQcERjF0Zm75vq6.jpg",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12405_main",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12405_photo_1",
@@ -2169251,16 +2169098,17 @@
       "work_title": "Walpurgisnacht: Rising",
       "release_date": "2027-08",
       "price_jpy": 8800,
-      "is_limited": false,
+      "is_limited": true,
       "data_status": "verified",
       "source_urls": [
+        "https://online.aniplex.co.jp/itemMDrePKqw.html",
         "https://www.goodsmile.com/ja/product/1146448",
         "https://www.claynel.jp/products/?item_id=12405"
       ],
       "source_refs": [
         {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1146448",
+          "source_id": "aniplex_plus_madoka_jp",
+          "url": "https://online.aniplex.co.jp/itemMDrePKqw.html",
           "fields": [
             "names",
             "images",
@@ -2169283,16 +2169131,30 @@
             "work_title"
           ],
           "confidence": "high"
+        },
+        {
+          "source_id": "good_smile_madoka_global",
+          "url": "https://www.goodsmile.com/ja/product/1146448",
+          "fields": [
+            "names",
+            "images",
+            "grade_code",
+            "release_date",
+            "price_jpy",
+            "work_title"
+          ],
+          "confidence": "high"
         }
       ],
       "tags": [
         "madoka",
-        "good smile",
+        "aniplex plus",
+        "aniplex",
         "madoka_scale",
-        "claynel",
-        "aniplex"
+        "good smile",
+        "claynel"
       ],
-      "notes": "Imported from the Good Smile Company official store (goodsmile.com, Madoka keyword search).",
+      "notes": "Imported from the Aniplex+ official store (Madoka keyword search).",
       "series": {
         "key": "madoka_walpurgis",
         "sort": 442,
@@ -2169307,7 +2169169,7 @@
         "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 鹿目まどか ノンスケールフィギュア",
         "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 鹿目まどか ノンスケールフィギュア",
         "zh": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 鹿目まどか ノンスケールフィギュア",
-        "ko": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 鹿目まどか ノンスケールフィギュア"
+        "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 카나메 마도카 논스케일 피규어"
       }
     },
     {
@@ -2169333,7 +2169195,8 @@
         "https://www.claynel.jp/SYS/CONTENTS/goods_12526_photo_2",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12526_photo_3",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12526_photo_4",
-        "https://www.claynel.jp/SYS/CONTENTS/goods_12526_photo_5"
+        "https://www.claynel.jp/SYS/CONTENTS/goods_12526_photo_5",
+        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1146963/3DR06qQVfpJhyPvag5cE82zHUbwFdsx4.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Walpurgisnacht: Rising",
@@ -2169343,7 +2169206,8 @@
       "data_status": "verified",
       "source_urls": [
         "https://online.aniplex.co.jp/itemRfedMPeC.html",
-        "https://www.claynel.jp/products/?item_id=12526"
+        "https://www.claynel.jp/products/?item_id=12526",
+        "https://www.goodsmile.com/ja/product/1146963"
       ],
       "source_refs": [
         {
@@ -2169371,6 +2169235,19 @@
             "work_title"
           ],
           "confidence": "high"
+        },
+        {
+          "source_id": "good_smile_madoka_global",
+          "url": "https://www.goodsmile.com/ja/product/1146963",
+          "fields": [
+            "names",
+            "images",
+            "grade_code",
+            "release_date",
+            "price_jpy",
+            "work_title"
+          ],
+          "confidence": "high"
         }
       ],
       "tags": [
@@ -2169379,7 +2169256,8 @@
         "aniplex",
         "madoka_action",
         "buzzmod.",
-        "claynel"
+        "claynel",
+        "good smile"
       ],
       "notes": "Imported from the Aniplex+ official store (Madoka keyword search).",
       "series": {
@@ -2169423,7 +2169301,8 @@
         "https://www.claynel.jp/SYS/CONTENTS/goods_12406_photo_2",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12406_photo_3",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12406_photo_4",
-        "https://www.claynel.jp/SYS/CONTENTS/goods_12406_photo_5"
+        "https://www.claynel.jp/SYS/CONTENTS/goods_12406_photo_5",
+        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1146450/WEUJ4V8Q2BqSy0gD7aiAFKsCXGN3h6rM.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Walpurgisnacht: Rising",
@@ -2169433,7 +2169312,8 @@
       "data_status": "verified",
       "source_urls": [
         "https://online.aniplex.co.jp/itemKBrPGNuO.html",
-        "https://www.claynel.jp/products/?item_id=12406"
+        "https://www.claynel.jp/products/?item_id=12406",
+        "https://www.goodsmile.com/ja/product/1146450"
       ],
       "source_refs": [
         {
@@ -2169461,6 +2169341,19 @@
             "work_title"
           ],
           "confidence": "high"
+        },
+        {
+          "source_id": "good_smile_madoka_global",
+          "url": "https://www.goodsmile.com/ja/product/1146450",
+          "fields": [
+            "names",
+            "images",
+            "grade_code",
+            "release_date",
+            "price_jpy",
+            "work_title"
+          ],
+          "confidence": "high"
         }
       ],
       "tags": [
@@ -2169469,7 +2169362,8 @@
         "aniplex",
         "madoka_action",
         "buzzmod.",
-        "claynel"
+        "claynel",
+        "good smile"
       ],
       "notes": "Imported from the Aniplex+ official store (Madoka keyword search).",
       "series": {
@@ -2174115,7 +2174009,8 @@
         "https://images.goodsmile.info/cgm/images/product/20220830/13181/103561/large/5a85c0cddd5dc9680d2b77af76bc2f09.jpg",
         "https://images.goodsmile.info/cgm/images/product/20220830/13181/103562/large/0670fc77221606432dbdcc31db7c49f5.jpg",
         "https://images.goodsmile.info/cgm/images/product/20220830/13181/103563/large/5c973d1b120a1f9a7cebcc92d84554fb.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20220830/13181/103564/thumb/06be25ef7d57c7b228277a9f2061f370.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20220830/13181/103564/thumb/06be25ef7d57c7b228277a9f2061f370.jpg",
+        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20220830/13181/103565/large/1bc2d0f2099d942bdb534b2173cdc21e.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Rebellion",
@@ -2174124,12 +2174019,26 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/13181/"
+        "https://www.goodsmile.info/ja/product/13181/",
+        "https://www.goodsmile.com/ja/product/10866"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/13181/",
+          "fields": [
+            "names",
+            "images",
+            "grade_code",
+            "release_date",
+            "price_jpy",
+            "work_title"
+          ],
+          "confidence": "high"
+        },
+        {
+          "source_id": "good_smile_madoka_global",
+          "url": "https://www.goodsmile.com/ja/product/10866",
           "fields": [
             "names",
             "images",
@@ -2174420,7 +2174329,8 @@
         "https://images.goodsmile.info/cgm/images/product/20220711/12957/101297/large/949938577800ddb2be5ee7ff6289386e.jpg",
         "https://images.goodsmile.info/cgm/images/product/20220711/12957/101298/large/b60615aeee646872561e9b649154314d.jpg",
         "https://images.goodsmile.info/cgm/images/product/20220711/12957/101299/large/24864b71a4703a9dcce22c020c34929d.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20220711/12957/101300/thumb/90c95b549376d605a423f7a4386c87a9.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20220711/12957/101300/thumb/90c95b549376d605a423f7a4386c87a9.jpg",
+        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20220711/12957/101301/large/271ad02104bd594ca7b345119554872e.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Rebellion",
@@ -2174429,12 +2174339,26 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/12957/"
+        "https://www.goodsmile.info/ja/product/12957/",
+        "https://www.goodsmile.com/ja/product/10642"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/12957/",
+          "fields": [
+            "names",
+            "images",
+            "grade_code",
+            "release_date",
+            "price_jpy",
+            "work_title"
+          ],
+          "confidence": "high"
+        },
+        {
+          "source_id": "good_smile_madoka_global",
+          "url": "https://www.goodsmile.com/ja/product/10642",
           "fields": [
             "names",
             "images",
@@ -2174621,7 +2174545,7 @@
         "ja": "POP UP PARADE 暁美ほむら",
         "en": "POP UP PARADE 暁美ほむら",
         "zh": "POP UP PARADE 暁美ほむら",
-        "ko": "POP UP PARADE 아케미 호무라"
+        "ko": "POP UP PARADE 아케미 호무라 (2022년)"
       }
     },
     {
@@ -2174644,7 +2174568,8 @@
         "https://images.goodsmile.info/cgm/images/product/20220214/12330/95280/large/6239b95ad0ddeb6fec4325ec7ba34050.jpg",
         "https://images.goodsmile.info/cgm/images/product/20220214/12330/95281/large/dedec4d71b8323142eab0f07158c51a4.jpg",
         "https://images.goodsmile.info/cgm/images/product/20220214/12330/95282/large/827b6b9ce710f52ec169af7c5536f29e.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20220214/12330/95283/thumb/416742232ceba9849a1c0b3a02522f9e.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20220214/12330/95283/thumb/416742232ceba9849a1c0b3a02522f9e.jpg",
+        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20220214/12330/95284/large/78fa85bede509c1a704c74eba43f6e47.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Rebellion",
@@ -2174653,12 +2174578,26 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/12330/"
+        "https://www.goodsmile.info/ja/product/12330/",
+        "https://www.goodsmile.com/ja/product/10018"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/12330/",
+          "fields": [
+            "names",
+            "images",
+            "grade_code",
+            "release_date",
+            "price_jpy",
+            "work_title"
+          ],
+          "confidence": "high"
+        },
+        {
+          "source_id": "good_smile_madoka_global",
+          "url": "https://www.goodsmile.com/ja/product/10018",
           "fields": [
             "names",
             "images",
@@ -2175030,7 +2174969,8 @@
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwc056457d/items/items2000/2929/contents/9877.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwf7697f16/items/items2000/2929/contents/9878.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw47aa30d8/items/items2000/2929/contents/9879.jpg",
-        "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw5d8a8bdc/items/items2000/2929/contents/9880.jpg"
+        "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw5d8a8bdc/items/items2000/2929/contents/9880.jpg",
+        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20180205/7036/50030/large/b9606b2eb0750121990b3cbffaf8877d.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Magia Record",
@@ -2175040,7 +2174980,8 @@
       "data_status": "verified",
       "source_urls": [
         "https://www.goodsmile.info/ja/product/7036/",
-        "https://online.aniplex.co.jp/itemJlDPwYxd.html"
+        "https://online.aniplex.co.jp/itemJlDPwYxd.html",
+        "https://www.goodsmile.com/ja/product/4756"
       ],
       "source_refs": [
         {
@@ -2175059,6 +2175000,19 @@
         {
           "source_id": "aniplex_plus_madoka_jp",
           "url": "https://online.aniplex.co.jp/itemJlDPwYxd.html",
+          "fields": [
+            "names",
+            "images",
+            "grade_code",
+            "release_date",
+            "price_jpy",
+            "work_title"
+          ],
+          "confidence": "high"
+        },
+        {
+          "source_id": "good_smile_madoka_global",
+          "url": "https://www.goodsmile.com/ja/product/4756",
           "fields": [
             "names",
             "images",
@@ -2175803,8 +2175757,8 @@
           "confidence": "high"
         },
         {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/4679",
+          "source_id": "aniplex_plus_madoka_jp",
+          "url": "https://online.aniplex.co.jp/itemQdrXpkoG.html",
           "fields": [
             "names",
             "images",
@@ -2175816,8 +2175770,8 @@
           "confidence": "high"
         },
         {
-          "source_id": "aniplex_plus_madoka_jp",
-          "url": "https://online.aniplex.co.jp/itemQdrXpkoG.html",
+          "source_id": "good_smile_madoka_global",
+          "url": "https://www.goodsmile.com/ja/product/4679",
           "fields": [
             "names",
             "images",
@@ -2176145,8 +2176099,8 @@
           "confidence": "high"
         },
         {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/4161",
+          "source_id": "aniplex_plus_madoka_jp",
+          "url": "https://online.aniplex.co.jp/itemNemaFglS.html",
           "fields": [
             "names",
             "images",
@@ -2176158,8 +2176112,8 @@
           "confidence": "high"
         },
         {
-          "source_id": "aniplex_plus_madoka_jp",
-          "url": "https://online.aniplex.co.jp/itemNemaFglS.html",
+          "source_id": "good_smile_madoka_global",
+          "url": "https://www.goodsmile.com/ja/product/4161",
           "fields": [
             "names",
             "images",
@@ -2176311,8 +2176265,8 @@
           "confidence": "high"
         },
         {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/3913",
+          "source_id": "aniplex_plus_madoka_jp",
+          "url": "https://online.aniplex.co.jp/itemFOrNeLLa.html",
           "fields": [
             "names",
             "images",
@@ -2176324,8 +2176278,8 @@
           "confidence": "high"
         },
         {
-          "source_id": "aniplex_plus_madoka_jp",
-          "url": "https://online.aniplex.co.jp/itemFOrNeLLa.html",
+          "source_id": "good_smile_madoka_global",
+          "url": "https://www.goodsmile.com/ja/product/3913",
           "fields": [
             "names",
             "images",
@@ -2177177,7 +2177131,8 @@
         "https://images.goodsmile.info/cgm/images/product/20140924/4624/30577/large/7434e6f888a930dd60b3b33ba7c6d61e.jpg",
         "https://images.goodsmile.info/cgm/images/product/20140924/4624/30578/large/594627243577ae4893c81f8a9ac15af2.jpg",
         "https://images.goodsmile.info/cgm/images/product/20140924/4624/30581/large/4c8839d2d17027a349172e1d95a7bded.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20140924/4624/30579/thumb/ac67a005b2762d6611c745079df1c70b.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20140924/4624/30579/thumb/ac67a005b2762d6611c745079df1c70b.jpg",
+        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20140924/4624/30580/large/593bd2dbac0c8e8a9f5c87f47a05a5db.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Rebellion",
@@ -2177186,12 +2177141,26 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/4624/"
+        "https://www.goodsmile.info/ja/product/4624/",
+        "https://www.goodsmile.com/ja/product/2419"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/4624/",
+          "fields": [
+            "names",
+            "images",
+            "grade_code",
+            "release_date",
+            "price_jpy",
+            "work_title"
+          ],
+          "confidence": "high"
+        },
+        {
+          "source_id": "good_smile_madoka_global",
+          "url": "https://www.goodsmile.com/ja/product/2419",
           "fields": [
             "names",
             "images",
@@ -2183975,74 +2183944,18 @@
       }
     },
     {
-      "kit_id": "goodsmile-madoka-g10018",
-      "franchise": "madoka",
-      "grade_code": "MADOKA_SCALE",
-      "subline": "POP UP PARADE",
-      "number": null,
-      "scale": "non-scale",
-      "images": {
-        "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20220214/12330/95284/large/78fa85bede509c1a704c74eba43f6e47.jpg",
-        "box_art_source_id": "good_smile_madoka_global"
-      },
-      "gallery_image_urls": [
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20220214/12330/95284/large/78fa85bede509c1a704c74eba43f6e47.jpg"
-      ],
-      "universe": "Madoka",
-      "work_title": "Madoka Magica",
-      "release_date": null,
-      "price_jpy": 4800,
-      "is_limited": false,
-      "data_status": "verified",
-      "source_urls": [
-        "https://www.goodsmile.com/ja/product/10018"
-      ],
-      "source_refs": [
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/10018",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        }
-      ],
-      "tags": [
-        "madoka",
-        "good smile",
-        "madoka_scale",
-        "pop up parade"
-      ],
-      "notes": "Imported from the Good Smile Company official store (goodsmile.com, Madoka keyword search).",
-      "series": {
-        "key": "madoka_tv",
-        "sort": 440,
-        "labels": {
-          "zh": "魔法少女小圆",
-          "en": "Madoka Magica",
-          "ja": "まどか☆マギカ",
-          "ko": "마도카 마기카"
-        }
-      },
-      "names": {
-        "ja": "POP UP PARADE 鹿目まどか",
-        "en": "POP UP PARADE 鹿目まどか",
-        "zh": "POP UP PARADE 鹿目まどか",
-        "ko": "POP UP PARADE 鹿目まどか"
-      }
-    },
-    {
       "kit_id": "goodsmile-madoka-g10412",
       "franchise": "madoka",
       "grade_code": "MADOKA_SCALE",
       "subline": "POP UP PARADE",
       "number": null,
       "scale": "non-scale",
+      "names": {
+        "ja": "POP UP PARADE 美樹さやか",
+        "en": "POP UP PARADE 美樹さやか",
+        "zh": "POP UP PARADE 美樹さやか",
+        "ko": "POP UP PARADE 미키 사야카"
+      },
       "images": {
         "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20220523/12727/99040/large/a3728941f43fbc5478bf7eb58afd085b.jpg",
         "box_art_source_id": "good_smile_madoka_global"
@@ -2184090,12 +2184003,6 @@
           "ja": "まどか☆マギカ",
           "ko": "마도카 마기카"
         }
-      },
-      "names": {
-        "ja": "POP UP PARADE 美樹さやか",
-        "en": "POP UP PARADE 美樹さやか",
-        "zh": "POP UP PARADE 美樹さやか",
-        "ko": "POP UP PARADE 美樹さやか"
       }
     },
     {
@@ -2184105,6 +2184012,12 @@
       "subline": "POP UP PARADE",
       "number": null,
       "scale": "non-scale",
+      "names": {
+        "ja": "POP UP PARADE 佐倉杏子",
+        "en": "POP UP PARADE 佐倉杏子",
+        "zh": "POP UP PARADE 佐倉杏子",
+        "ko": "POP UP PARADE 사쿠라 쿄코"
+      },
       "images": {
         "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20220620/12839/100268/large/6767ecf003b39fa66b11e645606fc5a6.jpg",
         "box_art_source_id": "good_smile_madoka_global"
@@ -2184152,134 +2184065,6 @@
           "ja": "まどか☆マギカ",
           "ko": "마도카 마기카"
         }
-      },
-      "names": {
-        "ja": "POP UP PARADE 佐倉杏子",
-        "en": "POP UP PARADE 佐倉杏子",
-        "zh": "POP UP PARADE 佐倉杏子",
-        "ko": "POP UP PARADE 佐倉杏子"
-      }
-    },
-    {
-      "kit_id": "goodsmile-madoka-g10642",
-      "franchise": "madoka",
-      "grade_code": "MADOKA_MINI",
-      "subline": "Good Smile Company",
-      "number": null,
-      "scale": "non-scale",
-      "images": {
-        "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20220711/12957/101301/large/271ad02104bd594ca7b345119554872e.jpg",
-        "box_art_source_id": "good_smile_madoka_global"
-      },
-      "gallery_image_urls": [
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20220711/12957/101301/large/271ad02104bd594ca7b345119554872e.jpg"
-      ],
-      "universe": "Madoka",
-      "work_title": "Madoka Magica",
-      "release_date": null,
-      "price_jpy": null,
-      "is_limited": false,
-      "data_status": "verified",
-      "source_urls": [
-        "https://www.goodsmile.com/ja/product/10642"
-      ],
-      "source_refs": [
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/10642",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        }
-      ],
-      "tags": [
-        "madoka",
-        "good smile",
-        "madoka_mini"
-      ],
-      "notes": "Imported from the Good Smile Company official store (goodsmile.com, Madoka keyword search).",
-      "series": {
-        "key": "madoka_tv",
-        "sort": 440,
-        "labels": {
-          "zh": "魔法少女小圆",
-          "en": "Madoka Magica",
-          "ja": "まどか☆マギカ",
-          "ko": "마도카 마기카"
-        }
-      },
-      "names": {
-        "ja": "HELLO! GOOD SMILE 暁美ほむら",
-        "en": "HELLO! GOOD SMILE 暁美ほむら",
-        "zh": "HELLO! GOOD SMILE 暁美ほむら",
-        "ko": "HELLO! GOOD SMILE 暁美ほむら"
-      }
-    },
-    {
-      "kit_id": "goodsmile-madoka-g10866",
-      "franchise": "madoka",
-      "grade_code": "MADOKA_MINI",
-      "subline": "Good Smile Company",
-      "number": null,
-      "scale": "non-scale",
-      "images": {
-        "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20220830/13181/103565/large/1bc2d0f2099d942bdb534b2173cdc21e.jpg",
-        "box_art_source_id": "good_smile_madoka_global"
-      },
-      "gallery_image_urls": [
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20220830/13181/103565/large/1bc2d0f2099d942bdb534b2173cdc21e.jpg"
-      ],
-      "universe": "Madoka",
-      "work_title": "Madoka Magica",
-      "release_date": null,
-      "price_jpy": null,
-      "is_limited": false,
-      "data_status": "verified",
-      "source_urls": [
-        "https://www.goodsmile.com/ja/product/10866"
-      ],
-      "source_refs": [
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/10866",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        }
-      ],
-      "tags": [
-        "madoka",
-        "good smile",
-        "madoka_mini"
-      ],
-      "notes": "Imported from the Good Smile Company official store (goodsmile.com, Madoka keyword search).",
-      "series": {
-        "key": "madoka_tv",
-        "sort": 440,
-        "labels": {
-          "zh": "魔法少女小圆",
-          "en": "Madoka Magica",
-          "ja": "まどか☆マギカ",
-          "ko": "마도카 마기카"
-        }
-      },
-      "names": {
-        "ja": "HELLO! GOOD SMILE 巴マミ",
-        "en": "HELLO! GOOD SMILE 巴マミ",
-        "zh": "HELLO! GOOD SMILE 巴マミ",
-        "ko": "HELLO! GOOD SMILE 巴マミ"
       }
     },
     {
@@ -2184289,6 +2184074,12 @@
       "subline": "Good Smile Company",
       "number": null,
       "scale": "non-scale",
+      "names": {
+        "ja": "くりぱん ぬいぐるみ アルティメットまどか / 悪魔ほむら",
+        "en": "くりぱん ぬいぐるみ アルティメットまどか / 悪魔ほむら",
+        "zh": "くりぱん ぬいぐるみ アルティメットまどか / 悪魔ほむら",
+        "ko": "쿠리판 봉제인형 얼티밋 마도카 / 악마 호무라"
+      },
       "images": {
         "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1137469/bj98YZUq1FNsgcrda47yme235EuQVnLC.jpg",
         "box_art_source_id": "good_smile_madoka_global"
@@ -2184335,12 +2184126,6 @@
           "ja": "叛逆の物語",
           "ko": "반역의 이야기"
         }
-      },
-      "names": {
-        "ja": "くりぱん ぬいぐるみ アルティメットまどか / 悪魔ほむら",
-        "en": "くりぱん ぬいぐるみ アルティメットまどか / 悪魔ほむら",
-        "zh": "くりぱん ぬいぐるみ アルティメットまどか / 悪魔ほむら",
-        "ko": "くりぱん ぬいぐるみ アルティメットまどか / 悪魔ほむら"
       }
     },
     {
@@ -2184350,6 +2184135,12 @@
       "subline": "Good Smile Company",
       "number": null,
       "scale": "non-scale",
+      "names": {
+        "ja": "HELLO! GOOD SMILE 鹿目まどか オーロラVer.",
+        "en": "HELLO! GOOD SMILE 鹿目まどか オーロラVer.",
+        "zh": "HELLO! GOOD SMILE 鹿目まどか オーロラVer.",
+        "ko": "HELLO! GOOD SMILE 카나메 마도카 오로라 Ver."
+      },
       "images": {
         "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1138609/bLmjW4diZHGSKQ83tePrN9cvXEkCqBFz.jpg",
         "box_art_source_id": "good_smile_madoka_global"
@@ -2184396,12 +2184187,6 @@
           "ja": "まどか☆マギカ",
           "ko": "마도카 마기카"
         }
-      },
-      "names": {
-        "ja": "HELLO! GOOD SMILE 鹿目まどか オーロラVer.",
-        "en": "HELLO! GOOD SMILE 鹿目まどか オーロラVer.",
-        "zh": "HELLO! GOOD SMILE 鹿目まどか オーロラVer.",
-        "ko": "HELLO! GOOD SMILE 鹿目まどか オーロラVer."
       }
     },
     {
@@ -2184411,6 +2184196,12 @@
       "subline": "ねんどろいど",
       "number": null,
       "scale": "non-scale",
+      "names": {
+        "ja": "ねんどろいど 鹿目まどか 〈ワルプルギスの廻天〉Ver. べーしっく",
+        "en": "ねんどろいど 鹿目まどか 〈ワルプルギスの廻天〉Ver. べーしっく",
+        "zh": "ねんどろいど 鹿目まどか 〈ワルプルギスの廻天〉Ver. べーしっく",
+        "ko": "넨도로이드 카나메 마도카 〈발푸르기스의 회천〉 Ver. 베이직"
+      },
       "images": {
         "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1139201/ngERBHt2ZkQYiAfX1qTWw75eyjDcFp0U.jpg",
         "box_art_source_id": "good_smile_madoka_global"
@@ -2184458,12 +2184249,6 @@
           "ja": "ワルプルギスの廻天",
           "ko": "발푸르기스의 회천"
         }
-      },
-      "names": {
-        "ja": "ねんどろいど 鹿目まどか 〈ワルプルギスの廻天〉Ver. べーしっく",
-        "en": "ねんどろいど 鹿目まどか 〈ワルプルギスの廻天〉Ver. べーしっく",
-        "zh": "ねんどろいど 鹿目まどか 〈ワルプルギスの廻天〉Ver. べーしっく",
-        "ko": "ねんどろいど 鹿目まどか 〈ワルプルギスの廻天〉Ver. べーしっく"
       }
     },
     {
@@ -2184473,6 +2184258,12 @@
       "subline": "ねんどろいど",
       "number": null,
       "scale": "non-scale",
+      "names": {
+        "ja": "ねんどろいど 暁美ほむら 〈ワルプルギスの廻天〉Ver. べーしっく",
+        "en": "ねんどろいど 暁美ほむら 〈ワルプルギスの廻天〉Ver. べーしっく",
+        "zh": "ねんどろいど 暁美ほむら 〈ワルプルギスの廻天〉Ver. べーしっく",
+        "ko": "넨도로이드 아케미 호무라 〈발푸르기스의 회천〉 Ver. 베이직"
+      },
       "images": {
         "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1139202/fpm2W8JX5C0iekE9F4LzDArqTa1xnvuS.jpg",
         "box_art_source_id": "good_smile_madoka_global"
@@ -2184520,12 +2184311,6 @@
           "ja": "ワルプルギスの廻天",
           "ko": "발푸르기스의 회천"
         }
-      },
-      "names": {
-        "ja": "ねんどろいど 暁美ほむら 〈ワルプルギスの廻天〉Ver. べーしっく",
-        "en": "ねんどろいど 暁美ほむら 〈ワルプルギスの廻天〉Ver. べーしっく",
-        "zh": "ねんどろいど 暁美ほむら 〈ワルプルギスの廻天〉Ver. べーしっく",
-        "ko": "ねんどろいど 暁美ほむら 〈ワルプルギスの廻天〉Ver. べーしっく"
       }
     },
     {
@@ -2184535,6 +2184320,12 @@
       "subline": "ねんどろいど",
       "number": null,
       "scale": "non-scale",
+      "names": {
+        "ja": "ねんどろいど 巴マミ 〈ワルプルギスの廻天〉Ver. べーしっく",
+        "en": "ねんどろいど 巴マミ 〈ワルプルギスの廻天〉Ver. べーしっく",
+        "zh": "ねんどろいど 巴マミ 〈ワルプルギスの廻天〉Ver. べーしっく",
+        "ko": "넨도로이드 토모에 마미 〈발푸르기스의 회천〉 Ver. 베이직"
+      },
       "images": {
         "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1139826/Uqk0vhjuy6aKeCfcDSspzHQW2n8P4JBG.jpg",
         "box_art_source_id": "good_smile_madoka_global"
@@ -2184582,12 +2184373,6 @@
           "ja": "ワルプルギスの廻天",
           "ko": "발푸르기스의 회천"
         }
-      },
-      "names": {
-        "ja": "ねんどろいど 巴マミ 〈ワルプルギスの廻天〉Ver. べーしっく",
-        "en": "ねんどろいど 巴マミ 〈ワルプルギスの廻天〉Ver. べーしっく",
-        "zh": "ねんどろいど 巴マミ 〈ワルプルギスの廻天〉Ver. べーしっく",
-        "ko": "ねんどろいど 巴マミ 〈ワルプルギスの廻天〉Ver. べーしっく"
       }
     },
     {
@@ -2184597,6 +2184382,12 @@
       "subline": "POP UP PARADE",
       "number": null,
       "scale": "non-scale",
+      "names": {
+        "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 アニプレックスくじ A賞 POP UP PARADE SP 鹿目まどか〈ワルプルギスの廻天〉Ver.",
+        "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 アニプレックスくじ A賞 POP UP PARADE SP 鹿目まどか〈ワルプルギスの廻天〉Ver.",
+        "zh": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 アニプレックスくじ A賞 POP UP PARADE SP 鹿目まどか〈ワルプルギスの廻天〉Ver.",
+        "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 애니플렉스 쿠지 A상 POP UP PARADE SP 카나메 마도카 〈발푸르기스의 회천〉 Ver."
+      },
       "images": {
         "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1139887/AD2RBXN5Ln7kfaFKtdyP8rxubzWVg04E.jpg",
         "box_art_source_id": "good_smile_madoka_global"
@@ -2184644,12 +2184435,6 @@
           "ja": "ワルプルギスの廻天",
           "ko": "발푸르기스의 회천"
         }
-      },
-      "names": {
-        "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 アニプレックスくじ A賞 POP UP PARADE SP 鹿目まどか〈ワルプルギスの廻天〉Ver.",
-        "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 アニプレックスくじ A賞 POP UP PARADE SP 鹿目まどか〈ワルプルギスの廻天〉Ver.",
-        "zh": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 アニプレックスくじ A賞 POP UP PARADE SP 鹿目まどか〈ワルプルギスの廻天〉Ver.",
-        "ko": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 アニプレックスくじ A賞 POP UP PARADE SP 鹿目まどか〈ワルプルギスの廻天〉Ver."
       }
     },
     {
@@ -2184659,6 +2184444,12 @@
       "subline": "POP UP PARADE",
       "number": null,
       "scale": "non-scale",
+      "names": {
+        "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 アニプレックスくじ ラスト賞 POP UP PARADE SP 鹿目まどか〈ワルプルギスの廻天〉 微笑みVer.",
+        "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 アニプレックスくじ ラスト賞 POP UP PARADE SP 鹿目まどか〈ワルプルギスの廻天〉 微笑みVer.",
+        "zh": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 アニプレックスくじ ラスト賞 POP UP PARADE SP 鹿目まどか〈ワルプルギスの廻天〉 微笑みVer.",
+        "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 애니플렉스 쿠지 라스트상 POP UP PARADE SP 카나메 마도카 〈발푸르기스의 회천〉 미소 Ver."
+      },
       "images": {
         "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1139895/xkuwf3PavrQ0LtWNVMX5KnmdAc9pHeb7.jpg",
         "box_art_source_id": "good_smile_madoka_global"
@@ -2184706,12 +2184497,6 @@
           "ja": "ワルプルギスの廻天",
           "ko": "발푸르기스의 회천"
         }
-      },
-      "names": {
-        "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 アニプレックスくじ ラスト賞 POP UP PARADE SP 鹿目まどか〈ワルプルギスの廻天〉 微笑みVer.",
-        "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 アニプレックスくじ ラスト賞 POP UP PARADE SP 鹿目まどか〈ワルプルギスの廻天〉 微笑みVer.",
-        "zh": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 アニプレックスくじ ラスト賞 POP UP PARADE SP 鹿目まどか〈ワルプルギスの廻天〉 微笑みVer.",
-        "ko": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 アニプレックスくじ ラスト賞 POP UP PARADE SP 鹿目まどか〈ワルプルギスの廻天〉 微笑みVer."
       }
     },
     {
@@ -2184721,6 +2184506,12 @@
       "subline": "ねんどろいど",
       "number": null,
       "scale": "non-scale",
+      "names": {
+        "ja": "ねんどろいど 美樹さやか 〈ワルプルギスの廻天〉Ver. べーしっく",
+        "en": "ねんどろいど 美樹さやか 〈ワルプルギスの廻天〉Ver. べーしっく",
+        "zh": "ねんどろいど 美樹さやか 〈ワルプルギスの廻天〉Ver. べーしっく",
+        "ko": "넨도로이드 미키 사야카 〈발푸르기스의 회천〉 Ver. 베이직"
+      },
       "images": {
         "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1140363/B7tiKhr05d8gkL49PWXFwGMRxbZsCvHn.jpg",
         "box_art_source_id": "good_smile_madoka_global"
@@ -2184768,12 +2184559,6 @@
           "ja": "ワルプルギスの廻天",
           "ko": "발푸르기스의 회천"
         }
-      },
-      "names": {
-        "ja": "ねんどろいど 美樹さやか 〈ワルプルギスの廻天〉Ver. べーしっく",
-        "en": "ねんどろいど 美樹さやか 〈ワルプルギスの廻天〉Ver. べーしっく",
-        "zh": "ねんどろいど 美樹さやか 〈ワルプルギスの廻天〉Ver. べーしっく",
-        "ko": "ねんどろいど 美樹さやか 〈ワルプルギスの廻天〉Ver. べーしっく"
       }
     },
     {
@@ -2184783,6 +2184568,12 @@
       "subline": "ねんどろいど",
       "number": null,
       "scale": "non-scale",
+      "names": {
+        "ja": "ねんどろいど 佐倉杏子 〈ワルプルギスの廻天〉Ver. べーしっく",
+        "en": "ねんどろいど 佐倉杏子 〈ワルプルギスの廻天〉Ver. べーしっく",
+        "zh": "ねんどろいど 佐倉杏子 〈ワルプルギスの廻天〉Ver. べーしっく",
+        "ko": "넨도로이드 사쿠라 쿄코 〈발푸르기스의 회천〉 Ver. 베이직"
+      },
       "images": {
         "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1140364/EVt2c15yjH8hkR6usqSYZXp3PTLr7v9m.jpg",
         "box_art_source_id": "good_smile_madoka_global"
@@ -2184830,12 +2184621,6 @@
           "ja": "ワルプルギスの廻天",
           "ko": "발푸르기스의 회천"
         }
-      },
-      "names": {
-        "ja": "ねんどろいど 佐倉杏子 〈ワルプルギスの廻天〉Ver. べーしっく",
-        "en": "ねんどろいど 佐倉杏子 〈ワルプルギスの廻天〉Ver. べーしっく",
-        "zh": "ねんどろいど 佐倉杏子 〈ワルプルギスの廻天〉Ver. べーしっく",
-        "ko": "ねんどろいど 佐倉杏子 〈ワルプルギスの廻天〉Ver. べーしっく"
       }
     },
     {
@@ -2184845,6 +2184630,12 @@
       "subline": "Good Smile Company",
       "number": null,
       "scale": "non-scale",
+      "names": {
+        "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 お茶会 ケーキの歌Ver. ノンスケールフィギュア コンプリートセット",
+        "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 お茶会 ケーキの歌Ver. ノンスケールフィギュア コンプリートSet",
+        "zh": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 お茶会 ケーキの歌Ver. ノンスケールフィギュア コンプリート套装",
+        "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 다과회 케이크의 노래 Ver. 논스케일 피규어 컴플리트 세트"
+      },
       "images": {
         "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1142228/QwP7i2g5tAfsZMzYeB1KTH8qFxnGm4S3.jpg",
         "box_art_source_id": "good_smile_madoka_global"
@@ -2184891,12 +2184682,6 @@
           "ja": "叛逆の物語",
           "ko": "반역의 이야기"
         }
-      },
-      "names": {
-        "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 お茶会 ケーキの歌Ver. ノンスケールフィギュア コンプリートセット",
-        "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 お茶会 ケーキの歌Ver. ノンスケールフィギュア コンプリートSet",
-        "zh": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 お茶会 ケーキの歌Ver. ノンスケールフィギュア コンプリート套装",
-        "ko": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 お茶会 ケーキの歌Ver. ノンスケールフィギュア コンプリート세트"
       }
     },
     {
@@ -2184906,6 +2184691,12 @@
       "subline": "Good Smile Company",
       "number": null,
       "scale": "non-scale",
+      "names": {
+        "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 鹿目まどか / 暁美ほむら / 巴マミ / 美樹さやか / 佐倉杏子 お茶会 ケーキの歌Ver. ノンスケールフィギュア",
+        "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 鹿目まどか / 暁美ほむら / 巴マミ / 美樹さやか / 佐倉杏子 お茶会 ケーキの歌Ver. ノンスケールフィギュア",
+        "zh": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 鹿目まどか / 暁美ほむら / 巴マミ / 美樹さやか / 佐倉杏子 お茶会 ケーキの歌Ver. ノンスケールフィギュア",
+        "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 카나메 마도카 / 아케미 호무라 / 토모에 마미 / 미키 사야카 / 사쿠라 쿄코 다과회 케이크의 노래 Ver. 논스케일 피규어"
+      },
       "images": {
         "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1142250/D7ur9qJe2iAtHBEbMShCx3cm4UZ5KwNp.jpg",
         "box_art_source_id": "good_smile_madoka_global"
@@ -2184952,136 +2184743,6 @@
           "ja": "叛逆の物語",
           "ko": "반역의 이야기"
         }
-      },
-      "names": {
-        "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 鹿目まどか / 暁美ほむら / 巴マミ / 美樹さやか / 佐倉杏子 お茶会 ケーキの歌Ver. ノンスケールフィギュア",
-        "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 鹿目まどか / 暁美ほむら / 巴マミ / 美樹さやか / 佐倉杏子 お茶会 ケーキの歌Ver. ノンスケールフィギュア",
-        "zh": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 鹿目まどか / 暁美ほむら / 巴マミ / 美樹さやか / 佐倉杏子 お茶会 ケーキの歌Ver. ノンスケールフィギュア",
-        "ko": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 鹿目まどか / 暁美ほむら / 巴マミ / 美樹さやか / 佐倉杏子 お茶会 ケーキの歌Ver. ノンスケールフィギュア"
-      }
-    },
-    {
-      "kit_id": "goodsmile-madoka-g1146450",
-      "franchise": "madoka",
-      "grade_code": "MADOKA_ACTION",
-      "subline": "BUZZmod.",
-      "number": null,
-      "scale": "non-scale",
-      "images": {
-        "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1146450/WEUJ4V8Q2BqSy0gD7aiAFKsCXGN3h6rM.jpg",
-        "box_art_source_id": "good_smile_madoka_global"
-      },
-      "gallery_image_urls": [
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1146450/WEUJ4V8Q2BqSy0gD7aiAFKsCXGN3h6rM.jpg"
-      ],
-      "universe": "Madoka",
-      "work_title": "Walpurgisnacht: Rising",
-      "release_date": null,
-      "price_jpy": 12000,
-      "is_limited": false,
-      "data_status": "verified",
-      "source_urls": [
-        "https://www.goodsmile.com/ja/product/1146450"
-      ],
-      "source_refs": [
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1146450",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        }
-      ],
-      "tags": [
-        "madoka",
-        "good smile",
-        "madoka_action",
-        "buzzmod."
-      ],
-      "notes": "Imported from the Good Smile Company official store (goodsmile.com, Madoka keyword search).",
-      "series": {
-        "key": "madoka_walpurgis",
-        "sort": 442,
-        "labels": {
-          "zh": "瓦尔普吉斯的回天",
-          "en": "Walpurgisnacht: Rising",
-          "ja": "ワルプルギスの廻天",
-          "ko": "발푸르기스의 회천"
-        }
-      },
-      "names": {
-        "ja": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 鹿目まどか",
-        "en": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 鹿目まどか",
-        "zh": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 鹿目まどか",
-        "ko": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 鹿目まどか"
-      }
-    },
-    {
-      "kit_id": "goodsmile-madoka-g1146963",
-      "franchise": "madoka",
-      "grade_code": "MADOKA_ACTION",
-      "subline": "BUZZmod.",
-      "number": null,
-      "scale": "non-scale",
-      "images": {
-        "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1146963/3DR06qQVfpJhyPvag5cE82zHUbwFdsx4.jpg",
-        "box_art_source_id": "good_smile_madoka_global"
-      },
-      "gallery_image_urls": [
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1146963/3DR06qQVfpJhyPvag5cE82zHUbwFdsx4.jpg"
-      ],
-      "universe": "Madoka",
-      "work_title": "Walpurgisnacht: Rising",
-      "release_date": null,
-      "price_jpy": 12000,
-      "is_limited": false,
-      "data_status": "verified",
-      "source_urls": [
-        "https://www.goodsmile.com/ja/product/1146963"
-      ],
-      "source_refs": [
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1146963",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        }
-      ],
-      "tags": [
-        "madoka",
-        "good smile",
-        "madoka_action",
-        "buzzmod."
-      ],
-      "notes": "Imported from the Good Smile Company official store (goodsmile.com, Madoka keyword search).",
-      "series": {
-        "key": "madoka_walpurgis",
-        "sort": 442,
-        "labels": {
-          "zh": "瓦尔普吉斯的回天",
-          "en": "Walpurgisnacht: Rising",
-          "ja": "ワルプルギスの廻天",
-          "ko": "발푸르기스의 회천"
-        }
-      },
-      "names": {
-        "ja": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 暁美ほむら",
-        "en": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 暁美ほむら",
-        "zh": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 暁美ほむら",
-        "ko": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 暁美ほむら"
       }
     },
     {
@@ -2185091,6 +2184752,12 @@
       "subline": "POP UP PARADE",
       "number": null,
       "scale": "non-scale",
+      "names": {
+        "ja": "POP UP PARADE SP 鹿目まどか 〈ワルプルギスの廻天〉 Ver.",
+        "en": "POP UP PARADE SP 鹿目まどか 〈ワルプルギスの廻天〉 Ver.",
+        "zh": "POP UP PARADE SP 鹿目まどか 〈ワルプルギスの廻天〉 Ver.",
+        "ko": "POP UP PARADE SP 카나메 마도카 〈발푸르기스의 회천〉 Ver."
+      },
       "images": {
         "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1147107/aphqm0A9dQJ6NrBDut2ZvGMzb7Ygscjf.jpg",
         "box_art_source_id": "good_smile_madoka_global"
@@ -2185138,12 +2184805,6 @@
           "ja": "ワルプルギスの廻天",
           "ko": "발푸르기스의 회천"
         }
-      },
-      "names": {
-        "ja": "POP UP PARADE SP 鹿目まどか 〈ワルプルギスの廻天〉 Ver.",
-        "en": "POP UP PARADE SP 鹿目まどか 〈ワルプルギスの廻天〉 Ver.",
-        "zh": "POP UP PARADE SP 鹿目まどか 〈ワルプルギスの廻天〉 Ver.",
-        "ko": "POP UP PARADE SP 鹿目まどか 〈ワルプルギスの廻天〉 Ver."
       }
     },
     {
@@ -2185153,6 +2184814,12 @@
       "subline": "ねんどろいど",
       "number": null,
       "scale": "non-scale",
+      "names": {
+        "ja": "ねんどろいど 巴マミ 制服Ver.",
+        "en": "ねんどろいど 巴マミ 制服Ver.",
+        "zh": "ねんどろいど 巴マミ 制服Ver.",
+        "ko": "넨도로이드 토모에 마미 교복 Ver."
+      },
       "images": {
         "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20131125/4134/27208/large/312ea4cbc8405e064ca38f0cff4f0b5a.jpg",
         "box_art_source_id": "good_smile_madoka_global"
@@ -2185200,12 +2184867,6 @@
           "ja": "まどか☆マギカ",
           "ko": "마도카 마기카"
         }
-      },
-      "names": {
-        "ja": "ねんどろいど 巴マミ 制服Ver.",
-        "en": "ねんどろいど 巴マミ 制服Ver.",
-        "zh": "ねんどろいど 巴マミ 制服Ver.",
-        "ko": "ねんどろいど 巴マミ 制服Ver."
       }
     },
     {
@@ -2185215,6 +2184876,12 @@
       "subline": "ねんどろいど",
       "number": null,
       "scale": "non-scale",
+      "names": {
+        "ja": "ねんどろいど美樹さやか 制服Ver.＆佐倉杏子 私服Ver.セット",
+        "en": "ねんどろいど美樹さやか 制服Ver.＆佐倉杏子 私服Ver.Set",
+        "zh": "ねんどろいど美樹さやか 制服Ver.＆佐倉杏子 私服Ver.套装",
+        "ko": "넨도로이드 미키 사야카 교복 Ver. & 사쿠라 쿄코 사복 Ver. 세트"
+      },
       "images": {
         "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20140602/4438/29120/large/4459799bb4034033f3a85e09bbef00a7.jpg",
         "box_art_source_id": "good_smile_madoka_global"
@@ -2185262,136 +2184929,6 @@
           "ja": "まどか☆マギカ",
           "ko": "마도카 마기카"
         }
-      },
-      "names": {
-        "ja": "ねんどろいど美樹さやか 制服Ver.＆佐倉杏子 私服Ver.セット",
-        "en": "ねんどろいど美樹さやか 制服Ver.＆佐倉杏子 私服Ver.Set",
-        "zh": "ねんどろいど美樹さやか 制服Ver.＆佐倉杏子 私服Ver.套装",
-        "ko": "ねんどろいど美樹さやか 制服Ver.＆佐倉杏子 私服Ver.세트"
-      }
-    },
-    {
-      "kit_id": "goodsmile-madoka-g2419",
-      "franchise": "madoka",
-      "grade_code": "NENDOROID",
-      "subline": "ねんどろいど",
-      "number": null,
-      "scale": "non-scale",
-      "images": {
-        "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20140924/4624/30580/large/593bd2dbac0c8e8a9f5c87f47a05a5db.jpg",
-        "box_art_source_id": "good_smile_madoka_global"
-      },
-      "gallery_image_urls": [
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20140924/4624/30580/large/593bd2dbac0c8e8a9f5c87f47a05a5db.jpg"
-      ],
-      "universe": "Madoka",
-      "work_title": "Rebellion",
-      "release_date": null,
-      "price_jpy": 7900,
-      "is_limited": false,
-      "data_status": "verified",
-      "source_urls": [
-        "https://www.goodsmile.com/ja/product/2419"
-      ],
-      "source_refs": [
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/2419",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        }
-      ],
-      "tags": [
-        "madoka",
-        "good smile",
-        "nendoroid",
-        "ねんどろいど"
-      ],
-      "notes": "Imported from the Good Smile Company official store (goodsmile.com, Madoka keyword search).",
-      "series": {
-        "key": "madoka_rebellion",
-        "sort": 441,
-        "labels": {
-          "zh": "叛逆的物语",
-          "en": "Rebellion",
-          "ja": "叛逆の物語",
-          "ko": "반역의 이야기"
-        }
-      },
-      "names": {
-        "ja": "ねんどろいど 悪魔ほむら",
-        "en": "ねんどろいど 悪魔ほむら",
-        "zh": "ねんどろいど 悪魔ほむら",
-        "ko": "ねんどろいど 悪魔ほむら"
-      }
-    },
-    {
-      "kit_id": "goodsmile-madoka-g4756",
-      "franchise": "madoka",
-      "grade_code": "NENDOROID",
-      "subline": "ねんどろいど",
-      "number": null,
-      "scale": "non-scale",
-      "images": {
-        "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20180205/7036/50030/large/b9606b2eb0750121990b3cbffaf8877d.jpg",
-        "box_art_source_id": "good_smile_madoka_global"
-      },
-      "gallery_image_urls": [
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20180205/7036/50030/large/b9606b2eb0750121990b3cbffaf8877d.jpg"
-      ],
-      "universe": "Madoka",
-      "work_title": "Magia Record",
-      "release_date": null,
-      "price_jpy": 5093,
-      "is_limited": false,
-      "data_status": "verified",
-      "source_urls": [
-        "https://www.goodsmile.com/ja/product/4756"
-      ],
-      "source_refs": [
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/4756",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        }
-      ],
-      "tags": [
-        "madoka",
-        "good smile",
-        "nendoroid",
-        "ねんどろいど"
-      ],
-      "notes": "Imported from the Good Smile Company official store (goodsmile.com, Madoka keyword search).",
-      "series": {
-        "key": "madoka_magireco",
-        "sort": 443,
-        "labels": {
-          "zh": "魔法纪录",
-          "en": "Magia Record",
-          "ja": "マギアレコード",
-          "ko": "마기아 레코드"
-        }
-      },
-      "names": {
-        "ja": "ねんどろいど 環いろは",
-        "en": "ねんどろいど 環いろは",
-        "zh": "ねんどろいど 環いろは",
-        "ko": "ねんどろいど 環いろは"
       }
     },
     {
@@ -2185401,6 +2184938,12 @@
       "subline": "POP UP PARADE",
       "number": null,
       "scale": "non-scale",
+      "names": {
+        "ja": "POP UP PARADE 暁美ほむら",
+        "en": "POP UP PARADE 暁美ほむら",
+        "zh": "POP UP PARADE 暁美ほむら",
+        "ko": "POP UP PARADE 아케미 호무라"
+      },
       "images": {
         "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/55557/hEaX4bAJdf38iFM6xYztCmBG9ve0NHWs.jpg",
         "box_art_source_id": "good_smile_madoka_global"
@@ -2185448,12 +2184991,6 @@
           "ja": "まどか☆マギカ",
           "ko": "마도카 마기카"
         }
-      },
-      "names": {
-        "ja": "POP UP PARADE 暁美ほむら",
-        "en": "POP UP PARADE 暁美ほむら",
-        "zh": "POP UP PARADE 暁美ほむら",
-        "ko": "POP UP PARADE 暁美ほむら"
       }
     },
     {
@@ -2185463,6 +2185000,12 @@
       "subline": "POP UP PARADE",
       "number": null,
       "scale": "non-scale",
+      "names": {
+        "ja": "POP UP PARADE 百江なぎさ",
+        "en": "POP UP PARADE 百江なぎさ",
+        "zh": "POP UP PARADE 百江なぎさ",
+        "ko": "POP UP PARADE 모모에 나기사"
+      },
       "images": {
         "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/55558/rf8PKJkqBZYU0HENGmjuTegs2hpCn9tR.jpg",
         "box_art_source_id": "good_smile_madoka_global"
@@ -2185510,12 +2185053,6 @@
           "ja": "まどか☆マギカ",
           "ko": "마도카 마기카"
         }
-      },
-      "names": {
-        "ja": "POP UP PARADE 百江なぎさ",
-        "en": "POP UP PARADE 百江なぎさ",
-        "zh": "POP UP PARADE 百江なぎさ",
-        "ko": "POP UP PARADE 百江なぎさ"
       }
     },
     {
@@ -2185525,6 +2185062,12 @@
       "subline": "Good Smile Company",
       "number": null,
       "scale": "non-scale",
+      "names": {
+        "ja": "くりぱん ぬいぐるみ 鹿目まどか / 暁美ほむら / 巴マミ / 佐倉杏子 / 美樹さやか",
+        "en": "くりぱん ぬいぐるみ 鹿目まどか / 暁美ほむら / 巴マミ / 佐倉杏子 / 美樹さやか",
+        "zh": "くりぱん ぬいぐるみ 鹿目まどか / 暁美ほむら / 巴マミ / 佐倉杏子 / 美樹さやか",
+        "ko": "쿠리판 봉제인형 카나메 마도카 / 아케미 호무라 / 토모에 마미 / 사쿠라 쿄코 / 미키 사야카"
+      },
       "images": {
         "box_art_url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/60079/u1xrX53F2PBfLyqhsEvkaU4DzidMpNCH.jpg",
         "box_art_source_id": "good_smile_madoka_global"
@@ -2185571,12 +2185114,6 @@
           "ja": "まどか☆マギカ",
           "ko": "마도카 마기카"
         }
-      },
-      "names": {
-        "ja": "くりぱん ぬいぐるみ 鹿目まどか / 暁美ほむら / 巴マミ / 佐倉杏子 / 美樹さやか",
-        "en": "くりぱん ぬいぐるみ 鹿目まどか / 暁美ほむら / 巴マミ / 佐倉杏子 / 美樹さやか",
-        "zh": "くりぱん ぬいぐるみ 鹿目まどか / 暁美ほむら / 巴マミ / 佐倉杏子 / 美樹さやか",
-        "ko": "くりぱん ぬいぐるみ 鹿目まどか / 暁美ほむら / 巴マミ / 佐倉杏子 / 美樹さやか"
       }
     },
     {
@@ -2186080,7 +2185617,7 @@
         "ja": "ポケットモンスター めちゃもふぐっとぬいぐるみ～アチャモ～",
         "en": "ポケットモンスター めちゃもふぐっとぬいぐるみ - アチャモ -",
         "zh": "ポケットモンスター めちゃもふぐっとぬいぐるみ～アチャモ～",
-        "ko": "ポケットモンスター めちゃもふぐっとぬいぐるみ～アチャモ～"
+        "ko": "포켓몬스터 메챠모후굿 봉제인형 ~아차모~"
       },
       "images": {
         "box_art_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2027.01/shiro/2694226_1a.jpg/250w_250h.jpg",
@@ -2186139,7 +2185676,7 @@
         "ja": "ポケットモンスター めちゃもふぐっとぬいぐるみ～ソーナンス～",
         "en": "ポケットモンスター めちゃもふぐっとぬいぐるみ - ソーナンス -",
         "zh": "ポケットモンスター めちゃもふぐっとぬいぐるみ～ソーナンス～",
-        "ko": "ポケットモンスター めちゃもふぐっとぬいぐるみ～ソーナンス～"
+        "ko": "포켓몬스터 메챠모후굿 봉제인형 ~마자용~"
       },
       "images": {
         "box_art_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2027.01/shiro/2792975_1a.jpg/250w_250h.jpg",
@@ -2186198,7 +2185735,7 @@
         "ja": "ポケットモンスター カラーセレクションぬいぐるみ white～ルギア～",
         "en": "ポケットモンスター カラーセレクションぬいぐるみ white - ルギア -",
         "zh": "ポケットモンスター カラーセレクションぬいぐるみ white～ルギア～",
-        "ko": "ポケットモンスター カラーセレクションぬいぐるみ white～ルギア～"
+        "ko": "포켓몬스터 컬러 셀렉션 봉제인형 white ~루기아~"
       },
       "images": {
         "box_art_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2027.01/shiro/2792978_1a.jpg/250w_250h.jpg",
@@ -2186257,7 +2185794,7 @@
         "ja": "ポケットモンスター めちゃもふぐっと ほっこりいやされぬいぐるみ～ドオー～",
         "en": "ポケットモンスター めちゃもふぐっと ほっこりいやされぬいぐるみ - ドオー -",
         "zh": "ポケットモンスター めちゃもふぐっと ほっこりいやされぬいぐるみ～ドオー～",
-        "ko": "ポケットモンスター めちゃもふぐっと ほっこりいやされぬいぐるみ～ドオー～"
+        "ko": "포켓몬스터 메챠모후굿 포근한 힐링 봉제인형 ~토오~"
       },
       "images": {
         "box_art_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2027.01/shiro/2842078_1a.jpg/250w_250h.jpg",
@@ -2186316,7 +2185853,7 @@
         "ja": "ポケットモンスター もふぐっとぬいぐるみ～エネコ・ニャオハ～",
         "en": "ポケットモンスター もふぐっとぬいぐるみ - エネコ ニャオハ -",
         "zh": "ポケットモンスター もふぐっとぬいぐるみ～エネコ・ニャオハ～",
-        "ko": "ポケットモンスター もふぐっとぬいぐるみ～エネコ・ニャオハ～"
+        "ko": "포켓몬스터 모후굿 봉제인형 ~에나비·나오하~"
       },
       "images": {
         "box_art_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2027.01/shiro/2848093_1a.jpg/250w_250h.jpg",
@@ -2186375,7 +2185912,7 @@
         "ja": "ポケットモンスター ほぺぴたぬいぐるみ～カビゴン・カイリュー・キバゴ～",
         "en": "ポケットモンスター ほぺぴたぬいぐるみ - カビゴン カイリュー キバゴ -",
         "zh": "ポケットモンスター ほぺぴたぬいぐるみ～カビゴン・カイリュー・キバゴ～",
-        "ko": "ポケットモンスター ほぺぴたぬいぐるみ～カビゴン・カイリュー・キバゴ～"
+        "ko": "포켓몬스터 볼에 착 붙는 봉제인형 ~잠만보·망나뇽·터검니~"
       },
       "images": {
         "box_art_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2027.01/shiro/2848095_1a.jpg/250w_250h.jpg",
@@ -2186434,7 +2185971,7 @@
         "ja": "ポケットモンスター ぬいぐるみ～コダック・タッツー・ミジュマル～",
         "en": "ポケットモンスター ぬいぐるみ - コダック タッツー ミジュマル -",
         "zh": "ポケットモンスター ぬいぐるみ～コダック・タッツー・ミジュマル～",
-        "ko": "ポケットモンスター ぬいぐるみ～コダック・タッツー・ミジュマル～"
+        "ko": "포켓몬스터 봉제인형 ~고라파덕·쏘드라·수댕이~"
       },
       "images": {
         "box_art_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2027.01/shiro/2848096_1a.jpg/250w_250h.jpg",
@@ -2186493,7 +2186030,7 @@
         "ja": "ポケットモンスター ぬいぐるみ～ナゾノクサ・ワタッコ・モクロー～",
         "en": "ポケットモンスター ぬいぐるみ - ナゾノクサ ワタッコ モクロー -",
         "zh": "ポケットモンスター ぬいぐるみ～ナゾノクサ・ワタッコ・モクロー～",
-        "ko": "ポケットモンスター ぬいぐるみ～ナゾノクサ・ワタッコ・モクロー～"
+        "ko": "포켓몬스터 봉제인형 ~뚜벅쵸·솜솜코·나몰빼미~"
       },
       "images": {
         "box_art_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2027.01/shiro/2848110_1a.jpg/250w_250h.jpg",
@@ -2186552,7 +2186089,7 @@
         "ja": "ポケットモンスター ボールチェーン付き顔型ミニポーチ～ミュウ～",
         "en": "ポケットモンスター Ballチェーン付き顔型ミニポーチ - ミュウ -",
         "zh": "ポケットモンスター 铁球チェーン付き顔型ミニポーチ～ミュウ～",
-        "ko": "ポケットモンスター 볼チェーン付き顔型ミニポーチ～ミュウ～"
+        "ko": "포켓몬스터 볼체인 달린 얼굴 모양 미니 파우치 ~뮤~"
       },
       "images": {
         "box_art_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2027.01/shiro/2850680_1a.jpg/250w_250h.jpg",
@@ -2186613,7 +2186150,7 @@
         "ja": "ポケットモンスター めちゃもふぐっとぬいぐるみ～ゴンベ～ウィンクver.",
         "en": "ポケットモンスター めちゃもふぐっとぬいぐるみ - ゴンベ - ウィンクver.",
         "zh": "ポケットモンスター めちゃもふぐっとぬいぐるみ～ゴンベ～ウィンクver.",
-        "ko": "ポケットモンスター めちゃもふぐっとぬいぐるみ～ゴンベ～ウィンクver."
+        "ko": "포켓몬스터 메챠모후굿 봉제인형 ~먹고자~ 윙크 ver."
       },
       "images": {
         "box_art_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2027.01/shiro/2873419_1a.jpg/250w_250h.jpg",
@@ -2186672,7 +2186209,7 @@
         "ja": "ポケットモンスター ぬいぐるみ～ヒトデマン～",
         "en": "ポケットモンスター ぬいぐるみ - ヒトデマン -",
         "zh": "ポケットモンスター ぬいぐるみ～ヒトデマン～",
-        "ko": "ポケットモンスター ぬいぐるみ～ヒトデマン～"
+        "ko": "포켓몬스터 봉제인형 ~별가사리~"
       },
       "images": {
         "box_art_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2027.01/shiro/2880604_1a.jpg/250w_250h.jpg",
@@ -2186731,7 +2186268,7 @@
         "ja": "ポケットモンスター もふぐっと ほぺぴたぬいぐるみ～ゼニガメ・ウパー～",
         "en": "ポケットモンスター もふぐっと ほぺぴたぬいぐるみ - ゼニガメ ウパー -",
         "zh": "ポケットモンスター もふぐっと ほぺぴたぬいぐるみ～ゼニガメ・ウパー～",
-        "ko": "ポケットモンスター もふぐっと ほぺぴたぬいぐるみ～ゼニガメ・ウパー～"
+        "ko": "포켓몬스터 모후굿 볼에 착 붙는 봉제인형 ~꼬부기·우파~"
       },
       "images": {
         "box_art_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2027.01/shiro/2882319_1a.jpg/250w_250h.jpg",
@@ -2187216,7 +2186753,7 @@
         "ja": "ポケットモンスター SOFVIMATES～カメックス～",
         "en": "ポケットモンスター SOFVIMATES - カメックス -",
         "zh": "ポケットモンスター SOFVIMATES～カメックス～",
-        "ko": "ポケットモンスター SOFVIMATES～カメックス～"
+        "ko": "포켓몬스터 SOFVIMATES ~거북왕~"
       },
       "images": {
         "box_art_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2026.12/bae/2840179_a.jpg/250w_250h.jpg",
@@ -2187275,7 +2186812,7 @@
         "ja": "ポケットモンスター ぬいぐるみ～フシギダネ・チコリータ・ハネッコ～",
         "en": "ポケットモンスター ぬいぐるみ - フシギダネ チコリータ ハネッコ -",
         "zh": "ポケットモンスター ぬいぐるみ～フシギダネ・チコリータ・ハネッコ～",
-        "ko": "ポケットモンスター ぬいぐるみ～フシギダネ・チコリータ・ハネッコ～"
+        "ko": "포켓몬스터 봉제인형 ~이상해씨·치코리타·통통코~"
       },
       "images": {
         "box_art_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2026.12/bae/2842106_a.jpg/250w_250h.jpg",
@@ -2187334,7 +2186871,7 @@
         "ja": "ポケットモンスター フェイスぬいぐるみバンド～カビゴン・ポッチャマ・パチリス・カヌチャン～",
         "en": "ポケットモンスター フェイスぬいぐるみバンド - カビゴン ポッチャマ パチリス カヌチャン -",
         "zh": "ポケットモンスター フェイスぬいぐるみバンド～カビゴン・ポッチャマ・パチリス・カヌチャン～",
-        "ko": "ポケットモンスター フェイスぬいぐるみバンド～カビゴン・ポッチャマ・パチリス・カヌチャン～"
+        "ko": "포켓몬스터 얼굴 봉제인형 밴드 ~잠만보·팽도리·파치리스·어리짱~"
       },
       "images": {
         "box_art_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2026.12/bae/2848125_a.jpg/250w_250h.jpg",
