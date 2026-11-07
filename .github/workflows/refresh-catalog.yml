@@ -48,6 +48,19 @@ jobs:
       - name: Apply curated Korean names
         run: node scripts/apply_ko_names.mjs
 
+      # Covers on hosts that do not serve apps reliably (bsp-prize.jp answers a
+      # bot check part of the time, Pokémon Center Online refuses hotlinks) are
+      # kept in app/assets. Polite mode: bot user agent, robots.txt, one request
+      # per host at a time, and a host that refuses is left until the next run,
+      # so the remaining covers fill in over a few days. Only uncached covers
+      # are requested.
+      - name: Cache covers of hosts that block apps
+        continue-on-error: true
+        timeout-minutes: 10
+        run: |
+          npm run cache:madoka-images
+          npm run cache:pokemon-center-images
+
       - name: Build update feed
         run: npm run updates -- --before="$RUNNER_TEMP/kits-before.json"
 

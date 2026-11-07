@@ -1083,6 +1083,21 @@
         "price"
       ],
       "notes": "Retired www.prizebp.jp read once through the Wayback Machine (scripts/archive_madoka_wayback.mjs → data/madoka/archive-products.json); the daily import reads only that file."
+    },
+    {
+      "source_id": "manual_image",
+      "name": "Official image found by hand",
+      "type": "manual",
+      "country": null,
+      "base_url": null,
+      "priority": 30,
+      "best_for": [
+        "covers of products whose own source has no usable picture"
+      ],
+      "weak_for": [
+        "everything but the image"
+      ],
+      "notes": "data/manual-images.json: an official maker / store image chosen by hand per product; applied by scripts/apply_manual_images.mjs only while the product has no cover of its own."
     }
   ]
 }

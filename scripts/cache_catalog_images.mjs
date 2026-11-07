@@ -26,13 +26,25 @@ const maxItems = Number(options.limit || process.env.IMAGE_CACHE_LIMIT || 0);
 const concurrency = Number(options.concurrency || process.env.IMAGE_CACHE_CONCURRENCY || 6);
 const externalCacheRoot = path.resolve(process.env.IMAGE_CACHE_DIR || "../image-cache/catalog");
 const assetRoot = path.resolve("app/assets/catalog");
-const userAgent =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
-  "(KHTML, like Gecko) Chrome/126.0 Safari/537.36 GunpulaImageCache/1.0";
+// --polite: the crawling rules of the newer importers — the bot says who it is
+// (no browser user-agent, no made-up Referer), robots.txt is read first and
+// obeyed, each host gets one request at a time at least POLITE_GAP_MS apart,
+// and a host that answers 403 / 429 / 503 or a non-image page (bot check) is
+// left alone for the rest of the run; its covers are tried again next run.
+// --host=a.example,b.example limits the run to covers on those hosts.
+const polite = flags.has("--polite");
+const hostFilter = new Set((options.host || "").split(",").map((host) => host.trim()).filter(Boolean));
+const POLITE_GAP_MS = 1100;
+const BOT_UA = "HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)";
+const userAgent = polite
+  ? BOT_UA
+  : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
+    "(KHTML, like Gecko) Chrome/126.0 Safari/537.36 GunpulaImageCache/1.0";
 
 function shouldCacheUrl(url) {
   if (!url || !/^https?:\/\//i.test(url)) return false;
   const parsed = new URL(url);
+  if (hostFilter.size && !hostFilter.has(parsed.hostname)) return false;
   return (
     allImages ||
     repoAssets ||
@@ -112,14 +124,74 @@ const kitIdFilter = kitIdsPath
     )
   : new Set();
 
+// Polite mode: per-host queue, robots.txt, refusal stops the host.
+const hostState = new Map();
+
+function politeHost(host) {
+  if (!hostState.has(host)) hostState.set(host, { chain: Promise.resolve(), nextAt: 0, robots: undefined, refused: null });
+  return hostState.get(host);
+}
+
+// Disallow rules for "*" or this bot ("hobbyatlasdatabot"); a robots.txt that
+// is missing or not plain text (a soft-404 page) allows everything.
+async function robotsDisallows(host) {
+  const state = politeHost(host);
+  if (state.robots === undefined) {
+    state.robots = [];
+    try {
+      const response = await fetch(`https://${host}/robots.txt`, { headers: { "User-Agent": BOT_UA } });
+      const text = response.ok && /text\/plain/i.test(response.headers.get("content-type") || "") ? await response.text() : "";
+      let applies = false;
+      for (const raw of text.split(/\r?\n/)) {
+        const line = raw.replace(/#.*/, "").trim();
+        const [key, ...rest] = line.split(":");
+        const value = rest.join(":").trim();
+        if (/^user-agent$/i.test(key)) applies = value === "*" || /hobbyatlasdatabot/i.test(value);
+        else if (applies && /^disallow$/i.test(key) && value) state.robots.push(value);
+      }
+    } catch {
+      // unreachable robots.txt: treated as missing
+    }
+    state.nextAt = Date.now() + POLITE_GAP_MS;
+  }
+  return state.robots;
+}
+
+async function politeFetch(url) {
+  const { host, pathname } = new URL(url);
+  const state = politeHost(host);
+  const run = async () => {
+    if (state.refused) throw new Error(`host refused earlier: ${state.refused}`);
+    const rules = await robotsDisallows(host);
+    if (rules.some((rule) => pathname.startsWith(rule))) throw new Error("robots.txt disallows");
+    const wait = state.nextAt - Date.now();
+    if (wait > 0) await new Promise((resolve) => setTimeout(resolve, wait));
+    try {
+      const response = await fetch(url, { headers: { "User-Agent": BOT_UA, Accept: "image/*" } });
+      const type = response.headers.get("content-type") || "";
+      if ([403, 429, 503].includes(response.status) || (response.ok && !/^image\//i.test(type))) {
+        state.refused = `HTTP ${response.status} ${type}`;
+      }
+      return response;
+    } finally {
+      state.nextAt = Date.now() + POLITE_GAP_MS;
+    }
+  };
+  const result = state.chain.then(run, run);
+  state.chain = result.catch(() => {});
+  return result;
+}
+
 async function fetchImage(kit, url) {
-  const response = await fetch(url, {
-    headers: {
-      "User-Agent": userAgent,
-      "Referer": refererFor(kit, url),
-      "Accept": "image/avif,image/webp,image/png,image/jpeg,image/*,*/*;q=0.8",
-    },
-  });
+  const response = polite
+    ? await politeFetch(url)
+    : await fetch(url, {
+        headers: {
+          "User-Agent": userAgent,
+          "Referer": refererFor(kit, url),
+          "Accept": "image/avif,image/webp,image/png,image/jpeg,image/*,*/*;q=0.8",
+        },
+      });
   if (!response.ok) {
     throw new Error(`${response.status} ${response.statusText}`);
   }

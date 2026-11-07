@@ -47,6 +47,8 @@ const STEPS = [
   // the release months that moved. Offline.
   { script: "atlas:restocks", kind: "derive" },
   { script: "relink:images", kind: "derive" },
+  // Hand-picked official covers for products whose source has none (data/manual-images.json).
+  { script: "images:manual", kind: "derive" },
   { script: "localize", kind: "derive" },
   { script: "check:sources", kind: "required" },
 ];
