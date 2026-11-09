@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-09T14:31:01.436Z",
+  "updated_at": "2026-11-09T23:53:45.320Z",
   "sources": [
     {
       "source_id": "tamashii_news",
@@ -82,7 +82,24 @@
       "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuG_D_8QZmHTfbJfsz8-J_A"
     }
   ],
-  "fetch_errors": [],
+  "fetch_errors": [
+    {
+      "source_id": "bandai_hobby_youtube",
+      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuxB1suCoCqAKiljh_0xE4A returned 404; https://www.youtube.com/feeds/videos.xml?playlist_id=UUuxB1suCoCqAKiljh_0xE4A returned 404"
+    },
+    {
+      "source_id": "gundam_channel_youtube",
+      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UC7wu64jFsV02bbu6UHUd7JA returned 404; https://www.youtube.com/feeds/videos.xml?playlist_id=UU7wu64jFsV02bbu6UHUd7JA returned 404"
+    },
+    {
+      "source_id": "gundam_base_youtube",
+      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UCMt6mbBNDPwyNGvJKvhCYuA returned 404; https://www.youtube.com/feeds/videos.xml?playlist_id=UUMt6mbBNDPwyNGvJKvhCYuA returned 404"
+    },
+    {
+      "source_id": "beyblade_youtube",
+      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuG_D_8QZmHTfbJfsz8-J_A returned 404; https://www.youtube.com/feeds/videos.xml?playlist_id=UUuG_D_8QZmHTfbJfsz8-J_A returned 404"
+    }
+  ],
   "announcements": [
     {
       "id": "gundam-official-szkd08d9vyl6ruf728ryvl5s",
