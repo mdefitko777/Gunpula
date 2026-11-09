@@ -1,4 +1,4 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { appendFile, readFile, writeFile } from "node:fs/promises";
 
 const CATALOG_FILE = "data/kits.json";
 
@@ -1150,13 +1150,41 @@ if (missingNames.length || missingSeries.length) {
 }
 
 // A rule change that moves a few records is normal; one that moves a large batch out
-// of the series they already had is a regression. Fail without writing, so the
-// refresh keeps yesterday's kits.json and reports this step.
+// of the series they already had is a regression. The importers hand this script
+// records whose series is reset, so the comparison is with the catalog as published
+// before this refresh (LOCALIZE_BASELINE_PATH, the workflow's snapshot), else with the
+// records as they came in.
+//
+// This step used to throw on a large batch. The importers had already rewritten
+// kits.json, so the refresh then committed a catalog with no series at all and the
+// curated Korean names reverted (2026-11-06: 2366 series, 4754 names). Now every other
+// change of the day goes through (new products, prices, dates, images) and only the
+// moved records keep their published series; the note goes to the failure report.
 const MAX_SERIES_MOVES = Number(process.env.LOCALIZE_MAX_SERIES_MOVES || 40);
-const moved = catalog.kits.filter((kit, index) => kit.series?.key && kit.series.key !== "other" && kits[index].series.key !== kit.series.key);
+const baselinePath = process.env.LOCALIZE_BASELINE_PATH || "";
+let baseline = catalog.kits;
+if (baselinePath) {
+  try {
+    baseline = JSON.parse(await readFile(baselinePath, "utf8")).kits;
+  } catch (error) {
+    console.warn(`Baseline ${baselinePath} unreadable (${error.message}); comparing with the incoming records.`);
+  }
+}
+const published = new Map(baseline.filter((kit) => kit.series?.key).map((kit) => [kit.kit_id, kit]));
+const moved = kits
+  .map((kit, index) => ({ kit, index, before: published.get(kit.kit_id) }))
+  .filter(({ kit, before }) => before && before.series.key !== "other" && kit.series.key !== before.series.key);
 if (moved.length > MAX_SERIES_MOVES) {
-  const sample = moved.slice(0, 5).map((kit) => `${kit.kit_id} ${kit.series.key}`).join(", ");
-  throw new Error(`Localization would move ${moved.length} records out of their series (limit ${MAX_SERIES_MOVES}), e.g. ${sample}`);
+  for (const { kit, index, before } of moved) {
+    kits[index] = { ...kit, series: before.series, work_title: before.work_title ?? kit.work_title, universe: before.universe ?? kit.universe };
+  }
+  const sample = moved
+    .slice(0, 5)
+    .map(({ kit, before }) => `${kit.kit_id} ${before.series.key}→${kit.series.key}`)
+    .join(", ");
+  const note = `localize held ${moved.length} series moves (limit ${MAX_SERIES_MOVES}); they keep their published series. e.g. ${sample}`;
+  console.warn(`::warning::${note}`);
+  if (process.env.IMPORT_NOTES_PATH) await appendFile(process.env.IMPORT_NOTES_PATH, `${note}\n`, "utf8");
 }
 
 await writeFile(CATALOG_FILE, `${JSON.stringify({ ...catalog, kits }, null, 2)}\n`, "utf8");

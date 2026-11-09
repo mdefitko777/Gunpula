@@ -1,5 +1,5 @@
 import { spawn } from "node:child_process";
-import { appendFile, writeFile } from "node:fs/promises";
+import { appendFile, readFile, rm, writeFile } from "node:fs/promises";
 
 // Runs every import step behind `npm run import:data`, in order, and keeps going
 // when one fails. This used to be a single `&&` chain, so goodsmile answering 503
@@ -49,7 +49,11 @@ const STEPS = [
   { script: "relink:images", kind: "derive" },
   // Hand-picked official covers for products whose source has none (data/manual-images.json).
   { script: "images:manual", kind: "derive" },
-  { script: "localize", kind: "derive" },
+  // Rewrites kits.json in place (series, compact work titles, four-language names). If it
+  // crashes, kits.json is the importers' raw output with no series, so nothing is committed.
+  // A batch of series moves is not a crash: those records keep their published series and
+  // the step leaves a note (IMPORT_NOTES_PATH) for the failure report.
+  { script: "localize", kind: "required" },
   { script: "check:sources", kind: "required" },
 ];
 
@@ -58,6 +62,12 @@ const STEPS = [
 const STEP_TIMEOUT_MS = Number(process.env.IMPORT_STEP_TIMEOUT_MINUTES || 15) * 60 * 1000;
 // One line per failed step, read by the workflow to comment on the failure issue.
 const FAILURES_PATH = process.env.IMPORT_FAILURES_PATH || "";
+// Steps that succeeded but held something back append a line here (read into the report).
+const NOTES_PATH = FAILURES_PATH ? `${FAILURES_PATH}.notes` : "";
+if (NOTES_PATH) {
+  await rm(NOTES_PATH, { force: true });
+  process.env.IMPORT_NOTES_PATH = NOTES_PATH;
+}
 
 const isWindows = process.platform === "win32";
 let current = null;
@@ -129,7 +139,9 @@ for (const result of results) {
 console.log(`${results.length - failed.length}/${results.length} steps ok, ${sources.length - sources.filter((r) => !r.ok).length}/${sources.length} sources ok.`);
 
 if (FAILURES_PATH) {
-  await writeFile(FAILURES_PATH, failed.map((result) => `${result.script} (${result.reason})\n`).join(""), "utf8");
+  const notes = NOTES_PATH ? await readFile(NOTES_PATH, "utf8").catch(() => "") : "";
+  const lines = failed.map((result) => `${result.script} (${result.reason})\n`).join("");
+  await writeFile(FAILURES_PATH, lines + notes, "utf8");
 }
 if (process.env.GITHUB_STEP_SUMMARY) {
   const rows = results.map((result) => `| ${result.ok ? "ok" : "**FAIL**"} | \`${result.script}\` | ${result.kind} | ${result.seconds}s | ${result.reason} |`);

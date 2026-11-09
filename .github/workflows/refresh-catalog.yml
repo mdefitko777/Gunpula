@@ -40,6 +40,8 @@ jobs:
           # build_restocks.mjs (atlas:restocks step) compares release months with the
           # catalog as it was before this run.
           RESTOCK_BEFORE_PATH: ${{ runner.temp }}/kits-before.json
+          # localize_catalog.mjs: a batch of series moves keeps the series published before this run.
+          LOCALIZE_BASELINE_PATH: ${{ runner.temp }}/kits-before.json
         run: npm run import:data
 
       - name: Translate kana display names to Korean
