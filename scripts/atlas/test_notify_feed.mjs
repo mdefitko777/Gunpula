@@ -22,6 +22,9 @@ assert.deepEqual(changeReasons(null, kit("a")), ["new"]);
 assert.deepEqual(changeReasons(kit("a"), kit("a", { price_jpy: 2420 })), ["price"]);
 assert.deepEqual(changeReasons(kit("a"), kit("a", { images: ["x"] })), ["image"]);
 assert.deepEqual(changeReasons(kit("a"), kit("a", { release_date: "2026-12", is_limited: true })), ["release", "limited"]);
+// a date seen for the first time (backfilled from the product page) is not news
+assert.deepEqual(changeReasons(kit("a", { release_date: null }), kit("a")), ["release_found"]);
+assert.equal(notifiable("changed", ["release_found"]), false);
 assert.equal(notifiable("changed", ["image", "name"]), false);
 assert.equal(notifiable("changed", ["image", "price"]), true);
 assert.equal(notifiable("added", ["new"]), true);

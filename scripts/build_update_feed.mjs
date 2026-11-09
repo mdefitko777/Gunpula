@@ -133,7 +133,9 @@ function changeReasons(beforeKit, kit, changeType) {
   const reasons = new Set();
   if (!sameJson(beforeKit.names, kit.names)) reasons.add("name");
   if (!sameJson(beforeKit.images, kit.images) || !sameJson(beforeKit.gallery_image_urls, kit.gallery_image_urls)) reasons.add("image");
-  if (beforeKit.release_date !== kit.release_date) reasons.add("release");
+  // A date that appears for the first time (often read later from the product page,
+  // scripts/backfill_release_dates.mjs) is quiet; a date that moves is news.
+  if (beforeKit.release_date !== kit.release_date) reasons.add(beforeKit.release_date ? "release" : "release_found");
   if (beforeKit.price_jpy !== kit.price_jpy) reasons.add("price");
   if (beforeKit.grade_code !== kit.grade_code || beforeKit.subline !== kit.subline || beforeKit.scale !== kit.scale) reasons.add("product_line");
   if (beforeKit.series?.key !== kit.series?.key || beforeKit.work_title !== kit.work_title || beforeKit.universe !== kit.universe) reasons.add("series");

@@ -49,6 +49,8 @@ const STEPS = [
   { script: "relink:images", kind: "derive" },
   // Hand-picked official covers for products whose source has none (data/manual-images.json).
   { script: "images:manual", kind: "derive" },
+  // Release dates read earlier from product pages (data/release-dates.json); offline.
+  { script: "dates:apply", kind: "derive" },
   // Rewrites kits.json in place (series, compact work titles, four-language names). If it
   // crashes, kits.json is the importers' raw output with no series, so nothing is committed.
   // A batch of series moves is not a crash: those records keep their published series and

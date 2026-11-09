@@ -63,6 +63,14 @@ jobs:
           npm run cache:madoka-images
           npm run cache:pokemon-center-images
 
+      # Release dates of new products whose source list has none, read from their
+      # product pages (Aniplex+, gashapon.jp) with the same polite rules; at most
+      # 300 pages a run. Dates already read are put back by import:data (dates:apply).
+      - name: Read missing release dates
+        continue-on-error: true
+        timeout-minutes: 12
+        run: npm run dates:backfill -- --limit=300
+
       - name: Build update feed
         run: npm run updates -- --before="$RUNNER_TEMP/kits-before.json"
 
