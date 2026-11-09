@@ -23,6 +23,10 @@ const WORK_SERIES = {
   "build-fighters-try": "build", "build-divers": "build", "build-divers-rerise": "build", "build-metaverse": "build", aoz: "aoz",
   sentinel: "sentinel", thunderbolt: "thunderbolt", origin: "origin", crossbone: "crossbone", msv: "msv", moon: "moon",
   "sd-sangokuden": "sangoku", "sd-gundam-world-soketsuden": "sangoku",
+  // UC side stories and SD lines the atlas knows (reached only by records left in other / mixed)
+  "twilight-axis": "uc_side", "secret-weapons-phantom-bullets": "uc_side", "double-fake-under-the-gundam": "uc_side",
+  "gundam-neo-experience-0087-green-divers": "uc_side", "gihrens-greed": "uc_side", "sd-gundam-gaiden": "sd",
+  "sd-sengokuden": "sd", "sd-gundam-world-heroes": "sd", "sd-command-chronicles-g-arms": "sd",
 };
 
 function seriesFromKitWorks(kit) {
@@ -512,11 +516,11 @@ const GUNDAM_WORK_UNIT_RULES = [
 // f91 before the plain-Gundam rule, which would otherwise take "ガンダムRXF-91改".
 const GUNDAM_FALLBACK_UNIT_RULES = [
   { key: "double_o", pattern: /ガンダムOO|グラハム・エーカー|GUNDAM EXIA|00 RAISER|00 QAN\[T\]|トランザムライザー|GNソード|GNアーチャー|GNアームズ|アルヴァアロン|アルヴァトーレ|オーガンダム|[O0]ガンダム|ガッデス|(?:^|\s)ガガ(?=\s|$)|マスラオ|レグナント|プロトザンユニット/i },
-  { key: "g", pattern: /MASTER GUNDAM|BURNING GUNDAM|GOD GUNDAM|ガンダムシュピーゲル|ドモン・カッシュ|東方不敗/i },
+  { key: "g", pattern: /MASTER GUNDAM|BURNING GUNDAM|GOD GUNDAM|SHINING GUNDAM|ガンダムシュピーゲル|ドモン・カッシュ|東方不敗/i },
   { key: "w", pattern: /TALLGEESE|OZ-06MS LEO|EPYON|WING GUNDAM|DEATHSCYTHE|HEAVY ARMS|SANDROCK/i },
   { key: "ibo", pattern: /BARBATOS|獅電/i },
   { key: "witch", pattern: /CALIBARN|GUNDAM AERIAL|スレッタ・マーキュリー|ミオリネ・レンブラン/i },
-  { key: "cca", pattern: /SAZABI|νGUNDAM/i },
+  { key: "cca", pattern: /SAZABI|ν ?GUNDAM/i },
   { key: "unicorn", pattern: /SINANJU|ガンダムUC|アームド・?アーマーVN|コンロイ/i },
   { key: "f91", pattern: /F90|RXF-91|ネオガンダム|クラスターガンダム|Gキャノンマグナ|ハーディガン|ビギナ・?ゼラ|ベース・?ジャバー/i },
   { key: "victory", pattern: /ガンブラスター|セカンドV/i },

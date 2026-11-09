@@ -29,4 +29,7 @@ assert.deepEqual(
   ["HG 1/144 레전드 건담 (2026년)", "HG 1/144 레전드 건담 (2005년)", "HG 1/144 레전드 건담", "마스코트 이브이", "마스코트 이브이", "Fire Station", "Fire Station"],
 );
 assert.equal(tidyKoNames(kits), 0, "second run changes nothing");
+assert.equal(tidyKo("기동전사 건담 ROBOT魂 미니어처 컬렉션"), "기동전사 건담 ROBOT혼 미니어처 컬렉션");
+assert.equal(tidyKo("超合金の塊 건담 시리즈"), "초합금 덩어리 건담 시리즈");
+assert.equal(tidyKo("EXPO2025 超合金 RX-78F00 / E 건담"), "EXPO2025 초합금 RX-78F00 / E 건담");
 console.log("ko tidy: ok");

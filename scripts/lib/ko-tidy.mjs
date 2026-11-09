@@ -7,6 +7,7 @@
 //   * shop campaign tags dropped:     "【무료 배송 캠페인 대상】…", "【무료 배송!】"
 //   * reissue tags in one form:       "【재판】" · "※재판" · "（재판）" → "(재판)" at the end
 //   * HTML entities left by a store:  "Pikachu&apos;s" → "Pikachu's"
+//   * Bandai brand words left in kanji: "ROBOT魂" → "ROBOT혼", "超合金(の塊)" → "초합금 (덩어리)"
 //   * same name, different products:  two records of one franchise and grade with the same
 //     Korean name but different release years get the year: "HG 1/144 레전드 건담 (2026년)"
 //     (not LEGO: the app puts the set number in front of every LEGO name)
@@ -34,6 +35,9 @@ export function tidyKo(name) {
     .replace(/\s+([)）\]］】」』>〉])/g, "$1")
     .replace(/(\d)\s+\/\s+(\d)/g, "$1/$2")
     .replace(/\bFate\s+\/\s+/g, "Fate/")
+    .replace(/ROBOT\s*魂/g, "ROBOT혼")
+    .replace(/超合金の塊/g, "초합금 덩어리")
+    .replace(/超合金/g, "초합금")
     .replace(/\s{2,}/g, " ")
     .trim();
   return reissue ? `${ko} (재판)` : ko;

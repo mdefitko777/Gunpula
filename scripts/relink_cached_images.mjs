@@ -2,6 +2,8 @@ import { createHash } from "node:crypto";
 import { readdir, readFile, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 
+import { dropCachedOriginals } from "./lib/cached-originals.mjs";
+
 const CATALOG_PATH = "data/kits.json";
 const checkOnly = process.argv.includes("--check");
 
@@ -94,13 +96,17 @@ for (const kit of catalog.kits || []) {
   relinkedCovers += 1;
 }
 
+let droppedOriginals = 0;
+for (const kit of catalog.kits || []) droppedOriginals += dropCachedOriginals(kit);
+
 console.log(`Reusable local images: ${relinkedCovers} covers, ${relinkedGalleryImages} gallery files.`);
+console.log(`Remote originals of cached gallery photos dropped: ${droppedOriginals}.`);
 if (checkOnly) {
-  if (relinkedCovers) {
+  if (relinkedCovers || droppedOriginals) {
     console.error("Catalog contains remote covers that already have local cache files. Run npm run relink:images.");
     process.exitCode = 1;
   }
-} else if (relinkedCovers) {
+} else if (relinkedCovers || droppedOriginals) {
   await writeFile(CATALOG_PATH, `${JSON.stringify(catalog, null, 2)}\n`, "utf8");
   console.log(`Updated ${CATALOG_PATH}.`);
 }

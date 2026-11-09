@@ -2,6 +2,8 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import path from "node:path";
 
+import { dropCachedOriginals } from "./lib/cached-originals.mjs";
+
 const CATALOG_PATH = "data/kits.json";
 const catalog = JSON.parse(await readFile(CATALOG_PATH, "utf8"));
 const args = process.argv.slice(2);
@@ -300,6 +302,7 @@ if (rewriteCatalog && repoAssets) {
       box_art_url: cachedCover,
     };
     kit.gallery_image_urls = [...new Set(gallery.filter(Boolean))];
+    dropCachedOriginals(kit);
     updatedKits += 1;
   }
   catalog.updated_at = new Date().toISOString().slice(0, 10);
