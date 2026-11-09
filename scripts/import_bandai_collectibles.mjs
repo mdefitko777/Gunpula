@@ -1250,6 +1250,18 @@ function parseBeybladeXListings(html, pageUrl) {
 
 function parseBeybladeXDetail(html, detailUrl, code) {
   const imageKey = code.replace(/[^A-Z0-9]/gi, "").toUpperCase();
+  // The 「パーツ詳細」 pop-up: one picture of the blade, ratchet and bit with
+  // their descriptions and stats (_image/detail_BX54.png). Sets can have one
+  // per bey (detail_BX00_xx …).
+  const parts = unique(
+    [...html.matchAll(/<img[^>]+src="([^"]+)"[^>]*>/g)]
+      .map((match) => match[1])
+      .filter((src) => {
+        const fileName = new URL(src, detailUrl).pathname.split("/").at(-1)?.toUpperCase() ?? "";
+        return fileName.startsWith(`DETAIL_${imageKey}`);
+      })
+      .map((src) => absoluteUrl(src, detailUrl)),
+  );
   const images = unique(
     [...html.matchAll(/<img[^>]+src="([^"]+)"[^>]*>/g)]
       .map((match) => match[1])
@@ -1260,7 +1272,7 @@ function parseBeybladeXDetail(html, detailUrl, code) {
       .map((src) => absoluteUrl(src, detailUrl)),
   );
 
-  return { images };
+  return { images, parts };
 }
 
 function beybladeCategoryLabel(category) {
@@ -1313,18 +1325,19 @@ async function importBeybladeX(existingKits = []) {
 
   const details = await mapLimit(listings, 6, async (listing) => {
     if (listing.detail_url === BEYBLADE_X_LINEUP_URL) {
-      return { images: [] };
+      return { images: [], parts: [] };
     }
     try {
       return parseBeybladeXDetail(await fetchBrowserText(listing.detail_url), listing.detail_url, listing.code);
     } catch (error) {
       console.warn(`BEYBLADE X detail fetch failed for ${listing.detail_url}: ${error.message}`);
-      return { images: [] };
+      return { images: [], parts: [] };
     }
   });
 
   return listings.map((listing, index) => {
-    const images = unique([listing.image_url, ...details[index].images]);
+    // Cover first (the lineup card), then the parts detail picture, then the product shots.
+    const images = unique([listing.image_url, ...details[index].parts, ...details[index].images].filter(Boolean));
     return buildKit({
       kitId: beybladeKitId(listing, existingByTitle),
       franchise: "beyblade",
@@ -1337,7 +1350,8 @@ async function importBeybladeX(existingKits = []) {
         zh: listing.title,
         ko: listing.title,
       },
-      boxArtUrl: images[0] ?? null,
+      // Never the parts picture as the cover, even when the card has no image.
+      boxArtUrl: listing.image_url || details[index].images[0] || null,
       galleryUrls: images,
       releaseDate: listing.release_date,
       priceJpy: listing.price_jpy,
