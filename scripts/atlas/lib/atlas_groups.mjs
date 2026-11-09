@@ -43,7 +43,8 @@ const classNear = (before, after) => {
 };
 
 function aniplexCodes(kit) {
-  const urls = [kit.images?.box_art_url, ...(kit.gallery_image_urls || []), ...(kit.source_urls || [])];
+  // images.cached_from: remote originals of cached photos (scripts/lib/cached-originals.mjs)
+  const urls = [kit.images?.box_art_url, ...(kit.images?.cached_from || []), ...(kit.gallery_image_urls || []), ...(kit.source_urls || [])];
   const codes = [];
   for (const u of urls) {
     const m = String(u || "").match(/\/items\/title-[A-Za-z]\/([^/]+)\/([^/]+)/);

@@ -10,6 +10,7 @@ const kit = {
 };
 assert.equal(dropCachedOriginals(kit), 1);
 assert.deepEqual(kit.gallery_image_urls, ["./assets/catalog/madoka/alter-madoka-258-01-ddf6931224.jpg", other]);
+assert.deepEqual(kit.images.cached_from, [original], "the original URL is kept out of the gallery");
 assert.equal(dropCachedOriginals(kit), 0, "idempotent");
 
 const remoteOnly = { gallery_image_urls: [original, other] };

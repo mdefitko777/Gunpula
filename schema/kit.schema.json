@@ -70,6 +70,11 @@
         "box_art_source_id": {
           "type": ["string", "null"],
           "description": "Must match one source_id in data/sources.json when not null."
+        },
+        "cached_from": {
+          "type": "array",
+          "items": { "type": "string", "format": "uri" },
+          "description": "Remote URLs of photos the gallery shows as local cached copies (kept for the information in the URL, not shown)."
         }
       },
       "additionalProperties": false
