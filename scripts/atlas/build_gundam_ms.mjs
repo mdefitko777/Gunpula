@@ -229,7 +229,13 @@ async function main() {
         if (rb && !/カラー$/.test(rb[2]) && nameKey(rb[1]).length >= 3) rec.names.ja.push(rb[1]);
       }
     }
-    const seriesWorks = uniq((w.series || []).map(matchWikiSeries));
+    // A page with no "Series" list but a "Debut" (215 pages: GQuuuuuuX -Beginning-, SEED FREEDOM,
+    // Thunderbolt …) belongs to its debut work; without this ZGMF-MM07 ズゴック had no work at all
+    // and the SEED FREEDOM kit fell back to the 0079 ズゴック.
+    // ("Mobile Suit Variation" as a debut names where the design was drawn, not where the suit
+    // appears — ザク・マリンタイプ is in the TV series — so it is not used this way.)
+    const debutOnly = w.debut && !/^Mobile Suit Variation$/i.test(w.debut) ? [w.debut] : [];
+    const seriesWorks = uniq(((w.series || []).length ? w.series : debutOnly).map(matchWikiSeries));
     rec.works = seriesWorks;
     rec.debut = seriesWorks[0] || null;
     rec.timeline = eraTimeline(w.era) || (rec.debut ? workById.get(rec.debut)?.timeline : null) || null;
@@ -541,6 +547,20 @@ async function main() {
   };
   const altOnly = (r) => r.works.length > 0 && r.works.every((w) => ALT_WORKS.has(w));
 
+  // A work named in the box name — "ズゴック（SEED FREEDOM Ver.）", "ガンダム (GQuuuuuuX Ver.)" —
+  // tells which of several same-named pages is meant; the series bucket only knows "SEED".
+  const TITLE_HINTS = [
+    [/SEED\s*FREEDOM(?!\s*ZERO)/i, "seed-freedom"],
+    [/SEED\s*DESTINY/i, "seed-destiny"],
+    [/GQuuuuuuX|ジークアクス/i, "gquuuuuux"],
+    [/水星の魔女|Witch\s*from\s*Mercury/i, "witch-from-mercury"],
+    [/鉄血のオルフェンズ/, "orphans"],
+    [/閃光のハサウェイ/, "hathaway"],
+  ].filter(([, id]) => workById.has(id));
+  function titleHintWorks(text) {
+    return TITLE_HINTS.filter(([re]) => re.test(text)).map(([, id]) => id);
+  }
+
   function pick(ids, ctx, { max = 1 } = {}) {
     // A variant page found alone competes with its base page (kits are rarely the alt version),
     // and a kit that names a version ("(GQ)") also sees that version of each candidate.
@@ -716,7 +736,11 @@ async function main() {
     const n = nfkc(name);
     const joinKey = kitJoinKey(name);
     const manualTitles = manualIndex.get(joinKey) || [];
-    const hintWorks = uniq([...manualTitles.map((t) => workOfManual.get(t)), workOfLegacy.get(kit.series?.key)]);
+    const hintWorks = uniq([
+      ...manualTitles.map((t) => workOfManual.get(t)),
+      ...titleHintWorks(n),
+      workOfLegacy.get(kit.series?.key),
+    ]);
     const cleanedTop = cleanKitName(name, workPrefixes);
     const sdWork = sdOriginalWork(kit, cleanedTop.cleaned);
     const baseCtx = { works: hintWorks, variant: kitVariantSignal(name), ew: isEw(n) };
@@ -840,7 +864,18 @@ async function main() {
       kitWorkSource[kit.kit_id] = "sd_line";
     } else {
       const debut = uniq(r.ids.map((id) => ms.get(id)?.debut));
-      if (debut.length) {
+      // A plain "ザク" box linked by name to the GQuuuuuuX page "MS-06 Zaku" (a page that only got
+      // its work from "Debut" on 2026-11-09) is not a GQuuuuuuX kit: when the only debut is
+      // GQuuuuuuX and the kit gives no sign of it, its own series wins. (THE ORIGIN, Thunderbolt and
+      // Doan's Island pages are left as they were: their kits name the version.)
+      const legacy = workOfLegacy.get(kit.series?.key);
+      const retellingOnly =
+        debut.length &&
+        debut.every((w) => w === "gquuuuuux") &&
+        legacy &&
+        !debut.includes(legacy) &&
+        !(r.hintWorks || []).some((w) => debut.includes(w));
+      if (debut.length && !retellingOnly) {
         kitWorks[kit.kit_id] = debut.slice(0, 3);
         kitWorkSource[kit.kit_id] = "ms_debut";
       } else if (workOfLegacy.get(kit.series?.key)) {
