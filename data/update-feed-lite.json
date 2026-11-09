@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-09",
-  "generated_at": "2026-11-09T09:55:03.847Z",
+  "generated_at": "2026-11-09T10:36:05.126Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,18 +18,18 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-09T09:54:53.914Z",
+    "generated_at": "2026-11-09T10:35:57.240Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-09",
-      "generated_at": "2026-11-09T09:55:03.847Z",
+      "generated_at": "2026-11-09T10:36:05.126Z",
       "total_before": 39326,
       "total_after": 39326,
       "added_count": 3,
-      "changed_count": 281,
+      "changed_count": 282,
       "removed_count": 3,
       "watched_count": 14,
       "merged_count": 0,
@@ -39,7 +39,7 @@
       "franchise_counts": {
         "lego": 4,
         "armored_core": 5,
-        "madoka": 2,
+        "madoka": 3,
         "pokemon": 146,
         "beyblade": 72,
         "gundam": 51,
@@ -47,7 +47,7 @@
       },
       "reason_counts": {
         "new": 3,
-        "image": 274,
+        "image": 275,
         "limited": 2,
         "source": 4,
         "release": 1,
@@ -794,6 +794,46 @@
           ]
         },
         {
+          "kit_id": "aniplex-madoka-itemrfedmpec",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_ACTION",
+          "subline": "BUZZmod.",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 暁美ほむら",
+            "zh": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 暁美ほむら",
+            "ko": "BUZZmod. 『극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉』 아케미 호무라",
+            "en": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 暁美ほむら"
+          },
+          "release_date": "2027-07",
+          "price_jpy": 12000,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "aniplex_plus_madoka_jp",
+            "claynel_madoka_jp",
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemRfedMPeC.html",
+            "https://www.claynel.jp/products/?item_id=12526"
+          ]
+        },
+        {
           "kit_id": "tamashii-16129",
           "change_type": "changed",
           "franchise": "gundam",
@@ -989,44 +1029,6 @@
           "source_urls": [
             "https://www.bandai.co.jp/candy/gundam/converge/core55/",
             "https://www.bandai.co.jp/candy/gundam/converge/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000010255",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "プレミアムバンダイ",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "HG 1 / 144 スーパーカスタムザクF2000",
-            "zh": "HG 1 / 144 スーパーカスタム扎古F2000",
-            "ko": "HG 1/144 슈퍼 커스텀 자쿠 F2000",
-            "en": "HG 1 / 144 スーパーカスタムZakuF2000"
-          },
-          "release_date": "2027-01",
-          "price_jpy": 2310,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000010255/"
           ]
         }
       ],

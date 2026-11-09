@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-09",
-  "generated_at": "2026-11-09T09:55:03.847Z",
+  "generated_at": "2026-11-09T10:36:05.126Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,18 +18,18 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-09T09:54:53.914Z",
+    "generated_at": "2026-11-09T10:35:57.240Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-09",
-      "generated_at": "2026-11-09T09:55:03.847Z",
+      "generated_at": "2026-11-09T10:36:05.126Z",
       "total_before": 39326,
       "total_after": 39326,
       "added_count": 3,
-      "changed_count": 281,
+      "changed_count": 282,
       "removed_count": 3,
       "watched_count": 14,
       "merged_count": 0,
@@ -39,7 +39,7 @@
       "franchise_counts": {
         "lego": 4,
         "armored_core": 5,
-        "madoka": 2,
+        "madoka": 3,
         "pokemon": 146,
         "beyblade": 72,
         "gundam": 51,
@@ -47,7 +47,7 @@
       },
       "reason_counts": {
         "new": 3,
-        "image": 274,
+        "image": 275,
         "limited": 2,
         "source": 4,
         "release": 1,
@@ -791,6 +791,46 @@
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102616623000&grp_id=5325",
             "https://p-bandai.jp/item/item-1000160095/"
+          ]
+        },
+        {
+          "kit_id": "aniplex-madoka-itemrfedmpec",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_ACTION",
+          "subline": "BUZZmod.",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 暁美ほむら",
+            "zh": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 暁美ほむら",
+            "ko": "BUZZmod. 『극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉』 아케미 호무라",
+            "en": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 暁美ほむら"
+          },
+          "release_date": "2027-07",
+          "price_jpy": 12000,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "aniplex_plus_madoka_jp",
+            "claynel_madoka_jp",
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemRfedMPeC.html",
+            "https://www.claynel.jp/products/?item_id=12526"
           ]
         },
         {
@@ -4817,47 +4857,6 @@
           "source_urls": [
             "https://tamashiiweb.com/item/15607/",
             "https://tamashiiweb.com/item_brand/mrs_ka_signature/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
-          ]
-        },
-        {
-          "kit_id": "ng-20-4573102720283000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "option",
-          "series_labels": {
-            "zh": "配件",
-            "en": "Option",
-            "ja": "オプション",
-            "ko": "옵션"
-          },
-          "names": {
-            "ja": "オプションパーツセット ガンプラ 20 (ライドオンセット)",
-            "zh": "选配零件套装 ガンプラ 20 (ライドオン套装)",
-            "ko": "옵션 파츠 세트 건프라 20 (라이드 온 세트)",
-            "en": "Option Parts Set ガンプラ 20 (ライドオンSet)"
-          },
-          "release_date": "2026-02-21",
-          "price_jpy": 1980,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102720283000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000247185/"
           ]
         }
       ],
