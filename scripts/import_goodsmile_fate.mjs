@@ -494,7 +494,7 @@ async function main() {
       newCards.push(card);
     } else if (
       kit.kit_id === `goodsmile-fate-g${card.productId}` &&
-      (!kit.images?.box_art_url || (kit.gallery_image_urls || []).length < 2)
+      (!kit.images?.box_art_url || (kit.gallery_image_urls || []).length + (kit.images?.cached_from || []).length < 2)
     ) {
       // A kit we previously imported from the global store but with incomplete media —
       // re-fetch its detail page instead of only patching the card image. (Release dates

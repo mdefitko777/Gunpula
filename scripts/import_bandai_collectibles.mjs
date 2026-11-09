@@ -670,7 +670,8 @@ async function importPokeplaBandaiSpirits(existingKits = [], overseasKits = [], 
   let detailCount = 0;
   const imported = [];
   for (const card of cardList) {
-    const previousGallery = (card.existing?.gallery_image_urls || []).filter(isBandaiSpiritsModelImage);
+    // cached_from: originals of photos the gallery now shows as local copies (lib/cached-originals.mjs)
+    const previousGallery = [...(card.existing?.gallery_image_urls || []), ...(card.existing?.images?.cached_from || [])].filter(isBandaiSpiritsModelImage);
     let detailImages = previousGallery;
     if (!previousGallery.length && detailCount < POKEPLA_DETAIL_BUDGET) {
       await sleep(POKEPLA_REQUEST_GAP_MS);

@@ -771,7 +771,7 @@ export function isKitName(name) {
 async function pickPremiumBandai(kit) {
   if (kit.images?.box_art_source_id !== "p_bandai_wayback") return null;
   if (!isKitName(kit.names?.ja || kit.names?.en)) return { none: "pb-not-a-kit" };
-  const id = akamaiIdFrom([...(kit.gallery_image_urls || []), kit.images?.box_art_url]) || (String(kit.kit_id).match(/^pbandai-wb-(\d{10})$/) || [])[1];
+  const id = akamaiIdFrom([...(kit.gallery_image_urls || []), ...(kit.images?.cached_from || []), kit.images?.box_art_url]) || (String(kit.kit_id).match(/^pbandai-wb-(\d{10})$/) || [])[1];
   if (!id) return { none: "no-item-id" };
   const n = await akamaiCount(id, pageTtl(kit) > 7 ? 120 : 14);
   if (n === null) return { unknown: true };
@@ -853,7 +853,7 @@ async function pickCandy(kit) {
 async function pickGashapon(kit) {
   const src = kit.images?.box_art_source_id || "";
   if (!src.startsWith("bandai_gashapon")) return null;
-  const urls = [kit.images?.box_art_url, ...(kit.gallery_image_urls || [])];
+  const urls = [kit.images?.box_art_url, ...(kit.gallery_image_urls || []), ...(kit.images?.cached_from || [])];
   const id = akamaiIdFrom(urls);
   if (!id) return { none: "no-akamai-set-image" };
   if (/箱売/.test(kit.names?.ja || "")) {
