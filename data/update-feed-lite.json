@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-10",
-  "generated_at": "2026-11-10T13:27:10.552Z",
+  "generated_at": "2026-11-10T17:27:24.826Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,38 +18,38 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-10T13:26:26.802Z",
+    "generated_at": "2026-11-10T17:26:40.316Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-10",
-      "generated_at": "2026-11-10T13:27:10.552Z",
+      "generated_at": "2026-11-10T17:27:24.826Z",
       "total_before": 39326,
       "total_after": 39334,
       "added_count": 8,
-      "changed_count": 19,
+      "changed_count": 22,
       "removed_count": 0,
       "watched_count": 3,
       "merged_count": 0,
       "backfilled_count": 0,
-      "premium_bandai_count": 15,
+      "premium_bandai_count": 18,
       "bbx_count": 0,
       "franchise_counts": {
-        "gundam": 19,
+        "gundam": 22,
         "lego": 1,
         "pokemon": 6,
         "fate": 1
       },
       "reason_counts": {
         "new": 8,
-        "source": 10,
+        "source": 13,
         "series": 4,
         "release": 1,
         "name": 4,
         "release_found": 1,
-        "limited": 1
+        "limited": 3
       },
       "interest_tags": [
         "gundam",
@@ -955,6 +955,126 @@
           ]
         },
         {
+          "kit_id": "mg-mg-1-100-for-ver-ka-gundam-thunderbolt-4549660129103000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "MG",
+          "series_key": "thunderbolt",
+          "series_labels": {
+            "zh": "雷霆宙域",
+            "en": "Thunderbolt",
+            "ja": "サンダーボルト",
+            "ko": "썬더볼트"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ウエポン＆アーマーハンガー FOR フルアーマー・ガンダム Ｖｅｒ．Ｋａ （GUNDAM THUNDERBOLT版）",
+            "zh": "ＭＧ 1 / 100 ウエポン＆アーマーハンガー FOR フルアーマー・高达 Ｖｅｒ．Ｋａ （高达 THUNDERBOLT版）",
+            "ko": "MG 1/100 웨폰&아머 행거 FOR 풀 아머 건담 Ver.Ka (GUNDAM THUNDERBOLT판)",
+            "en": "ＭＧ 1 / 100 ウエポン＆アーマーハンガー FOR フルアーマー Gundam Ｖｅｒ．Ｋａ (GUNDAM THUNDERBOLT版)"
+          },
+          "release_date": "2016-11",
+          "price_jpy": 2860,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "limited",
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660129103000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000255590",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "MG",
+          "series_key": "w",
+          "series_labels": {
+            "zh": "W",
+            "en": "W",
+            "ja": "W",
+            "ko": "W"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ガンダムヘビーアームズ改 ＥＷ",
+            "zh": "ＭＧ 1 / 100 高达重武装改 ＥＷ",
+            "ko": "MG 1/100 건담 헤비암즈 개량형 EW",
+            "en": "ＭＧ 1 / 100 Gundam Heavyarms改 ＥＷ"
+          },
+          "release_date": "2016-10",
+          "price_jpy": 5720,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "p_bandai_wayback",
+            "bandai_spirits_products_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660116301000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000255590/"
+          ]
+        },
+        {
+          "kit_id": "mg-mg-1-100-rg-ver-4549660079675000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "MG",
+          "series_key": "build",
+          "series_labels": {
+            "zh": "创战",
+            "en": "Build",
+            "ja": "ビルド",
+            "ko": "빌드"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 スタービルドストライクガンダム（ＲＧシステムＶｅｒ．）",
+            "zh": "ＭＧ 1 / 100 スタービルド强袭高达（ＲＧシステムＶｅｒ．）",
+            "ko": "MG 1/100 스타 빌드 스트라이크 건담(RG 시스템 Ver.)",
+            "en": "ＭＧ 1 / 100 スタービルドStrike Gundam (ＲＧシステムＶｅｒ．)"
+          },
+          "release_date": "2016-04",
+          "price_jpy": 6480,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "limited",
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660079675000&grp_id=5325"
+          ]
+        },
+        {
           "kit_id": "hg-hguc-1-144-v2-4543112965271000",
           "change_type": "changed",
           "franchise": "gundam",
@@ -1031,84 +1151,6 @@
           ],
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112909206000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "tamashii-1245",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "ROBOT_SPIRITS",
-          "subline": "ROBOT魂",
-          "series_key": "victory",
-          "series_labels": {
-            "zh": "V",
-            "en": "V",
-            "ja": "V",
-            "ko": "V"
-          },
-          "names": {
-            "ja": "V2アサルトバスターガンダム",
-            "zh": "V2アサルト暴风高达",
-            "ko": "V2アサルト버스터건담",
-            "en": "V2アサルトBuster Gundam"
-          },
-          "release_date": "2010-03-20",
-          "price_jpy": 5500,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "tamashii_web_jp"
-          ],
-          "source_urls": [
-            "https://tamashiiweb.com/item/1245/",
-            "https://tamashiiweb.com/item_brand/robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
-          ]
-        },
-        {
-          "kit_id": "sd-bb-275-4543112318770000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "SD",
-          "subline": "SD",
-          "series_key": "sd",
-          "series_labels": {
-            "zh": "SD",
-            "en": "SD",
-            "ja": "SD",
-            "ko": "SD"
-          },
-          "names": {
-            "ja": "BB戦士275 龍神導師仁宇（リュウジンドウシニュー）",
-            "zh": "BB戦士275 龍神導師仁宇（リュウジンドウシニュー）",
-            "ko": "BB전사275 용신도사 인우(류진도시 뉴)",
-            "en": "BB戦士275 龍神導師仁宇 (リュウジンドウシニュー)"
-          },
-          "release_date": "2004-12",
-          "price_jpy": 550,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "series"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112318770000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000130293/"
           ]
         }
       ],

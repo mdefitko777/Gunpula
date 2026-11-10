@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated_at": "2026-11-10",
+ "updated_at": "2026-11-11",
  "description": "Sale pages (Premium Bandai 再販 / N次発送 / 抽選販売 pages, Tamashii 発送分 batches) folded into another catalog record by clean_catalog.mjs, kept so scripts/build_restocks.mjs can list resale events. Keyed by the folded page's kit_id; `to` is the record it was folded into.",
  "pages": {
   "pbandai-wb-1000000110": {"source":"p_bandai_wayback","url":"https://p-bandai.jp/item/item-1000000110/","name":"ＭＧ 1/100 ＭＳ-09 ドム（重力戦線イメージカラーVer.）","price_jpy":4320,"first_seen":"2026-11-02"},
@@ -298,6 +298,9 @@
   "pbandai-wb-1000105795": {"source":"p_bandai_wayback","url":"https://p-bandai.jp/item/item-1000105795/","name":"ＭＧ 1 / 100 ガンダムアストレイ ノワール 【再販】【２次：２０１６年１０月発送】","ship":"2016-10","price_jpy":5400,"order_closes_at":"2016-10-05","first_seen":"2026-07-24","to":"mg-mg-1-100-4543112863584000"},
   "pbandai-wb-1000105824": {"source":"p_bandai_wayback","url":"https://p-bandai.jp/item/item-1000105824/","name":"HGBF 1/144 ガーベラ・テトラ（キララ専用機）【２次：２０１６年１０月発送】","ship":"2016-10","price_jpy":1944,"first_seen":"2026-11-02"},
   "pbandai-wb-1000105859": {"source":"p_bandai_wayback","url":"https://p-bandai.jp/item/item-1000105859/","name":"HGCE 1/144 ブラストインパルスガンダム 【３次：２０１６年１０月発送】","ship":"2016-10","price_jpy":2160,"first_seen":"2026-11-02"},
+  "pbandai-wb-1000106222": {"source":"p_bandai_wayback","url":"https://p-bandai.jp/item/item-1000106222/","name":"ＭＧ 1/100 ガンダムヘビーアームズ改 ＥＷ","ship":"2016-10","price_jpy":5184,"order_closes_at":"2016-08-18","first_seen":"2026-11-11","to":"pbandai-wb-1000255590"},
+  "pbandai-wb-1000106283": {"source":"p_bandai_wayback","url":"https://p-bandai.jp/item/item-1000106283/","name":"ＭＧ 1/100 スタービルドストライクガンダム（ＲＧシステムＶｅｒ．）【再販】","price_jpy":6480,"first_seen":"2026-11-11","to":"mg-mg-1-100-rg-ver-4549660079675000"},
+  "pbandai-wb-1000106326": {"source":"p_bandai_wayback","url":"https://p-bandai.jp/item/item-1000106326/","name":"ＭＧ 1/100 ウエポン＆アーマーハンガー FOR フルアーマー・ガンダム Ｖｅｒ．Ｋａ （GUNDAM THUNDERBOLT版）","ship":"2016-11","price_jpy":2808,"order_closes_at":"2016-09-29","first_seen":"2026-11-11","to":"mg-mg-1-100-for-ver-ka-gundam-thunderbolt-4549660129103000"},
   "pbandai-wb-1000106478": {"source":"p_bandai_wayback","url":"https://p-bandai.jp/item/item-1000106478/","name":"HGUC 1/144 リバウ 【再販】","price_jpy":2592,"first_seen":"2026-11-02"},
   "pbandai-wb-1000106480": {"source":"p_bandai_wayback","url":"https://p-bandai.jp/item/item-1000106480/","name":"1/100 ハイレゾリューションモデル ガンダムバルバトス第６形態 【２次：２０１７年２月発送】","ship":"2017-02","price_jpy":18360,"first_seen":"2026-11-02"},
   "pbandai-wb-1000106481": {"source":"p_bandai_wayback","url":"https://p-bandai.jp/item/item-1000106481/","name":"ＭＧ 1/100 ガンダムヘビーアームズ改 ＥＷ 【２次：２０１６年１１月発送】","ship":"2016-11","price_jpy":5184,"first_seen":"2026-11-02"},
