@@ -1,6 +1,12 @@
 import { existsSync, readFileSync } from "node:fs";
 import { GOODS_KINDS } from "./lib/catalog-cleanup.mjs";
 import { isDateLike, kitName, loadCatalog } from "./lib/catalog.mjs";
+import { strandedPublishedIds } from "./lib/fold-aliases.mjs";
+import { HTML_ENTITY_IN_URL } from "./lib/html-url.mjs";
+
+// Same rule as import_bandai_collectibles.mjs (MISFORMED_BEYBLADE_ID); not imported from
+// there because that module pulls in the whole importer.
+const MISFORMED_BEYBLADE_ID = /^beyblade-x-(?:bx|ux|cx)-\d/;
 
 const { grades, kits, sources, gradeByCode, sourceById } = loadCatalog();
 const errors = [];
@@ -171,6 +177,42 @@ if (aliasDoc) {
     if (kitIds.has(id)) addError(`kit-aliases: ${id} is excluded but still in the catalog`);
     // Goods stay in the catalog; only another franchise's / IP's records are removed.
     if (!/^wrong_franchise\b/.test(String(reason))) addError(`kit-aliases: ${id} is excluded for "${reason}"; only wrong_franchise records may be removed`);
+  }
+}
+
+// Image URLs read from HTML must be decoded: "600&times;600.png" / "a&amp;b/M1.jpg" answer 404.
+// BEYBLADE X ids follow data/bbx-database.json (beyblade-x-cx09, not beyblade-x-cx-09-106),
+// which the apps join on for parts and bladers. Both are warnings until the next import
+// has rewritten the records written before the fix (import_fate_extra_sources.mjs,
+// import_bandai_collectibles.mjs).
+for (const kit of kits) {
+  const urls = [kit.images?.box_art_url, ...(Array.isArray(kit.gallery_image_urls) ? kit.gallery_image_urls : [])];
+  const escaped = [...new Set(urls.filter((url) => typeof url === "string" && HTML_ENTITY_IN_URL.test(url)))];
+  if (escaped.length) addWarning(`kit ${kit.kit_id}: image URL still HTML-escaped (${escaped[0]})`);
+  if (kit.franchise === "beyblade" && MISFORMED_BEYBLADE_ID.test(kit.kit_id)) {
+    addWarning(`kit ${kit.kit_id}: BEYBLADE X id is not beyblade-x-<product id> (e.g. beyblade-x-cx09)`);
+  }
+}
+
+// A published id (data/kit-first-seen.json) that leaves the catalog needs an alias (or a
+// wrong_franchise exclusion), or saved entries, share links and notifications pointing
+// at it are stranded. Products that a source stopped listing also show up here, so this
+// is a warning, summed up by id prefix.
+const firstSeenDoc = existsSync("data/kit-first-seen.json") ? JSON.parse(readFileSync("data/kit-first-seen.json", "utf8")) : null;
+if (firstSeenDoc) {
+  const stranded = strandedPublishedIds(firstSeenDoc.dates, kitIds, aliasDoc);
+  if (stranded.length) {
+    const byPrefix = {};
+    for (const id of stranded) {
+      const prefix = /^[a-z0-9]+(?:-[a-z]+(?=-|$))?/.exec(id)?.[0] || id;
+      byPrefix[prefix] = (byPrefix[prefix] || 0) + 1;
+    }
+    const top = Object.entries(byPrefix)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 8)
+      .map(([prefix, count]) => `${prefix} ${count}`)
+      .join(", ");
+    addWarning(`${stranded.length} published kit_ids are gone without an alias in data/kit-aliases.json (${top}; e.g. ${stranded[0]})`);
   }
 }
 

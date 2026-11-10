@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-10",
+  "updated_at": "2026-11-11",
   "description": "kit_ids removed from data/kits.json. aliases: duplicate id -> id of the record that replaced it (move saved entries there). excluded: id -> why the record was dropped (only records of another franchise / IP; goods stay in the catalog with a goods_kind).",
   "aliases": {
     "aniplex-fate-itemffpaofmf": "goodsmile-fate-g4303",
@@ -2859,7 +2859,17 @@
     "tamashii-16158": "tamashii-16068",
     "tamashii-16170": "tamashii-16134",
     "tamashii-16171": "tamashii-16129",
-    "tamashii-16172": "tamashii-16135"
+    "tamashii-16172": "tamashii-16135",
+    "goodsmile-madoka-g10018": "goodsmile-madoka-12330",
+    "goodsmile-madoka-g10642": "goodsmile-madoka-12957",
+    "goodsmile-madoka-g10866": "goodsmile-madoka-13181",
+    "goodsmile-madoka-g1146448": "aniplex-madoka-itemmdrepkqw",
+    "goodsmile-madoka-g1146449": "aniplex-madoka-itemmdrepkqw02",
+    "goodsmile-madoka-g1146450": "aniplex-madoka-itemkbrpgnuo",
+    "goodsmile-madoka-g1146889": "aniplex-madoka-itemmdrepkqw03",
+    "goodsmile-madoka-g1146963": "aniplex-madoka-itemrfedmpec",
+    "goodsmile-madoka-g2419": "goodsmile-madoka-4624",
+    "goodsmile-madoka-g4756": "goodsmile-madoka-7036"
   },
   "excluded": {
     "pbandai-wb-1000255817": "wrong_franchise: 超宇宙刑事ギャバン Blu-ray matched armored_core through 'ネクスト' in 'Vシネクスト'"

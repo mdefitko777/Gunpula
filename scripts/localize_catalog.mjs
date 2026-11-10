@@ -400,7 +400,8 @@ const SERIES = [
     sort: 420,
     labels: { zh: "限定", en: "Limited", ja: "限定", ko: "한정" },
     universe: "BEYBLADE X",
-    pattern: /限定|イベント|B4ストア|タカラトミーモール|メタルコート|Ver\./i,
+    // Not "Ver." alone: BX-28 ストリングランチャー ホワイトVer. is a regular release.
+    pattern: /限定|イベント|B4ストア|タカラトミーモール|メタルコート/i,
   },
   {
     key: "beyblade_bx",
