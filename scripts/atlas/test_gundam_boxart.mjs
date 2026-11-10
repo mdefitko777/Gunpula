@@ -19,7 +19,7 @@ process.env.ATLAS_TIMEOUT_MS = "5000";
 const BUILDER = path.join(path.dirname(fileURLToPath(import.meta.url)), "build_gundam_boxart.mjs");
 const {
   decodeJpegLuma, letterbox, isDeadUrl, kitJans, confidenceFor, boxPairShot, isKitName, fetchCached, hostReport, refusal,
-  candyPkgSrc, candyTokens, CANDY_EXTRACT, BS_EXTRACT, toEntry, guardReasons, healthPlan,
+  candyPkgSrc, candyTokens, CANDY_EXTRACT, BS_EXTRACT, toEntry, guardReasons, healthPlan, publishable,
 } = await import(pathToFileURL(BUILDER).href);
 
 const b64 = (s) => Buffer.from(s, "base64");
@@ -132,6 +132,22 @@ assert.ok(isDeadUrl("https://bandai-hobby.net/images/1.jpg"));
 assert.ok(isDeadUrl("http://internal-pbn/x.jpg"));
 assert.ok(isDeadUrl("./assets/catalog/gundam/x.jpg"));
 assert.ok(!isDeadUrl("https://bandai-a.akamaihd.net/bc/img/model/b/1000252373_10.jpg"));
+// Fandom files: a Cloudflare challenge on phones (owner checked on the device), never published.
+const FANDOM_URL = "https://static.wikia.nocookie.net/gunplabuilders/images/c/c7/HGIBO_Hyakuri_boxart.jpg/revision/latest/scale-to-width-down/640?cb=1";
+assert.ok(isDeadUrl(FANDOM_URL));
+assert.ok(isDeadUrl("https://vignette.wikia.nocookie.net/gunpla/images/a/ab/x.jpg"));
+assert.ok(isDeadUrl("https://gunpla.fandom.com/wiki/File:x.jpg"));
+{
+  const prevBox = {
+    a: { url: "https://bandai-a.akamaihd.net/bc/img/model/b/1000000001_5.jpg", source: "bandai_spirits_last", confidence: "high" },
+    b: { url: FANDOM_URL, source: "gunplapedia_jan", confidence: "medium" },
+    c: { url: FANDOM_URL, source: "gunplapedia_jan", confidence: "low", kind: "maybe" },
+  };
+  assert.deepEqual(Object.keys(publishable(prevBox)), ["a"]);
+  assert.deepEqual(publishable(undefined), {});
+  // Dropping only the dead entries does not trip the 5% guard (it counts publishable ones).
+  assert.deepEqual(guardReasons({ hosts: {}, prevCount: Object.keys(publishable(prevBox)).length, count: 1 }), []);
+}
 
 assert.deepEqual(kitJans({ kit_id: "hg-hg-1-144-4580886844760000", source_urls: [] }), ["4580886844760"]);
 assert.deepEqual(kitJans({ kit_id: "x", source_urls: ["https://gashapon.jp/products/detail.php?jan_code=4549660547853000"] }), ["4549660547853"]);
@@ -277,7 +293,7 @@ assert.equal(guardReasons({ hosts: { a: { blocked: 0, unexpected: 21 } }, prevCo
   const dir = path.join(TMP, "run");
   mkdirSync(dir, { recursive: true });
   const page = (n) => `https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=${n}`;
-  const kits = [1, 2, 3].map((n) => ({ kit_id: `k${n}`, franchise: "gundam", grade_code: "HG", release_date: "2020-01-01", source_urls: [page(n)] }));
+  const kits = [1, 2, 3, 4].map((n) => ({ kit_id: `k${n}`, franchise: "gundam", grade_code: "HG", release_date: "2020-01-01", source_urls: [page(n)] }));
   writeFileSync(path.join(dir, "kits.json"), JSON.stringify({ kits }));
   const prev = {
     schema: 1,
@@ -285,11 +301,13 @@ assert.equal(guardReasons({ hosts: { a: { blocked: 0, unexpected: 21 } }, prevCo
       k1: { url: "https://bandai-a.akamaihd.net/bc/img/model/b/1000000001_5.jpg", source: "bandai_spirits_last", confidence: "high" },
       k2: { url: "https://bandai-a.akamaihd.net/bc/img/model/b/1000000002_5.jpg", source: "bandai_spirits_last", confidence: "medium" },
       k3: { url: "https://bandai-a.akamaihd.net/bc/img/model/b/1000000003_5.jpg", source: "bandai_spirits_last", confidence: "low" },
+      // an older file's Fandom box art: dropped, never carried over
+      k4: { url: FANDOM_URL, source: "gunplapedia_jan", confidence: "medium" },
     },
   };
   const cacheWith = (name, status) => {
     const c = path.join(dir, name);
-    for (const n of [1, 2, 3]) {
+    for (const n of [1, 2, 3, 4]) {
       const f = path.join(c, "www.bandaispirits.co.jp", createHash("sha1").update(page(n)).digest("hex"));
       mkdirSync(path.dirname(f), { recursive: true });
       writeFileSync(`${f}.meta.json`, JSON.stringify({ url: page(n), status, content_type: "text/html", fetched_at: new Date().toISOString() }));
@@ -306,10 +324,15 @@ assert.equal(guardReasons({ hosts: { a: { blocked: 0, unexpected: 21 } }, prevCo
     assert.equal(p.status, 0, p.stderr);
     return { out: JSON.parse(readFileSync(path.join(dir, "out.json"), "utf8")), report: JSON.parse(readFileSync(path.join(dir, "report.json"), "utf8")) };
   };
-  // Cached 403 pages (left by the old script): unknown, so all 3 entries are carried over.
+  // Cached 403 pages (left by the old script): unknown, so the 3 live entries are carried
+  // over; the Fandom one (k4) is not.
   const a = run(cacheWith("c403", 403));
   assert.deepEqual(Object.keys(a.out.boxart), ["k1", "k2", "k3"]);
   assert.equal(a.report.carried_over, 3);
+  assert.equal(a.report.dropped_dead, 1);
+  assert.ok(!JSON.stringify(a.out.boxart).includes("nocookie"), "no Fandom URL published");
+  assert.ok(!a.out.sources.some((s) => s.id === "gunplapedia_jan"), "Gunplapedia is not a source any more");
+  assert.equal(a.out.stats.by_source.gunplapedia_jan, undefined);
   assert.equal(a.out.boxart.k3.kind, "maybe", "carried low-confidence entry becomes kind maybe");
   assert.equal(a.out.stats.with_box, 2);
   assert.equal(a.out.stats.with_maybe, 1);

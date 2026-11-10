@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import { existsSync, statSync } from "node:fs";
 import { readFile } from "node:fs/promises";
-import { armoredCoreClassifier, fateClassifier, pokemonClassifier } from "./lib/atlas_groups.mjs";
+import { armoredCoreClassifier, fateClassifier, madokaClassifier, pokemonClassifier } from "./lib/atlas_groups.mjs";
 import { LINE_COVER_GAPS, LINE_COVER_KINDS, LINE_COVER_SOURCES, OFFICIAL_LINE_HOSTS, parseRobots, pickLineImage, robotsAllows } from "./lib/line_covers.mjs";
 import { buildMatcher, compactKey } from "./lib/textmatch.mjs";
 
@@ -54,6 +54,24 @@ expectGroup(fate, "キューポッシュ アヴェンジャー/ジャンヌ・�
 expectGroup(fate, "POP UP PARADE Hisui", "tsukihime", { tags: ["type-moon"] });
 expectGroup(fate, "Fate/strange Fake アクリルスタンド", "strange_fake");
 expectGroup(fate, "SDミニアクリルマスコット（全13種）", "fate_general");
+// Aniplex+ event goods: the event folder (/items/event/<event>/fgo/…) or the booth file name
+// ("…/C100/notes/C100notes5_fgo_600.jpg") says FGO, so they are FGO event goods.
+const cachedFrom = (path) => ({ images: { box_art_url: "./assets/catalog/fate/x.jpg", cached_from: [`https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw0/items/event/${path}`] } });
+expectGroup(fate, "AnimeJapan2023 SDミニアクリルマスコット（全13種）", "fgo_events", cachedFrom("aj2023/fgo/fgo_SDac00_600.jpg"));
+expectGroup(fate, "AGF2021 ダンミル描き下ろしメモリアルイラスト キャラファイングラフ", "fgo_events", cachedFrom("agf2021/fgo/cfg_600.jpg"));
+expectGroup(fate, "【復刻】コン もちもちスクイーズマスコット（全3種ランダム）", "fgo_events", cachedFrom("kyomaf2022/FGO/kon1_600.jpg"));
+expectGroup(fate, "C100 アクリルパネル -ピエタ-", "fgo_events", cachedFrom("C100/notes/C100notes5_fgo_600.jpg"));
+// a booth file without "fgo" in its name says nothing; a named work still wins over the folder
+expectGroup(fate, "C100 アクリルパネル", "fate_general", cachedFrom("C100/notes/C100notes4_tsukihime_600.jpg"));
+expectGroup(fate, "Fate / strange Fake アクリルスタンド", "strange_fake", cachedFrom("aj2026/fake/acst.jpg"));
+
+// 魔法少女まどか☆マギカ: one group per character; Bebe / the Sweets Witch are Nagisa.
+const madoka = madokaClassifier().classify;
+expectGroup(madoka, "叛逆の物語 Magiccraft HQぬいぐるみ べべ", "nagisa");
+expectGroup(madoka, "お菓子の魔女BIGぬいぐるみ", "nagisa");
+expectGroup(madoka, "Fluffy Puffy～キュゥべえ＆べべ～", "madoka_ensemble");
+expectGroup(madoka, "スーパーDXぬいぐるみ～キュゥべえ＆お菓子の魔女～", "madoka_ensemble");
+expectGroup(madoka, "劇場版 魔法少女まどか☆マギカ キュゥべえ ぬいぐるみ", "kyubey");
 
 // Pokémon: species → generation, regional forms, games/regions, multi-generation, none.
 const pokemon = pokemonClassifier(taxonomy.pokemon).classify;

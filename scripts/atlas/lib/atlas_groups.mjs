@@ -49,12 +49,22 @@ function aniplexCodes(kit) {
   for (const u of urls) {
     const m = String(u || "").match(/\/items\/title-[A-Za-z]\/([^/]+)\/([^/]+)/);
     if (m) codes.push(m[1].toLowerCase(), `${m[1]}/${m[2]}`.toLowerCase());
+    // Event goods live under /items/event/<event>/<folder>/<file>: the folder names the work
+    // (".../aj2022/fgo/…", ".../kyomaf2022/FGO/…"), or it is a booth folder whose file names
+    // carry it (".../C100/notes/C100notes5_fgo_600.jpg"). Only FGO / Grand Carnival are read.
+    const ev = String(u || "").match(/\/items\/event\/([^/]+)\/([^/]+)\/([^/?#]*)/);
+    if (ev) {
+      const [event, folder, file] = ev.slice(1).map((s) => s.toLowerCase());
+      const work = /^(fgo|fgc)$/.test(folder) ? folder : file.split(/[_.-]/).find((t) => t === "fgo" || t === "fgc");
+      if (work) codes.push(work, `${work}/${event}`, `${work}/event-${event}`);
+    }
   }
   return uniq(codes);
 }
 
 // FGO goods that name no single servant, by kind. `codes` are Aniplex+ catalogue folders
-// (title-H/fgo/<folder>/…); the first kind that matches wins.
+// (title-H/fgo/<folder>/…, or "fgo/event-<event>" for /items/event/… goods); the first kind
+// that matches wins.
 export const FGO_GOODS_KINDS = [
   {
     id: "fgo_media",
@@ -71,7 +81,7 @@ export const FGO_GOODS_KINDS = [
   {
     id: "fgo_events",
     why: "exhibition / event / ticket / collaboration",
-    codes: ["fgo/exhibition", "fgo/winterfes", "fgo/aj20", "fgo/tckt", "fgo/fgomart", "fgo/otss", "fgo/dramalogue", "fgo/fate241231", "fgo/tsutaya", "fgo/nazomaru", "fgo/fgl-shiire", "fgo/sairinten", "fgo/yunyu"],
+    codes: ["fgo/event-", "fgc/event-", "fgo/exhibition", "fgo/winterfes", "fgo/aj20", "fgo/tckt", "fgo/fgomart", "fgo/otss", "fgo/dramalogue", "fgo/fate241231", "fgo/tsutaya", "fgo/nazomaru", "fgo/fgl-shiire", "fgo/sairinten", "fgo/yunyu"],
     patterns: ["チケット", "ticket", "展覧会", "原画展", "exhibition", "冬祭り", "winter fes", "animejapan", "anime japan", "京まふ", "リアル脱出", "謎特異点", "キャラバン", "caravan", "コラボ", "collaboration", "カフェ", "cafe", "dramalogue", "the stage", "舞台", "ミュージカル", "musical", "コンサート", "concert", "over the same sky", "under the same sky", "fgo mart", "grail league", "dream striker", "事後通販"],
   },
 ];
@@ -336,7 +346,7 @@ export const MADOKA_CHARACTERS = [
   { id: "sayaka", labels: lang("美树沙耶加", "사야카", "Sayaka", "美樹さやか"), names: ["美樹さやか", "さやか", "オクタヴィア", "Sayaka"] },
   { id: "mami", labels: lang("巴麻美", "마미", "Mami", "巴マミ"), names: ["巴マミ", "マミ", "Mami"] },
   { id: "kyoko", labels: lang("佐仓杏子", "쿄코", "Kyoko", "佐倉杏子"), names: ["佐倉杏子", "杏子", "Kyoko"] },
-  { id: "nagisa", labels: lang("百江渚", "나기사", "Nagisa", "百江なぎさ"), names: ["百江なぎさ", "なぎさ", "ベベ", "シャルロッテ", "Nagisa"] },
+  { id: "nagisa", labels: lang("百江渚", "나기사", "Nagisa", "百江なぎさ"), names: ["百江なぎさ", "なぎさ", "ベベ", "べべ", "シャルロッテ", "お菓子の魔女", "Nagisa", "Bebe", "Charlotte"] },
   { id: "kyubey", labels: lang("丘比", "큐베", "Kyubey", "キュゥべえ"), names: ["キュゥべえ", "キュウべえ", "キュゥべぇ", "インキュベーター", "Kyubey"] },
   { id: "iroha", labels: lang("环彩羽", "이로하", "Iroha", "環いろは"), names: ["環いろは", "いろは", "Iroha"] },
   { id: "yachiyo", labels: lang("七海八千代", "야치요", "Yachiyo", "七海やちよ"), names: ["七海やちよ", "やちよ", "Yachiyo"] },
