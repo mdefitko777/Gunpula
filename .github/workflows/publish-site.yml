@@ -1,0 +1,119 @@
+# Publishes https://mdefitko777.github.io/Gunpula/ (GitHub Pages, build type "GitHub Actions").
+# The cached product photos go to the image shard repos (data/image-shards.json) and the site
+# carries only data + web app, so it stays under the 1 GB Pages limit — scripts/publish_site.mjs.
+#
+# Pushes made by the other workflows' GITHUB_TOKEN do not start a push run, so this also runs
+# when any workflow that commits data finishes (workflow_run), plus every 6 hours as a safety net.
+name: Publish site
+
+on:
+  push:
+    branches: [main]
+  workflow_run:
+    workflows:
+      - Refresh official catalog
+      - Refresh important images
+      - Update market prices
+      - Atlas - Gundam box art
+      - Atlas - Pokémon Frienda data
+      - Atlas - group rosters and covers
+      - Atlas Gundam MS data
+      - Atlas - Pokémon MEZASTAR data
+      - Atlas - Notify feed
+    types: [completed]
+    branches: [main]
+  schedule:
+    - cron: "41 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: "Deploy the site (main only). Off = sync the image shards and build without deploying."
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  issues: write
+
+# One at a time; a newer trigger waits and then publishes the latest main.
+concurrency:
+  group: publish-site
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    outputs:
+      deployable: ${{ steps.site.outputs.deployable }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Always the newest main (a workflow_run / schedule run publishes what is there now);
+          # a manual run on another branch builds that branch.
+          ref: ${{ github.event_name == 'workflow_dispatch' && github.ref || 'main' }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Image shard deploy keys
+        env:
+          K1: ${{ secrets.IMG_SHARD_KEY_1 }}
+          K2: ${{ secrets.IMG_SHARD_KEY_2 }}
+          K3: ${{ secrets.IMG_SHARD_KEY_3 }}
+          K4: ${{ secrets.IMG_SHARD_KEY_4 }}
+        run: |
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          echo "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl" >> ~/.ssh/known_hosts
+          for n in 1 2 3 4; do
+            var="K$n"
+            [ -n "${!var}" ] || continue
+            printf '%s\n' "${!var}" > ~/.ssh/img$n
+            chmod 600 ~/.ssh/img$n
+            printf 'Host img%s\n  HostName github.com\n  User git\n  IdentityFile ~/.ssh/img%s\n  IdentitiesOnly yes\n' "$n" "$n" >> ~/.ssh/config
+            git config --global url."git@img$n:mdefitko777/gunpula-img-$n.git".insteadOf "https://github.com/mdefitko777/gunpula-img-$n.git"
+          done
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Sync image shards and build the site
+        id: site
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        # Only main moves the shards (another branch would delete photos main still uses).
+        run: node scripts/publish_site.mjs ${{ github.ref == 'refs/heads/main' && '--sync' || '' }} --out _site
+
+      - name: Upload site
+        if: ${{ !cancelled() && steps.site.outputs.deployable == 'true' }}
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Report failure
+        if: ${{ failure() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue comment 1 --repo "$GITHUB_REPOSITORY" --body "网站发布出了问题（Publish site）: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID — 看 Summary 里的 ❌ / ⚠️。" || true
+
+  deploy:
+    needs: build
+    if: ${{ !cancelled() && needs.build.outputs.deployable == 'true' && github.ref == 'refs/heads/main' && (github.event_name != 'workflow_dispatch' || inputs.deploy) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Report failure
+        if: ${{ failure() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue comment 1 --repo "$GITHUB_REPOSITORY" --body "网站发布失败（deploy）: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" || true

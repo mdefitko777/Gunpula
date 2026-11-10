@@ -6,7 +6,7 @@
   "description": "Gunpla catalog data, validation, and reporting tools.",
   "scripts": {
     "validate": "node scripts/validate_catalog.mjs",
-    "test:unit": "node scripts/test_search_engine.mjs && node scripts/test_ko_tidy.mjs && node scripts/test_cached_originals.mjs && node scripts/test_robots.mjs && node scripts/test_release_dates.mjs && node scripts/test_pb_gallery.mjs && node scripts/test_bandai_manuals.mjs && node scripts/test_collection_store.mjs && node scripts/test_view_state.mjs && node scripts/test_catalog_display.mjs && node scripts/test_update_feed.mjs && node scripts/test_pbandai_market.mjs && node scripts/test_cms_model.mjs && node scripts/test_cms_patches.mjs && node scripts/test_kotobukiya_shop.mjs && node scripts/test_bandai_announcements.mjs && node scripts/test_coverage_parsers.mjs && node scripts/atlas/test_atlas_groups.mjs && node scripts/test_backup_format.mjs && node scripts/test_restocks.mjs && node scripts/test_fate_names.mjs && node scripts/atlas/test_notify_feed.mjs",
+    "test:unit": "node scripts/test_search_engine.mjs && node scripts/test_ko_tidy.mjs && node scripts/test_cached_originals.mjs && node scripts/test_robots.mjs && node scripts/test_release_dates.mjs && node scripts/test_pb_gallery.mjs && node scripts/test_bandai_manuals.mjs && node scripts/test_collection_store.mjs && node scripts/test_view_state.mjs && node scripts/test_catalog_display.mjs && node scripts/test_update_feed.mjs && node scripts/test_pbandai_market.mjs && node scripts/test_cms_model.mjs && node scripts/test_cms_patches.mjs && node scripts/test_kotobukiya_shop.mjs && node scripts/test_bandai_announcements.mjs && node scripts/test_coverage_parsers.mjs && node scripts/atlas/test_atlas_groups.mjs && node scripts/test_backup_format.mjs && node scripts/test_restocks.mjs && node scripts/test_fate_names.mjs && node scripts/atlas/test_notify_feed.mjs && node scripts/test_publish_site.mjs",
     "stats": "node scripts/catalog_stats.mjs",
     "search": "node scripts/search_kits.mjs",
     "sources": "node scripts/source_coverage.mjs",
@@ -77,7 +77,8 @@
     "refresh:pb:japan": "npm run import:pb:wayback && npm run check:sources",
     "import:data": "node scripts/run_importers.mjs",
     "import:takaratomy-pokemon": "node scripts/import_takaratomy_pokemon.mjs",
-    "import:pokemon-extra": "node scripts/import_pokemon_extra_sources.mjs"
+    "import:pokemon-extra": "node scripts/import_pokemon_extra_sources.mjs",
+    "publish:plan": "node scripts/publish_site.mjs --plan"
   },
   "devDependencies": {
     "@capacitor/android": "^7.0.0",

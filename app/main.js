@@ -5968,10 +5968,16 @@ function itemTypeLabel(key) {
   return itemTypeLabelFor(key, state.language);
 }
 
+// Photos this project keeps itself — ./assets/… in the repo, or the image shard sites the
+// published data points at (scripts/publish_site.mjs) — load more reliably than shop links.
+function isKeptImage(url) {
+  return String(url).startsWith("./") || /^https:\/\/mdefitko777\.github\.io\/gunpula-img-\d+\//.test(String(url));
+}
+
 function imageCandidatesForKit(kit) {
   const overrideCover = kit.local_override?.cover_image_url || kit.local_override?.image_url;
   const candidates = [...new Set([kit.images?.box_art_url, ...(kit.gallery_image_urls || [])].filter(Boolean))]
-    .sort((left, right) => Number(!String(left).startsWith("./")) - Number(!String(right).startsWith("./")));
+    .sort((left, right) => Number(!isKeptImage(left)) - Number(!isKeptImage(right)));
   return overrideCover ? [overrideCover, ...candidates.filter((url) => url !== overrideCover)] : candidates;
 }
 

@@ -1,0 +1,14 @@
+{
+  "schema": "gunpula-image-shards-v1",
+  "note": "The big image caches (app/assets/<dir>/…) are not published with this site — GitHub Pages stops at 1 GB. scripts/publish_site.mjs copies them into these image repos (each its own Pages site, kept under limit_mb) and rewrites ./assets/<dir>/… in the published JSON to the shard that holds the file. The repo keeps the originals; scripts keep using ./assets/… paths. Add a shard here (and its repo, Pages, deploy key secret IMG_SHARD_KEY_<n>) when the publish job warns that space is running out.",
+  "limit_mb": 650,
+  "low_space_mb": 300,
+  "site_limit_mb": 900,
+  "dirs": ["catalog", "kotobukiya-ac", "bbx"],
+  "shards": [
+    { "repo": "mdefitko777/gunpula-img-1", "url": "https://mdefitko777.github.io/gunpula-img-1/" },
+    { "repo": "mdefitko777/gunpula-img-2", "url": "https://mdefitko777.github.io/gunpula-img-2/" },
+    { "repo": "mdefitko777/gunpula-img-3", "url": "https://mdefitko777.github.io/gunpula-img-3/" },
+    { "repo": "mdefitko777/gunpula-img-4", "url": "https://mdefitko777.github.io/gunpula-img-4/" }
+  ]
+}
