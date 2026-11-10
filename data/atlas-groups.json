@@ -12352,6 +12352,8 @@
           "beyblade-x-bx35",
           "beyblade-x-bx48",
           "beyblade-x-cx02",
+          "beyblade-x-cx08",
+          "beyblade-x-cx09",
           "beyblade-x-cx17",
           "beyblade-x-ux01",
           "beyblade-x-ux02",
@@ -12361,11 +12363,10 @@
           "beyblade-x-ux16",
           "beyblade-x-ux18",
           "beyblade-x-bx00-cc",
-          "beyblade-x-cx-09-106",
-          "beyblade-x-ux-00-133",
-          "beyblade-x-ux00-db-bc"
+          "beyblade-x-ux00-db-bc",
+          "beyblade-x-ux00-samurai"
         ],
-        "count": 24
+        "count": 25
       },
       {
         "id": "chrome_ryugu",
@@ -12406,17 +12407,18 @@
           "beyblade-x-bx34",
           "beyblade-x-bx46",
           "beyblade-x-bx48",
+          "beyblade-x-cx08",
           "beyblade-x-ux11",
+          "beyblade-x-ux17",
           "beyblade-x-ux18",
           "beyblade-x-bx00-cd",
           "beyblade-x-bx00-cd-white",
           "beyblade-x-bx00-cdr",
           "beyblade-x-bx00-dd",
           "beyblade-x-bx00-ds-black",
-          "beyblade-x-bx00-ds-v2",
-          "beyblade-x-ux-17-114"
+          "beyblade-x-bx00-ds-v2"
         ],
-        "count": 21
+        "count": 22
       },
       {
         "id": "ekusu_kurosu",
@@ -12456,6 +12458,7 @@
           "beyblade-x-bx49",
           "beyblade-x-cx01",
           "beyblade-x-cx04",
+          "beyblade-x-cx08",
           "beyblade-x-ux01",
           "beyblade-x-ux04",
           "beyblade-x-ux18",
@@ -12466,7 +12469,7 @@
           "beyblade-x-cx00-db",
           "beyblade-x-ux00-db-bc"
         ],
-        "count": 20
+        "count": 21
       },
       {
         "id": "multi_nanairo",
@@ -12483,7 +12486,7 @@
           "en": "ペルソナ",
           "ja": "ペルソナ"
         },
-        "image": "./assets/bbx/bx53-b135baefc3.png",
+        "image": "./assets/bbx/cx14-78ac051f28.jpg",
         "cover_source": "newest product picture",
         "blades": [
           "ウィザードアロー",
@@ -12509,53 +12512,13 @@
           "beyblade-x-bx24",
           "beyblade-x-bx35",
           "beyblade-x-cx02",
+          "beyblade-x-cx14",
           "beyblade-x-ux03",
           "beyblade-x-ux04",
           "beyblade-x-ux10",
-          "beyblade-x-cx-14-123",
           "beyblade-x-ux00-nm"
         ],
         "count": 19
-      },
-      {
-        "id": "nine_kurosu",
-        "kind": "blader",
-        "labels": {
-          "zh": "黑須玖",
-          "ko": "구나인",
-          "en": "Nine Cross",
-          "ja": "黒須ナイン"
-        },
-        "subtitle": {
-          "zh": "ペルソナ",
-          "ko": "페르소나",
-          "en": "ペルソナ",
-          "ja": "ペルソナ"
-        },
-        "image": "./assets/bbx/bx53-b135baefc3.png",
-        "cover_source": "newest product picture",
-        "blades": [
-          "ナイトシールド",
-          "ウィザードアロー",
-          "エンペラーマイトH",
-          "ラグナレイジFE"
-        ],
-        "kit_ids": [
-          "beyblade-x-bx53",
-          "beyblade-x-bx03",
-          "beyblade-x-bx04",
-          "beyblade-x-bx05",
-          "beyblade-x-bx06",
-          "beyblade-x-bx08",
-          "beyblade-x-bx14",
-          "beyblade-x-bx17",
-          "beyblade-x-bx20",
-          "beyblade-x-bx21",
-          "beyblade-x-bx24",
-          "beyblade-x-cx11",
-          "beyblade-x-cx-15-124"
-        ],
-        "count": 13
       },
       {
         "id": "bird_kazami",
@@ -12590,13 +12553,95 @@
           "beyblade-x-bx21",
           "beyblade-x-bx31",
           "beyblade-x-bx48",
+          "beyblade-x-cx05",
           "beyblade-x-cx17",
           "beyblade-x-cx18",
           "beyblade-x-ux02",
           "beyblade-x-bx00-hc",
           "beyblade-x-bx00-hch"
         ],
-        "count": 12
+        "count": 13
+      },
+      {
+        "id": "nine_kurosu",
+        "kind": "blader",
+        "labels": {
+          "zh": "黑須玖",
+          "ko": "구나인",
+          "en": "Nine Cross",
+          "ja": "黒須ナイン"
+        },
+        "subtitle": {
+          "zh": "ペルソナ",
+          "ko": "페르소나",
+          "en": "ペルソナ",
+          "ja": "ペルソナ"
+        },
+        "image": "./assets/bbx/cx15-9482112cdf.jpg",
+        "cover_source": "newest product picture",
+        "blades": [
+          "ナイトシールド",
+          "ウィザードアロー",
+          "エンペラーマイトH",
+          "ラグナレイジFE"
+        ],
+        "kit_ids": [
+          "beyblade-x-bx53",
+          "beyblade-x-bx03",
+          "beyblade-x-bx04",
+          "beyblade-x-bx05",
+          "beyblade-x-bx06",
+          "beyblade-x-bx08",
+          "beyblade-x-bx14",
+          "beyblade-x-bx17",
+          "beyblade-x-bx20",
+          "beyblade-x-bx21",
+          "beyblade-x-bx24",
+          "beyblade-x-cx11",
+          "beyblade-x-cx15"
+        ],
+        "count": 13
+      },
+      {
+        "id": "ciel_kaminari",
+        "kind": "blader",
+        "labels": {
+          "zh": "神成空",
+          "ko": "신하늘",
+          "en": "Ciel Kaminari",
+          "ja": "神成シエル"
+        },
+        "subtitle": {
+          "zh": "ペンドラゴン",
+          "ko": "펜드래곤",
+          "en": "ペンドラゴン",
+          "ja": "ペンドラゴン"
+        },
+        "image": "./assets/bbx/bx48-c7881ee048.jpg",
+        "cover_source": "newest product picture",
+        "blades": [
+          "コバルトドレイク",
+          "ブラックシェル",
+          "ドランバスター",
+          "コバルトドラグーン",
+          "シェルタードレイク"
+        ],
+        "kit_ids": [
+          "beyblade-x-bx34",
+          "beyblade-x-bx35",
+          "beyblade-x-bx39",
+          "beyblade-x-bx46",
+          "beyblade-x-bx48",
+          "beyblade-x-cx08",
+          "beyblade-x-ux01",
+          "beyblade-x-ux04",
+          "beyblade-x-bx00-cc",
+          "beyblade-x-bx00-cd",
+          "beyblade-x-bx00-cd-white",
+          "beyblade-x-bx00-cdr",
+          "beyblade-x-ux00-db-bc"
+        ],
+        "count": 13
       },
       {
         "id": "sigur_nanairo",
@@ -12629,51 +12674,11 @@
           "beyblade-x-bx24",
           "beyblade-x-bx33",
           "beyblade-x-bx48",
+          "beyblade-x-cx10",
           "beyblade-x-ux12",
           "beyblade-x-ux18",
           "beyblade-x-bx00-hc",
-          "beyblade-x-bx00-lc",
-          "beyblade-x-cx-10-110"
-        ],
-        "count": 12
-      },
-      {
-        "id": "ciel_kaminari",
-        "kind": "blader",
-        "labels": {
-          "zh": "神成空",
-          "ko": "신하늘",
-          "en": "Ciel Kaminari",
-          "ja": "神成シエル"
-        },
-        "subtitle": {
-          "zh": "ペンドラゴン",
-          "ko": "펜드래곤",
-          "en": "ペンドラゴン",
-          "ja": "ペンドラゴン"
-        },
-        "image": "./assets/bbx/bx48-c7881ee048.jpg",
-        "cover_source": "newest product picture",
-        "blades": [
-          "コバルトドレイク",
-          "ブラックシェル",
-          "ドランバスター",
-          "コバルトドラグーン",
-          "シェルタードレイク"
-        ],
-        "kit_ids": [
-          "beyblade-x-bx34",
-          "beyblade-x-bx35",
-          "beyblade-x-bx39",
-          "beyblade-x-bx46",
-          "beyblade-x-bx48",
-          "beyblade-x-ux01",
-          "beyblade-x-ux04",
-          "beyblade-x-bx00-cc",
-          "beyblade-x-bx00-cd",
-          "beyblade-x-bx00-cd-white",
-          "beyblade-x-bx00-cdr",
-          "beyblade-x-ux00-db-bc"
+          "beyblade-x-bx00-lc"
         ],
         "count": 12
       },
@@ -12740,6 +12745,7 @@
           "beyblade-x-bx50",
           "beyblade-x-bx34",
           "beyblade-x-bx48",
+          "beyblade-x-cx08",
           "beyblade-x-ux01",
           "beyblade-x-ux04",
           "beyblade-x-ux11",
@@ -12748,7 +12754,7 @@
           "beyblade-x-bx00-cd-white",
           "beyblade-x-ux00-db-bc"
         ],
-        "count": 10
+        "count": 11
       },
       {
         "id": "tenka_shiroboshi",
@@ -12777,12 +12783,12 @@
           "beyblade-x-bx14",
           "beyblade-x-bx20",
           "beyblade-x-bx31",
+          "beyblade-x-bx45",
           "beyblade-x-bx48",
           "beyblade-x-cx17",
           "beyblade-x-ux09",
-          "beyblade-x-bx-45-104",
           "beyblade-x-bx00-se",
-          "beyblade-x-ux-00-133"
+          "beyblade-x-ux00-samurai"
         ],
         "count": 9
       },
@@ -12856,6 +12862,42 @@
         "count": 9
       },
       {
+        "id": "meiko_meiden",
+        "kind": "blader",
+        "labels": {
+          "zh": "冥殿魅可",
+          "ko": "임메이",
+          "en": "Meiko Myoden",
+          "ja": "冥殿メイコ"
+        },
+        "subtitle": {
+          "zh": "駒刃寿司",
+          "ko": "코마바 스시",
+          "en": "駒刃寿司",
+          "ja": "駒刃寿司"
+        },
+        "image": "./assets/bbx/bx48-c7881ee048.jpg",
+        "cover_source": "newest product picture",
+        "blades": [
+          "シャークエッジ",
+          "ホエールウェーブ",
+          "ホエールフレイムM",
+          "シャークスケイル"
+        ],
+        "kit_ids": [
+          "beyblade-x-bx14",
+          "beyblade-x-bx20",
+          "beyblade-x-bx31",
+          "beyblade-x-bx36",
+          "beyblade-x-bx48",
+          "beyblade-x-cx05",
+          "beyblade-x-cx08",
+          "beyblade-x-ux15",
+          "beyblade-x-bx00-se"
+        ],
+        "count": 9
+      },
+      {
         "id": "one_kurosu",
         "kind": "blader",
         "labels": {
@@ -12883,9 +12925,9 @@
           "beyblade-x-bx23",
           "beyblade-x-bx35",
           "beyblade-x-cx11",
+          "beyblade-x-cx13",
           "beyblade-x-cx16",
           "beyblade-x-bx00-pw",
-          "beyblade-x-cx-13-122",
           "beyblade-x-ux00-gv"
         ],
         "count": 8
@@ -13019,36 +13061,36 @@
         "count": 8
       },
       {
-        "id": "meiko_meiden",
+        "id": "burn_fujiwara",
         "kind": "blader",
         "labels": {
-          "zh": "冥殿魅可",
-          "ko": "임메이",
-          "en": "Meiko Myoden",
-          "ja": "冥殿メイコ"
+          "zh": "不死原燃",
+          "ko": "홍불새",
+          "en": "Blaze Fujiwara",
+          "ja": "不死原バーン"
         },
         "subtitle": {
-          "zh": "駒刃寿司",
-          "ko": "코마바 스시",
-          "en": "駒刃寿司",
-          "ja": "駒刃寿司"
+          "zh": "ユグドラシル",
+          "ko": "위그드라실",
+          "en": "ユグドラシル",
+          "ja": "ユグドラシル"
         },
-        "image": "./assets/bbx/bx48-c7881ee048.jpg",
+        "image": "./assets/bbx/cx12-d5a8a971fc.jpg",
         "cover_source": "newest product picture",
         "blades": [
-          "シャークエッジ",
-          "ホエールウェーブ",
-          "ホエールフレイムM",
-          "シャークスケイル"
+          "フェニックスフェザー",
+          "フェニックスウイング",
+          "フェニックスラダー",
+          "フェニックスフレアZ"
         ],
         "kit_ids": [
-          "beyblade-x-bx14",
-          "beyblade-x-bx20",
-          "beyblade-x-bx31",
-          "beyblade-x-bx36",
-          "beyblade-x-bx48",
-          "beyblade-x-ux15",
-          "beyblade-x-bx00-se"
+          "beyblade-x-bx23",
+          "beyblade-x-bx35",
+          "beyblade-x-cx05",
+          "beyblade-x-cx12",
+          "beyblade-x-ux07",
+          "beyblade-x-ux12",
+          "beyblade-x-bx00-pw"
         ],
         "count": 7
       },
@@ -13084,6 +13126,37 @@
         "count": 6
       },
       {
+        "id": "king_manju",
+        "kind": "blader",
+        "labels": {
+          "zh": "萬獸金恩",
+          "ko": "김만호",
+          "en": "Titus Manju",
+          "ja": "万獣キング"
+        },
+        "subtitle": {
+          "zh": "ズーガニック",
+          "ko": "주가닉",
+          "en": "ズーガニック",
+          "ja": "ズーガニック"
+        },
+        "image": "./assets/bbx/cx05-ac557c0c16.jpg",
+        "cover_source": "newest product picture",
+        "blades": [
+          "レオンクロー",
+          "レオンクレスト"
+        ],
+        "kit_ids": [
+          "beyblade-x-bx15",
+          "beyblade-x-bx24",
+          "beyblade-x-cx05",
+          "beyblade-x-ux06",
+          "beyblade-x-ux12",
+          "beyblade-x-bx00-lc"
+        ],
+        "count": 6
+      },
+      {
         "id": "cho_pan",
         "kind": "blader",
         "labels": {
@@ -13111,39 +13184,6 @@
           "beyblade-x-bx31",
           "beyblade-x-bx48",
           "beyblade-x-bx00-se"
-        ],
-        "count": 6
-      },
-      {
-        "id": "burn_fujiwara",
-        "kind": "blader",
-        "labels": {
-          "zh": "不死原燃",
-          "ko": "홍불새",
-          "en": "Blaze Fujiwara",
-          "ja": "不死原バーン"
-        },
-        "subtitle": {
-          "zh": "ユグドラシル",
-          "ko": "위그드라실",
-          "en": "ユグドラシル",
-          "ja": "ユグドラシル"
-        },
-        "image": "./assets/bbx/ux07-01be7ad03f.jpg",
-        "cover_source": "newest product picture",
-        "blades": [
-          "フェニックスフェザー",
-          "フェニックスウイング",
-          "フェニックスラダー",
-          "フェニックスフレアZ"
-        ],
-        "kit_ids": [
-          "beyblade-x-bx23",
-          "beyblade-x-bx35",
-          "beyblade-x-ux07",
-          "beyblade-x-ux12",
-          "beyblade-x-bx00-pw",
-          "beyblade-x-cx-12-117"
         ],
         "count": 6
       },
@@ -13210,34 +13250,34 @@
         "count": 6
       },
       {
-        "id": "king_manju",
+        "id": "tsuyoshi_goriki",
         "kind": "blader",
         "labels": {
-          "zh": "萬獸金恩",
-          "ko": "김만호",
-          "en": "Titus Manju",
-          "ja": "万獣キング"
+          "zh": "剛力強",
+          "ko": "고리키 츠요시",
+          "en": "Tsuyoshi Goriki",
+          "ja": "剛力ツヨシ"
         },
         "subtitle": {
-          "zh": "ズーガニック",
-          "ko": "주가닉",
-          "en": "ズーガニック",
-          "ja": "ズーガニック"
+          "zh": "ゲームオリジナル（BEYBLADE X XONE）",
+          "ko": "게임 오리지널 (BEYBLADE X XONE)",
+          "en": "ゲームオリジナル（BEYBLADE X XONE）",
+          "ja": "ゲームオリジナル（BEYBLADE X XONE）"
         },
-        "image": "./assets/bbx/ux06-2545562e0c.jpg",
+        "image": "./assets/bbx/bx48-c7881ee048.jpg",
         "cover_source": "newest product picture",
         "blades": [
-          "レオンクロー",
-          "レオンクレスト"
+          "ドランバスター"
         ],
         "kit_ids": [
-          "beyblade-x-bx15",
-          "beyblade-x-bx24",
-          "beyblade-x-ux06",
-          "beyblade-x-ux12",
-          "beyblade-x-bx00-lc"
+          "beyblade-x-bx48",
+          "beyblade-x-cx08",
+          "beyblade-x-ux01",
+          "beyblade-x-ux04",
+          "beyblade-x-bx00-cc",
+          "beyblade-x-ux00-db-bc"
         ],
-        "count": 5
+        "count": 6
       },
       {
         "id": "sorita",
@@ -13359,35 +13399,6 @@
         "count": 5
       },
       {
-        "id": "tsuyoshi_goriki",
-        "kind": "blader",
-        "labels": {
-          "zh": "剛力強",
-          "ko": "고리키 츠요시",
-          "en": "Tsuyoshi Goriki",
-          "ja": "剛力ツヨシ"
-        },
-        "subtitle": {
-          "zh": "ゲームオリジナル（BEYBLADE X XONE）",
-          "ko": "게임 오리지널 (BEYBLADE X XONE)",
-          "en": "ゲームオリジナル（BEYBLADE X XONE）",
-          "ja": "ゲームオリジナル（BEYBLADE X XONE）"
-        },
-        "image": "./assets/bbx/bx48-c7881ee048.jpg",
-        "cover_source": "newest product picture",
-        "blades": [
-          "ドランバスター"
-        ],
-        "kit_ids": [
-          "beyblade-x-bx48",
-          "beyblade-x-ux01",
-          "beyblade-x-ux04",
-          "beyblade-x-bx00-cc",
-          "beyblade-x-ux00-db-bc"
-        ],
-        "count": 5
-      },
-      {
         "id": "omega_shiroboshi",
         "kind": "blader",
         "labels": {
@@ -13410,7 +13421,7 @@
         ],
         "kit_ids": [
           "beyblade-x-bx53",
-          "beyblade-x-cx-07-98",
+          "beyblade-x-cx07",
           "beyblade-x-cx00-pb",
           "beyblade-x-ux00-ap-red"
         ],
@@ -13469,9 +13480,9 @@
         ],
         "kit_ids": [
           "beyblade-x-bx31",
+          "beyblade-x-cx09",
           "beyblade-x-cx17",
-          "beyblade-x-ux10",
-          "beyblade-x-cx-09-106"
+          "beyblade-x-ux10"
         ],
         "count": 4
       },
@@ -13749,8 +13760,8 @@
         ],
         "kit_ids": [
           "beyblade-x-ux21",
-          "beyblade-x-ux08",
-          "beyblade-x-cx-10-110"
+          "beyblade-x-cx10",
+          "beyblade-x-ux08"
         ],
         "count": 3
       },
@@ -13877,16 +13888,16 @@
           "en": "ゲームオリジナル（BEYBLADE X XONE）",
           "ja": "ゲームオリジナル（BEYBLADE X XONE）"
         },
-        "image": "./assets/bbx/ux05-409030b03d.webp",
+        "image": "./assets/bbx/bx44-27f3b25579.jpg",
         "cover_source": "newest product picture",
         "blades": [
           "シノビシャドウ",
           "トリケラプレス"
         ],
         "kit_ids": [
+          "beyblade-x-bx44",
           "beyblade-x-ux05",
-          "beyblade-x-ux12",
-          "beyblade-x-bx-44-96"
+          "beyblade-x-ux12"
         ],
         "count": 3
       },
@@ -14140,15 +14151,15 @@
           "en": "",
           "ja": ""
         },
-        "image": "./assets/bbx/cx16-f8219fad97.jpg",
+        "image": "./assets/bbx/cx13-038c4ca679.jpg",
         "cover_source": "newest product picture",
         "blades": [
           "オロチクラスタ",
           "バハムートブリッツBK"
         ],
         "kit_ids": [
-          "beyblade-x-cx16",
-          "beyblade-x-cx-13-122"
+          "beyblade-x-cx13",
+          "beyblade-x-cx16"
         ],
         "count": 2
       },
@@ -14174,6 +14185,32 @@
         ],
         "kit_ids": [
           "beyblade-x-bx27",
+          "beyblade-x-ux07"
+        ],
+        "count": 2
+      },
+      {
+        "id": "loupe_himekawa",
+        "kind": "blader",
+        "labels": {
+          "zh": "姬川露佩",
+          "ko": "히메카와 루페",
+          "en": "Loupe Himekawa",
+          "ja": "姫川ルーペ"
+        },
+        "subtitle": {
+          "zh": "ゲームオリジナル（BEYBLADE X EVOBATTLE）",
+          "ko": "게임 오리지널 (BEYBLADE X EVOBATTLE)",
+          "en": "ゲームオリジナル（BEYBLADE X EVOBATTLE）",
+          "ja": "ゲームオリジナル（BEYBLADE X EVOBATTLE）"
+        },
+        "image": "./assets/bbx/cx05-ac557c0c16.jpg",
+        "cover_source": "newest product picture",
+        "blades": [
+          "フェニックスラダー"
+        ],
+        "kit_ids": [
+          "beyblade-x-cx05",
           "beyblade-x-ux07"
         ],
         "count": 2
@@ -14257,6 +14294,56 @@
         "count": 1
       },
       {
+        "id": "million_mizu",
+        "kind": "blader",
+        "labels": {
+          "zh": "三頭百萬",
+          "ko": "밀리온",
+          "en": "Million Mizu",
+          "ja": "三頭ミリオン"
+        },
+        "subtitle": {
+          "zh": "ゾディアック",
+          "ko": "조디악",
+          "en": "ゾディアック",
+          "ja": "ゾディアック"
+        },
+        "image": "./assets/bbx/cx08-2a652122e2.jpg",
+        "cover_source": "newest product picture",
+        "blades": [
+          "ケルベロスフレイムW"
+        ],
+        "kit_ids": [
+          "beyblade-x-cx08"
+        ],
+        "count": 1
+      },
+      {
+        "id": "yoko_kyubi",
+        "kind": "blader",
+        "labels": {
+          "zh": "九尾小妖",
+          "ko": "구미호",
+          "en": "Yoko Kyubi",
+          "ja": "九尾ヨウコ"
+        },
+        "subtitle": {
+          "zh": "ミスリーダーズ",
+          "ko": "미스리더즈",
+          "en": "ミスリーダーズ",
+          "ja": "ミスリーダーズ"
+        },
+        "image": "./assets/bbx/cx06-d4efb22330.jpg",
+        "cover_source": "newest product picture",
+        "blades": [
+          "フォックスブラッシュJ"
+        ],
+        "kit_ids": [
+          "beyblade-x-cx06"
+        ],
+        "count": 1
+      },
+      {
         "id": "ryu_isshin",
         "kind": "blader",
         "labels": {
@@ -14271,13 +14358,13 @@
           "en": "ミスリーダーズ",
           "ja": "ミスリーダーズ"
         },
-        "image": "",
+        "image": "./assets/bbx/bx44-27f3b25579.jpg",
         "cover_source": "newest product picture",
         "blades": [
           "トリケラプレス"
         ],
         "kit_ids": [
-          "beyblade-x-bx-44-96"
+          "beyblade-x-bx44"
         ],
         "count": 1
       },
@@ -14353,31 +14440,6 @@
         ],
         "kit_ids": [
           "beyblade-x-bx37"
-        ],
-        "count": 1
-      },
-      {
-        "id": "loupe_himekawa",
-        "kind": "blader",
-        "labels": {
-          "zh": "姬川露佩",
-          "ko": "히메카와 루페",
-          "en": "Loupe Himekawa",
-          "ja": "姫川ルーペ"
-        },
-        "subtitle": {
-          "zh": "ゲームオリジナル（BEYBLADE X EVOBATTLE）",
-          "ko": "게임 오리지널 (BEYBLADE X EVOBATTLE)",
-          "en": "ゲームオリジナル（BEYBLADE X EVOBATTLE）",
-          "ja": "ゲームオリジナル（BEYBLADE X EVOBATTLE）"
-        },
-        "image": "./assets/bbx/ux07-01be7ad03f.jpg",
-        "cover_source": "newest product picture",
-        "blades": [
-          "フェニックスラダー"
-        ],
-        "kit_ids": [
-          "beyblade-x-ux07"
         ],
         "count": 1
       }
