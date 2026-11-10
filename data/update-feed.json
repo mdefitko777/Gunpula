@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-10",
-  "generated_at": "2026-11-10T09:18:48.604Z",
+  "generated_at": "2026-11-10T13:27:10.552Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,44 +18,47 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-10T09:18:26.265Z",
+    "generated_at": "2026-11-10T13:26:26.802Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-10",
-      "generated_at": "2026-11-10T09:18:48.604Z",
+      "generated_at": "2026-11-10T13:27:10.552Z",
       "total_before": 39326,
       "total_after": 39334,
       "added_count": 8,
-      "changed_count": 5,
+      "changed_count": 19,
       "removed_count": 0,
-      "watched_count": 2,
+      "watched_count": 3,
       "merged_count": 0,
       "backfilled_count": 0,
-      "premium_bandai_count": 3,
+      "premium_bandai_count": 15,
       "bbx_count": 0,
       "franchise_counts": {
+        "gundam": 19,
         "lego": 1,
-        "gundam": 5,
         "pokemon": 6,
         "fate": 1
       },
       "reason_counts": {
         "new": 8,
+        "source": 10,
+        "series": 4,
         "release": 1,
-        "source": 2,
-        "series": 2
+        "name": 4,
+        "release_found": 1,
+        "limited": 1
       },
       "interest_tags": [
-        "lego",
         "gundam",
         "premium_bandai",
+        "lego",
         "pokemon",
-        "fate",
         "seed",
-        "00"
+        "00",
+        "fate"
       ],
       "watch_tags": [
         "seed",
@@ -404,6 +407,47 @@
           ]
         },
         {
+          "kit_id": "pbandai-wb-1000166358",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ガンダムアストレイレッドフレームインバージョン",
+            "zh": "ＨＧ 1 / 144 高达异端レッドフレームインバージョン",
+            "ko": "HG 1/144 건담 어스트레이 레드 프레임 인버전",
+            "en": "ＨＧ 1 / 144 Gundam Astrayレッドフレームインバージョン"
+          },
+          "release_date": "2022-02",
+          "price_jpy": 1980,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000166358/"
+          ]
+        },
+        {
           "kit_id": "tamashii-12335",
           "change_type": "changed",
           "franchise": "gundam",
@@ -520,6 +564,437 @@
           ]
         },
         {
+          "kit_id": "hg-hg-1-144-v2-4573102653918000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "victory",
+          "series_labels": {
+            "zh": "V",
+            "en": "V",
+            "ja": "V",
+            "ko": "V"
+          },
+          "names": {
+            "ja": "HG 1 / 144 V2アサルトバスターガンダム [クリアカラー]",
+            "zh": "HG 1 / 144 V2アサルト暴风高达 [透明色]",
+            "ko": "HG 1/144 V2アサルト버스터건담 [클리어 컬러]",
+            "en": "HG 1 / 144 V2アサルトBuster Gundam [Clear Color]"
+          },
+          "release_date": "2023-05-03",
+          "price_jpy": 2640,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102653918000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000166322",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "uc_first",
+          "series_labels": {
+            "zh": "初代",
+            "en": "0079",
+            "ja": "初代",
+            "ko": "초대"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 グフクリムゾンカスタム",
+            "zh": "ＨＧ 1 / 144 老虎クリムゾンカスタム",
+            "ko": "HG 1/144 구프 크림슨 커스텀",
+            "en": "ＨＧ 1 / 144 Goufクリムゾンカスタム"
+          },
+          "release_date": "2022-06",
+          "price_jpy": 1980,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release_found",
+            "source"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000166322/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000166324",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "w",
+          "series_labels": {
+            "zh": "W",
+            "en": "W",
+            "ja": "W",
+            "ko": "W"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ウイングガンダムスカイゼロ",
+            "zh": "ＨＧ 1 / 144 飞翼高达スカイゼロ",
+            "ko": "HG 1/144 윙 건담 스카이 제로",
+            "en": "ＨＧ 1 / 144 Wing Gundamスカイゼロ"
+          },
+          "release_date": "2022-02",
+          "price_jpy": 1870,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000166324/"
+          ]
+        },
+        {
+          "kit_id": "hg-hg-1-144-4573102629685000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "w",
+          "series_labels": {
+            "zh": "W",
+            "en": "W",
+            "ja": "W",
+            "ko": "W"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ガンダムアスクレプオス",
+            "zh": "ＨＧ 1 / 144 高达アスクレプオス",
+            "ko": "HG 1/144 건담 아스클레피오스",
+            "en": "ＨＧ 1 / 144 Gundamアスクレプオス"
+          },
+          "release_date": "2022-01",
+          "price_jpy": 4180,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102629685000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "mg-mg-1-100-4573102632791000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "MG",
+          "series_key": "sd",
+          "series_labels": {
+            "zh": "SD",
+            "en": "SD",
+            "ja": "SD",
+            "ko": "SD"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 真武者頑駄無 戦国の陣 黒衣大鎧",
+            "zh": "ＭＧ 1 / 100 真武者頑駄無 戦国の陣 黒衣大鎧",
+            "ko": "MG 1/100 진 무사 건담 전국의 진 흑의 대갑옷",
+            "en": "ＭＧ 1 / 100 真武者頑駄無 戦国の陣 黒衣大鎧"
+          },
+          "release_date": "2022-01",
+          "price_jpy": 10890,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102632791000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "hg-hg-1-144-4573102620279000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "build",
+          "series_labels": {
+            "zh": "创战",
+            "en": "Build",
+            "ja": "ビルド",
+            "ko": "빌드"
+          },
+          "names": {
+            "ja": "HG 1 / 144 ブレイジングガンダム",
+            "zh": "HG 1 / 144 ブレイジング高达",
+            "ko": "HG 1/144 블레이징 건담",
+            "en": "HG 1 / 144 ブレイジングGundam"
+          },
+          "release_date": "2021-12-11",
+          "price_jpy": 2200,
+          "is_limited": false,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102620279000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000168300/"
+          ]
+        },
+        {
+          "kit_id": "rg-rg-1-144-rx-78-2-4573102621870000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "RG",
+          "series_key": "uc_first",
+          "series_labels": {
+            "zh": "初代",
+            "en": "0079",
+            "ja": "初代",
+            "ko": "초대"
+          },
+          "names": {
+            "ja": "ＲＧ 1 / 144 RX-78-2 ガンダム（チームブライトカスタム）",
+            "zh": "ＲＧ 1 / 144 RX-78-2 高达（チームブライトカスタム）",
+            "ko": "RG 1/144 RX-78-2 건담(팀 브라이트 커스텀)",
+            "en": "ＲＧ 1 / 144 RX-78-2 Gundam (チームブライトカスタム)"
+          },
+          "release_date": "2021-10",
+          "price_jpy": 3300,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "limited",
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102621870000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000252943",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "w",
+          "series_labels": {
+            "zh": "W",
+            "en": "W",
+            "ja": "W",
+            "ko": "W"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ガンダムジェミナス０２用 陸戦重装ユニット 拡張パーツ",
+            "zh": "ＨＧ 1 / 144 高达ジェミナス０２用 陸戦重装ユニット 拡張パーツ",
+            "ko": "HG 1/144 건담 제미나스 02용 육전 중장 유닛 확장 파츠",
+            "en": "ＨＧ 1 / 144 Gundamジェミナス０２用 陸戦重装ユニット 拡張パーツ"
+          },
+          "release_date": "2021-05",
+          "price_jpy": 2530,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "p_bandai_wayback",
+            "bandai_spirits_products_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102616869000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000252943/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000252930",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "w",
+          "series_labels": {
+            "zh": "W",
+            "en": "W",
+            "ja": "W",
+            "ko": "W"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ガンダムジェミナス０１",
+            "zh": "ＨＧ 1 / 144 高达ジェミナス０１",
+            "ko": "HG 1/144 건담 제미나스 01",
+            "en": "ＨＧ 1 / 144 Gundamジェミナス０１"
+          },
+          "release_date": "2020-05",
+          "price_jpy": 2420,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "p_bandai_wayback",
+            "bandai_spirits_products_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102595614000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000252930/"
+          ]
+        },
+        {
+          "kit_id": "mg-mg-1-100-v2-ver-ka-4573102555281000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "MG",
+          "series_key": "victory",
+          "series_labels": {
+            "zh": "V",
+            "en": "V",
+            "ja": "V",
+            "ko": "V"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 Ｖ２アサルトバスターガンダム Ver．Ka",
+            "zh": "ＭＧ 1 / 100 Ｖ２アサルト暴风高达 Ver．Ka",
+            "ko": "ＭＧ 1/100 Ｖ２アサルト버스터건담 Ver．Ka",
+            "en": "ＭＧ 1 / 100 Ｖ２アサルトBuster Gundam Ver．Ka"
+          },
+          "release_date": "2018-12-04",
+          "price_jpy": 8800,
+          "is_limited": false,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102555281000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "hg-hguc-1-144-v2-4543112965271000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HGUC",
+          "series_key": "victory",
+          "series_labels": {
+            "zh": "V",
+            "en": "V",
+            "ja": "V",
+            "ko": "V"
+          },
+          "names": {
+            "ja": "HGUC 1 / 144 V2アサルトバスターガンダム",
+            "zh": "HGUC 1 / 144 V2アサルト暴风高达",
+            "ko": "HGUC 1/144 V2アサルト버스터건담",
+            "en": "HGUC 1 / 144 V2アサルトBuster Gundam"
+          },
+          "release_date": "2015-05-23",
+          "price_jpy": 2420,
+          "is_limited": false,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112965271000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000247342/"
+          ]
+        },
+        {
           "kit_id": "mg-mg-1-100-ver-4543112909206000",
           "change_type": "changed",
           "franchise": "gundam",
@@ -556,6 +1031,84 @@
           ],
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112909206000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "tamashii-1245",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "ROBOT_SPIRITS",
+          "subline": "ROBOT魂",
+          "series_key": "victory",
+          "series_labels": {
+            "zh": "V",
+            "en": "V",
+            "ja": "V",
+            "ko": "V"
+          },
+          "names": {
+            "ja": "V2アサルトバスターガンダム",
+            "zh": "V2アサルト暴风高达",
+            "ko": "V2アサルト버스터건담",
+            "en": "V2アサルトBuster Gundam"
+          },
+          "release_date": "2010-03-20",
+          "price_jpy": 5500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/1245/",
+            "https://tamashiiweb.com/item_brand/robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "sd-bb-275-4543112318770000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "SD",
+          "subline": "SD",
+          "series_key": "sd",
+          "series_labels": {
+            "zh": "SD",
+            "en": "SD",
+            "ja": "SD",
+            "ko": "SD"
+          },
+          "names": {
+            "ja": "BB戦士275 龍神導師仁宇（リュウジンドウシニュー）",
+            "zh": "BB戦士275 龍神導師仁宇（リュウジンドウシニュー）",
+            "ko": "BB전사275 용신도사 인우(류진도시 뉴)",
+            "en": "BB戦士275 龍神導師仁宇 (リュウジンドウシニュー)"
+          },
+          "release_date": "2004-12",
+          "price_jpy": 550,
+          "is_limited": false,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112318770000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000130293/"
           ]
         }
       ],
@@ -601,6 +1154,47 @@
           ],
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102743145000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000166358",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ガンダムアストレイレッドフレームインバージョン",
+            "zh": "ＨＧ 1 / 144 高达异端レッドフレームインバージョン",
+            "ko": "HG 1/144 건담 어스트레이 레드 프레임 인버전",
+            "en": "ＨＧ 1 / 144 Gundam Astrayレッドフレームインバージョン"
+          },
+          "release_date": "2022-02",
+          "price_jpy": 1980,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000166358/"
           ]
         },
         {
