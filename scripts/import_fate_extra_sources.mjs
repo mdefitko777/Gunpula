@@ -29,6 +29,8 @@ import {
 } from "./lib/kotobukiya-shop.mjs";
 import { KIT_ALIASES_PATH, retiredKitIds } from "./lib/catalog-cleanup.mjs";
 import { gradeForProduct, scaleFor } from "./lib/fate-grades.mjs";
+import { HOBBY_SEARCH_BASE, parseHobbySearch, tidyStoredHobbySearchKits } from "./lib/hobby-search.mjs";
+import { absoluteHtmlUrl } from "./lib/html-url.mjs";
 import { aniplexCampaign, nameKey, needsQualifier, qualifiedName, sameName } from "./lib/fate-names.mjs";
 
 const CATALOG_PATH = "data/kits.json";
@@ -106,12 +108,10 @@ async function fetchJson(url, extraHeaders) {
   return (await fetchRaw(url, { accept: "application/json", ...extraHeaders })).json();
 }
 
+// Attribute values are HTML-escaped: Aniplex+ writes "600&times;600_….png" and
+// "saihan_musashi&amp;miniCu/M1.jpg", which answer 404 until decoded.
 function absolute(href, base) {
-  try {
-    return new URL(href, base).toString();
-  } catch {
-    return "";
-  }
+  return absoluteHtmlUrl(href, base);
 }
 
 // Japanese release copy: "2026年08月29日(土)より順次発売予定" / "2026年7月".
@@ -328,7 +328,7 @@ function parseIchibanKuji(html, pageUrl) {
       series: "",
       line: "一番くじ",
       url: absolute(`/products/${slug}`, pageUrl),
-      image: /<img src="([^"]+)"/.exec(block)?.[1] || "",
+      image: absolute(/<img src="([^"]+)"/.exec(block)?.[1] || "", pageUrl),
       release_date: releaseDateFrom(decodeHtml(/<p class="date">([\s\S]*?)<\/p>/.exec(block)?.[1] || "")),
       is_limited: true,
     });
@@ -437,44 +437,15 @@ async function fetchTamashii() {
 
 // ------------------------------------------------------- ホビーサーチ (1999.co.jp)
 
-// The only reachable listing that carries the makers the official sites do not
-// expose (PLAMATEA, BUSHIROAD, PalVerse, CHILLfigg ...). Two traps: the search
+// The only listing that carried the makers the official sites do not expose
+// (PLAMATEA, BUSHIROAD, PalVerse, CHILLfigg ...). Two traps: the search
 // parameter is `searchkey`, not `keyword` — `keyword` is accepted and then
 // silently ignored, returning an unfiltered default page — and the keyword
 // still matches unrelated products, so titles are checked against the Fate
-// works before a record is kept.
-const HOBBY_SEARCH_BASE = "https://www.1999.co.jp";
+// works before a record is kept (lib/hobby-search.mjs). Since 2026-11 the site
+// answers the bot with a bot check, so stored records are tidied offline
+// (tidyStoredHobbySearchKits) instead of being refreshed.
 const HOBBY_SEARCH_KEYWORDS = ["Fate", "Fate/Grand Order", "フェイト"];
-const HOBBY_SEARCH_TITLE =
-  /Fate|フェイト|FGO|セイバー|アルトリア|マシュ|ジャンヌ|ギルガメッシュ|エミヤ|遠坂|イリヤ|型月|月姫|空の境界|カルデア|サーヴァント/i;
-// "Dr. FATE" is a DC character; MAFEX releases it and it matches on "FATE".
-const HOBBY_SEARCH_EXCLUDE = /Dr\.?\s*FATE/i;
-
-function parseHobbySearch(html) {
-  const out = [];
-  for (const chunk of String(html || "").split('<div class="c-product-list__item">').slice(1)) {
-    const block = chunk.split("</div></div></div>")[0];
-    const code = /ItemCode="(\d+)"/.exec(block)?.[1];
-    const name = decodeHtml(/<div class="c-card__title">([\s\S]*?)<\/div>/.exec(block)?.[1] || "");
-    if (!code || !name) continue;
-    if (!HOBBY_SEARCH_TITLE.test(name) || HOBBY_SEARCH_EXCLUDE.test(name)) continue;
-    const image = /<img[^>]*src="([^"]*itbig[^"]*)"/i.exec(block)?.[1];
-    out.push({
-      key: code,
-      name,
-      series: "",
-      line: "ホビーサーチ",
-      url: `${HOBBY_SEARCH_BASE}/${code}`,
-      image: image ? absolute(image, HOBBY_SEARCH_BASE) : "",
-      price_jpy: parseYen(decodeHtml(/<div class="c-card__price-element">([\s\S]*?)<\/div>/.exec(block)?.[1] || "")),
-      // The card shows a fuzzy Japanese release phrase ("9月下旬 発売予定") with
-      // no year, so it is left unset rather than guessed at.
-      release_date: null,
-      is_limited: /限定|特典/.test(name),
-    });
-  }
-  return out;
-}
 
 async function fetchHobbySearch() {
   const byKey = new Map();
@@ -485,7 +456,12 @@ async function fetchHobbySearch() {
         `&searchkey=${encodeURIComponent(keyword)}&spage=${page}`;
       const html = await fetchText(url);
       const products = parseHobbySearch(html);
-      for (const product of products) byKey.set(product.key, product);
+      for (const product of products) {
+        // The clean name is the record's name; the card title stays in source_name
+        // (always set for this source, which is how tidyStoredHobbySearchKits tells
+        // these records from the ones stored before the cleanup).
+        byKey.set(product.key, { ...product, name: product.source_name, display_name: product.name });
+      }
       // Page size is 60 regardless of how many survive the Fate title filter,
       // so paging stops on the raw card count, not the kept count.
       if ((html.split('<div class="c-product-list__item">').length - 1) < 60) break;
@@ -566,7 +542,7 @@ function toKit(product, source, index) {
     scale: scaleFor(product.name),
     names: { ja: name, en: name, zh: name, ko: name },
     // The store's own title when names carry a campaign prefix (lib/fate-names.mjs).
-    ...(displayName ? { source_name: product.source_name || product.name } : {}),
+    ...(displayName || source.source_id === "hobby_search_fate_jp" ? { source_name: product.source_name || product.name } : {}),
     images: {
       box_art_url: image,
       box_art_source_id: image ? source.source_id : null,
@@ -652,6 +628,8 @@ try {
   // No alias file yet.
 }
 const merged = mergeCatalog(catalog.kits, imported.filter((kit) => !retired.has(kit.kit_id)));
+const tidied = tidyStoredHobbySearchKits(merged);
+if (tidied) console.log(`Hobby Search: tidied ${tidied} stored records (shop category suffix, discounted card price).`);
 await writeFile(CATALOG_PATH, `${JSON.stringify({ ...catalog, updated_at: today(), kits: merged }, null, 2)}\n`, "utf8");
 console.log(
   `Extra Fate sources — ${report.join(", ")}; catalog now ${merged.filter((kit) => kit.franchise === "fate").length} Fate records.`,

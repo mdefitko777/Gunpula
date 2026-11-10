@@ -44,10 +44,13 @@ import {
   parseKotobukiyaShopDetail,
   parseKotobukiyaShopListings,
 } from "./lib/kotobukiya-shop.mjs";
-import { KIT_ALIASES_PATH, retiredKitIds } from "./lib/catalog-cleanup.mjs";
+import { KIT_ALIASES_PATH, resolveAlias, retiredKitIds } from "./lib/catalog-cleanup.mjs";
 import { scaleFor } from "./lib/fate-grades.mjs";
+import { aliasPublishedFolds } from "./lib/fold-aliases.mjs";
+import { absoluteHtmlUrl } from "./lib/html-url.mjs";
 
 const CATALOG_PATH = "data/kits.json";
+const FIRST_SEEN_PATH = "data/kit-first-seen.json";
 const REPORT_PATH = process.env.MADOKA_REPORT_PATH || "";
 const BOT_UA = "HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)";
 const BOT_TOKEN = "hobbyatlasdatabot";
@@ -87,13 +90,9 @@ function decodeHtml(value = "") {
     .trim();
 }
 
+// Attribute values are HTML-escaped ("saihan_musashi&amp;miniCu/M1.jpg"); decoded first.
 function absolute(href, base) {
-  if (!href) return "";
-  try {
-    return new URL(href.startsWith("//") ? `https:${href}` : href, base).toString();
-  } catch {
-    return "";
-  }
+  return absoluteHtmlUrl(href, base);
 }
 
 // "2026年08月29日(土)より順次発売予定" / "2026年7月" / "2022/06".
@@ -2179,6 +2178,7 @@ function dedupe(imported, previousMadoka) {
   }
   const dropped = new Set();
   const merges = [];
+  const folded = [];
   const kept = [];
   for (const group of groups.values()) {
     if (group.length < 2) continue;
@@ -2200,6 +2200,7 @@ function dedupe(imported, previousMadoka) {
       }
       absorb(winner, kit);
       dropped.add(kit.kit_id);
+      folded.push({ from: kit.kit_id, to: winner.kit_id });
       merges.push(`${kit.kit_id} → ${winner.kit_id} (${winner.names.ja})`);
     }
   }
@@ -2222,9 +2223,10 @@ function dedupe(imported, previousMadoka) {
     if (others.length !== 1) continue;
     absorb(others[0], kit);
     dropped.add(kit.kit_id);
+    folded.push({ from: kit.kit_id, to: others[0].kit_id });
     merges.push(`${kit.kit_id} → ${others[0].kit_id} (${others[0].names.ja}, goodsmile.com)`);
   }
-  return { kits: imported.filter((kit) => !dropped.has(kit.kit_id)), merges, kept };
+  return { kits: imported.filter((kit) => !dropped.has(kit.kit_id)), merges, folded, kept };
 }
 
 // Possible duplicates left apart (same core name and scale across sources,
@@ -2288,8 +2290,10 @@ async function runSource(source) {
 const catalog = JSON.parse(await readFile(CATALOG_PATH, "utf8"));
 const previousMadoka = catalog.kits.filter((kit) => kit.franchise === FRANCHISE);
 let retired = new Set();
+let aliasDoc = null;
 try {
-  retired = retiredKitIds(JSON.parse(await readFile(KIT_ALIASES_PATH, "utf8")));
+  aliasDoc = JSON.parse(await readFile(KIT_ALIASES_PATH, "utf8"));
+  retired = retiredKitIds(aliasDoc);
 } catch {
   // No alias file yet.
 }
@@ -2298,8 +2302,18 @@ try {
 // MADOKA_ONLY=a,b runs only those sources (for trying a vendor by hand).
 const ONLY = new Set((process.env.MADOKA_ONLY || "").split(",").filter(Boolean));
 const results = await Promise.all(SOURCES.filter((source) => !ONLY.size || ONLY.has(source.source_id)).map(runSource));
-const imported = results.flatMap((result) => result.kits).filter((kit) => !retired.has(kit.kit_id));
-const { kits: deduped, merges, kept: keptPairs } = dedupe(imported, previousMadoka);
+const fetchedAll = results.flatMap((result) => result.kits);
+const imported = fetchedAll.filter((kit) => !retired.has(kit.kit_id));
+const { kits: deduped, merges, folded, kept: keptPairs } = dedupe(imported, previousMadoka);
+// A page folded away on an earlier run (now an alias) still lends its source ref, price
+// and date to the record it went into, so the alias costs nothing on the next import.
+{
+  const byId = new Map([...previousMadoka, ...deduped].map((kit) => [kit.kit_id, kit]));
+  for (const kit of fetchedAll) {
+    const target = retired.has(kit.kit_id) ? byId.get(resolveAlias(aliasDoc?.aliases || {}, kit.kit_id)) : null;
+    if (target && target !== kit) absorb(target, kit);
+  }
+}
 
 const lines = [];
 const reportJson = { generated_at: new Date().toISOString(), hosts: {}, sources: [], merges, kept_duplicate_pairs: keptPairs };
@@ -2350,4 +2364,22 @@ if (!deduped.length) {
 
 const merged = mergeCatalog(catalog.kits, deduped);
 await writeFile(CATALOG_PATH, `${JSON.stringify({ ...catalog, updated_at: today(), kits: merged }, null, 2)}\n`, "utf8");
+if (folded.length) {
+  let firstSeen = {};
+  try {
+    firstSeen = JSON.parse(await readFile(FIRST_SEEN_PATH, "utf8")).dates || {};
+  } catch {
+    // No ledger yet: nothing was published.
+  }
+  const doc = aliasDoc || { schema: 1, updated_at: null, aliases: {}, excluded: {} };
+  const added = aliasPublishedFolds(doc, folded, {
+    published: (id) => Boolean(firstSeen[id]),
+    liveIds: new Set(merged.map((kit) => kit.kit_id)),
+  });
+  if (added.length) {
+    doc.updated_at = today();
+    await writeFile(KIT_ALIASES_PATH, `${JSON.stringify(doc, null, 2)}\n`, "utf8");
+    console.log(`  aliased ${added.length} published records that were folded: ${added.join("; ")}`);
+  }
+}
 console.log(`Madoka: imported ${deduped.length} records; catalog now ${merged.filter((kit) => kit.franchise === FRANCHISE).length} Madoka records.`);

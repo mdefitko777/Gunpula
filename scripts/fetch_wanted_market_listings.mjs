@@ -1,12 +1,30 @@
 import { createHash } from "node:crypto";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { appendFile, mkdir, readFile, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { loadRobots, robotsAllows } from "./lib/robots.mjs";
+
+// Wishlist prices from Korean / Japanese marketplaces.
+//
+// Every request identifies as this project's bot (until 2026-11 the scraped sources got a
+// made-up Chrome user-agent), robots.txt is read first for each host and obeyed, and a
+// 403 / 429 / 503 stops that source for the run. A source that fails for every kit is
+// reported: a table in the GitHub step summary, an ::error:: annotation, and
+// `--check-health` (run as the workflow's last step) exits 1 so the run turns red
+// after the data that did arrive has been committed. Before this, Naver Shopping and
+// Bunjang answered 404 for every query from 2026-10 on and the run stayed green.
+//
+//   node scripts/fetch_wanted_market_listings.mjs                 fetch (exit 0 unless MARKET_STRICT=1)
+//   node scripts/fetch_wanted_market_listings.mjs --check-health  exit 1 when the last fetch had a failing source
 
 const rootDir = dirname(dirname(fileURLToPath(import.meta.url)));
 const now = new Date().toISOString();
 const REQUEST_DELAY_MS = 1500;
-const BROWSER_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36";
+const BOT_UA = "HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)";
+// Where the last fetch leaves its per-source health for --check-health (outside the repo,
+// so a health line never becomes a data commit).
+const HEALTH_PATH = process.env.MARKET_HEALTH_PATH || join(process.env.RUNNER_TEMP || tmpdir(), "market-source-health.json");
 
 const DATA = {
   kits: "data/kits.json",
@@ -167,16 +185,38 @@ function kitMatchTokens(kit, nameOverride) {
   return [...new Set(names.flatMap(tokenize))];
 }
 
+/** An HTTP error with what the service said (Naver: {"errorCode","errorMessage"}), never the request headers. */
+export async function httpError(label, response) {
+  let detail = "";
+  try {
+    const text = (await response.text()).trim();
+    try {
+      const body = JSON.parse(text);
+      detail = [body.errorCode, body.errorMessage || body.message || body.error].filter(Boolean).join(" ");
+    } catch {
+      detail = /<title>([^<]{1,120})<\/title>/i.exec(text)?.[1] || text.slice(0, 120);
+    }
+  } catch {
+    // No body.
+  }
+  const error = new Error(`${label} ${response.status}${detail ? ` (${detail.replace(/\s+/g, " ").trim()})` : ""}`);
+  error.status = response.status;
+  // The site asking us to stop or slow down: no more requests to it this run.
+  error.refused = [403, 429, 503].includes(response.status);
+  return error;
+}
+
 async function fetchNaver(query) {
   const { NAVER_CLIENT_ID, NAVER_CLIENT_SECRET } = process.env;
-  if (!NAVER_CLIENT_ID || !NAVER_CLIENT_SECRET) return [];
   // sort=sim (relevance) surfaces the actual kit; sort=asc buries it under
   // unrelated cheap accessories that the match filter then rejects.
   const url = `https://openapi.naver.com/v1/search/shop.json?query=${encodeURIComponent(query)}&display=10&sort=sim`;
   const response = await fetch(url, {
-    headers: { "X-Naver-Client-Id": NAVER_CLIENT_ID, "X-Naver-Client-Secret": NAVER_CLIENT_SECRET },
+    headers: { "User-Agent": BOT_UA, "X-Naver-Client-Id": NAVER_CLIENT_ID, "X-Naver-Client-Secret": NAVER_CLIENT_SECRET },
   });
-  if (!response.ok) throw new Error(`Naver API ${response.status}`);
+  // 401 024 = unknown client id, 401 / 403 = the app lacks the 검색 API, 404 SE05 = no such
+  // search API (wrong path or an app registered for another API set).
+  if (!response.ok) throw await httpError("Naver API", response);
   const data = await response.json();
   return (data.items || []).map((item) => ({
     title: cleanName(item.title.replace(/<\/?b>/g, "")),
@@ -188,8 +228,8 @@ async function fetchNaver(query) {
 
 async function fetchBunjang(query) {
   const url = `https://api.bunjang.co.kr/api/1/find_v2.json?q=${encodeURIComponent(query)}&order=score&page=0&stat_device=w&n=10`;
-  const response = await fetch(url, { headers: { "User-Agent": BROWSER_UA, Accept: "application/json" } });
-  if (!response.ok) throw new Error(`Bunjang API ${response.status}`);
+  const response = await fetch(url, { headers: { "User-Agent": BOT_UA, Accept: "application/json" } });
+  if (!response.ok) throw await httpError("Bunjang API", response);
   const data = await response.json();
   return (data.list || []).map((item) => ({
     title: item.name,
@@ -201,8 +241,8 @@ async function fetchBunjang(query) {
 
 async function fetchJoongna(query) {
   const url = `https://web.joongna.com/search/${encodeURIComponent(query)}`;
-  const response = await fetch(url, { headers: { "User-Agent": BROWSER_UA } });
-  if (!response.ok) throw new Error(`Joongna ${response.status}`);
+  const response = await fetch(url, { headers: { "User-Agent": BOT_UA } });
+  if (!response.ok) throw await httpError("Joongna", response);
   const html = await response.text();
   const results = [];
   // The search results are embedded as a JSON string inside a Next.js <script> payload,
@@ -224,9 +264,9 @@ async function fetchJoongna(query) {
 async function fetchAmazon(query) {
   const url = `https://www.amazon.co.jp/s?k=${encodeURIComponent(query)}`;
   const response = await fetch(url, {
-    headers: { "User-Agent": BROWSER_UA, "Accept-Language": "ja-JP,ja;q=0.9" },
+    headers: { "User-Agent": BOT_UA, "Accept-Language": "ja-JP,ja;q=0.9" },
   });
-  if (!response.ok) throw new Error(`Amazon ${response.status}`);
+  if (!response.ok) throw await httpError("Amazon", response);
   const html = await response.text();
   const results = [];
   const cardPattern = /data-asin="([A-Z0-9]{6,})"[\s\S]{0,2000}?<\/div>\s*<\/div>\s*<\/div>/g;
@@ -249,14 +289,95 @@ async function fetchAmazon(query) {
   return results;
 }
 
+// sampleUrl: a request of the same shape, checked against the host's robots.txt before
+// the source is used (api.bunjang.co.kr allows only search engines: "User-agent: *
+// Disallow: /", so the bot leaves Bunjang alone). Naver's Open API is an authenticated
+// API, not a crawl, and needs the two NAVER_* keys.
 const SOURCE_FETCHERS = [
   // Naver is a Korean marketplace: Korean queries return real hits where
   // English/kana queries come back empty even for popular kits.
-  { id: "naver_shop", fetch: fetchNaver, buildQuery: buildKoreanQuery },
-  { id: "bunjang", fetch: fetchBunjang, buildQuery: buildKoreanQuery },
-  { id: "joongna", fetch: fetchJoongna, buildQuery: buildKoreanQuery },
-  { id: "amazon", fetch: fetchAmazon, buildQuery },
+  { id: "naver_shop", fetch: fetchNaver, buildQuery: buildKoreanQuery, needs: ["NAVER_CLIENT_ID", "NAVER_CLIENT_SECRET"] },
+  { id: "bunjang", fetch: fetchBunjang, buildQuery: buildKoreanQuery, sampleUrl: "https://api.bunjang.co.kr/api/1/find_v2.json?q=x" },
+  { id: "joongna", fetch: fetchJoongna, buildQuery: buildKoreanQuery, sampleUrl: "https://web.joongna.com/search/x" },
+  { id: "amazon", fetch: fetchAmazon, buildQuery, sampleUrl: "https://www.amazon.co.jp/s?k=x" },
 ];
+
+/**
+ * One source's run → status: "ok", "partial" (some kits failed), "failing" (every kit
+ * failed), "refused" (403 / 429 / 503), "disallowed" (robots.txt), "no_credentials",
+ * "idle" (nothing to ask). failing and refused are the ones a person has to look at.
+ */
+export function sourceStatus(stat) {
+  if (stat.skipped) return stat.skipped;
+  if (stat.refused) return "refused";
+  if (!stat.attempted) return "idle";
+  if (stat.errors >= stat.attempted) return "failing";
+  return stat.errors ? "partial" : "ok";
+}
+
+export const UNHEALTHY = new Set(["failing", "refused"]);
+
+/** Markdown for the GitHub step summary. */
+export function healthSummary(stats) {
+  const rows = Object.entries(stats).map(
+    ([id, stat]) =>
+      `| ${id} | ${sourceStatus(stat)} | ${stat.attempted} | ${stat.matched} | ${stat.errors} | ${(stat.last_error || stat.note || "").replace(/\|/g, "/")} |`,
+  );
+  return ["### Market sources", "", "| source | status | asked | matched kits | errors | last error |", "|---|---|---|---|---|---|", ...rows, ""].join("\n");
+}
+
+async function prepareSources(stats) {
+  const robotsByHost = new Map();
+  for (const source of SOURCE_FETCHERS) {
+    const stat = stats[source.id];
+    const missing = (source.needs || []).filter((name) => !process.env[name]);
+    if (missing.length) {
+      stat.skipped = "no_credentials";
+      stat.note = `missing ${missing.join(", ")}`;
+      continue;
+    }
+    if (!source.sampleUrl) continue;
+    const host = new URL(source.sampleUrl).host;
+    if (!robotsByHost.has(host)) robotsByHost.set(host, await loadRobots(host, { userAgent: BOT_UA }));
+    const robots = robotsByHost.get(host);
+    if (!robotsAllows(robots, source.sampleUrl)) {
+      stat.skipped = "disallowed";
+      stat.note = `robots.txt ${robots.status}`;
+    }
+  }
+}
+
+async function reportHealth(stats) {
+  const health = Object.fromEntries(Object.entries(stats).map(([id, stat]) => [id, { ...stat, status: sourceStatus(stat) }]));
+  await mkdir(dirname(HEALTH_PATH), { recursive: true });
+  await writeFile(HEALTH_PATH, `${JSON.stringify({ checked_at: now, sources: health }, null, 2)}\n`, "utf8");
+  if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, `${healthSummary(stats)}\n`);
+  const unhealthy = Object.entries(health).filter(([, stat]) => UNHEALTHY.has(stat.status));
+  for (const [id, stat] of unhealthy) {
+    // A workflow annotation on the run page; plain text elsewhere.
+    console.log(`::error title=Market source ${id} ${stat.status}::${stat.errors}/${stat.attempted} requests failed; last: ${stat.last_error || "?"}`);
+  }
+  return unhealthy;
+}
+
+async function checkHealth() {
+  let doc;
+  try {
+    doc = JSON.parse(await readFile(HEALTH_PATH, "utf8"));
+  } catch {
+    console.log(`No market health file at ${HEALTH_PATH}; run the fetch first.`);
+    process.exit(1);
+  }
+  const unhealthy = Object.entries(doc.sources || {}).filter(([, stat]) => UNHEALTHY.has(stat.status));
+  for (const [id, stat] of Object.entries(doc.sources || {})) {
+    console.log(`  ${id}: ${stat.status}${stat.last_error ? ` (${stat.last_error})` : stat.note ? ` (${stat.note})` : ""}`);
+  }
+  if (unhealthy.length) {
+    console.log(`Market sources failing: ${unhealthy.map(([id]) => id).join(", ")}.`);
+    process.exit(1);
+  }
+  console.log("Market sources OK.");
+}
 
 async function main() {
   await loadLocalSecrets();
@@ -275,6 +396,7 @@ async function main() {
   const nameOverrides = nameOverridesDoc.overrides || {};
   const listings = [];
   const stats = Object.fromEntries(SOURCE_FETCHERS.map((source) => [source.id, { attempted: 0, matched: 0, errors: 0 }]));
+  await prepareSources(stats);
 
   if (!watchedIds.length) {
     console.log("No watched kits found (empty shared wanted list and empty data/market_watch_list.json). Writing empty auto-listings file.");
@@ -289,6 +411,7 @@ async function main() {
     const nameOverride = nameOverrides[kitId];
     const matchTokens = kitMatchTokens(kit, nameOverride);
     for (const source of SOURCE_FETCHERS) {
+      if (stats[source.id].skipped || stats[source.id].refused) continue;
       stats[source.id].attempted += 1;
       const query = source.buildQuery(kit, nameOverride);
       try {
@@ -313,11 +436,19 @@ async function main() {
         if (matched.length) stats[source.id].matched += 1;
       } catch (error) {
         stats[source.id].errors += 1;
+        stats[source.id].last_error = error.message;
+        if (error.refused) stats[source.id].refused = true;
         console.warn(`[${source.id}] ${kitId}: ${error.message}`);
       }
       await sleep(REQUEST_DELAY_MS);
     }
   }
+
+  for (const [id, stat] of Object.entries(stats)) {
+    console.log(`  ${id}: ${sourceStatus(stat)} attempted=${stat.attempted} matched_kits=${stat.matched} errors=${stat.errors}${stat.note ? ` (${stat.note})` : ""}`);
+  }
+  const unhealthy = await reportHealth(stats);
+  if (unhealthy.length && process.env.MARKET_STRICT === "1") process.exitCode = 1;
 
   // Never let a barren run (missing secrets, network outage, blocked runner)
   // clobber previously captured listings: stale prices beat vanished prices.
@@ -338,14 +469,17 @@ async function main() {
       naver: Boolean(process.env.NAVER_CLIENT_ID && process.env.NAVER_CLIENT_SECRET),
       supabase: Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY && process.env.SYNC_WORKSPACE_ID && process.env.SYNC_WORKSPACE_SECRET),
     },
-    source_stats: stats,
+    source_stats: Object.fromEntries(
+      Object.entries(stats).map(([id, stat]) => [id, { attempted: stat.attempted, matched: stat.matched, errors: stat.errors, status: sourceStatus(stat) }]),
+    ),
     listings,
   });
 
   console.log(`Auto market fetch done: ${watchedIds.length} watched kit(s), ${listings.length} listing(s) captured.`);
-  for (const [id, stat] of Object.entries(stats)) {
-    console.log(`  ${id}: attempted=${stat.attempted} matched_kits=${stat.matched} errors=${stat.errors}`);
-  }
 }
 
-await main();
+// The unit test imports the helpers; only a direct run fetches.
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  if (process.argv.includes("--check-health")) await checkHealth();
+  else await main();
+}

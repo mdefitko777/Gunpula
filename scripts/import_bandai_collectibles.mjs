@@ -41,6 +41,10 @@ const POKEPLA_DETAIL_BUDGET = Number(process.env.POKEPLA_DETAIL_BUDGET || 120);
 const BANDAI_AC_SEARCH_URL = "https://www.bandaispirits.co.jp/products/search/result.php?freeword=ARMORED%20CORE&category=2";
 const TAMASHII_BASE_URL = "https://tamashiiweb.com";
 const BEYBLADE_X_LINEUP_URL = "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/";
+const BBX_DATABASE_PATH = "data/bbx-database.json";
+const FIRST_SEEN_PATH = "data/kit-first-seen.json";
+// Misformed BEYBLADE X ids moved by this run (old id → new id), see beybladeKitId.
+const beybladeMoves = new Map();
 
 const CANDY_BRANDS = [
   { code: "CONVERGE", slug: "converge", label: "FW GUNDAM CONVERGE" },
@@ -1262,7 +1266,7 @@ function parseBeybladeXListings(html, pageUrl) {
       category,
       release_date: parseReleaseDate(releaseText),
       price_jpy: parsePrice(priceText),
-      is_limited: /限定|イベント|B4ストア|タカラトミーモール|メタルコート|Ver\./.test(block) || /限定|メタルコート|Ver\./.test(title),
+      is_limited: beybladeIsLimited(block, title),
       index: index + 1,
     });
     index += 1;
@@ -1319,20 +1323,90 @@ function beybladeSeriesTags(listing) {
   return tags;
 }
 
-// A lineup card without a detail link used to get `${code}-${position}` as its id,
-// and the id changed whenever the card moved or gained its link, leaving a stale
-// twin behind. A card that matches an existing record by title keeps that
-// record's id; a new card without a link gets an id from its code and title.
-const beybladeTitleKey = (title) => nfkc(title).replace(/\s+/g, "");
+// Store / event exclusives say so (【B4ストア限定】, イベント, タカラトミーモール, メタルコート
+// prizes). A colour variant of a regular numbered product (BX-28 ストリングランチャー
+// ホワイトVer., BX-43 ギアケース ホワイトVer.) is a regular release, so "Ver." alone is not
+// a limited mark.
+const BEYBLADE_LIMITED_PATTERN = /限定|イベント|B4ストア|タカラトミーモール|メタルコート/;
 
-function beybladeKitId(listing, existingByTitle) {
-  const existing = existingByTitle.get(beybladeTitleKey(listing.title));
-  if (existing) return existing;
-  if (listing.detail_url !== BEYBLADE_X_LINEUP_URL) {
-    return `beyblade-x-${slugify(listing.href_slug, `${String(listing.index).padStart(3, "0")}-${listing.code.toLowerCase()}`)}`;
+export function beybladeIsLimited(block, title) {
+  return BEYBLADE_LIMITED_PATTERN.test(block || "") || BEYBLADE_LIMITED_PATTERN.test(title || "");
+}
+
+// Catalog ids follow data/bbx-database.json and the apps, which join on
+// `beyblade-x-<product_id lowercased>` (BX44 → beyblade-x-bx44, CX09 → beyblade-x-cx09):
+//   * a card with a detail link: its page name (bx28.html → bx28, bx00-ds.html → bx00-ds);
+//   * a numbered card without one yet: its code without the dash (CX-09 → cx09);
+//   * a BX-00 / UX-00 / CX-00 card without one: the page the parts database lists for the
+//     same title (bx00-rl.html), else the code and a hash of the title (bx00-1a2b3c4d).
+// A card matching an existing record by title keeps that record's id, so an id never
+// changes when a card moves or gains its link. Ids made before this rule from the code
+// with its dash ("beyblade-x-cx-09-106": the position on the page, or a title hash) are
+// moved to the id above once; the old id goes to data/kit-aliases.json so saved entries
+// follow it.
+const beybladeTitleKey = (title) => nfkc(title).replace(/\s+/g, "");
+export const MISFORMED_BEYBLADE_ID = /^beyblade-x-(?:bx|ux|cx)-\d/;
+
+const beybladeCode = (code) => String(code || "").replace(/[^a-z0-9]/gi, "").toLowerCase();
+
+/** data/bbx-database.json products → Map(title key → lineup page name). */
+export function beybladeDatabasePages(database) {
+  const pages = new Map();
+  for (const product of database?.products || []) {
+    const page = /\/beyblade-x\/lineup\/([^/?#]+)\.html/.exec(product.url || "")?.[1];
+    const title = product.names?.ja;
+    if (page && title && !pages.has(beybladeTitleKey(title))) pages.set(beybladeTitleKey(title), page);
   }
+  return pages;
+}
+
+export function beybladeCanonicalId(listing, databasePages = new Map()) {
+  const code = beybladeCode(listing.code);
+  if (listing.detail_url !== BEYBLADE_X_LINEUP_URL) {
+    return `beyblade-x-${slugify(listing.href_slug, code || "bx")}`;
+  }
+  // A numbered product (not the 00 of store / event items).
+  if (/^[a-z]+\d*[1-9]\d*$/.test(code)) return `beyblade-x-${code}`;
+  const page = databasePages.get(beybladeTitleKey(listing.title));
+  if (page) return `beyblade-x-${slugify(page, code || "bx")}`;
   const titleHash = createHash("sha1").update(listing.title).digest("hex").slice(0, 8);
-  return `beyblade-x-${slugify(listing.code, "bx")}-${titleHash}`;
+  return `beyblade-x-${code || "bx"}-${titleHash}`;
+}
+
+/**
+ * { id, movedFrom? }: the record's id, and the old id when a misformed one is moved.
+ * `takenIds` are the catalog ids in use (a move never lands on another record).
+ */
+export function beybladeKitId(listing, existingByTitle, databasePages = new Map(), takenIds = new Set()) {
+  const canonical = beybladeCanonicalId(listing, databasePages);
+  const existing = existingByTitle.get(beybladeTitleKey(listing.title));
+  if (!existing || existing === canonical) return { id: canonical };
+  if (MISFORMED_BEYBLADE_ID.test(existing) && !MISFORMED_BEYBLADE_ID.test(canonical) && !takenIds.has(canonical)) {
+    return { id: canonical, movedFrom: existing };
+  }
+  return { id: existing };
+}
+
+/**
+ * Two cards of one run never share an id: a second card that lands on an id already given
+ * to another title in this run (two link-less cards with the same code, or two titles the
+ * parts database lists under one page) gets its code and a title hash, and is not moved.
+ */
+export function uniqueBeybladeIds(listings, ids) {
+  const titleById = new Map();
+  return ids.map((entry, index) => {
+    const titleKey = beybladeTitleKey(listings[index].title);
+    const owner = titleById.get(entry.id);
+    if (owner === undefined || owner === titleKey) {
+      titleById.set(entry.id, titleKey);
+      return entry;
+    }
+    const code = beybladeCode(listings[index].code) || "bx";
+    const titleHash = createHash("sha1").update(listings[index].title).digest("hex").slice(0, 8);
+    const id = entry.movedFrom || `beyblade-x-${code}-${titleHash}`;
+    titleById.set(id, titleKey);
+    return { id };
+  });
 }
 
 async function importBeybladeX(existingKits = []) {
@@ -1342,8 +1416,19 @@ async function importBeybladeX(existingKits = []) {
       .filter((kit) => kit.franchise === "beyblade" && !retired.has(kit.kit_id))
       .map((kit) => [beybladeTitleKey(kit.names?.ja), kit.kit_id]),
   );
+  const databasePages = beybladeDatabasePages(await readJsonFile(BBX_DATABASE_PATH, null));
+  const takenIds = new Set(existingKits.map((kit) => kit.kit_id));
   const html = await fetchBrowserText(BEYBLADE_X_LINEUP_URL);
   const listings = parseBeybladeXListings(html, BEYBLADE_X_LINEUP_URL);
+  const ids = uniqueBeybladeIds(
+    listings,
+    listings.map((listing) => beybladeKitId(listing, existingByTitle, databasePages, takenIds)),
+  );
+  for (const { id, movedFrom } of ids) {
+    if (!movedFrom) continue;
+    beybladeMoves.set(movedFrom, id);
+    takenIds.add(id);
+  }
   console.log(`Found ${listings.length} Takara Tomy BEYBLADE X listings.`);
 
   const details = await mapLimit(listings, 6, async (listing) => {
@@ -1362,7 +1447,7 @@ async function importBeybladeX(existingKits = []) {
     // Cover first (the lineup card), then the parts detail picture, then the product shots.
     const images = unique([listing.image_url, ...details[index].parts, ...details[index].images].filter(Boolean));
     return buildKit({
-      kitId: beybladeKitId(listing, existingByTitle),
+      kitId: ids[index].id,
       franchise: "beyblade",
       gradeCode: "BEYBLADE_X",
       subline: beybladeCategoryLabel(listing.category),
@@ -1528,7 +1613,21 @@ async function importEnsemble() {
   return imported;
 }
 
-function parseForteEntries(html, listUrl) {
+// A set heading is an image whose alt text names the wave ("機動戦士ガンダム ガシャポン戦士f
+// 06"). The alt text can be wrong: the 1.5 wave heading (stit_f-01_5.png, JAN 4549660270751,
+// 2018-07) says "f 06", the name of the real 06 wave (stit_f-06.png, 2018-06). The file
+// name is the one the site keeps right, so a wave number in it wins over the alt text.
+export function forteSetTitle(token, fallback) {
+  const alt = stripTags(extract(/alt="([^"]+)"/, token)) || stripTags(token) || fallback;
+  const file = /stit_f-(\d+)(?:_(\d+))?(?:_pb)?\.(?:png|jpe?g|gif|webp)/i.exec(extract(/src="([^"]+)"/, token) || "");
+  if (!file) return alt;
+  const wave = file[2] ? `${Number(file[1])}.${file[2]}` : file[1];
+  return alt.replace(/(ガシャポン戦士\s*f\s*)(\d+(?:\.\d+)?)/, (match, head, number) =>
+    Number(number) === Number(wave) && number.includes(".") === wave.includes(".") ? match : `${head}${wave}`,
+  );
+}
+
+export function parseForteEntries(html, listUrl) {
   const entries = [];
   const tokenPattern = /<h3[\s\S]*?<\/h3>|<a href="(https:\/\/gashapon\.jp\/products\/detail\.html\?jan_code=\d+)"[^>]*>|<area class="fancybox-frame"[^>]+>/g;
   let currentSetTitle = "機動戦士ガンダム ガシャポン戦士f";
@@ -1538,7 +1637,7 @@ function parseForteEntries(html, listUrl) {
   for (const match of html.matchAll(tokenPattern)) {
     const token = match[0];
     if (token.startsWith("<h3")) {
-      currentSetTitle = stripTags(extract(/alt="([^"]+)"/, token)) || stripTags(token) || currentSetTitle;
+      currentSetTitle = forteSetTitle(token, currentSetTitle);
       index = 0;
       continue;
     }
@@ -1814,9 +1913,37 @@ async function main() {
     if (upsertSalePage(salePages, kit.kit_id, salePageFromKit(kit, { firstSeen: seoulToday() }))) salePagesChanged = true;
   }
   await writeSalePages(salePages, { changed: salePagesChanged });
+  if (beybladeMoves.size) await moveBeybladeIds(existingDoc, beybladeMoves);
   const merged = mergeKits(existingDoc, imported.filter((kit) => !retired.has(kit.kit_id)));
   await writeFile("data/kits.json", `${JSON.stringify(merged, null, 2)}\n`, "utf8");
   console.log(`Merged ${imported.length} collectible records. Catalog now has ${merged.kits.length} records.`);
+}
+
+// A moved BEYBLADE X record keeps what it had (cleanup fields, published date): the stored
+// record takes the new id before the merge, the old id is aliased to it in
+// data/kit-aliases.json (the apps move saved entries along) and the new id keeps the old
+// one's first-seen date, so the product is not marked as new.
+async function moveBeybladeIds(existingDoc, moves) {
+  const aliasDoc = (await readJsonFile(KIT_ALIASES_PATH, null)) || { schema: 1, aliases: {}, excluded: {} };
+  aliasDoc.aliases = aliasDoc.aliases || {};
+  const firstSeenDoc = await readJsonFile(FIRST_SEEN_PATH, null);
+  const ids = new Set(existingDoc.kits.map((kit) => kit.kit_id));
+  for (const [from, to] of moves) {
+    const kit = existingDoc.kits.find((candidate) => candidate.kit_id === from);
+    if (kit && !ids.has(to)) {
+      kit.kit_id = to;
+      ids.delete(from);
+      ids.add(to);
+    } else if (kit) {
+      existingDoc.kits = existingDoc.kits.filter((candidate) => candidate.kit_id !== from);
+    }
+    if (!aliasDoc.aliases[from]) aliasDoc.aliases[from] = to;
+    if (firstSeenDoc?.dates?.[from] && !firstSeenDoc.dates[to]) firstSeenDoc.dates[to] = firstSeenDoc.dates[from];
+    console.log(`BEYBLADE X: ${from} → ${to}`);
+  }
+  aliasDoc.updated_at = seoulToday();
+  await writeFile(KIT_ALIASES_PATH, `${JSON.stringify(aliasDoc, null, 2)}\n`, "utf8");
+  if (firstSeenDoc) await writeFile(FIRST_SEEN_PATH, `${JSON.stringify(firstSeenDoc, null, 2)}\n`, "utf8");
 }
 
 // The unit tests import the Tamashii helpers; only a direct run imports data.
