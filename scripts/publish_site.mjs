@@ -228,6 +228,7 @@ export async function buildSite(outDir, config, assign) {
   await rm(out, { recursive: true, force: true });
   await mkdir(out, { recursive: true });
   const skip = config.dirs.map((dir) => `app/assets/${dir}/`);
+  const excluded = (file) => (config.site_exclude || []).some((entry) => (entry.endsWith("/") ? file.startsWith(entry) : file === entry));
   const encode = (rel) => rel.split("/").map(encodeURIComponent).join("/");
   // A photo no live shard holds (no room, or not synced) is served from the repo itself.
   const urlFor = (rel) =>
@@ -236,7 +237,7 @@ export async function buildSite(outDir, config, assign) {
   let missing = 0;
   // Only tracked files: nothing local-only (secrets, work files) can reach the site.
   for (const file of trackedFiles()) {
-    if (file.startsWith(".github/") || skip.some((prefix) => file.startsWith(prefix))) continue;
+    if (file.startsWith(".github/") || skip.some((prefix) => file.startsWith(prefix)) || excluded(file)) continue;
     const target = path.join(out, file);
     await mkdir(path.dirname(target), { recursive: true });
     if (file.endsWith(".json") && (file.startsWith("data/") || file.startsWith("app/"))) {

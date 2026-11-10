@@ -5,6 +5,8 @@
   "low_space_mb": 300,
   "site_limit_mb": 900,
   "dirs": ["catalog", "kotobukiya-ac", "bbx"],
+  "site_exclude_note": "Not published at all: nothing that runs from the site reads them (search-index.json is the old monolithic index; the web app reads data/search/search-<franchise>.json). Fewer and smaller files keep the Pages deploy inside its 10-minute sync limit.",
+  "site_exclude": ["data/search-index.json", "scripts/", "docs/", "ionic/", "schema/"],
   "shards": [
     { "repo": "mdefitko777/gunpula-img-1", "url": "https://mdefitko777.github.io/gunpula-img-1/" },
     { "repo": "mdefitko777/gunpula-img-2", "url": "https://mdefitko777.github.io/gunpula-img-2/" },
