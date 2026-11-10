@@ -24,9 +24,10 @@
 //   * Gashapon: 【箱売】 sets show the shipping box as image _1 (older items: _2), found
 //     by a box-pair pixel check; other capsule sets get the machine's DP card (台紙)
 //     with kind "dp", since capsule toys have no box.
-//   * Gunplapedia infobox box art (joined by JAN) would cover older kits, but its image
-//     host answers non-browser clients with a Cloudflare challenge; the join only runs
-//     when a one-request probe gets an image back.
+//   * Gunplapedia infobox box art (joined by JAN) is NOT used: its image host
+//     static.wikia.nocookie.net answers non-browser clients with a Cloudflare challenge,
+//     and the app on a phone could not load a single one (checked on the device,
+//     2026-11-11). Such URLs are dead (isDeadUrl): never picked, never carried over.
 //   * Not covered: TAMASHII figures (no package shots published), WEB取説 / Bandai Hobby
 //     Site images (bandai-hobby.net: HTML or expiring signed URLs).
 //
@@ -51,7 +52,7 @@
 //
 // Usage:
 //   node scripts/atlas/build_gundam_boxart.mjs [--budget=N] [--check=N] [--offline]
-//        [--only=bs,pb,candy,gashapon,gunplapedia] [--out=FILE] [--report=FILE]
+//        [--only=bs,pb,candy,gashapon] [--out=FILE] [--report=FILE]
 //        [--kits=FILE] [--guard] [--allow-drop] [--workers=N]
 //   node scripts/atlas/test_gundam_boxart.mjs   # offline self-test
 
@@ -637,6 +638,8 @@ const DEAD_URL = [
   /^https?:\/\/www\.goodsmile\.com\//, // 503 bot wall
   /^https?:\/\/([a-z0-9-]+\.)*bandai-hobby\.net\//, // 403 / HTML instead of images
   /^https?:\/\/pokemon\.hgodo\.com\//, // 302 to a login page
+  // Fandom / Gunplapedia files: Cloudflare challenge (403) for the app on phones
+  /^https?:\/\/([a-z0-9-]+\.)*(wikia\.nocookie\.net|wikia\.com|fandom\.com)\//i,
 ];
 export const isDeadUrl = (u) => !/^https:\/\//.test(String(u)) || DEAD_URL.some((re) => re.test(u));
 
@@ -872,13 +875,8 @@ async function pickGashapon(kit) {
   return { url: akamaiUrl(id, 1), source: "gashapon_dp", confidence: "medium", kind: "dp" };
 }
 
-// --- Gunplapedia (gunpla.fandom.com) infobox box art joined by JAN ------------------
-// The wiki's files live on static.wikia.nocookie.net, which answers non-browser clients
-// with a Cloudflare challenge (checked 2026-11-01). We probe one file first and only use
-// the join when that probe returns an image, so a blocked host costs a single request.
-
-const FANDOM_API = "https://gunpla.fandom.com/api.php";
-const FANDOM_PROBE = "https://static.wikia.nocookie.net/gunplabuilders/images/c/c7/HGIBO_Hyakuri_boxart.jpg/revision/latest?cb=20170409134851";
+// --- JAN codes of a kit ----------------------------------------------------------------
+// (The Gunplapedia join that used them was removed on 2026-11-11: phones cannot load its images.)
 
 function eanOk(s) {
   if (!/^\d{13}$/.test(s)) return false;
@@ -889,76 +887,6 @@ function eanOk(s) {
 export function kitJans(kit) {
   const hay = [kit.kit_id, ...(kit.source_urls || [])].join(" ");
   return [...new Set([...hay.matchAll(/(?<!\d)(4[59]\d{11})(?:000)?(?!\d)/g)].map((m) => m[1]).filter(eanOk))];
-}
-
-/** Body of the first {{Plamo Infobox ...}} template, nested templates included. */
-export function plamoInfobox(text) {
-  const start = text.search(/\{\{\s*Plamo[ _]Infobox/i);
-  if (start < 0) return "";
-  let depth = 0;
-  for (let i = start; i < text.length - 1; i++) {
-    if (text[i] === "{" && text[i + 1] === "{") {
-      depth++;
-      i++;
-    } else if (text[i] === "}" && text[i + 1] === "}") {
-      depth--;
-      i++;
-      if (depth === 0) return text.slice(start, i + 1);
-    }
-  }
-  return text.slice(start);
-}
-
-async function gunplapediaJanIndex(report) {
-  // A refused probe is expected (it is not cached and does not count as a block).
-  const probe = await fetchCached(FANDOM_PROBE, { method: "HEAD", maxAgeDays: 7, expect: "image", probe: true });
-  const ps = hostStats.get(new URL(FANDOM_PROBE).hostname);
-  report.probe = probe ? `${probe.status} ${probe.contentType.split(";")[0]}` : ps?.probe_blocked ? `refused (${ps.last_refusal})` : OFFLINE ? "not probed (offline)" : "no answer";
-  if (!probe || probe.status !== 200 || !/^image\//.test(probe.contentType)) return null;
-  const base = `${FANDOM_API}?action=query&format=json&formatversion=2&generator=allpages&gapnamespace=0&gaplimit=50&gapfilterredir=nonredirects&prop=revisions&rvprop=content&rvslots=main&rvsection=0`;
-  const fileByJan = new Map();
-  let cont = null;
-  for (let i = 0; i < 200; i++) {
-    const url = cont ? `${base}&gapcontinue=${encodeURIComponent(cont)}&continue=${encodeURIComponent("gapcontinue||")}` : base;
-    const r = await fetchCached(url, { maxAgeDays: 30 });
-    if (!r || r.status !== 200) return null;
-    const j = JSON.parse(r.body.toString("utf8"));
-    for (const p of j.query?.pages || []) {
-      const text = p.revisions?.[0]?.slots?.main?.content || "";
-      const box = plamoInfobox(text);
-      const file = box.match(/\|\s*image\s*=\s*([^|}\n]+)/i)?.[1]?.trim();
-      const jans = (box.match(/\|\s*JAN(?:\/ISBN)?\s*=\s*([^|}]+)/i)?.[1] || "").match(/\d{13}/g) || [];
-      if (file) for (const jan of jans) if (!fileByJan.has(jan)) fileByJan.set(jan, file.replace(/^(File|Image):/i, ""));
-    }
-    cont = j.continue?.gapcontinue;
-    if (!cont) break;
-  }
-  const files = [...new Set(fileByJan.values())];
-  const info = new Map();
-  for (let i = 0; i < files.length; i += 50) {
-    const titles = files.slice(i, i + 50).map((f) => `File:${f}`).join("|");
-    const url = `${FANDOM_API}?action=query&format=json&formatversion=2&prop=imageinfo&iiprop=url%7Csize%7Cmime&titles=${encodeURIComponent(titles)}`;
-    const r = await fetchCached(url, { maxAgeDays: 30 });
-    if (!r || r.status !== 200) continue;
-    const j = JSON.parse(r.body.toString("utf8"));
-    const norm = new Map((j.query?.normalized || []).map((n) => [n.to, n.from]));
-    for (const p of j.query?.pages || []) {
-      const ii = p.imageinfo?.[0];
-      if (!ii?.url) continue;
-      const from = (norm.get(p.title) || p.title).replace(/^File:/, "");
-      info.set(from, ii);
-      info.set(p.title.replace(/^File:/, ""), ii);
-    }
-  }
-  const byJan = new Map();
-  for (const [jan, file] of fileByJan) {
-    const ii = info.get(file) || info.get(file.replace(/_/g, " "));
-    if (!ii) continue;
-    const boxName = /box|package|pkg|パッケージ/i.test(file);
-    byJan.set(jan, { url: ii.url.replace(/\/revision\/latest\?/, "/revision/latest/scale-to-width-down/640?"), boxName, w: ii.width, h: ii.height });
-  }
-  report.files = byJan.size;
-  return byJan;
 }
 
 // ---------------------------------------------------------------------------
@@ -1040,16 +968,10 @@ const SOURCES = [
     method: "Capsule toys have no box; image _1 of the set is the machine's DP card (台紙). Entries carry kind \"dp\".",
     licence: "© SOTSU・SUNRISE / BANDAI. Hotlinked only.",
   },
-  {
-    id: "gunplapedia_jan",
-    name: "Gunplapedia (gunpla.fandom.com) infobox box art, joined by JAN",
-    url: "https://gunpla.fandom.com/",
-    method: "Only used when static.wikia.nocookie.net serves images to non-browser clients (one HEAD probe per run); it answered with a Cloudflare challenge (403) when this was written, so no entries come from here.",
-    licence: "Wiki text CC BY-SA 3.0; box art © SOTSU・SUNRISE / BANDAI SPIRITS. Hotlinked only.",
-  },
 ];
 
 const NOT_COVERED = {
+  gunplapedia: "Gunplapedia (gunpla.fandom.com) infobox box art: its image host static.wikia.nocookie.net answers non-browser clients, the app on phones included, with a Cloudflare challenge (403), so those URLs are never published.",
   tamashii_figures: "tamashiiweb.com product pages show figure photos only; no package shots are published (METAL BUILD, METAL ROBOT魂, ROBOT魂, S.H.Figuarts).",
   web_manual: "WEB取説 (manual.bandai-hobby.net) thumbnails live on bandai-hobby.net, which returns HTML instead of images to plain clients.",
   bandai_hobby_site: "bandai-hobby.net product images are CloudFront-signed URLs that expire within hours.",
@@ -1071,6 +993,9 @@ export function toEntry(r) {
   else if (r.confidence === "low") e.kind = "maybe";
   return e;
 }
+
+/** Entries of a previous file that may still be published (dead hosts such as Fandom are not). */
+export const publishable = (boxart) => Object.fromEntries(Object.entries(boxart || {}).filter(([, e]) => e?.url && !isDeadUrl(e.url)));
 
 /**
  * Reasons not to write the file (CI passes --guard): a host refused us, served unexpected
@@ -1111,10 +1036,12 @@ async function main() {
   if (!catalog?.kits?.length) throw new Error(`no kits in ${kitsFile}`);
   const kits = catalog.kits.filter((k) => k.franchise === "gundam");
   const prev = await readJson(outFile);
-  const prevBox = prev?.boxart || {};
+  // Dead entries of the previous file (e.g. Fandom box art) are neither carried over nor
+  // counted by the 5% guard, so dropping them does not block the run.
+  const prevBox = publishable(prev?.boxart);
 
-  const report = { gunplapedia: {}, reasons: {}, carried_over: 0, started: new Date().toISOString() };
-  const fandom = want("gunplapedia") ? await gunplapediaJanIndex(report.gunplapedia) : null;
+  const dropped_dead = Object.keys(prev?.boxart || {}).length - Object.keys(prevBox).length;
+  const report = { reasons: {}, carried_over: 0, dropped_dead, started: new Date().toISOString() };
 
   const picks = new Map();
   let next = 0;
@@ -1136,10 +1063,6 @@ async function main() {
           result = r;
           break;
         }
-      }
-      if ((!result || !result.url) && fandom) {
-        const hit = kitJans(kit).map((j) => fandom.get(j)).find(Boolean);
-        if (hit && !isDeadUrl(hit.url)) result = { url: hit.url, source: "gunplapedia_jan", confidence: hit.boxName ? "medium" : "low" };
       }
       if (result?.url && !isDeadUrl(result.url)) {
         picks.set(kit.kit_id, toEntry(result));
@@ -1191,7 +1114,6 @@ async function main() {
     ...s,
     entries: bySource[s.id] || 0,
     ...(checks[s.id] ? { url_check: checks[s.id] } : {}),
-    ...(s.id === "gunplapedia_jan" ? { status: fandom ? "ok" : "not used" } : {}),
   }));
   const body = {
     schema: 1,
@@ -1238,7 +1160,7 @@ async function main() {
     url_checks: checks,
     reasons: report.reasons,
     carried_over: report.carried_over,
-    gunplapedia: report.gunplapedia,
+    dropped_dead: report.dropped_dead,
     hosts,
   };
   console.log(JSON.stringify(summary, null, 1));
