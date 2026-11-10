@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-10",
-  "generated_at": "2026-11-10T20:02:59.863Z",
+  "generated_at": "2026-11-10T21:01:45.321Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,60 +18,53 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-10T19:15:38.461Z",
+    "generated_at": "2026-11-10T21:01:17.050Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-10",
-      "generated_at": "2026-11-10T19:15:58.618Z",
+      "generated_at": "2026-11-10T21:01:45.321Z",
       "total_before": 39326,
-      "total_after": 39334,
-      "added_count": 6,
-      "changed_count": 237,
+      "total_after": 39337,
+      "added_count": 9,
+      "changed_count": 307,
       "removed_count": 0,
-      "watched_count": 193,
+      "watched_count": 197,
       "merged_count": 17,
       "backfilled_count": 8,
-      "premium_bandai_count": 103,
-      "bbx_count": 33,
+      "premium_bandai_count": 54,
+      "bbx_count": 32,
       "franchise_counts": {
-        "beyblade": 33,
-        "gundam": 168,
+        "gundam": 111,
         "lego": 1,
-        "pokemon": 4,
-        "madoka": 3,
-        "fate": 34
+        "pokemon": 48,
+        "beyblade": 32,
+        "armored_core": 7
       },
       "reason_counts": {
-        "new": 6,
-        "name": 195,
-        "source": 6,
-        "series": 37,
-        "image": 3,
-        "release": 1,
-        "limited": 1
+        "new": 9,
+        "name": 189,
+        "source": 2
       },
       "interest_tags": [
+        "gundam",
+        "premium_bandai",
+        "lego",
+        "pokemon",
+        "seed",
         "beyblade",
         "bbx",
-        "bbx_ux",
+        "bbx_cx",
         "bbx_limited",
         "beyblade_limited",
         "00",
+        "beyblade_cx",
+        "bbx_ux",
         "bbx_bx",
         "beyblade_bx",
-        "gundam",
-        "premium_bandai",
-        "bbx_cx",
-        "beyblade_cx",
-        "lego",
-        "beyblade_ux",
-        "pokemon",
-        "seed",
-        "madoka",
-        "fate"
+        "armored_core"
       ],
       "watch_tags": [
         "seed",
@@ -86,7 +79,7 @@
           "subline": "プレミアムバンダイ",
           "series_key": "mixed",
           "series_labels": {
-            "zh": "混合",
+            "zh": "多作品",
             "en": "Mixed",
             "ja": "複合作品",
             "ko": "혼합"
@@ -188,6 +181,80 @@
           ],
           "source_urls": [
             "https://www.pokemoncenter-online.com/4521329350219.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329366760",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "666 ぬいぐるみ Pok&eacute;mon fit ビビヨン(はなぞののもよう)",
+            "zh": "666 毛绒玩偶 Pok&eacute;mon fit 彩粉蝶(花园花纹)",
+            "ko": "666 ぬいぐるみ Pokémon fit ビビヨン(はなぞののもよう)",
+            "en": "666 ぬいぐるみ Pok&eacute;mon fit ビビヨン(はなぞののもよう)"
+          },
+          "release_date": null,
+          "price_jpy": 1980,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329366760.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329427874",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "785 ぬいぐるみ Pok&eacute;mon fit カプ・コケコ",
+            "zh": "785 毛绒玩偶 Pok&eacute;mon fit 卡璞・鸣鸣",
+            "ko": "785 ぬいぐるみ Pokémon fit カプ・コケコ",
+            "en": "785 ぬいぐるみ Pok&eacute;mon fit カプ コケコ"
+          },
+          "release_date": null,
+          "price_jpy": 1980,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329427874.html"
           ]
         },
         {
@@ -299,6 +366,43 @@
           ],
           "source_urls": [
             "https://www.pokemoncenter-online.com/4521329423166.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4904810911715",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "モンコレ MS-07 メガガブリアス",
+            "zh": "宝可梦 Moncolle 小手办 MS-07 超级烈咬陆鲨",
+            "ko": "モンコレ MS-07 メガガブリアス",
+            "en": "モンコレ MS-07 メガガブリアス"
+          },
+          "release_date": null,
+          "price_jpy": 715,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4904810911715.html"
           ]
         }
       ],
@@ -23603,7 +23707,7 @@
           "subline": "Mobile Suit Gundam G Frame FA",
           "series_key": "mixed",
           "series_labels": {
-            "zh": "混合",
+            "zh": "多作品",
             "en": "Mixed",
             "ja": "複合作品",
             "ko": "혼합"
@@ -23641,7 +23745,7 @@
           "subline": "FW GUNDAM CONVERGE #",
           "series_key": "mixed",
           "series_labels": {
-            "zh": "混合",
+            "zh": "多作品",
             "en": "Mixed",
             "ja": "複合作品",
             "ko": "혼합"
@@ -34106,7 +34210,7 @@
           "subline": "Gundam Gashapon Merchandise",
           "series_key": "mixed",
           "series_labels": {
-            "zh": "混合",
+            "zh": "多作品",
             "en": "Mixed",
             "ja": "複合作品",
             "ko": "혼합"
@@ -34146,7 +34250,7 @@
           "subline": "FW GUNDAM CONVERGE",
           "series_key": "mixed",
           "series_labels": {
-            "zh": "混合",
+            "zh": "多作品",
             "en": "Mixed",
             "ja": "複合作品",
             "ko": "혼합"
@@ -39011,7 +39115,7 @@
           "subline": "プレミアムバンダイ",
           "series_key": "08ms",
           "series_labels": {
-            "zh": "08MS",
+            "zh": "08小队",
             "en": "08MS",
             "ja": "08小隊",
             "ko": "08소대"
