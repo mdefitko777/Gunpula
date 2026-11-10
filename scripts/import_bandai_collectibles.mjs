@@ -1166,19 +1166,45 @@ async function importBandaiArmoredCore() {
   return imported;
 }
 
-async function importKotobukiyaArmoredCore() {
+// Detail pages one at a time with a gap (five in parallel drew 503s on 2026-11-10 and
+// every record came back without date or price, failing the refresh's validation).
+// A 403 / 429 / 503 stops the detail reads for this run; a listing without its detail
+// keeps the record it already had.
+const KOTOBUKIYA_DETAIL_GAP_MS = 1100;
+
+async function importKotobukiyaArmoredCore(existingKits = []) {
   const html = await fetchKotobukiyaShopText(KOTOBUKIYA_AC_SHOP_URL);
   const listings = parseKotobukiyaShopListings(html);
   console.log(`Found ${listings.length} Kotobukiya Armored Core official shop listings.`);
+  const existingById = new Map(existingKits.map((kit) => [kit.kit_id, kit]));
   let detailCount = 0;
-  const imported = await mapLimit(listings, 5, async (listing) => {
+  let refused = "";
+  const imported = [];
+  for (const listing of listings) {
     let detail = null;
-    try {
-      detail = parseKotobukiyaShopDetail(await fetchKotobukiyaShopText(listing.detail_url), listing.detail_url);
-      detailCount += 1;
-    } catch (error) {
-      console.warn(`Kotobukiya detail fetch failed for ${listing.detail_url}: ${error.message}`);
+    if (!refused) {
+      await sleep(KOTOBUKIYA_DETAIL_GAP_MS);
+      try {
+        detail = parseKotobukiyaShopDetail(await fetchKotobukiyaShopText(listing.detail_url, { retry: false }), listing.detail_url);
+        detailCount += 1;
+      } catch (error) {
+        console.warn(`Kotobukiya detail fetch failed for ${listing.detail_url}: ${error.message}`);
+        if (/: (403|429|503)$/.test(error.message)) refused = error.message.slice(-3);
+      }
     }
+    const existing = existingById.get(`acvi-${listing.product_id}`);
+    if (!detail && existing) {
+      imported.push(existing);
+      continue;
+    }
+    imported.push(kotobukiyaKit(listing, detail));
+  }
+  if (refused) console.warn(`Kotobukiya answered ${refused}; detail pages left for the next run, existing records kept.`);
+  console.log(`Fetched ${detailCount}/${listings.length} Kotobukiya Armored Core detail pages.`);
+  return imported.filter(Boolean);
+}
+
+function kotobukiyaKit(listing, detail) {
     const fallbackModel = !/カラー|塗料|チャーム|DECOCTION|完成品フィギュア/i.test(listing.title);
     if (!(detail?.is_plastic_model ?? fallbackModel)) return null;
 
@@ -1190,8 +1216,8 @@ async function importKotobukiyaArmoredCore() {
         title: detail?.title || listing.title,
         boxArtUrl: listing.image_url,
         galleryUrls: [listing.image_url, ...(detail?.gallery || [])],
-        releaseDate: detail?.release_date,
-        priceJpy: detail?.price_jpy,
+        releaseDate: detail?.release_date ?? null,
+        priceJpy: detail?.price_jpy ?? null,
         isLimited: listing.is_limited,
         sourceId: KOTOBUKIYA_AC_SOURCE_ID,
         sourceUrls: [listing.detail_url, KOTOBUKIYA_AC_SHOP_URL, KOTOBUKIYA_AC_PORTAL_URL],
@@ -1201,10 +1227,6 @@ async function importKotobukiyaArmoredCore() {
         universeOverride: "Armored Core",
         scale: detail?.scale || "various",
       });
-  });
-
-  console.log(`Fetched ${detailCount}/${listings.length} Kotobukiya Armored Core detail pages.`);
-  return imported.filter(Boolean);
 }
 
 function parseBeybladeXListings(html, pageUrl) {
@@ -1544,7 +1566,7 @@ function parseForteEntries(html, listUrl) {
   return entries;
 }
 
-async function fetchKotobukiyaShopText(url) {
+async function fetchKotobukiyaShopText(url, { retry = true } = {}) {
   let lastError;
   for (let attempt = 1; attempt <= 3; attempt += 1) {
     try {
@@ -1557,6 +1579,8 @@ async function fetchKotobukiyaShopText(url) {
       });
       if (response.ok) return decodeKotobukiyaShopHtml(await response.arrayBuffer());
       lastError = new Error(`Failed to fetch ${url}: ${response.status}`);
+      // A refusal (busy / rate limit) is not asked again at once
+      if (!retry || [403, 429, 503].includes(response.status)) break;
     } catch (error) {
       lastError = error;
     }
@@ -1774,7 +1798,7 @@ async function main() {
     )),
     ...(await importOptional("Tamashii Gundam figures", () => importTamashiiGundamFigures(existingDoc.kits))),
     ...(await importOptional("Bandai Armored Core", importBandaiArmoredCore)),
-    ...(await importOptional("Kotobukiya Armored Core", importKotobukiyaArmoredCore)),
+    ...(await importOptional("Kotobukiya Armored Core", () => importKotobukiyaArmoredCore(existingDoc.kits))),
     ...(await importOptional("BEYBLADE X", () => importBeybladeX(existingDoc.kits))),
   ];
 
