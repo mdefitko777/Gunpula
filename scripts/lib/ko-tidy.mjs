@@ -6,6 +6,8 @@
 //   * scales and work titles:         "1 / 144" → "1/144", "Fate / Grand Order" → "Fate/Grand Order"
 //   * shop campaign tags dropped:     "【무료 배송 캠페인 대상】…", "【무료 배송!】"
 //   * reissue tags in one form:       "【재판】" · "※재판" · "（재판）" → "(재판)" at the end
+//   * full-width letters, digits and signs: "ＭＧ Ｖｅｒ．Ｋａ ［Ｕ.Ｃ.００８８］" → "MG Ver.Ka ［U.C.0088］"
+//     (the full-width brackets （）［］｛｝＜＞ stay: the names use them as CJK brackets)
 //   * HTML entities left by a store:  "Pikachu&apos;s" → "Pikachu's"
 //   * Bandai brand words left in kanji: "ROBOT魂" → "ROBOT혼", "超合金(の塊)" → "초합금 (덩어리)"
 //   * same name, different products:  two records of one franchise and grade with the same
@@ -21,12 +23,26 @@ export function decodeEntities(value) {
     .replace(/&([a-z]+);/gi, (match, name) => ENTITIES[name.toLowerCase()] ?? match);
 }
 
+// U+FF01–FF5E is ASCII 0x21–0x7E shifted by 0xFEE0; U+3000 is the ideographic space.
+const FULL_WIDTH_ASCII = /[\uFF01-\uFF5E\u3000]/g;
+const KEEP_FULL_WIDTH = new Set("（）［］｛｝＜＞");
+
+/**
+ * Full-width ASCII to half width (searchable as "ver.ka", "0088", "mk-iii"), full-width brackets kept.
+ * "\uff0f" becomes " / ", the form localize_catalog.mjs gives every slash, so the next refresh keeps it.
+ */
+export function foldFullWidth(value) {
+  return value.replace(FULL_WIDTH_ASCII, (ch) =>
+    ch === "\u3000" ? " " : ch === "\uff0f" ? " / " : KEEP_FULL_WIDTH.has(ch) ? ch : String.fromCharCode(ch.charCodeAt(0) - 0xfee0),
+  );
+}
+
 const REISSUE = /\s*(?:【재판】|［재판］|\[재판\]|（재판）|\(재판\)|※\s*재판)\s*/g;
 const YEAR_SUFFIX = / \((?:19|20)\d{2}년\)$/;
 
 /** One Korean name, on its own (no knowledge of other records; the year suffix is left to tidyKoNames). */
 export function tidyKo(name) {
-  let ko = decodeEntities(String(name || "")).replace(YEAR_SUFFIX, "");
+  let ko = foldFullWidth(decodeEntities(String(name || ""))).replace(YEAR_SUFFIX, "");
   ko = ko.replace(/【[^】]*(?:무료\s*배송|캠페인|送料無料)[^】]*】/g, " ");
   const reissue = ko.replace(REISSUE, " ") !== ko;
   ko = ko.replace(REISSUE, " ");

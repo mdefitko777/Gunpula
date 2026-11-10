@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import { tidyKo, tidyKoNames } from "./lib/ko-tidy.mjs";
+import { translateDisplayName } from "./lib/kana_ko_dict.mjs";
+import { foldFullWidth, tidyKo, tidyKoNames } from "./lib/ko-tidy.mjs";
 
 assert.equal(tidyKo("RG 1 / 144 아카츠키건담( 오오와시 장비)"), "RG 1/144 아카츠키건담(오오와시 장비)");
 assert.equal(tidyKo("아카츠키（ 시라누이 장비 ） SEED FREEDOM Ver."), "아카츠키（시라누이 장비） SEED FREEDOM Ver.");
@@ -32,4 +33,16 @@ assert.equal(tidyKoNames(kits), 0, "second run changes nothing");
 assert.equal(tidyKo("기동전사 건담 ROBOT魂 미니어처 컬렉션"), "기동전사 건담 ROBOT혼 미니어처 컬렉션");
 assert.equal(tidyKo("超合金の塊 건담 시리즈"), "초합금 덩어리 건담 시리즈");
 assert.equal(tidyKo("EXPO2025 超合金 RX-78F00 / E 건담"), "EXPO2025 초합금 RX-78F00 / E 건담");
+// Full-width letters, digits and signs to half width (searchable); full-width brackets stay
+assert.equal(tidyKo("ＭＧ 1 / 100 ν건담 ＨＷＳ Ｖｅｒ．Ｋａ"), "MG 1/100 ν건담 HWS Ver.Ka");
+assert.equal(tidyKo("ＨＧ 1 / 144 제타건담［Ｕ.Ｃ.００８８］"), "HG 1/144 제타건담［U.C.0088］");
+assert.equal(tidyKo("ＨＧ 1 / 144 건담Ｍｋ－ＩＩＩ"), "HG 1/144 건담Mk-III");
+assert.equal(tidyKo("ＨＧ　１／１４４ 짐 ［재판］"), "HG 1/144 짐 (재판)");
+assert.equal(foldFullWidth("Ｂ２ 태피스트리＜이리야＞【한정】「세이버」（재판）"), "B2 태피스트리＜이리야＞【한정】「세이버」（재판）");
+assert.equal(tidyKo(tidyKo("ＲＧ １／１４４ Ｈｉ－ν")), "RG 1/144 Hi-ν");
+// "／" takes the spaced form localize_catalog.mjs gives every slash, so a refresh does not flip it
+assert.equal(tidyKo("퍼펙트 스트라이크건담／스트라이크 루즈"), "퍼펙트 스트라이크건담 / 스트라이크 루즈");
+
+// V2アサルトバスター (Victory): the kana dictionary covers it
+assert.equal(translateDisplayName("HGUC 1/144 V2アサルト버스터건담"), "HGUC 1/144 V2 어설트 버스터건담");
 console.log("ko tidy: ok");

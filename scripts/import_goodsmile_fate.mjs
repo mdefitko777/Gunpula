@@ -334,6 +334,13 @@ function seriesKeyFor(series, name) {
   return series || "Fate";
 }
 
+// "fgo" only on FGO products: the shop's Fate listing also carries stay night, Zero, Apocrypha,
+// Prisma☆Illya and TYPE-MOON figures, and an "fgo" tag on every one of them filed them all under FGO.
+function kitTags(extra, workTitle) {
+  const fgo = workTitle === "Fate/Grand Order" ? "fgo" : null;
+  return [...new Set(["fate", fgo, ...extra, workTitle].filter(Boolean).map((value) => String(value).toLowerCase()))];
+}
+
 function toKit(card, detail = {}) {
   const name = detail.productName || card.name;
   const category = detail.category || card.category;
@@ -374,7 +381,7 @@ function toKit(card, detail = {}) {
         confidence: "high",
       },
     ],
-    tags: [...new Set(["fate", "fgo", "good smile", manufacturer, category, workTitle].filter(Boolean).map((value) => String(value).toLowerCase()))],
+    tags: kitTags(["good smile", manufacturer, category], workTitle),
     notes: "Imported from Good Smile Company official Fate/FGO catalog.",
   };
 }
@@ -433,7 +440,7 @@ function toGlobalKit(card, detail = {}) {
         confidence: "high",
       },
     ],
-    tags: [...new Set(["fate", "fgo", "good smile", manufacturer, line, workTitle].filter(Boolean).map((value) => String(value).toLowerCase()))],
+    tags: kitTags(["good smile", manufacturer, line], workTitle),
     notes: "Imported from Good Smile Company official global store (goodsmile.com).",
   };
 }
