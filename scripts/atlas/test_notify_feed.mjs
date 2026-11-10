@@ -1,7 +1,21 @@
 // Self-test for scripts/atlas/build_notify_feed.mjs (no network, no git):
 //   node scripts/atlas/test_notify_feed.mjs
 import assert from "node:assert/strict";
-import { annotateItems, buildDoc, changeReasons, compactItem, diffCatalogs, isBackfill, itemFromFeed, mergeItem, notifiable, sameContent, windowStart } from "./build_notify_feed.mjs";
+import {
+  QUIET_REASONS,
+  annotateItems,
+  buildDoc,
+  changeReasons,
+  compactItem,
+  diffCatalogs,
+  isBackfill,
+  itemFromFeed,
+  mergeItem,
+  notifiable,
+  sameContent,
+  sourceReason,
+  windowStart,
+} from "./build_notify_feed.mjs";
 
 const kit = (id, extra = {}) => ({
   kit_id: id,
@@ -28,6 +42,27 @@ assert.equal(notifiable("changed", ["release_found"]), false);
 assert.equal(notifiable("changed", ["image", "name"]), false);
 assert.equal(notifiable("changed", ["image", "price"]), true);
 assert.equal(notifiable("added", ["new"]), true);
+// an archive.org copy of a PB page (p_bandai_wayback) coming or going is "archive", which is quiet
+{
+  const shop = { source_id: "bandai_hobby", url: "https://bandai-hobby.net/item/a/" };
+  const wayback = { source_id: "p_bandai_wayback", url: "https://p-bandai.jp/item/item-1000142431/", fields: ["names"], confidence: "medium" };
+  const base = kit("a", { source_refs: [shop] });
+  assert.deepEqual(changeReasons(base, kit("a", { source_refs: [shop, wayback] })), ["archive"]);
+  assert.deepEqual(changeReasons(kit("a", { source_refs: [shop, wayback] }), base), ["archive"]);
+  assert.equal(sourceReason(base, kit("a", { source_refs: [shop] })), null);
+  assert.equal(notifiable("changed", ["archive"]), false);
+  assert.equal(QUIET_REASONS.has("archive"), true);
+  // real source changes stay "source"
+  assert.deepEqual(changeReasons(base, kit("a", { source_refs: [shop, wayback, { source_id: "p_bandai_jp", url: "https://p-bandai.jp/item/item-1/" }] })), ["source"]);
+  assert.deepEqual(changeReasons(base, kit("a", { source_refs: [shop, wayback], source_urls: ["https://p-bandai.jp/item/item-1/"] })), ["source"]);
+  assert.deepEqual(changeReasons(base, kit("a", { source_refs: [shop, wayback], tags: ["limited"] })), ["source"]);
+  // archive + a real change: still notifiable through the real one
+  assert.deepEqual(changeReasons(base, kit("a", { source_refs: [shop, wayback], is_limited: true })), ["limited", "archive"]);
+  assert.equal(notifiable("changed", ["limited", "archive"]), true);
+  const d = diffCatalogs({ kits: [base] }, { kits: [kit("a", { source_refs: [shop, wayback] })] });
+  assert.equal(d.changed, 1);
+  assert.equal(d.items.length, 0, "an archive-only change is not a phone notification");
+}
 
 // ── diff: no cap, image-only changes dropped, counts are full ──
 {
@@ -310,4 +345,36 @@ console.log("notify feed date_quiet_reasons: ok");
   assert.equal(doc.entries[0].added[0].name_ja, "ねんどろいどぷち 暁美ほむら");
   assert.equal(doc.entries[0].changed[0].subline, undefined);
   console.log("notify feed annotate: ok");
+}
+
+// annotateItems: the push title (names.ko) follows the catalog's current Korean name
+{
+  const doc = {
+    entries: [
+      {
+        added: [{ kit_id: "pb1", series_key: "seed", names: { ko: "ガンプラＬＥＤユニット２個세트（緑）" }, series_labels: { ko: "旧" } }],
+        changed: [
+          { kit_id: "gone", series_key: "seed", names: { ko: "kept" }, series_labels: { ko: "건담 SEED" } },
+          { kit_id: "noname", series_key: "seed", names: { ko: "kept too" } },
+        ],
+      },
+    ],
+  };
+  annotateItems(
+    doc,
+    [
+      { kit_id: "pb1", names: { ja: "ガンプラＬＥＤユニット２個セット（緑）", ko: "건프라 LED 유닛 2개 세트 (초록)" }, series: { key: "tools", labels: { ko: "건프라 툴" } } },
+      { kit_id: "noname", names: {} },
+    ],
+    null,
+  );
+  assert.deepEqual(doc.entries[0].added[0].names, { ko: "건프라 LED 유닛 2개 세트 (초록)" });
+  assert.deepEqual(doc.entries[0].added[0].series_labels, { ko: "건프라 툴" });
+  assert.equal(doc.entries[0].added[0].series_key, "tools", "the series key moves with its label (app series: conditions, SEED / 00)");
+  assert.deepEqual(doc.entries[0].changed[0].names, { ko: "kept" }, "a kit no longer in the catalog keeps its stored name");
+  assert.equal(doc.entries[0].changed[0].series_key, "seed");
+  assert.deepEqual(doc.entries[0].changed[0].series_labels, { ko: "건담 SEED" });
+  assert.deepEqual(doc.entries[0].changed[1].names, { ko: "kept too" }, "a catalog kit without names keeps the stored one");
+  assert.equal(doc.entries[0].changed[1].series_key, "seed", "a catalog kit without a series keeps the stored one");
+  console.log("notify feed name refresh: ok");
 }

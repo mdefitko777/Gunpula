@@ -127,6 +127,23 @@ function sameJson(left, right) {
   return JSON.stringify(left ?? null) === JSON.stringify(right ?? null);
 }
 
+// Archive copies of a shop page (archive.org snapshots): extra evidence, not news.
+// Same rule as scripts/atlas/build_notify_feed.mjs sourceReason (where "archive" is a quiet reason).
+const ARCHIVE_SOURCE_IDS = new Set(["p_bandai_wayback"]);
+
+function liveSourceRefs(refs) {
+  return (refs || []).filter((ref) => !ARCHIVE_SOURCE_IDS.has(ref?.source_id));
+}
+
+function sourceReason(beforeKit, kit) {
+  const live =
+    !sameJson(liveSourceRefs(beforeKit.source_refs), liveSourceRefs(kit.source_refs)) ||
+    !sameJson(beforeKit.source_urls, kit.source_urls) ||
+    !sameJson(beforeKit.tags, kit.tags);
+  if (live) return "source";
+  return sameJson(beforeKit.source_refs, kit.source_refs) ? null : "archive";
+}
+
 function changeReasons(beforeKit, kit, changeType) {
   if (changeType === "added") return ["new"];
   if (changeType === "removed") return ["removed"];
@@ -140,7 +157,8 @@ function changeReasons(beforeKit, kit, changeType) {
   if (beforeKit.grade_code !== kit.grade_code || beforeKit.subline !== kit.subline || beforeKit.scale !== kit.scale) reasons.add("product_line");
   if (beforeKit.series?.key !== kit.series?.key || beforeKit.work_title !== kit.work_title || beforeKit.universe !== kit.universe) reasons.add("series");
   if (beforeKit.is_limited !== kit.is_limited) reasons.add("limited");
-  if (!sameJson(beforeKit.source_refs, kit.source_refs) || !sameJson(beforeKit.source_urls, kit.source_urls) || !sameJson(beforeKit.tags, kit.tags)) reasons.add("source");
+  const source = sourceReason(beforeKit, kit);
+  if (source) reasons.add(source);
   return reasons.size ? [...reasons] : ["metadata"];
 }
 
@@ -341,7 +359,28 @@ const entry = {
   backfilled: sortItems(backfilled).slice(0, ITEM_LIMIT),
 };
 
-const previousEntries = previousFeed.entries || [];
+// Items keep the names they had on the day they entered the feed. Names are often
+// translated later (Japanese or half-Korean at first), so refresh the display names
+// and series labels of every item whose kit is still in the catalog.
+function refreshDisplayFields(entries) {
+  for (const feedEntry of entries) {
+    for (const group of ["added", "changed", "watched", "backfilled"]) {
+      for (const item of feedEntry[group] || []) {
+        const kit = currentById.get(item?.kit_id);
+        if (!kit) continue;
+        item.names = nameFor(kit);
+        // key and labels together (the app matches series: conditions and SEED / 00 on series_key)
+        if (kit.series?.key) {
+          item.series_key = kit.series.key;
+          item.series_labels = kit.series.labels ?? null;
+        }
+      }
+    }
+  }
+  return entries;
+}
+
+const previousEntries = refreshDisplayFields(previousFeed.entries || []);
 const sameDateEntry = previousEntries.find((item) => item.date === date);
 const entries = [
   mergeSameDateEntry(sameDateEntry, entry),
