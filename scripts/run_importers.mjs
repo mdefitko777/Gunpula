@@ -53,13 +53,15 @@ const STEPS = [
   { script: "dates:apply", kind: "derive" },
   // Premium Bandai photos 2..n counted earlier on the Bandai CDN (data/pb-image-counts.json); offline.
   { script: "pb:gallery", kind: "derive" },
-  // Official assembly manuals (data/manuals.json, list read weekly) → manual_id; offline.
-  { script: "manuals", kind: "derive" },
   // Rewrites kits.json in place (series, compact work titles, four-language names). If it
   // crashes, kits.json is the importers' raw output with no series, so nothing is committed.
   // A batch of series moves is not a crash: those records keep their published series and
   // the step leaves a note (IMPORT_NOTES_PATH) for the failure report.
   { script: "localize", kind: "required" },
+  // Official assembly manuals (data/manuals.json, list read weekly) → manual_id; offline.
+  // After localize, so it matches the same localized names (decoded entities, names.en)
+  // as the re-match in manuals:fetch; before, the two gave different links on some days.
+  { script: "manuals", kind: "derive" },
   { script: "check:sources", kind: "required" },
 ];
 

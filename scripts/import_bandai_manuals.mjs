@@ -1,12 +1,15 @@
 import { readFile, writeFile } from "node:fs/promises";
+import { loadRobots, robotsAllows } from "./lib/robots.mjs";
 
 // Official assembly manuals (BANDAI HOBBY 説明書, manual.bandai-hobby.net): the app opens
 // a kit's manual in its own viewer page — only the link, the manual stays on Bandai's site.
 //
 // `--fetch` (npm run manuals:fetch) reads the manual list (20 per page, newest first)
-// politely: this bot's user-agent, one page per 1.1 s, a 403 / 429 / 503 stops the run.
-// The full list (~2500 manuals, 2013 onwards) is read at most once a week (--force to
-// read anyway); data/manuals.json keeps it.
+// politely: this bot's user-agent, robots.txt first (lib/robots.mjs), one page per 1.1 s,
+// a 403 / 429 / 503 or a failed request stops the run and keeps the pages read so far.
+// The list (~2700 manuals, 2013 onwards) is read at most once a week (--force to read
+// anyway); data/manuals.json keeps it. After one complete read the weekly read stops at
+// the first page it already knows (--full reads every page again).
 //
 // Without --fetch (npm run manuals, an offline derive step of import:data) each record
 // whose name matches a manual (same normalized name; the release month breaks ties) gets
@@ -108,22 +111,65 @@ export function matchManuals(kits, manuals) {
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-async function fetchList(store) {
+/**
+ * Reads the manual list into the stored one → { manuals (Map id → manual), pages, complete }.
+ * After a complete read (store.read_at), the list being newest first, the read stops at the
+ * first page whose manuals are all known; until then (first read, or one cut short) every
+ * page is read, so the older pages get filled in. `full` reads every page anyway.
+ * A refusal, a robots.txt rule, a failed request or an unexpected status ends the read
+ * with what was read so far and complete: false (read_at is then left as it was).
+ */
+export async function fetchList(store, { full = false, fetchImpl = globalThis.fetch, gapMs = GAP_MS, deadlineMs = 300_000 } = {}) {
   const manuals = new Map((store.manuals || []).map((m) => [m.id, m]));
+  // "Known" = read by the last COMPLETE read. Ids an incomplete read added (pending_ids) are not
+  // known yet: stopping at them would skip the pages between the failure and the old frontier.
+  const pending = new Set(store.pending_ids || []);
+  const known = store.read_at && !full ? new Set([...manuals.keys()].filter((id) => !pending.has(id))) : null;
+  const started = Date.now();
   let pages = 0;
+  const robots = await loadRobots(new URL(BASE).host, { userAgent: BOT_UA, fetchImpl });
+  if (robots.disallowAll) {
+    console.warn(`manual list: robots.txt ${robots.status}; nothing read this run.`);
+    return { manuals, pages, complete: false };
+  }
   for (let page = 1; page <= MAX_PAGES; page += 1) {
-    await sleep(GAP_MS);
-    const response = await fetch(`${BASE}/?page=${page}`, { headers: { "User-Agent": BOT_UA }, redirect: "manual", signal: AbortSignal.timeout(30000) });
+    const url = `${BASE}/?page=${page}`;
+    // Stay well inside the workflow step's timeout; what was read is kept and the next run continues
+    if (Date.now() - started > deadlineMs) {
+      console.warn(`manual list: time limit reached after ${pages} pages; keeping what was read.`);
+      return { manuals, pages, complete: false };
+    }
+    if (!robotsAllows(robots, url)) {
+      console.warn(`manual list: robots.txt disallows ${url}; keeping what was read.`);
+      return { manuals, pages, complete: false };
+    }
+    await sleep(gapMs);
+    let response;
+    let html = "";
+    try {
+      response = await fetchImpl(url, { headers: { "User-Agent": BOT_UA }, redirect: "manual", signal: AbortSignal.timeout(30000) });
+      if (response.status === 200) html = await response.text();
+    } catch (error) {
+      // DNS / connection / timeout: one bad page no longer throws away every page before it
+      console.warn(`manual list page ${page} failed (${error.message}); keeping what was read.`);
+      return { manuals, pages, complete: false };
+    }
     if ([403, 429, 503].includes(response.status)) {
       console.warn(`manual list answered ${response.status} on page ${page}; keeping what was read.`);
       return { manuals, pages, complete: false };
     }
     // past the last page the site redirects to the top
-    if (response.status !== 200) break;
-    const items = parseManualList(await response.text());
+    if (response.status >= 300 && response.status < 400) break;
+    if (response.status !== 200) {
+      console.warn(`manual list answered ${response.status} on page ${page}; keeping what was read.`);
+      return { manuals, pages, complete: false };
+    }
+    const items = parseManualList(html);
     if (!items.length) break;
     pages += 1;
+    const allKnown = known && items.every((m) => known.has(m.id));
     for (const m of items) manuals.set(m.id, m);
+    if (allKnown) break;
   }
   return { manuals, pages, complete: true };
 }
@@ -137,12 +183,25 @@ async function main() {
 
   if (args.includes("--fetch")) {
     const due = !store.read_at || Date.now() - Date.parse(store.read_at) > REFRESH_DAYS * 86400000;
-    if (due || args.includes("--force")) {
-      const { manuals, pages, complete } = await fetchList(store);
-      store.manuals = [...manuals.values()].sort((a, b) => b.id - a.id);
-      if (complete) store.read_at = new Date().toISOString().slice(0, 10);
-      await writeFile(STORE_PATH, `${JSON.stringify(store, null, 1)}\n`, "utf8");
-      console.log(`Manuals: read ${pages} list pages, ${store.manuals.length} manuals.`);
+    if (due || args.includes("--force") || args.includes("--full")) {
+      // Whatever happens to the list read, the offline re-match below still runs.
+      try {
+        const before = new Set((store.manuals || []).map((m) => m.id));
+        const { manuals, pages, complete } = await fetchList(store, { full: args.includes("--full") });
+        store.manuals = [...manuals.values()].sort((a, b) => b.id - a.id);
+        if (complete) {
+          store.read_at = new Date().toISOString().slice(0, 10);
+          delete store.pending_ids;
+        } else {
+          // remember what this incomplete read added, so the next read does not stop at it
+          const added = store.manuals.map((m) => m.id).filter((id) => !before.has(id));
+          store.pending_ids = [...new Set([...(store.pending_ids || []), ...added])].sort((a, b) => b - a);
+        }
+        await writeFile(STORE_PATH, `${JSON.stringify(store, null, 1)}\n`, "utf8");
+        console.log(`Manuals: read ${pages} list pages${complete ? "" : " (incomplete)"}, ${store.manuals.length} manuals.`);
+      } catch (error) {
+        console.warn(`Manuals: list read failed (${error.message}); matching with the stored list.`);
+      }
     } else {
       console.log(`Manuals: list read on ${store.read_at}; next read after ${REFRESH_DAYS} days.`);
     }

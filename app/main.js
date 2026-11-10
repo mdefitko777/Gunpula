@@ -1056,12 +1056,36 @@ async function init() {
     renderSettings();
     openDialog(elements.settingsDialog);
   }
+  // A shared #kit= link (open.html) carries no franchise, so the kit is often in a
+  // slice that is not loaded yet. Remember it and open it once the catalog is complete.
+  const pendingKitId = state.pendingKitId && !state.selectedKit ? storeResolveKitAlias(state.kitAliases, state.pendingKitId) : null;
   seedInitialOverlayHistory();
   if (state.query.trim()) {
     ensureSearchIndex();
   }
-  showOnboardingIfNeeded();
+  if (pendingKitId) {
+    void openPendingKitWhenLoaded(pendingKitId);
+  } else {
+    showOnboardingIfNeeded();
+  }
   checkShellUpdate();
+}
+
+async function openPendingKitWhenLoaded(kitId) {
+  await ensureCatalogComplete().catch(() => {});
+  // The visitor already opened something (another kit, settings, a panel) while the
+  // rest of the catalog loaded: leave it alone.
+  if (state.selectedKit || state.activeModal || document.querySelector("dialog[open]")) {
+    return;
+  }
+  const kit = displayKitById(kitId);
+  if (!kit) {
+    showOnboardingIfNeeded();
+    return;
+  }
+  // The usual detail path (search index of that franchise, recently viewed, history push so
+  // Back closes it — seedInitialOverlayHistory already dropped #kit= from the URL).
+  openDetail(kit);
 }
 
 function normalizeState() {

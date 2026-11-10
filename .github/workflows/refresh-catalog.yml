@@ -80,7 +80,9 @@ jobs:
         run: npm run pb:gallery:fetch -- --limit=40
 
       # Official assembly manual list (manual.bandai-hobby.net, ~140 pages), read at
-      # most once a week with the same polite rules; links records by name (manual_id).
+      # most once a week with the same polite rules; after one complete read only the
+      # new pages are read, and a failed page keeps what was read. Links records by
+      # name (manual_id) even when the read fails.
       - name: Read official manual list
         continue-on-error: true
         timeout-minutes: 6

@@ -1,4 +1,5 @@
 import { readFile, writeFile } from "node:fs/promises";
+import { loadRobots, robotsAllows, robotsPattern } from "./lib/robots.mjs";
 
 // Release dates for products whose source list has none (2026-11: 2079 Aniplex+ Fate
 // goods, ~430 gashapon items). The importers rebuild every record on each refresh, so a
@@ -75,42 +76,21 @@ export function applyStoredDates(kits, store) {
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-/** robots.txt path rule → RegExp: `*` = any characters, `$` at the end = end of the path. */
-export function robotsPattern(rule) {
-  const anchored = rule.endsWith("$");
-  const body = (anchored ? rule.slice(0, -1) : rule)
-    .split("*")
-    .map((part) => part.replace(/[.+?^${}()|[\]\\]/g, "\\$&"))
-    .join(".*");
-  return new RegExp(`^${body}${anchored ? "$" : ""}`);
-}
-
-async function robotsDisallows(host) {
-  try {
-    const response = await fetch(`https://${host}/robots.txt`, { headers: { "User-Agent": BOT_UA }, signal: AbortSignal.timeout(15000) });
-    if (!response.ok) return [];
-    const rules = [];
-    let applies = false;
-    for (const line of (await response.text()).split(/\r?\n/)) {
-      const [key, ...rest] = line.replace(/#.*/, "").split(":");
-      const value = rest.join(":").trim();
-      if (/^user-agent$/i.test(key.trim())) applies = value === "*" || /hobbyatlasdatabot/i.test(value);
-      else if (applies && /^disallow$/i.test(key.trim()) && value) rules.push(robotsPattern(value));
-    }
-    return rules;
-  } catch {
-    return []; // unreachable robots.txt: treated as missing
-  }
-}
+// robots.txt (RFC 9309) lives in lib/robots.mjs; robotsPattern stays exported here for the test.
+export { robotsPattern };
 
 async function readHost(host, jobs, store, today, budget) {
-  const disallowed = await robotsDisallows(host);
+  // A 5xx or unreachable robots.txt disallows the whole host for this run.
+  const robots = await loadRobots(host, { userAgent: BOT_UA });
+  if (robots.disallowAll) {
+    console.warn(`${host}: robots.txt ${robots.status}; nothing read today.`);
+    return;
+  }
   let read = 0;
   let found = 0;
   for (const { kit, page, url } of jobs) {
     if (budget.left <= 0) break;
-    const { pathname, search } = new URL(url);
-    if (disallowed.some((rule) => rule.test(`${pathname}${search}`))) continue;
+    if (!robotsAllows(robots, url)) continue;
     budget.left -= 1;
     await sleep(GAP_MS);
     let html = "";

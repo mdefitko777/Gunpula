@@ -29,6 +29,22 @@ const WORK_SERIES = {
   "sd-sengokuden": "sd", "sd-gundam-world-heroes": "sd", "sd-command-chronicles-g-arms": "sd",
 };
 
+// kit_id → series key, fixed by hand when the name rules file a kit under the wrong work
+// (2026-11-10: "セラフィムフェザー" under 00, Blue Destiny under SEED via "DESTINY", GN-X via "ジン" …).
+// Only a missing file means "no overrides". A read or parse error (a hand-edit typo) throws,
+// so the required localize step fails before the refresh commits pattern series over them.
+// The two-argument then keeps a JSON.parse SyntaxError out of the ENOENT handler.
+const SERIES_OVERRIDES = await readFile("data/series-overrides.json", "utf8").then(
+  (raw) => JSON.parse(raw).series || {},
+  (error) => {
+    if (error.code === "ENOENT") {
+      console.warn("::warning::data/series-overrides.json not found; no hand-fixed series applied.");
+      return {};
+    }
+    throw error;
+  },
+);
+
 function seriesFromKitWorks(kit) {
   const keys = new Set((KIT_WORKS[kit.kit_id] || []).map((work) => WORK_SERIES[work]));
   if (keys.size !== 1 || keys.has(undefined)) return null;
@@ -63,14 +79,14 @@ const SERIES = [
     sort: 30,
     labels: { zh: "SEED", en: "SEED", ja: "SEED", ko: "SEED" },
     universe: "CE",
-    pattern: /SEED|DESTINY|FREEDOM|ASTRAY|STARGAZER|スターゲイザー|デスティニー|フリーダム|ジャスティス|インパルス|アカツキ|ストライク|イージス|デュエル|バスター|ブリッツ|プロヴィデンス|カラミティ|フォビドゥン|レイダー|アストレイ|ジン|シグー|ゲイツ|ウィンダム|ムラサメ|ブラックナイトスコード|ソードストライカー|ランチャーストライカー|エールストライカー|ストライカーパック|プラウドディフェンダー|アークエンジェル/i,
+    pattern: /SEED|(?<!BLUE ?)DESTINY|FREEDOM|ASTRAY|STARGAZER|スターゲイザー|デスティニー|フリーダム|ジャスティス|インパルス|アカツキ|ストライク|イージス|デュエル|(?<!アサルト)バスター|ブリッツ|プロヴィデンス|カラミティ|フォビドゥン|レイダー|アストレイ|(?<![ァ-ヶー])ジン(?![クャュョ])|シグー|ゲイツ|ウィンダム|ムラサメ|ブラックナイトスコード|ソードストライカー|ランチャーストライカー|エールストライカー|ストライカーパック|プラウドディフェンダー|アークエンジェル/i,
   },
   {
     key: "double_o",
     sort: 40,
     labels: { zh: "00", en: "00", ja: "00", ko: "00" },
     universe: "AD",
-    pattern: /Gundam 00(?![0-9])|ガンダム00(?![0-9])|ダブルオー|00クアンタ|クアンタ|エクシア|デュナメス|キュリオス|ヴァーチェ|ナドレ|アストレア|ケルディム|アリオス|セラヴィー|セラフィム|オーライザー|ジンクス|ティエレン|スサノオ|フラッグ|スローネ|アルケー|アヘッド|ガデッサ|ガラッゾ|リボーンズ|ブレイヴ|GNアームズ|1\.5（アイズ）|1\.5ガンダム|Awakening of the Trailblazer/i,
+    pattern: /Gundam 00(?![0-9])|ガンダム00(?![0-9])|ダブルオー|00クアンタ|クアンタ|エクシア|デュナメス|キュリオス|ヴァーチェ|ナドレ|アストレア|ケルディム|アリオス|セラヴィー|セラフィムガンダム|オーライザー|ジンクス|ティエレン|スサノオ|フラッグ|スローネ|アルケー|アヘッド|ガデッサ|ガラッゾ|リボーンズ|ブレイヴ|GNアームズ|1\.5（アイズ）|1\.5ガンダム|Awakening of the Trailblazer/i,
   },
   {
     key: "w",
@@ -120,7 +136,7 @@ const SERIES = [
     sort: 120,
     labels: { zh: "ZZ", en: "ZZ", ja: "ZZ", ko: "ZZ" },
     universe: "UC",
-    pattern: /Mobile Suit Gundam ZZ|ZZ|ダブルゼータ|ゲーマルク|ゲー・ドライ|ハンマ・ハンマ|キュベレイ|ドーベン・ウルフ|ザクIII|バウ|クィン・マンサ|ドライセン|ズサ/i,
+    pattern: /Mobile Suit Gundam ZZ|ZZ|ダブルゼータ|ゲーマルク|ゲー・ドライ|ハンマ・ハンマ|キュベレイ|ドーベン・ウルフ|ザクIII|バウ(?!ン)|クィン・マンサ|ドライセン|ズサ/i,
   },
   {
     key: "cca",
@@ -225,7 +241,7 @@ const SERIES = [
     sort: 246,
     labels: { zh: "Origin", en: "Origin", ja: "ORIGIN", ko: "Origin" },
     universe: "UC",
-    pattern: /THE ORIGIN|Origin|オリジン|局地型ガンダム|ブグ|ザクI(?!I)|ザク・ハーフキャノン/i,
+    pattern: /THE ORIGIN|Origin|(?<!アスタロト ?)オリジン|局地型ガンダム|ブグ|ザクI(?!I)|ザク・ハーフキャノン/i,
   },
   {
     key: "sentinel",
@@ -423,6 +439,16 @@ const SERIES = [
   },
 ];
 
+// An override naming no known series key is skipped by classifySeries (the name rules
+// decide instead); say so rather than drop the hand fix silently.
+const UNKNOWN_SERIES_OVERRIDES = Object.entries(SERIES_OVERRIDES).filter(([, key]) => !SERIES.some((series) => series.key === key));
+if (UNKNOWN_SERIES_OVERRIDES.length) {
+  const sample = UNKNOWN_SERIES_OVERRIDES.slice(0, 5)
+    .map(([kitId, key]) => `${kitId}→${key}`)
+    .join(", ");
+  console.warn(`::warning::data/series-overrides.json has ${UNKNOWN_SERIES_OVERRIDES.length} override(s) with an unknown series key, ignored: ${sample}`);
+}
+
 const DEFAULT_SERIES = {
   key: "other",
   sort: 999,
@@ -488,14 +514,15 @@ const TITLE_PRIORITY_SERIES = new Set([
 const GUNDAM_WORK_UNIT_RULES = [
   { key: "build", pattern: /HGBF|HGBD|HGBD:R|Gundam Build|Build Fighters|Build Divers|Build Metaverse|ビルド|ダイバー|コアガンダム|アースリィ|マーズフォー|ヴィートルー|メルクワン|ユーラヴェン|ネプテイト|プルタイン|ラーガンダム|ベアッガイ|プチッガイ|ふみな|トライオン|アメイジング|フェニーチェ|スクランブル|ティフォエウス|AGEIIマグナム/i },
   { key: "sangoku", pattern: /三国|三國|三国創傑伝|三国伝|SDW HEROES.*(?:関羽|孫権|曹操|劉備|諸葛亮|司馬懿|呂布|張飛|趙雲|貂蝉|馬超|黄忠|董卓|信長|悟空|三蔵|佐助|才蔵|軍馬)/i },
+  { key: "seed", pattern: /グフ\s*イグナイテッド|ザクウォーリア|ザクファントム|ガナーザク|ブレイズザク|スラッシュザク|ケルベロスザク/i },
   { key: "crossbone", pattern: /Crossbone|クロスボーン|ガンダムX-?1|ガンダムX-?2|ガンダムX-?3|フルクロス|ゴーストガンダム|ファントムガンダム|アンカーガンダム/i },
   { key: "sentinel", pattern: /Sentinel|Sガンダム|\bEx-S\b(?!tandard)|FAZZ|Zプラス|ゼータプラス|ディープストライカー|ガンダムMk-V|ゼク・アイン/i },
   { key: "narrative", pattern: /Mobile Suit Gundam Narrative|Narrative Gundam|機動戦士ガンダムNT|ナラティブガンダム|フェネクス|シナンジュ・スタイン.*(?:NT|ナラティブ)|ナラティブ Ver/i },
   { key: "moon", pattern: /Moon Gundam|ムーンガンダム|バルギル/i },
-  { key: "origin", pattern: /THE ORIGIN|オリジン|局地型ガンダム|ブグ|ザクI(?!I)|ザク・ハーフキャノン|シャア専用ザクII.*ORIGIN/i },
+  { key: "origin", pattern: /THE ORIGIN|(?<!アスタロト ?)オリジン|局地型ガンダム|ブグ|ザクI(?!I)|ザク・ハーフキャノン|シャア専用ザクII.*ORIGIN/i },
   { key: "gqux", pattern: /GQuuuuuuX|ジークアクス|GFreD|白いガンダム|赤いガンダム|軽キャノン|\(GQ\)|（GQ）|シャリア専用リック・ドム\(GQ\)|ザク\(GQ\)/i },
-  { key: "seed", pattern: /SEED|DESTINY|FREEDOM|ASTRAY|STARGAZER|スターゲイザー|ライジングフリーダム|イモータルジャスティス|マイティーストライクフリーダム|ストライクフリーダム|インフィニットジャスティス|デスティニー|インパルス|アカツキ|ストライク|イージス|デュエル|バスター|ブリッツ|プロヴィデンス|カラミティ|フォビドゥン|レイダー|アストレイ|ブラックナイトスコード|ジン|シグー|ゲイツ|ウィンダム|ムラサメ|ソードストライカー|ランチャーストライカー|エールストライカー|ストライカーパック|プラウドディフェンダー|アークエンジェル/i },
-  { key: "double_o", pattern: /Gundam 00(?![0-9])|ガンダム00(?![0-9])|00ガンダム|ダブルオー|00クアンタ|クアンタ|エクシア|デュナメス|キュリオス|ヴァーチェ|ナドレ|アストレア|ケルディム|アリオス|セラヴィー|セラフィム|オーライザー|ジンクス|ティエレン|スサノオ|フラッグ|スローネ|アルケー|アヘッド|ガデッサ|ガラッゾ|リボーンズ|ブレイヴ|GNアームズ|1\.5（アイズ）|1\.5ガンダム/i },
+  { key: "seed", pattern: /SEED|(?<!BLUE ?)DESTINY|FREEDOM|ASTRAY|STARGAZER|スターゲイザー|ライジングフリーダム|イモータルジャスティス|マイティーストライクフリーダム|ストライクフリーダム|インフィニットジャスティス|デスティニー|インパルス|アカツキ|ストライク|イージス|デュエル|(?<!アサルト)バスター|ブリッツ|プロヴィデンス|カラミティ|フォビドゥン|レイダー|アストレイ|ブラックナイトスコード|(?<![ァ-ヶー])ジン(?![クャュョ])|シグー|ゲイツ|ウィンダム|ムラサメ|ソードストライカー|ランチャーストライカー|エールストライカー|ストライカーパック|プラウドディフェンダー|アークエンジェル/i },
+  { key: "double_o", pattern: /Gundam 00(?![0-9])|ガンダム00(?![0-9])|00ガンダム|ダブルオー|00クアンタ|クアンタ|エクシア|デュナメス|キュリオス|ヴァーチェ|ナドレ|アストレア|ケルディム|アリオス|セラヴィー|セラフィムガンダム|オーライザー|ジンクス|ティエレン|スサノオ|フラッグ|スローネ|アルケー|アヘッド|ガデッサ|ガラッゾ|リボーンズ|ブレイヴ|GNアームズ|1\.5（アイズ）|1\.5ガンダム/i },
   { key: "w", pattern: /Gundam Wing|ガンダムW|Endless Waltz|\bEW\b|G-UNIT|ハイドラガンダム|Hydra Gundam|ウイング|デスサイズ|ヘビーアームズ|サンドロック|シェンロン|アルトロン|トールギス|エピオン|リーオー|マグアナック|ヴァイエイト|メリクリウス|エアリーズ|ジェミナス|グリープ|ヒイロ・ユイ/i },
   { key: "ibo", pattern: /Iron-Blooded Orphans|鉄血|バルバトス|グシオン|キマリス|グレイズ|フラウロス|バエル|ヴィダール|百里|百錬|マンロディ|ロディ|マルコシアス|アスタロト|ダンタリオン|レギンレイズ|グリムゲルデ/i },
   { key: "witch", pattern: /Witch from Mercury|水星の魔女|エアリアル|ルブリス|キャリバーン|ファラクト|ディランザ|デミ|ベギル|ミカエリス|シュバルゼッテ|ガンヴォルヴァ|ザウォート|ダリルバルデ|グエル・ジェターク/i },
@@ -505,7 +532,7 @@ const GUNDAM_WORK_UNIT_RULES = [
   { key: "0083", pattern: /0083|Stardust Memory|GP0[123]|ガーベラ|デンドロビウム|ステイメン|ノイエ・ジール|ドラッツェ|ザメル/i },
   { key: "0080", pattern: /0080|War in the Pocket|アレックス|NT-1|ケンプファー|ハイゴッグ|ズゴックE|ザクII改/i },
   { key: "08ms", pattern: /08th MS Team|08小隊|Ez-8|陸戦型|グフカスタム/i },
-  { key: "zz", pattern: /ZZ|ダブルゼータ|フルアーマーZZ|強化型ZZ|クィン・マンサ|キュベレイ|ドーベン・ウルフ|ザクIII|バウ|ドライセン|ズサ|ハンマ・ハンマ|ゲーマルク/i },
+  { key: "zz", pattern: /ZZ|ダブルゼータ|フルアーマーZZ|強化型ZZ|クィン・マンサ|キュベレイ|ドーベン・ウルフ|ザクIII|バウ(?!ン)|ドライセン|ズサ|ハンマ・ハンマ|ゲーマルク/i },
   { key: "zeta", pattern: /Zガンダム|Ζ|ゼータガンダム|ZII|サイコ・ガンダム|ガンダムMk-II|ガンダムMk-Ⅱ|百式|リック・ディアス|メタス|ネモ|ハイザック|マラサイ|バーザム|ギャプラン|アッシマー|ジ・O|ディジェ/i },
   { key: "g", pattern: /Mobile Fighter G Gundam|Gガンダム|ゴッドガンダム|シャイニングガンダム|マスターガンダム|ノーベルガンダム|ドラゴンガンダム|ガンダムローズ|マックスター|マンダラガンダム|デビルガンダム|クーロンガンダム|風雲再起/i },
   { key: "g_reco", pattern: /Reconguista|Gのレコンギスタ|G-セルフ|Ｇ-セルフ|G-アルケイン|G-ルシファー|グリモア|マックナイフ|ジャハナム|カバカーリー/i },
@@ -1019,6 +1046,12 @@ function seriesForKit(kit) {
 }
 
 function classifySeries(kit) {
+  // Fixed by hand (data/series-overrides.json): wins over everything, also over an earlier result
+  const forced = SERIES_OVERRIDES[kit.kit_id];
+  if (forced) {
+    const series = SERIES.find((candidate) => candidate.key === forced);
+    if (series) return series;
+  }
   const previous = previousSeries(kit);
   if (previous) {
     return previous;
@@ -1171,9 +1204,15 @@ if (baselinePath) {
   }
 }
 const published = new Map(baseline.filter((kit) => kit.series?.key).map((kit) => [kit.kit_id, kit]));
+// A hand fix from data/series-overrides.json is a deliberate move, not a rule regression:
+// it does not count toward the limit and is never held. Compared with the applied key, so
+// an override naming an unknown key (the name rules decided) still counts.
 const moved = kits
   .map((kit, index) => ({ kit, index, before: published.get(kit.kit_id) }))
-  .filter(({ kit, before }) => before && before.series.key !== "other" && kit.series.key !== before.series.key);
+  .filter(
+    ({ kit, before }) =>
+      before && before.series.key !== "other" && kit.series.key !== before.series.key && SERIES_OVERRIDES[kit.kit_id] !== kit.series.key,
+  );
 if (moved.length > MAX_SERIES_MOVES) {
   for (const { kit, index, before } of moved) {
     kits[index] = { ...kit, series: before.series, work_title: before.work_title ?? kit.work_title, universe: before.universe ?? kit.universe };

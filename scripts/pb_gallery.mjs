@@ -1,4 +1,5 @@
 import { readFile, writeFile } from "node:fs/promises";
+import { loadRobots, robotsAllows } from "./lib/robots.mjs";
 
 // Premium Bandai photos, counted on the Bandai CDN where an item's photos are numbered
 // bandai-a.akamaihd.net/bc/img/model/<size>/<item id>_<n>.jpg:
@@ -9,7 +10,9 @@ import { readFile, writeFile } from "node:fs/promises";
 //
 // `--fetch` (npm run pb:gallery:fetch) counts the photos of items not counted yet with
 // HEAD requests on the 100 px size (galloping: 2, 4, 8 … then halving), politely: this
-// bot's user-agent, one request per 1.1 s, a 403 / 429 / 503 stops the run, at most
+// bot's user-agent, the CDN's robots.txt first (lib/robots.mjs: a disallowed photo path is
+// not asked, a 5xx / unreachable robots.txt skips the run), one request per 1.1 s,
+// a 403 / 429 / 503 stops the run, at most
 // --limit items (default 40). Counts go to data/pb-image-counts.json and are re-checked
 // after 90 days (P-Bandai adds photos while an item is on sale).
 //
@@ -107,15 +110,24 @@ async function main() {
     "Photo counts of Premium Bandai items on the Bandai CDN (model/<size>/<id>_<n>.jpg), for records from archived P-Bandai pages (scripts/pb_gallery.mjs).";
   store.counts ||= {};
 
-  if (fetchCounts) {
+  const robots = fetchCounts ? await loadRobots(new URL(CDN).host, { userAgent: BOT_UA }) : null;
+  if (robots?.disallowAll) console.warn(`Bandai CDN robots.txt ${robots.status}; no photos counted this run.`);
+  if (fetchCounts && !robots.disallowAll) {
     const today = new Date().toISOString().slice(0, 10);
     const recheckAfter = new Date(Date.now() - RECHECK_DAYS * 86400000).toISOString().slice(0, 10);
     const ids = [...new Set(catalog.kits.map(pbItemId).filter(Boolean))].filter((id) => !(store.counts[id]?.read > recheckAfter));
     let refused = "";
     let counted = 0;
     let requests = 0;
+    let disallowed = 0;
     for (const id of ids.slice(0, limit)) {
+      let blocked = false;
       const n = await countPhotos(async (i) => {
+        // A photo path robots.txt disallows is never asked; the item stays uncounted.
+        if (!robotsAllows(robots, photoUrl(id, i, "s"))) {
+          blocked = true;
+          return null;
+        }
         await sleep(GAP_MS);
         requests += 1;
         try {
@@ -131,11 +143,15 @@ async function main() {
         }
       });
       if (refused) break;
-      if (n === null) continue;
+      if (n === null) {
+        if (blocked) disallowed += 1;
+        continue;
+      }
       store.counts[id] = { n, read: today };
       counted += 1;
     }
     if (refused) console.warn(`Bandai CDN answered ${refused}; the rest is left for the next run.`);
+    if (disallowed) console.warn(`Bandai CDN robots.txt disallows the photos of ${disallowed} items; left uncounted.`);
     console.log(`PB photos: counted ${counted} items with ${requests} requests (${ids.length} were due).`);
     store.updated_at = today;
     store.counts = Object.fromEntries(Object.entries(store.counts).sort(([a], [b]) => a.localeCompare(b)));

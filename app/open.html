@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Hobby Atlas</title>
+  <!--
+    Hobby Atlas 상품 공유 링크의 넘김 페이지 (hobby-atlas-v3 lib/logic/kit_link.dart):
+      open.html?kit=<kit_id>[&lang=zh|ko|en|ja]
+    안드로이드: Hobby Atlas 앱이 있으면 그 상품 상세(intent://kit/<id>, scheme hobbyatlas),
+                없으면 브라우저가 S.browser_fallback_url = 이 웹 앱의 #lang=<lang>&kit=<id> 로.
+    그 밖의 기기: 바로 웹 앱 #lang=<lang>&kit=<id> (lang 기본 ko).
+  -->
+  <style>
+    :root { color-scheme: light dark; --bg: #f7f7f5; --panel: #fff; --ink: #111; --muted: #767676; --accent: #1f6feb; }
+    @media (prefers-color-scheme: dark) { :root { --bg: #111; --panel: #1b1b1b; --ink: #f2f2f2; --muted: #a0a0a0; --accent: #5b9cff; } }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: system-ui, -apple-system, "Noto Sans KR", sans-serif; }
+    main { max-width: 420px; margin: 18vh auto 0; padding: 24px 16px; text-align: center; }
+    h1 { font-size: 22px; margin: 0 0 8px; }
+    p { color: var(--muted); font-size: 14px; margin: 0 0 24px; }
+    a { display: block; padding: 14px; border-radius: 12px; font-size: 16px; font-weight: 700; text-decoration: none; margin-bottom: 10px; }
+    #open { background: var(--accent); color: #fff; }
+    #web { background: var(--panel); color: var(--ink); border: 1px solid rgba(127, 127, 127, 0.3); }
+    .small { font-size: 12px; margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Hobby Atlas</h1>
+    <p id="msg">앱에서 여는 중…</p>
+    <a id="open" href="#">Hobby Atlas 앱에서 열기</a>
+    <a id="web" href="./">웹에서 보기</a>
+    <p class="small">앱이 없으면 웹에서 열려요.</p>
+  </main>
+  <script>
+    (function () {
+      var query = new URLSearchParams(location.search);
+      var id = query.get("kit") || "";
+      var open = document.getElementById("open");
+      if (!/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/.test(id)) {
+        document.getElementById("msg").textContent = "잘못된 링크예요";
+        open.style.display = "none";
+        return;
+      }
+      // 웹 앱은 lang 이 없으면 중국어로 열리고, #kit= 로 들어오면 언어 고르기 화면도 건너뜀.
+      // 앱과 이 페이지는 한국어라 기본 ko, 링크에 ?lang= 이 있으면 (zh/ko/en/ja 만) 그대로 넘김.
+      // 이미 고른 언어가 있는 사람(같은 사이트라 저장값을 읽을 수 있다)은 그대로 두고, 처음 오는 사람만 ko.
+      var saved = "";
+      try { saved = localStorage.getItem("gunpula-catalog-language-v1") || ""; } catch (e) {}
+      var asked = query.get("lang") || "";
+      var lang = /^(zh|ko|en|ja)$/.test(asked) ? asked : (saved ? "" : "ko");
+      var web = new URL("./#" + (lang ? "lang=" + lang + "&" : "") + "kit=" + encodeURIComponent(id), location.href).href;
+      document.getElementById("web").href = web;
+      if (!/Android/i.test(navigator.userAgent)) {
+        location.replace(web);
+        return;
+      }
+      var intent = "intent://kit/" + encodeURIComponent(id) +
+        "#Intent;scheme=hobbyatlas;package=com.mdefitko.hobbyatlas;S.browser_fallback_url=" + encodeURIComponent(web) + ";end";
+      open.href = intent;
+      location.href = intent;
+    })();
+  </script>
+</body>
+</html>
