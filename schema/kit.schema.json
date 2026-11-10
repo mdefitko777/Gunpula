@@ -168,6 +168,11 @@
     "manual_id": {
       "type": "integer",
       "description": "Official assembly manual on manual.bandai-hobby.net (/menus/detail/<id>), linked by scripts/import_bandai_manuals.mjs."
+    },
+    "search_zh": {
+      "description": "Chinese fan / other-region names of glossary terms in the name (scripts/apply_zh_names.mjs) — search only, never shown.",
+      "type": "array",
+      "items": { "type": "string" }
     }
   },
   "additionalProperties": false

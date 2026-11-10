@@ -1,0 +1,3899 @@
+{
+ "franchise": "gundam",
+ "scope": "非机体名的高达商品用语：系列/等级/标签/限定渠道/配色与工艺/配件/通用商品词",
+ "sources": [
+  "https://wiki.biligame.com/gundam/RG高达模型",
+  "https://wiki.biligame.com/gundam/MG高达模型",
+  "https://wiki.biligame.com/gundam/FW高达食玩",
+  "https://hk.gundam.info/news/gunpla/01_5322.html",
+  "https://hk.gundam.info/news/gunpla/01_5660.html",
+  "https://hk.gundam.info/news/gunpla/01_2933.html",
+  "https://hk.gundam.info/news/goods/01_494.html",
+  "https://www.toy-people.com/?p=28226",
+  "catalog: kits-gundam.json names.ja / subline token frequency (5759 kits)",
+  "https://wiki.biligame.com/gundam/RG_独角兽高达_最终决战样式_特别涂层版_高达基地限定",
+  "https://tw.gundam.info/news/gunpla/01_12031.html",
+  "https://tw.gundam.info/news/gunpla/01_3175.html"
+ ],
+ "terms": [
+  {
+   "ja": "HG",
+   "en": "High Grade",
+   "zh": "HG",
+   "official": true,
+   "aliases": [
+    "高级",
+    "高级模型",
+    "High Grade",
+    "HG高达"
+   ],
+   "note": "官方保留英文等级代号；中文描述为“高级”"
+  },
+  {
+   "ja": "SD",
+   "en": "SD Gundam",
+   "zh": "SD",
+   "official": true,
+   "aliases": [
+    "Q版高达",
+    "SD Gundam",
+    "SD高达"
+   ],
+   "note": "名称中多为「SDガンダム…」，此处只译词头 SD，避免变成「SD高达高达」"
+  },
+  {
+   "ja": "ROBOT魂",
+   "en": "Robot Spirits",
+   "zh": "ROBOT魂",
+   "official": true,
+   "aliases": [
+    "R魂",
+    "Robot Spirits",
+    "魂系成品"
+   ]
+  },
+  {
+   "ja": "MG",
+   "en": "Master Grade",
+   "zh": "MG",
+   "official": true,
+   "aliases": [
+    "大师级",
+    "MG大师级",
+    "Master Grade"
+   ],
+   "note": "官方保留代号；中文圈通称“大师级”"
+  },
+  {
+   "ja": "プレミアムバンダイ",
+   "en": "Premium Bandai",
+   "zh": "PREMIUM BANDAI",
+   "official": true,
+   "aliases": [
+    "PB",
+    "P-BANDAI",
+    "万代网店"
+   ]
+  },
+  {
+   "ja": "No Grade",
+   "zh": "无等级",
+   "official": false,
+   "aliases": [
+    "其他",
+    "非等级"
+   ],
+   "note": "catalog subline 字段值"
+  },
+  {
+   "ja": "Ver.",
+   "en": "Ver.",
+   "zh": "Ver.",
+   "official": true,
+   "aliases": [
+    "Ver",
+    "版本",
+    "Version",
+    "版"
+   ],
+   "note": "官方中文商品名保留 Ver.（如 MG … Ver.3.0）"
+  },
+  {
+   "ja": "BB戦士",
+   "en": "BB Senshi",
+   "zh": "BB战士",
+   "official": true,
+   "aliases": [
+    "BB",
+    "SD BB战士",
+    "BB战士高达",
+    "BB Senshi"
+   ]
+  },
+  {
+   "ja": "RG",
+   "en": "Real Grade",
+   "zh": "RG",
+   "official": true,
+   "aliases": [
+    "实感级",
+    "RG实感级",
+    "Real Grade"
+   ],
+   "note": "中文圈通称“实感级”"
+  },
+  {
+   "ja": "HGUC",
+   "en": "HGUC",
+   "zh": "HGUC",
+   "official": true,
+   "aliases": [
+    "HG UC",
+    "高级UC",
+    "UC系列HG",
+    "High Grade Universal Century"
+   ],
+   "note": "宇宙世纪系列 HG"
+  },
+  {
+   "ja": "限定",
+   "en": "Limited",
+   "zh": "限定",
+   "official": true,
+   "aliases": [
+    "限定版",
+    "限量"
+   ]
+  },
+  {
+   "ja": "MOBILE SUIT ENSEMBLE",
+   "en": "Mobile Suit Ensemble",
+   "zh": "MOBILE SUIT ENSEMBLE",
+   "official": true,
+   "aliases": [
+    "MSE",
+    "MSE扭蛋",
+    "高达MSE扭蛋"
+   ],
+   "note": "名称前已有「機動戦士ガンダム」，zh 只保留系列名；B站WIKI简称 MSE"
+  },
+  {
+   "ja": "専用",
+   "zh": "专用",
+   "official": true,
+   "aliases": [
+    "专用机"
+   ]
+  },
+  {
+   "ja": "ver. A.N.I.M.E.",
+   "en": "ver. A.N.I.M.E.",
+   "zh": "ver. A.N.I.M.E.",
+   "official": true,
+   "aliases": [
+    "ANIME版",
+    "动画版",
+    "A.N.I.M.E.",
+    "动画风"
+   ]
+  },
+  {
+   "ja": "クリア",
+   "en": "Clear",
+   "zh": "透明",
+   "official": true,
+   "aliases": [
+    "透明版",
+    "彩透",
+    "Clear"
+   ]
+  },
+  {
+   "ja": "Gundam Gashapon Merchandise",
+   "zh": "高达扭蛋",
+   "official": false,
+   "aliases": [
+    "扭蛋",
+    "高达扭蛋周边",
+    "Gashapon"
+   ],
+   "note": "catalog subline 字段值"
+  },
+  {
+   "ja": "FW GUNDAM CONVERGE",
+   "en": "FW Gundam Converge",
+   "zh": "FW 高达 CONVERGE",
+   "official": true,
+   "aliases": [
+    "converge",
+    "CONVERGE食玩",
+    "FW食玩",
+    "高达食玩",
+    "CVG",
+    "FWGC"
+   ],
+   "note": "HK 官方称“食玩公仔”，系列名保留英文；B站WIKI简称 FWGC"
+  },
+  {
+   "ja": "ガシャポン戦士",
+   "en": "Gashapon Senshi",
+   "zh": "扭蛋战士",
+   "official": true,
+   "aliases": [
+    "SD高达扭蛋战士",
+    "Gashapon Senshi",
+    "扭蛋SD"
+   ],
+   "note": "万代中国官方称 Gashapon 为“扭蛋”"
+  },
+  {
+   "ja": "ガンダムベース",
+   "en": "The Gundam Base",
+   "zh": "高达基地",
+   "official": true,
+   "aliases": [
+    "THE GUNDAM BASE",
+    "GBASE",
+    "基地"
+   ],
+   "note": "HK gundam.info 繁中官方用语转简体"
+  },
+  {
+   "ja": "ガンダムベース限定",
+   "en": "The Gundam Base Exclusive",
+   "zh": "高达基地限定",
+   "official": true,
+   "aliases": [
+    "基地限定",
+    "基地限",
+    "GBASE限定",
+    "THE GUNDAM BASE",
+    "高達基地限定"
+   ],
+   "note": "HK gundam.info 繁中官方用语转简体"
+  },
+  {
+   "ja": "仕様",
+   "en": "Type/Spec",
+   "zh": "样式",
+   "official": false,
+   "aliases": [
+    "规格",
+    "版"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "プレミアムバンダイ限定",
+   "en": "Premium Bandai Exclusive",
+   "zh": "PREMIUM BANDAI 限定",
+   "official": true,
+   "aliases": [
+    "PB限定",
+    "PB",
+    "P-BANDAI",
+    "网限",
+    "万代网限",
+    "PB网限"
+   ],
+   "note": "官方保留英文店名；B站WIKI作「PB网限」。「魂限」是魂商店，不同渠道"
+  },
+  {
+   "ja": "METAL BUILD",
+   "en": "Metal Build",
+   "zh": "METAL BUILD",
+   "official": true,
+   "aliases": [
+    "MB",
+    "合金成品",
+    "MB合金"
+   ]
+  },
+  {
+   "ja": "号機",
+   "en": "Unit",
+   "zh": "号机",
+   "official": true,
+   "aliases": [
+    "号"
+   ]
+  },
+  {
+   "ja": "METAL ROBOT魂",
+   "en": "Metal Robot Spirits",
+   "zh": "METAL ROBOT魂",
+   "official": true,
+   "aliases": [
+    "MR魂",
+    "合金R魂",
+    "METAL ROBOT"
+   ]
+  },
+  {
+   "ja": "クリアカラー",
+   "en": "Clear Color",
+   "zh": "透明配色",
+   "official": true,
+   "aliases": [
+    "彩透",
+    "彩透版",
+    "透明版",
+    "透明色",
+    "透明",
+    "Clear Color",
+    "CC"
+   ],
+   "note": "港台 gundam.info 官方新闻作「透明配色」（如 HGUC NT高达 A装备[透明配色]）；B站WIKI作「彩透版」"
+  },
+  {
+   "ja": "ガシャポン戦士f",
+   "en": "Gashapon Senshi f",
+   "zh": "扭蛋战士f",
+   "official": true,
+   "aliases": [
+    "扭蛋战士F",
+    "GSF",
+    "扭蛋战士forte前作"
+   ]
+  },
+  {
+   "ja": "HGBF",
+   "en": "HGBF",
+   "zh": "HGBF",
+   "official": true,
+   "aliases": [
+    "高达创战者",
+    "创战者HG",
+    "Build Fighters"
+   ],
+   "note": "《高达创战者》系列 HG"
+  },
+  {
+   "ja": "改",
+   "en": "Kai",
+   "zh": "改",
+   "official": true,
+   "aliases": [
+    "改型",
+    "Custom"
+   ]
+  },
+  {
+   "ja": "PG",
+   "en": "Perfect Grade",
+   "zh": "PG",
+   "official": true,
+   "aliases": [
+    "完美级",
+    "PG完美级",
+    "Perfect Grade"
+   ]
+  },
+  {
+   "ja": "Gフレーム",
+   "en": "G Frame",
+   "zh": "G FRAME",
+   "official": true,
+   "aliases": [
+    "G框架",
+    "GF",
+    "G Frame FA",
+    "GFRAME",
+    "GFrame",
+    "GFrameFA",
+    "高达G FRAME"
+   ],
+   "note": "名称形如「機動戦士ガンダム GフレームFA 01」；B站WIKI作 GFrameFA"
+  },
+  {
+   "ja": "Mobile Suit Gundam G Frame FA",
+   "en": "G Frame FA",
+   "zh": "机动战士高达 G FRAME FA",
+   "official": false,
+   "aliases": [
+    "GFrameFA"
+   ],
+   "note": "catalog subline 字段值"
+  },
+  {
+   "ja": "専用機",
+   "zh": "专用机",
+   "official": false,
+   "aliases": [
+    "专用",
+    "Custom"
+   ],
+   "note": "人名+専用機 → 人名+专用机"
+  },
+  {
+   "ja": "AG",
+   "en": "Advanced Grade",
+   "zh": "AG",
+   "official": true,
+   "aliases": [
+    "Advanced Grade",
+    "AGE系列AG"
+   ]
+  },
+  {
+   "ja": "SD Gundam World",
+   "zh": "SD高达世界",
+   "official": true,
+   "aliases": [
+    "SDW"
+   ],
+   "note": "catalog subline 字段值"
+  },
+  {
+   "ja": "装備",
+   "en": "Equipment",
+   "zh": "装备",
+   "official": false,
+   "aliases": [
+    "装备型"
+   ],
+   "note": "例：アサルトパック装備型→突击背包装备型"
+  },
+  {
+   "ja": "カスタム",
+   "en": "Custom",
+   "zh": "特装型",
+   "official": false,
+   "aliases": [
+    "定制型",
+    "改装型",
+    "Custom"
+   ],
+   "note": "B站高达WIKI作「特装型」（HGCE 火虎特装型）"
+  },
+  {
+   "ja": "Ver.Ka",
+   "en": "Ver.Ka",
+   "zh": "Ver.Ka",
+   "official": true,
+   "aliases": [
+    "卡版",
+    "Ka版",
+    "卡托基版",
+    "卡式",
+    "Ka signature"
+   ],
+   "note": "Hajime Katoki(卡托基肇)设计版本，中文圈俗称卡版"
+  },
+  {
+   "ja": "HGBD",
+   "en": "HGBD",
+   "zh": "HGBD",
+   "official": true,
+   "aliases": [
+    "高达创形者",
+    "创形者HG",
+    "Build Divers"
+   ],
+   "note": "《高达创形者》系列 HG"
+  },
+  {
+   "ja": "GUNDAM UNIVERSE",
+   "en": "Gundam Universe",
+   "zh": "GUNDAM UNIVERSE",
+   "official": true,
+   "aliases": [
+    "GU",
+    "高达宇宙",
+    "高达UNIVERSE"
+   ]
+  },
+  {
+   "ja": "Ver.2.0",
+   "en": "Ver.2.0",
+   "zh": "Ver.2.0",
+   "official": true,
+   "aliases": [
+    "2.0",
+    "2.0版"
+   ]
+  },
+  {
+   "ja": "CONVERGE CORE",
+   "en": "Converge Core",
+   "zh": "CONVERGE CORE",
+   "official": true,
+   "aliases": [
+    "converge core",
+    "CORE",
+    "FWGC核心",
+    "FW GUNDAM CONVERGE CORE"
+   ],
+   "note": "名称前已有 FW GUNDAM；B站WIKI作「FWGC核心」"
+  },
+  {
+   "ja": "コーティング",
+   "en": "Coating",
+   "zh": "镀膜",
+   "official": false,
+   "aliases": [
+    "涂层",
+    "Coating",
+    "电镀"
+   ],
+   "note": "台湾官方新闻多作「鍍膜」，B站WIKI作「涂层」（结构涂层黑色版）"
+  },
+  {
+   "ja": "Ka signature",
+   "en": "Ka signature",
+   "zh": "Ka signature",
+   "official": true,
+   "aliases": [
+    "卡签",
+    "Ka签名",
+    "卡版"
+   ]
+  },
+  {
+   "ja": "フルアーマー",
+   "en": "Full Armor",
+   "zh": "全装甲",
+   "official": true,
+   "aliases": [
+    "FA",
+    "Full Armor"
+   ]
+  },
+  {
+   "ja": "オプションパーツセット",
+   "en": "Option Parts Set",
+   "zh": "配件包",
+   "official": false,
+   "aliases": [
+    "OP件",
+    "选购件",
+    "Option Parts Set",
+    "选配件套装"
+   ],
+   "note": "B站高达WIKI作「配件包」（MB 高达巴巴托斯 配件包）"
+  },
+  {
+   "ja": "量産型",
+   "en": "Mass Production Type",
+   "zh": "量产型",
+   "official": true,
+   "aliases": [
+    "量产",
+    "MP"
+   ]
+  },
+  {
+   "ja": "メタリック",
+   "en": "Metallic",
+   "zh": "金属色",
+   "official": true,
+   "aliases": [
+    "金属色版",
+    "金属版",
+    "Metallic"
+   ]
+  },
+  {
+   "ja": "デストロイモード",
+   "en": "Destroy Mode",
+   "zh": "毁灭模式",
+   "official": true,
+   "aliases": [
+    "毁灭形态",
+    "NT-D",
+    "Destroy Mode",
+    "爆甲",
+    "红框"
+   ],
+   "note": "《高达UC》简中官方译名"
+  },
+  {
+   "ja": "GフレームFA",
+   "en": "G Frame FA",
+   "zh": "G FRAME FA",
+   "official": false,
+   "aliases": [
+    "GFrameFA",
+    "GFFA",
+    "G框架FA"
+   ],
+   "note": "B站高达WIKI作 GFrameFA"
+  },
+  {
+   "ja": "SDW HEROES",
+   "en": "SD Gundam World Heroes",
+   "zh": "SD高达世界 群英集",
+   "official": true,
+   "aliases": [
+    "SDW",
+    "群英集",
+    "SDW HEROES",
+    "SD高达世界",
+    "SD鋼彈世界群英集",
+    "SDW英雄"
+   ],
+   "note": "HK gundam.info 繁中官方「SD鋼彈世界 群英集」转简体；B站WIKI简称「SDW英雄」"
+  },
+  {
+   "ja": "武器セット",
+   "en": "Weapon Set",
+   "zh": "武器套装",
+   "official": false,
+   "aliases": [
+    "武器包",
+    "武器配件",
+    "Weapon Set"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "パック",
+   "en": "Pack",
+   "zh": "背包",
+   "official": false,
+   "aliases": [
+    "Pack",
+    "装备包"
+   ],
+   "note": "例：宇宙用パック→宇宙用背包"
+  },
+  {
+   "ja": "SDガンダムGジェネレーション",
+   "en": "SD Gundam G Generation",
+   "zh": "SD高达G世纪",
+   "official": true,
+   "aliases": [
+    "G世纪",
+    "G世代",
+    "SDGG",
+    "G Generation"
+   ],
+   "note": "游戏官方简中名《SD高达G世纪》系列"
+  },
+  {
+   "ja": "Gジェネレーション",
+   "en": "G Generation",
+   "zh": "G世纪",
+   "official": true,
+   "aliases": [
+    "G世代",
+    "G Generation",
+    "GG"
+   ]
+  },
+  {
+   "ja": "GUNDAM FIX FIGURATION",
+   "en": "GFF",
+   "zh": "GUNDAM FIX FIGURATION",
+   "official": true,
+   "aliases": [
+    "GFF",
+    "高达FIX"
+   ]
+  },
+  {
+   "ja": "カラーVer.",
+   "en": "Color Ver.",
+   "zh": "配色版",
+   "official": false,
+   "aliases": [
+    "配色",
+    "Color Ver."
+   ]
+  },
+  {
+   "ja": "ブースター",
+   "en": "Booster",
+   "zh": "推进器",
+   "official": false,
+   "aliases": [
+    "助推器",
+    "Booster"
+   ]
+  },
+  {
+   "ja": "GUNDAM FIX FIGURATION METAL COMPOSITE",
+   "en": "GFF Metal Composite",
+   "zh": "GUNDAM FIX FIGURATION METAL COMPOSITE",
+   "official": true,
+   "aliases": [
+    "GFFMC",
+    "GFF MC",
+    "GFF合金"
+   ]
+  },
+  {
+   "ja": "HGBC",
+   "en": "HGBC",
+   "zh": "HGBC",
+   "official": true,
+   "aliases": [
+    "创制配件",
+    "HG改件",
+    "改件",
+    "Build Custom"
+   ],
+   "note": "创战者系列的配件/改件包"
+  },
+  {
+   "ja": "クロスシルエット",
+   "en": "Cross Silhouette",
+   "zh": "CROSS SILHOUETTE",
+   "official": true,
+   "aliases": [
+    "CS",
+    "SDCS",
+    "SD CS"
+   ]
+  },
+  {
+   "ja": "STRICT-G",
+   "en": "STRICT-G",
+   "zh": "STRICT-G",
+   "official": true,
+   "aliases": [
+    "STRICT G",
+    "高达服饰"
+   ],
+   "note": "万代官方高达服饰品牌"
+  },
+  {
+   "ja": "SD Cross Silhouette",
+   "zh": "SD高达 CROSS SILHOUETTE",
+   "official": true,
+   "aliases": [
+    "SDCS",
+    "CS"
+   ],
+   "note": "catalog subline 字段值"
+  },
+  {
+   "ja": "ビルダーズパーツ",
+   "en": "Builders Parts",
+   "zh": "创制配件 BUILDERS PARTS",
+   "official": false,
+   "aliases": [
+    "BP",
+    "改件",
+    "补件",
+    "Builders Parts",
+    "建造者配件"
+   ]
+  },
+  {
+   "ja": "プラスクリア外装",
+   "en": "+ Clear Armor",
+   "zh": "+透明外甲",
+   "official": false,
+   "aliases": [
+    "+透明外装",
+    "透明外甲",
+    "Clear外装",
+    "附透明外装"
+   ],
+   "note": "B站高达WIKI作「+透明外甲」（PGU ν高达专用飞翼浮游炮+透明外甲）"
+  },
+  {
+   "ja": "BPHD",
+   "en": "Builders Parts HD",
+   "zh": "BUILDERS PARTS HD",
+   "official": false,
+   "aliases": [
+    "BPHD",
+    "改件HD",
+    "Builders Parts HD"
+   ]
+  },
+  {
+   "ja": "HGBD:R",
+   "en": "HGBD:R",
+   "zh": "HGBD:R",
+   "official": true,
+   "aliases": [
+    "高达创形者Re:RISE",
+    "创形者Re:RISE",
+    "BDR"
+   ]
+  },
+  {
+   "ja": "プチッガイ",
+   "en": "Petit'gguy",
+   "zh": "小熊霸",
+   "official": false,
+   "aliases": [
+    "小熊亚凯",
+    "Petit'gguy",
+    "迷你熊霸"
+   ],
+   "note": "无官方简中名，取常见译法"
+  },
+  {
+   "ja": "高機動型",
+   "en": "High Mobility Type",
+   "zh": "高机动型",
+   "official": true,
+   "aliases": [
+    "高机动",
+    "High Mobility Type"
+   ]
+  },
+  {
+   "ja": "オプションセット",
+   "en": "Option Set",
+   "zh": "配件包",
+   "official": false,
+   "aliases": [
+    "OP件",
+    "选配件套装"
+   ],
+   "note": "B站高达WIKI作「配件包」"
+  },
+  {
+   "ja": "三国創傑伝",
+   "en": "Sangoku Soketsuden",
+   "zh": "三国创杰传",
+   "official": true,
+   "aliases": [
+    "创杰传",
+    "三國創傑傳",
+    "SD三国",
+    "SD高达世界 三国创杰传"
+   ],
+   "note": "名称形如「SD 三国創傑伝 …」；作品官方简中名《SD高达世界 三国创杰传》"
+  },
+  {
+   "ja": "NXEDGE STYLE",
+   "en": "NXEDGE STYLE",
+   "zh": "NXEDGE STYLE",
+   "official": true,
+   "aliases": [
+    "NX",
+    "NXEDGE"
+   ]
+  },
+  {
+   "ja": "ガンプラ",
+   "en": "Gunpla",
+   "zh": "高达模型",
+   "official": true,
+   "aliases": [
+    "钢普拉",
+    "敢达模型",
+    "高達模型",
+    "鋼彈模型",
+    "Gunpla",
+    "胶佬",
+    "拼装模型"
+   ],
+   "note": "万代中国/HK官方称“高达模型”；“钢普拉”为音译俗称"
+  },
+  {
+   "ja": "三国伝",
+   "en": "Sangokuden",
+   "zh": "三国传",
+   "official": true,
+   "aliases": [
+    "BB三国",
+    "三國傳",
+    "Brave Battle Warriors",
+    "BB战士 三国传"
+   ],
+   "note": "名称形如「BB戦士 三国伝 …」，zh 不再重复 BB战士"
+  },
+  {
+   "ja": "HGPG",
+   "en": "HGPG",
+   "zh": "HGPG",
+   "official": true,
+   "aliases": [
+    "小熊霸系列",
+    "Petit'gguy"
+   ],
+   "note": "プチッガイ 系列"
+  },
+  {
+   "ja": "試作",
+   "en": "Prototype",
+   "zh": "试作",
+   "official": true,
+   "aliases": [
+    "试作型",
+    "原型",
+    "Prototype"
+   ]
+  },
+  {
+   "ja": "CONVERGE:CORE",
+   "en": "Converge Core",
+   "zh": "CONVERGE:CORE",
+   "official": true,
+   "aliases": [
+    "converge core",
+    "CORE",
+    "FWGC核心",
+    "CONVERGE CORE"
+   ],
+   "note": "同 CONVERGE CORE"
+  },
+  {
+   "ja": "グロスインジェクション",
+   "en": "Gloss Injection",
+   "zh": "光泽注塑版",
+   "official": false,
+   "aliases": [
+    "光泽注塑",
+    "Gloss Injection",
+    "亮面注塑"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "パーフェクト",
+   "en": "Perfect",
+   "zh": "完美",
+   "official": true,
+   "aliases": [
+    "完美型",
+    "Perfect"
+   ]
+  },
+  {
+   "ja": "EXモデル",
+   "en": "EX Model",
+   "zh": "EX MODEL",
+   "official": true,
+   "aliases": [
+    "EX Model",
+    "EX模型",
+    "舰船模型"
+   ]
+  },
+  {
+   "ja": "ファンネル",
+   "en": "Funnel",
+   "zh": "浮游炮",
+   "official": false,
+   "aliases": [
+    "Funnel",
+    "飞翼浮游炮"
+   ],
+   "note": "B站高达WIKI作「浮游炮」"
+  },
+  {
+   "ja": "スペシャルコーティング",
+   "en": "Special Coating",
+   "zh": "特别涂层版",
+   "official": false,
+   "aliases": [
+    "特殊涂层",
+    "电镀版",
+    "SC",
+    "Special Coating",
+    "特殊镀膜版",
+    "特别镀膜",
+    "特殊电镀版"
+   ],
+   "note": "B站高达WIKI作「特别涂层版」；台湾官方新闻写法不一（特別鍍膜/特殊鍍膜版/特殊電鍍版），故不标官方"
+  },
+  {
+   "ja": "チタニウムフィニッシュ",
+   "en": "Titanium Finish",
+   "zh": "钛合金完成版",
+   "official": false,
+   "aliases": [
+    "钛合金电镀版",
+    "钛电",
+    "钛色",
+    "钛合金",
+    "TF",
+    "Titanium Finish"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "RE/100",
+   "en": "RE/100",
+   "zh": "RE/100",
+   "official": true,
+   "aliases": [
+    "RE",
+    "RE100",
+    "1/100 RE",
+    "Reborn-One Hundred"
+   ]
+  },
+  {
+   "ja": "ENTRY GRADE",
+   "en": "Entry Grade",
+   "zh": "ENTRY GRADE",
+   "official": true,
+   "aliases": [
+    "EG",
+    "入门级",
+    "EG入门级",
+    "Entry Grade"
+   ],
+   "note": "免工具拼装的入门级"
+  },
+  {
+   "ja": "拡張セット",
+   "en": "Expansion Set",
+   "zh": "扩张套装",
+   "official": false,
+   "aliases": [
+    "扩展套装",
+    "扩展包",
+    "Expansion Set"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "ユニコーンVer.",
+   "en": "Unicorn Ver.",
+   "zh": "UC版",
+   "official": false,
+   "aliases": [
+    "独角兽版",
+    "Unicorn Ver."
+   ],
+   "note": "指《机动战士高达UC》登场版本"
+  },
+  {
+   "ja": "ハロプラ",
+   "en": "HaroPla",
+   "zh": "Haro Pla 哈罗模型",
+   "official": false,
+   "aliases": [
+    "哈罗",
+    "哈啰",
+    "HaroPla",
+    "哈罗模型"
+   ]
+  },
+  {
+   "ja": "リアルタイプカラー",
+   "en": "Real Type Color",
+   "zh": "真实配色",
+   "official": false,
+   "aliases": [
+    "真实系配色",
+    "RTC",
+    "Real Type Color",
+    "真实风格配色"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "SDX",
+   "en": "SDX",
+   "zh": "SDX",
+   "official": true,
+   "aliases": [],
+   "note": "魂系 SD 完成品"
+  },
+  {
+   "ja": "武者頑駄無",
+   "en": "Musha Gundam",
+   "zh": "武者顽驮无",
+   "official": true,
+   "aliases": [
+    "武者高达",
+    "武者頑駄無",
+    "武者"
+   ],
+   "note": "SD 武者系列，“顽驮无”为高达的和风写法"
+  },
+  {
+   "ja": "超合金",
+   "en": "Chogokin",
+   "zh": "超合金",
+   "official": true,
+   "aliases": [
+    "合金",
+    "Chogokin"
+   ]
+  },
+  {
+   "ja": "Ver.GFT",
+   "en": "Ver.GFT",
+   "zh": "Ver.GFT",
+   "official": true,
+   "aliases": [
+    "GFT版",
+    "高达前线东京版",
+    "Gundam Front Tokyo"
+   ]
+  },
+  {
+   "ja": "EXスタンダード",
+   "en": "EX-Standard",
+   "zh": "EX-STANDARD",
+   "official": false,
+   "aliases": [
+    "SDEX",
+    "EX标准",
+    "EX Standard"
+   ]
+  },
+  {
+   "ja": "LEGENDBB",
+   "en": "LEGEND BB",
+   "zh": "LEGEND BB",
+   "official": true,
+   "aliases": [
+    "传说BB",
+    "传奇BB"
+   ]
+  },
+  {
+   "ja": "イメージカラー",
+   "en": "Image Color",
+   "zh": "印象配色",
+   "official": false,
+   "aliases": [
+    "印象色",
+    "Image Color"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "リペア",
+   "en": "Repair",
+   "zh": "修复型",
+   "official": false,
+   "aliases": [
+    "修复",
+    "Repair"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "ナラティブVer.",
+   "en": "Narrative Ver.",
+   "zh": "NT版",
+   "official": false,
+   "aliases": [
+    "叙事版",
+    "Narrative Ver."
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "ガシャポン戦士フォルテ",
+   "en": "Gashapon Senshi Forte",
+   "zh": "扭蛋战士forte",
+   "official": true,
+   "aliases": [
+    "扭蛋战士FORTE",
+    "forte"
+   ]
+  },
+  {
+   "ja": "S.H.Figuarts",
+   "en": "S.H.Figuarts",
+   "zh": "S.H.Figuarts",
+   "official": true,
+   "aliases": [
+    "SHF",
+    "SHFiguarts",
+    "人偶可动"
+   ]
+  },
+  {
+   "ja": "エクストラフィニッシュ",
+   "en": "Extra Finish",
+   "zh": "特别完成版",
+   "official": false,
+   "aliases": [
+    "EXTRA FINISH",
+    "电镀版",
+    "特别涂装",
+    "EF"
+   ]
+  },
+  {
+   "ja": "トランザムモード",
+   "en": "Trans-Am Mode",
+   "zh": "TRANS-AM模式",
+   "official": true,
+   "aliases": [
+    "Trans-AM",
+    "红化",
+    "TRANS-AM",
+    "Trans-Am Mode"
+   ]
+  },
+  {
+   "ja": "LIMITED",
+   "en": "Limited",
+   "zh": "限定",
+   "official": true,
+   "aliases": [
+    "Limited",
+    "限定版"
+   ]
+  },
+  {
+   "ja": "ユニコーンモード",
+   "en": "Unicorn Mode",
+   "zh": "独角兽模式",
+   "official": true,
+   "aliases": [
+    "独角兽形态",
+    "未爆甲",
+    "Unicorn Mode"
+   ]
+  },
+  {
+   "ja": "陸戦型",
+   "en": "Ground Type",
+   "zh": "陆战型",
+   "official": true,
+   "aliases": [
+    "陆战",
+    "Ground Type"
+   ]
+  },
+  {
+   "ja": "ノーマル",
+   "en": "Normal",
+   "zh": "普通型",
+   "official": false,
+   "aliases": [
+    "标准型",
+    "通常型",
+    "Normal"
+   ]
+  },
+  {
+   "ja": "MOBILITY JOINT GUNDAM",
+   "en": "Mobility Joint Gundam",
+   "zh": "MOBILITY JOINT GUNDAM",
+   "official": true,
+   "aliases": [
+    "MJ",
+    "MOBILITY JOINT",
+    "可动食玩"
+   ]
+  },
+  {
+   "ja": "クリアカラーバージョン",
+   "en": "Clear Color Ver.",
+   "zh": "透明配色版",
+   "official": true,
+   "aliases": [
+    "彩透版",
+    "透明版",
+    "Clear Color Ver."
+   ]
+  },
+  {
+   "ja": "マーキングプラス",
+   "en": "Marking Plus",
+   "zh": "标识增加版",
+   "official": false,
+   "aliases": [
+    "标记强化",
+    "带水贴版",
+    "Marking Plus",
+    "MARKING PLUS",
+    "标记强化版"
+   ],
+   "note": "B站高达WIKI作「标识增加版」（R魂 葵曼莎 标识增加版）"
+  },
+  {
+   "ja": "ハンド",
+   "en": "Hand",
+   "zh": "手部配件",
+   "official": false,
+   "aliases": [
+    "手型",
+    "手件",
+    "Hand Parts"
+   ]
+  },
+  {
+   "ja": "メッキ",
+   "en": "Plating",
+   "zh": "电镀",
+   "official": true,
+   "aliases": [
+    "电镀版",
+    "镀铬",
+    "Plated"
+   ]
+  },
+  {
+   "ja": "光の翼",
+   "en": "Wings of Light",
+   "zh": "光之翼",
+   "official": false,
+   "aliases": [
+    "光翼",
+    "Wings of Light"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "ミッションパック",
+   "en": "Mission Pack",
+   "zh": "任务背包",
+   "official": true,
+   "aliases": [
+    "背包",
+    "Mission Pack"
+   ]
+  },
+  {
+   "ja": "メガサイズモデル",
+   "en": "Mega Size Model",
+   "zh": "MEGA SIZE MODEL",
+   "official": true,
+   "aliases": [
+    "1/48",
+    "巨型模型",
+    "Mega Size",
+    "1/48大模",
+    "MEGASIZE"
+   ],
+   "note": "名称里已另有 1/48；B站WIKI简称 MEGASIZE"
+  },
+  {
+   "ja": "SDガンダムワールド",
+   "en": "SD Gundam World",
+   "zh": "SD高达世界",
+   "official": true,
+   "aliases": [
+    "SDW",
+    "SD Gundam World"
+   ]
+  },
+  {
+   "ja": "Figuarts mini",
+   "en": "Figuarts mini",
+   "zh": "Figuarts mini",
+   "official": true,
+   "aliases": [
+    "Figuarts迷你"
+   ]
+  },
+  {
+   "ja": "ガンダムちーびー戦士",
+   "zh": "高达 Chibi 战士",
+   "official": false,
+   "aliases": [
+    "chibi战士",
+    "ちーびー"
+   ]
+  },
+  {
+   "ja": "装備型",
+   "en": "Equipped Type",
+   "zh": "装备型",
+   "official": true,
+   "aliases": [
+    "装备"
+   ]
+  },
+  {
+   "ja": "EW版",
+   "en": "Endless Waltz Ver.",
+   "zh": "EW版",
+   "official": true,
+   "aliases": [
+    "无尽华尔兹版",
+    "Endless Waltz",
+    "EW"
+   ]
+  },
+  {
+   "ja": "バーニア",
+   "en": "Vernier",
+   "zh": "喷口",
+   "official": false,
+   "aliases": [
+    "推进器",
+    "喷嘴",
+    "Vernier"
+   ]
+  },
+  {
+   "ja": "SDEX",
+   "en": "SD EX-Standard",
+   "zh": "SDEX",
+   "official": true,
+   "aliases": [
+    "EX-Standard",
+    "SD EX",
+    "SD高达 EX-STANDARD"
+   ],
+   "note": "名称形如「SDEXスタンダード001」"
+  },
+  {
+   "ja": "元祖SDガンダムワールド",
+   "en": "Ganso SD Gundam World",
+   "zh": "元祖SD高达世界",
+   "official": true,
+   "aliases": [
+    "元祖SD",
+    "元祖SDW"
+   ]
+  },
+  {
+   "ja": "輝羅鋼",
+   "zh": "辉罗钢",
+   "official": true,
+   "aliases": [
+    "輝羅鋼",
+    "辉罗钢极彩",
+    "Kiraganė"
+   ],
+   "note": "HK gundam.info 繁中官方用语转简体"
+  },
+  {
+   "ja": "メカニカルクリア",
+   "en": "Mechanical Clear",
+   "zh": "机械透明",
+   "official": false,
+   "aliases": [
+    "机械透明版",
+    "透明外甲版",
+    "Mechanical Clear"
+   ]
+  },
+  {
+   "ja": "メカニックカラー",
+   "en": "Mechanic Color",
+   "zh": "机械配色",
+   "official": false,
+   "aliases": [
+    "Mechanic Color"
+   ]
+  },
+  {
+   "ja": "拡張パーツ",
+   "en": "Expansion Parts",
+   "zh": "扩展配件",
+   "official": false,
+   "aliases": [
+    "扩展件",
+    "配件包",
+    "Expansion Parts"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "REAL TYPE",
+   "en": "Real Type",
+   "zh": "真实配色",
+   "official": false,
+   "aliases": [
+    "真实系"
+   ]
+  },
+  {
+   "ja": "バズーカ",
+   "en": "Bazooka",
+   "zh": "火箭筒",
+   "official": false,
+   "aliases": [
+    "巴祖卡",
+    "Bazooka"
+   ]
+  },
+  {
+   "ja": "LEGEND BB",
+   "en": "LEGEND BB",
+   "zh": "LEGEND BB",
+   "official": true,
+   "aliases": [
+    "LEGENDBB",
+    "传说BB",
+    "传奇BB"
+   ]
+  },
+  {
+   "ja": "メタリックグロスインジェクション",
+   "en": "Metallic Gloss Injection",
+   "zh": "金属光泽注塑版",
+   "official": false,
+   "aliases": [
+    "金属光泽",
+    "光泽注塑",
+    "闪粉版",
+    "金属注塑",
+    "Metallic Gloss Injection",
+    "MGI",
+    "金属光泽射出成型"
+   ],
+   "note": "B站高达WIKI作「金属光泽注塑版」；台湾官方作「金屬光澤射出成型」"
+  },
+  {
+   "ja": "メカニカルバスト",
+   "en": "Mechanical Bust",
+   "zh": "MECHANICAL BUST",
+   "official": true,
+   "aliases": [
+    "机械胸像",
+    "胸像",
+    "Mechanical Bust",
+    "MECHANICAL BUST 机械胸像"
+   ]
+  },
+  {
+   "ja": "ディアクティブモード",
+   "en": "Deactive Mode",
+   "zh": "未启动模式",
+   "official": false,
+   "aliases": [
+    "未启动形态",
+    "灰装",
+    "相转移装甲未启动",
+    "Deactive Mode"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "エフェクトセット",
+   "en": "Effect Set",
+   "zh": "特效件套装",
+   "official": false,
+   "aliases": [
+    "特效件"
+   ]
+  },
+  {
+   "ja": "SELECTION",
+   "en": "Selection",
+   "zh": "SELECTION",
+   "official": false,
+   "aliases": [
+    "精选",
+    "精选集"
+   ]
+  },
+  {
+   "ja": "HGCE",
+   "en": "HGCE",
+   "zh": "HGCE",
+   "official": true,
+   "aliases": [
+    "HG CE",
+    "高级CE",
+    "SEED系列HG",
+    "Cosmic Era"
+   ],
+   "note": "宇宙纪元(SEED)系列 HG"
+  },
+  {
+   "ja": "輝羅鋼極彩",
+   "zh": "辉罗钢极彩",
+   "official": true,
+   "aliases": [
+    "辉罗钢",
+    "極彩",
+    "极彩"
+   ]
+  },
+  {
+   "ja": "コーティングバージョン",
+   "en": "Coating Ver.",
+   "zh": "镀膜版",
+   "official": false,
+   "aliases": [
+    "涂层版",
+    "电镀版"
+   ]
+  },
+  {
+   "ja": "ガンダムベースカラー",
+   "en": "Gundam Base Color",
+   "zh": "高达基地配色",
+   "official": false,
+   "aliases": [
+    "基地配色",
+    "Gundam Base Color"
+   ]
+  },
+  {
+   "ja": "ティターンズ仕様",
+   "en": "Titans Ver.",
+   "zh": "提坦斯样式",
+   "official": false,
+   "aliases": [
+    "提坦斯规格",
+    "迪坦斯样式",
+    "Titans"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "A.O.Z RE-BOOT版",
+   "en": "A.O.Z RE-BOOT Ver.",
+   "zh": "A.O.Z RE-BOOT版",
+   "official": true,
+   "aliases": [
+    "AOZ版",
+    "AOZ RE-BOOT"
+   ]
+  },
+  {
+   "ja": "エフェクトパーツ",
+   "en": "Effect Parts",
+   "zh": "特效件",
+   "official": false,
+   "aliases": [
+    "特效零件",
+    "特效"
+   ]
+  },
+  {
+   "ja": "連邦系",
+   "en": "Federation",
+   "zh": "联邦系",
+   "official": false,
+   "aliases": [
+    "联邦军",
+    "Federation"
+   ]
+  },
+  {
+   "ja": "プラカード",
+   "en": "Placard",
+   "zh": "标牌",
+   "official": false,
+   "aliases": [
+    "名牌",
+    "展示牌",
+    "Placard"
+   ]
+  },
+  {
+   "ja": "ガンダムアーティファクト",
+   "en": "Gundam Artifact",
+   "zh": "高达 ARTIFACT",
+   "official": true,
+   "aliases": [
+    "Artifact",
+    "高达Artifact食玩",
+    "神器",
+    "微缩拼装",
+    "GA"
+   ],
+   "note": "中文圈多直接用英文"
+  },
+  {
+   "ja": "METAL STRUCTURE 解体匠機",
+   "en": "Metal Structure",
+   "zh": "METAL STRUCTURE 解体匠机",
+   "official": true,
+   "aliases": [
+    "解体匠机",
+    "解體匠機",
+    "Metal Structure"
+   ]
+  },
+  {
+   "ja": "再販",
+   "en": "Reissue",
+   "zh": "再版",
+   "official": true,
+   "aliases": [
+    "再贩",
+    "复刻",
+    "再生产"
+   ]
+  },
+  {
+   "ja": "リアルマーキング",
+   "en": "Real Marking",
+   "zh": "真实标记",
+   "official": false,
+   "aliases": [
+    "真实水贴",
+    "Real Marking"
+   ]
+  },
+  {
+   "ja": "Gundam SEED Gashapon Merchandise",
+   "zh": "高达SEED扭蛋",
+   "official": false,
+   "aliases": [
+    "SEED扭蛋"
+   ],
+   "note": "catalog subline 字段值"
+  },
+  {
+   "ja": "ガシャポン戦士NEXT",
+   "zh": "扭蛋战士NEXT",
+   "official": false,
+   "aliases": [
+    "扭蛋战士 NEXT",
+    "Gashapon Senshi NEXT"
+   ]
+  },
+  {
+   "ja": "宇宙用",
+   "en": "Space Use",
+   "zh": "宇宙用",
+   "official": false,
+   "aliases": [
+    "宇宙型",
+    "宇宙战用"
+   ]
+  },
+  {
+   "ja": "FULL MECHANICS",
+   "en": "Full Mechanics",
+   "zh": "FULL MECHANICS",
+   "official": true,
+   "aliases": [
+    "FM",
+    "全机械",
+    "フルメカニクス"
+   ]
+  },
+  {
+   "ja": "最終決戦仕様",
+   "en": "Final Battle Ver.",
+   "zh": "最终决战样式",
+   "official": false,
+   "aliases": [
+    "最终决战版",
+    "最终决战规格",
+    "Final Battle Ver."
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "フルパッケージ",
+   "en": "Full Package",
+   "zh": "全套装",
+   "official": false,
+   "aliases": [
+    "全装备",
+    "Full Package"
+   ]
+  },
+  {
+   "ja": "指揮官機",
+   "en": "Commander Type",
+   "zh": "指挥官机",
+   "official": true,
+   "aliases": [
+    "指挥官型",
+    "指挥官用",
+    "Commander Type"
+   ]
+  },
+  {
+   "ja": "Ver.3.0",
+   "en": "Ver.3.0",
+   "zh": "Ver.3.0",
+   "official": true,
+   "aliases": [
+    "3.0",
+    "3.0版"
+   ]
+  },
+  {
+   "ja": "Re:Coordinate",
+   "en": "Re:Coordinate",
+   "zh": "再协调版",
+   "official": false,
+   "aliases": [
+    "Re配色",
+    "Re:Coordinate"
+   ],
+   "note": "B站高达WIKI作「再协调版」（MR魂 高达巴耶力 再协调版）"
+  },
+  {
+   "ja": "エフェクトパーツセット",
+   "en": "Effect Parts Set",
+   "zh": "特效件套装",
+   "official": false,
+   "aliases": [
+    "特效件",
+    "特效包",
+    "Effect Parts Set"
+   ]
+  },
+  {
+   "ja": "CAPSULE ACTION",
+   "en": "Capsule Action",
+   "zh": "CAPSULE ACTION",
+   "official": false,
+   "aliases": [
+    "扭蛋可动",
+    "可动扭蛋"
+   ]
+  },
+  {
+   "ja": "EXCEED MODEL",
+   "en": "Exceed Model",
+   "zh": "EXCEED MODEL",
+   "official": false,
+   "aliases": [
+    "EXCEED",
+    "头像扭蛋"
+   ]
+  },
+  {
+   "ja": "MGSD",
+   "en": "MGSD",
+   "zh": "MGSD",
+   "official": true,
+   "aliases": [
+    "MG SD",
+    "大师级SD"
+   ]
+  },
+  {
+   "ja": "ハイレゾリューションモデル",
+   "en": "Hi-Resolution Model",
+   "zh": "Hi-Resolution Model",
+   "official": true,
+   "aliases": [
+    "HIRM",
+    "HiRM",
+    "高解析度模型",
+    "高解析"
+   ]
+  },
+  {
+   "ja": "クロスシルエットフレーム",
+   "en": "Cross Silhouette Frame",
+   "zh": "CROSS SILHOUETTE 骨架",
+   "official": true,
+   "aliases": [
+    "CS骨架",
+    "CS框架",
+    "CS身体"
+   ]
+  },
+  {
+   "ja": "カードダス",
+   "en": "Carddass",
+   "zh": "卡片达斯",
+   "official": false,
+   "aliases": [
+    "Carddass",
+    "卡牌",
+    "高达卡"
+   ]
+  },
+  {
+   "ja": "PB限定",
+   "en": "P-Bandai Exclusive",
+   "zh": "PREMIUM BANDAI 限定",
+   "official": true,
+   "aliases": [
+    "PB限定",
+    "网限",
+    "PB网限"
+   ]
+  },
+  {
+   "ja": "トランザムクリア",
+   "en": "Trans-Am Clear",
+   "zh": "Trans-AM透明版",
+   "official": false,
+   "aliases": [
+    "TRANS-AM透明",
+    "红化透明",
+    "Trans-Am Clear"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "グロスインジェクションバージョン",
+   "en": "Gloss Injection Ver.",
+   "zh": "光泽注塑版",
+   "official": false,
+   "aliases": [
+    "光泽注塑"
+   ]
+  },
+  {
+   "ja": "実戦配備カラー",
+   "en": "Combat Deployed Color",
+   "zh": "实战配备配色",
+   "official": false,
+   "aliases": [
+    "实战配色",
+    "实战配备色"
+   ]
+  },
+  {
+   "ja": "ティターンズカラー",
+   "en": "Titans Color",
+   "zh": "提坦斯配色",
+   "official": true,
+   "aliases": [
+    "提坦斯色",
+    "迪坦斯配色",
+    "黑色Mk-II",
+    "Titans Color"
+   ]
+  },
+  {
+   "ja": "エゥーゴ仕様",
+   "en": "AEUG Ver.",
+   "zh": "奥古样式",
+   "official": false,
+   "aliases": [
+    "奥古规格",
+    "AEUG",
+    "白色Mk-II"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "量産機",
+   "zh": "量产机",
+   "official": true,
+   "aliases": [
+    "量产"
+   ]
+  },
+  {
+   "ja": "拡張エフェクトユニット",
+   "en": "Expansion Effect Unit",
+   "zh": "扩展特效件",
+   "official": false,
+   "aliases": [
+    "特效件",
+    "扩展特效",
+    "Expansion Effect Unit"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "FW GUNDAM CONVERGE SB",
+   "zh": "FW GUNDAM CONVERGE SB",
+   "official": false,
+   "aliases": [
+    "FWGC SB",
+    "舰船食玩",
+    "CONVERGE舰船"
+   ],
+   "note": "SB=战舰系列"
+  },
+  {
+   "ja": "最終決戦Ver.",
+   "en": "Final Battle Ver.",
+   "zh": "最终决战版",
+   "official": false,
+   "aliases": [
+    "最终决战样式"
+   ]
+  },
+  {
+   "ja": "バンダイホビーセンター専用エコプラ",
+   "en": "Bandai Hobby Center Ecopla",
+   "zh": "万代模型中心专用 环保模型",
+   "official": false,
+   "aliases": [
+    "环保版",
+    "环保胶",
+    "ECOPLA",
+    "エコプラ",
+    "万代静冈模型工厂",
+    "万代模型工厂专用"
+   ]
+  },
+  {
+   "ja": "エコプラ",
+   "en": "Ecopla",
+   "zh": "环保模型 ECOPLA",
+   "official": false,
+   "aliases": [
+    "环保版",
+    "环保胶",
+    "再生料版"
+   ]
+  },
+  {
+   "ja": "リミテッド",
+   "en": "Limited",
+   "zh": "限定",
+   "official": true,
+   "aliases": [
+    "Limited",
+    "限定版"
+   ]
+  },
+  {
+   "ja": "エクストラフィニッシュバージョン",
+   "en": "Extra Finish Ver.",
+   "zh": "特别完成版",
+   "official": false,
+   "aliases": [
+    "EXTRA FINISH Ver."
+   ]
+  },
+  {
+   "ja": "ロールアウトカラー",
+   "en": "Roll-out Color",
+   "zh": "初次出厂配色",
+   "official": false,
+   "aliases": [
+    "出厂配色",
+    "首发配色",
+    "Roll Out Color"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "明鏡止水",
+   "en": "Meikyo Shisui",
+   "zh": "明镜止水",
+   "official": true,
+   "aliases": [
+    "金身",
+    "明镜止水模式",
+    "Meikyo Shisui"
+   ]
+  },
+  {
+   "ja": "月光蝶",
+   "en": "Moonlight Butterfly",
+   "zh": "月光蝶",
+   "official": true,
+   "aliases": [
+    "Moonlight Butterfly"
+   ]
+  },
+  {
+   "ja": "強化型",
+   "en": "Enhanced Type",
+   "zh": "强化型",
+   "official": true,
+   "aliases": [
+    "强化"
+   ]
+  },
+  {
+   "ja": "リアルタイプver.",
+   "en": "Real Type Ver.",
+   "zh": "真实配色版",
+   "official": false,
+   "aliases": [
+    "真实系配色",
+    "Real Type Ver."
+   ]
+  },
+  {
+   "ja": "ジオン系",
+   "en": "Zeon",
+   "zh": "吉翁系",
+   "official": false,
+   "aliases": [
+    "吉恩系",
+    "自护系",
+    "Zeon"
+   ],
+   "note": "B站高达WIKI作「吉翁」（R魂 伟大吉翁号）"
+  },
+  {
+   "ja": "FG",
+   "en": "First Grade",
+   "zh": "FG",
+   "official": true,
+   "aliases": [
+    "First Grade",
+    "初级"
+   ]
+  },
+  {
+   "ja": "HGAC",
+   "en": "HGAC",
+   "zh": "HGAC",
+   "official": true,
+   "aliases": [
+    "HG AC",
+    "高达W系列HG",
+    "After Colony"
+   ]
+  },
+  {
+   "ja": "HGFC",
+   "en": "HGFC",
+   "zh": "HGFC",
+   "official": true,
+   "aliases": [
+    "HG FC",
+    "G高达系列HG",
+    "Future Century"
+   ]
+  },
+  {
+   "ja": "GUNDAM SIDE-F限定",
+   "en": "Gundam Side-F Exclusive",
+   "zh": "GUNDAM SIDE-F限定",
+   "official": true,
+   "aliases": [
+    "SIDE-F限定",
+    "福冈限定",
+    "福冈高达基地限定"
+   ]
+  },
+  {
+   "ja": "バンダイナムコアミューズメント限定",
+   "en": "Bandai Namco Amusement Exclusive",
+   "zh": "万代南梦宫游乐场限定",
+   "official": false,
+   "aliases": [
+    "景品",
+    "娃娃机限定",
+    "南梦宫限定"
+   ]
+  },
+  {
+   "ja": "アイアンメタリック",
+   "en": "Iron Metallic",
+   "zh": "铁金属色",
+   "official": false,
+   "aliases": [
+    "铁色",
+    "Iron Metallic"
+   ]
+  },
+  {
+   "ja": "ハイパーモード",
+   "en": "Hyper Mode",
+   "zh": "超级模式",
+   "official": false,
+   "aliases": [
+    "Hyper Mode",
+    "金身",
+    "超级形态"
+   ]
+  },
+  {
+   "ja": "一般機",
+   "en": "Mass Production Type",
+   "zh": "一般机",
+   "official": true,
+   "aliases": [
+    "量产机",
+    "普通机"
+   ]
+  },
+  {
+   "ja": "改修型",
+   "en": "Refit Type",
+   "zh": "改修型",
+   "official": true,
+   "aliases": [
+    "改装型"
+   ]
+  },
+  {
+   "ja": "ガンダムサンダーボルト版",
+   "en": "Thunderbolt Ver.",
+   "zh": "雷霆宙域版",
+   "official": false,
+   "aliases": [
+    "雷霆版",
+    "THUNDERBOLT版",
+    "TB版"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "拡張パーツセット",
+   "en": "Expansion Parts Set",
+   "zh": "扩展配件包",
+   "official": false,
+   "aliases": [
+    "扩展配件",
+    "扩展包",
+    "配件包",
+    "Expansion Parts Set"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "ガンダム専用オプションパーツ",
+   "zh": "高达专用配件",
+   "official": false,
+   "aliases": [
+    "专用配件",
+    "高达专用选配件"
+   ]
+  },
+  {
+   "ja": "フィギュア付",
+   "en": "with Figure",
+   "zh": "附人偶",
+   "official": false,
+   "aliases": [
+    "附人物",
+    "带人偶"
+   ]
+  },
+  {
+   "ja": "デカール",
+   "en": "Decal",
+   "zh": "贴纸",
+   "official": true,
+   "aliases": [
+    "水贴",
+    "贴花",
+    "Decal"
+   ]
+  },
+  {
+   "ja": "MGEX",
+   "en": "MGEX",
+   "zh": "MGEX",
+   "official": true,
+   "aliases": [
+    "MG EX",
+    "大师级EX"
+   ]
+  },
+  {
+   "ja": "フルメカニクス",
+   "en": "Full Mechanics",
+   "zh": "FULL MECHANICS",
+   "official": true,
+   "aliases": [
+    "FM",
+    "全机械"
+   ]
+  },
+  {
+   "ja": "Hi-Resolution Model",
+   "en": "Hi-Resolution Model",
+   "zh": "Hi-Resolution Model",
+   "official": true,
+   "aliases": [
+    "HIRM",
+    "HiRM",
+    "高解析度模型",
+    "高解析",
+    "ハイレゾ"
+   ]
+  },
+  {
+   "ja": "U.C.HARD GRAPH",
+   "en": "U.C. Hard Graph",
+   "zh": "U.C. HARD GRAPH",
+   "official": true,
+   "aliases": [
+    "UCHG",
+    "UC硬图"
+   ]
+  },
+  {
+   "ja": "ならぶんです",
+   "zh": "排排站系列",
+   "official": false,
+   "aliases": [
+    "ならぶんです",
+    "排排站",
+    "并排公仔"
+   ]
+  },
+  {
+   "ja": "ゴールドコーティング",
+   "en": "Gold Coating",
+   "zh": "金色电镀",
+   "official": false,
+   "aliases": [
+    "金电",
+    "镀金",
+    "金色电镀版",
+    "Gold Coating",
+    "金色镀膜"
+   ]
+  },
+  {
+   "ja": "フルカラーメッキ",
+   "en": "Full Color Plating",
+   "zh": "全彩电镀",
+   "official": false,
+   "aliases": [
+    "全电镀",
+    "Full Color Plated"
+   ]
+  },
+  {
+   "ja": "メタリックバージョン",
+   "en": "Metallic Ver.",
+   "zh": "金属色版",
+   "official": true,
+   "aliases": [
+    "金属版",
+    "Metallic Ver."
+   ]
+  },
+  {
+   "ja": "GUNDAM THE ORIGIN版",
+   "en": "The Origin Ver.",
+   "zh": "THE ORIGIN版",
+   "official": true,
+   "aliases": [
+    "起源版",
+    "Origin版"
+   ]
+  },
+  {
+   "ja": "拡張ユニット",
+   "en": "Expansion Unit",
+   "zh": "扩展单元",
+   "official": false,
+   "aliases": [
+    "扩展组件"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "サイトレンズ",
+   "en": "Sight Lens",
+   "zh": "镜片",
+   "official": false,
+   "aliases": [
+    "镜片贴",
+    "光学镜片",
+    "Sight Lens"
+   ]
+  },
+  {
+   "ja": "ガンダムデカール",
+   "en": "Gundam Decal",
+   "zh": "高达水贴",
+   "official": false,
+   "aliases": [
+    "GD",
+    "GD水贴",
+    "Gundam Decal",
+    "高达贴纸"
+   ]
+  },
+  {
+   "ja": "覚醒仕様",
+   "en": "Awakening Ver.",
+   "zh": "觉醒样式",
+   "official": false,
+   "aliases": [
+    "觉醒版",
+    "觉醒配色"
+   ]
+  },
+  {
+   "ja": "SDガンダム外伝",
+   "en": "SD Gundam Gaiden",
+   "zh": "SD高达外传",
+   "official": false,
+   "aliases": [
+    "SD外传",
+    "骑士高达外传"
+   ]
+  },
+  {
+   "ja": "ペインティングモデル",
+   "en": "Painting Model",
+   "zh": "涂装版",
+   "official": false,
+   "aliases": [
+    "涂装完成版",
+    "Painting Model",
+    "上色版"
+   ]
+  },
+  {
+   "ja": "HGAW",
+   "en": "HGAW",
+   "zh": "HGAW",
+   "official": true,
+   "aliases": [
+    "HG AW",
+    "高达X系列HG",
+    "After War"
+   ]
+  },
+  {
+   "ja": "PG UNLEASHED",
+   "en": "PG UNLEASHED",
+   "zh": "PG UNLEASHED",
+   "official": true,
+   "aliases": [
+    "PGU",
+    "PG解放",
+    "解放",
+    "完美级解放",
+    "PG Unleashed"
+   ]
+  },
+  {
+   "ja": "超合金の塊",
+   "zh": "超合金之块",
+   "official": true,
+   "aliases": [
+    "超合金块",
+    "超合金之塊",
+    "Chogokin no Katamari"
+   ]
+  },
+  {
+   "ja": "ジャンボカードダス",
+   "en": "Jumbo Carddass",
+   "zh": "巨型卡片达斯",
+   "official": false,
+   "aliases": [
+    "Jumbo Carddass",
+    "大卡"
+   ]
+  },
+  {
+   "ja": "リミテッドエディション",
+   "en": "Limited Edition",
+   "zh": "限定版",
+   "official": true,
+   "aliases": [
+    "Limited Edition",
+    "限量版",
+    "LE"
+   ]
+  },
+  {
+   "ja": "事後販売",
+   "zh": "后续贩售",
+   "official": false,
+   "aliases": [
+    "事后贩售",
+    "补售"
+   ]
+  },
+  {
+   "ja": "パールクリア",
+   "en": "Pearl Clear",
+   "zh": "珍珠透明",
+   "official": false,
+   "aliases": [
+    "珠光透明",
+    "Pearl Clear"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "プラフスキーパーティクルクリア",
+   "en": "Plavsky Particle Clear",
+   "zh": "帕拉夫斯基粒子透明版",
+   "official": false,
+   "aliases": [
+    "粒子透明",
+    "PP透明",
+    "PPクリア",
+    "普拉夫斯基粒子透明版"
+   ],
+   "note": "B站高达WIKI作「帕拉夫斯基粒子透明版」"
+  },
+  {
+   "ja": "アニメカラー",
+   "en": "Anime Color",
+   "zh": "动画配色",
+   "official": false,
+   "aliases": [
+    "动画色",
+    "Anime Color"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "覚醒カラー",
+   "en": "Awakening Color",
+   "zh": "觉醒配色",
+   "official": false,
+   "aliases": [
+    "觉醒色",
+    "Awakening Color"
+   ]
+  },
+  {
+   "ja": "トランザムカラー",
+   "en": "Trans-Am Color",
+   "zh": "Trans-AM配色",
+   "official": false,
+   "aliases": [
+    "TRANS-AM配色",
+    "红化配色",
+    "Trans-Am Color"
+   ]
+  },
+  {
+   "ja": "リサーキュレーションカラー",
+   "en": "Recirculation Color",
+   "zh": "再循环配色",
+   "official": false,
+   "aliases": [
+    "环保配色",
+    "Recirculation Color"
+   ]
+  },
+  {
+   "ja": "フルウェポン",
+   "en": "Full Weapon",
+   "zh": "全武装",
+   "official": false,
+   "aliases": [
+    "全武器",
+    "Full Weapon"
+   ]
+  },
+  {
+   "ja": "実戦配備型",
+   "zh": "实战配备型",
+   "official": false,
+   "aliases": [
+    "实战型"
+   ]
+  },
+  {
+   "ja": "アクションベース",
+   "en": "Action Base",
+   "zh": "ACTION BASE",
+   "official": true,
+   "aliases": [
+    "支架",
+    "地台",
+    "AB支架",
+    "Action Base",
+    "ACTION BASE 支架"
+   ]
+  },
+  {
+   "ja": "設定カラー",
+   "en": "Setting Color",
+   "zh": "设定配色",
+   "official": false,
+   "aliases": [
+    "设定色",
+    "设定配色版"
+   ]
+  },
+  {
+   "ja": "対決セット",
+   "en": "Versus Set",
+   "zh": "对决套装",
+   "official": false,
+   "aliases": [
+    "对决组",
+    "VS套装"
+   ]
+  },
+  {
+   "ja": "21st CENTURY REAL TYPE Ver.",
+   "en": "21st Century Real Type Ver.",
+   "zh": "21世纪真实配色版",
+   "official": false,
+   "aliases": [
+    "21世纪配色",
+    "21st Century Real Type"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "FORMANIA EX",
+   "en": "Formania EX",
+   "zh": "FORMANIA EX",
+   "official": true,
+   "aliases": [
+    "FORMANIA",
+    "胸像"
+   ]
+  },
+  {
+   "ja": "アイアンブラッドコーティング",
+   "en": "Iron-Blooded Coating",
+   "zh": "铁血电镀",
+   "official": false,
+   "aliases": [
+    "铁血涂层",
+    "Iron-Blooded Coating"
+   ]
+  },
+  {
+   "ja": "エゥーゴカラー",
+   "en": "AEUG Color",
+   "zh": "奥古配色",
+   "official": true,
+   "aliases": [
+    "奥古色"
+   ]
+  },
+  {
+   "ja": "連邦カラー",
+   "en": "Federation Color",
+   "zh": "联邦配色",
+   "official": false,
+   "aliases": [
+    "联邦色"
+   ]
+  },
+  {
+   "ja": "LIGHTING MODEL",
+   "en": "Lighting Model",
+   "zh": "亮灯模型",
+   "official": false,
+   "aliases": [
+    "亮灯版",
+    "发光版",
+    "灯组",
+    "LED"
+   ],
+   "note": "B站高达WIKI通行译法"
+  },
+  {
+   "ja": "浮世絵パッケージ",
+   "en": "Ukiyo-e Package",
+   "zh": "浮世绘封绘版",
+   "official": false,
+   "aliases": [
+    "浮世绘盒",
+    "浮世绘版",
+    "浮世绘包装"
+   ],
+   "note": "B站高达WIKI作「浮世绘封绘版」（EG 强袭高达 浮世绘封绘版）"
+  },
+  {
+   "ja": "隊長機",
+   "en": "Leader Type",
+   "zh": "队长机",
+   "official": true,
+   "aliases": [
+    "队长型"
+   ]
+  },
+  {
+   "ja": "試作型",
+   "en": "Prototype",
+   "zh": "试作型",
+   "official": true,
+   "aliases": [
+    "原型机"
+   ]
+  },
+  {
+   "ja": "ウェポンセット",
+   "en": "Weapon Set",
+   "zh": "武器套装",
+   "official": false,
+   "aliases": [
+    "武器包"
+   ]
+  },
+  {
+   "ja": "モビルスタンド",
+   "en": "Mobile Stand",
+   "zh": "MS支架",
+   "official": false,
+   "aliases": [
+    "支架",
+    "Mobile Stand"
+   ]
+  },
+  {
+   "ja": "Re:PACKAGE",
+   "en": "Re:Package",
+   "zh": "Re:PACKAGE",
+   "official": false,
+   "aliases": [
+    "新包装版",
+    "复刻包装"
+   ]
+  },
+  {
+   "ja": "ミニミニカードダス",
+   "en": "Mini Mini Carddass",
+   "zh": "迷你卡片达斯",
+   "official": false,
+   "aliases": [
+    "迷你卡"
+   ]
+  },
+  {
+   "ja": "HGCC",
+   "en": "HGCC",
+   "zh": "HGCC",
+   "official": true,
+   "aliases": [
+    "HG CC",
+    "∀高达系列HG",
+    "Correct Century"
+   ]
+  },
+  {
+   "ja": "PROPLICA",
+   "en": "Proplica",
+   "zh": "PROPLICA",
+   "official": true,
+   "aliases": [
+    "道具复刻",
+    "Proplica"
+   ]
+  },
+  {
+   "ja": "バンダイナムコオフィシャルショップ限定",
+   "zh": "万代南梦宫官方店限定",
+   "official": false,
+   "aliases": [
+    "官方店限定"
+   ]
+  },
+  {
+   "ja": "抽選販売",
+   "zh": "抽选销售",
+   "official": false,
+   "aliases": [
+    "抽选",
+    "抽签贩售"
+   ]
+  },
+  {
+   "ja": "ハーフメカニカルクリア",
+   "en": "Half Mechanical Clear",
+   "zh": "半机械透明",
+   "official": false,
+   "aliases": [
+    "半透明外甲"
+   ]
+  },
+  {
+   "ja": "発光仕様",
+   "zh": "发光样式",
+   "official": false,
+   "aliases": [
+    "发光版",
+    "亮灯"
+   ]
+  },
+  {
+   "ja": "再現パーツ付き",
+   "zh": "附还原配件",
+   "official": false,
+   "aliases": [
+    "还原件"
+   ]
+  },
+  {
+   "ja": "ディスプレイベース",
+   "en": "Display Base",
+   "zh": "展示底座",
+   "official": false,
+   "aliases": [
+    "底座",
+    "地台",
+    "Display Base"
+   ]
+  },
+  {
+   "ja": "初期生産型",
+   "zh": "初期生产型",
+   "official": false,
+   "aliases": [
+    "初期型"
+   ],
+   "note": "B站高达WIKI（HGCE 村雨改 初期生产型）"
+  },
+  {
+   "ja": "HY2M",
+   "en": "HY2M",
+   "zh": "HY2M",
+   "official": true,
+   "aliases": [
+    "发光HG",
+    "HY2M发光模型"
+   ]
+  },
+  {
+   "ja": "超合金魂",
+   "en": "Soul of Chogokin",
+   "zh": "超合金魂",
+   "official": true,
+   "aliases": [
+    "GX",
+    "超合金魂GX"
+   ]
+  },
+  {
+   "ja": "DX超合金",
+   "en": "DX Chogokin",
+   "zh": "DX超合金",
+   "official": true,
+   "aliases": [
+    "DX合金"
+   ]
+  },
+  {
+   "ja": "のっかるんです",
+   "zh": "搭肩系列",
+   "official": false,
+   "aliases": [
+    "のっかるんです",
+    "肩上公仔"
+   ]
+  },
+  {
+   "ja": "イベント限定",
+   "en": "Event Exclusive",
+   "zh": "活动限定",
+   "official": true,
+   "aliases": [
+    "会场限定",
+    "展会限定",
+    "活动限定版"
+   ],
+   "note": "HK gundam.info 繁中官方用语转简体"
+  },
+  {
+   "ja": "ガンプラEXPO限定",
+   "en": "Gunpla EXPO Exclusive",
+   "zh": "高达模型EXPO限定",
+   "official": true,
+   "aliases": [
+    "EXPO限定",
+    "钢普拉EXPO限定",
+    "Gunpla EXPO"
+   ]
+  },
+  {
+   "ja": "スーパークリア",
+   "en": "Super Clear",
+   "zh": "超透明",
+   "official": false,
+   "aliases": [
+    "全透明",
+    "Super Clear"
+   ]
+  },
+  {
+   "ja": "ホワイトパール",
+   "en": "White Pearl",
+   "zh": "珍珠白",
+   "official": false,
+   "aliases": [
+    "珠光白",
+    "White Pearl"
+   ]
+  },
+  {
+   "ja": "PPクリア",
+   "en": "PP Clear",
+   "zh": "帕拉夫斯基粒子透明版",
+   "official": false,
+   "aliases": [
+    "PP透明",
+    "粒子透明",
+    "普拉夫斯基粒子透明版"
+   ]
+  },
+  {
+   "ja": "ゴールドインジェクションカラー",
+   "en": "Gold Injection Color",
+   "zh": "金色注塑配色",
+   "official": false,
+   "aliases": [
+    "金色注塑"
+   ]
+  },
+  {
+   "ja": "覚醒イメージカラー",
+   "zh": "觉醒印象配色",
+   "official": false,
+   "aliases": [
+    "觉醒配色"
+   ]
+  },
+  {
+   "ja": "スーパーモード",
+   "en": "Super Mode",
+   "zh": "超级模式",
+   "official": false,
+   "aliases": [
+    "Super Mode",
+    "金身"
+   ]
+  },
+  {
+   "ja": "水転写式デカール",
+   "en": "Water-slide Decal",
+   "zh": "水转印贴纸",
+   "official": false,
+   "aliases": [
+    "水贴",
+    "水转贴",
+    "Water Decal"
+   ]
+  },
+  {
+   "ja": "ガンダムマーカー",
+   "en": "Gundam Marker",
+   "zh": "高达马克笔",
+   "official": false,
+   "aliases": [
+    "高达笔",
+    "渗线笔",
+    "Gundam Marker"
+   ]
+  },
+  {
+   "ja": "ガンプラスターターセット",
+   "en": "Gunpla Starter Set",
+   "zh": "高达模型入门套装",
+   "official": false,
+   "aliases": [
+    "入门套装",
+    "新手套装",
+    "Starter Set"
+   ]
+  },
+  {
+   "ja": "REAL TYPE COLOR",
+   "en": "Real Type Color",
+   "zh": "真实配色",
+   "official": false,
+   "aliases": [
+    "RTC",
+    "真实系配色"
+   ]
+  },
+  {
+   "ja": "GUNDAM NEXT FUTURE限定",
+   "zh": "GUNDAM NEXT FUTURE限定",
+   "official": false,
+   "aliases": [
+    "NEXT FUTURE限定",
+    "高达未来展限定"
+   ]
+  },
+  {
+   "ja": "SDクロスシルエット",
+   "en": "SD Cross Silhouette",
+   "zh": "SD高达 CROSS SILHOUETTE",
+   "official": true,
+   "aliases": [
+    "SDCS",
+    "CS",
+    "SD CS",
+    "Cross Silhouette"
+   ]
+  },
+  {
+   "ja": "30MM",
+   "en": "30 Minutes Missions",
+   "zh": "30 MINUTES MISSIONS",
+   "official": true,
+   "aliases": [
+    "30MM",
+    "30分钟任务",
+    "三十分钟任务"
+   ]
+  },
+  {
+   "ja": "魂ウェブ商店",
+   "en": "Tamashii Web Shop",
+   "zh": "魂商店",
+   "official": true,
+   "aliases": [
+    "魂限",
+    "魂商店限定",
+    "TAMASHII WEB SHOP"
+   ]
+  },
+  {
+   "ja": "ディスプレイスタンド",
+   "en": "Display Stand",
+   "zh": "展示支架",
+   "official": false,
+   "aliases": [
+    "支架",
+    "地台",
+    "展示台",
+    "Display Stand",
+    "展示架"
+   ]
+  },
+  {
+   "ja": "魂STAGE",
+   "en": "Tamashii Stage",
+   "zh": "魂STAGE",
+   "official": true,
+   "aliases": [
+    "魂支架",
+    "魂台"
+   ]
+  },
+  {
+   "ja": "ドライデカール",
+   "en": "Dry Decal",
+   "zh": "干式贴纸",
+   "official": false,
+   "aliases": [
+    "干贴",
+    "擦贴",
+    "转印贴",
+    "Dry Decal"
+   ]
+  },
+  {
+   "ja": "マーキングシール",
+   "en": "Marking Sticker",
+   "zh": "标记贴纸",
+   "official": false,
+   "aliases": [
+    "贴纸",
+    "Marking Sticker"
+   ]
+  },
+  {
+   "ja": "ガンダムベース限定カラー",
+   "zh": "高达基地限定配色",
+   "official": false,
+   "aliases": [
+    "基地限定配色"
+   ],
+   "note": "B站高达WIKI（PGU RX-78-2 高达 高达基地限定配色）"
+  }
+ ],
+ "words": [
+  {
+   "ja": "ガンダム",
+   "en": "Gundam",
+   "zh": "高达",
+   "official": true,
+   "aliases": [
+    "敢达",
+    "钢弹",
+    "高達",
+    "鋼彈",
+    "Gundam"
+   ],
+   "note": "大陆官方“高达”；港“高達”；台“鋼彈”"
+  },
+  {
+   "ja": "MS",
+   "en": "Mobile Suit",
+   "zh": "MS",
+   "official": true,
+   "aliases": [
+    "机动战士",
+    "机体"
+   ]
+  },
+  {
+   "ja": "機動戦士ガンダム",
+   "en": "Mobile Suit Gundam",
+   "zh": "机动战士高达",
+   "official": true,
+   "aliases": [
+    "机动战士",
+    "Mobile Suit Gundam",
+    "MSG"
+   ]
+  },
+  {
+   "ja": "セット",
+   "en": "Set",
+   "zh": "套装",
+   "official": true,
+   "aliases": [
+    "套组",
+    "Set"
+   ]
+  },
+  {
+   "ja": "ガシャポン",
+   "en": "Gashapon",
+   "zh": "扭蛋",
+   "official": true,
+   "aliases": [
+    "转蛋",
+    "Gashapon",
+    "扭蛋机"
+   ],
+   "note": "万代官方中文“扭蛋”"
+  },
+  {
+   "ja": "版",
+   "en": "Edition",
+   "zh": "版",
+   "official": true,
+   "aliases": [
+    "版本"
+   ]
+  },
+  {
+   "ja": "レッド",
+   "zh": "红色",
+   "official": false,
+   "aliases": [
+    "红",
+    "Red"
+   ]
+  },
+  {
+   "ja": "ブルー",
+   "zh": "蓝色",
+   "official": false,
+   "aliases": [
+    "蓝",
+    "Blue"
+   ]
+  },
+  {
+   "ja": "ホワイト",
+   "zh": "白色",
+   "official": false,
+   "aliases": [
+    "白",
+    "White"
+   ]
+  },
+  {
+   "ja": "DX",
+   "en": "Deluxe",
+   "zh": "DX",
+   "official": true,
+   "aliases": [
+    "豪华版",
+    "DX豪华版"
+   ]
+  },
+  {
+   "ja": "ノンスケール",
+   "en": "Non-scale",
+   "zh": "无比例",
+   "official": true,
+   "aliases": [
+    "NS",
+    "Non-scale",
+    "无比例尺"
+   ]
+  },
+  {
+   "ja": "シリーズ",
+   "zh": "系列",
+   "official": true,
+   "aliases": [
+    "Series"
+   ]
+  },
+  {
+   "ja": "スペシャル",
+   "en": "Special",
+   "zh": "特别",
+   "official": true,
+   "aliases": [
+    "特别版",
+    "Special"
+   ]
+  },
+  {
+   "ja": "ハロ",
+   "en": "Haro",
+   "zh": "哈罗",
+   "official": true,
+   "aliases": [
+    "哈啰",
+    "Haro"
+   ],
+   "note": "吉祥物，非MS"
+  },
+  {
+   "ja": "ゴールド",
+   "zh": "金色",
+   "official": false,
+   "aliases": [
+    "金",
+    "Gold"
+   ]
+  },
+  {
+   "ja": "シャツ",
+   "en": "Shirt",
+   "zh": "衬衫",
+   "official": true,
+   "aliases": [
+    "T恤",
+    "Shirt"
+   ]
+  },
+  {
+   "ja": "スタンダード",
+   "en": "Standard",
+   "zh": "标准",
+   "official": true,
+   "aliases": [
+    "标准版",
+    "Standard"
+   ]
+  },
+  {
+   "ja": "Tシャツ",
+   "en": "T-shirt",
+   "zh": "T恤",
+   "official": true,
+   "aliases": [
+    "T-shirt",
+    "短袖"
+   ]
+  },
+  {
+   "ja": "第",
+   "zh": "第",
+   "official": true,
+   "aliases": []
+  },
+  {
+   "ja": "ブラック",
+   "zh": "黑色",
+   "official": false,
+   "aliases": [
+    "黑",
+    "Black"
+   ]
+  },
+  {
+   "ja": "パッケージ",
+   "en": "Package",
+   "zh": "包装",
+   "official": true,
+   "aliases": [
+    "盒装",
+    "Package"
+   ]
+  },
+  {
+   "ja": "アクリルスタンド",
+   "en": "Acrylic Stand",
+   "zh": "亚克力立牌",
+   "official": true,
+   "aliases": [
+    "立牌",
+    "亚克力",
+    "Acrylic Stand"
+   ]
+  },
+  {
+   "ja": "周年",
+   "en": "Anniversary",
+   "zh": "周年",
+   "official": true,
+   "aliases": [
+    "周年纪念"
+   ]
+  },
+  {
+   "ja": "グリーン",
+   "zh": "绿色",
+   "official": false,
+   "aliases": [
+    "绿",
+    "Green"
+   ]
+  },
+  {
+   "ja": "ラバーマスコット",
+   "en": "Rubber Mascot",
+   "zh": "橡胶挂件",
+   "official": true,
+   "aliases": [
+    "软胶挂件",
+    "橡胶挂饰",
+    "Rubber Mascot"
+   ]
+  },
+  {
+   "ja": "カプセル",
+   "en": "Capsule",
+   "zh": "扭蛋",
+   "official": true,
+   "aliases": [
+    "扭蛋球",
+    "胶囊",
+    "Capsule"
+   ]
+  },
+  {
+   "ja": "付",
+   "en": "with",
+   "zh": "附",
+   "official": true,
+   "aliases": [
+    "附带"
+   ]
+  },
+  {
+   "ja": "カプセルラバーマスコット",
+   "en": "Capsule Rubber Mascot",
+   "zh": "扭蛋橡胶挂件",
+   "official": true,
+   "aliases": [
+    "橡胶挂件",
+    "软胶挂件"
+   ]
+  },
+  {
+   "ja": "フィギュア",
+   "en": "Figure",
+   "zh": "手办",
+   "official": true,
+   "aliases": [
+    "人偶",
+    "模型",
+    "Figure"
+   ]
+  },
+  {
+   "ja": "フラットガシャポン",
+   "en": "Flat Gashapon",
+   "zh": "扁平扭蛋",
+   "official": false,
+   "aliases": [
+    "平面扭蛋",
+    "Flat Gashapon"
+   ]
+  },
+  {
+   "ja": "ポスター",
+   "en": "Poster",
+   "zh": "海报",
+   "official": true,
+   "aliases": [
+    "Poster"
+   ]
+  },
+  {
+   "ja": "グレー",
+   "zh": "灰色",
+   "official": false,
+   "aliases": [
+    "灰",
+    "Gray"
+   ]
+  },
+  {
+   "ja": "発売",
+   "zh": "发售",
+   "official": true,
+   "aliases": [
+    "上市",
+    "Release"
+   ]
+  },
+  {
+   "ja": "ラバーコースター",
+   "en": "Rubber Coaster",
+   "zh": "橡胶杯垫",
+   "official": true,
+   "aliases": [
+    "杯垫",
+    "Rubber Coaster"
+   ]
+  },
+  {
+   "ja": "個入セット",
+   "zh": "个装",
+   "official": true,
+   "aliases": [
+    "整盒",
+    "端盒",
+    "个入套装",
+    "个装套装"
+   ]
+  },
+  {
+   "ja": "機セット",
+   "zh": "机套装",
+   "official": true,
+   "aliases": [
+    "机装"
+   ]
+  },
+  {
+   "ja": "刺繍",
+   "en": "Embroidery",
+   "zh": "刺绣",
+   "official": true,
+   "aliases": [
+    "Embroidery"
+   ]
+  },
+  {
+   "ja": "体セット",
+   "zh": "体套装",
+   "official": true,
+   "aliases": [
+    "只装"
+   ],
+   "note": "例：3体セット → 3体套装"
+  },
+  {
+   "ja": "弾",
+   "en": "Wave",
+   "zh": "弹",
+   "official": true,
+   "aliases": [
+    "第x弹"
+   ],
+   "note": "例：第2弾 → 第2弹"
+  },
+  {
+   "ja": "記念",
+   "en": "Commemorative",
+   "zh": "纪念",
+   "official": true,
+   "aliases": [
+    "纪念版"
+   ]
+  },
+  {
+   "ja": "ピンク",
+   "zh": "粉色",
+   "official": false,
+   "aliases": [
+    "粉",
+    "Pink"
+   ]
+  },
+  {
+   "ja": "Anniversary",
+   "en": "Anniversary",
+   "zh": "周年纪念",
+   "official": true,
+   "aliases": [
+    "周年"
+   ]
+  },
+  {
+   "ja": "LED",
+   "en": "LED",
+   "zh": "LED",
+   "official": true,
+   "aliases": [
+    "灯组",
+    "亮灯"
+   ]
+  },
+  {
+   "ja": "シルバー",
+   "zh": "银色",
+   "official": false,
+   "aliases": [
+    "银",
+    "Silver"
+   ]
+  },
+  {
+   "ja": "ツインセット",
+   "en": "Twin Set",
+   "zh": "双机套装",
+   "official": true,
+   "aliases": [
+    "双人套装",
+    "Twin Set"
+   ]
+  },
+  {
+   "ja": "キャップ",
+   "en": "Cap",
+   "zh": "棒球帽",
+   "official": true,
+   "aliases": [
+    "帽子",
+    "Cap"
+   ]
+  },
+  {
+   "ja": "シール",
+   "en": "Sticker",
+   "zh": "贴纸",
+   "official": true,
+   "aliases": [
+    "Sticker"
+   ]
+  },
+  {
+   "ja": "メタル",
+   "en": "Metal",
+   "zh": "金属",
+   "official": true,
+   "aliases": [
+    "合金",
+    "Metal"
+   ]
+  },
+  {
+   "ja": "メカぐるみ",
+   "zh": "机体毛绒玩偶",
+   "official": false,
+   "aliases": [
+    "机体毛绒",
+    "毛绒机体"
+   ]
+  },
+  {
+   "ja": "キーホルダー",
+   "en": "Keychain",
+   "zh": "钥匙扣",
+   "official": true,
+   "aliases": [
+    "挂件",
+    "钥匙链",
+    "Keychain"
+   ]
+  },
+  {
+   "ja": "トートバッグ",
+   "en": "Tote Bag",
+   "zh": "托特包",
+   "official": true,
+   "aliases": [
+    "帆布包",
+    "Tote Bag"
+   ]
+  },
+  {
+   "ja": "タオル",
+   "en": "Towel",
+   "zh": "毛巾",
+   "official": true,
+   "aliases": [
+    "Towel"
+   ]
+  },
+  {
+   "ja": "BOX",
+   "en": "Box",
+   "zh": "盒",
+   "official": true,
+   "aliases": [
+    "整盒",
+    "端盒"
+   ]
+  },
+  {
+   "ja": "ランナー",
+   "en": "Runner",
+   "zh": "板件",
+   "official": true,
+   "aliases": [
+    "流道",
+    "Runner"
+   ]
+  },
+  {
+   "ja": "ゲート",
+   "en": "Gate",
+   "zh": "水口",
+   "official": true,
+   "aliases": [
+    "Gate"
+   ]
+  },
+  {
+   "ja": "発光",
+   "en": "Light-up",
+   "zh": "发光",
+   "official": true,
+   "aliases": [
+    "亮灯",
+    "LED"
+   ]
+  },
+  {
+   "ja": "ダイキャスト",
+   "en": "Diecast",
+   "zh": "合金",
+   "official": true,
+   "aliases": [
+    "压铸合金",
+    "Diecast"
+   ]
+  },
+  {
+   "ja": "モビルスーツ",
+   "en": "Mobile Suit",
+   "zh": "机动战士",
+   "official": true,
+   "aliases": [
+    "MS",
+    "机体",
+    "Mobile Suit"
+   ]
+  },
+  {
+   "ja": "ぬいぐるみ",
+   "en": "Plush",
+   "zh": "毛绒玩偶",
+   "official": true,
+   "aliases": [
+    "毛绒",
+    "玩偶",
+    "公仔",
+    "Plush"
+   ]
+  },
+  {
+   "ja": "アクリルキーホルダー",
+   "en": "Acrylic Keychain",
+   "zh": "亚克力钥匙扣",
+   "official": true,
+   "aliases": [
+    "亚克力挂件",
+    "挂件"
+   ]
+  },
+  {
+   "ja": "ラバーキーホルダー",
+   "en": "Rubber Keychain",
+   "zh": "橡胶钥匙扣",
+   "official": true,
+   "aliases": [
+    "软胶钥匙扣",
+    "挂件"
+   ]
+  },
+  {
+   "ja": "バスタオル",
+   "en": "Bath Towel",
+   "zh": "浴巾",
+   "official": true,
+   "aliases": [
+    "Bath Towel"
+   ]
+  },
+  {
+   "ja": "ミニチュアコレクション",
+   "en": "Miniature Collection",
+   "zh": "迷你收藏系列",
+   "official": false,
+   "aliases": [
+    "迷你收藏",
+    "Miniature Collection"
+   ]
+  },
+  {
+   "ja": "特典",
+   "en": "Bonus",
+   "zh": "特典",
+   "official": true,
+   "aliases": [
+    "赠品",
+    "Bonus"
+   ]
+  },
+  {
+   "ja": "付属",
+   "en": "Included",
+   "zh": "附带",
+   "official": true,
+   "aliases": [
+    "附",
+    "附赠"
+   ]
+  },
+  {
+   "ja": "ビッグサイズ",
+   "en": "Big Size",
+   "zh": "大尺寸",
+   "official": true,
+   "aliases": [
+    "大号",
+    "Big Size"
+   ]
+  },
+  {
+   "ja": "ガシャポンボックス",
+   "zh": "扭蛋盒",
+   "official": false,
+   "aliases": [
+    "整盒扭蛋",
+    "Gashapon Box"
+   ]
+  },
+  {
+   "ja": "復刻",
+   "zh": "复刻",
+   "official": true,
+   "aliases": [
+    "复刻版",
+    "再版"
+   ]
+  },
+  {
+   "ja": "1/144",
+   "en": "1/144",
+   "zh": "1/144",
+   "official": true,
+   "aliases": [
+    "144",
+    "HG比例"
+   ]
+  },
+  {
+   "ja": "1/100",
+   "en": "1/100",
+   "zh": "1/100",
+   "official": true,
+   "aliases": [
+    "100",
+    "MG比例"
+   ]
+  },
+  {
+   "ja": "1/60",
+   "en": "1/60",
+   "zh": "1/60",
+   "official": true,
+   "aliases": [
+    "60",
+    "PG比例"
+   ]
+  },
+  {
+   "ja": "1/48",
+   "en": "1/48",
+   "zh": "1/48",
+   "official": true,
+   "aliases": [
+    "48"
+   ]
+  },
+  {
+   "ja": "プラモデル",
+   "en": "Plastic Model",
+   "zh": "拼装模型",
+   "official": true,
+   "aliases": [
+    "模型",
+    "胶模",
+    "塑料模型",
+    "Plastic Model"
+   ]
+  },
+  {
+   "ja": "組立式",
+   "en": "Assembly kit",
+   "zh": "拼装",
+   "official": true,
+   "aliases": [
+    "拼装式",
+    "需组装"
+   ]
+  },
+  {
+   "ja": "完成品",
+   "en": "Finished Product",
+   "zh": "成品",
+   "official": true,
+   "aliases": [
+    "完成品",
+    "成品模型",
+    "成品手办"
+   ]
+  },
+  {
+   "ja": "可動フィギュア",
+   "en": "Action Figure",
+   "zh": "可动人偶",
+   "official": true,
+   "aliases": [
+    "可动手办",
+    "可动成品"
+   ]
+  },
+  {
+   "ja": "食玩",
+   "en": "Candy Toy",
+   "zh": "食玩",
+   "official": true,
+   "aliases": [
+    "盒蛋",
+    "Candy Toy"
+   ]
+  },
+  {
+   "ja": "一番くじ",
+   "en": "Ichiban Kuji",
+   "zh": "一番赏",
+   "official": true,
+   "aliases": [
+    "Ichiban Kuji",
+    "一番賞"
+   ]
+  },
+  {
+   "ja": "プライズ",
+   "en": "Prize",
+   "zh": "景品",
+   "official": true,
+   "aliases": [
+    "娃娃机景品",
+    "Prize"
+   ]
+  },
+  {
+   "ja": "缶バッジ",
+   "en": "Can Badge",
+   "zh": "徽章",
+   "official": false,
+   "aliases": [
+    "马口铁徽章",
+    "Can Badge",
+    "吧唧"
+   ],
+   "note": "商品标题多写「徽章/马口铁徽章」，「吧唧」为圈内俗称"
+  },
+  {
+   "ja": "ニッパー",
+   "en": "Nipper",
+   "zh": "剪钳",
+   "official": true,
+   "aliases": [
+    "水口钳",
+    "斜口钳",
+    "模型剪钳",
+    "神之手",
+    "Nipper"
+   ]
+  },
+  {
+   "ja": "塗料",
+   "en": "Paint",
+   "zh": "模型漆",
+   "official": true,
+   "aliases": [
+    "油漆",
+    "涂料",
+    "Paint"
+   ]
+  },
+  {
+   "ja": "スミ入れ",
+   "en": "Panel Lining",
+   "zh": "渗线",
+   "official": true,
+   "aliases": [
+    "勾线",
+    "Panel Line"
+   ]
+  },
+  {
+   "ja": "トップコート",
+   "en": "Top Coat",
+   "zh": "保护漆",
+   "official": true,
+   "aliases": [
+    "消光",
+    "光油",
+    "消光喷",
+    "Top Coat"
+   ]
+  },
+  {
+   "ja": "ヤスリ",
+   "en": "File",
+   "zh": "锉刀",
+   "official": true,
+   "aliases": [
+    "砂纸",
+    "打磨",
+    "File"
+   ]
+  },
+  {
+   "ja": "ステッカー",
+   "en": "Sticker",
+   "zh": "贴纸",
+   "official": true,
+   "aliases": [
+    "Sticker"
+   ]
+  }
+ ]
+}
