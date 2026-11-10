@@ -36,7 +36,7 @@ const OUTPUT = "data/atlas/notify-feed.json";
 const RESTOCKS = "data/atlas/restocks.json";
 
 /** Change reasons the app never notifies about (same list as hobby-atlas lib/notifications/feed_rules.dart). */
-export const QUIET_REASONS = new Set(["image", "name", "series", "product_line", "metadata", "release_found"]);
+export const QUIET_REASONS = new Set(["image", "name", "series", "product_line", "metadata", "release_found", "archive"]);
 
 // ── Same rules as scripts/build_update_feed.mjs (copied: that script runs on import) ──
 function sameJson(left, right) {
@@ -97,6 +97,23 @@ export function watchTagsFor(kit) {
   return [...tags];
 }
 
+/** Archive copies of a shop page (archive.org snapshots read by scripts/import_pbandai_wayback*): extra evidence, not news */
+export const ARCHIVE_SOURCE_IDS = new Set(["p_bandai_wayback"]);
+
+function liveSourceRefs(refs) {
+  return (refs || []).filter((ref) => !ARCHIVE_SOURCE_IDS.has(ref?.source_id));
+}
+
+/** "source" when a real source ref / URL / tag changed, "archive" when only archive refs came or went, else null */
+export function sourceReason(beforeKit, kit) {
+  const live =
+    !sameJson(liveSourceRefs(beforeKit.source_refs), liveSourceRefs(kit.source_refs)) ||
+    !sameJson(beforeKit.source_urls, kit.source_urls) ||
+    !sameJson(beforeKit.tags, kit.tags);
+  if (live) return "source";
+  return sameJson(beforeKit.source_refs, kit.source_refs) ? null : "archive";
+}
+
 export function changeReasons(beforeKit, kit) {
   if (!beforeKit) return ["new"];
   const reasons = new Set();
@@ -109,7 +126,8 @@ export function changeReasons(beforeKit, kit) {
   if (beforeKit.grade_code !== kit.grade_code || beforeKit.subline !== kit.subline || beforeKit.scale !== kit.scale) reasons.add("product_line");
   if (beforeKit.series?.key !== kit.series?.key || beforeKit.work_title !== kit.work_title || beforeKit.universe !== kit.universe) reasons.add("series");
   if (beforeKit.is_limited !== kit.is_limited) reasons.add("limited");
-  if (!sameJson(beforeKit.source_refs, kit.source_refs) || !sameJson(beforeKit.source_urls, kit.source_urls) || !sameJson(beforeKit.tags, kit.tags)) reasons.add("source");
+  const source = sourceReason(beforeKit, kit);
+  if (source) reasons.add(source);
   return reasons.size ? [...reasons] : ["metadata"];
 }
 
@@ -167,7 +185,8 @@ export function itemFromFeed(item) {
 /**
  * Adds what the app's own notification conditions match on (channel · work or character · line):
  * `grade_code` and `groups` (the data/atlas-groups.json groups the kit is in, e.g. a Madoka
- * character). Taken from the current catalog, so items cached from older runs get them too.
+ * character). Taken from the current catalog, so items cached from older runs get them too;
+ * names.ko and series_labels.ko are refreshed the same way.
  */
 export function annotateItems(doc, kits, atlas) {
   // The app's product type (종류) comes from grade_code corrected by the
@@ -186,6 +205,18 @@ export function annotateItems(doc, kits, atlas) {
       if (kit?.grade_code) item.grade_code = kit.grade_code;
       if (kit?.subline) item.subline = kit.subline;
       if (kit?.names?.ja) item.name_ja = kit.names.ja;
+      // The phone notification title is names.ko: take the catalog's current Korean name, not the
+      // one stored when the item first entered the feed (often still Japanese or half translated).
+      const name = koName(kit?.names, "");
+      if (name) item.names = { ko: name };
+      // series_key (the app's series: conditions and SEED / 00 watch) and its label move together,
+      // so a series fixed in the catalog never shows the new label on the old key.
+      if (kit?.series?.key) {
+        item.series_key = kit.series.key;
+        const label = koName(kit.series.labels, "");
+        if (label) item.series_labels = { ko: label };
+        else delete item.series_labels;
+      }
       const ids = groups.get(item.kit_id);
       if (ids?.length) item.groups = [...ids];
     }
