@@ -162,14 +162,14 @@ export const FATE_WORKS = [
   },
   {
     id: "el_melloi",
-    labels: lang("君主·埃尔梅罗伊二世事件簿", "로드 엘멜로이 2세의 사건부", "Lord El-Melloi II Case Files", "ロード・エルメロイⅡ世の事件簿"),
+    labels: lang("君主·埃尔梅罗二世事件簿", "로드 엘멜로이 2세의 사건부", "Lord El-Melloi II Case Files", "ロード・エルメロイⅡ世の事件簿"),
     subtitle: lang("时钟塔", "시계탑", "Clock Tower", "時計塔"),
     wiki_ja: "ロード・エルメロイII世の事件簿",
     wiki_en: "Lord_El-Melloi_II_Case_Files",
     patterns: ["ロード・エルメロイⅱ世の事件簿", "ロードエルメロイⅱ世の事件簿", "ロード エルメロイ", "lord el-melloi", "el-melloi ii case files", "エルメロイⅱ世の事件簿", "エルメロイii世の事件簿"],
     tags: ["lord el-melloi ii case files", "lord el-melloi ii's case files {rail zeppelin} grace note"],
     chars: [
-      ["ロード・エルメロイⅡ世", "Lord El-Melloi II", "埃尔梅罗伊二世", "로드 엘멜로이 2세", "El-Melloi II", "エルメロイⅡ世"],
+      ["ロード・エルメロイⅡ世", "Lord El-Melloi II", "埃尔梅罗二世", "로드 엘멜로이 2세", "El-Melloi II", "エルメロイⅡ世"],
       ["ライネス・エルメロイ・アーチゾルテ", "Reines El-Melloi Archisorte", "莱妮丝·埃尔梅罗伊·阿奇佐尔缇", "라이네스 엘멜로이 아치조르테", "ライネス", "Reines"],
       ["トリムマウ", "Trimmau", "特里姆玛乌", "트림마우"],
       ["スヴィン・グラシュエート", "Svin Glascheit", "斯温·格拉修艾特", "스빈 글라슈에이트"],

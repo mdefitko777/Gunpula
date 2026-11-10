@@ -1,10 +1,12 @@
 import { readFile, writeFile } from "node:fs/promises";
+import { entryMergeTargets, isRenamed, mergeTargets } from "./lib/feed-renames.mjs";
 
 const CATALOG_PATH = "data/kits.json";
 const FEED_PATH = "data/update-feed.json";
 const LITE_FEED_PATH = "data/update-feed-lite.json";
 const SOURCE_HEALTH_PATH = "data/source-health.json";
 const ALIASES_PATH = "data/kit-aliases.json";
+const FIRST_SEEN_PATH = "data/kit-first-seen.json";
 const BACKFILL_AGE_MONTHS = 12;
 const HISTORY_LIMIT = 90;
 const ITEM_LIMIT = 120;
@@ -244,9 +246,24 @@ function entryStats(added, changed, removed) {
   };
 }
 
+// A second run on the same date (the refresh runs on every push) adds its own counts; items over
+// the list cap are only in the counts, so a count is not just the merged list's length (a rerun
+// with nothing new used to cut 2026-11-10's changed_count from 237 to the 120 listed).
+function mergedCount(previous, next, group, mergedItems) {
+  const listed = (entry) => (entry[group] || []).length;
+  const count = (entry) => entry[`${group}_count`] ?? listed(entry);
+  return Math.max(mergedItems.length, count(previous) + count(next) - listed(previous) - listed(next) + mergedItems.length);
+}
+
+const ENTRY_GROUPS = ["added", "changed", "removed", "watched", "merged", "backfilled", "renamed"];
+
 function mergeSameDateEntry(previous, next) {
   if (!previous) {
     return next;
+  }
+  // Nothing new in this run: keep the entry (its counts and stats also cover items over the cap).
+  if (ENTRY_GROUPS.every((group) => !(next[group] || []).length)) {
+    return { ...previous, total_after: next.total_after ?? previous.total_after };
   }
 
   const added = mergeUniqueItems(previous.added || [], next.added || []);
@@ -255,6 +272,7 @@ function mergeSameDateEntry(previous, next) {
   const watched = mergeUniqueItems(previous.watched || [], next.watched || []);
   const merged = mergeUniqueItems(previous.merged || [], next.merged || []);
   const backfilled = mergeUniqueItems(previous.backfilled || [], next.backfilled || []);
+  const renamed = mergeUniqueItems(previous.renamed || [], next.renamed || []);
   const stats = entryStats(added, changed, removed);
 
   return {
@@ -262,12 +280,13 @@ function mergeSameDateEntry(previous, next) {
     ...next,
     total_before: previous.total_before ?? next.total_before,
     total_after: next.total_after ?? previous.total_after,
-    added_count: added.length,
-    changed_count: changed.length,
-    removed_count: removed.length,
-    watched_count: watched.length,
-    merged_count: Math.max(merged.length, (previous.merged_count || 0) + (next.merged_count || 0) - (previous.merged || []).length - (next.merged || []).length + merged.length),
-    backfilled_count: Math.max(backfilled.length, (previous.backfilled_count || 0) + (next.backfilled_count || 0) - (previous.backfilled || []).length - (next.backfilled || []).length + backfilled.length),
+    added_count: mergedCount(previous, next, "added", added),
+    changed_count: mergedCount(previous, next, "changed", changed),
+    removed_count: mergedCount(previous, next, "removed", removed),
+    watched_count: mergedCount(previous, next, "watched", watched),
+    merged_count: mergedCount(previous, next, "merged", merged),
+    backfilled_count: mergedCount(previous, next, "backfilled", backfilled),
+    renamed_count: mergedCount(previous, next, "renamed", renamed),
     premium_bandai_count: stats.premium_bandai_count,
     bbx_count: stats.bbx_count,
     franchise_counts: stats.franchise_counts,
@@ -280,6 +299,7 @@ function mergeSameDateEntry(previous, next) {
     watched: watched.slice(0, ITEM_LIMIT),
     merged: merged.slice(0, ITEM_LIMIT),
     backfilled: backfilled.slice(0, ITEM_LIMIT),
+    renamed: renamed.slice(0, ITEM_LIMIT),
   };
 }
 
@@ -313,11 +333,54 @@ function isBackfill(kit) {
   return released != null && feedMonth != null && released < feedMonth - BACKFILL_AGE_MONTHS;
 }
 
+// A new id for a product the catalog already had (renamed, or relisted after it dropped out) is
+// not news either. The ledger is read before this run stamps it, so today's new ids are not in it.
+const firstSeenBefore = (await readJson(FIRST_SEEN_PATH, { dates: {} }))?.dates || {};
+const renamed = [];
+const todayTargets = mergeTargets(beforeById.keys(), currentById, aliasMap);
+
+function renamedItem(item) {
+  return { ...item, change_type: "renamed", change_reasons: ["renamed"] };
+}
+
+// Entries written before this rule (2026-11-10: nine BEYBLADE X ids) still list such ids as
+// "added": move them out the same way, so the app's 30-day window stops showing them as new.
+function moveRenamedItems(entries) {
+  let moved = 0;
+  for (const feedEntry of entries) {
+    const targets = entryMergeTargets(feedEntry);
+    const out = (feedEntry.added || []).filter((item) => isRenamed(item?.kit_id, feedEntry.date, { firstSeen: firstSeenBefore, targets }));
+    if (!out.length) continue;
+    const ids = new Set(out.map((item) => item.kit_id));
+    feedEntry.added = feedEntry.added.filter((item) => !ids.has(item?.kit_id));
+    feedEntry.added_count = Math.max(feedEntry.added.length, (feedEntry.added_count || 0) - out.length);
+    const watchedBefore = (feedEntry.watched || []).length;
+    if (feedEntry.watched) feedEntry.watched = feedEntry.watched.filter((item) => !(item.change_type === "added" && ids.has(item.kit_id)));
+    if (typeof feedEntry.watched_count === "number") feedEntry.watched_count -= watchedBefore - (feedEntry.watched || []).length;
+    feedEntry.renamed = mergeUniqueItems(feedEntry.renamed || [], out.map(renamedItem)).slice(0, ITEM_LIMIT);
+    feedEntry.renamed_count = (feedEntry.renamed_count || 0) + out.length;
+    // the stats counted them as new items (items over the cap are only in the stats, so subtract)
+    const less = (map, key, n = 1) => {
+      if (!map || !map[key]) return;
+      map[key] = Math.max(0, map[key] - n);
+      if (!map[key]) delete map[key];
+    };
+    less(feedEntry.reason_counts, "new", out.length);
+    for (const item of out) less(feedEntry.franchise_counts, item.franchise);
+    if (typeof feedEntry.bbx_count === "number") feedEntry.bbx_count = Math.max(0, feedEntry.bbx_count - out.filter((item) => item.franchise === "beyblade").length);
+    if (typeof feedEntry.premium_bandai_count === "number") feedEntry.premium_bandai_count = Math.max(0, feedEntry.premium_bandai_count - out.filter((item) => item.is_premium_bandai).length);
+    moved += out.length;
+  }
+  return moved;
+}
+
 for (const kit of currentDoc.kits || []) {
   const beforeKit = beforeById.get(kit.kit_id);
   if (!beforeKit) {
     const item = summarizeKit(kit, "added", changeReasons(null, kit, "added"));
-    (isBackfill(kit) ? backfilled : added).push(item);
+    if (isBackfill(kit)) backfilled.push(item);
+    else if (isRenamed(kit.kit_id, date, { firstSeen: firstSeenBefore, targets: todayTargets })) renamed.push(renamedItem(item));
+    else added.push(item);
   } else if (stableKitFingerprint(beforeKit) !== stableKitFingerprint(kit)) {
     changed.push(summarizeKit(kit, "changed", changeReasons(beforeKit, kit, "changed")));
   }
@@ -345,6 +408,7 @@ const entry = {
   watched_count: watched.length,
   merged_count: merged.length,
   backfilled_count: backfilled.length,
+  renamed_count: renamed.length,
   premium_bandai_count: stats.premium_bandai_count,
   bbx_count: stats.bbx_count,
   franchise_counts: stats.franchise_counts,
@@ -357,6 +421,7 @@ const entry = {
   watched: watched.slice(0, ITEM_LIMIT),
   merged: sortItems(merged).slice(0, ITEM_LIMIT),
   backfilled: sortItems(backfilled).slice(0, ITEM_LIMIT),
+  renamed: sortItems(renamed).slice(0, ITEM_LIMIT),
 };
 
 // Items keep the names they had on the day they entered the feed. Names are often
@@ -381,6 +446,7 @@ function refreshDisplayFields(entries) {
 }
 
 const previousEntries = refreshDisplayFields(previousFeed.entries || []);
+const movedRenames = moveRenamedItems(previousEntries);
 const sameDateEntry = previousEntries.find((item) => item.date === date);
 const entries = [
   mergeSameDateEntry(sameDateEntry, entry),
@@ -417,6 +483,7 @@ const liteFeed = {
     watched: (item.watched || []).slice(0, LITE_ITEM_LIMIT),
     merged: (item.merged || []).slice(0, LITE_ITEM_LIMIT),
     backfilled: (item.backfilled || []).slice(0, LITE_ITEM_LIMIT),
+    renamed: (item.renamed || []).slice(0, LITE_ITEM_LIMIT),
   })),
 };
 await writeFile(LITE_FEED_PATH, `${JSON.stringify(liteFeed, null, 2)}\n`, "utf8");
@@ -428,7 +495,6 @@ await writeFile(LITE_FEED_PATH, `${JSON.stringify(liteFeed, null, 2)}\n`, "utf8"
 // once and never rewritten. A backfill (released more than BACKFILL_AGE_MONTHS
 // before the run) is stamped with its release date, so a product from 2009
 // that a new source brings in does not show up as new.
-const FIRST_SEEN_PATH = "data/kit-first-seen.json";
 function releaseDay(value) {
   const [year, month = "01", day = "01"] = String(value).split("-");
   return `${year}-${month}-${day}`;
@@ -447,5 +513,5 @@ ledger.updated_at = date;
 await writeFile(FIRST_SEEN_PATH, `${JSON.stringify(ledger, null, 2)}\n`, "utf8");
 
 console.log(
-  `Wrote ${feedPath}: +${entry.added_count} (+${entry.backfilled_count} backfilled), changed ${entry.changed_count}, removed ${entry.removed_count} (+${entry.merged_count} merged into another id), watched ${entry.watched_count}. First-seen ledger: +${stamped} stamped.`,
+  `Wrote ${feedPath}: +${entry.added_count} (+${entry.backfilled_count} backfilled), changed ${entry.changed_count}, removed ${entry.removed_count} (+${entry.merged_count} merged into another id, +${entry.renamed_count} renamed or relisted, ${movedRenames} moved out of earlier dates), watched ${entry.watched_count}. First-seen ledger: +${stamped} stamped.`,
 );

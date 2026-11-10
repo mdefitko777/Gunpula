@@ -1,7 +1,7 @@
 // Importer fixes of 2026-11-11: escaped image URLs, Hobby Search cards, the Gashapon Senshi f
 // 1.5 heading, BEYBLADE X ids and limited flags, aliases for folded records, market health.
 import assert from "node:assert/strict";
-import { healthSummary, httpError, sourceStatus } from "./fetch_wanted_market_listings.mjs";
+import { healthReport, healthSummary, httpError, sourceStatus, unhealthySince } from "./fetch_wanted_market_listings.mjs";
 import {
   beybladeCanonicalId,
   beybladeDatabasePages,
@@ -192,5 +192,26 @@ assert.equal(naver404.refused, false);
 const busy = await httpError("Amazon", new Response("<html><title>Service Unavailable</title></html>", { status: 503 }));
 assert.equal(busy.message, "Amazon 503 (Service Unavailable)");
 assert.equal(busy.refused, true);
+// --check-health warns, it does not fail the run: Naver's 404 is a known key problem, Amazon's 503 a polite stop
+{
+  assert.equal(unhealthySince("failing", { status: "failing", since: "2026-11-09T20:10:00Z" }, "2026-11-11T20:10:00Z"), "2026-11-09T20:10:00Z");
+  assert.equal(unhealthySince("failing", { status: "refused", since: "2026-11-09T20:10:00Z" }, "2026-11-11T20:10:00Z"), "2026-11-11T20:10:00Z", "a new state starts a new since");
+  assert.equal(unhealthySince("failing", { attempted: 9, errors: 9 }, "2026-11-11T20:10:00Z"), "2026-11-11T20:10:00Z");
+  assert.equal(unhealthySince("ok", { status: "failing", since: "2026-11-09" }), null);
+  const report = healthReport({
+    sources: {
+      naver_shop: { attempted: 9, matched: 0, errors: 9, status: "failing", since: "2026-11-09T20:10:00Z", last_error: "Naver API 404 (SE05 Invalid search api)" },
+      amazon: { attempted: 1, matched: 0, errors: 1, status: "refused", refused: true, since: "2026-11-11T20:10:00Z", last_error: "Amazon 503 (Service Unavailable)" },
+      joongna: { attempted: 9, matched: 1, errors: 0, status: "ok" },
+    },
+  });
+  assert.equal(report.exitCode, 0, "a broken source is a warning, not a red run");
+  assert.deepEqual(report.unhealthy, ["naver_shop", "amazon"]);
+  assert.equal(report.annotations[0], "::warning title=Market source naver_shop failing since 2026-11-09::9/9 requests failed; last: Naver API 404 (SE05 Invalid search api)");
+  assert.equal(report.annotations[1], "::warning title=Market source amazon refused since 2026-11-11::the site asked us to stop (Amazon 503 (Service Unavailable)); no more requests this run, not a failure");
+  assert.ok(report.summary.includes("- **naver_shop** failing since 2026-11-09: 9/9 requests failed"));
+  assert.equal(healthReport({ sources: { joongna: { status: "ok" } } }).annotations.length, 0);
+  assert.ok(healthSummary({ naver_shop: { attempted: 9, matched: 0, errors: 9, since: "2026-11-09T20:10:00Z" } }).includes("| naver_shop | failing since 2026-11-09 |"));
+}
 
 console.log("import fixes ok");

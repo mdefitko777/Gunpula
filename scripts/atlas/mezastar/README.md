@@ -74,11 +74,11 @@ Printing ids are what the app keeps in the collection (one owned item per langua
 ```
 { schema, updated_at, edition{id, name{}, regions{}, id_scheme, notes?},
   sources:[{name, url, licence, role, status, error?, fetched_at?, seed_snapshot_at?}],
-  sets:[{id, ordinal, series, names{en?,zh_hant?,ko?,ja?},
+  sets:[{id, ordinal, series, names{en?,zh_hant?,zh?,ko?,ja?},
          releases:[{region, local_name, date?, url, checklist?, news?, legacy_date?, legacy_news?, wiki?}],
          counts{total, standard?, regular?, legacy?, promo?, gorgeous?, by_region{KR?,TC?,EN?,JA?}}, anomalies?}],
   tags:[{id, serial?, code?, kind, grade?, grade_src?, grade_group, dex, form?, form_src?, types[], orientation?,
-         names{ko,ja,en,zh_hant}, names_derived?[], sets[], base?, reprint_of?, promo_campaign?, promo_variant?,
+         names{ko,ja,en,zh_hant,zh?}, names_derived?[], sets[], base?, reprint_of?, promo_campaign?, promo_variant?,
          printings:[{id, region, name, img_front?, img_back?, img_thumb?, sets?, url?, variant?, kira?, src?, name_from?, delisted?}],
          stats?{hp,atk,def,spa,spd,spe,energy}, move?{name,type}, move2?, gimmick?, code_source?, anomalies?[], delisted?}],
   aliases?{<old id>: <new id>} }
@@ -95,6 +95,9 @@ Printing ids are what the app keeps in the collection (one owned item per langua
   brackets in ko/ja/zh-Hant (`버드렉스 (백마 탄 모습)`, `우라오스 (연격의 태세)`). Community names (`Charizard Mega X`)
   are not printed names: `names.en` and the community printing's `name` are the species, the form is in `form`.
   Official names are never changed; disagreements with PokeAPI go to `anomalies`.
+  `names.zh` (Simplified, for the app's Chinese UI) is added last by `scripts/atlas/pokemon_zh_names.mjs`: the
+  official zh-Hans name from `data/i18n/zh/pokemon.json` when it matches the printed zh-Hant name character for
+  character, else the printed name converted character by character (`九尾 (阿羅拉的樣子)` → `九尾 (阿罗拉的样子)`).
 * **form**: from the official EN name, else from form markers in the TC/KR name (`武道熊師（連擊流）` → Rapid Strike,
   `蕾冠王 (騎白馬的樣子)` → Ice Rider; `form_src: "TC name"`), else from mezastar-dex. A tag whose form no source gives,
   while the species has forms with other types, is flagged.

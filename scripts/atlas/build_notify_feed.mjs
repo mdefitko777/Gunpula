@@ -21,12 +21,17 @@
 // apply to them: a restocked kit is old by nature. Events marked quiet (the first build's
 // backlog, resales already over) are never items.
 //
+// Renames: a new id for a product the catalog already had (an old id aliased to it the same day,
+// or a first-seen date in data/kit-first-seen.json before the entry date) is not "added" — on
+// 2026-11-10 nine renamed BEYBLADE X ids reached phones as "새 상품" (scripts/lib/feed-renames.mjs).
+//
 //   node scripts/atlas/build_notify_feed.mjs [--days=30] [--max-commits=60] [--rebuild] [--no-git]
 //                                            [--report=path.json] [--output=data/atlas/notify-feed.json]
 import { execFileSync } from "node:child_process";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { entryMergeTargets, isRenamed, mergeTargets } from "../lib/feed-renames.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL("../..", import.meta.url)));
 const CATALOG = "data/kits.json";
@@ -34,6 +39,8 @@ const FEED = "data/update-feed.json";
 const MANIFEST = "data/split/manifest.json";
 const OUTPUT = "data/atlas/notify-feed.json";
 const RESTOCKS = "data/atlas/restocks.json";
+const ALIASES = "data/kit-aliases.json";
+const FIRST_SEEN = "data/kit-first-seen.json";
 
 /** Change reasons the app never notifies about (same list as hobby-atlas lib/notifications/feed_rules.dart). */
 export const QUIET_REASONS = new Set(["image", "name", "series", "product_line", "metadata", "release_found", "archive"]);
@@ -141,15 +148,39 @@ function koName(names, fallback) {
   return n.ko || n.ja || n.en || n.zh || fallback;
 }
 
+/** Languages kept in an item's names: the app's Chinese UI picks zh, ja, en, ko; the others ko first. */
+export const NAME_LANGS = ["ko", "zh", "ja", "en"];
+
+/**
+ * names → { ko (always, with fallbacks), zh, ja, en (when present) }: the only keys the app reads.
+ * en is left out when it is the Japanese name again (326 of 782 items on 2026-11-11): the app
+ * reads ja before en, so the title is the same and the file stays ~10 % smaller.
+ */
+export function itemNames(names, fallback) {
+  const n = names || {};
+  const out = { ko: koName(n, fallback) };
+  for (const lang of NAME_LANGS.slice(1)) if (n[lang]) out[lang] = n[lang];
+  if (out.en && out.en === out.ja) delete out.en;
+  return out;
+}
+
+/** series labels → { ko, zh }, or null without a label */
+export function itemSeriesLabels(labels) {
+  const ko = koName(labels, "");
+  if (!ko) return null;
+  return labels?.zh ? { ko, zh: labels.zh } : { ko };
+}
+
 /**
  * Trimmed item: the keys hobby-atlas FeedItem.fromJson reads, empty / false values left out.
- * (names / series_labels keep only Korean, which the app shows first.)
+ * (names keep ko · zh · ja · en and series_labels ko · zh, for the Korean and Chinese UIs.)
  */
-export function compactItem({ kit_id, change_type, franchise, series_key, names, series_label, release_date, price_jpy, is_limited, is_premium_bandai, watch_tags, change_reasons }) {
+export function compactItem({ kit_id, change_type, franchise, series_key, names, series_labels, release_date, price_jpy, is_limited, is_premium_bandai, watch_tags, change_reasons }) {
   const out = { kit_id, change_type, franchise: franchise || "" };
   if (series_key) out.series_key = series_key;
-  out.names = { ko: koName(names, kit_id) };
-  if (series_label) out.series_labels = { ko: series_label };
+  out.names = itemNames(names, kit_id);
+  const labels = itemSeriesLabels(series_labels);
+  if (labels) out.series_labels = labels;
   if (release_date) out.release_date = release_date;
   if (typeof price_jpy === "number") out.price_jpy = price_jpy;
   if (is_limited === true) out.is_limited = true;
@@ -167,7 +198,7 @@ export function itemFromKit(kit, changeType, reasons) {
     franchise: kit.franchise,
     series_key: kit.series?.key,
     names: kit.names,
-    series_label: koName(kit.series?.labels, ""),
+    series_labels: kit.series?.labels,
     release_date: kit.release_date,
     price_jpy: kit.price_jpy,
     is_limited: kit.is_limited,
@@ -179,14 +210,14 @@ export function itemFromKit(kit, changeType, reasons) {
 
 /** update-feed.json item → trimmed item */
 export function itemFromFeed(item) {
-  return compactItem({ ...item, series_label: koName(item.series_labels, "") });
+  return compactItem(item);
 }
 
 /**
  * Adds what the app's own notification conditions match on (channel · work or character · line):
  * `grade_code` and `groups` (the data/atlas-groups.json groups the kit is in, e.g. a Madoka
  * character). Taken from the current catalog, so items cached from older runs get them too;
- * names.ko and series_labels.ko are refreshed the same way.
+ * names and series_labels are refreshed the same way.
  */
 export function annotateItems(doc, kits, atlas) {
   // The app's product type (종류) comes from grade_code corrected by the
@@ -207,14 +238,13 @@ export function annotateItems(doc, kits, atlas) {
       if (kit?.names?.ja) item.name_ja = kit.names.ja;
       // The phone notification title is names.ko: take the catalog's current Korean name, not the
       // one stored when the item first entered the feed (often still Japanese or half translated).
-      const name = koName(kit?.names, "");
-      if (name) item.names = { ko: name };
+      if (koName(kit?.names, "")) item.names = itemNames(kit.names, item.kit_id);
       // series_key (the app's series: conditions and SEED / 00 watch) and its label move together,
       // so a series fixed in the catalog never shows the new label on the old key.
       if (kit?.series?.key) {
         item.series_key = kit.series.key;
-        const label = koName(kit.series.labels, "");
-        if (label) item.series_labels = { ko: label };
+        const labels = itemSeriesLabels(kit.series.labels);
+        if (labels) item.series_labels = labels;
         else delete item.series_labels;
       }
       const ids = groups.get(item.kit_id);
@@ -240,18 +270,24 @@ export function isBackfill(kit, date) {
 }
 
 /** Two kits.json documents → notifiable items + full counts (same rule as build_update_feed.mjs, no cap).
- *  [date] = the after-document's date; newly found kits released more than 12 months earlier are counted as backfilled, not notified. */
-export function diffCatalogs(beforeDoc, afterDoc, date = afterDoc?.updated_at) {
+ *  [date] = the after-document's date; newly found kits released more than 12 months earlier are counted as backfilled,
+ *  renamed / relisted ids ([aliases] = kit-aliases.json aliases, [firstSeen] = kit-first-seen.json dates) as renamed;
+ *  neither is notified. [targets] = ids an old id was merged into by this diff. */
+export function diffCatalogs(beforeDoc, afterDoc, date = afterDoc?.updated_at, { aliases = {}, firstSeen = {} } = {}) {
   const before = new Map((beforeDoc?.kits || []).map((k) => [k.kit_id, k]));
+  const targets = mergeTargets(before.keys(), new Set((afterDoc?.kits || []).map((k) => k?.kit_id)), aliases);
   const items = [];
   let added = 0;
   let changed = 0;
   let backfilled = 0;
+  let renamed = 0;
   for (const kit of afterDoc?.kits || []) {
     if (!kit?.kit_id) continue;
     const old = before.get(kit.kit_id);
     if (!old && isBackfill(kit, date)) {
       backfilled += 1;
+    } else if (!old && isRenamed(kit.kit_id, date, { firstSeen, targets })) {
+      renamed += 1;
     } else if (!old) {
       added += 1;
       items.push(itemFromKit(kit, "added", ["new"]));
@@ -261,7 +297,7 @@ export function diffCatalogs(beforeDoc, afterDoc, date = afterDoc?.updated_at) {
       if (notifiable("changed", reasons)) items.push(itemFromKit(kit, "changed", reasons));
     }
   }
-  return { items, added, changed, backfilled };
+  return { items, added, changed, backfilled, renamed, targets: [...targets] };
 }
 
 /** One kit per date: "added" wins over "changed", reasons are merged, the later version's fields win. */
@@ -352,8 +388,10 @@ async function readJson(path, fallback = null) {
  *  edgeDates : dates whose first kits.json commit could not be diffed (oldest commit in the window)
  *  since     : oldest date kept (windowStart of the feed dates); empty = the newest [days] dates
  *  restocks  : data/atlas/restocks.json (null = no restock items) · kitsById: the current catalog
+ *  firstSeen : data/kit-first-seen.json dates: an "added" item first seen before its date is a rename and is
+ *              dropped, also from the previous output and update-feed.json (written before the rule)
  */
-export function buildDoc({ feed, manifest, prev, pairs, commits, edgeDates = new Set(), days = 30, since = "", gitOk = true, now = new Date(), restocks = null, kitsById = new Map(), quiet = null }) {
+export function buildDoc({ feed, manifest, prev, pairs, commits, edgeDates = new Set(), days = 30, since = "", gitOk = true, now = new Date(), restocks = null, kitsById = new Map(), quiet = null, firstSeen = {} }) {
   // Maintenance (data/atlas/notify-quiet.json): their kits.json diffs and update-feed dates are not news
   const quietCommits = (quiet?.commits || []).filter(Boolean);
   const quietFeedDates = new Set(quiet?.feed_dates || []);
@@ -383,14 +421,21 @@ export function buildDoc({ feed, manifest, prev, pairs, commits, edgeDates = new
     const pe = prevEntries.get(date);
     const ps = (pairDates.get(date) || []).sort((a, b) => a.at.localeCompare(b.at)); // older first: the later version wins
     const map = new Map();
+    // A rename's "added" copy is skipped before merging (update-feed.json and the previous output may
+    // predate the rule): merged, "added" would win and swallow a same-day change or restock of the kit.
+    const targets = new Set([...entryMergeTargets(fe), ...ps.flatMap((p) => p.targets || [])]);
+    const renamedIn = (list) => new Set((list || []).filter((i) => isRenamed(i?.kit_id, date, { firstSeen, targets })).map((i) => i.kit_id));
+    const fromFeed = renamedIn(fe?.added);
+    const fromPrev = renamedIn(pe?.added);
+    const keep = (it) => !(it.change_type === "added" && isRenamed(it.kit_id, date, { firstSeen, targets }));
     // restock items are placed again below from restocks.json — don't carry the previous output's copy (it may sit on an older date)
     for (const it of [...(pe?.added || []), ...(pe?.changed || [])]) {
-      if (!(it.change_reasons || []).includes("restock")) mergeItem(map, it);
+      if (!(it.change_reasons || []).includes("restock") && keep(it)) mergeItem(map, it);
     }
     for (const it of [...(fe?.added || []), ...(fe?.changed || [])]) {
-      if (notifiable(it.change_type, it.change_reasons)) mergeItem(map, itemFromFeed(it));
+      if (notifiable(it.change_type, it.change_reasons) && keep(it)) mergeItem(map, itemFromFeed(it));
     }
-    for (const p of ps) for (const it of p.items) mergeItem(map, it);
+    for (const p of ps) for (const it of p.items) if (keep(it)) mergeItem(map, it);
     for (const it of restockDates.get(date) || []) mergeItem(map, it);
     const noise = quietReasons.get(date);
     const items = sortItems(
@@ -399,7 +444,14 @@ export function buildDoc({ feed, manifest, prev, pairs, commits, edgeDates = new
     const restockCount = items.filter((i) => i.change_reasons.includes("restock")).length;
     const feedComplete = !!fe && (fe.added || []).length >= (fe.added_count || 0) && (fe.changed || []).length >= (fe.changed_count || 0);
     const gitComplete = gitOk && diffedDates.has(date) && !edgeDates.has(date);
-    const addedCount = Math.max(fe?.added_count || 0, pe?.added_count || 0, ps.reduce((n, p) => n + p.added, 0));
+    // update-feed.json and the previous output may still count the renames (written before the rule):
+    // each count loses only the renames its own list had
+    const addedCount = Math.max(
+      (fe?.added_count || 0) - fromFeed.size,
+      (pe?.added_count || 0) - fromPrev.size,
+      ps.reduce((n, p) => n + p.added, 0),
+      items.filter((i) => i.change_type === "added").length,
+    );
     const changedCount = Math.max(fe?.changed_count || 0, pe?.changed_count || 0, ps.reduce((n, p) => n + p.changed, 0));
     const lastPair = ps.at(-1);
     return {
@@ -467,6 +519,8 @@ async function main() {
   const prevOk = prev?.schema === 1 ? prev : null;
   const restocks = await readJson(RESTOCKS, null);
   const quiet = await readJson("data/atlas/notify-quiet.json", null);
+  const aliases = (await readJson(ALIASES, null))?.aliases || {};
+  const firstSeen = (await readJson(FIRST_SEEN, null))?.dates || {};
   const kitsById = new Map();
   if (restocks?.events?.length) {
     const wanted = new Set(restocks.events.filter((e) => !e.quiet).map((e) => e.kit_id));
@@ -503,11 +557,11 @@ async function main() {
           break;
         }
         const before = readKitsAt(parent.sha);
-        const d = diffCatalogs(before, after, date);
+        const d = diffCatalogs(before, after, date, { aliases, firstSeen });
         pairs.push({ date, at: c.at, sha: c.sha, total: (after.kits || []).length, ...d });
         commits.push({ sha: c.sha, date });
         afterDoc = before;
-        process.stdout.write(`  ${c.sha.slice(0, 8)} ${date}: +${d.added} ~${d.changed} -> ${d.items.length} notifiable\n`);
+        process.stdout.write(`  ${c.sha.slice(0, 8)} ${date}: +${d.added} ~${d.changed}${d.renamed ? ` (${d.renamed} renamed)` : ""} -> ${d.items.length} notifiable\n`);
       }
       if (!list.length) {
         gitOk = false;
@@ -520,7 +574,7 @@ async function main() {
   }
 
   const doc = annotateItems(
-    buildDoc({ feed, manifest, prev: prevOk, pairs, commits, edgeDates, days, since: cutoff, gitOk, restocks, kitsById, quiet }),
+    buildDoc({ feed, manifest, prev: prevOk, pairs, commits, edgeDates, days, since: cutoff, gitOk, restocks, kitsById, quiet, firstSeen }),
     (await readJson(CATALOG, { kits: [] })).kits || [],
     await readJson("data/atlas-groups.json", null),
   );

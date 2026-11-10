@@ -27,6 +27,7 @@ import { fetchBulba, BULBA_SOURCE, bulbaStatus } from "./sources/bulba.mjs";
 import { loadMezastarDex, MD_SOURCE, MD_BULBA_SOURCE } from "./sources/mezastardex.mjs";
 import { mergeIntl, EDITION_INTL } from "./merge-intl.mjs";
 import { mergeJp, EDITION_JP } from "./merge-jp.mjs";
+import { addSimplifiedNames } from "../pokemon_zh_names.mjs";
 
 const args = Object.fromEntries(process.argv.slice(2).map((a) => { const [k, v] = a.replace(/^--/, "").split("="); return [k, v ?? "1"]; }));
 const EDITIONS = (args.edition || "all") === "all" ? ["intl", "jp"] : [args.edition];
@@ -157,6 +158,9 @@ function overlayPrevious(prev, cur, failed) {
 const stableJson = (o) => JSON.stringify({ ...o, updated_at: null, sources: (o.sources || []).map(({ fetched_at, error, seed_snapshot_at, ...s }) => s) });
 
 async function writeIfChanged(file, out, prev, idCheckPrev) {
+  // names.zh (Simplified) next to the sources' zh_hant, before comparing with the previous file
+  const zh = addSimplifiedNames(out);
+  if (zh.missing.length) log(`${path.basename(file)}: no Simplified name for ${zh.missing.length}: ${zh.missing.slice(0, 10).join(", ")}`);
   const errors = checkOutput(out, idCheckPrev);
   if (errors.length) {
     for (const e of errors.slice(0, 20)) log(`${path.basename(file)}: ID CHECK FAILED: ${e}`);

@@ -143,8 +143,26 @@ export function translateName(name, glossary) {
     out.push(ch === "・" ? "·" : ch);
     i += 1;
   }
-  const zh = out.join("").replace(/\s{2,}/g, " ").trim();
+  const zh = out
+    .join("")
+    // a glossary word ending in "Ver." followed by the source's own Ver. (エクストラフィニッシュVer.
+    // read 特别处理版Ver. until 2026-11-11); a version number after it (Ver. Ver.2.0) is kept
+    .replace(/(Ver\.)\s*Ver\.(?![\p{L}\p{N}])/giu, "$1")
+    .replace(/\s{2,}/g, " ")
+    .trim();
   return { zh, matched, complete: !KANA.test(zh) };
+}
+
+// The glossary's name for exactly this Japanese name (no composition), or null: the first of
+// [names] the glossary has as a whole term (ザクⅡ → 扎古Ⅱ, not a translation of its parts).
+export function exactGlossaryName(glossary, ...names) {
+  for (const name of names) {
+    const key = normKey(name);
+    if (!key) continue;
+    const zh = glossary.kata.get(key) ?? glossary.other.get(key);
+    if (zh) return zh;
+  }
+  return null;
 }
 
 // Fan / other-region names of every glossary term found in the name (search only).

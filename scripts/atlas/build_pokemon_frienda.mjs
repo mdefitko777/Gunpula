@@ -34,6 +34,7 @@ import {
   mechanicMentions, mechanicsIn, splitQualifier, nearYear, addDays, weekdayJa,
 } from "./frienda/parse.mjs";
 import { loadPokeApi, POKEAPI_SOURCE, nfkc } from "./frienda/pokeapi.mjs";
+import { addSimplifiedNames } from "./pokemon_zh_names.mjs";
 
 const args = Object.fromEntries(process.argv.slice(2).map((a) => { const m = a.match(/^--([^=]+)(?:=(.*))?$/); return m ? [m[1], m[2] ?? "1"] : [a, "1"]; }));
 const OUT = path.resolve(args.out || "data/atlas/pokemon-frienda.json");
@@ -701,7 +702,7 @@ async function main() {
         "ポケモンセンターバージョン (Pokémon Center / Pokémon Store cabinets, from ベストタッグ2だん) dispenses the same picks as normal cabinets; only cosmetics and charms differ.",
         "'mechanic' (tera / zmove / mega / dynamax / gmax / tag) is set only where the official 注目のフレンダピック / ピックアップ text or the pick name states it; a missing mechanic does not mean the pick has none. 'tera' gives the tera type when the text names it.",
         "Types come from PokeAPI for the resolved form (not verified against Frienda; tera/special picks may differ). Exact ★2 vs ★3 is not published on the official list (rarity 'normal' = ★2・★3).",
-        "Frienda is released only in Japan: names.en / names.ko of the edition, sets and special series are descriptive translations, not official titles; show names.ja first. Pokémon names in en / ko / zh_hant are the official species names (PokeAPI).",
+        "Frienda is released only in Japan: names.en / names.ko of the edition, sets and special series are descriptive translations, not official titles; show names.ja first. Pokémon names in en / ko / zh_hant are the official species names (PokeAPI); zh (Simplified) comes from data/i18n/zh/pokemon.json (scripts/atlas/pokemon_zh_names.mjs).",
         "Promo campaigns: 'ended' comes from the official 終了 banner or from the official end date (end_date, JST) having passed; a campaign without either may still be running while stocks last.",
         WITH_IMAGES ? "img/thumb are hotlinked official image URLs; the site terms ask other sites not to hotlink." : "Image URLs are omitted because the official site asks other sites not to hotlink images; 'url' links each pick's official list page.",
       ],
@@ -712,6 +713,9 @@ async function main() {
     sets,
     picks,
   };
+  // names.zh (Simplified) next to zh_hant, before comparing with the previous file
+  const zh = addSimplifiedNames(data);
+  if (zh.missing.length) console.log(`[frienda] no Simplified name for ${zh.missing.length}: ${zh.missing.slice(0, 10).join(", ")}`);
   if (pages && prev && stripVolatile(prev) === stripVolatile(data)) {
     console.log(`[frienda] unchanged (${picks.length} picks)`);
   } else {

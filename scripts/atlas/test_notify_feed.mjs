@@ -9,6 +9,8 @@ import {
   compactItem,
   diffCatalogs,
   isBackfill,
+  itemNames,
+  itemSeriesLabels,
   itemFromFeed,
   mergeItem,
   notifiable,
@@ -16,6 +18,7 @@ import {
   sourceReason,
   windowStart,
 } from "./build_notify_feed.mjs";
+import { isRenamed } from "../lib/feed-renames.mjs";
 
 const kit = (id, extra = {}) => ({
   kit_id: id,
@@ -89,7 +92,7 @@ assert.equal(notifiable("added", ["new"]), true);
     change_type: "changed",
     franchise: "gundam",
     series_key: "uc",
-    names: { ko: "ko-price" },
+    names: { ko: "ko-price", ja: "ja-price" },
     series_labels: { ko: "UC" },
     release_date: "2026-11",
     price_jpy: 2640,
@@ -126,12 +129,12 @@ assert.equal(notifiable("added", ["new"]), true);
     kit_id: "f1",
     change_type: "changed",
     franchise: "beyblade",
-    names: { ko: "드란소드" },
+    names: { ko: "드란소드", zh: "x", ja: "ドランソード", en: "Dran Sword" },
     price_jpy: 1980,
     is_limited: true,
     change_reasons: ["limited", "image"],
   });
-  assert.deepEqual(compactItem({ kit_id: "n", change_type: "added", names: { ja: "名前" } }).names, { ko: "名前" }, "Korean first, then Japanese");
+  assert.deepEqual(compactItem({ kit_id: "n", change_type: "added", names: { ja: "名前" } }).names, { ko: "名前", ja: "名前" }, "Korean first, then Japanese");
 }
 
 // ── one kit per date: added wins, reasons merge, later fields win ──
@@ -265,7 +268,7 @@ console.log("notify feed backfill: ok");
     change_type: "changed",
     franchise: "gundam",
     series_key: "uc",
-    names: { ko: "ko-hg-rose" },
+    names: { ko: "ko-hg-rose", ja: "ja-hg-rose" },
     series_labels: { ko: "UC" },
     release_date: "2012-03-24",
     price_jpy: 2200,
@@ -368,7 +371,7 @@ console.log("notify feed date_quiet_reasons: ok");
     ],
     null,
   );
-  assert.deepEqual(doc.entries[0].added[0].names, { ko: "건프라 LED 유닛 2개 세트 (초록)" });
+  assert.deepEqual(doc.entries[0].added[0].names, { ko: "건프라 LED 유닛 2개 세트 (초록)", ja: "ガンプラＬＥＤユニット２個セット（緑）" });
   assert.deepEqual(doc.entries[0].added[0].series_labels, { ko: "건프라 툴" });
   assert.equal(doc.entries[0].added[0].series_key, "tools", "the series key moves with its label (app series: conditions, SEED / 00)");
   assert.deepEqual(doc.entries[0].changed[0].names, { ko: "kept" }, "a kit no longer in the catalog keeps its stored name");
@@ -378,3 +381,57 @@ console.log("notify feed date_quiet_reasons: ok");
   assert.equal(doc.entries[0].changed[1].series_key, "seed", "a catalog kit without a series keeps the stored one");
   console.log("notify feed name refresh: ok");
 }
+
+// Chinese UI: items carry names ko · zh · ja · en and series_labels ko · zh from the current catalog
+{
+  const zhKit = kit("z1", { names: { ja: "ドランソード", ko: "드란소드", zh: "龙剑", en: "Dran Sword", fr: "x" }, series: { key: "bx", labels: { ko: "BX", zh: "BX 系列", ja: "BX", en: "BX" } } });
+  const d = diffCatalogs({ kits: [] }, { updated_at: "2026-11-11", kits: [zhKit] });
+  assert.deepEqual(d.items[0].names, { ko: "드란소드", zh: "龙剑", ja: "ドランソード", en: "Dran Sword" }, "only the four languages the app reads");
+  assert.deepEqual(d.items[0].series_labels, { ko: "BX", zh: "BX 系列" });
+  const doc = { entries: [{ added: [{ kit_id: "z1", names: { ko: "옛 이름" }, series_labels: { ko: "옛" } }], changed: [] }] };
+  annotateItems(doc, [zhKit], null);
+  assert.deepEqual(doc.entries[0].added[0].names, { ko: "드란소드", zh: "龙剑", ja: "ドランソード", en: "Dran Sword" }, "cached items get zh too");
+  assert.deepEqual(doc.entries[0].added[0].series_labels, { ko: "BX", zh: "BX 系列" });
+  assert.deepEqual(itemSeriesLabels({ ko: "UC" }), { ko: "UC" });
+  assert.equal(itemSeriesLabels(null), null);
+  assert.deepEqual(itemNames(null, "id-only"), { ko: "id-only" });
+  assert.deepEqual(itemNames({ ja: "BX-01", en: "BX-01", ko: "BX-01 드란소드" }), { ko: "BX-01 드란소드", ja: "BX-01" }, "en equal to ja is left out (the app reads ja first)");
+  console.log("notify feed zh names: ok");
+}
+
+// Renames: 2026-11-10 beyblade-x-bx-00-116 -> beyblade-x-bx00-drgs (first seen 2026-07-08) was pushed as a new item
+{
+  const aliases = { "beyblade-x-bx-00-116": "beyblade-x-bx00-drgs", "old-fold": "fold-target" };
+  const firstSeen = { "beyblade-x-bx00-drgs": "2026-07-08", relisted: "2026-07-21", fresh: "2026-11-10", "fold-target": "2026-11-10" };
+  const before = { kits: [kit("beyblade-x-bx-00-116"), kit("old-fold"), kit("stay")] };
+  const after = { updated_at: "2026-11-10", kits: [kit("beyblade-x-bx00-drgs"), kit("fold-target"), kit("relisted"), kit("fresh"), kit("stay"), kit("unseen")] };
+  const d = diffCatalogs(before, after, "2026-11-10", { aliases, firstSeen });
+  assert.deepEqual(d.items.map((i) => i.kit_id).sort(), ["fresh", "unseen"], "renamed, merge-target and relisted ids are not news");
+  assert.equal(d.added, 2);
+  assert.equal(d.renamed, 3);
+  assert.deepEqual(d.targets.sort(), ["beyblade-x-bx00-drgs", "fold-target"]);
+  assert.equal(isRenamed("fresh", "2026-11-10", { firstSeen }), false, "first seen on the entry date = new");
+  assert.equal(isRenamed("unseen", "2026-11-10", { firstSeen }), false, "not in the ledger yet = new");
+
+  // update-feed.json and the previous output written before the rule still list them as added
+  const added = (id) => ({ kit_id: id, change_type: "added", franchise: "beyblade", names: { ko: id }, change_reasons: ["new"] });
+  const feed = {
+    entries: [{
+      date: "2026-11-10", added_count: 4, changed_count: 0,
+      added: [added("beyblade-x-bx00-drgs"), added("fold-target"), added("fresh"), added("relisted")], changed: [],
+      merged: [{ kit_id: "old-fold", merged_into: "fold-target" }],
+    }],
+  };
+  const prev = { schema: 1, entries: [{ date: "2026-11-10", added_count: 4, changed_count: 0, complete: true, added: feed.entries[0].added, changed: [] }] };
+  const doc = buildDoc({ feed, manifest: { updated_at: "2026-11-10", total: 6 }, prev, pairs: [], commits: [], days: 1, gitOk: false, firstSeen: { ...firstSeen, "fold-target": "2026-11-10" } });
+  assert.deepEqual(doc.entries[0].added.map((i) => i.kit_id), ["fresh"], "cached renames are dropped too");
+  assert.equal(doc.entries[0].added_count, 1, "the count follows");
+  // a same-day price change of a renamed kit is still news: the cached "added" copy must not swallow it
+  const changedToo = buildDoc({
+    feed: { entries: [{ ...feed.entries[0], changed_count: 1, changed: [{ ...added("beyblade-x-bx00-drgs"), change_type: "changed", change_reasons: ["price"] }] }] },
+    manifest: { updated_at: "2026-11-10", total: 6 }, prev: null, pairs: [], commits: [], days: 1, gitOk: false, firstSeen,
+  });
+  assert.deepEqual(changedToo.entries[0].changed.map((i) => [i.kit_id, i.change_reasons]), [["beyblade-x-bx00-drgs", ["price"]]]);
+  assert.equal(changedToo.entries[0].added_count, 1, "the update-feed count loses only its own renames");
+}
+console.log("notify feed renames: ok");

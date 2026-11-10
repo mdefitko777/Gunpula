@@ -9,14 +9,17 @@ import { loadRobots, robotsAllows } from "./lib/robots.mjs";
 //
 // Every request identifies as this project's bot (until 2026-11 the scraped sources got a
 // made-up Chrome user-agent), robots.txt is read first for each host and obeyed, and a
-// 403 / 429 / 503 stops that source for the run. A source that fails for every kit is
-// reported: a table in the GitHub step summary, an ::error:: annotation, and
-// `--check-health` (run as the workflow's last step) exits 1 so the run turns red
-// after the data that did arrive has been committed. Before this, Naver Shopping and
-// Bunjang answered 404 for every query from 2026-10 on and the run stayed green.
+// 403 / 429 / 503 stops that source for the run. A source that fails for every kit, or
+// that asked us to stop, is reported: a table in the GitHub step summary and, from
+// `--check-health` (the workflow's last step), a ::warning:: annotation with the date it
+// has been that way since. Before 2026-11 Naver Shopping and Bunjang answered 404 for every
+// query for weeks and nobody saw it. The check does not turn the run red: Naver's 404 is a
+// key / API-permission problem the owner already knows about, and Amazon's 503 is the site
+// asking us to back off, which the fetch obeys (a red run every day hid real breakage).
 //
 //   node scripts/fetch_wanted_market_listings.mjs                 fetch (exit 0 unless MARKET_STRICT=1)
-//   node scripts/fetch_wanted_market_listings.mjs --check-health  exit 1 when the last fetch had a failing source
+//   node scripts/fetch_wanted_market_listings.mjs --check-health  warn about failing / refused sources
+//                                                                 (exit 1 only when the fetch left no health file)
 
 const rootDir = dirname(dirname(fileURLToPath(import.meta.url)));
 const now = new Date().toISOString();
@@ -321,9 +324,39 @@ export const UNHEALTHY = new Set(["failing", "refused"]);
 export function healthSummary(stats) {
   const rows = Object.entries(stats).map(
     ([id, stat]) =>
-      `| ${id} | ${sourceStatus(stat)} | ${stat.attempted} | ${stat.matched} | ${stat.errors} | ${(stat.last_error || stat.note || "").replace(/\|/g, "/")} |`,
+      `| ${id} | ${sourceStatus(stat)}${stat.since ? ` since ${stat.since.slice(0, 10)}` : ""} | ${stat.attempted} | ${stat.matched} | ${stat.errors} | ${(stat.last_error || stat.note || "").replace(/\|/g, "/")} |`,
   );
   return ["### Market sources", "", "| source | status | asked | matched kits | errors | last error |", "|---|---|---|---|---|---|", ...rows, ""].join("\n");
+}
+
+/**
+ * When an unhealthy source got that way: the previous run's `since` (data/market_auto_listings.json
+ * source_stats) while it stays in the same state, else [now]. Null for a healthy source.
+ */
+export function unhealthySince(status, previous, at = now) {
+  if (!UNHEALTHY.has(status)) return null;
+  return previous?.status === status && previous.since ? previous.since : at;
+}
+
+/**
+ * The health file → what --check-health prints: one ::warning:: annotation per failing or
+ * refused source (with since and the last error), a Markdown list for the step summary, and
+ * the exit code (always 0: a known-broken source is a warning, not a failed run).
+ */
+export function healthReport(doc) {
+  const sources = Object.entries(doc?.sources || {});
+  const unhealthy = sources.filter(([, stat]) => UNHEALTHY.has(stat.status));
+  const since = (stat) => (stat.since ? ` since ${stat.since.slice(0, 10)}` : "");
+  const what = (stat) =>
+    stat.status === "refused"
+      ? `the site asked us to stop (${stat.last_error || "403 / 429 / 503"}); no more requests this run, not a failure`
+      : `${stat.errors}/${stat.attempted} requests failed; last: ${stat.last_error || "?"}`;
+  const annotations = unhealthy.map(([id, stat]) => `::warning title=Market source ${id} ${stat.status}${since(stat)}::${what(stat)}`.replace(/\r?\n/g, " "));
+  const summary = unhealthy.length
+    ? ["#### Market sources to look at", "", ...unhealthy.map(([id, stat]) => `- **${id}** ${stat.status}${since(stat)}: ${what(stat)}`), ""].join("\n")
+    : "Market sources OK.\n";
+  const lines = sources.map(([id, stat]) => `  ${id}: ${stat.status}${since(stat)}${stat.last_error ? ` (${stat.last_error})` : stat.note ? ` (${stat.note})` : ""}`);
+  return { annotations, summary, lines, unhealthy: unhealthy.map(([id]) => id), exitCode: 0 };
 }
 
 async function prepareSources(stats) {
@@ -347,17 +380,17 @@ async function prepareSources(stats) {
   }
 }
 
-async function reportHealth(stats) {
-  const health = Object.fromEntries(Object.entries(stats).map(([id, stat]) => [id, { ...stat, status: sourceStatus(stat) }]));
-  await mkdir(dirname(HEALTH_PATH), { recursive: true });
-  await writeFile(HEALTH_PATH, `${JSON.stringify({ checked_at: now, sources: health }, null, 2)}\n`, "utf8");
-  if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, `${healthSummary(stats)}\n`);
-  const unhealthy = Object.entries(health).filter(([, stat]) => UNHEALTHY.has(stat.status));
-  for (const [id, stat] of unhealthy) {
-    // A workflow annotation on the run page; plain text elsewhere.
-    console.log(`::error title=Market source ${id} ${stat.status}::${stat.errors}/${stat.attempted} requests failed; last: ${stat.last_error || "?"}`);
+/** Writes the health file for --check-health and the step-summary table; stats gain status and since. */
+async function reportHealth(stats, previousStats = {}) {
+  for (const [id, stat] of Object.entries(stats)) {
+    stat.status = sourceStatus(stat);
+    const since = unhealthySince(stat.status, previousStats[id]);
+    if (since) stat.since = since;
   }
-  return unhealthy;
+  await mkdir(dirname(HEALTH_PATH), { recursive: true });
+  await writeFile(HEALTH_PATH, `${JSON.stringify({ checked_at: now, sources: stats }, null, 2)}\n`, "utf8");
+  if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, `${healthSummary(stats)}\n`);
+  return Object.entries(stats).filter(([, stat]) => UNHEALTHY.has(stat.status));
 }
 
 async function checkHealth() {
@@ -365,18 +398,17 @@ async function checkHealth() {
   try {
     doc = JSON.parse(await readFile(HEALTH_PATH, "utf8"));
   } catch {
-    console.log(`No market health file at ${HEALTH_PATH}; run the fetch first.`);
+    // The fetch step always writes it, so this is a crash there (or the step was skipped).
+    console.log(`::error title=Market health missing::No market health file at ${HEALTH_PATH}; the fetch step did not finish.`);
     process.exit(1);
   }
-  const unhealthy = Object.entries(doc.sources || {}).filter(([, stat]) => UNHEALTHY.has(stat.status));
-  for (const [id, stat] of Object.entries(doc.sources || {})) {
-    console.log(`  ${id}: ${stat.status}${stat.last_error ? ` (${stat.last_error})` : stat.note ? ` (${stat.note})` : ""}`);
-  }
-  if (unhealthy.length) {
-    console.log(`Market sources failing: ${unhealthy.map(([id]) => id).join(", ")}.`);
-    process.exit(1);
-  }
-  console.log("Market sources OK.");
+  const report = healthReport(doc);
+  for (const line of report.lines) console.log(line);
+  // Workflow annotations on the run page; plain text elsewhere.
+  for (const line of report.annotations) console.log(line);
+  if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, `${report.summary}\n`);
+  console.log(report.unhealthy.length ? `Market sources to look at: ${report.unhealthy.join(", ")} (warning only).` : "Market sources OK.");
+  process.exitCode = report.exitCode;
 }
 
 async function main() {
@@ -447,13 +479,13 @@ async function main() {
   for (const [id, stat] of Object.entries(stats)) {
     console.log(`  ${id}: ${sourceStatus(stat)} attempted=${stat.attempted} matched_kits=${stat.matched} errors=${stat.errors}${stat.note ? ` (${stat.note})` : ""}`);
   }
-  const unhealthy = await reportHealth(stats);
+  const previous = await readJson(DATA.autoListings, null);
+  const unhealthy = await reportHealth(stats, previous?.source_stats || {});
   if (unhealthy.length && process.env.MARKET_STRICT === "1") process.exitCode = 1;
 
   // Never let a barren run (missing secrets, network outage, blocked runner)
   // clobber previously captured listings: stale prices beat vanished prices.
   if (!listings.length) {
-    const previous = await readJson(DATA.autoListings, null);
     if (previous?.listings?.length) {
       console.warn(`Captured 0 listings but previous file has ${previous.listings.length}; keeping previous data.`);
       return;
@@ -470,7 +502,8 @@ async function main() {
       supabase: Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY && process.env.SYNC_WORKSPACE_ID && process.env.SYNC_WORKSPACE_SECRET),
     },
     source_stats: Object.fromEntries(
-      Object.entries(stats).map(([id, stat]) => [id, { attempted: stat.attempted, matched: stat.matched, errors: stat.errors, status: sourceStatus(stat) }]),
+      // since: when a failing / refused source got that way (carried over by the next run)
+      Object.entries(stats).map(([id, stat]) => [id, { attempted: stat.attempted, matched: stat.matched, errors: stat.errors, status: stat.status, ...(stat.since ? { since: stat.since } : {}) }]),
     ),
     listings,
   });

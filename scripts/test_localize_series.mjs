@@ -85,4 +85,12 @@ const v2 = localizeKit(kit("gundam", "HGUC 1 / 144 V2アサルトバスターガ
 assert.equal(v2.names.ko, "HGUC 1 / 144 V2 어설트 버스터건담");
 assert.equal(v2.names.en, "HGUC 1 / 144 V2 Assault Buster Gundam");
 
+// Chinese series labels (Chinese UI quality check 2026-11-11): the official titles
+{
+  const label = (ja) => SERIES.find((series) => series.labels?.ja === ja)?.labels.zh;
+  assert.equal(label("08小隊"), "08小队", "not 08MS");
+  assert.equal(label("エルメロイII世の事件簿"), "埃尔梅罗二世事件簿");
+  assert.equal(label("複合作品"), "多作品");
+}
+
 console.log("localize series: ok");

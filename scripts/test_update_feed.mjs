@@ -97,4 +97,58 @@ assert.deepEqual(recentFeedKits(feed, { days: 3, displayKitById: (id) => kits.fi
   }
 }
 
+// Renamed / relisted ids are not "added" (2026-11-10: nine BEYBLADE X ids got new ids, first seen 2026-07-08)
+{
+  const dir = mkdtempSync(join(tmpdir(), "update-feed-"));
+  try {
+    mkdirSync(join(dir, "data"));
+    const base = (id) => ({ kit_id: id, franchise: "beyblade", grade_code: "BX", names: { ja: `ja-${id}`, ko: `ko-${id}` }, release_date: "2026-11" });
+    const before = { updated_at: "2026-11-11", kits: [base("beyblade-x-bx-00-116"), base("stay")] };
+    const current = { updated_at: "2026-11-11", kits: [base("beyblade-x-bx00-drgs"), base("relisted"), base("fresh"), base("stay")] };
+    const oldAdded = (id) => ({ kit_id: id, change_type: "added", franchise: "beyblade", names: { ko: id }, change_reasons: ["new"] });
+    writeFileSync(join(dir, "before.json"), JSON.stringify(before));
+    writeFileSync(join(dir, "data/kits.json"), JSON.stringify(current));
+    writeFileSync(join(dir, "data/kit-aliases.json"), JSON.stringify({ aliases: { "beyblade-x-bx-00-116": "beyblade-x-bx00-drgs", "old-cx": "beyblade-x-cx10" } }));
+    writeFileSync(join(dir, "data/kit-first-seen.json"), JSON.stringify({ dates: { "beyblade-x-bx-00-116": "2026-07-08", relisted: "2026-07-21", stay: "2026-07-08", "beyblade-x-cx10": "2026-11-10", "new-1110": "2026-11-10", "old-1110": "2026-07-08" } }));
+    writeFileSync(
+      join(dir, "data/update-feed.json"),
+      JSON.stringify({
+        entries: [{
+          date: "2026-11-10", added_count: 3, merged_count: 1,
+          added: [oldAdded("beyblade-x-cx10"), oldAdded("new-1110"), oldAdded("old-1110")],
+          changed: [], removed: [], watched: [], merged: [{ kit_id: "old-cx", merged_into: "beyblade-x-cx10" }],
+        }],
+      }),
+    );
+    execFileSync(process.execPath, [fileURLToPath(new URL("./build_update_feed.mjs", import.meta.url)), "--before=before.json"], { cwd: dir, stdio: "pipe" });
+    for (const file of ["data/update-feed.json", "data/update-feed-lite.json"]) {
+      const out = JSON.parse(readFileSync(join(dir, file), "utf8"));
+      const today = out.entries.find((e) => e.date === "2026-11-11");
+      assert.deepEqual(today.added.map((i) => i.kit_id), ["fresh"], `${file}: only the id never seen before is new`);
+      assert.deepEqual(today.renamed.map((i) => i.kit_id).sort(), ["beyblade-x-bx00-drgs", "relisted"]);
+      assert.equal(today.renamed_count, 2);
+      assert.equal(today.added_count, 1);
+      const old = out.entries.find((e) => e.date === "2026-11-10");
+      assert.deepEqual(old.added.map((i) => i.kit_id), ["new-1110"], `${file}: an earlier entry loses its merge target and relisted id`);
+      assert.equal(old.added_count, 1);
+      assert.deepEqual(old.renamed.map((i) => i.change_type), ["renamed", "renamed"]);
+    }
+    const ledger = JSON.parse(readFileSync(join(dir, "data/kit-first-seen.json"), "utf8")).dates;
+    assert.equal(ledger.fresh, "2026-11-11");
+    assert.equal(ledger.relisted, "2026-07-21", "first-seen dates are never rewritten");
+    // A rerun on the same date with nothing new keeps the counts (items over the cap live only there)
+    const feedPath = join(dir, "data/update-feed.json");
+    const first = JSON.parse(readFileSync(feedPath, "utf8"));
+    first.entries.find((e) => e.date === "2026-11-11").changed_count = 237;
+    writeFileSync(feedPath, JSON.stringify(first));
+    execFileSync(process.execPath, [fileURLToPath(new URL("./build_update_feed.mjs", import.meta.url))], { cwd: dir, stdio: "pipe" });
+    const rerun = JSON.parse(readFileSync(feedPath, "utf8")).entries.find((e) => e.date === "2026-11-11");
+    assert.equal(rerun.changed_count, 237);
+    assert.equal(rerun.added_count, 1);
+    assert.equal(rerun.renamed_count, 2);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+}
+
 console.log("update-feed tests OK");

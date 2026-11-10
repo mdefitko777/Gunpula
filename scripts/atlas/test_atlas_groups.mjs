@@ -6,6 +6,7 @@ import { readFile } from "node:fs/promises";
 import { armoredCoreClassifier, fateClassifier, madokaClassifier, pokemonClassifier } from "./lib/atlas_groups.mjs";
 import { LINE_COVER_GAPS, LINE_COVER_KINDS, LINE_COVER_SOURCES, OFFICIAL_LINE_HOSTS, parseRobots, pickLineImage, robotsAllows } from "./lib/line_covers.mjs";
 import { buildMatcher, compactKey } from "./lib/textmatch.mjs";
+import { FATE_WORKS } from "./fate_works.mjs";
 
 const json = async (file) => JSON.parse(await readFile(new URL(`../../${file}`, import.meta.url), "utf8"));
 const roster = await json("data/atlas/fate-roster.json");
@@ -187,5 +188,13 @@ for (const line of ["gundam:HG", "gundam:MG", "gundam:RG", "gundam:PG", "gundam:
   assert.ok(seenLines.has(line), `line cover ${line} missing`);
 }
 checks += 2;
+
+// Official Simplified title (B站《埃尔梅罗二世事件簿》), not 埃尔梅罗伊
+{
+  const work = FATE_WORKS.find((w) => w.id === "el_melloi");
+  assert.equal(work.labels.zh, "君主·埃尔梅罗二世事件簿");
+  assert.equal(work.chars[0][2], "埃尔梅罗二世");
+  checks += 2;
+}
 
 console.log(`atlas groups: ${checks} checks passed`);

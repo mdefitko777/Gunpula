@@ -315,7 +315,7 @@ const SERIES = [
   {
     key: "08ms",
     sort: 300,
-    labels: { zh: "08MS", en: "08MS", ja: "08小隊", ko: "08소대" },
+    labels: { zh: "08小队", en: "08MS", ja: "08小隊", ko: "08소대" },
     universe: "UC",
     pattern: /08th MS Team|08小隊|Ez-8|陸戦型|グフカスタム/i,
   },
@@ -418,7 +418,7 @@ const SERIES = [
   {
     key: "fate_el_melloi",
     sort: 439,
-    labels: { zh: "埃尔梅罗伊II世事件簿", en: "El-Melloi II Case Files", ja: "エルメロイII世の事件簿", ko: "엘멜로이 2세의 사건부" },
+    labels: { zh: "埃尔梅罗二世事件簿", en: "El-Melloi II Case Files", ja: "エルメロイII世の事件簿", ko: "엘멜로이 2세의 사건부" },
     universe: "Fate",
     pattern: /(?!)/,
   },
@@ -519,7 +519,7 @@ const SERIES = [
   {
     key: "mixed",
     sort: 910,
-    labels: { zh: "混合", en: "Mixed", ja: "複合作品", ko: "혼합" },
+    labels: { zh: "多作品", en: "Mixed", ja: "複合作品", ko: "혼합" },
     universe: "Mixed",
     pattern: /\bMixed\b|Mixed Gundam Works|複合作品|混合|혼합|SELECTION|MEMORIAL|OPERATION|REVIVE|セット|SET/i,
   },

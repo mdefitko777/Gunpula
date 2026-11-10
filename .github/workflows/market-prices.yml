@@ -76,6 +76,7 @@ jobs:
           exit 1
 
       - name: Check market sources
-        # Fails (and shows the source) when one market source errored for every listing
-        # (Naver / Bunjang returned 404 for weeks while the run stayed green).
+        # Warns (annotation + step summary, with the date it started) when a market source errored
+        # for every listing or asked us to stop (Naver / Bunjang returned 404 for weeks unnoticed).
+        # Only a crash fails it: a known-broken Naver key or Amazon's 503 must not turn every run red.
         run: node scripts/fetch_wanted_market_listings.mjs --check-health

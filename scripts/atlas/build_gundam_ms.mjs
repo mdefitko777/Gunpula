@@ -7,6 +7,7 @@
 //   data/atlas/gundam-src-gunplapedia.json import_gunplapedia.mjs  (JAN -> "Model of")
 //   data/atlas/gundam-src-manual.json      import_manual_works.mjs (official kit -> work)
 //   data/atlas/gundam-overrides.json       human-maintained {kits: {kit_id: [ms ids]}}
+//   data/i18n/zh/gundam-ms.json            Simplified Chinese product-name glossary (names.zh)
 //
 // Outputs (compact JSON):
 //   data/atlas/gundam-ms.json            timelines, works, MS master
@@ -24,6 +25,11 @@
 // naming the pilot) -> name prefix -> guarded contains -> name suffix. SD original characters (BB戦士 三国伝,
 // 武者, 騎士, SDW HEROES) that only borrow an MS name link with role "sd_character".
 //
+// names.zh: the glossary name for the MS's Japanese name (what product names use, scripts/
+// apply_zh_names.mjs), else the GGET unit's. On 2026-11-11 the GGET-only names disagreed with the
+// glossary for 262 MS (渣古 / 扎古, 卡碧尼 / 京宝梵) and left 318 MS the glossary knows without
+// zh; a different GGET name is kept in name_aliases.zh for search.
+//
 // Debugging: ATLAS_EXPLAIN=<regex> prints how matching kits were matched,
 // ATLAS_EXPLAIN_UNIT=<regex> prints the candidate scores of matching GGET units.
 import path from "node:path";
@@ -31,6 +37,7 @@ import { buildWorks, eraTimeline, TIMELINES, wikiSeriesMatcher } from "./gundam_
 import { classifyKit, cleanKitName, isSetName, janOf, kitJoinKey, sdOriginalWork, splitPilotCustom, splitSet } from "./lib/kitnames.mjs";
 import { buildKoLexicon, transliterateKo } from "./lib/ko_translit.mjs";
 import { withCrawlPolicy } from "./lib/policy.mjs";
+import { exactGlossaryName, loadGlossary } from "../lib/zh-names.mjs";
 import { ATLAS_DATA, countBy, hasJapanese, modelKey, nameKey, nfkc, pct, readJson, repoPath, today, uniq, writeCompactJson } from "./lib/util.mjs";
 
 const P = (f) => path.join(ATLAS_DATA, f);
@@ -1001,6 +1008,7 @@ async function main() {
   ];
   const keep = (rec) => rec.gget.length || msKits.has(rec.id) || rec.works.length;
   // Lexicon of official Korean MS words learned from GGET's ja/ko unit names.
+  const zhGlossary = loadGlossary("gundam", repoPath("data", "i18n", "zh"));
   const koLexicon = buildKoLexicon(roster.units.filter((u) => u.names.ja && u.names.ko).map((u) => ({ ja: u.names.ja, ko: u.names.ko })));
   const msOut = [...ms.values()]
     .filter(keep)
@@ -1033,9 +1041,12 @@ async function main() {
           namesSrc.ko = "translit";
         }
       }
-      if (fromUnit && rec.gget_names?.zh) names.zh = rec.gget_names.zh;
+      const ggetZh = fromUnit ? rec.gget_names?.zh : null;
+      const glossaryZh = exactGlossaryName(zhGlossary, names.ja, fromUnit ? rec.gget_names?.ja : null);
+      if (glossaryZh || ggetZh) names.zh = glossaryZh || ggetZh;
       o.names = names;
       if (Object.keys(namesSrc).length) o.names_src = namesSrc;
+      if (glossaryZh && ggetZh && ggetZh !== glossaryZh) o.name_aliases = { zh: [ggetZh] };
       if (rec.gget.length) o.gget_ids = rec.gget.map((g) => g.u.id);
       if (rec.icon) o.icon = rec.icon;
       if (rec.works.length) o.works = rec.works;
