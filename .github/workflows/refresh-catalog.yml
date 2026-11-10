@@ -71,6 +71,21 @@ jobs:
         timeout-minutes: 12
         run: npm run dates:backfill -- --limit=300
 
+      # Photo counts of new archived Premium Bandai items on the Bandai CDN (HEAD
+      # probes, same polite rules, at most 40 items a run); import:data adds the
+      # counted photos (pb:gallery).
+      - name: Count Premium Bandai photos
+        continue-on-error: true
+        timeout-minutes: 8
+        run: npm run pb:gallery:fetch -- --limit=40
+
+      # Official assembly manual list (manual.bandai-hobby.net, ~140 pages), read at
+      # most once a week with the same polite rules; links records by name (manual_id).
+      - name: Read official manual list
+        continue-on-error: true
+        timeout-minutes: 6
+        run: npm run manuals:fetch
+
       - name: Build update feed
         run: npm run updates -- --before="$RUNNER_TEMP/kits-before.json"
 

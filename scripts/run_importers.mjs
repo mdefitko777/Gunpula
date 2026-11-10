@@ -51,6 +51,10 @@ const STEPS = [
   { script: "images:manual", kind: "derive" },
   // Release dates read earlier from product pages (data/release-dates.json); offline.
   { script: "dates:apply", kind: "derive" },
+  // Premium Bandai photos 2..n counted earlier on the Bandai CDN (data/pb-image-counts.json); offline.
+  { script: "pb:gallery", kind: "derive" },
+  // Official assembly manuals (data/manuals.json, list read weekly) → manual_id; offline.
+  { script: "manuals", kind: "derive" },
   // Rewrites kits.json in place (series, compact work titles, four-language names). If it
   // crashes, kits.json is the importers' raw output with no series, so nothing is committed.
   // A batch of series moves is not a crash: those records keep their published series and

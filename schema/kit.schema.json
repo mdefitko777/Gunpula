@@ -164,6 +164,10 @@
     },
     "notes": {
       "type": ["string", "null"]
+    },
+    "manual_id": {
+      "type": "integer",
+      "description": "Official assembly manual on manual.bandai-hobby.net (/menus/detail/<id>), linked by scripts/import_bandai_manuals.mjs."
     }
   },
   "additionalProperties": false
