@@ -7,6 +7,7 @@ import { HTML_ENTITY_IN_URL } from "./lib/html-url.mjs";
 // Same rule as import_bandai_collectibles.mjs (MISFORMED_BEYBLADE_ID); not imported from
 // there because that module pulls in the whole importer.
 const MISFORMED_BEYBLADE_ID = /^beyblade-x-(?:bx|ux|cx)-\d/;
+const FANDOM_IMAGE = /^https?:\/\/([a-z0-9-]+\.)*(wikia\.nocookie\.net|wikia\.com|fandom\.com)\//i;
 
 const { grades, kits, sources, gradeByCode, sourceById } = loadCatalog();
 const errors = [];
@@ -189,6 +190,9 @@ for (const kit of kits) {
   const urls = [kit.images?.box_art_url, ...(Array.isArray(kit.gallery_image_urls) ? kit.gallery_image_urls : [])];
   const escaped = [...new Set(urls.filter((url) => typeof url === "string" && HTML_ENTITY_IN_URL.test(url)))];
   if (escaped.length) addWarning(`kit ${kit.kit_id}: image URL still HTML-escaped (${escaped[0]})`);
+  // Fandom (static.wikia.nocookie.net) answers phones and GitHub with a Cloudflare check (2026-11-11).
+  const fandom = urls.find((url) => typeof url === "string" && FANDOM_IMAGE.test(url));
+  if (fandom) addError(`kit ${kit.kit_id}: Fandom image URL (${fandom}) — phones cannot load it`);
   if (kit.franchise === "beyblade" && MISFORMED_BEYBLADE_ID.test(kit.kit_id)) {
     addWarning(`kit ${kit.kit_id}: BEYBLADE X id is not beyblade-x-<product id> (e.g. beyblade-x-cx09)`);
   }

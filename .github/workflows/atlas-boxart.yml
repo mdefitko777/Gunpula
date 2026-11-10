@@ -81,7 +81,6 @@ jobs:
             out.push("By source: " + JSON.stringify(r.by_source));
             out.push("URL checks: " + JSON.stringify(r.url_checks));
             out.push("No pick: " + JSON.stringify(r.reasons));
-            out.push("Gunplapedia: " + JSON.stringify(r.gunplapedia));
             out.push("Hosts: " + JSON.stringify(r.hosts));
             fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, out.join("\n\n") + "\n");
           '

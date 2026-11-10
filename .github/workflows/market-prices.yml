@@ -74,3 +74,8 @@ jobs:
           done
           echo "Could not push after 5 attempts."
           exit 1
+
+      - name: Check market sources
+        # Fails (and shows the source) when one market source errored for every listing
+        # (Naver / Bunjang returned 404 for weeks while the run stayed green).
+        run: node scripts/fetch_wanted_market_listings.mjs --check-health
