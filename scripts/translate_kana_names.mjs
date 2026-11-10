@@ -1,5 +1,6 @@
 // Rewrites kana-polluted Korean display names (names.ko) in data/kits.json for
-// SEED / Gundam 00 / Beyblade X kits, using the shared curated dictionary.
+// Gundam and Beyblade X kits, using the shared curated dictionary (written for
+// SEED / 00 first; a name it cannot cover fully stays as it is, see below).
 // All-or-nothing per name: a name whose kana can't fully translate stays
 // unchanged, so the catalog never shows half-translated hybrids.
 //
@@ -13,11 +14,9 @@ import { KANA_RE, translateDisplayName } from "./lib/kana_ko_dict.mjs";
 
 const rootDir = dirname(dirname(fileURLToPath(import.meta.url)));
 const KITS_PATH = join(rootDir, "data/kits.json");
-const TARGET_SERIES = new Set(["seed", "double_o"]);
-
+// Every Gundam series: a SEED / 00-only filter left "V2アサルト버스터건담" (Victory) half Japanese.
 function isTarget(kit) {
-  if (kit.franchise === "beyblade") return true;
-  return kit.franchise === "gundam" && TARGET_SERIES.has(kit.series?.key);
+  return kit.franchise === "beyblade" || kit.franchise === "gundam";
 }
 
 const doc = JSON.parse(await readFile(KITS_PATH, "utf8"));

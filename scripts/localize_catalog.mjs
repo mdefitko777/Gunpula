@@ -1,4 +1,7 @@
 import { appendFile, readFile, writeFile } from "node:fs/promises";
+import { realpathSync } from "node:fs";
+import { pathToFileURL } from "node:url";
+import { fateClassifier } from "./atlas/lib/atlas_groups.mjs";
 
 const CATALOG_FILE = "data/kits.json";
 
@@ -44,6 +47,37 @@ const SERIES_OVERRIDES = await readFile("data/series-overrides.json", "utf8").th
     throw error;
   },
 );
+
+// Fate products take the work the atlas classifier finds (scripts/atlas/lib/atlas_groups.mjs:
+// work named in the title, then the store's work tags, the Aniplex+ catalogue folder, then
+// the characters). Matching names here instead filed every Good Smile product under FGO
+// (its importer tagged them all "fgo"), and "Fate / stay night" (spaced slash) and bare
+// "セイバー" as well (2026-11-11: 268 stay night / Zero / strange Fake / Prisma … products).
+const FATE_CLASSIFY = fateClassifier(JSON.parse(await readFile("data/atlas/fate-roster.json", "utf8"))).classify;
+const FATE_WORK_SERIES = {
+  fgo: "fate_fgo",
+  stay_night: "fate_stay_night",
+  hollow_ataraxia: "fate_hollow_ataraxia",
+  zero: "fate_zero",
+  apocrypha: "fate_apocrypha",
+  extra: "fate_extra",
+  prisma: "fate_prisma",
+  strange_fake: "fate_strange_fake",
+  el_melloi: "fate_el_melloi",
+  samurai_remnant: "fate_samurai_remnant",
+  prototype: "fate_prototype",
+  requiem: "fate_requiem",
+  tsukihime: "type_moon",
+  kara_no_kyoukai: "type_moon",
+  mahoyo: "type_moon",
+  type_moon: "type_moon",
+};
+
+/** Series of a Fate product; a product naming no work or character stays with FGO (the stores' main line). */
+function fateSeries(kit) {
+  const key = FATE_WORK_SERIES[FATE_CLASSIFY(kit).work] || "fate_fgo";
+  return SERIES.find((series) => series.key === key);
+}
 
 function seriesFromKitWorks(kit) {
   const keys = new Set((KIT_WORKS[kit.kit_id] || []).map((work) => WORK_SERIES[work]));
@@ -157,7 +191,7 @@ const SERIES = [
     sort: 150,
     labels: { zh: "闪哈", en: "Hathaway", ja: "閃ハサ", ko: "섬하사" },
     universe: "UC",
-    pattern: /Hathaway|閃光のハサウェイ|Ξガンダム|クスィーガンダム|ペーネロペー|メッサー/i,
+    pattern: /Hathaway|閃光のハサウェイ|Ξガンダム|クスィーガンダム|ペーネロペー|メッサー(?!ラ)/i,
   },
   {
     key: "f91",
@@ -316,47 +350,98 @@ const SERIES = [
     universe: "Pokemon",
     pattern: /Pokemon|Pokémon|ポケモン|PokePla/i,
   },
+  // Fate: one series per work, chosen by fateSeries() (the atlas classifier), so the
+  // patterns never match by themselves.
   {
     key: "fate_fgo",
     sort: 430,
     labels: { zh: "FGO", en: "FGO", ja: "FGO", ko: "FGO" },
     universe: "Fate",
-    pattern: /Fate\/Grand Order|Grand Order|FGO|マシュ|アルトリア|キャスター\/アルトリア|セイバー|ジャンヌ|モルガン|メリュジーヌ|ギルガメッシュ|スカサハ|エレシュキガル|ネロ|オベロン|BB|メリュジーヌ|Mash|Artoria|Altria|Morgan|Melusine|Gilgamesh|Scathach|Ereshkigal|Nero|Oberon/i,
+    pattern: /(?!)/,
   },
   {
     key: "fate_stay_night",
     sort: 431,
     labels: { zh: "stay night", en: "stay night", ja: "stay night", ko: "stay night" },
     universe: "Fate",
-    pattern: /Fate\/stay night|Heaven'?s Feel|Unlimited Blade Works|衛宮士郎|遠坂凛|間桐桜|Saber|Rin Tohsaka|Sakura Matou/i,
+    pattern: /(?!)/,
   },
   {
     key: "fate_zero",
     sort: 432,
     labels: { zh: "Zero", en: "Zero", ja: "Zero", ko: "Zero" },
     universe: "Fate",
-    pattern: /Fate\/Zero|Zero|衛宮切嗣|アイリスフィール|Kiritsugu|Irisviel/i,
+    pattern: /(?!)/,
   },
   {
     key: "fate_extra",
     sort: 433,
     labels: { zh: "EXTRA", en: "EXTRA", ja: "EXTRA", ko: "EXTRA" },
     universe: "Fate",
-    pattern: /Fate\/EXTRA|EXTELLA|EXTRA|ネロ・クラウディウス|玉藻の前|Tamamo/i,
+    pattern: /(?!)/,
   },
   {
     key: "fate_apocrypha",
     sort: 434,
     labels: { zh: "Apocrypha", en: "Apocrypha", ja: "Apocrypha", ko: "Apocrypha" },
     universe: "Fate",
-    pattern: /Fate\/Apocrypha|Apocrypha|ジャンヌ・ダルク|モードレッド|Astolfo|Mordred/i,
+    pattern: /(?!)/,
   },
   {
     key: "type_moon",
     sort: 435,
     labels: { zh: "型月", en: "TYPE-MOON", ja: "TYPE-MOON", ko: "타입문" },
     universe: "TYPE-MOON",
-    pattern: /TYPE-MOON|月姫|空の境界|Kara no Kyoukai|Garden of Sinners|魔法使いの夜|Mahoutsukai|Tsukihime|Arcueid|Shiki/i,
+    pattern: /(?!)/,
+  },
+  {
+    key: "fate_hollow_ataraxia",
+    sort: 436,
+    labels: { zh: "hollow ataraxia", en: "hollow ataraxia", ja: "hollow ataraxia", ko: "hollow ataraxia" },
+    universe: "Fate",
+    pattern: /(?!)/,
+  },
+  {
+    key: "fate_prisma",
+    sort: 437,
+    labels: { zh: "伊莉雅", en: "Prisma☆Illya", ja: "プリズマ☆イリヤ", ko: "프리즈마☆이리야" },
+    universe: "Fate",
+    pattern: /(?!)/,
+  },
+  {
+    key: "fate_strange_fake",
+    sort: 438,
+    labels: { zh: "strange Fake", en: "strange Fake", ja: "strange Fake", ko: "strange Fake" },
+    universe: "Fate",
+    pattern: /(?!)/,
+  },
+  {
+    key: "fate_el_melloi",
+    sort: 439,
+    labels: { zh: "埃尔梅罗伊II世事件簿", en: "El-Melloi II Case Files", ja: "エルメロイII世の事件簿", ko: "엘멜로이 2세의 사건부" },
+    universe: "Fate",
+    pattern: /(?!)/,
+  },
+  {
+    key: "fate_samurai_remnant",
+    sort: 439.1,
+    labels: { zh: "Samurai Remnant", en: "Samurai Remnant", ja: "Samurai Remnant", ko: "Samurai Remnant" },
+    universe: "Fate",
+    pattern: /(?!)/,
+  },
+  {
+    key: "fate_prototype",
+    sort: 439.2,
+    labels: { zh: "Prototype", en: "Prototype", ja: "Prototype", ko: "Prototype" },
+    universe: "Fate",
+    pattern: /(?!)/,
+  },
+  {
+    key: "fate_requiem",
+    sort: 439.3,
+    labels: { zh: "Requiem", en: "Requiem", ja: "Requiem", ko: "Requiem" },
+    universe: "Fate",
+    pattern: /(?!)/,
   },
   // 魔法少女まどか☆マギカ: one series per work, checked in this order (a Rebellion or
   // Magia Record title also contains "まどか☆マギカ"); madoka_tv takes the rest.
@@ -469,6 +554,13 @@ const NON_GUNDAM_SERIES_KEYS = new Set([
   "fate_extra",
   "fate_apocrypha",
   "type_moon",
+  "fate_hollow_ataraxia",
+  "fate_prisma",
+  "fate_strange_fake",
+  "fate_el_melloi",
+  "fate_samurai_remnant",
+  "fate_prototype",
+  "fate_requiem",
   "madoka_walpurgis",
   "madoka_rebellion",
   "madoka_magireco",
@@ -514,26 +606,28 @@ const TITLE_PRIORITY_SERIES = new Set([
 const GUNDAM_WORK_UNIT_RULES = [
   { key: "build", pattern: /HGBF|HGBD|HGBD:R|Gundam Build|Build Fighters|Build Divers|Build Metaverse|ビルド|ダイバー|コアガンダム|アースリィ|マーズフォー|ヴィートルー|メルクワン|ユーラヴェン|ネプテイト|プルタイン|ラーガンダム|ベアッガイ|プチッガイ|ふみな|トライオン|アメイジング|フェニーチェ|スクランブル|ティフォエウス|AGEIIマグナム/i },
   { key: "sangoku", pattern: /三国|三國|三国創傑伝|三国伝|SDW HEROES.*(?:関羽|孫権|曹操|劉備|諸葛亮|司馬懿|呂布|張飛|趙雲|貂蝉|馬超|黄忠|董卓|信長|悟空|三蔵|佐助|才蔵|軍馬)/i },
-  { key: "seed", pattern: /グフ\s*イグナイテッド|ザクウォーリア|ザクファントム|ガナーザク|ブレイズザク|スラッシュザク|ケルベロスザク/i },
+  // V2バスター / V2アサルトバスター are Victory suits, not SEED's Buster (the "バスター" below)
+  { key: "victory", pattern: /(?:V2|Ｖ２)(?:アサルト|バスター)/i },
+  { key: "seed", pattern: /ドム・?トルーパー|グフ\s*イグナイテッド|ザクウォーリア|ザクファントム|ガナーザク|ブレイズザク|スラッシュザク|ケルベロスザク/i },
   { key: "crossbone", pattern: /Crossbone|クロスボーン|ガンダムX-?1|ガンダムX-?2|ガンダムX-?3|フルクロス|ゴーストガンダム|ファントムガンダム|アンカーガンダム/i },
   { key: "sentinel", pattern: /Sentinel|Sガンダム|\bEx-S\b(?!tandard)|FAZZ|Zプラス|ゼータプラス|ディープストライカー|ガンダムMk-V|ゼク・アイン/i },
   { key: "narrative", pattern: /Mobile Suit Gundam Narrative|Narrative Gundam|機動戦士ガンダムNT|ナラティブガンダム|フェネクス|シナンジュ・スタイン.*(?:NT|ナラティブ)|ナラティブ Ver/i },
   { key: "moon", pattern: /Moon Gundam|ムーンガンダム|バルギル/i },
   { key: "origin", pattern: /THE ORIGIN|(?<!アスタロト ?)オリジン|局地型ガンダム|ブグ|ザクI(?!I)|ザク・ハーフキャノン|シャア専用ザクII.*ORIGIN/i },
-  { key: "gqux", pattern: /GQuuuuuuX|ジークアクス|GFreD|白いガンダム|赤いガンダム|軽キャノン|\(GQ\)|（GQ）|シャリア専用リック・ドム\(GQ\)|ザク\(GQ\)/i },
+  { key: "gqux", pattern: /GQuuuuuuX|ジークアクス|軍警ザク|GFreD|白いガンダム|赤いガンダム|軽キャノン|\(GQ\)|（GQ）|シャリア専用リック・ドム\(GQ\)|ザク\(GQ\)/i },
   { key: "seed", pattern: /SEED|(?<!BLUE ?)DESTINY|FREEDOM|ASTRAY|STARGAZER|スターゲイザー|ライジングフリーダム|イモータルジャスティス|マイティーストライクフリーダム|ストライクフリーダム|インフィニットジャスティス|デスティニー|インパルス|アカツキ|ストライク|イージス|デュエル|(?<!アサルト)バスター|ブリッツ|プロヴィデンス|カラミティ|フォビドゥン|レイダー|アストレイ|ブラックナイトスコード|(?<![ァ-ヶー])ジン(?![クャュョ])|シグー|ゲイツ|ウィンダム|ムラサメ|ソードストライカー|ランチャーストライカー|エールストライカー|ストライカーパック|プラウドディフェンダー|アークエンジェル/i },
   { key: "double_o", pattern: /Gundam 00(?![0-9])|ガンダム00(?![0-9])|00ガンダム|ダブルオー|00クアンタ|クアンタ|エクシア|デュナメス|キュリオス|ヴァーチェ|ナドレ|アストレア|ケルディム|アリオス|セラヴィー|セラフィムガンダム|オーライザー|ジンクス|ティエレン|スサノオ|フラッグ|スローネ|アルケー|アヘッド|ガデッサ|ガラッゾ|リボーンズ|ブレイヴ|GNアームズ|1\.5（アイズ）|1\.5ガンダム/i },
   { key: "w", pattern: /Gundam Wing|ガンダムW|Endless Waltz|\bEW\b|G-UNIT|ハイドラガンダム|Hydra Gundam|ウイング|デスサイズ|ヘビーアームズ|サンドロック|シェンロン|アルトロン|トールギス|エピオン|リーオー|マグアナック|ヴァイエイト|メリクリウス|エアリーズ|ジェミナス|グリープ|ヒイロ・ユイ/i },
   { key: "ibo", pattern: /Iron-Blooded Orphans|鉄血|バルバトス|グシオン|キマリス|グレイズ|フラウロス|バエル|ヴィダール|百里|百錬|マンロディ|ロディ|マルコシアス|アスタロト|ダンタリオン|レギンレイズ|グリムゲルデ/i },
   { key: "witch", pattern: /Witch from Mercury|水星の魔女|エアリアル|ルブリス|キャリバーン|ファラクト|ディランザ|デミ|ベギル|ミカエリス|シュバルゼッテ|ガンヴォルヴァ|ザウォート|ダリルバルデ|グエル・ジェターク/i },
   { key: "cca", pattern: /Char's Counterattack|逆襲のシャア|ベルトーチカ・チルドレン|νガンダム|Hi-ν|サザビー|ナイチンゲール|ヤクト・ドーガ|ギラ・ドーガ|α・アジール|リ・ガズィ|ジェガン|ハイパー・メガ・バズーカ・ランチャー/i },
-  { key: "hathaway", pattern: /Hathaway|閃光のハサウェイ|Ξガンダム|クスィーガンダム|ペーネロペー|メッサー|グスタフ・カール/i },
+  { key: "hathaway", pattern: /Hathaway|閃光のハサウェイ|Ξガンダム|クスィーガンダム|ペーネロペー|メッサー(?!ラ)|グスタフ・カール/i },
   { key: "thunderbolt", pattern: /Thunderbolt|サンダーボルト|フルアーマー・ガンダム|サイコ・ザク|アトラスガンダム/i },
   { key: "0083", pattern: /0083|Stardust Memory|GP0[123]|ガーベラ|デンドロビウム|ステイメン|ノイエ・ジール|ドラッツェ|ザメル/i },
   { key: "0080", pattern: /0080|War in the Pocket|アレックス|NT-1|ケンプファー|ハイゴッグ|ズゴックE|ザクII改/i },
   { key: "08ms", pattern: /08th MS Team|08小隊|Ez-8|陸戦型|グフカスタム/i },
   { key: "zz", pattern: /ZZ|ダブルゼータ|フルアーマーZZ|強化型ZZ|クィン・マンサ|キュベレイ|ドーベン・ウルフ|ザクIII|バウ(?!ン)|ドライセン|ズサ|ハンマ・ハンマ|ゲーマルク/i },
-  { key: "zeta", pattern: /Zガンダム|Ζ|ゼータガンダム|ZII|サイコ・ガンダム|ガンダムMk-II|ガンダムMk-Ⅱ|百式|リック・ディアス|メタス|ネモ|ハイザック|マラサイ|バーザム|ギャプラン|アッシマー|ジ・O|ディジェ/i },
+  { key: "zeta", pattern: /Zガンダム|Ζ|ゼータガンダム|ZII|メッサーラ|バウンド・?ドック|サイコ・ガンダム|ガンダムMk-II|ガンダムMk-Ⅱ|百式|リック・ディアス|メタス|ネモ|ハイザック|マラサイ|バーザム|ギャプラン|アッシマー|ジ・O|ディジェ/i },
   { key: "g", pattern: /Mobile Fighter G Gundam|Gガンダム|ゴッドガンダム|シャイニングガンダム|マスターガンダム|ノーベルガンダム|ドラゴンガンダム|ガンダムローズ|マックスター|マンダラガンダム|デビルガンダム|クーロンガンダム|風雲再起/i },
   { key: "g_reco", pattern: /Reconguista|Gのレコンギスタ|G-セルフ|Ｇ-セルフ|G-アルケイン|G-ルシファー|グリモア|マックナイフ|ジャハナム|カバカーリー/i },
   { key: "x", pattern: /Gundam X(?!-?[123])|ガンダムX(?!-?[123])|ガンダムダブルエックス|ダブルエックス|エアマスター|レオパルド|ベルティゴ|ヴァサーゴ|Gファルコン/i },
@@ -560,7 +654,7 @@ const GUNDAM_FALLBACK_UNIT_RULES = [
   { key: "gqux", pattern: /ソドン/i },
   { key: "zeta", pattern: /アーガマ(?!級)|ガンダム ?Mk-II(?!I)|リックディアス/i },
   { key: "zz", pattern: /ドワッジ/i },
-  { key: "hathaway", pattern: /メッサ[ー―-]/i },
+  { key: "hathaway", pattern: /メッサ[ー―-](?!ラ)/i },
   { key: "08ms", pattern: /08MS小隊|アイナ・サハリン/i },
   { key: "0083", pattern: /アルビオン|ラビアンローズ|試作[123]号機/i },
   { key: "msv", pattern: /ヘビー・ガンダム|ガンダムMk-III|G-3 GUNDAM|ヴァッフ/i },
@@ -580,6 +674,29 @@ const GUNDAM_FALLBACK_UNIT_RULES = [
       /^(?:(?:HGUC|HG|MG|PG|RG|HY2M|\d+ \/ \d+|メガサイズモデル|メガサイズ|リアルタイプ|MOBILE SUIT ENSEMBLE(?: HATSUNEMIKU| [\d.]+)?)\s*)*ガンダム(?=$|\s|\(|「|〔|Ver|G40|G30|RX)(?!\s*G-)/i,
   },
 ];
+
+// A product the name rules file under "0079" (uc_first) only because of a broad One Year
+// War word (ジム, ザク, ドム, ゲルググ, ガンタンク …) while the suit debuted in a later UC work.
+// Debut work per suit; tested on the NFKC text (ズゴックＥ, ジムＩＩＩ). Only the name rules'
+// uc_first is refined, so a work the title names ("ユニコーンVer.", "MSV版") or a hand fix stays.
+const UC_FIRST_SUIT_RULES = [
+  // a work the title names comes first (as R・ジャジャ （Twilight AXIS Ver．） already sits in uc_side)
+  { key: "uc_side", pattern: /Twilight AXIS|トワイライトアクシズ/i },
+  { key: "narrative", pattern: /(?:II|セカンド)・?ネオ・?ジオング/i },
+  { key: "unicorn", pattern: /ネオ・?ジオング|ジムII・?セミストライカー|ザクI・?スナイパー|ガンキャノン・?ディテクター/i },
+  { key: "f91", pattern: /ガンタンクR-44/i },
+  { key: "0083", pattern: /ジム改|ジム・?カスタム|ジム・?クゥエル|パワード・?ジム|ジム・?キャノンII|ゲルググ・?マリーネ|ドム・?トローペン|ザク(?:II|2) ?F2|MS-06F-2/i },
+  { key: "0080", pattern: /ジム・?コマンド|ジム・?スナイパーII|リック・?ドム(?:II|2)|ゲルググJ|ゲルググ・?イェーガー|ジム[(（]?寒冷地仕様|ガンキャノン量産型|ザク(?:II|2)改|ズゴックE/i },
+  { key: "08ms", pattern: /グフ・?フライトタイプ/i },
+  { key: "zz", pattern: /ジム(?:III|3(?!\d))|ザク・?マリナー|ザク(?:III|3(?![\d号]))/i },
+  { key: "zeta", pattern: /ジム(?:II(?!I)|2(?!\d))|アクト・?ザク/i },
+];
+
+function ucFirstSuitSeries(kit) {
+  const text = [kit.names?.ja, kit.names?.en, kit.names?.zh, kit.names?.ko].map(decodeHtml).join(" ").normalize("NFKC");
+  const rule = UC_FIRST_SUIT_RULES.find((candidate) => candidate.pattern.test(text));
+  return rule ? SERIES.find((series) => series.key === rule.key) : null;
+}
 
 const REPLACEMENTS = {
   en: [
@@ -606,6 +723,8 @@ const REPLACEMENTS = {
     ["ストライク", "Strike"],
     ["イージス", "Aegis"],
     ["デュエル", "Duel"],
+    // V2アサルトバスター: spaced so the words stay apart ("V2 Assault Buster Gundam")
+    ["アサルト", " Assault "],
     ["バスター", "Buster"],
     ["ブリッツ", "Blitz"],
     ["アストレイ", "Astray"],
@@ -722,6 +841,7 @@ const REPLACEMENTS = {
     ["ストライク", "强袭"],
     ["イージス", "圣盾"],
     ["デュエル", "决斗"],
+    ["アサルト", "突击"],
     ["バスター", "暴风"],
     ["ブリッツ", "迅雷"],
     ["アストレイ", "异端"],
@@ -845,6 +965,7 @@ const REPLACEMENTS = {
     ["ストライク", "스트라이크"],
     ["イージス", "이지스"],
     ["デュエル", "듀얼"],
+    ["アサルト", " 어설트 "],
     ["バスター", "버스터"],
     ["ブリッツ", "블리츠"],
     ["アストレイ", "아스트레이"],
@@ -1042,6 +1163,8 @@ function seriesForKit(kit) {
   // Only a product the name rules file under "mixed" or "other" takes the
   // series of its linked suits' works — never one they already placed.
   if (kit.franchise === "gundam" && (series?.key === "mixed" || series?.key === "other")) return seriesFromKitWorks(kit) || series;
+  // The name rules' "0079" only (not a hand fix or an earlier result): the suit's own UC work.
+  if (kit.franchise === "gundam" && series?.key === "uc_first" && !SERIES_OVERRIDES[kit.kit_id] && !previousSeries(kit)) return ucFirstSuitSeries(kit) || series;
   return series;
 }
 
@@ -1063,13 +1186,7 @@ function classifySeries(kit) {
     return SERIES.find((series) => series.key === "armored_core");
   }
   if (kit.franchise === "fate") {
-    const text = [kit.work_title, kit.universe, kit.names?.ja, kit.names?.en, kit.names?.zh, kit.names?.ko, kit.subline, ...(kit.tags ?? [])]
-      .map(decodeHtml)
-      .join(" ");
-    return (
-      SERIES.find((series) => ["fate_fgo", "fate_stay_night", "fate_zero", "fate_extra", "fate_apocrypha", "type_moon"].includes(series.key) && series.pattern.test(text)) ||
-      SERIES.find((series) => series.key === "fate_fgo")
-    );
+    return fateSeries(kit);
   }
   if (kit.franchise === "lego") {
     // One series per Rebrickable top-level theme (work_title); not in SERIES, built from the theme name
@@ -1173,58 +1290,66 @@ function localizeKit(kit) {
   };
 }
 
-const catalog = JSON.parse(await readFile(CATALOG_FILE, "utf8"));
-const kits = catalog.kits.map(localizeKit);
-const missingNames = kits.filter((kit) => ["ja", "en", "zh", "ko"].some((lang) => !kit.names?.[lang]));
-const missingSeries = kits.filter((kit) => !kit.series?.key);
+// Imported by scripts/test_localize_series.mjs for the series rules; runs only as a script.
+export { classifySeries, seriesForKit, localizeKit, SERIES, SERIES_OVERRIDES };
 
-if (missingNames.length || missingSeries.length) {
-  throw new Error(`Localization incomplete: missing names ${missingNames.length}, missing series ${missingSeries.length}`);
-}
+async function main() {
+  const catalog = JSON.parse(await readFile(CATALOG_FILE, "utf8"));
+  const kits = catalog.kits.map(localizeKit);
+  const missingNames = kits.filter((kit) => ["ja", "en", "zh", "ko"].some((lang) => !kit.names?.[lang]));
+  const missingSeries = kits.filter((kit) => !kit.series?.key);
 
-// A rule change that moves a few records is normal; one that moves a large batch out
-// of the series they already had is a regression. The importers hand this script
-// records whose series is reset, so the comparison is with the catalog as published
-// before this refresh (LOCALIZE_BASELINE_PATH, the workflow's snapshot), else with the
-// records as they came in.
-//
-// This step used to throw on a large batch. The importers had already rewritten
-// kits.json, so the refresh then committed a catalog with no series at all and the
-// curated Korean names reverted (2026-11-06: 2366 series, 4754 names). Now every other
-// change of the day goes through (new products, prices, dates, images) and only the
-// moved records keep their published series; the note goes to the failure report.
-const MAX_SERIES_MOVES = Number(process.env.LOCALIZE_MAX_SERIES_MOVES || 40);
-const baselinePath = process.env.LOCALIZE_BASELINE_PATH || "";
-let baseline = catalog.kits;
-if (baselinePath) {
-  try {
-    baseline = JSON.parse(await readFile(baselinePath, "utf8")).kits;
-  } catch (error) {
-    console.warn(`Baseline ${baselinePath} unreadable (${error.message}); comparing with the incoming records.`);
+  if (missingNames.length || missingSeries.length) {
+    throw new Error(`Localization incomplete: missing names ${missingNames.length}, missing series ${missingSeries.length}`);
   }
-}
-const published = new Map(baseline.filter((kit) => kit.series?.key).map((kit) => [kit.kit_id, kit]));
-// A hand fix from data/series-overrides.json is a deliberate move, not a rule regression:
-// it does not count toward the limit and is never held. Compared with the applied key, so
-// an override naming an unknown key (the name rules decided) still counts.
-const moved = kits
-  .map((kit, index) => ({ kit, index, before: published.get(kit.kit_id) }))
-  .filter(
-    ({ kit, before }) =>
-      before && before.series.key !== "other" && kit.series.key !== before.series.key && SERIES_OVERRIDES[kit.kit_id] !== kit.series.key,
-  );
-if (moved.length > MAX_SERIES_MOVES) {
-  for (const { kit, index, before } of moved) {
-    kits[index] = { ...kit, series: before.series, work_title: before.work_title ?? kit.work_title, universe: before.universe ?? kit.universe };
+
+  // A rule change that moves a few records is normal; one that moves a large batch out
+  // of the series they already had is a regression. The importers hand this script
+  // records whose series is reset, so the comparison is with the catalog as published
+  // before this refresh (LOCALIZE_BASELINE_PATH, the workflow's snapshot), else with the
+  // records as they came in.
+  //
+  // This step used to throw on a large batch. The importers had already rewritten
+  // kits.json, so the refresh then committed a catalog with no series at all and the
+  // curated Korean names reverted (2026-11-06: 2366 series, 4754 names). Now every other
+  // change of the day goes through (new products, prices, dates, images) and only the
+  // moved records keep their published series; the note goes to the failure report.
+  const MAX_SERIES_MOVES = Number(process.env.LOCALIZE_MAX_SERIES_MOVES || 40);
+  const baselinePath = process.env.LOCALIZE_BASELINE_PATH || "";
+  let baseline = catalog.kits;
+  if (baselinePath) {
+    try {
+      baseline = JSON.parse(await readFile(baselinePath, "utf8")).kits;
+    } catch (error) {
+      console.warn(`Baseline ${baselinePath} unreadable (${error.message}); comparing with the incoming records.`);
+    }
   }
-  const sample = moved
-    .slice(0, 5)
-    .map(({ kit, before }) => `${kit.kit_id} ${before.series.key}→${kit.series.key}`)
-    .join(", ");
-  const note = `localize held ${moved.length} series moves (limit ${MAX_SERIES_MOVES}); they keep their published series. e.g. ${sample}`;
-  console.warn(`::warning::${note}`);
-  if (process.env.IMPORT_NOTES_PATH) await appendFile(process.env.IMPORT_NOTES_PATH, `${note}\n`, "utf8");
+  const published = new Map(baseline.filter((kit) => kit.series?.key).map((kit) => [kit.kit_id, kit]));
+  // A hand fix from data/series-overrides.json is a deliberate move, not a rule regression:
+  // it does not count toward the limit and is never held. Compared with the applied key, so
+  // an override naming an unknown key (the name rules decided) still counts.
+  const moved = kits
+    .map((kit, index) => ({ kit, index, before: published.get(kit.kit_id) }))
+    .filter(
+      ({ kit, before }) =>
+        before && before.series.key !== "other" && kit.series.key !== before.series.key && SERIES_OVERRIDES[kit.kit_id] !== kit.series.key,
+    );
+  if (moved.length > MAX_SERIES_MOVES) {
+    for (const { kit, index, before } of moved) {
+      kits[index] = { ...kit, series: before.series, work_title: before.work_title ?? kit.work_title, universe: before.universe ?? kit.universe };
+    }
+    const sample = moved
+      .slice(0, 5)
+      .map(({ kit, before }) => `${kit.kit_id} ${before.series.key}→${kit.series.key}`)
+      .join(", ");
+    const note = `localize held ${moved.length} series moves (limit ${MAX_SERIES_MOVES}); they keep their published series. e.g. ${sample}`;
+    console.warn(`::warning::${note}`);
+    if (process.env.IMPORT_NOTES_PATH) await appendFile(process.env.IMPORT_NOTES_PATH, `${note}\n`, "utf8");
+  }
+
+  await writeFile(CATALOG_FILE, `${JSON.stringify({ ...catalog, kits }, null, 2)}\n`, "utf8");
+  console.log(`Localized ${kits.length} records with four-language names and compact series labels.`);
 }
 
-await writeFile(CATALOG_FILE, `${JSON.stringify({ ...catalog, kits }, null, 2)}\n`, "utf8");
-console.log(`Localized ${kits.length} records with four-language names and compact series labels.`);
+// realpath: the module URL is the resolved path, argv[1] may go through a symlink or a short name
+if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) await main();
