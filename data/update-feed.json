@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-11",
-  "generated_at": "2026-11-11T07:45:45.534Z",
+  "generated_at": "2026-11-11T17:06:15.342Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,52 +18,89 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-11T07:45:22.998Z",
+    "generated_at": "2026-11-11T17:05:53.621Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-11",
-      "generated_at": "2026-11-11T07:45:45.534Z",
+      "generated_at": "2026-11-11T17:06:15.342Z",
       "total_before": 39337,
-      "total_after": 39340,
-      "added_count": 2,
-      "changed_count": 264,
+      "total_after": 39341,
+      "added_count": 3,
+      "changed_count": 266,
       "removed_count": 0,
       "watched_count": 7,
       "merged_count": 0,
       "backfilled_count": 1,
       "renamed_count": 0,
-      "premium_bandai_count": 15,
+      "premium_bandai_count": 14,
       "bbx_count": 0,
       "franchise_counts": {
-        "pokemon": 50,
-        "gundam": 15,
-        "armored_core": 5,
-        "fate": 81
+        "fate": 82,
+        "pokemon": 22,
+        "gundam": 16,
+        "armored_core": 5
       },
       "reason_counts": {
-        "new": 2,
-        "archive": 13,
-        "name": 118,
-        "release": 19,
+        "new": 3,
+        "archive": 12,
+        "name": 90,
+        "release": 21,
         "limited": 2
       },
       "interest_tags": [
+        "fate",
         "pokemon",
         "gundam",
         "premium_bandai",
         "seed",
         "00",
-        "armored_core",
-        "fate"
+        "armored_core"
       ],
       "watch_tags": [
         "seed",
         "00"
       ],
       "added": [
+        {
+          "kit_id": "aniplex-fate-itemlcncuvmq",
+          "change_type": "added",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Aniplex+",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "スパイラル・ラダー「DNA」",
+            "zh": "スパイラル・ラダー「DNA」",
+            "ko": "スパイラル・ラダー「DNA」",
+            "en": "スパイラル ラダー「DNA」"
+          },
+          "release_date": "2027-02-24",
+          "price_jpy": 2750,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "aniplex_plus_fate_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemLcnCUvmq.html"
+          ]
+        },
         {
           "kit_id": "pokemon-kr-137700113",
           "change_type": "added",
@@ -620,6 +657,82 @@
           "source_urls": [
             "https://shop.kotobukiya.co.jp/shop/g/g4934054083244/",
             "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
+        {
+          "kit_id": "artifact-pro02",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "ARTIFACT",
+          "subline": "Gundam Artifact",
+          "series_key": "thunderbolt",
+          "series_labels": {
+            "zh": "雷霆宙域",
+            "en": "Thunderbolt",
+            "ja": "サンダーボルト",
+            "ko": "썬더볼트"
+          },
+          "names": {
+            "ja": "ガンダムアーティファクトPRO フルアーマー・ガンダム",
+            "zh": "高达 ARTIFACT PRO 全装甲高达",
+            "ko": "건담 아티팩트 PRO 풀 아머 건담",
+            "en": "GundamアーティファクトPRO フルアーマー Gundam"
+          },
+          "release_date": "2026-11-23",
+          "price_jpy": 6500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "bandai_candy_gundam_jp"
+          ],
+          "source_urls": [
+            "https://www.bandai.co.jp/candy/gundam/artifact/pro02",
+            "https://www.bandai.co.jp/candy/gundam/artifact/"
+          ]
+        },
+        {
+          "kit_id": "artifact-pro01",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "ARTIFACT",
+          "subline": "Gundam Artifact",
+          "series_key": "msv",
+          "series_labels": {
+            "zh": "MSV",
+            "en": "MSV",
+            "ja": "MSV",
+            "ko": "MSV"
+          },
+          "names": {
+            "ja": "ガンダムアーティファクトPRO 高機動型ザクII（黒い三連星仕様）",
+            "zh": "高达 ARTIFACT PRO 高机动型扎古II(黑色三连星样式)",
+            "ko": "건담 아티팩트 PRO 고기동형 자쿠II (검은 삼연성 사양)",
+            "en": "GundamアーティファクトPRO High Mobility TypeZakuII (黒い三連星Type)"
+          },
+          "release_date": "2026-11-23",
+          "price_jpy": 5800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "bandai_candy_gundam_jp"
+          ],
+          "source_urls": [
+            "https://www.bandai.co.jp/candy/gundam/artifact/pro01",
+            "https://www.bandai.co.jp/candy/gundam/artifact/"
           ]
         },
         {
@@ -4601,81 +4714,6 @@
           ],
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102590589000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "kotobukiya-fate-4934054007837",
-          "change_type": "changed",
-          "franchise": "fate",
-          "grade_code": "FATE_ACTION",
-          "subline": "その他フィギュア",
-          "series_key": "fate_fgo",
-          "series_labels": {
-            "zh": "FGO",
-            "en": "FGO",
-            "ja": "FGO",
-            "ko": "FGO"
-          },
-          "names": {
-            "ja": "キューポッシュ アヴェンジャー / ジャンヌ・ダルク〔オルタ〕",
-            "zh": "Q-posh Avenger / 贞德〔Alter〕",
-            "ko": "큐포쉬 어벤저 / 잔 다르크(얼터)",
-            "en": "キューポッシュ アヴェンジャー / ジャンヌ ダルク〔オルタ〕"
-          },
-          "release_date": "2019-12-18",
-          "price_jpy": 6380,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "fate"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "kotobukiya_fate_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054007837/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000138400",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "プレミアムバンダイ",
-          "series_key": "uc_side",
-          "series_labels": {
-            "zh": "UC外传",
-            "en": "UC Side Story",
-            "ja": "UC外伝",
-            "ko": "UC 외전"
-          },
-          "names": {
-            "ja": "ＨＧ 1 / 144 ガンダム６号機（マドロック）",
-            "zh": "HG 1 / 144 高达6号机(马德洛克)",
-            "ko": "HG 1/144 건담 6호기(매드록)",
-            "en": "ＨＧ 1 / 144 Gundam６号機 (マドロック)"
-          },
-          "release_date": "2019-12",
-          "price_jpy": 2200,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000138400/"
           ]
         }
       ],
