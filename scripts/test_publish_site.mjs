@@ -1,5 +1,9 @@
 import assert from "node:assert/strict";
-import { gitBlobSha, loadConfig, planShards, rewriteAssetUrls } from "./publish_site.mjs";
+import { createHash } from "node:crypto";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
+import { gitBlobSha, isSideDataFile, loadConfig, planShards, rewriteAssetUrls, stampManifest } from "./publish_site.mjs";
 
 // Same id as `git hash-object` (echo hello | git hash-object --stdin).
 assert.equal(gitBlobSha(Buffer.from("hello\n")), "ce013625030ba8dba906f756967f9e9ca394464a");
@@ -58,5 +62,47 @@ const f = (size, sha = `s${size}`) => ({ size, sha });
   assert.ok(config.limit_mb < 1000, "each shard must stay under the 1 GB Pages limit");
   assert.ok(config.site_limit_mb < 1000);
   for (const shard of config.shards) assert.match(shard.url, /^https:\/\/[^/]+\/[^/]+\/$/);
+}
+{
+  assert.ok(isSideDataFile("announcements.json"));
+  assert.ok(isSideDataFile("atlas/mezastar-jp.json"));
+  assert.ok(isSideDataFile("split/kit-aliases.json"));
+  assert.ok(!isSideDataFile("split/kits-gundam.json"), "kit files are covered by content_hash");
+  assert.ok(!isSideDataFile("split/manifest.json"));
+  assert.ok(!isSideDataFile("search/search-lego.json"));
+  assert.ok(!isSideDataFile("README.md"));
+}
+{
+  // The manifest gets a hash per side file; content_hash still covers only data/split, so a change
+  // to announcements.json alone moves files["announcements.json"] and nothing else.
+  const dataDir = await mkdtemp(path.join(os.tmpdir(), "gunpula-site-"));
+  try {
+    const put = async (rel, text) => {
+      await mkdir(path.dirname(path.join(dataDir, rel)), { recursive: true });
+      await writeFile(path.join(dataDir, rel), text);
+    };
+    await put("split/manifest.json", JSON.stringify({ updated_at: "2026-11-11", total: 1 }));
+    await put("split/kits-gundam.json", "[]");
+    await put("split/kit-aliases.json", "{}");
+    await put("search/search-gundam.json", "[]");
+    await put("announcements.json", '{"items":[]}');
+    await put("atlas/restocks.json", "[]");
+    const first = await stampManifest(dataDir, ["https://x.example/img-1/"]);
+    const contentHash = createHash("sha256");
+    for (const [name, text] of [["kit-aliases.json", "{}"], ["kits-gundam.json", "[]"]]) contentHash.update(`${name}\0`).update(text).update("\0");
+    assert.equal(first.content_hash, contentHash.digest("hex").slice(0, 16), "content_hash is computed as before");
+    assert.deepEqual(first.image_shards, ["https://x.example/img-1/"]);
+    assert.deepEqual(Object.keys(first.files), ["announcements.json", "atlas/restocks.json", "split/kit-aliases.json"]);
+    assert.equal(first.files["announcements.json"], createHash("sha256").update('{"items":[]}').digest("hex").slice(0, 16));
+    assert.deepEqual(JSON.parse(await readFile(path.join(dataDir, "split/manifest.json"), "utf8")), first, "written to the published manifest");
+
+    await put("announcements.json", '{"items":[{"id":"new"}]}');
+    const second = await stampManifest(dataDir, ["https://x.example/img-1/"]);
+    assert.equal(second.content_hash, first.content_hash);
+    assert.notEqual(second.files["announcements.json"], first.files["announcements.json"]);
+    assert.equal(second.files["atlas/restocks.json"], first.files["atlas/restocks.json"]);
+  } finally {
+    await rm(dataDir, { recursive: true, force: true });
+  }
 }
 console.log("publish_site tests passed.");

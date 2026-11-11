@@ -14,6 +14,8 @@
 // Only the published copy of every JSON file gets those paths rewritten to the
 // shard that holds the file, and data/split/manifest.json gets a content_hash of
 // the rewritten files, so an app that cached the old paths downloads the new ones.
+// The manifest also carries a hash per other data file (files), so the app can fetch
+// just the side files that changed (announcements …) on a day the kits did not.
 //
 // Shard assignment is stable: a photo stays in the shard that already has it;
 // a new photo goes to the first shard with room. Nothing here needs state in
@@ -252,20 +254,50 @@ export async function buildSite(outDir, config, assign) {
     }
     await cp(file, target);
   }
-  // The app re-downloads the split files only when this fingerprint changes.
-  const manifestPath = path.join(out, "data", "split", "manifest.json");
-  if (existsSync(manifestPath)) {
-    const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
-    const hash = createHash("sha256");
-    const splitDir = path.join(out, "data", "split");
-    for (const name of (await readdir(splitDir)).filter((n) => n !== "manifest.json" && n.endsWith(".json")).sort()) {
-      hash.update(`${name}\0`).update(await readFile(path.join(splitDir, name))).update("\0");
-    }
-    manifest.content_hash = hash.digest("hex").slice(0, 16);
-    manifest.image_shards = config.shards.map((shard) => shard.url);
-    await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
-  }
+  await stampManifest(path.join(out, "data"), config.shards.map((shard) => shard.url));
   return { rewritten, missing, bytes: await dirSize(out) };
+}
+
+// Data files the app may fetch on their own: every JSON under data/ except the per-channel kit
+// files (content_hash covers them), the manifest itself and the web app's search files.
+export function isSideDataFile(rel) {
+  return rel.endsWith(".json") && !/^split\/(kits-[^/]+|manifest)\.json$/.test(rel) && !rel.startsWith("search/");
+}
+
+// { "<path under data/>": first 16 hex of sha256 } over the bytes as served (after the photo path
+// rewrite), keyed like the app's aux file names ("announcements.json", "atlas/restocks.json"), so
+// the app can also check a download against it (a stale CDN copy or the raw fallback differs).
+// 84 files on 2026-11-12: the manifest grows from 0.6 KB to 4.8 KB (1.9 KB gzipped). Listing only
+// what the app reads today would be smaller but would miss the next file the app starts reading.
+export async function sideFileHashes(dataDir) {
+  const names = [];
+  for (const entry of await readdir(dataDir, { recursive: true, withFileTypes: true })) {
+    if (!entry.isFile()) continue;
+    const rel = path.relative(dataDir, path.join(entry.parentPath ?? entry.path, entry.name)).split(path.sep).join("/");
+    if (isSideDataFile(rel)) names.push(rel);
+  }
+  const files = {};
+  for (const rel of names.sort()) files[rel] = createHash("sha256").update(await readFile(path.join(dataDir, rel))).digest("hex").slice(0, 16);
+  return files;
+}
+
+// The app re-downloads the split files only when content_hash (with updated_at and total) changes.
+// Until files existed, a change to a side file alone (2 new announcements on 2026-11-12) did not
+// reach the app before the kits changed too.
+export async function stampManifest(dataDir, imageShards) {
+  const manifestPath = path.join(dataDir, "split", "manifest.json");
+  if (!existsSync(manifestPath)) return null;
+  const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
+  const hash = createHash("sha256");
+  const splitDir = path.join(dataDir, "split");
+  for (const name of (await readdir(splitDir)).filter((n) => n !== "manifest.json" && n.endsWith(".json")).sort()) {
+    hash.update(`${name}\0`).update(await readFile(path.join(splitDir, name))).update("\0");
+  }
+  manifest.content_hash = hash.digest("hex").slice(0, 16);
+  manifest.image_shards = imageShards;
+  manifest.files = await sideFileHashes(dataDir);
+  await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+  return manifest;
 }
 
 function summary(lines) {
