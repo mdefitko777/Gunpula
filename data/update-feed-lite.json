@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-11",
-  "generated_at": "2026-11-11T00:10:04.466Z",
+  "generated_at": "2026-11-11T06:55:45.034Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,35 +18,1243 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-11T00:09:44.053Z",
+    "generated_at": "2026-11-11T06:54:41.211Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-11",
-      "generated_at": "2026-11-11T00:10:04.466Z",
+      "generated_at": "2026-11-11T06:55:45.034Z",
       "total_before": 39337,
-      "total_after": 39337,
-      "added_count": 0,
-      "changed_count": 0,
+      "total_after": 39340,
+      "added_count": 2,
+      "changed_count": 235,
       "removed_count": 0,
-      "watched_count": 0,
+      "watched_count": 7,
       "merged_count": 0,
-      "backfilled_count": 0,
+      "backfilled_count": 1,
       "renamed_count": 0,
-      "premium_bandai_count": 0,
+      "premium_bandai_count": 14,
       "bbx_count": 0,
-      "franchise_counts": {},
-      "reason_counts": {},
-      "interest_tags": [],
-      "watch_tags": [],
-      "added": [],
-      "changed": [],
+      "franchise_counts": {
+        "pokemon": 22,
+        "gundam": 14,
+        "armored_core": 5,
+        "fate": 81
+      },
+      "reason_counts": {
+        "new": 2,
+        "archive": 13,
+        "name": 89,
+        "release": 19,
+        "limited": 2
+      },
+      "interest_tags": [
+        "pokemon",
+        "gundam",
+        "premium_bandai",
+        "seed",
+        "00",
+        "armored_core",
+        "fate"
+      ],
+      "watch_tags": [
+        "seed",
+        "00"
+      ],
+      "added": [
+        {
+          "kit_id": "pokemon-kr-137700113",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Garden Wedding 봉제인형 피카츄(수컷의 모습)",
+            "zh": "포켓몬센터 宝可梦 Garden Wedding 봉제인형 피카츄(수컷의 모습)",
+            "ko": "포켓몬센터 포켓몬 Garden Wedding 봉제인형 피카츄(수컷의 모습)",
+            "en": "포켓몬센터 Pokémon Garden Wedding 봉제인형 피카츄(수컷의 모습)"
+          },
+          "release_date": "2026-11-11",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137700113"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137702286",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Garden Wedding 봉제인형 피카츄(암컷의 모습)",
+            "zh": "포켓몬센터 宝可梦 Garden Wedding 봉제인형 피카츄(암컷의 모습)",
+            "ko": "포켓몬센터 포켓몬 Garden Wedding 봉제인형 피카츄(암컷의 모습)",
+            "en": "포켓몬센터 Pokémon Garden Wedding 봉제인형 피카츄(암컷의 모습)"
+          },
+          "release_date": "2026-11-11",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137702286"
+          ]
+        }
+      ],
+      "changed": [
+        {
+          "kit_id": "mg-mg-1-100-4573102591395000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "MG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 スラッシュザクファントム（イザーク・ジュール専用機）",
+            "zh": "MG 1 / 100 斩击扎古幻影(伊扎克·焦尔专用机)",
+            "ko": "MG 1/100 슬래시 자쿠 팬텀(이자크 쥴 전용기)",
+            "en": "ＭＧ 1 / 100 スラッシュZakuファントム (イザーク ジュールCustom機)"
+          },
+          "release_date": "2020-04",
+          "price_jpy": 5390,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102591395000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "pg-pg-1-60-4573102591333000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "PG",
+          "subline": "PG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＰＧ 1 / 60 ストライクガンダム用 パーフェクトストライクガンダム拡張パーツ",
+            "zh": "PG 1 / 60 强袭高达用 完美强袭高达扩展配件",
+            "ko": "PG 1/60 스트라이크 건담용 퍼펙트 스트라이크 건담 확장 파츠",
+            "en": "ＰＧ 1 / 60 Strike Gundam用 パーフェクトStrike Gundam拡張パーツ"
+          },
+          "release_date": "2020-02-01",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102591333000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "mg-mg-1-100-4573102590046000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "MG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ブラストインパルスガンダム",
+            "zh": "MG 1 / 100 爆破型脉冲高达",
+            "ko": "MG 1/100 블라스트 임펄스건담",
+            "en": "ＭＧ 1 / 100 ブラストImpulse Gundam"
+          },
+          "release_date": "2020-01",
+          "price_jpy": 5500,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102590046000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000138385",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ジンクスIV（量産機）",
+            "zh": "HG 1 / 144 GN-XIV(量产机)",
+            "ko": "HG 1/144 진엑스 IV(양산기)",
+            "en": "ＨＧ 1 / 144 ジンクスIV (量産機)"
+          },
+          "release_date": "2019-12",
+          "price_jpy": 2420,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "00"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000138385/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000130813",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ダブルオークアンタフルセイバー ［スペシャルコーティング］",
+            "zh": "MG 1 / 100 00 Qan[T] 全刃式 [特别涂层版]",
+            "ko": "MG 1/100 더블오 퀀터 풀 세이버 ［스페셜 코팅］",
+            "en": "ＭＧ 1 / 100 ダブルオーQan [T]フルセイバー ［スペシャルコーティング］"
+          },
+          "release_date": "2019-10",
+          "price_jpy": 11880,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "00"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000130813/"
+          ]
+        },
+        {
+          "kit_id": "rg-rg-1-144-4573102580863000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "RG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＲＧ 1 / 144 パーフェクトストライクガンダム",
+            "zh": "RG 1 / 144 完美强袭高达",
+            "ko": "RG 1/144 퍼펙트 스트라이크건담",
+            "en": "ＲＧ 1 / 144 パーフェクトStrike Gundam"
+          },
+          "release_date": "2019-09",
+          "price_jpy": 4400,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102580863000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "rg-rg-1-144-ver-4543112968241000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "RG",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "ＲＧ 1 / 144 トランザムライザー グロスインジェクションＶｅｒ．",
+            "zh": "RG 1 / 144 TRANS-AM强化模组 光泽注塑Ver.",
+            "ko": "RG 1/144 트랜스암 라이저 글로스 인젝션 Ver.",
+            "en": "ＲＧ 1 / 144 トランザムライザー グロスインジェクションＶｅｒ．"
+          },
+          "release_date": "2015-06",
+          "price_jpy": 3300,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "00"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112968241000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "acvi-4934054083251",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "V.I.シリーズ",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "ミラージュ C02-URANUS ウラヌス",
+            "zh": "幻影 C02-URANUS 天王星",
+            "ko": "미라주 C02-URANUS 우라노스",
+            "en": "ミラージュ C02-URANUS ウラヌス"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 9900,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054083251/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g1142291",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid Doll",
+          "series_key": "fate_stay_night",
+          "series_labels": {
+            "zh": "stay night",
+            "en": "stay night",
+            "ja": "stay night",
+            "ko": "stay night"
+          },
+          "names": {
+            "ja": "Nendoroid Doll Outfit Set: Saber - Casual Outfit Ver.",
+            "zh": "粘土人Doll 服装套装: Saber - 便服 Ver.",
+            "ko": "Nendoroid Doll Outfit 세트: Saber - Casual Outfit Ver.",
+            "en": "Nendoroid Doll Outfit Set: Saber - Casual Outfit Ver."
+          },
+          "release_date": "2027-02",
+          "price_jpy": 5500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "good_smile_fate_global",
+            "hobby_search_fate_jp"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/1142291"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g1142290",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid Doll",
+          "series_key": "fate_stay_night",
+          "series_labels": {
+            "zh": "stay night",
+            "en": "stay night",
+            "ja": "stay night",
+            "ko": "stay night"
+          },
+          "names": {
+            "ja": "Nendoroid Doll Saber: Casual Outfit Ver.",
+            "zh": "粘土人Doll Saber: 便服 Ver.",
+            "ko": "넨도로이드 돌 세이버: 캐주얼 의상 Ver.",
+            "en": "Nendoroid Doll Saber: Casual Outfit Ver."
+          },
+          "release_date": "2027-02",
+          "price_jpy": 9800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "good_smile_fate_global",
+            "hobby_search_fate_jp"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/1142290"
+          ]
+        },
+        {
+          "kit_id": "acvi-4934054088713",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "V.I.シリーズ",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "クレスト CR-C75U2 デルタVer.",
+            "zh": "克雷斯特 CR-C75U2 德尔塔Ver.",
+            "ko": "크레스트 CR-C75U2 델타 Ver.",
+            "en": "クレスト CR-C75U2 デルタVer."
+          },
+          "release_date": "2027-02",
+          "price_jpy": 9900,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054088713/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
+        {
+          "kit_id": "acvi-4934054083244",
+          "change_type": "changed",
+          "franchise": "armored_core",
+          "grade_code": "ACVI",
+          "subline": "V.I.シリーズ",
+          "series_key": "armored_core",
+          "series_labels": {
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
+          },
+          "names": {
+            "ja": "クレスト CR-C75U2 白兵戦Ver.",
+            "zh": "克雷斯特 CR-C75U2 白刃战Ver.",
+            "ko": "크레스트 CR-C75U2 백병전 Ver.",
+            "en": "クレスト CR-C75U2 白兵戦Ver."
+          },
+          "release_date": "2027-01",
+          "price_jpy": 9900,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "kotobukiya_armored_core_jp"
+          ],
+          "source_urls": [
+            "https://shop.kotobukiya.co.jp/shop/g/g4934054083244/",
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-136476284",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 레더 캔버스 토트백",
+            "zh": "宝可梦商店 「ETERNAL ANTIQUE METAL」 皮革帆布 托特包",
+            "ko": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 레더 캔버스 토트백",
+            "en": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 레더 캔버스 토트백"
+          },
+          "release_date": "2026-11-11",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=136476284"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-136476276",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(글레이시아)",
+            "zh": "宝可梦商店 「ETERNAL ANTIQUE METAL」 金属 钥匙圈(冰伊布)",
+            "ko": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(글레이시아)",
+            "en": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(글레이시아)"
+          },
+          "release_date": "2026-11-11",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=136476276"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-136476277",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(님피아)",
+            "zh": "宝可梦商店 「ETERNAL ANTIQUE METAL」 金属 钥匙圈(仙子伊布)",
+            "ko": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(님피아)",
+            "en": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(님피아)"
+          },
+          "release_date": "2026-11-11",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=136476277"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-136476275",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(리피아)",
+            "zh": "宝可梦商店 「ETERNAL ANTIQUE METAL」 金属 钥匙圈(叶伊布)",
+            "ko": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(리피아)",
+            "en": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(리피아)"
+          },
+          "release_date": "2026-11-11",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=136476275"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-136476272",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(부스터)",
+            "zh": "宝可梦商店 「ETERNAL ANTIQUE METAL」 金属 钥匙圈(火伊布)",
+            "ko": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(부스터)",
+            "en": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(부스터)"
+          },
+          "release_date": "2026-11-11",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=136476272"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-136476274",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(블래키)",
+            "zh": "宝可梦商店 「ETERNAL ANTIQUE METAL」 金属 钥匙圈(月亮伊布)",
+            "ko": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(블래키)",
+            "en": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(블래키)"
+          },
+          "release_date": "2026-11-11",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=136476274"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-136476270",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(샤미드)",
+            "zh": "宝可梦商店 「ETERNAL ANTIQUE METAL」 金属 钥匙圈(水伊布)",
+            "ko": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(샤미드)",
+            "en": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(샤미드)"
+          },
+          "release_date": "2026-11-11",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=136476270"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-136476273",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(에브이)",
+            "zh": "宝可梦商店 「ETERNAL ANTIQUE METAL」 金属 钥匙圈(太阳伊布)",
+            "ko": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(에브이)",
+            "en": "포켓몬 스토어 「ETERNAL ANTIQUE METAL」 메탈 키링(에브이)"
+          },
+          "release_date": "2026-11-11",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=136476273"
+          ]
+        }
+      ],
       "removed": [],
-      "watched": [],
+      "watched": [
+        {
+          "kit_id": "mg-mg-1-100-4573102591395000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "MG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 スラッシュザクファントム（イザーク・ジュール専用機）",
+            "zh": "MG 1 / 100 斩击扎古幻影(伊扎克·焦尔专用机)",
+            "ko": "MG 1/100 슬래시 자쿠 팬텀(이자크 쥴 전용기)",
+            "en": "ＭＧ 1 / 100 スラッシュZakuファントム (イザーク ジュールCustom機)"
+          },
+          "release_date": "2020-04",
+          "price_jpy": 5390,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102591395000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "pg-pg-1-60-4573102591333000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "PG",
+          "subline": "PG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＰＧ 1 / 60 ストライクガンダム用 パーフェクトストライクガンダム拡張パーツ",
+            "zh": "PG 1 / 60 强袭高达用 完美强袭高达扩展配件",
+            "ko": "PG 1/60 스트라이크 건담용 퍼펙트 스트라이크 건담 확장 파츠",
+            "en": "ＰＧ 1 / 60 Strike Gundam用 パーフェクトStrike Gundam拡張パーツ"
+          },
+          "release_date": "2020-02-01",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102591333000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "mg-mg-1-100-4573102590046000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "MG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ブラストインパルスガンダム",
+            "zh": "MG 1 / 100 爆破型脉冲高达",
+            "ko": "MG 1/100 블라스트 임펄스건담",
+            "en": "ＭＧ 1 / 100 ブラストImpulse Gundam"
+          },
+          "release_date": "2020-01",
+          "price_jpy": 5500,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102590046000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000138385",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ジンクスIV（量産機）",
+            "zh": "HG 1 / 144 GN-XIV(量产机)",
+            "ko": "HG 1/144 진엑스 IV(양산기)",
+            "en": "ＨＧ 1 / 144 ジンクスIV (量産機)"
+          },
+          "release_date": "2019-12",
+          "price_jpy": 2420,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "00"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000138385/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000130813",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ダブルオークアンタフルセイバー ［スペシャルコーティング］",
+            "zh": "MG 1 / 100 00 Qan[T] 全刃式 [特别涂层版]",
+            "ko": "MG 1/100 더블오 퀀터 풀 세이버 ［스페셜 코팅］",
+            "en": "ＭＧ 1 / 100 ダブルオーQan [T]フルセイバー ［スペシャルコーティング］"
+          },
+          "release_date": "2019-10",
+          "price_jpy": 11880,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "00"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000130813/"
+          ]
+        },
+        {
+          "kit_id": "rg-rg-1-144-4573102580863000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "RG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＲＧ 1 / 144 パーフェクトストライクガンダム",
+            "zh": "RG 1 / 144 完美强袭高达",
+            "ko": "RG 1/144 퍼펙트 스트라이크건담",
+            "en": "ＲＧ 1 / 144 パーフェクトStrike Gundam"
+          },
+          "release_date": "2019-09",
+          "price_jpy": 4400,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102580863000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "rg-rg-1-144-ver-4543112968241000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "RG",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "ＲＧ 1 / 144 トランザムライザー グロスインジェクションＶｅｒ．",
+            "zh": "RG 1 / 144 TRANS-AM强化模组 光泽注塑Ver.",
+            "ko": "RG 1/144 트랜스암 라이저 글로스 인젝션 Ver.",
+            "en": "ＲＧ 1 / 144 トランザムライザー グロスインジェクションＶｅｒ．"
+          },
+          "release_date": "2015-06",
+          "price_jpy": 3300,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "00"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112968241000&grp_id=5325"
+          ]
+        }
+      ],
       "merged": [],
-      "backfilled": [],
+      "backfilled": [
+        {
+          "kit_id": "pbandai-wb-1000141492",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "unicorn",
+          "series_labels": {
+            "zh": "UC",
+            "en": "Unicorn",
+            "ja": "UC",
+            "ko": "UC"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 シナンジュ・スタイン（ユニコーンＶｅｒ．）",
+            "zh": "HG 1 / 144 新安洲·原石(UC版)",
+            "ko": "HG 1/144 시난주・スタイン（유니콘Ver.）",
+            "en": "ＨＧ 1 / 144 Sinanju スタイン (UnicornＶｅｒ．)"
+          },
+          "release_date": "2020-01",
+          "price_jpy": 2860,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000141492/"
+          ]
+        }
+      ],
       "renamed": []
     },
     {
@@ -143,7 +1351,7 @@
           "subline": "Promotional",
           "series_key": "lego_promotional",
           "series_labels": {
-            "zh": "Promotional",
+            "zh": "赠品",
             "en": "Promotional",
             "ja": "Promotional",
             "ko": "프로모션"
@@ -186,10 +1394,10 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "615 ぬいぐるみ Pok&eacute;mon fit フリージオ",
+            "ja": "615 ぬいぐるみ ポケモン fit フリージオ",
             "zh": "615 毛绒玩偶 宝可梦 fit 几何雪花",
-            "ko": "615 봉제인형 Pokémon fit 프리지오",
-            "en": "615 ぬいぐるみ Pok&eacute;mon fit フリージオ"
+            "ko": "615 ぬいぐるみ 포켓몬 fit フリージオ",
+            "en": "615 ぬいぐるみ Pokémon fit フリージオ"
           },
           "release_date": null,
           "price_jpy": 1320,
@@ -223,10 +1431,10 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "666 ぬいぐるみ Pok&eacute;mon fit ビビヨン(はなぞののもよう)",
-            "zh": "666 毛绒玩偶 Pok&eacute;mon fit 彩粉蝶(花园花纹)",
-            "ko": "666 ぬいぐるみ Pokémon fit ビビヨン(はなぞののもよう)",
-            "en": "666 ぬいぐるみ Pok&eacute;mon fit ビビヨン(はなぞののもよう)"
+            "ja": "666 ぬいぐるみ ポケモン fit ビビヨン(はなぞののもよう)",
+            "zh": "666 毛绒玩偶 宝可梦 fit 彩粉蝶(花园花纹)",
+            "ko": "666 ぬいぐるみ 포켓몬 fit ビビヨン(はなぞののもよう)",
+            "en": "666 ぬいぐるみ Pokémon fit ビビヨン(はなぞののもよう)"
           },
           "release_date": null,
           "price_jpy": 1980,
@@ -260,10 +1468,10 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "785 ぬいぐるみ Pok&eacute;mon fit カプ・コケコ",
-            "zh": "785 毛绒玩偶 Pok&eacute;mon fit 卡璞・鸣鸣",
-            "ko": "785 ぬいぐるみ Pokémon fit カプ・コケコ",
-            "en": "785 ぬいぐるみ Pok&eacute;mon fit カプ コケコ"
+            "ja": "785 ぬいぐるみ ポケモン fit カプ・コケコ",
+            "zh": "785 毛绒玩偶 宝可梦 fit 卡璞·鸣鸣",
+            "ko": "785 ぬいぐるみ 포켓몬 fit カプ・コケコ",
+            "en": "785 ぬいぐるみ Pokémon fit カプ コケコ"
           },
           "release_date": null,
           "price_jpy": 1980,
@@ -410,7 +1618,7 @@
           "names": {
             "ja": "モンコレ MS-07 メガガブリアス",
             "zh": "宝可梦 Moncolle 小手办 MS-07 超级烈咬陆鲨",
-            "ko": "モンコレ MS-07 メガガブリアス",
+            "ko": "몬콜레 MS-07 메가한카리아스",
             "en": "モンコレ MS-07 メガガブリアス"
           },
           "release_date": null,
@@ -3634,7 +4842,7 @@
           "subline": "Bag and Luggage Tags",
           "series_key": "lego_gear",
           "series_labels": {
-            "zh": "Gear",
+            "zh": "周边",
             "en": "Gear",
             "ja": "Gear",
             "ko": "굿즈"
@@ -3671,7 +4879,7 @@
           "subline": "Bag and Luggage Tags",
           "series_key": "lego_gear",
           "series_labels": {
-            "zh": "Gear",
+            "zh": "周边",
             "en": "Gear",
             "ja": "Gear",
             "ko": "굿즈"
@@ -3708,7 +4916,7 @@
           "subline": "Key Chain",
           "series_key": "lego_gear",
           "series_labels": {
-            "zh": "Gear",
+            "zh": "周边",
             "en": "Gear",
             "ja": "Gear",
             "ko": "굿즈"
@@ -6178,7 +7386,7 @@
           "subline": "プレミアムバンダイ",
           "series_key": "sentinel",
           "series_labels": {
-            "zh": "Sentinel",
+            "zh": "前哨战",
             "en": "Sentinel",
             "ja": "センチネル",
             "ko": "센티넬"
@@ -7462,7 +8670,7 @@
           "subline": "Botanicals",
           "series_key": "lego_botanicals",
           "series_labels": {
-            "zh": "Botanicals",
+            "zh": "植物",
             "en": "Botanicals",
             "ja": "Botanicals",
             "ko": "보태니컬"
@@ -7499,7 +8707,7 @@
           "subline": "Botanicals",
           "series_key": "lego_botanicals",
           "series_labels": {
-            "zh": "Botanicals",
+            "zh": "植物",
             "en": "Botanicals",
             "ja": "Botanicals",
             "ko": "보태니컬"
@@ -7536,7 +8744,7 @@
           "subline": "Botanicals",
           "series_key": "lego_botanicals",
           "series_labels": {
-            "zh": "Botanicals",
+            "zh": "植物",
             "en": "Botanicals",
             "ja": "Botanicals",
             "ko": "보태니컬"
@@ -7573,7 +8781,7 @@
           "subline": "Botanicals",
           "series_key": "lego_botanicals",
           "series_labels": {
-            "zh": "Botanicals",
+            "zh": "植物",
             "en": "Botanicals",
             "ja": "Botanicals",
             "ko": "보태니컬"
@@ -7610,7 +8818,7 @@
           "subline": "Ninjago",
           "series_key": "lego_ninjago",
           "series_labels": {
-            "zh": "Ninjago",
+            "zh": "幻影忍者",
             "en": "Ninjago",
             "ja": "Ninjago",
             "ko": "닌자고"
@@ -7647,7 +8855,7 @@
           "subline": "Botanicals",
           "series_key": "lego_botanicals",
           "series_labels": {
-            "zh": "Botanicals",
+            "zh": "植物",
             "en": "Botanicals",
             "ja": "Botanicals",
             "ko": "보태니컬"
@@ -7684,7 +8892,7 @@
           "subline": "Botanicals",
           "series_key": "lego_botanicals",
           "series_labels": {
-            "zh": "Botanicals",
+            "zh": "植物",
             "en": "Botanicals",
             "ja": "Botanicals",
             "ko": "보태니컬"
@@ -7721,7 +8929,7 @@
           "subline": "Botanicals",
           "series_key": "lego_botanicals",
           "series_labels": {
-            "zh": "Botanicals",
+            "zh": "植物",
             "en": "Botanicals",
             "ja": "Botanicals",
             "ko": "보태니컬"
@@ -8039,7 +9247,7 @@
           "subline": "Database Sets",
           "series_key": "lego_other",
           "series_labels": {
-            "zh": "Other",
+            "zh": "其他",
             "en": "Other",
             "ja": "Other",
             "ko": "기타"
@@ -20671,10 +21879,10 @@
             "ko": "AC"
           },
           "names": {
-            "ja": "ミラージュ C02-URANUS ウラヌス （ミラージュ C02-URANUS ウラヌス）",
-            "zh": "幻影 C02-URANUS 天王星 (幻影 C02-URANUS 天王星)",
-            "ko": "미라주 C02-URANUS 우라노스 (미라주 C02-URANUS 우라노스)",
-            "en": "ミラージュ C02-URANUS ウラヌス (ミラージュ C02-URANUS ウラヌス)"
+            "ja": "ミラージュ C02-URANUS ウラヌス",
+            "zh": "幻影 C02-URANUS 天王星",
+            "ko": "미라주 C02-URANUS 우라노스",
+            "en": "ミラージュ C02-URANUS ウラヌス"
           },
           "release_date": "2027-03",
           "price_jpy": 9900,
@@ -20709,10 +21917,10 @@
             "ko": "AC"
           },
           "names": {
-            "ja": "クレスト CR-C75U2 デルタVer. （クレスト CR-C75U2 デルタVer.）",
-            "zh": "克雷斯特 CR-C75U2 德尔塔Ver. (克雷斯特 CR-C75U2 德尔塔Ver.)",
-            "ko": "크레스트 CR-C75U2 델타 Ver. (크레스트 CR-C75U2 델타 Ver.)",
-            "en": "クレスト CR-C75U2 デルタVer. (クレスト CR-C75U2 デルタVer.)"
+            "ja": "クレスト CR-C75U2 デルタVer.",
+            "zh": "克雷斯特 CR-C75U2 德尔塔Ver.",
+            "ko": "크레스트 CR-C75U2 델타 Ver.",
+            "en": "クレスト CR-C75U2 デルタVer."
           },
           "release_date": "2027-02",
           "price_jpy": 9900,
@@ -20747,10 +21955,10 @@
             "ko": "AC"
           },
           "names": {
-            "ja": "クレスト CR-C75U2 白兵戦Ver. （クレスト CR-C75U2 白兵戦Ver.）",
-            "zh": "克雷斯特 CR-C75U2 白刃战Ver. (克雷斯特 CR-C75U2 白刃战Ver.)",
-            "ko": "크레스트 CR-C75U2 백병전 Ver. (크레스트 CR-C75U2 백병전 Ver.)",
-            "en": "クレスト CR-C75U2 白兵戦Ver. (クレスト CR-C75U2 白兵戦Ver.)"
+            "ja": "クレスト CR-C75U2 白兵戦Ver.",
+            "zh": "克雷斯特 CR-C75U2 白刃战Ver.",
+            "ko": "크레스트 CR-C75U2 백병전 Ver.",
+            "en": "クレスト CR-C75U2 白兵戦Ver."
           },
           "release_date": "2027-01",
           "price_jpy": 9900,
@@ -21096,10 +22304,10 @@
             "ko": "AC"
           },
           "names": {
-            "ja": "クレスト CR-C98E2 強襲型Ver. （クレスト CR-C98E2 強襲型Ver.）",
-            "zh": "克雷斯特 CR-C98E2 强袭型Ver. (克雷斯特 CR-C98E2 强袭型Ver.)",
-            "ko": "크레스트 CR-C98E2 강습형 Ver. (크레스트 CR-C98E2 강습형 Ver.)",
-            "en": "クレスト CR-C98E2 強襲型Ver. (クレスト CR-C98E2 強襲型Ver.)"
+            "ja": "クレスト CR-C98E2 強襲型Ver.",
+            "zh": "克雷斯特 CR-C98E2 强袭型Ver.",
+            "ko": "크레스트 CR-C98E2 강습형 Ver.",
+            "en": "クレスト CR-C98E2 強襲型Ver."
           },
           "release_date": "2026-10-23",
           "price_jpy": 7920,
@@ -21134,10 +22342,10 @@
             "ko": "AC"
           },
           "names": {
-            "ja": "クレスト CR-C90U3 （クレスト CR-C90U3）",
-            "zh": "克雷斯特 CR-C90U3 (克雷斯特 CR-C90U3)",
-            "ko": "크레스트 CR-C90U3 (크레스트 CR-C90U3)",
-            "en": "クレスト CR-C90U3 (クレスト CR-C90U3)"
+            "ja": "クレスト CR-C90U3",
+            "zh": "克雷斯特 CR-C90U3",
+            "ko": "크레스트 CR-C90U3",
+            "en": "クレスト CR-C90U3"
           },
           "release_date": "2026-09-28",
           "price_jpy": 7920,
@@ -24795,10 +26003,10 @@
             "ko": "AC"
           },
           "names": {
-            "ja": "ミラージュ C02-URANUS ウラヌス （ミラージュ C02-URANUS ウラヌス）",
-            "zh": "幻影 C02-URANUS 天王星 (幻影 C02-URANUS 天王星)",
-            "ko": "미라주 C02-URANUS 우라노스 (미라주 C02-URANUS 우라노스)",
-            "en": "ミラージュ C02-URANUS ウラヌス (ミラージュ C02-URANUS ウラヌス)"
+            "ja": "ミラージュ C02-URANUS ウラヌス",
+            "zh": "幻影 C02-URANUS 天王星",
+            "ko": "미라주 C02-URANUS 우라노스",
+            "en": "ミラージュ C02-URANUS ウラヌス"
           },
           "release_date": "2027-03",
           "price_jpy": 9900,
@@ -24833,10 +26041,10 @@
             "ko": "AC"
           },
           "names": {
-            "ja": "クレスト CR-C75U2 デルタVer. （クレスト CR-C75U2 デルタVer.）",
-            "zh": "克雷斯特 CR-C75U2 德尔塔Ver. (克雷斯特 CR-C75U2 德尔塔Ver.)",
-            "ko": "크레스트 CR-C75U2 델타 Ver. (크레스트 CR-C75U2 델타 Ver.)",
-            "en": "クレスト CR-C75U2 デルタVer. (クレスト CR-C75U2 デルタVer.)"
+            "ja": "クレスト CR-C75U2 デルタVer.",
+            "zh": "克雷斯特 CR-C75U2 德尔塔Ver.",
+            "ko": "크레스트 CR-C75U2 델타 Ver.",
+            "en": "クレスト CR-C75U2 デルタVer."
           },
           "release_date": "2027-02",
           "price_jpy": 9900,
@@ -24871,10 +26079,10 @@
             "ko": "AC"
           },
           "names": {
-            "ja": "クレスト CR-C75U2 白兵戦Ver. （クレスト CR-C75U2 白兵戦Ver.）",
-            "zh": "克雷斯特 CR-C75U2 白刃战Ver. (克雷斯特 CR-C75U2 白刃战Ver.)",
-            "ko": "크레스트 CR-C75U2 백병전 Ver. (크레스트 CR-C75U2 백병전 Ver.)",
-            "en": "クレスト CR-C75U2 白兵戦Ver. (クレスト CR-C75U2 白兵戦Ver.)"
+            "ja": "クレスト CR-C75U2 白兵戦Ver.",
+            "zh": "克雷斯特 CR-C75U2 白刃战Ver.",
+            "ko": "크레스트 CR-C75U2 백병전 Ver.",
+            "en": "クレスト CR-C75U2 白兵戦Ver."
           },
           "release_date": "2027-01",
           "price_jpy": 9900,
@@ -24947,10 +26155,10 @@
             "ko": "AC"
           },
           "names": {
-            "ja": "クレスト CR-C98E2 強襲型Ver. （クレスト CR-C98E2 強襲型Ver.）",
-            "zh": "克雷斯特 CR-C98E2 强袭型Ver. (克雷斯特 CR-C98E2 强袭型Ver.)",
-            "ko": "크레스트 CR-C98E2 강습형 Ver. (크레스트 CR-C98E2 강습형 Ver.)",
-            "en": "クレスト CR-C98E2 強襲型Ver. (クレスト CR-C98E2 強襲型Ver.)"
+            "ja": "クレスト CR-C98E2 強襲型Ver.",
+            "zh": "克雷斯特 CR-C98E2 强袭型Ver.",
+            "ko": "크레스트 CR-C98E2 강습형 Ver.",
+            "en": "クレスト CR-C98E2 強襲型Ver."
           },
           "release_date": "2026-10-23",
           "price_jpy": 7920,
@@ -24985,10 +26193,10 @@
             "ko": "AC"
           },
           "names": {
-            "ja": "クレスト CR-C90U3 （クレスト CR-C90U3）",
-            "zh": "克雷斯特 CR-C90U3 (克雷斯特 CR-C90U3)",
-            "ko": "크레스트 CR-C90U3 (크레스트 CR-C90U3)",
-            "en": "クレスト CR-C90U3 (クレスト CR-C90U3)"
+            "ja": "クレスト CR-C90U3",
+            "zh": "克雷斯特 CR-C90U3",
+            "ko": "크레스트 CR-C90U3",
+            "en": "クレスト CR-C90U3"
           },
           "release_date": "2026-09-28",
           "price_jpy": 7920,
@@ -28849,10 +30057,10 @@
             "ko": "AC"
           },
           "names": {
-            "ja": "ミラージュ C02-URANUS ウラヌス （ミラージュ C02-URANUS ウラヌス）",
-            "zh": "幻影 C02-URANUS 天王星 (幻影 C02-URANUS 天王星)",
-            "ko": "미라주 C02-URANUS 우라노스 (미라주 C02-URANUS 우라노스)",
-            "en": "ミラージュ C02-URANUS ウラヌス (ミラージュ C02-URANUS ウラヌス)"
+            "ja": "ミラージュ C02-URANUS ウラヌス",
+            "zh": "幻影 C02-URANUS 天王星",
+            "ko": "미라주 C02-URANUS 우라노스",
+            "en": "ミラージュ C02-URANUS ウラヌス"
           },
           "release_date": "2027-03",
           "price_jpy": 9900,
@@ -29916,10 +31124,10 @@
             "ko": "AC"
           },
           "names": {
-            "ja": "クレスト CR-C98E2 強襲型Ver. （クレスト CR-C98E2 強襲型Ver.）",
-            "zh": "克雷斯特 CR-C98E2 强袭型Ver. (克雷斯特 CR-C98E2 强袭型Ver.)",
-            "ko": "크레스트 CR-C98E2 강습형 Ver. (크레스트 CR-C98E2 강습형 Ver.)",
-            "en": "クレスト CR-C98E2 強襲型Ver. (クレスト CR-C98E2 強襲型Ver.)"
+            "ja": "クレスト CR-C98E2 強襲型Ver.",
+            "zh": "克雷斯特 CR-C98E2 强袭型Ver.",
+            "ko": "크레스트 CR-C98E2 강습형 Ver.",
+            "en": "クレスト CR-C98E2 強襲型Ver."
           },
           "release_date": "2026-10-23",
           "price_jpy": 7920,
@@ -37053,10 +38261,10 @@
             "ko": "AC"
           },
           "names": {
-            "ja": "クレスト CR-C75U2 デルタVer. （クレスト CR-C75U2 デルタVer.）",
-            "zh": "克雷斯特 CR-C75U2 德尔塔Ver. (克雷斯特 CR-C75U2 德尔塔Ver.)",
-            "ko": "크레스트 CR-C75U2 델타 Ver. (크레스트 CR-C75U2 델타 Ver.)",
-            "en": "クレスト CR-C75U2 デルタVer. (クレスト CR-C75U2 デルタVer.)"
+            "ja": "クレスト CR-C75U2 デルタVer.",
+            "zh": "克雷斯特 CR-C75U2 德尔塔Ver.",
+            "ko": "크레스트 CR-C75U2 델타 Ver.",
+            "en": "クレスト CR-C75U2 デルタVer."
           },
           "release_date": "2027-02",
           "price_jpy": 9900,
