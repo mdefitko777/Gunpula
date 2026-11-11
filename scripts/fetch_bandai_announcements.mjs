@@ -37,8 +37,20 @@ import {
   youtubeFeedUrls,
 } from "./lib/official-announcements.mjs";
 import { parseKotobukiyaShopDetail } from "./lib/kotobukiya-shop.mjs";
+import {
+  COROCORO_FRANCHISES,
+  COROCORO_HOST,
+  COROCORO_SOURCE_ID,
+  COROCORO_SOURCE_NAME,
+  dropMagazineDuplicates,
+  emptyCoroCoroState,
+  runCoroCoroSource,
+} from "./lib/corocoro-news.mjs";
+import { loadRobots, robotsAllows } from "./lib/robots.mjs";
 
 const OUTPUT_PATH = "data/announcements.json";
+// Posts CoroCoro News already gave us, so each run reads only new ones.
+const COROCORO_STATE_PATH = "data/announcements-corocoro.json";
 const IMAGE_DIR = "app/assets/announcements";
 const USER_AGENT = "HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)";
 // At most about one request per second to any one host.
@@ -51,6 +63,9 @@ const MAX_CACHED_IMAGE_BYTES = 300 * 1024;
 // ANNOUNCEMENT_REPLAY=1 to rerun the parsers without touching the network).
 const RAW_CACHE_DIR = process.env.ANNOUNCEMENT_RAW_CACHE_DIR || "";
 const REPLAY = process.env.ANNOUNCEMENT_REPLAY === "1";
+// Optional: comma-separated source ids to run (trying one source without
+// fetching all the others); the others keep their stored records.
+const ONLY_SOURCES = new Set((process.env.ANNOUNCEMENT_SOURCES || "").split(",").map((id) => id.trim()).filter(Boolean));
 
 const lastRequestAt = new Map();
 
@@ -75,7 +90,7 @@ function decodeBody(buffer, contentType) {
   }
 }
 
-async function fetchText(url) {
+async function fetchText(url, accept = "text/html,application/atom+xml,application/xml;q=0.9,*/*;q=0.8") {
   if (REPLAY && RAW_CACHE_DIR) {
     try {
       return await readFile(rawCachePath(url), "utf8");
@@ -89,17 +104,22 @@ async function fetchText(url) {
     signal: AbortSignal.timeout(25000),
     headers: {
       "user-agent": USER_AGENT,
-      accept: "text/html,application/atom+xml,application/xml;q=0.9,*/*;q=0.8",
+      accept,
       "accept-language": "ja-JP,ja;q=0.9,en;q=0.6",
     },
   });
-  if (!response.ok) throw new Error(`${url} returned ${response.status}`);
+  if (!response.ok) throw Object.assign(new Error(`${url} returned ${response.status}`), { status: response.status });
   const text = decodeBody(Buffer.from(await response.arrayBuffer()), response.headers.get("content-type"));
   if (RAW_CACHE_DIR) {
     await mkdir(RAW_CACHE_DIR, { recursive: true });
     await writeFile(rawCachePath(url), text);
   }
   return text;
+}
+
+// A non-JSON answer (a bot-check page) throws a SyntaxError.
+async function fetchJson(url) {
+  return JSON.parse(await fetchText(url, "application/json"));
 }
 
 // YouTube's channel_id feed sometimes answers 404 for a day (BANDAI SPIRITS,
@@ -190,6 +210,46 @@ async function cacheAnnouncementImages(records) {
   for (const filename of await readdir(IMAGE_DIR)) {
     if (!used.has(filename)) await unlink(`${IMAGE_DIR}/${filename}`);
   }
+}
+
+async function readJson(path, fallback) {
+  try {
+    return JSON.parse(await readFile(path, "utf8"));
+  } catch {
+    return fallback;
+  }
+}
+
+async function runCoroCoro() {
+  // robots.txt first (2026-11-12: only /wp-admin/ is disallowed).
+  await waitForHost(`https://${COROCORO_HOST}/robots.txt`);
+  const robots = await loadRobots(COROCORO_HOST, { userAgent: USER_AGENT });
+  console.log(`${COROCORO_SOURCE_ID}: robots.txt ${robots.status}`);
+  const { state, records, stopped } = await runCoroCoroSource({
+    state: await readJson(COROCORO_STATE_PATH, emptyCoroCoroState()),
+    today,
+    fetchJson,
+    robotsAllows: (url) => robotsAllows(robots, url),
+    log: (line) => console.log(line),
+  });
+  // Saved even when the site stopped us halfway: posts already read are not
+  // fetched again tomorrow.
+  await writeFile(COROCORO_STATE_PATH, `${JSON.stringify(state, null, 2)}\n`);
+  if (stopped) {
+    errors.push({ source_id: COROCORO_SOURCE_ID, message: stopped });
+    console.warn(`${COROCORO_SOURCE_ID}: ${stopped}`);
+  }
+  return records;
+}
+
+// Catalog products per franchise, for telling a magazine scoop of a new bey
+// from an old one mentioned again. The split files are last run's catalog.
+async function readCatalogKits() {
+  const byFranchise = new Map();
+  for (const { franchise } of COROCORO_FRANCHISES) {
+    byFranchise.set(franchise, (await readJson(`data/split/kits-${franchise}.json`, {}))?.kits || []);
+  }
+  return byFranchise;
 }
 
 const previous = await readPrevious();
@@ -343,6 +403,14 @@ const SOURCES = [
     },
   },
   {
+    // Magazine scoops; after the makers' own pages and stores, so an official
+    // post about the same product wins.
+    id: COROCORO_SOURCE_ID,
+    name: COROCORO_SOURCE_NAME,
+    url: `https://${COROCORO_HOST}/`,
+    run: runCoroCoro,
+  },
+  {
     id: "bandai_hobby_youtube",
     name: "BANDAI Hobby Site YouTube",
     url: BANDAI_HOBBY_YOUTUBE_FEED_URLS[0],
@@ -369,6 +437,7 @@ const DEDUPE_PRIORITY = SOURCES.map((source) => source.id);
 const errors = [];
 const incoming = [];
 for (const source of SOURCES) {
+  if (ONLY_SOURCES.size && !ONLY_SOURCES.has(source.id)) continue;
   try {
     const records = (await source.run())
       .map((record) => ({ ...record, source_id: record.source_id || source.id }))
@@ -392,13 +461,20 @@ const incomingById = new Map();
 for (const record of incoming) if (!incomingById.has(record.id)) incomingById.set(record.id, record);
 
 const merged = mergeAnnouncementRecords(previous.announcements, [...incomingById.values()]);
-const { records: announcements, dropped } = dedupeAnnouncements(merged, DEDUPE_PRIORITY);
+// Magazine records an official source or the catalog already covers go first;
+// the stored copy is dropped too, not only today's.
+const magazine = dropMagazineDuplicates(merged, await readCatalogKits());
+if (magazine.dropped.length) console.log(`Dropped ${magazine.dropped.length} CoroCoro records covered by official sources or the catalog.`);
+const { records: announcements, dropped } = dedupeAnnouncements(magazine.records, DEDUPE_PRIORITY);
 if (dropped.length) console.log(`Dropped ${dropped.length} cross-source duplicates.`);
 await cacheAnnouncementImages(announcements);
 await writeFile(OUTPUT_PATH, `${JSON.stringify({
   updated_at: new Date().toISOString(),
   sources: SOURCES.map((source) => ({ source_id: source.id, name: source.name, url: source.url })),
-  fetch_errors: errors,
+  // A partial run (ANNOUNCEMENT_SOURCES) keeps the other sources' last errors.
+  fetch_errors: ONLY_SOURCES.size
+    ? [...(previous.fetch_errors || []).filter((error) => !ONLY_SOURCES.has(error.source_id)), ...errors]
+    : errors,
   announcements,
 }, null, 2)}\n`);
 

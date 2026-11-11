@@ -289,13 +289,15 @@ export function parseBeybladeNews(html, pageUrl = BEYBLADE_X_NEWS_URL) {
 }
 
 // Store listings (Premium Bandai, Kotobukiya, the BEYBLADE X lineup, Takara
-// Tomy's Pokémon page) are products by construction, so their titles carry no
-// reveal verb and must not be re-checked against the news-title filter.
+// Tomy's Pokémon page) and the per-product CoroCoro records are products by
+// construction, so their titles carry no reveal verb and must not be
+// re-checked against the news-title filter.
 const LISTING_SOURCE_IDS = new Set([
   "premium_bandai_new_items",
   "kotobukiya_shop",
   "beyblade_x_lineup",
   "takaratomy_pokemon",
+  "corocoro_news",
 ]);
 // Sources with their own title rule; everything else uses isProductAnnouncement.
 const SOURCE_TITLE_RULES = {

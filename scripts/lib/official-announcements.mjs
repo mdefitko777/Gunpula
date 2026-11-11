@@ -470,7 +470,7 @@ export function kotobukiyaAnnouncement({ title: titleInfo, goods, detail, detail
 // within ten days are the same reveal. The earlier source in `priority` wins,
 // but a record someone reviewed or linked in the CMS is never dropped.
 
-function normalizeProductKey(value) {
+export function normalizeProductKey(value) {
   return decodeFullWidthDigits(String(value || ""))
     .normalize("NFKC")
     .toLowerCase()
