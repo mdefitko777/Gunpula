@@ -11,6 +11,7 @@
 // `keywords`), while the category filter is the bare `categoryNos`.
 import { readFile, writeFile } from "node:fs/promises";
 import { KIT_ALIASES_PATH, retiredKitIds } from "./lib/catalog-cleanup.mjs";
+import { decodeEntities } from "./lib/html-entities.mjs";
 
 const CATALOG_PATH = "data/kits.json";
 const SOURCE_ID = "pokemon_store_kr";
@@ -96,7 +97,8 @@ function gradeFor(name, category) {
 }
 
 function toKit(product, category) {
-  const name = String(product.productName || "").replace(LOTTERY_PREFIX, "").replace(/\s+/g, " ").trim();
+  // the API sends names HTML-escaped ("Pikachu&apos;s Sweet Delivery")
+  const name = decodeEntities(product.productName || "").replace(LOTTERY_PREFIX, "").replace(/\s+/g, " ").trim();
   const image = absoluteImage((product.listImageUrls || product.imageUrls || [])[0]);
   const url = `${STORE}/pages/product/product-detail.html?productNo=${product.productNo}`;
   const price = Number.isInteger(product.salePrice) && product.salePrice > 0 ? product.salePrice : null;

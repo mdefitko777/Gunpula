@@ -1,4 +1,5 @@
 import { readFile, writeFile } from "node:fs/promises";
+import { decodeEntities } from "./lib/html-entities.mjs";
 
 const CATALOG_PATH = "data/kits.json";
 const SOURCE_ID = "pokemon_center_jp";
@@ -8,17 +9,10 @@ function today() {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
 }
 
+// Every Pokémon fit plush reads "Pok&eacute;mon fit …" on the category page; the old short list
+// (amp, quot, #039 …) kept that reference in 314 names until 2026-11-11.
 function decodeHtml(value = "") {
-  return String(value)
-    .replace(/<br\s*\/?>/gi, " ")
-    .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, '"')
-    .replace(/&#039;/g, "'")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
-    .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(Number.parseInt(code, 16)))
+  return decodeEntities(String(value).replace(/<br\s*\/?>/gi, " "))
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -64,7 +58,7 @@ async function fetchTextWithRetry(url, attempts = 3) {
   throw lastError;
 }
 
-function parseProducts(html) {
+export function parseProducts(html) {
   const products = [];
   const pattern = /<li class="product" data-pid="([^"]+)">([\s\S]*?)<\/li>/g;
   for (const match of html.matchAll(pattern)) {
@@ -153,19 +147,24 @@ function mergeCatalog(existingKits, importedKits) {
 // unreachable store must not fail the daily refresh: warn and exit 0. Its
 // products are absent from that day's catalog and return on the next
 // successful import.
-let html;
-try {
-  html = await fetchTextWithRetry(CATEGORY_URL);
-} catch (error) {
-  console.warn(`Pokemon Center Japan: skipped, source unreachable (${error.cause?.message || error.message}). Products return on the next successful import.`);
-  process.exit(0);
+async function main() {
+  let html;
+  try {
+    html = await fetchTextWithRetry(CATEGORY_URL);
+  } catch (error) {
+    console.warn(`Pokemon Center Japan: skipped, source unreachable (${error.cause?.message || error.message}). Products return on the next successful import.`);
+    process.exit(0);
+  }
+
+  const catalog = JSON.parse(await readFile(CATALOG_PATH, "utf8"));
+  const importedKits = parseProducts(html).map(toKit);
+  if (!importedKits.length) {
+    console.warn("Pokemon Center Japan: page fetched but no products parsed (layout change or interstitial page). Skipping this import.");
+    process.exit(0);
+  }
+  await writeFile(CATALOG_PATH, `${JSON.stringify({ ...catalog, updated_at: today(), kits: mergeCatalog(catalog.kits, importedKits) }, null, 2)}\n`, "utf8");
+  console.log(`Pokemon Center Japan: imported ${importedKits.length} products from plush/toys category page.`);
 }
 
-const catalog = JSON.parse(await readFile(CATALOG_PATH, "utf8"));
-const importedKits = parseProducts(html).map(toKit);
-if (!importedKits.length) {
-  console.warn("Pokemon Center Japan: page fetched but no products parsed (layout change or interstitial page). Skipping this import.");
-  process.exit(0);
-}
-await writeFile(CATALOG_PATH, `${JSON.stringify({ ...catalog, updated_at: today(), kits: mergeCatalog(catalog.kits, importedKits) }, null, 2)}\n`, "utf8");
-console.log(`Pokemon Center Japan: imported ${importedKits.length} products from plush/toys category page.`);
+// Tests import parseProducts without fetching.
+if (/(^|[\\/])import_pokemon_center_jp\.mjs$/.test(process.argv[1] || "")) await main();

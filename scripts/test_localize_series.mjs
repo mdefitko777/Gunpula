@@ -91,6 +91,12 @@ assert.equal(v2.names.en, "HGUC 1 / 144 V2 Assault Buster Gundam");
   assert.equal(label("08小隊"), "08小队", "not 08MS");
   assert.equal(label("エルメロイII世の事件簿"), "埃尔梅罗二世事件簿");
   assert.equal(label("複合作品"), "多作品");
+  assert.equal(label("センチネル"), "前哨战", "not the English Sentinel (second check 2026-11-11)");
+  assert.equal(label("ムーン"), "MOON高达", "bandaihobbysite.cn's 机动战士MOON高达, not the fan name 月钢");
+  const lego = (theme) => localizeKit({ kit_id: "lego-test", franchise: "lego", work_title: theme, names: { en: theme } }).series.labels;
+  assert.deepEqual(lego("Star Wars"), { zh: "星球大战", en: "Star Wars", ja: "Star Wars", ko: "스타워즈" });
+  assert.equal(lego("Collectible Minifigures").zh, "人仔抽抽乐");
+  assert.equal(lego("Some New Theme").zh, "Some New Theme", "a theme the file does not know keeps its name");
 }
 
 console.log("localize series: ok");

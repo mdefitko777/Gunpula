@@ -14,14 +14,7 @@
 //     Korean name but different release years get the year: "HG 1/144 레전드 건담 (2026년)"
 //     (not LEGO: the app puts the set number in front of every LEGO name)
 
-const ENTITIES = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " ", eacute: "é", times: "×", yen: "¥" };
-
-export function decodeEntities(value) {
-  return value
-    .replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCodePoint(Number.parseInt(hex, 16)))
-    .replace(/&#(\d+);/g, (_, dec) => String.fromCodePoint(Number(dec)))
-    .replace(/&([a-z]+);/gi, (match, name) => ENTITIES[name.toLowerCase()] ?? match);
-}
+import { decodeEntities } from "./html-entities.mjs";
 
 // U+FF01–FF5E is ASCII 0x21–0x7E shifted by 0xFEE0; U+3000 is the ideographic space.
 const FULL_WIDTH_ASCII = /[\uFF01-\uFF5E\u3000]/g;
@@ -42,7 +35,8 @@ const YEAR_SUFFIX = / \((?:19|20)\d{2}년\)$/;
 
 /** One Korean name, on its own (no knowledge of other records; the year suffix is left to tidyKoNames). */
 export function tidyKo(name) {
-  let ko = foldFullWidth(decodeEntities(String(name || ""))).replace(YEAR_SUFFIX, "");
+  // &nbsp; decodes to U+00A0; names keep a plain space, as before the shared table
+  let ko = foldFullWidth(decodeEntities(String(name || "")).replace(/\u00a0/g, " ")).replace(YEAR_SUFFIX, "");
   ko = ko.replace(/【[^】]*(?:무료\s*배송|캠페인|送料無料)[^】]*】/g, " ");
   const reissue = ko.replace(REISSUE, " ") !== ko;
   ko = ko.replace(REISSUE, " ");

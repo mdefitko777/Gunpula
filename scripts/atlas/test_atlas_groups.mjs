@@ -197,4 +197,16 @@ checks += 2;
   checks += 2;
 }
 
+// Chinese labels (second check 2026-11-11): LEGO themes from data/lego/theme-labels-zh.json,
+// BEYBLADE X team subtitles from data/atlas/atlas-zh-overrides.json, never the Japanese
+{
+  const lego = groups.franchises.lego;
+  assert.equal(lego.find((g) => g.labels.en === "Star Wars")?.labels.zh, "星球大战");
+  assert.equal(lego.find((g) => g.labels.en === "Ninjago")?.labels.zh, "幻影忍者");
+  const kana = /[぀-ヿ]/;
+  for (const g of groups.franchises.beyblade) assert.ok(!kana.test(g.subtitle?.zh || ""), `${g.id}: ${g.subtitle?.zh}`);
+  assert.equal(groups.franchises.beyblade.find((g) => g.subtitle?.ja === "ゲームオリジナル（BEYBLADE X XONE）")?.subtitle.zh, "游戏原创（BEYBLADE X XONE）");
+  checks += 4;
+}
+
 console.log(`atlas groups: ${checks} checks passed`);

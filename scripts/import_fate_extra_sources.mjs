@@ -30,6 +30,7 @@ import {
 import { KIT_ALIASES_PATH, retiredKitIds } from "./lib/catalog-cleanup.mjs";
 import { gradeForProduct, scaleFor } from "./lib/fate-grades.mjs";
 import { HOBBY_SEARCH_BASE, parseHobbySearch, tidyStoredHobbySearchKits } from "./lib/hobby-search.mjs";
+import { decodeEntities } from "./lib/html-entities.mjs";
 import { absoluteHtmlUrl } from "./lib/html-url.mjs";
 import { aniplexCampaign, nameKey, needsQualifier, qualifiedName, sameName } from "./lib/fate-names.mjs";
 
@@ -56,22 +57,10 @@ function today() {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
 }
 
+// Aniplex+ writes &times; ("崩壊：スターレイル&times;Fate/stay night"), &Eacute; (COSM&Eacute;TIQUE),
+// &Phi; and &ndash; in names: the full table, not a short list.
 function decodeHtml(value = "") {
-  return String(value)
-    .replace(/<br\s*\/?>/gi, " ")
-    .replace(/<[^>]+>/g, " ")
-    .replace(/&nbsp;/g, " ")
-    .replace(/&yen;/g, "¥")
-    // Collaboration titles use &times; ("崩壊：スターレイル&times;Fate/stay night").
-    .replace(/&times;/g, "×")
-    .replace(/&eacute;/g, "é")
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, '"')
-    .replace(/&#039;|&#39;/g, "'")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
-    .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(Number.parseInt(code, 16)))
+  return decodeEntities(String(value).replace(/<br\s*\/?>/gi, " ").replace(/<[^>]+>/g, " "))
     .replace(/\s+/g, " ")
     .trim();
 }

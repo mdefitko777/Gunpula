@@ -19,6 +19,7 @@
 // Empty groups are left out. `--report=<file>` writes every product's group and reason (for review).
 import { readFileSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
+import { hasKana } from "./lib/zh-names.mjs";
 import { armoredCoreClassifier, fateClassifier, lang, madokaClassifier, MADOKA_CHARACTERS, pokemonClassifier, POKEMON_GAMES, AC_TITLES, productText } from "./atlas/lib/atlas_groups.mjs";
 
 const readJson = async (file, fallback) => {
@@ -39,6 +40,10 @@ const bbxBladers = await readJson("data/atlas/bbx-bladers.json", { bladers: [] }
 // Korean for names the sources leave in Japanese (team names, servants without a KR name)
 const koOverrides = (await readJson("data/atlas/atlas-ko-overrides.json", { ko: {} })).ko || {};
 const koFix = (text) => koOverrides[text] ?? text;
+// Chinese for the same names; one the file does not have gets no zh (the app falls back to
+// another language), not the Japanese (49 BEYBLADE X team subtitles until 2026-11-11)
+const zhOverrides = (await readJson("data/atlas/atlas-zh-overrides.json", { zh: {} })).zh || {};
+const zhFix = (text) => zhOverrides[text] ?? (hasKana(text) ? "" : text);
 const coverFile = await readJson("data/atlas/atlas-covers.json", { covers: {} });
 const reportArg = process.argv.find((a) => a.startsWith("--report="))?.slice(9);
 const kits = (catalog.kits || []).filter((kit) => kit.data_status !== "hidden");
@@ -302,7 +307,7 @@ function beybladeGroups() {
         id: b.id,
         kind: "blader",
         labels: lang(b.names.zh, b.names.ko, b.names.en, b.names.ja),
-        subtitle: lang(b.team || "", koFix(b.team || ""), b.team || "", b.team || ""),
+        subtitle: lang(zhFix(b.team || ""), koFix(b.team || ""), b.team || "", b.team || ""),
         image: newest ? newest.product.image || newest.product.image_remote || "" : "",
         cover_source: "newest product picture",
         blades: b.blades.map((x) => x.name_ja),
@@ -317,6 +322,7 @@ function beybladeGroups() {
 // ─────────────── LEGO: one group per Rebrickable top-level theme (work_title) ───────────────
 function legoGroups() {
   const ko = JSON.parse(readFileSync("data/lego/theme-labels-ko.json", "utf8")).labels;
+  const zh = JSON.parse(readFileSync("data/lego/theme-labels-zh.json", "utf8")).labels;
   const byTheme = new Map();
   for (const k of kits.filter((x) => x.franchise === "lego")) {
     const theme = k.work_title || "Other";
@@ -330,7 +336,7 @@ function legoGroups() {
       return {
         id: `lego_${theme.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "other"}`,
         kind: "theme",
-        labels: lang(theme, ko[theme] || theme, theme, theme),
+        labels: lang(zh[theme] || theme, ko[theme] || theme, theme, theme),
         subtitle: lang("", "", "", ""),
         image: newest?.images.box_art_url || "",
         cover_source: "newest set picture (Rebrickable)",

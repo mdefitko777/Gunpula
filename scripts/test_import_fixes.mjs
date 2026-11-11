@@ -14,6 +14,9 @@ import {
 import { aliasPublishedFolds, strandedPublishedIds } from "./lib/fold-aliases.mjs";
 import { cleanHobbySearchName, hobbySearchListPrice, parseHobbySearch, tidyStoredHobbySearchKits } from "./lib/hobby-search.mjs";
 import { HTML_ENTITY_IN_URL, absoluteHtmlUrl, decodeHtmlAttr } from "./lib/html-url.mjs";
+import { decodeEntities } from "./lib/html-entities.mjs";
+import { tidyKo } from "./lib/ko-tidy.mjs";
+import { parseProducts } from "./import_pokemon_center_jp.mjs";
 
 // ---------------------------------------------------------------- escaped image URLs
 const ANIPLEX = "https://online.aniplex.co.jp";
@@ -212,6 +215,18 @@ assert.equal(busy.refused, true);
   assert.ok(report.summary.includes("- **naver_shop** failing since 2026-11-09: 9/9 requests failed"));
   assert.equal(healthReport({ sources: { joongna: { status: "ok" } } }).annotations.length, 0);
   assert.ok(healthSummary({ naver_shop: { attempted: 9, matched: 0, errors: 9, since: "2026-11-09T20:10:00Z" } }).includes("| naver_shop | failing since 2026-11-09 |"));
+}
+
+// ---------------------------------------------------------------- HTML entities in names (second check 2026-11-11)
+assert.equal(decodeEntities("785 ぬいぐるみ Pok&eacute;mon fit"), "785 ぬいぐるみ Pokémon fit");
+assert.equal(decodeEntities("COSM&Eacute;TIQUE &Phi;APMAKEIO &ndash;終局特異点&ndash; gMS-&Omega; Pikachu&apos;s"), "COSMÉTIQUE ΦAPMAKEIO –終局特異点– gMS-Ω Pikachu's");
+assert.equal(decodeEntities("&omega; &OMEGA; &AMP; &#039; &#x41; &unknown;"), "ω &OMEGA; & ' A &unknown;", "case-sensitive names, unknown kept");
+assert.equal(decodeEntities("&amp;eacute;"), "&eacute;", "decoded once");
+assert.equal(tidyKo("포켓몬센터 봉제인형 Pok&eacute;mon fit&nbsp;피카츄"), "포켓몬센터 봉제인형 Pokémon fit 피카츄");
+{
+  const [plush] = parseProducts(`<li class="product" data-pid="4521329427874"><p class="txt"><a href="/4521329427874.html">785 ぬいぐるみ Pok&eacute;mon fit カプ・コケコ</a></p><p class="price"><a>1,980円</a></p></li>`);
+  assert.equal(plush.name, "785 ぬいぐるみ Pokémon fit カプ・コケコ");
+  assert.equal(plush.price_jpy, 1980);
 }
 
 console.log("import fixes ok");

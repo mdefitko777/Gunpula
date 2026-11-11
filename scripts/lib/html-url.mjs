@@ -3,14 +3,11 @@
 // and the escaped form answers 404. Decode the character references first, then
 // let URL percent-encode what needs it (× → %C3%97; a literal & in a path is fine).
 
-const NAMED = { amp: "&", quot: '"', apos: "'", lt: "<", gt: ">", nbsp: " ", times: "×", yen: "¥" };
+import { decodeEntities } from "./html-entities.mjs";
 
 /** Character references in an attribute value → text (no tag stripping, no whitespace folding). */
 export function decodeHtmlAttr(value = "") {
-  return String(value)
-    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
-    .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(Number.parseInt(code, 16)))
-    .replace(/&([a-z]+);/gi, (match, name) => NAMED[name.toLowerCase()] ?? match);
+  return decodeEntities(value);
 }
 
 /** An href / src from HTML → absolute URL ("" when it cannot be one). */

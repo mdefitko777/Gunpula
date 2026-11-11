@@ -5,21 +5,30 @@
 // product's source name is still the one that was translated, like names-ko.json), else the
 // glossary translation (scripts/lib/zh-names.mjs). LEGO keeps its English name.
 // search_zh: fan / other-region names of every glossary term in the name (沙煲 for サザビー,
-// 海牛 for Hi-ν …) — search only, never shown.
+// 海牛 for Hi-ν …) and of the shorter terms inside a longer one (渣古 for 量産型ザク) — search only,
+// never shown.
 // Products whose Chinese name still has kana and no curated entry go to
 // data/i18n/names-zh-pending.json (the to-do list for the next translation pass).
 //
 // Runs in the daily refresh after apply_ko_names.mjs. Idempotent.
 
 import { readFile, writeFile } from "node:fs/promises";
+import { decodeEntities } from "./lib/html-entities.mjs";
 import { hasKana, loadGlossary, searchAliases, translateName } from "./lib/zh-names.mjs";
 
 const KITS_PATH = "data/kits.json";
 const NAMES_PATH = "data/i18n/names-zh.json";
 const PENDING_PATH = "data/i18n/names-zh-pending.json";
 
+const NENDOROID_ZH = "粘土人";
+
+function isNendoroid(kit, src) {
+  return kit.grade_code === "NENDOROID" || /nendoroid|ねんどろいど/i.test(src);
+}
+
+// Decoded like apply_ko_names.mjs: an entry outlives an importer that starts decoding "&eacute;".
 export function sourceName(kit) {
-  return (kit.names?.ja || kit.names?.en || "").trim();
+  return decodeEntities(kit.names?.ja || kit.names?.en || "").trim();
 }
 
 async function readJson(file, fallback) {
@@ -51,7 +60,10 @@ export function applyZhNames(kits, curated, glossaryFor) {
       if (!auto.complete) pending[kit.kit_id] = { src, auto: auto.zh };
     }
     kit.names = { ...kit.names, zh };
-    const words = searchAliases(auto.matched, glossary).filter((word) => !zh.includes(word));
+    const words = searchAliases(auto.matched, glossary, auto.inner).filter((word) => !zh.includes(word));
+    // every Nendoroid answers 粘土人, whatever its name says (goodsmile.com's English
+    // "Nendoroid …" names had no 粘土人 anywhere until 2026-11-11)
+    if (isNendoroid(kit, src) && !zh.includes(NENDOROID_ZH) && !words.includes(NENDOROID_ZH)) words.push(NENDOROID_ZH);
     if (words.length) kit.search_zh = words;
     else delete kit.search_zh;
   }

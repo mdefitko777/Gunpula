@@ -14,6 +14,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { decodeEntities } from "./lib/html-entities.mjs";
 import { tidyKoNames } from "./lib/ko-tidy.mjs";
 
 const rootDir = dirname(dirname(fileURLToPath(import.meta.url)));
@@ -32,8 +33,10 @@ export function needsKorean(ko) {
   return KANA_RE.test(rest) || KANJI_RE.test(rest);
 }
 
+// Decoded, so an entry keeps applying when an importer starts decoding a reference it used to
+// keep ("Pok&eacute;mon fit" → "Pokémon fit", Pokémon Center 2026-11-11).
 export function sourceName(kit) {
-  return (kit.names?.ja || kit.names?.en || "").trim();
+  return decodeEntities(kit.names?.ja || kit.names?.en || "").trim();
 }
 
 const doc = JSON.parse(await readFile(KITS_PATH, "utf8"));

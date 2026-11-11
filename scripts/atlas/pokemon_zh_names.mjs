@@ -137,6 +137,23 @@ export function speciesWithForm(hant, dex, ctx, charMap) {
   return rest == null ? null : species + rest;
 }
 
+// Sets of the Japanese edition (2020-2024) have no Traditional title to convert, and no official
+// Chinese one: the overseas edition sold other series (星尘 / 银河). Chinese renderings of the
+// Japanese series names (スーパータッグ = tag team → 超级搭档; the promo card is a 卡匣 like the overseas 活动卡匣) (until 2026-11-11 the app
+// showed 第1弹 next to "Super Tag Set 1").
+const JP_SERIES_ZH = { base: "", supertag: "超级搭档", doublechain: "双重连锁", gorgeousstar: "华丽之星" };
+const JP_PROMO_ZH = "特别卡匣";
+
+/** Chinese title of a Japanese-edition set (mz-jp:supertag-1 → 超级搭档第1弹), or null. */
+export function jpSetZh(set) {
+  if (!String(set?.id || "").startsWith("mz-jp:")) return null;
+  if (set.series === "promo") return JP_PROMO_ZH;
+  const n = /(\d+)弾$/.exec(set.names?.ja || "")?.[1];
+  if (!n || !(set.series in JP_SERIES_ZH)) return null;
+  const series = JP_SERIES_ZH[set.series];
+  return series ? `${series}第${n}弹` : `第${n}弹`; // no space, like the overseas 星尘第1弹
+}
+
 /** Set / edition title in Traditional → Simplified, or null when a character is not covered. */
 export function titleZh(hant) {
   if (!hant) return null;
@@ -160,7 +177,8 @@ function withZh(names, zh) {
  * Adds names.zh in place wherever names.zh_hant is. Tags / picks (they carry a dex): the
  * glossary name when it has the printed name's shape (超夢 → 超梦, 阿羅拉九尾 → 阿罗拉九尾),
  * else the printed name converted with the characters those pairs taught (九尾 (阿羅拉的樣子)
- * → 九尾 (阿罗拉的样子)). Sets and the edition: the title map. Returns { added, missing: [text] }.
+ * → 九尾 (阿罗拉的样子)). Sets and the edition: the title map; Japanese-edition sets, which have
+ * no zh_hant: jpSetZh(). Returns { added, missing: [text] }.
  */
 export function addSimplifiedNames(doc, ctx = loadPokemonZh()) {
   const slots = [];
@@ -191,6 +209,12 @@ export function addSimplifiedNames(doc, ctx = loadPokemonZh()) {
     if (!zh) missing.push(hant);
     if ((slot.names.zh || null) !== (zh || null)) added += 1;
     slot.node[slot.key] = withZh(slot.names, zh);
+  }
+  for (const set of doc.sets || []) {
+    const zh = set.names && !set.names.zh_hant ? jpSetZh(set) : null;
+    if (!zh || set.names.zh === zh) continue;
+    set.names = { ...set.names, zh };
+    added += 1;
   }
   return { added, missing: [...new Set(missing)] };
 }

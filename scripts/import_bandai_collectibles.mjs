@@ -9,6 +9,7 @@ import {
   parseKotobukiyaShopListings,
 } from "./lib/kotobukiya-shop.mjs";
 import { KIT_ALIASES_PATH, carryCleanupFields, gundamGradeFromName, nfkc, retiredKitIds } from "./lib/catalog-cleanup.mjs";
+import { HTML_ENTITIES } from "./lib/html-entities.mjs";
 import { buildSpeciesIndex, pokeplaIdentity, pokeplaNames, pokeplaSpeciesKey, pokeplaSubline } from "./lib/pokepla.mjs";
 import { readSalePages, salePageFromKit, seoulToday, upsertSalePage, writeSalePages } from "./lib/sale-pages.mjs";
 import { extractTamashiiGalleryImages } from "./lib/tamashii-images.mjs";
@@ -159,7 +160,8 @@ function decodeHtml(value) {
     .replace(/&gt;/g, ">")
     .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
     .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(Number.parseInt(code, 16)))
-    .replace(/&([a-z][a-z0-9]+);/gi, (match, name) => HTML_ENTITY_MAP[name.toLowerCase()] ?? match)
+    // the short map first (it reads &xi; as Gundam's Ξ), then every HTML 4 name (gMS-&Omega;, 2026-11-11)
+    .replace(/&([a-z][a-z0-9]+);/gi, (match, name) => HTML_ENTITY_MAP[name.toLowerCase()] ?? HTML_ENTITIES[name] ?? match)
     .replace(/\s+/g, " ")
     .trim();
 }

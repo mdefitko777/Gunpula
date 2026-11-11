@@ -1,21 +1,27 @@
+import { decodeEntities } from "./html-entities.mjs";
+
 export const KOTOBUKIYA_AC_PORTAL_URL = "https://www.kotobukiya.co.jp/title/armored-core/";
 export const KOTOBUKIYA_AC_SHOP_URL =
   "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90";
 
 function decodeHtml(value) {
-  return String(value ?? "")
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, '"')
-    .replace(/&#039;|&#39;/g, "'")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
-    .replace(/\s+/g, " ")
-    .trim();
+  return decodeEntities(value).replace(/\s+/g, " ").trim();
 }
 
 function stripTags(value) {
   return decodeHtml(String(value ?? "").replace(/<[^>]+>/g, " "));
+}
+
+// The shop repeats some names in brackets: "クレスト CR-C90U3 （クレスト CR-C90U3）",
+// "キューポッシュ アヴェンジャー / ジャンヌ・ダルク〔オルタ〕 （アヴェンジャー / ジャンヌ・ダルク〔オルタ〕）"
+// (8 products on 2026-11-11, and every language of the name doubled with them). The bracket
+// goes when it only repeats the end of the name.
+export function dropRepeatedName(title) {
+  const match = /^(.+?)\s*[（(]([^()（）]+)[)）]$/.exec(title);
+  if (!match) return title;
+  const key = (value) => value.normalize("NFKC").replace(/\s+/g, "");
+  const inner = key(match[2]);
+  return inner.length >= 4 && key(match[1]).endsWith(inner) ? match[1].trim() : title;
 }
 
 function absoluteUrl(value, baseUrl) {
@@ -54,7 +60,7 @@ export function parseKotobukiyaShopListings(html, pageUrl = KOTOBUKIYA_AC_SHOP_U
     const image = /<img[^>]+data-original="([^"]+)"/.exec(block)?.[1]
       || /<img[^>]+src="([^"]+)"/.exec(block)?.[1];
     const detailUrl = absoluteUrl(href, pageUrl);
-    const title = decodeHtml(titleAttribute || stripTags(titleMarkup));
+    const title = dropRepeatedName(decodeHtml(titleAttribute || stripTags(titleMarkup)));
     const productId = /\/shop\/g\/g([^/]+)\//.exec(detailUrl || "")?.[1];
     if (!detailUrl || !title || !productId) continue;
     listings.push({
@@ -80,7 +86,7 @@ export function parseKotobukiyaShopDetail(html, detailUrl) {
   const releaseMarkup = /<dl class="goods_release_">[\s\S]*?<dd[^>]*>([\s\S]*?)<\/dd>/.exec(html)?.[1];
   const scaleText = definitionValue(html, "スケール");
   return {
-    title: stripTags(/<h1 class="goods_name_">([\s\S]*?)<\/h1>/.exec(html)?.[1]),
+    title: dropRepeatedName(stripTags(/<h1 class="goods_name_">([\s\S]*?)<\/h1>/.exec(html)?.[1])),
     category,
     specification,
     work_title: definitionValue(html, "作品名") || "Armored Core",

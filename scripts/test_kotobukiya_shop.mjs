@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { parseKotobukiyaShopDetail, parseKotobukiyaShopListings } from "./lib/kotobukiya-shop.mjs";
+import { dropRepeatedName, parseKotobukiyaShopDetail, parseKotobukiyaShopListings } from "./lib/kotobukiya-shop.mjs";
 
 const [listing] = parseKotobukiyaShopListings(`
   <li class="tile_item normal">
@@ -24,5 +24,19 @@ assert.equal(detail.release_date, "2026-10");
 assert.equal(detail.price_jpy, 7920);
 assert.equal(detail.scale, "1/72");
 assert.equal(detail.gallery[0], "https://shop.kotobukiya.co.jp/img/goods/L/VI098_CREST_01.jpg");
+
+// A name the shop repeats in brackets is written once (8 products, 2026-11-11)
+assert.equal(dropRepeatedName("クレスト CR-C90U3 （クレスト CR-C90U3）"), "クレスト CR-C90U3");
+assert.equal(
+  dropRepeatedName("キューポッシュ アヴェンジャー / ジャンヌ・ダルク〔オルタ〕 （アヴェンジャー / ジャンヌ・ダルク〔オルタ〕）"),
+  "キューポッシュ アヴェンジャー / ジャンヌ・ダルク〔オルタ〕",
+);
+assert.equal(dropRepeatedName("ナインボール （ARMORED CORE）"), "ナインボール （ARMORED CORE）", "a bracket that says something else stays");
+const [doubled] = parseKotobukiyaShopListings(`
+  <li class="tile_item normal">
+    <a href="/shop/g/g4934054083220/" title="クレスト CR-C90U3 （クレスト CR-C90U3）"><div class="name">x</div></a>
+  </li>`);
+assert.equal(doubled.title, "クレスト CR-C90U3");
+assert.equal(parseKotobukiyaShopDetail(`<h1 class="goods_name_">クレスト CR-C90U3 （クレスト CR-C90U3）</h1>`, doubled.detail_url).title, "クレスト CR-C90U3");
 
 console.log("kotobukiya-shop tests OK");

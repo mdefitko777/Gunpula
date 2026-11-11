@@ -26,9 +26,10 @@
 // 武者, 騎士, SDW HEROES) that only borrow an MS name link with role "sd_character".
 //
 // names.zh: the glossary name for the MS's Japanese name (what product names use, scripts/
-// apply_zh_names.mjs), else the GGET unit's. On 2026-11-11 the GGET-only names disagreed with the
-// glossary for 262 MS (渣古 / 扎古, 卡碧尼 / 京宝梵) and left 318 MS the glossary knows without
-// zh; a different GGET name is kept in name_aliases.zh for search.
+// apply_zh_names.mjs), else the glossary's word-by-word translation of it when nothing is left in
+// Japanese, else the GGET unit's with the product spelling (渣古 → 扎古). On 2026-11-11 the GGET-only
+// names disagreed with the glossary for 262 MS (渣古 / 扎古, 卡碧尼 / 京宝梵) and left 318 MS the
+// glossary knows without zh; a different GGET name is kept in name_aliases.zh for search.
 //
 // Debugging: ATLAS_EXPLAIN=<regex> prints how matching kits were matched,
 // ATLAS_EXPLAIN_UNIT=<regex> prints the candidate scores of matching GGET units.
@@ -37,7 +38,7 @@ import { buildWorks, eraTimeline, TIMELINES, wikiSeriesMatcher } from "./gundam_
 import { classifyKit, cleanKitName, isSetName, janOf, kitJoinKey, sdOriginalWork, splitPilotCustom, splitSet } from "./lib/kitnames.mjs";
 import { buildKoLexicon, transliterateKo } from "./lib/ko_translit.mjs";
 import { withCrawlPolicy } from "./lib/policy.mjs";
-import { exactGlossaryName, loadGlossary } from "../lib/zh-names.mjs";
+import { composedGlossaryName, exactGlossaryName, loadGlossary } from "../lib/zh-names.mjs";
 import { ATLAS_DATA, countBy, hasJapanese, modelKey, nameKey, nfkc, pct, readJson, repoPath, today, uniq, writeCompactJson } from "./lib/util.mjs";
 
 const P = (f) => path.join(ATLAS_DATA, f);
@@ -45,6 +46,20 @@ const MIN_LINK_RATIO = Number(process.env.ATLAS_MIN_LINK_RATIO || 0.8); // refus
 const MIN_NAME_RATIO = Number(process.env.ATLAS_MIN_NAME_RATIO || 0.8); // same for localized MS names
 const EXPLAIN = process.env.ATLAS_EXPLAIN ? new RegExp(nfkc(process.env.ATLAS_EXPLAIN), "i") : null;
 const EXPLAIN_UNIT = process.env.ATLAS_EXPLAIN_UNIT ? new RegExp(nfkc(process.env.ATLAS_EXPLAIN_UNIT), "i") : null;
+
+// G Generation spells two suit families unlike the Chinese product names (data/i18n/zh/gundam-ms.json):
+// 渣古 for ザク (扎古) and 卡碧尼 for キュベレイ (京宝梵).
+const GGEN_SPELLING = [
+  [/渣古/g, "扎古"],
+  [/卡碧尼/g, "京宝梵"],
+];
+
+/** A GGET name with the product spelling, or null when it already has it. */
+export function productSpelling(zh) {
+  if (!zh) return null;
+  const fixed = GGEN_SPELLING.reduce((text, [from, to]) => text.replace(from, to), zh);
+  return fixed === zh ? null : fixed;
+}
 
 // Names too generic to be used for contains / truncated matching.
 const GENERIC = new Set(
@@ -1042,7 +1057,14 @@ async function main() {
         }
       }
       const ggetZh = fromUnit ? rec.gget_names?.zh : null;
-      const glossaryZh = exactGlossaryName(zhGlossary, names.ja, fromUnit ? rec.gget_names?.ja : null);
+      // A derived MS the glossary has no whole term for (シャア専用ザクI, 量産型キュベレイ) gets the
+      // word-by-word name its kits carry (夏亚专用扎古I), from its own Japanese name only (GGET's unit
+      // may be the plain suit). Else GGET's name with the product spelling (ザクII F2型: 渣古IIF2型 →
+      // 扎古IIF2型). 14 MS still read 渣古 / 卡碧尼 on 2026-11-11.
+      const glossaryZh =
+        exactGlossaryName(zhGlossary, names.ja, fromUnit ? rec.gget_names?.ja : null) ??
+        composedGlossaryName(zhGlossary, names.ja) ??
+        productSpelling(ggetZh);
       if (glossaryZh || ggetZh) names.zh = glossaryZh || ggetZh;
       o.names = names;
       if (Object.keys(namesSrc).length) o.names_src = namesSrc;
@@ -1157,7 +1179,10 @@ async function main() {
   }
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+// Tests import productSpelling without building.
+if (/(^|[\\/])build_gundam_ms\.mjs$/.test(process.argv[1] || "")) {
+  main().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+  });
+}

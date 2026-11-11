@@ -5,8 +5,9 @@ import { fateClassifier } from "./atlas/lib/atlas_groups.mjs";
 
 const CATALOG_FILE = "data/kits.json";
 
-// Korean labels of the LEGO top-level themes (Rebrickable names, franchise lego)
+// Korean and Chinese labels of the LEGO top-level themes (Rebrickable names, franchise lego)
 const LEGO_THEME_KO = JSON.parse(await readFile("data/lego/theme-labels-ko.json", "utf8")).labels;
+const LEGO_THEME_ZH = JSON.parse(await readFile("data/lego/theme-labels-zh.json", "utf8")).labels;
 
 // Gundam products filed under "mixed" or "other" (CONVERGE, MSE, GSF, merch …) whose
 // suits the atlas has linked to works (data/atlas/gundam-kit-ms.json
@@ -266,7 +267,7 @@ const SERIES = [
   {
     key: "moon",
     sort: 244,
-    labels: { zh: "Moon", en: "Moon", ja: "ムーン", ko: "문" },
+    labels: { zh: "MOON高达", en: "Moon", ja: "ムーン", ko: "문" },
     universe: "UC",
     pattern: /Moon Gundam|ムーンガンダム|バルギル/i,
   },
@@ -280,7 +281,7 @@ const SERIES = [
   {
     key: "sentinel",
     sort: 250,
-    labels: { zh: "Sentinel", en: "Sentinel", ja: "センチネル", ko: "센티넬" },
+    labels: { zh: "前哨战", en: "Sentinel", ja: "センチネル", ko: "센티넬" },
     universe: "UC",
     pattern: /Sentinel|Sガンダム|\bEx-S\b(?!tandard)|FAZZ|Zプラス|ゼータプラス|ディープストライカー|ガンダムMk-V|ゼク・アイン|ネロ/i,
   },
@@ -1195,7 +1196,7 @@ function classifySeries(kit) {
     return {
       key: `lego_${theme.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "other"}`,
       sort: 600,
-      labels: { zh: theme, en: theme, ja: theme, ko: LEGO_THEME_KO[theme] || theme },
+      labels: { zh: LEGO_THEME_ZH[theme] || theme, en: theme, ja: theme, ko: LEGO_THEME_KO[theme] || theme },
       universe: "LEGO",
     };
   }
