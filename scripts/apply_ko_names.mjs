@@ -16,6 +16,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { decodeEntities } from "./lib/html-entities.mjs";
 import { tidyKoNames } from "./lib/ko-tidy.mjs";
+import { sameSource } from "./lib/source-key.mjs";
 
 const rootDir = dirname(dirname(fileURLToPath(import.meta.url)));
 const KITS_PATH = join(rootDir, "data/kits.json");
@@ -48,7 +49,7 @@ const pending = [];
 for (const kit of doc.kits) {
   const entry = curated[kit.kit_id];
   const src = sourceName(kit);
-  if (entry && entry.src === src) {
+  if (entry && sameSource(entry.src, src)) {
     if (kit.names.ko !== entry.ko) applied += 1;
     kit.names.ko = entry.ko;
     continue;

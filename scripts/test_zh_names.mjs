@@ -233,3 +233,13 @@ const glossary = {
   assert.equal(doc.tags[0].names.zh, "超梦", "idempotent");
 }
 console.log("zh names: ok");
+
+// Curated names survive a shop respelling the source (Pokémon Center: Pok&eacute;mon → ポケモン, 2026-11-11)
+{
+  const { sameSource } = await import("./lib/source-key.mjs");
+  assert.ok(sameSource("424 ぬいぐるみ Pokémon fit エテボース", "424 ぬいぐるみ ポケモン fit エテボース"));
+  assert.ok(sameSource("424 ぬいぐるみ Pok&eacute;mon fit エテボース", "424 ぬいぐるみ Pokémon fit エテボース"));
+  assert.ok(sameSource("ＨＧ 1/144 ザク", "HG 1 / 144 ザク"));
+  assert.ok(!sameSource("HG 1/144 ザク", "HG 1/144 ザクII"), "a real rename still counts");
+  console.log("source key: ok");
+}

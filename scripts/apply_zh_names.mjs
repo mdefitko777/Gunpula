@@ -15,6 +15,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { decodeEntities } from "./lib/html-entities.mjs";
 import { hasKana, loadGlossary, searchAliases, translateName } from "./lib/zh-names.mjs";
+import { sameSource } from "./lib/source-key.mjs";
 
 const KITS_PATH = "data/kits.json";
 const NAMES_PATH = "data/i18n/names-zh.json";
@@ -52,7 +53,7 @@ export function applyZhNames(kits, curated, glossaryFor) {
     const auto = translateName(src, glossary);
     const entry = curated[kit.kit_id];
     let zh = auto.zh;
-    if (entry?.zh && entry.src === src) {
+    if (entry?.zh && sameSource(entry.src, src)) {
       zh = entry.zh;
       fromCurated += 1;
     } else {
