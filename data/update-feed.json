@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-11",
-  "generated_at": "2026-11-11T06:55:45.034Z",
+  "generated_at": "2026-11-11T07:45:45.534Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,35 +18,35 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-11T06:54:41.211Z",
+    "generated_at": "2026-11-11T07:45:22.998Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-11",
-      "generated_at": "2026-11-11T06:55:45.034Z",
+      "generated_at": "2026-11-11T07:45:45.534Z",
       "total_before": 39337,
       "total_after": 39340,
       "added_count": 2,
-      "changed_count": 235,
+      "changed_count": 264,
       "removed_count": 0,
       "watched_count": 7,
       "merged_count": 0,
       "backfilled_count": 1,
       "renamed_count": 0,
-      "premium_bandai_count": 14,
+      "premium_bandai_count": 15,
       "bbx_count": 0,
       "franchise_counts": {
-        "pokemon": 22,
-        "gundam": 14,
+        "pokemon": 50,
+        "gundam": 15,
         "armored_core": 5,
         "fate": 81
       },
       "reason_counts": {
         "new": 2,
         "archive": 13,
-        "name": 89,
+        "name": 118,
         "release": 19,
         "limited": 2
       },
@@ -4489,6 +4489,44 @@
           ]
         },
         {
+          "kit_id": "pbandai-wb-1000141492",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "unicorn",
+          "series_labels": {
+            "zh": "UC",
+            "en": "Unicorn",
+            "ja": "UC",
+            "ko": "UC"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 シナンジュ・スタイン（ユニコーンＶｅｒ．）",
+            "zh": "HG 1 / 144 新安洲·原石(UC版)",
+            "ko": "HG 1/144 시난주 스타인 (유니콘 Ver.)",
+            "en": "ＨＧ 1 / 144 Sinanju スタイン (UnicornＶｅｒ．)"
+          },
+          "release_date": "2020-01",
+          "price_jpy": 2860,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000141492/"
+          ]
+        },
+        {
           "kit_id": "goodsmile-fate-8555",
           "change_type": "changed",
           "franchise": "fate",
@@ -4638,44 +4676,6 @@
           ],
           "source_urls": [
             "https://p-bandai.jp/item/item-1000138400/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000253808",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "プレミアムバンダイ",
-          "series_key": "turn_a",
-          "series_labels": {
-            "zh": "∀",
-            "en": "Turn A",
-            "ja": "∀",
-            "ko": "턴에이"
-          },
-          "names": {
-            "ja": "ＭＧ 1 / 100 ∀ガンダム／ターンＸ［ナノスキンイメージ］",
-            "zh": "MG 1 / 100 ∀高达/逆X[纳米皮肤印象]",
-            "ko": "MG 1/100 ∀건담/턴X[나노스킨 이미지]",
-            "en": "ＭＧ 1 / 100 ∀Gundam／ターンＸ［ナノスキンイメージ］[Reissue][２次：２０２６年８月発送]"
-          },
-          "release_date": "2019-12",
-          "price_jpy": 15180,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000253808/"
           ]
         }
       ],
@@ -4992,7 +4992,7 @@
           "names": {
             "ja": "ＨＧ 1 / 144 シナンジュ・スタイン（ユニコーンＶｅｒ．）",
             "zh": "HG 1 / 144 新安洲·原石(UC版)",
-            "ko": "HG 1/144 시난주・スタイン（유니콘Ver.）",
+            "ko": "HG 1/144 시난주 스타인 (유니콘 Ver.)",
             "en": "ＨＧ 1 / 144 Sinanju スタイン (UnicornＶｅｒ．)"
           },
           "release_date": "2020-01",
@@ -5156,7 +5156,7 @@
           "names": {
             "ja": "615 ぬいぐるみ ポケモン fit フリージオ",
             "zh": "615 毛绒玩偶 宝可梦 fit 几何雪花",
-            "ko": "615 ぬいぐるみ 포켓몬 fit フリージオ",
+            "ko": "615 봉제인형 Pokémon fit 프리지오",
             "en": "615 ぬいぐるみ Pokémon fit フリージオ"
           },
           "release_date": null,
@@ -5193,7 +5193,7 @@
           "names": {
             "ja": "666 ぬいぐるみ ポケモン fit ビビヨン(はなぞののもよう)",
             "zh": "666 毛绒玩偶 宝可梦 fit 彩粉蝶(花园花纹)",
-            "ko": "666 ぬいぐるみ 포켓몬 fit ビビヨン(はなぞののもよう)",
+            "ko": "666 봉제인형 Pokémon fit 비비용(화원의 모양)",
             "en": "666 ぬいぐるみ Pokémon fit ビビヨン(はなぞののもよう)"
           },
           "release_date": null,
@@ -5230,7 +5230,7 @@
           "names": {
             "ja": "785 ぬいぐるみ ポケモン fit カプ・コケコ",
             "zh": "785 毛绒玩偶 宝可梦 fit 卡璞·鸣鸣",
-            "ko": "785 ぬいぐるみ 포켓몬 fit カプ・コケコ",
+            "ko": "785 봉제인형 Pokémon fit 카푸꼬꼬꼭",
             "en": "785 ぬいぐるみ Pokémon fit カプ コケコ"
           },
           "release_date": null,
@@ -29319,8 +29319,8 @@
           },
           "names": {
             "ja": "もっちりぬいぐるみ ポケモン Sleep おやすみゲンガー",
-            "zh": "软糯毛绒玩偶 宝可梦 Sleep 晚安耿鬼",
-            "ko": "もっちりぬいぐるみ 포켓몬 Sleep おやすみゲンガー",
+            "zh": "软糯毛绒玩偶 Pokémon Sleep 晚安耿鬼",
+            "ko": "쫀득 봉제인형 Pokémon Sleep 잘 자 팬텀",
             "en": "もっちりぬいぐるみ Pokémon Sleep おやすみゲンガー"
           },
           "release_date": null,
@@ -29356,8 +29356,8 @@
           },
           "names": {
             "ja": "もっちりぬいぐるみ ポケモン Sleep おやすみピカチュウ",
-            "zh": "软糯毛绒玩偶 宝可梦 Sleep 晚安皮卡丘",
-            "ko": "もっちりぬいぐるみ 포켓몬 Sleep おやすみピカチュウ",
+            "zh": "软糯毛绒玩偶 Pokémon Sleep 晚安皮卡丘",
+            "ko": "쫀득 봉제인형 Pokémon Sleep 잘 자 피카츄",
             "en": "もっちりぬいぐるみ Pokémon Sleep おやすみピカチュウ"
           },
           "release_date": null,
@@ -29393,8 +29393,8 @@
           },
           "names": {
             "ja": "もっちりぬいぐるみ ポケモン Sleep おやすみヤドン",
-            "zh": "软糯毛绒玩偶 宝可梦 Sleep 晚安呆呆兽",
-            "ko": "もっちりぬいぐるみ 포켓몬 Sleep おやすみヤドン",
+            "zh": "软糯毛绒玩偶 Pokémon Sleep 晚安呆呆兽",
+            "ko": "쫀득 봉제인형 Pokémon Sleep 잘 자 야돈",
             "en": "もっちりぬいぐるみ Pokémon Sleep おやすみヤドン"
           },
           "release_date": null,
@@ -178014,7 +178014,7 @@
           "names": {
             "ja": "666 ぬいぐるみ ポケモン fit ビビヨン(オーシャンのもよう)",
             "zh": "666 毛绒玩偶 宝可梦 fit 彩粉蝶(大洋花纹)",
-            "ko": "666 ぬいぐるみ 포켓몬 fit ビビヨン(オーシャンのもよう)",
+            "ko": "666 봉제인형 Pokémon fit 비비용(오션의 모양)",
             "en": "666 ぬいぐるみ Pokémon fit ビビヨン(オーシャンのもよう)"
           },
           "release_date": null,
@@ -178051,7 +178051,7 @@
           "names": {
             "ja": "782 ぬいぐるみ ポケモン fit ジャラコ",
             "zh": "782 毛绒玩偶 宝可梦 fit 心鳞宝",
-            "ko": "782 ぬいぐるみ 포켓몬 fit ジャラコ",
+            "ko": "782 봉제인형 Pokémon fit 짜랑꼬",
             "en": "782 ぬいぐるみ Pokémon fit ジャラコ"
           },
           "release_date": null,
@@ -179109,7 +179109,7 @@
           "names": {
             "ja": "732 ぬいぐるみ ポケモン fit ケララッパ",
             "zh": "732 毛绒玩偶 宝可梦 fit 喇叭啄鸟",
-            "ko": "732 ぬいぐるみ 포켓몬 fit ケララッパ",
+            "ko": "732 봉제인형 Pokémon fit 크라파",
             "en": "732 ぬいぐるみ Pokémon fit ケララッパ"
           },
           "release_date": null,
@@ -179146,7 +179146,7 @@
           "names": {
             "ja": "735 ぬいぐるみ ポケモン fit デカグース",
             "zh": "735 毛绒玩偶 宝可梦 fit 猫鼬探长",
-            "ko": "735 ぬいぐるみ 포켓몬 fit デカグース",
+            "ko": "735 봉제인형 Pokémon fit 형사구스",
             "en": "735 ぬいぐるみ Pokémon fit デカグース"
           },
           "release_date": null,
@@ -187929,7 +187929,7 @@
           "names": {
             "ja": "512 ぬいぐるみ ポケモン fit ヤナッキー",
             "zh": "512 毛绒玩偶 宝可梦 fit 花椰猿",
-            "ko": "512 ぬいぐるみ 포켓몬 fit ヤナッキー",
+            "ko": "512 봉제인형 Pokémon fit 야나키",
             "en": "512 ぬいぐるみ Pokémon fit ヤナッキー"
           },
           "release_date": null,
@@ -188040,7 +188040,7 @@
           "names": {
             "ja": "603 ぬいぐるみ ポケモン fit シビビール",
             "zh": "603 毛绒玩偶 宝可梦 fit 麻麻鳗",
-            "ko": "603 ぬいぐるみ 포켓몬 fit シビビール",
+            "ko": "603 봉제인형 Pokémon fit 저리릴",
             "en": "603 ぬいぐるみ Pokémon fit シビビール"
           },
           "release_date": null,
@@ -188262,7 +188262,7 @@
           "names": {
             "ja": "734 ぬいぐるみ ポケモン fit ヤングース",
             "zh": "734 毛绒玩偶 宝可梦 fit 猫鼬少",
-            "ko": "734 ぬいぐるみ 포켓몬 fit ヤングース",
+            "ko": "734 봉제인형 Pokémon fit 영구스",
             "en": "734 ぬいぐるみ Pokémon fit ヤングース"
           },
           "release_date": null,
@@ -188784,7 +188784,7 @@
           "names": {
             "ja": "424 ぬいぐるみ ポケモン fit エテボース",
             "zh": "424 毛绒玩偶 宝可梦 fit 双尾怪手",
-            "ko": "424 ぬいぐるみ 포켓몬 fit エテボース",
+            "ko": "424 봉제인형 Pokémon fit 겟핸보숭",
             "en": "424 ぬいぐるみ Pokémon fit エテボース"
           },
           "release_date": null,
@@ -188895,7 +188895,7 @@
           "names": {
             "ja": "521 ぬいぐるみ ポケモン fit ケンホロウ(メスのすがた)",
             "zh": "521 毛绒玩偶 宝可梦 fit 高傲雉鸡(雌性的样子)",
-            "ko": "521 ぬいぐるみ 포켓몬 fit ケンホロウ(メスのすがた)",
+            "ko": "521 봉제인형 Pokémon fit 켄호로우(암컷의 모습)",
             "en": "521 ぬいぐるみ Pokémon fit ケンホロウ(メスのすがた)"
           },
           "release_date": null,
@@ -188969,7 +188969,7 @@
           "names": {
             "ja": "586 ぬいぐるみ ポケモン fit メブキジカ(あきのすがた)",
             "zh": "586 毛绒玩偶 宝可梦 fit 萌芽鹿(秋天的样子)",
-            "ko": "586 ぬいぐるみ 포켓몬 fit メブキジカ(あきのすがた)",
+            "ko": "586 봉제인형 Pokémon fit 바라철록(가을의 모습)",
             "en": "586 ぬいぐるみ Pokémon fit メブキジカ(あきのすがた)"
           },
           "release_date": null,
@@ -189006,7 +189006,7 @@
           "names": {
             "ja": "586 ぬいぐるみ ポケモン fit メブキジカ(なつのすがた)",
             "zh": "586 毛绒玩偶 宝可梦 fit 萌芽鹿(夏天的样子)",
-            "ko": "586 ぬいぐるみ 포켓몬 fit メブキジカ(なつのすがた)",
+            "ko": "586 봉제인형 Pokémon fit 바라철록(여름의 모습)",
             "en": "586 ぬいぐるみ Pokémon fit メブキジカ(なつのすがた)"
           },
           "release_date": null,
@@ -189043,7 +189043,7 @@
           "names": {
             "ja": "586 ぬいぐるみ ポケモン fit メブキジカ(はるのすがた)",
             "zh": "586 毛绒玩偶 宝可梦 fit 萌芽鹿(春天的样子)",
-            "ko": "586 ぬいぐるみ 포켓몬 fit メブキジカ(はるのすがた)",
+            "ko": "586 봉제인형 Pokémon fit 바라철록(봄의 모습)",
             "en": "586 ぬいぐるみ Pokémon fit メブキジカ(はるのすがた)"
           },
           "release_date": null,
@@ -220684,7 +220684,7 @@
           "names": {
             "ja": "456 ぬいぐるみ ポケモン fit ケイコウオ",
             "zh": "456 毛绒玩偶 宝可梦 fit 荧光鱼",
-            "ko": "456 ぬいぐるみ 포켓몬 fit ケイコウオ",
+            "ko": "456 봉제인형 Pokémon fit 형광어",
             "en": "456 ぬいぐるみ Pokémon fit ケイコウオ"
           },
           "release_date": null,
@@ -223384,7 +223384,7 @@
           "names": {
             "ja": "586 ぬいぐるみ ポケモン fit メブキジカ(はるのすがた)",
             "zh": "586 毛绒玩偶 宝可梦 fit 萌芽鹿(春天的样子)",
-            "ko": "586 ぬいぐるみ 포켓몬 fit メブキジカ(はるのすがた)",
+            "ko": "586 봉제인형 Pokémon fit 바라철록(봄의 모습)",
             "en": "586 ぬいぐるみ Pokémon fit メブキジカ(はるのすがた)"
           },
           "release_date": null,
@@ -223991,7 +223991,7 @@
           "names": {
             "ja": "424 ぬいぐるみ ポケモン fit エテボース",
             "zh": "424 毛绒玩偶 宝可梦 fit 双尾怪手",
-            "ko": "424 ぬいぐるみ 포켓몬 fit エテボース",
+            "ko": "424 봉제인형 Pokémon fit 겟핸보숭",
             "en": "424 ぬいぐるみ Pokémon fit エテボース"
           },
           "release_date": null,
@@ -227172,7 +227172,7 @@
           "names": {
             "ja": "629 ぬいぐるみ ポケモン fit バルチャイ",
             "zh": "629 毛绒玩偶 宝可梦 fit 秃鹰丫头",
-            "ko": "629 ぬいぐるみ 포켓몬 fit バルチャイ",
+            "ko": "629 봉제인형 Pokémon fit 벌차이",
             "en": "629 ぬいぐるみ Pokémon fit バルチャイ"
           },
           "release_date": null,
@@ -250886,7 +250886,7 @@
           "names": {
             "ja": "586 ぬいぐるみ ポケモン fit メブキジカ(ふゆのすがた)",
             "zh": "586 毛绒玩偶 宝可梦 fit 萌芽鹿(冬天的样子)",
-            "ko": "586 ぬいぐるみ 포켓몬 fit メブキジカ(ふゆのすがた)",
+            "ko": "586 봉제인형 Pokémon fit 바라철록(겨울의 모습)",
             "en": "586 ぬいぐるみ Pokémon fit メブキジカ(ふゆのすがた)"
           },
           "release_date": null,
