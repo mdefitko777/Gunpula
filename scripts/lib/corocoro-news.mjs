@@ -356,8 +356,10 @@ function productNotes(product, postTitle) {
  * product dates the record and gives its link and picture; later posts fill
  * in what the first one did not say (date, price, kind).
  */
-export function coroCoroRecords(state) {
-  const posts = [...(state.posts || [])].sort((a, b) => String(a.date).localeCompare(String(b.date)) || a.id - b.id);
+export function coroCoroRecords(state, printPosts = []) {
+  // printPosts: reveals from the printed magazine that the site has not written up
+  // (data/announcements-corocoro-print.json) — same shape, same rules.
+  const posts = [...(state.posts || []), ...printPosts].sort((a, b) => String(a.date).localeCompare(String(b.date)) || a.id - b.id);
   const canonical = fullerKeys(posts.flatMap((post) => post.items || []));
   const byKey = new Map();
   for (const post of posts) {
@@ -503,7 +505,7 @@ export function postListUrl(search, after, page = 1) {
  * Reads new or edited posts into `state` and returns { state, records, stopped }.
  * `robotsAllows(url)` says whether robots.txt lets this bot read a URL.
  */
-export async function runCoroCoroSource({ state, today, fetchJson, robotsAllows = () => true, recentDays = COROCORO_RECENT_DAYS, log = () => {} }) {
+export async function runCoroCoroSource({ state, today, fetchJson, robotsAllows = () => true, recentDays = COROCORO_RECENT_DAYS, log = () => {}, printPosts = [] }) {
   const after = new Date(`${today}T00:00:00Z`);
   after.setUTCDate(after.getUTCDate() - recentDays);
   const afterIso = after.toISOString().slice(0, 10);
@@ -570,5 +572,5 @@ export async function runCoroCoroSource({ state, today, fetchJson, robotsAllows 
   // A run stopped halfway keeps the old version, so the rest are read next time.
   const extractor = stopped && reread ? state.extractor ?? null : COROCORO_EXTRACTOR_VERSION;
   const next = { updated_at: new Date().toISOString(), extractor, posts };
-  return { state: next, records: coroCoroRecords(next), stopped };
+  return { state: next, records: coroCoroRecords(next, printPosts), stopped };
 }

@@ -69,6 +69,8 @@ import { loadRobots, robotsAllows } from "./lib/robots.mjs";
 const OUTPUT_PATH = "data/announcements.json";
 // Posts CoroCoro News already gave us, so each run reads only new ones.
 const COROCORO_STATE_PATH = "data/announcements-corocoro.json";
+// Reveals from the printed magazine that CoroCoro News has not written up (hand-entered).
+const COROCORO_PRINT_PATH = "data/announcements-corocoro-print.json";
 // YouTube videos already checked for being a stream, so each watch page is
 // read once (and again only while its stream is still to come).
 const LIVE_STATE_PATH = "data/announcements-live.json";
@@ -259,6 +261,7 @@ async function runCoroCoro() {
   console.log(`${COROCORO_SOURCE_ID}: robots.txt ${robots.status}`);
   const { state, records, stopped } = await runCoroCoroSource({
     state: await readJson(COROCORO_STATE_PATH, emptyCoroCoroState()),
+    printPosts: (await readJson(COROCORO_PRINT_PATH, {})).posts || [],
     today,
     fetchJson,
     robotsAllows: (url) => robotsAllows(robots, url),

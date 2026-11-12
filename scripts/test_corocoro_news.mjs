@@ -225,3 +225,23 @@ const disallowed = await runCoroCoroSource({ state: { posts: [] }, today: "2026-
 assert.match(disallowed.stopped, /robots\.txt/);
 
 console.log("corocoro-news tests OK");
+
+// Print-only reveals (data/announcements-corocoro-print.json) become records like crawled ones
+{
+  const { coroCoroRecords: records } = await import("./lib/corocoro-news.mjs");
+  const { readFileSync } = await import("node:fs");
+  const print = JSON.parse(readFileSync("data/announcements-corocoro-print.json", "utf8")).posts;
+  const out = records({ posts: [] }, print);
+  const lucifer = out.find((r) => r.names.ja.includes("バニッシュルシファー"));
+  const horus = out.find((r) => r.names.ja.includes("ホルスシャッター3-85MO"));
+  assert.ok(lucifer && horus, "both December-issue beys");
+  assert.equal(lucifer.source_id, "corocoro_news");
+  assert.equal(lucifer.confidence, "magazine");
+  assert.equal(lucifer.announced_at, "2026-11-13");
+  assert.match(lucifer.notes, /2026年12月26日発売 \/ 2,500円 \/ スターター/);
+  assert.match(horus.notes, /1,600円 \/ ランダムブースターVol\.12/);
+  // the same product read from the site later is the same record (id from the name)
+  const both = records({ posts: [{ id: 1, date: "2026-11-14", link: "https://corocoro-news.jp/news/1/", title: "t", items: [{ ...print[0].items[0] }] }] }, print);
+  assert.equal(both.filter((r) => r.names.ja.includes("バニッシュルシファー")).length, 1);
+  console.log("corocoro print reveals: ok");
+}
