@@ -7,10 +7,9 @@ import {
   isProductAnnouncement,
   mergeAnnouncementRecords,
   parseBandaiHobbyNews,
-  parseBandaiYoutubeFeed,
   parseBeybladeNews,
   parseTamashiiNews,
-  parseYoutubeFeed,
+  productVideoRecords,
 } from "./lib/bandai-announcements.mjs";
 import {
   dedupeAnnouncements,
@@ -72,16 +71,19 @@ assert.equal(news[0].announced_at, "2026-07-30");
 assert.equal(news[0].source_url, "https://www.bandaispirits.co.jp/news/detail/123/");
 assert.equal(news[0].thumbnail_url, "https://www.bandaispirits.co.jp/images/reveal.jpg");
 
-const videos = parseBandaiYoutubeFeed(`
-  <entry><yt:videoId>abc123</yt:videoId><title>ガンプラ新商品発表ライブ</title><published>2026-07-30T10:00:00Z</published></entry>
-  <entry><yt:videoId>other</yt:videoId><title>フィギュア紹介</title><published>2026-07-29T10:00:00Z</published></entry>
-`);
+// Videos as a channel's upload list gives them (the list itself and the dating
+// rule: test_youtube_videos.mjs). The titles decide what is a product video.
+const listed = (videoId, title) => ({ videoId, title, scheduled: false, streamed: false, ageDays: 1 });
+const bandaiChannel = { idPrefix: "bandai-youtube", sourceName: "BANDAI Hobby Site YouTube", sourceId: "bandai_hobby_youtube", today: "2026-07-31" };
+const videos = productVideoRecords([
+  listed("abc123", "ガンプラ新商品発表ライブ"),
+  listed("other", "フィギュア紹介"),
+], bandaiChannel);
 assert.equal(videos.length, 1);
+assert.equal(videos[0].id, "bandai-youtube-abc123");
 assert.equal(videos[0].thumbnail_url, "https://i.ytimg.com/vi/abc123/hqdefault.jpg");
 
-const revealProgram = parseBandaiYoutubeFeed(`
-  <entry><yt:videoId>reveal123</yt:videoId><title>HOBBY NEW ITEM INFO. 2026 SUMMER</title><published>2026-07-30T10:00:00Z</published></entry>
-`);
+const revealProgram = productVideoRecords([listed("reveal123", "HOBBY NEW ITEM INFO. 2026 SUMMER")], bandaiChannel);
 assert.equal(revealProgram.length, 1);
 
 const tamashii = parseTamashiiNews(`
@@ -186,10 +188,10 @@ const topics = parseBandaiHobbyNews(`
 assert.deepEqual(topics.map((record) => record.franchise), ["fate", "gundam"]);
 
 // Channel-specific reveal wording on a single-IP channel.
-const baseVideos = parseYoutubeFeed(`
-  <entry><yt:videoId>gb1</yt:videoId><title>【ガンダムベース限定品情報】MG 1/100 ガンダムキュリオス</title><published>2026-09-12T10:00:00Z</published></entry>
-  <entry><yt:videoId>gb2</yt:videoId><title>【夜のガンプラ倶楽部】本日のおすすめアイテム！</title><published>2026-09-13T10:00:00Z</published></entry>
-`, { sourceName: "THE GUNDAM BASE YouTube", sourceId: "gundam_base_youtube", defaultFranchise: "gundam", accept: /限定品情報/ });
+const baseVideos = productVideoRecords([
+  listed("gb1", "【ガンダムベース限定品情報】MG 1/100 ガンダムキュリオス"),
+  listed("gb2", "【夜のガンプラ倶楽部】本日のおすすめアイテム！"),
+], { sourceName: "THE GUNDAM BASE YouTube", sourceId: "gundam_base_youtube", defaultFranchise: "gundam", accept: /限定品情報/, today: "2026-09-13" });
 assert.deepEqual(baseVideos.map((record) => record.id), ["youtube-gb1"]);
 assert.equal(baseVideos[0].source_id, "gundam_base_youtube");
 assert.equal(acceptsStoredAnnouncement(baseVideos[0]), true, "re-check uses the channel's own rule");

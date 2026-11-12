@@ -23,6 +23,7 @@
 //   tamashiiweb.com work pages     ok   (2026-11-12) reveal banners in the key-visual slider
 import { createHash } from "node:crypto";
 import {
+  BANDAI_HOBBY_YOUTUBE_CHANNEL_ID,
   absoluteUrl,
   decodeHtml,
   franchiseForAnnouncement,
@@ -53,17 +54,29 @@ export const KOTOBUKIYA_TITLES = [
   { id: "r100089", franchise: "pokemon", label: "『ポケットモンスター』シリーズ" },
 ];
 
+// The channels read for product videos, one source each; a record's id is
+// <idPrefix>-<videoId>. BANDAI SPIRITS covers every Bandai line, so it has no
+// default franchise: the title has to name one of the app's worlds.
 export const YOUTUBE_CHANNELS = [
+  {
+    id: "bandai_hobby_youtube",
+    name: "BANDAI Hobby Site YouTube",
+    channelId: BANDAI_HOBBY_YOUTUBE_CHANNEL_ID,
+    idPrefix: "bandai-youtube",
+    defaultFranchise: null,
+  },
   {
     id: "gundam_channel_youtube",
     name: "ガンダムチャンネル YouTube",
     channelId: "UC7wu64jFsV02bbu6UHUd7JA",
+    idPrefix: "youtube",
     defaultFranchise: "gundam",
   },
   {
     id: "gundam_base_youtube",
     name: "THE GUNDAM BASE YouTube",
     channelId: "UCMt6mbBNDPwyNGvJKvhCYuA",
+    idPrefix: "youtube",
     defaultFranchise: "gundam",
     accept: /限定品情報/,
   },
@@ -71,16 +84,10 @@ export const YOUTUBE_CHANNELS = [
     id: "beyblade_youtube",
     name: "ベイチューブ YouTube",
     channelId: "UCuG_D_8QZmHTfbJfsz8-J_A",
+    idPrefix: "youtube",
     defaultFranchise: "beyblade",
   },
 ];
-
-export function youtubeFeedUrls(channelId) {
-  return [
-    `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
-    `https://www.youtube.com/feeds/videos.xml?playlist_id=UU${channelId.slice(2)}`,
-  ];
-}
 
 /**
  * The fetcher's per-run stop list: a host that answered 403/429/503 (blocked,

@@ -14,10 +14,16 @@
 // gains the two fields. Ended streams stay 14 days (the archive is worth a
 // link), then go.
 //
+// The channels' product-video sources read the same upload lists
+// (runYoutubeVideoSource, at the end of the YouTube part): one request per
+// channel a run serves both.
+//
 // Measured 2026-11-12 with this bot's user-agent (KR IP):
-//   www.youtube.com/robots.txt  "*" may not read /feeds/videos.xml (so the channel
-//                               feeds are not used here) but may read /playlist,
-//                               /watch and /oembed
+//   www.youtube.com/robots.txt  "*" may not read /feeds/videos.xml (the channel
+//                               feeds: not used; the product-video sources read
+//                               them until this day, and GitHub's runners got 404
+//                               from them on and off since 11-01) but may read
+//                               /playlist, /watch and /oembed
 //   /playlist?list=UU<channel>  the channel's ~100 newest uploads (videos,
 //                               premieres, streams) in one page, ~300 kB gzipped;
 //                               the data is in "var ytInitialData = {…}" or, on
@@ -25,7 +31,8 @@
 //                               A scheduled stream has the badge 配信予定 instead
 //                               of a length and "2026/11/12 1:00 に公開予定" — US
 //                               Pacific time with no zone — so the time is never
-//                               taken from the list
+//                               taken from the list. Other rows give an age
+//                               ("5 時間前", "8 日前", "2 週間前"), never a date
 //   /watch?v=<id>               ytInitialPlayerResponse: liveBroadcastDetails
 //                               { isLiveNow, startTimestamp, endTimestamp } for
 //                               streams and premieres, plus scheduledStartTime
@@ -38,12 +45,7 @@
 // Not measured: GitHub's runners. YouTube may answer them with a sign-in bot
 // check; the source then stops for the run, stored streams keep the time they
 // have, and a newly listed one is recorded without a time (live_at null).
-import {
-  BANDAI_HOBBY_YOUTUBE_CHANNEL_ID,
-  absoluteUrl,
-  franchiseForAnnouncement,
-  stripTags,
-} from "./bandai-announcements.mjs";
+import { absoluteUrl, franchiseForAnnouncement, productVideoRecords, shiftDay, stripTags } from "./bandai-announcements.mjs";
 import { YOUTUBE_CHANNELS, announcementRecord, balancedObjectAfter, stableHash } from "./official-announcements.mjs";
 
 export const YOUTUBE_LIVE_SOURCE_ID = "youtube_live";
@@ -64,14 +66,13 @@ const ASSUMED_LIVE_HOURS = 2;
 // two weeks, and a watch page read once must not be read again in that time.
 const CHECKED_KEEP_DAYS = 30;
 
-// Record ids and names match the product-video sources of the same channels
+// The product-video channels under the same record ids and names
 // (bandai-youtube-<id>, youtube-<id>), so a video is one record whichever
 // source saw it. 魂ネイションズ has no channel of its own: tamashiiweb.com
 // links the "TAMASHII STATION" playlist of the BANDAI SPIRITS channel.
 // タカラトミー: linked from beyblade.takaratomy.co.jp next to ベイチューブ.
 export const LIVE_CHANNELS = [
-  { channelId: BANDAI_HOBBY_YOUTUBE_CHANNEL_ID, name: "BANDAI Hobby Site YouTube", idPrefix: "bandai-youtube", defaultFranchise: null },
-  ...YOUTUBE_CHANNELS.map(({ channelId, name, defaultFranchise }) => ({ channelId, name, idPrefix: "youtube", defaultFranchise })),
+  ...YOUTUBE_CHANNELS.map(({ channelId, name, idPrefix, defaultFranchise }) => ({ channelId, name, idPrefix, defaultFranchise })),
   { channelId: "UClVgBLXWrw3TV4Wm0d7qrFQ", name: "タカラトミー YouTube", idPrefix: "youtube", defaultFranchise: null },
 ];
 
@@ -309,10 +310,15 @@ export function liveStreamRecord({ stream, channel, franchise, stored = null, to
 // The statuses the fetcher stops a host for (createHostStops).
 const saidStop = (error) => [403, 429, 503].includes(error?.status);
 
-function shiftDay(iso, days) {
-  const date = new Date(`${iso}T00:00:00Z`);
-  date.setUTCDate(date.getUTCDate() + days);
-  return date.toISOString().slice(0, 10);
+/**
+ * A channel's upload list → { url, items, stopped }: `stopped` says why
+ * YouTube must not be asked again this run. A failed request throws.
+ */
+async function readUploads(channel, { fetchText, robotsAllows }) {
+  const url = youtubeUploadsUrl(channel.channelId);
+  if (!robotsAllows(url)) return { url, items: [], stopped: `${url} is disallowed by robots.txt` };
+  const items = parseYoutubeListing(await fetchText(url));
+  return { url, items, stopped: items.length ? null : `${url} has no video list (a consent or bot-check page, or new markup)` };
 }
 
 /**
@@ -359,15 +365,10 @@ export async function runYoutubeLiveSource({
 
   for (const channel of channels) {
     if (stopped) break;
-    const url = youtubeUploadsUrl(channel.channelId);
-    if (!robotsAllows(url)) {
-      stopped = `${url} is disallowed by robots.txt`;
-      break;
-    }
     try {
-      const items = parseYoutubeListing(await fetchText(url));
-      if (!items.length) {
-        stopped = `${url} has no video list (a consent or bot-check page, or new markup)`;
+      const { items, stopped: why } = await readUploads(channel, { fetchText, robotsAllows });
+      if (why) {
+        stopped = why;
         break;
       }
       for (const item of items) listed.set(item.videoId, item);
@@ -451,6 +452,60 @@ export async function runYoutubeLiveSource({
     .filter(([, entry]) => String(entry?.checked_at || "") >= keepFrom)
     .sort(([a], [b]) => a.localeCompare(b)));
   return { records, gone, state: { videos }, stopped, problems };
+}
+
+// ---------------------------------------------------------------------------
+// Product videos, from the same lists.
+
+/**
+ * A fetchText that asks for each URL once and hands every later caller the
+ * same answer, or the same failure. The fetcher reads YouTube through one, so
+ * a channel's upload list is a single request per run for its product-video
+ * source and the stream source together.
+ */
+export function oncePerUrl(fetchText) {
+  const answers = new Map();
+  return (url) => {
+    if (!answers.has(url)) answers.set(url, fetchText(url));
+    return answers.get(url);
+  };
+}
+
+/**
+ * A channel's product videos as its upload list shows them (the title rules
+ * and the dating are productVideoRecords in bandai-announcements.mjs).
+ *   channel  an entry of YOUTUBE_CHANNELS
+ *   stored   last run's announcement records
+ * → { records, stopped }: `stopped` is set when YouTube must not be asked
+ * again this run. A failed request throws, as in any other source.
+ */
+export async function runYoutubeVideoSource({
+  channel,
+  stored = [],
+  today,
+  fetchText,
+  robotsAllows = () => true,
+  log = () => {},
+}) {
+  const { url, items, stopped } = await readUploads(channel, { fetchText, robotsAllows });
+  if (stopped) return { records: [], stopped };
+  // Every upload that has run carries its age. A list where none does is one
+  // this parser cannot read (another language, new markup), and new could not
+  // be told from old.
+  if (!items.some((item) => item.ageDays !== null)) throw new Error(`${url} gives no video an age (another language, or new markup)`);
+  const storedById = new Map(stored.map((record) => [record.id, record]));
+  const records = productVideoRecords(items, {
+    idPrefix: channel.idPrefix,
+    sourceName: channel.name,
+    sourceId: channel.id,
+    defaultFranchise: channel.defaultFranchise,
+    accept: channel.accept || null,
+    stored: storedById,
+    today,
+  });
+  const added = records.filter((record) => !storedById.has(record.id)).length;
+  log(`${channel.id}: ${items.length} uploads listed, ${records.length} product videos, ${added} of them new`);
+  return { records, stopped: null };
 }
 
 // ---------------------------------------------------------------------------

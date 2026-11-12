@@ -1,8 +1,7 @@
 export const BANDAI_HOBBY_NEWS_URL =
   "https://www.bandaispirits.co.jp/products/topics/?category=1";
+// BANDAI SPIRITS' own channel.
 export const BANDAI_HOBBY_YOUTUBE_CHANNEL_ID = "UCuxB1suCoCqAKiljh_0xE4A";
-export const BANDAI_HOBBY_YOUTUBE_FEED_URL =
-  `https://www.youtube.com/feeds/videos.xml?channel_id=${BANDAI_HOBBY_YOUTUBE_CHANNEL_ID}`;
 // /news/ answers 301 to http://tamashiiweb.com/topics/ (2026-11-12), the same list
 // and markup, so /topics/ is read directly instead of through an http hop.
 export const TAMASHII_NEWS_URL = "https://tamashiiweb.com/topics/";
@@ -136,37 +135,76 @@ export function parseBandaiHobbyNews(html, pageUrl = BANDAI_HOBBY_NEWS_URL, { de
   return records;
 }
 
-// Any official channel's Atom feed. defaultFranchise is for single-IP channels
-// (ガンダムチャンネル, ベイチューブ); `accept` lets a channel add its own reveal
-// wording on top of isProductAnnouncement (THE GUNDAM BASE posts
+// A video the bot has not stored yet is taken only while its channel's upload
+// list calls it at most this old. The list is the ~100 newest uploads (a month
+// of them on BANDAI SPIRITS, a year on THE GUNDAM BASE) with no dates: without
+// the limit the first read would have filed 7 product videos, 4 weeks to 11
+// months old, under that day (2026-11-12). A run sees an upload within a day;
+// a week covers a run of days the bot could not read YouTube.
+export const NEW_VIDEO_DAYS = 7;
+
+// A scheduled premiere or stream has no age yet and is news by definition.
+function isNewUpload(item) {
+  return item.ageDays === null ? Boolean(item.scheduled) : item.ageDays <= NEW_VIDEO_DAYS;
+}
+
+/** "2026-11-12", -3 → "2026-11-09". */
+export function shiftDay(iso, days) {
+  const date = new Date(`${iso}T00:00:00Z`);
+  date.setUTCDate(date.getUTCDate() + days);
+  return date.toISOString().slice(0, 10);
+}
+
+// The product videos among the uploads an official channel lists (`items`:
+// parseYoutubeListing in live-streams.mjs). defaultFranchise is for single-IP
+// channels (ガンダムチャンネル, ベイチューブ); `accept` lets a channel add its
+// own reveal wording on top of isProductAnnouncement (THE GUNDAM BASE posts
 // "【ガンダムベース限定品情報】…" with no product verb).
-export function parseYoutubeFeed(xml, {
+// The list gives an age ("3 日前"), not a date, so the bot dates a new video
+// itself (announced_at_basis "first_seen"): `today`, the day in Japan, less
+// the listed age. On a daily run that is the day the bot first saw it ("5 時間前"
+// is no days). Plain `today` is not used: a video that repeats a news post is
+// dropped by dedupeAnnouncements and so never stored, the list offers it again
+// every day of its week, and dated by the run it would end the week more than
+// that check's ten days from the post and come back as a second record of the
+// same reveal. `stored` (last run's records by id) keeps the date a video
+// already has — the publish date, for those read from the channel feeds until
+// 2026-11-12.
+export function productVideoRecords(items, {
   idPrefix = "youtube",
   sourceName,
-  sourceId = null,
+  sourceId,
   defaultFranchise = null,
   accept = null,
+  stored = new Map(),
+  today,
 } = {}) {
   const records = [];
-  for (const match of String(xml || "").matchAll(/<entry>([\s\S]*?)<\/entry>/g)) {
-    const entry = match[1];
-    const videoId = stripTags(/<yt:videoId>([\s\S]*?)<\/yt:videoId>/.exec(entry)?.[1]);
-    const title = stripTags(/<title>([\s\S]*?)<\/title>/.exec(entry)?.[1]);
-    const published = stripTags(/<published>([\s\S]*?)<\/published>/.exec(entry)?.[1]);
+  for (const item of items || []) {
+    const { videoId } = item;
+    // Spaces as the feed parser left them, so no stored title changes by one.
+    const title = String(item.title || "").replace(/\s+/g, " ").trim();
     // Multi-IP channels cover every line, so a video only counts when its
     // title names one of the app's worlds.
     const franchise = franchiseForAnnouncement(title, defaultFranchise);
     const accepted = isProductAnnouncement(title) || Boolean(accept?.test(title) && !NOT_PRODUCT_NEWS.test(title));
     if (!videoId || !title || !franchise || !accepted) continue;
+    const id = `${idPrefix}-${videoId}`;
+    const known = stored.get(id);
+    if (!known && !isNewUpload(item)) continue;
+    const dated = known?.announced_at
+      ? known
+      : { announced_at: shiftDay(today, -(item.ageDays || 0)), announced_at_basis: "first_seen" };
     records.push({
-      id: `${idPrefix}-${videoId}`,
+      id,
       franchise,
       names: { ja: title, zh: null, ko: null, en: null },
       status: "announced",
-      announced_at: published ? published.slice(0, 10) : null,
+      announced_at: dated.announced_at,
+      ...(dated.announced_at_basis ? { announced_at_basis: dated.announced_at_basis } : {}),
       source_type: "youtube",
       source_name: sourceName,
-      ...(sourceId ? { source_id: sourceId } : {}),
+      source_id: sourceId,
       source_url: `https://www.youtube.com/watch?v=${videoId}`,
       thumbnail_url: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
       video_id: videoId,
@@ -179,18 +217,6 @@ export function parseYoutubeFeed(xml, {
     });
   }
   return records;
-}
-
-// BANDAI SPIRITS' own channel (UCuxB1suCoCqAKiljh_0xE4A). Its channel_id feed
-// answered 404 on 2026-11-01 and 200 the next day, so the fetcher retries via
-// the same channel's uploads playlist (UU…) — see BANDAI_HOBBY_YOUTUBE_FEED_URLS.
-export const BANDAI_HOBBY_YOUTUBE_FEED_URLS = [
-  BANDAI_HOBBY_YOUTUBE_FEED_URL,
-  `https://www.youtube.com/feeds/videos.xml?playlist_id=UU${BANDAI_HOBBY_YOUTUBE_CHANNEL_ID.slice(2)}`,
-];
-
-export function parseBandaiYoutubeFeed(xml) {
-  return parseYoutubeFeed(xml, { idPrefix: "bandai-youtube", sourceName: "BANDAI Hobby Site YouTube" });
 }
 
 // 魂ウェブ (tamashiiweb.com/topics/, formerly /news/) — the Bandai Spirits collectible-figure feed.

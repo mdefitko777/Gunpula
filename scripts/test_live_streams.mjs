@@ -5,7 +5,7 @@
 // (TAMASHII NEWS NETWORK), and the TAMASHII NATION 2026 site's two stream lists.
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { acceptsStoredAnnouncement, mergeAnnouncementRecords, parseBandaiYoutubeFeed } from "./lib/bandai-announcements.mjs";
+import { acceptsStoredAnnouncement, mergeAnnouncementRecords, productVideoRecords } from "./lib/bandai-announcements.mjs";
 import { createHostStops, dedupeAnnouncements } from "./lib/official-announcements.mjs";
 import { parseRobots, robotsAllows } from "./lib/robots.mjs";
 import {
@@ -165,8 +165,11 @@ function fakeFetch(log) {
     return pages.get(url);
   };
 }
-// A product video the feed source stored earlier.
-const [storedProductVideo] = parseBandaiYoutubeFeed("<entry><yt:videoId>la8pjjZx3jQ</yt:videoId><title>ガンプラ新商品発表</title><published>2026-11-12T01:00:09+00:00</published></entry>");
+// A product video the channel's product-video source stored earlier.
+const [storedProductVideo] = productVideoRecords(
+  [{ videoId: "la8pjjZx3jQ", title: "ガンプラ新商品発表", scheduled: false, streamed: false, ageDays: 0 }],
+  { idPrefix: bandai.idPrefix, sourceName: bandai.name, sourceId: "bandai_hobby_youtube", today: "2026-11-12" },
+);
 const requests = [];
 const first = await runYoutubeLiveSource({
   channels: [bandai, gundamBase],

@@ -2,16 +2,13 @@ import { mkdir, readFile, readdir, unlink, writeFile } from "node:fs/promises";
 import { basename, join } from "node:path";
 import {
   BANDAI_HOBBY_NEWS_URL,
-  BANDAI_HOBBY_YOUTUBE_FEED_URLS,
   BANDAI_SPIRITS_TOPICS_URL,
   BEYBLADE_X_NEWS_URL,
   TAMASHII_NEWS_URL,
   mergeAnnouncementRecords,
   parseBandaiHobbyNews,
-  parseBandaiYoutubeFeed,
   parseBeybladeNews,
   parseTamashiiNews,
-  parseYoutubeFeed,
 } from "./lib/bandai-announcements.mjs";
 import {
   BEYBLADE_X_LINEUP_URL,
@@ -40,7 +37,6 @@ import {
   parseTakaraTomyPokemonNews,
   parseTamashiiRevealBanners,
   promoteRevealStages,
-  youtubeFeedUrls,
 } from "./lib/official-announcements.mjs";
 import { parseKotobukiyaShopDetail } from "./lib/kotobukiya-shop.mjs";
 import {
@@ -60,10 +56,13 @@ import {
   eventStreamHints,
   eventStreamRecords,
   isMissingS3File,
+  oncePerUrl,
   parseEventStreams,
   runYoutubeLiveSource,
+  runYoutubeVideoSource,
   settleLiveRecords,
   withLiveFields,
+  youtubeUploadsUrl,
 } from "./lib/live-streams.mjs";
 import { loadRobots, robotsAllows } from "./lib/robots.mjs";
 
@@ -150,20 +149,6 @@ async function fetchText(url, accept = "text/html,application/atom+xml,applicati
 // A non-JSON answer (a bot-check page) throws a SyntaxError.
 async function fetchJson(url) {
   return JSON.parse(await fetchText(url, "application/json"));
-}
-
-// YouTube's channel_id feed sometimes answers 404 for a day (BANDAI SPIRITS,
-// 2026-11-01); the uploads-playlist feed of the same channel is the fallback.
-async function fetchFirstOk(urls) {
-  const errors = [];
-  for (const url of urls) {
-    try {
-      return await fetchText(url);
-    } catch (error) {
-      errors.push(error.message);
-    }
-  }
-  throw new Error(errors.join("; "));
 }
 
 function todayInJapan() {
@@ -346,26 +331,62 @@ async function runTamashiiNationLive() {
   return records;
 }
 
-// Upload lists and watch pages only: robots.txt keeps "*" out of
-// /feeds/videos.xml (see lib/live-streams.mjs).
+const YOUTUBE_HOST = "www.youtube.com";
+// A YouTube page is asked for once a run: a channel's upload list serves its
+// product-video source and the stream source.
+const fetchYoutube = oncePerUrl(fetchText);
+let youtubeRobots = null;
+
+// robots.txt once a run, before the first YouTube page. Upload lists and watch
+// pages only: it keeps "*" out of /feeds/videos.xml (see lib/live-streams.mjs).
+function loadYoutubeRobots() {
+  youtubeRobots ||= (async () => {
+    await waitForHost(`https://${YOUTUBE_HOST}/robots.txt`);
+    const robots = await loadRobots(YOUTUBE_HOST, { userAgent: USER_AGENT });
+    console.log(`${YOUTUBE_HOST}: robots.txt ${robots.status}`);
+    // A 403 here reads as "no robots.txt"; from YouTube it is the bot being turned away.
+    hostStops.record(`https://${YOUTUBE_HOST}/robots.txt`, Number.parseInt(robots.status, 10));
+    return robots;
+  })();
+  return youtubeRobots;
+}
+
+// A page without its data is a bot check until shown otherwise.
+function stopYoutube() {
+  hostStops.stop(`https://${YOUTUBE_HOST}/`, "a page without video data");
+}
+
+async function runYoutubeVideos(channel) {
+  const robots = await loadYoutubeRobots();
+  const { records, stopped } = await runYoutubeVideoSource({
+    channel,
+    stored: previous.announcements,
+    today,
+    fetchText: fetchYoutube,
+    robotsAllows: (url) => robotsAllows(robots, url),
+    log: (line) => console.log(line),
+  });
+  if (stopped) {
+    stopYoutube();
+    throw new Error(stopped);
+  }
+  return records;
+}
+
 async function runYoutubeLive() {
-  const host = "www.youtube.com";
-  await waitForHost(`https://${host}/robots.txt`);
-  const robots = await loadRobots(host, { userAgent: USER_AGENT });
-  console.log(`${YOUTUBE_LIVE_SOURCE_ID}: robots.txt ${robots.status}`);
+  const robots = await loadYoutubeRobots();
   const result = await runYoutubeLiveSource({
     hints: linkedStreams,
     stored: previous.announcements,
     state: await readJson(LIVE_STATE_PATH, {}),
     today,
-    fetchText,
+    fetchText: fetchYoutube,
     robotsAllows: (url) => robotsAllows(robots, url),
     log: (line) => console.log(line),
   });
   await writeFile(LIVE_STATE_PATH, `${JSON.stringify(result.state, null, 2)}\n`);
   for (const id of result.gone) goneStreamIds.add(id);
-  // A page without its data is a bot check until shown otherwise.
-  if (result.stopped) hostStops.stop(`https://${host}/`, "a page without video data");
+  if (result.stopped) stopYoutube();
   for (const message of [result.stopped, ...result.problems].filter(Boolean)) {
     errors.push({ source_id: YOUTUBE_LIVE_SOURCE_ID, message });
     console.warn(`${YOUTUBE_LIVE_SOURCE_ID}: ${message}`);
@@ -551,26 +572,16 @@ const SOURCES = [
     url: `https://${COROCORO_HOST}/`,
     run: runCoroCoro,
   },
-  {
-    id: "bandai_hobby_youtube",
-    name: "BANDAI Hobby Site YouTube",
-    url: BANDAI_HOBBY_YOUTUBE_FEED_URLS[0],
-    run: async () => parseBandaiYoutubeFeed(await fetchFirstOk(BANDAI_HOBBY_YOUTUBE_FEED_URLS)),
-  },
+  // Product videos, from each channel's upload list.
   ...YOUTUBE_CHANNELS.map((channel) => ({
     id: channel.id,
     name: channel.name,
-    url: youtubeFeedUrls(channel.channelId)[0],
-    run: async () => parseYoutubeFeed(await fetchFirstOk(youtubeFeedUrls(channel.channelId)), {
-      idPrefix: "youtube",
-      sourceName: channel.name,
-      sourceId: channel.id,
-      defaultFranchise: channel.defaultFranchise,
-      accept: channel.accept || null,
-    }),
+    url: youtubeUploadsUrl(channel.channelId),
+    run: () => runYoutubeVideos(channel),
   })),
   // When official streams start. Last: a video a source above already
-  // reports keeps that record and only gains live_at / live_state.
+  // reports keeps that record and only gains live_at / live_state. The YouTube
+  // one reads the same upload lists (once a run, see fetchYoutube).
   {
     id: EVENT_LIVE_SOURCE_ID,
     name: TAMASHII_NATION_EVENT.name,
