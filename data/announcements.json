@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-12T06:37:48.471Z",
+  "updated_at": "2026-11-12T07:26:52.045Z",
   "sources": [
     {
       "source_id": "tamashii_news",
@@ -92,8 +92,150 @@
       "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuG_D_8QZmHTfbJfsz8-J_A"
     }
   ],
-  "fetch_errors": [],
+  "fetch_errors": [
+    {
+      "source_id": "bandai_hobby_youtube",
+      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuxB1suCoCqAKiljh_0xE4A returned 404; https://www.youtube.com/feeds/videos.xml?playlist_id=UUuxB1suCoCqAKiljh_0xE4A returned 404"
+    },
+    {
+      "source_id": "gundam_channel_youtube",
+      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UC7wu64jFsV02bbu6UHUd7JA returned 404; https://www.youtube.com/feeds/videos.xml?playlist_id=UU7wu64jFsV02bbu6UHUd7JA returned 404"
+    },
+    {
+      "source_id": "gundam_base_youtube",
+      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UCMt6mbBNDPwyNGvJKvhCYuA returned 404; https://www.youtube.com/feeds/videos.xml?playlist_id=UUMt6mbBNDPwyNGvJKvhCYuA returned 404"
+    },
+    {
+      "source_id": "beyblade_youtube",
+      "message": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuG_D_8QZmHTfbJfsz8-J_A returned 404; https://www.youtube.com/feeds/videos.xml?playlist_id=UUuG_D_8QZmHTfbJfsz8-J_A returned 404"
+    }
+  ],
   "announcements": [
+    {
+      "id": "gundam-official-i54ahpo5irdfm3tpdgli5t16",
+      "franchise": "gundam",
+      "names": {
+        "ja": "格闘ポージングに特化したROBOT魂新シリーズ「マーシャルアクション」に「シャイニングガンダム」「ボルトガンダム」登場！本日11月12日より取り扱い店舗にて予約開始！",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-12",
+      "source_type": "news",
+      "source_name": "GUNDAM.INFO",
+      "source_id": "gundam_official_news",
+      "source_url": "https://gundam-official.com/news/i54ahpo5irdfm3tpdgli5t16",
+      "thumbnail_url": "https://gundam-official.com/media/50de49316d57d5ce4101ee83ade511e2/50de49316d57d5ce4101ee83ade511e2.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "gundam-official.com: フィギュア",
+      "reviewed_at": null
+    },
+    {
+      "id": "gundam-official-pscrbpngr7xnr27g7cjh2qx1",
+      "franchise": "gundam",
+      "names": {
+        "ja": "ガンプラ「HG ジム・スナイパー」「HG ジム・スナイパーII（リド・ウォルフ機）」「HG ジム・スナイパーII ホワイト・ディンゴ隊仕様」の追加予約が本日11月12日11時よりスタート！",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-12",
+      "source_type": "news",
+      "source_name": "GUNDAM.INFO",
+      "source_id": "gundam_official_news",
+      "source_url": "https://gundam-official.com/news/pscrbpngr7xnr27g7cjh2qx1",
+      "thumbnail_url": "https://gundam-official.com/media/92e575a22e606ba1373ade41e327c113/92e575a22e606ba1373ade41e327c113.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "gundam-official.com: ガンプラ",
+      "reviewed_at": null
+    },
+    {
+      "id": "pbandai-1000260916",
+      "franchise": "gundam",
+      "names": {
+        "ja": "HG 1/144 ジム・スナイパー【再販】",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-12",
+      "source_type": "news",
+      "source_name": "プレミアムバンダイ",
+      "source_id": "premium_bandai_new_items",
+      "source_url": "https://p-bandai.jp/item/item-1000260916/",
+      "thumbnail_url": "../app/assets/announcements/pbandai-1000260916.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "pbandai-1000260917",
+      "franchise": "gundam",
+      "names": {
+        "ja": "ＨＧ 1/144 ジム・スナイパーII ホワイト・ディンゴ隊仕様【再販】",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-12",
+      "source_type": "news",
+      "source_name": "プレミアムバンダイ",
+      "source_id": "premium_bandai_new_items",
+      "source_url": "https://p-bandai.jp/item/item-1000260917/",
+      "thumbnail_url": "../app/assets/announcements/pbandai-1000260917.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "pbandai-1000260918",
+      "franchise": "gundam",
+      "names": {
+        "ja": "HG 1/144 ジム・スナイパーＩＩ（リド・ウォルフ機）【再販】",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-12",
+      "source_type": "news",
+      "source_name": "プレミアムバンダイ",
+      "source_id": "premium_bandai_new_items",
+      "source_url": "https://p-bandai.jp/item/item-1000260918/",
+      "thumbnail_url": "../app/assets/announcements/pbandai-1000260918.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null
+    },
     {
       "id": "pbandai-1000261240",
       "franchise": "gundam",

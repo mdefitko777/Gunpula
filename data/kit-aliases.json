@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "updated_at": "2026-11-11",
+  "updated_at": "2026-11-12",
   "description": "kit_ids removed from data/kits.json. aliases: duplicate id -> id of the record that replaced it (move saved entries there). excluded: id -> why the record was dropped (only records of another franchise / IP; goods stay in the catalog with a goods_kind).",
   "aliases": {
     "aniplex-fate-itemffpaofmf": "goodsmile-fate-g4303",
@@ -2908,7 +2908,9 @@
     "tamashii-16158": "tamashii-16068",
     "tamashii-16170": "tamashii-16134",
     "tamashii-16171": "tamashii-16129",
-    "tamashii-16172": "tamashii-16135"
+    "tamashii-16172": "tamashii-16135",
+    "tamashii-16270": "tamashii-16061",
+    "tamashii-16271": "tamashii-16062"
   },
   "excluded": {
     "pbandai-wb-1000255817": "wrong_franchise: 超宇宙刑事ギャバン Blu-ray matched armored_core through 'ネクスト' in 'Vシネクスト'"

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-12",
-  "generated_at": "2026-11-12T01:29:35.863Z",
+  "generated_at": "2026-11-12T07:27:38.481Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,42 +18,49 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-12T01:29:14.885Z",
+    "generated_at": "2026-11-12T07:27:17.804Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-12",
-      "generated_at": "2026-11-12T01:29:35.863Z",
+      "generated_at": "2026-11-12T07:27:38.481Z",
       "total_before": 39341,
-      "total_after": 39351,
-      "added_count": 7,
-      "changed_count": 2,
+      "total_after": 39353,
+      "added_count": 9,
+      "changed_count": 7,
       "removed_count": 0,
-      "watched_count": 1,
+      "watched_count": 2,
       "merged_count": 0,
       "backfilled_count": 3,
       "renamed_count": 0,
-      "premium_bandai_count": 1,
+      "premium_bandai_count": 3,
       "bbx_count": 0,
       "franchise_counts": {
-        "gundam": 3,
-        "lego": 6
+        "gundam": 7,
+        "lego": 6,
+        "madoka": 2,
+        "pokemon": 1
       },
       "reason_counts": {
-        "new": 7,
-        "source": 1,
+        "new": 9,
+        "source": 5,
+        "image": 3,
         "series": 1
       },
       "interest_tags": [
         "gundam",
         "00",
         "lego",
-        "premium_bandai"
+        "premium_bandai",
+        "seed",
+        "madoka",
+        "pokemon"
       ],
       "watch_tags": [
-        "00"
+        "00",
+        "seed"
       ],
       "added": [
         {
@@ -95,6 +102,82 @@
           "source_urls": [
             "https://tamashiiweb.com/item/16259/",
             "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-16188",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "ROBOT_SPIRITS",
+          "subline": "ROBOT魂",
+          "series_key": "g",
+          "series_labels": {
+            "zh": "G",
+            "en": "G",
+            "ja": "G",
+            "ko": "G"
+          },
+          "names": {
+            "ja": "＜SIDE MF＞ ボルトガンダム マーシャルアクション",
+            "zh": "<SIDE MF> 雷霆高达 マーシャルアクション",
+            "ko": "＜SIDE MF＞ ボルト건담 マーシャルアクション",
+            "en": "＜SIDE MF＞ ボルトGundam マーシャルアクション"
+          },
+          "release_date": "2027-06",
+          "price_jpy": 9900,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16188/",
+            "https://tamashiiweb.com/item_brand/robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-16187",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "ROBOT_SPIRITS",
+          "subline": "ROBOT魂",
+          "series_key": "g",
+          "series_labels": {
+            "zh": "G",
+            "en": "G",
+            "ja": "G",
+            "ko": "G"
+          },
+          "names": {
+            "ja": "＜SIDE MF＞ シャイニングガンダム マーシャルアクション",
+            "zh": "<SIDE MF> 闪光高达 マーシャルアクション",
+            "ko": "＜SIDE MF＞ シャイニング건담 マーシャルアクション",
+            "en": "＜SIDE MF＞ シャイニングGundam マーシャルアクション"
+          },
+          "release_date": "2027-05",
+          "price_jpy": 7700,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16187/",
+            "https://tamashiiweb.com/item_brand/robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
           ]
         },
         {
@@ -322,6 +405,209 @@
       ],
       "changed": [
         {
+          "kit_id": "tamashii-16061",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_ROBOT",
+          "subline": "METAL ROBOT魂",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "デスティニーガンダムSpecII 最終決戦 Ver.",
+            "zh": "命运高达SpecII 最终决战版",
+            "ko": "데스티니건담SpecII 최종 결전 Ver.",
+            "en": "Destiny Gundam SpecII Final Battle Ver."
+          },
+          "release_date": "2026-11",
+          "price_jpy": 25300,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "tamashii_web_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16061/",
+            "https://tamashiiweb.com/item_brand/metal_robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "aniplex-madoka-itemmdrepkqw05",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Aniplex+",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 佐倉杏子 ノンスケールフィギュア",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 佐仓杏子 无比例手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 사쿠라 쿄코 논스케일 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 佐倉杏子 ノンスケールフィギュア"
+          },
+          "release_date": "2027-10",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "aniplex_plus_madoka_jp",
+            "good_smile_madoka_global",
+            "claynel_madoka_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemMDrePKqw05.html",
+            "https://www.goodsmile.com/ja/product/1147372"
+          ]
+        },
+        {
+          "kit_id": "aniplex-madoka-itemmdrepkqw04",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Aniplex+",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 美樹さやか ノンスケールフィギュア",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 美树沙耶香 无比例手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 미키 사야카 논스케일 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 美樹さやか ノンスケールフィギュア"
+          },
+          "release_date": "2027-10",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "aniplex_plus_madoka_jp",
+            "good_smile_madoka_global",
+            "claynel_madoka_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemMDrePKqw04.html",
+            "https://www.goodsmile.com/ja/product/1147371"
+          ]
+        },
+        {
+          "kit_id": "tamashii-16062",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": "g",
+          "series_labels": {
+            "zh": "G",
+            "en": "G",
+            "ja": "G",
+            "ko": "G"
+          },
+          "names": {
+            "ja": "ゴッドガンダム（明鏡止水）",
+            "zh": "神高达(明镜止水)",
+            "ko": "갓 건담(명경지수)",
+            "en": "ゴッドGundam (明鏡止水)"
+          },
+          "release_date": "2026-11",
+          "price_jpy": 39600,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "tamashii_web_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16062/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "poke-gashapon-4582770139730000",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GASHAPON",
+          "subline": "Pokemon Gashapon",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケットモンスター トートバッグ＆ポーチコレクションvol.12",
+            "zh": "宝可梦 托特包&收纳包收藏vol.12",
+            "ko": "포켓몬스터 토트백&파우치 컬렉션 vol.12",
+            "en": "ポケットモンスター トートバッグ＆ポーチコレクションvol.12"
+          },
+          "release_date": "2026-11",
+          "price_jpy": 400,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_products_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/products/detail.php?jan_code=4582770139730000",
+            "https://gashapon.jp/products/result.php?free=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
+          ]
+        },
+        {
           "kit_id": "hg-hg-1-144-gq-4573102720184000",
           "change_type": "changed",
           "franchise": "gundam",
@@ -367,12 +653,12 @@
           "franchise": "gundam",
           "grade_code": "ROBOT_SPIRITS",
           "subline": "ROBOT魂 ver. A.N.I.M.E.",
-          "series_key": "zeta",
+          "series_key": "uc_first",
           "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
+            "zh": "初代",
+            "en": "0079",
+            "ja": "初代",
+            "ko": "초대"
           },
           "names": {
             "ja": "RGM-79SC ジム・スナイパーカスタム （ジャブロー防衛隊仕様） ver. A.N.I.M.E.",
@@ -441,6 +727,49 @@
           "source_urls": [
             "https://tamashiiweb.com/item/16259/",
             "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "tamashii-16061",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_ROBOT",
+          "subline": "METAL ROBOT魂",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "デスティニーガンダムSpecII 最終決戦 Ver.",
+            "zh": "命运高达SpecII 最终决战版",
+            "ko": "데스티니건담SpecII 최종 결전 Ver.",
+            "en": "Destiny Gundam SpecII Final Battle Ver."
+          },
+          "release_date": "2026-11",
+          "price_jpy": 25300,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "tamashii_web_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16061/",
+            "https://tamashiiweb.com/item_brand/metal_robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
           ]
         }
       ],
