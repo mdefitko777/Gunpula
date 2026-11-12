@@ -22,10 +22,14 @@ import {
   POKEMON_FRIENDA_URL,
   PREMIUM_BANDAI_NEW_ITEMS_URL,
   TAKARATOMY_POKEMON_URL,
+  TAMASHII_REVEAL_PAGES,
+  TAMASHII_REVEALS_SOURCE_ID,
   TAMASHII_TOPICS_ITEMS_URL,
   YOUTUBE_CHANNELS,
+  createHostStops,
   dedupeAnnouncements,
   kotobukiyaAnnouncement,
+  linkRevealKits,
   parseBeybladeLineup,
   parseFriendaTopics,
   parseGundamBaseNews,
@@ -34,6 +38,8 @@ import {
   parsePremiumBandaiCategoryTitles,
   parsePremiumBandaiNewItems,
   parseTakaraTomyPokemonNews,
+  parseTamashiiRevealBanners,
+  promoteRevealStages,
   youtubeFeedUrls,
 } from "./lib/official-announcements.mjs";
 import { parseKotobukiyaShopDetail } from "./lib/kotobukiya-shop.mjs";
@@ -68,8 +74,12 @@ const REPLAY = process.env.ANNOUNCEMENT_REPLAY === "1";
 const ONLY_SOURCES = new Set((process.env.ANNOUNCEMENT_SOURCES || "").split(",").map((id) => id.trim()).filter(Boolean));
 
 const lastRequestAt = new Map();
+// Several sources share a host (three on tamashiiweb.com); one that answered
+// 403/429/503 gets no further request from any of them this run.
+const hostStops = createHostStops();
 
 async function waitForHost(url) {
+  hostStops.check(url);
   const host = new URL(url).host;
   const wait = (lastRequestAt.get(host) || 0) + HOST_GAP_MS - Date.now();
   if (wait > 0) await new Promise((resolve) => setTimeout(resolve, wait));
@@ -108,7 +118,10 @@ async function fetchText(url, accept = "text/html,application/atom+xml,applicati
       "accept-language": "ja-JP,ja;q=0.9,en;q=0.6",
     },
   });
-  if (!response.ok) throw Object.assign(new Error(`${url} returned ${response.status}`), { status: response.status });
+  if (!response.ok) {
+    hostStops.record(url, response.status);
+    throw Object.assign(new Error(`${url} returned ${response.status}`), { status: response.status });
+  }
   const text = decodeBody(Buffer.from(await response.arrayBuffer()), response.headers.get("content-type"));
   if (RAW_CACHE_DIR) {
     await mkdir(RAW_CACHE_DIR, { recursive: true });
@@ -190,7 +203,10 @@ async function cacheAnnouncementImages(records) {
         signal: AbortSignal.timeout(20000),
         headers: { "user-agent": USER_AGENT },
       });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      if (!response.ok) {
+        hostStops.record(record.thumbnail_url, response.status);
+        throw new Error(`HTTP ${response.status}`);
+      }
       const contentType = response.headers.get("content-type") || "";
       if (!/^image\//i.test(contentType)) throw new Error(`not an image (${contentType})`);
       const bytes = Buffer.from(await response.arrayBuffer());
@@ -242,11 +258,31 @@ async function runCoroCoro() {
   return records;
 }
 
+// Robots first (2026-11-12: tamashiiweb.com has no robots.txt, a 404), then one
+// work page per day.
+async function runTamashiiReveals() {
+  const host = new URL(TAMASHII_REVEAL_PAGES[0].url).host;
+  await waitForHost(`https://${host}/robots.txt`);
+  const robots = await loadRobots(host, { userAgent: USER_AGENT });
+  console.log(`${TAMASHII_REVEALS_SOURCE_ID}: robots.txt ${robots.status}`);
+  hostStops.record(`https://${host}/robots.txt`, Number.parseInt(robots.status, 10));
+  const records = [];
+  for (const page of TAMASHII_REVEAL_PAGES) {
+    if (!robotsAllows(robots, page.url)) throw new Error(`${page.url} is disallowed by robots.txt`);
+    const parsed = parseTamashiiRevealBanners(await fetchText(page.url), { pageUrl: page.url, franchise: page.franchise, today });
+    // A page without the slider is a markup change or a bot check, not a quiet day.
+    if (!parsed.slides) throw new Error(`${page.url} has no key-visual slides`);
+    records.push(...parsed.records);
+  }
+  return records;
+}
+
 // Catalog products per franchise, for telling a magazine scoop of a new bey
-// from an old one mentioned again. The split files are last run's catalog.
-async function readCatalogKits() {
+// from an old one mentioned again and for linking a reveal to its product.
+// The split files are last run's catalog.
+async function readCatalogKits(franchises) {
   const byFranchise = new Map();
-  for (const { franchise } of COROCORO_FRANCHISES) {
+  for (const franchise of franchises) {
     byFranchise.set(franchise, (await readJson(`data/split/kits-${franchise}.json`, {}))?.kits || []);
   }
   return byFranchise;
@@ -300,6 +336,14 @@ const SOURCES = [
         return { records: parseTamashiiNews(html, TAMASHII_TOPICS_ITEMS_URL), oldest: dates[0] || null, items: dates.length };
       },
     }),
+  },
+  {
+    // 商品化決定 reveals that exist only as a slider banner until the preorder
+    // opens (see parseTamashiiRevealBanners).
+    id: TAMASHII_REVEALS_SOURCE_ID,
+    name: "TAMASHII WEB",
+    url: TAMASHII_REVEAL_PAGES[0].url,
+    run: runTamashiiReveals,
   },
   {
     id: "bandai_hobby_news",
@@ -463,9 +507,17 @@ for (const record of incoming) if (!incomingById.has(record.id)) incomingById.se
 const merged = mergeAnnouncementRecords(previous.announcements, [...incomingById.values()]);
 // Magazine records an official source or the catalog already covers go first;
 // the stored copy is dropped too, not only today's.
-const magazine = dropMagazineDuplicates(merged, await readCatalogKits());
+const magazine = dropMagazineDuplicates(merged, await readCatalogKits(COROCORO_FRANCHISES.map(({ franchise }) => franchise)));
 if (magazine.dropped.length) console.log(`Dropped ${magazine.dropped.length} CoroCoro records covered by official sources or the catalog.`);
-const { records: announcements, dropped } = dedupeAnnouncements(magazine.records, DEDUPE_PRIORITY);
+// A reveal follows its product: linked once the catalog has it, moved to
+// preorder_open once an official post opens the preorder. Before the dedupe, so
+// a post it drops still counts.
+const stages = promoteRevealStages(linkRevealKits(
+  magazine.records,
+  await readCatalogKits([...new Set(TAMASHII_REVEAL_PAGES.map((page) => page.franchise))]),
+));
+for (const { id, from, to } of stages.promoted) console.log(`${id}: ${from} -> ${to}`);
+const { records: announcements, dropped } = dedupeAnnouncements(stages.records, DEDUPE_PRIORITY);
 if (dropped.length) console.log(`Dropped ${dropped.length} cross-source duplicates.`);
 await cacheAnnouncementImages(announcements);
 await writeFile(OUTPUT_PATH, `${JSON.stringify({

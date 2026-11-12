@@ -15,7 +15,20 @@ function today() {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
 }
 
+// One retry after a dropped connection: soshage.com reset the connection mid-body once
+// (2026-11-12, "TypeError: terminated … ECONNRESET") and the step kept yesterday's data.
 async function fetchHtml(url) {
+  try {
+    return await fetchHtmlOnce(url);
+  } catch (error) {
+    if (/^HTTP /.test(error.message)) throw error;
+    console.warn(`gget: ${error.message} — retrying in 30 s`);
+    await new Promise((resolve) => setTimeout(resolve, 30000));
+    return fetchHtmlOnce(url);
+  }
+}
+
+async function fetchHtmlOnce(url) {
   const response = await fetch(url, {
     headers: {
       "user-agent":

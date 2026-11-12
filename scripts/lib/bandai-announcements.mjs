@@ -3,7 +3,9 @@ export const BANDAI_HOBBY_NEWS_URL =
 export const BANDAI_HOBBY_YOUTUBE_CHANNEL_ID = "UCuxB1suCoCqAKiljh_0xE4A";
 export const BANDAI_HOBBY_YOUTUBE_FEED_URL =
   `https://www.youtube.com/feeds/videos.xml?channel_id=${BANDAI_HOBBY_YOUTUBE_CHANNEL_ID}`;
-export const TAMASHII_NEWS_URL = "https://tamashiiweb.com/news/";
+// /news/ answers 301 to http://tamashiiweb.com/topics/ (2026-11-12), the same list
+// and markup, so /topics/ is read directly instead of through an http hop.
+export const TAMASHII_NEWS_URL = "https://tamashiiweb.com/topics/";
 export const BEYBLADE_X_NEWS_URL = "https://beyblade.takaratomy.co.jp/beyblade-x/news/";
 
 export function decodeHtml(value) {
@@ -191,7 +193,7 @@ export function parseBandaiYoutubeFeed(xml) {
   return parseYoutubeFeed(xml, { idPrefix: "bandai-youtube", sourceName: "BANDAI Hobby Site YouTube" });
 }
 
-// 魂ウェブ (tamashiiweb.com/news/) — the Bandai Spirits collectible-figure feed.
+// 魂ウェブ (tamashiiweb.com/topics/, formerly /news/) — the Bandai Spirits collectible-figure feed.
 // Titles are prefixed with the work in brackets (【機動戦士ガンダムSEED FREEDOM】),
 // which is what decides the franchise; it carries every Bandai line, so posts
 // without one of the app's worlds are dropped.
@@ -291,13 +293,15 @@ export function parseBeybladeNews(html, pageUrl = BEYBLADE_X_NEWS_URL) {
 // Store listings (Premium Bandai, Kotobukiya, the BEYBLADE X lineup, Takara
 // Tomy's Pokémon page) and the per-product CoroCoro records are products by
 // construction, so their titles carry no reveal verb and must not be
-// re-checked against the news-title filter.
+// re-checked against the news-title filter. So are the 魂ウェブ reveal banners,
+// stored under the product name alone once read.
 const LISTING_SOURCE_IDS = new Set([
   "premium_bandai_new_items",
   "kotobukiya_shop",
   "beyblade_x_lineup",
   "takaratomy_pokemon",
   "corocoro_news",
+  "tamashii_reveals",
 ]);
 // Sources with their own title rule; everything else uses isProductAnnouncement.
 const SOURCE_TITLE_RULES = {

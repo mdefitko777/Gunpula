@@ -8,7 +8,7 @@
 //   gundam-base.net/news           ok   static HTML
 //   p-bandai.jp list pages         ok   Shift_JIS; item detail pages are an Akamai
 //                                       bot-check page, so only list pages are read
-//   tamashiiweb.com/topics/items/  ok   same markup as /news/, paged by current_page
+//   tamashiiweb.com/topics/items/  ok   same markup as /topics/, paged by current_page
 //   beyblade.takaratomy.co.jp      ok   lineup page carries release dates
 //   takaratomy.co.jp/products/pokemon/  ok   "お知らせ" box
 //   pokemonfrienda.com             ok   topics carousel
@@ -20,6 +20,8 @@
 //   www.pokemoncenter-online.com   redirects to a virtual waiting room
 //   www.pokemon.co.jp news/goods   rendered by scripts under robots-disallowed /js/
 //   Pokémon Mezastar               service ended (稼動終了); site is static
+//   tamashiiweb.com work pages     ok   (2026-11-12) reveal banners in the key-visual slider
+import { createHash } from "node:crypto";
 import {
   absoluteUrl,
   decodeHtml,
@@ -78,6 +80,24 @@ export function youtubeFeedUrls(channelId) {
     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
     `https://www.youtube.com/feeds/videos.xml?playlist_id=UU${channelId.slice(2)}`,
   ];
+}
+
+/**
+ * The fetcher's per-run stop list: a host that answered 403/429/503 (blocked,
+ * slow down, maintenance) gets no further request this run, from any source.
+ * `record(url, status)` after a response; `check(url)` throws for a stopped host.
+ */
+export function createHostStops(statuses = [403, 429, 503]) {
+  const stopped = new Map();
+  return {
+    record(url, status) {
+      if (statuses.includes(status)) stopped.set(new URL(url).host, status);
+    },
+    check(url) {
+      const host = new URL(url).host;
+      if (stopped.has(host)) throw new Error(`${host} answered ${stopped.get(host)} earlier; stopped for this run`);
+    },
+  };
 }
 
 function hashTail(value, length = 10) {
@@ -505,9 +525,13 @@ export function dedupeAnnouncements(records, priority = []) {
   // to the same item page as the original reveal months earlier, and that
   // is news of its own. The query string stays in the URL (YouTube's ?v=…).
   // Only across sites: one site's two posts about one product (reveal, then
-  // preorder) are both news, so twins must differ in source_name.
+  // preorder) are both news, so twins must differ in source_name. A 魂ウェブ
+  // reveal banner linking an item page its topic post also links is that post
+  // again, though both say TAMASHII WEB.
+  const isReveal = (record) => record.source_id === TAMASHII_REVEALS_SOURCE_ID;
   const near = (record) => (twin) =>
-    twin.source_name !== record.source_name && daysBetween(twin.announced_at, record.announced_at) <= 10;
+    (twin.source_name !== record.source_name || isReveal(twin) !== isReveal(record))
+    && daysBetween(twin.announced_at, record.announced_at) <= 10;
   const remember = (map, key, record) => map.set(key, [...(map.get(key) || []), record]);
   for (const record of sorted) {
     const url = String(record.source_url || "").replace(/#.*$/, "").replace(/\/$/, "");
@@ -526,4 +550,156 @@ export function dedupeAnnouncements(records, priority = []) {
     String(b.announced_at || "").localeCompare(String(a.announced_at || ""))
     || String(a.id).localeCompare(String(b.id)));
   return { records: kept, dropped };
+}
+
+// ---------------------------------------------------------------------------
+// 魂ウェブ reveal banners. A 商品化決定 reveal (TAMASHII NATION, the TAMASHII NEWS
+// NETWORK livestream) gets no topic post and no item page until its preorder
+// opens; until then it exists only as a slide in the key-visual slider of the
+// work's page. On 2026-11-12 "【機動戦士ガンダム00】「ガンダムキュリオス」が
+// METAL BUILDより商品化決定！" was on /item_character/gundam_series/ (and the
+// METAL BUILD brand page) and nowhere else on the site; not on the top page,
+// /topics/, the TAMASHII NATION 2026 event site or gundam-official.com. The
+// other slides link item pages, which the topic sources already cover.
+
+export const TAMASHII_REVEALS_SOURCE_ID = "tamashii_reveals";
+export const TAMASHII_REVEAL_PAGES = [
+  { url: "https://tamashiiweb.com/item_character/gundam_series/", franchise: "gundam" },
+];
+const REVEAL_WORDING = /商品化(?:が)?決定|開発(?:が)?決定/;
+// The brand stands after が ("…」がMETAL BUILDより商品化決定") or in front of the
+// quote ("METAL BUILD「…」商品化決定").
+const BRAND_AFTER_QUOTE = /」\s*(?:が|も)\s*([^「」【】]{2,40}?)\s*(?:より|から|にて|で|に|として)/;
+// Reveals are made at an event or on a livestream, and banners may say so
+// ("「TAMASHII NATION 2026」にて「…」が…", "TNNにて…"); those words are where,
+// not what or which brand.
+const NOT_A_BRAND = /TAMASHII\s*NATIONS?|TNN|NEWS\s*NETWORK|イベント|会場|配信|生放送|[にでがはをのと、。!！]$/i;
+// A quote is a product when the sentence goes on with it: が/も, a list
+// separator, the next quote, or the reveal itself. "「イベント名」にて" is not.
+const PRODUCT_QUOTE_FOLLOWER = /^\s*(?:が|も|と|、|・|「|の?(?:商品化|開発)|[!！]*$)/;
+// Without a quote the text before 商品化決定 is the name, unless it is a
+// round-up ("ガンダムシリーズ新商品の商品化決定").
+const NOT_A_NAME = /新商品|新作|続々|ラインナップ|情報|アイテム|多数/;
+
+/** "【機動戦士ガンダム00】「ガンダムキュリオス」がMETAL BUILDより商品化決定！" → ["METAL BUILD ガンダムキュリオス"]. */
+export function revealProductNames(title) {
+  const text = stripTags(String(title || "").replace(/<br\s*\/?>/gi, " "));
+  if (!REVEAL_WORDING.test(text)) return [];
+  // 【…】 holds the work, or sometimes the brand; the work is not part of a name.
+  const body = text.replace(/【[^】]*】/g, " ").trim();
+  const quoted = [...body.matchAll(/「([^」]+)」/g)]
+    .filter((match) => PRODUCT_QUOTE_FOLLOWER.test(body.slice(match.index + match[0].length)))
+    .map((match) => match[1].trim())
+    .filter(Boolean);
+  if (!body.includes("「")) {
+    const name = body.split(REVEAL_WORDING)[0].replace(/[!！\s]+$/, "").replace(/[のがも]$/, "").trim();
+    return name && !NOT_A_NAME.test(name) && !NOT_A_BRAND.test(name) ? [name] : [];
+  }
+  const after = BRAND_AFTER_QUOTE.exec(body)?.[1]?.trim();
+  const before = body.slice(0, body.indexOf("「")).trim().replace(/の$/, "");
+  const brand = [after, before].find((candidate) => candidate && !REVEAL_WORDING.test(candidate) && !NOT_A_BRAND.test(candidate)) || "";
+  return quoted.map((name) =>
+    !brand || normalizeProductKey(name).startsWith(normalizeProductKey(brand)) ? name : `${brand} ${name}`);
+}
+
+function stableHash(value) {
+  return createHash("sha1").update(value).digest("hex").slice(0, 10);
+}
+
+/**
+ * One record per product a reveal slide names, dated by when the bot first saw
+ * it (the slide has no date). `slides` counts every slide, so the fetcher can
+ * tell an empty day from a page whose markup changed.
+ */
+export function parseTamashiiRevealBanners(html, { pageUrl, franchise = null, today }) {
+  const records = [];
+  const blocks = String(html || "").split(/<li class="swiper-slide kvSlide__item/).slice(1);
+  for (const chunk of blocks) {
+    const block = chunk.split("</li>")[0];
+    const title = stripTags(String(/<span class="kvSlide__name">([\s\S]*?)<\/span>/.exec(block)?.[1] || "").replace(/<br\s*\/?>/gi, " "));
+    const href = /<a\s+href="([^"]+)"/.exec(block)?.[1];
+    const recordFranchise = franchiseForAnnouncement(title, franchise);
+    if (!href || !recordFranchise) continue;
+    for (const name of revealProductNames(title)) {
+      records.push(announcementRecord({
+        // By name, so the same reveal on another day (or on another page) is
+        // one record.
+        id: `tamashii-reveal-${stableHash(normalizeProductKey(name))}`,
+        sourceId: TAMASHII_REVEALS_SOURCE_ID,
+        franchise: recordFranchise,
+        title: name,
+        status: "product_confirmed", // the banner says 商品化決定 — same stage the news rules give 商品化 titles
+        announcedAt: today,
+        announcedAtBasis: "first_seen",
+        sourceName: "TAMASHII WEB",
+        sourceUrl: absoluteUrl(href, pageUrl),
+        // The phone-size banner (1578×888); the desktop one is the same picture, larger.
+        thumbnailUrl: absoluteUrl(/<img\b[^>]*src="([^"]+)"/.exec(block)?.[1], pageUrl),
+        notes: `魂ウェブ banner: ${title} Announcement date = first seen by the bot.`,
+      }));
+    }
+  }
+  const seen = new Set();
+  return { records: records.filter((record) => !seen.has(record.id) && seen.add(record.id)), slides: blocks.length };
+}
+
+const STAGES = ["announced", "product_confirmed", "preorder_open", "released"];
+
+// Does an official record's title name the revealed product? Its 「…」 or its
+// whole title equals the reveal's name, or equals the name without the brand
+// while the brand is elsewhere in the title ("「ガンダムキュリオス」がMETAL
+// BUILDに登場！…予約受付開始！").
+function namesRevealedProduct(record, revealKey) {
+  const title = normalizeProductKey(record.names?.ja);
+  const keys = [...productKeys(record.names?.ja), title];
+  return keys.some((key) => key === revealKey
+    || (key.length >= 4 && revealKey.endsWith(key) && title.includes(revealKey.slice(0, revealKey.length - key.length))));
+}
+
+/**
+ * Moves a reveal forward when an official post about the same product follows
+ * it (its preorder opening → preorder_open), so people following the reveal in
+ * the app get the stage change. The merge keeps a stored status, so this only
+ * ever moves forward. Records reviewed in the CMS are left alone.
+ */
+export function promoteRevealStages(records) {
+  const others = records.filter((record) => record.source_id !== TAMASHII_REVEALS_SOURCE_ID && record.confidence === "official");
+  const promoted = [];
+  const out = records.map((record) => {
+    if (record.source_id !== TAMASHII_REVEALS_SOURCE_ID || record.reviewed_at) return record;
+    const key = normalizeProductKey(record.names?.ja);
+    // The reveal is dated by first sight; allow a week for a missed run.
+    const since = new Date(Date.parse(`${record.announced_at}T00:00:00Z`) - 7 * 86400000).toISOString().slice(0, 10);
+    const best = others
+      .filter((other) => other.franchise === record.franchise && String(other.announced_at || "") >= since)
+      .filter((other) => namesRevealedProduct(other, key))
+      .map((other) => other.status)
+      .filter((status) => STAGES.indexOf(status) > STAGES.indexOf(record.status))
+      .sort((a, b) => STAGES.indexOf(b) - STAGES.indexOf(a))[0];
+    if (!best) return record;
+    promoted.push({ id: record.id, from: record.status, to: best });
+    return { ...record, status: best };
+  });
+  return { records: out, promoted };
+}
+
+/**
+ * Links a reveal to its catalog product once the catalog has it: 魂ウェブ kits
+ * carry the brand in `subline` and the bare name in names.ja. Released kits are
+ * skipped (an old METAL BUILD with the same name is not this reveal).
+ * `kitsByFranchise`: Map franchise → kits.
+ */
+export function linkRevealKits(records, kitsByFranchise = new Map()) {
+  return records.map((record) => {
+    if (record.source_id !== TAMASHII_REVEALS_SOURCE_ID || record.linked_kit_id) return record;
+    const key = normalizeProductKey(record.names?.ja);
+    const month = String(record.announced_at || "").slice(0, 7);
+    const kit = (kitsByFranchise.get(record.franchise) || []).find((candidate) => {
+      const name = normalizeProductKey(candidate.names?.ja);
+      const full = normalizeProductKey(`${candidate.subline || ""}${candidate.names?.ja || ""}`);
+      const release = String(candidate.release_date || "");
+      return name && (full === key || name === key) && (!release || release.slice(0, 7) >= month);
+    });
+    return kit ? { ...record, linked_kit_id: kit.kit_id } : record;
+  });
 }
