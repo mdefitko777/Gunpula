@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-12",
-  "generated_at": "2026-11-12T08:33:09.443Z",
+  "generated_at": "2026-11-12T09:10:42.896Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,18 +18,18 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-12T08:32:46.652Z",
+    "generated_at": "2026-11-12T09:10:21.133Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-12",
-      "generated_at": "2026-11-12T08:33:09.443Z",
+      "generated_at": "2026-11-12T09:10:42.896Z",
       "total_before": 39341,
-      "total_after": 39353,
-      "added_count": 9,
-      "changed_count": 7,
+      "total_after": 39355,
+      "added_count": 11,
+      "changed_count": 14,
       "removed_count": 0,
       "watched_count": 2,
       "merged_count": 0,
@@ -40,23 +40,24 @@
       "franchise_counts": {
         "gundam": 7,
         "lego": 6,
-        "madoka": 2,
-        "pokemon": 1
+        "pokemon": 10,
+        "madoka": 2
       },
       "reason_counts": {
-        "new": 9,
+        "new": 11,
         "source": 5,
         "image": 3,
-        "series": 1
+        "series": 1,
+        "name": 7
       },
       "interest_tags": [
         "gundam",
         "00",
         "lego",
+        "pokemon",
         "premium_bandai",
         "seed",
-        "madoka",
-        "pokemon"
+        "madoka"
       ],
       "watch_tags": [
         "00",
@@ -401,6 +402,80 @@
           "source_urls": [
             "https://rebrickable.com/sets/6651644-1/"
           ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329423197",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "マスコット POKÉMON TRAINERS メロコ",
+            "zh": "挂件 POKÉMON TRAINERS 梅洛可",
+            "ko": "マスコット POKÉMON TRAINERS メロコ",
+            "en": "マスコット POKÉMON TRAINERS メロコ"
+          },
+          "release_date": null,
+          "price_jpy": 1870,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329423197.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329370293",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "マスコット POKÈMON TRAINERS ヤロー",
+            "zh": "挂件 POKÈMON TRAINERS ヤロー",
+            "ko": "マスコット POKÈMON TRAINERS ヤロー",
+            "en": "マスコット POKÈMON TRAINERS ヤロー"
+          },
+          "release_date": null,
+          "price_jpy": 1650,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329370293.html"
+          ]
         }
       ],
       "changed": [
@@ -683,6 +758,265 @@
           "source_urls": [
             "https://tamashiiweb.com/item/15098/",
             "https://tamashiiweb.com/item_brand/robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329343907",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "507 ぬいぐるみ ポケモン fit ハーデリア",
+            "zh": "507 毛绒玩偶 宝可梦 fit 哈约克",
+            "ko": "507 봉제인형 Pokémon fit 하데리어",
+            "en": "507 ぬいぐるみ Pokémon fit ハーデリア"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329343907.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329344065",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "522 ぬいぐるみ ポケモン fit シママ",
+            "zh": "522 毛绒玩偶 宝可梦 fit 斑斑马",
+            "ko": "522 봉제인형 Pokémon fit 줄뮤마",
+            "en": "522 ぬいぐるみ Pokémon fit シママ"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329344065.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329350202",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "614 ぬいぐるみ ポケモン fit ツンベアー",
+            "zh": "614 毛绒玩偶 宝可梦 fit 冻原熊",
+            "ko": "614 봉제인형 Pokémon fit 툰베어",
+            "en": "614 ぬいぐるみ Pokémon fit ツンベアー"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329350202.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329413501",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "731 ぬいぐるみ ポケモン fit ツツケラ",
+            "zh": "731 毛绒玩偶 宝可梦 fit 小笃儿",
+            "ko": "731 봉제인형 Pokémon fit 콕코구리",
+            "en": "731 ぬいぐるみ Pokémon fit ツツケラ"
+          },
+          "release_date": null,
+          "price_jpy": 1430,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329413501.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329413587",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "739 ぬいぐるみ ポケモン fit マケンカニ",
+            "zh": "739 毛绒玩偶 宝可梦 fit 好胜蟹",
+            "ko": "739 봉제인형 Pokémon fit 오기지게",
+            "en": "739 ぬいぐるみ Pokémon fit マケンカニ"
+          },
+          "release_date": null,
+          "price_jpy": 1430,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329413587.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329427850",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "783 ぬいぐるみ ポケモン fit ジャランゴ",
+            "zh": "783 毛绒玩偶 宝可梦 fit 鳞甲龙",
+            "ko": "783 봉제인형 Pokémon fit 짜랑고우",
+            "en": "783 ぬいぐるみ Pokémon fit ジャランゴ"
+          },
+          "release_date": null,
+          "price_jpy": 1760,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329427850.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329427904",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "788 ぬいぐるみ ポケモン fit カプ・レヒレ",
+            "zh": "788 毛绒玩偶 宝可梦 fit 卡璞·鳍鳍",
+            "ko": "788 봉제인형 Pokémon fit 카푸느지느",
+            "en": "788 ぬいぐるみ Pokémon fit カプ レヒレ"
+          },
+          "release_date": null,
+          "price_jpy": 1980,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329427904.html"
           ]
         }
       ],
@@ -189201,10 +189535,10 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "739 ぬいぐるみ Pok&eacute;mon fit マケンカニ",
+            "ja": "739 ぬいぐるみ ポケモン fit マケンカニ",
             "zh": "739 毛绒玩偶 宝可梦 fit 好胜蟹",
             "ko": "739 봉제인형 Pokémon fit 오기지게",
-            "en": "739 ぬいぐるみ Pok&eacute;mon fit マケンカニ"
+            "en": "739 ぬいぐるみ Pokémon fit マケンカニ"
           },
           "release_date": null,
           "price_jpy": 1430,
@@ -189238,10 +189572,10 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "783 ぬいぐるみ Pok&eacute;mon fit ジャランゴ",
+            "ja": "783 ぬいぐるみ ポケモン fit ジャランゴ",
             "zh": "783 毛绒玩偶 宝可梦 fit 鳞甲龙",
             "ko": "783 봉제인형 Pokémon fit 짜랑고우",
-            "en": "783 ぬいぐるみ Pok&eacute;mon fit ジャランゴ"
+            "en": "783 ぬいぐるみ Pokémon fit ジャランゴ"
           },
           "release_date": null,
           "price_jpy": 1760,
@@ -189723,10 +190057,10 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "507 ぬいぐるみ Pok&eacute;mon fit ハーデリア",
+            "ja": "507 ぬいぐるみ ポケモン fit ハーデリア",
             "zh": "507 毛绒玩偶 宝可梦 fit 哈约克",
             "ko": "507 봉제인형 Pokémon fit 하데리어",
-            "en": "507 ぬいぐるみ Pok&eacute;mon fit ハーデリア"
+            "en": "507 ぬいぐるみ Pokémon fit ハーデリア"
           },
           "release_date": null,
           "price_jpy": 1540,
@@ -223988,10 +224322,10 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "788 ぬいぐるみ Pok&eacute;mon fit カプ・レヒレ",
+            "ja": "788 ぬいぐるみ ポケモン fit カプ・レヒレ",
             "zh": "788 毛绒玩偶 宝可梦 fit 卡璞·鳍鳍",
             "ko": "788 봉제인형 Pokémon fit 카푸느지느",
-            "en": "788 ぬいぐるみ Pok&eacute;mon fit カプ レヒレ"
+            "en": "788 ぬいぐるみ Pokémon fit カプ レヒレ"
           },
           "release_date": null,
           "price_jpy": 1980,

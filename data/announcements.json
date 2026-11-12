@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-12T08:32:11.928Z",
+  "updated_at": "2026-11-12T09:09:52.706Z",
   "sources": [
     {
       "source_id": "tamashii_news",
@@ -74,22 +74,22 @@
     {
       "source_id": "bandai_hobby_youtube",
       "name": "BANDAI Hobby Site YouTube",
-      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuxB1suCoCqAKiljh_0xE4A"
+      "url": "https://www.youtube.com/playlist?list=UUuxB1suCoCqAKiljh_0xE4A"
     },
     {
       "source_id": "gundam_channel_youtube",
       "name": "ガンダムチャンネル YouTube",
-      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC7wu64jFsV02bbu6UHUd7JA"
+      "url": "https://www.youtube.com/playlist?list=UU7wu64jFsV02bbu6UHUd7JA"
     },
     {
       "source_id": "gundam_base_youtube",
       "name": "THE GUNDAM BASE YouTube",
-      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCMt6mbBNDPwyNGvJKvhCYuA"
+      "url": "https://www.youtube.com/playlist?list=UUMt6mbBNDPwyNGvJKvhCYuA"
     },
     {
       "source_id": "beyblade_youtube",
       "name": "ベイチューブ YouTube",
-      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuG_D_8QZmHTfbJfsz8-J_A"
+      "url": "https://www.youtube.com/playlist?list=UUuG_D_8QZmHTfbJfsz8-J_A"
     },
     {
       "source_id": "tamashii_nation_live",
@@ -102,7 +102,12 @@
       "url": "https://www.youtube.com/"
     }
   ],
-  "fetch_errors": [],
+  "fetch_errors": [
+    {
+      "source_id": "youtube_live",
+      "message": "https://www.youtube.com/watch?v=c3M7UKldpEA has no video data (ログインして bot ではないことを確認してください)"
+    }
+  ],
   "announcements": [
     {
       "id": "bandai-youtube-la8pjjZx3jQ",
