@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-11",
-  "generated_at": "2026-11-11T17:47:48.995Z",
+  "updated_at": "2026-11-12",
+  "generated_at": "2026-11-12T01:29:35.863Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,11 +18,548 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-11T17:47:27.415Z",
+    "generated_at": "2026-11-12T01:29:14.885Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
+    {
+      "date": "2026-11-12",
+      "generated_at": "2026-11-12T01:29:35.863Z",
+      "total_before": 39341,
+      "total_after": 39351,
+      "added_count": 7,
+      "changed_count": 2,
+      "removed_count": 0,
+      "watched_count": 1,
+      "merged_count": 0,
+      "backfilled_count": 3,
+      "renamed_count": 0,
+      "premium_bandai_count": 1,
+      "bbx_count": 0,
+      "franchise_counts": {
+        "gundam": 3,
+        "lego": 6
+      },
+      "reason_counts": {
+        "new": 7,
+        "source": 1,
+        "series": 1
+      },
+      "interest_tags": [
+        "gundam",
+        "00",
+        "lego",
+        "premium_bandai"
+      ],
+      "watch_tags": [
+        "00"
+      ],
+      "added": [
+        {
+          "kit_id": "tamashii-16259",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "ガンダムデュナメス",
+            "zh": "力天使高达",
+            "ko": "건담듀나메스",
+            "en": "Gundam Dynames"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 33000,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16259/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "lego-115300-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_GEAR",
+          "subline": "Key Chain",
+          "series_key": "lego_gear",
+          "series_labels": {
+            "zh": "周边",
+            "en": "Gear",
+            "ja": "Gear",
+            "ko": "굿즈"
+          },
+          "names": {
+            "ja": "Gold 2 x 4 Plate Key Chain",
+            "zh": "Gold 2 x 4 Plate Key Chain",
+            "ko": "Gold 2 x 4 Plate Key Chain",
+            "en": "Gold 2 x 4 Plate Key Chain"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/115300-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-6675836-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "LEGO Brand Store",
+          "series_key": "lego_lego_brand_store",
+          "series_labels": {
+            "zh": "乐高品牌零售店",
+            "en": "LEGO Brand Store",
+            "ja": "LEGO Brand Store",
+            "ko": "레고 스토어"
+          },
+          "names": {
+            "ja": "I [Heart] LEGO Store Lakeside Tile",
+            "zh": "I [Heart] LEGO Store Lakeside Tile",
+            "ko": "I [Heart] LEGO Store Lakeside Tile",
+            "en": "I [Heart] LEGO Store Lakeside Tile"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/6675836-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-6675835-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "LEGO Brand Store",
+          "series_key": "lego_lego_brand_store",
+          "series_labels": {
+            "zh": "乐高品牌零售店",
+            "en": "LEGO Brand Store",
+            "ja": "LEGO Brand Store",
+            "ko": "레고 스토어"
+          },
+          "names": {
+            "ja": "I [Heart] LEGO Store Norwich Tile",
+            "zh": "I [Heart] LEGO Store Norwich Tile",
+            "ko": "I [Heart] LEGO Store Norwich Tile",
+            "en": "I [Heart] LEGO Store Norwich Tile"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/6675835-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-6670923-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "LEGO Brand Store",
+          "series_key": "lego_lego_brand_store",
+          "series_labels": {
+            "zh": "乐高品牌零售店",
+            "en": "LEGO Brand Store",
+            "ja": "LEGO Brand Store",
+            "ko": "레고 스토어"
+          },
+          "names": {
+            "ja": "I [Heart] LEGO Store Town Center Tile",
+            "zh": "I [Heart] LEGO Store Town Center Tile",
+            "ko": "I [Heart] LEGO Store Town Center Tile",
+            "en": "I [Heart] LEGO Store Town Center Tile"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/6670923-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-5010668-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_GEAR",
+          "subline": "Bags, Totes, & Luggage",
+          "series_key": "lego_gear",
+          "series_labels": {
+            "zh": "周边",
+            "en": "Gear",
+            "ja": "Gear",
+            "ko": "굿즈"
+          },
+          "names": {
+            "ja": "London Retro Tote Bag",
+            "zh": "London Retro Tote Bag",
+            "ko": "London Retro Tote Bag",
+            "en": "London Retro Tote Bag"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/5010668-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-6651644-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "Winnie the Pooh",
+          "series_key": "lego_duplo",
+          "series_labels": {
+            "zh": "得宝",
+            "en": "Duplo",
+            "ja": "Duplo",
+            "ko": "듀플로"
+          },
+          "names": {
+            "ja": "Winnie The Pooh 100 Years",
+            "zh": "Winnie The Pooh 100 Years",
+            "ko": "Winnie The Pooh 100 Years",
+            "en": "Winnie The Pooh 100 Years"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/6651644-1/"
+          ]
+        }
+      ],
+      "changed": [
+        {
+          "kit_id": "hg-hg-1-144-gq-4573102720184000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "gqux",
+          "series_labels": {
+            "zh": "GQX",
+            "en": "GQuuuuuuX",
+            "ja": "GQuuuuuuX",
+            "ko": "GQuuuuuuX"
+          },
+          "names": {
+            "ja": "HG 1 / 144 シャリア専用リック・ドム(GQ)",
+            "zh": "HG 1 / 144 夏里亚专用力克·大魔(GQ)",
+            "ko": "HG 1/144 샤리아 전용 릭 돔 (GQ)",
+            "en": "HG 1 / 144 シャリアCustomリック Dom(GQ)"
+          },
+          "release_date": "2026-02-07",
+          "price_jpy": 3630,
+          "is_limited": false,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102720184000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000256659/"
+          ]
+        },
+        {
+          "kit_id": "tamashii-15098",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "ROBOT_SPIRITS",
+          "subline": "ROBOT魂 ver. A.N.I.M.E.",
+          "series_key": "zeta",
+          "series_labels": {
+            "zh": "Z",
+            "en": "Z",
+            "ja": "Z",
+            "ko": "Z"
+          },
+          "names": {
+            "ja": "RGM-79SC ジム・スナイパーカスタム （ジャブロー防衛隊仕様） ver. A.N.I.M.E.",
+            "zh": "RGM-79SC 吉姆狙击特装型 (贾布罗防卫队样式) ver. A.N.I.M.E.",
+            "ko": "RGM-79SC 짐 스나이퍼 커스텀 (자브로 방위대 사양) ver. A.N.I.M.E.",
+            "en": "RGM-79SC GM スナイパーカスタム (ジャブロー防衛隊Type) ver. A.N.I.M.E."
+          },
+          "release_date": "2025-01",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/15098/",
+            "https://tamashiiweb.com/item_brand/robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        }
+      ],
+      "removed": [],
+      "watched": [
+        {
+          "kit_id": "tamashii-16259",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "ガンダムデュナメス",
+            "zh": "力天使高达",
+            "ko": "건담듀나메스",
+            "en": "Gundam Dynames"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 33000,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16259/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        }
+      ],
+      "merged": [],
+      "backfilled": [
+        {
+          "kit_id": "lego-barra-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "LEGO Brand Store",
+          "series_key": "lego_lego_brand_store",
+          "series_labels": {
+            "zh": "乐高品牌零售店",
+            "en": "LEGO Brand Store",
+            "ja": "LEGO Brand Store",
+            "ko": "레고 스토어"
+          },
+          "names": {
+            "ja": "I [Heart] LEGO Store Barra Shopping Tile",
+            "zh": "I [Heart] LEGO Store Barra Shopping Tile",
+            "ko": "I [Heart] LEGO Store Barra Shopping Tile",
+            "en": "I [Heart] LEGO Store Barra Shopping Tile"
+          },
+          "release_date": "2024",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/BARRA-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-coolsprings-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "LEGO Brand Store",
+          "series_key": "lego_lego_brand_store",
+          "series_labels": {
+            "zh": "乐高品牌零售店",
+            "en": "LEGO Brand Store",
+            "ja": "LEGO Brand Store",
+            "ko": "레고 스토어"
+          },
+          "names": {
+            "ja": "I [Heart] LEGO Store Coolsprings Galleria Tile",
+            "zh": "I [Heart] LEGO Store Coolsprings Galleria Tile",
+            "ko": "I [Heart] LEGO Store Coolsprings Galleria Tile",
+            "en": "I [Heart] LEGO Store Coolsprings Galleria Tile"
+          },
+          "release_date": "2023",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/COOLSPRINGS-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-6382642-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "LEGO Brand Store",
+          "series_key": "lego_lego_brand_store",
+          "series_labels": {
+            "zh": "乐高品牌零售店",
+            "en": "LEGO Brand Store",
+            "ja": "LEGO Brand Store",
+            "ko": "레고 스토어"
+          },
+          "names": {
+            "ja": "I [Heart] LEGO Store 5th Avenue Tile",
+            "zh": "I [Heart] LEGO Store 5th Avenue Tile",
+            "ko": "I [Heart] LEGO Store 5th Avenue Tile",
+            "en": "I [Heart] LEGO Store 5th Avenue Tile"
+          },
+          "release_date": "2021",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/6382642-1/"
+          ]
+        }
+      ],
+      "renamed": []
+    },
     {
       "date": "2026-11-11",
       "generated_at": "2026-11-11T17:47:48.995Z",
@@ -208308,12 +208845,12 @@
           "franchise": "gundam",
           "grade_code": "ROBOT_SPIRITS",
           "subline": "ROBOT魂 ver. A.N.I.M.E.",
-          "series_key": "uc_first",
+          "series_key": "zeta",
           "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
+            "zh": "Z",
+            "en": "Z",
+            "ja": "Z",
+            "ko": "Z"
           },
           "names": {
             "ja": "RGM-79SC ジム・スナイパーカスタム （ジャブロー防衛隊仕様） ver. A.N.I.M.E.",
@@ -238369,12 +238906,12 @@
           "franchise": "gundam",
           "grade_code": "ROBOT_SPIRITS",
           "subline": "ROBOT魂 ver. A.N.I.M.E.",
-          "series_key": "uc_first",
+          "series_key": "zeta",
           "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
+            "zh": "Z",
+            "en": "Z",
+            "ja": "Z",
+            "ko": "Z"
           },
           "names": {
             "ja": "RGM-79SC ジム・スナイパーカスタム （ジャブロー防衛隊仕様） ver. A.N.I.M.E.",
@@ -253166,4998 +253703,6 @@
         }
       ],
       "renamed_count": 9
-    },
-    {
-      "date": "2026-08-02",
-      "generated_at": "2026-08-01T20:02:40.693Z",
-      "total_before": 5191,
-      "total_after": 5195,
-      "added_count": 4,
-      "changed_count": 136,
-      "removed_count": 0,
-      "watched_count": 0,
-      "premium_bandai_count": 113,
-      "bbx_count": 0,
-      "franchise_counts": {
-        "fate": 2,
-        "gundam": 115,
-        "pokemon": 23
-      },
-      "reason_counts": {
-        "new": 4,
-        "source": 113,
-        "image": 23
-      },
-      "interest_tags": [
-        "fate",
-        "gundam",
-        "premium_bandai",
-        "pokemon"
-      ],
-      "watch_tags": [],
-      "added": [
-        {
-          "kit_id": "goodsmile-fate-g1144549",
-          "change_type": "added",
-          "franchise": "fate",
-          "grade_code": "FATE_SCALE",
-          "subline": "MAX FACTORY",
-          "series_key": "fate_fgo",
-          "series_labels": {
-            "zh": "FGO",
-            "en": "FGO",
-            "ja": "FGO",
-            "ko": "FGO"
-          },
-          "names": {
-            "ja": "PLAMATEA Shielder / Mash Kyrielight (Ortinax)",
-            "zh": "PLAMATEA Shielder / 玛修·基列莱特 (奥特瑙斯)",
-            "ko": "PLAMATEA 실더 / 마슈 키리에라이트 (오르테낙스)",
-            "en": "PLAMATEA Shielder / Mash Kyrielight (Ortinax)"
-          },
-          "release_date": "2027-04",
-          "price_jpy": 8800,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "fate"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "good_smile_fate_global"
-          ],
-          "source_urls": [
-            "https://www.goodsmile.com/en/product/1144549"
-          ]
-        },
-        {
-          "kit_id": "goodsmile-fate-g1144550",
-          "change_type": "added",
-          "franchise": "fate",
-          "grade_code": "FATE_SCALE",
-          "subline": "MAX FACTORY",
-          "series_key": "fate_fgo",
-          "series_labels": {
-            "zh": "FGO",
-            "en": "FGO",
-            "ja": "FGO",
-            "ko": "FGO"
-          },
-          "names": {
-            "ja": "PLAMATEA Shielder / Mash Kyrielight (Ortinax) Black Barrel Edition",
-            "zh": "PLAMATEA Shielder / 玛修·基列莱特 (奥特瑙斯) 黑桶版",
-            "ko": "PLAMATEA 실더 / 마슈 키리에라이트 (오르테낙스) 블랙 배럴 에디션",
-            "en": "PLAMATEA Shielder / Mash Kyrielight (Ortinax) Black Barrel Edition"
-          },
-          "release_date": "2027-04",
-          "price_jpy": 17800,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "fate"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "good_smile_fate_global"
-          ],
-          "source_urls": [
-            "https://www.goodsmile.com/en/product/1144550"
-          ]
-        },
-        {
-          "kit_id": "gundam-merch-4582770027877000",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "Gundam Gashapon Merchandise",
-          "series_key": "mixed",
-          "series_labels": {
-            "zh": "多作品",
-            "en": "Mixed",
-            "ja": "複合作品",
-            "ko": "혼합"
-          },
-          "names": {
-            "ja": "ガンダムカードゲーム アクリルチャームコレクション",
-            "zh": "高达卡牌游戏 亚克力挂件收藏",
-            "ko": "건담 카드 게임 아크릴 참 컬렉션",
-            "en": "Gundamカードゲーム アクリルチャームコレクション"
-          },
-          "release_date": null,
-          "price_jpy": 300,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "bandai_gashapon_products_jp"
-          ],
-          "source_urls": [
-            "https://gashapon.jp/products/detail.php?jan_code=4582770027877000",
-            "https://gashapon.jp/products/result.php?free=%E3%82%AC%E3%83%B3%E3%83%80%E3%83%A0"
-          ]
-        },
-        {
-          "kit_id": "gundam-merch-4582769936098000",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "Gundam Gashapon Merchandise",
-          "series_key": "mixed",
-          "series_labels": {
-            "zh": "多作品",
-            "en": "Mixed",
-            "ja": "複合作品",
-            "ko": "혼합"
-          },
-          "names": {
-            "ja": "機動戦士ガンダム ガシャポン戦士ZERO 02",
-            "zh": "机动战士高达 扭蛋战士ZERO 02",
-            "ko": "기동전사 건담 가샤폰 전사ZERO 02",
-            "en": "Mobile Suit Gundam Gashapon SenshiZERO 02"
-          },
-          "release_date": null,
-          "price_jpy": 300,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "bandai_gashapon_products_jp"
-          ],
-          "source_urls": [
-            "https://gashapon.jp/products/detail.php?jan_code=4582769936098000",
-            "https://gashapon.jp/products/result.php?free=%E3%82%AC%E3%83%B3%E3%83%80%E3%83%A0"
-          ]
-        }
-      ],
-      "changed": [
-        {
-          "kit_id": "ng-1-100-4902425382456000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "f91",
-          "series_labels": {
-            "zh": "F91",
-            "en": "F91",
-            "ja": "F91",
-            "ko": "F91"
-          },
-          "names": {
-            "ja": "1 / 100 クラスターガンダム",
-            "zh": "1 / 100 集群高达",
-            "ko": "1/100 클러스터 건담",
-            "en": "1 / 100 クラスターGundam"
-          },
-          "release_date": "1993-03",
-          "price_jpy": 1320,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425382456000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146705/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-rxf-91-4902425374208000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "f91",
-          "series_labels": {
-            "zh": "F91",
-            "en": "F91",
-            "ja": "F91",
-            "ko": "F91"
-          },
-          "names": {
-            "ja": "1 / 100 ガンダムRXF-91改",
-            "zh": "1 / 100 高达RXF-91改",
-            "ko": "1/100 건담 RXF-91 개",
-            "en": "1 / 100 Gundam RXF-91改"
-          },
-          "release_date": "1992-12",
-          "price_jpy": 1980,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425374208000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146704/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-rx-99-4902425370453000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "f91",
-          "series_labels": {
-            "zh": "F91",
-            "en": "F91",
-            "ja": "F91",
-            "ko": "F91"
-          },
-          "names": {
-            "ja": "1 / 100 RX-99 ネオガンダム",
-            "zh": "1 / 100 RX-99 新高达",
-            "ko": "1/100 RX-99 네오 건담",
-            "en": "1 / 100 RX-99 ネオGundam"
-          },
-          "release_date": "1992-09",
-          "price_jpy": 2310,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425370453000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000250496/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425360768000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "0083",
-          "series_labels": {
-            "zh": "0083",
-            "en": "0083",
-            "ja": "0083",
-            "ko": "0083"
-          },
-          "names": {
-            "ja": "1 / 144 ガーベラテトラ",
-            "zh": "1 / 144 格贝拉·特多拉",
-            "ko": "1/144 거베라 테트라",
-            "en": "1 / 144 ガーベラテトラ"
-          },
-          "release_date": "1992-06",
-          "price_jpy": 1100,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425360768000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146694/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-gp-03s-4902425357652000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "0083",
-          "series_labels": {
-            "zh": "0083",
-            "en": "0083",
-            "ja": "0083",
-            "ko": "0083"
-          },
-          "names": {
-            "ja": "1 / 144 ガンダムGP-03S",
-            "zh": "1 / 144 高达GP-03S",
-            "ko": "1/144 건담GP-03S",
-            "en": "1 / 144 Gundam GP-03S"
-          },
-          "release_date": "1992-05",
-          "price_jpy": 1100,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425357652000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146693/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-gp-01fb-4902425345611000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "0083",
-          "series_labels": {
-            "zh": "0083",
-            "en": "0083",
-            "ja": "0083",
-            "ko": "0083"
-          },
-          "names": {
-            "ja": "1 / 144 ガンダムGP-01FB",
-            "zh": "1 / 144 高达GP-01FB",
-            "ko": "1/144 건담GP-01FB",
-            "en": "1 / 144 Gundam GP-01FB"
-          },
-          "release_date": "1991-12",
-          "price_jpy": 1100,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425345611000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146692/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-f-90-2l-4902425345666000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "msv",
-          "series_labels": {
-            "zh": "MSV",
-            "en": "MSV",
-            "ja": "MSV",
-            "ko": "MSV"
-          },
-          "names": {
-            "ja": "1 / 100 ガンダムF-90 2Lタイプ",
-            "zh": "1 / 100 高达F-90 2L型",
-            "ko": "1/100 건담 F-90 2L타입",
-            "en": "1 / 100 Gundam F-90 2Lタイプ"
-          },
-          "release_date": "1991-11",
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425345666000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146698/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-f-90-p-4902425342085000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "msv",
-          "series_labels": {
-            "zh": "MSV",
-            "en": "MSV",
-            "ja": "MSV",
-            "ko": "MSV"
-          },
-          "names": {
-            "ja": "1 / 100 ガンダムF-90 Pタイプ",
-            "zh": "1 / 100 高达F-90 P型",
-            "ko": "1/100 건담 F-90 P타입",
-            "en": "1 / 100 Gundam F-90 Pタイプ"
-          },
-          "release_date": "1991-10",
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425342085000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146696/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-f-90-v-4902425342924000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "msv",
-          "series_labels": {
-            "zh": "MSV",
-            "en": "MSV",
-            "ja": "MSV",
-            "ko": "MSV"
-          },
-          "names": {
-            "ja": "1 / 100 ガンダムF-90 Vタイプ",
-            "zh": "1 / 100 高达F-90 V型",
-            "ko": "1/100 건담 F-90 V타입",
-            "en": "1 / 100 Gundam F-90 Vタイプ"
-          },
-          "release_date": "1991-10",
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425342924000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146697/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-gp-02a-4902425334691000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "0083",
-          "series_labels": {
-            "zh": "0083",
-            "en": "0083",
-            "ja": "0083",
-            "ko": "0083"
-          },
-          "names": {
-            "ja": "1 / 144 ガンダムGP-02A",
-            "zh": "1 / 144 高达GP-02A",
-            "ko": "1/144 건담GP-02A",
-            "en": "1 / 144 Gundam GP-02A"
-          },
-          "release_date": "1991-07",
-          "price_jpy": 1100,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425334691000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146691/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-gp-01-4902425333281000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "0083",
-          "series_labels": {
-            "zh": "0083",
-            "en": "0083",
-            "ja": "0083",
-            "ko": "0083"
-          },
-          "names": {
-            "ja": "1 / 144 ガンダムGP-01",
-            "zh": "1 / 144 高达GP-01",
-            "ko": "1/144 건담GP-01",
-            "en": "1 / 144 Gundam GP-01"
-          },
-          "release_date": "1991-06",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425333281000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146690/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425326450000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "f91",
-          "series_labels": {
-            "zh": "F91",
-            "en": "F91",
-            "ja": "F91",
-            "ko": "F91"
-          },
-          "names": {
-            "ja": "1 / 100 ヘビーガン",
-            "zh": "1 / 100 重钢",
-            "ko": "1/100 헤비건",
-            "en": "1 / 100 ヘビーガン"
-          },
-          "release_date": "1991-04",
-          "price_jpy": 1210,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425326450000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000250490/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425325187000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "f91",
-          "series_labels": {
-            "zh": "F91",
-            "en": "F91",
-            "ja": "F91",
-            "ko": "F91"
-          },
-          "names": {
-            "ja": "1 / 100 ベルガギロス",
-            "zh": "1 / 100 贝尔加·基罗斯",
-            "ko": "1/100 베르가 기로스",
-            "en": "1 / 100 ベルガギロス"
-          },
-          "release_date": "1991-03",
-          "price_jpy": 1430,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425325187000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000250489/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425317007000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "f91",
-          "series_labels": {
-            "zh": "F91",
-            "en": "F91",
-            "ja": "F91",
-            "ko": "F91"
-          },
-          "names": {
-            "ja": "1 / 100 ビギナギナ",
-            "zh": "1 / 100 比基纳·基纳",
-            "ko": "1/100 비기나 기나",
-            "en": "1 / 100 ビギナギナ"
-          },
-          "release_date": "1990-12",
-          "price_jpy": 1100,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425317007000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146699/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-f-90-4902425310404000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "msv",
-          "series_labels": {
-            "zh": "MSV",
-            "en": "MSV",
-            "ja": "MSV",
-            "ko": "MSV"
-          },
-          "names": {
-            "ja": "1 / 100 ガンダムF-90",
-            "zh": "1 / 100 高达F-90",
-            "ko": "1/100 건담F-90",
-            "en": "1 / 100 Gundam F-90"
-          },
-          "release_date": "1990-10",
-          "price_jpy": 2750,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425310404000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146695/"
-          ]
-        },
-        {
-          "kit_id": "sd-bb-36-4902425278223000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "SD",
-          "subline": "SD",
-          "series_key": "sd",
-          "series_labels": {
-            "zh": "SD",
-            "en": "SD",
-            "ja": "SD",
-            "ko": "SD"
-          },
-          "names": {
-            "ja": "BB戦士36 武者サイコガンダム",
-            "zh": "BB战士36 武者精神感应高达",
-            "ko": "BB전사36 무사 사이코 건담",
-            "en": "BB戦士36 武者サイコGundam"
-          },
-          "release_date": "1989-07-25",
-          "price_jpy": 330,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425278223000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000160165/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425275475000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "0080",
-          "series_labels": {
-            "zh": "0080",
-            "en": "0080",
-            "ja": "0080",
-            "ko": "0080"
-          },
-          "names": {
-            "ja": "1 / 144 ケンプファー",
-            "zh": "1 / 144 肯普法",
-            "ko": "1/144 캠퍼",
-            "en": "1 / 144 Kampfer"
-          },
-          "release_date": "1989-07",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425275475000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000136569/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425279695000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "0080",
-          "series_labels": {
-            "zh": "0080",
-            "en": "0080",
-            "ja": "0080",
-            "ko": "0080"
-          },
-          "names": {
-            "ja": "1 / 144 ジムコマンド宇宙用",
-            "zh": "1 / 144 吉姆指挥型宇宙用",
-            "ko": "1/144 짐 커맨드 우주용",
-            "en": "1 / 144 GMコマンド宇宙用"
-          },
-          "release_date": "1989-07",
-          "price_jpy": 550,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425279695000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000136568/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-j-4902425275482000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "0080",
-          "series_labels": {
-            "zh": "0080",
-            "en": "0080",
-            "ja": "0080",
-            "ko": "0080"
-          },
-          "names": {
-            "ja": "1 / 144 ゲルググJ",
-            "zh": "1 / 144 格鲁古古J",
-            "ko": "1/144 겔구그J",
-            "en": "1 / 144 GelgoogJ"
-          },
-          "release_date": "1989-06",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425275482000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000136567/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425273112000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "0080",
-          "series_labels": {
-            "zh": "0080",
-            "en": "0080",
-            "ja": "0080",
-            "ko": "0080"
-          },
-          "names": {
-            "ja": "1 / 144 ハイゴッグ",
-            "zh": "1 / 144 高性能魔肯",
-            "ko": "1/144 하이 곡그",
-            "en": "1 / 144 ハイゴッグ"
-          },
-          "release_date": "1989-05",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425273112000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000136564/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-ii-4902425275284000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "0080",
-          "series_labels": {
-            "zh": "0080",
-            "en": "0080",
-            "ja": "0080",
-            "ko": "0080"
-          },
-          "names": {
-            "ja": "1 / 144 リックドムII",
-            "zh": "1 / 144 力克·大魔II",
-            "ko": "1/144 릭 돔II",
-            "en": "1 / 144 リックDomII"
-          },
-          "release_date": "1989-05",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425275284000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000136566/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-2-4902425273105000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "0080",
-          "series_labels": {
-            "zh": "0080",
-            "en": "0080",
-            "ja": "0080",
-            "ko": "0080"
-          },
-          "names": {
-            "ja": "1 / 144 ザク2改",
-            "zh": "1 / 144 扎古2改",
-            "ko": "1/144 자쿠2 개",
-            "en": "1 / 144 Zaku2改"
-          },
-          "release_date": "1989-04",
-          "price_jpy": 660,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425273105000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000136565/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425273099000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "0080",
-          "series_labels": {
-            "zh": "0080",
-            "en": "0080",
-            "ja": "0080",
-            "ko": "0080"
-          },
-          "names": {
-            "ja": "1 / 144 ジムコマンド",
-            "zh": "1 / 144 吉姆指挥型",
-            "ko": "1/144 짐 커맨드",
-            "en": "1 / 144 GMコマンド"
-          },
-          "release_date": "1989-04",
-          "price_jpy": 550,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425273099000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000136563/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-ex-s-4902425250526000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "sentinel",
-          "series_labels": {
-            "zh": "前哨战",
-            "en": "Sentinel",
-            "ja": "センチネル",
-            "ko": "센티넬"
-          },
-          "names": {
-            "ja": "1 / 144 Ex-S ガンダム",
-            "zh": "1 / 144 EX-S高达",
-            "ko": "1/144 Ex-S 건담",
-            "en": "1 / 144 Ex-S Gundam"
-          },
-          "release_date": "1988-11",
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425250526000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144127/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-s-4902425250533000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "sentinel",
-          "series_labels": {
-            "zh": "前哨战",
-            "en": "Sentinel",
-            "ja": "センチネル",
-            "ko": "센티넬"
-          },
-          "names": {
-            "ja": "1 / 144 Sガンダム / ブースター・ユニット装着型",
-            "zh": "1 / 144 S高达 / 推进器组件装备型",
-            "ko": "1/144 S건담 / 부스터 유닛 장착형",
-            "en": "1 / 144 S Gundam / ブースター ユニット装着型"
-          },
-          "release_date": "1988-11",
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425250533000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144128/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425247281000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "cca",
-          "series_labels": {
-            "zh": "逆夏",
-            "en": "CCA",
-            "ja": "逆シャア",
-            "ko": "역샤아"
-          },
-          "names": {
-            "ja": "1 / 100 νガンダム(ファンネル付)",
-            "zh": "1 / 100 ν高达(附浮游炮)",
-            "ko": "1/100 ν건담(판넬 포함)",
-            "en": "1 / 100 νGundam(ファンネル付)"
-          },
-          "release_date": "1988-10",
-          "price_jpy": 2750,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425247281000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000091438/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-c1-4902425246666000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "sentinel",
-          "series_labels": {
-            "zh": "前哨战",
-            "en": "Sentinel",
-            "ja": "センチネル",
-            "ko": "센티넬"
-          },
-          "names": {
-            "ja": "1 / 144 ゼータプラス C1",
-            "zh": "1 / 144 Z+ C1",
-            "ko": "1/144 제타 플러스 C1",
-            "en": "1 / 144 Zetaプラス C1"
-          },
-          "release_date": "1988-09",
-          "price_jpy": 1100,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425246666000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144126/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-550-4902425244907000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "cca",
-          "series_labels": {
-            "zh": "逆夏",
-            "en": "CCA",
-            "ja": "逆シャア",
-            "ko": "역샤아"
-          },
-          "names": {
-            "ja": "1 / 550 アルパアジール",
-            "zh": "1 / 550 α·阿基尔",
-            "ko": "1/550 알파 아질",
-            "en": "1 / 550 アルパアジール"
-          },
-          "release_date": "1988-08",
-          "price_jpy": 1100,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425244907000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000091729/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425243917000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "cca",
-          "series_labels": {
-            "zh": "逆夏",
-            "en": "CCA",
-            "ja": "逆シャア",
-            "ko": "역샤아"
-          },
-          "names": {
-            "ja": "1 / 144 νガンダム(ファンネル付)",
-            "zh": "1 / 144 ν高达(附浮游炮)",
-            "ko": "1/144 ν건담(판넬 포함)",
-            "en": "1 / 144 νGundam(ファンネル付)"
-          },
-          "release_date": "1988-07",
-          "price_jpy": 1100,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425243917000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000091649/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425234649000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "cca",
-          "series_labels": {
-            "zh": "逆夏",
-            "en": "CCA",
-            "ja": "逆シャア",
-            "ko": "역샤아"
-          },
-          "names": {
-            "ja": "1 / 144 クェス用ヤクト・ドーガ",
-            "zh": "1 / 144 奎丝用雅克特·多加",
-            "ko": "1/144 퀘스용 야크트 도가",
-            "en": "1 / 144 クェス用ヤクト ドーガ"
-          },
-          "release_date": "1988-04-20",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425234649000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000125969/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425230368000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "cca",
-          "series_labels": {
-            "zh": "逆夏",
-            "en": "CCA",
-            "ja": "逆シャア",
-            "ko": "역샤아"
-          },
-          "names": {
-            "ja": "1 / 144 ギラ・ドーガ",
-            "zh": "1 / 144 吉拉·多加",
-            "ko": "1/144 기라 도가",
-            "en": "1 / 144 ギラ ドーガ"
-          },
-          "release_date": "1988-03-20",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425230368000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000125967/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425231594000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "cca",
-          "series_labels": {
-            "zh": "逆夏",
-            "en": "CCA",
-            "ja": "逆シャア",
-            "ko": "역샤아"
-          },
-          "names": {
-            "ja": "1 / 144 ジェガン",
-            "zh": "1 / 144 杰刚",
-            "ko": "1/144 제간",
-            "en": "1 / 144 ジェガン"
-          },
-          "release_date": "1988-03",
-          "price_jpy": 550,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425231594000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000091586/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425208442000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "cca",
-          "series_labels": {
-            "zh": "逆夏",
-            "en": "CCA",
-            "ja": "逆シャア",
-            "ko": "역샤아"
-          },
-          "names": {
-            "ja": "1 / 144 ヤクト・ドーガ",
-            "zh": "1 / 144 雅克特·多加",
-            "ko": "1/144 야크트 도가",
-            "en": "1 / 144 ヤクト ドーガ"
-          },
-          "release_date": "1988-02-05",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425208442000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000125964/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425208695000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "cca",
-          "series_labels": {
-            "zh": "逆夏",
-            "en": "CCA",
-            "ja": "逆シャア",
-            "ko": "역샤아"
-          },
-          "names": {
-            "ja": "1 / 144 サザビー",
-            "zh": "1 / 144 沙扎比",
-            "ko": "1/144 사자비",
-            "en": "1 / 144 Sazabi"
-          },
-          "release_date": "1988-02",
-          "price_jpy": 1100,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425208695000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000091584/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425104218000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "cca",
-          "series_labels": {
-            "zh": "逆夏",
-            "en": "CCA",
-            "ja": "逆シャア",
-            "ko": "역샤아"
-          },
-          "names": {
-            "ja": "1 / 144 リ・ガズィ",
-            "zh": "1 / 144 里·卡兹",
-            "ko": "1/144 리 가지",
-            "en": "1 / 144 リ ガズィ"
-          },
-          "release_date": "1987-12-15",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425104218000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000125963/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425104201000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "cca",
-          "series_labels": {
-            "zh": "逆夏",
-            "en": "CCA",
-            "ja": "逆シャア",
-            "ko": "역샤아"
-          },
-          "names": {
-            "ja": "1 / 144 νガンダム",
-            "zh": "1 / 144 ν高达",
-            "ko": "1/144 ν건담",
-            "en": "1 / 144 νGundam"
-          },
-          "release_date": "1987-12",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425104201000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000091495/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-60-4902425087238000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 60 ドム",
-            "zh": "1 / 60 大魔",
-            "ko": "1/60 돔",
-            "en": "1 / 60 Dom"
-          },
-          "release_date": "1986-11-01",
-          "price_jpy": 2750,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087238000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000143602/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-iii-4902425071305000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "zz",
-          "series_labels": {
-            "zh": "ZZ",
-            "en": "ZZ",
-            "ja": "ZZ",
-            "ko": "ZZ"
-          },
-          "names": {
-            "ja": "1 / 144 ザクIII",
-            "zh": "1 / 144 扎古III",
-            "ko": "1/144 자쿠III",
-            "en": "1 / 144 ZakuIII"
-          },
-          "release_date": "1986-11",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425071305000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144123/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425071299000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "zz",
-          "series_labels": {
-            "zh": "ZZ",
-            "en": "ZZ",
-            "ja": "ZZ",
-            "ko": "ZZ"
-          },
-          "names": {
-            "ja": "1 / 144 ドーベンウルフ",
-            "zh": "1 / 144 德本·沃尔夫",
-            "ko": "1/144 도벤 울프",
-            "en": "1 / 144 ドーベンウルフ"
-          },
-          "release_date": "1986-11",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425071299000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144125/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425071282000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "zz",
-          "series_labels": {
-            "zh": "ZZ",
-            "en": "ZZ",
-            "ja": "ZZ",
-            "ko": "ZZ"
-          },
-          "names": {
-            "ja": "1 / 144 ドライセン",
-            "zh": "1 / 144 德莱森",
-            "ko": "1/144 드라이센",
-            "en": "1 / 144 ドライセン"
-          },
-          "release_date": "1986-10",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425071282000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144124/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425069500000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "zz",
-          "series_labels": {
-            "zh": "ZZ",
-            "en": "ZZ",
-            "ja": "ZZ",
-            "ko": "ZZ"
-          },
-          "names": {
-            "ja": "1 / 144 アイザック",
-            "zh": "1 / 144 艾萨克",
-            "ko": "1/144 아이작",
-            "en": "1 / 144 アイザック"
-          },
-          "release_date": "1986-09",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425069500000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144122/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425068299000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "zz",
-          "series_labels": {
-            "zh": "ZZ",
-            "en": "ZZ",
-            "ja": "ZZ",
-            "ko": "ZZ"
-          },
-          "names": {
-            "ja": "1 / 144 ザクマリナー",
-            "zh": "1 / 144 扎古水中型",
-            "ko": "1/144 자쿠 마리너",
-            "en": "1 / 144 Zakuマリナー"
-          },
-          "release_date": "1986-08",
-          "price_jpy": 660,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425068299000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144120/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425067735000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "zz",
-          "series_labels": {
-            "zh": "ZZ",
-            "en": "ZZ",
-            "ja": "ZZ",
-            "ko": "ZZ"
-          },
-          "names": {
-            "ja": "1 / 144 バウ",
-            "zh": "1 / 144 巴乌",
-            "ko": "1/144 바우",
-            "en": "1 / 144 バウ"
-          },
-          "release_date": "1986-08",
-          "price_jpy": 660,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425067735000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144119/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-r-4902425062976000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "zz",
-          "series_labels": {
-            "zh": "ZZ",
-            "en": "ZZ",
-            "ja": "ZZ",
-            "ko": "ZZ"
-          },
-          "names": {
-            "ja": "1 / 144 Rジャジャ",
-            "zh": "1 / 144 R·加加",
-            "ko": "1/144 R자자",
-            "en": "1 / 144 Rジャジャ"
-          },
-          "release_date": "1986-07",
-          "price_jpy": 660,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425062976000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144118/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425062884000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "zz",
-          "series_labels": {
-            "zh": "ZZ",
-            "en": "ZZ",
-            "ja": "ZZ",
-            "ko": "ZZ"
-          },
-          "names": {
-            "ja": "1 / 144 ズサ",
-            "zh": "1 / 144 祖沙",
-            "ko": "1/144 즈사",
-            "en": "1 / 144 ズサ"
-          },
-          "release_date": "1986-06",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425062884000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144121/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425053363000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "1 / 144 パラスアテネ",
-            "zh": "1 / 144 帕拉斯·雅典娜",
-            "ko": "1/144 팔라스 아테네",
-            "en": "1 / 144 パラスアテネ"
-          },
-          "release_date": "1986-01",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425053363000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144115/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425051864000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "1 / 144 ガブスレイ",
-            "zh": "1 / 144 加布斯雷",
-            "ko": "1/144 가브스레이",
-            "en": "1 / 144 ガブスレイ"
-          },
-          "release_date": "1985-12",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425051864000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144018/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425051888000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "1 / 144 ハンブラビ",
-            "zh": "1 / 144 汉布拉比",
-            "ko": "1/144 함브라비",
-            "en": "1 / 144 ハンブラビ"
-          },
-          "release_date": "1985-12",
-          "price_jpy": 660,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425051888000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144014/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425051871000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "1 / 144 メタス",
-            "zh": "1 / 144 梅塔斯",
-            "ko": "1/144 메타스",
-            "en": "1 / 144 メタス"
-          },
-          "release_date": "1985-12",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425051871000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144015/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-g-4902425049724000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "1 / 144 Gディフェンサー",
-            "zh": "1 / 144 G防卫者",
-            "ko": "1/144 G디펜서",
-            "en": "1 / 144 Gディフェンサー"
-          },
-          "release_date": "1985-11",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425049724000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144016/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425049229000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "1 / 100 百式",
-            "zh": "1 / 100 百式",
-            "ko": "1/100 백식",
-            "en": "1 / 100 Hyaku Shiki"
-          },
-          "release_date": "1985-10",
-          "price_jpy": 1320,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425049229000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144116/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425049243000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "1 / 144 ギャプラン",
-            "zh": "1 / 144 加布兰",
-            "ko": "1/144 갸프랑",
-            "en": "1 / 144 ギャプラン"
-          },
-          "release_date": "1985-10",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425049243000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144114/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425039589000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "1 / 100 リックディアス",
-            "zh": "1 / 100 里克·迪亚斯",
-            "ko": "1/100 릭 디아스",
-            "en": "1 / 100 リックディアス"
-          },
-          "release_date": "1985-08",
-          "price_jpy": 1320,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425039589000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144117/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425047874000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "1 / 144 ネモ",
-            "zh": "1 / 144 尼莫",
-            "ko": "1/144 네모",
-            "en": "1 / 144 ネモ"
-          },
-          "release_date": "1985-08",
-          "price_jpy": 550,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425047874000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144013/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425044910000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "1 / 144 マラサイ",
-            "zh": "1 / 144 马拉赛",
-            "ko": "1/144 마라사이",
-            "en": "1 / 144 マラサイ"
-          },
-          "release_date": "1985-07",
-          "price_jpy": 550,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425044910000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144012/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425037523000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "1 / 144 リックディアス",
-            "zh": "1 / 144 里克·迪亚斯",
-            "ko": "1/144 릭 디아스",
-            "en": "1 / 144 リックディアス"
-          },
-          "release_date": "1985-05",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425037523000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144017/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-60-4902425087030000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 60 量産型ザク",
-            "zh": "1 / 60 量产型扎古",
-            "ko": "1/60 양산형자쿠",
-            "en": "1 / 60 Mass Production TypeZaku"
-          },
-          "release_date": "1985-04-01",
-          "price_jpy": 2200,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087030000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000136683/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425013077000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 リアルタイプ ジム",
-            "zh": "1 / 100 写实型 吉姆",
-            "ko": "1/100 리얼 타입 짐",
-            "en": "1 / 100 Real Type GM"
-          },
-          "release_date": "1983-04",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425013077000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137280/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425013060000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 リアルタイプ 旧型ザク",
-            "zh": "1 / 100 写实型 旧型扎古",
-            "ko": "1/100 리얼 타입 구형 자쿠",
-            "en": "1 / 100 Real Type 旧型Zaku"
-          },
-          "release_date": "1983-04",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425013060000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137279/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-550-4902425087481000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 550 ミデア",
-            "zh": "1 / 550 米迪亚",
-            "ko": "1/550 미디아",
-            "en": "1 / 550 ミデア"
-          },
-          "release_date": "1983-01",
-          "price_jpy": 440,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087481000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000150061/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087443000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "msv",
-          "series_labels": {
-            "zh": "MSV",
-            "en": "MSV",
-            "ja": "MSV",
-            "ko": "MSV"
-          },
-          "names": {
-            "ja": "1 / 100 ゾゴック",
-            "zh": "1 / 100 佐格克",
-            "ko": "1/100 조고크",
-            "en": "1 / 100 ゾゴック"
-          },
-          "release_date": "1982-11",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087443000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137273/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425087405000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "msv",
-          "series_labels": {
-            "zh": "MSV",
-            "en": "MSV",
-            "ja": "MSV",
-            "ko": "MSV"
-          },
-          "names": {
-            "ja": "1 / 144 ゾゴック",
-            "zh": "1 / 144 佐格克",
-            "ko": "1/144 조고크",
-            "en": "1 / 144 ゾゴック"
-          },
-          "release_date": "1982-11",
-          "price_jpy": 440,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087405000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000143598/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087436000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "msv",
-          "series_labels": {
-            "zh": "MSV",
-            "en": "MSV",
-            "ja": "MSV",
-            "ko": "MSV"
-          },
-          "names": {
-            "ja": "1 / 100 アッグ",
-            "zh": "1 / 100 阿古",
-            "ko": "1/100 앗그",
-            "en": "1 / 100 アッグ"
-          },
-          "release_date": "1982-10",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087436000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000142782/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087412000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 アッガイ",
-            "zh": "1 / 100 阿凯",
-            "ko": "1/100 앗가이",
-            "en": "1 / 100 アッガイ"
-          },
-          "release_date": "1982-09",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087412000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137265/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087429000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "msv",
-          "series_labels": {
-            "zh": "MSV",
-            "en": "MSV",
-            "ja": "MSV",
-            "ko": "MSV"
-          },
-          "names": {
-            "ja": "1 / 100 アッグガイ",
-            "zh": "1 / 100 阿古凯",
-            "ko": "1/100 앗그가이",
-            "en": "1 / 100 アッグガイ"
-          },
-          "release_date": "1982-09",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087429000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137272/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087207000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 量産型ザク",
-            "zh": "1 / 100 量产型扎古",
-            "ko": "1/100 양산형자쿠",
-            "en": "1 / 100 Mass Production TypeZaku"
-          },
-          "release_date": "1982-09",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087207000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137261/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425087399000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "msv",
-          "series_labels": {
-            "zh": "MSV",
-            "en": "MSV",
-            "ja": "MSV",
-            "ko": "MSV"
-          },
-          "names": {
-            "ja": "1 / 144 アッグ",
-            "zh": "1 / 144 阿古",
-            "ko": "1/144 앗그",
-            "en": "1 / 144 アッグ"
-          },
-          "release_date": "1982-09",
-          "price_jpy": 330,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087399000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146637/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087375000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 ジム",
-            "zh": "1 / 100 吉姆",
-            "ko": "1/100 짐",
-            "en": "1 / 100 GM"
-          },
-          "release_date": "1982-08",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087375000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000142780/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425087382000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "msv",
-          "series_labels": {
-            "zh": "MSV",
-            "en": "MSV",
-            "ja": "MSV",
-            "ko": "MSV"
-          },
-          "names": {
-            "ja": "1 / 144 ジュアッグ",
-            "zh": "1 / 144 朱阿古",
-            "ko": "1/144 쥬앗그",
-            "en": "1 / 144 ジュアッグ"
-          },
-          "release_date": "1982-08",
-          "price_jpy": 550,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087382000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000142771/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087368000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 旧型ザク",
-            "zh": "1 / 100 旧型扎古",
-            "ko": "1/100 구형 자쿠",
-            "en": "1 / 100 旧型Zaku"
-          },
-          "release_date": "1982-07",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087368000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000142779/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425086750000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "msv",
-          "series_labels": {
-            "zh": "MSV",
-            "en": "MSV",
-            "ja": "MSV",
-            "ko": "MSV"
-          },
-          "names": {
-            "ja": "1 / 144 アッグガイ",
-            "zh": "1 / 144 阿古凯",
-            "ko": "1/144 앗그가이",
-            "en": "1 / 144 アッグガイ"
-          },
-          "release_date": "1982-07",
-          "price_jpy": 440,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086750000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137256/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087337000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 量産型ズゴック",
-            "zh": "1 / 100 量产型魔蟹",
-            "ko": "1/100 양산형 즈고크",
-            "en": "1 / 100 Mass Production Typeズゴック"
-          },
-          "release_date": "1982-06",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087337000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137269/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-550-4902425086774000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 550 アッザム",
-            "zh": "1 / 550 阿扎姆",
-            "ko": "1/550 앗잠",
-            "en": "1 / 550 アッザム"
-          },
-          "release_date": "1982-06",
-          "price_jpy": 440,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086774000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000150060/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-550-4902425087313000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 550 ザクレロ",
-            "zh": "1 / 550 扎古雷罗",
-            "ko": "1/550 자쿠레로",
-            "en": "1 / 550 Zakuレロ"
-          },
-          "release_date": "1982-06",
-          "price_jpy": 550,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087313000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146686/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-550-4902425087320000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 550 ブラウ・ブロ",
-            "zh": "1 / 550 布劳·布罗",
-            "ko": "1/550 브라우 브로",
-            "en": "1 / 550 ブラウ ブロ"
-          },
-          "release_date": "1982-06",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087320000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137264/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425086767000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 144 マゼラアタック",
-            "zh": "1 / 144 马杰拉攻击车",
-            "ko": "1/144 마젤라 어택",
-            "en": "1 / 144 マゼラアタック"
-          },
-          "release_date": "1982-05",
-          "price_jpy": 440,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086767000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146685/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425087214000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 144 量産型ゲルググ",
-            "zh": "1 / 144 量产型格鲁古古",
-            "ko": "1/144 양산형겔구그",
-            "en": "1 / 144 Mass Production TypeGelgoog"
-          },
-          "release_date": "1982-05",
-          "price_jpy": 550,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087214000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137257/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087290000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 リアルタイプ ゲルググ",
-            "zh": "1 / 100 写实型 格鲁古古",
-            "ko": "1/100 리얼 타입 겔구그",
-            "en": "1 / 100 Real Type Gelgoog"
-          },
-          "release_date": "1982-04",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087290000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137282/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087306000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 リアルタイプガンキャノン",
-            "zh": "1 / 100 写实型钢加农",
-            "ko": "1/100 리얼 타입 건캐논",
-            "en": "1 / 100 Real Typeガンキャノン"
-          },
-          "release_date": "1982-04",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087306000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000144009/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087283000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 ゴッグ",
-            "zh": "1 / 100 魔肯",
-            "ko": "1/100 곡그",
-            "en": "1 / 100 ゴッグ"
-          },
-          "release_date": "1982-03",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087283000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137271/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087276000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 リアルタイプ ガンダム",
-            "zh": "1 / 100 写实型 高达",
-            "ko": "1/100 리얼 타입 건담",
-            "en": "1 / 100 Real Type Gundam"
-          },
-          "release_date": "1982-03",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087276000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137277/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087252000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 リアルタイプ ザク",
-            "zh": "1 / 100 写实型 扎古",
-            "ko": "1/100 리얼 타입 자쿠",
-            "en": "1 / 100 Real Type Zaku"
-          },
-          "release_date": "1982-02",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087252000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137278/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087269000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 リアルタイプ ドム",
-            "zh": "1 / 100 写实型 大魔",
-            "ko": "1/100 리얼 타입 돔",
-            "en": "1 / 100 Real Type Dom"
-          },
-          "release_date": "1982-02",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087269000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137281/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087245000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 ギャン",
-            "zh": "1 / 100 强人",
-            "ko": "1/100 걍",
-            "en": "1 / 100 ギャン"
-          },
-          "release_date": "1982-01",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087245000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137263/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087184000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 グフ",
-            "zh": "1 / 100 老虎",
-            "ko": "1/100 구프",
-            "en": "1 / 100 Gouf"
-          },
-          "release_date": "1981-12",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087184000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137266/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087191000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 シャア専用ズゴック",
-            "zh": "1 / 100 夏亚专用魔蟹",
-            "ko": "1/100 샤아 전용 즈고크",
-            "en": "1 / 100 シャアCustomズゴック"
-          },
-          "release_date": "1981-12",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087191000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137628/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-60-4902425087221000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 60 シャア専用ゲルググ",
-            "zh": "1 / 60 夏亚专用格鲁古古",
-            "ko": "1/60 샤아 전용겔구그",
-            "en": "1 / 60 シャアCustomGelgoog"
-          },
-          "release_date": "1981-12",
-          "price_jpy": 2750,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087221000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000136684/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425086620000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 144 旧型ザク",
-            "zh": "1 / 144 旧型扎古",
-            "ko": "1/144 구형 자쿠",
-            "en": "1 / 144 旧型Zaku"
-          },
-          "release_date": "1981-10",
-          "price_jpy": 330,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086620000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146635/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-550-4902425086712000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 550 ララァ専用モビルアーマー",
-            "zh": "1 / 550 拉拉专用机动装甲",
-            "ko": "1/550 라라아 전용 모빌아머",
-            "en": "1 / 550 ララァCustomモビルアーマー"
-          },
-          "release_date": "1981-10",
-          "price_jpy": 330,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086712000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146679/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425086637000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 144 ボール",
-            "zh": "1 / 144 铁球",
-            "ko": "1/144 볼",
-            "en": "1 / 144 Ball"
-          },
-          "release_date": "1981-09",
-          "price_jpy": 330,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086637000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146639/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-550-4902425086699000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 550 ビグロ",
-            "zh": "1 / 550 比格罗",
-            "ko": "1/550 비그로",
-            "en": "1 / 550 ビグロ"
-          },
-          "release_date": "1981-09",
-          "price_jpy": 330,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086699000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146680/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425086613000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 144 アッガイ",
-            "zh": "1 / 144 阿凯",
-            "ko": "1/144 앗가이",
-            "en": "1 / 144 アッガイ"
-          },
-          "release_date": "1981-08",
-          "price_jpy": 330,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086613000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000143596/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087108000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 シャア専用ザク",
-            "zh": "1 / 100 夏亚专用扎古",
-            "ko": "1/100 샤아 전용자쿠",
-            "en": "1 / 100 シャアCustomZaku"
-          },
-          "release_date": "1981-07",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087108000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000150066/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425086606000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 144 ギャン",
-            "zh": "1 / 144 强人",
-            "ko": "1/144 걍",
-            "en": "1 / 144 ギャン"
-          },
-          "release_date": "1981-07",
-          "price_jpy": 330,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086606000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137251/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425086576000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 144 シャア専用ズゴック",
-            "zh": "1 / 144 夏亚专用魔蟹",
-            "ko": "1/144 샤아 전용 즈고크",
-            "en": "1 / 144 シャアCustomズゴック"
-          },
-          "release_date": "1981-07",
-          "price_jpy": 330,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086576000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146633/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087122000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 量産型ゲルググ",
-            "zh": "1 / 100 量产型格鲁古古",
-            "ko": "1/100 양산형겔구그",
-            "en": "1 / 100 Mass Production TypeGelgoog"
-          },
-          "release_date": "1981-06",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087122000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137268/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425087115000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 144 シャア専用ゲルググ",
-            "zh": "1 / 144 夏亚专用格鲁古古",
-            "ko": "1/144 샤아 전용겔구그",
-            "en": "1 / 144 シャアCustomGelgoog"
-          },
-          "release_date": "1981-06",
-          "price_jpy": 550,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087115000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000143600/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425086569000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 144 ガンキャノン",
-            "zh": "1 / 144 钢加农",
-            "ko": "1/144 건캐논",
-            "en": "1 / 144 ガンキャノン"
-          },
-          "release_date": "1981-05",
-          "price_jpy": 330,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086569000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000142768/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425087085000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 144 ガンタンク",
-            "zh": "1 / 144 钢坦克",
-            "ko": "1/144 건탱크",
-            "en": "1 / 144 ガンタンク"
-          },
-          "release_date": "1981-05",
-          "price_jpy": 660,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087085000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137260/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425086682000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 144 ゴッグ",
-            "zh": "1 / 144 魔肯",
-            "ko": "1/144 곡그",
-            "en": "1 / 144 ゴッグ"
-          },
-          "release_date": "1981-05",
-          "price_jpy": 440,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086682000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000142770/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425086583000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 144 ジム",
-            "zh": "1 / 144 吉姆",
-            "ko": "1/144 짐",
-            "en": "1 / 144 GM"
-          },
-          "release_date": "1981-04",
-          "price_jpy": 330,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086583000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000145877/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425086644000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "option",
-          "series_labels": {
-            "zh": "配件",
-            "en": "Option",
-            "ja": "オプション",
-            "ko": "옵션"
-          },
-          "names": {
-            "ja": "1 / 144 武器セット",
-            "zh": "1 / 144 武器套装",
-            "ko": "1/144 무기 세트",
-            "en": "1 / 144 Weapon Set"
-          },
-          "release_date": "1981-04",
-          "price_jpy": 330,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086644000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146640/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087061000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 ガンキャノン",
-            "zh": "1 / 100 钢加农",
-            "ko": "1/100 건캐논",
-            "en": "1 / 100 ガンキャノン"
-          },
-          "release_date": "1981-03",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087061000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137262/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425087078000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 シャア専用ゲルググ",
-            "zh": "1 / 100 夏亚专用格鲁古古",
-            "ko": "1/100 샤아 전용겔구그",
-            "en": "1 / 100 シャアCustomGelgoog"
-          },
-          "release_date": "1981-03",
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087078000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137267/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425087054000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 144 ジオング",
-            "zh": "1 / 144 吉翁号",
-            "ko": "1/144 지옹",
-            "en": "1 / 144 ジオング"
-          },
-          "release_date": "1981-03",
-          "price_jpy": 660,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087054000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000150064/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425086538000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 144 量産型ザク",
-            "zh": "1 / 144 量产型扎古",
-            "ko": "1/144 양산형자쿠",
-            "en": "1 / 144 Mass Production TypeZaku"
-          },
-          "release_date": "1981-01",
-          "price_jpy": 330,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086538000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146629/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425086552000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 144 量産型ズゴック",
-            "zh": "1 / 144 量产型魔蟹",
-            "ko": "1/144 양산형 즈고크",
-            "en": "1 / 144 Mass Production Typeズゴック"
-          },
-          "release_date": "1980-12",
-          "price_jpy": 330,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086552000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146634/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-60-4902425087047000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 60 ガンダム",
-            "zh": "1 / 60 高达",
-            "ko": "1/60 건담",
-            "en": "1 / 60 Gundam"
-          },
-          "release_date": "1980-12",
-          "price_jpy": 2200,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087047000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000137274/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-60-4902425087016000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 60 シャア専用ザク",
-            "zh": "1 / 60 夏亚专用扎古",
-            "ko": "1/60 샤아 전용자쿠",
-            "en": "1 / 60 シャアCustomZaku"
-          },
-          "release_date": "1980-12",
-          "price_jpy": 2200,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425087016000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000136682/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425086545000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 144 グフ",
-            "zh": "1 / 144 老虎",
-            "ko": "1/144 구프",
-            "en": "1 / 144 Gouf"
-          },
-          "release_date": "1980-11",
-          "price_jpy": 330,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086545000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146632/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425086521000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 144 シャア専用ザク",
-            "zh": "1 / 144 夏亚专用扎古",
-            "ko": "1/144 샤아 전용자쿠",
-            "en": "1 / 144 シャアCustomZaku"
-          },
-          "release_date": "1980-09",
-          "price_jpy": 330,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086521000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146626/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-100-4902425086996000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 100 ガンダム",
-            "zh": "1 / 100 高达",
-            "ko": "1/100 건담",
-            "en": "1 / 100 Gundam"
-          },
-          "release_date": "1980-07",
-          "price_jpy": 770,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086996000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000150065/"
-          ]
-        },
-        {
-          "kit_id": "ng-1-144-4902425086590000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "NG",
-          "subline": "No Grade",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "1 / 144 ガンダム",
-            "zh": "1 / 144 高达",
-            "ko": "1/144 건담",
-            "en": "1 / 144 Gundam"
-          },
-          "release_date": "1980-07",
-          "price_jpy": 330,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4902425086590000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000146625/"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-4237",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 52 セレクトシリーズ ギャラドス",
-            "zh": "宝可梦拼装模型收藏 52 精选系列 暴鲤龙",
-            "ko": "포켓몬 프라모 컬렉션 52 셀렉트 시리즈 갸라도스",
-            "en": "Pokémon PLAMO COLLECTION 52 SELECT SERIES Gyarados"
-          },
-          "release_date": null,
-          "price_jpy": 1300,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_4237/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5028",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション No.54 セレクトシリーズ グラードン",
-            "zh": "宝可梦拼装模型收藏 No.54 精选系列 固拉多",
-            "ko": "포켓몬 프라모 컬렉션 No.54 셀렉트 시리즈 그란돈",
-            "en": "Pokémon PLAMO COLLECTION No.54 SELECT SERIES Groudon"
-          },
-          "release_date": null,
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5028/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5411",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 55 セレクトシリーズ ハッサム",
-            "zh": "宝可梦拼装模型收藏 55 精选系列 巨钳螳螂",
-            "ko": "포켓몬 프라모 컬렉션 55 셀렉트 시리즈 핫삼",
-            "en": "Pokémon PLAMO COLLECTION 55 SELECT SERIES Scizor"
-          },
-          "release_date": null,
-          "price_jpy": 1400,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5411/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5467",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 56 セレクトシリーズ マスカーニャ",
-            "zh": "宝可梦拼装模型收藏 56 精选系列 魔幻假面喵",
-            "ko": "포켓몬 프라모 컬렉션 56 셀렉트 시리즈 마스카나",
-            "en": "Pokémon PLAMO COLLECTION 56 SELECT SERIES Meowscarada"
-          },
-          "release_date": null,
-          "price_jpy": 1600,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5467/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5497",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 57 セレクトシリーズ ソウブレイズ",
-            "zh": "宝可梦拼装模型收藏 57 精选系列 苍炎刃鬼",
-            "ko": "포켓몬 프라모 컬렉션 57 셀렉트 시리즈 파라블레이즈",
-            "en": "Pokémon PLAMO COLLECTION 57 SELECT SERIES Ceruledge"
-          },
-          "release_date": null,
-          "price_jpy": 1700,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5497/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5568",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 58 セレクトシリーズ グレンアルマ",
-            "zh": "宝可梦拼装模型收藏 58 精选系列 红莲铠骑",
-            "ko": "포켓몬 프라모 컬렉션 58 셀렉트 시리즈 카디나르마",
-            "en": "Pokémon PLAMO COLLECTION 58 SELECT SERIES Armarouge"
-          },
-          "release_date": null,
-          "price_jpy": 1700,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5568/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5958",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 59 セレクトシリーズ ミライドン",
-            "zh": "宝可梦拼装模型收藏 59 精选系列 密勒顿",
-            "ko": "포켓몬 프라모 컬렉션 59 셀렉트 시리즈 미라이돈",
-            "en": "Pokémon PLAMO COLLECTION 59 SELECT SERIES Miraidon"
-          },
-          "release_date": null,
-          "price_jpy": 2100,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5958/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        }
-      ],
-      "removed": [],
-      "watched": []
     }
   ]
 }

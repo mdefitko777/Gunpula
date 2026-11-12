@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-11",
+  "updated_at": "2026-11-12",
   "scope": "Individual model kit and official collectible catalog imported from Japanese official BANDAI SPIRITS, Bandai Candy, Bandai Gashapon, Bandai Hobby, Tamashii Web, Kotobukiya, and Takara Tomy sources. Covers Gundam, Armored Core, Pokemon, and BEYBLADE X records. Records are needs_review until field-level human checks are complete.",
   "kits": [
     {
@@ -146730,12 +146730,6 @@
       "subline": "Aniplex+",
       "number": null,
       "scale": "non-scale",
-      "names": {
-        "ja": "スパイラル・ラダー「DNA」",
-        "en": "スパイラル ラダー「DNA」",
-        "zh": "スパイラル・ラダー「DNA」",
-        "ko": "スパイラル・ラダー「DNA」"
-      },
       "images": {
         "box_art_url": "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw75d9cfd5/items/title-H/fgo/ost/DNA_JKkari.jpg",
         "box_art_source_id": "aniplex_plus_fate_jp"
@@ -146783,6 +146777,12 @@
           "ja": "FGO",
           "ko": "FGO"
         }
+      },
+      "names": {
+        "ja": "スパイラル・ラダー「DNA」",
+        "en": "スパイラル ラダー「DNA」",
+        "zh": "スパイラル・ラダー「DNA」",
+        "ko": "スパイラル・ラダー「DNA」"
       }
     },
     {
@@ -210567,6 +210567,91 @@
       ]
     },
     {
+      "kit_id": "tamashii-16259",
+      "franchise": "gundam",
+      "grade_code": "METAL_BUILD",
+      "subline": "METAL BUILD",
+      "number": null,
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://tamashiiweb.com/storage/images/products/thumbnail/aaf0aa7e-895e-455b-ac7f-e8e76bd61657.webp",
+        "box_art_source_id": "tamashii_web_jp"
+      },
+      "gallery_image_urls": [
+        "https://tamashiiweb.com/storage/images/products/thumbnail/aaf0aa7e-895e-455b-ac7f-e8e76bd61657.webp",
+        "https://tamashiiweb.com/storage/images/products/main/1aad1ca7-10db-4dc9-b6df-a394c16b0eeb.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/670d3c23-3f4a-4e48-9f82-2f1451c1fe62.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/5e56c26e-a75c-4d02-8bf4-c66c0d975a93.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/fff6dff7-a09a-4500-802d-f6ca779a99c5.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/2a42db7d-7072-4573-973d-6b2df4746671.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/598b70f9-9d56-45c8-95bb-7910dbff134f.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/dc669acd-c515-43c1-bcf2-47cf136cbb5e.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/fe769364-c0c7-451e-8ad3-294652c87bf3.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/95eba8be-7804-4cf1-a586-9bf4fb9f6a34.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/24cfdcfc-4692-4ae4-a5fe-935160917d94.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/3f73be7c-a4a5-4339-a117-a0f008c34ee6.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/e9f19cf1-259b-4932-bbe4-91d3045557d4.webp",
+        "https://tamashiiweb.com/storage/images/products/sub/17b0cca0-301a-46fe-9020-8121d5ad66ee.webp",
+        "https://tamashiiweb.com/assets/item/16259_gundamdynames/item_16259_4v746b8wd_web.webp"
+      ],
+      "universe": "AD",
+      "work_title": "00",
+      "release_date": "2027-01",
+      "price_jpy": 33000,
+      "is_limited": true,
+      "data_status": "needs_review",
+      "source_urls": [
+        "https://tamashiiweb.com/item/16259/",
+        "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+      ],
+      "source_refs": [
+        {
+          "source_id": "tamashii_web_jp",
+          "url": "https://tamashiiweb.com/item/16259/",
+          "fields": [
+            "franchise",
+            "names",
+            "grade_code",
+            "subline",
+            "scale",
+            "release_date",
+            "price_jpy",
+            "images",
+            "gallery_image_urls",
+            "work_title",
+            "universe"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "gundam",
+        "tamashii nations",
+        "collectible figure",
+        "metal-build"
+      ],
+      "notes": "Imported from the official Tamashii Web Gundam METAL BUILD catalog and product detail page.",
+      "names": {
+        "ja": "ガンダムデュナメス",
+        "en": "Gundam Dynames",
+        "zh": "力天使高达",
+        "ko": "건담듀나메스"
+      },
+      "series": {
+        "key": "double_o",
+        "sort": 40,
+        "labels": {
+          "zh": "00",
+          "en": "00",
+          "ja": "00",
+          "ko": "00"
+        }
+      },
+      "search_zh": [
+        "Dynames"
+      ]
+    },
+    {
       "kit_id": "mobility-13",
       "franchise": "gundam",
       "grade_code": "MOBILITY",
@@ -230911,7 +230996,7 @@
       "data_status": "needs_review",
       "source_urls": [
         "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102720184000&grp_id=5325",
-        "https://p-bandai.jp/item/item-1000246304/"
+        "https://p-bandai.jp/item/item-1000256659/"
       ],
       "source_refs": [
         {
@@ -230934,6 +231019,15 @@
         {
           "source_id": "p_bandai_jp",
           "url": "https://p-bandai.jp/item/item-1000246304/",
+          "fields": [
+            "source_urls",
+            "sales_channel"
+          ],
+          "confidence": "high"
+        },
+        {
+          "source_id": "p_bandai_jp",
+          "url": "https://p-bandai.jp/item/item-1000256659/",
           "fields": [
             "source_urls",
             "sales_channel"
@@ -252470,7 +252564,7 @@
         "https://tamashiiweb.com/storage/images/products/imported/item_0000015098_9xHi3Lmp_12.jpg"
       ],
       "universe": "UC",
-      "work_title": "0079",
+      "work_title": "Z",
       "release_date": "2025-01",
       "price_jpy": 8800,
       "is_limited": true,
@@ -252513,13 +252607,13 @@
         "ko": "RGM-79SC 짐 스나이퍼 커스텀 (자브로 방위대 사양) ver. A.N.I.M.E."
       },
       "series": {
-        "key": "uc_first",
-        "sort": 100,
+        "key": "zeta",
+        "sort": 110,
         "labels": {
-          "zh": "初代",
-          "en": "0079",
-          "ja": "初代",
-          "ko": "초대"
+          "zh": "Z",
+          "en": "Z",
+          "ja": "Z",
+          "ko": "Z"
         }
       },
       "search_zh": [
@@ -733385,6 +733479,58 @@
       }
     },
     {
+      "kit_id": "lego-115300-1",
+      "franchise": "lego",
+      "grade_code": "LEGO_GEAR",
+      "subline": "Key Chain",
+      "number": "115300",
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://cdn.rebrickable.com/media/sets/115300-1.jpg",
+        "box_art_source_id": "rebrickable_lego"
+      },
+      "universe": "LEGO",
+      "work_title": "Gear",
+      "release_date": "2026",
+      "price_jpy": null,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://rebrickable.com/sets/115300-1/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "rebrickable_lego",
+          "url": "https://rebrickable.com/sets/115300-1/",
+          "fields": [
+            "names",
+            "images",
+            "release_date"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "lego"
+      ],
+      "names": {
+        "ja": "Gold 2 x 4 Plate Key Chain",
+        "en": "Gold 2 x 4 Plate Key Chain",
+        "zh": "Gold 2 x 4 Plate Key Chain",
+        "ko": "Gold 2 x 4 Plate Key Chain"
+      },
+      "series": {
+        "key": "lego_gear",
+        "sort": 600,
+        "labels": {
+          "zh": "周边",
+          "en": "Gear",
+          "ja": "Gear",
+          "ko": "굿즈"
+        }
+      }
+    },
+    {
       "kit_id": "lego-115512-1",
       "franchise": "lego",
       "grade_code": "LEGO_GEAR",
@@ -762093,6 +762239,58 @@
       }
     },
     {
+      "kit_id": "lego-5010668-1",
+      "franchise": "lego",
+      "grade_code": "LEGO_GEAR",
+      "subline": "Bags, Totes, & Luggage",
+      "number": "5010668",
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://cdn.rebrickable.com/media/sets/5010668-1.jpg",
+        "box_art_source_id": "rebrickable_lego"
+      },
+      "universe": "LEGO",
+      "work_title": "Gear",
+      "release_date": "2026",
+      "price_jpy": null,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://rebrickable.com/sets/5010668-1/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "rebrickable_lego",
+          "url": "https://rebrickable.com/sets/5010668-1/",
+          "fields": [
+            "names",
+            "images",
+            "release_date"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "lego"
+      ],
+      "names": {
+        "ja": "London Retro Tote Bag",
+        "en": "London Retro Tote Bag",
+        "zh": "London Retro Tote Bag",
+        "ko": "London Retro Tote Bag"
+      },
+      "series": {
+        "key": "lego_gear",
+        "sort": 600,
+        "labels": {
+          "zh": "周边",
+          "en": "Gear",
+          "ja": "Gear",
+          "ko": "굿즈"
+        }
+      }
+    },
+    {
       "kit_id": "lego-5010670-1",
       "franchise": "lego",
       "grade_code": "LEGO_GEAR",
@@ -779545,6 +779743,58 @@
       }
     },
     {
+      "kit_id": "lego-6651644-1",
+      "franchise": "lego",
+      "grade_code": "LEGO_SET",
+      "subline": "Winnie the Pooh",
+      "number": "6651644",
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://cdn.rebrickable.com/media/sets/6651644-1.jpg",
+        "box_art_source_id": "rebrickable_lego"
+      },
+      "universe": "LEGO",
+      "work_title": "Duplo",
+      "release_date": "2026",
+      "price_jpy": null,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://rebrickable.com/sets/6651644-1/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "rebrickable_lego",
+          "url": "https://rebrickable.com/sets/6651644-1/",
+          "fields": [
+            "names",
+            "images",
+            "release_date"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "lego"
+      ],
+      "names": {
+        "ja": "Winnie The Pooh 100 Years",
+        "en": "Winnie The Pooh 100 Years",
+        "zh": "Winnie The Pooh 100 Years",
+        "ko": "Winnie The Pooh 100 Years"
+      },
+      "series": {
+        "key": "lego_duplo",
+        "sort": 600,
+        "labels": {
+          "zh": "得宝",
+          "en": "Duplo",
+          "ja": "Duplo",
+          "ko": "듀플로"
+        }
+      }
+    },
+    {
       "kit_id": "lego-6652991-1",
       "franchise": "lego",
       "grade_code": "LEGO_SET",
@@ -780280,6 +780530,59 @@
       }
     },
     {
+      "kit_id": "lego-6670923-1",
+      "franchise": "lego",
+      "grade_code": "LEGO_SET",
+      "subline": "LEGO Brand Store",
+      "number": "6670923",
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://cdn.rebrickable.com/media/sets/6670923-1.jpg",
+        "box_art_source_id": "rebrickable_lego"
+      },
+      "universe": "LEGO",
+      "work_title": "LEGO Brand Store",
+      "release_date": "2026",
+      "price_jpy": null,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://rebrickable.com/sets/6670923-1/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "rebrickable_lego",
+          "url": "https://rebrickable.com/sets/6670923-1/",
+          "fields": [
+            "names",
+            "images",
+            "release_date"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "lego",
+        "pieces:1"
+      ],
+      "names": {
+        "ja": "I [Heart] LEGO Store Town Center Tile",
+        "en": "I [Heart] LEGO Store Town Center Tile",
+        "zh": "I [Heart] LEGO Store Town Center Tile",
+        "ko": "I [Heart] LEGO Store Town Center Tile"
+      },
+      "series": {
+        "key": "lego_lego_brand_store",
+        "sort": 600,
+        "labels": {
+          "zh": "乐高品牌零售店",
+          "en": "LEGO Brand Store",
+          "ja": "LEGO Brand Store",
+          "ko": "레고 스토어"
+        }
+      }
+    },
+    {
       "kit_id": "lego-6670924-1",
       "franchise": "lego",
       "grade_code": "LEGO_SET",
@@ -780488,6 +780791,112 @@
         "en": "Tall Ship",
         "zh": "Tall Ship",
         "ko": "Tall Ship"
+      }
+    },
+    {
+      "kit_id": "lego-6675835-1",
+      "franchise": "lego",
+      "grade_code": "LEGO_SET",
+      "subline": "LEGO Brand Store",
+      "number": "6675835",
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://cdn.rebrickable.com/media/sets/6675835-1.jpg",
+        "box_art_source_id": "rebrickable_lego"
+      },
+      "universe": "LEGO",
+      "work_title": "LEGO Brand Store",
+      "release_date": "2026",
+      "price_jpy": null,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://rebrickable.com/sets/6675835-1/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "rebrickable_lego",
+          "url": "https://rebrickable.com/sets/6675835-1/",
+          "fields": [
+            "names",
+            "images",
+            "release_date"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "lego",
+        "pieces:1"
+      ],
+      "names": {
+        "ja": "I [Heart] LEGO Store Norwich Tile",
+        "en": "I [Heart] LEGO Store Norwich Tile",
+        "zh": "I [Heart] LEGO Store Norwich Tile",
+        "ko": "I [Heart] LEGO Store Norwich Tile"
+      },
+      "series": {
+        "key": "lego_lego_brand_store",
+        "sort": 600,
+        "labels": {
+          "zh": "乐高品牌零售店",
+          "en": "LEGO Brand Store",
+          "ja": "LEGO Brand Store",
+          "ko": "레고 스토어"
+        }
+      }
+    },
+    {
+      "kit_id": "lego-6675836-1",
+      "franchise": "lego",
+      "grade_code": "LEGO_SET",
+      "subline": "LEGO Brand Store",
+      "number": "6675836",
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://cdn.rebrickable.com/media/sets/6675836-1.jpg",
+        "box_art_source_id": "rebrickable_lego"
+      },
+      "universe": "LEGO",
+      "work_title": "LEGO Brand Store",
+      "release_date": "2026",
+      "price_jpy": null,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://rebrickable.com/sets/6675836-1/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "rebrickable_lego",
+          "url": "https://rebrickable.com/sets/6675836-1/",
+          "fields": [
+            "names",
+            "images",
+            "release_date"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "lego",
+        "pieces:1"
+      ],
+      "names": {
+        "ja": "I [Heart] LEGO Store Lakeside Tile",
+        "en": "I [Heart] LEGO Store Lakeside Tile",
+        "zh": "I [Heart] LEGO Store Lakeside Tile",
+        "ko": "I [Heart] LEGO Store Lakeside Tile"
+      },
+      "series": {
+        "key": "lego_lego_brand_store",
+        "sort": 600,
+        "labels": {
+          "zh": "乐高品牌零售店",
+          "en": "LEGO Brand Store",
+          "ja": "LEGO Brand Store",
+          "ko": "레고 스토어"
+        }
       }
     },
     {
@@ -948196,6 +948605,59 @@
       }
     },
     {
+      "kit_id": "lego-barra-1",
+      "franchise": "lego",
+      "grade_code": "LEGO_SET",
+      "subline": "LEGO Brand Store",
+      "number": "BARRA",
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://cdn.rebrickable.com/media/sets/barra-1.jpg",
+        "box_art_source_id": "rebrickable_lego"
+      },
+      "universe": "LEGO",
+      "work_title": "LEGO Brand Store",
+      "release_date": "2024",
+      "price_jpy": null,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://rebrickable.com/sets/BARRA-1/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "rebrickable_lego",
+          "url": "https://rebrickable.com/sets/BARRA-1/",
+          "fields": [
+            "names",
+            "images",
+            "release_date"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "lego",
+        "pieces:1"
+      ],
+      "names": {
+        "ja": "I [Heart] LEGO Store Barra Shopping Tile",
+        "en": "I [Heart] LEGO Store Barra Shopping Tile",
+        "zh": "I [Heart] LEGO Store Barra Shopping Tile",
+        "ko": "I [Heart] LEGO Store Barra Shopping Tile"
+      },
+      "series": {
+        "key": "lego_lego_brand_store",
+        "sort": 600,
+        "labels": {
+          "zh": "乐高品牌零售店",
+          "en": "LEGO Brand Store",
+          "ja": "LEGO Brand Store",
+          "ko": "레고 스토어"
+        }
+      }
+    },
+    {
       "kit_id": "lego-bp0462700-1",
       "franchise": "lego",
       "grade_code": "LEGO_GEAR",
@@ -1013169,6 +1013631,59 @@
         "en": "City: Gear Up For Action!",
         "zh": "City: Gear Up For Action!",
         "ko": "City: Gear Up For Action!"
+      }
+    },
+    {
+      "kit_id": "lego-coolsprings-1",
+      "franchise": "lego",
+      "grade_code": "LEGO_SET",
+      "subline": "LEGO Brand Store",
+      "number": "COOLSPRINGS",
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://cdn.rebrickable.com/media/sets/coolsprings-1.jpg",
+        "box_art_source_id": "rebrickable_lego"
+      },
+      "universe": "LEGO",
+      "work_title": "LEGO Brand Store",
+      "release_date": "2023",
+      "price_jpy": null,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://rebrickable.com/sets/COOLSPRINGS-1/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "rebrickable_lego",
+          "url": "https://rebrickable.com/sets/COOLSPRINGS-1/",
+          "fields": [
+            "names",
+            "images",
+            "release_date"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "lego",
+        "pieces:1"
+      ],
+      "names": {
+        "ja": "I [Heart] LEGO Store Coolsprings Galleria Tile",
+        "en": "I [Heart] LEGO Store Coolsprings Galleria Tile",
+        "zh": "I [Heart] LEGO Store Coolsprings Galleria Tile",
+        "ko": "I [Heart] LEGO Store Coolsprings Galleria Tile"
+      },
+      "series": {
+        "key": "lego_lego_brand_store",
+        "sort": 600,
+        "labels": {
+          "zh": "乐高品牌零售店",
+          "en": "LEGO Brand Store",
+          "ja": "LEGO Brand Store",
+          "ko": "레고 스토어"
+        }
       }
     },
     {
@@ -1139601,6 +1140116,59 @@
         "en": "The LEGO Store (Hangzhou) - 1st Anniversary",
         "zh": "The LEGO Store (Hangzhou) - 1st Anniversary",
         "ko": "The LEGO Store (Hangzhou) - 1st Anniversary"
+      }
+    },
+    {
+      "kit_id": "lego-6382642-1",
+      "franchise": "lego",
+      "grade_code": "LEGO_SET",
+      "subline": "LEGO Brand Store",
+      "number": "6382642",
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://cdn.rebrickable.com/media/sets/6382642-1.jpg",
+        "box_art_source_id": "rebrickable_lego"
+      },
+      "universe": "LEGO",
+      "work_title": "LEGO Brand Store",
+      "release_date": "2021",
+      "price_jpy": null,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://rebrickable.com/sets/6382642-1/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "rebrickable_lego",
+          "url": "https://rebrickable.com/sets/6382642-1/",
+          "fields": [
+            "names",
+            "images",
+            "release_date"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "lego",
+        "pieces:1"
+      ],
+      "names": {
+        "ja": "I [Heart] LEGO Store 5th Avenue Tile",
+        "en": "I [Heart] LEGO Store 5th Avenue Tile",
+        "zh": "I [Heart] LEGO Store 5th Avenue Tile",
+        "ko": "I [Heart] LEGO Store 5th Avenue Tile"
+      },
+      "series": {
+        "key": "lego_lego_brand_store",
+        "sort": 600,
+        "labels": {
+          "zh": "乐高品牌零售店",
+          "en": "LEGO Brand Store",
+          "ja": "LEGO Brand Store",
+          "ko": "레고 스토어"
+        }
       }
     },
     {

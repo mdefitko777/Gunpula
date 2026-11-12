@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-11",
-  "generated_at": "2026-11-11T17:47:48.995Z",
+  "updated_at": "2026-11-12",
+  "generated_at": "2026-11-12T01:29:35.863Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,11 +18,548 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-11T17:47:27.415Z",
+    "generated_at": "2026-11-12T01:29:14.885Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
+    {
+      "date": "2026-11-12",
+      "generated_at": "2026-11-12T01:29:35.863Z",
+      "total_before": 39341,
+      "total_after": 39351,
+      "added_count": 7,
+      "changed_count": 2,
+      "removed_count": 0,
+      "watched_count": 1,
+      "merged_count": 0,
+      "backfilled_count": 3,
+      "renamed_count": 0,
+      "premium_bandai_count": 1,
+      "bbx_count": 0,
+      "franchise_counts": {
+        "gundam": 3,
+        "lego": 6
+      },
+      "reason_counts": {
+        "new": 7,
+        "source": 1,
+        "series": 1
+      },
+      "interest_tags": [
+        "gundam",
+        "00",
+        "lego",
+        "premium_bandai"
+      ],
+      "watch_tags": [
+        "00"
+      ],
+      "added": [
+        {
+          "kit_id": "tamashii-16259",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "ガンダムデュナメス",
+            "zh": "力天使高达",
+            "ko": "건담듀나메스",
+            "en": "Gundam Dynames"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 33000,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16259/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "lego-115300-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_GEAR",
+          "subline": "Key Chain",
+          "series_key": "lego_gear",
+          "series_labels": {
+            "zh": "周边",
+            "en": "Gear",
+            "ja": "Gear",
+            "ko": "굿즈"
+          },
+          "names": {
+            "ja": "Gold 2 x 4 Plate Key Chain",
+            "zh": "Gold 2 x 4 Plate Key Chain",
+            "ko": "Gold 2 x 4 Plate Key Chain",
+            "en": "Gold 2 x 4 Plate Key Chain"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/115300-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-6675836-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "LEGO Brand Store",
+          "series_key": "lego_lego_brand_store",
+          "series_labels": {
+            "zh": "乐高品牌零售店",
+            "en": "LEGO Brand Store",
+            "ja": "LEGO Brand Store",
+            "ko": "레고 스토어"
+          },
+          "names": {
+            "ja": "I [Heart] LEGO Store Lakeside Tile",
+            "zh": "I [Heart] LEGO Store Lakeside Tile",
+            "ko": "I [Heart] LEGO Store Lakeside Tile",
+            "en": "I [Heart] LEGO Store Lakeside Tile"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/6675836-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-6675835-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "LEGO Brand Store",
+          "series_key": "lego_lego_brand_store",
+          "series_labels": {
+            "zh": "乐高品牌零售店",
+            "en": "LEGO Brand Store",
+            "ja": "LEGO Brand Store",
+            "ko": "레고 스토어"
+          },
+          "names": {
+            "ja": "I [Heart] LEGO Store Norwich Tile",
+            "zh": "I [Heart] LEGO Store Norwich Tile",
+            "ko": "I [Heart] LEGO Store Norwich Tile",
+            "en": "I [Heart] LEGO Store Norwich Tile"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/6675835-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-6670923-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "LEGO Brand Store",
+          "series_key": "lego_lego_brand_store",
+          "series_labels": {
+            "zh": "乐高品牌零售店",
+            "en": "LEGO Brand Store",
+            "ja": "LEGO Brand Store",
+            "ko": "레고 스토어"
+          },
+          "names": {
+            "ja": "I [Heart] LEGO Store Town Center Tile",
+            "zh": "I [Heart] LEGO Store Town Center Tile",
+            "ko": "I [Heart] LEGO Store Town Center Tile",
+            "en": "I [Heart] LEGO Store Town Center Tile"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/6670923-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-5010668-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_GEAR",
+          "subline": "Bags, Totes, & Luggage",
+          "series_key": "lego_gear",
+          "series_labels": {
+            "zh": "周边",
+            "en": "Gear",
+            "ja": "Gear",
+            "ko": "굿즈"
+          },
+          "names": {
+            "ja": "London Retro Tote Bag",
+            "zh": "London Retro Tote Bag",
+            "ko": "London Retro Tote Bag",
+            "en": "London Retro Tote Bag"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/5010668-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-6651644-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "Winnie the Pooh",
+          "series_key": "lego_duplo",
+          "series_labels": {
+            "zh": "得宝",
+            "en": "Duplo",
+            "ja": "Duplo",
+            "ko": "듀플로"
+          },
+          "names": {
+            "ja": "Winnie The Pooh 100 Years",
+            "zh": "Winnie The Pooh 100 Years",
+            "ko": "Winnie The Pooh 100 Years",
+            "en": "Winnie The Pooh 100 Years"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/6651644-1/"
+          ]
+        }
+      ],
+      "changed": [
+        {
+          "kit_id": "hg-hg-1-144-gq-4573102720184000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "gqux",
+          "series_labels": {
+            "zh": "GQX",
+            "en": "GQuuuuuuX",
+            "ja": "GQuuuuuuX",
+            "ko": "GQuuuuuuX"
+          },
+          "names": {
+            "ja": "HG 1 / 144 シャリア専用リック・ドム(GQ)",
+            "zh": "HG 1 / 144 夏里亚专用力克·大魔(GQ)",
+            "ko": "HG 1/144 샤리아 전용 릭 돔 (GQ)",
+            "en": "HG 1 / 144 シャリアCustomリック Dom(GQ)"
+          },
+          "release_date": "2026-02-07",
+          "price_jpy": 3630,
+          "is_limited": false,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102720184000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000256659/"
+          ]
+        },
+        {
+          "kit_id": "tamashii-15098",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "ROBOT_SPIRITS",
+          "subline": "ROBOT魂 ver. A.N.I.M.E.",
+          "series_key": "zeta",
+          "series_labels": {
+            "zh": "Z",
+            "en": "Z",
+            "ja": "Z",
+            "ko": "Z"
+          },
+          "names": {
+            "ja": "RGM-79SC ジム・スナイパーカスタム （ジャブロー防衛隊仕様） ver. A.N.I.M.E.",
+            "zh": "RGM-79SC 吉姆狙击特装型 (贾布罗防卫队样式) ver. A.N.I.M.E.",
+            "ko": "RGM-79SC 짐 스나이퍼 커스텀 (자브로 방위대 사양) ver. A.N.I.M.E.",
+            "en": "RGM-79SC GM スナイパーカスタム (ジャブロー防衛隊Type) ver. A.N.I.M.E."
+          },
+          "release_date": "2025-01",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/15098/",
+            "https://tamashiiweb.com/item_brand/robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        }
+      ],
+      "removed": [],
+      "watched": [
+        {
+          "kit_id": "tamashii-16259",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "ガンダムデュナメス",
+            "zh": "力天使高达",
+            "ko": "건담듀나메스",
+            "en": "Gundam Dynames"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 33000,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16259/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        }
+      ],
+      "merged": [],
+      "backfilled": [
+        {
+          "kit_id": "lego-barra-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "LEGO Brand Store",
+          "series_key": "lego_lego_brand_store",
+          "series_labels": {
+            "zh": "乐高品牌零售店",
+            "en": "LEGO Brand Store",
+            "ja": "LEGO Brand Store",
+            "ko": "레고 스토어"
+          },
+          "names": {
+            "ja": "I [Heart] LEGO Store Barra Shopping Tile",
+            "zh": "I [Heart] LEGO Store Barra Shopping Tile",
+            "ko": "I [Heart] LEGO Store Barra Shopping Tile",
+            "en": "I [Heart] LEGO Store Barra Shopping Tile"
+          },
+          "release_date": "2024",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/BARRA-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-coolsprings-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "LEGO Brand Store",
+          "series_key": "lego_lego_brand_store",
+          "series_labels": {
+            "zh": "乐高品牌零售店",
+            "en": "LEGO Brand Store",
+            "ja": "LEGO Brand Store",
+            "ko": "레고 스토어"
+          },
+          "names": {
+            "ja": "I [Heart] LEGO Store Coolsprings Galleria Tile",
+            "zh": "I [Heart] LEGO Store Coolsprings Galleria Tile",
+            "ko": "I [Heart] LEGO Store Coolsprings Galleria Tile",
+            "en": "I [Heart] LEGO Store Coolsprings Galleria Tile"
+          },
+          "release_date": "2023",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/COOLSPRINGS-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-6382642-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "LEGO Brand Store",
+          "series_key": "lego_lego_brand_store",
+          "series_labels": {
+            "zh": "乐高品牌零售店",
+            "en": "LEGO Brand Store",
+            "ja": "LEGO Brand Store",
+            "ko": "레고 스토어"
+          },
+          "names": {
+            "ja": "I [Heart] LEGO Store 5th Avenue Tile",
+            "zh": "I [Heart] LEGO Store 5th Avenue Tile",
+            "ko": "I [Heart] LEGO Store 5th Avenue Tile",
+            "en": "I [Heart] LEGO Store 5th Avenue Tile"
+          },
+          "release_date": "2021",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/6382642-1/"
+          ]
+        }
+      ],
+      "renamed": []
+    },
     {
       "date": "2026-11-11",
       "generated_at": "2026-11-11T17:47:48.995Z",
@@ -39836,1787 +40373,6 @@
       ],
       "removed": [],
       "watched": [],
-      "merged": [],
-      "backfilled": [],
-      "renamed": []
-    },
-    {
-      "date": "2026-10-04",
-      "generated_at": "2026-10-03T21:53:08.714Z",
-      "total_before": 8729,
-      "total_after": 8771,
-      "added_count": 42,
-      "changed_count": 23,
-      "removed_count": 0,
-      "watched_count": 5,
-      "premium_bandai_count": 42,
-      "bbx_count": 0,
-      "franchise_counts": {
-        "gundam": 42,
-        "pokemon": 23
-      },
-      "reason_counts": {
-        "new": 42,
-        "image": 23
-      },
-      "interest_tags": [
-        "gundam",
-        "premium_bandai",
-        "seed",
-        "00",
-        "pokemon"
-      ],
-      "watch_tags": [
-        "seed",
-        "00"
-      ],
-      "added": [
-        {
-          "kit_id": "pbandai-wb-1000256694",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "ＲＧ 1 / 144 ストライクフリーダムガンダム ディアクティブモード【再販】【３次：２０２６年１１月発送】",
-            "zh": "ＲＧ 1 / 144 强袭自由高达 ディアクティブモード【再贩】【３次：２０２６年１１月発送】",
-            "ko": "ＲＧ 1 / 144 스트라이크 프리덤건담 ディアクティブモード【재판】【３次：２０２６年１１月発送】",
-            "en": "ＲＧ 1 / 144 Strike Freedom Gundam ディアクティブモード[Reissue][３次：２０２６年１１月発送]"
-          },
-          "release_date": "2026-11",
-          "price_jpy": 3850,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000256694/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000258339",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "STRICT-G×ホロライブプロダクション ラバーコースター 博衣こより エンブレム【機動戦士ガンダムSEED Ver.】",
-            "zh": "STRICT-G×hololive production 橡胶杯垫 博衣小夜璃 徽章【机动战士高达SEED Ver.】",
-            "ko": "STRICT-G×홀로라이브 프로덕션 러버 코스터 하쿠이 코요리 엠블럼【기동전사 건담 SEED Ver.】",
-            "en": "STRICT-G×ホロライブプロダクション ラバーコースター 博衣こより エンブレム[Mobile Suit Gundam SEED Ver.]"
-          },
-          "release_date": "2026-11",
-          "price_jpy": 1320,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000258339/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000258337",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "double_o",
-          "series_labels": {
-            "zh": "00",
-            "en": "00",
-            "ja": "00",
-            "ko": "00"
-          },
-          "names": {
-            "ja": "STRICT-G×ホロライブプロダクション ラバーコースター 白上フブキエンブレム【機動戦士ガンダム00 Ver.】",
-            "zh": "STRICT-G×hololive production 橡胶杯垫 白上吹雪徽章【机动战士高达00 Ver.】",
-            "ko": "STRICT-G×홀로라이브 프로덕션 러버 코스터 시라카미 후부키 엠블럼【기동전사 건담 00 Ver.】",
-            "en": "STRICT-G×ホロライブプロダクション ラバーコースター 白上フブキエンブレム[Mobile Suit Gundam 00 Ver.]"
-          },
-          "release_date": "2026-11",
-          "price_jpy": 1320,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "00"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000258337/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000258876",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "STRICT-G×ホロライブプロダクション 刺繍Tシャツ 博衣こより エンブレム【機動戦士ガンダムSEED Ver.】",
-            "zh": "STRICT-G×hololive production 刺绣T恤 博衣小夜璃 徽章【机动战士高达SEED Ver.】",
-            "ko": "STRICT-G×홀로라이브 프로덕션 자수 티셔츠 하쿠이 코요리 엠블럼【기동전사 건담 SEED Ver.】",
-            "en": "STRICT-G×ホロライブプロダクション 刺繍Tシャツ 博衣こより エンブレム[Mobile Suit Gundam SEED Ver.]"
-          },
-          "release_date": "2026-11",
-          "price_jpy": 4730,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000258876/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000258872",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "double_o",
-          "series_labels": {
-            "zh": "00",
-            "en": "00",
-            "ja": "00",
-            "ko": "00"
-          },
-          "names": {
-            "ja": "STRICT-G×ホロライブプロダクション 刺繍Tシャツ 白上フブキエンブレム【機動戦士ガンダム00 Ver.】",
-            "zh": "STRICT-G×hololive production 刺绣T恤 白上吹雪徽章【机动战士高达00 Ver.】",
-            "ko": "STRICT-G×홀로라이브 프로덕션 자수 티셔츠 시라카미 후부키 엠블럼【기동전사 건담 00 Ver.】",
-            "en": "STRICT-G×ホロライブプロダクション 刺繍Tシャツ 白上フブキエンブレム[Mobile Suit Gundam 00 Ver.]"
-          },
-          "release_date": "2026-11",
-          "price_jpy": 4730,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "00"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000258872/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000258387",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "unicorn",
-          "series_labels": {
-            "zh": "UC",
-            "en": "Unicorn",
-            "ja": "UC",
-            "ko": "UC"
-          },
-          "names": {
-            "ja": "BB戦士 LEGENDBB 騎士ユニコーンガンダム（ビーストモード アルティメットバトルVer.）",
-            "zh": "BB战士 LEGEND BB 骑士独角兽高达(野兽模式 终极战斗Ver.)",
-            "ko": "BB전사 LEGENDBB 나이트 유니콘 건담(비스트 모드 얼티밋 배틀 Ver.)",
-            "en": "BB戦士 LEGENDBB 騎士Unicorn Gundam (ビーストモード アルティメットバトルVer.)"
-          },
-          "release_date": "2027-03",
-          "price_jpy": 3080,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000258387/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000258388",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "sd",
-          "series_labels": {
-            "zh": "SD",
-            "en": "SD",
-            "ja": "SD",
-            "ko": "SD"
-          },
-          "names": {
-            "ja": "BB戦士 LEGENDBB 殺駆頭（闇将軍 超鋼Ver.）",
-            "zh": "BB战士 LEGEND BB 杀驱头(暗将军 超钢Ver.)",
-            "ko": "BB전사 LEGENDBB 살구두(암장군 초강 Ver.)",
-            "en": "BB戦士 LEGENDBB 殺駆頭 (闇将軍 超鋼Ver.)"
-          },
-          "release_date": "2027-03",
-          "price_jpy": 3300,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000258388/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000257021",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "HGUC 1 / 144 ジム改 スタンダードカラー＆ボール改修型 【再販】",
-            "zh": "HGUC 1 / 144 吉姆改 スタンダードカラー＆铁球改修型 【再贩】",
-            "ko": "HGUC 1 / 144 짐改 スタンダードカラー＆볼改修型 【재판】",
-            "en": "HGUC 1 / 144 GM改 スタンダードカラー＆Ball改修型 [Reissue]"
-          },
-          "release_date": "2027-03",
-          "price_jpy": 2530,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000257021/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000257045",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "msv",
-          "series_labels": {
-            "zh": "MSV",
-            "en": "MSV",
-            "ja": "MSV",
-            "ko": "MSV"
-          },
-          "names": {
-            "ja": "ＭＧ 1 / 100 FA-78-2 ヘビー・ガンダム",
-            "zh": "MG 1 / 100 FA-78-2 重装高达",
-            "ko": "MG 1/100 FA-78-2 헤비 건담",
-            "en": "ＭＧ 1 / 100 FA-78-2 ヘビー Gundam"
-          },
-          "release_date": "2027-03",
-          "price_jpy": 5390,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000257045/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000257894",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "sd",
-          "series_labels": {
-            "zh": "SD",
-            "en": "SD",
-            "ja": "SD",
-            "ko": "SD"
-          },
-          "names": {
-            "ja": "SDガンダムBB戦士 VS闇軍団セット１",
-            "zh": "SD高达BB战士 VS暗军团套装1",
-            "ko": "SD건담 BB전사 VS 어둠군단 세트1",
-            "en": "SD Gundam BB戦士 VS闇軍団Set１"
-          },
-          "release_date": "2027-03",
-          "price_jpy": 6050,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000257894/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000257896",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "sd",
-          "series_labels": {
-            "zh": "SD",
-            "en": "SD",
-            "ja": "SD",
-            "ko": "SD"
-          },
-          "names": {
-            "ja": "SDガンダムBB戦士 VS闇軍団セット２",
-            "zh": "SD高达BB战士 VS暗军团套装2",
-            "ko": "SD건담 BB전사 VS 어둠군단 세트2",
-            "en": "SD Gundam BB戦士 VS闇軍団Set２"
-          },
-          "release_date": "2027-03",
-          "price_jpy": 4950,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000257896/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000256651",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "unicorn",
-          "series_labels": {
-            "zh": "UC",
-            "en": "Unicorn",
-            "ja": "UC",
-            "ko": "UC"
-          },
-          "names": {
-            "ja": "メガサイズモデル 1 / 48 ガンダムベース限定 RX-0 ユニコーンガンダム Ver. TWC FINAL",
-            "zh": "MEGA SIZE MODEL 1 / 48 高达基地限定 RX-0 独角兽高达 Ver. TWC FINAL",
-            "ko": "메가사이즈 모델 1/48 건담 베이스 한정 RX-0 유니콘 건담 Ver. TWC FINAL",
-            "en": "メガサイズモデル 1 / 48 GundamベースLimited RX-0 Unicorn Gundam Ver. TWC FINAL"
-          },
-          "release_date": "2027-03",
-          "price_jpy": 14300,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000256651/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000257040",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "ＨＧ 1 / 144 MS-06RD-4 高機動試作型ザク",
-            "zh": "HG 1 / 144 MS-06RD-4 高机动试作型扎古",
-            "ko": "HG 1/144 MS-06RD-4 고기동 시작형 자쿠",
-            "en": "ＨＧ 1 / 144 MS-06RD-4 高機動試作型Zaku"
-          },
-          "release_date": "2027-02",
-          "price_jpy": 2420,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000257040/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000257041",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "08ms",
-          "series_labels": {
-            "zh": "08小队",
-            "en": "08MS",
-            "ja": "08小隊",
-            "ko": "08소대"
-          },
-          "names": {
-            "ja": "HGUC 1 / 144 グフ・フライトタイプ",
-            "zh": "HGUC 1 / 144 飞行老虎",
-            "ko": "HGUC 1/144 구프 플라이트 타입",
-            "en": "HGUC 1 / 144 Gouf フライトタイプ [Reissue]"
-          },
-          "release_date": "2027-02",
-          "price_jpy": 2530,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000257041/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000257043",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "ＭＧ 1 / 100 量産型百式改",
-            "zh": "MG 1 / 100 量产型百式改",
-            "ko": "MG 1/100 양산형 백식 개량형",
-            "en": "ＭＧ 1 / 100 Mass Production TypeHyaku Shiki改"
-          },
-          "release_date": "2027-02",
-          "price_jpy": 6490,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000257043/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000257318",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "ＨＧ 1 / 144 ハイザック・カスタム (A.O.Z RE-BOOT版)",
-            "zh": "HG 1 / 144 高扎古特装型 (A.O.Z RE-BOOT版)",
-            "ko": "HG 1/144 하이잭 커스텀 (A.O.Z RE-BOOT판)",
-            "en": "ＨＧ 1 / 144 ハイザック カスタム (A.O.Z RE-BOOT版)[Reissue]"
-          },
-          "release_date": "2027-01",
-          "price_jpy": 3080,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000257318/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000257029",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "ＨＧ 1 / 144 バウンド・ドック（ゲーツ・キャパ専用機）",
-            "zh": "HG 1 / 144 邦德·多克(盖茨·卡帕专用机)",
-            "ko": "HG 1/144 바운드 독(게츠 캐퍼 전용기)",
-            "en": "ＨＧ 1 / 144 バウンド ドック (ゲーツ キャパCustom機)"
-          },
-          "release_date": "2027-01",
-          "price_jpy": 6050,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000257029/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000254521",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "HGUC 1 / 144 ゼータガンダム（ウェイブシューター）",
-            "zh": "HGUC 1 / 144 Z高达(冲浪者)",
-            "ko": "HGUC 1/144 제타 건담(웨이브 슈터)",
-            "en": "HGUC 1 / 144 Zeta Gundam (ウェイブシューター)[Reissue]"
-          },
-          "release_date": "2027-01",
-          "price_jpy": 2420,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000254521/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000257011",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "HGUC 1 / 144 ボールK型（第08MS小隊版）＆ボール（シャークマウス仕様）【再販】",
-            "zh": "HGUC 1 / 144 铁球K型（第08MS小隊版）＆铁球（シャークマウス规格）【再贩】",
-            "ko": "HGUC 1 / 144 볼K型（第08MS小隊版）＆볼（シャークマウス사양）【재판】",
-            "en": "HGUC 1 / 144 BallK型 (第08MS小隊版)＆Ball (シャークマウスType)[Reissue]"
-          },
-          "release_date": "2027-01",
-          "price_jpy": 1980,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000257011/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000256718",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "g_reco",
-          "series_labels": {
-            "zh": "G复国",
-            "en": "G-Reco",
-            "ja": "Gレコ",
-            "ko": "G레코"
-          },
-          "names": {
-            "ja": "HG 1 / 144 G-セルフ(大気圏用パック&宇宙用パック)(劇場版『Gのレコンギスタ』Ver.)【２０２６年１１月発送】",
-            "zh": "HG 1 / 144 G-セルフ(大気圏用パック&宇宙用パック)(劇場版『Gのレコンギスタ』Ver.)【２０２６年１１月発送】",
-            "ko": "HG 1 / 144 G-セルフ(大気圏用パック&宇宙用パック)(劇場版『Gのレコンギスタ』Ver.)【２０２６年１１月発送】",
-            "en": "HG 1 / 144 G-セルフ(大気圏用パック&宇宙用パック)(劇場版『Gのレコンギスタ』Ver.)[２０２６年１１月発送]"
-          },
-          "release_date": "2026-11",
-          "price_jpy": 6050,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000256718/"
-          ]
-        }
-      ],
-      "changed": [
-        {
-          "kit_id": "pokepla-01-4237",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 52 セレクトシリーズ ギャラドス",
-            "zh": "宝可梦拼装模型收藏 52 精选系列 暴鲤龙",
-            "ko": "포켓몬 프라모 컬렉션 52 셀렉트 시리즈 갸라도스",
-            "en": "Pokémon PLAMO COLLECTION 52 SELECT SERIES Gyarados"
-          },
-          "release_date": null,
-          "price_jpy": 1300,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_4237/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5028",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション No.54 セレクトシリーズ グラードン",
-            "zh": "宝可梦拼装模型收藏 No.54 精选系列 固拉多",
-            "ko": "포켓몬 프라모 컬렉션 No.54 셀렉트 시리즈 그란돈",
-            "en": "Pokémon PLAMO COLLECTION No.54 SELECT SERIES Groudon"
-          },
-          "release_date": null,
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5028/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5411",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 55 セレクトシリーズ ハッサム",
-            "zh": "宝可梦拼装模型收藏 55 精选系列 巨钳螳螂",
-            "ko": "포켓몬 프라모 컬렉션 55 셀렉트 시리즈 핫삼",
-            "en": "Pokémon PLAMO COLLECTION 55 SELECT SERIES Scizor"
-          },
-          "release_date": null,
-          "price_jpy": 1400,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5411/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5467",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 56 セレクトシリーズ マスカーニャ",
-            "zh": "宝可梦拼装模型收藏 56 精选系列 魔幻假面喵",
-            "ko": "포켓몬 프라모 컬렉션 56 셀렉트 시리즈 마스카나",
-            "en": "Pokémon PLAMO COLLECTION 56 SELECT SERIES Meowscarada"
-          },
-          "release_date": null,
-          "price_jpy": 1600,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5467/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5497",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 57 セレクトシリーズ ソウブレイズ",
-            "zh": "宝可梦拼装模型收藏 57 精选系列 苍炎刃鬼",
-            "ko": "포켓몬 프라모 컬렉션 57 셀렉트 시리즈 파라블레이즈",
-            "en": "Pokémon PLAMO COLLECTION 57 SELECT SERIES Ceruledge"
-          },
-          "release_date": null,
-          "price_jpy": 1700,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5497/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5568",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 58 セレクトシリーズ グレンアルマ",
-            "zh": "宝可梦拼装模型收藏 58 精选系列 红莲铠骑",
-            "ko": "포켓몬 프라모 컬렉션 58 셀렉트 시리즈 카디나르마",
-            "en": "Pokémon PLAMO COLLECTION 58 SELECT SERIES Armarouge"
-          },
-          "release_date": null,
-          "price_jpy": 1700,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5568/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5958",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 59 セレクトシリーズ ミライドン",
-            "zh": "宝可梦拼装模型收藏 59 精选系列 密勒顿",
-            "ko": "포켓몬 프라모 컬렉션 59 셀렉트 시리즈 미라이돈",
-            "en": "Pokémon PLAMO COLLECTION 59 SELECT SERIES Miraidon"
-          },
-          "release_date": null,
-          "price_jpy": 2100,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5958/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5984",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 60 セレクトシリーズ コライドン",
-            "zh": "宝可梦拼装模型收藏 60 精选系列 故勒顿",
-            "ko": "포켓몬 프라모 컬렉션 60 셀렉트 시리즈 코라이돈",
-            "en": "Pokémon PLAMO COLLECTION 60 SELECT SERIES Koraidon"
-          },
-          "release_date": null,
-          "price_jpy": 2100,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5984/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-6780",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 61 セレクトシリーズ メガレックウザ",
-            "zh": "宝可梦拼装模型收藏 61 精选系列 超级烈空坐",
-            "ko": "포켓몬 프라모 컬렉션 61 셀렉트 시리즈 메가레쿠쟈",
-            "en": "Pokémon PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza"
-          },
-          "release_date": null,
-          "price_jpy": 2700,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_6780/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-7038",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 62 セレクトシリーズ カイオーガ",
-            "zh": "宝可梦拼装模型收藏 62 精选系列 盖欧卡",
-            "ko": "포켓몬 프라모 컬렉션 62 셀렉트 시리즈 가이오가",
-            "en": "Pokémon PLAMO COLLECTION 62 SELECT SERIES Kyogre"
-          },
-          "release_date": null,
-          "price_jpy": 1800,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7038/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5174",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 18 ニャオハ",
-            "zh": "宝可梦拼装模型收藏 快速组装 18 新叶喵",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 18 나오하",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 18 Sprigatito"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5174/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5247",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 19 クワッス",
-            "zh": "宝可梦拼装模型收藏 快速组装 19 润水鸭",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 19 꾸왁스",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 19 Quaxly"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5247/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5372",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 20 ホゲータ",
-            "zh": "宝可梦拼装模型收藏 快速组装 20 呆火鳄",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 20 뜨아거",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 20 Fuecoco"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5372/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5450",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 21 コダック",
-            "zh": "宝可梦拼装模型收藏 快速组装 21 可达鸭",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 21 고라파덕",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 21 Psyduck"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5450/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5555",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 22 パモ",
-            "zh": "宝可梦拼装模型收藏 快速组装 22 布拨",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 22 빠모",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 22 Pawmi"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5555/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5947",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 23 ジラーチ",
-            "zh": "宝可梦拼装模型收藏 快速组装 23 基拉祈",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 23 지라치",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 23 Jirachi"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5947/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-6762",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 24 ピチュー",
-            "zh": "宝可梦拼装模型收藏 快速组装 24 皮丘",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 24 피츄",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 24 Pichu"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_6762/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-7010",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 26 サンダース",
-            "zh": "宝可梦拼装模型收藏 快速组装 26 雷伊布",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 26 쥬피썬더",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 26 Jolteon"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7010/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-7015",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 27 シャワーズ",
-            "zh": "宝可梦拼装模型收藏 快速组装 27 水伊布",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 27 샤미드",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 27 Vaporeon"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7015/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-7120",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 28 ニャース",
-            "zh": "宝可梦拼装模型收藏 快速组装 28 喵喵",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 28 나옹",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 28 Meowth"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7120/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        }
-      ],
-      "removed": [],
-      "watched": [
-        {
-          "kit_id": "pbandai-wb-1000256694",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "ＲＧ 1 / 144 ストライクフリーダムガンダム ディアクティブモード【再販】【３次：２０２６年１１月発送】",
-            "zh": "ＲＧ 1 / 144 强袭自由高达 ディアクティブモード【再贩】【３次：２０２６年１１月発送】",
-            "ko": "ＲＧ 1 / 144 스트라이크 프리덤건담 ディアクティブモード【재판】【３次：２０２６年１１月発送】",
-            "en": "ＲＧ 1 / 144 Strike Freedom Gundam ディアクティブモード[Reissue][３次：２０２６年１１月発送]"
-          },
-          "release_date": "2026-11",
-          "price_jpy": 3850,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000256694/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000258339",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "STRICT-G×ホロライブプロダクション ラバーコースター 博衣こより エンブレム【機動戦士ガンダムSEED Ver.】",
-            "zh": "STRICT-G×hololive production 橡胶杯垫 博衣小夜璃 徽章【机动战士高达SEED Ver.】",
-            "ko": "STRICT-G×홀로라이브 프로덕션 러버 코스터 하쿠이 코요리 엠블럼【기동전사 건담 SEED Ver.】",
-            "en": "STRICT-G×ホロライブプロダクション ラバーコースター 博衣こより エンブレム[Mobile Suit Gundam SEED Ver.]"
-          },
-          "release_date": "2026-11",
-          "price_jpy": 1320,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000258339/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000258337",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "double_o",
-          "series_labels": {
-            "zh": "00",
-            "en": "00",
-            "ja": "00",
-            "ko": "00"
-          },
-          "names": {
-            "ja": "STRICT-G×ホロライブプロダクション ラバーコースター 白上フブキエンブレム【機動戦士ガンダム00 Ver.】",
-            "zh": "STRICT-G×hololive production 橡胶杯垫 白上吹雪徽章【机动战士高达00 Ver.】",
-            "ko": "STRICT-G×홀로라이브 프로덕션 러버 코스터 시라카미 후부키 엠블럼【기동전사 건담 00 Ver.】",
-            "en": "STRICT-G×ホロライブプロダクション ラバーコースター 白上フブキエンブレム[Mobile Suit Gundam 00 Ver.]"
-          },
-          "release_date": "2026-11",
-          "price_jpy": 1320,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "00"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000258337/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000258876",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "STRICT-G×ホロライブプロダクション 刺繍Tシャツ 博衣こより エンブレム【機動戦士ガンダムSEED Ver.】",
-            "zh": "STRICT-G×hololive production 刺绣T恤 博衣小夜璃 徽章【机动战士高达SEED Ver.】",
-            "ko": "STRICT-G×홀로라이브 프로덕션 자수 티셔츠 하쿠이 코요리 엠블럼【기동전사 건담 SEED Ver.】",
-            "en": "STRICT-G×ホロライブプロダクション 刺繍Tシャツ 博衣こより エンブレム[Mobile Suit Gundam SEED Ver.]"
-          },
-          "release_date": "2026-11",
-          "price_jpy": 4730,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000258876/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000258872",
-          "change_type": "added",
-          "franchise": "gundam",
-          "grade_code": "GUNDAM_MERCH",
-          "subline": "プレミアムバンダイ",
-          "series_key": "double_o",
-          "series_labels": {
-            "zh": "00",
-            "en": "00",
-            "ja": "00",
-            "ko": "00"
-          },
-          "names": {
-            "ja": "STRICT-G×ホロライブプロダクション 刺繍Tシャツ 白上フブキエンブレム【機動戦士ガンダム00 Ver.】",
-            "zh": "STRICT-G×hololive production 刺绣T恤 白上吹雪徽章【机动战士高达00 Ver.】",
-            "ko": "STRICT-G×홀로라이브 프로덕션 자수 티셔츠 시라카미 후부키 엠블럼【기동전사 건담 00 Ver.】",
-            "en": "STRICT-G×ホロライブプロダクション 刺繍Tシャツ 白上フブキエンブレム[Mobile Suit Gundam 00 Ver.]"
-          },
-          "release_date": "2026-11",
-          "price_jpy": 4730,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "00"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000258872/"
-          ]
-        }
-      ],
       "merged": [],
       "backfilled": [],
       "renamed": []
