@@ -52,12 +52,29 @@ import {
   emptyCoroCoroState,
   runCoroCoroSource,
 } from "./lib/corocoro-news.mjs";
+import {
+  EVENT_LIVE_SOURCE_ID,
+  TAMASHII_NATION_EVENT,
+  YOUTUBE_LIVE_SOURCE_ID,
+  eventInSeason,
+  eventStreamHints,
+  eventStreamRecords,
+  isMissingS3File,
+  parseEventStreams,
+  runYoutubeLiveSource,
+  settleLiveRecords,
+  withLiveFields,
+} from "./lib/live-streams.mjs";
 import { loadRobots, robotsAllows } from "./lib/robots.mjs";
 
 const OUTPUT_PATH = "data/announcements.json";
 // Posts CoroCoro News already gave us, so each run reads only new ones.
 const COROCORO_STATE_PATH = "data/announcements-corocoro.json";
+// YouTube videos already checked for being a stream, so each watch page is
+// read once (and again only while its stream is still to come).
+const LIVE_STATE_PATH = "data/announcements-live.json";
 const IMAGE_DIR = "app/assets/announcements";
+const IMAGE_SKIPS_PATH = "data/announcements-image-skips.json";
 const USER_AGENT = "HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)";
 // At most about one request per second to any one host.
 const HOST_GAP_MS = 1100;
@@ -190,8 +207,16 @@ async function cacheAnnouncementImages(records) {
   // A record whose image is already on disk (a rerun before the commit) is
   // relinked instead of downloaded again.
   const onDisk = new Map((await readdir(IMAGE_DIR)).map((filename) => [filename.replace(/\.[a-z]+$/i, ""), filename]));
+  // Images over the size limit stay remote links. Remember them: until 2026-11-12 every run
+  // downloaded about 180 of them again (178 from gundam-official.com, 3 min 20 s) only to drop them.
+  const oversize = (await readJson(IMAGE_SKIPS_PATH, {})).oversize || {};
+  const stillOversize = {};
   for (const record of records) {
     if (!/^https?:/i.test(record.thumbnail_url || "")) continue;
+    if (oversize[record.thumbnail_url]) {
+      stillOversize[record.thumbnail_url] = oversize[record.thumbnail_url];
+      continue;
+    }
     const filenameBase = record.id.replace(/[^a-z0-9_-]/gi, "_");
     if (onDisk.has(filenameBase)) {
       record.thumbnail_url = `../app/assets/announcements/${onDisk.get(filenameBase)}`;
@@ -210,7 +235,10 @@ async function cacheAnnouncementImages(records) {
       const contentType = response.headers.get("content-type") || "";
       if (!/^image\//i.test(contentType)) throw new Error(`not an image (${contentType})`);
       const bytes = Buffer.from(await response.arrayBuffer());
-      if (bytes.length > MAX_CACHED_IMAGE_BYTES) continue;
+      if (bytes.length > MAX_CACHED_IMAGE_BYTES) {
+        stillOversize[record.thumbnail_url] = bytes.length;
+        continue;
+      }
       const extension = /png/i.test(contentType) ? "png" : /webp/i.test(contentType) ? "webp" : /gif/i.test(contentType) ? "gif" : "jpg";
       const filename = `${filenameBase}.${extension}`;
       await writeFile(`${IMAGE_DIR}/${filename}`, bytes);
@@ -226,6 +254,9 @@ async function cacheAnnouncementImages(records) {
   for (const filename of await readdir(IMAGE_DIR)) {
     if (!used.has(filename)) await unlink(`${IMAGE_DIR}/${filename}`);
   }
+  const sorted = Object.fromEntries(Object.keys(stillOversize).sort().map((url) => [url, stillOversize[url]]));
+  const skips = { note: "Announcement thumbnails over the cache size limit (bytes): left as remote links, not downloaded again.", oversize: sorted };
+  await writeFile(IMAGE_SKIPS_PATH, `${JSON.stringify(skips, null, 1)}\n`);
 }
 
 async function readJson(path, fallback) {
@@ -277,6 +308,71 @@ async function runTamashiiReveals() {
   return records;
 }
 
+// YouTube streams the event site links; read by the YouTube source after it.
+const linkedStreams = [];
+// Stored streams YouTube no longer has (cancelled, made private).
+const goneStreamIds = new Set();
+
+// The show's site, only around the show. Its robots.txt is S3's 403 for a
+// missing file (2026-11-12): none published. Any other 403 there stops the
+// host, as a 403 from a page would.
+async function runTamashiiNationLive() {
+  if (!eventInSeason(TAMASHII_NATION_EVENT, today)) return [];
+  const host = new URL(TAMASHII_NATION_EVENT.pages[0]).host;
+  const robotsUrl = `https://${host}/robots.txt`;
+  await waitForHost(robotsUrl);
+  let missingFile = false;
+  const robots = await loadRobots(host, {
+    userAgent: USER_AGENT,
+    fetchImpl: async (url, options) => {
+      const response = await fetch(url, options);
+      if (response.status !== 403) return response;
+      // loadRobots does not read a 4xx body; it is read here and handed on.
+      const body = await response.text();
+      missingFile = isMissingS3File({ status: response.status, server: response.headers.get("server"), body });
+      return new Response(body, { status: response.status });
+    },
+  });
+  console.log(`${EVENT_LIVE_SOURCE_ID}: robots.txt ${robots.status}${missingFile ? " (S3: no such file)" : ""}`);
+  if (!missingFile) hostStops.record(robotsUrl, Number.parseInt(robots.status, 10));
+  const records = [];
+  for (const url of TAMASHII_NATION_EVENT.pages) {
+    if (!robotsAllows(robots, url)) throw new Error(`${url} is disallowed by robots.txt`);
+    const parsed = parseEventStreams(await fetchText(url), { pageUrl: url, today });
+    console.log(`${EVENT_LIVE_SOURCE_ID}: ${url}: ${parsed.streams.length} streams in ${parsed.items} items`);
+    records.push(...eventStreamRecords(parsed, { today, now }));
+    linkedStreams.push(...eventStreamHints(parsed));
+  }
+  return records;
+}
+
+// Upload lists and watch pages only: robots.txt keeps "*" out of
+// /feeds/videos.xml (see lib/live-streams.mjs).
+async function runYoutubeLive() {
+  const host = "www.youtube.com";
+  await waitForHost(`https://${host}/robots.txt`);
+  const robots = await loadRobots(host, { userAgent: USER_AGENT });
+  console.log(`${YOUTUBE_LIVE_SOURCE_ID}: robots.txt ${robots.status}`);
+  const result = await runYoutubeLiveSource({
+    hints: linkedStreams,
+    stored: previous.announcements,
+    state: await readJson(LIVE_STATE_PATH, {}),
+    today,
+    fetchText,
+    robotsAllows: (url) => robotsAllows(robots, url),
+    log: (line) => console.log(line),
+  });
+  await writeFile(LIVE_STATE_PATH, `${JSON.stringify(result.state, null, 2)}\n`);
+  for (const id of result.gone) goneStreamIds.add(id);
+  // A page without its data is a bot check until shown otherwise.
+  if (result.stopped) hostStops.stop(`https://${host}/`, "a page without video data");
+  for (const message of [result.stopped, ...result.problems].filter(Boolean)) {
+    errors.push({ source_id: YOUTUBE_LIVE_SOURCE_ID, message });
+    console.warn(`${YOUTUBE_LIVE_SOURCE_ID}: ${message}`);
+  }
+  return result.records;
+}
+
 // Catalog products per franchise, for telling a magazine scoop of a new bey
 // from an old one mentioned again and for linking a reveal to its product.
 // The split files are last run's catalog.
@@ -290,6 +386,7 @@ async function readCatalogKits(franchises) {
 
 const previous = await readPrevious();
 const previousById = new Map(previous.announcements.map((record) => [record.id, record]));
+const now = new Date();
 const today = todayInJapan();
 const cutoff = shiftDate(today, -RECENT_DAYS);
 
@@ -472,6 +569,20 @@ const SOURCES = [
       accept: channel.accept || null,
     }),
   })),
+  // When official streams start. Last: a video a source above already
+  // reports keeps that record and only gains live_at / live_state.
+  {
+    id: EVENT_LIVE_SOURCE_ID,
+    name: TAMASHII_NATION_EVENT.name,
+    url: TAMASHII_NATION_EVENT.pages[0],
+    run: runTamashiiNationLive,
+  },
+  {
+    id: YOUTUBE_LIVE_SOURCE_ID,
+    name: "YouTube ライブ配信",
+    url: "https://www.youtube.com/",
+    run: runYoutubeLive,
+  },
 ];
 
 // Which copy of a reveal survives when several sources carry it: SOURCES
@@ -500,11 +611,22 @@ for (const source of SOURCES) {
 }
 
 // The same id can come from two sources (魂ウェブ /news/ and /topics/items/);
-// the first one in SOURCES order wins.
+// the first one in SOURCES order wins, and takes the stream time when the
+// later one is the same video seen as a stream.
 const incomingById = new Map();
-for (const record of incoming) if (!incomingById.has(record.id)) incomingById.set(record.id, record);
+for (const record of incoming) {
+  const first = incomingById.get(record.id);
+  incomingById.set(record.id, first ? withLiveFields(first, record) : record);
+}
 
-const merged = mergeAnnouncementRecords(previous.announcements, [...incomingById.values()]);
+// Streams follow the clock and leave two weeks after they ran.
+const live = settleLiveRecords(
+  mergeAnnouncementRecords(previous.announcements, [...incomingById.values()])
+    .filter((record) => !goneStreamIds.has(record.id) || record.reviewed_at),
+  now,
+);
+if (goneStreamIds.size || live.dropped.length) console.log(`Dropped ${goneStreamIds.size} cancelled and ${live.dropped.length} past streams.`);
+const merged = live.records;
 // Magazine records an official source or the catalog already covers go first;
 // the stored copy is dropped too, not only today's.
 const magazine = dropMagazineDuplicates(merged, await readCatalogKits(COROCORO_FRANCHISES.map(({ franchise }) => franchise)));

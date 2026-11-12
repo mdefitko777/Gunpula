@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-12T07:26:52.045Z",
+  "updated_at": "2026-11-12T07:54:47.132Z",
   "sources": [
     {
       "source_id": "tamashii_news",
@@ -90,6 +90,16 @@
       "source_id": "beyblade_youtube",
       "name": "ベイチューブ YouTube",
       "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuG_D_8QZmHTfbJfsz8-J_A"
+    },
+    {
+      "source_id": "tamashii_nation_live",
+      "name": "TAMASHII NATION",
+      "url": "https://tamashii-nation.tamashiiweb.com/"
+    },
+    {
+      "source_id": "youtube_live",
+      "name": "YouTube ライブ配信",
+      "url": "https://www.youtube.com/"
     }
   ],
   "fetch_errors": [
@@ -159,6 +169,62 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
+      "reviewed_at": null
+    },
+    {
+      "id": "live-5b79e87f56",
+      "franchise": "gundam",
+      "names": {
+        "ja": "TAMASHII NATION 2026 Live Stream from AKIHABARA DAY2",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "announced",
+      "announced_at": "2026-11-12",
+      "announced_at_basis": "first_seen",
+      "source_type": "news",
+      "source_name": "TAMASHII NATION 2026",
+      "source_id": "tamashii_nation_live",
+      "source_url": "https://p-bandai.jp/contents/liveshopping20261114",
+      "thumbnail_url": "../app/assets/announcements/live-5b79e87f56.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Livestream outside YouTube; start time from the event site, end assumed two hours later. Announcement date = first seen by the bot.",
+      "live_at": "2026-11-14T21:00:00+09:00",
+      "live_state": "upcoming",
+      "reviewed_at": null
+    },
+    {
+      "id": "live-ebd6d015a6",
+      "franchise": "gundam",
+      "names": {
+        "ja": "TAMASHII NATION 2026 Live Stream from AKIHABARA DAY1",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "announced",
+      "announced_at": "2026-11-12",
+      "announced_at_basis": "first_seen",
+      "source_type": "news",
+      "source_name": "TAMASHII NATION 2026",
+      "source_id": "tamashii_nation_live",
+      "source_url": "https://p-bandai.jp/contents/liveshopping20261113",
+      "thumbnail_url": "../app/assets/announcements/live-ebd6d015a6.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Livestream outside YouTube; start time from the event site, end assumed two hours later. Announcement date = first seen by the bot.",
+      "live_at": "2026-11-13T21:00:00+09:00",
+      "live_state": "upcoming",
       "reviewed_at": null
     },
     {
@@ -560,6 +626,33 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "Name truncated by the Premium Bandai new-items list.",
+      "reviewed_at": null
+    },
+    {
+      "id": "youtube-c3M7UKldpEA",
+      "franchise": "gundam",
+      "names": {
+        "ja": "【HG ガンダムアシュタロン/ENTRY GRADEガンダムベース限定 ビルドストライク エクシードギャラクシー [プラフスキーパーティクルクリア]】教えて!ガンプラコンシェルジュ!! # 283",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "announced",
+      "announced_at": "2026-11-07",
+      "source_type": "youtube",
+      "source_name": "THE GUNDAM BASE YouTube",
+      "source_id": "youtube_live",
+      "source_url": "https://www.youtube.com/watch?v=c3M7UKldpEA",
+      "thumbnail_url": "../app/assets/announcements/youtube-c3M7UKldpEA.jpg",
+      "video_id": "c3M7UKldpEA",
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "live_at": "2026-11-12T18:00:00+09:00",
+      "live_state": "upcoming",
       "reviewed_at": null
     },
     {

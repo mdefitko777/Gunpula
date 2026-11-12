@@ -294,7 +294,8 @@ export function parseBeybladeNews(html, pageUrl = BEYBLADE_X_NEWS_URL) {
 // Tomy's Pokémon page) and the per-product CoroCoro records are products by
 // construction, so their titles carry no reveal verb and must not be
 // re-checked against the news-title filter. So are the 魂ウェブ reveal banners,
-// stored under the product name alone once read.
+// stored under the product name alone once read, and scheduled livestreams
+// (live-streams.mjs), whose titles are programme names; those leave by age.
 const LISTING_SOURCE_IDS = new Set([
   "premium_bandai_new_items",
   "kotobukiya_shop",
@@ -302,6 +303,8 @@ const LISTING_SOURCE_IDS = new Set([
   "takaratomy_pokemon",
   "corocoro_news",
   "tamashii_reveals",
+  "tamashii_nation_live",
+  "youtube_live",
 ]);
 // Sources with their own title rule; everything else uses isProductAnnouncement.
 const SOURCE_TITLE_RULES = {

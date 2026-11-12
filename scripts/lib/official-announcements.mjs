@@ -85,13 +85,17 @@ export function youtubeFeedUrls(channelId) {
 /**
  * The fetcher's per-run stop list: a host that answered 403/429/503 (blocked,
  * slow down, maintenance) gets no further request this run, from any source.
- * `record(url, status)` after a response; `check(url)` throws for a stopped host.
+ * `record(url, status)` after a response; `stop(url, what)` for a bot-check or
+ * consent page that came with a 200; `check(url)` throws for a stopped host.
  */
 export function createHostStops(statuses = [403, 429, 503]) {
   const stopped = new Map();
   return {
     record(url, status) {
       if (statuses.includes(status)) stopped.set(new URL(url).host, status);
+    },
+    stop(url, what) {
+      stopped.set(new URL(url).host, what);
     },
     check(url) {
       const host = new URL(url).host;
@@ -168,7 +172,7 @@ export function extractNextFlight(html) {
   return out;
 }
 
-function balancedObjectAfter(text, key) {
+export function balancedObjectAfter(text, key) {
   const at = text.indexOf(key);
   if (at < 0) return null;
   const start = text.indexOf("{", at + key.length);
@@ -534,6 +538,13 @@ export function dedupeAnnouncements(records, priority = []) {
     && daysBetween(twin.announced_at, record.announced_at) <= 10;
   const remember = (map, key, record) => map.set(key, [...(map.get(key) || []), record]);
   for (const record of sorted) {
+    // A scheduled stream is not a product reveal: its title quotes the event
+    // ("「TAMASHII NATION 2026」…") like every news post about that event does,
+    // and it must neither be dropped as their twin nor drop them.
+    if (record.live_state) {
+      kept.push(record);
+      continue;
+    }
     const url = String(record.source_url || "").replace(/#.*$/, "").replace(/\/$/, "");
     const keys = productKeys(record.names?.ja).map((key) => `${record.franchise}|${key}`);
     const twin = (url ? byUrl.get(url) || [] : []).find(near(record))
@@ -602,7 +613,7 @@ export function revealProductNames(title) {
     !brand || normalizeProductKey(name).startsWith(normalizeProductKey(brand)) ? name : `${brand} ${name}`);
 }
 
-function stableHash(value) {
+export function stableHash(value) {
   return createHash("sha1").update(value).digest("hex").slice(0, 10);
 }
 
