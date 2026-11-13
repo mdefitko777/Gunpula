@@ -55,8 +55,9 @@ jobs:
       - name: Apply Chinese names
         run: node scripts/apply_zh_names.mjs
 
-      # Covers on hosts that do not serve apps reliably (bsp-prize.jp answers a
-      # bot check part of the time, Pokémon Center Online refuses hotlinks) are
+      # Covers on hosts that do not serve apps reliably (bsp-prize.jp: its listing
+      # thumbnails, as its full-size pictures are refused to every client, see
+      # scripts/lib/bsp-prize.mjs; Pokémon Center Online refuses hotlinks) are
       # kept in app/assets. Polite mode: bot user agent, robots.txt, one request
       # per host at a time, and a host that refuses is left until the next run,
       # so the remaining covers fill in over a few days. Only uncached covers
@@ -119,6 +120,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data app/assets
           git commit -m "Refresh official catalog data"
+          own=$(git rev-parse HEAD)
           # Generated data files (timestamps, market prices, search index) change
           # every run, so a plain rebase against a concurrently-updated remote hits
           # unresolvable conflicts. Rebase with -X theirs (keep this run's fresh data)
@@ -136,8 +138,14 @@ jobs:
               node scripts/build_atlas_groups.mjs
               npm run split
               npm run validate
-              if ! git diff --quiet -- data; then
-                git add data
+              # The announcement files of a light run (refresh-announcements.yml) that
+              # pushed meanwhile would be merged hunk by hunk too, and nothing checks
+              # announcements.json. This run read every source after that run started
+              # (light runs skip while this one runs), so its own files stand whole.
+              git restore --source="$own" --staged --worktree -- \
+                data/announcements.json data/announcement-details.json "data/announcements-*.json" app/assets/announcements
+              git add data app/assets/announcements
+              if ! git diff --cached --quiet; then
                 git commit -q --amend --no-edit
               fi
               if git push origin "HEAD:$GITHUB_REF_NAME"; then

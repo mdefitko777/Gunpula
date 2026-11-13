@@ -1,4 +1,6 @@
-// ホビーサーチ (www.1999.co.jp) search cards, shared by the Fate importer and its test.
+// ホビーサーチ (www.1999.co.jp) search cards. Since 2026-11-14 no importer requests the
+// site (it answers GitHub's runners with a Cloudflare challenge); the Fate importer only
+// tidies the records it stored before, and the parser stays for the day the block lifts.
 //
 // Three things the card is not: the product's name (the shop appends its own category,
 // "マシュ・キリエライト (フィギュア)", and puts sale banners in front, "★特価品 POP UP

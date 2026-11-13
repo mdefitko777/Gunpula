@@ -38,11 +38,20 @@ async function fetchText(url) {
         accept: "text/html,application/xhtml+xml",
       },
     });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    if (!response.ok) throw Object.assign(new Error(`HTTP ${response.status}`), { status: response.status });
     return await response.text();
   } finally {
     clearTimeout(timeout);
   }
+}
+
+/**
+ * Is a failed request worth repeating? A timeout or a 5xx hiccup is; a 403 / 429 / 503
+ * is the store turning the bot away (its waiting room, or Cloudflare on GitHub's runners,
+ * seen on 5 of 10 runs up to 2026-11-13), and until then it was asked twice more.
+ */
+export function worthRetrying(error) {
+  return ![403, 429, 503].includes(error?.status);
 }
 
 async function fetchTextWithRetry(url, attempts = 3) {
@@ -52,6 +61,7 @@ async function fetchTextWithRetry(url, attempts = 3) {
       return await fetchText(url);
     } catch (error) {
       lastError = error;
+      if (!worthRetrying(error) || attempt === attempts) break;
       await sleep(2000 * attempt);
     }
   }

@@ -23,6 +23,10 @@ export const EXTRACTOR_VERSION = 1;
 export const MAX_GALLERY = 12;
 // Detail pages per host and run: the backfill of ~50 pages spreads over about a week.
 export const DETAIL_PAGES_PER_HOST = 6;
+// A light run (several a day, ANNOUNCEMENT_LIGHT=1 in fetch_bandai_announcements.mjs)
+// reads only the pages of records nobody has read yet, two per host; refreshes, retries
+// and a new extractor version wait for the daily run.
+export const LIGHT_RUN_DETAILS = { perHost: 2, reasons: ["new"] };
 // A preorder's price and ship month can still change: entries are read again
 // this often while the record is this young and the product has not shipped.
 const REFRESH_DAYS = 14;
@@ -197,15 +201,16 @@ const REASON_ORDER = ["new", "version", "retry", "refresh"];
  * The pages to read this run: [{ id, url, source, host, reason }], new pages
  * first (newest record first), then retries and refreshes, at most `perHost`
  * per host. A page whose HTML the run already has (`preloaded`: Set of ids, a
- * new コトブキヤ goods page) costs nothing and is not counted.
+ * new コトブキヤ goods page) costs nothing and is not counted. `reasons` limits
+ * the plan to those reasons (LIGHT_RUN_DETAILS).
  */
-export function planDetailFetches(records, previous = {}, today, { perHost = DETAIL_PAGES_PER_HOST, preloaded = new Set() } = {}) {
+export function planDetailFetches(records, previous = {}, today, { perHost = DETAIL_PAGES_PER_HOST, preloaded = new Set(), reasons = REASON_ORDER } = {}) {
   const wanted = [];
   for (const record of records) {
     const source = detailSource(record);
     if (!source) continue;
     const reason = detailFetchReason(record, previous[record.id], today);
-    if (!reason) continue;
+    if (!reason || !reasons.includes(reason)) continue;
     wanted.push({ id: record.id, url: record.source_url, source, host: new URL(record.source_url).host, reason, announcedAt: record.announced_at || "" });
   }
   wanted.sort((a, b) => REASON_ORDER.indexOf(a.reason) - REASON_ORDER.indexOf(b.reason)

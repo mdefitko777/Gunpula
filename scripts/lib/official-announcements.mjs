@@ -113,6 +113,42 @@ export function createHostStops(statuses = [403, 429, 503]) {
   };
 }
 
+/**
+ * The sources of a light run (ANNOUNCEMENT_LIGHT=1, refresh-announcements.yml):
+ * the makers' own news lists, about 35 requests (robots.txt included) and 30 s. In the
+ * posts of 2026-10-09..11-13, 90 of 118 timed preorders were announced on the day they
+ * opened (69 GUNDAM.INFO, 17 Premium Bandai, 4 魂ウェブ), most of them between
+ * 10:00 and 19:00 JST. Left for the daily run: コトブキヤショップ and the BEYBLADE X
+ * lineup (release dates, not preorder posts), CoroCoro and the fan and media
+ * sites (scoops days ahead), YouTube and the event site.
+ */
+export const LIGHT_SOURCE_IDS = [
+  "tamashii_news",
+  "tamashii_topics_items",
+  "tamashii_reveals",
+  "tamashii_schedule",
+  "bandai_hobby_news",
+  "bandai_spirits_topics",
+  "beyblade_x_news",
+  "takaratomy_pokemon",
+  "pokemon_frienda",
+  "gundam_base_news",
+  "gundam_official_news",
+  "premium_bandai_new_items",
+];
+
+/**
+ * announcements.json as written: `next` with the previous `updated_at` when
+ * nothing else changed, else with `now`. A fresh stamp on every run made each
+ * run a commit, a site publish and a new file hash, so the app downloaded the
+ * same announcements again (with light runs, eight times a day).
+ */
+export function stampAnnouncements(previous, next, now) {
+  const { updated_at: previousStamp, ...before } = previous || {};
+  const unchanged = Boolean(previousStamp) && JSON.stringify(before) === JSON.stringify(next);
+  return { updated_at: unchanged ? previousStamp : now, ...next };
+}
+
 function hashTail(value, length = 10) {
   return Buffer.from(String(value)).toString("base64url").slice(-length);
 }

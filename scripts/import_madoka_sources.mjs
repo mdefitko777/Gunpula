@@ -12,11 +12,10 @@
 //                           2026-10-23, so it is tried and reported, nothing more
 //   * 魂ウェブ            — tamashiiweb.com search_item.php, character madoka-magica
 //   * 一番くじ            — 1kuji.com title filter 85 (魔法少女まどか☆マギカ)
-//   * バンプレスト景品     — bsp-prize.jp title IP00004703 (search listing)
+//   * バンプレスト景品     — bsp-prize.jp title IP00004703 (search listing; its
+//                           thumbnails, lib/bsp-prize.mjs)
 //   * 寿屋                — shop.kotobukiya.co.jp keyword search (Shift-JIS)
-//   * ホビーサーチ         — 1999.co.jp figure search (answers the bot with a
-//                           Cloudflare challenge as of 2026-11; reported as refused)
-//   * ALTER               — alter-web.jp keyword search + product pages
+//   * ALTER              — alter-web.jp keyword search + product pages
 //   * FuRyu (hobby)       — furyu-hm.com (FURYU HOBBY MALL) products.json, Madoka tag
 //   * MEDICOS             — medicos-e.net WordPress "gallery" REST search
 //   * タイトープライズ     — taito.co.jp prize JSON (Crawl-delay 20 is honoured)
@@ -27,7 +26,9 @@
 // does not connect and myethos.jp renders its catalog in the browser only;
 // www.kotobukiya.co.jp answers 403; bellfine.co.jp answers its REST search
 // with 403; union-creative.jp, medicomtoy.co.jp and quesq.net list no Madoka
-// products.
+// products. ホビーサーチ (1999.co.jp) answers GitHub's runners with a Cloudflare
+// challenge since 2026-11 (a home line gets the page): an IP block, so it is
+// not read at all; it never returned a Madoka record.
 //
 // Crawling rules (non-negotiable): every request identifies as
 // HobbyAtlasDataBot, each host's robots.txt is fetched first and obeyed, and
@@ -47,6 +48,7 @@ import {
 import { KIT_ALIASES_PATH, resolveAlias, retiredKitIds } from "./lib/catalog-cleanup.mjs";
 import { scaleFor } from "./lib/fate-grades.mjs";
 import { aliasPublishedFolds } from "./lib/fold-aliases.mjs";
+import { banprestoCover } from "./lib/bsp-prize.mjs";
 import { absoluteHtmlUrl } from "./lib/html-url.mjs";
 
 const CATALOG_PATH = "data/kits.json";
@@ -903,47 +905,23 @@ function parseBanpresto(html, pageUrl) {
   return out;
 }
 
-function parseBanprestoDetail(html, id) {
-  // Full-size pictures are linked from the gallery; the listing only has a
-  // 250px thumbnail.
-  const images = [
-    ...new Set(
-      [...html.matchAll(/href="(\/files\/[^"]+\.(?:jpg|jpeg|png))"/gi)]
-        .map((match) => absolute(match[1], BSP_BASE))
-        .filter((url) => url.includes(id)),
-    ),
-  ];
-  return { images };
-}
-
+// One request: the listing's thumbnails are the pictures (lib/bsp-prize.mjs). Until
+// 2026-11-14 each item page was read for its full-size pictures, which the bot and
+// the app are refused, so 24 covers and 89 gallery pictures never showed.
 async function fetchBanpresto(ctx) {
   const html = await fetchText(BSP_LIST_URL);
   const listed = parseBanpresto(html, BSP_LIST_URL);
   ctx.listed = listed.length;
   const total = Number(/(\d+)\s*件あります/.exec(decodeHtml(html))?.[1] || 0);
   if (total > listed.length) console.warn(`banpresto_prize_madoka_jp: listing shows ${listed.length} of ${total} items`);
+  const stored = new Map(previousMadoka.map((kit) => [kit.kit_id, kit]));
   const out = [];
   for (const product of listed) {
     if (!isMadoka(product.name)) {
       ctx.offWork.push(product.name);
       continue;
     }
-    if (classify(product, "banpresto_prize_madoka_jp").exclude) {
-      out.push(product);
-      continue;
-    }
-    try {
-      const detail = parseBanprestoDetail(await fetchText(product.url), product.key);
-      if (detail.images.length) {
-        // The item's own picture ("<id>a.jpg") first, then the group shots.
-        detail.images.sort((a, b) => Number(!a.includes(`${product.key}a.`)) - Number(!b.includes(`${product.key}a.`)));
-        product.image = detail.images[0];
-        product.gallery = detail.images;
-      }
-    } catch (error) {
-      if (error.refused) throw error;
-      console.warn(`banpresto_prize_madoka_jp detail ${product.key}: ${error.message}`);
-    }
+    product.image = banprestoCover(product.image, stored.get(`banpresto-madoka-${slugify(product.key, "")}`));
     out.push(product);
   }
   return out;
@@ -989,56 +967,6 @@ async function fetchKotobukiya(ctx) {
     });
   }
   return products;
-}
-
-// ------------------------------------------------------- ホビーサーチ (1999.co.jp)
-
-// Carries the makers whose own sites are not reachable. As of 2026-11 every
-// search answers this bot with a Cloudflare challenge (HTTP 403), so the
-// source reports "refused"; the parser is the Fate importer's.
-const HOBBY_SEARCH_BASE = "https://www.1999.co.jp";
-const HOBBY_SEARCH_KEYWORDS = ["まどか☆マギカ", "マギアレコード"];
-
-function parseHobbySearch(html) {
-  const out = [];
-  for (const chunk of String(html || "").split('<div class="c-product-list__item">').slice(1)) {
-    const block = chunk.split("</div></div></div>")[0];
-    const code = /ItemCode="(\d+)"/.exec(block)?.[1];
-    const name = decodeHtml(/<div class="c-card__title">([\s\S]*?)<\/div>/.exec(block)?.[1] || "");
-    if (!code || !name) continue;
-    const image = /<img[^>]*src="([^"]*itbig[^"]*)"/i.exec(block)?.[1];
-    out.push({
-      key: code,
-      name,
-      series: "",
-      line: "ホビーサーチ",
-      url: `${HOBBY_SEARCH_BASE}/${code}`,
-      image: image ? absolute(image, HOBBY_SEARCH_BASE) : "",
-      price_jpy: parseYen(decodeHtml(/<div class="c-card__price-element">([\s\S]*?)<\/div>/.exec(block)?.[1] || "")),
-      release_date: null,
-      is_limited: /限定|特典/.test(name),
-    });
-  }
-  return out;
-}
-
-async function fetchHobbySearch(ctx) {
-  const byKey = new Map();
-  for (const keyword of HOBBY_SEARCH_KEYWORDS) {
-    for (let page = 1; page <= 12; page += 1) {
-      const html = await fetchText(
-        `${HOBBY_SEARCH_BASE}/search?typ1_c=101&cat=figure&sold=1&searchkey=${encodeURIComponent(keyword)}&spage=${page}`,
-      );
-      for (const product of parseHobbySearch(html)) byKey.set(product.key, product);
-      if (html.split('<div class="c-product-list__item">').length - 1 < 60) break;
-    }
-  }
-  ctx.listed = byKey.size;
-  return [...byKey.values()].filter((product) => {
-    if (isMadoka(product.name) || MADOKA_CHARACTER.test(nf(product.name))) return true;
-    ctx.offWork.push(product.name);
-    return false;
-  });
 }
 
 // ------------------------------------------------------- タイトープライズ
@@ -1925,14 +1853,6 @@ const SOURCES = [
     tags: ["madoka", "ichiban kuji", "prize"],
     fetchAll: fetchIchibanKuji,
     notes: "Imported from the Ichiban Kuji official lineup (魔法少女まどか☆マギカ title filter).",
-  },
-  {
-    source_id: "hobby_search_madoka_jp",
-    idPrefix: "hobbysearch-madoka",
-    subline: "ホビーサーチ",
-    tags: ["madoka", "hobby search"],
-    fetchAll: fetchHobbySearch,
-    notes: "Imported from the Hobby Search figure listing (Madoka keyword search).",
   },
   {
     source_id: "aniplex_plus_madoka_jp",

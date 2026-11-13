@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01",
+  "updated_at": "2026-11-14",
   "sources": [
     {
       "source_id": "manual_seed",
@@ -658,11 +658,30 @@
         "official product images"
       ],
       "weak_for": [
+        "answers GitHub runners with a Cloudflare challenge (HTTP 403) since 2026-11-01; not read any more",
         "historical catalog (only currently orderable stock is listed)",
         "release date (the card shows a fuzzy month with no year)",
         "non-figure categories"
       ],
-      "notes": "Retailer, not a manufacturer, and used only for makers whose own sites are unreachable. The search parameter is searchkey — keyword is accepted then silently ignored, returning an unfiltered page — and results still drift, so titles are matched against the Fate works before a record is kept."
+      "notes": "Retailer, not a manufacturer. Not read since 2026-11-14: its Cloudflare challenge blocks the runners IP range, which is not worked around. Stored records stay (tidied offline); BUSHIROAD THE BOX now comes from bushiroad_creative_fate_jp."
+    },
+    {
+      "source_id": "bushiroad_creative_fate_jp",
+      "name": "Bushiroad Creative (Fate figures)",
+      "type": "official_manufacturer_jp",
+      "country": "JP",
+      "base_url": "https://bushiroad-creative.com/titles/fate/",
+      "priority": 16,
+      "best_for": [
+        "BUSHIROAD THE BOX and other Bushiroad Creative figures",
+        "Japan price (tax included, per pack for blind boxes)",
+        "release month",
+        "official images"
+      ],
+      "weak_for": [
+        "flat goods (only the figure class is read)"
+      ],
+      "notes": "Maker catalog, WordPress REST (items?goodsc=46, then the picture from media/<id>). Read with the bot user agent, robots.txt first, 1.1 s apart."
     },
     {
       "source_id": "good_smile_madoka_en",
@@ -762,7 +781,8 @@
         "official prize images"
       ],
       "weak_for": [
-        "price (prize items carry none)"
+        "price (prize items carry none)",
+        "full-size pictures (/files/) answer 403 to bots and apps; the 250px listing thumbnails are used"
       ],
       "notes": "Banpresto prize site, Madoka Magica title."
     },
@@ -794,7 +814,7 @@
       "weak_for": [
         "answers the bot with a Cloudflare challenge (HTTP 403); not worked around"
       ],
-      "notes": "Retailer; currently refuses HobbyAtlasDataBot, so it yields nothing."
+      "notes": "Retailer; refuses the runners (Cloudflare challenge, an IP block) and is not read since 2026-11-14. It never returned a record."
     },
     {
       "source_id": "rebrickable_lego",

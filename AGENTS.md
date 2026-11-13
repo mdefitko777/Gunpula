@@ -37,6 +37,11 @@ result reads as if one person wrote it.
   first (`scripts/lib/robots.mjs`), one request at a time per host at least 1.1 s apart, and stops for the run on
   403 / 429 / 503 or a bot-check page. Never a browser user-agent, never a made-up Referer, never a Cloudflare or
   captcha bypass, never run a site's JavaScript. Old scripts keep their current UA (owner's decision).
+- A host that refuses on every run is not asked every day: stop reading it or let it rest, find the same data
+  at a source that allows it, and list what stays missing in `docs/source-plan.md` (Blocked hosts).
+- Announcements are read twice over: the daily refresh reads every source, `refresh-announcements.yml`
+  reads only the makers' lists several times a day (`ANNOUNCEMENT_LIGHT=1`). A source for same-day
+  preorder posts goes in `LIGHT_SOURCE_IDS`; anything slow or rate-limited stays daily-only.
 - Rebrickable archives at most once a day. Frienda image URLs never go into public data.
 - Never read or print `data/market_secrets.local.json`.
 

@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import path from "node:path";
 
+import { isBspFullSize } from "./lib/bsp-prize.mjs";
 import { dropCachedOriginals } from "./lib/cached-originals.mjs";
 
 const CATALOG_PATH = "data/kits.json";
@@ -47,6 +48,8 @@ function shouldCacheUrl(url) {
   if (!url || !/^https?:\/\//i.test(url)) return false;
   const parsed = new URL(url);
   if (hostFilter.size && !hostFilter.has(parsed.hostname)) return false;
+  // Refused to every client (lib/bsp-prize.mjs); the listing thumbnail is cached instead.
+  if (isBspFullSize(url)) return false;
   return (
     allImages ||
     repoAssets ||
@@ -163,7 +166,7 @@ async function politeFetch(url) {
   const { host, pathname } = new URL(url);
   const state = politeHost(host);
   const run = async () => {
-    if (state.refused) throw new Error(`host refused earlier: ${state.refused}`);
+    if (state.refused) throw Object.assign(new Error(`host refused earlier: ${state.refused}`), { hostRefused: host });
     const rules = await robotsDisallows(host);
     if (rules.some((rule) => pathname.startsWith(rule))) throw new Error("robots.txt disallows");
     const wait = state.nextAt - Date.now();
@@ -245,6 +248,8 @@ const manifest = [];
 let cached = 0;
 let skipped = selectedKits.length - tasks.length;
 let failed = 0;
+// host → records not tried because the host refused earlier in the run (polite mode).
+const leftForNextRun = new Map();
 
 await mapLimit(tasks, async (task) => {
   let cachedForKit = false;
@@ -274,6 +279,13 @@ await mapLimit(tasks, async (task) => {
         break;
       }
     } catch (error) {
+      // A host that refused once is not asked again this run; its covers wait for
+      // the next run. Counted, not logged per URL: on 2026-11-13 one 403 printed 78
+      // "host refused earlier" lines.
+      if (error.hostRefused) {
+        leftForNextRun.set(error.hostRefused, (leftForNextRun.get(error.hostRefused) || 0) + 1);
+        break;
+      }
       failed += 1;
       console.warn(`Failed to cache ${task.kit.kit_id}: ${error.message} ${entry.url}`);
     }
@@ -318,6 +330,9 @@ await writeFile(
 );
 
 console.log(`Cached ${cached}/${tasks.length} images. Skipped ${skipped}. Failed ${failed}.`);
+for (const [host, count] of leftForNextRun) {
+  console.log(`${host} refused (${politeHost(host).refused}); ${count} records left for the next run.`);
+}
 console.log(`Cache root: ${repoAssets ? path.relative(process.cwd(), assetRoot) : externalCacheRoot}`);
 if (rewriteCatalog) {
   console.log(`Updated ${updatedKits} catalog records.`);

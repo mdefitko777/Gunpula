@@ -10,17 +10,26 @@
 //   * バンプレスト景品 — bsp-prize.jp, Fate シリーズ title page (IP00004797)
 //   * 寿屋            — shop.kotobukiya.co.jp keyword search (Shift-JIS)
 //   * 魂ウェブ        — tamashiiweb.com search_item.php, Fate character codes
-//   * ホビーサーチ     — 1999.co.jp figure listing, `searchkey` keyword search
+//   * ブシロードクリエイティブ — bushiroad-creative.com WordPress REST, figures
+//                       of the Fate title (lib/bushiroad-creative.mjs)
+//
+// ホビーサーチ (1999.co.jp) is no longer read: since 2026-11-01 it answers
+// GitHub's runners with a Cloudflare challenge (HTTP 403) while a home line gets
+// the page, so it is an IP block that this importer may not work around. Its
+// stored records stay and are tidied offline (tidyStoredHobbySearchKits). What
+// only it carried and no maker site offers (CHILLfigg, AQ, Reincarnation …) is
+// missing for new products (docs/source-plan.md, "Blocked hosts").
 //
 // Aniplex+ is by far the largest: its keyword search drifts into unrelated
 // products past the exact matches, so results are kept only when the tile's
 // series line (or, when that is blank, the title) names a Fate/TYPE-MOON work.
 //
-// Every maker's own site was checked and none is usable: Alter, Ques Q and
-// Wonderful Works either fail DNS or render client-side, Bellfine and Max
-// Factory return no Fate hits, and the aggregate databases are closed to
-// scripts (AmiAmi and MyFigureCollection both answer 403). Hobby Search is the
-// one reachable listing that carries those makers' products.
+// Maker sites checked in 2026-08: Alter, Ques Q and Wonderful Works either
+// failed DNS or rendered client-side, Bellfine and Max Factory returned no Fate
+// hits, and the aggregate databases are closed to scripts (AmiAmi and
+// MyFigureCollection both answer 403). In 2026-11 alter-web.jp answers again
+// (the Madoka importer reads it) and palverse-figure.com lists FGO figures;
+// neither is read here yet.
 import { readFile, writeFile } from "node:fs/promises";
 import {
   decodeKotobukiyaShopHtml,
@@ -29,7 +38,14 @@ import {
 } from "./lib/kotobukiya-shop.mjs";
 import { KIT_ALIASES_PATH, retiredKitIds } from "./lib/catalog-cleanup.mjs";
 import { gradeForProduct, scaleFor } from "./lib/fate-grades.mjs";
-import { HOBBY_SEARCH_BASE, parseHobbySearch, tidyStoredHobbySearchKits } from "./lib/hobby-search.mjs";
+import { tidyStoredHobbySearchKits } from "./lib/hobby-search.mjs";
+import {
+  bushiroadFiguresUrl,
+  bushiroadMediaSource,
+  bushiroadMediaUrl,
+  parseBushiroadFigures,
+} from "./lib/bushiroad-creative.mjs";
+import { loadRobots, robotsAllows } from "./lib/robots.mjs";
 import { decodeEntities } from "./lib/html-entities.mjs";
 import { absoluteHtmlUrl } from "./lib/html-url.mjs";
 import { aniplexCampaign, nameKey, needsQualifier, qualifiedName, sameName } from "./lib/fate-names.mjs";
@@ -424,39 +440,63 @@ async function fetchTamashii() {
 }
 
 
-// ------------------------------------------------------- ホビーサーチ (1999.co.jp)
+// ------------------------------------------------- ブシロードクリエイティブ
 
-// The only listing that carried the makers the official sites do not expose
-// (PLAMATEA, BUSHIROAD, PalVerse, CHILLfigg ...). Two traps: the search
-// parameter is `searchkey`, not `keyword` — `keyword` is accepted and then
-// silently ignored, returning an unfiltered default page — and the keyword
-// still matches unrelated products, so titles are checked against the Fate
-// works before a record is kept (lib/hobby-search.mjs). Since 2026-11 the site
-// answers the bot with a bot check, so stored records are tidied offline
-// (tidyStoredHobbySearchKits) instead of being refreshed.
-const HOBBY_SEARCH_KEYWORDS = ["Fate", "Fate/Grand Order", "フェイト"];
+// Added 2026-11-14 for the BUSHIROAD THE BOX line ホビーサーチ carried (see the
+// header). A new source, so it keeps the crawling rules of AGENTS.md: the bot's
+// own user-agent, robots.txt first, 1.1 s between requests, and a 403 / 429 /
+// 503 or an answer that is not JSON (a bot check) stops it for the run.
+const BOT_UA = "HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)";
+const POLITE_GAP_MS = 1100;
 
-async function fetchHobbySearch() {
-  const byKey = new Map();
-  for (const keyword of HOBBY_SEARCH_KEYWORDS) {
-    for (let page = 1; page <= 12; page += 1) {
-      const url =
-        `${HOBBY_SEARCH_BASE}/search?typ1_c=101&cat=figure&sold=1` +
-        `&searchkey=${encodeURIComponent(keyword)}&spage=${page}`;
-      const html = await fetchText(url);
-      const products = parseHobbySearch(html);
-      for (const product of products) {
-        // The clean name is the record's name; the card title stays in source_name
-        // (always set for this source, which is how tidyStoredHobbySearchKits tells
-        // these records from the ones stored before the cleanup).
-        byKey.set(product.key, { ...product, name: product.source_name, display_name: product.name });
-      }
-      // Page size is 60 regardless of how many survive the Fate title filter,
-      // so paging stops on the raw card count, not the kept count.
-      if ((html.split('<div class="c-product-list__item">').length - 1) < 60) break;
+async function politeJson(url, state) {
+  if (state.refused) throw new Error(`${state.refused}; stopped for this run`);
+  if (!state.robots) {
+    state.robots = await loadRobots(new URL(url).host, { userAgent: BOT_UA });
+    state.nextAt = Date.now() + POLITE_GAP_MS;
+    if (state.robots.disallowAll) state.refused = `robots.txt ${state.robots.status}`;
+  }
+  if (!robotsAllows(state.robots, url)) throw new Error(`robots.txt disallows ${url}`);
+  const wait = state.nextAt - Date.now();
+  if (wait > 0) await sleep(wait);
+  try {
+    const response = await fetch(url, {
+      signal: AbortSignal.timeout(25000),
+      headers: { "user-agent": BOT_UA, accept: "application/json" },
+    });
+    if (!response.ok) {
+      if ([403, 429, 503].includes(response.status)) state.refused = `HTTP ${response.status}`;
+      throw new Error(`HTTP ${response.status} for ${url}`);
+    }
+    try {
+      return await response.json();
+    } catch {
+      state.refused = "an answer that is not JSON";
+      throw new Error(`${url} did not answer JSON`);
+    }
+  } finally {
+    state.nextAt = Date.now() + POLITE_GAP_MS;
+  }
+}
+
+async function fetchBushiroadCreative() {
+  const state = { robots: null, nextAt: 0, refused: null };
+  const products = [];
+  for (let page = 1; page <= 5; page += 1) {
+    const items = await politeJson(bushiroadFiguresUrl(page), state);
+    products.push(...parseBushiroadFigures(items));
+    if (!Array.isArray(items) || items.length < 100) break;
+  }
+  // One request per Fate figure for its picture; a record without one still counts.
+  for (const product of products) {
+    if (!product.media_id) continue;
+    try {
+      product.image = bushiroadMediaSource(await politeJson(bushiroadMediaUrl(product.media_id), state));
+    } catch (error) {
+      console.warn(`bushiroad_creative_fate_jp picture ${product.key}: ${error.message}`);
     }
   }
-  return [...byKey.values()];
+  return products;
 }
 
 // --------------------------------------------------------------------------
@@ -498,12 +538,12 @@ const SOURCES = [
     notes: "Imported from the Kotobukiya online shop (Fate keyword search).",
   },
   {
-    source_id: "hobby_search_fate_jp",
-    idPrefix: "hobbysearch-fate",
-    subline: "ホビーサーチ",
-    tags: ["fate", "hobby search", "figure"],
-    fetchAll: fetchHobbySearch,
-    notes: "Imported from the Hobby Search figure listing (Fate keyword search); covers makers whose own sites are not reachable.",
+    source_id: "bushiroad_creative_fate_jp",
+    idPrefix: "bushiroad-fate",
+    subline: "ブシロードクリエイティブ",
+    tags: ["fate", "bushiroad creative", "figure"],
+    fetchAll: fetchBushiroadCreative,
+    notes: "Imported from the Bushiroad Creative official catalog (figures, Fate title).",
   },
   {
     source_id: "tamashii_web_fate_jp",
@@ -531,7 +571,7 @@ function toKit(product, source, index) {
     scale: scaleFor(product.name),
     names: { ja: name, en: name, zh: name, ko: name },
     // The store's own title when names carry a campaign prefix (lib/fate-names.mjs).
-    ...(displayName || source.source_id === "hobby_search_fate_jp" ? { source_name: product.source_name || product.name } : {}),
+    ...(displayName ? { source_name: product.source_name || product.name } : {}),
     images: {
       box_art_url: image,
       box_art_source_id: image ? source.source_id : null,
@@ -576,9 +616,12 @@ function mergeCatalog(existingKits, importedKits) {
   });
 }
 
+// FATE_EXTRA_ONLY=a,b runs only those sources (for trying a vendor by hand); the
+// others keep their stored records.
+const ONLY = new Set((process.env.FATE_EXTRA_ONLY || "").split(",").filter(Boolean));
 const imported = [];
 const report = [];
-for (const source of SOURCES) {
+for (const source of SOURCES.filter((entry) => !ONLY.size || ONLY.has(entry.source_id))) {
   let products = [];
   try {
     if (source.fetchAll) {

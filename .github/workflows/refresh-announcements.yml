@@ -1,0 +1,110 @@
+# Hobby Atlas reminds people 30 minutes before a preorder opens (preorder_at in
+# data/announcements.json). The makers post most same-day preorders between 10:00 and
+# 19:00 JST (GUNDAM.INFO, 2026-10-09..11-13: 90 of 118 timed preorders were posted on the
+# day they opened), and the daily catalog refresh, scheduled 03:20 JST and started
+# 07:00-10:00 JST in 2026-11, read them only the next day. This run reads only the makers'
+# announcement lists (ANNOUNCEMENT_LIGHT=1 in scripts/fetch_bandai_announcements.mjs: about
+# 35 requests, 40 s), commits only the announcement files and, when they changed, starts
+# Publish site. It does not touch data/kits.json, so the notify feed sees nothing new.
+#
+# Next to the daily refresh: a run is skipped while "Refresh official catalog" is queued or
+# running (that run reads the same lists and more), and a run whose files the daily run
+# changed meanwhile drops its commit instead of merging; refresh-catalog.yml in turn keeps
+# its own announcement files when it rebases onto one of these commits. Not the daily's
+# concurrency group: a group keeps one pending run, so a light run queued behind a
+# running daily would cancel a daily that is waiting (a push-triggered one).
+name: Refresh announcements
+
+on:
+  schedule:
+    # One run after each cluster of posts, in JST: 08:10, 10:10, 12:10, 13:10, 15:10,
+    # 17:15, 19:45 and 21:15. GitHub starts scheduled runs late on this repo (0.4-8.7 h in
+    # 2026-10/11) and drops some, so these are chances, not times; off-the-hour minutes
+    # are delayed less.
+    - cron: "10 23,1,3,4,6 * * *"
+    - cron: "15 8,12 * * *"
+    - cron: "45 10 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  # gh run list (the daily refresh) and gh workflow run (Publish site): a push by
+  # GITHUB_TOKEN starts no workflow, a workflow_dispatch by it does.
+  actions: write
+
+concurrency:
+  group: refresh-announcements
+  cancel-in-progress: false
+
+jobs:
+  announcements:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Skip while the daily refresh runs
+        id: daily
+        run: |
+          busy=$(gh run list --workflow refresh-catalog.yml --limit 20 --json status --jq '[.[] | select(.status != "completed")] | length')
+          if [ "$busy" != "0" ]; then
+            echo "Refresh official catalog is queued or running; it reads the announcements itself."
+            echo "busy=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.daily.outputs.busy != 'true'
+
+      - uses: actions/setup-node@v4
+        if: steps.daily.outputs.busy != 'true'
+        with:
+          node-version: 22
+
+      - name: Read the makers' announcement lists
+        if: steps.daily.outputs.busy != 'true'
+        env:
+          ANNOUNCEMENT_LIGHT: "1"
+        run: node scripts/fetch_bandai_announcements.mjs
+
+      - name: Commit the announcements
+        id: commit
+        if: steps.daily.outputs.busy != 'true'
+        run: |
+          paths=(data/announcements.json data/announcement-details.json "data/announcements-*.json" app/assets/announcements)
+          if [ -z "$(git status --porcelain -- "${paths[@]}")" ]; then
+            echo "No new announcements."
+            exit 0
+          fi
+          for file in data/announcements.json data/announcement-details.json; do
+            node -e 'JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"))' "$file"
+          done
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          base=$(git rev-parse HEAD)
+          git add -A -- "${paths[@]}"
+          git commit -q -m "Refresh announcements"
+          # Only announcement files are in this commit, so a plain rebase applies unless
+          # someone changed them since the checkout; then that run's files stand (the
+          # daily refresh read every source) and the next light run starts from them.
+          for attempt in 1 2 3 4 5; do
+            git fetch -q origin "$GITHUB_REF_NAME"
+            if ! git diff --quiet "$base" "origin/$GITHUB_REF_NAME" -- "${paths[@]}"; then
+              echo "The announcement files changed on $GITHUB_REF_NAME meanwhile; leaving them as they are."
+              exit 0
+            fi
+            if git rebase -q "origin/$GITHUB_REF_NAME" && git push -q origin "HEAD:$GITHUB_REF_NAME"; then
+              echo "Pushed on attempt $attempt."
+              echo "pushed=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            echo "Push rejected (remote moved); retrying..."
+            sleep $(( (RANDOM % 10) + 5 ))
+          done
+          echo "Could not push after 5 attempts."
+          exit 1
+
+      - name: Publish the site
+        if: steps.commit.outputs.pushed == 'true' && github.ref == 'refs/heads/main'
+        run: gh workflow run publish-site.yml --ref main

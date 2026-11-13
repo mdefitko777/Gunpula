@@ -307,8 +307,9 @@ const SOURCE_FETCHERS = [
 
 /**
  * One source's run → status: "ok", "partial" (some kits failed), "failing" (every kit
- * failed), "refused" (403 / 429 / 503), "disallowed" (robots.txt), "no_credentials",
- * "idle" (nothing to ask). failing and refused are the ones a person has to look at.
+ * failed), "refused" (403 / 429 / 503), "resting" (refused before, not asked until its
+ * retry_after), "disallowed" (robots.txt), "no_credentials", "idle" (nothing to ask).
+ * failing and refused are the ones a person has to look at.
  */
 export function sourceStatus(stat) {
   if (stat.skipped) return stat.skipped;
@@ -334,8 +335,30 @@ export function healthSummary(stats) {
  * source_stats) while it stays in the same state, else [now]. Null for a healthy source.
  */
 export function unhealthySince(status, previous, at = now) {
-  if (!UNHEALTHY.has(status)) return null;
-  return previous?.status === status && previous.since ? previous.since : at;
+  if (!UNHEALTHY.has(status) && status !== "resting") return null;
+  // Refused and resting are one spell: since stays when a rested source is refused again.
+  const sameSpell = previous?.status === status || (REFUSALS.has(status) && REFUSALS.has(previous?.status));
+  return sameSpell && previous.since ? previous.since : at;
+}
+
+const REFUSALS = new Set(["refused", "resting"]);
+// A source refused on two runs in a row is left alone for a week, then asked once again.
+// Until 2026-11-14 Amazon (a 503 robot check since 11-04) and Joongna (a CloudFront 403
+// since 11-11) were asked every day from GitHub's runners and refused every time, while
+// both answer robots.txt normally from a home line: the runners' address range, which
+// is not worked around.
+const REST_DAYS = 7;
+
+/** The retry_after a source carries after this run (ISO time), or null to ask it next run. */
+export function nextRetryAfter(status, previous, at = now) {
+  if (status === "resting") return previous?.retry_after || null;
+  if (status !== "refused" || !REFUSALS.has(previous?.status)) return null;
+  return new Date(Date.parse(at) + REST_DAYS * 86400000).toISOString();
+}
+
+/** Is the source (its previous source_stats entry) still resting at `at`? */
+export function isResting(previous, at = now) {
+  return Boolean(previous?.retry_after) && Date.parse(previous.retry_after) > Date.parse(at);
 }
 
 /**
@@ -359,7 +382,7 @@ export function healthReport(doc) {
   return { annotations, summary, lines, unhealthy: unhealthy.map(([id]) => id), exitCode: 0 };
 }
 
-async function prepareSources(stats) {
+async function prepareSources(stats, previousStats = {}) {
   const robotsByHost = new Map();
   for (const source of SOURCE_FETCHERS) {
     const stat = stats[source.id];
@@ -367,6 +390,12 @@ async function prepareSources(stats) {
     if (missing.length) {
       stat.skipped = "no_credentials";
       stat.note = `missing ${missing.join(", ")}`;
+      continue;
+    }
+    const previous = previousStats[source.id];
+    if (isResting(previous)) {
+      stat.skipped = "resting";
+      stat.note = `refused since ${String(previous.since || "?").slice(0, 10)}; asked again after ${previous.retry_after.slice(0, 10)}`;
       continue;
     }
     if (!source.sampleUrl) continue;
@@ -386,6 +415,8 @@ async function reportHealth(stats, previousStats = {}) {
     stat.status = sourceStatus(stat);
     const since = unhealthySince(stat.status, previousStats[id]);
     if (since) stat.since = since;
+    const retryAfter = nextRetryAfter(stat.status, previousStats[id]);
+    if (retryAfter) stat.retry_after = retryAfter;
   }
   await mkdir(dirname(HEALTH_PATH), { recursive: true });
   await writeFile(HEALTH_PATH, `${JSON.stringify({ checked_at: now, sources: stats }, null, 2)}\n`, "utf8");
@@ -428,7 +459,8 @@ async function main() {
   const nameOverrides = nameOverridesDoc.overrides || {};
   const listings = [];
   const stats = Object.fromEntries(SOURCE_FETCHERS.map((source) => [source.id, { attempted: 0, matched: 0, errors: 0 }]));
-  await prepareSources(stats);
+  const previous = await readJson(DATA.autoListings, null);
+  await prepareSources(stats, previous?.source_stats || {});
 
   if (!watchedIds.length) {
     console.log("No watched kits found (empty shared wanted list and empty data/market_watch_list.json). Writing empty auto-listings file.");
@@ -479,15 +511,28 @@ async function main() {
   for (const [id, stat] of Object.entries(stats)) {
     console.log(`  ${id}: ${sourceStatus(stat)} attempted=${stat.attempted} matched_kits=${stat.matched} errors=${stat.errors}${stat.note ? ` (${stat.note})` : ""}`);
   }
-  const previous = await readJson(DATA.autoListings, null);
   const unhealthy = await reportHealth(stats, previous?.source_stats || {});
   if (unhealthy.length && process.env.MARKET_STRICT === "1") process.exitCode = 1;
+  const sourceStats = Object.fromEntries(
+    // since: when a failing / refused source got that way; retry_after: until when a
+    // refused source rests (both carried over by the next run)
+    Object.entries(stats).map(([id, stat]) => [id, {
+      attempted: stat.attempted,
+      matched: stat.matched,
+      errors: stat.errors,
+      status: stat.status,
+      ...(stat.since ? { since: stat.since } : {}),
+      ...(stat.retry_after ? { retry_after: stat.retry_after } : {}),
+    }]),
+  );
 
   // Never let a barren run (missing secrets, network outage, blocked runner)
   // clobber previously captured listings: stale prices beat vanished prices.
+  // The source stats are still written: they hold which sources rest.
   if (!listings.length) {
     if (previous?.listings?.length) {
       console.warn(`Captured 0 listings but previous file has ${previous.listings.length}; keeping previous data.`);
+      await writeJson(DATA.autoListings, { ...previous, source_stats: sourceStats });
       return;
     }
   }
@@ -501,10 +546,7 @@ async function main() {
       naver: Boolean(process.env.NAVER_CLIENT_ID && process.env.NAVER_CLIENT_SECRET),
       supabase: Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY && process.env.SYNC_WORKSPACE_ID && process.env.SYNC_WORKSPACE_SECRET),
     },
-    source_stats: Object.fromEntries(
-      // since: when a failing / refused source got that way (carried over by the next run)
-      Object.entries(stats).map(([id, stat]) => [id, { attempted: stat.attempted, matched: stat.matched, errors: stat.errors, status: stat.status, ...(stat.since ? { since: stat.since } : {}) }]),
-    ),
+    source_stats: sourceStats,
     listings,
   });
 

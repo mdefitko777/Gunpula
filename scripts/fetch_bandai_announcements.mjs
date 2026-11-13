@@ -17,6 +17,7 @@ import {
   GUNDAM_OFFICIAL_NEWS_URL,
   KOTOBUKIYA_SHOP_BASE,
   KOTOBUKIYA_TITLES,
+  LIGHT_SOURCE_IDS,
   POKEMON_FRIENDA_URL,
   PREMIUM_BANDAI_NEW_ITEMS_URL,
   TAKARATOMY_POKEMON_URL,
@@ -41,6 +42,7 @@ import {
   parseTakaraTomyPokemonNews,
   parseTamashiiRevealBanners,
   promoteRevealStages,
+  stampAnnouncements,
 } from "./lib/official-announcements.mjs";
 import { parseKotobukiyaShopDetail } from "./lib/kotobukiya-shop.mjs";
 import {
@@ -101,6 +103,7 @@ import {
 import {
   DETAILS_SCHEMA,
   EXTRACTOR_VERSION,
+  LIGHT_RUN_DETAILS,
   kotobukiyaDetailsFromHtml,
   mergeDetails,
   parseTamashiiItemDetails,
@@ -138,9 +141,17 @@ const MAX_CACHED_IMAGE_BYTES = 300 * 1024;
 // ANNOUNCEMENT_REPLAY=1 to rerun the parsers without touching the network).
 const RAW_CACHE_DIR = process.env.ANNOUNCEMENT_RAW_CACHE_DIR || "";
 const REPLAY = process.env.ANNOUNCEMENT_REPLAY === "1";
+// ANNOUNCEMENT_LIGHT=1: the announcements-only run of refresh-announcements.yml,
+// several times a day, so a preorder posted in the morning gets its reminder
+// before it opens. Only the makers' own lists (LIGHT_SOURCE_IDS), and product
+// text only for new records (LIGHT_RUN_DETAILS); YouTube, the shop and the
+// unofficial sites wait for the daily run.
+const LIGHT = process.env.ANNOUNCEMENT_LIGHT === "1";
 // Optional: comma-separated source ids to run (trying one source without
 // fetching all the others); the others keep their stored records.
-const ONLY_SOURCES = new Set((process.env.ANNOUNCEMENT_SOURCES || "").split(",").map((id) => id.trim()).filter(Boolean));
+const ONLY_SOURCES = new Set(
+  (process.env.ANNOUNCEMENT_SOURCES || (LIGHT ? LIGHT_SOURCE_IDS.join(",") : "")).split(",").map((id) => id.trim()).filter(Boolean),
+);
 // Optional, once after a parser fix: preorder times that have passed may be
 // read again (they are frozen otherwise, lib/preorder-times.mjs).
 const PREORDER_REPARSE = process.env.PREORDER_REPARSE === "1";
@@ -180,6 +191,11 @@ async function fetchText(url, accept = "text/html,application/atom+xml,applicati
       // Not cached; fall through to the network.
     }
   }
+  // robots.txt before a host's first page. Until 2026-11-14 only the 魂ウェブ,
+  // unofficial, CoroCoro, YouTube and event hosts were checked; GUNDAM.INFO,
+  // p-bandai.jp, bandai-hobby.net and the Takara Tomy sites were read without it.
+  const robots = await hostRobots(new URL(url).host);
+  if (!robotsAllows(robots, url)) throw Object.assign(new Error(`${url} is disallowed by robots.txt`), { status: "robots" });
   await waitForHost(url);
   const response = await fetch(url, {
     redirect: "follow",
@@ -310,9 +326,7 @@ async function readJson(path, fallback) {
 
 async function runCoroCoro() {
   // robots.txt first (2026-11-12: only /wp-admin/ is disallowed).
-  await waitForHost(`https://${COROCORO_HOST}/robots.txt`);
-  const robots = await loadRobots(COROCORO_HOST, { userAgent: USER_AGENT });
-  console.log(`${COROCORO_SOURCE_ID}: robots.txt ${robots.status}`);
+  const robots = await hostRobots(COROCORO_HOST);
   const { state, records, stopped } = await runCoroCoroSource({
     state: await readJson(COROCORO_STATE_PATH, emptyCoroCoroState()),
     printPosts: (await readJson(COROCORO_PRINT_PATH, {})).posts || [],
@@ -334,20 +348,21 @@ async function runCoroCoro() {
 // robots.txt once a run per host, before its first page; sources that share a
 // host (魂ウェブ's banners and its schedule) share the answer. A 403 there reads
 // as "no robots.txt" but is the bot being turned away, so it stops the host
-// like a 403 from a page.
+// like a 403 from a page. `load` is for a host whose answer needs reading
+// differently (the event site, below).
 const robotsByHost = new Map();
-function hostRobots(host) {
-  if (!robotsByHost.has(host)) {
-    robotsByHost.set(host, (async () => {
-      const url = `https://${host}/robots.txt`;
-      await waitForHost(url);
-      const robots = await loadRobots(host, { userAgent: USER_AGENT });
-      console.log(`${host}: robots.txt ${robots.status}`);
-      hostStops.record(url, Number.parseInt(robots.status, 10));
-      return robots;
-    })());
-  }
+function hostRobots(host, load = loadHostRobots) {
+  if (!robotsByHost.has(host)) robotsByHost.set(host, load(host));
   return robotsByHost.get(host);
+}
+
+async function loadHostRobots(host) {
+  const url = `https://${host}/robots.txt`;
+  await waitForHost(url);
+  const robots = await loadRobots(host, { userAgent: USER_AGENT });
+  console.log(`${host}: robots.txt ${robots.status}`);
+  hostStops.record(url, Number.parseInt(robots.status, 10));
+  return robots;
 }
 
 // Robots first (2026-11-12: tamashiiweb.com has no robots.txt, a 404), then one
@@ -441,9 +456,7 @@ const goneStreamIds = new Set();
 // The show's site, only around the show. Its robots.txt is S3's 403 for a
 // missing file (2026-11-12): none published. Any other 403 there stops the
 // host, as a 403 from a page would.
-async function runTamashiiNationLive() {
-  if (!eventInSeason(TAMASHII_NATION_EVENT, today)) return [];
-  const host = new URL(TAMASHII_NATION_EVENT.pages[0]).host;
+async function loadEventRobots(host) {
   const robotsUrl = `https://${host}/robots.txt`;
   await waitForHost(robotsUrl);
   let missingFile = false;
@@ -458,8 +471,16 @@ async function runTamashiiNationLive() {
       return new Response(body, { status: response.status });
     },
   });
-  console.log(`${EVENT_LIVE_SOURCE_ID}: robots.txt ${robots.status}${missingFile ? " (S3: no such file)" : ""}`);
+  // S3's missing-file answer is a 403; logged as what it is, so a search of the
+  // run log for 403s finds only real refusals.
+  console.log(`${host}: robots.txt ${missingFile ? "none published (S3 missing file): all allowed" : robots.status}`);
   if (!missingFile) hostStops.record(robotsUrl, Number.parseInt(robots.status, 10));
+  return robots;
+}
+
+async function runTamashiiNationLive() {
+  if (!eventInSeason(TAMASHII_NATION_EVENT, today)) return [];
+  const robots = await hostRobots(new URL(TAMASHII_NATION_EVENT.pages[0]).host, loadEventRobots);
   const records = [];
   for (const url of TAMASHII_NATION_EVENT.pages) {
     if (!robotsAllows(robots, url)) throw new Error(`${url} is disallowed by robots.txt`);
@@ -475,20 +496,11 @@ const YOUTUBE_HOST = "www.youtube.com";
 // A YouTube page is asked for once a run: a channel's upload list serves its
 // product-video source and the stream source.
 const fetchYoutube = oncePerUrl(fetchText);
-let youtubeRobots = null;
 
 // robots.txt once a run, before the first YouTube page. Upload lists and watch
 // pages only: it keeps "*" out of /feeds/videos.xml (see lib/live-streams.mjs).
 function loadYoutubeRobots() {
-  youtubeRobots ||= (async () => {
-    await waitForHost(`https://${YOUTUBE_HOST}/robots.txt`);
-    const robots = await loadRobots(YOUTUBE_HOST, { userAgent: USER_AGENT });
-    console.log(`${YOUTUBE_HOST}: robots.txt ${robots.status}`);
-    // A 403 here reads as "no robots.txt"; from YouTube it is the bot being turned away.
-    hostStops.record(`https://${YOUTUBE_HOST}/robots.txt`, Number.parseInt(robots.status, 10));
-    return robots;
-  })();
-  return youtubeRobots;
+  return hostRobots(YOUTUBE_HOST);
 }
 
 // A page without its data is a bot check until shown otherwise.
@@ -591,7 +603,10 @@ async function readBeybladeBodies(records, bodiesRead) {
 // The product text behind the announcements (lib/announcement-details.mjs):
 // at most a few pages per host and run; data/announcement-details.json.
 async function readDetails(records, previousDetails) {
-  const plan = planDetailFetches(records, previousDetails, today, { preloaded: new Set(detailPages.keys()) });
+  const plan = planDetailFetches(records, previousDetails, today, {
+    preloaded: new Set(detailPages.keys()),
+    ...(LIGHT ? LIGHT_RUN_DETAILS : {}),
+  });
   const results = new Map();
   let ok = 0;
   for (const { id, url, source, reason } of plan) {
@@ -848,6 +863,10 @@ const SOURCES = [
 // order — the maker's own post first, then aggregators, store listings, videos.
 const DEDUPE_PRIORITY = SOURCES.map((source) => source.id);
 
+// A renamed source would silently drop out of the light runs.
+const unknownSources = [...ONLY_SOURCES].filter((id) => !DEDUPE_PRIORITY.includes(id));
+if (unknownSources.length) throw new Error(`Unknown announcement sources: ${unknownSources.join(", ")}`);
+
 const errors = [];
 const incoming = [];
 for (const source of SOURCES) {
@@ -955,8 +974,8 @@ try {
   errors.push({ source_id: "announcement_details", message: error.message });
   console.warn(`announcement_details: ${error.message}`);
 }
-await writeFile(OUTPUT_PATH, `${JSON.stringify({
-  updated_at: new Date().toISOString(),
+// The file as it is on disk (`previous` was tidied on reading), for the stamp.
+await writeFile(OUTPUT_PATH, `${JSON.stringify(stampAnnouncements(await readJson(OUTPUT_PATH, null), {
   sources: SOURCES.map((source) => ({ source_id: source.id, name: source.name, url: source.url })),
   // A partial run (ANNOUNCEMENT_SOURCES) keeps the other sources' last errors.
   fetch_errors: ONLY_SOURCES.size
@@ -964,6 +983,6 @@ await writeFile(OUTPUT_PATH, `${JSON.stringify({
     : errors,
   ...replacements,
   announcements,
-}, null, 2)}\n`);
+}, new Date().toISOString()), null, 2)}\n`);
 
 console.log(`Wrote ${announcements.length} announcements to ${OUTPUT_PATH}`);
