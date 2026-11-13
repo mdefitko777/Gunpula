@@ -80,6 +80,10 @@ const ORDER_WORD = /予約|受注|申込|申し込/;
 // A date followed by these is a release, a shipment or a broadcast, not the
 // preorder ("11月2日より順次発売", but 「再販予約」 is a preorder).
 const NOT_OPENING = /^\s*(?:に|より|から)?\s*(?:順次)?(?:発売|発送|再販(?!予約)|登場|出荷|公開|配信|放送|開催)/;
+// 「11月20日まで予約受付中」「23時59分に予約受付終了」 name the close, not the
+// opening. None in the 2026-11 titles, but read as an opening it would remind
+// people of a window that is ending.
+const CLOSING = /^\s*(?:まで|迄)|^[^！!。、「」]{0,28}?(?:予約|受注|受付|申込|申し込み)(?:の|は)?(?:受付)?(?:終了|締切|締め切り|〆切)/;
 // A result further than this from the post is a misreading, not a preorder.
 const DAYS_BEFORE_POST = 1;
 const DAYS_AFTER_POST = 60;
@@ -92,7 +96,7 @@ function sentenceAround(text, start, end) {
 }
 
 function opensHere(after, sentence) {
-  if (NOT_OPENING.test(after)) return false;
+  if (NOT_OPENING.test(after) || CLOSING.test(after)) return false;
   if (ORDER_VERB.test(after)) return true;
   if (RECEPTION.test(after) && !VOTE.test(sentence)) return true;
   return START.test(after) && ORDER_WORD.test(sentence);

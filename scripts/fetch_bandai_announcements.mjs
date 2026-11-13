@@ -576,6 +576,9 @@ async function readBeybladeBodies(records, bodiesRead) {
     if (page.stopped) break;
     if (!page.html) {
       console.warn(`${record.id}: body not read (${page.status})`);
+      // A page that is gone or off limits would otherwise take one of the two
+      // places every run and keep the next notice waiting.
+      if ([404, 410, "robots"].includes(page.status)) bodiesRead[record.id] = today;
       continue;
     }
     bodiesRead[record.id] = today;

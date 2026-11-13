@@ -74,6 +74,11 @@ assert.equal(preorderFromTitle("「サンプル」11月20日12時より予約開
 // A scale is not a date, and a result far from the post is a misreading (synthetic).
 assert.equal(preorderFromTitle("「1/12スケール サンプル」予約受付開始！", "2026-11-14"), null);
 assert.equal(preorderFromTitle("「サンプル」3月20日より予約開始！", "2026-11-14"), null);
+// A closing is not an opening (synthetic: no title in the corpus names one).
+assert.equal(preorderFromTitle("「サンプル」11月20日まで予約受付中！", "2026-11-14"), null);
+assert.equal(preorderFromTitle("「サンプル」11月20日23時59分に予約受付終了！", "2026-11-14"), null);
+assert.equal(preorderFromTitle("「サンプル」11月20日23:59受注締切！", "2026-11-14"), null);
+assert.equal(preorderFromTitle("「サンプル」11/13 18時より予約受付開始！11/20 23時まで", "2026-11-12").at, "2026-11-13T18:00:00+09:00");
 
 // withTitlePreorders writes the fields; status stays as it is.
 const [nightingale] = withTitlePreorders([announcementRecord({
