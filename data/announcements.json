@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-13T17:26:36.648Z",
+  "updated_at": "2026-11-13T17:56:26.246Z",
   "sources": [
     {
       "source_id": "tamashii_news",
@@ -132,54 +132,103 @@
       "url": "https://www.youtube.com/"
     }
   ],
-  "fetch_errors": [
-    {
-      "source_id": "youtube_live",
-      "message": "https://www.youtube.com/watch?v=c3M7UKldpEA has no video data (ログインして bot ではないことを確認してください)"
-    }
-  ],
+  "fetch_errors": [],
   "replaced": {
-    "corocoro-d0dfcce067": "hamusuke-bx-55",
-    "corocoro-d1ac4f87bf": "hamusuke-ux-22",
+    "corocoro-d1ac4f87bf": "beyblade-lineup-dXgyMi5odG1s",
+    "hamusuke-bx-55": "beyblade-lineup-Yng1NS5odG1s",
+    "hamusuke-ux-22": "beyblade-lineup-dXgyMi5odG1s",
     "tamashii-reveal-0abb669c96": "tamashii-news-2026-11-13-16258"
   },
   "replaced_at": {
-    "corocoro-d0dfcce067": "2026-11-14",
     "corocoro-d1ac4f87bf": "2026-11-14",
+    "hamusuke-bx-55": "2026-11-14",
+    "hamusuke-ux-22": "2026-11-14",
     "tamashii-reveal-0abb669c96": "2026-11-13"
   },
   "announcements": [
     {
-      "id": "hamusuke-bx-55",
+      "id": "beyblade-lineup-dXgyMi5odG1s",
       "franchise": "beyblade",
       "names": {
-        "ja": "BX-55 ランダムブースターVol.12「ホルスシャッター3-85MO」",
+        "ja": "UX-22 バニッシュルシファーWW スターター",
         "zh": null,
         "ko": null,
         "en": null
       },
-      "status": "announced",
-      "announced_at": "2026-11-13",
+      "status": "product_confirmed",
+      "announced_at": "2026-11-14",
+      "announced_at_basis": "first_seen",
       "source_type": "news",
-      "source_name": "ハムすけの備忘録",
-      "source_id": "hamusuke_beyblade",
-      "source_url": "https://hamusuke.com/beybladex-bx55-randombooster12-report/",
-      "thumbnail_url": "https://hamusuke.com/wp/wp-content/uploads/2026/11/HW7wjbDa8AAHhTy-768x768.jpg",
+      "source_name": "BEYBLADE X",
+      "source_id": "beyblade_x_lineup",
+      "source_url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/ux22.html",
+      "thumbnail_url": "../app/assets/announcements/beyblade-lineup-dXgyMi5odG1s.png",
       "video_id": null,
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
       "linked_kit_id": null,
-      "confidence": "unofficial",
-      "notes": "2026年12月26日発売 / 1,600円 / ランダムブースター. Fan blog post (ハムすけの備忘録), written when the monthly embargo lifts; not on the official lineup when first seen.",
-      "unofficial": true,
+      "confidence": "official",
+      "notes": "2026年12月26日発売 (official lineup). Announcement date = first seen by the bot.",
       "reviewed_at": null
     },
     {
-      "id": "hamusuke-ux-22",
+      "id": "beyblade-lineup-MC1iYi5odG1s",
       "franchise": "beyblade",
       "names": {
-        "ja": "UX-22 スターター「バニッシュルシファーWW」",
+        "ja": "CX-00 【B4ストア限定】 バハムートブリッツBK1-50I メタルコート:ブラック スターター",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-11-14",
+      "announced_at_basis": "first_seen",
+      "source_type": "news",
+      "source_name": "BEYBLADE X",
+      "source_id": "beyblade_x_lineup",
+      "source_url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-bb.html",
+      "thumbnail_url": "../app/assets/announcements/beyblade-lineup-MC1iYi5odG1s.png",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "2026年12月26日発売 (official lineup). Announcement date = first seen by the bot.",
+      "reviewed_at": null
+    },
+    {
+      "id": "beyblade-lineup-Yng1NS5odG1s",
+      "franchise": "beyblade",
+      "names": {
+        "ja": "BX-55 ランダムブースターVol.12 ランダムブースター",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-11-14",
+      "announced_at_basis": "first_seen",
+      "source_type": "news",
+      "source_name": "BEYBLADE X",
+      "source_id": "beyblade_x_lineup",
+      "source_url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/bx55.html",
+      "thumbnail_url": "../app/assets/announcements/beyblade-lineup-Yng1NS5odG1s.png",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "2026年12月26日発売 (official lineup). Announcement date = first seen by the bot.",
+      "reviewed_at": null
+    },
+    {
+      "id": "corocoro-d0dfcce067",
+      "franchise": "beyblade",
+      "names": {
+        "ja": "ランダムブースターVol.12「ホルスシャッター3-85MO」",
         "zh": null,
         "ko": null,
         "en": null
@@ -187,17 +236,178 @@
       "status": "announced",
       "announced_at": "2026-11-13",
       "source_type": "news",
-      "source_name": "ハムすけの備忘録",
-      "source_id": "hamusuke_beyblade",
-      "source_url": "https://hamusuke.com/baybladex-ux22-vanishlucifer-report/",
-      "thumbnail_url": "https://hamusuke.com/wp/wp-content/uploads/2026/11/HW7wPW3bgAAySPt-768x768.jpg",
+      "source_name": "コロコロコミック",
+      "source_id": "corocoro_news",
+      "source_url": "https://corocoro-news.jp/news/403084/",
+      "thumbnail_url": "../app/assets/announcements/corocoro-d0dfcce067.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "magazine",
+      "notes": "2026年12月26日発売 / 1,600円 / ランダムブースターVol.12. Magazine scoop (CoroCoro News: 月刊コロコロコミック 2026年12月号（誌面）); not on the official lineup when first seen.",
+      "reviewed_at": null
+    },
+    {
+      "id": "gundam-official-eu9ei9n4v9hgg52akq4okete",
+      "franchise": "gundam",
+      "names": {
+        "ja": "「SD戦国伝 武者頑駄無 ソフビフィギュア」本日11月13日より予約スタート！全高約23cm、全幅約26cmの大ボリューム！",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-13",
+      "source_type": "news",
+      "source_name": "GUNDAM.INFO",
+      "source_id": "gundam_official_news",
+      "source_url": "https://gundam-official.com/news/eu9ei9n4v9hgg52akq4okete",
+      "thumbnail_url": "https://gundam-official.com/media/710159c1847d9194a52bd22b6cd6083f/710159c1847d9194a52bd22b6cd6083f.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "gundam-official.com: フィギュア",
+      "reviewed_at": null,
+      "preorder_date": "2026-11-13",
+      "preorder_basis": "title"
+    },
+    {
+      "id": "gundam-official-nxuehbs1kqodttf2bd7il4ol",
+      "franchise": "gundam",
+      "names": {
+        "ja": "「ENTRY GRADE ガンダムベース限定 ビルドストライク エクシードギャラクシー［プラフスキーパーティクルクリア］」11月21日発売！",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-11-13",
+      "source_type": "news",
+      "source_name": "GUNDAM.INFO",
+      "source_id": "gundam_official_news",
+      "source_url": "https://gundam-official.com/news/nxuehbs1kqodttf2bd7il4ol",
+      "thumbnail_url": "https://gundam-official.com/media/6985e37375a119585e139948a63e73e7/6985e37375a119585e139948a63e73e7.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "gundam-official.com: ガンプラ",
+      "reviewed_at": null
+    },
+    {
+      "id": "gundam-official-ykqlbxoud0q46eaq505u4vko",
+      "franchise": "gundam",
+      "names": {
+        "ja": "「METAL BUILD ガンダムキュリオス」本日11月13日18時より予約受付スタート！飛行形態への変形機構と武装ギミックを実装！",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-13",
+      "source_type": "news",
+      "source_name": "GUNDAM.INFO",
+      "source_id": "gundam_official_news",
+      "source_url": "https://gundam-official.com/news/ykqlbxoud0q46eaq505u4vko",
+      "thumbnail_url": "https://gundam-official.com/media/eb521d6fe4d363d7b59a3caf3a63446b/eb521d6fe4d363d7b59a3caf3a63446b.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "gundam-official.com: フィギュア",
+      "reviewed_at": null,
+      "preorder_at": "2026-11-13T18:00:00+09:00",
+      "preorder_date": "2026-11-13",
+      "preorder_basis": "title"
+    },
+    {
+      "id": "pbandai-1000258239",
+      "franchise": "gundam",
+      "names": {
+        "ja": "METAL BUILD ガンダムデュナメス",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-13",
+      "source_type": "news",
+      "source_name": "プレミアムバンダイ",
+      "source_id": "premium_bandai_new_items",
+      "source_url": "https://p-bandai.jp/item/item-1000258239/",
+      "thumbnail_url": "../app/assets/announcements/pbandai-1000258239.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Name truncated by the Premium Bandai new-items list.",
+      "reviewed_at": null,
+      "preorder_at": "2026-11-13T12:00:00+09:00",
+      "preorder_date": "2026-11-13",
+      "preorder_basis": "store_list"
+    },
+    {
+      "id": "pbandai-1000258243",
+      "franchise": "gundam",
+      "names": {
+        "ja": "METAL BUILD ガンダムキュリオス",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-13",
+      "source_type": "news",
+      "source_name": "プレミアムバンダイ",
+      "source_id": "premium_bandai_new_items",
+      "source_url": "https://p-bandai.jp/item/item-1000258243/",
+      "thumbnail_url": "../app/assets/announcements/pbandai-1000258243.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Name truncated by the Premium Bandai new-items list.",
+      "reviewed_at": null,
+      "preorder_at": "2026-11-13T18:00:00+09:00",
+      "preorder_date": "2026-11-13",
+      "preorder_basis": "store_list"
+    },
+    {
+      "id": "stds-78357",
+      "franchise": "lego",
+      "names": {
+        "ja": "新たなる希望 50周年、レゴ(R)スター・ウォーズのコンセプトアート版ミニフィギュアを徹底解説",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "announced",
+      "announced_at": "2026-11-13",
+      "source_type": "news",
+      "source_name": "スタッズ",
+      "source_id": "stds_lego",
+      "source_url": "https://stds.jp/starwars-50th-anniversary-lego-minifigures-20270101/",
+      "thumbnail_url": "https://stds.jp/wp-content/uploads/2026/11/starwars-50th-anniversary-lego-minifigures-20270101_title_.webp",
       "video_id": null,
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
       "linked_kit_id": null,
       "confidence": "unofficial",
-      "notes": "2026年12月26日発売 / 2,500円 / スターター. Fan blog post (ハムすけの備忘録), written when the monthly embargo lifts; not on the official lineup when first seen.",
+      "notes": null,
       "unofficial": true,
       "reviewed_at": null
     },
@@ -220,11 +430,15 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16258",
       "confidence": "official",
-      "notes": null,
+      "notes": "予約 2026-11-13〜 / 発送 2027-06 / ¥38,500（税込） / 魂ウェブ商店販売商品",
       "source_id": "tamashii_news",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-13T18:00:00+09:00",
+      "preorder_date": "2026-11-13",
+      "preorder_basis": "title",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "tamashii-news-2026-11-13-ZXJpZXMv",
@@ -249,6 +463,31 @@
       "confidence": "official",
       "notes": null,
       "source_id": "tamashii_news",
+      "reviewed_at": null
+    },
+    {
+      "id": "bandai-news-2026-11-12-vMDFfNzUxNC8",
+      "franchise": "gundam",
+      "names": {
+        "ja": "HOBBY NEW ITEM INFO. 2026 November",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "announced",
+      "announced_at": "2026-11-12",
+      "source_type": "news",
+      "source_name": "BANDAI SPIRITS",
+      "source_url": "https://bandai-hobby.net/news/01_7514/",
+      "thumbnail_url": "../app/assets/announcements/bandai-news-2026-11-12-vMDFfNzUxNC8.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "source_id": "bandai_hobby_news",
       "reviewed_at": null
     },
     {
@@ -301,7 +540,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-11-12",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-pscrbpngr7xnr27g7cjh2qx1",
@@ -326,7 +567,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-12T11:00:00+09:00",
+      "preorder_date": "2026-11-12",
+      "preorder_basis": "title"
     },
     {
       "id": "hjweb-2884578",
@@ -485,7 +729,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-12T11:00:00+09:00",
+      "preorder_date": "2026-11-12",
+      "preorder_basis": "store_list"
     },
     {
       "id": "pbandai-1000260917",
@@ -510,7 +757,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-12T11:00:00+09:00",
+      "preorder_date": "2026-11-12",
+      "preorder_basis": "store_list"
     },
     {
       "id": "pbandai-1000260918",
@@ -535,7 +785,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-12T11:00:00+09:00",
+      "preorder_date": "2026-11-12",
+      "preorder_basis": "store_list"
     },
     {
       "id": "pbandai-1000261240",
@@ -636,7 +889,9 @@
       "confidence": "official",
       "notes": "予約 2026-11-12〜 / 発売 2027-05 / ¥7,700（税込） / 一般店頭販売商品",
       "source_id": "tamashii_news",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-11-12",
+      "preorder_basis": "title"
     },
     {
       "id": "tamashii-news-2026-11-12-16188",
@@ -661,7 +916,9 @@
       "confidence": "official",
       "notes": "予約 2026-11-12〜 / 発売 2027-06 / ¥9,900（税込） / 一般店頭販売商品",
       "source_id": "tamashii_news",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-11-12",
+      "preorder_basis": "title"
     },
     {
       "id": "tamashii-news-2026-11-12-16259",
@@ -684,9 +941,13 @@
       "grade_code": null,
       "linked_kit_id": "tamashii-16259",
       "confidence": "official",
-      "notes": "予約 2026-11-13〜 / 発送 2027-01 / ¥33,000（税込） / 魂ウェブ商店販売商品",
+      "notes": "予約 2026-11-13〜2026-11-13 / 発送 2027-01 / ¥33,000（税込） / 魂ウェブ商店販売商品",
       "source_id": "tamashii_topics_items",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-13T12:00:00+09:00",
+      "preorder_date": "2026-11-13",
+      "preorder_basis": "title",
+      "preorder_end_date": "2026-11-13"
     },
     {
       "id": "tamashii-schedule-16270",
@@ -711,7 +972,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "予約 2026-11-13〜 / 発送 2027-03 / ¥25,300（税込） / TAMASHII NATION開催記念商品 / 事後販売",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-11-13",
+      "preorder_basis": "schedule"
     },
     {
       "id": "tamashii-schedule-16271",
@@ -736,7 +999,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "予約 2026-11-13〜 / 発送 2027-03 / ¥39,600（税込） / TAMASHII NATION開催記念商品 / 事後販売",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-11-13",
+      "preorder_basis": "schedule"
     },
     {
       "id": "gundam-official-c5y12b6ub1an1f8luxpolr1r",
@@ -761,7 +1026,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-11-10",
+      "preorder_basis": "title"
     },
     {
       "id": "pbandai-1000260986",
@@ -786,7 +1053,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-10T11:00:00+09:00",
+      "preorder_date": "2026-11-10",
+      "preorder_basis": "store_list"
     },
     {
       "id": "pbandai-1000260987",
@@ -811,7 +1081,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-10T11:00:00+09:00",
+      "preorder_date": "2026-11-10",
+      "preorder_basis": "store_list"
     },
     {
       "id": "pbandai-1000260988",
@@ -836,7 +1109,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-10T11:00:00+09:00",
+      "preorder_date": "2026-11-10",
+      "preorder_basis": "store_list"
     },
     {
       "id": "pbandai-1000260990",
@@ -861,7 +1137,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-10T11:00:00+09:00",
+      "preorder_date": "2026-11-10",
+      "preorder_basis": "store_list"
     },
     {
       "id": "gundam-official-szkd08d9vyl6ruf728ryvl5s",
@@ -954,7 +1233,7 @@
       "source_name": "fig速",
       "source_id": "figsoku_tags",
       "source_url": "https://figsoku.net/blog-entry-534790.html",
-      "thumbnail_url": null,
+      "thumbnail_url": "https://figsoku.net/wp-content/wonfes/reserve/fig_20261108_1794129695110.jpg",
       "video_id": null,
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
@@ -1019,7 +1298,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "Name truncated by the Premium Bandai new-items list.",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-06T13:00:00+09:00",
+      "preorder_date": "2026-11-06",
+      "preorder_basis": "store_list"
     },
     {
       "id": "pbandai-1000259827",
@@ -1044,7 +1326,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "Name truncated by the Premium Bandai new-items list.",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-06T13:00:00+09:00",
+      "preorder_date": "2026-11-06",
+      "preorder_basis": "store_list"
     },
     {
       "id": "pbandai-1000260994",
@@ -1069,7 +1354,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "Name truncated by the Premium Bandai new-items list.",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-06T12:00:00+09:00",
+      "preorder_date": "2026-11-06",
+      "preorder_basis": "store_list"
     },
     {
       "id": "pbandai-1000260996",
@@ -1094,7 +1382,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "Name truncated by the Premium Bandai new-items list.",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-06T12:00:00+09:00",
+      "preorder_date": "2026-11-06",
+      "preorder_basis": "store_list"
     },
     {
       "id": "pbandai-1000261090",
@@ -1119,7 +1410,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "Name truncated by the Premium Bandai new-items list.",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-06T12:00:00+09:00",
+      "preorder_date": "2026-11-06",
+      "preorder_basis": "store_list"
     },
     {
       "id": "pbandai-1000261091",
@@ -1144,7 +1438,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "Name truncated by the Premium Bandai new-items list.",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-06T12:00:00+09:00",
+      "preorder_date": "2026-11-06",
+      "preorder_basis": "store_list"
     },
     {
       "id": "pbandai-1000261092",
@@ -1169,7 +1466,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "Name truncated by the Premium Bandai new-items list.",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-06T12:00:00+09:00",
+      "preorder_date": "2026-11-06",
+      "preorder_basis": "store_list"
     },
     {
       "id": "tamashii-news-2026-11-06-16254",
@@ -1219,7 +1519,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-05T11:00:00+09:00",
+      "preorder_date": "2026-11-05",
+      "preorder_basis": "title"
     },
     {
       "id": "pbandai-1000260403",
@@ -1244,7 +1547,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-05T11:00:00+09:00",
+      "preorder_date": "2026-11-05",
+      "preorder_basis": "store_list"
     },
     {
       "id": "pbandai-1000260445",
@@ -1269,7 +1575,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-05T11:00:00+09:00",
+      "preorder_date": "2026-11-05",
+      "preorder_basis": "store_list"
     },
     {
       "id": "pbandai-1000260555",
@@ -1294,7 +1603,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "Name truncated by the Premium Bandai new-items list.",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-11-05T10:00:00+09:00",
+      "preorder_date": "2026-11-05",
+      "preorder_basis": "store_list"
     },
     {
       "id": "gundam-official-eqnmicxoa4rm3jggh27il0ac",
@@ -1617,10 +1929,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "beyblade-x-cx00-vv",
       "confidence": "official",
       "notes": "2026年11月5日発売 (official lineup). Announcement date = first seen by the bot.",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "beyblade-lineup-Y3gyMC5odG1s",
@@ -1643,10 +1956,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "beyblade-x-cx20",
       "confidence": "official",
       "notes": "2026年11月21日発売 (official lineup). Announcement date = first seen by the bot.",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "beyblade-lineup-Yng1NC5odG1s",
@@ -1669,10 +1983,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "beyblade-x-bx54",
       "confidence": "official",
       "notes": "2026年11月21日発売 (official lineup). Announcement date = first seen by the bot.",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "kotobukiya-4580787175222",
@@ -1695,10 +2010,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "kotobukiya-fate-4580787175222",
       "confidence": "official",
       "notes": "2026年11月発売予定 (Fate シリーズ). Announcement date = first seen by the bot.",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "kotobukiya-4934054056057",
@@ -1721,10 +2037,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "acvi-4934054056057",
       "confidence": "official",
       "notes": "2027年1月発売予定 (ARMORED CORE). Announcement date = first seen by the bot.",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "kotobukiya-4934054066971",
@@ -1799,10 +2116,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "acvi-4934054083244",
       "confidence": "official",
       "notes": "2027年1月発売予定 (ARMORED CORE). Announcement date = first seen by the bot.",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "kotobukiya-4934054083251",
@@ -1825,10 +2143,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "acvi-4934054083251",
       "confidence": "official",
       "notes": "2027年3月発売予定 (ARMORED CORE). Announcement date = first seen by the bot.",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "kotobukiya-4934054088706",
@@ -1851,10 +2170,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "acvi-4934054088706",
       "confidence": "official",
       "notes": "2027年4月発売予定 (ARMORED CORE). Announcement date = first seen by the bot.",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "kotobukiya-4934054088713",
@@ -1877,10 +2197,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "acvi-4934054088713",
       "confidence": "official",
       "notes": "2027年2月発売予定 (ARMORED CORE). Announcement date = first seen by the bot.",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "gundam-official-x85np1jmdnhk4wge12h8k6eh",
@@ -1927,10 +2248,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "moncolle-mc-0",
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "gundam-official-adqewcy72qmsuz9u8bk3codx",
@@ -1980,7 +2302,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-10-30",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-clfdpokbcpcfkfzady7wsssq",
@@ -2030,7 +2354,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-11-02",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-jb185qspgpo9th6foyrfs3bd",
@@ -2055,7 +2381,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: 食玩・お菓子",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-10-30",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-kdfmnv31inm8dijd9gctsfze",
@@ -2080,7 +2408,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-11-02",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-nfbeigdvyphpuptkqxpjclwu",
@@ -2427,10 +2757,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "pbandai-wb-1000256700",
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "pbandai-1000260730",
@@ -2477,10 +2808,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "pbandai-wb-1000252431",
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "pbandai-1000260732",
@@ -2502,10 +2834,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "pbandai-wb-1000252432",
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "pbandai-1000260734",
@@ -2527,10 +2860,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "pbandai-wb-1000252947",
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "pbandai-1000260735",
@@ -2552,10 +2886,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "pbandai-wb-1000255625",
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "pbandai-1000260736",
@@ -2577,10 +2912,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "pbandai-wb-1000255626",
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "pbandai-1000260737",
@@ -2602,10 +2938,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "pbandai-wb-1000252434",
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "pbandai-1000260741",
@@ -2652,10 +2989,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "hg-hg-1-144-4573102691859000",
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "pbandai-1000260744",
@@ -2730,7 +3068,9 @@
       "confidence": "official",
       "notes": "予約 2026-11-02〜 / 発売 2027-04 / ¥5,500（税込） / 一般店頭販売商品",
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "preorder_date": "2026-11-02",
+      "preorder_basis": "schedule"
     },
     {
       "id": "youtube-OdDVsibG0Wc",
@@ -2780,7 +3120,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-10-29T11:00:00+09:00",
+      "preorder_date": "2026-10-29",
+      "preorder_basis": "title"
     },
     {
       "id": "pbandai-1000260369",
@@ -2827,10 +3170,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "hg-hg-1-144-specii-4573102688590000",
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "pbandai-1000260371",
@@ -2955,7 +3299,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: 食玩・お菓子",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-10-28",
+      "preorder_basis": "title"
     },
     {
       "id": "pbandai-1000250013",
@@ -3131,7 +3477,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-10-28T12:00:00+09:00",
+      "preorder_date": "2026-10-28",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-ueqh1i1pxry1v3u50zq4akbu",
@@ -3156,7 +3505,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-10-28T11:00:00+09:00",
+      "preorder_date": "2026-10-28",
+      "preorder_basis": "title"
     },
     {
       "id": "pbandai-1000250791",
@@ -3281,7 +3633,9 @@
       "confidence": "official",
       "notes": "予約 2026-11-02〜 / 発売 2027-01 / ¥19,800（税込） / 一般店頭販売商品",
       "source_id": "tamashii_topics_items",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-11-02",
+      "preorder_basis": "schedule"
     },
     {
       "id": "gundam-official-f466pbn8be9l1qrueuvt4yla",
@@ -3306,7 +3660,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-10-20T11:00:00+09:00",
+      "preorder_date": "2026-10-20",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-f8n1bxjkp1qebat8a457vqm8",
@@ -3406,7 +3763,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-10-19T11:00:00+09:00",
+      "preorder_date": "2026-10-19",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-sa6no0n259eefa4rmepnqnp6",
@@ -3531,7 +3891,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-10-16T12:00:00+09:00",
+      "preorder_date": "2026-10-16",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-ulkfjypm95xnr8pmp2w88ftq",
@@ -3656,7 +4019,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-10-15T11:00:00+09:00",
+      "preorder_date": "2026-10-15",
+      "preorder_basis": "title"
     },
     {
       "id": "beyblade-news-2026-10-14-0Lmh0bWw",
@@ -3681,7 +4047,12 @@
       "confidence": "official",
       "notes": null,
       "source_id": "beyblade_x_news",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-10-15T10:00:00+09:00",
+      "preorder_date": "2026-10-15",
+      "preorder_basis": "post_body",
+      "preorder_end_at": "2026-10-28T23:59:00+09:00",
+      "preorder_end_date": "2026-10-28"
     },
     {
       "id": "bandai-news-2026-10-13-vMDFfNzQyMy8",
@@ -3731,7 +4102,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-10-13T11:00:00+09:00",
+      "preorder_date": "2026-10-13",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-d9e9z9uckgueejidxoevpr89",
@@ -3756,7 +4130,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-10-12T11:00:00+09:00",
+      "preorder_date": "2026-10-12",
+      "preorder_basis": "title"
     },
     {
       "id": "bandai-news-2026-10-09-waWNzLzc0MTE",
@@ -3906,7 +4283,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-10-08",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-nfq5vhdp6855xyw8fgaay5h5",
@@ -3931,7 +4310,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-10-08",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-qpanrefval38bdfxpg5j155p",
@@ -3981,7 +4362,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-10-07T11:00:00+09:00",
+      "preorder_date": "2026-10-07",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-zatphao2gr2sjn0oce4x24ud",
@@ -4006,7 +4390,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-10-08",
+      "preorder_basis": "title"
     },
     {
       "id": "bandai-news-2026-10-06-waWNzLzczOTQ",
@@ -4052,11 +4438,15 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16191",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "preorder_date": "2026-10-09",
+      "preorder_basis": "schedule",
+      "preorder_end_date": "2026-11-29",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "tamashii-news-2026-10-05-16192",
@@ -4077,11 +4467,15 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16192",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "preorder_date": "2026-10-09",
+      "preorder_basis": "schedule",
+      "preorder_end_date": "2026-11-29",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "gundam-official-beisr5n3fgs5dawfvrupg43q",
@@ -4106,7 +4500,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-10-02T12:00:00+09:00",
+      "preorder_date": "2026-10-02",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-qnmp3lgehx48l473xpryftpq",
@@ -4131,7 +4528,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-10-02T11:00:00+09:00",
+      "preorder_date": "2026-10-02",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-ukduxronszrskkjn44rp7fi2",
@@ -4181,7 +4581,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-10-02T12:00:00+09:00",
+      "preorder_date": "2026-10-02",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-zn6kst3dif07awiniv578v5c",
@@ -4227,11 +4630,12 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16165",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "tamashii-news-2026-10-02-16166",
@@ -4252,11 +4656,12 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16166",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "bandai-youtube-6uA18AhAhWk",
@@ -4356,7 +4761,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-10-01T11:00:00+09:00",
+      "preorder_date": "2026-10-01",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-x7h8c8flapqx3zbbpqt7g9d7",
@@ -4381,7 +4789,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-10-02T16:00:00+09:00",
+      "preorder_date": "2026-10-02",
+      "preorder_basis": "title"
     },
     {
       "id": "takaratomy-pokemon-2026-10-01-aWthY2h1Lw",
@@ -4403,10 +4814,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "moncolle-mc-1",
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "tamashii-news-2026-10-01-16176",
@@ -4427,11 +4839,15 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16176",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "preorder_date": "2026-10-02",
+      "preorder_basis": "schedule",
+      "preorder_end_date": "2026-11-01",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "gundam-official-f2ht5w2ptoplj5mw09amx7vp",
@@ -4456,7 +4872,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-09-30",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-ku2vyhqx87h1dwex3ttkox62",
@@ -4527,11 +4945,14 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "pbandai-wb-1000257894",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "bandai_hobby_news"
+      "source_id": "bandai_hobby_news",
+      "preorder_date": "2026-09-29",
+      "preorder_basis": "title",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "bandai-news-2026-09-29-wMDI1Nzg5Ni8",
@@ -4552,11 +4973,14 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "pbandai-wb-1000257896",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "bandai_hobby_news"
+      "source_id": "bandai_hobby_news",
+      "preorder_date": "2026-09-29",
+      "preorder_basis": "title",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "gundam-official-ltykia42uxzlxq4pl8g1q55q",
@@ -4581,7 +5005,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-09-29T11:00:00+09:00",
+      "preorder_date": "2026-09-29",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-becd1gyzkdy862nwmpt00mci",
@@ -4656,7 +5083,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-09-25T16:00:00+09:00",
+      "preorder_date": "2026-09-25",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-gwfeuqgrh2n2lzq3zxsneyxg",
@@ -4731,7 +5161,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-09-25T16:00:00+09:00",
+      "preorder_date": "2026-09-25",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-lykpvs9qyis4fa2ujx72m0a0",
@@ -4827,11 +5260,12 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16138",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "tamashii-news-2026-09-24-16139",
@@ -4852,11 +5286,12 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16139",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "gundam-official-v0rbkms38a5vvqrpb7xn7n9z",
@@ -4881,7 +5316,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-09-18T11:00:00+09:00",
+      "preorder_date": "2026-09-18",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-base-2026-09-17-MDFfNzQxNA",
@@ -4931,7 +5369,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-09-18T18:00:00+09:00",
+      "preorder_date": "2026-09-18",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-ywvmziohawgi2qtrud8lqp6b",
@@ -4956,7 +5397,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-09-18T17:00:00+09:00",
+      "preorder_date": "2026-09-18",
+      "preorder_basis": "title"
     },
     {
       "id": "tamashii-news-2026-09-17-16134",
@@ -4977,11 +5421,15 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16134",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "preorder_at": "2026-09-18T18:00:00+09:00",
+      "preorder_date": "2026-09-18",
+      "preorder_basis": "title",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "tamashii-news-2026-09-17-16135",
@@ -5002,11 +5450,12 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16135",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "corocoro-9327b60944",
@@ -5106,7 +5555,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: 食玩・お菓子",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-09-11",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-ux3pncw2bl8954qp881b8geq",
@@ -5156,7 +5607,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-09-11T16:00:00+09:00",
+      "preorder_date": "2026-09-11",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-ob6jvq9hajgkfnp1xgzbhvs0",
@@ -5181,7 +5635,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-09-10T11:00:00+09:00",
+      "preorder_date": "2026-09-10",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-qx10bkr9djrmk7p42o2rmr8k",
@@ -5206,7 +5663,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-09-11T16:00:00+09:00",
+      "preorder_date": "2026-09-11",
+      "preorder_basis": "title"
     },
     {
       "id": "tamashii-news-2026-09-10-16068",
@@ -5227,11 +5687,15 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16068",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "preorder_at": "2026-09-11T16:00:00+09:00",
+      "preorder_date": "2026-09-11",
+      "preorder_basis": "title",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "tamashii-news-2026-09-10-16129",
@@ -5252,11 +5716,15 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16129",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "preorder_at": "2026-09-11T16:00:00+09:00",
+      "preorder_date": "2026-09-11",
+      "preorder_basis": "title",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "gundam-official-d73d2gm7j5h5vnhuwm9uit4u",
@@ -5281,7 +5749,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: トイ・グッズ / ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-09-10",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-j1nmzfqvms5hny4daet6mr0w",
@@ -5306,7 +5776,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-09-10",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-qqfe62ws1ffdlxu5953o33qh",
@@ -5356,7 +5828,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-09-10",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-ogrg834giqacqeshtbhcc42k",
@@ -5381,7 +5855,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-09-08T11:00:00+09:00",
+      "preorder_date": "2026-09-08",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-md1mxpv0h9z2tv1k1h3lxgbp",
@@ -5406,7 +5883,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-09-04T11:00:00+09:00",
+      "preorder_date": "2026-09-04",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-p2xr98kzed1djhz8uqd00kob",
@@ -5481,7 +5961,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-09-04T16:00:00+09:00",
+      "preorder_date": "2026-09-04",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-zrr02gimducozxs4rn4sgflj",
@@ -5506,7 +5989,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-09-04T16:00:00+09:00",
+      "preorder_date": "2026-09-04",
+      "preorder_basis": "title"
     },
     {
       "id": "tamashii-news-2026-09-03-16120",
@@ -5527,11 +6013,12 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16120",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "tamashii-news-2026-09-03-16123",
@@ -5552,11 +6039,15 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16123",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "preorder_at": "2026-09-04T16:00:00+09:00",
+      "preorder_date": "2026-09-04",
+      "preorder_basis": "title",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "tamashii-news-2026-09-03-16127",
@@ -5577,11 +6068,16 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16127",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "preorder_at": "2026-09-04T16:00:00+09:00",
+      "preorder_date": "2026-09-04",
+      "preorder_basis": "title",
+      "preorder_end_date": "2026-11-01",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "gundam-official-lxcxw3nbw8eid3a3en7bsw2f",
@@ -5631,7 +6127,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: 食玩・お菓子",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-09-02T13:00:00+09:00",
+      "preorder_date": "2026-09-02",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-r6k5ha4f588zl4hwwytxplj3",
@@ -5656,7 +6155,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-09-02T11:00:00+09:00",
+      "preorder_date": "2026-09-02",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-wt86df19ei7whaf1m74g94fg",
@@ -5703,10 +6205,11 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "moncolle-mc-2",
       "confidence": "official",
       "notes": null,
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "bandai-youtube-R5Z9RpP7Cn0",
@@ -5756,7 +6259,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-09-01",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-ueaf3od8jkh7035iakv6zdkc",
@@ -5781,7 +6286,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-09-01T11:00:00+09:00",
+      "preorder_date": "2026-09-01",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-ybgmy1be4usgqggdsmjblm2p",
@@ -5856,7 +6364,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-08-31T12:00:00+09:00",
+      "preorder_date": "2026-08-31",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-vf3a6o5fd7wyb2rwucs6808e",
@@ -5881,7 +6392,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-08-31",
+      "preorder_basis": "title"
     },
     {
       "id": "tamashii-news-2026-08-31-16049",
@@ -6006,7 +6519,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-08-27",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-vk01chu6fsbvpoa3m8u4euzc",
@@ -6031,7 +6546,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-08-27",
+      "preorder_basis": "title"
     },
     {
       "id": "takaratomy-pokemon-2026-08-27-bF9wYXJrLw",
@@ -6102,11 +6619,14 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16018",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "preorder_date": "2026-08-27",
+      "preorder_basis": "title",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "tamashii-news-2026-08-27-16032",
@@ -6127,11 +6647,12 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16032",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "tamashii-news-2026-08-27-16104",
@@ -6152,11 +6673,12 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16104",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "tamashii-news-2026-08-27-16105",
@@ -6177,11 +6699,12 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16105",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "bandai-news-2026-08-26-vMDFfNzM1MC8",
@@ -6227,11 +6750,14 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "pbandai-wb-1000255597",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "bandai_hobby_news"
+      "source_id": "bandai_hobby_news",
+      "preorder_date": "2026-08-26",
+      "preorder_basis": "title",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "beyblade-news-2026-08-26-2Lmh0bWw",
@@ -6256,7 +6782,12 @@
       "confidence": "official",
       "notes": null,
       "source_id": "beyblade_x_news",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-09-14T10:00:00+09:00",
+      "preorder_date": "2026-09-14",
+      "preorder_basis": "post_body",
+      "preorder_end_at": "2026-10-12T23:59:00+09:00",
+      "preorder_end_date": "2026-10-12"
     },
     {
       "id": "gundam-official-bfikwk4q8xwo93t7i6xbmnhz",
@@ -6281,7 +6812,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-08-26T12:00:00+09:00",
+      "preorder_date": "2026-08-26",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-mxksrk66gaof0hajpg2hattm",
@@ -6327,11 +6861,15 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16103",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "preorder_at": "2026-08-28T16:00:00+09:00",
+      "preorder_date": "2026-08-28",
+      "preorder_basis": "title",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "tamashii-news-2026-08-26-d29ybGQv",
@@ -6381,7 +6919,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: 食玩・お菓子",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-08-25",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-w2vrx6gicf2m5agcusb3kieg",
@@ -6481,7 +7021,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: 食玩・お菓子",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-08-21",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-uiomayv384bd2j7rttl03lod",
@@ -6506,7 +7048,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-08-21T11:00:00+09:00",
+      "preorder_date": "2026-08-21",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-x4ai3wohtvqud85lyteqwpvt",
@@ -6531,7 +7076,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-08-21T12:00:00+09:00",
+      "preorder_date": "2026-08-21",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-f6dz3dibe40hbv8qxxzxgeoq",
@@ -6656,7 +7204,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-08-21T16:00:00+09:00",
+      "preorder_date": "2026-08-21",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-ujxklwnwttq5w2ddf616gdx2",
@@ -6706,7 +7257,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-08-20T11:00:00+09:00",
+      "preorder_date": "2026-08-20",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-xum8jo8hjxxc6393q38zb551",
@@ -6752,11 +7306,12 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16070",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "bandai-news-2026-08-19-vMDFfNzM0OS8",
@@ -6806,7 +7361,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: 食玩・お菓子",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-08-18",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-ilb6no8v8sr4w7kdcd4l538r",
@@ -6881,7 +7438,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-08-07",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-woaznnn8lf21v8ty67p9n0te",
@@ -6906,7 +7465,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-08-07T11:00:00+09:00",
+      "preorder_date": "2026-08-07",
+      "preorder_basis": "title"
     },
     {
       "id": "tamashii-news-2026-08-07-16064",
@@ -6927,11 +7489,15 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16064",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "preorder_at": "2026-08-07T16:00:00+09:00",
+      "preorder_date": "2026-08-07",
+      "preorder_basis": "title",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "beyblade-news-2026-08-05-1Lmh0bWw",
@@ -6977,11 +7543,15 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16010",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "preorder_date": "2026-08-06",
+      "preorder_basis": "schedule",
+      "preorder_end_date": "2026-09-06",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "tamashii-news-2026-08-05-16011",
@@ -7002,11 +7572,15 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16011",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "preorder_date": "2026-08-06",
+      "preorder_basis": "schedule",
+      "preorder_end_date": "2026-09-06",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "bandai-youtube-ciF6OFBrz4M",
@@ -7056,7 +7630,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-08-04T16:00:00+09:00",
+      "preorder_date": "2026-08-04",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-l3nieuvxhby83myj1aag3dt6",
@@ -7081,7 +7658,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-08-04T11:00:00+09:00",
+      "preorder_date": "2026-08-04",
+      "preorder_basis": "title"
     },
     {
       "id": "tamashii-news-2026-08-04-16007",
@@ -7106,7 +7686,10 @@
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "tamashii_topics_items"
+      "source_id": "tamashii_topics_items",
+      "preorder_at": "2026-08-04T16:00:00+09:00",
+      "preorder_date": "2026-08-04",
+      "preorder_basis": "title"
     },
     {
       "id": "tamashii-news-2026-08-04-16063",
@@ -7281,7 +7864,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-08-03",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-lmubf8ri1vqdgkhz5duqgydp",
@@ -7331,7 +7916,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-08-03",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-smj8p0n5fvxf4edkcjk1or06",
@@ -7356,7 +7943,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-07-31T11:00:00+09:00",
+      "preorder_date": "2026-07-31",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-tifwuzn52uda0isp13aqc27q",
@@ -7406,7 +7996,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-07-31",
+      "preorder_basis": "title"
     },
     {
       "id": "tamashii-news-2026-07-31-sMTU5ODY",
@@ -7477,11 +8069,14 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-15968",
       "confidence": "official",
       "notes": null,
       "source_id": "tamashii_topics_items",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-08-03",
+      "preorder_basis": "schedule",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "tamashii-news-2026-07-28-15971",
@@ -7502,11 +8097,12 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-15971",
       "confidence": "official",
       "notes": null,
       "source_id": "tamashii_topics_items",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "tamashii-news-2026-07-28-15972",
@@ -7527,11 +8123,14 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-15972",
       "confidence": "official",
       "notes": null,
       "source_id": "tamashii_topics_items",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-08-03",
+      "preorder_basis": "schedule",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "tamashii-news-2026-07-28-sMTU5Njk",
@@ -7606,7 +8205,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-07-27T11:00:00+09:00",
+      "preorder_date": "2026-07-27",
+      "preorder_basis": "title"
     },
     {
       "id": "tamashii-news-2026-07-27-16006",
@@ -7627,11 +8229,15 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16006",
       "confidence": "official",
       "notes": null,
       "source_id": "tamashii_topics_items",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-07-27T21:00:00+09:00",
+      "preorder_date": "2026-07-27",
+      "preorder_basis": "title",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "bandai-news-2026-07-24-wMDI1NDYzMS8",
@@ -7652,11 +8258,14 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "pbandai-wb-1000254631",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "bandai_hobby_news"
+      "source_id": "bandai_hobby_news",
+      "preorder_date": "2026-07-24",
+      "preorder_basis": "title",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "gundam-official-fhslpqsqcbzkvcyqwuqxw93b",
@@ -7681,7 +8290,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-07-24T12:00:00+09:00",
+      "preorder_date": "2026-07-24",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-qybt43kjdvxjgecpgkniyvw0",
@@ -7706,7 +8318,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-07-24T12:00:00+09:00",
+      "preorder_date": "2026-07-24",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-stnze2rq5muam8jsmy48sex8",
@@ -7731,7 +8346,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-07-24T11:00:00+09:00",
+      "preorder_date": "2026-07-24",
+      "preorder_basis": "title"
     },
     {
       "id": "tamashii-news-2026-07-24-ZXJpZXMv",
@@ -7881,7 +8499,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-07-17T11:00:00+09:00",
+      "preorder_date": "2026-07-17",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-il8s7yrbee52rjg1w0j7a6w2",
@@ -8031,7 +8652,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-07-17T16:00:00+09:00",
+      "preorder_date": "2026-07-17",
+      "preorder_basis": "title"
     },
     {
       "id": "tamashii-news-2026-07-16-15994",
@@ -8052,11 +8676,16 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-15994",
       "confidence": "official",
       "notes": null,
       "source_id": "tamashii_topics_items",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-07-17T16:00:00+09:00",
+      "preorder_date": "2026-07-17",
+      "preorder_basis": "title",
+      "preorder_end_date": "2026-08-30",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "gundam-official-m0y15wc04yv04gx0x9w6szh3",
@@ -8106,7 +8735,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-07-15T11:00:00+09:00",
+      "preorder_date": "2026-07-15",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-k66x90pt9ip2urlesn40cwaa",
@@ -8131,7 +8763,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-07-14T11:00:00+09:00",
+      "preorder_date": "2026-07-14",
+      "preorder_basis": "title"
     },
     {
       "id": "bandai-news-2026-07-10-wMDI1NDQyNC8",
@@ -8152,11 +8787,14 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "pbandai-wb-1000254424",
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
-      "source_id": "bandai_hobby_news"
+      "source_id": "bandai_hobby_news",
+      "preorder_date": "2026-07-10",
+      "preorder_basis": "title",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "gundam-official-dubk6ftj0frxciq7dize3pip",
@@ -8206,7 +8844,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-07-10",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-werbrqdqjwby9ebtmo98rbk0",
@@ -8256,7 +8896,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-07-10T11:00:00+09:00",
+      "preorder_date": "2026-07-10",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-yqn5m7mhkl7bi1e65o8usyqs",
@@ -8306,7 +8949,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-07-09T11:00:00+09:00",
+      "preorder_date": "2026-07-09",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-vx27rz7it252obamar64y029",
@@ -8331,7 +8977,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-07-07T11:00:00+09:00",
+      "preorder_date": "2026-07-07",
+      "preorder_basis": "title"
     },
     {
       "id": "bandai-news-2026-07-06-vMDFfNzMwNy8",
@@ -8381,7 +9030,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-07-06T11:00:00+09:00",
+      "preorder_date": "2026-07-06",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-cu1mxuqpon12o6rdehwwh4rj",
@@ -8406,7 +9058,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-07-03T11:00:00+09:00",
+      "preorder_date": "2026-07-03",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-oshr5nv3dm9e9v0enmhmfbtx",
@@ -8456,7 +9111,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-07-02",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-izc7qzc1jxkhzhab6um25axj",
@@ -8531,7 +9188,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-07-01T11:00:00+09:00",
+      "preorder_date": "2026-07-01",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-n0j93k0iicl5e3u32c2p2f5e",
@@ -8556,7 +9216,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-06-30",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-uknc1hkm0qmtx3ias4kzl44h",
@@ -8581,7 +9243,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-07-01",
+      "preorder_basis": "title"
     },
     {
       "id": "tamashii-news-2026-06-30-sMTU5Mjk",
@@ -8631,7 +9295,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-06-29T11:00:00+09:00",
+      "preorder_date": "2026-06-29",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-ow5osgi08vsroc42e36wtngl",
@@ -8656,7 +9323,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-06-29T12:00:00+09:00",
+      "preorder_date": "2026-06-29",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-c6n7d8cee4uhdds6dfic42go",
@@ -8756,7 +9426,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア / ゲーム・アプリ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-06-25",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-tw21f7q90w5m3re1o3sg61jw",
@@ -8806,7 +9478,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-06-25T11:00:00+09:00",
+      "preorder_date": "2026-06-25",
+      "preorder_basis": "title"
     },
     {
       "id": "tamashii-news-2026-06-25-15939",
@@ -8827,11 +9502,12 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-15939",
       "confidence": "official",
       "notes": null,
       "source_id": "tamashii_topics_items",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "gundam-official-ualrdx21zf8to1uvjujohfey",
@@ -8856,7 +9532,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-06-23T11:00:00+09:00",
+      "preorder_date": "2026-06-23",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-ueqdngvgo6aksgz9nec68y10",
@@ -8881,7 +9560,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-06-24T16:00:00+09:00",
+      "preorder_date": "2026-06-24",
+      "preorder_basis": "title"
     },
     {
       "id": "tamashii-news-2026-06-23-15938",
@@ -8902,11 +9584,16 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-15938",
       "confidence": "official",
       "notes": null,
       "source_id": "tamashii_topics_items",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-06-24T16:00:00+09:00",
+      "preorder_date": "2026-06-24",
+      "preorder_basis": "title",
+      "preorder_end_date": "2026-06-30",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "beyblade-news-2026-06-22-IuaHRtbA",
@@ -9156,7 +9843,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-06-19T16:00:00+09:00",
+      "preorder_date": "2026-06-19",
+      "preorder_basis": "title"
     },
     {
       "id": "beyblade-news-2026-06-17-3Lmh0bWw",
@@ -9206,7 +9896,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-06-17T11:00:00+09:00",
+      "preorder_date": "2026-06-17",
+      "preorder_basis": "title"
     },
     {
       "id": "beyblade-news-2026-06-15-MuaHRtbA",
@@ -9306,7 +9999,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-06-15T11:00:00+09:00",
+      "preorder_date": "2026-06-15",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-pmbbos26bjxpn46yov6bpy0y",
@@ -9331,7 +10027,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-06-12T11:00:00+09:00",
+      "preorder_date": "2026-06-12",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-bavvj78i7jckejme9hm0yjx8",
@@ -9356,7 +10055,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-06-11T12:00:00+09:00",
+      "preorder_date": "2026-06-11",
+      "preorder_basis": "title"
     },
     {
       "id": "bandai-news-2026-06-09-vMDFfNzI5OC8",
@@ -9406,7 +10108,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-06-09T11:00:00+09:00",
+      "preorder_date": "2026-06-09",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-yaodd9vzpm4uz6y1at7tkxsa",
@@ -9481,7 +10186,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-06-05T11:00:00+09:00",
+      "preorder_date": "2026-06-05",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-s4r9y4czfw4kfk6zt990xiau",
@@ -9531,7 +10239,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-06-04T11:00:00+09:00",
+      "preorder_date": "2026-06-04",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-cbe3yqvf22ohr8gxod2j9h8r",
@@ -9556,7 +10267,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-06-04",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-pwb9j8sl72c5arboek3kbzc0",
@@ -9581,7 +10294,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-06-04",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-v284k430jh3qto2rr5abqag7",
@@ -9606,7 +10321,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-06-04",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-q4rmoumdsstztc9zi7mpd09y",
@@ -9631,7 +10348,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-06-02T11:00:00+09:00",
+      "preorder_date": "2026-06-02",
+      "preorder_basis": "title"
     },
     {
       "id": "bandai-news-2026-06-01-vMDFfNzI5MS8",
@@ -9681,7 +10401,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-06-01T11:00:00+09:00",
+      "preorder_date": "2026-06-01",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-c7gak1eumola8ftzwi467dnv",
@@ -9781,7 +10504,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-06-01",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-m8k6kd949nras9l9n9pvyffg",
@@ -9806,7 +10531,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-05-29T11:00:00+09:00",
+      "preorder_date": "2026-05-29",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-w96vj1v2tsd59syimywnzh2g",
@@ -9831,7 +10559,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-05-29T12:00:00+09:00",
+      "preorder_date": "2026-05-29",
+      "preorder_basis": "title"
     },
     {
       "id": "tamashii-news-2026-05-29-sMTU4NDg",
@@ -9906,7 +10637,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-05-28T12:00:00+09:00",
+      "preorder_date": "2026-05-28",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-r64hl53w6opf6pb4kw2i3hm1",
@@ -9931,7 +10665,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-05-28T11:00:00+09:00",
+      "preorder_date": "2026-05-28",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-x2tsw4zqbj90xby1dg2rl4yd",
@@ -9981,7 +10718,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-05-26T11:00:00+09:00",
+      "preorder_date": "2026-05-26",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-ou5t9v544wkoua5nxdlt355c",
@@ -10006,7 +10746,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: 食玩・お菓子",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-05-25",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-y3epyw9n944u32xm78ox5d7k",
@@ -10031,7 +10773,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: 食玩・お菓子",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-05-25",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-d5i9y5oyy8a7hpcoak0birhw",
@@ -10131,7 +10875,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-05-22T16:00:00+09:00",
+      "preorder_date": "2026-05-22",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-zxspe5vszpsrw702bgggcg9u",
@@ -10177,11 +10924,15 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-15872",
       "confidence": "official",
       "notes": null,
       "source_id": "tamashii_topics_items",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-05-22T16:00:00+09:00",
+      "preorder_date": "2026-05-22",
+      "preorder_basis": "title",
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "gundam-official-jv7fttuw613y8km22v2zl5jv",
@@ -10281,7 +11032,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-05-18T11:00:00+09:00",
+      "preorder_date": "2026-05-18",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-m2yvksh6t21mcyigks3xa1h7",
@@ -10331,7 +11085,10 @@
       "confidence": "official",
       "notes": null,
       "source_id": "tamashii_topics_items",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-05-15T16:00:00+09:00",
+      "preorder_date": "2026-05-15",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-jtnt76vr5rucw05bdzwkesgd",
@@ -10381,7 +11138,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-05-15T16:00:00+09:00",
+      "preorder_date": "2026-05-15",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-uh47f61numymxp3ikjtz2ov4",
@@ -10406,7 +11166,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-05-14T11:00:00+09:00",
+      "preorder_date": "2026-05-14",
+      "preorder_basis": "title"
     },
     {
       "id": "tamashii-news-2026-05-14-15861",
@@ -10427,11 +11190,12 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-15861",
       "confidence": "official",
       "notes": null,
       "source_id": "tamashii_topics_items",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "linked_kit_basis": "source_page"
     },
     {
       "id": "gundam-official-noij4pn9ibr9s55kcsl6tfzz",
@@ -10456,7 +11220,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-05-13T11:00:00+09:00",
+      "preorder_date": "2026-05-13",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-c0rjki6lgmikb44dcvsolay3",
@@ -10481,7 +11248,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-05-12T12:00:00+09:00",
+      "preorder_date": "2026-05-12",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-pl81sbgizf1k4p05lpg99b4k",
@@ -10506,7 +11276,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-05-12T12:00:00+09:00",
+      "preorder_date": "2026-05-12",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-sy6jt904zrjiehvsknzelsgw",
@@ -10531,7 +11304,10 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_at": "2026-05-12T11:00:00+09:00",
+      "preorder_date": "2026-05-12",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-ceb9xjgg1aemsns7v0y56agm",
@@ -10556,7 +11332,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-05-08",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-ga0m50qkyvizvpxrgcwduoew",
@@ -10581,7 +11359,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: トイ・グッズ / ガンプラ",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-05-08",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-l7h4cnqgkk8r43jjhzq13ffc",
@@ -10606,7 +11386,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-05-08",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-me289m6uvdnq2l1bqrn3sm7r",
@@ -10631,7 +11413,9 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
-      "reviewed_at": null
+      "reviewed_at": null,
+      "preorder_date": "2026-05-07",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-p8vwfbp62ds1i7s3iqor1c1b",

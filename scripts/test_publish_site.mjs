@@ -65,6 +65,7 @@ const f = (size, sha = `s${size}`) => ({ size, sha });
 }
 {
   assert.ok(isSideDataFile("announcements.json"));
+  assert.ok(isSideDataFile("announcement-details.json"));
   assert.ok(isSideDataFile("atlas/mezastar-jp.json"));
   assert.ok(isSideDataFile("split/kit-aliases.json"));
   assert.ok(!isSideDataFile("split/kits-gundam.json"), "kit files are covered by content_hash");

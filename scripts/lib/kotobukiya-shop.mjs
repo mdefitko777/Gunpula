@@ -74,6 +74,20 @@ export function parseKotobukiyaShopListings(html, pageUrl = KOTOBUKIYA_AC_SHOP_U
   return listings;
 }
 
+// The rows of the goods page's 商品仕様 box shown as the product's spec (the
+// announcement's 「상품 소개」); カテゴリ, 価格帯 and 発売月 are search filters.
+const SPEC_LABELS = ["作品名", "メーカー", "仕様", "スケール", "原型/設計", "サイズ", "仕様/素材", "版権表記"];
+
+// The 商品説明 box: <br> breaks lines, an empty line between them starts a paragraph.
+function goodsDescription(html) {
+  const box = /<div class="goods_explain[^"]*"[^>]*>([\s\S]*?)<\/div>/.exec(html)?.[1] || "";
+  const body = box.replace(/<h3[^>]*>[\s\S]*?<\/h3>/, "");
+  return body
+    .split(/(?:<br\s*\/?>\s*){2,}|<\/p>/i)
+    .map((paragraph) => paragraph.split(/<br\s*\/?>/i).map((line) => stripTags(line)).filter(Boolean).join("\n"))
+    .filter(Boolean);
+}
+
 export function parseKotobukiyaShopDetail(html, detailUrl) {
   const category = stripTags(/<dl class="goods_category_">[\s\S]*?<dd[^>]*>([\s\S]*?)<\/dd>/.exec(html)?.[1]);
   const specification = definitionValue(html, "仕様");
@@ -93,7 +107,13 @@ export function parseKotobukiyaShopDetail(html, detailUrl) {
     series: definitionValue(html, "ブランド") || "Kotobukiya Armored Core",
     scale: /^NON/i.test(scaleText) ? "non-scale" : scaleText || "various",
     release_date: parseReleaseDate(releaseMarkup),
+    release_text: stripTags(releaseMarkup) || null,
     price_jpy: parsePrice(priceMarkup),
+    price_text: stripTags(/<p class="price">([\s\S]*?)<\/p>/.exec(html)?.[1]).replace(/\s+/g, "") || null,
+    description: goodsDescription(html),
+    spec_rows: SPEC_LABELS
+      .map((label) => ({ label, value: definitionValue(html, label) }))
+      .filter((row) => row.value),
     gallery,
     is_plastic_model: /プラモデル/.test(`${category} ${specification}`) && !/塗料|チャーム|完成品/.test(`${category} ${specification}`),
   };

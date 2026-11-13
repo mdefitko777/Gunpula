@@ -10,7 +10,8 @@
 // to three times a month, once per stage. `asset_base_url` is empty: pictures
 // resolve against the site itself.
 import { franchiseForAnnouncement, shiftDay } from "./bandai-announcements.mjs";
-import { announcementRecord, namesRevealedProduct, normalizeProductKey } from "./official-announcements.mjs";
+import { SOURCE_PAGE_LINK, announcementRecord, namesRevealedProduct, normalizeProductKey } from "./official-announcements.mjs";
+import { scheduleWindows } from "./preorder-times.mjs";
 import { admitItems } from "./source-intake.mjs";
 
 export const TAMASHII_SCHEDULE_SOURCE_ID = "tamashii_schedule";
@@ -109,6 +110,20 @@ function scheduleRecord(item, { kit, franchise, today, announcedAt }) {
       notes: scheduleNotes(item),
     }),
     linked_kit_id: kit?.kit_id || null,
+    // Matched by item id, like linkSourcePageKits: it names the product and
+    // does not keep the record from the dedupe.
+    ...(kit ? { linked_kit_basis: SOURCE_PAGE_LINK } : {}),
+    // Days only (lib/preorder-times.mjs): the window's clock is in the topic post's title.
+    ...windowFields(scheduleWindows([item]).get(String(item.tamashiiWebId))),
+  };
+}
+
+function windowFields(window) {
+  if (!window) return {};
+  return {
+    preorder_date: window.date,
+    ...(window.end_date ? { preorder_end_date: window.end_date } : {}),
+    preorder_basis: window.basis,
   };
 }
 
@@ -176,20 +191,34 @@ export function dropScheduleTwins(records) {
     const near = others.filter((other) =>
       other.franchise === record.franchise && String(other.announced_at || "") >= from && String(other.announced_at || "") <= to);
     // The topic post of the item page first: it is the record that stays when
-    // a news site repeats it, and so the one to carry the notes.
-    const twin = near.find((other) => sameItemUrl(other.source_url, record.source_url))
+    // a news site repeats it, and so the one to carry the notes. 魂ウェブ's own
+    // before the BANDAI SPIRITS card linking the same page (2026-11-14: the
+    // card took the キュリオス notes and catalog link, and with the link the
+    // place of 魂ウェブ's post).
+    const samePage = near.filter((other) => sameItemUrl(other.source_url, record.source_url));
+    const twin = samePage.find((other) => other.source_name === record.source_name) || samePage[0]
       || near.find((other) => namesRevealedProduct(other, key));
     if (!twin) return true;
     dropped.push({ id: record.id, kept: twin.id });
     const gain = gains.get(twin.id) || {};
-    gains.set(twin.id, { notes: gain.notes || record.notes, linked_kit_id: gain.linked_kit_id || record.linked_kit_id });
+    gains.set(twin.id, {
+      notes: gain.notes || record.notes,
+      linked_kit_id: gain.linked_kit_id || record.linked_kit_id,
+      linked_kit_basis: gain.linked_kit_basis || record.linked_kit_basis,
+    });
     return false;
   });
   return {
     records: kept.map((record) => {
       const gain = gains.get(record.id);
       if (!gain) return record;
-      return { ...record, notes: record.notes || gain.notes, linked_kit_id: record.linked_kit_id || gain.linked_kit_id };
+      if (record.linked_kit_id || !gain.linked_kit_id) return { ...record, notes: record.notes || gain.notes };
+      return {
+        ...record,
+        notes: record.notes || gain.notes,
+        linked_kit_id: gain.linked_kit_id,
+        ...(gain.linked_kit_basis ? { linked_kit_basis: gain.linked_kit_basis } : {}),
+      };
     }),
     dropped,
   };

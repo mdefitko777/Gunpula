@@ -200,4 +200,26 @@ assert.deepEqual(dropScheduleTwins([byId.get("tamashii-schedule-16259"), { ...dy
 const deduped = dedupeAnnouncements(settled.records, ["tamashii_news", TAMASHII_REVEALS_SOURCE_ID, TAMASHII_SCHEDULE_SOURCE_ID, "gundam_official_news"]);
 assert.deepEqual(deduped.dropped, []);
 
+// 魂ウェブ's own post gets the row before the BANDAI SPIRITS card of the same
+// page, and the catalog link it gains (matched by item id) does not put it
+// ahead of anyone in the dedupe (2026-11-14: the card took the link and with
+// it the place of the キュリオス post).
+const card = topicPost({
+  id: "bandai-news-2026-11-12-lbS8xNjI1OS8",
+  sourceId: "bandai_spirits_topics",
+  sourceName: "BANDAI SPIRITS",
+  title: dynamesPost.names.ja,
+  date: "2026-11-12",
+  url: "https://tamashiiweb.com/item/16259/",
+});
+const linkedRow = byId.get("tamashii-schedule-16259");
+assert.equal(linkedRow.linked_kit_basis, "source_page");
+const sameSite = dropScheduleTwins([card, dynamesPost, linkedRow]);
+assert.deepEqual(sameSite.dropped, [{ id: linkedRow.id, kept: dynamesPost.id }]);
+assert.equal(sameSite.records.find((record) => record.id === dynamesPost.id).linked_kit_basis, "source_page");
+assert.deepEqual(
+  dedupeAnnouncements(sameSite.records, ["tamashii_news", "bandai_spirits_topics"]).dropped,
+  [{ id: card.id, kept: dynamesPost.id }],
+);
+
 console.log("tamashii schedule: ok");

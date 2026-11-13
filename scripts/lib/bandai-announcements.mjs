@@ -1,3 +1,5 @@
+import { applyPreorder, preorderCandidate, preorderFields, withoutPreorder } from "./preorder-times.mjs";
+
 export const BANDAI_HOBBY_NEWS_URL =
   "https://www.bandaispirits.co.jp/products/topics/?category=1";
 // BANDAI SPIRITS' own channel.
@@ -373,7 +375,9 @@ export function thumbnailStaysRemote(record) {
   return Boolean(record?.unofficial) || record?.confidence === "unofficial";
 }
 
-export function mergeAnnouncementRecords(previous = [], incoming = []) {
+// `preorder`: applyPreorder's options ({ now, reparse, log }) for the preorder
+// times a source reports (lib/preorder-times.mjs).
+export function mergeAnnouncementRecords(previous = [], incoming = [], preorder = {}) {
   const incomingIds = new Set(incoming.map((item) => item.id));
   // Stored records outlive the source listing on purpose — a post scrolls off
   // the first page long before it stops being real news. But that also meant a
@@ -387,9 +391,12 @@ export function mergeAnnouncementRecords(previous = [], incoming = []) {
   );
   for (const item of incoming) {
     const old = records.get(item.id) || {};
-    records.set(item.id, {
-      ...old,
-      ...item,
+    // Preorder times only move forward: the stored ones, then what the source
+    // says now, by applyPreorder's rules (a listing that dropped the time keeps it).
+    records.set(item.id, applyPreorder({
+      ...withoutPreorder(old),
+      ...withoutPreorder(item),
+      ...preorderFields(old),
       // Listings without a post date are dated by when the bot first saw them
       // (announced_at_basis "first_seen"); a refetch must not move that date.
       announced_at: item.announced_at_basis === "first_seen" && old.announced_at ? old.announced_at : item.announced_at,
@@ -410,7 +417,7 @@ export function mergeAnnouncementRecords(previous = [], incoming = []) {
       status: old.status || item.status,
       linked_kit_id: old.linked_kit_id || item.linked_kit_id,
       reviewed_at: old.reviewed_at || null,
-    });
+    }, preorderCandidate(item), preorder));
   }
   return [...records.values()].sort((a, b) =>
     String(b.announced_at || "").localeCompare(String(a.announced_at || ""))

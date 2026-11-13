@@ -30,6 +30,7 @@ import {
   dedupeAnnouncements,
   kotobukiyaAnnouncement,
   linkRevealKits,
+  linkSourcePageKits,
   parseBeybladeLineup,
   parseFriendaTopics,
   parseGundamBaseNews,
@@ -88,8 +89,30 @@ import {
   unofficialSource,
 } from "./lib/unofficial-feeds.mjs";
 import { loadRobots, robotsAllows } from "./lib/robots.mjs";
+import {
+  BEYBLADE_ORDER_TITLE,
+  applyPreorder,
+  beybladeOrderWindow,
+  scheduleWindows,
+  twinPreorders,
+  withScheduleWindows,
+  withTitlePreorders,
+} from "./lib/preorder-times.mjs";
+import {
+  DETAILS_SCHEMA,
+  EXTRACTOR_VERSION,
+  kotobukiyaDetailsFromHtml,
+  mergeDetails,
+  parseTamashiiItemDetails,
+  planDetailFetches,
+} from "./lib/announcement-details.mjs";
 
 const OUTPUT_PATH = "data/announcements.json";
+// The product text behind announcements (lib/announcement-details.mjs), apart
+// from the records the app reads on every refresh.
+const DETAILS_PATH = "data/announcement-details.json";
+// BEYBLADE X order notices whose body is read for the order window, at most per run.
+const BEYBLADE_BODIES_PER_RUN = 2;
 // Posts CoroCoro News already gave us, so each run reads only new ones.
 const COROCORO_STATE_PATH = "data/announcements-corocoro.json";
 // Reveals from the printed magazine that CoroCoro News has not written up (hand-entered).
@@ -118,6 +141,9 @@ const REPLAY = process.env.ANNOUNCEMENT_REPLAY === "1";
 // Optional: comma-separated source ids to run (trying one source without
 // fetching all the others); the others keep their stored records.
 const ONLY_SOURCES = new Set((process.env.ANNOUNCEMENT_SOURCES || "").split(",").map((id) => id.trim()).filter(Boolean));
+// Optional, once after a parser fix: preorder times that have passed may be
+// read again (they are frozen otherwise, lib/preorder-times.mjs).
+const PREORDER_REPARSE = process.env.PREORDER_REPARSE === "1";
 
 const lastRequestAt = new Map();
 // Several sources share a host (three on tamashiiweb.com); one that answered
@@ -339,6 +365,11 @@ async function runTamashiiReveals() {
   return records;
 }
 
+// 魂ウェブ item id → preorder window from the schedule (lib/preorder-times.mjs).
+const preorderWindows = new Map();
+// Record id → goods-page HTML a source already read this run (コトブキヤ), for its product text.
+const detailPages = new Map();
+
 // The month in progress and the next: two requests a run (lib/tamashii-schedule.mjs).
 async function runTamashiiSchedule() {
   const robots = await hostRobots(new URL(TAMASHII_SCHEDULE_PAGE_URL).host);
@@ -353,6 +384,8 @@ async function runTamashiiSchedule() {
     console.log(`${TAMASHII_SCHEDULE_SOURCE_ID}: ${month}: ${parsed.rows} rows, ${parsed.items.length} items`);
     for (const item of parsed.items) if (!items.has(item.tamashiiWebId)) items.set(item.tamashiiWebId, item);
   }
+  // Every listed item's window, also for the posts of items it files no record for.
+  for (const [itemId, window] of scheduleWindows([...items.values()])) preorderWindows.set(itemId, window);
   // 魂ウェブ products are in the catalog for these worlds ("tamashii-16259", "tamashii-fate-13377").
   const kits = await readCatalogKits(["gundam", "fate", "madoka"]);
   const { records, state } = tamashiiScheduleRecords([...items.values()], {
@@ -512,6 +545,94 @@ async function readCatalogKits(franchises) {
   return byFranchise;
 }
 
+// One page after the lists: robots.txt first, and a host that stopped the run
+// (403/429/503 or a bot check) is skipped. Returns the HTML, or
+// { status } / { stopped } when there is none.
+async function readPage(url) {
+  try {
+    hostStops.check(url);
+  } catch {
+    return { stopped: true };
+  }
+  const robots = await hostRobots(new URL(url).host);
+  if (!robotsAllows(robots, url)) return { status: "robots" };
+  try {
+    return { html: await fetchText(url) };
+  } catch (error) {
+    return [403, 429, 503].includes(error.status) ? { stopped: true } : { status: error.status || error.message };
+  }
+}
+
+// BEYBLADE X 受注生産 / 抽選販売 notices: the order window is only in the body
+// (lib/preorder-times.mjs). Each is read once; `bodiesRead`: id → day read.
+async function readBeybladeBodies(records, bodiesRead) {
+  const due = records
+    .map((record, index) => ({ record, index }))
+    .filter(({ record }) => record.source_id === "beyblade_x_news" && BEYBLADE_ORDER_TITLE.test(record.names?.ja || "")
+      && !record.preorder_at && !bodiesRead[record.id])
+    .slice(0, BEYBLADE_BODIES_PER_RUN);
+  for (const { record, index } of due) {
+    const page = await readPage(record.source_url);
+    if (page.stopped) break;
+    if (!page.html) {
+      console.warn(`${record.id}: body not read (${page.status})`);
+      continue;
+    }
+    bodiesRead[record.id] = today;
+    const window = beybladeOrderWindow(page.html);
+    console.log(`${record.id}: order window ${window ? `${window.at} - ${window.end_at || "?"}` : "not in the body"}`);
+    records[index] = applyPreorder(record, window, preorderOptions);
+  }
+}
+
+// The product text behind the announcements (lib/announcement-details.mjs):
+// at most a few pages per host and run; data/announcement-details.json.
+async function readDetails(records, previousDetails) {
+  const plan = planDetailFetches(records, previousDetails, today, { preloaded: new Set(detailPages.keys()) });
+  const results = new Map();
+  let ok = 0;
+  for (const { id, url, source, reason } of plan) {
+    const page = detailPages.has(id) ? { html: detailPages.get(id) } : await readPage(url);
+    if (page.stopped) continue;
+    if (!page.html) {
+      results.set(id, { url, error: page.status === 404 ? "gone" : `HTTP ${page.status}`, gone: page.status === 404 });
+      continue;
+    }
+    const parsed = source === "tamashii" ? parseTamashiiItemDetails(page.html, url) : kotobukiyaDetailsFromHtml(page.html, url);
+    if (parsed.challenge) {
+      hostStops.stop(url, "a page that is not the product page");
+      continue;
+    }
+    results.set(id, parsed.entry ? { url, entry: parsed.entry } : { url, error: parsed.error });
+    if (parsed.entry) ok += 1;
+    else console.warn(`${id}: ${parsed.error} (${reason})`);
+  }
+  console.log(`announcement details: planned ${plan.length}, read ${results.size}, ok ${ok}`);
+  return mergeDetails(previousDetails, results, new Set(records.map((record) => record.id)), today);
+}
+
+async function readPostBodiesAndDetails(records) {
+  const previousDetails = await readJson(DETAILS_PATH, {});
+  const bodiesRead = { ...(previousDetails.bodies_read || {}) };
+  await readBeybladeBodies(records, bodiesRead);
+  const details = await readDetails(records, previousDetails.details || {});
+  const liveIds = new Set(records.map((record) => record.id));
+  const bodies = Object.fromEntries(Object.entries(bodiesRead).filter(([id]) => liveIds.has(id)).sort(([a], [b]) => a.localeCompare(b)));
+  const unchanged = JSON.stringify(details) === JSON.stringify(previousDetails.details || {})
+    && JSON.stringify(bodies) === JSON.stringify(previousDetails.bodies_read || {})
+    && previousDetails.extractor_version === EXTRACTOR_VERSION;
+  if (unchanged) return;
+  await writeFile(DETAILS_PATH, `${JSON.stringify({
+    schema: DETAILS_SCHEMA,
+    updated_at: new Date().toISOString(),
+    extractor_version: EXTRACTOR_VERSION,
+    details,
+    // Order notices whose body was read (id → day): each is read once.
+    bodies_read: bodies,
+  }, null, 2)}\n`);
+  console.log(`Wrote ${Object.keys(details).length} announcement details to ${DETAILS_PATH}`);
+}
+
 const previous = await readPrevious();
 const previousById = new Map(previous.announcements.map((record) => [record.id, record]));
 const now = new Date();
@@ -666,6 +787,8 @@ const SOURCES = [
             continue;
           }
           const detailHtml = await fetchText(item.url);
+          // Read once: the product text comes from the same page.
+          detailPages.set(`kotobukiya-${item.code}`, detailHtml);
           const record = kotobukiyaAnnouncement({
             title,
             goods: item,
@@ -752,17 +875,22 @@ for (const record of incoming) {
   incomingById.set(record.id, first ? withLiveFields(first, record) : record);
 }
 
+// Preorder times only move forward; what moved and what disagrees is logged.
+const preorderOptions = { now, reparse: PREORDER_REPARSE, log: (line) => console.log(line) };
 // Streams follow the clock and leave two weeks after they ran.
 const live = settleLiveRecords(
-  mergeAnnouncementRecords(previous.announcements, [...incomingById.values()])
+  mergeAnnouncementRecords(previous.announcements, [...incomingById.values()], preorderOptions)
     .filter((record) => !goneStreamIds.has(record.id) || record.reviewed_at),
   now,
 );
 if (goneStreamIds.size || live.dropped.length) console.log(`Dropped ${goneStreamIds.size} cancelled and ${live.dropped.length} past streams.`);
+// When each preorder opens: the title's 「11/13 18時より」 (stored history too),
+// then the 魂ウェブ schedule's window for the posts of its items.
+const timed = withScheduleWindows(withTitlePreorders(live.records, preorderOptions), preorderWindows, preorderOptions);
 // The merge keeps a stored status; listings that report the stage themselves
 // (the schedule once a preorder opens, fig速's 【予約開始】) move their record on.
 const STAGE_SOURCE_IDS = new Set([TAMASHII_SCHEDULE_SOURCE_ID, FIGSOKU_SOURCE_ID]);
-const staged = advanceStages(live.records, [...incomingById.values()].filter((record) => STAGE_SOURCE_IDS.has(record.source_id)));
+const staged = advanceStages(timed, [...incomingById.values()].filter((record) => STAGE_SOURCE_IDS.has(record.source_id)));
 for (const { id, from, to } of staged.advanced) console.log(`${id}: ${from} -> ${to}`);
 // Magazine and fan-blog records an official source or the catalog already
 // covers go first; the stored copy is dropped too, not only today's.
@@ -789,8 +917,20 @@ const schedule = dropScheduleTwins(stages.records);
 if (schedule.dropped.length) console.log(`Dropped ${schedule.dropped.length} schedule records other official records already tell.`);
 // A fan-blog post and a magazine scoop of one bey are twins, the blog first
 // (keepsApart): it has the product picture.
-const { records: announcements, dropped } = dedupeAnnouncements(schedule.records, DEDUPE_PRIORITY, { separate: keepsApart() });
+const deduped = dedupeAnnouncements(schedule.records, DEDUPE_PRIORITY, { separate: keepsApart() });
+const { dropped } = deduped;
 if (dropped.length) console.log(`Dropped ${dropped.length} cross-source duplicates.`);
+// A record that stays for a dropped twin takes the twin's preorder time when
+// it has none (the reveal or the topic post of キュリオス, whichever stays).
+const twinPool = new Map([...staged.records, ...stages.records].map((record) => [record.id, record]));
+const twinTimes = twinPreorders(twinPool, [...magazine.dropped, ...media.dropped, ...schedule.dropped, ...dropped], preorderOptions);
+// Then each record linked to the catalog product whose own page it is.
+const sourceLinks = linkSourcePageKits(
+  deduped.records.map((record) => applyPreorder(record, twinTimes.get(record.id), { ...preorderOptions, fillOnly: true })),
+  [...(await readCatalogKits(["gundam", "pokemon", "fate", "beyblade", "armored_core", "madoka"])).values()].flat(),
+);
+if (sourceLinks.linked.length) console.log(`Linked ${sourceLinks.linked.length} records to the catalog product of their page.`);
+const announcements = sourceLinks.records;
 // Where each published record dropped above went, so a follow in the app moves with it.
 const replacements = carryReplaced({
   replaced: previous.replaced,
@@ -804,6 +944,14 @@ for (const [id, kept] of Object.entries(replacements.replaced)) {
   if (!previous.replaced?.[id]) console.log(`${id}: replaced by ${kept}`);
 }
 await cacheAnnouncementImages(announcements);
+// Pages read after the lists: BEYBLADE X order windows and the product text.
+// A failure here leaves both as they were and never stops the write below.
+try {
+  await readPostBodiesAndDetails(announcements);
+} catch (error) {
+  errors.push({ source_id: "announcement_details", message: error.message });
+  console.warn(`announcement_details: ${error.message}`);
+}
 await writeFile(OUTPUT_PATH, `${JSON.stringify({
   updated_at: new Date().toISOString(),
   sources: SOURCES.map((source) => ({ source_id: source.id, name: source.name, url: source.url })),

@@ -33,6 +33,7 @@ import {
   shiftDay,
   stripTags,
 } from "./bandai-announcements.mjs";
+import { applyPreorder, japanDayOf, japanInstant, nearestYearDay, preorderCandidate } from "./preorder-times.mjs";
 
 export const GUNDAM_OFFICIAL_NEWS_URL = "https://gundam-official.com/news";
 export const GUNDAM_BASE_NEWS_URL = "https://www.gundam-base.net/news";
@@ -225,7 +226,10 @@ export function parseGundamOfficialNews(html) {
   const records = [];
   let oldest = null;
   for (const news of response.data || []) {
-    const date = String(news.displayDatetime || "").slice(0, 10);
+    // displayDatetime is UTC ("2026-11-12T01:45:00.000Z" = 10:45 in Japan); the
+    // day is Japan's, which 「本日11時より」 in the title refers to.
+    const posted = Date.parse(news.displayDatetime || "");
+    const date = Number.isFinite(posted) ? japanDayOf(new Date(posted)) : String(news.displayDatetime || "").slice(0, 10);
     if (date && (!oldest || date < oldest)) oldest = date;
     const categories = (news.categories || []).map((category) => category.name);
     const title = decodeHtml(news.title);
@@ -314,12 +318,13 @@ export function parsePremiumBandaiNewItems(html, {
   for (const block of String(html || "").split("<!-- ITEM BOX -->").slice(1)) {
     const itemId = /\/item\/item-(\d+)\//.exec(block)?.[1];
     const listed = stripTags(/<p class="itemslist_name">[\s\S]*?<span>([\s\S]*?)<\/span>/.exec(block)?.[1]);
-    const start = /開始：\s*(\d{1,2})\/(\d{1,2})/.exec(block);
+    // "開始：11/13 12時": the hour was dropped until 2026-11-14; every one of the
+    // 440 listings that day had it, none had minutes.
+    const start = /開始：\s*(\d{1,2})\/(\d{1,2})(?:\s*(\d{1,2})時(?:(\d{1,2})分)?)?/.exec(block);
     if (!itemId || !listed || !start) continue;
-    const month = Number(start[1]);
     // The page shows no year; listings are at most a few weeks old.
-    const year = month > now.getMonth() + 2 ? now.getFullYear() - 1 : now.getFullYear();
-    const date = `${year}-${String(month).padStart(2, "0")}-${start[2].padStart(2, "0")}`;
+    const date = nearestYearDay(Number(start[1]), Number(start[2]), japanDayOf(now));
+    if (!date) continue;
     const fullTitle = fullTitles.get(itemId);
     const title = fullTitle || listed.replace(/\.\.\.$/, "…");
     if (PB_NOT_COLLECTIBLE.test(title)) continue;
@@ -333,18 +338,28 @@ export function parsePremiumBandaiNewItems(html, {
     seenNames.add(nameKey);
     const badge = /<span class="hassou">[\s\S]*?alt="([^"]*)"/.exec(block)?.[1] || "";
     const image = /<img src="([^"]+)"/.exec(block)?.[1];
-    records.push(announcementRecord({
+    const preorder = /予約|抽選/.test(badge) || /予約|抽選/.test(title);
+    const record = announcementRecord({
       id: `pbandai-${itemId}`,
       sourceId: "premium_bandai_new_items",
       franchise,
       title,
-      status: /予約|抽選/.test(badge) || /予約|抽選/.test(title) ? "preorder_open" : "product_confirmed",
+      status: preorder ? "preorder_open" : "product_confirmed",
       announcedAt: date,
       sourceName: "プレミアムバンダイ",
       sourceUrl: `https://p-bandai.jp/item/item-${itemId}/`,
       thumbnailUrl: absoluteUrl(image, "https://p-bandai.jp/"),
       notes: fullTitle ? null : "Name truncated by the Premium Bandai new-items list.",
-    }));
+    });
+    // 開始 is when the preorder opened only for a 予約 / 抽選 listing; for the
+    // others it is when the item went on sale (pbandai-1000261240 PG ユニコーン, 8時).
+    if (preorder) {
+      const hour = start[3] == null ? null : Number(start[3]);
+      const minute = Number(start[4] || 0);
+      const at = hour != null && hour <= 23 && minute <= 59 ? japanInstant(date, hour, minute) : null;
+      Object.assign(record, { ...(at ? { preorder_at: at } : {}), preorder_date: date, preorder_basis: "store_list" });
+    }
+    records.push(record);
   }
   return records;
 }
@@ -525,9 +540,16 @@ function daysBetween(a, b) {
   return Math.abs((Date.parse(a) - Date.parse(b)) / 86400000);
 }
 
+// A link made by matching the source page (linkSourcePageKits) says which
+// product a post is about, not that someone chose this record, so it does not
+// shield a twin from the dedupe.
+function pinnedRecord(record) {
+  return Boolean(record.reviewed_at || (record.linked_kit_id && record.linked_kit_basis !== SOURCE_PAGE_LINK));
+}
+
 export function dedupeAnnouncements(records, priority = [], { separate = () => false } = {}) {
   const rank = (record) => {
-    if (record.reviewed_at || record.linked_kit_id) return -1;
+    if (pinnedRecord(record)) return -1;
     const byId = priority.indexOf(record.source_id);
     if (byId >= 0) return byId;
     const byName = priority.indexOf(record.source_name);
@@ -564,7 +586,7 @@ export function dedupeAnnouncements(records, priority = [], { separate = () => f
     const keys = productKeys(record.names?.ja).map((key) => `${record.franchise}|${key}`);
     const twin = (url ? byUrl.get(url) || [] : []).find(near(record))
       || keys.flatMap((key) => byKey.get(key) || []).find(near(record));
-    if (twin && !(record.reviewed_at || record.linked_kit_id)) {
+    if (twin && !pinnedRecord(record)) {
       dropped.push({ id: record.id, kept: twin.id });
       if (!twin.thumbnail_url && record.thumbnail_url && !record.unofficial && !pictures.has(twin.id)) {
         pictures.set(twin.id, record.thumbnail_url);
@@ -741,8 +763,9 @@ export function namesRevealedProduct(record, revealKey) {
 /**
  * Moves a reveal forward when an official post about the same product follows
  * it (its preorder opening → preorder_open), so people following the reveal in
- * the app get the stage change. The merge keeps a stored status, so this only
- * ever moves forward. Records reviewed in the CMS are left alone.
+ * the app get the stage change, and the reveal takes the post's preorder time
+ * when it has none. The merge keeps a stored status, so this only ever moves
+ * forward. Records reviewed in the CMS are left alone.
  */
 export function promoteRevealStages(records) {
   const others = records.filter((record) => record.source_id !== TAMASHII_REVEALS_SOURCE_ID && record.confidence === "official");
@@ -752,15 +775,19 @@ export function promoteRevealStages(records) {
     const key = normalizeProductKey(record.names?.ja);
     // The reveal is dated by first sight; allow a week for a missed run.
     const since = new Date(Date.parse(`${record.announced_at}T00:00:00Z`) - 7 * 86400000).toISOString().slice(0, 10);
-    const best = others
+    const tellers = others
       .filter((other) => other.franchise === record.franchise && String(other.announced_at || "") >= since)
-      .filter((other) => namesRevealedProduct(other, key))
+      .filter((other) => namesRevealedProduct(other, key));
+    // A clock first (the topic post's 「18時より」), then a day.
+    const timed = tellers.find((other) => other.preorder_at) || tellers.find((other) => other.preorder_date);
+    const next = timed ? applyPreorder(record, preorderCandidate(timed), { fillOnly: true }) : record;
+    const best = tellers
       .map((other) => other.status)
       .filter((status) => STAGES.indexOf(status) > STAGES.indexOf(record.status))
       .sort((a, b) => STAGES.indexOf(b) - STAGES.indexOf(a))[0];
-    if (!best) return record;
+    if (!best) return next;
     promoted.push({ id: record.id, from: record.status, to: best });
-    return { ...record, status: best };
+    return { ...next, status: best };
   });
   return { records: out, promoted };
 }
@@ -803,4 +830,47 @@ export function linkRevealKits(records, kitsByFranchise = new Map()) {
     });
     return kit ? { ...record, linked_kit_id: kit.kit_id } : record;
   });
+}
+
+// linked_kit_basis of a link made by linkSourcePageKits.
+export const SOURCE_PAGE_LINK = "source_page";
+
+function pageKey(url) {
+  return String(url || "").trim().replace(/^http:/, "https:").replace(/#.*$/, "").replace(/\/$/, "");
+}
+
+/**
+ * Links an announcement to the catalog product whose own page it is: the same
+ * 魂ウェブ item page, Premium Bandai item, コトブキヤショップ goods page (its JAN)
+ * or lineup page in the kit's source_urls, or a 魂ウェブ item id that is the kit's
+ * ("tamashii-16258"). On 2026-11-13 only 6 of 421 records were linked and 65
+ * pointed at a kit's own page; the app fills the gallery, price and its
+ * 「이 예고의 상품」 from the link. No request, no guess by name: unofficial
+ * sites and streams are left alone. `kits`: every catalog kit.
+ */
+export function linkSourcePageKits(records, kits = []) {
+  const byPage = new Map();
+  for (const kit of kits) {
+    for (const url of kit.source_urls || []) {
+      const key = pageKey(url);
+      // A page two kits share (a list, a brand page) names neither.
+      if (key) byPage.set(key, byPage.has(key) && byPage.get(key) !== kit.kit_id ? null : kit.kit_id);
+    }
+  }
+  const byTamashiiItem = new Map();
+  for (const kit of kits) {
+    const itemId = /^tamashii-(?:[a-z_]+-)?(\d+)$/.exec(kit.kit_id || "")?.[1];
+    if (itemId) byTamashiiItem.set(itemId, kit.kit_id);
+  }
+  const linked = [];
+  const out = records.map((record) => {
+    if (record.linked_kit_id || record.unofficial || record.confidence === "unofficial" || record.live_state) return record;
+    const page = pageKey(record.source_url);
+    const itemId = /^https:\/\/tamashiiweb\.com\/item\/(\d+)$/.exec(page)?.[1];
+    const kitId = byPage.get(page) || (itemId && byTamashiiItem.get(itemId)) || null;
+    if (!kitId) return record;
+    linked.push({ id: record.id, kit_id: kitId });
+    return { ...record, linked_kit_id: kitId, linked_kit_basis: SOURCE_PAGE_LINK };
+  });
+  return { records: out, linked };
 }
