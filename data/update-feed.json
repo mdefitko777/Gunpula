@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-13",
-  "generated_at": "2026-11-13T00:21:42.633Z",
+  "generated_at": "2026-11-13T18:19:17.090Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,44 +18,59 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-13T00:19:24.771Z",
+    "generated_at": "2026-11-13T18:18:15.678Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-13",
-      "generated_at": "2026-11-13T00:21:42.633Z",
+      "generated_at": "2026-11-13T18:19:17.090Z",
       "total_before": 39403,
-      "total_after": 39410,
-      "added_count": 6,
-      "changed_count": 88,
+      "total_after": 39417,
+      "added_count": 10,
+      "changed_count": 127,
       "removed_count": 0,
-      "watched_count": 8,
+      "watched_count": 15,
       "merged_count": 0,
-      "backfilled_count": 1,
+      "backfilled_count": 4,
       "renamed_count": 0,
-      "premium_bandai_count": 81,
-      "bbx_count": 0,
+      "premium_bandai_count": 116,
+      "bbx_count": 3,
       "franchise_counts": {
+        "gundam": 118,
+        "beyblade": 3,
         "pokemon": 12,
-        "gundam": 82
+        "madoka": 2,
+        "fate": 2
       },
       "reason_counts": {
-        "new": 6,
+        "new": 10,
+        "archive": 112,
+        "release": 5,
+        "source": 5,
+        "image": 5,
         "limited": 9,
-        "archive": 80,
-        "image": 2,
-        "source": 1,
-        "release": 1,
+        "price": 1,
         "name": 7
       },
       "interest_tags": [
-        "pokemon",
         "gundam",
         "00",
+        "beyblade",
+        "bbx",
+        "bbx_cx",
+        "bbx_limited",
+        "beyblade_limited",
         "premium_bandai",
-        "seed"
+        "bbx_bx",
+        "beyblade_bx",
+        "bbx_ux",
+        "beyblade_ux",
+        "pokemon",
+        "seed",
+        "madoka",
+        "fate"
       ],
       "watch_tags": [
         "00",
@@ -101,6 +116,174 @@
           "source_urls": [
             "https://tamashiiweb.com/item/16258/",
             "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-cx00-bb",
+          "change_type": "added",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Starter",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "CX-00 【B4ストア限定】 バハムートブリッツBK1-50I メタルコート:ブラック",
+            "zh": "CX-00 【B4商店限定】 龙王闪击BK1-50I 金属镀层:黑色",
+            "ko": "CX-00 【B4ストア한정】 バハムート블리츠BK1-50I メタルコート:ブラック",
+            "en": "CX-00 [B4ストアLimited] バハムートBlitzBK1-50I メタルコート:ブラック"
+          },
+          "release_date": "2026-12-26",
+          "price_jpy": 2400,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_cx",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-bb.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000139181",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 アドヴァンスドジンクス",
+            "zh": "MG 1 / 100 先进GN-X",
+            "ko": "MG 1/100 アドヴァンスドジンクス",
+            "en": "ＭＧ 1 / 100 アドヴァンスドジンクス"
+          },
+          "release_date": null,
+          "price_jpy": 4620,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "00"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000139181/"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-bx55",
+          "change_type": "added",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Random Booster",
+          "series_key": "beyblade_bx",
+          "series_labels": {
+            "zh": "BX",
+            "en": "BX",
+            "ja": "BX",
+            "ko": "BX"
+          },
+          "names": {
+            "ja": "BX-55 ランダムブースターVol.12",
+            "zh": "BX-55 随机补充包Vol.12",
+            "ko": "BX-55 랜덤 부스터 Vol.12",
+            "en": "BX-55 ランダムブースターVol.12"
+          },
+          "release_date": "2026-12-26",
+          "price_jpy": 1600,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_bx",
+            "beyblade_bx"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/bx55.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-ux22",
+          "change_type": "added",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Starter",
+          "series_key": "beyblade_ux",
+          "series_labels": {
+            "zh": "UX",
+            "en": "UX",
+            "ja": "UX",
+            "ko": "UX"
+          },
+          "names": {
+            "ja": "UX-22 バニッシュルシファーWW",
+            "zh": "UX-22 バニッシュルシファーWW",
+            "ko": "UX-22 バニッシュルシファーWW",
+            "en": "UX-22 バニッシュルシファーWW"
+          },
+          "release_date": "2026-12-26",
+          "price_jpy": 2500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_ux",
+            "beyblade_ux"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/ux22.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
           ]
         },
         {
@@ -417,6 +600,48 @@
           ]
         },
         {
+          "kit_id": "hg-hg-1-144-4573102618580000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ロードアストレイΩ",
+            "zh": "HG 1 / 144 领主异端Ω",
+            "ko": "HG 1/144 로드 어스트레이 Ω",
+            "en": "ＨＧ 1 / 144 ロードAstrayΩ"
+          },
+          "release_date": "2022-04",
+          "price_jpy": 2640,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102618580000&grp_id=5325"
+          ]
+        },
+        {
           "kit_id": "pg-pg-1-60-g-4573102592224000",
           "change_type": "changed",
           "franchise": "gundam",
@@ -459,6 +684,90 @@
           ]
         },
         {
+          "kit_id": "mg-mg-1-100-4573102590046000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "MG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ブラストインパルスガンダム",
+            "zh": "MG 1 / 100 爆破型脉冲高达",
+            "ko": "MG 1/100 블라스트 임펄스건담",
+            "en": "ＭＧ 1 / 100 ブラストImpulse Gundam"
+          },
+          "release_date": "2020-01",
+          "price_jpy": 5500,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102590046000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000194284",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ガンダムアストレイ レッドドラゴン",
+            "zh": "MG 1 / 100 异端高达 红龙",
+            "ko": "MG 1/100 건담아스트레이 레드 드래곤",
+            "en": "ＭＧ 1 / 100 Gundam Astray レッドドラゴン"
+          },
+          "release_date": "2019-04",
+          "price_jpy": 7700,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "release",
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000194284/"
+          ]
+        },
+        {
           "kit_id": "pbandai-wb-1000123688",
           "change_type": "changed",
           "franchise": "gundam",
@@ -497,6 +806,88 @@
           ],
           "source_urls": [
             "https://p-bandai.jp/item/item-1000123688/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000115863",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ジャスティスガンダム [スペシャルコーティング]",
+            "zh": "MG 1 / 100 正义高达 [特别涂层版]",
+            "ko": "MG 1/100 저스티스건담 [스페셜 코팅]",
+            "en": "ＭＧ 1 / 100 Justice Gundam [スペシャルコーティング]"
+          },
+          "release_date": "2018-01",
+          "price_jpy": 9720,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000115863/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000113716",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 プロヴィデンスガンダム用 ドラグーンディスプレイエフェクト",
+            "zh": "MG 1 / 100 天意高达用 龙骑兵展示特效",
+            "ko": "MG 1/100 프로비던스 건담용 드라군 디스플레이 이펙트",
+            "en": "ＭＧ 1 / 100 Providence Gundam用 ドラグーンディスプレイエフェクト"
+          },
+          "release_date": "2017-07",
+          "price_jpy": 2376,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000113716/"
           ]
         },
         {
@@ -584,6 +975,123 @@
           ]
         },
         {
+          "kit_id": "aniplex-madoka-itemmdrepkqw05",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Aniplex+",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 佐倉杏子 ノンスケールフィギュア",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 佐仓杏子 无比例手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 사쿠라 쿄코 논스케일 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 佐倉杏子 ノンスケールフィギュア"
+          },
+          "release_date": "2027-10",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "aniplex_plus_madoka_jp",
+            "claynel_madoka_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemMDrePKqw05.html",
+            "https://www.claynel.jp/products/?item_id=12607"
+          ]
+        },
+        {
+          "kit_id": "aniplex-madoka-itemmdrepkqw04",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Aniplex+",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 美樹さやか ノンスケールフィギュア",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 美树沙耶香 无比例手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 미키 사야카 논스케일 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 美樹さやか ノンスケールフィギュア"
+          },
+          "release_date": "2027-10",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "aniplex_plus_madoka_jp",
+            "claynel_madoka_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemMDrePKqw04.html",
+            "https://www.claynel.jp/products/?item_id=12606"
+          ]
+        },
+        {
+          "kit_id": "aniplex-fate-itemzeopzhye",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "Aniplex+",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Fate / Grand Order ビースト / エレシュキガル（第一再臨）1 / 7スケールフィギュア",
+            "zh": "Fate / Grand Order Beast / 埃列什基伽勒(第一再临)1/7比例手办",
+            "ko": "Fate/Grand Order 비스트 / 에레쉬키갈 (제1재림) 1/7 스케일 피규어",
+            "en": "Fate / Grand Order ビースト / エレシュキガル (第一再臨)1 / 7スケールフィギュア"
+          },
+          "release_date": "2026-11-27",
+          "price_jpy": 24200,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "release"
+          ],
+          "source_ids": [
+            "aniplex_plus_fate_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemZEOpzHye.html"
+          ]
+        },
+        {
           "kit_id": "pbandai-wb-1000256371",
           "change_type": "changed",
           "franchise": "gundam",
@@ -619,6 +1127,45 @@
           ],
           "source_urls": [
             "https://p-bandai.jp/item/item-1000256371/"
+          ]
+        },
+        {
+          "kit_id": "hg-hg-1-144-4580886844531000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "x",
+          "series_labels": {
+            "zh": "X",
+            "en": "X",
+            "ja": "X",
+            "ko": "X"
+          },
+          "names": {
+            "ja": "HG 1 / 144 ガンダムヴァサーゴ",
+            "zh": "HG 1 / 144 维萨戈高达",
+            "ko": "HG 1/144 건담 버사고",
+            "en": "HG 1 / 144 Gundamヴァサーゴ"
+          },
+          "release_date": "2026-10-31",
+          "price_jpy": 3190,
+          "is_limited": false,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4580886844531000&grp_id=5325"
           ]
         },
         {
@@ -697,6 +1244,47 @@
           ],
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102663740000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000256700",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "g",
+          "series_labels": {
+            "zh": "G",
+            "en": "G",
+            "ja": "G",
+            "ko": "G"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ガンダムマックスター",
+            "zh": "HG 1 / 144 拳王高达",
+            "ko": "HG 1/144 건담 맥스터",
+            "en": "ＨＧ 1 / 144 Gundamマックスター"
+          },
+          "release_date": "2023-11",
+          "price_jpy": 2915,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback",
+            "bandai_spirits_products_jp",
+            "p_bandai_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102657299000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000256700/"
           ]
         },
         {
@@ -1483,6 +2071,84 @@
           ]
         },
         {
+          "kit_id": "hg-hg-1-144-age-1-age-2-4573102635976000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "age",
+          "series_labels": {
+            "zh": "AGE",
+            "en": "AGE",
+            "ja": "AGE",
+            "ko": "AGE"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ガンダムＡＧＥ-１ レイザー＆ガンダムＡＧＥ-２ アルティメス セット",
+            "zh": "HG 1 / 144 高达AGE-1 剃刀&高达AGE-2 阿尔提梅斯 套装",
+            "ko": "HG 1/144 건담 AGE-1 레이저 & 건담 AGE-2 얼티메스 세트",
+            "en": "ＨＧ 1 / 144 GundamＡＧＥ-１ レイザー＆GundamＡＧＥ-２ アルティメス Set"
+          },
+          "release_date": "2022-03",
+          "price_jpy": 3960,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102635976000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "hg-hg-1-144-rx-78-2-2020-pr-4573102605955000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "uc_first",
+          "series_labels": {
+            "zh": "初代",
+            "en": "0079",
+            "ja": "初代",
+            "ko": "초대"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 RX-78-2 ガンダム［2020年ドバイ国際博覧会 日本館PRアンバサダー］",
+            "zh": "HG 1 / 144 RX-78-2 高达[2020年迪拜国际博览会 日本馆PR大使]",
+            "ko": "HG 1/144 RX-78-2 건담 [2020년 두바이 국제박람회 일본관 PR 앰배서더]",
+            "en": "ＨＧ 1 / 144 RX-78-2 Gundam［2020年ドバイ国際博覧会 日本館PRアンバサダー］"
+          },
+          "release_date": "2021-10",
+          "price_jpy": 2420,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102605955000&grp_id=5325"
+          ]
+        },
+        {
           "kit_id": "pbandai-wb-1000256697",
           "change_type": "changed",
           "franchise": "gundam",
@@ -1520,6 +2186,45 @@
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102609106000&grp_id=5325",
             "https://p-bandai.jp/item/item-1000256697/"
+          ]
+        },
+        {
+          "kit_id": "rg-rg-1-144-hi-4573102618573000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "RG",
+          "series_key": "cca",
+          "series_labels": {
+            "zh": "逆夏",
+            "en": "CCA",
+            "ja": "逆シャア",
+            "ko": "역샤아"
+          },
+          "names": {
+            "ja": "ＲＧ 1 / 144 Hi-νガンダム専用ハイパー・メガ・バズーカ・ランチャー",
+            "zh": "RG 1 / 144 Hi-ν高达专用超级米加火箭发射器",
+            "ko": "RG 1/144 Hi-ν건담 전용 하이퍼 메가 바주카 런처",
+            "en": "ＲＧ 1 / 144 Hi-νGundam Customハイパー メガ バズーカ ランチャー"
+          },
+          "release_date": "2021-09",
+          "price_jpy": 2750,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102618573000&grp_id=5325"
           ]
         },
         {
@@ -2107,6 +2812,237 @@
           ]
         },
         {
+          "kit_id": "re100-re-100-1-100-4573102595621000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RE100",
+          "subline": "RE/100",
+          "series_key": "victory",
+          "series_labels": {
+            "zh": "V",
+            "en": "V",
+            "ja": "V",
+            "ko": "V"
+          },
+          "names": {
+            "ja": "ＲＥ / 100 1 / 100 シャッコー",
+            "zh": "RE / 100 1 / 100 夏科",
+            "ko": "RE/100 1/100 샷코",
+            "en": "ＲＥ / 100 1 / 100 シャッコー"
+          },
+          "release_date": "2020-05",
+          "price_jpy": 4180,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102595621000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000138400",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "uc_side",
+          "series_labels": {
+            "zh": "UC外传",
+            "en": "UC Side Story",
+            "ja": "UC外伝",
+            "ko": "UC 외전"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ガンダム６号機（マドロック）",
+            "zh": "HG 1 / 144 高达6号机(马德洛克)",
+            "ko": "HG 1/144 건담 6호기(매드록)",
+            "en": "ＨＧ 1 / 144 Gundam６号機 (マドロック)"
+          },
+          "release_date": "2019-12",
+          "price_jpy": 2200,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000138400/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000137105",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "victory",
+          "series_labels": {
+            "zh": "V",
+            "en": "V",
+            "ja": "V",
+            "ko": "V"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 セカンドＶ",
+            "zh": "HG 1 / 144 第二V",
+            "ko": "HG 1/144 세컨드 V",
+            "en": "ＨＧ 1 / 144 セカンドＶ"
+          },
+          "release_date": "2019-12",
+          "price_jpy": 2200,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000137105/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000135068",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "cca",
+          "series_labels": {
+            "zh": "逆夏",
+            "en": "CCA",
+            "ja": "逆シャア",
+            "ko": "역샤아"
+          },
+          "names": {
+            "ja": "ＲＧ 1 / 144 サザビー［スペシャルコーティング］",
+            "zh": "RG 1 / 144 沙扎比[特别涂层版]",
+            "ko": "RG 1/144 사자비 [스페셜 코팅]",
+            "en": "ＲＧ 1 / 144 Sazabi［スペシャルコーティング］"
+          },
+          "release_date": "2019-12",
+          "price_jpy": 10800,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release",
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000135068/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000136483",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "uc_first",
+          "series_labels": {
+            "zh": "初代",
+            "en": "0079",
+            "ja": "初代",
+            "ko": "초대"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ジム・ドミナンス（フィリップ・ヒューズ機）",
+            "zh": "MG 1 / 100 吉姆 DOMINANCE(菲利普·休斯机)",
+            "ko": "MG 1/100 짐 도미넌스(필립 휴즈기)",
+            "en": "ＭＧ 1 / 100 GM ドミナンス (フィリップ ヒューズ機)"
+          },
+          "release_date": "2019-11",
+          "price_jpy": 6050,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "release",
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000136483/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000136789",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "cca",
+          "series_labels": {
+            "zh": "逆夏",
+            "en": "CCA",
+            "ja": "逆シャア",
+            "ko": "역샤아"
+          },
+          "names": {
+            "ja": "ＲＧ 1 / 144 νガンダム用ダブル・フィン・ファンネル拡張ユニット",
+            "zh": "RG 1 / 144 ν高达用双重飞翼浮游炮扩展单元",
+            "ko": "RG 1/144 ν건담용 더블 핀 판넬 확장 유닛",
+            "en": "ＲＧ 1 / 144 νGundam用ダブル フィン ファンネル拡張ユニット"
+          },
+          "release_date": "2019-11",
+          "price_jpy": 1836,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000136789/"
+          ]
+        },
+        {
           "kit_id": "pbandai-wb-1000120255",
           "change_type": "changed",
           "franchise": "gundam",
@@ -2183,6 +3119,82 @@
           ]
         },
         {
+          "kit_id": "pbandai-wb-1000255631",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "unicorn",
+          "series_labels": {
+            "zh": "UC",
+            "en": "Unicorn",
+            "ja": "UC",
+            "ko": "UC"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 リゲルグ（ユニコーンVer.）",
+            "zh": "HG 1 / 144 里格鲁古(UC版)",
+            "ko": "HG 1/144 리겔구(유니콘 Ver.)",
+            "en": "ＨＧ 1 / 144 リゲルグ (UnicornVer.)[Reissue][３次：２０２６年１０月発送]"
+          },
+          "release_date": "2019-05",
+          "price_jpy": 2750,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000255631/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000129851",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "cca",
+          "series_labels": {
+            "zh": "逆夏",
+            "en": "CCA",
+            "ja": "逆シャア",
+            "ko": "역샤아"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ジェガンＤ型 （護衛隊仕様）",
+            "zh": "HG 1 / 144 杰刚D型 (护卫队样式)",
+            "ko": "HG 1/144 제간 D형 (호위대 사양)",
+            "en": "ＨＧ 1 / 144 ジェガンＤ型 (護衛隊Type)"
+          },
+          "release_date": "2019-03",
+          "price_jpy": 1944,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000129851/"
+          ]
+        },
+        {
           "kit_id": "pbandai-wb-1000255486",
           "change_type": "changed",
           "franchise": "gundam",
@@ -2218,6 +3230,158 @@
           ],
           "source_urls": [
             "https://p-bandai.jp/item/item-1000255486/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000255600",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "unicorn",
+          "series_labels": {
+            "zh": "UC",
+            "en": "Unicorn",
+            "ja": "UC",
+            "ko": "UC"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ジェスタ （シェザール隊仕様 Ａ班装備）",
+            "zh": "HG 1 / 144 杰斯塔 (谢萨尔队样式 A班装备)",
+            "ko": "HG 1/144 제스타 (셰자르대 사양 A반 장비)",
+            "en": "ＨＧ 1 / 144 ジェスタ (シェザール隊Type Ａ班Equipment)[Reissue][２０２６年１１月発送]"
+          },
+          "release_date": "2019-01",
+          "price_jpy": 3520,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000255600/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000255601",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "unicorn",
+          "series_labels": {
+            "zh": "UC",
+            "en": "Unicorn",
+            "ja": "UC",
+            "ko": "UC"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ジェスタ （シェザール隊仕様 Ｂ＆Ｃ班装備）",
+            "zh": "HG 1 / 144 杰斯塔 (谢萨尔队样式 B&C班装备)",
+            "ko": "HG 1/144 제스타 (셰자르대 사양 B&C반 장비)",
+            "en": "ＨＧ 1 / 144 ジェスタ (シェザール隊Type Ｂ＆Ｃ班Equipment)[Reissue][２０２６年１２月発送]"
+          },
+          "release_date": "2019-01",
+          "price_jpy": 2970,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000255601/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000128218",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "f91",
+          "series_labels": {
+            "zh": "F91",
+            "en": "F91",
+            "ja": "F91",
+            "ko": "F91"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ガンダムＦ９１ Ｖｅｒ．２．０ バックキャノン装着型 ＆ ツイン・ヴェスバー装着型",
+            "zh": "MG 1 / 100 高达F91 Ver.2.0 背部加农装备型 & 双VSBR装备型",
+            "ko": "MG 1/100 건담 F91 Ver.2.0 백 캐논 장착형 & 트윈 베스바 장착형",
+            "en": "ＭＧ 1 / 100 GundamＦ９１ Ｖｅｒ．２．０ バックキャノン装着型 ＆ ツイン ヴェスバー装着型"
+          },
+          "release_date": "2019-01",
+          "price_jpy": 6264,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000128218/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000130557",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "narrative",
+          "series_labels": {
+            "zh": "NT",
+            "en": "Narrative",
+            "ja": "NT",
+            "ko": "NT"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ユニコーンガンダム３号機 フェネクス （ナラティブVer.）",
+            "zh": "MG 1 / 100 独角兽高达3号机 凤凰 (NT版)",
+            "ko": "MG 1/100 유니콘 건담 3호기 페넥스 (내러티브 Ver.)",
+            "en": "ＭＧ 1 / 100 Unicorn Gundam３号機 Phenex (ナラティブVer.)"
+          },
+          "release_date": "2019-01",
+          "price_jpy": 14040,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000130557/"
           ]
         },
         {
@@ -2299,6 +3463,82 @@
           ]
         },
         {
+          "kit_id": "pbandai-wb-1000125915",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RE100",
+          "subline": "プレミアムバンダイ",
+          "series_key": "msv",
+          "series_labels": {
+            "zh": "MSV",
+            "en": "MSV",
+            "ja": "MSV",
+            "ko": "MSV"
+          },
+          "names": {
+            "ja": "ＲＥ / 100 1 / 100 ガンキャノン・ディテクター（Ｚ-ＭＳＶ Ｖｅｒ.）",
+            "zh": "RE / 100 1 / 100 钢加农侦测型(Z-MSV Ver.)",
+            "ko": "RE/100 1/100 건캐논 디텍터(Z-MSV Ver.)",
+            "en": "ＲＥ / 100 1 / 100 ガンキャノン ディテクター (Ｚ-ＭＳＶ Ｖｅｒ.)"
+          },
+          "release_date": "2018-09",
+          "price_jpy": 4104,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000125915/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000125318",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "PG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "unicorn",
+          "series_labels": {
+            "zh": "UC",
+            "en": "Unicorn",
+            "ja": "UC",
+            "ko": "UC"
+          },
+          "names": {
+            "ja": "ＰＧ 1 / 60 RX-0 ユニコーンガンダム用 ＬＥＤユニット〔RX-0シリーズ兼用〕",
+            "zh": "PG 1 / 60 RX-0 独角兽高达用 LED灯组〔RX-0系列兼用〕",
+            "ko": "PG 1/60 RX-0 유니콘 건담용 LED 유닛〔RX-0 시리즈 겸용〕",
+            "en": "ＰＧ 1 / 60 RX-0 Unicorn Gundam用 ＬＥＤユニット〔RX-0シリーズ兼用〕"
+          },
+          "release_date": "2018-08",
+          "price_jpy": 12960,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000125318/"
+          ]
+        },
+        {
           "kit_id": "pbandai-wb-1000123456",
           "change_type": "changed",
           "franchise": "gundam",
@@ -2334,6 +3574,44 @@
           ],
           "source_urls": [
             "https://p-bandai.jp/item/item-1000123456/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000115893",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "uc_side",
+          "series_labels": {
+            "zh": "UC外传",
+            "en": "UC Side Story",
+            "ja": "UC外伝",
+            "ko": "UC 외전"
+          },
+          "names": {
+            "ja": "HGUC 1 / 144 ペイルライダー（空間戦仕様）",
+            "zh": "HGUC 1 / 144 苍白骑士(空间战样式)",
+            "ko": "HGUC 1/144 페일라이더(공간전 사양)",
+            "en": "HGUC 1 / 144 ペイルライダー (空間戦Type)"
+          },
+          "release_date": "2017-09",
+          "price_jpy": 2160,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000115893/"
           ]
         },
         {
@@ -2452,6 +3730,44 @@
           ]
         },
         {
+          "kit_id": "pbandai-wb-1000112047",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "cca",
+          "series_labels": {
+            "zh": "逆夏",
+            "en": "CCA",
+            "ja": "逆シャア",
+            "ko": "역샤아"
+          },
+          "names": {
+            "ja": "HGUC 1 / 144 ジェガン(エコーズ仕様) コンロイ機",
+            "zh": "HGUC 1 / 144 杰刚(ECOAS样式) 康罗伊机",
+            "ko": "HGUC 1/144 제간(에코즈 사양) 콘로이기",
+            "en": "HGUC 1 / 144 ジェガン(エコーズType) コンロイ機"
+          },
+          "release_date": "2017-05",
+          "price_jpy": 1944,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000112047/"
+          ]
+        },
+        {
           "kit_id": "mg-mg-1-100-ii-4549660164050000",
           "change_type": "changed",
           "franchise": "gundam",
@@ -2491,6 +3807,44 @@
           ]
         },
         {
+          "kit_id": "pbandai-wb-1000110311",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "PG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "narrative",
+          "series_labels": {
+            "zh": "NT",
+            "en": "Narrative",
+            "ja": "NT",
+            "ko": "NT"
+          },
+          "names": {
+            "ja": "ＰＧ 1 / 60 RX-０ ユニコーンガンダム３号機 フェネクス",
+            "zh": "PG 1 / 60 RX-0 独角兽高达3号机 凤凰",
+            "ko": "PG 1/60 RX-0 유니콘 건담 3호기 페넥스",
+            "en": "ＰＧ 1 / 60 RX-０ Unicorn Gundam３号機 Phenex"
+          },
+          "release_date": "2017-03",
+          "price_jpy": 43200,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000110311/"
+          ]
+        },
+        {
           "kit_id": "pbandai-wb-1000107583",
           "change_type": "changed",
           "franchise": "gundam",
@@ -2526,6 +3880,84 @@
           ],
           "source_urls": [
             "https://p-bandai.jp/item/item-1000107583/"
+          ]
+        },
+        {
+          "kit_id": "mg-mg-1-100-hws-ver-ka-4549660148326000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "MG",
+          "series_key": "cca",
+          "series_labels": {
+            "zh": "逆夏",
+            "en": "CCA",
+            "ja": "逆シャア",
+            "ko": "역샤아"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 νガンダム ＨＷＳ Ｖｅｒ．Ｋａ",
+            "zh": "MG 1 / 100 ν高达 HWS Ver.Ka",
+            "ko": "MG 1/100 ν건담 HWS Ver.Ka",
+            "en": "ＭＧ 1 / 100 νGundam ＨＷＳ Ｖｅｒ．Ｋａ"
+          },
+          "release_date": "2016-12",
+          "price_jpy": 10340,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660148326000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "mg-mg-1-100-ver-ka-hws-4549660148333000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "MG",
+          "series_key": "cca",
+          "series_labels": {
+            "zh": "逆夏",
+            "en": "CCA",
+            "ja": "逆シャア",
+            "ko": "역샤아"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 νガンダム Ｖｅｒ．Ｋａ用 ＨＷＳ拡張セット",
+            "zh": "MG 1 / 100 ν高达 Ver.Ka用 HWS扩展套装",
+            "ko": "MG 1/100 ν건담 Ver.Ka용 HWS 확장 세트",
+            "en": "ＭＧ 1 / 100 νGundam Ｖｅｒ．Ｋａ用 ＨＷＳExpansion Set"
+          },
+          "release_date": "2016-12",
+          "price_jpy": 2640,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660148333000&grp_id=5325"
           ]
         },
         {
@@ -3155,6 +4587,47 @@
           ]
         },
         {
+          "kit_id": "hg-hguc-1-144-4549660032212000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HGUC",
+          "series_key": "zz",
+          "series_labels": {
+            "zh": "ZZ",
+            "en": "ZZ",
+            "ja": "ZZ",
+            "ko": "ZZ"
+          },
+          "names": {
+            "ja": "HGUC 1 / 144 キュベレイ",
+            "zh": "HGUC 1 / 144 京宝梵",
+            "ko": "HGUC 1/144 큐베레이 (2015년)",
+            "en": "HGUC 1 / 144 Qubeley"
+          },
+          "release_date": "2015-12-19",
+          "price_jpy": 2200,
+          "is_limited": false,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660032212000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000249650/"
+          ]
+        },
+        {
           "kit_id": "pbandai-wb-1000255642",
           "change_type": "changed",
           "franchise": "gundam",
@@ -3234,6 +4707,85 @@
           ]
         },
         {
+          "kit_id": "pbandai-wb-1000142005",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "MG",
+          "series_key": "zeta",
+          "series_labels": {
+            "zh": "Z",
+            "en": "Z",
+            "ja": "Z",
+            "ko": "Z"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 MSZ-006P2 / 3C ゼータガンダム３号機Ｐ２型 レッド・ゼータ",
+            "zh": "MG 1 / 100 MSZ-006P2 / 3C Z高达3号机P2型 红色Z",
+            "ko": "MG 1/100 MSZ-006P2/3C 제타 건담 3호기 P2형 레드 제타",
+            "en": "ＭＧ 1 / 100 MSZ-006P2 / 3C Zeta Gundam３号機Ｐ２型 レッド Zeta"
+          },
+          "release_date": "2015-06",
+          "price_jpy": 7150,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback",
+            "bandai_spirits_products_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112956866000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000142005/"
+          ]
+        },
+        {
+          "kit_id": "hg-hguc-1-144-4573102588999000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HGUC",
+          "series_key": "uc_side",
+          "series_labels": {
+            "zh": "UC外传",
+            "en": "UC Side Story",
+            "ja": "UC外伝",
+            "ko": "UC 외전"
+          },
+          "names": {
+            "ja": "HGUC 1 / 144 ペイルライダー（陸戦重装備仕様）",
+            "zh": "HGUC 1 / 144 苍白骑士(陆战重装备样式)",
+            "ko": "HGUC 1/144 페일라이더(육전 중장비 사양)",
+            "en": "HGUC 1 / 144 ペイルライダー (陸戦重EquipmentType)"
+          },
+          "release_date": "2015-04",
+          "price_jpy": 2200,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102588999000&grp_id=5325"
+          ]
+        },
+        {
           "kit_id": "pbandai-wb-1000255640",
           "change_type": "changed",
           "franchise": "gundam",
@@ -3271,6 +4823,121 @@
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112956859000&grp_id=5325",
             "https://p-bandai.jp/item/item-1000255640/"
+          ]
+        },
+        {
+          "kit_id": "mg-mg-1-100-hi-ver-ka-hws-4543112930095000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "MG",
+          "series_key": "cca",
+          "series_labels": {
+            "zh": "逆夏",
+            "en": "CCA",
+            "ja": "逆シャア",
+            "ko": "역샤아"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 Ｈｉ-νガンダムＶｅｒ.Ｋａ用 ＨＷＳ拡張セット",
+            "zh": "MG 1 / 100 Hi-ν高达Ver.Ka用 HWS扩展套装",
+            "ko": "MG 1/100 Hi-ν건담 Ver.Ka용 HWS 확장 세트",
+            "en": "ＭＧ 1 / 100 Ｈｉ-νGundamＶｅｒ.Ｋａ用 ＨＷＳExpansion Set"
+          },
+          "release_date": "2014-09",
+          "price_jpy": 3630,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112930095000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "hg-hguc-1-144-ii-ver-4573102588432000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HGUC",
+          "series_key": "zeta",
+          "series_labels": {
+            "zh": "Z",
+            "en": "Z",
+            "ja": "Z",
+            "ko": "Z"
+          },
+          "names": {
+            "ja": "HGUC 1 / 144 ジムII（エゥーゴカラーVer.)",
+            "zh": "HGUC 1 / 144 吉姆II(奥古配色Ver.)",
+            "ko": "HGUC 1/144 짐II(에우고 컬러 Ver.)",
+            "en": "HGUC 1 / 144 GMII (エゥーゴカラーVer.)"
+          },
+          "release_date": "2012-11",
+          "price_jpy": 1540,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102588432000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "hg-hguc-1-144-ii-4543112778901000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HGUC",
+          "series_key": "0080",
+          "series_labels": {
+            "zh": "0080",
+            "en": "0080",
+            "ja": "0080",
+            "ko": "0080"
+          },
+          "names": {
+            "ja": "HGUC 1 / 144 ジム・スナイパーII ホワイト・ディンゴ隊仕様",
+            "zh": "HGUC 1 / 144 吉姆狙击型II 白色野犬队样式",
+            "ko": "HGUC 1/144 짐 스나이퍼II 화이트 딩고대 사양",
+            "en": "HGUC 1 / 144 GM スナイパーII ホワイト ディンゴ隊Type"
+          },
+          "release_date": "2012-09",
+          "price_jpy": 2200,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "price"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112778901000&grp_id=5325"
           ]
         },
         {
@@ -3477,262 +5144,40 @@
           ]
         },
         {
-          "kit_id": "pokemon-center-4521329341415",
+          "kit_id": "goodsmile-fate-g6987",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Scale Figure",
+          "series_key": "type_moon",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "型月",
+            "en": "TYPE-MOON",
+            "ja": "TYPE-MOON",
+            "ko": "타입문"
           },
           "names": {
-            "ja": "492 ぬいぐるみ ポケモン fit シェイミ (スカイフォルム)",
-            "zh": "492 毛绒玩偶 宝可梦 fit 谢米 (天空形态)",
-            "ko": "492 봉제인형 Pokémon fit 쉐이미 (스카이폼)",
-            "en": "492 ぬいぐるみ Pokémon fit シェイミ (スカイフォルム)"
+            "ja": "1 / 64 Scale GOODSMILE RACING & TYPE-MOON RACING 2019 SPA24H Test Day Ver.",
+            "zh": "1 / 64比例 GOODSMILE RACING & TYPE-MOON RACING 2019 SPA24H 测试日 Ver.",
+            "ko": "1/64 스케일 GOODSMILE RACING & TYPE-MOON RACING 2019 SPA24H 테스트 데이 Ver.",
+            "en": "1 / 64 Scale GOODSMILE RACING & TYPE-MOON RACING 2019 SPA24H Test Day Ver."
           },
           "release_date": null,
-          "price_jpy": 1650,
+          "price_jpy": 3300,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "fate"
           ],
           "change_reasons": [
-            "name"
+            "image"
           ],
           "source_ids": [
-            "pokemon_center_jp"
+            "good_smile_fate_global"
           ],
           "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329341415.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329344041",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "521 ぬいぐるみ ポケモン fit ケンホロウ(オスのすがた)",
-            "zh": "521 毛绒玩偶 宝可梦 fit 高傲雉鸡(雄性的样子)",
-            "ko": "521 봉제인형 Pokémon fit 켄호로우(수컷의 모습)",
-            "en": "521 ぬいぐるみ Pokémon fit ケンホロウ(オスのすがた)"
-          },
-          "release_date": null,
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329344041.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329349299",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "533 ぬいぐるみ ポケモン fit ドテッコツ",
-            "zh": "533 毛绒玩偶 宝可梦 fit 铁骨土人",
-            "ko": "533 봉제인형 Pokémon fit 토쇠골",
-            "en": "533 ぬいぐるみ Pokémon fit ドテッコツ"
-          },
-          "release_date": null,
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329349299.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329349831",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "585 ぬいぐるみ ポケモン fit シキジカ(はるのすがた)",
-            "zh": "585 毛绒玩偶 宝可梦 fit 四季鹿(春天的样子)",
-            "ko": "585 봉제인형 Pokémon fit 사철록(봄의 모습)",
-            "en": "585 ぬいぐるみ Pokémon fit シキジカ(はるのすがた)"
-          },
-          "release_date": null,
-          "price_jpy": 1320,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329349831.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329350110",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "605 ぬいぐるみ ポケモン fit リグレー",
-            "zh": "605 毛绒玩偶 宝可梦 fit 小灰怪",
-            "ko": "605 봉제인형 Pokémon fit 리그레",
-            "en": "605 ぬいぐるみ Pokémon fit リグレー"
-          },
-          "release_date": null,
-          "price_jpy": 1320,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329350110.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329350455",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "639 ぬいぐるみ ポケモン fit テラキオン",
-            "zh": "639 毛绒玩偶 宝可梦 fit 代拉基翁",
-            "ko": "639 봉제인형 Pokémon fit 테라키온",
-            "en": "639 ぬいぐるみ Pokémon fit テラキオン"
-          },
-          "release_date": null,
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329350455.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329366005",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "671 ぬいぐるみ ポケモン fit フラージェス",
-            "zh": "671 毛绒玩偶 宝可梦 fit 花洁夫人",
-            "ko": "671 봉제인형 Pokémon fit 플라제스",
-            "en": "671 ぬいぐるみ Pokémon fit フラージェス"
-          },
-          "release_date": null,
-          "price_jpy": 1980,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329366005.html"
+            "https://www.goodsmile.com/en/product/6987"
           ]
         }
       ],
@@ -3777,6 +5222,51 @@
           "source_urls": [
             "https://tamashiiweb.com/item/16258/",
             "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "beyblade-x-cx00-bb",
+          "change_type": "added",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Starter",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "CX-00 【B4ストア限定】 バハムートブリッツBK1-50I メタルコート:ブラック",
+            "zh": "CX-00 【B4商店限定】 龙王闪击BK1-50I 金属镀层:黑色",
+            "ko": "CX-00 【B4ストア한정】 バハムート블리츠BK1-50I メタルコート:ブラック",
+            "en": "CX-00 [B4ストアLimited] バハムートBlitzBK1-50I メタルコート:ブラック"
+          },
+          "release_date": "2026-12-26",
+          "price_jpy": 2400,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_cx",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-bb.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
           ]
         },
         {
@@ -3906,6 +5396,48 @@
           ]
         },
         {
+          "kit_id": "hg-hg-1-144-4573102618580000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ロードアストレイΩ",
+            "zh": "HG 1 / 144 领主异端Ω",
+            "ko": "HG 1/144 로드 어스트레이 Ω",
+            "en": "ＨＧ 1 / 144 ロードAstrayΩ"
+          },
+          "release_date": "2022-04",
+          "price_jpy": 2640,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102618580000&grp_id=5325"
+          ]
+        },
+        {
           "kit_id": "pg-pg-1-60-g-4573102592224000",
           "change_type": "changed",
           "franchise": "gundam",
@@ -3948,6 +5480,90 @@
           ]
         },
         {
+          "kit_id": "mg-mg-1-100-4573102590046000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "MG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ブラストインパルスガンダム",
+            "zh": "MG 1 / 100 爆破型脉冲高达",
+            "ko": "MG 1/100 블라스트 임펄스건담",
+            "en": "ＭＧ 1 / 100 ブラストImpulse Gundam"
+          },
+          "release_date": "2020-01",
+          "price_jpy": 5500,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102590046000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000194284",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ガンダムアストレイ レッドドラゴン",
+            "zh": "MG 1 / 100 异端高达 红龙",
+            "ko": "MG 1/100 건담아스트레이 레드 드래곤",
+            "en": "ＭＧ 1 / 100 Gundam Astray レッドドラゴン"
+          },
+          "release_date": "2019-04",
+          "price_jpy": 7700,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "release",
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000194284/"
+          ]
+        },
+        {
           "kit_id": "pbandai-wb-1000123688",
           "change_type": "changed",
           "franchise": "gundam",
@@ -3986,6 +5602,88 @@
           ],
           "source_urls": [
             "https://p-bandai.jp/item/item-1000123688/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000115863",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 ジャスティスガンダム [スペシャルコーティング]",
+            "zh": "MG 1 / 100 正义高达 [特别涂层版]",
+            "ko": "MG 1/100 저스티스건담 [스페셜 코팅]",
+            "en": "ＭＧ 1 / 100 Justice Gundam [スペシャルコーティング]"
+          },
+          "release_date": "2018-01",
+          "price_jpy": 9720,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000115863/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000113716",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 プロヴィデンスガンダム用 ドラグーンディスプレイエフェクト",
+            "zh": "MG 1 / 100 天意高达用 龙骑兵展示特效",
+            "ko": "MG 1/100 프로비던스 건담용 드라군 디스플레이 이펙트",
+            "en": "ＭＧ 1 / 100 Providence Gundam用 ドラグーンディスプレイエフェクト"
+          },
+          "release_date": "2017-07",
+          "price_jpy": 2376,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000113716/"
           ]
         },
         {
@@ -4071,10 +5769,137 @@
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660079729000&grp_id=5325"
           ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000139181",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 アドヴァンスドジンクス",
+            "zh": "MG 1 / 100 先进GN-X",
+            "ko": "MG 1/100 アドヴァンスドジンクス",
+            "en": "ＭＧ 1 / 100 アドヴァンスドジンクス"
+          },
+          "release_date": null,
+          "price_jpy": 4620,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "00"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000139181/"
+          ]
         }
       ],
       "merged": [],
       "backfilled": [
+        {
+          "kit_id": "beyblade-x-cx00-wa",
+          "change_type": "added",
+          "franchise": "beyblade",
+          "grade_code": "BEYBLADE_X",
+          "subline": "BEYBLADE X Booster",
+          "series_key": "beyblade_limited",
+          "series_labels": {
+            "zh": "限定",
+            "en": "Limited",
+            "ja": "限定",
+            "ko": "한정"
+          },
+          "names": {
+            "ja": "CX-00 【アプリ・イベント限定】 ウィザードアークR4-55LO メタルコート:ブラック",
+            "zh": "CX-00 【App/活动限定】 魔导至尊R4-55LO 金属镀层:黑色",
+            "ko": "CX-00 【アプリ・イベント한정】 ウィザードアークR4-55LO メタルコート:ブラック",
+            "en": "CX-00 [アプリ イベントLimited] ウィザードアークR4-55LO メタルコート:ブラック"
+          },
+          "release_date": "2025-08-09",
+          "price_jpy": 1800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "beyblade",
+            "bbx",
+            "bbx_cx",
+            "bbx_limited",
+            "beyblade_limited",
+            "00"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "takara_tomy_beyblade_x_jp"
+          ],
+          "source_urls": [
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-wa.html",
+            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000131690",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "PG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "ＰＧ 1 / 60 ガンダムエクシア クリアカラーボディ",
+            "zh": "PG 1 / 60 能天使高达 透明机身",
+            "ko": "PG 1/60 건담엑시아 클리어 컬러ボディ",
+            "en": "ＰＧ 1 / 60 Gundam Exia Clear Colorボディ"
+          },
+          "release_date": "2019-04",
+          "price_jpy": 3780,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "00"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000131690/"
+          ]
+        },
         {
           "kit_id": "pbandai-wb-1000194742",
           "change_type": "added",
@@ -4111,6 +5936,44 @@
           ],
           "source_urls": [
             "https://p-bandai.jp/item/item-1000194742/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000131556",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "narrative",
+          "series_labels": {
+            "zh": "NT",
+            "en": "Narrative",
+            "ja": "NT",
+            "ko": "NT"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ナラティブガンダム用 Ｂ装備拡張セット",
+            "zh": "HG 1 / 144 叙事高达用 B装备扩张套装",
+            "ko": "HG 1/144 ナラティブ건담用 B장비확장 세트",
+            "en": "ＨＧ 1 / 144 ナラティブGundam用 ＢEquipmentExpansion Set"
+          },
+          "release_date": "2019-04",
+          "price_jpy": 1404,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000131556/"
           ]
         }
       ],
