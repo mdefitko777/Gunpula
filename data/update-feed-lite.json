@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-13",
-  "generated_at": "2026-11-13T19:01:51.418Z",
+  "generated_at": "2026-11-13T20:16:37.920Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,56 +18,55 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-13T19:00:42.698Z",
+    "generated_at": "2026-11-13T20:13:58.848Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-13",
-      "generated_at": "2026-11-13T19:01:51.418Z",
+      "generated_at": "2026-11-13T20:16:37.920Z",
       "total_before": 39403,
-      "total_after": 39417,
-      "added_count": 10,
-      "changed_count": 128,
+      "total_after": 39432,
+      "added_count": 25,
+      "changed_count": 167,
       "removed_count": 0,
-      "watched_count": 15,
+      "watched_count": 17,
       "merged_count": 0,
       "backfilled_count": 4,
       "renamed_count": 0,
-      "premium_bandai_count": 117,
+      "premium_bandai_count": 143,
       "bbx_count": 3,
       "franchise_counts": {
-        "gundam": 119,
+        "gundam": 144,
         "beyblade": 3,
-        "pokemon": 12,
-        "madoka": 2,
+        "pokemon": 6,
+        "madoka": 29,
         "fate": 2
       },
       "reason_counts": {
-        "new": 10,
-        "archive": 112,
+        "new": 25,
+        "archive": 123,
         "release": 5,
-        "source": 6,
-        "image": 5,
-        "limited": 9,
-        "price": 1,
-        "name": 7
+        "source": 7,
+        "image": 31,
+        "limited": 10,
+        "price": 1
       },
       "interest_tags": [
         "gundam",
         "00",
+        "premium_bandai",
         "beyblade",
         "bbx",
         "bbx_cx",
         "bbx_limited",
         "beyblade_limited",
-        "premium_bandai",
+        "pokemon",
         "bbx_bx",
         "beyblade_bx",
         "bbx_ux",
         "beyblade_ux",
-        "pokemon",
         "seed",
         "madoka",
         "fate"
@@ -116,6 +115,47 @@
           "source_urls": [
             "https://tamashiiweb.com/item/16258/",
             "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000257635",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "MG 1 / 100 スペルビア ジンクス",
+            "zh": "MG 1 / 100 スペルビア GN-X",
+            "ko": "MG 1/100 스페르비아 진엑스",
+            "en": "MG 1 / 100 スペルビア ジンクス"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 6050,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "00"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000257635/"
           ]
         },
         {
@@ -205,6 +245,538 @@
           ]
         },
         {
+          "kit_id": "pbandai-wb-1000129269",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "プレミアムバンダイ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケットモンスターPCクッション ミミッキュ",
+            "zh": "宝可梦PC抱枕 谜拟丘",
+            "ko": "ポケットモンスターPCクッション ミミッキュ",
+            "en": "ポケットモンスターPCクッション ミミッキュ"
+          },
+          "release_date": "2027-06",
+          "price_jpy": 5720,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000129269/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000184562",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "機動戦士ガンダム 水星の魔女 ててこれ",
+            "zh": "机动战士高达 水星的魔女 ててこれ",
+            "ko": "기동전사 건담 수성의 마녀 ててこれ",
+            "en": "Mobile Suit Gundam The Witch from Mercury ててこれ"
+          },
+          "release_date": "2027-06",
+          "price_jpy": 5940,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000184562/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000184559",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "機動戦士ガンダム 水星の魔女 はぐキャラコレクション",
+            "zh": "机动战士高达 水星的魔女 はぐキャラコレクション",
+            "ko": "기동전사 건담 수성의 마녀 はぐキャラコレクション",
+            "en": "Mobile Suit Gundam The Witch from Mercury はぐキャラコレクション"
+          },
+          "release_date": "2027-06",
+          "price_jpy": 5940,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000184559/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000190891",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "STRICT-G ALPHA LIGHT MA-1 NATUS『機動戦士ガンダム水星の魔女』アスティカシア高等専門学園モデル",
+            "zh": "STRICT-G ALPHA LIGHT MA-1 NATUS『机动战士高达 水星的魔女』阿斯提卡西亚高等専門学園模型",
+            "ko": "STRICT-G ALPHA LIGHT MA-1 NATUS『기동전사 건담수성의 마녀』アスティカシア高等専門学園モデル",
+            "en": "STRICT-G ALPHA LIGHT MA-1 NATUS『Mobile Suit Gundam The Witch from Mercury』アスティカシア高等専門学園モデル"
+          },
+          "release_date": "2027-04",
+          "price_jpy": 42680,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000190891/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000181554",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』Tシャツ アスティカシア高等専門学園ロゴ",
+            "zh": "STRICT-G『机动战士高达 水星的魔女』T恤 阿斯提卡西亚高等専門学園标志",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』Tシャツ アスティカシア高等専門学園ロゴ",
+            "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』Tシャツ アスティカシア高等専門学園ロゴ"
+          },
+          "release_date": "2027-04",
+          "price_jpy": 4730,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000181554/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000181556",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』Tシャツ ガンダム・エアリアル",
+            "zh": "STRICT-G『机动战士高达 水星的魔女』T恤 高达·风灵",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』Tシャツ 건담・エアリアル",
+            "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』Tシャツ Gundam エアリアル"
+          },
+          "release_date": "2027-04",
+          "price_jpy": 4730,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000181556/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000181555",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』Tシャツ スレッタ・マーキュリー",
+            "zh": "STRICT-G『机动战士高达 水星的魔女』T恤 斯莱塔·墨丘利",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』Tシャツ スレッタ・マーキュリー",
+            "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』Tシャツ スレッタ マーキュリー"
+          },
+          "release_date": "2027-04",
+          "price_jpy": 4730,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000181555/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000181562",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』パーカー アスティカシア高等専門学園 ロゴ",
+            "zh": "STRICT-G『机动战士高达 水星的魔女』パーカー 阿斯提卡西亚高等専門学園 标志",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』パーカー アスティカシア高等専門学園 ロゴ",
+            "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』パーカー アスティカシア高等専門学園 ロゴ"
+          },
+          "release_date": "2027-04",
+          "price_jpy": 9130,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000181562/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000184952",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』ピンズ アスティカシア高等専門学園 ホルダーロゴ",
+            "zh": "STRICT-G『机动战士高达 水星的魔女』ピンズ 阿斯提卡西亚高等専門学園 ホルダーロゴ",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』ピンズ アスティカシア高等専門学園 ホルダーロゴ",
+            "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』ピンズ アスティカシア高等専門学園 ホルダーロゴ"
+          },
+          "release_date": "2027-04",
+          "price_jpy": 880,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000184952/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000181558",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』長袖Tシャツ ガンダム・エアリアル シルエット",
+            "zh": "STRICT-G『机动战士高达 水星的魔女』長袖T恤 高达·风灵 轮廓装备",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』長袖Tシャツ 건담・エアリアル シルエット",
+            "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』長袖Tシャツ Gundam エアリアル シルエット"
+          },
+          "release_date": "2027-04",
+          "price_jpy": 5830,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000181558/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000181559",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』長袖Tシャツ ガンダム・エアリアルロゴ",
+            "zh": "STRICT-G『机动战士高达 水星的魔女』長袖T恤 高达·风灵标志",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』長袖Tシャツ 건담・エアリアルロゴ",
+            "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』長袖Tシャツ Gundam エアリアルロゴ"
+          },
+          "release_date": "2027-04",
+          "price_jpy": 5830,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000181559/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000257632",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "ibo",
+          "series_labels": {
+            "zh": "铁血",
+            "en": "Iron-Blooded Orphans",
+            "ja": "鉄血",
+            "ko": "철혈"
+          },
+          "names": {
+            "ja": "HG 1 / 144 流星号(グレイズ改参)",
+            "zh": "HG 1 / 144 流星号(格雷兹改参)",
+            "ko": "HG 1/144 流星号(그레이즈改参)",
+            "en": "HG 1 / 144 流星号(Graze改参)"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 2750,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000257632/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000257633",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "HG 1 / 144 ガンダムルブリスジウツー",
+            "zh": "HG 1 / 144 ガンダムルブリスジウツー",
+            "ko": "HG 1/144 건담ルブリスジウツー",
+            "en": "HG 1 / 144 Gundamルブリスジウツー"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 2860,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000257633/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000257634",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "aoz",
+          "series_labels": {
+            "zh": "AOZ",
+            "en": "AOZ",
+            "ja": "A.O.Z",
+            "ko": "AOZ"
+          },
+          "names": {
+            "ja": "HG 1 / 144 リーベン・ヴォルフ (スペース・ウルフ隊仕様)(A.O.Z RE-BOOT版)",
+            "zh": "HG 1 / 144 利本·沃尔夫 (スペース・ウルフ隊样式)(A.O.Z RE-BOOT版)",
+            "ko": "HG 1/144 リーベン・ヴォルフ (スペース・ウルフ隊사양)(A.O.Z RE-BOOT版)",
+            "en": "HG 1 / 144 リーベン ヴォルフ (スペース ウルフ隊Type)(A.O.Z RE-BOOT版)"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 5720,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000257634/"
+          ]
+        },
+        {
           "kit_id": "beyblade-x-bx55",
           "change_type": "added",
           "franchise": "beyblade",
@@ -285,194 +857,52 @@
             "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/ux22.html",
             "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
           ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329452555",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_GOODS",
-          "subline": "Pokemon Center Goods",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ペーパークラフト ポケットモンスター ダイヤモンド・パール ハクタイのもり もりのようかん",
-            "zh": "ペーパークラフト 宝可梦 ダイヤモンド・パール ハクタイのもり もりのようかん",
-            "ko": "ペーパークラフト ポケットモンスター ダイヤモンド・パール ハクタイのもり もりのようかん",
-            "en": "ペーパークラフト ポケットモンスター ダイヤモンド パール ハクタイのもり もりのようかん"
-          },
-          "release_date": null,
-          "price_jpy": 2750,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329452555.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329452548",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_GOODS",
-          "subline": "Pokemon Center Goods",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ペーパークラフト ポケットモンスター ルビー・サファイア フエンタウン おんせん",
-            "zh": "ペーパークラフト 宝可梦 ルビー・サファイア フエンタウン おんせん",
-            "ko": "ペーパークラフト ポケットモンスター ルビー・サファイア フエンタウン おんせん",
-            "en": "ペーパークラフト ポケットモンスター ルビー サファイア フエンタウン おんせん"
-          },
-          "release_date": null,
-          "price_jpy": 2750,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329452548.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329452531",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_GOODS",
-          "subline": "Pokemon Center Goods",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ペーパークラフト ポケットモンスター 金・銀 エンジュシティ スズのとう",
-            "zh": "ペーパークラフト 宝可梦 金·銀 エンジュシティ スズのとう",
-            "ko": "ペーパークラフト ポケットモンスター 金・銀 エンジュシティ スズのとう",
-            "en": "ペーパークラフト ポケットモンスター 金 銀 エンジュシティ スズのとう"
-          },
-          "release_date": null,
-          "price_jpy": 2750,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329452531.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329452524",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_GOODS",
-          "subline": "Pokemon Center Goods",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ペーパークラフト ポケットモンスター 赤・緑 クチバシティ サント・アンヌごう",
-            "zh": "ペーパークラフト 宝可梦 赤·緑 クチバシティ サント・アンヌごう",
-            "ko": "ペーパークラフト ポケットモンスター 赤・緑 クチバシティ サント・アンヌごう",
-            "en": "ペーパークラフト ポケットモンスター 赤 緑 クチバシティ サント アンヌごう"
-          },
-          "release_date": null,
-          "price_jpy": 2750,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329452524.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329452562",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_GOODS",
-          "subline": "Pokemon Center Goods",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ペーパークラフト ポケットモンスターブラック・ホワイト ヤグルマのもり～ヒウンシティ スカイアローブリッジ",
-            "zh": "ペーパークラフト ポケットモンスターブラック・ホワイト ヤグルマのもり~ヒウンシティ スカイアローブリッジ",
-            "ko": "ペーパークラフト ポケットモンスターブラック・ホワイト ヤグルマのもり~ヒウンシティ スカイアローブリッジ",
-            "en": "ペーパークラフト ポケットモンスターブラック ホワイト ヤグルマのもり - ヒウンシティ スカイアローブリッジ"
-          },
-          "release_date": null,
-          "price_jpy": 3850,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329452562.html"
-          ]
         }
       ],
       "changed": [
+        {
+          "kit_id": "pbandai-wb-1000245953",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "RG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＲＧ 1 / 144 アカツキガンダム用シラヌイパック & ＨＧゼウスシルエット用接続パーツ",
+            "zh": "RG 1 / 144 拂晓高达用不知火背包 & HG宙斯魅影装备用连接配件",
+            "ko": "RG 1/144 아카츠키 건담용 시라누이 팩 & HG 제우스 실루엣용 접속 파츠",
+            "en": "ＲＧ 1 / 144 Akatsuki Gundam用シラヌイパック & ＨＧゼウスシルエット用接続パーツ"
+          },
+          "release_date": "2024-12",
+          "price_jpy": 4400,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback",
+            "bandai_spirits_products_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102672711000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000245953/"
+          ]
+        },
         {
           "kit_id": "rg-rg-1-144-4573102621962000",
           "change_type": "changed",
@@ -1055,6 +1485,46 @@
           ]
         },
         {
+          "kit_id": "tamashii-16134",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "ROBOT_SPIRITS",
+          "subline": "ROBOT魂",
+          "series_key": "zz",
+          "series_labels": {
+            "zh": "ZZ",
+            "en": "ZZ",
+            "ja": "ZZ",
+            "ko": "ZZ"
+          },
+          "names": {
+            "ja": "クィン・マンサ ～マーキングプラス～",
+            "zh": "葵曼莎 ~标识增加版~",
+            "ko": "퀸 만사 ~마킹 플러스~",
+            "en": "クィン マンサ - マーキングプラス -"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 35200,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "tamashii_web_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16134/",
+            "https://tamashiiweb.com/item_brand/robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
           "kit_id": "aniplex-fate-itemzeopzhye",
           "change_type": "changed",
           "franchise": "fate",
@@ -1169,120 +1639,40 @@
           ]
         },
         {
-          "kit_id": "hg-hg-1-144-4573102674319000",
+          "kit_id": "bushiroad-fate-99655",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "zeta",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "BUSHIROAD THE BOX",
+          "series_key": "fate_strange_fake",
           "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
+            "zh": "strange Fake",
+            "en": "strange Fake",
+            "ja": "strange Fake",
+            "ko": "strange Fake"
           },
           "names": {
-            "ja": "HG 1 / 144 ボリノーク・サマーン",
-            "zh": "HG 1 / 144 波利诺克·萨曼",
-            "ko": "HG 1/144 보리노크 사만",
-            "en": "HG 1 / 144 ボリノーク サマーン"
+            "ja": "BUSHIROAD THE BOX TVアニメ『Fate / strange Fake』 コレクションフィギュアRICH",
+            "zh": "BUSHIROAD THE BOX TV动画『Fate/strange Fake』 收藏手办RICH",
+            "ko": "BUSHIROAD THE BOX TV 애니메이션『Fate/strange Fake』컬렉션 피규어 RICH",
+            "en": "BUSHIROAD THE BOX TVアニメ『Fate / strange Fake』 コレクションフィギュアRICH"
           },
-          "release_date": "2024-11-30",
-          "price_jpy": 3520,
+          "release_date": "2026-10",
+          "price_jpy": 660,
           "is_limited": false,
-          "is_premium_bandai": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "fate"
           ],
           "change_reasons": [
             "source"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
+            "bushiroad_creative_fate_jp"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102674319000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "hg-hg-1-144-tr-5-a-o-z-re-boot-4573102663757000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "ＨＧ 1 / 144 ギャプランTR-5[フライルー] (ティターンズ仕様)(A.O.Z RE-BOOT版)",
-            "zh": "HG 1 / 144 加布兰TR-5[弗莱鲁] (提坦斯样式)(A.O.Z RE-BOOT版)",
-            "ko": "HG 1/144 갸프랑 TR-5 [흐라이루] (티탄즈 사양)(A.O.Z RE-BOOT판)",
-            "en": "ＨＧ 1 / 144 ギャプランTR-5 [フライルー] (ティターンズType)(A.O.Z RE-BOOT版)"
-          },
-          "release_date": "2024-02",
-          "price_jpy": 3630,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102663757000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "hg-hg-1-144-4573102663740000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "uc_side",
-          "series_labels": {
-            "zh": "UC外传",
-            "en": "UC Side Story",
-            "ja": "UC外伝",
-            "ko": "UC 외전"
-          },
-          "names": {
-            "ja": "ＨＧ 1 / 144 ジーラインスタンダードアーマー",
-            "zh": "HG 1 / 144 G-Line标准装甲",
-            "ko": "HG 1/144 G-라인 스탠다드 아머",
-            "en": "ＨＧ 1 / 144 ジーラインスタンダードアーマー"
-          },
-          "release_date": "2024-02",
-          "price_jpy": 3630,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102663740000&grp_id=5325"
+            "https://bushiroad-creative.com/items/99655/"
           ]
         }
       ],
@@ -1330,6 +1720,47 @@
           ]
         },
         {
+          "kit_id": "pbandai-wb-1000257635",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "MG 1 / 100 スペルビア ジンクス",
+            "zh": "MG 1 / 100 スペルビア GN-X",
+            "ko": "MG 1/100 스페르비아 진엑스",
+            "en": "MG 1 / 100 スペルビア ジンクス"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 6050,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "00"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000257635/"
+          ]
+        },
+        {
           "kit_id": "beyblade-x-cx00-bb",
           "change_type": "added",
           "franchise": "beyblade",
@@ -1372,6 +1803,49 @@
           "source_urls": [
             "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-bb.html",
             "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000245953",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "RG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＲＧ 1 / 144 アカツキガンダム用シラヌイパック & ＨＧゼウスシルエット用接続パーツ",
+            "zh": "RG 1 / 144 拂晓高达用不知火背包 & HG宙斯魅影装备用连接配件",
+            "ko": "RG 1/144 아카츠키 건담용 시라누이 팩 & HG 제우스 실루엣용 접속 파츠",
+            "en": "ＲＧ 1 / 144 Akatsuki Gundam用シラヌイパック & ＨＧゼウスシルエット用接続パーツ"
+          },
+          "release_date": "2024-12",
+          "price_jpy": 4400,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback",
+            "bandai_spirits_products_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102672711000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000245953/"
           ]
         },
         {

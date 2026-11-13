@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-13",
-  "generated_at": "2026-11-13T19:01:51.418Z",
+  "generated_at": "2026-11-13T20:16:37.920Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,56 +18,55 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-13T19:00:42.698Z",
+    "generated_at": "2026-11-13T20:13:58.848Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-13",
-      "generated_at": "2026-11-13T19:01:51.418Z",
+      "generated_at": "2026-11-13T20:16:37.920Z",
       "total_before": 39403,
-      "total_after": 39417,
-      "added_count": 10,
-      "changed_count": 128,
+      "total_after": 39432,
+      "added_count": 25,
+      "changed_count": 167,
       "removed_count": 0,
-      "watched_count": 15,
+      "watched_count": 17,
       "merged_count": 0,
       "backfilled_count": 4,
       "renamed_count": 0,
-      "premium_bandai_count": 117,
+      "premium_bandai_count": 143,
       "bbx_count": 3,
       "franchise_counts": {
-        "gundam": 119,
+        "gundam": 144,
         "beyblade": 3,
-        "pokemon": 12,
-        "madoka": 2,
+        "pokemon": 6,
+        "madoka": 29,
         "fate": 2
       },
       "reason_counts": {
-        "new": 10,
-        "archive": 112,
+        "new": 25,
+        "archive": 123,
         "release": 5,
-        "source": 6,
-        "image": 5,
-        "limited": 9,
-        "price": 1,
-        "name": 7
+        "source": 7,
+        "image": 31,
+        "limited": 10,
+        "price": 1
       },
       "interest_tags": [
         "gundam",
         "00",
+        "premium_bandai",
         "beyblade",
         "bbx",
         "bbx_cx",
         "bbx_limited",
         "beyblade_limited",
-        "premium_bandai",
+        "pokemon",
         "bbx_bx",
         "beyblade_bx",
         "bbx_ux",
         "beyblade_ux",
-        "pokemon",
         "seed",
         "madoka",
         "fate"
@@ -116,6 +115,47 @@
           "source_urls": [
             "https://tamashiiweb.com/item/16258/",
             "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000257635",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "MG 1 / 100 スペルビア ジンクス",
+            "zh": "MG 1 / 100 スペルビア GN-X",
+            "ko": "MG 1/100 스페르비아 진엑스",
+            "en": "MG 1 / 100 スペルビア ジンクス"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 6050,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "00"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000257635/"
           ]
         },
         {
@@ -202,6 +242,538 @@
           ],
           "source_urls": [
             "https://p-bandai.jp/item/item-1000139181/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000129269",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "プレミアムバンダイ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケットモンスターPCクッション ミミッキュ",
+            "zh": "宝可梦PC抱枕 谜拟丘",
+            "ko": "ポケットモンスターPCクッション ミミッキュ",
+            "en": "ポケットモンスターPCクッション ミミッキュ"
+          },
+          "release_date": "2027-06",
+          "price_jpy": 5720,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000129269/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000184562",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "機動戦士ガンダム 水星の魔女 ててこれ",
+            "zh": "机动战士高达 水星的魔女 ててこれ",
+            "ko": "기동전사 건담 수성의 마녀 ててこれ",
+            "en": "Mobile Suit Gundam The Witch from Mercury ててこれ"
+          },
+          "release_date": "2027-06",
+          "price_jpy": 5940,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000184562/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000184559",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "機動戦士ガンダム 水星の魔女 はぐキャラコレクション",
+            "zh": "机动战士高达 水星的魔女 はぐキャラコレクション",
+            "ko": "기동전사 건담 수성의 마녀 はぐキャラコレクション",
+            "en": "Mobile Suit Gundam The Witch from Mercury はぐキャラコレクション"
+          },
+          "release_date": "2027-06",
+          "price_jpy": 5940,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000184559/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000190891",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "STRICT-G ALPHA LIGHT MA-1 NATUS『機動戦士ガンダム水星の魔女』アスティカシア高等専門学園モデル",
+            "zh": "STRICT-G ALPHA LIGHT MA-1 NATUS『机动战士高达 水星的魔女』阿斯提卡西亚高等専門学園模型",
+            "ko": "STRICT-G ALPHA LIGHT MA-1 NATUS『기동전사 건담수성의 마녀』アスティカシア高等専門学園モデル",
+            "en": "STRICT-G ALPHA LIGHT MA-1 NATUS『Mobile Suit Gundam The Witch from Mercury』アスティカシア高等専門学園モデル"
+          },
+          "release_date": "2027-04",
+          "price_jpy": 42680,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000190891/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000181554",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』Tシャツ アスティカシア高等専門学園ロゴ",
+            "zh": "STRICT-G『机动战士高达 水星的魔女』T恤 阿斯提卡西亚高等専門学園标志",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』Tシャツ アスティカシア高等専門学園ロゴ",
+            "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』Tシャツ アスティカシア高等専門学園ロゴ"
+          },
+          "release_date": "2027-04",
+          "price_jpy": 4730,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000181554/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000181556",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』Tシャツ ガンダム・エアリアル",
+            "zh": "STRICT-G『机动战士高达 水星的魔女』T恤 高达·风灵",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』Tシャツ 건담・エアリアル",
+            "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』Tシャツ Gundam エアリアル"
+          },
+          "release_date": "2027-04",
+          "price_jpy": 4730,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000181556/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000181555",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』Tシャツ スレッタ・マーキュリー",
+            "zh": "STRICT-G『机动战士高达 水星的魔女』T恤 斯莱塔·墨丘利",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』Tシャツ スレッタ・マーキュリー",
+            "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』Tシャツ スレッタ マーキュリー"
+          },
+          "release_date": "2027-04",
+          "price_jpy": 4730,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000181555/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000181562",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』パーカー アスティカシア高等専門学園 ロゴ",
+            "zh": "STRICT-G『机动战士高达 水星的魔女』パーカー 阿斯提卡西亚高等専門学園 标志",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』パーカー アスティカシア高等専門学園 ロゴ",
+            "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』パーカー アスティカシア高等専門学園 ロゴ"
+          },
+          "release_date": "2027-04",
+          "price_jpy": 9130,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000181562/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000184952",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』ピンズ アスティカシア高等専門学園 ホルダーロゴ",
+            "zh": "STRICT-G『机动战士高达 水星的魔女』ピンズ 阿斯提卡西亚高等専門学園 ホルダーロゴ",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』ピンズ アスティカシア高等専門学園 ホルダーロゴ",
+            "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』ピンズ アスティカシア高等専門学園 ホルダーロゴ"
+          },
+          "release_date": "2027-04",
+          "price_jpy": 880,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000184952/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000181558",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』長袖Tシャツ ガンダム・エアリアル シルエット",
+            "zh": "STRICT-G『机动战士高达 水星的魔女』長袖T恤 高达·风灵 轮廓装备",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』長袖Tシャツ 건담・エアリアル シルエット",
+            "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』長袖Tシャツ Gundam エアリアル シルエット"
+          },
+          "release_date": "2027-04",
+          "price_jpy": 5830,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000181558/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000181559",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "GUNDAM_MERCH",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』長袖Tシャツ ガンダム・エアリアルロゴ",
+            "zh": "STRICT-G『机动战士高达 水星的魔女』長袖T恤 高达·风灵标志",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』長袖Tシャツ 건담・エアリアルロゴ",
+            "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』長袖Tシャツ Gundam エアリアルロゴ"
+          },
+          "release_date": "2027-04",
+          "price_jpy": 5830,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000181559/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000257632",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "ibo",
+          "series_labels": {
+            "zh": "铁血",
+            "en": "Iron-Blooded Orphans",
+            "ja": "鉄血",
+            "ko": "철혈"
+          },
+          "names": {
+            "ja": "HG 1 / 144 流星号(グレイズ改参)",
+            "zh": "HG 1 / 144 流星号(格雷兹改参)",
+            "ko": "HG 1/144 流星号(그레이즈改参)",
+            "en": "HG 1 / 144 流星号(Graze改参)"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 2750,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000257632/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000257633",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "witch",
+          "series_labels": {
+            "zh": "水星",
+            "en": "Witch",
+            "ja": "水星",
+            "ko": "수성"
+          },
+          "names": {
+            "ja": "HG 1 / 144 ガンダムルブリスジウツー",
+            "zh": "HG 1 / 144 ガンダムルブリスジウツー",
+            "ko": "HG 1/144 건담ルブリスジウツー",
+            "en": "HG 1 / 144 Gundamルブリスジウツー"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 2860,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000257633/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000257634",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "aoz",
+          "series_labels": {
+            "zh": "AOZ",
+            "en": "AOZ",
+            "ja": "A.O.Z",
+            "ko": "AOZ"
+          },
+          "names": {
+            "ja": "HG 1 / 144 リーベン・ヴォルフ (スペース・ウルフ隊仕様)(A.O.Z RE-BOOT版)",
+            "zh": "HG 1 / 144 利本·沃尔夫 (スペース・ウルフ隊样式)(A.O.Z RE-BOOT版)",
+            "ko": "HG 1/144 リーベン・ヴォルフ (スペース・ウルフ隊사양)(A.O.Z RE-BOOT版)",
+            "en": "HG 1 / 144 リーベン ヴォルフ (スペース ウルフ隊Type)(A.O.Z RE-BOOT版)"
+          },
+          "release_date": "2027-01",
+          "price_jpy": 5720,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000257634/"
           ]
         },
         {
@@ -473,6 +1045,49 @@
         }
       ],
       "changed": [
+        {
+          "kit_id": "pbandai-wb-1000245953",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "RG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＲＧ 1 / 144 アカツキガンダム用シラヌイパック & ＨＧゼウスシルエット用接続パーツ",
+            "zh": "RG 1 / 144 拂晓高达用不知火背包 & HG宙斯魅影装备用连接配件",
+            "ko": "RG 1/144 아카츠키 건담용 시라누이 팩 & HG 제우스 실루엣용 접속 파츠",
+            "en": "ＲＧ 1 / 144 Akatsuki Gundam用シラヌイパック & ＨＧゼウスシルエット用接続パーツ"
+          },
+          "release_date": "2024-12",
+          "price_jpy": 4400,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback",
+            "bandai_spirits_products_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102672711000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000245953/"
+          ]
+        },
         {
           "kit_id": "rg-rg-1-144-4573102621962000",
           "change_type": "changed",
@@ -1055,6 +1670,46 @@
           ]
         },
         {
+          "kit_id": "tamashii-16134",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "ROBOT_SPIRITS",
+          "subline": "ROBOT魂",
+          "series_key": "zz",
+          "series_labels": {
+            "zh": "ZZ",
+            "en": "ZZ",
+            "ja": "ZZ",
+            "ko": "ZZ"
+          },
+          "names": {
+            "ja": "クィン・マンサ ～マーキングプラス～",
+            "zh": "葵曼莎 ~标识增加版~",
+            "ko": "퀸 만사 ~마킹 플러스~",
+            "en": "クィン マンサ - マーキングプラス -"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 35200,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "tamashii_web_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16134/",
+            "https://tamashiiweb.com/item_brand/robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
           "kit_id": "aniplex-fate-itemzeopzhye",
           "change_type": "changed",
           "franchise": "fate",
@@ -1169,6 +1824,709 @@
           ]
         },
         {
+          "kit_id": "bushiroad-fate-99655",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "BUSHIROAD THE BOX",
+          "series_key": "fate_strange_fake",
+          "series_labels": {
+            "zh": "strange Fake",
+            "en": "strange Fake",
+            "ja": "strange Fake",
+            "ko": "strange Fake"
+          },
+          "names": {
+            "ja": "BUSHIROAD THE BOX TVアニメ『Fate / strange Fake』 コレクションフィギュアRICH",
+            "zh": "BUSHIROAD THE BOX TV动画『Fate/strange Fake』 收藏手办RICH",
+            "ko": "BUSHIROAD THE BOX TV 애니메이션『Fate/strange Fake』컬렉션 피규어 RICH",
+            "en": "BUSHIROAD THE BOX TVアニメ『Fate / strange Fake』 コレクションフィギュアRICH"
+          },
+          "release_date": "2026-10",
+          "price_jpy": 660,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bushiroad_creative_fate_jp"
+          ],
+          "source_urls": [
+            "https://bushiroad-creative.com/items/99655/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2725383",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 暁美ほむら フィギュア",
+            "zh": "剧场版 魔法少女小圆[新篇]叛逆的物语 晓美焰 手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 아케미 호무라 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 暁美ほむら フィギュア"
+          },
+          "release_date": "2026-09-29",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2725383/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2725386",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 佐倉杏子 フィギュア",
+            "zh": "剧场版 魔法少女小圆[新篇]叛逆的物语 佐仓杏子 手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 사쿠라 쿄코 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 佐倉杏子 フィギュア"
+          },
+          "release_date": "2026-09-29",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2725386/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2725382",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 鹿目まどか フィギュア",
+            "zh": "剧场版 魔法少女小圆[新篇]叛逆的物语 鹿目圆 手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 카나메 마도카 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 鹿目まどか フィギュア"
+          },
+          "release_date": "2026-09-29",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2725382/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2725384",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 巴マミ フィギュア",
+            "zh": "剧场版 魔法少女小圆[新篇]叛逆的物语 巴麻美 手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 토모에 마미 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 巴マミ フィギュア"
+          },
+          "release_date": "2026-09-29",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2725384/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2725385",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 美樹さやか フィギュア",
+            "zh": "剧场版 魔法少女小圆[新篇]叛逆的物语 美树沙耶香 手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 미키 사야카 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 美樹さやか フィギュア"
+          },
+          "release_date": "2026-09-29",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2725385/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2841183",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PLUSH",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 Fluffy Puffy BIG～キュゥべえ～",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 Fluffy Puffy BIG~丘比~",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 Fluffy Puffy BIG ~큐베~",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 Fluffy Puffy BIG - キュゥべえ -"
+          },
+          "release_date": "2026-09-25",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2841183/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2774393",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 暁美ほむら フィギュア",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 晓美焰 手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 아케미 호무라 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 暁美ほむら フィギュア"
+          },
+          "release_date": "2026-08-25",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2774393/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2807214",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 佐倉杏子 フィギュア",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 佐仓杏子 手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 사쿠라 쿄코 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 佐倉杏子 フィギュア"
+          },
+          "release_date": "2026-08-25",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2807214/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2774392",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 鹿目まどか フィギュア",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 鹿目圆 手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 카나메 마도카 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 鹿目まどか フィギュア"
+          },
+          "release_date": "2026-08-25",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2774392/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2807216",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 巴マミ フィギュア",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 巴麻美 手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 토모에 마미 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 巴マミ フィギュア"
+          },
+          "release_date": "2026-08-25",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2807216/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2807215",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 美樹さやか フィギュア",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 美树沙耶香 手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 미키 사야카 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 美樹さやか フィギュア"
+          },
+          "release_date": "2026-08-25",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2807215/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2807218",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PLUSH",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 ちびぐるみ",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 Q版玩偶",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 치비구루미",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 ちびぐるみ"
+          },
+          "release_date": "2026-07-28",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2807218/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2813871",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PLUSH",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 ドーム型ぬいぐるみ～キュゥべえ～",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 圆顶毛绒玩偶~丘比~",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 돔형 봉제인형 ~큐베~",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 ドーム型ぬいぐるみ - キュゥべえ -"
+          },
+          "release_date": "2026-07-22",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2813871/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2807211",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PLUSH",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 ちびぐるみ～魔法少女～",
+            "zh": "剧场版 魔法少女小圆[新篇]叛逆的物语 Q版玩偶~魔法少女~",
+            "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 치비구루미 ~마법소녀~",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 ちびぐるみ - 魔法少女 -"
+          },
+          "release_date": "2026-03-13",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2807211/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2833636",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PLUSH",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 めちゃもふぐっとぬいぐるみ～キュゥべえ～Ⅱ",
+            "zh": "剧场版 魔法少女小圆[新篇]叛逆的物语 超蓬松毛绒玩偶~丘比~II",
+            "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 메차모후 굿 봉제인형 ~큐베~ Ⅱ",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 めちゃもふぐっとぬいぐるみ - キュゥべえ - Ⅱ"
+          },
+          "release_date": "2026-03-10",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2833636/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2633405",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PLUSH",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Fluffy Puffy～キュゥべえ＆お菓子の魔女～",
+            "zh": "剧场版 魔法少女小圆[新篇]叛逆的物语 Fluffy Puffy~丘比&点心魔女~",
+            "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 Fluffy Puffy ~큐베 & 과자의 마녀~",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Fluffy Puffy - キュゥべえ＆お菓子の魔女 -"
+          },
+          "release_date": "2026-02-26",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2633405/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2725387",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 BANPRESTO EVOLVE アルティメットまどかフィギュア",
+            "zh": "剧场版 魔法少女小圆[新篇]叛逆的物语 BANPRESTO EVOLVE 究极小圆手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 BANPRESTO EVOLVE 얼티밋 마도카 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 BANPRESTO EVOLVE アルティメットまどかフィギュア"
+          },
+          "release_date": "2025-04-24",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2725387/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2725388",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 BANPRESTO EVOLVE 悪魔ほむらフィギュア",
+            "zh": "剧场版 魔法少女小圆[新篇]叛逆的物语 BANPRESTO EVOLVE 恶魔焰手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 BANPRESTO EVOLVE 악마 호무라 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 BANPRESTO EVOLVE 悪魔ほむらフィギュア"
+          },
+          "release_date": "2025-04-24",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2725388/"
+          ]
+        },
+        {
           "kit_id": "hg-hg-1-144-4573102674319000",
           "change_type": "changed",
           "franchise": "gundam",
@@ -1205,6 +2563,43 @@
           ],
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102674319000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2683612",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PLUSH",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 ちびぐるみ～キュゥべえ着ぐるみver.～",
+            "zh": "剧场版 魔法少女小圆[新篇]叛逆的物语 Q版玩偶~丘比玩偶装ver.~",
+            "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 치비구루미 ~큐베 인형탈 Ver.~",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 ちびぐるみ - キュゥべえ着ぐるみver. -"
+          },
+          "release_date": "2024-02-15",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2683612/"
           ]
         },
         {
@@ -1283,6 +2678,191 @@
           ],
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102663740000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2683611",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PLUSH",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 めちゃもふぐっとぬいぐるみ～キュゥべえ～",
+            "zh": "剧场版 魔法少女小圆[新篇]叛逆的物语 超蓬松毛绒玩偶~丘比~",
+            "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 메차모후 굿 봉제인형 ~큐베~",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 めちゃもふぐっとぬいぐるみ - キュゥべえ -"
+          },
+          "release_date": "2024-01-25",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2683611/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2672163",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Serenus couture-佐倉杏子-",
+            "zh": "剧场版 魔法少女小圆[新篇]叛逆的物语 Serenus couture-佐仓杏子-",
+            "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 Serenus couture -사쿠라 쿄코-",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Serenus couture-佐倉杏子-"
+          },
+          "release_date": "2024-01-16",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2672163/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2672162",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Serenus couture-美樹さやか-",
+            "zh": "剧场版 魔法少女小圆[新篇]叛逆的物语 Serenus couture-美树沙耶香-",
+            "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 Serenus couture -미키 사야카-",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Serenus couture-美樹さやか-"
+          },
+          "release_date": "2024-01-16",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2672162/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2672164",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Serenus couture-巴マミ-",
+            "zh": "剧场版 魔法少女小圆[新篇]叛逆的物语 Serenus couture-巴麻美-",
+            "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 Serenus couture -토모에 마미-",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Serenus couture-巴マミ-"
+          },
+          "release_date": "2023-12-19",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2672164/"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2661600",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Serenus couture-暁美ほむら-",
+            "zh": "剧场版 魔法少女小圆[新篇]叛逆的物语 Serenus couture-晓美焰-",
+            "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 Serenus couture -아케미 호무라-",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Serenus couture-暁美ほむら-"
+          },
+          "release_date": "2023-11-21",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2661600/"
           ]
         },
         {
@@ -1403,6 +2983,43 @@
           ],
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102660084000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2661609",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PRIZE",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Serenus couture-鹿目まどか-",
+            "zh": "剧场版 魔法少女小圆[新篇]叛逆的物语 Serenus couture-鹿目圆-",
+            "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 Serenus couture -카나메 마도카-",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Serenus couture-鹿目まどか-"
+          },
+          "release_date": "2023-10-24",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2661609/"
           ]
         },
         {
@@ -1676,6 +3293,43 @@
           ],
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102654649000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2633404",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PLUSH",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Fluffy Puffy～キュゥべえ＆べべ～",
+            "zh": "剧场版 魔法少女小圆[新篇]叛逆的物语 Fluffy Puffy~丘比&贝贝~",
+            "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 Fluffy Puffy ~큐베 & 베베~",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Fluffy Puffy - キュゥべえ＆べべ -"
+          },
+          "release_date": "2023-05-25",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2633404/"
           ]
         },
         {
@@ -2107,6 +3761,43 @@
           ],
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102629371000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "banpresto-madoka-2596551",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PLUSH",
+          "subline": "バンプレスト景品",
+          "series_key": "madoka_tv",
+          "series_labels": {
+            "zh": "魔法少女小圆",
+            "en": "Madoka Magica",
+            "ja": "まどか☆マギカ",
+            "ko": "마도카 마기카"
+          },
+          "names": {
+            "ja": "魔法少女まどか☆マギカ 10周年記念 めちゃでかぬいぐるみ～キュゥべえ～寝そべりver.",
+            "zh": "魔法少女小圆 10周年纪念 超大毛绒玩偶~丘比~趴姿ver.",
+            "ko": "마법소녀 마도카☆마기카 10주년 기념 초대형 봉제인형 ~큐베~ 엎드린 Ver.",
+            "en": "魔法少女まどか☆マギカ 10周年記念 めちゃでかぬいぐるみ - キュゥべえ - 寝そべりver."
+          },
+          "release_date": "2022-03-24",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "banpresto_prize_madoka_jp"
+          ],
+          "source_urls": [
+            "https://bsp-prize.jp/item/2596551/"
           ]
         },
         {
@@ -2890,6 +4581,45 @@
           ]
         },
         {
+          "kit_id": "re100-re-100-1-100-4573102590602000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RE100",
+          "subline": "RE/100",
+          "series_key": "victory",
+          "series_labels": {
+            "zh": "V",
+            "en": "V",
+            "ja": "V",
+            "ko": "V"
+          },
+          "names": {
+            "ja": "ＲＥ / 100 1 / 100 ガンイージ・プロトタイプ（ロールアウトカラー）",
+            "zh": "RE / 100 1 / 100 钢伊吉·原型(初次出厂配色)",
+            "ko": "RE/100 1/100 건이지 프로토타입(롤아웃 컬러)",
+            "en": "ＲＥ / 100 1 / 100 ガンイージ プロトタイプ (ロールアウトカラー)"
+          },
+          "release_date": "2020-01",
+          "price_jpy": 4400,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102590602000&grp_id=5325"
+          ]
+        },
+        {
           "kit_id": "pbandai-wb-1000138400",
           "change_type": "changed",
           "franchise": "gundam",
@@ -3120,6 +4850,44 @@
           ]
         },
         {
+          "kit_id": "pbandai-wb-1000134427",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RE100",
+          "subline": "プレミアムバンダイ",
+          "series_key": "victory",
+          "series_labels": {
+            "zh": "V",
+            "en": "V",
+            "ja": "V",
+            "ko": "V"
+          },
+          "names": {
+            "ja": "ＲＥ / 100 1 / 100 ガンイージ 陸戦タイプ",
+            "zh": "RE / 100 1 / 100 钢伊吉 陆战型",
+            "ko": "RE/100 1/100 건이지 육전 타입",
+            "en": "ＲＥ / 100 1 / 100 ガンイージ 陸戦タイプ"
+          },
+          "release_date": "2019-08",
+          "price_jpy": 3780,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000134427/"
+          ]
+        },
+        {
           "kit_id": "pbandai-wb-1000254472",
           "change_type": "changed",
           "franchise": "gundam",
@@ -3193,6 +4961,44 @@
           ],
           "source_urls": [
             "https://p-bandai.jp/item/item-1000255631/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000131778",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RE100",
+          "subline": "プレミアムバンダイ",
+          "series_key": "victory",
+          "series_labels": {
+            "zh": "V",
+            "en": "V",
+            "ja": "V",
+            "ko": "V"
+          },
+          "names": {
+            "ja": "ＲＥ / 100 1 / 100 ガンブラスター",
+            "zh": "RE / 100 1 / 100 钢冲击者",
+            "ko": "RE/100 1/100 건블래스터",
+            "en": "ＲＥ / 100 1 / 100 ガンブラスター"
+          },
+          "release_date": "2019-05",
+          "price_jpy": 3780,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000131778/"
           ]
         },
         {
@@ -3769,6 +5575,44 @@
           ]
         },
         {
+          "kit_id": "pbandai-wb-1000113445",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "ibo",
+          "series_labels": {
+            "zh": "铁血",
+            "en": "Iron-Blooded Orphans",
+            "ja": "鉄血",
+            "ko": "철혈"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 モビルレギンレイズ（一般機）",
+            "zh": "HG 1 / 144 雷金雷兹(一般机)",
+            "ko": "HG 1/144 모빌 레긴레이즈(일반기)",
+            "en": "ＨＧ 1 / 144 モビルレギンレイズ (一般機)"
+          },
+          "release_date": "2017-06",
+          "price_jpy": 1296,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000113445/"
+          ]
+        },
+        {
           "kit_id": "pbandai-wb-1000112047",
           "change_type": "changed",
           "franchise": "gundam",
@@ -3844,1343 +5688,6 @@
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660164050000&grp_id=5325"
           ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000110311",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "PG",
-          "subline": "プレミアムバンダイ",
-          "series_key": "narrative",
-          "series_labels": {
-            "zh": "NT",
-            "en": "Narrative",
-            "ja": "NT",
-            "ko": "NT"
-          },
-          "names": {
-            "ja": "ＰＧ 1 / 60 RX-０ ユニコーンガンダム３号機 フェネクス",
-            "zh": "PG 1 / 60 RX-0 独角兽高达3号机 凤凰",
-            "ko": "PG 1/60 RX-0 유니콘 건담 3호기 페넥스",
-            "en": "ＰＧ 1 / 60 RX-０ Unicorn Gundam３号機 Phenex"
-          },
-          "release_date": "2017-03",
-          "price_jpy": 43200,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000110311/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000107583",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "プレミアムバンダイ",
-          "series_key": "thunderbolt",
-          "series_labels": {
-            "zh": "雷霆宙域",
-            "en": "Thunderbolt",
-            "ja": "サンダーボルト",
-            "ko": "썬더볼트"
-          },
-          "names": {
-            "ja": "ＭＧ 1 / 100 ウエポン＆アーマーハンガー FOR フルアーマー・ガンダム Ｖｅｒ．Ｋａ （GTB版）",
-            "zh": "MG 1 / 100 武器&装甲机库 FOR 全装甲高达 Ver.Ka (GTB版)",
-            "ko": "MG 1/100 웨폰&아머 행거 FOR 풀 아머 건담 Ver.Ka (GTB판)",
-            "en": "ＭＧ 1 / 100 ウエポン＆アーマーハンガー FOR フルアーマー Gundam Ｖｅｒ．Ｋａ (GTB版)"
-          },
-          "release_date": "2016-12",
-          "price_jpy": 2808,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://p-bandai.jp/item/item-1000107583/"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-hws-ver-ka-4549660148326000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "cca",
-          "series_labels": {
-            "zh": "逆夏",
-            "en": "CCA",
-            "ja": "逆シャア",
-            "ko": "역샤아"
-          },
-          "names": {
-            "ja": "ＭＧ 1 / 100 νガンダム ＨＷＳ Ｖｅｒ．Ｋａ",
-            "zh": "MG 1 / 100 ν高达 HWS Ver.Ka",
-            "ko": "MG 1/100 ν건담 HWS Ver.Ka",
-            "en": "ＭＧ 1 / 100 νGundam ＨＷＳ Ｖｅｒ．Ｋａ"
-          },
-          "release_date": "2016-12",
-          "price_jpy": 10340,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660148326000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-ver-ka-hws-4549660148333000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "cca",
-          "series_labels": {
-            "zh": "逆夏",
-            "en": "CCA",
-            "ja": "逆シャア",
-            "ko": "역샤아"
-          },
-          "names": {
-            "ja": "ＭＧ 1 / 100 νガンダム Ｖｅｒ．Ｋａ用 ＨＷＳ拡張セット",
-            "zh": "MG 1 / 100 ν高达 Ver.Ka用 HWS扩展套装",
-            "ko": "MG 1/100 ν건담 Ver.Ka용 HWS 확장 세트",
-            "en": "ＭＧ 1 / 100 νGundam Ｖｅｒ．Ｋａ用 ＨＷＳExpansion Set"
-          },
-          "release_date": "2016-12",
-          "price_jpy": 2640,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660148333000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "hg-hguc-1-144-c1-4573102602404000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HGUC",
-          "series_key": "sentinel",
-          "series_labels": {
-            "zh": "前哨战",
-            "en": "Sentinel",
-            "ja": "センチネル",
-            "ko": "센티넬"
-          },
-          "names": {
-            "ja": "HGUC 1 / 144 ゼータプラスＣ１",
-            "zh": "HGUC 1 / 144 Z+C1",
-            "ko": "HGUC 1/144 제타 플러스 C1",
-            "en": "HGUC 1 / 144 ZetaプラスＣ１"
-          },
-          "release_date": "2016-11-05",
-          "price_jpy": 2640,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102602404000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "hg-hguc-1-144-mk-ii-4549660116233000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HGUC",
-          "series_key": "zz",
-          "series_labels": {
-            "zh": "ZZ",
-            "en": "ZZ",
-            "ja": "ZZ",
-            "ko": "ZZ"
-          },
-          "names": {
-            "ja": "HGUC 1 / 144 キュベレイＭｋ-ＩＩ（エルピー・プル専用機）",
-            "zh": "HGUC 1 / 144 京宝梵Mk-II(艾尔比·普露专用机)",
-            "ko": "HGUC 1/144 큐베레이 Mk-II (엘피 플 전용기)",
-            "en": "HGUC 1 / 144 QubeleyＭｋ-ＩＩ (エルピー プルCustom機)"
-          },
-          "release_date": "2016-09",
-          "price_jpy": 2200,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660116233000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-4549660100355000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "0083",
-          "series_labels": {
-            "zh": "0083",
-            "en": "0083",
-            "ja": "0083",
-            "ko": "0083"
-          },
-          "names": {
-            "ja": "ＭＧ 1 / 100 パワード・ジム",
-            "zh": "MG 1 / 100 强力吉姆",
-            "ko": "MG 1/100 파워드 짐",
-            "en": "ＭＧ 1 / 100 パワード GM"
-          },
-          "release_date": "2016-07",
-          "price_jpy": 3300,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660100355000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "hg-hgbf-1-144-z-4549660079767000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HGBF",
-          "series_key": "build",
-          "series_labels": {
-            "zh": "创战",
-            "en": "Build",
-            "ja": "ビルド",
-            "ko": "빌드"
-          },
-          "names": {
-            "ja": "HGBF 1 / 144 ライトニングＺガンダム アスプロス",
-            "zh": "HGBF 1 / 144 闪电Z高达 阿斯普洛斯",
-            "ko": "HGBF 1/144 라이트닝 Z 건담 아스프로스",
-            "en": "HGBF 1 / 144 ライトニングＺGundam アスプロス"
-          },
-          "release_date": "2016-06",
-          "price_jpy": 2420,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660079767000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "hg-hguc-1-144-21stcentury-real-type-ver-4573102602787000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HGUC",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "HGUC 1 / 144 ガンキャノン（２１ｓｔＣＥＮＴＵＲＹ ＲＥＡＬ ＴＹＰＥ Ｖｅｒ．）",
-            "zh": "HGUC 1 / 144 钢加农(21stCENTURY REAL TYPE Ver.)",
-            "ko": "HGUC 1/144 건캐논 (21st CENTURY REAL TYPE Ver.)",
-            "en": "HGUC 1 / 144 ガンキャノン (２１ｓｔＣＥＮＴＵＲＹ ＲＥＡＬ ＴＹＰＥ Ｖｅｒ．)"
-          },
-          "release_date": "2016-06",
-          "price_jpy": 1540,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102602787000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "hg-hguc-1-144-21stcentury-real-type-ver-4573102602800000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HGUC",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "HGUC 1 / 144 ガンダム（２１ｓｔＣＥＮＴＵＲＹ ＲＥＡＬ ＴＹＰＥ Ｖｅｒ．）",
-            "zh": "HGUC 1 / 144 高达(21stCENTURY REAL TYPE Ver.)",
-            "ko": "HGUC 1/144 건담（21stCENTURY REAL TYPE Ver.）",
-            "en": "HGUC 1 / 144 Gundam (２１ｓｔＣＥＮＴＵＲＹ ＲＥＡＬ ＴＹＰＥ Ｖｅｒ．)"
-          },
-          "release_date": "2016-06",
-          "price_jpy": 1320,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102602800000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "hg-hguc-1-144-21stcentury-real-type-ver-4573102602794000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HGUC",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "HGUC 1 / 144 グフ（２１ｓｔＣＥＮＴＵＲＹ ＲＥＡＬ ＴＹＰＥ Ｖｅｒ．）",
-            "zh": "HGUC 1 / 144 老虎(21stCENTURY REAL TYPE Ver.)",
-            "ko": "HGUC 1/144 구프（21stCENTURY REAL TYPE Ver.）",
-            "en": "HGUC 1 / 144 Gouf (２１ｓｔＣＥＮＴＵＲＹ ＲＥＡＬ ＴＹＰＥ Ｖｅｒ．)"
-          },
-          "release_date": "2016-06",
-          "price_jpy": 1870,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102602794000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-ver-4549660058762000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "cca",
-          "series_labels": {
-            "zh": "逆夏",
-            "en": "CCA",
-            "ja": "逆シャア",
-            "ko": "역샤아"
-          },
-          "names": {
-            "ja": "ＭＧ 1 / 100 ギラ・ドーガ（ユニコーンＶｅｒ．）",
-            "zh": "MG 1 / 100 吉拉·多加(独角兽Ver.)",
-            "ko": "MG 1/100 기라 도가(유니콘 Ver.)",
-            "en": "ＭＧ 1 / 100 ギラ ドーガ (UnicornＶｅｒ．)"
-          },
-          "release_date": "2016-06",
-          "price_jpy": 5940,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660058762000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-ver-4549660058779000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "sentinel",
-          "series_labels": {
-            "zh": "前哨战",
-            "en": "Sentinel",
-            "ja": "センチネル",
-            "ko": "센티넬"
-          },
-          "names": {
-            "ja": "ＭＧ 1 / 100 ゼータプラス（ユニコーンＶｅｒ．）",
-            "zh": "MG 1 / 100 Z+(独角兽Ver.)",
-            "ko": "MG 1/100 제타 플러스(유니콘 Ver.)",
-            "en": "ＭＧ 1 / 100 Zetaプラス (UnicornＶｅｒ．)"
-          },
-          "release_date": "2016-06",
-          "price_jpy": 4180,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660058779000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "hg-hguc-1-144-ver-4549660079705000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HGUC",
-          "series_key": "0083",
-          "series_labels": {
-            "zh": "0083",
-            "en": "0083",
-            "ja": "0083",
-            "ko": "0083"
-          },
-          "names": {
-            "ja": "HGUC 1 / 144 ガーベラ・テトラ（ロールアウトＶｅｒ．）",
-            "zh": "HGUC 1 / 144 格贝拉·特多拉(下线Ver.)",
-            "ko": "HGUC 1/144 거베라 테트라 (롤아웃 Ver.)",
-            "en": "HGUC 1 / 144 ガーベラ テトラ (ロールアウトＶｅｒ．)"
-          },
-          "release_date": "2016-05",
-          "price_jpy": 2200,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "limited",
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660079705000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "hg-hguc-1-144-4549660079712000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HGUC",
-          "series_key": "0083",
-          "series_labels": {
-            "zh": "0083",
-            "en": "0083",
-            "ja": "0083",
-            "ko": "0083"
-          },
-          "names": {
-            "ja": "HGUC 1 / 144 ドラッツェ改",
-            "zh": "HGUC 1 / 144 德拉兹改",
-            "ko": "HGUC 1/144 드라체 개",
-            "en": "HGUC 1 / 144 ドラッツェ改"
-          },
-          "release_date": "2016-05",
-          "price_jpy": 2420,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "limited",
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660079712000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "hg-hgbf-1-144-ez-sr-4549660079699000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HGBF",
-          "series_key": "build",
-          "series_labels": {
-            "zh": "创战",
-            "en": "Build",
-            "ja": "ビルド",
-            "ko": "빌드"
-          },
-          "names": {
-            "ja": "HGBF 1 / 144 Ｅｚ-ＳＲ フォックスハウンド",
-            "zh": "HGBF 1 / 144 Ez-SR 猎狐犬",
-            "ko": "HGBF 1/144 Ez-SR 폭스하운드",
-            "en": "HGBF 1 / 144 Ｅｚ-ＳＲ フォックスハウンド"
-          },
-          "release_date": "2016-04",
-          "price_jpy": 2200,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660079699000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "hg-hguc-1-144-mk-ii-4549660058786000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HGUC",
-          "series_key": "zz",
-          "series_labels": {
-            "zh": "ZZ",
-            "en": "ZZ",
-            "ja": "ZZ",
-            "ko": "ZZ"
-          },
-          "names": {
-            "ja": "HGUC 1 / 144 キュベレイＭｋ-ＩＩ （プルツー専用機）",
-            "zh": "HGUC 1 / 144 京宝梵Mk-II (普露托专用机)",
-            "ko": "HGUC 1/144 큐베레이 Mk-II (플루투 전용기)",
-            "en": "HGUC 1 / 144 QubeleyＭｋ-ＩＩ (プルツーCustom機)"
-          },
-          "release_date": "2016-03",
-          "price_jpy": 2200,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660058786000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "hg-hguc-1-144-4549660058793000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HGUC",
-          "series_key": "zz",
-          "series_labels": {
-            "zh": "ZZ",
-            "en": "ZZ",
-            "ja": "ZZ",
-            "ko": "ZZ"
-          },
-          "names": {
-            "ja": "HGUC 1 / 144 キュベレイ用ファンネルエフェクトセット",
-            "zh": "HGUC 1 / 144 京宝梵用浮游炮特效件套装",
-            "ko": "HGUC 1/144 큐베레이용 판넬 이펙트 세트",
-            "en": "HGUC 1 / 144 Qubeley用ファンネルエフェクトSet"
-          },
-          "release_date": "2016-03",
-          "price_jpy": 1320,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660058793000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-v2-ver-ka-4549660040989000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "victory",
-          "series_labels": {
-            "zh": "V",
-            "en": "V",
-            "ja": "V",
-            "ko": "V"
-          },
-          "names": {
-            "ja": "ＭＧ 1 / 100 Ｖ２ガンダム Ver．Ka用 拡張エフェクトユニット “光の翼”",
-            "zh": "MG 1 / 100 V2高达 Ver.Ka用 扩展特效件 “光之翼”",
-            "ko": "MG 1/100 V2건담 Ver.Ka용 확장 이펙트 유닛 \"빛의 날개\"",
-            "en": "ＭＧ 1 / 100 Ｖ２Gundam Ver．Ka用 拡張エフェクトユニット “光の翼”"
-          },
-          "release_date": "2016-01-08",
-          "price_jpy": 2200,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660040989000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "hg-hg-1-144-4549660100348000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "ibo",
-          "series_labels": {
-            "zh": "铁血",
-            "en": "Iron-Blooded Orphans",
-            "ja": "鉄血",
-            "ko": "철혈"
-          },
-          "names": {
-            "ja": "ＨＧ 1 / 144 ガンダムバルバトス コンプリートセット",
-            "zh": "HG 1 / 144 高达巴巴托斯 完全套装",
-            "ko": "HG 1/144 건담 발바토스 컴플리트 세트",
-            "en": "ＨＧ 1 / 144 Gundam Barbatos コンプリートSet"
-          },
-          "release_date": "2016",
-          "price_jpy": 3300,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660100348000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "hg-hguc-1-144-4549660032212000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HGUC",
-          "series_key": "zz",
-          "series_labels": {
-            "zh": "ZZ",
-            "en": "ZZ",
-            "ja": "ZZ",
-            "ko": "ZZ"
-          },
-          "names": {
-            "ja": "HGUC 1 / 144 キュベレイ",
-            "zh": "HGUC 1 / 144 京宝梵",
-            "ko": "HGUC 1/144 큐베레이 (2015년)",
-            "en": "HGUC 1 / 144 Qubeley"
-          },
-          "release_date": "2015-12-19",
-          "price_jpy": 2200,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660032212000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000249650/"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000255642",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "PG",
-          "subline": "PG",
-          "series_key": "unicorn",
-          "series_labels": {
-            "zh": "UC",
-            "en": "Unicorn",
-            "ja": "UC",
-            "ko": "UC"
-          },
-          "names": {
-            "ja": "ＰＧ 1 / 60 拡張ユニット アームド・アーマーＶＮ／ＢＳ",
-            "zh": "PG 1 / 60 扩展单元 武装装甲VN/BS",
-            "ko": "PG 1/60 확장 유닛 아머드 아머 VN/BS",
-            "en": "ＰＧ 1 / 60 拡張ユニット アームド アーマーＶＮ／ＢＳ"
-          },
-          "release_date": "2015-10-03",
-          "price_jpy": 5500,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "p_bandai_wayback",
-            "bandai_spirits_products_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4549660040996000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000255642/"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-ew-4573102619709000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "w",
-          "series_labels": {
-            "zh": "W",
-            "en": "W",
-            "ja": "W",
-            "ko": "W"
-          },
-          "names": {
-            "ja": "ＭＧ 1 / 100 アルトロンガンダム ＥＷ",
-            "zh": "MG 1 / 100 双头龙高达 EW",
-            "ko": "MG 1/100 알트론 건담 EW",
-            "en": "ＭＧ 1 / 100 アルトロンGundam ＥＷ"
-          },
-          "release_date": "2015-10",
-          "price_jpy": 5390,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102619709000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000142005",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "ＭＧ 1 / 100 MSZ-006P2 / 3C ゼータガンダム３号機Ｐ２型 レッド・ゼータ",
-            "zh": "MG 1 / 100 MSZ-006P2 / 3C Z高达3号机P2型 红色Z",
-            "ko": "MG 1/100 MSZ-006P2/3C 제타 건담 3호기 P2형 레드 제타",
-            "en": "ＭＧ 1 / 100 MSZ-006P2 / 3C Zeta Gundam３号機Ｐ２型 レッド Zeta"
-          },
-          "release_date": "2015-06",
-          "price_jpy": 7150,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "p_bandai_wayback",
-            "bandai_spirits_products_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112956866000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000142005/"
-          ]
-        },
-        {
-          "kit_id": "hg-hguc-1-144-4573102588999000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HGUC",
-          "series_key": "uc_side",
-          "series_labels": {
-            "zh": "UC外传",
-            "en": "UC Side Story",
-            "ja": "UC外伝",
-            "ko": "UC 외전"
-          },
-          "names": {
-            "ja": "HGUC 1 / 144 ペイルライダー（陸戦重装備仕様）",
-            "zh": "HGUC 1 / 144 苍白骑士(陆战重装备样式)",
-            "ko": "HGUC 1/144 페일라이더(육전 중장비 사양)",
-            "en": "HGUC 1 / 144 ペイルライダー (陸戦重EquipmentType)"
-          },
-          "release_date": "2015-04",
-          "price_jpy": 2200,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102588999000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "pbandai-wb-1000255640",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "PG",
-          "subline": "PG",
-          "series_key": "unicorn",
-          "series_labels": {
-            "zh": "UC",
-            "en": "Unicorn",
-            "ja": "UC",
-            "ko": "UC"
-          },
-          "names": {
-            "ja": "ＰＧ 1 / 60 RX-0 ユニコーンガンダム用 ＦＡ拡張ユニット",
-            "zh": "PG 1 / 60 RX-0 独角兽高达用 FA扩展单元",
-            "ko": "PG 1/60 RX-0 유니콘 건담용 FA 확장 유닛",
-            "en": "ＰＧ 1 / 60 RX-0 Unicorn Gundam用 ＦＡ拡張ユニット"
-          },
-          "release_date": "2015-01-10",
-          "price_jpy": 8250,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "p_bandai_wayback",
-            "bandai_spirits_products_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112956859000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000255640/"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-hi-ver-ka-hws-4543112930095000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "cca",
-          "series_labels": {
-            "zh": "逆夏",
-            "en": "CCA",
-            "ja": "逆シャア",
-            "ko": "역샤아"
-          },
-          "names": {
-            "ja": "ＭＧ 1 / 100 Ｈｉ-νガンダムＶｅｒ.Ｋａ用 ＨＷＳ拡張セット",
-            "zh": "MG 1 / 100 Hi-ν高达Ver.Ka用 HWS扩展套装",
-            "ko": "MG 1/100 Hi-ν건담 Ver.Ka용 HWS 확장 세트",
-            "en": "ＭＧ 1 / 100 Ｈｉ-νGundamＶｅｒ.Ｋａ用 ＨＷＳExpansion Set"
-          },
-          "release_date": "2014-09",
-          "price_jpy": 3630,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112930095000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "hg-hguc-1-144-ii-ver-4573102588432000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HGUC",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "HGUC 1 / 144 ジムII（エゥーゴカラーVer.)",
-            "zh": "HGUC 1 / 144 吉姆II(奥古配色Ver.)",
-            "ko": "HGUC 1/144 짐II(에우고 컬러 Ver.)",
-            "en": "HGUC 1 / 144 GMII (エゥーゴカラーVer.)"
-          },
-          "release_date": "2012-11",
-          "price_jpy": 1540,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102588432000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "hg-hguc-1-144-ii-4543112778901000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HGUC",
-          "series_key": "0080",
-          "series_labels": {
-            "zh": "0080",
-            "en": "0080",
-            "ja": "0080",
-            "ko": "0080"
-          },
-          "names": {
-            "ja": "HGUC 1 / 144 ジム・スナイパーII ホワイト・ディンゴ隊仕様",
-            "zh": "HGUC 1 / 144 吉姆狙击型II 白色野犬队样式",
-            "ko": "HGUC 1/144 짐 스나이퍼II 화이트 딩고대 사양",
-            "en": "HGUC 1 / 144 GM スナイパーII ホワイト ディンゴ隊Type"
-          },
-          "release_date": "2012-09",
-          "price_jpy": 2200,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam"
-          ],
-          "change_reasons": [
-            "price"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112778901000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-msa-003-ver-4543112765758000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "MG 1 / 100 MSA-003 ネモ ユニコーンカラーVer.",
-            "zh": "MG 1 / 100 MSA-003 尼莫 独角兽配色Ver.",
-            "ko": "MG 1/100 MSA-003 네모 유니콘 컬러 Ver.",
-            "en": "MG 1 / 100 MSA-003 ネモ UnicornカラーVer."
-          },
-          "release_date": "2012-04",
-          "price_jpy": 3850,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "image",
-            "limited",
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112765758000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000251744/"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-msa-003-ver-4543112765741000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "zeta",
-          "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
-          },
-          "names": {
-            "ja": "MG 1 / 100 MSA-003 ネモ ユニコーンデザートカラーVer.",
-            "zh": "MG 1 / 100 MSA-003 尼莫 独角兽沙漠配色Ver.",
-            "ko": "MG 1/100 MSA-003 네모 유니콘 데저트 컬러 Ver.",
-            "en": "MG 1 / 100 MSA-003 ネモ UnicornデザートカラーVer."
-          },
-          "release_date": "2012-04",
-          "price_jpy": 3850,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "image",
-            "limited",
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112765741000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000251745/"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-ms-06j-ii-ver-4543112590534000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "ＭＧ 1 / 100 ＭＳ-06J ザクII（重力戦線イメージカラーVer.）",
-            "zh": "MG 1 / 100 MS-06J 扎古II(重力战线印象配色Ver.)",
-            "ko": "MG 1/100 MS-06J 자쿠II(중력전선 이미지 컬러 Ver.)",
-            "en": "ＭＧ 1 / 100 ＭＳ-06J ZakuII (重力戦線イメージカラーVer.)"
-          },
-          "release_date": "2009-07",
-          "price_jpy": 3850,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112590534000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-ms-07b3-ver-4543112590510000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "08ms",
-          "series_labels": {
-            "zh": "08小队",
-            "en": "08MS",
-            "ja": "08小隊",
-            "ko": "08소대"
-          },
-          "names": {
-            "ja": "ＭＧ 1 / 100 ＭＳ-07B3 グフカスタム（重力戦線イメージカラーVer.）",
-            "zh": "MG 1 / 100 MS-07B3 老虎特装型(重力战线印象配色Ver.)",
-            "ko": "MG 1/100 MS-07B3 구프 커스텀(중력전선 이미지 컬러 Ver.)",
-            "en": "ＭＧ 1 / 100 ＭＳ-07B3 Goufカスタム (重力戦線イメージカラーVer.)"
-          },
-          "release_date": "2009-07",
-          "price_jpy": 3300,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112590510000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "mg-mg-1-100-ms-09-ver-4543112590527000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "uc_first",
-          "series_labels": {
-            "zh": "初代",
-            "en": "0079",
-            "ja": "初代",
-            "ko": "초대"
-          },
-          "names": {
-            "ja": "ＭＧ 1 / 100 ＭＳ-09 ドム（重力戦線イメージカラーVer.）",
-            "zh": "MG 1 / 100 MS-09 大魔(重力战线印象配色Ver.)",
-            "ko": "MG 1/100 MS-09 돔(중력전선 이미지 컬러 Ver.)",
-            "en": "ＭＧ 1 / 100 ＭＳ-09 Dom (重力戦線イメージカラーVer.)"
-          },
-          "release_date": "2009-07",
-          "price_jpy": 4400,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "archive"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112590527000&grp_id=5325"
-          ]
         }
       ],
       "removed": [],
@@ -5227,6 +5734,47 @@
           ]
         },
         {
+          "kit_id": "pbandai-wb-1000257635",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "プレミアムバンダイ",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "MG 1 / 100 スペルビア ジンクス",
+            "zh": "MG 1 / 100 スペルビア GN-X",
+            "ko": "MG 1/100 스페르비아 진엑스",
+            "en": "MG 1 / 100 スペルビア ジンクス"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 6050,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "00"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://p-bandai.jp/item/item-1000257635/"
+          ]
+        },
+        {
           "kit_id": "beyblade-x-cx00-bb",
           "change_type": "added",
           "franchise": "beyblade",
@@ -5269,6 +5817,49 @@
           "source_urls": [
             "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-bb.html",
             "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
+          ]
+        },
+        {
+          "kit_id": "pbandai-wb-1000245953",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "RG",
+          "subline": "RG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "ＲＧ 1 / 144 アカツキガンダム用シラヌイパック & ＨＧゼウスシルエット用接続パーツ",
+            "zh": "RG 1 / 144 拂晓高达用不知火背包 & HG宙斯魅影装备用连接配件",
+            "ko": "RG 1/144 아카츠키 건담용 시라누이 팩 & HG 제우스 실루엣용 접속 파츠",
+            "en": "ＲＧ 1 / 144 Akatsuki Gundam用シラヌイパック & ＨＧゼウスシルエット用接続パーツ"
+          },
+          "release_date": "2024-12",
+          "price_jpy": 4400,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "p_bandai_wayback",
+            "bandai_spirits_products_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102672711000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000245953/"
           ]
         },
         {
