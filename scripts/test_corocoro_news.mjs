@@ -175,7 +175,8 @@ assert.equal(kept.find((record) => record.id === kidRecord.id).linked_kit_id, nu
 // name) matches. An official record from long before the scoop that shares
 // the blade name, or a "-00" code shared by every limited item, does not.
 const vanishLineup = { id: "l2", source_id: "beyblade_x_lineup", franchise: "beyblade", announced_at: "2026-12-01", names: { ja: "UX-22 バニッシュルシファーW3-60WW スターター" } };
-assert.deepEqual(dropMagazineDuplicates([vanish, vanishLineup]).dropped, [{ id: vanish.id, reason: "official" }]);
+// `kept` names the record that stays, for data/announcements.json "replaced".
+assert.deepEqual(dropMagazineDuplicates([vanish, vanishLineup]).dropped, [{ id: vanish.id, reason: "official", kept: "l2" }]);
 const bladeOnly = { ...vanishLineup, names: { ja: "BX-60 バニッシュルシファーW3-60WW スターター" } };
 assert.equal(dropMagazineDuplicates([vanish, bladeOnly]).dropped.length, 1, "the blade name alone matches near the scoop");
 assert.equal(dropMagazineDuplicates([vanish, { ...bladeOnly, announced_at: "2025-05-01" }]).dropped.length, 0);

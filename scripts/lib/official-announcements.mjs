@@ -30,6 +30,7 @@ import {
   isGundamBaseProductNews,
   isProductAnnouncement,
   japaneseDate,
+  shiftDay,
   stripTags,
 } from "./bandai-announcements.mjs";
 
@@ -500,6 +501,11 @@ export function kotobukiyaAnnouncement({ title: titleInfo, goods, detail, detail
 // are the same post; records in the same world naming the same 「product」
 // within ten days are the same reveal. The earlier source in `priority` wins,
 // but a record someone reviewed or linked in the CMS is never dropped.
+// `separate(a, b)` names pairs that are not twins whatever they share (see
+// keepsApart in unofficial-feeds.mjs). A record that stays without a picture
+// takes its dropped twin's (the 魂ウェブ reveal banner has one before the topic
+// post may), but never an unofficial site's: those are not copied into the
+// repo (owner's decision, 2026-11-13).
 
 export function normalizeProductKey(value) {
   return decodeFullWidthDigits(String(value || ""))
@@ -519,7 +525,7 @@ function daysBetween(a, b) {
   return Math.abs((Date.parse(a) - Date.parse(b)) / 86400000);
 }
 
-export function dedupeAnnouncements(records, priority = []) {
+export function dedupeAnnouncements(records, priority = [], { separate = () => false } = {}) {
   const rank = (record) => {
     if (record.reviewed_at || record.linked_kit_id) return -1;
     const byId = priority.indexOf(record.source_id);
@@ -542,8 +548,10 @@ export function dedupeAnnouncements(records, priority = []) {
   const isReveal = (record) => record.source_id === TAMASHII_REVEALS_SOURCE_ID;
   const near = (record) => (twin) =>
     (twin.source_name !== record.source_name || isReveal(twin) !== isReveal(record))
-    && daysBetween(twin.announced_at, record.announced_at) <= 10;
+    && daysBetween(twin.announced_at, record.announced_at) <= 10
+    && !separate(record, twin);
   const remember = (map, key, record) => map.set(key, [...(map.get(key) || []), record]);
+  const pictures = new Map();
   for (const record of sorted) {
     // A scheduled stream is not a product reveal: its title quotes the event
     // ("「TAMASHII NATION 2026」…") like every news post about that event does,
@@ -558,16 +566,72 @@ export function dedupeAnnouncements(records, priority = []) {
       || keys.flatMap((key) => byKey.get(key) || []).find(near(record));
     if (twin && !(record.reviewed_at || record.linked_kit_id)) {
       dropped.push({ id: record.id, kept: twin.id });
+      if (!twin.thumbnail_url && record.thumbnail_url && !record.unofficial && !pictures.has(twin.id)) {
+        pictures.set(twin.id, record.thumbnail_url);
+      }
       continue;
     }
     kept.push(record);
     if (url) remember(byUrl, url, record);
     for (const key of keys) remember(byKey, key, record);
   }
-  kept.sort((a, b) =>
+  const out = kept.map((record) => pictures.has(record.id) ? { ...record, thumbnail_url: pictures.get(record.id) } : record);
+  out.sort((a, b) =>
     String(b.announced_at || "").localeCompare(String(a.announced_at || ""))
     || String(a.id).localeCompare(String(b.id)));
-  return { records: kept, dropped };
+  return { records: out, dropped };
+}
+
+// ---------------------------------------------------------------------------
+// Replaced records. The app keeps follows (알림 받는 예고) by announcement id, so
+// a record dropped as another one's twin took its followers with it
+// (2026-11-13: the 魂ウェブ reveal of METAL BUILD ガンダムキュリオス, dropped as the
+// twin of its preorder post). data/announcements.json says where each one
+// went: "replaced" (dropped id → id that stays) and "replaced_at" (the day).
+
+export const REPLACED_KEEP_DAYS = 120;
+
+/**
+ * This run's { replaced, replaced_at }. `replaced` / `replacedAt`: last run's
+ * maps; `drops`: this run's [{ id, kept }] from the dedupe steps (a drop
+ * without `kept`, a scoop the catalog took over, has nowhere to point);
+ * `publishedIds`: the ids of last run's file, as a record first seen and
+ * dropped on the same run was never shown and nobody follows it; `keptIds`: the
+ * ids written this run. Chains collapse (a → b and b → c give a → c, also
+ * through a record that was never published), and an entry goes once it is
+ * older than REPLACED_KEEP_DAYS, when its own record is back, or when the
+ * record it would point at is gone.
+ */
+export function carryReplaced({ replaced = {}, replacedAt = {}, drops = [], publishedIds = new Set(), keptIds = new Set(), today }) {
+  const since = shiftDay(today, -REPLACED_KEEP_DAYS);
+  const entries = new Map();
+  for (const [id, target] of Object.entries(replaced || {})) {
+    const day = (replacedAt || {})[id] || today;
+    if (day >= since) entries.set(id, { target, day });
+  }
+  const next = new Map([...entries].map(([id, { target }]) => [id, target]));
+  for (const { id, kept } of drops) {
+    if (!kept || kept === id) continue;
+    next.set(id, kept);
+    if (publishedIds.has(id)) entries.set(id, { target: kept, day: today });
+  }
+  const resolve = (id) => {
+    const seen = new Set([id]);
+    let target = next.get(id);
+    while (!keptIds.has(target) && next.has(target) && !seen.has(target)) {
+      seen.add(target);
+      target = next.get(target);
+    }
+    return target;
+  };
+  const out = { replaced: {}, replaced_at: {} };
+  for (const [id, { day }] of [...entries].sort(([a], [b]) => a.localeCompare(b))) {
+    const target = resolve(id);
+    if (keptIds.has(id) || !keptIds.has(target)) continue;
+    out.replaced[id] = target;
+    out.replaced_at[id] = day;
+  }
+  return out;
 }
 
 // ---------------------------------------------------------------------------
@@ -667,7 +731,7 @@ const STAGES = ["announced", "product_confirmed", "preorder_open", "released"];
 // whole title equals the reveal's name, or equals the name without the brand
 // while the brand is elsewhere in the title ("「ガンダムキュリオス」がMETAL
 // BUILDに登場！…予約受付開始！").
-function namesRevealedProduct(record, revealKey) {
+export function namesRevealedProduct(record, revealKey) {
   const title = normalizeProductKey(record.names?.ja);
   const keys = [...productKeys(record.names?.ja), title];
   return keys.some((key) => key === revealKey
@@ -699,6 +763,25 @@ export function promoteRevealStages(records) {
     return { ...record, status: best };
   });
   return { records: out, promoted };
+}
+
+/**
+ * Moves a record forward when its own source now reports a later stage (the
+ * 魂ウェブ schedule once the preorder opens, fig速's 【予約開始】 after
+ * 【近日予約開始】). The merge keeps a stored status, so without this a listing
+ * could never report the next stage; never backwards, and never a record
+ * reviewed in the CMS. `incoming`: this run's records of those sources.
+ */
+export function advanceStages(records, incoming) {
+  const reported = new Map(incoming.map((record) => [record.id, record.status]));
+  const advanced = [];
+  const out = records.map((record) => {
+    const status = reported.get(record.id);
+    if (record.reviewed_at || STAGES.indexOf(status) <= STAGES.indexOf(record.status)) return record;
+    advanced.push({ id: record.id, from: record.status, to: status });
+    return { ...record, status };
+  });
+  return { records: out, advanced };
 }
 
 /**

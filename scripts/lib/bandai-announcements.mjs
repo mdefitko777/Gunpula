@@ -322,6 +322,9 @@ export function parseBeybladeNews(html, pageUrl = BEYBLADE_X_NEWS_URL) {
 // re-checked against the news-title filter. So are the 魂ウェブ reveal banners,
 // stored under the product name alone once read, and scheduled livestreams
 // (live-streams.mjs), whose titles are programme names; those leave by age.
+// 魂ウェブ's schedule lists items by name, and the unofficial sources
+// (unofficial-feeds.mjs) have their own wording rules: a show report says
+// 初展示 or 参考展示, which this filter does not know.
 const LISTING_SOURCE_IDS = new Set([
   "premium_bandai_new_items",
   "kotobukiya_shop",
@@ -329,6 +332,12 @@ const LISTING_SOURCE_IDS = new Set([
   "takaratomy_pokemon",
   "corocoro_news",
   "tamashii_reveals",
+  "tamashii_schedule",
+  "hamusuke_beyblade",
+  "hjweb_news",
+  "dengeki_gunpla",
+  "figsoku_tags",
+  "stds_lego",
   "tamashii_nation_live",
   "youtube_live",
 ]);
@@ -357,6 +366,13 @@ export function isGundamBaseProductNews(title) {
   return isProductAnnouncement(text) || GUNDAM_BASE_PRODUCT.test(text);
 }
 
+// An unofficial site's picture (unofficial-feeds.mjs) stays a link to the
+// site: a third party's photo is not copied into this public repo (owner's
+// decision, 2026-11-13). The makers' own pictures are cached as before.
+export function thumbnailStaysRemote(record) {
+  return Boolean(record?.unofficial) || record?.confidence === "unofficial";
+}
+
 export function mergeAnnouncementRecords(previous = [], incoming = []) {
   const incomingIds = new Set(incoming.map((item) => item.id));
   // Stored records outlive the source listing on purpose — a post scrolls off
@@ -379,8 +395,9 @@ export function mergeAnnouncementRecords(previous = [], incoming = []) {
       announced_at: item.announced_at_basis === "first_seen" && old.announced_at ? old.announced_at : item.announced_at,
       // An image already cached in the repo is kept: the feed's URL may be a
       // signed CloudFront link that expires (bandaispirits.co.jp), and
-      // re-downloading every thumbnail daily gains nothing.
-      thumbnail_url: String(old.thumbnail_url || "").startsWith("../app/assets/announcements/")
+      // re-downloading every thumbnail daily gains nothing. Not for an
+      // unofficial record: its feed gives the site's link back.
+      thumbnail_url: String(old.thumbnail_url || "").startsWith("../app/assets/announcements/") && !thumbnailStaysRemote(item)
         ? old.thumbnail_url
         : item.thumbnail_url,
       // Curated translations (zh/ko/en, edited in the CMS) survive a refetch,

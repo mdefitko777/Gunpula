@@ -398,9 +398,15 @@ export function coroCoroRecords(state, printPosts = []) {
  * before the article (an old bey mentioned again). A catalog product that is
  * not out yet is linked instead. Records reviewed in the CMS are left alone.
  * `kitsByFranchise`: Map franchise → kits ({ kit_id, names, release_date }).
+ * `sourceIds`: the sources judged this way; the fetcher adds the fan blog that
+ * reports the same beys (unofficial-feeds.mjs). Only the makers' own records
+ * replace a scoop: neither another judged source nor any unofficial record
+ * counts as official word. `dropped`: [{ id, reason, kept }], `kept` being the
+ * official record that names the product (none when the catalog took it over).
  */
-export function dropMagazineDuplicates(records, kitsByFranchise = new Map()) {
-  const official = records.filter((record) => record.source_id !== COROCORO_SOURCE_ID);
+export function dropMagazineDuplicates(records, kitsByFranchise = new Map(), { sourceIds = [COROCORO_SOURCE_ID] } = {}) {
+  const judged = new Set(sourceIds);
+  const official = records.filter((record) => !judged.has(record.source_id) && !record.unofficial);
   const officialText = new Map();
   for (const record of official) {
     const list = officialText.get(record.franchise) || [];
@@ -418,18 +424,18 @@ export function dropMagazineDuplicates(records, kitsByFranchise = new Map()) {
   const dropped = [];
   const kept = [];
   for (const record of records) {
-    if (record.source_id !== COROCORO_SOURCE_ID || record.reviewed_at) {
+    if (!judged.has(record.source_id) || record.reviewed_at) {
       kept.push(record);
       continue;
     }
     const keys = productKeys(record.names?.ja);
     const posted = String(record.announced_at || "");
     const loose = looseMatch(record);
-    const twin = (officialText.get(record.franchise) || []).some(({ record: other, raw, text }) =>
+    const twin = (officialText.get(record.franchise) || []).find(({ record: other, raw, text }) =>
       keys.some((key) => text.includes(key))
       || (loose && String(other.announced_at || "") >= loose.since && loose.matches(raw)));
     if (twin) {
-      dropped.push({ id: record.id, reason: "official" });
+      dropped.push({ id: record.id, reason: "official", kept: twin.record.id });
       continue;
     }
     const kits = (kitText.get(record.franchise) || [])
@@ -456,15 +462,17 @@ export function dropMagazineDuplicates(records, kitsByFranchise = new Map()) {
  * カスタマイズセットD"): the lineup will write another name, so it also matches
  * on its product code or its blade name, but only official records and kits
  * from about the time of the scoop, as an old bey can share a blade name.
- * Null for a full bey name, which the name match already handles.
+ * A full bey name is left to the name match, except for its product code: the
+ * lineup lists "BX-55 ランダムブースターVol.12「ホルスシャッター3-85MO」" as the
+ * booster, without the bey. Null when there is nothing loose to match on.
  */
 function looseMatch(record) {
   const title = String(record.names?.ja || "").normalize("NFKC");
   const inner = /「([^」]+)」/.exec(title)?.[1] || "";
-  if (!inner || canonicalBeyName(inner)) return null;
+  if (!inner) return null;
   // "-00" is every limited item (BX-00, CX-00 …), not one product.
   const codes = [...title.matchAll(PRODUCT_CODE)].map((match) => match[1]).filter((code) => !/-0+$/.test(code));
-  const blade = /^[ァ-ヺー]{5,}/.exec(inner)?.[0] || null;
+  const blade = canonicalBeyName(inner) ? null : /^[ァ-ヺー]{5,}/.exec(inner)?.[0] || null;
   if (!codes.length && !blade) return null;
   const since = new Date(`${String(record.announced_at || "").slice(0, 10) || "1970-01-01"}T00:00:00Z`);
   since.setUTCDate(since.getUTCDate() - 30);

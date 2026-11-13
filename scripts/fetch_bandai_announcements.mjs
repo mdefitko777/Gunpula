@@ -9,6 +9,7 @@ import {
   parseBandaiHobbyNews,
   parseBeybladeNews,
   parseTamashiiNews,
+  thumbnailStaysRemote,
 } from "./lib/bandai-announcements.mjs";
 import {
   BEYBLADE_X_LINEUP_URL,
@@ -23,6 +24,8 @@ import {
   TAMASHII_REVEALS_SOURCE_ID,
   TAMASHII_TOPICS_ITEMS_URL,
   YOUTUBE_CHANNELS,
+  advanceStages,
+  carryReplaced,
   createHostStops,
   dedupeAnnouncements,
   kotobukiyaAnnouncement,
@@ -64,6 +67,26 @@ import {
   withLiveFields,
   youtubeUploadsUrl,
 } from "./lib/live-streams.mjs";
+import {
+  TAMASHII_SCHEDULE_PAGE_URL,
+  TAMASHII_SCHEDULE_SOURCE_ID,
+  dropScheduleTwins,
+  parseTamashiiSchedule,
+  scheduleApiUrl,
+  scheduleMonths,
+  tamashiiKitsByItemId,
+  tamashiiScheduleRecords,
+} from "./lib/tamashii-schedule.mjs";
+import {
+  FIGSOKU_SOURCE_ID,
+  HAMUSUKE_SOURCE_ID,
+  UNOFFICIAL_SOURCES,
+  UnexpectedPage,
+  dropUnofficialDuplicates,
+  keepsApart,
+  runUnofficialSource,
+  unofficialSource,
+} from "./lib/unofficial-feeds.mjs";
 import { loadRobots, robotsAllows } from "./lib/robots.mjs";
 
 const OUTPUT_PATH = "data/announcements.json";
@@ -74,6 +97,11 @@ const COROCORO_PRINT_PATH = "data/announcements-corocoro-print.json";
 // YouTube videos already checked for being a stream, so each watch page is
 // read once (and again only while its stream is still to come).
 const LIVE_STATE_PATH = "data/announcements-live.json";
+// What 魂ウェブ's schedule and the unofficial sites already offered, taken or
+// passed over (lib/source-intake.mjs), so a first read does not file weeks of
+// items as news.
+const SCHEDULE_STATE_PATH = "data/announcements-tamashii-schedule.json";
+const UNOFFICIAL_STATE_PATH = "data/announcements-unofficial.json";
 const IMAGE_DIR = "app/assets/announcements";
 const IMAGE_SKIPS_PATH = "data/announcements-image-skips.json";
 const USER_AGENT = "HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)";
@@ -199,7 +227,7 @@ async function cacheAnnouncementImages(records) {
   const oversize = (await readJson(IMAGE_SKIPS_PATH, {})).oversize || {};
   const stillOversize = {};
   for (const record of records) {
-    if (!/^https?:/i.test(record.thumbnail_url || "")) continue;
+    if (!/^https?:/i.test(record.thumbnail_url || "") || thumbnailStaysRemote(record)) continue;
     if (oversize[record.thumbnail_url]) {
       stillOversize[record.thumbnail_url] = oversize[record.thumbnail_url];
       continue;
@@ -277,14 +305,29 @@ async function runCoroCoro() {
   return records;
 }
 
+// robots.txt once a run per host, before its first page; sources that share a
+// host (魂ウェブ's banners and its schedule) share the answer. A 403 there reads
+// as "no robots.txt" but is the bot being turned away, so it stops the host
+// like a 403 from a page.
+const robotsByHost = new Map();
+function hostRobots(host) {
+  if (!robotsByHost.has(host)) {
+    robotsByHost.set(host, (async () => {
+      const url = `https://${host}/robots.txt`;
+      await waitForHost(url);
+      const robots = await loadRobots(host, { userAgent: USER_AGENT });
+      console.log(`${host}: robots.txt ${robots.status}`);
+      hostStops.record(url, Number.parseInt(robots.status, 10));
+      return robots;
+    })());
+  }
+  return robotsByHost.get(host);
+}
+
 // Robots first (2026-11-12: tamashiiweb.com has no robots.txt, a 404), then one
 // work page per day.
 async function runTamashiiReveals() {
-  const host = new URL(TAMASHII_REVEAL_PAGES[0].url).host;
-  await waitForHost(`https://${host}/robots.txt`);
-  const robots = await loadRobots(host, { userAgent: USER_AGENT });
-  console.log(`${TAMASHII_REVEALS_SOURCE_ID}: robots.txt ${robots.status}`);
-  hostStops.record(`https://${host}/robots.txt`, Number.parseInt(robots.status, 10));
+  const robots = await hostRobots(new URL(TAMASHII_REVEAL_PAGES[0].url).host);
   const records = [];
   for (const page of TAMASHII_REVEAL_PAGES) {
     if (!robotsAllows(robots, page.url)) throw new Error(`${page.url} is disallowed by robots.txt`);
@@ -294,6 +337,67 @@ async function runTamashiiReveals() {
     records.push(...parsed.records);
   }
   return records;
+}
+
+// The month in progress and the next: two requests a run (lib/tamashii-schedule.mjs).
+async function runTamashiiSchedule() {
+  const robots = await hostRobots(new URL(TAMASHII_SCHEDULE_PAGE_URL).host);
+  const [thisMonth, nextMonth] = scheduleMonths(today);
+  const items = new Map();
+  for (const month of [thisMonth, nextMonth]) {
+    const url = scheduleApiUrl(month);
+    if (!robotsAllows(robots, url)) throw new Error(`${url} is disallowed by robots.txt`);
+    const parsed = parseTamashiiSchedule(await fetchJson(url));
+    // The month in progress always lists something; an answer without rows is not the schedule.
+    if (!parsed.rows && month === thisMonth) throw new Error(`${url} lists no items`);
+    console.log(`${TAMASHII_SCHEDULE_SOURCE_ID}: ${month}: ${parsed.rows} rows, ${parsed.items.length} items`);
+    for (const item of parsed.items) if (!items.has(item.tamashiiWebId)) items.set(item.tamashiiWebId, item);
+  }
+  // 魂ウェブ products are in the catalog for these worlds ("tamashii-16259", "tamashii-fate-13377").
+  const kits = await readCatalogKits(["gundam", "fate", "madoka"]);
+  const { records, state } = tamashiiScheduleRecords([...items.values()], {
+    today,
+    state: await readJson(SCHEDULE_STATE_PATH, {}),
+    kitsByItemId: tamashiiKitsByItemId([...kits.values()].flat()),
+    stored: previousById,
+  });
+  await writeFile(SCHEDULE_STATE_PATH, `${JSON.stringify(state, null, 2)}\n`);
+  return records;
+}
+
+// One file for all unofficial sources: source id → what the site already offered.
+let unofficialState = null;
+
+// Fan blogs and hobby media (lib/unofficial-feeds.mjs): robots.txt first, then
+// the feed or list page, and nothing more for the run once a site answers with
+// something other than what was asked for.
+async function runUnofficial(source) {
+  const robots = await hostRobots(source.host);
+  unofficialState ||= await readJson(UNOFFICIAL_STATE_PATH, {});
+  try {
+    const { records, state } = await runUnofficialSource(source, {
+      state: unofficialState[source.id] || {},
+      today,
+      stored: previousById,
+      fetchText,
+      robotsAllows: (url) => robotsAllows(robots, url),
+      // A picture can sit on another host (電撃オンライン's image server), with its own robots.txt.
+      imageAllowed: async (url) => robotsAllows(await hostRobots(new URL(url).host), url),
+      log: (line) => console.log(line),
+    });
+    unofficialState = { ...unofficialState, [source.id]: state };
+    await writeFile(UNOFFICIAL_STATE_PATH, `${JSON.stringify(unofficialState, null, 2)}\n`);
+    return records;
+  } catch (error) {
+    // A page that came with a 200 but is not the feed is a bot check until shown otherwise.
+    if (error instanceof UnexpectedPage) hostStops.stop(`https://${source.host}/`, "an unexpected page");
+    throw error;
+  }
+}
+
+function unofficialEntry(id) {
+  const source = unofficialSource(id);
+  return { id: source.id, name: source.name, url: source.url, run: () => runUnofficial(source) };
 }
 
 // YouTube streams the event site links; read by the YouTube source after it.
@@ -467,6 +571,14 @@ const SOURCES = [
     run: runTamashiiReveals,
   },
   {
+    // The monthly sales schedule: preorder windows, release months, and items
+    // no topic post announces (resales, later lottery batches, store exclusives).
+    id: TAMASHII_SCHEDULE_SOURCE_ID,
+    name: "TAMASHII WEB",
+    url: TAMASHII_SCHEDULE_PAGE_URL,
+    run: runTamashiiSchedule,
+  },
+  {
     id: "bandai_hobby_news",
     name: "BANDAI SPIRITS",
     url: BANDAI_HOBBY_NEWS_URL,
@@ -567,9 +679,13 @@ const SOURCES = [
       return records;
     },
   },
+  // Unofficial from here on, after the makers' own pages and stores, so an
+  // official post about the same product wins. The bey blog stands before the
+  // magazine: of two records of one bey, the one with the product code, the
+  // release day and the product picture stays.
+  unofficialEntry(HAMUSUKE_SOURCE_ID),
   {
-    // Magazine scoops; after the makers' own pages and stores, so an official
-    // post about the same product wins.
+    // Magazine scoops.
     id: COROCORO_SOURCE_ID,
     name: COROCORO_SOURCE_NAME,
     url: `https://${COROCORO_HOST}/`,
@@ -582,6 +698,9 @@ const SOURCES = [
     url: youtubeUploadsUrl(channel.channelId),
     run: () => runYoutubeVideos(channel),
   })),
+  // Hobby media and figure news, in the order their records win over each
+  // other when two sites report one product.
+  ...UNOFFICIAL_SOURCES.filter((source) => source.id !== HAMUSUKE_SOURCE_ID).map((source) => unofficialEntry(source.id)),
   // When official streams start. Last: a video a source above already
   // reports keeps that record and only gains live_at / live_state. The YouTube
   // one reads the same upload lists (once a run, see fetchYoutube).
@@ -640,21 +759,50 @@ const live = settleLiveRecords(
   now,
 );
 if (goneStreamIds.size || live.dropped.length) console.log(`Dropped ${goneStreamIds.size} cancelled and ${live.dropped.length} past streams.`);
-const merged = live.records;
-// Magazine records an official source or the catalog already covers go first;
-// the stored copy is dropped too, not only today's.
-const magazine = dropMagazineDuplicates(merged, await readCatalogKits(COROCORO_FRANCHISES.map(({ franchise }) => franchise)));
-if (magazine.dropped.length) console.log(`Dropped ${magazine.dropped.length} CoroCoro records covered by official sources or the catalog.`);
+// The merge keeps a stored status; listings that report the stage themselves
+// (the schedule once a preorder opens, fig速's 【予約開始】) move their record on.
+const STAGE_SOURCE_IDS = new Set([TAMASHII_SCHEDULE_SOURCE_ID, FIGSOKU_SOURCE_ID]);
+const staged = advanceStages(live.records, [...incomingById.values()].filter((record) => STAGE_SOURCE_IDS.has(record.source_id)));
+for (const { id, from, to } of staged.advanced) console.log(`${id}: ${from} -> ${to}`);
+// Magazine and fan-blog records an official source or the catalog already
+// covers go first; the stored copy is dropped too, not only today's.
+const magazine = dropMagazineDuplicates(
+  staged.records,
+  await readCatalogKits(COROCORO_FRANCHISES.map(({ franchise }) => franchise)),
+  { sourceIds: [COROCORO_SOURCE_ID, HAMUSUKE_SOURCE_ID] },
+);
+if (magazine.dropped.length) console.log(`Dropped ${magazine.dropped.length} CoroCoro and fan-blog records covered by official sources or the catalog.`);
+// So do media and figure posts whose products official records already name.
+const media = dropUnofficialDuplicates(magazine.records);
+if (media.dropped.length) console.log(`Dropped ${media.dropped.length} media records covered by official sources.`);
 // A reveal follows its product: linked once the catalog has it, moved to
 // preorder_open once an official post opens the preorder. Before the dedupe, so
 // a post it drops still counts.
 const stages = promoteRevealStages(linkRevealKits(
-  magazine.records,
+  media.records,
   await readCatalogKits([...new Set(TAMASHII_REVEAL_PAGES.map((page) => page.franchise))]),
 ));
 for (const { id, from, to } of stages.promoted) console.log(`${id}: ${from} -> ${to}`);
-const { records: announcements, dropped } = dedupeAnnouncements(stages.records, DEDUPE_PRIORITY);
+// After the reveals: a schedule row may move one to preorder_open before a
+// post, or the reveal itself, replaces the row.
+const schedule = dropScheduleTwins(stages.records);
+if (schedule.dropped.length) console.log(`Dropped ${schedule.dropped.length} schedule records other official records already tell.`);
+// A fan-blog post and a magazine scoop of one bey are twins, the blog first
+// (keepsApart): it has the product picture.
+const { records: announcements, dropped } = dedupeAnnouncements(schedule.records, DEDUPE_PRIORITY, { separate: keepsApart() });
 if (dropped.length) console.log(`Dropped ${dropped.length} cross-source duplicates.`);
+// Where each published record dropped above went, so a follow in the app moves with it.
+const replacements = carryReplaced({
+  replaced: previous.replaced,
+  replacedAt: previous.replaced_at,
+  drops: [...magazine.dropped, ...media.dropped, ...schedule.dropped, ...dropped],
+  publishedIds: new Set(previousById.keys()),
+  keptIds: new Set(announcements.map((record) => record.id)),
+  today,
+});
+for (const [id, kept] of Object.entries(replacements.replaced)) {
+  if (!previous.replaced?.[id]) console.log(`${id}: replaced by ${kept}`);
+}
 await cacheAnnouncementImages(announcements);
 await writeFile(OUTPUT_PATH, `${JSON.stringify({
   updated_at: new Date().toISOString(),
@@ -663,6 +811,7 @@ await writeFile(OUTPUT_PATH, `${JSON.stringify({
   fetch_errors: ONLY_SOURCES.size
     ? [...(previous.fetch_errors || []).filter((error) => !ONLY_SOURCES.has(error.source_id)), ...errors]
     : errors,
+  ...replacements,
   announcements,
 }, null, 2)}\n`);
 

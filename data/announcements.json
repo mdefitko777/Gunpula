@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-13T00:18:51.767Z",
+  "updated_at": "2026-11-13T17:26:36.648Z",
   "sources": [
     {
       "source_id": "tamashii_news",
@@ -15,6 +15,11 @@
       "source_id": "tamashii_reveals",
       "name": "TAMASHII WEB",
       "url": "https://tamashiiweb.com/item_character/gundam_series/"
+    },
+    {
+      "source_id": "tamashii_schedule",
+      "name": "TAMASHII WEB",
+      "url": "https://tamashiiweb.com/schedule/"
     },
     {
       "source_id": "bandai_hobby_news",
@@ -67,6 +72,11 @@
       "url": "https://shop.kotobukiya.co.jp/shop/pages/titlelist.aspx"
     },
     {
+      "source_id": "hamusuke_beyblade",
+      "name": "ハムすけの備忘録",
+      "url": "https://hamusuke.com/"
+    },
+    {
       "source_id": "corocoro_news",
       "name": "コロコロコミック",
       "url": "https://corocoro-news.jp/"
@@ -92,6 +102,26 @@
       "url": "https://www.youtube.com/playlist?list=UUuG_D_8QZmHTfbJfsz8-J_A"
     },
     {
+      "source_id": "hjweb_news",
+      "name": "Hobby JAPAN Web",
+      "url": "https://hjweb.jp/"
+    },
+    {
+      "source_id": "dengeki_gunpla",
+      "name": "電撃オンライン",
+      "url": "https://dengekionline.com/tag/%E3%82%AC%E3%83%B3%E3%83%97%E3%83%A9/page/1"
+    },
+    {
+      "source_id": "figsoku_tags",
+      "name": "fig速",
+      "url": "https://figsoku.net/"
+    },
+    {
+      "source_id": "stds_lego",
+      "name": "スタッズ",
+      "url": "https://stds.jp/tag/newsets/feed/"
+    },
+    {
       "source_id": "tamashii_nation_live",
       "name": "TAMASHII NATION",
       "url": "https://tamashii-nation.tamashiiweb.com/"
@@ -108,12 +138,22 @@
       "message": "https://www.youtube.com/watch?v=c3M7UKldpEA has no video data (ログインして bot ではないことを確認してください)"
     }
   ],
+  "replaced": {
+    "corocoro-d0dfcce067": "hamusuke-bx-55",
+    "corocoro-d1ac4f87bf": "hamusuke-ux-22",
+    "tamashii-reveal-0abb669c96": "tamashii-news-2026-11-13-16258"
+  },
+  "replaced_at": {
+    "corocoro-d0dfcce067": "2026-11-14",
+    "corocoro-d1ac4f87bf": "2026-11-14",
+    "tamashii-reveal-0abb669c96": "2026-11-13"
+  },
   "announcements": [
     {
-      "id": "corocoro-d0dfcce067",
+      "id": "hamusuke-bx-55",
       "franchise": "beyblade",
       "names": {
-        "ja": "ランダムブースターVol.12「ホルスシャッター3-85MO」",
+        "ja": "BX-55 ランダムブースターVol.12「ホルスシャッター3-85MO」",
         "zh": null,
         "ko": null,
         "en": null
@@ -121,24 +161,25 @@
       "status": "announced",
       "announced_at": "2026-11-13",
       "source_type": "news",
-      "source_name": "コロコロコミック",
-      "source_id": "corocoro_news",
-      "source_url": "https://corocoro-news.jp/news/403084/",
-      "thumbnail_url": "../app/assets/announcements/corocoro-d0dfcce067.jpg",
+      "source_name": "ハムすけの備忘録",
+      "source_id": "hamusuke_beyblade",
+      "source_url": "https://hamusuke.com/beybladex-bx55-randombooster12-report/",
+      "thumbnail_url": "https://hamusuke.com/wp/wp-content/uploads/2026/11/HW7wjbDa8AAHhTy-768x768.jpg",
       "video_id": null,
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
       "linked_kit_id": null,
-      "confidence": "magazine",
-      "notes": "2026年12月26日発売 / 1,600円 / ランダムブースターVol.12. Magazine scoop (CoroCoro News: 月刊コロコロコミック 2026年12月号（誌面）); not on the official lineup when first seen.",
+      "confidence": "unofficial",
+      "notes": "2026年12月26日発売 / 1,600円 / ランダムブースター. Fan blog post (ハムすけの備忘録), written when the monthly embargo lifts; not on the official lineup when first seen.",
+      "unofficial": true,
       "reviewed_at": null
     },
     {
-      "id": "corocoro-d1ac4f87bf",
+      "id": "hamusuke-ux-22",
       "franchise": "beyblade",
       "names": {
-        "ja": "スターター「バニッシュルシファー WW」",
+        "ja": "UX-22 スターター「バニッシュルシファーWW」",
         "zh": null,
         "ko": null,
         "en": null
@@ -146,17 +187,18 @@
       "status": "announced",
       "announced_at": "2026-11-13",
       "source_type": "news",
-      "source_name": "コロコロコミック",
-      "source_id": "corocoro_news",
-      "source_url": "https://corocoro-news.jp/news/403084/",
-      "thumbnail_url": "../app/assets/announcements/corocoro-d1ac4f87bf.jpg",
+      "source_name": "ハムすけの備忘録",
+      "source_id": "hamusuke_beyblade",
+      "source_url": "https://hamusuke.com/baybladex-ux22-vanishlucifer-report/",
+      "thumbnail_url": "https://hamusuke.com/wp/wp-content/uploads/2026/11/HW7wPW3bgAAySPt-768x768.jpg",
       "video_id": null,
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
       "linked_kit_id": null,
-      "confidence": "magazine",
-      "notes": "2026年12月26日発売 / 2,500円 / スターター. Magazine scoop (CoroCoro News: 月刊コロコロコミック 2026年12月号（誌面）); not on the official lineup when first seen.",
+      "confidence": "unofficial",
+      "notes": "2026年12月26日発売 / 2,500円 / スターター. Fan blog post (ハムすけの備忘録), written when the monthly embargo lifts; not on the official lineup when first seen.",
+      "unofficial": true,
       "reviewed_at": null
     },
     {
@@ -287,6 +329,84 @@
       "reviewed_at": null
     },
     {
+      "id": "hjweb-2884578",
+      "franchise": "gundam",
+      "names": {
+        "ja": "【機動武闘伝Gガンダム】ROBOT魂「謎のモビルファイター」5体が参考展示！【TAMASHII NATION 2026 レポート】",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "announced",
+      "announced_at": "2026-11-12",
+      "source_type": "news",
+      "source_name": "Hobby JAPAN Web",
+      "source_id": "hjweb_news",
+      "source_url": "https://hjweb.jp/article/2884578/",
+      "thumbnail_url": "https://hjweb.jp/wp-content/uploads/2026/11/ae46b1f460ee46f789c27b264a6cb421-2-1024x683.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "unofficial",
+      "notes": null,
+      "unofficial": true,
+      "reviewed_at": null
+    },
+    {
+      "id": "hjweb-2884580",
+      "franchise": "gundam",
+      "names": {
+        "ja": "【Ka signature】METAL ROBOT魂「百式」、ROBOT魂「ドーベンウルフ」がKa signatureシリーズモデルが参考展示！【TAMASHII NATION 2026 レポート】",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "announced",
+      "announced_at": "2026-11-12",
+      "source_type": "news",
+      "source_name": "Hobby JAPAN Web",
+      "source_id": "hjweb_news",
+      "source_url": "https://hjweb.jp/article/2884580/",
+      "thumbnail_url": "https://hjweb.jp/wp-content/uploads/2026/11/ae46b1f460ee46f789c27b264a6cb421-3-1024x683.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "unofficial",
+      "notes": null,
+      "unofficial": true,
+      "reviewed_at": null
+    },
+    {
+      "id": "hjweb-2884735",
+      "franchise": "gundam",
+      "names": {
+        "ja": "【ガンダム00】METAL BUILD「ガンダムデュナメス」「ガンダムキュリオス」が初展示！「GNアームズ TYPE-K オプションセット」の商品化も決定【TAMASHII NATION 2026 レポート】",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-11-12",
+      "source_type": "news",
+      "source_name": "Hobby JAPAN Web",
+      "source_id": "hjweb_news",
+      "source_url": "https://hjweb.jp/article/2884735/",
+      "thumbnail_url": "https://hjweb.jp/wp-content/uploads/2026/11/ae46b1f460ee46f789c27b264a6cb421-4-1024x683.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "unofficial",
+      "notes": null,
+      "unofficial": true,
+      "reviewed_at": null
+    },
+    {
       "id": "live-5b79e87f56",
       "franchise": "gundam",
       "names": {
@@ -339,7 +459,7 @@
       "confidence": "official",
       "notes": "Livestream outside YouTube; start time from the event site, end assumed two hours later. Announcement date = first seen by the bot.",
       "live_at": "2026-11-13T21:00:00+09:00",
-      "live_state": "upcoming",
+      "live_state": "ended",
       "reviewed_at": null
     },
     {
@@ -468,6 +588,32 @@
       "reviewed_at": null
     },
     {
+      "id": "stds-75875",
+      "franchise": "lego",
+      "names": {
+        "ja": "懐かしのポスターに最大のサプライズまで、レゴ(R)スター・ウォーズ新作2027年1月1日発売",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-11-12",
+      "source_type": "news",
+      "source_name": "スタッズ",
+      "source_id": "stds_lego",
+      "source_url": "https://stds.jp/lego-starwars-january-2027-new-sets/",
+      "thumbnail_url": "https://stds.jp/wp-content/uploads/2026/11/lego-starwars-january-2027-new-sets_title_.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "unofficial",
+      "notes": null,
+      "unofficial": true,
+      "reviewed_at": null
+    },
+    {
       "id": "tamashii-news-2026-11-12-16187",
       "franchise": "gundam",
       "names": {
@@ -486,9 +632,9 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16187",
       "confidence": "official",
-      "notes": null,
+      "notes": "予約 2026-11-12〜 / 発売 2027-05 / ¥7,700（税込） / 一般店頭販売商品",
       "source_id": "tamashii_news",
       "reviewed_at": null
     },
@@ -511,9 +657,9 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16188",
       "confidence": "official",
-      "notes": null,
+      "notes": "予約 2026-11-12〜 / 発売 2027-06 / ¥9,900（税込） / 一般店頭販売商品",
       "source_id": "tamashii_news",
       "reviewed_at": null
     },
@@ -536,10 +682,60 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
+      "linked_kit_id": "tamashii-16259",
+      "confidence": "official",
+      "notes": "予約 2026-11-13〜 / 発送 2027-01 / ¥33,000（税込） / 魂ウェブ商店販売商品",
+      "source_id": "tamashii_topics_items",
+      "reviewed_at": null
+    },
+    {
+      "id": "tamashii-schedule-16270",
+      "franchise": "gundam",
+      "names": {
+        "ja": "METAL ROBOT魂 【事後販売】＜SIDE MS＞ デスティニーガンダムSpecII 最終決戦 Ver.",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-12",
+      "source_type": "news",
+      "source_name": "TAMASHII WEB",
+      "source_id": "tamashii_schedule",
+      "source_url": "https://tamashiiweb.com/item/16270/",
+      "thumbnail_url": "../app/assets/announcements/tamashii-schedule-16270.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
       "linked_kit_id": null,
       "confidence": "official",
-      "notes": null,
-      "source_id": "tamashii_topics_items",
+      "notes": "予約 2026-11-13〜 / 発送 2027-03 / ¥25,300（税込） / TAMASHII NATION開催記念商品 / 事後販売",
+      "reviewed_at": null
+    },
+    {
+      "id": "tamashii-schedule-16271",
+      "franchise": "gundam",
+      "names": {
+        "ja": "METAL BUILD 【事後販売】ゴッドガンダム（明鏡止水）",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-12",
+      "source_type": "news",
+      "source_name": "TAMASHII WEB",
+      "source_id": "tamashii_schedule",
+      "source_url": "https://tamashiiweb.com/item/16271/",
+      "thumbnail_url": "https://tamashiiweb.com/storage/images/products/thumbnail/05f07f77-a994-4fdc-a0d5-2921a983bd53.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "予約 2026-11-13〜 / 発送 2027-03 / ¥39,600（税込） / TAMASHII NATION開催記念商品 / 事後販売",
       "reviewed_at": null
     },
     {
@@ -716,6 +912,62 @@
       "confidence": "official",
       "notes": "Name truncated by the Premium Bandai new-items list.",
       "reviewed_at": null
+    },
+    {
+      "id": "stds-78316",
+      "franchise": "lego",
+      "names": {
+        "ja": "レゴ(R)スーパーマリオ ヨッシーの予告画像、Nintendo TODAY アプリで公開",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "announced",
+      "announced_at": "2026-11-09",
+      "source_type": "news",
+      "source_name": "スタッズ",
+      "source_id": "stds_lego",
+      "source_url": "https://stds.jp/lego-yoshi-set-teased-on-app/",
+      "thumbnail_url": "https://stds.jp/wp-content/uploads/2026/11/lego-yoshi-set-teased-on-app_title_.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "unofficial",
+      "notes": null,
+      "unofficial": true,
+      "reviewed_at": null
+    },
+    {
+      "id": "figsoku-b76eed66d7",
+      "franchise": "pokemon",
+      "names": {
+        "ja": "【食玩】ポケモンスケールワールド「 ピュール&メガズルズキン&ギルガルド(シールドフォルム)」「ヨーギラス&サナギラス&バンギラス&メガバンギラス」【プレバン受注開始】",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-08",
+      "source_type": "news",
+      "source_name": "fig速",
+      "source_id": "figsoku_tags",
+      "source_url": "https://figsoku.net/blog-entry-534790.html",
+      "thumbnail_url": null,
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "unofficial",
+      "notes": null,
+      "unofficial": true,
+      "reviewed_at": null,
+      "official_urls": [
+        "https://p-bandai.jp/item/item-1000259827/",
+        "https://p-bandai.jp/item/item-1000259828/"
+      ]
     },
     {
       "id": "youtube-c3M7UKldpEA",
@@ -938,9 +1190,9 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16254",
       "confidence": "official",
-      "notes": null,
+      "notes": "発売 2026-11 / ¥33,000（税込） / その他限定商品",
       "source_id": "tamashii_topics_items",
       "reviewed_at": null
     },
@@ -2474,9 +2726,9 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16152",
       "confidence": "official",
-      "notes": null,
+      "notes": "予約 2026-11-02〜 / 発売 2027-04 / ¥5,500（税込） / 一般店頭販売商品",
       "reviewed_at": null,
       "source_id": "tamashii_topics_items"
     },
@@ -2831,6 +3083,32 @@
       "reviewed_at": null
     },
     {
+      "id": "figsoku-75d32a06e8",
+      "franchise": "fate",
+      "names": {
+        "ja": "【プリズマ☆イリヤ】デザインココ「イリヤスフィール・フォン・アインツベルン」フィギュア【近日予約開始】",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-10-27",
+      "source_type": "news",
+      "source_name": "fig速",
+      "source_id": "figsoku_tags",
+      "source_url": "https://figsoku.net/blog-entry-532525.html",
+      "thumbnail_url": "https://figsoku.net/wp-content/wonfes/reserve/fig_20261027_1793106030090.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "unofficial",
+      "notes": null,
+      "unofficial": true,
+      "reviewed_at": null
+    },
+    {
       "id": "gundam-official-to8wwz2mwq5i5azt7ukuomr0",
       "franchise": "gundam",
       "names": {
@@ -2999,9 +3277,9 @@
       "video_timestamp_seconds": null,
       "series_key": "unclassified",
       "grade_code": null,
-      "linked_kit_id": null,
+      "linked_kit_id": "tamashii-16151",
       "confidence": "official",
-      "notes": null,
+      "notes": "予約 2026-11-02〜 / 発売 2027-01 / ¥19,800（税込） / 一般店頭販売商品",
       "source_id": "tamashii_topics_items",
       "reviewed_at": null
     },

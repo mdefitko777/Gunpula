@@ -7,6 +7,7 @@ import { readFileSync } from "node:fs";
 import { acceptsStoredAnnouncement, mergeAnnouncementRecords, parseTamashiiNews } from "./lib/bandai-announcements.mjs";
 import {
   TAMASHII_REVEALS_SOURCE_ID,
+  carryReplaced,
   createHostStops,
   dedupeAnnouncements,
   linkRevealKits,
@@ -116,6 +117,44 @@ const itemTopic = { ...preorder[0], source_id: "tamashii_news", announced_at: "2
 const deduped = dedupeAnnouncements([itemReveal, itemTopic], ["tamashii_news", TAMASHII_REVEALS_SOURCE_ID]);
 assert.deepEqual(deduped.records.map((record) => record.id), [itemTopic.id]);
 assert.deepEqual(deduped.dropped, [{ id: itemReveal.id, kept: itemTopic.id }]);
+// The banner's picture goes to the topic post when the post has none.
+assert.equal(dedupeAnnouncements([itemReveal, { ...itemTopic, thumbnail_url: null }], ["tamashii_news", TAMASHII_REVEALS_SOURCE_ID]).records[0].thumbnail_url, itemReveal.thumbnail_url);
+assert.ok(itemReveal.thumbnail_url);
+assert.equal(deduped.records[0].thumbnail_url, itemTopic.thumbnail_url, "a post with its own picture keeps it");
+
+// The app follows a reveal by its id ("알림 받는 예고"): a published record
+// dropped as a twin leaves "replaced" behind, so the follow moves to the post.
+const run = (fields) => carryReplaced({ today: "2026-11-14", ...fields });
+const published = new Set([itemReveal.id]);
+const keptIds = new Set([itemTopic.id]);
+const first = run({ drops: deduped.dropped, publishedIds: published, keptIds });
+assert.deepEqual(first, { replaced: { [itemReveal.id]: itemTopic.id }, replaced_at: { [itemReveal.id]: "2026-11-14" } });
+// A twin first seen and dropped on the same run was never shown: nothing to move.
+assert.deepEqual(run({ drops: deduped.dropped, publishedIds: new Set(), keptIds }), { replaced: {}, replaced_at: {} });
+// Carried over from run to run with the day it was written…
+const later = run({ replaced: first.replaced, replacedAt: first.replaced_at, today: "2027-03-14", keptIds });
+assert.deepEqual(later, first);
+// …until it is 120 days old.
+assert.deepEqual(run({ replaced: first.replaced, replacedAt: first.replaced_at, today: "2027-03-15", keptIds }), { replaced: {}, replaced_at: {} });
+// Chains collapse: the post replaced in turn takes the old reveal's follow along,
+// also through a record that was never published.
+const chain = run({
+  replaced: first.replaced,
+  replacedAt: first.replaced_at,
+  today: "2026-11-20",
+  drops: [{ id: itemTopic.id, kept: "tamashii-news-new" }, { id: "tamashii-news-new", kept: "tamashii-news-final" }],
+  publishedIds: new Set([itemTopic.id]),
+  keptIds: new Set(["tamashii-news-final"]),
+});
+assert.deepEqual(chain, {
+  replaced: { [itemReveal.id]: "tamashii-news-final", [itemTopic.id]: "tamashii-news-final" },
+  replaced_at: { [itemReveal.id]: "2026-11-14", [itemTopic.id]: "2026-11-20" },
+});
+// Never pointing at a record that is gone, and gone once its own record is back.
+assert.deepEqual(run({ replaced: first.replaced, replacedAt: first.replaced_at, keptIds: new Set() }), { replaced: {}, replaced_at: {} });
+assert.deepEqual(run({ replaced: first.replaced, replacedAt: first.replaced_at, keptIds: new Set([itemReveal.id, itemTopic.id]) }), { replaced: {}, replaced_at: {} });
+// A drop the catalog took over (no record stays) has nowhere to point.
+assert.deepEqual(run({ drops: [{ id: itemReveal.id, reason: "catalog" }], publishedIds: published, keptIds }), { replaced: {}, replaced_at: {} });
 
 // The fetcher's stop list: a host that answered 403/429/503 gets nothing more this run.
 const stops = createHostStops();
