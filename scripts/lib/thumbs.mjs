@@ -1,0 +1,193 @@
+// Small cover thumbnails for the app's tiles (scripts/build_thumbs.mjs makes them,
+// scripts/publish_site.mjs publishes data/thumbs.json that maps an image URL to its thumbnail).
+//
+// Why (measured 2026-11-14 from Korea): the image hosts answer in 0.1–0.4 s, but the app draws
+// 52–150 dp tiles from 560–2400 px originals (a 60-tile screen decodes 80–140 MB) and most feed
+// covers sit on bandai-a.akamaihd.net with max-age=300 and no ETag, so they are downloaded again
+// every few minutes. A 400 px WebP is 9–14 KB and lives on the image shards (ETag, stable names).
+//
+// Layout under app/assets/thumbs/ (published to the image shards, not the site):
+//   repo/<dir>/<file>.webp   one per photo in app/assets/<dir> (made in the publish job, not committed)
+//   web/<host>/<sha1(url) 16>.webp   remote covers (fetched by the daily refresh, committed)
+
+import { createHash } from "node:crypto";
+import { spawnSync } from "node:child_process";
+
+export const THUMB_ROOT = "app/assets/thumbs";
+export const THUMB_MAX_SIDE = 400;
+export const THUMB_QUALITY = 72;
+// Photos in these app/assets folders get a thumbnail. announcements is published with the site
+// (../app/assets/announcements/… in announcements.json); its thumbnails still go to the shards.
+export const REPO_SOURCE_DIRS = ["catalog", "kotobukiya-ac", "bbx", "announcements"];
+export const SITE_BASE = "https://mdefitko777.github.io/Gunpula/";
+// Hosts with their own thumbnails: no copy needed. Rebrickable: 250x250p is the size its own set
+// lists use (2026-11-14: 104 KB for 31209-1, whose original is 4.25 MB / 2048x2160).
+export const THUMB_RULES = [
+  { prefix: "https://cdn.rebrickable.com/media/sets/", thumb_prefix: "https://cdn.rebrickable.com/media/thumbs/sets/", thumb_suffix: "/250x250p.jpg" },
+];
+
+const IMAGE_EXT = /\.(?:jpe?g|png|gif|webp)$/i;
+
+export function repoThumbRel(rel) {
+  return `thumbs/repo/${rel}.webp`;
+}
+
+export function webThumbFile(url) {
+  return `${new URL(url).host}/${createHash("sha1").update(url).digest("hex").slice(0, 16)}.webp`;
+}
+
+export function ruleThumb(url, rules = THUMB_RULES) {
+  const rule = rules.find((entry) => url.startsWith(entry.prefix));
+  return rule ? `${rule.thumb_prefix}${url.slice(rule.prefix.length)}${rule.thumb_suffix}` : null;
+}
+
+// Android refuses cleartext (no usesCleartextTraffic in the app), so an http:// image never
+// shows; the hosts seen in the data (image.toast.com, images.goodsmile.info) serve the same
+// files over https (checked 2026-11-14).
+export function httpsImageUrl(url) {
+  return typeof url === "string" && /^http:\/\//i.test(url) ? `https://${url.slice(7)}` : url;
+}
+
+// Upgrades every quoted http:// image URL in a JSON text; links to pages stay as they are.
+export function upgradeCleartextImages(text) {
+  let upgraded = 0;
+  const out = text.replace(/"http:\/\/([^"\\\s]+?\.(?:jpe?g|png|gif|webp)(?:\?[^"\\\s]*)?)"/gi, (whole, rest) => {
+    upgraded += 1;
+    return `"https://${rest}"`;
+  });
+  return { text: out, upgraded };
+}
+
+// Same as the app's deadImage (hobby-atlas-v3 lib/data/gunpula.dart): never shown, never fetched.
+export function deadImage(url) {
+  return ["internal-pbn", "Expires=", "bandai-hobby.net", "pokemon.hgodo.com"].some((part) => url.includes(part));
+}
+
+// The tile image the app picks for a kit (pickCover in lib/data/gunpula.dart): Gundam box art
+// unless it is only a "maybe", else box_art_url, else the first gallery photo.
+export function coverOf(kit, boxart) {
+  const box = kit.images?.box_art_url || "";
+  const gallery = kit.gallery_image_urls || [];
+  const art = boxart?.[kit.kit_id];
+  if (art?.url && art.kind !== "maybe" && !deadImage(art.url)) return art.url;
+  if (box && !deadImage(box)) return box;
+  return gallery[0] || "";
+}
+
+// A remote cover worth a copy: https (after the upgrade), a picture, not one of ours, not
+// covered by a rule.
+export function wantsWebThumb(url) {
+  if (!/^https?:\/\//i.test(url || "") || deadImage(url)) return false;
+  const secure = httpsImageUrl(url);
+  const parsed = new URL(secure);
+  if (parsed.host.endsWith(".github.io") || parsed.host === "raw.githubusercontent.com") return false;
+  if (ruleThumb(secure)) return false;
+  return IMAGE_EXT.test(parsed.pathname) || /\/(?:img|image|images|media|uploads?)\//i.test(parsed.pathname);
+}
+
+// Every kit_id mentioned anywhere in a feed document.
+export function feedKitIds(doc, ids = new Set()) {
+  if (Array.isArray(doc)) for (const item of doc) feedKitIds(item, ids);
+  else if (doc && typeof doc === "object") {
+    if (typeof doc.kit_id === "string") ids.add(doc.kit_id);
+    for (const value of Object.values(doc)) if (value && typeof value === "object") feedKitIds(value, ids);
+  }
+  return ids;
+}
+
+const DAY = 24 * 60 * 60 * 1000;
+
+// Remote images to copy, most visible first: announcement tiles and the notify / update feeds,
+// then kits new in the last 30 days or released from 30 days ago to 120 days ahead (the home
+// rows), then restocks, then the rest of the catalog newest first.
+export function thumbCandidates({ kits, boxart = {}, firstSeen = {}, feedIds = new Set(), restockIds = new Set(), announcements = [], today = new Date() }) {
+  const now = today.getTime();
+  const daysFrom = (value) => {
+    const time = Date.parse(String(value || "").length === 7 ? `${value}-15` : value || "");
+    return Number.isNaN(time) ? null : (time - now) / DAY;
+  };
+  const scored = [];
+  announcements.forEach((item, index) => scored.push({ url: item.thumbnail_url, tier: 0, order: index }));
+  for (const kit of kits) {
+    const url = coverOf(kit, boxart);
+    const seen = daysFrom(firstSeen[kit.kit_id]);
+    const release = daysFrom(kit.release_date);
+    let tier = 3;
+    if (feedIds.has(kit.kit_id)) tier = 0;
+    else if ((seen !== null && seen >= -30) || (release !== null && release >= -30 && release <= 120)) tier = 1;
+    else if (restockIds.has(kit.kit_id)) tier = 2;
+    scored.push({ url, tier, order: -(seen ?? -1e6) });
+  }
+  scored.sort((a, b) => a.tier - b.tier || a.order - b.order);
+  const out = [];
+  const seenUrls = new Set();
+  for (const { url } of scored) {
+    if (!wantsWebThumb(url)) continue;
+    const secure = httpsImageUrl(url);
+    if (seenUrls.has(secure)) continue;
+    seenUrls.add(secure);
+    out.push(secure);
+  }
+  return out;
+}
+
+// data/thumbs.json as published. repoIndex: { "<dir>/<file>": sha } (thumbs made in this job),
+// webIndex: { "<remote url>": "<host>/<file>.webp" }. urlForAsset(rel under app/assets) gives
+// the published URL of a shard file, or null when no live shard holds it; a thumbnail without
+// one is left out, so the map never points at raw.githubusercontent.com.
+export function buildThumbMap({ repoIndex = {}, webIndex = {}, originalUrl, thumbUrl, generatedAt = new Date().toISOString() }) {
+  const thumbs = {};
+  for (const rel of Object.keys(repoIndex).sort()) {
+    const original = originalUrl(rel);
+    const thumb = thumbUrl(repoThumbRel(rel));
+    if (original && thumb) thumbs[original] = thumb;
+  }
+  for (const url of Object.keys(webIndex).sort()) {
+    const thumb = thumbUrl(`thumbs/web/${webIndex[url]}`);
+    if (thumb) thumbs[url] = thumb;
+  }
+  return { schema: "gunpula-thumbs-v1", generated_at: generatedAt, max_side: THUMB_MAX_SIDE, rules: THUMB_RULES, thumbs };
+}
+
+// Pillow (the same Python the atlas cover step uses; no npm image library is installed).
+// One process per batch: reads {"src","dst"} lines, writes {"dst","ok"|"error"} lines.
+const PY_THUMBS = String.raw`
+import json, os, sys
+from PIL import Image, ImageOps
+side, quality = int(sys.argv[1]), int(sys.argv[2])
+for line in sys.stdin:
+    job = json.loads(line)
+    try:
+        im = Image.open(job["src"])
+        # JPEG: decode straight at 1/2..1/8 scale (big box art is 2000+ px).
+        im.draft("RGB", (side, side))
+        im = ImageOps.exif_transpose(im)
+        alpha = "A" in im.getbands() or "transparency" in im.info
+        im = im.convert("RGBA" if alpha else "RGB")
+        im.thumbnail((side, side), Image.LANCZOS)
+        os.makedirs(os.path.dirname(job["dst"]), exist_ok=True)
+        im.save(job["dst"] + ".tmp", "WEBP", quality=quality, method=4)
+        os.replace(job["dst"] + ".tmp", job["dst"])
+        print(json.dumps({"dst": job["dst"], "ok": True, "width": im.width, "height": im.height}), flush=True)
+    except Exception as error:
+        print(json.dumps({"dst": job["dst"], "error": str(error)[:200]}), flush=True)
+`;
+
+// First interpreter that can import Pillow (on Windows "python3" may be a Store stub).
+let pillowPython;
+export function pythonWithPillow() {
+  if (pillowPython === undefined) {
+    pillowPython = ["python3", "python"].find((py) => spawnSync(py, ["-I", "-c", "import PIL.WebPImagePlugin"], { encoding: "utf8" }).status === 0) || null;
+  }
+  return pillowPython;
+}
+
+export function makeThumbs(jobs, { side = THUMB_MAX_SIDE, quality = THUMB_QUALITY } = {}) {
+  if (!jobs.length) return [];
+  const py = pythonWithPillow();
+  if (!py) throw new Error("Python with Pillow (WebP) is needed: pip install pillow");
+  const input = jobs.map((job) => JSON.stringify(job)).join("\n");
+  const res = spawnSync(py, ["-I", "-c", PY_THUMBS, String(side), String(quality)], { input: `${input}\n`, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  if (res.status !== 0) throw new Error(`thumbnail batch failed: ${(res.stderr || res.error?.message || "").trim().split("\n").pop()}`);
+  return res.stdout.trim().split("\n").filter(Boolean).map((line) => JSON.parse(line));
+}

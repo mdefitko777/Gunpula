@@ -20,6 +20,7 @@ on:
       - Atlas Gundam MS data
       - Atlas - Pokémon MEZASTAR data
       - Atlas - Notify feed
+      - Thumbnail remote covers
     types: [completed]
     branches: [main]
   schedule:
@@ -78,6 +79,31 @@ jobs:
           done
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      # Tile thumbnails of the repo's photos (scripts/build_thumbs.mjs --repo, Pillow): about
+      # 4 minutes for all 7,500 on a cold cache, seconds when few photos changed. The cache key
+      # follows the photo folders' git trees, so an unchanged repo restores the same files and the
+      # shards see no change. A failure stops the publish: without the thumbnails the plan would
+      # delete them from the shards and send them all again on the next run.
+      - name: Install Pillow
+        run: |
+          python3 -c "import PIL.WebPImagePlugin" 2>/dev/null \
+            || python3 -m pip install --quiet --user pillow \
+            || python3 -m pip install --quiet --user --break-system-packages pillow
+
+      - name: Thumbnail cache key
+        id: thumbkey
+        run: echo "key=thumbs-repo-v1-$(git rev-parse HEAD:app/assets/catalog HEAD:app/assets/kotobukiya-ac HEAD:app/assets/bbx HEAD:app/assets/announcements | sha1sum | cut -c1-16)" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/cache@v4
+        with:
+          path: app/assets/thumbs/repo
+          key: ${{ steps.thumbkey.outputs.key }}
+          restore-keys: thumbs-repo-v1-
+
+      - name: Make tile thumbnails
+        timeout-minutes: 15
+        run: node scripts/build_thumbs.mjs --repo
 
       - name: Sync image shards and build the site
         id: site

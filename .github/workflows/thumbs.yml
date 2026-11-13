@@ -1,0 +1,84 @@
+name: Thumbnail remote covers
+
+# 400 px WebP copies of the covers the app hotlinks from makers' hosts (scripts/build_thumbs.mjs
+# --fetch): announcement pictures and the notify / update feeds first, then new and upcoming
+# items, then the rest of the catalog. The originals are 50 KB–4 MB at 560–2400 px for tiles of
+# 52–150 dp, and bandai-a.akamaihd.net (most feed covers) sends max-age=300 without an ETag, so
+# the app downloads them again every few minutes. Bot user agent, robots.txt, one request per
+# host at a time >= 1.1 s apart, a host that refuses is left for the run. About 1,000 covers a
+# run from the busiest host: the ~5,900 remote covers of 2026-11-14 are copied within a week,
+# then only new items. Not part of the daily refresh, which already runs 40–50 of its 60 minutes.
+# Commits only app/assets/thumbs/web/; the publish job puts them on the image shards and
+# lists them in the site's data/thumbs.json.
+
+on:
+  workflow_run:
+    workflows: ["Atlas - Notify feed"]
+    types: [completed]
+  schedule:
+    - cron: "20 23 * * *" # 08:20 KST, fallback if a workflow_run event is missed
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: thumbs-remote
+  cancel-in-progress: false
+
+jobs:
+  thumbs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      # Only what the step reads and writes, not the 1.2 GB of photos under app/assets.
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          sparse-checkout: |
+            data
+            scripts
+            app/assets/thumbs/web
+          sparse-checkout-cone-mode: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Pillow
+        run: |
+          python3 -c "import PIL.WebPImagePlugin" 2>/dev/null \
+            || python3 -m pip install --quiet --user pillow \
+            || python3 -m pip install --quiet --user --break-system-packages pillow
+
+      - name: Copy remote covers
+        timeout-minutes: 25
+        run: node scripts/build_thumbs.mjs --fetch --minutes=20
+
+      - name: Commit thumbnails
+        run: |
+          if [ -z "$(git status --porcelain -- app/assets/thumbs/web)" ]; then
+            echo "No new thumbnails."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- app/assets/thumbs/web
+          git commit -m "Add thumbnails of remote covers"
+          branch="${{ github.event.repository.default_branch }}"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin "$branch"
+            if git rebase "origin/$branch"; then
+              if git push origin "HEAD:$branch"; then
+                echo "Pushed on attempt $attempt."
+                exit 0
+              fi
+              echo "Push rejected (remote moved); retrying..."
+            else
+              echo "Rebase conflict; aborting and retrying against latest remote..."
+              git rebase --abort || true
+            fi
+            sleep $(( (RANDOM % 10) + 5 ))
+          done
+          echo "Could not push after 5 attempts."
+          exit 1

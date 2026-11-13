@@ -16,6 +16,8 @@
 // the rewritten files, so an app that cached the old paths downloads the new ones.
 // The manifest also carries a hash per other data file (files), so the app can fetch
 // just the side files that changed (announcements …) on a day the kits did not.
+// The site also gets data/thumbs.json: image URL -> its small thumbnail on a shard
+// (scripts/lib/thumbs.mjs; the thumbnails are app/assets/thumbs/, one of the shard dirs).
 //
 // Shard assignment is stable: a photo stays in the shard that already has it;
 // a new photo goes to the first shard with room. Nothing here needs state in
@@ -31,6 +33,7 @@ import { cp, mkdir, mkdtemp, readFile, readdir, rm, stat, writeFile } from "node
 import { existsSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { buildThumbMap, SITE_BASE, upgradeCleartextImages } from "./lib/thumbs.mjs";
 
 export const CONFIG_PATH = "data/image-shards.json";
 const MB = 1024 * 1024;
@@ -237,6 +240,7 @@ export async function buildSite(outDir, config, assign) {
     assign.has(rel) ? `${config.shards[assign.get(rel)].url}${encode(rel)}` : existsSync(path.join("app", "assets", rel)) ? `${RAW_BASE}${encode(rel)}` : null;
   let rewritten = 0;
   let missing = 0;
+  let upgraded = 0;
   // Only tracked files: nothing local-only (secrets, work files) can reach the site.
   for (const file of trackedFiles()) {
     if (file.startsWith(".github/") || skip.some((prefix) => file.startsWith(prefix)) || excluded(file)) continue;
@@ -244,18 +248,41 @@ export async function buildSite(outDir, config, assign) {
     await mkdir(path.dirname(target), { recursive: true });
     if (file.endsWith(".json") && (file.startsWith("data/") || file.startsWith("app/"))) {
       const text = await readFile(file, "utf8");
-      if (text.includes("./assets/")) {
+      if (text.includes("./assets/") || text.includes('"http://')) {
         const result = rewriteAssetUrls(text, config.dirs, urlFor);
+        const secure = upgradeCleartextImages(result.text);
         rewritten += result.rewritten;
         missing += result.missing;
-        await writeFile(target, result.text);
+        upgraded += secure.upgraded;
+        await writeFile(target, secure.text);
         continue;
       }
     }
     await cp(file, target);
   }
+  const thumbs = await writeThumbMap(path.join(out, "data", "thumbs.json"), config, assign, urlFor);
   await stampManifest(path.join(out, "data"), config.shards.map((shard) => shard.url));
-  return { rewritten, missing, bytes: await dirSize(out) };
+  return { rewritten, missing, upgraded, thumbs, bytes: await dirSize(out) };
+}
+
+// Only thumbnails a live shard holds (assign) go in; a photo in a shard dir is keyed by the URL
+// its JSON now carries, an announcement picture by the app's resolveAsset of ../app/assets/….
+export function thumbUrls(config, assign, urlFor) {
+  const encode = (rel) => rel.split("/").map(encodeURIComponent).join("/");
+  const shardDir = (rel) => config.dirs.includes(rel.split("/")[0]);
+  return {
+    originalUrl: (rel) => (shardDir(rel) ? urlFor(rel) : `${SITE_BASE}app/assets/${rel}`),
+    thumbUrl: (rel) => (assign.has(rel) ? `${config.shards[assign.get(rel)].url}${encode(rel)}` : null),
+  };
+}
+
+async function writeThumbMap(target, config, assign, urlFor) {
+  const readIndex = async (file) => (existsSync(file) ? JSON.parse(await readFile(file, "utf8")) : {});
+  const repoIndex = await readIndex("app/assets/thumbs/repo/index.json");
+  const webIndex = (await readIndex("app/assets/thumbs/web/index.json")).thumbs || {};
+  const map = buildThumbMap({ repoIndex, webIndex, ...thumbUrls(config, assign, urlFor) });
+  await writeFile(target, `${JSON.stringify(map)}\n`);
+  return { entries: Object.keys(map.thumbs).length, repoPhotos: Object.keys(repoIndex).length, web: Object.keys(webIndex).length, bytes: (await stat(target)).size };
 }
 
 // Data files the app may fetch on their own: every JSON under data/ except the per-channel kit
@@ -373,7 +400,8 @@ async function main() {
   let deployable = false;
   if (outDir) {
     const site = await buildSite(outDir, config, plan.assign);
-    lines.push("", `Site: ${(site.bytes / MB).toFixed(0)} MB (limit ${config.site_limit_mb} MB), ${site.rewritten} photo paths pointed at shards, ${site.missing} left as ./assets/ (file missing in the repo too).`);
+    lines.push("", `Site: ${(site.bytes / MB).toFixed(0)} MB (limit ${config.site_limit_mb} MB), ${site.rewritten} photo paths pointed at shards, ${site.missing} left as ./assets/ (file missing in the repo too), ${site.upgraded} http:// pictures changed to https://.`);
+    lines.push("", `Thumbnails: data/thumbs.json ${site.thumbs.entries} entries (${(site.thumbs.bytes / 1024).toFixed(0)} KB) from ${site.thumbs.repoPhotos} repo photos and ${site.thumbs.web} remote covers.`);
     if (site.bytes > config.site_limit_mb * MB) errors.push(`Site is ${(site.bytes / MB).toFixed(0)} MB, over ${config.site_limit_mb} MB — not published. Move another folder into the shards (dirs in ${CONFIG_PATH}).`);
     else if (notLive.length) errors.push(...notLive);
     else deployable = true;
