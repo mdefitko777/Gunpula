@@ -41,6 +41,7 @@ import {
   parsePremiumBandaiNewItems,
   parseTakaraTomyPokemonNews,
   parseTamashiiRevealBanners,
+  carryFetchErrors,
   promoteRevealStages,
   stampAnnouncements,
 } from "./lib/official-announcements.mjs";
@@ -977,10 +978,8 @@ try {
 // The file as it is on disk (`previous` was tidied on reading), for the stamp.
 await writeFile(OUTPUT_PATH, `${JSON.stringify(stampAnnouncements(await readJson(OUTPUT_PATH, null), {
   sources: SOURCES.map((source) => ({ source_id: source.id, name: source.name, url: source.url })),
-  // A partial run (ANNOUNCEMENT_SOURCES) keeps the other sources' last errors.
-  fetch_errors: ONLY_SOURCES.size
-    ? [...(previous.fetch_errors || []).filter((error) => !ONLY_SOURCES.has(error.source_id)), ...errors]
-    : errors,
+  // A partial run (ANNOUNCEMENT_SOURCES, a light run) keeps the other sources' last errors.
+  fetch_errors: carryFetchErrors(previous.fetch_errors, errors, ONLY_SOURCES),
   ...replacements,
   announcements,
 }, new Date().toISOString()), null, 2)}\n`);

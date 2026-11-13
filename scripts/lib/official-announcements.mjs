@@ -138,6 +138,18 @@ export const LIGHT_SOURCE_IDS = [
 ];
 
 /**
+ * fetch_errors after a run of only some sources (`onlySources`, a Set): the other
+ * sources' last errors stay, this run's replace those of the sources it read. The
+ * product-text step ("announcement_details") runs every time, so its old error goes
+ * too; kept, every failing light run (eight a day) added one more copy of it.
+ */
+export function carryFetchErrors(previousErrors, errors, onlySources) {
+  if (!onlySources.size) return errors;
+  const ranThisRun = (id) => onlySources.has(id) || id === "announcement_details";
+  return [...(previousErrors || []).filter((error) => !ranThisRun(error.source_id)), ...errors];
+}
+
+/**
  * announcements.json as written: `next` with the previous `updated_at` when
  * nothing else changed, else with `now`. A fresh stamp on every run made each
  * run a commit, a site publish and a new file hash, so the app downloaded the

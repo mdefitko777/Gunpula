@@ -4,7 +4,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { DETAIL_PAGES_PER_HOST, LIGHT_RUN_DETAILS, planDetailFetches } from "./lib/announcement-details.mjs";
-import { LIGHT_SOURCE_IDS, stampAnnouncements } from "./lib/official-announcements.mjs";
+import { LIGHT_SOURCE_IDS, carryFetchErrors, stampAnnouncements } from "./lib/official-announcements.mjs";
 
 const TODAY = "2026-11-14";
 
@@ -51,5 +51,20 @@ assert.equal(stampAnnouncements(previous, changed, now).updated_at, now);
 assert.equal(stampAnnouncements({ ...body, fetch_errors: [{ source_id: "x", message: "503" }], updated_at: previous.updated_at }, body, now).updated_at, now, "an error that went away is a change");
 assert.equal(stampAnnouncements(null, body, now).updated_at, now);
 assert.equal(stampAnnouncements(body, body, now).updated_at, now, "a file without a stamp gets one");
+
+// --- fetch_errors: a light run replaces the errors of what it ran (its sources and the
+// product text), keeps the daily-only sources' ones, and never piles up copies.
+const lightSources = new Set(LIGHT_SOURCE_IDS);
+const dailyErrors = [
+  { source_id: "bandai_hobby_youtube", message: "bot check" },
+  { source_id: "gundam_official_news", message: "HTTP 500" },
+  { source_id: "announcement_details", message: "timeout" },
+];
+const detailsFailing = [{ source_id: "announcement_details", message: "timeout" }];
+let carried = carryFetchErrors(dailyErrors, detailsFailing, lightSources);
+carried = carryFetchErrors(carried, detailsFailing, lightSources);
+assert.deepEqual(carried, [dailyErrors[0], detailsFailing[0]], "one details error after two failing light runs");
+assert.deepEqual(carryFetchErrors(dailyErrors, [], lightSources), [dailyErrors[0]], "a clean light run clears what it ran");
+assert.deepEqual(carryFetchErrors(dailyErrors, detailsFailing, new Set()), detailsFailing, "a full run starts over");
 
 console.log("light announcements: ok");
