@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-13",
-  "generated_at": "2026-11-13T18:19:17.090Z",
+  "generated_at": "2026-11-13T19:01:51.418Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,27 +18,27 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-13T18:18:15.678Z",
+    "generated_at": "2026-11-13T19:00:42.698Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-13",
-      "generated_at": "2026-11-13T18:19:17.090Z",
+      "generated_at": "2026-11-13T19:01:51.418Z",
       "total_before": 39403,
       "total_after": 39417,
       "added_count": 10,
-      "changed_count": 127,
+      "changed_count": 128,
       "removed_count": 0,
       "watched_count": 15,
       "merged_count": 0,
       "backfilled_count": 4,
       "renamed_count": 0,
-      "premium_bandai_count": 116,
+      "premium_bandai_count": 117,
       "bbx_count": 3,
       "franchise_counts": {
-        "gundam": 118,
+        "gundam": 119,
         "beyblade": 3,
         "pokemon": 12,
         "madoka": 2,
@@ -48,7 +48,7 @@
         "new": 10,
         "archive": 112,
         "release": 5,
-        "source": 5,
+        "source": 6,
         "image": 5,
         "limited": 9,
         "price": 1,
@@ -1166,6 +1166,45 @@
           ],
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4580886844531000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "hg-hg-1-144-4573102674319000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "zeta",
+          "series_labels": {
+            "zh": "Z",
+            "en": "Z",
+            "ja": "Z",
+            "ko": "Z"
+          },
+          "names": {
+            "ja": "HG 1 / 144 ボリノーク・サマーン",
+            "zh": "HG 1 / 144 波利诺克·萨曼",
+            "ko": "HG 1/144 보리노크 사만",
+            "en": "HG 1 / 144 ボリノーク サマーン"
+          },
+          "release_date": "2024-11-30",
+          "price_jpy": 3520,
+          "is_limited": false,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102674319000&grp_id=5325"
           ]
         },
         {
@@ -5141,43 +5180,6 @@
           ],
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112590527000&grp_id=5325"
-          ]
-        },
-        {
-          "kit_id": "goodsmile-fate-g6987",
-          "change_type": "changed",
-          "franchise": "fate",
-          "grade_code": "FATE_GOODS",
-          "subline": "Scale Figure",
-          "series_key": "type_moon",
-          "series_labels": {
-            "zh": "型月",
-            "en": "TYPE-MOON",
-            "ja": "TYPE-MOON",
-            "ko": "타입문"
-          },
-          "names": {
-            "ja": "1 / 64 Scale GOODSMILE RACING & TYPE-MOON RACING 2019 SPA24H Test Day Ver.",
-            "zh": "1 / 64比例 GOODSMILE RACING & TYPE-MOON RACING 2019 SPA24H 测试日 Ver.",
-            "ko": "1/64 스케일 GOODSMILE RACING & TYPE-MOON RACING 2019 SPA24H 테스트 데이 Ver.",
-            "en": "1 / 64 Scale GOODSMILE RACING & TYPE-MOON RACING 2019 SPA24H Test Day Ver."
-          },
-          "release_date": null,
-          "price_jpy": 3300,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "fate"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "good_smile_fate_global"
-          ],
-          "source_urls": [
-            "https://www.goodsmile.com/en/product/6987"
           ]
         }
       ],
