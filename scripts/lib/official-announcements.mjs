@@ -21,6 +21,7 @@
 //   www.pokemon.co.jp news/goods   rendered by scripts under robots-disallowed /js/
 //   Pokémon Mezastar               service ended (稼動終了); site is static
 //   tamashiiweb.com work pages     ok   (2026-11-12) reveal banners in the key-visual slider
+//   pokemonkorea.co.kr/goods       ok   (2026-11-14) no robots.txt (its home page answers); goods banners
 import { createHash } from "node:crypto";
 import {
   BANDAI_HOBBY_YOUTUBE_CHANNEL_ID,
@@ -45,6 +46,8 @@ export const TAMASHII_TOPICS_ITEMS_URL = "https://tamashiiweb.com/topics/items/"
 export const BEYBLADE_X_LINEUP_URL = "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/";
 export const TAKARATOMY_POKEMON_URL = "https://www.takaratomy.co.jp/products/pokemon/";
 export const POKEMON_FRIENDA_URL = "https://pokemonfrienda.com/";
+export const POKEMON_KOREA_GOODS_URL = "https://pokemonkorea.co.kr/goods";
+export const POKEMON_KOREA_GOODS_SOURCE_ID = "pokemon_korea_goods";
 export const KOTOBUKIYA_SHOP_BASE = "https://shop.kotobukiya.co.jp";
 // shop.kotobukiya.co.jp/shop/pages/titlelist.aspx ids. Title pages list goods
 // newest release first.
@@ -506,6 +509,72 @@ export function parseFriendaTopics(html, pageUrl = POKEMON_FRIENDA_URL) {
     }));
   }
   return records;
+}
+
+// ---------------------------------------------------------------------------
+// 포켓몬코리아 (pokemonkorea.co.kr/goods, read 2026-11-14): the slider at the top carries
+// the Korean goods news (CU × Pokopia, Pokopia 몬콜레, LEGO 포켓몬, FC서울 collaboration …),
+// each a title, a picture and a link to whoever sells it. The slides have no date; the
+// picture's upload path has one (/s3.php?key=…newdata/2026/10/2026-10-07_18-26-33-….jpg).
+// The licensee list further down stopped in 2024-11 and 「새로운 소식」 lists Kakao
+// emoticons, so neither is read. The links (Instagram, Naver smartstore, Kyobo …) are
+// kept for the app and never fetched.
+
+// Emoticons and other digital releases are not goods.
+const POKEMON_KOREA_NOT_GOODS = /이모티콘|모바일 ?게임|애니메이션 방영|극장판/;
+
+function koreanStatus(title) {
+  if (/예약|사전 ?판매/.test(title)) return "preorder_open";
+  if (/출시|발매|만나보세요|판매/.test(title)) return "released";
+  return "product_confirmed";
+}
+
+/** The upload day in a pokemonkorea.co.kr picture URL, or null. */
+export function pokemonKoreaImageDate(url) {
+  let key = String(url || "");
+  try {
+    key = decodeURIComponent(key);
+  } catch {
+    // keep the raw form
+  }
+  return /newdata\/\d{4}\/\d{2}\/(\d{4}-\d{2}-\d{2})_/.exec(key)?.[1] || null;
+}
+
+export function parsePokemonKoreaGoodsBanners(html, { pageUrl = POKEMON_KOREA_GOODS_URL, today } = {}) {
+  const slider = /<section class="sect-visual[\s\S]*?<\/section>/.exec(String(html || ""))?.[0] || "";
+  const slides = slider.split(/<div class="swiper-slide">/).slice(1);
+  const records = [];
+  const seen = new Set();
+  for (const slide of slides) {
+    const title = stripTags(String(/<h2[^>]*>([\s\S]*?)<\/h2>/.exec(slide)?.[1] || ""));
+    const href = /<a\s[^>]*href="([^"]+)"/.exec(slide)?.[1]?.trim();
+    const image = /<img\b[^>]*src="([^"]+)"/.exec(slide)?.[1];
+    if (!title || POKEMON_KOREA_NOT_GOODS.test(title)) continue;
+    const uploaded = pokemonKoreaImageDate(image);
+    const announcedAt = uploaded || today;
+    if (!announcedAt) continue;
+    // By title, so a banner whose picture is replaced stays one record.
+    const id = `pokemonkorea-goods-${stableHash(title)}`;
+    if (seen.has(id)) continue;
+    seen.add(id);
+    const record = announcementRecord({
+      id,
+      sourceId: POKEMON_KOREA_GOODS_SOURCE_ID,
+      franchise: "pokemon",
+      title,
+      status: koreanStatus(title),
+      announcedAt,
+      ...(uploaded ? {} : { announcedAtBasis: "first_seen" }),
+      sourceName: "포켓몬코리아",
+      sourceUrl: absoluteUrl(href, pageUrl) || pageUrl,
+      thumbnailUrl: absoluteUrl(image, pageUrl),
+      notes: "Banner on pokemonkorea.co.kr/goods; the date is the day its picture was uploaded.",
+    });
+    // A Korean title: the app shows names.ko first; names.ja keeps the title for the
+    // dedupe keys, as on the 포켓몬스토어 records.
+    records.push({ ...record, names: { ja: title, zh: null, ko: title, en: null } });
+  }
+  return { records, slides: slides.length };
 }
 
 // ---------------------------------------------------------------------------

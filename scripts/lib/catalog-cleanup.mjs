@@ -73,7 +73,7 @@ const MEDIA_RULES = [
     /Drama CD|ドラマCD|\bCD(?!ケース)(?:\d|[ 枚]|$|&)|Original Soundtrack|サウンドトラック|Live Album|アナログレコード|\+\s*OST\b|\bOST\s*(?:앨범|album)|OST 앨범|\bLP\b/i,
   ],
   ["video_game", /PlayStation|<\s*(?:PS[345]|Nintendo Switch\s*2?|Switch\s*2?)\s*>|\bXbox\b/i],
-  ["board_game", /ボードゲーム|Board Game/i],
+  ["board_game", /ボードゲーム|Board Game|보드게임/i],
   ["ticket", /チケット\s*(?:≪|<<|抽選|リセール)|(?:入場|観覧|参加)券(?!付)/],
   // A sales page for in-game currency ("聖晶石販売ページ") or a bulk-buy page.
   ["other", /販売ページ$|まとめ買い/],
@@ -91,16 +91,24 @@ const MEDIA_RULES = [
   ["food", /(?<!プチッガイ.*)(?:クッキー|グミ(?!ュ)|キャンディ|お菓子(?!の魔女)|焼き菓子)/],
 ];
 
+// The Korean words came with the 포켓몬스토어 goods (2026-11-14, lib/pokemon-store-kr.mjs);
+// they match only records whose name is Korean.
 const GOODS_RULES = [
-  ["accessory", /サングラス|ネックレス|ペンダント|ブローチ|イヤリング|バレッタ/],
+  [
+    "accessory",
+    /サングラス|ネックレス|ペンダント|ブローチ|イヤリング|バレッタ|피어스|귀걸이|이어링|목걸이|반지|초커|헤어 ?밴드|헤어 ?핀|헤어 ?클립|앞머리 클립|헤어 ?끈|머리끈|곱창 ?밴드|팔찌/,
+  ],
   [
     "apparel",
-    /Tシャツ|T-shirt|シャツ|パーカー|ジャケット|ロゴトレーナー|スウェット|ジャージ|キャップ|ニット帽|ソックス|靴下|トートバッグ|ショルダーバッグ|STRICT-G.*バックパック|ヘルメットバッグ|リュック|ポーチ|PVCケース|SLEEPING BAG|ATTACHKIT|9FORTY|FLeeasy|티셔츠|셔츠|점퍼|바람막이|볼캡|모자|양말|토트백|에코백|파우치|백팩|복조리백|배스로브|슬리퍼|입는 담요|미니 백팩/i,
+    /Tシャツ|T-shirt|シャツ|パーカー|ジャケット|ロゴトレーナー|スウェット|ジャージ|キャップ|ニット帽|ソックス|靴下|トートバッグ|ショルダーバッグ|STRICT-G.*バックパック|ヘルメットバッグ|リュック|ポーチ|PVCケース|SLEEPING BAG|ATTACHKIT|9FORTY|FLeeasy|티셔츠|셔츠|점퍼|바람막이|볼캡|모자|양말|토트백|에코백|파우치|백팩|복조리백|배스로브|슬리퍼|입는 담요|미니 백팩|블루종|스웨터|파카|후디|후드티|맨투맨|파자마|팔토시|장갑|머플러|목도리|버킷햇|해트|숄더백|크로스백|스트링백|주머니|가방|지갑|귀마개/i,
   ],
-  ["stationery", /シャープペンシル|노트|볼펜|젤펜|메모패드|점착 메모|캘린더|투두리스트|책받침/],
+  [
+    "stationery",
+    /シャープペンシル|노트|볼펜|젤펜|메모패드|점착 ?메모|블록 ?메모|캘린더|투두리스트|책받침|스티커|클리어 ?파일|엽서|포토카드|그리팅 카드|메[세시]지 카드|마스킹 ?테이프|필통|펜 ?케이스|펜 스탠드|펜 홀더|만년연필|연필|레터 ?세트|편지지|그림놀이/,
+  ],
   [
     "household",
-    /マグカップ|グラス(?=$|[\s(（])|タンブラー|ジョッキ|ラバーコースター|バスタオル|タオル|マルチクロス|クッション|ブランケット|ホースリール|ハンディファン|텀블러|머그|유리컵|양치컵|보울|뚝배기|수세미|인덕션매트|러그|타월|바디필로우|테이블|우산|칫솔|샤워볼|아이스 트레이|벽시계|충전기|스피커|손거울|줄자|그립 홀더/i,
+    /マグカップ|グラス(?=$|[\s(（])|タンブラー|ジョッキ|ラバーコースター|バスタオル|タオル|マルチクロス|クッション|ブランケット|ホースリール|ハンディファン|텀블러|머그|유리컵|양치컵|보울|뚝배기|수세미|인덕션매트|러그|타월|바디필로우|테이블|우산|칫솔|샤워볼|아이스 트레이|벽시계|충전기|스피커|손거울|줄자|그립 홀더|쿠션|방석|담요|블랭킷|타올|코스터|접시|그릇|매트|라이트|램프|무드등|스노우볼|가랜드|수저 받침|종지|캐니스터|포토 ?프레임|액자|거울|오브제|마그넷|선물 상자|스마트폰 스탠드|멀티 스탠드|액세서리 케이스/i,
   ],
 ];
 
@@ -129,8 +137,17 @@ export function goodsKind(kit) {
   }
   if ((kit.franchise || "gundam") === "gundam" && GUNDAM_HOBBY_SUPPLY.test(name)) return "hobby_supply";
   if (CHARACTER_GOODS.test(name)) return null;
+  return goodsRuleKind(name);
+}
+
+/**
+ * The apparel / accessory / stationery / household word rules alone, without the
+ * character-goods check: for a store that sells its plush bags and doll pens as goods.
+ */
+export function goodsRuleKind(name) {
+  const text = nfkc(name);
   for (const [kind, pattern] of GOODS_RULES) {
-    if (pattern.test(name)) return kind;
+    if (pattern.test(text)) return kind;
   }
   return null;
 }

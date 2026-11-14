@@ -22,7 +22,8 @@
 //     再販 in the title (「product names」 matched on the catalog's product key; only a
 //     single, older product counts).
 //   * optional: a BANDAI SPIRITS kit whose release month moved ≥ 12 months later while
-//     its old month was ≥ 6 months past (a retail restock the shop dates anew).
+//     its old month was ≥ 6 months past (a retail restock the shop dates anew), and a
+//     포켓몬스토어 product sold out before and on sale now, or whose sale start moved forward.
 import { gundamGradeFromName, nfkc, productKey, resolveAlias } from "./catalog-cleanup.mjs";
 import { monthOf } from "./sale-pages.mjs";
 
@@ -320,13 +321,46 @@ export function eventsFromAnnouncements(records, { kitsById, aliases, index, sal
   return events;
 }
 
-/** BANDAI SPIRITS kits whose release month moved ≥ 12 months later while the old month was ≥ 6 months past. */
+// 포켓몬스토어: a sale start that moves at least this far forward is a new sale of the product
+// (315 sale starts moved to 2026-11-12, most of them from 2023–2025).
+const KR_STORE_RESALE_DAYS = 14;
+
+/**
+ * 포켓몬스토어 products (lib/pokemon-store-kr.mjs keeps the release date and records
+ * pokemon_store_kr.sale_start / sold_out) that are on sale again: sold out before and not
+ * now, or a sale start moved forward. Dated by the new sale start (else today).
+ */
+export function koreanStoreRestocks(before, kit, today) {
+  const now = kit.pokemon_store_kr;
+  const old = before?.pokemon_store_kr;
+  if (!now || !old || now.sold_out) return null;
+  const moved = now.sale_start && old.sale_start && now.sale_start >= shiftDay(old.sale_start, KR_STORE_RESALE_DAYS);
+  if (!moved && !old.sold_out) return null;
+  return {
+    kit_id: kit.kit_id,
+    date: moved ? now.sale_start : today,
+    kind: "retail_resale",
+    source_url: (kit.source_urls || [])[0] || null,
+    announced_at: null,
+    seen: null,
+    source: "catalog",
+    title: kit.names?.ko || null,
+    ...(moved ? { previous_date: old.sale_start } : {}),
+  };
+}
+
+/**
+ * BANDAI SPIRITS kits whose release month moved ≥ 12 months later while the old month was
+ * ≥ 6 months past, and 포켓몬스토어 products on sale again (koreanStoreRestocks).
+ */
 export function eventsFromCatalogShift(beforeKits, afterKits, today) {
   const before = new Map((beforeKits || []).map((kit) => [kit.kit_id, kit]));
   const now = monthIndex(today);
   const events = [];
   for (const kit of afterKits || []) {
     const old = before.get(kit.kit_id);
+    const korean = koreanStoreRestocks(old, kit, today);
+    if (korean) events.push(korean);
     if (!old || !(kit.source_refs || []).some((ref) => ref.source_id === "bandai_spirits_products_jp")) continue;
     const from = monthIndex(old.release_date);
     const to = monthIndex(kit.release_date);
@@ -429,7 +463,7 @@ export function buildRestockDoc({ events, previous = null, today, kitsById, now 
     history_months: HISTORY_MONTHS,
     kinds: {
       pb_resale: "Premium Bandai sells the item again (【再販】, 【２次：…発送】, a later shipping month)",
-      retail_resale: "BANDAI SPIRITS ships the kit to shops again (official news / a new store month)",
+      retail_resale: "BANDAI SPIRITS ships the kit to shops again (official news / a new store month), or the Korean Pokémon Store sells the product again",
       tamashii_resale: "Tamashii Nations sells the figure again (（YYYY年M月発送分） batch, 再販 news)",
       lottery: "A lottery sale (抽選販売) of a product that already sold",
     },

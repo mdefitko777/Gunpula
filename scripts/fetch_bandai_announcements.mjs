@@ -19,6 +19,8 @@ import {
   KOTOBUKIYA_TITLES,
   LIGHT_SOURCE_IDS,
   POKEMON_FRIENDA_URL,
+  POKEMON_KOREA_GOODS_SOURCE_ID,
+  POKEMON_KOREA_GOODS_URL,
   PREMIUM_BANDAI_NEW_ITEMS_URL,
   TAKARATOMY_POKEMON_URL,
   TAMASHII_REVEAL_PAGES,
@@ -38,6 +40,7 @@ import {
   parseGundamOfficialNews,
   parseKotobukiyaTitleGoods,
   parsePremiumBandaiCategoryTitles,
+  parsePokemonKoreaGoodsBanners,
   parsePremiumBandaiNewItems,
   parseTakaraTomyPokemonNews,
   parseTamashiiRevealBanners,
@@ -753,6 +756,19 @@ const SOURCES = [
     name: "ポケモンフレンダ",
     url: POKEMON_FRIENDA_URL,
     run: async () => parseFriendaTopics(await fetchText(POKEMON_FRIENDA_URL)),
+  },
+  {
+    // Korean goods news (collaborations, Korean releases), 1–4 banners a month: the daily
+    // run is enough, so it is not a light source.
+    id: POKEMON_KOREA_GOODS_SOURCE_ID,
+    name: "포켓몬코리아",
+    url: POKEMON_KOREA_GOODS_URL,
+    run: async () => {
+      const parsed = parsePokemonKoreaGoodsBanners(await fetchText(POKEMON_KOREA_GOODS_URL), { today });
+      // A page without the slider is a markup change, not a quiet day.
+      if (!parsed.slides) throw new Error(`${POKEMON_KOREA_GOODS_URL} has no banner slides`);
+      return parsed.records;
+    },
   },
   {
     id: "gundam_base_news",

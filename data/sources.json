@@ -633,17 +633,18 @@
       "priority": 13,
       "best_for": [
         "Korea-exclusive Pokemon plush and goods",
+        "character goods sold in Korea (stationery, homeware, apparel, keyrings, metal charms)",
         "Korean product names",
         "KRW price",
-        "sale start date",
+        "sale start date and restocks",
         "official images"
       ],
       "weak_for": [
         "Japan-only products",
         "yen price (the shop prices in won)",
-        "apparel/stationery/TCG are deliberately not imported"
+        "the card game and Nintendo products are deliberately not imported"
       ],
-      "notes": "Official Korean Pokemon Store, on NHN Commerce shopby. Public REST API at shop-api.e-ncp.com; search filters need a filter. prefix while the category filter is the bare categoryNos — getting either wrong silently returns a 4-product default instead of an error."
+      "notes": "Official Korean Pokemon Store, on NHN Commerce shopby. Public REST API at shop-api.e-ncp.com; search filters need a filter. prefix while the category filter is the bare categoryNos — getting either wrong silently returns a 4-product default instead of an error. Since 2026-11-14 the whole store is read (27 pages), not three categories."
     },
     {
       "source_id": "hobby_search_fate_jp",

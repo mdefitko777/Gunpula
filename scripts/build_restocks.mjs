@@ -7,8 +7,8 @@
 //   data/announcements.json  PB new items marked 再販, Tamashii 再販 topics, GUNDAM.INFO / BANDAI SPIRITS 再販 news
 //   data/kits.json + data/kit-aliases.json   the live catalog the events point at
 //   --before=path            (or RESTOCK_BEFORE_PATH) kits.json before today's import: BANDAI
-//                            SPIRITS kits whose release month moved a year later count as a
-//                            retail restock
+//                            SPIRITS kits whose release month moved a year later, and 포켓몬스토어
+//                            products back on sale, count as a retail restock
 // The previous output keeps each event's first-seen day, so scripts/atlas/build_notify_feed.mjs
 // can file new events under the day they appeared (reason "restock").
 //
