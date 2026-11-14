@@ -85,11 +85,16 @@ jobs:
       # follows the photo folders' git trees, so an unchanged repo restores the same files and the
       # shards see no change. A failure stops the publish: without the thumbnails the plan would
       # delete them from the shards and send them all again on the next run.
+      # scripts/lib/thumbs.mjs runs Python isolated (-I), which skips the user site, so Pillow goes
+      # into the interpreter itself (setup-python), not pip --user.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
       - name: Install Pillow
         run: |
-          python3 -c "from PIL import ImageCms, features; assert features.check('webp')" 2>/dev/null \
-            || python3 -m pip install --quiet --user pillow \
-            || python3 -m pip install --quiet --user --break-system-packages pillow
+          python3 -m pip install --quiet pillow
+          python3 -I -c "from PIL import ImageCms, features; assert features.check('webp')"
 
       - name: Thumbnail cache key
         id: thumbkey

@@ -45,11 +45,16 @@ jobs:
         with:
           node-version: 22
 
+      # scripts/lib/thumbs.mjs runs Python isolated (-I), which skips the user site, so Pillow goes
+      # into the interpreter itself (setup-python), not pip --user.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
       - name: Install Pillow
         run: |
-          python3 -c "from PIL import ImageCms, features; assert features.check('webp')" 2>/dev/null \
-            || python3 -m pip install --quiet --user pillow \
-            || python3 -m pip install --quiet --user --break-system-packages pillow
+          python3 -m pip install --quiet pillow
+          python3 -I -c "from PIL import ImageCms, features; assert features.check('webp')"
 
       - name: Copy remote covers
         timeout-minutes: 25
