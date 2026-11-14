@@ -80,14 +80,14 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      # Tile thumbnails of the repo's photos (scripts/build_thumbs.mjs --repo, Pillow): about
-      # 4 minutes for all 7,500 on a cold cache, seconds when few photos changed. The cache key
+      # Tile thumbnails of the repo's photos (scripts/build_thumbs.mjs --repo, Pillow): all 7,500
+      # take about 1 minute on 8 threads (3.5 on one), a few changed photos seconds. The cache key
       # follows the photo folders' git trees, so an unchanged repo restores the same files and the
       # shards see no change. A failure stops the publish: without the thumbnails the plan would
       # delete them from the shards and send them all again on the next run.
       - name: Install Pillow
         run: |
-          python3 -c "import PIL.WebPImagePlugin" 2>/dev/null \
+          python3 -c "from PIL import ImageCms, features; assert features.check('webp')" 2>/dev/null \
             || python3 -m pip install --quiet --user pillow \
             || python3 -m pip install --quiet --user --break-system-packages pillow
 

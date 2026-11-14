@@ -33,7 +33,7 @@ import { cp, mkdir, mkdtemp, readFile, readdir, rm, stat, writeFile } from "node
 import { existsSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { buildThumbMap, SITE_BASE, upgradeCleartextImages } from "./lib/thumbs.mjs";
+import { buildThumbMap, REPO_THUMB_INDEX, SITE_BASE, upgradeCleartextImages, WEB_THUMB_INDEX } from "./lib/thumbs.mjs";
 
 export const CONFIG_PATH = "data/image-shards.json";
 const MB = 1024 * 1024;
@@ -276,10 +276,16 @@ export function thumbUrls(config, assign, urlFor) {
   };
 }
 
+// The repo photos' thumbnails are made by the publish job, not committed: a checkout that has not
+// made them (a sync from this PC) would otherwise remove every one of them from the shards.
+export function repoThumbsMade(shardFiles, indexExists = existsSync(REPO_THUMB_INDEX)) {
+  return indexExists || !shardFiles.some((files) => [...files.keys()].some((file) => file.startsWith("thumbs/repo/")));
+}
+
 async function writeThumbMap(target, config, assign, urlFor) {
   const readIndex = async (file) => (existsSync(file) ? JSON.parse(await readFile(file, "utf8")) : {});
-  const repoIndex = await readIndex("app/assets/thumbs/repo/index.json");
-  const webIndex = (await readIndex("app/assets/thumbs/web/index.json")).thumbs || {};
+  const repoIndex = await readIndex(REPO_THUMB_INDEX);
+  const webIndex = (await readIndex(WEB_THUMB_INDEX)).thumbs || {};
   const map = buildThumbMap({ repoIndex, webIndex, ...thumbUrls(config, assign, urlFor) });
   await writeFile(target, `${JSON.stringify(map)}\n`);
   return { entries: Object.keys(map.thumbs).length, repoPhotos: Object.keys(repoIndex).length, web: Object.keys(webIndex).length, bytes: (await stat(target)).size };
@@ -350,6 +356,9 @@ async function main() {
   const listed = [];
   for (const shard of config.shards) listed.push(await listShard(shard, config.dirs));
   const remote = listed.map((entry) => entry.files);
+  if (sync && !repoThumbsMade(remote)) {
+    throw new Error(`No ${REPO_THUMB_INDEX}: run node scripts/build_thumbs.mjs --repo first, or this sync deletes the repo photos' thumbnails from the shards.`);
+  }
   const plan = planShards(local, remote, limit);
   const errors = [];
   const warnings = [];

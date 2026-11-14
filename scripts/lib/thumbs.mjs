@@ -8,14 +8,18 @@
 //
 // Layout under app/assets/thumbs/ (published to the image shards, not the site):
 //   repo/<dir>/<file>.webp   one per photo in app/assets/<dir> (made in the publish job, not committed)
-//   web/<host>/<sha1(url) 16>.webp   remote covers (fetched by the daily refresh, committed)
+//   web/<host>/<sha1(url) 16>.webp   remote covers (fetched daily by .github/workflows/thumbs.yml, committed)
 
 import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
 
 export const THUMB_ROOT = "app/assets/thumbs";
+export const REPO_THUMB_INDEX = `${THUMB_ROOT}/repo/index.json`;
+export const WEB_THUMB_INDEX = `${THUMB_ROOT}/web/index.json`;
 export const THUMB_MAX_SIDE = 400;
 export const THUMB_QUALITY = 72;
+// Changes whenever the Pillow recipe below changes, so --repo makes every thumbnail again.
+export const THUMB_RECIPE = "webp-400-q72-srgb";
 // Photos in these app/assets folders get a thumbnail. announcements is published with the site
 // (../app/assets/announcements/… in announcements.json); its thumbnails still go to the shards.
 export const REPO_SOURCE_DIRS = ["catalog", "kotobukiya-ac", "bbx", "announcements"];
@@ -80,6 +84,9 @@ export function wantsWebThumb(url) {
   if (!/^https?:\/\//i.test(url || "") || deadImage(url)) return false;
   const secure = httpsImageUrl(url);
   const parsed = new URL(secure);
+  // An http:// URL stays http:// in the published JSON unless it looks like a picture
+  // (upgradeCleartextImages), so a thumbnail keyed by its https form would never be looked up.
+  if (secure !== url && !IMAGE_EXT.test(parsed.pathname)) return false;
   if (parsed.host.endsWith(".github.io") || parsed.host === "raw.githubusercontent.com") return false;
   if (ruleThumb(secure)) return false;
   return IMAGE_EXT.test(parsed.pathname) || /\/(?:img|image|images|media|uploads?)\//i.test(parsed.pathname);
@@ -135,7 +142,9 @@ export function thumbCandidates({ kits, boxart = {}, firstSeen = {}, feedIds = n
 // webIndex: { "<remote url>": "<host>/<file>.webp" }. urlForAsset(rel under app/assets) gives
 // the published URL of a shard file, or null when no live shard holds it; a thumbnail without
 // one is left out, so the map never points at raw.githubusercontent.com.
-export function buildThumbMap({ repoIndex = {}, webIndex = {}, originalUrl, thumbUrl, generatedAt = new Date().toISOString() }) {
+// No generated_at: the manifest hashes this file and the app downloads it again when the hash
+// changes, and a timestamp would change it on every publish (about 20 a day) for nothing.
+export function buildThumbMap({ repoIndex = {}, webIndex = {}, originalUrl, thumbUrl }) {
   const thumbs = {};
   for (const rel of Object.keys(repoIndex).sort()) {
     const original = originalUrl(rel);
@@ -146,38 +155,70 @@ export function buildThumbMap({ repoIndex = {}, webIndex = {}, originalUrl, thum
     const thumb = thumbUrl(`thumbs/web/${webIndex[url]}`);
     if (thumb) thumbs[url] = thumb;
   }
-  return { schema: "gunpula-thumbs-v1", generated_at: generatedAt, max_side: THUMB_MAX_SIDE, rules: THUMB_RULES, thumbs };
+  return { schema: "gunpula-thumbs-v1", max_side: THUMB_MAX_SIDE, rules: THUMB_RULES, thumbs };
 }
 
 // Pillow (the same Python the atlas cover step uses; no npm image library is installed).
-// One process per batch: reads {"src","dst"} lines, writes {"dst","ok"|"error"} lines.
+// One process per batch: reads {"src","dst"} lines, writes {"dst","ok"|"error"} lines in the same
+// order. Threads, because Pillow lets go of the GIL while decoding, resizing and encoding.
+// Colour: a WebP without a profile is shown as sRGB, so photos tagged with another profile are
+// converted (2026-11-14: 82 Adobe RGB, 1 Display P3, 1 Japan Color CMYK and a few monitor
+// profiles among the 7,497 repo photos; copied as they were, the tiles looked washed out).
 const PY_THUMBS = String.raw`
-import json, os, sys
-from PIL import Image, ImageOps
+import io, json, os, sys
+from concurrent.futures import ThreadPoolExecutor
+from PIL import Image, ImageCms, ImageOps
 side, quality = int(sys.argv[1]), int(sys.argv[2])
-for line in sys.stdin:
-    job = json.loads(line)
+SRGB = ImageCms.createProfile("sRGB")
+
+def to_srgb(im, icc, mode):
+    try:
+        profile = ImageCms.ImageCmsProfile(io.BytesIO(icc))
+        if "sRGB" in ImageCms.getProfileDescription(profile):
+            return im
+        return ImageCms.profileToProfile(im, profile, SRGB, outputMode=mode)
+    except Exception:
+        return im
+
+def make(job):
+    tmp = job["dst"] + ".tmp"
     try:
         im = Image.open(job["src"])
-        # JPEG: decode straight at 1/2..1/8 scale (big box art is 2000+ px).
+        # JPEG: decode straight at 1/2..1/8 scale (big box art is 2000+ px), never below side.
         im.draft("RGB", (side, side))
         im = ImageOps.exif_transpose(im)
+        icc = im.info.get("icc_profile")
         alpha = "A" in im.getbands() or "transparency" in im.info
-        im = im.convert("RGBA" if alpha else "RGB")
+        mode = "RGBA" if alpha else "RGB"
+        if im.mode not in (mode, "CMYK"):
+            im = im.convert(mode)
         im.thumbnail((side, side), Image.LANCZOS)
+        if icc and im.mode in ("RGB", "RGBA", "CMYK"):
+            im = to_srgb(im, icc, mode)
+        if im.mode != mode:
+            im = im.convert(mode)
         os.makedirs(os.path.dirname(job["dst"]), exist_ok=True)
-        im.save(job["dst"] + ".tmp", "WEBP", quality=quality, method=4)
-        os.replace(job["dst"] + ".tmp", job["dst"])
-        print(json.dumps({"dst": job["dst"], "ok": True, "width": im.width, "height": im.height}), flush=True)
+        im.save(tmp, "WEBP", quality=quality, method=4)
+        os.replace(tmp, job["dst"])
+        return {"dst": job["dst"], "ok": True, "width": im.width, "height": im.height}
     except Exception as error:
-        print(json.dumps({"dst": job["dst"], "error": str(error)[:200]}), flush=True)
+        if os.path.exists(tmp):
+            os.remove(tmp)
+        return {"dst": job["dst"], "error": str(error)[:200]}
+
+jobs = [json.loads(line) for line in sys.stdin if line.strip()]
+with ThreadPoolExecutor(max_workers=min(8, os.cpu_count() or 2)) as pool:
+    for result in pool.map(make, jobs):
+        print(json.dumps(result), flush=True)
 `;
 
-// First interpreter that can import Pillow (on Windows "python3" may be a Store stub).
+// First interpreter whose Pillow writes WebP and has LittleCMS (on Windows "python3" may be a
+// Store stub; importing WebPImagePlugin alone succeeds even without libwebp).
+const PY_CHECK = "from PIL import ImageCms, features; assert features.check('webp')";
 let pillowPython;
 export function pythonWithPillow() {
   if (pillowPython === undefined) {
-    pillowPython = ["python3", "python"].find((py) => spawnSync(py, ["-I", "-c", "import PIL.WebPImagePlugin"], { encoding: "utf8" }).status === 0) || null;
+    pillowPython = ["python3", "python"].find((py) => spawnSync(py, ["-I", "-c", PY_CHECK], { encoding: "utf8" }).status === 0) || null;
   }
   return pillowPython;
 }
@@ -185,7 +226,7 @@ export function pythonWithPillow() {
 export function makeThumbs(jobs, { side = THUMB_MAX_SIDE, quality = THUMB_QUALITY } = {}) {
   if (!jobs.length) return [];
   const py = pythonWithPillow();
-  if (!py) throw new Error("Python with Pillow (WebP) is needed: pip install pillow");
+  if (!py) throw new Error("Python with Pillow (WebP, LittleCMS) is needed: pip install pillow");
   const input = jobs.map((job) => JSON.stringify(job)).join("\n");
   const res = spawnSync(py, ["-I", "-c", PY_THUMBS, String(side), String(quality)], { input: `${input}\n`, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
   if (res.status !== 0) throw new Error(`thumbnail batch failed: ${(res.stderr || res.error?.message || "").trim().split("\n").pop()}`);

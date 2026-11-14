@@ -5,7 +5,7 @@
   "low_space_mb": 300,
   "site_limit_mb": 900,
   "dirs": ["catalog", "kotobukiya-ac", "bbx", "thumbs"],
-  "thumbs_note": "thumbs: the 400 px WebP tile pictures (scripts/build_thumbs.mjs). thumbs/repo/ is made in the publish job from the photos in the repo (about 103 MB for 7,497 photos on 2026-11-14), thumbs/web/ holds copies of remote covers (committed by the daily refresh, about 12 KB each). The site's data/thumbs.json maps each picture to its thumbnail.",
+  "thumbs_note": "thumbs: the 400 px WebP tile pictures (scripts/build_thumbs.mjs). thumbs/repo/ is made in the publish job from the photos in the repo (about 103 MB for 7,497 photos on 2026-11-14), thumbs/web/ holds copies of remote covers (committed daily by .github/workflows/thumbs.yml, about 15 KB each). The site's data/thumbs.json maps each picture to its thumbnail.",
   "site_exclude_note": "Not published at all: nothing that runs from the site reads them (search-index.json is the old monolithic index; the web app reads data/search/search-<franchise>.json). Fewer and smaller files keep the Pages deploy inside its 10-minute sync limit.",
   "site_exclude": ["data/search-index.json", "scripts/", "docs/", "ionic/", "schema/"],
   "shards": [

@@ -4,11 +4,11 @@
 //                                                        -> app/assets/thumbs/repo/ (publish job; not committed, cached)
 //   node scripts/build_thumbs.mjs --fetch [--minutes=8] [--limit=5000]
 //                                                        remote covers, feeds and new items first
-//                                                        -> app/assets/thumbs/web/ (daily refresh; committed)
+//                                                        -> app/assets/thumbs/web/ (thumbs.yml, daily; committed)
 //   node scripts/build_thumbs.mjs --plan                 how many are missing, no network
 //
-// --repo regenerates only photos whose bytes changed (app/assets/thumbs/repo/index.json keeps the
-// source sha1) and removes thumbnails of photos that are gone. --fetch reads each remote cover once
+// --repo regenerates only photos whose bytes (or THUMB_RECIPE) changed (app/assets/thumbs/repo/index.json
+// keeps "<recipe>:<sha1 of the photo>") and removes thumbnails of photos that are gone. --fetch reads each remote cover once
 // with the bot's rules (robots.txt, one request per host at a time >= 1.1 s apart, a host that
 // answers 403/429/503 or a page instead of a picture is left for the run); 404/410 are written to
 // the index and retried after 30 days. Needs Python with Pillow.
@@ -20,15 +20,24 @@ import os from "node:os";
 import path from "node:path";
 import { loadRobots, robotsAllows } from "./lib/robots.mjs";
 import { createHostStops } from "./lib/official-announcements.mjs";
-import { feedKitIds, makeThumbs, REPO_SOURCE_DIRS, repoThumbRel, THUMB_ROOT, thumbCandidates, webThumbFile } from "./lib/thumbs.mjs";
+import {
+  feedKitIds,
+  makeThumbs,
+  REPO_SOURCE_DIRS,
+  REPO_THUMB_INDEX,
+  repoThumbRel,
+  THUMB_RECIPE,
+  THUMB_ROOT,
+  thumbCandidates,
+  WEB_THUMB_INDEX,
+  webThumbFile,
+} from "./lib/thumbs.mjs";
 
 const USER_AGENT = "HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)";
 const HOST_GAP_MS = 1100;
 const MAX_SOURCE_BYTES = 20 * 1024 * 1024;
 const RETRY_FAILED_DAYS = 30;
 const BATCH = 400;
-export const REPO_INDEX = `${THUMB_ROOT}/repo/index.json`;
-export const WEB_INDEX = `${THUMB_ROOT}/web/index.json`;
 
 async function readJson(file, fallback) {
   try {
@@ -61,9 +70,9 @@ export function planRepoThumbs(photos, index, thumbExists) {
 }
 
 async function buildRepo() {
-  const index = await readJson(REPO_INDEX, {});
+  const index = await readJson(REPO_THUMB_INDEX, {});
   const photos = new Map();
-  for (const rel of await listRepoPhotos()) photos.set(rel, createHash("sha1").update(await readFile(path.join("app", "assets", rel))).digest("hex"));
+  for (const rel of await listRepoPhotos()) photos.set(rel, `${THUMB_RECIPE}:${createHash("sha1").update(await readFile(path.join("app", "assets", rel))).digest("hex")}`);
   const target = (rel) => path.join("app", "assets", repoThumbRel(rel));
   const { make, drop } = planRepoThumbs(photos, index, (rel) => existsSync(target(rel)));
   for (const rel of drop) {
@@ -75,19 +84,21 @@ async function buildRepo() {
   for (let i = 0; i < make.length; i += BATCH) {
     const part = make.slice(i, i + BATCH);
     const results = makeThumbs(part.map((rel) => ({ src: path.join("app", "assets", rel), dst: target(rel) })));
-    part.forEach((rel, j) => {
+    for (const [j, rel] of part.entries()) {
       if (results[j]?.ok) {
         index[rel] = photos.get(rel);
         made += 1;
       } else {
+        // The thumbnail of the photo's previous bytes would still be published to the shards.
+        await rm(target(rel), { force: true });
         delete index[rel];
         failed.push(`${rel}: ${results[j]?.error || "no answer"}`);
       }
-    });
+    }
     console.log(`repo thumbnails: ${Math.min(i + BATCH, make.length)}/${make.length}`);
-    await writeJson(REPO_INDEX, sortKeys(index));
+    await writeJson(REPO_THUMB_INDEX, sortKeys(index));
   }
-  await writeJson(REPO_INDEX, sortKeys(index));
+  await writeJson(REPO_THUMB_INDEX, sortKeys(index));
   console.log(`Repo photos: ${photos.size}, thumbnails made ${made}, removed ${drop.length}, failed ${failed.length}.`);
   for (const line of failed.slice(0, 20)) console.log(`  failed ${line}`);
 }
@@ -133,15 +144,13 @@ async function fetchHost(host, urls, { deadline, stops, tmp, index, downloads })
       const response = await fetch(url, { headers: { "User-Agent": USER_AGENT, Accept: "image/*" }, redirect: "follow", signal: AbortSignal.timeout(30000) });
       last = Date.now();
       stops.record(url, response.status);
-      if (response.status === 404 || response.status === 410) {
-        index.failed[url] = { status: response.status, at: new Date().toISOString().slice(0, 10) };
-        continue;
-      }
-      if (!response.ok) continue;
       const type = response.headers.get("content-type") || "";
-      if (!type.startsWith("image/")) {
+      if (!response.ok || !type.startsWith("image/")) {
+        // Unread bodies keep the connection busy until garbage collection.
+        await response.body?.cancel().catch(() => {});
+        if (response.status === 404 || response.status === 410) index.failed[url] = { status: response.status, at: new Date().toISOString().slice(0, 10) };
         // A page instead of the picture: a bot check or a login wall, so leave the host alone.
-        stops.stop(url, `a ${type || "non-image"} answer`);
+        else if (response.ok) stops.stop(url, `a ${type || "non-image"} answer`);
         continue;
       }
       const bytes = Buffer.from(await response.arrayBuffer());
@@ -156,7 +165,7 @@ async function fetchHost(host, urls, { deadline, stops, tmp, index, downloads })
 }
 
 async function fetchWeb({ minutes, limit }) {
-  const index = await readJson(WEB_INDEX, {});
+  const index = await readJson(WEB_THUMB_INDEX, {});
   index.thumbs ||= {};
   index.failed ||= {};
   const todo = pendingUrls(await candidates(), index).slice(0, limit);
@@ -188,7 +197,7 @@ async function fetchWeb({ minutes, limit }) {
     console.log(`Copied ${made} remote covers (${(sourceBytes / 1024 / 1024).toFixed(1)} MB of originals); ${pendingUrls(await candidates(), index).length} left.`);
   } finally {
     await rm(tmp, { recursive: true, force: true });
-    await writeJson(WEB_INDEX, {
+    await writeJson(WEB_THUMB_INDEX, {
       note: "Remote cover -> its 400 px WebP thumbnail under app/assets/thumbs/web/ (scripts/build_thumbs.mjs --fetch). failed: 404/410 answers, retried after 30 days.",
       thumbs: sortKeys(index.thumbs),
       failed: sortKeys(index.failed),
@@ -197,9 +206,9 @@ async function fetchWeb({ minutes, limit }) {
 }
 
 async function plan() {
-  const repoIndex = await readJson(REPO_INDEX, {});
+  const repoIndex = await readJson(REPO_THUMB_INDEX, {});
   const photos = await listRepoPhotos();
-  const webIndex = await readJson(WEB_INDEX, {});
+  const webIndex = await readJson(WEB_THUMB_INDEX, {});
   const urls = await candidates();
   const pending = pendingUrls(urls, webIndex);
   const hosts = {};

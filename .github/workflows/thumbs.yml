@@ -47,7 +47,7 @@ jobs:
 
       - name: Install Pillow
         run: |
-          python3 -c "import PIL.WebPImagePlugin" 2>/dev/null \
+          python3 -c "from PIL import ImageCms, features; assert features.check('webp')" 2>/dev/null \
             || python3 -m pip install --quiet --user pillow \
             || python3 -m pip install --quiet --user --break-system-packages pillow
 
