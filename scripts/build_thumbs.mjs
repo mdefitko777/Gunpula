@@ -200,7 +200,7 @@ async function fetchWeb({ minutes, limit }) {
   try {
     await Promise.all([...byHost].map(([host, urls]) => fetchHost(host, urls, { deadline, stops, tmp, index, downloads })));
     let sourceBytes = 0;
-    const made = [];
+    let made = 0;
     for (let i = 0; i < downloads.length; i += BATCH) {
       const part = [];
       for (const item of downloads.slice(i, i + BATCH)) {
@@ -215,23 +215,14 @@ async function fetchWeb({ minutes, limit }) {
         const bytes = await readFile(provisional);
         const file = webThumbFile(item.url, bytes);
         await rename(provisional, path.join(THUMB_ROOT, "web", file));
-        made.push({ url: item.url, file, digest: thumbDigest(file), bytes: item.bytes });
+        // Two hosts can serve the same maker photo; with the check above that is a real twin, not
+        // the race, so it is published (left out, it would be downloaded again every day).
+        index.thumbs[item.url] = file;
+        sourceBytes += item.bytes;
+        made += 1;
       }
     }
-    // A safety net for the race above: covers of two hosts with the same thumbnail are not published.
-    const known = Object.entries(index.thumbs).map(([url, file]) => ({ url, digest: thumbDigest(file) }));
-    const twins = crossHostTwins([...known, ...made]);
-    for (const item of made) {
-      if (twins.has(item.url)) {
-        console.log(`  left out ${item.url}: same thumbnail as a cover on another host`);
-        await rm(path.join(THUMB_ROOT, "web", item.file), { force: true });
-        continue;
-      }
-      index.thumbs[item.url] = item.file;
-      sourceBytes += item.bytes;
-    }
-    const copied = made.filter((item) => !twins.has(item.url)).length;
-    console.log(`Copied ${copied} remote covers (${(sourceBytes / 1024 / 1024).toFixed(1)} MB of originals); ${pendingUrls(await candidates(), index).length} left.`);
+    console.log(`Copied ${made} remote covers (${(sourceBytes / 1024 / 1024).toFixed(1)} MB of originals); ${pendingUrls(await candidates(), index).length} left.`);
   } finally {
     await rm(tmp, { recursive: true, force: true });
     await writeJson(WEB_THUMB_INDEX, {
@@ -259,11 +250,13 @@ async function plan() {
 }
 
 // Web thumbnails that are byte for byte another host's cover: what the fetchHost race left behind.
-async function webTwins(webIndex) {
+// Only the names from before 2026-11-14 (no "-<sha1(webp) 8>"): a thumbnail made since was checked
+// against its own download, so a twin among those is two hosts serving one photo.
+export async function webTwins(webIndex, root = THUMB_ROOT) {
   const entries = [];
   for (const [url, file] of Object.entries(webIndex.thumbs || {})) {
-    const abs = path.join(THUMB_ROOT, "web", file);
-    if (existsSync(abs)) entries.push({ url, digest: sha1(await readFile(abs)) });
+    const abs = path.join(root, "web", file);
+    if (!thumbDigest(file) && existsSync(abs)) entries.push({ url, digest: sha1(await readFile(abs)) });
   }
   return [...crossHostTwins(entries)].sort();
 }

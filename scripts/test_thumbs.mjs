@@ -8,7 +8,7 @@ import { existsSync } from "node:fs";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import { downloadPath, fetchHost, pendingUrls, planRepoThumbs, thumbDigest } from "./build_thumbs.mjs";
+import { downloadPath, fetchHost, pendingUrls, planRepoThumbs, thumbDigest, webTwins } from "./build_thumbs.mjs";
 import { createHostStops } from "./lib/official-announcements.mjs";
 import {
   addFeedThumbs,
@@ -83,6 +83,27 @@ assert.equal(webThumbFile(AKAMAI), webThumbFile(AKAMAI), "stable: the same URL i
     }
   } finally {
     await rm(tmp, { recursive: true, force: true });
+  }
+}
+
+// --- --plan / --purge-twins: only thumbnails from before the fix are suspects. Since then two
+//     hosts with one photo are a real twin (left out, they would be downloaded every day).
+{
+  const root = await mkdtemp(path.join(os.tmpdir(), "gunpula-thumbs-twins-"));
+  try {
+    const thumbs = {
+      "https://beyblade.takaratomy.co.jp/ux22.png": "beyblade.takaratomy.co.jp/fb1f0e2b87937723.webp",
+      "https://stds.jp/yoshi.webp": "stds.jp/efb5fd4b6294225c.webp",
+      "https://bandai-a.akamaihd.net/bc/img/model/b/1.jpg": "bandai-a.akamaihd.net/aaaaaaaaaaaaaaaa-0123abcd.webp",
+      "https://gashapon.jp/images/1.jpg": "gashapon.jp/bbbbbbbbbbbbbbbb-0123abcd.webp",
+    };
+    for (const [url, file] of Object.entries(thumbs)) {
+      await mkdir(path.dirname(path.join(root, "web", file)), { recursive: true });
+      await writeFile(path.join(root, "web", file), url.includes("akamaihd") || url.includes("gashapon") ? "same photo" : "yoshi");
+    }
+    assert.deepEqual(await webTwins({ thumbs }, root), ["https://beyblade.takaratomy.co.jp/ux22.png", "https://stds.jp/yoshi.webp"]);
+  } finally {
+    await rm(root, { recursive: true, force: true });
   }
 }
 assert.equal(

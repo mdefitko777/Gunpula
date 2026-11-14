@@ -101,6 +101,14 @@ assert.equal(matchAcademy(index, byNo("2158")).kit.kit_id, "moncolle-ms-26");
 assert.equal(matchAcademy(index, byNo("2078")).kit.kit_id, "moncolle-ml-20", "an old S81… code still matches by name");
 assert.equal(matchAcademy(index, { name: "몬콜레 MS 피카츄" }), null, "피카츄 fits two records: never merged");
 assert.equal(matchAcademy(index, byNo("1526")), null, "sets stay records of their own");
+// Academy's old EX labels on the MS / ML figures (2026-11-14: 57 such listings had records of their own).
+assert.deepEqual(matchAcademy(index, { name: "EMC시리즈 팬텀" }), { kit: catalog[4], by: "moncolle-legacy" }, "EMC is MS");
+assert.equal(matchAcademy(index, { name: "EHP시리즈 뮤츠" }).kit.kit_id, "moncolle-ml-20", "EHP is ML");
+assert.equal(matchAcademy(index, { name: "EHP시리즈 팬텀" }), null, "EHP is not MS: the big figure is another product");
+assert.equal(matchAcademy(index, { name: "ESP시리즈 팬텀" }), null, "ESP fits only a record without a size");
+assert.equal(matchAcademy(index, { name: "ESP시리즈 메가라이츄Y" }).kit.kit_id, "moncolle-y");
+assert.equal(matchAcademy(index, byNo("957")), null, "EMC시리즈 파이리: no record");
+assert.equal(matchAcademy(index, byNo("2158")).by, "moncolle");
 assert.deepEqual(academyKind(byNo("2179")), { grade: "POKE_MONCOLLE", subline: "몬콜레" });
 assert.deepEqual(academyKind(byNo("957")), { grade: "POKE_MONCOLLE", subline: "몬콜레" }, "EMC시리즈 is the old MonColle line");
 assert.deepEqual(academyKind(byNo("2170")), { grade: "POKE_PLUSH", subline: "포켓피스" });
@@ -132,6 +140,25 @@ assert.equal(academyReleaseDate(byNo("957")), null, "S81…: the old numbering h
   const ids = new Set(result.kits.map((kit) => kit.kit_id));
   assert.ok(!ids.has("bnkr-5") && ids.has("bnkr-6") && !ids.has("bnkr-7"));
   assert.deepEqual([result.joined, result.own], [1, 1]);
+}
+
+// --- Two listings for one record: the single strong match joins it, otherwise none does.
+{
+  const own = (id) => ownRecord({ kitId: id, sourceId: "academy_kr", kind: { grade: "POKE_MONCOLLE", subline: "몬콜레" }, name: id, image: null, releaseDate: null, price: 9000, jan: null, url: id, tags: [], notes: "" });
+  const entry = (id, match, weak) => ({ ownId: id, match, weak, join: { sourceId: "academy_kr", url: id, price: 9000 }, record: own(id) });
+  const result = applyListings(catalog, [
+    entry("academy-2158", catalog[4], false), // 몬콜레 MS 팬텀
+    entry("academy-982", catalog[4], true), // EMC시리즈 팬텀
+    entry("academy-981", catalog[6], true), // EMC시리즈 피카츄 (S81336)
+    entry("academy-988", catalog[6], true), // EMC시리즈 피카츄 (S81329)
+    entry("academy-1093", catalog[5], true), // EHP시리즈 뮤츠, the only listing of ML-20
+  ]);
+  const ids = new Set(result.kits.map((kit) => kit.kit_id));
+  assert.deepEqual([...ids].filter((id) => id.startsWith("academy-")).sort(), ["academy-981", "academy-982", "academy-988"]);
+  assert.deepEqual(result.kits.find((kit) => kit.kit_id === "moncolle-ms-26").source_refs.map((ref) => ref.url), ["academy-2158"]);
+  assert.equal(result.kits.find((kit) => kit.kit_id === "moncolle-ms-01").source_refs.length, 0, "피카츄 listed twice: neither joins");
+  assert.ok(result.kits.find((kit) => kit.kit_id === "moncolle-ml-20").source_refs.some((ref) => ref.url === "academy-1093"));
+  assert.deepEqual([result.joined, result.own], [2, 3]);
 }
 
 console.log("test_kr_pokemon_shops: ok");

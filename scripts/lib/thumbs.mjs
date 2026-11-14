@@ -53,8 +53,9 @@ export function webThumbFile(url, thumbBytes = null) {
 
 /**
  * [{ url, digest }] → the urls whose thumbnail bytes (digest) equal a cover's on another host.
- * Two makers do not share a picture byte for byte; one host can (a maker photo reused on two
- * product pages: 9 such groups on 2026-11-14), so those are left alone.
+ * One host reuses a maker photo on two product pages (9 such groups on 2026-11-14), so those are
+ * left alone. Two hosts can share one too (a maker's photo on its shop and its CDN), so this only
+ * reads the thumbnails made before the fetchHost fix (build_thumbs.mjs --plan / --purge-twins).
  */
 export function crossHostTwins(entries) {
   const hostsByDigest = new Map();

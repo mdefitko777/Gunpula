@@ -47,7 +47,7 @@ export const NINTENDO_SERIES = [
   { id: "fire_emblem", pattern: /파이어 ?엠블렘|Fire Emblem/i, labels: { ko: "파이어 엠블렘", zh: "火焰纹章", en: "Fire Emblem", ja: "ファイアーエムブレム" } },
   { id: "donkey_kong", pattern: /동키콩|Donkey Kong/i, labels: { ko: "동키콩", zh: "大金刚", en: "Donkey Kong", ja: "ドンキーコング" } },
   { id: "yoshi", pattern: /요시|Yoshi/i, labels: { ko: "요시", zh: "耀西", en: "Yoshi", ja: "ヨッシー" } },
-  { id: "mario", pattern: /마리오|루이지|피치|와리오|Mario|Luigi|Peach|Wario/i, labels: { ko: "마리오", zh: "马力欧", en: "Mario", ja: "マリオ" } },
+  { id: "mario", pattern: /마리오|루이지|피치|와리오|수다쟁이 꽃|Mario|Luigi|Peach|Wario/i, labels: { ko: "마리오", zh: "马力欧", en: "Mario", ja: "マリオ" } },
   { id: "other", pattern: /$^/, labels: { ko: "기타", zh: "其他", en: "Other", ja: "その他" } },
 ];
 const SERIES_SORT = 700;
@@ -180,6 +180,14 @@ const SIZE = /\s*\((?:XS|S|M|L|XL|XXL|2XL|3XL|FREE)\)\s*/i;
 // ---------------------------------------------------------------------------
 // www.nintendo.com/kr
 
+// The schedule's imageHeroOrg is the original key visual on Contentful (2026-11-14: 638 KB for
+// 별의 커비 월드 비욘드); Contentful's image API gives an 800 px WebP of it (51 KB). The amiibo and
+// news pictures already come with their own size.
+export function sizedContentfulImage(url, width = 800) {
+  if (!url || !url.startsWith("https://images.ctfassets.net/") || url.includes("?")) return url || null;
+  return `${url}?w=${width}&fm=webp`;
+}
+
 /** Release schedule → [{ title, nsuid, releaseDate ("YYYY-MM-DD" | "YYYY-MM" | "YYYY"), platform, formats, publisher, image, link }]. */
 export function parseSchedule(html) {
   const flight = extractNextFlight(html);
@@ -201,7 +209,7 @@ export function parseSchedule(html) {
       platform: item.hardware === "switch2" ? "switch2" : item.hardware === "switch" ? "switch" : null,
       formats: [...(item.category || []).includes("패키지 버전") ? ["package"] : [], ...(item.category || []).includes("다운로드 버전") ? ["download"] : []],
       publisher: text(item.publisher),
-      image: item.imageHeroOrg?.url || null,
+      image: sizedContentfulImage(item.imageHeroOrg?.url),
       link: item.link ? new URL(item.link, SITE).href : null,
     });
   }

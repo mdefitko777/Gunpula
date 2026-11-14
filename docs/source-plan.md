@@ -74,6 +74,6 @@ npm run sources
 | 반다이남코코리아몰 www.bnkrmall.co.kr | `import_bnkr_pokemon.mjs`（`bnkrmall_kr`） | 万代的宝可梦韩国发售：포켓프라、프라코로、나노블럭、스케일 월드、깜짝에그；韩元价、JAN（商品页「모델명」） | 条款页在 robots 禁止的 /cscenter/ 下，店主决定按允许处理；读的路径（/goods/）robots 允许。没有发售日，用图片上传月份当上架月 |
 | 아카데미과학 academy.co.kr | `import_academy_pokemon.mjs`（`academy_kr`） | 多美的宝可梦韩国发售：몬콜레（含旧 EMC/EHP/ESP）、포켓피스、말랑콕콕、포코피아 | 只读搜索列表（商品页没有 JAN、发售日）；发售年取自 S{YY} 商品编号。不是 academyhobby.co.kr（零售店） |
 
-合并规则：韩国商品是目录里已有的同一商品时不新建记录，只给原记录加来源、韩元价、JAN（原记录没有时）—— JAN 相同；或 Pokepla 线和编号相同（QUICK!! 29 = 퀵!! 29，No.62 = 62 셀렉트 시리즈）；或 MonColle 的宝可梦韩文名相同且两边写了的尺寸一致；都只在恰好一条候选时才合并（「피카츄」这种多条候选的不合并）。韩国店自建的记录（`bnkr-<gno>`、`academy-<product_no>`）以后匹配上目录记录时，旧 id 写进 `data/kit-aliases.json`。
+合并规则：韩国商品是目录里已有的同一商品时不新建记录，只给原记录加来源、韩元价、JAN（原记录没有时）—— JAN 相同；或 Pokepla 线和编号相同（QUICK!! 29 = 퀵!! 29，No.62 = 62 셀렉트 시리즈）；或 MonColle 的宝可梦韩文名相同且两边写了的尺寸一致（아카데미 仍用旧 EX 名称卖 MS/ML：「EMC시리즈」= MS，「EHP시리즈」= ML，「ESP시리즈」只配没写尺寸的记录，如 Mega）；都只在恰好一条候选时才合并（「피카츄」这种多条候选的不合并）。反过来，同一条记录被店里几件商品匹配时，只让唯一一件用现行名称（몬콜레 MS …）的合并，用旧名称的留作自己的记录；没有唯一的就都不合并（「EMC시리즈 피카츄」有 S81329、S81336 两件）。韩国店自建的记录（`bnkr-<gno>`、`academy-<product_no>`）以后匹配上目录记录时，旧 id 写进 `data/kit-aliases.json`。
 
 宝可梦与任天堂的重叠：游戏、主机、配件（包括宝可梦作品，如 Pokopia、LEGENDS Z-A）归 `nintendo` 频道（系列 `nintendo_pokemon`，标签 `pokemon`）；포켓몬스토어 的「닌텐도 게임」分类照旧不导入，所以不会重复。宝可梦角色周边留在 `pokemon`。

@@ -63,9 +63,12 @@ async function main() {
   const index = buildIndex(catalog.kits);
   const entries = [...products.values()].map((product) => {
     const ownId = `academy-${product.productNo}`;
+    const found = matchAcademy(index, product);
     return {
       ownId,
-      match: matchAcademy(index, product)?.kit || null,
+      match: found?.kit || null,
+      // "EMC시리즈 …": a listing under the current 몬콜레 label of the same figure goes first.
+      weak: found?.by === "moncolle-legacy",
       join: { sourceId: ACADEMY_SOURCE_ID, url: product.url, price: product.price, jan: null, name: product.name },
       record: {
         ...ownRecord({

@@ -19,12 +19,13 @@ const STEPS = [
   { script: "import:collectibles", kind: "source" },
   { script: "import:pokemon-center", kind: "source" },
   { script: "import:pokemon-kr", kind: "source" },
-  // Korean releases sold by the Japanese makers' Korean partners; after the Japanese and the
-  // 포켓몬스토어 importers, so a listing of a product the catalog has joins that record.
-  { script: "import:bnkr-pokemon", kind: "source" },
-  { script: "import:academy-pokemon", kind: "source" },
   { script: "import:takaratomy-pokemon", kind: "source" },
   { script: "import:pokemon-extra", kind: "source" },
+  // Korean releases sold by the Japanese makers' Korean partners; after the Japanese and the
+  // 포켓몬스토어 importers (MonColle comes from import:takaratomy-pokemon), so a listing of a
+  // product the catalog has joins that record the same day.
+  { script: "import:bnkr-pokemon", kind: "source" },
+  { script: "import:academy-pokemon", kind: "source" },
   { script: "import:fate", kind: "source" },
   { script: "import:fate-extra", kind: "source" },
   { script: "import:madoka", kind: "source" },

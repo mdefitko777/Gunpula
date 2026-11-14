@@ -10,8 +10,11 @@
 //      (pokepla-jp-<JAN>, pokemon-center-<JAN>);
 //   2. Pokepla: line and number ("QUICK!! 29" = "퀵!! 29", "No.62" = "62 셀렉트 시리즈"), else the name
 //      without the line words;
-//   3. MonColle: the Pokémon's Korean name and, when both sides say it, the size (MS / MM / ML …).
-//      "피카츄" alone fits many records and is never merged.
+//   3. MonColle: the Pokémon's Korean name and, when both sides say it, the size (MS / MM / ML …;
+//      Academy's "EMC시리즈" is MS and "EHP시리즈" is ML). "피카츄" alone fits many records and is
+//      never merged.
+// The other way round too: of several listings that fit one record, only a single one under the
+// current label joins it (applyListings).
 import { goodsKind, goodsRuleKind } from "./catalog-cleanup.mjs";
 import { decodeEntities } from "./html-entities.mjs";
 
@@ -210,17 +213,28 @@ export function matchBnkr(index, product, jan) {
   return null;
 }
 
+// Academy still sells the MS / ML figures under the old MonColle EX labels: "EMC시리즈 리자몽"
+// (S20007) has the picture of MS-15 リザードン, "EMC시리즈 나오하" (S22046) is MS-03 ニャオハ, a
+// figure first sold in 2022, long after the EX line. Until 2026-11-14 these names were never
+// matched and 57 of them became academy-… records next to the catalog's own. ESP (special) has
+// no counterpart and only fits a record that names no size (the Mega figures). Such a match is
+// "moncolle-legacy": a weaker claim than a listing under the current label (applyListings).
+const ACADEMY_LINE_SIZE = { EMC: "MS", EHP: "ML" };
+const ACADEMY_OLD_LINES = new Set(["EMC", "EHP", "ESP"]);
+
 /** The catalog record an Academy listing is (or null): MonColle only (no other line overlaps, 2026-11-14). */
 export function matchAcademy(index, product) {
-  if (!/몬콜레|몬스터콜렉션/.test(product.name) || /세트|트레이너|플레이맵|GET/.test(product.name)) return null;
-  const { size, name } = moncolleParts(product.name);
+  if (!/몬콜레|몬스터콜렉션|(?:EMC|EHP|ESP) ?시리즈/.test(product.name) || /세트|트레이너|플레이맵|GET/.test(product.name)) return null;
+  const parts = moncolleParts(product.name);
+  const size = ACADEMY_LINE_SIZE[parts.size] || parts.size;
+  const { name } = parts;
   if (!name) return null;
   const candidates = (index.moncolle.get(name) || []).filter((kit) => {
     const own = moncolleSize(kit);
     return !size || !own || own === size || (size === "MM" && own === "MC");
   });
   const kit = only(candidates);
-  return kit ? { kit, by: "moncolle" } : null;
+  return kit ? { kit, by: ACADEMY_OLD_LINES.has(parts.size) ? "moncolle-legacy" : "moncolle" } : null;
 }
 
 // ---------------------------------------------------------------------------
@@ -294,18 +308,29 @@ export function listingKey(product, jan) {
 }
 
 /**
- * The shop's listings over the catalog. entries: [{ ownId, match (catalog record | null), record
- * (own record), join }]. A product that earlier got a record of its own and now matches a catalog
- * record moves there: { from: ownId, to: match } goes into `aliases` (data/kit-aliases.json), so
- * saved likes and owned entries follow.
+ * The shop's listings over the catalog. entries: [{ ownId, match (catalog record | null), weak
+ * (an old-label match), record (own record), join }]. A product that earlier got a record of its
+ * own and now matches a catalog record moves there: { from: ownId, to: match } goes into `aliases`
+ * (data/kit-aliases.json), so saved likes and owned entries follow.
  */
 export function applyListings(kits, entries, { retired = new Set() } = {}) {
   const byId = new Map(kits.map((kit) => [kit.kit_id, kit]));
   const aliases = {};
   let joined = 0;
   let own = 0;
+  // Two products of the shop cannot both be one record. When several listings fit a record, the
+  // one strong match joins it ("몬콜레 MS 팬텀" S26037 over "EMC시리즈 팬텀" S81340, entry.weak);
+  // with no single strong one, none does ("EMC시리즈 피카츄" is listed twice, S81329 and S81336).
+  const claimants = new Map();
+  for (const entry of entries) if (entry.match) (claimants.get(entry.match.kit_id) || claimants.set(entry.match.kit_id, []).get(entry.match.kit_id)).push(entry);
+  const joining = new Set();
+  for (const list of claimants.values()) {
+    const strong = list.filter((entry) => !entry.weak);
+    const winner = strong.length === 1 ? strong[0] : !strong.length && list.length === 1 ? list[0] : null;
+    if (winner) joining.add(winner);
+  }
   for (const entry of entries) {
-    if (entry.match) {
+    if (joining.has(entry)) {
       const current = byId.get(entry.match.kit_id) || entry.match;
       byId.set(current.kit_id, joinRecord(current, entry.join));
       joined += 1;

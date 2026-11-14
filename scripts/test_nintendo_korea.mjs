@@ -13,6 +13,7 @@ import {
   parseStoreList,
   platformOf,
   seriesFor,
+  sizedContentfulImage,
   splitName,
   titleKey,
 } from "./lib/nintendo-kr.mjs";
@@ -72,6 +73,7 @@ assert.equal(seriesFor("amiibo 링크 (슈퍼 스매시브라더스 시리즈)")
 assert.equal(seriesFor("요시와 신기한 도감").key, "nintendo_yoshi");
 assert.equal(seriesFor("Pokémon LEGENDS Z-A".normalize("NFD")).key, "nintendo_pokemon", "a decomposed é still reads as Pokémon");
 assert.equal(seriesFor("닌텐도 사운드 클록 Alarmo").key, "nintendo_other");
+assert.equal(seriesFor("수다쟁이 꽃").key, "nintendo_mario", "the Talking Flower of Super Mario Bros. Wonder");
 
 // --- Product page, schedule, amiibo.
 assert.deepEqual(parseStoreDetail(fixture("nintendo-store-detail.html")), {
@@ -85,6 +87,10 @@ const kirby = schedule.find((item) => item.title === "별의 커비 월드 비�
 assert.equal(schedule.length, 5);
 assert.deepEqual([kirby.releaseDate, kirby.nsuid, kirby.platform, kirby.publisher], ["2027", "70010000135067", "switch2", "한국닌텐도"], "\"2027 봄\" is the year");
 assert.equal(schedule.find((item) => item.title === "메트로이드 래버너스").releaseDate, "2027-01-28");
+assert.match(kirby.image, /^https:\/\/images\.ctfassets\.net\/.+\.jpg\?w=800&fm=webp$/,"the 638 KB original key visual comes as an 800 px WebP");
+assert.equal(sizedContentfulImage("https://images.ctfassets.net/a/b/c/akay.jpg?w=400&h=400&fit=pad&fm=webp"), "https://images.ctfassets.net/a/b/c/akay.jpg?w=400&h=400&fit=pad&fm=webp", "a sized picture stays");
+assert.equal(sizedContentfulImage("https://store.nintendo.co.kr/media/a.jpg"), "https://store.nintendo.co.kr/media/a.jpg");
+assert.equal(sizedContentfulImage(undefined), null);
 assert.equal(schedule.find((item) => item.title === "Xenoblade Genesis").nsuid, null, "nsuid 0 is none");
 const amiibo = parseAmiiboLineup(fixture("nintendo-kr-amiibo.html"));
 assert.deepEqual(amiibo.map((item) => [item.id, item.name, item.series, item.releaseDate]), [
