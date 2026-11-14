@@ -18,6 +18,7 @@ import {
   parseBnkrDetail,
   parseBnkrList,
   pokeplaKey,
+  recordJan,
 } from "./lib/kr-pokemon-shops.mjs";
 import { THUMB_RULES, ruleThumb } from "./lib/thumbs.mjs";
 
@@ -63,7 +64,7 @@ assert.equal(pokeplaKey("포켓몬 프라모 컬렉션 No.36+No.38 셀렉트 시
 
 // --- Matching against the catalog.
 const catalog = [
-  { kit_id: "pokepla-01-7148", franchise: "pokemon", grade_code: "POKEPLA", names: { ko: "포켓몬 프라모 컬렉션 퀵!! 29 불꽃숭이" }, source_refs: [{ source_id: "bandai_spirits_pokepla_jp" }] },
+  { kit_id: "pokepla-01-7148", franchise: "pokemon", grade_code: "POKEPLA", names: { ko: "포켓몬 프라모 컬렉션 퀵!! 29 불꽃숭이" }, source_urls: ["https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102742957000&grp_id=5325"], source_refs: [{ source_id: "bandai_spirits_pokepla_jp" }] },
   { kit_id: "pokepla-01-7038", franchise: "pokemon", grade_code: "POKEPLA", names: { ko: "포켓몬 프라모 컬렉션 62 셀렉트 시리즈 가이오가" }, source_refs: [] },
   { kit_id: "pokepla-jp-4573102720214", franchise: "pokemon", grade_code: "POKEPLA", names: { ko: "포켓몬 프라모 컬렉션 화석 포켓몬 시리즈 견고라스" }, source_refs: [] },
   { kit_id: "moncolle-y", franchise: "pokemon", grade_code: "POKE_MONCOLLE", number: null, names: { ko: "메가라이츄Y" }, source_refs: [] },
@@ -125,6 +126,28 @@ assert.equal(academyReleaseDate(byNo("957")), null, "S81…: the old numbering h
   assert.deepEqual(joined.source_refs.at(-1), { source_id: "bnkrmall_kr", url: "https://www.bnkrmall.co.kr/goods/detail.do?gno=8786335", fields: ["price_krw", "jan"], confidence: "high" });
   assert.equal(joinRecord(joined, { sourceId: "bnkrmall_kr", url: joined.source_refs.at(-1).url, price: 9900 }).source_refs.length, joined.source_refs.length, "a second run replaces its reference");
   assert.equal(joinRecord(catalog[8], { sourceId: "bnkrmall_kr", url: "u", price: 25000 }).price_krw, 30000);
+}
+
+// --- The record's own JAN stays in jan; the Korean edition's other JAN goes to jan_kr.
+{
+  assert.equal(recordJan(catalog[0]), "4573102742957", "from the product page URL (prd_id=<JAN>000)");
+  assert.equal(recordJan({ kit_id: "pokepla-jp-4549660144823" }), "4549660144823");
+  assert.equal(recordJan({ kit_id: "x", jan: "4549660144824" }), null, "a bad check digit is no JAN");
+  const old = { kit_id: "pokepla-jp-4549660144823", franchise: "pokemon", grade_code: "POKEPLA", names: { ko: "피카츄" }, source_refs: [{ source_id: "bandai_spirits_pokepla_jp" }] };
+  const join = { sourceId: "bnkrmall_kr", url: "https://www.bnkrmall.co.kr/goods/detail.do?gno=1", price: 9400, jan: "4573102558961" };
+  const joined = joinRecord(old, join);
+  assert.deepEqual([joined.jan, joined.jan_kr], [undefined, "4573102558961"]);
+  assert.deepEqual(joined.source_refs.at(-1).fields, ["price_krw", "jan_kr"]);
+  // What the first run wrote (jan = the Korean JAN, "jan" in its reference) is moved on the next run.
+  const firstRun = { ...old, jan: "4573102558961", source_refs: [...old.source_refs, { source_id: "bnkrmall_kr", url: join.url, fields: ["price_krw", "jan"], confidence: "high" }] };
+  for (const again of [joinRecord(firstRun, join), joinRecord(firstRun, { ...join, jan: null })]) {
+    assert.deepEqual([again.jan, again.jan_kr, again.source_refs.length], [undefined, "4573102558961", 2]);
+  }
+  const index = buildIndex([joined]);
+  assert.equal(matchBnkr(index, { name: "나노블럭 피카츄" }, "4573102558961").kit.kit_id, old.kit_id, "jan_kr still matches the listing");
+  assert.equal(matchBnkr(index, { name: "나노블럭 피카츄" }, "4549660144823").kit.kit_id, old.kit_id);
+  const same = joinRecord({ ...firstRun, kit_id: "pokepla-01-7148", jan: "4573102742957", source_urls: catalog[0].source_urls }, { ...join, jan: "4573102742957" });
+  assert.deepEqual([same.jan, same.jan_kr], ["4573102742957", undefined], "the same JAN stays in jan");
 }
 
 // --- A product with a record of its own that the catalog later has moves there, with an alias.

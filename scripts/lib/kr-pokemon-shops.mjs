@@ -4,10 +4,11 @@
 //
 // Both shops sell mostly products the catalog already has from the Japanese makers (Pokepla,
 // MonColle). Such a listing does not become a second record: it joins the existing one (a source
-// reference, the won price, the JAN), and only a product no record matches gets its own record.
+// reference, the won price, the JAN: `jan` when it is the record's own, else `jan_kr`), and only a
+// product no record matches gets its own record.
 // Matching, in this order, and only when exactly one record fits:
-//   1. JAN: the BNKR product page's 모델명, against a record's `jan` or a JAN in its kit_id
-//      (pokepla-jp-<JAN>, pokemon-center-<JAN>);
+//   1. JAN: the BNKR product page's 모델명, against a record's `jan`, a JAN in its kit_id
+//      (pokepla-jp-<JAN>, pokemon-center-<JAN>) or the `jan_kr` an earlier run kept;
 //   2. Pokepla: line and number ("QUICK!! 29" = "퀵!! 29", "No.62" = "62 셀렉트 시리즈"), else the name
 //      without the line words;
 //   3. MonColle: the Pokémon's Korean name and, when both sides say it, the size (MS / MM / ML …;
@@ -179,6 +180,29 @@ function catalogJan(kit) {
   return /-(\d{13})$/.exec(kit.kit_id)?.[1] || null;
 }
 
+// Same as the app's findJan (hobby-atlas-v3 lib/data/gunpula.dart): a 45… / 49… EAN-13 with a
+// valid check digit, sometimes followed by "000" in Bandai picture names.
+const JAN_IN_TEXT = /(?<!\d)(4[59]\d{11})(?:000)?(?!\d)/g;
+
+function eanOk(code) {
+  let sum = 0;
+  for (let i = 0; i < 12; i += 1) sum += Number(code[i]) * (i % 2 ? 3 : 1);
+  return (10 - (sum % 10)) % 10 === Number(code[12]);
+}
+
+/**
+ * The record's own barcode as the app reads it: `jan`, else the first JAN in its id, source URLs,
+ * number, box art or cached originals (Pokepla pictures are often named after it).
+ */
+export function recordJan(kit) {
+  if (/^\d{13}$/.test(kit.jan || "") && eanOk(kit.jan)) return kit.jan;
+  const texts = [kit.kit_id, ...(kit.source_urls || []), kit.number, kit.images?.box_art_url, ...(kit.images?.cached_from || [])];
+  for (const value of texts) {
+    for (const match of String(value || "").matchAll(JAN_IN_TEXT)) if (eanOk(match[1])) return match[1];
+  }
+  return null;
+}
+
 function moncolleSize(kit) {
   return /^(MS|ML|MB|MM|MC)-/.exec(kit.number || "")?.[1] || /^moncolle-(ms|ml|mb|mm)-/.exec(kit.kit_id)?.[1]?.toUpperCase() || moncolleParts(kit.names?.ko).size;
 }
@@ -192,6 +216,8 @@ export function buildIndex(kits, ownPrefixes = ["bnkr-", "academy-"]) {
   for (const kit of kits) {
     if (kit.franchise !== "pokemon" || ownPrefixes.some((prefix) => kit.kit_id.startsWith(prefix))) continue;
     add(byJan, catalogJan(kit), kit);
+    // The Korean edition's JAN a join kept (joinRecord), so the listing keeps matching by JAN.
+    if (kit.jan_kr && kit.jan_kr !== catalogJan(kit)) add(byJan, kit.jan_kr, kit);
     if (kit.grade_code === "POKEPLA") add(pokepla, pokeplaKey(kit.names?.ko), kit);
     if (kit.grade_code === "POKE_MONCOLLE") add(moncolle, moncolleParts(kit.names?.ko).name, kit);
   }
@@ -278,6 +304,13 @@ export function ownRecord({ kitId, sourceId, kind, name, image, releaseDate, pri
 /**
  * The shop's listing on an existing record: its source reference and URL, the won price (unless
  * the 포켓몬스토어 prices it), the JAN and a Korean name when the record has none. Never the kit_id.
+ *
+ * `jan` stays the record's own barcode: the shop's JAN is written there only when the record
+ * already carries the same one (in its id, URLs or pictures); any other is the Korean edition's
+ * and goes to `jan_kr`. The app reads `jan` before the JAN in the id and pairs Korean and Japanese
+ * records by it, and on 2026-11-14 the first run gave 17 Pokepla records (pokepla-jp-4549660144823
+ * …) the Korean 4573102… JAN in place of their own. A `jan` an earlier run of this shop wrote is
+ * decided again.
  */
 export function joinRecord(kit, { sourceId, url, price, jan, name }) {
   const refs = (kit.source_refs || []).filter((ref) => !(ref.source_id === sourceId && ref.url === url));
@@ -285,9 +318,19 @@ export function joinRecord(kit, { sourceId, url, price, jan, name }) {
   const next = { ...kit };
   const otherKrw = refs.some((ref) => ref.source_id === "pokemon_store_kr" && (ref.fields || []).includes("price_krw"));
   if (price && !otherKrw) next.price_krw = price;
-  if (jan && !kit.jan) {
-    next.jan = jan;
-    fields.push("jan");
+  const wroteJan = (kit.source_refs || []).some((ref) => ref.source_id === sourceId && (ref.fields || []).includes("jan"));
+  const shopJan = jan || (wroteJan ? kit.jan : null);
+  if (wroteJan) delete next.jan;
+  if (shopJan) {
+    if (recordJan(next) === shopJan) {
+      if (!next.jan) {
+        next.jan = shopJan;
+        fields.push("jan");
+      }
+    } else {
+      next.jan_kr = shopJan;
+      fields.push("jan_kr");
+    }
   }
   if (name && !/[가-힣]/.test(kit.names?.ko || "")) {
     next.names = { ...kit.names, ko: name };
