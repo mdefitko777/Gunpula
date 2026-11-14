@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-14",
-  "generated_at": "2026-11-14T02:15:04.017Z",
+  "generated_at": "2026-11-14T05:35:17.366Z",
   "watch_tags": [
     "seed",
     "00"
@@ -15,47 +15,49 @@
     "fate",
     "beyblade",
     "madoka",
-    "lego"
+    "lego",
+    "nintendo"
   ],
   "source_health": {
-    "generated_at": "2026-11-14T02:14:43.822Z",
+    "generated_at": "2026-11-14T05:34:55.309Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-14",
-      "generated_at": "2026-11-14T02:15:04.017Z",
+      "generated_at": "2026-11-14T05:35:17.366Z",
       "total_before": 39432,
-      "total_after": 40823,
-      "added_count": 175,
-      "changed_count": 949,
+      "total_after": 41564,
+      "added_count": 187,
+      "changed_count": 1138,
       "removed_count": 0,
-      "watched_count": 1,
-      "merged_count": 0,
-      "backfilled_count": 1121,
+      "watched_count": 2,
+      "merged_count": 2,
+      "backfilled_count": 1161,
       "renamed_count": 0,
-      "premium_bandai_count": 0,
+      "premium_bandai_count": 4,
       "bbx_count": 0,
       "franchise_counts": {
-        "lego": 15,
-        "pokemon": 246,
-        "gundam": 1
+        "lego": 13,
+        "pokemon": 352,
+        "gundam": 7
       },
       "reason_counts": {
-        "new": 130,
-        "source": 9,
-        "image": 118,
-        "product_line": 4,
-        "release": 24,
-        "name": 7
+        "new": 132,
+        "source": 123,
+        "image": 112,
+        "product_line": 8,
+        "release": 25,
+        "name": 1,
+        "price": 5
       },
       "interest_tags": [
         "lego",
         "pokemon",
         "gundam",
         "00",
-        "armored_core"
+        "premium_bandai"
       ],
       "watch_tags": [
         "00"
@@ -804,6 +806,47 @@
       ],
       "changed": [
         {
+          "kit_id": "tamashii-16258",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "ガンダムキュリオス",
+            "zh": "主天使高达",
+            "ko": "건담큐리오스",
+            "en": "Gundam Kyrios"
+          },
+          "release_date": "2027-06",
+          "price_jpy": 38500,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16258/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
           "kit_id": "tamashii-16259",
           "change_type": "changed",
           "franchise": "gundam",
@@ -1509,47 +1552,51 @@
           "source_urls": [
             "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137676460"
           ]
-        },
-        {
-          "kit_id": "pokemon-kr-137641260",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "봉제인형",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "포켓몬센터 파닥파닥! 봉제인형 만타인",
-            "zh": "宝可梦中心 啪嗒啪嗒! 毛绒玩偶 巨翅飞鱼",
-            "ko": "포켓몬센터 파닥파닥! 봉제인형 만타인",
-            "en": "포켓몬센터 파닥파닥! 봉제인형 만타인"
-          },
-          "release_date": "2026-11-05",
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "pokemon_store_kr"
-          ],
-          "source_urls": [
-            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137641260"
-          ]
         }
       ],
       "removed": [],
       "watched": [
+        {
+          "kit_id": "tamashii-16258",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "METAL_BUILD",
+          "subline": "METAL BUILD",
+          "series_key": "double_o",
+          "series_labels": {
+            "zh": "00",
+            "en": "00",
+            "ja": "00",
+            "ko": "00"
+          },
+          "names": {
+            "ja": "ガンダムキュリオス",
+            "zh": "主天使高达",
+            "ko": "건담큐리오스",
+            "en": "Gundam Kyrios"
+          },
+          "release_date": "2027-06",
+          "price_jpy": 38500,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [
+            "00"
+          ],
+          "interest_tags": [
+            "gundam",
+            "00"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16258/",
+            "https://tamashiiweb.com/item_brand/metal_build/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
         {
           "kit_id": "tamashii-16259",
           "change_type": "changed",
@@ -1592,7 +1639,84 @@
           ]
         }
       ],
-      "merged": [],
+      "merged": [
+        {
+          "kit_id": "academy-1469",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "몬콜레",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "EMC 시리즈 메가한카리아스",
+            "zh": "EMC 시리즈 메가한카리아스",
+            "ko": "EMC 시리즈 메가한카리아스",
+            "en": "EMC 시리즈 메가한카리아스"
+          },
+          "release_date": "2022-09",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "academy_kr"
+          ],
+          "source_urls": [
+            "https://academy.co.kr/product/detail.html?product_no=1469"
+          ],
+          "merged_into": "pokemon-center-4904810911715"
+        },
+        {
+          "kit_id": "academy-977",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "몬콜레",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "EMC시리즈 님피아",
+            "zh": "EMC시리즈 님피아",
+            "ko": "EMC시리즈 님피아",
+            "en": "EMC시리즈 님피아"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "academy_kr"
+          ],
+          "source_urls": [
+            "https://academy.co.kr/product/detail.html?product_no=977"
+          ],
+          "merged_into": "pokemon-center-4904810951469"
+        }
+      ],
       "backfilled": [
         {
           "kit_id": "pokemon-kr-131521673",
