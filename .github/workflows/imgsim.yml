@@ -1,20 +1,26 @@
 name: Image search vectors
 
-# Hobby Atlas "생김새로 찾기": the on-device image model (LiteRT, converted once) and the catalog's image vectors
-# (weekly, incremental). Both are assets of the `imgsim` release; the app downloads them on first use.
-#   siglip2-b32-256-wi8.tflite  SigLIP2 ViT-B/32-256 image tower, int8 weights (Apache-2.0)
-#   imgsim-vectors.bin          one int8 vector per product image (scripts/imgsim/build_vectors.py)
-#   imgsim.json                 what the app checks: file names, sizes, sha256, update time
+# Hobby Atlas "생김새로 찾기": the on-device image models (LiteRT, each converted once) and the catalog's image vectors
+# (daily, incremental, uploaded only when they change). All are assets of the `imgsim` release; the app downloads
+# them on first use. Models and file names: scripts/imgsim/imgsim_lib.py (MODELS).
+#   siglip2-b32-256-wi8.tflite, model.json, imgsim-vectors.bin       B/32 — installed apps read it via imgsim.json
+#   siglip2-b16-256-wi8.tflite, siglip2-b16-256-wi8.model.json,
+#   imgsim-vectors-siglip2-b16-256-wi8.bin                           B/16 — listed in imgsim-v2.json only
+#   imgsim.json (schema 1, B/32), imgsim-v2.json (schema 2, all models + default)
 
 on:
   schedule:
-    - cron: "20 20 * * 0"
+    - cron: "20 20 * * *"
   workflow_dispatch:
     inputs:
       reconvert:
-        description: "Convert the model again (otherwise only when the release has none)"
-        type: boolean
-        default: false
+        description: "Model ids to convert again, comma-separated. A new B/32 file stops installed apps' vector updates."
+        type: string
+        default: ""
+      budget_min:
+        description: "Minutes for reading images (the daily run uses 90; the first B/16 fill needs about 2 h)"
+        type: string
+        default: "240"
   push:
     branches:
       - "imgsim/**"
@@ -28,7 +34,7 @@ concurrency:
 
 env:
   GH_TOKEN: ${{ github.token }}
-  MODEL: siglip2-b32-256-wi8.tflite
+  MODEL_IDS: "siglip2-b32-256-wi8 siglip2-b16-256-wi8"
 
 jobs:
   build:
@@ -45,45 +51,42 @@ jobs:
         run: |
           gh release view imgsim >/dev/null 2>&1 || gh release create imgsim --latest=false \
             --title "Image search data (Hobby Atlas)" \
-            --notes "On-device image search for Hobby Atlas. Model: SigLIP2 ViT-B/32-256 image tower (google, Apache-2.0, via open_clip), int8 weights. Vectors: one per catalog image, rebuilt weekly by .github/workflows/imgsim.yml."
+            --notes "On-device image search for Hobby Atlas. Models: SigLIP2 ViT-B/32-256 and ViT-B/16-256 image towers (google, Apache-2.0, via open_clip), int8 weights. Vectors: one per catalog image, rebuilt daily by .github/workflows/imgsim.yml."
           mkdir -p prev out
           gh release download imgsim -D prev --clobber || true
           ls -la prev
 
-      - name: Convert model
-        if: ${{ inputs.reconvert || hashFiles('prev/siglip2-b32-256-wi8.tflite') == '' }}
+      # A model is converted when the release has none (B/16 on its first run) or when asked by id. A failed
+      # conversion only leaves that model out of the manifests; the others still publish.
+      - name: Convert models
+        env:
+          RECONVERT: ${{ inputs.reconvert }}
         run: |
-          pip install --extra-index-url https://download.pytorch.org/whl/cpu ai-edge-torch ai-edge-quantizer ai-edge-litert open_clip_torch timm
-          python scripts/imgsim/convert_model.py out
-          cp out/$MODEL prev/$MODEL
-          gh release upload imgsim out/$MODEL out/model.json --clobber
-          cp out/model.json prev/model.json
+          installed=
+          for id in $MODEL_IDS; do
+            if [ -f "prev/$id.tflite" ] && [[ ",$RECONVERT," != *",$id,"* ]]; then continue; fi
+            if [ -z "$installed" ]; then
+              pip install --extra-index-url https://download.pytorch.org/whl/cpu ai-edge-torch ai-edge-quantizer ai-edge-litert open_clip_torch timm
+              installed=1
+            fi
+            if python scripts/imgsim/convert_model.py "convert/$id" "$id"; then
+              gh release upload imgsim convert/$id/* --clobber
+              cp convert/$id/* prev/
+            else
+              echo "::warning::model $id was not converted"
+            fi
+          done
 
       - name: Build vectors
         run: |
           pip install ai-edge-litert pillow numpy
-          python scripts/imgsim/build_vectors.py . prev/$MODEL out/imgsim-vectors.bin --prev prev/imgsim-vectors.bin --budget-min 240
+          python scripts/imgsim/build_vectors.py . prev out --budget-min "${{ inputs.budget_min || '90' }}"
 
       - name: Publish
         run: |
-          python - <<'EOF'
-          import hashlib, json, os
-          base = 'https://github.com/mdefitko777/Gunpula/releases/download/imgsim/'
-          def sha(p):
-              h = hashlib.sha256()
-              with open(p, 'rb') as f:
-                  for b in iter(lambda: f.read(1 << 20), b''):
-                      h.update(b)
-              return h.hexdigest()
-          model = json.load(open('prev/model.json'))
-          mp = 'prev/' + model['file']
-          model.update(url=base + model['file'], bytes=os.path.getsize(mp), sha256=sha(mp))
-          s = json.load(open('out/imgsim-vectors.bin.summary.json'))
-          meta = json.loads(open('out/imgsim-vectors.bin', 'rb').read()[20:20 + int.from_bytes(open('out/imgsim-vectors.bin', 'rb').read()[16:20], 'little')])
-          vec = dict(file='imgsim-vectors.bin', url=base + 'imgsim-vectors.bin', bytes=s['bytes'], sha256=sha('out/imgsim-vectors.bin'),
-                     rows=s['rows'], kits=s['kits'], updated=meta['updated'], model=meta['model'])
-          json.dump(dict(schema=1, model=model, vectors=vec), open('out/imgsim.json', 'w'), indent=1)
-          print(json.dumps(s))
-          EOF
-          cat out/imgsim.json
-          gh release upload imgsim out/imgsim-vectors.bin out/imgsim.json --clobber
+          python scripts/imgsim/publish_manifest.py prev out
+          head -c 4000 out/imgsim-v2.json
+          # one file at a time, in order: vectors before the manifests that point at them
+          while read -r f; do
+            gh release upload imgsim "$f" --clobber
+          done < out/upload.txt

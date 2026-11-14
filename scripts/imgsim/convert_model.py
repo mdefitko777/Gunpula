@@ -1,4 +1,4 @@
-"""Hobby Atlas "생김새로 찾기" — SigLIP2 ViT-B/32-256 (Apache-2.0, webli) image tower → LiteRT (.tflite).
+"""Hobby Atlas "생김새로 찾기" — a SigLIP2 image tower (Apache-2.0, webli; imgsim_lib.MODELS: B/32-256, B/16-256) → LiteRT.
 
 The exported model takes the already-cropped photo, NHWC float32 in [0, 1] (1, 256, 256, 3), and returns the
 L2-normalised 768-d embedding (1, 768). Normalisation ((x - 0.5) / 0.5) is inside the model, so the app and
@@ -7,7 +7,9 @@ build_vectors.py only resize, center-crop and divide by 255.
 Weights are stored int8, activations stay float32 (ai-edge-quantizer `weight_only_wi8_afp32`). The image-similarity
 eval showed dynamic-range / full int8 breaks this model (R@1 44 → 13); weight-only keeps cos ≥ 0.99 with the float model.
 
-usage: convert_model.py OUT_DIR      → OUT_DIR/siglip2-b32-256-wi8.tflite + OUT_DIR/model.json
+Never reconvert B/32 without a reason: installed apps only refresh their vectors while the model's sha256 is unchanged.
+
+usage: convert_model.py OUT_DIR [MODEL_ID]   → OUT_DIR/<file> + OUT_DIR/<meta> (MODEL_ID defaults to the B/32 model)
 """
 import json
 import os
@@ -16,10 +18,15 @@ import sys
 import numpy as np
 import torch
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from imgsim_lib import LEGACY_MODEL, MODELS  # noqa: E402
+
 OUT = sys.argv[1]
+MODEL_ID = sys.argv[2] if len(sys.argv) > 2 else LEGACY_MODEL
 os.makedirs(OUT, exist_ok=True)
-ARCH, TAG, SIZE = 'ViT-B-32-SigLIP2-256', 'webli', 256
-NAME = 'siglip2-b32-256-wi8.tflite'
+SPEC = MODELS[MODEL_ID]
+ARCH, TAG, SIZE = SPEC['arch'], SPEC['pretrained'], SPEC['size']
+NAME = SPEC['file']
 
 import open_clip  # noqa: E402
 
@@ -91,6 +98,7 @@ assert cos['f32'] > 0.999 and cos['wi8'] > 0.98, cos
 os.remove(f32)
 
 meta = dict(
+    id=MODEL_ID,
     file=NAME,
     bytes=os.path.getsize(out),
     arch=ARCH,
@@ -100,5 +108,5 @@ meta = dict(
     output=dict(dim=int(ref.shape[1]), normalised=True),
     min_cos_vs_torch=cos,
 )
-json.dump(meta, open(os.path.join(OUT, 'model.json'), 'w'), indent=1)
+json.dump(meta, open(os.path.join(OUT, SPEC['meta']), 'w'), indent=1)
 print(json.dumps(meta, indent=1))

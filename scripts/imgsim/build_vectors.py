@@ -1,30 +1,30 @@
-"""Hobby Atlas "생김새로 찾기" — embed every catalog product's official image(s) with the same LiteRT model the app
-runs, and write one compact file the app downloads (imgsim-vectors.bin).
+"""Hobby Atlas "생김새로 찾기" — embed every catalog product's official image(s) with the same LiteRT model(s) the app
+runs, and write one compact vectors file per model (imgsim_lib.MODELS: B/32 → imgsim-vectors.bin, B/16 → its own).
 
-Per product (data/split/kits-*.json): the cover (images.box_art_url, else the first gallery image) and, when different,
-the atlas box art (data/atlas/gundam-boxart.json) or the 2nd local gallery image. The box art lets a photo of a box
-front find its kit; the app keeps the best of a product's rows.
+Rows (imgsim_lib.gallery_rows): per product in data/split/kits-*.json the cover and, when different, the atlas box art
+or the 2nd local gallery image; the app keeps the best of a product's rows. Every row carries its franchise (`fr`) so
+the app can search one franchise without loading the catalog.
 
-Incremental: rows whose (kit_id, image URL) is unchanged are copied from the previous file, so a weekly run only
-downloads new / changed images. Downloads are polite: HobbyAtlasDataBot UA, one thread per host, ≥ 1.05 s between
-requests to a host, robots.txt obeyed, local ./assets images read from the checkout (no network). Images are only
-held in memory, never stored. With --budget-min the run stops fetching after that many minutes and writes what it has
-(the next run fills the rest).
+Incremental: a row whose image URL was embedded before (by the same model) is copied from the previous file, so a
+daily run only downloads new / changed images, and an image is downloaded once for all models that need it. Downloads
+are polite: HobbyAtlasDataBot UA, one thread per host, ≥ 1.1 s between requests to a host, robots.txt obeyed, a host
+that answers 403 / 429 / 503, an HTML page or a redirect to another host is left for the rest of the run, local
+./assets images are read from the checkout. Images are only held in memory, never stored. With --budget-min the run
+stops fetching after that many minutes and writes what it has (the next run fills the rest; a kit whose new image is
+not read yet keeps its previous vector); images the B/32 file (installed apps) still lacks are fetched before the B/16
+backfill.
 
-File layout (little-endian):
-  b'HAIS' u8 version=1, 3 × u8 pad, u32 dim, u32 rows, u32 json_bytes,
-  json (utf-8, space-padded to a multiple of 4): {"model", "updated", "ids": [kit_id per row], "src": [url hash per row]},
-  f32 scale[rows], i8 vec[rows × dim]      — row vector ≈ vec * scale (L2-normalised before quantising)
+An unchanged index is written byte for byte as before (same `updated`), so its sha256 and the manifests stay put.
 
-usage: build_vectors.py REPO MODEL.tflite OUT.bin [--prev PREV.bin] [--budget-min N]
+usage: build_vectors.py REPO DIR OUT_DIR [--budget-min N] [--only ID,ID]
+  DIR: the release assets (model .tflite files + previous vectors files); OUT_DIR gets <vectors> + <vectors>.summary.json
 """
 import argparse
 import collections
-import hashlib
 import io
 import json
 import os
-import struct
+import sys
 import threading
 import time
 import urllib.error
@@ -36,97 +36,81 @@ from urllib.parse import urlparse
 import numpy as np
 from PIL import Image
 
-UA = 'HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)'
-MODEL_ID = 'siglip2-b32-256-wi8'
-SIZE = 256
-FRANCHISES = ['gundam', 'pokemon', 'fate', 'armored_core', 'beyblade', 'madoka']
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from imgsim_lib import (  # noqa: E402
+    FRANCHISES, LEGACY_MODEL, MODELS, UA, assemble, fetch_url, gallery_rows, is_local, pack_stable, resolve_aliases,
+    src_hash, unpack_vectors,
+)
+
+STOP_CODES = (403, 429, 503)
+HOST_GAP_S = 1.1  # AGENTS.md: at least 1.1 s between two requests to one host
 
 ap = argparse.ArgumentParser()
 ap.add_argument('repo')
-ap.add_argument('model')
-ap.add_argument('out')
-ap.add_argument('--prev')
+ap.add_argument('dir')
+ap.add_argument('out_dir')
 ap.add_argument('--budget-min', type=float, default=0)
+ap.add_argument('--only', default='')
 args = ap.parse_args()
 t_start = time.time()
+os.makedirs(args.out_dir, exist_ok=True)
 
 
-def src_hash(url):
-    return hashlib.sha1(url.encode()).hexdigest()[:10]
-
-
-def is_local(u):
-    return not u.startswith('http')
-
-
-# ── gallery ─────────────────────────────────────────────────────────────────────────────────────
 def load(rel):
     with open(os.path.join(args.repo, rel), encoding='utf-8') as f:
         return json.load(f)
 
 
-boxart = load('data/atlas/gundam-boxart.json').get('boxart', {})
-rows = []  # (kit_id, url)
-for fr in FRANCHISES:
-    for k in load(f'data/split/kits-{fr}.json')['kits']:
-        kid = k.get('kit_id')
-        gal = [u for u in (k.get('gallery_image_urls') or []) if isinstance(u, str) and u]
-        main = (k.get('images') or {}).get('box_art_url') or (gal[0] if gal else None)
-        if not kid or not main:
-            continue
-        alt = None
-        b = boxart.get(kid) or {}
-        if b.get('url') and b['url'] != main:
-            alt = b['url']
-        else:
-            alt = next((u for u in gal if u != main and is_local(u)), None)
-        rows.append((kid, main))
-        if alt:
-            rows.append((kid, alt))
-print('gallery rows', len(rows), 'kits', len({r[0] for r in rows}), flush=True)
+# ── gallery ─────────────────────────────────────────────────────────────────────────────────────
+split = {fr: load(f'data/split/kits-{fr}.json')['kits'] for fr in FRANCHISES}
+rows = gallery_rows(split, load('data/atlas/gundam-boxart.json').get('boxart', {}))
+gallery_kits = len({r[0] for r in rows})
+current_id = resolve_aliases(load('data/split/kit-aliases.json').get('aliases', {}))
+print('gallery rows', len(rows), 'kits', gallery_kits, flush=True)
 
-
-# ── previous file ───────────────────────────────────────────────────────────────────────────────
-def read_bin(path):
-    with open(path, 'rb') as f:
-        data = f.read()
-    assert data[:4] == b'HAIS' and data[4] == 1, 'not an imgsim v1 file'
-    dim, n, jl = struct.unpack_from('<III', data, 8)
-    meta = json.loads(data[20:20 + jl])
-    off = 20 + jl
-    scale = np.frombuffer(data, '<f4', n, off)
-    vec = np.frombuffer(data, 'i1', n * dim, off + 4 * n).reshape(n, dim)
-    return meta, dim, scale, vec
-
-
-reuse = {}
-if args.prev and os.path.exists(args.prev):
-    try:
-        meta, dim, scale, vec = read_bin(args.prev)
-        if meta.get('model') == MODEL_ID:
-            for i, (kid, h) in enumerate(zip(meta['ids'], meta['src'])):
-                reuse[(kid, h)] = (scale[i], vec[i])
-        print('previous rows reusable', len(reuse), flush=True)
-    except Exception as e:  # a broken / old file just means a full run
-        print('previous file ignored:', repr(e)[:200], flush=True)
-
-todo = [(kid, u) for kid, u in rows if (kid, src_hash(u)) not in reuse]
-print('to embed', len(todo), flush=True)
-
-# ── model ───────────────────────────────────────────────────────────────────────────────────────
+# ── models + previous files ─────────────────────────────────────────────────────────────────────
 try:
     from ai_edge_litert.interpreter import Interpreter
 except ImportError:
     from tensorflow.lite.python.interpreter import Interpreter
-interp = Interpreter(model_path=args.model, num_threads=os.cpu_count() or 2)
-interp.allocate_tensors()
-inp, outp = interp.get_input_details()[0], interp.get_output_details()[0]
-DIM = int(outp['shape'][-1])
-lock = threading.Lock()
+
+only = {m for m in args.only.split(',') if m}
+models = {}  # id → interpreter, lock, reuse {src hash: (scale, vec bytes)}, prev_rows {kit: …}, previous bytes, done
+for mid, spec in MODELS.items():
+    path = os.path.join(args.dir, spec['file'])
+    if only and mid not in only:
+        continue
+    if not os.path.exists(path):
+        print(mid, 'skipped: no model file', flush=True)
+        continue
+    interp = Interpreter(model_path=path, num_threads=os.cpu_count() or 2)
+    interp.allocate_tensors()
+    outp = interp.get_output_details()[0]
+    m = dict(interp=interp, inp=interp.get_input_details()[0], outp=outp, dim=int(outp['shape'][-1]),
+             lock=threading.Lock(), size=spec['size'], reuse={}, prev_rows=collections.defaultdict(list), prev=None,
+             done={})
+    prev_path = os.path.join(args.dir, spec['vectors'])
+    if os.path.exists(prev_path):
+        with open(prev_path, 'rb') as f:
+            m['prev'] = f.read()
+        try:
+            meta, dim, scales, vecs = unpack_vectors(m['prev'])
+            # keyed by image, not by (kit, image): a renamed kit keeps its vector without a new download
+            if meta.get('model') == mid and dim == m['dim']:
+                m['reuse'] = {h: (s, v) for h, s, v in zip(meta['src'], scales, vecs)}
+                for kid, h, s, v in zip(meta['ids'], meta['src'], scales, vecs):
+                    m['prev_rows'][current_id.get(kid, kid)].append((h, s, v))
+        except Exception as e:  # a broken / old file just means a full run
+            print(mid, 'previous file ignored:', repr(e)[:200], flush=True)
+    models[mid] = m
+    print(mid, 'previous images reusable', len(m['reuse']), flush=True)
+if not models:
+    sys.exit('no model file in ' + args.dir)
 
 
-def prep(data):
-    """Same steps as the app (lib/ml/visual_prep.dart): alpha on white → shorter side 256 → center crop → [0, 1]."""
+# ── embedding ───────────────────────────────────────────────────────────────────────────────────
+def prep(data, size):
+    """Same steps as the app (lib/ml/visual_index.dart cropToInput): alpha on white → shorter side → center crop → [0, 1]."""
     im = Image.open(io.BytesIO(data))
     im.load()
     if im.mode in ('RGBA', 'LA', 'P'):
@@ -137,26 +121,51 @@ def prep(data):
     im = im.convert('RGB')
     im.thumbnail((320, 320), Image.LANCZOS)  # catalog images vary a lot in size; the eval gallery was ≤ 320 px
     w, h = im.size
-    s = SIZE / min(w, h)
-    im = im.resize((max(SIZE, round(w * s)), max(SIZE, round(h * s))), Image.BICUBIC)
-    l, t = (im.width - SIZE) // 2, (im.height - SIZE) // 2
-    im = im.crop((l, t, l + SIZE, t + SIZE))
+    s = size / min(w, h)
+    im = im.resize((max(size, round(w * s)), max(size, round(h * s))), Image.BICUBIC)
+    l, t = (im.width - size) // 2, (im.height - size) // 2
+    im = im.crop((l, t, l + size, t + size))
     return np.asarray(im, np.float32)[None] / 255.0
 
 
-def embed(data):
-    x = prep(data)
-    with lock:
-        interp.set_tensor(inp['index'], x)
-        interp.invoke()
-        y = interp.get_tensor(outp['index'])[0].astype(np.float32)
+def embed(m, x):
+    with m['lock']:
+        m['interp'].set_tensor(m['inp']['index'], x)
+        m['interp'].invoke()
+        y = m['interp'].get_tensor(m['outp']['index'])[0].astype(np.float32)
     y /= np.linalg.norm(y) + 1e-12
     s = float(np.abs(y).max()) / 127 or 1.0
-    return np.float32(s), np.clip(np.round(y / s), -127, 127).astype(np.int8)
+    return s, np.clip(np.round(y / s), -127, 127).astype(np.int8).tobytes()
 
+
+# ── what to fetch ───────────────────────────────────────────────────────────────────────────────
+need = {}  # url → model ids that have no vector for it yet
+for _, u, _ in rows:
+    mids = [mid for mid, m in models.items() if src_hash(u) not in m['reuse']]
+    if mids:
+        need[u] = mids
+jobs = collections.defaultdict(list)
+for u, mids in need.items():
+    jobs['LOCAL' if is_local(u) else urlparse(u).netloc].append((u, mids))
+for lst in jobs.values():
+    lst.sort(key=lambda j: LEGACY_MODEL not in j[1])  # installed apps' file first, then the backfill
+print('to embed', {mid: sum(mid in v for v in need.values()) for mid in models}, flush=True)
+print({h: len(lst) for h, lst in jobs.items()}, flush=True)
 
 # ── polite fetch ────────────────────────────────────────────────────────────────────────────────
+class SameHostRedirects(urllib.request.HTTPRedirectHandler):
+    """A jump to another host (a waiting room, a login) counts as a refusal and is not followed: that host's robots.txt
+    was never read (scripts/lib/polite-fetch.mjs, 2026-11-14). No image host redirected on 2026-11-14."""
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        if urlparse(newurl).netloc != urlparse(req.full_url).netloc:
+            raise urllib.error.HTTPError(newurl, 403, 'redirect to another host', headers, fp)
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+OPENER = urllib.request.build_opener(SameHostRedirects)
 robots = {}
+robots_read_at = {}  # netloc → when its robots.txt was read: that request counts for the 1.1 s gap too
 
 
 def allowed(u):
@@ -166,13 +175,14 @@ def allowed(u):
         rp = urllib.robotparser.RobotFileParser()
         try:
             req = urllib.request.Request(host + '/robots.txt', headers={'User-Agent': UA})
-            with urllib.request.urlopen(req, timeout=20) as r:
+            with OPENER.open(req, timeout=20) as r:
                 rp.parse(r.read().decode('utf-8', 'replace').splitlines())
         except urllib.error.HTTPError as e:
             rp.parse([] if e.code in (404, 410) else ['User-agent: *', 'Disallow: /'])
         except Exception:
             rp.parse([])
         robots[host] = rp
+        robots_read_at[p.netloc] = time.time()
     return robots[host].can_fetch(UA, u)
 
 
@@ -185,12 +195,9 @@ def local_bytes(u):
         return f.read()
 
 
-done = {}
 fails = collections.Counter()
 stopped = threading.Event()
-jobs = collections.defaultdict(list)
-for kid, u in todo:
-    jobs['LOCAL' if is_local(u) else urlparse(u).netloc].append((kid, u))
+refused = {}  # host → why it was left for the rest of the run
 
 
 def over_budget():
@@ -199,7 +206,7 @@ def over_budget():
 
 def worker(host, lst):
     last = 0.0
-    for kid, u in lst:
+    for u, mids in lst:
         if over_budget():
             stopped.set()
             return
@@ -207,60 +214,72 @@ def worker(host, lst):
             if host == 'LOCAL':
                 data = local_bytes(u)
             else:
-                if not allowed(u):
+                wire = fetch_url(u)
+                if not allowed(wire):
                     fails['robots'] += 1
                     continue
-                wait = last + 1.05 - time.time()
+                wait = max(last, robots_read_at.get(host, 0.0)) + HOST_GAP_S - time.time()
                 if wait > 0:
                     time.sleep(wait)
                 last = time.time()
-                req = urllib.request.Request(u, headers={'User-Agent': UA})
-                with urllib.request.urlopen(req, timeout=30) as r:
+                req = urllib.request.Request(wire, headers={'User-Agent': UA})
+                with OPENER.open(req, timeout=30) as r:
+                    if r.headers.get_content_type() == 'text/html':  # a bot check or an error page, not an image
+                        refused[host] = 'html'
+                        return
                     data = r.read()
-            done[(kid, src_hash(u))] = embed(data)
+            for mid in mids:
+                m = models[mid]
+                m['done'][src_hash(u)] = embed(m, prep(data, m['size']))
+        except urllib.error.HTTPError as e:
+            fails[f'HTTP {e.code}'] += 1
+            if e.code in STOP_CODES:
+                refused[host] = e.code
+                return
         except Exception as e:
             fails[type(e).__name__] += 1
 
 
-threads = [threading.Thread(target=worker, args=(h, l), daemon=True) for h, l in jobs.items()]
-print({h: len(l) for h, l in jobs.items()}, flush=True)
+threads = [threading.Thread(target=worker, args=(h, lst), daemon=True) for h, lst in jobs.items()]
 for t in threads:
     t.start()
 while any(t.is_alive() for t in threads):
     time.sleep(30)
-    print(time.strftime('%H:%M:%S'), 'embedded', len(done), 'fails', dict(fails), flush=True)
+    print(time.strftime('%H:%M:%S'), 'embedded', {mid: len(m['done']) for mid, m in models.items()},
+          'fails', dict(fails), flush=True)
+if refused:
+    print('hosts left for this run:', refused, flush=True)
 
 # ── write ───────────────────────────────────────────────────────────────────────────────────────
-ids, src, scales, vecs = [], [], [], []
-for kid, u in rows:
-    key = (kid, src_hash(u))
-    got = done.get(key) or reuse.get(key)
-    if got is None:
-        continue
-    ids.append(kid)
-    src.append(key[1])
-    scales.append(got[0])
-    vecs.append(got[1])
-meta = dict(model=MODEL_ID, updated=datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'), ids=ids, src=src)
-js = json.dumps(meta, ensure_ascii=False, separators=(',', ':')).encode()
-js += b' ' * (-len(js) % 4)
-with open(args.out + '.tmp', 'wb') as f:
-    f.write(b'HAIS' + bytes([1, 0, 0, 0]) + struct.pack('<III', DIM, len(ids), len(js)))
-    f.write(js)
-    f.write(np.asarray(scales, '<f4').tobytes())
-    f.write(np.stack(vecs).astype('i1').tobytes() if vecs else b'')
-os.replace(args.out + '.tmp', args.out)
-summary = dict(
-    rows=len(ids),
-    kits=len(set(ids)),
-    gallery_rows=len(rows),
-    new=len(done),
-    reused=len(ids) - sum(1 for k in zip(ids, src) if k in done),
-    fails=dict(fails),
-    stopped_by_budget=stopped.is_set(),
-    bytes=os.path.getsize(args.out),
-    minutes=round((time.time() - t_start) / 60, 1),
-)
-print(json.dumps(summary), flush=True)
-with open(args.out + '.summary.json', 'w') as f:
-    json.dump(summary, f)
+now = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+for mid, m in models.items():
+    ids, src, fr, scales, vecs, kept = assemble(
+        rows, lambda u: m['done'].get(src_hash(u)) or m['reuse'].get(src_hash(u)), m['prev_rows'])
+    data, changed = pack_stable(m['prev'], mid, now, m['dim'], ids, src, fr, scales, vecs)
+    out = os.path.join(args.out_dir, MODELS[mid]['vectors'])
+    with open(out + '.tmp', 'wb') as f:
+        f.write(data)
+    os.replace(out + '.tmp', out)
+    by_fr = collections.Counter(FRANCHISES[fi] for fi in dict(zip(ids, fr)).values())
+    kits = len(set(ids))
+    summary = dict(
+        model=mid,
+        rows=len(ids),
+        kits=kits,
+        gallery_rows=len(rows),
+        gallery_kits=gallery_kits,
+        coverage=round(kits / gallery_kits, 4) if gallery_kits else 0,
+        kits_by_franchise={f: by_fr[f] for f in FRANCHISES},
+        updated=unpack_vectors(data)[0]['updated'],
+        changed=changed,
+        new=len(m['done']),
+        kept_previous=kept,
+        fails=dict(fails),
+        refused=refused,
+        stopped_by_budget=stopped.is_set(),
+        bytes=len(data),
+        minutes=round((time.time() - t_start) / 60, 1),
+    )
+    print(json.dumps(summary), flush=True)
+    with open(out + '.summary.json', 'w') as f:
+        json.dump(summary, f)
