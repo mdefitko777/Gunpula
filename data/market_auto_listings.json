@@ -11,22 +11,29 @@
     "naver_shop": {
       "attempted": 9,
       "matched": 0,
-      "errors": 9
+      "errors": 9,
+      "status": "failing",
+      "since": "2026-11-14T00:52:41.406Z"
     },
     "bunjang": {
-      "attempted": 9,
+      "attempted": 0,
       "matched": 0,
-      "errors": 9
+      "errors": 0,
+      "status": "disallowed"
     },
     "joongna": {
-      "attempted": 9,
-      "matched": 1,
-      "errors": 0
+      "attempted": 1,
+      "matched": 0,
+      "errors": 1,
+      "status": "refused",
+      "since": "2026-11-14T00:52:41.406Z"
     },
     "amazon": {
-      "attempted": 9,
+      "attempted": 1,
       "matched": 0,
-      "errors": 4
+      "errors": 1,
+      "status": "refused",
+      "since": "2026-11-14T00:52:41.406Z"
     }
   },
   "listings": [
