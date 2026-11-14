@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-14",
-  "generated_at": "2026-11-14T01:37:04.961Z",
+  "generated_at": "2026-11-14T02:15:04.017Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,36 +18,37 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-14T01:36:43.298Z",
+    "generated_at": "2026-11-14T02:14:43.822Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-14",
-      "generated_at": "2026-11-14T01:37:04.961Z",
+      "generated_at": "2026-11-14T02:15:04.017Z",
       "total_before": 39432,
       "total_after": 40823,
-      "added_count": 11,
-      "changed_count": 34,
+      "added_count": 175,
+      "changed_count": 949,
       "removed_count": 0,
       "watched_count": 1,
       "merged_count": 0,
-      "backfilled_count": 0,
+      "backfilled_count": 1121,
       "renamed_count": 0,
       "premium_bandai_count": 0,
       "bbx_count": 0,
       "franchise_counts": {
         "lego": 15,
-        "pokemon": 28,
-        "gundam": 1,
-        "armored_core": 1
+        "pokemon": 246,
+        "gundam": 1
       },
       "reason_counts": {
-        "new": 11,
-        "source": 6,
-        "name": 7,
-        "image": 21
+        "new": 130,
+        "source": 9,
+        "image": 118,
+        "product_line": 4,
+        "release": 24,
+        "name": 7
       },
       "interest_tags": [
         "lego",
@@ -320,85 +321,48 @@
           ]
         },
         {
-          "kit_id": "lego-l0002255-1",
+          "kit_id": "pokemon-kr-137676452",
           "change_type": "added",
-          "franchise": "lego",
-          "grade_code": "LEGO_SET",
-          "subline": "Minecraft",
-          "series_key": "lego_minecraft",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "패션",
+          "series_key": "pokemon",
           "series_labels": {
-            "zh": "我的世界",
-            "en": "Minecraft",
-            "ja": "Minecraft",
-            "ko": "마인크래프트"
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
           },
           "names": {
-            "ja": "Famous Steve + Sneaky Creeper + Curious Pig",
-            "zh": "Famous Steve + Sneaky Creeper + Curious Pig",
-            "ko": "Famous Steve + Sneaky Creeper + Curious Pig",
-            "en": "Famous Steve + Sneaky Creeper + Curious Pig"
+            "ja": "포켓몬센터 A4 클리어파일 2장 세트 ポケモン Pokopia",
+            "zh": "포켓몬센터 A4 클리어파일 2장 세트 宝可梦 Pokopia",
+            "ko": "포켓몬센터 A4 클리어파일 2장 세트 포켓몬 Pokopia",
+            "en": "포켓몬센터 A4 클리어파일 2장 세트 Pokémon Pokopia"
           },
-          "release_date": "2026",
+          "release_date": "2026-11-05",
           "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "lego"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "rebrickable_lego"
-          ],
-          "source_urls": [
-            "https://rebrickable.com/sets/L0002255-1/"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329413365",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "A076 ぬいぐるみ ポケモン fit ゴローニャ(アローラのすがた)",
-            "zh": "A076 毛绒玩偶 宝可梦 fit 隆隆岩(阿罗拉的样子)",
-            "ko": "A076 ぬいぐるみ 포켓몬 fit ゴローニャ(アローラのすがた)",
-            "en": "A076 ぬいぐるみ Pokémon fit ゴローニャ(アローラのすがた)"
-          },
-          "release_date": null,
-          "price_jpy": 1980,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
             "pokemon"
           ],
           "change_reasons": [
             "new"
           ],
           "source_ids": [
-            "pokemon_center_jp"
+            "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329413365.html"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137676452"
           ]
         },
         {
-          "kit_id": "pokemon-center-4521329452579",
+          "kit_id": "pokemon-kr-137676445",
           "change_type": "added",
           "franchise": "pokemon",
           "grade_code": "POKE_GOODS",
-          "subline": "Pokemon Center Goods",
+          "subline": "포켓몬 스토어",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -407,13 +371,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ペーパークラフト ポケットモンスター Ｘ・Ｙ ミアレシティ プリズムタワー",
-            "zh": "ペーパークラフト 宝可梦 X·Y 密阿雷市 プリズムタワー",
-            "ko": "ペーパークラフト ポケットモンスター X・Y ミアレシティ プリズムタワー",
-            "en": "ペーパークラフト ポケットモンスター Ｘ Ｙ ミアレシティ プリズムタワー"
+            "ja": "포켓몬센터 B6 노트 ポケモン Pokopia",
+            "zh": "포켓몬센터 B6 노트 宝可梦 Pokopia",
+            "ko": "포켓몬센터 B6 노트 포켓몬 Pokopia",
+            "en": "포켓몬센터 B6 노트 Pokémon Pokopia"
           },
-          "release_date": null,
-          "price_jpy": 3850,
+          "release_date": "2026-11-05",
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -424,18 +388,18 @@
             "new"
           ],
           "source_ids": [
-            "pokemon_center_jp"
+            "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329452579.html"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137676445"
           ]
         },
         {
-          "kit_id": "pokemon-center-4521329452593",
+          "kit_id": "pokemon-kr-137676446",
           "change_type": "added",
           "franchise": "pokemon",
           "grade_code": "POKE_GOODS",
-          "subline": "Pokemon Center Goods",
+          "subline": "포켓몬 스토어",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -444,13 +408,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "ペーパークラフト ポケットモンスター ソード・シールド ナックルシティ ナックルスタジアム",
-            "zh": "ペーパークラフト 宝可梦 ソード・シールド ナックルシティ ナックルスタジアム",
-            "ko": "ペーパークラフト ポケットモンスター ソード・シールド ナックルシティ ナックルスタジアム",
-            "en": "ペーパークラフト ポケットモンスター ソード シールド ナックルシティ ナックルスタジアム"
+            "ja": "포켓몬센터 LED 라이트 ポケモン Pokopia 피카츄(창백한 색)",
+            "zh": "포켓몬센터 LED 라이트 宝可梦 Pokopia 피카츄(창백한 색)",
+            "ko": "포켓몬센터 LED 라이트 포켓몬 Pokopia 피카츄(창백한 색)",
+            "en": "포켓몬센터 LED 라이트 Pokémon Pokopia 피카츄(창백한 색)"
           },
-          "release_date": null,
-          "price_jpy": 3850,
+          "release_date": "2026-11-05",
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -461,10 +425,380 @@
             "new"
           ],
           "source_ids": [
-            "pokemon_center_jp"
+            "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329452593.html"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137676446"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137504078",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "문구",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! A4 클리어파일",
+            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! A4 클리어파일",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! A4 클리어파일",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! A4 클리어파일"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504078"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137504085",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "패션",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 디저트 피규어 키링 마휘핑",
+            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 디저트 피규어 키링 마휘핑",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 디저트 피규어 키링 마휘핑",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 디저트 피규어 키링 마휘핑"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504085"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137504083",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "패션",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 디저트 피규어 키링 알로라 라이츄",
+            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 디저트 피규어 키링 알로라 라이츄",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 디저트 피규어 키링 알로라 라이츄",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 디저트 피규어 키링 알로라 라이츄"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504083"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137504084",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "패션",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 디저트 피규어 키링 조로아",
+            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 디저트 피규어 키링 조로아",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 디저트 피규어 키링 조로아",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 디저트 피규어 키링 조로아"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504084"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137504098",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "리빙",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 리버시블 블랭킷",
+            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 리버시블 블랭킷",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 리버시블 블랭킷",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 리버시블 블랭킷"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504098"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137603336",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "리빙",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 머그컵&플레이트 세트",
+            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 머그컵&플레이트 세트",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 머그컵&플레이트 세트",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 머그컵&플레이트 세트"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137603336"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137504086",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "문구",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 모양 메모",
+            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 모양 메모",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 모양 메모",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 모양 메모"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504086"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137504081",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "패션",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 아크릴 키링 컬렉션(랜덤 상품)",
+            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 아크릴 키링 컬렉션(랜덤 상품)",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 아크릴 키링 컬렉션(랜덤 상품)",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 아크릴 키링 컬렉션(랜덤 상품)"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504081"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137504082",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "문구",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 조각 스티커",
+            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 조각 스티커",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 조각 스티커",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 조각 스티커"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504082"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137504097",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "패션",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 쫀득 팬케이크 느낌 파우치 알로라 라이츄",
+            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 쫀득 팬케이크 느낌 파우치 알로라 라이츄",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 쫀득 팬케이크 느낌 파우치 알로라 라이츄",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 쫀득 팬케이크 느낌 파우치 알로라 라이츄"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504097"
           ]
         }
       ],
@@ -511,267 +845,7 @@
           ]
         },
         {
-          "kit_id": "lego-2d001182-1",
-          "change_type": "changed",
-          "franchise": "lego",
-          "grade_code": "LEGO_SET",
-          "subline": "Construction",
-          "series_key": "lego_city",
-          "series_labels": {
-            "zh": "城市组",
-            "en": "City",
-            "ja": "City",
-            "ko": "시티"
-          },
-          "names": {
-            "ja": "Construction Worker with Wheel Loader",
-            "zh": "Construction Worker with Wheel Loader",
-            "ko": "Construction Worker with Wheel Loader",
-            "en": "Construction Worker with Wheel Loader"
-          },
-          "release_date": "2026",
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "lego"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "rebrickable_lego"
-          ],
-          "source_urls": [
-            "https://rebrickable.com/sets/2D001182-1/"
-          ]
-        },
-        {
-          "kit_id": "lego-6670923-1",
-          "change_type": "changed",
-          "franchise": "lego",
-          "grade_code": "LEGO_SET",
-          "subline": "LEGO Brand Store",
-          "series_key": "lego_lego_brand_store",
-          "series_labels": {
-            "zh": "乐高品牌零售店",
-            "en": "LEGO Brand Store",
-            "ja": "LEGO Brand Store",
-            "ko": "레고 스토어"
-          },
-          "names": {
-            "ja": "I [Heart] LEGO Store Town Center Crossing Tile",
-            "zh": "I [Heart] LEGO Store Town Center Crossing Tile",
-            "ko": "I [Heart] LEGO Store Town Center Crossing Tile",
-            "en": "I [Heart] LEGO Store Town Center Crossing Tile"
-          },
-          "release_date": "2026",
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "lego"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "rebrickable_lego"
-          ],
-          "source_urls": [
-            "https://rebrickable.com/sets/6670923-1/"
-          ]
-        },
-        {
-          "kit_id": "lego-2d001183-1",
-          "change_type": "changed",
-          "franchise": "lego",
-          "grade_code": "LEGO_SET",
-          "subline": "Ninjago",
-          "series_key": "lego_ninjago",
-          "series_labels": {
-            "zh": "幻影忍者",
-            "en": "Ninjago",
-            "ja": "Ninjago",
-            "ko": "닌자고"
-          },
-          "names": {
-            "ja": "Kai with Motorcycle",
-            "zh": "Kai with Motorcycle",
-            "ko": "Kai with Motorcycle",
-            "en": "Kai with Motorcycle"
-          },
-          "release_date": "2026",
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "lego"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "rebrickable_lego"
-          ],
-          "source_urls": [
-            "https://rebrickable.com/sets/2D001183-1/"
-          ]
-        },
-        {
-          "kit_id": "lego-2d001184-1",
-          "change_type": "changed",
-          "franchise": "lego",
-          "grade_code": "LEGO_SET",
-          "subline": "Ninjago",
-          "series_key": "lego_ninjago",
-          "series_labels": {
-            "zh": "幻影忍者",
-            "en": "Ninjago",
-            "ja": "Ninjago",
-            "ko": "닌자고"
-          },
-          "names": {
-            "ja": "Lloyd with Mech",
-            "zh": "Lloyd with Mech",
-            "ko": "Lloyd with Mech",
-            "en": "Lloyd with Mech"
-          },
-          "release_date": "2026",
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "lego"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "rebrickable_lego"
-          ],
-          "source_urls": [
-            "https://rebrickable.com/sets/2D001184-1/"
-          ]
-        },
-        {
-          "kit_id": "lego-2d001164-1",
-          "change_type": "changed",
-          "franchise": "lego",
-          "grade_code": "LEGO_SET",
-          "subline": "Police",
-          "series_key": "lego_city",
-          "series_labels": {
-            "zh": "城市组",
-            "en": "City",
-            "ja": "City",
-            "ko": "시티"
-          },
-          "names": {
-            "ja": "Police Buggy",
-            "zh": "Police Buggy",
-            "ko": "Police Buggy",
-            "en": "Police Buggy"
-          },
-          "release_date": "2026",
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "lego"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "rebrickable_lego"
-          ],
-          "source_urls": [
-            "https://rebrickable.com/sets/2D001164-1/"
-          ]
-        },
-        {
-          "kit_id": "lego-910068-1",
-          "change_type": "changed",
-          "franchise": "lego",
-          "grade_code": "LEGO_SET",
-          "subline": "BrickLink Designer Program",
-          "series_key": "lego_bricklink_designer_program",
-          "series_labels": {
-            "zh": "BrickLink设计师计划",
-            "en": "BrickLink Designer Program",
-            "ja": "BrickLink Designer Program",
-            "ko": "브릭링크 디자이너 프로그램"
-          },
-          "names": {
-            "ja": "University of Science",
-            "zh": "University of Science",
-            "ko": "University of Science",
-            "en": "University of Science"
-          },
-          "release_date": "2026",
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "lego"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "rebrickable_lego"
-          ],
-          "source_urls": [
-            "https://rebrickable.com/sets/910068-1/"
-          ]
-        },
-        {
-          "kit_id": "ac30mm-4573102685759000",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "AC30MM",
-          "subline": "30MM Armored Core VI",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "30MM ARMORED CORE VI FIRES OF RUBICON RaD CC-3000 WRECKER ミルクトゥース",
-            "zh": "30MM 装甲核心6 境界天火 RaD CC-3000 WRECKER 乳牙",
-            "ko": "30MM ARMORED CORE VI FIRES OF RUBICON RaD CC-3000 WRECKER 밀크 투스",
-            "en": "30MM ARMORED CORE VI FIRES OF RUBICON RaD CC-3000 WRECKER ミルクトゥース"
-          },
-          "release_date": "2025-06-21",
-          "price_jpy": 3850,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102685759000&grp_id=5325",
-            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=ARMORED%20CORE&category=2"
-          ]
-        },
-        {
-          "kit_id": "pokemon-kr-124396821",
+          "kit_id": "pokemon-kr-137529060",
           "change_type": "changed",
           "franchise": "pokemon",
           "grade_code": "POKE_PLUSH",
@@ -784,12 +858,12 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "포켓몬센터 마스코트 키링 두둔 둔감 야아 가라르 야도란",
-            "zh": "宝可梦中心 玩偶钥匙扣 咚咚 迟钝 呀啊 伽勒尔 呆壳兽",
-            "ko": "포켓몬센터 마스코트 키링 두둔 둔감 야아 가라르 야도란",
-            "en": "포켓몬센터 마스코트 키링 두둔 둔감 야아 가라르 야도란"
+            "ja": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 밀로틱",
+            "zh": "宝可梦中心 闪闪亮亮☆ 闪粉 毛绒玩偶 美纳斯",
+            "ko": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 밀로틱",
+            "en": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 밀로틱"
           },
-          "release_date": "2025-02-17",
+          "release_date": "2026-11-12",
           "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
@@ -804,11 +878,11 @@
             "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=124396821"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137529060"
           ]
         },
         {
-          "kit_id": "pokemon-kr-124396822",
+          "kit_id": "pokemon-kr-137529057",
           "change_type": "changed",
           "franchise": "pokemon",
           "grade_code": "POKE_PLUSH",
@@ -821,12 +895,12 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "포켓몬센터 마스코트 키링 두둔 둔감 야아 가라르 야돈",
-            "zh": "宝可梦中心 玩偶钥匙扣 咚咚 迟钝 呀啊 伽勒尔 呆呆兽",
-            "ko": "포켓몬센터 마스코트 키링 두둔 둔감 야아 가라르 야돈",
-            "en": "포켓몬센터 마스코트 키링 두둔 둔감 야아 가라르 야돈"
+            "ja": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 샤미드",
+            "zh": "宝可梦中心 闪闪亮亮☆ 闪粉 毛绒玩偶 水伊布",
+            "ko": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 샤미드",
+            "en": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 샤미드"
           },
-          "release_date": "2025-02-17",
+          "release_date": "2026-11-12",
           "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
@@ -841,11 +915,11 @@
             "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=124396822"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137529057"
           ]
         },
         {
-          "kit_id": "pokemon-kr-124396819",
+          "kit_id": "pokemon-kr-137700113",
           "change_type": "changed",
           "franchise": "pokemon",
           "grade_code": "POKE_PLUSH",
@@ -858,12 +932,12 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "포켓몬센터 마스코트 키링 두둔 둔감 야아 메가야도란",
-            "zh": "宝可梦中心 玩偶钥匙扣 咚咚 迟钝 呀啊 超级呆壳兽",
-            "ko": "포켓몬센터 마스코트 키링 두둔 둔감 야아 메가야도란",
-            "en": "포켓몬센터 마스코트 키링 두둔 둔감 야아 메가야도란"
+            "ja": "포켓몬센터 ポケモン Garden Wedding 봉제인형 피카츄(수컷의 모습)",
+            "zh": "포켓몬센터 宝可梦 Garden Wedding 봉제인형 피카츄(수컷의 모습)",
+            "ko": "포켓몬센터 포켓몬 Garden Wedding 봉제인형 피카츄(수컷의 모습)",
+            "en": "포켓몬센터 Pokémon Garden Wedding 봉제인형 피카츄(수컷의 모습)"
           },
-          "release_date": "2025-02-17",
+          "release_date": "2026-11-11",
           "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
@@ -878,11 +952,11 @@
             "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=124396819"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137700113"
           ]
         },
         {
-          "kit_id": "pokemon-kr-124396824",
+          "kit_id": "pokemon-kr-137702286",
           "change_type": "changed",
           "franchise": "pokemon",
           "grade_code": "POKE_PLUSH",
@@ -895,12 +969,12 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "포켓몬센터 마스코트 키링 두둔 둔감 야아 야도란",
-            "zh": "宝可梦中心 玩偶钥匙扣 咚咚 迟钝 呀啊 呆壳兽",
-            "ko": "포켓몬센터 마스코트 키링 두둔 둔감 야아 야도란",
-            "en": "포켓몬센터 마스코트 키링 두둔 둔감 야아 야도란"
+            "ja": "포켓몬센터 ポケモン Garden Wedding 봉제인형 피카츄(암컷의 모습)",
+            "zh": "포켓몬센터 宝可梦 Garden Wedding 봉제인형 피카츄(암컷의 모습)",
+            "ko": "포켓몬센터 포켓몬 Garden Wedding 봉제인형 피카츄(암컷의 모습)",
+            "en": "포켓몬센터 Pokémon Garden Wedding 봉제인형 피카츄(암컷의 모습)"
           },
-          "release_date": "2025-02-17",
+          "release_date": "2026-11-11",
           "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
@@ -915,11 +989,11 @@
             "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=124396824"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137702286"
           ]
         },
         {
-          "kit_id": "pokemon-kr-124396823",
+          "kit_id": "pokemon-kr-137593192",
           "change_type": "changed",
           "franchise": "pokemon",
           "grade_code": "POKE_PLUSH",
@@ -932,12 +1006,12 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "포켓몬센터 마스코트 키링 두둔 둔감 야아 야도킹",
-            "zh": "宝可梦中心 玩偶钥匙扣 咚咚 迟钝 呀啊 呆呆王",
-            "ko": "포켓몬센터 마스코트 키링 두둔 둔감 야아 야도킹",
-            "en": "포켓몬센터 마스코트 키링 두둔 둔감 야아 야도킹"
+            "ja": "포켓몬센터 Sean Wotherspoon ✕ ポケモン Center 봉제인형 리자몽",
+            "zh": "宝可梦中心 Sean Wotherspoon ✕ 宝可梦中心 毛绒玩偶 喷火龙",
+            "ko": "포켓몬센터 Sean Wotherspoon ✕ 포켓몬 Center 봉제인형 리자몽",
+            "en": "포켓몬센터 Sean Wotherspoon ✕ Pokémon Center 봉제인형 리자몽"
           },
-          "release_date": "2025-02-17",
+          "release_date": "2026-11-05",
           "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
@@ -952,11 +1026,11 @@
             "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=124396823"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137593192"
           ]
         },
         {
-          "kit_id": "pokemon-kr-124396825",
+          "kit_id": "pokemon-kr-137592460",
           "change_type": "changed",
           "franchise": "pokemon",
           "grade_code": "POKE_PLUSH",
@@ -969,12 +1043,12 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "포켓몬센터 마스코트 키링 두둔 둔감 야아 야돈",
-            "zh": "宝可梦中心 玩偶钥匙扣 咚咚 迟钝 呀啊 呆呆兽",
-            "ko": "포켓몬센터 마스코트 키링 두둔 둔감 야아 야돈",
-            "en": "포켓몬센터 마스코트 키링 두둔 둔감 야아 야돈"
+            "ja": "포켓몬센터 Sean Wotherspoon ✕ ポケモン Center 봉제인형 이상해씨",
+            "zh": "宝可梦中心 Sean Wotherspoon ✕ 宝可梦中心 毛绒玩偶 妙蛙种子",
+            "ko": "포켓몬센터 Sean Wotherspoon ✕ 포켓몬 Center 봉제인형 이상해씨",
+            "en": "포켓몬센터 Sean Wotherspoon ✕ Pokémon Center 봉제인형 이상해씨"
           },
-          "release_date": "2025-02-17",
+          "release_date": "2026-11-05",
           "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
@@ -989,11 +1063,11 @@
             "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=124396825"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137592460"
           ]
         },
         {
-          "kit_id": "pokemon-kr-124396826",
+          "kit_id": "pokemon-kr-137593509",
           "change_type": "changed",
           "franchise": "pokemon",
           "grade_code": "POKE_PLUSH",
@@ -1006,12 +1080,12 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "포켓몬센터 줄줄이 봉제인형 두둔 둔감 야아 야돈",
-            "zh": "宝可梦中心 串串 毛绒玩偶 咚咚 迟钝 呀啊 呆呆兽",
-            "ko": "포켓몬센터 줄줄이 봉제인형 두둔 둔감 야아 야돈",
-            "en": "포켓몬센터 줄줄이 봉제인형 두둔 둔감 야아 야돈"
+            "ja": "포켓몬센터 Sean Wotherspoon ✕ ポケモン Center 봉제인형 피카츄",
+            "zh": "宝可梦中心 Sean Wotherspoon ✕ 宝可梦中心 毛绒玩偶 皮卡丘",
+            "ko": "포켓몬센터 Sean Wotherspoon ✕ 포켓몬 Center 봉제인형 피카츄",
+            "en": "포켓몬센터 Sean Wotherspoon ✕ Pokémon Center 봉제인형 피카츄"
           },
-          "release_date": "2025-02-17",
+          "release_date": "2026-11-05",
           "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
@@ -1026,11 +1100,11 @@
             "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=124396826"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137593509"
           ]
         },
         {
-          "kit_id": "pokemon-kr-119592413",
+          "kit_id": "pokemon-kr-137504096",
           "change_type": "changed",
           "franchise": "pokemon",
           "grade_code": "POKE_PLUSH",
@@ -1043,12 +1117,12 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "포켓몬센터 Hug you! 봉제인형 빠모트",
-            "zh": "宝可梦中心 Hug you! 毛绒玩偶 布土拨",
-            "ko": "포켓몬센터 Hug you! 봉제인형 빠모트",
-            "en": "포켓몬센터 Hug you! 봉제인형 빠모트"
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 마스코트 마휘핑",
+            "zh": "宝可梦中心 宝可梦 Magic Hour Illusion! 挂件 霜奶仙",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 마스코트 마휘핑",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 마스코트 마휘핑"
           },
-          "release_date": "2024-07-16",
+          "release_date": "2026-11-05",
           "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
@@ -1063,11 +1137,11 @@
             "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=119592413"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504096"
           ]
         },
         {
-          "kit_id": "pokemon-kr-118529139",
+          "kit_id": "pokemon-kr-137504094",
           "change_type": "changed",
           "franchise": "pokemon",
           "grade_code": "POKE_PLUSH",
@@ -1080,12 +1154,12 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "포켓몬센터 마스코트 싸리용 친구들 싸리용 뻗은 모습",
-            "zh": "宝可梦中心 挂件 米立龙 伙伴们 米立龙 挺直姿势",
-            "ko": "포켓몬센터 마스코트 싸리용 친구들 싸리용 뻗은 모습",
-            "en": "포켓몬센터 마스코트 싸리용 친구들 싸리용 뻗은 모습"
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 마스코트 알로라 라이츄",
+            "zh": "宝可梦中心 宝可梦 Magic Hour Illusion! 挂件 阿罗拉 雷丘",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 마스코트 알로라 라이츄",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 마스코트 알로라 라이츄"
           },
-          "release_date": "2024-03-29",
+          "release_date": "2026-11-05",
           "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
@@ -1100,11 +1174,11 @@
             "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=118529139"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504094"
           ]
         },
         {
-          "kit_id": "pokemon-kr-118529124",
+          "kit_id": "pokemon-kr-137504095",
           "change_type": "changed",
           "franchise": "pokemon",
           "grade_code": "POKE_PLUSH",
@@ -1117,12 +1191,12 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "포켓몬센터 봉제인형 싸리용 친구들 한판내기",
-            "zh": "宝可梦中心 毛绒玩偶 米立龙 伙伴们 一决胜负",
-            "ko": "포켓몬센터 봉제인형 싸리용 친구들 한판내기",
-            "en": "포켓몬센터 봉제인형 싸리용 친구들 한판내기"
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 마스코트 조로아",
+            "zh": "宝可梦中心 宝可梦 Magic Hour Illusion! 挂件 索罗亚",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 마스코트 조로아",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 마스코트 조로아"
           },
-          "release_date": "2024-03-29",
+          "release_date": "2026-11-05",
           "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
@@ -1137,15 +1211,15 @@
             "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=118529124"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504095"
           ]
         },
         {
-          "kit_id": "pokemon-kr-118032417",
+          "kit_id": "pokemon-kr-137504089",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_GOODS",
-          "subline": "포켓몬 스토어 오리지널",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1154,14 +1228,14 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "포켓몬 스토어 포켓파를레의 대타출동 랜덤 아크릴 팝톡",
-            "zh": "宝可梦商店 宝可梦乐园的替身 盲盒 亚克力 手机气囊支架",
-            "ko": "포켓몬 스토어 포켓파를레의 대타출동 랜덤 아크릴 팝톡",
-            "en": "포켓몬 스토어 포켓파를레의 대타출동 랜덤 아크릴 팝톡"
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 봉제인형 빠모",
+            "zh": "宝可梦中心 宝可梦 Magic Hour Illusion! 毛绒玩偶 布拨",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 봉제인형 빠모",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 봉제인형 빠모"
           },
-          "release_date": "2024-03-10",
+          "release_date": "2026-11-05",
           "price_jpy": null,
-          "is_limited": true,
+          "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
@@ -1174,15 +1248,15 @@
             "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=118032417"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504089"
           ]
         },
         {
-          "kit_id": "pokemon-kr-118032407",
+          "kit_id": "pokemon-kr-137504088",
           "change_type": "changed",
           "franchise": "pokemon",
-          "grade_code": "POKE_GOODS",
-          "subline": "포켓몬 스토어 오리지널",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -1191,14 +1265,14 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "포켓몬 스토어 포켓파를레의 대타출동 러그",
-            "zh": "宝可梦商店 宝可梦乐园的替身 地垫",
-            "ko": "포켓몬 스토어 포켓파를레의 대타출동 러그",
-            "en": "포켓몬 스토어 포켓파를레의 대타출동 러그"
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 봉제인형 조로아크",
+            "zh": "宝可梦中心 宝可梦 Magic Hour Illusion! 毛绒玩偶 索罗亚克",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 봉제인형 조로아크",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 봉제인형 조로아크"
           },
-          "release_date": "2024-03-10",
+          "release_date": "2026-11-05",
           "price_jpy": null,
-          "is_limited": true,
+          "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
@@ -1211,7 +1285,266 @@
             "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=118032407"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504088"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137504091",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 봉제인형 포트데스(위작폼)",
+            "zh": "宝可梦中心 宝可梦 Magic Hour Illusion! 毛绒玩偶 怖思壶(赝品形态)",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 봉제인형 포트데스(위작폼)",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 봉제인형 포트데스(위작폼)"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504091"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137504090",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 봉제인형 피카츄",
+            "zh": "宝可梦中心 宝可梦 Magic Hour Illusion! 毛绒玩偶 皮卡丘",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 봉제인형 피카츄",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 봉제인형 피카츄"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504090"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137504093",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 포즈 마스코트 크로뱃",
+            "zh": "宝可梦中心 宝可梦 Magic Hour Illusion! 姿势 挂件 叉字蝠",
+            "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 포즈 마스코트 크로뱃",
+            "en": "포켓몬센터 Pokémon Magic Hour Illusion! 포즈 마스코트 크로뱃"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137504093"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137529058",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 네오라이트",
+            "zh": "宝可梦中心 闪闪亮亮☆ 闪粉 毛绒玩偶 霓虹鱼",
+            "ko": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 네오라이트",
+            "en": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 네오라이트"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137529058"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137529053",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 코산호",
+            "zh": "宝可梦中心 闪闪亮亮☆ 闪粉 毛绒玩偶 太阳珊瑚",
+            "ko": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 코산호",
+            "en": "포켓몬센터 반짝반짝☆ 글리터 봉제인형 코산호"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137529053"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137676460",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 봉제인형 ポケモン Pokopia 피카츄(창백한 색)",
+            "zh": "宝可梦中心 毛绒玩偶 宝可梦 Pokopia 皮卡丘(苍白色)",
+            "ko": "포켓몬센터 봉제인형 포켓몬 Pokopia 피카츄(창백한 색)",
+            "en": "포켓몬센터 봉제인형 Pokémon Pokopia 피카츄(창백한 색)"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137676460"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-137641260",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 파닥파닥! 봉제인형 만타인",
+            "zh": "宝可梦中心 啪嗒啪嗒! 毛绒玩偶 巨翅飞鱼",
+            "ko": "포켓몬센터 파닥파닥! 봉제인형 만타인",
+            "en": "포켓몬센터 파닥파닥! 봉제인형 만타인"
+          },
+          "release_date": "2026-11-05",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=137641260"
           ]
         }
       ],
@@ -1260,7 +1593,748 @@
         }
       ],
       "merged": [],
-      "backfilled": [],
+      "backfilled": [
+        {
+          "kit_id": "pokemon-kr-131521673",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "문구",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 A4 클리어파일 세트 POKEMON TRAINERS -STARDUST BESTIES-",
+            "zh": "포켓몬센터 A4 클리어파일 세트 POKEMON TRAINERS -STARDUST BESTIES-",
+            "ko": "포켓몬센터 A4 클리어파일 세트 POKEMON TRAINERS -STARDUST BESTIES-",
+            "en": "포켓몬센터 A4 클리어파일 세트 POKEMON TRAINERS -STARDUST BESTIES-"
+          },
+          "release_date": "2025-09-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=131521673"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-131521675",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "패션",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 긴팔 티셔츠 POKEMON TRAINERS -STARDUST BESTIES- Free",
+            "zh": "포켓몬센터 긴팔 티셔츠 POKEMON TRAINERS -STARDUST BESTIES- Free",
+            "ko": "포켓몬센터 긴팔 티셔츠 POKEMON TRAINERS -STARDUST BESTIES- Free",
+            "en": "포켓몬센터 긴팔 티셔츠 POKEMON TRAINERS -STARDUST BESTIES- Free"
+          },
+          "release_date": "2025-09-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=131521675"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-131521679",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "패션",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 러버 키링 컬렉션 POKEMON TRAINERS -STARDUST BESTIES-",
+            "zh": "포켓몬센터 러버 키링 컬렉션 POKEMON TRAINERS -STARDUST BESTIES-",
+            "ko": "포켓몬센터 러버 키링 컬렉션 POKEMON TRAINERS -STARDUST BESTIES-",
+            "en": "포켓몬센터 러버 키링 컬렉션 POKEMON TRAINERS -STARDUST BESTIES-"
+          },
+          "release_date": "2025-09-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=131521679"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-131521676",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "패션",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 맨투맨 POKEMON TRAINERS -STARDUST BESTIES-",
+            "zh": "포켓몬센터 맨투맨 POKEMON TRAINERS -STARDUST BESTIES-",
+            "ko": "포켓몬센터 맨투맨 POKEMON TRAINERS -STARDUST BESTIES-",
+            "en": "포켓몬센터 맨투맨 POKEMON TRAINERS -STARDUST BESTIES-"
+          },
+          "release_date": "2025-09-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=131521676"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-131515103",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "리빙",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 배스타월 포켓몬 찜질방",
+            "zh": "포켓몬센터 배스타월 포켓몬 찜질방",
+            "ko": "포켓몬센터 배스타월 포켓몬 찜질방",
+            "en": "포켓몬센터 배스타월 포켓몬 찜질방"
+          },
+          "release_date": "2025-09-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=131515103"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-131521674",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "문구",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 수고하셨스탬프 POKEMON TRAINERS -STARDUST BESTIES-",
+            "zh": "포켓몬센터 수고하셨스탬프 POKEMON TRAINERS -STARDUST BESTIES-",
+            "ko": "포켓몬센터 수고하셨스탬프 POKEMON TRAINERS -STARDUST BESTIES-",
+            "en": "포켓몬센터 수고하셨스탬프 POKEMON TRAINERS -STARDUST BESTIES-"
+          },
+          "release_date": "2025-09-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=131521674"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-131521671",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "문구",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 스티커 세트 POKEMON TRAINERS -STARDUST BESTIES- (메인 아트)",
+            "zh": "포켓몬센터 스티커 세트 POKEMON TRAINERS -STARDUST BESTIES- (메인 아트)",
+            "ko": "포켓몬센터 스티커 세트 POKEMON TRAINERS -STARDUST BESTIES- (메인 아트)",
+            "en": "포켓몬센터 스티커 세트 POKEMON TRAINERS -STARDUST BESTIES- (메인 아트)"
+          },
+          "release_date": "2025-09-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=131521671"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-131521672",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "문구",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 스티커 세트 POKEMON TRAINERS -STARDUST BESTIES- (일러스트)",
+            "zh": "포켓몬센터 스티커 세트 POKEMON TRAINERS -STARDUST BESTIES- (일러스트)",
+            "ko": "포켓몬센터 스티커 세트 POKEMON TRAINERS -STARDUST BESTIES- (일러스트)",
+            "en": "포켓몬센터 스티커 세트 POKEMON TRAINERS -STARDUST BESTIES- (일러스트)"
+          },
+          "release_date": "2025-09-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=131521672"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-131515106",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "문구",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 스티커 세트 포켓몬 찜질방",
+            "zh": "포켓몬센터 스티커 세트 포켓몬 찜질방",
+            "ko": "포켓몬센터 스티커 세트 포켓몬 찜질방",
+            "en": "포켓몬센터 스티커 세트 포켓몬 찜질방"
+          },
+          "release_date": "2025-09-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=131515106"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-131521668",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "패션",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 양말 POKEMON TRAINERS -STARDUST BESTIES- (스타모빌)",
+            "zh": "포켓몬센터 양말 POKEMON TRAINERS -STARDUST BESTIES- (스타모빌)",
+            "ko": "포켓몬센터 양말 POKEMON TRAINERS -STARDUST BESTIES- (스타모빌)",
+            "en": "포켓몬센터 양말 POKEMON TRAINERS -STARDUST BESTIES- (스타모빌)"
+          },
+          "release_date": "2025-09-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=131521668"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-130963696",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "패션",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 양말 너랑 나랑 식스테일 (23-25cm)",
+            "zh": "포켓몬센터 양말 너랑 나랑 식스테일 (23-25cm)",
+            "ko": "포켓몬센터 양말 너랑 나랑 식스테일 (23-25cm)",
+            "en": "포켓몬센터 양말 너랑 나랑 식스테일 (23-25cm)"
+          },
+          "release_date": "2025-09-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=130963696"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-130963695",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "패션",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 양말 너랑 나랑 지그제구리 (23-25cm)",
+            "zh": "포켓몬센터 양말 너랑 나랑 지그제구리 (23-25cm)",
+            "ko": "포켓몬센터 양말 너랑 나랑 지그제구리 (23-25cm)",
+            "en": "포켓몬센터 양말 너랑 나랑 지그제구리 (23-25cm)"
+          },
+          "release_date": "2025-09-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=130963695"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-131038467",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "패션",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 프리미엄 레더 3단 지갑 메타몽",
+            "zh": "포켓몬센터 프리미엄 레더 3단 지갑 메타몽",
+            "ko": "포켓몬센터 프리미엄 레더 3단 지갑 메타몽",
+            "en": "포켓몬센터 프리미엄 레더 3단 지갑 메타몽"
+          },
+          "release_date": "2025-09-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=131038467"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-131038476",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "패션",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 프리미엄 레더 라운드 파우치 메타몽",
+            "zh": "포켓몬센터 프리미엄 레더 라운드 파우치 메타몽",
+            "ko": "포켓몬센터 프리미엄 레더 라운드 파우치 메타몽",
+            "en": "포켓몬센터 프리미엄 레더 라운드 파우치 메타몽"
+          },
+          "release_date": "2025-09-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=131038476"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-131038477",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "패션",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 프리미엄 레더 라운드 파우치 피카츄",
+            "zh": "포켓몬센터 프리미엄 레더 라운드 파우치 피카츄",
+            "ko": "포켓몬센터 프리미엄 레더 라운드 파우치 피카츄",
+            "en": "포켓몬센터 프리미엄 레더 라운드 파우치 피카츄"
+          },
+          "release_date": "2025-09-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=131038477"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-131038470",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "패션",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 프리미엄 레더 릴홀더 카드케이스 메타몽",
+            "zh": "포켓몬센터 프리미엄 레더 릴홀더 카드케이스 메타몽",
+            "ko": "포켓몬센터 프리미엄 레더 릴홀더 카드케이스 메타몽",
+            "en": "포켓몬센터 프리미엄 레더 릴홀더 카드케이스 메타몽"
+          },
+          "release_date": "2025-09-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=131038470"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-131038471",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "패션",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 프리미엄 레더 릴홀더 카드케이스 피카츄",
+            "zh": "포켓몬센터 프리미엄 레더 릴홀더 카드케이스 피카츄",
+            "ko": "포켓몬센터 프리미엄 레더 릴홀더 카드케이스 피카츄",
+            "en": "포켓몬센터 프리미엄 레더 릴홀더 카드케이스 피카츄"
+          },
+          "release_date": "2025-09-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=131038471"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-131038466",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "패션",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 프리미엄 레더 반지갑 블래키",
+            "zh": "포켓몬센터 프리미엄 레더 반지갑 블래키",
+            "ko": "포켓몬센터 프리미엄 레더 반지갑 블래키",
+            "en": "포켓몬센터 프리미엄 레더 반지갑 블래키"
+          },
+          "release_date": "2025-09-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=131038466"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-131038475",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "패션",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 프리미엄 레더 스퀘어 파우치 블래키",
+            "zh": "포켓몬센터 프리미엄 레더 스퀘어 파우치 블래키",
+            "ko": "포켓몬센터 프리미엄 레더 스퀘어 파우치 블래키",
+            "en": "포켓몬센터 프리미엄 레더 스퀘어 파우치 블래키"
+          },
+          "release_date": "2025-09-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=131038475"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-131515101",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "리빙",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 핸드타월 포켓몬 찜질방 슈륙챙이&곤율랭",
+            "zh": "포켓몬센터 핸드타월 포켓몬 찜질방 슈륙챙이&곤율랭",
+            "ko": "포켓몬센터 핸드타월 포켓몬 찜질방 슈륙챙이&곤율랭",
+            "en": "포켓몬센터 핸드타월 포켓몬 찜질방 슈륙챙이&곤율랭"
+          },
+          "release_date": "2025-09-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=131515101"
+          ]
+        }
+      ],
       "renamed": []
     },
     {
