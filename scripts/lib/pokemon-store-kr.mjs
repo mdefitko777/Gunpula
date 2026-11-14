@@ -1,6 +1,6 @@
 // Rules behind scripts/import_pokemon_korea.mjs (the official 포켓몬스토어, pokemonstore.co.kr):
 // which shop products become records, their grade, goods_kind and release date. Pure
-// functions over the shop API's product objects, so scripts/test_pokemon_store_kr.mjs can
+// functions over the shop API's product objects, so scripts/test_pokemon_korea.mjs can
 // run them on saved answers.
 //
 // Until 2026-11-14 only three categories were read (봉제인형, 피규어, 스토어 오리지널). The
@@ -9,6 +9,7 @@
 // "0"): about 220 plush and 14 figures were among them.
 import { goodsKind, goodsRuleKind } from "./catalog-cleanup.mjs";
 import { decodeEntities } from "./html-entities.mjs";
+import { deadImage, httpsImageUrl } from "./thumbs.mjs";
 
 export const SOURCE_ID = "pokemon_store_kr";
 export const STORE = "https://pokemonstore.co.kr";
@@ -175,7 +176,7 @@ export function saleStart(product) {
 }
 
 /**
- * Release date: the sale start, unless it lies more than a month after the listing date
+ * Release date: the sale start, unless it lies more than RELIST_GAP_DAYS after the listing date
  * (a relisting or restock, then the listing date). Never later than the date the record
  * already had, so a sale start that moves forward does not move the release (it is a
  * restock event instead, lib/restocks.mjs).
@@ -189,10 +190,15 @@ export function releaseDateFor(product, previousDate = null) {
   return date;
 }
 
+// 2026-11-14: 134 covers sat on http://image.toast.com (Android shows no cleartext picture;
+// the same files answer over https), and the 28 products of the old Godo mall still point at
+// pokemon.hgodo.com, which redirects every picture to a service-ended page (the shop's own
+// product page shows them broken too). Those are left out rather than written as covers.
 function absoluteImage(url) {
   const value = String(url || "").trim();
   if (!value) return null;
-  return value.startsWith("//") ? `https:${value}` : value;
+  const absolute = httpsImageUrl(value.startsWith("//") ? `https:${value}` : value);
+  return deadImage(absolute) ? null : absolute;
 }
 
 // The CDN serves 860–1500 px JPEGs and answers 400 to every resize parameter tried on
@@ -216,8 +222,8 @@ export function toKit(product, index, previous = null) {
   if (!name) return null;
   const { grade_code: gradeCode, subline } = gradeFor(product, index);
   const kind = gradeCode === "POKE_GOODS" ? goodsKindFor(product, index) : null;
-  const cover = absoluteImage(product.listImageUrls?.[0] || product.imageUrls?.[0]);
-  const gallery = [...new Set([cover, ...(product.imageUrls || []).map(absoluteImage)].filter(Boolean))].slice(0, MAX_GALLERY);
+  const gallery = [...new Set([product.listImageUrls?.[0], ...(product.imageUrls || [])].map(absoluteImage).filter(Boolean))].slice(0, MAX_GALLERY);
+  const cover = gallery[0] || null;
   const url = productUrl(product.productNo);
   const price = Number.isInteger(product.salePrice) && product.salePrice > 0 ? product.salePrice : null;
   const { tops } = placement(product, index);

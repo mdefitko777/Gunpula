@@ -328,13 +328,18 @@ const KR_STORE_RESALE_DAYS = 14;
 /**
  * 포켓몬스토어 products (lib/pokemon-store-kr.mjs keeps the release date and records
  * pokemon_store_kr.sale_start / sold_out) that are on sale again: sold out before and not
- * now, or a sale start moved forward. Dated by the new sale start (else today).
+ * now, or a sale start moved forward after the old one had passed (an upcoming product whose
+ * sale start moves later is postponed, not sold again). Dated by the new sale start (else today).
  */
 export function koreanStoreRestocks(before, kit, today) {
   const now = kit.pokemon_store_kr;
   const old = before?.pokemon_store_kr;
   if (!now || !old || now.sold_out) return null;
-  const moved = now.sale_start && old.sale_start && now.sale_start >= shiftDay(old.sale_start, KR_STORE_RESALE_DAYS);
+  const moved =
+    now.sale_start &&
+    old.sale_start &&
+    old.sale_start < today &&
+    now.sale_start >= shiftDay(old.sale_start, KR_STORE_RESALE_DAYS);
   if (!moved && !old.sold_out) return null;
   return {
     kit_id: kit.kit_id,

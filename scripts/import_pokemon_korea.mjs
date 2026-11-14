@@ -85,6 +85,8 @@ async function fetchAllProducts() {
 
 async function main() {
   const robots = await loadRobots(new URL(API).host, { userAgent: USER_AGENT });
+  // robots.txt was a request to the same host: the category tree waits its turn after it.
+  lastRequestAt = Date.now();
   if (!robotsAllows(robots, `${API}/products/search`)) {
     throw new Error(`${API} is disallowed by robots.txt (${robots.status})`);
   }

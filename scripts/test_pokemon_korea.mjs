@@ -72,6 +72,12 @@ assert.match(wedding.images.box_art_url, /^https:\/\/shopby-images\.cdn-nhncomme
 assert.ok(wedding.gallery_image_urls.length > 1 && wedding.gallery_image_urls.length <= 6);
 assert.equal(wedding.gallery_image_urls[0], wedding.images.box_art_url);
 assert.equal(productName({ productName: "[구매권 추첨] Pikachu&apos;s Sweet  Delivery" }), "Pikachu's Sweet Delivery");
+// Cleartext covers become https; the old Godo mall's pictures (all redirected away) are dropped.
+assert.match(kit(118529118).images.box_art_url, /^https:\/\/image\.toast\.com\//);
+assert.ok(kit(118529118).gallery_image_urls.every((url) => url.startsWith("https://")));
+assert.equal(kit(133826321).images.box_art_url, null, "pokemon.hgodo.com only");
+assert.equal(kit(133826321).images.box_art_source_id, null);
+assert.deepEqual(kit(133826321).gallery_image_urls, []);
 
 // ── release date: a relisting does not move it ──
 // 봉제인형 브케인: listed 2024-01-16, sale start moved to 2026-11-12 22:00.
@@ -99,6 +105,7 @@ assert.deepEqual(
   { date: "2026-11-12", kind: "retail_resale", previous_date: "2024-01-16" },
 );
 assert.equal(koreanStoreRestocks(store("2026-11-11", false), store("2026-11-12", false), "2026-11-14"), null, "a day later is not a new sale");
+assert.equal(koreanStoreRestocks(store("2026-11-20", false), store("2026-12-20", false), "2026-11-14"), null, "an upcoming sale postponed");
 assert.equal(koreanStoreRestocks(store("2024-01-16", true), store("2026-11-12", true), "2026-11-14"), null, "still sold out");
 assert.equal(koreanStoreRestocks(undefined, store("2026-11-12", false), "2026-11-14"), null, "new product");
 assert.equal(koreanStoreRestocks({ kit_id: "pokemon-kr-1" }, store("2026-11-12", false), "2026-11-14"), null, "first run with the field");
