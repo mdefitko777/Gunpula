@@ -1275,12 +1275,17 @@ function workTitleForSeries(series, kit) {
 
 function localizeKit(kit) {
   const baseName = sourceName(kit);
-  const names = {
-    ja: translateName(kit.names?.ja || baseName, "ja"),
-    en: translateName(kit.names?.en || baseName, "en"),
-    zh: translateName(kit.names?.zh || baseName, "zh"),
-    ko: translateName(kit.names?.ko || baseName, "ko"),
-  };
+  // Nintendo Korea's own titles are the official Korean names; the word lists below are written for
+  // Japanese titles and turned "Pokémon Pokopia" into "포켓몬 Pokopia" / "ポケモン Pokopia" (2026-11-14).
+  const names =
+    kit.franchise === "nintendo"
+      ? { ja: kit.names?.ja || baseName, en: kit.names?.en || baseName, zh: kit.names?.zh || baseName, ko: kit.names?.ko || baseName }
+      : {
+          ja: translateName(kit.names?.ja || baseName, "ja"),
+          en: translateName(kit.names?.en || baseName, "en"),
+          zh: translateName(kit.names?.zh || baseName, "zh"),
+          ko: translateName(kit.names?.ko || baseName, "ko"),
+        };
   const series = seriesForKit({ ...kit, names });
 
   return {

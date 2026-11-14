@@ -104,6 +104,8 @@ assert.equal(v2.names.en, "HGUC 1 / 144 V2 Assault Buster Gundam");
   const zelda = localizeKit(kit("nintendo", "키홀더 론론 우유 젤다의 전설"));
   assert.deepEqual([zelda.series.key, zelda.series.labels.zh, zelda.work_title, zelda.universe], ["nintendo_zelda", "塞尔达传说", "The Legend of Zelda", "Nintendo"]);
   check("nintendo", "닌텐도 사운드 클록 Alarmo", "nintendo_other");
+  const pokopia = localizeKit({ kit_id: "nintendo-kr-15815", franchise: "nintendo", names: { ko: "Pokémon Pokopia", ja: "Pokémon Pokopia", zh: "Pokémon Pokopia", en: "Pokémon Pokopia" } });
+  assert.deepEqual(pokopia.names, { ko: "Pokémon Pokopia", ja: "Pokémon Pokopia", zh: "Pokémon Pokopia", en: "Pokémon Pokopia" }, "official Korean titles stay as Nintendo writes them");
   check("nintendo", "amiibo 소라", "nintendo_smash", { subline: "슈퍼 스매시브라더스 시리즈" });
 }
 
