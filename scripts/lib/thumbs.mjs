@@ -158,6 +158,44 @@ export function buildThumbMap({ repoIndex = {}, webIndex = {}, originalUrl, thum
   return { schema: "gunpula-thumbs-v1", max_side: THUMB_MAX_SIDE, rules: THUMB_RULES, thumbs };
 }
 
+// The small picture for an image URL as published: its data/thumbs.json entry, else a host rule.
+// Never the URL itself (full size) and never raw.githubusercontent.com (a file no shard holds yet).
+export function smallImageOf(url, map) {
+  if (!url) return null;
+  const thumb = map.thumbs?.[url] || ruleThumb(url, map.rules || THUMB_RULES);
+  return thumb && thumb !== url && !thumb.includes("raw.githubusercontent.com") ? thumb : null;
+}
+
+// The feeds the app's inbox reads (hobby-atlas-v3 lib/notifications/feed_rules.dart: added[] and
+// changed[] of each entry). Their published copies carry "thumb" per item: the app prefetches new
+// items' pictures (lib/background/image_prefetch.dart) before its cached catalog has those kits, and
+// the feeds have no image URLs. The repo copies stay without it: shard URLs are only known at publish
+// time, and the notify feed would otherwise change whenever a photo moves shard.
+export const FEED_THUMB_FILES = ["atlas/notify-feed.json", "update-feed-lite.json"];
+const FEED_THUMB_LISTS = ["added", "changed"];
+
+// Sets item.thumb on every added / changed item whose kit has a small cover. kitsById and boxart
+// must be the published (path-rewritten) data, so coverOf gives the URL the app loads.
+export function addFeedThumbs(doc, { kitsById, boxart = {}, aliases = {}, map }) {
+  let items = 0;
+  let withThumb = 0;
+  for (const entry of doc?.entries || []) {
+    for (const list of FEED_THUMB_LISTS) {
+      for (const item of entry?.[list] || []) {
+        if (!item || typeof item.kit_id !== "string") continue;
+        items += 1;
+        const kit = kitsById.get(item.kit_id) || kitsById.get(aliases[item.kit_id]);
+        const thumb = kit ? smallImageOf(coverOf(kit, boxart), map) : null;
+        if (thumb) {
+          item.thumb = thumb;
+          withThumb += 1;
+        } else delete item.thumb;
+      }
+    }
+  }
+  return { items, withThumb };
+}
+
 // Pillow (the same Python the atlas cover step uses; no npm image library is installed).
 // One process per batch: reads {"src","dst"} lines, writes {"dst","ok"|"error"} lines in the same
 // order. Threads, because Pillow lets go of the GIL while decoding, resizing and encoding.

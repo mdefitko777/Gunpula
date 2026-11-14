@@ -3,12 +3,14 @@
 // (contract: gunpula-thumbs-v1 — exact image URL -> thumbnail URL on an image shard, plus rules).
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { pendingUrls, planRepoThumbs } from "./build_thumbs.mjs";
 import {
+  addFeedThumbs,
   buildThumbMap,
   coverOf,
   feedKitIds,
@@ -17,12 +19,14 @@ import {
   pythonWithPillow,
   repoThumbRel,
   ruleThumb,
+  smallImageOf,
   thumbCandidates,
+  THUMB_RULES,
   upgradeCleartextImages,
   wantsWebThumb,
   webThumbFile,
 } from "./lib/thumbs.mjs";
-import { repoThumbsMade, rewriteAssetUrls, thumbUrls } from "./publish_site.mjs";
+import { repoThumbsMade, rewriteAssetUrls, stampManifest, thumbUrls, writeFeedThumbs } from "./publish_site.mjs";
 
 const AKAMAI = "https://bandai-a.akamaihd.net/bc/img/model/b/1000256190_1.jpg";
 
@@ -139,6 +143,95 @@ assert.deepEqual([...feedKitIds([{ added: [{ kit_id: "a" }], changed: [{ kit_id:
   // The key is the very string the rewritten JSON carries.
   const published = rewriteAssetUrls(JSON.stringify({ box_art_url: "./assets/catalog/pokemon/a b.jpg" }), config.dirs, urlFor).text;
   assert.ok(map.thumbs[JSON.parse(published).box_art_url]);
+}
+
+// --- "thumb" on the inbox feeds' items (site copies of notify-feed.json and update-feed-lite.json).
+{
+  const SHARD = "https://mdefitko777.github.io/gunpula-img-3/";
+  const RAW = "https://raw.githubusercontent.com/mdefitko777/Gunpula/main/app/assets/";
+  const map = {
+    rules: THUMB_RULES,
+    thumbs: {
+      [AKAMAI]: `${SHARD}thumbs/web/bandai-a.akamaihd.net/0123456789abcdef.webp`,
+      [`${SHARD}catalog/a.jpg`]: `${SHARD}thumbs/repo/catalog/a.jpg.webp`,
+      "https://h.example/broken.jpg": `${RAW}thumbs/web/h.example/1.webp`,
+    },
+  };
+  assert.equal(smallImageOf(AKAMAI, map), map.thumbs[AKAMAI]);
+  assert.equal(smallImageOf("https://cdn.rebrickable.com/media/sets/75466-1.jpg", map), "https://cdn.rebrickable.com/media/thumbs/sets/75466-1.jpg/250x250p.jpg");
+  assert.equal(smallImageOf("https://h.example/no-thumb.jpg", map), null, "never the full-size picture");
+  assert.equal(smallImageOf("https://h.example/broken.jpg", map), null, "never raw.githubusercontent.com");
+  assert.equal(smallImageOf("", map), null);
+
+  const kits = [
+    { kit_id: "pb", images: { box_art_url: AKAMAI } },
+    { kit_id: "local", images: { box_art_url: `${SHARD}catalog/a.jpg` } },
+    { kit_id: "lego-75466-1", images: { box_art_url: "https://cdn.rebrickable.com/media/sets/75466-1.jpg" } },
+    { kit_id: "unsynced", images: { box_art_url: `${RAW}catalog/b.jpg` } },
+    { kit_id: "plain", images: { box_art_url: "https://h.example/no-thumb.jpg" } },
+    { kit_id: "gundam", images: { box_art_url: "https://h.example/no-thumb.jpg" } },
+    { kit_id: "new-id", images: { box_art_url: AKAMAI } },
+  ];
+  const kitsById = new Map(kits.map((kit) => [kit.kit_id, kit]));
+  const doc = {
+    entries: [
+      {
+        added: [{ kit_id: "pb" }, { kit_id: "lego-75466-1" }, { kit_id: "gone" }, { kit_id: "plain", thumb: "stale" }],
+        changed: [{ kit_id: "local" }, { kit_id: "unsynced" }, { kit_id: "gundam" }, { kit_id: "old-id" }],
+        removed: [{ kit_id: "pb" }],
+      },
+    ],
+  };
+  const counts = addFeedThumbs(doc, { kitsById, boxart: { gundam: { url: AKAMAI } }, aliases: { "old-id": "new-id" }, map });
+  assert.deepEqual(counts, { items: 8, withThumb: 5 });
+  const thumbOf = (list, id) => doc.entries[0][list].find((item) => item.kit_id === id).thumb;
+  assert.equal(thumbOf("added", "pb"), map.thumbs[AKAMAI]);
+  assert.equal(thumbOf("added", "lego-75466-1"), "https://cdn.rebrickable.com/media/thumbs/sets/75466-1.jpg/250x250p.jpg", "Rebrickable's own small size");
+  assert.equal(thumbOf("changed", "local"), `${SHARD}thumbs/repo/catalog/a.jpg.webp`);
+  assert.equal(thumbOf("changed", "gundam"), map.thumbs[AKAMAI], "the box art the app picks over box_art_url");
+  assert.equal(thumbOf("changed", "old-id"), map.thumbs[AKAMAI], "a merged kit follows its alias");
+  for (const [list, id] of [["added", "gone"], ["added", "plain"], ["changed", "unsynced"]]) {
+    assert.ok(!("thumb" in doc.entries[0][list].find((item) => item.kit_id === id)), `${id}: no thumbnail, no field`);
+  }
+  assert.equal(doc.entries[0].removed[0].thumb, undefined, "only the lists the app reads");
+  const text = JSON.stringify(doc);
+  assert.ok(!text.includes("raw.githubusercontent.com") && !text.includes(`"thumb":"${AKAMAI}"`));
+  for (const item of [...doc.entries[0].added, ...doc.entries[0].changed]) {
+    if (item.thumb) assert.match(item.thumb, /\/thumbs\/(?:repo|web)\/.+\.webp$|\/250x250p\.jpg$/, "a small picture only");
+  }
+
+  // As the publish job runs it: the site's rewritten kits, both feeds, layout kept.
+  const dataDir = await mkdtemp(path.join(os.tmpdir(), "gunpula-feed-thumbs-"));
+  try {
+    const put = async (rel, value) => {
+      await mkdir(path.dirname(path.join(dataDir, rel)), { recursive: true });
+      await writeFile(path.join(dataDir, rel), value);
+    };
+    await put("split/kits-gundam.json", JSON.stringify({ kits: kits.slice(0, 2) }));
+    await put("split/kits-lego.json", JSON.stringify({ kits: [kits[2]] }));
+    await put("split/kit-aliases.json", JSON.stringify({ aliases: {} }));
+    const feed = { entries: [{ added: [{ kit_id: "pb" }, { kit_id: "none" }], changed: [{ kit_id: "lego-75466-1" }] }] };
+    await put("atlas/notify-feed.json", `${JSON.stringify(feed)}\n`);
+    await put("update-feed-lite.json", `${JSON.stringify(feed, null, 2)}\n`);
+    const results = await writeFeedThumbs(dataDir, map);
+    assert.deepEqual(results.map(({ file, items, withThumb }) => [file, items, withThumb]), [["atlas/notify-feed.json", 3, 2], ["update-feed-lite.json", 3, 2]]);
+    const notify = await readFile(path.join(dataDir, "atlas/notify-feed.json"), "utf8");
+    const lite = await readFile(path.join(dataDir, "update-feed-lite.json"), "utf8");
+    assert.ok(!notify.includes("\n "), "notify-feed.json stays on one line");
+    assert.ok(lite.startsWith("{\n  "), "update-feed-lite.json stays indented");
+    assert.equal(JSON.parse(notify).entries[0].added[0].thumb, map.thumbs[AKAMAI]);
+    assert.equal(JSON.parse(lite).entries[0].changed[0].thumb, "https://cdn.rebrickable.com/media/thumbs/sets/75466-1.jpg/250x250p.jpg");
+    assert.equal(results[0].after - results[0].before, Buffer.byteLength(notify) - Buffer.byteLength(`${JSON.stringify(feed)}\n`));
+    // buildSite stamps the manifest after this step: its files hashes are of the copies with "thumb", so the
+    // app fetches both feeds again when a thumbnail moves shard or a cover changes.
+    await put("split/manifest.json", "{}\n");
+    const manifest = await stampManifest(dataDir, []);
+    for (const [rel, text] of [["atlas/notify-feed.json", notify], ["update-feed-lite.json", lite]]) {
+      assert.equal(manifest.files[rel], createHash("sha256").update(text).digest("hex").slice(0, 16), `${rel} hashed as served`);
+    }
+  } finally {
+    await rm(dataDir, { recursive: true, force: true });
+  }
 }
 
 // --- A sync without the repo thumbnails made would delete them from the shards.

@@ -17,7 +17,8 @@
 // The manifest also carries a hash per other data file (files), so the app can fetch
 // just the side files that changed (announcements …) on a day the kits did not.
 // The site also gets data/thumbs.json: image URL -> its small thumbnail on a shard
-// (scripts/lib/thumbs.mjs; the thumbnails are app/assets/thumbs/, one of the shard dirs).
+// (scripts/lib/thumbs.mjs; the thumbnails are app/assets/thumbs/, one of the shard dirs), and
+// the inbox feeds' items get the "thumb" of their kit's cover (only in the published copy).
 //
 // Shard assignment is stable: a photo stays in the shard that already has it;
 // a new photo goes to the first shard with room. Nothing here needs state in
@@ -33,7 +34,7 @@ import { cp, mkdir, mkdtemp, readFile, readdir, rm, stat, writeFile } from "node
 import { existsSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { buildThumbMap, REPO_THUMB_INDEX, SITE_BASE, upgradeCleartextImages, WEB_THUMB_INDEX } from "./lib/thumbs.mjs";
+import { addFeedThumbs, buildThumbMap, FEED_THUMB_FILES, REPO_THUMB_INDEX, SITE_BASE, upgradeCleartextImages, WEB_THUMB_INDEX } from "./lib/thumbs.mjs";
 
 export const CONFIG_PATH = "data/image-shards.json";
 const MB = 1024 * 1024;
@@ -260,9 +261,38 @@ export async function buildSite(outDir, config, assign) {
     }
     await cp(file, target);
   }
-  const thumbs = await writeThumbMap(path.join(out, "data", "thumbs.json"), config, assign, urlFor);
+  const { map, ...thumbs } = await writeThumbMap(path.join(out, "data", "thumbs.json"), config, assign, urlFor);
+  const feedThumbs = await writeFeedThumbs(path.join(out, "data"), map);
   await stampManifest(path.join(out, "data"), config.shards.map((shard) => shard.url));
-  return { rewritten, missing, upgraded, thumbs, bytes: await dirSize(out) };
+  return { rewritten, missing, upgraded, thumbs, feedThumbs, bytes: await dirSize(out) };
+}
+
+// Adds "thumb" to the site copies of the inbox feeds (lib/thumbs.mjs FEED_THUMB_FILES), looked up in
+// the site's own (already rewritten) kits and box art, so it is the thumbnail of the cover the app shows.
+export async function writeFeedThumbs(dataDir, map) {
+  const readJson = async (rel, fallback) => {
+    const file = path.join(dataDir, rel);
+    return existsSync(file) ? JSON.parse(await readFile(file, "utf8")) : fallback;
+  };
+  const kitsById = new Map();
+  const splitDir = path.join(dataDir, "split");
+  const splitNames = existsSync(splitDir) ? (await readdir(splitDir)).filter((name) => /^kits-.+\.json$/.test(name)).sort() : [];
+  for (const name of splitNames) for (const kit of (await readJson(`split/${name}`, {})).kits || []) kitsById.set(kit.kit_id, kit);
+  const boxart = (await readJson("atlas/gundam-boxart.json", {})).boxart || {};
+  const aliases = (await readJson("split/kit-aliases.json", {})).aliases || {};
+  const results = [];
+  for (const rel of FEED_THUMB_FILES) {
+    const file = path.join(dataDir, rel);
+    if (!existsSync(file)) continue;
+    const text = await readFile(file, "utf8");
+    const doc = JSON.parse(text);
+    const counts = addFeedThumbs(doc, { kitsById, boxart, aliases, map });
+    // Same layout as the generator wrote (update-feed-lite.json is indented, notify-feed.json is not).
+    const next = `${JSON.stringify(doc, null, /^\{\r?\n/.test(text) ? 2 : 0)}\n`;
+    await writeFile(file, next);
+    results.push({ file: rel, ...counts, before: Buffer.byteLength(text), after: Buffer.byteLength(next) });
+  }
+  return results;
 }
 
 // Only thumbnails a live shard holds (assign) go in; a photo in a shard dir is keyed by the URL
@@ -288,7 +318,7 @@ async function writeThumbMap(target, config, assign, urlFor) {
   const webIndex = (await readIndex(WEB_THUMB_INDEX)).thumbs || {};
   const map = buildThumbMap({ repoIndex, webIndex, ...thumbUrls(config, assign, urlFor) });
   await writeFile(target, `${JSON.stringify(map)}\n`);
-  return { entries: Object.keys(map.thumbs).length, repoPhotos: Object.keys(repoIndex).length, web: Object.keys(webIndex).length, bytes: (await stat(target)).size };
+  return { map, entries: Object.keys(map.thumbs).length, repoPhotos: Object.keys(repoIndex).length, web: Object.keys(webIndex).length, bytes: (await stat(target)).size };
 }
 
 // Data files the app may fetch on their own: every JSON under data/ except the per-channel kit
@@ -411,6 +441,9 @@ async function main() {
     const site = await buildSite(outDir, config, plan.assign);
     lines.push("", `Site: ${(site.bytes / MB).toFixed(0)} MB (limit ${config.site_limit_mb} MB), ${site.rewritten} photo paths pointed at shards, ${site.missing} left as ./assets/ (file missing in the repo too), ${site.upgraded} http:// pictures changed to https://.`);
     lines.push("", `Thumbnails: data/thumbs.json ${site.thumbs.entries} entries (${(site.thumbs.bytes / 1024).toFixed(0)} KB) from ${site.thumbs.repoPhotos} repo photos and ${site.thumbs.web} remote covers.`);
+    for (const feed of site.feedThumbs) {
+      lines.push("", `Feed thumbs: data/${feed.file} ${feed.withThumb} of ${feed.items} items (+${((feed.after - feed.before) / 1024).toFixed(0)} KB).`);
+    }
     if (site.bytes > config.site_limit_mb * MB) errors.push(`Site is ${(site.bytes / MB).toFixed(0)} MB, over ${config.site_limit_mb} MB — not published. Move another folder into the shards (dirs in ${CONFIG_PATH}).`);
     else if (notLive.length) errors.push(...notLive);
     else deployable = true;

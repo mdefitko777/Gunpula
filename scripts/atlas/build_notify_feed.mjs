@@ -483,7 +483,7 @@ export function buildDoc({ feed, manifest, prev, pairs, commits, edgeDates = new
         method:
           "Diff of consecutive git versions of data/kits.json (same rule as scripts/build_update_feed.mjs, no item cap), merged with data/update-feed.json. Only new items and price / release / limited / source changes are kept. Restock items (reason restock) come from data/atlas/restocks.json.",
         licence:
-          "Product facts (names, prices, release dates) collected by Gunpula from the official shops named in each kit's source_refs (BANDAI SPIRITS, Premium Bandai, Pokémon Center, Takara Tomy, Good Smile and others). Names and trademarks belong to their owners. No images are included.",
+          "Product facts (names, prices, release dates) collected by Gunpula from the official shops named in each kit's source_refs (BANDAI SPIRITS, Premium Bandai, Pokémon Center, Takara Tomy, Good Smile and others). Names, trademarks and pictures belong to their owners. No images are included; the published copy links each added / changed item's small cover thumbnail (\"thumb\", scripts/publish_site.mjs).",
       },
     ],
     commits: commits.filter((c) => c.date >= oldest).map((c) => [c.sha, c.date]),
