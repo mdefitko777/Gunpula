@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-14T00:54:30.337Z",
+  "updated_at": "2026-11-14T01:36:06.417Z",
   "sources": [
     {
       "source_id": "tamashii_news",
@@ -50,6 +50,11 @@
       "source_id": "pokemon_frienda",
       "name": "ポケモンフレンダ",
       "url": "https://pokemonfrienda.com/"
+    },
+    {
+      "source_id": "pokemon_korea_goods",
+      "name": "포켓몬코리아",
+      "url": "https://pokemonkorea.co.kr/goods"
     },
     {
       "source_id": "gundam_base_news",
@@ -132,7 +137,12 @@
       "url": "https://www.youtube.com/"
     }
   ],
-  "fetch_errors": [],
+  "fetch_errors": [
+    {
+      "source_id": "hamusuke_beyblade",
+      "message": "fetch failed"
+    }
+  ],
   "replaced": {
     "corocoro-d1ac4f87bf": "beyblade-lineup-dXgyMi5odG1s",
     "hamusuke-bx-55": "beyblade-lineup-Yng1NS5odG1s",
@@ -1302,6 +1312,31 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "Name truncated by the Premium Bandai new-items list.",
+      "reviewed_at": null
+    },
+    {
+      "id": "pokemonkorea-goods-3b5a39d29e",
+      "franchise": "pokemon",
+      "names": {
+        "ja": "어서오세요! 포켓몬카페 피카 브이의 섞어 섞어 아라모드~ 반짝반짝 쿠킹!~ 출시!!",
+        "zh": null,
+        "ko": "어서오세요! 포켓몬카페 피카 브이의 섞어 섞어 아라모드~ 반짝반짝 쿠킹!~ 출시!!",
+        "en": null
+      },
+      "status": "released",
+      "announced_at": "2026-11-09",
+      "source_type": "news",
+      "source_name": "포켓몬코리아",
+      "source_id": "pokemon_korea_goods",
+      "source_url": "https://product.kyobobook.co.kr/detail/S000221846039",
+      "thumbnail_url": "https://pokemonkorea.co.kr/s3.php?key=home%2Fdata%2Fdata1_www%2Fnewdata%2F2026%2F11%2F2026-11-09_10-06-22-16d00c7b22e0cfb4.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Banner on pokemonkorea.co.kr/goods; the date is the day its picture was uploaded.",
       "reviewed_at": null
     },
     {
@@ -4508,6 +4543,31 @@
       "preorder_basis": "title"
     },
     {
+      "id": "pokemonkorea-goods-a6db28b290",
+      "franchise": "pokemon",
+      "names": {
+        "ja": "Pokémon Pokopia 몬콜레 상품 출시!!",
+        "zh": null,
+        "ko": "Pokémon Pokopia 몬콜레 상품 출시!!",
+        "en": null
+      },
+      "status": "released",
+      "announced_at": "2026-10-07",
+      "source_type": "news",
+      "source_name": "포켓몬코리아",
+      "source_id": "pokemon_korea_goods",
+      "source_url": "https://smartstore.naver.com/moncolle_korea/category/7f9868f6dbfd413a9ef7ed2350a11c72?cp=1",
+      "thumbnail_url": "../app/assets/announcements/pokemonkorea-goods-a6db28b290.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Banner on pokemonkorea.co.kr/goods; the date is the day its picture was uploaded.",
+      "reviewed_at": null
+    },
+    {
       "id": "bandai-news-2026-10-06-waWNzLzczOTQ",
       "franchise": "gundam",
       "names": {
@@ -5012,6 +5072,31 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
+      "reviewed_at": null
+    },
+    {
+      "id": "pokemonkorea-goods-353450effa",
+      "franchise": "pokemon",
+      "names": {
+        "ja": "CU에서 포코피아 신상품을 만나보세요!!",
+        "zh": null,
+        "ko": "CU에서 포코피아 신상품을 만나보세요!!",
+        "en": null
+      },
+      "status": "released",
+      "announced_at": "2026-09-30",
+      "source_type": "news",
+      "source_name": "포켓몬코리아",
+      "source_id": "pokemon_korea_goods",
+      "source_url": "https://www.instagram.com/p/DdnaCB9k9zg/?stkn=MW0zZ2J1ZnRuZ3M2Mw==",
+      "thumbnail_url": "../app/assets/announcements/pokemonkorea-goods-353450effa.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Banner on pokemonkorea.co.kr/goods; the date is the day its picture was uploaded.",
       "reviewed_at": null
     },
     {
@@ -8882,6 +8967,31 @@
       "preorder_basis": "title"
     },
     {
+      "id": "pokemonkorea-goods-29b985ec2b",
+      "franchise": "pokemon",
+      "names": {
+        "ja": "조립하는 즐거움! 레고® 포켓몬™",
+        "zh": null,
+        "ko": "조립하는 즐거움! 레고® 포켓몬™",
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-07-14",
+      "source_type": "news",
+      "source_name": "포켓몬코리아",
+      "source_id": "pokemon_korea_goods",
+      "source_url": "https://www.lego.com/ko-kr/themes/pokemon/about",
+      "thumbnail_url": "../app/assets/announcements/pokemonkorea-goods-29b985ec2b.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Banner on pokemonkorea.co.kr/goods; the date is the day its picture was uploaded.",
+      "reviewed_at": null
+    },
+    {
       "id": "bandai-news-2026-07-10-wMDI1NDQyNC8",
       "franchise": "gundam",
       "names": {
@@ -10361,6 +10471,31 @@
       "preorder_at": "2026-06-04T11:00:00+09:00",
       "preorder_date": "2026-06-04",
       "preorder_basis": "title"
+    },
+    {
+      "id": "pokemonkorea-goods-78e08d710c",
+      "franchise": "pokemon",
+      "names": {
+        "ja": "FC서울×포켓몬 콜라보 상품 발매!",
+        "zh": null,
+        "ko": "FC서울×포켓몬 콜라보 상품 발매!",
+        "en": null
+      },
+      "status": "released",
+      "announced_at": "2026-06-04",
+      "source_type": "news",
+      "source_name": "포켓몬코리아",
+      "source_id": "pokemon_korea_goods",
+      "source_url": "https://fcseoulshop.com/product/list.html?cate_no=78",
+      "thumbnail_url": "https://pokemonkorea.co.kr/s3.php?key=home%2Fdata%2Fdata1_www%2Fnewdata%2F2026%2F06%2F2026-06-04_11-41-10-38124-1780540870.png",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Banner on pokemonkorea.co.kr/goods; the date is the day its picture was uploaded.",
+      "reviewed_at": null
     },
     {
       "id": "gundam-official-cbe3yqvf22ohr8gxod2j9h8r",

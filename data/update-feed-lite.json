@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-14",
-  "generated_at": "2026-11-14T00:55:22.793Z",
+  "generated_at": "2026-11-14T01:37:04.961Z",
   "watch_tags": [
     "seed",
     "00"
@@ -18,18 +18,18 @@
     "lego"
   ],
   "source_health": {
-    "generated_at": "2026-11-14T00:55:00.551Z",
+    "generated_at": "2026-11-14T01:36:43.298Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-14",
-      "generated_at": "2026-11-14T00:55:22.793Z",
+      "generated_at": "2026-11-14T01:37:04.961Z",
       "total_before": 39432,
-      "total_after": 39442,
-      "added_count": 10,
-      "changed_count": 13,
+      "total_after": 40823,
+      "added_count": 11,
+      "changed_count": 34,
       "removed_count": 0,
       "watched_count": 1,
       "merged_count": 0,
@@ -39,19 +39,22 @@
       "bbx_count": 0,
       "franchise_counts": {
         "lego": 15,
-        "pokemon": 7,
-        "gundam": 1
+        "pokemon": 28,
+        "gundam": 1,
+        "armored_core": 1
       },
       "reason_counts": {
-        "new": 10,
+        "new": 11,
         "source": 6,
-        "name": 7
+        "name": 7,
+        "image": 21
       },
       "interest_tags": [
         "lego",
         "pokemon",
         "gundam",
-        "00"
+        "00",
+        "armored_core"
       ],
       "watch_tags": [
         "00"
@@ -391,6 +394,43 @@
           ]
         },
         {
+          "kit_id": "pokemon-center-4521329452579",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "Pokemon Center Goods",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ペーパークラフト ポケットモンスター Ｘ・Ｙ ミアレシティ プリズムタワー",
+            "zh": "ペーパークラフト 宝可梦 X·Y 密阿雷市 プリズムタワー",
+            "ko": "ペーパークラフト ポケットモンスター X・Y ミアレシティ プリズムタワー",
+            "en": "ペーパークラフト ポケットモンスター Ｘ Ｙ ミアレシティ プリズムタワー"
+          },
+          "release_date": null,
+          "price_jpy": 3850,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329452579.html"
+          ]
+        },
+        {
           "kit_id": "pokemon-center-4521329452593",
           "change_type": "added",
           "franchise": "pokemon",
@@ -693,48 +733,86 @@
           ]
         },
         {
-          "kit_id": "lego-41002-1",
+          "kit_id": "ac30mm-4573102685759000",
           "change_type": "changed",
-          "franchise": "lego",
-          "grade_code": "LEGO_SET",
-          "subline": "Friends",
-          "series_key": "lego_friends",
+          "franchise": "armored_core",
+          "grade_code": "AC30MM",
+          "subline": "30MM Armored Core VI",
+          "series_key": "armored_core",
           "series_labels": {
-            "zh": "好朋友",
-            "en": "Friends",
-            "ja": "Friends",
-            "ko": "프렌즈"
+            "zh": "AC",
+            "en": "Armored Core",
+            "ja": "AC",
+            "ko": "AC"
           },
           "names": {
-            "ja": "Emma's Karate Class",
-            "zh": "Emma's Karate Class",
-            "ko": "Emma's Karate Class",
-            "en": "Emma's Karate Class"
+            "ja": "30MM ARMORED CORE VI FIRES OF RUBICON RaD CC-3000 WRECKER ミルクトゥース",
+            "zh": "30MM 装甲核心6 境界天火 RaD CC-3000 WRECKER 乳牙",
+            "ko": "30MM ARMORED CORE VI FIRES OF RUBICON RaD CC-3000 WRECKER 밀크 투스",
+            "en": "30MM ARMORED CORE VI FIRES OF RUBICON RaD CC-3000 WRECKER ミルクトゥース"
           },
-          "release_date": "2013",
+          "release_date": "2025-06-21",
+          "price_jpy": 3850,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "armored_core"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102685759000&grp_id=5325",
+            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=ARMORED%20CORE&category=2"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-124396821",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 마스코트 키링 두둔 둔감 야아 가라르 야도란",
+            "zh": "宝可梦中心 玩偶钥匙扣 咚咚 迟钝 呀啊 伽勒尔 呆壳兽",
+            "ko": "포켓몬센터 마스코트 키링 두둔 둔감 야아 가라르 야도란",
+            "en": "포켓몬센터 마스코트 키링 두둔 둔감 야아 가라르 야도란"
+          },
+          "release_date": "2025-02-17",
           "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "lego"
+            "pokemon"
           ],
           "change_reasons": [
-            "name"
+            "image"
           ],
           "source_ids": [
-            "rebrickable_lego"
+            "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://rebrickable.com/sets/41002-1/"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=124396821"
           ]
         },
         {
-          "kit_id": "pokemon-center-4521329339115",
+          "kit_id": "pokemon-kr-124396822",
           "change_type": "changed",
           "franchise": "pokemon",
           "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
+          "subline": "봉제인형",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -743,13 +821,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "411 ぬいぐるみ ポケモン fit トリデプス",
-            "zh": "411 毛绒玩偶 宝可梦 fit 护城龙",
-            "ko": "411 봉제인형 Pokémon fit 바리톱스",
-            "en": "411 ぬいぐるみ Pokémon fit トリデプス"
+            "ja": "포켓몬센터 마스코트 키링 두둔 둔감 야아 가라르 야돈",
+            "zh": "宝可梦中心 玩偶钥匙扣 咚咚 迟钝 呀啊 伽勒尔 呆呆兽",
+            "ko": "포켓몬센터 마스코트 키링 두둔 둔감 야아 가라르 야돈",
+            "en": "포켓몬센터 마스코트 키링 두둔 둔감 야아 가라르 야돈"
           },
-          "release_date": null,
-          "price_jpy": 1540,
+          "release_date": "2025-02-17",
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -757,21 +835,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "name"
+            "image"
           ],
           "source_ids": [
-            "pokemon_center_jp"
+            "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329339115.html"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=124396822"
           ]
         },
         {
-          "kit_id": "pokemon-center-4521329343914",
+          "kit_id": "pokemon-kr-124396819",
           "change_type": "changed",
           "franchise": "pokemon",
           "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
+          "subline": "봉제인형",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -780,13 +858,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "508 ぬいぐるみ ポケモン fit ムーランド",
-            "zh": "508 毛绒玩偶 宝可梦 fit 长毛狗",
-            "ko": "508 봉제인형 Pokémon fit 바랜드",
-            "en": "508 ぬいぐるみ Pokémon fit ムーランド"
+            "ja": "포켓몬센터 마스코트 키링 두둔 둔감 야아 메가야도란",
+            "zh": "宝可梦中心 玩偶钥匙扣 咚咚 迟钝 呀啊 超级呆壳兽",
+            "ko": "포켓몬센터 마스코트 키링 두둔 둔감 야아 메가야도란",
+            "en": "포켓몬센터 마스코트 키링 두둔 둔감 야아 메가야도란"
           },
-          "release_date": null,
-          "price_jpy": 1650,
+          "release_date": "2025-02-17",
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -794,21 +872,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "name"
+            "image"
           ],
           "source_ids": [
-            "pokemon_center_jp"
+            "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329343914.html"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=124396819"
           ]
         },
         {
-          "kit_id": "pokemon-center-4521329343976",
+          "kit_id": "pokemon-kr-124396824",
           "change_type": "changed",
           "franchise": "pokemon",
           "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
+          "subline": "봉제인형",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -817,13 +895,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "514 ぬいぐるみ ポケモン fit バオッキー",
-            "zh": "514 毛绒玩偶 宝可梦 fit 爆香猿",
-            "ko": "514 봉제인형 Pokémon fit 바오키",
-            "en": "514 ぬいぐるみ Pokémon fit バオッキー"
+            "ja": "포켓몬센터 마스코트 키링 두둔 둔감 야아 야도란",
+            "zh": "宝可梦中心 玩偶钥匙扣 咚咚 迟钝 呀啊 呆壳兽",
+            "ko": "포켓몬센터 마스코트 키링 두둔 둔감 야아 야도란",
+            "en": "포켓몬센터 마스코트 키링 두둔 둔감 야아 야도란"
           },
-          "release_date": null,
-          "price_jpy": 1540,
+          "release_date": "2025-02-17",
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -831,21 +909,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "name"
+            "image"
           ],
           "source_ids": [
-            "pokemon_center_jp"
+            "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329343976.html"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=124396824"
           ]
         },
         {
-          "kit_id": "pokemon-center-4521329359953",
+          "kit_id": "pokemon-kr-124396823",
           "change_type": "changed",
           "franchise": "pokemon",
           "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
+          "subline": "봉제인형",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -854,13 +932,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "53 ぬいぐるみ ポケモン fit ペルシアン",
-            "zh": "53 毛绒玩偶 宝可梦 fit 猫老大",
-            "ko": "53 봉제인형 Pokémon fit 페르시온",
-            "en": "53 ぬいぐるみ Pokémon fit ペルシアン"
+            "ja": "포켓몬센터 마스코트 키링 두둔 둔감 야아 야도킹",
+            "zh": "宝可梦中心 玩偶钥匙扣 咚咚 迟钝 呀啊 呆呆王",
+            "ko": "포켓몬센터 마스코트 키링 두둔 둔감 야아 야도킹",
+            "en": "포켓몬센터 마스코트 키링 두둔 둔감 야아 야도킹"
           },
-          "release_date": null,
-          "price_jpy": 1540,
+          "release_date": "2025-02-17",
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -868,21 +946,21 @@
             "pokemon"
           ],
           "change_reasons": [
-            "name"
+            "image"
           ],
           "source_ids": [
-            "pokemon_center_jp"
+            "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329359953.html"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=124396823"
           ]
         },
         {
-          "kit_id": "pokemon-center-4521329350622",
+          "kit_id": "pokemon-kr-124396825",
           "change_type": "changed",
           "franchise": "pokemon",
           "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
+          "subline": "봉제인형",
           "series_key": "pokemon",
           "series_labels": {
             "zh": "宝可梦",
@@ -891,13 +969,13 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "649 ぬいぐるみ ポケモン fit ゲノセクト",
-            "zh": "649 毛绒玩偶 宝可梦 fit 盖诺赛克特",
-            "ko": "649 봉제인형 Pokémon fit 게노세크트",
-            "en": "649 ぬいぐるみ Pokémon fit ゲノセクト"
+            "ja": "포켓몬센터 마스코트 키링 두둔 둔감 야아 야돈",
+            "zh": "宝可梦中心 玩偶钥匙扣 咚咚 迟钝 呀啊 呆呆兽",
+            "ko": "포켓몬센터 마스코트 키링 두둔 둔감 야아 야돈",
+            "en": "포켓몬센터 마스코트 키링 두둔 둔감 야아 야돈"
           },
-          "release_date": null,
-          "price_jpy": 1650,
+          "release_date": "2025-02-17",
+          "price_jpy": null,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
@@ -905,13 +983,235 @@
             "pokemon"
           ],
           "change_reasons": [
-            "name"
+            "image"
           ],
           "source_ids": [
-            "pokemon_center_jp"
+            "pokemon_store_kr"
           ],
           "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329350622.html"
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=124396825"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-124396826",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 줄줄이 봉제인형 두둔 둔감 야아 야돈",
+            "zh": "宝可梦中心 串串 毛绒玩偶 咚咚 迟钝 呀啊 呆呆兽",
+            "ko": "포켓몬센터 줄줄이 봉제인형 두둔 둔감 야아 야돈",
+            "en": "포켓몬센터 줄줄이 봉제인형 두둔 둔감 야아 야돈"
+          },
+          "release_date": "2025-02-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=124396826"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-119592413",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 Hug you! 봉제인형 빠모트",
+            "zh": "宝可梦中心 Hug you! 毛绒玩偶 布土拨",
+            "ko": "포켓몬센터 Hug you! 봉제인형 빠모트",
+            "en": "포켓몬센터 Hug you! 봉제인형 빠모트"
+          },
+          "release_date": "2024-07-16",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=119592413"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-118529139",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 마스코트 싸리용 친구들 싸리용 뻗은 모습",
+            "zh": "宝可梦中心 挂件 米立龙 伙伴们 米立龙 挺直姿势",
+            "ko": "포켓몬센터 마스코트 싸리용 친구들 싸리용 뻗은 모습",
+            "en": "포켓몬센터 마스코트 싸리용 친구들 싸리용 뻗은 모습"
+          },
+          "release_date": "2024-03-29",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=118529139"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-118529124",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "봉제인형",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬센터 봉제인형 싸리용 친구들 한판내기",
+            "zh": "宝可梦中心 毛绒玩偶 米立龙 伙伴们 一决胜负",
+            "ko": "포켓몬센터 봉제인형 싸리용 친구들 한판내기",
+            "en": "포켓몬센터 봉제인형 싸리용 친구들 한판내기"
+          },
+          "release_date": "2024-03-29",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=118529124"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-118032417",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 포켓파를레의 대타출동 랜덤 아크릴 팝톡",
+            "zh": "宝可梦商店 宝可梦乐园的替身 盲盒 亚克力 手机气囊支架",
+            "ko": "포켓몬 스토어 포켓파를레의 대타출동 랜덤 아크릴 팝톡",
+            "en": "포켓몬 스토어 포켓파를레의 대타출동 랜덤 아크릴 팝톡"
+          },
+          "release_date": "2024-03-10",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=118032417"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-118032407",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 포켓파를레의 대타출동 러그",
+            "zh": "宝可梦商店 宝可梦乐园的替身 地垫",
+            "ko": "포켓몬 스토어 포켓파를레의 대타출동 러그",
+            "en": "포켓몬 스토어 포켓파를레의 대타출동 러그"
+          },
+          "release_date": "2024-03-10",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=118032407"
           ]
         }
       ],
@@ -3932,7 +4232,7 @@
           "names": {
             "ja": "포켓몬센터 봉제인형 ポケモン fit 고지",
             "zh": "포켓몬센터 봉제인형 宝可梦 fit 고지",
-            "ko": "포켓몬센터 봉제인형 포켓몬 fit 고지 (2026년)",
+            "ko": "포켓몬센터 봉제인형 포켓몬 fit 고지",
             "en": "포켓몬센터 봉제인형 Pokemon fit 고지"
           },
           "release_date": "2026-11-12",
