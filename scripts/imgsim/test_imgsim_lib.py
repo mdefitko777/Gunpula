@@ -125,8 +125,10 @@ b16 = v2['models'][1]
 assert b16['file'] == 'siglip2-b16-256-wi8.tflite' and b16['vectors']['file'] == 'imgsim-vectors-siglip2-b16-256-wi8.bin'
 assert b16['vectors']['model'] == B16 and b16['vectors']['coverage'] == 0.45 and b16['output']['dim'] == 768
 _, v2 = L.build_manifests(models, {B32: vec_info(900), B16: vec_info(882)})
+assert v2['default'] == B32, 'held: B/16 is not promoted until the owner flips PROMOTE_PREFERRED'
+_, v2 = L.build_manifests(models, {B32: vec_info(900), B16: vec_info(882)}, promote=True)
 assert v2['default'] == B16, 'B/16 holds 98 % of the kits B/32 holds (not of the gallery: some hosts refuse)'
-_, v2 = L.build_manifests(models, {B32: vec_info(900), B16: vec_info(881)})
+_, v2 = L.build_manifests(models, {B32: vec_info(900), B16: vec_info(881)}, promote=True)
 assert v2['default'] == B32
 _, v2 = L.build_manifests({B32: models[B32]}, {B32: vec_info(900), B16: vec_info(900)})
 assert [m['id'] for m in v2['models']] == [B32] and v2['default'] == B32, 'a model without its file is not listed'
@@ -169,7 +171,7 @@ try:
     assert m1['model']['sha256'] == hashlib.sha256(b'model-b32').hexdigest() and m1['model']['bytes'] == 9
     with open(os.path.join(out, 'imgsim-v2.json'), encoding='utf-8') as f:
         m2 = json.load(f)
-    assert m2['default'] == B16 and m2['models'][0]['id'] == B32
+    assert m2['default'] == (B16 if L.PROMOTE_PREFERRED else B32) and m2['models'][0]['id'] == B32
     for name in ('imgsim-vectors.bin', 'imgsim-vectors-siglip2-b16-256-wi8.bin', 'imgsim-v2.json', 'imgsim.json'):
         shutil.copy(os.path.join(out, name), os.path.join(rel, name))
     assert publish() == [], 'nothing changed → nothing uploaded'

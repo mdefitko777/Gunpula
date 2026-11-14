@@ -37,6 +37,9 @@ PREFERRED_MODEL = 'siglip2-b16-256-wi8'
 # fill re-reads every gallery image and takes one or two daily runs. Compared with B/32, not with the gallery: some
 # images can never be read (pokemoncenter-online answers 403, 2026-11-14).
 MIN_DEFAULT_COVERAGE = 0.98
+# Owner hold (2026-11-14): B/16 is built and listed so it can be measured on the phones, but it does not become the
+# default until its on-device speed is known (estimated 0.7–1.5 s per photo vs 0.2–0.4 s) — flip this to promote it.
+PROMOTE_PREFERRED = False
 
 
 def src_hash(url):
@@ -183,7 +186,7 @@ def model_entry(model_id, meta, info):
     return dict(id=model_id, file=name, url=RELEASE_URL + name, bytes=info['bytes'], sha256=info['sha256'], **out)
 
 
-def build_manifests(models, vectors):
+def build_manifests(models, vectors, promote=None):
     """models: {id: (model meta, {bytes, sha256})}, vectors: {id: vectors info} → (imgsim.json, imgsim-v2.json).
 
     imgsim.json stays schema 1 with exactly the fields installed apps read (B/32 only); imgsim-v2.json lists every
@@ -201,7 +204,9 @@ def build_manifests(models, vectors):
             meta, info = models[mid]
             listed.append(dict(model_entry(mid, meta, info), vectors=vectors_entry(mid, vectors[mid])))
     default = LEGACY_MODEL
-    if PREFERRED_MODEL in vectors and PREFERRED_MODEL in models:
+    if promote is None:
+        promote = PROMOTE_PREFERRED
+    if promote and PREFERRED_MODEL in vectors and PREFERRED_MODEL in models:
         want = vectors[LEGACY_MODEL]['kits'] if v1 else 0
         if vectors[PREFERRED_MODEL]['kits'] >= MIN_DEFAULT_COVERAGE * want:
             default = PREFERRED_MODEL
