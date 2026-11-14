@@ -8,9 +8,11 @@ import { existsSync } from "node:fs";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import { pendingUrls, planRepoThumbs } from "./build_thumbs.mjs";
+import { downloadPath, fetchHost, pendingUrls, planRepoThumbs, thumbDigest } from "./build_thumbs.mjs";
+import { createHostStops } from "./lib/official-announcements.mjs";
 import {
   addFeedThumbs,
+  crossHostTwins,
   buildThumbMap,
   coverOf,
   feedKitIds,
@@ -34,6 +36,55 @@ const AKAMAI = "https://bandai-a.akamaihd.net/bc/img/model/b/1000256190_1.jpg";
 assert.equal(repoThumbRel("catalog/pokemon/a-01-b6e76f25b4.jpg"), "thumbs/repo/catalog/pokemon/a-01-b6e76f25b4.jpg.webp", "x.jpg and x.png never share a thumbnail");
 assert.match(webThumbFile(AKAMAI), /^bandai-a\.akamaihd\.net\/[0-9a-f]{16}\.webp$/);
 assert.equal(webThumbFile(AKAMAI), webThumbFile(AKAMAI), "stable: the same URL is never copied twice");
+{
+  // A thumbnail made again gets a new name, so phones that cached the old picture load the new one.
+  const a = webThumbFile(AKAMAI, Buffer.from("yoshi"));
+  const b = webThumbFile(AKAMAI, Buffer.from("ux-22"));
+  assert.match(a, /^bandai-a\.akamaihd\.net\/[0-9a-f]{16}-[0-9a-f]{8}\.webp$/);
+  assert.notEqual(a, b);
+  assert.ok(a.startsWith(webThumbFile(AKAMAI).slice(0, -".webp".length)), "the URL part stays");
+  assert.equal(thumbDigest(a), a.slice(-13, -5));
+  assert.equal(thumbDigest(webThumbFile(AKAMAI)), null, "older names carry no digest");
+}
+
+// --- Covers of two hosts with one thumbnail (2026-11-14: UX-22 showed stds.jp's LEGO Yoshi).
+{
+  const twins = crossHostTwins([
+    { url: "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/UX22_list.png", digest: "aa" },
+    { url: "https://stds.jp/wp-content/uploads/2026/11/lego-yoshi.webp", digest: "aa" },
+    { url: "https://bandai-a.akamaihd.net/bc/img/model/b/1.jpg", digest: "bb" },
+    { url: "https://bandai-a.akamaihd.net/bc/img/model/b/2.jpg", digest: "bb" },
+    { url: "https://bandai-a.akamaihd.net/bc/img/model/b/3.jpg", digest: null },
+  ]);
+  assert.deepEqual([...twins].sort(), ["https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/UX22_list.png", "https://stds.jp/wp-content/uploads/2026/11/lego-yoshi.webp"]);
+}
+
+// --- Hosts download at the same time: each cover keeps its own bytes. Until 2026-11-14 the
+//     temporary file was named after downloads.length, so two hosts wrote the same file.
+{
+  const tmp = await mkdtemp(path.join(os.tmpdir(), "gunpula-thumbs-race-"));
+  try {
+    const urls = { "a.example": "https://a.example/img/ux22.png", "b.example": "https://b.example/img/yoshi.webp" };
+    const fetchImpl = async (url) => {
+      if (url.endsWith("/robots.txt")) return new Response("", { status: 404 });
+      // b answers first, a a moment later: both writes are pending at the same time.
+      await new Promise((resolve) => setTimeout(resolve, url.includes("a.example") ? 5 : 0));
+      return new Response(Buffer.from(`picture of ${url}`), { status: 200, headers: { "content-type": "image/png" } });
+    };
+    const downloads = [];
+    const shared = { deadline: Date.now() + 60000, stops: createHostStops(), tmp, index: { failed: {} }, downloads, fetchImpl, gapMs: 0 };
+    await Promise.all(Object.entries(urls).map(([host, url]) => fetchHost(host, [url], shared)));
+    assert.equal(downloads.length, 2);
+    assert.notEqual(downloads[0].src, downloads[1].src, "one temporary file per cover");
+    for (const item of downloads) {
+      assert.equal(item.src, downloadPath(tmp, item.url));
+      assert.equal(await readFile(item.src, "utf8"), `picture of ${item.url}`, "the file holds this cover's bytes");
+      assert.equal(item.sha, createHash("sha1").update(`picture of ${item.url}`).digest("hex"));
+    }
+  } finally {
+    await rm(tmp, { recursive: true, force: true });
+  }
+}
 assert.equal(
   ruleThumb("https://cdn.rebrickable.com/media/sets/31209-1.jpg"),
   "https://cdn.rebrickable.com/media/thumbs/sets/31209-1.jpg/250x250p.jpg",

@@ -8,7 +8,8 @@
 //
 // Layout under app/assets/thumbs/ (published to the image shards, not the site):
 //   repo/<dir>/<file>.webp   one per photo in app/assets/<dir> (made in the publish job, not committed)
-//   web/<host>/<sha1(url) 16>.webp   remote covers (fetched daily by .github/workflows/thumbs.yml, committed)
+//   web/<host>/<sha1(url) 16>-<sha1(webp) 8>.webp   remote covers (fetched daily by .github/workflows/thumbs.yml,
+//                            committed); the ones copied before 2026-11-14 have no "-<sha1(webp) 8>"
 
 import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
@@ -36,8 +37,30 @@ export function repoThumbRel(rel) {
   return `thumbs/repo/${rel}.webp`;
 }
 
-export function webThumbFile(url) {
-  return `${new URL(url).host}/${createHash("sha1").update(url).digest("hex").slice(0, 16)}.webp`;
+// With the thumbnail's bytes, the name also carries their hash. The app keeps a picture for 30
+// days without asking again (hobby-atlas-v3 NetImageFiles.keepFor), so a thumbnail made again for
+// the same cover needs a new name: on 2026-11-14 twenty web thumbnails showed another host's
+// picture (BEYBLADE X UX-22 showed LEGO Yoshi, build_thumbs.mjs fetchHost), and a fix under the
+// old name would have stayed on the phones for a month.
+export function webThumbFile(url, thumbBytes = null) {
+  const name = createHash("sha1").update(url).digest("hex").slice(0, 16);
+  const content = thumbBytes ? `-${createHash("sha1").update(thumbBytes).digest("hex").slice(0, 8)}` : "";
+  return `${new URL(url).host}/${name}${content}.webp`;
+}
+
+/**
+ * [{ url, digest }] → the urls whose thumbnail bytes (digest) equal a cover's on another host.
+ * Two makers do not share a picture byte for byte; one host can (a maker photo reused on two
+ * product pages: 9 such groups on 2026-11-14), so those are left alone.
+ */
+export function crossHostTwins(entries) {
+  const hostsByDigest = new Map();
+  for (const { url, digest } of entries) {
+    if (!digest) continue;
+    if (!hostsByDigest.has(digest)) hostsByDigest.set(digest, new Set());
+    hostsByDigest.get(digest).add(new URL(url).host);
+  }
+  return new Set(entries.filter(({ digest }) => digest && hostsByDigest.get(digest).size > 1).map(({ url }) => url));
 }
 
 export function ruleThumb(url, rules = THUMB_RULES) {

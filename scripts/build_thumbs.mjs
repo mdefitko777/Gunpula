@@ -6,6 +6,7 @@
 //                                                        remote covers, feeds and new items first
 //                                                        -> app/assets/thumbs/web/ (thumbs.yml, daily; committed)
 //   node scripts/build_thumbs.mjs --plan                 how many are missing, no network
+//   node scripts/build_thumbs.mjs --purge-twins          drops web thumbnails equal to another host's cover
 //
 // --repo regenerates only photos whose bytes (or THUMB_RECIPE) changed (app/assets/thumbs/repo/index.json
 // keeps "<recipe>:<sha1 of the photo>") and removes thumbnails of photos that are gone. --fetch reads each remote cover once
@@ -15,12 +16,13 @@
 
 import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
-import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, readdir, rename, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { loadRobots, robotsAllows } from "./lib/robots.mjs";
 import { createHostStops } from "./lib/official-announcements.mjs";
 import {
+  crossHostTwins,
   feedKitIds,
   makeThumbs,
   REPO_SOURCE_DIRS,
@@ -115,14 +117,29 @@ async function candidates() {
   return thumbCandidates({ kits, boxart, firstSeen, feedIds, restockIds, announcements });
 }
 
+// The "-<sha1(webp) 8>" part of a web thumbnail name (webThumbFile), null for the older names.
+export function thumbDigest(file) {
+  return /-([0-9a-f]{8})\.webp$/.exec(file || "")?.[1] || null;
+}
+
 // Remote covers still to fetch: not copied yet and not a recent 404.
 export function pendingUrls(urls, index, today = new Date()) {
   const cutoff = today.getTime() - RETRY_FAILED_DAYS * 24 * 60 * 60 * 1000;
   return urls.filter((url) => !index.thumbs?.[url] && !(index.failed?.[url] && Date.parse(index.failed[url].at) > cutoff));
 }
 
-async function fetchHost(host, urls, { deadline, stops, tmp, index, downloads }) {
-  const robots = await loadRobots(host, { userAgent: USER_AGENT });
+const sha1 = (bytes) => createHash("sha1").update(bytes).digest("hex");
+
+// Every host runs at the same time (fetchWeb). Until 2026-11-14 the temporary file was named after
+// downloads.length, read before an await and pushed after it, so two hosts could write the same
+// file and both covers got a thumbnail of whichever came last: 10 cross-host pairs, BEYBLADE X
+// UX-22 showing the LEGO Yoshi cover of stds.jp. The name now comes from the URL alone.
+export function downloadPath(tmp, url) {
+  return path.join(tmp, sha1(url));
+}
+
+export async function fetchHost(host, urls, { deadline, stops, tmp, index, downloads, fetchImpl = globalThis.fetch, gapMs = HOST_GAP_MS }) {
+  const robots = await loadRobots(host, { userAgent: USER_AGENT, fetchImpl });
   let last = Date.now();
   if (robots.disallowAll) {
     console.log(`${host}: robots.txt ${robots.status}; ${urls.length} covers left`);
@@ -137,11 +154,11 @@ async function fetchHost(host, urls, { deadline, stops, tmp, index, downloads })
       console.log(`${error.message}; the rest of its covers wait for the next run`);
       break;
     }
-    const wait = last + HOST_GAP_MS - Date.now();
+    const wait = last + gapMs - Date.now();
     if (wait > 0) await new Promise((resolve) => setTimeout(resolve, wait));
     last = Date.now();
     try {
-      const response = await fetch(url, { headers: { "User-Agent": USER_AGENT, Accept: "image/*" }, redirect: "follow", signal: AbortSignal.timeout(30000) });
+      const response = await fetchImpl(url, { headers: { "User-Agent": USER_AGENT, Accept: "image/*" }, redirect: "follow", signal: AbortSignal.timeout(30000) });
       last = Date.now();
       stops.record(url, response.status);
       const type = response.headers.get("content-type") || "";
@@ -155,9 +172,9 @@ async function fetchHost(host, urls, { deadline, stops, tmp, index, downloads })
       }
       const bytes = Buffer.from(await response.arrayBuffer());
       if (bytes.length > MAX_SOURCE_BYTES) continue;
-      const src = path.join(tmp, `${downloads.length}`);
+      const src = downloadPath(tmp, url);
       await writeFile(src, bytes);
-      downloads.push({ url, src, bytes: bytes.length });
+      downloads.push({ url, src, bytes: bytes.length, sha: sha1(bytes) });
     } catch (error) {
       console.log(`${host}: ${error.message}`);
     }
@@ -183,22 +200,42 @@ async function fetchWeb({ minutes, limit }) {
   try {
     await Promise.all([...byHost].map(([host, urls]) => fetchHost(host, urls, { deadline, stops, tmp, index, downloads })));
     let sourceBytes = 0;
-    let made = 0;
+    const made = [];
     for (let i = 0; i < downloads.length; i += BATCH) {
-      const part = downloads.slice(i, i + BATCH);
+      const part = [];
+      for (const item of downloads.slice(i, i + BATCH)) {
+        // The file must still hold the bytes read for this URL, or the thumbnail shows another cover.
+        if (sha1(await readFile(item.src)) === item.sha) part.push(item);
+        else console.log(`  skipped ${item.url}: its download was overwritten`);
+      }
       const results = makeThumbs(part.map((item) => ({ src: item.src, dst: path.join(THUMB_ROOT, "web", webThumbFile(item.url)) })));
-      part.forEach((item, j) => {
-        if (!results[j]?.ok) return;
-        index.thumbs[item.url] = webThumbFile(item.url);
-        sourceBytes += item.bytes;
-        made += 1;
-      });
+      for (const [j, item] of part.entries()) {
+        if (!results[j]?.ok) continue;
+        const provisional = path.join(THUMB_ROOT, "web", webThumbFile(item.url));
+        const bytes = await readFile(provisional);
+        const file = webThumbFile(item.url, bytes);
+        await rename(provisional, path.join(THUMB_ROOT, "web", file));
+        made.push({ url: item.url, file, digest: thumbDigest(file), bytes: item.bytes });
+      }
     }
-    console.log(`Copied ${made} remote covers (${(sourceBytes / 1024 / 1024).toFixed(1)} MB of originals); ${pendingUrls(await candidates(), index).length} left.`);
+    // A safety net for the race above: covers of two hosts with the same thumbnail are not published.
+    const known = Object.entries(index.thumbs).map(([url, file]) => ({ url, digest: thumbDigest(file) }));
+    const twins = crossHostTwins([...known, ...made]);
+    for (const item of made) {
+      if (twins.has(item.url)) {
+        console.log(`  left out ${item.url}: same thumbnail as a cover on another host`);
+        await rm(path.join(THUMB_ROOT, "web", item.file), { force: true });
+        continue;
+      }
+      index.thumbs[item.url] = item.file;
+      sourceBytes += item.bytes;
+    }
+    const copied = made.filter((item) => !twins.has(item.url)).length;
+    console.log(`Copied ${copied} remote covers (${(sourceBytes / 1024 / 1024).toFixed(1)} MB of originals); ${pendingUrls(await candidates(), index).length} left.`);
   } finally {
     await rm(tmp, { recursive: true, force: true });
     await writeJson(WEB_THUMB_INDEX, {
-      note: "Remote cover -> its 400 px WebP thumbnail under app/assets/thumbs/web/ (scripts/build_thumbs.mjs --fetch). failed: 404/410 answers, retried after 30 days.",
+      note: "Remote cover -> its 400 px WebP thumbnail under app/assets/thumbs/web/ (scripts/build_thumbs.mjs --fetch), named <sha1(url) 16>-<sha1(webp) 8> since 2026-11-14. failed: 404/410 answers, retried after 30 days.",
       thumbs: sortKeys(index.thumbs),
       failed: sortKeys(index.failed),
     });
@@ -216,6 +253,32 @@ async function plan() {
   console.log(`Repo photos ${photos.length}, with thumbnail ${photos.filter((rel) => repoIndex[rel]).length}.`);
   console.log(`Remote covers ${urls.length}, copied ${Object.keys(webIndex.thumbs || {}).length}, failed ${Object.keys(webIndex.failed || {}).length}, pending ${pending.length}:`);
   for (const [host, count] of Object.entries(hosts).sort((a, b) => b[1] - a[1])) console.log(`  ${host} ${count}`);
+  const twins = await webTwins(webIndex);
+  console.log(`Web thumbnails equal to another host's: ${twins.length}${twins.length ? " (--purge-twins removes them)" : ""}`);
+  for (const url of twins) console.log(`  ${url}`);
+}
+
+// Web thumbnails that are byte for byte another host's cover: what the fetchHost race left behind.
+async function webTwins(webIndex) {
+  const entries = [];
+  for (const [url, file] of Object.entries(webIndex.thumbs || {})) {
+    const abs = path.join(THUMB_ROOT, "web", file);
+    if (existsSync(abs)) entries.push({ url, digest: sha1(await readFile(abs)) });
+  }
+  return [...crossHostTwins(entries)].sort();
+}
+
+// Removes them from the index and the shards' source folder; the next --fetch copies them again
+// under content-hashed names, so phones that cached the wrong picture load the new one.
+async function purgeTwins() {
+  const webIndex = await readJson(WEB_THUMB_INDEX, {});
+  const twins = await webTwins(webIndex);
+  for (const url of twins) {
+    await rm(path.join(THUMB_ROOT, "web", webIndex.thumbs[url]), { force: true });
+    delete webIndex.thumbs[url];
+  }
+  await writeJson(WEB_THUMB_INDEX, webIndex);
+  console.log(`Removed ${twins.length} web thumbnails made from another host's cover.`);
 }
 
 function sortKeys(object) {
@@ -231,6 +294,7 @@ async function main() {
   const argv = process.argv.slice(2);
   const option = (name, fallback) => Number(argv.find((arg) => arg.startsWith(`--${name}=`))?.split("=")[1] ?? fallback);
   if (argv.includes("--repo")) await buildRepo();
+  else if (argv.includes("--purge-twins")) await purgeTwins();
   else if (argv.includes("--fetch")) await fetchWeb({ minutes: option("minutes", 8), limit: option("limit", 5000) });
   else await plan();
 }
