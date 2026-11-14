@@ -94,6 +94,7 @@ import {
   runUnofficialSource,
   unofficialSource,
 } from "./lib/unofficial-feeds.mjs";
+import { NEWS_SOURCE_ID as NINTENDO_KR_NEWS_SOURCE_ID, NEWS_URL as NINTENDO_KR_NEWS_URL, parseNintendoNews } from "./lib/nintendo-kr.mjs";
 import { loadRobots, robotsAllows } from "./lib/robots.mjs";
 import {
   BEYBLADE_ORDER_TITLE,
@@ -771,6 +772,19 @@ const SOURCES = [
     },
   },
   {
+    // 한국닌텐도's news list (the 닌텐도 channel): product posts only (lib/nintendo-kr.mjs), a few a
+    // week, so the daily run is enough. Plain HTML; the site's scripts are never run.
+    id: NINTENDO_KR_NEWS_SOURCE_ID,
+    name: "한국닌텐도",
+    url: NINTENDO_KR_NEWS_URL,
+    run: async () => {
+      const html = await fetchText(NINTENDO_KR_NEWS_URL);
+      // A page without article links is a markup change, not a quiet week.
+      if (!html.includes("/kr/news/article/")) throw new Error(`${NINTENDO_KR_NEWS_URL} lists no articles`);
+      return parseNintendoNews(html);
+    },
+  },
+  {
     id: "gundam_base_news",
     name: "THE GUNDAM BASE",
     url: GUNDAM_BASE_NEWS_URL,
@@ -966,7 +980,7 @@ const twinTimes = twinPreorders(twinPool, [...magazine.dropped, ...media.dropped
 // Then each record linked to the catalog product whose own page it is.
 const sourceLinks = linkSourcePageKits(
   deduped.records.map((record) => applyPreorder(record, twinTimes.get(record.id), { ...preorderOptions, fillOnly: true })),
-  [...(await readCatalogKits(["gundam", "pokemon", "fate", "beyblade", "armored_core", "madoka"])).values()].flat(),
+  [...(await readCatalogKits(["gundam", "pokemon", "fate", "beyblade", "armored_core", "madoka", "nintendo"])).values()].flat(),
 );
 if (sourceLinks.linked.length) console.log(`Linked ${sourceLinks.linked.length} records to the catalog product of their page.`);
 const announcements = sourceLinks.records;

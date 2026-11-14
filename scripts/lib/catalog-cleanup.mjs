@@ -154,8 +154,10 @@ export function goodsRuleKind(name) {
 
 // Grade a goods record gets in its franchise. Prize, kuji, gashapon and goods
 // lines already say how the item is sold and keep their grade.
-export const GOODS_GRADE = { gundam: "GUNDAM_MERCH", fate: "FATE_GOODS", pokemon: "POKE_GOODS" };
+export const GOODS_GRADE = { gundam: "GUNDAM_MERCH", fate: "FATE_GOODS", pokemon: "POKE_GOODS", nintendo: "NIN_GOODS" };
 export const KEEPS_GRADE_AS_GOODS = /MERCH|GOODS|PRIZE|KUJI|GASHAPON/;
+// Nintendo games, hardware and amiibo are never goods, whatever words their names carry.
+export const NINTENDO_PRODUCT_LINES = new Set(["NIN_GAME", "NIN_HW", "NIN_AMIIBO"]);
 
 // ---------------------------------------------------------------------------
 // Gundam grade detection from product names

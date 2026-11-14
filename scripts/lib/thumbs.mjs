@@ -27,8 +27,11 @@ export const REPO_SOURCE_DIRS = ["catalog", "kotobukiya-ac", "bbx", "announcemen
 export const SITE_BASE = "https://mdefitko777.github.io/Gunpula/";
 // Hosts with their own thumbnails: no copy needed. Rebrickable: 250x250p is the size its own set
 // lists use (2026-11-14: 104 KB for 31209-1, whose original is 4.25 MB / 2048x2160).
+// 반다이남코코리아몰's CDN resizes any goods picture itself (2026-11-14: ?resize=400&format=webp
+// gives a 400 px WebP of the 2176x1440 /big/ photo).
 export const THUMB_RULES = [
   { prefix: "https://cdn.rebrickable.com/media/sets/", thumb_prefix: "https://cdn.rebrickable.com/media/thumbs/sets/", thumb_suffix: "/250x250p.jpg" },
+  { prefix: "https://cdn.bnkrmall.co.kr/live/data/base/goods/", thumb_prefix: "https://cdn.bnkrmall.co.kr/live/data/base/goods/", thumb_suffix: "?resize=400&format=webp" },
 ];
 
 const IMAGE_EXT = /\.(?:jpe?g|png|gif|webp)$/i;

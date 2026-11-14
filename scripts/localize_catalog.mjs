@@ -2,6 +2,7 @@ import { appendFile, readFile, writeFile } from "node:fs/promises";
 import { realpathSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { fateClassifier } from "./atlas/lib/atlas_groups.mjs";
+import { seriesOfKit as nintendoSeries } from "./lib/nintendo-kr.mjs";
 
 const CATALOG_FILE = "data/kits.json";
 
@@ -1199,6 +1200,10 @@ function classifySeries(kit) {
       labels: { zh: LEGO_THEME_ZH[theme] || theme, en: theme, ja: theme, ko: LEGO_THEME_KO[theme] || theme },
       universe: "LEGO",
     };
+  }
+  if (kit.franchise === "nintendo") {
+    // One series per Nintendo world (Mario, Zelda …), from the Korean name; not in SERIES.
+    return nintendoSeries(kit);
   }
   if (kit.franchise === "madoka") {
     const keys = ["madoka_walpurgis", "madoka_rebellion", "madoka_magireco", "madoka_tv"];

@@ -37,6 +37,7 @@ import {
   GOODS_KINDS,
   KEEPS_GRADE_AS_GOODS,
   KIT_ALIASES_PATH,
+  NINTENDO_PRODUCT_LINES,
   bandaiImageId,
   emptyAliases,
   goodsKind,
@@ -126,8 +127,10 @@ const monthIndex = (date) => {
 
 // 1. Goods, in every franchise. A curated kind (data/goods-kinds.json) wins,
 //    then the name rules; a record classified on an earlier run keeps its kind.
+//    Nintendo's games, hardware and amiibo say what they are by their grade: the goods
+//    words would make a console case "household" (lib/nintendo-kr.mjs).
 for (const kit of catalog.kits) {
-  if (!isLive(kit)) continue;
+  if (!isLive(kit) || NINTENDO_PRODUCT_LINES.has(kit.grade_code)) continue;
   const curated = GOODS_KINDS.includes(goodsOverrides[kit.kit_id]) ? goodsOverrides[kit.kit_id] : null;
   const kind = curated || goodsKind(kit) || (GOODS_KINDS.includes(kit.goods_kind) ? kit.goods_kind : null);
   if (!kind) continue;

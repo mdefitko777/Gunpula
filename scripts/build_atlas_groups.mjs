@@ -19,6 +19,7 @@
 // Empty groups are left out. `--report=<file>` writes every product's group and reason (for review).
 import { readFileSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
+import { NINTENDO_SERIES } from "./lib/nintendo-kr.mjs";
 import { hasKana } from "./lib/zh-names.mjs";
 import { armoredCoreClassifier, fateClassifier, lang, madokaClassifier, MADOKA_CHARACTERS, pokemonClassifier, POKEMON_GAMES, AC_TITLES, productText } from "./atlas/lib/atlas_groups.mjs";
 
@@ -348,6 +349,36 @@ function legoGroups() {
     .sort((a, b) => Number(LEGO_TAIL_THEMES.has(a.labels.en)) - Number(LEGO_TAIL_THEMES.has(b.labels.en)) || b.count - a.count);
 }
 
+// ─────────────── Nintendo: one group per world (series from lib/nintendo-kr.mjs) ───────────────
+function nintendoGroups() {
+  const order = NINTENDO_SERIES.map((series) => `nintendo_${series.id}`);
+  const bySeries = new Map();
+  for (const k of kits.filter((x) => x.franchise === "nintendo")) {
+    const key = k.series?.key || "nintendo_other";
+    (bySeries.get(key) || bySeries.set(key, []).get(key)).push(k);
+  }
+  return [...bySeries.entries()]
+    .map(([key, list]) => {
+      const labels = list[0].series?.labels || {};
+      // A game or a console of the world first, the newest one, as its cover.
+      const newest = [...list]
+        .filter((k) => k.images?.box_art_url)
+        .sort((a, b) => Number(b.grade_code === "NIN_GAME") - Number(a.grade_code === "NIN_GAME") || String(b.release_date || "").localeCompare(String(a.release_date || "")))[0];
+      return {
+        id: key,
+        kind: "series",
+        labels: lang(labels.zh || labels.en || key, labels.ko || labels.en || key, labels.en || key, labels.ja || labels.en || key),
+        subtitle: lang("", "", "", ""),
+        image: newest?.images.box_art_url || "",
+        cover_source: "newest game picture (Nintendo Store Korea)",
+        kit_ids: list.map((k) => k.kit_id),
+        count: list.length,
+      };
+    })
+    // Bigger worlds first, "기타" last.
+    .sort((a, b) => Number(a.id === "nintendo_other") - Number(b.id === "nintendo_other") || b.count - a.count || order.indexOf(a.id) - order.indexOf(b.id));
+}
+
 const LEGO_TAIL_THEMES = new Set(["Gear", "Books", "Service Packs", "Bulk Bricks", "Promotional", "LEGO Brand Store", "Legoland", "Legoland Parks", "Other", "Educational and Dacta", "FIRST LEGO League", "Games", "Power Functions", "Value Packs", "Universal Building Set"]);
 
 // ─────────────── Gundam timeline (unchanged: GGEN series logos per work) ───────────────
@@ -413,6 +444,7 @@ function channels() {
     armored_core: ch("armored_core", lang("装甲核心", "아머드 코어", "Armored Core", "アーマード・コア")),
     madoka: ch("madoka", lang("魔法少女小圆", "마도카 마기카", "Madoka Magica", "まどか☆マギカ")),
     lego: ch("lego", lang("乐高", "레고", "LEGO", "レゴ")),
+    nintendo: ch("nintendo", lang("任天堂", "닌텐도", "Nintendo", "任天堂")),
   };
 }
 
@@ -443,6 +475,7 @@ const output = {
     madoka: madokaGroups(),
     beyblade: beybladeGroups(),
     lego: legoGroups(),
+    nintendo: nintendoGroups(),
   },
 };
 
@@ -450,4 +483,4 @@ await writeFile("data/atlas-groups.json", `${JSON.stringify(output, null, 2)}\n`
 if (reportArg) await writeFile(reportArg, `${JSON.stringify(report, null, 1)}\n`, "utf8");
 const summary = (list) => list.map((g) => `${g.id}:${g.count}`).join(" ");
 console.log(`atlas groups: pokemon ${output.franchises.pokemon.length}, fate ${output.franchises.fate.length}, ac ${output.franchises.armored_core.length}, gundam timeline ${output.franchises.gundam_timeline.length}`);
-for (const f of ["pokemon", "fate", "armored_core", "madoka", "beyblade"]) console.log(`  ${f}: ${summary(output.franchises[f])}`);
+for (const f of ["pokemon", "fate", "armored_core", "madoka", "beyblade", "nintendo"]) console.log(`  ${f}: ${summary(output.franchises[f])}`);

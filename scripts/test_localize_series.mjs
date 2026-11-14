@@ -99,4 +99,12 @@ assert.equal(v2.names.en, "HGUC 1 / 144 V2 Assault Buster Gundam");
   assert.equal(lego("Some New Theme").zh, "Some New Theme", "a theme the file does not know keeps its name");
 }
 
+// ── Nintendo: one series per world from the Korean name (lib/nintendo-kr.mjs), work_title = its English label ──
+{
+  const zelda = localizeKit(kit("nintendo", "키홀더 론론 우유 젤다의 전설"));
+  assert.deepEqual([zelda.series.key, zelda.series.labels.zh, zelda.work_title, zelda.universe], ["nintendo_zelda", "塞尔达传说", "The Legend of Zelda", "Nintendo"]);
+  check("nintendo", "닌텐도 사운드 클록 Alarmo", "nintendo_other");
+  check("nintendo", "amiibo 소라", "nintendo_smash", { subline: "슈퍼 스매시브라더스 시리즈" });
+}
+
 console.log("localize series: ok");

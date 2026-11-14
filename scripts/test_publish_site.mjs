@@ -93,6 +93,7 @@ const f = (size, sha = `s${size}`) => ({ size, sha });
     for (const [name, text] of [["kit-aliases.json", "{}"], ["kits-gundam.json", "[]"]]) contentHash.update(`${name}\0`).update(text).update("\0");
     assert.equal(first.content_hash, contentHash.digest("hex").slice(0, 16), "content_hash is computed as before");
     assert.deepEqual(first.image_shards, ["https://x.example/img-1/"]);
+    assert.deepEqual(first.franchise_hashes, { gundam: createHash("sha256").update("[]").digest("hex").slice(0, 16) }, "one hash per channel file");
     assert.deepEqual(Object.keys(first.files), ["announcements.json", "atlas/restocks.json", "split/kit-aliases.json"]);
     assert.equal(first.files["announcements.json"], createHash("sha256").update('{"items":[]}').digest("hex").slice(0, 16));
     assert.deepEqual(JSON.parse(await readFile(path.join(dataDir, "split/manifest.json"), "utf8")), first, "written to the published manifest");

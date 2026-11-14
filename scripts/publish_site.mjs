@@ -353,10 +353,17 @@ export async function stampManifest(dataDir, imageShards) {
   const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
   const hash = createHash("sha256");
   const splitDir = path.join(dataDir, "split");
+  // Per channel too (2026-11-14): the app downloads only the channels a user picked (a new one such
+  // as nintendo is off until chosen), so it fetches kits-<franchise>.json again only when that changed.
+  const franchiseHashes = {};
   for (const name of (await readdir(splitDir)).filter((n) => n !== "manifest.json" && n.endsWith(".json")).sort()) {
-    hash.update(`${name}\0`).update(await readFile(path.join(splitDir, name))).update("\0");
+    const bytes = await readFile(path.join(splitDir, name));
+    hash.update(`${name}\0`).update(bytes).update("\0");
+    const franchise = /^kits-(.+)\.json$/.exec(name)?.[1];
+    if (franchise) franchiseHashes[franchise] = createHash("sha256").update(bytes).digest("hex").slice(0, 16);
   }
   manifest.content_hash = hash.digest("hex").slice(0, 16);
+  manifest.franchise_hashes = franchiseHashes;
   manifest.image_shards = imageShards;
   manifest.files = await sideFileHashes(dataDir);
   await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);

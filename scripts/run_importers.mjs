@@ -19,11 +19,17 @@ const STEPS = [
   { script: "import:collectibles", kind: "source" },
   { script: "import:pokemon-center", kind: "source" },
   { script: "import:pokemon-kr", kind: "source" },
+  // Korean releases sold by the Japanese makers' Korean partners; after the Japanese and the
+  // 포켓몬스토어 importers, so a listing of a product the catalog has joins that record.
+  { script: "import:bnkr-pokemon", kind: "source" },
+  { script: "import:academy-pokemon", kind: "source" },
   { script: "import:takaratomy-pokemon", kind: "source" },
   { script: "import:pokemon-extra", kind: "source" },
   { script: "import:fate", kind: "source" },
   { script: "import:fate-extra", kind: "source" },
   { script: "import:madoka", kind: "source" },
+  // The 닌텐도 channel (store.nintendo.co.kr, nintendo.com/kr); about 6 minutes the first time.
+  { script: "import:nintendo-kr", kind: "source" },
   // Rebrickable allows downloading its catalog archives at most once a day; the script skips
   // the download when data/lego/rebrickable-fetch.json already has today's date.
   { script: "import:lego", kind: "source" },

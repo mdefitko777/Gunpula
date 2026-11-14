@@ -59,3 +59,21 @@ npm run sources
 | www.amazon.co.jp、web.joongna.com（行情） | CI 上每天 503 robot check / CloudFront 403，robots.txt 允许 | 连续两次被拒就休息 7 天再问一次（`data/market_auto_listings.json` 的 `retry_after`） | 这两家的行情 |
 | tamashii-nation.tamashiiweb.com robots.txt | S3 对不存在的文件回 403 | 当作没有 robots.txt，日志不写成 403 | 无 |
 | www.youtube.com 播放页 | 读几页后出现登录 bot check | 当次停止 YouTube；轻量刷新不读 YouTube | 部分直播时间晚一天 |
+| search.nintendo.jp（日本任天堂软件列表、发售日程、amiibo 阵容背后的 JSON） | robots.txt 是 `User-Agent: * Disallow: /`（2026-11-14） | 不读；任天堂频道改用韩国官方的 store.nintendo.co.kr 和 nintendo.com/kr | 日本的 amiibo、日本独有的软件和发售日 |
+| store-jp.nintendo.com（My Nintendo Store 日本） | robots 允许 /list/，但每个商品页都跳到 Queue-it 排队页（store-jp-wr.nintendo.com，要跑 JS 拿令牌），属于 bot check | 不读 | 日本任天堂商店的周边（约 800 件）和 amiibo（约 140 件） |
+| www.nintendo.com/kr/amiibo/lineup 的「더보기」 | 页面只内嵌最新 20 个 amiibo，其余要客户端 JS 调 Contentful API | 只读内嵌的 20 个，读过的记录保留；不跑网页 JS、不直接调 API | 2024-02 以前的韩国 amiibo |
+
+## 韩国来源（2026-11-14 起）
+
+项目原则仍是日本官方来源优先；下面这些是韩国官方或官方授权方，补韩国发售、韩文名和韩元价格，以及日本来源拿不到的任天堂频道。规则都在 `scripts/lib/` 对应文件里，抓取用 `scripts/lib/polite-fetch.mjs`（bot UA、先读 robots.txt、同站 ≥1.1 秒一次、403/429/503/bot check/跳到别的站就停）。
+
+| 来源 | 脚本 | 拿什么 | 注意点 |
+|---|---|---|---|
+| 닌텐도 스토어 store.nintendo.co.kr | `import_nintendo_korea.mjs`（`nintendo_store_kr`） | 任天堂频道：游戏（实体＋下载合为一条）、主机与配件、amiibo 卡、周边；发售日、厂商、图片来自商品页 | robots.txt 为空（全允许）。只收任天堂发行的游戏；DLC、升级通行证、Online 会员、点卡、体验版、散装零件、线材、存储卡不收。商品页只读新商品和未发售的（每周再读一次），记在 `data/nintendo/store-details.json` |
+| 한국닌텐도 www.nintendo.com/kr | 同上（`nintendo_kr`）、`fetch_bandai_announcements.mjs`（`nintendo_kr_news`） | 发售日程（只取「한국닌텐도」发行的）、最新 20 个 amiibo、新闻里的商品消息 | robots.txt 对 `*` 允许，但点名拒绝 ClaudeBot、GPTBot 等 AI 爬虫；本 bot 属于 `*`。数据从服务器渲染的 flight 数据里读，不跑网页 JS |
+| 반다이남코코리아몰 www.bnkrmall.co.kr | `import_bnkr_pokemon.mjs`（`bnkrmall_kr`） | 万代的宝可梦韩国发售：포켓프라、프라코로、나노블럭、스케일 월드、깜짝에그；韩元价、JAN（商品页「모델명」） | 条款页在 robots 禁止的 /cscenter/ 下，店主决定按允许处理；读的路径（/goods/）robots 允许。没有发售日，用图片上传月份当上架月 |
+| 아카데미과학 academy.co.kr | `import_academy_pokemon.mjs`（`academy_kr`） | 多美的宝可梦韩国发售：몬콜레（含旧 EMC/EHP/ESP）、포켓피스、말랑콕콕、포코피아 | 只读搜索列表（商品页没有 JAN、发售日）；发售年取自 S{YY} 商品编号。不是 academyhobby.co.kr（零售店） |
+
+合并规则：韩国商品是目录里已有的同一商品时不新建记录，只给原记录加来源、韩元价、JAN（原记录没有时）—— JAN 相同；或 Pokepla 线和编号相同（QUICK!! 29 = 퀵!! 29，No.62 = 62 셀렉트 시리즈）；或 MonColle 的宝可梦韩文名相同且两边写了的尺寸一致；都只在恰好一条候选时才合并（「피카츄」这种多条候选的不合并）。韩国店自建的记录（`bnkr-<gno>`、`academy-<product_no>`）以后匹配上目录记录时，旧 id 写进 `data/kit-aliases.json`。
+
+宝可梦与任天堂的重叠：游戏、主机、配件（包括宝可梦作品，如 Pokopia、LEGENDS Z-A）归 `nintendo` 频道（系列 `nintendo_pokemon`，标签 `pokemon`）；포켓몬스토어 的「닌텐도 게임」分类照旧不导入，所以不会重复。宝可梦角色周边留在 `pokemon`。

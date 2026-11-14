@@ -1119,6 +1119,83 @@
         "everything but the image"
       ],
       "notes": "data/manual-images.json: an official maker / store image chosen by hand per product; applied by scripts/apply_manual_images.mjs only while the product has no cover of its own."
+    },
+    {
+      "source_id": "nintendo_store_kr",
+      "name": "Nintendo Store Korea (닌텐도 스토어)",
+      "type": "official_retail_kr",
+      "country": "KR",
+      "base_url": "https://store.nintendo.co.kr/",
+      "priority": 13,
+      "best_for": [
+        "Nintendo games (package and download)",
+        "Nintendo Switch / Switch 2 hardware and accessories",
+        "Nintendo character goods",
+        "Korean product names",
+        "KRW price",
+        "release date"
+      ],
+      "weak_for": [
+        "JAN",
+        "yen price",
+        "other publishers games (left out)"
+      ],
+      "notes": "Magento store, server-rendered; robots.txt allows everything (2026-11-14). Lists /physical/physical-all and /digital/digital-all?publisher=14, product pages for 발매일 / 메이커."
+    },
+    {
+      "source_id": "nintendo_kr",
+      "name": "Nintendo Korea (한국닌텐도)",
+      "type": "official_maker_kr",
+      "country": "KR",
+      "base_url": "https://www.nintendo.com/kr/",
+      "priority": 13,
+      "best_for": [
+        "release schedule of upcoming Nintendo games",
+        "amiibo lineup (newest 20)",
+        "product news"
+      ],
+      "weak_for": [
+        "price",
+        "older amiibo (only the newest 20 are in the page)"
+      ],
+      "notes": "Next.js; the schedule and amiibo lineup are read from the server-rendered flight data, never by running the site JavaScript. robots.txt allows * (it opts out named AI crawlers)."
+    },
+    {
+      "source_id": "bnkrmall_kr",
+      "name": "BANDAI NAMCO Korea Mall (반다이남코코리아몰)",
+      "type": "official_retail_kr",
+      "country": "KR",
+      "base_url": "https://www.bnkrmall.co.kr/",
+      "priority": 14,
+      "best_for": [
+        "Korean releases of Bandai Pokémon products (포켓프라, 나노블럭, 스케일 월드, 식완)",
+        "Korean product names",
+        "KRW price",
+        "JAN (모델명)"
+      ],
+      "weak_for": [
+        "release date (not shown)"
+      ],
+      "notes": "Bandai Namco Korea official mall, server-rendered. Search list + product pages for the JAN; robots.txt allows the paths read (its terms page sits under a disallowed path: treated as allowed by the owner, 2026-11-14)."
+    },
+    {
+      "source_id": "academy_kr",
+      "name": "Academy Science (아카데미과학)",
+      "type": "official_retail_kr",
+      "country": "KR",
+      "base_url": "https://academy.co.kr/",
+      "priority": 14,
+      "best_for": [
+        "Korean releases of Takara Tomy Pokémon toys (몬콜레, 포켓피스 …)",
+        "Korean product names",
+        "KRW price",
+        "release year (S{YY} product code)"
+      ],
+      "weak_for": [
+        "JAN",
+        "exact release date"
+      ],
+      "notes": "Korean licensee of Takara Tomy Pokémon toys; Cafe24 shop, the search list only. Not academyhobby.co.kr (a retailer)."
     }
   ]
 }
