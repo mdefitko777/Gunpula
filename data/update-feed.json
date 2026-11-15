@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-15",
-  "generated_at": "2026-11-15T10:55:40.423Z",
+  "generated_at": "2026-11-15T23:38:05.600Z",
   "watch_tags": [
     "seed",
     "00"
@@ -20,37 +20,38 @@
     "effects"
   ],
   "source_health": {
-    "generated_at": "2026-11-15T10:55:20.087Z",
+    "generated_at": "2026-11-15T23:37:41.690Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-15",
-      "generated_at": "2026-11-15T10:55:40.423Z",
+      "generated_at": "2026-11-15T23:38:05.600Z",
       "total_before": 41615,
       "total_after": 41542,
       "added_count": 1,
-      "changed_count": 97,
+      "changed_count": 103,
       "removed_count": 0,
       "watched_count": 8,
       "merged_count": 0,
       "backfilled_count": 0,
       "renamed_count": 0,
-      "premium_bandai_count": 71,
+      "premium_bandai_count": 72,
       "bbx_count": 0,
       "franchise_counts": {
-        "gundam": 73,
+        "gundam": 74,
         "lego": 3,
         "madoka": 21,
-        "pokemon": 1
+        "pokemon": 6
       },
       "reason_counts": {
         "new": 1,
-        "archive": 70,
+        "archive": 71,
         "limited": 6,
         "source": 24,
-        "image": 29
+        "image": 29,
+        "name": 5
       },
       "interest_tags": [
         "gundam",
@@ -631,6 +632,47 @@
           ],
           "source_urls": [
             "https://rebrickable.com/sets/6651644-1/"
+          ]
+        },
+        {
+          "kit_id": "hg-hg-1-144-4573102691859000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "g",
+          "series_labels": {
+            "zh": "G",
+            "en": "G",
+            "ja": "G",
+            "ko": "G"
+          },
+          "names": {
+            "ja": "HG 1 / 144 マンダラガンダム",
+            "zh": "HG 1 / 144 曼陀罗高达",
+            "ko": "HG 1/144 만다라 건담",
+            "en": "HG 1 / 144 マンダラGundam"
+          },
+          "release_date": "2025-11",
+          "price_jpy": 2915,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "archive"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102691859000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000260742/"
           ]
         },
         {
@@ -3931,6 +3973,154 @@
           ]
         },
         {
+          "kit_id": "pokemon-center-4521329317311",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "369 ぬいぐるみ ポケモン fit ジーランス",
+            "zh": "369 毛绒玩偶 宝可梦 fit 古空棘鱼",
+            "ko": "369 봉제인형 Pokémon fit 시라칸",
+            "en": "369 ぬいぐるみ Pokémon fit ジーランス"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329317311.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329341347",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "487 ぬいぐるみ ポケモン fit ギラティナ (アナザーフォルム)",
+            "zh": "487 毛绒玩偶 宝可梦 fit 骑拉帝纳 (别种形态)",
+            "ko": "487 봉제인형 Pokémon fit 기라티나 (어나더폼)",
+            "en": "487 ぬいぐるみ Pokémon fit ギラティナ (アナザーフォルム)"
+          },
+          "release_date": null,
+          "price_jpy": 1650,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329341347.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329349794",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "581 ぬいぐるみ ポケモン fit スワンナ",
+            "zh": "581 毛绒玩偶 宝可梦 fit 舞天鹅",
+            "ko": "581 봉제인형 Pokémon fit 스완나",
+            "en": "581 ぬいぐるみ Pokémon fit スワンナ"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329349794.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329366722",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "666 ぬいぐるみ ポケモン fit ビビヨン(せつげんのもよう)",
+            "zh": "666 毛绒玩偶 宝可梦 fit 彩粉蝶(雪原花纹)",
+            "ko": "666 봉제인형 Pokémon fit 비비용(설원의 모양)",
+            "en": "666 ぬいぐるみ Pokémon fit ビビヨン(せつげんのもよう)"
+          },
+          "release_date": null,
+          "price_jpy": 1980,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329366722.html"
+          ]
+        },
+        {
           "kit_id": "pokemon-center-4521329452579",
           "change_type": "changed",
           "franchise": "pokemon",
@@ -3965,6 +4155,43 @@
           ],
           "source_urls": [
             "https://www.pokemoncenter-online.com/4521329452579.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329423173",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "マスコット POKÉMON TRAINERS ネリネ",
+            "zh": "挂件 宝可梦训练家系列 纳莉",
+            "ko": "마스코트 POKÉMON TRAINERS 네리네",
+            "en": "マスコット POKÉMON TRAINERS ネリネ"
+          },
+          "release_date": null,
+          "price_jpy": 1870,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329423173.html"
           ]
         }
       ],
@@ -220721,10 +220948,10 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "666 ぬいぐるみ Pok&eacute;mon fit ビビヨン(せつげんのもよう)",
+            "ja": "666 ぬいぐるみ ポケモン fit ビビヨン(せつげんのもよう)",
             "zh": "666 毛绒玩偶 宝可梦 fit 彩粉蝶(雪原花纹)",
             "ko": "666 봉제인형 Pokémon fit 비비용(설원의 모양)",
-            "en": "666 ぬいぐるみ Pok&eacute;mon fit ビビヨン(せつげんのもよう)"
+            "en": "666 ぬいぐるみ Pokémon fit ビビヨン(せつげんのもよう)"
           },
           "release_date": null,
           "price_jpy": 1980,
@@ -255211,10 +255438,10 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "マスコット POK&Eacute;MON TRAINERS ネリネ",
+            "ja": "マスコット POKÉMON TRAINERS ネリネ",
             "zh": "挂件 宝可梦训练家系列 纳莉",
             "ko": "마스코트 POKÉMON TRAINERS 네리네",
-            "en": "マスコット POK&Eacute;MON TRAINERS ネリネ"
+            "en": "マスコット POKÉMON TRAINERS ネリネ"
           },
           "release_date": null,
           "price_jpy": 1870,
