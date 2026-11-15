@@ -19,6 +19,7 @@
 // Empty groups are left out. `--report=<file>` writes every product's group and reason (for review).
 import { readFileSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
+import { effectGroups } from "./lib/effect-parts.mjs";
 import { NINTENDO_SERIES } from "./lib/nintendo-kr.mjs";
 import { hasKana } from "./lib/zh-names.mjs";
 import { armoredCoreClassifier, fateClassifier, lang, madokaClassifier, MADOKA_CHARACTERS, pokemonClassifier, POKEMON_GAMES, AC_TITLES, productText } from "./atlas/lib/atlas_groups.mjs";
@@ -445,6 +446,7 @@ function channels() {
     madoka: ch("madoka", lang("魔法少女小圆", "마도카 마기카", "Madoka Magica", "まどか☆マギカ")),
     lego: ch("lego", lang("乐高", "레고", "LEGO", "レゴ")),
     nintendo: ch("nintendo", lang("任天堂", "닌텐도", "Nintendo", "任天堂")),
+    effects: ch("effects", lang("特效件", "이펙트", "Effects", "エフェクト")),
   };
 }
 
@@ -476,6 +478,8 @@ const output = {
     beyblade: beybladeGroups(),
     lego: legoGroups(),
     nintendo: nintendoGroups(),
+    // One group per kind of effect (smoke, explosion …); lib/effect-parts.mjs.
+    effects: effectGroups(kits, lang),
   },
 };
 
@@ -483,4 +487,4 @@ await writeFile("data/atlas-groups.json", `${JSON.stringify(output, null, 2)}\n`
 if (reportArg) await writeFile(reportArg, `${JSON.stringify(report, null, 1)}\n`, "utf8");
 const summary = (list) => list.map((g) => `${g.id}:${g.count}`).join(" ");
 console.log(`atlas groups: pokemon ${output.franchises.pokemon.length}, fate ${output.franchises.fate.length}, ac ${output.franchises.armored_core.length}, gundam timeline ${output.franchises.gundam_timeline.length}`);
-for (const f of ["pokemon", "fate", "armored_core", "madoka", "beyblade", "nintendo"]) console.log(`  ${f}: ${summary(output.franchises[f])}`);
+for (const f of ["pokemon", "fate", "armored_core", "madoka", "beyblade", "nintendo", "effects"]) console.log(`  ${f}: ${summary(output.franchises[f])}`);

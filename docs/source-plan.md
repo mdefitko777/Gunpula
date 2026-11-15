@@ -77,3 +77,15 @@ npm run sources
 合并规则：韩国商品是目录里已有的同一商品时不新建记录，只给原记录加来源、韩元价、JAN（和原记录自己的 JAN 相同时写 `jan`，不同的是韩国版的，写 `jan_kr`，不覆盖 `jan`）—— JAN 相同（`jan`、id 里的 JAN 或 `jan_kr`）；或 Pokepla 线和编号相同（QUICK!! 29 = 퀵!! 29，No.62 = 62 셀렉트 시리즈）；或 MonColle 的宝可梦韩文名相同且两边写了的尺寸一致（아카데미 仍用旧 EX 名称卖 MS/ML：「EMC시리즈」= MS，「EHP시리즈」= ML，「ESP시리즈」只配没写尺寸的记录，如 Mega）；都只在恰好一条候选时才合并（「피카츄」这种多条候选的不合并）。反过来，同一条记录被店里几件商品匹配时，只让唯一一件用现行名称（몬콜레 MS …）的合并，用旧名称的留作自己的记录；没有唯一的就都不合并（「EMC시리즈 피카츄」有 S81329、S81336 两件）。韩国店自建的记录（`bnkr-<gno>`、`academy-<product_no>`）以后匹配上目录记录时，旧 id 写进 `data/kit-aliases.json`。
 
 宝可梦与任天堂的重叠：游戏、主机、配件（包括宝可梦作品，如 Pokopia、LEGENDS Z-A）归 `nintendo` 频道（系列 `nintendo_pokemon`，标签 `pokemon`）；포켓몬스토어 的「닌텐도 게임」分类照旧不导入，所以不会重复。宝可梦角色周边留在 `pokemon`。
+
+## 特效件频道 effects（2026-11-15 起）
+
+不属于任何作品的通用特效件（烟雾、爆炸、冲击、风、雷、水、火焰、气场、岩石……）归 `effects` 频道，App 里叫「이펙트 / 特效件 / Effects」，默认不开，用户在频道选择里自己加。为某个机体或角色做的特效件（光の翼、フィン・ファンネルエフェクト、ver. A.N.I.M.E. エフェクトパーツセット、ビルダーズパーツ MSエフェクト、水の呼吸エフェクトパーツSET）留在原作品的频道。脚本 `import_effect_parts.mjs`（`npm run import:effects`），规则在 `scripts/lib/effect-parts.mjs`，抓取用 `scripts/lib/polite-fetch.mjs`。
+
+| 来源 | 拿什么 | 注意点 |
+|---|---|---|
+| 魂ウェブ tamashiiweb.com（`tamashii_effect_jp`） | 魂EFFECT 全部 38 件（2014–2020 初代 + 现在的「for S.H.Figuarts」）：日文名、发售日、日元价、图片 | 搜索 API 按品牌筛（`brandCode[]=tamashii_effect`，和官网商品搜索同一参数），japan / asia / usa / emea 四个销售区各一页；海外区的 19 / 19 / 13 件都在 japan 里。商品页只读新商品和列表月份 / 价格变了的。再贩商品共用一个页面：`release_date` 用「初回発売日」，再贩日写进 notes。等级 `TAMASHII_EFFECT` |
+| BANDAI SPIRITS 商品搜索 www.bandaispirits.co.jp（沿用 `bandai_spirits_products_jp`） | カスタマイズエフェクト 8 件（2020–2021，任何模型都能用的塑料特效件）：日文名、发售日、日元价、JAN（`prd_id` 去掉末尾 000）、图片 | 和 Armored Core / Pokepla 读的是同一个商品搜索，robots.txt 404（无规则）。等级 `CUSTOMIZE_EFFECT` |
+| Good Smile Company www.goodsmile.com（`good_smile_effects_jp`） | THE シンプルエフェクト（`GSC_SIMPLE_EFFECT`）、MODEROID 的フレイム / ウインド / ウエーブエフェクト（`MODEROID_EFFECT`）：日文名、英文名、日元价、JAN、图片 | robots.txt 404（无规则）。搜「エフェクト」一页，按名字留下特效件（PROGENITOR EFFECT 套件、PLAMAX「エフェクトカラーVer.」不收）；日文、英文商品页各读一次。已出货的商品页不再显示发售时期，只有预约截止，所以这些记录没有发售日 |
+
+查过但没有收的：寿屋 shop.kotobukiya.co.jp 搜「エフェクト」「エフェクトユニット」都是 0 件（2026-11-15）；BANDAI SPIRITS 商品搜索里的其他「エフェクト」都是某个作品专用的（光の翼、螺旋丸、黒龍波……），留在原频道；HLJ 等店铺不作为记录来源。

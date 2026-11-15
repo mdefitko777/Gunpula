@@ -406,8 +406,9 @@ async function runTamashiiSchedule() {
   }
   // Every listed item's window, also for the posts of items it files no record for.
   for (const [itemId, window] of scheduleWindows([...items.values()])) preorderWindows.set(itemId, window);
-  // 魂ウェブ products are in the catalog for these worlds ("tamashii-16259", "tamashii-fate-13377").
-  const kits = await readCatalogKits(["gundam", "fate", "madoka"]);
+  // 魂ウェブ products are in the catalog for these worlds ("tamashii-16259", "tamashii-fate-13377");
+  // a 魂EFFECT item takes the effects channel from its record (its title names no work).
+  const kits = await readCatalogKits(["gundam", "fate", "madoka", "effects"]);
   const { records, state } = tamashiiScheduleRecords([...items.values()], {
     today,
     state: await readJson(SCHEDULE_STATE_PATH, {}),
@@ -980,7 +981,7 @@ const twinTimes = twinPreorders(twinPool, [...magazine.dropped, ...media.dropped
 // Then each record linked to the catalog product whose own page it is.
 const sourceLinks = linkSourcePageKits(
   deduped.records.map((record) => applyPreorder(record, twinTimes.get(record.id), { ...preorderOptions, fillOnly: true })),
-  [...(await readCatalogKits(["gundam", "pokemon", "fate", "beyblade", "armored_core", "madoka", "nintendo"])).values()].flat(),
+  [...(await readCatalogKits(["gundam", "pokemon", "fate", "beyblade", "armored_core", "madoka", "nintendo", "effects"])).values()].flat(),
 );
 if (sourceLinks.linked.length) console.log(`Linked ${sourceLinks.linked.length} records to the catalog product of their page.`);
 const announcements = sourceLinks.records;

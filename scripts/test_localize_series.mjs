@@ -109,4 +109,13 @@ assert.equal(v2.names.en, "HGUC 1 / 144 V2 Assault Buster Gundam");
   check("nintendo", "amiibo 소라", "nintendo_smash", { subline: "슈퍼 스매시브라더스 시리즈" });
 }
 
+// ── Effects: one series per kind of effect (lib/effect-parts.mjs); no work and no universe ──
+{
+  const smoke = localizeKit(kit("effects", "魂EFFECT SMOKE White Ver. for S.H.Figuarts", { work_title: null, universe: null }));
+  assert.deepEqual([smoke.series.key, smoke.series.labels.ko, smoke.work_title, smoke.universe], ["effects_smoke", "연기", null, null]);
+  assert.equal(smoke.names.ja, "魂EFFECT SMOKE White Ver. for S.H.Figuarts");
+  check("effects", "THE シンプルエフェクト《炎》RED", "effects_flame");
+  check("effects", "魂EFFECT SHOCK IMPACT Yellow Ver. for S.H.Figuarts", "effects_impact");
+}
+
 console.log("localize series: ok");

@@ -10,7 +10,9 @@ from urllib.parse import quote
 
 UA = 'HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)'
 RELEASE_URL = 'https://github.com/mdefitko777/Gunpula/releases/download/imgsim/'
-FRANCHISES = ['gundam', 'pokemon', 'fate', 'armored_core', 'beyblade', 'madoka']
+# Row franchise = index into this list (the vectors meta and imgsim-v2.json carry it): append only, never reorder.
+# 'effects' (2026-11-15): general effect parts are photographed like figures; LEGO and Nintendo stay out.
+FRANCHISES = ['gundam', 'pokemon', 'fate', 'armored_core', 'beyblade', 'madoka', 'effects']
 
 # FGO リアル脱出ゲーム tickets (264 Fate records, 2026-11-14) share a few near-identical event banners: one banner
 # matched 105 kits at cos > 0.97 and filled whole result grids. Nobody photographs a ticket to find it again.

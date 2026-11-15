@@ -57,6 +57,8 @@ assert rows == [
     ('b1', 'https://b/1.png', 4),
 ], rows
 assert L.FRANCHISES.index('fate') == 2 and 'lego' not in L.FRANCHISES
+assert L.FRANCHISES[:6] == ['gundam', 'pokemon', 'fate', 'armored_core', 'beyblade', 'madoka'], 'indices installed apps know'
+assert L.FRANCHISES.index('effects') == 6
 
 # --- rows of the new file: current images first, a kit whose new image is not read yet keeps its previous rows
 assert L.resolve_aliases({'a': 'b', 'b': 'c', 'x': 'y'}) == {'a': 'c', 'b': 'c', 'x': 'y'}

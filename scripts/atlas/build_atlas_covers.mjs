@@ -40,6 +40,8 @@ export const COVER_SOURCES = {
   "channel:pokemon": { wiki: wiki("Pok%C3%A9mon"), note: "International Pokémon logo" },
   "channel:fate": { url: "https://www.fate-go.jp/images/fate_ogp_3500.png", page: "https://www.fate-go.jp/", note: "Fate/Grand Order official site key visual (most Fate goods are FGO)" },
   "channel:nintendo": { url: "https://www.nintendo.co.kr/sns.png", page: "https://www.nintendo.co.kr/", note: "Nintendo Korea official site share image (logo)" },
+  // Most of the channel is 魂EFFECT; Good Smile has no share image for its effect lines.
+  "channel:effects": { url: "https://tamashiiweb.com/storage/images/brands/imported/og_tamashii_effect.jpg", page: "https://tamashiiweb.com/item_brand/tamashii_effect/", note: "Tamashii Web 魂EFFECT brand page share image" },
   "channel:armored_core": { url: "https://www.armoredcore.net/resources/images/common/ogp/ogp_image.png", page: "https://www.armoredcore.net/", note: "ARMORED CORE official site share image (AC VI logo)" },
   // Pokémon: one cover per generation = the generation's paired games.
   "pokemon:gen1": { wiki: wiki("Pok%C3%A9mon_Red_and_Blue") },

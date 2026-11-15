@@ -1196,6 +1196,45 @@
         "exact release date"
       ],
       "notes": "Korean licensee of Takara Tomy Pokémon toys; Cafe24 shop, the search list only. Not academyhobby.co.kr (a retailer)."
+    },
+    {
+      "source_id": "tamashii_effect_jp",
+      "name": "Tamashii Web (魂EFFECT)",
+      "type": "official_manufacturer_jp",
+      "country": "JP",
+      "base_url": "https://tamashiiweb.com/item_brand/tamashii_effect/",
+      "priority": 14,
+      "best_for": [
+        "魂EFFECT general effect parts (2014 line and the for S.H.Figuarts line)",
+        "exact release date",
+        "first release date of reissues",
+        "Japan price",
+        "official images"
+      ],
+      "weak_for": [
+        "JAN"
+      ],
+      "notes": "Tamashii Nations item search filtered by brand (brandCode[]=tamashii_effect) in the japan, asia, usa and emea sales areas; product pages for pictures. 38 products on 2026-11-15. robots.txt answers 404 (no rules)."
+    },
+    {
+      "source_id": "good_smile_effects_jp",
+      "name": "Good Smile Company Official Shop (effect parts)",
+      "type": "official_manufacturer_jp",
+      "country": "JP",
+      "base_url": "https://www.goodsmile.com/ja/",
+      "priority": 14,
+      "best_for": [
+        "THE シンプルエフェクト",
+        "MODEROID effect parts",
+        "Japan price",
+        "JAN",
+        "official images",
+        "English name"
+      ],
+      "weak_for": [
+        "release date of shipped products (the product page no longer shows it)"
+      ],
+      "notes": "goodsmile.com search for エフェクト, kept by name (シンプルエフェクト, MODEROID …エフェクト); ja and en product pages once per product. robots.txt answers 404 (no rules) on 2026-11-15."
     }
   ]
 }

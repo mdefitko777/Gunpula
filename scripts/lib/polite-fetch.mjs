@@ -1,8 +1,9 @@
 // The crawling rules of AGENTS.md as one small fetcher, for the importers written since 2026-11-14
-// (import_nintendo_korea.mjs, import_bnkr_pokemon.mjs, import_academy_pokemon.mjs): the bot's own
-// user agent, robots.txt read once per host before its first page, one request at a time per host
-// at least 1.1 s apart, and no second try: 403 / 429 / 503, a bot-check page or a redirect to
-// another host (a waiting room) throws, and the importer leaves its data as it was.
+// (import_nintendo_korea.mjs, import_bnkr_pokemon.mjs, import_academy_pokemon.mjs,
+// import_effect_parts.mjs): the bot's own user agent, robots.txt read once per host before its first
+// page, one request at a time per host at least 1.1 s apart, and no second try: 403 / 429 / 503, a
+// bot-check page or a redirect to another host (a waiting room) throws, and the importer leaves its
+// data as it was.
 //
 // Redirects are followed by hand. With redirect: "follow" a jump to another host (a Queue-it
 // waiting room, a login) was already requested before the host check saw it, without that host's

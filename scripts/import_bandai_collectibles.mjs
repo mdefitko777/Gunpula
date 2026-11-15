@@ -877,7 +877,8 @@ function parseTamashiiInfoValue(html, labelPattern) {
   return null;
 }
 
-function parseTamashiiProductDetail(html, detailUrl) {
+// Also reads the 魂EFFECT product pages for the effects channel (import_effect_parts.mjs).
+export function parseTamashiiProductDetail(html, detailUrl) {
   const title = stripTags(extract(/<span class="productMain__name">([\s\S]*?)<\/span>/, html));
   const brandName = stripTags(extract(/<span class="productMain__brand">[\s\S]*?<img[^>]+alt="([^"]+)"/, html));
   const gallery = extractTamashiiGalleryImages(html, detailUrl).slice(0, 24);
@@ -1088,7 +1089,7 @@ async function importTamashiiGundamFigures(existingKits = []) {
   return imported;
 }
 
-function parseBandaiSpiritProductCards(html, listingUrl) {
+export function parseBandaiSpiritProductCards(html, listingUrl) {
   return html
     .split('<div class="m_panel__listItem">')
     .slice(1)
@@ -1125,7 +1126,7 @@ function sameBandaiImageSeries(url, referenceUrl) {
   return Boolean(id && referenceId && id === referenceId);
 }
 
-function parseBandaiSpiritProductDetail(html, referenceImageUrl) {
+export function parseBandaiSpiritProductDetail(html, referenceImageUrl) {
   const images = unique([...html.matchAll(/https:\/\/bandai-a\.akamaihd\.net\/bc\/img\/model\/[^"')\s<>]+/g)].map((match) => match[0]));
   return {
     images: referenceImageUrl ? images.filter((url) => sameBandaiImageSeries(url, referenceImageUrl)) : images,

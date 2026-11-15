@@ -2,6 +2,7 @@ import { appendFile, readFile, writeFile } from "node:fs/promises";
 import { realpathSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { fateClassifier } from "./atlas/lib/atlas_groups.mjs";
+import { effectSeries } from "./lib/effect-parts.mjs";
 import { seriesOfKit as nintendoSeries } from "./lib/nintendo-kr.mjs";
 
 const CATALOG_FILE = "data/kits.json";
@@ -1205,6 +1206,10 @@ function classifySeries(kit) {
     // One series per Nintendo world (Mario, Zelda …), from the Korean name; not in SERIES.
     return nintendoSeries(kit);
   }
+  if (kit.franchise === "effects") {
+    // One series per kind of effect (smoke, explosion …); not in SERIES.
+    return effectSeries(kit);
+  }
   if (kit.franchise === "madoka") {
     const keys = ["madoka_walpurgis", "madoka_rebellion", "madoka_magireco", "madoka_tv"];
     const text = [kit.work_title, kit.names?.ja, kit.names?.en, kit.subline, ...(kit.tags ?? [])].map(decodeHtml).join(" ");
@@ -1267,6 +1272,8 @@ function classifySeries(kit) {
 }
 
 function workTitleForSeries(series, kit) {
+  // An effect part belongs to no work: its series is the kind of effect, not a title.
+  if (kit.franchise === "effects") return null;
   if (!series || series.key === "other") {
     return kit.work_title || null;
   }
