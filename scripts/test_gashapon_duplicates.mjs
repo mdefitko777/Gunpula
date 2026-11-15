@@ -82,5 +82,9 @@ assert.deepEqual(
 // ---------------------------------------------------------------- re-import keeps a folded price
 assert.equal(carryCleanupFields({ kit_id: "mse-18-1-item", price_jpy: 500 }, { kit_id: "mse-18-1-item", price_jpy: null }).price_jpy, 500);
 assert.equal(carryCleanupFields({ kit_id: "mse-18-1-item", price_jpy: 500 }, { kit_id: "mse-18-1-item", price_jpy: 600 }).price_jpy, 600);
+assert.equal(carryCleanupFields({ kit_id: "gsf-15-3-item", price_jpy: 500 }, { kit_id: "gsf-15-3-item", price_jpy: null }).price_jpy, 500);
+// Any other re-import that comes back without a price (オープン価格, dropped) still clears it.
+assert.equal(carryCleanupFields({ kit_id: "hg-rx-78-2", price_jpy: 1650 }, { kit_id: "hg-rx-78-2", price_jpy: null }).price_jpy, null);
+assert.equal(carryCleanupFields({ kit_id: "gundam-merch-4570117912345", price_jpy: 500 }, { kit_id: "gundam-merch-4570117912345", price_jpy: null }).price_jpy, null);
 
 console.log("gashapon duplicate tests passed");

@@ -347,6 +347,9 @@ export function premiumBandaiExclusiveEvidence(keeper, pages) {
   return null;
 }
 
+// Per-figure records of the gashapon figure lines (importEnsemble, importForte).
+const GASHAPON_FIGURE_ID = /^(?:mse|gsf)-/;
+
 /**
  * Re-import of `previous` as `kit` without losing what clean_catalog.mjs folded
  * into it: source refs of other sources (the PB pages it absorbed), the Premium
@@ -369,9 +372,10 @@ export function carryCleanupFields(previous, kit) {
     tags,
     // Goods classification (clean_catalog.mjs) survives a re-import too.
     ...(previous.goods_kind && !kit.goods_kind ? { category: "goods", goods_kind: previous.goods_kind } : {}),
-    // So does a price folded in from a dropped duplicate: no MOBILE SUIT ENSEMBLE figure
-    // finds its product page in the archive (0 of 220 on 2026-11-15), the wave card had it.
-    ...(kit.price_jpy == null && Number.isFinite(previous.price_jpy) ? { price_jpy: previous.price_jpy } : {}),
+    // So does the price a gashapon figure took from its folded wave card: no MOBILE SUIT
+    // ENSEMBLE figure finds its product page in the archive (0 of 220 on 2026-11-15). Only
+    // those figures: any other re-import without a price (オープン価格, dropped) clears it.
+    ...(GASHAPON_FIGURE_ID.test(kit.kit_id) && kit.price_jpy == null && Number.isFinite(previous.price_jpy) ? { price_jpy: previous.price_jpy } : {}),
   };
 }
 
