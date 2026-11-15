@@ -88,4 +88,4 @@ npm run sources
 | BANDAI SPIRITS 商品搜索 www.bandaispirits.co.jp（沿用 `bandai_spirits_products_jp`） | カスタマイズエフェクト 8 件（2020–2021，任何模型都能用的塑料特效件）：日文名、发售日、日元价、JAN（`prd_id` 去掉末尾 000）、图片 | 和 Armored Core / Pokepla 读的是同一个商品搜索，robots.txt 404（无规则）。等级 `CUSTOMIZE_EFFECT` |
 | Good Smile Company www.goodsmile.com（`good_smile_effects_jp`） | THE シンプルエフェクト（`GSC_SIMPLE_EFFECT`）、MODEROID 的フレイム / ウインド / ウエーブエフェクト（`MODEROID_EFFECT`）：日文名、英文名、日元价、JAN、图片 | robots.txt 404（无规则）。搜「エフェクト」一页，按名字留下特效件（PROGENITOR EFFECT 套件、PLAMAX「エフェクトカラーVer.」不收）；日文、英文商品页各读一次。已出货的商品页不再显示发售时期，只有预约截止，所以这些记录没有发售日 |
 
-查过但没有收的：寿屋 shop.kotobukiya.co.jp 搜「エフェクト」「エフェクトユニット」都是 0 件（2026-11-15）；BANDAI SPIRITS 商品搜索里的其他「エフェクト」都是某个作品专用的（光の翼、螺旋丸、黒龍波……），留在原频道；HLJ 等店铺不作为记录来源。
+查过但没有收的：寿屋 shop.kotobukiya.co.jp 的搜索（`search.aspx?keyword=`）只认 Shift_JIS 编码的关键词，UTF-8 编码的日文词一律 0 件（连「ウェポン」也是）；按 Shift_JIS 搜「エフェクト」「スモーク」「衝撃」0 件，「インパクト」「フレイム」只有武器（ウェポンユニット、バーチュアスタイル……），「爆発」只有トルハコ 背景シート，「M.S.G」是手、脸、贴纸和武器件，没有通用特效件（2026-11-15）；官网 www.kotobukiya.co.jp 对本 bot 回 403，没再读；BANDAI SPIRITS 商品搜索里的其他「エフェクト」都是某个作品专用的（光の翼、螺旋丸、黒龍波……），留在原频道；HLJ 等店铺不作为记录来源。
