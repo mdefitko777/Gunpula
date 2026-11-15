@@ -8,7 +8,7 @@ import {
   parseKotobukiyaShopDetail,
   parseKotobukiyaShopListings,
 } from "./lib/kotobukiya-shop.mjs";
-import { KIT_ALIASES_PATH, carryCleanupFields, gundamGradeFromName, nfkc, retiredKitIds } from "./lib/catalog-cleanup.mjs";
+import { KIT_ALIASES_PATH, carryCleanupFields, gashaponSetParts, gundamGradeFromName, nfkc, retiredKitIds } from "./lib/catalog-cleanup.mjs";
 import { HTML_ENTITIES } from "./lib/html-entities.mjs";
 import { buildSpeciesIndex, pokeplaIdentity, pokeplaNames, pokeplaSpeciesKey, pokeplaSubline } from "./lib/pokepla.mjs";
 import { readSalePages, salePageFromKit, seoulToday, upsertSalePage, writeSalePages } from "./lib/sale-pages.mjs";
@@ -1691,15 +1691,19 @@ async function fetchKotobukiyaShopText(url, { retry = true } = {}) {
   throw lastError;
 }
 
+const isForteExEntry = (entry) => /(^|-)ex\d+/i.test(entry.group || "") || /\bEX\d{3}\b/i.test(entry.set_title || "");
+
 function forteEntryIdentity(entry) {
-  const isExGallery = /(^|-)ex\d+/i.test(entry.group || "") || /\bEX\d{3}\b/i.test(entry.set_title || "");
-  if (!isExGallery) {
+  if (!isForteExEntry(entry)) {
     return `${entry.group}:${entry.index}:${entry.name}`;
   }
   return `${entry.group}:${entry.name.replace(/\s+/g, " ").trim()}`;
 }
 
-function collapseForteEntries(entries) {
+// An EX gallery shows the set ("将頑駄無&ハリマオ") and then each figure of it. One EX
+// capsule holds the whole set, so those photos go to the set's record
+// (clean_catalog.mjs folds the single-figure records made before 2026-11-15).
+export function collapseForteEntries(entries) {
   const byIdentity = new Map();
   for (const entry of entries) {
     const key = forteEntryIdentity(entry);
@@ -1710,7 +1714,15 @@ function collapseForteEntries(entries) {
     }
     current.images = unique([...(current.images || []), entry.image_url]);
   }
-  return [...byIdentity.values()];
+  const collapsed = [...byIdentity.values()];
+  const plainName = (entry) => nfkc(entry.name).replace(/\s+/g, "");
+  return collapsed.filter((entry) => {
+    if (!isForteExEntry(entry)) return true;
+    const set = collapsed.find((other) => other !== entry && other.group === entry.group && gashaponSetParts(other.name).includes(plainName(entry)));
+    if (!set) return true;
+    set.images = unique([...set.images, ...entry.images]);
+    return false;
+  });
 }
 
 async function importForte() {

@@ -10,6 +10,8 @@
 //   * sale pages of a product the catalog already has: Premium Bandai lottery /
 //     resale / 2次発送 pages, Tamashii Web 【抽選販売】/【2次：…発送分】 pages,
 //     Gashapon 【箱売】 box-sale cards of a capsule wave the catalog has;
+//   * line cards, box-set figures and EX single figures of the gashapon lines the
+//     catalog lists figure by figure (MOBILE SUIT ENSEMBLE, ガシャポン戦士f);
 //   * anything listed in data/kit-aliases.json: `aliases` (duplicates and
 //     everything this script folded on earlier runs) and `excluded` (curated:
 //     only records of the wrong franchise / IP, e.g. a 超宇宙刑事ギャバン Blu-ray
@@ -40,6 +42,7 @@ import {
   NINTENDO_PRODUCT_LINES,
   bandaiImageId,
   emptyAliases,
+  gashaponDuplicates,
   goodsKind,
   gundamGradeFromName,
   hasModelCode,
@@ -193,49 +196,33 @@ for (const kit of catalog.kits) {
   }
 }
 
-// 4. Gashapon. A line card ("MOBILE SUIT ENSEMBLE 06", "ガシャポン戦士フォルテ09")
-//    is the record of the whole wave; importEnsemble / importForte add the
-//    figures one by one next to it, so the card stays (tagged gashapon-wave)
-//    and passes its capsule price to figures that have none. 【箱売】 box-sale
-//    cards of a wave the catalog has are folded into the wave card.
+// 4. Gashapon. 【箱売】 box-sale cards of a capsule line the catalog has are
+//    folded into the line card. MOBILE SUIT ENSEMBLE and ガシャポン戦士f are listed
+//    figure by figure (importEnsemble / importForte), so their line cards
+//    ("MOBILE SUIT ENSEMBLE 06", "ガシャポン戦士フォルテ09"), the figures of a box
+//    set and the single figures of an EX set are folded into the figure records
+//    (gashaponDuplicates). A line card first passes its capsule price to the
+//    wave's figures that have none.
 {
-  const volumeKey = (text) =>
-    nfkc(text)
-      .replace(/.*(?:MOBILE SUIT ENSEMBLE|ガシャポン戦士(?:フォルテ|f))\s*/i, "")
-      .replace(/[~～]?Ver\.\s*FUKUOKA[~～]?/i, "fukuoka")
-      .replace(/[~～]?初音ミク color Ver\.[~～]?/i, "hatsunemiku")
-      .replace(/^ガンダムメカ$/, "mecha")
-      .replace(/\s+/g, "")
-      .toLowerCase();
-  const figureLines = new Map();
-  for (const kit of catalog.kits) {
-    if (!isLive(kit) || !["MSE", "GSF"].includes(kit.grade_code) || !/^(?:mse|gsf)-/.test(kit.kit_id)) continue;
-    const key = `${kit.grade_code}|${volumeKey(kit.subline)}`;
-    if (!figureLines.has(key)) figureLines.set(key, kit.subline);
-  }
   const plainName = (kit) => nfkc(kit.names?.ja).replace(/【[^】]*】/g, "").replace(/\s+/g, "");
   const lineByName = new Map();
   for (const kit of catalog.kits) {
     if (isLive(kit) && kit.kit_id.startsWith("gundam-merch-") && !/【箱売】/.test(kit.names?.ja || "")) lineByName.set(plainName(kit), kit);
   }
   for (const kit of catalog.kits) {
-    if (!isLive(kit) || !kit.kit_id.startsWith("gundam-merch-")) continue;
-    const name = nfkc(kit.names?.ja);
-    if (/【箱売】/.test(name)) {
-      const line = lineByName.get(plainName(kit));
-      if (line && line.kit_id !== kit.kit_id) addAlias(kit.kit_id, line.kit_id, "gashapon box-sale card of a wave card");
-      continue;
-    }
-    if (!["MSE", "GSF"].includes(kit.grade_code)) continue;
-    const subline = figureLines.get(`${kit.grade_code}|${volumeKey(name.replace(/【[^】]*】/g, "").trim())}`);
-    if (!subline) continue;
-    addTag(kit, "gashapon-wave");
-    // Per-figure records carry no price; the wave card has the capsule price.
-    if (Number.isFinite(kit.price_jpy)) {
+    if (!isLive(kit) || !kit.kit_id.startsWith("gundam-merch-") || !/【箱売】/.test(nfkc(kit.names?.ja))) continue;
+    const line = lineByName.get(plainName(kit));
+    if (line && line.kit_id !== kit.kit_id) addAlias(kit.kit_id, line.kit_id, "gashapon box-sale card of a wave card");
+  }
+  for (const { from, to, why } of gashaponDuplicates(catalog.kits.filter(isLive))) {
+    const card = kitsById.get(from);
+    const figure = kitsById.get(to);
+    if (card.kit_id.startsWith("gundam-merch-") && Number.isFinite(card.price_jpy)) {
       for (const sibling of catalog.kits) {
-        if (sibling.grade_code === kit.grade_code && sibling.subline === subline && sibling.price_jpy == null) sibling.price_jpy = kit.price_jpy;
+        if (sibling.grade_code === figure.grade_code && sibling.subline === figure.subline && sibling.price_jpy == null) sibling.price_jpy = card.price_jpy;
       }
     }
+    addAlias(from, to, why);
   }
 }
 

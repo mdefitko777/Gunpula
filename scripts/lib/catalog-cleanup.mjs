@@ -289,7 +289,7 @@ export function stripDisplaySaleTags(name) {
 }
 
 // Tags clean_catalog.mjs adds; importers keep them when they re-import a kit.
-export const CLEANUP_TAGS = ["accessory-kit", "premium-bandai-sale", "gashapon-wave"];
+export const CLEANUP_TAGS = ["accessory-kit", "premium-bandai-sale"];
 
 // ---------------------------------------------------------------------------
 // Premium Bandai exclusives
@@ -350,7 +350,7 @@ export function premiumBandaiExclusiveEvidence(keeper, pages) {
 /**
  * Re-import of `previous` as `kit` without losing what clean_catalog.mjs folded
  * into it: source refs of other sources (the PB pages it absorbed), the Premium
- * Bandai flags and order window, and the cleanup tags. Importers overwrite
+ * Bandai flags and order window, the cleanup tags and a price. Importers overwrite
  * every field they own, so without this the next daily run wiped the PB refs
  * and flags again.
  */
@@ -369,6 +369,9 @@ export function carryCleanupFields(previous, kit) {
     tags,
     // Goods classification (clean_catalog.mjs) survives a re-import too.
     ...(previous.goods_kind && !kit.goods_kind ? { category: "goods", goods_kind: previous.goods_kind } : {}),
+    // So does a price folded in from a dropped duplicate: no MOBILE SUIT ENSEMBLE figure
+    // finds its product page in the archive (0 of 220 on 2026-11-15), the wave card had it.
+    ...(kit.price_jpy == null && Number.isFinite(previous.price_jpy) ? { price_jpy: previous.price_jpy } : {}),
   };
 }
 
@@ -401,6 +404,106 @@ export function productKey(name, { keepCodes = true } = {}) {
     .replace(/1 ?\/ ?\d{2,4}/g, " ");
   if (!keepCodes) text = text.replace(MODEL_CODE, " ");
   return text.replace(/[\s・·()（）［］\[\]「」『』〔〕<>〈〉~～\-‐－—_/.,、。:：&＆!！?？'"“”+]/g, "").toLowerCase();
+}
+
+// ---------------------------------------------------------------------------
+// Gashapon figure lines (MOBILE SUIT ENSEMBLE, ガシャポン戦士f)
+// ---------------------------------------------------------------------------
+//
+// import_bandai_collectibles.mjs reads these lines twice: the archives (importEnsemble,
+// importForte) give one record per figure (mse-… / gsf-…), the Gashapon product search one
+// line card per wave (gundam-merch-<JAN>, "ガシャポン戦士フォルテ09"). Until 2026-11-15 the
+// card stayed next to its figures as the wave record, which put every wave in the app's
+// ガシャポン戦士f and MOBILE SUIT ENSEMBLE lists twice (18 + 43 cards); the figures are the products.
+
+const GASHAPON_FIGURE_GRADES = ["MSE", "GSF"];
+const BOX_SET_LINE = /^(.*?)\s+\d+個入り?セット$/;
+
+/** The wave a line card or a figure subline names: "…ガシャポン戦士フォルテ09" / "…ガシャポン戦士f 09" → "09". */
+export function gashaponVolumeKey(text) {
+  return nfkc(text)
+    .replace(/.*(?:MOBILE SUIT ENSEMBLE|ガシャポン戦士(?:フォルテ|f))\s*/i, "")
+    .replace(/[~～]?Ver\.\s*FUKUOKA[~～]?/i, "fukuoka")
+    .replace(/[~～]?初音ミク color Ver\.[~～]?/i, "hatsunemiku")
+    .replace(/^ガンダムメカ$/, "mecha")
+    .replace(/\s+/g, "")
+    .toLowerCase();
+}
+
+/** The figures an EX set names: "将頑駄無&ハリマオ" → ["将頑駄無", "ハリマオ"]; a single figure → []. */
+export function gashaponSetParts(name) {
+  const parts = nfkc(name)
+    .split("&")
+    .map((part) => part.replace(/\s+/g, ""))
+    .filter(Boolean);
+  return parts.length > 1 ? parts : [];
+}
+
+function gashaponFigureName(kit) {
+  const name = nfkc(kit.names?.ja);
+  const line = nfkc(kit.subline);
+  return (line && name.startsWith(line) ? name.slice(line.length) : name).replace(/\s+/g, "");
+}
+
+// The archive photo is named by the figure's F-number (img_102.jpg = F102), also on the
+// box-set page, whose own names can still be "？？？" (F102 ダリルバルデ, checked 2026-11-15).
+const photoFile = (kit) => String(kit.images?.box_art_url || "").replace(/[?#].*$/, "").split("/").pop();
+
+/**
+ * Gashapon records that repeat a product the catalog has figure by figure, as
+ * [{ from, to, why }] (kit_ids). `kits` are the live records.
+ *   - a line card of a wave whose figures are listed → the wave's first figure;
+ *   - a figure of a box set ("ガシャポン戦士f 15 12個入セット", Premium Bandai) → the same
+ *     figure (same photo, else same name) of the regular wave: the box holds capsules of it;
+ *   - a single figure of an EX set next to the set's record ("将頑駄無&ハリマオ") → the set:
+ *     one EX capsule holds the whole set.
+ * Figures of different waves (Hi-νガンダム in 01 and 1.5) are different releases and stay.
+ */
+export function gashaponDuplicates(kits) {
+  const folds = [];
+  const byId = (a, b) => a.kit_id.localeCompare(b.kit_id, "en", { numeric: true });
+  const lines = new Map();
+  for (const kit of kits) {
+    if (!GASHAPON_FIGURE_GRADES.includes(kit.grade_code) || !/^(?:mse|gsf)-/.test(kit.kit_id)) continue;
+    const line = nfkc(kit.subline);
+    if (!lines.has(line)) lines.set(line, []);
+    lines.get(line).push(kit);
+  }
+  for (const members of lines.values()) members.sort(byId);
+
+  const firstOfWave = new Map();
+  for (const [line, members] of lines) {
+    const key = `${members[0].grade_code}|${gashaponVolumeKey(line)}`;
+    const current = firstOfWave.get(key);
+    if (!current || byId(members[0], current) < 0) firstOfWave.set(key, members[0]);
+  }
+  for (const kit of kits) {
+    if (!kit.kit_id.startsWith("gundam-merch-") || !GASHAPON_FIGURE_GRADES.includes(kit.grade_code)) continue;
+    const name = nfkc(kit.names?.ja).replace(/【[^】]*】/g, "");
+    const first = firstOfWave.get(`${kit.grade_code}|${gashaponVolumeKey(name)}`);
+    if (first) folds.push({ from: kit.kit_id, to: first.kit_id, why: "gashapon line card of a wave listed figure by figure" });
+  }
+
+  for (const [line, members] of lines) {
+    const box = BOX_SET_LINE.exec(line);
+    const wave = box && lines.get(box[1]);
+    if (!wave) continue;
+    for (const kit of members) {
+      const same = wave.find((figure) => photoFile(figure) && photoFile(figure) === photoFile(kit)) || wave.find((figure) => gashaponFigureName(figure) === gashaponFigureName(kit));
+      if (same) folds.push({ from: kit.kit_id, to: same.kit_id, why: "gashapon box-set figure of a regular wave figure" });
+    }
+  }
+
+  for (const [line, members] of lines) {
+    if (!/\bEX\s*\d+/i.test(line)) continue;
+    for (const set of members) {
+      const parts = gashaponSetParts(gashaponFigureName(set));
+      for (const kit of members) {
+        if (kit !== set && parts.includes(gashaponFigureName(kit))) folds.push({ from: kit.kit_id, to: set.kit_id, why: "gashapon EX figure of its set" });
+      }
+    }
+  }
+  return folds;
 }
 
 // ---------------------------------------------------------------------------
