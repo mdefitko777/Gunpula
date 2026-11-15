@@ -1,5 +1,5 @@
 {
-  "note": "Official covers chosen by hand for products whose own source has no usable picture. Applied by scripts/apply_manual_images.mjs only while the product has no cover. url = the maker's own image, page = where it was found.",
+  "note": "Official covers chosen by hand for products whose own source has no usable picture. Applied by scripts/apply_manual_images.mjs only while the product has no cover. url = the maker's own image (or our cached copy of it, ./assets/…), page = where it was found.",
   "images": {
     "hobbysearch-fate-11368849": {
       "url": "https://alter-web.jp/uploads/products/20251105154520_MLiSN8MZ.jpg",
@@ -12,6 +12,14 @@
     "hobbysearch-fate-11485325": {
       "url": "https://palverse-figure.com/wordpress/wp-content/uploads/2026/10/08163128/1_PV_FGO_vol2_ALL.jpg",
       "page": "https://palverse-figure.com/product/product-4491/"
+    },
+    "pokemon-kr-133826318": {
+      "url": "./assets/catalog/pokemon/pokemon-center-4521329419053-01-beb7414397.jpg",
+      "page": "https://www.pokemoncenter-online.com/4521329419053.html"
+    },
+    "pokemon-kr-133826320": {
+      "url": "./assets/catalog/pokemon/pokemon-center-4521329419084-01-26d164dffc.jpg",
+      "page": "https://www.pokemoncenter-online.com/4521329419084.html"
     }
   }
 }

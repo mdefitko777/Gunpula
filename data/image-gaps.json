@@ -1,0 +1,38 @@
+{
+  "note": "Records with no picture we may use, listed by hand with the reason. scripts/check_image_health.mjs reports them but does not fail for them; it says when one has a working picture again or is gone, and then the entry comes off. Before adding one, look for an allowed source (data/manual-images.json).",
+  "reasons": {
+    "godo_mall": "Pokémon Store Korea lists only pictures on pokemon.hgodo.com, its closed Godo mall (no answer, not even robots.txt, on 2026-11-16; the shop's own page shows them broken). No other allowed source shows the product (checked 2026-11-16).",
+    "pokemon_center_hotlink": "Pokémon Store Korea's only pictures are linked from www.pokemoncenter-online.com, which refuses hotlinks and answered our bot with 403 (2026-11-15); no catalog record has the same JAN. cache:pokemon-center-images copies it on a day the host lets the bot through."
+  },
+  "kits": {
+    "pokemon-kr-116548761": "pokemon_center_hotlink",
+    "pokemon-kr-116548785": "pokemon_center_hotlink",
+    "pokemon-kr-116551253": "godo_mall",
+    "pokemon-kr-116551529": "godo_mall",
+    "pokemon-kr-116551533": "godo_mall",
+    "pokemon-kr-116551535": "godo_mall",
+    "pokemon-kr-118032419": "godo_mall",
+    "pokemon-kr-133826295": "godo_mall",
+    "pokemon-kr-133826296": "godo_mall",
+    "pokemon-kr-133826297": "godo_mall",
+    "pokemon-kr-133826298": "godo_mall",
+    "pokemon-kr-133826299": "godo_mall",
+    "pokemon-kr-133826300": "godo_mall",
+    "pokemon-kr-133826301": "godo_mall",
+    "pokemon-kr-133826302": "godo_mall",
+    "pokemon-kr-133826303": "godo_mall",
+    "pokemon-kr-133826304": "godo_mall",
+    "pokemon-kr-133826306": "godo_mall",
+    "pokemon-kr-133826307": "godo_mall",
+    "pokemon-kr-133826308": "godo_mall",
+    "pokemon-kr-133826309": "godo_mall",
+    "pokemon-kr-133826310": "godo_mall",
+    "pokemon-kr-133826311": "godo_mall",
+    "pokemon-kr-133826312": "godo_mall",
+    "pokemon-kr-133826315": "godo_mall",
+    "pokemon-kr-133826316": "godo_mall",
+    "pokemon-kr-133826317": "godo_mall",
+    "pokemon-kr-133826319": "godo_mall",
+    "pokemon-kr-133826321": "godo_mall"
+  }
+}

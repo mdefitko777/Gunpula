@@ -1,6 +1,8 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
+import { IMAGE_GAPS_PATH, loadImageGaps, sortImageGaps } from "./lib/image-gaps.mjs";
+
 const catalog = JSON.parse(await readFile("data/kits.json", "utf8"));
 const args = process.argv.slice(2);
 const options = Object.fromEntries(
@@ -132,6 +134,14 @@ for (const kit of selectedKits) {
   }
 }
 
+// Listed by hand with the reason (data/image-gaps.json): reported, but they do not fail the run.
+const gaps = sortImageGaps({
+  missing: kitsWithoutWorkingImage,
+  checkedIds: new Set(selectedKits.map((kit) => kit.kit_id)),
+  catalogIds: new Set(catalog.kits.map((kit) => kit.kit_id)),
+  gaps: await loadImageGaps(),
+});
+
 const byFranchise = {};
 for (const kit of selectedKits) {
   byFranchise[kit.franchise] ||= { checked_kits: 0, broken_urls: 0, kits_without_working_image: 0 };
@@ -153,9 +163,11 @@ const report = {
   broken_urls: broken.length,
   working_kits: selectedKits.length - kitsWithoutWorkingImage.length,
   kits_without_working_image: kitsWithoutWorkingImage.length,
+  known_gaps: gaps.known.length,
   by_franchise: byFranchise,
   broken: broken.slice(0, 300),
   kits_without_working_image_items: kitsWithoutWorkingImage.slice(0, 300),
+  known_gaps_items: gaps.known.map(({ kit_id: kitId, reason }) => ({ kit_id: kitId, reason })),
 };
 
 await mkdir(path.dirname(outputPath), { recursive: true });
@@ -166,6 +178,18 @@ console.log(`Wrote ${outputPath}.`);
 for (const item of broken.slice(0, 80)) {
   console.log(`${item.status} ${item.kit_id} ${item.role} ${item.url}`);
 }
-if (kitsWithoutWorkingImage.length) {
+if (gaps.known.length) {
+  console.log(`${gaps.known.length} of them are listed in ${IMAGE_GAPS_PATH} (no picture we may use).`);
+}
+for (const kitId of gaps.recovered) {
+  console.log(`${kitId} has a working image again: take it off ${IMAGE_GAPS_PATH}.`);
+}
+for (const kitId of gaps.gone) {
+  console.log(`${kitId} is no longer in the catalog: take it off ${IMAGE_GAPS_PATH}.`);
+}
+for (const item of gaps.failing.slice(0, 80)) {
+  console.log(`No working image: ${item.kit_id} ${item.urls.join(" ") || "(no image URL)"}`);
+}
+if (gaps.failing.length) {
   process.exitCode = 1;
 }

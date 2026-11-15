@@ -4,6 +4,7 @@ import path from "node:path";
 
 import { isBspFullSize } from "./lib/bsp-prize.mjs";
 import { dropCachedOriginals } from "./lib/cached-originals.mjs";
+import { createImageFetcher, hostAllowed, hostList } from "./lib/image-fetcher.mjs";
 
 const CATALOG_PATH = "data/kits.json";
 const catalog = JSON.parse(await readFile(CATALOG_PATH, "utf8"));
@@ -29,25 +30,23 @@ const maxItems = Number(options.limit || process.env.IMAGE_CACHE_LIMIT || 0);
 const concurrency = Number(options.concurrency || process.env.IMAGE_CACHE_CONCURRENCY || 6);
 const externalCacheRoot = path.resolve(process.env.IMAGE_CACHE_DIR || "../image-cache/catalog");
 const assetRoot = path.resolve("app/assets/catalog");
-// --polite: the crawling rules of the newer importers — the bot says who it is
-// (no browser user-agent, no made-up Referer), robots.txt is read first and
-// obeyed, each host gets one request at a time at least POLITE_GAP_MS apart,
-// and a host that answers 403 / 429 / 503 or a non-image page (bot check) is
-// left alone for the rest of the run; its covers are tried again next run.
-// --host=a.example,b.example limits the run to covers on those hosts.
+// --polite: bot user-agent, robots.txt, one request per host 1.1 s apart (lib/image-fetcher.mjs).
+// In every mode a host that answers 403 / 429 / 503 is left alone for the rest of the run.
+// --host=a.example,b.example limits the run to covers on those hosts; --skip-host= leaves those
+// hosts out (the Pokémon run leaves www.pokemoncenter-online.com to the polite run after it, so
+// that host is asked with the bot's name only and at most until its first refusal).
 const polite = flags.has("--polite");
-const hostFilter = new Set((options.host || "").split(",").map((host) => host.trim()).filter(Boolean));
-const POLITE_GAP_MS = 1100;
-const BOT_UA = "HobbyAtlasDataBot/1.0 (+https://github.com/mdefitko777/Gunpula)";
+const hostFilter = { only: hostList(options.host), skip: hostList(options["skip-host"]) };
 const userAgent = polite
-  ? BOT_UA
+  ? undefined
   : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
     "(KHTML, like Gecko) Chrome/126.0 Safari/537.36 GunpulaImageCache/1.0";
+const fetcher = createImageFetcher({ polite, userAgent });
 
 function shouldCacheUrl(url) {
   if (!url || !/^https?:\/\//i.test(url)) return false;
   const parsed = new URL(url);
-  if (hostFilter.size && !hostFilter.has(parsed.hostname)) return false;
+  if (!hostAllowed(url, hostFilter)) return false;
   // Refused to every client (lib/bsp-prize.mjs); the listing thumbnail is cached instead.
   if (isBspFullSize(url)) return false;
   return (
@@ -129,74 +128,8 @@ const kitIdFilter = kitIdsPath
     )
   : new Set();
 
-// Polite mode: per-host queue, robots.txt, refusal stops the host.
-const hostState = new Map();
-
-function politeHost(host) {
-  if (!hostState.has(host)) hostState.set(host, { chain: Promise.resolve(), nextAt: 0, robots: undefined, refused: null });
-  return hostState.get(host);
-}
-
-// Disallow rules for "*" or this bot ("hobbyatlasdatabot"); a robots.txt that
-// is missing or not plain text (a soft-404 page) allows everything.
-async function robotsDisallows(host) {
-  const state = politeHost(host);
-  if (state.robots === undefined) {
-    state.robots = [];
-    try {
-      const response = await fetch(`https://${host}/robots.txt`, { headers: { "User-Agent": BOT_UA } });
-      const text = response.ok && /text\/plain/i.test(response.headers.get("content-type") || "") ? await response.text() : "";
-      let applies = false;
-      for (const raw of text.split(/\r?\n/)) {
-        const line = raw.replace(/#.*/, "").trim();
-        const [key, ...rest] = line.split(":");
-        const value = rest.join(":").trim();
-        if (/^user-agent$/i.test(key)) applies = value === "*" || /hobbyatlasdatabot/i.test(value);
-        else if (applies && /^disallow$/i.test(key) && value) state.robots.push(value);
-      }
-    } catch {
-      // unreachable robots.txt: treated as missing
-    }
-    state.nextAt = Date.now() + POLITE_GAP_MS;
-  }
-  return state.robots;
-}
-
-async function politeFetch(url) {
-  const { host, pathname } = new URL(url);
-  const state = politeHost(host);
-  const run = async () => {
-    if (state.refused) throw Object.assign(new Error(`host refused earlier: ${state.refused}`), { hostRefused: host });
-    const rules = await robotsDisallows(host);
-    if (rules.some((rule) => pathname.startsWith(rule))) throw new Error("robots.txt disallows");
-    const wait = state.nextAt - Date.now();
-    if (wait > 0) await new Promise((resolve) => setTimeout(resolve, wait));
-    try {
-      const response = await fetch(url, { headers: { "User-Agent": BOT_UA, Accept: "image/*" } });
-      const type = response.headers.get("content-type") || "";
-      if ([403, 429, 503].includes(response.status) || (response.ok && !/^image\//i.test(type))) {
-        state.refused = `HTTP ${response.status} ${type}`;
-      }
-      return response;
-    } finally {
-      state.nextAt = Date.now() + POLITE_GAP_MS;
-    }
-  };
-  const result = state.chain.then(run, run);
-  state.chain = result.catch(() => {});
-  return result;
-}
-
 async function fetchImage(kit, url) {
-  const response = polite
-    ? await politeFetch(url)
-    : await fetch(url, {
-        headers: {
-          "User-Agent": userAgent,
-          "Referer": refererFor(kit, url),
-          "Accept": "image/avif,image/webp,image/png,image/jpeg,image/*,*/*;q=0.8",
-        },
-      });
+  const response = await fetcher.fetch(url, { referer: polite ? undefined : refererFor(kit, url) });
   if (!response.ok) {
     throw new Error(`${response.status} ${response.statusText}`);
   }
@@ -248,11 +181,12 @@ const manifest = [];
 let cached = 0;
 let skipped = selectedKits.length - tasks.length;
 let failed = 0;
-// host → records not tried because the host refused earlier in the run (polite mode).
+// host → records not tried because the host refused earlier in the run.
 const leftForNextRun = new Map();
 
 await mapLimit(tasks, async (task) => {
   let cachedForKit = false;
+  const refusedFor = new Set();
   for (const entry of task.urls) {
     try {
       const image = await fetchImage(task.kit, entry.url);
@@ -281,10 +215,14 @@ await mapLimit(tasks, async (task) => {
     } catch (error) {
       // A host that refused once is not asked again this run; its covers wait for
       // the next run. Counted, not logged per URL: on 2026-11-13 one 403 printed 78
-      // "host refused earlier" lines.
+      // "host refused earlier" lines. The record's photos on other hosts are still tried
+      // (pokemon-kr-116531419: a Pokémon Center cover, then the shop's own photos).
       if (error.hostRefused) {
-        leftForNextRun.set(error.hostRefused, (leftForNextRun.get(error.hostRefused) || 0) + 1);
-        break;
+        if (!refusedFor.has(error.hostRefused)) {
+          refusedFor.add(error.hostRefused);
+          leftForNextRun.set(error.hostRefused, (leftForNextRun.get(error.hostRefused) || 0) + 1);
+        }
+        continue;
       }
       failed += 1;
       console.warn(`Failed to cache ${task.kit.kit_id}: ${error.message} ${entry.url}`);
@@ -331,7 +269,7 @@ await writeFile(
 
 console.log(`Cached ${cached}/${tasks.length} images. Skipped ${skipped}. Failed ${failed}.`);
 for (const [host, count] of leftForNextRun) {
-  console.log(`${host} refused (${politeHost(host).refused}); ${count} records left for the next run.`);
+  console.log(`${host} refused (${fetcher.refused(host)}); ${count} records left for the next run.`);
 }
 console.log(`Cache root: ${repoAssets ? path.relative(process.cwd(), assetRoot) : externalCacheRoot}`);
 if (rewriteCatalog) {

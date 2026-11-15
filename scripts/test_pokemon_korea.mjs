@@ -6,7 +6,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { goodsKind } from "./lib/catalog-cleanup.mjs";
 import { parsePokemonKoreaGoodsBanners, pokemonKoreaImageDate } from "./lib/official-announcements.mjs";
-import { categoryIndex, mergeCatalog, productName, releaseDateFor, toKit } from "./lib/pokemon-store-kr.mjs";
+import { categoryIndex, galleryFor, mergeCatalog, productName, releaseDateFor, toKit } from "./lib/pokemon-store-kr.mjs";
 import { eventsFromCatalogShift, koreanStoreRestocks } from "./lib/restocks.mjs";
 
 const fixture = (name) => readFileSync(new URL(`./fixtures/${name}`, import.meta.url), "utf8");
@@ -78,6 +78,13 @@ assert.ok(kit(118529118).gallery_image_urls.every((url) => url.startsWith("https
 assert.equal(kit(133826321).images.box_art_url, null, "pokemon.hgodo.com only");
 assert.equal(kit(133826321).images.box_art_source_id, null);
 assert.deepEqual(kit(133826321).gallery_image_urls, []);
+// Pictures linked from Pokémon Center Japan (refuses hotlinks and our bot) go behind the shop's own
+// uploads (pokemon-kr-116531419, API answer of 2026-11-16 trimmed to its pictures).
+const PCO = "https://www.pokemoncenter-online.com/static/product_image/4521329369600/4521329369600_L.jpg";
+const SHOP = "https://shopby-images.cdn-nhncommerce.com/Mall-No-h6Ss/20261112/175231.770171169/4521329369600.jpg";
+assert.deepEqual(galleryFor({ listImageUrls: [PCO], imageUrls: [PCO, SHOP] }), [SHOP, PCO]);
+assert.deepEqual(galleryFor({ listImageUrls: [PCO], imageUrls: ["https://pokemon.hgodo.com/header_store_1450.png"] }), [PCO], "nothing else: the link stays");
+assert.deepEqual(galleryFor({ imageUrls: ["//shopby-images.cdn-nhncommerce.com/a.jpg", PCO] }), ["https://shopby-images.cdn-nhncommerce.com/a.jpg", PCO]);
 
 // ── release date: a relisting does not move it ──
 // 봉제인형 브케인: listed 2024-01-16, sale start moved to 2026-11-12 22:00.

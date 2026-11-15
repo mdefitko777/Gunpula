@@ -205,6 +205,19 @@ function absoluteImage(url) {
 // 2026-11-14 (?RS=300x300, ?type=w&w=300, ?w=300), so tiles use the cached copies.
 const MAX_GALLERY = 6;
 
+// Some old listings show Pokémon Center Japan's own pictures, linked from its site. That host
+// refuses hotlinks (the app shows nothing) and answered our bot with 403 on 2026-11-15, so the
+// shop's own uploads go first and those links are kept only behind them, for the polite cache
+// run (cache:pokemon-center-images) on a day the host lets it through.
+const HOTLINKED_HOST = "www.pokemoncenter-online.com";
+
+/** The product's pictures, the shop's own uploads before the ones linked from Pokémon Center. */
+export function galleryFor(product) {
+  const urls = [...new Set([product?.listImageUrls?.[0], ...(product?.imageUrls || [])].map(absoluteImage).filter(Boolean))];
+  const hotlinked = (url) => new URL(url).hostname === HOTLINKED_HOST;
+  return [...urls.filter((url) => !hotlinked(url)), ...urls.filter(hotlinked)].slice(0, MAX_GALLERY);
+}
+
 /** A JAN / EAN-13 (2,139 of 2,603 products carry Pokémon Center Japan's 4521329…). */
 export function janOf(product) {
   const code = String(product?.productManagementCd || "").trim();
@@ -222,7 +235,7 @@ export function toKit(product, index, previous = null) {
   if (!name) return null;
   const { grade_code: gradeCode, subline } = gradeFor(product, index);
   const kind = gradeCode === "POKE_GOODS" ? goodsKindFor(product, index) : null;
-  const gallery = [...new Set([product.listImageUrls?.[0], ...(product.imageUrls || [])].map(absoluteImage).filter(Boolean))].slice(0, MAX_GALLERY);
+  const gallery = galleryFor(product);
   const cover = gallery[0] || null;
   const url = productUrl(product.productNo);
   const price = Number.isInteger(product.salePrice) && product.salePrice > 0 ? product.salePrice : null;
