@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-15",
-  "generated_at": "2026-11-15T04:17:47.673Z",
+  "generated_at": "2026-11-15T10:55:40.423Z",
   "watch_tags": [
     "seed",
     "00"
@@ -20,18 +20,18 @@
     "effects"
   ],
   "source_health": {
-    "generated_at": "2026-11-15T04:15:59.280Z",
+    "generated_at": "2026-11-15T10:55:20.087Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-15",
-      "generated_at": "2026-11-15T04:17:47.673Z",
+      "generated_at": "2026-11-15T10:55:40.423Z",
       "total_before": 41615,
-      "total_after": 41616,
+      "total_after": 41542,
       "added_count": 1,
-      "changed_count": 95,
+      "changed_count": 97,
       "removed_count": 0,
       "watched_count": 8,
       "merged_count": 0,
@@ -40,25 +40,25 @@
       "premium_bandai_count": 71,
       "bbx_count": 0,
       "franchise_counts": {
-        "gundam": 71,
-        "madoka": 21,
+        "gundam": 73,
         "lego": 3,
+        "madoka": 21,
         "pokemon": 1
       },
       "reason_counts": {
         "new": 1,
-        "image": 27,
-        "source": 24,
         "archive": 70,
-        "limited": 6
+        "limited": 6,
+        "source": 24,
+        "image": 29
       },
       "interest_tags": [
         "gundam",
         "premium_bandai",
-        "madoka",
         "seed",
-        "lego",
         "00",
+        "lego",
+        "madoka",
         "pokemon"
       ],
       "watch_tags": [
@@ -1184,10 +1184,12 @@
             "source"
           ],
           "source_ids": [
-            "good_smile_madoka_en"
+            "good_smile_madoka_en",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
-            "https://www.goodsmile.info/ja/product/13181/"
+            "https://www.goodsmile.info/ja/product/13181/",
+            "https://www.goodsmile.com/ja/product/10866"
           ]
         },
         {
@@ -1222,10 +1224,12 @@
             "source"
           ],
           "source_ids": [
-            "good_smile_madoka_en"
+            "good_smile_madoka_en",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
-            "https://www.goodsmile.info/ja/product/12957/"
+            "https://www.goodsmile.info/ja/product/12957/",
+            "https://www.goodsmile.com/ja/product/10642"
           ]
         },
         {
@@ -1260,10 +1264,12 @@
             "source"
           ],
           "source_ids": [
-            "good_smile_madoka_en"
+            "good_smile_madoka_en",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
-            "https://www.goodsmile.info/ja/product/12956/"
+            "https://www.goodsmile.info/ja/product/12956/",
+            "https://www.goodsmile.com/ja/product/10641"
           ]
         },
         {
@@ -1376,10 +1382,12 @@
             "source"
           ],
           "source_ids": [
-            "good_smile_madoka_en"
+            "good_smile_madoka_en",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
-            "https://www.goodsmile.info/ja/product/12329/"
+            "https://www.goodsmile.info/ja/product/12329/",
+            "https://www.goodsmile.com/ja/product/10017"
           ]
         },
         {
@@ -1610,7 +1618,8 @@
           ],
           "source_ids": [
             "good_smile_madoka_en",
-            "aniplex_plus_madoka_jp"
+            "aniplex_plus_madoka_jp",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
             "https://www.goodsmile.info/ja/product/7036/",
@@ -1649,10 +1658,12 @@
             "source"
           ],
           "source_ids": [
-            "good_smile_madoka_en"
+            "good_smile_madoka_en",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
-            "https://www.goodsmile.info/ja/product/10287/"
+            "https://www.goodsmile.info/ja/product/10287/",
+            "https://www.goodsmile.com/ja/product/7981"
           ]
         },
         {
@@ -1843,10 +1854,12 @@
             "source"
           ],
           "source_ids": [
-            "good_smile_madoka_en"
+            "good_smile_madoka_en",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
-            "https://www.goodsmile.info/ja/product/9370/"
+            "https://www.goodsmile.info/ja/product/9370/",
+            "https://www.goodsmile.com/ja/product/7077"
           ]
         },
         {
@@ -2004,6 +2017,44 @@
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102595614000&grp_id=5325",
             "https://p-bandai.jp/item/item-1000252930/"
+          ]
+        },
+        {
+          "kit_id": "gsf-gallery-ex07-1-item",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GSF",
+          "subline": "機動戦士ガンダム ガシャポン戦士f EX07",
+          "series_key": "sd",
+          "series_labels": {
+            "zh": "SD",
+            "en": "SD",
+            "ja": "SD",
+            "ko": "SD"
+          },
+          "names": {
+            "ja": "機動戦士ガンダム ガシャポン戦士f EX07 将頑駄無&ハリマオ",
+            "zh": "机动战士高达 扭蛋战士f EX07 将顽驮无&哈利马奥",
+            "ko": "기동전사 건담 가샤폰 전사 f EX07 쇼 건담 & 하리마오",
+            "en": "Mobile Suit Gundam Gashapon Senshif EX07 将頑駄無&ハリマオ"
+          },
+          "release_date": "2020-04",
+          "price_jpy": 300,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_gundam_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/forte/items/",
+            "https://gashapon.jp/products/detail.html?jan_code=4549660472414000"
           ]
         },
         {
@@ -2201,6 +2252,44 @@
           ]
         },
         {
+          "kit_id": "gsf-gallery-ex05-1-item",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "GSF",
+          "subline": "機動戦士ガンダム ガシャポン戦士f EX005",
+          "series_key": "sd",
+          "series_labels": {
+            "zh": "SD",
+            "en": "SD",
+            "ja": "SD",
+            "ko": "SD"
+          },
+          "names": {
+            "ja": "機動戦士ガンダム ガシャポン戦士f EX005 フルアーマー騎士ガンダム＆モンスターブラックドラゴン",
+            "zh": "机动战士高达 扭蛋战士f EX005 全装甲骑士高达&怪兽黑龙",
+            "ko": "기동전사 건담 가샤폰 전사 f EX005 풀아머 나이트 건담 & 몬스터 블랙 드래곤",
+            "en": "Mobile Suit Gundam Gashapon Senshif EX005 フルアーマー騎士Gundam＆モンスターブラックドラゴン"
+          },
+          "release_date": "2018-10",
+          "price_jpy": 300,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "bandai_gashapon_gundam_jp"
+          ],
+          "source_urls": [
+            "https://gashapon.jp/forte/items/",
+            "https://gashapon.jp/products/detail.html?jan_code=4549660292951000"
+          ]
+        },
+        {
           "kit_id": "goodsmile-madoka-6958",
           "change_type": "changed",
           "franchise": "madoka",
@@ -2233,7 +2322,8 @@
           ],
           "source_ids": [
             "good_smile_madoka_en",
-            "aniplex_plus_madoka_jp"
+            "aniplex_plus_madoka_jp",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
             "https://www.goodsmile.info/ja/product/6958/",
@@ -2272,10 +2362,12 @@
             "source"
           ],
           "source_ids": [
-            "good_smile_madoka_en"
+            "good_smile_madoka_en",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
-            "https://www.goodsmile.info/ja/product/6587/"
+            "https://www.goodsmile.info/ja/product/6587/",
+            "https://www.goodsmile.com/ja/product/4315"
           ]
         },
         {
@@ -2311,7 +2403,8 @@
           ],
           "source_ids": [
             "good_smile_madoka_en",
-            "aniplex_plus_madoka_jp"
+            "aniplex_plus_madoka_jp",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
             "https://www.goodsmile.info/ja/product/6175/",
@@ -2822,10 +2915,12 @@
             "source"
           ],
           "source_ids": [
-            "good_smile_madoka_en"
+            "good_smile_madoka_en",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
-            "https://www.goodsmile.info/ja/product/4234/"
+            "https://www.goodsmile.info/ja/product/4234/",
+            "https://www.goodsmile.com/ja/product/2046"
           ]
         },
         {
@@ -2940,10 +3035,12 @@
             "source"
           ],
           "source_ids": [
-            "good_smile_madoka_en"
+            "good_smile_madoka_en",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
-            "https://www.goodsmile.info/ja/product/3419/"
+            "https://www.goodsmile.info/ja/product/3419/",
+            "https://www.goodsmile.com/ja/product/1257"
           ]
         },
         {
@@ -2978,10 +3075,12 @@
             "source"
           ],
           "source_ids": [
-            "good_smile_madoka_en"
+            "good_smile_madoka_en",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
-            "https://www.goodsmile.info/ja/product/3720/"
+            "https://www.goodsmile.info/ja/product/3720/",
+            "https://www.goodsmile.com/ja/product/1550"
           ]
         },
         {
@@ -3057,10 +3156,12 @@
             "source"
           ],
           "source_ids": [
-            "good_smile_madoka_en"
+            "good_smile_madoka_en",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
-            "https://www.goodsmile.info/ja/product/3398/"
+            "https://www.goodsmile.info/ja/product/3398/",
+            "https://www.goodsmile.com/ja/product/1236"
           ]
         },
         {
@@ -3095,10 +3196,12 @@
             "source"
           ],
           "source_ids": [
-            "good_smile_madoka_en"
+            "good_smile_madoka_en",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
-            "https://www.goodsmile.info/ja/product/3319/"
+            "https://www.goodsmile.info/ja/product/3319/",
+            "https://www.goodsmile.com/ja/product/1159"
           ]
         },
         {
@@ -3498,10 +3601,12 @@
             "source"
           ],
           "source_ids": [
-            "good_smile_madoka_en"
+            "good_smile_madoka_en",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
-            "https://www.goodsmile.info/ja/product/3435/"
+            "https://www.goodsmile.info/ja/product/3435/",
+            "https://www.goodsmile.com/ja/product/1273"
           ]
         },
         {
@@ -3577,10 +3682,12 @@
             "source"
           ],
           "source_ids": [
-            "good_smile_madoka_en"
+            "good_smile_madoka_en",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
-            "https://www.goodsmile.info/ja/product/3436/"
+            "https://www.goodsmile.info/ja/product/3436/",
+            "https://www.goodsmile.com/ja/product/1274"
           ]
         },
         {
@@ -3615,10 +3722,12 @@
             "source"
           ],
           "source_ids": [
-            "good_smile_madoka_en"
+            "good_smile_madoka_en",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
-            "https://www.goodsmile.info/ja/product/3222/"
+            "https://www.goodsmile.info/ja/product/3222/",
+            "https://www.goodsmile.com/ja/product/1062"
           ]
         },
         {
@@ -3653,10 +3762,12 @@
             "source"
           ],
           "source_ids": [
-            "good_smile_madoka_en"
+            "good_smile_madoka_en",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
-            "https://www.goodsmile.info/ja/product/3206/"
+            "https://www.goodsmile.info/ja/product/3206/",
+            "https://www.goodsmile.com/ja/product/1046"
           ]
         },
         {
@@ -3691,10 +3802,12 @@
             "source"
           ],
           "source_ids": [
-            "good_smile_madoka_en"
+            "good_smile_madoka_en",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
-            "https://www.goodsmile.info/ja/product/3200/"
+            "https://www.goodsmile.info/ja/product/3200/",
+            "https://www.goodsmile.com/ja/product/1040"
           ]
         },
         {
@@ -3729,10 +3842,12 @@
             "source"
           ],
           "source_ids": [
-            "good_smile_madoka_en"
+            "good_smile_madoka_en",
+            "good_smile_madoka_global"
           ],
           "source_urls": [
-            "https://www.goodsmile.info/ja/product/3199/"
+            "https://www.goodsmile.info/ja/product/3199/",
+            "https://www.goodsmile.com/ja/product/1039"
           ]
         },
         {
