@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-14",
+  "updated_at": "2026-11-15",
   "source": "Generated from data/kits.json, data/atlas-source-taxonomy.json (PokeAPI species), data/gget-series-sections.json, data/atlas/fate-roster.json (Atlas Academy + Mooncell + hand-kept works) and data/atlas/atlas-covers.json by scripts/build_atlas_groups.mjs",
   "channels": {
     "gundam": {
@@ -85,6 +85,17 @@
       "image": "./assets/atlas/covers/channel-nintendo.webp",
       "image_remote": "https://www.nintendo.co.kr/sns.png",
       "cover_source": "https://www.nintendo.co.kr/"
+    },
+    "effects": {
+      "label": {
+        "zh": "特效件",
+        "ko": "이펙트",
+        "en": "Effects",
+        "ja": "エフェクト"
+      },
+      "image": "./assets/atlas/covers/channel-effects.jpg",
+      "image_remote": "https://tamashiiweb.com/storage/images/brands/imported/og_tamashii_effect.jpg",
+      "cover_source": "https://tamashiiweb.com/item_brand/tamashii_effect/"
     }
   },
   "line_covers": {
@@ -48696,6 +48707,311 @@
           "nintendo-kr-97"
         ],
         "count": 58
+      }
+    ],
+    "effects": [
+      {
+        "id": "effects_flame",
+        "kind": "series",
+        "labels": {
+          "zh": "火焰",
+          "ko": "불꽃",
+          "en": "Flame",
+          "ja": "炎"
+        },
+        "subtitle": {
+          "zh": "",
+          "ko": "",
+          "en": "",
+          "ja": ""
+        },
+        "image": "https://tamashiiweb.com/storage/images/products/imported/item_0000014576_OKUOCRVc_02.jpg",
+        "cover_source": "newest product picture (Tamashii Web / goodsmile.com)",
+        "kit_ids": [
+          "tamashii-10676",
+          "tamashii-10677",
+          "tamashii-11201",
+          "tamashii-14576",
+          "goodsmile-effects-g1139373",
+          "goodsmile-effects-g1140117",
+          "goodsmile-effects-g9022"
+        ],
+        "count": 7
+      },
+      {
+        "id": "effects_explosion",
+        "kind": "series",
+        "labels": {
+          "zh": "爆炸",
+          "ko": "폭발",
+          "en": "Explosion",
+          "ja": "爆発"
+        },
+        "subtitle": {
+          "zh": "",
+          "ko": "",
+          "en": "",
+          "ja": ""
+        },
+        "image": "https://tamashiiweb.com/storage/images/products/thumbnail/nxxtooFAB1SfK0Cvu94um0gIzJX1kKIvI8qBs2EC.jpg",
+        "cover_source": "newest product picture (Tamashii Web / goodsmile.com)",
+        "kit_ids": [
+          "tamashii-10844",
+          "tamashii-10845",
+          "tamashii-15722",
+          "tamashii-15723",
+          "bandai-effect-4573102602558000",
+          "bandai-effect-4573102606945000"
+        ],
+        "count": 6
+      },
+      {
+        "id": "effects_impact",
+        "kind": "series",
+        "labels": {
+          "zh": "冲击",
+          "ko": "임팩트",
+          "en": "Impact",
+          "ja": "インパクト"
+        },
+        "subtitle": {
+          "zh": "",
+          "ko": "",
+          "en": "",
+          "ja": ""
+        },
+        "image": "https://tamashiiweb.com/storage/images/products/thumbnail/5d2d07f5-279c-4bbd-b3d3-f5720086ca07.webp",
+        "cover_source": "newest product picture (Tamashii Web / goodsmile.com)",
+        "kit_ids": [
+          "tamashii-10553",
+          "tamashii-10554",
+          "tamashii-10883",
+          "tamashii-14753",
+          "tamashii-14943",
+          "tamashii-15794"
+        ],
+        "count": 6
+      },
+      {
+        "id": "effects_wind",
+        "kind": "series",
+        "labels": {
+          "zh": "风",
+          "ko": "바람",
+          "en": "Wind",
+          "ja": "ウインド"
+        },
+        "subtitle": {
+          "zh": "",
+          "ko": "",
+          "en": "",
+          "ja": ""
+        },
+        "image": "https://tamashiiweb.com/storage/images/products/imported/item_0000015614_LKLGGvEN_02.jpg",
+        "cover_source": "newest product picture (Tamashii Web / goodsmile.com)",
+        "kit_ids": [
+          "tamashii-11408",
+          "tamashii-11409",
+          "tamashii-14574",
+          "tamashii-14742",
+          "tamashii-15614",
+          "goodsmile-effects-g9023"
+        ],
+        "count": 6
+      },
+      {
+        "id": "effects_aura",
+        "kind": "series",
+        "labels": {
+          "zh": "气场",
+          "ko": "오라",
+          "en": "Aura",
+          "ja": "オーラ"
+        },
+        "subtitle": {
+          "zh": "",
+          "ko": "",
+          "en": "",
+          "ja": ""
+        },
+        "image": "https://tamashiiweb.com/storage/images/products/imported/item_0000014579_E1N6JcmF_02.jpg",
+        "cover_source": "newest product picture (Tamashii Web / goodsmile.com)",
+        "kit_ids": [
+          "tamashii-11064",
+          "tamashii-11065",
+          "tamashii-13129",
+          "tamashii-14577",
+          "tamashii-14579"
+        ],
+        "count": 5
+      },
+      {
+        "id": "effects_thunder",
+        "kind": "series",
+        "labels": {
+          "zh": "雷电",
+          "ko": "번개",
+          "en": "Thunder",
+          "ja": "サンダー"
+        },
+        "subtitle": {
+          "zh": "",
+          "ko": "",
+          "en": "",
+          "ja": ""
+        },
+        "image": "https://tamashiiweb.com/storage/images/products/imported/item_0000015286_tPAvkR7r_02.jpg",
+        "cover_source": "newest product picture (Tamashii Web / goodsmile.com)",
+        "kit_ids": [
+          "tamashii-11019",
+          "tamashii-11020",
+          "tamashii-14578",
+          "tamashii-14978",
+          "tamashii-15286"
+        ],
+        "count": 5
+      },
+      {
+        "id": "effects_rock",
+        "kind": "series",
+        "labels": {
+          "zh": "岩石·碎裂",
+          "ko": "바위·파편",
+          "en": "Rock & Crash",
+          "ja": "ロック・クラッシュ"
+        },
+        "subtitle": {
+          "zh": "",
+          "ko": "",
+          "en": "",
+          "ja": ""
+        },
+        "image": "https://tamashiiweb.com/storage/images/products/imported/item_0000015360_wnVEZGLn_02.jpg",
+        "cover_source": "newest product picture (Tamashii Web / goodsmile.com)",
+        "kit_ids": [
+          "tamashii-12391",
+          "tamashii-12392",
+          "tamashii-14575",
+          "tamashii-15360"
+        ],
+        "count": 4
+      },
+      {
+        "id": "effects_water",
+        "kind": "series",
+        "labels": {
+          "zh": "水·波浪",
+          "ko": "물·파도",
+          "en": "Water & Wave",
+          "ja": "ウォーター・ウエーブ"
+        },
+        "subtitle": {
+          "zh": "",
+          "ko": "",
+          "en": "",
+          "ja": ""
+        },
+        "image": "https://tamashiiweb.com/storage/images/products/imported/item_0000014760_JIQUnJOX_02.jpg",
+        "cover_source": "newest product picture (Tamashii Web / goodsmile.com)",
+        "kit_ids": [
+          "tamashii-11060",
+          "tamashii-11061",
+          "tamashii-14760",
+          "goodsmile-effects-g9024"
+        ],
+        "count": 4
+      },
+      {
+        "id": "effects_action",
+        "kind": "series",
+        "labels": {
+          "zh": "动作",
+          "ko": "액션",
+          "en": "Action",
+          "ja": "アクション"
+        },
+        "subtitle": {
+          "zh": "",
+          "ko": "",
+          "en": "",
+          "ja": ""
+        },
+        "image": "https://bandai-a.akamaihd.net/bc/img/model/b/1000154979_1.jpg",
+        "cover_source": "newest product picture (Tamashii Web / goodsmile.com)",
+        "kit_ids": [
+          "bandai-effect-4573102613226000",
+          "bandai-effect-4573102613233000"
+        ],
+        "count": 2
+      },
+      {
+        "id": "effects_gunfire",
+        "kind": "series",
+        "labels": {
+          "zh": "枪击",
+          "ko": "총격",
+          "en": "Gunfire",
+          "ja": "銃撃"
+        },
+        "subtitle": {
+          "zh": "",
+          "ko": "",
+          "en": "",
+          "ja": ""
+        },
+        "image": "https://bandai-a.akamaihd.net/bc/img/model/b/1000146729_1.jpg",
+        "cover_source": "newest product picture (Tamashii Web / goodsmile.com)",
+        "kit_ids": [
+          "bandai-effect-4573102602541000",
+          "bandai-effect-4573102605795000"
+        ],
+        "count": 2
+      },
+      {
+        "id": "effects_slash",
+        "kind": "series",
+        "labels": {
+          "zh": "斩击",
+          "ko": "참격",
+          "en": "Slash",
+          "ja": "斬撃"
+        },
+        "subtitle": {
+          "zh": "",
+          "ko": "",
+          "en": "",
+          "ja": ""
+        },
+        "image": "https://bandai-a.akamaihd.net/bc/img/model/b/1000151942_1.jpg",
+        "cover_source": "newest product picture (Tamashii Web / goodsmile.com)",
+        "kit_ids": [
+          "bandai-effect-4573102607386000",
+          "bandai-effect-4573102607393000"
+        ],
+        "count": 2
+      },
+      {
+        "id": "effects_smoke",
+        "kind": "series",
+        "labels": {
+          "zh": "烟雾",
+          "ko": "연기",
+          "en": "Smoke",
+          "ja": "スモーク"
+        },
+        "subtitle": {
+          "zh": "",
+          "ko": "",
+          "en": "",
+          "ja": ""
+        },
+        "image": "https://tamashiiweb.com/storage/images/products/imported/item_0000015681_atKMRnXk_02.jpg",
+        "cover_source": "newest product picture (Tamashii Web / goodsmile.com)",
+        "kit_ids": [
+          "tamashii-14979",
+          "tamashii-15681"
+        ],
+        "count": 2
       }
     ]
   }
