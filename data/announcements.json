@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-15T23:37:04.597Z",
+  "updated_at": "2026-11-16T00:23:20.295Z",
   "sources": [
     {
       "source_id": "tamashii_news",
@@ -142,7 +142,12 @@
       "url": "https://www.youtube.com/"
     }
   ],
-  "fetch_errors": [],
+  "fetch_errors": [
+    {
+      "source_id": "kotobukiya_shop",
+      "message": "https://shop.kotobukiya.co.jp/shop/r/r100000/ returned 503"
+    }
+  ],
   "replaced": {
     "corocoro-d1ac4f87bf": "beyblade-lineup-dXgyMi5odG1s",
     "hamusuke-bx-55": "beyblade-lineup-Yng1NS5odG1s",
