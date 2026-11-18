@@ -31,6 +31,7 @@ const STEPS = [
   { script: "import:madoka", kind: "source" },
   // The 닌텐도 channel (store.nintendo.co.kr, nintendo.com/kr); about 6 minutes the first time.
   { script: "import:nintendo-kr", kind: "source" },
+  { script: "import:nintendo-hobby", kind: "source" },
   // The 이펙트 channel (魂EFFECT on Tamashii Web, Good Smile effect parts, BANDAI SPIRITS
   // カスタマイズエフェクト); about 12 requests a day once the product pages are read.
   { script: "import:effects", kind: "source" },

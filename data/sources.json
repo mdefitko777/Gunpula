@@ -1235,6 +1235,97 @@
         "release date of shipped products (the product page no longer shows it)"
       ],
       "notes": "goodsmile.com search for エフェクト, kept by name (シンプルエフェクト, MODEROID …エフェクト); ja and en product pages once per product. robots.txt answers 404 (no rules) on 2026-11-15."
+    },
+    {
+      "source_id": "kotobukiya_nintendo_jp",
+      "name": "Kotobukiya (Nintendo titles)",
+      "type": "official_manufacturer_jp",
+      "country": "JP",
+      "base_url": "https://www.kotobukiya.co.jp/title/xenoblade2/",
+      "priority": 14,
+      "best_for": [
+        "Kotobukiya Xenoblade model kits (セイレーン, フォーミュラ)",
+        "release month",
+        "official product images"
+      ],
+      "weak_for": [
+        "works other than Xenoblade (Kotobukiya has no other Nintendo title page)",
+        "price (the title page shows none)"
+      ],
+      "notes": "Read through the Wayback Machine: www.kotobukiya.co.jp answers 403 to scripts, and the reachable shop search lists in-stock items only, so these kits are invisible there."
+    },
+    {
+      "source_id": "good_smile_nintendo_jp",
+      "name": "Good Smile Company (Nintendo titles)",
+      "type": "official_manufacturer_jp",
+      "country": "JP",
+      "base_url": "https://www.goodsmile.com/en/search",
+      "priority": 13,
+      "best_for": [
+        "Nendoroid / figma / POP UP PARADE and scale figures",
+        "Japan price",
+        "official images"
+      ],
+      "weak_for": [
+        "release date (the list blocks carry none)",
+        "Pokemon (its own franchise)"
+      ],
+      "notes": "Filtered by Good Smile’s own work ids (the title checkboxes on /en/search), never by keyword: a keyword search drifts badly — \"Pikmin\" returns Cinnamoroll and Pompompurin — and the result blocks hold no work to check against."
+    },
+    {
+      "source_id": "ichiban_kuji_nintendo_jp",
+      "name": "Ichiban Kuji (Nintendo titles)",
+      "type": "official_lottery_jp",
+      "country": "JP",
+      "base_url": "https://1kuji.com/products/search?index_master_search=454",
+      "priority": 15,
+      "best_for": [
+        "Ichiban Kuji prize lineups",
+        "draw period",
+        "official prize images"
+      ],
+      "weak_for": [
+        "retail figures",
+        "price (prize items carry none)"
+      ],
+      "notes": "Title filters 332 スーパーマリオブラザーズ, 377 スプラトゥーン, 410 星のカービィ, 454 ゼルダの伝説, 513 どうぶつの森."
+    },
+    {
+      "source_id": "banpresto_prize_nintendo_jp",
+      "name": "Banpresto Prize (Nintendo titles)",
+      "type": "official_prize_jp",
+      "country": "JP",
+      "base_url": "https://bsp-prize.jp/title/IP00002055/",
+      "priority": 16,
+      "best_for": [
+        "prize figures and plush",
+        "release month",
+        "official prize images"
+      ],
+      "weak_for": [
+        "retail figures",
+        "price",
+        "works other than 星のカービィ (the only Nintendo title page)"
+      ],
+      "notes": "Title IP00002055 (星のカービィ). Its images answer a Cloudflare bot check, so they are not cacheable."
+    },
+    {
+      "source_id": "tamashii_web_nintendo_jp",
+      "name": "Tamashii Web (Nintendo characters)",
+      "type": "official_manufacturer_jp",
+      "country": "JP",
+      "base_url": "https://tamashiiweb.com/item_character/super_mario/",
+      "priority": 14,
+      "best_for": [
+        "Figuarts / Figuarts ZERO figures",
+        "exact release date",
+        "Japan price",
+        "brand line"
+      ],
+      "weak_for": [
+        "coverage (only three Nintendo character codes exist)"
+      ],
+      "notes": "Character codes super_mario, legend_of_zelda, metroid_prime4_beyond. Keyword parameters are ignored by search_item.php and per_page caps at 40; product titles are bare character names, so the work comes from the character filter."
     }
   ]
 }

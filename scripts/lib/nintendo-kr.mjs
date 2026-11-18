@@ -35,19 +35,19 @@ const ID_PREFIX = "nintendo-kr-";
 // One series per Nintendo world; the first match wins, so a Smash Bros. amiibo of Link is Smash
 // and "요시와 신기한 도감" is Yoshi, not Mario. Labels: official names (zh: Nintendo's Chinese titles).
 export const NINTENDO_SERIES = [
-  { id: "smash", pattern: /스매시브라더스|대난투|Smash Bros/i, labels: { ko: "대난투 스매시브라더스", zh: "任天堂明星大乱斗", en: "Super Smash Bros.", ja: "大乱闘スマッシュブラザーズ" } },
-  { id: "pokemon", pattern: /포켓몬|Pokémon|Pokemon|피카츄|이브이|Pokopia/i, labels: { ko: "포켓몬", zh: "宝可梦", en: "Pokémon", ja: "ポケモン" } },
-  { id: "zelda", pattern: /젤다|하이랄|Zelda|시간의 오카리나|론론|마스터 소드|코로그|무쥬라/i, labels: { ko: "젤다의 전설", zh: "塞尔达传说", en: "The Legend of Zelda", ja: "ゼルダの伝説" } },
-  { id: "kirby", pattern: /커비|Kirby/i, labels: { ko: "별의 커비", zh: "星之卡比", en: "Kirby", ja: "星のカービィ" } },
-  { id: "splatoon", pattern: /스플래툰|Splatoon/i, labels: { ko: "스플래툰", zh: "斯普拉遁", en: "Splatoon", ja: "スプラトゥーン" } },
-  { id: "animal_crossing", pattern: /동물의 숲|Animal Crossing/i, labels: { ko: "동물의 숲", zh: "动物森友会", en: "Animal Crossing", ja: "どうぶつの森" } },
-  { id: "pikmin", pattern: /피크민|Pikmin/i, labels: { ko: "피크민", zh: "皮克敏", en: "Pikmin", ja: "ピクミン" } },
-  { id: "metroid", pattern: /메트로이드|Metroid/i, labels: { ko: "메트로이드", zh: "密特罗德", en: "Metroid", ja: "メトロイド" } },
-  { id: "xenoblade", pattern: /제노블레이드|Xenoblade/i, labels: { ko: "제노블레이드", zh: "异度神剑", en: "Xenoblade", ja: "ゼノブレイド" } },
-  { id: "fire_emblem", pattern: /파이어 ?엠블렘|Fire Emblem/i, labels: { ko: "파이어 엠블렘", zh: "火焰纹章", en: "Fire Emblem", ja: "ファイアーエムブレム" } },
-  { id: "donkey_kong", pattern: /동키콩|Donkey Kong/i, labels: { ko: "동키콩", zh: "大金刚", en: "Donkey Kong", ja: "ドンキーコング" } },
-  { id: "yoshi", pattern: /요시|Yoshi/i, labels: { ko: "요시", zh: "耀西", en: "Yoshi", ja: "ヨッシー" } },
-  { id: "mario", pattern: /마리오|루이지|피치|와리오|수다쟁이 꽃|Mario|Luigi|Peach|Wario/i, labels: { ko: "마리오", zh: "马力欧", en: "Mario", ja: "マリオ" } },
+  { id: "smash", pattern: /스매시브라더스|대난투|Smash Bros|スマッシュブラザーズ|スマブラ/i, labels: { ko: "대난투 스매시브라더스", zh: "任天堂明星大乱斗", en: "Super Smash Bros.", ja: "大乱闘スマッシュブラザーズ" } },
+  { id: "pokemon", pattern: /포켓몬|Pokémon|Pokemon|피카츄|이브이|Pokopia|ポケモン|ピカチュウ/i, labels: { ko: "포켓몬", zh: "宝可梦", en: "Pokémon", ja: "ポケモン" } },
+  { id: "zelda", pattern: /젤다|하이랄|Zelda|시간의 오카리나|론론|마스터 소드|코로그|무쥬라|ゼルダ|ハイラル|リンク(?!ス)|ムジュラ|コログ/i, labels: { ko: "젤다의 전설", zh: "塞尔达传说", en: "The Legend of Zelda", ja: "ゼルダの伝説" } },
+  { id: "kirby", pattern: /커비|Kirby|カービィ/i, labels: { ko: "별의 커비", zh: "星之卡比", en: "Kirby", ja: "星のカービィ" } },
+  { id: "splatoon", pattern: /스플래툰|Splatoon|スプラトゥーン|スプラ(?=トゥ)/i, labels: { ko: "스플래툰", zh: "斯普拉遁", en: "Splatoon", ja: "スプラトゥーン" } },
+  { id: "animal_crossing", pattern: /동물의 숲|Animal Crossing|どうぶつの森|あつまれ どうぶつ/i, labels: { ko: "동물의 숲", zh: "动物森友会", en: "Animal Crossing", ja: "どうぶつの森" } },
+  { id: "pikmin", pattern: /피크민|Pikmin|ピクミン/i, labels: { ko: "피크민", zh: "皮克敏", en: "Pikmin", ja: "ピクミン" } },
+  { id: "metroid", pattern: /메트로이드|Metroid|メトロイド/i, labels: { ko: "메트로이드", zh: "密特罗德", en: "Metroid", ja: "メトロイド" } },
+  { id: "xenoblade", pattern: /제노블레이드|Xenoblade|ゼノブレイド|ゼノブレ|セイレーン|フォーミュラ|ホムラ|ヒカリ/i, labels: { ko: "제노블레이드", zh: "异度神剑", en: "Xenoblade", ja: "ゼノブレイド" } },
+  { id: "fire_emblem", pattern: /파이어 ?엠블렘|Fire Emblem|ファイアーエムブレム|ファイアエムブレム/i, labels: { ko: "파이어 엠블렘", zh: "火焰纹章", en: "Fire Emblem", ja: "ファイアーエムブレム" } },
+  { id: "donkey_kong", pattern: /동키콩|Donkey Kong|ドンキーコング/i, labels: { ko: "동키콩", zh: "大金刚", en: "Donkey Kong", ja: "ドンキーコング" } },
+  { id: "yoshi", pattern: /요시|Yoshi|ヨッシー/i, labels: { ko: "요시", zh: "耀西", en: "Yoshi", ja: "ヨッシー" } },
+  { id: "mario", pattern: /마리오|루이지|피치|와리오|수다쟁이 꽃|Mario|Luigi|Peach|Wario|マリオ|ルイージ|ピーチ|ワリオ|クッパ|キノピオ/i, labels: { ko: "마리오", zh: "马力欧", en: "Mario", ja: "マリオ" } },
   { id: "other", pattern: /$^/, labels: { ko: "기타", zh: "其他", en: "Other", ja: "その他" } },
 ];
 const SERIES_SORT = 700;
@@ -60,7 +60,14 @@ export function seriesFor(text) {
 
 /** The series of a record (localize_catalog.mjs runs this on every nintendo record). */
 export function seriesOfKit(kit) {
-  return seriesFor([kit.names?.ko, kit.source_name, kit.subline, kit.nintendo_kr?.amiibo_series].filter(Boolean).join(" "));
+  // ja/en are read too: the hobby-maker sources (Kotobukiya, Good Smile,
+  // 一番くじ, 魂ウェブ) name their products in Japanese only, and without
+  // these every one of those records would fall through to "other".
+  return seriesFor(
+    [kit.names?.ko, kit.names?.ja, kit.names?.en, kit.work_title, kit.source_name, kit.subline, kit.nintendo_kr?.amiibo_series]
+      .filter(Boolean)
+      .join(" "),
+  );
 }
 
 // NFC: the store writes some "Pokémon" with a combining accent.
