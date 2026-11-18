@@ -54,13 +54,18 @@ const KUJI_TITLES = [[332, "スーパーマリオブラザーズ"], [377, "ス�
 const TAMASHII_BASE = "https://tamashiiweb.com";
 const TAMASHII_CODES = [["super_mario", "マリオ"], ["legend_of_zelda", "ゼルダの伝説"], ["metroid_prime4_beyond", "メトロイド"]];
 const BSP_TITLES = [["IP00002055", "星のカービィ"]];
+const GASHAPON_BASE = "https://gashapon.jp";
+const GASHAPON_QUERIES = ["マリオ", "カービィ", "ゼルダ", "スプラトゥーン", "どうぶつの森", "ピクミン", "メトロイド"];
 
 // A product counts as Nintendo when its text names one of the works. The Good
 // Smile keyword search in particular drifts well past the exact matches.
 const NINTENDO_TEXT =
   /ゼルダ|ハイラル|ムジュラ|コログ|Zelda|マリオ|ルイージ|ピーチ|ワリオ|クッパ|キノピオ|Mario|Luigi|Peach|スプラトゥーン|Splatoon|カービィ|Kirby|ゼノブレイド|セイレーン|フォーミュラ|ホムラ|ヒカリ|Xenoblade|Pyra|Mythra|ピクミン|Pikmin|メトロイド|Metroid|サムス|Samus|ファイアー?エムブレム|Fire Emblem|どうぶつの森|Animal Crossing|ドンキーコング|Donkey Kong|ヨッシー|Yoshi|スマッシュブラザーズ|Smash Bros/i;
-// Good Smile's search matches these on substrings ("carbonia" holds "nia").
-const NINTENDO_DROP = /carbonia|babylonia|lonsdaleite|chitocerium|Mariage|marionette/i;
+// Products whose text holds a work name but belong to something else:
+// "carbonia" holds "nia", and ヨッシースタンプ is a LINE-sticker character by
+// an illustrator called Yoshi, not Nintendo's — the ガシャポン catalog carries
+// 15 of them and nothing marks them apart except the name.
+const NINTENDO_DROP = /carbonia|babylonia|lonsdaleite|chitocerium|Mariage|marionette|ヨッシースタンプ/i;
 
 function today() {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
@@ -335,6 +340,58 @@ async function fetchTamashii() {
   return [...byKey.values()];
 }
 
+
+// --------------------------------------------------------------- ガシャポン
+
+function ogMeta(html, name) {
+  const pattern = new RegExp(`<meta[^>]+property="og:${name}"[^>]+content="([^"]*)"`, "i");
+  return decodeHtml(pattern.exec(html)?.[1] || "") || null;
+}
+
+const pageText = (html) => decodeHtml(String(html || "").replace(/<(script|style)[\s\S]*?<\/>/gi, " "));
+
+// The keyword search lists ids only, so the name, price and date each need the
+// product page. The search also reaches past Nintendo (a "ゼルダ" query returns
+// unrelated capsules), so each page's own title is checked before it is kept.
+async function fetchGashapon() {
+  const ids = new Set();
+  for (const query of GASHAPON_QUERIES) {
+    try {
+      const html = await fetchText(`${GASHAPON_BASE}/products/result.php?free=${encodeURIComponent(query)}`);
+      for (const match of html.matchAll(/detail\.php\?jan_code=(\d+)/g)) ids.add(match[1]);
+    } catch (error) {
+      console.warn(`  gashapon ${query}: ${error.message}`);
+    }
+  }
+  const out = [];
+  for (const id of ids) {
+    const url = `${GASHAPON_BASE}/products/detail.php?jan_code=${id}`;
+    let html;
+    try {
+      html = await fetchText(url);
+    } catch (error) {
+      console.warn(`  gashapon ${id}: ${error.message}`);
+      continue;
+    }
+    const name = (ogMeta(html, "title") || decodeHtml(/<title>([^<]*)/.exec(html)?.[1] || "")).split(/[|｜]/)[0].trim();
+    if (!name) continue;
+    const text = pageText(html);
+    out.push({
+      key: id,
+      name,
+      work: "",
+      line: "ガシャポン",
+      category: "ガシャポン",
+      url,
+      image: ogMeta(html, "image") || "",
+      price_jpy: parseYen(/([\d,]+)\s*円/.exec(/価格[^円]{0,30}円/.exec(text)?.[0] || "")?.[1]),
+      release_date: releaseDateFrom(/発売(?:日|時期|予定)?[^0-9]{0,6}(\d{4}年\s*\d{1,2}月)/.exec(text)?.[1] || ""),
+      is_limited: false,
+    });
+  }
+  return out;
+}
+
 // --------------------------------------------------------------------------
 
 const SOURCES = [
@@ -346,6 +403,8 @@ const SOURCES = [
     notes: "Imported from the Ichiban Kuji official lineup (Nintendo title filters)." },
   { source_id: "banpresto_prize_nintendo_jp", defaultGrade: "NIN_PRIZE", idPrefix: "banpresto-nin", subline: "バンプレスト景品", tags: ["nintendo", "banpresto", "prize"], fetchAll: fetchBanpresto,
     notes: "Imported from the Banpresto prize site (Nintendo title pages)." },
+  { source_id: "gashapon_nintendo_jp", defaultGrade: "NIN_MINI", idPrefix: "gashapon-nin", subline: "ガシャポン", tags: ["nintendo", "gashapon", "bandai"], fetchAll: fetchGashapon,
+    notes: "Imported from the Bandai Gashapon site (Nintendo keyword search, one product page each)." },
   { source_id: "tamashii_web_nintendo_jp", defaultGrade: "NIN_ACTION", idPrefix: "tamashii-nin", subline: "魂ウェブ", tags: ["nintendo", "tamashii", "bandai spirits"], fetchAll: fetchTamashii,
     notes: "Imported from the Tamashii Web catalog (Nintendo character filters)." },
 ];

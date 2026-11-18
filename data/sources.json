@@ -1326,6 +1326,25 @@
         "coverage (only three Nintendo character codes exist)"
       ],
       "notes": "Character codes super_mario, legend_of_zelda, metroid_prime4_beyond. Keyword parameters are ignored by search_item.php and per_page caps at 40; product titles are bare character names, so the work comes from the character filter."
+    },
+    {
+      "source_id": "gashapon_nintendo_jp",
+      "name": "Bandai Gashapon (Nintendo)",
+      "type": "official_manufacturer_jp",
+      "country": "JP",
+      "base_url": "https://gashapon.jp/products/result.php",
+      "priority": 15,
+      "best_for": [
+        "capsule-toy lineups",
+        "release month",
+        "Japan price",
+        "official images"
+      ],
+      "weak_for": [
+        "scale figures",
+        "works beyond the searched keywords"
+      ],
+      "notes": "Keyword search lists ids only, so name/price/date come from each product page. The search reaches past Nintendo, and ヨッシースタンプ (a LINE-sticker character, not Nintendo Yoshi) is excluded by name — nothing else marks it apart."
     }
   ]
 }
