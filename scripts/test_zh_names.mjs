@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { applyZhNames } from "./apply_zh_names.mjs";
-import { composedGlossaryName, exactGlossaryName, hasKana, loadGlossary, searchAliases, translateName } from "./lib/zh-names.mjs";
+import { applyZhNames, isUntranslated } from "./apply_zh_names.mjs";
+import { composedGlossaryName, exactGlossaryName, hasHangul, hasKana, loadGlossary, searchAliases, translateName } from "./lib/zh-names.mjs";
 import { addSimplifiedNames, convertByChars, jpSetZh, learnCharMap, loadPokemonZh, titleZh } from "./atlas/pokemon_zh_names.mjs";
-import { productSpelling } from "./atlas/build_gundam_ms.mjs";
+import { applyHandNames, productSpelling } from "./atlas/build_gundam_ms.mjs";
 
 const glossary = {
   kata: new Map([
@@ -60,6 +60,27 @@ const glossary = {
   assert.equal(fromCurated, 1);
   assert.deepEqual(Object.keys(pending), ["b"]);
   assert.equal(kits[3].names.zh, "Millennium Falcon", "LEGO keeps its name");
+}
+// A Korean store's own title has no kana but is just as untranslated (2,148 such names.zh on 2026-11-20)
+{
+  assert.equal(isUntranslated("포켓몬센터 봉제인형 피카츄"), true);
+  assert.equal(isUntranslated("宝可梦中心 毛绒玩偶 皮卡丘"), false);
+  assert.equal(isUntranslated("宝可梦·皮卡丘"), false, "the middle dot is punctuation");
+  assert.equal(hasHangul("ㅋ"), true, "compatibility jamo count too");
+  const kits = [
+    { kit_id: "kr", franchise: "pokemon", names: { ja: "포켓몬센터 봉제인형 피카츄", ko: "포켓몬센터 봉제인형 피카츄" } },
+    { kit_id: "kr-done", franchise: "pokemon", names: { ja: "포켓몬센터 봉제인형 이브이" } },
+    { kit_id: "kr-half", franchise: "pokemon", names: { ja: "포켓몬센터 머그 꼬부기" } },
+  ];
+  const curated = {
+    "kr-done": { src: "포켓몬센터 봉제인형 이브이", zh: "宝可梦中心 毛绒玩偶 伊布" },
+    "kr-half": { src: "포켓몬센터 머그 꼬부기", zh: "宝可梦中心 马克杯 꼬부기" },
+  };
+  const { pending } = applyZhNames(kits, curated, () => glossary);
+  assert.deepEqual(pending.kr, { src: "포켓몬센터 봉제인형 피카츄", auto: "포켓몬센터 봉제인형 피카츄" });
+  assert.equal(pending["kr-done"], undefined);
+  assert.equal(kits[2].names.zh, "宝可梦中心 马克杯 꼬부기", "a half-translated curated name is still shown");
+  assert.deepEqual(pending["kr-half"], { src: "포켓몬센터 머그 꼬부기", curated: "宝可梦中心 马克杯 꼬부기" });
 }
 // Gundam MS guide (scripts/atlas/build_gundam_ms.mjs): the glossary's whole-name entry, never a composition
 {
@@ -177,6 +198,24 @@ const glossary = {
   const ms = JSON.parse(readFileSync("data/atlas/gundam-ms.json", "utf8")).ms;
   assert.ok(!ms.some((m) => /渣古|卡碧尼/.test(m.names.zh || "")), "MS names use the product spelling");
   assert.deepEqual(ms.find((m) => m.names.ja === "シャア専用ザクI")?.name_aliases, { zh: ["夏亚专用渣古I"] }, "GGET's name stays searchable");
+}
+// Hand MS names (gundam-overrides.json "names") fill gaps and beat only the unofficial Korean reading
+{
+  const fill = (names, namesSrc, hand) => {
+    applyHandNames(names, namesSrc, hand);
+    return { names, namesSrc };
+  };
+  assert.deepEqual(fill({ en: "Zeus Silhouette" }, {}, { ko: "제우스 실루엣", zh: "宙斯魅影装备" }).names, { en: "Zeus Silhouette", ko: "제우스 실루엣", zh: "宙斯魅影装备" });
+  assert.deepEqual(fill({ ko: "구프 시작실험기" }, { ko: "translit" }, { ko: "구프 시작 실험기" }), { names: { ko: "구프 시작 실험기" }, namesSrc: {} });
+  assert.deepEqual(fill({ ko: "자쿠", zh: "扎古" }, { ko: "kit" }, { ko: "작업용 자쿠", zh: "作业用扎古" }).names, { ko: "자쿠", zh: "扎古" }, "a kit or glossary name wins");
+  assert.deepEqual(fill({ ko: "자쿠" }, {}, undefined).names, { ko: "자쿠" });
+  const overrides = JSON.parse(readFileSync("data/atlas/gundam-overrides.json", "utf8"));
+  const msIds = new Set(JSON.parse(readFileSync("data/atlas/gundam-ms.json", "utf8")).ms.map((m) => m.id));
+  for (const [id, hand] of Object.entries(overrides.names || {})) {
+    assert.ok(msIds.has(id), `names override for an MS id that exists: ${id}`);
+    assert.ok(!hasKana(hand.zh) && !hasHangul(hand.zh), `Chinese hand name is Chinese: ${id}`);
+    assert.ok(!hand.ko || (hasHangul(hand.ko) && !hasKana(hand.ko)), `Korean hand name is Korean: ${id}`);
+  }
 }
 
 // MEZASTAR Japan sets: no zh_hant to convert, a Chinese title per series

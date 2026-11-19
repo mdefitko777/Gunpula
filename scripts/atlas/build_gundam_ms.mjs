@@ -6,7 +6,7 @@
 //   data/atlas/gundam-src-gundamwiki.json  import_gundamwiki_ms.mjs (canonical MS ids)
 //   data/atlas/gundam-src-gunplapedia.json import_gunplapedia.mjs  (JAN -> "Model of")
 //   data/atlas/gundam-src-manual.json      import_manual_works.mjs (official kit -> work)
-//   data/atlas/gundam-overrides.json       human-maintained {kits: {kit_id: [ms ids]}}
+//   data/atlas/gundam-overrides.json       human-maintained {kits: {kit_id: [ms ids]}, units, names: {ms id: {ko?, zh?}}}
 //   data/i18n/zh/gundam-ms.json            Simplified Chinese product-name glossary (names.zh)
 //
 // Outputs (compact JSON):
@@ -59,6 +59,21 @@ export function productSpelling(zh) {
   if (!zh) return null;
   const fixed = GGEN_SPELLING.reduce((text, [from, to]) => text.replace(from, to), zh);
   return fixed === zh ? null : fixed;
+}
+
+// Hand-written Korean / Chinese names from gundam-overrides.json "names" for MS that GGET, their
+// kits and the glossary leave without one: on 2026-11-20 33 linked MS had no Korean name (no
+// Japanese name to read, as "Zeus Silhouette", or kanji the reading does not know, as 親衛隊機)
+// and 16 without a Japanese name had no Chinese one (plus スモー and アメイジング, common words a
+// glossary term would also translate in product names). A hand name fills a gap or replaces the
+// unofficial Korean reading, never a GGET or kit name.
+export function applyHandNames(names, namesSrc, hand) {
+  if (!hand) return;
+  if (hand.ko && (!names.ko || namesSrc.ko === "translit")) {
+    names.ko = hand.ko;
+    delete namesSrc.ko;
+  }
+  if (hand.zh && !names.zh) names.zh = hand.zh;
 }
 
 // Names too generic to be used for contains / truncated matching.
@@ -214,6 +229,7 @@ async function main() {
   ]);
   const overrides = Object.fromEntries(Object.entries(overridesRaw.kits || overridesRaw).filter(([k, v]) => !k.startsWith("_") && Array.isArray(v)));
   const unitOverrides = overridesRaw.units || {}; // {gget unit id: MS id}
+  const nameOverrides = overridesRaw.names || {}; // {MS id: {ko?, zh?}}
   const kits = catalog.kits.filter((k) => k.franchise === "gundam");
 
   // ---------------------------------------------------------------- works
@@ -1066,6 +1082,7 @@ async function main() {
         composedGlossaryName(zhGlossary, names.ja) ??
         productSpelling(ggetZh);
       if (glossaryZh || ggetZh) names.zh = glossaryZh || ggetZh;
+      applyHandNames(names, namesSrc, nameOverrides[rec.id]);
       o.names = names;
       if (Object.keys(namesSrc).length) o.names_src = namesSrc;
       if (glossaryZh && ggetZh && ggetZh !== glossaryZh) o.name_aliases = { zh: [ggetZh] };

@@ -7,14 +7,14 @@
 // search_zh: fan / other-region names of every glossary term in the name (沙煲 for サザビー,
 // 海牛 for Hi-ν …) and of the shorter terms inside a longer one (渣古 for 量産型ザク) — search only,
 // never shown.
-// Products whose Chinese name still has kana and no curated entry go to
-// data/i18n/names-zh-pending.json (the to-do list for the next translation pass).
+// Products whose Chinese name is still untranslated (kana or Hangul left, see isUntranslated) go
+// to data/i18n/names-zh-pending.json (the to-do list for the next translation pass).
 //
 // Runs in the daily refresh after apply_ko_names.mjs. Idempotent.
 
 import { readFile, writeFile } from "node:fs/promises";
 import { decodeEntities } from "./lib/html-entities.mjs";
-import { hasKana, loadGlossary, searchAliases, translateName } from "./lib/zh-names.mjs";
+import { hasHangul, hasKana, loadGlossary, searchAliases, translateName } from "./lib/zh-names.mjs";
 import { sameSource } from "./lib/source-key.mjs";
 
 const KITS_PATH = "data/kits.json";
@@ -41,6 +41,14 @@ async function readJson(file, fallback) {
   }
 }
 
+// Korean store titles (pokemon_store_kr, academy_kr, Nintendo Korea …) have no kana, so their
+// names.zh, the Korean title passed through the Japanese glossary, counted as translated: on
+// 2026-11-20 2,148 products showed Hangul on the Chinese screens and none was on the to-do list.
+// A curated sentence with Hangul left is listed too (it is still shown: better than the raw title).
+export function isUntranslated(zh) {
+  return hasKana(zh) || hasHangul(zh);
+}
+
 export function applyZhNames(kits, curated, glossaryFor) {
   const pending = {};
   let fromCurated = 0;
@@ -56,9 +64,10 @@ export function applyZhNames(kits, curated, glossaryFor) {
     if (entry?.zh && sameSource(entry.src, src)) {
       zh = entry.zh;
       fromCurated += 1;
+      if (isUntranslated(zh)) pending[kit.kit_id] = { src, curated: zh };
     } else {
       fromGlossary += 1;
-      if (!auto.complete) pending[kit.kit_id] = { src, auto: auto.zh };
+      if (isUntranslated(zh)) pending[kit.kit_id] = { src, auto: zh };
     }
     kit.names = { ...kit.names, zh };
     const words = searchAliases(auto.matched, glossary, auto.inner).filter((word) => !zh.includes(word));
@@ -86,10 +95,11 @@ async function main() {
   const ids = Object.keys(pending).sort();
   await writeFile(
     PENDING_PATH,
-    `${JSON.stringify({ note: "Products whose Chinese name still has kana; translate them into data/i18n/names-zh.json.", count: ids.length, names: Object.fromEntries(ids.map((id) => [id, pending[id]])) }, null, 1)}\n`,
+    `${JSON.stringify({ note: "Products whose Chinese name still has kana or Hangul; translate them into data/i18n/names-zh.json.", count: ids.length, names: Object.fromEntries(ids.map((id) => [id, pending[id]])) }, null, 1)}\n`,
   );
   const leftKana = doc.kits.filter((kit) => kit.franchise !== "lego" && hasKana(kit.names?.zh)).length;
-  console.log(`Chinese names: ${fromCurated} curated, ${fromGlossary} from the glossary, ${ids.length} still with kana (${leftKana} in total).`);
+  const leftHangul = doc.kits.filter((kit) => kit.franchise !== "lego" && hasHangul(kit.names?.zh)).length;
+  console.log(`Chinese names: ${fromCurated} curated, ${fromGlossary} from the glossary, ${ids.length} untranslated (${leftKana} with kana, ${leftHangul} with Hangul).`);
 }
 
 if (/(^|[\\/])apply_zh_names\.mjs$/.test(process.argv[1] || "")) {

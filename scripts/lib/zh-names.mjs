@@ -25,6 +25,7 @@ import { decodeEntities } from "./html-entities.mjs";
 const GLOSSARY_DIR = "data/i18n/zh";
 const KATAKANA = /[゠-ヿㇰ-ㇿ]/;
 const KANA = /[぀-ヿㇰ-ㇿｦ-ﾟ]/;
+const HANGUL = /[ᄀ-ᇿ㄰-㆏가-힯]/;
 const CJK_OR_KANA = /[぀-ヿ㐀-鿿]/;
 const HIRAGANA = /[ぁ-ゖ]/;
 const ALNUM = /[A-Za-z0-9]/;
@@ -288,4 +289,8 @@ export function searchAliases(matched, glossary, inner = []) {
 
 export function hasKana(text) {
   return KANA.test(String(text || "").replace(DOTS, ""));
+}
+
+export function hasHangul(text) {
+  return HANGUL.test(String(text || ""));
 }
