@@ -11,7 +11,8 @@
       },
       "image": "./assets/atlas/covers/channel-gundam.png",
       "image_remote": "https://gundam-official.com/assets/ogp-default.png",
-      "cover_source": "https://gundam-official.com/"
+      "cover_source": "https://gundam-official.com/",
+      "cover_kind": "picture"
     },
     "beyblade": {
       "label": {
@@ -22,7 +23,8 @@
       },
       "image": "./assets/atlas/covers/channel-beyblade.png",
       "image_remote": "https://beyblade.takaratomy.co.jp/bbx_portal.png",
-      "cover_source": "https://beyblade.takaratomy.co.jp/"
+      "cover_source": "https://beyblade.takaratomy.co.jp/",
+      "cover_kind": "picture"
     },
     "pokemon": {
       "label": {
@@ -33,7 +35,8 @@
       },
       "image": "./assets/atlas/covers/channel-pokemon.png",
       "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/960px-International_Pok%C3%A9mon_logo.svg.png",
-      "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon"
+      "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon",
+      "cover_kind": "logo"
     },
     "fate": {
       "label": {
@@ -44,7 +47,8 @@
       },
       "image": "./assets/atlas/covers/channel-fate.jpg",
       "image_remote": "https://www.fate-go.jp/images/fate_ogp_3500.png",
-      "cover_source": "https://www.fate-go.jp/"
+      "cover_source": "https://www.fate-go.jp/",
+      "cover_kind": "picture"
     },
     "armored_core": {
       "label": {
@@ -55,7 +59,8 @@
       },
       "image": "./assets/atlas/covers/channel-armored_core.png",
       "image_remote": "https://www.armoredcore.net/resources/images/common/ogp/ogp_image.png",
-      "cover_source": "https://www.armoredcore.net/"
+      "cover_source": "https://www.armoredcore.net/",
+      "cover_kind": "picture"
     },
     "madoka": {
       "label": {
@@ -64,7 +69,10 @@
         "en": "Madoka Magica",
         "ja": "まどか☆マギカ"
       },
-      "image": ""
+      "image": "./assets/atlas/covers/channel-madoka.jpg",
+      "image_remote": "https://www.madoka-magica.com/assets/icon/ogp.png",
+      "cover_source": "https://www.madoka-magica.com/",
+      "cover_kind": "picture"
     },
     "lego": {
       "label": {
@@ -73,7 +81,10 @@
         "en": "LEGO",
         "ja": "レゴ"
       },
-      "image": ""
+      "image": "./assets/atlas/covers/channel-lego.png",
+      "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/LEGO_logo.svg/500px-LEGO_logo.svg.png",
+      "cover_source": "https://en.wikipedia.org/wiki/Lego",
+      "cover_kind": "logo"
     },
     "nintendo": {
       "label": {
@@ -84,7 +95,8 @@
       },
       "image": "./assets/atlas/covers/channel-nintendo.webp",
       "image_remote": "https://www.nintendo.co.kr/sns.png",
-      "cover_source": "https://www.nintendo.co.kr/"
+      "cover_source": "https://www.nintendo.co.kr/",
+      "cover_kind": "picture"
     },
     "effects": {
       "label": {
@@ -95,7 +107,8 @@
       },
       "image": "./assets/atlas/covers/channel-effects.jpg",
       "image_remote": "https://tamashiiweb.com/storage/images/brands/imported/og_tamashii_effect.jpg",
-      "cover_source": "https://tamashiiweb.com/item_brand/tamashii_effect/"
+      "cover_source": "https://tamashiiweb.com/item_brand/tamashii_effect/",
+      "cover_kind": "picture"
     }
   },
   "line_covers": {
@@ -104,33 +117,79 @@
         "image": "./assets/atlas/covers/line-armored_core-ac_smp.png",
         "image_remote": "https://www.bandai.co.jp/candy/published/cms_files/smp.png",
         "cover_source": "https://www.bandai.co.jp/candy/brand/smp/index.html",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 400,
+        "height": 200
+      },
+      "AC30MM": {
+        "image": "./assets/atlas/covers/line-armored_core-ac30mm.jpg",
+        "image_remote": "https://manual.bandai-hobby.net/images/titles/199.jpeg",
+        "cover_source": "https://manual.bandai-hobby.net/",
+        "kind": "logo",
+        "width": 300,
+        "height": 170
       },
       "ACVI": {
         "image": "./assets/atlas/covers/line-armored_core-acvi.png",
         "image_remote": "https://shop.kotobukiya.co.jp/img/usr/cmnpc/ac_logo_pc.png",
         "cover_source": "https://shop.kotobukiya.co.jp/shop/r/r100000/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 151,
+        "height": 151
       }
     },
     "beyblade": {
+      "BEYBLADE_X": {
+        "image": "./assets/atlas/covers/line-beyblade-beyblade_x.png",
+        "image_remote": "https://beyblade.takaratomy.co.jp/bbx_portal.png",
+        "cover_source": "https://beyblade.takaratomy.co.jp/",
+        "kind": "logo",
+        "width": 640,
+        "height": 139
+      },
       "BX": {
         "image": "./assets/atlas/covers/line-beyblade-bx.png",
         "image_remote": "https://beyblade.takaratomy.co.jp/beyblade-x/guide/_image/pict17@2x.png",
         "cover_source": "https://beyblade.takaratomy.co.jp/beyblade-x/guide/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 236,
+        "height": 204
       },
       "CX": {
         "image": "./assets/atlas/covers/line-beyblade-cx.png",
         "image_remote": "https://beyblade.takaratomy.co.jp/beyblade-x/guide/_image/pict17_3@2x.png",
         "cover_source": "https://beyblade.takaratomy.co.jp/beyblade-x/guide/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 236,
+        "height": 204
       },
       "UX": {
         "image": "./assets/atlas/covers/line-beyblade-ux.png",
         "image_remote": "https://beyblade.takaratomy.co.jp/beyblade-x/guide/_image/pict17_2@2x.png",
         "cover_source": "https://beyblade.takaratomy.co.jp/beyblade-x/guide/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 236,
+        "height": 204
+      }
+    },
+    "effects": {
+      "TAMASHII_EFFECT": {
+        "image": "./assets/atlas/covers/line-effects-tamashii_effect.png",
+        "image_remote": "https://tamashiiweb.com/assets/img/header/logo_tamashii_effect.webp",
+        "cover_source": "https://tamashiiweb.com/item_brand/tamashii_effect/",
+        "kind": "logo",
+        "width": 315,
+        "height": 123
+      }
+    },
+    "fate": {
+      "NENDOROID": {
+        "image": "./assets/atlas/covers/line-fate-nendoroid.png",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Nendoroid-Series.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail_unscaled",
+        "cover_source": "https://en.wikipedia.org/wiki/Nendoroid",
+        "kind": "logo",
+        "width": 210,
+        "height": 79
       }
     },
     "gundam": {
@@ -138,232 +197,394 @@
         "image": "./assets/atlas/covers/line-gundam-artifact.png",
         "image_remote": "https://www.bandai.co.jp/candy/gundam/artifact/images/logoS.png",
         "cover_source": "https://www.bandai.co.jp/candy/gundam/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 375,
+        "height": 114
       },
       "CHOGOKIN": {
         "image": "./assets/atlas/covers/line-gundam-chogokin.png",
         "image_remote": "https://tamashiiweb.com/assets/img/brand-logo/chogokin.webp",
         "cover_source": "https://tamashiiweb.com/item_brand/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 640,
+        "height": 206
       },
       "CONVERGE": {
         "image": "./assets/atlas/covers/line-gundam-converge.png",
         "image_remote": "https://www.bandai.co.jp/candy/gundam/converge/images/logoS.2501.png",
         "cover_source": "https://www.bandai.co.jp/candy/gundam/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 375,
+        "height": 114
       },
       "EG": {
         "image": "./assets/atlas/covers/line-gundam-eg.jpg",
         "image_remote": "https://manual.bandai-hobby.net/images/categories/2.jpeg",
         "cover_source": "https://manual.bandai-hobby.net/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 300,
+        "height": 170
       },
       "FIGUARTS_MINI": {
         "image": "./assets/atlas/covers/line-gundam-figuarts_mini.png",
         "image_remote": "https://tamashiiweb.com/assets/img/header/logo_figuarts_mini.webp",
         "cover_source": "https://tamashiiweb.com/item_brand/figuarts_mini/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 315,
+        "height": 123
       },
       "FM": {
-        "image": "./assets/atlas/covers/line-gundam-fm.jpg",
-        "image_remote": "https://manual.bandai-hobby.net/images/categories/4.jpeg",
-        "cover_source": "https://manual.bandai-hobby.net/",
-        "kind": "logo"
+        "image": "./assets/atlas/covers/line-gundam-fm.png",
+        "image_remote": "https://satellite.bandai-hobby.net/images/characters/gundam/list/logo_fullmechanics.png",
+        "cover_source": "https://satellite.bandai-hobby.net/characters/gundam_list.php",
+        "kind": "logo",
+        "width": 480,
+        "height": 114
       },
       "GFF": {
         "image": "./assets/atlas/covers/line-gundam-gff.png",
         "image_remote": "https://tamashiiweb.com/assets/img/header/logo_gundam_fix_figuration_metal.webp",
         "cover_source": "https://tamashiiweb.com/item_brand/gundam_fix_figuration_metal/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 315,
+        "height": 123
       },
       "GFRAME": {
         "image": "./assets/atlas/covers/line-gundam-gframe.png",
         "image_remote": "https://www.bandai.co.jp/candy/gundam/gframe/images/logoS.2204.png",
         "cover_source": "https://www.bandai.co.jp/candy/gundam/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 375,
+        "height": 114
       },
       "GSF": {
         "image": "./assets/atlas/covers/line-gundam-gsf.jpg",
         "image_remote": "https://gashapon.jp/gundam/images/top/btn_item_ensemble_03.jpg",
         "cover_source": "https://gashapon.jp/gundam/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 300,
+        "height": 73
       },
       "GUNDAM_MERCH": {
         "image": "./assets/atlas/covers/line-gundam-gundam_merch.jpg",
         "image_remote": "https://gashapon.jp/gundam/ogp_v3.jpg?v4",
         "cover_source": "https://gashapon.jp/gundam/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 640,
+        "height": 219
       },
       "GUNDAM_UNIVERSE": {
         "image": "./assets/atlas/covers/line-gundam-gundam_universe.png",
         "image_remote": "https://tamashiiweb.com/assets/img/brand-logo/gundam_universe.webp",
         "cover_source": "https://tamashiiweb.com/item_brand/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 640,
+        "height": 234
       },
       "HG": {
-        "image": "./assets/atlas/covers/line-gundam-hg.jpg",
-        "image_remote": "https://manual.bandai-hobby.net/images/categories/1.jpeg",
-        "cover_source": "https://manual.bandai-hobby.net/",
-        "kind": "logo"
+        "image": "./assets/atlas/covers/line-gundam-hg.png",
+        "image_remote": "https://satellite.bandai-hobby.net/images/characters/gundam/list/logo_hg.png",
+        "cover_source": "https://satellite.bandai-hobby.net/characters/gundam_list.php",
+        "kind": "logo",
+        "width": 264,
+        "height": 182
       },
       "HIRM": {
         "image": "./assets/atlas/covers/line-gundam-hirm.png",
         "image_remote": "https://satellite.bandai-hobby.net/images/characters/gundam/list/logo_hirm.png",
         "cover_source": "https://satellite.bandai-hobby.net/characters/gundam_list.php",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 480,
+        "height": 71
       },
       "MEGA": {
-        "image": "./assets/atlas/covers/line-gundam-mega.jpg",
-        "image_remote": "https://manual.bandai-hobby.net/images/categories/232.jpeg",
-        "cover_source": "https://manual.bandai-hobby.net/",
-        "kind": "logo"
+        "image": "./assets/atlas/covers/line-gundam-mega.png",
+        "image_remote": "https://satellite.bandai-hobby.net/images/characters/gundam/list/logo_mega.png",
+        "cover_source": "https://satellite.bandai-hobby.net/characters/gundam_list.php",
+        "kind": "logo",
+        "width": 196,
+        "height": 196
       },
       "METAL_BUILD": {
         "image": "./assets/atlas/covers/line-gundam-metal_build.png",
         "image_remote": "https://tamashiiweb.com/assets/img/brand-logo/metal_build.webp",
         "cover_source": "https://tamashiiweb.com/item_brand/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 640,
+        "height": 150
       },
       "METAL_ROBOT": {
         "image": "./assets/atlas/covers/line-gundam-metal_robot.png",
         "image_remote": "https://tamashiiweb.com/assets/img/brand-logo/metal_robot_tamashii.webp",
         "cover_source": "https://tamashiiweb.com/item_brand/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 640,
+        "height": 360
       },
       "METAL_STRUCTURE": {
         "image": "./assets/atlas/covers/line-gundam-metal_structure.png",
         "image_remote": "https://tamashiiweb.com/assets/img/header/logo_kaitai_shou_ki.webp",
         "cover_source": "https://tamashiiweb.com/item_brand/kaitai_shou_ki/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 315,
+        "height": 123
       },
       "MG": {
-        "image": "./assets/atlas/covers/line-gundam-mg.jpg",
-        "image_remote": "https://manual.bandai-hobby.net/images/categories/6.jpeg",
-        "cover_source": "https://manual.bandai-hobby.net/",
-        "kind": "logo"
+        "image": "./assets/atlas/covers/line-gundam-mg.png",
+        "image_remote": "https://satellite.bandai-hobby.net/images/characters/gundam/list/logo_mg.png",
+        "cover_source": "https://satellite.bandai-hobby.net/characters/gundam_list.php",
+        "kind": "logo",
+        "width": 281,
+        "height": 185
       },
       "MGEX": {
         "image": "./assets/atlas/covers/line-gundam-mgex.jpg",
         "image_remote": "https://manual.bandai-hobby.net/images/categories/7.jpeg",
         "cover_source": "https://manual.bandai-hobby.net/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 300,
+        "height": 170
       },
       "MGSD": {
         "image": "./assets/atlas/covers/line-gundam-mgsd.jpg",
         "image_remote": "https://manual.bandai-hobby.net/images/categories/8.jpeg",
         "cover_source": "https://manual.bandai-hobby.net/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 300,
+        "height": 170
       },
       "MOBILITY": {
         "image": "./assets/atlas/covers/line-gundam-mobility.png",
         "image_remote": "https://www.bandai.co.jp/candy/gundam/mobilityJoint/images/logoS.png",
         "cover_source": "https://www.bandai.co.jp/candy/gundam/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 375,
+        "height": 114
       },
       "MSE": {
         "image": "./assets/atlas/covers/line-gundam-mse.png",
         "image_remote": "https://gashapon.jp/ensemble/images/common/logo_main.png",
         "cover_source": "https://gashapon.jp/ensemble/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 640,
+        "height": 101
       },
       "NXEDGE": {
         "image": "./assets/atlas/covers/line-gundam-nxedge.png",
         "image_remote": "https://tamashiiweb.com/assets/img/header/logo_nxedge.webp",
         "cover_source": "https://tamashiiweb.com/item_brand/nxedge/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 315,
+        "height": 123
       },
       "PG": {
-        "image": "./assets/atlas/covers/line-gundam-pg.jpg",
-        "image_remote": "https://manual.bandai-hobby.net/images/categories/9.jpeg",
-        "cover_source": "https://manual.bandai-hobby.net/",
-        "kind": "logo"
+        "image": "./assets/atlas/covers/line-gundam-pg.png",
+        "image_remote": "https://satellite.bandai-hobby.net/images/characters/gundam/list/logo_pg.png",
+        "cover_source": "https://satellite.bandai-hobby.net/characters/gundam_list.php",
+        "kind": "logo",
+        "width": 480,
+        "height": 61
       },
       "RE100": {
         "image": "./assets/atlas/covers/line-gundam-re100.jpg",
         "image_remote": "https://manual.bandai-hobby.net/images/categories/133.jpeg",
         "cover_source": "https://manual.bandai-hobby.net/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 300,
+        "height": 170
       },
       "RG": {
-        "image": "./assets/atlas/covers/line-gundam-rg.jpg",
-        "image_remote": "https://manual.bandai-hobby.net/images/categories/10.jpeg",
-        "cover_source": "https://manual.bandai-hobby.net/",
-        "kind": "logo"
+        "image": "./assets/atlas/covers/line-gundam-rg.png",
+        "image_remote": "https://satellite.bandai-hobby.net/images/characters/gundam/list/logo_rg.png",
+        "cover_source": "https://satellite.bandai-hobby.net/characters/gundam_list.php",
+        "kind": "logo",
+        "width": 326,
+        "height": 186
       },
       "ROBOT_SPIRITS": {
         "image": "./assets/atlas/covers/line-gundam-robot_spirits.png",
         "image_remote": "https://tamashiiweb.com/assets/img/brand-logo/robot_tamashii.webp",
         "cover_source": "https://tamashiiweb.com/item_brand/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 640,
+        "height": 206
       },
       "SD": {
         "image": "./assets/atlas/covers/line-gundam-sd.png",
         "image_remote": "https://satellite.bandai-hobby.net/images/characters/gundam/list/logo_sd.png",
         "cover_source": "https://satellite.bandai-hobby.net/characters/gundam_list.php",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 530,
+        "height": 271
       },
       "SDCS": {
         "image": "./assets/atlas/covers/line-gundam-sdcs.jpg",
         "image_remote": "https://manual.bandai-hobby.net/images/categories/35.jpeg",
         "cover_source": "https://manual.bandai-hobby.net/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 300,
+        "height": 170
       },
       "SDEX": {
         "image": "./assets/atlas/covers/line-gundam-sdex.jpg",
         "image_remote": "https://manual.bandai-hobby.net/images/categories/14.jpeg",
         "cover_source": "https://manual.bandai-hobby.net/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 300,
+        "height": 170
       },
       "SDW": {
         "image": "./assets/atlas/covers/line-gundam-sdw.png",
         "image_remote": "https://satellite.bandai-hobby.net/images/characters/gundam/sd/logo_h.png",
         "cover_source": "https://satellite.bandai-hobby.net/characters/gundam_sd.php",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 280,
+        "height": 280
       },
       "SDX": {
         "image": "./assets/atlas/covers/line-gundam-sdx.jpg",
         "image_remote": "https://tamashiiweb.com/storage/images/brands/imported/og_sdx.jpg",
         "cover_source": "https://tamashiiweb.com/item_brand/sdx/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 620,
+        "height": 180
       },
       "SH_FIGUARTS": {
         "image": "./assets/atlas/covers/line-gundam-sh_figuarts.png",
         "image_remote": "https://tamashiiweb.com/assets/img/brand-logo/shfiguarts.webp",
         "cover_source": "https://tamashiiweb.com/item_brand/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 640,
+        "height": 158
       },
       "SUPERIOR": {
         "image": "./assets/atlas/covers/line-gundam-superior.png",
         "image_remote": "https://www.bandai.co.jp/candy/gundam/superiordefine/images/logoS.png",
         "cover_source": "https://www.bandai.co.jp/candy/gundam/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 375,
+        "height": 114
+      }
+    },
+    "madoka": {
+      "NENDOROID": {
+        "image": "./assets/atlas/covers/line-madoka-nendoroid.png",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Nendoroid-Series.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail_unscaled",
+        "cover_source": "https://en.wikipedia.org/wiki/Nendoroid",
+        "kind": "logo",
+        "width": 210,
+        "height": 79
+      }
+    },
+    "nintendo": {
+      "NIN_AMIIBO": {
+        "image": "./assets/atlas/covers/line-nintendo-nin_amiibo.png",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Amiibo.svg/500px-Amiibo.svg.png?utm_source=ja.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+        "cover_source": "https://ja.wikipedia.org/wiki/Amiibo",
+        "kind": "logo",
+        "width": 500,
+        "height": 114
       }
     },
     "pokemon": {
       "POKE_GASHAPON": {
         "image": "./assets/atlas/covers/line-pokemon-poke_gashapon.png",
-        "image_remote": "https://gashapon.jp/pokemon/ogp.png",
+        "image_remote": "https://gashapon.jp/pokemon/images/common/logo_gashapon.png",
         "cover_source": "https://gashapon.jp/pokemon/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 224,
+        "height": 61
       },
       "POKE_KUJI": {
         "image": "./assets/atlas/covers/line-pokemon-poke_kuji.png",
         "image_remote": "https://1kuji.com/images/common/logo_1kuji.png",
         "cover_source": "https://1kuji.com/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 203,
+        "height": 110
       },
       "POKE_MONCOLLE": {
         "image": "./assets/atlas/covers/line-pokemon-poke_moncolle.png",
         "image_remote": "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/images/moncolle_logo.png",
         "cover_source": "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 320,
+        "height": 99
       },
       "POKEPLA": {
         "image": "./assets/atlas/covers/line-pokemon-pokepla.jpg",
         "image_remote": "https://manual.bandai-hobby.net/images/categories/199.jpeg",
         "cover_source": "https://manual.bandai-hobby.net/",
-        "kind": "logo"
+        "kind": "logo",
+        "width": 300,
+        "height": 170
       }
+    }
+  },
+  "line_icons": {
+    "armored_core": {
+      "AC_SHOKUGAN": "food"
+    },
+    "beyblade": {
+      "BEYBLADE_GOODS": "goods"
+    },
+    "effects": {
+      "CUSTOMIZE_EFFECT": "plamo",
+      "GSC_SIMPLE_EFFECT": "misc",
+      "MODEROID_EFFECT": "plamo"
+    },
+    "fate": {
+      "FATE_ACTION": "figure",
+      "FATE_GOODS": "goods",
+      "FATE_MINI": "figure",
+      "FATE_PLUSH": "plush",
+      "FATE_PRIZE": "prize",
+      "FATE_SCALE": "figure"
+    },
+    "gundam": {
+      "AG": "plamo",
+      "BMC": "plamo",
+      "EX": "plamo",
+      "FG": "plamo",
+      "GANSO_SD": "figure",
+      "HAROPLA": "plamo",
+      "HY2M": "plamo",
+      "NG": "plamo",
+      "OPTION_PARTS": "plamo",
+      "PGU": "plamo",
+      "TAMASHII_OTHER": "figure",
+      "UCHG": "plamo"
+    },
+    "lego": {
+      "LEGO_BOOK": "misc",
+      "LEGO_GEAR": "goods",
+      "LEGO_MINIFIG": "figure",
+      "LEGO_PARTS": "misc",
+      "LEGO_SET": "plamo"
+    },
+    "madoka": {
+      "MADOKA_ACTION": "figure",
+      "MADOKA_MINI": "figure",
+      "MADOKA_PLUSH": "plush",
+      "MADOKA_PRIZE": "prize",
+      "MADOKA_SCALE": "figure"
+    },
+    "nintendo": {
+      "NIN_ACTION": "figure",
+      "NIN_GAME": "game",
+      "NIN_GOODS": "goods",
+      "NIN_HW": "hardware",
+      "NIN_MINI": "capsule",
+      "NIN_PLAMO": "plamo",
+      "NIN_PLUSH": "plush",
+      "NIN_PRIZE": "prize",
+      "NIN_SCALE": "figure"
+    },
+    "pokemon": {
+      "POKE_FIGURE": "figure",
+      "POKE_GOODS": "goods",
+      "POKE_PLUSH": "plush",
+      "POKE_PRIZE": "prize"
     }
   },
   "franchises": {
@@ -386,6 +607,7 @@
         "count": 56,
         "image": "https://img.kusoge.xyz/ggenet/series/logo_l_series_0010.webp",
         "cover_source": "G Generation series logo (official game asset) via soshage.com GGET",
+        "cover_kind": "logo",
         "works": [
           {
             "work_id": 10,
@@ -687,6 +909,7 @@
         "count": 13,
         "image": "https://img.kusoge.xyz/ggenet/series/logo_l_series_3000.webp",
         "cover_source": "G Generation series logo (official game asset) via soshage.com GGET",
+        "cover_kind": "logo",
         "works": [
           {
             "work_id": 3000,
@@ -773,6 +996,7 @@
         "count": 8,
         "image": "https://img.kusoge.xyz/ggenet/series/logo_l_series_0170.webp",
         "cover_source": "G Generation series logo (official game asset) via soshage.com GGET",
+        "cover_kind": "logo",
         "works": [
           {
             "work_id": 170,
@@ -834,6 +1058,7 @@
         "count": 5,
         "image": "https://img.kusoge.xyz/ggenet/series/logo_l_series_2100.webp",
         "cover_source": "G Generation series logo (official game asset) via soshage.com GGET",
+        "cover_kind": "logo",
         "works": [
           {
             "work_id": 2100,
@@ -880,6 +1105,7 @@
         "count": 4,
         "image": "https://img.kusoge.xyz/ggenet/series/logo_l_series_4300.webp",
         "cover_source": "G Generation series logo (official game asset) via soshage.com GGET",
+        "cover_kind": "logo",
         "works": [
           {
             "work_id": 4300,
@@ -921,6 +1147,7 @@
         "count": 2,
         "image": "https://img.kusoge.xyz/ggenet/series/logo_l_series_5000.webp",
         "cover_source": "G Generation series logo (official game asset) via soshage.com GGET",
+        "cover_kind": "logo",
         "works": [
           {
             "work_id": 5000,
@@ -952,6 +1179,7 @@
         "count": 1,
         "image": "https://img.kusoge.xyz/ggenet/series/logo_l_series_0550.webp",
         "cover_source": "G Generation series logo (official game asset) via soshage.com GGET",
+        "cover_kind": "logo",
         "works": [
           {
             "work_id": 550,
@@ -978,6 +1206,7 @@
         "count": 4,
         "image": "https://img.kusoge.xyz/ggenet/series/logo_l_series_4000.webp",
         "cover_source": "G Generation series logo (official game asset) via soshage.com GGET",
+        "cover_kind": "logo",
         "works": [
           {
             "work_id": 4000,
@@ -1019,6 +1248,7 @@
         "count": 2,
         "image": "https://img.kusoge.xyz/ggenet/series/logo_l_series_6000.webp",
         "cover_source": "G Generation series logo (official game asset) via soshage.com GGET",
+        "cover_kind": "logo",
         "works": [
           {
             "work_id": 6000,
@@ -1050,6 +1280,7 @@
         "count": 1,
         "image": "https://img.kusoge.xyz/ggenet/series/logo_l_series_2000.webp",
         "cover_source": "G Generation series logo (official game asset) via soshage.com GGET",
+        "cover_kind": "logo",
         "works": [
           {
             "work_id": 2000,
@@ -1076,6 +1307,7 @@
         "count": 1,
         "image": "https://img.kusoge.xyz/ggenet/series/logo_l_series_2300.webp",
         "cover_source": "G Generation series logo (official game asset) via soshage.com GGET",
+        "cover_kind": "logo",
         "works": [
           {
             "work_id": 2300,
@@ -1102,6 +1334,7 @@
         "count": 1,
         "image": "https://img.kusoge.xyz/ggenet/series/logo_l_series_2400.webp",
         "cover_source": "G Generation series logo (official game asset) via soshage.com GGET",
+        "cover_kind": "logo",
         "works": [
           {
             "work_id": 2400,
@@ -1128,6 +1361,7 @@
         "count": 1,
         "image": "https://img.kusoge.xyz/ggenet/series/logo_l_series_4200.webp",
         "cover_source": "G Generation series logo (official game asset) via soshage.com GGET",
+        "cover_kind": "logo",
         "works": [
           {
             "work_id": 4200,
@@ -1154,6 +1388,7 @@
         "count": 8,
         "image": "https://img.kusoge.xyz/ggenet/series/logo_l_series_7000.webp",
         "cover_source": "G Generation series logo (official game asset) via soshage.com GGET",
+        "cover_kind": "logo",
         "works": [
           {
             "work_id": 7000,
@@ -1225,6 +1460,7 @@
         "image": "./assets/atlas/covers/pokemon-gen1.webp",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/a/af/Pok%C3%A9mon_Red_and_Blue_cover_art.webp",
         "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon_Red_and_Blue",
+        "cover_kind": "picture",
         "items": [
           "1. Bulbasaur",
           "2. Ivysaur",
@@ -2148,6 +2384,7 @@
         "image": "./assets/atlas/covers/pokemon-gen2.png",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/4/4c/Pok%C3%A9mon_box_art_-_Gold_Version.png",
         "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon_Gold_and_Silver",
+        "cover_kind": "picture",
         "items": [
           "152. Chikorita",
           "153. Bayleef",
@@ -2517,6 +2754,7 @@
         "image": "./assets/atlas/covers/pokemon-gen3.jpg",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/b/be/PokemonRubySapphireBox.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon_Ruby_and_Sapphire",
+        "cover_kind": "picture",
         "items": [
           "252. Treecko",
           "253. Grovyle",
@@ -2913,6 +3151,7 @@
         "image": "./assets/atlas/covers/pokemon-gen4.jpg",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/2/2e/PokemonDiamondPearlBoxArt.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon_Diamond_and_Pearl",
+        "cover_kind": "picture",
         "items": [
           "387. Turtwig",
           "388. Grotle",
@@ -3345,6 +3584,7 @@
         "image": "./assets/atlas/covers/pokemon-gen5.jpg",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/e/e1/Pokemon_Black_Box_Artwork.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon_Black_and_White",
+        "cover_kind": "picture",
         "items": [
           "494. Victini",
           "495. Snivy",
@@ -3889,9 +4129,10 @@
           "en": "X, Y, Omega Ruby, Alpha Sapphire",
           "ja": "X・Y・オメガルビー・アルファサファイア"
         },
-        "image": "./assets/atlas/covers/pokemon-gen6.jpg",
-        "image_remote": "https://upload.wikimedia.org/wikipedia/en/d/dc/Pokemon_X_and_Y_box_art.jpg",
-        "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon_X_and_Y",
+        "image": "./assets/atlas/covers/pokemon-gen6.png",
+        "image_remote": "https://www.pokemon.co.jp/ex/xy/common/images/logo_xy.png",
+        "cover_source": "https://www.pokemon.co.jp/ex/xy/",
+        "cover_kind": "logo",
         "items": [
           "650. Chespin",
           "651. Quilladin",
@@ -4261,9 +4502,10 @@
           "en": "Sun, Moon, Ultra Sun, Ultra Moon, Let's Go",
           "ja": "サン・ムーン・ウルトラサン・ウルトラムーン・Let's Go"
         },
-        "image": "./assets/atlas/covers/pokemon-gen7.jpg",
-        "image_remote": "https://upload.wikimedia.org/wikipedia/en/b/ba/Pokemon_Sun_Boxart.jpg",
-        "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon_Sun_and_Moon",
+        "image": "./assets/atlas/covers/pokemon-gen7.png",
+        "image_remote": "https://www.pokemon.co.jp/ex/sun_moon/common/images/shared/logo-sun.png",
+        "cover_source": "https://www.pokemon.co.jp/ex/sun_moon/",
+        "cover_kind": "logo",
         "items": [
           "722. Rowlet",
           "723. Dartrix",
@@ -4601,9 +4843,10 @@
           "en": "Sword, Shield, BDSP, Legends: Arceus",
           "ja": "ソード・シールド・BDSP・LEGENDS アルセウス"
         },
-        "image": "./assets/atlas/covers/pokemon-gen8.jpg",
-        "image_remote": "https://upload.wikimedia.org/wikipedia/en/f/fa/Pok%C3%A9mon_Sword_and_Shield.jpg",
-        "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon_Sword_and_Shield",
+        "image": "./assets/atlas/covers/pokemon-gen8.png",
+        "image_remote": "https://www.pokemon.co.jp/ex/sword_shield/assets/logo_main01@2x.png",
+        "cover_source": "https://www.pokemon.co.jp/ex/sword_shield/",
+        "cover_kind": "logo",
         "items": [
           "810. Grookey",
           "811. Thwackey",
@@ -4892,8 +5135,9 @@
           "ja": "スカーレット・バイオレット・LEGENDS Z-A"
         },
         "image": "./assets/atlas/covers/pokemon-gen9.png",
-        "image_remote": "https://upload.wikimedia.org/wikipedia/en/0/00/Pok%C3%A9mon_Scarlet_and_Violet_banner.png",
-        "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon_Scarlet_and_Violet",
+        "image_remote": "https://www.pokemon.co.jp/ex/sv/assets/img/toppage/ja/title_scarlet.png",
+        "cover_source": "https://www.pokemon.co.jp/ex/sv/ja/",
+        "cover_kind": "logo",
         "items": [
           "906. Sprigatito",
           "907. Floragato",
@@ -5587,6 +5831,7 @@
         "image": "./assets/atlas/covers/channel-pokemon.png",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/960px-International_Pok%C3%A9mon_logo.svg.png",
         "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon",
+        "cover_kind": "logo",
         "items": [],
         "kit_ids": [
           "banpresto-2848093",
@@ -5736,6 +5981,7 @@
         "image": "./assets/atlas/covers/channel-pokemon.png",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/960px-International_Pok%C3%A9mon_logo.svg.png",
         "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon",
+        "cover_kind": "logo",
         "items": [],
         "kit_ids": [
           "ichibankuji-pk30th-2-2",
@@ -6483,6 +6729,7 @@
         "image": "./assets/atlas/covers/fate-fgo_100.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap100.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 1,
@@ -6624,6 +6871,7 @@
         "image": "./assets/atlas/covers/fate-fgo_101.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap101.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 6,
@@ -6766,6 +7014,7 @@
         "image": "./assets/atlas/covers/fate-fgo_102.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap102.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 5,
@@ -6865,6 +7114,7 @@
         "image": "./assets/atlas/covers/fate-fgo_104.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap104.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 33,
@@ -6958,6 +7208,7 @@
         "image": "./assets/atlas/covers/fate-fgo_105.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap105.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 71,
@@ -7080,6 +7331,7 @@
         "image": "./assets/atlas/covers/fate-fgo_106.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap106.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 16,
@@ -7242,6 +7494,7 @@
         "image": "./assets/atlas/covers/fate-fgo_107.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap107.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 19,
@@ -7431,6 +7684,7 @@
         "image": "./assets/atlas/covers/fate-fgo_108.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap108.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [],
         "kit_ids": [
           "aniplex-fate-itemqmdetizn",
@@ -7484,6 +7738,7 @@
         "image": "./assets/atlas/covers/fate-fgo_201.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap201.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 156,
@@ -7538,6 +7793,7 @@
         "image": "./assets/atlas/covers/fate-fgo_202.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap202.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 169,
@@ -7584,6 +7840,7 @@
         "image": "./assets/atlas/covers/fate-fgo_203.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap203.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 112,
@@ -7677,6 +7934,7 @@
         "image": "./assets/atlas/covers/fate-fgo_204.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap204.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 192,
@@ -7735,6 +7993,7 @@
         "image": "./assets/atlas/covers/fate-fgo_301.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap301.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 201,
@@ -7798,6 +8057,7 @@
         "image": "./assets/atlas/covers/fate-fgo_302.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap302.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 212,
@@ -7860,6 +8120,7 @@
         "image": "./assets/atlas/covers/fate-fgo_303.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap304.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 226,
@@ -7926,6 +8187,7 @@
         "image": "./assets/atlas/covers/fate-fgo_304.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap305.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 244,
@@ -7990,6 +8252,7 @@
         "image": "./assets/atlas/covers/fate-fgo_306.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap308.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 278,
@@ -8037,6 +8300,7 @@
         "image": "./assets/atlas/covers/fate-fgo_307.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap309.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 297,
@@ -8086,6 +8350,7 @@
         "image": "./assets/atlas/covers/fate-fgo_308.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap312.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 284,
@@ -8225,6 +8490,7 @@
         "image": "./assets/atlas/covers/fate-fgo_310.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap315.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 342,
@@ -8297,6 +8563,7 @@
         "image": "./assets/atlas/covers/fate-fgo_311.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap317.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 370,
@@ -8354,6 +8621,7 @@
         "image": "./assets/atlas/covers/fate-fgo_402.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap402.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 381,
@@ -8401,6 +8669,7 @@
         "image": "./assets/atlas/covers/fate-fgo_403.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap403.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 407,
@@ -8458,6 +8727,7 @@
         "image": "./assets/atlas/covers/fate-fgo_404.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap405.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 421,
@@ -8507,6 +8777,7 @@
         "image": "./assets/atlas/covers/fate-fgo_405.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap406.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [
           {
             "no": 438,
@@ -8557,6 +8828,7 @@
         "image": "./assets/atlas/covers/fate-fgo_407.png",
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap410.png",
         "cover_source": "https://atlasacademy.io/",
+        "cover_kind": "picture",
         "roster": [],
         "kit_ids": [
           "aniplex-fate-itemaimsoidf29",
@@ -8586,9 +8858,10 @@
           "en": "Not on a story-chapter pickup · 296 servants",
           "ja": "メインストーリー章のピックアップ外・サーヴァント 296騎"
         },
-        "image": "./assets/atlas/covers/fate-fgo.jpg",
-        "image_remote": "https://upload.wikimedia.org/wikipedia/en/4/42/Fate_Grand_Order_logo.png",
-        "cover_source": "https://en.wikipedia.org/wiki/Fate/Grand_Order",
+        "image": "./assets/atlas/covers/fate-fgo.png",
+        "image_remote": "https://www.fate-go.jp/assets/img/pc/top/main/slide01/logo.png",
+        "cover_source": "https://www.fate-go.jp/",
+        "cover_kind": "logo",
         "roster": [
           {
             "no": 4,
@@ -10536,9 +10809,10 @@
           "en": "Fes. goods without a single servant",
           "ja": "特定サーヴァントのない Fes. グッズ"
         },
-        "image": "./assets/atlas/covers/channel-fate.jpg",
-        "image_remote": "https://www.fate-go.jp/images/fate_ogp_3500.png",
+        "image": "./assets/atlas/covers/fate-fgo.png",
+        "image_remote": "https://www.fate-go.jp/assets/img/pc/top/main/slide01/logo.png",
         "cover_source": "https://www.fate-go.jp/",
+        "cover_kind": "logo",
         "roster": [],
         "kit_ids": [
           "aniplex-fate-itemtygocpcn",
@@ -11010,9 +11284,10 @@
           "en": "Winter Fes., exhibitions, escape games, collaborations",
           "ja": "冬祭り・展覧会・リアル脱出ゲーム・コラボ"
         },
-        "image": "./assets/atlas/covers/channel-fate.jpg",
-        "image_remote": "https://www.fate-go.jp/images/fate_ogp_3500.png",
+        "image": "./assets/atlas/covers/fate-fgo.png",
+        "image_remote": "https://www.fate-go.jp/assets/img/pc/top/main/slide01/logo.png",
         "cover_source": "https://www.fate-go.jp/",
+        "cover_kind": "logo",
         "roster": [],
         "kit_ids": [
           "aniplex-fate-itembgdqgbdg",
@@ -12083,9 +12358,10 @@
           "en": "Soundtracks, Blu-ray, art books",
           "ja": "サントラ・Blu-ray・画集"
         },
-        "image": "./assets/atlas/covers/fate-fgo.jpg",
-        "image_remote": "https://upload.wikimedia.org/wikipedia/en/4/42/Fate_Grand_Order_logo.png",
-        "cover_source": "https://en.wikipedia.org/wiki/Fate/Grand_Order",
+        "image": "./assets/atlas/covers/fate-fgo.png",
+        "image_remote": "https://www.fate-go.jp/assets/img/pc/top/main/slide01/logo.png",
+        "cover_source": "https://www.fate-go.jp/",
+        "cover_kind": "logo",
         "roster": [],
         "kit_ids": [
           "aniplex-fate-itemczfwwdlu",
@@ -12138,9 +12414,10 @@
           "en": "Random and multi-servant sets",
           "ja": "ランダム・複数サーヴァントのセットなど"
         },
-        "image": "./assets/atlas/covers/channel-fate.jpg",
-        "image_remote": "https://www.fate-go.jp/images/fate_ogp_3500.png",
+        "image": "./assets/atlas/covers/fate-fgo.png",
+        "image_remote": "https://www.fate-go.jp/assets/img/pc/top/main/slide01/logo.png",
         "cover_source": "https://www.fate-go.jp/",
+        "cover_kind": "logo",
         "roster": [],
         "kit_ids": [
           "goodsmile-fate-g1141696",
@@ -12324,9 +12601,10 @@
           "en": "UBW · Heaven's Feel · Emiya Family Menu",
           "ja": "UBW・Heaven's Feel・衛宮さんちの今日のごはん"
         },
-        "image": "./assets/atlas/covers/fate-stay_night.jpg",
-        "image_remote": "https://upload.wikimedia.org/wikipedia/en/d/d4/Fate-stay_night.jpg",
-        "cover_source": "https://en.wikipedia.org/wiki/Fate/stay_night",
+        "image": "./assets/atlas/covers/fate-stay_night.png",
+        "image_remote": "http://www.fate-sn.jp/images/top/logo.png?6858901b436c0655491f8c196e6cddd4",
+        "cover_source": "http://www.fate-sn.jp/",
+        "cover_kind": "logo",
         "roster": [
           {
             "ja": "衛宮士郎",
@@ -12640,6 +12918,7 @@
         "image": "./assets/atlas/covers/fate-hollow_ataraxia.jpg",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/a/aa/Fate_hollow_ataraxia_game_DVD_cover.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Fate/hollow_ataraxia",
+        "cover_kind": "picture",
         "roster": [
           {
             "ja": "バゼット・フラガ・マクレミッツ",
@@ -12688,6 +12967,7 @@
         "image": "./assets/atlas/covers/fate-zero.jpg",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/3/3e/FatezeroNovelCover.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Fate/Zero",
+        "cover_kind": "picture",
         "roster": [
           {
             "ja": "衛宮切嗣",
@@ -12791,9 +13071,10 @@
           "en": "The Great Holy Grail War",
           "ja": "聖杯大戦"
         },
-        "image": "./assets/atlas/covers/fate-apocrypha.jpg",
-        "image_remote": "https://upload.wikimedia.org/wikipedia/en/0/03/Fateapocrypha_vol.01_cover.jpg",
-        "cover_source": "https://en.wikipedia.org/wiki/Fate/Apocrypha",
+        "image": "./assets/atlas/covers/fate-apocrypha.png",
+        "image_remote": "https://fate-apocrypha.com/assets/img/top/logo.png",
+        "cover_source": "https://fate-apocrypha.com/",
+        "cover_kind": "logo",
         "roster": [
           {
             "ja": "獅子劫界離",
@@ -12872,6 +13153,7 @@
         "image": "./assets/atlas/covers/fate-extra.jpg",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/3/34/Fate_Extra_Cover_Art.png",
         "cover_source": "https://en.wikipedia.org/wiki/Fate/Extra",
+        "cover_kind": "picture",
         "roster": [
           {
             "ja": "ジナコ=カリギリ",
@@ -13019,9 +13301,10 @@
           "en": "Fate/kaleid liner",
           "ja": "Fate/kaleid liner"
         },
-        "image": "./assets/atlas/covers/fate-prisma.jpg",
-        "image_remote": "https://upload.wikimedia.org/wikipedia/en/1/11/Fatekaleid_liner_Prisma_Illya_Vol.1.jpg",
-        "cover_source": "https://en.wikipedia.org/wiki/Fate/kaleid_liner_Prisma_Illya",
+        "image": "./assets/atlas/covers/fate-prisma.png",
+        "image_remote": "https://anime.prisma-illya.jp/finale/img/common/logo.png",
+        "cover_source": "https://anime.prisma-illya.jp/finale/",
+        "cover_kind": "logo",
         "roster": [
           {
             "ja": "ルヴィアゼリッタ・エーデルフェルト",
@@ -13102,6 +13385,7 @@
         "image": "./assets/atlas/covers/fate-strange_fake.jpg",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/f/fd/Fate-strange_fake_light_novel_volume_1_cover.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Fate/strange_Fake",
+        "cover_kind": "picture",
         "roster": [
           {
             "ja": "繰丘椿",
@@ -13216,6 +13500,7 @@
         "image": "./assets/atlas/covers/fate-el_melloi.jpg",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/7/77/ElMelCaseFiles1.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/The_Case_Files_of_Lord_El-Melloi_II",
+        "cover_kind": "picture",
         "roster": [
           {
             "ja": "ロード・エルメロイⅡ世",
@@ -13270,9 +13555,10 @@
           "en": "The Waxing Moon Ritual",
           "ja": "盈月の儀"
         },
-        "image": "./assets/atlas/covers/fate-samurai_remnant.jpg",
-        "image_remote": "https://upload.wikimedia.org/wikipedia/en/b/b0/Fate-Samurai_Remnant_box_art.jpeg",
-        "cover_source": "https://en.wikipedia.org/wiki/Fate/Samurai_Remnant",
+        "image": "./assets/atlas/covers/fate-samurai_remnant.png",
+        "image_remote": "https://www.gamecity.ne.jp/fate-sr/assets/img/top_kv_logo@sp.png",
+        "cover_source": "https://www.gamecity.ne.jp/fate-sr/",
+        "cover_kind": "logo",
         "roster": [
           {
             "ja": "高尾太夫",
@@ -13318,6 +13604,7 @@
         "image": "./assets/atlas/covers/fate-prototype.jpg",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/a/ab/Fate-Prototype_key_visual.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Fate/Prototype",
+        "cover_kind": "picture",
         "roster": [
           {
             "ja": "沙条愛歌",
@@ -13355,6 +13642,7 @@
         "image": "./assets/atlas/covers/fate-tsukihime.jpg",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/a/a3/Tsukihime.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Tsukihime",
+        "cover_kind": "picture",
         "roster": [
           {
             "ja": "アルクェイド・ブリュンスタッド",
@@ -13454,9 +13742,10 @@
           "en": "Kara no Kyoukai",
           "ja": "the Garden of sinners"
         },
-        "image": "./assets/atlas/covers/fate-kara_no_kyoukai.jpg",
-        "image_remote": "https://upload.wikimedia.org/wikipedia/en/c/c8/Kyoukai01.jpg",
-        "cover_source": "https://en.wikipedia.org/wiki/The_Garden_of_Sinners",
+        "image": "./assets/atlas/covers/fate-kara_no_kyoukai.png",
+        "image_remote": "https://www.karanokyoukai.com/img/logo_main.png",
+        "cover_source": "https://www.karanokyoukai.com/",
+        "cover_kind": "logo",
         "roster": [
           {
             "ja": "黒桐幹也",
@@ -13508,9 +13797,10 @@
           "en": "Aoko Aozaki & Alice Kuonji",
           "ja": "蒼崎青子と久遠寺有珠"
         },
-        "image": "./assets/atlas/covers/fate-mahoyo.jpg",
-        "image_remote": "https://upload.wikimedia.org/wikipedia/en/a/a2/Mah%C5%8Dtsukai_no_Yoru_game_cover.jpg",
-        "cover_source": "https://en.wikipedia.org/wiki/Witch_on_the_Holy_Night",
+        "image": "./assets/atlas/covers/fate-mahoyo.png",
+        "image_remote": "https://mahoyo-movie.com/assets/img/top/kv/logo_ttl.png",
+        "cover_source": "https://mahoyo-movie.com/",
+        "cover_kind": "logo",
         "roster": [
           {
             "ja": "静希草十郎",
@@ -13540,9 +13830,10 @@
           "en": "Series-wide goods, TYPE-MOON exhibitions, Carnival Phantasm …",
           "ja": "シリーズ共通・TYPE-MOON展・カーニバル・ファンタズムほか"
         },
-        "image": "./assets/atlas/covers/fate-type_moon.jpg",
+        "image": "./assets/atlas/covers/fate-type_moon.png",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Type-moon.svg/500px-Type-moon.svg.png",
         "cover_source": "https://en.wikipedia.org/wiki/Type-Moon",
+        "cover_kind": "logo",
         "roster": [],
         "kit_ids": [
           "aniplex-fate-itemnjeptxoy",
@@ -13579,9 +13870,10 @@
           "en": "Work could not be identified",
           "ja": "作品を特定できない商品"
         },
-        "image": "./assets/atlas/covers/fate-type_moon.jpg",
+        "image": "./assets/atlas/covers/fate-type_moon.png",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Type-moon.svg/500px-Type-moon.svg.png",
         "cover_source": "https://en.wikipedia.org/wiki/Type-Moon",
+        "cover_kind": "logo",
         "roster": [],
         "kit_ids": [
           "aniplex-fate-itemncstlkbj",
@@ -13618,6 +13910,7 @@
         "image": "./assets/atlas/covers/armored_core-ac1.jpg",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/d/db/ArmoredCorePS1.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Armored_Core_(video_game)",
+        "cover_kind": "picture",
         "roster": [
           "ナインボール",
           "ナインボール・セラフ",
@@ -13661,6 +13954,7 @@
         "image": "./assets/atlas/covers/armored_core-ac3.jpg",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/4/41/Armored_Core_3.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Armored_Core_3",
+        "cover_kind": "picture",
         "roster": [
           "ミラージュ",
           "クレスト",
@@ -13712,6 +14006,7 @@
         "image": "./assets/atlas/covers/armored_core-ac4.jpg",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/6/69/Armored_Core_4.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Armored_Core_4",
+        "cover_kind": "picture",
         "roster": [
           "ホワイト・グリント",
           "ラインアーク",
@@ -13769,6 +14064,7 @@
         "image": "./assets/atlas/covers/armored_core-acv.png",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/6/64/Armored_Core_V_cover.png",
         "cover_source": "https://en.wikipedia.org/wiki/Armored_Core_V",
+        "cover_kind": "picture",
         "roster": [
           "ハングドマン",
           "ヴェンジェンス",
@@ -13808,9 +14104,10 @@
         "games": [
           "ARMORED CORE VI FIRES OF RUBICON (2023)"
         ],
-        "image": "./assets/atlas/covers/armored_core-ac6.jpg",
-        "image_remote": "https://upload.wikimedia.org/wikipedia/en/8/89/Armored_Core_VI_Fires_of_Rubicon_cover_art.jpg",
-        "cover_source": "https://en.wikipedia.org/wiki/Armored_Core_VI:_Fires_of_Rubicon",
+        "image": "./assets/atlas/covers/armored_core-ac6.png",
+        "image_remote": "https://www.armoredcore.net/resources/images/common/sp/menu/ac-logo2.png",
+        "cover_source": "https://www.armoredcore.net/",
+        "cover_kind": "logo",
         "roster": [
           "バルテウス",
           "ナイトフォール",
@@ -13866,9 +14163,10 @@
           "en": "Game era could not be identified",
           "ja": "ゲーム世代を特定できない商品"
         },
-        "image": "./assets/atlas/covers/channel-armored_core.png",
-        "image_remote": "https://www.armoredcore.net/resources/images/common/ogp/ogp_image.png",
-        "cover_source": "https://www.armoredcore.net/",
+        "image": "./assets/atlas/covers/armored_core-series.png",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/Armored_Core_series_logo.svg/960px-Armored_Core_series_logo.svg.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Armored_Core",
+        "cover_kind": "logo",
         "roster": [],
         "kit_ids": [
           "acvi-4988601383523",
@@ -13944,7 +14242,8 @@
           "movic-madoka-02151-00700-00051"
         ],
         "count": 46,
-        "cover_source": "newest product picture"
+        "cover_source": "newest product picture",
+        "cover_kind": "picture"
       },
       {
         "id": "homura",
@@ -14004,7 +14303,8 @@
           "movic-madoka-02151-00700-00052"
         ],
         "count": 39,
-        "cover_source": "newest product picture"
+        "cover_source": "newest product picture",
+        "cover_kind": "picture"
       },
       {
         "id": "sayaka",
@@ -14046,7 +14346,8 @@
           "movic-madoka-02151-00700-00054"
         ],
         "count": 21,
-        "cover_source": "newest product picture"
+        "cover_source": "newest product picture",
+        "cover_kind": "picture"
       },
       {
         "id": "mami",
@@ -14087,7 +14388,8 @@
           "movic-madoka-02151-00700-00053"
         ],
         "count": 20,
-        "cover_source": "newest product picture"
+        "cover_source": "newest product picture",
+        "cover_kind": "picture"
       },
       {
         "id": "kyoko",
@@ -14128,7 +14430,8 @@
           "movic-madoka-02151-00700-00055"
         ],
         "count": 20,
-        "cover_source": "newest product picture"
+        "cover_source": "newest product picture",
+        "cover_kind": "picture"
       },
       {
         "id": "nagisa",
@@ -14155,7 +14458,8 @@
           "goodsmile-madoka-g55558"
         ],
         "count": 6,
-        "cover_source": "newest product picture"
+        "cover_source": "newest product picture",
+        "cover_kind": "picture"
       },
       {
         "id": "kyubey",
@@ -14190,7 +14494,8 @@
           "goodsmile-madoka-3200"
         ],
         "count": 14,
-        "cover_source": "newest product picture"
+        "cover_source": "newest product picture",
+        "cover_kind": "picture"
       },
       {
         "id": "iroha",
@@ -14216,7 +14521,8 @@
           "furyu-madoka-fnx-eokdayen"
         ],
         "count": 5,
-        "cover_source": "newest product picture"
+        "cover_source": "newest product picture",
+        "cover_kind": "picture"
       },
       {
         "id": "yachiyo",
@@ -14239,7 +14545,8 @@
           "aniplex-madoka-itemmtjyadiy"
         ],
         "count": 2,
-        "cover_source": "newest product picture"
+        "cover_source": "newest product picture",
+        "cover_kind": "picture"
       },
       {
         "id": "tsuruno",
@@ -14261,7 +14568,8 @@
           "aniplex-madoka-itemfiaijbud"
         ],
         "count": 1,
-        "cover_source": "newest product picture"
+        "cover_source": "newest product picture",
+        "cover_kind": "picture"
       },
       {
         "id": "felicia",
@@ -14283,7 +14591,8 @@
           "goodsmile-madoka-9384"
         ],
         "count": 1,
-        "cover_source": "newest product picture"
+        "cover_source": "newest product picture",
+        "cover_kind": "picture"
       },
       {
         "id": "sana",
@@ -14305,7 +14614,8 @@
           "goodsmile-madoka-7358"
         ],
         "count": 1,
-        "cover_source": "newest product picture"
+        "cover_source": "newest product picture",
+        "cover_kind": "picture"
       },
       {
         "id": "alina",
@@ -14327,7 +14637,8 @@
           "goodsmile-madoka-11902"
         ],
         "count": 1,
-        "cover_source": "newest product picture"
+        "cover_source": "newest product picture",
+        "cover_kind": "picture"
       },
       {
         "id": "ren",
@@ -14349,7 +14660,8 @@
           "alter-madoka-258"
         ],
         "count": 1,
-        "cover_source": "newest product picture"
+        "cover_source": "newest product picture",
+        "cover_kind": "picture"
       },
       {
         "id": "madoka_ensemble",
@@ -14366,7 +14678,10 @@
           "en": "Several characters in one product",
           "ja": "一つの商品に複数のキャラクター"
         },
-        "image": "./assets/catalog/madoka/aniplex-madoka-itempacozudg-01-49edf4b936.jpg",
+        "image": "./assets/atlas/covers/channel-madoka.jpg",
+        "image_remote": "https://www.madoka-magica.com/assets/icon/ogp.png",
+        "cover_source": "https://www.madoka-magica.com/",
+        "cover_kind": "picture",
         "kit_ids": [
           "banpresto-madoka-2633405",
           "goodsmile-madoka-14098",
@@ -14381,8 +14696,7 @@
           "goodsmile-madoka-g60079",
           "prime1-madoka-pwmdmgr-01ps"
         ],
-        "count": 12,
-        "cover_source": "newest product picture"
+        "count": 12
       },
       {
         "id": "madoka_general",
@@ -14399,7 +14713,10 @@
           "en": "Lotteries, trading sets and others with no character named",
           "ja": "一番くじ・トレーディングなどキャラクター名のない商品"
         },
-        "image": "./assets/catalog/madoka/aniplex-madoka-itemthyggcvl12-01-044318ad96.jpg",
+        "image": "./assets/atlas/covers/channel-madoka.jpg",
+        "image_remote": "https://www.madoka-magica.com/assets/icon/ogp.png",
+        "cover_source": "https://www.madoka-magica.com/",
+        "cover_kind": "picture",
         "kit_ids": [
           "ichibankuji-madoka-madomagi16",
           "skjapan-madoka-amgoods-74351",
@@ -14453,8 +14770,7 @@
           "ichibankuji-madoka-madomagi5",
           "ichibankuji-madoka-madomagi6"
         ],
-        "count": 51,
-        "cover_source": "newest product picture"
+        "count": 51
       }
     ],
     "beyblade": [
@@ -14475,6 +14791,7 @@
         },
         "image": "./assets/bbx/cx17-cb63e16152.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ウィザードアロー",
           "ヘルズハンマー",
@@ -14534,6 +14851,7 @@
         },
         "image": "./assets/bbx/bx50-f68df3bff6.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "コバルトドレイク",
           "ドランソード",
@@ -14586,6 +14904,7 @@
         },
         "image": "./assets/bbx/bx49-419a6259ed.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ドランソード",
           "ドランダガー",
@@ -14637,6 +14956,7 @@
         },
         "image": "./assets/bbx/cx14-78ac051f28.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ウィザードアロー",
           "ナイトシールド",
@@ -14687,6 +15007,7 @@
         },
         "image": "./assets/bbx/ux21-2829a6e72d.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ヘルズサイズ",
           "ヘルズチェイン",
@@ -14729,6 +15050,7 @@
         },
         "image": "./assets/bbx/cx15-9482112cdf.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ナイトシールド",
           "ウィザードアロー",
@@ -14769,6 +15091,7 @@
         },
         "image": "./assets/bbx/bx48-c7881ee048.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "コバルトドレイク",
           "ブラックシェル",
@@ -14810,6 +15133,7 @@
         },
         "image": "./assets/bbx/bx48-c7881ee048.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "レオンクロー",
           "ヘルズサイズ",
@@ -14849,6 +15173,7 @@
         },
         "image": "./assets/bbx/bx48-c7881ee048.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "シャークエッジ",
           "ウィザードアロー"
@@ -14886,6 +15211,7 @@
         },
         "image": "./assets/bbx/bx50-f68df3bff6.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "インパクトドレイク",
           "ドランバスター",
@@ -14923,6 +15249,7 @@
         },
         "image": "./assets/bbx/cx17-cb63e16152.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "サムライスチール",
           "シャークエッジ",
@@ -14959,6 +15286,7 @@
         },
         "image": "./assets/bbx/bx53-b135baefc3.png",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ウィザードアロー",
           "フェニックスフェザー"
@@ -14993,6 +15321,7 @@
         },
         "image": "./assets/bbx/ux20-d0e0eb415e.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "エンペラーマイトH",
           "フェニックスウイング",
@@ -15029,6 +15358,7 @@
         },
         "image": "./assets/bbx/bx53-b135baefc3.png",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ウィザードアロー",
           "クロックミラージュ",
@@ -15064,6 +15394,7 @@
         },
         "image": "./assets/bbx/bx48-c7881ee048.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "シャークエッジ",
           "ホエールウェーブ",
@@ -15100,6 +15431,7 @@
         },
         "image": "./assets/bbx/bx53-b135baefc3.png",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ウィザードアロー"
         ],
@@ -15132,6 +15464,7 @@
         },
         "image": "./assets/bbx/bx53-b135baefc3.png",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ウィザードアロー"
         ],
@@ -15164,6 +15497,7 @@
         },
         "image": "./assets/bbx/bx53-b135baefc3.png",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ウィザードアロー"
         ],
@@ -15196,6 +15530,7 @@
         },
         "image": "./assets/bbx/bx53-b135baefc3.png",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ウィザードアロー"
         ],
@@ -15228,6 +15563,7 @@
         },
         "image": "./assets/bbx/cx12-d5a8a971fc.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "フェニックスフェザー",
           "フェニックスウイング",
@@ -15262,6 +15598,7 @@
         },
         "image": "./assets/bbx/bx48-c7881ee048.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "シャークエッジ",
           "フェニックスフェザー"
@@ -15293,6 +15630,7 @@
         },
         "image": "./assets/bbx/cx05-ac557c0c16.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "レオンクロー",
           "レオンクレスト"
@@ -15324,6 +15662,7 @@
         },
         "image": "./assets/bbx/bx48-c7881ee048.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "シャークエッジ",
           "ライノホーン"
@@ -15355,6 +15694,7 @@
         },
         "image": "./assets/bbx/cx03-034e2aa04a.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "レオンクロー",
           "ペルセウスダークB"
@@ -15386,6 +15726,7 @@
         },
         "image": "./assets/bbx/cx17-cb63e16152.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ヴァイパーテイル",
           "ティラノビート"
@@ -15417,6 +15758,7 @@
         },
         "image": "./assets/bbx/bx48-c7881ee048.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ドランバスター"
         ],
@@ -15447,6 +15789,7 @@
         },
         "image": "./assets/bbx/ux07-01be7ad03f.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ワイバーンゲイル",
           "ユニコーンスティング"
@@ -15477,6 +15820,7 @@
         },
         "image": "./assets/bbx/cx19-b6fdffb7f2.png",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ワイバーンゲイル",
           "ユニコーンデルタPO",
@@ -15508,6 +15852,7 @@
         },
         "image": "./assets/bbx/bx48-c7881ee048.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "シャークエッジ"
         ],
@@ -15537,6 +15882,7 @@
         },
         "image": "./assets/bbx/bx48-c7881ee048.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "シャークエッジ"
         ],
@@ -15566,6 +15912,7 @@
         },
         "image": "./assets/bbx/bx53-b135baefc3.png",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "エアロペガサス",
           "ペガサスブラストA"
@@ -15595,6 +15942,7 @@
         },
         "image": "./assets/bbx/ux19-c31788e853.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ワイバーンゲイル",
           "バレットグリフォン"
@@ -15624,6 +15972,7 @@
         },
         "image": "./assets/bbx/cx17-cb63e16152.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ティラノビート",
           "ソルエクリプスD",
@@ -15654,6 +16003,7 @@
         },
         "image": "./assets/bbx/ux18-ab63d339e0.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ヴァイパーテイル",
           "マミーカース",
@@ -15684,6 +16034,7 @@
         },
         "image": "./assets/bbx/ux12-809c8a2fce.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "レオンクロー"
         ],
@@ -15712,6 +16063,7 @@
         },
         "image": "./assets/bbx/ux12-809c8a2fce.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "レオンクロー"
         ],
@@ -15740,6 +16092,7 @@
         },
         "image": "./assets/bbx/bx53-b135baefc3.png",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ユニコーンスティング",
           "エアロペガサス"
@@ -15769,6 +16122,7 @@
         },
         "image": "./assets/bbx/bx35-a33efc9298.png",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ヴァイパーテイル"
         ],
@@ -15796,6 +16150,7 @@
         },
         "image": "./assets/bbx/cx17-cb63e16152.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ティラノビート"
         ],
@@ -15823,6 +16178,7 @@
         },
         "image": "./assets/bbx/cx18-133cbf81d9.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ライノホーン",
           "ブラキオウィップOW"
@@ -15851,6 +16207,7 @@
         },
         "image": "./assets/bbx/ux07-01be7ad03f.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ワイバーンゲイル"
         ],
@@ -15878,6 +16235,7 @@
         },
         "image": "./assets/bbx/ux07-01be7ad03f.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ワイバーンゲイル"
         ],
@@ -15905,6 +16263,7 @@
         },
         "image": "./assets/bbx/ux21-2829a6e72d.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "シルバーウルフ",
           "ウルフハントF"
@@ -15933,6 +16292,7 @@
         },
         "image": "./assets/bbx/bx35-a33efc9298.png",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ヴァイパーテイル"
         ],
@@ -15960,6 +16320,7 @@
         },
         "image": "./assets/bbx/bx35-a33efc9298.png",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ヴァイパーテイル"
         ],
@@ -15987,6 +16348,7 @@
         },
         "image": "./assets/bbx/cx13-038c4ca679.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "オロチクラスタ",
           "バハムートブリッツBK"
@@ -16015,6 +16377,7 @@
         },
         "image": "./assets/bbx/ux07-01be7ad03f.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ワイバーンゲイル"
         ],
@@ -16042,6 +16405,7 @@
         },
         "image": "./assets/bbx/ux07-01be7ad03f.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ワイバーンゲイル"
         ],
@@ -16069,6 +16433,7 @@
         },
         "image": "./assets/bbx/bx44-27f3b25579.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "シノビシャドウ",
           "トリケラプレス"
@@ -16097,6 +16462,7 @@
         },
         "image": "./assets/bbx/bx35-a33efc9298.png",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ユニコーンスティング"
         ],
@@ -16123,6 +16489,7 @@
         },
         "image": "./assets/bbx/ux07-01be7ad03f.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "スフィンクスカウル"
         ],
@@ -16149,6 +16516,7 @@
         },
         "image": "./assets/bbx/ux05-409030b03d.webp",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "シノビナイフ",
           "シノビシャドウ"
@@ -16176,6 +16544,7 @@
         },
         "image": "./assets/bbx/cx17-cb63e16152.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "クリムゾンガルーダ"
         ],
@@ -16202,6 +16571,7 @@
         },
         "image": "./assets/bbx/bx50-f68df3bff6.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ゴーストサークル"
         ],
@@ -16228,6 +16598,7 @@
         },
         "image": "./assets/bbx/cx11-f1bce66c81.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ゴーレムロック"
         ],
@@ -16254,6 +16625,7 @@
         },
         "image": "./assets/bbx/ux14-be27904410.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "スコーピオスピア"
         ],
@@ -16280,6 +16652,7 @@
         },
         "image": "./assets/bbx/ux07-01be7ad03f.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "スフィンクスカウル"
         ],
@@ -16306,6 +16679,7 @@
         },
         "image": "./assets/bbx/ux07-01be7ad03f.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "スフィンクスカウル"
         ],
@@ -16332,6 +16706,7 @@
         },
         "image": "./assets/bbx/ux07-01be7ad03f.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "スフィンクスカウル"
         ],
@@ -16358,6 +16733,7 @@
         },
         "image": "./assets/bbx/cx05-ac557c0c16.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "フェニックスラダー"
         ],
@@ -16384,6 +16760,7 @@
         },
         "image": "./assets/bbx/ux15-fb20207270.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "プテラスイング",
           "ティラノロア"
@@ -16411,6 +16788,7 @@
         },
         "image": "./assets/bbx/ux14-be27904410.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "スコーピオスピア"
         ],
@@ -16437,6 +16815,7 @@
         },
         "image": "./assets/bbx/ux12-809c8a2fce.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "フェニックスフェザー"
         ],
@@ -16462,6 +16841,7 @@
         },
         "image": "./assets/bbx/cx08-2a652122e2.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ケルベロスフレイムW"
         ],
@@ -16487,6 +16867,7 @@
         },
         "image": "./assets/bbx/cx06-d4efb22330.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "フォックスブラッシュJ"
         ],
@@ -16512,6 +16893,7 @@
         },
         "image": "./assets/bbx/bx44-27f3b25579.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "トリケラプレス"
         ],
@@ -16537,6 +16919,7 @@
         },
         "image": "",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ドレイクブレイブG"
         ],
@@ -16562,6 +16945,7 @@
         },
         "image": "./assets/bbx/bx50-f68df3bff6.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ヘブンズリング"
         ],
@@ -16587,6 +16971,7 @@
         },
         "image": "./assets/bbx/bx37-feeb1343af.jpg",
         "cover_source": "newest product picture",
+        "cover_kind": "picture",
         "blades": [
           "ベアスクラッチ"
         ],
@@ -16612,8 +16997,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/10462-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-duplo.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Duplo",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/en/thumb/b/bb/Duplo_logo_2022.svg/500px-Duplo_logo_2022.svg.png",
         "kit_ids": [
           "lego-10462-1",
           "lego-10463-1",
@@ -18098,8 +18485,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/75466-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-star_wars.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Star_Wars",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Lego_Star_Wars_Logo_%282%29.svg/500px-Lego_Star_Wars_Logo_%282%29.svg.png",
         "kit_ids": [
           "lego-75466-1",
           "lego-75467-1",
@@ -19231,8 +19620,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/2d001164-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-city.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_City",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Lego_City_logo%2C_used_since_January_2015.png",
         "kit_ids": [
           "lego-2d001164-1",
           "lego-2d001182-1",
@@ -20273,8 +20664,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/71051-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-collectible_minifigures.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Minifigures_(theme)",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/en/thumb/b/b1/LEGO_Minifigures_logo.svg/500px-LEGO_Minifigures_logo.svg.png",
         "kit_ids": [
           "lego-6581056-1",
           "lego-6623266-1",
@@ -21299,8 +21692,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/42709-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-friends.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Friends",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/a/ad/Lego_Friends_2023.png",
         "kit_ids": [
           "lego-42709-1",
           "lego-42718-1",
@@ -22006,8 +22401,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/71873-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-ninjago.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Ninjago",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Lego_Ninjago_logo.svg/500px-Lego_Ninjago_logo.svg.png",
         "kit_ids": [
           "lego-71873-1",
           "lego-71875-1",
@@ -22713,6 +23110,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/10184-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-10184-1",
           "lego-4032-11",
@@ -23411,8 +23809,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/2d001187-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-creator.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Creator",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Lego_Creator.svg/500px-Lego_Creator.svg.png",
         "kit_ids": [
           "lego-2d001187-1",
           "lego-2d001188-1",
@@ -24069,8 +24469,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/42254-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-technic.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Technic",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Technic_logo.svg/500px-Technic_logo.svg.png",
         "kit_ids": [
           "lego-42254-1",
           "lego-30735-1",
@@ -24712,6 +25114,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/11387-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-11387-1",
           "lego-30716-1",
@@ -25288,6 +25691,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/1-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-1-1",
           "lego-101-2",
@@ -25809,8 +26213,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/5004409-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-bionicle.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Bionicle",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/7/75/Bionicle2015Logo.png",
         "kit_ids": [
           "lego-5004409-1",
           "lego-601601-1",
@@ -26298,8 +26704,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/67005-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-super_heroes_marvel.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Marvel",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Lego_Super_Heroes_Logo.png",
         "kit_ids": [
           "lego-67005-1",
           "lego-67006-1",
@@ -26736,6 +27144,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/11910-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-11910-1",
           "lego-5002812-1",
@@ -27088,8 +27497,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/30720-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-disney.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Disney",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Lego_Disney.svg/500px-Lego_Disney.svg.png",
         "kit_ids": [
           "lego-30720-1",
           "lego-43280-1",
@@ -27405,6 +27816,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/30190-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-30190-1",
           "lego-30191-1",
@@ -27707,8 +28119,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/eg00160-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-castle.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Castle",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/7/74/Lego_Castle_logo.png",
         "kit_ids": [
           "lego-eg00160-1",
           "lego-eg00161-1",
@@ -28002,6 +28416,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/67008-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-67008-1",
           "lego-67009-1",
@@ -28289,6 +28704,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/k4548-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-k4548-1",
           "lego-2159-1",
@@ -28551,8 +28967,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/30724-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-harry_potter.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Harry_Potter",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/5/57/LEGO_Harry_Potter_Logo.png",
         "kit_ids": [
           "lego-30724-1",
           "lego-40901-1",
@@ -28786,8 +29204,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/21582-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-minecraft.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Minecraft",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Lego_Minecraft_logo_2021.svg/500px-Lego_Minecraft_logo_2021.svg.png",
         "kit_ids": [
           "lego-21582-1",
           "lego-21583-1",
@@ -29020,8 +29440,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/40856-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-brickheadz.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_BrickHeadz",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/en/thumb/1/10/Lego_BrickHeadz_logo.svg/500px-Lego_BrickHeadz_logo.svg.png",
         "kit_ids": [
           "lego-40856-1",
           "lego-40858-1",
@@ -29242,8 +29664,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/72052-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-super_mario.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Super_Mario",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Lego_Super_Mario.svg/500px-Lego_Super_Mario.svg.png",
         "kit_ids": [
           "lego-72052-1",
           "lego-72054-1",
@@ -29455,6 +29879,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/3573-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-3573-1",
           "lego-3568-1",
@@ -29648,8 +30073,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/30256-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-legends_of_chima.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Legends_of_Chima",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/b/bf/Legends_of_Chima_logo.png",
         "kit_ids": [
           "lego-30256-1",
           "lego-391501-1",
@@ -29815,6 +30242,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/5460-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-5460-1",
           "lego-5461-1",
@@ -29973,6 +30401,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/122506-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-122506-1",
           "lego-122509-1",
@@ -30123,8 +30552,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/41554-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-mixels.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Mixels",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/c/c3/Mixeltvshowlogo.png",
         "kit_ids": [
           "lego-41554-1",
           "lego-41555-1",
@@ -30269,6 +30700,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/10681-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-10681-1",
           "lego-10682-1",
@@ -30407,8 +30839,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/40116-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-hero_factory.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Hero_Factory",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Lego_Hero_Factory_logo.svg/500px-Lego_Hero_Factory_logo.svg.png",
         "kit_ids": [
           "lego-40116-1",
           "lego-40117-1",
@@ -30539,8 +30973,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/271824-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-nexo_knights.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Nexo_Knights",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/d/d5/Nexo_Knights_Logo.png",
         "kit_ids": [
           "lego-271824-1",
           "lego-271825-1",
@@ -30670,8 +31106,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/21365-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-lego_ideas_and_cuusoo.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Ideas",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Lego_Ideas_logo.svg/500px-Lego_Ideas_logo.svg.png",
         "kit_ids": [
           "lego-21365-1",
           "lego-21366-1",
@@ -30799,8 +31237,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/3647-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-fabuland.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Fabuland",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/commons/3/30/Logo_Lego-Fabuland.png",
         "kit_ids": [
           "lego-3647-1",
           "lego-3663-1",
@@ -30927,8 +31367,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/30734-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-speed_champions.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Speed_Champions",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/5/58/Lego_Speed_Champsions_logo.png",
         "kit_ids": [
           "lego-30734-1",
           "lego-77252-1",
@@ -31056,6 +31498,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/6513792-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-6513792-1",
           "lego-30637-1",
@@ -31171,6 +31614,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/11370-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-11370-1",
           "lego-11372-1",
@@ -31282,8 +31726,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/eg00163-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-pirates.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Pirates",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/2/2a/LEGO_Pirates_logo_2010.png",
         "kit_ids": [
           "lego-eg00163-1",
           "lego-40158-1",
@@ -31397,6 +31843,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/7583-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-7583-1",
           "lego-7585-1",
@@ -31506,6 +31953,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/88016-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-88016-1",
           "lego-40413-1",
@@ -31612,6 +32060,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/4000048-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-4000048-1",
           "lego-4000049-1",
@@ -31716,6 +32165,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/7215-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-7215-1",
           "lego-7545-1",
@@ -31818,8 +32268,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/3380-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-adventurers.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Adventurers",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/a/a2/Lego_Adventurers.png",
         "kit_ids": [
           "lego-3380-1",
           "lego-3381-1",
@@ -31924,6 +32376,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/11045-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-11045-1",
           "lego-11039-1",
@@ -32024,6 +32477,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/30340-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-30340-1",
           "lego-30460-1",
@@ -32120,6 +32574,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/910069-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-910069-1",
           "lego-910070-1",
@@ -32214,6 +32669,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/3121-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-3121-1",
           "lego-3122-1",
@@ -32306,8 +32762,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/10748-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-juniors.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Juniors",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Lego_Juniors.svg/500px-Lego_Juniors.svg.png",
         "kit_ids": [
           "lego-10748-1",
           "lego-10749-1",
@@ -32397,6 +32855,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/71255-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-71255-1",
           "lego-71264-1",
@@ -32486,6 +32945,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/11515-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-11515-1",
           "lego-11516-1",
@@ -32572,8 +33032,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/71508-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-dreamzzz.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Dreamzzz",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/6/67/Lego_Dreamzzz.webp",
         "kit_ids": [
           "lego-71508-1",
           "lego-71512-1",
@@ -32662,6 +33124,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/3035-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-3035-1",
           "lego-2907-1",
@@ -32748,8 +33211,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/21064-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-architecture.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Architecture",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Lego_Architecture.svg/500px-Lego_Architecture.svg.png",
         "kit_ids": [
           "lego-21064-1",
           "lego-21065-1",
@@ -32835,8 +33300,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/80065-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-monkie_kid.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Monkie_Kid",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/9/94/Lego_Monkie_Kid.png",
         "kit_ids": [
           "lego-80065-1",
           "lego-80066-1",
@@ -32916,6 +33383,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/1380-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-1380-1",
           "lego-1381-1",
@@ -32992,6 +33460,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/4858-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-4858-1",
           "lego-4860-1",
@@ -33065,8 +33534,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/k8107-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-exo_force.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Exo-Force",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/5/5a/Lego_Exo-Force.png",
         "kit_ids": [
           "lego-k8107-1",
           "lego-8111-1",
@@ -33138,8 +33609,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/43101-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-vidiyo.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Vidiyo",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/f/f5/Lego_Vidiyo_logo.png",
         "kit_ids": [
           "lego-43101-0",
           "lego-43101-1",
@@ -33211,6 +33684,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/6663053-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-6663053-1",
           "lego-5002130-1",
@@ -33273,8 +33747,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/41190-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-elves.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Elves",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/0/04/Lego_Elves.png",
         "kit_ids": [
           "lego-41190-1",
           "lego-41191-1",
@@ -33338,6 +33814,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/80120-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-40976-1",
           "lego-80120-1",
@@ -33399,6 +33876,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/7770-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-7770-1",
           "lego-7771-1",
@@ -33457,6 +33935,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/3344-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-3344-1",
           "lego-3345-1",
@@ -33515,6 +33994,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/m20-2110-100.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-m20-2110-100",
           "lego-m20-2111-100",
@@ -33571,6 +34051,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/30463-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-30463-1",
           "lego-30464-1",
@@ -33622,8 +34103,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/4742-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-alpha_team.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Alpha_Team",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/f/fb/Lego_Alpha_Team_logo.webp",
         "kit_ids": [
           "lego-4742-1",
           "lego-4743-1",
@@ -33677,6 +34160,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/5235-2.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-5235-2",
           "lego-5233-1",
@@ -33730,6 +34214,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/30729-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-30729-1",
           "lego-30730-1",
@@ -33782,6 +34267,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/205-2.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-205-2",
           "lego-208-1",
@@ -33833,6 +34319,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/70166-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-5004554-1",
           "lego-70166-1",
@@ -33882,6 +34369,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/9478-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-66409-1",
           "lego-9478-1",
@@ -33929,8 +34417,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/31218-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-lego_art.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Art",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/en/thumb/1/13/Lego_Art_logo.png/500px-Lego_Art_logo.png",
         "kit_ids": [
           "lego-31218-1",
           "lego-31220-1",
@@ -33978,6 +34468,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/30406-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-30406-1",
           "lego-40314-1",
@@ -34025,6 +34516,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/11507-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-11507-1",
           "lego-4000351-1",
@@ -34071,6 +34563,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/30733-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-30733-1",
           "lego-77117-1",
@@ -34115,8 +34608,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/7976-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-atlantis.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Atlantis",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/2/2c/Lego_Atlantis_logo.png",
         "kit_ids": [
           "lego-7976-1",
           "lego-7977-1",
@@ -34162,6 +34657,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/77012-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-77012-1",
           "lego-77013-1",
@@ -34206,6 +34702,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/30271-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-30271-1",
           "lego-5002127-1",
@@ -34248,8 +34745,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/8188-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-power_miners.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Power_Miners",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/6/6d/PowerMiners.png",
         "kit_ids": [
           "lego-8188-1",
           "lego-8189-1",
@@ -34294,6 +34793,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/11371-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-11371-1",
           "lego-10350-1",
@@ -34337,6 +34837,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/6762-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-6762-1",
           "lego-6763-1",
@@ -34380,6 +34881,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/5006005-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-5006005-1",
           "lego-5006582-1",
@@ -34422,6 +34924,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/20215-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-20214-1",
           "lego-20215-1",
@@ -34464,6 +34967,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/4040-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-4040-1",
           "lego-4042-1",
@@ -34506,6 +35010,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/4002-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-4002-1",
           "lego-4012-1",
@@ -34548,6 +35053,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/30731-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-30731-1",
           "lego-77059-1",
@@ -34588,6 +35094,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/40464-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-40464-1",
           "lego-40465-1",
@@ -34628,6 +35135,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/3505-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-3505-1",
           "lego-3506-1",
@@ -34668,6 +35176,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/1-12.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-1-12",
           "lego-2-11",
@@ -34708,6 +35217,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/6644880-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-6644880-1",
           "lego-6644882-1",
@@ -34746,6 +35256,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/5950-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-5950-1",
           "lego-5951-1",
@@ -34782,8 +35293,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://cdn.rebrickable.com/media/sets/1274-1.jpg",
-        "cover_source": "newest set picture (Rebrickable)",
+        "image": "./assets/atlas/covers/lego-rock_raiders.jpg",
+        "cover_source": "https://en.wikipedia.org/wiki/Lego_Rock_Raiders",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/2/2e/Lego_Rock_Raiders_logo.jpg",
         "kit_ids": [
           "lego-1274-1",
           "lego-1275-1",
@@ -34822,6 +35335,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/10151-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-10151-1",
           "lego-5533-1",
@@ -34859,6 +35373,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/77079-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-77079-1",
           "lego-77080-1",
@@ -34895,6 +35410,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/10228-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-10228-1",
           "lego-30200-1",
@@ -34930,6 +35446,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/3817-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-3817-1",
           "lego-3818-1",
@@ -34965,6 +35482,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/11227-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-11227-1",
           "lego-11212-1",
@@ -34999,6 +35517,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/75970-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-75970-1",
           "lego-75971-1",
@@ -35033,6 +35552,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/3386-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-3386-1",
           "lego-3387-1",
@@ -35067,6 +35587,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/30546-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-30546-1",
           "lego-41230-1",
@@ -35100,6 +35621,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/4293136-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-4293136-1",
           "lego-4296983-1",
@@ -35133,6 +35655,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/75685-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-75685-1",
           "lego-75687-1",
@@ -35165,6 +35688,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/5357-2.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-5357-2",
           "lego-5470-1",
@@ -35197,6 +35721,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/30601-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-30601-1",
           "lego-5004810-1",
@@ -35228,6 +35753,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/40179-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-40179-1",
           "lego-6162-1",
@@ -35259,6 +35785,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/11216-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-11216-1",
           "lego-11217-1",
@@ -35289,6 +35816,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/eg00162-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-eg00162-1",
           "lego-7020-1",
@@ -35319,6 +35847,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/75575-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-75575-1",
           "lego-75576-1",
@@ -35349,6 +35878,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/30387-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-30387-1",
           "lego-40511-1",
@@ -35379,6 +35909,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/30555-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-30555-1",
           "lego-41250-1",
@@ -35409,6 +35940,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/30090-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-30090-1",
           "lego-30091-1",
@@ -35439,6 +35971,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/10021-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-10021-1",
           "lego-398-1",
@@ -35469,6 +36002,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/6495-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-6495-1",
           "lego-6496-1",
@@ -35499,6 +36033,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/40535-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-40535-1",
           "lego-40536-1",
@@ -35528,6 +36063,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/30260-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-30260-1",
           "lego-30261-1",
@@ -35557,6 +36093,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/10029-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-10029-1",
           "lego-7467-1",
@@ -35586,6 +36123,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/76787-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-76787-1",
           "lego-76788-1",
@@ -35614,6 +36152,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/5882-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-5882-1",
           "lego-5883-1",
@@ -35642,6 +36181,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/10191-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-10191-1",
           "lego-10192-1",
@@ -35670,6 +36210,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/75821-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-75821-1",
           "lego-75822-1",
@@ -35697,6 +36238,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/8409-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-8409-1",
           "lego-8410-1",
@@ -35724,6 +36266,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/43025-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-43025-1",
           "lego-43008-1",
@@ -35750,6 +36293,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/30678-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-30678-1",
           "lego-75580-1",
@@ -35776,6 +36320,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/81000-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-81000-1",
           "lego-81001-1",
@@ -35801,6 +36346,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/21204-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-21204-1",
           "lego-21205-1",
@@ -35826,6 +36372,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/8158-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-8158-1",
           "lego-8159-1",
@@ -35851,6 +36398,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/3806-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-3806-1",
           "lego-3807-1",
@@ -35876,6 +36424,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/75810-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-75810-1",
           "lego-castlebyers-1",
@@ -35900,6 +36449,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/77093-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-77093-1",
           "lego-77092-1"
@@ -35923,6 +36473,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/41287-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-41287-1",
           "lego-41288-1"
@@ -35946,6 +36497,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/75827-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-75827-1",
           "lego-75828-1"
@@ -35969,6 +36521,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/2853944-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-2853944-1",
           "lego-55001-1"
@@ -35992,6 +36545,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/3828-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-3828-1",
           "lego-3829-1"
@@ -36015,6 +36569,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/72423-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-72423-1"
         ],
@@ -36037,6 +36592,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/72537-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-72537-1"
         ],
@@ -36059,6 +36615,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/77037-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-77037-1"
         ],
@@ -36081,6 +36638,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/53894-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-53894-1",
           "lego-53895-1",
@@ -42685,6 +43243,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/9780241831953-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-9780241831953-1",
           "lego-9780241836712-1",
@@ -44188,6 +44747,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/45200-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-45200-1",
           "lego-45201-1",
@@ -45337,6 +45897,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/5010005-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-5010005-1",
           "lego-6518176-1",
@@ -45929,6 +46490,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/5003221-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-5003221-1",
           "lego-630-3",
@@ -46455,6 +47017,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/3033-2.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-3033-2",
           "lego-2155-1",
@@ -46894,6 +47457,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/6675226-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-6675226-1",
           "lego-6675304-1",
@@ -47314,6 +47878,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/build-a-mini-2027.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-build-a-mini-2027",
           "lego-database-2027",
@@ -47656,6 +48221,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/1555-2.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-1555-2",
           "lego-1610-2",
@@ -47837,6 +48403,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/45832-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-45832-1",
           "lego-45833-1",
@@ -47994,6 +48561,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/bag6-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-bag6-1",
           "lego-f6316-1",
@@ -48151,6 +48719,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/40952-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-40952-1",
           "lego-40810-1",
@@ -48230,6 +48799,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/50003-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-50003-1",
           "lego-50004-1",
@@ -48298,6 +48868,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/88020-1.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-88020-1",
           "lego-88020-2",
@@ -48362,6 +48933,7 @@
         },
         "image": "https://cdn.rebrickable.com/media/sets/30662-2.jpg",
         "cover_source": "newest set picture (Rebrickable)",
+        "cover_kind": "picture",
         "kit_ids": [
           "lego-30662-2",
           "lego-30664-2",
@@ -48421,8 +48993,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://images.ctfassets.net/sjvy5j5nlcjk/70010000135067b98b677aacc311f1ae71af02b35a5764/b87e2106b3aa77a6bbf6ed2ee56088b5/ad91843a60997cf00f505c51c3e309babe70a25537c7c6a293b8e7658c26caa1.jpg?w=800&fm=webp",
-        "cover_source": "newest game picture (Nintendo Store Korea)",
+        "image": "./assets/atlas/covers/nintendo-kirby.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Kirby_(series)",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/Kirby_blue_and_yellow_logo.png/960px-Kirby_blue_and_yellow_logo.png",
         "kit_ids": [
           "nintendo-kr-ns-70010000135067",
           "gashapon-nin-4582770131505000",
@@ -48545,8 +49119,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/f/d/fd69c90e3034aae1f4d5cb3db1101fb865ce4769aa9571362a7234476fe809a5_1.jpg",
-        "cover_source": "newest game picture (Nintendo Store Korea)",
+        "image": "./assets/atlas/covers/nintendo-zelda.png",
+        "cover_source": "https://en.wikipedia.org/wiki/The_Legend_of_Zelda",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Zelda_2017.svg/960px-Zelda_2017.svg.png",
         "kit_ids": [
           "tamashii-nin-16048",
           "nintendo-kr-17640",
@@ -48640,8 +49216,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/c/b/cbcf7cc15a8532930091694efdf7731dc07dd585ff3da776611408d69f4f5015_1.jpg",
-        "cover_source": "newest game picture (Nintendo Store Korea)",
+        "image": "./assets/atlas/covers/nintendo-mario.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Super_Mario",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Super_Mario_Series_Logo.png/960px-Super_Mario_Series_Logo.png",
         "kit_ids": [
           "tamashii-nin-15463",
           "gashapon-nin-4582769924613000",
@@ -48722,8 +49300,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/c/f/cf587e01f6f115398f411f280dba21e025795eb69f234a41722341ea999d170d.jpg",
-        "cover_source": "newest game picture (Nintendo Store Korea)",
+        "image": "./assets/atlas/covers/nintendo-splatoon.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Splatoon",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Splatoon_monochrome_logo.svg/500px-Splatoon_monochrome_logo.svg.png",
         "kit_ids": [
           "ichibankuji-nin-splatoon-3-03",
           "nintendo-kr-16362",
@@ -48789,8 +49369,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/e/9/e98ecdd892d64b4e53e19c4d57cd1edaa961aa3ca6621ad79764c4e513e9ce9e.jpg",
-        "cover_source": "newest game picture (Nintendo Store Korea)",
+        "image": "./assets/atlas/covers/nintendo-fire_emblem.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Fire_Emblem",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/Fire_Emblem_logo.svg/500px-Fire_Emblem_logo.svg.png",
         "kit_ids": [
           "nintendo-kr-16725",
           "nintendo-kr-17641",
@@ -48853,8 +49435,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/p/o/pok_mon-pokopia-_-_-_.jpg",
-        "cover_source": "newest game picture (Nintendo Store Korea)",
+        "image": "./assets/atlas/covers/nintendo-pokemon.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/960px-International_Pok%C3%A9mon_logo.svg.png",
         "kit_ids": [
           "nintendo-kr-17900",
           "nintendo-kr-17901",
@@ -48900,8 +49484,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/f/5/f5dc1bf581d4bf64293afcc24d1e63abb625dcb7c25b1595f1bb4ecd03b214f9_1.jpg",
-        "cover_source": "newest game picture (Nintendo Store Korea)",
+        "image": "./assets/atlas/covers/nintendo-animal_crossing.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Animal_Crossing",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/9/9e/Animal_Crossing_Logo.png",
         "kit_ids": [
           "gashapon-nin-4582770068412000",
           "gashapon-nin-4582769935299000",
@@ -48946,8 +49532,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://images.ctfassets.net/sjvy5j5nlcjk/5byPGJDUk1sX4Ndd8oV9cp/197c3048e608cf2bc9fd9cd6a476ea36/F_03_1.jpg?w=800&fm=webp",
-        "cover_source": "newest game picture (Nintendo Store Korea)",
+        "image": "./assets/atlas/covers/nintendo-xenoblade.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Xenoblade_Chronicles",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/Xenoblade_series_logo.svg/960px-Xenoblade_series_logo.svg.png",
         "kit_ids": [
           "nintendo-kr-sch-3c10bd5e6a",
           "nintendo-kr-18063",
@@ -48987,8 +49575,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/_/-/_-4-nintendo-switch-2-edition_-_-_-_.jpg",
-        "cover_source": "newest game picture (Nintendo Store Korea)",
+        "image": "./assets/atlas/covers/nintendo-pikmin.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Pikmin",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Pikmin_series_logo_new.svg/960px-Pikmin_series_logo_new.svg.png",
         "kit_ids": [
           "nintendo-kr-17838",
           "gashapon-nin-4570118211354000",
@@ -49023,8 +49613,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/a/8/a8911a0e9eac65082625b2d49c202baedce56adf614f6b191fea0070608750ef_1.jpg",
-        "cover_source": "newest game picture (Nintendo Store Korea)",
+        "image": "./assets/atlas/covers/nintendo-metroid.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Metroid",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Metroid_Logo_2017.svg/500px-Metroid_Logo_2017.svg.png",
         "kit_ids": [
           "nintendo-kr-17638",
           "tamashii-nin-15649",
@@ -49056,8 +49648,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/1/_/1_3_2.jpg",
-        "cover_source": "newest game picture (Nintendo Store Korea)",
+        "image": "./assets/atlas/covers/nintendo-smash.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Super_Smash_Bros.",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/26/Super_Smash_Bros._logo_2018.svg/960px-Super_Smash_Bros._logo_2018.svg.png",
         "kit_ids": [
           "nintendo-kr-amiibo-350",
           "nintendo-kr-amiibo-341",
@@ -49086,8 +49680,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/e/5/e51d5f3c6b5a7da18be07790db67ea3e2ddc227a112f51e2da382a528edf001a.jpg",
-        "cover_source": "newest game picture (Nintendo Store Korea)",
+        "image": "./assets/atlas/covers/nintendo-yoshi.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Yoshi_(franchise)",
+        "cover_kind": "logo",
+        "image_remote": "https://upload.wikimedia.org/wikipedia/en/0/06/Yoshi_%28series%29.png",
         "kit_ids": [
           "ichibankuji-nin-mario-yoshi",
           "nintendo-kr-15978",
@@ -49113,8 +49709,10 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/d/6/d60d7ff9b004bd4c74f22c99ee2ca42037a560f6ee8934f6ab4a92906ab41884.jpg",
-        "cover_source": "newest game picture (Nintendo Store Korea)",
+        "image": "./assets/atlas/covers/nintendo-donkey_kong.png",
+        "cover_source": "https://en.wikipedia.org/wiki/Donkey_Kong",
+        "cover_kind": "logo",
+        "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/Donkey_Kong_2024_logo.png/960px-Donkey_Kong_2024_logo.png",
         "kit_ids": [
           "nintendo-kr-13670",
           "nintendo-kr-11912",
@@ -49140,6 +49738,7 @@
         },
         "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/n/i/nintendo-switch-sports-resort.jpg",
         "cover_source": "newest game picture (Nintendo Store Korea)",
+        "cover_kind": "picture",
         "kit_ids": [
           "nintendo-kr-17515",
           "nintendo-kr-17569",
@@ -49207,6 +49806,7 @@
     ],
     "effects": [
       {
+        "cover_kind": "picture",
         "id": "effects_flame",
         "kind": "series",
         "labels": {
@@ -49235,6 +49835,7 @@
         "count": 7
       },
       {
+        "cover_kind": "picture",
         "id": "effects_explosion",
         "kind": "series",
         "labels": {
@@ -49262,6 +49863,7 @@
         "count": 6
       },
       {
+        "cover_kind": "picture",
         "id": "effects_impact",
         "kind": "series",
         "labels": {
@@ -49289,6 +49891,7 @@
         "count": 6
       },
       {
+        "cover_kind": "picture",
         "id": "effects_wind",
         "kind": "series",
         "labels": {
@@ -49316,6 +49919,7 @@
         "count": 6
       },
       {
+        "cover_kind": "picture",
         "id": "effects_aura",
         "kind": "series",
         "labels": {
@@ -49342,6 +49946,7 @@
         "count": 5
       },
       {
+        "cover_kind": "picture",
         "id": "effects_thunder",
         "kind": "series",
         "labels": {
@@ -49368,6 +49973,7 @@
         "count": 5
       },
       {
+        "cover_kind": "picture",
         "id": "effects_rock",
         "kind": "series",
         "labels": {
@@ -49393,6 +49999,7 @@
         "count": 4
       },
       {
+        "cover_kind": "picture",
         "id": "effects_water",
         "kind": "series",
         "labels": {
@@ -49418,6 +50025,7 @@
         "count": 4
       },
       {
+        "cover_kind": "picture",
         "id": "effects_action",
         "kind": "series",
         "labels": {
@@ -49441,6 +50049,7 @@
         "count": 2
       },
       {
+        "cover_kind": "picture",
         "id": "effects_gunfire",
         "kind": "series",
         "labels": {
@@ -49464,6 +50073,7 @@
         "count": 2
       },
       {
+        "cover_kind": "picture",
         "id": "effects_slash",
         "kind": "series",
         "labels": {
@@ -49487,6 +50097,7 @@
         "count": 2
       },
       {
+        "cover_kind": "picture",
         "id": "effects_smoke",
         "kind": "series",
         "labels": {

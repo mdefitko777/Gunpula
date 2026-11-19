@@ -4,7 +4,8 @@ import assert from "node:assert/strict";
 import { existsSync, statSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { armoredCoreClassifier, fateClassifier, madokaClassifier, pokemonClassifier } from "./lib/atlas_groups.mjs";
-import { LINE_COVER_GAPS, LINE_COVER_KINDS, LINE_COVER_SOURCES, OFFICIAL_LINE_HOSTS, parseRobots, pickLineImage, robotsAllows } from "./lib/line_covers.mjs";
+import { APP_DERIVED_CODES, isAllowedLineHost, LINE_COVER_GAPS, LINE_COVER_KINDS, LINE_COVER_SOURCES, LINE_ICON_KINDS, LINE_ICONS, lineSelector, OFFICIAL_LINE_HOSTS, parseRobots, pickLineImage, robotsAllows, WIKIMEDIA_HOSTS } from "./lib/line_covers.mjs";
+import { COVER_SOURCES } from "./build_atlas_covers.mjs";
 import { buildMatcher, compactKey } from "./lib/textmatch.mjs";
 import { FATE_WORKS } from "./fate_works.mjs";
 
@@ -137,6 +138,11 @@ assert.equal(pickLineImage(html, page, { img: { src: "ac_logo.png" } }), "https:
 assert.equal(pickLineImage(html, page, { img: { alt: "BX" } }), "https://example.jp/brand/_image/pict17@2x.png");
 assert.equal(pickLineImage(html, page, { og: true }), "https://example.jp/og.png");
 assert.equal(pickLineImage(html, page, { img: { alt: "RG" } }), "");
+// Lazy-loaded images: the file is only in data-srcset (pokemon.co.jp) or data-pc (nintendo.com)
+const lazy = `<img class="lazyload" data-srcset="/ss/logo_main01.png, /ss/logo_main01@2x.png 2x" alt="ソード シールド">
+  <img data-njs="image" data-pc="top/img/top/logo.png" data-sp="top/img/top/logo-sp.png" alt="">`;
+assert.equal(pickLineImage(lazy, page, { img: { alt: "ソード シールド" } }), "https://example.jp/ss/logo_main01@2x.png");
+assert.equal(pickLineImage(lazy, page, { img: { src: "top/logo.png" } }), "https://example.jp/brand/top/img/top/logo.png");
 const robots = parseRobots("User-agent: ClaudeBot\nDisallow: /\n\nUser-agent: *\nDisallow: /common/\nAllow: /common/ok/\nDisallow: /*.json$\n");
 assert.equal(robotsAllows(robots, "/candy/gundam/"), true);
 assert.equal(robotsAllows(robots, "/common/x.png"), false);
@@ -149,13 +155,16 @@ checks += 12;
 // Product-line covers in the generated file: shape, official sources, files present and small,
 // every code a real line of that franchise, and in step with the curated list.
 const gradesDoc = await json("data/grades.json");
-const grades = new Set((gradesDoc.grades || gradesDoc).map((g) => g.code));
+const gradeList = gradesDoc.grades || gradesDoc;
+const grades = new Set(gradeList.map((g) => g.code));
 const codesByFranchise = {};
-for (const franchise of ["gundam", "armored_core", "pokemon", "fate", "beyblade"]) {
+for (const franchise of ["gundam", "armored_core", "pokemon", "fate", "beyblade", "madoka", "nintendo", "effects", "lego"]) {
   const split = await json(`data/split/kits-${franchise}.json`);
   codesByFranchise[franchise] = new Set((split.kits || []).map((k) => k.grade_code));
 }
 const BBX_LINES = new Set(["BX", "UX", "CX"]);
+// Grade codes two channels share on purpose (Good Smile's Nendoroid is one line in Fate and Madoka).
+const SHARED_CODES = new Set(["NENDOROID"]);
 const lineCovers = groups.line_covers;
 assert.ok(lineCovers && typeof lineCovers === "object", "line_covers map");
 const seenLines = new Set();
@@ -164,30 +173,116 @@ for (const [franchise, byCode] of Object.entries(lineCovers)) {
   for (const [code, c] of Object.entries(byCode)) {
     const where = `line_covers.${franchise}.${code}`;
     seenLines.add(`${franchise}:${code}`);
-    assert.deepEqual(Object.keys(c).sort(), ["cover_source", "image", "image_remote", "kind"], `${where} keys`);
-    if (franchise === "beyblade") assert.ok(BBX_LINES.has(code), `${where}: BEYBLADE X lines are BX / UX / CX`);
+    // The app reads line_covers.<channel>.<code>.image; the rest is extra (old apps ignore it).
+    assert.equal(typeof c.image, "string", `${where}.image is a path string`);
+    for (const key of Object.keys(c)) assert.ok(["cover_source", "image", "image_remote", "kind", "width", "height"].includes(key), `${where} key ${key}`);
+    if (c.width !== undefined) assert.ok(Number.isInteger(c.width) && Number.isInteger(c.height) && c.width > 0 && c.height > 0, `${where} size`);
+    if (franchise === "beyblade") assert.ok(BBX_LINES.has(code) || code === "BEYBLADE_X", `${where}: BEYBLADE X lines are BX / UX / CX`);
     else {
       assert.ok(grades.has(code), `${where}: not a grade code in data/grades.json`);
-      for (const [other, codes] of Object.entries(codesByFranchise)) assert.ok(other === franchise || !codes.has(code), `${where}: code belongs to ${other}`);
+      for (const [other, codes] of Object.entries(codesByFranchise)) assert.ok(other === franchise || SHARED_CODES.has(code) || !codes.has(code), `${where}: code belongs to ${other}`);
     }
     assert.ok(LINE_COVER_KINDS.has(c.kind), `${where} kind ${c.kind}`);
     assert.match(c.image, new RegExp(`^\\./assets/atlas/covers/line-${franchise}-[a-z0-9_]+\\.(png|jpg)$`), `${where} image path`);
     const file = new URL(`../../app/${c.image.slice(2)}`, import.meta.url);
     assert.ok(existsSync(file), `${where}: ${c.image} missing`);
     assert.ok(statSync(file).size <= 100 * 1024, `${where}: ${c.image} is over 100 KB`);
-    assert.ok(OFFICIAL_LINE_HOSTS.has(new URL(c.image_remote).host), `${where}: image_remote host`);
-    assert.ok(OFFICIAL_LINE_HOSTS.has(new URL(c.cover_source).host), `${where}: cover_source host`);
-    assert.ok(LINE_COVER_SOURCES[`${franchise}:${code}`], `${where} is not in LINE_COVER_SOURCES`);
+    assert.ok(isAllowedLineHost(new URL(c.image_remote).host), `${where}: image_remote host`);
+    assert.ok(isAllowedLineHost(new URL(c.cover_source).host), `${where}: cover_source host`);
+    const source = LINE_COVER_SOURCES[`${franchise}:${code}`];
+    assert.ok(source, `${where} is not in LINE_COVER_SOURCES`);
+    // Wikimedia only when the maker's own site has no usable logo, and the entry says why.
+    if (WIKIMEDIA_HOSTS.has(new URL(c.cover_source).host)) assert.ok(source.note, `${where}: Wikimedia source without a note`);
     assert.ok(!LINE_COVER_GAPS[`${franchise}:${code}`], `${where} is also listed as a gap`);
+    assert.ok(!groups.line_icons?.[franchise]?.[code], `${where} is also a line icon`);
     checks++;
   }
 }
-for (const key of Object.keys(LINE_COVER_SOURCES)) assert.ok(!LINE_COVER_GAPS[key], `${key} both curated and a gap`);
-assert.ok(seenLines.size >= 30, `only ${seenLines.size} line covers`);
-for (const line of ["gundam:HG", "gundam:MG", "gundam:RG", "gundam:PG", "gundam:METAL_BUILD", "gundam:ROBOT_SPIRITS", "beyblade:BX", "beyblade:UX", "beyblade:CX", "pokemon:POKE_MONCOLLE"]) {
+for (const key of Object.keys(LINE_COVER_SOURCES)) {
+  assert.ok(!LINE_COVER_GAPS[key], `${key} both curated and a gap`);
+  assert.ok(!LINE_ICONS[key], `${key} both a logo and an icon`);
+  assert.ok(OFFICIAL_LINE_HOSTS.has(new URL(LINE_COVER_SOURCES[key].page).host) || LINE_COVER_SOURCES[key].note, `${key}: non-official page without a note`);
+}
+for (const key of Object.keys(LINE_COVER_GAPS)) assert.ok(LINE_ICONS[key], `gap ${key} has no line icon`);
+assert.ok(seenLines.size >= 40, `only ${seenLines.size} line covers`);
+for (const line of ["gundam:HG", "gundam:MG", "gundam:RG", "gundam:PG", "gundam:METAL_BUILD", "gundam:ROBOT_SPIRITS", "beyblade:BX", "beyblade:UX", "beyblade:CX", "pokemon:POKE_MONCOLLE", "armored_core:AC30MM", "nintendo:NIN_AMIIBO", "effects:TAMASHII_EFFECT", "fate:NENDOROID"]) {
   assert.ok(seenLines.has(line), `line cover ${line} missing`);
 }
 checks += 2;
+
+// Line icons: fixed vocabulary; every grade code with kits is a logo or an icon, never both and
+// never neither (owner's decision 2026-11-19: no product photos in the 종류 grid).
+const lineIcons = groups.line_icons;
+assert.ok(lineIcons && typeof lineIcons === "object", "line_icons map");
+for (const [key, kind] of Object.entries(LINE_ICONS)) assert.ok(LINE_ICON_KINDS.has(kind), `${key}: icon kind ${kind}`);
+for (const [franchise, byCode] of Object.entries(lineIcons)) {
+  for (const [code, kind] of Object.entries(byCode)) {
+    assert.ok(LINE_ICON_KINDS.has(kind), `line_icons.${franchise}.${code} = ${kind}`);
+    assert.ok(codesByFranchise[franchise]?.has(code) || APP_DERIVED_CODES.has(`${franchise}:${code}`), `line_icons.${franchise}.${code}: no such line`);
+    checks++;
+  }
+}
+for (const [franchise, codes] of Object.entries(codesByFranchise)) {
+  for (const code of codes) {
+    const logo = Boolean(lineCovers[franchise]?.[code]);
+    const icon = Boolean(lineIcons[franchise]?.[code]);
+    assert.ok(logo !== icon, `${franchise}:${code} is ${logo ? "both a logo and an icon" : "neither a logo nor an icon"}`);
+    checks++;
+  }
+}
+assert.equal(lineIcons.pokemon.POKE_PLUSH, "plush");
+assert.equal(lineIcons.nintendo.NIN_GAME, "game");
+assert.equal(lineIcons.gundam.NG, "plamo");
+checks += 3;
+
+// 세대 groups say whether their picture is a title logo; switched works point at a logo.
+for (const [franchise, list] of Object.entries(groups.franchises)) {
+  for (const g of list) assert.ok(["logo", "picture"].includes(g.cover_kind), `${franchise}/${g.id} cover_kind ${g.cover_kind}`);
+}
+const groupById = (franchise, id) => groups.franchises[franchise].find((g) => g.id === id);
+for (const [franchise, id] of [["pokemon", "gen9"], ["fate", "apocrypha"], ["armored_core", "ac6"], ["nintendo", "nintendo_kirby"], ["lego", "lego_star_wars"]]) {
+  assert.equal(groupById(franchise, id)?.cover_kind, "logo", `${franchise}/${id} should show its title logo`);
+  checks++;
+}
+
+// Review of 2026-11-19: a 세대 logo names the whole work, a banner is not called a logo, and a logo
+// taken from Wikipedia says what the official site had.
+{
+  const coverFile = await json("data/atlas/atlas-covers.json");
+  for (const [key, source] of Object.entries(COVER_SOURCES)) {
+    if (source.wiki && source.kind === "logo") assert.ok(source.note, `${key}: Wikipedia logo without a note on the official site`);
+    checks++;
+  }
+  // Paired games show both titles (one logo per title on their sites).
+  for (const gen of ["gen7", "gen9"]) {
+    assert.ok(COVER_SOURCES[`pokemon:${gen}`].join, `pokemon:${gen} shows both titles`);
+    assert.ok(coverFile.covers[`pokemon:${gen}`]?.join_remote, `pokemon:${gen} cover records the second logo`);
+  }
+  // Prisma☆Phantasm (one short film) and the Heaven's Feel films are not the series logos.
+  assert.ok(!/prismaphantasm/.test(COVER_SOURCES["fate:prisma"].page), "fate:prisma uses the series site");
+  assert.ok(!/fate-sn\.com/.test(COVER_SOURCES["fate:stay_night"].page), "fate:stay_night is not the Heaven's Feel film logo");
+  assert.equal(new URL(coverFile.covers["fate:fgo"].source_page).host, "www.fate-go.jp");
+  // The まどか☆マギカ portal share banner is a picture, and so are the groups that reuse it.
+  assert.notEqual(COVER_SOURCES["channel:madoka"].kind, "logo");
+  for (const id of ["madoka_ensemble", "madoka_general"]) assert.equal(groupById("madoka", id)?.cover_kind, "picture", `madoka/${id}`);
+  // POKE_GASHAPON names the line (ガシャポン), not the Pokémon logo of the share image.
+  assert.ok(!LINE_COVER_SOURCES["pokemon:POKE_GASHAPON"].og, "POKE_GASHAPON is not the Pokémon share image");
+  checks += 9;
+}
+// `join` is part of the selector only when set, so the saved selectors of other entries stay valid.
+assert.equal(lineSelector({ img: { src: "a.png" } }), '{"img":{"src":"a.png"},"og":false,"crop":null,"background":null}');
+assert.equal(lineSelector({ img: { src: "a.png" }, join: { src: "b.png" } }), '{"img":{"src":"a.png"},"og":false,"crop":null,"background":null,"join":{"src":"b.png"}}');
+checks += 2;
+
+// Every grade has a Korean line name; the Nintendo plush / prize / plamo lines share the
+// category of the Fate / Madoka / Pokémon lines of the same kind (the app names those by name_ko).
+for (const g of gradeList) assert.ok(String(g.name_ko || "").trim(), `grade ${g.code} without name_ko`);
+for (const g of gradeList) assert.ok(!/\?\?/.test(JSON.stringify([g.name_zh, g.name_ko, g.aliases])), `grade ${g.code} has "??" (wrong encoding)`);
+const category = (code) => gradeList.find((g) => g.code === code)?.category;
+assert.equal(category("NIN_PLUSH"), category("MADOKA_PLUSH"));
+assert.equal(category("NIN_PRIZE"), category("POKE_PRIZE"));
+assert.equal(category("NIN_PLAMO"), category("POKEPLA"));
+checks += 3;
 
 // Official Simplified title (B站《埃尔梅罗二世事件簿》), not 埃尔梅罗伊
 {

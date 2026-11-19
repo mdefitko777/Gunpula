@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01",
+  "updated_at": "2026-11-19",
   "scope": "Official model and collectible line taxonomy for Gundam, Armored Core, Pokemon, and BEYBLADE X catalog records. Includes Gunpla grades, SD lines, 1/100 side lines, historical plastic model lines, Tamashii Nations Gundam figure lines, Bandai Candy shokugan figures, Bandai Gashapon lines, Bandai/Kotobukiya Armored Core plastic model lines, Pokemon plastic model / capsule toy lines, and Takara Tomy BEYBLADE X battle toy lines. Excludes unofficial third-party kits and resin garage kits., Fate/FGO official figures/goods, and Pokemon Center plush/goods catalog records.",
   "sources": [
     {
@@ -59,6 +59,7 @@
       "code": "NG",
       "name_en": "No Grade",
       "name_zh": "无等级 / 旧模 / TV",
+      "name_ko": "No Grade",
       "category": "historical",
       "typical_scale": [
         "1/144",
@@ -80,6 +81,7 @@
       "code": "BMC",
       "name_en": "Best Mecha Collection",
       "name_zh": "最佳机甲收藏 / 初代旧模复刻线",
+      "name_ko": "베스트 메카 컬렉션",
       "category": "historical",
       "typical_scale": [
         "1/144",
@@ -97,6 +99,7 @@
       "code": "HG",
       "name_en": "High Grade",
       "name_zh": "高等级 / HG",
+      "name_ko": "HG",
       "category": "core",
       "typical_scale": [
         "1/144",
@@ -127,6 +130,7 @@
       "code": "MG",
       "name_en": "Master Grade",
       "name_zh": "大师级",
+      "name_ko": "MG",
       "category": "core",
       "typical_scale": [
         "1/100"
@@ -145,6 +149,7 @@
       "code": "PG",
       "name_en": "Perfect Grade",
       "name_zh": "完美级",
+      "name_ko": "PG",
       "category": "core",
       "typical_scale": [
         "1/60"
@@ -159,6 +164,7 @@
       "code": "FG",
       "name_en": "First Grade",
       "name_zh": "初级 / 首级",
+      "name_ko": "FG",
       "category": "historical",
       "typical_scale": [
         "1/144"
@@ -173,6 +179,7 @@
       "code": "EX",
       "name_en": "EX Model",
       "name_zh": "EX 模型",
+      "name_ko": "EX 모델",
       "category": "special",
       "typical_scale": [
         "1/144",
@@ -191,6 +198,7 @@
       "code": "UCHG",
       "name_en": "U.C. Hard Graph",
       "name_zh": "U.C.硬派写实",
+      "name_ko": "U.C. 하드 그래프",
       "category": "special",
       "typical_scale": [
         "1/35"
@@ -208,6 +216,7 @@
       "code": "SG",
       "name_en": "Speed Grade",
       "name_zh": "速组级",
+      "name_ko": "SG",
       "category": "historical",
       "typical_scale": [
         "1/200"
@@ -224,6 +233,7 @@
       "code": "MEGA",
       "name_en": "Mega Size Model",
       "name_zh": "Mega Size 大比例模型",
+      "name_ko": "메가 사이즈 모델",
       "category": "special",
       "typical_scale": [
         "1/48"
@@ -240,6 +250,7 @@
       "code": "RG",
       "name_en": "Real Grade",
       "name_zh": "真实级",
+      "name_ko": "RG",
       "category": "core",
       "typical_scale": [
         "1/144"
@@ -254,6 +265,7 @@
       "code": "EG",
       "name_en": "Entry Grade",
       "name_zh": "入门级",
+      "name_ko": "엔트리 그레이드",
       "category": "core",
       "typical_scale": [
         "1/144"
@@ -268,6 +280,7 @@
       "code": "AG",
       "name_en": "Advanced Grade",
       "name_zh": "进阶级",
+      "name_ko": "AG",
       "category": "historical",
       "typical_scale": [
         "1/144"
@@ -282,6 +295,7 @@
       "code": "RE100",
       "name_en": "Reborn-One Hundred",
       "name_zh": "RE/100",
+      "name_ko": "RE/100",
       "category": "one_hundred",
       "typical_scale": [
         "1/100"
@@ -299,6 +313,7 @@
       "code": "FM",
       "name_en": "Full Mechanics",
       "name_zh": "全机械骨架 / FM",
+      "name_ko": "풀 메카닉스",
       "category": "one_hundred",
       "typical_scale": [
         "1/100"
@@ -316,6 +331,7 @@
       "code": "HIRM",
       "name_en": "Hi-Resolution Model",
       "name_zh": "高解析度模型",
+      "name_ko": "Hi-Resolution Model",
       "category": "one_hundred",
       "typical_scale": [
         "1/100"
@@ -333,6 +349,7 @@
       "code": "MGEX",
       "name_en": "Master Grade Extreme",
       "name_zh": "大师级极致版",
+      "name_ko": "MGEX",
       "category": "core_subline",
       "typical_scale": [
         "1/100"
@@ -349,6 +366,7 @@
       "code": "PGU",
       "name_en": "Perfect Grade Unleashed",
       "name_zh": "完美级解放版",
+      "name_ko": "PG 언리쉬드",
       "category": "core_subline",
       "typical_scale": [
         "1/60"
@@ -365,6 +383,7 @@
       "code": "MGSD",
       "name_en": "Master Grade SD",
       "name_zh": "大师级 SD",
+      "name_ko": "MGSD",
       "category": "sd",
       "typical_scale": [
         "non-scale"
@@ -381,6 +400,7 @@
       "code": "SD",
       "name_en": "Super Deformed",
       "name_zh": "SD / Q版",
+      "name_ko": "SD",
       "category": "sd",
       "typical_scale": [
         "non-scale"
@@ -398,6 +418,7 @@
       "code": "SDEX",
       "name_en": "SD Gundam EX-Standard",
       "name_zh": "SD EX-Standard",
+      "name_ko": "SDEX",
       "category": "sd",
       "typical_scale": [
         "non-scale"
@@ -415,6 +436,7 @@
       "code": "SDCS",
       "name_en": "SD Gundam Cross Silhouette",
       "name_zh": "SDCS / Cross Silhouette",
+      "name_ko": "SD 크로스 실루엣",
       "category": "sd",
       "typical_scale": [
         "non-scale"
@@ -431,6 +453,7 @@
       "code": "SDW",
       "name_en": "SD Gundam World",
       "name_zh": "SD 三国创杰传 / 世界英雄",
+      "name_ko": "SD 월드 히어로즈",
       "category": "sd",
       "typical_scale": [
         "non-scale"
@@ -449,6 +472,7 @@
       "code": "HAROPLA",
       "name_en": "HaroPla",
       "name_zh": "哈罗模型",
+      "name_ko": "하로프라",
       "category": "special",
       "typical_scale": [
         "non-scale"
@@ -466,6 +490,7 @@
       "code": "IROPLA",
       "name_en": "Iropla",
       "name_zh": "Iropla 多色成型早期线",
+      "name_ko": "이로프라",
       "category": "historical",
       "typical_scale": [
         "1/250"
@@ -480,6 +505,7 @@
       "code": "LM",
       "name_en": "Limited Model",
       "name_zh": "Limited Model",
+      "name_ko": "LM",
       "category": "historical",
       "typical_scale": [
         "1/144",
@@ -497,6 +523,7 @@
       "code": "HY2M",
       "name_en": "Hyper Hybrid Model",
       "name_zh": "HY2M / Hyper Hybrid Model",
+      "name_ko": "HY2M",
       "category": "special",
       "typical_scale": [
         "1/60",
@@ -516,6 +543,7 @@
       "code": "CONVERGE",
       "name_en": "FW GUNDAM CONVERGE",
       "name_zh": "FW GUNDAM CONVERGE 食玩",
+      "name_ko": "CONVERGE",
       "category": "shokugan",
       "typical_scale": [
         "non-scale"
@@ -534,6 +562,7 @@
       "code": "GFRAME",
       "name_en": "Mobile Suit Gundam G Frame FA",
       "name_zh": "机动战士高达 G Frame FA 食玩",
+      "name_ko": "G FRAME FA",
       "category": "shokugan",
       "typical_scale": [
         "non-scale"
@@ -551,6 +580,7 @@
       "code": "MOBILITY",
       "name_en": "MOBILITY JOINT GUNDAM",
       "name_zh": "MOBILITY JOINT GUNDAM 食玩",
+      "name_ko": "MOBILITY JOINT",
       "category": "shokugan",
       "typical_scale": [
         "non-scale"
@@ -567,6 +597,7 @@
       "code": "ARTIFACT",
       "name_en": "Gundam Artifact",
       "name_zh": "高达 Artifact 食玩",
+      "name_ko": "건담 아티팩트",
       "category": "shokugan",
       "typical_scale": [
         "non-scale"
@@ -583,6 +614,7 @@
       "code": "SUPERIOR",
       "name_en": "Gundam Superior Define",
       "name_zh": "Gundam Superior Define 食玩",
+      "name_ko": "Superior Define",
       "category": "shokugan",
       "typical_scale": [
         "non-scale"
@@ -599,6 +631,7 @@
       "code": "MSE",
       "name_en": "Mobile Suit Ensemble",
       "name_zh": "MOBILE SUIT ENSEMBLE 扭蛋",
+      "name_ko": "MS 앙상블",
       "category": "gashapon",
       "typical_scale": [
         "non-scale"
@@ -616,6 +649,7 @@
       "code": "GSF",
       "name_en": "Gashapon Senshi f",
       "name_zh": "Gashapon Senshi f 扭蛋",
+      "name_ko": "가샤폰 전사 f",
       "category": "gashapon",
       "typical_scale": [
         "non-scale"
@@ -633,6 +667,7 @@
       "code": "GUNDAM_MERCH",
       "name_en": "Gundam Gashapon Merchandise",
       "name_zh": "高达官方扭蛋周边",
+      "name_ko": "굿즈",
       "category": "gashapon",
       "typical_scale": [
         "non-scale"
@@ -650,6 +685,7 @@
       "code": "METAL_BUILD",
       "name_en": "METAL BUILD",
       "name_zh": "METAL BUILD / MB 成品",
+      "name_ko": "METAL BUILD",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale"
@@ -667,6 +703,7 @@
       "code": "METAL_ROBOT",
       "name_en": "METAL ROBOT Spirits",
       "name_zh": "METAL ROBOT魂 / MR魂",
+      "name_ko": "METAL ROBOT魂",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale"
@@ -686,6 +723,7 @@
       "code": "ROBOT_SPIRITS",
       "name_en": "ROBOT Spirits",
       "name_zh": "ROBOT魂 / R魂",
+      "name_ko": "ROBOT魂",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale"
@@ -706,6 +744,7 @@
       "code": "SH_FIGUARTS",
       "name_en": "S.H.Figuarts",
       "name_zh": "S.H.Figuarts / SHF 成品",
+      "name_ko": "S.H.Figuarts",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale"
@@ -724,6 +763,7 @@
       "code": "GFF",
       "name_en": "GUNDAM FIX FIGURATION",
       "name_zh": "GFF / GUNDAM FIX FIGURATION 成品",
+      "name_ko": "GUNDAM FIX FIGURATION",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale",
@@ -745,6 +785,7 @@
       "code": "GUNDAM_UNIVERSE",
       "name_en": "GUNDAM UNIVERSE",
       "name_zh": "GUNDAM UNIVERSE 成品",
+      "name_ko": "GUNDAM UNIVERSE",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale",
@@ -763,6 +804,7 @@
       "code": "NXEDGE",
       "name_en": "NXEDGE STYLE",
       "name_zh": "NXEDGE STYLE 成品",
+      "name_ko": "NXEDGE STYLE",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale",
@@ -782,6 +824,7 @@
       "code": "SDX",
       "name_en": "SDX",
       "name_zh": "SDX 成品",
+      "name_ko": "SDX",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale",
@@ -799,6 +842,7 @@
       "code": "GANSO_SD",
       "name_en": "Ganso SD Gundam World",
       "name_zh": "元祖SD高达世界 复刻",
+      "name_ko": "元祖 SD",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale",
@@ -817,6 +861,7 @@
       "code": "FIGUARTS_MINI",
       "name_en": "Figuarts mini",
       "name_zh": "Figuarts mini 角色成品",
+      "name_ko": "Figuarts mini",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale",
@@ -834,6 +879,7 @@
       "code": "CHOGOKIN",
       "name_en": "Chogokin",
       "name_zh": "超合金 成品",
+      "name_ko": "超合金",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale",
@@ -854,6 +900,7 @@
       "code": "METAL_STRUCTURE",
       "name_en": "METAL STRUCTURE",
       "name_zh": "METAL STRUCTURE 解体匠机",
+      "name_ko": "METAL STRUCTURE",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale",
@@ -872,6 +919,7 @@
       "code": "TAMASHII_OTHER",
       "name_en": "Tamashii Nations (other lines)",
       "name_zh": "魂系列 其他成品",
+      "name_ko": "魂 기타",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale",
@@ -894,6 +942,7 @@
       "code": "AC30MM",
       "name_en": "30MM Armored Core",
       "name_zh": "30MM Armored Core 拼装模型",
+      "name_ko": "30MM",
       "category": "plastic_model",
       "typical_scale": [
         "non-scale"
@@ -910,6 +959,7 @@
       "code": "ACVI",
       "name_en": "Armored Core V.I. Series",
       "name_zh": "Armored Core V.I. 系列拼装模型",
+      "name_ko": "V.I.",
       "category": "plastic_model",
       "typical_scale": [
         "1/72",
@@ -930,6 +980,7 @@
       "code": "POKEPLA",
       "name_en": "Pokemon Model Kit",
       "name_zh": "宝可梦拼装模型 / PokePla",
+      "name_ko": "포켓프라",
       "category": "plastic_model",
       "typical_scale": [
         "non-scale"
@@ -948,6 +999,7 @@
       "code": "POKE_GASHAPON",
       "name_en": "Pokemon Gashapon",
       "name_zh": "宝可梦官方扭蛋 / 玩偶周边",
+      "name_ko": "가샤폰",
       "category": "gashapon",
       "typical_scale": [
         "non-scale"
@@ -965,6 +1017,7 @@
       "code": "BEYBLADE_X",
       "name_en": "BEYBLADE X",
       "name_zh": "BEYBLADE X / 战斗陀螺X",
+      "name_ko": "베이블레이드 X",
       "category": "battle_toy",
       "typical_scale": [
         "non-scale"
@@ -983,7 +1036,8 @@
     {
       "code": "FATE_SCALE",
       "name_en": "Scale Figure",
-      "name_zh": "????",
+      "name_zh": "比例手办",
+      "name_ko": "스케일",
       "category": "tamashii_figure",
       "typical_scale": [
         "1/4",
@@ -999,12 +1053,13 @@
         "Scale",
         "POP UP PARADE"
       ],
-      "notes_zh": "Fate/FGO ?????POP UP PARADE ?????????"
+      "notes_zh": "Fate/FGO 比例手办与 POP UP PARADE 等完成品手办。"
     },
     {
       "code": "FATE_ACTION",
       "name_en": "Action Figure",
-      "name_zh": "????",
+      "name_zh": "可动手办",
+      "name_ko": "액션 피규어",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale",
@@ -1017,12 +1072,13 @@
         "figma",
         "action figure"
       ],
-      "notes_zh": "Fate/FGO ???????? figma?"
+      "notes_zh": "Fate/FGO 可动手办（主要是 figma）。"
     },
     {
       "code": "NENDOROID",
       "name_en": "Nendoroid",
-      "name_zh": "???",
+      "name_zh": "粘土人",
+      "name_ko": "넨도로이드",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale"
@@ -1032,14 +1088,15 @@
       "parent_code": null,
       "aliases": [
         "Good Smile Nendoroid",
-        "??????"
+        "ねんどろいど"
       ],
-      "notes_zh": "Good Smile Company ??????? Doll?"
+      "notes_zh": "Good Smile Company 的粘土人，含粘土人 Doll。"
     },
     {
       "code": "ICHIBAN_KUJI",
       "name_en": "Ichiban Kuji",
-      "name_zh": "???",
+      "name_zh": "一番赏",
+      "name_ko": "제일복권",
       "category": "other",
       "typical_scale": [
         "non-scale",
@@ -1050,14 +1107,15 @@
       "parent_code": null,
       "aliases": [
         "Ichiban Kuji",
-        "????"
+        "一番くじ"
       ],
-      "notes_zh": "???????????"
+      "notes_zh": "BANDAI SPIRITS 的一番赏奖品。"
     },
     {
       "code": "FATE_GASHAPON",
       "name_en": "Fate Gashapon",
-      "name_zh": "Fate ??",
+      "name_zh": "Fate 扭蛋",
+      "name_ko": "가샤폰",
       "category": "gashapon",
       "typical_scale": [
         "non-scale",
@@ -1070,12 +1128,13 @@
         "capsule toy",
         "gashapon"
       ],
-      "notes_zh": "Fate/FGO ????????"
+      "notes_zh": "Fate/FGO 的扭蛋商品。"
     },
     {
       "code": "FATE_PRIZE",
       "name_en": "Prize Figure",
-      "name_zh": "??",
+      "name_zh": "景品",
+      "name_ko": "경품",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale",
@@ -1086,14 +1145,15 @@
       "parent_code": null,
       "aliases": [
         "Prize",
-        "????"
+        "プライズ"
       ],
-      "notes_zh": "Fate/FGO ????????"
+      "notes_zh": "Fate/FGO 景品手办与一番赏。"
     },
     {
       "code": "FATE_GOODS",
       "name_en": "Fate Goods",
-      "name_zh": "Fate ??",
+      "name_zh": "Fate 周边",
+      "name_ko": "굿즈",
       "category": "other",
       "typical_scale": [
         "non-scale",
@@ -1108,12 +1168,13 @@
         "acrylic",
         "plush"
       ],
-      "notes_zh": "Fate/FGO ????????????????"
+      "notes_zh": "Fate/FGO 的周边商品（主要是 Aniplex+）。"
     },
     {
       "code": "MADOKA_SCALE",
       "name_en": "Scale Figure",
       "name_zh": "比例手办",
+      "name_ko": "스케일",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale",
@@ -1132,6 +1193,7 @@
       "code": "MADOKA_ACTION",
       "name_en": "Action Figure",
       "name_zh": "可动手办",
+      "name_ko": "액션 피규어",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale",
@@ -1151,6 +1213,7 @@
       "code": "MADOKA_PRIZE",
       "name_en": "Prize Figure",
       "name_zh": "景品",
+      "name_ko": "경품",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale",
@@ -1169,6 +1232,7 @@
       "code": "MADOKA_MINI",
       "name_en": "Mini / Trading Figure",
       "name_zh": "小手办 / 盲盒",
+      "name_ko": "미니 · 트레이딩",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale",
@@ -1187,6 +1251,7 @@
       "code": "MADOKA_PLUSH",
       "name_en": "Plush",
       "name_zh": "毛绒",
+      "name_ko": "인형",
       "category": "other",
       "typical_scale": [
         "non-scale",
@@ -1204,7 +1269,8 @@
     {
       "code": "POKE_PLUSH",
       "name_en": "Pokemon Plush",
-      "name_zh": "?????",
+      "name_zh": "宝可梦毛绒",
+      "name_ko": "봉제인형",
       "category": "other",
       "typical_scale": [
         "non-scale",
@@ -1215,14 +1281,15 @@
       "parent_code": null,
       "aliases": [
         "Pokemon Center plush",
-        "?????"
+        "ぬいぐるみ"
       ],
-      "notes_zh": "Pokemon Center ????????"
+      "notes_zh": "Pokémon Center / 宝可梦商店的毛绒玩偶。"
     },
     {
       "code": "POKE_GOODS",
       "name_en": "Pokemon Goods",
-      "name_zh": "?????",
+      "name_zh": "宝可梦周边",
+      "name_ko": "굿즈",
       "category": "other",
       "typical_scale": [
         "non-scale",
@@ -1234,12 +1301,13 @@
       "aliases": [
         "Pokemon Center goods"
       ],
-      "notes_zh": "Pokemon ????????????????"
+      "notes_zh": "宝可梦的周边商品（文具、生活用品、饰品等）。"
     },
     {
       "code": "AC_SHOKUGAN",
       "name_en": "Armored Core Shokugan",
-      "name_zh": "??????",
+      "name_zh": "装甲核心食玩",
+      "name_ko": "식완",
       "category": "shokugan",
       "typical_scale": [
         "non-scale",
@@ -1250,14 +1318,15 @@
       "parent_code": null,
       "aliases": [
         "Assemble Collection",
-        "???????????"
+        "アッセンブルコレクション"
       ],
-      "notes_zh": "Armored Core VI ????????????"
+      "notes_zh": "ARMORED CORE VI 的食玩拼装收藏（Assemble Collection）。"
     },
     {
       "code": "AC_SMP",
       "name_en": "SMP Armored Core",
-      "name_zh": "SMP ????",
+      "name_zh": "SMP 食玩模型",
+      "name_ko": "SMP",
       "category": "plastic_model",
       "typical_scale": [
         "non-scale",
@@ -1270,12 +1339,13 @@
         "SMP",
         "SHOKUGAN MODELING PROJECT"
       ],
-      "notes_zh": "Bandai Candy SMP / SHOKUGAN MODELING PROJECT ???????????"
+      "notes_zh": "Bandai Candy SMP / SHOKUGAN MODELING PROJECT 的装甲核心食玩模型。"
     },
     {
       "code": "POKE_MONCOLLE",
       "name_en": "Pokemon Moncolle",
       "name_zh": "宝可梦 モンコレ",
+      "name_ko": "몬콜레",
       "category": "other",
       "typical_scale": [
         "non-scale"
@@ -1294,6 +1364,7 @@
       "code": "POKE_KUJI",
       "name_en": "Pokemon Ichiban Kuji",
       "name_zh": "宝可梦 一番赏",
+      "name_ko": "제일복권",
       "category": "other",
       "typical_scale": [
         "non-scale"
@@ -1308,6 +1379,7 @@
       "code": "POKE_PRIZE",
       "name_en": "Pokemon Prize Figure",
       "name_zh": "宝可梦 景品",
+      "name_ko": "경품",
       "category": "other",
       "typical_scale": [
         "non-scale"
@@ -1322,6 +1394,7 @@
       "code": "POKE_FIGURE",
       "name_en": "Pokemon Figure",
       "name_zh": "宝可梦 手办",
+      "name_ko": "피규어",
       "category": "other",
       "typical_scale": [
         "non-scale"
@@ -1339,6 +1412,7 @@
       "code": "LEGO_SET",
       "name_en": "LEGO Set",
       "name_zh": "乐高套装",
+      "name_ko": "세트",
       "category": "plastic_model",
       "typical_scale": [
         "non-scale",
@@ -1356,6 +1430,7 @@
       "code": "LEGO_MINIFIG",
       "name_en": "Collectible Minifigure",
       "name_zh": "乐高人仔抽抽乐",
+      "name_ko": "미니피규어",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale",
@@ -1374,6 +1449,7 @@
       "code": "LEGO_GEAR",
       "name_en": "LEGO Gear",
       "name_zh": "乐高周边",
+      "name_ko": "굿즈",
       "category": "other",
       "typical_scale": [
         "non-scale",
@@ -1392,6 +1468,7 @@
       "code": "LEGO_BOOK",
       "name_en": "LEGO Book",
       "name_zh": "乐高书籍",
+      "name_ko": "책 · 화보",
       "category": "other",
       "typical_scale": [
         "non-scale",
@@ -1409,6 +1486,7 @@
       "code": "LEGO_PARTS",
       "name_en": "LEGO Parts Pack",
       "name_zh": "乐高零件包",
+      "name_ko": "부품",
       "category": "other",
       "typical_scale": [
         "non-scale",
@@ -1427,6 +1505,7 @@
       "code": "NIN_GAME",
       "name_en": "Nintendo Game",
       "name_zh": "任天堂游戏",
+      "name_ko": "게임",
       "category": "other",
       "typical_scale": [
         "non-scale",
@@ -1446,6 +1525,7 @@
       "code": "NIN_HW",
       "name_en": "Nintendo Hardware & Accessories",
       "name_zh": "任天堂主机与配件",
+      "name_ko": "본체 · 주변기기",
       "category": "other",
       "typical_scale": [
         "non-scale",
@@ -1465,6 +1545,7 @@
       "code": "NIN_AMIIBO",
       "name_en": "amiibo",
       "name_zh": "amiibo",
+      "name_ko": "amiibo",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale",
@@ -1483,6 +1564,7 @@
       "code": "NIN_GOODS",
       "name_en": "Nintendo Goods",
       "name_zh": "任天堂周边",
+      "name_ko": "굿즈",
       "category": "other",
       "typical_scale": [
         "non-scale",
@@ -1580,6 +1662,7 @@
       "code": "NIN_SCALE",
       "name_en": "Scale Figure",
       "name_zh": "比例手办",
+      "name_ko": "스케일",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale",
@@ -1598,6 +1681,7 @@
       "code": "NIN_ACTION",
       "name_en": "Action Figure",
       "name_zh": "可动手办",
+      "name_ko": "액션 피규어",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale",
@@ -1617,7 +1701,8 @@
       "code": "NIN_PLAMO",
       "name_en": "Plastic Model Kit",
       "name_zh": "拼装模型",
-      "category": "tamashii_figure",
+      "name_ko": "프라모델",
+      "category": "plastic_model",
       "typical_scale": [
         "non-scale",
         "various"
@@ -1635,7 +1720,8 @@
       "code": "NIN_PRIZE",
       "name_en": "Prize Figure",
       "name_zh": "景品手办",
-      "category": "tamashii_figure",
+      "name_ko": "경품",
+      "category": "other",
       "typical_scale": [
         "non-scale",
         "various"
@@ -1654,6 +1740,7 @@
       "code": "NIN_MINI",
       "name_en": "Mini / Trading Figure",
       "name_zh": "小手办 / 盒蛋",
+      "name_ko": "미니 · 트레이딩",
       "category": "tamashii_figure",
       "typical_scale": [
         "non-scale",
@@ -1673,7 +1760,8 @@
       "code": "NIN_PLUSH",
       "name_en": "Plush",
       "name_zh": "毛绒玩偶",
-      "category": "tamashii_figure",
+      "name_ko": "인형",
+      "category": "other",
       "typical_scale": [
         "non-scale",
         "various"
