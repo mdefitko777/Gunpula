@@ -166,6 +166,9 @@ jobs:
       # before anyone notices the catalog stopped growing. Open (or reuse) one
       # issue so a broken daily refresh is visible. A run that committed but had
       # failed sources is reported too; this runs after the commit, so it never blocks it.
+      # Paused sources and hosts under maintenance (import-failures.txt.known, see
+      # scripts/lib/import-report.mjs) alone are not a reason to comment; with a real
+      # failure they are listed once, on one "Paused (known)" line.
       - name: Report failure
         if: ${{ !cancelled() }}
         env:
@@ -177,8 +180,12 @@ jobs:
           if [ -s "$FAILURES_PATH" ]; then
             failed_steps=$(sed 's/^/- /' "$FAILURES_PATH")
           fi
+          known=""
+          if [ -s "$FAILURES_PATH.known" ]; then
+            known=$(awk 'NF { printf "%s%s", (n++ ? "; " : ""), $0 }' "$FAILURES_PATH.known")
+          fi
           if [ "$JOB_STATUS" = "success" ] && [ -z "$failed_steps" ]; then
-            echo "Nothing to report."
+            echo "Nothing to report.${known:+ Paused (known): $known}"
             exit 0
           fi
           run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
@@ -189,6 +196,9 @@ jobs:
           fi
           if [ -n "$failed_steps" ]; then
             body="$body"$'\n\n'"$failed_steps"
+          fi
+          if [ -n "$known" ]; then
+            body="$body"$'\n\n'"Paused (known, kept their previous data): $known"
           fi
           title="每日目录抓取失败"
           existing=$(gh issue list --state open --search "$title in:title" --json number --jq '.[0].number')

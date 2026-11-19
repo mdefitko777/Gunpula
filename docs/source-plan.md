@@ -63,6 +63,9 @@ npm run sources
 | store-jp.nintendo.com（My Nintendo Store 日本） | robots 允许 /list/，但每个商品页都跳到 Queue-it 排队页（store-jp-wr.nintendo.com，要跑 JS 拿令牌），属于 bot check | 不读 | 日本任天堂商店的周边（约 800 件）和 amiibo（约 140 件） |
 | www.nintendo.com/kr/amiibo/lineup 的「더보기」 | 页面只内嵌最新 20 个 amiibo，其余要客户端 JS 调 Contentful API | 只读内嵌的 20 个，读过的记录保留；不跑网页 JS、不直接调 API | 2024-02 以前的韩国 amiibo |
 | www.kotobukiya.co.jp（寿屋官网，任天堂作品） | 对本 bot 回 403；shop.kotobukiya.co.jp 只列在售商品，2026-11-19 任天堂作品全部 0 件，セイレーン、フォーミュラ 的商品页写「販売終了」 | 不读官网（只把 `product/detail/p<JAN>/` 写进 source_urls）；在售的由 `import_nintendo_makers.mjs` 每天按作品筛选和关键词搜索；已售罄的写在 `data/nintendo/kotobukiya-manual.json`（店主提供的品番、JAN、价格、月份） | 寿屋任天堂商品的价格与多角度图（停售后）；店里从没出现过的旧商品 |
+| www.bnkrmall.co.kr（반다이남코코리아몰） | 2026-11-14 加入后 CI 一次都没读到：runner 拿到的 robots.txt 没有 `*` 组，搜索页 HTTP 200 却没有商品（有 F5 BIG-IP 的 cookie）；家用线路正常（每页 40 件）。是对 runner 的封锁 | GitHub runner 上 `import:bnkr-pokemon` 暂停（`scripts/run_importers.mjs` 的 `pause`），每 7 天试一次；报告里只在「Paused (known)」一行列出。2026-11-14 读到的记录和 `data/kr-shops/bnkr-details.json` 保留 | 万代宝可梦韩国新品、韩元价格、JAN 不再更新 |
+| store.nintendo.co.kr（닌텐도 스토어） | 2026-11-14 加入后 CI 一次都没读到：robots.txt 和列表页都回 HTTP 202（AWS WAF challenge，要跑 JS）；家用线路 200 | 同上暂停 `import:nintendo-kr`，每 7 天试一次（只问 robots.txt，202 就停）。2026-11-14 的记录和 `data/nintendo/store-details.json` 保留。同一步里的 nintendo.com/kr 发售表和 amiibo 也跟着暂停 | 韩国商店的新游戏、主机、周边，以及发售日和图片；nintendo.com/kr 的发售表与 amiibo 更新 |
+| www.goodsmile.com（维护，不是拒绝） | 2026-10-23 起约两周、2026-11-19 19:47 JST 起整站 HTTP 503「メンテナンス中」（robots.txt 也是 503；平时 robots.txt 是 404） | 不停用。robots.txt 或页面是维护页时，日志写「under maintenance」，这个 host 当次停止，记录保留；报告里列在「Paused (known)」一行，不当失败。`import:fate` 的 goodsmile.info 旧版列表照常写入 | 维护期间 goodsmile.com 的新品 |
 
 ## 韩国来源（2026-11-14 起）
 
@@ -70,7 +73,7 @@ npm run sources
 
 | 来源 | 脚本 | 拿什么 | 注意点 |
 |---|---|---|---|
-| 닌텐도 스토어 store.nintendo.co.kr | `import_nintendo_korea.mjs`（`nintendo_store_kr`） | 任天堂频道：游戏（实体＋下载合为一条）、主机与配件、amiibo 卡、周边；发售日、厂商、图片来自商品页 | robots.txt 为空（全允许）。只收任天堂发行的游戏；DLC、升级通行证、Online 会员、点卡、体验版、散装零件、线材、存储卡不收。商品页只读新商品和未发售的（每周再读一次），记在 `data/nintendo/store-details.json` |
+| 닌텐도 스토어 store.nintendo.co.kr | `import_nintendo_korea.mjs`（`nintendo_store_kr`） | 任天堂频道：游戏（实体＋下载合为一条）、主机与配件、amiibo 卡、周边；发售日、厂商、图片来自商品页 | robots.txt 为空（全允许；只对家用线路，GitHub runner 收到的是 202 bot check，见上表）。只收任天堂发行的游戏；DLC、升级通行证、Online 会员、点卡、体验版、散装零件、线材、存储卡不收。商品页只读新商品和未发售的（每周再读一次），记在 `data/nintendo/store-details.json` |
 | 한국닌텐도 www.nintendo.com/kr | 同上（`nintendo_kr`）、`fetch_bandai_announcements.mjs`（`nintendo_kr_news`） | 发售日程（只取「한국닌텐도」发行的）、最新 20 个 amiibo、新闻里的商品消息 | robots.txt 对 `*` 允许，但点名拒绝 ClaudeBot、GPTBot 等 AI 爬虫；本 bot 属于 `*`。数据从服务器渲染的 flight 数据里读，不跑网页 JS |
 | 반다이남코코리아몰 www.bnkrmall.co.kr | `import_bnkr_pokemon.mjs`（`bnkrmall_kr`） | 万代的宝可梦韩国发售：포켓프라、프라코로、나노블럭、스케일 월드、깜짝에그；韩元价、JAN（商品页「모델명」） | 条款页在 robots 禁止的 /cscenter/ 下，店主决定按允许处理；读的路径（/goods/）robots 允许。没有发售日，用图片上传月份当上架月 |
 | 아카데미과학 academy.co.kr | `import_academy_pokemon.mjs`（`academy_kr`） | 多美的宝可梦韩国发售：몬콜레（含旧 EMC/EHP/ESP）、포켓피스、말랑콕콕、포코피아 | 只读搜索列表（商品页没有 JAN、发售日）；发售年取自 S{YY} 商品编号。不是 academyhobby.co.kr（零售店） |

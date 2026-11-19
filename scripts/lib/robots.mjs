@@ -9,8 +9,16 @@
 //   * robots.txt answering 4xx (none published) = everything allowed, 5xx or no answer
 //     (timeout, DNS, connection) = everything disallowed for this run (§2.3.1.3–4).
 //     429 is the site asking us to slow down, so it counts as unreachable, not as "none".
+//   * a bot check in place of robots.txt (HTTP 202 or an x-amzn-waf-action header, the AWS WAF
+//     challenge store.nintendo.co.kr answers GitHub runners with since 2026-11-14, or a challenge
+//     page) is not a robots.txt: disallow all, `challenged`. Read as rules it was "none", allow all.
+//   * a 5xx maintenance page (www.goodsmile.com, 2026-10-23 and 2026-11-19) says so in `status`,
+//     so the report does not read like the site changed its rules.
+import { looksLikeBotChallenge } from "../atlas/lib/http.mjs";
 
 export const BOT_TOKEN = "hobbyatlasdatabot";
+// The title of a maintenance page ("メンテナンス中 | グッドスマイルカンパニー公式ショップ", 2026-11-19).
+export const MAINTENANCE_PAGE = /<title>[^<]*(?:メンテナンス|maintenance|점검)/i;
 
 /** robots.txt path rule → RegExp: `*` = any characters, `$` at the end = end of the path. */
 export function robotsPattern(rule) {
@@ -81,7 +89,7 @@ export function robotsAllows(robots, target) {
 
 /**
  * Reads https://<host>/robots.txt with this bot's user-agent and never throws:
- * { rules, group, disallowAll?, status } (status is a short line for the log).
+ * { rules, group, disallowAll?, challenged?, status } (status is a short line for the log).
  */
 export async function loadRobots(host, { userAgent, timeoutMs = 15000, fetchImpl = globalThis.fetch } = {}) {
   try {
@@ -89,15 +97,25 @@ export async function loadRobots(host, { userAgent, timeoutMs = 15000, fetchImpl
       headers: userAgent ? { "User-Agent": userAgent } : {},
       signal: AbortSignal.timeout(timeoutMs),
     });
+    const waf = response.headers.get("x-amzn-waf-action");
+    if (response.status === 202 || waf) {
+      return { rules: [], group: "none", disallowAll: true, challenged: true, status: `${response.status} (bot check${waf ? `, x-amzn-waf-action: ${waf}` : ""}: disallow all)` };
+    }
     if (response.status === 429 || response.status >= 500) {
-      return { rules: [], group: "none", disallowAll: true, status: `${response.status} (unreachable: disallow all)` };
+      const body = response.status >= 500 ? await response.text().catch(() => "") : "";
+      const reason = MAINTENANCE_PAGE.test(body) ? "under maintenance" : "unreachable";
+      return { rules: [], group: "none", disallowAll: true, status: `${response.status} (${reason}: disallow all)` };
     }
     if (response.status >= 400) return { rules: [], group: "none", status: `${response.status} (no robots.txt: all allowed)` };
     if (!response.ok) {
       // A redirect that was not followed (or any other non-2xx): the rules were never read.
       return { rules: [], group: "none", disallowAll: true, status: `${response.status} (not read: disallow all)` };
     }
-    const robots = parseRobots(await response.text());
+    const text = await response.text();
+    if (looksLikeBotChallenge(response.status, text)) {
+      return { rules: [], group: "none", disallowAll: true, challenged: true, status: `${response.status} (bot check: disallow all)` };
+    }
+    const robots = parseRobots(text);
     const disallows = robots.rules.filter((rule) => !rule.allow).length;
     return { ...robots, status: `${response.status} (rules for ${robots.group}: ${disallows} disallow)` };
   } catch (error) {
