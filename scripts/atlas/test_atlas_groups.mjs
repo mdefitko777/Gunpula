@@ -4,7 +4,8 @@ import assert from "node:assert/strict";
 import { existsSync, statSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { armoredCoreClassifier, fateClassifier, madokaClassifier, pokemonClassifier } from "./lib/atlas_groups.mjs";
-import { APP_DERIVED_CODES, isAllowedLineHost, LINE_COVER_GAPS, LINE_COVER_KINDS, LINE_COVER_SOURCES, LINE_ICON_KINDS, LINE_ICONS, OFFICIAL_LINE_HOSTS, parseRobots, pickLineImage, robotsAllows, WIKIMEDIA_HOSTS } from "./lib/line_covers.mjs";
+import { APP_DERIVED_CODES, isAllowedLineHost, LINE_COVER_GAPS, LINE_COVER_KINDS, LINE_COVER_SOURCES, LINE_ICON_KINDS, LINE_ICONS, lineSelector, OFFICIAL_LINE_HOSTS, parseRobots, pickLineImage, robotsAllows, WIKIMEDIA_HOSTS } from "./lib/line_covers.mjs";
+import { COVER_SOURCES } from "./build_atlas_covers.mjs";
 import { buildMatcher, compactKey } from "./lib/textmatch.mjs";
 import { FATE_WORKS } from "./fate_works.mjs";
 
@@ -243,6 +244,35 @@ for (const [franchise, id] of [["pokemon", "gen9"], ["fate", "apocrypha"], ["arm
   assert.equal(groupById(franchise, id)?.cover_kind, "logo", `${franchise}/${id} should show its title logo`);
   checks++;
 }
+
+// Review of 2026-11-19: a 세대 logo names the whole work, a banner is not called a logo, and a logo
+// taken from Wikipedia says what the official site had.
+{
+  const coverFile = await json("data/atlas/atlas-covers.json");
+  for (const [key, source] of Object.entries(COVER_SOURCES)) {
+    if (source.wiki && source.kind === "logo") assert.ok(source.note, `${key}: Wikipedia logo without a note on the official site`);
+    checks++;
+  }
+  // Paired games show both titles (one logo per title on their sites).
+  for (const gen of ["gen7", "gen9"]) {
+    assert.ok(COVER_SOURCES[`pokemon:${gen}`].join, `pokemon:${gen} shows both titles`);
+    assert.ok(coverFile.covers[`pokemon:${gen}`]?.join_remote, `pokemon:${gen} cover records the second logo`);
+  }
+  // Prisma☆Phantasm (one short film) and the Heaven's Feel films are not the series logos.
+  assert.ok(!/prismaphantasm/.test(COVER_SOURCES["fate:prisma"].page), "fate:prisma uses the series site");
+  assert.ok(!/fate-sn\.com/.test(COVER_SOURCES["fate:stay_night"].page), "fate:stay_night is not the Heaven's Feel film logo");
+  assert.equal(new URL(coverFile.covers["fate:fgo"].source_page).host, "www.fate-go.jp");
+  // The まどか☆マギカ portal share banner is a picture, and so are the groups that reuse it.
+  assert.notEqual(COVER_SOURCES["channel:madoka"].kind, "logo");
+  for (const id of ["madoka_ensemble", "madoka_general"]) assert.equal(groupById("madoka", id)?.cover_kind, "picture", `madoka/${id}`);
+  // POKE_GASHAPON names the line (ガシャポン), not the Pokémon logo of the share image.
+  assert.ok(!LINE_COVER_SOURCES["pokemon:POKE_GASHAPON"].og, "POKE_GASHAPON is not the Pokémon share image");
+  checks += 9;
+}
+// `join` is part of the selector only when set, so the saved selectors of other entries stay valid.
+assert.equal(lineSelector({ img: { src: "a.png" } }), '{"img":{"src":"a.png"},"og":false,"crop":null,"background":null}');
+assert.equal(lineSelector({ img: { src: "a.png" }, join: { src: "b.png" } }), '{"img":{"src":"a.png"},"og":false,"crop":null,"background":null,"join":{"src":"b.png"}}');
+checks += 2;
 
 // Every grade has a Korean line name; the Nintendo plush / prize / plamo lines share the
 // category of the Fate / Madoka / Pokémon lines of the same kind (the app names those by name_ko).

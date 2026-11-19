@@ -4,12 +4,13 @@
 // decision 2026-11-19: the 세대 / 종류 screens show logos, box art only where no logo exists),
 // otherwise game box art, a light-novel / visual-novel cover, or FGO's own quest-board chapter
 // banner. Sources:
+//   - The title logo picked from the static HTML of the work's official site (`page` + `img` / `og`,
+//     same picking rules as the product lines). Tried first for every logo.
 //   - English / Japanese Wikipedia: the infobox image of the work's article (official logo or box
 //     art, uploaded there as non-free fair-use files; SVG logos come as Wikimedia PNG renderings).
-//     Article HTML is read from /wiki/ pages, which robots.txt allows (the /w/api.php endpoint is
-//     disallowed, so it is not used).
-//   - The title logo picked from the static HTML of the work's official site (`page` + `img` / `og`,
-//     same picking rules as the product lines).
+//     A logo is taken from here only when the official site has none we may read as a raster image,
+//     and the entry's note says what the official site had. Article HTML is read from /wiki/ pages,
+//     which robots.txt allows (the /w/api.php endpoint is disallowed, so it is not used).
 //   - Atlas Academy static assets for the FGO chapter banners (official game assets).
 //   - Product-line covers (the "종류별 도감" cards: HG / MG / ROBOT魂 / MONCOLLE / BX …): the line's
 //     logo picked from the static HTML of the maker's own brand page, as listed in
@@ -41,6 +42,10 @@ const wiki = (title) => `https://en.wikipedia.org/wiki/${title}`;
 const LOGO = "logo";
 const POKEMON_JP = "https://www.pokemon.co.jp";
 
+// Why a logo comes from Wikipedia although the work has an official site (checked 2026-11-19).
+const POKEMON_LOGO_NOTE = "International Pokémon logo; pokemon.co.jp keeps its logo under /img/, which its robots.txt disallows";
+const LEGO_COM_NOTE = "lego.com theme pages load their logos from assets.lego.com, whose robots.txt answers 403";
+
 // key -> source. `wiki`: article whose infobox image is the cover. `url`: direct official image.
 // `page` + `img` | `og`: image picked from an official page (see line_covers.mjs).
 // `kind: "logo"` marks a title logo (kept transparent, shown as a logo by the app); anything else
@@ -49,14 +54,17 @@ export const COVER_SOURCES = {
   // Channel headers (series logos / key art).
   "channel:gundam": { url: "https://gundam-official.com/assets/ogp-default.png", page: "https://gundam-official.com/", note: "GUNDAM official portal share image (logo)" },
   "channel:beyblade": { url: "https://beyblade.takaratomy.co.jp/bbx_portal.png", page: "https://beyblade.takaratomy.co.jp/", note: "BEYBLADE X official site share image (logo)" },
-  "channel:pokemon": { wiki: wiki("Pok%C3%A9mon"), kind: LOGO, note: "International Pokémon logo" },
+  "channel:pokemon": { wiki: wiki("Pok%C3%A9mon"), kind: LOGO, note: POKEMON_LOGO_NOTE },
   "channel:fate": { url: "https://www.fate-go.jp/images/fate_ogp_3500.png", page: "https://www.fate-go.jp/", note: "Fate/Grand Order official site key visual (most Fate goods are FGO)" },
   "channel:nintendo": { url: "https://www.nintendo.co.kr/sns.png", page: "https://www.nintendo.co.kr/", note: "Nintendo Korea official site share image (logo)" },
   // Most of the channel is 魂EFFECT; Good Smile has no share image for its effect lines.
   "channel:effects": { url: "https://tamashiiweb.com/storage/images/brands/imported/og_tamashii_effect.jpg", page: "https://tamashiiweb.com/item_brand/tamashii_effect/", note: "Tamashii Web 魂EFFECT brand page share image" },
   "channel:armored_core": { url: "https://www.armoredcore.net/resources/images/common/ogp/ogp_image.png", page: "https://www.armoredcore.net/", note: "ARMORED CORE official site share image (AC VI logo)" },
-  "channel:madoka": { page: "https://www.madoka-magica.com/", og: true, kind: LOGO, note: "まどか☆マギカ portal share image (the page's own logo is SVG only)" },
-  "channel:lego": { wiki: wiki("Lego"), kind: LOGO, note: "LEGO logo" },
+  // A share banner ("PORTAL SITE" on white), so a picture, not a title logo: the portal's own logo
+  // is SVG only, its PNG logos are of Magia Exedra and ワルプルギスの廻天, and Wikipedia's infobox is a
+  // Blu-ray cover (checked 2026-11-19).
+  "channel:madoka": { page: "https://www.madoka-magica.com/", og: true, note: "まどか☆マギカ portal share image (no raster title logo on the official site)" },
+  "channel:lego": { wiki: wiki("Lego"), kind: LOGO, note: `LEGO logo; ${LEGO_COM_NOTE}` },
   // Pokémon: one cover per generation = the generation's paired games. Title logos from the
   // games' official sites where the site still has one; gen 1–4 pages show only key art, so
   // those keep the box art of Wikipedia's infobox.
@@ -67,9 +75,10 @@ export const COVER_SOURCES = {
   // gen 5: the B/W site's logo.gif is disallowed by pokemon.co.jp's robots.txt (checked 2026-11-19).
   "pokemon:gen5": { wiki: wiki("Pok%C3%A9mon_Black_and_White") },
   "pokemon:gen6": { page: `${POKEMON_JP}/ex/xy/`, img: { src: "images/logo_xy.png" }, kind: LOGO },
-  "pokemon:gen7": { page: `${POKEMON_JP}/ex/sun_moon/`, img: { src: "shared/logo-sun.png" }, kind: LOGO, note: "サン logo (the site has サン and ムーン as two images)" },
+  // Sun / Moon and Scarlet / Violet have one logo per title on their sites: both, side by side.
+  "pokemon:gen7": { page: `${POKEMON_JP}/ex/sun_moon/`, img: { src: "shared/logo-sun.png" }, join: { src: "shared/logo-moon.png" }, kind: LOGO, note: "サン and ムーン logos side by side" },
   "pokemon:gen8": { page: `${POKEMON_JP}/ex/sword_shield/`, img: { alt: "ポケットモンスター ソード ポケットモンスター シールド" }, kind: LOGO },
-  "pokemon:gen9": { page: `${POKEMON_JP}/ex/sv/ja/`, img: { src: "toppage/ja/title_scarlet.png" }, kind: LOGO, note: "スカーレット logo (the site has スカーレット and バイオレット as two images)" },
+  "pokemon:gen9": { page: `${POKEMON_JP}/ex/sv/ja/`, img: { src: "toppage/ja/title_scarlet.png" }, join: { src: "toppage/ja/title_violet.png" }, kind: LOGO, note: "スカーレット and バイオレット logos side by side" },
   // Armored Core: one cover per game era (the era's first title). Only AC VI has a logo on an
   // official site; the older eras keep their box art.
   "armored_core:ac1": { wiki: wiki("Armored_Core_(video_game)") },
@@ -78,16 +87,20 @@ export const COVER_SOURCES = {
   "armored_core:ac4": { wiki: wiki("Armored_Core_4") },
   "armored_core:acv": { wiki: wiki("Armored_Core_V") },
   "armored_core:ac6": { page: "https://www.armoredcore.net/", img: { src: "menu/ac-logo2.png" }, kind: LOGO, background: "#16181d", note: "ARMORED CORE VI logo of the official site menu (white)" },
-  "armored_core:series": { wiki: wiki("Armored_Core"), kind: LOGO, note: "ARMORED CORE series logo" },
+  "armored_core:series": { wiki: wiki("Armored_Core"), kind: LOGO, note: "ARMORED CORE series logo; armoredcore.net shows only the AC VI logo" },
   // Fate works: title logos of the official anime / game sites; the works whose sites are gone
   // or refuse bots keep the light-novel / visual-novel cover.
-  "fate:fgo": { wiki: wiki("Fate/Grand_Order"), kind: LOGO },
-  "fate:stay_night": { page: "https://www.fate-sn.com/", img: { src: "img/common/logo_pc.png" }, kind: LOGO, note: "劇場版 Fate/stay night [Heaven's Feel] logo" },
+  "fate:fgo": { page: "https://www.fate-go.jp/", img: { src: "top/main/slide01/logo.png" }, kind: LOGO },
+  // The original visual novel's logo for the whole work: fate-sn.com is the Heaven's Feel films'
+  // site, and the REMASTERED logo sits on cache.typemoon.com, whose robots.txt cannot be read.
+  "fate:stay_night": { page: "http://www.fate-sn.jp/", img: { src: "images/top/logo.png" }, crop: [112, 0, 413, 249], kind: LOGO, background: "#16181d", note: "Fate/stay night [Réalta Nua] logo (white)" },
   "fate:hollow_ataraxia": { wiki: wiki("Fate/hollow_ataraxia") },
   "fate:zero": { wiki: wiki("Fate/Zero") },
   "fate:apocrypha": { page: "https://fate-apocrypha.com/", img: { src: "assets/img/top/logo.png" }, kind: LOGO },
   "fate:extra": { wiki: wiki("Fate/Extra") },
-  "fate:prisma": { page: "http://anime.prisma-illya.jp/movie/prismaphantasm/", img: { src: "img/common/logo.png" }, kind: LOGO, note: "Prisma☆Phantasm logo (the series' current official site)" },
+  // anime.prisma-illya.jp opens the FINALE page; the series title is cut out of its logo, without
+  // the FINALE line (the Prisma☆Phantasm logo named one short film, not the series).
+  "fate:prisma": { page: "https://anime.prisma-illya.jp/finale/", img: { src: "img/common/logo.png" }, crop: [0, 0, 1131, 177], kind: LOGO, note: "Fate/kaleid liner プリズマ☆イリヤ title of the series site's logo" },
   "fate:strange_fake": { wiki: wiki("Fate/strange_Fake") },
   "fate:el_melloi": { wiki: wiki("The_Case_Files_of_Lord_El-Melloi_II") },
   "fate:samurai_remnant": { page: "https://www.gamecity.ne.jp/fate-sr/", img: { alt: "Fate/Samurai Remnant" }, kind: LOGO },
@@ -95,24 +108,30 @@ export const COVER_SOURCES = {
   "fate:tsukihime": { wiki: wiki("Tsukihime") },
   "fate:kara_no_kyoukai": { page: "https://www.karanokyoukai.com/", img: { src: "img/logo_main.png" }, kind: LOGO, background: "#16181d", note: "劇場版 空の境界 logo (white)" },
   "fate:mahoyo": { page: "https://mahoyo-movie.com/", img: { src: "kv/logo_ttl.png" }, kind: LOGO, background: "#16181d", note: "劇場版 魔法使いの夜 logo (white)" },
-  "fate:type_moon": { wiki: wiki("Type-Moon"), kind: LOGO },
-  // Nintendo worlds: series logos from Wikipedia's infobox (nintendo.com/jp/character/mario/ shows
-  // only its "MARIO PORTAL" mark; the other series have no character site of Nintendo's own).
-  "nintendo:mario": { wiki: wiki("Super_Mario"), kind: LOGO },
-  "nintendo:kirby": { wiki: wiki("Kirby_(series)"), kind: LOGO },
-  "nintendo:zelda": { wiki: wiki("The_Legend_of_Zelda"), kind: LOGO },
-  "nintendo:splatoon": { wiki: wiki("Splatoon"), kind: LOGO },
-  "nintendo:fire_emblem": { wiki: wiki("Fire_Emblem"), kind: LOGO },
-  "nintendo:pokemon": { wiki: wiki("Pok%C3%A9mon"), kind: LOGO },
-  "nintendo:animal_crossing": { wiki: wiki("Animal_Crossing"), kind: LOGO },
-  "nintendo:xenoblade": { wiki: wiki("Xenoblade_Chronicles"), kind: LOGO },
-  "nintendo:pikmin": { wiki: wiki("Pikmin"), kind: LOGO },
-  "nintendo:metroid": { wiki: wiki("Metroid"), kind: LOGO },
-  "nintendo:smash": { wiki: wiki("Super_Smash_Bros."), kind: LOGO },
-  "nintendo:yoshi": { wiki: wiki("Yoshi_(franchise)"), kind: LOGO },
-  "nintendo:donkey_kong": { wiki: wiki("Donkey_Kong"), kind: LOGO },
-  // LEGO themes (key = the group id without "lego_"): theme logos from Wikipedia's infobox
-  // (lego.com is not read). Themes without a logo there keep the newest set picture.
+  "fate:type_moon": { wiki: wiki("Type-Moon"), kind: LOGO, note: "TYPE-MOON logo; typemoon.com shows it only as a 26 px header mark" },
+  // Nintendo worlds: series logos from Wikipedia's infobox. What the official sites had
+  // (2026-11-19): robots.txt of mario.nintendo.com, zelda.com and animal-crossing.com answers 403;
+  // nintendo.com/jp/character/mario/ and kirby.jp show only their portal marks; pikmin.nintendo.com
+  // has its logo as SVG only; metroid.nintendo.com, smashbros.com and nintendo.co.jp/fe/ have only a
+  // share image; splatoon.nintendo.com is a script-only page; no Nintendo site for Xenoblade, Yoshi
+  // or Donkey Kong was found.
+  "nintendo:mario": { wiki: wiki("Super_Mario"), kind: LOGO, note: "series logo; Nintendo's Mario pages show only the MARIO PORTAL mark" },
+  "nintendo:kirby": { wiki: wiki("Kirby_(series)"), kind: LOGO, note: "series logo; kirby.jp shows only its 星のカービィポータル mark" },
+  "nintendo:zelda": { wiki: wiki("The_Legend_of_Zelda"), kind: LOGO, note: "series logo; zelda.com's robots.txt answers 403" },
+  "nintendo:splatoon": { wiki: wiki("Splatoon"), kind: LOGO, note: "series logo; splatoon.nintendo.com has no static HTML" },
+  "nintendo:fire_emblem": { wiki: wiki("Fire_Emblem"), kind: LOGO, note: "series logo; nintendo.co.jp/fe/ has only a share image" },
+  "nintendo:pokemon": { wiki: wiki("Pok%C3%A9mon"), kind: LOGO, note: POKEMON_LOGO_NOTE },
+  "nintendo:animal_crossing": { wiki: wiki("Animal_Crossing"), kind: LOGO, note: "series logo; animal-crossing.com's robots.txt answers 403" },
+  "nintendo:xenoblade": { wiki: wiki("Xenoblade_Chronicles"), kind: LOGO, note: "series logo; no series site of Nintendo's found" },
+  "nintendo:pikmin": { wiki: wiki("Pikmin"), kind: LOGO, note: "series logo; pikmin.nintendo.com has it as SVG only" },
+  "nintendo:metroid": { wiki: wiki("Metroid"), kind: LOGO, note: "series logo; metroid.nintendo.com has only a share image" },
+  "nintendo:smash": { wiki: wiki("Super_Smash_Bros."), kind: LOGO, note: "series logo; smashbros.com has only a share image" },
+  "nintendo:yoshi": { wiki: wiki("Yoshi_(franchise)"), kind: LOGO, note: "series logo; no series site of Nintendo's found" },
+  "nintendo:donkey_kong": { wiki: wiki("Donkey_Kong"), kind: LOGO, note: "series logo; no series site of Nintendo's found" },
+  // LEGO themes (key = the group id without "lego_"): theme logos from Wikipedia's infobox. The
+  // current themes' lego.com pages show a logo, but it is on assets.lego.com, whose robots.txt
+  // answers 403 (and most are SVG); retired themes have no lego.com page. Themes without a logo on
+  // Wikipedia keep the newest set picture.
   ...Object.fromEntries(
     Object.entries({
       duplo: "Lego_Duplo",
@@ -152,7 +171,7 @@ export const COVER_SOURCES = {
       exo_force: "Exo-Force",
       power_miners: "Lego_Power_Miners",
       super_heroes_marvel: "Lego_Marvel",
-    }).map(([id, article]) => [`lego:${id}`, { wiki: wiki(article), kind: LOGO }]),
+    }).map(([id, article]) => [`lego:${id}`, { wiki: wiki(article), kind: LOGO, note: `theme logo; ${LEGO_COM_NOTE}` }]),
   ),
 };
 
@@ -269,7 +288,8 @@ async function assertRobotsAllow(url) {
   if (!robotsAllows(rules, `${u.pathname}${u.search}`)) throw new Error(`robots.txt of ${u.host} disallows ${u.pathname}`);
 }
 
-// Crop (optional) and cap the width at 640 px. A logo stays transparent and is saved as PNG
+// Join (optional: a second logo set to the right, both at their own size), crop (optional) and
+// cap the width at 640 px. A logo stays transparent and is saved as PNG
 // (palette PNG if needed); only a white logo gets the `background` colour behind it. Key visuals,
 // and logos still too big as PNG, become JPEG on the background (white by default). A small
 // JPEG that needs no change is kept byte for byte. Prints "<file> <width> <height>".
@@ -277,13 +297,20 @@ const LINE_MAX_BYTES = 80 * 1024;
 const PY_LINE = String.raw`
 import json, os, sys
 from PIL import Image
-src, stem, crop, bg, kind, limit = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], int(sys.argv[6])
+src, stem, crop, bg, kind, limit, join = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], int(sys.argv[6]), sys.argv[7]
 im = Image.open(src)
 fmt = im.format
 im.load()
-if fmt == "JPEG" and not crop and im.width <= 640 and os.path.getsize(src) <= limit:
+if fmt == "JPEG" and not crop and not join and im.width <= 640 and os.path.getsize(src) <= limit:
     print("KEEP", im.width, im.height)
     sys.exit(0)
+if join:
+    first, second = im.convert("RGBA"), Image.open(join).convert("RGBA")
+    height = max(first.height, second.height)
+    gap = round(height * 0.15)
+    im = Image.new("RGBA", (first.width + gap + second.width, height), (0, 0, 0, 0))
+    im.alpha_composite(first, (0, (height - first.height) // 2))
+    im.alpha_composite(second, (first.width + gap, (height - second.height) // 2))
 if crop:
     im = im.crop(tuple(json.loads(crop)))
 im = im.convert("RGBA")
@@ -324,9 +351,9 @@ function pythonWithPillow() {
   return pillowPython;
 }
 
-/** Downloaded logo / line image → final file next to `stem`: {file, width, height}. */
-function processLogo(raw, stem, source) {
-  const args = [raw, stem, source.crop ? JSON.stringify(source.crop) : "", source.background || "", lineKind(source), String(LINE_MAX_BYTES)];
+/** Downloaded logo / line image (and the `join` image) → final file next to `stem`: {file, width, height}. */
+function processLogo(raw, stem, source, joinRaw = "") {
+  const args = [raw, stem, source.crop ? JSON.stringify(source.crop) : "", source.background || "", lineKind(source), String(LINE_MAX_BYTES), joinRaw];
   const py = pythonWithPillow();
   if (py) {
     const res = spawnSync(py, ["-I", "-c", PY_LINE, ...args], { encoding: "utf8" });
@@ -340,23 +367,31 @@ function processLogo(raw, stem, source) {
   }
   // No Python + Pillow: only a small, uncropped PNG/JPEG may be used as downloaded.
   const ext = path.extname(raw).slice(1);
-  if (source.crop || !["png", "jpg"].includes(ext) || statSync(raw).size > LINE_MAX_BYTES) throw new Error("needs Python with Pillow to crop / shrink this image");
+  if (source.crop || joinRaw || !["png", "jpg"].includes(ext) || statSync(raw).size > LINE_MAX_BYTES) throw new Error("needs Python with Pillow to crop / join / shrink this image");
   copyFileSync(raw, `${stem}.${ext}`);
   return { file: `${stem}.${ext}` };
 }
 
-/** Download `imageUrl`, process it as a logo and put it at <stem>.png|jpg (replacing prevImage). */
-async function saveLogo(stem, imageUrl, source, prevImage) {
+/** Download a picked image to a temporary file next to `stem`. */
+async function download(stem, imageUrl, label) {
   await assertRobotsAllow(imageUrl);
   const { bytes, type } = await fetchBinary(imageUrl);
-  // Work on temporary names so a failure leaves the previous cover in place.
-  const raw = `${stem}.download.${extOf(type, imageUrl)}`;
+  const raw = `${stem}.${label}.${extOf(type, imageUrl)}`;
   await writeFile(raw, bytes);
+  return raw;
+}
+
+/** Download `imageUrl` (and `joinUrl`), process it as a logo and put it at <stem>.png|jpg (replacing prevImage). */
+async function saveLogo(stem, imageUrl, source, prevImage, joinUrl = "") {
+  // Work on temporary names so a failure leaves the previous cover in place.
+  const raws = [];
   let fresh;
   try {
-    fresh = processLogo(raw, `${stem}.new`, source);
+    raws.push(await download(stem, imageUrl, "download"));
+    if (joinUrl) raws.push(await download(stem, joinUrl, "join"));
+    fresh = processLogo(raws[0], `${stem}.new`, source, raws[1] || "");
   } finally {
-    rmSync(raw, { force: true });
+    for (const raw of raws) rmSync(raw, { force: true });
   }
   const file = `${stem}${path.extname(fresh.file)}`;
   const prevFile = prevImage ? path.join(APP_DIR, prevImage.replace(/^\.\//, "")) : "";
@@ -370,13 +405,17 @@ async function pickedCover(stem, source, prev) {
   await assertRobotsAllow(source.page);
   const pageRes = await politeFetch(source.page, { ttlHours: 24 * 30, accept: "text/html", retries: 1 });
   const image = pickLineImage(pageRes.body, source.page, source);
-  if (!image) throw new Error(`no matching image on ${source.page}`);
-  const host = new URL(image).host;
-  if (!isAllowedLineHost(host) && host !== new URL(source.page).host) throw new Error(`picked image is on ${host}, not the page's or an allowed host`);
-  const saved = await saveLogo(stem, image, source, prev?.image);
+  const joinImage = source.join ? pickLineImage(pageRes.body, source.page, { img: source.join }) : "";
+  if (!image || (source.join && !joinImage)) throw new Error(`no matching image on ${source.page}`);
+  for (const picked of [image, joinImage].filter(Boolean)) {
+    const host = new URL(picked).host;
+    if (!isAllowedLineHost(host) && host !== new URL(source.page).host) throw new Error(`picked image is on ${host}, not the page's or an allowed host`);
+  }
+  const saved = await saveLogo(stem, image, source, prev?.image, joinImage);
   return {
     image: saved.image,
     image_remote: image,
+    join_remote: joinImage || undefined,
     source_page: source.page,
     kind: lineKind(source),
     selector: lineSelector(source),
@@ -396,6 +435,8 @@ async function lineCover(key, source, prev) {
 }
 
 const isFresh = (prev, file) => prev && existsSync(file);
+// A cover that is not downloaded again still takes the source's current note (why it comes from there).
+const keep = (prev, source) => ({ ...prev, note: source.note });
 
 async function main() {
   const previous = (await readJson(OUT, null))?.covers || {};
@@ -412,7 +453,7 @@ async function main() {
     try {
       if (source.page && !source.url) {
         if (isFresh(prev, prevFile) && !refreshes(key) && prev.source_page === source.page && prev.selector === lineSelector(source) && prev.kind === kind) {
-          covers[key] = prev;
+          covers[key] = keep(prev, source);
           continue;
         }
         covers[key] = await pickedCover(path.join(ASSET_DIR, base), { ...source, kind }, prev);
@@ -420,7 +461,7 @@ async function main() {
         continue;
       }
       if (isFresh(prev, prevFile) && !refreshes(key) && prev.source_page === (source.wiki || source.page) && (source.wiki || prev.image_remote === source.url) && (prev.kind || "picture") === kind) {
-        covers[key] = prev;
+        covers[key] = keep(prev, source);
         continue;
       }
       const found = source.wiki ? await infoboxImage(source.wiki) : { image: source.url, file_page: "" };
@@ -458,7 +499,7 @@ async function main() {
     const prevFile = prev?.image ? path.join(APP_DIR, prev.image.replace(/^\.\//, "")) : "";
     try {
       if (isFresh(prev, prevFile) && !refreshes(key) && prev.source_page === source.page && prev.selector === lineSelector(source) && prev.kind === lineKind(source)) {
-        covers[key] = prev;
+        covers[key] = keep(prev, source);
         continue;
       }
       covers[key] = await lineCover(lineKey, source, prev);
@@ -470,7 +511,7 @@ async function main() {
   }
   const out = {
     updated_at: today(),
-    note: "Official cover images for Atlas group cards, channel headers and product lines (keys line:<franchise>:<code>). image = copy in this repo; image_remote = where it was downloaded from; source_page = the page that shows it as the official cover/logo; kind = logo (title / line logo, transparent PNG) or picture (box art, key visual, banner); width / height in pixels when known.",
+    note: "Official cover images for Atlas group cards, channel headers and product lines (keys line:<franchise>:<code>). image = copy in this repo; image_remote = where it was downloaded from (join_remote = the second logo set beside it); source_page = the page that shows it as the official cover/logo; kind = logo (title / line logo, transparent PNG) or picture (box art, key visual, banner); width / height in pixels when known.",
     covers,
   };
   const res = await writeCompactJson(OUT, out);

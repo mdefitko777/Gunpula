@@ -15,6 +15,8 @@
 //                       the corner of an official explainer graphic)
 //   background: "#…"    colour put behind transparent pixels; only for white logos, the others
 //                       keep their transparency (logos are stored as-is, wide, never squared)
+//   join: { alt | src }  a second image of the same page, set to the right of the first at the
+//                       same height (a paired release whose site has one logo per title)
 //   kind: "logo" | "key_visual"
 // build_atlas_covers.mjs downloads each picked image into app/assets/atlas/covers/line-*.png|jpg
 // and records it in data/atlas/atlas-covers.json under "line:<franchise>:<code>";
@@ -84,7 +86,9 @@ export const LINE_COVER_SOURCES = {
   // ── Pokémon ──
   "pokemon:POKEPLA": { page: MANUAL, img: { alt: "ポケモンプラモコレクション" } },
   "pokemon:POKE_MONCOLLE": { page: "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/", img: { src: "images/moncolle_logo.png" } },
-  "pokemon:POKE_GASHAPON": { page: "https://gashapon.jp/pokemon/", og: true, crop: [240, 90, 960, 510], note: "share image of the official Pokémon gashapon page (Pokémon logo)" },
+  // The page's share image shows only the Pokémon logos, so the line takes the ガシャポン mark of the
+  // same page (like GUNDAM_MERCH, the app shows it on the "가샤폰" card).
+  "pokemon:POKE_GASHAPON": { page: "https://gashapon.jp/pokemon/", img: { src: "images/common/logo_gashapon.png" }, note: "ガシャポン logo of the official Pokémon gashapon page" },
   "pokemon:POKE_KUJI": { page: "https://1kuji.com/", img: { src: "/images/common/logo_1kuji.png" }, note: "一番くじ logo (BANDAI SPIRITS official 一番くじ site)" },
   // ── Good Smile: Nendoroid (Fate and Madoka keep the same grade code) ──
   "fate:NENDOROID": { page: NENDOROID, img: { src: "Nendoroid-Series.png" }, note: "Nendoroid logo (Wikimedia Commons); cf.goodsmile.jp robots.txt unreadable" },
@@ -220,7 +224,14 @@ export const lineKind = (source) => source.kind || "logo";
 
 /** Stable text of how an entry is picked; a change makes the builder fetch it again. */
 export const lineSelector = (source) =>
-  JSON.stringify({ img: source.img || null, og: Boolean(source.og), crop: source.crop || null, background: source.background || null });
+  JSON.stringify({
+    img: source.img || null,
+    og: Boolean(source.og),
+    crop: source.crop || null,
+    background: source.background || null,
+    // Only when set, so the selectors already saved in atlas-covers.json stay the same.
+    ...(source.join ? { join: source.join } : {}),
+  });
 
 /** File name stem for a line cover: line-<franchise>-<code in lower case>. */
 export const lineFileStem = (franchise, code) => `line-${franchise}-${code.toLowerCase().replace(/[^a-z0-9_]/g, "_")}`;
