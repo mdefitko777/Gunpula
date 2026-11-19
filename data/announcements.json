@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-19T04:08:31.033Z",
+  "updated_at": "2026-11-19T08:16:55.815Z",
   "sources": [
     {
       "source_id": "tamashii_news",
@@ -142,7 +142,12 @@
       "url": "https://www.youtube.com/"
     }
   ],
-  "fetch_errors": [],
+  "fetch_errors": [
+    {
+      "source_id": "youtube_live",
+      "message": "https://www.youtube.com/watch?v=SD209sqtPiM returned 429"
+    }
+  ],
   "replaced": {
     "corocoro-d1ac4f87bf": "beyblade-lineup-dXgyMi5odG1s",
     "hamusuke-bx-55": "beyblade-lineup-Yng1NS5odG1s",
@@ -158,6 +163,137 @@
     "tamashii-reveal-0abb669c96": "2026-11-13"
   },
   "announcements": [
+    {
+      "id": "bandai-news-2026-11-19-vMDFfNzQ2MS8",
+      "franchise": "gundam",
+      "names": {
+        "ja": "ガンプラ 2027年 4 - 6月 一般店頭発売アイテム",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-11-19",
+      "source_type": "news",
+      "source_name": "BANDAI SPIRITS",
+      "source_url": "https://bandai-hobby.net/news/01_7461/",
+      "thumbnail_url": "../app/assets/announcements/bandai-news-2026-11-19-vMDFfNzQ2MS8.png",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "source_id": "bandai_hobby_news",
+      "reviewed_at": null
+    },
+    {
+      "id": "bandai-news-2026-11-19-vMDFfNzUxNS8",
+      "franchise": "gundam",
+      "names": {
+        "ja": "BANDAI TABLETOP GAMES 2027年 5 - 7月、9月 一般店頭発売アイテム",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-11-19",
+      "source_type": "news",
+      "source_name": "BANDAI SPIRITS",
+      "source_url": "https://bandai-hobby.net/news/01_7515/",
+      "thumbnail_url": "../app/assets/announcements/bandai-news-2026-11-19-vMDFfNzUxNS8.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "source_id": "bandai_hobby_news",
+      "reviewed_at": null
+    },
+    {
+      "id": "gundam-official-c4z2ginrx6r0s45vqyeqjhn1",
+      "franchise": "gundam",
+      "names": {
+        "ja": "「HG ジム・スパルタン（BD隊仕様）」11月20日12時より予約開始！ビーム・ライフル、ヒート・ナイフ、ハンド・ビーム・ガンなど特徴的な武装が新規で付属！",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-19",
+      "source_type": "news",
+      "source_name": "GUNDAM.INFO",
+      "source_id": "gundam_official_news",
+      "source_url": "https://gundam-official.com/news/c4z2ginrx6r0s45vqyeqjhn1",
+      "thumbnail_url": "https://gundam-official.com/media/b1934b2d8f50ca0914b461cf9c239b3e/b1934b2d8f50ca0914b461cf9c239b3e.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "gundam-official.com: ガンプラ",
+      "reviewed_at": null,
+      "preorder_at": "2026-11-20T12:00:00+09:00",
+      "preorder_date": "2026-11-20",
+      "preorder_basis": "title"
+    },
+    {
+      "id": "gundam-official-ixhgsyy88sj44zjyxt7gt4hl",
+      "franchise": "gundam",
+      "names": {
+        "ja": "「ROBOT魂 ガブスレイ ver. A.N.I.M.E.」11月20日16時より予約受付スタート！ムーバブル・フレーム・クローが展開する中間形態も再現可能！",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-19",
+      "source_type": "news",
+      "source_name": "GUNDAM.INFO",
+      "source_id": "gundam_official_news",
+      "source_url": "https://gundam-official.com/news/ixhgsyy88sj44zjyxt7gt4hl",
+      "thumbnail_url": "https://gundam-official.com/media/4aa4fdc8fd888902fd07db42bb7e9893/4aa4fdc8fd888902fd07db42bb7e9893.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "gundam-official.com: フィギュア",
+      "reviewed_at": null,
+      "preorder_at": "2026-11-20T16:00:00+09:00",
+      "preorder_date": "2026-11-20",
+      "preorder_basis": "title"
+    },
+    {
+      "id": "gundam-official-mztp31e974kf3sro9hvozszn",
+      "franchise": "gundam",
+      "names": {
+        "ja": "2027年4月～6月発売「オプションパーツセット ガンプラ 23（Gファルコン）」や『機動戦士ガンダムRG XARX-ZERO』「GUNDAM ROGUE ORBIT」新商品ほかガンプラ＆関連アイテムの情報公開！",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-11-19",
+      "source_type": "news",
+      "source_name": "GUNDAM.INFO",
+      "source_id": "gundam_official_news",
+      "source_url": "https://gundam-official.com/news/mztp31e974kf3sro9hvozszn",
+      "thumbnail_url": "../app/assets/announcements/gundam-official-mztp31e974kf3sro9hvozszn.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "gundam-official.com: ガンプラ",
+      "reviewed_at": null
+    },
     {
       "id": "gundam-official-rk9yiha7rhqv8dqiso1mqfug",
       "franchise": "gundam",
@@ -185,6 +321,31 @@
       "preorder_at": "2026-11-19T11:00:00+09:00",
       "preorder_date": "2026-11-19",
       "preorder_basis": "title"
+    },
+    {
+      "id": "nintendo-kr-news-3zzavutnybx4sbdxfhh1oq",
+      "franchise": "nintendo",
+      "names": {
+        "ja": "『Nintendo Switch 2 Monster Hunter Wilds 세트』 예약 판매 일정 안내",
+        "zh": null,
+        "ko": "『Nintendo Switch 2 Monster Hunter Wilds 세트』 예약 판매 일정 안내",
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-19",
+      "source_type": "news",
+      "source_name": "한국닌텐도",
+      "source_id": "nintendo_kr_news",
+      "source_url": "https://www.nintendo.com/kr/news/article/3zzavuTnYBX4sbDXfHH1OQ",
+      "thumbnail_url": "../app/assets/announcements/nintendo-kr-news-3zzavutnybx4sbdxfhh1oq.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null
     },
     {
       "id": "pbandai-1000260469",
@@ -324,6 +485,32 @@
       "reviewed_at": null
     },
     {
+      "id": "stds-76556",
+      "franchise": "lego",
+      "names": {
+        "ja": "全11チームのドライバーミニフィギュア付き、レゴ®F1 新作 3月1日発売【予約受付中】",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-19",
+      "source_type": "news",
+      "source_name": "スタッズ",
+      "source_id": "stds_lego",
+      "source_url": "https://stds.jp/lego-speed-champions-f1-march-2027/",
+      "thumbnail_url": "https://stds.jp/wp-content/uploads/2026/11/lego-speed-champions-f1-january-2027_title_.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "unofficial",
+      "notes": null,
+      "unofficial": true,
+      "reviewed_at": null
+    },
+    {
       "id": "stds-78433",
       "franchise": "lego",
       "names": {
@@ -373,10 +560,36 @@
       "notes": "予約 2026-11-20〜 / 発送 2027-05 / ¥14,300（税込） / 魂ウェブ商店販売商品",
       "source_id": "tamashii_news",
       "reviewed_at": null,
+      "linked_kit_basis": "source_page",
       "preorder_at": "2026-11-20T16:00:00+09:00",
       "preorder_date": "2026-11-20",
-      "preorder_basis": "title",
-      "linked_kit_basis": "source_page"
+      "preorder_basis": "title"
+    },
+    {
+      "id": "dengeki-94443",
+      "franchise": "gundam",
+      "names": {
+        "ja": "【合体可能】『ガンダムX』よりGファルコンがガンプラ化。27年4月発売！",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-11-18",
+      "source_type": "news",
+      "source_name": "電撃オンライン",
+      "source_id": "dengeki_gunpla",
+      "source_url": "https://dengekionline.com/article/202611/94443",
+      "thumbnail_url": "https://cimg.kgl-systems.io/camion/files/94443/thumbnail_EoRt.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "unofficial",
+      "notes": null,
+      "unofficial": true,
+      "reviewed_at": null
     },
     {
       "id": "gundam-official-insgesv85ej9pajixeutg583",
@@ -509,10 +722,10 @@
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
+      "linked_kit_basis": "source_page",
       "preorder_at": "2026-11-18T11:00:00+09:00",
       "preorder_date": "2026-11-18",
-      "preorder_basis": "store_list",
-      "linked_kit_basis": "source_page"
+      "preorder_basis": "store_list"
     },
     {
       "id": "pbandai-1000261454",
@@ -538,10 +751,10 @@
       "confidence": "official",
       "notes": null,
       "reviewed_at": null,
+      "linked_kit_basis": "source_page",
       "preorder_at": "2026-11-18T11:00:00+09:00",
       "preorder_date": "2026-11-18",
-      "preorder_basis": "store_list",
-      "linked_kit_basis": "source_page"
+      "preorder_basis": "store_list"
     },
     {
       "id": "pbandai-1000261601",
@@ -1733,6 +1946,56 @@
       "reviewed_at": null
     },
     {
+      "id": "nintendo-kr-news-2sg010gp2igwhecwgapza2",
+      "franchise": "nintendo",
+      "names": {
+        "ja": "원하는 소프트웨어를 선택할 수 있는 ｢Nintendo Switch 2 Select One 세트｣ 발매 결정!",
+        "zh": null,
+        "ko": "원하는 소프트웨어를 선택할 수 있는 ｢Nintendo Switch 2 Select One 세트｣ 발매 결정!",
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-11-12",
+      "source_type": "news",
+      "source_name": "한국닌텐도",
+      "source_id": "nintendo_kr_news",
+      "source_url": "https://www.nintendo.com/kr/news/article/2Sg010Gp2IgWHeCWGapZA2",
+      "thumbnail_url": "../app/assets/announcements/nintendo-kr-news-2sg010gp2igwhecwgapza2.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "nintendo-kr-news-6x4hsqr1i4wbn3kgqclpfn",
+      "franchise": "nintendo",
+      "names": {
+        "ja": "『피크민 4 Nintendo Switch 2 Edition + 누구나 도전! 계획력 테스트』 오늘 발매!",
+        "zh": null,
+        "ko": "『피크민 4 Nintendo Switch 2 Edition + 누구나 도전! 계획력 테스트』 오늘 발매!",
+        "en": null
+      },
+      "status": "released",
+      "announced_at": "2026-11-12",
+      "source_type": "news",
+      "source_name": "한국닌텐도",
+      "source_id": "nintendo_kr_news",
+      "source_url": "https://www.nintendo.com/kr/news/article/6X4HsqR1I4wBN3KgqCLpFn",
+      "thumbnail_url": "../app/assets/announcements/nintendo-kr-news-6x4hsqr1i4wbn3kgqclpfn.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null
+    },
+    {
       "id": "pbandai-1000260916",
       "franchise": "gundam",
       "names": {
@@ -2246,6 +2509,31 @@
       "reviewed_at": null
     },
     {
+      "id": "pokemonkorea-goods-3b5a39d29e",
+      "franchise": "pokemon",
+      "names": {
+        "ja": "어서오세요! 포켓몬카페 피카 브이의 섞어 섞어 아라모드~ 반짝반짝 쿠킹!~ 출시!!",
+        "zh": null,
+        "ko": "어서오세요! 포켓몬카페 피카 브이의 섞어 섞어 아라모드~ 반짝반짝 쿠킹!~ 출시!!",
+        "en": null
+      },
+      "status": "released",
+      "announced_at": "2026-11-09",
+      "source_type": "news",
+      "source_name": "포켓몬코리아",
+      "source_id": "pokemon_korea_goods",
+      "source_url": "https://product.kyobobook.co.kr/detail/S000221846039",
+      "thumbnail_url": "https://pokemonkorea.co.kr/s3.php?key=home%2Fdata%2Fdata1_www%2Fnewdata%2F2026%2F11%2F2026-11-09_10-06-22-16d00c7b22e0cfb4.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Banner on pokemonkorea.co.kr/goods; the date is the day its picture was uploaded.",
+      "reviewed_at": null
+    },
+    {
       "id": "stds-78316",
       "franchise": "lego",
       "names": {
@@ -2576,6 +2864,31 @@
       "preorder_at": "2026-11-05T11:00:00+09:00",
       "preorder_date": "2026-11-05",
       "preorder_basis": "title"
+    },
+    {
+      "id": "nintendo-kr-news-ilozel436n61v4w8jnfrf",
+      "franchise": "nintendo",
+      "names": {
+        "ja": "Nintendo Switch 2 『젤다의 전설 시간의 오카리나』 오늘 발매. 최신 정보도 함께 소개합니다.",
+        "zh": null,
+        "ko": "Nintendo Switch 2 『젤다의 전설 시간의 오카리나』 오늘 발매. 최신 정보도 함께 소개합니다.",
+        "en": null
+      },
+      "status": "released",
+      "announced_at": "2026-11-05",
+      "source_type": "news",
+      "source_name": "한국닌텐도",
+      "source_id": "nintendo_kr_news",
+      "source_url": "https://www.nintendo.com/kr/news/article/iloZeL436N61v4w8jNfRf",
+      "thumbnail_url": "../app/assets/announcements/nintendo-kr-news-ilozel436n61v4w8jnfrf.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null
     },
     {
       "id": "pbandai-1000260403",
@@ -5449,6 +5762,31 @@
       "preorder_basis": "title"
     },
     {
+      "id": "pokemonkorea-goods-a6db28b290",
+      "franchise": "pokemon",
+      "names": {
+        "ja": "Pokémon Pokopia 몬콜레 상품 출시!!",
+        "zh": null,
+        "ko": "Pokémon Pokopia 몬콜레 상품 출시!!",
+        "en": null
+      },
+      "status": "released",
+      "announced_at": "2026-10-07",
+      "source_type": "news",
+      "source_name": "포켓몬코리아",
+      "source_id": "pokemon_korea_goods",
+      "source_url": "https://smartstore.naver.com/moncolle_korea/category/7f9868f6dbfd413a9ef7ed2350a11c72?cp=1",
+      "thumbnail_url": "../app/assets/announcements/pokemonkorea-goods-a6db28b290.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Banner on pokemonkorea.co.kr/goods; the date is the day its picture was uploaded.",
+      "reviewed_at": null
+    },
+    {
       "id": "bandai-news-2026-10-06-waWNzLzczOTQ",
       "franchise": "gundam",
       "names": {
@@ -5953,6 +6291,31 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
+      "reviewed_at": null
+    },
+    {
+      "id": "pokemonkorea-goods-353450effa",
+      "franchise": "pokemon",
+      "names": {
+        "ja": "CU에서 포코피아 신상품을 만나보세요!!",
+        "zh": null,
+        "ko": "CU에서 포코피아 신상품을 만나보세요!!",
+        "en": null
+      },
+      "status": "released",
+      "announced_at": "2026-09-30",
+      "source_type": "news",
+      "source_name": "포켓몬코리아",
+      "source_id": "pokemon_korea_goods",
+      "source_url": "https://www.instagram.com/p/DdnaCB9k9zg/?stkn=MW0zZ2J1ZnRuZ3M2Mw==",
+      "thumbnail_url": "../app/assets/announcements/pokemonkorea-goods-353450effa.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Banner on pokemonkorea.co.kr/goods; the date is the day its picture was uploaded.",
       "reviewed_at": null
     },
     {
@@ -9823,6 +10186,31 @@
       "preorder_basis": "title"
     },
     {
+      "id": "pokemonkorea-goods-29b985ec2b",
+      "franchise": "pokemon",
+      "names": {
+        "ja": "조립하는 즐거움! 레고® 포켓몬™",
+        "zh": null,
+        "ko": "조립하는 즐거움! 레고® 포켓몬™",
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-07-14",
+      "source_type": "news",
+      "source_name": "포켓몬코리아",
+      "source_id": "pokemon_korea_goods",
+      "source_url": "https://www.lego.com/ko-kr/themes/pokemon/about",
+      "thumbnail_url": "../app/assets/announcements/pokemonkorea-goods-29b985ec2b.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Banner on pokemonkorea.co.kr/goods; the date is the day its picture was uploaded.",
+      "reviewed_at": null
+    },
+    {
       "id": "bandai-news-2026-07-10-wMDI1NDQyNC8",
       "franchise": "gundam",
       "names": {
@@ -11302,6 +11690,31 @@
       "preorder_at": "2026-06-04T11:00:00+09:00",
       "preorder_date": "2026-06-04",
       "preorder_basis": "title"
+    },
+    {
+      "id": "pokemonkorea-goods-78e08d710c",
+      "franchise": "pokemon",
+      "names": {
+        "ja": "FC서울×포켓몬 콜라보 상품 발매!",
+        "zh": null,
+        "ko": "FC서울×포켓몬 콜라보 상품 발매!",
+        "en": null
+      },
+      "status": "released",
+      "announced_at": "2026-06-04",
+      "source_type": "news",
+      "source_name": "포켓몬코리아",
+      "source_id": "pokemon_korea_goods",
+      "source_url": "https://fcseoulshop.com/product/list.html?cate_no=78",
+      "thumbnail_url": "https://pokemonkorea.co.kr/s3.php?key=home%2Fdata%2Fdata1_www%2Fnewdata%2F2026%2F06%2F2026-06-04_11-41-10-38124-1780540870.png",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Banner on pokemonkorea.co.kr/goods; the date is the day its picture was uploaded.",
+      "reviewed_at": null
     },
     {
       "id": "gundam-official-cbe3yqvf22ohr8gxod2j9h8r",

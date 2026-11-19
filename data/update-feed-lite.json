@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-19",
-  "generated_at": "2026-11-19T01:16:43.362Z",
+  "generated_at": "2026-11-19T08:17:56.672Z",
   "watch_tags": [
     "seed",
     "00"
@@ -20,49 +20,49 @@
     "effects"
   ],
   "source_health": {
-    "generated_at": "2026-11-19T01:16:19.075Z",
+    "generated_at": "2026-11-19T08:17:34.853Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-19",
-      "generated_at": "2026-11-19T01:16:43.362Z",
+      "generated_at": "2026-11-19T08:17:56.672Z",
       "total_before": 41965,
-      "total_after": 42012,
-      "added_count": 50,
-      "changed_count": 14,
+      "total_after": 42017,
+      "added_count": 56,
+      "changed_count": 15,
       "removed_count": 9,
       "watched_count": 0,
       "merged_count": 0,
       "backfilled_count": 6,
       "renamed_count": 0,
-      "premium_bandai_count": 4,
+      "premium_bandai_count": 5,
       "bbx_count": 0,
       "franchise_counts": {
-        "gundam": 5,
-        "lego": 43,
+        "gundam": 6,
         "madoka": 4,
-        "pokemon": 11,
+        "pokemon": 17,
+        "lego": 43,
         "fate": 1
       },
       "reason_counts": {
-        "new": 50,
+        "new": 56,
         "image": 3,
-        "source": 4,
-        "price": 2,
+        "source": 5,
         "product_line": 1,
         "series": 1,
+        "price": 2,
         "name": 6,
         "removed": 9
       },
       "interest_tags": [
         "gundam",
-        "lego",
         "madoka",
         "pokemon",
-        "fate",
-        "premium_bandai"
+        "lego",
+        "premium_bandai",
+        "fate"
       ],
       "watch_tags": [],
       "added": [
@@ -250,6 +250,228 @@
           ],
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102742797000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-132758391",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 메타몽 입는 담요",
+            "zh": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 메타몽 입는 담요",
+            "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 메타몽 입는 담요",
+            "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 메타몽 입는 담요"
+          },
+          "release_date": "2026-02-10",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=132758391"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-132758382",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 버킷햇",
+            "zh": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 버킷햇",
+            "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 버킷햇",
+            "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 버킷햇"
+          },
+          "release_date": "2026-02-10",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=132758382"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-132758429",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 액션 슬리퍼",
+            "zh": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 액션 슬리퍼",
+            "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 액션 슬리퍼",
+            "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 액션 슬리퍼"
+          },
+          "release_date": "2026-02-10",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=132758429"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-132758539",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 인형 토트백",
+            "zh": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 인형 토트백",
+            "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 인형 토트백",
+            "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 인형 토트백"
+          },
+          "release_date": "2026-02-10",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=132758539"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-132758326",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 파자마",
+            "zh": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 파자마",
+            "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 파자마",
+            "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 파자마"
+          },
+          "release_date": "2026-02-10",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=132758326"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-132756277",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 스노우볼",
+            "zh": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 스노우볼",
+            "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 스노우볼",
+            "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 스노우볼"
+          },
+          "release_date": "2026-02-09",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=132756277"
           ]
         },
         {
@@ -584,228 +806,6 @@
           "source_urls": [
             "https://rebrickable.com/sets/10019391-1/"
           ]
-        },
-        {
-          "kit_id": "lego-10020184-1",
-          "change_type": "added",
-          "franchise": "lego",
-          "grade_code": "LEGO_GEAR",
-          "subline": "Gear",
-          "series_key": "lego_gear",
-          "series_labels": {
-            "zh": "周边",
-            "en": "Gear",
-            "ja": "Gear",
-            "ko": "굿즈"
-          },
-          "names": {
-            "ja": "Holiday Green Elf Minifigure Jibbitz",
-            "zh": "Holiday Green Elf Minifigure Jibbitz",
-            "ko": "Holiday Green Elf Minifigure Jibbitz",
-            "en": "Holiday Green Elf Minifigure Jibbitz"
-          },
-          "release_date": "2026",
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "lego"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "rebrickable_lego"
-          ],
-          "source_urls": [
-            "https://rebrickable.com/sets/10020184-1/"
-          ]
-        },
-        {
-          "kit_id": "lego-10020186-1",
-          "change_type": "added",
-          "franchise": "lego",
-          "grade_code": "LEGO_GEAR",
-          "subline": "Gear",
-          "series_key": "lego_gear",
-          "series_labels": {
-            "zh": "周边",
-            "en": "Gear",
-            "ja": "Gear",
-            "ko": "굿즈"
-          },
-          "names": {
-            "ja": "Holiday Light Brown Teddy Bear Jibbitz",
-            "zh": "Holiday Light Brown Teddy Bear Jibbitz",
-            "ko": "Holiday Light Brown Teddy Bear Jibbitz",
-            "en": "Holiday Light Brown Teddy Bear Jibbitz"
-          },
-          "release_date": "2026",
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "lego"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "rebrickable_lego"
-          ],
-          "source_urls": [
-            "https://rebrickable.com/sets/10020186-1/"
-          ]
-        },
-        {
-          "kit_id": "lego-10020185-1",
-          "change_type": "added",
-          "franchise": "lego",
-          "grade_code": "LEGO_GEAR",
-          "subline": "Gear",
-          "series_key": "lego_gear",
-          "series_labels": {
-            "zh": "周边",
-            "en": "Gear",
-            "ja": "Gear",
-            "ko": "굿즈"
-          },
-          "names": {
-            "ja": "Holiday Santa Claus Face Jibbitz",
-            "zh": "Holiday Santa Claus Face Jibbitz",
-            "ko": "Holiday Santa Claus Face Jibbitz",
-            "en": "Holiday Santa Claus Face Jibbitz"
-          },
-          "release_date": "2026",
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "lego"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "rebrickable_lego"
-          ],
-          "source_urls": [
-            "https://rebrickable.com/sets/10020185-1/"
-          ]
-        },
-        {
-          "kit_id": "lego-poster-3",
-          "change_type": "added",
-          "franchise": "lego",
-          "grade_code": "LEGO_GEAR",
-          "subline": "Posters and Art Prints",
-          "series_key": "lego_gear",
-          "series_labels": {
-            "zh": "周边",
-            "en": "Gear",
-            "ja": "Gear",
-            "ko": "굿즈"
-          },
-          "names": {
-            "ja": "LEGO Ideas Godzilla Poster",
-            "zh": "LEGO Ideas Godzilla Poster",
-            "ko": "LEGO Ideas Godzilla Poster",
-            "en": "LEGO Ideas Godzilla Poster"
-          },
-          "release_date": "2026",
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "lego"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "rebrickable_lego"
-          ],
-          "source_urls": [
-            "https://rebrickable.com/sets/POSTER-3/"
-          ]
-        },
-        {
-          "kit_id": "lego-workshop-1",
-          "change_type": "added",
-          "franchise": "lego",
-          "grade_code": "LEGO_SET",
-          "subline": "Christmas",
-          "series_key": "lego_seasonal",
-          "series_labels": {
-            "zh": "节日",
-            "en": "Seasonal",
-            "ja": "Seasonal",
-            "ko": "시즌"
-          },
-          "names": {
-            "ja": "Mini Santa's Workshop",
-            "zh": "Mini Santa's Workshop",
-            "ko": "Mini Santa's Workshop",
-            "en": "Mini Santa's Workshop"
-          },
-          "release_date": "2026",
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "lego"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "rebrickable_lego"
-          ],
-          "source_urls": [
-            "https://rebrickable.com/sets/WORKSHOP-1/"
-          ]
-        },
-        {
-          "kit_id": "lego-2162927-1",
-          "change_type": "added",
-          "franchise": "lego",
-          "grade_code": "LEGO_GEAR",
-          "subline": "Bags, Totes, & Luggage",
-          "series_key": "lego_gear",
-          "series_labels": {
-            "zh": "周边",
-            "en": "Gear",
-            "ja": "Gear",
-            "ko": "굿즈"
-          },
-          "names": {
-            "ja": "Minifigure Bag",
-            "zh": "Minifigure Bag",
-            "ko": "Minifigure Bag",
-            "en": "Minifigure Bag"
-          },
-          "release_date": "2026",
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "lego"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "rebrickable_lego"
-          ],
-          "source_urls": [
-            "https://rebrickable.com/sets/2162927-1/"
-          ]
         }
       ],
       "changed": [
@@ -970,6 +970,47 @@
           "source_urls": [
             "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102692092000&grp_id=5325",
             "https://p-bandai.jp/item/item-1000261453/"
+          ]
+        },
+        {
+          "kit_id": "hg-hg-1-144-4573102685995000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "uc_side",
+          "series_labels": {
+            "zh": "UC外传",
+            "en": "UC Side Story",
+            "ja": "UC外伝",
+            "ko": "UC 외전"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ジーライン・ライトアーマー",
+            "zh": "HG 1 / 144 G-Line·轻装甲",
+            "ko": "HG 1/144 G-라인 라이트 아머",
+            "en": "ＨＧ 1 / 144 ジーライン ライトアーマー"
+          },
+          "release_date": "2025-04",
+          "price_jpy": 3630,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback",
+            "p_bandai_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102685995000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000261210/"
           ]
         },
         {
