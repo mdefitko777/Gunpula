@@ -42,6 +42,10 @@ assert.equal(foldFullWidth("Ｂ２ 태피스트리＜이리야＞【한정】「
 assert.equal(tidyKo(tidyKo("ＲＧ １／１４４ Ｈｉ－ν")), "RG 1/144 Hi-ν");
 // "／" takes the spaced form localize_catalog.mjs gives every slash, so a refresh does not flip it
 assert.equal(tidyKo("퍼펙트 스트라이크건담／스트라이크 루즈"), "퍼펙트 스트라이크건담 / 스트라이크 루즈");
+// The Japanese middle dot next to Hangul becomes the one the curated names use; between Latin letters it stays
+assert.equal(tidyKo("포켓몬센터 봉제인형 미네랄사이다・리프레쉬 푸린"), "포켓몬센터 봉제인형 미네랄사이다·리프레쉬 푸린");
+assert.equal(tidyKo("포켓몬스터스칼렛･바이올렛 B6 링노트"), "포켓몬스터스칼렛·바이올렛 B6 링노트");
+assert.equal(tidyKo("A・B 세트"), "A・B 세트");
 
 // V2アサルトバスター (Victory): the kana dictionary covers it
 assert.equal(translateDisplayName("HGUC 1/144 V2アサルト버스터건담"), "HGUC 1/144 V2 어설트 버스터건담");

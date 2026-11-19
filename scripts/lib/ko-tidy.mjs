@@ -10,6 +10,8 @@
 //     (the full-width brackets （）［］｛｝＜＞ stay: the names use them as CJK brackets)
 //   * HTML entities left by a store:  "Pikachu&apos;s" → "Pikachu's"
 //   * Bandai brand words left in kanji: "ROBOT魂" → "ROBOT혼", "超合金(の塊)" → "초합금 (덩어리)"
+//   * the Japanese middle dot next to Hangul: "스칼렛・바이올렛" → "스칼렛·바이올렛", the dot the
+//     curated names use ("잠만보·엘풍·따라큐"); the Korean stores copy ・ from Japanese pages
 //   * same name, different products:  two records of one franchise and grade with the same
 //     Korean name but different release years get the year: "HG 1/144 레전드 건담 (2026년)"
 //     (not LEGO: the app puts the set number in front of every LEGO name)
@@ -48,6 +50,7 @@ export function tidyKo(name) {
     .replace(/ROBOT\s*魂/g, "ROBOT혼")
     .replace(/超合金の塊/g, "초합금 덩어리")
     .replace(/超合金/g, "초합금")
+    .replace(/(?<=[가-힣])[・･]|[・･](?=[가-힣])/g, "·")
     .replace(/\s{2,}/g, " ")
     .trim();
   return reissue ? `${ko} (재판)` : ko;
