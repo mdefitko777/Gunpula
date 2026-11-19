@@ -85,4 +85,25 @@ assert.equal(unreachable.disallowAll, true, "network error: disallow all");
 assert.match(unreachable.status, /fetch failed/);
 assert.equal(robotsAllows(null, "/x"), false, "no robots read: nothing allowed");
 
+// A bot check in place of robots.txt is not a robots.txt: disallow all, not "rules for none".
+// store.nintendo.co.kr answered GitHub runners with 202 (AWS WAF) since 2026-11-14.
+const answer = (status, body = "", headers = {}) => async () => new Response(body, { status, headers });
+const waf202 = await loadRobots("store.test", { fetchImpl: answer(202, "<html><script src=\"https://x.token.awswaf.com/challenge.js\"></script></html>") });
+assert.equal(waf202.disallowAll, true);
+assert.equal(waf202.challenged, true);
+assert.match(waf202.status, /^202 \(bot check/);
+const wafHeader = await loadRobots("store.test", { fetchImpl: answer(200, "", { "x-amzn-waf-action": "challenge" }) });
+assert.equal(wafHeader.challenged, true);
+assert.match(wafHeader.status, /x-amzn-waf-action: challenge/);
+const f5 = await loadRobots("mall.test", {
+  fetchImpl: answer(200, "<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 1234567890</body></html>"),
+});
+assert.equal(f5.challenged, true, "an F5 rejection page with HTTP 200");
+assert.equal(robotsAllows(f5, "/goods/search.do"), false);
+// A 5xx maintenance page (www.goodsmile.com, 2026-11-19) says so; still disallow all.
+const maintenance = await loadRobots("shop.test", { fetchImpl: answer(503, "<html><head><title>メンテナンス中 | グッドスマイルカンパニー公式ショップ</title></head></html>") });
+assert.equal(maintenance.disallowAll, true);
+assert.equal(maintenance.status, "503 (under maintenance: disallow all)");
+assert.equal((await loadRobots("shop.test", { fetchImpl: answer(503, "Service Unavailable") })).status, "503 (unreachable: disallow all)");
+
 console.log("robots: ok");

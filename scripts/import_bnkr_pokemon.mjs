@@ -57,7 +57,8 @@ const productUrl = (gno) => `${BNKR_BASE}/goods/detail.do?gno=${gno}`;
  */
 export function describeEmptySearch(html) {
   const title = /<title>([^<]*)<\/title>/i.exec(html)?.[1]?.replace(/\s+/g, " ").trim() || "no title";
-  const mall = /반다이남코코리아몰/.test(html);
+  // The mall's name in its title, or its picture CDN in the page.
+  const mall = /반다이남코코리아몰|cdn\.bnkrmall\.co\.kr/.test(html);
   return `The search page lists no products (${mall ? "a mall page: markup change?" : "not the mall"}; title "${title.slice(0, 80)}", ${html.length} characters).`;
 }
 

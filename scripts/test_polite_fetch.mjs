@@ -89,4 +89,36 @@ for (const page of [{ status: 403 }, { status: 429 }, { status: 503 }, { body: "
   assert.equal(await fetcher.text("https://a.test/sjis", { encoding: "shift_jis" }), "セイレーン");
 }
 
+// robots.txt that cannot be read stops the host at once, saying why: a 503 maintenance page
+// (www.goodsmile.com, 2026-11-19; it was reported as "…/search/list is disallowed by robots.txt")
+// and the AWS WAF 202 (store.nintendo.co.kr to GitHub runners). No page is requested.
+const MAINTENANCE = { status: 503, body: "<html><head><title>メンテナンス中 | グッドスマイルカンパニー公式ショップ</title></head></html>" };
+for (const [robots, reason] of [[MAINTENANCE, /robots\.txt 503 \(under maintenance: disallow all\)/], [{ status: 202, body: "<script>gokuProps = {}</script>" }, /robots\.txt 202 \(bot check/]]) {
+  const site = stubSite({ "https://a.test/robots.txt": robots, "https://a.test/list": { body: "list" } });
+  const fetcher = createPoliteFetcher({ fetchImpl: site.fetchImpl, gapMs: 1, log: quiet });
+  const error = await fetcher.text("https://a.test/list").catch((caught) => caught);
+  assert.match(error.message, reason);
+  assert.doesNotMatch(error.message, /disallowed by robots\.txt/);
+  assert.equal(error.hostStopped, "a.test");
+  await assert.rejects(fetcher.text("https://a.test/other"), /stopped this run/);
+  assert.deepEqual(site.calls.map((call) => call.url), ["https://a.test/robots.txt"], "one request to the host, robots.txt");
+}
+
+// Pages: a 503 maintenance page says so; a 202 or an x-amzn-waf-action header (AWS WAF) and the
+// F5 "request rejected" page with HTTP 200 are bot checks. Each stops the host for the run.
+for (const [page, reason] of [
+  [MAINTENANCE, /a\.test is under maintenance \(HTTP 503/],
+  [{ status: 202, body: "" }, /bot check \(HTTP 202\)/],
+  [{ status: 200, body: "<html></html>", headers: { "x-amzn-waf-action": "challenge" } }, /bot check \(HTTP 200, x-amzn-waf-action: challenge\)/],
+  [{ status: 200, body: "<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Your support ID is: 123</body></html>" }, /answered with a bot check/],
+]) {
+  const site = stubSite({ "https://a.test/robots.txt": ROBOTS, "https://a.test/page": page, "https://a.test/next": { body: "next" } });
+  const fetcher = createPoliteFetcher({ fetchImpl: site.fetchImpl, gapMs: 1, log: quiet });
+  const error = await fetcher.text("https://a.test/page").catch((caught) => caught);
+  assert.match(error.message, reason);
+  assert.equal(error.hostStopped, "a.test");
+  await assert.rejects(fetcher.text("https://a.test/next"), /stopped this run/);
+  assert.equal(site.calls.length, 2);
+}
+
 console.log("test_polite_fetch: ok");

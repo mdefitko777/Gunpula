@@ -20,6 +20,8 @@ import {
   pokeplaKey,
   recordJan,
 } from "./lib/kr-pokemon-shops.mjs";
+import { looksLikeBotChallenge } from "./atlas/lib/http.mjs";
+import { describeEmptySearch } from "./import_bnkr_pokemon.mjs";
 import { THUMB_RULES, ruleThumb } from "./lib/thumbs.mjs";
 
 const fixture = (name) => readFileSync(`scripts/fixtures/${name}`, "utf8");
@@ -182,6 +184,16 @@ assert.equal(academyReleaseDate(byNo("957")), null, "S81…: the old numbering h
   assert.equal(result.kits.find((kit) => kit.kit_id === "moncolle-ms-01").source_refs.length, 0, "피카츄 listed twice: neither joins");
   assert.ok(result.kits.find((kit) => kit.kit_id === "moncolle-ml-20").source_refs.some((ref) => ref.url === "academy-1093"));
   assert.deepEqual([result.joined, result.own], [2, 3]);
+}
+
+// --- A page in place of the search (GitHub runners since 2026-11-14): no products, and the error
+// says what came back instead of "markup change".
+{
+  const rejected = "<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consult with your administrator.<br><br>Your support ID is: 1234567890</body></html>";
+  assert.equal(parseBnkrList(rejected).products.length, 0);
+  assert.equal(looksLikeBotChallenge(200, rejected), true, "the fetcher stops the host on it");
+  assert.match(describeEmptySearch(rejected), /not the mall; title "Request Rejected", \d+ characters/);
+  assert.match(describeEmptySearch(fixture("bnkr-search-page.html").replace(/<h5 class="font-15"/g, "<h5")), /a mall page: markup change\?/);
 }
 
 console.log("test_kr_pokemon_shops: ok");
