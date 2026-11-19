@@ -1238,39 +1238,42 @@
     },
     {
       "source_id": "kotobukiya_nintendo_jp",
-      "name": "Kotobukiya (Nintendo titles)",
+      "name": "Kotobukiya Online Shop (Nintendo titles)",
       "type": "official_manufacturer_jp",
       "country": "JP",
-      "base_url": "https://www.kotobukiya.co.jp/title/xenoblade2/",
+      "base_url": "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?search_filter1=193&search.x=on&ps=90",
       "priority": 14,
       "best_for": [
-        "Kotobukiya Xenoblade model kits (セイレーン, フォーミュラ)",
+        "Kotobukiya model kits and figures of Nintendo works while they are on sale",
+        "Japan price (tax included)",
         "release month",
+        "JAN",
         "official product images"
       ],
       "weak_for": [
-        "works other than Xenoblade (Kotobukiya has no other Nintendo title page)",
-        "price (the title page shows none)"
+        "sold-out products (the shop lists products on sale only; セイレーン and フォーミュラ come from data/nintendo/kotobukiya-manual.json)"
       ],
-      "notes": "Read through the Wayback Machine: www.kotobukiya.co.jp answers 403 to scripts, and the reachable shop search lists in-stock items only, so these kits are invisible there."
+      "notes": "scripts/import_nintendo_makers.mjs: the shop's 作品名 filter (193 ゼノブレイド2, 50 ゼノブレイドクロス, 93 星のカービィ) and 13 Shift_JIS keyword searches; a goods page once per product. www.kotobukiya.co.jp answers 403 to the bot and is only written as the source reference (product/detail/p<JAN>/). On 2026-11-19 every Nintendo search found nothing."
     },
     {
       "source_id": "good_smile_nintendo_jp",
-      "name": "Good Smile Company (Nintendo titles)",
+      "name": "Good Smile Company Official Shop (Nintendo titles)",
       "type": "official_manufacturer_jp",
       "country": "JP",
-      "base_url": "https://www.goodsmile.com/en/search",
+      "base_url": "https://www.goodsmile.com/ja/search",
       "priority": 13,
       "best_for": [
         "Nendoroid / figma / POP UP PARADE and scale figures",
         "Japan price",
-        "official images"
+        "JAN",
+        "first release month (販売)",
+        "official images",
+        "English name"
       ],
       "weak_for": [
-        "release date (the list blocks carry none)",
         "Pokemon (its own franchise)"
       ],
-      "notes": "Filtered by Good Smile’s own work ids (the title checkboxes on /en/search), never by keyword: a keyword search drifts badly — \"Pikmin\" returns Cinnamoroll and Pompompurin — and the result blocks hold no work to check against."
+      "notes": "scripts/import_nintendo_makers.mjs: Good Smile's own 作品名 filter ids (the title checkboxes on /ja/search), never a keyword (\"Pikmin\" also returns Cinnamoroll and Pompompurin); ja and en product pages once per product. The copyright line decides Nintendo vs Pokémon vs other. robots.txt answers 404 (no rules) on 2026-11-19."
     },
     {
       "source_id": "ichiban_kuji_nintendo_jp",

@@ -1,0 +1,31 @@
+{
+  "note": "Kotobukiya products of Nintendo works that the Kotobukiya online shop no longer lists (sold out) and www.kotobukiya.co.jp does not answer the bot for. scripts/import_nintendo_makers.mjs writes one record per entry (kit_id kotobukiya-nin-<jan>); a shop listing of the same JAN wins for price, month and pictures. Hand-curated: add a product here with where each fact came from.",
+  "products": [
+    {
+      "jan": "4934054045389",
+      "number": "KP349R",
+      "ja": "セイレーン",
+      "en": "Siren",
+      "work": "ゼノブレイド2",
+      "grade": "NIN_PLAMO",
+      "scale": "non-scale",
+      "release_date": "2025-05",
+      "price_jpy": 13200,
+      "image": "https://www.kotobukiya.co.jp/files_thumbnail/product/2024/202411/KP349R_Siren/KP349R_Siren_eye.jpg/500.jpg",
+      "notes": "Plastic model kit, reissue (再生産) of May 2025 at 13,200 yen incl. tax; 品番, JAN, month and price as the owner read them on the official product page (2026-11-19). The online shop's goods page says 販売終了."
+    },
+    {
+      "jan": "4934054073962",
+      "number": "KP401R",
+      "ja": "フォーミュラ",
+      "en": "Formula",
+      "work": "ゼノブレイドクロス",
+      "grade": "NIN_PLAMO",
+      "scale": "non-scale",
+      "release_date": "2025-10",
+      "price_jpy": null,
+      "image": "https://www.kotobukiya.co.jp/files_thumbnail/product/2025/202503/KP401R_formula/KP401R_formula_eye.jpg/500.jpg",
+      "notes": "Plastic model kit (reissue, 品番 from the picture's file name); name, month and picture from the archived kotobukiya.co.jp ゼノブレイドクロス title page (read 2026-11-19). The online shop's goods page says 販売終了; price not known."
+    }
+  ]
+}

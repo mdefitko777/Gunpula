@@ -62,6 +62,7 @@ npm run sources
 | search.nintendo.jp（日本任天堂软件列表、发售日程、amiibo 阵容背后的 JSON） | robots.txt 是 `User-Agent: * Disallow: /`（2026-11-14） | 不读；任天堂频道改用韩国官方的 store.nintendo.co.kr 和 nintendo.com/kr | 日本的 amiibo、日本独有的软件和发售日 |
 | store-jp.nintendo.com（My Nintendo Store 日本） | robots 允许 /list/，但每个商品页都跳到 Queue-it 排队页（store-jp-wr.nintendo.com，要跑 JS 拿令牌），属于 bot check | 不读 | 日本任天堂商店的周边（约 800 件）和 amiibo（约 140 件） |
 | www.nintendo.com/kr/amiibo/lineup 的「더보기」 | 页面只内嵌最新 20 个 amiibo，其余要客户端 JS 调 Contentful API | 只读内嵌的 20 个，读过的记录保留；不跑网页 JS、不直接调 API | 2024-02 以前的韩国 amiibo |
+| www.kotobukiya.co.jp（寿屋官网，任天堂作品） | 对本 bot 回 403；shop.kotobukiya.co.jp 只列在售商品，2026-11-19 任天堂作品全部 0 件，セイレーン、フォーミュラ 的商品页写「販売終了」 | 不读官网（只把 `product/detail/p<JAN>/` 写进 source_urls）；在售的由 `import_nintendo_makers.mjs` 每天按作品筛选和关键词搜索；已售罄的写在 `data/nintendo/kotobukiya-manual.json`（店主提供的品番、JAN、价格、月份） | 寿屋任天堂商品的价格与多角度图（停售后）；店里从没出现过的旧商品 |
 
 ## 韩国来源（2026-11-14 起）
 

@@ -51,6 +51,7 @@ const CATALOG_SOURCES = [
   { source_id: "bnkrmall_kr", label: "BANDAI NAMCO Korea Mall (Pokemon)" },
   { source_id: "academy_kr", label: "Academy Science (Pokemon)" },
   { source_id: "nintendo_store_kr", label: "Nintendo Store Korea" },
+  { source_id: "good_smile_nintendo_jp", label: "Good Smile Company (Nintendo)" },
   { source_id: "tamashii_effect_jp", label: "Tamashii Web (魂EFFECT)" },
   { source_id: "good_smile_effects_jp", label: "Good Smile Company (effect parts)" },
   { source_id: "hobby_search_fate_jp", label: "Hobby Search (Fate, stored records only)" },

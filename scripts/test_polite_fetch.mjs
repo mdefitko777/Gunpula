@@ -82,4 +82,11 @@ for (const page of [{ status: 403 }, { status: 429 }, { status: 503 }, { body: "
   assert.equal(await fetcher.text("https://a.test/next"), "next");
 }
 
+// A Shift_JIS page (the Kotobukiya shop) is decoded with the charset the caller names.
+{
+  const site = stubSite({ "https://a.test/robots.txt": ROBOTS, "https://a.test/sjis": { body: Uint8Array.from([0x83, 0x5a, 0x83, 0x43, 0x83, 0x8c, 0x81, 0x5b, 0x83, 0x93]) } });
+  const fetcher = createPoliteFetcher({ fetchImpl: site.fetchImpl, gapMs: 1, log: quiet });
+  assert.equal(await fetcher.text("https://a.test/sjis", { encoding: "shift_jis" }), "セイレーン");
+}
+
 console.log("test_polite_fetch: ok");

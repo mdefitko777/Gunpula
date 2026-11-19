@@ -50,6 +50,43 @@ export function decodeKotobukiyaShopHtml(buffer) {
   return new TextDecoder("shift_jis").decode(buffer);
 }
 
+// The shop search reads its keyword as Shift_JIS: the UTF-8 bytes of ゼノブレイド find nothing
+// (checked 2026-11-15). Node has no Shift_JIS encoder, so the table is the decoder run backwards
+// over every one- and two-byte code (no dependency for one query string).
+let shiftJisTable = null;
+
+function shiftJisBytes(char) {
+  if (!shiftJisTable) {
+    shiftJisTable = new Map();
+    const decoder = new TextDecoder("shift_jis");
+    const remember = (bytes) => {
+      const decoded = decoder.decode(Uint8Array.from(bytes));
+      if (decoded.length === 1 && decoded !== "�" && !shiftJisTable.has(decoded)) shiftJisTable.set(decoded, bytes);
+    };
+    for (let byte = 0x20; byte <= 0xdf; byte += 1) if (byte < 0x7f || byte >= 0xa1) remember([byte]);
+    for (let lead = 0x81; lead <= 0xfc; lead += 1) {
+      if (lead > 0x9f && lead < 0xe0) continue;
+      for (let trail = 0x40; trail <= 0xfc; trail += 1) if (trail !== 0x7f) remember([lead, trail]);
+    }
+  }
+  const bytes = shiftJisTable.get(char);
+  if (!bytes) throw new Error(`${char} has no Shift_JIS code`);
+  return bytes;
+}
+
+/** "ゼノブレイド" → "%83%5B%83m%83u%83%8C%83C%83h", the shop search's keyword parameter. */
+export function shiftJisQuery(keyword) {
+  return [...String(keyword)]
+    .flatMap(shiftJisBytes)
+    .map((byte) => (/[A-Za-z0-9*\-._]/.test(String.fromCharCode(byte)) ? String.fromCharCode(byte) : `%${byte.toString(16).toUpperCase().padStart(2, "0")}`))
+    .join("");
+}
+
+/** The shop's keyword search, 90 products a page (one page is all a work has had so far). */
+export function kotobukiyaShopSearchUrl(keyword) {
+  return `https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=${shiftJisQuery(keyword)}&search.x=on&ps=90`;
+}
+
 export function parseKotobukiyaShopListings(html, pageUrl = KOTOBUKIYA_AC_SHOP_URL) {
   const listings = [];
   for (const match of html.matchAll(/<li class="tile_item[^"]*"[^>]*>([\s\S]*?)<\/li>/g)) {

@@ -5,11 +5,6 @@
 // makers below publish in Japanese only, which is why lib/nintendo-kr.mjs also
 // matches Japanese now — otherwise every record here falls through to "other".
 //
-//   * 寿屋        — kotobukiya.co.jp title pages, read through the Wayback
-//                   Machine: the live site answers 403 and the shop search
-//                   lists in-stock items only, so the ゼノブレイド2 セイレーン
-//                   and ゼノブレイドクロス フォーミュラ kits are invisible there.
-//   * Good Smile  — goodsmile.com keyword search, one pass per work
 //   * 一番くじ     — 1kuji.com title filters 332 マリオ · 377 スプラトゥーン ·
 //                   410 星のカービィ · 454 ゼルダの伝説 · 513 どうぶつの森
 //   * 魂ウェブ     — tamashiiweb.com character codes super_mario,
@@ -21,6 +16,10 @@
 // MyFigureCollection answer 403, and store-jp.nintendo.com renders its catalog
 // in the browser only. Flat goods are not imported, same as the other
 // franchises.
+//
+// 寿屋 and Good Smile moved to import_nintendo_makers.mjs (2026-11-19), which
+// reads their product pages for JAN, price and work; the list blocks read here
+// had none of them.
 import { readFile, writeFile } from "node:fs/promises";
 import { seriesFor } from "./lib/nintendo-kr.mjs";
 
@@ -28,28 +27,6 @@ const CATALOG_PATH = "data/kits.json";
 const REQUEST_DELAY_MS = Number(process.env.NINTENDO_HOBBY_DELAY_MS || 250);
 const ONLY = process.env.NINTENDO_HOBBY_ONLY || "";
 
-const KOTO_WAYBACK = "https://web.archive.org/web/29991231id_/https://www.kotobukiya.co.jp/title";
-const KOTO_SITE = "https://www.kotobukiya.co.jp";
-const KOTO_TITLES = [["xenoblade2", "ゼノブレイド2"], ["xenobladex", "ゼノブレイドクロス"]];
-const GSC_BASE = "https://www.goodsmile.com";
-// Good Smile's own work filter, read off the checkboxes on /en/search
-// (`id="title<N>"`). A keyword search drifts badly here — "Pikmin" returns
-// Cinnamoroll and Pompompurin — and the result blocks carry no work of their
-// own to check against, so the work has to come from the query itself.
-// Pokémon titles are deliberately absent: they are their own franchise.
-const GSC_TITLES = [
-  [458, "どうぶつの森"],
-  [379, "ファイアーエムブレム"], [901, "ファイアーエムブレム"], [756, "ファイアーエムブレム"],
-  [890, "ファイアーエムブレム"], [920, "ファイアーエムブレム"], [1798, "ファイアーエムブレム"],
-  [653, "星のカービィ"], [2843, "星のカービィ"], [1029, "星のカービィ"],
-  [2414, "メトロイド"], [297, "メトロイド"], [1234, "メトロイド"],
-  [2796, "ピクミン"],
-  [1186, "スプラトゥーン"], [1517, "スプラトゥーン"],
-  [510, "マリオ"],
-  [940, "ゼルダの伝説"], [1182, "ゼルダの伝説"], [752, "ゼルダの伝説"], [199, "ゼルダの伝説"],
-  [512, "ゼルダの伝説"], [1108, "ゼルダの伝説"], [2815, "ゼルダの伝説"],
-  [1218, "ゼノブレイド"], [2511, "ゼノブレイド"], [1874, "ゼノブレイド"],
-];
 const KUJI_TITLES = [[332, "スーパーマリオブラザーズ"], [377, "スプラトゥーン"], [410, "星のカービィ"], [454, "ゼルダの伝説"], [513, "どうぶつの森"]];
 const TAMASHII_BASE = "https://tamashiiweb.com";
 const TAMASHII_CODES = [["super_mario", "マリオ"], ["legend_of_zelda", "ゼルダの伝説"], ["metroid_prime4_beyond", "メトロイド"]];
@@ -57,8 +34,8 @@ const BSP_TITLES = [["IP00002055", "星のカービィ"]];
 const GASHAPON_BASE = "https://gashapon.jp";
 const GASHAPON_QUERIES = ["マリオ", "カービィ", "ゼルダ", "スプラトゥーン", "どうぶつの森", "ピクミン", "メトロイド"];
 
-// A product counts as Nintendo when its text names one of the works. The Good
-// Smile keyword search in particular drifts well past the exact matches.
+// A product counts as Nintendo when its text names one of the works; the
+// keyword searches drift well past the exact matches.
 const NINTENDO_TEXT =
   /ゼルダ|ハイラル|ムジュラ|コログ|Zelda|マリオ|ルイージ|ピーチ|ワリオ|クッパ|キノピオ|Mario|Luigi|Peach|スプラトゥーン|Splatoon|カービィ|Kirby|ゼノブレイド|セイレーン|フォーミュラ|ホムラ|ヒカリ|Xenoblade|Pyra|Mythra|ピクミン|Pikmin|メトロイド|Metroid|サムス|Samus|ファイアー?エムブレム|Fire Emblem|どうぶつの森|Animal Crossing|ドンキーコング|Donkey Kong|ヨッシー|Yoshi|スマッシュブラザーズ|Smash Bros/i;
 // Products whose text holds a work name but belong to something else:
@@ -159,87 +136,6 @@ function gradeForProduct(product, fallbackGrade) {
 
 function scaleFor(name) {
   return /(1\/(?:3|4|6|7|8|10|12|20))/.exec(String(name || ""))?.[1] || "non-scale";
-}
-
-// --------------------------------------------------------------------- 寿屋
-
-function parseKotobukiyaTitle(html, pageUrl, work) {
-  const out = [];
-  for (const chunk of String(html || "").split('<li class="productList_item">').slice(1)) {
-    const block = chunk.split("</li>")[0];
-    const name = decodeHtml(/<p class="productList_title">([\s\S]*?)<\/p>/.exec(block)?.[1]);
-    if (!name) continue;
-    const href = /<a href="([^"]+)" class="overMask"/.exec(block)?.[1];
-    const image = /<img src="([^"]+)"/.exec(block)?.[1];
-    out.push({
-      key: href ? href.replace(/\W+/g, "") : slugify(name, "koto"),
-      name,
-      work,
-      line: "寿屋",
-      category: decodeHtml(/<p class="productList_category">([\s\S]*?)<\/p>/.exec(block)?.[1]),
-      url: href ? absolute(href, KOTO_SITE) : pageUrl,
-      image: image ? absolute(image, KOTO_SITE) : "",
-      release_date: releaseDateFrom(decodeHtml(/<time class="date">([\s\S]*?)<\/time>/.exec(block)?.[1])),
-      price_jpy: null,
-      is_limited: /限定/.test(name),
-    });
-  }
-  return out;
-}
-
-async function fetchKotobukiya() {
-  const out = [];
-  for (const [slug, work] of KOTO_TITLES) {
-    try {
-      const html = await fetchText(`${KOTO_WAYBACK}/${slug}/`, {}, 60000);
-      out.push(...parseKotobukiyaTitle(html, `${KOTO_SITE}/title/${slug}/`, work));
-    } catch (error) {
-      console.warn(`  kotobukiya ${slug}: ${error.message}`);
-    }
-  }
-  return out;
-}
-
-// --------------------------------------------------------------- Good Smile
-
-function gscFilter(titleId) {
-  return encodeURIComponent(JSON.stringify({
-    search_keyword: "", search_over18: false, search_category: [], search_maker: [],
-    search_title: [titleId], search_status: "0", release_date_from: "", release_date_to: "",
-    search_bonus: false, search_exclusive: false, search_sale: false, search_sales_origin: false, tag: [],
-  }));
-}
-
-async function fetchGoodSmile() {
-  const byKey = new Map();
-  for (const [titleId, work] of GSC_TITLES) {
-    for (let offset = 0; offset <= 240; offset += 60) {
-      let html;
-      try {
-        html = await fetchText(`${GSC_BASE}/en/search/list?filter=${gscFilter(titleId)}&orderBy=1&limit=60&offset=${offset}&couponId=null&searchIndex=-1`);
-      } catch (error) {
-        console.warn(`  good smile title ${titleId}: ${error.message}`);
-        break;
-      }
-      const blocks = html.split('<div class="p-product-list__item">').slice(1);
-      for (const block of blocks) {
-        const id = /href="\/en\/product\/(\d+)"/.exec(block)?.[1];
-        const name = decodeHtml(/<h2 class="c-title[^"]*">([\s\S]*?)<\/h2>/.exec(block)?.[1]);
-        if (!id || !name) continue;
-        const image = /(?:src)="([^"]*gsc-webrevo-sdk-storage-prd\/product\/image\/[^"]*)"/.exec(block)?.[1];
-        byKey.set(id, {
-          key: id, name, work, line: "Good Smile Company", category: "",
-          url: `${GSC_BASE}/en/product/${id}`,
-          image: image ? absolute(image, GSC_BASE) : "",
-          release_date: null,
-          price_jpy: parseYen(decodeHtml(/<span class="c-price__main">([\s\S]*?)<\/span>/.exec(block)?.[1])),
-          is_limited: /Exclusive|Limited|限定/i.test(name),
-        });
-      }
-      if (blocks.length < 60) break;
-    }
-  }
-  return [...byKey.values()];
 }
 
 // ----------------------------------------------------------------- 一番くじ
@@ -395,10 +291,6 @@ async function fetchGashapon() {
 // --------------------------------------------------------------------------
 
 const SOURCES = [
-  { source_id: "kotobukiya_nintendo_jp", defaultGrade: "NIN_PLAMO", idPrefix: "kotobukiya-nin", subline: "寿屋", tags: ["nintendo", "kotobukiya"], fetchAll: fetchKotobukiya,
-    notes: "Imported from the Kotobukiya title pages (Xenoblade), read through the Wayback Machine because the live site answers 403." },
-  { source_id: "good_smile_nintendo_jp", defaultGrade: "NIN_SCALE", idPrefix: "goodsmile-nin", subline: "Good Smile Company", tags: ["nintendo", "good smile"], fetchAll: fetchGoodSmile,
-    notes: "Imported from the Good Smile Company official store (per-work keyword search)." },
   { source_id: "ichiban_kuji_nintendo_jp", defaultGrade: "NIN_PRIZE", idPrefix: "ichibankuji-nin", subline: "一番くじ", tags: ["nintendo", "ichiban kuji", "prize"], fetchAll: fetchIchibanKuji,
     notes: "Imported from the Ichiban Kuji official lineup (Nintendo title filters)." },
   { source_id: "banpresto_prize_nintendo_jp", defaultGrade: "NIN_PRIZE", idPrefix: "banpresto-nin", subline: "バンプレスト景品", tags: ["nintendo", "banpresto", "prize"], fetchAll: fetchBanpresto,

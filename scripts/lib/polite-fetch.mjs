@@ -44,7 +44,8 @@ export function createPoliteFetcher({ userAgent = BOT_USER_AGENT, gapMs = 1100, 
     return new Error(message);
   }
 
-  async function text(url) {
+  // encoding: the page's charset when it is not UTF-8 (shop.kotobukiya.co.jp is Shift_JIS).
+  async function text(url, { encoding = "utf-8" } = {}) {
     const host = new URL(url).host;
     if (stoppedHosts.has(host)) throw new Error(`${host} stopped this run (${stoppedHosts.get(host)})`);
     let target = url;
@@ -68,7 +69,7 @@ export function createPoliteFetcher({ userAgent = BOT_USER_AGENT, gapMs = 1100, 
       // The site asking us to stop: no retry, the run ends here.
       if (STOP_STATUSES.has(response.status)) throw stop(host, `HTTP ${response.status} for ${target}`);
       if (!response.ok) throw new Error(`HTTP ${response.status} for ${target}`);
-      const body = await response.text();
+      const body = new TextDecoder(encoding).decode(await response.arrayBuffer());
       if (looksLikeBotChallenge(response.status, body)) throw stop(host, `${target} answered with a bot check`);
       return body;
     }
