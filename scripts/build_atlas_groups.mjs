@@ -13,15 +13,21 @@
 // Shape (backward compatible): franchises.{pokemon,fate,armored_core}[] =
 //   {id, labels{zh,ko,en,ja}, subtitle, image, kit_ids[], count, …}
 // plus `kind`, `image_remote`, `cover_source`, `roster` (and per-franchise extras), and a
-// top-level `channels` map with one official header image per channel, and a top-level
+// top-level `channels` map with one official header image per channel, a top-level
 // `line_covers` map {<franchise>: {<grade_code | BX | UX | CX>: {image, image_remote,
-// cover_source, kind: "logo" | "key_visual"}}} with the official image of each product line.
+// cover_source, kind: "logo" | "key_visual", width, height}}} with the official logo of each
+// brand line, and a top-level `line_icons` map {<franchise>: {<grade_code>: <icon kind>}} for the
+// lines that are only a kind of product (goods, plush, prize …; vocabulary in
+// scripts/atlas/lib/line_covers.mjs LINE_ICON_KINDS). A code is in one of the two maps, never both.
+// Every group says `cover_kind`: "logo" (the work's title logo) or "picture" (box art, key visual,
+// banner, newest product picture).
 // Empty groups are left out. `--report=<file>` writes every product's group and reason (for review).
 import { readFileSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
 import { effectGroups } from "./lib/effect-parts.mjs";
 import { NINTENDO_SERIES } from "./lib/nintendo-kr.mjs";
 import { hasKana } from "./lib/zh-names.mjs";
+import { APP_DERIVED_CODES, LINE_COVER_SOURCES, LINE_ICONS } from "./atlas/lib/line_covers.mjs";
 import { armoredCoreClassifier, fateClassifier, lang, madokaClassifier, MADOKA_CHARACTERS, pokemonClassifier, POKEMON_GAMES, AC_TITLES, productText } from "./atlas/lib/atlas_groups.mjs";
 
 const readJson = async (file, fallback) => {
@@ -54,7 +60,7 @@ const covers = coverFile.covers || {};
 function cover(key, fallbackKey) {
   const c = covers[key] || (fallbackKey && covers[fallbackKey]);
   if (!c) return { image: "" };
-  return { image: c.image, image_remote: c.image_remote, cover_source: c.source_page };
+  return { image: c.image, image_remote: c.image_remote, cover_source: c.source_page, cover_kind: c.kind === "logo" ? "logo" : "picture" };
 }
 
 const report = [];
@@ -155,7 +161,7 @@ function fateGroups() {
       work: "fgo",
       labels: lang("FGO Fes. · 周年周边", "FGO Fes. · 주년 굿즈", "FGO Fes. & anniversary goods", "FGO Fes.・周年グッズ"),
       subtitle: lang("没有单一从者的 Fes. 周边", "특정 서번트가 없는 Fes. 굿즈", "Fes. goods without a single servant", "特定サーヴァントのない Fes. グッズ"),
-      ...cover("channel:fate", "fate:fgo"),
+      ...cover("fate:fgo", "channel:fate"),
       roster: [],
       kit_ids: [],
     },
@@ -165,7 +171,7 @@ function fateGroups() {
       work: "fgo",
       labels: lang("FGO 展览 · 活动 · 门票", "FGO 전시 · 이벤트 · 티켓", "FGO exhibitions, events & tickets", "FGO 展示・イベント・チケット"),
       subtitle: lang("冬祭 · 展览会 · 实景解谜 · 联动", "겨울축제 · 전시회 · 리얼 탈출 게임 · 콜라보", "Winter Fes., exhibitions, escape games, collaborations", "冬祭り・展覧会・リアル脱出ゲーム・コラボ"),
-      ...cover("channel:fate", "fate:fgo"),
+      ...cover("fate:fgo", "channel:fate"),
       roster: [],
       kit_ids: [],
     },
@@ -185,7 +191,7 @@ function fateGroups() {
       work: "fgo",
       labels: lang("FGO 综合周边", "FGO 공통 굿즈", "FGO general goods", "FGO 共通グッズ"),
       subtitle: lang("随机 · 多从者套装等", "랜덤 · 여러 서번트 세트 등", "Random and multi-servant sets", "ランダム・複数サーヴァントのセットなど"),
-      ...cover("channel:fate", "fate:fgo"),
+      ...cover("fate:fgo", "channel:fate"),
       roster: [],
       kit_ids: [],
     },
@@ -229,7 +235,7 @@ function armoredCoreGroups() {
     kind: "unsorted",
     labels: lang("跨作品 / 其他", "작품 공통 / 기타", "Cross-title / other", "作品横断 / その他"),
     subtitle: lang("无法判断游戏世代", "게임 세대를 알 수 없는 상품", "Game era could not be identified", "ゲーム世代を特定できない商品"),
-    ...cover("channel:armored_core"),
+    ...cover("armored_core:series", "channel:armored_core"),
     roster: [],
     kit_ids: [],
   });
@@ -243,7 +249,8 @@ function madokaGroups() {
     kind: "character",
     labels: c.labels,
     subtitle: lang("", "", "", ""),
-    ...cover(`madoka:${c.id}`, "channel:madoka"),
+    // No logo per character: the newest product picture below, not the series logo in every cell.
+    ...cover(`madoka:${c.id}`),
     kit_ids: [],
   }));
   groups.push({
@@ -270,7 +277,7 @@ function madokaGroups() {
       .map((id) => byId.get(id))
       .filter((k) => k?.images?.box_art_url)
       .sort((a, b) => String(b.release_date || "").localeCompare(String(a.release_date || "")))[0];
-    return newest ? { ...g, image: newest.images.box_art_url, cover_source: "newest product picture" } : g;
+    return newest ? { ...g, image: newest.images.box_art_url, cover_source: "newest product picture", cover_kind: "picture" } : g;
   });
 }
 
@@ -312,6 +319,7 @@ function beybladeGroups() {
         subtitle: lang(zhFix(b.team || ""), koFix(b.team || ""), b.team || "", b.team || ""),
         image: newest ? newest.product.image || newest.product.image_remote || "" : "",
         cover_source: "newest product picture",
+        cover_kind: "picture",
         blades: b.blades.map((x) => x.name_ja),
         kit_ids: [...mine.map((p) => p.kitId), ...byNameKits.map((k) => k.kit_id)],
       };
@@ -335,13 +343,18 @@ function legoGroups() {
       const newest = [...list]
         .filter((k) => k.images?.box_art_url)
         .sort((a, b) => String(b.release_date || "").localeCompare(String(a.release_date || "")) || (b.tags?.length || 0) - (a.tags?.length || 0))[0];
+      const id = `lego_${theme.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "other"}`;
+      // The theme logo where Wikipedia has one (build_atlas_covers.mjs), else the newest set.
+      const logo = cover(`lego:${id.slice(5)}`);
       return {
-        id: `lego_${theme.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "other"}`,
+        id,
         kind: "theme",
         labels: lang(zh[theme] || theme, ko[theme] || theme, theme, theme),
         subtitle: lang("", "", "", ""),
         image: newest?.images.box_art_url || "",
         cover_source: "newest set picture (Rebrickable)",
+        cover_kind: "picture",
+        ...(logo.image ? logo : {}),
         kit_ids: list.map((k) => k.kit_id),
         count: list.length,
       };
@@ -365,6 +378,8 @@ function nintendoGroups() {
       const newest = [...list]
         .filter((k) => k.images?.box_art_url)
         .sort((a, b) => Number(b.grade_code === "NIN_GAME") - Number(a.grade_code === "NIN_GAME") || String(b.release_date || "").localeCompare(String(a.release_date || "")))[0];
+      // The series logo (build_atlas_covers.mjs), else the newest game of the world.
+      const logo = cover(`nintendo:${key.replace(/^nintendo_/, "")}`);
       return {
         id: key,
         kind: "series",
@@ -372,6 +387,8 @@ function nintendoGroups() {
         subtitle: lang("", "", "", ""),
         image: newest?.images.box_art_url || "",
         cover_source: "newest game picture (Nintendo Store Korea)",
+        cover_kind: "picture",
+        ...(logo.image ? logo : {}),
         kit_ids: list.map((k) => k.kit_id),
         count: list.length,
       };
@@ -429,6 +446,7 @@ function gundamTimeline() {
         count: groupWorks.length,
         image: groupWorks.find((work) => work.image)?.image || "",
         cover_source: "G Generation series logo (official game asset) via soshage.com GGET",
+        cover_kind: "logo",
         works: groupWorks.map((work) => ({ work_id: work.work_id, name: work.name, image: work.image || "" })),
       };
     })
@@ -450,25 +468,43 @@ function channels() {
   };
 }
 
-// "종류별 도감" cards: official logo / key visual per product line, from the covers keyed
+// "종류별 도감" cards: official logo per brand line, from the covers keyed
 // line:<franchise>:<grade_code> (BEYBLADE X: line:beyblade:BX|UX|CX). Curated in
-// scripts/atlas/lib/line_covers.mjs, downloaded by build_atlas_covers.mjs.
+// scripts/atlas/lib/line_covers.mjs, downloaded by build_atlas_covers.mjs. A cover left in
+// atlas-covers.json for a line that is no longer curated (moved to an icon) is not published.
 function lineCovers() {
   const out = {};
   for (const [key, c] of Object.entries(covers).sort(([a], [b]) => a.localeCompare(b))) {
     const m = key.match(/^line:([a-z_]+):([A-Za-z0-9_]+)$/);
-    if (!m || !c.image) continue;
-    (out[m[1]] ||= {})[m[2]] = { image: c.image, image_remote: c.image_remote, cover_source: c.source_page, kind: c.kind || "logo" };
+    if (!m || !c.image || !LINE_COVER_SOURCES[`${m[1]}:${m[2]}`]) continue;
+    const entry = { image: c.image, image_remote: c.image_remote, cover_source: c.source_page, kind: c.kind || "logo" };
+    if (c.width && c.height) Object.assign(entry, { width: c.width, height: c.height });
+    (out[m[1]] ||= {})[m[2]] = entry;
   }
   return out;
 }
 
+// The other cards: the app draws a line icon of this kind. Only codes with kits in the channel
+// (plus the codes the app derives from names), and never a code that has a logo.
+function lineIcons(published) {
+  const codes = new Set(kits.map((k) => `${k.franchise}:${k.grade_code}`));
+  const out = {};
+  for (const [key, kind] of Object.entries(LINE_ICONS).sort(([a], [b]) => a.localeCompare(b))) {
+    const [franchise, code] = key.split(":");
+    if (published[franchise]?.[code] || !(codes.has(key) || APP_DERIVED_CODES.has(key))) continue;
+    (out[franchise] ||= {})[code] = kind;
+  }
+  return out;
+}
+
+const publishedLineCovers = lineCovers();
 const output = {
   updated_at: catalog.updated_at || "",
   source:
     "Generated from data/kits.json, data/atlas-source-taxonomy.json (PokeAPI species), data/gget-series-sections.json, data/atlas/fate-roster.json (Atlas Academy + Mooncell + hand-kept works) and data/atlas/atlas-covers.json by scripts/build_atlas_groups.mjs",
   channels: channels(),
-  line_covers: lineCovers(),
+  line_covers: publishedLineCovers,
+  line_icons: lineIcons(publishedLineCovers),
   franchises: {
     gundam_timeline: gundamTimeline(),
     pokemon: pokemonGroups(),
@@ -479,7 +515,7 @@ const output = {
     lego: legoGroups(),
     nintendo: nintendoGroups(),
     // One group per kind of effect (smoke, explosion …); lib/effect-parts.mjs.
-    effects: effectGroups(kits, lang),
+    effects: effectGroups(kits, lang).map((g) => ({ cover_kind: "picture", ...g })),
   },
 };
 

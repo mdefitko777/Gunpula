@@ -70,3 +70,33 @@ npm run validate
 记录升级到 `verified` 前，必须有日本官方或日本店铺来源支撑；Dalong、Wiki、海外整理站只作为人工参考，不写入主数据来源。
 
 `work_title` 目前由官方商品名规则推断，适合做筛选和初步整理；仍需人工核对后再把记录升级为 `verified`。
+
+## 图鉴的封面：`data/atlas-groups.json`
+
+App 的「종류」（按产品线）和「세대」（按作品 / 世代）两个浏览页，每格只放一种图：官方 logo。
+
+- `line_covers.<频道>.<grade_code>`：品牌 / 产品线的官方 logo（HG、MG、ROBOT魂、amiibo、魂EFFECT …）。
+  形状不变：`{image, image_remote, cover_source, kind, width, height}`，`image` 是 `./assets/atlas/covers/line-*.png|jpg`
+  的路径；logo 保持原来的横长比例和透明背景（只有白色 logo 垫深色底），不裁成正方形。来源清单在
+  `scripts/atlas/lib/line_covers.mjs` 的 `LINE_COVER_SOURCES`，由 `scripts/atlas/build_atlas_covers.mjs` 下载。
+- `line_icons.<频道>.<grade_code>`：没有自己品牌的「商品种类」（周边、毛绒、景品、游戏 …）和找不到官方 logo 的
+  产品线，App 画一个线条图标。值只能是下面这些（`LINE_ICON_KINDS`），新增一种需要 App 一起发版：
+
+  | 值 | 含义 |
+  |---|---|
+  | `goods` | 周边（굿즈） |
+  | `plush` | 毛绒（봉제인형 · 인형） |
+  | `figure` | 手办（피규어 · 스케일 · 액션） |
+  | `prize` | 景品 / 一番赏（경품） |
+  | `game` | 游戏软件（게임） |
+  | `hardware` | 主机和周边设备（본체 · 주변기기） |
+  | `card` | 卡牌（카드） |
+  | `apparel` | 服装（의류） |
+  | `food` | 食玩（식완） |
+  | `capsule` | 扭蛋（가샤폰） |
+  | `plamo` | 拼装模型（프라모델） |
+  | `misc` | 其他（책 · 부품 …） |
+
+- 一个 grade_code 只会出现在 `line_covers` 或 `line_icons` 其中之一，`line_covers` 里不放某一件商品的照片。
+- 「세대」分组（`franchises.*[]`）仍用原来的 `image` 字段，能找到作品标题 logo 的就指向 logo；新增的
+  `cover_kind` 说明是 `logo` 还是 `picture`（包装图、主视觉、最新商品图）。
