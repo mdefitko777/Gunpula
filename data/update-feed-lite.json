@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-19",
-  "generated_at": "2026-11-19T09:03:35.057Z",
+  "generated_at": "2026-11-19T22:25:30.927Z",
   "watch_tags": [
     "seed",
     "00"
@@ -20,39 +20,40 @@
     "effects"
   ],
   "source_health": {
-    "generated_at": "2026-11-19T09:03:12.470Z",
+    "generated_at": "2026-11-19T22:25:11.011Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-19",
-      "generated_at": "2026-11-19T09:03:35.057Z",
+      "generated_at": "2026-11-19T22:25:30.927Z",
       "total_before": 41965,
-      "total_after": 42021,
+      "total_after": 42020,
       "added_count": 56,
-      "changed_count": 15,
+      "changed_count": 66,
       "removed_count": 9,
       "watched_count": 0,
-      "merged_count": 0,
+      "merged_count": 1,
       "backfilled_count": 6,
       "renamed_count": 0,
-      "premium_bandai_count": 5,
+      "premium_bandai_count": 8,
       "bbx_count": 0,
       "franchise_counts": {
-        "gundam": 6,
-        "madoka": 4,
-        "pokemon": 17,
+        "gundam": 9,
+        "madoka": 50,
+        "pokemon": 18,
         "lego": 43,
-        "fate": 1
+        "fate": 2
       },
       "reason_counts": {
         "new": 56,
-        "image": 3,
-        "source": 5,
+        "image": 49,
+        "source": 54,
+        "limited": 1,
         "product_line": 1,
         "series": 1,
-        "price": 2,
+        "price": 3,
         "name": 6,
         "removed": 9
       },
@@ -61,8 +62,8 @@
         "madoka",
         "pokemon",
         "lego",
-        "premium_bandai",
-        "fate"
+        "fate",
+        "premium_bandai"
       ],
       "watch_tags": [],
       "added": [
@@ -82,7 +83,7 @@
           "names": {
             "ja": "RX-110 ガブスレイ ver. A.N.I.M.E.",
             "zh": "RX-110 加布斯雷 ver. A.N.I.M.E.",
-            "ko": "RX-110 ガブスレイ ver. A.N.I.M.E.",
+            "ko": "RX-110 가브스레이 ver. A.N.I.M.E.",
             "en": "RX-110 ガブスレイ ver. A.N.I.M.E."
           },
           "release_date": "2027-05",
@@ -119,8 +120,8 @@
           },
           "names": {
             "ja": "魔法少女まどか☆マギカ ぬいパル（ぬいぐるみマスコット）／百江なぎさ",
-            "zh": "魔法少女小圆 毛绒挂件(ぬいぐるみマスコット)/百江渚",
-            "ko": "魔法少女まどか☆マギカ ぬいパル（ぬいぐるみマスコット） / 百江なぎさ",
+            "zh": "魔法少女小圆 毛绒挂件/百江渚",
+            "ko": "마법소녀 마도카☆마기카 누이팔 (봉제인형 마스코트) / 모모에 나기사",
             "en": "魔法少女まどか☆マギカ ぬいパル (ぬいぐるみマスコット)／百江なぎさ"
           },
           "release_date": "2027-04-16",
@@ -231,7 +232,7 @@
           "names": {
             "ja": "魔法少女まどか☆マギカ 30MP 鹿目まどか(ワルプルギスの廻天Ver.)",
             "zh": "魔法少女小圆 30MP 鹿目圆(瓦尔普吉斯的回天Ver.)",
-            "ko": "魔法少女まどか☆マギカ 30MP 鹿目まどか(ワルプルギスの廻天Ver.)",
+            "ko": "마법소녀 마도카☆마기카 30MP 카나메 마도카 (발푸르기스의 회천 Ver.)",
             "en": "魔法少女まどか☆マギカ 30MP 鹿目まどか(ワルプルギスの廻天Ver.)"
           },
           "release_date": "2026-11-07",
@@ -892,6 +893,243 @@
           ]
         },
         {
+          "kit_id": "aniplex-madoka-itemmdrepkqw02",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Aniplex+",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 暁美ほむら ノンスケールフィギュア",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 晓美焰 无比例手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 아케미 호무라 논스케일 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 暁美ほむら ノンスケールフィギュア"
+          },
+          "release_date": "2027-09",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "aniplex_plus_madoka_jp",
+            "claynel_madoka_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemMDrePKqw02.html",
+            "https://www.claynel.jp/products/?item_id=12521"
+          ]
+        },
+        {
+          "kit_id": "aniplex-madoka-itemmdrepkqw03",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Aniplex+",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 巴マミ ノンスケールフィギュア",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 巴麻美 无比例手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 토모에 마미 논스케일 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 巴マミ ノンスケールフィギュア"
+          },
+          "release_date": "2027-09",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "aniplex_plus_madoka_jp",
+            "claynel_madoka_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemMDrePKqw03.html",
+            "https://www.claynel.jp/products/?item_id=12520"
+          ]
+        },
+        {
+          "kit_id": "aniplex-madoka-itemmdrepkqw",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Aniplex+",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 鹿目まどか ノンスケールフィギュア",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 鹿目圆 无比例手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 카나메 마도카 논스케일 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 鹿目まどか ノンスケールフィギュア"
+          },
+          "release_date": "2027-08",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "aniplex_plus_madoka_jp",
+            "claynel_madoka_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemMDrePKqw.html",
+            "https://www.claynel.jp/products/?item_id=12405"
+          ]
+        },
+        {
+          "kit_id": "aniplex-madoka-itemrfedmpec",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_ACTION",
+          "subline": "BUZZmod.",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 暁美ほむら",
+            "zh": "BUZZmod. 『剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉』 晓美焰",
+            "ko": "BUZZmod. 『극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉』 아케미 호무라",
+            "en": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 暁美ほむら"
+          },
+          "release_date": "2027-07",
+          "price_jpy": 12000,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "aniplex_plus_madoka_jp",
+            "claynel_madoka_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemRfedMPeC.html",
+            "https://www.claynel.jp/products/?item_id=12526"
+          ]
+        },
+        {
+          "kit_id": "aniplex-fate-itemgaiqvmxc",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "Aniplex+",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Fate / Grand Order ムーンキャンサー / 玉兎 1 / 7スケールフィギュア",
+            "zh": "Fate / Grand Order MoonCancer / 玉兔 1/7比例手办",
+            "ko": "Fate/Grand Order 문캔서 / 옥토 1/7 스케일 피규어",
+            "en": "Fate / Grand Order ムーンキャンサー / 玉兎 1 / 7スケールフィギュア"
+          },
+          "release_date": "2027-07",
+          "price_jpy": 26400,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "limited"
+          ],
+          "source_ids": [
+            "aniplex_plus_fate_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemGAiqVmXc.html"
+          ]
+        },
+        {
+          "kit_id": "aniplex-madoka-itemkbrpgnuo",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_ACTION",
+          "subline": "BUZZmod.",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 鹿目まどか",
+            "zh": "BUZZmod. 『剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉』 鹿目圆",
+            "ko": "BUZZmod. 『극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉』 카나메 마도카",
+            "en": "BUZZmod. 『劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉』 鹿目まどか"
+          },
+          "release_date": "2027-03",
+          "price_jpy": 12000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "aniplex_plus_madoka_jp",
+            "claynel_madoka_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemKBrPGNuO.html",
+            "https://www.claynel.jp/products/?item_id=12406"
+          ]
+        },
+        {
           "kit_id": "hg-hg-1-144-4580886844760000",
           "change_type": "changed",
           "franchise": "gundam",
@@ -1014,6 +1252,47 @@
           ]
         },
         {
+          "kit_id": "hg-hg-1-144-4573102663740000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "uc_side",
+          "series_labels": {
+            "zh": "UC外传",
+            "en": "UC Side Story",
+            "ja": "UC外伝",
+            "ko": "UC 외전"
+          },
+          "names": {
+            "ja": "ＨＧ 1 / 144 ジーラインスタンダードアーマー",
+            "zh": "HG 1 / 144 G-Line标准装甲",
+            "ko": "HG 1/144 G-라인 스탠다드 아머",
+            "en": "ＨＧ 1 / 144 ジーラインスタンダードアーマー"
+          },
+          "release_date": "2024-02",
+          "price_jpy": 3630,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback",
+            "p_bandai_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102663740000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000261209/"
+          ]
+        },
+        {
           "kit_id": "lego-10370-1",
           "change_type": "changed",
           "franchise": "lego",
@@ -1052,26 +1331,26 @@
           ]
         },
         {
-          "kit_id": "hg-hguc-1-144-zii-4543112966841000",
+          "kit_id": "pbandai-wb-1000256700",
           "change_type": "changed",
           "franchise": "gundam",
           "grade_code": "HG",
-          "subline": "HGUC",
-          "series_key": "zeta",
+          "subline": "HG",
+          "series_key": "g",
           "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
+            "zh": "G",
+            "en": "G",
+            "ja": "G",
+            "ko": "G"
           },
           "names": {
-            "ja": "HGUC 1 / 144 ＺＩＩ（ゼッツー） トラヴィス・カークランドカラー",
-            "zh": "HGUC 1 / 144 ZII(Z2) 特拉维斯·柯克兰配色",
-            "ko": "HGUC 1/144 ZII(제츠) 트래비스 커클랜드 컬러",
-            "en": "HGUC 1 / 144 ＺＩＩ (ゼッツー) トラヴィス カークランドカラー"
+            "ja": "ＨＧ 1 / 144 ガンダムマックスター",
+            "zh": "HG 1 / 144 拳王高达",
+            "ko": "HG 1/144 건담 맥스터",
+            "en": "ＨＧ 1 / 144 Gundamマックスター"
           },
-          "release_date": "2015-04",
-          "price_jpy": 2860,
+          "release_date": "2023-11",
+          "price_jpy": 2915,
           "is_limited": true,
           "is_premium_bandai": true,
           "watch_tags": [],
@@ -1080,312 +1359,244 @@
             "premium_bandai"
           ],
           "change_reasons": [
-            "price"
+            "source"
           ],
           "source_ids": [
+            "p_bandai_wayback",
             "bandai_spirits_products_jp",
-            "p_bandai_wayback"
+            "p_bandai_jp"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112966841000&grp_id=5325"
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102657299000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000260727/"
           ]
         },
         {
-          "kit_id": "mg-mg-1-100-msz-006-3b-3-b-4543112956873000",
+          "kit_id": "goodsmile-madoka-14098",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "MG",
-          "subline": "MG",
-          "series_key": "zeta",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_MINI",
+          "subline": "ソフトビニール",
+          "series_key": "madoka_tv",
           "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
+            "zh": "魔法少女小圆",
+            "en": "Madoka Magica",
+            "ja": "まどか☆マギカ",
+            "ko": "마도카 마기카"
           },
           "names": {
-            "ja": "ＭＧ 1 / 100 MSZ-006-3B ゼータガンダム３号機Ｂ型 グレイ・ゼータ",
-            "zh": "MG 1 / 100 MSZ-006-3B Z高达3号机B型 灰色Z",
-            "ko": "MG 1/100 MSZ-006-3B 제타 건담 3호기 B형 그레이 제타",
-            "en": "ＭＧ 1 / 100 MSZ-006-3B Zeta Gundam３号機Ｂ型 グレイ Zeta"
+            "ja": "［BINIVINI BABY］SOFT VINYL FIGURE 魔法少女まどか☆マギカ 鹿目まどか / 暁美ほむら / 巴マミ",
+            "zh": "[BINIVINI BABY]SOFT VINYL FIGURE 魔法少女小圆 鹿目圆 / 晓美焰 / 巴麻美",
+            "ko": "[BINIVINI BABY] SOFT VINYL FIGURE 마법소녀 마도카☆마기카 카나메 마도카 / 아케미 호무라 / 토모에 마미",
+            "en": "［BINIVINI BABY］SOFT VINYL FIGURE 魔法少女まどか☆マギカ 鹿目まどか / 暁美ほむら / 巴マミ"
           },
-          "release_date": "2015-02-07",
+          "release_date": "2023-08",
           "price_jpy": 7590,
           "is_limited": false,
-          "is_premium_bandai": true,
+          "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "gundam",
-            "premium_bandai"
+            "madoka"
           ],
           "change_reasons": [
-            "price"
+            "image",
+            "source"
           ],
           "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_wayback"
+            "good_smile_madoka_en"
           ],
           "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112956873000&grp_id=5325"
+            "https://www.goodsmile.info/ja/product/14098/"
           ]
         },
         {
-          "kit_id": "goodsmile-fate-g6987",
+          "kit_id": "goodsmile-madoka-13183",
           "change_type": "changed",
-          "franchise": "fate",
-          "grade_code": "FATE_GOODS",
-          "subline": "Scale Figure",
-          "series_key": "type_moon",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_MINI",
+          "subline": "HELLO! GOOD SMILE",
+          "series_key": "madoka_rebellion",
           "series_labels": {
-            "zh": "型月",
-            "en": "TYPE-MOON",
-            "ja": "TYPE-MOON",
-            "ko": "타입문"
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
           },
           "names": {
-            "ja": "1 / 64 Scale GOODSMILE RACING & TYPE-MOON RACING 2019 SPA24H Test Day Ver.",
-            "zh": "1 / 64比例 GOODSMILE RACING & TYPE-MOON RACING 2019 SPA24H 测试日 Ver.",
-            "ko": "1/64 스케일 GOODSMILE RACING & TYPE-MOON RACING 2019 SPA24H 테스트 데이 Ver.",
-            "en": "1 / 64 Scale GOODSMILE RACING & TYPE-MOON RACING 2019 SPA24H Test Day Ver."
+            "ja": "HELLO! GOOD SMILE 佐倉杏子",
+            "zh": "HELLO! GOOD SMILE 佐仓杏子",
+            "ko": "HELLO! GOOD SMILE 사쿠라 쿄코",
+            "en": "HELLO! GOOD SMILE 佐倉杏子"
           },
-          "release_date": null,
-          "price_jpy": 3300,
+          "release_date": "2023-01",
+          "price_jpy": 1700,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "fate"
+            "madoka"
           ],
           "change_reasons": [
-            "image"
+            "image",
+            "source"
           ],
           "source_ids": [
-            "good_smile_fate_global"
+            "good_smile_madoka_en"
           ],
           "source_urls": [
-            "https://www.goodsmile.com/en/product/6987"
+            "https://www.goodsmile.info/ja/product/13183/"
           ]
         },
         {
-          "kit_id": "pokemon-center-4521329316338",
+          "kit_id": "goodsmile-madoka-13181",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_MINI",
+          "subline": "HELLO! GOOD SMILE",
+          "series_key": "madoka_rebellion",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
           },
           "names": {
-            "ja": "274 ぬいぐるみ ポケモン fit コノハナ",
-            "zh": "274 毛绒玩偶 宝可梦 fit 长鼻叶",
-            "ko": "274 봉제인형 Pokémon fit 잎새코",
-            "en": "274 ぬいぐるみ Pokémon fit コノハナ"
+            "ja": "HELLO! GOOD SMILE 巴マミ",
+            "zh": "HELLO! GOOD SMILE 巴麻美",
+            "ko": "HELLO! GOOD SMILE 토모에 마미",
+            "en": "HELLO! GOOD SMILE 巴マミ"
           },
-          "release_date": null,
-          "price_jpy": 1540,
+          "release_date": "2023-01",
+          "price_jpy": 1700,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "madoka"
           ],
           "change_reasons": [
-            "name"
+            "image",
+            "source"
           ],
           "source_ids": [
-            "pokemon_center_jp"
+            "good_smile_madoka_en"
           ],
           "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329316338.html"
+            "https://www.goodsmile.info/ja/product/13181/"
           ]
         },
         {
-          "kit_id": "pokemon-center-4521329370378",
+          "kit_id": "goodsmile-madoka-13182",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_MINI",
+          "subline": "HELLO! GOOD SMILE",
+          "series_key": "madoka_rebellion",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
           },
           "names": {
-            "ja": "38 ぬいぐるみ ポケモン fit キュウコン",
-            "zh": "38 毛绒玩偶 宝可梦 fit 九尾",
-            "ko": "38 봉제인형 Pokémon fit 나인테일",
-            "en": "38 ぬいぐるみ Pokémon fit キュウコン"
+            "ja": "HELLO! GOOD SMILE 美樹さやか",
+            "zh": "HELLO! GOOD SMILE 美树沙耶香",
+            "ko": "HELLO! GOOD SMILE 미키 사야카",
+            "en": "HELLO! GOOD SMILE 美樹さやか"
           },
-          "release_date": null,
-          "price_jpy": 1540,
+          "release_date": "2023-01",
+          "price_jpy": 1700,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "madoka"
           ],
           "change_reasons": [
-            "name"
+            "image",
+            "source"
           ],
           "source_ids": [
-            "pokemon_center_jp"
+            "good_smile_madoka_en"
           ],
           "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329370378.html"
+            "https://www.goodsmile.info/ja/product/13182/"
           ]
         },
         {
-          "kit_id": "pokemon-center-4521329349220",
+          "kit_id": "goodsmile-madoka-12957",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_MINI",
+          "subline": "HELLO! GOOD SMILE",
+          "series_key": "madoka_rebellion",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
           },
           "names": {
-            "ja": "526 ぬいぐるみ ポケモン fit ギガイアス",
-            "zh": "526 毛绒玩偶 宝可梦 fit 庞岩怪",
-            "ko": "526 봉제인형 Pokémon fit 기가이어스",
-            "en": "526 ぬいぐるみ Pokémon fit ギガイアス"
+            "ja": "HELLO! GOOD SMILE 暁美ほむら",
+            "zh": "HELLO! GOOD SMILE 晓美焰",
+            "ko": "HELLO! GOOD SMILE 아케미 호무라",
+            "en": "HELLO! GOOD SMILE 暁美ほむら"
           },
-          "release_date": null,
-          "price_jpy": 1650,
+          "release_date": "2022-11",
+          "price_jpy": 1700,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "madoka"
           ],
           "change_reasons": [
-            "name"
+            "image",
+            "source"
           ],
           "source_ids": [
-            "pokemon_center_jp"
+            "good_smile_madoka_en"
           ],
           "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329349220.html"
+            "https://www.goodsmile.info/ja/product/12957/"
           ]
         },
         {
-          "kit_id": "pokemon-center-4521329366579",
+          "kit_id": "goodsmile-madoka-12956",
           "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_MINI",
+          "subline": "HELLO! GOOD SMILE",
+          "series_key": "madoka_rebellion",
           "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
           },
           "names": {
-            "ja": "653 ぬいぐるみ ポケモン fit フォッコ",
-            "zh": "653 毛绒玩偶 宝可梦 fit 火狐狸",
-            "ko": "653 봉제인형 Pokémon fit 푸호꼬",
-            "en": "653 ぬいぐるみ Pokémon fit フォッコ"
+            "ja": "HELLO! GOOD SMILE 鹿目まどか",
+            "zh": "HELLO! GOOD SMILE 鹿目圆",
+            "ko": "HELLO! GOOD SMILE 카나메 마도카",
+            "en": "HELLO! GOOD SMILE 鹿目まどか"
           },
-          "release_date": null,
-          "price_jpy": 1430,
+          "release_date": "2022-11",
+          "price_jpy": 1700,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "pokemon"
+            "madoka"
           ],
           "change_reasons": [
-            "name"
+            "image",
+            "source"
           ],
           "source_ids": [
-            "pokemon_center_jp"
+            "good_smile_madoka_en"
           ],
           "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329366579.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329366944",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "695 ぬいぐるみ ポケモン fit エレザード",
-            "zh": "695 毛绒玩偶 宝可梦 fit 光电伞蜥",
-            "ko": "695 봉제인형 Pokémon fit 일레도리자드",
-            "en": "695 ぬいぐるみ Pokémon fit エレザード"
-          },
-          "release_date": null,
-          "price_jpy": 1760,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329366944.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329427867",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "784 ぬいぐるみ ポケモン fit ジャラランガ",
-            "zh": "784 毛绒玩偶 宝可梦 fit 杖尾鳞甲龙",
-            "ko": "784 봉제인형 Pokémon fit 짜랑고우거",
-            "en": "784 ぬいぐるみ Pokémon fit ジャラランガ"
-          },
-          "release_date": null,
-          "price_jpy": 1980,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329427867.html"
+            "https://www.goodsmile.info/ja/product/12956/"
           ]
         }
       ],
@@ -1725,7 +1936,46 @@
         }
       ],
       "watched": [],
-      "merged": [],
+      "merged": [
+        {
+          "kit_id": "academy-2042",
+          "change_type": "removed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "몬콜레",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "몬콜레 MM 메가한카리아스",
+            "zh": "몬콜레 MM 메가한카리아스",
+            "ko": "몬콜레 MM 메가한카리아스",
+            "en": "몬콜레 MM 메가한카리아스"
+          },
+          "release_date": "2025-12",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "academy_kr"
+          ],
+          "source_urls": [
+            "https://academy.co.kr/product/detail.html?product_no=2042"
+          ],
+          "merged_into": "pokemon-center-4904810096382"
+        }
+      ],
       "backfilled": [
         {
           "kit_id": "lego-978832534844-1",
@@ -2004,7 +2254,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 10(土)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 10(土)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/10(土)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/10(토) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 10(土)15:00≫"
           },
           "release_date": null,
@@ -2044,7 +2294,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 11(日)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 11(日)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/11(日)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/11(일) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 11(日)15:00≫"
           },
           "release_date": null,
@@ -2084,7 +2334,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 17(土)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 17(土)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/17(土)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/17(토) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 17(土)15:00≫"
           },
           "release_date": null,
@@ -2124,7 +2374,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 18(日)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 18(日)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/18(日)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/18(일) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 18(日)15:00≫"
           },
           "release_date": null,
@@ -2164,7 +2414,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 24(土)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 24(土)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/24(土)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/24(토) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 24(土)15:00≫"
           },
           "release_date": null,
@@ -2204,7 +2454,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 25(日)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 25(日)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/25(日)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/25(일) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 25(日)15:00≫"
           },
           "release_date": null,
@@ -2244,7 +2494,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 29(木・祝)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 29(木·祝)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/29(木・祝)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/29(목·공휴일) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 29(木 祝)15:00≫"
           },
           "release_date": null,
@@ -2284,7 +2534,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 3(土)10:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 3(土)10:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/3(土)10:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/3(토) 10:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 3(土)10:00≫"
           },
           "release_date": null,
@@ -2324,7 +2574,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 3(土)20:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 3(土)20:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/3(土)20:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/3(토) 20:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 3(土)20:00≫"
           },
           "release_date": null,
@@ -2364,7 +2614,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 30(金)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 30(金)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/30(金)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/30(금) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 30(金)15:00≫"
           },
           "release_date": null,
@@ -2404,7 +2654,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 4(日)10:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 4(日)10:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/4(日)10:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/4(일) 10:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 4(日)10:00≫"
           },
           "release_date": null,
@@ -2444,7 +2694,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 4(日)20:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 4(日)20:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/4(日)20:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/4(일) 20:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 4(日)20:00≫"
           },
           "release_date": null,
@@ -2484,7 +2734,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 1(土)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪5 / 1(土)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5/1(土)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪5/1(토) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 1(土)15:00≫"
           },
           "release_date": null,
@@ -2524,7 +2774,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 2(日)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪5 / 2(日)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5/2(日)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪5/2(일) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 2(日)15:00≫"
           },
           "release_date": null,
@@ -2564,7 +2814,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 3(月・祝)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪5 / 3(月·祝)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5/3(月・祝)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪5/3(월·공휴일) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 3(月 祝)15:00≫"
           },
           "release_date": null,
@@ -2604,7 +2854,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 4(火・祝)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪5 / 4(火·祝)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5/4(火・祝)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪5/4(화·공휴일) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 4(火 祝)15:00≫"
           },
           "release_date": null,
@@ -2644,7 +2894,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 5(水・祝)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪5 / 5(水·祝)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5/5(水・祝)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪5/5(수·공휴일) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 5(水 祝)15:00≫"
           },
           "release_date": null,
@@ -2684,7 +2934,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 8(土)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪5 / 8(土)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5/8(土)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪5/8(토) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 8(土)15:00≫"
           },
           "release_date": null,
@@ -2724,7 +2974,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 9(日)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪5 / 9(日)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5/9(日)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪5/9(일) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 9(日)15:00≫"
           },
           "release_date": null,
@@ -3068,7 +3318,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 10(土)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 10(土)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/10(土)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/10(토) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 10(土)15:00≫"
           },
           "release_date": null,
@@ -3108,7 +3358,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 11(日)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 11(日)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/11(日)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/11(일) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 11(日)15:00≫"
           },
           "release_date": null,
@@ -3148,7 +3398,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 17(土)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 17(土)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/17(土)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/17(토) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 17(土)15:00≫"
           },
           "release_date": null,
@@ -3188,7 +3438,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 18(日)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 18(日)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/18(日)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/18(일) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 18(日)15:00≫"
           },
           "release_date": null,
@@ -3228,7 +3478,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 24(土)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 24(土)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/24(土)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/24(토) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 24(土)15:00≫"
           },
           "release_date": null,
@@ -3268,7 +3518,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 25(日)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 25(日)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/25(日)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/25(일) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 25(日)15:00≫"
           },
           "release_date": null,
@@ -3308,7 +3558,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 29(木・祝)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 29(木·祝)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/29(木・祝)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/29(목·공휴일) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 29(木 祝)15:00≫"
           },
           "release_date": null,
@@ -3348,7 +3598,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 3(土)10:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 3(土)10:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/3(土)10:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/3(토) 10:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 3(土)10:00≫"
           },
           "release_date": null,
@@ -3388,7 +3638,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 3(土)20:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 3(土)20:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/3(土)20:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/3(토) 20:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 3(土)20:00≫"
           },
           "release_date": null,
@@ -3428,7 +3678,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 30(金)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 30(金)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/30(金)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/30(금) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 30(金)15:00≫"
           },
           "release_date": null,
@@ -3468,7 +3718,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 4(日)10:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 4(日)10:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/4(日)10:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/4(일) 10:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 4(日)10:00≫"
           },
           "release_date": null,
@@ -3508,7 +3758,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 4(日)20:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪4 / 4(日)20:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4/4(日)20:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪4/4(일) 20:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪4 / 4(日)20:00≫"
           },
           "release_date": null,
@@ -3548,7 +3798,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 1(土)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪5 / 1(土)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5/1(土)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪5/1(토) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 1(土)15:00≫"
           },
           "release_date": null,
@@ -3588,7 +3838,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 2(日)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪5 / 2(日)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5/2(日)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪5/2(일) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 2(日)15:00≫"
           },
           "release_date": null,
@@ -3628,7 +3878,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 3(月・祝)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪5 / 3(月·祝)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5/3(月・祝)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪5/3(월·공휴일) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 3(月 祝)15:00≫"
           },
           "release_date": null,
@@ -3668,7 +3918,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 4(火・祝)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪5 / 4(火·祝)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5/4(火・祝)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪5/4(화·공휴일) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 4(火 祝)15:00≫"
           },
           "release_date": null,
@@ -3708,7 +3958,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 5(水・祝)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪5 / 5(水·祝)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5/5(水・祝)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪5/5(수·공휴일) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 5(水 祝)15:00≫"
           },
           "release_date": null,
@@ -3748,7 +3998,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 8(土)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪5 / 8(土)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5/8(土)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪5/8(토) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 8(土)15:00≫"
           },
           "release_date": null,
@@ -3788,7 +4038,7 @@
           "names": {
             "ja": "【大阪】Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 9(日)15:00≫",
             "zh": "【大阪】Fate / Grand Order×真人密室逃脱「谜特异点 FINAL 逃离无间冤罪地狱」门票≪5 / 9(日)15:00≫",
-            "ko": "【大阪】Fate/Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5/9(日)15:00≫",
+            "ko": "【오사카】Fate/Grand Order×리얼 탈출 게임 「수수께끼 특이점 FINAL 무간원죄지옥에서의 탈출」 티켓 ≪5/9(일) 15:00≫",
             "en": "[大阪]Fate / Grand Order×リアル脱出ゲーム「謎特異点 FINAL 無間冤罪地獄からの脱出」チケット≪5 / 9(日)15:00≫"
           },
           "release_date": null,
@@ -4099,8 +4349,8 @@
           },
           "names": {
             "ja": "ビーニーバウンサー （ビリリダマ）",
-            "zh": "ビーニーバウンサー (霹雳电球)",
-            "ko": "ビーニーバウンサー （ビリリダマ）",
+            "zh": "Beanie Bouncer (霹雳电球)",
+            "ko": "비니 바운서 (찌리리공)",
             "en": "ビーニーバウンサー (ビリリダマ)"
           },
           "release_date": null,
@@ -4136,8 +4386,8 @@
           },
           "names": {
             "ja": "ビーニーバウンサー （マスターボール）",
-            "zh": "ビーニーバウンサー (大师球)",
-            "ko": "ビーニーバウンサー （マスター볼）",
+            "zh": "Beanie Bouncer (大师球)",
+            "ko": "비니 바운서 (마스터볼)",
             "en": "ビーニーバウンサー (マスターBall)"
           },
           "release_date": null,
@@ -4173,8 +4423,8 @@
           },
           "names": {
             "ja": "マスコット ポケモンドールズ クワッス",
-            "zh": "挂件 ポケモンドールズ 润水鸭",
-            "ko": "マスコット 포켓몬ドールズ クワッス",
+            "zh": "挂件 Pokémon Dolls 润水鸭",
+            "ko": "마스코트 포켓몬 돌즈 꾸왁스",
             "en": "マスコット Pokemonドールズ クワッス"
           },
           "release_date": null,
@@ -5893,7 +6143,7 @@
           "names": {
             "ja": "HG 1 / 144 赤いガンダム用 拡張セット",
             "zh": "HG 1 / 144 红色高达用 扩张套装",
-            "ko": "HG 1/144 赤い건담用 확장 세트",
+            "ko": "HG 1/144 붉은 건담용 확장 세트",
             "en": "HG 1 / 144 赤いGundam用 Expansion Set"
           },
           "release_date": null,
@@ -9619,7 +9869,7 @@
           },
           "names": {
             "ja": "MG 1 / 100 スペルビア ジンクス",
-            "zh": "MG 1 / 100 スペルビア GN-X",
+            "zh": "MG 1 / 100 斯佩尔比亚GN-X",
             "ko": "MG 1/100 스페르비아 진엑스",
             "en": "MG 1 / 100 スペルビア ジンクス"
           },
@@ -9661,7 +9911,7 @@
           "names": {
             "ja": "CX-00 【B4ストア限定】 バハムートブリッツBK1-50I メタルコート:ブラック",
             "zh": "CX-00 【B4商店限定】 龙王闪击BK1-50I 金属镀层:黑色",
-            "ko": "CX-00 【B4ストア한정】 バハムート블리츠BK1-50I メタルコート:ブラック",
+            "ko": "CX-00 【B4 스토어 한정】 바하무트블리츠 BK1-50I 메탈 코트:블랙",
             "en": "CX-00 [B4ストアLimited] バハムートBlitzBK1-50I メタルコート:ブラック"
           },
           "release_date": "2026-12-26",
@@ -9706,7 +9956,7 @@
           "names": {
             "ja": "ＭＧ 1 / 100 アドヴァンスドジンクス",
             "zh": "MG 1 / 100 先进GN-X",
-            "ko": "MG 1/100 アドヴァンスドジンクス",
+            "ko": "MG 1/100 어드밴스드 징크스",
             "en": "ＭＧ 1 / 100 アドヴァンスドジンクス"
           },
           "release_date": null,
@@ -9747,7 +9997,7 @@
           "names": {
             "ja": "ポケットモンスターPCクッション ミミッキュ",
             "zh": "宝可梦PC抱枕 谜拟丘",
-            "ko": "ポケットモンスターPCクッション ミミッキュ",
+            "ko": "포켓몬스터 PC 쿠션 따라큐",
             "en": "ポケットモンスターPCクッション ミミッキュ"
           },
           "release_date": "2027-06",
@@ -9784,8 +10034,8 @@
           },
           "names": {
             "ja": "機動戦士ガンダム 水星の魔女 ててこれ",
-            "zh": "机动战士高达 水星的魔女 ててこれ",
-            "ko": "기동전사 건담 수성의 마녀 ててこれ",
+            "zh": "机动战士高达 水星的魔女 Tetekore",
+            "ko": "기동전사 건담 수성의 마녀 테테코레",
             "en": "Mobile Suit Gundam The Witch from Mercury ててこれ"
           },
           "release_date": "2027-06",
@@ -9822,8 +10072,8 @@
           },
           "names": {
             "ja": "機動戦士ガンダム 水星の魔女 はぐキャラコレクション",
-            "zh": "机动战士高达 水星的魔女 はぐキャラコレクション",
-            "ko": "기동전사 건담 수성의 마녀 はぐキャラコレクション",
+            "zh": "机动战士高达 水星的魔女 拥抱角色收藏",
+            "ko": "기동전사 건담 수성의 마녀 허그 캐릭터 컬렉션",
             "en": "Mobile Suit Gundam The Witch from Mercury はぐキャラコレクション"
           },
           "release_date": "2027-06",
@@ -9860,8 +10110,8 @@
           },
           "names": {
             "ja": "STRICT-G ALPHA LIGHT MA-1 NATUS『機動戦士ガンダム水星の魔女』アスティカシア高等専門学園モデル",
-            "zh": "STRICT-G ALPHA LIGHT MA-1 NATUS『机动战士高达 水星的魔女』阿斯提卡西亚高等専門学園模型",
-            "ko": "STRICT-G ALPHA LIGHT MA-1 NATUS『기동전사 건담수성의 마녀』アスティカシア高等専門学園モデル",
+            "zh": "STRICT-G ALPHA LIGHT MA-1 NATUS『机动战士高达 水星的魔女』阿斯提卡西亚高等专门学园款",
+            "ko": "STRICT-G ALPHA LIGHT MA-1 NATUS『기동전사 건담 수성의 마녀』 아스티카시아 고등전문학원 모델",
             "en": "STRICT-G ALPHA LIGHT MA-1 NATUS『Mobile Suit Gundam The Witch from Mercury』アスティカシア高等専門学園モデル"
           },
           "release_date": "2027-04",
@@ -9898,8 +10148,8 @@
           },
           "names": {
             "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』Tシャツ アスティカシア高等専門学園ロゴ",
-            "zh": "STRICT-G『机动战士高达 水星的魔女』T恤 阿斯提卡西亚高等専門学園标志",
-            "ko": "STRICT-G『기동전사 건담 수성의 마녀』Tシャツ アスティカシア高等専門学園ロゴ",
+            "zh": "STRICT-G『机动战士高达 水星的魔女』T恤 阿斯提卡西亚高等专门学园标志",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』 티셔츠 아스티카시아 고등전문학원 로고",
             "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』Tシャツ アスティカシア高等専門学園ロゴ"
           },
           "release_date": "2027-04",
@@ -9937,7 +10187,7 @@
           "names": {
             "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』Tシャツ ガンダム・エアリアル",
             "zh": "STRICT-G『机动战士高达 水星的魔女』T恤 高达·风灵",
-            "ko": "STRICT-G『기동전사 건담 수성의 마녀』Tシャツ 건담・エアリアル",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』 티셔츠 건담 에어리얼",
             "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』Tシャツ Gundam エアリアル"
           },
           "release_date": "2027-04",
@@ -9975,7 +10225,7 @@
           "names": {
             "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』Tシャツ スレッタ・マーキュリー",
             "zh": "STRICT-G『机动战士高达 水星的魔女』T恤 斯莱塔·墨丘利",
-            "ko": "STRICT-G『기동전사 건담 수성의 마녀』Tシャツ スレッタ・マーキュリー",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』 티셔츠 슬레타 머큐리",
             "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』Tシャツ スレッタ マーキュリー"
           },
           "release_date": "2027-04",
@@ -10012,8 +10262,8 @@
           },
           "names": {
             "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』パーカー アスティカシア高等専門学園 ロゴ",
-            "zh": "STRICT-G『机动战士高达 水星的魔女』パーカー 阿斯提卡西亚高等専門学園 标志",
-            "ko": "STRICT-G『기동전사 건담 수성의 마녀』パーカー アスティカシア高等専門学園 ロゴ",
+            "zh": "STRICT-G『机动战士高达 水星的魔女』连帽衫 阿斯提卡西亚高等专门学园 标志",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』 후드 아스티카시아 고등전문학원 로고",
             "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』パーカー アスティカシア高等専門学園 ロゴ"
           },
           "release_date": "2027-04",
@@ -10050,8 +10300,8 @@
           },
           "names": {
             "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』ピンズ アスティカシア高等専門学園 ホルダーロゴ",
-            "zh": "STRICT-G『机动战士高达 水星的魔女』ピンズ 阿斯提卡西亚高等専門学園 ホルダーロゴ",
-            "ko": "STRICT-G『기동전사 건담 수성의 마녀』ピンズ アスティカシア高等専門学園 ホルダーロゴ",
+            "zh": "STRICT-G『机动战士高达 水星的魔女』徽章 阿斯提卡西亚高等专门学园 Holder标志",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』 핀 배지 아스티카시아 고등전문학원 홀더 로고",
             "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』ピンズ アスティカシア高等専門学園 ホルダーロゴ"
           },
           "release_date": "2027-04",
@@ -10088,8 +10338,8 @@
           },
           "names": {
             "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』長袖Tシャツ ガンダム・エアリアル シルエット",
-            "zh": "STRICT-G『机动战士高达 水星的魔女』長袖T恤 高达·风灵 轮廓装备",
-            "ko": "STRICT-G『기동전사 건담 수성의 마녀』長袖Tシャツ 건담・エアリアル シルエット",
+            "zh": "STRICT-G『机动战士高达 水星的魔女』长袖T恤 风灵高达 剪影",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』 긴팔 티셔츠 건담 에어리얼 실루엣",
             "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』長袖Tシャツ Gundam エアリアル シルエット"
           },
           "release_date": "2027-04",
@@ -10126,8 +10376,8 @@
           },
           "names": {
             "ja": "STRICT-G『機動戦士ガンダム 水星の魔女』長袖Tシャツ ガンダム・エアリアルロゴ",
-            "zh": "STRICT-G『机动战士高达 水星的魔女』長袖T恤 高达·风灵标志",
-            "ko": "STRICT-G『기동전사 건담 수성의 마녀』長袖Tシャツ 건담・エアリアルロゴ",
+            "zh": "STRICT-G『机动战士高达 水星的魔女』长袖T恤 风灵高达标志",
+            "ko": "STRICT-G『기동전사 건담 수성의 마녀』 긴팔 티셔츠 건담 에어리얼 로고",
             "en": "STRICT-G『Mobile Suit Gundam The Witch from Mercury』長袖Tシャツ Gundam エアリアルロゴ"
           },
           "release_date": "2027-04",
@@ -10164,8 +10414,8 @@
           },
           "names": {
             "ja": "HG 1 / 144 流星号(グレイズ改参)",
-            "zh": "HG 1 / 144 流星号(格雷兹改参)",
-            "ko": "HG 1/144 流星号(그레이즈改参)",
+            "zh": "HG 1 / 144 流星号(格雷兹改三)",
+            "ko": "HG 1/144 류세이고 (그레이즈 카이 3)",
             "en": "HG 1 / 144 流星号(Graze改参)"
           },
           "release_date": "2027-02",
@@ -10202,8 +10452,8 @@
           },
           "names": {
             "ja": "HG 1 / 144 ガンダムルブリスジウツー",
-            "zh": "HG 1 / 144 ガンダムルブリスジウツー",
-            "ko": "HG 1/144 건담ルブリスジウツー",
+            "zh": "HG 1 / 144 魔灵高达·吉乌2",
+            "ko": "HG 1/144 건담 루브리스 지우 투",
             "en": "HG 1 / 144 Gundamルブリスジウツー"
           },
           "release_date": "2027-01",
@@ -10240,8 +10490,8 @@
           },
           "names": {
             "ja": "HG 1 / 144 リーベン・ヴォルフ (スペース・ウルフ隊仕様)(A.O.Z RE-BOOT版)",
-            "zh": "HG 1 / 144 利本·沃尔夫 (スペース・ウルフ隊样式)(A.O.Z RE-BOOT版)",
-            "ko": "HG 1/144 リーベン・ヴォルフ (スペース・ウルフ隊사양)(A.O.Z RE-BOOT版)",
+            "zh": "HG 1 / 144 利本·沃尔夫 (太空狼队样式)(A.O.Z RE-BOOT版)",
+            "ko": "HG 1/144 리벤 볼프 (스페이스 울프대 사양) (A.O.Z RE-BOOT판)",
             "en": "HG 1 / 144 リーベン ヴォルフ (スペース ウルフ隊Type)(A.O.Z RE-BOOT版)"
           },
           "release_date": "2027-01",
@@ -10319,8 +10569,8 @@
           },
           "names": {
             "ja": "UX-22 バニッシュルシファーWW",
-            "zh": "UX-22 バニッシュルシファーWW",
-            "ko": "UX-22 バニッシュルシファーWW",
+            "zh": "UX-22 消失路西法WW",
+            "ko": "UX-22 배니시루시퍼 WW",
             "en": "UX-22 バニッシュルシファーWW"
           },
           "release_date": "2026-12-26",
@@ -11221,7 +11471,7 @@
           },
           "names": {
             "ja": "MG 1 / 100 スペルビア ジンクス",
-            "zh": "MG 1 / 100 スペルビア GN-X",
+            "zh": "MG 1 / 100 斯佩尔比亚GN-X",
             "ko": "MG 1/100 스페르비아 진엑스",
             "en": "MG 1 / 100 スペルビア ジンクス"
           },
@@ -11263,7 +11513,7 @@
           "names": {
             "ja": "CX-00 【B4ストア限定】 バハムートブリッツBK1-50I メタルコート:ブラック",
             "zh": "CX-00 【B4商店限定】 龙王闪击BK1-50I 金属镀层:黑色",
-            "ko": "CX-00 【B4ストア한정】 バハムート블리츠BK1-50I メタルコート:ブラック",
+            "ko": "CX-00 【B4 스토어 한정】 바하무트블리츠 BK1-50I 메탈 코트:블랙",
             "en": "CX-00 [B4ストアLimited] バハムートBlitzBK1-50I メタルコート:ブラック"
           },
           "release_date": "2026-12-26",
@@ -11852,7 +12102,7 @@
           "names": {
             "ja": "ＭＧ 1 / 100 アドヴァンスドジンクス",
             "zh": "MG 1 / 100 先进GN-X",
-            "ko": "MG 1/100 アドヴァンスドジンクス",
+            "ko": "MG 1/100 어드밴스드 징크스",
             "en": "ＭＧ 1 / 100 アドヴァンスドジンクス"
           },
           "release_date": null,
@@ -11896,7 +12146,7 @@
           "names": {
             "ja": "CX-00 【アプリ・イベント限定】 ウィザードアークR4-55LO メタルコート:ブラック",
             "zh": "CX-00 【App/活动限定】 魔导至尊R4-55LO 金属镀层:黑色",
-            "ko": "CX-00 【アプリ・イベント한정】 ウィザードアークR4-55LO メタルコート:ブラック",
+            "ko": "CX-00 【앱·이벤트 한정】 위저드아크 R4-55LO 메탈 코트:블랙",
             "en": "CX-00 [アプリ イベントLimited] ウィザードアークR4-55LO メタルコート:ブラック"
           },
           "release_date": "2025-08-09",
@@ -11941,7 +12191,7 @@
           "names": {
             "ja": "ＰＧ 1 / 60 ガンダムエクシア クリアカラーボディ",
             "zh": "PG 1 / 60 能天使高达 透明机身",
-            "ko": "PG 1/60 건담엑시아 클리어 컬러ボディ",
+            "ko": "PG 1/60 건담 엑시아 클리어 컬러 바디",
             "en": "ＰＧ 1 / 60 Gundam Exia Clear Colorボディ"
           },
           "release_date": "2019-04",
@@ -11981,8 +12231,8 @@
           },
           "names": {
             "ja": "ＨＧ 1 / 144 量産型リコ専用ザク",
-            "zh": "HG 1 / 144 量产型リコ专用扎古",
-            "ko": "HG 1/144 양산형リコ전용자쿠",
+            "zh": "HG 1 / 144 量产型里科专用扎古",
+            "ko": "HG 1/144 양산형 리코 전용 자쿠",
             "en": "ＨＧ 1 / 144 Mass Production TypeリコCustomZaku"
           },
           "release_date": "2024-01",
@@ -12020,7 +12270,7 @@
           "names": {
             "ja": "ＨＧ 1 / 144 ナラティブガンダム用 Ｂ装備拡張セット",
             "zh": "HG 1 / 144 叙事高达用 B装备扩张套装",
-            "ko": "HG 1/144 ナラティブ건담用 B장비확장 세트",
+            "ko": "HG 1/144 내러티브 건담용 B장비 확장 세트",
             "en": "ＨＧ 1 / 144 ナラティブGundam用 ＢEquipmentExpansion Set"
           },
           "release_date": "2019-04",
@@ -12143,8 +12393,8 @@
           },
           "names": {
             "ja": "＜SIDE MF＞ ボルトガンダム マーシャルアクション",
-            "zh": "<SIDE MF> 雷霆高达 マーシャルアクション",
-            "ko": "＜SIDE MF＞ ボルト건담 マーシャルアクション",
+            "zh": "<SIDE MF> 雷霆高达 格斗动作版",
+            "ko": "＜SIDE MF＞ 볼트 건담 마셜 액션",
             "en": "＜SIDE MF＞ ボルトGundam マーシャルアクション"
           },
           "release_date": "2027-06",
@@ -12181,8 +12431,8 @@
           },
           "names": {
             "ja": "＜SIDE MF＞ シャイニングガンダム マーシャルアクション",
-            "zh": "<SIDE MF> 闪光高达 マーシャルアクション",
-            "ko": "＜SIDE MF＞ シャイニング건담 マーシャルアクション",
+            "zh": "<SIDE MF> 闪光高达 格斗动作版",
+            "ko": "＜SIDE MF＞ 샤이닝 건담 마셜 액션",
             "en": "＜SIDE MF＞ シャイニングGundam マーシャルアクション"
           },
           "release_date": "2027-05",
@@ -13856,8 +14106,8 @@
           },
           "names": {
             "ja": "スパイラル・ラダー「DNA」",
-            "zh": "スパイラル・ラダー「DNA」",
-            "ko": "スパイラル・ラダー「DNA」",
+            "zh": "Spiral Ladder「DNA」",
+            "ko": "스파이럴 래더 「DNA」",
             "en": "スパイラル ラダー「DNA」"
           },
           "release_date": "2027-02-24",

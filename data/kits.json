@@ -21514,7 +21514,7 @@
       "work_title": "FGO",
       "release_date": "2027-07",
       "price_jpy": 26400,
-      "is_limited": true,
+      "is_limited": false,
       "data_status": "verified",
       "source_urls": [
         "https://online.aniplex.co.jp/itemGAiqVmXc.html"
@@ -289625,7 +289625,8 @@
       "is_limited": true,
       "data_status": "needs_review",
       "source_urls": [
-        "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102663740000&grp_id=5325"
+        "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102663740000&grp_id=5325",
+        "https://p-bandai.jp/item/item-1000261209/"
       ],
       "source_refs": [
         {
@@ -289688,13 +289689,25 @@
             "release_date"
           ],
           "confidence": "medium"
+        },
+        {
+          "source_id": "p_bandai_jp",
+          "url": "https://p-bandai.jp/item/item-1000261209/",
+          "fields": [
+            "source_urls",
+            "sales_channel"
+          ],
+          "confidence": "high"
         }
       ],
       "tags": [
         "gunpla",
-        "bandai spirits import"
+        "bandai spirits import",
+        "premium bandai jp",
+        "p-bandai jp",
+        "official store"
       ],
-      "notes": "Imported from BANDAI SPIRITS product search. Release text: 2024年02月予定.",
+      "notes": "Imported from BANDAI SPIRITS product search. Release text: 2024年02月予定. Premium Bandai Japan official store link recovered from the Japanese BANDAI SPIRITS product page.",
       "is_premium_bandai": true,
       "premium_bandai": {
         "availability": null,
@@ -296238,8 +296251,8 @@
       "data_status": "needs_review",
       "source_urls": [
         "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102657299000&grp_id=5325",
-        "https://p-bandai.jp/item/item-1000256700/",
-        "https://p-bandai.jp/item/item-1000260727/"
+        "https://p-bandai.jp/item/item-1000260727/",
+        "https://p-bandai.jp/item/item-1000256700/"
       ],
       "source_refs": [
         {
@@ -516077,7 +516090,7 @@
       "universe": "UC",
       "work_title": "Z",
       "release_date": "2015-06",
-      "price_jpy": 7150,
+      "price_jpy": 7590,
       "is_limited": true,
       "is_premium_bandai": true,
       "premium_bandai": {
@@ -2248036,7 +2248049,6 @@
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw8cfba3f1/items/title-M/madoka-magica/FGR/kaiten-sayaka-ns/11.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwcd154d90/items/title-M/madoka-magica/FGR/kaiten-sayaka-ns/12.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwcb0cf66f/items/title-M/madoka-magica/FGR/kaiten-sayaka-ns/13.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1147371/S6T29E5H47qRMFGBA8efnzwCJ1Uskbix.jpg",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12606_main",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12606_photo_1",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12606_photo_2",
@@ -2248059,26 +2248071,12 @@
       "data_status": "verified",
       "source_urls": [
         "https://online.aniplex.co.jp/itemMDrePKqw04.html",
-        "https://www.goodsmile.com/ja/product/1147371",
         "https://www.claynel.jp/products/?item_id=12606"
       ],
       "source_refs": [
         {
           "source_id": "aniplex_plus_madoka_jp",
           "url": "https://online.aniplex.co.jp/itemMDrePKqw04.html",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1147371",
           "fields": [
             "names",
             "images",
@@ -2248108,7 +2248106,6 @@
         "aniplex plus",
         "aniplex",
         "madoka_scale",
-        "good smile",
         "claynel"
       ],
       "notes": "Imported from the Aniplex+ official store (Madoka keyword search).",
@@ -2248177,7 +2248174,6 @@
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw17785809/items/title-M/madoka-magica/FGR/kaiten-kyouko-ns/11.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw95876fc2/items/title-M/madoka-magica/FGR/kaiten-kyouko-ns/12.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw38d1c2d3/items/title-M/madoka-magica/FGR/kaiten-kyouko-ns/13.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1147372/haxdwq6jeXJrA7YL1iRM2ksg3SGPZUEn.jpg",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12607_main",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12607_photo_1",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12607_photo_2",
@@ -2248199,26 +2248195,12 @@
       "data_status": "verified",
       "source_urls": [
         "https://online.aniplex.co.jp/itemMDrePKqw05.html",
-        "https://www.goodsmile.com/ja/product/1147372",
         "https://www.claynel.jp/products/?item_id=12607"
       ],
       "source_refs": [
         {
           "source_id": "aniplex_plus_madoka_jp",
           "url": "https://online.aniplex.co.jp/itemMDrePKqw05.html",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1147372",
           "fields": [
             "names",
             "images",
@@ -2248248,7 +2248230,6 @@
         "aniplex plus",
         "aniplex",
         "madoka_scale",
-        "good smile",
         "claynel"
       ],
       "notes": "Imported from the Aniplex+ official store (Madoka keyword search).",
@@ -2248326,8 +2248307,7 @@
         "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_8",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_9",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_10",
-        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_11",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1146449/g58kzaVJ036qFd49PMBpNmLK7fUsWGuZ.jpg"
+        "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_11"
       ],
       "universe": "Madoka",
       "work_title": "Walpurgisnacht: Rising",
@@ -2248337,8 +2248317,7 @@
       "data_status": "verified",
       "source_urls": [
         "https://online.aniplex.co.jp/itemMDrePKqw02.html",
-        "https://www.claynel.jp/products/?item_id=12521",
-        "https://www.goodsmile.com/ja/product/1146449"
+        "https://www.claynel.jp/products/?item_id=12521"
       ],
       "source_refs": [
         {
@@ -2248366,19 +2248345,6 @@
             "work_title"
           ],
           "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1146449",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
         }
       ],
       "tags": [
@@ -2248386,8 +2248352,7 @@
         "aniplex plus",
         "aniplex",
         "madoka_scale",
-        "claynel",
-        "good smile"
+        "claynel"
       ],
       "notes": "Imported from the Aniplex+ official store (Madoka keyword search).",
       "series": {
@@ -2248467,8 +2248432,7 @@
         "https://www.claynel.jp/SYS/CONTENTS/goods_12520_photo_8",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12520_photo_9",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12520_photo_10",
-        "https://www.claynel.jp/SYS/CONTENTS/goods_12520_photo_11",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1146889/htprm3qaCvb49VZniUgKdL6cJBej58Hw.jpg"
+        "https://www.claynel.jp/SYS/CONTENTS/goods_12520_photo_11"
       ],
       "universe": "Madoka",
       "work_title": "Walpurgisnacht: Rising",
@@ -2248478,8 +2248442,7 @@
       "data_status": "verified",
       "source_urls": [
         "https://online.aniplex.co.jp/itemMDrePKqw03.html",
-        "https://www.claynel.jp/products/?item_id=12520",
-        "https://www.goodsmile.com/ja/product/1146889"
+        "https://www.claynel.jp/products/?item_id=12520"
       ],
       "source_refs": [
         {
@@ -2248507,19 +2248470,6 @@
             "work_title"
           ],
           "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1146889",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
         }
       ],
       "tags": [
@@ -2248527,8 +2248477,7 @@
         "aniplex plus",
         "aniplex",
         "madoka_scale",
-        "claynel",
-        "good smile"
+        "claynel"
       ],
       "notes": "Imported from the Aniplex+ official store (Madoka keyword search).",
       "series": {
@@ -2248604,8 +2248553,7 @@
         "https://www.claynel.jp/SYS/CONTENTS/goods_12405_photo_7",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12405_photo_8",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12405_photo_9",
-        "https://www.claynel.jp/SYS/CONTENTS/goods_12405_photo_10",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1146448/9SiTXswDd8tz2yYkAgQcERjF0Zm75vq6.jpg"
+        "https://www.claynel.jp/SYS/CONTENTS/goods_12405_photo_10"
       ],
       "universe": "Madoka",
       "work_title": "Walpurgisnacht: Rising",
@@ -2248615,8 +2248563,7 @@
       "data_status": "verified",
       "source_urls": [
         "https://online.aniplex.co.jp/itemMDrePKqw.html",
-        "https://www.claynel.jp/products/?item_id=12405",
-        "https://www.goodsmile.com/ja/product/1146448"
+        "https://www.claynel.jp/products/?item_id=12405"
       ],
       "source_refs": [
         {
@@ -2248644,19 +2248591,6 @@
             "work_title"
           ],
           "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1146448",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
         }
       ],
       "tags": [
@@ -2248664,8 +2248598,7 @@
         "aniplex plus",
         "aniplex",
         "madoka_scale",
-        "claynel",
-        "good smile"
+        "claynel"
       ],
       "notes": "Imported from the Aniplex+ official store (Madoka keyword search).",
       "series": {
@@ -2248730,8 +2248663,7 @@
         "https://www.claynel.jp/SYS/CONTENTS/goods_12526_photo_6",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12526_photo_7",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12526_photo_8",
-        "https://www.claynel.jp/SYS/CONTENTS/goods_12526_photo_9",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1146963/3DR06qQVfpJhyPvag5cE82zHUbwFdsx4.jpg"
+        "https://www.claynel.jp/SYS/CONTENTS/goods_12526_photo_9"
       ],
       "universe": "Madoka",
       "work_title": "Walpurgisnacht: Rising",
@@ -2248741,8 +2248673,7 @@
       "data_status": "verified",
       "source_urls": [
         "https://online.aniplex.co.jp/itemRfedMPeC.html",
-        "https://www.claynel.jp/products/?item_id=12526",
-        "https://www.goodsmile.com/ja/product/1146963"
+        "https://www.claynel.jp/products/?item_id=12526"
       ],
       "source_refs": [
         {
@@ -2248770,19 +2248701,6 @@
             "work_title"
           ],
           "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1146963",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
         }
       ],
       "tags": [
@@ -2248791,8 +2248709,7 @@
         "aniplex",
         "madoka_action",
         "buzzmod.",
-        "claynel",
-        "good smile"
+        "claynel"
       ],
       "notes": "Imported from the Aniplex+ official store (Madoka keyword search).",
       "series": {
@@ -2248939,8 +2248856,7 @@
         "https://www.claynel.jp/SYS/CONTENTS/goods_12406_photo_2",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12406_photo_3",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12406_photo_4",
-        "https://www.claynel.jp/SYS/CONTENTS/goods_12406_photo_5",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1146450/WEUJ4V8Q2BqSy0gD7aiAFKsCXGN3h6rM.jpg"
+        "https://www.claynel.jp/SYS/CONTENTS/goods_12406_photo_5"
       ],
       "universe": "Madoka",
       "work_title": "Walpurgisnacht: Rising",
@@ -2248950,8 +2248866,7 @@
       "data_status": "verified",
       "source_urls": [
         "https://online.aniplex.co.jp/itemKBrPGNuO.html",
-        "https://www.claynel.jp/products/?item_id=12406",
-        "https://www.goodsmile.com/ja/product/1146450"
+        "https://www.claynel.jp/products/?item_id=12406"
       ],
       "source_refs": [
         {
@@ -2248979,19 +2248894,6 @@
             "work_title"
           ],
           "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1146450",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
         }
       ],
       "tags": [
@@ -2249000,8 +2248902,7 @@
         "aniplex",
         "madoka_action",
         "buzzmod.",
-        "claynel",
-        "good smile"
+        "claynel"
       ],
       "notes": "Imported from the Aniplex+ official store (Madoka keyword search).",
       "series": {
@@ -2254791,8 +2254692,7 @@
         "https://images.goodsmile.info/cgm/images/product/20230307/14098/112752/large/5db95abab4937d5eca35b910212d80e9.jpg",
         "https://images.goodsmile.info/cgm/images/product/20230307/14098/112754/large/f44bd6ed183ec8ee8f9aeb0d25165510.jpg",
         "https://images.goodsmile.info/cgm/images/product/20230307/14098/112755/large/9f0574c442a39d15c4d79e78c8709288.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20230307/14098/112756/thumb/5dc4cfaa6f03a528e49c9784dc02eee7.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20230307/14098/112757/large/8dee2645d7be809922462c80c07bad05.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20230307/14098/112756/thumb/5dc4cfaa6f03a528e49c9784dc02eee7.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2254801,26 +2254701,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/14098/",
-        "https://www.goodsmile.com/ja/product/11783"
+        "https://www.goodsmile.info/ja/product/14098/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/14098/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/11783",
           "fields": [
             "names",
             "images",
@@ -2254982,8 +2254868,7 @@
         "./assets/catalog/madoka/goodsmile-madoka-13181-01-6956856bd7.jpg",
         "https://images.goodsmile.info/cgm/images/product/20220830/13181/103562/large/0670fc77221606432dbdcc31db7c49f5.jpg",
         "https://images.goodsmile.info/cgm/images/product/20220830/13181/103563/large/5c973d1b120a1f9a7cebcc92d84554fb.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20220830/13181/103564/thumb/06be25ef7d57c7b228277a9f2061f370.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20220830/13181/103565/large/1bc2d0f2099d942bdb534b2173cdc21e.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20220830/13181/103564/thumb/06be25ef7d57c7b228277a9f2061f370.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Rebellion",
@@ -2254992,26 +2254877,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/13181/",
-        "https://www.goodsmile.com/ja/product/10866"
+        "https://www.goodsmile.info/ja/product/13181/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/13181/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/10866",
           "fields": [
             "names",
             "images",
@@ -2255072,8 +2254943,7 @@
         "./assets/catalog/madoka/goodsmile-madoka-13182-01-77d5e0c29e.jpg",
         "https://images.goodsmile.info/cgm/images/product/20220830/13182/103567/large/fadb8f29e17471654f960ca6c708eea9.jpg",
         "https://images.goodsmile.info/cgm/images/product/20220830/13182/103568/large/e39ea019c1500ea1bf8ba288aa6953c4.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20220830/13182/103569/thumb/fe6dac81af0412333187d5b6a3ffa567.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20220830/13182/103570/large/025ac003f5823080911681b8179273b4.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20220830/13182/103569/thumb/fe6dac81af0412333187d5b6a3ffa567.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Rebellion",
@@ -2255082,26 +2254952,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/13182/",
-        "https://www.goodsmile.com/ja/product/10867"
+        "https://www.goodsmile.info/ja/product/13182/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/13182/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/10867",
           "fields": [
             "names",
             "images",
@@ -2255162,8 +2255018,7 @@
         "./assets/catalog/madoka/goodsmile-madoka-13183-01-ae46040150.jpg",
         "https://images.goodsmile.info/cgm/images/product/20220830/13183/103572/large/a761c69163c73e3035b6344bf6580e83.jpg",
         "https://images.goodsmile.info/cgm/images/product/20220830/13183/103573/large/ca95a4b4a10ec4dc70d2f815922fd3fd.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20220830/13183/103574/thumb/955691b67d88150f5df614ead55632e9.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20220830/13183/103575/large/02d9411f35687b6c5402f2d4a37a375c.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20220830/13183/103574/thumb/955691b67d88150f5df614ead55632e9.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Rebellion",
@@ -2255172,26 +2255027,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/13183/",
-        "https://www.goodsmile.com/ja/product/10868"
+        "https://www.goodsmile.info/ja/product/13183/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/13183/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/10868",
           "fields": [
             "names",
             "images",
@@ -2255251,8 +2255092,7 @@
         "./assets/catalog/madoka/goodsmile-madoka-12956-01-342ac4bc72.jpg",
         "https://images.goodsmile.info/cgm/images/product/20220711/12956/101293/large/2b1e9b13fde8cd9c436d634e446bc4d4.jpg",
         "https://images.goodsmile.info/cgm/images/product/20220711/12956/101294/large/1bc009fa8af90bfdb7ddb51c45493ca6.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20220711/12956/101295/thumb/dbcc0153d08be96ecf32c913767a4363.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20220711/12956/101296/large/1a37286b54d7244e21354ee048fced46.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20220711/12956/101295/thumb/dbcc0153d08be96ecf32c913767a4363.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Rebellion",
@@ -2255261,26 +2255101,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/12956/",
-        "https://www.goodsmile.com/ja/product/10641"
+        "https://www.goodsmile.info/ja/product/12956/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/12956/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/10641",
           "fields": [
             "names",
             "images",
@@ -2255341,8 +2255167,7 @@
         "./assets/catalog/madoka/goodsmile-madoka-12957-01-3594f90657.jpg",
         "https://images.goodsmile.info/cgm/images/product/20220711/12957/101298/large/b60615aeee646872561e9b649154314d.jpg",
         "https://images.goodsmile.info/cgm/images/product/20220711/12957/101299/large/24864b71a4703a9dcce22c020c34929d.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20220711/12957/101300/thumb/90c95b549376d605a423f7a4386c87a9.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20220711/12957/101301/large/271ad02104bd594ca7b345119554872e.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20220711/12957/101300/thumb/90c95b549376d605a423f7a4386c87a9.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Rebellion",
@@ -2255351,26 +2255176,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/12957/",
-        "https://www.goodsmile.com/ja/product/10642"
+        "https://www.goodsmile.info/ja/product/12957/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/12957/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/10642",
           "fields": [
             "names",
             "images",
@@ -2255516,8 +2255327,7 @@
         "https://images.goodsmile.info/cgm/images/product/20220214/12329/95269/large/46cb2477e2e672252525b946d439e748.jpg",
         "https://images.goodsmile.info/cgm/images/product/20220214/12329/95270/large/5a90bc8e728e423f7df9f3401656536b.jpg",
         "https://images.goodsmile.info/cgm/images/product/20220214/12329/95271/large/70bfc06e67adfbb21b0e471fd4f6fbda.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20220214/12329/95272/thumb/403b5396efc40c096cf4d038f592abaf.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20220214/12329/95273/large/4f1ccff7560c023ddb6e1f779be52fb0.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20220214/12329/95272/thumb/403b5396efc40c096cf4d038f592abaf.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Rebellion",
@@ -2255526,26 +2255336,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/12329/",
-        "https://www.goodsmile.com/ja/product/10017"
+        "https://www.goodsmile.info/ja/product/12329/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/12329/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/10017",
           "fields": [
             "names",
             "images",
@@ -2255614,8 +2255410,7 @@
         "https://images.goodsmile.info/cgm/images/product/20220214/12330/95280/large/6239b95ad0ddeb6fec4325ec7ba34050.jpg",
         "https://images.goodsmile.info/cgm/images/product/20220214/12330/95281/large/dedec4d71b8323142eab0f07158c51a4.jpg",
         "https://images.goodsmile.info/cgm/images/product/20220214/12330/95282/large/827b6b9ce710f52ec169af7c5536f29e.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20220214/12330/95283/thumb/416742232ceba9849a1c0b3a02522f9e.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20220214/12330/95284/large/78fa85bede509c1a704c74eba43f6e47.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20220214/12330/95283/thumb/416742232ceba9849a1c0b3a02522f9e.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Rebellion",
@@ -2255624,26 +2255419,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/12330/",
-        "https://www.goodsmile.com/ja/product/10018"
+        "https://www.goodsmile.info/ja/product/12330/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/12330/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/10018",
           "fields": [
             "names",
             "images",
@@ -2255974,8 +2255755,7 @@
         "https://images.goodsmile.info/cgm/images/product/20201022/10287/76270/large/4483dc2d34cef4b660b9280d65e42a3d.jpg",
         "https://images.goodsmile.info/cgm/images/product/20201022/10287/76271/large/c2e32ccfbe0d2dce4494a3d5d9d7d175.jpg",
         "https://images.goodsmile.info/cgm/images/product/20201022/10287/76272/large/ec830728ca9a5d0bf58e3af597e54062.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20201022/10287/76274/thumb/bf8369b9d20bd6e2bc3d5a1527c535e0.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20201022/10287/76276/large/801653921a3741cc996ea0e49ac18cd0.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20201022/10287/76274/thumb/bf8369b9d20bd6e2bc3d5a1527c535e0.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Magia Record",
@@ -2255984,26 +2255764,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/10287/",
-        "https://www.goodsmile.com/ja/product/7981"
+        "https://www.goodsmile.info/ja/product/10287/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/10287/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/7981",
           "fields": [
             "names",
             "images",
@@ -2256074,8 +2255840,7 @@
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwc056457d/items/items2000/2929/contents/9877.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwf7697f16/items/items2000/2929/contents/9878.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw47aa30d8/items/items2000/2929/contents/9879.jpg",
-        "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw5d8a8bdc/items/items2000/2929/contents/9880.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20180205/7036/50030/large/b9606b2eb0750121990b3cbffaf8877d.jpg"
+        "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw5d8a8bdc/items/items2000/2929/contents/9880.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Magia Record",
@@ -2256085,8 +2255850,7 @@
       "data_status": "verified",
       "source_urls": [
         "https://www.goodsmile.info/ja/product/7036/",
-        "https://online.aniplex.co.jp/itemJlDPwYxd.html",
-        "https://www.goodsmile.com/ja/product/4756"
+        "https://online.aniplex.co.jp/itemJlDPwYxd.html"
       ],
       "source_refs": [
         {
@@ -2256105,19 +2255869,6 @@
         {
           "source_id": "aniplex_plus_madoka_jp",
           "url": "https://online.aniplex.co.jp/itemJlDPwYxd.html",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/4756",
           "fields": [
             "names",
             "images",
@@ -2256264,8 +2256015,7 @@
         "https://images.goodsmile.info/cgm/images/product/20200319/9370/68417/large/7351fe63b4e07492a785dc3003b72384.jpg",
         "https://images.goodsmile.info/cgm/images/product/20200319/9370/68418/large/108ba133ce5342268424adccf2611af8.jpg",
         "https://images.goodsmile.info/cgm/images/product/20200319/9370/68419/large/814f00b1856a9cac7bdb78862b3a3d28.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20200319/9370/68420/thumb/1bd5f2b4f456d05f9c55638572d4ae3e.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20200319/9370/68421/large/6692073a92d24f95161a25e510fd62c2.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20200319/9370/68420/thumb/1bd5f2b4f456d05f9c55638572d4ae3e.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Magia Record",
@@ -2256274,26 +2256024,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/9370/",
-        "https://www.goodsmile.com/ja/product/7077"
+        "https://www.goodsmile.info/ja/product/9370/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/9370/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/7077",
           "fields": [
             "names",
             "images",
@@ -2256933,7 +2256669,6 @@
         "https://images.goodsmile.info/cgm/images/product/20171218/6958/49391/large/be4a90d69a5502b0367b5f854376fcd6.jpg",
         "https://images.goodsmile.info/cgm/images/product/20171218/6958/49392/large/a9d1438bd9b15c3de21953333771f0be.jpg",
         "https://images.goodsmile.info/cgm/images/product/20171218/6958/49393/thumb/0e66aefd34eeb3b48693eb59c83b6c45.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20171218/6958/49394/large/2b35b7cabf59869816d371721024149e.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwb6576754/items/items2000/2785/contents/9383.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwb5308bcf/items/items2000/2785/contents/9384.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwc9e2154f/items/items2000/2785/contents/9385.jpg",
@@ -2256948,26 +2256683,12 @@
       "data_status": "verified",
       "source_urls": [
         "https://www.goodsmile.info/ja/product/6958/",
-        "https://www.goodsmile.com/ja/product/4679",
         "https://online.aniplex.co.jp/itemQdrXpkoG.html"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/6958/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/4679",
           "fields": [
             "names",
             "images",
@@ -2257233,8 +2256954,7 @@
         "https://images.goodsmile.info/cgm/images/product/20170714/6587/46545/large/a2ded594bd09600186b4a3269c23e6b7.jpg",
         "https://images.goodsmile.info/cgm/images/product/20170714/6587/46546/large/ee5b44569326a93b74d644eede1192c5.jpg",
         "https://images.goodsmile.info/cgm/images/product/20170714/6587/46547/large/2d3404e80fd45d3abda8f91dc1a38d1a.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20170714/6587/46548/thumb/cc88cc356195141ec7695655f22c46bc.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20170714/6587/46542/large/ba5d48eacfdce78d5cd2dcaf8d2bcc3d.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20170714/6587/46548/thumb/cc88cc356195141ec7695655f22c46bc.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2257243,26 +2256963,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/6587/",
-        "https://www.goodsmile.com/ja/product/4315"
+        "https://www.goodsmile.info/ja/product/6587/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/6587/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/4315",
           "fields": [
             "names",
             "images",
@@ -2257330,7 +2257036,6 @@
         "https://images.goodsmile.info/cgm/images/product/20170501/6427/45289/large/f795a6310d3fbc31be95e1a7da5de6c1.jpg",
         "https://images.goodsmile.info/cgm/images/product/20170501/6427/45290/large/6872079c8ae1b08984a3208086da1fc1.jpg",
         "https://images.goodsmile.info/cgm/images/product/20170501/6427/45291/thumb/afcddfd1f91a8d690faeb3e8dce6e564.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20170501/6427/45285/large/5fe7d3da423cb32d908ed43ff4762a63.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwb2e65d6b/items/items2000/2068/contents/7297.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw272abba5/items/items2000/2068/contents/7298.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwaa636ba7/items/items2000/2068/contents/7299.jpg",
@@ -2257345,26 +2257050,12 @@
       "data_status": "verified",
       "source_urls": [
         "https://www.goodsmile.info/ja/product/6427/",
-        "https://www.goodsmile.com/ja/product/4161",
         "https://online.aniplex.co.jp/itemNemaFglS.html"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/6427/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/4161",
           "fields": [
             "names",
             "images",
@@ -2257526,7 +2257217,6 @@
         "https://images.goodsmile.info/cgm/images/product/20170113/6175/43186/large/d76484d05de626ad4e278038a1abb3df.jpg",
         "https://images.goodsmile.info/cgm/images/product/20170113/6175/43187/large/9aca8fb54c94f4e3230aa0b1ff7b5f0f.jpg",
         "https://images.goodsmile.info/cgm/images/product/20170113/6175/43188/thumb/090a6c0df4837d67bd800816a01302eb.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20170113/6175/43182/large/f68e0a37fafe0e0e27b94576e5f2d9d2.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw03dbe602/items/items1000/1827/contents/6421.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw9d1b5d17/items/items1000/1827/contents/6422.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw768bc128/items/items1000/1827/contents/6423.jpg",
@@ -2257541,26 +2257231,12 @@
       "data_status": "verified",
       "source_urls": [
         "https://www.goodsmile.info/ja/product/6175/",
-        "https://www.goodsmile.com/ja/product/3913",
         "https://online.aniplex.co.jp/itemFOrNeLLa.html"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/6175/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/3913",
           "fields": [
             "names",
             "images",
@@ -2258569,8 +2258245,7 @@
         "https://images.goodsmile.info/cgm/images/product/20140924/4624/30577/large/7434e6f888a930dd60b3b33ba7c6d61e.jpg",
         "https://images.goodsmile.info/cgm/images/product/20140924/4624/30578/large/594627243577ae4893c81f8a9ac15af2.jpg",
         "https://images.goodsmile.info/cgm/images/product/20140924/4624/30581/large/4c8839d2d17027a349172e1d95a7bded.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20140924/4624/30579/thumb/ac67a005b2762d6611c745079df1c70b.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20140924/4624/30580/large/593bd2dbac0c8e8a9f5c87f47a05a5db.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20140924/4624/30579/thumb/ac67a005b2762d6611c745079df1c70b.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Rebellion",
@@ -2258579,26 +2258254,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/4624/",
-        "https://www.goodsmile.com/ja/product/2419"
+        "https://www.goodsmile.info/ja/product/4624/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/4624/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/2419",
           "fields": [
             "names",
             "images",
@@ -2259138,8 +2258799,7 @@
         "https://images.goodsmile.info/cgm/images/product/20140310/4249/28086/large/5a7bbe2ca6e075b8c8371a79067916c5.jpg",
         "https://images.goodsmile.info/cgm/images/product/20140310/4249/28087/large/cf3fc3e8a3138e48acab31fa59c787c1.jpg",
         "https://images.goodsmile.info/cgm/images/product/20140310/4249/28088/large/fb30fb4b44e599a6aeffc364b571b3aa.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20140310/4249/28089/thumb/7980c1b6182b4a542a1b9cf8e47e4f1b.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20140310/4249/28090/large/5577f604221fbf6c4a3ecf918ca0b033.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20140310/4249/28089/thumb/7980c1b6182b4a542a1b9cf8e47e4f1b.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Rebellion",
@@ -2259148,26 +2258808,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/4249/",
-        "https://www.goodsmile.com/ja/product/2061"
+        "https://www.goodsmile.info/ja/product/4249/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/4249/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/2061",
           "fields": [
             "names",
             "images",
@@ -2259229,8 +2258875,7 @@
         "https://images.goodsmile.info/cgm/images/product/20140224/4234/27971/large/ab19b833e2e3b68f4dd39ef8622585bd.jpg",
         "https://images.goodsmile.info/cgm/images/product/20140224/4234/27972/large/5df72b2c7ee495e46f91f2325a5bc889.jpg",
         "https://images.goodsmile.info/cgm/images/product/20140224/4234/27973/large/a9a3bd5d81789533b036353e3c7e460f.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20140224/4234/27974/thumb/c11b5a68d9415a53bc6378ef76c701db.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20140224/4234/27975/large/cc41ad0ffa69e7e0b8451c391d6e103e.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20140224/4234/27974/thumb/c11b5a68d9415a53bc6378ef76c701db.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Rebellion",
@@ -2259239,26 +2258884,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/4234/",
-        "https://www.goodsmile.com/ja/product/2046"
+        "https://www.goodsmile.info/ja/product/4234/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/4234/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/2046",
           "fields": [
             "names",
             "images",
@@ -2260018,8 +2259649,7 @@
         "https://images.goodsmile.info/cgm/images/product/20130410/3881/23374/large/af80fc9d02d80b4d4f80d95e3cc6cc2d.jpg",
         "https://images.goodsmile.info/cgm/images/product/20130410/3881/23375/large/dbf5eaee6dbe4613058da8d8d43b1c6b.jpg",
         "https://images.goodsmile.info/cgm/images/product/20130410/3881/23376/large/f9d34d57b60873b6008f39af038598ac.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20130410/3881/23378/thumb/ee48f372979ee0bae5b1475476b7dad2.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20130410/3881/23371/large/5ca1d49733f6df061d2335024e29ec44.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20130410/3881/23378/thumb/ee48f372979ee0bae5b1475476b7dad2.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2260028,26 +2259658,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3881/",
-        "https://www.goodsmile.com/ja/product/1710"
+        "https://www.goodsmile.info/ja/product/3881/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3881/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1710",
           "fields": [
             "names",
             "images",
@@ -2260110,8 +2259726,7 @@
         "https://images.goodsmile.info/cgm/images/product/20130528/3932/24213/large/01737702f2180438132c23614cb67591.jpg",
         "https://images.goodsmile.info/cgm/images/product/20130528/3932/24214/large/b2a594c6719c1edc2308ba380f63a027.jpg",
         "https://images.goodsmile.info/cgm/images/product/20130528/3932/24215/large/3bd18d8e31bbc413bb101d36e9b19a40.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20130528/3932/24217/thumb/1d92d682693198fb7c2a7998cec1ea29.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20130528/3932/24211/large/04bebac5558ba70edb49b2bc25e6613d.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20130528/3932/24217/thumb/1d92d682693198fb7c2a7998cec1ea29.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2260120,26 +2259735,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3932/",
-        "https://www.goodsmile.com/ja/product/1759"
+        "https://www.goodsmile.info/ja/product/3932/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3932/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1759",
           "fields": [
             "names",
             "images",
@@ -2260286,8 +2259887,7 @@
         "https://images.goodsmile.info/cgm/images/product/20111108/3343/16115/large/0c8f1a307ffd291725d9bf9f63ea3def.jpg",
         "https://images.goodsmile.info/cgm/images/product/20111108/3343/16116/large/6eb7779da46a74de3be015c3376c2ea9.jpg",
         "https://images.goodsmile.info/cgm/images/product/20111108/3343/16117/large/714d158aba562b3a9e936935db4d2bf4.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20111108/3343/16119/thumb/1c95f490c38198d11beb873278ed0254.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20111108/3343/16113/large/9c1234c8642602657cbd3a8dd905423a.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20111108/3343/16119/thumb/1c95f490c38198d11beb873278ed0254.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2260296,26 +2259896,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3343/",
-        "https://www.goodsmile.com/ja/product/1183"
+        "https://www.goodsmile.info/ja/product/3343/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3343/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1183",
           "fields": [
             "names",
             "images",
@@ -2260382,8 +2259968,7 @@
         "https://images.goodsmile.info/cgm/images/product/20111214/3419/16585/large/85a11e84c11ed97b85eed28303a337c9.jpg",
         "https://images.goodsmile.info/cgm/images/product/20111214/3419/16586/large/374f47d1cb9878577ef3ca1ee4812a09.jpg",
         "https://images.goodsmile.info/cgm/images/product/20111214/3419/16587/large/24c023fc06ccc037c9c377eb6ffc627a.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20111214/3419/16588/thumb/f63571399258a9d4f7a8d75a0cb710c2.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20111214/3419/16581/large/c9b474aa4f11c44a107d65298f2362c0.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20111214/3419/16588/thumb/f63571399258a9d4f7a8d75a0cb710c2.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2260392,26 +2259977,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3419/",
-        "https://www.goodsmile.com/ja/product/1257"
+        "https://www.goodsmile.info/ja/product/3419/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3419/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1257",
           "fields": [
             "names",
             "images",
@@ -2260557,8 +2260128,7 @@
         "https://images.goodsmile.info/cgm/images/product/20121015/3712/20873/large/33f0df9d92c67e8c580143c3e3be55df.jpg",
         "https://images.goodsmile.info/cgm/images/product/20121015/3712/20874/large/6087a2514cafee000120d3a227d3464c.jpg",
         "https://images.goodsmile.info/cgm/images/product/20121015/3712/20875/large/8acb267d026fc6818b2781b60c7ae258.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20121015/3712/20889/thumb/32937392c322bc7d62aec75116d016f6.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/1542/XwUHeuFQGVT85904zE3J27Ksjb6xNZvq.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20121015/3712/20889/thumb/32937392c322bc7d62aec75116d016f6.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2260567,26 +2260137,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3712/",
-        "https://www.goodsmile.com/ja/product/1542"
+        "https://www.goodsmile.info/ja/product/3712/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3712/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1542",
           "fields": [
             "names",
             "images",
@@ -2260653,8 +2260209,7 @@
         "https://images.goodsmile.info/cgm/images/product/20121024/3720/20984/large/8e5e93f082b660497c729ea98598097b.jpg",
         "https://images.goodsmile.info/cgm/images/product/20121024/3720/20985/large/09cb6f6ea1d0cd981587ce52831741e1.jpg",
         "https://images.goodsmile.info/cgm/images/product/20121024/3720/20986/large/2cc77fbc226053e5ae61491845558e7c.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20121024/3720/20988/thumb/bb3c305cc2672164668ae52ca4747511.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20121024/3720/20981/large/e87975f3b34c45f2720261fbce3d7d5d.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20121024/3720/20988/thumb/bb3c305cc2672164668ae52ca4747511.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2260663,26 +2260218,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3720/",
-        "https://www.goodsmile.com/ja/product/1550"
+        "https://www.goodsmile.info/ja/product/3720/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3720/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1550",
           "fields": [
             "names",
             "images",
@@ -2261215,8 +2260756,7 @@
         "https://images.goodsmile.info/cgm/images/product/20121128/3767/21681/large/a3a3ead3b062718b007df26c8068fadf.jpg",
         "https://images.goodsmile.info/cgm/images/product/20121128/3767/21682/large/125100a7a18dd5fdf3caab51275e57dd.jpg",
         "https://images.goodsmile.info/cgm/images/product/20121128/3767/21683/large/890df3db8e88145847113e33a5344702.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20121128/3767/21685/thumb/c6620611ffb587fab116bd2039bc6fee.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20121128/3767/21678/large/d837adf49fa7a2288405eeb6f351f6f6.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20121128/3767/21685/thumb/c6620611ffb587fab116bd2039bc6fee.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2261225,26 +2260765,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3767/",
-        "https://www.goodsmile.com/ja/product/1596"
+        "https://www.goodsmile.info/ja/product/3767/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3767/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1596",
           "fields": [
             "names",
             "images",
@@ -2261466,8 +2260992,7 @@
         "https://images.goodsmile.info/cgm/images/product/20121015/3713/20885/large/aab5d940ab4273d0102c9135702ea553.jpg",
         "https://images.goodsmile.info/cgm/images/product/20121015/3713/20886/large/f43950226b5a750b24169ef3b6fa8175.jpg",
         "https://images.goodsmile.info/cgm/images/product/20121015/3713/20887/large/dad099b2ae8da6c9a2a896dc0f0d7051.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20121015/3713/20888/thumb/e65f41cb6c57a0b0f9d51acc212bc64e.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20121015/3713/20879/large/62a33dd8c81b05d8a016f969977709d7.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20121015/3713/20888/thumb/e65f41cb6c57a0b0f9d51acc212bc64e.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2261476,26 +2261001,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3713/",
-        "https://www.goodsmile.com/ja/product/1543"
+        "https://www.goodsmile.info/ja/product/3713/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3713/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1543",
           "fields": [
             "names",
             "images",
@@ -2261711,8 +2261222,7 @@
         "./assets/catalog/madoka/goodsmile-madoka-3704-01-037e9b7413.jpg",
         "https://images.goodsmile.info/cgm/images/product/20121003/3704/20762/large/c2be6dbd8db3e2fee56119465a11d306.jpg",
         "https://images.goodsmile.info/cgm/images/product/20121003/3704/20763/large/8f3dacd8c1fdecdc6f3a56e6cf2bab7f.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20121003/3704/20765/thumb/2b0c10a2407d0794524aa1e9096625ce.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20121003/3704/20760/large/0fd6836bb377c650102387c612be28e8.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20121003/3704/20765/thumb/2b0c10a2407d0794524aa1e9096625ce.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2261721,26 +2261231,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3704/",
-        "https://www.goodsmile.com/ja/product/1535"
+        "https://www.goodsmile.info/ja/product/3704/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3704/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1535",
           "fields": [
             "names",
             "images",
@@ -2261954,8 +2261450,7 @@
         "https://images.goodsmile.info/cgm/images/product/20111013/3319/15803/large/a81420f419fbe0207767db57c8c4dc76.jpg",
         "https://images.goodsmile.info/cgm/images/product/20111013/3319/15805/large/2db9493b9fe5e12dc4f1d8e89b5a894e.jpg",
         "https://images.goodsmile.info/cgm/images/product/20111013/3319/15806/large/119e7d796ea61f7616569799d05d8d8e.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20111013/3319/15808/thumb/99ad9ed4a6b6c9b17c7850ec07a1ab46.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20111013/3319/15804/large/f053330d36cb211e7159c876071b893f.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20111013/3319/15808/thumb/99ad9ed4a6b6c9b17c7850ec07a1ab46.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2261964,26 +2261459,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3319/",
-        "https://www.goodsmile.com/ja/product/1159"
+        "https://www.goodsmile.info/ja/product/3319/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3319/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1159",
           "fields": [
             "names",
             "images",
@@ -2262051,8 +2261532,7 @@
         "https://images.goodsmile.info/cgm/images/product/20111130/3398/16420/large/0c3aa578f23f1c8fa2d5960f42955eff.jpg",
         "https://images.goodsmile.info/cgm/images/product/20111130/3398/16421/large/44fc8d17a6945b7087088327f9a6aad1.jpg",
         "https://images.goodsmile.info/cgm/images/product/20111130/3398/16422/large/ab4710f7aaf4f55eb23792077c0374a0.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20111130/3398/16411/thumb/b1a92d52b15bcea5ded63d1937f86d90.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20111130/3398/16418/large/7c315ea3690b2bd48a4bcdc0a24dc8e0.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20111130/3398/16411/thumb/b1a92d52b15bcea5ded63d1937f86d90.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2262061,26 +2261541,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3398/",
-        "https://www.goodsmile.com/ja/product/1236"
+        "https://www.goodsmile.info/ja/product/3398/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3398/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1236",
           "fields": [
             "names",
             "images",
@@ -2262525,8 +2261991,7 @@
         "./assets/catalog/madoka/goodsmile-madoka-3640-01-5efb44e341.jpg",
         "https://images.goodsmile.info/cgm/images/product/20120816/3640/19896/large/78156a47d060dd5ed942f010fb2191a2.jpg",
         "https://images.goodsmile.info/cgm/images/product/20120816/3640/19897/large/3a160f7739c8d59b464253b8d4e4e9e8.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20120816/3640/19899/thumb/712c0e3a2b95764721e87e14bba165e2.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20120816/3640/19894/large/3b63e7a8397a1c6f28d6a844e2736657.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20120816/3640/19899/thumb/712c0e3a2b95764721e87e14bba165e2.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2262535,26 +2262000,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3640/",
-        "https://www.goodsmile.com/ja/product/1471"
+        "https://www.goodsmile.info/ja/product/3640/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3640/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1471",
           "fields": [
             "names",
             "images",
@@ -2263001,8 +2262452,7 @@
         "https://images.goodsmile.info/cgm/images/product/20110906/3281/15357/large/9011d1b586142803b9ced51d413bc4fa.jpg",
         "https://images.goodsmile.info/cgm/images/product/20110906/3281/15358/large/8518143c097b2279776d200641b21649.jpg",
         "https://images.goodsmile.info/cgm/images/product/20110906/3281/15359/large/987367e2aeb0c90bd1513c794956f5d5.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20110906/3281/15360/thumb/5749adcfc406dcad6dfc764164f8a6d7.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20110906/3281/15352/large/c1e733d400a74a4829e39702ef8f0bf4.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20110906/3281/15360/thumb/5749adcfc406dcad6dfc764164f8a6d7.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2263011,26 +2262461,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3281/",
-        "https://www.goodsmile.com/ja/product/1121"
+        "https://www.goodsmile.info/ja/product/3281/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3281/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1121",
           "fields": [
             "names",
             "images",
@@ -2263259,8 +2262695,7 @@
         "https://images.goodsmile.info/cgm/images/product/20110721/3223/14697/large/12c0240a7c258f04b4283c3f6f8f7e74.jpg",
         "https://images.goodsmile.info/cgm/images/product/20110721/3223/14698/large/f42410da4d2d7c16367e34a73601f38d.jpg",
         "https://images.goodsmile.info/cgm/images/product/20110721/3223/14699/large/f8c9c9784569ee9838aec7df8bdd30aa.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20110721/3223/14700/thumb/61bbee004f35ec33eae90214335c9f6f.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20110721/3223/14687/large/deae1239ee38ea30ca1a20dae4d46ce9.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20110721/3223/14700/thumb/61bbee004f35ec33eae90214335c9f6f.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2263269,26 +2262704,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3223/",
-        "https://www.goodsmile.com/ja/product/1063"
+        "https://www.goodsmile.info/ja/product/3223/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3223/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1063",
           "fields": [
             "names",
             "images",
@@ -2263359,8 +2262780,7 @@
         "https://images.goodsmile.info/cgm/images/product/20120116/3435/16880/large/f3411930ec9c1d3451439cd0e56b5147.jpg",
         "https://images.goodsmile.info/cgm/images/product/20120116/3435/16881/large/6d46d710b018ac098feefd8f5dc0c5b5.jpg",
         "https://images.goodsmile.info/cgm/images/product/20120116/3435/16882/large/131a0a04e1fc5a52b20b8831bfcc37bf.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20120116/3435/16883/thumb/9b437ecd752a58b885e40807a2da2942.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20120116/3435/16874/large/050a1a8beae316199e4518b03c6f838d.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20120116/3435/16883/thumb/9b437ecd752a58b885e40807a2da2942.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2263369,26 +2262789,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3435/",
-        "https://www.goodsmile.com/ja/product/1273"
+        "https://www.goodsmile.info/ja/product/3435/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3435/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1273",
           "fields": [
             "names",
             "images",
@@ -2263456,8 +2262862,7 @@
         "https://images.goodsmile.info/cgm/images/product/20120116/3436/16891/large/397b3fc7f99152dd40939fe8a441979d.jpg",
         "https://images.goodsmile.info/cgm/images/product/20120116/3436/16892/large/8ebd6e360183a50f6ac8a3583f91f286.jpg",
         "https://images.goodsmile.info/cgm/images/product/20120116/3436/16893/large/8a3d1ffee980347fa7e8feb56e73ed4a.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20120116/3436/16894/thumb/ed839d674a9d5b62b6fd5b2fbbf8a733.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20120116/3436/16887/large/36e3965045a1298c600d165bdbc888d3.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20120116/3436/16894/thumb/ed839d674a9d5b62b6fd5b2fbbf8a733.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2263466,26 +2262871,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3436/",
-        "https://www.goodsmile.com/ja/product/1274"
+        "https://www.goodsmile.info/ja/product/3436/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3436/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1274",
           "fields": [
             "names",
             "images",
@@ -2263555,8 +2262946,7 @@
         "https://images.goodsmile.info/cgm/images/product/20110714/3221/14625/large/8fd7254807842d16e35efcb8f124ce76.jpg",
         "https://images.goodsmile.info/cgm/images/product/20110714/3221/14626/large/14092a892e1f131785bdf20104b41754.jpg",
         "https://images.goodsmile.info/cgm/images/product/20110714/3221/14627/large/34d2f34514d50cf52a7676d872fdb0f7.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20110714/3221/14629/thumb/5f4206b7e0fce773c30ec0faabd5d1b4.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20110714/3221/14621/large/d3dc86b77e4d0e6bbe12ed2814d01ea5.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20110714/3221/14629/thumb/5f4206b7e0fce773c30ec0faabd5d1b4.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2263565,26 +2262955,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3221/",
-        "https://www.goodsmile.com/ja/product/1061"
+        "https://www.goodsmile.info/ja/product/3221/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3221/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1061",
           "fields": [
             "names",
             "images",
@@ -2264180,8 +2263556,7 @@
         "https://images.goodsmile.info/cgm/images/product/20110622/3206/14425/large/307708bebc4f1176b3e9d3803c3b0c72.jpg",
         "https://images.goodsmile.info/cgm/images/product/20110622/3206/14426/large/d982addf7938c9ca2a71ddca24ad8fc4.jpg",
         "https://images.goodsmile.info/cgm/images/product/20110622/3206/14427/large/71f5b1b9b422b5065255a1aeb43664bb.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20110622/3206/14429/thumb/0a577fb36ddd1580f59509ca716ca995.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20110622/3206/14423/large/3ea23387235706a79fd5133771368d7b.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20110622/3206/14429/thumb/0a577fb36ddd1580f59509ca716ca995.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2264190,26 +2263565,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3206/",
-        "https://www.goodsmile.com/ja/product/1046"
+        "https://www.goodsmile.info/ja/product/3206/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3206/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1046",
           "fields": [
             "names",
             "images",
@@ -2264278,8 +2263639,7 @@
         "https://images.goodsmile.info/cgm/images/product/20110714/3222/14634/large/4aca9c3f71b75ecfa59df1598c248acb.jpg",
         "https://images.goodsmile.info/cgm/images/product/20110714/3222/14635/large/e86f5e4cefe03d74d87162bace01c5f2.jpg",
         "https://images.goodsmile.info/cgm/images/product/20110714/3222/14636/large/f331bf120744001d7e16cb6aa8778a93.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20110714/3222/14638/thumb/d80beaa841339dcd01d321b7b31aa8d8.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20110714/3222/14630/large/49c5bf8b5c369312032bb32186694b39.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20110714/3222/14638/thumb/d80beaa841339dcd01d321b7b31aa8d8.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2264288,26 +2263648,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3222/",
-        "https://www.goodsmile.com/ja/product/1062"
+        "https://www.goodsmile.info/ja/product/3222/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3222/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1062",
           "fields": [
             "names",
             "images",
@@ -2264375,8 +2263721,7 @@
         "https://images.goodsmile.info/cgm/images/product/20110601/3188/14195/large/8335f4f84ad2a2bc2ff2dc1d60e86442.jpg",
         "https://images.goodsmile.info/cgm/images/product/20110601/3188/14196/large/13415fc71208b36a06345ba09faa5435.jpg",
         "https://images.goodsmile.info/cgm/images/product/20110601/3188/14197/large/04e1202767c17f0b74b2a068fecbdc5e.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20110601/3188/14198/thumb/140d6f0f7cf2c4e2f2b2ecc4768e6e98.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20110601/3188/14190/large/27e8339a9ae0123447861e4ed2365699.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20110601/3188/14198/thumb/140d6f0f7cf2c4e2f2b2ecc4768e6e98.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2264385,26 +2263730,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3188/",
-        "https://www.goodsmile.com/ja/product/1028"
+        "https://www.goodsmile.info/ja/product/3188/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3188/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1028",
           "fields": [
             "names",
             "images",
@@ -2264467,8 +2263798,7 @@
         "https://images.goodsmile.info/cgm/images/product/20110427/3156/13767/large/81c423971f5c86c2d2ec5d4bccac702e.jpg",
         "https://images.goodsmile.info/cgm/images/product/20110427/3156/13768/large/e9fd2b7254a3f199490dafb06b1332a9.jpg",
         "https://images.goodsmile.info/cgm/images/product/20110427/3156/13769/large/76655e34af88b2651d8fa1e3d25c7d3e.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20110427/3156/13771/thumb/e839e460cbfd02d4afd9cfbe27edfc2e.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20110427/3156/13765/large/d2b3f4073875ab286b2ee64c46847c97.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20110427/3156/13771/thumb/e839e460cbfd02d4afd9cfbe27edfc2e.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2264477,26 +2263807,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3156/",
-        "https://www.goodsmile.com/ja/product/996"
+        "https://www.goodsmile.info/ja/product/3156/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3156/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/996",
           "fields": [
             "names",
             "images",
@@ -2264634,8 +2263950,7 @@
         "https://images.goodsmile.info/cgm/images/product/20110614/3199/14339/large/0479380c8c53a69949f93ffe6a00ac7e.jpg",
         "https://images.goodsmile.info/cgm/images/product/20110614/3199/14340/large/6e7cd5c89b812150aedebc5efb18a211.jpg",
         "https://images.goodsmile.info/cgm/images/product/20110614/3199/14341/large/f7fd8ca9d984a4975ce599335250b820.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20110614/3199/14342/thumb/9462d2532b0812667958926bdf516862.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20110614/3199/14337/large/c67daaa3e388c33ff4a8090c2bc20d7e.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20110614/3199/14342/thumb/9462d2532b0812667958926bdf516862.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2264644,26 +2263959,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3199/",
-        "https://www.goodsmile.com/ja/product/1039"
+        "https://www.goodsmile.info/ja/product/3199/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3199/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1039",
           "fields": [
             "names",
             "images",
@@ -2264728,8 +2264029,7 @@
         "./assets/catalog/madoka/goodsmile-madoka-3200-01-45f37ae177.jpg",
         "https://images.goodsmile.info/cgm/images/product/20110614/3200/14348/large/6d6e0b9b7bf3c252c24c4ad2afda4aa1.jpg",
         "https://images.goodsmile.info/cgm/images/product/20110614/3200/14349/large/97b34d65d22e5f7d4e340629b658a778.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20110614/3200/14351/thumb/bd1fe5b41b466eb8d802341fbcf9d1f6.jpg",
-        "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20110614/3200/14346/large/1d9dcc4298d42746fecb0b42b037e1e4.jpg"
+        "https://images.goodsmile.info/cgm/images/product/20110614/3200/14351/thumb/bd1fe5b41b466eb8d802341fbcf9d1f6.jpg"
       ],
       "universe": "Madoka",
       "work_title": "Madoka Magica",
@@ -2264738,26 +2264038,12 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.goodsmile.info/ja/product/3200/",
-        "https://www.goodsmile.com/ja/product/1040"
+        "https://www.goodsmile.info/ja/product/3200/"
       ],
       "source_refs": [
         {
           "source_id": "good_smile_madoka_en",
           "url": "https://www.goodsmile.info/ja/product/3200/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "good_smile_madoka_global",
-          "url": "https://www.goodsmile.com/ja/product/1040",
           "fields": [
             "names",
             "images",
@@ -2332509,12 +2331795,6 @@
       "scale": "non-scale",
       "category": "goods",
       "goods_kind": "apparel",
-      "names": {
-        "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 파자마",
-        "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 파자마",
-        "zh": "宝可梦商店 「软软百变怪的一天」 睡衣",
-        "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 파자마"
-      },
       "source_name": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 파자마",
       "images": {
         "box_art_url": "https://shopby-images.cdn-nhncommerce.com/Mall-No-h6Ss/20260210/105624.281388916/8800286272380.jpg",
@@ -2332569,7 +2331849,13 @@
         "pokemon store",
         "poke_goods"
       ],
-      "notes": "Imported from the official Korean Pokemon Store online shop (pokemonstore.co.kr)."
+      "notes": "Imported from the official Korean Pokemon Store online shop (pokemonstore.co.kr).",
+      "names": {
+        "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 파자마",
+        "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 파자마",
+        "zh": "宝可梦商店 「软软百变怪的一天」 睡衣",
+        "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 파자마"
+      }
     },
     {
       "kit_id": "pokemon-kr-132758382",
@@ -2332580,12 +2331866,6 @@
       "scale": "non-scale",
       "category": "goods",
       "goods_kind": "apparel",
-      "names": {
-        "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 버킷햇",
-        "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 버킷햇",
-        "zh": "宝可梦商店 「软软百变怪的一天」 渔夫帽",
-        "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 버킷햇"
-      },
       "source_name": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 버킷햇",
       "images": {
         "box_art_url": "https://shopby-images.cdn-nhncommerce.com/Mall-No-h6Ss/20260210/105809.489341427/8800286272618.jpg",
@@ -2332640,7 +2331920,13 @@
         "pokemon store",
         "poke_goods"
       ],
-      "notes": "Imported from the official Korean Pokemon Store online shop (pokemonstore.co.kr)."
+      "notes": "Imported from the official Korean Pokemon Store online shop (pokemonstore.co.kr).",
+      "names": {
+        "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 버킷햇",
+        "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 버킷햇",
+        "zh": "宝可梦商店 「软软百变怪的一天」 渔夫帽",
+        "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 버킷햇"
+      }
     },
     {
       "kit_id": "pokemon-kr-132758391",
@@ -2332651,12 +2331937,6 @@
       "scale": "non-scale",
       "category": "goods",
       "goods_kind": "apparel",
-      "names": {
-        "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 메타몽 입는 담요",
-        "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 메타몽 입는 담요",
-        "zh": "宝可梦商店 「软软百变怪的一天」 百变怪 可穿毛毯",
-        "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 메타몽 입는 담요"
-      },
       "source_name": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 메타몽 입는 담요",
       "images": {
         "box_art_url": "https://shopby-images.cdn-nhncommerce.com/Mall-No-h6Ss/20260210/105900.114408322/8800286272571.jpg",
@@ -2332712,7 +2331992,13 @@
         "pokemon store",
         "poke_goods"
       ],
-      "notes": "Imported from the official Korean Pokemon Store online shop (pokemonstore.co.kr)."
+      "notes": "Imported from the official Korean Pokemon Store online shop (pokemonstore.co.kr).",
+      "names": {
+        "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 메타몽 입는 담요",
+        "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 메타몽 입는 담요",
+        "zh": "宝可梦商店 「软软百变怪的一天」 百变怪 可穿毛毯",
+        "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 메타몽 입는 담요"
+      }
     },
     {
       "kit_id": "pokemon-kr-132758429",
@@ -2332723,12 +2332009,6 @@
       "scale": "non-scale",
       "category": "goods",
       "goods_kind": "apparel",
-      "names": {
-        "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 액션 슬리퍼",
-        "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 액션 슬리퍼",
-        "zh": "宝可梦商店 「软软百变怪的一天」 动态拖鞋",
-        "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 액션 슬리퍼"
-      },
       "source_name": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 액션 슬리퍼",
       "images": {
         "box_art_url": "https://shopby-images.cdn-nhncommerce.com/Mall-No-h6Ss/20260210/105955.906528440/8800286272861.jpg",
@@ -2332783,7 +2332063,13 @@
         "pokemon store",
         "poke_goods"
       ],
-      "notes": "Imported from the official Korean Pokemon Store online shop (pokemonstore.co.kr)."
+      "notes": "Imported from the official Korean Pokemon Store online shop (pokemonstore.co.kr).",
+      "names": {
+        "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 액션 슬리퍼",
+        "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 액션 슬리퍼",
+        "zh": "宝可梦商店 「软软百变怪的一天」 动态拖鞋",
+        "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 액션 슬리퍼"
+      }
     },
     {
       "kit_id": "pokemon-kr-132758539",
@@ -2332794,12 +2332080,6 @@
       "scale": "non-scale",
       "category": "goods",
       "goods_kind": "apparel",
-      "names": {
-        "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 인형 토트백",
-        "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 인형 토트백",
-        "zh": "宝可梦商店 「软软百变怪的一天」 玩偶托特包",
-        "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 인형 토트백"
-      },
       "source_name": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 인형 토트백",
       "images": {
         "box_art_url": "https://shopby-images.cdn-nhncommerce.com/Mall-No-h6Ss/20260210/110442.660098454/8800286272564.png",
@@ -2332856,7 +2332136,13 @@
         "pokemon store",
         "poke_goods"
       ],
-      "notes": "Imported from the official Korean Pokemon Store online shop (pokemonstore.co.kr)."
+      "notes": "Imported from the official Korean Pokemon Store online shop (pokemonstore.co.kr).",
+      "names": {
+        "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 인형 토트백",
+        "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 인형 토트백",
+        "zh": "宝可梦商店 「软软百变怪的一天」 玩偶托特包",
+        "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 인형 토트백"
+      }
     },
     {
       "kit_id": "pokemon-kr-132756277",
@@ -2332867,12 +2332153,6 @@
       "scale": "non-scale",
       "category": "goods",
       "goods_kind": "household",
-      "names": {
-        "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 스노우볼",
-        "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 스노우볼",
-        "zh": "宝可梦商店 「软软百变怪的一天」 水晶球",
-        "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 스노우볼"
-      },
       "source_name": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 스노우볼",
       "images": {
         "box_art_url": "https://shopby-images.cdn-nhncommerce.com/Mall-No-h6Ss/20251216/095038.729210952/8800286272588_01.png",
@@ -2332927,7 +2332207,13 @@
         "pokemon store",
         "poke_goods"
       ],
-      "notes": "Imported from the official Korean Pokemon Store online shop (pokemonstore.co.kr)."
+      "notes": "Imported from the official Korean Pokemon Store online shop (pokemonstore.co.kr).",
+      "names": {
+        "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 스노우볼",
+        "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 스노우볼",
+        "zh": "宝可梦商店 「软软百变怪的一天」 水晶球",
+        "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 스노우볼"
+      }
     },
     {
       "kit_id": "pokemon-kr-132756286",
@@ -2340586,73 +2339872,6 @@
         "en": "포켓피스 말랑말랑 따라큐 수면등",
         "zh": "Poképeace 软弹弹 谜拟丘 小夜灯",
         "ko": "포켓피스 말랑말랑 따라큐 수면등"
-      }
-    },
-    {
-      "kit_id": "academy-2042",
-      "franchise": "pokemon",
-      "grade_code": "POKE_MONCOLLE",
-      "subline": "몬콜레",
-      "number": "S25050",
-      "scale": "non-scale",
-      "source_name": "몬콜레 MM 메가한카리아스",
-      "images": {
-        "box_art_url": "https://academy.co.kr/web/product/medium/202512/640588e82a3b6b21e0f5867abd00d462.jpg",
-        "box_art_source_id": "academy_kr"
-      },
-      "gallery_image_urls": [
-        "https://academy.co.kr/web/product/medium/202512/640588e82a3b6b21e0f5867abd00d462.jpg"
-      ],
-      "series": {
-        "key": "pokemon",
-        "sort": 400,
-        "labels": {
-          "zh": "宝可梦",
-          "en": "Pokemon",
-          "ja": "ポケモン",
-          "ko": "포켓몬"
-        }
-      },
-      "universe": "Pokemon",
-      "work_title": "Pokemon",
-      "release_date": "2025-12",
-      "price_jpy": null,
-      "price_krw": 14000,
-      "is_limited": false,
-      "data_status": "verified",
-      "source_urls": [
-        "https://academy.co.kr/product/detail.html?product_no=2042"
-      ],
-      "source_refs": [
-        {
-          "source_id": "academy_kr",
-          "url": "https://academy.co.kr/product/detail.html?product_no=2042",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "price_krw"
-          ],
-          "confidence": "high"
-        }
-      ],
-      "tags": [
-        "pokemon",
-        "korea",
-        "poke_moncolle",
-        "academy",
-        "takara tomy"
-      ],
-      "notes": "Imported from 아카데미과학 (academy.co.kr), the Korean licensee of Takara Tomy's Pokémon toys; the year comes from its S{YY} product code.",
-      "academy_kr": {
-        "code": "S25050",
-        "sold_out": false
-      },
-      "names": {
-        "ja": "몬콜레 MM 메가한카리아스",
-        "en": "몬콜레 MM 메가한카리아스",
-        "zh": "Moncolle MM 超级烈咬陆鲨",
-        "ko": "몬콜레 MM 메가한카리아스"
       }
     },
     {
@@ -2589678,7 +2588897,8 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.pokemoncenter-online.com/4904810096382.html"
+        "https://www.pokemoncenter-online.com/4904810096382.html",
+        "https://academy.co.kr/product/detail.html?product_no=2042"
       ],
       "source_refs": [
         {
@@ -2589689,6 +2588909,14 @@
             "price_jpy",
             "images",
             "grade_code"
+          ],
+          "confidence": "high"
+        },
+        {
+          "source_id": "academy_kr",
+          "url": "https://academy.co.kr/product/detail.html?product_no=2042",
+          "fields": [
+            "price_krw"
           ],
           "confidence": "high"
         }
@@ -2589723,7 +2588951,8 @@
         "en": "モンコレ メガガブリアス",
         "zh": "宝可梦 Moncolle 小手办 超级烈咬陆鲨",
         "ko": "몬콜레 메가한카리아스"
-      }
+      },
+      "price_krw": 14000
     },
     {
       "kit_id": "pokemon-center-4904810098683",
