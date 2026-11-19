@@ -1,0 +1,12 @@
+{
+  "note": "Hand-picked tile colours (bg) for covers whose logo has a transparent border, keyed like data/atlas/atlas-covers.json. Only used when the border is transparent; a cover with an opaque border keeps its own edge colour. Pick a colour only when the logo itself (or the brand's official page) shows the logo on it, and never the logo's own lettering colour. Read by scripts/atlas/build_atlas_covers.mjs (scripts/atlas/lib/cover_colors.mjs).",
+  "colors": {
+    "line:beyblade:BX": { "bg": "#70bbe9", "why": "Frame colour of the BX mark (official beginner guide shows the three line marks as coloured squares; the CX crop is already full pink, so BX / UX match it)" },
+    "line:beyblade:UX": { "bg": "#ee7700", "why": "Frame colour of the UX mark (same as BX)" },
+    "line:fate:NENDOROID": { "bg": "#f89321", "why": "Orange panel of the Nendoroid logo; the white lettering stays readable on it" },
+    "line:madoka:NENDOROID": { "bg": "#f89321", "why": "Orange panel of the Nendoroid logo (same file as fate)" },
+    "line:gundam:CHOGOKIN": { "bg": "#ffe101", "why": "Yellow panel of the 超合金 logo (TAMASHII NATIONS); the black and red parts read on it" },
+    "line:gundam:FM": { "bg": "#000000", "why": "Black panel of the FULL MECHANICS logo with white lettering" },
+    "line:pokemon:POKE_GASHAPON": { "bg": "#ffffff", "why": "gashapon.jp shows the red ガシャポン mark on white (the GUNDAM_MERCH gashapon cover is on white too)" }
+  }
+}

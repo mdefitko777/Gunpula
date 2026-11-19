@@ -100,3 +100,18 @@ App 的「종류」（按产品线）和「세대」（按作品 / 世代）两�
 - 一个 grade_code 只会出现在 `line_covers` 或 `line_icons` 其中之一，`line_covers` 里不放某一件商品的照片。
 - 「세대」分组（`franchises.*[]`）仍用原来的 `image` 字段，能找到作品标题 logo 的就指向 logo；新增的
   `cover_kind` 说明是 `logo` 还是 `picture`（包装图、主视觉、最新商品图）。
+- 格子底色（App 的 종류 / 세대 格子是满版正方形：logo 放大摆在自己的品牌底色上，没有白框、没有边框）：
+  `line_covers.<频道>.<code>` 多了 `bg`、`fg`；「세대」分组和 `channels.*` 的封面来自
+  `data/atlas/atlas-covers.json` 时多了同义的 `cover_bg`、`cover_fg`。
+
+  | 字段 | 值 | 含义 |
+  |---|---|---|
+  | `bg` / `cover_bg` | `"#RRGGBB"`（小写） | 整格的底色 |
+  | `fg` / `cover_fg` | `"light"` \| `"dark"` | 底色上用白字 / 白图标（`light`）还是黑字（`dark`）更清楚（WCAG 对比度） |
+
+  `bg` 只从仓库里缓存的图算（`scripts/atlas/lib/cover_colors.mjs`，不联网）：图的外圈不透明且几乎一色 → 就用这个
+  颜色，logo 和格子连成一片（`edge`）；外圈不透明但很花（主视觉、包装图）→ 外圈平均色（`mean`）；外圈透明 →
+  `data/atlas/brand-colors.json` 里手选的品牌色（`brand`，写明理由），没有就取 logo 的主色（不算白、黑、灰）调成
+  浅色（`tint`；浅色 logo 用同色相的深色；黑 / 灰 logo 用白色，白 logo 用 `#16181d`），所以格子不会是灰色。`atlas-covers.json` 里还记着
+  `bg_from`（`edge` / `mean` / `brand` / `tint`），App 不用读。只有远程地址、仓库里没缓存的封面（高达时间线的
+  GGEN 系列 logo、最新商品图）没有这两个字段，App 照旧画。`npm run atlas:covers -- --colors-only` 只重算颜色。

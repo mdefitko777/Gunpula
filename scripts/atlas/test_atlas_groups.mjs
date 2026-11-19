@@ -165,6 +165,8 @@ for (const franchise of ["gundam", "armored_core", "pokemon", "fate", "beyblade"
 const BBX_LINES = new Set(["BX", "UX", "CX"]);
 // Grade codes two channels share on purpose (Good Smile's Nendoroid is one line in Fate and Madoka).
 const SHARED_CODES = new Set(["NENDOROID"]);
+const TILE_BG = /^#[0-9a-f]{6}$/;
+const TILE_FG = new Set(["light", "dark"]);
 const lineCovers = groups.line_covers;
 assert.ok(lineCovers && typeof lineCovers === "object", "line_covers map");
 const seenLines = new Set();
@@ -175,7 +177,10 @@ for (const [franchise, byCode] of Object.entries(lineCovers)) {
     seenLines.add(`${franchise}:${code}`);
     // The app reads line_covers.<channel>.<code>.image; the rest is extra (old apps ignore it).
     assert.equal(typeof c.image, "string", `${where}.image is a path string`);
-    for (const key of Object.keys(c)) assert.ok(["cover_source", "image", "image_remote", "kind", "width", "height"].includes(key), `${where} key ${key}`);
+    for (const key of Object.keys(c)) assert.ok(["cover_source", "image", "image_remote", "kind", "width", "height", "bg", "fg"].includes(key), `${where} key ${key}`);
+    // Full-bleed tiles: every line logo is a cached file, so every one has its tile colours.
+    assert.match(c.bg || "", TILE_BG, `${where}.bg`);
+    assert.ok(TILE_FG.has(c.fg), `${where}.fg ${c.fg}`);
     if (c.width !== undefined) assert.ok(Number.isInteger(c.width) && Number.isInteger(c.height) && c.width > 0 && c.height > 0, `${where} size`);
     if (franchise === "beyblade") assert.ok(BBX_LINES.has(code) || code === "BEYBLADE_X", `${where}: BEYBLADE X lines are BX / UX / CX`);
     else {
@@ -237,8 +242,17 @@ checks += 3;
 
 // 세대 groups say whether their picture is a title logo; switched works point at a logo.
 for (const [franchise, list] of Object.entries(groups.franchises)) {
-  for (const g of list) assert.ok(["logo", "picture"].includes(g.cover_kind), `${franchise}/${g.id} cover_kind ${g.cover_kind}`);
+  for (const g of list) {
+    assert.ok(["logo", "picture"].includes(g.cover_kind), `${franchise}/${g.id} cover_kind ${g.cover_kind}`);
+    // A cover cached under ./assets/atlas/covers/ has tile colours; remote-only ones (GGEN logos) none.
+    if (/^\.\/assets\/atlas\/covers\//.test(g.image || "")) {
+      assert.match(g.cover_bg || "", TILE_BG, `${franchise}/${g.id} cover_bg`);
+      assert.ok(TILE_FG.has(g.cover_fg), `${franchise}/${g.id} cover_fg`);
+    } else assert.ok(!g.cover_bg, `${franchise}/${g.id}: cover_bg without a cached cover`);
+  }
 }
+for (const [id, ch] of Object.entries(groups.channels)) assert.match(ch.cover_bg || "", TILE_BG, `channels.${id}.cover_bg`);
+checks++;
 const groupById = (franchise, id) => groups.franchises[franchise].find((g) => g.id === id);
 for (const [franchise, id] of [["pokemon", "gen9"], ["fate", "apocrypha"], ["armored_core", "ac6"], ["nintendo", "nintendo_kirby"], ["lego", "lego_star_wars"]]) {
   assert.equal(groupById(franchise, id)?.cover_kind, "logo", `${franchise}/${id} should show its title logo`);
@@ -265,6 +279,17 @@ for (const [franchise, id] of [["pokemon", "gen9"], ["fate", "apocrypha"], ["arm
   // The まどか☆マギカ portal share banner is a picture, and so are the groups that reuse it.
   assert.notEqual(COVER_SOURCES["channel:madoka"].kind, "logo");
   for (const id of ["madoka_ensemble", "madoka_general"]) assert.equal(groupById("madoka", id)?.cover_kind, "picture", `madoka/${id}`);
+  // Hand-picked tile colours: keys of real covers, a hex colour and a reason; a colour is used only
+  // where the logo's border is transparent, so each one shows up as bg_from "brand".
+  const brand = (await json("data/atlas/brand-colors.json")).colors;
+  for (const [key, entry] of Object.entries(brand)) {
+    assert.ok(coverFile.covers[key], `brand-colors ${key} is not a cover`);
+    assert.match(entry.bg, TILE_BG, `brand-colors ${key}.bg`);
+    assert.ok(String(entry.why || "").length > 10, `brand-colors ${key} without a reason`);
+    assert.equal(coverFile.covers[key].bg_from, "brand", `brand-colors ${key}: the cover's border is not transparent`);
+    assert.equal(coverFile.covers[key].bg, entry.bg, `brand-colors ${key} not applied`);
+    checks++;
+  }
   // POKE_GASHAPON names the line (ガシャポン), not the Pokémon logo of the share image.
   assert.ok(!LINE_COVER_SOURCES["pokemon:POKE_GASHAPON"].og, "POKE_GASHAPON is not the Pokémon share image");
   checks += 9;

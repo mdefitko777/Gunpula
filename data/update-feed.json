@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-20",
-  "generated_at": "2026-11-19T23:02:12.401Z",
+  "generated_at": "2026-11-19T23:05:24.755Z",
   "watch_tags": [
     "seed",
     "00"
@@ -20,14 +20,14 @@
     "effects"
   ],
   "source_health": {
-    "generated_at": "2026-11-19T22:25:11.011Z",
+    "generated_at": "2026-11-19T22:59:03.630Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-20",
-      "generated_at": "2026-11-19T23:02:12.401Z",
+      "generated_at": "2026-11-19T23:05:24.755Z",
       "total_before": 42020,
       "total_after": 42021,
       "added_count": 1,
@@ -3049,20 +3049,20 @@
     },
     {
       "date": "2026-11-19",
-      "generated_at": "2026-11-19T22:25:30.927Z",
+      "generated_at": "2026-11-19T22:59:23.457Z",
       "total_before": 41965,
       "total_after": 42020,
       "added_count": 55,
-      "changed_count": 66,
+      "changed_count": 67,
       "removed_count": 9,
-      "watched_count": 0,
+      "watched_count": 1,
       "merged_count": 1,
       "backfilled_count": 6,
       "renamed_count": 1,
-      "premium_bandai_count": 8,
+      "premium_bandai_count": 9,
       "bbx_count": 0,
       "franchise_counts": {
-        "gundam": 9,
+        "gundam": 10,
         "madoka": 50,
         "pokemon": 17,
         "lego": 43,
@@ -3070,8 +3070,8 @@
       },
       "reason_counts": {
         "new": 55,
+        "source": 55,
         "image": 49,
-        "source": 54,
         "limited": 1,
         "product_line": 1,
         "series": 1,
@@ -3084,10 +3084,13 @@
         "madoka",
         "pokemon",
         "lego",
-        "fate",
-        "premium_bandai"
+        "premium_bandai",
+        "seed",
+        "fate"
       ],
-      "watch_tags": [],
+      "watch_tags": [
+        "seed"
+      ],
       "added": [
         {
           "kit_id": "tamashii-16276",
@@ -5127,6 +5130,48 @@
         }
       ],
       "changed": [
+        {
+          "kit_id": "hg-hg-1-144-4573102663054000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "HG 1 / 144 ブラックナイトスコードルドラ（グリフィン・アルバレスト専用機）",
+            "zh": "HG 1 / 144 黑骑士小队 楼陀罗(格里芬·阿尔巴雷斯特专用机)",
+            "ko": "HG 1/144 블랙 나이트 스쿼드 루드라 (그리핀 알바레스트 전용기)",
+            "en": "HG 1 / 144 ブラックナイトスコードルドラ (グリフィン アルバレストCustom機)"
+          },
+          "release_date": "2024-03-23",
+          "price_jpy": 2970,
+          "is_limited": false,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102663054000&grp_id=5325"
+          ]
+        },
         {
           "kit_id": "aniplex-madoka-itemmdrepkqw05",
           "change_type": "changed",
@@ -8006,7 +8051,50 @@
           ]
         }
       ],
-      "watched": [],
+      "watched": [
+        {
+          "kit_id": "hg-hg-1-144-4573102663054000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "seed",
+          "series_labels": {
+            "zh": "SEED",
+            "en": "SEED",
+            "ja": "SEED",
+            "ko": "SEED"
+          },
+          "names": {
+            "ja": "HG 1 / 144 ブラックナイトスコードルドラ（グリフィン・アルバレスト専用機）",
+            "zh": "HG 1 / 144 黑骑士小队 楼陀罗(格里芬·阿尔巴雷斯特专用机)",
+            "ko": "HG 1/144 블랙 나이트 스쿼드 루드라 (그리핀 알바레스트 전용기)",
+            "en": "HG 1 / 144 ブラックナイトスコードルドラ (グリフィン アルバレストCustom機)"
+          },
+          "release_date": "2024-03-23",
+          "price_jpy": 2970,
+          "is_limited": false,
+          "is_premium_bandai": true,
+          "watch_tags": [
+            "seed"
+          ],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai",
+            "seed"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102663054000&grp_id=5325"
+          ]
+        }
+      ],
       "merged": [
         {
           "kit_id": "academy-2042",
@@ -8023,7 +8111,7 @@
           },
           "names": {
             "ja": "몬콜레 MM 메가한카리아스",
-            "zh": "몬콜레 MM 메가한카리아스",
+            "zh": "Moncolle MM 超级烈咬陆鲨",
             "ko": "몬콜레 MM 메가한카리아스",
             "en": "몬콜레 MM 메가한카리아스"
           },
