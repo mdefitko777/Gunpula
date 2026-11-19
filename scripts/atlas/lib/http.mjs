@@ -50,10 +50,16 @@ async function readCache(paths) {
   }
 }
 
+// Besides Cloudflare: the F5 BIG-IP "request rejected" page, which comes with HTTP 200 and so read
+// as a changed page, and the AWS WAF challenge script (HTTP 202). Since 2026-11-14 GitHub runners
+// get a 200 page without products from www.bnkrmall.co.kr (F5 cookies) and a 202 from
+// store.nintendo.co.kr (behind AWS), while a home line gets the real pages.
+const BOT_CHECK_MARKERS =
+  /<title>\s*Just a moment\.\.\.\s*<\/title>|challenges\.cloudflare\.com|cf-chl-|Verifying you are human|proof-of-work|The requested URL was rejected|Your support ID is|awswaf\.com|gokuProps|AwsWafIntegration/i;
+
 export function looksLikeBotChallenge(status, text) {
   if (status === 511) return true;
-  const head = String(text || "").slice(0, 4000);
-  return /<title>\s*Just a moment\.\.\.\s*<\/title>|challenges\.cloudflare\.com|cf-chl-|Verifying you are human|proof-of-work/i.test(head);
+  return BOT_CHECK_MARKERS.test(String(text || "").slice(0, 4000));
 }
 
 /**

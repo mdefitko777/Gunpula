@@ -1,14 +1,27 @@
-import { readFile, writeFile } from "node:fs/promises";
+// Good Smile Company's Fate / FGO products: the legacy goodsmile.info FGO listing and the
+// goodsmile.com global store.
+//
+//   node scripts/import_goodsmile_fate.mjs        (npm run import:fate)
+//
+// The two sites fail apart: goodsmile.com was under maintenance (HTTP 503 for every page) from
+// 2026-10-23 and again on 2026-11-19, and the whole step used to fail, throwing away the legacy
+// listing it had already read. Now one site failing leaves its records as they were and a note
+// (IMPORT_NOTES_PATH); only both failing fails the step.
+import { appendFile, readFile, writeFile } from "node:fs/promises";
 import { KIT_ALIASES_PATH, retiredKitIds } from "./lib/catalog-cleanup.mjs";
+import { createPoliteFetcher } from "./lib/polite-fetch.mjs";
 
 const CATALOG_PATH = "data/kits.json";
 const LIST_URL = "https://www.goodsmile.info/en/fgo";
 const SOURCE_ID = "good_smile_fate_en";
 const GLOBAL_BASE = "https://www.goodsmile.com";
 const GLOBAL_SOURCE_ID = "good_smile_fate_global";
-const CONCURRENCY = Number(process.env.GSC_FATE_CONCURRENCY || 5);
 const DETAIL_LIMIT = Number(process.env.GSC_FATE_DETAIL_LIMIT || 0);
-const REQUEST_DELAY_MS = Number(process.env.GSC_FATE_DELAY_MS || 150);
+// This older script keeps its user agent (AGENTS.md). Until 2026-11-19 it sent 5 requests at a
+// time 150 ms apart (about 13 a second to goodsmile.info) without robots.txt; now one at a time
+// per host 1.1 s apart, robots.txt first, stopping on 403 / 429 / 503 (lib/polite-fetch.mjs).
+// About 4 minutes a run (172 legacy pages).
+const USER_AGENT = "Gunpula catalog importer (+https://github.com/mdefitko777/Gunpula)";
 const GLOBAL_PAGE_SIZE = 60;
 const GLOBAL_MAX_OFFSET = 6000;
 
@@ -48,47 +61,7 @@ function absoluteUrl(url) {
   return url;
 }
 
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-async function fetchText(url) {
-  if (REQUEST_DELAY_MS > 0) await sleep(REQUEST_DELAY_MS);
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 15000);
-  try {
-    const response = await fetch(url, {
-      signal: controller.signal,
-      headers: {
-        "user-agent": "Gunpula catalog importer (+https://github.com/mdefitko777/Gunpula)",
-        accept: "text/html,application/xhtml+xml",
-      },
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
-    }
-    return await response.text();
-  } finally {
-    clearTimeout(timeout);
-  }
-}
-
-async function mapLimit(items, limit, worker) {
-  let next = 0;
-  const results = [];
-  await Promise.all(
-    Array.from({ length: Math.min(limit, items.length) }, async () => {
-      while (next < items.length) {
-        const index = next;
-        next += 1;
-        results[index] = await worker(items[index], index);
-      }
-    }),
-  );
-  return results;
-}
-
-function parseCards(html) {
+export function parseCards(html) {
   const cards = [];
   const anchorPattern = /<a\b[^>]*href="([^"]*\/en\/product\/(\d+)\/[^"]*)"[^>]*>([\s\S]*?<span class="infosection">[\s\S]*?<\/span>[\s\S]*?)<\/a>/g;
   for (const match of html.matchAll(anchorPattern)) {
@@ -177,7 +150,7 @@ function absoluteGlobalUrl(url) {
   return new URL(url, GLOBAL_BASE).href;
 }
 
-function parseGlobalCards(html) {
+export function parseGlobalCards(html) {
   const cards = [];
   const itemPattern = /<a class="p-product-list__link" href="(\/en\/product\/(\d+)[^"]*)">([\s\S]*?)<\/a>/g;
   for (const match of html.matchAll(itemPattern)) {
@@ -203,7 +176,7 @@ function parseGlobalCards(html) {
   return [...byId.values()];
 }
 
-async function fetchGlobalCards() {
+async function fetchGlobalCards(fetchText) {
   const cards = [];
   for (let offset = 0; offset <= GLOBAL_MAX_OFFSET; offset += GLOBAL_PAGE_SIZE) {
     const url = `${GLOBAL_BASE}/en/search/list?filter=${globalFilterParam()}&orderBy=1&limit=${GLOBAL_PAGE_SIZE}&offset=${offset}&couponId=null&searchIndex=-1`;
@@ -218,7 +191,7 @@ async function fetchGlobalCards() {
   return [...byId.values()];
 }
 
-async function fetchGlobalDetail(card) {
+async function fetchGlobalDetail(card, fetchText) {
   let html = await fetchText(`${GLOBAL_BASE}/en/product/${card.productId}`);
   const redirect = /<title>Redirecting to (https?:\/\/[^<\s]+)/i.exec(html)?.[1];
   if (redirect) {
@@ -462,32 +435,36 @@ function mergeCatalog(existingKits, importedKits) {
   });
 }
 
-async function main() {
-  const catalog = JSON.parse(await readFile(CATALOG_PATH, "utf8"));
-
-  // Legacy goodsmile.info FGO listing (frozen around 2024, still hosts working images).
-  const html = await fetchText(LIST_URL);
-  const cards = parseCards(html);
+/** The legacy goodsmile.info FGO listing (frozen around 2024, still hosts working images) → kits. */
+async function readLegacy(kits, fetchText) {
+  const cards = parseCards(await fetchText(LIST_URL));
+  if (!cards.length) throw new Error(`${LIST_URL} lists no products (markup change?)`);
   const detailCards = DETAIL_LIMIT > 0 ? cards.slice(0, DETAIL_LIMIT) : cards;
   const details = new Map();
   let detailErrors = 0;
-
-  await mapLimit(detailCards, CONCURRENCY, async (card) => {
+  for (const card of detailCards) {
     try {
       details.set(card.productId, parseDetail(await fetchText(card.url), card.productId));
     } catch (error) {
       detailErrors += 1;
       details.set(card.productId, { error_message: error.message });
     }
-  });
+  }
+  // A page not read (the host stopped the run halfway) leaves its existing record as it was,
+  // instead of overwriting its price and pictures with the listing card's.
+  const known = new Set(kits.map((kit) => kit.kit_id));
+  const importedKits = cards
+    .filter((card) => !details.get(card.productId)?.error_message || !known.has(`goodsmile-fate-${card.productId}`))
+    .map((card) => toKit(card, details.get(card.productId) || {}));
+  return { kits: mergeCatalog(kits, importedKits), summary: `legacy ${cards.length} products (detail errors ${detailErrors})` };
+}
 
-  const importedKits = cards.map((card) => toKit(card, details.get(card.productId) || {}));
-  let kits = mergeCatalog(catalog.kits, importedKits);
-
-  // Current goodsmile.com global store: covers products announced after the legacy
-  // listing stopped updating. Product ids live in a different namespace, so new kits
-  // use a `g` prefix and products already known from the legacy list are matched by name.
-  const globalCards = await fetchGlobalCards();
+// Current goodsmile.com global store: covers products announced after the legacy
+// listing stopped updating. Product ids live in a different namespace, so new kits
+// use a `g` prefix and products already known from the legacy list are matched by name.
+async function readGlobal(kits, fetchText) {
+  const globalCards = await fetchGlobalCards(fetchText);
+  if (!globalCards.length) throw new Error(`${GLOBAL_BASE} search lists no Fate products (markup change?)`);
   const fateByName = new Map();
   for (const kit of kits) {
     if (kit.franchise === "fate") fateByName.set(nameKey(kit.names?.en), kit);
@@ -530,14 +507,14 @@ async function main() {
   const globalDetailCards = DETAIL_LIMIT > 0 ? detailTargets.slice(0, DETAIL_LIMIT) : detailTargets;
   const globalDetails = new Map();
   let globalDetailErrors = 0;
-  await mapLimit(globalDetailCards, CONCURRENCY, async (card) => {
+  for (const card of globalDetailCards) {
     try {
-      globalDetails.set(card.productId, await fetchGlobalDetail(card));
+      globalDetails.set(card.productId, await fetchGlobalDetail(card, fetchText));
     } catch (error) {
       globalDetailErrors += 1;
       globalDetails.set(card.productId, { error_message: error.message });
     }
-  });
+  }
   const globalKits = globalDetailCards.map((card) => {
     const kit = toGlobalKit(card, globalDetails.get(card.productId) || {});
     const previous = fateByName.get(nameKey(card.name));
@@ -551,10 +528,42 @@ async function main() {
     }
     return kit;
   });
-  kits = mergeCatalog(kits, globalKits);
+  const withBoxArt = globalKits.filter((kit) => kit.images.box_art_url).length;
+  return {
+    kits: mergeCatalog(kits, globalKits),
+    summary:
+      `global store ${globalCards.length} products, matched ${knownCards.length}, refreshed ${refreshCards.length}, new ${newCards.length} ` +
+      `(${withBoxArt}/${globalKits.length} detail-fetched kits with box art, detail errors ${globalDetailErrors})`,
+  };
+}
+
+export async function main({
+  fetchText = createPoliteFetcher({ userAgent: USER_AGENT, language: "en,ja;q=0.8" }).text,
+  catalogPath = CATALOG_PATH,
+  aliasesPath = KIT_ALIASES_PATH,
+  notesPath = process.env.IMPORT_NOTES_PATH,
+  log = console.log,
+} = {}) {
+  const catalog = JSON.parse(await readFile(catalogPath, "utf8"));
+  let kits = catalog.kits;
+  const summaries = [];
+  const failures = [];
+  // One site failing (goodsmile.com under maintenance) keeps that site's records as they were.
+  for (const [sourceId, read] of [[SOURCE_ID, readLegacy], [GLOBAL_SOURCE_ID, readGlobal]]) {
+    try {
+      const result = await read(kits, fetchText);
+      kits = result.kits;
+      summaries.push(result.summary);
+    } catch (error) {
+      failures.push(`${sourceId}: ${error.message}`);
+      summaries.push(`${sourceId} not read (${error.message}), its records kept`);
+    }
+  }
+  if (failures.length === 2) throw new Error(`Both Good Smile sites failed: ${failures.join("; ")}`);
+
   // Ids clean_catalog.mjs dropped as duplicates (e.g. a truncated legacy name
   // of a global-store product) are not brought back.
-  const retired = retiredKitIds(await readFile(KIT_ALIASES_PATH, "utf8").then(JSON.parse, () => null));
+  const retired = retiredKitIds(await readFile(aliasesPath, "utf8").then(JSON.parse, () => null));
   kits = kits.filter((kit) => !retired.has(kit.kit_id));
 
   const nextCatalog = {
@@ -562,16 +571,14 @@ async function main() {
     updated_at: today(),
     kits,
   };
-  await writeFile(CATALOG_PATH, `${JSON.stringify(nextCatalog, null, 2)}\n`, "utf8");
-  const withBoxArt = globalKits.filter((kit) => kit.images.box_art_url).length;
-  console.log(
-    `Good Smile Fate: legacy ${importedKits.length} products (detail errors ${detailErrors}); ` +
-      `global store ${globalCards.length} products, matched ${knownCards.length}, refreshed ${refreshCards.length}, new ${newCards.length} ` +
-      `(${withBoxArt}/${globalKits.length} detail-fetched kits with box art, detail errors ${globalDetailErrors}).`,
-  );
+  await writeFile(catalogPath, `${JSON.stringify(nextCatalog, null, 2)}\n`, "utf8");
+  if (notesPath && failures.length) await appendFile(notesPath, failures.map((line) => `import:fate ${line}\n`).join(""), "utf8");
+  log(`Good Smile Fate: ${summaries.join("; ")}.`);
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+if (/(^|[\/])import_goodsmile_fate\.mjs$/.test(process.argv[1] || "")) {
+  main().catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
+}

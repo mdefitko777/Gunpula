@@ -1,5 +1,6 @@
 import { spawn } from "node:child_process";
 import { appendFile, readFile, rm, writeFile } from "node:fs/promises";
+import { pauseAction, splitReport } from "./lib/import-report.mjs";
 
 // Runs every import step behind `npm run import:data`, in order, and keeps going
 // when one fails. This used to be a single `&&` chain, so goodsmile answering 503
@@ -14,6 +15,9 @@ import { appendFile, readFile, rm, writeFile } from "node:fs/promises";
 //                the previous derived file stays.
 // kind "required": a data-integrity guard; failing fails the run so broken data is
 //                  never committed (check:sources fails when a source drops to zero).
+// pause: { since, host, reason }: the host refuses GitHub runners on every run (a home line reads
+//        it), so there the step runs once a week and is listed once as "paused (known)"
+//        (lib/import-report.mjs); local runs are not paused. Remove it once a weekly try answers.
 const STEPS = [
   { script: "import:bandai", kind: "source" },
   { script: "import:collectibles", kind: "source" },
@@ -24,13 +28,25 @@ const STEPS = [
   // Korean releases sold by the Japanese makers' Korean partners; after the Japanese and the
   // 포켓몬스토어 importers (MonColle comes from import:takaratomy-pokemon), so a listing of a
   // product the catalog has joins that record the same day.
-  { script: "import:bnkr-pokemon", kind: "source" },
+  {
+    script: "import:bnkr-pokemon",
+    kind: "source",
+    // No runner run ever read it: robots.txt without a "*" group and a search page without
+    // products (F5 cookies), while a home line reads 40 products a page. 2026-11-14 records stay.
+    pause: { since: "2026-11-14", host: "www.bnkrmall.co.kr", reason: "GitHub runners get a page that is not the mall" },
+  },
   { script: "import:academy-pokemon", kind: "source" },
   { script: "import:fate", kind: "source" },
   { script: "import:fate-extra", kind: "source" },
   { script: "import:madoka", kind: "source" },
   // The 닌텐도 channel (store.nintendo.co.kr, nintendo.com/kr); about 6 minutes the first time.
-  { script: "import:nintendo-kr", kind: "source" },
+  {
+    script: "import:nintendo-kr",
+    kind: "source",
+    // No runner run ever read it: HTTP 202 for robots.txt and the lists (AWS WAF challenge), while
+    // a home line gets the store. 2026-11-14 records stay.
+    pause: { since: "2026-11-14", host: "store.nintendo.co.kr", reason: "GitHub runners get an HTTP 202 bot check" },
+  },
   { script: "import:nintendo-hobby", kind: "source" },
   // Kotobukiya and Good Smile products of Nintendo games; product pages only for new products.
   { script: "import:nintendo-makers", kind: "source" },
@@ -91,6 +107,9 @@ if (NOTES_PATH) {
 }
 
 const isWindows = process.platform === "win32";
+const CI = process.env.GITHUB_ACTIONS === "true";
+// Pause days are counted in Korean dates, like the importers' updated_at.
+const TODAY = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date());
 let current = null;
 
 function npmCommand(script) {
@@ -141,34 +160,49 @@ for (const signal of ["SIGINT", "SIGTERM"]) {
   });
 }
 
+function statusOf(result) {
+  if (result.action === "skip" || (result.action === "try" && !result.ok)) return "paused";
+  return result.ok ? "ok" : "FAIL";
+}
+
 const results = [];
 for (const step of STEPS) {
-  const result = { ...step, ...(await runStep(step.script)) };
+  const action = pauseAction(step, TODAY, { ci: CI });
+  if (action === "skip") {
+    results.push({ ...step, action, ok: true, reason: `paused (${step.pause.host})`, seconds: 0 });
+    console.log(`\n${step.script}: paused on GitHub runners since ${step.pause.since} (${step.pause.reason}); skipped.\n`);
+    continue;
+  }
+  const result = { ...step, action, ...(await runStep(step.script)) };
   results.push(result);
   if (!result.ok) console.error(`\n${step.script} failed (${result.reason}); continuing with the next step.\n`);
 }
 
-const failed = results.filter((result) => !result.ok);
+// A paused step failing its weekly try is expected, not a failed step.
+const failed = results.filter((result) => statusOf(result) === "FAIL");
 const sources = results.filter((result) => result.kind === "source");
 const allSourcesFailed = sources.every((result) => !result.ok);
 const requiredFailed = failed.some((result) => result.kind === "required");
 
 console.log("\nImport summary:");
 for (const result of results) {
-  console.log(`  ${result.ok ? "ok  " : "FAIL"}  ${result.script.padEnd(26)} ${String(result.seconds).padStart(4)}s  ${result.reason}`);
+  console.log(`  ${statusOf(result).padEnd(6)} ${result.script.padEnd(26)} ${String(result.seconds).padStart(4)}s  ${result.reason}`);
 }
 console.log(`${results.length - failed.length}/${results.length} steps ok, ${sources.length - sources.filter((r) => !r.ok).length}/${sources.length} sources ok.`);
 
+const notes = NOTES_PATH ? (await readFile(NOTES_PATH, "utf8").catch(() => "")).split("\n") : [];
+const report = splitReport(results, notes, TODAY);
 if (FAILURES_PATH) {
-  const notes = NOTES_PATH ? await readFile(NOTES_PATH, "utf8").catch(() => "") : "";
-  const lines = failed.map((result) => `${result.script} (${result.reason})\n`).join("");
-  await writeFile(FAILURES_PATH, lines + notes, "utf8");
+  // The workflow comments the failures on the issue and adds the known lines to them as one line.
+  await writeFile(FAILURES_PATH, report.failures.map((line) => `${line}\n`).join(""), "utf8");
+  await writeFile(`${FAILURES_PATH}.known`, report.known.map((line) => `${line}\n`).join(""), "utf8");
 }
 if (process.env.GITHUB_STEP_SUMMARY) {
-  const rows = results.map((result) => `| ${result.ok ? "ok" : "**FAIL**"} | \`${result.script}\` | ${result.kind} | ${result.seconds}s | ${result.reason} |`);
+  const rows = results.map((result) => `| ${statusOf(result) === "FAIL" ? "**FAIL**" : statusOf(result)} | \`${result.script}\` | ${result.kind} | ${result.seconds}s | ${result.reason} |`);
+  const known = report.known.length ? ["", "Paused (known):", "", ...report.known.map((line) => `- ${line}`)] : [];
   await appendFile(
     process.env.GITHUB_STEP_SUMMARY,
-    ["### Import steps", "", "| | Step | Kind | Time | Reason |", "|---|---|---|---|---|", ...rows, ""].join("\n"),
+    ["### Import steps", "", "| | Step | Kind | Time | Reason |", "|---|---|---|---|---|", ...rows, ...known, ""].join("\n"),
     "utf8",
   );
 }

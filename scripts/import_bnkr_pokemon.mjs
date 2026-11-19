@@ -51,10 +51,21 @@ async function readJson(file, fallback) {
 
 const productUrl = (gno) => `${BNKR_BASE}/goods/detail.do?gno=${gno}`;
 
+/**
+ * What came back instead of the search: since 2026-11-14 GitHub runners get an HTTP 200 page
+ * without products (a home line gets 40 a page), and the log said only "markup change".
+ */
+export function describeEmptySearch(html) {
+  const title = /<title>([^<]*)<\/title>/i.exec(html)?.[1]?.replace(/\s+/g, " ").trim() || "no title";
+  const mall = /반다이남코코리아몰/.test(html);
+  return `The search page lists no products (${mall ? "a mall page: markup change?" : "not the mall"}; title "${title.slice(0, 80)}", ${html.length} characters).`;
+}
+
 async function main() {
   const fetcher = createPoliteFetcher();
-  const first = parseBnkrList(await fetcher.text(`${BNKR_SEARCH}&pageNum=1`));
-  if (!first.products.length) throw new Error("The search page lists no products (markup change or not the mall).");
+  const firstPage = await fetcher.text(`${BNKR_SEARCH}&pageNum=1`);
+  const first = parseBnkrList(firstPage);
+  if (!first.products.length) throw new Error(describeEmptySearch(firstPage));
   const products = new Map(first.products.map((product) => [product.gno, product]));
   for (let page = 2; page <= Math.min(first.pages, MAX_PAGES); page += 1) {
     for (const product of parseBnkrList(await fetcher.text(`${BNKR_SEARCH}&pageNum=${page}`)).products) products.set(product.gno, product);
