@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-20",
-  "generated_at": "2026-11-19T23:05:24.755Z",
+  "updated_at": "2026-11-19",
+  "generated_at": "2026-11-19T23:34:06.640Z",
   "watch_tags": [
     "seed",
     "00"
@@ -20,24 +20,24 @@
     "effects"
   ],
   "source_health": {
-    "generated_at": "2026-11-19T22:59:03.630Z",
+    "generated_at": "2026-11-19T23:33:43.009Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
-      "date": "2026-11-20",
-      "generated_at": "2026-11-19T23:05:24.755Z",
-      "total_before": 42020,
-      "total_after": 42021,
-      "added_count": 1,
-      "changed_count": 75,
-      "removed_count": 0,
+      "date": "2026-11-19",
+      "generated_at": "2026-11-19T23:34:06.640Z",
+      "total_before": 41965,
+      "total_after": 42020,
+      "added_count": 55,
+      "changed_count": 222,
+      "removed_count": 9,
       "watched_count": 0,
-      "merged_count": 0,
-      "backfilled_count": 0,
-      "renamed_count": 0,
-      "premium_bandai_count": 0,
+      "merged_count": 1,
+      "backfilled_count": 6,
+      "renamed_count": 1,
+      "premium_bandai_count": 8,
       "bbx_count": 0,
       "franchise_counts": {
         "nintendo": 8,
@@ -911,12 +911,12 @@
         "madoka": 50,
         "pokemon": 17,
         "lego": 43,
-        "fate": 2
+        "fate": 122
       },
       "reason_counts": {
         "new": 55,
-        "source": 55,
-        "image": 49,
+        "image": 169,
+        "source": 174,
         "limited": 1,
         "product_line": 1,
         "series": 1,
@@ -2164,6 +2164,120 @@
           ]
         },
         {
+          "kit_id": "goodsmile-fate-8394",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/4th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Scáthach: Sashi Ugatsu Bunny Ver.",
+            "zh": "斯卡哈: 刺穿兔女郎 Ver.",
+            "ko": "스카사하: 꿰뚫는 바니 Ver.",
+            "en": "Scáthach: Sashi Ugatsu Bunny Ver."
+          },
+          "release_date": "2024-06",
+          "price_jpy": 29700,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/8394/Scathach+Sashi+Ugatsu+Bunny+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-14347",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Lancer / Mysterious Alter Ego Λ [AQ]",
+            "zh": "Lancer / 谜之Alterego·Λ [AQ]",
+            "ko": "랜서 / 수수께끼의 얼터 에고·Λ [AQ]",
+            "en": "Lancer / Mysterious Alter Ego Λ [AQ]"
+          },
+          "release_date": "2024-03",
+          "price_jpy": 24900,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/14347/Lancer+Mysterious+Alter+Ego+AQ.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-14348",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/4th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Assassin / Koyanskaya of Light (Final Ascension)",
+            "zh": "Assassin / 光之高扬斯卡娅 (最终再临)",
+            "ko": "어새신 / 빛의 코얀스카야 (최종 재림)",
+            "en": "Assassin / Koyanskaya of Light (Final Ascension)"
+          },
+          "release_date": "2024-02",
+          "price_jpy": 54780,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/14348/Assassin+Koyanskaya+of+Light+Final+Ascension.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo"
+          ]
+        },
+        {
           "kit_id": "hg-hg-1-144-4573102663740000",
           "change_type": "changed",
           "franchise": "gundam",
@@ -2205,6 +2319,82 @@
           ]
         },
         {
+          "kit_id": "goodsmile-fate-14661",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/4th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Ruler / Altria Pendragon",
+            "zh": "Ruler / 阿尔托莉雅·潘德拉贡",
+            "ko": "룰러 / 알트리아 펜드래곤 (2024년)",
+            "en": "Ruler / Altria Pendragon"
+          },
+          "release_date": "2024-02",
+          "price_jpy": 49500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/14661/Ruler+Altria+Pendragon.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-14776",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "POP UP PARADE Avenger / Jeanne d'Arc (Alter)",
+            "zh": "POP UP PARADE Avenger / 贞德 (Alter)",
+            "ko": "POP UP PARADE 어벤저 / 잔 다르크(얼터)",
+            "en": "POP UP PARADE Avenger / Jeanne d'Arc (Alter)"
+          },
+          "release_date": "2024-01",
+          "price_jpy": 4800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/14776/POP+UP+PARADE+Avenger+Jeanne+d+Arc+Alter.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo"
+          ]
+        },
+        {
           "kit_id": "lego-10370-1",
           "change_type": "changed",
           "franchise": "lego",
@@ -2243,234 +2433,79 @@
           ]
         },
         {
-          "kit_id": "pbandai-wb-1000256700",
+          "kit_id": "goodsmile-fate-14512",
           "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "g",
+          "franchise": "fate",
+          "grade_code": "NENDOROID",
+          "subline": "Nendoroid",
+          "series_key": "fate_fgo",
           "series_labels": {
-            "zh": "G",
-            "en": "G",
-            "ja": "G",
-            "ko": "G"
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
           },
           "names": {
-            "ja": "ＨＧ 1 / 144 ガンダムマックスター",
-            "zh": "HG 1 / 144 拳王高达",
-            "ko": "HG 1/144 건담 맥스터",
-            "en": "ＨＧ 1 / 144 Gundamマックスター"
+            "ja": "Nendoroid Lancer / Mélusine",
+            "zh": "粘土人 Lancer / 梅柳齐娜",
+            "ko": "넨도로이드 랜서 / 멜뤼진",
+            "en": "Nendoroid Lancer / Mélusine"
+          },
+          "release_date": "2023-12",
+          "price_jpy": 7200,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "good_smile_fate_en"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/en/product/14512/Nendoroid+Lancer+Melusine.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-13929",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "1/7th Scale",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "Berserker / Minamoto-no-Raikou: Travel Portrait Ver.",
+            "zh": "Berserker / 源赖光: 英灵旅装 Ver.",
+            "ko": "버서커 / 미나모토노 라이코: 영령여장 Ver.",
+            "en": "Berserker / Minamoto-no-Raikou: Travel Portrait Ver."
           },
           "release_date": "2023-11",
-          "price_jpy": 2915,
-          "is_limited": true,
-          "is_premium_bandai": true,
-          "watch_tags": [],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "p_bandai_wayback",
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102657299000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000260727/"
-          ]
-        },
-        {
-          "kit_id": "goodsmile-madoka-14098",
-          "change_type": "changed",
-          "franchise": "madoka",
-          "grade_code": "MADOKA_MINI",
-          "subline": "ソフトビニール",
-          "series_key": "madoka_tv",
-          "series_labels": {
-            "zh": "魔法少女小圆",
-            "en": "Madoka Magica",
-            "ja": "まどか☆マギカ",
-            "ko": "마도카 마기카"
-          },
-          "names": {
-            "ja": "［BINIVINI BABY］SOFT VINYL FIGURE 魔法少女まどか☆マギカ 鹿目まどか / 暁美ほむら / 巴マミ",
-            "zh": "[BINIVINI BABY]SOFT VINYL FIGURE 魔法少女小圆 鹿目圆 / 晓美焰 / 巴麻美",
-            "ko": "[BINIVINI BABY] SOFT VINYL FIGURE 마법소녀 마도카☆마기카 카나메 마도카 / 아케미 호무라 / 토모에 마미",
-            "en": "［BINIVINI BABY］SOFT VINYL FIGURE 魔法少女まどか☆マギカ 鹿目まどか / 暁美ほむら / 巴マミ"
-          },
-          "release_date": "2023-08",
-          "price_jpy": 7590,
+          "price_jpy": 28800,
           "is_limited": false,
           "is_premium_bandai": false,
           "watch_tags": [],
           "interest_tags": [
-            "madoka"
+            "fate"
           ],
           "change_reasons": [
             "image",
             "source"
           ],
           "source_ids": [
-            "good_smile_madoka_en"
+            "good_smile_fate_en"
           ],
           "source_urls": [
-            "https://www.goodsmile.info/ja/product/14098/"
-          ]
-        },
-        {
-          "kit_id": "goodsmile-madoka-13183",
-          "change_type": "changed",
-          "franchise": "madoka",
-          "grade_code": "MADOKA_MINI",
-          "subline": "HELLO! GOOD SMILE",
-          "series_key": "madoka_rebellion",
-          "series_labels": {
-            "zh": "叛逆的物语",
-            "en": "Rebellion",
-            "ja": "叛逆の物語",
-            "ko": "반역의 이야기"
-          },
-          "names": {
-            "ja": "HELLO! GOOD SMILE 佐倉杏子",
-            "zh": "HELLO! GOOD SMILE 佐仓杏子",
-            "ko": "HELLO! GOOD SMILE 사쿠라 쿄코",
-            "en": "HELLO! GOOD SMILE 佐倉杏子"
-          },
-          "release_date": "2023-01",
-          "price_jpy": 1700,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "madoka"
-          ],
-          "change_reasons": [
-            "image",
-            "source"
-          ],
-          "source_ids": [
-            "good_smile_madoka_en"
-          ],
-          "source_urls": [
-            "https://www.goodsmile.info/ja/product/13183/"
-          ]
-        },
-        {
-          "kit_id": "goodsmile-madoka-13181",
-          "change_type": "changed",
-          "franchise": "madoka",
-          "grade_code": "MADOKA_MINI",
-          "subline": "HELLO! GOOD SMILE",
-          "series_key": "madoka_rebellion",
-          "series_labels": {
-            "zh": "叛逆的物语",
-            "en": "Rebellion",
-            "ja": "叛逆の物語",
-            "ko": "반역의 이야기"
-          },
-          "names": {
-            "ja": "HELLO! GOOD SMILE 巴マミ",
-            "zh": "HELLO! GOOD SMILE 巴麻美",
-            "ko": "HELLO! GOOD SMILE 토모에 마미",
-            "en": "HELLO! GOOD SMILE 巴マミ"
-          },
-          "release_date": "2023-01",
-          "price_jpy": 1700,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "madoka"
-          ],
-          "change_reasons": [
-            "image",
-            "source"
-          ],
-          "source_ids": [
-            "good_smile_madoka_en"
-          ],
-          "source_urls": [
-            "https://www.goodsmile.info/ja/product/13181/"
-          ]
-        },
-        {
-          "kit_id": "goodsmile-madoka-13182",
-          "change_type": "changed",
-          "franchise": "madoka",
-          "grade_code": "MADOKA_MINI",
-          "subline": "HELLO! GOOD SMILE",
-          "series_key": "madoka_rebellion",
-          "series_labels": {
-            "zh": "叛逆的物语",
-            "en": "Rebellion",
-            "ja": "叛逆の物語",
-            "ko": "반역의 이야기"
-          },
-          "names": {
-            "ja": "HELLO! GOOD SMILE 美樹さやか",
-            "zh": "HELLO! GOOD SMILE 美树沙耶香",
-            "ko": "HELLO! GOOD SMILE 미키 사야카",
-            "en": "HELLO! GOOD SMILE 美樹さやか"
-          },
-          "release_date": "2023-01",
-          "price_jpy": 1700,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "madoka"
-          ],
-          "change_reasons": [
-            "image",
-            "source"
-          ],
-          "source_ids": [
-            "good_smile_madoka_en"
-          ],
-          "source_urls": [
-            "https://www.goodsmile.info/ja/product/13182/"
-          ]
-        },
-        {
-          "kit_id": "goodsmile-madoka-12957",
-          "change_type": "changed",
-          "franchise": "madoka",
-          "grade_code": "MADOKA_MINI",
-          "subline": "HELLO! GOOD SMILE",
-          "series_key": "madoka_rebellion",
-          "series_labels": {
-            "zh": "叛逆的物语",
-            "en": "Rebellion",
-            "ja": "叛逆の物語",
-            "ko": "반역의 이야기"
-          },
-          "names": {
-            "ja": "HELLO! GOOD SMILE 暁美ほむら",
-            "zh": "HELLO! GOOD SMILE 晓美焰",
-            "ko": "HELLO! GOOD SMILE 아케미 호무라",
-            "en": "HELLO! GOOD SMILE 暁美ほむら"
-          },
-          "release_date": "2022-11",
-          "price_jpy": 1700,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "madoka"
-          ],
-          "change_reasons": [
-            "image",
-            "source"
-          ],
-          "source_ids": [
-            "good_smile_madoka_en"
-          ],
-          "source_urls": [
-            "https://www.goodsmile.info/ja/product/12957/"
+            "https://www.goodsmile.info/en/product/13929/Berserker+Minamoto+no+Raikou+Travel+Portrait+Ver.html?utm_source=internal&utm_medium=matome&utm_campaign=fgo"
           ]
         }
       ],
