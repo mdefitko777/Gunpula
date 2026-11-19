@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-18",
+  "updated_at": "2026-11-19",
   "source": "Generated from data/kits.json, data/atlas-source-taxonomy.json (PokeAPI species), data/gget-series-sections.json, data/atlas/fate-roster.json (Atlas Academy + Mooncell + hand-kept works) and data/atlas/atlas-covers.json by scripts/build_atlas_groups.mjs",
   "channels": {
     "gundam": {
@@ -4231,11 +4231,12 @@
           "pokemon-center-4521329437170",
           "pokemon-center-4521329437354",
           "pokemon-center-4521329452579",
+          "pokemon-center-4904810096382",
           "pokemon-center-4904810098683",
           "pokemon-center-4904810911715",
           "pokemon-center-4904810951469"
         ],
-        "count": 266
+        "count": 267
       },
       {
         "id": "gen7",
@@ -4572,9 +4573,10 @@
           "pokemon-center-4521329428062",
           "pokemon-center-4521329437187",
           "pokemon-center-4521329437194",
-          "pokemon-center-4521329437200"
+          "pokemon-center-4521329437200",
+          "pokemon-center-4521329452586"
         ],
-        "count": 218
+        "count": 219
       },
       {
         "id": "gen8",
@@ -5562,9 +5564,10 @@
           "pokemon-center-4521329437248",
           "pokemon-center-4521329437255",
           "pokemon-center-4521329437262",
+          "pokemon-center-4521329452609",
           "pokemon-center-4521329454153"
         ],
-        "count": 547
+        "count": 548
       },
       {
         "id": "pokemon_general",
@@ -5740,6 +5743,8 @@
           "banpresto-2843713",
           "banpresto-2859837",
           "banpresto-2859900",
+          "pokemon-kr-138193138",
+          "pokemon-kr-138193150",
           "banpresto-2842079",
           "pokemon-kr-137286917",
           "pokemon-kr-137287010",
@@ -6453,7 +6458,7 @@
           "pokemon-center-4901161056553",
           "pokemon-center-4904810913894"
         ],
-        "count": 717
+        "count": 719
       }
     ],
     "fate": [
@@ -7163,8 +7168,8 @@
           "aniplex-fate-itemumgdeslp",
           "ichibankuji-fate-fate25",
           "aniplex-fate-itempxylcxnw",
+          "aniplex-fate-itemusluhsfz",
           "aniplex-fate-itemvkohhcgi",
-          "aniplex-fate-itemzofuftqg",
           "aniplex-fate-itemannmsgts",
           "aniplex-fate-itemdcbbdevv",
           "aniplex-fate-itemgwjerfwl",
@@ -7210,9 +7215,9 @@
           "aniplex-fate-itemqfviaadw",
           "aniplex-fate-itemrjalxvus",
           "aniplex-fate-itemrpwgksvy",
-          "aniplex-fate-itemusluhsfz",
           "aniplex-fate-itemvcijjxmv",
           "aniplex-fate-itemwhepkybs",
+          "aniplex-fate-itemzofuftqg",
           "goodsmile-fate-g7781"
         ],
         "count": 58
@@ -13898,6 +13903,7 @@
           "movic-madoka-02151-00700-00065",
           "aniplex-madoka-itemcarfxvpv01",
           "megahouse-madoka-5807",
+          "bspirits-madoka-4573102742797000",
           "banpresto-madoka-2725382",
           "banpresto-madoka-2774392",
           "aniplex-madoka-itemmyjsbdai",
@@ -13938,7 +13944,7 @@
           "goodsmile-madoka-g1147107",
           "movic-madoka-02151-00700-00051"
         ],
-        "count": 45,
+        "count": 46,
         "cover_source": "newest product picture"
       },
       {
@@ -14140,15 +14146,16 @@
           "en": "",
           "ja": ""
         },
-        "image": "./assets/catalog/madoka/skjapan-madoka-amgoods-53602-01-b4b214aca9.jpg",
+        "image": "./assets/catalog/madoka/movic-madoka-02151-00700-00067-01-2bd4c44a1a.jpg",
         "kit_ids": [
+          "movic-madoka-02151-00700-00067",
           "skjapan-madoka-amgoods-53602",
           "prizebp-madoka-prizebp-49159",
           "goodsmile-madoka-4249",
           "goodsmile-madoka-4234",
           "goodsmile-madoka-g55558"
         ],
-        "count": 5,
+        "count": 6,
         "cover_source": "newest product picture"
       },
       {
@@ -48362,6 +48369,128 @@
     ],
     "nintendo": [
       {
+        "id": "nintendo_kirby",
+        "kind": "series",
+        "labels": {
+          "zh": "星之卡比",
+          "ko": "별의 커비",
+          "en": "Kirby",
+          "ja": "星のカービィ"
+        },
+        "subtitle": {
+          "zh": "",
+          "ko": "",
+          "en": "",
+          "ja": ""
+        },
+        "image": "https://images.ctfassets.net/sjvy5j5nlcjk/70010000135067b98b677aacc311f1ae71af02b35a5764/b87e2106b3aa77a6bbf6ed2ee56088b5/ad91843a60997cf00f505c51c3e309babe70a25537c7c6a293b8e7658c26caa1.jpg?w=800&fm=webp",
+        "cover_source": "newest game picture (Nintendo Store Korea)",
+        "kit_ids": [
+          "nintendo-kr-ns-70010000135067",
+          "gashapon-nin-4582770131505000",
+          "banpresto-nin-2855780",
+          "gashapon-nin-4582769928154000",
+          "gashapon-nin-4582769832505000",
+          "gashapon-nin-4582769979866000",
+          "gashapon-nin-4582770069464000",
+          "gashapon-nin-4549660488774000",
+          "ichibankuji-nin-kirby25",
+          "gashapon-nin-4582769968525000",
+          "banpresto-nin-2778437",
+          "gashapon-nin-4582769700897000",
+          "gashapon-nin-4582769769290000",
+          "banpresto-nin-2812384",
+          "gashapon-nin-4582769916861000",
+          "gashapon-nin-4582769889455000",
+          "gashapon-nin-4582769928123000",
+          "gashapon-nin-4582769928130000",
+          "nintendo-kr-14591",
+          "ichibankuji-nin-kirby6-2",
+          "banpresto-nin-2785685",
+          "gashapon-nin-4549660488798000",
+          "gashapon-nin-4582769832499000",
+          "gashapon-nin-4582769916854000",
+          "nintendo-kr-14011",
+          "gashapon-nin-4582769793455000",
+          "banpresto-nin-2786922",
+          "gashapon-nin-4570118197665000",
+          "gashapon-nin-4582769739408000",
+          "gashapon-nin-4582769720758000",
+          "ichibankuji-nin-kirby24",
+          "gashapon-nin-4582769739392000",
+          "banpresto-nin-2734939",
+          "gashapon-nin-4549660502159000",
+          "gashapon-nin-4570118107039000",
+          "gashapon-nin-4582769700880000",
+          "nintendo-kr-12516",
+          "ichibankuji-nin-kirby23",
+          "gashapon-nin-4570118233370000",
+          "banpresto-nin-2715961",
+          "gashapon-nin-4549660939771000",
+          "gashapon-nin-4549660792659000",
+          "ichibankuji-nin-kirby22",
+          "gashapon-nin-4570117968266000",
+          "gashapon-nin-4570118106971000",
+          "gashapon-nin-4549660939757000",
+          "ichibankuji-nin-kirby21",
+          "gashapon-nin-4549660775195000",
+          "gashapon-nin-4570118106995000",
+          "banpresto-nin-2635300",
+          "ichibankuji-nin-kirby20",
+          "gashapon-nin-4549660361091000",
+          "gashapon-nin-4549660939733000",
+          "banpresto-nin-2629410",
+          "gashapon-nin-4549660346135000",
+          "gashapon-nin-4549660696018000",
+          "ichibankuji-nin-kirby19",
+          "nintendo-kr-6046",
+          "nintendo-kr-7497",
+          "nintendo-kr-7498",
+          "banpresto-nin-2559716",
+          "gashapon-nin-4549660406099000",
+          "gashapon-nin-4549660952077000",
+          "nintendo-kr-5782",
+          "ichibankuji-nin-kirby17",
+          "gashapon-nin-4549660622956000",
+          "gashapon-nin-4549660758358000",
+          "nintendo-kr-11810",
+          "banpresto-nin-2584282",
+          "gashapon-nin-4549660661054000",
+          "ichibankuji-nin-kirby-c2",
+          "gashapon-nin-4549660555018000",
+          "gashapon-nin-4549660510215000",
+          "nintendo-kr-1940",
+          "gashapon-nin-4549660406112000",
+          "nintendo-kr-819",
+          "ichibankuji-nin-kirby-c",
+          "gashapon-nin-4549660269274000",
+          "nintendo-kr-171",
+          "goodsmile-nin-10434",
+          "goodsmile-nin-10929",
+          "goodsmile-nin-1137526",
+          "goodsmile-nin-1141435",
+          "goodsmile-nin-1142183",
+          "goodsmile-nin-2974",
+          "goodsmile-nin-34674",
+          "goodsmile-nin-35228",
+          "goodsmile-nin-3625",
+          "goodsmile-nin-4242",
+          "goodsmile-nin-4243",
+          "goodsmile-nin-4244",
+          "goodsmile-nin-4245",
+          "goodsmile-nin-4542",
+          "goodsmile-nin-4566",
+          "goodsmile-nin-4801",
+          "goodsmile-nin-5458",
+          "goodsmile-nin-55962",
+          "goodsmile-nin-55964",
+          "goodsmile-nin-5625",
+          "goodsmile-nin-6929",
+          "ichibankuji-nin-kirby18"
+        ],
+        "count": 101
+      },
+      {
         "id": "nintendo_zelda",
         "kind": "series",
         "labels": {
@@ -48379,7 +48508,9 @@
         "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/f/d/fd69c90e3034aae1f4d5cb3db1101fb865ce4769aa9571362a7234476fe809a5_1.jpg",
         "cover_source": "newest game picture (Nintendo Store Korea)",
         "kit_ids": [
+          "tamashii-nin-16048",
           "nintendo-kr-17640",
+          "ichibankuji-nin-zelda5",
           "nintendo-kr-17579",
           "nintendo-kr-17783",
           "nintendo-kr-17784",
@@ -48405,15 +48536,21 @@
           "nintendo-kr-18131",
           "nintendo-kr-18132",
           "nintendo-kr-18133",
+          "gashapon-nin-4582770027075000",
           "nintendo-kr-14915",
+          "gashapon-nin-4570118121233000",
           "nintendo-kr-13864",
           "nintendo-kr-13953",
+          "ichibankuji-nin-zelda4",
           "nintendo-kr-12616",
+          "tamashii-nin-14850",
+          "ichibankuji-nin-zelda3-02",
           "nintendo-kr-amiibo-343",
           "nintendo-kr-amiibo-344",
           "nintendo-kr-11816",
           "nintendo-kr-8330",
           "nintendo-kr-amiibo-340",
+          "ichibankuji-nin-zelda3",
           "nintendo-kr-11924",
           "nintendo-kr-8086",
           "nintendo-kr-8087",
@@ -48422,10 +48559,31 @@
           "nintendo-kr-1907",
           "nintendo-kr-783",
           "nintendo-kr-699",
+          "ichibankuji-nin-zelda2",
           "nintendo-kr-15902",
+          "ichibankuji-nin-zelda",
+          "gashapon-nin-4543112872852000",
+          "goodsmile-nin-1409",
+          "goodsmile-nin-2181",
+          "goodsmile-nin-2952",
+          "goodsmile-nin-3189",
+          "goodsmile-nin-3190",
+          "goodsmile-nin-3348",
+          "goodsmile-nin-3427",
+          "goodsmile-nin-3706",
+          "goodsmile-nin-3707",
+          "goodsmile-nin-3708",
+          "goodsmile-nin-3950",
+          "goodsmile-nin-4806",
+          "goodsmile-nin-56831",
+          "goodsmile-nin-58704",
+          "goodsmile-nin-60181",
+          "goodsmile-nin-60357",
+          "goodsmile-nin-60793",
+          "goodsmile-nin-6526",
           "nintendo-kr-18319"
         ],
-        "count": 45
+        "count": 74
       },
       {
         "id": "nintendo_mario",
@@ -48445,16 +48603,27 @@
         "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/c/b/cbcf7cc15a8532930091694efdf7731dc07dd585ff3da776611408d69f4f5015_1.jpg",
         "cover_source": "newest game picture (Nintendo Store Korea)",
         "kit_ids": [
+          "tamashii-nin-15463",
+          "gashapon-nin-4582769924613000",
+          "ichibankuji-nin-mario-movie2",
           "nintendo-kr-15981",
+          "tamashii-nin-15467",
           "nintendo-kr-15837",
+          "tamashii-nin-15464",
+          "tamashii-nin-15465",
           "nintendo-kr-15172",
+          "gashapon-nin-4582769898242000",
+          "ichibankuji-nin-mario2",
           "nintendo-kr-14676",
           "nintendo-kr-14598",
           "nintendo-kr-14599",
           "nintendo-kr-14012",
+          "gashapon-nin-4570118246059000",
+          "gashapon-nin-4570118246073000",
           "nintendo-kr-13659",
           "nintendo-kr-11913",
           "nintendo-kr-12617",
+          "ichibankuji-nin-mario",
           "nintendo-kr-11140",
           "nintendo-kr-11142",
           "nintendo-kr-11280",
@@ -48462,20 +48631,172 @@
           "nintendo-kr-8682",
           "nintendo-kr-8681",
           "nintendo-kr-11818",
+          "ichibankuji-nin-mario-life",
+          "ichibankuji-nin-mario-movie",
           "nintendo-kr-4646",
           "nintendo-kr-2956",
           "nintendo-kr-2955",
           "nintendo-kr-2404",
+          "ichibankuji-nin-itsudemo-mario2",
           "nintendo-kr-1505",
+          "ichibankuji-nin-itsudemo-mario",
           "nintendo-kr-873",
           "nintendo-kr-608",
           "nintendo-kr-344",
+          "ichibankuji-nin-mariokart",
           "nintendo-kr-69",
           "nintendo-kr-118",
+          "tamashii-nin-12389",
           "nintendo-kr-98",
-          "nintendo-kr-11804"
+          "nintendo-kr-11804",
+          "ichibankuji-nin-mario-od",
+          "tamashii-nin-10610",
+          "tamashii-nin-11164",
+          "tamashii-nin-11165",
+          "tamashii-nin-11007",
+          "tamashii-nin-11008",
+          "tamashii-nin-10612",
+          "tamashii-nin-10613",
+          "gashapon-nin-4543112942135000",
+          "tamashii-nin-10792",
+          "tamashii-nin-10793",
+          "gashapon-nin-4543112921390000",
+          "gashapon-nin-4543112872838000",
+          "goodsmile-nin-1986",
+          "goodsmile-nin-2510"
         ],
-        "count": 29
+        "count": 61
+      },
+      {
+        "id": "nintendo_splatoon",
+        "kind": "series",
+        "labels": {
+          "zh": "斯普拉遁",
+          "ko": "스플래툰",
+          "en": "Splatoon",
+          "ja": "スプラトゥーン"
+        },
+        "subtitle": {
+          "zh": "",
+          "ko": "",
+          "en": "",
+          "ja": ""
+        },
+        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/c/f/cf587e01f6f115398f411f280dba21e025795eb69f234a41722341ea999d170d.jpg",
+        "cover_source": "newest game picture (Nintendo Store Korea)",
+        "kit_ids": [
+          "ichibankuji-nin-splatoon-3-03",
+          "nintendo-kr-16362",
+          "gashapon-nin-4570118107077000",
+          "ichibankuji-nin-splatoon-3-02",
+          "nintendo-kr-amiibo-345",
+          "nintendo-kr-amiibo-346",
+          "nintendo-kr-amiibo-347",
+          "gashapon-nin-4549660801139000",
+          "ichibankuji-nin-splatoon-3-2",
+          "nintendo-kr-7245",
+          "nintendo-kr-amiibo-332",
+          "nintendo-kr-amiibo-333",
+          "nintendo-kr-amiibo-334",
+          "nintendo-kr-6052",
+          "nintendo-kr-6051",
+          "nintendo-kr-11813",
+          "ichibankuji-nin-splatoon-t22clhqqfnm3nw5",
+          "nintendo-kr-11812",
+          "nintendo-kr-510",
+          "gashapon-nin-4549660332534000",
+          "gashapon-nin-4549660294139000",
+          "gashapon-nin-4549660246459000",
+          "gashapon-nin-4549660225973000",
+          "gashapon-nin-4549660179719000",
+          "ichibankuji-nin-splatoon-2",
+          "gashapon-nin-4549660179696000",
+          "gashapon-nin-4549660135012000",
+          "ichibankuji-nin-splatoon2",
+          "gashapon-nin-4549660110378000",
+          "gashapon-nin-4549660109297000",
+          "gashapon-nin-4549660110361000",
+          "gashapon-nin-4549660092902000",
+          "ichibankuji-nin-splatoon",
+          "gashapon-nin-4549660066774000",
+          "gashapon-nin-4549660065364000",
+          "gashapon-nin-4549660065357000",
+          "gashapon-nin-4549660031611000",
+          "gashapon-nin-4549660029830000",
+          "gashapon-nin-4549660031291000",
+          "gashapon-nin-4549660029274000",
+          "gashapon-nin-4549660029816000",
+          "goodsmile-nin-5263",
+          "goodsmile-nin-5264",
+          "goodsmile-nin-6654",
+          "goodsmile-nin-6655",
+          "goodsmile-nin-8034"
+        ],
+        "count": 46
+      },
+      {
+        "id": "nintendo_fire_emblem",
+        "kind": "series",
+        "labels": {
+          "zh": "火焰纹章",
+          "ko": "파이어 엠블렘",
+          "en": "Fire Emblem",
+          "ja": "ファイアーエムブレム"
+        },
+        "subtitle": {
+          "zh": "",
+          "ko": "",
+          "en": "",
+          "ja": ""
+        },
+        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/e/9/e98ecdd892d64b4e53e19c4d57cd1edaa961aa3ca6621ad79764c4e513e9ce9e.jpg",
+        "cover_source": "newest game picture (Nintendo Store Korea)",
+        "kit_ids": [
+          "nintendo-kr-16725",
+          "nintendo-kr-17641",
+          "nintendo-kr-6044",
+          "nintendo-kr-4647",
+          "nintendo-kr-726",
+          "nintendo-kr-164",
+          "goodsmile-nin-10487",
+          "goodsmile-nin-10488",
+          "goodsmile-nin-10631",
+          "goodsmile-nin-10632",
+          "goodsmile-nin-10707",
+          "goodsmile-nin-10708",
+          "goodsmile-nin-10869",
+          "goodsmile-nin-10870",
+          "goodsmile-nin-11256",
+          "goodsmile-nin-1136862",
+          "goodsmile-nin-1137282",
+          "goodsmile-nin-1138244",
+          "goodsmile-nin-1138499",
+          "goodsmile-nin-1140134",
+          "goodsmile-nin-1144407",
+          "goodsmile-nin-1144408",
+          "goodsmile-nin-1145060",
+          "goodsmile-nin-12076",
+          "goodsmile-nin-1787",
+          "goodsmile-nin-2536",
+          "goodsmile-nin-2887",
+          "goodsmile-nin-3008",
+          "goodsmile-nin-3124",
+          "goodsmile-nin-3582",
+          "goodsmile-nin-36047",
+          "goodsmile-nin-36048",
+          "goodsmile-nin-36049",
+          "goodsmile-nin-36050",
+          "goodsmile-nin-36051",
+          "goodsmile-nin-3890",
+          "goodsmile-nin-3891",
+          "goodsmile-nin-4504",
+          "goodsmile-nin-57564",
+          "goodsmile-nin-61866",
+          "goodsmile-nin-6643",
+          "goodsmile-nin-8640",
+          "goodsmile-nin-9886"
+        ],
+        "count": 43
       },
       {
         "id": "nintendo_pokemon",
@@ -48525,13 +48846,13 @@
         "count": 26
       },
       {
-        "id": "nintendo_splatoon",
+        "id": "nintendo_animal_crossing",
         "kind": "series",
         "labels": {
-          "zh": "斯普拉遁",
-          "ko": "스플래툰",
-          "en": "Splatoon",
-          "ja": "スプラトゥーン"
+          "zh": "动物森友会",
+          "ko": "동물의 숲",
+          "en": "Animal Crossing",
+          "ja": "どうぶつの森"
         },
         "subtitle": {
           "zh": "",
@@ -48539,89 +48860,36 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/c/f/cf587e01f6f115398f411f280dba21e025795eb69f234a41722341ea999d170d.jpg",
+        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/f/5/f5dc1bf581d4bf64293afcc24d1e63abb625dcb7c25b1595f1bb4ecd03b214f9_1.jpg",
         "cover_source": "newest game picture (Nintendo Store Korea)",
         "kit_ids": [
-          "nintendo-kr-16362",
-          "nintendo-kr-amiibo-345",
-          "nintendo-kr-amiibo-346",
-          "nintendo-kr-amiibo-347",
-          "nintendo-kr-7245",
-          "nintendo-kr-amiibo-332",
-          "nintendo-kr-amiibo-333",
-          "nintendo-kr-amiibo-334",
-          "nintendo-kr-6052",
-          "nintendo-kr-6051",
-          "nintendo-kr-11813",
-          "nintendo-kr-11812",
-          "nintendo-kr-510"
+          "gashapon-nin-4582770068412000",
+          "gashapon-nin-4582769935299000",
+          "gashapon-nin-4582770098853000",
+          "ichibankuji-nin-doubutsuno-mori6",
+          "gashapon-nin-4582769916786000",
+          "nintendo-kr-15462",
+          "nintendo-kr-12615",
+          "ichibankuji-nin-doubutsuno-mori5",
+          "nintendo-kr-8616",
+          "nintendo-kr-8622",
+          "ichibankuji-nin-doubutsuno-mori4-02",
+          "ichibankuji-nin-doubutsuno-mori4",
+          "gashapon-nin-4549660271437000",
+          "nintendo-kr-amiibo-327",
+          "ichibankuji-nin-doubutsuno-mori3-2",
+          "gashapon-nin-4549660555056000",
+          "ichibankuji-nin-doubutsuno-mori3",
+          "nintendo-kr-1464",
+          "nintendo-kr-11806",
+          "nintendo-kr-11807",
+          "ichibankuji-nin-doubutsuno-mori2",
+          "ichibankuji-nin-doubutsuno-mori",
+          "gashapon-nin-4549660029793000",
+          "goodsmile-nin-1734",
+          "goodsmile-nin-1952"
         ],
-        "count": 13
-      },
-      {
-        "id": "nintendo_kirby",
-        "kind": "series",
-        "labels": {
-          "zh": "星之卡比",
-          "ko": "별의 커비",
-          "en": "Kirby",
-          "ja": "星のカービィ"
-        },
-        "subtitle": {
-          "zh": "",
-          "ko": "",
-          "en": "",
-          "ja": ""
-        },
-        "image": "https://images.ctfassets.net/sjvy5j5nlcjk/70010000135067b98b677aacc311f1ae71af02b35a5764/b87e2106b3aa77a6bbf6ed2ee56088b5/ad91843a60997cf00f505c51c3e309babe70a25537c7c6a293b8e7658c26caa1.jpg?w=800&fm=webp",
-        "cover_source": "newest game picture (Nintendo Store Korea)",
-        "kit_ids": [
-          "nintendo-kr-ns-70010000135067",
-          "nintendo-kr-14591",
-          "nintendo-kr-14011",
-          "nintendo-kr-12516",
-          "nintendo-kr-6046",
-          "nintendo-kr-7497",
-          "nintendo-kr-7498",
-          "nintendo-kr-5782",
-          "nintendo-kr-11810",
-          "nintendo-kr-1940",
-          "nintendo-kr-819",
-          "nintendo-kr-171"
-        ],
-        "count": 12
-      },
-      {
-        "id": "nintendo_pikmin",
-        "kind": "series",
-        "labels": {
-          "zh": "皮克敏",
-          "ko": "피크민",
-          "en": "Pikmin",
-          "ja": "ピクミン"
-        },
-        "subtitle": {
-          "zh": "",
-          "ko": "",
-          "en": "",
-          "ja": ""
-        },
-        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/_/-/_-4-nintendo-switch-2-edition_-_-_-_.jpg",
-        "cover_source": "newest game picture (Nintendo Store Korea)",
-        "kit_ids": [
-          "nintendo-kr-17838",
-          "nintendo-kr-8679",
-          "nintendo-kr-8680",
-          "nintendo-kr-9325",
-          "nintendo-kr-9326",
-          "nintendo-kr-11817",
-          "nintendo-kr-8935",
-          "nintendo-kr-8936",
-          "nintendo-kr-8937",
-          "nintendo-kr-8938",
-          "nintendo-kr-1804"
-        ],
-        "count": 11
+        "count": 25
       },
       {
         "id": "nintendo_xenoblade",
@@ -48646,14 +48914,92 @@
           "nintendo-kr-17389",
           "nintendo-kr-16723",
           "nintendo-kr-15774",
+          "kotobukiya-nin-productdetailp4934054073962",
+          "kotobukiya-nin-productdetailp4934054045389",
           "nintendo-kr-13402",
           "nintendo-kr-amiibo-348",
           "nintendo-kr-amiibo-349",
           "nintendo-kr-5031",
           "nintendo-kr-1455",
-          "nintendo-kr-96"
+          "nintendo-kr-96",
+          "goodsmile-nin-45693",
+          "goodsmile-nin-4687",
+          "goodsmile-nin-4912",
+          "goodsmile-nin-61459",
+          "goodsmile-nin-6426",
+          "goodsmile-nin-8516",
+          "goodsmile-nin-9904"
         ],
-        "count": 11
+        "count": 20
+      },
+      {
+        "id": "nintendo_pikmin",
+        "kind": "series",
+        "labels": {
+          "zh": "皮克敏",
+          "ko": "피크민",
+          "en": "Pikmin",
+          "ja": "ピクミン"
+        },
+        "subtitle": {
+          "zh": "",
+          "ko": "",
+          "en": "",
+          "ja": ""
+        },
+        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/_/-/_-4-nintendo-switch-2-edition_-_-_-_.jpg",
+        "cover_source": "newest game picture (Nintendo Store Korea)",
+        "kit_ids": [
+          "nintendo-kr-17838",
+          "gashapon-nin-4570118211354000",
+          "gashapon-nin-4570117984754000",
+          "nintendo-kr-8679",
+          "nintendo-kr-8680",
+          "nintendo-kr-9325",
+          "nintendo-kr-9326",
+          "nintendo-kr-11817",
+          "nintendo-kr-8935",
+          "nintendo-kr-8936",
+          "nintendo-kr-8937",
+          "nintendo-kr-8938",
+          "nintendo-kr-1804",
+          "goodsmile-nin-1138596",
+          "goodsmile-nin-56672"
+        ],
+        "count": 15
+      },
+      {
+        "id": "nintendo_metroid",
+        "kind": "series",
+        "labels": {
+          "zh": "密特罗德",
+          "ko": "메트로이드",
+          "en": "Metroid",
+          "ja": "メトロイド"
+        },
+        "subtitle": {
+          "zh": "",
+          "ko": "",
+          "en": "",
+          "ja": ""
+        },
+        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/a/8/a8911a0e9eac65082625b2d49c202baedce56adf614f6b191fea0070608750ef_1.jpg",
+        "cover_source": "newest game picture (Nintendo Store Korea)",
+        "kit_ids": [
+          "nintendo-kr-17638",
+          "tamashii-nin-15649",
+          "nintendo-kr-14917",
+          "nintendo-kr-15118",
+          "nintendo-kr-7454",
+          "nintendo-kr-18071",
+          "goodsmile-nin-10914",
+          "goodsmile-nin-12297",
+          "goodsmile-nin-1281",
+          "goodsmile-nin-1282",
+          "goodsmile-nin-3478",
+          "goodsmile-nin-4125"
+        ],
+        "count": 12
       },
       {
         "id": "nintendo_smash",
@@ -48686,13 +49032,13 @@
         "count": 9
       },
       {
-        "id": "nintendo_animal_crossing",
+        "id": "nintendo_yoshi",
         "kind": "series",
         "labels": {
-          "zh": "动物森友会",
-          "ko": "동물의 숲",
-          "en": "Animal Crossing",
-          "ja": "どうぶつの森"
+          "zh": "耀西",
+          "ko": "요시",
+          "en": "Yoshi",
+          "ja": "ヨッシー"
         },
         "subtitle": {
           "zh": "",
@@ -48700,72 +49046,17 @@
           "en": "",
           "ja": ""
         },
-        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/f/5/f5dc1bf581d4bf64293afcc24d1e63abb625dcb7c25b1595f1bb4ecd03b214f9_1.jpg",
+        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/e/5/e51d5f3c6b5a7da18be07790db67ea3e2ddc227a112f51e2da382a528edf001a.jpg",
         "cover_source": "newest game picture (Nintendo Store Korea)",
         "kit_ids": [
-          "nintendo-kr-15462",
-          "nintendo-kr-12615",
-          "nintendo-kr-8616",
-          "nintendo-kr-8622",
-          "nintendo-kr-amiibo-327",
-          "nintendo-kr-1464",
-          "nintendo-kr-11806",
-          "nintendo-kr-11807"
-        ],
-        "count": 8
-      },
-      {
-        "id": "nintendo_fire_emblem",
-        "kind": "series",
-        "labels": {
-          "zh": "火焰纹章",
-          "ko": "파이어 엠블렘",
-          "en": "Fire Emblem",
-          "ja": "ファイアーエムブレム"
-        },
-        "subtitle": {
-          "zh": "",
-          "ko": "",
-          "en": "",
-          "ja": ""
-        },
-        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/e/9/e98ecdd892d64b4e53e19c4d57cd1edaa961aa3ca6621ad79764c4e513e9ce9e.jpg",
-        "cover_source": "newest game picture (Nintendo Store Korea)",
-        "kit_ids": [
-          "nintendo-kr-16725",
-          "nintendo-kr-17641",
-          "nintendo-kr-6044",
-          "nintendo-kr-4647",
-          "nintendo-kr-726",
-          "nintendo-kr-164"
+          "ichibankuji-nin-mario-yoshi",
+          "nintendo-kr-15978",
+          "gashapon-nin-4582769916830000",
+          "tamashii-nin-15466",
+          "nintendo-kr-430",
+          "tamashii-nin-10901"
         ],
         "count": 6
-      },
-      {
-        "id": "nintendo_metroid",
-        "kind": "series",
-        "labels": {
-          "zh": "密特罗德",
-          "ko": "메트로이드",
-          "en": "Metroid",
-          "ja": "メトロイド"
-        },
-        "subtitle": {
-          "zh": "",
-          "ko": "",
-          "en": "",
-          "ja": ""
-        },
-        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/a/8/a8911a0e9eac65082625b2d49c202baedce56adf614f6b191fea0070608750ef_1.jpg",
-        "cover_source": "newest game picture (Nintendo Store Korea)",
-        "kit_ids": [
-          "nintendo-kr-17638",
-          "nintendo-kr-14917",
-          "nintendo-kr-15118",
-          "nintendo-kr-7454",
-          "nintendo-kr-18071"
-        ],
-        "count": 5
       },
       {
         "id": "nintendo_donkey_kong",
@@ -48791,29 +49082,6 @@
           "nintendo-kr-172"
         ],
         "count": 4
-      },
-      {
-        "id": "nintendo_yoshi",
-        "kind": "series",
-        "labels": {
-          "zh": "耀西",
-          "ko": "요시",
-          "en": "Yoshi",
-          "ja": "ヨッシー"
-        },
-        "subtitle": {
-          "zh": "",
-          "ko": "",
-          "en": "",
-          "ja": ""
-        },
-        "image": "https://store.nintendo.co.kr/media/catalog/product/cache/69fca11704444074de0ecc4f2e43f422/e/5/e51d5f3c6b5a7da18be07790db67ea3e2ddc227a112f51e2da382a528edf001a.jpg",
-        "cover_source": "newest game picture (Nintendo Store Korea)",
-        "kit_ids": [
-          "nintendo-kr-15978",
-          "nintendo-kr-430"
-        ],
-        "count": 2
       },
       {
         "id": "nintendo_other",

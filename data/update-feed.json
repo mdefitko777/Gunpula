@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18",
-  "generated_at": "2026-11-18T01:43:28.798Z",
+  "updated_at": "2026-11-19",
+  "generated_at": "2026-11-19T00:30:12.485Z",
   "watch_tags": [
     "seed",
     "00"
@@ -20,11 +20,853 @@
     "effects"
   ],
   "source_health": {
-    "generated_at": "2026-11-18T01:39:34.794Z",
+    "generated_at": "2026-11-19T00:29:46.571Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
+    {
+      "date": "2026-11-19",
+      "generated_at": "2026-11-19T00:30:12.485Z",
+      "total_before": 41879,
+      "total_after": 41887,
+      "added_count": 8,
+      "changed_count": 13,
+      "removed_count": 0,
+      "watched_count": 0,
+      "merged_count": 0,
+      "backfilled_count": 0,
+      "renamed_count": 0,
+      "premium_bandai_count": 4,
+      "bbx_count": 0,
+      "franchise_counts": {
+        "gundam": 5,
+        "madoka": 4,
+        "pokemon": 11,
+        "fate": 1
+      },
+      "reason_counts": {
+        "new": 8,
+        "image": 3,
+        "source": 4,
+        "price": 2,
+        "name": 6
+      },
+      "interest_tags": [
+        "gundam",
+        "madoka",
+        "pokemon",
+        "fate",
+        "premium_bandai"
+      ],
+      "watch_tags": [],
+      "added": [
+        {
+          "kit_id": "tamashii-16276",
+          "change_type": "added",
+          "franchise": "gundam",
+          "grade_code": "ROBOT_SPIRITS",
+          "subline": "ROBOT魂 ver. A.N.I.M.E.",
+          "series_key": "zeta",
+          "series_labels": {
+            "zh": "Z",
+            "en": "Z",
+            "ja": "Z",
+            "ko": "Z"
+          },
+          "names": {
+            "ja": "RX-110 ガブスレイ ver. A.N.I.M.E.",
+            "zh": "RX-110 加布斯雷 ver. A.N.I.M.E.",
+            "ko": "RX-110 ガブスレイ ver. A.N.I.M.E.",
+            "en": "RX-110 ガブスレイ ver. A.N.I.M.E."
+          },
+          "release_date": "2027-05",
+          "price_jpy": 14300,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/16276/",
+            "https://tamashiiweb.com/item_brand/robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "movic-madoka-02151-00700-00067",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PLUSH",
+          "subline": "ムービック",
+          "series_key": "madoka_tv",
+          "series_labels": {
+            "zh": "魔法少女小圆",
+            "en": "Madoka Magica",
+            "ja": "まどか☆マギカ",
+            "ko": "마도카 마기카"
+          },
+          "names": {
+            "ja": "魔法少女まどか☆マギカ ぬいパル（ぬいぐるみマスコット）／百江なぎさ",
+            "zh": "魔法少女小圆 毛绒挂件(ぬいぐるみマスコット)/百江渚",
+            "ko": "魔法少女まどか☆マギカ ぬいパル（ぬいぐるみマスコット） / 百江なぎさ",
+            "en": "魔法少女まどか☆マギカ ぬいパル (ぬいぐるみマスコット)／百江なぎさ"
+          },
+          "release_date": "2027-04-16",
+          "price_jpy": 1980,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "movic_madoka_jp"
+          ],
+          "source_urls": [
+            "https://www.movic.jp/shop/g/g02151-00700-00067/"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-138193138",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "[예약 판매] 포켓몬 스토어 2027년 탁상 캘린더",
+            "zh": "[예약 판매] 포켓몬 스토어 2027년 탁상 캘린더",
+            "ko": "[예약 판매] 포켓몬 스토어 2027년 탁상 캘린더",
+            "en": "[예약 판매] 포켓몬 스토어 2027년 탁상 캘린더"
+          },
+          "release_date": "2026-11-18",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=138193138"
+          ]
+        },
+        {
+          "kit_id": "pokemon-kr-138193150",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "포켓몬 스토어 오리지널",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "[예약 판매] 포켓몬 스토어 2027년 탁상 캘린더&다이어리 세트",
+            "zh": "[예약 판매] 포켓몬 스토어 2027년 탁상 캘린더&다이어리 세트",
+            "ko": "[예약 판매] 포켓몬 스토어 2027년 탁상 캘린더&다이어리 세트",
+            "en": "[예약 판매] 포켓몬 스토어 2027년 탁상 캘린더&다이어리 세트"
+          },
+          "release_date": "2026-11-18",
+          "price_jpy": null,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_store_kr"
+          ],
+          "source_urls": [
+            "https://pokemonstore.co.kr/pages/product/product-detail.html?productNo=138193150"
+          ]
+        },
+        {
+          "kit_id": "bspirits-madoka-4573102742797000",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_ACTION",
+          "subline": "30MP",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "魔法少女まどか☆マギカ 30MP 鹿目まどか(ワルプルギスの廻天Ver.)",
+            "zh": "魔法少女小圆 30MP 鹿目圆(瓦尔普吉斯的回天Ver.)",
+            "ko": "魔法少女まどか☆マギカ 30MP 鹿目まどか(ワルプルギスの廻天Ver.)",
+            "en": "魔法少女まどか☆マギカ 30MP 鹿目まどか(ワルプルギスの廻天Ver.)"
+          },
+          "release_date": "2026-11-07",
+          "price_jpy": 4950,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "bandai_spirits_madoka_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102742797000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329452586",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "Pokemon Center Goods",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ペーパークラフト ポケットモンスター サン・ムーン ポニじま うみのたみのむら",
+            "zh": "ペーパークラフト 宝可梦 サン・ムーン ポニじま うみのたみのむら",
+            "ko": "ペーパークラフト ポケットモンスター サン・ムーン ポニじま うみのたみのむら",
+            "en": "ペーパークラフト ポケットモンスター サン ムーン ポニじま うみのたみのむら"
+          },
+          "release_date": null,
+          "price_jpy": 3850,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329452586.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329452609",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_GOODS",
+          "subline": "Pokemon Center Goods",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ペーパークラフト ポケットモンスター スカーレット・バイオレット テーブルシティ オレンジアカデミー／グレープアカデミー",
+            "zh": "ペーパークラフト 宝可梦 宝可梦 朱/紫 テーブルシティ オレンジアカデミー/グレープアカデミー",
+            "ko": "ペーパークラフト ポケットモンスター スカーレット・バイオレット テーブルシティ オレンジアカデミー / グレープアカデミー",
+            "en": "ペーパークラフト ポケットモンスター スカーレット バイオレット テーブルシティ オレンジアカデミー／グレープアカデミー"
+          },
+          "release_date": null,
+          "price_jpy": 3850,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329452609.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4904810096382",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "モンコレ メガガブリアス",
+            "zh": "宝可梦 Moncolle 小手办 超级烈咬陆鲨",
+            "ko": "モンコレ メガガブリアス",
+            "en": "モンコレ メガガブリアス"
+          },
+          "release_date": null,
+          "price_jpy": 1067,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4904810096382.html"
+          ]
+        }
+      ],
+      "changed": [
+        {
+          "kit_id": "aniplex-madoka-itemmdrepkqw05",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Aniplex+",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 佐倉杏子 ノンスケールフィギュア",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 佐仓杏子 无比例手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 사쿠라 쿄코 논스케일 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 佐倉杏子 ノンスケールフィギュア"
+          },
+          "release_date": "2027-10",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "aniplex_plus_madoka_jp",
+            "good_smile_madoka_global",
+            "claynel_madoka_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemMDrePKqw05.html",
+            "https://www.goodsmile.com/ja/product/1147372"
+          ]
+        },
+        {
+          "kit_id": "aniplex-madoka-itemmdrepkqw04",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Aniplex+",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 美樹さやか ノンスケールフィギュア",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 美树沙耶香 无比例手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 미키 사야카 논스케일 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 美樹さやか ノンスケールフィギュア"
+          },
+          "release_date": "2027-10",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "aniplex_plus_madoka_jp",
+            "good_smile_madoka_global",
+            "claynel_madoka_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemMDrePKqw04.html",
+            "https://www.goodsmile.com/ja/product/1147371"
+          ]
+        },
+        {
+          "kit_id": "hg-hg-1-144-4580886844760000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "w",
+          "series_labels": {
+            "zh": "W",
+            "en": "W",
+            "ja": "W",
+            "ko": "W"
+          },
+          "names": {
+            "ja": "HG 1 / 144 ハイドラガンダム",
+            "zh": "HG 1 / 144 海德拉高达",
+            "ko": "HG 1/144 하이드라 건담",
+            "en": "HG 1 / 144 ハイドラGundam"
+          },
+          "release_date": "2026-11",
+          "price_jpy": 5500,
+          "is_limited": false,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4580886844760000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000261454/"
+          ]
+        },
+        {
+          "kit_id": "hg-hg-1-144-4573102692092000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HG",
+          "series_key": "w",
+          "series_labels": {
+            "zh": "W",
+            "en": "W",
+            "ja": "W",
+            "ko": "W"
+          },
+          "names": {
+            "ja": "HG 1 / 144 ガンダムグリープ",
+            "zh": "HG 1 / 144 格里普高达",
+            "ko": "HG 1/144 건담 그리프",
+            "en": "HG 1 / 144 Gundamグリープ"
+          },
+          "release_date": "2025-12",
+          "price_jpy": 4510,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102692092000&grp_id=5325",
+            "https://p-bandai.jp/item/item-1000261453/"
+          ]
+        },
+        {
+          "kit_id": "hg-hguc-1-144-zii-4543112966841000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "HG",
+          "subline": "HGUC",
+          "series_key": "zeta",
+          "series_labels": {
+            "zh": "Z",
+            "en": "Z",
+            "ja": "Z",
+            "ko": "Z"
+          },
+          "names": {
+            "ja": "HGUC 1 / 144 ＺＩＩ（ゼッツー） トラヴィス・カークランドカラー",
+            "zh": "HGUC 1 / 144 ZII(Z2) 特拉维斯·柯克兰配色",
+            "ko": "HGUC 1/144 ZII(제츠) 트래비스 커클랜드 컬러",
+            "en": "HGUC 1 / 144 ＺＩＩ (ゼッツー) トラヴィス カークランドカラー"
+          },
+          "release_date": "2015-04",
+          "price_jpy": 2860,
+          "is_limited": true,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "price"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112966841000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "mg-mg-1-100-msz-006-3b-3-b-4543112956873000",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "MG",
+          "subline": "MG",
+          "series_key": "zeta",
+          "series_labels": {
+            "zh": "Z",
+            "en": "Z",
+            "ja": "Z",
+            "ko": "Z"
+          },
+          "names": {
+            "ja": "ＭＧ 1 / 100 MSZ-006-3B ゼータガンダム３号機Ｂ型 グレイ・ゼータ",
+            "zh": "MG 1 / 100 MSZ-006-3B Z高达3号机B型 灰色Z",
+            "ko": "MG 1/100 MSZ-006-3B 제타 건담 3호기 B형 그레이 제타",
+            "en": "ＭＧ 1 / 100 MSZ-006-3B Zeta Gundam３号機Ｂ型 グレイ Zeta"
+          },
+          "release_date": "2015-02-07",
+          "price_jpy": 7590,
+          "is_limited": false,
+          "is_premium_bandai": true,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam",
+            "premium_bandai"
+          ],
+          "change_reasons": [
+            "price"
+          ],
+          "source_ids": [
+            "bandai_spirits_products_jp",
+            "p_bandai_wayback"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4543112956873000&grp_id=5325"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-fate-g6987",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Scale Figure",
+          "series_key": "type_moon",
+          "series_labels": {
+            "zh": "型月",
+            "en": "TYPE-MOON",
+            "ja": "TYPE-MOON",
+            "ko": "타입문"
+          },
+          "names": {
+            "ja": "1 / 64 Scale GOODSMILE RACING & TYPE-MOON RACING 2019 SPA24H Test Day Ver.",
+            "zh": "1 / 64比例 GOODSMILE RACING & TYPE-MOON RACING 2019 SPA24H 测试日 Ver.",
+            "ko": "1/64 스케일 GOODSMILE RACING & TYPE-MOON RACING 2019 SPA24H 테스트 데이 Ver.",
+            "en": "1 / 64 Scale GOODSMILE RACING & TYPE-MOON RACING 2019 SPA24H Test Day Ver."
+          },
+          "release_date": null,
+          "price_jpy": 3300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_fate_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/en/product/6987"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329316338",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "274 ぬいぐるみ ポケモン fit コノハナ",
+            "zh": "274 毛绒玩偶 宝可梦 fit 长鼻叶",
+            "ko": "274 봉제인형 Pokémon fit 잎새코",
+            "en": "274 ぬいぐるみ Pokémon fit コノハナ"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329316338.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329370378",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "38 ぬいぐるみ ポケモン fit キュウコン",
+            "zh": "38 毛绒玩偶 宝可梦 fit 九尾",
+            "ko": "38 봉제인형 Pokémon fit 나인테일",
+            "en": "38 ぬいぐるみ Pokémon fit キュウコン"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329370378.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329349220",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "526 ぬいぐるみ ポケモン fit ギガイアス",
+            "zh": "526 毛绒玩偶 宝可梦 fit 庞岩怪",
+            "ko": "526 봉제인형 Pokémon fit 기가이어스",
+            "en": "526 ぬいぐるみ Pokémon fit ギガイアス"
+          },
+          "release_date": null,
+          "price_jpy": 1650,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329349220.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329366579",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "653 ぬいぐるみ ポケモン fit フォッコ",
+            "zh": "653 毛绒玩偶 宝可梦 fit 火狐狸",
+            "ko": "653 봉제인형 Pokémon fit 푸호꼬",
+            "en": "653 ぬいぐるみ Pokémon fit フォッコ"
+          },
+          "release_date": null,
+          "price_jpy": 1430,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329366579.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329366944",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "695 ぬいぐるみ ポケモン fit エレザード",
+            "zh": "695 毛绒玩偶 宝可梦 fit 光电伞蜥",
+            "ko": "695 봉제인형 Pokémon fit 일레도리자드",
+            "en": "695 ぬいぐるみ Pokémon fit エレザード"
+          },
+          "release_date": null,
+          "price_jpy": 1760,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329366944.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329427867",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "784 ぬいぐるみ ポケモン fit ジャラランガ",
+            "zh": "784 毛绒玩偶 宝可梦 fit 杖尾鳞甲龙",
+            "ko": "784 봉제인형 Pokémon fit 짜랑고우거",
+            "en": "784 ぬいぐるみ Pokémon fit ジャラランガ"
+          },
+          "release_date": null,
+          "price_jpy": 1980,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329427867.html"
+          ]
+        }
+      ],
+      "removed": [],
+      "watched": [],
+      "merged": [],
+      "backfilled": [],
+      "renamed": []
+    },
     {
       "date": "2026-11-18",
       "generated_at": "2026-11-18T01:43:28.798Z",
@@ -169200,10 +170042,10 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "784 ぬいぐるみ Pok&eacute;mon fit ジャラランガ",
+            "ja": "784 ぬいぐるみ ポケモン fit ジャラランガ",
             "zh": "784 毛绒玩偶 宝可梦 fit 杖尾鳞甲龙",
             "ko": "784 봉제인형 Pokémon fit 짜랑고우거",
-            "en": "784 ぬいぐるみ Pok&eacute;mon fit ジャラランガ"
+            "en": "784 ぬいぐるみ Pokémon fit ジャラランガ"
           },
           "release_date": null,
           "price_jpy": 1980,
@@ -213652,10 +214494,10 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "653 ぬいぐるみ Pok&eacute;mon fit フォッコ",
+            "ja": "653 ぬいぐるみ ポケモン fit フォッコ",
             "zh": "653 毛绒玩偶 宝可梦 fit 火狐狸",
             "ko": "653 봉제인형 Pokémon fit 푸호꼬",
-            "en": "653 ぬいぐるみ Pok&eacute;mon fit フォッコ"
+            "en": "653 ぬいぐるみ Pokémon fit フォッコ"
           },
           "release_date": null,
           "price_jpy": 1430,
@@ -260694,10 +261536,10 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "695 ぬいぐるみ Pok&eacute;mon fit エレザード",
+            "ja": "695 ぬいぐるみ ポケモン fit エレザード",
             "zh": "695 毛绒玩偶 宝可梦 fit 光电伞蜥",
             "ko": "695 봉제인형 Pokémon fit 일레도리자드",
-            "en": "695 ぬいぐるみ Pok&eacute;mon fit エレザード"
+            "en": "695 ぬいぐるみ Pokémon fit エレザード"
           },
           "release_date": null,
           "price_jpy": 1760,
@@ -274178,370 +275020,6 @@
         }
       ],
       "renamed_count": 3
-    },
-    {
-      "date": "2026-08-10",
-      "generated_at": "2026-08-09T19:32:08.537Z",
-      "total_before": 5401,
-      "total_after": 5406,
-      "added_count": 5,
-      "changed_count": 4,
-      "removed_count": 0,
-      "watched_count": 0,
-      "premium_bandai_count": 0,
-      "bbx_count": 0,
-      "franchise_counts": {
-        "pokemon": 9
-      },
-      "reason_counts": {
-        "new": 5,
-        "image": 4
-      },
-      "interest_tags": [
-        "pokemon"
-      ],
-      "watch_tags": [],
-      "added": [
-        {
-          "kit_id": "pokemon-center-4521329316215",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "262 ぬいぐるみ Pok&eacute;mon fit グラエナ",
-            "zh": "262 毛绒玩偶 宝可梦 fit 大狼犬",
-            "ko": "262 봉제인형 Pokémon fit 그라에나",
-            "en": "262 ぬいぐるみ Pok&eacute;mon fit グラエナ"
-          },
-          "release_date": null,
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329316215.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329316383",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "279 ぬいぐるみ Pok&eacute;mon fit ペリッパー",
-            "zh": "279 毛绒玩偶 宝可梦 fit 大嘴鸥",
-            "ko": "279 봉제인형 Pokémon fit 패리퍼",
-            "en": "279 ぬいぐるみ Pok&eacute;mon fit ペリッパー"
-          },
-          "release_date": null,
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329316383.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329317410",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "379 ぬいぐるみ Pok&eacute;mon fit レジスチル",
-            "zh": "379 毛绒玩偶 宝可梦 fit 雷吉斯奇鲁",
-            "ko": "379 봉제인형 Pokémon fit 레지스틸",
-            "en": "379 ぬいぐるみ Pok&eacute;mon fit レジスチル"
-          },
-          "release_date": null,
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329317410.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329381763",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "カラビナ付きマスコット ミジュマル",
-            "zh": "带登山扣挂件 水水獭",
-            "ko": "카라비너 포함 마스코트 수댕이",
-            "en": "カラビナ付きマスコット ミジュマル"
-          },
-          "release_date": null,
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329381763.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4904810956631",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_GOODS",
-          "subline": "Pokemon Center Goods",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "モンコレ MS-18 プリン",
-            "zh": "モンコレ MS-18 プリン",
-            "ko": "モンコレ MS-18 プリン",
-            "en": "モンコレ MS-18 プリン"
-          },
-          "release_date": null,
-          "price_jpy": 715,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4904810956631.html"
-          ]
-        }
-      ],
-      "changed": [
-        {
-          "kit_id": "pokemon-center-4521329341316",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "484 ぬいぐるみ Pok&eacute;mon fit パルキア",
-            "zh": "484 毛绒玩偶 宝可梦 fit 帕路奇亚",
-            "ko": "484 봉제인형 Pokémon fit 펄기아",
-            "en": "484 ぬいぐるみ Pok&eacute;mon fit パルキア"
-          },
-          "release_date": null,
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329341316.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329349152",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "498 ぬいぐるみ Pok&eacute;mon fit ポカブ",
-            "zh": "498 毛绒玩偶 宝可梦 fit 暖暖猪",
-            "ko": "498 봉제인형 Pokémon fit 뚜꾸리",
-            "en": "498 ぬいぐるみ Pok&eacute;mon fit ポカブ"
-          },
-          "release_date": null,
-          "price_jpy": 1320,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329349152.html"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5372",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 20 ホゲータ",
-            "zh": "宝可梦拼装模型收藏 快速组装 20 呆火鳄",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 20 뜨아거",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 20 Fuecoco"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5372/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5947",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 23 ジラーチ",
-            "zh": "宝可梦拼装模型收藏 快速组装 23 基拉祈",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 23 지라치",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 23 Jirachi"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5947/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        }
-      ],
-      "removed": [],
-      "watched": []
     }
   ]
 }
