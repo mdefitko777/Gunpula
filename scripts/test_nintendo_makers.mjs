@@ -22,6 +22,7 @@ import {
   kotobukiyaManualRecord,
   kotobukiyaRecord,
   kotobukiyaStoredDetail,
+  makerGoodsKind,
   makerSeries,
   mergeMakerRecords,
   parseGscSpec,
@@ -149,6 +150,16 @@ assert.equal(homura.work_title, "Xenoblade");
 assert.equal(homura.gallery_image_urls.length, 3);
 assert.match(homura.notes, /Reissued 2021-06, 2022-09, 2022-10\./);
 assert.deepEqual(gscRecord(cards[1], ...Object.values(gscStoredPages(homura))), homura, "stored pages rebuild the same record");
+assert.equal(homura.category, undefined, "a figure is no goods");
+
+// Goods carry category and goods_kind, also where the shared rules see a character good.
+const goods = (productId, name) => gscRecord({ productId, name, work: "星のカービィ", price_jpy: 770 }, { name, images: ["https://www.goodsmile.com/g.jpg"] }, {}, { work: "星のカービィ", copyright: "© Nintendo / HAL Laboratory, Inc." });
+const strap = goods("4243", "星のカービィ へんしんラバーストラップ ビームVer./ファイアVer./アイスVer./ソードVer./ドクターVer./スリープVer.");
+assert.deepEqual([strap.grade_code, strap.category, strap.goods_kind], ["NIN_GOODS", "goods", "accessory"]);
+assert.deepEqual(gscRecord({ productId: "4243", name: strap.names.ja, work: "星のカービィ", price_jpy: 770 }, ...Object.values(gscStoredPages(strap))), strap, "stored pages keep the kind");
+assert.equal(goods("4244", "星のカービィ トートバッグ").goods_kind, "apparel");
+assert.equal(makerGoodsKind("星のカービィ アクリルスタンド"), "acrylic");
+assert.equal(makerGoodsKind("星のカービィ グッズセット"), "other");
 
 // A reissue is the same product page renamed; the record keeps the first month and the product's name.
 assert.equal(gscProductName("【三次再販】 figma サムス・アラン"), "figma サムス・アラン");
@@ -193,5 +204,13 @@ const renamed = mergeMakerRecords([{ ...old, names: { ...old.names, ja: "Pyra" }
 assert.equal(renamed[0].names.ko, "ホムラ", "a new Japanese name drops the old translation");
 assert.equal(findDuplicate([{ kit_id: "pokemon-x", franchise: "pokemon", jan: "4580416940504", names: { ja: "x" } }], homura)?.kit_id, "pokemon-x");
 assert.equal(findDuplicate([{ kit_id: "goodsmile-nin-4687", jan: "4580416940504", names: { ja: "ホムラ" } }], homura), null, "itself is no duplicate");
+// The capsule-machine run of a trading figure (own page, own JAN) is the same lineup.
+const corocoroid = { kit_id: "goodsmile-nin-4801", franchise: "nintendo", subline: "Good Smile Company", grade_code: "NIN_MINI", jan: "4580590180857", names: { ja: "ころころいど カービィ トレーディングフィギュア" } };
+const capsule = { kit_id: "goodsmile-nin-5099", franchise: "nintendo", subline: "Good Smile Company", grade_code: "NIN_MINI", jan: "4571368446701", names: { ja: "ころころいど カービィ" } };
+assert.equal(findDuplicate([corocoroid], capsule)?.kit_id, "goodsmile-nin-4801");
+assert.equal(findDuplicate([corocoroid], { ...capsule, names: { ja: "ころころいど カービィ02" } }), null, "the second lineup is another product");
+// Saved before the rule: the capsule ids follow the trading-figure records.
+assert.equal(aliases["goodsmile-nin-5099"], "goodsmile-nin-4801");
+assert.equal(aliases["goodsmile-nin-5722"], "goodsmile-nin-5458");
 
 console.log("nintendo makers tests OK");

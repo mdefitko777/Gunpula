@@ -14,6 +14,7 @@
 //                          作品名, the 仕様, the 販売 / 再販 months and the copyright line.
 // Not used: www.kotobukiya.co.jp answers 403 to this bot (its detail URL is only written as a
 // source reference), and a keyword search on goodsmile.com ("Pikmin" also returns Sanrio plush).
+import { goodsKind, goodsRuleKind } from "./catalog-cleanup.mjs";
 import { decodeEntities } from "./html-entities.mjs";
 import { kotobukiyaShopSearchUrl } from "./kotobukiya-shop.mjs";
 import { seriesFor } from "./nintendo-kr.mjs";
@@ -105,6 +106,22 @@ export function kotobukiyaGrade({ category = "", specification = "", title = "" 
   return "NIN_GOODS";
 }
 
+// Goods words the shared rules leave to the importer: goodsKind() gives no kind to a character
+// good (ストラップ, キーホルダー, アクリル …), so clean_catalog.mjs left the NIN_GOODS
+// "星のカービィ へんしんラバーストラップ …" without category and goods_kind (2026-11-19).
+const CHARACTER_KINDS = [
+  ["acrylic", /アクリル|Acrylic/i],
+  ["accessory", /ストラップ|キーホルダー|キーチェーン|缶バッジ|バッジ|Strap|Keychain/i],
+  ["stationery", /ステッカー|ステーショナリー/],
+];
+
+/** goods_kind of a NIN_GOODS record: the shared name rules, then the character words, else "other". */
+export function makerGoodsKind(name) {
+  const byName = goodsKind({ franchise: FRANCHISE, source_name: name });
+  if (byName) return byName;
+  return CHARACTER_KINDS.find(([, pattern]) => pattern.test(name))?.[0] || goodsRuleKind(name) || "other";
+}
+
 // ---------------------------------------------------------------------------
 // Helpers
 
@@ -140,6 +157,8 @@ function record({ kitId, grade, subline, number = null, ja, en, scale, image, ga
     subline,
     number,
     scale: scale || "non-scale",
+    // Goods carry their kind like the nintendo-kr goods; the app splits goods from figures by it.
+    ...(grade === "NIN_GOODS" ? { category: "goods", goods_kind: makerGoodsKind(ja) } : {}),
     // ko / zh come from data/i18n/names-ko.json and names-zh.json (apply_ko_names / apply_zh_names).
     names: { ja, en: en || ja, zh: ja, ko: ja },
     images: { box_art_url: image || null, box_art_source_id: image ? sourceId : null },
@@ -428,7 +447,11 @@ function keepNames(previous, next) {
 
 /** A JAN or name already in the catalog under another id (another franchise or importer). */
 export function findDuplicate(kits, record) {
-  const key = (value) => String(value || "").normalize("NFKC").replace(/\s+/g, "").toLowerCase();
+  // goodsmile.com lists the capsule-machine run of a trading figure as a product of its own, with
+  // its own JAN: "ころころいど カービィ" (家電量販店 / アミューズメント施設, 400 yen each) beside
+  // "ころころいど カービィ トレーディングフィギュア" (1BOX6個入り), the same 全4種 (read 2026-11-19).
+  // One record per lineup.
+  const key = (value) => String(value || "").normalize("NFKC").replace(/\s+/g, "").toLowerCase().replace(/トレーディングフィギュア$/, "");
   return kits.find((kit) => kit.kit_id !== record.kit_id && (
     (record.jan && kit.jan === record.jan)
     || (kit.franchise === FRANCHISE && kit.subline === record.subline && key(kit.names?.ja) === key(record.names.ja) && kit.grade_code === record.grade_code)
