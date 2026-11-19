@@ -15,12 +15,13 @@
 // plus `kind`, `image_remote`, `cover_source`, `roster` (and per-franchise extras), and a
 // top-level `channels` map with one official header image per channel, a top-level
 // `line_covers` map {<franchise>: {<grade_code | BX | UX | CX>: {image, image_remote,
-// cover_source, kind: "logo" | "key_visual", width, height}}} with the official logo of each
+// cover_source, kind: "logo" | "key_visual", width, height, bg, fg}}} with the official logo of each
 // brand line, and a top-level `line_icons` map {<franchise>: {<grade_code>: <icon kind>}} for the
 // lines that are only a kind of product (goods, plush, prize …; vocabulary in
 // scripts/atlas/lib/line_covers.mjs LINE_ICON_KINDS). A code is in one of the two maps, never both.
 // Every group says `cover_kind`: "logo" (the work's title logo) or "picture" (box art, key visual,
-// banner, newest product picture).
+// banner, newest product picture); a group or channel whose cover is one of atlas-covers.json also
+// has `cover_bg` / `cover_fg`, the tile colours of that cover (line covers: `bg` / `fg`).
 // Empty groups are left out. `--report=<file>` writes every product's group and reason (for review).
 import { readFileSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
@@ -57,10 +58,12 @@ const reportArg = process.argv.find((a) => a.startsWith("--report="))?.slice(9);
 const kits = (catalog.kits || []).filter((kit) => kit.data_status !== "hidden");
 
 const covers = coverFile.covers || {};
+// Full-bleed tile colours of a cover (build_atlas_covers.mjs); left out when the cover has none.
+const tileColors = (c, prefix = "") => (c.bg ? { [`${prefix}bg`]: c.bg, [`${prefix}fg`]: c.fg } : {});
 function cover(key, fallbackKey) {
   const c = covers[key] || (fallbackKey && covers[fallbackKey]);
   if (!c) return { image: "" };
-  return { image: c.image, image_remote: c.image_remote, cover_source: c.source_page, cover_kind: c.kind === "logo" ? "logo" : "picture" };
+  return { image: c.image, image_remote: c.image_remote, cover_source: c.source_page, cover_kind: c.kind === "logo" ? "logo" : "picture", ...tileColors(c, "cover_") };
 }
 
 const report = [];
@@ -479,6 +482,7 @@ function lineCovers() {
     if (!m || !c.image || !LINE_COVER_SOURCES[`${m[1]}:${m[2]}`]) continue;
     const entry = { image: c.image, image_remote: c.image_remote, cover_source: c.source_page, kind: c.kind || "logo" };
     if (c.width && c.height) Object.assign(entry, { width: c.width, height: c.height });
+    Object.assign(entry, tileColors(c));
     (out[m[1]] ||= {})[m[2]] = entry;
   }
   return out;

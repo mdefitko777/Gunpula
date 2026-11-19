@@ -21,6 +21,9 @@
 // catalog images) so the app never hotlinks; data/atlas/atlas-covers.json records the local
 // path, the original image URL, the page it came from, the kind (logo or picture) and the size.
 //
+// Every run also gives each cover its tile colours `bg` / `fg` / `bg_from` from the cached file
+// (lib/cover_colors.mjs, hand-picked ones in data/atlas/brand-colors.json); `--colors-only` does
+// just that, without any network.
 // Run by hand or weekly (`npm run atlas:covers`); existing files are not downloaded again
 // unless --refresh (everything) or --refresh=<key prefix> (e.g. --refresh=line:) is passed.
 // The daily data refresh only reads atlas-covers.json.
@@ -28,13 +31,16 @@ import { copyFileSync, existsSync, renameSync, rmSync, statSync } from "node:fs"
 import { spawnSync } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { coverFileColors } from "./lib/cover_colors.mjs";
 import { politeFetch, throttle, USER_AGENT } from "./lib/http.mjs";
 import { isAllowedLineHost, LINE_COVER_SOURCES, lineFileStem, lineKind, lineSelector, parseRobots, pickLineImage, robotsAllows } from "./lib/line_covers.mjs";
 import { ATLAS_DATA, REPO_ROOT, readJson, today, writeCompactJson } from "./lib/util.mjs";
 
 const REFRESH_ARG = process.argv.find((a) => a === "--refresh" || a.startsWith("--refresh="));
 const refreshes = (key) => Boolean(REFRESH_ARG) && (REFRESH_ARG === "--refresh" || key.startsWith(REFRESH_ARG.slice(10)));
+const COLORS_ONLY = process.argv.includes("--colors-only");
 const OUT = path.join(ATLAS_DATA, "atlas-covers.json");
+const BRAND_COLORS = path.join(ATLAS_DATA, "brand-colors.json");
 // Image paths are written like the catalog images ("./assets/…", relative to app/).
 const APP_DIR = path.join(REPO_ROOT, "app");
 const ASSET_DIR = path.join(APP_DIR, "assets", "atlas", "covers");
@@ -434,6 +440,22 @@ async function lineCover(key, source, prev) {
   return pickedCover(path.join(ASSET_DIR, lineFileStem(franchise, code)), source, prev);
 }
 
+/**
+ * bg / fg / bg_from of every cover from its cached file. A cover this machine cannot decode (a JPEG
+ * without Pillow) keeps the colours it had, so a run without Python does not drop them.
+ */
+async function addTileColors(covers) {
+  const brand = (await readJson(BRAND_COLORS, { colors: {} })).colors || {};
+  const python = pythonWithPillow();
+  const missed = [];
+  for (const [key, c] of Object.entries(covers)) {
+    const colors = c.image ? coverFileColors(path.join(APP_DIR, c.image.replace(/^\.\//, "")), brand[key]?.bg || "", python) : null;
+    if (colors) Object.assign(c, colors);
+    else missed.push(key);
+  }
+  if (missed.length) console.warn(`tile colours not computed (kept as they were): ${missed.join(", ")}`);
+}
+
 const isFresh = (prev, file) => prev && existsSync(file);
 // A cover that is not downloaded again still takes the source's current note (why it comes from there).
 const keep = (prev, source) => ({ ...prev, note: source.note });
@@ -450,6 +472,10 @@ async function main() {
     const sourceUrl = source.wiki || source.url || source.page;
     const prevFile = prev?.image ? path.join(APP_DIR, prev.image.replace(/^\.\//, "")) : "";
     const kind = source.kind || "picture";
+    if (COLORS_ONLY) {
+      if (prev) covers[key] = prev;
+      continue;
+    }
     try {
       if (source.page && !source.url) {
         if (isFresh(prev, prevFile) && !refreshes(key) && prev.source_page === source.page && prev.selector === lineSelector(source) && prev.kind === kind) {
@@ -497,6 +523,10 @@ async function main() {
     const key = `line:${lineKey}`;
     const prev = previous[key];
     const prevFile = prev?.image ? path.join(APP_DIR, prev.image.replace(/^\.\//, "")) : "";
+    if (COLORS_ONLY) {
+      if (prev) covers[key] = prev;
+      continue;
+    }
     try {
       if (isFresh(prev, prevFile) && !refreshes(key) && prev.source_page === source.page && prev.selector === lineSelector(source) && prev.kind === lineKind(source)) {
         covers[key] = keep(prev, source);
@@ -509,9 +539,10 @@ async function main() {
       if (prev && existsSync(prevFile)) covers[key] = prev;
     }
   }
+  await addTileColors(covers);
   const out = {
     updated_at: today(),
-    note: "Official cover images for Atlas group cards, channel headers and product lines (keys line:<franchise>:<code>). image = copy in this repo; image_remote = where it was downloaded from (join_remote = the second logo set beside it); source_page = the page that shows it as the official cover/logo; kind = logo (title / line logo, transparent PNG) or picture (box art, key visual, banner); width / height in pixels when known.",
+    note: "Official cover images for Atlas group cards, channel headers and product lines (keys line:<franchise>:<code>). image = copy in this repo; image_remote = where it was downloaded from (join_remote = the second logo set beside it); source_page = the page that shows it as the official cover/logo; kind = logo (title / line logo, transparent PNG) or picture (box art, key visual, banner); width / height in pixels when known; bg = tile colour of the app's full-bleed tiles (#RRGGBB), fg = light | dark (white or black text reads better on bg), bg_from = edge | mean | brand | tint (how bg was chosen, scripts/atlas/lib/cover_colors.mjs).",
     covers,
   };
   const res = await writeCompactJson(OUT, out);

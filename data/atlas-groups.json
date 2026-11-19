@@ -12,7 +12,9 @@
       "image": "./assets/atlas/covers/channel-gundam.png",
       "image_remote": "https://gundam-official.com/assets/ogp-default.png",
       "cover_source": "https://gundam-official.com/",
-      "cover_kind": "picture"
+      "cover_kind": "picture",
+      "cover_bg": "#000000",
+      "cover_fg": "light"
     },
     "beyblade": {
       "label": {
@@ -24,7 +26,9 @@
       "image": "./assets/atlas/covers/channel-beyblade.png",
       "image_remote": "https://beyblade.takaratomy.co.jp/bbx_portal.png",
       "cover_source": "https://beyblade.takaratomy.co.jp/",
-      "cover_kind": "picture"
+      "cover_kind": "picture",
+      "cover_bg": "#030000",
+      "cover_fg": "light"
     },
     "pokemon": {
       "label": {
@@ -36,7 +40,9 @@
       "image": "./assets/atlas/covers/channel-pokemon.png",
       "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/960px-International_Pok%C3%A9mon_logo.svg.png",
       "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon",
-      "cover_kind": "logo"
+      "cover_kind": "logo",
+      "cover_bg": "#fcf3cf",
+      "cover_fg": "dark"
     },
     "fate": {
       "label": {
@@ -48,7 +54,9 @@
       "image": "./assets/atlas/covers/channel-fate.jpg",
       "image_remote": "https://www.fate-go.jp/images/fate_ogp_3500.png",
       "cover_source": "https://www.fate-go.jp/",
-      "cover_kind": "picture"
+      "cover_kind": "picture",
+      "cover_bg": "#f7fcff",
+      "cover_fg": "dark"
     },
     "armored_core": {
       "label": {
@@ -60,7 +68,9 @@
       "image": "./assets/atlas/covers/channel-armored_core.png",
       "image_remote": "https://www.armoredcore.net/resources/images/common/ogp/ogp_image.png",
       "cover_source": "https://www.armoredcore.net/",
-      "cover_kind": "picture"
+      "cover_kind": "picture",
+      "cover_bg": "#040000",
+      "cover_fg": "light"
     },
     "madoka": {
       "label": {
@@ -72,7 +82,9 @@
       "image": "./assets/atlas/covers/channel-madoka.jpg",
       "image_remote": "https://www.madoka-magica.com/assets/icon/ogp.png",
       "cover_source": "https://www.madoka-magica.com/",
-      "cover_kind": "picture"
+      "cover_kind": "picture",
+      "cover_bg": "#ffffff",
+      "cover_fg": "dark"
     },
     "lego": {
       "label": {
@@ -84,7 +96,9 @@
       "image": "./assets/atlas/covers/channel-lego.png",
       "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/LEGO_logo.svg/500px-LEGO_logo.svg.png",
       "cover_source": "https://en.wikipedia.org/wiki/Lego",
-      "cover_kind": "logo"
+      "cover_kind": "logo",
+      "cover_bg": "#000000",
+      "cover_fg": "light"
     },
     "nintendo": {
       "label": {
@@ -96,7 +110,9 @@
       "image": "./assets/atlas/covers/channel-nintendo.webp",
       "image_remote": "https://www.nintendo.co.kr/sns.png",
       "cover_source": "https://www.nintendo.co.kr/",
-      "cover_kind": "picture"
+      "cover_kind": "picture",
+      "cover_bg": "#e70013",
+      "cover_fg": "light"
     },
     "effects": {
       "label": {
@@ -108,7 +124,9 @@
       "image": "./assets/atlas/covers/channel-effects.jpg",
       "image_remote": "https://tamashiiweb.com/storage/images/brands/imported/og_tamashii_effect.jpg",
       "cover_source": "https://tamashiiweb.com/item_brand/tamashii_effect/",
-      "cover_kind": "picture"
+      "cover_kind": "picture",
+      "cover_bg": "#ffffff",
+      "cover_fg": "dark"
     }
   },
   "line_covers": {
@@ -119,7 +137,9 @@
         "cover_source": "https://www.bandai.co.jp/candy/brand/smp/index.html",
         "kind": "logo",
         "width": 400,
-        "height": 200
+        "height": 200,
+        "bg": "#fbfad0",
+        "fg": "dark"
       },
       "AC30MM": {
         "image": "./assets/atlas/covers/line-armored_core-ac30mm.jpg",
@@ -127,7 +147,9 @@
         "cover_source": "https://manual.bandai-hobby.net/",
         "kind": "logo",
         "width": 300,
-        "height": 170
+        "height": 170,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "ACVI": {
         "image": "./assets/atlas/covers/line-armored_core-acvi.png",
@@ -135,7 +157,9 @@
         "cover_source": "https://shop.kotobukiya.co.jp/shop/r/r100000/",
         "kind": "logo",
         "width": 151,
-        "height": 151
+        "height": 151,
+        "bg": "#ffffff",
+        "fg": "dark"
       }
     },
     "beyblade": {
@@ -145,7 +169,9 @@
         "cover_source": "https://beyblade.takaratomy.co.jp/",
         "kind": "logo",
         "width": 640,
-        "height": 139
+        "height": 139,
+        "bg": "#030000",
+        "fg": "light"
       },
       "BX": {
         "image": "./assets/atlas/covers/line-beyblade-bx.png",
@@ -153,7 +179,9 @@
         "cover_source": "https://beyblade.takaratomy.co.jp/beyblade-x/guide/",
         "kind": "logo",
         "width": 236,
-        "height": 204
+        "height": 204,
+        "bg": "#70bbe9",
+        "fg": "dark"
       },
       "CX": {
         "image": "./assets/atlas/covers/line-beyblade-cx.png",
@@ -161,7 +189,9 @@
         "cover_source": "https://beyblade.takaratomy.co.jp/beyblade-x/guide/",
         "kind": "logo",
         "width": 236,
-        "height": 204
+        "height": 204,
+        "bg": "#e7318c",
+        "fg": "dark"
       },
       "UX": {
         "image": "./assets/atlas/covers/line-beyblade-ux.png",
@@ -169,7 +199,9 @@
         "cover_source": "https://beyblade.takaratomy.co.jp/beyblade-x/guide/",
         "kind": "logo",
         "width": 236,
-        "height": 204
+        "height": 204,
+        "bg": "#ee7700",
+        "fg": "dark"
       }
     },
     "effects": {
@@ -179,7 +211,9 @@
         "cover_source": "https://tamashiiweb.com/item_brand/tamashii_effect/",
         "kind": "logo",
         "width": 315,
-        "height": 123
+        "height": 123,
+        "bg": "#ffffff",
+        "fg": "dark"
       }
     },
     "fate": {
@@ -189,7 +223,9 @@
         "cover_source": "https://en.wikipedia.org/wiki/Nendoroid",
         "kind": "logo",
         "width": 210,
-        "height": 79
+        "height": 79,
+        "bg": "#f89321",
+        "fg": "dark"
       }
     },
     "gundam": {
@@ -199,7 +235,9 @@
         "cover_source": "https://www.bandai.co.jp/candy/gundam/",
         "kind": "logo",
         "width": 375,
-        "height": 114
+        "height": 114,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "CHOGOKIN": {
         "image": "./assets/atlas/covers/line-gundam-chogokin.png",
@@ -207,7 +245,9 @@
         "cover_source": "https://tamashiiweb.com/item_brand/",
         "kind": "logo",
         "width": 640,
-        "height": 206
+        "height": 206,
+        "bg": "#ffe101",
+        "fg": "dark"
       },
       "CONVERGE": {
         "image": "./assets/atlas/covers/line-gundam-converge.png",
@@ -215,7 +255,9 @@
         "cover_source": "https://www.bandai.co.jp/candy/gundam/",
         "kind": "logo",
         "width": 375,
-        "height": 114
+        "height": 114,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "EG": {
         "image": "./assets/atlas/covers/line-gundam-eg.jpg",
@@ -223,7 +265,9 @@
         "cover_source": "https://manual.bandai-hobby.net/",
         "kind": "logo",
         "width": 300,
-        "height": 170
+        "height": 170,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "FIGUARTS_MINI": {
         "image": "./assets/atlas/covers/line-gundam-figuarts_mini.png",
@@ -231,7 +275,9 @@
         "cover_source": "https://tamashiiweb.com/item_brand/figuarts_mini/",
         "kind": "logo",
         "width": 315,
-        "height": 123
+        "height": 123,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "FM": {
         "image": "./assets/atlas/covers/line-gundam-fm.png",
@@ -239,7 +285,9 @@
         "cover_source": "https://satellite.bandai-hobby.net/characters/gundam_list.php",
         "kind": "logo",
         "width": 480,
-        "height": 114
+        "height": 114,
+        "bg": "#000000",
+        "fg": "light"
       },
       "GFF": {
         "image": "./assets/atlas/covers/line-gundam-gff.png",
@@ -247,7 +295,9 @@
         "cover_source": "https://tamashiiweb.com/item_brand/gundam_fix_figuration_metal/",
         "kind": "logo",
         "width": 315,
-        "height": 123
+        "height": 123,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "GFRAME": {
         "image": "./assets/atlas/covers/line-gundam-gframe.png",
@@ -255,7 +305,9 @@
         "cover_source": "https://www.bandai.co.jp/candy/gundam/",
         "kind": "logo",
         "width": 375,
-        "height": 114
+        "height": 114,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "GSF": {
         "image": "./assets/atlas/covers/line-gundam-gsf.jpg",
@@ -263,7 +315,9 @@
         "cover_source": "https://gashapon.jp/gundam/",
         "kind": "logo",
         "width": 300,
-        "height": 73
+        "height": 73,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "GUNDAM_MERCH": {
         "image": "./assets/atlas/covers/line-gundam-gundam_merch.jpg",
@@ -271,7 +325,9 @@
         "cover_source": "https://gashapon.jp/gundam/",
         "kind": "logo",
         "width": 640,
-        "height": 219
+        "height": 219,
+        "bg": "#f6f6f6",
+        "fg": "dark"
       },
       "GUNDAM_UNIVERSE": {
         "image": "./assets/atlas/covers/line-gundam-gundam_universe.png",
@@ -279,7 +335,9 @@
         "cover_source": "https://tamashiiweb.com/item_brand/",
         "kind": "logo",
         "width": 640,
-        "height": 234
+        "height": 234,
+        "bg": "#fccfd1",
+        "fg": "dark"
       },
       "HG": {
         "image": "./assets/atlas/covers/line-gundam-hg.png",
@@ -287,7 +345,9 @@
         "cover_source": "https://satellite.bandai-hobby.net/characters/gundam_list.php",
         "kind": "logo",
         "width": 264,
-        "height": 182
+        "height": 182,
+        "bg": "#d1f3fa",
+        "fg": "dark"
       },
       "HIRM": {
         "image": "./assets/atlas/covers/line-gundam-hirm.png",
@@ -295,7 +355,9 @@
         "cover_source": "https://satellite.bandai-hobby.net/characters/gundam_list.php",
         "kind": "logo",
         "width": 480,
-        "height": 71
+        "height": 71,
+        "bg": "#424346",
+        "fg": "light"
       },
       "MEGA": {
         "image": "./assets/atlas/covers/line-gundam-mega.png",
@@ -303,7 +365,9 @@
         "cover_source": "https://satellite.bandai-hobby.net/characters/gundam_list.php",
         "kind": "logo",
         "width": 196,
-        "height": 196
+        "height": 196,
+        "bg": "#f3e6d8",
+        "fg": "dark"
       },
       "METAL_BUILD": {
         "image": "./assets/atlas/covers/line-gundam-metal_build.png",
@@ -311,7 +375,9 @@
         "cover_source": "https://tamashiiweb.com/item_brand/",
         "kind": "logo",
         "width": 640,
-        "height": 150
+        "height": 150,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "METAL_ROBOT": {
         "image": "./assets/atlas/covers/line-gundam-metal_robot.png",
@@ -319,7 +385,9 @@
         "cover_source": "https://tamashiiweb.com/item_brand/",
         "kind": "logo",
         "width": 640,
-        "height": 360
+        "height": 360,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "METAL_STRUCTURE": {
         "image": "./assets/atlas/covers/line-gundam-metal_structure.png",
@@ -327,7 +395,9 @@
         "cover_source": "https://tamashiiweb.com/item_brand/kaitai_shou_ki/",
         "kind": "logo",
         "width": 315,
-        "height": 123
+        "height": 123,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "MG": {
         "image": "./assets/atlas/covers/line-gundam-mg.png",
@@ -335,7 +405,9 @@
         "cover_source": "https://satellite.bandai-hobby.net/characters/gundam_list.php",
         "kind": "logo",
         "width": 281,
-        "height": 185
+        "height": 185,
+        "bg": "#f9eed2",
+        "fg": "dark"
       },
       "MGEX": {
         "image": "./assets/atlas/covers/line-gundam-mgex.jpg",
@@ -343,7 +415,9 @@
         "cover_source": "https://manual.bandai-hobby.net/",
         "kind": "logo",
         "width": 300,
-        "height": 170
+        "height": 170,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "MGSD": {
         "image": "./assets/atlas/covers/line-gundam-mgsd.jpg",
@@ -351,7 +425,9 @@
         "cover_source": "https://manual.bandai-hobby.net/",
         "kind": "logo",
         "width": 300,
-        "height": 170
+        "height": 170,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "MOBILITY": {
         "image": "./assets/atlas/covers/line-gundam-mobility.png",
@@ -359,7 +435,9 @@
         "cover_source": "https://www.bandai.co.jp/candy/gundam/",
         "kind": "logo",
         "width": 375,
-        "height": 114
+        "height": 114,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "MSE": {
         "image": "./assets/atlas/covers/line-gundam-mse.png",
@@ -367,7 +445,9 @@
         "cover_source": "https://gashapon.jp/ensemble/",
         "kind": "logo",
         "width": 640,
-        "height": 101
+        "height": 101,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "NXEDGE": {
         "image": "./assets/atlas/covers/line-gundam-nxedge.png",
@@ -375,7 +455,9 @@
         "cover_source": "https://tamashiiweb.com/item_brand/nxedge/",
         "kind": "logo",
         "width": 315,
-        "height": 123
+        "height": 123,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "PG": {
         "image": "./assets/atlas/covers/line-gundam-pg.png",
@@ -383,7 +465,9 @@
         "cover_source": "https://satellite.bandai-hobby.net/characters/gundam_list.php",
         "kind": "logo",
         "width": 480,
-        "height": 61
+        "height": 61,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "RE100": {
         "image": "./assets/atlas/covers/line-gundam-re100.jpg",
@@ -391,7 +475,9 @@
         "cover_source": "https://manual.bandai-hobby.net/",
         "kind": "logo",
         "width": 300,
-        "height": 170
+        "height": 170,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "RG": {
         "image": "./assets/atlas/covers/line-gundam-rg.png",
@@ -399,7 +485,9 @@
         "cover_source": "https://satellite.bandai-hobby.net/characters/gundam_list.php",
         "kind": "logo",
         "width": 326,
-        "height": 186
+        "height": 186,
+        "bg": "#fbf0d0",
+        "fg": "dark"
       },
       "ROBOT_SPIRITS": {
         "image": "./assets/atlas/covers/line-gundam-robot_spirits.png",
@@ -407,7 +495,9 @@
         "cover_source": "https://tamashiiweb.com/item_brand/",
         "kind": "logo",
         "width": 640,
-        "height": 206
+        "height": 206,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "SD": {
         "image": "./assets/atlas/covers/line-gundam-sd.png",
@@ -415,7 +505,9 @@
         "cover_source": "https://satellite.bandai-hobby.net/characters/gundam_list.php",
         "kind": "logo",
         "width": 530,
-        "height": 271
+        "height": 271,
+        "bg": "#fccfd2",
+        "fg": "dark"
       },
       "SDCS": {
         "image": "./assets/atlas/covers/line-gundam-sdcs.jpg",
@@ -423,7 +515,9 @@
         "cover_source": "https://manual.bandai-hobby.net/",
         "kind": "logo",
         "width": 300,
-        "height": 170
+        "height": 170,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "SDEX": {
         "image": "./assets/atlas/covers/line-gundam-sdex.jpg",
@@ -431,7 +525,9 @@
         "cover_source": "https://manual.bandai-hobby.net/",
         "kind": "logo",
         "width": 300,
-        "height": 170
+        "height": 170,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "SDW": {
         "image": "./assets/atlas/covers/line-gundam-sdw.png",
@@ -439,7 +535,9 @@
         "cover_source": "https://satellite.bandai-hobby.net/characters/gundam_sd.php",
         "kind": "logo",
         "width": 280,
-        "height": 280
+        "height": 280,
+        "bg": "#fcd4cf",
+        "fg": "dark"
       },
       "SDX": {
         "image": "./assets/atlas/covers/line-gundam-sdx.jpg",
@@ -447,7 +545,9 @@
         "cover_source": "https://tamashiiweb.com/item_brand/sdx/",
         "kind": "logo",
         "width": 620,
-        "height": 180
+        "height": 180,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "SH_FIGUARTS": {
         "image": "./assets/atlas/covers/line-gundam-sh_figuarts.png",
@@ -455,7 +555,9 @@
         "cover_source": "https://tamashiiweb.com/item_brand/",
         "kind": "logo",
         "width": 640,
-        "height": 158
+        "height": 158,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "SUPERIOR": {
         "image": "./assets/atlas/covers/line-gundam-superior.png",
@@ -463,7 +565,9 @@
         "cover_source": "https://www.bandai.co.jp/candy/gundam/",
         "kind": "logo",
         "width": 375,
-        "height": 114
+        "height": 114,
+        "bg": "#ffffff",
+        "fg": "dark"
       }
     },
     "madoka": {
@@ -473,7 +577,9 @@
         "cover_source": "https://en.wikipedia.org/wiki/Nendoroid",
         "kind": "logo",
         "width": 210,
-        "height": 79
+        "height": 79,
+        "bg": "#f89321",
+        "fg": "dark"
       }
     },
     "nintendo": {
@@ -483,7 +589,9 @@
         "cover_source": "https://ja.wikipedia.org/wiki/Amiibo",
         "kind": "logo",
         "width": 500,
-        "height": 114
+        "height": 114,
+        "bg": "#cffcf6",
+        "fg": "dark"
       }
     },
     "pokemon": {
@@ -493,7 +601,9 @@
         "cover_source": "https://gashapon.jp/pokemon/",
         "kind": "logo",
         "width": 224,
-        "height": 61
+        "height": 61,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "POKE_KUJI": {
         "image": "./assets/atlas/covers/line-pokemon-poke_kuji.png",
@@ -501,7 +611,9 @@
         "cover_source": "https://1kuji.com/",
         "kind": "logo",
         "width": 203,
-        "height": 110
+        "height": 110,
+        "bg": "#ffffff",
+        "fg": "dark"
       },
       "POKE_MONCOLLE": {
         "image": "./assets/atlas/covers/line-pokemon-poke_moncolle.png",
@@ -509,7 +621,9 @@
         "cover_source": "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/",
         "kind": "logo",
         "width": 320,
-        "height": 99
+        "height": 99,
+        "bg": "#fccfd1",
+        "fg": "dark"
       },
       "POKEPLA": {
         "image": "./assets/atlas/covers/line-pokemon-pokepla.jpg",
@@ -517,7 +631,9 @@
         "cover_source": "https://manual.bandai-hobby.net/",
         "kind": "logo",
         "width": 300,
-        "height": 170
+        "height": 170,
+        "bg": "#ffffff",
+        "fg": "dark"
       }
     }
   },
@@ -1461,6 +1577,8 @@
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/a/af/Pok%C3%A9mon_Red_and_Blue_cover_art.webp",
         "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon_Red_and_Blue",
         "cover_kind": "picture",
+        "cover_bg": "#958a75",
+        "cover_fg": "dark",
         "items": [
           "1. Bulbasaur",
           "2. Ivysaur",
@@ -2393,6 +2511,8 @@
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/4/4c/Pok%C3%A9mon_box_art_-_Gold_Version.png",
         "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon_Gold_and_Silver",
         "cover_kind": "picture",
+        "cover_bg": "#acaca0",
+        "cover_fg": "dark",
         "items": [
           "152. Chikorita",
           "153. Bayleef",
@@ -2764,6 +2884,8 @@
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/b/be/PokemonRubySapphireBox.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon_Ruby_and_Sapphire",
         "cover_kind": "picture",
+        "cover_bg": "#45637a",
+        "cover_fg": "light",
         "items": [
           "252. Treecko",
           "253. Grovyle",
@@ -3162,6 +3284,8 @@
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/2/2e/PokemonDiamondPearlBoxArt.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon_Diamond_and_Pearl",
         "cover_kind": "picture",
+        "cover_bg": "#585758",
+        "cover_fg": "light",
         "items": [
           "387. Turtwig",
           "388. Grotle",
@@ -3595,6 +3719,8 @@
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/e/e1/Pokemon_Black_Box_Artwork.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon_Black_and_White",
         "cover_kind": "picture",
+        "cover_bg": "#a4a4a4",
+        "cover_fg": "dark",
         "items": [
           "494. Victini",
           "495. Snivy",
@@ -4144,6 +4270,8 @@
         "image_remote": "https://www.pokemon.co.jp/ex/xy/common/images/logo_xy.png",
         "cover_source": "https://www.pokemon.co.jp/ex/xy/",
         "cover_kind": "logo",
+        "cover_bg": "#cfe9fc",
+        "cover_fg": "dark",
         "items": [
           "650. Chespin",
           "651. Quilladin",
@@ -4516,6 +4644,8 @@
         "image_remote": "https://www.pokemon.co.jp/ex/sun_moon/common/images/shared/logo-sun.png",
         "cover_source": "https://www.pokemon.co.jp/ex/sun_moon/",
         "cover_kind": "logo",
+        "cover_bg": "#fcedcf",
+        "cover_fg": "dark",
         "items": [
           "722. Rowlet",
           "723. Dartrix",
@@ -4859,6 +4989,8 @@
         "image_remote": "https://www.pokemon.co.jp/ex/sword_shield/assets/logo_main01@2x.png",
         "cover_source": "https://www.pokemon.co.jp/ex/sword_shield/",
         "cover_kind": "logo",
+        "cover_bg": "#fccfe0",
+        "cover_fg": "dark",
         "items": [
           "810. Grookey",
           "811. Thwackey",
@@ -5150,6 +5282,8 @@
         "image_remote": "https://www.pokemon.co.jp/ex/sv/assets/img/toppage/ja/title_scarlet.png",
         "cover_source": "https://www.pokemon.co.jp/ex/sv/ja/",
         "cover_kind": "logo",
+        "cover_bg": "#fcf7cf",
+        "cover_fg": "dark",
         "items": [
           "906. Sprigatito",
           "907. Floragato",
@@ -5833,6 +5967,8 @@
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/960px-International_Pok%C3%A9mon_logo.svg.png",
         "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon",
         "cover_kind": "logo",
+        "cover_bg": "#fcf3cf",
+        "cover_fg": "dark",
         "items": [],
         "kit_ids": [
           "banpresto-2848093",
@@ -5994,6 +6130,8 @@
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/960px-International_Pok%C3%A9mon_logo.svg.png",
         "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon",
         "cover_kind": "logo",
+        "cover_bg": "#fcf3cf",
+        "cover_fg": "dark",
         "items": [],
         "kit_ids": [
           "ichibankuji-pk30th-2-2",
@@ -6735,6 +6873,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap100.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#f6dfd5",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 1,
@@ -6877,6 +7017,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap101.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#d2fccf",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 6,
@@ -7020,6 +7162,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap102.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#fcebcf",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 5,
@@ -7120,6 +7264,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap104.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#f1e7da",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 33,
@@ -7214,6 +7360,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap105.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#f1daf1",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 71,
@@ -7337,6 +7485,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap106.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#f6d5d5",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 16,
@@ -7500,6 +7650,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap107.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#f1e8da",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 19,
@@ -7690,6 +7842,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap108.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#fcfbcf",
+        "cover_fg": "dark",
         "roster": [],
         "kit_ids": [
           "aniplex-fate-itemqmdetizn",
@@ -7744,6 +7898,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap201.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#cfedfc",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 156,
@@ -7799,6 +7955,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap202.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#fcddcf",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 169,
@@ -7846,6 +8004,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap203.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#fccfcf",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 112,
@@ -7940,6 +8100,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap204.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#eadaf1",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 192,
@@ -7999,6 +8161,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap301.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#d3e7f8",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 201,
@@ -8063,6 +8227,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap302.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#cfe5fc",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 212,
@@ -8126,6 +8292,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap304.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#fce9cf",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 226,
@@ -8193,6 +8361,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap305.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#fccffc",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 244,
@@ -8258,6 +8428,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap308.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#cfeffc",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 278,
@@ -8306,6 +8478,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap309.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#fceacf",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 297,
@@ -8356,6 +8530,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap312.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#fceacf",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 284,
@@ -8496,6 +8672,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap315.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#cfe4fc",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 342,
@@ -8569,6 +8747,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap317.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#d9f8d3",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 370,
@@ -8627,6 +8807,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap402.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#d3e7f8",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 381,
@@ -8675,6 +8857,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap403.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#f1dbda",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 407,
@@ -8733,6 +8917,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap405.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#dacffc",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 421,
@@ -8783,6 +8969,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap406.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#f8f1d3",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 438,
@@ -8834,6 +9022,8 @@
         "image_remote": "https://static.atlasacademy.io/JP/Banner/questboard_cap410.png",
         "cover_source": "https://atlasacademy.io/",
         "cover_kind": "picture",
+        "cover_bg": "#dadaf1",
+        "cover_fg": "dark",
         "roster": [],
         "kit_ids": [
           "aniplex-fate-itemaimsoidf29",
@@ -8867,6 +9057,8 @@
         "image_remote": "https://www.fate-go.jp/assets/img/pc/top/main/slide01/logo.png",
         "cover_source": "https://www.fate-go.jp/",
         "cover_kind": "logo",
+        "cover_bg": "#dae3f1",
+        "cover_fg": "dark",
         "roster": [
           {
             "no": 4,
@@ -10818,6 +11010,8 @@
         "image_remote": "https://www.fate-go.jp/assets/img/pc/top/main/slide01/logo.png",
         "cover_source": "https://www.fate-go.jp/",
         "cover_kind": "logo",
+        "cover_bg": "#dae3f1",
+        "cover_fg": "dark",
         "roster": [],
         "kit_ids": [
           "aniplex-fate-itemtygocpcn",
@@ -11293,6 +11487,8 @@
         "image_remote": "https://www.fate-go.jp/assets/img/pc/top/main/slide01/logo.png",
         "cover_source": "https://www.fate-go.jp/",
         "cover_kind": "logo",
+        "cover_bg": "#dae3f1",
+        "cover_fg": "dark",
         "roster": [],
         "kit_ids": [
           "aniplex-fate-itembgdqgbdg",
@@ -12367,6 +12563,8 @@
         "image_remote": "https://www.fate-go.jp/assets/img/pc/top/main/slide01/logo.png",
         "cover_source": "https://www.fate-go.jp/",
         "cover_kind": "logo",
+        "cover_bg": "#dae3f1",
+        "cover_fg": "dark",
         "roster": [],
         "kit_ids": [
           "aniplex-fate-itemczfwwdlu",
@@ -12423,6 +12621,8 @@
         "image_remote": "https://www.fate-go.jp/assets/img/pc/top/main/slide01/logo.png",
         "cover_source": "https://www.fate-go.jp/",
         "cover_kind": "logo",
+        "cover_bg": "#dae3f1",
+        "cover_fg": "dark",
         "roster": [],
         "kit_ids": [
           "goodsmile-fate-g1141696",
@@ -12610,6 +12810,8 @@
         "image_remote": "http://www.fate-sn.jp/images/top/logo.png?6858901b436c0655491f8c196e6cddd4",
         "cover_source": "http://www.fate-sn.jp/",
         "cover_kind": "logo",
+        "cover_bg": "#16181d",
+        "cover_fg": "light",
         "roster": [
           {
             "ja": "衛宮士郎",
@@ -12924,6 +13126,8 @@
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/a/aa/Fate_hollow_ataraxia_game_DVD_cover.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Fate/hollow_ataraxia",
         "cover_kind": "picture",
+        "cover_bg": "#d2b7bb",
+        "cover_fg": "dark",
         "roster": [
           {
             "ja": "バゼット・フラガ・マクレミッツ",
@@ -12973,6 +13177,8 @@
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/3/3e/FatezeroNovelCover.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Fate/Zero",
         "cover_kind": "picture",
+        "cover_bg": "#7a7a86",
+        "cover_fg": "dark",
         "roster": [
           {
             "ja": "衛宮切嗣",
@@ -13080,6 +13286,8 @@
         "image_remote": "https://fate-apocrypha.com/assets/img/top/logo.png",
         "cover_source": "https://fate-apocrypha.com/",
         "cover_kind": "logo",
+        "cover_bg": "#fbecd0",
+        "cover_fg": "dark",
         "roster": [
           {
             "ja": "獅子劫界離",
@@ -13159,6 +13367,8 @@
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/3/34/Fate_Extra_Cover_Art.png",
         "cover_source": "https://en.wikipedia.org/wiki/Fate/Extra",
         "cover_kind": "picture",
+        "cover_bg": "#346f9b",
+        "cover_fg": "light",
         "roster": [
           {
             "ja": "ジナコ=カリギリ",
@@ -13310,6 +13520,8 @@
         "image_remote": "https://anime.prisma-illya.jp/finale/img/common/logo.png",
         "cover_source": "https://anime.prisma-illya.jp/finale/",
         "cover_kind": "logo",
+        "cover_bg": "#ded7f4",
+        "cover_fg": "dark",
         "roster": [
           {
             "ja": "ルヴィアゼリッタ・エーデルフェルト",
@@ -13391,6 +13603,8 @@
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/f/fd/Fate-strange_fake_light_novel_volume_1_cover.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Fate/strange_Fake",
         "cover_kind": "picture",
+        "cover_bg": "#a69d9c",
+        "cover_fg": "dark",
         "roster": [
           {
             "ja": "繰丘椿",
@@ -13506,6 +13720,8 @@
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/7/77/ElMelCaseFiles1.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/The_Case_Files_of_Lord_El-Melloi_II",
         "cover_kind": "picture",
+        "cover_bg": "#263356",
+        "cover_fg": "light",
         "roster": [
           {
             "ja": "ロード・エルメロイⅡ世",
@@ -13564,6 +13780,8 @@
         "image_remote": "https://www.gamecity.ne.jp/fate-sr/assets/img/top_kv_logo@sp.png",
         "cover_source": "https://www.gamecity.ne.jp/fate-sr/",
         "cover_kind": "logo",
+        "cover_bg": "#fcd2cf",
+        "cover_fg": "dark",
         "roster": [
           {
             "ja": "高尾太夫",
@@ -13610,6 +13828,8 @@
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/a/ab/Fate-Prototype_key_visual.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Fate/Prototype",
         "cover_kind": "picture",
+        "cover_bg": "#dce6ec",
+        "cover_fg": "dark",
         "roster": [
           {
             "ja": "沙条愛歌",
@@ -13648,6 +13868,8 @@
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/a/a3/Tsukihime.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Tsukihime",
         "cover_kind": "picture",
+        "cover_bg": "#7b8eb9",
+        "cover_fg": "dark",
         "roster": [
           {
             "ja": "アルクェイド・ブリュンスタッド",
@@ -13751,6 +13973,8 @@
         "image_remote": "https://www.karanokyoukai.com/img/logo_main.png",
         "cover_source": "https://www.karanokyoukai.com/",
         "cover_kind": "logo",
+        "cover_bg": "#16181d",
+        "cover_fg": "light",
         "roster": [
           {
             "ja": "黒桐幹也",
@@ -13806,6 +14030,8 @@
         "image_remote": "https://mahoyo-movie.com/assets/img/top/kv/logo_ttl.png",
         "cover_source": "https://mahoyo-movie.com/",
         "cover_kind": "logo",
+        "cover_bg": "#17191e",
+        "cover_fg": "light",
         "roster": [
           {
             "ja": "静希草十郎",
@@ -13839,6 +14065,8 @@
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Type-moon.svg/500px-Type-moon.svg.png",
         "cover_source": "https://en.wikipedia.org/wiki/Type-Moon",
         "cover_kind": "logo",
+        "cover_bg": "#cfe0fc",
+        "cover_fg": "dark",
         "roster": [],
         "kit_ids": [
           "aniplex-fate-itemnjeptxoy",
@@ -13879,6 +14107,8 @@
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Type-moon.svg/500px-Type-moon.svg.png",
         "cover_source": "https://en.wikipedia.org/wiki/Type-Moon",
         "cover_kind": "logo",
+        "cover_bg": "#cfe0fc",
+        "cover_fg": "dark",
         "roster": [],
         "kit_ids": [
           "aniplex-fate-itemncstlkbj",
@@ -13916,6 +14146,8 @@
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/d/db/ArmoredCorePS1.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Armored_Core_(video_game)",
         "cover_kind": "picture",
+        "cover_bg": "#252631",
+        "cover_fg": "light",
         "roster": [
           "ナインボール",
           "ナインボール・セラフ",
@@ -13960,6 +14192,8 @@
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/4/41/Armored_Core_3.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Armored_Core_3",
         "cover_kind": "picture",
+        "cover_bg": "#3f383c",
+        "cover_fg": "light",
         "roster": [
           "ミラージュ",
           "クレスト",
@@ -14012,6 +14246,8 @@
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/6/69/Armored_Core_4.jpg",
         "cover_source": "https://en.wikipedia.org/wiki/Armored_Core_4",
         "cover_kind": "picture",
+        "cover_bg": "#4a4847",
+        "cover_fg": "light",
         "roster": [
           "ホワイト・グリント",
           "ラインアーク",
@@ -14070,6 +14306,8 @@
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/6/64/Armored_Core_V_cover.png",
         "cover_source": "https://en.wikipedia.org/wiki/Armored_Core_V",
         "cover_kind": "picture",
+        "cover_bg": "#2a201c",
+        "cover_fg": "light",
         "roster": [
           "ハングドマン",
           "ヴェンジェンス",
@@ -14113,6 +14351,8 @@
         "image_remote": "https://www.armoredcore.net/resources/images/common/sp/menu/ac-logo2.png",
         "cover_source": "https://www.armoredcore.net/",
         "cover_kind": "logo",
+        "cover_bg": "#16181d",
+        "cover_fg": "light",
         "roster": [
           "バルテウス",
           "ナイトフォール",
@@ -14172,6 +14412,8 @@
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/Armored_Core_series_logo.svg/960px-Armored_Core_series_logo.svg.png",
         "cover_source": "https://en.wikipedia.org/wiki/Armored_Core",
         "cover_kind": "logo",
+        "cover_bg": "#ffffff",
+        "cover_fg": "dark",
         "roster": [],
         "kit_ids": [
           "acvi-4988601383523",
@@ -14687,6 +14929,8 @@
         "image_remote": "https://www.madoka-magica.com/assets/icon/ogp.png",
         "cover_source": "https://www.madoka-magica.com/",
         "cover_kind": "picture",
+        "cover_bg": "#ffffff",
+        "cover_fg": "dark",
         "kit_ids": [
           "banpresto-madoka-2633405",
           "goodsmile-madoka-14098",
@@ -14722,6 +14966,8 @@
         "image_remote": "https://www.madoka-magica.com/assets/icon/ogp.png",
         "cover_source": "https://www.madoka-magica.com/",
         "cover_kind": "picture",
+        "cover_bg": "#ffffff",
+        "cover_fg": "dark",
         "kit_ids": [
           "ichibankuji-madoka-madomagi16",
           "skjapan-madoka-amgoods-74351",
@@ -17006,6 +17252,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Duplo",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/en/thumb/b/bb/Duplo_logo_2022.svg/500px-Duplo_logo_2022.svg.png",
+        "cover_bg": "#fcf6cf",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-10462-1",
           "lego-10463-1",
@@ -18494,6 +18742,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Star_Wars",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Lego_Star_Wars_Logo_%282%29.svg/500px-Lego_Star_Wars_Logo_%282%29.svg.png",
+        "cover_bg": "#fccfd1",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-75466-1",
           "lego-75467-1",
@@ -19629,6 +19879,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_City",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Lego_City_logo%2C_used_since_January_2015.png",
+        "cover_bg": "#fccfcf",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-2d001164-1",
           "lego-2d001182-1",
@@ -20673,6 +20925,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Minifigures_(theme)",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/en/thumb/b/b1/LEGO_Minifigures_logo.svg/500px-LEGO_Minifigures_logo.svg.png",
+        "cover_bg": "#fccfcf",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-6581056-1",
           "lego-6623266-1",
@@ -21701,6 +21955,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Friends",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/a/ad/Lego_Friends_2023.png",
+        "cover_bg": "#ffffff",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-42709-1",
           "lego-42718-1",
@@ -22410,6 +22666,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Ninjago",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Lego_Ninjago_logo.svg/500px-Lego_Ninjago_logo.svg.png",
+        "cover_bg": "#fbd0d1",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-71873-1",
           "lego-71875-1",
@@ -23818,6 +24076,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Creator",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Lego_Creator.svg/500px-Lego_Creator.svg.png",
+        "cover_bg": "#fbd0d1",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-2d001187-1",
           "lego-2d001188-1",
@@ -24478,6 +24738,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Technic",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Technic_logo.svg/500px-Technic_logo.svg.png",
+        "cover_bg": "#fccfd4",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-42254-1",
           "lego-30735-1",
@@ -26222,6 +26484,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Bionicle",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/7/75/Bionicle2015Logo.png",
+        "cover_bg": "#f1e8da",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-5004409-1",
           "lego-601601-1",
@@ -26713,6 +26977,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Marvel",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Lego_Super_Heroes_Logo.png",
+        "cover_bg": "#fbd0d1",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-67005-1",
           "lego-67006-1",
@@ -27506,6 +27772,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Disney",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Lego_Disney.svg/500px-Lego_Disney.svg.png",
+        "cover_bg": "#f9d2d3",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-30720-1",
           "lego-43280-1",
@@ -28128,6 +28396,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Castle",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/7/74/Lego_Castle_logo.png",
+        "cover_bg": "#f2f2f2",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-eg00160-1",
           "lego-eg00161-1",
@@ -28976,6 +29246,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Harry_Potter",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/5/57/LEGO_Harry_Potter_Logo.png",
+        "cover_bg": "#fbd0d1",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-30724-1",
           "lego-40901-1",
@@ -29213,6 +29485,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Minecraft",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Lego_Minecraft_logo_2021.svg/500px-Lego_Minecraft_logo_2021.svg.png",
+        "cover_bg": "#fbd0d1",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-21582-1",
           "lego-21583-1",
@@ -29449,6 +29723,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_BrickHeadz",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/en/thumb/1/10/Lego_BrickHeadz_logo.svg/500px-Lego_BrickHeadz_logo.svg.png",
+        "cover_bg": "#fbd0d1",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-40856-1",
           "lego-40858-1",
@@ -29673,6 +29949,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Super_Mario",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Lego_Super_Mario.svg/500px-Lego_Super_Mario.svg.png",
+        "cover_bg": "#fccfd1",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-72052-1",
           "lego-72054-1",
@@ -30082,6 +30360,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Legends_of_Chima",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/b/bf/Legends_of_Chima_logo.png",
+        "cover_bg": "#f9efd2",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-30256-1",
           "lego-391501-1",
@@ -30561,6 +30841,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Mixels",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/c/c3/Mixeltvshowlogo.png",
+        "cover_bg": "#fcf6cf",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-41554-1",
           "lego-41555-1",
@@ -30848,6 +31130,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Hero_Factory",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Lego_Hero_Factory_logo.svg/500px-Lego_Hero_Factory_logo.svg.png",
+        "cover_bg": "#fbd0d1",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-40116-1",
           "lego-40117-1",
@@ -30982,6 +31266,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Nexo_Knights",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/d/d5/Nexo_Knights_Logo.png",
+        "cover_bg": "#fccfd0",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-271824-1",
           "lego-271825-1",
@@ -31115,6 +31401,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Ideas",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Lego_Ideas_logo.svg/500px-Lego_Ideas_logo.svg.png",
+        "cover_bg": "#fccfcf",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-21365-1",
           "lego-21366-1",
@@ -31246,6 +31534,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Fabuland",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/commons/3/30/Logo_Lego-Fabuland.png",
+        "cover_bg": "#fcf8cf",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-3647-1",
           "lego-3663-1",
@@ -31376,6 +31666,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Speed_Champions",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/5/58/Lego_Speed_Champsions_logo.png",
+        "cover_bg": "#fccfd1",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-30734-1",
           "lego-77252-1",
@@ -31735,6 +32027,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Pirates",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/2/2a/LEGO_Pirates_logo_2010.png",
+        "cover_bg": "#cfe3fc",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-eg00163-1",
           "lego-40158-1",
@@ -32277,6 +32571,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Adventurers",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/a/a2/Lego_Adventurers.png",
+        "cover_bg": "#fcf3cf",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-3380-1",
           "lego-3381-1",
@@ -32771,6 +33067,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Juniors",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Lego_Juniors.svg/500px-Lego_Juniors.svg.png",
+        "cover_bg": "#fccfcf",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-10748-1",
           "lego-10749-1",
@@ -33041,6 +33339,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Dreamzzz",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/6/67/Lego_Dreamzzz.webp",
+        "cover_bg": "#ffffff",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-71508-1",
           "lego-71512-1",
@@ -33220,6 +33520,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Architecture",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Lego_Architecture.svg/500px-Lego_Architecture.svg.png",
+        "cover_bg": "#fad5d1",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-21064-1",
           "lego-21065-1",
@@ -33309,6 +33611,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Monkie_Kid",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/9/94/Lego_Monkie_Kid.png",
+        "cover_bg": "#fcf5cf",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-80065-1",
           "lego-80066-1",
@@ -33543,6 +33847,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Exo-Force",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/5/5a/Lego_Exo-Force.png",
+        "cover_bg": "#f8d3d4",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-k8107-1",
           "lego-8111-1",
@@ -33618,6 +33924,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Vidiyo",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/f/f5/Lego_Vidiyo_logo.png",
+        "cover_bg": "#22b7bb",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-43101-0",
           "lego-43101-1",
@@ -33756,6 +34064,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Elves",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/0/04/Lego_Elves.png",
+        "cover_bg": "#0b141b",
+        "cover_fg": "light",
         "kit_ids": [
           "lego-41190-1",
           "lego-41191-1",
@@ -34112,6 +34422,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Alpha_Team",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/f/fb/Lego_Alpha_Team_logo.webp",
+        "cover_bg": "#000001",
+        "cover_fg": "light",
         "kit_ids": [
           "lego-4742-1",
           "lego-4743-1",
@@ -34426,6 +34738,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Art",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/en/thumb/1/13/Lego_Art_logo.png/500px-Lego_Art_logo.png",
+        "cover_bg": "#fccfd1",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-31218-1",
           "lego-31220-1",
@@ -34617,6 +34931,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Atlantis",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/2/2c/Lego_Atlantis_logo.png",
+        "cover_bg": "#fbd3d0",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-7976-1",
           "lego-7977-1",
@@ -34754,6 +35070,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Power_Miners",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/6/6d/PowerMiners.png",
+        "cover_bg": "#fefefe",
+        "cover_fg": "dark",
         "kit_ids": [
           "lego-8188-1",
           "lego-8189-1",
@@ -35302,6 +35620,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Lego_Rock_Raiders",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/2/2e/Lego_Rock_Raiders_logo.jpg",
+        "cover_bg": "#24261c",
+        "cover_fg": "light",
         "kit_ids": [
           "lego-1274-1",
           "lego-1275-1",
@@ -49002,6 +49322,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Kirby_(series)",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/Kirby_blue_and_yellow_logo.png/960px-Kirby_blue_and_yellow_logo.png",
+        "cover_bg": "#d5d5f6",
+        "cover_fg": "dark",
         "kit_ids": [
           "nintendo-kr-ns-70010000135067",
           "gashapon-nin-4582770131505000",
@@ -49128,6 +49450,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/The_Legend_of_Zelda",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Zelda_2017.svg/960px-Zelda_2017.svg.png",
+        "cover_bg": "#ffffff",
+        "cover_fg": "dark",
         "kit_ids": [
           "tamashii-nin-16048",
           "nintendo-kr-17640",
@@ -49225,6 +49549,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Super_Mario",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Super_Mario_Series_Logo.png/960px-Super_Mario_Series_Logo.png",
+        "cover_bg": "#fcf4cf",
+        "cover_fg": "dark",
         "kit_ids": [
           "tamashii-nin-15463",
           "gashapon-nin-4582769924613000",
@@ -49309,6 +49635,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Splatoon",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Splatoon_monochrome_logo.svg/500px-Splatoon_monochrome_logo.svg.png",
+        "cover_bg": "#ffffff",
+        "cover_fg": "dark",
         "kit_ids": [
           "ichibankuji-nin-splatoon-3-03",
           "nintendo-kr-16362",
@@ -49378,6 +49706,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Fire_Emblem",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/Fire_Emblem_logo.svg/500px-Fire_Emblem_logo.svg.png",
+        "cover_bg": "#ffffff",
+        "cover_fg": "dark",
         "kit_ids": [
           "nintendo-kr-16725",
           "nintendo-kr-17641",
@@ -49444,6 +49774,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Pok%C3%A9mon",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/960px-International_Pok%C3%A9mon_logo.svg.png",
+        "cover_bg": "#fcf3cf",
+        "cover_fg": "dark",
         "kit_ids": [
           "nintendo-kr-17900",
           "nintendo-kr-17901",
@@ -49493,6 +49825,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Animal_Crossing",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/9/9e/Animal_Crossing_Logo.png",
+        "cover_bg": "#f4e9d7",
+        "cover_fg": "dark",
         "kit_ids": [
           "gashapon-nin-4582770068412000",
           "gashapon-nin-4582769935299000",
@@ -49541,6 +49875,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Xenoblade_Chronicles",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/Xenoblade_series_logo.svg/960px-Xenoblade_series_logo.svg.png",
+        "cover_bg": "#ffffff",
+        "cover_fg": "dark",
         "kit_ids": [
           "nintendo-kr-sch-3c10bd5e6a",
           "nintendo-kr-18063",
@@ -49584,6 +49920,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Pikmin",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Pikmin_series_logo_new.svg/960px-Pikmin_series_logo_new.svg.png",
+        "cover_bg": "#cffccf",
+        "cover_fg": "dark",
         "kit_ids": [
           "nintendo-kr-17838",
           "gashapon-nin-4570118211354000",
@@ -49622,6 +49960,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Metroid",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Metroid_Logo_2017.svg/500px-Metroid_Logo_2017.svg.png",
+        "cover_bg": "#ffffff",
+        "cover_fg": "dark",
         "kit_ids": [
           "nintendo-kr-17638",
           "tamashii-nin-15649",
@@ -49657,6 +49997,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Super_Smash_Bros.",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/26/Super_Smash_Bros._logo_2018.svg/960px-Super_Smash_Bros._logo_2018.svg.png",
+        "cover_bg": "#ffffff",
+        "cover_fg": "dark",
         "kit_ids": [
           "nintendo-kr-amiibo-350",
           "nintendo-kr-amiibo-341",
@@ -49689,6 +50031,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Yoshi_(franchise)",
         "cover_kind": "logo",
         "image_remote": "https://upload.wikimedia.org/wikipedia/en/0/06/Yoshi_%28series%29.png",
+        "cover_bg": "#e6f6d5",
+        "cover_fg": "dark",
         "kit_ids": [
           "ichibankuji-nin-mario-yoshi",
           "nintendo-kr-15978",
@@ -49718,6 +50062,8 @@
         "cover_source": "https://en.wikipedia.org/wiki/Donkey_Kong",
         "cover_kind": "logo",
         "image_remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/Donkey_Kong_2024_logo.png/960px-Donkey_Kong_2024_logo.png",
+        "cover_bg": "#fccfd2",
+        "cover_fg": "dark",
         "kit_ids": [
           "nintendo-kr-13670",
           "nintendo-kr-11912",
