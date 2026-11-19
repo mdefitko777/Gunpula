@@ -6,6 +6,7 @@ import { NINTENDO_PRODUCT_LINES } from "./lib/catalog-cleanup.mjs";
 import {
   buildRecords,
   classifyStoreProduct,
+  isStoreRecord,
   parseAmiiboLineup,
   parseNintendoNews,
   parseSchedule,
@@ -166,5 +167,11 @@ assert.deepEqual(news.map((item) => [item.announced_at, item.status]), [
 assert.ok(news.every((item) => item.franchise === "nintendo" && item.source_id === "nintendo_kr_news" && item.names.ko === item.names.ja));
 assert.match(news[0].thumbnail_url, /^https:\/\/images\.ctfassets\.net\/.*\?w=400&fm=webp$/, "&amp; decoded");
 assert.equal(news.some((item) => /피크민 in 잠실|판매량/.test(item.names.ko)), false, "events and sales milestones are not products");
+
+// --- The drop guard counts the store's own records, not the hobby makers' Nintendo records.
+assert.equal(isStoreRecord({ kit_id: "nintendo-kr-18132", franchise: "nintendo" }), true);
+assert.equal(isStoreRecord({ kit_id: "nintendo-kr-amiibo-mario", franchise: "nintendo" }), true);
+assert.equal(isStoreRecord({ kit_id: "goodsmile-nintendo-123", franchise: "nintendo" }), false);
+assert.equal(isStoreRecord({ kit_id: "tamashii-nintendo-45", franchise: "nintendo" }), false);
 
 console.log("test_nintendo_korea: ok");

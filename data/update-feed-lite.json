@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19",
-  "generated_at": "2026-11-19T22:25:30.927Z",
+  "updated_at": "2026-11-20",
+  "generated_at": "2026-11-19T23:02:12.401Z",
   "watch_tags": [
     "seed",
     "00"
@@ -26,28 +26,895 @@
   },
   "entries": [
     {
+      "date": "2026-11-20",
+      "generated_at": "2026-11-19T23:02:12.401Z",
+      "total_before": 42020,
+      "total_after": 42021,
+      "added_count": 1,
+      "changed_count": 75,
+      "removed_count": 0,
+      "watched_count": 0,
+      "merged_count": 0,
+      "backfilled_count": 0,
+      "renamed_count": 0,
+      "premium_bandai_count": 0,
+      "bbx_count": 0,
+      "franchise_counts": {
+        "nintendo": 8,
+        "pokemon": 68
+      },
+      "reason_counts": {
+        "new": 1,
+        "name": 7,
+        "source": 68
+      },
+      "interest_tags": [
+        "nintendo",
+        "pokemon"
+      ],
+      "watch_tags": [],
+      "added": [
+        {
+          "kit_id": "nintendo-kr-18322",
+          "change_type": "added",
+          "franchise": "nintendo",
+          "grade_code": "NIN_HW",
+          "subline": "Nintendo Switch 2",
+          "series_key": "nintendo_other",
+          "series_labels": {
+            "ko": "기타",
+            "zh": "其他",
+            "en": "Other",
+            "ja": "その他"
+          },
+          "names": {
+            "ja": "Nintendo Switch 2 Monster Hunter Wilds 세트",
+            "zh": "Nintendo Switch 2 怪物猎人 荒野 套装",
+            "ko": "Nintendo Switch 2 Monster Hunter Wilds 세트",
+            "en": "Nintendo Switch 2 Monster Hunter Wilds 세트"
+          },
+          "release_date": "2026-12-04",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "nintendo"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "nintendo_store_kr"
+          ],
+          "source_urls": [
+            "https://store.nintendo.co.kr/beeskb6ngkor"
+          ]
+        }
+      ],
+      "changed": [
+        {
+          "kit_id": "pokepla-01-7148",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon Model Kit Quick!!",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモンプラモコレクション クイック!! 29 ヒコザル",
+            "zh": "宝可梦拼装模型收藏 快速组装 29 小火焰猴",
+            "ko": "포켓몬 프라모 컬렉션 퀵!! 29 불꽃숭이",
+            "en": "Pokémon PLAMO COLLECTION QUICK!! 29 Chimchar"
+          },
+          "release_date": "2026-09-12",
+          "price_jpy": 858,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_pokepla_jp",
+            "bandai_hobby_pokemon_global",
+            "bnkrmall_kr"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102742957000&grp_id=5325",
+            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-7120",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon Model Kit Quick!!",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモンプラモコレクション クイック!! 28 ニャース",
+            "zh": "宝可梦拼装模型收藏 快速组装 28 喵喵",
+            "ko": "포켓몬 프라모 컬렉션 퀵!! 28 나옹",
+            "en": "Pokémon PLAMO COLLECTION QUICK!! 28 Meowth"
+          },
+          "release_date": "2026-07-18",
+          "price_jpy": 858,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_pokepla_jp",
+            "bandai_hobby_pokemon_global",
+            "bnkrmall_kr"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102742513000&grp_id=5325",
+            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-7038",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモンプラモコレクション 62 セレクトシリーズ カイオーガ",
+            "zh": "宝可梦拼装模型收藏 62 精选系列 盖欧卡",
+            "ko": "포켓몬 프라모 컬렉션 62 셀렉트 시리즈 가이오가",
+            "en": "Pokémon PLAMO COLLECTION 62 SELECT SERIES Kyogre"
+          },
+          "release_date": "2026-06-13",
+          "price_jpy": 1980,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_pokepla_jp",
+            "bandai_hobby_pokemon_global",
+            "bnkrmall_kr"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102725530000&grp_id=5325",
+            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-7015",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon Model Kit Quick!!",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモンプラモコレクション クイック!! 27 シャワーズ",
+            "zh": "宝可梦拼装模型收藏 快速组装 27 水伊布",
+            "ko": "포켓몬 프라모 컬렉션 퀵!! 27 샤미드",
+            "en": "Pokémon PLAMO COLLECTION QUICK!! 27 Vaporeon"
+          },
+          "release_date": "2026-05-22",
+          "price_jpy": 858,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_pokepla_jp",
+            "bandai_hobby_pokemon_global",
+            "bnkrmall_kr"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102725356000&grp_id=5325",
+            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-7010",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon Model Kit Quick!!",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモンプラモコレクション クイック!! 26 サンダース",
+            "zh": "宝可梦拼装模型收藏 快速组装 26 雷伊布",
+            "ko": "포켓몬 프라모 컬렉션 퀵!! 26 쥬피썬더",
+            "en": "Pokémon PLAMO COLLECTION QUICK!! 26 Jolteon"
+          },
+          "release_date": "2026-04-18",
+          "price_jpy": 858,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_pokepla_jp",
+            "bandai_hobby_pokemon_global",
+            "bnkrmall_kr"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102725264000&grp_id=5325",
+            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc"
+          ]
+        },
+        {
+          "kit_id": "nintendo-kr-15383",
+          "change_type": "changed",
+          "franchise": "nintendo",
+          "grade_code": "NIN_HW",
+          "subline": "Nintendo Switch 2",
+          "series_key": "nintendo_other",
+          "series_labels": {
+            "ko": "기타",
+            "zh": "其他",
+            "en": "Other",
+            "ja": "その他"
+          },
+          "names": {
+            "ja": "Virtual Boy for Nintendo Switch 2/Nintendo Switch",
+            "zh": "Virtual Boy for Nintendo Switch 2/Nintendo Switch",
+            "ko": "Virtual Boy for Nintendo Switch 2/Nintendo Switch",
+            "en": "Virtual Boy for Nintendo Switch 2/Nintendo Switch"
+          },
+          "release_date": "2026-02-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "nintendo"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "nintendo_store_kr"
+          ],
+          "source_urls": [
+            "https://store.nintendo.co.kr/hacalvpaa"
+          ]
+        },
+        {
+          "kit_id": "nintendo-kr-15384",
+          "change_type": "changed",
+          "franchise": "nintendo",
+          "grade_code": "NIN_HW",
+          "subline": "Nintendo Switch 2",
+          "series_key": "nintendo_other",
+          "series_labels": {
+            "ko": "기타",
+            "zh": "其他",
+            "en": "Other",
+            "ja": "その他"
+          },
+          "names": {
+            "ja": "Virtual Boy(페이퍼 모델) for Nintendo Switch 2/Nintendo Switch",
+            "zh": "Virtual Boy (纸模型) for Nintendo Switch 2/Nintendo Switch",
+            "ko": "Virtual Boy(페이퍼 모델) for Nintendo Switch 2/Nintendo Switch",
+            "en": "Virtual Boy(페이퍼 모델) for Nintendo Switch 2/Nintendo Switch"
+          },
+          "release_date": "2026-02-17",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "nintendo"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "nintendo_store_kr"
+          ],
+          "source_urls": [
+            "https://store.nintendo.co.kr/hacalvsaa"
+          ]
+        },
+        {
+          "kit_id": "pokepla-jp-4573102720214",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon Fossil Pokemon Series",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモンプラモコレクション カセキポケモンシリーズ ガチゴラス",
+            "zh": "宝可梦拼装模型收藏 化石宝可梦系列 怪颚龙",
+            "ko": "포켓몬 프라모 컬렉션 화석 포켓몬 시리즈 견고라스",
+            "en": "Pokémon PLAMO COLLECTION FOSSIL POKÉMON SERIES Tyrantrum"
+          },
+          "release_date": "2026-02-14",
+          "price_jpy": 2640,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_pokepla_jp",
+            "bnkrmall_kr"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102720214000&grp_id=5325",
+            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc"
+          ]
+        },
+        {
+          "kit_id": "pokepla-jp-4573102720207",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon Fossil Pokemon Series",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモンプラモコレクション カセキポケモンシリーズ プテラ",
+            "zh": "宝可梦拼装模型收藏 化石宝可梦系列 化石翼龙",
+            "ko": "포켓몬 프라모 컬렉션 화석 포켓몬 시리즈 프테라",
+            "en": "Pokémon PLAMO COLLECTION FOSSIL POKÉMON SERIES Aerodactyl"
+          },
+          "release_date": "2026-02-14",
+          "price_jpy": 2200,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_pokepla_jp",
+            "bnkrmall_kr"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102720207000&grp_id=5325",
+            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-6894",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon Model Kit Quick!!",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモンプラモコレクション クイック!! 25 ブースター",
+            "zh": "宝可梦拼装模型收藏 快速组装 25 火伊布",
+            "ko": "포켓몬 프라모 컬렉션 퀵!! 25 부스터",
+            "en": "Pokémon PLAMO COLLECTION QUICK!! 25 Flareon"
+          },
+          "release_date": "2026-01-24",
+          "price_jpy": 858,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_pokepla_jp",
+            "bandai_hobby_pokemon_global",
+            "bnkrmall_kr"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102691798000&grp_id=5325",
+            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-6780",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモンプラモコレクション 61 セレクトシリーズ メガレックウザ",
+            "zh": "宝可梦拼装模型收藏 61 精选系列 超级烈空坐",
+            "ko": "포켓몬 프라모 컬렉션 61 셀렉트 시리즈 메가레쿠쟈",
+            "en": "Pokémon PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza"
+          },
+          "release_date": "2025-12-20",
+          "price_jpy": 2970,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_pokepla_jp",
+            "bandai_hobby_pokemon_global",
+            "bnkrmall_kr"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102692023000&grp_id=5325",
+            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-6762",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon Model Kit Quick!!",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモンプラモコレクション クイック!! 24 ピチュー",
+            "zh": "宝可梦拼装模型收藏 快速组装 24 皮丘",
+            "ko": "포켓몬 프라모 컬렉션 퀵!! 24 피츄",
+            "en": "Pokémon PLAMO COLLECTION QUICK!! 24 Pichu"
+          },
+          "release_date": "2025-10-25",
+          "price_jpy": 858,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_pokepla_jp",
+            "bandai_hobby_pokemon_global",
+            "bnkrmall_kr"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102691699000&grp_id=5325",
+            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-5984",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモンプラモコレクション 60 セレクトシリーズ コライドン",
+            "zh": "宝可梦拼装模型收藏 60 精选系列 故勒顿",
+            "ko": "포켓몬 프라모 컬렉션 60 셀렉트 시리즈 코라이돈",
+            "en": "Pokémon PLAMO COLLECTION 60 SELECT SERIES Koraidon"
+          },
+          "release_date": "2025-09-27",
+          "price_jpy": 2310,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_pokepla_jp",
+            "bandai_hobby_pokemon_global",
+            "bnkrmall_kr"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102688736000&grp_id=5325",
+            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-5958",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモンプラモコレクション 59 セレクトシリーズ ミライドン",
+            "zh": "宝可梦拼装模型收藏 59 精选系列 密勒顿",
+            "ko": "포켓몬 프라모 컬렉션 59 셀렉트 시리즈 미라이돈",
+            "en": "Pokémon PLAMO COLLECTION 59 SELECT SERIES Miraidon"
+          },
+          "release_date": "2025-08-08",
+          "price_jpy": 2310,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_pokepla_jp",
+            "bandai_hobby_pokemon_global",
+            "bnkrmall_kr"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102688507000&grp_id=5325",
+            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-5947",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon Model Kit Quick!!",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモンプラモコレクション クイック!! 23 ジラーチ",
+            "zh": "宝可梦拼装模型收藏 快速组装 23 基拉祈",
+            "ko": "포켓몬 프라모 컬렉션 퀵!! 23 지라치",
+            "en": "Pokémon PLAMO COLLECTION QUICK!! 23 Jirachi"
+          },
+          "release_date": "2025-07-12",
+          "price_jpy": 858,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_pokepla_jp",
+            "bandai_hobby_pokemon_global",
+            "bnkrmall_kr"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102686879000&grp_id=5325",
+            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-5568",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモンプラモコレクション 58 セレクトシリーズ グレンアルマ",
+            "zh": "宝可梦拼装模型收藏 58 精选系列 红莲铠骑",
+            "ko": "포켓몬 프라모 컬렉션 58 셀렉트 시리즈 카디나르마",
+            "en": "Pokémon PLAMO COLLECTION 58 SELECT SERIES Armarouge"
+          },
+          "release_date": "2025-05-24",
+          "price_jpy": 1870,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_pokepla_jp",
+            "bandai_hobby_pokemon_global",
+            "bnkrmall_kr"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102685650000&grp_id=5325",
+            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-5555",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon Model Kit Quick!!",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモンプラモコレクション クイック!! 22 パモ",
+            "zh": "宝可梦拼装模型收藏 快速组装 22 布拨",
+            "ko": "포켓몬 프라모 컬렉션 퀵!! 22 빠모",
+            "en": "Pokémon PLAMO COLLECTION QUICK!! 22 Pawmi"
+          },
+          "release_date": "2025-04-12",
+          "price_jpy": 858,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_pokepla_jp",
+            "bandai_hobby_pokemon_global",
+            "bnkrmall_kr"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102685612000&grp_id=5325",
+            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-5497",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモンプラモコレクション 57 セレクトシリーズ ソウブレイズ",
+            "zh": "宝可梦拼装模型收藏 57 精选系列 苍炎刃鬼",
+            "ko": "포켓몬 프라모 컬렉션 57 셀렉트 시리즈 파라블레이즈",
+            "en": "Pokémon PLAMO COLLECTION 57 SELECT SERIES Ceruledge"
+          },
+          "release_date": "2025-03-22",
+          "price_jpy": 1870,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_pokepla_jp",
+            "bandai_hobby_pokemon_global",
+            "bnkrmall_kr"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102683663000&grp_id=5325",
+            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-5467",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモンプラモコレクション 56 セレクトシリーズ マスカーニャ",
+            "zh": "宝可梦拼装模型收藏 56 精选系列 魔幻假面喵",
+            "ko": "포켓몬 프라모 컬렉션 56 셀렉트 시리즈 마스카나",
+            "en": "Pokémon PLAMO COLLECTION 56 SELECT SERIES Meowscarada"
+          },
+          "release_date": "2025-02-22",
+          "price_jpy": 1760,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_pokepla_jp",
+            "bandai_hobby_pokemon_global",
+            "bnkrmall_kr"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102683458000&grp_id=5325",
+            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc"
+          ]
+        },
+        {
+          "kit_id": "pokepla-01-5450",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKEPLA",
+          "subline": "Pokemon Model Kit Quick!!",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "ポケモンプラモコレクション クイック!! 21 コダック",
+            "zh": "宝可梦拼装模型收藏 快速组装 21 可达鸭",
+            "ko": "포켓몬 프라모 컬렉션 퀵!! 21 고라파덕",
+            "en": "Pokémon PLAMO COLLECTION QUICK!! 21 Psyduck"
+          },
+          "release_date": "2025-01-25",
+          "price_jpy": 858,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "bandai_spirits_pokepla_jp",
+            "bandai_hobby_pokemon_global",
+            "bnkrmall_kr"
+          ],
+          "source_urls": [
+            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102683298000&grp_id=5325",
+            "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2&dsp_cnt=60&sort=salesdate&order=desc"
+          ]
+        }
+      ],
+      "removed": [],
+      "watched": [],
+      "merged": [],
+      "backfilled": [],
+      "renamed": []
+    },
+    {
       "date": "2026-11-19",
       "generated_at": "2026-11-19T22:25:30.927Z",
       "total_before": 41965,
       "total_after": 42020,
-      "added_count": 56,
+      "added_count": 55,
       "changed_count": 66,
       "removed_count": 9,
       "watched_count": 0,
       "merged_count": 1,
       "backfilled_count": 6,
-      "renamed_count": 0,
+      "renamed_count": 1,
       "premium_bandai_count": 8,
       "bbx_count": 0,
       "franchise_counts": {
         "gundam": 9,
         "madoka": 50,
-        "pokemon": 18,
+        "pokemon": 17,
         "lego": 43,
         "fate": 2
       },
       "reason_counts": {
-        "new": 56,
+        "new": 55,
         "image": 49,
         "source": 54,
         "limited": 1,
@@ -157,7 +1024,7 @@
           },
           "names": {
             "ja": "[예약 판매] 포켓몬 스토어 2027년 탁상 캘린더",
-            "zh": "[예약 판매] 포켓몬 스토어 2027년 탁상 캘린더",
+            "zh": "【预售】宝可梦商店 2027年 台历",
             "ko": "[예약 판매] 포켓몬 스토어 2027년 탁상 캘린더",
             "en": "[예약 판매] 포켓몬 스토어 2027년 탁상 캘린더"
           },
@@ -194,7 +1061,7 @@
           },
           "names": {
             "ja": "[예약 판매] 포켓몬 스토어 2027년 탁상 캘린더&다이어리 세트",
-            "zh": "[예약 판매] 포켓몬 스토어 2027년 탁상 캘린더&다이어리 세트",
+            "zh": "【预售】宝可梦商店 2027年 台历&手账套装",
             "ko": "[예약 판매] 포켓몬 스토어 2027년 탁상 캘린더&다이어리 세트",
             "en": "[예약 판매] 포켓몬 스토어 2027년 탁상 캘린더&다이어리 세트"
           },
@@ -268,7 +1135,7 @@
           },
           "names": {
             "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 메타몽 입는 담요",
-            "zh": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 메타몽 입는 담요",
+            "zh": "宝可梦商店 「软软百变怪的一天」 百变怪 可穿毛毯",
             "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 메타몽 입는 담요",
             "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 메타몽 입는 담요"
           },
@@ -305,7 +1172,7 @@
           },
           "names": {
             "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 버킷햇",
-            "zh": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 버킷햇",
+            "zh": "宝可梦商店 「软软百变怪的一天」 渔夫帽",
             "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 버킷햇",
             "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 버킷햇"
           },
@@ -342,7 +1209,7 @@
           },
           "names": {
             "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 액션 슬리퍼",
-            "zh": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 액션 슬리퍼",
+            "zh": "宝可梦商店 「软软百变怪的一天」 动态拖鞋",
             "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 액션 슬리퍼",
             "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 액션 슬리퍼"
           },
@@ -379,7 +1246,7 @@
           },
           "names": {
             "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 인형 토트백",
-            "zh": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 인형 토트백",
+            "zh": "宝可梦商店 「软软百变怪的一天」 玩偶托特包",
             "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 인형 토트백",
             "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 인형 토트백"
           },
@@ -416,7 +1283,7 @@
           },
           "names": {
             "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 파자마",
-            "zh": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 파자마",
+            "zh": "宝可梦商店 「软软百变怪的一天」 睡衣",
             "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 파자마",
             "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 파자마"
           },
@@ -453,7 +1320,7 @@
           },
           "names": {
             "ja": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 스노우볼",
-            "zh": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 스노우볼",
+            "zh": "宝可梦商店 「软软百变怪的一天」 水晶球",
             "ko": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 스노우볼",
             "en": "포켓몬 스토어 「말랑말랑 메타몽의 하루」 스노우볼"
           },
@@ -2200,7 +3067,45 @@
           ]
         }
       ],
-      "renamed": []
+      "renamed": [
+        {
+          "kit_id": "pokemon-center-4904810096382",
+          "change_type": "renamed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "モンコレ メガガブリアス",
+            "zh": "宝可梦 Moncolle 小手办 超级烈咬陆鲨",
+            "ko": "몬콜레 메가한카리아스",
+            "en": "モンコレ メガガブリアス"
+          },
+          "release_date": null,
+          "price_jpy": 1067,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "renamed"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4904810096382.html"
+          ]
+        }
+      ]
     },
     {
       "date": "2026-11-18",
@@ -3163,7 +4068,7 @@
           },
           "names": {
             "ja": "포켓몬센터 봉제인형 뚜꾸리",
-            "zh": "포켓몬센터 봉제인형 뚜꾸리",
+            "zh": "宝可梦中心 毛绒玩偶 暖暖猪",
             "ko": "포켓몬센터 봉제인형 뚜꾸리",
             "en": "포켓몬센터 봉제인형 뚜꾸리"
           },
@@ -4201,7 +5106,7 @@
           },
           "names": {
             "ja": "포켓몬 LCD 파트너즈 몬스터",
-            "zh": "포켓몬 LCD 파트너즈 몬스터",
+            "zh": "宝可梦 LCD 伙伴 精灵",
             "ko": "포켓몬 LCD 파트너즈 몬스터",
             "en": "포켓몬 LCD 파트너즈 몬스터"
           },
@@ -7636,7 +8541,7 @@
           },
           "names": {
             "ja": "포켓몬센터 A4 클리어파일 2장 세트 ポケモン Pokopia",
-            "zh": "포켓몬센터 A4 클리어파일 2장 세트 宝可梦 Pokopia",
+            "zh": "宝可梦中心 A4 文件夹 2张套装 宝可梦 Pokopia",
             "ko": "포켓몬센터 A4 클리어파일 2장 세트 포켓몬 Pokopia",
             "en": "포켓몬센터 A4 클리어파일 2장 세트 Pokémon Pokopia"
           },
@@ -7673,7 +8578,7 @@
           },
           "names": {
             "ja": "포켓몬센터 B6 노트 ポケモン Pokopia",
-            "zh": "포켓몬센터 B6 노트 宝可梦 Pokopia",
+            "zh": "宝可梦中心 B6 笔记本 宝可梦 Pokopia",
             "ko": "포켓몬센터 B6 노트 포켓몬 Pokopia",
             "en": "포켓몬센터 B6 노트 Pokémon Pokopia"
           },
@@ -7710,7 +8615,7 @@
           },
           "names": {
             "ja": "포켓몬센터 LED 라이트 ポケモン Pokopia 피카츄(창백한 색)",
-            "zh": "포켓몬센터 LED 라이트 宝可梦 Pokopia 피카츄(창백한 색)",
+            "zh": "宝可梦中心 LED 灯 宝可梦 Pokopia 皮卡丘(苍白色)",
             "ko": "포켓몬센터 LED 라이트 포켓몬 Pokopia 피카츄(창백한 색)",
             "en": "포켓몬센터 LED 라이트 Pokémon Pokopia 피카츄(창백한 색)"
           },
@@ -7747,7 +8652,7 @@
           },
           "names": {
             "ja": "포켓몬센터 ポケモン Magic Hour Illusion! A4 클리어파일",
-            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! A4 클리어파일",
+            "zh": "宝可梦中心 宝可梦 Magic Hour Illusion! A4 文件夹",
             "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! A4 클리어파일",
             "en": "포켓몬센터 Pokémon Magic Hour Illusion! A4 클리어파일"
           },
@@ -7784,7 +8689,7 @@
           },
           "names": {
             "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 디저트 피규어 키링 마휘핑",
-            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 디저트 피규어 키링 마휘핑",
+            "zh": "宝可梦中心 宝可梦 Magic Hour Illusion! 甜点手办钥匙圈 霜奶仙",
             "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 디저트 피규어 키링 마휘핑",
             "en": "포켓몬센터 Pokémon Magic Hour Illusion! 디저트 피규어 키링 마휘핑"
           },
@@ -7821,7 +8726,7 @@
           },
           "names": {
             "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 디저트 피규어 키링 알로라 라이츄",
-            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 디저트 피규어 키링 알로라 라이츄",
+            "zh": "宝可梦中心 宝可梦 Magic Hour Illusion! 甜点手办钥匙圈 阿罗拉 雷丘",
             "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 디저트 피규어 키링 알로라 라이츄",
             "en": "포켓몬센터 Pokémon Magic Hour Illusion! 디저트 피규어 키링 알로라 라이츄"
           },
@@ -7858,7 +8763,7 @@
           },
           "names": {
             "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 디저트 피규어 키링 조로아",
-            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 디저트 피규어 키링 조로아",
+            "zh": "宝可梦中心 宝可梦 Magic Hour Illusion! 甜点手办钥匙圈 索罗亚",
             "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 디저트 피규어 키링 조로아",
             "en": "포켓몬센터 Pokémon Magic Hour Illusion! 디저트 피규어 키링 조로아"
           },
@@ -7895,7 +8800,7 @@
           },
           "names": {
             "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 리버시블 블랭킷",
-            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 리버시블 블랭킷",
+            "zh": "宝可梦中心 宝可梦 Magic Hour Illusion! 双面毯子",
             "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 리버시블 블랭킷",
             "en": "포켓몬센터 Pokémon Magic Hour Illusion! 리버시블 블랭킷"
           },
@@ -7932,7 +8837,7 @@
           },
           "names": {
             "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 머그컵&플레이트 세트",
-            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 머그컵&플레이트 세트",
+            "zh": "宝可梦中心 宝可梦 Magic Hour Illusion! 马克杯&盘子套装",
             "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 머그컵&플레이트 세트",
             "en": "포켓몬센터 Pokémon Magic Hour Illusion! 머그컵&플레이트 세트"
           },
@@ -7969,7 +8874,7 @@
           },
           "names": {
             "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 모양 메모",
-            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 모양 메모",
+            "zh": "宝可梦中心 宝可梦 Magic Hour Illusion! 造型便签",
             "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 모양 메모",
             "en": "포켓몬센터 Pokémon Magic Hour Illusion! 모양 메모"
           },
@@ -8006,7 +8911,7 @@
           },
           "names": {
             "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 아크릴 키링 컬렉션(랜덤 상품)",
-            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 아크릴 키링 컬렉션(랜덤 상품)",
+            "zh": "宝可梦中心 宝可梦 Magic Hour Illusion! 亚克力钥匙圈收藏(随机款)",
             "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 아크릴 키링 컬렉션(랜덤 상품)",
             "en": "포켓몬센터 Pokémon Magic Hour Illusion! 아크릴 키링 컬렉션(랜덤 상품)"
           },
@@ -8043,7 +8948,7 @@
           },
           "names": {
             "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 조각 스티커",
-            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 조각 스티커",
+            "zh": "宝可梦中心 宝可梦 Magic Hour Illusion! 贴纸片",
             "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 조각 스티커",
             "en": "포켓몬센터 Pokémon Magic Hour Illusion! 조각 스티커"
           },
@@ -8080,7 +8985,7 @@
           },
           "names": {
             "ja": "포켓몬센터 ポケモン Magic Hour Illusion! 쫀득 팬케이크 느낌 파우치 알로라 라이츄",
-            "zh": "포켓몬센터 宝可梦 Magic Hour Illusion! 쫀득 팬케이크 느낌 파우치 알로라 라이츄",
+            "zh": "宝可梦中心 宝可梦 Magic Hour Illusion! 软糯松饼风收纳包 阿罗拉 雷丘",
             "ko": "포켓몬센터 포켓몬 Magic Hour Illusion! 쫀득 팬케이크 느낌 파우치 알로라 라이츄",
             "en": "포켓몬센터 Pokémon Magic Hour Illusion! 쫀득 팬케이크 느낌 파우치 알로라 라이츄"
           },
@@ -8275,7 +9180,7 @@
           },
           "names": {
             "ja": "포켓몬센터 ポケモン Garden Wedding 봉제인형 피카츄(수컷의 모습)",
-            "zh": "포켓몬센터 宝可梦 Garden Wedding 봉제인형 피카츄(수컷의 모습)",
+            "zh": "宝可梦中心 宝可梦 Garden Wedding 毛绒玩偶 皮卡丘(雄性的样子)",
             "ko": "포켓몬센터 포켓몬 Garden Wedding 봉제인형 피카츄(수컷의 모습)",
             "en": "포켓몬센터 Pokémon Garden Wedding 봉제인형 피카츄(수컷의 모습)"
           },
@@ -8312,7 +9217,7 @@
           },
           "names": {
             "ja": "포켓몬센터 ポケモン Garden Wedding 봉제인형 피카츄(암컷의 모습)",
-            "zh": "포켓몬센터 宝可梦 Garden Wedding 봉제인형 피카츄(암컷의 모습)",
+            "zh": "宝可梦中心 宝可梦 Garden Wedding 毛绒玩偶 皮卡丘(雌性的样子)",
             "ko": "포켓몬센터 포켓몬 Garden Wedding 봉제인형 피카츄(암컷의 모습)",
             "en": "포켓몬센터 Pokémon Garden Wedding 봉제인형 피카츄(암컷의 모습)"
           },
@@ -9032,7 +9937,7 @@
           },
           "names": {
             "ja": "포켓몬센터 A4 클리어파일 세트 POKEMON TRAINERS -STARDUST BESTIES-",
-            "zh": "포켓몬센터 A4 클리어파일 세트 POKEMON TRAINERS -STARDUST BESTIES-",
+            "zh": "宝可梦中心 A4 文件夹套装 宝可梦训练家系列 -STARDUST BESTIES-",
             "ko": "포켓몬센터 A4 클리어파일 세트 POKEMON TRAINERS -STARDUST BESTIES-",
             "en": "포켓몬센터 A4 클리어파일 세트 POKEMON TRAINERS -STARDUST BESTIES-"
           },
@@ -9069,7 +9974,7 @@
           },
           "names": {
             "ja": "포켓몬센터 긴팔 티셔츠 POKEMON TRAINERS -STARDUST BESTIES- Free",
-            "zh": "포켓몬센터 긴팔 티셔츠 POKEMON TRAINERS -STARDUST BESTIES- Free",
+            "zh": "宝可梦中心 长袖T恤 宝可梦训练家系列 -STARDUST BESTIES- Free",
             "ko": "포켓몬센터 긴팔 티셔츠 POKEMON TRAINERS -STARDUST BESTIES- Free",
             "en": "포켓몬센터 긴팔 티셔츠 POKEMON TRAINERS -STARDUST BESTIES- Free"
           },
@@ -9106,7 +10011,7 @@
           },
           "names": {
             "ja": "포켓몬센터 러버 키링 컬렉션 POKEMON TRAINERS -STARDUST BESTIES-",
-            "zh": "포켓몬센터 러버 키링 컬렉션 POKEMON TRAINERS -STARDUST BESTIES-",
+            "zh": "宝可梦中心 橡胶钥匙圈收藏 宝可梦训练家系列 -STARDUST BESTIES-",
             "ko": "포켓몬센터 러버 키링 컬렉션 POKEMON TRAINERS -STARDUST BESTIES-",
             "en": "포켓몬센터 러버 키링 컬렉션 POKEMON TRAINERS -STARDUST BESTIES-"
           },
@@ -9143,7 +10048,7 @@
           },
           "names": {
             "ja": "포켓몬센터 맨투맨 POKEMON TRAINERS -STARDUST BESTIES-",
-            "zh": "포켓몬센터 맨투맨 POKEMON TRAINERS -STARDUST BESTIES-",
+            "zh": "宝可梦中心 圆领卫衣 宝可梦训练家系列 -STARDUST BESTIES-",
             "ko": "포켓몬센터 맨투맨 POKEMON TRAINERS -STARDUST BESTIES-",
             "en": "포켓몬센터 맨투맨 POKEMON TRAINERS -STARDUST BESTIES-"
           },
@@ -9180,7 +10085,7 @@
           },
           "names": {
             "ja": "포켓몬센터 배스타월 포켓몬 찜질방",
-            "zh": "포켓몬센터 배스타월 포켓몬 찜질방",
+            "zh": "宝可梦中心 浴巾 宝可梦 汗蒸房",
             "ko": "포켓몬센터 배스타월 포켓몬 찜질방",
             "en": "포켓몬센터 배스타월 포켓몬 찜질방"
           },
@@ -9217,7 +10122,7 @@
           },
           "names": {
             "ja": "포켓몬센터 수고하셨스탬프 POKEMON TRAINERS -STARDUST BESTIES-",
-            "zh": "포켓몬센터 수고하셨스탬프 POKEMON TRAINERS -STARDUST BESTIES-",
+            "zh": "宝可梦中心 辛苦了印章 宝可梦训练家系列 -STARDUST BESTIES-",
             "ko": "포켓몬센터 수고하셨스탬프 POKEMON TRAINERS -STARDUST BESTIES-",
             "en": "포켓몬센터 수고하셨스탬프 POKEMON TRAINERS -STARDUST BESTIES-"
           },
@@ -9254,7 +10159,7 @@
           },
           "names": {
             "ja": "포켓몬센터 스티커 세트 POKEMON TRAINERS -STARDUST BESTIES- (메인 아트)",
-            "zh": "포켓몬센터 스티커 세트 POKEMON TRAINERS -STARDUST BESTIES- (메인 아트)",
+            "zh": "宝可梦中心 贴纸套装 宝可梦训练家系列 -STARDUST BESTIES- (主视觉)",
             "ko": "포켓몬센터 스티커 세트 POKEMON TRAINERS -STARDUST BESTIES- (메인 아트)",
             "en": "포켓몬센터 스티커 세트 POKEMON TRAINERS -STARDUST BESTIES- (메인 아트)"
           },
@@ -9291,7 +10196,7 @@
           },
           "names": {
             "ja": "포켓몬센터 스티커 세트 POKEMON TRAINERS -STARDUST BESTIES- (일러스트)",
-            "zh": "포켓몬센터 스티커 세트 POKEMON TRAINERS -STARDUST BESTIES- (일러스트)",
+            "zh": "宝可梦中心 贴纸套装 宝可梦训练家系列 -STARDUST BESTIES- (插画)",
             "ko": "포켓몬센터 스티커 세트 POKEMON TRAINERS -STARDUST BESTIES- (일러스트)",
             "en": "포켓몬센터 스티커 세트 POKEMON TRAINERS -STARDUST BESTIES- (일러스트)"
           },
@@ -9328,7 +10233,7 @@
           },
           "names": {
             "ja": "포켓몬센터 스티커 세트 포켓몬 찜질방",
-            "zh": "포켓몬센터 스티커 세트 포켓몬 찜질방",
+            "zh": "宝可梦中心 贴纸套装 宝可梦 汗蒸房",
             "ko": "포켓몬센터 스티커 세트 포켓몬 찜질방",
             "en": "포켓몬센터 스티커 세트 포켓몬 찜질방"
           },
@@ -9365,7 +10270,7 @@
           },
           "names": {
             "ja": "포켓몬센터 양말 POKEMON TRAINERS -STARDUST BESTIES- (스타모빌)",
-            "zh": "포켓몬센터 양말 POKEMON TRAINERS -STARDUST BESTIES- (스타모빌)",
+            "zh": "宝可梦中心 袜子 宝可梦训练家系列 -STARDUST BESTIES- (天星队车)",
             "ko": "포켓몬센터 양말 POKEMON TRAINERS -STARDUST BESTIES- (스타모빌)",
             "en": "포켓몬센터 양말 POKEMON TRAINERS -STARDUST BESTIES- (스타모빌)"
           },
@@ -9402,7 +10307,7 @@
           },
           "names": {
             "ja": "포켓몬센터 양말 너랑 나랑 식스테일 (23-25cm)",
-            "zh": "포켓몬센터 양말 너랑 나랑 식스테일 (23-25cm)",
+            "zh": "宝可梦中心 袜子 你和我 六尾 (23-25cm)",
             "ko": "포켓몬센터 양말 너랑 나랑 식스테일 (23-25cm)",
             "en": "포켓몬센터 양말 너랑 나랑 식스테일 (23-25cm)"
           },
@@ -9439,7 +10344,7 @@
           },
           "names": {
             "ja": "포켓몬센터 양말 너랑 나랑 지그제구리 (23-25cm)",
-            "zh": "포켓몬센터 양말 너랑 나랑 지그제구리 (23-25cm)",
+            "zh": "宝可梦中心 袜子 你和我 蛇纹熊 (23-25cm)",
             "ko": "포켓몬센터 양말 너랑 나랑 지그제구리 (23-25cm)",
             "en": "포켓몬센터 양말 너랑 나랑 지그제구리 (23-25cm)"
           },
@@ -9476,7 +10381,7 @@
           },
           "names": {
             "ja": "포켓몬센터 프리미엄 레더 3단 지갑 메타몽",
-            "zh": "포켓몬센터 프리미엄 레더 3단 지갑 메타몽",
+            "zh": "宝可梦中心 高级皮革 三折钱包 百变怪",
             "ko": "포켓몬센터 프리미엄 레더 3단 지갑 메타몽",
             "en": "포켓몬센터 프리미엄 레더 3단 지갑 메타몽"
           },
@@ -9513,7 +10418,7 @@
           },
           "names": {
             "ja": "포켓몬센터 프리미엄 레더 라운드 파우치 메타몽",
-            "zh": "포켓몬센터 프리미엄 레더 라운드 파우치 메타몽",
+            "zh": "宝可梦中心 高级皮革 圆形收纳包 百变怪",
             "ko": "포켓몬센터 프리미엄 레더 라운드 파우치 메타몽",
             "en": "포켓몬센터 프리미엄 레더 라운드 파우치 메타몽"
           },
@@ -9550,7 +10455,7 @@
           },
           "names": {
             "ja": "포켓몬센터 프리미엄 레더 라운드 파우치 피카츄",
-            "zh": "포켓몬센터 프리미엄 레더 라운드 파우치 피카츄",
+            "zh": "宝可梦中心 高级皮革 圆形收纳包 皮卡丘",
             "ko": "포켓몬센터 프리미엄 레더 라운드 파우치 피카츄",
             "en": "포켓몬센터 프리미엄 레더 라운드 파우치 피카츄"
           },
@@ -9587,7 +10492,7 @@
           },
           "names": {
             "ja": "포켓몬센터 프리미엄 레더 릴홀더 카드케이스 메타몽",
-            "zh": "포켓몬센터 프리미엄 레더 릴홀더 카드케이스 메타몽",
+            "zh": "宝可梦中心 高级皮革 伸缩卡套 百变怪",
             "ko": "포켓몬센터 프리미엄 레더 릴홀더 카드케이스 메타몽",
             "en": "포켓몬센터 프리미엄 레더 릴홀더 카드케이스 메타몽"
           },
@@ -9624,7 +10529,7 @@
           },
           "names": {
             "ja": "포켓몬센터 프리미엄 레더 릴홀더 카드케이스 피카츄",
-            "zh": "포켓몬센터 프리미엄 레더 릴홀더 카드케이스 피카츄",
+            "zh": "宝可梦中心 高级皮革 伸缩卡套 皮卡丘",
             "ko": "포켓몬센터 프리미엄 레더 릴홀더 카드케이스 피카츄",
             "en": "포켓몬센터 프리미엄 레더 릴홀더 카드케이스 피카츄"
           },
@@ -9661,7 +10566,7 @@
           },
           "names": {
             "ja": "포켓몬센터 프리미엄 레더 반지갑 블래키",
-            "zh": "포켓몬센터 프리미엄 레더 반지갑 블래키",
+            "zh": "宝可梦中心 高级皮革 短款钱包 月亮伊布",
             "ko": "포켓몬센터 프리미엄 레더 반지갑 블래키",
             "en": "포켓몬센터 프리미엄 레더 반지갑 블래키"
           },
@@ -9698,7 +10603,7 @@
           },
           "names": {
             "ja": "포켓몬센터 프리미엄 레더 스퀘어 파우치 블래키",
-            "zh": "포켓몬센터 프리미엄 레더 스퀘어 파우치 블래키",
+            "zh": "宝可梦中心 高级皮革 方形收纳包 月亮伊布",
             "ko": "포켓몬센터 프리미엄 레더 스퀘어 파우치 블래키",
             "en": "포켓몬센터 프리미엄 레더 스퀘어 파우치 블래키"
           },
@@ -9735,7 +10640,7 @@
           },
           "names": {
             "ja": "포켓몬센터 핸드타월 포켓몬 찜질방 슈륙챙이&곤율랭",
-            "zh": "포켓몬센터 핸드타월 포켓몬 찜질방 슈륙챙이&곤율랭",
+            "zh": "宝可梦中心 方巾 宝可梦 汗蒸房 蚊香君&滑滑小子",
             "ko": "포켓몬센터 핸드타월 포켓몬 찜질방 슈륙챙이&곤율랭",
             "en": "포켓몬센터 핸드타월 포켓몬 찜질방 슈륙챙이&곤율랭"
           },
@@ -12469,7 +13374,7 @@
           },
           "names": {
             "ja": "포켓몬센터 마스코트 키링 Little Daydream 우파와 누오 인형",
-            "zh": "포켓몬센터 마스코트 키링 Little Daydream 우파와 누오 인형",
+            "zh": "宝可梦中心 玩偶钥匙扣 Little Daydream 乌波与沼王玩偶",
             "ko": "포켓몬센터 마스코트 키링 Little Daydream 우파와 누오 인형",
             "en": "포켓몬센터 마스코트 키링 Little Daydream 우파와 누오 인형"
           },
@@ -12506,7 +13411,7 @@
           },
           "names": {
             "ja": "포켓몬센터 마스코트 키링 ポケモン Botanical Easter 블루",
-            "zh": "포켓몬센터 마스코트 키링 宝可梦 Botanical Easter 블루",
+            "zh": "宝可梦中心 玩偶钥匙扣 宝可梦 Botanical Easter 蓝色",
             "ko": "포켓몬센터 마스코트 키링 포켓몬 Botanical Easter 블루",
             "en": "포켓몬센터 마스코트 키링 Pokemon Botanical Easter 블루"
           },
@@ -12543,7 +13448,7 @@
           },
           "names": {
             "ja": "포켓몬센터 마스코트 키링 딜리버드&꾸꾸리 ポケモン Christmas Toy Factory",
-            "zh": "포켓몬센터 마스코트 키링 딜리버드&꾸꾸리 宝可梦 Christmas Toy Factory",
+            "zh": "宝可梦中心 玩偶钥匙扣 信使鸟&小山猪 宝可梦 Christmas Toy Factory",
             "ko": "포켓몬센터 마스코트 키링 딜리버드&꾸꾸리 포켓몬 Christmas Toy Factory",
             "en": "포켓몬센터 마스코트 키링 딜리버드&꾸꾸리 Pokemon Christmas Toy Factory"
           },
@@ -12580,7 +13485,7 @@
           },
           "names": {
             "ja": "포켓몬센터 보들보들 봉제인형 블래키",
-            "zh": "포켓몬센터 보들보들 봉제인형 블래키",
+            "zh": "宝可梦中心 软绵绵 毛绒玩偶 月亮伊布",
             "ko": "포켓몬센터 보들보들 봉제인형 블래키",
             "en": "포켓몬센터 보들보들 봉제인형 블래키"
           },
@@ -12617,7 +13522,7 @@
           },
           "names": {
             "ja": "포켓몬센터 봉제인형 Little Daydream 먹고자와 잠만보 인형",
-            "zh": "포켓몬센터 봉제인형 Little Daydream 먹고자와 잠만보 인형",
+            "zh": "宝可梦中心 毛绒玩偶 Little Daydream 小卡比兽与卡比兽玩偶",
             "ko": "포켓몬센터 봉제인형 Little Daydream 먹고자와 잠만보 인형",
             "en": "포켓몬센터 봉제인형 Little Daydream 먹고자와 잠만보 인형"
           },
@@ -12654,7 +13559,7 @@
           },
           "names": {
             "ja": "포켓몬센터 봉제인형 Little Daydream 우파와 누오 인형",
-            "zh": "포켓몬센터 봉제인형 Little Daydream 우파와 누오 인형",
+            "zh": "宝可梦中心 毛绒玩偶 Little Daydream 乌波与沼王玩偶",
             "ko": "포켓몬센터 봉제인형 Little Daydream 우파와 누오 인형",
             "en": "포켓몬센터 봉제인형 Little Daydream 우파와 누오 인형"
           },
@@ -12691,7 +13596,7 @@
           },
           "names": {
             "ja": "포켓몬센터 봉제인형 ポケモン fit 갱도라",
-            "zh": "포켓몬센터 봉제인형 宝可梦 fit 갱도라",
+            "zh": "宝可梦中心 毛绒玩偶 宝可梦 fit 可多拉",
             "ko": "포켓몬센터 봉제인형 포켓몬 fit 갱도라",
             "en": "포켓몬센터 봉제인형 Pokemon fit 갱도라"
           },
@@ -12728,7 +13633,7 @@
           },
           "names": {
             "ja": "포켓몬센터 봉제인형 ポケモン fit 고지",
-            "zh": "포켓몬센터 봉제인형 宝可梦 fit 고지",
+            "zh": "宝可梦中心 毛绒玩偶 宝可梦 fit 穿山王",
             "ko": "포켓몬센터 봉제인형 포켓몬 fit 고지",
             "en": "포켓몬센터 봉제인형 Pokemon fit 고지"
           },
@@ -12765,7 +13670,7 @@
           },
           "names": {
             "ja": "포켓몬센터 봉제인형 ポケモン fit 꼬부기",
-            "zh": "포켓몬센터 봉제인형 宝可梦 fit 꼬부기",
+            "zh": "宝可梦中心 毛绒玩偶 宝可梦 fit 杰尼龟",
             "ko": "포켓몬센터 봉제인형 포켓몬 fit 꼬부기",
             "en": "포켓몬센터 봉제인형 Pokemon fit 꼬부기"
           },
@@ -12802,7 +13707,7 @@
           },
           "names": {
             "ja": "포켓몬센터 봉제인형 ポケモン fit 네오라이트",
-            "zh": "포켓몬센터 봉제인형 宝可梦 fit 네오라이트",
+            "zh": "宝可梦中心 毛绒玩偶 宝可梦 fit 霓虹鱼",
             "ko": "포켓몬센터 봉제인형 포켓몬 fit 네오라이트",
             "en": "포켓몬센터 봉제인형 Pokemon fit 네오라이트"
           },
@@ -12839,7 +13744,7 @@
           },
           "names": {
             "ja": "포켓몬센터 봉제인형 ポケモン fit 노공룡",
-            "zh": "포켓몬센터 봉제인형 宝可梦 fit 노공룡",
+            "zh": "宝可梦中心 毛绒玩偶 宝可梦 fit 吼爆弹",
             "ko": "포켓몬센터 봉제인형 포켓몬 fit 노공룡",
             "en": "포켓몬센터 봉제인형 Pokemon fit 노공룡"
           },
@@ -12876,7 +13781,7 @@
           },
           "names": {
             "ja": "포켓몬센터 봉제인형 ポケモン fit 노보청",
-            "zh": "포켓몬센터 봉제인형 宝可梦 fit 노보청",
+            "zh": "宝可梦中心 毛绒玩偶 宝可梦 fit 修建老匠",
             "ko": "포켓몬센터 봉제인형 포켓몬 fit 노보청",
             "en": "포켓몬센터 봉제인형 Pokemon fit 노보청"
           },
@@ -12913,7 +13818,7 @@
           },
           "names": {
             "ja": "포켓몬센터 봉제인형 ポケモン fit 델케티",
-            "zh": "포켓몬센터 봉제인형 宝可梦 fit 델케티",
+            "zh": "宝可梦中心 毛绒玩偶 宝可梦 fit 优雅猫",
             "ko": "포켓몬센터 봉제인형 포켓몬 fit 델케티",
             "en": "포켓몬센터 봉제인형 Pokemon fit 델케티"
           },
@@ -12950,7 +13855,7 @@
           },
           "names": {
             "ja": "포켓몬센터 봉제인형 ポケモン fit 도롱마담(초목도롱)",
-            "zh": "포켓몬센터 봉제인형 宝可梦 fit 도롱마담(초목도롱)",
+            "zh": "宝可梦中心 毛绒玩偶 宝可梦 fit 结草贵妇(草木蓑衣)",
             "ko": "포켓몬센터 봉제인형 포켓몬 fit 도롱마담(초목도롱)",
             "en": "포켓몬센터 봉제인형 Pokemon fit 도롱마담(초목도롱)"
           },
@@ -12987,7 +13892,7 @@
           },
           "names": {
             "ja": "포켓몬센터 봉제인형 ポケモン fit 두르쿤",
-            "zh": "포켓몬센터 봉제인형 宝可梦 fit 두르쿤",
+            "zh": "宝可梦中心 毛绒玩偶 宝可梦 fit 宝包茧",
             "ko": "포켓몬센터 봉제인형 포켓몬 fit 두르쿤",
             "en": "포켓몬센터 봉제인형 Pokemon fit 두르쿤"
           },
@@ -13024,7 +13929,7 @@
           },
           "names": {
             "ja": "포켓몬센터 봉제인형 ポケモン fit 레지아이스",
-            "zh": "포켓몬센터 봉제인형 宝可梦 fit 레지아이스",
+            "zh": "宝可梦中心 毛绒玩偶 宝可梦 fit 雷吉艾斯",
             "ko": "포켓몬센터 봉제인형 포켓몬 fit 레지아이스",
             "en": "포켓몬센터 봉제인형 Pokemon fit 레지아이스"
           },
@@ -13061,7 +13966,7 @@
           },
           "names": {
             "ja": "포켓몬센터 봉제인형 ポケモン fit 뮤츠",
-            "zh": "포켓몬센터 봉제인형 宝可梦 fit 뮤츠",
+            "zh": "宝可梦中心 毛绒玩偶 宝可梦 fit 超梦",
             "ko": "포켓몬센터 봉제인형 포켓몬 fit 뮤츠",
             "en": "포켓몬센터 봉제인형 Pokemon fit 뮤츠"
           },
@@ -14143,7 +15048,7 @@
           },
           "names": {
             "ja": "포켓몬센터 ポケモン Garden Wedding 봉제인형 피카츄(수컷의 모습)",
-            "zh": "포켓몬센터 宝可梦 Garden Wedding 봉제인형 피카츄(수컷의 모습)",
+            "zh": "宝可梦中心 宝可梦 Garden Wedding 毛绒玩偶 皮卡丘(雄性的样子)",
             "ko": "포켓몬센터 포켓몬 Garden Wedding 봉제인형 피카츄(수컷의 모습)",
             "en": "포켓몬센터 Pokémon Garden Wedding 봉제인형 피카츄(수컷의 모습)"
           },
@@ -14180,7 +15085,7 @@
           },
           "names": {
             "ja": "포켓몬센터 ポケモン Garden Wedding 봉제인형 피카츄(암컷의 모습)",
-            "zh": "포켓몬센터 宝可梦 Garden Wedding 봉제인형 피카츄(암컷의 모습)",
+            "zh": "宝可梦中心 宝可梦 Garden Wedding 毛绒玩偶 皮卡丘(雌性的样子)",
             "ko": "포켓몬센터 포켓몬 Garden Wedding 봉제인형 피카츄(암컷의 모습)",
             "en": "포켓몬센터 Pokémon Garden Wedding 봉제인형 피카츄(암컷의 모습)"
           },
@@ -47029,147 +47934,6 @@
       "renamed_count": 2,
       "merged": [],
       "backfilled": []
-    },
-    {
-      "date": "2026-10-12",
-      "generated_at": "2026-10-11T22:33:59.709Z",
-      "total_before": 8794,
-      "total_after": 8797,
-      "added_count": 3,
-      "changed_count": 0,
-      "removed_count": 0,
-      "watched_count": 0,
-      "premium_bandai_count": 0,
-      "bbx_count": 0,
-      "franchise_counts": {
-        "pokemon": 3
-      },
-      "reason_counts": {
-        "new": 3
-      },
-      "interest_tags": [
-        "pokemon"
-      ],
-      "watch_tags": [],
-      "added": [
-        {
-          "kit_id": "pokemon-center-4904810088141",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_GOODS",
-          "subline": "Pokemon Center Goods",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "30周年記念 モンコレピカチュウセレクション でかけるピカチュウ",
-            "zh": "30周年纪念 宝可梦 Moncolle 小手办皮卡丘精选 出门皮卡丘",
-            "ko": "30주년 기념 몬콜레 피카츄 셀렉션 외출하는 피카츄",
-            "en": "30周年記念 モンコレピカチュウセレクション でかけるピカチュウ"
-          },
-          "release_date": null,
-          "price_jpy": 715,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4904810088141.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329349831",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "585 ぬいぐるみ ポケモン fit シキジカ(はるのすがた)",
-            "zh": "585 毛绒玩偶 宝可梦 fit 四季鹿(春天的样子)",
-            "ko": "585 봉제인형 Pokémon fit 사철록(봄의 모습)",
-            "en": "585 ぬいぐるみ Pokémon fit シキジカ(はるのすがた)"
-          },
-          "release_date": null,
-          "price_jpy": 1320,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329349831.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329350554",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "646 ぬいぐるみ ポケモン fit キュレム",
-            "zh": "646 毛绒玩偶 宝可梦 fit 酋雷姆",
-            "ko": "646 봉제인형 Pokémon fit 큐레무",
-            "en": "646 ぬいぐるみ Pokémon fit キュレム"
-          },
-          "release_date": null,
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329350554.html"
-          ]
-        }
-      ],
-      "changed": [],
-      "removed": [],
-      "watched": [],
-      "merged": [],
-      "backfilled": [],
-      "renamed": []
     }
   ]
 }

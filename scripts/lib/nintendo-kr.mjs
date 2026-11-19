@@ -32,6 +32,11 @@ export const LIST_LIMIT = 48;
 
 const ID_PREFIX = "nintendo-kr-";
 
+// The records this importer builds. Since 2026-11-19 the franchise also holds the hobby makers'
+// records (tamashii-nintendo-…, goodsmile-nintendo-…), and on 2026-11-20 a full run of 240 store
+// records was held back by the drop guard against all 504 "nintendo" records.
+export const isStoreRecord = (kit) => kit.franchise === "nintendo" && String(kit.kit_id).startsWith(ID_PREFIX);
+
 // One series per Nintendo world; the first match wins, so a Smash Bros. amiibo of Link is Smash
 // and "요시와 신기한 도감" is Yoshi, not Mario. Labels: official names (zh: Nintendo's Chinese titles).
 export const NINTENDO_SERIES = [

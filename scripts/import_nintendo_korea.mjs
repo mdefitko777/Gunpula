@@ -19,6 +19,7 @@ import {
   buildRecords,
   classifyStoreProduct,
   DIGITAL_LIST,
+  isStoreRecord,
   LIST_LIMIT,
   parseAmiiboLineup,
   parseSchedule,
@@ -114,7 +115,7 @@ async function main() {
   }
 
   const catalog = JSON.parse(await readFile(CATALOG_PATH, "utf8"));
-  const previous = catalog.kits.filter((kit) => kit.franchise === "nintendo");
+  const previous = catalog.kits.filter(isStoreRecord);
   const asDetails = Object.fromEntries(
     Object.entries(details)
       .filter(([, entry]) => entry.maker !== undefined)
