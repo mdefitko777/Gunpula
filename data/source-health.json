@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-20T00:08:51.386Z",
+  "generated_at": "2026-11-20T01:15:32.190Z",
   "updated_at": "2026-11-20",
   "catalog": {
     "byFranchise": {
@@ -260,7 +260,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://p-bandai.jp/hobby/a0001/list-da20-n3/",
-      "duration_ms": 668,
+      "duration_ms": 834,
       "item_count": 40,
       "direct_status": "ok",
       "access_method": "direct",
@@ -272,7 +272,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/",
-      "duration_ms": 2133,
+      "duration_ms": 1861,
       "item_count": 159,
       "catalog_count": 159,
       "buckets": {
@@ -286,14 +286,14 @@
     {
       "source_id": "kotobukiya_armored_core_jp",
       "url": "https://www.kotobukiya.co.jp/title/armored-core/",
-      "status": "warning",
-      "http_status": 503,
+      "status": "ok",
+      "http_status": 200,
       "final_url": "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90",
-      "duration_ms": 1064,
-      "item_count": 0,
+      "duration_ms": 1212,
+      "item_count": 46,
       "catalog_count": 42,
       "access_method": "kotobukiya_official_shop_jp",
-      "message": "Official Japanese shop returned 0 Armored Core listings; catalog currently has 42 Kotobukiya records"
+      "message": "Official Japanese shop returned 46 Armored Core listings; catalog currently has 42 Kotobukiya records"
     },
     {
       "source_id": "bandai_spirits_products_jp",
@@ -301,7 +301,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://bandai-hobby.net/site/gunpla.html",
-      "duration_ms": 373,
+      "duration_ms": 491,
       "message": "reachable"
     },
     {
@@ -310,7 +310,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://www.bandai.co.jp/candy/gundam/",
-      "duration_ms": 896,
+      "duration_ms": 1258,
       "message": "reachable"
     },
     {
@@ -319,7 +319,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://gashapon.jp/products/result.php?free=%E3%82%AC%E3%83%B3%E3%83%80%E3%83%A0",
-      "duration_ms": 1301,
+      "duration_ms": 2154,
       "message": "reachable"
     },
     {
@@ -328,7 +328,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://tamashiiweb.com/item_character/gundam_series/",
-      "duration_ms": 1009,
+      "duration_ms": 708,
       "message": "reachable"
     },
     {
@@ -337,7 +337,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://www.bandaispirits.co.jp/products/search/result.php?freeword=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3&category=2",
-      "duration_ms": 406,
+      "duration_ms": 549,
       "message": "reachable"
     },
     {
@@ -346,7 +346,7 @@
       "status": "warning",
       "http_status": 403,
       "final_url": "https://wr.pokemoncenter-online.com/?c=pol&e=wr20261120ec&ver=v3-javascript-3.7.10&cver=259&man=pol-prd-rule-sfcc&t=https%3A%2F%2Fwww.pokemoncenter-online.com%2Fon%2Fdemandware.store%2FSites-POL-Site%2Fja_JP%2FSearch-Show%3Fcgid%3Dplush-toys&kupver=salesforce-2.1.0",
-      "duration_ms": 610,
+      "duration_ms": 1059,
       "message": "reachable"
     },
     {
@@ -355,7 +355,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/",
-      "duration_ms": 745,
+      "duration_ms": 848,
       "message": "reachable"
     },
     {
@@ -364,7 +364,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://1kuji.com/products/search?index_master_search=47",
-      "duration_ms": 759,
+      "duration_ms": 997,
       "message": "reachable"
     },
     {
@@ -373,7 +373,7 @@
       "status": "ok",
       "http_status": 200,
       "final_url": "https://bsp-prize.jp/title/IP00002054/",
-      "duration_ms": 1322,
+      "duration_ms": 1720,
       "message": "reachable"
     }
   ]
