@@ -770,6 +770,26 @@ function gscGlobalWithDetail(card, html) {
   };
 }
 
+/**
+ * A card whose product page an earlier run read → the product again, without
+ * the page. The card has no spec or date, so what only the page gave (a 1/8
+ * scale in 仕様, the release date) comes back from the stored record; toKit
+ * rebuilds scale from `spec`, and mergeCatalog would otherwise write the
+ * card's "non-scale" and null over them.
+ */
+function gscGlobalFromStored(card, stored) {
+  return {
+    ...card,
+    force_grade: stored.grade_code,
+    line: stored.subline,
+    series: stored.work_title,
+    gallery: stored.gallery_image_urls,
+    spec: stored.scale && stored.scale !== "non-scale" ? stored.scale : "",
+    release_date: stored.release_date || card.release_date,
+    price_jpy: card.price_jpy ?? stored.price_jpy ?? null,
+  };
+}
+
 async function readGscGlobalPage(url) {
   const html = await fetchText(url);
   // As in import_goodsmile_fate.mjs: an unslugged url can answer with a
@@ -809,7 +829,7 @@ async function fetchGoodSmileGlobal(ctx) {
     // Read on an earlier run: its grade and work stand, no new request.
     const stored = previous.get(`goodsmile-madoka-${card.key}`);
     if (stored) {
-      out.push({ ...card, force_grade: stored.grade_code, line: stored.subline, series: stored.work_title, gallery: stored.gallery_image_urls });
+      out.push(gscGlobalFromStored(card, stored));
       continue;
     }
     const legacyId = gscLegacyId(card.image);
@@ -835,9 +855,13 @@ async function fetchGoodSmileGlobal(ctx) {
       }
       out.push(product);
     } catch (error) {
-      // A refusal keeps what the search already gave; the rest waits for the next run.
-      if (error.refused) stopped = error.message;
-      else console.warn(`good_smile_madoka_global detail ${card.key}: ${error.message}`);
+      // A refusal keeps what the search already gave; the rest waits for the
+      // next run. The run report still names it, so a host that starts
+      // refusing the bot shows up in the source status, not only in robots.
+      if (error.refused) {
+        stopped = error.message;
+        ctx.partial = `product pages refused: ${error.message}`;
+      } else console.warn(`good_smile_madoka_global detail ${card.key}: ${error.message}`);
       ctx.excluded.push({ kind: "uncertain", name: card.name, url: card.url, reason: `product page not read (${error.message})` });
     }
   }
@@ -2308,8 +2332,15 @@ function mergeCatalog(existingKits, importedKits) {
 
 // ------------------------------------------------------------------- main
 
+/** A source's line in the run report: refused / failed, or ok with what it had to leave out. */
+function sourceStatus(ctx) {
+  if (ctx.refused) return `refused (${ctx.refused})`;
+  if (ctx.error) return `failed (${ctx.error})`;
+  return ctx.partial ? `ok (${ctx.partial})` : "ok";
+}
+
 async function runSource(source, previousById) {
-  const ctx = { listed: 0, offWork: [], excluded: [], error: null, refused: null, previousById };
+  const ctx = { listed: 0, offWork: [], excluded: [], error: null, refused: null, partial: null, previousById };
   const kits = [];
   try {
     const products = await source.fetchAll(ctx);
@@ -2379,7 +2410,7 @@ async function main() {
     for (const kit of fetched) grades[kit.grade_code] = (grades[kit.grade_code] || 0) + 1;
     const goods = ctx.excluded.filter((entry) => entry.kind === "goods").length;
     const uncertain = ctx.excluded.filter((entry) => entry.kind === "uncertain");
-    const status = ctx.refused ? `refused (${ctx.refused})` : ctx.error ? `failed (${ctx.error})` : "ok";
+    const status = sourceStatus(ctx);
     lines.push(
       `${source.source_id}: ${status}; listed ${ctx.listed}, fetched ${fetched.length}` +
         `${kits.length > fetched.length ? ` (+${kits.length - fetched.length} merged into other sources)` : ""}, kept ${keptPrevious}` +
@@ -2436,7 +2467,19 @@ async function main() {
 }
 
 // Tests import the rules below without running the importer.
-export { classify, dedupe, gscBoxOf, gscGlobalWithDetail, gscLegacyId, isMadoka, isMadokaCharacter, workTitleFor };
+export {
+  classify,
+  dedupe,
+  gscBoxOf,
+  gscGlobalFromStored,
+  gscGlobalWithDetail,
+  gscLegacyId,
+  isMadoka,
+  isMadokaCharacter,
+  sourceStatus,
+  toKit,
+  workTitleFor,
+};
 
 if (/(^|[\\/])import_madoka_sources\.mjs$/.test(process.argv[1] || "")) {
   main().catch((error) => {

@@ -9,10 +9,13 @@ import {
   classify,
   dedupe,
   gscBoxOf,
+  gscGlobalFromStored,
   gscGlobalWithDetail,
   gscLegacyId,
   isMadoka,
   isMadokaCharacter,
+  sourceStatus,
+  toKit,
   workTitleFor,
 } from "./import_madoka_sources.mjs";
 
@@ -65,6 +68,28 @@ assert.equal(homura.price_jpy, 9428);
 assert.ok(homura.gallery.length >= 2 && homura.gallery.every((url) => gscLegacyId(url) === "3797"), "own pictures only");
 assert.deepEqual(classify(homura, GLOBAL), { grade: "MADOKA_SCALE" });
 assert.equal(workTitleFor(homura), TV);
+
+// A later run reuses the stored record instead of the page; what only the page gave (the 1/8
+// in 仕様, the release date) must survive, or mergeCatalog writes the card's blanks over it.
+const globalSource = { source_id: GLOBAL, idPrefix: "goodsmile-madoka", subline: "Good Smile Company", tags: [], notes: "" };
+const firstRun = toKit(homura, globalSource, classify(homura, GLOBAL), 0);
+assert.equal(firstRun.scale, "1/8");
+const storedHomura = { ...firstRun, release_date: firstRun.release_date || "2013-07", price_jpy: 9000 };
+const reused = gscGlobalFromStored(homuraCard, storedHomura);
+const laterRun = toKit(reused, globalSource, { grade: reused.force_grade }, 0);
+assert.equal(laterRun.kit_id, firstRun.kit_id);
+assert.equal(laterRun.scale, "1/8");
+assert.equal(laterRun.release_date, storedHomura.release_date);
+assert.equal(laterRun.grade_code, "MADOKA_SCALE");
+assert.equal(laterRun.work_title, TV);
+assert.equal(laterRun.price_jpy, 9428, "today's card price wins");
+assert.equal(toKit(gscGlobalFromStored({ ...homuraCard, price_jpy: null }, storedHomura), globalSource, { grade: "MADOKA_SCALE" }, 0).price_jpy, 9000);
+assert.equal(gscGlobalFromStored(homuraCard, { ...storedHomura, scale: "non-scale" }).spec, "");
+
+// Product pages refused mid-run: the search results stand, the status says so.
+assert.equal(sourceStatus({}), "ok");
+assert.equal(sourceStatus({ partial: "product pages refused: www.goodsmile.com: HTTP 429" }), "ok (product pages refused: www.goodsmile.com: HTTP 429)");
+assert.equal(sourceStatus({ refused: "www.goodsmile.com: HTTP 503", partial: "x" }), "refused (www.goodsmile.com: HTTP 503)");
 
 // The finger puppet's page files it under グッズ; the name still makes it plush.
 const puppetCard = {
