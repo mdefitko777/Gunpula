@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22",
-  "generated_at": "2026-11-22T00:05:33.619Z",
+  "updated_at": "2026-11-23",
+  "generated_at": "2026-11-23T00:21:18.550Z",
   "watch_tags": [
     "seed",
     "00"
@@ -20,11 +20,1167 @@
     "effects"
   ],
   "source_health": {
-    "generated_at": "2026-11-22T00:05:09.613Z",
+    "generated_at": "2026-11-23T00:20:58.631Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
+    {
+      "date": "2026-11-23",
+      "generated_at": "2026-11-23T00:21:18.550Z",
+      "total_before": 42036,
+      "total_after": 42052,
+      "added_count": 10,
+      "changed_count": 10,
+      "removed_count": 2,
+      "watched_count": 0,
+      "merged_count": 0,
+      "backfilled_count": 8,
+      "renamed_count": 0,
+      "premium_bandai_count": 0,
+      "bbx_count": 0,
+      "franchise_counts": {
+        "lego": 16,
+        "gundam": 1,
+        "pokemon": 3
+      },
+      "reason_counts": {
+        "new": 10,
+        "series": 1,
+        "name": 4,
+        "source": 4,
+        "product_line": 1,
+        "removed": 2
+      },
+      "interest_tags": [
+        "lego",
+        "gundam",
+        "pokemon"
+      ],
+      "watch_tags": [],
+      "added": [
+        {
+          "kit_id": "lego-9780241788868-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_BOOK",
+          "subline": "Activity Books with LEGO Parts",
+          "series_key": "lego_books",
+          "series_labels": {
+            "zh": "图书",
+            "en": "Books",
+            "ja": "Books",
+            "ko": "책"
+          },
+          "names": {
+            "ja": "City: Build Your Own Adventure",
+            "zh": "City: Build Your Own Adventure",
+            "ko": "City: Build Your Own Adventure",
+            "en": "City: Build Your Own Adventure"
+          },
+          "release_date": "2027",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/9780241788868-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-9780241845882-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_BOOK",
+          "subline": "Story Books",
+          "series_key": "lego_books",
+          "series_labels": {
+            "zh": "图书",
+            "en": "Books",
+            "ja": "Books",
+            "ko": "책"
+          },
+          "names": {
+            "ja": "DK Super Readers Level 2: City: Speed Quest",
+            "zh": "DK Super Readers Level 2: City: Speed Quest",
+            "ko": "DK Super Readers Level 2: City: Speed Quest",
+            "en": "DK Super Readers Level 2: City: Speed Quest"
+          },
+          "release_date": "2027",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/9780241845882-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-9781837252855-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_BOOK",
+          "subline": "Non-fiction Books",
+          "series_key": "lego_books",
+          "series_labels": {
+            "zh": "图书",
+            "en": "Books",
+            "ja": "Books",
+            "ko": "책"
+          },
+          "names": {
+            "ja": "Star Wars: Celebrate the Galaxy: 50 Years of Star Wars History Reimagined in LEGO Form",
+            "zh": "Star Wars: Celebrate the Galaxy: 50 Years of Star Wars History Reimagined in LEGO Form",
+            "ko": "Star Wars: Celebrate the Galaxy: 50 Years of Star Wars History Reimagined in LEGO Form",
+            "en": "Star Wars: Celebrate the Galaxy: 50 Years of Star Wars History Reimagined in LEGO Form"
+          },
+          "release_date": "2027",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/9781837252855-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-9798217311361-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_BOOK",
+          "subline": "Non-fiction Books",
+          "series_key": "lego_books",
+          "series_labels": {
+            "zh": "图书",
+            "en": "Books",
+            "ja": "Books",
+            "ko": "책"
+          },
+          "names": {
+            "ja": "Harry Potter: Read. Build. Create. (2026 Edition)",
+            "zh": "Harry Potter: Read. Build. Create. (2026 Edition)",
+            "ko": "Harry Potter: Read. Build. Create. (2026 Edition)",
+            "en": "Harry Potter: Read. Build. Create. (2026 Edition)"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/9798217311361-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-l0002258-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "Minecraft",
+          "series_key": "lego_minecraft",
+          "series_labels": {
+            "zh": "我的世界",
+            "en": "Minecraft",
+            "ja": "Minecraft",
+            "ko": "마인크래프트"
+          },
+          "names": {
+            "ja": "Hero and Snow Golem",
+            "zh": "Hero and Snow Golem",
+            "ko": "Hero and Snow Golem",
+            "en": "Hero and Snow Golem"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/L0002258-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-6677492-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "LEGO Brand Store",
+          "series_key": "lego_lego_brand_store",
+          "series_labels": {
+            "zh": "乐高品牌零售店",
+            "en": "LEGO Brand Store",
+            "ja": "LEGO Brand Store",
+            "ko": "레고 스토어"
+          },
+          "names": {
+            "ja": "I [Heart] LEGO Store Lyon Tile",
+            "zh": "I [Heart] LEGO Store Lyon Tile",
+            "ko": "I [Heart] LEGO Store Lyon Tile",
+            "en": "I [Heart] LEGO Store Lyon Tile"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/6677492-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-9798217311316-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_BOOK",
+          "subline": "Non-fiction Books",
+          "series_key": "lego_books",
+          "series_labels": {
+            "zh": "图书",
+            "en": "Books",
+            "ja": "Books",
+            "ko": "책"
+          },
+          "names": {
+            "ja": "Marvel: Read. Build. Create. (2026 Edition)",
+            "zh": "Marvel: Read. Build. Create. (2026 Edition)",
+            "ko": "Marvel: Read. Build. Create. (2026 Edition)",
+            "en": "Marvel: Read. Build. Create. (2026 Edition)"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/9798217311316-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-9798217311347-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_BOOK",
+          "subline": "Non-fiction Books",
+          "series_key": "lego_books",
+          "series_labels": {
+            "zh": "图书",
+            "en": "Books",
+            "ja": "Books",
+            "ko": "책"
+          },
+          "names": {
+            "ja": "Minecraft: Read. Build. Create.",
+            "zh": "Minecraft: Read. Build. Create.",
+            "ko": "Minecraft: Read. Build. Create.",
+            "en": "Minecraft: Read. Build. Create."
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/9798217311347-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-9798217311354-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_BOOK",
+          "subline": "Non-fiction Books",
+          "series_key": "lego_books",
+          "series_labels": {
+            "zh": "图书",
+            "en": "Books",
+            "ja": "Books",
+            "ko": "책"
+          },
+          "names": {
+            "ja": "Ninjago: Read. Build. Create. (2026 Edition)",
+            "zh": "Ninjago: Read. Build. Create. (2026 Edition)",
+            "ko": "Ninjago: Read. Build. Create. (2026 Edition)",
+            "en": "Ninjago: Read. Build. Create. (2026 Edition)"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/9798217311354-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-6702754-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_GEAR",
+          "subline": "Seasonal",
+          "series_key": "lego_gear",
+          "series_labels": {
+            "zh": "周边",
+            "en": "Gear",
+            "ja": "Gear",
+            "ko": "굿즈"
+          },
+          "names": {
+            "ja": "Santa Sticker (Czech Stores)",
+            "zh": "Santa Sticker (Czech Stores)",
+            "ko": "Santa Sticker (Czech Stores)",
+            "en": "Santa Sticker (Czech Stores)"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/6702754-1/"
+          ]
+        }
+      ],
+      "changed": [
+        {
+          "kit_id": "lego-9781837252756-1",
+          "change_type": "changed",
+          "franchise": "lego",
+          "grade_code": "LEGO_BOOK",
+          "subline": "Activity Books with LEGO Parts",
+          "series_key": "lego_books",
+          "series_labels": {
+            "zh": "图书",
+            "en": "Books",
+            "ja": "Books",
+            "ko": "책"
+          },
+          "names": {
+            "ja": "Star Wars: Explore the Galaxy: Search & Find Sticker Activity",
+            "zh": "Star Wars: Explore the Galaxy: Search & Find Sticker Activity",
+            "ko": "Star Wars: Explore the Galaxy: Search & Find Sticker Activity",
+            "en": "Star Wars: Explore the Galaxy: Search & Find Sticker Activity"
+          },
+          "release_date": "2027",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/9781837252756-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-60505-1",
+          "change_type": "changed",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "City",
+          "series_key": "lego_city",
+          "series_labels": {
+            "zh": "城市组",
+            "en": "City",
+            "ja": "City",
+            "ko": "시티"
+          },
+          "names": {
+            "ja": "Airplane, Service Truck & Hovercraft Remix",
+            "zh": "Airplane, Service Truck & Hovercraft Remix",
+            "ko": "Airplane, Service Truck & Hovercraft Remix",
+            "en": "Airplane, Service Truck & Hovercraft Remix"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/60505-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-40914-1",
+          "change_type": "changed",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "Other",
+          "series_key": "lego_other",
+          "series_labels": {
+            "zh": "其他",
+            "en": "Other",
+            "ja": "Other",
+            "ko": "기타"
+          },
+          "names": {
+            "ja": "Retro Jukebox",
+            "zh": "Retro Jukebox",
+            "ko": "Retro Jukebox",
+            "en": "Retro Jukebox"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/40914-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-9798217311330-1",
+          "change_type": "changed",
+          "franchise": "lego",
+          "grade_code": "LEGO_BOOK",
+          "subline": "Non-fiction Books",
+          "series_key": "lego_books",
+          "series_labels": {
+            "zh": "图书",
+            "en": "Books",
+            "ja": "Books",
+            "ko": "책"
+          },
+          "names": {
+            "ja": "Star Wars: Read. Build. Create. (2026 Edition)",
+            "zh": "Star Wars: Read. Build. Create. (2026 Edition)",
+            "ko": "Star Wars: Read. Build. Create. (2026 Edition)",
+            "en": "Star Wars: Read. Build. Create. (2026 Edition)"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "product_line"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/9798217311330-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-40918-1",
+          "change_type": "changed",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "Other",
+          "series_key": "lego_other",
+          "series_labels": {
+            "zh": "其他",
+            "en": "Other",
+            "ja": "Other",
+            "ko": "기타"
+          },
+          "names": {
+            "ja": "Winter Snow Globe",
+            "zh": "Winter Snow Globe",
+            "ko": "Winter Snow Globe",
+            "en": "Winter Snow Globe"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/40918-1/"
+          ]
+        },
+        {
+          "kit_id": "tamashii-15098",
+          "change_type": "changed",
+          "franchise": "gundam",
+          "grade_code": "ROBOT_SPIRITS",
+          "subline": "ROBOT魂 ver. A.N.I.M.E.",
+          "series_key": "uc_first",
+          "series_labels": {
+            "zh": "初代",
+            "en": "0079",
+            "ja": "初代",
+            "ko": "초대"
+          },
+          "names": {
+            "ja": "RGM-79SC ジム・スナイパーカスタム （ジャブロー防衛隊仕様） ver. A.N.I.M.E.",
+            "zh": "RGM-79SC 吉姆狙击特装型 (贾布罗防卫队样式) ver. A.N.I.M.E.",
+            "ko": "RGM-79SC 짐 스나이퍼 커스텀 (자브로 방위대 사양) ver. A.N.I.M.E.",
+            "en": "RGM-79SC GM スナイパーカスタム (ジャブロー防衛隊Type) ver. A.N.I.M.E."
+          },
+          "release_date": "2025-01",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "gundam"
+          ],
+          "change_reasons": [
+            "series"
+          ],
+          "source_ids": [
+            "tamashii_web_jp"
+          ],
+          "source_urls": [
+            "https://tamashiiweb.com/item/15098/",
+            "https://tamashiiweb.com/item_brand/robot_tamashii/?character=gundam_series&ck1=1&ck2=1&ck3=1&number=100&order=new"
+          ]
+        },
+        {
+          "kit_id": "lego-6565182-1",
+          "change_type": "changed",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "Seasonal",
+          "series_key": "lego_seasonal",
+          "series_labels": {
+            "zh": "节日",
+            "en": "Seasonal",
+            "ja": "Seasonal",
+            "ko": "시즌"
+          },
+          "names": {
+            "ja": "Eid Mosaic",
+            "zh": "Eid Mosaic",
+            "ko": "Eid Mosaic",
+            "en": "Eid Mosaic"
+          },
+          "release_date": "2025",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/6565182-1/"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329333977",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "196 ぬいぐるみ ポケモン fit エーフィ",
+            "zh": "196 毛绒玩偶 宝可梦 fit 太阳伊布",
+            "ko": "196 봉제인형 Pokémon fit 에브이",
+            "en": "196 ぬいぐるみ Pokémon fit エーフィ"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329333977.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4904810088141",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "30周年記念 モンコレピカチュウセレクション でかけるピカチュウ",
+            "zh": "30周年纪念 宝可梦 Moncolle 小手办皮卡丘精选 出门皮卡丘",
+            "ko": "30주년 기념 몬콜레 피카츄 셀렉션 외출하는 피카츄",
+            "en": "30周年記念 モンコレピカチュウセレクション でかけるピカチュウ"
+          },
+          "release_date": null,
+          "price_jpy": 715,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4904810088141.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329341132",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "471 ぬいぐるみ ポケモン fit グレイシア",
+            "zh": "471 毛绒玩偶 宝可梦 fit 冰伊布",
+            "ko": "471 봉제인형 Pokémon fit 글레이시아",
+            "en": "471 ぬいぐるみ Pokémon fit グレイシア"
+          },
+          "release_date": null,
+          "price_jpy": 1540,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329341132.html"
+          ]
+        }
+      ],
+      "removed": [
+        {
+          "kit_id": "lego-978832534844-1",
+          "change_type": "removed",
+          "franchise": "lego",
+          "grade_code": "LEGO_BOOK",
+          "subline": "Activity Books with LEGO Parts",
+          "series_key": "lego_books",
+          "series_labels": {
+            "zh": "图书",
+            "en": "Books",
+            "ja": "Books",
+            "ko": "책"
+          },
+          "names": {
+            "ja": "City: Time to Play (Astronaut Spacewalk)",
+            "zh": "City: Time to Play (Astronaut Spacewalk)",
+            "ko": "City: Time to Play (Astronaut Spacewalk)",
+            "en": "City: Time to Play (Astronaut Spacewalk)"
+          },
+          "release_date": "2025",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/978832534844-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-978832534839-7",
+          "change_type": "removed",
+          "franchise": "lego",
+          "grade_code": "LEGO_BOOK",
+          "subline": "Activity Books with LEGO Parts",
+          "series_key": "lego_books",
+          "series_labels": {
+            "zh": "图书",
+            "en": "Books",
+            "ja": "Books",
+            "ko": "책"
+          },
+          "names": {
+            "ja": "Harry Potter: Time to Play! (Neville Longbottom Edition)",
+            "zh": "Harry Potter: Time to Play! (Neville Longbottom Edition)",
+            "ko": "Harry Potter: Time to Play! (Neville Longbottom Edition)",
+            "en": "Harry Potter: Time to Play! (Neville Longbottom Edition)"
+          },
+          "release_date": "2025",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "removed"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/978832534839-7/"
+          ]
+        }
+      ],
+      "watched": [],
+      "merged": [],
+      "backfilled": [
+        {
+          "kit_id": "lego-9788325348441-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_BOOK",
+          "subline": "Activity Books with LEGO Parts",
+          "series_key": "lego_books",
+          "series_labels": {
+            "zh": "图书",
+            "en": "Books",
+            "ja": "Books",
+            "ko": "책"
+          },
+          "names": {
+            "ja": "City: Time to Play",
+            "zh": "City: Time to Play",
+            "ko": "City: Time to Play",
+            "en": "City: Time to Play"
+          },
+          "release_date": "2025",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/9788325348441-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-9788325348403-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_BOOK",
+          "subline": "Activity Books with LEGO Parts",
+          "series_key": "lego_books",
+          "series_labels": {
+            "zh": "图书",
+            "en": "Books",
+            "ja": "Books",
+            "ko": "책"
+          },
+          "names": {
+            "ja": "DC Comics Super Heroes: Time to Play",
+            "zh": "DC Comics Super Heroes: Time to Play",
+            "ko": "DC Comics Super Heroes: Time to Play",
+            "en": "DC Comics Super Heroes: Time to Play"
+          },
+          "release_date": "2025",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/9788325348403-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-9788325348434-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_BOOK",
+          "subline": "Activity Books with LEGO Parts",
+          "series_key": "lego_books",
+          "series_labels": {
+            "zh": "图书",
+            "en": "Books",
+            "ja": "Books",
+            "ko": "책"
+          },
+          "names": {
+            "ja": "DREAMZzz: Time to Play",
+            "zh": "DREAMZzz: Time to Play",
+            "ko": "DREAMZzz: Time to Play",
+            "en": "DREAMZzz: Time to Play"
+          },
+          "release_date": "2025",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/9788325348434-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-9788325348410-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_BOOK",
+          "subline": "Activity Books with LEGO Parts",
+          "series_key": "lego_books",
+          "series_labels": {
+            "zh": "图书",
+            "en": "Books",
+            "ja": "Books",
+            "ko": "책"
+          },
+          "names": {
+            "ja": "Friends: Time to Play",
+            "zh": "Friends: Time to Play",
+            "ko": "Friends: Time to Play",
+            "en": "Friends: Time to Play"
+          },
+          "release_date": "2025",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/9788325348410-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-9788325348397-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_BOOK",
+          "subline": "Activity Books with LEGO Parts",
+          "series_key": "lego_books",
+          "series_labels": {
+            "zh": "图书",
+            "en": "Books",
+            "ja": "Books",
+            "ko": "책"
+          },
+          "names": {
+            "ja": "Harry Potter: Time to Play!",
+            "zh": "Harry Potter: Time to Play!",
+            "ko": "Harry Potter: Time to Play!",
+            "en": "Harry Potter: Time to Play!"
+          },
+          "release_date": "2025",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/9788325348397-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-9788325348380-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_BOOK",
+          "subline": "Activity Books with LEGO Parts",
+          "series_key": "lego_books",
+          "series_labels": {
+            "zh": "图书",
+            "en": "Books",
+            "ja": "Books",
+            "ko": "책"
+          },
+          "names": {
+            "ja": "Ninjago: Dragons Rising: Time to Play",
+            "zh": "Ninjago: Dragons Rising: Time to Play",
+            "ko": "Ninjago: Dragons Rising: Time to Play",
+            "en": "Ninjago: Dragons Rising: Time to Play"
+          },
+          "release_date": "2025",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/9788325348380-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-9780593958957-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_BOOK",
+          "subline": "Non-fiction Books",
+          "series_key": "lego_books",
+          "series_labels": {
+            "zh": "图书",
+            "en": "Books",
+            "ja": "Books",
+            "ko": "책"
+          },
+          "names": {
+            "ja": "Marvel: Read. Build. Create",
+            "zh": "Marvel: Read. Build. Create",
+            "ko": "Marvel: Read. Build. Create",
+            "en": "Marvel: Read. Build. Create"
+          },
+          "release_date": "2024",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/9780593958957-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-9780593958940-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_BOOK",
+          "subline": "Non-fiction Books",
+          "series_key": "lego_books",
+          "series_labels": {
+            "zh": "图书",
+            "en": "Books",
+            "ja": "Books",
+            "ko": "책"
+          },
+          "names": {
+            "ja": "Ninjago: Read. Build. Create.",
+            "zh": "Ninjago: Read. Build. Create.",
+            "ko": "Ninjago: Read. Build. Create.",
+            "en": "Ninjago: Read. Build. Create."
+          },
+          "release_date": "2024",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/9780593958940-1/"
+          ]
+        }
+      ],
+      "renamed": []
+    },
     {
       "date": "2026-11-22",
       "generated_at": "2026-11-22T00:05:33.619Z",
@@ -661,12 +1817,12 @@
           "franchise": "gundam",
           "grade_code": "ROBOT_SPIRITS",
           "subline": "ROBOT魂 ver. A.N.I.M.E.",
-          "series_key": "zeta",
+          "series_key": "uc_first",
           "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
+            "zh": "初代",
+            "en": "0079",
+            "ja": "初代",
+            "ko": "초대"
           },
           "names": {
             "ja": "RGM-79SC ジム・スナイパーカスタム （ジャブロー防衛隊仕様） ver. A.N.I.M.E.",
@@ -230080,10 +231236,10 @@
             "ko": "포켓몬"
           },
           "names": {
-            "ja": "196 ぬいぐるみ Pok&eacute;mon fit エーフィ",
+            "ja": "196 ぬいぐるみ ポケモン fit エーフィ",
             "zh": "196 毛绒玩偶 宝可梦 fit 太阳伊布",
             "ko": "196 봉제인형 Pokémon fit 에브이",
-            "en": "196 ぬいぐるみ Pok&eacute;mon fit エーフィ"
+            "en": "196 ぬいぐるみ Pokémon fit エーフィ"
           },
           "release_date": null,
           "price_jpy": 1540,
@@ -265776,12 +266932,12 @@
           "franchise": "gundam",
           "grade_code": "ROBOT_SPIRITS",
           "subline": "ROBOT魂 ver. A.N.I.M.E.",
-          "series_key": "zeta",
+          "series_key": "uc_first",
           "series_labels": {
-            "zh": "Z",
-            "en": "Z",
-            "ja": "Z",
-            "ko": "Z"
+            "zh": "初代",
+            "en": "0079",
+            "ja": "初代",
+            "ko": "초대"
           },
           "names": {
             "ja": "RGM-79SC ジム・スナイパーカスタム （ジャブロー防衛隊仕様） ver. A.N.I.M.E.",
@@ -281177,1758 +282333,6 @@
         }
       ],
       "renamed_count": 4
-    },
-    {
-      "date": "2026-08-14",
-      "generated_at": "2026-08-13T19:55:43.330Z",
-      "total_before": 5422,
-      "total_after": 5429,
-      "added_count": 4,
-      "changed_count": 36,
-      "removed_count": 0,
-      "watched_count": 2,
-      "premium_bandai_count": 2,
-      "bbx_count": 0,
-      "franchise_counts": {
-        "pokemon": 38,
-        "gundam": 2
-      },
-      "reason_counts": {
-        "new": 4,
-        "source": 2,
-        "image": 34
-      },
-      "interest_tags": [
-        "pokemon",
-        "gundam",
-        "premium_bandai",
-        "seed"
-      ],
-      "watch_tags": [
-        "seed"
-      ],
-      "added": [
-        {
-          "kit_id": "pokemon-center-4521329350349",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "628 ぬいぐるみ Pok&eacute;mon fit ウォーグル",
-            "zh": "628 毛绒玩偶 宝可梦 fit 勇士雄鹰",
-            "ko": "628 봉제인형 Pokémon fit 워글",
-            "en": "628 ぬいぐるみ Pok&eacute;mon fit ウォーグル"
-          },
-          "release_date": null,
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329350349.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329350417",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "635 ぬいぐるみ Pok&eacute;mon fit サザンドラ",
-            "zh": "635 毛绒玩偶 宝可梦 fit 三首恶龙",
-            "ko": "635 봉제인형 Pokémon fit 삼삼드래",
-            "en": "635 ぬいぐるみ Pok&eacute;mon fit サザンドラ"
-          },
-          "release_date": null,
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329350417.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4904790175442",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケピース／ファニーフェイス／ボールチェーンマスコット／ピカチュウ",
-            "zh": "Poképeace/搞怪脸/珠链挂件/皮卡丘",
-            "ko": "포케피스/퍼니 페이스/볼체인 마스코트/피카츄",
-            "en": "ポケピース／ファニーフェイス／Ballチェーンマスコット／ピカチュウ"
-          },
-          "release_date": null,
-          "price_jpy": 2640,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4904790175442.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329423173",
-          "change_type": "added",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "マスコット POKÉMON TRAINERS ネリネ",
-            "zh": "挂件 宝可梦训练家系列 纳莉",
-            "ko": "마스코트 POKÉMON TRAINERS 네리네",
-            "en": "マスコット POKÉMON TRAINERS ネリネ"
-          },
-          "release_date": null,
-          "price_jpy": 1870,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329423173.html"
-          ]
-        }
-      ],
-      "changed": [
-        {
-          "kit_id": "hg-hg-1-144-4573102662859000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "HG 1 / 144 イモータルジャスティスガンダム",
-            "zh": "HG 1 / 144 不朽正义高达",
-            "ko": "HG 1/144 이모탈 저스티스건담",
-            "en": "HG 1 / 144 Immortal Justice Gundam"
-          },
-          "release_date": "2024-01-26",
-          "price_jpy": 2640,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102662859000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000206408/"
-          ]
-        },
-        {
-          "kit_id": "hg-hg-1-144-4573102662842000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "HG 1 / 144 ライジングフリーダムガンダム",
-            "zh": "HG 1 / 144 飞升自由高达",
-            "ko": "HG 1/144 라이징 프리덤건담",
-            "en": "HG 1 / 144 Rising Freedom Gundam"
-          },
-          "release_date": "2024-01-26",
-          "price_jpy": 2640,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102662842000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000206407/"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329333816",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "128 ぬいぐるみ Pok&eacute;mon fit ケンタロス",
-            "zh": "128 毛绒玩偶 宝可梦 fit 肯泰罗",
-            "ko": "128 봉제인형 Pokémon fit 켄타로스",
-            "en": "128 ぬいぐるみ Pok&eacute;mon fit ケンタロス"
-          },
-          "release_date": null,
-          "price_jpy": 1320,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329333816.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329339313",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "424 ぬいぐるみ ポケモン fit エテボース",
-            "zh": "424 毛绒玩偶 宝可梦 fit 双尾怪手",
-            "ko": "424 봉제인형 Pokémon fit 겟핸보숭",
-            "en": "424 ぬいぐるみ Pokémon fit エテボース"
-          },
-          "release_date": null,
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329339313.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329339627",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "455 ぬいぐるみ Pok&eacute;mon fit マスキッパ",
-            "zh": "455 毛绒玩偶 宝可梦 fit 尖牙笼",
-            "ko": "455 봉제인형 Pokémon fit 무스틈니",
-            "en": "455 ぬいぐるみ Pok&eacute;mon fit マスキッパ"
-          },
-          "release_date": null,
-          "price_jpy": 1320,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329339627.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329344041",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "521 ぬいぐるみ ポケモン fit ケンホロウ(オスのすがた)",
-            "zh": "521 毛绒玩偶 宝可梦 fit 高傲雉鸡(雄性的样子)",
-            "ko": "521 봉제인형 Pokémon fit 켄호로우(수컷의 모습)",
-            "en": "521 ぬいぐるみ Pokémon fit ケンホロウ(オスのすがた)"
-          },
-          "release_date": null,
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329344041.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329349503",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "553 ぬいぐるみ Pok&eacute;mon fit ワルビアル",
-            "zh": "553 毛绒玩偶 宝可梦 fit 流氓鳄",
-            "ko": "553 봉제인형 Pokémon fit 악비아르",
-            "en": "553 ぬいぐるみ Pok&eacute;mon fit ワルビアル"
-          },
-          "release_date": null,
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329349503.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329349695",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "571 ぬいぐるみ Pok&eacute;mon fit ゾロアーク",
-            "zh": "571 毛绒玩偶 宝可梦 fit 索罗亚克",
-            "ko": "571 봉제인형 Pokémon fit 조로아크",
-            "en": "571 ぬいぐるみ Pok&eacute;mon fit ゾロアーク"
-          },
-          "release_date": null,
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329349695.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329350189",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "612 ぬいぐるみ Pok&eacute;mon fit オノノクス",
-            "zh": "612 毛绒玩偶 宝可梦 fit 双斧战龙",
-            "ko": "612 봉제인형 Pokémon fit 액스라이즈",
-            "en": "612 ぬいぐるみ Pok&eacute;mon fit オノノクス"
-          },
-          "release_date": null,
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329350189.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329350400",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "634 ぬいぐるみ ポケモン fit ジヘッド",
-            "zh": "634 毛绒玩偶 宝可梦 fit 双首暴龙",
-            "ko": "634 봉제인형 Pokémon fit 디헤드",
-            "en": "634 ぬいぐるみ Pokémon fit ジヘッド"
-          },
-          "release_date": null,
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329350400.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4521329366258",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "685 ぬいぐるみ Pok&eacute;mon fit ペロリーム",
-            "zh": "685 毛绒玩偶 宝可梦 fit 胖甜妮",
-            "ko": "685 봉제인형 Pokémon fit 나루림",
-            "en": "685 ぬいぐるみ Pok&eacute;mon fit ペロリーム"
-          },
-          "release_date": null,
-          "price_jpy": 1760,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329366258.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4972825204337",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_GOODS",
-          "subline": "Pokemon Center Goods",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ナノブロック シャワーズ",
-            "zh": "纳米积木 水伊布",
-            "ko": "나노블록 샤미드",
-            "en": "ナノブロック シャワーズ"
-          },
-          "release_date": null,
-          "price_jpy": 1430,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4972825204337.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4972825204351",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_GOODS",
-          "subline": "Pokemon Center Goods",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ナノブロック ブースター",
-            "zh": "纳米积木 火伊布",
-            "ko": "나노블록 부스터",
-            "en": "ナノブロック ブースター"
-          },
-          "release_date": null,
-          "price_jpy": 1430,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4972825204351.html"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-4237",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 52 セレクトシリーズ ギャラドス",
-            "zh": "宝可梦拼装模型收藏 52 精选系列 暴鲤龙",
-            "ko": "포켓몬 프라모 컬렉션 52 셀렉트 시리즈 갸라도스",
-            "en": "Pokémon PLAMO COLLECTION 52 SELECT SERIES Gyarados"
-          },
-          "release_date": null,
-          "price_jpy": 1300,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_4237/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5028",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション No.54 セレクトシリーズ グラードン",
-            "zh": "宝可梦拼装模型收藏 No.54 精选系列 固拉多",
-            "ko": "포켓몬 프라모 컬렉션 No.54 셀렉트 시리즈 그란돈",
-            "en": "Pokémon PLAMO COLLECTION No.54 SELECT SERIES Groudon"
-          },
-          "release_date": null,
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5028/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5411",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 55 セレクトシリーズ ハッサム",
-            "zh": "宝可梦拼装模型收藏 55 精选系列 巨钳螳螂",
-            "ko": "포켓몬 프라모 컬렉션 55 셀렉트 시리즈 핫삼",
-            "en": "Pokémon PLAMO COLLECTION 55 SELECT SERIES Scizor"
-          },
-          "release_date": null,
-          "price_jpy": 1400,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5411/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5467",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 56 セレクトシリーズ マスカーニャ",
-            "zh": "宝可梦拼装模型收藏 56 精选系列 魔幻假面喵",
-            "ko": "포켓몬 프라모 컬렉션 56 셀렉트 시리즈 마스카나",
-            "en": "Pokémon PLAMO COLLECTION 56 SELECT SERIES Meowscarada"
-          },
-          "release_date": null,
-          "price_jpy": 1600,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5467/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5497",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 57 セレクトシリーズ ソウブレイズ",
-            "zh": "宝可梦拼装模型收藏 57 精选系列 苍炎刃鬼",
-            "ko": "포켓몬 프라모 컬렉션 57 셀렉트 시리즈 파라블레이즈",
-            "en": "Pokémon PLAMO COLLECTION 57 SELECT SERIES Ceruledge"
-          },
-          "release_date": null,
-          "price_jpy": 1700,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5497/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5568",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 58 セレクトシリーズ グレンアルマ",
-            "zh": "宝可梦拼装模型收藏 58 精选系列 红莲铠骑",
-            "ko": "포켓몬 프라모 컬렉션 58 셀렉트 시리즈 카디나르마",
-            "en": "Pokémon PLAMO COLLECTION 58 SELECT SERIES Armarouge"
-          },
-          "release_date": null,
-          "price_jpy": 1700,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5568/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5958",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 59 セレクトシリーズ ミライドン",
-            "zh": "宝可梦拼装模型收藏 59 精选系列 密勒顿",
-            "ko": "포켓몬 프라모 컬렉션 59 셀렉트 시리즈 미라이돈",
-            "en": "Pokémon PLAMO COLLECTION 59 SELECT SERIES Miraidon"
-          },
-          "release_date": null,
-          "price_jpy": 2100,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5958/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5984",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 60 セレクトシリーズ コライドン",
-            "zh": "宝可梦拼装模型收藏 60 精选系列 故勒顿",
-            "ko": "포켓몬 프라모 컬렉션 60 셀렉트 시리즈 코라이돈",
-            "en": "Pokémon PLAMO COLLECTION 60 SELECT SERIES Koraidon"
-          },
-          "release_date": null,
-          "price_jpy": 2100,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5984/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-6780",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 61 セレクトシリーズ メガレックウザ",
-            "zh": "宝可梦拼装模型收藏 61 精选系列 超级烈空坐",
-            "ko": "포켓몬 프라모 컬렉션 61 셀렉트 시리즈 메가레쿠쟈",
-            "en": "Pokémon PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza"
-          },
-          "release_date": null,
-          "price_jpy": 2700,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_6780/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-7038",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 62 セレクトシリーズ カイオーガ",
-            "zh": "宝可梦拼装模型收藏 62 精选系列 盖欧卡",
-            "ko": "포켓몬 프라모 컬렉션 62 셀렉트 시리즈 가이오가",
-            "en": "Pokémon PLAMO COLLECTION 62 SELECT SERIES Kyogre"
-          },
-          "release_date": null,
-          "price_jpy": 1800,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7038/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5174",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 18 ニャオハ",
-            "zh": "宝可梦拼装模型收藏 快速组装 18 新叶喵",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 18 나오하",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 18 Sprigatito"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5174/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5247",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 19 クワッス",
-            "zh": "宝可梦拼装模型收藏 快速组装 19 润水鸭",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 19 꾸왁스",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 19 Quaxly"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5247/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5372",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 20 ホゲータ",
-            "zh": "宝可梦拼装模型收藏 快速组装 20 呆火鳄",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 20 뜨아거",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 20 Fuecoco"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5372/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5450",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 21 コダック",
-            "zh": "宝可梦拼装模型收藏 快速组装 21 可达鸭",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 21 고라파덕",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 21 Psyduck"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5450/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5555",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 22 パモ",
-            "zh": "宝可梦拼装模型收藏 快速组装 22 布拨",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 22 빠모",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 22 Pawmi"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5555/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5947",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 23 ジラーチ",
-            "zh": "宝可梦拼装模型收藏 快速组装 23 基拉祈",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 23 지라치",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 23 Jirachi"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5947/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-6762",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 24 ピチュー",
-            "zh": "宝可梦拼装模型收藏 快速组装 24 皮丘",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 24 피츄",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 24 Pichu"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_6762/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-7010",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 26 サンダース",
-            "zh": "宝可梦拼装模型收藏 快速组装 26 雷伊布",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 26 쥬피썬더",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 26 Jolteon"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7010/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-7015",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 27 シャワーズ",
-            "zh": "宝可梦拼装模型收藏 快速组装 27 水伊布",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 27 샤미드",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 27 Vaporeon"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7015/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-7120",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 28 ニャース",
-            "zh": "宝可梦拼装模型收藏 快速组装 28 喵喵",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 28 나옹",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 28 Meowth"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7120/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-7148",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon Model Kit Quick!!",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション クイック!! 29 ヒコザル",
-            "zh": "宝可梦拼装模型收藏 快速组装 29 小火焰猴",
-            "ko": "포켓몬 프라모 컬렉션 퀵!! 29 불꽃숭이",
-            "en": "Pokémon PLAMO COLLECTION QUICK!! 29 Chimchar"
-          },
-          "release_date": null,
-          "price_jpy": 780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_7148/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5010",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション セレクトシリーズ 黒いレックウザ",
-            "zh": "宝可梦拼装模型收藏 精选系列 黑色烈空坐",
-            "ko": "포켓몬 프라모 컬렉션 셀렉트 시리즈 검은 레쿠쟈",
-            "en": "Pokémon PLAMO COLLECTION SELECT SERIES Black Rayquaza"
-          },
-          "release_date": null,
-          "price_jpy": 1500,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5010/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-4324",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 53 セレクトシリーズ メタグロス",
-            "zh": "宝可梦拼装模型收藏 53 精选系列 巨金怪",
-            "ko": "포켓몬 프라모 컬렉션 53 셀렉트 시리즈 메타그로스",
-            "en": "Pokémon PLAMO COLLECTION 53 SELECT SERIES Metagross"
-          },
-          "release_date": null,
-          "price_jpy": 1300,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_4324/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        }
-      ],
-      "removed": [],
-      "watched": [
-        {
-          "kit_id": "hg-hg-1-144-4573102662859000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "HG 1 / 144 イモータルジャスティスガンダム",
-            "zh": "HG 1 / 144 不朽正义高达",
-            "ko": "HG 1/144 이모탈 저스티스건담",
-            "en": "HG 1 / 144 Immortal Justice Gundam"
-          },
-          "release_date": "2024-01-26",
-          "price_jpy": 2640,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102662859000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000206408/"
-          ]
-        },
-        {
-          "kit_id": "hg-hg-1-144-4573102662842000",
-          "change_type": "changed",
-          "franchise": "gundam",
-          "grade_code": "HG",
-          "subline": "HG",
-          "series_key": "seed",
-          "series_labels": {
-            "zh": "SEED",
-            "en": "SEED",
-            "ja": "SEED",
-            "ko": "SEED"
-          },
-          "names": {
-            "ja": "HG 1 / 144 ライジングフリーダムガンダム",
-            "zh": "HG 1 / 144 飞升自由高达",
-            "ko": "HG 1/144 라이징 프리덤건담",
-            "en": "HG 1 / 144 Rising Freedom Gundam"
-          },
-          "release_date": "2024-01-26",
-          "price_jpy": 2640,
-          "is_limited": false,
-          "is_premium_bandai": true,
-          "watch_tags": [
-            "seed"
-          ],
-          "interest_tags": [
-            "gundam",
-            "premium_bandai",
-            "seed"
-          ],
-          "change_reasons": [
-            "source"
-          ],
-          "source_ids": [
-            "bandai_spirits_products_jp",
-            "p_bandai_jp"
-          ],
-          "source_urls": [
-            "https://www.bandaispirits.co.jp/products/search/detail.php?prd_id=4573102662842000&grp_id=5325",
-            "https://p-bandai.jp/item/item-1000206407/"
-          ]
-        }
-      ],
-      "renamed": [
-        {
-          "kit_id": "pokemon-center-4521329339092",
-          "change_type": "renamed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_PLUSH",
-          "subline": "Pokemon Center Plush",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "409 ぬいぐるみ Pok&eacute;mon fit ラムパルド",
-            "zh": "409 毛绒玩偶 宝可梦 fit 战槌龙",
-            "ko": "409 봉제인형 Pokémon fit 램펄드",
-            "en": "409 ぬいぐるみ Pok&eacute;mon fit ラムパルド"
-          },
-          "release_date": null,
-          "price_jpy": 1540,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "renamed"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4521329339092.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4901161056522",
-          "change_type": "renamed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_GOODS",
-          "subline": "Pokemon Center Goods",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "おりがみコレクション デイリースケッチ",
-            "zh": "折纸收藏 日常速写",
-            "ko": "종이접기 컬렉션 데일리 스케치",
-            "en": "おりがみコレクション デイリースケッチ"
-          },
-          "release_date": null,
-          "price_jpy": 440,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "renamed"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4901161056522.html"
-          ]
-        },
-        {
-          "kit_id": "pokemon-center-4904810913894",
-          "change_type": "renamed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_GOODS",
-          "subline": "Pokemon Center Goods",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ドリームトミカ No.151 ポケモンとどこいく！？ どこいこっカー",
-            "zh": "梦想多美卡 No.151 和宝可梦去哪儿!? 去哪儿车",
-            "ko": "드림 토미카 No.151 포켓몬이랑 어디 가!? 어디갈카",
-            "en": "ドリームトミカ No.151 Pokemonとどこいく！？ どこいこっカー"
-          },
-          "release_date": null,
-          "price_jpy": 880,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "renamed"
-          ],
-          "source_ids": [
-            "pokemon_center_jp"
-          ],
-          "source_urls": [
-            "https://www.pokemoncenter-online.com/4904810913894.html"
-          ]
-        }
-      ],
-      "renamed_count": 3
     }
   ]
 }
