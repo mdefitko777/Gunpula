@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-23",
-  "generated_at": "2026-11-23T10:28:40.936Z",
+  "generated_at": "2026-11-23T11:19:04.581Z",
   "watch_tags": [
     "seed",
     "00"
@@ -20,18 +20,18 @@
     "effects"
   ],
   "source_health": {
-    "generated_at": "2026-11-23T10:28:16.680Z",
+    "generated_at": "2026-11-23T11:18:34.429Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-23",
-      "generated_at": "2026-11-23T10:28:40.936Z",
+      "generated_at": "2026-11-23T11:19:04.581Z",
       "total_before": 42036,
-      "total_after": 42055,
-      "added_count": 13,
-      "changed_count": 10,
+      "total_after": 42064,
+      "added_count": 22,
+      "changed_count": 13,
       "removed_count": 2,
       "watched_count": 0,
       "merged_count": 0,
@@ -42,19 +42,22 @@
       "franchise_counts": {
         "lego": 16,
         "pokemon": 6,
+        "madoka": 12,
         "gundam": 1
       },
       "reason_counts": {
-        "new": 13,
+        "new": 22,
         "name": 4,
-        "source": 4,
+        "source": 7,
         "product_line": 1,
         "series": 1,
+        "image": 3,
         "removed": 2
       },
       "interest_tags": [
         "lego",
         "pokemon",
+        "madoka",
         "gundam"
       ],
       "watch_tags": [],
@@ -539,6 +542,339 @@
           "source_urls": [
             "https://rebrickable.com/sets/6702754-1/"
           ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g1144728",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_MINI",
+          "subline": "Good Smile Company",
+          "series_key": "madoka_tv",
+          "series_labels": {
+            "zh": "魔法少女小圆",
+            "en": "Madoka Magica",
+            "ja": "まどか☆マギカ",
+            "ko": "마도카 마기카"
+          },
+          "names": {
+            "ja": "Huggy Good Smile 暁美ほむら",
+            "zh": "Huggy Good Smile 晓美焰",
+            "ko": "Huggy Good Smile 暁美ほむら",
+            "en": "Huggy Good Smile 暁美ほむら"
+          },
+          "release_date": null,
+          "price_jpy": 1800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/1144728"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g1144727",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_MINI",
+          "subline": "Good Smile Company",
+          "series_key": "madoka_tv",
+          "series_labels": {
+            "zh": "魔法少女小圆",
+            "en": "Madoka Magica",
+            "ja": "まどか☆マギカ",
+            "ko": "마도카 마기카"
+          },
+          "names": {
+            "ja": "Huggy Good Smile 鹿目まどか",
+            "zh": "Huggy Good Smile 鹿目圆",
+            "ko": "Huggy Good Smile 鹿目まどか",
+            "en": "Huggy Good Smile 鹿目まどか"
+          },
+          "release_date": null,
+          "price_jpy": 1800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/1144727"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g35143",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "POP UP PARADE SP くるみ割りの魔女",
+            "zh": "POP UP PARADE SP くるみ割りの魔女",
+            "ko": "POP UP PARADE SP くるみ割りの魔女",
+            "en": "POP UP PARADE SP くるみ割りの魔女"
+          },
+          "release_date": null,
+          "price_jpy": 13800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/35143"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g10131",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "madoka_tv",
+          "series_labels": {
+            "zh": "魔法少女小圆",
+            "en": "Madoka Magica",
+            "ja": "まどか☆マギカ",
+            "ko": "마도카 마기카"
+          },
+          "names": {
+            "ja": "POP UP PARADE 巴 マミ",
+            "zh": "POP UP PARADE 巴麻美",
+            "ko": "POP UP PARADE 巴 マミ",
+            "en": "POP UP PARADE 巴 マミ"
+          },
+          "release_date": null,
+          "price_jpy": 3900,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/10131"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g1141456",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "NENDOROID",
+          "subline": "ねんどろいど",
+          "series_key": "madoka_magireco",
+          "series_labels": {
+            "zh": "魔法纪录",
+            "en": "Magia Record",
+            "ja": "マギアレコード",
+            "ko": "마기아 레코드"
+          },
+          "names": {
+            "ja": "ねんどろいど ホーリーマミ",
+            "zh": "粘土人 ホーリーマミ",
+            "ko": "ねんどろいど ホーリーマミ",
+            "en": "ねんどろいど ホーリーマミ"
+          },
+          "release_date": null,
+          "price_jpy": 8500,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/1141456"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g1146562",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "NENDOROID",
+          "subline": "ねんどろいどもあ",
+          "series_key": "madoka_magireco",
+          "series_labels": {
+            "zh": "魔法纪录",
+            "en": "Magia Record",
+            "ja": "マギアレコード",
+            "ko": "마기아 레코드"
+          },
+          "names": {
+            "ja": "ねんどろいどもあ ホーリーマミ マスケット銃パーツセット",
+            "zh": "ねんどろいどもあ ホーリーマミ マスケット銃パーツセット",
+            "ko": "ねんどろいどもあ ホーリーマミ マスケット銃파츠 세트",
+            "en": "ねんどろいどもあ ホーリーマミ マスケット銃Parts Set"
+          },
+          "release_date": null,
+          "price_jpy": 2000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/1146562"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g1626",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Good Smile Company",
+          "series_key": "madoka_tv",
+          "series_labels": {
+            "zh": "魔法少女小圆",
+            "en": "Madoka Magica",
+            "ja": "まどか☆マギカ",
+            "ko": "마도카 마기카"
+          },
+          "names": {
+            "ja": "暁美ほむら you are not alone.",
+            "zh": "晓美焰 you are not alone.",
+            "ko": "暁美ほむら you are not alone.",
+            "en": "暁美ほむら you are not alone."
+          },
+          "release_date": null,
+          "price_jpy": 9428,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/1626"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g1143786",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PLUSH",
+          "subline": "Good Smile Company",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Huggy Doll 鹿目まどか / 暁美ほむら",
+            "zh": "劇場版 魔法少女小圆[新篇]叛逆的物语 Huggy Doll 鹿目圆 / 晓美焰",
+            "ko": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Huggy Doll 鹿目まどか / 暁美ほむら",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Huggy Doll 鹿目まどか / 暁美ほむら"
+          },
+          "release_date": null,
+          "price_jpy": 3300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/1143786"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g1143792",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_PLUSH",
+          "subline": "Good Smile Company",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 トレーディング指人形",
+            "zh": "劇場版 魔法少女小圆[新篇]叛逆的物语 トレーディング指人形",
+            "ko": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 トレーディング指人形",
+            "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 トレーディング指人形"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/1143792"
+          ]
         }
       ],
       "changed": [
@@ -800,6 +1136,126 @@
           ],
           "source_urls": [
             "https://rebrickable.com/sets/6565182-1/"
+          ]
+        },
+        {
+          "kit_id": "aniplex-madoka-itemxhwuynnx",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Aniplex+",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "悪魔ほむら～叛逆の物語～ 1 / 8スケールフィギュア",
+            "zh": "恶魔焰~叛逆的物语~ 1 / 8比例手办",
+            "ko": "악마 호무라 ~반역의 이야기~ 1/8 스케일 피규어",
+            "en": "悪魔ほむら - 叛逆の物語 - 1 / 8スケールフィギュア"
+          },
+          "release_date": "2024-11",
+          "price_jpy": 29700,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "aniplex_plus_madoka_jp",
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemxHwUynnX.html",
+            "https://www.goodsmile.com/ja/product/56002"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-11322",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "1/4スケールフィギュア",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "暁美ほむら うさみみVer.",
+            "zh": "晓美焰 兔耳Ver.",
+            "ko": "아케미 호무라 토끼귀 Ver.",
+            "en": "暁美ほむら うさみみVer."
+          },
+          "release_date": "2021-12",
+          "price_jpy": 30800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "good_smile_madoka_en",
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/ja/product/11322/",
+            "https://www.goodsmile.com/ja/product/9016"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-9376",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "1/4スケールフィギュア",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "鹿目まどか うさみみVer.",
+            "zh": "鹿目圆 兔耳Ver.",
+            "ko": "카나메 마도카 토끼귀 Ver.",
+            "en": "鹿目まどか うさみみVer."
+          },
+          "release_date": "2021-03",
+          "price_jpy": 30800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "good_smile_madoka_en",
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.info/ja/product/9376/",
+            "https://www.goodsmile.com/ja/product/7083"
           ]
         },
         {

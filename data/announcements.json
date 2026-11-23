@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-23T10:27:28.722Z",
+  "updated_at": "2026-11-23T11:18:03.926Z",
   "sources": [
     {
       "source_id": "tamashii_news",
@@ -142,7 +142,12 @@
       "url": "https://www.youtube.com/"
     }
   ],
-  "fetch_errors": [],
+  "fetch_errors": [
+    {
+      "source_id": "hjweb_news",
+      "message": "https://hjweb.jp/feed/ is disallowed by robots.txt"
+    }
+  ],
   "replaced": {
     "corocoro-d1ac4f87bf": "beyblade-lineup-dXgyMi5odG1s",
     "hamusuke-bx-55": "beyblade-lineup-Yng1NS5odG1s",
