@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "updated_at": "2026-11-23",
-  "generated_at": "2026-11-23T00:21:18.550Z",
+  "generated_at": "2026-11-23T10:28:40.936Z",
   "watch_tags": [
     "seed",
     "00"
@@ -20,17 +20,17 @@
     "effects"
   ],
   "source_health": {
-    "generated_at": "2026-11-23T00:20:58.631Z",
+    "generated_at": "2026-11-23T10:28:16.680Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
     {
       "date": "2026-11-23",
-      "generated_at": "2026-11-23T00:21:18.550Z",
+      "generated_at": "2026-11-23T10:28:40.936Z",
       "total_before": 42036,
-      "total_after": 42052,
-      "added_count": 10,
+      "total_after": 42055,
+      "added_count": 13,
       "changed_count": 10,
       "removed_count": 2,
       "watched_count": 0,
@@ -41,21 +41,21 @@
       "bbx_count": 0,
       "franchise_counts": {
         "lego": 16,
-        "gundam": 1,
-        "pokemon": 3
+        "pokemon": 6,
+        "gundam": 1
       },
       "reason_counts": {
-        "new": 10,
-        "series": 1,
+        "new": 13,
         "name": 4,
         "source": 4,
         "product_line": 1,
+        "series": 1,
         "removed": 2
       },
       "interest_tags": [
         "lego",
-        "gundam",
-        "pokemon"
+        "pokemon",
+        "gundam"
       ],
       "watch_tags": [],
       "added": [
@@ -168,6 +168,117 @@
           ],
           "source_urls": [
             "https://rebrickable.com/sets/9781837252855-1/"
+          ]
+        },
+        {
+          "kit_id": "academy-2201",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "몬콜레",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "몬콜레 30주년 전설세트 성도지방(칠색조, 루기아)",
+            "zh": "몬콜레 30주년 전설세트 성도지방(칠색조, 루기아)",
+            "ko": "몬콜레 30주년 전설세트 성도지방(칠색조, 루기아)",
+            "en": "몬콜레 30주년 전설세트 성도지방(칠색조, 루기아)"
+          },
+          "release_date": "2026-11",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "academy_kr"
+          ],
+          "source_urls": [
+            "https://academy.co.kr/product/detail.html?product_no=2201"
+          ]
+        },
+        {
+          "kit_id": "academy-2200",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "몬콜레",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "몬콜레 30주년 전설세트 칼로스지방(제르네아스, 이벨타르)",
+            "zh": "몬콜레 30주년 전설세트 칼로스지방(제르네아스, 이벨타르)",
+            "ko": "몬콜레 30주년 전설세트 칼로스지방(제르네아스, 이벨타르)",
+            "en": "몬콜레 30주년 전설세트 칼로스지방(제르네아스, 이벨타르)"
+          },
+          "release_date": "2026-11",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "academy_kr"
+          ],
+          "source_urls": [
+            "https://academy.co.kr/product/detail.html?product_no=2200"
+          ]
+        },
+        {
+          "kit_id": "academy-2199",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "몬콜레",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "몬콜레 MS 야돈&잠만보 2종 세트",
+            "zh": "몬콜레 MS 야돈&잠만보 2종 세트",
+            "ko": "몬콜레 MS 야돈&잠만보 2종 세트",
+            "en": "몬콜레 MS 야돈&잠만보 2종 세트"
+          },
+          "release_date": "2026-11",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "academy_kr"
+          ],
+          "source_urls": [
+            "https://academy.co.kr/product/detail.html?product_no=2199"
           ]
         },
         {
