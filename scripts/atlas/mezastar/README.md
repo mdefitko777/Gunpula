@@ -21,8 +21,8 @@ the committed revision, then commits only `data/atlas/mezastar-*`).
 | Source | Access | Gives |
 |---|---|---|
 | TW `api.pokemonmezastar.com.tw/api/v1/season/list` + `/season/{id}` | public JSON | TC names, front/back images, orientation, legacy (`經典卡匣`) and promo tags, release dates, PDF checklists |
-| HK `world.pokemonmezastar.com/hk/tag/` (+ page ids from the version switcher) and `/hk/news/` | static HTML | EN names, grade group, front image; EN launch and legacy-event dates from news titles |
-| KR `pokemontagstar.co.kr/kr/sub/stage.php` (`<select name=cate>` first) + `stage_pop_view.php?idx=N` (POST) | PHP HTML | KR names, exact ★ grade, thumbnails; front/back art from the popup (fetched only for tags not already in the previous output) |
+| HK `world.pokemonmezastar.com/hk/tag/` (+ page ids from the version switcher) and `/hk/news/` | static HTML | EN names, grade group, front image, tag-list flyer images (`checklist_imgs`, front and back, when the page links them); EN launch and legacy-event dates from news titles |
+| KR `pokemontagstar.co.kr/kr/sub/stage.php` (`<select name=cate>` first) + `stage_pop_view.php?idx=N` (POST) | PHP HTML | KR names, exact ★ grade, thumbnails, tag-list image (`checklist`, one tall JPEG per set); front/back art from the popup (fetched only for tags not already in the previous output). Misprinted KR numbers (a `…-000` serial, or a KR name whose species differs from the TC/EN printings of that serial — 스타더스트 3탄 lists 오롱털 as 1-3-000 and 대짱이 as 1-3-012) move to the one standard tag of the same set and species without a KR printing, with an anomaly |
 | CN `www.pokemonmezastar.com.cn/chuckInformation?id=` `__NEXT_DATA__` | Next.js SSR | exact ★ grade only (no SC printings emitted); malformed codes and duplicated serials are normalised and logged |
 | JP `takaratomy-arts.co.jp/specials/pokemonmezastar/new/{1..4,st1..5,dc1..5,gs1..5}.html`, `/new/special/` | static HTML | JA names, grade group, kira flag, full + thumbnail images, 146 promos |
 | Bulbapedia MediaWiki API (`action=parse`, category `Mezastar expansion sets`, `Promotional tags (Mezastar)`, `Pokémon Mezastar`) | JSON | JP: EN species, types, exact grade, Gorgeous (`…G`), Ultra Beast (`…-U0n`) and Legacy rows, promo campaigns, set release dates; HK launch day |
@@ -75,7 +75,7 @@ Printing ids are what the app keeps in the collection (one owned item per langua
 { schema, updated_at, edition{id, name{}, regions{}, id_scheme, notes?},
   sources:[{name, url, licence, role, status, error?, fetched_at?, seed_snapshot_at?}],
   sets:[{id, ordinal, series, names{en?,zh_hant?,zh?,ko?,ja?},
-         releases:[{region, local_name, date?, url, checklist?, news?, legacy_date?, legacy_news?, wiki?}],
+         releases:[{region, local_name, date?, url, checklist?, checklist_imgs?[], news?, legacy_date?, legacy_news?, wiki?}],
          counts{total, standard?, regular?, legacy?, promo?, gorgeous?, by_region{KR?,TC?,EN?,JA?}}, anomalies?}],
   tags:[{id, serial?, code?, kind, grade?, grade_src?, grade_group, dex, form?, form_src?, types[], orientation?,
          names{ko,ja,en,zh_hant,zh?}, names_derived?[], sets[], base?, reprint_of?, promo_campaign?, promo_variant?,
@@ -103,6 +103,9 @@ Printing ids are what the app keeps in the collection (one owned item per langua
   while the species has forms with other types, is flagged.
 * **types**: international = mezastar-dex `pool.json` if curated, else PokeAPI for the form; Mega/Gigantamax/Dynamax/Primal
   keep the base types (Bulbapedia convention). JP = Bulbapedia.
+* **checklist**: the official tag list of a set in that region — KR: one tall JPEG (≈4600×15600 px, 3 MB; decode it
+  downscaled), TC: a PDF, EN: `checklist_imgs` = the A5 flyer images (front, back) and `checklist` = the first of them.
+  Hotlinked like the tag images.
 * `src: "community"` printings (EN legacy/promo data from mezastar-dex) and `src: "bulbapedia"` printings (JP tags
   not on the official archive) have no official image.
 * Regular tags appear in several sets; a printing lists `sets` when its art differs per set.

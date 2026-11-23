@@ -7,7 +7,7 @@ export const HK_SOURCE = {
   name: "Pokémon MEZASTAR Hong Kong official site (English; same tags as SG/MY/ID)",
   url: `${BASE}tag/`,
   licence: "© Pokémon/Nintendo/Creatures/GAME FREAK, T-ARTS/MARV. No stated terms; metadata + hotlinked image URLs only, personal use",
-  role: "EN printings: English names, grade group, front images; release dates from the news list",
+  role: "EN printings: English names, grade group, front images, tag-list flyer images; release dates from the news list",
   region: "EN",
 };
 
@@ -29,7 +29,15 @@ function parseTagPage(html, url) {
     const h = events.filter((e) => e.at < m.index).pop();
     rows.push({ heading: h ? h.heading : null, serial_raw: stripTags(no || ""), serial: nfkc(stripTags(no || "")), name: nfkc(stripTags(name || "")), img_front: absUrl(img, url) });
   }
-  return { label, versions, rows };
+  // Tag-list flyer (the printed A5 checklist, front and back) linked under the list: <a href="X.jpg"><img src="X.jpg">
+  const lastList = html.lastIndexOf("tag-all_list_child");
+  const listImgs = [];
+  for (const m of html.slice(Math.max(0, lastList)).matchAll(/<a[^>]+href="([^"]+\.(?:jpe?g|png))"[^>]*>\s*<img[^>]+src="([^"]+)"/gi)) {
+    if (m[1] !== m[2]) continue;
+    const abs = absUrl(m[1], url);
+    if (!listImgs.includes(abs)) listImgs.push(abs);
+  }
+  return { label, versions, rows, listImgs };
 }
 
 function parseNews(html) {
@@ -61,7 +69,7 @@ export async function fetchHK() {
   const first = await politeFetch(`${BASE}tag/`);
   let stale = first.stale;
   const cur = parseTagPage(first.text, `${BASE}tag/`);
-  const pages = [{ pageId: null, label: cur.label, url: `${BASE}tag/`, rows: cur.rows }];
+  const pages = [{ pageId: null, label: cur.label, url: `${BASE}tag/`, rows: cur.rows, list_imgs: cur.listImgs }];
   const seenIds = new Set();
   for (const v of cur.versions) {
     if (!v.pageId || seenIds.has(v.pageId)) continue;
@@ -69,7 +77,7 @@ export async function fetchHK() {
     const r = await politeFetch(v.url);
     stale ||= r.stale;
     const p = parseTagPage(r.text, v.url);
-    pages.push({ pageId: v.pageId, label: p.label || v.label, switcher_label: v.label, url: v.url, rows: p.rows });
+    pages.push({ pageId: v.pageId, label: p.label || v.label, switcher_label: v.label, url: v.url, rows: p.rows, list_imgs: p.listImgs });
   }
   const rows = [];
   for (const p of pages) p.rows.forEach((r, i) => rows.push({ region: "EN", page: p.pageId || "current", pos: i, ...r }));

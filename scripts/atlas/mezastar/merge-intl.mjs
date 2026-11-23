@@ -113,7 +113,8 @@ export function mergeIntl({ tw, hk, kr, cn, md, poke, launch = {}, reg = null })
       const ev = launches.find((e) => e.series === key.series && e.version === key.V);
       let date = ev ? ev.date : null, dateUrl = ev ? ev.url : null;
       if (!date && key.S === 1 && key.V === 1 && launch.hk) date = launch.hk; // launch day (Bulbapedia infobox)
-      set.releases.push({ region: "EN", local_name: p.label || p.switcher_label, date, url: p.url, news: dateUrl });
+      const imgs = p.list_imgs || [];
+      set.releases.push({ region: "EN", local_name: p.label || p.switcher_label, date, url: p.url, news: dateUrl, ...(imgs.length ? { checklist: imgs[0], checklist_imgs: imgs } : {}) });
     }
   }
   if (kr) {
@@ -182,8 +183,42 @@ export function mergeIntl({ tw, hk, kr, cn, md, poke, launch = {}, reg = null })
       tag.ev.group_kr = g;
       const kg = gradeFromHeading(r.heading);
       if (kg) tag.ev.grade.KR = kg;
-      addPrinting(tag, r.setId, { region: "KR", name: r.name, img_front: r.img_front || r.img_thumb, img_back: r.img_back, img_thumb: r.img_thumb, url: r.url });
+      // kr_grade / kr_group stay on the printing (not written out) so a misprinted number can be moved with them
+      addPrinting(tag, r.setId, { region: "KR", name: r.name, img_front: r.img_front || r.img_thumb, img_back: r.img_back, img_thumb: r.img_thumb, url: r.url, kr_grade: kg, kr_group: g });
     }
+  }
+  // KR misprinted numbers (스타더스트 3탄: 오롱털 listed as '1-3-000' = 1-3-009; 대짱이 listed as '1-3-012', which is
+  // 번치코 = 1-3-013). A KR printing that sits on a number no tag has (000), or whose species differs from the
+  // TC/EN printings of that number, goes to the one standard tag of the same set and species that has no KR
+  // printing; with no single such tag it stays as printed (and the name check below flags it).
+  const speciesOf = (p) => (p.region === "EN" ? poke.resolveEn(p.name)?.dex : p.region === "TC" ? poke.resolveLocal(p.name, "zh_hant")?.dex : null) || null;
+  const krDex = (p) => poke.resolveLocal(p.name, "ko")?.dex || null;
+  const misplaced = [];
+  for (const t of tags.values()) {
+    if (t.kind !== "standard") continue;
+    const others = uniq(t.printings.map(speciesOf).filter(Boolean));
+    for (const p of t.printings.filter((x) => x.region === "KR")) {
+      const dex = krDex(p);
+      if (!dex) continue;
+      if (/-000$/.test(t.serial) ? others.length === 0 : others.length === 1 && others[0] !== dex) misplaced.push({ from: t, p, dex });
+    }
+  }
+  for (const { from, p, dex } of misplaced) {
+    const prefix = from.serial.slice(0, 4);
+    const fits = [...tags.values()].filter((t) => t !== from && t.kind === "standard" && t.serial.startsWith(prefix) && [...p.sets].every((s) => t.sets.has(s)) && !t.printings.some((x) => x.region === "KR") && t.printings.some((x) => speciesOf(x) === dex));
+    if (fits.length !== 1) { if (/-000$/.test(from.serial)) from.anomalies.push(`KR lists serial ${from.serial}, which does not exist; no single tag of this set and species to put it on`); continue; }
+    const to = fits[0];
+    from.printings.splice(from.printings.indexOf(p), 1);
+    for (const s of p.sets) addPrinting(to, s, { ...p, sets: undefined });
+    // the KR grade heading the row stood under belongs to the tag it moves to
+    for (const t of [from, to]) {
+      const kp = t.printings.find((x) => x.region === "KR");
+      t.ev.group_kr = kp ? kp.kr_group : undefined;
+      if (kp && kp.kr_grade) t.ev.grade.KR = kp.kr_grade;
+      else delete t.ev.grade.KR;
+    }
+    to.anomalies.push(`KR site prints this tag's number as ${from.serial}; matched by species`);
+    if (!from.printings.length) tags.delete(from.id);
   }
 
   // ---- CN rows (exact grade); assigned to tags after species resolution ---------------
