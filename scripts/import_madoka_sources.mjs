@@ -5,11 +5,20 @@
 // Flat goods (acrylic stands, badges, apparel, tapestries, discs, books …) are
 // left out on purpose.
 //
+//   node scripts/import_madoka_sources.mjs   (npm run import:madoka;
+//   MADOKA_ONLY=<source ids> MADOKA_REPORT_PATH=<file> for a trial run)
+//
 //   * Aniplex+            — online.aniplex.co.jp search grid (q=まどか, マギアレコード)
 //   * Good Smile (legacy) — www.goodsmile.info search; frozen since ~2024-06 but
 //                           holds every older GSC / Max Factory / FREEing item
-//   * Good Smile (global) — www.goodsmile.com; in maintenance (503) since
-//                           2026-10-23, so it is tried and reported, nothing more
+//   * Good Smile (global) — www.goodsmile.com search (keywords 魔法少女まどか☆マギカ
+//                           and マギアレコード). Its cards carry no category, so a
+//                           card the name rules cannot place (or whose name has no
+//                           Madoka work or character) has its product page
+//                           read (category, 作品名, 仕様; at most
+//                           MADOKA_GSC_DETAIL_LIMIT a run, a record from an earlier
+//                           read is reused). It also carries products whose
+//                           goodsmile.info page is gone (404)
 //   * 魂ウェブ            — tamashiiweb.com search_item.php, character madoka-magica
 //   * 一番くじ            — 1kuji.com title filter 85 (魔法少女まどか☆マギカ)
 //   * バンプレスト景品     — bsp-prize.jp title IP00004703 (search listing; its
@@ -49,7 +58,9 @@ import { KIT_ALIASES_PATH, resolveAlias, retiredKitIds } from "./lib/catalog-cle
 import { scaleFor } from "./lib/fate-grades.mjs";
 import { aliasPublishedFolds } from "./lib/fold-aliases.mjs";
 import { banprestoCover } from "./lib/bsp-prize.mjs";
+import { gscSearchUrl, parseGscDetail } from "./lib/effect-parts.mjs";
 import { absoluteHtmlUrl } from "./lib/html-url.mjs";
+import { parseGscSpec } from "./lib/nintendo-makers.mjs";
 
 const CATALOG_PATH = "data/kits.json";
 const FIRST_SEEN_PATH = "data/kit-first-seen.json";
@@ -320,17 +331,30 @@ const MADOKA_WORK = /まどか\s*☆?\s*マギカ|まどマギ|マギアレコ�
 // 創彩少女庭園 and 京乃まどか of 輪廻のラグランジェ). Only used when the
 // source gives no work line at all.
 const MADOKA_CHARACTER =
-  /鹿目まどか|暁美ほむら|悪魔ほむら|アルティメットまどか|円環の理|巴マミ|美樹さやか|佐倉杏子|百江なぎさ|キュゥべえ|環いろは|七海やちよ|由比鶴乃|深月フェリシア|二葉さな|アリナ・グレイ|里見灯花|柊ねむ|環うい|梓みふゆ|黒江|お菓子の魔女|シャルロッテ|ワルプルギスの夜|美国織莉子|呉キリカ|和紗ミチル/;
+  /鹿目まどか|暁美ほむら|悪魔ほむら|アルティメットまどか|円環の理|巴マミ|ホーリーマミ|美樹さやか|佐倉杏子|百江なぎさ|キュゥべえ|環いろは|七海やちよ|由比鶴乃|深月フェリシア|二葉さな|アリナ・グレイ|里見灯花|柊ねむ|環うい|梓みふゆ|黒江|お菓子の魔女|シャルロッテ|ワルプルギスの夜|美国織莉子|呉キリカ|和紗ミチル/;
+// Characters of マギアレコード (and the games after it) only: a product named
+// after one of them alone belongs to that work, not to the TV series.
+const MAGIA_RECORD_CHARACTER = /ホーリーマミ|環いろは|七海やちよ|由比鶴乃|深月フェリシア|二葉さな|アリナ・グレイ|里見灯花|柊ねむ|環うい|梓みふゆ|黒江/;
+
+// Stores space names freely: goodsmile.com sells "POP UP PARADE 巴 マミ"
+// (2026-11-23), every other page writes 巴マミ. Only the test drops the spaces.
+const compact = (value) => nf(value).replace(/\s+/g, "");
 
 function isMadoka(...texts) {
-  return MADOKA_WORK.test(nf(texts.filter(Boolean).join(" ")));
+  return texts.some((text) => text && MADOKA_WORK.test(compact(text)));
+}
+
+function isMadokaCharacter(text) {
+  return MADOKA_CHARACTER.test(compact(text));
 }
 
 // Canonical work titles, so one work groups together however a store spaces
 // its brackets. The detail page's 作品名 is checked first, then the name.
+// The English titles are what a stored record carries once localize_catalog.mjs
+// has run (a goodsmile.com record reused without reading its page again).
 const WORK_TITLES = [
-  [/ワルプルギスの廻天/, "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉"],
-  [/叛逆の物語|新編/, "劇場版 魔法少女まどか☆マギカ［新編］叛逆の物語"],
+  [/ワルプルギスの廻天|Walpurgisnacht/i, "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉"],
+  [/叛逆の物語|新編|Rebellion/i, "劇場版 魔法少女まどか☆マギカ［新編］叛逆の物語"],
   [/始まりの物語|永遠の物語|\[前編\]|\[後編\]/, "劇場版 魔法少女まどか☆マギカ［前編］始まりの物語／［後編］永遠の物語"],
   [/マギアレコード|マギレコ|Magia\s*Record/i, "マギアレコード 魔法少女まどか☆マギカ外伝"],
   [/Magia\s*Exedra|マギアエクセドラ/i, "魔法少女まどか☆マギカ Magia Exedra"],
@@ -348,8 +372,11 @@ function workTitleFor(product) {
   // A Madoka 作品名 is the source's own statement of the work and wins over
   // whatever the product name mentions.
   const work = nf(product.work);
-  if (work && MADOKA_WORK.test(work)) return canonicalWork(work) || "魔法少女まどか☆マギカ";
-  return canonicalWork(nf(product.name)) || canonicalWork(nf(product.series)) || "魔法少女まどか☆マギカ";
+  if (work && isMadoka(work)) return canonicalWork(work) || "魔法少女まどか☆マギカ";
+  const named = canonicalWork(nf(product.name)) || canonicalWork(nf(product.series));
+  if (named) return named;
+  if (MAGIA_RECORD_CHARACTER.test(compact(product.name))) return "マギアレコード 魔法少女まどか☆マギカ外伝";
+  return "魔法少女まどか☆マギカ";
 }
 
 // Flat goods. Checked against the name (and the store category), never the
@@ -366,7 +393,7 @@ const GOODS_PATTERN = new RegExp(
     "メモ(?!リアル)", "カレンダー", "購入セット", "スリッポン", "キャラファイン", "ミストグラフ", "レイヤードグラフ", "キャンバス", "チェスセット",
     "PROPLICA", "プロップリカ", "ソウルジェム", "グリーフシード", "ボイスマスコット", "ボイス付き", "スリーブ",
     "ブースター", "TCG", "等身大", "洗濯ネット", "ロールペーパー", "レターセット", "バスタオル",
-    "サイクルシリーズ", "サイクルジャージ", "グッズセット", "ねんどろいどもあ", "グラフィグ", "ペーパークラフト",
+    "サイクルシリーズ", "サイクルジャージ", "グッズセット", "グラフィグ", "ペーパークラフト",
     "パズル", "スタンド(?!.*フィギュア)", "バルーン", "ボトル", "食器", "皿", "ランチ", "傘", "扇子", "靴下", "マスク",
     "コースター", "ミラー", "ハンカチ", "手ぬぐい", "風呂敷", "プレート", "フレーム", "色紙", "複製原画", "アートボード",
   ].join("|"),
@@ -374,13 +401,15 @@ const GOODS_PATTERN = new RegExp(
 );
 const GOODS_CATEGORY = /グッズ|雑貨|アパレル|ステーショナリー|デカール|書籍|アクセサリー|ファッション/;
 
-const PLUSH_PATTERN = /ぬいぐるみ|ちびぐるみ|Fluffy\s*Puffy|プラッシュ|Plush|もちころりん|ぬいもーじゅ|めちゃもふ|めちゃでか|てちぬい/i;
+// goodsmile.com files its Huggy Doll under ぬいぐるみ but the finger puppets
+// (ポリエステル, 約11cm) under グッズ; both are plush, so the name decides first.
+const PLUSH_PATTERN = /ぬいぐるみ|ちびぐるみ|Fluffy\s*Puffy|プラッシュ|Plush|もちころりん|ぬいもーじゅ|めちゃもふ|めちゃでか|てちぬい|Huggy\s*Doll|指人形/i;
 // Plush that is really a bag charm or a cushion: not a figure, but close
 // enough to list as uncertain rather than drop silently.
 const PLUSH_ACCESSORY = /チャーム|キーホルダー|ストラップ|ポーチ|バッグ|クッション|ケース|ポシェット|リュック|ペンケース/;
 const NENDOROID_PATTERN = /ねんどろいど|ネンドロイド|Nendoroid/i;
 const MINI_PATTERN =
-  /Figuarts\s*mini|フィギュアーツ\s*mini|ぺたん娘|ぷちきゃら|トレーディングフィギュア|ちょこのせ|HELLO!\s*GOOD\s*SMILE|Q\s*posket|デフォルメ|きゅんキャラ|ソフビ|ソフトビニール|SOFT\s*VINYL|BE@RBRICK|るかっぷ|ワールドコレクタブル|ミニフィギュア|コレクションフィギュア|ガシャポン|カプセル|ガチャ|ぷちぴっと|minissimo|ころんぷてぃ|ちびっこ|ぴのこ|ぷちらま|ちょびるめ|ミニッチュ|るかっぷ|ねむらせ隊|トルソー|キューティーフィギュア|ぺたっとおすわり|Half\s*Age|Twinkle\s*Dolly|PalVerse|食玩|マスコット(?!.*ラバー)/i;
+  /Figuarts\s*mini|フィギュアーツ\s*mini|ぺたん娘|ぷちきゃら|トレーディングフィギュア|ちょこのせ|HELLO!\s*GOOD\s*SMILE|Q\s*posket|デフォルメ|きゅんキャラ|ソフビ|ソフトビニール|SOFT\s*VINYL|BE@RBRICK|るかっぷ|ワールドコレクタブル|ミニフィギュア|コレクションフィギュア|ガシャポン|カプセル|ガチャ|ぷちぴっと|minissimo|ころんぷてぃ|ちびっこ|ぴのこ|ぷちらま|ちょびるめ|ミニッチュ|るかっぷ|ねむらせ隊|Huggy\s*Good\s*Smile|トルソー|キューティーフィギュア|ぺたっとおすわり|Half\s*Age|Twinkle\s*Dolly|PalVerse|食玩|マスコット(?!.*ラバー)/i;
 const ACTION_PATTERN = /figma|S\.H\.?\s*Figuarts|フィギュアーツ|Figuarts|BUZZmod|アクションフィギュア|可動フィギュア|キューポッシュ|ACT MODE|Pop Mart|超像可動|30MP|30\s*MINUTES/i;
 const PRIZE_PATTERN = /一番くじ|プライズ|景品|EVOLVE|Serenus\s*couture|ESPRESTO|GLITTER\s*&\s*GLAMOURS|Luminasta|TENITOL|SPM|ちょこのせプレミアム/i;
 const SCALE_FIGURE_PATTERN =
@@ -408,8 +437,16 @@ function classify(product, sourceId) {
     return { grade: "MADOKA_PLUSH" };
   }
   if (GOODS_PATTERN.test(name) || GOODS_CATEGORY.test(nf(product.category))) return { exclude: "goods" };
+  // ねんどろいどもあ (parts sets) count as ねんどろいど, as the Fate, Nintendo and
+  // Pokémon importers file them.
   if (NENDOROID_PATTERN.test(label)) {
-    const subline = /ぷち|Petite|Petit/i.test(label) ? "ねんどろいどぷち" : /どーる|Doll/i.test(label) ? "ねんどろいどどーる" : "ねんどろいど";
+    const subline = /ねんどろいどもあ|Nendoroid\s*More/i.test(label)
+      ? "ねんどろいどもあ"
+      : /ぷち|Petite|Petit/i.test(label)
+        ? "ねんどろいどぷち"
+        : /どーる|Doll/i.test(label)
+          ? "ねんどろいどどーる"
+          : "ねんどろいど";
     return { grade: "NENDOROID", subline };
   }
   if (/Figuarts\s*mini|フィギュアーツ\s*mini/i.test(label)) return { grade: "MADOKA_MINI", subline: "Figuarts mini" };
@@ -566,7 +603,7 @@ async function fetchAniplex(ctx) {
   // work, or — no work anywhere — a Madoka character by full name.
   return out.filter((product) => {
     if (isMadoka(product.series, product.name, product.work)) return true;
-    if (!product.work && MADOKA_CHARACTER.test(nf(product.name))) return true;
+    if (!product.work && isMadokaCharacter(product.name)) return true;
     ctx.offWork.push(`${product.work || "(no work)"} | ${product.name}`);
     return false;
   });
@@ -666,12 +703,20 @@ async function fetchGoodSmileInfo(ctx) {
 
 // --------------------------------------------- Good Smile (goodsmile.com)
 
-// The current store. In maintenance (HTTP 503 everywhere, robots.txt too)
-// since 2026-10-23: the robots check stops it before any search request, and
-// the source is reported as refused. When the store returns, its search grid
-// is read with the same markup the Fate importer parses.
+// The current store, read with the same search markup the Fate importer
+// parses. It was in maintenance (503) from 2026-10-23; a 503 still marks the
+// source refused. The keyword search only finds products whose page names
+// the keyword: マギアレコード products ("ねんどろいど ホーリーマミ", 2026-11-23)
+// turn up under their own keyword only.
 const GSC_GLOBAL_BASE = "https://www.goodsmile.com";
+// Page size 60, as lib/effect-parts.mjs gscSearchUrl() asks for.
 const GSC_GLOBAL_PAGE_SIZE = 60;
+const GSC_GLOBAL_KEYWORDS = ["魔法少女まどか☆マギカ", "マギアレコード"];
+// Cards carry a name, a price and a picture, no category. On 2026-11-23, 23
+// of 104 cards had no figure word in the name and 2 no Madoka name; most are
+// goodsmile.info products already in the catalog and need no page. The rest
+// (7 that day) are read, at most this many a run, newest first.
+const GSC_GLOBAL_DETAIL_LIMIT = Number(process.env.MADOKA_GSC_DETAIL_LIMIT || 30);
 
 function parseGscGlobalCards(html) {
   const cards = [];
@@ -693,34 +738,110 @@ function parseGscGlobalCards(html) {
   return cards;
 }
 
+// Products moved over from goodsmile.info keep their pictures under
+// product/image/product/<date>/<goodsmile.info id>/.
+function gscLegacyId(url) {
+  return /\/product\/image\/product\/\d{8}\/(\d+)\//.exec(String(url || ""))?.[1] || null;
+}
+
+// "…トレーディング指人形（5個入）" is the sealed box of the blind-packed
+// "…トレーディング指人形" listed beside it: one product, one record.
+function gscBoxOf(name, names) {
+  const single = /^(.*?)\s*\(\s*\d+\s*個入り?\s*\)\s*$/.exec(nf(name))?.[1];
+  return single && names.has(single) ? single : null;
+}
+
+/** A goodsmile.com card and its product page (lib parsers) → the product classify() reads. */
+function gscGlobalWithDetail(card, html) {
+  const productId = card.key.replace(/^g/, "");
+  const detail = parseGscDetail(html, productId);
+  const spec = parseGscSpec(html);
+  return {
+    // The card's name stays: the page's adds the variant on sale ("…Huggy Doll 鹿目まどか/暁美ほむら：…暁美ほむら").
+    ...card,
+    work: spec.work,
+    category: spec.category || "",
+    spec: spec.spec || "",
+    is_figure: /塗装済み?(?:完成品|可動フィギュア)/.test(spec.spec || ""),
+    image: detail.images[0] || card.image,
+    gallery: detail.images,
+    price_jpy: card.price_jpy ?? detail.price_jpy,
+    release_date: detail.release_date || card.release_date,
+  };
+}
+
+async function readGscGlobalPage(url) {
+  const html = await fetchText(url);
+  // As in import_goodsmile_fate.mjs: an unslugged url can answer with a
+  // "Redirecting to" page instead of an HTTP redirect.
+  const redirect = /<title>Redirecting to (https?:\/\/[^<\s]+)/i.exec(html)?.[1];
+  return redirect ? fetchText(decodeHtml(redirect)) : html;
+}
+
 async function fetchGoodSmileGlobal(ctx) {
-  const filter = encodeURIComponent(
-    JSON.stringify({
-      search_keyword: "魔法少女まどか☆マギカ",
-      search_over18: false,
-      search_category: [],
-      search_maker: [],
-      search_title: [],
-      search_status: "0",
-      release_date_from: "",
-      release_date_to: "",
-      search_bonus: false,
-      search_exclusive: false,
-      search_sale: false,
-      search_sales_origin: false,
-      tag: [],
-    }),
-  );
   const byKey = new Map();
-  for (let offset = 0; offset <= 1200; offset += GSC_GLOBAL_PAGE_SIZE) {
-    const page = parseGscGlobalCards(
-      await fetchText(`${GSC_GLOBAL_BASE}/ja/search/list?filter=${filter}&orderBy=1&limit=${GSC_GLOBAL_PAGE_SIZE}&offset=${offset}&couponId=null&searchIndex=-1`),
-    );
-    for (const card of page) byKey.set(card.key, card);
-    if (page.length < GSC_GLOBAL_PAGE_SIZE) break;
+  for (const keyword of GSC_GLOBAL_KEYWORDS) {
+    for (let offset = 0; offset <= 1200; offset += GSC_GLOBAL_PAGE_SIZE) {
+      const page = parseGscGlobalCards(await fetchText(gscSearchUrl(offset, keyword)));
+      for (const card of page) if (!byKey.has(card.key)) byKey.set(card.key, card);
+      if (page.length < GSC_GLOBAL_PAGE_SIZE) break;
+    }
   }
   ctx.listed = byKey.size;
-  return [...byKey.values()].filter((card) => isMadoka(card.name) || MADOKA_CHARACTER.test(nf(card.name)));
+  const previous = ctx.previousById || new Map();
+  const names = new Set([...byKey.values()].map((card) => nf(card.name)));
+  const out = [];
+  const unplaced = [];
+  for (const card of byKey.values()) {
+    const single = gscBoxOf(card.name, names);
+    if (single) {
+      ctx.excluded.push({ kind: "duplicate", name: card.name, url: card.url, reason: `sealed box of ${single}` });
+      continue;
+    }
+    // A name without the work or a character ("POP UP PARADE SP くるみ割りの魔女",
+    // and the マギアレコード search's ねんどろいどこ～で 神浜コウジ of KING OF PRISM)
+    // waits for its page's 作品名; goods by their name need no page.
+    card.named = isMadoka(card.name) || isMadokaCharacter(card.name);
+    if (card.named && classify(card, "good_smile_madoka_global").exclude !== "uncertain") {
+      out.push(card);
+      continue;
+    }
+    // Read on an earlier run: its grade and work stand, no new request.
+    const stored = previous.get(`goodsmile-madoka-${card.key}`);
+    if (stored) {
+      out.push({ ...card, force_grade: stored.grade_code, line: stored.subline, series: stored.work_title, gallery: stored.gallery_image_urls });
+      continue;
+    }
+    const legacyId = gscLegacyId(card.image);
+    if (legacyId && previous.has(`goodsmile-madoka-${legacyId}`)) {
+      ctx.excluded.push({ kind: "covered", name: card.name, url: card.url, reason: `goodsmile.info record goodsmile-madoka-${legacyId}` });
+      continue;
+    }
+    unplaced.push(card);
+  }
+  // goodsmile.com ids grow: over the limit, the newest products are read first.
+  unplaced.sort((a, b) => Number(b.key.slice(1)) - Number(a.key.slice(1)));
+  let stopped = null;
+  for (const [index, card] of unplaced.entries()) {
+    if (stopped || index >= GSC_GLOBAL_DETAIL_LIMIT) {
+      ctx.excluded.push({ kind: "uncertain", name: card.name, url: card.url, reason: `product page not read (${stopped || "detail limit"})` });
+      continue;
+    }
+    try {
+      const product = gscGlobalWithDetail(card, await readGscGlobalPage(card.url));
+      if (product.work ? !isMadoka(product.work) : !card.named) {
+        ctx.offWork.push(`${product.work || "(no work)"} | ${card.name}`);
+        continue;
+      }
+      out.push(product);
+    } catch (error) {
+      // A refusal keeps what the search already gave; the rest waits for the next run.
+      if (error.refused) stopped = error.message;
+      else console.warn(`good_smile_madoka_global detail ${card.key}: ${error.message}`);
+      ctx.excluded.push({ kind: "uncertain", name: card.name, url: card.url, reason: `product page not read (${error.message})` });
+    }
+  }
+  return out;
 }
 
 // --------------------------------------------------------------- 魂ウェブ
@@ -914,7 +1035,7 @@ async function fetchBanpresto(ctx) {
   ctx.listed = listed.length;
   const total = Number(/(\d+)\s*件あります/.exec(decodeHtml(html))?.[1] || 0);
   if (total > listed.length) console.warn(`banpresto_prize_madoka_jp: listing shows ${listed.length} of ${total} items`);
-  const stored = new Map(previousMadoka.map((kit) => [kit.kit_id, kit]));
+  const stored = ctx.previousById || new Map();
   const out = [];
   for (const product of listed) {
     if (!isMadoka(product.name)) {
@@ -938,7 +1059,7 @@ async function fetchKotobukiya(ctx) {
   ctx.listed = listings.length;
   const products = [];
   for (const listing of listings) {
-    if (!isMadoka(listing.title) && !MADOKA_CHARACTER.test(nf(listing.title))) {
+    if (!isMadoka(listing.title) && !isMadokaCharacter(listing.title)) {
       ctx.offWork.push(listing.title);
       continue;
     }
@@ -1452,7 +1573,7 @@ async function fetchClaynel(ctx) {
     const data = await fetchJson(`${CLAYNEL_BASE}/products/data.html?page=${page}`);
     total = Number(data.items?.total || 0);
     for (const item of data.items?.articles || []) {
-      if (MADOKA_CHARACTER.test(nf(item.title))) candidates.push(item);
+      if (isMadokaCharacter(item.title)) candidates.push(item);
     }
   }
   ctx.listed = candidates.length;
@@ -2127,12 +2248,17 @@ function dedupe(imported, previousMadoka) {
   // goodsmile.com lists the products goodsmile.info and Aniplex+ already have,
   // but without the work or (for action figures) the scale, and at today's
   // price, so the rule above cannot match them. A goodsmile.com record is the
-  // product of the one other record with the same core name and grade.
+  // product of the one other record with the same core name and grade. A
+  // product moved over from goodsmile.info names its old id in its picture
+  // paths; that record is the product whatever the names say, also when its
+  // goodsmile.info page is gone (404) and only the stored record is left.
   const coreName = (kit) => coreKey(kit).split("|")[0];
   const live = pool.filter((kit) => !dropped.has(kit.kit_id));
   for (const kit of live) {
     if (kit.source_refs?.[0]?.source_id !== "good_smile_madoka_global" || previousIds.has(kit.kit_id)) continue;
-    const others = live.filter(
+    const legacyId = [kit.images?.box_art_url, ...(kit.gallery_image_urls || [])].map(gscLegacyId).find(Boolean);
+    const legacy = legacyId ? live.find((other) => other.kit_id === `goodsmile-madoka-${legacyId}` && !dropped.has(other.kit_id)) : null;
+    const others = legacy ? [legacy] : live.filter(
       (other) =>
         other !== kit &&
         !dropped.has(other.kit_id) &&
@@ -2182,8 +2308,8 @@ function mergeCatalog(existingKits, importedKits) {
 
 // ------------------------------------------------------------------- main
 
-async function runSource(source) {
-  const ctx = { listed: 0, offWork: [], excluded: [], error: null, refused: null };
+async function runSource(source, previousById) {
+  const ctx = { listed: 0, offWork: [], excluded: [], error: null, refused: null, previousById };
   const kits = [];
   try {
     const products = await source.fetchAll(ctx);
@@ -2207,99 +2333,114 @@ async function runSource(source) {
   return { source, ctx, kits };
 }
 
-const catalog = JSON.parse(await readFile(CATALOG_PATH, "utf8"));
-const previousMadoka = catalog.kits.filter((kit) => kit.franchise === FRANCHISE);
-let retired = new Set();
-let aliasDoc = null;
-try {
-  aliasDoc = JSON.parse(await readFile(KIT_ALIASES_PATH, "utf8"));
-  retired = retiredKitIds(aliasDoc);
-} catch {
-  // No alias file yet.
-}
-
-// Sources run side by side; each host still sees one request at a time.
-// MADOKA_ONLY=a,b runs only those sources (for trying a vendor by hand).
-const ONLY = new Set((process.env.MADOKA_ONLY || "").split(",").filter(Boolean));
-const results = await Promise.all(SOURCES.filter((source) => !ONLY.size || ONLY.has(source.source_id)).map(runSource));
-const fetchedAll = results.flatMap((result) => result.kits);
-const imported = fetchedAll.filter((kit) => !retired.has(kit.kit_id));
-const { kits: deduped, merges, folded, kept: keptPairs } = dedupe(imported, previousMadoka);
-// A page folded away on an earlier run (now an alias) still lends its source ref, price
-// and date to the record it went into, so the alias costs nothing on the next import.
-{
-  const byId = new Map([...previousMadoka, ...deduped].map((kit) => [kit.kit_id, kit]));
-  for (const kit of fetchedAll) {
-    const target = retired.has(kit.kit_id) ? byId.get(resolveAlias(aliasDoc?.aliases || {}, kit.kit_id)) : null;
-    if (target && target !== kit) absorb(target, kit);
-  }
-}
-
-const lines = [];
-const reportJson = { generated_at: new Date().toISOString(), hosts: {}, sources: [], merges, kept_duplicate_pairs: keptPairs };
-for (const [host, state] of hosts) reportJson.hosts[host] = { robots: state.robotsStatus, requests: state.requests, refused: state.refused };
-const dedupedIds = new Set(deduped.map((kit) => kit.kit_id));
-for (const { source, ctx, kits } of results) {
-  const fetched = kits.filter((kit) => dedupedIds.has(kit.kit_id));
-  const freshIds = new Set(kits.map((kit) => kit.kit_id));
-  const keptPrevious = previousMadoka.filter(
-    (kit) => kit.source_refs?.[0]?.source_id === source.source_id && !freshIds.has(kit.kit_id),
-  ).length;
-  const grades = {};
-  for (const kit of fetched) grades[kit.grade_code] = (grades[kit.grade_code] || 0) + 1;
-  const goods = ctx.excluded.filter((entry) => entry.kind === "goods").length;
-  const uncertain = ctx.excluded.filter((entry) => entry.kind === "uncertain");
-  const status = ctx.refused ? `refused (${ctx.refused})` : ctx.error ? `failed (${ctx.error})` : "ok";
-  lines.push(
-    `${source.source_id}: ${status}; listed ${ctx.listed}, fetched ${fetched.length}` +
-      `${kits.length > fetched.length ? ` (+${kits.length - fetched.length} merged into other sources)` : ""}, kept ${keptPrevious}` +
-      `, goods skipped ${goods}, uncertain ${uncertain.length}, other works ${ctx.offWork.length}` +
-      `${Object.keys(grades).length ? ` — ${Object.entries(grades).map(([grade, count]) => `${grade} ${count}`).join(", ")}` : ""}`,
-  );
-  reportJson.sources.push({
-    source_id: source.source_id,
-    status,
-    listed: ctx.listed,
-    fetched: fetched.length,
-    merged_away: kits.length - fetched.length,
-    kept: keptPrevious,
-    grades,
-    excluded: ctx.excluded,
-    other_works: ctx.offWork,
-  });
-}
-reportJson.near_duplicates = nearDuplicates(deduped);
-
-console.log("Madoka sources:");
-for (const [host, state] of hosts) console.log(`  robots ${host}: ${state.robotsStatus}; ${state.requests} requests${state.refused ? `; refused: ${state.refused}` : ""}`);
-for (const line of lines) console.log(`  ${line}`);
-if (merges.length) console.log(`  merged ${merges.length} cross-source duplicates`);
-if (keptPairs.length) console.log(`  ${keptPairs.length} duplicate pairs already in the catalog were kept: ${keptPairs.join("; ")}`);
-if (REPORT_PATH) await writeFile(REPORT_PATH, `${JSON.stringify(reportJson, null, 2)}\n`, "utf8");
-
-if (!deduped.length) {
-  console.error("No Madoka products parsed from any source; leaving the catalog untouched.");
-  process.exit(1);
-}
-
-const merged = mergeCatalog(catalog.kits, deduped);
-await writeFile(CATALOG_PATH, `${JSON.stringify({ ...catalog, updated_at: today(), kits: merged }, null, 2)}\n`, "utf8");
-if (folded.length) {
-  let firstSeen = {};
+async function main() {
+  const catalog = JSON.parse(await readFile(CATALOG_PATH, "utf8"));
+  const previousMadoka = catalog.kits.filter((kit) => kit.franchise === FRANCHISE);
+  let retired = new Set();
+  let aliasDoc = null;
   try {
-    firstSeen = JSON.parse(await readFile(FIRST_SEEN_PATH, "utf8")).dates || {};
+    aliasDoc = JSON.parse(await readFile(KIT_ALIASES_PATH, "utf8"));
+    retired = retiredKitIds(aliasDoc);
   } catch {
-    // No ledger yet: nothing was published.
+    // No alias file yet.
   }
-  const doc = aliasDoc || { schema: 1, updated_at: null, aliases: {}, excluded: {} };
-  const added = aliasPublishedFolds(doc, folded, {
-    published: (id) => Boolean(firstSeen[id]),
-    liveIds: new Set(merged.map((kit) => kit.kit_id)),
-  });
-  if (added.length) {
-    doc.updated_at = today();
-    await writeFile(KIT_ALIASES_PATH, `${JSON.stringify(doc, null, 2)}\n`, "utf8");
-    console.log(`  aliased ${added.length} published records that were folded: ${added.join("; ")}`);
+
+  // Sources run side by side; each host still sees one request at a time.
+  // MADOKA_ONLY=a,b runs only those sources (for trying a vendor by hand).
+  const ONLY = new Set((process.env.MADOKA_ONLY || "").split(",").filter(Boolean));
+  const previousById = new Map(previousMadoka.map((kit) => [kit.kit_id, kit]));
+  const results = await Promise.all(
+    SOURCES.filter((source) => !ONLY.size || ONLY.has(source.source_id)).map((source) => runSource(source, previousById)),
+  );
+  const fetchedAll = results.flatMap((result) => result.kits);
+  const imported = fetchedAll.filter((kit) => !retired.has(kit.kit_id));
+  const { kits: deduped, merges, folded, kept: keptPairs } = dedupe(imported, previousMadoka);
+  // A page folded away on an earlier run (now an alias) still lends its source ref, price
+  // and date to the record it went into, so the alias costs nothing on the next import.
+  {
+    const byId = new Map([...previousMadoka, ...deduped].map((kit) => [kit.kit_id, kit]));
+    for (const kit of fetchedAll) {
+      const target = retired.has(kit.kit_id) ? byId.get(resolveAlias(aliasDoc?.aliases || {}, kit.kit_id)) : null;
+      if (target && target !== kit) absorb(target, kit);
+    }
   }
+
+  const lines = [];
+  const reportJson = { generated_at: new Date().toISOString(), hosts: {}, sources: [], merges, kept_duplicate_pairs: keptPairs };
+  for (const [host, state] of hosts) reportJson.hosts[host] = { robots: state.robotsStatus, requests: state.requests, refused: state.refused };
+  const dedupedIds = new Set(deduped.map((kit) => kit.kit_id));
+  for (const { source, ctx, kits } of results) {
+    const fetched = kits.filter((kit) => dedupedIds.has(kit.kit_id));
+    const freshIds = new Set(kits.map((kit) => kit.kit_id));
+    const keptPrevious = previousMadoka.filter(
+      (kit) => kit.source_refs?.[0]?.source_id === source.source_id && !freshIds.has(kit.kit_id),
+    ).length;
+    const grades = {};
+    for (const kit of fetched) grades[kit.grade_code] = (grades[kit.grade_code] || 0) + 1;
+    const goods = ctx.excluded.filter((entry) => entry.kind === "goods").length;
+    const uncertain = ctx.excluded.filter((entry) => entry.kind === "uncertain");
+    const status = ctx.refused ? `refused (${ctx.refused})` : ctx.error ? `failed (${ctx.error})` : "ok";
+    lines.push(
+      `${source.source_id}: ${status}; listed ${ctx.listed}, fetched ${fetched.length}` +
+        `${kits.length > fetched.length ? ` (+${kits.length - fetched.length} merged into other sources)` : ""}, kept ${keptPrevious}` +
+        `, goods skipped ${goods}, uncertain ${uncertain.length}, other works ${ctx.offWork.length}` +
+        `${Object.keys(grades).length ? ` — ${Object.entries(grades).map(([grade, count]) => `${grade} ${count}`).join(", ")}` : ""}`,
+    );
+    reportJson.sources.push({
+      source_id: source.source_id,
+      status,
+      listed: ctx.listed,
+      fetched: fetched.length,
+      merged_away: kits.length - fetched.length,
+      kept: keptPrevious,
+      grades,
+      excluded: ctx.excluded,
+      other_works: ctx.offWork,
+    });
+  }
+  reportJson.near_duplicates = nearDuplicates(deduped);
+
+  console.log("Madoka sources:");
+  for (const [host, state] of hosts) console.log(`  robots ${host}: ${state.robotsStatus}; ${state.requests} requests${state.refused ? `; refused: ${state.refused}` : ""}`);
+  for (const line of lines) console.log(`  ${line}`);
+  if (merges.length) console.log(`  merged ${merges.length} cross-source duplicates`);
+  if (keptPairs.length) console.log(`  ${keptPairs.length} duplicate pairs already in the catalog were kept: ${keptPairs.join("; ")}`);
+  if (REPORT_PATH) await writeFile(REPORT_PATH, `${JSON.stringify(reportJson, null, 2)}\n`, "utf8");
+
+  if (!deduped.length) {
+    console.error("No Madoka products parsed from any source; leaving the catalog untouched.");
+    process.exit(1);
+  }
+
+  const merged = mergeCatalog(catalog.kits, deduped);
+  await writeFile(CATALOG_PATH, `${JSON.stringify({ ...catalog, updated_at: today(), kits: merged }, null, 2)}\n`, "utf8");
+  if (folded.length) {
+    let firstSeen = {};
+    try {
+      firstSeen = JSON.parse(await readFile(FIRST_SEEN_PATH, "utf8")).dates || {};
+    } catch {
+      // No ledger yet: nothing was published.
+    }
+    const doc = aliasDoc || { schema: 1, updated_at: null, aliases: {}, excluded: {} };
+    const added = aliasPublishedFolds(doc, folded, {
+      published: (id) => Boolean(firstSeen[id]),
+      liveIds: new Set(merged.map((kit) => kit.kit_id)),
+    });
+    if (added.length) {
+      doc.updated_at = today();
+      await writeFile(KIT_ALIASES_PATH, `${JSON.stringify(doc, null, 2)}\n`, "utf8");
+      console.log(`  aliased ${added.length} published records that were folded: ${added.join("; ")}`);
+    }
+  }
+  console.log(`Madoka: imported ${deduped.length} records; catalog now ${merged.filter((kit) => kit.franchise === FRANCHISE).length} Madoka records.`);
 }
-console.log(`Madoka: imported ${deduped.length} records; catalog now ${merged.filter((kit) => kit.franchise === FRANCHISE).length} Madoka records.`);
+
+// Tests import the rules below without running the importer.
+export { classify, dedupe, gscBoxOf, gscGlobalWithDetail, gscLegacyId, isMadoka, isMadokaCharacter, workTitleFor };
+
+if (/(^|[\\/])import_madoka_sources\.mjs$/.test(process.argv[1] || "")) {
+  main().catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
+}
