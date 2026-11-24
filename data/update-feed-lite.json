@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23",
-  "generated_at": "2026-11-23T11:19:04.581Z",
+  "updated_at": "2026-11-24",
+  "generated_at": "2026-11-24T04:35:31.158Z",
   "watch_tags": [
     "seed",
     "00"
@@ -20,11 +20,497 @@
     "effects"
   ],
   "source_health": {
-    "generated_at": "2026-11-23T11:18:34.429Z",
+    "generated_at": "2026-11-24T04:35:00.935Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
+    {
+      "date": "2026-11-24",
+      "generated_at": "2026-11-24T04:35:31.158Z",
+      "total_before": 42064,
+      "total_after": 42070,
+      "added_count": 6,
+      "changed_count": 6,
+      "removed_count": 0,
+      "watched_count": 0,
+      "merged_count": 0,
+      "backfilled_count": 0,
+      "renamed_count": 0,
+      "premium_bandai_count": 0,
+      "bbx_count": 0,
+      "franchise_counts": {
+        "lego": 5,
+        "pokemon": 5,
+        "madoka": 2
+      },
+      "reason_counts": {
+        "new": 6,
+        "source": 4,
+        "image": 2,
+        "name": 1
+      },
+      "interest_tags": [
+        "lego",
+        "pokemon",
+        "madoka"
+      ],
+      "watch_tags": [],
+      "added": [
+        {
+          "kit_id": "academy-2202",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "몬콜레",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 포코피아 몬콜레 MS 메타몽 변신(라프라스)",
+            "zh": "포켓몬 포코피아 몬콜레 MS 메타몽 변신(라프라스)",
+            "ko": "포켓몬 포코피아 몬콜레 MS 메타몽 변신(라프라스)",
+            "en": "포켓몬 포코피아 몬콜레 MS 메타몽 변신(라프라스)"
+          },
+          "release_date": "2026-11",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "academy_kr"
+          ],
+          "source_urls": [
+            "https://academy.co.kr/product/detail.html?product_no=2202"
+          ]
+        },
+        {
+          "kit_id": "academy-2203",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "몬콜레",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "포켓몬 포코피아 몬콜레 MS 잠만보(이끼투성이)",
+            "zh": "포켓몬 포코피아 몬콜레 MS 잠만보(이끼투성이)",
+            "ko": "포켓몬 포코피아 몬콜레 MS 잠만보(이끼투성이)",
+            "en": "포켓몬 포코피아 몬콜레 MS 잠만보(이끼투성이)"
+          },
+          "release_date": "2026-11",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "academy_kr"
+          ],
+          "source_urls": [
+            "https://academy.co.kr/product/detail.html?product_no=2203"
+          ]
+        },
+        {
+          "kit_id": "lego-6677056-1",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "Promotional",
+          "series_key": "lego_promotional",
+          "series_labels": {
+            "zh": "赠品",
+            "en": "Promotional",
+            "ja": "Promotional",
+            "ko": "프로모션"
+          },
+          "names": {
+            "ja": "Gryffindor",
+            "zh": "Gryffindor",
+            "ko": "Gryffindor",
+            "en": "Gryffindor"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/6677056-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-6677056-2",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "Promotional",
+          "series_key": "lego_promotional",
+          "series_labels": {
+            "zh": "赠品",
+            "en": "Promotional",
+            "ja": "Promotional",
+            "ko": "프로모션"
+          },
+          "names": {
+            "ja": "Hufflepuff",
+            "zh": "Hufflepuff",
+            "ko": "Hufflepuff",
+            "en": "Hufflepuff"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/6677056-2/"
+          ]
+        },
+        {
+          "kit_id": "lego-6677056-4",
+          "change_type": "added",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "Promotional",
+          "series_key": "lego_promotional",
+          "series_labels": {
+            "zh": "赠品",
+            "en": "Promotional",
+            "ja": "Promotional",
+            "ko": "프로모션"
+          },
+          "names": {
+            "ja": "Slytherin",
+            "zh": "Slytherin",
+            "ko": "Slytherin",
+            "en": "Slytherin"
+          },
+          "release_date": "2026",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/6677056-4/"
+          ]
+        },
+        {
+          "kit_id": "academy-2205",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_FIGURE",
+          "subline": "완구",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "81393 포켓몬 크레인 2026 Ver",
+            "zh": "81393 포켓몬 크레인 2026 Ver",
+            "ko": "81393 포켓몬 크레인 2026 Ver",
+            "en": "81393 포켓몬 크레인 2026 Ver"
+          },
+          "release_date": null,
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "academy_kr"
+          ],
+          "source_urls": [
+            "https://academy.co.kr/product/detail.html?product_no=2205"
+          ]
+        }
+      ],
+      "changed": [
+        {
+          "kit_id": "lego-6603984-1",
+          "change_type": "changed",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "LEGO Brand Store",
+          "series_key": "lego_lego_brand_store",
+          "series_labels": {
+            "zh": "乐高品牌零售店",
+            "en": "LEGO Brand Store",
+            "ja": "LEGO Brand Store",
+            "ko": "레고 스토어"
+          },
+          "names": {
+            "ja": "Canada Tennis",
+            "zh": "Canada Tennis",
+            "ko": "Canada Tennis",
+            "en": "Canada Tennis"
+          },
+          "release_date": "2025",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/6603984-1/"
+          ]
+        },
+        {
+          "kit_id": "lego-42130-1",
+          "change_type": "changed",
+          "franchise": "lego",
+          "grade_code": "LEGO_SET",
+          "subline": "Technic",
+          "series_key": "lego_technic",
+          "series_labels": {
+            "zh": "机械组",
+            "en": "Technic",
+            "ja": "Technic",
+            "ko": "테크닉"
+          },
+          "names": {
+            "ja": "BMW Motorrad M 1000 RR",
+            "zh": "BMW Motorrad M 1000 RR",
+            "ko": "BMW Motorrad M 1000 RR",
+            "en": "BMW Motorrad M 1000 RR"
+          },
+          "release_date": "2022",
+          "price_jpy": null,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "lego"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "rebrickable_lego"
+          ],
+          "source_urls": [
+            "https://rebrickable.com/sets/42130-1/"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329316321",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "273 ぬいぐるみ ポケモン fit タネボー",
+            "zh": "273 毛绒玩偶 宝可梦 fit 橡实果",
+            "ko": "273 봉제인형 Pokémon fit 도토리",
+            "en": "273 ぬいぐるみ Pokémon fit タネボー"
+          },
+          "release_date": null,
+          "price_jpy": 1320,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "name"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329316321.html"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g35143",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "madoka_rebellion",
+          "series_labels": {
+            "zh": "叛逆的物语",
+            "en": "Rebellion",
+            "ja": "叛逆の物語",
+            "ko": "반역의 이야기"
+          },
+          "names": {
+            "ja": "POP UP PARADE SP くるみ割りの魔女",
+            "zh": "POP UP PARADE SP くるみ割りの魔女",
+            "ko": "POP UP PARADE SP くるみ割りの魔女",
+            "en": "POP UP PARADE SP くるみ割りの魔女"
+          },
+          "release_date": null,
+          "price_jpy": 13800,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image",
+            "source"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/35143"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4904810951469",
+          "change_type": "changed",
+          "franchise": "pokemon",
+          "grade_code": "POKE_MONCOLLE",
+          "subline": "モンコレ",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "モンコレ MS-50 ニンフィア",
+            "zh": "宝可梦 Moncolle 小手办 MS-50 仙子伊布",
+            "ko": "몬콜레 MS-50 님피아",
+            "en": "モンコレ MS-50 ニンフィア"
+          },
+          "release_date": null,
+          "price_jpy": 715,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "source"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4904810951469.html"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g1626",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Good Smile Company",
+          "series_key": "madoka_tv",
+          "series_labels": {
+            "zh": "魔法少女小圆",
+            "en": "Madoka Magica",
+            "ja": "まどか☆マギカ",
+            "ko": "마도카 마기카"
+          },
+          "names": {
+            "ja": "暁美ほむら you are not alone.",
+            "zh": "晓美焰 you are not alone.",
+            "ko": "暁美ほむら you are not alone.",
+            "en": "暁美ほむら you are not alone."
+          },
+          "release_date": null,
+          "price_jpy": 9428,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/1626"
+          ]
+        }
+      ],
+      "removed": [],
+      "watched": [],
+      "merged": [],
+      "backfilled": [],
+      "renamed": []
+    },
     {
       "date": "2026-11-23",
       "generated_at": "2026-11-23T11:19:04.581Z",
@@ -48356,1176 +48842,6 @@
           ],
           "source_urls": [
             "https://p-bandai.jp/item/item-1000259131/"
-          ]
-        }
-      ],
-      "merged": [],
-      "backfilled": [],
-      "renamed": []
-    },
-    {
-      "date": "2026-10-16",
-      "generated_at": "2026-10-15T21:57:24.623Z",
-      "total_before": 8803,
-      "total_after": 8808,
-      "added_count": 5,
-      "changed_count": 35,
-      "removed_count": 0,
-      "watched_count": 3,
-      "premium_bandai_count": 0,
-      "bbx_count": 5,
-      "franchise_counts": {
-        "armored_core": 1,
-        "beyblade": 5,
-        "pokemon": 34
-      },
-      "reason_counts": {
-        "new": 5,
-        "name": 12,
-        "image": 34,
-        "source": 11
-      },
-      "interest_tags": [
-        "armored_core",
-        "beyblade",
-        "bbx",
-        "bbx_bx",
-        "beyblade_bx",
-        "bbx_cx",
-        "beyblade_cx",
-        "bbx_limited",
-        "beyblade_limited",
-        "00",
-        "bbx_ux",
-        "pokemon"
-      ],
-      "watch_tags": [
-        "00"
-      ],
-      "added": [
-        {
-          "kit_id": "beyblade-x-cx00-vv",
-          "change_type": "added",
-          "franchise": "beyblade",
-          "grade_code": "BEYBLADE_X",
-          "subline": "BEYBLADE X Booster",
-          "series_key": "beyblade_limited",
-          "series_labels": {
-            "zh": "限定",
-            "en": "Limited",
-            "ja": "限定",
-            "ko": "한정"
-          },
-          "names": {
-            "ja": "CX-00 【アプリ・イベント限定】 ワルキューレボルトS4-70V ガンメタVer.",
-            "zh": "CX-00 【App/活动限定】 女武神雷霆S4-70V 枪灰色Ver.",
-            "ko": "CX-00 【앱·이벤트 한정】 발키리볼트 S4-70V 건메탈 Ver.",
-            "en": "CX-00 [アプリ イベントLimited] ワルキューレボルトS4-70V ガンメタVer."
-          },
-          "release_date": "2026-11-05",
-          "price_jpy": 1800,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "beyblade",
-            "bbx",
-            "bbx_cx",
-            "bbx_limited",
-            "beyblade_limited",
-            "00"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "takara_tomy_beyblade_x_jp"
-          ],
-          "source_urls": [
-            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-vv.html",
-            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
-          ]
-        },
-        {
-          "kit_id": "beyblade-x-bx-00-143",
-          "change_type": "added",
-          "franchise": "beyblade",
-          "grade_code": "BEYBLADE_X",
-          "subline": "BEYBLADE X Booster",
-          "series_key": "beyblade_limited",
-          "series_labels": {
-            "zh": "限定",
-            "en": "Limited",
-            "ja": "限定",
-            "ko": "한정"
-          },
-          "names": {
-            "ja": "BX-00 【B4ストア限定】 ドランソード3-60F バージョン2.0",
-            "zh": "BX-00 【B4ストア限定】 ドランソード3-60F バージョン2.0",
-            "ko": "BX-00 【B4ストア한정】 ドランソード3-60F バージョン2.0",
-            "en": "BX-00 [B4ストアLimited] ドランソード3-60F バージョン2.0"
-          },
-          "release_date": "2026-08-08",
-          "price_jpy": 1600,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "beyblade",
-            "bbx",
-            "bbx_bx",
-            "bbx_limited",
-            "beyblade_limited",
-            "00"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "takara_tomy_beyblade_x_jp"
-          ],
-          "source_urls": [
-            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
-          ]
-        },
-        {
-          "kit_id": "acvi-4934054083251",
-          "change_type": "added",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "V.I.シリーズ",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "ミラージュ C02-URANUS ウラヌス",
-            "zh": "幻影 C02-URANUS 天王星",
-            "ko": "미라주 C02-URANUS 우라노스",
-            "en": "ミラージュ C02-URANUS ウラヌス"
-          },
-          "release_date": "2027-03",
-          "price_jpy": 9900,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054083251/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
-          ]
-        },
-        {
-          "kit_id": "beyblade-x-bx54",
-          "change_type": "added",
-          "franchise": "beyblade",
-          "grade_code": "BEYBLADE_X",
-          "subline": "BEYBLADE X Booster",
-          "series_key": "beyblade_bx",
-          "series_labels": {
-            "zh": "BX",
-            "en": "BX",
-            "ja": "BX",
-            "ko": "BX"
-          },
-          "names": {
-            "ja": "BX-54 ジークスペリオン0-70LP",
-            "zh": "BX-54 凯旋超神0-70LP",
-            "ko": "BX-54 지크스페리온 0-70LP",
-            "en": "BX-54 ジークスペリオン0-70LP"
-          },
-          "release_date": "2026-11-21",
-          "price_jpy": 1600,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "beyblade",
-            "bbx",
-            "bbx_bx",
-            "beyblade_bx"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "takara_tomy_beyblade_x_jp"
-          ],
-          "source_urls": [
-            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/bx54.html",
-            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
-          ]
-        },
-        {
-          "kit_id": "beyblade-x-cx20",
-          "change_type": "added",
-          "franchise": "beyblade",
-          "grade_code": "BEYBLADE_X",
-          "subline": "BEYBLADE X Set",
-          "series_key": "beyblade_cx",
-          "series_labels": {
-            "zh": "CX",
-            "en": "CX",
-            "ja": "CX",
-            "ko": "CX"
-          },
-          "names": {
-            "ja": "CX-20 カスタマイズセットC",
-            "zh": "CX-20 改装套组C",
-            "ko": "CX-20 커스터마이즈 세트C",
-            "en": "CX-20 カスタマイズSetC"
-          },
-          "release_date": "2026-11-21",
-          "price_jpy": 6600,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "beyblade",
-            "bbx",
-            "bbx_cx",
-            "beyblade_cx"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "takara_tomy_beyblade_x_jp"
-          ],
-          "source_urls": [
-            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx20.html",
-            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
-          ]
-        }
-      ],
-      "changed": [
-        {
-          "kit_id": "beyblade-x-ux00-ap-red",
-          "change_type": "changed",
-          "franchise": "beyblade",
-          "grade_code": "BEYBLADE_X",
-          "subline": "BEYBLADE X Booster",
-          "series_key": "beyblade_limited",
-          "series_labels": {
-            "zh": "限定",
-            "en": "Limited",
-            "ja": "限定",
-            "ko": "한정"
-          },
-          "names": {
-            "ja": "UX-00 【アプリ・イベント限定】 エアロペガサス3-70A レッドVer.",
-            "zh": "UX-00 【App/活动限定】 空力天马3-70A 红色Ver.",
-            "ko": "UX-00 【앱·이벤트 한정】 에어로페가수스 3-70A 레드 Ver.",
-            "en": "UX-00 [アプリ イベントLimited] エアロペガサス3-70A レッドVer."
-          },
-          "release_date": "2026-02-21",
-          "price_jpy": 1600,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "beyblade",
-            "bbx",
-            "bbx_ux",
-            "bbx_limited",
-            "beyblade_limited",
-            "00"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "takara_tomy_beyblade_x_jp"
-          ],
-          "source_urls": [
-            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/ux00-ap_red.html",
-            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-126",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "あくテラスタル リザードン",
-            "zh": "恶太晶化 喷火龙",
-            "ko": "악 테라스탈 리자몽",
-            "en": "あくテラスタル リザードン"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "name",
-            "image",
-            "source"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/terastal_lizardon/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-129",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "かくとうテラスタル コライドン",
-            "zh": "格斗太晶化 故勒顿",
-            "ko": "격투 테라스탈 코라이돈",
-            "en": "かくとうテラスタル コライドン"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "name",
-            "image",
-            "source"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/terastal_koraidon/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-133",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ゲンシカイオーガ",
-            "zh": "原始盖欧卡",
-            "ko": "원시가이오가",
-            "en": "ゲンシカイオーガ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "name",
-            "image",
-            "source"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/primal_kyogre/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-134",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ゲンシグラードン",
-            "zh": "原始固拉多",
-            "ko": "원시그란돈",
-            "en": "ゲンシグラードン"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "name",
-            "image",
-            "source"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/primal_groudon/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-131",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "コイキング・ ギャラドスセット",
-            "zh": "鲤鱼王·暴鲤龙套装",
-            "ko": "잉어킹·갸라도스 세트",
-            "en": "コイキング ギャラドスSet"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "name",
-            "image",
-            "source"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/magikarp_gyarados_set/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-128",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ゴーストテラスタル ソウブレイズ",
-            "zh": "幽灵太晶化 苍炎刃鬼",
-            "ko": "고스트 테라스탈 파라블레이즈",
-            "en": "ゴーストテラスタル ソウブレイズ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "name",
-            "image",
-            "source"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/terastal_soublades/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-132",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ストリンダーセット",
-            "zh": "颤弦蝾螈套装",
-            "ko": "스트린더 세트",
-            "en": "ストリンダーSet"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "name",
-            "image",
-            "source"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/toxtricity_set/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-135",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "テラパゴス （テラスタルフォルム）",
-            "zh": "太乐巴戈斯 (太晶形态)",
-            "ko": "테라파고스 (테라스탈폼)",
-            "en": "テラパゴス (テラスタルフォルム)"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "name",
-            "image",
-            "source"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/terastal_terapagos/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-130",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "でんきテラスタル ミライドン",
-            "zh": "电太晶化 密勒顿",
-            "ko": "전기 테라스탈 미라이돈",
-            "en": "でんきテラスタル ミライドン"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "name",
-            "image",
-            "source"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/terastal_miraidon/"
-          ]
-        },
-        {
-          "kit_id": "moncolle-mc-125",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKE_MONCOLLE",
-          "subline": "モンコレ",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ひこうテラスタル ピカチュウ",
-            "zh": "飞行太晶化 皮卡丘",
-            "ko": "비행 테라스탈 피카츄",
-            "en": "ひこうテラスタル ピカチュウ"
-          },
-          "release_date": null,
-          "price_jpy": null,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "name",
-            "image",
-            "source"
-          ],
-          "source_ids": [
-            "takara_tomy_pokemon_jp"
-          ],
-          "source_urls": [
-            "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/terastal_pikachu/"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-4237",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 52 セレクトシリーズ ギャラドス",
-            "zh": "宝可梦拼装模型收藏 52 精选系列 暴鲤龙",
-            "ko": "포켓몬 프라모 컬렉션 52 셀렉트 시리즈 갸라도스",
-            "en": "Pokémon PLAMO COLLECTION 52 SELECT SERIES Gyarados"
-          },
-          "release_date": null,
-          "price_jpy": 1300,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_4237/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5028",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション No.54 セレクトシリーズ グラードン",
-            "zh": "宝可梦拼装模型收藏 No.54 精选系列 固拉多",
-            "ko": "포켓몬 프라모 컬렉션 No.54 셀렉트 시리즈 그란돈",
-            "en": "Pokémon PLAMO COLLECTION No.54 SELECT SERIES Groudon"
-          },
-          "release_date": null,
-          "price_jpy": 1650,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5028/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5411",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 55 セレクトシリーズ ハッサム",
-            "zh": "宝可梦拼装模型收藏 55 精选系列 巨钳螳螂",
-            "ko": "포켓몬 프라모 컬렉션 55 셀렉트 시리즈 핫삼",
-            "en": "Pokémon PLAMO COLLECTION 55 SELECT SERIES Scizor"
-          },
-          "release_date": null,
-          "price_jpy": 1400,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5411/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5467",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 56 セレクトシリーズ マスカーニャ",
-            "zh": "宝可梦拼装模型收藏 56 精选系列 魔幻假面喵",
-            "ko": "포켓몬 프라모 컬렉션 56 셀렉트 시리즈 마스카나",
-            "en": "Pokémon PLAMO COLLECTION 56 SELECT SERIES Meowscarada"
-          },
-          "release_date": null,
-          "price_jpy": 1600,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5467/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5497",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 57 セレクトシリーズ ソウブレイズ",
-            "zh": "宝可梦拼装模型收藏 57 精选系列 苍炎刃鬼",
-            "ko": "포켓몬 프라모 컬렉션 57 셀렉트 시리즈 파라블레이즈",
-            "en": "Pokémon PLAMO COLLECTION 57 SELECT SERIES Ceruledge"
-          },
-          "release_date": null,
-          "price_jpy": 1700,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5497/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5568",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 58 セレクトシリーズ グレンアルマ",
-            "zh": "宝可梦拼装模型收藏 58 精选系列 红莲铠骑",
-            "ko": "포켓몬 프라모 컬렉션 58 셀렉트 시리즈 카디나르마",
-            "en": "Pokémon PLAMO COLLECTION 58 SELECT SERIES Armarouge"
-          },
-          "release_date": null,
-          "price_jpy": 1700,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5568/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5958",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 59 セレクトシリーズ ミライドン",
-            "zh": "宝可梦拼装模型收藏 59 精选系列 密勒顿",
-            "ko": "포켓몬 프라모 컬렉션 59 셀렉트 시리즈 미라이돈",
-            "en": "Pokémon PLAMO COLLECTION 59 SELECT SERIES Miraidon"
-          },
-          "release_date": null,
-          "price_jpy": 2100,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5958/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-5984",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 60 セレクトシリーズ コライドン",
-            "zh": "宝可梦拼装模型收藏 60 精选系列 故勒顿",
-            "ko": "포켓몬 프라모 컬렉션 60 셀렉트 시리즈 코라이돈",
-            "en": "Pokémon PLAMO COLLECTION 60 SELECT SERIES Koraidon"
-          },
-          "release_date": null,
-          "price_jpy": 2100,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_5984/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        },
-        {
-          "kit_id": "pokepla-01-6780",
-          "change_type": "changed",
-          "franchise": "pokemon",
-          "grade_code": "POKEPLA",
-          "subline": "Pokemon PLAMO COLLECTION SELECT SERIES",
-          "series_key": "pokemon",
-          "series_labels": {
-            "zh": "宝可梦",
-            "en": "Pokemon",
-            "ja": "ポケモン",
-            "ko": "포켓몬"
-          },
-          "names": {
-            "ja": "ポケモンプラモコレクション 61 セレクトシリーズ メガレックウザ",
-            "zh": "宝可梦拼装模型收藏 61 精选系列 超级烈空坐",
-            "ko": "포켓몬 프라모 컬렉션 61 셀렉트 시리즈 메가레쿠쟈",
-            "en": "Pokémon PLAMO COLLECTION 61 SELECT SERIES Mega Rayquaza"
-          },
-          "release_date": null,
-          "price_jpy": 2700,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "pokemon"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "bandai_hobby_pokemon_global"
-          ],
-          "source_urls": [
-            "https://global.bandai-hobby.net/en-others/item/01_6780/",
-            "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        }
-      ],
-      "removed": [],
-      "watched": [
-        {
-          "kit_id": "beyblade-x-cx00-vv",
-          "change_type": "added",
-          "franchise": "beyblade",
-          "grade_code": "BEYBLADE_X",
-          "subline": "BEYBLADE X Booster",
-          "series_key": "beyblade_limited",
-          "series_labels": {
-            "zh": "限定",
-            "en": "Limited",
-            "ja": "限定",
-            "ko": "한정"
-          },
-          "names": {
-            "ja": "CX-00 【アプリ・イベント限定】 ワルキューレボルトS4-70V ガンメタVer.",
-            "zh": "CX-00 【App/活动限定】 女武神雷霆S4-70V 枪灰色Ver.",
-            "ko": "CX-00 【앱·이벤트 한정】 발키리볼트 S4-70V 건메탈 Ver.",
-            "en": "CX-00 [アプリ イベントLimited] ワルキューレボルトS4-70V ガンメタVer."
-          },
-          "release_date": "2026-11-05",
-          "price_jpy": 1800,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "beyblade",
-            "bbx",
-            "bbx_cx",
-            "bbx_limited",
-            "beyblade_limited",
-            "00"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "takara_tomy_beyblade_x_jp"
-          ],
-          "source_urls": [
-            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/cx00-vv.html",
-            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
-          ]
-        },
-        {
-          "kit_id": "beyblade-x-bx-00-143",
-          "change_type": "added",
-          "franchise": "beyblade",
-          "grade_code": "BEYBLADE_X",
-          "subline": "BEYBLADE X Booster",
-          "series_key": "beyblade_limited",
-          "series_labels": {
-            "zh": "限定",
-            "en": "Limited",
-            "ja": "限定",
-            "ko": "한정"
-          },
-          "names": {
-            "ja": "BX-00 【B4ストア限定】 ドランソード3-60F バージョン2.0",
-            "zh": "BX-00 【B4ストア限定】 ドランソード3-60F バージョン2.0",
-            "ko": "BX-00 【B4ストア한정】 ドランソード3-60F バージョン2.0",
-            "en": "BX-00 [B4ストアLimited] ドランソード3-60F バージョン2.0"
-          },
-          "release_date": "2026-08-08",
-          "price_jpy": 1600,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "beyblade",
-            "bbx",
-            "bbx_bx",
-            "bbx_limited",
-            "beyblade_limited",
-            "00"
-          ],
-          "change_reasons": [
-            "new"
-          ],
-          "source_ids": [
-            "takara_tomy_beyblade_x_jp"
-          ],
-          "source_urls": [
-            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
-          ]
-        },
-        {
-          "kit_id": "beyblade-x-ux00-ap-red",
-          "change_type": "changed",
-          "franchise": "beyblade",
-          "grade_code": "BEYBLADE_X",
-          "subline": "BEYBLADE X Booster",
-          "series_key": "beyblade_limited",
-          "series_labels": {
-            "zh": "限定",
-            "en": "Limited",
-            "ja": "限定",
-            "ko": "한정"
-          },
-          "names": {
-            "ja": "UX-00 【アプリ・イベント限定】 エアロペガサス3-70A レッドVer.",
-            "zh": "UX-00 【App/活动限定】 空力天马3-70A 红色Ver.",
-            "ko": "UX-00 【앱·이벤트 한정】 에어로페가수스 3-70A 레드 Ver.",
-            "en": "UX-00 [アプリ イベントLimited] エアロペガサス3-70A レッドVer."
-          },
-          "release_date": "2026-02-21",
-          "price_jpy": 1600,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [
-            "00"
-          ],
-          "interest_tags": [
-            "beyblade",
-            "bbx",
-            "bbx_ux",
-            "bbx_limited",
-            "beyblade_limited",
-            "00"
-          ],
-          "change_reasons": [
-            "name"
-          ],
-          "source_ids": [
-            "takara_tomy_beyblade_x_jp"
-          ],
-          "source_urls": [
-            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/ux00-ap_red.html",
-            "https://beyblade.takaratomy.co.jp/beyblade-x/lineup/"
           ]
         }
       ],
