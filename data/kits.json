@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-24",
+  "updated_at": "2026-11-25",
   "scope": "Individual model kit and official collectible catalog imported from Japanese official BANDAI SPIRITS, Bandai Candy, Bandai Gashapon, Bandai Hobby, Tamashii Web, Kotobukiya, and Takara Tomy sources. Covers Gundam, Armored Core, Pokemon, and BEYBLADE X records. Records are needs_review until field-level human checks are complete.",
   "kits": [
     {
@@ -253531,8 +253531,8 @@
         "https://tamashiiweb.com/storage/images/products/imported/item_0000015386_BsC75K87_09.jpg",
         "https://tamashiiweb.com/storage/images/products/imported/item_0000015386_BsC75K87_10.jpg"
       ],
-      "universe": "Accessory",
-      "work_title": "Option",
+      "universe": "UC",
+      "work_title": "Z",
       "release_date": "2025-10",
       "price_jpy": 9900,
       "is_limited": true,
@@ -253575,13 +253575,13 @@
         "ko": "하이퍼 메가 런처 옵션 세트"
       },
       "series": {
-        "key": "option",
-        "sort": 900,
+        "key": "zeta",
+        "sort": 110,
         "labels": {
-          "zh": "配件",
-          "en": "Option",
-          "ja": "オプション",
-          "ko": "옵션"
+          "zh": "Z",
+          "en": "Z",
+          "ja": "Z",
+          "ko": "Z"
         }
       },
       "search_zh": [
@@ -798483,12 +798483,6 @@
         "lego",
         "pieces:38"
       ],
-      "names": {
-        "ja": "Gryffindor",
-        "en": "Gryffindor",
-        "zh": "Gryffindor",
-        "ko": "Gryffindor"
-      },
       "series": {
         "key": "lego_promotional",
         "sort": 600,
@@ -798498,6 +798492,12 @@
           "ja": "Promotional",
           "ko": "프로모션"
         }
+      },
+      "names": {
+        "ja": "Gryffindor",
+        "en": "Gryffindor",
+        "zh": "Gryffindor",
+        "ko": "Gryffindor"
       }
     },
     {
@@ -798536,11 +798536,64 @@
         "lego",
         "pieces:29"
       ],
+      "series": {
+        "key": "lego_promotional",
+        "sort": 600,
+        "labels": {
+          "zh": "赠品",
+          "en": "Promotional",
+          "ja": "Promotional",
+          "ko": "프로모션"
+        }
+      },
       "names": {
         "ja": "Hufflepuff",
         "en": "Hufflepuff",
         "zh": "Hufflepuff",
         "ko": "Hufflepuff"
+      }
+    },
+    {
+      "kit_id": "lego-6677056-3",
+      "franchise": "lego",
+      "grade_code": "LEGO_SET",
+      "subline": "Promotional",
+      "number": "6677056-3",
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://cdn.rebrickable.com/media/sets/6677056-3.jpg",
+        "box_art_source_id": "rebrickable_lego"
+      },
+      "universe": "LEGO",
+      "work_title": "Promotional",
+      "release_date": "2026",
+      "price_jpy": null,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://rebrickable.com/sets/6677056-3/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "rebrickable_lego",
+          "url": "https://rebrickable.com/sets/6677056-3/",
+          "fields": [
+            "names",
+            "images",
+            "release_date"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "lego",
+        "pieces:24"
+      ],
+      "names": {
+        "ja": "Ravenclaw",
+        "en": "Ravenclaw",
+        "zh": "Ravenclaw",
+        "ko": "Ravenclaw"
       },
       "series": {
         "key": "lego_promotional",
@@ -798589,12 +798642,6 @@
         "lego",
         "pieces:23"
       ],
-      "names": {
-        "ja": "Slytherin",
-        "en": "Slytherin",
-        "zh": "Slytherin",
-        "ko": "Slytherin"
-      },
       "series": {
         "key": "lego_promotional",
         "sort": 600,
@@ -798604,6 +798651,12 @@
           "ja": "Promotional",
           "ko": "프로모션"
         }
+      },
+      "names": {
+        "ja": "Slytherin",
+        "en": "Slytherin",
+        "zh": "Slytherin",
+        "ko": "Slytherin"
       }
     },
     {
@@ -876493,7 +876546,7 @@
       ],
       "tags": [
         "lego",
-        "pieces:43"
+        "pieces:45"
       ],
       "series": {
         "key": "lego_lego_brand_store",
@@ -2251953,6 +2252006,87 @@
       }
     },
     {
+      "kit_id": "banpresto-madoka-2633404",
+      "franchise": "madoka",
+      "grade_code": "MADOKA_PLUSH",
+      "subline": "バンプレスト景品",
+      "number": null,
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2026.12/bae/2633404_a.jpg/250w_250h.jpg",
+        "box_art_source_id": "banpresto_prize_madoka_jp"
+      },
+      "gallery_image_urls": [
+        "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2026.12/bae/2633404_a.jpg/250w_250h.jpg"
+      ],
+      "universe": "Madoka",
+      "work_title": "Rebellion",
+      "release_date": "2026-12-03",
+      "price_jpy": null,
+      "is_limited": true,
+      "data_status": "verified",
+      "source_urls": [
+        "https://bsp-prize.jp/item/2633404/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "banpresto_prize_madoka_jp",
+          "url": "https://bsp-prize.jp/item/2633404/",
+          "fields": [
+            "names",
+            "images",
+            "grade_code",
+            "release_date",
+            "price_jpy",
+            "work_title"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "madoka",
+        "banpresto",
+        "prize",
+        "madoka_plush"
+      ],
+      "notes": "Imported from the Banpresto prize site (魔法少女まどか☆マギカ シリーズ title).",
+      "series": {
+        "key": "madoka_rebellion",
+        "sort": 441,
+        "labels": {
+          "zh": "叛逆的物语",
+          "en": "Rebellion",
+          "ja": "叛逆の物語",
+          "ko": "반역의 이야기"
+        }
+      },
+      "search_zh": [
+        "魔圆",
+        "魔法少女小圓",
+        "魔法少女まどかマギカ",
+        "まどマギ",
+        "Madoka Magica",
+        "madomagi",
+        "叛逆的物語",
+        "QB",
+        "Q比",
+        "孵化者",
+        "淫兽",
+        "Kyubey",
+        "インキュベーター",
+        "Bebe",
+        "贝贝（渚）",
+        "Rebellion",
+        "新篇 叛逆的物语"
+      ],
+      "names": {
+        "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Fluffy Puffy～キュゥべえ＆べべ～",
+        "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Fluffy Puffy - キュゥべえ＆べべ -",
+        "zh": "剧场版 魔法少女小圆[新篇]叛逆的物语 Fluffy Puffy~丘比&贝贝~",
+        "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 Fluffy Puffy ~큐베 & 베베~"
+      }
+    },
+    {
       "kit_id": "megahouse-madoka-5807",
       "franchise": "madoka",
       "grade_code": "MADOKA_MINI",
@@ -2252139,9 +2252273,9 @@
         "https://bandai-a.akamaihd.net/bc/img/model/b/1000261496_11.jpg",
         "https://bandai-a.akamaihd.net/bc/img/model/b/1000261496_12.jpg",
         "https://bandai-a.akamaihd.net/bc/img/model/b/1000258241_1.jpg",
+        "https://bandai-a.akamaihd.net/bc/img/model/b/1000260471_1.jpg",
         "https://bandai-a.akamaihd.net/bc/img/model/b/1000257635_1.jpg",
         "https://bandai-a.akamaihd.net/bc/img/model/b/1000257894_1.jpg",
-        "https://bandai-a.akamaihd.net/bc/img/model/b/1000257896_1.jpg",
         "https://www.bandaispirits.co.jp/images/common/ico_hard_ps.png",
         "https://www.bandaispirits.co.jp/images/common/copy_rurutea.jpg",
         "https://www.bandaispirits.co.jp/images/common/copy_piapro.png"
@@ -2254412,9 +2254546,9 @@
         "https://bandai-a.akamaihd.net/bc/img/model/b/1000248310_11.jpg",
         "https://bandai-a.akamaihd.net/bc/img/model/b/1000248310_12.jpg",
         "https://bandai-a.akamaihd.net/bc/img/model/b/1000258241_1.jpg",
+        "https://bandai-a.akamaihd.net/bc/img/model/b/1000260471_1.jpg",
         "https://bandai-a.akamaihd.net/bc/img/model/b/1000257635_1.jpg",
         "https://bandai-a.akamaihd.net/bc/img/model/b/1000257894_1.jpg",
-        "https://bandai-a.akamaihd.net/bc/img/model/b/1000257896_1.jpg",
         "https://www.bandaispirits.co.jp/images/common/ico_hard_ps.png",
         "https://www.bandaispirits.co.jp/images/common/copy_rurutea.jpg",
         "https://www.bandaispirits.co.jp/images/common/copy_piapro.png"
@@ -2256671,90 +2256805,6 @@
         "en": "［BINIVINI BABY］SOFT VINYL FIGURE 魔法少女まどか☆マギカ 鹿目まどか / 暁美ほむら / 巴マミ",
         "zh": "[BINIVINI BABY]SOFT VINYL FIGURE 魔法少女小圆 鹿目圆 / 晓美焰 / 巴麻美",
         "ko": "[BINIVINI BABY] SOFT VINYL FIGURE 마법소녀 마도카☆마기카 카나메 마도카 / 아케미 호무라 / 토모에 마미"
-      }
-    },
-    {
-      "kit_id": "banpresto-madoka-2633404",
-      "franchise": "madoka",
-      "grade_code": "MADOKA_PLUSH",
-      "subline": "バンプレスト景品",
-      "number": null,
-      "scale": "non-scale",
-      "images": {
-        "box_art_url": "./assets/catalog/madoka/banpresto-madoka-2633404-01-7f8adfb36c.jpg",
-        "box_art_source_id": "banpresto_prize_madoka_jp",
-        "cached_from": [
-          "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2023.05/2633404.jpg/250w_250h.jpg"
-        ]
-      },
-      "gallery_image_urls": [
-        "./assets/catalog/madoka/banpresto-madoka-2633404-01-7f8adfb36c.jpg"
-      ],
-      "universe": "Madoka",
-      "work_title": "Rebellion",
-      "release_date": "2023-05-25",
-      "price_jpy": null,
-      "is_limited": true,
-      "data_status": "verified",
-      "source_urls": [
-        "https://bsp-prize.jp/item/2633404/"
-      ],
-      "source_refs": [
-        {
-          "source_id": "banpresto_prize_madoka_jp",
-          "url": "https://bsp-prize.jp/item/2633404/",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "release_date",
-            "price_jpy",
-            "work_title"
-          ],
-          "confidence": "high"
-        }
-      ],
-      "tags": [
-        "madoka",
-        "banpresto",
-        "prize",
-        "madoka_plush"
-      ],
-      "notes": "Imported from the Banpresto prize site (魔法少女まどか☆マギカ シリーズ title).",
-      "series": {
-        "key": "madoka_rebellion",
-        "sort": 441,
-        "labels": {
-          "zh": "叛逆的物语",
-          "en": "Rebellion",
-          "ja": "叛逆の物語",
-          "ko": "반역의 이야기"
-        }
-      },
-      "search_zh": [
-        "魔圆",
-        "魔法少女小圓",
-        "魔法少女まどかマギカ",
-        "まどマギ",
-        "Madoka Magica",
-        "madomagi",
-        "叛逆的物語",
-        "QB",
-        "Q比",
-        "孵化者",
-        "淫兽",
-        "Kyubey",
-        "インキュベーター",
-        "Bebe",
-        "贝贝（渚）",
-        "Rebellion",
-        "新篇 叛逆的物语"
-      ],
-      "names": {
-        "ja": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Fluffy Puffy～キュゥべえ＆べべ～",
-        "en": "劇場版 魔法少女まどか☆マギカ[新編]叛逆の物語 Fluffy Puffy - キュゥべえ＆べべ -",
-        "zh": "剧场版 魔法少女小圆[新篇]叛逆的物语 Fluffy Puffy~丘比&贝贝~",
-        "ko": "극장판 마법소녀 마도카☆마기카 [신편] 반역의 이야기 Fluffy Puffy ~큐베 & 베베~"
       }
     },
     {
@@ -2271599,6 +2271649,67 @@
         "zh": "异度神剑 Genesis",
         "ko": "Xenoblade Genesis"
       }
+    },
+    {
+      "kit_id": "banpresto-nin-2845226",
+      "franchise": "nintendo",
+      "grade_code": "NIN_PRIZE",
+      "subline": "バンプレスト景品",
+      "number": null,
+      "scale": "non-scale",
+      "names": {
+        "ja": "星のカービィ SOFVIMATES～カービィ（もぐもぐver.）～",
+        "en": "星のカービィ SOFVIMATES～カービィ（もぐもぐver.）～",
+        "zh": "星のカービィ SOFVIMATES~カービィ(もぐもぐver.)~",
+        "ko": "星のカービィ SOFVIMATES~カービィ（もぐもぐver.）~"
+      },
+      "images": {
+        "box_art_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2026.12/bae/2845226_a.jpg/250w_250h.jpg",
+        "box_art_source_id": "banpresto_prize_nintendo_jp"
+      },
+      "gallery_image_urls": [
+        "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2026.12/bae/2845226_a.jpg/250w_250h.jpg"
+      ],
+      "series": {
+        "key": "nintendo_kirby",
+        "sort": 700,
+        "labels": {
+          "ko": "별의 커비",
+          "zh": "星之卡比",
+          "en": "Kirby",
+          "ja": "星のカービィ"
+        }
+      },
+      "universe": "Nintendo",
+      "work_title": "Kirby",
+      "release_date": "2026-12-08",
+      "price_jpy": null,
+      "is_limited": true,
+      "data_status": "verified",
+      "source_urls": [
+        "https://bsp-prize.jp/item/2845226/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "banpresto_prize_nintendo_jp",
+          "url": "https://bsp-prize.jp/item/2845226/",
+          "fields": [
+            "names",
+            "images",
+            "grade_code",
+            "release_date",
+            "price_jpy"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "nintendo",
+        "banpresto",
+        "prize",
+        "nin_prize"
+      ],
+      "notes": "Imported from the Banpresto prize site (Nintendo title pages)."
     },
     {
       "kit_id": "ichibankuji-nin-zelda5",
@@ -2307432,6 +2307543,223 @@
       }
     },
     {
+      "kit_id": "banpresto-2645839",
+      "franchise": "pokemon",
+      "grade_code": "POKE_PRIZE",
+      "subline": "バンプレスト景品",
+      "number": null,
+      "scale": "non-scale",
+      "names": {
+        "ja": "ポケットモンスター めちゃもふぐっとぬいぐるみ～コイキング～",
+        "en": "ポケットモンスター めちゃもふぐっとぬいぐるみ - コイキング -",
+        "zh": "宝可梦 超蓬松毛绒玩偶~鲤鱼王~",
+        "ko": "ポケットモンスター めちゃもふぐっとぬいぐるみ~コイキング~"
+      },
+      "images": {
+        "box_art_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2026.12/bae/2645839_a.jpg/250w_250h.jpg",
+        "box_art_source_id": "banpresto_prize_jp"
+      },
+      "gallery_image_urls": [
+        "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2026.12/bae/2645839_a.jpg/250w_250h.jpg"
+      ],
+      "series": {
+        "key": "pokemon",
+        "sort": 400,
+        "labels": {
+          "zh": "宝可梦",
+          "en": "Pokemon",
+          "ja": "ポケモン",
+          "ko": "포켓몬"
+        }
+      },
+      "universe": "Pokemon",
+      "work_title": "Pokemon",
+      "release_date": "2026-12-24",
+      "price_jpy": null,
+      "is_limited": true,
+      "data_status": "verified",
+      "source_urls": [
+        "https://bsp-prize.jp/item/2645839/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "banpresto_prize_jp",
+          "url": "https://bsp-prize.jp/item/2645839/",
+          "fields": [
+            "names",
+            "images",
+            "grade_code",
+            "release_date"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "pokemon",
+        "banpresto",
+        "prize"
+      ],
+      "notes": "Imported from the Banpresto prize-figure site (Pokemon title page).",
+      "search_zh": [
+        "精灵宝可梦",
+        "口袋妖怪",
+        "神奇宝贝",
+        "めちゃもふ",
+        "mecha mofugutto",
+        "大软绒",
+        "超软绒",
+        "毛绒公仔",
+        "公仔",
+        "布偶",
+        "娃娃",
+        "毛绒玩具",
+        "鯉魚王",
+        "mofugutto",
+        "软绒"
+      ]
+    },
+    {
+      "kit_id": "banpresto-2842093",
+      "franchise": "pokemon",
+      "grade_code": "POKE_PRIZE",
+      "subline": "バンプレスト景品",
+      "number": null,
+      "scale": "non-scale",
+      "names": {
+        "ja": "ポケットモンスター カラーセレクションぬいぐるみ white～トサキント・トゲチック・クマシュン～",
+        "en": "ポケットモンスター カラーセレクションぬいぐるみ white - トサキント トゲチック クマシュン -",
+        "zh": "宝可梦 色彩精选毛绒玩偶 white~角金鱼·波克基古·喷嚏熊~",
+        "ko": "ポケットモンスター カラーセレクションぬいぐるみ white~トサキント・トゲチック・クマシュン~"
+      },
+      "images": {
+        "box_art_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2026.12/bae/2842093_a.jpg/250w_250h.jpg",
+        "box_art_source_id": "banpresto_prize_jp"
+      },
+      "gallery_image_urls": [
+        "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2026.12/bae/2842093_a.jpg/250w_250h.jpg"
+      ],
+      "series": {
+        "key": "pokemon",
+        "sort": 400,
+        "labels": {
+          "zh": "宝可梦",
+          "en": "Pokemon",
+          "ja": "ポケモン",
+          "ko": "포켓몬"
+        }
+      },
+      "universe": "Pokemon",
+      "work_title": "Pokemon",
+      "release_date": "2026-12-24",
+      "price_jpy": null,
+      "is_limited": true,
+      "data_status": "verified",
+      "source_urls": [
+        "https://bsp-prize.jp/item/2842093/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "banpresto_prize_jp",
+          "url": "https://bsp-prize.jp/item/2842093/",
+          "fields": [
+            "names",
+            "images",
+            "grade_code",
+            "release_date"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "pokemon",
+        "banpresto",
+        "prize"
+      ],
+      "notes": "Imported from the Banpresto prize-figure site (Pokemon title page).",
+      "search_zh": [
+        "精灵宝可梦",
+        "口袋妖怪",
+        "神奇宝贝",
+        "角金魚",
+        "噴嚏熊",
+        "毛绒公仔",
+        "公仔",
+        "布偶",
+        "娃娃",
+        "毛绒玩具"
+      ]
+    },
+    {
+      "kit_id": "banpresto-2847582",
+      "franchise": "pokemon",
+      "grade_code": "POKE_PRIZE",
+      "subline": "バンプレスト景品",
+      "number": null,
+      "scale": "non-scale",
+      "names": {
+        "ja": "ポケットモンスター いろんなおかおぬいぐるみ～ニャース・ヌメラ～",
+        "en": "ポケットモンスター いろんなおかおぬいぐるみ - ニャース ヌメラ -",
+        "zh": "宝可梦 いろんなおかお毛绒玩偶~喵喵·黏黏宝~",
+        "ko": "ポケットモンスター いろんなおかおぬいぐるみ~ニャース・ヌメラ~"
+      },
+      "images": {
+        "box_art_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2026.12/bae/2847582_a.jpg/250w_250h.jpg",
+        "box_art_source_id": "banpresto_prize_jp"
+      },
+      "gallery_image_urls": [
+        "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2026.12/bae/2847582_a.jpg/250w_250h.jpg"
+      ],
+      "series": {
+        "key": "pokemon",
+        "sort": 400,
+        "labels": {
+          "zh": "宝可梦",
+          "en": "Pokemon",
+          "ja": "ポケモン",
+          "ko": "포켓몬"
+        }
+      },
+      "universe": "Pokemon",
+      "work_title": "Pokemon",
+      "release_date": "2026-12-24",
+      "price_jpy": null,
+      "is_limited": true,
+      "data_status": "verified",
+      "source_urls": [
+        "https://bsp-prize.jp/item/2847582/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "banpresto_prize_jp",
+          "url": "https://bsp-prize.jp/item/2847582/",
+          "fields": [
+            "names",
+            "images",
+            "grade_code",
+            "release_date"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "pokemon",
+        "banpresto",
+        "prize"
+      ],
+      "notes": "Imported from the Banpresto prize-figure site (Pokemon title page).",
+      "search_zh": [
+        "精灵宝可梦",
+        "口袋妖怪",
+        "神奇宝贝",
+        "毛绒公仔",
+        "公仔",
+        "布偶",
+        "娃娃",
+        "毛绒玩具",
+        "黏黏寶"
+      ]
+    },
+    {
       "kit_id": "ichibankuji-pk30th-1-2",
       "franchise": "pokemon",
       "grade_code": "POKE_KUJI",
@@ -2314109,12 +2314437,6 @@
       "subline": "몬콜레",
       "number": "S26066",
       "scale": "non-scale",
-      "names": {
-        "ja": "포켓몬 포코피아 몬콜레 MS 메타몽 변신(라프라스)",
-        "en": "포켓몬 포코피아 몬콜레 MS 메타몽 변신(라프라스)",
-        "zh": "포켓몬 포코피아 몬콜레 MS 메타몽 변신(라프라스)",
-        "ko": "포켓몬 포코피아 몬콜레 MS 메타몽 변신(라프라스)"
-      },
       "source_name": "포켓몬 포코피아 몬콜레 MS 메타몽 변신(라프라스)",
       "images": {
         "box_art_url": "https://academy.co.kr/web/product/medium/202611/e0aa02b442cfd41188c8305c8eea73f2.jpg",
@@ -2314167,6 +2314489,12 @@
       "academy_kr": {
         "code": "S26066",
         "sold_out": false
+      },
+      "names": {
+        "ja": "포켓몬 포코피아 몬콜레 MS 메타몽 변신(라프라스)",
+        "en": "포켓몬 포코피아 몬콜레 MS 메타몽 변신(라프라스)",
+        "zh": "포켓몬 포코피아 몬콜레 MS 메타몽 변신(라프라스)",
+        "ko": "포켓몬 포코피아 몬콜레 MS 메타몽 변신(라프라스)"
       }
     },
     {
@@ -2314176,12 +2314504,6 @@
       "subline": "몬콜레",
       "number": "S26067",
       "scale": "non-scale",
-      "names": {
-        "ja": "포켓몬 포코피아 몬콜레 MS 잠만보(이끼투성이)",
-        "en": "포켓몬 포코피아 몬콜레 MS 잠만보(이끼투성이)",
-        "zh": "포켓몬 포코피아 몬콜레 MS 잠만보(이끼투성이)",
-        "ko": "포켓몬 포코피아 몬콜레 MS 잠만보(이끼투성이)"
-      },
       "source_name": "포켓몬 포코피아 몬콜레 MS 잠만보(이끼투성이)",
       "images": {
         "box_art_url": "https://academy.co.kr/web/product/medium/202611/f861c06a4bc1b85d9f331c33f1875ce4.jpg",
@@ -2314234,6 +2314556,12 @@
       "academy_kr": {
         "code": "S26067",
         "sold_out": false
+      },
+      "names": {
+        "ja": "포켓몬 포코피아 몬콜레 MS 잠만보(이끼투성이)",
+        "en": "포켓몬 포코피아 몬콜레 MS 잠만보(이끼투성이)",
+        "zh": "포켓몬 포코피아 몬콜레 MS 잠만보(이끼투성이)",
+        "ko": "포켓몬 포코피아 몬콜레 MS 잠만보(이끼투성이)"
       }
     },
     {
@@ -2343459,7 +2343787,7 @@
       "work_title": "Pokemon",
       "release_date": "2025-12",
       "price_jpy": null,
-      "price_krw": 47000,
+      "price_krw": 37600,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2343660,7 +2343988,7 @@
       "work_title": "Pokemon",
       "release_date": "2025-12",
       "price_jpy": null,
-      "price_krw": 39000,
+      "price_krw": 31200,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2343727,7 +2344055,7 @@
       "work_title": "Pokemon",
       "release_date": "2025-12",
       "price_jpy": null,
-      "price_krw": 39000,
+      "price_krw": 31200,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2343794,7 +2344122,7 @@
       "work_title": "Pokemon",
       "release_date": "2025-12",
       "price_jpy": null,
-      "price_krw": 37000,
+      "price_krw": 29600,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2343861,7 +2344189,7 @@
       "work_title": "Pokemon",
       "release_date": "2025-12",
       "price_jpy": null,
-      "price_krw": 37000,
+      "price_krw": 29600,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2361427,7 +2361755,7 @@
       "work_title": "Pokemon",
       "release_date": "2025-04",
       "price_jpy": null,
-      "price_krw": 31000,
+      "price_krw": 24800,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2380035,7 +2380363,7 @@
       "work_title": "Pokemon",
       "release_date": "2025",
       "price_jpy": null,
-      "price_krw": 68000,
+      "price_krw": 54400,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2385341,7 +2385669,7 @@
       "work_title": "Pokemon",
       "release_date": "2024-12",
       "price_jpy": null,
-      "price_krw": 31000,
+      "price_krw": 24800,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2385408,7 +2385736,7 @@
       "work_title": "Pokemon",
       "release_date": "2024-12",
       "price_jpy": null,
-      "price_krw": 31000,
+      "price_krw": 24800,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2513117,7 +2513445,7 @@
       "work_title": "Pokemon",
       "release_date": "2023",
       "price_jpy": null,
-      "price_krw": 33000,
+      "price_krw": 26400,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2513184,7 +2513512,7 @@
       "work_title": "Pokemon",
       "release_date": "2023",
       "price_jpy": null,
-      "price_krw": 33000,
+      "price_krw": 26400,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2513251,7 +2513579,7 @@
       "work_title": "Pokemon",
       "release_date": "2023",
       "price_jpy": null,
-      "price_krw": 33000,
+      "price_krw": 26400,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2513318,7 +2513646,7 @@
       "work_title": "Pokemon",
       "release_date": "2023",
       "price_jpy": null,
-      "price_krw": 33000,
+      "price_krw": 26400,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2513385,7 +2513713,7 @@
       "work_title": "Pokemon",
       "release_date": "2023",
       "price_jpy": null,
-      "price_krw": 33000,
+      "price_krw": 26400,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2513452,7 +2513780,7 @@
       "work_title": "Pokemon",
       "release_date": "2023",
       "price_jpy": null,
-      "price_krw": 60000,
+      "price_krw": 48000,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2513519,7 +2513847,7 @@
       "work_title": "Pokemon",
       "release_date": "2023",
       "price_jpy": null,
-      "price_krw": 29000,
+      "price_krw": 23200,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2513586,7 +2513914,7 @@
       "work_title": "Pokemon",
       "release_date": "2023",
       "price_jpy": null,
-      "price_krw": 11000,
+      "price_krw": 8800,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2513653,7 +2513981,7 @@
       "work_title": "Pokemon",
       "release_date": "2023",
       "price_jpy": null,
-      "price_krw": 11000,
+      "price_krw": 8800,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2513720,7 +2514048,7 @@
       "work_title": "Pokemon",
       "release_date": "2023",
       "price_jpy": null,
-      "price_krw": 11000,
+      "price_krw": 8800,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2513787,7 +2514115,7 @@
       "work_title": "Pokemon",
       "release_date": "2023",
       "price_jpy": null,
-      "price_krw": 11000,
+      "price_krw": 8800,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2513854,7 +2514182,7 @@
       "work_title": "Pokemon",
       "release_date": "2023",
       "price_jpy": null,
-      "price_krw": 11000,
+      "price_krw": 8800,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2513921,7 +2514249,7 @@
       "work_title": "Pokemon",
       "release_date": "2023",
       "price_jpy": null,
-      "price_krw": 46000,
+      "price_krw": 36800,
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
@@ -2532795,12 +2533123,6 @@
       "subline": "완구",
       "number": null,
       "scale": "non-scale",
-      "names": {
-        "ja": "81393 포켓몬 크레인 2026 Ver",
-        "en": "81393 포켓몬 크레인 2026 Ver",
-        "zh": "81393 포켓몬 크레인 2026 Ver",
-        "ko": "81393 포켓몬 크레인 2026 Ver"
-      },
       "source_name": "81393 포켓몬 크레인 2026 Ver",
       "images": {
         "box_art_url": "https://academy.co.kr/web/product/medium/202611/84060c25a3fd59fad5a688611b99b07e.jpg",
@@ -2532853,6 +2533175,12 @@
       "academy_kr": {
         "code": null,
         "sold_out": false
+      },
+      "names": {
+        "ja": "81393 포켓몬 크레인 2026 Ver",
+        "en": "81393 포켓몬 크레인 2026 Ver",
+        "zh": "81393 포켓몬 크레인 2026 Ver",
+        "ko": "81393 포켓몬 크레인 2026 Ver"
       }
     },
     {
@@ -2565183,12 +2565511,18 @@
         "布偶",
         "娃娃",
         "毛绒玩具",
+        "神奇宝贝",
+        "口袋妖怪",
+        "精灵宝可梦",
+        "宠物小精灵",
+        "寶可夢",
+        "Pokemon",
         "水精灵",
         "水精靈"
       ],
       "names": {
-        "ja": "134 ぬいぐるみ Pok&eacute;mon fit シャワーズ",
-        "en": "134 ぬいぐるみ Pok&eacute;mon fit シャワーズ",
+        "ja": "134 ぬいぐるみ ポケモン fit シャワーズ",
+        "en": "134 ぬいぐるみ Pokémon fit シャワーズ",
         "zh": "134 毛绒玩偶 宝可梦 fit 水伊布",
         "ko": "134 봉제인형 Pokémon fit 샤미드"
       }
@@ -2565690,11 +2566024,17 @@
         "布偶",
         "娃娃",
         "毛绒玩具",
+        "神奇宝贝",
+        "口袋妖怪",
+        "精灵宝可梦",
+        "宠物小精灵",
+        "寶可夢",
+        "Pokemon",
         "急凍鳥"
       ],
       "names": {
-        "ja": "144 ぬいぐるみ Pok&eacute;mon fit フリーザー",
-        "en": "144 ぬいぐるみ Pok&eacute;mon fit フリーザー",
+        "ja": "144 ぬいぐるみ ポケモン fit フリーザー",
+        "en": "144 ぬいぐるみ Pokémon fit フリーザー",
         "zh": "144 毛绒玩偶 宝可梦 fit 急冻鸟",
         "ko": "144 봉제인형 Pokémon fit 프리져"
       }
@@ -2566047,11 +2566387,17 @@
         "布偶",
         "娃娃",
         "毛绒玩具",
+        "神奇宝贝",
+        "口袋妖怪",
+        "精灵宝可梦",
+        "宠物小精灵",
+        "寶可夢",
+        "Pokemon",
         "結草貴婦"
       ],
       "names": {
-        "ja": "413 ぬいぐるみ Pok&eacute;mon fit ミノマダム (くさきのミノ)",
-        "en": "413 ぬいぐるみ Pok&eacute;mon fit ミノマダム (くさきのミノ)",
+        "ja": "413 ぬいぐるみ ポケモン fit ミノマダム (くさきのミノ)",
+        "en": "413 ぬいぐるみ Pokémon fit ミノマダム (くさきのミノ)",
         "zh": "413 毛绒玩偶 宝可梦 fit 结草贵妇 (草木蓑衣)",
         "ko": "413 봉제인형 Pokémon fit 도롱마담 (초목도롱)"
       }
@@ -2568034,12 +2568380,18 @@
         "布偶",
         "娃娃",
         "毛绒玩具",
+        "神奇宝贝",
+        "口袋妖怪",
+        "精灵宝可梦",
+        "宠物小精灵",
+        "寶可夢",
+        "Pokemon",
         "時拉比",
         "雪拉比"
       ],
       "names": {
-        "ja": "251 ぬいぐるみ Pok&eacute;mon fit セレビィ",
-        "en": "251 ぬいぐるみ Pok&eacute;mon fit セレビィ",
+        "ja": "251 ぬいぐるみ ポケモン fit セレビィ",
+        "en": "251 ぬいぐるみ Pokémon fit セレビィ",
         "zh": "251 毛绒玩偶 宝可梦 fit 时拉比",
         "ko": "251 봉제인형 Pokémon fit 세레비"
       }
@@ -2568820,11 +2569172,17 @@
         "公仔",
         "布偶",
         "娃娃",
-        "毛绒玩具"
+        "毛绒玩具",
+        "神奇宝贝",
+        "口袋妖怪",
+        "精灵宝可梦",
+        "宠物小精灵",
+        "寶可夢",
+        "Pokemon"
       ],
       "names": {
-        "ja": "244 ぬいぐるみ Pok&eacute;mon fit エンテイ",
-        "en": "244 ぬいぐるみ Pok&eacute;mon fit エンテイ",
+        "ja": "244 ぬいぐるみ ポケモン fit エンテイ",
+        "en": "244 ぬいぐるみ Pokémon fit エンテイ",
         "zh": "244 毛绒玩偶 宝可梦 fit 炎帝",
         "ko": "244 봉제인형 Pokémon fit 앤테이"
       }
@@ -2570789,11 +2571147,17 @@
         "公仔",
         "布偶",
         "娃娃",
-        "毛绒玩具"
+        "毛绒玩具",
+        "神奇宝贝",
+        "口袋妖怪",
+        "精灵宝可梦",
+        "宠物小精灵",
+        "寶可夢",
+        "Pokemon"
       ],
       "names": {
-        "ja": "504 ぬいぐるみ Pok&eacute;mon fit ミネズミ",
-        "en": "504 ぬいぐるみ Pok&eacute;mon fit ミネズミ",
+        "ja": "504 ぬいぐるみ ポケモン fit ミネズミ",
+        "en": "504 ぬいぐるみ Pokémon fit ミネズミ",
         "zh": "504 毛绒玩偶 宝可梦 fit 探探鼠",
         "ko": "504 봉제인형 Pokémon fit 보르쥐"
       }
@@ -2571229,11 +2571593,17 @@
         "公仔",
         "布偶",
         "娃娃",
-        "毛绒玩具"
+        "毛绒玩具",
+        "神奇宝贝",
+        "口袋妖怪",
+        "精灵宝可梦",
+        "宠物小精灵",
+        "寶可夢",
+        "Pokemon"
       ],
       "names": {
-        "ja": "515 ぬいぐるみ Pok&eacute;mon fit ヒヤップ",
-        "en": "515 ぬいぐるみ Pok&eacute;mon fit ヒヤップ",
+        "ja": "515 ぬいぐるみ ポケモン fit ヒヤップ",
+        "en": "515 ぬいぐるみ Pokémon fit ヒヤップ",
         "zh": "515 毛绒玩偶 宝可梦 fit 冷水猴",
         "ko": "515 봉제인형 Pokémon fit 앗차프"
       }
@@ -2571299,11 +2571669,17 @@
         "布偶",
         "娃娃",
         "毛绒玩具",
+        "神奇宝贝",
+        "口袋妖怪",
+        "精灵宝可梦",
+        "宠物小精灵",
+        "寶可夢",
+        "Pokemon",
         "豆豆鴿"
       ],
       "names": {
-        "ja": "519 ぬいぐるみ Pok&eacute;mon fit マメパト",
-        "en": "519 ぬいぐるみ Pok&eacute;mon fit マメパト",
+        "ja": "519 ぬいぐるみ ポケモン fit マメパト",
+        "en": "519 ぬいぐるみ Pokémon fit マメパト",
         "zh": "519 毛绒玩偶 宝可梦 fit 豆豆鸽",
         "ko": "519 봉제인형 Pokémon fit 콩둘기"
       }
@@ -2572526,11 +2572902,17 @@
         "毛绒公仔",
         "公仔",
         "布偶",
-        "毛绒玩具"
+        "毛绒玩具",
+        "神奇宝贝",
+        "口袋妖怪",
+        "精灵宝可梦",
+        "宠物小精灵",
+        "寶可夢",
+        "Pokemon"
       ],
       "names": {
-        "ja": "548 ぬいぐるみ Pok&eacute;mon fit チュリネ",
-        "en": "548 ぬいぐるみ Pok&eacute;mon fit チュリネ",
+        "ja": "548 ぬいぐるみ ポケモン fit チュリネ",
+        "en": "548 ぬいぐるみ Pokémon fit チュリネ",
         "zh": "548 毛绒玩偶 宝可梦 fit 百合根娃娃",
         "ko": "548 봉제인형 Pokémon fit 치릴리"
       }
@@ -2574180,11 +2574562,17 @@
         "布偶",
         "娃娃",
         "毛绒玩具",
+        "神奇宝贝",
+        "口袋妖怪",
+        "精灵宝可梦",
+        "宠物小精灵",
+        "寶可夢",
+        "Pokemon",
         "敗露球菇"
       ],
       "names": {
-        "ja": "591 ぬいぐるみ Pok&eacute;mon fit モロバレル",
-        "en": "591 ぬいぐるみ Pok&eacute;mon fit モロバレル",
+        "ja": "591 ぬいぐるみ ポケモン fit モロバレル",
+        "en": "591 ぬいぐるみ Pokémon fit モロバレル",
         "zh": "591 毛绒玩偶 宝可梦 fit 败露球菇",
         "ko": "591 봉제인형 Pokémon fit 뽀록나"
       }
@@ -2575409,11 +2575797,17 @@
         "公仔",
         "布偶",
         "娃娃",
-        "毛绒玩具"
+        "毛绒玩具",
+        "神奇宝贝",
+        "口袋妖怪",
+        "精灵宝可梦",
+        "宠物小精灵",
+        "寶可夢",
+        "Pokemon"
       ],
       "names": {
-        "ja": "619 ぬいぐるみ Pok&eacute;mon fit コジョフー",
-        "en": "619 ぬいぐるみ Pok&eacute;mon fit コジョフー",
+        "ja": "619 ぬいぐるみ ポケモン fit コジョフー",
+        "en": "619 ぬいぐるみ Pokémon fit コジョフー",
         "zh": "619 毛绒玩偶 宝可梦 fit 功夫鼬",
         "ko": "619 봉제인형 Pokémon fit 비조푸"
       }
