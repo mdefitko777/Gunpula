@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-25T20:13:49.478Z",
+  "updated_at": "2026-11-26T02:23:09.463Z",
   "sources": [
     {
       "source_id": "tamashii_news",
@@ -144,12 +144,12 @@
   ],
   "fetch_errors": [
     {
-      "source_id": "youtube_live",
-      "message": "https://www.youtube.com/watch?v=SD209sqtPiM has no video data (ログインして bot ではないことを確認してください)"
+      "source_id": "kotobukiya_shop",
+      "message": "https://shop.kotobukiya.co.jp/shop/r/r100000/ returned 503"
     },
     {
-      "source_id": "gundam_base_news",
-      "message": "https://www.gundam-base.net/news returned 502"
+      "source_id": "youtube_live",
+      "message": "https://www.youtube.com/watch?v=SD209sqtPiM has no video data (ログインして bot ではないことを確認してください)"
     }
   ],
   "replaced": {
@@ -167,6 +167,197 @@
     "tamashii-reveal-0abb669c96": "2026-11-13"
   },
   "announcements": [
+    {
+      "id": "gundam-official-paa0veug2taucmu7sk2oo1dr",
+      "franchise": "gundam",
+      "names": {
+        "ja": "「MG ガンダムAGE-1 フルグランサ［デザイナーズカラーVer．］」「HG ガンダムAGE-2 特務隊仕様」ほか『機動戦士ガンダムAGE』関連ガンプラの追加予約が本日11月26日11時よりスタート！",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-26",
+      "source_type": "news",
+      "source_name": "GUNDAM.INFO",
+      "source_id": "gundam_official_news",
+      "source_url": "https://gundam-official.com/news/paa0veug2taucmu7sk2oo1dr",
+      "thumbnail_url": "https://gundam-official.com/media/6b873d60e0e39a1627c5f97d6ed84a7f/6b873d60e0e39a1627c5f97d6ed84a7f.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "gundam-official.com: ガンプラ",
+      "reviewed_at": null,
+      "preorder_at": "2026-11-26T11:00:00+09:00",
+      "preorder_date": "2026-11-26",
+      "preorder_basis": "title"
+    },
+    {
+      "id": "pbandai-1000250309",
+      "franchise": "gundam",
+      "names": {
+        "ja": "元祖SDガンダムスナック&元祖SD…",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-11-26",
+      "source_type": "news",
+      "source_name": "プレミアムバンダイ",
+      "source_id": "premium_bandai_new_items",
+      "source_url": "https://p-bandai.jp/item/item-1000250309/",
+      "thumbnail_url": "../app/assets/announcements/pbandai-1000250309.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Name truncated by the Premium Bandai new-items list.",
+      "reviewed_at": null
+    },
+    {
+      "id": "pbandai-1000261565",
+      "franchise": "gundam",
+      "names": {
+        "ja": "HG 1/144 ガンダムAGE-2 特務隊仕様【再販】",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-26",
+      "source_type": "news",
+      "source_name": "プレミアムバンダイ",
+      "source_id": "premium_bandai_new_items",
+      "source_url": "https://p-bandai.jp/item/item-1000261565/",
+      "thumbnail_url": "../app/assets/announcements/pbandai-1000261565.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null,
+      "preorder_at": "2026-11-26T11:00:00+09:00",
+      "preorder_date": "2026-11-26",
+      "preorder_basis": "store_list"
+    },
+    {
+      "id": "pbandai-1000261568",
+      "franchise": "gundam",
+      "names": {
+        "ja": "ＨＧ 1/144 ダナジン（紫カラー）【再販】",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-26",
+      "source_type": "news",
+      "source_name": "プレミアムバンダイ",
+      "source_id": "premium_bandai_new_items",
+      "source_url": "https://p-bandai.jp/item/item-1000261568/",
+      "thumbnail_url": "../app/assets/announcements/pbandai-1000261568.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null,
+      "preorder_at": "2026-11-26T11:00:00+09:00",
+      "preorder_date": "2026-11-26",
+      "preorder_basis": "store_list"
+    },
+    {
+      "id": "pbandai-1000261570",
+      "franchise": "gundam",
+      "names": {
+        "ja": "ＨＧ 1/144 ガンダムレギルス〔MEMORY OF EDEN〕【再販】",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-26",
+      "source_type": "news",
+      "source_name": "プレミアムバンダイ",
+      "source_id": "premium_bandai_new_items",
+      "source_url": "https://p-bandai.jp/item/item-1000261570/",
+      "thumbnail_url": "../app/assets/announcements/pbandai-1000261570.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null,
+      "preorder_at": "2026-11-26T11:00:00+09:00",
+      "preorder_date": "2026-11-26",
+      "preorder_basis": "store_list"
+    },
+    {
+      "id": "pbandai-1000261573",
+      "franchise": "gundam",
+      "names": {
+        "ja": "ＭＧ 1/100 ガンダムＡＧＥ－１ フルグランサ [デザイナーズカラーＶｅｒ．]【再販】",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-26",
+      "source_type": "news",
+      "source_name": "プレミアムバンダイ",
+      "source_id": "premium_bandai_new_items",
+      "source_url": "https://p-bandai.jp/item/item-1000261573/",
+      "thumbnail_url": "../app/assets/announcements/pbandai-1000261573.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null,
+      "preorder_at": "2026-11-26T11:00:00+09:00",
+      "preorder_date": "2026-11-26",
+      "preorder_basis": "store_list"
+    },
+    {
+      "id": "hjweb-2895078",
+      "franchise": "gundam",
+      "names": {
+        "ja": "「機動戦士ガンダム CAPSULE INDEX」第4弾は『キルケーの魔女』『GQuuuuuuX』から4機体をピックアップ！ダイナミックなポージングで立体化【ガシャポン®最新情報】",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "announced",
+      "announced_at": "2026-11-25",
+      "source_type": "news",
+      "source_name": "Hobby JAPAN Web",
+      "source_id": "hjweb_news",
+      "source_url": "https://hjweb.jp/article/2895078/",
+      "thumbnail_url": "https://hjweb.jp/wp-content/uploads/2026/11/126CI_01-853x1024.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "unofficial",
+      "notes": null,
+      "unofficial": true,
+      "reviewed_at": null
+    },
     {
       "id": "pbandai-1000261818",
       "franchise": "gundam",
@@ -694,6 +885,60 @@
       "notes": null,
       "unofficial": true,
       "reviewed_at": null
+    },
+    {
+      "id": "stds-78597",
+      "franchise": "lego",
+      "names": {
+        "ja": "ハリーの髪は黒から茶色に、初のHBOドラマ版レゴ(R)ハリー・ポッター新作1月1日発売",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-11-25",
+      "source_type": "news",
+      "source_name": "スタッズ",
+      "source_id": "stds_lego",
+      "source_url": "https://stds.jp/lego-hbo-harry-potter-january-2027-sets/",
+      "thumbnail_url": "https://stds.jp/wp-content/uploads/2026/11/lego-hbo-harry-potter-january-2027-sets_title_.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "unofficial",
+      "notes": null,
+      "unofficial": true,
+      "reviewed_at": null
+    },
+    {
+      "id": "stds-78599",
+      "franchise": "lego",
+      "names": {
+        "ja": "ドラマ版ハリポタ、ジョーカー、宇宙船など Amazonでレゴ(R)ブロック1月1日新製品予約開始",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-25",
+      "source_type": "news",
+      "source_name": "スタッズ",
+      "source_id": "stds_lego",
+      "source_url": "https://stds.jp/lego-jan-2027-sets-amazon-pre-order/",
+      "thumbnail_url": "https://stds.jp/wp-content/uploads/2026/11/lego-jan-2027-sets-amazon-pre-order_title_.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "unofficial",
+      "notes": null,
+      "unofficial": true,
+      "reviewed_at": null,
+      "preorder_date": "2027-01-01",
+      "preorder_basis": "title"
     },
     {
       "id": "gundam-official-ey5jjxuw5n8o4t5opaler7ps",
@@ -1673,6 +1918,33 @@
       "preorder_basis": "store_list"
     },
     {
+      "id": "youtube-_TXw0KQtjq0",
+      "franchise": "gundam",
+      "names": {
+        "ja": "【生中継】“本予告”を初解禁！　スペシャルトークイベント【機動戦士ガンダムSEED FREEDOM ZERO】",
+        "zh": null,
+        "ko": null,
+        "en": null
+      },
+      "status": "announced",
+      "announced_at": "2026-11-20",
+      "source_type": "youtube",
+      "source_name": "ガンダムチャンネル YouTube",
+      "source_id": "youtube_live",
+      "source_url": "https://www.youtube.com/watch?v=_TXw0KQtjq0",
+      "thumbnail_url": "../app/assets/announcements/youtube-_TXw0KQtjq0.jpg",
+      "video_id": "_TXw0KQtjq0",
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "live_at": "2026-11-28T16:40:00+09:00",
+      "live_state": "upcoming",
+      "reviewed_at": null
+    },
+    {
       "id": "bandai-news-2026-11-19-vMDFfNzQ2MS8",
       "franchise": "gundam",
       "names": {
@@ -1830,6 +2102,31 @@
       "preorder_at": "2026-11-19T11:00:00+09:00",
       "preorder_date": "2026-11-19",
       "preorder_basis": "title"
+    },
+    {
+      "id": "nintendo-kr-news-3zzavutnybx4sbdxfhh1oq",
+      "franchise": "nintendo",
+      "names": {
+        "ja": "『Nintendo Switch 2 Monster Hunter Wilds 세트』 예약 판매 일정 안내",
+        "zh": null,
+        "ko": "『Nintendo Switch 2 Monster Hunter Wilds 세트』 예약 판매 일정 안내",
+        "en": null
+      },
+      "status": "preorder_open",
+      "announced_at": "2026-11-19",
+      "source_type": "news",
+      "source_name": "한국닌텐도",
+      "source_id": "nintendo_kr_news",
+      "source_url": "https://www.nintendo.com/kr/news/article/3zzavuTnYBX4sbDXfHH1OQ",
+      "thumbnail_url": "../app/assets/announcements/nintendo-kr-news-3zzavutnybx4sbdxfhh1oq.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null
     },
     {
       "id": "pbandai-1000260469",
@@ -3159,7 +3456,7 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": null,
-      "source_id": "tamashii_news",
+      "source_id": "tamashii_topics_items",
       "reviewed_at": null
     },
     {
@@ -3239,33 +3536,6 @@
       "confidence": "official",
       "notes": null,
       "source_id": "bandai_hobby_news",
-      "reviewed_at": null
-    },
-    {
-      "id": "bandai-youtube-la8pjjZx3jQ",
-      "franchise": "gundam",
-      "names": {
-        "ja": "【TAMASHII NEWS NETWORK】「TAMASHII NATION 2026」ONE PIECE、鬼滅の刃、仮面ライダー、初解禁！【BANDAISPIRITS公式】 #バンマニ",
-        "zh": null,
-        "ko": null,
-        "en": null
-      },
-      "status": "announced",
-      "announced_at": "2026-11-12",
-      "source_type": "youtube",
-      "source_name": "BANDAI Hobby Site YouTube",
-      "source_id": "youtube_live",
-      "source_url": "https://www.youtube.com/watch?v=la8pjjZx3jQ",
-      "thumbnail_url": "../app/assets/announcements/bandai-youtube-la8pjjZx3jQ.jpg",
-      "video_id": "la8pjjZx3jQ",
-      "video_timestamp_seconds": null,
-      "series_key": "unclassified",
-      "grade_code": null,
-      "linked_kit_id": null,
-      "confidence": "official",
-      "notes": null,
-      "live_at": "2026-11-12T10:00:00+09:00",
-      "live_state": "ended",
       "reviewed_at": null
     },
     {
@@ -3455,6 +3725,56 @@
       "notes": "Livestream outside YouTube; start time from the event site, end assumed two hours later. Announcement date = first seen by the bot.",
       "live_at": "2026-11-13T21:00:00+09:00",
       "live_state": "ended",
+      "reviewed_at": null
+    },
+    {
+      "id": "nintendo-kr-news-2sg010gp2igwhecwgapza2",
+      "franchise": "nintendo",
+      "names": {
+        "ja": "원하는 소프트웨어를 선택할 수 있는 ｢Nintendo Switch 2 Select One 세트｣ 발매 결정!",
+        "zh": null,
+        "ko": "원하는 소프트웨어를 선택할 수 있는 ｢Nintendo Switch 2 Select One 세트｣ 발매 결정!",
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-11-12",
+      "source_type": "news",
+      "source_name": "한국닌텐도",
+      "source_id": "nintendo_kr_news",
+      "source_url": "https://www.nintendo.com/kr/news/article/2Sg010Gp2IgWHeCWGapZA2",
+      "thumbnail_url": "../app/assets/announcements/nintendo-kr-news-2sg010gp2igwhecwgapza2.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null
+    },
+    {
+      "id": "nintendo-kr-news-6x4hsqr1i4wbn3kgqclpfn",
+      "franchise": "nintendo",
+      "names": {
+        "ja": "『피크민 4 Nintendo Switch 2 Edition + 누구나 도전! 계획력 테스트』 오늘 발매!",
+        "zh": null,
+        "ko": "『피크민 4 Nintendo Switch 2 Edition + 누구나 도전! 계획력 테스트』 오늘 발매!",
+        "en": null
+      },
+      "status": "released",
+      "announced_at": "2026-11-12",
+      "source_type": "news",
+      "source_name": "한국닌텐도",
+      "source_id": "nintendo_kr_news",
+      "source_url": "https://www.nintendo.com/kr/news/article/6X4HsqR1I4wBN3KgqCLpFn",
+      "thumbnail_url": "../app/assets/announcements/nintendo-kr-news-6x4hsqr1i4wbn3kgqclpfn.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
       "reviewed_at": null
     },
     {
@@ -3973,6 +4293,31 @@
       "reviewed_at": null
     },
     {
+      "id": "pokemonkorea-goods-3b5a39d29e",
+      "franchise": "pokemon",
+      "names": {
+        "ja": "어서오세요! 포켓몬카페 피카 브이의 섞어 섞어 아라모드~ 반짝반짝 쿠킹!~ 출시!!",
+        "zh": null,
+        "ko": "어서오세요! 포켓몬카페 피카 브이의 섞어 섞어 아라모드~ 반짝반짝 쿠킹!~ 출시!!",
+        "en": null
+      },
+      "status": "released",
+      "announced_at": "2026-11-09",
+      "source_type": "news",
+      "source_name": "포켓몬코리아",
+      "source_id": "pokemon_korea_goods",
+      "source_url": "https://product.kyobobook.co.kr/detail/S000221846039",
+      "thumbnail_url": "https://pokemonkorea.co.kr/s3.php?key=home%2Fdata%2Fdata1_www%2Fnewdata%2F2026%2F11%2F2026-11-09_10-06-22-16d00c7b22e0cfb4.jpg",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Banner on pokemonkorea.co.kr/goods; the date is the day its picture was uploaded.",
+      "reviewed_at": null
+    },
+    {
       "id": "stds-78316",
       "franchise": "lego",
       "names": {
@@ -4303,6 +4648,31 @@
       "preorder_at": "2026-11-05T11:00:00+09:00",
       "preorder_date": "2026-11-05",
       "preorder_basis": "title"
+    },
+    {
+      "id": "nintendo-kr-news-ilozel436n61v4w8jnfrf",
+      "franchise": "nintendo",
+      "names": {
+        "ja": "Nintendo Switch 2 『젤다의 전설 시간의 오카리나』 오늘 발매. 최신 정보도 함께 소개합니다.",
+        "zh": null,
+        "ko": "Nintendo Switch 2 『젤다의 전설 시간의 오카리나』 오늘 발매. 최신 정보도 함께 소개합니다.",
+        "en": null
+      },
+      "status": "released",
+      "announced_at": "2026-11-05",
+      "source_type": "news",
+      "source_name": "한국닌텐도",
+      "source_id": "nintendo_kr_news",
+      "source_url": "https://www.nintendo.com/kr/news/article/iloZeL436N61v4w8jNfRf",
+      "thumbnail_url": "../app/assets/announcements/nintendo-kr-news-ilozel436n61v4w8jnfrf.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": null,
+      "reviewed_at": null
     },
     {
       "id": "pbandai-1000260403",
@@ -7176,6 +7546,31 @@
       "preorder_basis": "title"
     },
     {
+      "id": "pokemonkorea-goods-a6db28b290",
+      "franchise": "pokemon",
+      "names": {
+        "ja": "Pokémon Pokopia 몬콜레 상품 출시!!",
+        "zh": null,
+        "ko": "Pokémon Pokopia 몬콜레 상품 출시!!",
+        "en": null
+      },
+      "status": "released",
+      "announced_at": "2026-10-07",
+      "source_type": "news",
+      "source_name": "포켓몬코리아",
+      "source_id": "pokemon_korea_goods",
+      "source_url": "https://smartstore.naver.com/moncolle_korea/category/7f9868f6dbfd413a9ef7ed2350a11c72?cp=1",
+      "thumbnail_url": "../app/assets/announcements/pokemonkorea-goods-a6db28b290.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Banner on pokemonkorea.co.kr/goods; the date is the day its picture was uploaded.",
+      "reviewed_at": null
+    },
+    {
       "id": "bandai-news-2026-10-06-waWNzLzczOTQ",
       "franchise": "gundam",
       "names": {
@@ -7680,6 +8075,31 @@
       "linked_kit_id": null,
       "confidence": "official",
       "notes": "gundam-official.com: フィギュア",
+      "reviewed_at": null
+    },
+    {
+      "id": "pokemonkorea-goods-353450effa",
+      "franchise": "pokemon",
+      "names": {
+        "ja": "CU에서 포코피아 신상품을 만나보세요!!",
+        "zh": null,
+        "ko": "CU에서 포코피아 신상품을 만나보세요!!",
+        "en": null
+      },
+      "status": "released",
+      "announced_at": "2026-09-30",
+      "source_type": "news",
+      "source_name": "포켓몬코리아",
+      "source_id": "pokemon_korea_goods",
+      "source_url": "https://www.instagram.com/p/DdnaCB9k9zg/?stkn=MW0zZ2J1ZnRuZ3M2Mw==",
+      "thumbnail_url": "../app/assets/announcements/pokemonkorea-goods-353450effa.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Banner on pokemonkorea.co.kr/goods; the date is the day its picture was uploaded.",
       "reviewed_at": null
     },
     {
@@ -11550,6 +11970,31 @@
       "preorder_basis": "title"
     },
     {
+      "id": "pokemonkorea-goods-29b985ec2b",
+      "franchise": "pokemon",
+      "names": {
+        "ja": "조립하는 즐거움! 레고® 포켓몬™",
+        "zh": null,
+        "ko": "조립하는 즐거움! 레고® 포켓몬™",
+        "en": null
+      },
+      "status": "product_confirmed",
+      "announced_at": "2026-07-14",
+      "source_type": "news",
+      "source_name": "포켓몬코리아",
+      "source_id": "pokemon_korea_goods",
+      "source_url": "https://www.lego.com/ko-kr/themes/pokemon/about",
+      "thumbnail_url": "../app/assets/announcements/pokemonkorea-goods-29b985ec2b.webp",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Banner on pokemonkorea.co.kr/goods; the date is the day its picture was uploaded.",
+      "reviewed_at": null
+    },
+    {
       "id": "bandai-news-2026-07-10-wMDI1NDQyNC8",
       "franchise": "gundam",
       "names": {
@@ -13029,6 +13474,31 @@
       "preorder_at": "2026-06-04T11:00:00+09:00",
       "preorder_date": "2026-06-04",
       "preorder_basis": "title"
+    },
+    {
+      "id": "pokemonkorea-goods-78e08d710c",
+      "franchise": "pokemon",
+      "names": {
+        "ja": "FC서울×포켓몬 콜라보 상품 발매!",
+        "zh": null,
+        "ko": "FC서울×포켓몬 콜라보 상품 발매!",
+        "en": null
+      },
+      "status": "released",
+      "announced_at": "2026-06-04",
+      "source_type": "news",
+      "source_name": "포켓몬코리아",
+      "source_id": "pokemon_korea_goods",
+      "source_url": "https://fcseoulshop.com/product/list.html?cate_no=78",
+      "thumbnail_url": "https://pokemonkorea.co.kr/s3.php?key=home%2Fdata%2Fdata1_www%2Fnewdata%2F2026%2F06%2F2026-06-04_11-41-10-38124-1780540870.png",
+      "video_id": null,
+      "video_timestamp_seconds": null,
+      "series_key": "unclassified",
+      "grade_code": null,
+      "linked_kit_id": null,
+      "confidence": "official",
+      "notes": "Banner on pokemonkorea.co.kr/goods; the date is the day its picture was uploaded.",
+      "reviewed_at": null
     },
     {
       "id": "gundam-official-cbe3yqvf22ohr8gxod2j9h8r",
