@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-26",
+  "updated_at": "2026-11-27",
   "scope": "Individual model kit and official collectible catalog imported from Japanese official BANDAI SPIRITS, Bandai Candy, Bandai Gashapon, Bandai Hobby, Tamashii Web, Kotobukiya, and Takara Tomy sources. Covers Gundam, Armored Core, Pokemon, and BEYBLADE X records. Records are needs_review until field-level human checks are complete.",
   "kits": [
     {
@@ -223182,12 +223182,6 @@
         "official store"
       ],
       "notes": "Imported from BANDAI SPIRITS product search. Release text: 2027年02月予定. Premium Bandai Japan official store link recovered from the Japanese BANDAI SPIRITS product page.",
-      "names": {
-        "ja": "HG 1 / 144 ジーライン・アサルトアーマー",
-        "en": "HG 1 / 144 ジーライン Assault アーマー",
-        "zh": "HG 1 / 144 G-Line·突击装甲",
-        "ko": "HG 1/144 ジーライン・ 어설트 アーマー"
-      },
       "series": {
         "key": "uc_side",
         "sort": 315,
@@ -223197,6 +223191,12 @@
           "ja": "UC外伝",
           "ko": "UC 외전"
         }
+      },
+      "names": {
+        "ja": "HG 1 / 144 ジーライン・アサルトアーマー",
+        "en": "HG 1 / 144 ジーライン Assault アーマー",
+        "zh": "HG 1 / 144 G-Line·突击装甲",
+        "ko": "HG 1/144 ジーライン・ 어설트 アーマー"
       }
     },
     {
@@ -550078,7 +550078,7 @@
       "universe": "AG",
       "work_title": "AGE",
       "release_date": "2013-09",
-      "price_jpy": 1650,
+      "price_jpy": 2420,
       "is_limited": true,
       "data_status": "needs_review",
       "source_urls": [
@@ -565418,7 +565418,7 @@
       "universe": "AG",
       "work_title": "AGE",
       "release_date": "2012-09",
-      "price_jpy": 1650,
+      "price_jpy": 1870,
       "is_limited": true,
       "data_status": "needs_review",
       "source_urls": [
@@ -569008,7 +569008,7 @@
       "universe": "AG",
       "work_title": "AGE",
       "release_date": "2012-07",
-      "price_jpy": 1650,
+      "price_jpy": 1980,
       "is_limited": false,
       "data_status": "needs_review",
       "source_urls": [
@@ -737777,6 +737777,58 @@
       }
     },
     {
+      "kit_id": "lego-40992-1",
+      "franchise": "lego",
+      "grade_code": "LEGO_SET",
+      "subline": "Brickheadz",
+      "number": "40992",
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://cdn.rebrickable.com/media/sets/40992-1.jpg",
+        "box_art_source_id": "rebrickable_lego"
+      },
+      "universe": "LEGO",
+      "work_title": "Brickheadz",
+      "release_date": "2027",
+      "price_jpy": null,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://rebrickable.com/sets/40992-1/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "rebrickable_lego",
+          "url": "https://rebrickable.com/sets/40992-1/",
+          "fields": [
+            "names",
+            "images",
+            "release_date"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "lego"
+      ],
+      "names": {
+        "ja": "Harry, Draco & Hagrid Figures",
+        "en": "Harry, Draco & Hagrid Figures",
+        "zh": "Harry, Draco & Hagrid Figures",
+        "ko": "Harry, Draco & Hagrid Figures"
+      },
+      "series": {
+        "key": "lego_brickheadz",
+        "sort": 600,
+        "labels": {
+          "zh": "方头仔",
+          "en": "Brickheadz",
+          "ja": "Brickheadz",
+          "ko": "브릭헤즈"
+        }
+      }
+    },
+    {
       "kit_id": "lego-42254-1",
       "franchise": "lego",
       "grade_code": "LEGO_SET",
@@ -737878,6 +737930,58 @@
         "en": "Pet Care & Play Center",
         "zh": "Pet Care & Play Center",
         "ko": "Pet Care & Play Center"
+      }
+    },
+    {
+      "kit_id": "lego-42717-1",
+      "franchise": "lego",
+      "grade_code": "LEGO_SET",
+      "subline": "Friends",
+      "number": "42717",
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://cdn.rebrickable.com/media/sets/42717-1.jpg",
+        "box_art_source_id": "rebrickable_lego"
+      },
+      "universe": "LEGO",
+      "work_title": "Friends",
+      "release_date": "2027",
+      "price_jpy": null,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://rebrickable.com/sets/42717-1/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "rebrickable_lego",
+          "url": "https://rebrickable.com/sets/42717-1/",
+          "fields": [
+            "names",
+            "images",
+            "release_date"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "lego"
+      ],
+      "names": {
+        "ja": "Family Dollhouse",
+        "en": "Family Dollhouse",
+        "zh": "Family Dollhouse",
+        "ko": "Family Dollhouse"
+      },
+      "series": {
+        "key": "lego_friends",
+        "sort": 600,
+        "labels": {
+          "zh": "好朋友",
+          "en": "Friends",
+          "ja": "Friends",
+          "ko": "프렌즈"
+        }
       }
     },
     {
@@ -738644,12 +738748,6 @@
       "tags": [
         "lego"
       ],
-      "names": {
-        "ja": "Marvel Rivals: Jeff the Land Shark",
-        "en": "Marvel Rivals: Jeff the Land Shark",
-        "zh": "Marvel Rivals: Jeff the Land Shark",
-        "ko": "Marvel Rivals: Jeff the Land Shark"
-      },
       "series": {
         "key": "lego_super_heroes_marvel",
         "sort": 600,
@@ -738659,6 +738757,12 @@
           "ja": "Super Heroes Marvel",
           "ko": "마블 슈퍼 히어로"
         }
+      },
+      "names": {
+        "ja": "Marvel Rivals: Jeff the Land Shark",
+        "en": "Marvel Rivals: Jeff the Land Shark",
+        "zh": "Marvel Rivals: Jeff the Land Shark",
+        "ko": "Marvel Rivals: Jeff the Land Shark"
       }
     },
     {
@@ -739647,6 +739751,266 @@
         "en": "Chequered Brick Lunch Bag",
         "zh": "Chequered Brick Lunch Bag",
         "ko": "Chequered Brick Lunch Bag"
+      }
+    },
+    {
+      "kit_id": "lego-76481-1",
+      "franchise": "lego",
+      "grade_code": "LEGO_SET",
+      "subline": "Harry Potter",
+      "number": "76481",
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://cdn.rebrickable.com/media/sets/76481-1.jpg",
+        "box_art_source_id": "rebrickable_lego"
+      },
+      "universe": "LEGO",
+      "work_title": "Harry Potter",
+      "release_date": "2027",
+      "price_jpy": null,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://rebrickable.com/sets/76481-1/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "rebrickable_lego",
+          "url": "https://rebrickable.com/sets/76481-1/",
+          "fields": [
+            "names",
+            "images",
+            "release_date"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "lego"
+      ],
+      "names": {
+        "ja": "Privet Drive",
+        "en": "Privet Drive",
+        "zh": "Privet Drive",
+        "ko": "Privet Drive"
+      },
+      "series": {
+        "key": "lego_harry_potter",
+        "sort": 600,
+        "labels": {
+          "zh": "哈利·波特",
+          "en": "Harry Potter",
+          "ja": "Harry Potter",
+          "ko": "해리포터"
+        }
+      }
+    },
+    {
+      "kit_id": "lego-76482-1",
+      "franchise": "lego",
+      "grade_code": "LEGO_SET",
+      "subline": "Harry Potter",
+      "number": "76482",
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://cdn.rebrickable.com/media/sets/76482-1.jpg",
+        "box_art_source_id": "rebrickable_lego"
+      },
+      "universe": "LEGO",
+      "work_title": "Harry Potter",
+      "release_date": "2027",
+      "price_jpy": null,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://rebrickable.com/sets/76482-1/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "rebrickable_lego",
+          "url": "https://rebrickable.com/sets/76482-1/",
+          "fields": [
+            "names",
+            "images",
+            "release_date"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "lego"
+      ],
+      "names": {
+        "ja": "Gryffindor Common Room",
+        "en": "Gryffindor Common Room",
+        "zh": "Gryffindor Common Room",
+        "ko": "Gryffindor Common Room"
+      },
+      "series": {
+        "key": "lego_harry_potter",
+        "sort": 600,
+        "labels": {
+          "zh": "哈利·波特",
+          "en": "Harry Potter",
+          "ja": "Harry Potter",
+          "ko": "해리포터"
+        }
+      }
+    },
+    {
+      "kit_id": "lego-76487-1",
+      "franchise": "lego",
+      "grade_code": "LEGO_SET",
+      "subline": "Harry Potter",
+      "number": "76487",
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://cdn.rebrickable.com/media/sets/76487-1.jpg",
+        "box_art_source_id": "rebrickable_lego"
+      },
+      "universe": "LEGO",
+      "work_title": "Harry Potter",
+      "release_date": "2027",
+      "price_jpy": null,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://rebrickable.com/sets/76487-1/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "rebrickable_lego",
+          "url": "https://rebrickable.com/sets/76487-1/",
+          "fields": [
+            "names",
+            "images",
+            "release_date"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "lego"
+      ],
+      "names": {
+        "ja": "Hogwarts Express & Platform 9¾",
+        "en": "Hogwarts Express & Platform 9¾",
+        "zh": "Hogwarts Express & Platform 9¾",
+        "ko": "Hogwarts Express & Platform 9¾"
+      },
+      "series": {
+        "key": "lego_harry_potter",
+        "sort": 600,
+        "labels": {
+          "zh": "哈利·波特",
+          "en": "Harry Potter",
+          "ja": "Harry Potter",
+          "ko": "해리포터"
+        }
+      }
+    },
+    {
+      "kit_id": "lego-77084-1",
+      "franchise": "lego",
+      "grade_code": "LEGO_SET",
+      "subline": "Fortnite",
+      "number": "77084",
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://cdn.rebrickable.com/media/sets/77084-1.jpg",
+        "box_art_source_id": "rebrickable_lego"
+      },
+      "universe": "LEGO",
+      "work_title": "Fortnite",
+      "release_date": "2027",
+      "price_jpy": null,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://rebrickable.com/sets/77084-1/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "rebrickable_lego",
+          "url": "https://rebrickable.com/sets/77084-1/",
+          "fields": [
+            "names",
+            "images",
+            "release_date"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "lego"
+      ],
+      "names": {
+        "ja": "P-1000",
+        "en": "P-1000",
+        "zh": "P-1000",
+        "ko": "P-1000"
+      },
+      "series": {
+        "key": "lego_fortnite",
+        "sort": 600,
+        "labels": {
+          "zh": "堡垒之夜",
+          "en": "Fortnite",
+          "ja": "Fortnite",
+          "ko": "포트나이트"
+        }
+      }
+    },
+    {
+      "kit_id": "lego-77088-1",
+      "franchise": "lego",
+      "grade_code": "LEGO_SET",
+      "subline": "Fortnite",
+      "number": "77088",
+      "scale": "non-scale",
+      "images": {
+        "box_art_url": "https://cdn.rebrickable.com/media/sets/77088-1.jpg",
+        "box_art_source_id": "rebrickable_lego"
+      },
+      "universe": "LEGO",
+      "work_title": "Fortnite",
+      "release_date": "2027",
+      "price_jpy": null,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://rebrickable.com/sets/77088-1/"
+      ],
+      "source_refs": [
+        {
+          "source_id": "rebrickable_lego",
+          "url": "https://rebrickable.com/sets/77088-1/",
+          "fields": [
+            "names",
+            "images",
+            "release_date"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "lego"
+      ],
+      "names": {
+        "ja": "Guaco's Tacos",
+        "en": "Guaco's Tacos",
+        "zh": "Guaco's Tacos",
+        "ko": "Guaco's Tacos"
+      },
+      "series": {
+        "key": "lego_fortnite",
+        "sort": 600,
+        "labels": {
+          "zh": "堡垒之夜",
+          "en": "Fortnite",
+          "ja": "Fortnite",
+          "ko": "포트나이트"
+        }
       }
     },
     {
@@ -781934,12 +782298,6 @@
       "tags": [
         "lego"
       ],
-      "names": {
-        "ja": "Christmas Craft Set",
-        "en": "Christmas Craft Set",
-        "zh": "Christmas Craft 套装",
-        "ko": "Christmas Craft 세트"
-      },
       "series": {
         "key": "lego_gear",
         "sort": 600,
@@ -781949,6 +782307,12 @@
           "ja": "Gear",
           "ko": "굿즈"
         }
+      },
+      "names": {
+        "ja": "Christmas Craft Set",
+        "en": "Christmas Craft Set",
+        "zh": "Christmas Craft 套装",
+        "ko": "Christmas Craft 세트"
       }
     },
     {
@@ -824424,10 +824788,10 @@
         }
       },
       "names": {
-        "ja": "Famous Steve + Sneaky Creeper + Curious Pig",
-        "en": "Famous Steve + Sneaky Creeper + Curious Pig",
-        "zh": "Famous Steve + Sneaky Creeper + Curious Pig",
-        "ko": "Famous Steve + Sneaky Creeper + Curious Pig"
+        "ja": "Steve, Creeper and Pig",
+        "en": "Steve, Creeper and Pig",
+        "zh": "Steve, Creeper and Pig",
+        "ko": "Steve, Creeper and Pig"
       }
     },
     {
@@ -842944,7 +843308,7 @@
       ],
       "tags": [
         "lego",
-        "pieces:51"
+        "pieces:50"
       ],
       "series": {
         "key": "lego_friends",
@@ -2119482,7 +2119846,7 @@
       ],
       "tags": [
         "lego",
-        "pieces:171"
+        "pieces:190"
       ],
       "series": {
         "key": "lego_pirates",
@@ -2250327,6 +2250691,7 @@
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwab849f91/items/title-M/madoka-magica/FGR/kaiten_homura-ns/10.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwe373335b/items/title-M/madoka-magica/FGR/kaiten_homura-ns/11.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw8485663c/items/title-M/madoka-magica/FGR/kaiten_homura-ns/12.jpg",
+        "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwcb0cf66f/items/title-M/madoka-magica/FGR/kaiten-sayaka-ns/13.jpg",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12521_main",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_1",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12521_photo_2",
@@ -2250468,6 +2250833,7 @@
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwe494dc5d/items/title-M/madoka-magica/FGR/kaiten_mami-ns/10.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw4421d317/items/title-M/madoka-magica/FGR/kaiten_mami-ns/11.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw5bfc5294/items/title-M/madoka-magica/FGR/kaiten_mami-ns/12.jpg",
+        "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwcb0cf66f/items/title-M/madoka-magica/FGR/kaiten-sayaka-ns/13.jpg",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12520_main",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12520_photo_1",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12520_photo_2",
@@ -2250606,6 +2250972,7 @@
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw7ed0256c/items/title-M/madoka-magica/FGR/kaiten_madoka-ns/08.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw14223aa5/items/title-M/madoka-magica/FGR/kaiten_madoka-ns/09.jpg",
         "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dw8eca9752/items/title-M/madoka-magica/FGR/kaiten_madoka-ns/10.jpg",
+        "https://online.aniplex.co.jp/on/demandware.static/-/Sites-all-master-catalog/ja_JP/dwcb0cf66f/items/title-M/madoka-magica/FGR/kaiten-sayaka-ns/13.jpg",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12405_main",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12405_photo_1",
         "https://www.claynel.jp/SYS/CONTENTS/goods_12405_photo_2",
@@ -2271912,11 +2272279,11 @@
       "number": null,
       "scale": "non-scale",
       "images": {
-        "box_art_url": "https://assets.1kuji.com/uploads/product/image/10841/4b83c524-56fa-4f74-86ca-6ec49d9c36e8.webp",
+        "box_art_url": "https://assets.1kuji.com/uploads/product/image/10841/734d3b2d-c299-45a5-b091-faa5babb7800.webp",
         "box_art_source_id": "ichiban_kuji_nintendo_jp"
       },
       "gallery_image_urls": [
-        "https://assets.1kuji.com/uploads/product/image/10841/4b83c524-56fa-4f74-86ca-6ec49d9c36e8.webp"
+        "https://assets.1kuji.com/uploads/product/image/10841/734d3b2d-c299-45a5-b091-faa5babb7800.webp"
       ],
       "series": {
         "key": "nintendo_zelda",
@@ -2436268,73 +2436635,6 @@
       }
     },
     {
-      "kit_id": "academy-1950",
-      "franchise": "pokemon",
-      "grade_code": "POKE_MONCOLLE",
-      "subline": "몬콜레",
-      "number": "S24192",
-      "scale": "non-scale",
-      "source_name": "몬스터콜렉션 MS 케르디오 (각오의모습)",
-      "images": {
-        "box_art_url": "https://academy.co.kr/web/product/medium/202501/d78e736031643a46d34f463992e7295c.jpg",
-        "box_art_source_id": "academy_kr"
-      },
-      "gallery_image_urls": [
-        "https://academy.co.kr/web/product/medium/202501/d78e736031643a46d34f463992e7295c.jpg"
-      ],
-      "series": {
-        "key": "pokemon",
-        "sort": 400,
-        "labels": {
-          "zh": "宝可梦",
-          "en": "Pokemon",
-          "ja": "ポケモン",
-          "ko": "포켓몬"
-        }
-      },
-      "universe": "Pokemon",
-      "work_title": "Pokemon",
-      "release_date": "2024",
-      "price_jpy": null,
-      "price_krw": 9000,
-      "is_limited": false,
-      "data_status": "verified",
-      "source_urls": [
-        "https://academy.co.kr/product/detail.html?product_no=1950"
-      ],
-      "source_refs": [
-        {
-          "source_id": "academy_kr",
-          "url": "https://academy.co.kr/product/detail.html?product_no=1950",
-          "fields": [
-            "names",
-            "images",
-            "grade_code",
-            "price_krw"
-          ],
-          "confidence": "high"
-        }
-      ],
-      "tags": [
-        "pokemon",
-        "korea",
-        "poke_moncolle",
-        "academy",
-        "takara tomy"
-      ],
-      "notes": "Imported from 아카데미과학 (academy.co.kr), the Korean licensee of Takara Tomy's Pokémon toys; the year comes from its S{YY} product code.",
-      "academy_kr": {
-        "code": "S24192",
-        "sold_out": false
-      },
-      "names": {
-        "ja": "몬스터콜렉션 MS 케르디오 (각오의모습)",
-        "en": "몬스터콜렉션 MS 케르디오 (각오의모습)",
-        "zh": "Moncolle MS 凯路迪欧 (觉悟的样子)",
-        "ko": "몬스터콜렉션 MS 케르디오 (각오의모습)"
-      }
-    },
-    {
       "kit_id": "academy-1952",
       "franchise": "pokemon",
       "grade_code": "POKE_MONCOLLE",
@@ -2447333,7 +2447633,7 @@
       "jan": "4521329317380",
       "pokemon_store_kr": {
         "sale_start": "2026-11-12",
-        "sold_out": false
+        "sold_out": true
       },
       "names": {
         "ja": "포켓몬센터 봉제인형 ポケモン fit 메타그로스",
@@ -2454624,7 +2454924,7 @@
       "jan": "4521329349374",
       "pokemon_store_kr": {
         "sale_start": "2026-11-12",
-        "sold_out": false
+        "sold_out": true
       },
       "names": {
         "ja": "포켓몬센터 봉제인형 ポケモン fit 두르쿤",
@@ -2459487,7 +2459787,7 @@
       "jan": "4521329316895",
       "pokemon_store_kr": {
         "sale_start": "2026-11-12",
-        "sold_out": false
+        "sold_out": true
       },
       "names": {
         "ja": "포켓몬센터 봉제인형 ポケモン fit 플라이곤",
@@ -2538986,7 +2539286,8 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/select35/"
+        "https://www.takaratomy.co.jp/products/pokemon/moncolle_ex/lineup/select35/",
+        "https://academy.co.kr/product/detail.html?product_no=1950"
       ],
       "source_refs": [
         {
@@ -2538998,6 +2539299,14 @@
             "grade_code",
             "number",
             "release_date"
+          ],
+          "confidence": "high"
+        },
+        {
+          "source_id": "academy_kr",
+          "url": "https://academy.co.kr/product/detail.html?product_no=1950",
+          "fields": [
+            "price_krw"
           ],
           "confidence": "high"
         }
@@ -2539017,7 +2539326,8 @@
         "en": "ケルディオ (かくごのすがた)",
         "zh": "凯路迪欧 (觉悟的样子)",
         "ko": "케르디오 (각오의 모습)"
-      }
+      },
+      "price_krw": 9000
     },
     {
       "kit_id": "moncolle-mc-148",
@@ -2566726,11 +2567036,17 @@
         "布偶",
         "娃娃",
         "毛绒玩具",
+        "神奇宝贝",
+        "口袋妖怪",
+        "精灵宝可梦",
+        "宠物小精灵",
+        "寶可夢",
+        "Pokemon",
         "結草貴婦"
       ],
       "names": {
-        "ja": "413 ぬいぐるみ Pok&eacute;mon fit ミノマダム (ゴミのミノ)",
-        "en": "413 ぬいぐるみ Pok&eacute;mon fit ミノマダム (ゴミのミノ)",
+        "ja": "413 ぬいぐるみ ポケモン fit ミノマダム (ゴミのミノ)",
+        "en": "413 ぬいぐるみ Pokémon fit ミノマダム (ゴミのミノ)",
         "zh": "413 毛绒玩偶 宝可梦 fit 结草贵妇 (垃圾蓑衣)",
         "ko": "413 봉제인형 Pokémon fit 도롱마담 (슈레도롱)"
       }
@@ -2575206,6 +2575522,81 @@
         "zh": "605 毛绒玩偶 宝可梦 fit 小灰怪",
         "ko": "605 봉제인형 Pokémon fit 리그레"
       }
+    },
+    {
+      "kit_id": "pokemon-center-4521329350127",
+      "franchise": "pokemon",
+      "grade_code": "POKE_PLUSH",
+      "subline": "Pokemon Center Plush",
+      "number": "4521329350127",
+      "scale": "non-scale",
+      "names": {
+        "ja": "606 ぬいぐるみ ポケモン fit オーベム",
+        "en": "606 ぬいぐるみ Pokémon fit オーベム",
+        "zh": "606 毛绒玩偶 宝可梦 fit 大宇怪",
+        "ko": "606 ぬいぐるみ 포켓몬 fit オーベム"
+      },
+      "images": {
+        "box_art_url": "./assets/catalog/pokemon/pokemon-center-4521329350127-01-03750c30f6.jpg",
+        "box_art_source_id": "pokemon_center_jp",
+        "cached_from": [
+          "https://www.pokemoncenter-online.com/a/img/item/4521329350127/M/388bef3f01c06fd81dd09c00de7c65515cf6b7f7946038de301978c7fe5b05cf.jpg"
+        ]
+      },
+      "gallery_image_urls": [
+        "./assets/catalog/pokemon/pokemon-center-4521329350127-01-03750c30f6.jpg"
+      ],
+      "universe": "Pokemon",
+      "work_title": "Pokemon",
+      "release_date": null,
+      "price_jpy": 1540,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://www.pokemoncenter-online.com/4521329350127.html"
+      ],
+      "source_refs": [
+        {
+          "source_id": "pokemon_center_jp",
+          "url": "https://www.pokemoncenter-online.com/4521329350127.html",
+          "fields": [
+            "names",
+            "price_jpy",
+            "images",
+            "grade_code"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "pokemon",
+        "pokemon center",
+        "poke_plush"
+      ],
+      "notes": "Imported from Pokemon Center Online Japan category page.",
+      "series": {
+        "key": "pokemon",
+        "sort": 400,
+        "labels": {
+          "zh": "宝可梦",
+          "en": "Pokemon",
+          "ja": "ポケモン",
+          "ko": "포켓몬"
+        }
+      },
+      "search_zh": [
+        "毛绒公仔",
+        "公仔",
+        "布偶",
+        "娃娃",
+        "毛绒玩具",
+        "神奇宝贝",
+        "口袋妖怪",
+        "精灵宝可梦",
+        "宠物小精灵",
+        "寶可夢",
+        "Pokemon"
+      ]
     },
     {
       "kit_id": "pokemon-center-4521329350141",
@@ -2585665,6 +2586056,71 @@
       }
     },
     {
+      "kit_id": "pokemon-center-4521329423203",
+      "franchise": "pokemon",
+      "grade_code": "POKE_PLUSH",
+      "subline": "Pokemon Center Plush",
+      "number": "4521329423203",
+      "scale": "non-scale",
+      "names": {
+        "ja": "マスコット POKÉMON TRAINERS シュウメイ",
+        "en": "マスコット POKÉMON TRAINERS シュウメイ",
+        "zh": "挂件 POKÉMON TRAINERS 秋明",
+        "ko": "マスコット POKÉMON TRAINERS シュウメイ"
+      },
+      "images": {
+        "box_art_url": "https://www.pokemoncenter-online.com/a/img/item/4521329423203/M/7de0bc117fc0a0f22898bd8fc5ecbf3ac091d1de125cb1fa0292f4514ee2b9f8.jpg",
+        "box_art_source_id": "pokemon_center_jp"
+      },
+      "gallery_image_urls": [
+        "https://www.pokemoncenter-online.com/a/img/item/4521329423203/M/7de0bc117fc0a0f22898bd8fc5ecbf3ac091d1de125cb1fa0292f4514ee2b9f8.jpg"
+      ],
+      "universe": "Pokemon",
+      "work_title": "Pokemon",
+      "release_date": null,
+      "price_jpy": 1870,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://www.pokemoncenter-online.com/4521329423203.html"
+      ],
+      "source_refs": [
+        {
+          "source_id": "pokemon_center_jp",
+          "url": "https://www.pokemoncenter-online.com/4521329423203.html",
+          "fields": [
+            "names",
+            "price_jpy",
+            "images",
+            "grade_code"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "pokemon",
+        "pokemon center",
+        "poke_plush"
+      ],
+      "notes": "Imported from Pokemon Center Online Japan category page.",
+      "series": {
+        "key": "pokemon",
+        "sort": 400,
+        "labels": {
+          "zh": "宝可梦",
+          "en": "Pokemon",
+          "ja": "ポケモン",
+          "ko": "포켓몬"
+        }
+      },
+      "search_zh": [
+        "小挂件",
+        "毛绒挂件",
+        "挂饰",
+        "吉祥物挂件"
+      ]
+    },
+    {
       "kit_id": "pokemon-center-4521329423227",
       "franchise": "pokemon",
       "grade_code": "POKE_PLUSH",
@@ -2586096,11 +2586552,17 @@
         "公仔",
         "布偶",
         "娃娃",
-        "毛绒玩具"
+        "毛绒玩具",
+        "神奇宝贝",
+        "口袋妖怪",
+        "精灵宝可梦",
+        "宠物小精灵",
+        "寶可夢",
+        "Pokemon"
       ],
       "names": {
-        "ja": "786 ぬいぐるみ Pok&eacute;mon fit カプ・テテフ",
-        "en": "786 ぬいぐるみ Pok&eacute;mon fit カプ テテフ",
+        "ja": "786 ぬいぐるみ ポケモン fit カプ・テテフ",
+        "en": "786 ぬいぐるみ Pokémon fit カプ テテフ",
         "zh": "786 毛绒玩偶 宝可梦 fit 卡璞·蝶蝶",
         "ko": "786 봉제인형 Pokémon fit 카푸나비나"
       }
@@ -2587093,6 +2587555,74 @@
         "zh": "毛绒玩偶 Pokopia 皮卡丘(淡色)",
         "ko": "봉제인형 포코 아 포켓몬 피카츄 (연한 색)"
       }
+    },
+    {
+      "kit_id": "pokemon-center-4521329436982",
+      "franchise": "pokemon",
+      "grade_code": "POKE_PLUSH",
+      "subline": "Pokemon Center Plush",
+      "number": "4521329436982",
+      "scale": "non-scale",
+      "names": {
+        "ja": "カラビナ付きマスコット ピカチュウ",
+        "en": "カラビナ付きマスコット ピカチュウ",
+        "zh": "带登山扣挂件 皮卡丘",
+        "ko": "カラビナ付きマスコット ピカチュウ"
+      },
+      "images": {
+        "box_art_url": "https://www.pokemoncenter-online.com/a/img/item/4521329436982/M/24d7aa85fb420d22ec81e2a63b1dce39257572f59aa61a1dd8350aebc2ca781b.jpg",
+        "box_art_source_id": "pokemon_center_jp"
+      },
+      "gallery_image_urls": [
+        "https://www.pokemoncenter-online.com/a/img/item/4521329436982/M/24d7aa85fb420d22ec81e2a63b1dce39257572f59aa61a1dd8350aebc2ca781b.jpg"
+      ],
+      "universe": "Pokemon",
+      "work_title": "Pokemon",
+      "release_date": null,
+      "price_jpy": 1540,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://www.pokemoncenter-online.com/4521329436982.html"
+      ],
+      "source_refs": [
+        {
+          "source_id": "pokemon_center_jp",
+          "url": "https://www.pokemoncenter-online.com/4521329436982.html",
+          "fields": [
+            "names",
+            "price_jpy",
+            "images",
+            "grade_code"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "pokemon",
+        "pokemon center",
+        "poke_plush"
+      ],
+      "notes": "Imported from Pokemon Center Online Japan category page.",
+      "series": {
+        "key": "pokemon",
+        "sort": 400,
+        "labels": {
+          "zh": "宝可梦",
+          "en": "Pokemon",
+          "ja": "ポケモン",
+          "ko": "포켓몬"
+        }
+      },
+      "search_zh": [
+        "皮神",
+        "比卡超",
+        "挂扣",
+        "小挂件",
+        "毛绒挂件",
+        "挂饰",
+        "吉祥物挂件"
+      ]
     },
     {
       "kit_id": "pokemon-center-4521329436999",
@@ -2590741,6 +2591271,277 @@
       }
     },
     {
+      "kit_id": "pokemon-center-4521329452944",
+      "franchise": "pokemon",
+      "grade_code": "POKE_PLUSH",
+      "subline": "Pokemon Center Plush",
+      "number": "4521329452944",
+      "scale": "non-scale",
+      "names": {
+        "ja": "ぬいぐるみ PIKA PIKA Fresh Farm 農場すがたのピカチュウ",
+        "en": "ぬいぐるみ PIKA PIKA Fresh Farm 農場すがたのピカチュウ",
+        "zh": "毛绒玩偶 PIKA PIKA Fresh Farm 農場すがたの皮卡丘",
+        "ko": "ぬいぐるみ PIKA PIKA Fresh Farm 農場すがたのピカチュウ"
+      },
+      "images": {
+        "box_art_url": "https://www.pokemoncenter-online.com/a/img/item/4521329452944/M/839bbe65f8f0c2d2d3c7f190bf5013809abc4871512802debd1b5065ae3f52d4.jpg",
+        "box_art_source_id": "pokemon_center_jp"
+      },
+      "gallery_image_urls": [
+        "https://www.pokemoncenter-online.com/a/img/item/4521329452944/M/839bbe65f8f0c2d2d3c7f190bf5013809abc4871512802debd1b5065ae3f52d4.jpg"
+      ],
+      "universe": "Pokemon",
+      "work_title": "Pokemon",
+      "release_date": null,
+      "price_jpy": 3850,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://www.pokemoncenter-online.com/4521329452944.html"
+      ],
+      "source_refs": [
+        {
+          "source_id": "pokemon_center_jp",
+          "url": "https://www.pokemoncenter-online.com/4521329452944.html",
+          "fields": [
+            "names",
+            "price_jpy",
+            "images",
+            "grade_code"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "pokemon",
+        "pokemon center",
+        "poke_plush"
+      ],
+      "notes": "Imported from Pokemon Center Online Japan category page.",
+      "series": {
+        "key": "pokemon",
+        "sort": 400,
+        "labels": {
+          "zh": "宝可梦",
+          "en": "Pokemon",
+          "ja": "ポケモン",
+          "ko": "포켓몬"
+        }
+      },
+      "search_zh": [
+        "毛绒公仔",
+        "公仔",
+        "布偶",
+        "娃娃",
+        "毛绒玩具",
+        "皮神",
+        "比卡超"
+      ]
+    },
+    {
+      "kit_id": "pokemon-center-4521329452951",
+      "franchise": "pokemon",
+      "grade_code": "POKE_PLUSH",
+      "subline": "Pokemon Center Plush",
+      "number": "4521329452951",
+      "scale": "non-scale",
+      "names": {
+        "ja": "きのみ収穫！リバーシブルぬいぐるみ PIKA PIKA Fresh Farm ホシガリス＆オレンのみ",
+        "en": "きのみ収穫！リバーシブルぬいぐるみ PIKA PIKA Fresh Farm ホシガリス＆オレンのみ",
+        "zh": "き果収穫!リバーシブル毛绒玩偶 PIKA PIKA Fresh Farm 贪心栗鼠&オレン果",
+        "ko": "きのみ収穫!リバーシブルぬいぐるみ PIKA PIKA Fresh Farm ホシガリス&オレンのみ"
+      },
+      "images": {
+        "box_art_url": "https://www.pokemoncenter-online.com/a/img/item/4521329452951/M/e4381bd79631768f23a84ad5aec6f4ab8b84d106eb3309c4f8a073ae06548f20.jpg",
+        "box_art_source_id": "pokemon_center_jp"
+      },
+      "gallery_image_urls": [
+        "https://www.pokemoncenter-online.com/a/img/item/4521329452951/M/e4381bd79631768f23a84ad5aec6f4ab8b84d106eb3309c4f8a073ae06548f20.jpg"
+      ],
+      "universe": "Pokemon",
+      "work_title": "Pokemon",
+      "release_date": null,
+      "price_jpy": 3850,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://www.pokemoncenter-online.com/4521329452951.html"
+      ],
+      "source_refs": [
+        {
+          "source_id": "pokemon_center_jp",
+          "url": "https://www.pokemoncenter-online.com/4521329452951.html",
+          "fields": [
+            "names",
+            "price_jpy",
+            "images",
+            "grade_code"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "pokemon",
+        "pokemon center",
+        "poke_plush"
+      ],
+      "notes": "Imported from Pokemon Center Online Japan category page.",
+      "series": {
+        "key": "pokemon",
+        "sort": 400,
+        "labels": {
+          "zh": "宝可梦",
+          "en": "Pokemon",
+          "ja": "ポケモン",
+          "ko": "포켓몬"
+        }
+      },
+      "search_zh": [
+        "树果",
+        "毛绒公仔",
+        "公仔",
+        "布偶",
+        "娃娃",
+        "毛绒玩具",
+        "貪心栗鼠"
+      ]
+    },
+    {
+      "kit_id": "pokemon-center-4521329452968",
+      "franchise": "pokemon",
+      "grade_code": "POKE_PLUSH",
+      "subline": "Pokemon Center Plush",
+      "number": "4521329452968",
+      "scale": "non-scale",
+      "names": {
+        "ja": "きのみ収穫！リバーシブルぬいぐるみ PIKA PIKA Fresh Farm エモンガ＆オボンのみ",
+        "en": "きのみ収穫！リバーシブルぬいぐるみ PIKA PIKA Fresh Farm エモンガ＆オボンのみ",
+        "zh": "き果収穫!リバーシブル毛绒玩偶 PIKA PIKA Fresh Farm 电飞鼠&文柚果",
+        "ko": "きのみ収穫!リバーシブルぬいぐるみ PIKA PIKA Fresh Farm エモンガ&オボンのみ"
+      },
+      "images": {
+        "box_art_url": "https://www.pokemoncenter-online.com/a/img/item/4521329452968/M/817b4d4a24bc6e968a5e9b23e4f938fecf735401364660013d64abd0c06c9e59.jpg",
+        "box_art_source_id": "pokemon_center_jp"
+      },
+      "gallery_image_urls": [
+        "https://www.pokemoncenter-online.com/a/img/item/4521329452968/M/817b4d4a24bc6e968a5e9b23e4f938fecf735401364660013d64abd0c06c9e59.jpg"
+      ],
+      "universe": "Pokemon",
+      "work_title": "Pokemon",
+      "release_date": null,
+      "price_jpy": 3850,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://www.pokemoncenter-online.com/4521329452968.html"
+      ],
+      "source_refs": [
+        {
+          "source_id": "pokemon_center_jp",
+          "url": "https://www.pokemoncenter-online.com/4521329452968.html",
+          "fields": [
+            "names",
+            "price_jpy",
+            "images",
+            "grade_code"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "pokemon",
+        "pokemon center",
+        "poke_plush"
+      ],
+      "notes": "Imported from Pokemon Center Online Japan category page.",
+      "series": {
+        "key": "pokemon",
+        "sort": 400,
+        "labels": {
+          "zh": "宝可梦",
+          "en": "Pokemon",
+          "ja": "ポケモン",
+          "ko": "포켓몬"
+        }
+      },
+      "search_zh": [
+        "树果",
+        "毛绒公仔",
+        "公仔",
+        "布偶",
+        "娃娃",
+        "毛绒玩具",
+        "電飛鼠"
+      ]
+    },
+    {
+      "kit_id": "pokemon-center-4521329452982",
+      "franchise": "pokemon",
+      "grade_code": "POKE_PLUSH",
+      "subline": "Pokemon Center Plush",
+      "number": "4521329452982",
+      "scale": "non-scale",
+      "names": {
+        "ja": "おいかけっこぬいぐるみ PIKA PIKA Fresh Farm ワンパチとメリープ",
+        "en": "おいかけっこぬいぐるみ PIKA PIKA Fresh Farm ワンパチとメリープ",
+        "zh": "おいかけっこ毛绒玩偶 PIKA PIKA Fresh Farm 来电汪と咩利羊",
+        "ko": "おいかけっこぬいぐるみ PIKA PIKA Fresh Farm ワンパチとメリープ"
+      },
+      "images": {
+        "box_art_url": "https://www.pokemoncenter-online.com/a/img/item/4521329452982/M/c910400a0034c1e54df2b78843506e2330782a22c2acbf64af0638bca95470d4.jpg",
+        "box_art_source_id": "pokemon_center_jp"
+      },
+      "gallery_image_urls": [
+        "https://www.pokemoncenter-online.com/a/img/item/4521329452982/M/c910400a0034c1e54df2b78843506e2330782a22c2acbf64af0638bca95470d4.jpg"
+      ],
+      "universe": "Pokemon",
+      "work_title": "Pokemon",
+      "release_date": null,
+      "price_jpy": 3520,
+      "is_limited": false,
+      "data_status": "verified",
+      "source_urls": [
+        "https://www.pokemoncenter-online.com/4521329452982.html"
+      ],
+      "source_refs": [
+        {
+          "source_id": "pokemon_center_jp",
+          "url": "https://www.pokemoncenter-online.com/4521329452982.html",
+          "fields": [
+            "names",
+            "price_jpy",
+            "images",
+            "grade_code"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "tags": [
+        "pokemon",
+        "pokemon center",
+        "poke_plush"
+      ],
+      "notes": "Imported from Pokemon Center Online Japan category page.",
+      "series": {
+        "key": "pokemon",
+        "sort": 400,
+        "labels": {
+          "zh": "宝可梦",
+          "en": "Pokemon",
+          "ja": "ポケモン",
+          "ko": "포켓몬"
+        }
+      },
+      "search_zh": [
+        "毛绒公仔",
+        "公仔",
+        "布偶",
+        "娃娃",
+        "毛绒玩具",
+        "來電汪"
+      ]
+    },
+    {
       "kit_id": "pokemon-center-4521329453880",
       "franchise": "pokemon",
       "grade_code": "POKE_PLUSH",
@@ -2592688,8 +2593489,7 @@
       "is_limited": false,
       "data_status": "verified",
       "source_urls": [
-        "https://www.pokemoncenter-online.com/4904810075318.html",
-        "https://academy.co.kr/product/detail.html?product_no=2149"
+        "https://www.pokemoncenter-online.com/4904810075318.html"
       ],
       "source_refs": [
         {
@@ -2592700,14 +2593500,6 @@
             "price_jpy",
             "images",
             "grade_code"
-          ],
-          "confidence": "high"
-        },
-        {
-          "source_id": "academy_kr",
-          "url": "https://academy.co.kr/product/detail.html?product_no=2149",
-          "fields": [
-            "price_krw"
           ],
           "confidence": "high"
         }
