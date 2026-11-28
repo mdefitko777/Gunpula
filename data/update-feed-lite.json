@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-27",
-  "generated_at": "2026-11-27T02:22:25.849Z",
+  "updated_at": "2026-11-28",
+  "generated_at": "2026-11-28T02:06:58.499Z",
   "watch_tags": [
     "seed",
     "00"
@@ -20,11 +20,1069 @@
     "effects"
   ],
   "source_health": {
-    "generated_at": "2026-11-27T02:22:05.517Z",
+    "generated_at": "2026-11-28T02:06:32.637Z",
     "blocked_count": 0,
     "error_count": 0
   },
   "entries": [
+    {
+      "date": "2026-11-28",
+      "generated_at": "2026-11-28T02:06:58.499Z",
+      "total_before": 42091,
+      "total_after": 42098,
+      "added_count": 7,
+      "changed_count": 153,
+      "removed_count": 0,
+      "watched_count": 0,
+      "merged_count": 0,
+      "backfilled_count": 0,
+      "renamed_count": 0,
+      "premium_bandai_count": 0,
+      "bbx_count": 0,
+      "franchise_counts": {
+        "madoka": 7,
+        "pokemon": 7,
+        "fate": 143,
+        "lego": 3
+      },
+      "reason_counts": {
+        "new": 7,
+        "limited": 143,
+        "source": 3,
+        "image": 5,
+        "name": 2
+      },
+      "interest_tags": [
+        "madoka",
+        "pokemon",
+        "fate",
+        "lego"
+      ],
+      "watch_tags": [],
+      "added": [
+        {
+          "kit_id": "aniplex-madoka-itemmdrepkqw06",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Aniplex+",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 ワス ノンスケールフィギュア",
+            "zh": "劇場版 魔法少女小圆〈瓦尔普吉斯的回天〉 ワス ノンスケールフィギュア",
+            "ko": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 ワス ノンスケールフィギュア",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 ワス ノンスケールフィギュア"
+          },
+          "release_date": "2027-11",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "aniplex_plus_madoka_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemMDrePKqw06.html"
+          ]
+        },
+        {
+          "kit_id": "goodsmile-madoka-g1141582",
+          "change_type": "added",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "POP UP PARADE",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "POP UP PARADE SP 暁美ほむら 〈ワルプルギスの廻天〉Ver.",
+            "zh": "POP UP PARADE SP 晓美焰 〈瓦尔普吉斯的回天〉Ver.",
+            "ko": "POP UP PARADE SP 暁美ほむら 〈ワルプルギスの廻天〉Ver.",
+            "en": "POP UP PARADE SP 暁美ほむら 〈ワルプルギスの廻天〉Ver."
+          },
+          "release_date": null,
+          "price_jpy": 7500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://www.goodsmile.com/ja/product/1141582"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4521329423210",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "マスコット POKÉMON TRAINERS オルティガ",
+            "zh": "挂件 POKÉMON TRAINERS 奥尔迪加",
+            "ko": "マスコット POKÉMON TRAINERS オルティガ",
+            "en": "マスコット POKÉMON TRAINERS オルティガ"
+          },
+          "release_date": null,
+          "price_jpy": 1870,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4521329423210.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4905330037794",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "マスコット チルット",
+            "zh": "挂件 青绵鸟",
+            "ko": "マスコット チルット",
+            "en": "マスコット チルット"
+          },
+          "release_date": null,
+          "price_jpy": 1980,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4905330037794.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4905330037770",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "マスコット プラスル",
+            "zh": "挂件 正电拍拍",
+            "ko": "マスコット プラスル",
+            "en": "マスコット プラスル"
+          },
+          "release_date": null,
+          "price_jpy": 1980,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4905330037770.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4905330037787",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "マスコット マイナン",
+            "zh": "挂件 負电拍拍",
+            "ko": "マスコット マイナン",
+            "en": "マスコット マイナン"
+          },
+          "release_date": null,
+          "price_jpy": 1980,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4905330037787.html"
+          ]
+        },
+        {
+          "kit_id": "pokemon-center-4905330037817",
+          "change_type": "added",
+          "franchise": "pokemon",
+          "grade_code": "POKE_PLUSH",
+          "subline": "Pokemon Center Plush",
+          "series_key": "pokemon",
+          "series_labels": {
+            "zh": "宝可梦",
+            "en": "Pokemon",
+            "ja": "ポケモン",
+            "ko": "포켓몬"
+          },
+          "names": {
+            "ja": "マスコット ヤブクロン",
+            "zh": "挂件 破破袋",
+            "ko": "マスコット ヤブクロン",
+            "en": "マスコット ヤブクロン"
+          },
+          "release_date": null,
+          "price_jpy": 1980,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "pokemon"
+          ],
+          "change_reasons": [
+            "new"
+          ],
+          "source_ids": [
+            "pokemon_center_jp"
+          ],
+          "source_urls": [
+            "https://www.pokemoncenter-online.com/4905330037817.html"
+          ]
+        }
+      ],
+      "changed": [
+        {
+          "kit_id": "aniplex-madoka-itemmdrepkqw05",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Aniplex+",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 佐倉杏子 ノンスケールフィギュア",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 佐仓杏子 无比例手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 사쿠라 쿄코 논스케일 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 佐倉杏子 ノンスケールフィギュア"
+          },
+          "release_date": "2027-10",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "aniplex_plus_madoka_jp",
+            "good_smile_madoka_global",
+            "claynel_madoka_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemMDrePKqw05.html",
+            "https://www.goodsmile.com/ja/product/1147372"
+          ]
+        },
+        {
+          "kit_id": "aniplex-madoka-itemmdrepkqw04",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Aniplex+",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 美樹さやか ノンスケールフィギュア",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 美树沙耶香 无比例手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 미키 사야카 논스케일 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 美樹さやか ノンスケールフィギュア"
+          },
+          "release_date": "2027-10",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "aniplex_plus_madoka_jp",
+            "good_smile_madoka_global",
+            "claynel_madoka_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemMDrePKqw04.html",
+            "https://www.goodsmile.com/ja/product/1147371"
+          ]
+        },
+        {
+          "kit_id": "aniplex-madoka-itemmdrepkqw02",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Aniplex+",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 暁美ほむら ノンスケールフィギュア",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 晓美焰 无比例手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 아케미 호무라 논스케일 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 暁美ほむら ノンスケールフィギュア"
+          },
+          "release_date": "2027-09",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "aniplex_plus_madoka_jp",
+            "claynel_madoka_jp",
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemMDrePKqw02.html",
+            "https://www.claynel.jp/products/?item_id=12521"
+          ]
+        },
+        {
+          "kit_id": "aniplex-madoka-itemmdrepkqw03",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Aniplex+",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 巴マミ ノンスケールフィギュア",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 巴麻美 无比例手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 토모에 마미 논스케일 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 巴マミ ノンスケールフィギュア"
+          },
+          "release_date": "2027-09",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "aniplex_plus_madoka_jp",
+            "claynel_madoka_jp",
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemMDrePKqw03.html",
+            "https://www.claynel.jp/products/?item_id=12520"
+          ]
+        },
+        {
+          "kit_id": "aniplex-madoka-itemmdrepkqw",
+          "change_type": "changed",
+          "franchise": "madoka",
+          "grade_code": "MADOKA_SCALE",
+          "subline": "Aniplex+",
+          "series_key": "madoka_walpurgis",
+          "series_labels": {
+            "zh": "瓦尔普吉斯的回天",
+            "en": "Walpurgisnacht: Rising",
+            "ja": "ワルプルギスの廻天",
+            "ko": "발푸르기스의 회천"
+          },
+          "names": {
+            "ja": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 鹿目まどか ノンスケールフィギュア",
+            "zh": "剧场版 魔法少女小圆〈瓦尔普吉斯的回天〉 鹿目圆 无比例手办",
+            "ko": "극장판 마법소녀 마도카☆마기카 〈발푸르기스의 회천〉 카나메 마도카 논스케일 피규어",
+            "en": "劇場版 魔法少女まどか☆マギカ〈ワルプルギスの廻天〉 鹿目まどか ノンスケールフィギュア"
+          },
+          "release_date": "2027-08",
+          "price_jpy": 8800,
+          "is_limited": true,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "madoka"
+          ],
+          "change_reasons": [
+            "image"
+          ],
+          "source_ids": [
+            "aniplex_plus_madoka_jp",
+            "claynel_madoka_jp",
+            "good_smile_madoka_global"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemMDrePKqw.html",
+            "https://www.claynel.jp/products/?item_id=12405"
+          ]
+        },
+        {
+          "kit_id": "aniplex-fate-itemuxhrufoh",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_SCALE",
+          "subline": "Aniplex+",
+          "series_key": "fate_stay_night",
+          "series_labels": {
+            "zh": "stay night",
+            "en": "stay night",
+            "ja": "stay night",
+            "ko": "stay night"
+          },
+          "names": {
+            "ja": "「崩壊：スターレイル」×「Fate / stay night [UBW]」 セイバー 1 / 7 完成品フィギュア",
+            "zh": "「崩坏：星穹铁道」×「Fate / stay night [UBW]」 Saber 1/7 成品手办",
+            "ko": "「붕괴: 스타레일」×「Fate/stay night [UBW]」세이버 1/7 완성품 피규어",
+            "en": "「崩壊：スターレイル」×「Fate / stay night [UBW]」 セイバー 1 / 7 完成品フィギュア"
+          },
+          "release_date": "2027-06",
+          "price_jpy": 31900,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "limited"
+          ],
+          "source_ids": [
+            "aniplex_plus_fate_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemUXhRuFoH.html"
+          ]
+        },
+        {
+          "kit_id": "aniplex-fate-itemgnxasnsi57",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Aniplex+",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "「Fate / Grand Order」10th Anniversary Movie ポストカードブック",
+            "zh": "「Fate / Grand Order」10th Anniversary Movie 明信片册",
+            "ko": "「Fate/Grand Order」 10th Anniversary Movie 포스트카드 북",
+            "en": "「Fate / Grand Order」10th Anniversary Movie ポストカードブック"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 3500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "limited"
+          ],
+          "source_ids": [
+            "aniplex_plus_fate_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemGnxAsnSI57.html"
+          ]
+        },
+        {
+          "kit_id": "aniplex-fate-itemgnxasnsi44",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Aniplex+",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "「エルメロイⅡ世とアレキサンダーの学園７不思議からの脱出」クリップボード",
+            "zh": "「逃离埃尔梅罗II世与亚历山大的学园七大不可思议」板夹",
+            "ko": "「엘멜로이 Ⅱ세와 알렉산더의 학원 7대 불가사의에서의 탈출」 클립보드",
+            "en": "「エルメロイⅡ世とアレキサンダーの学園７不思議からの脱出」クリップボード"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 2000,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "limited"
+          ],
+          "source_ids": [
+            "aniplex_plus_fate_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemGnxAsnSI44.html"
+          ]
+        },
+        {
+          "kit_id": "aniplex-fate-itemptvfrkza48",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Aniplex+",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "【再販】獣の足跡 缶バッジスタンド",
+            "zh": "【再贩】兽之足迹 吧唧展示架",
+            "ko": "짐승의 발자국 캔배지 스탠드 (재판)",
+            "en": "[Reissue]獣の足跡 缶バッジスタンド"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 1500,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "limited"
+          ],
+          "source_ids": [
+            "aniplex_plus_fate_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemPTVfRKzA48.html"
+          ]
+        },
+        {
+          "kit_id": "aniplex-fate-itemftdpyimh31",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Aniplex+",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "【復刻】\"OVER THE SAME SKY\" ポートレイトコレクションA（全25種ランダム）",
+            "zh": "【复刻】\"OVER THE SAME SKY\" 立绘卡收藏A(全25种随机)",
+            "ko": "【복각】\"OVER THE SAME SKY\" 포트레이트 컬렉션 A (전 25종 랜덤)",
+            "en": "[復刻]\"OVER THE SAME SKY\" ポートレイトコレクションA (全25種ランダム)"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "limited"
+          ],
+          "source_ids": [
+            "aniplex_plus_fate_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemFtdpyImH31.html"
+          ]
+        },
+        {
+          "kit_id": "aniplex-fate-itemftdpyimh32",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Aniplex+",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "【復刻】\"OVER THE SAME SKY\" ポートレイトコレクションB（全26種ランダム）",
+            "zh": "【复刻】\"OVER THE SAME SKY\" 立绘卡收藏B(全26种随机)",
+            "ko": "【복각】\"OVER THE SAME SKY\" 포트레이트 컬렉션 B (전 26종 랜덤)",
+            "en": "[復刻]\"OVER THE SAME SKY\" ポートレイトコレクションB (全26種ランダム)"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "limited"
+          ],
+          "source_ids": [
+            "aniplex_plus_fate_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemFtdpyImH32.html"
+          ]
+        },
+        {
+          "kit_id": "aniplex-fate-itemftdpyimh33",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Aniplex+",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "【復刻】\"OVER THE SAME SKY\" ポートレイトコレクションC（全26種ランダム）",
+            "zh": "【复刻】\"OVER THE SAME SKY\" 立绘卡收藏C(全26种随机)",
+            "ko": "【복각】\"OVER THE SAME SKY\" 포트레이트 컬렉션 C (전 26종 랜덤)",
+            "en": "[復刻]\"OVER THE SAME SKY\" ポートレイトコレクションC (全26種ランダム)"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "limited"
+          ],
+          "source_ids": [
+            "aniplex_plus_fate_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemFtdpyImH33.html"
+          ]
+        },
+        {
+          "kit_id": "aniplex-fate-itemftdpyimh34",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Aniplex+",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "【復刻】\"OVER THE SAME SKY\" ポートレイトコレクションD（全25種ランダム）",
+            "zh": "【复刻】\"OVER THE SAME SKY\" 立绘卡收藏D(全25种随机)",
+            "ko": "【복각】\"OVER THE SAME SKY\" 포트레이트 컬렉션 D (전 25종 랜덤)",
+            "en": "[復刻]\"OVER THE SAME SKY\" ポートレイトコレクションD (全25種ランダム)"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "limited"
+          ],
+          "source_ids": [
+            "aniplex_plus_fate_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemFtdpyImH34.html"
+          ]
+        },
+        {
+          "kit_id": "aniplex-fate-itemftdpyimh20",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Aniplex+",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "【復刻】\"OVER THE SAME SKY\" 霊基召喚缶バッジA（全25種）",
+            "zh": "【复刻】\"OVER THE SAME SKY\" 灵基召唤吧唧A(全25种)",
+            "ko": "【복각】\"OVER THE SAME SKY\" 영기 소환 캔배지 A (전 25종)",
+            "en": "[復刻]\"OVER THE SAME SKY\" 霊基召喚缶バッジA (全25種)"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "limited"
+          ],
+          "source_ids": [
+            "aniplex_plus_fate_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemFtdpyImH20.html"
+          ]
+        },
+        {
+          "kit_id": "aniplex-fate-itemftdpyimh21",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Aniplex+",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "【復刻】\"OVER THE SAME SKY\" 霊基召喚缶バッジB（全26種）",
+            "zh": "【复刻】\"OVER THE SAME SKY\" 灵基召唤吧唧B(全26种)",
+            "ko": "【복각】\"OVER THE SAME SKY\" 영기 소환 캔배지 B (전 26종)",
+            "en": "[復刻]\"OVER THE SAME SKY\" 霊基召喚缶バッジB (全26種)"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "limited"
+          ],
+          "source_ids": [
+            "aniplex_plus_fate_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemFtdpyImH21.html"
+          ]
+        },
+        {
+          "kit_id": "aniplex-fate-itemftdpyimh22",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Aniplex+",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "【復刻】\"OVER THE SAME SKY\" 霊基召喚缶バッジC（全26種）",
+            "zh": "【复刻】\"OVER THE SAME SKY\" 灵基召唤吧唧C(全26种)",
+            "ko": "【복각】\"OVER THE SAME SKY\" 영기 소환 캔배지 C (전 26종)",
+            "en": "[復刻]\"OVER THE SAME SKY\" 霊基召喚缶バッジC (全26種)"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "limited"
+          ],
+          "source_ids": [
+            "aniplex_plus_fate_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemFtdpyImH22.html"
+          ]
+        },
+        {
+          "kit_id": "aniplex-fate-itemftdpyimh23",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Aniplex+",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "【復刻】\"OVER THE SAME SKY\" 霊基召喚缶バッジD（全25種）",
+            "zh": "【复刻】\"OVER THE SAME SKY\" 灵基召唤吧唧D(全25种)",
+            "ko": "【복각】\"OVER THE SAME SKY\" 영기 소환 캔배지 D (전 25종)",
+            "en": "[復刻]\"OVER THE SAME SKY\" 霊基召喚缶バッジD (全25種)"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "limited"
+          ],
+          "source_ids": [
+            "aniplex_plus_fate_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemFtdpyImH23.html"
+          ]
+        },
+        {
+          "kit_id": "aniplex-fate-itemptvfrkza83",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Aniplex+",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "【復刻】\"under the same sky\" ポートレイトコレクション A",
+            "zh": "【复刻】\"under the same sky\" 立绘卡收藏 A",
+            "ko": "【복각】\"under the same sky\" 포트레이트 컬렉션 A",
+            "en": "[復刻]\"under the same sky\" ポートレイトコレクション A"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "limited"
+          ],
+          "source_ids": [
+            "aniplex_plus_fate_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemPTVfRKzA83.html"
+          ]
+        },
+        {
+          "kit_id": "aniplex-fate-itemptvfrkza84",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Aniplex+",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "【復刻】\"under the same sky\" ポートレイトコレクション B",
+            "zh": "【复刻】\"under the same sky\" 立绘卡收藏 B",
+            "ko": "【복각】\"under the same sky\" 포트레이트 컬렉션 B",
+            "en": "[復刻]\"under the same sky\" ポートレイトコレクション B"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "limited"
+          ],
+          "source_ids": [
+            "aniplex_plus_fate_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemPTVfRKzA84.html"
+          ]
+        },
+        {
+          "kit_id": "aniplex-fate-itemhektelmk",
+          "change_type": "changed",
+          "franchise": "fate",
+          "grade_code": "FATE_GOODS",
+          "subline": "Aniplex+",
+          "series_key": "fate_fgo",
+          "series_labels": {
+            "zh": "FGO",
+            "en": "FGO",
+            "ja": "FGO",
+            "ko": "FGO"
+          },
+          "names": {
+            "ja": "【復刻】\"under the same sky\" 霊基召喚缶バッジＡ（全25種）",
+            "zh": "【复刻】\"under the same sky\" 灵基召唤吧唧A(全25种)",
+            "ko": "【복각】\"under the same sky\" 영기 소환 캔배지 A (전 25종)",
+            "en": "[復刻]\"under the same sky\" 霊基召喚缶バッジＡ (全25種)"
+          },
+          "release_date": "2027-02",
+          "price_jpy": 300,
+          "is_limited": false,
+          "is_premium_bandai": false,
+          "watch_tags": [],
+          "interest_tags": [
+            "fate"
+          ],
+          "change_reasons": [
+            "limited"
+          ],
+          "source_ids": [
+            "aniplex_plus_fate_jp"
+          ],
+          "source_urls": [
+            "https://online.aniplex.co.jp/itemHekTeLmK.html"
+          ]
+        }
+      ],
+      "removed": [],
+      "watched": [],
+      "merged": [],
+      "backfilled": [],
+      "renamed": []
+    },
     {
       "date": "2026-11-27",
       "generated_at": "2026-11-27T02:22:25.849Z",
@@ -47351,798 +48409,6 @@
           "source_urls": [
             "https://global.bandai-hobby.net/en-others/item/01_5010/",
             "https://global.bandai-hobby.net/en-others/site/pokemon/pokepla/products/?category=quick"
-          ]
-        }
-      ],
-      "removed": [],
-      "watched": [],
-      "merged": [],
-      "backfilled": [],
-      "renamed": []
-    },
-    {
-      "date": "2026-10-20",
-      "generated_at": "2026-10-19T22:54:48.742Z",
-      "total_before": 8825,
-      "total_after": 8825,
-      "added_count": 0,
-      "changed_count": 45,
-      "removed_count": 0,
-      "watched_count": 0,
-      "premium_bandai_count": 0,
-      "bbx_count": 0,
-      "franchise_counts": {
-        "armored_core": 41,
-        "pokemon": 4
-      },
-      "reason_counts": {
-        "image": 45
-      },
-      "interest_tags": [
-        "armored_core",
-        "pokemon"
-      ],
-      "watch_tags": [],
-      "added": [],
-      "changed": [
-        {
-          "kit_id": "acvi-4934054083251",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "V.I.シリーズ",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "ミラージュ C02-URANUS ウラヌス",
-            "zh": "幻影 C02-URANUS 天王星",
-            "ko": "미라주 C02-URANUS 우라노스",
-            "en": "ミラージュ C02-URANUS ウラヌス"
-          },
-          "release_date": "2027-03",
-          "price_jpy": 9900,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054083251/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
-          ]
-        },
-        {
-          "kit_id": "acvi-4934054088713",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "V.I.シリーズ",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "クレスト CR-C75U2 デルタVer.",
-            "zh": "克雷斯特 CR-C75U2 德尔塔Ver.",
-            "ko": "크레스트 CR-C75U2 델타 Ver.",
-            "en": "クレスト CR-C75U2 デルタVer."
-          },
-          "release_date": "2027-02",
-          "price_jpy": 9900,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054088713/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
-          ]
-        },
-        {
-          "kit_id": "acvi-4934054083244",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "V.I.シリーズ",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "クレスト CR-C75U2 白兵戦Ver.",
-            "zh": "克雷斯特 CR-C75U2 白刃战Ver.",
-            "ko": "크레스트 CR-C75U2 백병전 Ver.",
-            "en": "クレスト CR-C75U2 白兵戦Ver."
-          },
-          "release_date": "2027-01",
-          "price_jpy": 9900,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054083244/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
-          ]
-        },
-        {
-          "kit_id": "acvi-4934054056057",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "V.I.シリーズ",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "ラインアーク ホワイト・グリント＆V.O.Bセット",
-            "zh": "莱茵方舟 白色闪光&V.O.B套装",
-            "ko": "라인아크 화이트 글린트&V.O.B 세트",
-            "en": "ラインアーク ホワイト グリント＆V.O.BSet"
-          },
-          "release_date": "2027-01",
-          "price_jpy": 12100,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054056057/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
-          ]
-        },
-        {
-          "kit_id": "acvi-4934054083237",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "V.I.シリーズ",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "クレスト CR-C98E2 強襲型Ver.",
-            "zh": "克雷斯特 CR-C98E2 强袭型Ver.",
-            "ko": "크레스트 CR-C98E2 강습형 Ver.",
-            "en": "クレスト CR-C98E2 強襲型Ver."
-          },
-          "release_date": "2026-10-23",
-          "price_jpy": 7920,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054083237/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
-          ]
-        },
-        {
-          "kit_id": "acvi-4934054083220",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "V.I.シリーズ",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "クレスト CR-C90U3",
-            "zh": "克雷斯特 CR-C90U3",
-            "ko": "크레스트 CR-C90U3",
-            "en": "クレスト CR-C90U3"
-          },
-          "release_date": "2026-09-28",
-          "price_jpy": 7920,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054083220/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
-          ]
-        },
-        {
-          "kit_id": "acvi-4934054081356",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "V.I.シリーズ",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "レイレナード 03-AALIYAH オルレア",
-            "zh": "雷雷纳德 03-AALIYAH 奥尔蕾亚",
-            "ko": "레이레너드 03-AALIYAH 오를레아",
-            "en": "レイレナード 03-AALIYAH オルレア"
-          },
-          "release_date": "2026-06-25",
-          "price_jpy": 8800,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054081356/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
-          ]
-        },
-        {
-          "kit_id": "acvi-4934054048083",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "Kotobukiya Armored Core",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "SCHNEIDER NACHTREIHER / 40E 近接突撃型",
-            "zh": "施奈德 NACHTREIHER / 40E 近战突击型",
-            "ko": "SCHNEIDER NACHTREIHER / 40E 근접 돌격형",
-            "en": "SCHNEIDER NACHTREIHER / 40E 近接突撃型"
-          },
-          "release_date": "2026-06-24",
-          "price_jpy": 17050,
-          "is_limited": true,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054048083/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
-          ]
-        },
-        {
-          "kit_id": "acvi-4934054048328",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "Kotobukiya Armored Core",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "SCHNEIDER NACHTREIHER / 40E スティールヘイズ",
-            "zh": "施奈德 NACHTREIHER / 40E 钢铁迷雾",
-            "ko": "SCHNEIDER NACHTREIHER / 40E 스틸 헤이즈",
-            "en": "SCHNEIDER NACHTREIHER / 40E スティールヘイズ"
-          },
-          "release_date": "2025-12-25",
-          "price_jpy": 17050,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054048328/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
-          ]
-        },
-        {
-          "kit_id": "acvi-4988601383523",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "Kotobukiya Armored Core",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "アーマード・コア ストラクチャーアーツ ノンスケールプラスチックモデルキット シリーズ Vol.１",
-            "zh": "装甲核心 Structure Arts 无比例塑料模型套件 系列 Vol.1",
-            "ko": "아머드 코어 스트럭처 아츠 논스케일 플라스틱 모델 키트 시리즈 Vol.1",
-            "en": "アーマード コア ストラクチャーアーツ ノンスケールプラスチックモデルキット シリーズ Vol.１"
-          },
-          "release_date": "2025-12-25",
-          "price_jpy": 14080,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4988601383523/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
-          ]
-        },
-        {
-          "kit_id": "acvi-4934054065523",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "V.I.シリーズ",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "KT-104 / PERUN ハングドマン 再戦ver.",
-            "zh": "KT-104 / PERUN 吊人 再战ver.",
-            "ko": "KT-104 / PERUN 행드맨 재전 ver.",
-            "en": "KT-104 / PERUN ハングドマン 再戦ver."
-          },
-          "release_date": "2025-06-24",
-          "price_jpy": 10780,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054065523/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
-          ]
-        },
-        {
-          "kit_id": "acvi-4934054065516",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "V.I.シリーズ",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "ナインボール ARMORED CORE Ver.",
-            "zh": "九球 装甲核心 Ver.",
-            "ko": "나인볼 ARMORED CORE Ver.",
-            "en": "ナインBall ARMORED CORE Ver."
-          },
-          "release_date": "2025-06-24",
-          "price_jpy": 6600,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054065516/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
-          ]
-        },
-        {
-          "kit_id": "acvi-4934054057047",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "V.I.シリーズ",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "ミラージュ C01-GAEA",
-            "zh": "幻影 C01-GAEA",
-            "ko": "미라주 C01-GAEA",
-            "en": "ミラージュ C01-GAEA"
-          },
-          "release_date": "2025-06-24",
-          "price_jpy": 4180,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054057047/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
-          ]
-        },
-        {
-          "kit_id": "acvi-4934054065165",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "V.I.シリーズ",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "MATSUKAZE mdl.2 拠点防衛仕様",
-            "zh": "MATSUKAZE mdl.2 据点防卫规格",
-            "ko": "MATSUKAZE mdl.2 거점 방어 사양",
-            "en": "MATSUKAZE mdl.2 拠点防衛Type"
-          },
-          "release_date": "2025-05-23",
-          "price_jpy": 22000,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054065165/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
-          ]
-        },
-        {
-          "kit_id": "acvi-4934054065035",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "V.I.シリーズ",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "オーバード・ウェポンセット",
-            "zh": "超限武器套组",
-            "ko": "오버드 웨폰 세트",
-            "en": "オーバード ウェポンSet"
-          },
-          "release_date": "2025-05-23",
-          "price_jpy": 9350,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054065035/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
-          ]
-        },
-        {
-          "kit_id": "acvi-4934054065189",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "V.I.シリーズ",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "UCR-10 / A ヴェンジェンス",
-            "zh": "UCR-10 / A 复仇",
-            "ko": "UCR-10 / A 벤전스",
-            "en": "UCR-10 / A ヴェンジェンス"
-          },
-          "release_date": "2025-04-18",
-          "price_jpy": 10670,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054065189/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
-          ]
-        },
-        {
-          "kit_id": "acvi-4934054065110",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "V.I.シリーズ",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "クレスト CR-C89E オラクルVer.",
-            "zh": "克雷斯特 CR-C89E 神谕Ver.",
-            "ko": "크레스트 CR-C89E 오라클 Ver.",
-            "en": "クレスト CR-C89E オラクルVer."
-          },
-          "release_date": "2025-04-18",
-          "price_jpy": 6380,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054065110/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
-          ]
-        },
-        {
-          "kit_id": "acvi-4934054065080",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "V.I.シリーズ",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "ミラージュ C03-HELIOS ウィクトーリアVer.",
-            "zh": "幻影 C03-HELIOS 维多利亚Ver.",
-            "ko": "미라주 C03-HELIOS 빅토리아 Ver.",
-            "en": "ミラージュ C03-HELIOS ウィクトーリアVer."
-          },
-          "release_date": "2025-03-19",
-          "price_jpy": 6600,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054065080/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
-          ]
-        },
-        {
-          "kit_id": "acvi-4934054065172",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "V.I.シリーズ",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "レイレナード 03-AALIYAH シュープリス OP Ver.",
-            "zh": "雷雷纳德 03-AALIYAH 苦刑 OP Ver.",
-            "ko": "레이레너드 03-AALIYAH 슈프리스 OP Ver.",
-            "en": "レイレナード 03-AALIYAH シュープリス OP Ver."
-          },
-          "release_date": "2025-03-19",
-          "price_jpy": 8800,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054065172/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
-          ]
-        },
-        {
-          "kit_id": "acvi-4934054066193",
-          "change_type": "changed",
-          "franchise": "armored_core",
-          "grade_code": "ACVI",
-          "subline": "V.I.シリーズ",
-          "series_key": "armored_core",
-          "series_labels": {
-            "zh": "AC",
-            "en": "Armored Core",
-            "ja": "AC",
-            "ko": "AC"
-          },
-          "names": {
-            "ja": "GA GAN01 サンシャインE フィードバック",
-            "zh": "GA GAN01 阳光E 反馈",
-            "ko": "GA GAN01 선샤인E 피드백",
-            "en": "GA GAN01 サンシャインE フィードバック"
-          },
-          "release_date": "2025-03-10",
-          "price_jpy": 6930,
-          "is_limited": false,
-          "is_premium_bandai": false,
-          "watch_tags": [],
-          "interest_tags": [
-            "armored_core"
-          ],
-          "change_reasons": [
-            "image"
-          ],
-          "source_ids": [
-            "kotobukiya_armored_core_jp"
-          ],
-          "source_urls": [
-            "https://shop.kotobukiya.co.jp/shop/g/g4934054066193/",
-            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?keyword=ARMORED%20CORE&search.x=on&ps=90"
           ]
         }
       ],
